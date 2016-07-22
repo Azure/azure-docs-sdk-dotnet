@@ -6,4 +6,4 @@ REM git clone azure .NET SDK souce code
 git clone "https://github.com/Azure/azure-sdk-for-net.git"
 
 REM run docfx
-docfx docfx.json
+docfx metadata docfx.json
