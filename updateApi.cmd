@@ -1,5 +1,8 @@
 CALL dnu commands install docfx
 
+CALL git clone git@github.com:Azure/azure-docs-sdk-dotnet.git
+
+CD azure-docs-sdk-dotnet
 CALL docfx metadata docfx.json
 
 git config user.email "vscopbld@microsoft.com"
