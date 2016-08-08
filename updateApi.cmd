@@ -1,4 +1,6 @@
-docfx metadata docfx.json
+CALL dnu commands install docfx
+
+CALL docfx metadata docfx.json
 
 git config user.email "vscopbld@microsoft.com"
 git config user.name "OpenPublishBuild"
