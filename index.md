@@ -485,3 +485,4 @@ The following is a list of namespaces in the Azure .NET class library. Each name
    <td>
     </td>
 </tr>
+</table>
