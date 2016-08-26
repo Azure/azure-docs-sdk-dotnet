@@ -47,52 +47,112 @@ The following is a list of namespaces in the Azure .NET class library. Each name
 </tr>
 <tr>
    <td>@Microsoft.Hadoop.Avro</td>
-   <td>
+   <td>A newer version of HDInsight .NET SDK is available that uses the Azure Resource Manager (ARM) approach.
+   You are encouraged to use the newer ARM-based version of HDInsight .NET SDK going forward.
+   For instructions on how to use the new HDInsight .NET SDK to create a cluster,
+   see [Create HDInsight Linux clusters using .NET SDK](https://azure.microsoft.com/documentation/articles/hdinsight-hadoop-create-linux-clusters-dotnet-sdk/).
+   For instructions on how to submit jobs using the new .NET SDK and other approaches,
+   see [Submit jobs to an HDInsight cluster](https://azure.microsoft.com/documentation/articles/hdinsight-submit-hadoop-jobs-programmatically/).
+   The HDInsight SDK reference for the newer version is available at [HDInsight .NET SDK Reference](https://msdn.microsoft.com/library/azure/mt271028.aspx).
     </td>
 </tr>
 <tr>
    <td>@Microsoft.Hadoop.Avro.Container</td>
-   <td>
+   <td>A newer version of HDInsight .NET SDK is available that uses the Azure Resource Manager (ARM) approach.
+   You are encouraged to use the newer ARM-based version of HDInsight .NET SDK going forward.
+   For instructions on how to use the new HDInsight .NET SDK to create a cluster,
+   see [Create HDInsight Linux clusters using .NET SDK](https://azure.microsoft.com/documentation/articles/hdinsight-hadoop-create-linux-clusters-dotnet-sdk/).
+   For instructions on how to submit jobs using the new .NET SDK and other approaches,
+   see [Submit jobs to an HDInsight cluster](https://azure.microsoft.com/documentation/articles/hdinsight-submit-hadoop-jobs-programmatically/).
+   The HDInsight SDK reference for the newer version is available at [HDInsight .NET SDK Reference](https://msdn.microsoft.com/library/azure/mt271028.aspx).
     </td>
 </tr>
 <tr>
    <td>@Microsoft.Hadoop.Avro.Sample</td>
-   <td>
+   <td>A newer version of HDInsight .NET SDK is available that uses the Azure Resource Manager (ARM) approach.
+   You are encouraged to use the newer ARM-based version of HDInsight .NET SDK going forward.
+   For instructions on how to use the new HDInsight .NET SDK to create a cluster,
+   see [Create HDInsight Linux clusters using .NET SDK](https://azure.microsoft.com/documentation/articles/hdinsight-hadoop-create-linux-clusters-dotnet-sdk/).
+   For instructions on how to submit jobs using the new .NET SDK and other approaches,
+   see [Submit jobs to an HDInsight cluster](https://azure.microsoft.com/documentation/articles/hdinsight-submit-hadoop-jobs-programmatically/).
+   The HDInsight SDK reference for the newer version is available at [HDInsight .NET SDK Reference](https://msdn.microsoft.com/library/azure/mt271028.aspx).
     </td>
 </tr>
 <tr>
    <td>@Microsoft.Hadoop.Avro.Schema</td>
-   <td>
+   <td>A newer version of HDInsight .NET SDK is available that uses the Azure Resource Manager (ARM) approach.
+   You are encouraged to use the newer ARM-based version of HDInsight .NET SDK going forward.
+   For instructions on how to use the new HDInsight .NET SDK to create a cluster,
+   see [Create HDInsight Linux clusters using .NET SDK](https://azure.microsoft.com/documentation/articles/hdinsight-hadoop-create-linux-clusters-dotnet-sdk/).
+   For instructions on how to submit jobs using the new .NET SDK and other approaches,
+   see [Submit jobs to an HDInsight cluster](https://azure.microsoft.com/documentation/articles/hdinsight-submit-hadoop-jobs-programmatically/).
+   The HDInsight SDK reference for the newer version is available at [HDInsight .NET SDK Reference](https://msdn.microsoft.com/library/azure/mt271028.aspx).
     </td>
 </tr>
 <tr>
    <td>@Microsoft.Hadoop.Avro.Tools</td>
-   <td>
+   <td>A newer version of HDInsight .NET SDK is available that uses the Azure Resource Manager (ARM) approach.
+   You are encouraged to use the newer ARM-based version of HDInsight .NET SDK going forward.
+   For instructions on how to use the new HDInsight .NET SDK to create a cluster,
+   see [Create HDInsight Linux clusters using .NET SDK](https://azure.microsoft.com/documentation/articles/hdinsight-hadoop-create-linux-clusters-dotnet-sdk/).
+   For instructions on how to submit jobs using the new .NET SDK and other approaches,
+   see [Submit jobs to an HDInsight cluster](https://azure.microsoft.com/documentation/articles/hdinsight-submit-hadoop-jobs-programmatically/).
+   The HDInsight SDK reference for the newer version is available at [HDInsight .NET SDK Reference](https://msdn.microsoft.com/library/azure/mt271028.aspx).
     </td>
 </tr>
 <tr>
    <td>@Microsoft.Hadoop.Avro.Utils.Templates</td>
-   <td>
+   <td>A newer version of HDInsight .NET SDK is available that uses the Azure Resource Manager (ARM) approach.
+   You are encouraged to use the newer ARM-based version of HDInsight .NET SDK going forward.
+   For instructions on how to use the new HDInsight .NET SDK to create a cluster,
+   see [Create HDInsight Linux clusters using .NET SDK](https://azure.microsoft.com/documentation/articles/hdinsight-hadoop-create-linux-clusters-dotnet-sdk/).
+   For instructions on how to submit jobs using the new .NET SDK and other approaches,
+   see [Submit jobs to an HDInsight cluster](https://azure.microsoft.com/documentation/articles/hdinsight-submit-hadoop-jobs-programmatically/).
+   The HDInsight SDK reference for the newer version is available at [HDInsight .NET SDK Reference](https://msdn.microsoft.com/library/azure/mt271028.aspx).
     </td>
 </tr>
 <tr>
    <td>@Microsoft.Hadoop.Client</td>
-   <td>
+   <td>A newer version of HDInsight .NET SDK is available that uses the Azure Resource Manager (ARM) approach.
+   You are encouraged to use the newer ARM-based version of HDInsight .NET SDK going forward.
+   For instructions on how to use the new HDInsight .NET SDK to create a cluster,
+   see [Create HDInsight Linux clusters using .NET SDK](https://azure.microsoft.com/documentation/articles/hdinsight-hadoop-create-linux-clusters-dotnet-sdk/).
+   For instructions on how to submit jobs using the new .NET SDK and other approaches,
+   see [Submit jobs to an HDInsight cluster](https://azure.microsoft.com/documentation/articles/hdinsight-submit-hadoop-jobs-programmatically/).
+   The HDInsight SDK reference for the newer version is available at [HDInsight .NET SDK Reference](https://msdn.microsoft.com/library/azure/mt271028.aspx).
     </td>
 </tr>
 <tr>
    <td>@Microsoft.Hadoop.Client.HadoopStorageClientLayer</td>
-   <td>
+   <td>A newer version of HDInsight .NET SDK is available that uses the Azure Resource Manager (ARM) approach.
+   You are encouraged to use the newer ARM-based version of HDInsight .NET SDK going forward.
+   For instructions on how to use the new HDInsight .NET SDK to create a cluster,
+   see [Create HDInsight Linux clusters using .NET SDK](https://azure.microsoft.com/documentation/articles/hdinsight-hadoop-create-linux-clusters-dotnet-sdk/).
+   For instructions on how to submit jobs using the new .NET SDK and other approaches,
+   see [Submit jobs to an HDInsight cluster](https://azure.microsoft.com/documentation/articles/hdinsight-submit-hadoop-jobs-programmatically/).
+   The HDInsight SDK reference for the newer version is available at [HDInsight .NET SDK Reference](https://msdn.microsoft.com/library/azure/mt271028.aspx).
     </td>
 </tr>
 <tr>
    <td>@Microsoft.HadoopAppliance.Client</td>
-   <td>
+   <td>A newer version of HDInsight .NET SDK is available that uses the Azure Resource Manager (ARM) approach.
+   You are encouraged to use the newer ARM-based version of HDInsight .NET SDK going forward.
+   For instructions on how to use the new HDInsight .NET SDK to create a cluster,
+   see [Create HDInsight Linux clusters using .NET SDK](https://azure.microsoft.com/documentation/articles/hdinsight-hadoop-create-linux-clusters-dotnet-sdk/).
+   For instructions on how to submit jobs using the new .NET SDK and other approaches,
+   see [Submit jobs to an HDInsight cluster](https://azure.microsoft.com/documentation/articles/hdinsight-submit-hadoop-jobs-programmatically/).
+   The HDInsight SDK reference for the newer version is available at [HDInsight .NET SDK Reference](https://msdn.microsoft.com/library/azure/mt271028.aspx).
     </td>
 </tr>
 <tr>
    <td>@Microsoft.HadoopAppliance.Client.HadoopStorageClientLayer</td>
-   <td>
+   <td>A newer version of HDInsight .NET SDK is available that uses the Azure Resource Manager (ARM) approach.
+   You are encouraged to use the newer ARM-based version of HDInsight .NET SDK going forward.
+   For instructions on how to use the new HDInsight .NET SDK to create a cluster,
+   see [Create HDInsight Linux clusters using .NET SDK](https://azure.microsoft.com/documentation/articles/hdinsight-hadoop-create-linux-clusters-dotnet-sdk/).
+   For instructions on how to submit jobs using the new .NET SDK and other approaches,
+   see [Submit jobs to an HDInsight cluster](https://azure.microsoft.com/documentation/articles/hdinsight-submit-hadoop-jobs-programmatically/).
+   The HDInsight SDK reference for the newer version is available at [HDInsight .NET SDK Reference](https://msdn.microsoft.com/library/azure/mt271028.aspx).
     </td>
 </tr>
 <tr>
@@ -102,7 +162,7 @@ The following is a list of namespaces in the Azure .NET class library. Each name
 </tr>
 <tr>
    <td>@Microsoft.WindowsAzure.Management</td>
-   <td>
+   <td>Manage service deployments and storage accounts.
     </td>
 </tr>
 <tr>
@@ -117,7 +177,7 @@ The following is a list of namespaces in the Azure .NET class library. Each name
 </tr>
 <tr>
    <td>@Microsoft.WindowsAzure.Management.Compute</td>
-   <td>
+   <td>Manage virtual machines, service certificates, cloud services, deployments.
     </td>
 </tr>
 <tr>
@@ -397,12 +457,12 @@ The following is a list of namespaces in the Azure .NET class library. Each name
 </tr>
 <tr>
    <td>@Microsoft.WindowsAzure.Management.Storage</td>
-   <td>
+   <td>Manage storage accounts.
     </td>
 </tr>
 <tr>
    <td>@Microsoft.WindowsAzure.Management.Storage.Models</td>
-   <td>
+   <td>Information and settings for managing service accounts.
     </td>
 </tr>
 <tr>
@@ -442,12 +502,12 @@ The following is a list of namespaces in the Azure .NET class library. Each name
 </tr>
 <tr>
    <td>@Microsoft.WindowsAzure.Management.WebSites</td>
-   <td>
+   <td>Manage websites.
     </td>
 </tr>
 <tr>
    <td>@Microsoft.WindowsAzure.Management.WebSites.Models</td>
-   <td>
+   <td>Information and settings for websites.
     </td>
 </tr>
 <tr>
