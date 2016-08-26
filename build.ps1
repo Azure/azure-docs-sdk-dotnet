@@ -24,6 +24,9 @@ function Unzip
 
 Unzip $docfxZip $docfx
 
+# clean api_ref
+Remove-Item "api_ref\*" -Force
+
 # run docfx metadata to generate YAML metadata
 & $docfx\docfx.exe metadata
 if($LASTEXITCODE -ne 0)
