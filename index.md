@@ -14,6 +14,10 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 # Azure .NET API reference
 
+> This page was hand-authored, pulling information from some equivalent MSDN pages.
+> The page will be generated from the source (.yml) files in the future.
+> The source files need to have summary information added for namespaces.
+
 ## Namespaces in the Azure .NET class library
 
 The following is a list of namespaces in the Azure .NET class library. Each namespace contains a set of functionally-related types.
