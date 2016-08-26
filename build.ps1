@@ -6,8 +6,8 @@ $scriptHome = Split-Path $scriptPath
 Push-Location $scriptHome
 
 $azureDoc = "azure-docs-sdk-dotnet"
-$docfxZip = "docfx.zip"
-$docfx = "docfx"
+$docfxZip = "c:\projects\docfx.zip"
+$docfx = "c:\projects\docfx"
 $docfxExeUrl = "https://github.com/dotnet/docfx/releases/download/v2.1.0-cli-alpha/docfx.cli.zip"
 
 # download docfx from github.com
@@ -25,7 +25,7 @@ function Unzip
 Unzip $docfxZip $docfx
 
 # run docfx metadata to generate YAML metadata
-& .\$docfx\docfx.exe metadata $azureDoc\docfx.json
+& $docfx\docfx.exe metadata $azureDoc\docfx.json
 if($LASTEXITCODE -ne 0)
 {
     Pop-Location
