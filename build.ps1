@@ -25,6 +25,8 @@ function Unzip
 Unzip $docfxZip $docfx
 
 # run docfx metadata to generate YAML metadata
+Write-Host $scriptHome
+Get-Location
 & $docfx\docfx.exe metadata $azureDoc\docfx.json
 if($LASTEXITCODE -ne 0)
 {
