@@ -30,11 +30,6 @@ The following is a list of namespaces in the Azure .NET class library. Each name
    </tr>
 </thead>
 <tr>
-   <td></td>
-   <td>
-    </td>
-</tr>
-<tr>
    <td>Microsoft.ClusterServices.RDFEProvider.ResourceExtensions.Common.Models</td>
    <td>
     </td>
