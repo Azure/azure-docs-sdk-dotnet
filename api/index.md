@@ -30,517 +30,297 @@ The following is a list of namespaces in the Azure .NET class library. Each name
    </tr>
 </thead>
 <tr>
-   <td>Microsoft.ClusterServices.RDFEProvider.ResourceExtensions.Common.Models</td>
+   <td><a href source="./Microsoft.Azure.Graph.RBAC">Microsoft.Azure.Graph.RBAC<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.ClusterServices.RDFEProvider.ResourceExtensions.JobSubmission</td>
+   <td><a href source="./Microsoft.Azure.Graph.RBAC.Models">Microsoft.Azure.Graph.RBAC.Models<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.ClusterServices.RDFEProvider.ResourceExtensions.JobSubmission.Models</td>
+   <td><a href source="./Microsoft.Azure.Management.Authorization">Microsoft.Azure.Management.Authorization<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.Hadoop.Avro</td>
-   <td>A newer version of HDInsight .NET SDK is available that uses the Azure Resource Manager (ARM) approach.
-   You are encouraged to use the newer ARM-based version of HDInsight .NET SDK going forward.
-   For instructions on how to use the new HDInsight .NET SDK to create a cluster,
-   see [Create HDInsight Linux clusters using .NET SDK](https://azure.microsoft.com/documentation/articles/hdinsight-hadoop-create-linux-clusters-dotnet-sdk/).
-   For instructions on how to submit jobs using the new .NET SDK and other approaches,
-   see [Submit jobs to an HDInsight cluster](https://azure.microsoft.com/documentation/articles/hdinsight-submit-hadoop-jobs-programmatically/).
-   The HDInsight SDK reference for the newer version is available at [HDInsight .NET SDK Reference](https://msdn.microsoft.com/library/azure/mt271028.aspx).
-    </td>
-</tr>
-<tr>
-   <td>Microsoft.Hadoop.Avro.Container</td>
-   <td>A newer version of HDInsight .NET SDK is available that uses the Azure Resource Manager (ARM) approach.
-   You are encouraged to use the newer ARM-based version of HDInsight .NET SDK going forward.
-   For instructions on how to use the new HDInsight .NET SDK to create a cluster,
-   see [Create HDInsight Linux clusters using .NET SDK](https://azure.microsoft.com/documentation/articles/hdinsight-hadoop-create-linux-clusters-dotnet-sdk/).
-   For instructions on how to submit jobs using the new .NET SDK and other approaches,
-   see [Submit jobs to an HDInsight cluster](https://azure.microsoft.com/documentation/articles/hdinsight-submit-hadoop-jobs-programmatically/).
-   The HDInsight SDK reference for the newer version is available at [HDInsight .NET SDK Reference](https://msdn.microsoft.com/library/azure/mt271028.aspx).
-    </td>
-</tr>
-<tr>
-   <td>Microsoft.Hadoop.Avro.Sample</td>
-   <td>A newer version of HDInsight .NET SDK is available that uses the Azure Resource Manager (ARM) approach.
-   You are encouraged to use the newer ARM-based version of HDInsight .NET SDK going forward.
-   For instructions on how to use the new HDInsight .NET SDK to create a cluster,
-   see [Create HDInsight Linux clusters using .NET SDK](https://azure.microsoft.com/documentation/articles/hdinsight-hadoop-create-linux-clusters-dotnet-sdk/).
-   For instructions on how to submit jobs using the new .NET SDK and other approaches,
-   see [Submit jobs to an HDInsight cluster](https://azure.microsoft.com/documentation/articles/hdinsight-submit-hadoop-jobs-programmatically/).
-   The HDInsight SDK reference for the newer version is available at [HDInsight .NET SDK Reference](https://msdn.microsoft.com/library/azure/mt271028.aspx).
-    </td>
-</tr>
-<tr>
-   <td>Microsoft.Hadoop.Avro.Schema</td>
-   <td>A newer version of HDInsight .NET SDK is available that uses the Azure Resource Manager (ARM) approach.
-   You are encouraged to use the newer ARM-based version of HDInsight .NET SDK going forward.
-   For instructions on how to use the new HDInsight .NET SDK to create a cluster,
-   see [Create HDInsight Linux clusters using .NET SDK](https://azure.microsoft.com/documentation/articles/hdinsight-hadoop-create-linux-clusters-dotnet-sdk/).
-   For instructions on how to submit jobs using the new .NET SDK and other approaches,
-   see [Submit jobs to an HDInsight cluster](https://azure.microsoft.com/documentation/articles/hdinsight-submit-hadoop-jobs-programmatically/).
-   The HDInsight SDK reference for the newer version is available at [HDInsight .NET SDK Reference](https://msdn.microsoft.com/library/azure/mt271028.aspx).
-    </td>
-</tr>
-<tr>
-   <td>Microsoft.Hadoop.Avro.Tools</td>
-   <td>A newer version of HDInsight .NET SDK is available that uses the Azure Resource Manager (ARM) approach.
-   You are encouraged to use the newer ARM-based version of HDInsight .NET SDK going forward.
-   For instructions on how to use the new HDInsight .NET SDK to create a cluster,
-   see [Create HDInsight Linux clusters using .NET SDK](https://azure.microsoft.com/documentation/articles/hdinsight-hadoop-create-linux-clusters-dotnet-sdk/).
-   For instructions on how to submit jobs using the new .NET SDK and other approaches,
-   see [Submit jobs to an HDInsight cluster](https://azure.microsoft.com/documentation/articles/hdinsight-submit-hadoop-jobs-programmatically/).
-   The HDInsight SDK reference for the newer version is available at [HDInsight .NET SDK Reference](https://msdn.microsoft.com/library/azure/mt271028.aspx).
-    </td>
-</tr>
-<tr>
-   <td>Microsoft.Hadoop.Avro.Utils.Templates</td>
-   <td>A newer version of HDInsight .NET SDK is available that uses the Azure Resource Manager (ARM) approach.
-   You are encouraged to use the newer ARM-based version of HDInsight .NET SDK going forward.
-   For instructions on how to use the new HDInsight .NET SDK to create a cluster,
-   see [Create HDInsight Linux clusters using .NET SDK](https://azure.microsoft.com/documentation/articles/hdinsight-hadoop-create-linux-clusters-dotnet-sdk/).
-   For instructions on how to submit jobs using the new .NET SDK and other approaches,
-   see [Submit jobs to an HDInsight cluster](https://azure.microsoft.com/documentation/articles/hdinsight-submit-hadoop-jobs-programmatically/).
-   The HDInsight SDK reference for the newer version is available at [HDInsight .NET SDK Reference](https://msdn.microsoft.com/library/azure/mt271028.aspx).
-    </td>
-</tr>
-<tr>
-   <td>Microsoft.Hadoop.Client</td>
-   <td>A newer version of HDInsight .NET SDK is available that uses the Azure Resource Manager (ARM) approach.
-   You are encouraged to use the newer ARM-based version of HDInsight .NET SDK going forward.
-   For instructions on how to use the new HDInsight .NET SDK to create a cluster,
-   see [Create HDInsight Linux clusters using .NET SDK](https://azure.microsoft.com/documentation/articles/hdinsight-hadoop-create-linux-clusters-dotnet-sdk/).
-   For instructions on how to submit jobs using the new .NET SDK and other approaches,
-   see [Submit jobs to an HDInsight cluster](https://azure.microsoft.com/documentation/articles/hdinsight-submit-hadoop-jobs-programmatically/).
-   The HDInsight SDK reference for the newer version is available at [HDInsight .NET SDK Reference](https://msdn.microsoft.com/library/azure/mt271028.aspx).
-    </td>
-</tr>
-<tr>
-   <td>Microsoft.Hadoop.Client.HadoopStorageClientLayer</td>
-   <td>A newer version of HDInsight .NET SDK is available that uses the Azure Resource Manager (ARM) approach.
-   You are encouraged to use the newer ARM-based version of HDInsight .NET SDK going forward.
-   For instructions on how to use the new HDInsight .NET SDK to create a cluster,
-   see [Create HDInsight Linux clusters using .NET SDK](https://azure.microsoft.com/documentation/articles/hdinsight-hadoop-create-linux-clusters-dotnet-sdk/).
-   For instructions on how to submit jobs using the new .NET SDK and other approaches,
-   see [Submit jobs to an HDInsight cluster](https://azure.microsoft.com/documentation/articles/hdinsight-submit-hadoop-jobs-programmatically/).
-   The HDInsight SDK reference for the newer version is available at [HDInsight .NET SDK Reference](https://msdn.microsoft.com/library/azure/mt271028.aspx).
-    </td>
-</tr>
-<tr>
-   <td>Microsoft.HadoopAppliance.Client</td>
-   <td>A newer version of HDInsight .NET SDK is available that uses the Azure Resource Manager (ARM) approach.
-   You are encouraged to use the newer ARM-based version of HDInsight .NET SDK going forward.
-   For instructions on how to use the new HDInsight .NET SDK to create a cluster,
-   see [Create HDInsight Linux clusters using .NET SDK](https://azure.microsoft.com/documentation/articles/hdinsight-hadoop-create-linux-clusters-dotnet-sdk/).
-   For instructions on how to submit jobs using the new .NET SDK and other approaches,
-   see [Submit jobs to an HDInsight cluster](https://azure.microsoft.com/documentation/articles/hdinsight-submit-hadoop-jobs-programmatically/).
-   The HDInsight SDK reference for the newer version is available at [HDInsight .NET SDK Reference](https://msdn.microsoft.com/library/azure/mt271028.aspx).
-    </td>
-</tr>
-<tr>
-   <td>Microsoft.HadoopAppliance.Client.HadoopStorageClientLayer</td>
-   <td>A newer version of HDInsight .NET SDK is available that uses the Azure Resource Manager (ARM) approach.
-   You are encouraged to use the newer ARM-based version of HDInsight .NET SDK going forward.
-   For instructions on how to use the new HDInsight .NET SDK to create a cluster,
-   see [Create HDInsight Linux clusters using .NET SDK](https://azure.microsoft.com/documentation/articles/hdinsight-hadoop-create-linux-clusters-dotnet-sdk/).
-   For instructions on how to submit jobs using the new .NET SDK and other approaches,
-   see [Submit jobs to an HDInsight cluster](https://azure.microsoft.com/documentation/articles/hdinsight-submit-hadoop-jobs-programmatically/).
-   The HDInsight SDK reference for the newer version is available at [HDInsight .NET SDK Reference](https://msdn.microsoft.com/library/azure/mt271028.aspx).
-    </td>
-</tr>
-<tr>
-   <td>Microsoft.HDInsight.Net.Http.Formatting.Formatting</td>
-   <td>
-    </td>
-</tr>
-<tr>
-   <td>Microsoft.WindowsAzure.Management</td>
-   <td>Manage service deployments and storage accounts.
-    </td>
-</tr>
-<tr>
-   <td>Microsoft.WindowsAzure.Management.Automation</td>
-   <td>
-    </td>
-</tr>
-<tr>
-   <td>Microsoft.WindowsAzure.Management.Automation.Models</td>
-   <td>
-    </td>
-</tr>
-<tr>
-   <td>Microsoft.WindowsAzure.Management.Compute</td>
-   <td>Manage virtual machines, service certificates, cloud services, deployments.
-    </td>
-</tr>
-<tr>
-   <td>Microsoft.WindowsAzure.Management.Compute.Models</td>
-   <td>
-    </td>
-</tr>
-<tr>
-   <td>Microsoft.WindowsAzure.Management.Configuration</td>
-   <td>
-    </td>
-</tr>
-<tr>
-   <td>Microsoft.WindowsAzure.Management.Configuration.Data</td>
+   <td><a href source="./Microsoft.Azure.Management.Authorization.Models">Microsoft.Azure.Management.Authorization.Models<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.ExpressRoute</td>
+   <td><a href source="./Microsoft.Azure.Management.Batch">Microsoft.Azure.Management.Batch<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.ExpressRoute.Models</td>
+   <td><a href source="./Microsoft.Azure.Management.Batch.Models">Microsoft.Azure.Management.Batch.Models<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.HDInsight</td>
+   <td><a href source="./Microsoft.Azure.Management.Cdn">Microsoft.Azure.Management.Cdn<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.HDInsight.ClusterProvisioning</td>
+   <td><a href source="./Microsoft.Azure.Management.Cdn.Models">Microsoft.Azure.Management.Cdn.Models<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.HDInsight.ClusterProvisioning.Data</td>
+   <td><a href source="./Microsoft.Azure.Management.CognitiveServices">Microsoft.Azure.Management.CognitiveServices<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.HDInsight.Contracts</td>
+   <td><a href source="./Microsoft.Azure.Management.CognitiveServices.Models">Microsoft.Azure.Management.CognitiveServices.Models<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.HDInsight.Contracts.March2013</td>
+   <td><a href source="./Microsoft.Azure.Management.Compute">Microsoft.Azure.Management.Compute<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.HDInsight.Contracts.May2013</td>
+   <td><a href source="./Microsoft.Azure.Management.Compute.Models">Microsoft.Azure.Management.Compute.Models<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.HDInsight.Contracts.May2014</td>
+   <td><a href source="./Microsoft.Azure.Management.DataLake.Analytic">Microsoft.Azure.Management.DataLake.Analytic<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.HDInsight.Framework.Core</td>
+   <td><a href source="./Microsoft.Azure.Management.DataLake.Analytic.Models">Microsoft.Azure.Management.DataLake.Analytic.Models<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.HDInsight.Framework.Core.Library.WebRequest</td>
+   <td><a href source="./Microsoft.Azure.Management.DataLake.Store">Microsoft.Azure.Management.DataLake.Store<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.HDInsight.Framework.Core.Retries</td>
+   <td><a href source="./Microsoft.Azure.Management.DataLake.Store.Models">Microsoft.Azure.Management.DataLake.Store.Models<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.HDInsight.Framework.Internal</td>
+   <td><a href source="./Microsoft.Azure.Management.DevTestLabs">Microsoft.Azure.Management.DevTestLabs<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.HDInsight.Framework.Logging</td>
+   <td><a href source="./Microsoft.Azure.Management.DevTestLabs.Models">Microsoft.Azure.Management.DevTestLabs.Models<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.HDInsight.Framework.Rest</td>
+   <td><a href source="./Microsoft.Azure.Management.DNS">Microsoft.Azure.Management.DNS<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.HDInsight.Framework.Rest.CodeGen</td>
+   <td><a href source="./Microsoft.Azure.Management.DNS.Models">Microsoft.Azure.Management.DNS.Models<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.HDInsight.JobSubmission</td>
+   <td><a href source="./Microsoft.Azure.Management.EventHub">Microsoft.Azure.Management.EventHub<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.HDInsight.Logging</td>
+   <td><a href source="./Microsoft.Azure.Management.EventHub.Models">Microsoft.Azure.Management.EventHub.Models<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.HDInsight.Tests</td>
+   <td><a href source="./Microsoft.Azure.Management.IotHub">Microsoft.Azure.Management.IotHub<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.HDInsight.Tests.ServerDataObjects</td>
+   <td><a href source="./Microsoft.Azure.Management.IotHub.Models">Microsoft.Azure.Management.IotHub.Models<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.HDInsight.Tests.ServerDataObjects.Rdfe</td>
+   <td><a href source="./Microsoft.Azure.Management.KeyVault">Microsoft.Azure.Management.KeyVault<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.HDInsight.Tests.ServerDataObjects.RdfeE</td>
+   <td><a href source="./Microsoft.Azure.Management.KeyVault.Models">Microsoft.Azure.Management.KeyVault.Models<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.HDInsight.TestUtilities</td>
+   <td><a href source="./Microsoft.Azure.Management.Logic">Microsoft.Azure.Management.Logic<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.HDInsight.TestUtilities.PowerShellTestAbstraction.Concreates</td>
+   <td><a href source="./Microsoft.Azure.Management.Logic.Models">Microsoft.Azure.Management.Logic.Models<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.HDInsight.TestUtilities.PowerShellTestAbstraction.Disposable</td>
+   <td><a href source="./Microsoft.Azure.Management.MachineLearning.CommitmentPlans">Microsoft.Azure.Management.MachineLearning.CommitmentPlans<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.HDInsight.TestUtilities.PowerShellTestAbstraction.Interfaces</td>
+   <td><a href source="./Microsoft.Azure.Management.MachineLearning.CommitmentPlans.Models">Microsoft.Azure.Management.MachineLearning.CommitmentPlans.Models<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.HDInsight.TestUtilities.ServerDataObjects</td>
+   <td><a href source="./Microsoft.Azure.Management.MachineLearning.WebServices">Microsoft.Azure.Management.MachineLearning.WebServices<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.MediaServices</td>
+   <td><a href source="./Microsoft.Azure.Management.MachineLearning.WebServices.Models">Microsoft.Azure.Management.MachineLearning.WebServices.Models<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.MediaServices.Models</td>
+   <td><a href source="./Microsoft.Azure.Management.Media">Microsoft.Azure.Management.Media<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.Models</td>
+   <td><a href source="./Microsoft.Azure.Management.Media.Models">Microsoft.Azure.Management.Media.Models<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.Monitoring.Alerts</td>
+   <td><a href source="./Microsoft.Azure.Management.Network">Microsoft.Azure.Management.Network<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.Monitoring.Alerts.Models</td>
+   <td><a href source="./Microsoft.Azure.Management.Network.Models">Microsoft.Azure.Management.Network.Models<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.Monitoring.Autoscale</td>
+   <td><a href source="./Microsoft.Azure.Management.NotificationHubs">Microsoft.Azure.Management.NotificationHubs<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.Monitoring.Autoscale.Models</td>
+   <td><a href source="./Microsoft.Azure.Management.NotificationHubs.Models">Microsoft.Azure.Management.NotificationHubs.Models<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.Monitoring.Metrics</td>
+   <td><a href source="./Microsoft.Azure.Management.PowerBIEmbedded">Microsoft.Azure.Management.PowerBIEmbedded<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.Monitoring.Metrics.Models</td>
+   <td><a href source="./Microsoft.Azure.Management.PowerBIEmbedded.Models">Microsoft.Azure.Management.PowerBIEmbedded.Models<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.Monitoring.Models</td>
+   <td><a href source="./Microsoft.Azure.Management.Redis">Microsoft.Azure.Management.Redis<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.Monitoring.Utilities</td>
+   <td><a href source="./Microsoft.Azure.Management.Redis.Models">Microsoft.Azure.Management.Redis.Models<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.Network</td>
+   <td><a href source="./Microsoft.Azure.Management.ResourceManager">Microsoft.Azure.Management.ResourceManager<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.Network.Models</td>
+   <td><a href source="./Microsoft.Azure.Management.ResourceManager.Models">Microsoft.Azure.Management.ResourceManager.Models<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.RecoveryServices</td>
+   <td><a href source="./Microsoft.Azure.Management.Scheduler">Microsoft.Azure.Management.Scheduler<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.RecoveryServices.Models</td>
+   <td><a href source="./Microsoft.Azure.Management.Scheduler.Models">Microsoft.Azure.Management.Scheduler.Models<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.RemoteApp</td>
+   <td><a href source="./Microsoft.Azure.Management.ServerManagement">Microsoft.Azure.Management.ServerManagement<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.RemoteApp.Models</td>
+   <td><a href source="./Microsoft.Azure.Management.ServerManagement.Models">Microsoft.Azure.Management.ServerManagement.Models<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.Scheduler</td>
+   <td><a href source="./Microsoft.Azure.Management.ServiceBus">Microsoft.Azure.Management.ServiceBus<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.Scheduler.Models</td>
+   <td><a href source="./Microsoft.Azure.Management.ServiceBus.Models">Microsoft.Azure.Management.ServiceBus.Models<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.ServiceBus</td>
+   <td><a href source="./Microsoft.Azure.Management.Storage">Microsoft.Azure.Management.Storage<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Management.ServiceBus.Models</td>
+   <td><a href source="./Microsoft.Azure.Management.Storage.Models">Microsoft.Azure.Management.Storage.Models<a></td>
    <td>
-    </td>
-</tr>
-<tr>
-   <td>Microsoft.WindowsAzure.Management.SiteRecovery</td>
-   <td>
-    </td>
-</tr>
-<tr>
-   <td>Microsoft.WindowsAzure.Management.SiteRecovery.Models</td>
-   <td>
-    </td>
-</tr>
-<tr>
-   <td>Microsoft.WindowsAzure.Management.Sql</td>
-   <td>
-    </td>
-</tr>
-<tr>
-   <td>Microsoft.WindowsAzure.Management.Sql.Models</td>
-   <td>
-    </td>
-</tr>
-<tr>
-   <td>Microsoft.WindowsAzure.Management.Storage</td>
-   <td>Manage storage accounts.
-    </td>
-</tr>
-<tr>
-   <td>Microsoft.WindowsAzure.Management.Storage.Models</td>
-   <td>Information and settings for managing service accounts.
-    </td>
-</tr>
-<tr>
-   <td>Microsoft.WindowsAzure.Management.Store</td>
-   <td>
-    </td>
-</tr>
-<tr>
-   <td>Microsoft.WindowsAzure.Management.Store.Models</td>
-   <td>
-    </td>
-</tr>
-<tr>
-   <td>Microsoft.WindowsAzure.Management.StorSimple</td>
-   <td>
-    </td>
-</tr>
-<tr>
-   <td>Microsoft.WindowsAzure.Management.StorSimple.Customization.Models</td>
-   <td>
-    </td>
-</tr>
-<tr>
-   <td>Microsoft.WindowsAzure.Management.StorSimple.Models</td>
-   <td>
-    </td>
-</tr>
-<tr>
-   <td>Microsoft.WindowsAzure.Management.TrafficManager</td>
-   <td>
-    </td>
-</tr>
-<tr>
-   <td>Microsoft.WindowsAzure.Management.TrafficManager.Models</td>
-   <td>
-    </td>
-</tr>
-<tr>
-   <td>Microsoft.WindowsAzure.Management.WebSites</td>
-   <td>Manage websites.
-    </td>
-</tr>
-<tr>
-   <td>Microsoft.WindowsAzure.Management.WebSites.Models</td>
-   <td>Information and settings for websites.
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Scheduler</td>
+   <td><a href source="./Microsoft.Azure.Management.TrafficManager">Microsoft.Azure.Management.TrafficManager<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Scheduler.Models</td>
+   <td><a href source="./Microsoft.Azure.Management.TrafficManager.Models">Microsoft.Azure.Management.TrafficManager.Models<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Subscriptions</td>
+   <td><a href source="./Microsoft.Azure.Management.WebSites">Microsoft.Azure.Management.WebSites<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.Subscriptions.Models</td>
+   <td><a href source="./Microsoft.Azure.Management.WebSites.Models">Microsoft.Azure.Management.WebSites.Models<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.WebSitesExtensions</td>
+   <td><a href source="./Scheduler.Test.Helpers">Scheduler.Test.Helpers<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>Microsoft.WindowsAzure.WebSitesExtensions.Models</td>
+   <td><a href source="./Scheduler.Test.InMemoryTests">Scheduler.Test.InMemoryTests<a></td>
    <td>
     </td>
 </tr>
 <tr>
-   <td>ProcDetailsTestApplication</td>
+   <td><a href source="./Scheduler.Test.ScenarioTests">Scheduler.Test.ScenarioTests<a></td>
    <td>
     </td>
 </tr>
