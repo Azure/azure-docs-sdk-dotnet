@@ -19,60 +19,6 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 > The source files need to have summary information added for namespaces.
 
 
-## Microsoft.Azure.Graph.RBAC
-
-[Microsoft.Azure.Graph.RBAC namespace](Microsoft.Azure.Graph.RBAC)
-
-### Classes
-
-- [ApplicationsOperationsExtensions](Microsoft.Azure.Graph.RBAC.ApplicationOperationsExtensions)
-- [GraphRbacManagementClient](Microsoft.Azure.Graph.RBAC.GraphRbacManagementClient)
-- [GroupsOperationsExtensions](Microsoft.Azure.Graph.RBAC.GroupsOperationsExtensions)
-- [ObjectsOperationsExtensions](Microsoft.Azure.Graph.RBAC.ObjectsOperationsExtensions)
-- [ServicePrincipalOperationsExtensions](Microsoft.Azure.Graph.RBAC.ServicePrincipalOperationsExtensions)
-- [UserOperationsExtensions](Microsoft.Azure.Graph.RBAC.UserOperationsExtensions)
-
-### Interfaces
-
-- [IApplicationsOperations](Microsoft.Azure.Graph.RBAC.IApplicationsOperations)
-- [IGraphRbacManagementClient](Microsoft.Azure.Graph.RBAC.IGraphRbacManagementClient)
-- [IGroupsOperations](Microsoft.Azure.Graph.RBAC.)
-- [IGroupOperations](Microsoft.Azure.Graph.RBAC.IGroupsOperations)
-- [IObjectOperations](Microsoft.Azure.Graph.RBAC.IObjectOperations)
-- [IServicePrincipalsOperations](Microsoft.Azure.Graph.RBAC.IServicePrincipalsOperations)
-- [IUSersOperations](Microsoft.Azure.Graph.RBAC.IUSersOperations)
-
-## Microsoft.Azure.Graph.RBAC.Models
-
-[Microsoft.Azure.Graph.RBAC.Models namespace](Microsoft.Azure.Graph.RBAC.Models)
-
-### Classes
-
-- [AADObjet](Microsoft.Azure.Graph.RBAC.Models.AADObject)
-- [ADGroup](Microsoft.Azure.Graph.RBAC.Models.ADGroup)
-- [Application](Microsoft.Azure.Graph.RBAC.Models.Application)
-- [ApplicationCreateParameters](Microsoft.Azure.Graph.RBAC.Models.ApplicationCreateParameters)
-- [ApplicationUpdateParameters](Microsoft.Azure.Graph.RBAC.Models.ApplicationUpdateParameters)
-- [CheckGroupMembershipParemeters](Microsoft.Azure.Graph.RBAC.Models.CheckGroupMembershipParameters)
-- [CheckGroupMembershipResult](Microsoft.Azure.Graph.RBAC.Models.CheckGroupMembershipResult)
-- [GetObjectsParameters](Microsoft.Azure.Graph.RBAC.Models.GetObjectsParameters)
-- [GraphError](Microsoft.Azure.Graph.RBAC.Models.GraphError)
-- [GraphErrorException](Microsoft.Azure.Graph.RBAC.Models.GraphErrorException)
-- [GroupAddMemberParameters](Microsoft.Azure.Graph.RBAC.Models.GroupAddMemberParameters)
-- [GroupCreateParameters](Microsoft.Azure.Graph.RBAC.Models.GroupCreateParameters)
-- [GroupGetMemberGroupsParameters](Microsoft.Azure.Graph.RBAC.Models.GroupGetMemberGroupsParameters)
-- [KeyCredentials](Microsoft.Azure.Graph.RBAC.Models.KeyCredentials)
-- [KeyCredentialsUpdateParameters](Microsoft.Azure.Graph.RBAC.Models.KeyCredentialsUpdateParameters)
-- [PasswordCredential](Microsoft.Azure.Graph.RBAC.Models.PasswordCredential)
-- [PasswordCredentialUpdateParameters](Microsoft.Azure.Graph.RBAC.Models.PasswordCredential)
-- [PasswordProfile](Microsoft.Azure.Graph.RBAC.Models.PasswordProfile)
-- [ServicePrincipal](Microsoft.Azure.Graph.RBAC.Models.ServicePrincipal)
-- [ServicePrincipalCreateParameters](Microsoft.Azure.Graph.RBAC.Models.ServicePrincipalCreateParameters)
-- [User](Microsoft.Azure.Graph.RBAC.Models.User)
-- [UserCreateParameters](Microsoft.Azure.Graph.RBAC.Models.UserCreateParameters)
-- [UserGetMemberGroupsParameters](Microsoft.Azure.Graph.RBAC.Models.UserGetMemberGroupsParameters)
-- [UserUpdateParameters](Microsoft.Azure.Graph.RBAC.Models.UserGetMemberGroupsParameters)
-
 ## Microsoft.Azure.Management
 
 [Microsoft.Azure.Management namespace](Microsoft.Azure.Management)
