@@ -72,28 +72,75 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 - [UserCreateParameters](Microsoft.Azure.Graph.RBAC.Models.UserCreateParameters)
 - [UserGetMemberGroupsParameters](Microsoft.Azure.Graph.RBAC.Models.UserGetMemberGroupsParameters)
 - [UserUpdateParameters](Microsoft.Azure.Graph.RBAC.Models.UserGetMemberGroupsParameters)
-- [](Microsoft.Azure.Graph.RBAC.Models.)
-- [](Microsoft.Azure.Graph.RBAC.Models.)
-- [](Microsoft.Azure.Graph.RBAC.Models.)
-- [](Microsoft.Azure.Graph.RBAC.Models.)
-- [](Microsoft.Azure.Graph.RBAC.Models.)
-- [](Microsoft.Azure.Graph.RBAC.Models.)
-- [](Microsoft.Azure.Graph.RBAC.Models.)
-- [](Microsoft.Azure.Graph.RBAC.Models.)
-- [](Microsoft.Azure.Graph.RBAC.Models.)
 
-## Microsoft.Azure.Insights
+## Microsoft.Azure.Management
 
-[Microsoft.Azure.Insights namespace](Microsoft.Azure.Insights)
+[Microsoft.Azure.Management namespace](Microsoft.Azure.Management)
 
-## Microsoft.Azure.Insights.Models
+### Classes
 
-[Microsoft.Azure.Insights.Models namespace](Microsoft.Azure.Insights.Models)
+- [Azure](Microsoft.Azure.Management.Azure)
+- [Azure.Authenticated](Microsoft.Azure.Management.Azure.Authenticated)
+- [Azure.Configurable](Microsoft.Azure.Management.Azure.Configurable)
 
-## Microsoft.Azure.Management.Authorization
-## Microsoft.Azure.Management.Authorization.Models
+## Interfaces
+
+- [Azure.IAuthenticated](Microsoft.Azure.Management.Azure.IAuthenticated)
+- [Azure.IConfigurable](Microsoft.Azure.Management.Azure.IConfigurable)
+
 ## Microsoft.Azure.Management.Batch
+
+[Microsoft.Azure.Management.Batch namespace](Microsoft.Azure.Management.Batch)
+
+### Classes
+
+- [AccountOperationsExtensions](Microsoft.Azure.Management.Batch.AccountOperationsExtensions)
+- [ApplicationOperationsExtensions](Microsoft.Azure.Management.Batch.ApplicationOperationsExtensions)
+- [BatchManagementClient](Microsoft.Azure.Management.Batch.BatchManagementClient)
+- [SubscriptionOperationsExtensions](Microsoft.Azure.Management.Batch.SubscriptionOperationsExtensions)
+
+### Interfaces
+
+- [IAccountOperations](Microsoft.Azure.Management.Batch.IAccountOperations)
+- [IApplicationOperations](Microsoft.Azure.Management.Batch.IApplicationOperations)
+- [IBatchManagementClient](Microsoft.Azure.Management.Batch.IBatchManagementClient)
+- [ISubscriptionOperations](Microsoft.Azure.Management.Batch.ISubscriptionOperations)
+
 ## Microsoft.Azure.Management.Batch.Models
+
+[Microsoft.Azure.Management.Batch.Models namespace](Microsoft.Azure.Management.Batch.Models)
+
+### Classes
+
+- [AccountResourceInner](Microsoft.Azure.Management.Batch.Models.AccountResourceInner)
+- [ActivateApplicationPackageParameters](Microsoft.Azure.Management.Batch.Models.ActivateApplicationPackageParameters)
+- [AddApplicationPackageResultInner](Microsoft.Azure.Management.Batch.Models.AddApplicationPackageResultInner)
+- [ActivateApplicationPackageParameters](Microsoft.Azure.Management.Batch.Models.ActivateApplicationPackageParameters)
+- [AddApplicationPackageResultInner](Microsoft.Azure.Management.Batch.Models.AddApplicationPackageResultInner)
+- [AddApplicationParametersInner](Microsoft.Azure.Management.Batch.Models.AddApplicationParametersInner)
+- [ApplicationInner](Microsoft.Azure.Management.Batch.Models.ApplicationInner)
+- [ApplicationPackage](Microsoft.Azure.Management.Batch.Models.ApplicationPackage)
+- [AutoStorageBaseProperties](Microsoft.Azure.Management.Batch.Models.AutoStorageBaseProperties)
+- [AutoStorageProperties](Microsoft.Azure.Management.Batch.Models.AutoStorageProperties)
+- [BatchAccountCreateParametersInner](Microsoft.Azure.Management.Batch.Models.BatchAccountCreateParametersInner)
+- [BatchAccountListKeyResultInner](Microsoft.Azure.Management.Batch.Models.BatchAccountListKeyResultInner)
+- [BatchAccountListResultInner](Microsoft.Azure.Management.Batch.Models.BatchAccountListResultInner)
+- [BatchAccountRegenerateKeyParameters](Microsoft.Azure.Management.Batch.Models.BatchAccountRegenerateKeyParameters)
+- [BatchAccountRegenerateKeyResultInner](Microsoft.Azure.Management.Batch.Models.BatchAccountRegenerateKeyResultInner)
+- [BatchAccountUpdateParametersInner](Microsoft.Azure.Management.Batch.Models.BatchAccountUpdateParametersInner)
+- [GetApplicationPackageResultInner](Microsoft.Azure.Management.Batch.Models.GetApplicationPackageResultInner)
+- [ListApplicationsResultInner](Microsoft.Azure.Management.Batch.Models.ListApplicationsResultInner)
+- [Page<T>](Microsoft.Azure.Management.Batch.Models.Page`1)
+- [SubscriptionQuotasGetResultInner](Microsoft.Azure.Management.Batch.Models.SubscriptionQuotasGetResultInner)
+- [UpdateApplicationParametersInner](Microsoft.Azure.Management.Batch.Models.UpdateApplicationParametersInner)
+
+## Enums
+
+- [AccountKeyType](Microsoft.Azure.Management.Batch.Models.AccountKeyType)
+- [AccountProvisioningState](Microsoft.Azure.Management.Batch.Models.AccountProvisioningState)
+- [PackageState](Microsoft.Azure.Management.Batch.Models.PackageState)
+
+
 ## Microsoft.Azure.Management.Cdn
 ## Microsoft.Azure.Management.Cdn.Models
 ## Microsoft.Azure.Management.CognitiveServices
