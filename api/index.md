@@ -73,6 +73,53 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 - [UserGetMemberGroupsParameters](Microsoft.Azure.Graph.RBAC.Models.UserGetMemberGroupsParameters)
 - [UserUpdateParameters](Microsoft.Azure.Graph.RBAC.Models.UserGetMemberGroupsParameters)
 
+## Microsoft.Azure.Management.Insights
+
+[Microsoft.Azure.Management.Insights namespace](Microsoft.Azure.Insights.)
+
+### Classes
+
+- [EventCategoriesOperationsExtensions](Microsoft.Azure.Management.Insights.EventCategoriesOperationsExtensions)
+- [EventsOperationsExtensions](Microsoft.Azure.Management.Insights.EventsOperationsExtensions)
+- [InsightsClient](Microsoft.Azure.Management.Insights.InsightsClient)
+- [MetricDefinitionsOperationsExtensions](Microsoft.Azure.Management.Insights.MetricDefinitionsOperationsExtensions)
+- [MetricsOperationsExtensions](Microsoft.Azure.Management.Insights.MetricsOperationsExtensions)
+- [TenantEventsOperationsExtensions](Microsoft.Azure.Management.Insights.TenantEventsOperationsExtensions)
+- [UsageMetricsOperationsExtensions](Microsoft.Azure.Management.Insights.UsageMetricsOperationsExtensions)
+
+### Interfaces
+
+- [IEventCategoriesOperations](Microsoft.Azure.Management.Insights.IEventCategoriesOperations)
+- [IEventsOperations](Microsoft.Azure.Management.Insights.IEventsOperations)
+- [IInsightsClient](Microsoft.Azure.Management.Insights.IInsightsClient)
+- [IMetricDefinitionsOperations](Microsoft.Azure.Management.Insights.IMetricDefinitionsOperations)
+- [IMetricsOperations](Microsoft.Azure.Management.Insights.IMetricsOperations)
+- [ITenantEventsOperations](Microsoft.Azure.Management.Insights.ITenantEventsOperations)
+- [IUsageMetricsOperations](Microsoft.Azure.Management.Insights.IUsageMetricsOperations)
+
+## Microsoft.Azure.Management.Insights.Models
+
+[Microsoft.Azure.Management.Insights.Models namespace](Microsoft.Azure.Insights..Models)
+
+### Classes
+
+- [EventData](Microsoft.Azure.Management.Insights.Models.EventData)
+- [HttpRequestInfo](Microsoft.Azure.Management.Insights.Models.HttpRequestInfo)
+- [LocalizableString](Microsoft.Azure.Management.Insights.Models.LocalizableString)
+- [Metric](Microsoft.Azure.Management.Insights.Models.Metric)
+- [MetricAvailability](Microsoft.Azure.Management.Insights.Models.MetricAvailability)
+- [Page1<T>](Microsoft.Azure.Management.Insights.Models.Page1`1)
+- [Page<T>](Microsoft.Azure.Management.Insights.Models.Page`1)
+- [SenderAuthorization](Microsoft.Azure.Management.Insights.Models.SenderAuthorization)
+- [UsageMetric](Microsoft.Azure.Management.Insights.Models.UsageMetric)
+
+### Enums
+
+- [AggregationType](Microsoft.Azure.Management.Insights.Models.AggregationType)
+- [EventChannels](Microsoft.Azure.Management.Insights.Models.EventChannels)
+- [EventLevel](Microsoft.Azure.Management.Insights.Models.EventLevel)
+- [Unit](Microsoft.Azure.Management.Insights.Models.Unit)
+
 ## Microsoft.Azure.Management
 
 [Microsoft.Azure.Management namespace](Microsoft.Azure.Management)
