@@ -29,7 +29,7 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 - [Azure.Authenticated](Microsoft.Azure.Management.Azure.Authenticated)
 - [Azure.Configurable](Microsoft.Azure.Management.Azure.Configurable)
 
-## Interfaces
+### Interfaces
 
 - [Azure.IAuthenticated](Microsoft.Azure.Management.Azure.IAuthenticated)
 - [Azure.IConfigurable](Microsoft.Azure.Management.Azure.IConfigurable)
@@ -80,7 +80,7 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 - [SubscriptionQuotasGetResultInner](Microsoft.Azure.Management.Batch.Models.SubscriptionQuotasGetResultInner)
 - [UpdateApplicationParametersInner](Microsoft.Azure.Management.Batch.Models.UpdateApplicationParametersInner)
 
-## Enums
+### Enums
 
 - [AccountKeyType](Microsoft.Azure.Management.Batch.Models.AccountKeyType)
 - [AccountProvisioningState](Microsoft.Azure.Management.Batch.Models.AccountProvisioningState)
