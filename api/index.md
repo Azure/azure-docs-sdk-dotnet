@@ -486,15 +486,21 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 ### Classes
 
-- [](Microsoft.Azure.Management.DataLake.Analytic.)
+- [AccountOperationsExtensions](Microsoft.Azure.Management.DataLake.Analytic.AccountOperationsExtensions)
+- [CatalogOperationsExtensions](Microsoft.Azure.Management.DataLake.Analytic.CatalogOperationsExtensions)
+- [DataLakeAnalyticsAccountManagementClient](Microsoft.Azure.Management.DataLake.Analytic.DataLakeAnalyticsAccountManagementClient)
+- [DataLakeAnalyticsCatalogManagementClient](Microsoft.Azure.Management.DataLake.Analytic.DataLakeAnalyticsCatalogManagementClient)
+- [DataLakeAnalyticsJobsManagementClient](Microsoft.Azure.Management.DataLake.Analytic.DataLakeAnalyticsJobsManagementClient)
+- [JobOperationsExtensions](Microsoft.Azure.Management.DataLake.Analytic.JobOperationsExtensions)
 
 ### Interfaces
 
-- [](Microsoft.Azure.Management.DataLake.Analytic.)
-
-### Enums
-
-- [](Microsoft.Azure.Management.DataLake.Analytic.)
+- [IAccountOperations](Microsoft.Azure.Management.DataLake.Analytic.IAccountOperations)
+- [ICatalogOperations](Microsoft.Azure.Management.DataLake.Analytic.ICatalogOperations)
+- [IDataLakeAnalyticsAccountManagementClient](Microsoft.Azure.Management.DataLake.Analytic.IDataLakeAnalyticsAccountManagementClient)
+- [IDataLakeAnalyticsCatalogManagementClient](Microsoft.Azure.Management.DataLake.Analytic.IDataLakeAnalyticsCatalogManagementClient)
+- [IDataLakeAnalyticsJobsManagementClient](Microsoft.Azure.Management.DataLake.Analytic.IDataLakeAnalyticsJobsManagementClient)
+- [IJobOperations](Microsoft.Azure.Management.DataLake.Analytic.IJobOperations)
 
 ## Microsoft.Azure.Management.DataLake.Analytic.Models
 
@@ -502,14 +508,76 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 ### Classes
 
-- [](Microsoft.Azure.Management.DataLake.Analytic.Models.)
-
-### Interfaces
-
-- [](Microsoft.Azure.Management.DataLake.Analytic.Models.)
+- [AddDataLakeStoreParameters](Microsoft.Azure.Management.DataLake.Analytic.Models.AddDataLakeStoreParameters)
+- [AddStorageAccountParameters](Microsoft.Azure.Management.DataLake.Analytic.Models.AddStorageAccountParameters)
+- [AzureAsyncOperationResult](Microsoft.Azure.Management.DataLake.Analytic.Models.AzureAsyncOperationResult)
+- [BlobContainer](Microsoft.Azure.Management.DataLake.Analytic.Models.BlobContainer)
+- [BlobContainerProperties](Microsoft.Azure.Management.DataLake.Analytic.Models.BlobContainerProperties)
+- [CatalogItem](Microsoft.Azure.Management.DataLake.Analytic.Models.CatalogItem)
+- [CatalogItemList](Microsoft.Azure.Management.DataLake.Analytic.Models.CatalogItemList)
+- [CompileMode](Microsoft.Azure.Management.DataLake.Analytic.Models.CompileMode)
+- [DataLakeAnalyticsAccount](Microsoft.Azure.Management.DataLake.Analytic.Models.DataLakeAnalyticsAccount)
+- [DataLakeAnalyticsAccountProperties](Microsoft.Azure.Management.DataLake.Analytic.Models.DataLakeAnalyticsAccountProperties)
+- [DataLakeAnalyticsCatalogSecretCreateOrUpdateParameters](Microsoft.Azure.Management.DataLake.Analytic.Models.DataLakeAnalyticsCatalogSecretCreateOrUpdateParameters)
+- [DataLakeStoreAccountInfo](Microsoft.Azure.Management.DataLake.Analytic.Models.DataLakeStoreAccountInfo)
+- [DataLakeStoreAccountInfoProperties](Microsoft.Azure.Management.DataLake.Analytic.Models.DataLakeStoreAccountInfoProperties)
+- [DdlName](Microsoft.Azure.Management.DataLake.Analytic.Models.DdlName)
+- [Diagnostics](Microsoft.Azure.Management.DataLake.Analytic.Models.Diagnostics)
+- [EntityId](Microsoft.Azure.Management.DataLake.Analytic.Models.EntityId)
+- [Error](Microsoft.Azure.Management.DataLake.Analytic.Models.Error)
+- [ErrorDetails](Microsoft.Azure.Management.DataLake.Analytic.Models.ErrorDetails)
+- [ExternalTable](Microsoft.Azure.Management.DataLake.Analytic.Models.ExternalTable)
+- [HiveJobProperties](Microsoft.Azure.Management.DataLake.Analytic.Models.HiveJobProperties)
+- [InnerError](Microsoft.Azure.Management.DataLake.Analytic.Models.InnerError)
+- [JobDataPath](Microsoft.Azure.Management.DataLake.Analytic.Models.JobDataPath)
+- [JobErrorDetails](Microsoft.Azure.Management.DataLake.Analytic.Models.JobErrorDetails)
+- [JobInformation](Microsoft.Azure.Management.DataLake.Analytic.Models.JobInformation)
+- [JobInnerError](Microsoft.Azure.Management.DataLake.Analytic.Models.JobInnerError)
+- [JobProperties](Microsoft.Azure.Management.DataLake.Analytic.Models.JobProperties)
+- [JobResource](Microsoft.Azure.Management.DataLake.Analytic.Models.JobResource)
+- [JobResult](Microsoft.Azure.Management.DataLake.Analytic.Models.JobResult)
+- [JobStateAuditRecord](Microsoft.Azure.Management.DataLake.Analytic.Models.JobStateAuditRecord)
+- [JobStatistics](Microsoft.Azure.Management.DataLake.Analytic.Models.JobStatistics)
+- [JobStatisticsVertexStage](Microsoft.Azure.Management.DataLake.Analytic.Models.JobStatisticsVertexStage)
+- [Page<T>](Microsoft.Azure.Management.DataLake.Analytic.Models.Page`1)
+- [SasTokenInfo](Microsoft.Azure.Management.DataLake.Analytic.Models.SasTokenInfo)
+- [StorageAccountInfo](Microsoft.Azure.Management.DataLake.Analytic.Models.StorageAccountInfo)
+- [StorageAccountProperties](Microsoft.Azure.Management.DataLake.Analytic.Models.StorageAccountProperties)
+- [TypeFieldInfo](Microsoft.Azure.Management.DataLake.Analytic.Models.TypeFieldInfo)
+- [USqlAssembly](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlAssembly)
+- [USqlAssemblyClr](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlAssemblyClr)
+- [USqlAssemblyDependencyInfo](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlAssemblyDependencyInfo)
+- [USqlAssemblyFieldInfo](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlAssemblyFieldInfo)
+- [USqlCredential](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlCredential)
+- [USqlDatabase](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlDatabase)
+- [USqlDirectedColumn](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlDirectedColumn)
+- [USqlDistributionInfo](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlDistributionInfo)
+- [USqlExternalDataSource](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlExternalDataSource)
+- [USqlIndex](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlIndex)
+- [USqlJobProperties](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlJobProperties)
+- [USqlProcedure](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlProcedure)
+- [USqlSchema](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlSchema)
+- [USqlSecret](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlSecret)
+- [USqlTable](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlTable)
+- [USqlTableColumn](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlTableColumn)
+- [USqlTablePartition](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlTablePartition)
+- [USqlTableStatistics](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlTableStatistics)
+- [USqlTableType](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlTableType)
+- [USqlTableValuedFunction](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlTableValuedFunction)
+- [USqlType](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlType)
+- [USqlView](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlView)
 
 ### Enums
 
+- [DataLakeAnalyticsAccountState](Microsoft.Azure.Management.DataLake.Analytic.Models.DataLakeAnalyticsAccountState)
+- [DataLakeAnalyticsAccountStatus](Microsoft.Azure.Management.DataLake.Analytic.Models.DataLakeAnalyticsAccountStatus)
+- [FileType](Microsoft.Azure.Management.DataLake.Analytic.Models.FileType)
+- [JobResourceType](Microsoft.Azure.Management.DataLake.Analytic.Models.JobResourceType)
+- [JobState](Microsoft.Azure.Management.DataLake.Analytic.Models.JobState)
+- [JobType](Microsoft.Azure.Management.DataLake.Analytic.Models.JobType)
+- [OperationStatus](Microsoft.Azure.Management.DataLake.Analytic.Models.OperationStatus)
+- [SeverityTypes](Microsoft.Azure.Management.DataLake.Analytic.Models.SeverityTypes)
+- [](Microsoft.Azure.Management.DataLake.Analytic.Models.)
 - [](Microsoft.Azure.Management.DataLake.Analytic.Models.)
 
 ## Microsoft.Azure.Management.DataLake.Store
