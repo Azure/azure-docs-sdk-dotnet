@@ -286,7 +286,6 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 - [PurgeParameters](Microsoft.Azure.Management.Cdn.Models.PurgeParameters)
 - [Resource](Microsoft.Azure.Management.Cdn.Models.Resource)
 - [Sku](Microsoft.Azure.Management.Cdn.Models.Sku)
-- [SkuName](Microsoft.Azure.Management.Cdn.Models.SkuName)
 - [SsoUri](Microsoft.Azure.Management.Cdn.Models.SsoUri)
 - [TrackedResource](Microsoft.Azure.Management.Cdn.Models.TrackedResource)
 - [ValidateCustomDomainInput](Microsoft.Azure.Management.Cdn.Models.ValidateCustomDomainInput)
@@ -301,7 +300,7 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 - [ProvisioningState](Microsoft.Azure.Management.Cdn.Models.ProvisioningState)
 - [QueryStringCachingBehavior](Microsoft.Azure.Management.Cdn.Models.QueryStringCachingBehavior)
 - [ResourceType](Microsoft.Azure.Management.Cdn.Models.ResourceType)
-- [](Microsoft.Azure.Management.Cdn.Models.)
+- [SkuName](Microsoft.Azure.Management.Cdn.Models.SkuName)
 
 ## Microsoft.Azure.Management.CognitiveServices
 
@@ -309,15 +308,13 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 ### Classes
 
-- [](Microsoft.Azure.Management.CognitiveServices.)
+- [CognitiveServicesAccountsOperationsExtensions](Microsoft.Azure.Management.CognitiveServices.CognitiveServicesAccountsOperationsExtensions)
+- [CognitiveServicesManagementClient](Microsoft.Azure.Management.CognitiveServices.CognitiveServicesManagementClient)
 
 ### Interfaces
 
-- [](Microsoft.Azure.Management.CognitiveServices.)
-
-### Enums
-
-- [](Microsoft.Azure.Management.CognitiveServices.)
+- [ICognitiveServicesAccountsOperations](Microsoft.Azure.Management.CognitiveServices.ICognitiveServicesAccountsOperations)
+- [ICognitiveServicesManagementClient](Microsoft.Azure.Management.CognitiveServices.ICognitiveServicesManagementClient)
 
 ## Microsoft.Azure.Management.CognitiveServices.Models
 
@@ -325,15 +322,25 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 ### Classes
 
-- [](Microsoft.Azure.Management.CognitiveServices.Models.)
-
-### Interfaces
-
-- [](Microsoft.Azure.Management.CognitiveServices.Models.)
+- [CognitiveServicesAccount](Microsoft.Azure.Management.CognitiveServices.CognitiveServicesAccount)
+- [CognitiveServicesAccountCreateParameters](Microsoft.Azure.Management.CognitiveServices.CognitiveServicesAccountCreateParameters)
+- [CognitiveServicesAccountEnumerateSkusResult](Microsoft.Azure.Management.CognitiveServices.CognitiveServicesAccountEnumerateSkusResult)
+- [CognitiveServicesAccountKeys](Microsoft.Azure.Management.CognitiveServices.CognitiveServicesAccountKeys)
+- [CognitiveServicesAccountUpdateParameters](Microsoft.Azure.Management.CognitiveServices.CognitiveServicesAccountUpdateParameters)
+- [CognitiveServicesResourceAndSku](Microsoft.Azure.Management.CognitiveServices.CognitiveServicesResourceAndSku)
+- [Error](Microsoft.Azure.Management.CognitiveServices.Models.Error)
+- [ErrorBody](Microsoft.Azure.Management.CognitiveServices.Models.ErrorBody)
+- [ErrorException](Microsoft.Azure.Management.CognitiveServices.Models.ErrorException)
+- [Page<T>](Microsoft.Azure.Management.CognitiveServices.Models.PAge`1)
+- [Sku](Microsoft.Azure.Management.CognitiveServices.Models.Sku)
 
 ### Enums
 
-- [](Microsoft.Azure.Management.CognitiveServices.Models.)
+- [KeyName](Microsoft.Azure.Management.CognitiveServices.Models.KeyName)
+- [Kind](Microsoft.Azure.Management.CognitiveServices.Models.Kind)
+- [ProvisioningState](Microsoft.Azure.Management.CognitiveServices.Models.ProvisioningState)
+- [SkuName](Microsoft.Azure.Management.CognitiveServices.Models.SkuName)
+- [SkuTier](Microsoft.Azure.Management.CognitiveServices.Models.SkuTier)
 
 ## Microsoft.Azure.Management.Compute
 
