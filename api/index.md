@@ -108,8 +108,8 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 - [LocalizableString](Microsoft.Azure.Insights.Models.LocalizableString)
 - [Metric](Microsoft.Azure.Insights.Models.Metric)
 - [MetricAvailability](Microsoft.Azure.Insights.Models.MetricAvailability)
-- [Page1\<T>](Microsoft.Azure.Insights.Models.Page1`1)
-- [Page\<T>](Microsoft.Azure.Insights.Models.Page`1)
+- [Page1<T>](Microsoft.Azure.Insights.Models.Page1`1)
+- [Page<T>](Microsoft.Azure.Insights.Models.Page`1)
 - [SenderAuthorization](Microsoft.Azure.Insights.Models.SenderAuthorization)
 - [UsageMetric](Microsoft.Azure.Insights.Models.UsageMetric)
 
@@ -166,7 +166,7 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [ClassicAdministrator](Microsoft.Azure.Management.Authorization.Models.ClassicAdministrator)
 - [ClassicAdministratorProperties](Microsoft.Azure.Management.Authorization.Models.ClassicAdministratorProperties)
-- [Page\<T>](Microsoft.Azure.Management.Authorization.Models.Page`1)
+- [Page<T>](Microsoft.Azure.Management.Authorization.Models.Page`1)
 - [Permission](Microsoft.Azure.Management.Authorization.Models.Permission)
 - [ProviderOperation](Microsoft.Azure.Management.Authorization.Models.ProviderOperation)
 - [ProviderOperationsMetadata](Microsoft.Azure.Management.Authorization.Models.ProviderOperationsMetadata)
@@ -223,7 +223,7 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 - [BatchAccountUpdateParametersInner](Microsoft.Azure.Management.Batch.Models.BatchAccountUpdateParametersInner)
 - [GetApplicationPackageResultInner](Microsoft.Azure.Management.Batch.Models.GetApplicationPackageResultInner)
 - [ListApplicationsResultInner](Microsoft.Azure.Management.Batch.Models.ListApplicationsResultInner)
-- [Page\<T>](Microsoft.Azure.Management.Batch.Models.Page`1)
+- [Page<T>](Microsoft.Azure.Management.Batch.Models.Page`1)
 - [SubscriptionQuotasGetResultInner](Microsoft.Azure.Management.Batch.Models.SubscriptionQuotasGetResultInner)
 - [UpdateApplicationParametersInner](Microsoft.Azure.Management.Batch.Models.UpdateApplicationParametersInner)
 
@@ -279,7 +279,7 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 - [OperationDisplay](Microsoft.Azure.Management.Cdn.Models.OperationDisplay)
 - [Origin](Microsoft.Azure.Management.Cdn.Models.Origin)
 - [OriginParameters](Microsoft.Azure.Management.Cdn.Models.OriginParameters)
-- [Page\<T>](Microsoft.Azure.Management.Cdn.Models.Page`1)
+- [Page<T>](Microsoft.Azure.Management.Cdn.Models.Page`1)
 - [Profile](Microsoft.Azure.Management.Cdn.Models.Profile)
 - [ProfileCreateParameters](Microsoft.Azure.Management.Cdn.Models.ProfileCreateParameters)
 - [ProfileUpdateParameters](Microsoft.Azure.Management.Cdn.Models.ProfileUpdateParameters)
@@ -331,7 +331,7 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 - [Error](Microsoft.Azure.Management.CognitiveServices.Models.Error)
 - [ErrorBody](Microsoft.Azure.Management.CognitiveServices.Models.ErrorBody)
 - [ErrorException](Microsoft.Azure.Management.CognitiveServices.Models.ErrorException)
-- [Page\<T>](Microsoft.Azure.Management.CognitiveServices.Models.PAge`1)
+- [Page<T>](Microsoft.Azure.Management.CognitiveServices.Models.PAge`1)
 - [Sku](Microsoft.Azure.Management.CognitiveServices.Models.Sku)
 
 ### Enums
@@ -414,8 +414,8 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 - [OSDisk](Microsoft.Azure.Management.Compute.Models.OSDisk)
 - [OSDiskImage](Microsoft.Azure.Management.Compute.Models.OSDiskImage)
 - [OSProfile](Microsoft.Azure.Management.Compute.Models.OSProfile)
-- [Page1\<T>](Microsoft.Azure.Management.Compute.Models.Page1`1)
-- [Page\<T>](Microsoft.Azure.Management.Compute.Models.Page`1)
+- [Page1<T>](Microsoft.Azure.Management.Compute.Models.Page1`1)
+- [Page<T>](Microsoft.Azure.Management.Compute.Models.Page`1)
 - [Plan](Microsoft.Azure.Management.Compute.Models.Plan)
 - [PurchasePlan](Microsoft.Azure.Management.Compute.Models.PurchasePlan)
 - [Resource](Microsoft.Azure.Management.Compute.Models.Resource)
@@ -539,7 +539,7 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 - [JobStateAuditRecord](Microsoft.Azure.Management.DataLake.Analytic.Models.JobStateAuditRecord)
 - [JobStatistics](Microsoft.Azure.Management.DataLake.Analytic.Models.JobStatistics)
 - [JobStatisticsVertexStage](Microsoft.Azure.Management.DataLake.Analytic.Models.JobStatisticsVertexStage)
-- [Page\<T>](Microsoft.Azure.Management.DataLake.Analytic.Models.Page`1)
+- [Page<T>](Microsoft.Azure.Management.DataLake.Analytic.Models.Page`1)
 - [SasTokenInfo](Microsoft.Azure.Management.DataLake.Analytic.Models.SasTokenInfo)
 - [StorageAccountInfo](Microsoft.Azure.Management.DataLake.Analytic.Models.StorageAccountInfo)
 - [StorageAccountProperties](Microsoft.Azure.Management.DataLake.Analytic.Models.StorageAccountProperties)
@@ -584,17 +584,15 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 ### Classes
 
-- [AccountOperationsExtensions](Microsoft.Azure.Management.Management.DataLake.Store.AccountOperationsExtensions)
-- [DataLakeStoreAccountManagementClient](Microsoft.Azure.Management.Management.DataLake.Store.DataLakeStoreAccountManagementClient)
-- [DataLakeStoreFileSystemManagementClient](Microsoft.Azure.Management.Management.DataLake.Store.DataLakeStoreFileSystemManagementClient)
-- [FileSystemOperationsExtensions](Microsoft.Azure.Management.Management.DataLake.Store.FileSystemOperationsExtensions)
+- [](Microsoft.Azure.Management.Management.DataLake.Store.)
 
 ### Interfaces
 
-- [IAccountOperations](Microsoft.Azure.Management.Management.DataLake.Store.IAccountOperations)
-- [IDataLakeStoreAccountManagementClient](Microsoft.Azure.Management.Management.DataLake.Store.IDataLakeStoreAccountManagementClient)
-- [IDataLakeStoreFileSystemManagementClient](Microsoft.Azure.Management.Management.DataLake.Store.IDataLakeStoreFileSystemManagementClient)
-- [IFileSystemOperations](Microsoft.Azure.Management.Management.DataLake.Store.IFileSystemOperations)
+- [](Microsoft.Azure.Management.Management.DataLake.Store.)
+
+### Enums
+
+- [](Microsoft.Azure.Management.Management.DataLake.Store.)
 
 ## DataLake.Store.Models namespace
 
@@ -602,50 +600,15 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 ### Classes
 
-- [AclStatus](Microsoft.Azure.Management.DataLake.Store.Models.AclStatus)
-- [AclStatusResult](Microsoft.Azure.Management.DataLake.Store.Models.AclStatusResult)
-- [AdlsAccessControlException](Microsoft.Azure.Management.DataLake.Store.Models.AdlsAccessControlException)
-- [AdlsBadOffsetException](Microsoft.Azure.Management.DataLake.Store.Models.AdlsBadOffsetException)
-- [AdlsError](Microsoft.Azure.Management.DataLake.Store.Models.AdlsError)
-- [AdlsFileAlreadyExistsException](Microsoft.Azure.Management.DataLake.Store.Models.AdlsFileAlreadyExistsException)
-- [AdloFileNotFoundException](Microsoft.Azure.Management.DataLake.Store.Models.AdloFileNotFoundException)
-- [AdlsIOException](Microsoft.Azure.Management.DataLake.Store.Models.AdlsIOException)
-- [AdlsRemoteException](Microsoft.Azure.Management.DataLake.Store.Models.AdlsRemoteException)
-- [AdlsRuntimeException](Microsoft.Azure.Management.DataLake.Store.Models.AdlsRuntimeException)
-- [AdlsSecurityException](Microsoft.Azure.Management.DataLake.Store.Models.AdlsSecurityException)
-- [AdlsUnsupportedOperationException](Microsoft.Azure.Management.DataLake.Store.Models.AdlsUnsupportedOperationException)
-- [AzureAsyncOperationResult](Microsoft.Azure.Management.DataLake.Store.Models.AzureAsyncOperationResult)
-- [ContentSummary](Microsoft.Azure.Management.DataLake.Store.Models.ContentSummary)
-- [ContentSummaryResult](Microsoft.Azure.Management.DataLake.Store.Models.ContentSummaryResult)
-- [DataLakeStoreAccount](Microsoft.Azure.Management.DataLake.Store.Models.DataLakeStoreAccount)
-- [DataLakeStoreAccountProperties](Microsoft.Azure.Management.DataLake.Store.Models.DataLakeStoreAccountProperties)
-- [EncryptionConfig](Microsoft.Azure.Management.DataLake.Store.Models.EncryptionConfig)
-- [EncryptionIdentity](Microsoft.Azure.Management.DataLake.Store.Models.EncryptionIdentity)
-- [Error](Microsoft.Azure.Management.DataLake.Store.Models.Error)
-- [ErrorDetails](Microsoft.Azure.Management.DataLake.Store.Models.ErrorDetails)
-- [FileOperationResult](Microsoft.Azure.Management.DataLake.Store.Models.FileOperationResult)
-- [FileStatuses](Microsoft.Azure.Management.DataLake.Store.Models.FileStatuses)
-- [FileStatusesResult](Microsoft.Azure.Management.DataLake.Store.Models.FileStatusesResult)
-- [FileStatusProperties](Microsoft.Azure.Management.DataLake.Store.Models.FileStatusProperties)
-- [FileStatusResult](Microsoft.Azure.Management.DataLake.Store.Models.FileStatusResult)
-- [FirewallRule](Microsoft.Azure.Management.DataLake.Store.Models.FirewallRule)
-- [FirewallRuleProperties](Microsoft.Azure.Management.DataLake.Store.Models.FirewallRuleProperties)
-- [InnerError](Microsoft.Azure.Management.DataLake.Store.Models.InnerError)
-- [KeyVaultMetaInfo](Microsoft.Azure.Management.DataLake.Store.Models.KeyVaultMetaInfo)
-- [Page\<T>](Microsoft.Azure.Management.DataLake.Store.Models.Page`1)
+- [](Microsoft.Azure.Management.DataLake.Store.Models.)
+
+### Interfaces
+
+- [](Microsoft.Azure.Management.DataLake.Store.Models.)
 
 ### Enums
 
-- [AppendModeType](Microsoft.Azure.Management.DataLake.Store.Models.AppendModeType)
-- [DataLakeStoreAccountState](Microsoft.Azure.Management.DataLake.Store.Models.DataLakeStoreAccountState)
-- [DataLakeStoreAccountStatus](Microsoft.Azure.Management.DataLake.Store.Models.DataLakeStoreAccountStatus)
-- [EncryptionConfigType](Microsoft.Azure.Management.DataLake.Store.Models.EncryptionConfigType)
-- [EncryptionIdentityType](Microsoft.Azure.Management.DataLake.Store.Models.EncryptionIdentityType)
-- [EncryptionProvisioningState](Microsoft.Azure.Management.DataLake.Store.Models.EncryptionProvisioningState)
-- [EncryptionState](Microsoft.Azure.Management.DataLake.Store.Models.EncryptionState)
-- [ExpiryOptionType](Microsoft.Azure.Management.DataLake.Store.Models.ExpiryOptionType)
-- [FileType](Microsoft.Azure.Management.DataLake.Store.Models.FileType)
-- [OperationStatus](Microsoft.Azure.Management.DataLake.Store.Models.OperationStatus)
+- [](Microsoft.Azure.Management.DataLake.Store.Models.)
 
 ## DevTestLabs namespace
 
