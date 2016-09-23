@@ -19,9 +19,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 > The source files need to have summary information added for namespaces.
 
 
-## Microsoft.Azure.Graph.RBAC
+## Graph.RBAC namespace
 
-[Microsoft.Azure.Graph.RBAC namespace](Microsoft.Azure.Graph.RBAC)
+[Microsoft.Azure.Graph.RBAC](Microsoft.Azure.Graph.RBAC)
 
 ### Classes
 
@@ -42,9 +42,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 - [IServicePrincipalsOperations](Microsoft.Azure.Graph.RBAC.IServicePrincipalsOperations)
 - [IUSersOperations](Microsoft.Azure.Graph.RBAC.IUSersOperations)
 
-## Microsoft.Azure.Graph.RBAC.Models
+## Graph.RBAC.Models namespace
 
-[Microsoft.Azure.Graph.RBAC.Models namespace](Microsoft.Azure.Graph.RBAC.Models)
+[Microsoft.Azure.Graph.RBAC.Models](Microsoft.Azure.Graph.RBAC.Models)
 
 ### Classes
 
@@ -73,9 +73,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 - [UserGetMemberGroupsParameters](Microsoft.Azure.Graph.RBAC.Models.UserGetMemberGroupsParameters)
 - [UserUpdateParameters](Microsoft.Azure.Graph.RBAC.Models.UserGetMemberGroupsParameters)
 
-## Microsoft.Azure.Insights
+## Insights namespace
 
-[Microsoft.Azure.Insights namespace](Microsoft.Azure.Insights.)
+[Microsoft.Azure.Insights](Microsoft.Azure.Insights.)
 
 ### Classes
 
@@ -97,9 +97,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 - [ITenantEventsOperations](Microsoft.Azure.Insights.ITenantEventsOperations)
 - [IUsageMetricsOperations](Microsoft.Azure.Insights.IUsageMetricsOperations)
 
-## Microsoft.Azure.Insights.Models
+## Insights.Models namespace
 
-[Microsoft.Azure.Insights.Models namespace](Microsoft.Azure.Insights..Models)
+[Microsoft.Azure.Insights.Models](Microsoft.Azure.Insights..Models)
 
 ### Classes
 
@@ -120,9 +120,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 - [EventLevel](Microsoft.Azure.Insights.Models.EventLevel)
 - [Unit](Microsoft.Azure.Insights.Models.Unit)
 
-## Microsoft.Azure.Management
+## Management namespace
 
-[Microsoft.Azure.Management namespace](Microsoft.Azure.Management)
+[Microsoft.Azure.Management](Microsoft.Azure.Management)
 
 ### Classes
 
@@ -135,9 +135,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 - [Azure.IAuthenticated](Microsoft.Azure.Management.Azure.IAuthenticated)
 - [Azure.IConfigurable](Microsoft.Azure.Management.Azure.IConfigurable)
 
-## Microsoft.Azure.Management.Authorization
+## Authorization namespace
 
-[Microsoft.Azure.Management.Authorization namespace](Microsoft.Azure.Management.Authorization)
+[Microsoft.Azure.Management.Authorization](Microsoft.Azure.Management.Authorization)
 
 ### Classes
 
@@ -158,9 +158,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 - [IRoleAssignmentsOperations](Microsoft.Azure.Management.Authorization.IRoleAssignmentsOperations)
 - [IRoleDefinitionsOperations](Microsoft.Azure.Management.Authorization.IRoleDefinitionsOperations)
 
-## Microsoft.Azure.Management.Authorization.Models
+## Authorization.Models namespace
 
-[Microsoft.Azure.Management.Authorization.Models namespace](Microsoft.Azure.Management.Authorization.Models)
+[Microsoft.Azure.Management.Authorization.Models](Microsoft.Azure.Management.Authorization.Models)
 
 ### Classes
 
@@ -181,9 +181,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 - [RoleDefinitionProperties](Microsoft.Azure.Management.Authorization.Models.RoleDefinitionProperties)
 - [SubResource](Microsoft.Azure.Management.Authorization.Models.RoleDefinitionProperties)
 
-## Microsoft.Azure.Management.Batch
+## Batch namespace
 
-[Microsoft.Azure.Management.Batch namespace](Microsoft.Azure.Management.Batch)
+[Microsoft.Azure.Management.Batch](Microsoft.Azure.Management.Batch)
 
 ### Classes
 
@@ -199,9 +199,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 - [IBatchManagementClient](Microsoft.Azure.Management.Batch.IBatchManagementClient)
 - [ISubscriptionOperations](Microsoft.Azure.Management.Batch.ISubscriptionOperations)
 
-## Microsoft.Azure.Management.Batch.Models
+## Batch.Models namespace
 
-[Microsoft.Azure.Management.Batch.Models namespace](Microsoft.Azure.Management.Batch.Models)
+[Microsoft.Azure.Management.Batch.Models](Microsoft.Azure.Management.Batch.Models)
 
 ### Classes
 
@@ -234,9 +234,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 - [PackageState](Microsoft.Azure.Management.Batch.Models.PackageState)
 
 
-## Microsoft.Azure.Management.Cdn
+## Cdn namespace
 
-[Microsoft.Azure.Management.Cdn namespace](Microsoft.Azure.Management.Cdn)
+[Microsoft.Azure.Management.Cdn](Microsoft.Azure.Management.Cdn)
 
 ### Classes
 
@@ -258,9 +258,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 - [IOriginsOperations](Microsoft.Azure.Management.Cdn.IOriginsOperations)
 - [IProfilesOperations](Microsoft.Azure.Management.Cdn.IProfilesOperations)
 
-## Microsoft.Azure.Management.Cdn.Models
+## Cdn.Models namespace
 
-[Microsoft.Azure.Management.Cdn.Models namespace](Microsoft.Azure.Management.Cdn.Models)
+[Microsoft.Azure.Management.Cdn.Models](Microsoft.Azure.Management.Cdn.Models)
 
 ### Classes
 
@@ -302,9 +302,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 - [ResourceType](Microsoft.Azure.Management.Cdn.Models.ResourceType)
 - [SkuName](Microsoft.Azure.Management.Cdn.Models.SkuName)
 
-## Microsoft.Azure.Management.CognitiveServices
+## CognitiveServices namespace
 
-[Microsoft.Azure.Management.CognitiveServices namespace](Microsoft.Azure.Management.CognitiveServices)
+[Microsoft.Azure.Management.CognitiveServices](Microsoft.Azure.Management.CognitiveServices)
 
 ### Classes
 
@@ -316,9 +316,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 - [ICognitiveServicesAccountsOperations](Microsoft.Azure.Management.CognitiveServices.ICognitiveServicesAccountsOperations)
 - [ICognitiveServicesManagementClient](Microsoft.Azure.Management.CognitiveServices.ICognitiveServicesManagementClient)
 
-## Microsoft.Azure.Management.CognitiveServices.Models
+## CognitiveServices.Models namespace
 
-[Microsoft.Azure.Management.CognitiveServices.Models namespace](Microsoft.Azure.Management.CognitiveServices.Models)
+[Microsoft.Azure.Management.CognitiveServices.Models](Microsoft.Azure.Management.CognitiveServices.Models)
 
 ### Classes
 
@@ -342,9 +342,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 - [SkuName](Microsoft.Azure.Management.CognitiveServices.Models.SkuName)
 - [SkuTier](Microsoft.Azure.Management.CognitiveServices.Models.SkuTier)
 
-## Microsoft.Azure.Management.Compute
+## Compute namespace
 
-[Microsoft.Azure.Management.Compute namespace](Microsoft.Azure.Management.Compute)
+[Microsoft.Azure.Management.Compute](Microsoft.Azure.Management.Compute)
 
 ### Classes
 
@@ -374,9 +374,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 - [IVirtualMachineSizesOperations](Microsoft.Azure.Management.Compute.IVirtualMachineSizesOperations)
 - [IVirtualMachinesOperations](Microsoft.Azure.Management.Compute.IVirtualMachinesOperations)
 
-## Microsoft.Azure.Management.Compute.Models
+## Compute.Models namespace
 
-[Microsoft.Azure.Management.Compute.Models namespace](Microsoft.Azure.Management.Compute.Models)
+[Microsoft.Azure.Management.Compute.Models](Microsoft.Azure.Management.Compute.Models)
 
 ### Classes
 
@@ -480,9 +480,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 - [VirtualMachineScaleSetSkuScaleType](Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetSkuScaleType)
 - [VirtualMachineSizeTypes](Microsoft.Azure.Management.Compute.Models.VirtualMachineSizeTypes)
 
-## Microsoft.Azure.Management.DataLake.Analytic
+## DataLake.Analytic namespace
 
-[Microsoft.Azure.Management.DataLake.Analytic namespace](Microsoft.Azure.Management.DataLake.Analytic)
+[Microsoft.Azure.Management.DataLake.Analytic](Microsoft.Azure.Management.DataLake.Analytic)
 
 ### Classes
 
@@ -502,9 +502,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 - [IDataLakeAnalyticsJobsManagementClient](Microsoft.Azure.Management.DataLake.Analytic.IDataLakeAnalyticsJobsManagementClient)
 - [IJobOperations](Microsoft.Azure.Management.DataLake.Analytic.IJobOperations)
 
-## Microsoft.Azure.Management.DataLake.Analytic.Models
+## DataLake.Analytic.Models namespace
 
-[Microsoft.Azure.Management.DataLake.Analytic.Models namespace](Microsoft.Azure.Management.DataLake.Analytic.Models)
+[Microsoft.Azure.Management.DataLake.Analytic.Models](Microsoft.Azure.Management.DataLake.Analytic.Models)
 
 ### Classes
 
@@ -577,12 +577,10 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 - [JobType](Microsoft.Azure.Management.DataLake.Analytic.Models.JobType)
 - [OperationStatus](Microsoft.Azure.Management.DataLake.Analytic.Models.OperationStatus)
 - [SeverityTypes](Microsoft.Azure.Management.DataLake.Analytic.Models.SeverityTypes)
-- [](Microsoft.Azure.Management.DataLake.Analytic.Models.)
-- [](Microsoft.Azure.Management.DataLake.Analytic.Models.)
 
-## Microsoft.Azure.Management.DataLake.Store
+## DataLake.Store namespace
 
-[Microsoft.Azure.Management.DataLake.Store namespace](Microsoft.Azure.Management.DataLake.Store)
+[Microsoft.Azure.Management.DataLake.Store](Microsoft.Azure.Management.DataLake.Store)
 
 ### Classes
 
@@ -598,9 +596,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 - [IDataLakeStoreFileSystemManagementClient](Microsoft.Azure.Management.Management.DataLake.Store.IDataLakeStoreFileSystemManagementClient)
 - [IFileSystemOperations](Microsoft.Azure.Management.Management.DataLake.Store.IFileSystemOperations)
 
-## Microsoft.Azure.Management.DataLake.Store.Models
+## DataLake.Store.Models namespace
 
-[Microsoft.Azure.Management.DataLake.Store.Models namespace](Microsoft.Azure.Management.DataLake.Store.Models)
+[Microsoft.Azure.Management.DataLake.Store.Models](Microsoft.Azure.Management.DataLake.Store.Models)
 
 ### Classes
 
@@ -649,9 +647,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 - [FileType](Microsoft.Azure.Management.DataLake.Store.Models.FileType)
 - [OperationStatus](Microsoft.Azure.Management.DataLake.Store.Models.OperationStatus)
 
-## Microsoft.Azure.Management.DevTestLabs
+## DevTestLabs namespace
 
-[Microsoft.Azure.Management.DevTestLabs namespace](Microsoft.Azure.Management.DevTestLabs)
+[Microsoft.Azure.Management.DevTestLabs](Microsoft.Azure.Management.DevTestLabs)
 
 ### Classes
 
@@ -665,9 +663,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.DevTestLabs.)
 
-## Microsoft.Azure.Management.DevTestLabs.Models
+## DevTestLabs.Models namespace
 
-[Microsoft.Azure.Management.DevTestLabs.Models namespace](Microsoft.Azure.Management.DevTestLabs.Models)
+[Microsoft.Azure.Management.DevTestLabs.Models](Microsoft.Azure.Management.DevTestLabs.Models)
 
 ### Classes
 
@@ -681,9 +679,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.DevTestLabs.Models.)
 
-## Microsoft.Azure.Management.DNS
+## DNS namespace
 
-[Microsoft.Azure.Management.DNS namespace](Microsoft.Azure.Management.DNS)
+[Microsoft.Azure.Management.DNS](Microsoft.Azure.Management.DNS)
 
 ### Classes
 
@@ -697,9 +695,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.DNS.)
 
-## Microsoft.Azure.Management.DNS.Models
+## DNS.Models namespace
 
-[Microsoft.Azure.Management.DNS.Models namespace](Microsoft.Azure.Management.DNS.Models)
+[Microsoft.Azure.Management.DNS.Models](Microsoft.Azure.Management.DNS.Models)
 
 ### Classes
 
@@ -713,9 +711,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.DNS.Models.)
 
-## Microsoft.Azure.Management.EventHub
+## EventHub namespace
 
-[Microsoft.Azure.Management.EventHub namespace](Microsoft.Azure.Management.EventHub)
+[Microsoft.Azure.Management.EventHub](Microsoft.Azure.Management.EventHub)
 
 ### Classes
 
@@ -729,9 +727,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.EventHub.)
 
-## Microsoft.Azure.Management.EventHub.Models
+## EventHub.Models namespace
 
-[Microsoft.Azure.Management.EventHub.Models namespace](Microsoft.Azure.Management.EventHub.Models)
+[Microsoft.Azure.Management.EventHub.Models](Microsoft.Azure.Management.EventHub.Models)
 
 ### Classes
 
@@ -745,9 +743,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.EventHub.Models.)
 
-## Microsoft.Azure.Management.IotHub
+## IotHub namespace
 
-[Microsoft.Azure.Management.IotHub namespace](Microsoft.Azure.Management.IotHub)
+[Microsoft.Azure.Management.IotHub](Microsoft.Azure.Management.IotHub)
 
 ### Classes
 
@@ -761,9 +759,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.IotHub.)
 
-## Microsoft.Azure.Management.IotHub.Models
+## IotHub.Models namespace
 
-[Microsoft.Azure.Management.IotHub.Models namespace](Microsoft.Azure.Management.IotHub.Models)
+[Microsoft.Azure.Management.IotHub.Models](Microsoft.Azure.Management.IotHub.Models)
 
 ### Classes
 
@@ -777,9 +775,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.IotHub.Models.)
 
-## Microsoft.Azure.Management.KeyVault
+## KeyVault namespace
 
-[Microsoft.Azure.Management.Management.KeyVault namespace](Microsoft.Azure.Management.Management.KeyVault)
+[Microsoft.Azure.Management.Management.KeyVault](Microsoft.Azure.Management.Management.KeyVault)
 
 ### Classes
 
@@ -793,9 +791,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.Management.KeyVault.)
 
-## Microsoft.Azure.Management.KeyVault.Models
+## KeyVault.Models namespace
 
-[Microsoft.Azure.Management.KeyVault.Models namespace](Microsoft.Azure.Management.KeyVault.Models)
+[Microsoft.Azure.Management.KeyVault.Models](Microsoft.Azure.Management.KeyVault.Models)
 
 ### Classes
 
@@ -809,9 +807,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.KeyVault.Models.)
 
-## Microsoft.Azure.Management.Logic
+## Logic namespace
 
-[Microsoft.Azure.Management.Logic namespace](Microsoft.Azure.Management.Logic)
+[Microsoft.Azure.Management.Logic](Microsoft.Azure.Management.Logic)
 
 ### Classes
 
@@ -825,9 +823,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.Logic.)
 
-## Microsoft.Azure.Management.Logic.Models
+## Logic.Models namespace
 
-[Microsoft.Azure.Management.Logic.Models namespace](Microsoft.Azure.Management.Logic.Models)
+[Microsoft.Azure.Management.Logic.Models](Microsoft.Azure.Management.Logic.Models)
 
 ### Classes
 
@@ -841,9 +839,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.Logic.Models.)
 
-## Microsoft.Azure.Management.MachineLearning.CommitmentPlans
+## MachineLearning.CommitmentPlans namespace
 
-[Microsoft.Azure.Management.MachineLearning.CommitmentPlans namespace](Microsoft.Azure.Management.MachineLearning.CommitmentPlans)
+[Microsoft.Azure.Management.MachineLearning.CommitmentPlans](Microsoft.Azure.Management.MachineLearning.CommitmentPlans)
 
 ### Classes
 
@@ -857,9 +855,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.MachineLearning.CommitmentPlans.)
 
-## Microsoft.Azure.Management.MachineLearning.CommitmentPlans.Models
+## MachineLearning.CommitmentPlans.Models namespace
 
-[Microsoft.Azure.Management.MachineLearning.CommitmentPlans.Models namespace](Microsoft.Azure.Management.MachineLearning.CommitmentPlans.Models)
+[Microsoft.Azure.Management.MachineLearning.CommitmentPlans.Models](Microsoft.Azure.Management.MachineLearning.CommitmentPlans.Models)
 
 ### Classes
 
@@ -873,9 +871,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.MachineLearning.CommitmentPlans.Models.)
 
-## Microsoft.Azure.Management.MachineLearning.WebServices
+## MachineLearning.WebServices namespace
 
-[Microsoft.Azure.Management.MachineLearning.WebServices namespace](Microsoft.Azure.Management.MachineLearning.WebServices)
+[Microsoft.Azure.Management.MachineLearning.WebServices](Microsoft.Azure.Management.MachineLearning.WebServices)
 
 ### Classes
 
@@ -889,9 +887,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.MachineLearning.WebServices.)
 
-## Microsoft.Azure.Management.MachineLearning.WebServices.Models
+## MachineLearning.WebServices.Models namespace
 
-[Microsoft.Azure.Management.MachineLearning.WebServices.Models namespace](Microsoft.Azure.Management.MachineLearning.WebServices.Models)
+[Microsoft.Azure.Management.MachineLearning.WebServices.Models](Microsoft.Azure.Management.MachineLearning.WebServices.Models)
 
 ### Classes
 
@@ -905,9 +903,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.MachineLearning.WebServices.Models.)
 
-## Microsoft.Azure.Management.Media
+## Media namespace
 
-[Microsoft.Azure.Management.Media namespace](Microsoft.Azure.Management.Media)
+[Microsoft.Azure.Management.Media](Microsoft.Azure.Management.Media)
 
 ### Classes
 
@@ -921,9 +919,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.Media.)
 
-## Microsoft.Azure.Management.Media.Models
+## Media.Models namespace
 
-[Microsoft.Azure.Management.Media.Models namespace](Microsoft.Azure.Management.Media.Models)
+[Microsoft.Azure.Management.Media.Models](Microsoft.Azure.Management.Media.Models)
 
 ### Classes
 
@@ -937,9 +935,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.Media.Models.)
 
-## Microsoft.Azure.Management.Network
+## Network namespace
 
-[Microsoft.Azure.Management.Network namespace](Microsoft.Azure.Management.Network)
+[Microsoft.Azure.Management.Network](Microsoft.Azure.Management.Network)
 
 ### Classes
 
@@ -953,9 +951,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.Network.)
 
-## Microsoft.Azure.Management.Network.Models
+## Network.Models namespace
 
-[Microsoft.Azure.Management.Network.Models namespace](Microsoft.Azure.Management.Network.Models)
+[Microsoft.Azure.Management.Network.Models](Microsoft.Azure.Management.Network.Models)
 
 ### Classes
 
@@ -969,9 +967,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.Network.Models.)
 
-## Microsoft.Azure.Management.NotificationHubs
+## NotificationHubs namespace
 
-[Microsoft.Azure.Management.NotificationHubs namespace](Microsoft.Azure.Management.NotificationHubs)
+[Microsoft.Azure.Management.NotificationHubs](Microsoft.Azure.Management.NotificationHubs)
 
 ### Classes
 
@@ -985,9 +983,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.NotificationHubs.)
 
-## Microsoft.Azure.Management.NotificationHubs.Models
+## NotificationHubs.Models namespace
 
-[Microsoft.Azure.Management.NotificationHubs.Models namespace](Microsoft.Azure.Management.NotificationHubs.Models)
+[Microsoft.Azure.Management.NotificationHubs.Models](Microsoft.Azure.Management.NotificationHubs.Models)
 
 ### Classes
 
@@ -1001,9 +999,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.NotificationHubs.Models.)
 
-## Microsoft.Azure.Management.PowerBIEmbedded
+## PowerBIEmbedded namespace
 
-[Microsoft.Azure.Management.PowerBIEmbedded namespace](Microsoft.Azure.Management.PowerBIEmbedded)
+[Microsoft.Azure.Management.PowerBIEmbedded](Microsoft.Azure.Management.PowerBIEmbedded)
 
 ### Classes
 
@@ -1017,9 +1015,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.PowerBIEmbedded.)
 
-## Microsoft.Azure.Management.PowerBIEmbedded.Models
+## PowerBIEmbedded.Models namespace
 
-[Microsoft.Azure.Management.PowerBIEmbedded.Models namespace](Microsoft.Azure.Management.PowerBIEmbedded.Models)
+[Microsoft.Azure.Management.PowerBIEmbedded.Models](Microsoft.Azure.Management.PowerBIEmbedded.Models)
 
 ### Classes
 
@@ -1033,9 +1031,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.PowerBIEmbedded.Models.)
 
-## Microsoft.Azure.Management.Redis
+## Redis namespace
 
-[Microsoft.Azure.Management.Redis namespace](Microsoft.Azure.Management.Redis)
+[Microsoft.Azure.Management.Redis](Microsoft.Azure.Management.Redis)
 
 ### Classes
 
@@ -1049,9 +1047,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.Redis.)
 
-## Microsoft.Azure.Management.Redis.Models
+## Redis.Models namespace
 
-[Microsoft.Azure.Management.Redis.Models namespace](Microsoft.Azure.Management.Redis.Models)
+[Microsoft.Azure.Management.Redis.Models](Microsoft.Azure.Management.Redis.Models)
 
 ### Classes
 
@@ -1065,9 +1063,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.Redis.Models.)
 
-## Microsoft.Azure.Management.ResourceManager
+## ResourceManager namespace
 
-[Microsoft.Azure.Management.ResourceManager namespace](Microsoft.Azure.Management.ResourceManager)
+[Microsoft.Azure.Management.ResourceManager](Microsoft.Azure.Management.ResourceManager)
 
 ### Classes
 
@@ -1081,9 +1079,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.ResourceManager.)
 
-## Microsoft.Azure.Management.ResourceManager.Models
+## ResourceManager.Models namespace
 
-[Microsoft.Azure.Management.ResourceManager.Models namespace](Microsoft.Azure.Management.ResourceManager.Models)
+[Microsoft.Azure.Management.ResourceManager.Models](Microsoft.Azure.Management.ResourceManager.Models)
 
 ### Classes
 
@@ -1097,9 +1095,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.ResourceManager.Models.)
 
-## Microsoft.Azure.Management.Scheduler
+## Scheduler namespace
 
-[Microsoft.Azure.Management.Scheduler namespace](Microsoft.Azure.Management.Scheduler)
+[Microsoft.Azure.Management.Scheduler](Microsoft.Azure.Management.Scheduler)
 
 ### Classes
 
@@ -1113,9 +1111,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.Scheduler.)
 
-## Microsoft.Azure.Management.Scheduler.Models
+## Scheduler.Models namespace
 
-[Microsoft.Azure.Management.Scheduler.Models namespace](Microsoft.Azure.Management.Scheduler.Models)
+[Microsoft.Azure.Management.Scheduler.Models](Microsoft.Azure.Management.Scheduler.Models)
 
 ### Classes
 
@@ -1129,9 +1127,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.Scheduler.Models.)
 
-## Microsoft.Azure.Management.ServerManagement
+## ServerManagement namespace
 
-[Microsoft.Azure.Management.ServerManagement namespace](Microsoft.Azure.Management.ServerManagement)
+[Microsoft.Azure.Management.ServerManagement](Microsoft.Azure.Management.ServerManagement)
 
 ### Classes
 
@@ -1145,9 +1143,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.ServerManagement.)
 
-## Microsoft.Azure.Management.ServerManagement.Models
+## ServerManagement.Models namespace
 
-[Microsoft.Azure.Management.ServerManagement.Models namespace](Microsoft.Azure.Management.ServerManagement.Models)
+[Microsoft.Azure.Management.ServerManagement.Models](Microsoft.Azure.Management.ServerManagement.Models)
 
 ### Classes
 
@@ -1161,9 +1159,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.ServerManagement.Models.)
 
-## Microsoft.Azure.Management.ServiceBus
+## ServiceBus namespace
 
-[Microsoft.Azure.Management.ServiceBus namespace](Microsoft.Azure.Management.ServiceBus)
+[Microsoft.Azure.Management.ServiceBus](Microsoft.Azure.Management.ServiceBus)
 
 ### Classes
 
@@ -1177,9 +1175,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.ServiceBus.)
 
-## Microsoft.Azure.Management.ServiceBus.Models
+## ServiceBus.Models namespace
 
-[Microsoft.Azure.Management.ServiceBus.Models namespace](Microsoft.Azure.Management.ServiceBus.Models)
+[Microsoft.Azure.Management.ServiceBus.Models](Microsoft.Azure.Management.ServiceBus.Models)
 
 ### Classes
 
@@ -1193,9 +1191,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.ServiceBus.Models.)
 
-## Microsoft.Azure.Management.Storage
+## Storage namespace
 
-[Microsoft.Azure.Management.Storage namespace](Microsoft.Azure.Management.Storage)
+[Microsoft.Azure.Management.Storage](Microsoft.Azure.Management.Storage)
 
 ### Classes
 
@@ -1209,9 +1207,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.Storage.)
 
-## Microsoft.Azure.Management.Storage.Models
+## Storage.Models namespace
 
-[Microsoft.Azure.Management.Storage.Models namespace](Microsoft.Azure.Management.Storage.Models)
+[Microsoft.Azure.Management.Storage.Models](Microsoft.Azure.Management.Storage.Models)
 
 ### Classes
 
@@ -1225,9 +1223,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.Storage.Models.)
 
-## Microsoft.Azure.Management.TrafficManager
+## TrafficManager namespace
 
-[Microsoft.Azure.Management.TrafficManager namespace](Microsoft.Azure.Management.TrafficManager)
+[Microsoft.Azure.Management.TrafficManager](Microsoft.Azure.Management.TrafficManager)
 
 ### Classes
 
@@ -1241,9 +1239,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.TrafficManager.)
 
-## Microsoft.Azure.Management.TrafficManager.Models
+## TrafficManager.Models namespace
 
-[Microsoft.Azure.Management.TrafficManager.Models namespace](Microsoft.Azure.Management.TrafficManager.Models)
+[Microsoft.Azure.Management.TrafficManager.Models](Microsoft.Azure.Management.TrafficManager.Models)
 
 ### Classes
 
@@ -1257,9 +1255,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.TrafficManager.Models.)
 
-## Microsoft.Azure.Management.WebSites
+## WebSites namespace
 
-[Microsoft.Azure.Management.WebSites namespace](Microsoft.Azure.Management.WebSites)
+[Microsoft.Azure.Management.WebSites](Microsoft.Azure.Management.WebSites)
 
 ### Classes
 
@@ -1273,9 +1271,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.WebSites.)
 
-## Microsoft.Azure.Management.WebSites.Models
+## WebSites.Models namespace
 
-[Microsoft.Azure.Management.WebSites.Models namespace](Microsoft.Azure.Management.WebSites.Models)
+[Microsoft.Azure.Management.WebSites.Models](Microsoft.Azure.Management.WebSites.Models)
 
 ### Classes
 
@@ -1289,9 +1287,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Microsoft.Azure.Management.WebSites.Models.)
 
-## Scheduler.Test.Helpers
+## Scheduler.Test.Helpers namespace
 
-[Scheduler.Test.Helpers namespace](Scheduler.Test.Helpers)
+[Scheduler.Test.Helpers](Scheduler.Test.Helpers)
 
 ### Classes
 
@@ -1305,9 +1303,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Scheduler.Test.Helpers.)
 
-## Scheduler.Test.InMemoryTests
+## Scheduler.Test.InMemoryTests namespace
 
-[Scheduler.Test.InMemoryTests namespace](MicScheduler.Test.InMemoryTests)
+[Scheduler.Test.InMemoryTests](MicScheduler.Test.InMemoryTests)
 
 ### Classes
 
@@ -1321,9 +1319,9 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [](Scheduler.Test.InMemoryTests.)
 
-## Scheduler.Test.ScenarioTests
+## Scheduler.Test.ScenarioTests namespace
 
-[Scheduler.Test.ScenarioTests namespace](Scheduler.Test.ScenarioTests)
+[Scheduler.Test.ScenarioTests](Scheduler.Test.ScenarioTests)
 
 ### Classes
 
