@@ -1,5 +1,5 @@
 ---
-uid: Microsoft.Azure.Management.Compute.VirtualMachinesPperationsExtensions
+uid: Microsoft.Azure.Management.Compute.VirtualMachinesOperationsExtensions
 remarks: *content
 ---
 
