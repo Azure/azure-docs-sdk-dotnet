@@ -19,6 +19,107 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 > The source files need to have summary information added for namespaces.
 
 
+## Microsoft.Azure.Graph.RBAC
+
+[Microsoft.Azure.Graph.RBAC namespace](Microsoft.Azure.Graph.RBAC)
+
+### Classes
+
+- [ApplicationsOperationsExtensions](Microsoft.Azure.Graph.RBAC.ApplicationOperationsExtensions)
+- [GraphRbacManagementClient](Microsoft.Azure.Graph.RBAC.GraphRbacManagementClient)
+- [GroupsOperationsExtensions](Microsoft.Azure.Graph.RBAC.GroupsOperationsExtensions)
+- [ObjectsOperationsExtensions](Microsoft.Azure.Graph.RBAC.ObjectsOperationsExtensions)
+- [ServicePrincipalOperationsExtensions](Microsoft.Azure.Graph.RBAC.ServicePrincipalOperationsExtensions)
+- [UserOperationsExtensions](Microsoft.Azure.Graph.RBAC.UserOperationsExtensions)
+
+### Interfaces
+
+- [IApplicationsOperations](Microsoft.Azure.Graph.RBAC.IApplicationsOperations)
+- [IGraphRbacManagementClient](Microsoft.Azure.Graph.RBAC.IGraphRbacManagementClient)
+- [IGroupsOperations](Microsoft.Azure.Graph.RBAC.)
+- [IGroupOperations](Microsoft.Azure.Graph.RBAC.IGroupsOperations)
+- [IObjectOperations](Microsoft.Azure.Graph.RBAC.IObjectOperations)
+- [IServicePrincipalsOperations](Microsoft.Azure.Graph.RBAC.IServicePrincipalsOperations)
+- [IUSersOperations](Microsoft.Azure.Graph.RBAC.IUSersOperations)
+
+## Microsoft.Azure.Graph.RBAC.Models
+
+[Microsoft.Azure.Graph.RBAC.Models namespace](Microsoft.Azure.Graph.RBAC.Models)
+
+### Classes
+
+- [AADObjet](Microsoft.Azure.Graph.RBAC.Models.AADObject)
+- [ADGroup](Microsoft.Azure.Graph.RBAC.Models.ADGroup)
+- [Application](Microsoft.Azure.Graph.RBAC.Models.Application)
+- [ApplicationCreateParameters](Microsoft.Azure.Graph.RBAC.Models.ApplicationCreateParameters)
+- [ApplicationUpdateParameters](Microsoft.Azure.Graph.RBAC.Models.ApplicationUpdateParameters)
+- [CheckGroupMembershipParemeters](Microsoft.Azure.Graph.RBAC.Models.CheckGroupMembershipParameters)
+- [CheckGroupMembershipResult](Microsoft.Azure.Graph.RBAC.Models.CheckGroupMembershipResult)
+- [GetObjectsParameters](Microsoft.Azure.Graph.RBAC.Models.GetObjectsParameters)
+- [GraphError](Microsoft.Azure.Graph.RBAC.Models.GraphError)
+- [GraphErrorException](Microsoft.Azure.Graph.RBAC.Models.GraphErrorException)
+- [GroupAddMemberParameters](Microsoft.Azure.Graph.RBAC.Models.GroupAddMemberParameters)
+- [GroupCreateParameters](Microsoft.Azure.Graph.RBAC.Models.GroupCreateParameters)
+- [GroupGetMemberGroupsParameters](Microsoft.Azure.Graph.RBAC.Models.GroupGetMemberGroupsParameters)
+- [KeyCredentials](Microsoft.Azure.Graph.RBAC.Models.KeyCredentials)
+- [KeyCredentialsUpdateParameters](Microsoft.Azure.Graph.RBAC.Models.KeyCredentialsUpdateParameters)
+- [PasswordCredential](Microsoft.Azure.Graph.RBAC.Models.PasswordCredential)
+- [PasswordCredentialUpdateParameters](Microsoft.Azure.Graph.RBAC.Models.PasswordCredential)
+- [PasswordProfile](Microsoft.Azure.Graph.RBAC.Models.PasswordProfile)
+- [ServicePrincipal](Microsoft.Azure.Graph.RBAC.Models.ServicePrincipal)
+- [ServicePrincipalCreateParameters](Microsoft.Azure.Graph.RBAC.Models.ServicePrincipalCreateParameters)
+- [User](Microsoft.Azure.Graph.RBAC.Models.User)
+- [UserCreateParameters](Microsoft.Azure.Graph.RBAC.Models.UserCreateParameters)
+- [UserGetMemberGroupsParameters](Microsoft.Azure.Graph.RBAC.Models.UserGetMemberGroupsParameters)
+- [UserUpdateParameters](Microsoft.Azure.Graph.RBAC.Models.UserGetMemberGroupsParameters)
+
+## Microsoft.Azure.Insights
+
+[Microsoft.Azure.Insights namespace](Microsoft.Azure.Insights.)
+
+### Classes
+
+- [EventCategoriesOperationsExtensions](Microsoft.Azure.Insights.EventCategoriesOperationsExtensions)
+- [EventsOperationsExtensions](Microsoft.Azure.Insights.EventsOperationsExtensions)
+- [InsightsClient](Microsoft.Azure.Insights.InsightsClient)
+- [MetricDefinitionsOperationsExtensions](Microsoft.Azure.Insights.MetricDefinitionsOperationsExtensions)
+- [MetricsOperationsExtensions](Microsoft.Azure.Insights.MetricsOperationsExtensions)
+- [TenantEventsOperationsExtensions](Microsoft.Azure.Insights.TenantEventsOperationsExtensions)
+- [UsageMetricsOperationsExtensions](Microsoft.Azure.Insights.UsageMetricsOperationsExtensions)
+
+### Interfaces
+
+- [IEventCategoriesOperations](Microsoft.Azure.Insights.IEventCategoriesOperations)
+- [IEventsOperations](Microsoft.Azure.Insights.IEventsOperations)
+- [IInsightsClient](Microsoft.Azure.Insights.IInsightsClient)
+- [IMetricDefinitionsOperations](Microsoft.Azure.Insights.IMetricDefinitionsOperations)
+- [IMetricsOperations](Microsoft.Azure.Insights.IMetricsOperations)
+- [ITenantEventsOperations](Microsoft.Azure.Insights.ITenantEventsOperations)
+- [IUsageMetricsOperations](Microsoft.Azure.Insights.IUsageMetricsOperations)
+
+## Microsoft.Azure.Insights.Models
+
+[Microsoft.Azure.Insights.Models namespace](Microsoft.Azure.Insights..Models)
+
+### Classes
+
+- [EventData](Microsoft.Azure.Insights.Models.EventData)
+- [HttpRequestInfo](Microsoft.Azure.Insights.Models.HttpRequestInfo)
+- [LocalizableString](Microsoft.Azure.Insights.Models.LocalizableString)
+- [Metric](Microsoft.Azure.Insights.Models.Metric)
+- [MetricAvailability](Microsoft.Azure.Insights.Models.MetricAvailability)
+- [Page1<T>](Microsoft.Azure.Insights.Models.Page1`1)
+- [Page<T>](Microsoft.Azure.Insights.Models.Page`1)
+- [SenderAuthorization](Microsoft.Azure.Insights.Models.SenderAuthorization)
+- [UsageMetric](Microsoft.Azure.Insights.Models.UsageMetric)
+
+### Enums
+
+- [AggregationType](Microsoft.Azure.Insights.Models.AggregationType)
+- [EventChannels](Microsoft.Azure.Insights.Models.EventChannels)
+- [EventLevel](Microsoft.Azure.Insights.Models.EventLevel)
+- [Unit](Microsoft.Azure.Insights.Models.Unit)
+
 ## Microsoft.Azure.Management
 
 [Microsoft.Azure.Management namespace](Microsoft.Azure.Management)
@@ -33,6 +134,52 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [Azure.IAuthenticated](Microsoft.Azure.Management.Azure.IAuthenticated)
 - [Azure.IConfigurable](Microsoft.Azure.Management.Azure.IConfigurable)
+
+## Microsoft.Azure.Management.Authorization
+
+[Microsoft.Azure.Management.Authorization namespace](Microsoft.Azure.Management.Authorization)
+
+### Classes
+
+- [AuthorizationManagementClient](Microsoft.Azure.Management.Authorization.AuthorizationManagementClient)
+- [AuthorizationManagementClientExtensions](Microsoft.Azure.Management.Authorization.AuthorizationManagementClientExtensions)
+- [ClassicAdministratorsOperationsExtesions](Microsoft.Azure.Management.Authorization.ClassicAdministratorsOperationsExtesions)
+- [PermissionsOperationsExtensions](Microsoft.Azure.Management.Authorization.PermissionsOperationsExtensions)
+- [ProverOperationsMetadataOperationsExtensions](Microsoft.Azure.Management.Authorization.ProverOperationsMetadataOperationsExtensions)
+- [RoleAssignmentsOperationsExtensions](Microsoft.Azure.Management.Authorization.RoleAssignmentsOperationsExtensions)
+- [RoleDefinitionsOperationsExtensions](Microsoft.Azure.Management.Authorization.RoleDefinitionsOperationsExtensions)
+
+### Interfaces
+
+- [IAuthorizationManagementClient](Microsoft.Azure.Management.Authorization.IAuthorizationManagementClient)
+- [IClassicAdministratorsOperations](Microsoft.Azure.Management.Authorization.IClassicAdministratorsOperations)
+- [IPermissionsOperations](Microsoft.Azure.Management.Authorization.IPermissionsOperations)
+- [IProviderOperationsMetadataOperations](Microsoft.Azure.Management.Authorization.IProviderOperationsMetadataOperations)
+- [IRoleAssignmentsOperations](Microsoft.Azure.Management.Authorization.IRoleAssignmentsOperations)
+- [IRoleDefinitionsOperations](Microsoft.Azure.Management.Authorization.IRoleDefinitionsOperations)
+
+## Microsoft.Azure.Management.Authorization.Models
+
+[Microsoft.Azure.Management.Authorization.Models namespace](Microsoft.Azure.Management.Authorization.Models)
+
+### Classes
+
+- [ClassicAdministrator](Microsoft.Azure.Management.Authorization.Models.ClassicAdministrator)
+- [ClassicAdministratorProperties](Microsoft.Azure.Management.Authorization.Models.ClassicAdministratorProperties)
+- [Page<T>](Microsoft.Azure.Management.Authorization.Models.Page`1)
+- [Permission](Microsoft.Azure.Management.Authorization.Models.Permission)
+- [ProviderOperation](Microsoft.Azure.Management.Authorization.Models.ProviderOperation)
+- [ProviderOperationsMetadata](Microsoft.Azure.Management.Authorization.Models.ProviderOperationsMetadata)
+- [Resource](Microsoft.Azure.Management.Authorization.Models.Resource)
+- [ResourceType](Microsoft.Azure.Management.Authorization.Models.ResourceType)
+- [RoleAssignmentCreateParameters](Microsoft.Azure.Management.Authorization.Models.RoleAssignmentCreateParameters)
+- [RoleAssignmentFilter](Microsoft.Azure.Management.Authorization.Models.RoleAssignmentFilter)
+- [RoleAssignmentProperties](Microsoft.Azure.Management.Authorization.Models.RoleAssignmentProperties)
+- [RoleAssignmentPropertiesWithScope](Microsoft.Azure.Management.Authorization.Models.RoleAssignmentPropertiesWithScope)
+- [RoleDefinition](Microsoft.Azure.Management.Authorization.Models.RoleDefinition)
+- [RoleDefinitionFilter](Microsoft.Azure.Management.Authorization.Models.RoleDefinitionFilter)
+- [RoleDefinitionProperties](Microsoft.Azure.Management.Authorization.Models.RoleDefinitionProperties)
+- [SubResource](Microsoft.Azure.Management.Authorization.Models.RoleDefinitionProperties)
 
 ## Microsoft.Azure.Management.Batch
 
@@ -89,19 +236,27 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 ## Microsoft.Azure.Management.Cdn
 
-[Microsoft.Azure.Management.Cdn namespace](Microsoft.Azure.Management.)
+[Microsoft.Azure.Management.Cdn namespace](Microsoft.Azure.Management.Cdn)
 
 ### Classes
 
-- [](Microsoft.Azure.Management.Cdn.)
+- [CdnManagementClient](Microsoft.Azure.Management.Cdn.CdnManagementClient)
+- [CustomDomainsOperationsExtensions](Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions)
+- [EndpointsOperationsExtensions](Microsoft.Azure.Management.Cdn.EndpointsOperationsExtensions)
+- [NameAvailabilityOperationsExtensions](Microsoft.Azure.Management.Cdn.NameAvailabilityOperationsExtensions)
+- [OperationsOperationsExtensions](Microsoft.Azure.Management.Cdn.OperationsOperationsExtensions)
+- [OriginsOperationsExtensions](Microsoft.Azure.Management.Cdn.OriginsOperationsExtensions)
+- [ProfilesOperationsExtensions](Microsoft.Azure.Management.Cdn.ProfilesOperationsExtensions)
 
 ### Interfaces
 
-- [](Microsoft.Azure.Management.Cdn.)
-
-### Enums
-
-- [](Microsoft.Azure.Management.Cdn.)
+- [ICdnManagementClient](Microsoft.Azure.Management.Cdn.ICdnManagementClient)
+- [ICustomDomainsOperations](Microsoft.Azure.Management.Cdn.ICustomDomainsOperations)
+- [IEndpointsOperations](Microsoft.Azure.Management.Cdn.IEndpointsOperations)
+- [INameAvailabilityOperations](Microsoft.Azure.Management.Cdn.INameAvailabilityOperations)
+- [IOperationsOperations](Microsoft.Azure.Management.Cdn.IOperationsOperations)
+- [IOriginsOperations](Microsoft.Azure.Management.Cdn.IOriginsOperations)
+- [IProfilesOperations](Microsoft.Azure.Management.Cdn.IProfilesOperations)
 
 ## Microsoft.Azure.Management.Cdn.Models
 
@@ -109,15 +264,43 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 ### Classes
 
-- [](Microsoft.Azure.Management.Cdn.Models.)
-
-### Interfaces
-
-- [](Microsoft.Azure.Management.Cdn.Models.)
+- [CheckNameAvailabilityInput](Microsoft.Azure.Management.Cdn.Models.CheckNameAvailabilityInput)
+- [CheckNameAvailabilityOutput](Microsoft.Azure.Management.Cdn.Models.CheckNameAvailabilityOutput)
+- [CustomDomain](Microsoft.Azure.Management.Cdn.Models.CustomDomain)
+- [CustomDomainParameters](Microsoft.Azure.Management.Cdn.Models.CustomDomainParameters)
+- [DeepCreatedOrigin](Microsoft.Azure.Management.Cdn.Models.DeepCreatedOrigin)
+- [EndPoint](Microsoft.Azure.Management.Cdn.Models.EndPoint)
+- [EndPointCreateParameters](Microsoft.Azure.Management.Cdn.Models.EndPointCreateParameters)
+- [EndpointUpdateParameters](Microsoft.Azure.Management.Cdn.Models.EndpointUpdateParameters)
+- [ErrorResponse](Microsoft.Azure.Management.Cdn.Models.ErrorResponse)
+- [ErrorResponseException](Microsoft.Azure.Management.Cdn.Models.ErrorResponseException)
+- [LoadParameters](Microsoft.Azure.Management.Cdn.Models.LoadParameters)
+- [Operation](Microsoft.Azure.Management.Cdn.Models.Operation)
+- [OperationDisplay](Microsoft.Azure.Management.Cdn.Models.OperationDisplay)
+- [Origin](Microsoft.Azure.Management.Cdn.Models.Origin)
+- [OriginParameters](Microsoft.Azure.Management.Cdn.Models.OriginParameters)
+- [Page<T>](Microsoft.Azure.Management.Cdn.Models.Page`1)
+- [Profile](Microsoft.Azure.Management.Cdn.Models.Profile)
+- [ProfileCreateParameters](Microsoft.Azure.Management.Cdn.Models.ProfileCreateParameters)
+- [ProfileUpdateParameters](Microsoft.Azure.Management.Cdn.Models.ProfileUpdateParameters)
+- [PurgeParameters](Microsoft.Azure.Management.Cdn.Models.PurgeParameters)
+- [Resource](Microsoft.Azure.Management.Cdn.Models.Resource)
+- [Sku](Microsoft.Azure.Management.Cdn.Models.Sku)
+- [SsoUri](Microsoft.Azure.Management.Cdn.Models.SsoUri)
+- [TrackedResource](Microsoft.Azure.Management.Cdn.Models.TrackedResource)
+- [ValidateCustomDomainInput](Microsoft.Azure.Management.Cdn.Models.ValidateCustomDomainInput)
+- [ValidateCustomDomainOutput](Microsoft.Azure.Management.Cdn.Models.ValidateCustomDomainOutput)
 
 ### Enums
 
-- [](Microsoft.Azure.Management.Cdn.Models.)
+- [CustomDomainResourceState](Microsoft.Azure.Management.Cdn.Models.CustomDomainResourceState)
+- [EndPointResourceState](Microsoft.Azure.Management.Cdn.Models.EndPointResourceState)
+- [OriginResourceState](Microsoft.Azure.Management.Cdn.Models.OriginResourceState)
+- [ProfileResourceState](Microsoft.Azure.Management.Cdn.Models.ProfileResourceState)
+- [ProvisioningState](Microsoft.Azure.Management.Cdn.Models.ProvisioningState)
+- [QueryStringCachingBehavior](Microsoft.Azure.Management.Cdn.Models.QueryStringCachingBehavior)
+- [ResourceType](Microsoft.Azure.Management.Cdn.Models.ResourceType)
+- [SkuName](Microsoft.Azure.Management.Cdn.Models.SkuName)
 
 ## Microsoft.Azure.Management.CognitiveServices
 
@@ -125,15 +308,13 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 ### Classes
 
-- [](Microsoft.Azure.Management.CognitiveServices.)
+- [CognitiveServicesAccountsOperationsExtensions](Microsoft.Azure.Management.CognitiveServices.CognitiveServicesAccountsOperationsExtensions)
+- [CognitiveServicesManagementClient](Microsoft.Azure.Management.CognitiveServices.CognitiveServicesManagementClient)
 
 ### Interfaces
 
-- [](Microsoft.Azure.Management.CognitiveServices.)
-
-### Enums
-
-- [](Microsoft.Azure.Management.CognitiveServices.)
+- [ICognitiveServicesAccountsOperations](Microsoft.Azure.Management.CognitiveServices.ICognitiveServicesAccountsOperations)
+- [ICognitiveServicesManagementClient](Microsoft.Azure.Management.CognitiveServices.ICognitiveServicesManagementClient)
 
 ## Microsoft.Azure.Management.CognitiveServices.Models
 
@@ -141,15 +322,25 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 ### Classes
 
-- [](Microsoft.Azure.Management.CognitiveServices.Models.)
-
-### Interfaces
-
-- [](Microsoft.Azure.Management.CognitiveServices.Models.)
+- [CognitiveServicesAccount](Microsoft.Azure.Management.CognitiveServices.CognitiveServicesAccount)
+- [CognitiveServicesAccountCreateParameters](Microsoft.Azure.Management.CognitiveServices.CognitiveServicesAccountCreateParameters)
+- [CognitiveServicesAccountEnumerateSkusResult](Microsoft.Azure.Management.CognitiveServices.CognitiveServicesAccountEnumerateSkusResult)
+- [CognitiveServicesAccountKeys](Microsoft.Azure.Management.CognitiveServices.CognitiveServicesAccountKeys)
+- [CognitiveServicesAccountUpdateParameters](Microsoft.Azure.Management.CognitiveServices.CognitiveServicesAccountUpdateParameters)
+- [CognitiveServicesResourceAndSku](Microsoft.Azure.Management.CognitiveServices.CognitiveServicesResourceAndSku)
+- [Error](Microsoft.Azure.Management.CognitiveServices.Models.Error)
+- [ErrorBody](Microsoft.Azure.Management.CognitiveServices.Models.ErrorBody)
+- [ErrorException](Microsoft.Azure.Management.CognitiveServices.Models.ErrorException)
+- [Page<T>](Microsoft.Azure.Management.CognitiveServices.Models.PAge`1)
+- [Sku](Microsoft.Azure.Management.CognitiveServices.Models.Sku)
 
 ### Enums
 
-- [](Microsoft.Azure.Management.CognitiveServices.Models.)
+- [KeyName](Microsoft.Azure.Management.CognitiveServices.Models.KeyName)
+- [Kind](Microsoft.Azure.Management.CognitiveServices.Models.Kind)
+- [ProvisioningState](Microsoft.Azure.Management.CognitiveServices.Models.ProvisioningState)
+- [SkuName](Microsoft.Azure.Management.CognitiveServices.Models.SkuName)
+- [SkuTier](Microsoft.Azure.Management.CognitiveServices.Models.SkuTier)
 
 ## Microsoft.Azure.Management.Compute
 
@@ -157,15 +348,31 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 ### Classes
 
-- [](Microsoft.Azure.Management.Compute.)
+- [AvailabilitySetsOperationsExtensions](Microsoft.Azure.Management.Compute.AvailabilitySetsOperationsExtensions)
+- [ComputeManagementClient](Microsoft.Azure.Management.Compute.ComputeManagementClient)
+- [ContainerServiceOperationsExtensions](Microsoft.Azure.Management.Compute.ContainerServiceOperationsExtensions)
+- [UsageOperationsExtensionsOperationsExtensions](Microsoft.Azure.Management.Compute.UsageOperationsExtensionsOperationsExtensions)
+- [VirtualMachineExtrensionImagesOperationsExtensions](Microsoft.Azure.Management.Compute.VirtualMachineExtrensionImagesOperationsExtensions)
+- [VirtualMachineExtrensionsOperationsExtensions](Microsoft.Azure.Management.Compute.VirtualMachineExtrensionsOperationsExtensions)
+- [VirtualMachineImagesOperationsExtensions](Microsoft.Azure.Management.Compute.VirtualMachineImagesOperationsExtensions)
+- [VirtualMachineScaleSetsOperationsExtensions](Microsoft.Azure.Management.Compute.VirtualMachineScaleSetsOperationsExtensions)
+- [VirtualMachineScaleSetVMsOperationsExtensions](Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions)
+- [VirtualMachineSizesOperationsExtensions](Microsoft.Azure.Management.Compute.VirtualMachineSizesOperationsExtensions)
+- [VirtualMachinesOperationsExtensions](Microsoft.Azure.Management.Compute.VirtualMachinesOperationsExtensions)
 
 ### Interfaces
 
-- [](Microsoft.Azure.Management.Compute.)
-
-### Enums
-
-- [](Microsoft.Azure.Management.Compute.)
+- [IAvailabilitySetsOperations]](Microsoft.Azure.Management.Compute.IAvailabilitySetsOperations)
+- [IComputeManagementClient](Microsoft.Azure.Management.Compute.IComputeManagementClient)
+- [IContainerServiceOperations](Microsoft.Azure.Management.Compute.IContainerServiceOperations)
+- [IUsageOperations](Microsoft.Azure.Management.Compute.IUsageOperations)
+- [IVirtualMachineExtensionsImagesOperations](Microsoft.Azure.Management.Compute.IVirtualMachineExtensionsImagesOperations)
+- [IVirtualMachineExtensionsOperations](Microsoft.Azure.Management.Compute.IVirtualMachineExtensionsOperations)
+- [IVirtualMachineImagesOperations](Microsoft.Azure.Management.Compute.IVirtualMachineImagesOperations)
+- [IVirtualMachineScaleSetsOperations](Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetsOperations)
+- [IVirtualMachineScaleSetVMsOperations](Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations)
+- [IVirtualMachineSizesOperations](Microsoft.Azure.Management.Compute.IVirtualMachineSizesOperations)
+- [IVirtualMachinesOperations](Microsoft.Azure.Management.Compute.IVirtualMachinesOperations)
 
 ## Microsoft.Azure.Management.Compute.Models
 
@@ -173,15 +380,105 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 ### Classes
 
-- [](Microsoft.Azure.Management.Compute.Models.)
-
-### Interfaces
-
-- [](Microsoft.Azure.Management.Compute.Models.)
+- [AdditionalUnattendedContent](Microsoft.Azure.Management.Compute.Models.AdditionalUnattendedContent)
+- [ApiEntityReference](Microsoft.Azure.Management.Compute.Models.ApiEntityReference)
+- [ApiError](Microsoft.Azure.Management.Compute.Models.ApiError)
+- [ApiErrorBase](Microsoft.Azure.Management.Compute.Models.ApiErrorBase)
+- [AvailabilitySet](Microsoft.Azure.Management.Compute.Models.AvailabilitySet)
+- [BootDiagnostics](Microsoft.Azure.Management.Compute.Models.BootDiagnostics)
+- [BootDiagnosticsInstanceView](Microsoft.Azure.Management.Compute.Models.BootDiagnosticsInstanceView)
+- [ComputeLongRunningOperationsProperties](Microsoft.Azure.Management.Compute.Models.ComputeLongRunningOperationsProperties)
+- [ContainerService](Microsoft.Azure.Management.Compute.Models.ContainerService)
+- [ContainerServiceAgentPoolProfile](Microsoft.Azure.Management.Compute.Models.ContainerServiceAgentPoolProfile)
+- [ContainerServiceDiagnosticsProfile](Microsoft.Azure.Management.Compute.Models.ContainerServiceDiagnosticsProfile)
+- [ContainerServiceLinuxProfile](Microsoft.Azure.Management.Compute.Models.ContainerServiceLinuxProfile)
+- [ContainerServiceMasterProfile](Microsoft.Azure.Management.Compute.Models.ContainerServiceMasterProfile)
+- [ContainerServiceOrchestratorProfile](Microsoft.Azure.Management.Compute.Models.ContainerServiceOrchestratorProfile)
+- [ContainerServiceSshConfiguration](Microsoft.Azure.Management.Compute.Models.ContainerServiceSshConfiguration)
+- [ContainerServiceVMDiagnostics](Microsoft.Azure.Management.Compute.Models.ContainerServiceVMDiagnostics)
+- [ContainerServiceVMSizeTypes](Microsoft.Azure.Management.Compute.Models.ContainerServiceVMSizeTypes)
+- [ContainerServiceWindowsProfile](Microsoft.Azure.Management.Compute.Models.ContainerServiceWindowsProfile)
+- [DataDisk](Microsoft.Azure.Management.Compute.Models.DataDisk)
+- [DataDiskImage](Microsoft.Azure.Management.Compute.Models.DataDiskImage)
+- [DiagnosticsProfile](Microsoft.Azure.Management.Compute.Models.DiagnosticsProfile)
+- [DiskEncryptionSettings](Microsoft.Azure.Management.Compute.Models.DiskEncryptionSettings)
+- [DiskInstanceView](Microsoft.Azure.Management.Compute.Models.DiskInstanceView)
+- [HardwareProfile](Microsoft.Azure.Management.Compute.Models.HardwareProfile)
+- [ImageReference](Microsoft.Azure.Management.Compute.Models.ImageReference)
+- [InnerError](Microsoft.Azure.Management.Compute.Models.InnerError)
+- [KeyVaultKeyReference](Microsoft.Azure.Management.Compute.Models.KeyVaultKeyReference)
+- [KeyVaultSecretReference](Microsoft.Azure.Management.Compute.Models.KeyVaultSecretReference)
+- [LinuxConfiguration](Microsoft.Azure.Management.Compute.Models.LinuxConfiguration)
+- [NetworkInterfaceReference](Microsoft.Azure.Management.Compute.Models.NetworkInterfaceReference)
+- [NetworkProfile](Microsoft.Azure.Management.Compute.Models.NetworkProfile)
+- [OSDisk](Microsoft.Azure.Management.Compute.Models.OSDisk)
+- [OSDiskImage](Microsoft.Azure.Management.Compute.Models.OSDiskImage)
+- [OSProfile](Microsoft.Azure.Management.Compute.Models.OSProfile)
+- [Page1<T>](Microsoft.Azure.Management.Compute.Models.Page1`1)
+- [Page<T>](Microsoft.Azure.Management.Compute.Models.Page`1)
+- [Plan](Microsoft.Azure.Management.Compute.Models.Plan)
+- [PurchasePlan](Microsoft.Azure.Management.Compute.Models.PurchasePlan)
+- [Resource](Microsoft.Azure.Management.Compute.Models.Resource)
+- [Sku](Microsoft.Azure.Management.Compute.Models.Sku)
+- [SshConfiguration](Microsoft.Azure.Management.Compute.Models.SshConfiguration)
+- [SshPublicKey](Microsoft.Azure.Management.Compute.Models.SshPublicKey)
+- [StorageProfile](Microsoft.Azure.Management.Compute.Models.StorageProfile)
+- [SubResource](Microsoft.Azure.Management.Compute.Models.SubResource)
+- [UpgradePolicy](Microsoft.Azure.Management.Compute.Models.UpgradePolicy)
+- [Usage](Microsoft.Azure.Management.Compute.Models.Usage)
+- [VaultCertificate](Microsoft.Azure.Management.Compute.Models.VaultCertificate)
+- [VaultSecretGroup](Microsoft.Azure.Management.Compute.Models.VaultSecretGroup)
+- [VirtualHardDisk](Microsoft.Azure.Management.Compute.Models.)
+- [VirtualMachine](Microsoft.Azure.Management.Compute.Models.VirtualMachine)
+- [VirtualMachineAgentInstanceView](Microsoft.Azure.Management.Compute.Models.VirtualMachineAgentInstanceView)
+- [VirtualMachineCaptureParameters](Microsoft.Azure.Management.Compute.Models.VirtualMachineCaptureParameters)
+- [VirtualMachineCaptureResult](Microsoft.Azure.Management.Compute.Models.VirtualMachineCaptureResult)
+- [VirtualMachineExtension](Microsoft.Azure.Management.Compute.Models.VirtualMachineExtension)
+- [VirtualMachineExtensionHandlerInstanceView](Microsoft.Azure.Management.Compute.Models.VirtualMachineExtensionHandlerInstanceView)
+- [VirtualMachineExtensionImage](Microsoft.Azure.Management.Compute.Models.VirtualMachineExtensionImage)
+- [VirtualMachineExtensionInstanceView](Microsoft.Azure.Management.Compute.Models.VirtualMachineExtensionInstanceView)
+- [VirtualMachineScaleSet](Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSet)
+- [VirtualMachineScaleSetExtension](Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetExtension)
+- [VirtualMachineScaleSetExtensionProfile](Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetExtensionProfile)
+- [VirtualMachineScaleSetInstanceView](Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetInstanceView)
+- [VirtualMachineScaleSetInstanceViewStatusesSummary](Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetInstanceViewStatusesSummary)
+- [VirtualMachineScaleSetIPConfiguration](Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetIPConfiguration)
+- [VirtualMachineScaleSetNetworkConfiguration](Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetNetworkConfiguration)
+- [VirtualMachineScaleSetNetworkProfile](Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetNetworkProfile)
+- [VirtualMachineScaleSetOSDisk](Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetOSDisk)
+- [VirtualMachineScaleSetOSProfile](Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetOSProfile)
+- [VirtualMachineScaleSetSku](Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetSku)
+- [VirtualMachineScaleSetSkuCapacity](Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetSkuCapacity)
+- [VirtualMachineScaleSetStorageProfile](Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetStorageProfile)
+- [VirtualMachineScaleSetVM](Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetVM)
+- [VirtualMachineScaleSetVMExtensionsSummary](Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetVMExtensionsSummary)
+- [VirtualMachineScaleSetVMInstanceIDs](Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetVMInstanceIDs)
+- [VirtualMachineScaleSetVMInstanceRequiredIDs](Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetVMInstanceRequiredIDs)
+- [VirtualMachineScaleSetVMInstanceView](Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetVMInstanceView)
+- [VirtualMachineScaleSetVMProfile](Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetVMProfile)
+- [VirtualMachineSize](Microsoft.Azure.Management.Compute.Models.VirtualMachineSize)
+- [VirtualMachineStatusCodeCount](Microsoft.Azure.Management.Compute.Models.VirtualMachineStatusCodeCount)
+- [WindowsConfiguration](Microsoft.Azure.Management.Compute.Models.WindowsConfiguration)
+- [WinRMConfiguration](Microsoft.Azure.Management.Compute.Models.WinRMConfiguration)
+- [WinRMListener](Microsoft.Azure.Management.Compute.Models.WinRMListener)
 
 ### Enums
 
-- [](Microsoft.Azure.Management.Compute.Models.)
+- [CachingTypes](Microsoft.Azure.Management.Compute.Models.CachingTypes)
+- [ComponentNames](Microsoft.Azure.Management.Compute.Models.ComponentNames)
+- [ContainerServiceOrchestratorTypes](Microsoft.Azure.Management.Compute.Models.ContainerServiceOrchestratorTypes)
+- [ContainerServiceSshPublicKey](Microsoft.Azure.Management.Compute.Models.ContainerServiceSshPublicKey)
+- [DisCreateOptionTypes](Microsoft.Azure.Management.Compute.Models.DisCreateOptionTypes)
+- [InstanceViewStatus](Microsoft.Azure.Management.Compute.Models.InstanceViewStatus)
+- [InstanceViewTypes](Microsoft.Azure.Management.Compute.Models.InstanceViewTypes)
+- [OperatingSystemTypes](Microsoft.Azure.Management.Compute.Models.OperatingSystemTypes)
+- [PassNames](Microsoft.Azure.Management.Compute.Models.PassNames)
+- [ProtocolTypes](Microsoft.Azure.Management.Compute.Models.ProtocolTypes)
+- [SettingNames](Microsoft.Azure.Management.Compute.Models.SettingNames)
+- [StatusLevelTypes](Microsoft.Azure.Management.Compute.Models.StatusLevelTypes)
+- [UsageName](Microsoft.Azure.Management.Compute.Models.UsageName)
+- [VirtualMachineScaleSetSkuScaleType](Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetSkuScaleType)
+- [VirtualMachineSizeTypes](Microsoft.Azure.Management.Compute.Models.VirtualMachineSizeTypes)
 
 ## Microsoft.Azure.Management.DataLake.Analytic
 
@@ -189,15 +486,21 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 ### Classes
 
-- [](Microsoft.Azure.Management.DataLake.Analytic.)
+- [AccountOperationsExtensions](Microsoft.Azure.Management.DataLake.Analytic.AccountOperationsExtensions)
+- [CatalogOperationsExtensions](Microsoft.Azure.Management.DataLake.Analytic.CatalogOperationsExtensions)
+- [DataLakeAnalyticsAccountManagementClient](Microsoft.Azure.Management.DataLake.Analytic.DataLakeAnalyticsAccountManagementClient)
+- [DataLakeAnalyticsCatalogManagementClient](Microsoft.Azure.Management.DataLake.Analytic.DataLakeAnalyticsCatalogManagementClient)
+- [DataLakeAnalyticsJobsManagementClient](Microsoft.Azure.Management.DataLake.Analytic.DataLakeAnalyticsJobsManagementClient)
+- [JobOperationsExtensions](Microsoft.Azure.Management.DataLake.Analytic.JobOperationsExtensions)
 
 ### Interfaces
 
-- [](Microsoft.Azure.Management.DataLake.Analytic.)
-
-### Enums
-
-- [](Microsoft.Azure.Management.DataLake.Analytic.)
+- [IAccountOperations](Microsoft.Azure.Management.DataLake.Analytic.IAccountOperations)
+- [ICatalogOperations](Microsoft.Azure.Management.DataLake.Analytic.ICatalogOperations)
+- [IDataLakeAnalyticsAccountManagementClient](Microsoft.Azure.Management.DataLake.Analytic.IDataLakeAnalyticsAccountManagementClient)
+- [IDataLakeAnalyticsCatalogManagementClient](Microsoft.Azure.Management.DataLake.Analytic.IDataLakeAnalyticsCatalogManagementClient)
+- [IDataLakeAnalyticsJobsManagementClient](Microsoft.Azure.Management.DataLake.Analytic.IDataLakeAnalyticsJobsManagementClient)
+- [IJobOperations](Microsoft.Azure.Management.DataLake.Analytic.IJobOperations)
 
 ## Microsoft.Azure.Management.DataLake.Analytic.Models
 
@@ -205,14 +508,76 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 ### Classes
 
-- [](Microsoft.Azure.Management.DataLake.Analytic.Models.)
-
-### Interfaces
-
-- [](Microsoft.Azure.Management.DataLake.Analytic.Models.)
+- [AddDataLakeStoreParameters](Microsoft.Azure.Management.DataLake.Analytic.Models.AddDataLakeStoreParameters)
+- [AddStorageAccountParameters](Microsoft.Azure.Management.DataLake.Analytic.Models.AddStorageAccountParameters)
+- [AzureAsyncOperationResult](Microsoft.Azure.Management.DataLake.Analytic.Models.AzureAsyncOperationResult)
+- [BlobContainer](Microsoft.Azure.Management.DataLake.Analytic.Models.BlobContainer)
+- [BlobContainerProperties](Microsoft.Azure.Management.DataLake.Analytic.Models.BlobContainerProperties)
+- [CatalogItem](Microsoft.Azure.Management.DataLake.Analytic.Models.CatalogItem)
+- [CatalogItemList](Microsoft.Azure.Management.DataLake.Analytic.Models.CatalogItemList)
+- [CompileMode](Microsoft.Azure.Management.DataLake.Analytic.Models.CompileMode)
+- [DataLakeAnalyticsAccount](Microsoft.Azure.Management.DataLake.Analytic.Models.DataLakeAnalyticsAccount)
+- [DataLakeAnalyticsAccountProperties](Microsoft.Azure.Management.DataLake.Analytic.Models.DataLakeAnalyticsAccountProperties)
+- [DataLakeAnalyticsCatalogSecretCreateOrUpdateParameters](Microsoft.Azure.Management.DataLake.Analytic.Models.DataLakeAnalyticsCatalogSecretCreateOrUpdateParameters)
+- [DataLakeStoreAccountInfo](Microsoft.Azure.Management.DataLake.Analytic.Models.DataLakeStoreAccountInfo)
+- [DataLakeStoreAccountInfoProperties](Microsoft.Azure.Management.DataLake.Analytic.Models.DataLakeStoreAccountInfoProperties)
+- [DdlName](Microsoft.Azure.Management.DataLake.Analytic.Models.DdlName)
+- [Diagnostics](Microsoft.Azure.Management.DataLake.Analytic.Models.Diagnostics)
+- [EntityId](Microsoft.Azure.Management.DataLake.Analytic.Models.EntityId)
+- [Error](Microsoft.Azure.Management.DataLake.Analytic.Models.Error)
+- [ErrorDetails](Microsoft.Azure.Management.DataLake.Analytic.Models.ErrorDetails)
+- [ExternalTable](Microsoft.Azure.Management.DataLake.Analytic.Models.ExternalTable)
+- [HiveJobProperties](Microsoft.Azure.Management.DataLake.Analytic.Models.HiveJobProperties)
+- [InnerError](Microsoft.Azure.Management.DataLake.Analytic.Models.InnerError)
+- [JobDataPath](Microsoft.Azure.Management.DataLake.Analytic.Models.JobDataPath)
+- [JobErrorDetails](Microsoft.Azure.Management.DataLake.Analytic.Models.JobErrorDetails)
+- [JobInformation](Microsoft.Azure.Management.DataLake.Analytic.Models.JobInformation)
+- [JobInnerError](Microsoft.Azure.Management.DataLake.Analytic.Models.JobInnerError)
+- [JobProperties](Microsoft.Azure.Management.DataLake.Analytic.Models.JobProperties)
+- [JobResource](Microsoft.Azure.Management.DataLake.Analytic.Models.JobResource)
+- [JobResult](Microsoft.Azure.Management.DataLake.Analytic.Models.JobResult)
+- [JobStateAuditRecord](Microsoft.Azure.Management.DataLake.Analytic.Models.JobStateAuditRecord)
+- [JobStatistics](Microsoft.Azure.Management.DataLake.Analytic.Models.JobStatistics)
+- [JobStatisticsVertexStage](Microsoft.Azure.Management.DataLake.Analytic.Models.JobStatisticsVertexStage)
+- [Page<T>](Microsoft.Azure.Management.DataLake.Analytic.Models.Page`1)
+- [SasTokenInfo](Microsoft.Azure.Management.DataLake.Analytic.Models.SasTokenInfo)
+- [StorageAccountInfo](Microsoft.Azure.Management.DataLake.Analytic.Models.StorageAccountInfo)
+- [StorageAccountProperties](Microsoft.Azure.Management.DataLake.Analytic.Models.StorageAccountProperties)
+- [TypeFieldInfo](Microsoft.Azure.Management.DataLake.Analytic.Models.TypeFieldInfo)
+- [USqlAssembly](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlAssembly)
+- [USqlAssemblyClr](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlAssemblyClr)
+- [USqlAssemblyDependencyInfo](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlAssemblyDependencyInfo)
+- [USqlAssemblyFieldInfo](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlAssemblyFieldInfo)
+- [USqlCredential](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlCredential)
+- [USqlDatabase](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlDatabase)
+- [USqlDirectedColumn](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlDirectedColumn)
+- [USqlDistributionInfo](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlDistributionInfo)
+- [USqlExternalDataSource](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlExternalDataSource)
+- [USqlIndex](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlIndex)
+- [USqlJobProperties](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlJobProperties)
+- [USqlProcedure](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlProcedure)
+- [USqlSchema](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlSchema)
+- [USqlSecret](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlSecret)
+- [USqlTable](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlTable)
+- [USqlTableColumn](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlTableColumn)
+- [USqlTablePartition](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlTablePartition)
+- [USqlTableStatistics](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlTableStatistics)
+- [USqlTableType](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlTableType)
+- [USqlTableValuedFunction](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlTableValuedFunction)
+- [USqlType](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlType)
+- [USqlView](Microsoft.Azure.Management.DataLake.Analytic.Models.USqlView)
 
 ### Enums
 
+- [DataLakeAnalyticsAccountState](Microsoft.Azure.Management.DataLake.Analytic.Models.DataLakeAnalyticsAccountState)
+- [DataLakeAnalyticsAccountStatus](Microsoft.Azure.Management.DataLake.Analytic.Models.DataLakeAnalyticsAccountStatus)
+- [FileType](Microsoft.Azure.Management.DataLake.Analytic.Models.FileType)
+- [JobResourceType](Microsoft.Azure.Management.DataLake.Analytic.Models.JobResourceType)
+- [JobState](Microsoft.Azure.Management.DataLake.Analytic.Models.JobState)
+- [JobType](Microsoft.Azure.Management.DataLake.Analytic.Models.JobType)
+- [OperationStatus](Microsoft.Azure.Management.DataLake.Analytic.Models.OperationStatus)
+- [SeverityTypes](Microsoft.Azure.Management.DataLake.Analytic.Models.SeverityTypes)
+- [](Microsoft.Azure.Management.DataLake.Analytic.Models.)
 - [](Microsoft.Azure.Management.DataLake.Analytic.Models.)
 
 ## Microsoft.Azure.Management.DataLake.Store
