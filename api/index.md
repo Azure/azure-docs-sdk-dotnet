@@ -240,30 +240,23 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 ### Classes
 
-- [](Microsoft.Azure.Management.Cdn.)
-- [](Microsoft.Azure.Management.Cdn.)
-- [](Microsoft.Azure.Management.Cdn.)
-- [](Microsoft.Azure.Management.Cdn.)
-- [](Microsoft.Azure.Management.Cdn.)
-- [](Microsoft.Azure.Management.Cdn.)
-- [](Microsoft.Azure.Management.Cdn.)
-- [](Microsoft.Azure.Management.Cdn.)
-- [](Microsoft.Azure.Management.Cdn.)
+- [CdnManagementClient](Microsoft.Azure.Management.Cdn.CdnManagementClient)
+- [CustomDomainsOperationsExtensions](Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions)
+- [EndpointsOperationsExtensions](Microsoft.Azure.Management.Cdn.EndpointsOperationsExtensions)
+- [NameAvailabilityOperationsExtensions](Microsoft.Azure.Management.Cdn.NameAvailabilityOperationsExtensions)
+- [OperationsOperationsExtensions](Microsoft.Azure.Management.Cdn.OperationsOperationsExtensions)
+- [OriginsOperationsExtensions](Microsoft.Azure.Management.Cdn.OriginsOperationsExtensions)
+- [ProfilesOperationsExtensions](Microsoft.Azure.Management.Cdn.ProfilesOperationsExtensions)
 
 ### Interfaces
 
-- [](Microsoft.Azure.Management.Cdn.)
-- [](Microsoft.Azure.Management.Cdn.)
-- [](Microsoft.Azure.Management.Cdn.)
-- [](Microsoft.Azure.Management.Cdn.)
-- [](Microsoft.Azure.Management.Cdn.)
-- [](Microsoft.Azure.Management.Cdn.)
-- [](Microsoft.Azure.Management.Cdn.)
-- [](Microsoft.Azure.Management.Cdn.)
-
-### Enums
-
-- [](Microsoft.Azure.Management.Cdn.)
+- [ICdnManagementClient](Microsoft.Azure.Management.Cdn.ICdnManagementClient)
+- [ICustomDomainsOperations](Microsoft.Azure.Management.Cdn.ICustomDomainsOperations)
+- [IEndpointsOperations](Microsoft.Azure.Management.Cdn.IEndpointsOperations)
+- [INameAvailabilityOperations](Microsoft.Azure.Management.Cdn.INameAvailabilityOperations)
+- [IOperationsOperations](Microsoft.Azure.Management.Cdn.IOperationsOperations)
+- [IOriginsOperations](Microsoft.Azure.Management.Cdn.IOriginsOperations)
+- [IProfilesOperations](Microsoft.Azure.Management.Cdn.IProfilesOperations)
 
 ## Microsoft.Azure.Management.Cdn.Models
 
@@ -271,14 +264,43 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 ### Classes
 
-- [](Microsoft.Azure.Management.Cdn.Models.)
-
-### Interfaces
-
-- [](Microsoft.Azure.Management.Cdn.Models.)
+- [CheckNameAvailabilityInput](Microsoft.Azure.Management.Cdn.Models.CheckNameAvailabilityInput)
+- [CheckNameAvailabilityOutput](Microsoft.Azure.Management.Cdn.Models.CheckNameAvailabilityOutput)
+- [CustomDomain](Microsoft.Azure.Management.Cdn.Models.CustomDomain)
+- [CustomDomainParameters](Microsoft.Azure.Management.Cdn.Models.CustomDomainParameters)
+- [DeepCreatedOrigin](Microsoft.Azure.Management.Cdn.Models.DeepCreatedOrigin)
+- [EndPoint](Microsoft.Azure.Management.Cdn.Models.EndPoint)
+- [EndPointCreateParameters](Microsoft.Azure.Management.Cdn.Models.EndPointCreateParameters)
+- [EndpointUpdateParameters](Microsoft.Azure.Management.Cdn.Models.EndpointUpdateParameters)
+- [ErrorResponse](Microsoft.Azure.Management.Cdn.Models.ErrorResponse)
+- [ErrorResponseException](Microsoft.Azure.Management.Cdn.Models.ErrorResponseException)
+- [LoadParameters](Microsoft.Azure.Management.Cdn.Models.LoadParameters)
+- [Operation](Microsoft.Azure.Management.Cdn.Models.Operation)
+- [OperationDisplay](Microsoft.Azure.Management.Cdn.Models.OperationDisplay)
+- [Origin](Microsoft.Azure.Management.Cdn.Models.Origin)
+- [OriginParameters](Microsoft.Azure.Management.Cdn.Models.OriginParameters)
+- [Page<T>](Microsoft.Azure.Management.Cdn.Models.Page`1)
+- [Profile](Microsoft.Azure.Management.Cdn.Models.Profile)
+- [ProfileCreateParameters](Microsoft.Azure.Management.Cdn.Models.ProfileCreateParameters)
+- [ProfileUpdateParameters](Microsoft.Azure.Management.Cdn.Models.ProfileUpdateParameters)
+- [PurgeParameters](Microsoft.Azure.Management.Cdn.Models.PurgeParameters)
+- [Resource](Microsoft.Azure.Management.Cdn.Models.Resource)
+- [Sku](Microsoft.Azure.Management.Cdn.Models.Sku)
+- [SkuName](Microsoft.Azure.Management.Cdn.Models.SkuName)
+- [SsoUri](Microsoft.Azure.Management.Cdn.Models.SsoUri)
+- [TrackedResource](Microsoft.Azure.Management.Cdn.Models.TrackedResource)
+- [ValidateCustomDomainInput](Microsoft.Azure.Management.Cdn.Models.ValidateCustomDomainInput)
+- [ValidateCustomDomainOutput](Microsoft.Azure.Management.Cdn.Models.ValidateCustomDomainOutput)
 
 ### Enums
 
+- [CustomDomainResourceState](Microsoft.Azure.Management.Cdn.Models.CustomDomainResourceState)
+- [EndPointResourceState](Microsoft.Azure.Management.Cdn.Models.EndPointResourceState)
+- [OriginResourceState](Microsoft.Azure.Management.Cdn.Models.OriginResourceState)
+- [ProfileResourceState](Microsoft.Azure.Management.Cdn.Models.ProfileResourceState)
+- [ProvisioningState](Microsoft.Azure.Management.Cdn.Models.ProvisioningState)
+- [QueryStringCachingBehavior](Microsoft.Azure.Management.Cdn.Models.QueryStringCachingBehavior)
+- [ResourceType](Microsoft.Azure.Management.Cdn.Models.ResourceType)
 - [](Microsoft.Azure.Management.Cdn.Models.)
 
 ## Microsoft.Azure.Management.CognitiveServices
