@@ -73,52 +73,52 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 - [UserGetMemberGroupsParameters](Microsoft.Azure.Graph.RBAC.Models.UserGetMemberGroupsParameters)
 - [UserUpdateParameters](Microsoft.Azure.Graph.RBAC.Models.UserGetMemberGroupsParameters)
 
-## Microsoft.Azure.Management.Insights
+## Microsoft.Azure.Insights
 
-[Microsoft.Azure.Management.Insights namespace](Microsoft.Azure.Insights.)
+[Microsoft.Azure.Insights namespace](Microsoft.Azure.Insights.)
 
 ### Classes
 
-- [EventCategoriesOperationsExtensions](Microsoft.Azure.Management.Insights.EventCategoriesOperationsExtensions)
-- [EventsOperationsExtensions](Microsoft.Azure.Management.Insights.EventsOperationsExtensions)
-- [InsightsClient](Microsoft.Azure.Management.Insights.InsightsClient)
-- [MetricDefinitionsOperationsExtensions](Microsoft.Azure.Management.Insights.MetricDefinitionsOperationsExtensions)
-- [MetricsOperationsExtensions](Microsoft.Azure.Management.Insights.MetricsOperationsExtensions)
-- [TenantEventsOperationsExtensions](Microsoft.Azure.Management.Insights.TenantEventsOperationsExtensions)
-- [UsageMetricsOperationsExtensions](Microsoft.Azure.Management.Insights.UsageMetricsOperationsExtensions)
+- [EventCategoriesOperationsExtensions](Microsoft.Azure.Insights.EventCategoriesOperationsExtensions)
+- [EventsOperationsExtensions](Microsoft.Azure.Insights.EventsOperationsExtensions)
+- [InsightsClient](Microsoft.Azure.Insights.InsightsClient)
+- [MetricDefinitionsOperationsExtensions](Microsoft.Azure.Insights.MetricDefinitionsOperationsExtensions)
+- [MetricsOperationsExtensions](Microsoft.Azure.Insights.MetricsOperationsExtensions)
+- [TenantEventsOperationsExtensions](Microsoft.Azure.Insights.TenantEventsOperationsExtensions)
+- [UsageMetricsOperationsExtensions](Microsoft.Azure.Insights.UsageMetricsOperationsExtensions)
 
 ### Interfaces
 
-- [IEventCategoriesOperations](Microsoft.Azure.Management.Insights.IEventCategoriesOperations)
-- [IEventsOperations](Microsoft.Azure.Management.Insights.IEventsOperations)
-- [IInsightsClient](Microsoft.Azure.Management.Insights.IInsightsClient)
-- [IMetricDefinitionsOperations](Microsoft.Azure.Management.Insights.IMetricDefinitionsOperations)
-- [IMetricsOperations](Microsoft.Azure.Management.Insights.IMetricsOperations)
-- [ITenantEventsOperations](Microsoft.Azure.Management.Insights.ITenantEventsOperations)
-- [IUsageMetricsOperations](Microsoft.Azure.Management.Insights.IUsageMetricsOperations)
+- [IEventCategoriesOperations](Microsoft.Azure.Insights.IEventCategoriesOperations)
+- [IEventsOperations](Microsoft.Azure.Insights.IEventsOperations)
+- [IInsightsClient](Microsoft.Azure.Insights.IInsightsClient)
+- [IMetricDefinitionsOperations](Microsoft.Azure.Insights.IMetricDefinitionsOperations)
+- [IMetricsOperations](Microsoft.Azure.Insights.IMetricsOperations)
+- [ITenantEventsOperations](Microsoft.Azure.Insights.ITenantEventsOperations)
+- [IUsageMetricsOperations](Microsoft.Azure.Insights.IUsageMetricsOperations)
 
-## Microsoft.Azure.Management.Insights.Models
+## Microsoft.Azure.Insights.Models
 
-[Microsoft.Azure.Management.Insights.Models namespace](Microsoft.Azure.Insights..Models)
+[Microsoft.Azure.Insights.Models namespace](Microsoft.Azure.Insights..Models)
 
 ### Classes
 
-- [EventData](Microsoft.Azure.Management.Insights.Models.EventData)
-- [HttpRequestInfo](Microsoft.Azure.Management.Insights.Models.HttpRequestInfo)
-- [LocalizableString](Microsoft.Azure.Management.Insights.Models.LocalizableString)
-- [Metric](Microsoft.Azure.Management.Insights.Models.Metric)
-- [MetricAvailability](Microsoft.Azure.Management.Insights.Models.MetricAvailability)
-- [Page1<T>](Microsoft.Azure.Management.Insights.Models.Page1`1)
-- [Page<T>](Microsoft.Azure.Management.Insights.Models.Page`1)
-- [SenderAuthorization](Microsoft.Azure.Management.Insights.Models.SenderAuthorization)
-- [UsageMetric](Microsoft.Azure.Management.Insights.Models.UsageMetric)
+- [EventData](Microsoft.Azure.Insights.Models.EventData)
+- [HttpRequestInfo](Microsoft.Azure.Insights.Models.HttpRequestInfo)
+- [LocalizableString](Microsoft.Azure.Insights.Models.LocalizableString)
+- [Metric](Microsoft.Azure.Insights.Models.Metric)
+- [MetricAvailability](Microsoft.Azure.Insights.Models.MetricAvailability)
+- [Page1<T>](Microsoft.Azure.Insights.Models.Page1`1)
+- [Page<T>](Microsoft.Azure.Insights.Models.Page`1)
+- [SenderAuthorization](Microsoft.Azure.Insights.Models.SenderAuthorization)
+- [UsageMetric](Microsoft.Azure.Insights.Models.UsageMetric)
 
 ### Enums
 
-- [AggregationType](Microsoft.Azure.Management.Insights.Models.AggregationType)
-- [EventChannels](Microsoft.Azure.Management.Insights.Models.EventChannels)
-- [EventLevel](Microsoft.Azure.Management.Insights.Models.EventLevel)
-- [Unit](Microsoft.Azure.Management.Insights.Models.Unit)
+- [AggregationType](Microsoft.Azure.Insights.Models.AggregationType)
+- [EventChannels](Microsoft.Azure.Insights.Models.EventChannels)
+- [EventLevel](Microsoft.Azure.Insights.Models.EventLevel)
+- [Unit](Microsoft.Azure.Insights.Models.Unit)
 
 ## Microsoft.Azure.Management
 
@@ -134,6 +134,52 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 - [Azure.IAuthenticated](Microsoft.Azure.Management.Azure.IAuthenticated)
 - [Azure.IConfigurable](Microsoft.Azure.Management.Azure.IConfigurable)
+
+## Microsoft.Azure.Management.Authorization
+
+[Microsoft.Azure.Management.Authorization namespace](Microsoft.Azure.Management.Authorization)
+
+### Classes
+
+- [AuthorizationManagementClient](Microsoft.Azure.Management.Authorization.AuthorizationManagementClient)
+- [AuthorizationManagementClientExtensions](Microsoft.Azure.Management.Authorization.AuthorizationManagementClientExtensions)
+- [ClassicAdministratorsOperationsExtesions](Microsoft.Azure.Management.Authorization.ClassicAdministratorsOperationsExtesions)
+- [PermissionsOperationsExtensions](Microsoft.Azure.Management.Authorization.PermissionsOperationsExtensions)
+- [ProverOperationsMetadataOperationsExtensions](Microsoft.Azure.Management.Authorization.ProverOperationsMetadataOperationsExtensions)
+- [RoleAssignmentsOperationsExtensions](Microsoft.Azure.Management.Authorization.RoleAssignmentsOperationsExtensions)
+- [RoleDefinitionsOperationsExtensions](Microsoft.Azure.Management.Authorization.RoleDefinitionsOperationsExtensions)
+
+### Interfaces
+
+- [IAuthorizationManagementClient](Microsoft.Azure.Management.Authorization.IAuthorizationManagementClient)
+- [IClassicAdministratorsOperations](Microsoft.Azure.Management.Authorization.IClassicAdministratorsOperations)
+- [IPermissionsOperations](Microsoft.Azure.Management.Authorization.IPermissionsOperations)
+- [IProviderOperationsMetadataOperations](Microsoft.Azure.Management.Authorization.IProviderOperationsMetadataOperations)
+- [IRoleAssignmentsOperations](Microsoft.Azure.Management.Authorization.IRoleAssignmentsOperations)
+- [IRoleDefinitionsOperations](Microsoft.Azure.Management.Authorization.IRoleDefinitionsOperations)
+
+## Microsoft.Azure.Management.Authorization.Models
+
+[Microsoft.Azure.Management.Authorization.Models namespace](Microsoft.Azure.Management.Authorization.Models)
+
+### Classes
+
+- [ClassicAdministrator](Microsoft.Azure.Management.Authorization.Models.ClassicAdministrator)
+- [ClassicAdministratorProperties](Microsoft.Azure.Management.Authorization.Models.ClassicAdministratorProperties)
+- [Page<T>](Microsoft.Azure.Management.Authorization.Models.Page`1)
+- [Permission](Microsoft.Azure.Management.Authorization.Models.Permission)
+- [ProviderOperation](Microsoft.Azure.Management.Authorization.Models.ProviderOperation)
+- [ProviderOperationsMetadata](Microsoft.Azure.Management.Authorization.Models.ProviderOperationsMetadata)
+- [Resource](Microsoft.Azure.Management.Authorization.Models.Resource)
+- [ResourceType](Microsoft.Azure.Management.Authorization.Models.ResourceType)
+- [RoleAssignmentCreateParameters](Microsoft.Azure.Management.Authorization.Models.RoleAssignmentCreateParameters)
+- [RoleAssignmentFilter](Microsoft.Azure.Management.Authorization.Models.RoleAssignmentFilter)
+- [RoleAssignmentProperties](Microsoft.Azure.Management.Authorization.Models.RoleAssignmentProperties)
+- [RoleAssignmentPropertiesWithScope](Microsoft.Azure.Management.Authorization.Models.RoleAssignmentPropertiesWithScope)
+- [RoleDefinition](Microsoft.Azure.Management.Authorization.Models.RoleDefinition)
+- [RoleDefinitionFilter](Microsoft.Azure.Management.Authorization.Models.RoleDefinitionFilter)
+- [RoleDefinitionProperties](Microsoft.Azure.Management.Authorization.Models.RoleDefinitionProperties)
+- [SubResource](Microsoft.Azure.Management.Authorization.Models.RoleDefinitionProperties)
 
 ## Microsoft.Azure.Management.Batch
 
@@ -190,14 +236,29 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 ## Microsoft.Azure.Management.Cdn
 
-[Microsoft.Azure.Management.Cdn namespace](Microsoft.Azure.Management.)
+[Microsoft.Azure.Management.Cdn namespace](Microsoft.Azure.Management.Cdn)
 
 ### Classes
 
 - [](Microsoft.Azure.Management.Cdn.)
+- [](Microsoft.Azure.Management.Cdn.)
+- [](Microsoft.Azure.Management.Cdn.)
+- [](Microsoft.Azure.Management.Cdn.)
+- [](Microsoft.Azure.Management.Cdn.)
+- [](Microsoft.Azure.Management.Cdn.)
+- [](Microsoft.Azure.Management.Cdn.)
+- [](Microsoft.Azure.Management.Cdn.)
+- [](Microsoft.Azure.Management.Cdn.)
 
 ### Interfaces
 
+- [](Microsoft.Azure.Management.Cdn.)
+- [](Microsoft.Azure.Management.Cdn.)
+- [](Microsoft.Azure.Management.Cdn.)
+- [](Microsoft.Azure.Management.Cdn.)
+- [](Microsoft.Azure.Management.Cdn.)
+- [](Microsoft.Azure.Management.Cdn.)
+- [](Microsoft.Azure.Management.Cdn.)
 - [](Microsoft.Azure.Management.Cdn.)
 
 ### Enums
