@@ -7,7 +7,7 @@ Here is content that is injected by the overwrite file method, so writers can ad
 
 ---
 uid: Microsoft.Azure.Management.Compute.VirtualMachinesOperationsExtensions.Capture(Microsoft.Azure.Management.Compute.IVirtualMachinesOperations,System.String,System.String,Microsoft.Azure.Management.Compute.Models.VirtualMachineCaptureParameters)
-example: *content
+remarks: *content
 ---
 
 The code below demonstrates how to call the Capture method using the Azure .NET SDK. 
