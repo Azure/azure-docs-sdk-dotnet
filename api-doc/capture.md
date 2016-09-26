@@ -10,34 +10,35 @@ uid: Microsoft.Azure.Management.Compute.VirtualMachinesOperationsExtensions.Capt
 example: *content
 ---
 
-```
-using Microsoft.Azure.Management.Compute;
-using Microsoft.Azure.Management.Compute.Models;
-using Microsoft.Rest;
+The code below demonstrates how to call the Capture method using the Azure .NET SDK. 
 
-namespace MyAzureVmClientApp
-{
-    class Program
+    using Microsoft.Azure.Management.Compute;
+    using Microsoft.Azure.Management.Compute.Models;
+    using Microsoft.Rest;
+
+    namespace MyAzureVmClientApp
     {
-        static void Main(string[] args)
+        class Program
         {
-            var token = "[Token Obtained from ADAL]";
+            static void Main(string[] args)
+            {
+                var token = "[Token Obtained from ADAL]";
 
-            var credential = new TokenCredentials(token);
+                var credential = new TokenCredentials(token);
 
-            var captureResponse = 
-                new ComputeManagementClient(credential)
-                .VirtualMachines
-                    .Capture(
-                        "myResourceGroup",
-                        "myVmName",
-                        new VirtualMachineCaptureParameters
-                        {
-                            DestinationContainerName = "myblobcontainer",
-                            OverwriteVhds = true,
-                            VhdPrefix = "backup"
-                        });
+                var captureResponse = 
+                    new ComputeManagementClient(credential)
+                    .VirtualMachines
+                        .Capture(
+                            "myResourceGroup",
+                            "myVmName",
+                            new VirtualMachineCaptureParameters
+                            {
+                                DestinationContainerName = "myblobcontainer",
+                                OverwriteVhds = true,
+                                VhdPrefix = "backup"
+                            });
+            }
         }
     }
-}
-```
+
