@@ -12,33 +12,35 @@ remarks: *content
 
 The code below demonstrates how to call the Capture method using the Azure .NET SDK. 
 
-    using Microsoft.Azure.Management.Compute;
-    using Microsoft.Azure.Management.Compute.Models;
-    using Microsoft.Rest;
+```cs
+using Microsoft.Azure.Management.Compute;
+using Microsoft.Azure.Management.Compute.Models;
+using Microsoft.Rest;
 
-    namespace MyAzureVmClientApp
+namespace MyAzureVmClientApp
+{
+    class Program
     {
-        class Program
+        static void Main(string[] args)
         {
-            static void Main(string[] args)
-            {
-                var token = "[Token Obtained from ADAL]";
+            var token = "[Token Obtained from ADAL]";
 
-                var credential = new TokenCredentials(token);
+            var credential = new TokenCredentials(token);
 
-                var captureResponse = 
-                    new ComputeManagementClient(credential)
-                    .VirtualMachines
-                        .Capture(
-                            "myResourceGroup",
-                            "myVmName",
-                            new VirtualMachineCaptureParameters
-                            {
-                                DestinationContainerName = "myblobcontainer",
-                                OverwriteVhds = true,
-                                VhdPrefix = "backup"
-                            });
-            }
+            var captureResponse = 
+                new ComputeManagementClient(credential)
+                .VirtualMachines
+                    .Capture(
+                        "myResourceGroup",
+                        "myVmName",
+                        new VirtualMachineCaptureParameters
+                        {
+                            DestinationContainerName = "myblobcontainer",
+                            OverwriteVhds = true,
+                            VhdPrefix = "backup"
+                        });
         }
     }
+}
+```
 
