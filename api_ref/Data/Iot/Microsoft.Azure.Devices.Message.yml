@@ -5,8 +5,8 @@ items:
   parent: Microsoft.Azure.Devices
   children:
   - Microsoft.Azure.Devices.Message.#ctor
-  - Microsoft.Azure.Devices.Message.#ctor(Stream)
   - Microsoft.Azure.Devices.Message.#ctor(System.Byte[])
+  - Microsoft.Azure.Devices.Message.#ctor(System.IO.Stream)
   - Microsoft.Azure.Devices.Message.Ack
   - Microsoft.Azure.Devices.Message.Clone
   - Microsoft.Azure.Devices.Message.CorrelationId
@@ -34,7 +34,7 @@ items:
     path: csharp/service/Microsoft.Azure.Devices/Message.cs
     startLine: 18
   assemblies:
-  - Microsoft.Azure.Devices.Uwp
+  - Microsoft.Azure.Devices
   namespace: Microsoft.Azure.Devices
   summary: "\nThe data structure represent the message that is used for interacting with IotHub.\n"
   example: []
@@ -42,10 +42,19 @@ items:
     content: 'public sealed class Message : IDisposable, IReadOnlyIndicator'
     content.vb: >-
       Public NotInheritable Class Message
-          Inherits IDisposable
-          Implements IReadOnlyIndicator
+          Implements IDisposable, IReadOnlyIndicator
   inheritance:
   - System.Object
+  implements:
+  - System.IDisposable
+  inheritedMembers:
+  - System.Object.ToString
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
   modifiers.csharp:
   - public
   - sealed
@@ -73,7 +82,7 @@ items:
     path: csharp/service/Microsoft.Azure.Devices/Message.cs
     startLine: 31
   assemblies:
-  - Microsoft.Azure.Devices.Uwp
+  - Microsoft.Azure.Devices
   namespace: Microsoft.Azure.Devices
   summary: "\nDefault constructor with no body data\n"
   example: []
@@ -84,15 +93,15 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.Azure.Devices.Message.#ctor(Stream)
-  commentId: M:Microsoft.Azure.Devices.Message.#ctor(Stream)
-  id: '#ctor(Stream)'
+- uid: Microsoft.Azure.Devices.Message.#ctor(System.IO.Stream)
+  commentId: M:Microsoft.Azure.Devices.Message.#ctor(System.IO.Stream)
+  id: '#ctor(System.IO.Stream)'
   parent: Microsoft.Azure.Devices.Message
   langs:
   - csharp
   - vb
   name: Message(Stream)
-  fullName: Microsoft.Azure.Devices.Message.Message(Stream)
+  fullName: Microsoft.Azure.Devices.Message.Message(System.IO.Stream)
   type: Constructor
   source:
     remote:
@@ -103,7 +112,7 @@ items:
     path: csharp/service/Microsoft.Azure.Devices/Message.cs
     startLine: 44
   assemblies:
-  - Microsoft.Azure.Devices.Uwp
+  - Microsoft.Azure.Devices
   namespace: Microsoft.Azure.Devices
   summary: "\nConstructor which uses the argument stream as the body stream.\n"
   remarks: User is expected to own the disposing of the stream when using this constructor.
@@ -113,7 +122,7 @@ items:
     content.vb: Public Sub New(stream As Stream)
     parameters:
     - id: stream
-      type: Stream
+      type: System.IO.Stream
       description: a stream which will be used as body stream.
   modifiers.csharp:
   - public
@@ -138,7 +147,7 @@ items:
     path: csharp/service/Microsoft.Azure.Devices/Message.cs
     startLine: 60
   assemblies:
-  - Microsoft.Azure.Devices.Uwp
+  - Microsoft.Azure.Devices
   namespace: Microsoft.Azure.Devices
   summary: "\nConstructor which uses the input byte array as the body\n"
   remarks: >-
@@ -181,7 +190,7 @@ items:
     path: csharp/service/Microsoft.Azure.Devices/Message.cs
     startLine: 103
   assemblies:
-  - Microsoft.Azure.Devices.Uwp
+  - Microsoft.Azure.Devices
   namespace: Microsoft.Azure.Devices
   summary: "\n[Required for two way requests] Used to correlate two-way communication. \nFormat: A case-sensitive string ( up to 128 char long) of ASCII 7-bit alphanumeric chars \n+ {'-', ':', '/', '\\', '.', '+', '%', '_', '#', '*', '?', '!', '(', ')', ',', '=', '@', ';', '$', '''}. \nNon-alphanumeric characters are from URN RFC.\n"
   example: []
@@ -216,7 +225,7 @@ items:
     path: csharp/service/Microsoft.Azure.Devices/Message.cs
     startLine: 119
   assemblies:
-  - Microsoft.Azure.Devices.Uwp
+  - Microsoft.Azure.Devices
   namespace: Microsoft.Azure.Devices
   summary: "\n[Required] Destination of the message\n"
   example: []
@@ -251,16 +260,16 @@ items:
     path: csharp/service/Microsoft.Azure.Devices/Message.cs
     startLine: 135
   assemblies:
-  - Microsoft.Azure.Devices.Uwp
+  - Microsoft.Azure.Devices
   namespace: Microsoft.Azure.Devices
   summary: "\n[Optional] The time when this message is considered expired\n"
   example: []
   syntax:
     content: public DateTime ExpiryTimeUtc { get; set; }
-    content.vb: Public Property ExpiryTimeUtc As DateTime
+    content.vb: Public Property ExpiryTimeUtc As Date
     parameters: []
     return:
-      type: DateTime
+      type: System.DateTime
   modifiers.csharp:
   - public
   - get
@@ -286,7 +295,7 @@ items:
     path: csharp/service/Microsoft.Azure.Devices/Message.cs
     startLine: 151
   assemblies:
-  - Microsoft.Azure.Devices.Uwp
+  - Microsoft.Azure.Devices
   namespace: Microsoft.Azure.Devices
   summary: "\nUsed in message responses and feedback\n"
   example: []
@@ -321,16 +330,34 @@ items:
     path: csharp/service/Microsoft.Azure.Devices/Message.cs
     startLine: 167
   assemblies:
-  - Microsoft.Azure.Devices.Uwp
+  - Microsoft.Azure.Devices
   namespace: Microsoft.Azure.Devices
   summary: "\nIndicates whether consumption or expiration of the message should post data to the feedback queue\n"
   example: []
   syntax:
-    content: public DeliveryAcknowledgement Ack { get; set; }
-    content.vb: Public Property Ack As DeliveryAcknowledgement
+    content: >-
+      [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations", Justification = "This should never happen. If it does, the client should crash.")]
+
+      public DeliveryAcknowledgement Ack { get; set; }
+    content.vb: >-
+      <SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations", Justification:="This should never happen. If it does, the client should crash.")>
+
+      Public Property Ack As DeliveryAcknowledgement
     parameters: []
     return:
       type: Microsoft.Azure.Devices.DeliveryAcknowledgement
+  attributes:
+  - type: System.Diagnostics.CodeAnalysis.SuppressMessageAttribute
+    ctor: System.Diagnostics.CodeAnalysis.SuppressMessageAttribute.#ctor(System.String,System.String)
+    arguments:
+    - type: System.String
+      value: Microsoft.Design
+    - type: System.String
+      value: CA1065:DoNotRaiseExceptionsInUnexpectedLocations
+    namedArguments:
+    - name: Justification
+      type: System.String
+      value: This should never happen. If it does, the client should crash.
   modifiers.csharp:
   - public
   - get
@@ -356,7 +383,7 @@ items:
     path: csharp/service/Microsoft.Azure.Devices/Message.cs
     startLine: 238
   assemblies:
-  - Microsoft.Azure.Devices.Uwp
+  - Microsoft.Azure.Devices
   namespace: Microsoft.Azure.Devices
   summary: "\n[Required] LockToken of the received message\n"
   example: []
@@ -391,7 +418,7 @@ items:
     path: csharp/service/Microsoft.Azure.Devices/Message.cs
     startLine: 284
   assemblies:
-  - Microsoft.Azure.Devices.Uwp
+  - Microsoft.Azure.Devices
   namespace: Microsoft.Azure.Devices
   summary: "\n[Required in feedback messages] Used to specify the origin of messages generated by device hub. \nPossible value: “{hub name}/”\n"
   example: []
@@ -426,7 +453,7 @@ items:
     path: csharp/service/Microsoft.Azure.Devices/Message.cs
     startLine: 300
   assemblies:
-  - Microsoft.Azure.Devices.Uwp
+  - Microsoft.Azure.Devices
   namespace: Microsoft.Azure.Devices
   summary: "\nGets the dictionary of user properties which are set when user send the data.\n"
   example: []
@@ -435,7 +462,7 @@ items:
     content.vb: Public ReadOnly Property Properties As IDictionary(Of String, String)
     parameters: []
     return:
-      type: IDictionary{System.String,System.String}
+      type: System.Collections.Generic.IDictionary{System.String,System.String}
   modifiers.csharp:
   - public
   - get
@@ -461,7 +488,7 @@ items:
     path: csharp/service/Microsoft.Azure.Devices/Message.cs
     startLine: 344
   assemblies:
-  - Microsoft.Azure.Devices.Uwp
+  - Microsoft.Azure.Devices
   namespace: Microsoft.Azure.Devices
   summary: "\nMakes a clone of the current event data instance.\n"
   example: []
@@ -471,6 +498,10 @@ items:
     return:
       type: Microsoft.Azure.Devices.Message
       description: 
+  exceptions:
+  - type: System.ObjectDisposedException
+    commentId: T:System.ObjectDisposedException
+    description: throws if the event data has already been disposed.
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -494,13 +525,15 @@ items:
     path: csharp/service/Microsoft.Azure.Devices/Message.cs
     startLine: 386
   assemblies:
-  - Microsoft.Azure.Devices.Uwp
+  - Microsoft.Azure.Devices
   namespace: Microsoft.Azure.Devices
   summary: "\nDispose the current event data instance\n"
   example: []
   syntax:
     content: public void Dispose()
     content.vb: Public Sub Dispose
+  implements:
+  - System.IDisposable.Dispose
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -524,17 +557,24 @@ items:
     path: csharp/service/Microsoft.Azure.Devices/Message.cs
     startLine: 398
   assemblies:
-  - Microsoft.Azure.Devices.Uwp
+  - Microsoft.Azure.Devices
   namespace: Microsoft.Azure.Devices
   summary: "\nReturn the body stream of the current event data instance\n"
-  remarks: This method can only be called once and afterwards method will throw <see cref="!:InvalidOperationException"></see>.
+  remarks: This method can only be called once and afterwards method will throw <xref href="System.InvalidOperationException" data-throw-if-not-resolved="false"></xref>.
   example: []
   syntax:
     content: public Stream GetBodyStream()
     content.vb: Public Function GetBodyStream As Stream
     return:
-      type: Stream
+      type: System.IO.Stream
       description: 
+  exceptions:
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: throws if the method has been called.
+  - type: System.ObjectDisposedException
+    commentId: T:System.ObjectDisposedException
+    description: throws if the event data has already been disposed.
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -558,7 +598,7 @@ items:
     path: csharp/service/Microsoft.Azure.Devices/Message.cs
     startLine: 416
   assemblies:
-  - Microsoft.Azure.Devices.Uwp
+  - Microsoft.Azure.Devices
   namespace: Microsoft.Azure.Devices
   summary: "\nThis methods return the body stream as a byte array\n"
   example: []
@@ -568,6 +608,13 @@ items:
     return:
       type: System.Byte[]
       description: 
+  exceptions:
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: throws if the method has been called.
+  - type: System.ObjectDisposedException
+    commentId: T:System.ObjectDisposedException
+    description: throws if the event data has already been disposed.
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -582,14 +629,233 @@ references:
   isExternal: true
   name: Object
   fullName: System.Object
+- uid: System.IDisposable
+  parent: System
+  isExternal: true
+  name: IDisposable
+  fullName: System.IDisposable
+- uid: System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    fullName: (
+  - name: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    fullName: (
+  - name: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    fullName: (
+  - name: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    fullName: (
+  - name: )
+    fullName: )
+- uid: System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    fullName: (
+  - name: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    fullName: (
+  - name: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    fullName: (
+  - name: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    fullName: (
+  - name: )
+    fullName: )
 - uid: System
   isExternal: false
   name: System
   fullName: System
-- uid: Stream
+- uid: System.IO.Stream
+  parent: System.IO
   isExternal: true
   name: Stream
-  fullName: Stream
+  fullName: System.IO.Stream
+- uid: System.IO
+  isExternal: false
+  name: System.IO
+  fullName: System.IO
 - uid: System.Byte[]
   isExternal: true
   name: Byte[]
@@ -615,25 +881,27 @@ references:
   isExternal: true
   name: String
   fullName: System.String
-- uid: DateTime
+- uid: System.DateTime
+  parent: System
   isExternal: true
-  name: DateTime
-  fullName: DateTime
+  name: System.DateTime
+  fullName: System.DateTime
 - uid: Microsoft.Azure.Devices.DeliveryAcknowledgement
   parent: Microsoft.Azure.Devices
   isExternal: false
   name: DeliveryAcknowledgement
   fullName: Microsoft.Azure.Devices.DeliveryAcknowledgement
-- uid: IDictionary{System.String,System.String}
-  definition: IDictionary`2
+- uid: System.Collections.Generic.IDictionary{System.String,System.String}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IDictionary`2
   name: IDictionary<String, String>
-  fullName: IDictionary<System.String, System.String>
-  fullname.vb: IDictionary(Of System.String, System.String)
+  fullName: System.Collections.Generic.IDictionary<System.String, System.String>
+  fullname.vb: System.Collections.Generic.IDictionary(Of System.String, System.String)
   name.vb: IDictionary(Of String, String)
   spec.csharp:
-  - uid: IDictionary`2
+  - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
-    fullName: IDictionary
+    fullName: System.Collections.Generic.IDictionary
     isExternal: true
   - name: <
     fullName: <
@@ -650,9 +918,9 @@ references:
   - name: '>'
     fullName: '>'
   spec.vb:
-  - uid: IDictionary`2
+  - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
-    fullName: IDictionary
+    fullName: System.Collections.Generic.IDictionary
     isExternal: true
   - name: '(Of '
     fullName: '(Of '
@@ -668,44 +936,82 @@ references:
     isExternal: true
   - name: )
     fullName: )
-- uid: IDictionary`2
+- uid: System.Collections.Generic.IDictionary`2
+  parent: System.Collections.Generic
   isExternal: true
-  name: IDictionary<, >
-  fullName: IDictionary<, >
-  fullname.vb: IDictionary(Of , )
-  name.vb: IDictionary(Of , )
+  name: IDictionary<TKey, TValue>
+  fullName: System.Collections.Generic.IDictionary<TKey, TValue>
+  fullname.vb: System.Collections.Generic.IDictionary(Of TKey, TValue)
+  name.vb: IDictionary(Of TKey, TValue)
   spec.csharp:
-  - uid: IDictionary`2
+  - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
-    fullName: IDictionary
+    fullName: System.Collections.Generic.IDictionary
     isExternal: true
   - name: <
     fullName: <
-  - name: 
-    fullName: 
+  - name: TKey
+    fullName: TKey
   - name: ', '
     fullName: ', '
-  - name: 
-    fullName: 
+  - name: TValue
+    fullName: TValue
   - name: '>'
     fullName: '>'
   spec.vb:
-  - uid: IDictionary`2
+  - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
-    fullName: IDictionary
+    fullName: System.Collections.Generic.IDictionary
     isExternal: true
   - name: '(Of '
     fullName: '(Of '
-  - name: 
-    fullName: 
+  - name: TKey
+    fullName: TKey
   - name: ', '
     fullName: ', '
-  - name: 
-    fullName: 
+  - name: TValue
+    fullName: TValue
   - name: )
     fullName: )
+- uid: System.Collections.Generic
+  isExternal: false
+  name: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: System.ObjectDisposedException
+  parent: System
+  isExternal: true
+  name: ObjectDisposedException
+  fullName: System.ObjectDisposedException
 - uid: Microsoft.Azure.Devices.Message
   parent: Microsoft.Azure.Devices
   isExternal: false
   name: Message
   fullName: Microsoft.Azure.Devices.Message
+- uid: System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  name: Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    fullName: System.IDisposable.Dispose
+    isExternal: true
+  - name: (
+    fullName: (
+  - name: )
+    fullName: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    fullName: System.IDisposable.Dispose
+    isExternal: true
+  - name: (
+    fullName: (
+  - name: )
+    fullName: )
+- uid: System.InvalidOperationException
+  parent: System
+  isExternal: true
+  name: InvalidOperationException
+  fullName: System.InvalidOperationException
