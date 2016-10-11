@@ -3,9 +3,9 @@
 var fs = require('fs');
 var path = require('path');
 
-var info = traverseApiToc("api_ref");
+var info = traverseApiToc("api-ref");
 checkDuplicateUid(info.ymlList);
-mergeToc(info.tocList, "api_ref/toc.yml");
+mergeToc(info.tocList, "api-ref/toc.yml");
 
 function checkDuplicateUid(ymlList) {
     var record = new Set();

@@ -7,9 +7,9 @@ Push-Location $rootFolder
 
 function ProcessLastExitCode {
     param($exitCode, $msg)
-    if ($lastexitcode -ne 0)
+    if ($exitCode.Equals(0))
     {
-        Write-Error $msg + ", exit code: $lastexitcode"
+        Write-Error "$msg, exit code: $exitCode"
         Pop-Location
         Exit 1
     }
@@ -20,7 +20,7 @@ function ProcessLastExitCode {
 ProcessLastExitCode($lastexitcode, "failed to install latest docfx")
 
 # clean api_ref
-Remove-Item "api_ref\*" -Force -recurse
+Remove-Item "api-ref\*" -Force -recurse
 
 # run docfx metadata to generate YAML metadata
 & docfx metadata
