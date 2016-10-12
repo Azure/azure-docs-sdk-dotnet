@@ -6,11 +6,17 @@ function CloneOrPull
       {
           Push-Location $folderName
           & git pull
+          Write-Host "Start to pull repo: $gitRepo"
+          if ($lastexitcode -ne 0) { Write-Error "error while pulling repo: $gitRepo, exit code: $lastexitcode" }
+          Write-Host "Finish pulling repo: $gitRepo"
           Pop-Location
       }
       else
       {
+          Write-Host "Start to clone repo: $gitRepo"
           & git clone -q --branch=$branch $gitRepo $folderName
+          if ($lastexitcode -ne 0) { Write-Error "error while cloning repo: $gitRepo, exit code: $lastexitcode" }
+          Write-Host "Finish cloning repo: $gitRepo"
       }
 }
 
@@ -28,7 +34,10 @@ Foreach($repo in $config.repo){
 	if ($repo.build_script)
 	{
 		Push-Location $($repo.name)
+           	Write-Host "Start to run build script in $repo.name"
 		Invoke-Expression $repo.build_script
+        	if ($lastexitcode -ne 0) { Write-Error "error while running build script $repo.build_script in $repo.name, exit code: $lastexitcode" }
+        	Write-Host "Finish running build script in $repo.name"
 		Pop-Location
 	}
 }
