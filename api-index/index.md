@@ -10,7 +10,6 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
 ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
-layout: NamespaceListPage
 ---
 
 # Azure .NET API reference
