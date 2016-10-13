@@ -34,10 +34,10 @@ Foreach($repo in $config.repo){
 	if ($repo.build_script)
 	{
 		Push-Location $($repo.name)
-           	Write-Host "Start to run build script in $repo.name"
+        Write-Host "Start to run build script in $($repo.name)"
 		Invoke-Expression $repo.build_script
-        	if ($lastexitcode -ne 0) { Write-Error "error while running build script $repo.build_script in $repo.name, exit code: $lastexitcode" }
-        	Write-Host "Finish running build script in $repo.name"
+        if ($lastexitcode -ne 0) { Write-Error "error while running build script $($repo.build_script) in $($repo.name), exit code: $lastexitcode" }
+        Write-Host "Finish running build script in $($repo.name)"
 		Pop-Location
 	}
 }
