@@ -4,7 +4,7 @@ description: Azure .NET API Reference
 keywords: Azure .NET, Azure .NET API Reference, Azure .NET class library
 author: allclark
 manager: douge
-ms.date: 10/13/2016
+ms.date: 10/14/2016
 ms.topic: managed-reference
 ms.prod: azure
 ms.technology: azure
