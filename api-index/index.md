@@ -17,15 +17,15 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 The Microsoft Azure SDK for .NET allows you to build applications
 that take advantage of scalable cloud computing resources.
 
-## Target Frameworks:
+## Target Frameworks
 
 * .NET Framework 4.5
 * Netstandard 1.5, based on the NetCore framework
 
-## Prerequisites:
+## Prerequisites
   Install .Net CoreCLR using [these steps](https://www.microsoft.com/net/core).
 
-## To build:
+## To build
 
 ###Full Build
 
@@ -37,7 +37,7 @@ that take advantage of scalable cloud computing resources.
  1. **msbuild** build.proj /t:build;package /p:scope=ResourceManagement\Compute
 
 
-###Using Visual Studio:
+###Using Visual Studio
 
   
 
@@ -45,7 +45,7 @@ that take advantage of scalable cloud computing resources.
  2. Invoke "build" command.
 
 
-## To run the tests:
+## To run the tests
 
 Using Visual Studio:
 
