@@ -47,12 +47,12 @@ that take advantage of scalable cloud computing resources.
 
 ## To run the tests
 
-Using Visual Studio:
+Using Visual Studio
 
   - Build.
   - "Test Explorer" window will get populated with tests. Go select and invoke.
 
-Using the command line:
+Using the command line
 
   - Refer to the "To build" section to get the command window set up.
   - Invoke "Test" target from "Build.proj". Likely, you need to build test project first, so put in "build" target as well. 
