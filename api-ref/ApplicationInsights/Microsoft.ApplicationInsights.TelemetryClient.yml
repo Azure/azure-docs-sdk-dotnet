@@ -9,29 +9,27 @@ items:
   - Microsoft.ApplicationInsights.TelemetryClient.#ctor(Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration)
   - Microsoft.ApplicationInsights.TelemetryClient.Context
   - Microsoft.ApplicationInsights.TelemetryClient.Flush
-  - Microsoft.ApplicationInsights.TelemetryClient.Initialize(Microsoft.ApplicationInsights.Channel.ITelemetry)
   - Microsoft.ApplicationInsights.TelemetryClient.InstrumentationKey
   - Microsoft.ApplicationInsights.TelemetryClient.IsEnabled
-  - Microsoft.ApplicationInsights.TelemetryClient.Track(Microsoft.ApplicationInsights.Channel.ITelemetry)
   - Microsoft.ApplicationInsights.TelemetryClient.TrackAvailability(Microsoft.ApplicationInsights.DataContracts.AvailabilityTelemetry)
-  - Microsoft.ApplicationInsights.TelemetryClient.TrackAvailability(System.String,DateTimeOffset,TimeSpan,System.String,System.Boolean,System.String)
+  - Microsoft.ApplicationInsights.TelemetryClient.TrackAvailability(System.String,System.DateTimeOffset,System.TimeSpan,System.String,System.Boolean,System.String)
   - Microsoft.ApplicationInsights.TelemetryClient.TrackDependency(Microsoft.ApplicationInsights.DataContracts.DependencyTelemetry)
-  - Microsoft.ApplicationInsights.TelemetryClient.TrackDependency(System.String,System.String,DateTimeOffset,TimeSpan,System.Boolean)
+  - Microsoft.ApplicationInsights.TelemetryClient.TrackDependency(System.String,System.String,System.DateTimeOffset,System.TimeSpan,System.Boolean)
   - Microsoft.ApplicationInsights.TelemetryClient.TrackEvent(Microsoft.ApplicationInsights.DataContracts.EventTelemetry)
-  - Microsoft.ApplicationInsights.TelemetryClient.TrackEvent(System.String,IDictionary{System.String,System.String},IDictionary{System.String,System.Double})
-  - Microsoft.ApplicationInsights.TelemetryClient.TrackException(Exception,IDictionary{System.String,System.String},IDictionary{System.String,System.Double})
+  - Microsoft.ApplicationInsights.TelemetryClient.TrackEvent(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IDictionary{System.String,System.Double})
   - Microsoft.ApplicationInsights.TelemetryClient.TrackException(Microsoft.ApplicationInsights.DataContracts.ExceptionTelemetry)
+  - Microsoft.ApplicationInsights.TelemetryClient.TrackException(System.Exception,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IDictionary{System.String,System.Double})
   - Microsoft.ApplicationInsights.TelemetryClient.TrackMetric(Microsoft.ApplicationInsights.DataContracts.MetricTelemetry)
-  - Microsoft.ApplicationInsights.TelemetryClient.TrackMetric(System.String,System.Double,IDictionary{System.String,System.String})
+  - Microsoft.ApplicationInsights.TelemetryClient.TrackMetric(System.String,System.Double,System.Collections.Generic.IDictionary{System.String,System.String})
   - Microsoft.ApplicationInsights.TelemetryClient.TrackPageView(Microsoft.ApplicationInsights.DataContracts.PageViewTelemetry)
   - Microsoft.ApplicationInsights.TelemetryClient.TrackPageView(System.String)
   - Microsoft.ApplicationInsights.TelemetryClient.TrackRequest(Microsoft.ApplicationInsights.DataContracts.RequestTelemetry)
-  - Microsoft.ApplicationInsights.TelemetryClient.TrackRequest(System.String,DateTimeOffset,TimeSpan,System.String,System.Boolean)
+  - Microsoft.ApplicationInsights.TelemetryClient.TrackRequest(System.String,System.DateTimeOffset,System.TimeSpan,System.String,System.Boolean)
   - Microsoft.ApplicationInsights.TelemetryClient.TrackTrace(Microsoft.ApplicationInsights.DataContracts.TraceTelemetry)
   - Microsoft.ApplicationInsights.TelemetryClient.TrackTrace(System.String)
-  - Microsoft.ApplicationInsights.TelemetryClient.TrackTrace(System.String,IDictionary{System.String,System.String})
   - Microsoft.ApplicationInsights.TelemetryClient.TrackTrace(System.String,Microsoft.ApplicationInsights.DataContracts.SeverityLevel)
-  - Microsoft.ApplicationInsights.TelemetryClient.TrackTrace(System.String,Microsoft.ApplicationInsights.DataContracts.SeverityLevel,IDictionary{System.String,System.String})
+  - Microsoft.ApplicationInsights.TelemetryClient.TrackTrace(System.String,Microsoft.ApplicationInsights.DataContracts.SeverityLevel,System.Collections.Generic.IDictionary{System.String,System.String})
+  - Microsoft.ApplicationInsights.TelemetryClient.TrackTrace(System.String,System.Collections.Generic.IDictionary{System.String,System.String})
   langs:
   - csharp
   - vb
@@ -53,15 +51,18 @@ items:
   summary: "\nSend events, metrics and other telemetry to the Application Insights service.\n"
   example: []
   syntax:
-    content: 'public sealed class TelemetryClient : object'
-    content.vb: >-
-      Public NotInheritable Class TelemetryClient
-          Inherits Object
+    content: public sealed class TelemetryClient
+    content.vb: Public NotInheritable Class TelemetryClient
   inheritance:
   - System.Object
-  extensionMethods:
-  - Microsoft.ApplicationInsights.TelemetryClient.Microsoft.ApplicationInsights.TelemetryClientExtensions.StartOperation``1(System.String)
-  - Microsoft.ApplicationInsights.TelemetryClient.Microsoft.ApplicationInsights.TelemetryClientExtensions.StopOperation``1(Microsoft.ApplicationInsights.Extensibility.IOperationHolder{{T}})
+  inheritedMembers:
+  - System.Object.ToString
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
   modifiers.csharp:
   - public
   - sealed
@@ -133,6 +134,10 @@ items:
     - id: configuration
       type: Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration
   overload: Microsoft.ApplicationInsights.TelemetryClient.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <em>configuration</em> is null.
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -245,16 +250,16 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.ApplicationInsights.TelemetryClient.TrackEvent(System.String,IDictionary{System.String,System.String},IDictionary{System.String,System.Double})
-  commentId: M:Microsoft.ApplicationInsights.TelemetryClient.TrackEvent(System.String,IDictionary{System.String,System.String},IDictionary{System.String,System.Double})
-  id: TrackEvent(System.String,IDictionary{System.String,System.String},IDictionary{System.String,System.Double})
+- uid: Microsoft.ApplicationInsights.TelemetryClient.TrackEvent(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IDictionary{System.String,System.Double})
+  commentId: M:Microsoft.ApplicationInsights.TelemetryClient.TrackEvent(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IDictionary{System.String,System.Double})
+  id: TrackEvent(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IDictionary{System.String,System.Double})
   parent: Microsoft.ApplicationInsights.TelemetryClient
   langs:
   - csharp
   - vb
   name: TrackEvent(String, IDictionary<String, String>, IDictionary<String, Double>)
   nameWithType: TelemetryClient.TrackEvent(String, IDictionary<String, String>, IDictionary<String, Double>)
-  fullName: Microsoft.ApplicationInsights.TelemetryClient.TrackEvent(System.String, IDictionary<System.String, System.String>, IDictionary<System.String, System.Double>)
+  fullName: Microsoft.ApplicationInsights.TelemetryClient.TrackEvent(System.String, System.Collections.Generic.IDictionary<System.String, System.String>, System.Collections.Generic.IDictionary<System.String, System.Double>)
   type: Method
   source:
     remote:
@@ -277,10 +282,10 @@ items:
       type: System.String
       description: A name for the event.
     - id: properties
-      type: IDictionary{System.String,System.String}
+      type: System.Collections.Generic.IDictionary{System.String,System.String}
       description: Named string values you can use to search and classify events.
     - id: metrics
-      type: IDictionary{System.String,System.Double}
+      type: System.Collections.Generic.IDictionary{System.String,System.Double}
       description: Measurements associated with this event.
   overload: Microsoft.ApplicationInsights.TelemetryClient.TrackEvent*
   nameWithType.vb: TelemetryClient.TrackEvent(String, IDictionary(Of String, String), IDictionary(Of String, Double))
@@ -288,7 +293,7 @@ items:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Microsoft.ApplicationInsights.TelemetryClient.TrackEvent(System.String, IDictionary(Of System.String, System.String), IDictionary(Of System.String, System.Double))
+  fullName.vb: Microsoft.ApplicationInsights.TelemetryClient.TrackEvent(System.String, System.Collections.Generic.IDictionary(Of System.String, System.String), System.Collections.Generic.IDictionary(Of System.String, System.Double))
   name.vb: TrackEvent(String, IDictionary(Of String, String), IDictionary(Of String, Double))
 - uid: Microsoft.ApplicationInsights.TelemetryClient.TrackEvent(Microsoft.ApplicationInsights.DataContracts.EventTelemetry)
   commentId: M:Microsoft.ApplicationInsights.TelemetryClient.TrackEvent(Microsoft.ApplicationInsights.DataContracts.EventTelemetry)
@@ -401,16 +406,16 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.ApplicationInsights.TelemetryClient.TrackTrace(System.String,IDictionary{System.String,System.String})
-  commentId: M:Microsoft.ApplicationInsights.TelemetryClient.TrackTrace(System.String,IDictionary{System.String,System.String})
-  id: TrackTrace(System.String,IDictionary{System.String,System.String})
+- uid: Microsoft.ApplicationInsights.TelemetryClient.TrackTrace(System.String,System.Collections.Generic.IDictionary{System.String,System.String})
+  commentId: M:Microsoft.ApplicationInsights.TelemetryClient.TrackTrace(System.String,System.Collections.Generic.IDictionary{System.String,System.String})
+  id: TrackTrace(System.String,System.Collections.Generic.IDictionary{System.String,System.String})
   parent: Microsoft.ApplicationInsights.TelemetryClient
   langs:
   - csharp
   - vb
   name: TrackTrace(String, IDictionary<String, String>)
   nameWithType: TelemetryClient.TrackTrace(String, IDictionary<String, String>)
-  fullName: Microsoft.ApplicationInsights.TelemetryClient.TrackTrace(System.String, IDictionary<System.String, System.String>)
+  fullName: Microsoft.ApplicationInsights.TelemetryClient.TrackTrace(System.String, System.Collections.Generic.IDictionary<System.String, System.String>)
   type: Method
   source:
     remote:
@@ -433,7 +438,7 @@ items:
       type: System.String
       description: Message to display.
     - id: properties
-      type: IDictionary{System.String,System.String}
+      type: System.Collections.Generic.IDictionary{System.String,System.String}
       description: Named string values you can use to search and classify events.
   overload: Microsoft.ApplicationInsights.TelemetryClient.TrackTrace*
   nameWithType.vb: TelemetryClient.TrackTrace(String, IDictionary(Of String, String))
@@ -441,18 +446,18 @@ items:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Microsoft.ApplicationInsights.TelemetryClient.TrackTrace(System.String, IDictionary(Of System.String, System.String))
+  fullName.vb: Microsoft.ApplicationInsights.TelemetryClient.TrackTrace(System.String, System.Collections.Generic.IDictionary(Of System.String, System.String))
   name.vb: TrackTrace(String, IDictionary(Of String, String))
-- uid: Microsoft.ApplicationInsights.TelemetryClient.TrackTrace(System.String,Microsoft.ApplicationInsights.DataContracts.SeverityLevel,IDictionary{System.String,System.String})
-  commentId: M:Microsoft.ApplicationInsights.TelemetryClient.TrackTrace(System.String,Microsoft.ApplicationInsights.DataContracts.SeverityLevel,IDictionary{System.String,System.String})
-  id: TrackTrace(System.String,Microsoft.ApplicationInsights.DataContracts.SeverityLevel,IDictionary{System.String,System.String})
+- uid: Microsoft.ApplicationInsights.TelemetryClient.TrackTrace(System.String,Microsoft.ApplicationInsights.DataContracts.SeverityLevel,System.Collections.Generic.IDictionary{System.String,System.String})
+  commentId: M:Microsoft.ApplicationInsights.TelemetryClient.TrackTrace(System.String,Microsoft.ApplicationInsights.DataContracts.SeverityLevel,System.Collections.Generic.IDictionary{System.String,System.String})
+  id: TrackTrace(System.String,Microsoft.ApplicationInsights.DataContracts.SeverityLevel,System.Collections.Generic.IDictionary{System.String,System.String})
   parent: Microsoft.ApplicationInsights.TelemetryClient
   langs:
   - csharp
   - vb
   name: TrackTrace(String, SeverityLevel, IDictionary<String, String>)
   nameWithType: TelemetryClient.TrackTrace(String, SeverityLevel, IDictionary<String, String>)
-  fullName: Microsoft.ApplicationInsights.TelemetryClient.TrackTrace(System.String, Microsoft.ApplicationInsights.DataContracts.SeverityLevel, IDictionary<System.String, System.String>)
+  fullName: Microsoft.ApplicationInsights.TelemetryClient.TrackTrace(System.String, Microsoft.ApplicationInsights.DataContracts.SeverityLevel, System.Collections.Generic.IDictionary<System.String, System.String>)
   type: Method
   source:
     remote:
@@ -478,7 +483,7 @@ items:
       type: Microsoft.ApplicationInsights.DataContracts.SeverityLevel
       description: Trace severity level.
     - id: properties
-      type: IDictionary{System.String,System.String}
+      type: System.Collections.Generic.IDictionary{System.String,System.String}
       description: Named string values you can use to search and classify events.
   overload: Microsoft.ApplicationInsights.TelemetryClient.TrackTrace*
   nameWithType.vb: TelemetryClient.TrackTrace(String, SeverityLevel, IDictionary(Of String, String))
@@ -486,7 +491,7 @@ items:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Microsoft.ApplicationInsights.TelemetryClient.TrackTrace(System.String, Microsoft.ApplicationInsights.DataContracts.SeverityLevel, IDictionary(Of System.String, System.String))
+  fullName.vb: Microsoft.ApplicationInsights.TelemetryClient.TrackTrace(System.String, Microsoft.ApplicationInsights.DataContracts.SeverityLevel, System.Collections.Generic.IDictionary(Of System.String, System.String))
   name.vb: TrackTrace(String, SeverityLevel, IDictionary(Of String, String))
 - uid: Microsoft.ApplicationInsights.TelemetryClient.TrackTrace(Microsoft.ApplicationInsights.DataContracts.TraceTelemetry)
   commentId: M:Microsoft.ApplicationInsights.TelemetryClient.TrackTrace(Microsoft.ApplicationInsights.DataContracts.TraceTelemetry)
@@ -524,16 +529,16 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.ApplicationInsights.TelemetryClient.TrackMetric(System.String,System.Double,IDictionary{System.String,System.String})
-  commentId: M:Microsoft.ApplicationInsights.TelemetryClient.TrackMetric(System.String,System.Double,IDictionary{System.String,System.String})
-  id: TrackMetric(System.String,System.Double,IDictionary{System.String,System.String})
+- uid: Microsoft.ApplicationInsights.TelemetryClient.TrackMetric(System.String,System.Double,System.Collections.Generic.IDictionary{System.String,System.String})
+  commentId: M:Microsoft.ApplicationInsights.TelemetryClient.TrackMetric(System.String,System.Double,System.Collections.Generic.IDictionary{System.String,System.String})
+  id: TrackMetric(System.String,System.Double,System.Collections.Generic.IDictionary{System.String,System.String})
   parent: Microsoft.ApplicationInsights.TelemetryClient
   langs:
   - csharp
   - vb
   name: TrackMetric(String, Double, IDictionary<String, String>)
   nameWithType: TelemetryClient.TrackMetric(String, Double, IDictionary<String, String>)
-  fullName: Microsoft.ApplicationInsights.TelemetryClient.TrackMetric(System.String, System.Double, IDictionary<System.String, System.String>)
+  fullName: Microsoft.ApplicationInsights.TelemetryClient.TrackMetric(System.String, System.Double, System.Collections.Generic.IDictionary<System.String, System.String>)
   type: Method
   source:
     remote:
@@ -559,7 +564,7 @@ items:
       type: System.Double
       description: Metric value.
     - id: properties
-      type: IDictionary{System.String,System.String}
+      type: System.Collections.Generic.IDictionary{System.String,System.String}
       description: Named string values you can use to classify and filter metrics.
   overload: Microsoft.ApplicationInsights.TelemetryClient.TrackMetric*
   nameWithType.vb: TelemetryClient.TrackMetric(String, Double, IDictionary(Of String, String))
@@ -567,7 +572,7 @@ items:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Microsoft.ApplicationInsights.TelemetryClient.TrackMetric(System.String, System.Double, IDictionary(Of System.String, System.String))
+  fullName.vb: Microsoft.ApplicationInsights.TelemetryClient.TrackMetric(System.String, System.Double, System.Collections.Generic.IDictionary(Of System.String, System.String))
   name.vb: TrackMetric(String, Double, IDictionary(Of String, String))
 - uid: Microsoft.ApplicationInsights.TelemetryClient.TrackMetric(Microsoft.ApplicationInsights.DataContracts.MetricTelemetry)
   commentId: M:Microsoft.ApplicationInsights.TelemetryClient.TrackMetric(Microsoft.ApplicationInsights.DataContracts.MetricTelemetry)
@@ -604,16 +609,16 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.ApplicationInsights.TelemetryClient.TrackException(Exception,IDictionary{System.String,System.String},IDictionary{System.String,System.Double})
-  commentId: M:Microsoft.ApplicationInsights.TelemetryClient.TrackException(Exception,IDictionary{System.String,System.String},IDictionary{System.String,System.Double})
-  id: TrackException(Exception,IDictionary{System.String,System.String},IDictionary{System.String,System.Double})
+- uid: Microsoft.ApplicationInsights.TelemetryClient.TrackException(System.Exception,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IDictionary{System.String,System.Double})
+  commentId: M:Microsoft.ApplicationInsights.TelemetryClient.TrackException(System.Exception,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IDictionary{System.String,System.Double})
+  id: TrackException(System.Exception,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IDictionary{System.String,System.Double})
   parent: Microsoft.ApplicationInsights.TelemetryClient
   langs:
   - csharp
   - vb
   name: TrackException(Exception, IDictionary<String, String>, IDictionary<String, Double>)
   nameWithType: TelemetryClient.TrackException(Exception, IDictionary<String, String>, IDictionary<String, Double>)
-  fullName: Microsoft.ApplicationInsights.TelemetryClient.TrackException(Exception, IDictionary<System.String, System.String>, IDictionary<System.String, System.Double>)
+  fullName: Microsoft.ApplicationInsights.TelemetryClient.TrackException(System.Exception, System.Collections.Generic.IDictionary<System.String, System.String>, System.Collections.Generic.IDictionary<System.String, System.Double>)
   type: Method
   source:
     remote:
@@ -633,13 +638,13 @@ items:
     content.vb: Public Sub TrackException(exception As Exception, properties As IDictionary(Of String, String) = Nothing, metrics As IDictionary(Of String, Double) = Nothing)
     parameters:
     - id: exception
-      type: Exception
+      type: System.Exception
       description: The exception to log.
     - id: properties
-      type: IDictionary{System.String,System.String}
+      type: System.Collections.Generic.IDictionary{System.String,System.String}
       description: Named string values you can use to classify and search for this exception.
     - id: metrics
-      type: IDictionary{System.String,System.Double}
+      type: System.Collections.Generic.IDictionary{System.String,System.Double}
       description: Additional values associated with this exception.
   overload: Microsoft.ApplicationInsights.TelemetryClient.TrackException*
   nameWithType.vb: TelemetryClient.TrackException(Exception, IDictionary(Of String, String), IDictionary(Of String, Double))
@@ -647,7 +652,7 @@ items:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Microsoft.ApplicationInsights.TelemetryClient.TrackException(Exception, IDictionary(Of System.String, System.String), IDictionary(Of System.String, System.Double))
+  fullName.vb: Microsoft.ApplicationInsights.TelemetryClient.TrackException(System.Exception, System.Collections.Generic.IDictionary(Of System.String, System.String), System.Collections.Generic.IDictionary(Of System.String, System.Double))
   name.vb: TrackException(Exception, IDictionary(Of String, String), IDictionary(Of String, Double))
 - uid: Microsoft.ApplicationInsights.TelemetryClient.TrackException(Microsoft.ApplicationInsights.DataContracts.ExceptionTelemetry)
   commentId: M:Microsoft.ApplicationInsights.TelemetryClient.TrackException(Microsoft.ApplicationInsights.DataContracts.ExceptionTelemetry)
@@ -684,16 +689,16 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.ApplicationInsights.TelemetryClient.TrackDependency(System.String,System.String,DateTimeOffset,TimeSpan,System.Boolean)
-  commentId: M:Microsoft.ApplicationInsights.TelemetryClient.TrackDependency(System.String,System.String,DateTimeOffset,TimeSpan,System.Boolean)
-  id: TrackDependency(System.String,System.String,DateTimeOffset,TimeSpan,System.Boolean)
+- uid: Microsoft.ApplicationInsights.TelemetryClient.TrackDependency(System.String,System.String,System.DateTimeOffset,System.TimeSpan,System.Boolean)
+  commentId: M:Microsoft.ApplicationInsights.TelemetryClient.TrackDependency(System.String,System.String,System.DateTimeOffset,System.TimeSpan,System.Boolean)
+  id: TrackDependency(System.String,System.String,System.DateTimeOffset,System.TimeSpan,System.Boolean)
   parent: Microsoft.ApplicationInsights.TelemetryClient
   langs:
   - csharp
   - vb
   name: TrackDependency(String, String, DateTimeOffset, TimeSpan, Boolean)
   nameWithType: TelemetryClient.TrackDependency(String, String, DateTimeOffset, TimeSpan, Boolean)
-  fullName: Microsoft.ApplicationInsights.TelemetryClient.TrackDependency(System.String, System.String, DateTimeOffset, TimeSpan, System.Boolean)
+  fullName: Microsoft.ApplicationInsights.TelemetryClient.TrackDependency(System.String, System.String, System.DateTimeOffset, System.TimeSpan, System.Boolean)
   type: Method
   source:
     remote:
@@ -719,10 +724,10 @@ items:
       type: System.String
       description: Dependency call command name.
     - id: startTime
-      type: DateTimeOffset
+      type: System.DateTimeOffset
       description: The time when the dependency was called.
     - id: duration
-      type: TimeSpan
+      type: System.TimeSpan
       description: The time taken by the external dependency to handle the call.
     - id: success
       type: System.Boolean
@@ -767,16 +772,16 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.ApplicationInsights.TelemetryClient.TrackAvailability(System.String,DateTimeOffset,TimeSpan,System.String,System.Boolean,System.String)
-  commentId: M:Microsoft.ApplicationInsights.TelemetryClient.TrackAvailability(System.String,DateTimeOffset,TimeSpan,System.String,System.Boolean,System.String)
-  id: TrackAvailability(System.String,DateTimeOffset,TimeSpan,System.String,System.Boolean,System.String)
+- uid: Microsoft.ApplicationInsights.TelemetryClient.TrackAvailability(System.String,System.DateTimeOffset,System.TimeSpan,System.String,System.Boolean,System.String)
+  commentId: M:Microsoft.ApplicationInsights.TelemetryClient.TrackAvailability(System.String,System.DateTimeOffset,System.TimeSpan,System.String,System.Boolean,System.String)
+  id: TrackAvailability(System.String,System.DateTimeOffset,System.TimeSpan,System.String,System.Boolean,System.String)
   parent: Microsoft.ApplicationInsights.TelemetryClient
   langs:
   - csharp
   - vb
   name: TrackAvailability(String, DateTimeOffset, TimeSpan, String, Boolean, String)
   nameWithType: TelemetryClient.TrackAvailability(String, DateTimeOffset, TimeSpan, String, Boolean, String)
-  fullName: Microsoft.ApplicationInsights.TelemetryClient.TrackAvailability(System.String, DateTimeOffset, TimeSpan, System.String, System.Boolean, System.String)
+  fullName: Microsoft.ApplicationInsights.TelemetryClient.TrackAvailability(System.String, System.DateTimeOffset, System.TimeSpan, System.String, System.Boolean, System.String)
   type: Method
   source:
     remote:
@@ -799,10 +804,10 @@ items:
       type: System.String
       description: Availability test name.
     - id: timeStamp
-      type: DateTimeOffset
+      type: System.DateTimeOffset
       description: The time when the availability was captured.
     - id: duration
-      type: TimeSpan
+      type: System.TimeSpan
       description: The time taken for the availability test to run.
     - id: runLocation
       type: System.String
@@ -849,77 +854,6 @@ items:
     - id: telemetry
       type: Microsoft.ApplicationInsights.DataContracts.AvailabilityTelemetry
   overload: Microsoft.ApplicationInsights.TelemetryClient.TrackAvailability*
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-- uid: Microsoft.ApplicationInsights.TelemetryClient.Track(Microsoft.ApplicationInsights.Channel.ITelemetry)
-  commentId: M:Microsoft.ApplicationInsights.TelemetryClient.Track(Microsoft.ApplicationInsights.Channel.ITelemetry)
-  id: Track(Microsoft.ApplicationInsights.Channel.ITelemetry)
-  parent: Microsoft.ApplicationInsights.TelemetryClient
-  langs:
-  - csharp
-  - vb
-  name: Track(ITelemetry)
-  nameWithType: TelemetryClient.Track(ITelemetry)
-  fullName: Microsoft.ApplicationInsights.TelemetryClient.Track(Microsoft.ApplicationInsights.Channel.ITelemetry)
-  type: Method
-  source:
-    remote:
-      path: src/Core/Managed/Shared/TelemetryClient.cs
-      branch: master
-      repo: https://github.com/Microsoft/ApplicationInsights-dotnet
-    id: Track
-    path: src/Core/Managed/Shared/TelemetryClient.cs
-    startLine: 320
-  assemblies:
-  - Microsoft.ApplicationInsights
-  namespace: Microsoft.ApplicationInsights
-  summary: "\nThis method is an internal part of Application Insights infrastructure. Do not call.\n"
-  example: []
-  syntax:
-    content: public void Track(ITelemetry telemetry)
-    content.vb: Public Sub Track(telemetry As ITelemetry)
-    parameters:
-    - id: telemetry
-      type: Microsoft.ApplicationInsights.Channel.ITelemetry
-  overload: Microsoft.ApplicationInsights.TelemetryClient.Track*
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-- uid: Microsoft.ApplicationInsights.TelemetryClient.Initialize(Microsoft.ApplicationInsights.Channel.ITelemetry)
-  commentId: M:Microsoft.ApplicationInsights.TelemetryClient.Initialize(Microsoft.ApplicationInsights.Channel.ITelemetry)
-  id: Initialize(Microsoft.ApplicationInsights.Channel.ITelemetry)
-  parent: Microsoft.ApplicationInsights.TelemetryClient
-  langs:
-  - csharp
-  - vb
-  name: Initialize(ITelemetry)
-  nameWithType: TelemetryClient.Initialize(ITelemetry)
-  fullName: Microsoft.ApplicationInsights.TelemetryClient.Initialize(Microsoft.ApplicationInsights.Channel.ITelemetry)
-  type: Method
-  source:
-    remote:
-      path: src/Core/Managed/Shared/TelemetryClient.cs
-      branch: master
-      repo: https://github.com/Microsoft/ApplicationInsights-dotnet
-    id: Initialize
-    path: src/Core/Managed/Shared/TelemetryClient.cs
-    startLine: 350
-  assemblies:
-  - Microsoft.ApplicationInsights
-  namespace: Microsoft.ApplicationInsights
-  summary: "\nThis method is an internal part of Application Insights infrastructure. Do not call.\n"
-  example: []
-  syntax:
-    content: public void Initialize(ITelemetry telemetry)
-    content.vb: Public Sub Initialize(telemetry As ITelemetry)
-    parameters:
-    - id: telemetry
-      type: Microsoft.ApplicationInsights.Channel.ITelemetry
-      description: Telemetry item to initialize.
-  overload: Microsoft.ApplicationInsights.TelemetryClient.Initialize*
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -995,16 +929,16 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.ApplicationInsights.TelemetryClient.TrackRequest(System.String,DateTimeOffset,TimeSpan,System.String,System.Boolean)
-  commentId: M:Microsoft.ApplicationInsights.TelemetryClient.TrackRequest(System.String,DateTimeOffset,TimeSpan,System.String,System.Boolean)
-  id: TrackRequest(System.String,DateTimeOffset,TimeSpan,System.String,System.Boolean)
+- uid: Microsoft.ApplicationInsights.TelemetryClient.TrackRequest(System.String,System.DateTimeOffset,System.TimeSpan,System.String,System.Boolean)
+  commentId: M:Microsoft.ApplicationInsights.TelemetryClient.TrackRequest(System.String,System.DateTimeOffset,System.TimeSpan,System.String,System.Boolean)
+  id: TrackRequest(System.String,System.DateTimeOffset,System.TimeSpan,System.String,System.Boolean)
   parent: Microsoft.ApplicationInsights.TelemetryClient
   langs:
   - csharp
   - vb
   name: TrackRequest(String, DateTimeOffset, TimeSpan, String, Boolean)
   nameWithType: TelemetryClient.TrackRequest(String, DateTimeOffset, TimeSpan, String, Boolean)
-  fullName: Microsoft.ApplicationInsights.TelemetryClient.TrackRequest(System.String, DateTimeOffset, TimeSpan, System.String, System.Boolean)
+  fullName: Microsoft.ApplicationInsights.TelemetryClient.TrackRequest(System.String, System.DateTimeOffset, System.TimeSpan, System.String, System.Boolean)
   type: Method
   source:
     remote:
@@ -1027,10 +961,10 @@ items:
       type: System.String
       description: The request name.
     - id: startTime
-      type: DateTimeOffset
+      type: System.DateTimeOffset
       description: The time when the page was requested.
     - id: duration
-      type: TimeSpan
+      type: System.TimeSpan
       description: The time taken by the application to handle the request.
     - id: responseCode
       type: System.String
@@ -1118,243 +1052,297 @@ references:
   nameWithType: Microsoft.ApplicationInsights
   fullName: Microsoft.ApplicationInsights
 - uid: System.Object
+  commentId: T:System.Object
+  parent: System
   isExternal: true
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: Microsoft.ApplicationInsights.TelemetryClient.Microsoft.ApplicationInsights.TelemetryClientExtensions.StartOperation``1(System.String)
-  commentId: M:Microsoft.ApplicationInsights.TelemetryClientExtensions.StartOperation``1(Microsoft.ApplicationInsights.TelemetryClient,System.String)
-  parent: Microsoft.ApplicationInsights.TelemetryClientExtensions
-  definition: Microsoft.ApplicationInsights.TelemetryClientExtensions.StartOperation``1(Microsoft.ApplicationInsights.TelemetryClient,System.String)
-  name: StartOperation<T>(String)
-  nameWithType: TelemetryClientExtensions.StartOperation<T>(String)
-  fullName: Microsoft.ApplicationInsights.TelemetryClientExtensions.StartOperation<T>(System.String)
-  nameWithType.vb: TelemetryClientExtensions.StartOperation(Of T)(String)
-  fullname.vb: Microsoft.ApplicationInsights.TelemetryClientExtensions.StartOperation(Of T)(System.String)
-  name.vb: StartOperation(Of T)(String)
-  spec.csharp:
-  - uid: Microsoft.ApplicationInsights.TelemetryClientExtensions.StartOperation``1(System.String)
-    name: StartOperation<T>
-    nameWithType: TelemetryClientExtensions.StartOperation<T>
-    fullName: Microsoft.ApplicationInsights.TelemetryClientExtensions.StartOperation<T>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.ApplicationInsights.TelemetryClientExtensions.StartOperation``1(System.String)
-    name: StartOperation(Of T)
-    nameWithType: TelemetryClientExtensions.StartOperation(Of T)
-    fullName: Microsoft.ApplicationInsights.TelemetryClientExtensions.StartOperation(Of T)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.ApplicationInsights.TelemetryClient.Microsoft.ApplicationInsights.TelemetryClientExtensions.StopOperation``1(Microsoft.ApplicationInsights.Extensibility.IOperationHolder{{T}})
-  commentId: M:Microsoft.ApplicationInsights.TelemetryClientExtensions.StopOperation``1(Microsoft.ApplicationInsights.TelemetryClient,Microsoft.ApplicationInsights.Extensibility.IOperationHolder{``0})
-  parent: Microsoft.ApplicationInsights.TelemetryClientExtensions
-  definition: Microsoft.ApplicationInsights.TelemetryClientExtensions.StopOperation``1(Microsoft.ApplicationInsights.TelemetryClient,Microsoft.ApplicationInsights.Extensibility.IOperationHolder{``0})
-  name: StopOperation<T>(IOperationHolder<T>)
-  nameWithType: TelemetryClientExtensions.StopOperation<T>(IOperationHolder<T>)
-  fullName: Microsoft.ApplicationInsights.TelemetryClientExtensions.StopOperation<T>(Microsoft.ApplicationInsights.Extensibility.IOperationHolder<T>)
-  nameWithType.vb: TelemetryClientExtensions.StopOperation(Of T)(IOperationHolder(Of T))
-  fullname.vb: Microsoft.ApplicationInsights.TelemetryClientExtensions.StopOperation(Of T)(Microsoft.ApplicationInsights.Extensibility.IOperationHolder(Of T))
-  name.vb: StopOperation(Of T)(IOperationHolder(Of T))
-  spec.csharp:
-  - uid: Microsoft.ApplicationInsights.TelemetryClientExtensions.StopOperation``1(Microsoft.ApplicationInsights.Extensibility.IOperationHolder{``0})
-    name: StopOperation<T>
-    nameWithType: TelemetryClientExtensions.StopOperation<T>
-    fullName: Microsoft.ApplicationInsights.TelemetryClientExtensions.StopOperation<T>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.ApplicationInsights.Extensibility.IOperationHolder`1
-    name: IOperationHolder
-    nameWithType: IOperationHolder
-    fullName: Microsoft.ApplicationInsights.Extensibility.IOperationHolder
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.ApplicationInsights.TelemetryClientExtensions.StopOperation``1(Microsoft.ApplicationInsights.Extensibility.IOperationHolder{``0})
-    name: StopOperation(Of T)
-    nameWithType: TelemetryClientExtensions.StopOperation(Of T)
-    fullName: Microsoft.ApplicationInsights.TelemetryClientExtensions.StopOperation(Of T)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.ApplicationInsights.Extensibility.IOperationHolder`1
-    name: IOperationHolder
-    nameWithType: IOperationHolder
-    fullName: Microsoft.ApplicationInsights.Extensibility.IOperationHolder
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: )
-    nameWithType: )
-    fullName: )
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.ApplicationInsights.TelemetryClientExtensions.StartOperation``1(Microsoft.ApplicationInsights.TelemetryClient,System.String)
-  commentId: M:Microsoft.ApplicationInsights.TelemetryClientExtensions.StartOperation``1(Microsoft.ApplicationInsights.TelemetryClient,System.String)
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
   isExternal: true
-  name: StartOperation<T>(TelemetryClient, String)
-  nameWithType: TelemetryClientExtensions.StartOperation<T>(TelemetryClient, String)
-  fullName: Microsoft.ApplicationInsights.TelemetryClientExtensions.StartOperation<T>(Microsoft.ApplicationInsights.TelemetryClient, System.String)
-  nameWithType.vb: TelemetryClientExtensions.StartOperation(Of T)(TelemetryClient, String)
-  fullname.vb: Microsoft.ApplicationInsights.TelemetryClientExtensions.StartOperation(Of T)(Microsoft.ApplicationInsights.TelemetryClient, System.String)
-  name.vb: StartOperation(Of T)(TelemetryClient, String)
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
   spec.csharp:
-  - uid: Microsoft.ApplicationInsights.TelemetryClientExtensions.StartOperation``1(Microsoft.ApplicationInsights.TelemetryClient,System.String)
-    name: StartOperation<T>
-    nameWithType: TelemetryClientExtensions.StartOperation<T>
-    fullName: Microsoft.ApplicationInsights.TelemetryClientExtensions.StartOperation<T>
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.ApplicationInsights.TelemetryClient
-    name: TelemetryClient
-    nameWithType: TelemetryClient
-    fullName: Microsoft.ApplicationInsights.TelemetryClient
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.ApplicationInsights.TelemetryClientExtensions.StartOperation``1(Microsoft.ApplicationInsights.TelemetryClient,System.String)
-    name: StartOperation(Of T)
-    nameWithType: TelemetryClientExtensions.StartOperation(Of T)
-    fullName: Microsoft.ApplicationInsights.TelemetryClientExtensions.StartOperation(Of T)
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.ApplicationInsights.TelemetryClient
-    name: TelemetryClient
-    nameWithType: TelemetryClient
-    fullName: Microsoft.ApplicationInsights.TelemetryClient
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.ApplicationInsights.TelemetryClientExtensions
-  commentId: T:Microsoft.ApplicationInsights.TelemetryClientExtensions
-  parent: Microsoft.ApplicationInsights
-  isExternal: false
-  name: TelemetryClientExtensions
-  nameWithType: TelemetryClientExtensions
-  fullName: Microsoft.ApplicationInsights.TelemetryClientExtensions
-- uid: Microsoft.ApplicationInsights.TelemetryClientExtensions.StopOperation``1(Microsoft.ApplicationInsights.TelemetryClient,Microsoft.ApplicationInsights.Extensibility.IOperationHolder{``0})
-  commentId: M:Microsoft.ApplicationInsights.TelemetryClientExtensions.StopOperation``1(Microsoft.ApplicationInsights.TelemetryClient,Microsoft.ApplicationInsights.Extensibility.IOperationHolder{``0})
-  isExternal: false
-  name: StopOperation<T>(TelemetryClient, IOperationHolder<T>)
-  nameWithType: TelemetryClientExtensions.StopOperation<T>(TelemetryClient, IOperationHolder<T>)
-  fullName: Microsoft.ApplicationInsights.TelemetryClientExtensions.StopOperation<T>(Microsoft.ApplicationInsights.TelemetryClient, Microsoft.ApplicationInsights.Extensibility.IOperationHolder<T>)
-  nameWithType.vb: TelemetryClientExtensions.StopOperation(Of T)(TelemetryClient, IOperationHolder(Of T))
-  fullname.vb: Microsoft.ApplicationInsights.TelemetryClientExtensions.StopOperation(Of T)(Microsoft.ApplicationInsights.TelemetryClient, Microsoft.ApplicationInsights.Extensibility.IOperationHolder(Of T))
-  name.vb: StopOperation(Of T)(TelemetryClient, IOperationHolder(Of T))
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
   spec.csharp:
-  - uid: Microsoft.ApplicationInsights.TelemetryClientExtensions.StopOperation``1(Microsoft.ApplicationInsights.TelemetryClient,Microsoft.ApplicationInsights.Extensibility.IOperationHolder{``0})
-    name: StopOperation<T>
-    nameWithType: TelemetryClientExtensions.StopOperation<T>
-    fullName: Microsoft.ApplicationInsights.TelemetryClientExtensions.StopOperation<T>
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.ApplicationInsights.TelemetryClient
-    name: TelemetryClient
-    nameWithType: TelemetryClient
-    fullName: Microsoft.ApplicationInsights.TelemetryClient
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Microsoft.ApplicationInsights.Extensibility.IOperationHolder`1
-    name: IOperationHolder
-    nameWithType: IOperationHolder
-    fullName: Microsoft.ApplicationInsights.Extensibility.IOperationHolder
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.ApplicationInsights.TelemetryClientExtensions.StopOperation``1(Microsoft.ApplicationInsights.TelemetryClient,Microsoft.ApplicationInsights.Extensibility.IOperationHolder{``0})
-    name: StopOperation(Of T)
-    nameWithType: TelemetryClientExtensions.StopOperation(Of T)
-    fullName: Microsoft.ApplicationInsights.TelemetryClientExtensions.StopOperation(Of T)
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.ApplicationInsights.TelemetryClient
-    name: TelemetryClient
-    nameWithType: TelemetryClient
-    fullName: Microsoft.ApplicationInsights.TelemetryClient
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Microsoft.ApplicationInsights.Extensibility.IOperationHolder`1
-    name: IOperationHolder
-    nameWithType: IOperationHolder
-    fullName: Microsoft.ApplicationInsights.Extensibility.IOperationHolder
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: T
-    nameWithType: T
-    fullName: T
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
   - name: )
     nameWithType: )
     fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: false
+  name: System
+  nameWithType: System
+  fullName: System
 - uid: Microsoft.ApplicationInsights.TelemetryClient
   commentId: T:Microsoft.ApplicationInsights.TelemetryClient
   parent: Microsoft.ApplicationInsights
@@ -1368,6 +1356,8 @@ references:
   name: TelemetryClient
   nameWithType: TelemetryClient.TelemetryClient
   fullName: Microsoft.ApplicationInsights.TelemetryClient.TelemetryClient
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
 - uid: Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration
   commentId: T:Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration
   parent: Microsoft.ApplicationInsights.Extensibility
@@ -1414,6 +1404,8 @@ references:
   nameWithType: TelemetryClient.InstrumentationKey
   fullName: Microsoft.ApplicationInsights.TelemetryClient.InstrumentationKey
 - uid: System.String
+  commentId: T:System.String
+  parent: System
   isExternal: true
   name: String
   nameWithType: String
@@ -1431,6 +1423,8 @@ references:
   nameWithType: TelemetryClient.IsEnabled
   fullName: Microsoft.ApplicationInsights.TelemetryClient.IsEnabled
 - uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
   isExternal: true
   name: Boolean
   nameWithType: Boolean
@@ -1448,20 +1442,21 @@ references:
   name: TrackEvent
   nameWithType: TelemetryClient.TrackEvent
   fullName: Microsoft.ApplicationInsights.TelemetryClient.TrackEvent
-- uid: IDictionary{System.String,System.String}
-  commentId: '!:IDictionary{System.String,System.String}'
-  definition: IDictionary`2
+- uid: System.Collections.Generic.IDictionary{System.String,System.String}
+  commentId: T:System.Collections.Generic.IDictionary{System.String,System.String}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IDictionary`2
   name: IDictionary<String, String>
   nameWithType: IDictionary<String, String>
-  fullName: IDictionary<System.String, System.String>
+  fullName: System.Collections.Generic.IDictionary<System.String, System.String>
   nameWithType.vb: IDictionary(Of String, String)
-  fullname.vb: IDictionary(Of System.String, System.String)
+  fullname.vb: System.Collections.Generic.IDictionary(Of System.String, System.String)
   name.vb: IDictionary(Of String, String)
   spec.csharp:
-  - uid: IDictionary`2
+  - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
     nameWithType: IDictionary
-    fullName: IDictionary
+    fullName: System.Collections.Generic.IDictionary
     isExternal: true
   - name: <
     nameWithType: <
@@ -1483,10 +1478,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: IDictionary`2
+  - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
     nameWithType: IDictionary
-    fullName: IDictionary
+    fullName: System.Collections.Generic.IDictionary
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -1507,20 +1502,21 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: IDictionary{System.String,System.Double}
-  commentId: '!:IDictionary{System.String,System.Double}'
-  definition: IDictionary`2
+- uid: System.Collections.Generic.IDictionary{System.String,System.Double}
+  commentId: T:System.Collections.Generic.IDictionary{System.String,System.Double}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IDictionary`2
   name: IDictionary<String, Double>
   nameWithType: IDictionary<String, Double>
-  fullName: IDictionary<System.String, System.Double>
+  fullName: System.Collections.Generic.IDictionary<System.String, System.Double>
   nameWithType.vb: IDictionary(Of String, Double)
-  fullname.vb: IDictionary(Of System.String, System.Double)
+  fullname.vb: System.Collections.Generic.IDictionary(Of System.String, System.Double)
   name.vb: IDictionary(Of String, Double)
   spec.csharp:
-  - uid: IDictionary`2
+  - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
     nameWithType: IDictionary
-    fullName: IDictionary
+    fullName: System.Collections.Generic.IDictionary
     isExternal: true
   - name: <
     nameWithType: <
@@ -1542,10 +1538,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: IDictionary`2
+  - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
     nameWithType: IDictionary
-    fullName: IDictionary
+    fullName: System.Collections.Generic.IDictionary
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -1566,56 +1562,63 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: IDictionary`2
+- uid: System.Collections.Generic.IDictionary`2
+  commentId: T:System.Collections.Generic.IDictionary`2
   isExternal: true
-  name: IDictionary<, >
-  nameWithType: IDictionary<, >
-  fullName: IDictionary<, >
-  nameWithType.vb: IDictionary(Of , )
-  fullname.vb: IDictionary(Of , )
-  name.vb: IDictionary(Of , )
+  name: IDictionary<TKey, TValue>
+  nameWithType: IDictionary<TKey, TValue>
+  fullName: System.Collections.Generic.IDictionary<TKey, TValue>
+  nameWithType.vb: IDictionary(Of TKey, TValue)
+  fullname.vb: System.Collections.Generic.IDictionary(Of TKey, TValue)
+  name.vb: IDictionary(Of TKey, TValue)
   spec.csharp:
-  - uid: IDictionary`2
+  - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
     nameWithType: IDictionary
-    fullName: IDictionary
+    fullName: System.Collections.Generic.IDictionary
     isExternal: true
   - name: <
     nameWithType: <
     fullName: <
-  - name: ''
-    nameWithType: ''
-    fullName: ''
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - name: ''
-    nameWithType: ''
-    fullName: ''
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: IDictionary`2
+  - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
     nameWithType: IDictionary
-    fullName: IDictionary
+    fullName: System.Collections.Generic.IDictionary
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: ''
-    nameWithType: ''
-    fullName: ''
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - name: ''
-    nameWithType: ''
-    fullName: ''
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: false
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
 - uid: Microsoft.ApplicationInsights.TelemetryClient.TrackEvent(Microsoft.ApplicationInsights.DataContracts.EventTelemetry)
   commentId: M:Microsoft.ApplicationInsights.TelemetryClient.TrackEvent(Microsoft.ApplicationInsights.DataContracts.EventTelemetry)
 - uid: Microsoft.ApplicationInsights.TelemetryClient.TrackTrace*
@@ -1654,6 +1657,8 @@ references:
   nameWithType: TelemetryClient.TrackMetric
   fullName: Microsoft.ApplicationInsights.TelemetryClient.TrackMetric
 - uid: System.Double
+  commentId: T:System.Double
+  parent: System
   isExternal: true
   name: Double
   nameWithType: Double
@@ -1673,11 +1678,13 @@ references:
   name: TrackException
   nameWithType: TelemetryClient.TrackException
   fullName: Microsoft.ApplicationInsights.TelemetryClient.TrackException
-- uid: Exception
+- uid: System.Exception
+  commentId: T:System.Exception
+  parent: System
   isExternal: true
   name: Exception
   nameWithType: Exception
-  fullName: Exception
+  fullName: System.Exception
 - uid: Microsoft.ApplicationInsights.TelemetryClient.TrackException(Microsoft.ApplicationInsights.DataContracts.ExceptionTelemetry)
   commentId: M:Microsoft.ApplicationInsights.TelemetryClient.TrackException(Microsoft.ApplicationInsights.DataContracts.ExceptionTelemetry)
 - uid: Microsoft.ApplicationInsights.TelemetryClient.TrackDependency*
@@ -1686,16 +1693,20 @@ references:
   name: TrackDependency
   nameWithType: TelemetryClient.TrackDependency
   fullName: Microsoft.ApplicationInsights.TelemetryClient.TrackDependency
-- uid: DateTimeOffset
+- uid: System.DateTimeOffset
+  commentId: T:System.DateTimeOffset
+  parent: System
   isExternal: true
   name: DateTimeOffset
   nameWithType: DateTimeOffset
-  fullName: DateTimeOffset
-- uid: TimeSpan
+  fullName: System.DateTimeOffset
+- uid: System.TimeSpan
+  commentId: T:System.TimeSpan
+  parent: System
   isExternal: true
   name: TimeSpan
   nameWithType: TimeSpan
-  fullName: TimeSpan
+  fullName: System.TimeSpan
 - uid: Microsoft.ApplicationInsights.DataContracts.DependencyTelemetry
   commentId: T:Microsoft.ApplicationInsights.DataContracts.DependencyTelemetry
   parent: Microsoft.ApplicationInsights.DataContracts
@@ -1720,18 +1731,6 @@ references:
   fullName: Microsoft.ApplicationInsights.DataContracts.AvailabilityTelemetry
 - uid: Microsoft.ApplicationInsights.TelemetryClient.TrackAvailability(Microsoft.ApplicationInsights.DataContracts.AvailabilityTelemetry)
   commentId: M:Microsoft.ApplicationInsights.TelemetryClient.TrackAvailability(Microsoft.ApplicationInsights.DataContracts.AvailabilityTelemetry)
-- uid: Microsoft.ApplicationInsights.TelemetryClient.Track*
-  commentId: Overload:Microsoft.ApplicationInsights.TelemetryClient.Track
-  isExternal: false
-  name: Track
-  nameWithType: TelemetryClient.Track
-  fullName: Microsoft.ApplicationInsights.TelemetryClient.Track
-- uid: Microsoft.ApplicationInsights.TelemetryClient.Initialize*
-  commentId: Overload:Microsoft.ApplicationInsights.TelemetryClient.Initialize
-  isExternal: false
-  name: Initialize
-  nameWithType: TelemetryClient.Initialize
-  fullName: Microsoft.ApplicationInsights.TelemetryClient.Initialize
 - uid: Microsoft.ApplicationInsights.TelemetryClient.TrackPageView*
   commentId: Overload:Microsoft.ApplicationInsights.TelemetryClient.TrackPageView
   isExternal: false
