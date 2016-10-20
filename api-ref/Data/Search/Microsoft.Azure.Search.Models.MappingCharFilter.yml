@@ -30,8 +30,13 @@ items:
   summary: "\nA character filter that applies mappings defined with the mappings\noption. Matching is greedy (longest pattern matching at a given point\nwins). Replacement is allowed to be the empty string. This character\nfilter is implemented using Apache Lucene.\n<a href=\"https://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/charfilter/MappingCharFilter.html\"></a>\n"
   example: []
   syntax:
-    content: 'public class MappingCharFilter : CharFilter'
+    content: >-
+      [JsonObject("#Microsoft.Azure.Search.MappingCharFilter")]
+
+      public class MappingCharFilter : CharFilter
     content.vb: >-
+      <JsonObject("#Microsoft.Azure.Search.MappingCharFilter")>
+
       Public Class MappingCharFilter
           Inherits CharFilter
   inheritance:
@@ -46,6 +51,12 @@ items:
   - System.Object.GetHashCode
   - System.Object.GetType
   - System.Object.MemberwiseClone
+  attributes:
+  - type: Newtonsoft.Json.JsonObjectAttribute
+    ctor: Newtonsoft.Json.JsonObjectAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: '#Microsoft.Azure.Search.MappingCharFilter'
   modifiers.csharp:
   - public
   - class
@@ -149,12 +160,26 @@ items:
   summary: "\nGets or sets a list of mappings of the following format: \"a=&gt;b\"\n(all occurrences of the character \"a\" will be replaced with\ncharacter \"b\").\n"
   example: []
   syntax:
-    content: public IList<string> Mappings { get; set; }
-    content.vb: Public Property Mappings As IList(Of String)
+    content: >-
+      [JsonProperty(PropertyName = "mappings")]
+
+      public IList<string> Mappings { get; set; }
+    content.vb: >-
+      <JsonProperty(PropertyName:="mappings")>
+
+      Public Property Mappings As IList(Of String)
     parameters: []
     return:
       type: System.Collections.Generic.IList{System.String}
   overload: Microsoft.Azure.Search.Models.MappingCharFilter.Mappings*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: PropertyName
+      type: System.String
+      value: mappings
   modifiers.csharp:
   - public
   - get
@@ -190,6 +215,10 @@ items:
     content.vb: Public Overrides Sub Validate
   overridden: Microsoft.Azure.Search.Models.CharFilter.Validate
   overload: Microsoft.Azure.Search.Models.MappingCharFilter.Validate*
+  exceptions:
+  - type: Microsoft.Rest.ValidationException
+    commentId: T:Microsoft.Rest.ValidationException
+    description: "\nThrown if validation fails\n"
   modifiers.csharp:
   - public
   - override
@@ -652,3 +681,5 @@ references:
   name: Validate
   nameWithType: MappingCharFilter.Validate
   fullName: Microsoft.Azure.Search.Models.MappingCharFilter.Validate
+- uid: Microsoft.Rest.ValidationException
+  commentId: T:Microsoft.Rest.ValidationException

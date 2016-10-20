@@ -30,8 +30,13 @@ items:
   summary: "\nProvides the ability to override other stemming filters with custom\ndictionary-based stemming. Any dictionary-stemmed terms will be\nmarked as keywords so that they will not be stemmed with stemmers\ndown the chain. Must be placed before any stemming filters. This\ntoken filter is implemented using Apache Lucene.\n<a href=\"http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/StemmerOverrideFilter.html\"></a>\n"
   example: []
   syntax:
-    content: 'public class StemmerOverrideTokenFilter : TokenFilter'
+    content: >-
+      [JsonObject("#Microsoft.Azure.Search.StemmerOverrideTokenFilter")]
+
+      public class StemmerOverrideTokenFilter : TokenFilter
     content.vb: >-
+      <JsonObject("#Microsoft.Azure.Search.StemmerOverrideTokenFilter")>
+
       Public Class StemmerOverrideTokenFilter
           Inherits TokenFilter
   inheritance:
@@ -46,6 +51,12 @@ items:
   - System.Object.GetHashCode
   - System.Object.GetType
   - System.Object.MemberwiseClone
+  attributes:
+  - type: Newtonsoft.Json.JsonObjectAttribute
+    ctor: Newtonsoft.Json.JsonObjectAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: '#Microsoft.Azure.Search.StemmerOverrideTokenFilter'
   modifiers.csharp:
   - public
   - class
@@ -149,12 +160,26 @@ items:
   summary: "\nGets or sets a list of stemming rules in the following format:\n\"word =&gt; stem\", for example: \"ran =&gt; run\"\n"
   example: []
   syntax:
-    content: public IList<string> Rules { get; set; }
-    content.vb: Public Property Rules As IList(Of String)
+    content: >-
+      [JsonProperty(PropertyName = "rules")]
+
+      public IList<string> Rules { get; set; }
+    content.vb: >-
+      <JsonProperty(PropertyName:="rules")>
+
+      Public Property Rules As IList(Of String)
     parameters: []
     return:
       type: System.Collections.Generic.IList{System.String}
   overload: Microsoft.Azure.Search.Models.StemmerOverrideTokenFilter.Rules*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: PropertyName
+      type: System.String
+      value: rules
   modifiers.csharp:
   - public
   - get
@@ -190,6 +215,10 @@ items:
     content.vb: Public Overrides Sub Validate
   overridden: Microsoft.Azure.Search.Models.TokenFilter.Validate
   overload: Microsoft.Azure.Search.Models.StemmerOverrideTokenFilter.Validate*
+  exceptions:
+  - type: Microsoft.Rest.ValidationException
+    commentId: T:Microsoft.Rest.ValidationException
+    description: "\nThrown if validation fails\n"
   modifiers.csharp:
   - public
   - override
@@ -652,3 +681,5 @@ references:
   name: Validate
   nameWithType: StemmerOverrideTokenFilter.Validate
   fullName: Microsoft.Azure.Search.Models.StemmerOverrideTokenFilter.Validate
+- uid: Microsoft.Rest.ValidationException
+  commentId: T:Microsoft.Rest.ValidationException

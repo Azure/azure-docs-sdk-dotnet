@@ -38,19 +38,29 @@ items:
   summary: "\nDescription of a restore request\n"
   example: []
   syntax:
-    content: 'public class RestoreRequest : Resource'
+    content: 'public class RestoreRequest : Resource, IResource'
     content.vb: >-
       Public Class RestoreRequest
           Inherits Resource
+          Implements IResource
   inheritance:
   - System.Object
   - Microsoft.Azure.Management.WebSites.Models.Resource
+  implements:
+  - Microsoft.Rest.Azure.IResource
   inheritedMembers:
   - Microsoft.Azure.Management.WebSites.Models.Resource.Id
   - Microsoft.Azure.Management.WebSites.Models.Resource.Name
   - Microsoft.Azure.Management.WebSites.Models.Resource.Location
   - Microsoft.Azure.Management.WebSites.Models.Resource.Type
   - Microsoft.Azure.Management.WebSites.Models.Resource.Tags
+  - System.Object.ToString
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
   modifiers.csharp:
   - public
   - class
@@ -178,12 +188,26 @@ items:
   summary: "\nSAS URL to the container\n"
   example: []
   syntax:
-    content: public string StorageAccountUrl { get; set; }
-    content.vb: Public Property StorageAccountUrl As String
+    content: >-
+      [JsonProperty(PropertyName = "properties.storageAccountUrl")]
+
+      public string StorageAccountUrl { get; set; }
+    content.vb: >-
+      <JsonProperty(PropertyName:="properties.storageAccountUrl")>
+
+      Public Property StorageAccountUrl As String
     parameters: []
     return:
       type: System.String
   overload: Microsoft.Azure.Management.WebSites.Models.RestoreRequest.StorageAccountUrl*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: PropertyName
+      type: System.String
+      value: properties.storageAccountUrl
   modifiers.csharp:
   - public
   - get
@@ -215,12 +239,26 @@ items:
   summary: "\nName of a blob which contains the backup\n"
   example: []
   syntax:
-    content: public string BlobName { get; set; }
-    content.vb: Public Property BlobName As String
+    content: >-
+      [JsonProperty(PropertyName = "properties.blobName")]
+
+      public string BlobName { get; set; }
+    content.vb: >-
+      <JsonProperty(PropertyName:="properties.blobName")>
+
+      Public Property BlobName As String
     parameters: []
     return:
       type: System.String
   overload: Microsoft.Azure.Management.WebSites.Models.RestoreRequest.BlobName*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: PropertyName
+      type: System.String
+      value: properties.blobName
   modifiers.csharp:
   - public
   - get
@@ -252,12 +290,26 @@ items:
   summary: "\nTrue if the restore operation can overwrite target site. \"True\"\nneeded if trying to restore over an existing site.\n"
   example: []
   syntax:
-    content: public bool ? Overwrite { get; set; }
-    content.vb: Public Property Overwrite As Boolean?
+    content: >-
+      [JsonProperty(PropertyName = "properties.overwrite")]
+
+      public bool ? Overwrite { get; set; }
+    content.vb: >-
+      <JsonProperty(PropertyName:="properties.overwrite")>
+
+      Public Property Overwrite As Boolean?
     parameters: []
     return:
       type: System.Nullable{System.Boolean}
   overload: Microsoft.Azure.Management.WebSites.Models.RestoreRequest.Overwrite*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: PropertyName
+      type: System.String
+      value: properties.overwrite
   modifiers.csharp:
   - public
   - get
@@ -289,12 +341,26 @@ items:
   summary: "\nName of a site (Web App)\n"
   example: []
   syntax:
-    content: public string SiteName { get; set; }
-    content.vb: Public Property SiteName As String
+    content: >-
+      [JsonProperty(PropertyName = "properties.siteName")]
+
+      public string SiteName { get; set; }
+    content.vb: >-
+      <JsonProperty(PropertyName:="properties.siteName")>
+
+      Public Property SiteName As String
     parameters: []
     return:
       type: System.String
   overload: Microsoft.Azure.Management.WebSites.Models.RestoreRequest.SiteName*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: PropertyName
+      type: System.String
+      value: properties.siteName
   modifiers.csharp:
   - public
   - get
@@ -326,12 +392,26 @@ items:
   summary: "\nCollection of databses which should be restored. This list has to\nmatch the list of databases included in the backup.\n"
   example: []
   syntax:
-    content: public IList<DatabaseBackupSetting> Databases { get; set; }
-    content.vb: Public Property Databases As IList(Of DatabaseBackupSetting)
+    content: >-
+      [JsonProperty(PropertyName = "properties.databases")]
+
+      public IList<DatabaseBackupSetting> Databases { get; set; }
+    content.vb: >-
+      <JsonProperty(PropertyName:="properties.databases")>
+
+      Public Property Databases As IList(Of DatabaseBackupSetting)
     parameters: []
     return:
       type: System.Collections.Generic.IList{Microsoft.Azure.Management.WebSites.Models.DatabaseBackupSetting}
   overload: Microsoft.Azure.Management.WebSites.Models.RestoreRequest.Databases*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: PropertyName
+      type: System.String
+      value: properties.databases
   modifiers.csharp:
   - public
   - get
@@ -363,12 +443,26 @@ items:
   summary: "\nChanges a logic when restoring a site with custom domains. If\n\"true\", custom domains are removed automatically. If \"false\",\ncustom domains are added to\nthe site object when it is being restored, but that\nmight fail due to conflicts during the operation.\n"
   example: []
   syntax:
-    content: public bool ? IgnoreConflictingHostNames { get; set; }
-    content.vb: Public Property IgnoreConflictingHostNames As Boolean?
+    content: >-
+      [JsonProperty(PropertyName = "properties.ignoreConflictingHostNames")]
+
+      public bool ? IgnoreConflictingHostNames { get; set; }
+    content.vb: >-
+      <JsonProperty(PropertyName:="properties.ignoreConflictingHostNames")>
+
+      Public Property IgnoreConflictingHostNames As Boolean?
     parameters: []
     return:
       type: System.Nullable{System.Boolean}
   overload: Microsoft.Azure.Management.WebSites.Models.RestoreRequest.IgnoreConflictingHostNames*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: PropertyName
+      type: System.String
+      value: properties.ignoreConflictingHostNames
   modifiers.csharp:
   - public
   - get
@@ -400,12 +494,26 @@ items:
   summary: "\nOperation type. Possible values for this property include:\n'Default', 'Clone', 'Relocation'.\n"
   example: []
   syntax:
-    content: public BackupRestoreOperationType? OperationType { get; set; }
-    content.vb: Public Property OperationType As BackupRestoreOperationType?
+    content: >-
+      [JsonProperty(PropertyName = "properties.operationType")]
+
+      public BackupRestoreOperationType? OperationType { get; set; }
+    content.vb: >-
+      <JsonProperty(PropertyName:="properties.operationType")>
+
+      Public Property OperationType As BackupRestoreOperationType?
     parameters: []
     return:
       type: System.Nullable{Microsoft.Azure.Management.WebSites.Models.BackupRestoreOperationType}
   overload: Microsoft.Azure.Management.WebSites.Models.RestoreRequest.OperationType*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: PropertyName
+      type: System.String
+      value: properties.operationType
   modifiers.csharp:
   - public
   - get
@@ -437,12 +545,26 @@ items:
   summary: "\nGets or sets a flag showing if SiteConfig.ConnectionStrings should\nbe set in new site\n"
   example: []
   syntax:
-    content: public bool ? AdjustConnectionStrings { get; set; }
-    content.vb: Public Property AdjustConnectionStrings As Boolean?
+    content: >-
+      [JsonProperty(PropertyName = "properties.adjustConnectionStrings")]
+
+      public bool ? AdjustConnectionStrings { get; set; }
+    content.vb: >-
+      <JsonProperty(PropertyName:="properties.adjustConnectionStrings")>
+
+      Public Property AdjustConnectionStrings As Boolean?
     parameters: []
     return:
       type: System.Nullable{System.Boolean}
   overload: Microsoft.Azure.Management.WebSites.Models.RestoreRequest.AdjustConnectionStrings*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: PropertyName
+      type: System.String
+      value: properties.adjustConnectionStrings
   modifiers.csharp:
   - public
   - get
@@ -474,12 +596,26 @@ items:
   summary: "\nApp Service Environment name, if needed (only when restoring a\nsite to an App Service Environment)\n"
   example: []
   syntax:
-    content: public string HostingEnvironment { get; set; }
-    content.vb: Public Property HostingEnvironment As String
+    content: >-
+      [JsonProperty(PropertyName = "properties.hostingEnvironment")]
+
+      public string HostingEnvironment { get; set; }
+    content.vb: >-
+      <JsonProperty(PropertyName:="properties.hostingEnvironment")>
+
+      Public Property HostingEnvironment As String
     parameters: []
     return:
       type: System.String
   overload: Microsoft.Azure.Management.WebSites.Models.RestoreRequest.HostingEnvironment*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: PropertyName
+      type: System.String
+      value: properties.hostingEnvironment
   modifiers.csharp:
   - public
   - get
@@ -542,6 +678,13 @@ references:
   name: Resource
   nameWithType: Resource
   fullName: Microsoft.Azure.Management.WebSites.Models.Resource
+- uid: Microsoft.Rest.Azure.IResource
+  commentId: T:Microsoft.Rest.Azure.IResource
+  parent: Microsoft.Rest.Azure
+  isExternal: false
+  name: IResource
+  nameWithType: IResource
+  fullName: Microsoft.Rest.Azure.IResource
 - uid: Microsoft.Azure.Management.WebSites.Models.Resource.Id
   commentId: P:Microsoft.Azure.Management.WebSites.Models.Resource.Id
   parent: Microsoft.Azure.Management.WebSites.Models.Resource
@@ -577,12 +720,297 @@ references:
   name: Tags
   nameWithType: Resource.Tags
   fullName: Microsoft.Azure.Management.WebSites.Models.Resource.Tags
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System
   commentId: N:System
   isExternal: false
   name: System
   nameWithType: System
   fullName: System
+- uid: Microsoft.Rest.Azure
+  commentId: N:Microsoft.Rest.Azure
+  isExternal: false
+  name: Microsoft.Rest.Azure
+  nameWithType: Microsoft.Rest.Azure
+  fullName: Microsoft.Rest.Azure
 - uid: Microsoft.Azure.Management.WebSites.Models.RestoreRequest.#ctor*
   commentId: Overload:Microsoft.Azure.Management.WebSites.Models.RestoreRequest.#ctor
   isExternal: false

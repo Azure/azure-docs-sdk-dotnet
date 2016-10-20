@@ -146,12 +146,26 @@ items:
   summary: "\nGets or sets the list of origins from which JavaScript code will\nbe granted access to your index. Can contain a list of hosts of\nthe form {protocol}://{fully-qualified-domain-name}[:{port#}], or\na single '*' to allow all origins (not recommended).\n"
   example: []
   syntax:
-    content: public IList<string> AllowedOrigins { get; set; }
-    content.vb: Public Property AllowedOrigins As IList(Of String)
+    content: >-
+      [JsonProperty(PropertyName = "allowedOrigins")]
+
+      public IList<string> AllowedOrigins { get; set; }
+    content.vb: >-
+      <JsonProperty(PropertyName:="allowedOrigins")>
+
+      Public Property AllowedOrigins As IList(Of String)
     parameters: []
     return:
       type: System.Collections.Generic.IList{System.String}
   overload: Microsoft.Azure.Search.Models.CorsOptions.AllowedOrigins*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: PropertyName
+      type: System.String
+      value: allowedOrigins
   modifiers.csharp:
   - public
   - get
@@ -183,12 +197,26 @@ items:
   summary: "\nGets or sets the duration for which browsers should cache CORS\npreflight responses. Defaults to 5 mintues.\n"
   example: []
   syntax:
-    content: public long ? MaxAgeInSeconds { get; set; }
-    content.vb: Public Property MaxAgeInSeconds As Long?
+    content: >-
+      [JsonProperty(PropertyName = "maxAgeInSeconds")]
+
+      public long ? MaxAgeInSeconds { get; set; }
+    content.vb: >-
+      <JsonProperty(PropertyName:="maxAgeInSeconds")>
+
+      Public Property MaxAgeInSeconds As Long?
     parameters: []
     return:
       type: System.Nullable{System.Int64}
   overload: Microsoft.Azure.Search.Models.CorsOptions.MaxAgeInSeconds*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: PropertyName
+      type: System.String
+      value: maxAgeInSeconds
   modifiers.csharp:
   - public
   - get
@@ -223,6 +251,10 @@ items:
     content: public virtual void Validate()
     content.vb: Public Overridable Sub Validate
   overload: Microsoft.Azure.Search.Models.CorsOptions.Validate*
+  exceptions:
+  - type: Microsoft.Rest.ValidationException
+    commentId: T:Microsoft.Rest.ValidationException
+    description: "\nThrown if validation fails\n"
   modifiers.csharp:
   - public
   - virtual
@@ -724,3 +756,5 @@ references:
   name: Validate
   nameWithType: CorsOptions.Validate
   fullName: Microsoft.Azure.Search.Models.CorsOptions.Validate
+- uid: Microsoft.Rest.ValidationException
+  commentId: T:Microsoft.Rest.ValidationException

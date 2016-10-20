@@ -28,8 +28,20 @@ items:
   summary: "\nDefines values for Kind.\n"
   example: []
   syntax:
-    content: public enum Kind
-    content.vb: Public Enum Kind
+    content: >-
+      [JsonConverter(typeof (StringEnumConverter))]
+
+      public enum Kind
+    content.vb: >-
+      <JsonConverter(GetType(StringEnumConverter))>
+
+      Public Enum Kind
+  attributes:
+  - type: Newtonsoft.Json.JsonConverterAttribute
+    ctor: Newtonsoft.Json.JsonConverterAttribute.#ctor(System.Type)
+    arguments:
+    - type: System.Type
+      value: Newtonsoft.Json.Converters.StringEnumConverter
   modifiers.csharp:
   - public
   - enum
@@ -59,9 +71,24 @@ items:
   - Microsoft.Azure.Management.Storage
   namespace: Microsoft.Azure.Management.Storage.Models
   syntax:
-    content: Storage = 0
+    content: >-
+      [EnumMember(Value = "Storage")]
+
+      Storage = 0
+    content.vb: >-
+      <EnumMember(Value:="Storage")>
+
+      Storage = 0
     return:
       type: Microsoft.Azure.Management.Storage.Models.Kind
+  attributes:
+  - type: System.Runtime.Serialization.EnumMemberAttribute
+    ctor: System.Runtime.Serialization.EnumMemberAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Value
+      type: System.String
+      value: Storage
   modifiers.csharp:
   - public
   - const
@@ -91,9 +118,24 @@ items:
   - Microsoft.Azure.Management.Storage
   namespace: Microsoft.Azure.Management.Storage.Models
   syntax:
-    content: BlobStorage = 1
+    content: >-
+      [EnumMember(Value = "BlobStorage")]
+
+      BlobStorage = 1
+    content.vb: >-
+      <EnumMember(Value:="BlobStorage")>
+
+      BlobStorage = 1
     return:
       type: Microsoft.Azure.Management.Storage.Models.Kind
+  attributes:
+  - type: System.Runtime.Serialization.EnumMemberAttribute
+    ctor: System.Runtime.Serialization.EnumMemberAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Value
+      type: System.String
+      value: BlobStorage
   modifiers.csharp:
   - public
   - const

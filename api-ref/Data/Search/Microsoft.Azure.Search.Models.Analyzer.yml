@@ -140,12 +140,26 @@ items:
   summary: "\nGets or sets the name of the analyzer. It must only contain\nletters, digits, spaces, dashes or underscores, can only start\nand end with alphanumeric characters, and is limited to 128\ncharacters.\n"
   example: []
   syntax:
-    content: public string Name { get; set; }
-    content.vb: Public Property Name As String
+    content: >-
+      [JsonProperty(PropertyName = "name")]
+
+      public string Name { get; set; }
+    content.vb: >-
+      <JsonProperty(PropertyName:="name")>
+
+      Public Property Name As String
     parameters: []
     return:
       type: System.String
   overload: Microsoft.Azure.Search.Models.Analyzer.Name*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: PropertyName
+      type: System.String
+      value: name
   modifiers.csharp:
   - public
   - get
@@ -180,6 +194,10 @@ items:
     content: public virtual void Validate()
     content.vb: Public Overridable Sub Validate
   overload: Microsoft.Azure.Search.Models.Analyzer.Validate*
+  exceptions:
+  - type: Microsoft.Rest.ValidationException
+    commentId: T:Microsoft.Rest.ValidationException
+    description: "\nThrown if validation fails\n"
   modifiers.csharp:
   - public
   - virtual
@@ -510,3 +528,5 @@ references:
   name: Validate
   nameWithType: Analyzer.Validate
   fullName: Microsoft.Azure.Search.Models.Analyzer.Validate
+- uid: Microsoft.Rest.ValidationException
+  commentId: T:Microsoft.Rest.ValidationException

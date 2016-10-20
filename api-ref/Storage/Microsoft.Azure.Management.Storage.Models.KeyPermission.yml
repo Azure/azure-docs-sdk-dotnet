@@ -28,8 +28,20 @@ items:
   summary: "\nDefines values for KeyPermission.\n"
   example: []
   syntax:
-    content: public enum KeyPermission
-    content.vb: Public Enum KeyPermission
+    content: >-
+      [JsonConverter(typeof (StringEnumConverter))]
+
+      public enum KeyPermission
+    content.vb: >-
+      <JsonConverter(GetType(StringEnumConverter))>
+
+      Public Enum KeyPermission
+  attributes:
+  - type: Newtonsoft.Json.JsonConverterAttribute
+    ctor: Newtonsoft.Json.JsonConverterAttribute.#ctor(System.Type)
+    arguments:
+    - type: System.Type
+      value: Newtonsoft.Json.Converters.StringEnumConverter
   modifiers.csharp:
   - public
   - enum
@@ -59,9 +71,24 @@ items:
   - Microsoft.Azure.Management.Storage
   namespace: Microsoft.Azure.Management.Storage.Models
   syntax:
-    content: READ = 0
+    content: >-
+      [EnumMember(Value = "READ")]
+
+      READ = 0
+    content.vb: >-
+      <EnumMember(Value:="READ")>
+
+      READ = 0
     return:
       type: Microsoft.Azure.Management.Storage.Models.KeyPermission
+  attributes:
+  - type: System.Runtime.Serialization.EnumMemberAttribute
+    ctor: System.Runtime.Serialization.EnumMemberAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Value
+      type: System.String
+      value: READ
   modifiers.csharp:
   - public
   - const
@@ -91,9 +118,24 @@ items:
   - Microsoft.Azure.Management.Storage
   namespace: Microsoft.Azure.Management.Storage.Models
   syntax:
-    content: FULL = 1
+    content: >-
+      [EnumMember(Value = "FULL")]
+
+      FULL = 1
+    content.vb: >-
+      <EnumMember(Value:="FULL")>
+
+      FULL = 1
     return:
       type: Microsoft.Azure.Management.Storage.Models.KeyPermission
+  attributes:
+  - type: System.Runtime.Serialization.EnumMemberAttribute
+    ctor: System.Runtime.Serialization.EnumMemberAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Value
+      type: System.String
+      value: FULL
   modifiers.csharp:
   - public
   - const

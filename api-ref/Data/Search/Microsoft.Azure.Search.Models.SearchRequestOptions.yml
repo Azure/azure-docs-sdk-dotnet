@@ -75,10 +75,14 @@ items:
   example: []
   syntax:
     content: >-
+      [JsonIgnore]
+
       [Obsolete("This property is deprecated. Please use ClientRequestId instead.")]
 
       public Guid? RequestId { get; set; }
     content.vb: >-
+      <JsonIgnore>
+
       <Obsolete("This property is deprecated. Please use ClientRequestId instead.")>
 
       Public Property RequestId As Guid?
@@ -87,6 +91,9 @@ items:
       type: System.Nullable{System.Guid}
   overload: Microsoft.Azure.Search.Models.SearchRequestOptions.RequestId*
   attributes:
+  - type: Newtonsoft.Json.JsonIgnoreAttribute
+    ctor: Newtonsoft.Json.JsonIgnoreAttribute.#ctor
+    arguments: []
   - type: System.ObsoleteAttribute
     ctor: System.ObsoleteAttribute.#ctor(System.String)
     arguments:
@@ -193,12 +200,26 @@ items:
   summary: "\nGets or sets the tracking ID sent with the request to help with\ndebugging.\n"
   example: []
   syntax:
-    content: public Guid? ClientRequestId { get; set; }
-    content.vb: Public Property ClientRequestId As Guid?
+    content: >-
+      [JsonProperty(PropertyName = "")]
+
+      public Guid? ClientRequestId { get; set; }
+    content.vb: >-
+      <JsonProperty(PropertyName:="")>
+
+      Public Property ClientRequestId As Guid?
     parameters: []
     return:
       type: System.Nullable{System.Guid}
   overload: Microsoft.Azure.Search.Models.SearchRequestOptions.ClientRequestId*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: PropertyName
+      type: System.String
+      value: ''
   modifiers.csharp:
   - public
   - get

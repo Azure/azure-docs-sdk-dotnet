@@ -28,8 +28,20 @@ items:
   summary: "\nDefines values for SkuName.\n"
   example: []
   syntax:
-    content: public enum SkuName
-    content.vb: Public Enum SkuName
+    content: >-
+      [JsonConverter(typeof (StringEnumConverter))]
+
+      public enum SkuName
+    content.vb: >-
+      <JsonConverter(GetType(StringEnumConverter))>
+
+      Public Enum SkuName
+  attributes:
+  - type: Newtonsoft.Json.JsonConverterAttribute
+    ctor: Newtonsoft.Json.JsonConverterAttribute.#ctor(System.Type)
+    arguments:
+    - type: System.Type
+      value: Newtonsoft.Json.Converters.StringEnumConverter
   modifiers.csharp:
   - public
   - enum
@@ -59,9 +71,24 @@ items:
   - Microsoft.Azure.Management.KeyVault
   namespace: Microsoft.Azure.Management.KeyVault.Models
   syntax:
-    content: Standard = 0
+    content: >-
+      [EnumMember(Value = "standard")]
+
+      Standard = 0
+    content.vb: >-
+      <EnumMember(Value:="standard")>
+
+      Standard = 0
     return:
       type: Microsoft.Azure.Management.KeyVault.Models.SkuName
+  attributes:
+  - type: System.Runtime.Serialization.EnumMemberAttribute
+    ctor: System.Runtime.Serialization.EnumMemberAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Value
+      type: System.String
+      value: standard
   modifiers.csharp:
   - public
   - const
@@ -91,9 +118,24 @@ items:
   - Microsoft.Azure.Management.KeyVault
   namespace: Microsoft.Azure.Management.KeyVault.Models
   syntax:
-    content: Premium = 1
+    content: >-
+      [EnumMember(Value = "premium")]
+
+      Premium = 1
+    content.vb: >-
+      <EnumMember(Value:="premium")>
+
+      Premium = 1
     return:
       type: Microsoft.Azure.Management.KeyVault.Models.SkuName
+  attributes:
+  - type: System.Runtime.Serialization.EnumMemberAttribute
+    ctor: System.Runtime.Serialization.EnumMemberAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Value
+      type: System.String
+      value: premium
   modifiers.csharp:
   - public
   - const

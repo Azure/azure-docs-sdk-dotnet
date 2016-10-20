@@ -28,8 +28,20 @@ items:
   summary: "\nDefines values for FileType.\n"
   example: []
   syntax:
-    content: public enum FileType
-    content.vb: Public Enum FileType
+    content: >-
+      [JsonConverter(typeof (StringEnumConverter))]
+
+      public enum FileType
+    content.vb: >-
+      <JsonConverter(GetType(StringEnumConverter))>
+
+      Public Enum FileType
+  attributes:
+  - type: Newtonsoft.Json.JsonConverterAttribute
+    ctor: Newtonsoft.Json.JsonConverterAttribute.#ctor(System.Type)
+    arguments:
+    - type: System.Type
+      value: Newtonsoft.Json.Converters.StringEnumConverter
   modifiers.csharp:
   - public
   - enum
@@ -59,9 +71,24 @@ items:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store.Models
   syntax:
-    content: FILE = 0
+    content: >-
+      [EnumMember(Value = "FILE")]
+
+      FILE = 0
+    content.vb: >-
+      <EnumMember(Value:="FILE")>
+
+      FILE = 0
     return:
       type: Microsoft.Azure.Management.DataLake.Store.Models.FileType
+  attributes:
+  - type: System.Runtime.Serialization.EnumMemberAttribute
+    ctor: System.Runtime.Serialization.EnumMemberAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Value
+      type: System.String
+      value: FILE
   modifiers.csharp:
   - public
   - const
@@ -91,9 +118,24 @@ items:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store.Models
   syntax:
-    content: DIRECTORY = 1
+    content: >-
+      [EnumMember(Value = "DIRECTORY")]
+
+      DIRECTORY = 1
+    content.vb: >-
+      <EnumMember(Value:="DIRECTORY")>
+
+      DIRECTORY = 1
     return:
       type: Microsoft.Azure.Management.DataLake.Store.Models.FileType
+  attributes:
+  - type: System.Runtime.Serialization.EnumMemberAttribute
+    ctor: System.Runtime.Serialization.EnumMemberAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Value
+      type: System.String
+      value: DIRECTORY
   modifiers.csharp:
   - public
   - const

@@ -5,14 +5,14 @@ items:
   id: FeatureClient
   parent: Microsoft.Azure.Management.ResourceManager
   children:
-  - Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(DelegatingHandler[])
-  - Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(HttpClientHandler,DelegatingHandler[])
-  - Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(ServiceClientCredentials,DelegatingHandler[])
-  - Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(ServiceClientCredentials,HttpClientHandler,DelegatingHandler[])
-  - Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(System.Uri,DelegatingHandler[])
-  - Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(System.Uri,HttpClientHandler,DelegatingHandler[])
-  - Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(System.Uri,ServiceClientCredentials,DelegatingHandler[])
-  - Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(System.Uri,ServiceClientCredentials,HttpClientHandler,DelegatingHandler[])
+  - Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(Microsoft.Rest.ServiceClientCredentials,System.Net.Http.DelegatingHandler[])
+  - Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(Microsoft.Rest.ServiceClientCredentials,System.Net.Http.HttpClientHandler,System.Net.Http.DelegatingHandler[])
+  - Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(System.Net.Http.DelegatingHandler[])
+  - Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(System.Net.Http.HttpClientHandler,System.Net.Http.DelegatingHandler[])
+  - Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(System.Uri,Microsoft.Rest.ServiceClientCredentials,System.Net.Http.DelegatingHandler[])
+  - Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(System.Uri,Microsoft.Rest.ServiceClientCredentials,System.Net.Http.HttpClientHandler,System.Net.Http.DelegatingHandler[])
+  - Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(System.Uri,System.Net.Http.DelegatingHandler[])
+  - Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(System.Uri,System.Net.Http.HttpClientHandler,System.Net.Http.DelegatingHandler[])
   - Microsoft.Azure.Management.ResourceManager.FeatureClient.AcceptLanguage
   - Microsoft.Azure.Management.ResourceManager.FeatureClient.ApiVersion
   - Microsoft.Azure.Management.ResourceManager.FeatureClient.BaseUri
@@ -51,9 +51,31 @@ items:
           Implements IFeatureClient, IDisposable, IAzureClient
   inheritance:
   - System.Object
+  - Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}
   implements:
   - Microsoft.Azure.Management.ResourceManager.IFeatureClient
   - System.IDisposable
+  - Microsoft.Rest.Azure.IAzureClient
+  inheritedMembers:
+  - Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}.FirstMessageHandler
+  - Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}.HttpClientHandler
+  - Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}.CreateRootHandler
+  - Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}.HttpClient
+  - Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}.UserAgent
+  - Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}.HttpMessageHandlers
+  - Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}.SetRetryPolicy(Microsoft.Rest.TransientFaultHandling.RetryPolicy)
+  - Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}.Dispose
+  - Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}.Dispose(System.Boolean)
+  - Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}.InitializeHttpClient(System.Net.Http.HttpClientHandler,System.Net.Http.DelegatingHandler[])
+  - Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}.SetUserAgent(System.String)
+  - Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}.SetUserAgent(System.String,System.String)
+  - System.Object.ToString
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
   modifiers.csharp:
   - public
   - class
@@ -128,10 +150,11 @@ items:
     content.vb: Public ReadOnly Property SerializationSettings As JsonSerializerSettings
     parameters: []
     return:
-      type: JsonSerializerSettings
+      type: Newtonsoft.Json.JsonSerializerSettings
   overload: Microsoft.Azure.Management.ResourceManager.FeatureClient.SerializationSettings*
   implements:
   - Microsoft.Azure.Management.ResourceManager.IFeatureClient.SerializationSettings
+  - Microsoft.Rest.Azure.IAzureClient.SerializationSettings
   modifiers.csharp:
   - public
   - get
@@ -167,10 +190,11 @@ items:
     content.vb: Public ReadOnly Property DeserializationSettings As JsonSerializerSettings
     parameters: []
     return:
-      type: JsonSerializerSettings
+      type: Newtonsoft.Json.JsonSerializerSettings
   overload: Microsoft.Azure.Management.ResourceManager.FeatureClient.DeserializationSettings*
   implements:
   - Microsoft.Azure.Management.ResourceManager.IFeatureClient.DeserializationSettings
+  - Microsoft.Rest.Azure.IAzureClient.DeserializationSettings
   modifiers.csharp:
   - public
   - get
@@ -206,10 +230,11 @@ items:
     content.vb: Public ReadOnly Property Credentials As ServiceClientCredentials
     parameters: []
     return:
-      type: ServiceClientCredentials
+      type: Microsoft.Rest.ServiceClientCredentials
   overload: Microsoft.Azure.Management.ResourceManager.FeatureClient.Credentials*
   implements:
   - Microsoft.Azure.Management.ResourceManager.IFeatureClient.Credentials
+  - Microsoft.Rest.Azure.IAzureClient.Credentials
   modifiers.csharp:
   - public
   - get
@@ -366,6 +391,7 @@ items:
   overload: Microsoft.Azure.Management.ResourceManager.FeatureClient.LongRunningOperationRetryTimeout*
   implements:
   - Microsoft.Azure.Management.ResourceManager.IFeatureClient.LongRunningOperationRetryTimeout
+  - Microsoft.Rest.Azure.IAzureClient.LongRunningOperationRetryTimeout
   modifiers.csharp:
   - public
   - get
@@ -405,6 +431,7 @@ items:
   overload: Microsoft.Azure.Management.ResourceManager.FeatureClient.GenerateClientRequestId*
   implements:
   - Microsoft.Azure.Management.ResourceManager.IFeatureClient.GenerateClientRequestId
+  - Microsoft.Rest.Azure.IAzureClient.GenerateClientRequestId
   modifiers.csharp:
   - public
   - get
@@ -450,16 +477,16 @@ items:
   - Public
   - Overridable
   - ReadOnly
-- uid: Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(DelegatingHandler[])
-  commentId: M:Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(DelegatingHandler[])
-  id: '#ctor(DelegatingHandler[])'
+- uid: Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(System.Net.Http.DelegatingHandler[])
+  commentId: M:Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(System.Net.Http.DelegatingHandler[])
+  id: '#ctor(System.Net.Http.DelegatingHandler[])'
   parent: Microsoft.Azure.Management.ResourceManager.FeatureClient
   langs:
   - csharp
   - vb
   name: FeatureClient(DelegatingHandler[])
   nameWithType: FeatureClient.FeatureClient(DelegatingHandler[])
-  fullName: Microsoft.Azure.Management.ResourceManager.FeatureClient.FeatureClient(DelegatingHandler[])
+  fullName: Microsoft.Azure.Management.ResourceManager.FeatureClient.FeatureClient(System.Net.Http.DelegatingHandler[])
   type: Constructor
   source:
     remote:
@@ -479,7 +506,7 @@ items:
     content.vb: Protected Sub New(ParamArray handlers As DelegatingHandler())
     parameters:
     - id: handlers
-      type: DelegatingHandler[]
+      type: System.Net.Http.DelegatingHandler[]
       description: "\nOptional. The delegating handlers to add to the http client pipeline.\n"
   overload: Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor*
   nameWithType.vb: FeatureClient.FeatureClient(DelegatingHandler())
@@ -487,18 +514,18 @@ items:
   - protected
   modifiers.vb:
   - Protected
-  fullName.vb: Microsoft.Azure.Management.ResourceManager.FeatureClient.FeatureClient(DelegatingHandler())
+  fullName.vb: Microsoft.Azure.Management.ResourceManager.FeatureClient.FeatureClient(System.Net.Http.DelegatingHandler())
   name.vb: FeatureClient(DelegatingHandler())
-- uid: Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(HttpClientHandler,DelegatingHandler[])
-  commentId: M:Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(HttpClientHandler,DelegatingHandler[])
-  id: '#ctor(HttpClientHandler,DelegatingHandler[])'
+- uid: Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(System.Net.Http.HttpClientHandler,System.Net.Http.DelegatingHandler[])
+  commentId: M:Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(System.Net.Http.HttpClientHandler,System.Net.Http.DelegatingHandler[])
+  id: '#ctor(System.Net.Http.HttpClientHandler,System.Net.Http.DelegatingHandler[])'
   parent: Microsoft.Azure.Management.ResourceManager.FeatureClient
   langs:
   - csharp
   - vb
   name: FeatureClient(HttpClientHandler, DelegatingHandler[])
   nameWithType: FeatureClient.FeatureClient(HttpClientHandler, DelegatingHandler[])
-  fullName: Microsoft.Azure.Management.ResourceManager.FeatureClient.FeatureClient(HttpClientHandler, DelegatingHandler[])
+  fullName: Microsoft.Azure.Management.ResourceManager.FeatureClient.FeatureClient(System.Net.Http.HttpClientHandler, System.Net.Http.DelegatingHandler[])
   type: Constructor
   source:
     remote:
@@ -518,10 +545,10 @@ items:
     content.vb: Protected Sub New(rootHandler As HttpClientHandler, ParamArray handlers As DelegatingHandler())
     parameters:
     - id: rootHandler
-      type: HttpClientHandler
+      type: System.Net.Http.HttpClientHandler
       description: "\nOptional. The http client handler used to handle http transport.\n"
     - id: handlers
-      type: DelegatingHandler[]
+      type: System.Net.Http.DelegatingHandler[]
       description: "\nOptional. The delegating handlers to add to the http client pipeline.\n"
   overload: Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor*
   nameWithType.vb: FeatureClient.FeatureClient(HttpClientHandler, DelegatingHandler())
@@ -529,18 +556,18 @@ items:
   - protected
   modifiers.vb:
   - Protected
-  fullName.vb: Microsoft.Azure.Management.ResourceManager.FeatureClient.FeatureClient(HttpClientHandler, DelegatingHandler())
+  fullName.vb: Microsoft.Azure.Management.ResourceManager.FeatureClient.FeatureClient(System.Net.Http.HttpClientHandler, System.Net.Http.DelegatingHandler())
   name.vb: FeatureClient(HttpClientHandler, DelegatingHandler())
-- uid: Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(System.Uri,DelegatingHandler[])
-  commentId: M:Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(System.Uri,DelegatingHandler[])
-  id: '#ctor(System.Uri,DelegatingHandler[])'
+- uid: Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(System.Uri,System.Net.Http.DelegatingHandler[])
+  commentId: M:Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(System.Uri,System.Net.Http.DelegatingHandler[])
+  id: '#ctor(System.Uri,System.Net.Http.DelegatingHandler[])'
   parent: Microsoft.Azure.Management.ResourceManager.FeatureClient
   langs:
   - csharp
   - vb
   name: FeatureClient(Uri, DelegatingHandler[])
   nameWithType: FeatureClient.FeatureClient(Uri, DelegatingHandler[])
-  fullName: Microsoft.Azure.Management.ResourceManager.FeatureClient.FeatureClient(System.Uri, DelegatingHandler[])
+  fullName: Microsoft.Azure.Management.ResourceManager.FeatureClient.FeatureClient(System.Uri, System.Net.Http.DelegatingHandler[])
   type: Constructor
   source:
     remote:
@@ -563,7 +590,7 @@ items:
       type: System.Uri
       description: "\nOptional. The base URI of the service.\n"
     - id: handlers
-      type: DelegatingHandler[]
+      type: System.Net.Http.DelegatingHandler[]
       description: "\nOptional. The delegating handlers to add to the http client pipeline.\n"
   overload: Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor*
   nameWithType.vb: FeatureClient.FeatureClient(Uri, DelegatingHandler())
@@ -571,18 +598,18 @@ items:
   - protected
   modifiers.vb:
   - Protected
-  fullName.vb: Microsoft.Azure.Management.ResourceManager.FeatureClient.FeatureClient(System.Uri, DelegatingHandler())
+  fullName.vb: Microsoft.Azure.Management.ResourceManager.FeatureClient.FeatureClient(System.Uri, System.Net.Http.DelegatingHandler())
   name.vb: FeatureClient(Uri, DelegatingHandler())
-- uid: Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(System.Uri,HttpClientHandler,DelegatingHandler[])
-  commentId: M:Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(System.Uri,HttpClientHandler,DelegatingHandler[])
-  id: '#ctor(System.Uri,HttpClientHandler,DelegatingHandler[])'
+- uid: Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(System.Uri,System.Net.Http.HttpClientHandler,System.Net.Http.DelegatingHandler[])
+  commentId: M:Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(System.Uri,System.Net.Http.HttpClientHandler,System.Net.Http.DelegatingHandler[])
+  id: '#ctor(System.Uri,System.Net.Http.HttpClientHandler,System.Net.Http.DelegatingHandler[])'
   parent: Microsoft.Azure.Management.ResourceManager.FeatureClient
   langs:
   - csharp
   - vb
   name: FeatureClient(Uri, HttpClientHandler, DelegatingHandler[])
   nameWithType: FeatureClient.FeatureClient(Uri, HttpClientHandler, DelegatingHandler[])
-  fullName: Microsoft.Azure.Management.ResourceManager.FeatureClient.FeatureClient(System.Uri, HttpClientHandler, DelegatingHandler[])
+  fullName: Microsoft.Azure.Management.ResourceManager.FeatureClient.FeatureClient(System.Uri, System.Net.Http.HttpClientHandler, System.Net.Http.DelegatingHandler[])
   type: Constructor
   source:
     remote:
@@ -605,10 +632,10 @@ items:
       type: System.Uri
       description: "\nOptional. The base URI of the service.\n"
     - id: rootHandler
-      type: HttpClientHandler
+      type: System.Net.Http.HttpClientHandler
       description: "\nOptional. The http client handler used to handle http transport.\n"
     - id: handlers
-      type: DelegatingHandler[]
+      type: System.Net.Http.DelegatingHandler[]
       description: "\nOptional. The delegating handlers to add to the http client pipeline.\n"
   overload: Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor*
   nameWithType.vb: FeatureClient.FeatureClient(Uri, HttpClientHandler, DelegatingHandler())
@@ -616,18 +643,18 @@ items:
   - protected
   modifiers.vb:
   - Protected
-  fullName.vb: Microsoft.Azure.Management.ResourceManager.FeatureClient.FeatureClient(System.Uri, HttpClientHandler, DelegatingHandler())
+  fullName.vb: Microsoft.Azure.Management.ResourceManager.FeatureClient.FeatureClient(System.Uri, System.Net.Http.HttpClientHandler, System.Net.Http.DelegatingHandler())
   name.vb: FeatureClient(Uri, HttpClientHandler, DelegatingHandler())
-- uid: Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(ServiceClientCredentials,DelegatingHandler[])
-  commentId: M:Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(ServiceClientCredentials,DelegatingHandler[])
-  id: '#ctor(ServiceClientCredentials,DelegatingHandler[])'
+- uid: Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(Microsoft.Rest.ServiceClientCredentials,System.Net.Http.DelegatingHandler[])
+  commentId: M:Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(Microsoft.Rest.ServiceClientCredentials,System.Net.Http.DelegatingHandler[])
+  id: '#ctor(Microsoft.Rest.ServiceClientCredentials,System.Net.Http.DelegatingHandler[])'
   parent: Microsoft.Azure.Management.ResourceManager.FeatureClient
   langs:
   - csharp
   - vb
   name: FeatureClient(ServiceClientCredentials, DelegatingHandler[])
   nameWithType: FeatureClient.FeatureClient(ServiceClientCredentials, DelegatingHandler[])
-  fullName: Microsoft.Azure.Management.ResourceManager.FeatureClient.FeatureClient(ServiceClientCredentials, DelegatingHandler[])
+  fullName: Microsoft.Azure.Management.ResourceManager.FeatureClient.FeatureClient(Microsoft.Rest.ServiceClientCredentials, System.Net.Http.DelegatingHandler[])
   type: Constructor
   source:
     remote:
@@ -647,10 +674,10 @@ items:
     content.vb: Public Sub New(credentials As ServiceClientCredentials, ParamArray handlers As DelegatingHandler())
     parameters:
     - id: credentials
-      type: ServiceClientCredentials
+      type: Microsoft.Rest.ServiceClientCredentials
       description: "\nRequired. Gets Azure subscription credentials.\n"
     - id: handlers
-      type: DelegatingHandler[]
+      type: System.Net.Http.DelegatingHandler[]
       description: "\nOptional. The delegating handlers to add to the http client pipeline.\n"
   overload: Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor*
   nameWithType.vb: FeatureClient.FeatureClient(ServiceClientCredentials, DelegatingHandler())
@@ -658,18 +685,18 @@ items:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Microsoft.Azure.Management.ResourceManager.FeatureClient.FeatureClient(ServiceClientCredentials, DelegatingHandler())
+  fullName.vb: Microsoft.Azure.Management.ResourceManager.FeatureClient.FeatureClient(Microsoft.Rest.ServiceClientCredentials, System.Net.Http.DelegatingHandler())
   name.vb: FeatureClient(ServiceClientCredentials, DelegatingHandler())
-- uid: Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(ServiceClientCredentials,HttpClientHandler,DelegatingHandler[])
-  commentId: M:Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(ServiceClientCredentials,HttpClientHandler,DelegatingHandler[])
-  id: '#ctor(ServiceClientCredentials,HttpClientHandler,DelegatingHandler[])'
+- uid: Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(Microsoft.Rest.ServiceClientCredentials,System.Net.Http.HttpClientHandler,System.Net.Http.DelegatingHandler[])
+  commentId: M:Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(Microsoft.Rest.ServiceClientCredentials,System.Net.Http.HttpClientHandler,System.Net.Http.DelegatingHandler[])
+  id: '#ctor(Microsoft.Rest.ServiceClientCredentials,System.Net.Http.HttpClientHandler,System.Net.Http.DelegatingHandler[])'
   parent: Microsoft.Azure.Management.ResourceManager.FeatureClient
   langs:
   - csharp
   - vb
   name: FeatureClient(ServiceClientCredentials, HttpClientHandler, DelegatingHandler[])
   nameWithType: FeatureClient.FeatureClient(ServiceClientCredentials, HttpClientHandler, DelegatingHandler[])
-  fullName: Microsoft.Azure.Management.ResourceManager.FeatureClient.FeatureClient(ServiceClientCredentials, HttpClientHandler, DelegatingHandler[])
+  fullName: Microsoft.Azure.Management.ResourceManager.FeatureClient.FeatureClient(Microsoft.Rest.ServiceClientCredentials, System.Net.Http.HttpClientHandler, System.Net.Http.DelegatingHandler[])
   type: Constructor
   source:
     remote:
@@ -689,13 +716,13 @@ items:
     content.vb: Public Sub New(credentials As ServiceClientCredentials, rootHandler As HttpClientHandler, ParamArray handlers As DelegatingHandler())
     parameters:
     - id: credentials
-      type: ServiceClientCredentials
+      type: Microsoft.Rest.ServiceClientCredentials
       description: "\nRequired. Gets Azure subscription credentials.\n"
     - id: rootHandler
-      type: HttpClientHandler
+      type: System.Net.Http.HttpClientHandler
       description: "\nOptional. The http client handler used to handle http transport.\n"
     - id: handlers
-      type: DelegatingHandler[]
+      type: System.Net.Http.DelegatingHandler[]
       description: "\nOptional. The delegating handlers to add to the http client pipeline.\n"
   overload: Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor*
   nameWithType.vb: FeatureClient.FeatureClient(ServiceClientCredentials, HttpClientHandler, DelegatingHandler())
@@ -703,18 +730,18 @@ items:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Microsoft.Azure.Management.ResourceManager.FeatureClient.FeatureClient(ServiceClientCredentials, HttpClientHandler, DelegatingHandler())
+  fullName.vb: Microsoft.Azure.Management.ResourceManager.FeatureClient.FeatureClient(Microsoft.Rest.ServiceClientCredentials, System.Net.Http.HttpClientHandler, System.Net.Http.DelegatingHandler())
   name.vb: FeatureClient(ServiceClientCredentials, HttpClientHandler, DelegatingHandler())
-- uid: Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(System.Uri,ServiceClientCredentials,DelegatingHandler[])
-  commentId: M:Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(System.Uri,ServiceClientCredentials,DelegatingHandler[])
-  id: '#ctor(System.Uri,ServiceClientCredentials,DelegatingHandler[])'
+- uid: Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(System.Uri,Microsoft.Rest.ServiceClientCredentials,System.Net.Http.DelegatingHandler[])
+  commentId: M:Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(System.Uri,Microsoft.Rest.ServiceClientCredentials,System.Net.Http.DelegatingHandler[])
+  id: '#ctor(System.Uri,Microsoft.Rest.ServiceClientCredentials,System.Net.Http.DelegatingHandler[])'
   parent: Microsoft.Azure.Management.ResourceManager.FeatureClient
   langs:
   - csharp
   - vb
   name: FeatureClient(Uri, ServiceClientCredentials, DelegatingHandler[])
   nameWithType: FeatureClient.FeatureClient(Uri, ServiceClientCredentials, DelegatingHandler[])
-  fullName: Microsoft.Azure.Management.ResourceManager.FeatureClient.FeatureClient(System.Uri, ServiceClientCredentials, DelegatingHandler[])
+  fullName: Microsoft.Azure.Management.ResourceManager.FeatureClient.FeatureClient(System.Uri, Microsoft.Rest.ServiceClientCredentials, System.Net.Http.DelegatingHandler[])
   type: Constructor
   source:
     remote:
@@ -737,10 +764,10 @@ items:
       type: System.Uri
       description: "\nOptional. The base URI of the service.\n"
     - id: credentials
-      type: ServiceClientCredentials
+      type: Microsoft.Rest.ServiceClientCredentials
       description: "\nRequired. Gets Azure subscription credentials.\n"
     - id: handlers
-      type: DelegatingHandler[]
+      type: System.Net.Http.DelegatingHandler[]
       description: "\nOptional. The delegating handlers to add to the http client pipeline.\n"
   overload: Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor*
   nameWithType.vb: FeatureClient.FeatureClient(Uri, ServiceClientCredentials, DelegatingHandler())
@@ -748,18 +775,18 @@ items:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Microsoft.Azure.Management.ResourceManager.FeatureClient.FeatureClient(System.Uri, ServiceClientCredentials, DelegatingHandler())
+  fullName.vb: Microsoft.Azure.Management.ResourceManager.FeatureClient.FeatureClient(System.Uri, Microsoft.Rest.ServiceClientCredentials, System.Net.Http.DelegatingHandler())
   name.vb: FeatureClient(Uri, ServiceClientCredentials, DelegatingHandler())
-- uid: Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(System.Uri,ServiceClientCredentials,HttpClientHandler,DelegatingHandler[])
-  commentId: M:Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(System.Uri,ServiceClientCredentials,HttpClientHandler,DelegatingHandler[])
-  id: '#ctor(System.Uri,ServiceClientCredentials,HttpClientHandler,DelegatingHandler[])'
+- uid: Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(System.Uri,Microsoft.Rest.ServiceClientCredentials,System.Net.Http.HttpClientHandler,System.Net.Http.DelegatingHandler[])
+  commentId: M:Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor(System.Uri,Microsoft.Rest.ServiceClientCredentials,System.Net.Http.HttpClientHandler,System.Net.Http.DelegatingHandler[])
+  id: '#ctor(System.Uri,Microsoft.Rest.ServiceClientCredentials,System.Net.Http.HttpClientHandler,System.Net.Http.DelegatingHandler[])'
   parent: Microsoft.Azure.Management.ResourceManager.FeatureClient
   langs:
   - csharp
   - vb
   name: FeatureClient(Uri, ServiceClientCredentials, HttpClientHandler, DelegatingHandler[])
   nameWithType: FeatureClient.FeatureClient(Uri, ServiceClientCredentials, HttpClientHandler, DelegatingHandler[])
-  fullName: Microsoft.Azure.Management.ResourceManager.FeatureClient.FeatureClient(System.Uri, ServiceClientCredentials, HttpClientHandler, DelegatingHandler[])
+  fullName: Microsoft.Azure.Management.ResourceManager.FeatureClient.FeatureClient(System.Uri, Microsoft.Rest.ServiceClientCredentials, System.Net.Http.HttpClientHandler, System.Net.Http.DelegatingHandler[])
   type: Constructor
   source:
     remote:
@@ -782,13 +809,13 @@ items:
       type: System.Uri
       description: "\nOptional. The base URI of the service.\n"
     - id: credentials
-      type: ServiceClientCredentials
+      type: Microsoft.Rest.ServiceClientCredentials
       description: "\nRequired. Gets Azure subscription credentials.\n"
     - id: rootHandler
-      type: HttpClientHandler
+      type: System.Net.Http.HttpClientHandler
       description: "\nOptional. The http client handler used to handle http transport.\n"
     - id: handlers
-      type: DelegatingHandler[]
+      type: System.Net.Http.DelegatingHandler[]
       description: "\nOptional. The delegating handlers to add to the http client pipeline.\n"
   overload: Microsoft.Azure.Management.ResourceManager.FeatureClient.#ctor*
   nameWithType.vb: FeatureClient.FeatureClient(Uri, ServiceClientCredentials, HttpClientHandler, DelegatingHandler())
@@ -796,7 +823,7 @@ items:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Microsoft.Azure.Management.ResourceManager.FeatureClient.FeatureClient(System.Uri, ServiceClientCredentials, HttpClientHandler, DelegatingHandler())
+  fullName.vb: Microsoft.Azure.Management.ResourceManager.FeatureClient.FeatureClient(System.Uri, Microsoft.Rest.ServiceClientCredentials, System.Net.Http.HttpClientHandler, System.Net.Http.DelegatingHandler())
   name.vb: FeatureClient(Uri, ServiceClientCredentials, HttpClientHandler, DelegatingHandler())
 references:
 - uid: Microsoft.Azure.Management.ResourceManager
@@ -812,6 +839,46 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
+- uid: Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}
+  commentId: T:Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}
+  parent: Microsoft.Rest
+  definition: Microsoft.Rest.ServiceClient`1
+  name: ServiceClient<FeatureClient>
+  nameWithType: ServiceClient<FeatureClient>
+  fullName: Microsoft.Rest.ServiceClient<Microsoft.Azure.Management.ResourceManager.FeatureClient>
+  nameWithType.vb: ServiceClient(Of FeatureClient)
+  fullname.vb: Microsoft.Rest.ServiceClient(Of Microsoft.Azure.Management.ResourceManager.FeatureClient)
+  name.vb: ServiceClient(Of FeatureClient)
+  spec.csharp:
+  - uid: Microsoft.Rest.ServiceClient`1
+    name: ServiceClient
+    nameWithType: ServiceClient
+    fullName: Microsoft.Rest.ServiceClient
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Microsoft.Azure.Management.ResourceManager.FeatureClient
+    name: FeatureClient
+    nameWithType: FeatureClient
+    fullName: Microsoft.Azure.Management.ResourceManager.FeatureClient
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Microsoft.Rest.ServiceClient`1
+    name: ServiceClient
+    nameWithType: ServiceClient
+    fullName: Microsoft.Rest.ServiceClient
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Microsoft.Azure.Management.ResourceManager.FeatureClient
+    name: FeatureClient
+    nameWithType: FeatureClient
+    fullName: Microsoft.Azure.Management.ResourceManager.FeatureClient
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Microsoft.Azure.Management.ResourceManager.IFeatureClient
   commentId: T:Microsoft.Azure.Management.ResourceManager.IFeatureClient
   parent: Microsoft.Azure.Management.ResourceManager
@@ -826,12 +893,1033 @@ references:
   name: IDisposable
   nameWithType: IDisposable
   fullName: System.IDisposable
+- uid: Microsoft.Rest.Azure.IAzureClient
+  commentId: T:Microsoft.Rest.Azure.IAzureClient
+  parent: Microsoft.Rest.Azure
+  isExternal: false
+  name: IAzureClient
+  nameWithType: IAzureClient
+  fullName: Microsoft.Rest.Azure.IAzureClient
+- uid: Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}.FirstMessageHandler
+  commentId: P:Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}.FirstMessageHandler
+  parent: Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}
+  definition: Microsoft.Rest.ServiceClient`1.FirstMessageHandler
+  name: FirstMessageHandler
+  nameWithType: ServiceClient<FeatureClient>.FirstMessageHandler
+  fullName: Microsoft.Rest.ServiceClient<Microsoft.Azure.Management.ResourceManager.FeatureClient>.FirstMessageHandler
+  nameWithType.vb: ServiceClient(Of FeatureClient).FirstMessageHandler
+  fullname.vb: Microsoft.Rest.ServiceClient(Of Microsoft.Azure.Management.ResourceManager.FeatureClient).FirstMessageHandler
+- uid: Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}.HttpClientHandler
+  commentId: P:Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}.HttpClientHandler
+  parent: Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}
+  definition: Microsoft.Rest.ServiceClient`1.HttpClientHandler
+  name: HttpClientHandler
+  nameWithType: ServiceClient<FeatureClient>.HttpClientHandler
+  fullName: Microsoft.Rest.ServiceClient<Microsoft.Azure.Management.ResourceManager.FeatureClient>.HttpClientHandler
+  nameWithType.vb: ServiceClient(Of FeatureClient).HttpClientHandler
+  fullname.vb: Microsoft.Rest.ServiceClient(Of Microsoft.Azure.Management.ResourceManager.FeatureClient).HttpClientHandler
+- uid: Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}.CreateRootHandler
+  commentId: M:Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}.CreateRootHandler
+  parent: Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}
+  definition: Microsoft.Rest.ServiceClient`1.CreateRootHandler
+  name: CreateRootHandler()
+  nameWithType: ServiceClient<FeatureClient>.CreateRootHandler()
+  fullName: Microsoft.Rest.ServiceClient<Microsoft.Azure.Management.ResourceManager.FeatureClient>.CreateRootHandler()
+  nameWithType.vb: ServiceClient(Of FeatureClient).CreateRootHandler()
+  fullname.vb: Microsoft.Rest.ServiceClient(Of Microsoft.Azure.Management.ResourceManager.FeatureClient).CreateRootHandler()
+  spec.csharp:
+  - uid: Microsoft.Rest.ServiceClient`1.CreateRootHandler
+    name: CreateRootHandler
+    nameWithType: ServiceClient<FeatureClient>.CreateRootHandler
+    fullName: Microsoft.Rest.ServiceClient<Microsoft.Azure.Management.ResourceManager.FeatureClient>.CreateRootHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.Rest.ServiceClient`1.CreateRootHandler
+    name: CreateRootHandler
+    nameWithType: ServiceClient(Of FeatureClient).CreateRootHandler
+    fullName: Microsoft.Rest.ServiceClient(Of Microsoft.Azure.Management.ResourceManager.FeatureClient).CreateRootHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}.HttpClient
+  commentId: P:Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}.HttpClient
+  parent: Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}
+  definition: Microsoft.Rest.ServiceClient`1.HttpClient
+  name: HttpClient
+  nameWithType: ServiceClient<FeatureClient>.HttpClient
+  fullName: Microsoft.Rest.ServiceClient<Microsoft.Azure.Management.ResourceManager.FeatureClient>.HttpClient
+  nameWithType.vb: ServiceClient(Of FeatureClient).HttpClient
+  fullname.vb: Microsoft.Rest.ServiceClient(Of Microsoft.Azure.Management.ResourceManager.FeatureClient).HttpClient
+- uid: Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}.UserAgent
+  commentId: P:Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}.UserAgent
+  parent: Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}
+  definition: Microsoft.Rest.ServiceClient`1.UserAgent
+  name: UserAgent
+  nameWithType: ServiceClient<FeatureClient>.UserAgent
+  fullName: Microsoft.Rest.ServiceClient<Microsoft.Azure.Management.ResourceManager.FeatureClient>.UserAgent
+  nameWithType.vb: ServiceClient(Of FeatureClient).UserAgent
+  fullname.vb: Microsoft.Rest.ServiceClient(Of Microsoft.Azure.Management.ResourceManager.FeatureClient).UserAgent
+- uid: Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}.HttpMessageHandlers
+  commentId: P:Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}.HttpMessageHandlers
+  parent: Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}
+  definition: Microsoft.Rest.ServiceClient`1.HttpMessageHandlers
+  name: HttpMessageHandlers
+  nameWithType: ServiceClient<FeatureClient>.HttpMessageHandlers
+  fullName: Microsoft.Rest.ServiceClient<Microsoft.Azure.Management.ResourceManager.FeatureClient>.HttpMessageHandlers
+  nameWithType.vb: ServiceClient(Of FeatureClient).HttpMessageHandlers
+  fullname.vb: Microsoft.Rest.ServiceClient(Of Microsoft.Azure.Management.ResourceManager.FeatureClient).HttpMessageHandlers
+- uid: Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}.SetRetryPolicy(Microsoft.Rest.TransientFaultHandling.RetryPolicy)
+  commentId: M:Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}.SetRetryPolicy(Microsoft.Rest.TransientFaultHandling.RetryPolicy)
+  parent: Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}
+  definition: Microsoft.Rest.ServiceClient`1.SetRetryPolicy(Microsoft.Rest.TransientFaultHandling.RetryPolicy)
+  name: SetRetryPolicy(RetryPolicy)
+  nameWithType: ServiceClient<FeatureClient>.SetRetryPolicy(RetryPolicy)
+  fullName: Microsoft.Rest.ServiceClient<Microsoft.Azure.Management.ResourceManager.FeatureClient>.SetRetryPolicy(Microsoft.Rest.TransientFaultHandling.RetryPolicy)
+  nameWithType.vb: ServiceClient(Of FeatureClient).SetRetryPolicy(RetryPolicy)
+  fullname.vb: Microsoft.Rest.ServiceClient(Of Microsoft.Azure.Management.ResourceManager.FeatureClient).SetRetryPolicy(Microsoft.Rest.TransientFaultHandling.RetryPolicy)
+  spec.csharp:
+  - uid: Microsoft.Rest.ServiceClient`1.SetRetryPolicy(Microsoft.Rest.TransientFaultHandling.RetryPolicy)
+    name: SetRetryPolicy
+    nameWithType: ServiceClient<FeatureClient>.SetRetryPolicy
+    fullName: Microsoft.Rest.ServiceClient<Microsoft.Azure.Management.ResourceManager.FeatureClient>.SetRetryPolicy
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.Rest.TransientFaultHandling.RetryPolicy
+    name: RetryPolicy
+    nameWithType: RetryPolicy
+    fullName: Microsoft.Rest.TransientFaultHandling.RetryPolicy
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.Rest.ServiceClient`1.SetRetryPolicy(Microsoft.Rest.TransientFaultHandling.RetryPolicy)
+    name: SetRetryPolicy
+    nameWithType: ServiceClient(Of FeatureClient).SetRetryPolicy
+    fullName: Microsoft.Rest.ServiceClient(Of Microsoft.Azure.Management.ResourceManager.FeatureClient).SetRetryPolicy
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.Rest.TransientFaultHandling.RetryPolicy
+    name: RetryPolicy
+    nameWithType: RetryPolicy
+    fullName: Microsoft.Rest.TransientFaultHandling.RetryPolicy
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}.Dispose
+  commentId: M:Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}.Dispose
+  parent: Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}
+  definition: Microsoft.Rest.ServiceClient`1.Dispose
+  name: Dispose()
+  nameWithType: ServiceClient<FeatureClient>.Dispose()
+  fullName: Microsoft.Rest.ServiceClient<Microsoft.Azure.Management.ResourceManager.FeatureClient>.Dispose()
+  nameWithType.vb: ServiceClient(Of FeatureClient).Dispose()
+  fullname.vb: Microsoft.Rest.ServiceClient(Of Microsoft.Azure.Management.ResourceManager.FeatureClient).Dispose()
+  spec.csharp:
+  - uid: Microsoft.Rest.ServiceClient`1.Dispose
+    name: Dispose
+    nameWithType: ServiceClient<FeatureClient>.Dispose
+    fullName: Microsoft.Rest.ServiceClient<Microsoft.Azure.Management.ResourceManager.FeatureClient>.Dispose
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.Rest.ServiceClient`1.Dispose
+    name: Dispose
+    nameWithType: ServiceClient(Of FeatureClient).Dispose
+    fullName: Microsoft.Rest.ServiceClient(Of Microsoft.Azure.Management.ResourceManager.FeatureClient).Dispose
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}.Dispose(System.Boolean)
+  commentId: M:Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}.Dispose(System.Boolean)
+  parent: Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}
+  definition: Microsoft.Rest.ServiceClient`1.Dispose(System.Boolean)
+  name: Dispose(Boolean)
+  nameWithType: ServiceClient<FeatureClient>.Dispose(Boolean)
+  fullName: Microsoft.Rest.ServiceClient<Microsoft.Azure.Management.ResourceManager.FeatureClient>.Dispose(System.Boolean)
+  nameWithType.vb: ServiceClient(Of FeatureClient).Dispose(Boolean)
+  fullname.vb: Microsoft.Rest.ServiceClient(Of Microsoft.Azure.Management.ResourceManager.FeatureClient).Dispose(System.Boolean)
+  spec.csharp:
+  - uid: Microsoft.Rest.ServiceClient`1.Dispose(System.Boolean)
+    name: Dispose
+    nameWithType: ServiceClient<FeatureClient>.Dispose
+    fullName: Microsoft.Rest.ServiceClient<Microsoft.Azure.Management.ResourceManager.FeatureClient>.Dispose
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.Rest.ServiceClient`1.Dispose(System.Boolean)
+    name: Dispose
+    nameWithType: ServiceClient(Of FeatureClient).Dispose
+    fullName: Microsoft.Rest.ServiceClient(Of Microsoft.Azure.Management.ResourceManager.FeatureClient).Dispose
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}.InitializeHttpClient(System.Net.Http.HttpClientHandler,System.Net.Http.DelegatingHandler[])
+  commentId: M:Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}.InitializeHttpClient(System.Net.Http.HttpClientHandler,System.Net.Http.DelegatingHandler[])
+  parent: Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}
+  definition: Microsoft.Rest.ServiceClient`1.InitializeHttpClient(System.Net.Http.HttpClientHandler,System.Net.Http.DelegatingHandler[])
+  name: InitializeHttpClient(HttpClientHandler, DelegatingHandler[])
+  nameWithType: ServiceClient<FeatureClient>.InitializeHttpClient(HttpClientHandler, DelegatingHandler[])
+  fullName: Microsoft.Rest.ServiceClient<Microsoft.Azure.Management.ResourceManager.FeatureClient>.InitializeHttpClient(System.Net.Http.HttpClientHandler, System.Net.Http.DelegatingHandler[])
+  nameWithType.vb: ServiceClient(Of FeatureClient).InitializeHttpClient(HttpClientHandler, DelegatingHandler())
+  fullname.vb: Microsoft.Rest.ServiceClient(Of Microsoft.Azure.Management.ResourceManager.FeatureClient).InitializeHttpClient(System.Net.Http.HttpClientHandler, System.Net.Http.DelegatingHandler())
+  name.vb: InitializeHttpClient(HttpClientHandler, DelegatingHandler())
+  spec.csharp:
+  - uid: Microsoft.Rest.ServiceClient`1.InitializeHttpClient(System.Net.Http.HttpClientHandler,System.Net.Http.DelegatingHandler[])
+    name: InitializeHttpClient
+    nameWithType: ServiceClient<FeatureClient>.InitializeHttpClient
+    fullName: Microsoft.Rest.ServiceClient<Microsoft.Azure.Management.ResourceManager.FeatureClient>.InitializeHttpClient
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Net.Http.HttpClientHandler
+    name: HttpClientHandler
+    nameWithType: HttpClientHandler
+    fullName: System.Net.Http.HttpClientHandler
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.Http.DelegatingHandler
+    name: DelegatingHandler
+    nameWithType: DelegatingHandler
+    fullName: System.Net.Http.DelegatingHandler
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.Rest.ServiceClient`1.InitializeHttpClient(System.Net.Http.HttpClientHandler,System.Net.Http.DelegatingHandler[])
+    name: InitializeHttpClient
+    nameWithType: ServiceClient(Of FeatureClient).InitializeHttpClient
+    fullName: Microsoft.Rest.ServiceClient(Of Microsoft.Azure.Management.ResourceManager.FeatureClient).InitializeHttpClient
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Net.Http.HttpClientHandler
+    name: HttpClientHandler
+    nameWithType: HttpClientHandler
+    fullName: System.Net.Http.HttpClientHandler
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.Http.DelegatingHandler
+    name: DelegatingHandler
+    nameWithType: DelegatingHandler
+    fullName: System.Net.Http.DelegatingHandler
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}.SetUserAgent(System.String)
+  commentId: M:Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}.SetUserAgent(System.String)
+  parent: Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}
+  definition: Microsoft.Rest.ServiceClient`1.SetUserAgent(System.String)
+  name: SetUserAgent(String)
+  nameWithType: ServiceClient<FeatureClient>.SetUserAgent(String)
+  fullName: Microsoft.Rest.ServiceClient<Microsoft.Azure.Management.ResourceManager.FeatureClient>.SetUserAgent(System.String)
+  nameWithType.vb: ServiceClient(Of FeatureClient).SetUserAgent(String)
+  fullname.vb: Microsoft.Rest.ServiceClient(Of Microsoft.Azure.Management.ResourceManager.FeatureClient).SetUserAgent(System.String)
+  spec.csharp:
+  - uid: Microsoft.Rest.ServiceClient`1.SetUserAgent(System.String)
+    name: SetUserAgent
+    nameWithType: ServiceClient<FeatureClient>.SetUserAgent
+    fullName: Microsoft.Rest.ServiceClient<Microsoft.Azure.Management.ResourceManager.FeatureClient>.SetUserAgent
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.Rest.ServiceClient`1.SetUserAgent(System.String)
+    name: SetUserAgent
+    nameWithType: ServiceClient(Of FeatureClient).SetUserAgent
+    fullName: Microsoft.Rest.ServiceClient(Of Microsoft.Azure.Management.ResourceManager.FeatureClient).SetUserAgent
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}.SetUserAgent(System.String,System.String)
+  commentId: M:Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}.SetUserAgent(System.String,System.String)
+  parent: Microsoft.Rest.ServiceClient{Microsoft.Azure.Management.ResourceManager.FeatureClient}
+  definition: Microsoft.Rest.ServiceClient`1.SetUserAgent(System.String,System.String)
+  name: SetUserAgent(String, String)
+  nameWithType: ServiceClient<FeatureClient>.SetUserAgent(String, String)
+  fullName: Microsoft.Rest.ServiceClient<Microsoft.Azure.Management.ResourceManager.FeatureClient>.SetUserAgent(System.String, System.String)
+  nameWithType.vb: ServiceClient(Of FeatureClient).SetUserAgent(String, String)
+  fullname.vb: Microsoft.Rest.ServiceClient(Of Microsoft.Azure.Management.ResourceManager.FeatureClient).SetUserAgent(System.String, System.String)
+  spec.csharp:
+  - uid: Microsoft.Rest.ServiceClient`1.SetUserAgent(System.String,System.String)
+    name: SetUserAgent
+    nameWithType: ServiceClient<FeatureClient>.SetUserAgent
+    fullName: Microsoft.Rest.ServiceClient<Microsoft.Azure.Management.ResourceManager.FeatureClient>.SetUserAgent
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.Rest.ServiceClient`1.SetUserAgent(System.String,System.String)
+    name: SetUserAgent
+    nameWithType: ServiceClient(Of FeatureClient).SetUserAgent
+    fullName: Microsoft.Rest.ServiceClient(Of Microsoft.Azure.Management.ResourceManager.FeatureClient).SetUserAgent
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System
   commentId: N:System
   isExternal: false
   name: System
   nameWithType: System
   fullName: System
+- uid: Microsoft.Rest.ServiceClient`1
+  commentId: T:Microsoft.Rest.ServiceClient`1
+  isExternal: false
+  name: ServiceClient<T>
+  nameWithType: ServiceClient<T>
+  fullName: Microsoft.Rest.ServiceClient<T>
+  nameWithType.vb: ServiceClient(Of T)
+  fullname.vb: Microsoft.Rest.ServiceClient(Of T)
+  name.vb: ServiceClient(Of T)
+  spec.csharp:
+  - uid: Microsoft.Rest.ServiceClient`1
+    name: ServiceClient
+    nameWithType: ServiceClient
+    fullName: Microsoft.Rest.ServiceClient
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Microsoft.Rest.ServiceClient`1
+    name: ServiceClient
+    nameWithType: ServiceClient
+    fullName: Microsoft.Rest.ServiceClient
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Rest
+  commentId: N:Microsoft.Rest
+  isExternal: false
+  name: Microsoft.Rest
+  nameWithType: Microsoft.Rest
+  fullName: Microsoft.Rest
+- uid: Microsoft.Rest.Azure
+  commentId: N:Microsoft.Rest.Azure
+  isExternal: false
+  name: Microsoft.Rest.Azure
+  nameWithType: Microsoft.Rest.Azure
+  fullName: Microsoft.Rest.Azure
+- uid: Microsoft.Rest.ServiceClient`1.FirstMessageHandler
+  commentId: P:Microsoft.Rest.ServiceClient`1.FirstMessageHandler
+  isExternal: false
+  name: FirstMessageHandler
+  nameWithType: ServiceClient<T>.FirstMessageHandler
+  fullName: Microsoft.Rest.ServiceClient<T>.FirstMessageHandler
+  nameWithType.vb: ServiceClient(Of T).FirstMessageHandler
+  fullname.vb: Microsoft.Rest.ServiceClient(Of T).FirstMessageHandler
+- uid: Microsoft.Rest.ServiceClient`1.HttpClientHandler
+  commentId: P:Microsoft.Rest.ServiceClient`1.HttpClientHandler
+  isExternal: false
+  name: HttpClientHandler
+  nameWithType: ServiceClient<T>.HttpClientHandler
+  fullName: Microsoft.Rest.ServiceClient<T>.HttpClientHandler
+  nameWithType.vb: ServiceClient(Of T).HttpClientHandler
+  fullname.vb: Microsoft.Rest.ServiceClient(Of T).HttpClientHandler
+- uid: Microsoft.Rest.ServiceClient`1.CreateRootHandler
+  commentId: M:Microsoft.Rest.ServiceClient`1.CreateRootHandler
+  isExternal: false
+  name: CreateRootHandler()
+  nameWithType: ServiceClient<T>.CreateRootHandler()
+  fullName: Microsoft.Rest.ServiceClient<T>.CreateRootHandler()
+  nameWithType.vb: ServiceClient(Of T).CreateRootHandler()
+  fullname.vb: Microsoft.Rest.ServiceClient(Of T).CreateRootHandler()
+  spec.csharp:
+  - uid: Microsoft.Rest.ServiceClient`1.CreateRootHandler
+    name: CreateRootHandler
+    nameWithType: ServiceClient<T>.CreateRootHandler
+    fullName: Microsoft.Rest.ServiceClient<T>.CreateRootHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.Rest.ServiceClient`1.CreateRootHandler
+    name: CreateRootHandler
+    nameWithType: ServiceClient(Of T).CreateRootHandler
+    fullName: Microsoft.Rest.ServiceClient(Of T).CreateRootHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Rest.ServiceClient`1.HttpClient
+  commentId: P:Microsoft.Rest.ServiceClient`1.HttpClient
+  isExternal: false
+  name: HttpClient
+  nameWithType: ServiceClient<T>.HttpClient
+  fullName: Microsoft.Rest.ServiceClient<T>.HttpClient
+  nameWithType.vb: ServiceClient(Of T).HttpClient
+  fullname.vb: Microsoft.Rest.ServiceClient(Of T).HttpClient
+- uid: Microsoft.Rest.ServiceClient`1.UserAgent
+  commentId: P:Microsoft.Rest.ServiceClient`1.UserAgent
+  isExternal: false
+  name: UserAgent
+  nameWithType: ServiceClient<T>.UserAgent
+  fullName: Microsoft.Rest.ServiceClient<T>.UserAgent
+  nameWithType.vb: ServiceClient(Of T).UserAgent
+  fullname.vb: Microsoft.Rest.ServiceClient(Of T).UserAgent
+- uid: Microsoft.Rest.ServiceClient`1.HttpMessageHandlers
+  commentId: P:Microsoft.Rest.ServiceClient`1.HttpMessageHandlers
+  isExternal: false
+  name: HttpMessageHandlers
+  nameWithType: ServiceClient<T>.HttpMessageHandlers
+  fullName: Microsoft.Rest.ServiceClient<T>.HttpMessageHandlers
+  nameWithType.vb: ServiceClient(Of T).HttpMessageHandlers
+  fullname.vb: Microsoft.Rest.ServiceClient(Of T).HttpMessageHandlers
+- uid: Microsoft.Rest.ServiceClient`1.SetRetryPolicy(Microsoft.Rest.TransientFaultHandling.RetryPolicy)
+  commentId: M:Microsoft.Rest.ServiceClient`1.SetRetryPolicy(Microsoft.Rest.TransientFaultHandling.RetryPolicy)
+  isExternal: false
+  name: SetRetryPolicy(RetryPolicy)
+  nameWithType: ServiceClient<T>.SetRetryPolicy(RetryPolicy)
+  fullName: Microsoft.Rest.ServiceClient<T>.SetRetryPolicy(Microsoft.Rest.TransientFaultHandling.RetryPolicy)
+  nameWithType.vb: ServiceClient(Of T).SetRetryPolicy(RetryPolicy)
+  fullname.vb: Microsoft.Rest.ServiceClient(Of T).SetRetryPolicy(Microsoft.Rest.TransientFaultHandling.RetryPolicy)
+  spec.csharp:
+  - uid: Microsoft.Rest.ServiceClient`1.SetRetryPolicy(Microsoft.Rest.TransientFaultHandling.RetryPolicy)
+    name: SetRetryPolicy
+    nameWithType: ServiceClient<T>.SetRetryPolicy
+    fullName: Microsoft.Rest.ServiceClient<T>.SetRetryPolicy
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.Rest.TransientFaultHandling.RetryPolicy
+    name: RetryPolicy
+    nameWithType: RetryPolicy
+    fullName: Microsoft.Rest.TransientFaultHandling.RetryPolicy
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.Rest.ServiceClient`1.SetRetryPolicy(Microsoft.Rest.TransientFaultHandling.RetryPolicy)
+    name: SetRetryPolicy
+    nameWithType: ServiceClient(Of T).SetRetryPolicy
+    fullName: Microsoft.Rest.ServiceClient(Of T).SetRetryPolicy
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.Rest.TransientFaultHandling.RetryPolicy
+    name: RetryPolicy
+    nameWithType: RetryPolicy
+    fullName: Microsoft.Rest.TransientFaultHandling.RetryPolicy
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Rest.ServiceClient`1.Dispose
+  commentId: M:Microsoft.Rest.ServiceClient`1.Dispose
+  isExternal: false
+  name: Dispose()
+  nameWithType: ServiceClient<T>.Dispose()
+  fullName: Microsoft.Rest.ServiceClient<T>.Dispose()
+  nameWithType.vb: ServiceClient(Of T).Dispose()
+  fullname.vb: Microsoft.Rest.ServiceClient(Of T).Dispose()
+  spec.csharp:
+  - uid: Microsoft.Rest.ServiceClient`1.Dispose
+    name: Dispose
+    nameWithType: ServiceClient<T>.Dispose
+    fullName: Microsoft.Rest.ServiceClient<T>.Dispose
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.Rest.ServiceClient`1.Dispose
+    name: Dispose
+    nameWithType: ServiceClient(Of T).Dispose
+    fullName: Microsoft.Rest.ServiceClient(Of T).Dispose
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Rest.ServiceClient`1.Dispose(System.Boolean)
+  commentId: M:Microsoft.Rest.ServiceClient`1.Dispose(System.Boolean)
+  isExternal: true
+  name: Dispose(Boolean)
+  nameWithType: ServiceClient<T>.Dispose(Boolean)
+  fullName: Microsoft.Rest.ServiceClient<T>.Dispose(System.Boolean)
+  nameWithType.vb: ServiceClient(Of T).Dispose(Boolean)
+  fullname.vb: Microsoft.Rest.ServiceClient(Of T).Dispose(System.Boolean)
+  spec.csharp:
+  - uid: Microsoft.Rest.ServiceClient`1.Dispose(System.Boolean)
+    name: Dispose
+    nameWithType: ServiceClient<T>.Dispose
+    fullName: Microsoft.Rest.ServiceClient<T>.Dispose
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.Rest.ServiceClient`1.Dispose(System.Boolean)
+    name: Dispose
+    nameWithType: ServiceClient(Of T).Dispose
+    fullName: Microsoft.Rest.ServiceClient(Of T).Dispose
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Rest.ServiceClient`1.InitializeHttpClient(System.Net.Http.HttpClientHandler,System.Net.Http.DelegatingHandler[])
+  commentId: M:Microsoft.Rest.ServiceClient`1.InitializeHttpClient(System.Net.Http.HttpClientHandler,System.Net.Http.DelegatingHandler[])
+  isExternal: true
+  name: InitializeHttpClient(HttpClientHandler, DelegatingHandler[])
+  nameWithType: ServiceClient<T>.InitializeHttpClient(HttpClientHandler, DelegatingHandler[])
+  fullName: Microsoft.Rest.ServiceClient<T>.InitializeHttpClient(System.Net.Http.HttpClientHandler, System.Net.Http.DelegatingHandler[])
+  nameWithType.vb: ServiceClient(Of T).InitializeHttpClient(HttpClientHandler, DelegatingHandler())
+  fullname.vb: Microsoft.Rest.ServiceClient(Of T).InitializeHttpClient(System.Net.Http.HttpClientHandler, System.Net.Http.DelegatingHandler())
+  name.vb: InitializeHttpClient(HttpClientHandler, DelegatingHandler())
+  spec.csharp:
+  - uid: Microsoft.Rest.ServiceClient`1.InitializeHttpClient(System.Net.Http.HttpClientHandler,System.Net.Http.DelegatingHandler[])
+    name: InitializeHttpClient
+    nameWithType: ServiceClient<T>.InitializeHttpClient
+    fullName: Microsoft.Rest.ServiceClient<T>.InitializeHttpClient
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Net.Http.HttpClientHandler
+    name: HttpClientHandler
+    nameWithType: HttpClientHandler
+    fullName: System.Net.Http.HttpClientHandler
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.Http.DelegatingHandler
+    name: DelegatingHandler
+    nameWithType: DelegatingHandler
+    fullName: System.Net.Http.DelegatingHandler
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.Rest.ServiceClient`1.InitializeHttpClient(System.Net.Http.HttpClientHandler,System.Net.Http.DelegatingHandler[])
+    name: InitializeHttpClient
+    nameWithType: ServiceClient(Of T).InitializeHttpClient
+    fullName: Microsoft.Rest.ServiceClient(Of T).InitializeHttpClient
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Net.Http.HttpClientHandler
+    name: HttpClientHandler
+    nameWithType: HttpClientHandler
+    fullName: System.Net.Http.HttpClientHandler
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.Http.DelegatingHandler
+    name: DelegatingHandler
+    nameWithType: DelegatingHandler
+    fullName: System.Net.Http.DelegatingHandler
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Rest.ServiceClient`1.SetUserAgent(System.String)
+  commentId: M:Microsoft.Rest.ServiceClient`1.SetUserAgent(System.String)
+  isExternal: true
+  name: SetUserAgent(String)
+  nameWithType: ServiceClient<T>.SetUserAgent(String)
+  fullName: Microsoft.Rest.ServiceClient<T>.SetUserAgent(System.String)
+  nameWithType.vb: ServiceClient(Of T).SetUserAgent(String)
+  fullname.vb: Microsoft.Rest.ServiceClient(Of T).SetUserAgent(System.String)
+  spec.csharp:
+  - uid: Microsoft.Rest.ServiceClient`1.SetUserAgent(System.String)
+    name: SetUserAgent
+    nameWithType: ServiceClient<T>.SetUserAgent
+    fullName: Microsoft.Rest.ServiceClient<T>.SetUserAgent
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.Rest.ServiceClient`1.SetUserAgent(System.String)
+    name: SetUserAgent
+    nameWithType: ServiceClient(Of T).SetUserAgent
+    fullName: Microsoft.Rest.ServiceClient(Of T).SetUserAgent
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Rest.ServiceClient`1.SetUserAgent(System.String,System.String)
+  commentId: M:Microsoft.Rest.ServiceClient`1.SetUserAgent(System.String,System.String)
+  isExternal: true
+  name: SetUserAgent(String, String)
+  nameWithType: ServiceClient<T>.SetUserAgent(String, String)
+  fullName: Microsoft.Rest.ServiceClient<T>.SetUserAgent(System.String, System.String)
+  nameWithType.vb: ServiceClient(Of T).SetUserAgent(String, String)
+  fullname.vb: Microsoft.Rest.ServiceClient(Of T).SetUserAgent(System.String, System.String)
+  spec.csharp:
+  - uid: Microsoft.Rest.ServiceClient`1.SetUserAgent(System.String,System.String)
+    name: SetUserAgent
+    nameWithType: ServiceClient<T>.SetUserAgent
+    fullName: Microsoft.Rest.ServiceClient<T>.SetUserAgent
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.Rest.ServiceClient`1.SetUserAgent(System.String,System.String)
+    name: SetUserAgent
+    nameWithType: ServiceClient(Of T).SetUserAgent
+    fullName: Microsoft.Rest.ServiceClient(Of T).SetUserAgent
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Microsoft.Azure.Management.ResourceManager.FeatureClient.BaseUri*
   commentId: Overload:Microsoft.Azure.Management.ResourceManager.FeatureClient.BaseUri
   isExternal: false
@@ -865,11 +1953,26 @@ references:
   name: SerializationSettings
   nameWithType: IFeatureClient.SerializationSettings
   fullName: Microsoft.Azure.Management.ResourceManager.IFeatureClient.SerializationSettings
-- uid: JsonSerializerSettings
+- uid: Microsoft.Rest.Azure.IAzureClient.SerializationSettings
+  commentId: P:Microsoft.Rest.Azure.IAzureClient.SerializationSettings
+  parent: Microsoft.Rest.Azure.IAzureClient
+  isExternal: false
+  name: SerializationSettings
+  nameWithType: IAzureClient.SerializationSettings
+  fullName: Microsoft.Rest.Azure.IAzureClient.SerializationSettings
+- uid: Newtonsoft.Json.JsonSerializerSettings
+  commentId: T:Newtonsoft.Json.JsonSerializerSettings
+  parent: Newtonsoft.Json
   isExternal: true
   name: JsonSerializerSettings
   nameWithType: JsonSerializerSettings
-  fullName: JsonSerializerSettings
+  fullName: Newtonsoft.Json.JsonSerializerSettings
+- uid: Newtonsoft.Json
+  commentId: N:Newtonsoft.Json
+  isExternal: false
+  name: Newtonsoft.Json
+  nameWithType: Newtonsoft.Json
+  fullName: Newtonsoft.Json
 - uid: Microsoft.Azure.Management.ResourceManager.FeatureClient.DeserializationSettings*
   commentId: Overload:Microsoft.Azure.Management.ResourceManager.FeatureClient.DeserializationSettings
   isExternal: false
@@ -883,6 +1986,13 @@ references:
   name: DeserializationSettings
   nameWithType: IFeatureClient.DeserializationSettings
   fullName: Microsoft.Azure.Management.ResourceManager.IFeatureClient.DeserializationSettings
+- uid: Microsoft.Rest.Azure.IAzureClient.DeserializationSettings
+  commentId: P:Microsoft.Rest.Azure.IAzureClient.DeserializationSettings
+  parent: Microsoft.Rest.Azure.IAzureClient
+  isExternal: false
+  name: DeserializationSettings
+  nameWithType: IAzureClient.DeserializationSettings
+  fullName: Microsoft.Rest.Azure.IAzureClient.DeserializationSettings
 - uid: Microsoft.Azure.Management.ResourceManager.FeatureClient.Credentials*
   commentId: Overload:Microsoft.Azure.Management.ResourceManager.FeatureClient.Credentials
   isExternal: false
@@ -896,11 +2006,20 @@ references:
   name: Credentials
   nameWithType: IFeatureClient.Credentials
   fullName: Microsoft.Azure.Management.ResourceManager.IFeatureClient.Credentials
-- uid: ServiceClientCredentials
-  isExternal: true
+- uid: Microsoft.Rest.Azure.IAzureClient.Credentials
+  commentId: P:Microsoft.Rest.Azure.IAzureClient.Credentials
+  parent: Microsoft.Rest.Azure.IAzureClient
+  isExternal: false
+  name: Credentials
+  nameWithType: IAzureClient.Credentials
+  fullName: Microsoft.Rest.Azure.IAzureClient.Credentials
+- uid: Microsoft.Rest.ServiceClientCredentials
+  commentId: T:Microsoft.Rest.ServiceClientCredentials
+  parent: Microsoft.Rest
+  isExternal: false
   name: ServiceClientCredentials
   nameWithType: ServiceClientCredentials
-  fullName: ServiceClientCredentials
+  fullName: Microsoft.Rest.ServiceClientCredentials
 - uid: Microsoft.Azure.Management.ResourceManager.FeatureClient.SubscriptionId*
   commentId: Overload:Microsoft.Azure.Management.ResourceManager.FeatureClient.SubscriptionId
   isExternal: false
@@ -960,6 +2079,13 @@ references:
   name: LongRunningOperationRetryTimeout
   nameWithType: IFeatureClient.LongRunningOperationRetryTimeout
   fullName: Microsoft.Azure.Management.ResourceManager.IFeatureClient.LongRunningOperationRetryTimeout
+- uid: Microsoft.Rest.Azure.IAzureClient.LongRunningOperationRetryTimeout
+  commentId: P:Microsoft.Rest.Azure.IAzureClient.LongRunningOperationRetryTimeout
+  parent: Microsoft.Rest.Azure.IAzureClient
+  isExternal: false
+  name: LongRunningOperationRetryTimeout
+  nameWithType: IAzureClient.LongRunningOperationRetryTimeout
+  fullName: Microsoft.Rest.Azure.IAzureClient.LongRunningOperationRetryTimeout
 - uid: System.Nullable{System.Int32}
   commentId: T:System.Nullable{System.Int32}
   parent: System
@@ -1056,6 +2182,13 @@ references:
   name: GenerateClientRequestId
   nameWithType: IFeatureClient.GenerateClientRequestId
   fullName: Microsoft.Azure.Management.ResourceManager.IFeatureClient.GenerateClientRequestId
+- uid: Microsoft.Rest.Azure.IAzureClient.GenerateClientRequestId
+  commentId: P:Microsoft.Rest.Azure.IAzureClient.GenerateClientRequestId
+  parent: Microsoft.Rest.Azure.IAzureClient
+  isExternal: false
+  name: GenerateClientRequestId
+  nameWithType: IAzureClient.GenerateClientRequestId
+  fullName: Microsoft.Rest.Azure.IAzureClient.GenerateClientRequestId
 - uid: System.Nullable{System.Boolean}
   commentId: T:System.Nullable{System.Boolean}
   parent: System
@@ -1126,33 +2259,41 @@ references:
   name: FeatureClient
   nameWithType: FeatureClient.FeatureClient
   fullName: Microsoft.Azure.Management.ResourceManager.FeatureClient.FeatureClient
-- uid: DelegatingHandler[]
+- uid: System.Net.Http.DelegatingHandler[]
   name: DelegatingHandler[]
   nameWithType: DelegatingHandler[]
-  fullName: DelegatingHandler[]
+  fullName: System.Net.Http.DelegatingHandler[]
   nameWithType.vb: DelegatingHandler()
-  fullname.vb: DelegatingHandler()
+  fullname.vb: System.Net.Http.DelegatingHandler()
   name.vb: DelegatingHandler()
   spec.csharp:
-  - uid: DelegatingHandler
+  - uid: System.Net.Http.DelegatingHandler
     name: DelegatingHandler
     nameWithType: DelegatingHandler
-    fullName: DelegatingHandler
+    fullName: System.Net.Http.DelegatingHandler
     isExternal: true
   - name: '[]'
     nameWithType: '[]'
     fullName: '[]'
   spec.vb:
-  - uid: DelegatingHandler
+  - uid: System.Net.Http.DelegatingHandler
     name: DelegatingHandler
     nameWithType: DelegatingHandler
-    fullName: DelegatingHandler
+    fullName: System.Net.Http.DelegatingHandler
     isExternal: true
   - name: ()
     nameWithType: ()
     fullName: ()
-- uid: HttpClientHandler
+- uid: System.Net.Http.HttpClientHandler
+  commentId: T:System.Net.Http.HttpClientHandler
+  parent: System.Net.Http
   isExternal: true
   name: HttpClientHandler
   nameWithType: HttpClientHandler
-  fullName: HttpClientHandler
+  fullName: System.Net.Http.HttpClientHandler
+- uid: System.Net.Http
+  commentId: N:System.Net.Http
+  isExternal: false
+  name: System.Net.Http
+  nameWithType: System.Net.Http
+  fullName: System.Net.Http

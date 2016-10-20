@@ -7,6 +7,7 @@ items:
   children:
   - Microsoft.ApplicationInsights.Channel.Transmission.#ctor
   - Microsoft.ApplicationInsights.Channel.Transmission.#ctor(System.Uri,System.Byte[],System.String,System.String,System.TimeSpan)
+  - Microsoft.ApplicationInsights.Channel.Transmission.#ctor(System.Uri,System.Collections.Generic.ICollection{Microsoft.ApplicationInsights.Channel.ITelemetry},System.TimeSpan)
   - Microsoft.ApplicationInsights.Channel.Transmission.Content
   - Microsoft.ApplicationInsights.Channel.Transmission.ContentEncoding
   - Microsoft.ApplicationInsights.Channel.Transmission.ContentType
@@ -14,6 +15,8 @@ items:
   - Microsoft.ApplicationInsights.Channel.Transmission.EndpointAddress
   - Microsoft.ApplicationInsights.Channel.Transmission.Id
   - Microsoft.ApplicationInsights.Channel.Transmission.SendAsync
+  - Microsoft.ApplicationInsights.Channel.Transmission.Split(System.Func{System.Int32,System.Int32})
+  - Microsoft.ApplicationInsights.Channel.Transmission.TelemetryItems
   - Microsoft.ApplicationInsights.Channel.Transmission.Timeout
   langs:
   - csharp
@@ -100,6 +103,48 @@ items:
   - Public
   fullName.vb: Microsoft.ApplicationInsights.Channel.Transmission.Transmission(System.Uri, System.Byte(), System.String, System.String, System.TimeSpan)
   name.vb: Transmission(Uri, Byte(), String, String, TimeSpan)
+- uid: Microsoft.ApplicationInsights.Channel.Transmission.#ctor(System.Uri,System.Collections.Generic.ICollection{Microsoft.ApplicationInsights.Channel.ITelemetry},System.TimeSpan)
+  commentId: M:Microsoft.ApplicationInsights.Channel.Transmission.#ctor(System.Uri,System.Collections.Generic.ICollection{Microsoft.ApplicationInsights.Channel.ITelemetry},System.TimeSpan)
+  id: '#ctor(System.Uri,System.Collections.Generic.ICollection{Microsoft.ApplicationInsights.Channel.ITelemetry},System.TimeSpan)'
+  parent: Microsoft.ApplicationInsights.Channel.Transmission
+  langs:
+  - csharp
+  - vb
+  name: Transmission(Uri, ICollection<ITelemetry>, TimeSpan)
+  nameWithType: Transmission.Transmission(Uri, ICollection<ITelemetry>, TimeSpan)
+  fullName: Microsoft.ApplicationInsights.Channel.Transmission.Transmission(System.Uri, System.Collections.Generic.ICollection<Microsoft.ApplicationInsights.Channel.ITelemetry>, System.TimeSpan)
+  type: Constructor
+  source:
+    remote:
+      path: src/Core/Managed/Shared/Channel/Transmission.cs
+      branch: master
+      repo: https://github.com/Microsoft/ApplicationInsights-dotnet
+    id: .ctor
+    path: src/Core/Managed/Shared/Channel/Transmission.cs
+    startLine: 68
+  assemblies:
+  - Microsoft.ApplicationInsights
+  namespace: Microsoft.ApplicationInsights.Channel
+  summary: "\nInitializes a new instance of the <xref href=\"Microsoft.ApplicationInsights.Channel.Transmission\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  example: []
+  syntax:
+    content: public Transmission(Uri address, ICollection<ITelemetry> telemetryItems, TimeSpan timeout = null)
+    content.vb: Public Sub New(address As Uri, telemetryItems As ICollection(Of ITelemetry), timeout As TimeSpan = Nothing)
+    parameters:
+    - id: address
+      type: System.Uri
+    - id: telemetryItems
+      type: System.Collections.Generic.ICollection{Microsoft.ApplicationInsights.Channel.ITelemetry}
+    - id: timeout
+      type: System.TimeSpan
+  overload: Microsoft.ApplicationInsights.Channel.Transmission.#ctor*
+  nameWithType.vb: Transmission.Transmission(Uri, ICollection(Of ITelemetry), TimeSpan)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Microsoft.ApplicationInsights.Channel.Transmission.Transmission(System.Uri, System.Collections.Generic.ICollection(Of Microsoft.ApplicationInsights.Channel.ITelemetry), System.TimeSpan)
+  name.vb: Transmission(Uri, ICollection(Of ITelemetry), TimeSpan)
 - uid: Microsoft.ApplicationInsights.Channel.Transmission.#ctor
   commentId: M:Microsoft.ApplicationInsights.Channel.Transmission.#ctor
   id: '#ctor'
@@ -118,7 +163,7 @@ items:
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
     id: .ctor
     path: src/Core/Managed/Shared/Channel/Transmission.cs
-    startLine: 72
+    startLine: 85
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.Channel
@@ -150,7 +195,7 @@ items:
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
     id: EndpointAddress
     path: src/Core/Managed/Shared/Channel/Transmission.cs
-    startLine: 79
+    startLine: 92
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.Channel
@@ -187,7 +232,7 @@ items:
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
     id: Content
     path: src/Core/Managed/Shared/Channel/Transmission.cs
-    startLine: 88
+    startLine: 101
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.Channel
@@ -224,7 +269,7 @@ items:
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
     id: ContentType
     path: src/Core/Managed/Shared/Channel/Transmission.cs
-    startLine: 97
+    startLine: 110
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.Channel
@@ -261,7 +306,7 @@ items:
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
     id: ContentEncoding
     path: src/Core/Managed/Shared/Channel/Transmission.cs
-    startLine: 106
+    startLine: 119
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.Channel
@@ -298,7 +343,7 @@ items:
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
     id: Timeout
     path: src/Core/Managed/Shared/Channel/Transmission.cs
-    startLine: 115
+    startLine: 128
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.Channel
@@ -335,7 +380,7 @@ items:
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
     id: Id
     path: src/Core/Managed/Shared/Channel/Transmission.cs
-    startLine: 124
+    startLine: 137
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.Channel
@@ -348,6 +393,43 @@ items:
     return:
       type: System.String
   overload: Microsoft.ApplicationInsights.Channel.Transmission.Id*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Microsoft.ApplicationInsights.Channel.Transmission.TelemetryItems
+  commentId: P:Microsoft.ApplicationInsights.Channel.Transmission.TelemetryItems
+  id: TelemetryItems
+  parent: Microsoft.ApplicationInsights.Channel.Transmission
+  langs:
+  - csharp
+  - vb
+  name: TelemetryItems
+  nameWithType: Transmission.TelemetryItems
+  fullName: Microsoft.ApplicationInsights.Channel.Transmission.TelemetryItems
+  type: Property
+  source:
+    remote:
+      path: src/Core/Managed/Shared/Channel/Transmission.cs
+      branch: master
+      repo: https://github.com/Microsoft/ApplicationInsights-dotnet
+    id: TelemetryItems
+    path: src/Core/Managed/Shared/Channel/Transmission.cs
+    startLine: 145
+  assemblies:
+  - Microsoft.ApplicationInsights
+  namespace: Microsoft.ApplicationInsights.Channel
+  summary: "\nGets the number of telemetry items in the transmission.\n"
+  example: []
+  syntax:
+    content: public ICollection<ITelemetry> TelemetryItems { get; }
+    content.vb: Public ReadOnly Property TelemetryItems As ICollection(Of ITelemetry)
+    parameters: []
+    return:
+      type: System.Collections.Generic.ICollection{Microsoft.ApplicationInsights.Channel.ITelemetry}
+  overload: Microsoft.ApplicationInsights.Channel.Transmission.TelemetryItems*
   modifiers.csharp:
   - public
   - get
@@ -372,7 +454,7 @@ items:
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
     id: SendAsync
     path: src/Core/Managed/Shared/Channel/Transmission.cs
-    startLine: 133
+    startLine: 155
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.Channel
@@ -391,6 +473,49 @@ items:
   modifiers.vb:
   - Public
   - Overridable
+- uid: Microsoft.ApplicationInsights.Channel.Transmission.Split(System.Func{System.Int32,System.Int32})
+  commentId: M:Microsoft.ApplicationInsights.Channel.Transmission.Split(System.Func{System.Int32,System.Int32})
+  id: Split(System.Func{System.Int32,System.Int32})
+  parent: Microsoft.ApplicationInsights.Channel.Transmission
+  langs:
+  - csharp
+  - vb
+  name: Split(Func<Int32, Int32>)
+  nameWithType: Transmission.Split(Func<Int32, Int32>)
+  fullName: Microsoft.ApplicationInsights.Channel.Transmission.Split(System.Func<System.Int32, System.Int32>)
+  type: Method
+  source:
+    remote:
+      path: src/Core/Managed/Shared/Channel/Transmission.cs
+      branch: master
+      repo: https://github.com/Microsoft/ApplicationInsights-dotnet
+    id: Split
+    path: src/Core/Managed/Shared/Channel/Transmission.cs
+    startLine: 243
+  assemblies:
+  - Microsoft.ApplicationInsights
+  namespace: Microsoft.ApplicationInsights.Channel
+  summary: "\nSplits the Transmission object into two pieces using a method \nto determine the length of the first piece based off of the length of the transmission.\n"
+  example: []
+  syntax:
+    content: public virtual Tuple<Transmission, Transmission> Split(Func<int, int> calculateLength)
+    content.vb: Public Overridable Function Split(calculateLength As Func(Of Integer, Integer)) As Tuple(Of Transmission, Transmission)
+    parameters:
+    - id: calculateLength
+      type: System.Func{System.Int32,System.Int32}
+    return:
+      type: System.Tuple{Microsoft.ApplicationInsights.Channel.Transmission,Microsoft.ApplicationInsights.Channel.Transmission}
+      description: "\nA tuple with the first item being a Transmission object with n ITelemetry objects\nand the second item being a Transmission object with the remaining ITelemetry objects.\n"
+  overload: Microsoft.ApplicationInsights.Channel.Transmission.Split*
+  nameWithType.vb: Transmission.Split(Func(Of Int32, Int32))
+  modifiers.csharp:
+  - public
+  - virtual
+  modifiers.vb:
+  - Public
+  - Overridable
+  fullName.vb: Microsoft.ApplicationInsights.Channel.Transmission.Split(System.Func(Of System.Int32, System.Int32))
+  name.vb: Split(Func(Of Int32, Int32))
 - uid: Microsoft.ApplicationInsights.Channel.Transmission.CreateRequest(System.Uri)
   commentId: M:Microsoft.ApplicationInsights.Channel.Transmission.CreateRequest(System.Uri)
   id: CreateRequest(System.Uri)
@@ -409,7 +534,7 @@ items:
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
     id: CreateRequest
     path: src/Core/Managed/Shared/Channel/Transmission.cs
-    startLine: 202
+    startLine: 374
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.Channel
@@ -789,6 +914,93 @@ references:
   name: TimeSpan
   nameWithType: TimeSpan
   fullName: System.TimeSpan
+- uid: System.Collections.Generic.ICollection{Microsoft.ApplicationInsights.Channel.ITelemetry}
+  commentId: T:System.Collections.Generic.ICollection{Microsoft.ApplicationInsights.Channel.ITelemetry}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.ICollection`1
+  name: ICollection<ITelemetry>
+  nameWithType: ICollection<ITelemetry>
+  fullName: System.Collections.Generic.ICollection<Microsoft.ApplicationInsights.Channel.ITelemetry>
+  nameWithType.vb: ICollection(Of ITelemetry)
+  fullname.vb: System.Collections.Generic.ICollection(Of Microsoft.ApplicationInsights.Channel.ITelemetry)
+  name.vb: ICollection(Of ITelemetry)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1
+    name: ICollection
+    nameWithType: ICollection
+    fullName: System.Collections.Generic.ICollection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Microsoft.ApplicationInsights.Channel.ITelemetry
+    name: ITelemetry
+    nameWithType: ITelemetry
+    fullName: Microsoft.ApplicationInsights.Channel.ITelemetry
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1
+    name: ICollection
+    nameWithType: ICollection
+    fullName: System.Collections.Generic.ICollection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Microsoft.ApplicationInsights.Channel.ITelemetry
+    name: ITelemetry
+    nameWithType: ITelemetry
+    fullName: Microsoft.ApplicationInsights.Channel.ITelemetry
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.ICollection`1
+  commentId: T:System.Collections.Generic.ICollection`1
+  isExternal: true
+  name: ICollection<T>
+  nameWithType: ICollection<T>
+  fullName: System.Collections.Generic.ICollection<T>
+  nameWithType.vb: ICollection(Of T)
+  fullname.vb: System.Collections.Generic.ICollection(Of T)
+  name.vb: ICollection(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1
+    name: ICollection
+    nameWithType: ICollection
+    fullName: System.Collections.Generic.ICollection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1
+    name: ICollection
+    nameWithType: ICollection
+    fullName: System.Collections.Generic.ICollection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: false
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
 - uid: Microsoft.ApplicationInsights.Channel.Transmission.EndpointAddress*
   commentId: Overload:Microsoft.ApplicationInsights.Channel.Transmission.EndpointAddress
   isExternal: false
@@ -825,6 +1037,12 @@ references:
   name: Id
   nameWithType: Transmission.Id
   fullName: Microsoft.ApplicationInsights.Channel.Transmission.Id
+- uid: Microsoft.ApplicationInsights.Channel.Transmission.TelemetryItems*
+  commentId: Overload:Microsoft.ApplicationInsights.Channel.Transmission.TelemetryItems
+  isExternal: false
+  name: TelemetryItems
+  nameWithType: Transmission.TelemetryItems
+  fullName: Microsoft.ApplicationInsights.Channel.Transmission.TelemetryItems
 - uid: Microsoft.ApplicationInsights.Channel.Transmission.SendAsync*
   commentId: Overload:Microsoft.ApplicationInsights.Channel.Transmission.SendAsync
   isExternal: false
@@ -918,6 +1136,230 @@ references:
   name: System.Threading.Tasks
   nameWithType: System.Threading.Tasks
   fullName: System.Threading.Tasks
+- uid: Microsoft.ApplicationInsights.Channel.Transmission.Split*
+  commentId: Overload:Microsoft.ApplicationInsights.Channel.Transmission.Split
+  isExternal: false
+  name: Split
+  nameWithType: Transmission.Split
+  fullName: Microsoft.ApplicationInsights.Channel.Transmission.Split
+- uid: System.Func{System.Int32,System.Int32}
+  commentId: T:System.Func{System.Int32,System.Int32}
+  parent: System
+  definition: System.Func`2
+  name: Func<Int32, Int32>
+  nameWithType: Func<Int32, Int32>
+  fullName: System.Func<System.Int32, System.Int32>
+  nameWithType.vb: Func(Of Int32, Int32)
+  fullname.vb: System.Func(Of System.Int32, System.Int32)
+  name.vb: Func(Of Int32, Int32)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Tuple{Microsoft.ApplicationInsights.Channel.Transmission,Microsoft.ApplicationInsights.Channel.Transmission}
+  commentId: T:System.Tuple{Microsoft.ApplicationInsights.Channel.Transmission,Microsoft.ApplicationInsights.Channel.Transmission}
+  parent: System
+  definition: System.Tuple`2
+  name: Tuple<Transmission, Transmission>
+  nameWithType: Tuple<Transmission, Transmission>
+  fullName: System.Tuple<Microsoft.ApplicationInsights.Channel.Transmission, Microsoft.ApplicationInsights.Channel.Transmission>
+  nameWithType.vb: Tuple(Of Transmission, Transmission)
+  fullname.vb: System.Tuple(Of Microsoft.ApplicationInsights.Channel.Transmission, Microsoft.ApplicationInsights.Channel.Transmission)
+  name.vb: Tuple(Of Transmission, Transmission)
+  spec.csharp:
+  - uid: System.Tuple`2
+    name: Tuple
+    nameWithType: Tuple
+    fullName: System.Tuple
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Microsoft.ApplicationInsights.Channel.Transmission
+    name: Transmission
+    nameWithType: Transmission
+    fullName: Microsoft.ApplicationInsights.Channel.Transmission
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.ApplicationInsights.Channel.Transmission
+    name: Transmission
+    nameWithType: Transmission
+    fullName: Microsoft.ApplicationInsights.Channel.Transmission
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Tuple`2
+    name: Tuple
+    nameWithType: Tuple
+    fullName: System.Tuple
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Microsoft.ApplicationInsights.Channel.Transmission
+    name: Transmission
+    nameWithType: Transmission
+    fullName: Microsoft.ApplicationInsights.Channel.Transmission
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.ApplicationInsights.Channel.Transmission
+    name: Transmission
+    nameWithType: Transmission
+    fullName: Microsoft.ApplicationInsights.Channel.Transmission
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Func`2
+  commentId: T:System.Func`2
+  isExternal: true
+  name: Func<T, TResult>
+  nameWithType: Func<T, TResult>
+  fullName: System.Func<T, TResult>
+  nameWithType.vb: Func(Of T, TResult)
+  fullname.vb: System.Func(Of T, TResult)
+  name.vb: Func(Of T, TResult)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Tuple`2
+  commentId: T:System.Tuple`2
+  isExternal: true
+  name: Tuple<T1, T2>
+  nameWithType: Tuple<T1, T2>
+  fullName: System.Tuple<T1, T2>
+  nameWithType.vb: Tuple(Of T1, T2)
+  fullname.vb: System.Tuple(Of T1, T2)
+  name.vb: Tuple(Of T1, T2)
+  spec.csharp:
+  - uid: System.Tuple`2
+    name: Tuple
+    nameWithType: Tuple
+    fullName: System.Tuple
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T1
+    nameWithType: T1
+    fullName: T1
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: T2
+    nameWithType: T2
+    fullName: T2
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Tuple`2
+    name: Tuple
+    nameWithType: Tuple
+    fullName: System.Tuple
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T1
+    nameWithType: T1
+    fullName: T1
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: T2
+    nameWithType: T2
+    fullName: T2
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Microsoft.ApplicationInsights.Channel.Transmission.CreateRequest*
   commentId: Overload:Microsoft.ApplicationInsights.Channel.Transmission.CreateRequest
   isExternal: false

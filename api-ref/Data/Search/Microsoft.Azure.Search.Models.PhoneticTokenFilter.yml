@@ -31,8 +31,13 @@ items:
   summary: "\nCreate tokens for phonetic matches. This token filter is implemented\nusing Apache Lucene.\n<a href=\"https://lucene.apache.org/core/4_10_3/analyzers-phonetic/org/apache/lucene/analysis/phonetic/package-tree.html\"></a>\n"
   example: []
   syntax:
-    content: 'public class PhoneticTokenFilter : TokenFilter'
+    content: >-
+      [JsonObject("#Microsoft.Azure.Search.PhoneticTokenFilter")]
+
+      public class PhoneticTokenFilter : TokenFilter
     content.vb: >-
+      <JsonObject("#Microsoft.Azure.Search.PhoneticTokenFilter")>
+
       Public Class PhoneticTokenFilter
           Inherits TokenFilter
   inheritance:
@@ -47,6 +52,12 @@ items:
   - System.Object.GetHashCode
   - System.Object.GetType
   - System.Object.MemberwiseClone
+  attributes:
+  - type: Newtonsoft.Json.JsonObjectAttribute
+    ctor: Newtonsoft.Json.JsonObjectAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: '#Microsoft.Azure.Search.PhoneticTokenFilter'
   modifiers.csharp:
   - public
   - class
@@ -152,12 +163,26 @@ items:
   summary: "\nGets or sets the phonetic encoder to use. Default is \"metaphone\".\nPossible values include: 'metaphone', 'doubleMetaphone',\n'soundex', 'refinedSoundex', 'caverphone1', 'caverphone2',\n'cologne', 'nysiis', 'koelnerPhonetik', 'haasePhonetik',\n'beiderMorse'\n"
   example: []
   syntax:
-    content: public PhoneticEncoder? Encoder { get; set; }
-    content.vb: Public Property Encoder As PhoneticEncoder?
+    content: >-
+      [JsonProperty(PropertyName = "encoder")]
+
+      public PhoneticEncoder? Encoder { get; set; }
+    content.vb: >-
+      <JsonProperty(PropertyName:="encoder")>
+
+      Public Property Encoder As PhoneticEncoder?
     parameters: []
     return:
       type: System.Nullable{Microsoft.Azure.Search.Models.PhoneticEncoder}
   overload: Microsoft.Azure.Search.Models.PhoneticTokenFilter.Encoder*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: PropertyName
+      type: System.String
+      value: encoder
   modifiers.csharp:
   - public
   - get
@@ -189,12 +214,26 @@ items:
   summary: "\nGets or sets a value indicating whether encoded tokens should\nreplace original tokens. If false, encoded tokens are added as\nsynonyms. Default is true.\n"
   example: []
   syntax:
-    content: public bool ? ReplaceOriginalTokens { get; set; }
-    content.vb: Public Property ReplaceOriginalTokens As Boolean?
+    content: >-
+      [JsonProperty(PropertyName = "replace")]
+
+      public bool ? ReplaceOriginalTokens { get; set; }
+    content.vb: >-
+      <JsonProperty(PropertyName:="replace")>
+
+      Public Property ReplaceOriginalTokens As Boolean?
     parameters: []
     return:
       type: System.Nullable{System.Boolean}
   overload: Microsoft.Azure.Search.Models.PhoneticTokenFilter.ReplaceOriginalTokens*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: PropertyName
+      type: System.String
+      value: replace
   modifiers.csharp:
   - public
   - get
@@ -230,6 +269,10 @@ items:
     content.vb: Public Overrides Sub Validate
   overridden: Microsoft.Azure.Search.Models.TokenFilter.Validate
   overload: Microsoft.Azure.Search.Models.PhoneticTokenFilter.Validate*
+  exceptions:
+  - type: Microsoft.Rest.ValidationException
+    commentId: T:Microsoft.Rest.ValidationException
+    description: "\nThrown if validation fails\n"
   modifiers.csharp:
   - public
   - override
@@ -734,3 +777,5 @@ references:
   name: Validate
   nameWithType: PhoneticTokenFilter.Validate
   fullName: Microsoft.Azure.Search.Models.PhoneticTokenFilter.Validate
+- uid: Microsoft.Rest.ValidationException
+  commentId: T:Microsoft.Rest.ValidationException

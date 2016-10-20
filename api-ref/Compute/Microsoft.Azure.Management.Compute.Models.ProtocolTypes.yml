@@ -28,8 +28,20 @@ items:
   summary: "\nDefines values for ProtocolTypes.\n"
   example: []
   syntax:
-    content: public enum ProtocolTypes
-    content.vb: Public Enum ProtocolTypes
+    content: >-
+      [JsonConverter(typeof (StringEnumConverter))]
+
+      public enum ProtocolTypes
+    content.vb: >-
+      <JsonConverter(GetType(StringEnumConverter))>
+
+      Public Enum ProtocolTypes
+  attributes:
+  - type: Newtonsoft.Json.JsonConverterAttribute
+    ctor: Newtonsoft.Json.JsonConverterAttribute.#ctor(System.Type)
+    arguments:
+    - type: System.Type
+      value: Newtonsoft.Json.Converters.StringEnumConverter
   modifiers.csharp:
   - public
   - enum
@@ -59,9 +71,24 @@ items:
   - Microsoft.Azure.Management.Compute
   namespace: Microsoft.Azure.Management.Compute.Models
   syntax:
-    content: Http = 0
+    content: >-
+      [EnumMember(Value = "Http")]
+
+      Http = 0
+    content.vb: >-
+      <EnumMember(Value:="Http")>
+
+      Http = 0
     return:
       type: Microsoft.Azure.Management.Compute.Models.ProtocolTypes
+  attributes:
+  - type: System.Runtime.Serialization.EnumMemberAttribute
+    ctor: System.Runtime.Serialization.EnumMemberAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Value
+      type: System.String
+      value: Http
   modifiers.csharp:
   - public
   - const
@@ -91,9 +118,24 @@ items:
   - Microsoft.Azure.Management.Compute
   namespace: Microsoft.Azure.Management.Compute.Models
   syntax:
-    content: Https = 1
+    content: >-
+      [EnumMember(Value = "Https")]
+
+      Https = 1
+    content.vb: >-
+      <EnumMember(Value:="Https")>
+
+      Https = 1
     return:
       type: Microsoft.Azure.Management.Compute.Models.ProtocolTypes
+  attributes:
+  - type: System.Runtime.Serialization.EnumMemberAttribute
+    ctor: System.Runtime.Serialization.EnumMemberAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Value
+      type: System.String
+      value: Https
   modifiers.csharp:
   - public
   - const

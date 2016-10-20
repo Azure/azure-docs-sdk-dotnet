@@ -28,8 +28,20 @@ items:
   summary: "\nDefines values for JobType.\n"
   example: []
   syntax:
-    content: public enum JobType
-    content.vb: Public Enum JobType
+    content: >-
+      [JsonConverter(typeof (StringEnumConverter))]
+
+      public enum JobType
+    content.vb: >-
+      <JsonConverter(GetType(StringEnumConverter))>
+
+      Public Enum JobType
+  attributes:
+  - type: Newtonsoft.Json.JsonConverterAttribute
+    ctor: Newtonsoft.Json.JsonConverterAttribute.#ctor(System.Type)
+    arguments:
+    - type: System.Type
+      value: Newtonsoft.Json.Converters.StringEnumConverter
   modifiers.csharp:
   - public
   - enum
@@ -59,9 +71,24 @@ items:
   - Microsoft.Azure.Management.DataLake.Analytics
   namespace: Microsoft.Azure.Management.DataLake.Analytics.Models
   syntax:
-    content: USql = 0
+    content: >-
+      [EnumMember(Value = "USql")]
+
+      USql = 0
+    content.vb: >-
+      <EnumMember(Value:="USql")>
+
+      USql = 0
     return:
       type: Microsoft.Azure.Management.DataLake.Analytics.Models.JobType
+  attributes:
+  - type: System.Runtime.Serialization.EnumMemberAttribute
+    ctor: System.Runtime.Serialization.EnumMemberAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Value
+      type: System.String
+      value: USql
   modifiers.csharp:
   - public
   - const
@@ -91,9 +118,24 @@ items:
   - Microsoft.Azure.Management.DataLake.Analytics
   namespace: Microsoft.Azure.Management.DataLake.Analytics.Models
   syntax:
-    content: Hive = 1
+    content: >-
+      [EnumMember(Value = "Hive")]
+
+      Hive = 1
+    content.vb: >-
+      <EnumMember(Value:="Hive")>
+
+      Hive = 1
     return:
       type: Microsoft.Azure.Management.DataLake.Analytics.Models.JobType
+  attributes:
+  - type: System.Runtime.Serialization.EnumMemberAttribute
+    ctor: System.Runtime.Serialization.EnumMemberAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Value
+      type: System.String
+      value: Hive
   modifiers.csharp:
   - public
   - const

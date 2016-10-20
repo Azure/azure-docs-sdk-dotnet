@@ -28,8 +28,20 @@ items:
   summary: "\nDefines values for AccessControlEntryAction.\n"
   example: []
   syntax:
-    content: public enum AccessControlEntryAction
-    content.vb: Public Enum AccessControlEntryAction
+    content: >-
+      [JsonConverter(typeof (StringEnumConverter))]
+
+      public enum AccessControlEntryAction
+    content.vb: >-
+      <JsonConverter(GetType(StringEnumConverter))>
+
+      Public Enum AccessControlEntryAction
+  attributes:
+  - type: Newtonsoft.Json.JsonConverterAttribute
+    ctor: Newtonsoft.Json.JsonConverterAttribute.#ctor(System.Type)
+    arguments:
+    - type: System.Type
+      value: Newtonsoft.Json.Converters.StringEnumConverter
   modifiers.csharp:
   - public
   - enum
@@ -59,9 +71,24 @@ items:
   - Microsoft.Azure.Management.Websites
   namespace: Microsoft.Azure.Management.WebSites.Models
   syntax:
-    content: Permit = 0
+    content: >-
+      [EnumMember(Value = "Permit")]
+
+      Permit = 0
+    content.vb: >-
+      <EnumMember(Value:="Permit")>
+
+      Permit = 0
     return:
       type: Microsoft.Azure.Management.WebSites.Models.AccessControlEntryAction
+  attributes:
+  - type: System.Runtime.Serialization.EnumMemberAttribute
+    ctor: System.Runtime.Serialization.EnumMemberAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Value
+      type: System.String
+      value: Permit
   modifiers.csharp:
   - public
   - const
@@ -91,9 +118,24 @@ items:
   - Microsoft.Azure.Management.Websites
   namespace: Microsoft.Azure.Management.WebSites.Models
   syntax:
-    content: Deny = 1
+    content: >-
+      [EnumMember(Value = "Deny")]
+
+      Deny = 1
+    content.vb: >-
+      <EnumMember(Value:="Deny")>
+
+      Deny = 1
     return:
       type: Microsoft.Azure.Management.WebSites.Models.AccessControlEntryAction
+  attributes:
+  - type: System.Runtime.Serialization.EnumMemberAttribute
+    ctor: System.Runtime.Serialization.EnumMemberAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Value
+      type: System.String
+      value: Deny
   modifiers.csharp:
   - public
   - const

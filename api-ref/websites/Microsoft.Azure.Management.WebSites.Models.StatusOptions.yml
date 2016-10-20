@@ -28,8 +28,20 @@ items:
   summary: "\nDefines values for StatusOptions.\n"
   example: []
   syntax:
-    content: public enum StatusOptions
-    content.vb: Public Enum StatusOptions
+    content: >-
+      [JsonConverter(typeof (StringEnumConverter))]
+
+      public enum StatusOptions
+    content.vb: >-
+      <JsonConverter(GetType(StringEnumConverter))>
+
+      Public Enum StatusOptions
+  attributes:
+  - type: Newtonsoft.Json.JsonConverterAttribute
+    ctor: Newtonsoft.Json.JsonConverterAttribute.#ctor(System.Type)
+    arguments:
+    - type: System.Type
+      value: Newtonsoft.Json.Converters.StringEnumConverter
   modifiers.csharp:
   - public
   - enum
@@ -59,9 +71,24 @@ items:
   - Microsoft.Azure.Management.Websites
   namespace: Microsoft.Azure.Management.WebSites.Models
   syntax:
-    content: Ready = 0
+    content: >-
+      [EnumMember(Value = "Ready")]
+
+      Ready = 0
+    content.vb: >-
+      <EnumMember(Value:="Ready")>
+
+      Ready = 0
     return:
       type: Microsoft.Azure.Management.WebSites.Models.StatusOptions
+  attributes:
+  - type: System.Runtime.Serialization.EnumMemberAttribute
+    ctor: System.Runtime.Serialization.EnumMemberAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Value
+      type: System.String
+      value: Ready
   modifiers.csharp:
   - public
   - const
@@ -91,9 +118,24 @@ items:
   - Microsoft.Azure.Management.Websites
   namespace: Microsoft.Azure.Management.WebSites.Models
   syntax:
-    content: Pending = 1
+    content: >-
+      [EnumMember(Value = "Pending")]
+
+      Pending = 1
+    content.vb: >-
+      <EnumMember(Value:="Pending")>
+
+      Pending = 1
     return:
       type: Microsoft.Azure.Management.WebSites.Models.StatusOptions
+  attributes:
+  - type: System.Runtime.Serialization.EnumMemberAttribute
+    ctor: System.Runtime.Serialization.EnumMemberAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Value
+      type: System.String
+      value: Pending
   modifiers.csharp:
   - public
   - const

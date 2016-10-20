@@ -31,8 +31,13 @@ items:
   summary: "\nDefines a function that boosts scores based on the value of a\ndate-time field.\n<a href=\"https://msdn.microsoft.com/library/azure/dn798928.aspx\"></a>\n"
   example: []
   syntax:
-    content: 'public class FreshnessScoringFunction : ScoringFunction'
+    content: >-
+      [JsonObject("freshness")]
+
+      public class FreshnessScoringFunction : ScoringFunction
     content.vb: >-
+      <JsonObject("freshness")>
+
       Public Class FreshnessScoringFunction
           Inherits ScoringFunction
   inheritance:
@@ -49,6 +54,12 @@ items:
   - System.Object.GetHashCode
   - System.Object.GetType
   - System.Object.MemberwiseClone
+  attributes:
+  - type: Newtonsoft.Json.JsonObjectAttribute
+    ctor: Newtonsoft.Json.JsonObjectAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: freshness
   modifiers.csharp:
   - public
   - class
@@ -200,12 +211,26 @@ items:
   summary: "\nGets or sets parameter values for the freshness scoring function.\n"
   example: []
   syntax:
-    content: public FreshnessScoringParameters Parameters { get; set; }
-    content.vb: Public Property Parameters As FreshnessScoringParameters
+    content: >-
+      [JsonProperty(PropertyName = "freshness")]
+
+      public FreshnessScoringParameters Parameters { get; set; }
+    content.vb: >-
+      <JsonProperty(PropertyName:="freshness")>
+
+      Public Property Parameters As FreshnessScoringParameters
     parameters: []
     return:
       type: Microsoft.Azure.Search.Models.FreshnessScoringParameters
   overload: Microsoft.Azure.Search.Models.FreshnessScoringFunction.Parameters*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: PropertyName
+      type: System.String
+      value: freshness
   modifiers.csharp:
   - public
   - get
@@ -241,6 +266,10 @@ items:
     content.vb: Public Overrides Sub Validate
   overridden: Microsoft.Azure.Search.Models.ScoringFunction.Validate
   overload: Microsoft.Azure.Search.Models.FreshnessScoringFunction.Validate*
+  exceptions:
+  - type: Microsoft.Rest.ValidationException
+    commentId: T:Microsoft.Rest.ValidationException
+    description: "\nThrown if validation fails\n"
   modifiers.csharp:
   - public
   - override
@@ -730,3 +759,5 @@ references:
   name: Validate
   nameWithType: FreshnessScoringFunction.Validate
   fullName: Microsoft.Azure.Search.Models.FreshnessScoringFunction.Validate
+- uid: Microsoft.Rest.ValidationException
+  commentId: T:Microsoft.Rest.ValidationException

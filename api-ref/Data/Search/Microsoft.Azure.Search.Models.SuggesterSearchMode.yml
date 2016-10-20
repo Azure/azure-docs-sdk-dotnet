@@ -27,8 +27,20 @@ items:
   summary: "\nDefines values for SuggesterSearchMode.\n"
   example: []
   syntax:
-    content: public enum SuggesterSearchMode
-    content.vb: Public Enum SuggesterSearchMode
+    content: >-
+      [JsonConverter(typeof (StringEnumConverter))]
+
+      public enum SuggesterSearchMode
+    content.vb: >-
+      <JsonConverter(GetType(StringEnumConverter))>
+
+      Public Enum SuggesterSearchMode
+  attributes:
+  - type: Newtonsoft.Json.JsonConverterAttribute
+    ctor: Newtonsoft.Json.JsonConverterAttribute.#ctor(System.Type)
+    arguments:
+    - type: System.Type
+      value: Newtonsoft.Json.Converters.StringEnumConverter
   modifiers.csharp:
   - public
   - enum
@@ -58,9 +70,24 @@ items:
   - Microsoft.Azure.Search
   namespace: Microsoft.Azure.Search.Models
   syntax:
-    content: AnalyzingInfixMatching = 0
+    content: >-
+      [EnumMember(Value = "analyzingInfixMatching")]
+
+      AnalyzingInfixMatching = 0
+    content.vb: >-
+      <EnumMember(Value:="analyzingInfixMatching")>
+
+      AnalyzingInfixMatching = 0
     return:
       type: Microsoft.Azure.Search.Models.SuggesterSearchMode
+  attributes:
+  - type: System.Runtime.Serialization.EnumMemberAttribute
+    ctor: System.Runtime.Serialization.EnumMemberAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Value
+      type: System.String
+      value: analyzingInfixMatching
   modifiers.csharp:
   - public
   - const

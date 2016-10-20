@@ -28,8 +28,20 @@ items:
   summary: "\nDefines values for UnauthenticatedClientAction.\n"
   example: []
   syntax:
-    content: public enum UnauthenticatedClientAction
-    content.vb: Public Enum UnauthenticatedClientAction
+    content: >-
+      [JsonConverter(typeof (StringEnumConverter))]
+
+      public enum UnauthenticatedClientAction
+    content.vb: >-
+      <JsonConverter(GetType(StringEnumConverter))>
+
+      Public Enum UnauthenticatedClientAction
+  attributes:
+  - type: Newtonsoft.Json.JsonConverterAttribute
+    ctor: Newtonsoft.Json.JsonConverterAttribute.#ctor(System.Type)
+    arguments:
+    - type: System.Type
+      value: Newtonsoft.Json.Converters.StringEnumConverter
   modifiers.csharp:
   - public
   - enum
@@ -59,9 +71,24 @@ items:
   - Microsoft.Azure.Management.Websites
   namespace: Microsoft.Azure.Management.WebSites.Models
   syntax:
-    content: RedirectToLoginPage = 0
+    content: >-
+      [EnumMember(Value = "RedirectToLoginPage")]
+
+      RedirectToLoginPage = 0
+    content.vb: >-
+      <EnumMember(Value:="RedirectToLoginPage")>
+
+      RedirectToLoginPage = 0
     return:
       type: Microsoft.Azure.Management.WebSites.Models.UnauthenticatedClientAction
+  attributes:
+  - type: System.Runtime.Serialization.EnumMemberAttribute
+    ctor: System.Runtime.Serialization.EnumMemberAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Value
+      type: System.String
+      value: RedirectToLoginPage
   modifiers.csharp:
   - public
   - const
@@ -91,9 +118,24 @@ items:
   - Microsoft.Azure.Management.Websites
   namespace: Microsoft.Azure.Management.WebSites.Models
   syntax:
-    content: AllowAnonymous = 1
+    content: >-
+      [EnumMember(Value = "AllowAnonymous")]
+
+      AllowAnonymous = 1
+    content.vb: >-
+      <EnumMember(Value:="AllowAnonymous")>
+
+      AllowAnonymous = 1
     return:
       type: Microsoft.Azure.Management.WebSites.Models.UnauthenticatedClientAction
+  attributes:
+  - type: System.Runtime.Serialization.EnumMemberAttribute
+    ctor: System.Runtime.Serialization.EnumMemberAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Value
+      type: System.String
+      value: AllowAnonymous
   modifiers.csharp:
   - public
   - const

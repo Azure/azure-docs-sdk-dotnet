@@ -28,8 +28,20 @@ items:
   summary: "\nDefines values for CustomHostNameDnsRecordType.\n"
   example: []
   syntax:
-    content: public enum CustomHostNameDnsRecordType
-    content.vb: Public Enum CustomHostNameDnsRecordType
+    content: >-
+      [JsonConverter(typeof (StringEnumConverter))]
+
+      public enum CustomHostNameDnsRecordType
+    content.vb: >-
+      <JsonConverter(GetType(StringEnumConverter))>
+
+      Public Enum CustomHostNameDnsRecordType
+  attributes:
+  - type: Newtonsoft.Json.JsonConverterAttribute
+    ctor: Newtonsoft.Json.JsonConverterAttribute.#ctor(System.Type)
+    arguments:
+    - type: System.Type
+      value: Newtonsoft.Json.Converters.StringEnumConverter
   modifiers.csharp:
   - public
   - enum
@@ -59,9 +71,24 @@ items:
   - Microsoft.Azure.Management.Websites
   namespace: Microsoft.Azure.Management.WebSites.Models
   syntax:
-    content: CName = 0
+    content: >-
+      [EnumMember(Value = "CName")]
+
+      CName = 0
+    content.vb: >-
+      <EnumMember(Value:="CName")>
+
+      CName = 0
     return:
       type: Microsoft.Azure.Management.WebSites.Models.CustomHostNameDnsRecordType
+  attributes:
+  - type: System.Runtime.Serialization.EnumMemberAttribute
+    ctor: System.Runtime.Serialization.EnumMemberAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Value
+      type: System.String
+      value: CName
   modifiers.csharp:
   - public
   - const
@@ -91,9 +118,24 @@ items:
   - Microsoft.Azure.Management.Websites
   namespace: Microsoft.Azure.Management.WebSites.Models
   syntax:
-    content: A = 1
+    content: >-
+      [EnumMember(Value = "A")]
+
+      A = 1
+    content.vb: >-
+      <EnumMember(Value:="A")>
+
+      A = 1
     return:
       type: Microsoft.Azure.Management.WebSites.Models.CustomHostNameDnsRecordType
+  attributes:
+  - type: System.Runtime.Serialization.EnumMemberAttribute
+    ctor: System.Runtime.Serialization.EnumMemberAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Value
+      type: System.String
+      value: A
   modifiers.csharp:
   - public
   - const

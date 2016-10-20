@@ -142,12 +142,26 @@ items:
   summary: "\nthe list of SSH public keys used to authenticate with linux based\nVMs\n"
   example: []
   syntax:
-    content: public IList<SshPublicKey> PublicKeys { get; set; }
-    content.vb: Public Property PublicKeys As IList(Of SshPublicKey)
+    content: >-
+      [JsonProperty(PropertyName = "publicKeys")]
+
+      public IList<SshPublicKey> PublicKeys { get; set; }
+    content.vb: >-
+      <JsonProperty(PropertyName:="publicKeys")>
+
+      Public Property PublicKeys As IList(Of SshPublicKey)
     parameters: []
     return:
       type: System.Collections.Generic.IList{Microsoft.Azure.Management.Compute.Models.SshPublicKey}
   overload: Microsoft.Azure.Management.Compute.Models.SshConfiguration.PublicKeys*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: PropertyName
+      type: System.String
+      value: publicKeys
   modifiers.csharp:
   - public
   - get
