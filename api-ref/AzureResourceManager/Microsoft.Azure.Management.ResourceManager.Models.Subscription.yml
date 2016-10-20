@@ -6,7 +6,7 @@ items:
   parent: Microsoft.Azure.Management.ResourceManager.Models
   children:
   - Microsoft.Azure.Management.ResourceManager.Models.Subscription.#ctor
-  - Microsoft.Azure.Management.ResourceManager.Models.Subscription.#ctor(System.String,System.String,System.String,System.String,System.String,Microsoft.Azure.Management.ResourceManager.Models.SubscriptionPolicies,System.String)
+  - Microsoft.Azure.Management.ResourceManager.Models.Subscription.#ctor(System.String,System.String,System.String,System.String,System.Nullable{Microsoft.Azure.Management.ResourceManager.Models.SubscriptionState},Microsoft.Azure.Management.ResourceManager.Models.SubscriptionPolicies,System.String)
   - Microsoft.Azure.Management.ResourceManager.Models.Subscription.AuthorizationSource
   - Microsoft.Azure.Management.ResourceManager.Models.Subscription.DisplayName
   - Microsoft.Azure.Management.ResourceManager.Models.Subscription.Id
@@ -28,7 +28,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: Subscription
     path: src/ResourceManagement/Resource/Microsoft.Azure.Management.ResourceManager/Generated/Models/Subscription.cs
-    startLine: 21
+    startLine: 15
   assemblies:
   - Microsoft.Azure.Management.ResourceManager
   namespace: Microsoft.Azure.Management.ResourceManager.Models
@@ -71,7 +71,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: .ctor
     path: src/ResourceManagement/Resource/Microsoft.Azure.Management.ResourceManager/Generated/Models/Subscription.cs
-    startLine: 26
+    startLine: 20
   assemblies:
   - Microsoft.Azure.Management.ResourceManager
   namespace: Microsoft.Azure.Management.ResourceManager.Models
@@ -85,16 +85,16 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.Azure.Management.ResourceManager.Models.Subscription.#ctor(System.String,System.String,System.String,System.String,System.String,Microsoft.Azure.Management.ResourceManager.Models.SubscriptionPolicies,System.String)
-  commentId: M:Microsoft.Azure.Management.ResourceManager.Models.Subscription.#ctor(System.String,System.String,System.String,System.String,System.String,Microsoft.Azure.Management.ResourceManager.Models.SubscriptionPolicies,System.String)
-  id: '#ctor(System.String,System.String,System.String,System.String,System.String,Microsoft.Azure.Management.ResourceManager.Models.SubscriptionPolicies,System.String)'
+- uid: Microsoft.Azure.Management.ResourceManager.Models.Subscription.#ctor(System.String,System.String,System.String,System.String,System.Nullable{Microsoft.Azure.Management.ResourceManager.Models.SubscriptionState},Microsoft.Azure.Management.ResourceManager.Models.SubscriptionPolicies,System.String)
+  commentId: M:Microsoft.Azure.Management.ResourceManager.Models.Subscription.#ctor(System.String,System.String,System.String,System.String,System.Nullable{Microsoft.Azure.Management.ResourceManager.Models.SubscriptionState},Microsoft.Azure.Management.ResourceManager.Models.SubscriptionPolicies,System.String)
+  id: '#ctor(System.String,System.String,System.String,System.String,System.Nullable{Microsoft.Azure.Management.ResourceManager.Models.SubscriptionState},Microsoft.Azure.Management.ResourceManager.Models.SubscriptionPolicies,System.String)'
   parent: Microsoft.Azure.Management.ResourceManager.Models.Subscription
   langs:
   - csharp
   - vb
-  name: Subscription(String, String, String, String, String, SubscriptionPolicies, String)
-  nameWithType: Subscription.Subscription(String, String, String, String, String, SubscriptionPolicies, String)
-  fullName: Microsoft.Azure.Management.ResourceManager.Models.Subscription.Subscription(System.String, System.String, System.String, System.String, System.String, Microsoft.Azure.Management.ResourceManager.Models.SubscriptionPolicies, System.String)
+  name: Subscription(String, String, String, String, Nullable<SubscriptionState>, SubscriptionPolicies, String)
+  nameWithType: Subscription.Subscription(String, String, String, String, Nullable<SubscriptionState>, SubscriptionPolicies, String)
+  fullName: Microsoft.Azure.Management.ResourceManager.Models.Subscription.Subscription(System.String, System.String, System.String, System.String, System.Nullable<Microsoft.Azure.Management.ResourceManager.Models.SubscriptionState>, Microsoft.Azure.Management.ResourceManager.Models.SubscriptionPolicies, System.String)
   type: Constructor
   source:
     remote:
@@ -103,19 +103,22 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: .ctor
     path: src/ResourceManagement/Resource/Microsoft.Azure.Management.ResourceManager/Generated/Models/Subscription.cs
-    startLine: 38
+    startLine: 39
   assemblies:
   - Microsoft.Azure.Management.ResourceManager
   namespace: Microsoft.Azure.Management.ResourceManager.Models
   summary: "\nInitializes a new instance of the Subscription class.\n"
   example: []
   syntax:
-    content: public Subscription(string id = null, string subscriptionId = null, string tenantId = null, string displayName = null, string state = null, SubscriptionPolicies subscriptionPolicies = null, string authorizationSource = null)
-    content.vb: Public Sub New(id As String = Nothing, subscriptionId As String = Nothing, tenantId As String = Nothing, displayName As String = Nothing, state As String = Nothing, subscriptionPolicies As SubscriptionPolicies = Nothing, authorizationSource As String = Nothing)
+    content: public Subscription(string id = null, string subscriptionId = null, string tenantId = null, string displayName = null, SubscriptionState? state = null, SubscriptionPolicies subscriptionPolicies = null, string authorizationSource = null)
+    content.vb: Public Sub New(id As String = Nothing, subscriptionId As String = Nothing, tenantId As String = Nothing, displayName As String = Nothing, state As SubscriptionState? = Nothing, subscriptionPolicies As SubscriptionPolicies = Nothing, authorizationSource As String = Nothing)
     parameters:
     - id: id
       type: System.String
-      description: The ID of the resource (/subscriptions/SubscriptionId).
+      description: >-
+        The fully qualified Id. For example,
+
+        /subscriptions/00000000-0000-0000-0000-000000000000.
     - id: subscriptionId
       type: System.String
       description: The subscription Id.
@@ -126,19 +129,37 @@ items:
       type: System.String
       description: The subscription display name.
     - id: state
-      type: System.String
-      description: The subscription state.
+      type: System.Nullable{Microsoft.Azure.Management.ResourceManager.Models.SubscriptionState}
+      description: >-
+        The subscription state. Possible values
+
+        include: 'Enabled', 'Warned', 'PastDue', 'Disabled',
+
+        'Deleted'
     - id: subscriptionPolicies
       type: Microsoft.Azure.Management.ResourceManager.Models.SubscriptionPolicies
-      description: The subscription policies.
+      description: >-
+        The subscription
+
+        policies.
     - id: authorizationSource
       type: System.String
-      description: The authorization source of the request. Valid values are one or more combinations of Legacy, RoleBased, Bypassed, Direct and Management. For example, 'Legacy, RoleBased'.
+      description: >-
+        The authorization source of the
+
+        request. Valid values are one or more combinations of Legacy,
+
+        RoleBased, Bypassed, Direct and Management. For example, 'Legacy,
+
+        RoleBased'.
   overload: Microsoft.Azure.Management.ResourceManager.Models.Subscription.#ctor*
+  nameWithType.vb: Subscription.Subscription(String, String, String, String, Nullable(Of SubscriptionState), SubscriptionPolicies, String)
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
+  fullName.vb: Microsoft.Azure.Management.ResourceManager.Models.Subscription.Subscription(System.String, System.String, System.String, System.String, System.Nullable(Of Microsoft.Azure.Management.ResourceManager.Models.SubscriptionState), Microsoft.Azure.Management.ResourceManager.Models.SubscriptionPolicies, System.String)
+  name.vb: Subscription(String, String, String, String, Nullable(Of SubscriptionState), SubscriptionPolicies, String)
 - uid: Microsoft.Azure.Management.ResourceManager.Models.Subscription.Id
   commentId: P:Microsoft.Azure.Management.ResourceManager.Models.Subscription.Id
   id: Id
@@ -157,21 +178,21 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: Id
     path: src/ResourceManagement/Resource/Microsoft.Azure.Management.ResourceManager/Generated/Models/Subscription.cs
-    startLine: 53
+    startLine: 54
   assemblies:
   - Microsoft.Azure.Management.ResourceManager
   namespace: Microsoft.Azure.Management.ResourceManager.Models
-  summary: "\nGets or sets the ID of the resource\n(/subscriptions/SubscriptionId).\n"
+  summary: "\nGets the fully qualified Id. For example,\n/subscriptions/00000000-0000-0000-0000-000000000000.\n"
   example: []
   syntax:
     content: >-
       [JsonProperty(PropertyName = "id")]
 
-      public string Id { get; set; }
+      public string Id { get; }
     content.vb: >-
       <JsonProperty(PropertyName:="id")>
 
-      Public Property Id As String
+      Public ReadOnly Property Id As String
     parameters: []
     return:
       type: System.String
@@ -187,9 +208,9 @@ items:
   modifiers.csharp:
   - public
   - get
-  - set
   modifiers.vb:
   - Public
+  - ReadOnly
 - uid: Microsoft.Azure.Management.ResourceManager.Models.Subscription.SubscriptionId
   commentId: P:Microsoft.Azure.Management.ResourceManager.Models.Subscription.SubscriptionId
   id: SubscriptionId
@@ -208,21 +229,21 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: SubscriptionId
     path: src/ResourceManagement/Resource/Microsoft.Azure.Management.ResourceManager/Generated/Models/Subscription.cs
-    startLine: 59
+    startLine: 60
   assemblies:
   - Microsoft.Azure.Management.ResourceManager
   namespace: Microsoft.Azure.Management.ResourceManager.Models
-  summary: "\nGets or sets the subscription Id.\n"
+  summary: "\nGets the subscription Id.\n"
   example: []
   syntax:
     content: >-
       [JsonProperty(PropertyName = "subscriptionId")]
 
-      public string SubscriptionId { get; set; }
+      public string SubscriptionId { get; }
     content.vb: >-
       <JsonProperty(PropertyName:="subscriptionId")>
 
-      Public Property SubscriptionId As String
+      Public ReadOnly Property SubscriptionId As String
     parameters: []
     return:
       type: System.String
@@ -238,9 +259,9 @@ items:
   modifiers.csharp:
   - public
   - get
-  - set
   modifiers.vb:
   - Public
+  - ReadOnly
 - uid: Microsoft.Azure.Management.ResourceManager.Models.Subscription.TenantId
   commentId: P:Microsoft.Azure.Management.ResourceManager.Models.Subscription.TenantId
   id: TenantId
@@ -259,21 +280,21 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: TenantId
     path: src/ResourceManagement/Resource/Microsoft.Azure.Management.ResourceManager/Generated/Models/Subscription.cs
-    startLine: 65
+    startLine: 66
   assemblies:
   - Microsoft.Azure.Management.ResourceManager
   namespace: Microsoft.Azure.Management.ResourceManager.Models
-  summary: "\nGets or sets the tenant Id.\n"
+  summary: "\nGets the tenant Id.\n"
   example: []
   syntax:
     content: >-
       [JsonProperty(PropertyName = "tenantId")]
 
-      public string TenantId { get; set; }
+      public string TenantId { get; }
     content.vb: >-
       <JsonProperty(PropertyName:="tenantId")>
 
-      Public Property TenantId As String
+      Public ReadOnly Property TenantId As String
     parameters: []
     return:
       type: System.String
@@ -289,9 +310,9 @@ items:
   modifiers.csharp:
   - public
   - get
-  - set
   modifiers.vb:
   - Public
+  - ReadOnly
 - uid: Microsoft.Azure.Management.ResourceManager.Models.Subscription.DisplayName
   commentId: P:Microsoft.Azure.Management.ResourceManager.Models.Subscription.DisplayName
   id: DisplayName
@@ -310,21 +331,21 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: DisplayName
     path: src/ResourceManagement/Resource/Microsoft.Azure.Management.ResourceManager/Generated/Models/Subscription.cs
-    startLine: 71
+    startLine: 72
   assemblies:
   - Microsoft.Azure.Management.ResourceManager
   namespace: Microsoft.Azure.Management.ResourceManager.Models
-  summary: "\nGets or sets the subscription display name.\n"
+  summary: "\nGets the subscription display name.\n"
   example: []
   syntax:
     content: >-
       [JsonProperty(PropertyName = "displayName")]
 
-      public string DisplayName { get; set; }
+      public string DisplayName { get; }
     content.vb: >-
       <JsonProperty(PropertyName:="displayName")>
 
-      Public Property DisplayName As String
+      Public ReadOnly Property DisplayName As String
     parameters: []
     return:
       type: System.String
@@ -340,9 +361,9 @@ items:
   modifiers.csharp:
   - public
   - get
-  - set
   modifiers.vb:
   - Public
+  - ReadOnly
 - uid: Microsoft.Azure.Management.ResourceManager.Models.Subscription.State
   commentId: P:Microsoft.Azure.Management.ResourceManager.Models.Subscription.State
   id: State
@@ -361,24 +382,24 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: State
     path: src/ResourceManagement/Resource/Microsoft.Azure.Management.ResourceManager/Generated/Models/Subscription.cs
-    startLine: 77
+    startLine: 79
   assemblies:
   - Microsoft.Azure.Management.ResourceManager
   namespace: Microsoft.Azure.Management.ResourceManager.Models
-  summary: "\nGets or sets the subscription state.\n"
+  summary: "\nGets the subscription state. Possible values include: 'Enabled',\n'Warned', 'PastDue', 'Disabled', 'Deleted'\n"
   example: []
   syntax:
     content: >-
       [JsonProperty(PropertyName = "state")]
 
-      public string State { get; set; }
+      public SubscriptionState? State { get; }
     content.vb: >-
       <JsonProperty(PropertyName:="state")>
 
-      Public Property State As String
+      Public ReadOnly Property State As SubscriptionState?
     parameters: []
     return:
-      type: System.String
+      type: System.Nullable{Microsoft.Azure.Management.ResourceManager.Models.SubscriptionState}
   overload: Microsoft.Azure.Management.ResourceManager.Models.Subscription.State*
   attributes:
   - type: Newtonsoft.Json.JsonPropertyAttribute
@@ -391,9 +412,9 @@ items:
   modifiers.csharp:
   - public
   - get
-  - set
   modifiers.vb:
   - Public
+  - ReadOnly
 - uid: Microsoft.Azure.Management.ResourceManager.Models.Subscription.SubscriptionPolicies
   commentId: P:Microsoft.Azure.Management.ResourceManager.Models.Subscription.SubscriptionPolicies
   id: SubscriptionPolicies
@@ -412,7 +433,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: SubscriptionPolicies
     path: src/ResourceManagement/Resource/Microsoft.Azure.Management.ResourceManager/Generated/Models/Subscription.cs
-    startLine: 83
+    startLine: 85
   assemblies:
   - Microsoft.Azure.Management.ResourceManager
   namespace: Microsoft.Azure.Management.ResourceManager.Models
@@ -463,7 +484,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: AuthorizationSource
     path: src/ResourceManagement/Resource/Microsoft.Azure.Management.ResourceManager/Generated/Models/Subscription.cs
-    startLine: 91
+    startLine: 93
   assemblies:
   - Microsoft.Azure.Management.ResourceManager
   namespace: Microsoft.Azure.Management.ResourceManager.Models
@@ -808,6 +829,48 @@ references:
   name: String
   nameWithType: String
   fullName: System.String
+- uid: System.Nullable{Microsoft.Azure.Management.ResourceManager.Models.SubscriptionState}
+  commentId: T:System.Nullable{Microsoft.Azure.Management.ResourceManager.Models.SubscriptionState}
+  parent: System
+  definition: System.Nullable`1
+  name: Nullable<SubscriptionState>
+  nameWithType: Nullable<SubscriptionState>
+  fullName: System.Nullable<Microsoft.Azure.Management.ResourceManager.Models.SubscriptionState>
+  nameWithType.vb: Nullable(Of SubscriptionState)
+  fullname.vb: System.Nullable(Of Microsoft.Azure.Management.ResourceManager.Models.SubscriptionState)
+  name.vb: Nullable(Of SubscriptionState)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Microsoft.Azure.Management.ResourceManager.Models.SubscriptionState
+    name: SubscriptionState
+    nameWithType: SubscriptionState
+    fullName: Microsoft.Azure.Management.ResourceManager.Models.SubscriptionState
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Microsoft.Azure.Management.ResourceManager.Models.SubscriptionState
+    name: SubscriptionState
+    nameWithType: SubscriptionState
+    fullName: Microsoft.Azure.Management.ResourceManager.Models.SubscriptionState
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Microsoft.Azure.Management.ResourceManager.Models.SubscriptionPolicies
   commentId: T:Microsoft.Azure.Management.ResourceManager.Models.SubscriptionPolicies
   parent: Microsoft.Azure.Management.ResourceManager.Models
@@ -815,6 +878,45 @@ references:
   name: SubscriptionPolicies
   nameWithType: SubscriptionPolicies
   fullName: Microsoft.Azure.Management.ResourceManager.Models.SubscriptionPolicies
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullname.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Microsoft.Azure.Management.ResourceManager.Models.Subscription.Id*
   commentId: Overload:Microsoft.Azure.Management.ResourceManager.Models.Subscription.Id
   isExternal: false
