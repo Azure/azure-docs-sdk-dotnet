@@ -23,7 +23,7 @@ that take advantage of scalable cloud computing resources.
 * Netstandard 1.5, based on the NetCore framework
 
 ## Prerequisites
-  Install [.Net Core CLR](https://www.microsoft.com/net/core).
+  Install [.Net Core SDK](https://www.microsoft.com/net/core).
 
 ## To build
 
