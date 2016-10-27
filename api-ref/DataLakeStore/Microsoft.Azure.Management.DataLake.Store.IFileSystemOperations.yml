@@ -11,6 +11,7 @@ items:
   - Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations.ConcurrentAppendWithHttpMessagesAsync(System.String,System.String,System.IO.Stream,System.Nullable{Microsoft.Azure.Management.DataLake.Store.Models.AppendModeType},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
   - Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations.CreateWithHttpMessagesAsync(System.String,System.String,System.IO.Stream,System.Nullable{System.Boolean},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
   - Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations.DeleteWithHttpMessagesAsync(System.String,System.String,System.Nullable{System.Boolean},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
+  - Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations.FlushWithHttpMessagesAsync(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
   - Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations.GetAclStatusWithHttpMessagesAsync(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
   - Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations.GetContentSummaryWithHttpMessagesAsync(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
   - Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations.GetFileStatusWithHttpMessagesAsync(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
@@ -72,6 +73,8 @@ items:
   - Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations.Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.GetContentSummaryAsync(System.String,System.String,System.Threading.CancellationToken)
   - Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations.Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.GetFileStatus(System.String,System.String)
   - Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations.Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.GetFileStatusAsync(System.String,System.String,System.Threading.CancellationToken)
+  - Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations.Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.Flush(System.String,System.String)
+  - Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations.Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.FlushAsync(System.String,System.String,System.Threading.CancellationToken)
   - Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations.Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.Append(System.String,System.String,System.IO.Stream,System.Nullable{System.Int64})
   - Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations.Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.AppendAsync(System.String,System.String,System.IO.Stream,System.Nullable{System.Int64},System.Threading.CancellationToken)
   - Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations.Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.Create(System.String,System.String,System.IO.Stream,System.Nullable{System.Boolean})
@@ -178,11 +181,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: ConcurrentAppendWithHttpMessagesAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/IFileSystemOperations.cs
-    startLine: 59
+    startLine: 62
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
-  summary: "\nAppends to the specified file. This method supports multiple\nconcurrent appends to the file. NOTE: Concurrent append and\nnormal (serial) append CANNOT be used interchangeably. Once a\nfile has been appended to using either append option, it can only\nbe appended to using that append option.\n"
+  summary: "\nAppends to the specified file. This method supports multiple\nconcurrent appends to the file. NOTE: ConcurrentAppend and normal\n(serial) Append CANNOT be used interchangeably; once a file has\nbeen appended to using either of these append options, it can\nonly be appended to using that append option. ConcurrentAppend\nDOES NOT guarantee order and can result in duplicated data\nlanding in the target file. In order to close a file after using\nConcurrentAppend, call the Flush method.\n"
   example: []
   syntax:
     content: Task<AzureOperationResponse> ConcurrentAppendWithHttpMessagesAsync(string accountName, string filePath, Stream streamContents, AppendModeType? appendMode = null, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = null)
@@ -237,7 +240,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: SetFileExpiryWithHttpMessagesAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/IFileSystemOperations.cs
-    startLine: 101
+    startLine: 104
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -296,7 +299,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: CheckAccessWithHttpMessagesAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/IFileSystemOperations.cs
-    startLine: 129
+    startLine: 132
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -352,7 +355,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: MkdirsWithHttpMessagesAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/IFileSystemOperations.cs
-    startLine: 156
+    startLine: 159
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -408,7 +411,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: ConcatWithHttpMessagesAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/IFileSystemOperations.cs
-    startLine: 186
+    startLine: 189
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -464,7 +467,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: MsConcatWithHttpMessagesAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/IFileSystemOperations.cs
-    startLine: 228
+    startLine: 231
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -523,7 +526,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: ListFileStatusWithHttpMessagesAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/IFileSystemOperations.cs
-    startLine: 271
+    startLine: 274
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -588,7 +591,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: GetContentSummaryWithHttpMessagesAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/IFileSystemOperations.cs
-    startLine: 298
+    startLine: 301
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -644,7 +647,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: GetFileStatusWithHttpMessagesAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/IFileSystemOperations.cs
-    startLine: 325
+    startLine: 328
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -682,6 +685,59 @@ items:
   nameWithType.vb: IFileSystemOperations.GetFileStatusWithHttpMessagesAsync(String, String, Dictionary(Of String, List(Of String)), CancellationToken)
   fullName.vb: Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations.GetFileStatusWithHttpMessagesAsync(System.String, System.String, System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.List(Of System.String)), System.Threading.CancellationToken)
   name.vb: GetFileStatusWithHttpMessagesAsync(String, String, Dictionary(Of String, List(Of String)), CancellationToken)
+- uid: Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations.FlushWithHttpMessagesAsync(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
+  commentId: M:Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations.FlushWithHttpMessagesAsync(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
+  id: FlushWithHttpMessagesAsync(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
+  parent: Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations
+  langs:
+  - csharp
+  - vb
+  name: FlushWithHttpMessagesAsync(String, String, Dictionary<String, List<String>>, CancellationToken)
+  nameWithType: IFileSystemOperations.FlushWithHttpMessagesAsync(String, String, Dictionary<String, List<String>>, CancellationToken)
+  fullName: Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations.FlushWithHttpMessagesAsync(System.String, System.String, System.Collections.Generic.Dictionary<System.String, System.Collections.Generic.List<System.String>>, System.Threading.CancellationToken)
+  type: Method
+  source:
+    remote:
+      path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/IFileSystemOperations.cs
+      branch: AutoRest
+      repo: https://github.com/Azure/azure-sdk-for-net.git
+    id: FlushWithHttpMessagesAsync
+    path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/IFileSystemOperations.cs
+    startLine: 355
+  assemblies:
+  - Microsoft.Azure.Management.DataLake.Store
+  namespace: Microsoft.Azure.Management.DataLake.Store
+  summary: "\nFlushes the specified file to the store. This forces an update to\nthe metadata of the file (returned from GetFileStatus), and is\nrequired by ConcurrentAppend once the file is done to populate\nfinalized metadata.\n"
+  example: []
+  syntax:
+    content: Task<AzureOperationResponse> FlushWithHttpMessagesAsync(string accountName, string flushFilePath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = null)
+    content.vb: Function FlushWithHttpMessagesAsync(accountName As String, flushFilePath As String, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse)
+    parameters:
+    - id: accountName
+      type: System.String
+      description: "\nThe Azure Data Lake Store account to execute filesystem operations\non.\n"
+    - id: flushFilePath
+      type: System.String
+      description: "\nThe Data Lake Store path (starting with '/') of the file to which\nto flush.\n"
+    - id: customHeaders
+      type: System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}}
+      description: "\nThe headers that will be added to request.\n"
+    - id: cancellationToken
+      type: System.Threading.CancellationToken
+      description: "\nThe cancellation token.\n"
+    return:
+      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse}
+  overload: Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations.FlushWithHttpMessagesAsync*
+  exceptions:
+  - type: Microsoft.Azure.Management.DataLake.Store.Models.AdlsErrorException
+    commentId: T:Microsoft.Azure.Management.DataLake.Store.Models.AdlsErrorException
+    description: "\nThrown when the operation returned an invalid status code\n"
+  - type: Microsoft.Rest.ValidationException
+    commentId: T:Microsoft.Rest.ValidationException
+    description: "\nThrown when a required parameter is null\n"
+  nameWithType.vb: IFileSystemOperations.FlushWithHttpMessagesAsync(String, String, Dictionary(Of String, List(Of String)), CancellationToken)
+  fullName.vb: Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations.FlushWithHttpMessagesAsync(System.String, System.String, System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.List(Of System.String)), System.Threading.CancellationToken)
+  name.vb: FlushWithHttpMessagesAsync(String, String, Dictionary(Of String, List(Of String)), CancellationToken)
 - uid: Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations.AppendWithHttpMessagesAsync(System.String,System.String,System.IO.Stream,System.Nullable{System.Int64},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
   commentId: M:Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations.AppendWithHttpMessagesAsync(System.String,System.String,System.IO.Stream,System.Nullable{System.Int64},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
   id: AppendWithHttpMessagesAsync(System.String,System.String,System.IO.Stream,System.Nullable{System.Int64},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
@@ -700,7 +756,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: AppendWithHttpMessagesAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/IFileSystemOperations.cs
-    startLine: 361
+    startLine: 391
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -759,7 +815,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: CreateWithHttpMessagesAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/IFileSystemOperations.cs
-    startLine: 392
+    startLine: 422
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -818,7 +874,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: OpenWithHttpMessagesAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/IFileSystemOperations.cs
-    startLine: 422
+    startLine: 452
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -880,7 +936,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: SetAclWithHttpMessagesAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/IFileSystemOperations.cs
-    startLine: 450
+    startLine: 480
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -936,7 +992,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: ModifyAclEntriesWithHttpMessagesAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/IFileSystemOperations.cs
-    startLine: 479
+    startLine: 509
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -992,7 +1048,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: RemoveAclEntriesWithHttpMessagesAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/IFileSystemOperations.cs
-    startLine: 508
+    startLine: 538
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -1048,7 +1104,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: RemoveDefaultAclWithHttpMessagesAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/IFileSystemOperations.cs
-    startLine: 533
+    startLine: 563
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -1101,7 +1157,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: RemoveAclWithHttpMessagesAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/IFileSystemOperations.cs
-    startLine: 558
+    startLine: 588
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -1154,7 +1210,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: GetAclStatusWithHttpMessagesAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/IFileSystemOperations.cs
-    startLine: 586
+    startLine: 616
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -1210,7 +1266,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: DeleteWithHttpMessagesAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/IFileSystemOperations.cs
-    startLine: 616
+    startLine: 646
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -1269,7 +1325,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: RenameWithHttpMessagesAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/IFileSystemOperations.cs
-    startLine: 646
+    startLine: 676
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -1328,7 +1384,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: SetOwnerWithHttpMessagesAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/IFileSystemOperations.cs
-    startLine: 678
+    startLine: 708
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -1387,7 +1443,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: SetPermissionWithHttpMessagesAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/IFileSystemOperations.cs
-    startLine: 706
+    startLine: 736
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -3259,6 +3315,132 @@ references:
     name: GetFileStatusAsync
     nameWithType: FileSystemOperationsExtensions.GetFileStatusAsync
     fullName: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.GetFileStatusAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    nameWithType: CancellationToken
+    fullName: System.Threading.CancellationToken
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations.Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.Flush(System.String,System.String)
+  commentId: M:Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.Flush(Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations,System.String,System.String)
+  parent: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions
+  definition: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.Flush(Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations,System.String,System.String)
+  name: Flush(String, String)
+  nameWithType: FileSystemOperationsExtensions.Flush(String, String)
+  fullName: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.Flush(System.String, System.String)
+  spec.csharp:
+  - uid: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.Flush(System.String,System.String)
+    name: Flush
+    nameWithType: FileSystemOperationsExtensions.Flush
+    fullName: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.Flush
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.Flush(System.String,System.String)
+    name: Flush
+    nameWithType: FileSystemOperationsExtensions.Flush
+    fullName: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.Flush
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations.Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.FlushAsync(System.String,System.String,System.Threading.CancellationToken)
+  commentId: M:Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.FlushAsync(Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations,System.String,System.String,System.Threading.CancellationToken)
+  parent: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions
+  definition: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.FlushAsync(Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations,System.String,System.String,System.Threading.CancellationToken)
+  name: FlushAsync(String, String, CancellationToken)
+  nameWithType: FileSystemOperationsExtensions.FlushAsync(String, String, CancellationToken)
+  fullName: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.FlushAsync(System.String, System.String, System.Threading.CancellationToken)
+  spec.csharp:
+  - uid: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.FlushAsync(System.String,System.String,System.Threading.CancellationToken)
+    name: FlushAsync
+    nameWithType: FileSystemOperationsExtensions.FlushAsync
+    fullName: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.FlushAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    nameWithType: CancellationToken
+    fullName: System.Threading.CancellationToken
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.FlushAsync(System.String,System.String,System.Threading.CancellationToken)
+    name: FlushAsync
+    nameWithType: FileSystemOperationsExtensions.FlushAsync
+    fullName: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.FlushAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -7737,6 +7919,158 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.Flush(Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations,System.String,System.String)
+  commentId: M:Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.Flush(Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations,System.String,System.String)
+  isExternal: true
+  name: Flush(IFileSystemOperations, String, String)
+  nameWithType: FileSystemOperationsExtensions.Flush(IFileSystemOperations, String, String)
+  fullName: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.Flush(Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations, System.String, System.String)
+  spec.csharp:
+  - uid: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.Flush(Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations,System.String,System.String)
+    name: Flush
+    nameWithType: FileSystemOperationsExtensions.Flush
+    fullName: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.Flush
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations
+    name: IFileSystemOperations
+    nameWithType: IFileSystemOperations
+    fullName: Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.Flush(Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations,System.String,System.String)
+    name: Flush
+    nameWithType: FileSystemOperationsExtensions.Flush
+    fullName: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.Flush
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations
+    name: IFileSystemOperations
+    nameWithType: IFileSystemOperations
+    fullName: Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.FlushAsync(Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations,System.String,System.String,System.Threading.CancellationToken)
+  commentId: M:Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.FlushAsync(Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations,System.String,System.String,System.Threading.CancellationToken)
+  isExternal: true
+  name: FlushAsync(IFileSystemOperations, String, String, CancellationToken)
+  nameWithType: FileSystemOperationsExtensions.FlushAsync(IFileSystemOperations, String, String, CancellationToken)
+  fullName: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.FlushAsync(Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations, System.String, System.String, System.Threading.CancellationToken)
+  spec.csharp:
+  - uid: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.FlushAsync(Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations,System.String,System.String,System.Threading.CancellationToken)
+    name: FlushAsync
+    nameWithType: FileSystemOperationsExtensions.FlushAsync
+    fullName: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.FlushAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations
+    name: IFileSystemOperations
+    nameWithType: IFileSystemOperations
+    fullName: Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    nameWithType: CancellationToken
+    fullName: System.Threading.CancellationToken
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.FlushAsync(Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations,System.String,System.String,System.Threading.CancellationToken)
+    name: FlushAsync
+    nameWithType: FileSystemOperationsExtensions.FlushAsync
+    fullName: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.FlushAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations
+    name: IFileSystemOperations
+    nameWithType: IFileSystemOperations
+    fullName: Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    nameWithType: CancellationToken
+    fullName: System.Threading.CancellationToken
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.Append(Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations,System.String,System.String,System.IO.Stream,System.Nullable{System.Int64})
   commentId: M:Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.Append(Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations,System.String,System.String,System.IO.Stream,System.Nullable{System.Int64})
   isExternal: true
@@ -11361,6 +11695,12 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations.FlushWithHttpMessagesAsync*
+  commentId: Overload:Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations.FlushWithHttpMessagesAsync
+  isExternal: false
+  name: FlushWithHttpMessagesAsync
+  nameWithType: IFileSystemOperations.FlushWithHttpMessagesAsync
+  fullName: Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations.FlushWithHttpMessagesAsync
 - uid: Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations.AppendWithHttpMessagesAsync*
   commentId: Overload:Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations.AppendWithHttpMessagesAsync
   isExternal: false

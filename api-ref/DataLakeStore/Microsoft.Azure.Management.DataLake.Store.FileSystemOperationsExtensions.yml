@@ -17,6 +17,8 @@ items:
   - Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.CreateAsync(Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations,System.String,System.String,System.IO.Stream,System.Nullable{System.Boolean},System.Threading.CancellationToken)
   - Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.Delete(Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations,System.String,System.String,System.Nullable{System.Boolean})
   - Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.DeleteAsync(Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations,System.String,System.String,System.Nullable{System.Boolean},System.Threading.CancellationToken)
+  - Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.Flush(Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations,System.String,System.String)
+  - Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.FlushAsync(Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations,System.String,System.String,System.Threading.CancellationToken)
   - Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.GetAclStatus(Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations,System.String,System.String)
   - Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.GetAclStatusAsync(Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations,System.String,System.String,System.Threading.CancellationToken)
   - Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.GetContentSummary(Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations,System.String,System.String)
@@ -213,11 +215,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: ConcurrentAppend
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 48
+    startLine: 51
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
-  summary: "\nAppends to the specified file. This method supports multiple concurrent\nappends to the file. NOTE: Concurrent append and normal (serial) append\nCANNOT be used interchangeably. Once a file has been appended to using\neither append option, it can only be appended to using that append option.\n"
+  summary: "\nAppends to the specified file. This method supports multiple concurrent\nappends to the file. NOTE: ConcurrentAppend and normal (serial) Append\nCANNOT be used interchangeably; once a file has been appended to using\neither of these append options, it can only be appended to using that\nappend option. ConcurrentAppend DOES NOT guarantee order and can result\nin duplicated data landing in the target file. In order to close a file\nafter using ConcurrentAppend, call the Flush method.\n"
   example: []
   syntax:
     content: public static void ConcurrentAppend(this IFileSystemOperations operations, string accountName, string filePath, Stream streamContents, AppendModeType? appendMode = null)
@@ -270,11 +272,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: ConcurrentAppendAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 80
+    startLine: 86
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
-  summary: "\nAppends to the specified file. This method supports multiple concurrent\nappends to the file. NOTE: Concurrent append and normal (serial) append\nCANNOT be used interchangeably. Once a file has been appended to using\neither append option, it can only be appended to using that append option.\n"
+  summary: "\nAppends to the specified file. This method supports multiple concurrent\nappends to the file. NOTE: ConcurrentAppend and normal (serial) Append\nCANNOT be used interchangeably; once a file has been appended to using\neither of these append options, it can only be appended to using that\nappend option. ConcurrentAppend DOES NOT guarantee order and can result\nin duplicated data landing in the target file. In order to close a file\nafter using ConcurrentAppend, call the Flush method.\n"
   example: []
   syntax:
     content: public static Task ConcurrentAppendAsync(this IFileSystemOperations operations, string accountName, string filePath, Stream streamContents, AppendModeType? appendMode = null, CancellationToken cancellationToken = null)
@@ -332,7 +334,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: SetFileExpiry
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 113
+    startLine: 119
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -389,7 +391,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: SetFileExpiryAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 149
+    startLine: 155
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -451,7 +453,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: CheckAccess
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 171
+    startLine: 177
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -502,7 +504,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: CheckAccessAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 196
+    startLine: 202
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -558,7 +560,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: Mkdirs
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 213
+    startLine: 219
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -608,7 +610,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: MkdirsAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 233
+    startLine: 239
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -661,7 +663,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: Concat
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 259
+    startLine: 265
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -715,7 +717,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: ConcatAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 285
+    startLine: 291
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -774,7 +776,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: MsConcat
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 319
+    startLine: 325
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -831,7 +833,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: MsConcatAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 356
+    startLine: 362
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -893,7 +895,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: ListFileStatus
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 389
+    startLine: 395
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -955,7 +957,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: ListFileStatusAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 425
+    startLine: 431
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -1020,7 +1022,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: GetContentSummary
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 446
+    startLine: 452
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -1070,7 +1072,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: GetContentSummaryAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 467
+    startLine: 473
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -1123,7 +1125,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: GetFileStatus
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 488
+    startLine: 494
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -1173,7 +1175,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: GetFileStatusAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 509
+    startLine: 515
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -1207,6 +1209,107 @@ items:
   modifiers.vb:
   - Public
   - Shared
+- uid: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.Flush(Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations,System.String,System.String)
+  commentId: M:Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.Flush(Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations,System.String,System.String)
+  id: Flush(Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations,System.String,System.String)
+  isExtensionMethod: true
+  parent: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions
+  langs:
+  - csharp
+  - vb
+  name: Flush(IFileSystemOperations, String, String)
+  nameWithType: FileSystemOperationsExtensions.Flush(IFileSystemOperations, String, String)
+  fullName: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.Flush(Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations, System.String, System.String)
+  type: Method
+  source:
+    remote:
+      path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
+      branch: AutoRest
+      repo: https://github.com/Azure/azure-sdk-for-net.git
+    id: Flush
+    path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
+    startLine: 537
+  assemblies:
+  - Microsoft.Azure.Management.DataLake.Store
+  namespace: Microsoft.Azure.Management.DataLake.Store
+  summary: "\nFlushes the specified file to the store. This forces an update to the\nmetadata of the file (returned from GetFileStatus), and is required by\nConcurrentAppend once the file is done to populate finalized metadata.\n"
+  example: []
+  syntax:
+    content: public static void Flush(this IFileSystemOperations operations, string accountName, string flushFilePath)
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Sub Flush(operations As IFileSystemOperations, accountName As String, flushFilePath As String)
+    parameters:
+    - id: operations
+      type: Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations
+      description: "\nThe operations group for this extension method.\n"
+    - id: accountName
+      type: System.String
+      description: "\nThe Azure Data Lake Store account to execute filesystem operations on.\n"
+    - id: flushFilePath
+      type: System.String
+      description: "\nThe Data Lake Store path (starting with '/') of the file to which to flush.\n"
+  overload: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.Flush*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.FlushAsync(Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations,System.String,System.String,System.Threading.CancellationToken)
+  commentId: M:Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.FlushAsync(Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations,System.String,System.String,System.Threading.CancellationToken)
+  id: FlushAsync(Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations,System.String,System.String,System.Threading.CancellationToken)
+  isExtensionMethod: true
+  parent: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions
+  langs:
+  - csharp
+  - vb
+  name: FlushAsync(IFileSystemOperations, String, String, CancellationToken)
+  nameWithType: FileSystemOperationsExtensions.FlushAsync(IFileSystemOperations, String, String, CancellationToken)
+  fullName: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.FlushAsync(Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations, System.String, System.String, System.Threading.CancellationToken)
+  type: Method
+  source:
+    remote:
+      path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
+      branch: AutoRest
+      repo: https://github.com/Azure/azure-sdk-for-net.git
+    id: FlushAsync
+    path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
+    startLine: 559
+  assemblies:
+  - Microsoft.Azure.Management.DataLake.Store
+  namespace: Microsoft.Azure.Management.DataLake.Store
+  summary: "\nFlushes the specified file to the store. This forces an update to the\nmetadata of the file (returned from GetFileStatus), and is required by\nConcurrentAppend once the file is done to populate finalized metadata.\n"
+  example: []
+  syntax:
+    content: public static Task FlushAsync(this IFileSystemOperations operations, string accountName, string flushFilePath, CancellationToken cancellationToken = null)
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Function FlushAsync(operations As IFileSystemOperations, accountName As String, flushFilePath As String, cancellationToken As CancellationToken = Nothing) As Task
+    parameters:
+    - id: operations
+      type: Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations
+      description: "\nThe operations group for this extension method.\n"
+    - id: accountName
+      type: System.String
+      description: "\nThe Azure Data Lake Store account to execute filesystem operations on.\n"
+    - id: flushFilePath
+      type: System.String
+      description: "\nThe Data Lake Store path (starting with '/') of the file to which to flush.\n"
+    - id: cancellationToken
+      type: System.Threading.CancellationToken
+      description: "\nThe cancellation token.\n"
+    return:
+      type: System.Threading.Tasks.Task
+  overload: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.FlushAsync*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
 - uid: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.Append(Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations,System.String,System.String,System.IO.Stream,System.Nullable{System.Int64})
   commentId: M:Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.Append(Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations,System.String,System.String,System.IO.Stream,System.Nullable{System.Int64})
   id: Append(Microsoft.Azure.Management.DataLake.Store.IFileSystemOperations,System.String,System.String,System.IO.Stream,System.Nullable{System.Int64})
@@ -1226,7 +1329,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: Append
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 542
+    startLine: 589
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -1283,7 +1386,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: AppendAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 575
+    startLine: 622
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -1345,7 +1448,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: Create
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 599
+    startLine: 646
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -1402,7 +1505,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: CreateAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 626
+    startLine: 673
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -1464,7 +1567,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: Open
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 647
+    startLine: 694
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -1523,7 +1626,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: OpenAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 671
+    startLine: 718
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -1585,7 +1688,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: SetAcl
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 695
+    startLine: 742
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -1636,7 +1739,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: SetAclAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 720
+    startLine: 767
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -1692,7 +1795,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: ModifyAclEntries
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 742
+    startLine: 789
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -1743,7 +1846,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: ModifyAclEntriesAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 767
+    startLine: 814
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -1799,7 +1902,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: RemoveAclEntries
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 789
+    startLine: 836
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -1850,7 +1953,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: RemoveAclEntriesAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 814
+    startLine: 861
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -1906,7 +2009,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: RemoveDefaultAcl
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 833
+    startLine: 880
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -1954,7 +2057,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: RemoveDefaultAclAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 855
+    startLine: 902
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -2007,7 +2110,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: RemoveAcl
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 874
+    startLine: 921
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -2055,7 +2158,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: RemoveAclAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 896
+    startLine: 943
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -2108,7 +2211,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: GetAclStatus
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 914
+    startLine: 961
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -2158,7 +2261,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: GetAclStatusAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 935
+    startLine: 982
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -2211,7 +2314,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: Delete
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 959
+    startLine: 1006
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -2267,7 +2370,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: DeleteAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 983
+    startLine: 1030
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -2326,7 +2429,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: Rename
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 1007
+    startLine: 1054
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -2379,7 +2482,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: RenameAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 1031
+    startLine: 1078
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -2435,7 +2538,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: SetOwner
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 1060
+    startLine: 1107
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -2489,7 +2592,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: SetOwnerAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 1089
+    startLine: 1136
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -2548,7 +2651,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: SetPermission
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 1111
+    startLine: 1158
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -2599,7 +2702,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: SetPermissionAsync
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/FileSystemOperationsExtensions.cs
-    startLine: 1136
+    startLine: 1183
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store
@@ -3709,6 +3812,18 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.Flush*
+  commentId: Overload:Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.Flush
+  isExternal: false
+  name: Flush
+  nameWithType: FileSystemOperationsExtensions.Flush
+  fullName: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.Flush
+- uid: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.FlushAsync*
+  commentId: Overload:Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.FlushAsync
+  isExternal: false
+  name: FlushAsync
+  nameWithType: FileSystemOperationsExtensions.FlushAsync
+  fullName: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.FlushAsync
 - uid: Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.Append*
   commentId: Overload:Microsoft.Azure.Management.DataLake.Store.FileSystemOperationsExtensions.Append
   isExternal: false
