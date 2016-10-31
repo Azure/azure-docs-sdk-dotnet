@@ -5,10 +5,10 @@ items:
   id: CapacityBasedAccountSelectionStrategy
   parent: Microsoft.WindowsAzure.MediaServices.Client
   children:
-  - Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy.#ctor(MediaContextBase)
-  - Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy.AddStorageAccount(IStorageAccount,System.Boolean,System.Int64)
+  - Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy.#ctor(Microsoft.WindowsAzure.MediaServices.Client.MediaContextBase)
+  - Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy.AddStorageAccount(Microsoft.WindowsAzure.MediaServices.Client.IStorageAccount,System.Boolean,System.Int64)
   - Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy.AddStorageAccountByName(System.String,System.Boolean,System.Int64)
-  - Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy.FromAccounts(MediaContextBase,System.Boolean,System.Int64,System.String[])
+  - Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy.FromAccounts(Microsoft.WindowsAzure.MediaServices.Client.MediaContextBase,System.Boolean,System.Int64,System.String[])
   - Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy.GetStorageAccounts
   - Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy.oneHundredEightyTB
   - Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy.Random
@@ -35,15 +35,30 @@ items:
   summary: "\nThis IAccountSelectionStrategy implementation uses the number of used bytes in a storage account to help determine which storage account\nshould be used to create the next asset.  It relies on the capacity metrics of the blob storage service to get the number of bytes used\nvia the Wiindows Azure Media Services REST API.  If storage account metrics are not enabled for the storage account, then null is returned\nfor the number of bytes used (these accounts are not used unless IncludeAccountsWithNoCapacityData is set to true).  Even knowing the \ncapacity of each storage account, the IAccountSelectionStrategy implementation still tries to spread out the new assets between the given \nstorage accounts.  This is especially important since the capacity is only calculated once per day by the storage service.  Thus, the\nIAccountSelectionStrategy implementation randomly selects from the available storage accounts but the probability of a storage account \nbeing selected is based on the accounts remaining capacity.  For example, if there are two storage accounts to choose from where one account \nis 50% full and the other account is 30% full then the implementation will pick the half full storage account 5 times out of \n12 ((100 – 50)/(200 – 50 – 30)) and the other storage account 7 times out of 12 ((100 – 30)/(200 – 50 – 30)).  If the algorithm always \nselected the storage account with the most available space, it would be used exclusively for 24 hours until the storage account metrics \nwere recalculated.  This weighted probability approach should spread the assets across the given storage accounts over time.  In order \nto have a margin of safety, storage accounts that are too close to the limit will be given a zero probability of being selected.  \nThis is controlled by the MaximumStorageAccountCapacity value.  Storage accounts that are at this capacity or greater will be considered\nfull and will not be selected for new assets.\n"
   example: []
   syntax:
-    content: 'public class CapacityBasedAccountSelectionStrategy : BaseEntity<IAccountSelectionStrategy>, IAccountSelectionStrategy'
+    content: 'public class CapacityBasedAccountSelectionStrategy : BaseEntity<IAccountSelectionStrategy>, IMediaContextContainer, IAccountSelectionStrategy'
     content.vb: >-
       Public Class CapacityBasedAccountSelectionStrategy
           Inherits BaseEntity(Of IAccountSelectionStrategy)
-          Implements IAccountSelectionStrategy
+          Implements IMediaContextContainer, IAccountSelectionStrategy
   inheritance:
   - System.Object
+  - Microsoft.WindowsAzure.MediaServices.Client.BaseEntity
+  - Microsoft.WindowsAzure.MediaServices.Client.BaseEntity{Microsoft.WindowsAzure.MediaServices.Client.IAccountSelectionStrategy}
   implements:
+  - Microsoft.WindowsAzure.MediaServices.Client.IMediaContextContainer
   - Microsoft.WindowsAzure.MediaServices.Client.IAccountSelectionStrategy
+  inheritedMembers:
+  - Microsoft.WindowsAzure.MediaServices.Client.BaseEntity.SetMediaContext(Microsoft.WindowsAzure.MediaServices.Client.MediaContextBase)
+  - Microsoft.WindowsAzure.MediaServices.Client.BaseEntity.GetMediaContext
+  - Microsoft.WindowsAzure.MediaServices.Client.BaseEntity.LoadProperty(Microsoft.WindowsAzure.MediaServices.Client.IMediaDataServiceContext,System.String)
+  - Microsoft.WindowsAzure.MediaServices.Client.BaseEntity.LoadProperty(Microsoft.WindowsAzure.MediaServices.Client.IMediaDataServiceContext,Microsoft.WindowsAzure.MediaServices.Client.BaseEntity,System.String)
+  - System.Object.ToString
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
   modifiers.csharp:
   - public
   - class
@@ -116,16 +131,16 @@ items:
   modifiers.vb:
   - Public
   - Const
-- uid: Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy.#ctor(MediaContextBase)
-  commentId: M:Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy.#ctor(MediaContextBase)
-  id: '#ctor(MediaContextBase)'
+- uid: Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy.#ctor(Microsoft.WindowsAzure.MediaServices.Client.MediaContextBase)
+  commentId: M:Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy.#ctor(Microsoft.WindowsAzure.MediaServices.Client.MediaContextBase)
+  id: '#ctor(Microsoft.WindowsAzure.MediaServices.Client.MediaContextBase)'
   parent: Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy
   langs:
   - csharp
   - vb
   name: CapacityBasedAccountSelectionStrategy(MediaContextBase)
   nameWithType: CapacityBasedAccountSelectionStrategy.CapacityBasedAccountSelectionStrategy(MediaContextBase)
-  fullName: Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy.CapacityBasedAccountSelectionStrategy(MediaContextBase)
+  fullName: Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy.CapacityBasedAccountSelectionStrategy(Microsoft.WindowsAzure.MediaServices.Client.MediaContextBase)
   type: Constructor
   source:
     remote:
@@ -145,23 +160,23 @@ items:
     content.vb: Public Sub New(mediaContextBase As MediaContextBase)
     parameters:
     - id: mediaContextBase
-      type: MediaContextBase
+      type: Microsoft.WindowsAzure.MediaServices.Client.MediaContextBase
       description: MediaContextBase instance to query IStorageAccount entities
   overload: Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy.#ctor*
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy.FromAccounts(MediaContextBase,System.Boolean,System.Int64,System.String[])
-  commentId: M:Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy.FromAccounts(MediaContextBase,System.Boolean,System.Int64,System.String[])
-  id: FromAccounts(MediaContextBase,System.Boolean,System.Int64,System.String[])
+- uid: Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy.FromAccounts(Microsoft.WindowsAzure.MediaServices.Client.MediaContextBase,System.Boolean,System.Int64,System.String[])
+  commentId: M:Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy.FromAccounts(Microsoft.WindowsAzure.MediaServices.Client.MediaContextBase,System.Boolean,System.Int64,System.String[])
+  id: FromAccounts(Microsoft.WindowsAzure.MediaServices.Client.MediaContextBase,System.Boolean,System.Int64,System.String[])
   parent: Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy
   langs:
   - csharp
   - vb
   name: FromAccounts(MediaContextBase, Boolean, Int64, String[])
   nameWithType: CapacityBasedAccountSelectionStrategy.FromAccounts(MediaContextBase, Boolean, Int64, String[])
-  fullName: Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy.FromAccounts(MediaContextBase, System.Boolean, System.Int64, System.String[])
+  fullName: Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy.FromAccounts(Microsoft.WindowsAzure.MediaServices.Client.MediaContextBase, System.Boolean, System.Int64, System.String[])
   type: Method
   source:
     remote:
@@ -181,7 +196,7 @@ items:
     content.vb: Public Shared Function FromAccounts(mediaContextBase As MediaContextBase, includeAccountsWithNoCapacityData As Boolean = False, maximumStorageAccountCapacity As Long = 197912092999680L, storageAccountNames As String() = Nothing) As CapacityBasedAccountSelectionStrategy
     parameters:
     - id: mediaContextBase
-      type: MediaContextBase
+      type: Microsoft.WindowsAzure.MediaServices.Client.MediaContextBase
       description: MediaContextBase used to enumerate the IStorageAccount instances to add
     - id: includeAccountsWithNoCapacityData
       type: System.Boolean
@@ -203,18 +218,18 @@ items:
   modifiers.vb:
   - Public
   - Shared
-  fullName.vb: Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy.FromAccounts(MediaContextBase, System.Boolean, System.Int64, System.String())
+  fullName.vb: Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy.FromAccounts(Microsoft.WindowsAzure.MediaServices.Client.MediaContextBase, System.Boolean, System.Int64, System.String())
   name.vb: FromAccounts(MediaContextBase, Boolean, Int64, String())
-- uid: Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy.AddStorageAccount(IStorageAccount,System.Boolean,System.Int64)
-  commentId: M:Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy.AddStorageAccount(IStorageAccount,System.Boolean,System.Int64)
-  id: AddStorageAccount(IStorageAccount,System.Boolean,System.Int64)
+- uid: Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy.AddStorageAccount(Microsoft.WindowsAzure.MediaServices.Client.IStorageAccount,System.Boolean,System.Int64)
+  commentId: M:Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy.AddStorageAccount(Microsoft.WindowsAzure.MediaServices.Client.IStorageAccount,System.Boolean,System.Int64)
+  id: AddStorageAccount(Microsoft.WindowsAzure.MediaServices.Client.IStorageAccount,System.Boolean,System.Int64)
   parent: Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy
   langs:
   - csharp
   - vb
   name: AddStorageAccount(IStorageAccount, Boolean, Int64)
   nameWithType: CapacityBasedAccountSelectionStrategy.AddStorageAccount(IStorageAccount, Boolean, Int64)
-  fullName: Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy.AddStorageAccount(IStorageAccount, System.Boolean, System.Int64)
+  fullName: Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy.AddStorageAccount(Microsoft.WindowsAzure.MediaServices.Client.IStorageAccount, System.Boolean, System.Int64)
   type: Method
   source:
     remote:
@@ -234,7 +249,7 @@ items:
     content.vb: Public Sub AddStorageAccount(storageAccount As IStorageAccount, considerAccountWithNoDataToBeEmpty As Boolean = False, maximumStorageAccountCapacity As Long = 197912092999680L)
     parameters:
     - id: storageAccount
-      type: IStorageAccount
+      type: Microsoft.WindowsAzure.MediaServices.Client.IStorageAccount
       description: IStorageAccount instance to add
     - id: considerAccountWithNoDataToBeEmpty
       type: System.Boolean
@@ -412,6 +427,62 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
+- uid: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity
+  commentId: T:Microsoft.WindowsAzure.MediaServices.Client.BaseEntity
+  parent: Microsoft.WindowsAzure.MediaServices.Client
+  isExternal: false
+  name: BaseEntity
+  nameWithType: BaseEntity
+  fullName: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity
+- uid: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity{Microsoft.WindowsAzure.MediaServices.Client.IAccountSelectionStrategy}
+  commentId: T:Microsoft.WindowsAzure.MediaServices.Client.BaseEntity{Microsoft.WindowsAzure.MediaServices.Client.IAccountSelectionStrategy}
+  parent: Microsoft.WindowsAzure.MediaServices.Client
+  definition: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity`1
+  name: BaseEntity<IAccountSelectionStrategy>
+  nameWithType: BaseEntity<IAccountSelectionStrategy>
+  fullName: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity<Microsoft.WindowsAzure.MediaServices.Client.IAccountSelectionStrategy>
+  nameWithType.vb: BaseEntity(Of IAccountSelectionStrategy)
+  fullname.vb: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity(Of Microsoft.WindowsAzure.MediaServices.Client.IAccountSelectionStrategy)
+  name.vb: BaseEntity(Of IAccountSelectionStrategy)
+  spec.csharp:
+  - uid: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity`1
+    name: BaseEntity
+    nameWithType: BaseEntity
+    fullName: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Microsoft.WindowsAzure.MediaServices.Client.IAccountSelectionStrategy
+    name: IAccountSelectionStrategy
+    nameWithType: IAccountSelectionStrategy
+    fullName: Microsoft.WindowsAzure.MediaServices.Client.IAccountSelectionStrategy
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity`1
+    name: BaseEntity
+    nameWithType: BaseEntity
+    fullName: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Microsoft.WindowsAzure.MediaServices.Client.IAccountSelectionStrategy
+    name: IAccountSelectionStrategy
+    nameWithType: IAccountSelectionStrategy
+    fullName: Microsoft.WindowsAzure.MediaServices.Client.IAccountSelectionStrategy
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.WindowsAzure.MediaServices.Client.IMediaContextContainer
+  commentId: T:Microsoft.WindowsAzure.MediaServices.Client.IMediaContextContainer
+  parent: Microsoft.WindowsAzure.MediaServices.Client
+  isExternal: false
+  name: IMediaContextContainer
+  nameWithType: IMediaContextContainer
+  fullName: Microsoft.WindowsAzure.MediaServices.Client.IMediaContextContainer
 - uid: Microsoft.WindowsAzure.MediaServices.Client.IAccountSelectionStrategy
   commentId: T:Microsoft.WindowsAzure.MediaServices.Client.IAccountSelectionStrategy
   parent: Microsoft.WindowsAzure.MediaServices.Client
@@ -419,12 +490,514 @@ references:
   name: IAccountSelectionStrategy
   nameWithType: IAccountSelectionStrategy
   fullName: Microsoft.WindowsAzure.MediaServices.Client.IAccountSelectionStrategy
+- uid: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity.SetMediaContext(Microsoft.WindowsAzure.MediaServices.Client.MediaContextBase)
+  commentId: M:Microsoft.WindowsAzure.MediaServices.Client.BaseEntity.SetMediaContext(Microsoft.WindowsAzure.MediaServices.Client.MediaContextBase)
+  parent: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity
+  isExternal: false
+  name: SetMediaContext(MediaContextBase)
+  nameWithType: BaseEntity.SetMediaContext(MediaContextBase)
+  fullName: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity.SetMediaContext(Microsoft.WindowsAzure.MediaServices.Client.MediaContextBase)
+  spec.csharp:
+  - uid: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity.SetMediaContext(Microsoft.WindowsAzure.MediaServices.Client.MediaContextBase)
+    name: SetMediaContext
+    nameWithType: BaseEntity.SetMediaContext
+    fullName: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity.SetMediaContext
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.WindowsAzure.MediaServices.Client.MediaContextBase
+    name: MediaContextBase
+    nameWithType: MediaContextBase
+    fullName: Microsoft.WindowsAzure.MediaServices.Client.MediaContextBase
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity.SetMediaContext(Microsoft.WindowsAzure.MediaServices.Client.MediaContextBase)
+    name: SetMediaContext
+    nameWithType: BaseEntity.SetMediaContext
+    fullName: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity.SetMediaContext
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.WindowsAzure.MediaServices.Client.MediaContextBase
+    name: MediaContextBase
+    nameWithType: MediaContextBase
+    fullName: Microsoft.WindowsAzure.MediaServices.Client.MediaContextBase
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity.GetMediaContext
+  commentId: M:Microsoft.WindowsAzure.MediaServices.Client.BaseEntity.GetMediaContext
+  parent: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity
+  isExternal: false
+  name: GetMediaContext()
+  nameWithType: BaseEntity.GetMediaContext()
+  fullName: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity.GetMediaContext()
+  spec.csharp:
+  - uid: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity.GetMediaContext
+    name: GetMediaContext
+    nameWithType: BaseEntity.GetMediaContext
+    fullName: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity.GetMediaContext
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity.GetMediaContext
+    name: GetMediaContext
+    nameWithType: BaseEntity.GetMediaContext
+    fullName: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity.GetMediaContext
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity.LoadProperty(Microsoft.WindowsAzure.MediaServices.Client.IMediaDataServiceContext,System.String)
+  commentId: M:Microsoft.WindowsAzure.MediaServices.Client.BaseEntity.LoadProperty(Microsoft.WindowsAzure.MediaServices.Client.IMediaDataServiceContext,System.String)
+  parent: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity
+  isExternal: true
+  name: LoadProperty(IMediaDataServiceContext, String)
+  nameWithType: BaseEntity.LoadProperty(IMediaDataServiceContext, String)
+  fullName: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity.LoadProperty(Microsoft.WindowsAzure.MediaServices.Client.IMediaDataServiceContext, System.String)
+  spec.csharp:
+  - uid: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity.LoadProperty(Microsoft.WindowsAzure.MediaServices.Client.IMediaDataServiceContext,System.String)
+    name: LoadProperty
+    nameWithType: BaseEntity.LoadProperty
+    fullName: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity.LoadProperty
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.WindowsAzure.MediaServices.Client.IMediaDataServiceContext
+    name: IMediaDataServiceContext
+    nameWithType: IMediaDataServiceContext
+    fullName: Microsoft.WindowsAzure.MediaServices.Client.IMediaDataServiceContext
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity.LoadProperty(Microsoft.WindowsAzure.MediaServices.Client.IMediaDataServiceContext,System.String)
+    name: LoadProperty
+    nameWithType: BaseEntity.LoadProperty
+    fullName: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity.LoadProperty
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.WindowsAzure.MediaServices.Client.IMediaDataServiceContext
+    name: IMediaDataServiceContext
+    nameWithType: IMediaDataServiceContext
+    fullName: Microsoft.WindowsAzure.MediaServices.Client.IMediaDataServiceContext
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity.LoadProperty(Microsoft.WindowsAzure.MediaServices.Client.IMediaDataServiceContext,Microsoft.WindowsAzure.MediaServices.Client.BaseEntity,System.String)
+  commentId: M:Microsoft.WindowsAzure.MediaServices.Client.BaseEntity.LoadProperty(Microsoft.WindowsAzure.MediaServices.Client.IMediaDataServiceContext,Microsoft.WindowsAzure.MediaServices.Client.BaseEntity,System.String)
+  parent: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity
+  isExternal: true
+  name: LoadProperty(IMediaDataServiceContext, BaseEntity, String)
+  nameWithType: BaseEntity.LoadProperty(IMediaDataServiceContext, BaseEntity, String)
+  fullName: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity.LoadProperty(Microsoft.WindowsAzure.MediaServices.Client.IMediaDataServiceContext, Microsoft.WindowsAzure.MediaServices.Client.BaseEntity, System.String)
+  spec.csharp:
+  - uid: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity.LoadProperty(Microsoft.WindowsAzure.MediaServices.Client.IMediaDataServiceContext,Microsoft.WindowsAzure.MediaServices.Client.BaseEntity,System.String)
+    name: LoadProperty
+    nameWithType: BaseEntity.LoadProperty
+    fullName: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity.LoadProperty
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.WindowsAzure.MediaServices.Client.IMediaDataServiceContext
+    name: IMediaDataServiceContext
+    nameWithType: IMediaDataServiceContext
+    fullName: Microsoft.WindowsAzure.MediaServices.Client.IMediaDataServiceContext
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity
+    name: BaseEntity
+    nameWithType: BaseEntity
+    fullName: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity.LoadProperty(Microsoft.WindowsAzure.MediaServices.Client.IMediaDataServiceContext,Microsoft.WindowsAzure.MediaServices.Client.BaseEntity,System.String)
+    name: LoadProperty
+    nameWithType: BaseEntity.LoadProperty
+    fullName: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity.LoadProperty
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.WindowsAzure.MediaServices.Client.IMediaDataServiceContext
+    name: IMediaDataServiceContext
+    nameWithType: IMediaDataServiceContext
+    fullName: Microsoft.WindowsAzure.MediaServices.Client.IMediaDataServiceContext
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity
+    name: BaseEntity
+    nameWithType: BaseEntity
+    fullName: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System
   commentId: N:System
   isExternal: false
   name: System
   nameWithType: System
   fullName: System
+- uid: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity`1
+  commentId: T:Microsoft.WindowsAzure.MediaServices.Client.BaseEntity`1
+  isExternal: false
+  name: BaseEntity<T>
+  nameWithType: BaseEntity<T>
+  fullName: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity<T>
+  nameWithType.vb: BaseEntity(Of T)
+  fullname.vb: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity(Of T)
+  name.vb: BaseEntity(Of T)
+  spec.csharp:
+  - uid: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity`1
+    name: BaseEntity
+    nameWithType: BaseEntity
+    fullName: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity`1
+    name: BaseEntity
+    nameWithType: BaseEntity
+    fullName: Microsoft.WindowsAzure.MediaServices.Client.BaseEntity
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Int64
   commentId: T:System.Int64
   parent: System
@@ -438,11 +1011,13 @@ references:
   name: CapacityBasedAccountSelectionStrategy
   nameWithType: CapacityBasedAccountSelectionStrategy.CapacityBasedAccountSelectionStrategy
   fullName: Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy.CapacityBasedAccountSelectionStrategy
-- uid: MediaContextBase
-  isExternal: true
+- uid: Microsoft.WindowsAzure.MediaServices.Client.MediaContextBase
+  commentId: T:Microsoft.WindowsAzure.MediaServices.Client.MediaContextBase
+  parent: Microsoft.WindowsAzure.MediaServices.Client
+  isExternal: false
   name: MediaContextBase
   nameWithType: MediaContextBase
-  fullName: MediaContextBase
+  fullName: Microsoft.WindowsAzure.MediaServices.Client.MediaContextBase
 - uid: Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy.FromAccounts*
   commentId: Overload:Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy.FromAccounts
   isExternal: false
@@ -494,11 +1069,13 @@ references:
   name: AddStorageAccount
   nameWithType: CapacityBasedAccountSelectionStrategy.AddStorageAccount
   fullName: Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy.AddStorageAccount
-- uid: IStorageAccount
-  isExternal: true
+- uid: Microsoft.WindowsAzure.MediaServices.Client.IStorageAccount
+  commentId: T:Microsoft.WindowsAzure.MediaServices.Client.IStorageAccount
+  parent: Microsoft.WindowsAzure.MediaServices.Client
+  isExternal: false
   name: IStorageAccount
   nameWithType: IStorageAccount
-  fullName: IStorageAccount
+  fullName: Microsoft.WindowsAzure.MediaServices.Client.IStorageAccount
 - uid: Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy.AddStorageAccountByName*
   commentId: Overload:Microsoft.WindowsAzure.MediaServices.Client.CapacityBasedAccountSelectionStrategy.AddStorageAccountByName
   isExternal: false
