@@ -31,12 +31,15 @@ Push-Location $rootFolder\$src
 $config = Get-Content $rootFolder\repo.json -Raw | ConvertFrom-Json
 Foreach($repo in $config.repo){
 	CloneOrPull $($repo.url) $($repo.branch) $($repo.name)
-	if ($repo.build_script)
+	if ($repo.build_scripts)
 	{
 		Push-Location $($repo.name)
         Write-Host "Start to run build script in $($repo.name)"
-		Invoke-Expression $repo.build_script
-        if ($lastexitcode -ne 0) { Write-Error "error while running build script $($repo.build_script) in $($repo.name), exit code: $lastexitcode" }
+        foreach ($script in $repo.build_scripts)
+        {
+		    Invoke-Expression $script
+            if ($lastexitcode -ne 0) { Write-Error "error while running build script $($script) in $($repo.name), exit code: $lastexitcode" }
+        }
         Write-Host "Finish running build script in $($repo.name)"
 		Pop-Location
 	}
