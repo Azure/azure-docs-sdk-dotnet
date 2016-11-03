@@ -1,5 +1,5 @@
 ---
-ui: Microsoft.ServiceBus.Messaging
+uid: Microsoft.ServiceBus.Messaging
 summary: *content
 ---
 
