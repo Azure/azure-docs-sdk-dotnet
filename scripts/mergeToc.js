@@ -3,9 +3,15 @@
 var fs = require('fs');
 var path = require('path');
 
-var info = traverseApiToc("api-ref");
-checkDuplicateUid(info.ymlList);
-mergeToc(info.tocList, "api-ref/toc.yml");
+// find all toc.yml and metadata files inside api-ref and api-ref-manual respectively
+var apiRefInfo = traverseApiToc("api-ref");
+var apiRefManualInfo = traverseApiToc("api-ref-manual");
+
+// check if any metadata files has duplicated uid
+checkDuplicateUid(apiRefInfo.ymlList.concat(apiRefManualInfo.ymlList));
+
+// merge all toc.yml into one
+mergeToc(apiRefInfo.tocList.concat(apiRefManualInfo.tocList), "api-ref/toc.yml");
 
 function checkDuplicateUid(ymlList) {
     var record = new Set();
@@ -23,6 +29,11 @@ function traverseApiToc(homeDir) {
     var apiInfo = {};
     apiInfo.tocList = [];
     apiInfo.ymlList = [];
+
+    if (!fs.existsSync(homeDir)) {
+        return apiInfo;
+    }
+
     fs.readdirSync(homeDir).forEach( function (file) {
         var filePath = path.join(homeDir, file);
         if (fs.lstatSync(filePath).isFile()) {
@@ -32,9 +43,9 @@ function traverseApiToc(homeDir) {
                 apiInfo.ymlList.push(file);
             }
         } else {
-            var otherInfo = traverseApiToc(filePath)
-            apiInfo.tocList = apiInfo.tocList.concat(otherInfo.tocList);
-            apiInfo.ymlList = apiInfo.ymlList.concat(otherInfo.ymlList);
+            var otherapiRefInfo = traverseApiToc(filePath)
+            apiInfo.tocList = apiInfo.tocList.concat(otherapiRefInfo.tocList);
+            apiInfo.ymlList = apiInfo.ymlList.concat(otherapiRefInfo.ymlList);
         }
     });
     return apiInfo;
