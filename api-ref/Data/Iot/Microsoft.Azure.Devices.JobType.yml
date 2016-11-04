@@ -18,7 +18,7 @@ items:
   source:
     remote:
       path: csharp/service/Microsoft.Azure.Devices/JobType.cs
-      branch: master
+      branch: release_2016_1014
       repo: https://github.com/Azure/azure-iot-sdks
     id: JobType
     path: csharp/service/Microsoft.Azure.Devices/JobType.cs
@@ -29,8 +29,20 @@ items:
   summary: "\nUsed to delineate job actions.\n"
   example: []
   syntax:
-    content: 'public enum JobType : int'
-    content.vb: Public Enum JobType As Integer
+    content: >-
+      [JsonConverter(typeof (StringEnumConverter))]
+
+      public enum JobType
+    content.vb: >-
+      <JsonConverter(GetType(StringEnumConverter))>
+
+      Public Enum JobType
+  attributes:
+  - type: Newtonsoft.Json.JsonConverterAttribute
+    ctor: Newtonsoft.Json.JsonConverterAttribute.#ctor(System.Type)
+    arguments:
+    - type: System.Type
+      value: Newtonsoft.Json.Converters.StringEnumConverter
   modifiers.csharp:
   - public
   - enum
@@ -51,7 +63,7 @@ items:
   source:
     remote:
       path: csharp/service/Microsoft.Azure.Devices/JobType.cs
-      branch: master
+      branch: release_2016_1014
       repo: https://github.com/Azure/azure-iot-sdks
     id: Unknown
     path: csharp/service/Microsoft.Azure.Devices/JobType.cs
@@ -60,10 +72,24 @@ items:
   - Microsoft.Azure.Devices.Uwp
   namespace: Microsoft.Azure.Devices
   syntax:
-    content: Unknown = null
-    content.vb: Unknown = Nothing
+    content: >-
+      [EnumMember(Value = "unknown")]
+
+      Unknown = 0
+    content.vb: >-
+      <EnumMember(Value:="unknown")>
+
+      Unknown = 0
     return:
       type: Microsoft.Azure.Devices.JobType
+  attributes:
+  - type: System.Runtime.Serialization.EnumMemberAttribute
+    ctor: System.Runtime.Serialization.EnumMemberAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Value
+      type: System.String
+      value: unknown
   modifiers.csharp:
   - public
   - const
@@ -84,7 +110,7 @@ items:
   source:
     remote:
       path: csharp/service/Microsoft.Azure.Devices/JobType.cs
-      branch: master
+      branch: release_2016_1014
       repo: https://github.com/Azure/azure-iot-sdks
     id: ExportDevices
     path: csharp/service/Microsoft.Azure.Devices/JobType.cs
@@ -93,10 +119,24 @@ items:
   - Microsoft.Azure.Devices.Uwp
   namespace: Microsoft.Azure.Devices
   syntax:
-    content: ExportDevices = null
-    content.vb: ExportDevices = Nothing
+    content: >-
+      [EnumMember(Value = "export")]
+
+      ExportDevices = 1
+    content.vb: >-
+      <EnumMember(Value:="export")>
+
+      ExportDevices = 1
     return:
       type: Microsoft.Azure.Devices.JobType
+  attributes:
+  - type: System.Runtime.Serialization.EnumMemberAttribute
+    ctor: System.Runtime.Serialization.EnumMemberAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Value
+      type: System.String
+      value: export
   modifiers.csharp:
   - public
   - const
@@ -117,7 +157,7 @@ items:
   source:
     remote:
       path: csharp/service/Microsoft.Azure.Devices/JobType.cs
-      branch: master
+      branch: release_2016_1014
       repo: https://github.com/Azure/azure-iot-sdks
     id: ImportDevices
     path: csharp/service/Microsoft.Azure.Devices/JobType.cs
@@ -126,10 +166,24 @@ items:
   - Microsoft.Azure.Devices.Uwp
   namespace: Microsoft.Azure.Devices
   syntax:
-    content: ImportDevices = null
-    content.vb: ImportDevices = Nothing
+    content: >-
+      [EnumMember(Value = "import")]
+
+      ImportDevices = 2
+    content.vb: >-
+      <EnumMember(Value:="import")>
+
+      ImportDevices = 2
     return:
       type: Microsoft.Azure.Devices.JobType
+  attributes:
+  - type: System.Runtime.Serialization.EnumMemberAttribute
+    ctor: System.Runtime.Serialization.EnumMemberAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Value
+      type: System.String
+      value: import
   modifiers.csharp:
   - public
   - const

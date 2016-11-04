@@ -19,7 +19,7 @@ items:
   source:
     remote:
       path: csharp/service/Microsoft.Azure.Devices/Common/Data/AccessRights.cs
-      branch: master
+      branch: release_2016_1014
       repo: https://github.com/Azure/azure-iot-sdks
     id: AccessRights
     path: csharp/service/Microsoft.Azure.Devices/Common/Data/AccessRights.cs
@@ -28,8 +28,27 @@ items:
   - Microsoft.Azure.Devices.Uwp
   namespace: Microsoft.Azure.Devices.Common.Data
   syntax:
-    content: 'public enum AccessRights : int'
-    content.vb: Public Enum AccessRights As Integer
+    content: >-
+      [Flags]
+
+      [JsonConverter(typeof (StringEnumConverter))]
+
+      public enum AccessRights
+    content.vb: >-
+      <Flags>
+
+      <JsonConverter(GetType(StringEnumConverter))>
+
+      Public Enum AccessRights
+  attributes:
+  - type: System.FlagsAttribute
+    ctor: System.FlagsAttribute.#ctor
+    arguments: []
+  - type: Newtonsoft.Json.JsonConverterAttribute
+    ctor: Newtonsoft.Json.JsonConverterAttribute.#ctor(System.Type)
+    arguments:
+    - type: System.Type
+      value: Newtonsoft.Json.Converters.StringEnumConverter
   modifiers.csharp:
   - public
   - enum
@@ -50,7 +69,7 @@ items:
   source:
     remote:
       path: csharp/service/Microsoft.Azure.Devices/Common/Data/AccessRights.cs
-      branch: master
+      branch: release_2016_1014
       repo: https://github.com/Azure/azure-iot-sdks
     id: RegistryRead
     path: csharp/service/Microsoft.Azure.Devices/Common/Data/AccessRights.cs
@@ -59,8 +78,7 @@ items:
   - Microsoft.Azure.Devices.Uwp
   namespace: Microsoft.Azure.Devices.Common.Data
   syntax:
-    content: RegistryRead = null
-    content.vb: RegistryRead = Nothing
+    content: RegistryRead = 1
     return:
       type: Microsoft.Azure.Devices.Common.Data.AccessRights
   modifiers.csharp:
@@ -83,7 +101,7 @@ items:
   source:
     remote:
       path: csharp/service/Microsoft.Azure.Devices/Common/Data/AccessRights.cs
-      branch: master
+      branch: release_2016_1014
       repo: https://github.com/Azure/azure-iot-sdks
     id: RegistryWrite
     path: csharp/service/Microsoft.Azure.Devices/Common/Data/AccessRights.cs
@@ -92,8 +110,7 @@ items:
   - Microsoft.Azure.Devices.Uwp
   namespace: Microsoft.Azure.Devices.Common.Data
   syntax:
-    content: RegistryWrite = null
-    content.vb: RegistryWrite = Nothing
+    content: RegistryWrite = 3
     return:
       type: Microsoft.Azure.Devices.Common.Data.AccessRights
   modifiers.csharp:
@@ -116,7 +133,7 @@ items:
   source:
     remote:
       path: csharp/service/Microsoft.Azure.Devices/Common/Data/AccessRights.cs
-      branch: master
+      branch: release_2016_1014
       repo: https://github.com/Azure/azure-iot-sdks
     id: ServiceConnect
     path: csharp/service/Microsoft.Azure.Devices/Common/Data/AccessRights.cs
@@ -125,8 +142,7 @@ items:
   - Microsoft.Azure.Devices.Uwp
   namespace: Microsoft.Azure.Devices.Common.Data
   syntax:
-    content: ServiceConnect = null
-    content.vb: ServiceConnect = Nothing
+    content: ServiceConnect = 4
     return:
       type: Microsoft.Azure.Devices.Common.Data.AccessRights
   modifiers.csharp:
@@ -149,7 +165,7 @@ items:
   source:
     remote:
       path: csharp/service/Microsoft.Azure.Devices/Common/Data/AccessRights.cs
-      branch: master
+      branch: release_2016_1014
       repo: https://github.com/Azure/azure-iot-sdks
     id: DeviceConnect
     path: csharp/service/Microsoft.Azure.Devices/Common/Data/AccessRights.cs
@@ -158,8 +174,7 @@ items:
   - Microsoft.Azure.Devices.Uwp
   namespace: Microsoft.Azure.Devices.Common.Data
   syntax:
-    content: DeviceConnect = null
-    content.vb: DeviceConnect = Nothing
+    content: DeviceConnect = 8
     return:
       type: Microsoft.Azure.Devices.Common.Data.AccessRights
   modifiers.csharp:

@@ -28,7 +28,7 @@ items:
   source:
     remote:
       path: csharp/service/Microsoft.Azure.Devices/Device.cs
-      branch: master
+      branch: release_2016_1014
       repo: https://github.com/Azure/azure-iot-sdks
     id: Device
     path: csharp/service/Microsoft.Azure.Devices/Device.cs
@@ -39,15 +39,22 @@ items:
   summary: "\ncontains device properties and their accessors.\n"
   example: []
   syntax:
-    content: 'public class Device : object, IETagHolder'
+    content: 'public class Device : IETagHolder'
     content.vb: >-
       Public Class Device
-          Inherits Object
           Implements IETagHolder
   inheritance:
   - System.Object
   implements:
   - Microsoft.Azure.Devices.Common.IETagHolder
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
   modifiers.csharp:
   - public
   - class
@@ -68,7 +75,7 @@ items:
   source:
     remote:
       path: csharp/service/Microsoft.Azure.Devices/Device.cs
-      branch: master
+      branch: release_2016_1014
       repo: https://github.com/Azure/azure-iot-sdks
     id: .ctor
     path: csharp/service/Microsoft.Azure.Devices/Device.cs
@@ -98,7 +105,7 @@ items:
   source:
     remote:
       path: csharp/service/Microsoft.Azure.Devices/Device.cs
-      branch: master
+      branch: release_2016_1014
       repo: https://github.com/Azure/azure-iot-sdks
     id: .ctor
     path: csharp/service/Microsoft.Azure.Devices/Device.cs
@@ -131,7 +138,7 @@ items:
   source:
     remote:
       path: csharp/service/Microsoft.Azure.Devices/Device.cs
-      branch: master
+      branch: release_2016_1014
       repo: https://github.com/Azure/azure-iot-sdks
     id: Id
     path: csharp/service/Microsoft.Azure.Devices/Device.cs
@@ -140,12 +147,26 @@ items:
   - Microsoft.Azure.Devices.Uwp
   namespace: Microsoft.Azure.Devices
   syntax:
-    content: public string Id { get; }
-    content.vb: Public ReadOnly Property Id As String
+    content: >-
+      [JsonProperty(PropertyName = "deviceId")]
+
+      public string Id { get; }
+    content.vb: >-
+      <JsonProperty(PropertyName:="deviceId")>
+
+      Public ReadOnly Property Id As String
     parameters: []
     return:
       type: System.String
   overload: Microsoft.Azure.Devices.Device.Id*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: PropertyName
+      type: System.String
+      value: deviceId
   modifiers.csharp:
   - public
   - get
@@ -166,7 +187,7 @@ items:
   source:
     remote:
       path: csharp/service/Microsoft.Azure.Devices/Device.cs
-      branch: master
+      branch: release_2016_1014
       repo: https://github.com/Azure/azure-iot-sdks
     id: GenerationId
     path: csharp/service/Microsoft.Azure.Devices/Device.cs
@@ -175,12 +196,26 @@ items:
   - Microsoft.Azure.Devices.Uwp
   namespace: Microsoft.Azure.Devices
   syntax:
-    content: public string GenerationId { get; }
-    content.vb: Public ReadOnly Property GenerationId As String
+    content: >-
+      [JsonProperty(PropertyName = "generationId")]
+
+      public string GenerationId { get; }
+    content.vb: >-
+      <JsonProperty(PropertyName:="generationId")>
+
+      Public ReadOnly Property GenerationId As String
     parameters: []
     return:
       type: System.String
   overload: Microsoft.Azure.Devices.Device.GenerationId*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: PropertyName
+      type: System.String
+      value: generationId
   modifiers.csharp:
   - public
   - get
@@ -201,7 +236,7 @@ items:
   source:
     remote:
       path: csharp/service/Microsoft.Azure.Devices/Device.cs
-      branch: master
+      branch: release_2016_1014
       repo: https://github.com/Azure/azure-iot-sdks
     id: ETag
     path: csharp/service/Microsoft.Azure.Devices/Device.cs
@@ -210,14 +245,28 @@ items:
   - Microsoft.Azure.Devices.Uwp
   namespace: Microsoft.Azure.Devices
   syntax:
-    content: public string ETag { get; set; }
-    content.vb: Public Property ETag As String
+    content: >-
+      [JsonProperty(PropertyName = "etag")]
+
+      public string ETag { get; set; }
+    content.vb: >-
+      <JsonProperty(PropertyName:="etag")>
+
+      Public Property ETag As String
     parameters: []
     return:
       type: System.String
   overload: Microsoft.Azure.Devices.Device.ETag*
   implements:
   - Microsoft.Azure.Devices.Common.IETagHolder.ETag
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: PropertyName
+      type: System.String
+      value: etag
   modifiers.csharp:
   - public
   - get
@@ -238,7 +287,7 @@ items:
   source:
     remote:
       path: csharp/service/Microsoft.Azure.Devices/Device.cs
-      branch: master
+      branch: release_2016_1014
       repo: https://github.com/Azure/azure-iot-sdks
     id: ConnectionState
     path: csharp/service/Microsoft.Azure.Devices/Device.cs
@@ -247,12 +296,35 @@ items:
   - Microsoft.Azure.Devices.Uwp
   namespace: Microsoft.Azure.Devices
   syntax:
-    content: public DeviceConnectionState ConnectionState { get; }
-    content.vb: Public ReadOnly Property ConnectionState As DeviceConnectionState
+    content: >-
+      [JsonProperty(PropertyName = "connectionState")]
+
+      [JsonConverter(typeof (StringEnumConverter))]
+
+      public DeviceConnectionState ConnectionState { get; }
+    content.vb: >-
+      <JsonProperty(PropertyName:="connectionState")>
+
+      <JsonConverter(GetType(StringEnumConverter))>
+
+      Public ReadOnly Property ConnectionState As DeviceConnectionState
     parameters: []
     return:
       type: Microsoft.Azure.Devices.DeviceConnectionState
   overload: Microsoft.Azure.Devices.Device.ConnectionState*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: PropertyName
+      type: System.String
+      value: connectionState
+  - type: Newtonsoft.Json.JsonConverterAttribute
+    ctor: Newtonsoft.Json.JsonConverterAttribute.#ctor(System.Type)
+    arguments:
+    - type: System.Type
+      value: Newtonsoft.Json.Converters.StringEnumConverter
   modifiers.csharp:
   - public
   - get
@@ -273,7 +345,7 @@ items:
   source:
     remote:
       path: csharp/service/Microsoft.Azure.Devices/Device.cs
-      branch: master
+      branch: release_2016_1014
       repo: https://github.com/Azure/azure-iot-sdks
     id: Status
     path: csharp/service/Microsoft.Azure.Devices/Device.cs
@@ -282,12 +354,35 @@ items:
   - Microsoft.Azure.Devices.Uwp
   namespace: Microsoft.Azure.Devices
   syntax:
-    content: public DeviceStatus Status { get; set; }
-    content.vb: Public Property Status As DeviceStatus
+    content: >-
+      [JsonProperty(PropertyName = "status")]
+
+      [JsonConverter(typeof (StringEnumConverter))]
+
+      public DeviceStatus Status { get; set; }
+    content.vb: >-
+      <JsonProperty(PropertyName:="status")>
+
+      <JsonConverter(GetType(StringEnumConverter))>
+
+      Public Property Status As DeviceStatus
     parameters: []
     return:
       type: Microsoft.Azure.Devices.DeviceStatus
   overload: Microsoft.Azure.Devices.Device.Status*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: PropertyName
+      type: System.String
+      value: status
+  - type: Newtonsoft.Json.JsonConverterAttribute
+    ctor: Newtonsoft.Json.JsonConverterAttribute.#ctor(System.Type)
+    arguments:
+    - type: System.Type
+      value: Newtonsoft.Json.Converters.StringEnumConverter
   modifiers.csharp:
   - public
   - get
@@ -308,7 +403,7 @@ items:
   source:
     remote:
       path: csharp/service/Microsoft.Azure.Devices/Device.cs
-      branch: master
+      branch: release_2016_1014
       repo: https://github.com/Azure/azure-iot-sdks
     id: StatusReason
     path: csharp/service/Microsoft.Azure.Devices/Device.cs
@@ -317,12 +412,26 @@ items:
   - Microsoft.Azure.Devices.Uwp
   namespace: Microsoft.Azure.Devices
   syntax:
-    content: public string StatusReason { get; set; }
-    content.vb: Public Property StatusReason As String
+    content: >-
+      [JsonProperty(PropertyName = "statusReason")]
+
+      public string StatusReason { get; set; }
+    content.vb: >-
+      <JsonProperty(PropertyName:="statusReason")>
+
+      Public Property StatusReason As String
     parameters: []
     return:
       type: System.String
   overload: Microsoft.Azure.Devices.Device.StatusReason*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: PropertyName
+      type: System.String
+      value: statusReason
   modifiers.csharp:
   - public
   - get
@@ -343,7 +452,7 @@ items:
   source:
     remote:
       path: csharp/service/Microsoft.Azure.Devices/Device.cs
-      branch: master
+      branch: release_2016_1014
       repo: https://github.com/Azure/azure-iot-sdks
     id: ConnectionStateUpdatedTime
     path: csharp/service/Microsoft.Azure.Devices/Device.cs
@@ -352,12 +461,26 @@ items:
   - Microsoft.Azure.Devices.Uwp
   namespace: Microsoft.Azure.Devices
   syntax:
-    content: public DateTime ConnectionStateUpdatedTime { get; }
-    content.vb: Public ReadOnly Property ConnectionStateUpdatedTime As DateTime
+    content: >-
+      [JsonProperty(PropertyName = "connectionStateUpdatedTime")]
+
+      public DateTime ConnectionStateUpdatedTime { get; }
+    content.vb: >-
+      <JsonProperty(PropertyName:="connectionStateUpdatedTime")>
+
+      Public ReadOnly Property ConnectionStateUpdatedTime As Date
     parameters: []
     return:
-      type: DateTime
+      type: System.DateTime
   overload: Microsoft.Azure.Devices.Device.ConnectionStateUpdatedTime*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: PropertyName
+      type: System.String
+      value: connectionStateUpdatedTime
   modifiers.csharp:
   - public
   - get
@@ -378,7 +501,7 @@ items:
   source:
     remote:
       path: csharp/service/Microsoft.Azure.Devices/Device.cs
-      branch: master
+      branch: release_2016_1014
       repo: https://github.com/Azure/azure-iot-sdks
     id: StatusUpdatedTime
     path: csharp/service/Microsoft.Azure.Devices/Device.cs
@@ -387,12 +510,26 @@ items:
   - Microsoft.Azure.Devices.Uwp
   namespace: Microsoft.Azure.Devices
   syntax:
-    content: public DateTime StatusUpdatedTime { get; }
-    content.vb: Public ReadOnly Property StatusUpdatedTime As DateTime
+    content: >-
+      [JsonProperty(PropertyName = "statusUpdatedTime")]
+
+      public DateTime StatusUpdatedTime { get; }
+    content.vb: >-
+      <JsonProperty(PropertyName:="statusUpdatedTime")>
+
+      Public ReadOnly Property StatusUpdatedTime As Date
     parameters: []
     return:
-      type: DateTime
+      type: System.DateTime
   overload: Microsoft.Azure.Devices.Device.StatusUpdatedTime*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: PropertyName
+      type: System.String
+      value: statusUpdatedTime
   modifiers.csharp:
   - public
   - get
@@ -413,7 +550,7 @@ items:
   source:
     remote:
       path: csharp/service/Microsoft.Azure.Devices/Device.cs
-      branch: master
+      branch: release_2016_1014
       repo: https://github.com/Azure/azure-iot-sdks
     id: LastActivityTime
     path: csharp/service/Microsoft.Azure.Devices/Device.cs
@@ -422,12 +559,26 @@ items:
   - Microsoft.Azure.Devices.Uwp
   namespace: Microsoft.Azure.Devices
   syntax:
-    content: public DateTime LastActivityTime { get; }
-    content.vb: Public ReadOnly Property LastActivityTime As DateTime
+    content: >-
+      [JsonProperty(PropertyName = "lastActivityTime")]
+
+      public DateTime LastActivityTime { get; }
+    content.vb: >-
+      <JsonProperty(PropertyName:="lastActivityTime")>
+
+      Public ReadOnly Property LastActivityTime As Date
     parameters: []
     return:
-      type: DateTime
+      type: System.DateTime
   overload: Microsoft.Azure.Devices.Device.LastActivityTime*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: PropertyName
+      type: System.String
+      value: lastActivityTime
   modifiers.csharp:
   - public
   - get
@@ -448,7 +599,7 @@ items:
   source:
     remote:
       path: csharp/service/Microsoft.Azure.Devices/Device.cs
-      branch: master
+      branch: release_2016_1014
       repo: https://github.com/Azure/azure-iot-sdks
     id: CloudToDeviceMessageCount
     path: csharp/service/Microsoft.Azure.Devices/Device.cs
@@ -457,12 +608,26 @@ items:
   - Microsoft.Azure.Devices.Uwp
   namespace: Microsoft.Azure.Devices
   syntax:
-    content: public int CloudToDeviceMessageCount { get; }
-    content.vb: Public ReadOnly Property CloudToDeviceMessageCount As Integer
+    content: >-
+      [JsonProperty(PropertyName = "cloudToDeviceMessageCount")]
+
+      public int CloudToDeviceMessageCount { get; }
+    content.vb: >-
+      <JsonProperty(PropertyName:="cloudToDeviceMessageCount")>
+
+      Public ReadOnly Property CloudToDeviceMessageCount As Integer
     parameters: []
     return:
       type: System.Int32
   overload: Microsoft.Azure.Devices.Device.CloudToDeviceMessageCount*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: PropertyName
+      type: System.String
+      value: cloudToDeviceMessageCount
   modifiers.csharp:
   - public
   - get
@@ -483,7 +648,7 @@ items:
   source:
     remote:
       path: csharp/service/Microsoft.Azure.Devices/Device.cs
-      branch: master
+      branch: release_2016_1014
       repo: https://github.com/Azure/azure-iot-sdks
     id: Authentication
     path: csharp/service/Microsoft.Azure.Devices/Device.cs
@@ -492,12 +657,26 @@ items:
   - Microsoft.Azure.Devices.Uwp
   namespace: Microsoft.Azure.Devices
   syntax:
-    content: public AuthenticationMechanism Authentication { get; set; }
-    content.vb: Public Property Authentication As AuthenticationMechanism
+    content: >-
+      [JsonProperty(PropertyName = "authentication")]
+
+      public AuthenticationMechanism Authentication { get; set; }
+    content.vb: >-
+      <JsonProperty(PropertyName:="authentication")>
+
+      Public Property Authentication As AuthenticationMechanism
     parameters: []
     return:
       type: Microsoft.Azure.Devices.AuthenticationMechanism
   overload: Microsoft.Azure.Devices.Device.Authentication*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: PropertyName
+      type: System.String
+      value: authentication
   modifiers.csharp:
   - public
   - get
@@ -525,6 +704,285 @@ references:
   name: IETagHolder
   nameWithType: IETagHolder
   fullName: Microsoft.Azure.Devices.Common.IETagHolder
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System
   commentId: N:System
   isExternal: false
@@ -613,11 +1071,13 @@ references:
   name: ConnectionStateUpdatedTime
   nameWithType: Device.ConnectionStateUpdatedTime
   fullName: Microsoft.Azure.Devices.Device.ConnectionStateUpdatedTime
-- uid: DateTime
+- uid: System.DateTime
+  commentId: T:System.DateTime
+  parent: System
   isExternal: true
-  name: DateTime
-  nameWithType: DateTime
-  fullName: DateTime
+  name: System.DateTime
+  nameWithType: System.DateTime
+  fullName: System.DateTime
 - uid: Microsoft.Azure.Devices.Device.StatusUpdatedTime*
   commentId: Overload:Microsoft.Azure.Devices.Device.StatusUpdatedTime
   isExternal: false

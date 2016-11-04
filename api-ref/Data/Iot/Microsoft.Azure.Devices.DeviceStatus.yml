@@ -17,7 +17,7 @@ items:
   source:
     remote:
       path: csharp/service/Microsoft.Azure.Devices/DeviceStatus.cs
-      branch: master
+      branch: release_2016_1014
       repo: https://github.com/Azure/azure-iot-sdks
     id: DeviceStatus
     path: csharp/service/Microsoft.Azure.Devices/DeviceStatus.cs
@@ -28,8 +28,20 @@ items:
   summary: "\nSpecifies the different states of a device.\n"
   example: []
   syntax:
-    content: 'public enum DeviceStatus : int'
-    content.vb: Public Enum DeviceStatus As Integer
+    content: >-
+      [JsonConverter(typeof (StringEnumConverter))]
+
+      public enum DeviceStatus
+    content.vb: >-
+      <JsonConverter(GetType(StringEnumConverter))>
+
+      Public Enum DeviceStatus
+  attributes:
+  - type: Newtonsoft.Json.JsonConverterAttribute
+    ctor: Newtonsoft.Json.JsonConverterAttribute.#ctor(System.Type)
+    arguments:
+    - type: System.Type
+      value: Newtonsoft.Json.Converters.StringEnumConverter
   modifiers.csharp:
   - public
   - enum
@@ -50,7 +62,7 @@ items:
   source:
     remote:
       path: csharp/service/Microsoft.Azure.Devices/DeviceStatus.cs
-      branch: master
+      branch: release_2016_1014
       repo: https://github.com/Azure/azure-iot-sdks
     id: Enabled
     path: csharp/service/Microsoft.Azure.Devices/DeviceStatus.cs
@@ -59,10 +71,24 @@ items:
   - Microsoft.Azure.Devices.Uwp
   namespace: Microsoft.Azure.Devices
   syntax:
-    content: Enabled = null
-    content.vb: Enabled = Nothing
+    content: >-
+      [EnumMember(Value = "enabled")]
+
+      Enabled = 0
+    content.vb: >-
+      <EnumMember(Value:="enabled")>
+
+      Enabled = 0
     return:
       type: Microsoft.Azure.Devices.DeviceStatus
+  attributes:
+  - type: System.Runtime.Serialization.EnumMemberAttribute
+    ctor: System.Runtime.Serialization.EnumMemberAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Value
+      type: System.String
+      value: enabled
   modifiers.csharp:
   - public
   - const
@@ -83,7 +109,7 @@ items:
   source:
     remote:
       path: csharp/service/Microsoft.Azure.Devices/DeviceStatus.cs
-      branch: master
+      branch: release_2016_1014
       repo: https://github.com/Azure/azure-iot-sdks
     id: Disabled
     path: csharp/service/Microsoft.Azure.Devices/DeviceStatus.cs
@@ -92,10 +118,24 @@ items:
   - Microsoft.Azure.Devices.Uwp
   namespace: Microsoft.Azure.Devices
   syntax:
-    content: Disabled = null
-    content.vb: Disabled = Nothing
+    content: >-
+      [EnumMember(Value = "disabled")]
+
+      Disabled = 1
+    content.vb: >-
+      <EnumMember(Value:="disabled")>
+
+      Disabled = 1
     return:
       type: Microsoft.Azure.Devices.DeviceStatus
+  attributes:
+  - type: System.Runtime.Serialization.EnumMemberAttribute
+    ctor: System.Runtime.Serialization.EnumMemberAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Value
+      type: System.String
+      value: disabled
   modifiers.csharp:
   - public
   - const
