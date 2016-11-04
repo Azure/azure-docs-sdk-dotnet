@@ -7,18 +7,18 @@ items:
   children:
   - Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.BeginCreate(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String,System.String)
   - Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.BeginCreateAsync(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)
-  - Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.BeginDeleteIfExists(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String)
-  - Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.BeginDeleteIfExistsAsync(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)
+  - Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.BeginDelete(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String)
+  - Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.BeginDeleteAsync(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)
   - Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.Create(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String,System.String)
   - Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.CreateAsync(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)
-  - Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.DeleteIfExists(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String)
-  - Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.DeleteIfExistsAsync(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)
+  - Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.Delete(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String)
+  - Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.DeleteAsync(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)
   - Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.Get(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String)
   - Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.GetAsync(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)
   - Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.ListByEndpoint(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String)
   - Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.ListByEndpointAsync(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
-  - Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.Update(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String,System.String)
-  - Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.UpdateAsync(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)
+  - Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.ListByEndpointNext(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String)
+  - Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.ListByEndpointNextAsync(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.Threading.CancellationToken)
   langs:
   - csharp
   - vb
@@ -33,7 +33,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: CustomDomainsOperationsExtensions
     path: src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/CustomDomainsOperationsExtensions.cs
-    startLine: 22
+    startLine: 17
   assemblies:
   - Microsoft.Azure.Management.Cdn
   namespace: Microsoft.Azure.Management.Cdn
@@ -78,33 +78,33 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: ListByEndpoint
     path: src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/CustomDomainsOperationsExtensions.cs
-    startLine: 39
+    startLine: 34
   assemblies:
   - Microsoft.Azure.Management.Cdn
   namespace: Microsoft.Azure.Management.Cdn
   summary: "\nLists the existing CDN custom domains within an endpoint.\n"
   example: []
   syntax:
-    content: public static IEnumerable<CustomDomain> ListByEndpoint(this ICustomDomainsOperations operations, string endpointName, string profileName, string resourceGroupName)
+    content: public static IPage<CustomDomain> ListByEndpoint(this ICustomDomainsOperations operations, string resourceGroupName, string profileName, string endpointName)
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Function ListByEndpoint(operations As ICustomDomainsOperations, endpointName As String, profileName As String, resourceGroupName As String) As IEnumerable(Of CustomDomain)
+      Public Shared Function ListByEndpoint(operations As ICustomDomainsOperations, resourceGroupName As String, profileName As String, endpointName As String) As IPage(Of CustomDomain)
     parameters:
     - id: operations
       type: Microsoft.Azure.Management.Cdn.ICustomDomainsOperations
       description: "\nThe operations group for this extension method.\n"
-    - id: endpointName
-      type: System.String
-      description: "\nName of the endpoint within the CDN profile.\n"
-    - id: profileName
-      type: System.String
-      description: "\nName of the CDN profile within the resource group.\n"
     - id: resourceGroupName
       type: System.String
-      description: "\nName of the resource group within the Azure subscription.\n"
+      description: "\nName of the Resource group within the Azure subscription.\n"
+    - id: profileName
+      type: System.String
+      description: "\nName of the CDN profile which is unique within the resource group.\n"
+    - id: endpointName
+      type: System.String
+      description: "\nName of the endpoint under the profile which is unique globally.\n"
     return:
-      type: System.Collections.Generic.IEnumerable{Microsoft.Azure.Management.Cdn.Models.CustomDomain}
+      type: Microsoft.Rest.Azure.IPage{Microsoft.Azure.Management.Cdn.Models.CustomDomain}
   overload: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.ListByEndpoint*
   modifiers.csharp:
   - public
@@ -131,36 +131,36 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: ListByEndpointAsync
     path: src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/CustomDomainsOperationsExtensions.cs
-    startLine: 62
+    startLine: 57
   assemblies:
   - Microsoft.Azure.Management.Cdn
   namespace: Microsoft.Azure.Management.Cdn
   summary: "\nLists the existing CDN custom domains within an endpoint.\n"
   example: []
   syntax:
-    content: public static Task<IEnumerable<CustomDomain>> ListByEndpointAsync(this ICustomDomainsOperations operations, string endpointName, string profileName, string resourceGroupName, CancellationToken cancellationToken = null)
+    content: public static Task<IPage<CustomDomain>> ListByEndpointAsync(this ICustomDomainsOperations operations, string resourceGroupName, string profileName, string endpointName, CancellationToken cancellationToken = null)
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Function ListByEndpointAsync(operations As ICustomDomainsOperations, endpointName As String, profileName As String, resourceGroupName As String, cancellationToken As CancellationToken = Nothing) As Task(Of IEnumerable(Of CustomDomain))
+      Public Shared Function ListByEndpointAsync(operations As ICustomDomainsOperations, resourceGroupName As String, profileName As String, endpointName As String, cancellationToken As CancellationToken = Nothing) As Task(Of IPage(Of CustomDomain))
     parameters:
     - id: operations
       type: Microsoft.Azure.Management.Cdn.ICustomDomainsOperations
       description: "\nThe operations group for this extension method.\n"
-    - id: endpointName
-      type: System.String
-      description: "\nName of the endpoint within the CDN profile.\n"
-    - id: profileName
-      type: System.String
-      description: "\nName of the CDN profile within the resource group.\n"
     - id: resourceGroupName
       type: System.String
-      description: "\nName of the resource group within the Azure subscription.\n"
+      description: "\nName of the Resource group within the Azure subscription.\n"
+    - id: profileName
+      type: System.String
+      description: "\nName of the CDN profile which is unique within the resource group.\n"
+    - id: endpointName
+      type: System.String
+      description: "\nName of the endpoint under the profile which is unique globally.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{Microsoft.Azure.Management.Cdn.Models.CustomDomain}}
+      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.IPage{Microsoft.Azure.Management.Cdn.Models.CustomDomain}}
   overload: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.ListByEndpointAsync*
   modifiers.csharp:
   - public
@@ -187,34 +187,34 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: Get
     path: src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/CustomDomainsOperationsExtensions.cs
-    startLine: 88
+    startLine: 83
   assemblies:
   - Microsoft.Azure.Management.Cdn
   namespace: Microsoft.Azure.Management.Cdn
   summary: "\nGets an existing CDN custom domain within an endpoint.\n"
   example: []
   syntax:
-    content: public static CustomDomain Get(this ICustomDomainsOperations operations, string customDomainName, string endpointName, string profileName, string resourceGroupName)
+    content: public static CustomDomain Get(this ICustomDomainsOperations operations, string resourceGroupName, string profileName, string endpointName, string customDomainName)
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Function Get(operations As ICustomDomainsOperations, customDomainName As String, endpointName As String, profileName As String, resourceGroupName As String) As CustomDomain
+      Public Shared Function Get(operations As ICustomDomainsOperations, resourceGroupName As String, profileName As String, endpointName As String, customDomainName As String) As CustomDomain
     parameters:
     - id: operations
       type: Microsoft.Azure.Management.Cdn.ICustomDomainsOperations
       description: "\nThe operations group for this extension method.\n"
+    - id: resourceGroupName
+      type: System.String
+      description: "\nName of the Resource group within the Azure subscription.\n"
+    - id: profileName
+      type: System.String
+      description: "\nName of the CDN profile which is unique within the resource group.\n"
+    - id: endpointName
+      type: System.String
+      description: "\nName of the endpoint under the profile which is unique globally.\n"
     - id: customDomainName
       type: System.String
       description: "\nName of the custom domain within an endpoint.\n"
-    - id: endpointName
-      type: System.String
-      description: "\nName of the endpoint within the CDN profile.\n"
-    - id: profileName
-      type: System.String
-      description: "\nName of the CDN profile within the resource group.\n"
-    - id: resourceGroupName
-      type: System.String
-      description: "\nName of the resource group within the Azure subscription.\n"
     return:
       type: Microsoft.Azure.Management.Cdn.Models.CustomDomain
   overload: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.Get*
@@ -243,34 +243,34 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: GetAsync
     path: src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/CustomDomainsOperationsExtensions.cs
-    startLine: 114
+    startLine: 109
   assemblies:
   - Microsoft.Azure.Management.Cdn
   namespace: Microsoft.Azure.Management.Cdn
   summary: "\nGets an existing CDN custom domain within an endpoint.\n"
   example: []
   syntax:
-    content: public static Task<CustomDomain> GetAsync(this ICustomDomainsOperations operations, string customDomainName, string endpointName, string profileName, string resourceGroupName, CancellationToken cancellationToken = null)
+    content: public static Task<CustomDomain> GetAsync(this ICustomDomainsOperations operations, string resourceGroupName, string profileName, string endpointName, string customDomainName, CancellationToken cancellationToken = null)
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Function GetAsync(operations As ICustomDomainsOperations, customDomainName As String, endpointName As String, profileName As String, resourceGroupName As String, cancellationToken As CancellationToken = Nothing) As Task(Of CustomDomain)
+      Public Shared Function GetAsync(operations As ICustomDomainsOperations, resourceGroupName As String, profileName As String, endpointName As String, customDomainName As String, cancellationToken As CancellationToken = Nothing) As Task(Of CustomDomain)
     parameters:
     - id: operations
       type: Microsoft.Azure.Management.Cdn.ICustomDomainsOperations
       description: "\nThe operations group for this extension method.\n"
+    - id: resourceGroupName
+      type: System.String
+      description: "\nName of the Resource group within the Azure subscription.\n"
+    - id: profileName
+      type: System.String
+      description: "\nName of the CDN profile which is unique within the resource group.\n"
+    - id: endpointName
+      type: System.String
+      description: "\nName of the endpoint under the profile which is unique globally.\n"
     - id: customDomainName
       type: System.String
       description: "\nName of the custom domain within an endpoint.\n"
-    - id: endpointName
-      type: System.String
-      description: "\nName of the endpoint within the CDN profile.\n"
-    - id: profileName
-      type: System.String
-      description: "\nName of the CDN profile within the resource group.\n"
-    - id: resourceGroupName
-      type: System.String
-      description: "\nName of the resource group within the Azure subscription.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
@@ -302,34 +302,34 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: Create
     path: src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/CustomDomainsOperationsExtensions.cs
-    startLine: 143
+    startLine: 138
   assemblies:
   - Microsoft.Azure.Management.Cdn
   namespace: Microsoft.Azure.Management.Cdn
   summary: "\nCreates a new CDN custom domain within an endpoint.\n"
   example: []
   syntax:
-    content: public static CustomDomain Create(this ICustomDomainsOperations operations, string customDomainName, string endpointName, string profileName, string resourceGroupName, string hostName)
+    content: public static CustomDomain Create(this ICustomDomainsOperations operations, string resourceGroupName, string profileName, string endpointName, string customDomainName, string hostName)
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Function Create(operations As ICustomDomainsOperations, customDomainName As String, endpointName As String, profileName As String, resourceGroupName As String, hostName As String) As CustomDomain
+      Public Shared Function Create(operations As ICustomDomainsOperations, resourceGroupName As String, profileName As String, endpointName As String, customDomainName As String, hostName As String) As CustomDomain
     parameters:
     - id: operations
       type: Microsoft.Azure.Management.Cdn.ICustomDomainsOperations
       description: "\nThe operations group for this extension method.\n"
+    - id: resourceGroupName
+      type: System.String
+      description: "\nName of the Resource group within the Azure subscription.\n"
+    - id: profileName
+      type: System.String
+      description: "\nName of the CDN profile which is unique within the resource group.\n"
+    - id: endpointName
+      type: System.String
+      description: "\nName of the endpoint under the profile which is unique globally.\n"
     - id: customDomainName
       type: System.String
       description: "\nName of the custom domain within an endpoint.\n"
-    - id: endpointName
-      type: System.String
-      description: "\nName of the endpoint within the CDN profile.\n"
-    - id: profileName
-      type: System.String
-      description: "\nName of the CDN profile within the resource group.\n"
-    - id: resourceGroupName
-      type: System.String
-      description: "\nName of the resource group within the Azure subscription.\n"
     - id: hostName
       type: System.String
       description: "\nThe host name of the custom domain. Must be a domain name.\n"
@@ -361,34 +361,34 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: CreateAsync
     path: src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/CustomDomainsOperationsExtensions.cs
-    startLine: 172
+    startLine: 167
   assemblies:
   - Microsoft.Azure.Management.Cdn
   namespace: Microsoft.Azure.Management.Cdn
   summary: "\nCreates a new CDN custom domain within an endpoint.\n"
   example: []
   syntax:
-    content: public static Task<CustomDomain> CreateAsync(this ICustomDomainsOperations operations, string customDomainName, string endpointName, string profileName, string resourceGroupName, string hostName, CancellationToken cancellationToken = null)
+    content: public static Task<CustomDomain> CreateAsync(this ICustomDomainsOperations operations, string resourceGroupName, string profileName, string endpointName, string customDomainName, string hostName, CancellationToken cancellationToken = null)
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Function CreateAsync(operations As ICustomDomainsOperations, customDomainName As String, endpointName As String, profileName As String, resourceGroupName As String, hostName As String, cancellationToken As CancellationToken = Nothing) As Task(Of CustomDomain)
+      Public Shared Function CreateAsync(operations As ICustomDomainsOperations, resourceGroupName As String, profileName As String, endpointName As String, customDomainName As String, hostName As String, cancellationToken As CancellationToken = Nothing) As Task(Of CustomDomain)
     parameters:
     - id: operations
       type: Microsoft.Azure.Management.Cdn.ICustomDomainsOperations
       description: "\nThe operations group for this extension method.\n"
+    - id: resourceGroupName
+      type: System.String
+      description: "\nName of the Resource group within the Azure subscription.\n"
+    - id: profileName
+      type: System.String
+      description: "\nName of the CDN profile which is unique within the resource group.\n"
+    - id: endpointName
+      type: System.String
+      description: "\nName of the endpoint under the profile which is unique globally.\n"
     - id: customDomainName
       type: System.String
       description: "\nName of the custom domain within an endpoint.\n"
-    - id: endpointName
-      type: System.String
-      description: "\nName of the endpoint within the CDN profile.\n"
-    - id: profileName
-      type: System.String
-      description: "\nName of the CDN profile within the resource group.\n"
-    - id: resourceGroupName
-      type: System.String
-      description: "\nName of the resource group within the Azure subscription.\n"
     - id: hostName
       type: System.String
       description: "\nThe host name of the custom domain. Must be a domain name.\n"
@@ -423,34 +423,34 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: BeginCreate
     path: src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/CustomDomainsOperationsExtensions.cs
-    startLine: 201
+    startLine: 196
   assemblies:
   - Microsoft.Azure.Management.Cdn
   namespace: Microsoft.Azure.Management.Cdn
   summary: "\nCreates a new CDN custom domain within an endpoint.\n"
   example: []
   syntax:
-    content: public static CustomDomain BeginCreate(this ICustomDomainsOperations operations, string customDomainName, string endpointName, string profileName, string resourceGroupName, string hostName)
+    content: public static CustomDomain BeginCreate(this ICustomDomainsOperations operations, string resourceGroupName, string profileName, string endpointName, string customDomainName, string hostName)
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Function BeginCreate(operations As ICustomDomainsOperations, customDomainName As String, endpointName As String, profileName As String, resourceGroupName As String, hostName As String) As CustomDomain
+      Public Shared Function BeginCreate(operations As ICustomDomainsOperations, resourceGroupName As String, profileName As String, endpointName As String, customDomainName As String, hostName As String) As CustomDomain
     parameters:
     - id: operations
       type: Microsoft.Azure.Management.Cdn.ICustomDomainsOperations
       description: "\nThe operations group for this extension method.\n"
+    - id: resourceGroupName
+      type: System.String
+      description: "\nName of the Resource group within the Azure subscription.\n"
+    - id: profileName
+      type: System.String
+      description: "\nName of the CDN profile which is unique within the resource group.\n"
+    - id: endpointName
+      type: System.String
+      description: "\nName of the endpoint under the profile which is unique globally.\n"
     - id: customDomainName
       type: System.String
       description: "\nName of the custom domain within an endpoint.\n"
-    - id: endpointName
-      type: System.String
-      description: "\nName of the endpoint within the CDN profile.\n"
-    - id: profileName
-      type: System.String
-      description: "\nName of the CDN profile within the resource group.\n"
-    - id: resourceGroupName
-      type: System.String
-      description: "\nName of the resource group within the Azure subscription.\n"
     - id: hostName
       type: System.String
       description: "\nThe host name of the custom domain. Must be a domain name.\n"
@@ -482,34 +482,34 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: BeginCreateAsync
     path: src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/CustomDomainsOperationsExtensions.cs
-    startLine: 230
+    startLine: 225
   assemblies:
   - Microsoft.Azure.Management.Cdn
   namespace: Microsoft.Azure.Management.Cdn
   summary: "\nCreates a new CDN custom domain within an endpoint.\n"
   example: []
   syntax:
-    content: public static Task<CustomDomain> BeginCreateAsync(this ICustomDomainsOperations operations, string customDomainName, string endpointName, string profileName, string resourceGroupName, string hostName, CancellationToken cancellationToken = null)
+    content: public static Task<CustomDomain> BeginCreateAsync(this ICustomDomainsOperations operations, string resourceGroupName, string profileName, string endpointName, string customDomainName, string hostName, CancellationToken cancellationToken = null)
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Function BeginCreateAsync(operations As ICustomDomainsOperations, customDomainName As String, endpointName As String, profileName As String, resourceGroupName As String, hostName As String, cancellationToken As CancellationToken = Nothing) As Task(Of CustomDomain)
+      Public Shared Function BeginCreateAsync(operations As ICustomDomainsOperations, resourceGroupName As String, profileName As String, endpointName As String, customDomainName As String, hostName As String, cancellationToken As CancellationToken = Nothing) As Task(Of CustomDomain)
     parameters:
     - id: operations
       type: Microsoft.Azure.Management.Cdn.ICustomDomainsOperations
       description: "\nThe operations group for this extension method.\n"
+    - id: resourceGroupName
+      type: System.String
+      description: "\nName of the Resource group within the Azure subscription.\n"
+    - id: profileName
+      type: System.String
+      description: "\nName of the CDN profile which is unique within the resource group.\n"
+    - id: endpointName
+      type: System.String
+      description: "\nName of the endpoint under the profile which is unique globally.\n"
     - id: customDomainName
       type: System.String
       description: "\nName of the custom domain within an endpoint.\n"
-    - id: endpointName
-      type: System.String
-      description: "\nName of the endpoint within the CDN profile.\n"
-    - id: profileName
-      type: System.String
-      description: "\nName of the CDN profile within the resource group.\n"
-    - id: resourceGroupName
-      type: System.String
-      description: "\nName of the resource group within the Azure subscription.\n"
     - id: hostName
       type: System.String
       description: "\nThe host name of the custom domain. Must be a domain name.\n"
@@ -525,351 +525,327 @@ items:
   modifiers.vb:
   - Public
   - Shared
-- uid: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.Update(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String,System.String)
-  commentId: M:Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.Update(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String,System.String)
-  id: Update(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String,System.String)
+- uid: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.Delete(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String)
+  commentId: M:Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.Delete(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String)
+  id: Delete(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String)
   isExtensionMethod: true
   parent: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions
   langs:
   - csharp
   - vb
-  name: Update(ICustomDomainsOperations, String, String, String, String, String)
-  nameWithType: CustomDomainsOperationsExtensions.Update(ICustomDomainsOperations, String, String, String, String, String)
-  fullName: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.Update(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations, System.String, System.String, System.String, System.String, System.String)
+  name: Delete(ICustomDomainsOperations, String, String, String, String)
+  nameWithType: CustomDomainsOperationsExtensions.Delete(ICustomDomainsOperations, String, String, String, String)
+  fullName: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.Delete(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations, System.String, System.String, System.String, System.String)
   type: Method
   source:
     remote:
       path: src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/CustomDomainsOperationsExtensions.cs
       branch: AutoRest
       repo: https://github.com/Azure/azure-sdk-for-net.git
-    id: Update
+    id: Delete
     path: src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/CustomDomainsOperationsExtensions.cs
-    startLine: 259
-  assemblies:
-  - Microsoft.Azure.Management.Cdn
-  namespace: Microsoft.Azure.Management.Cdn
-  summary: "\nUpdates an existing CDN custom domain within an endpoint.\n"
-  example: []
-  syntax:
-    content: public static ErrorResponse Update(this ICustomDomainsOperations operations, string customDomainName, string endpointName, string profileName, string resourceGroupName, string hostName)
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function Update(operations As ICustomDomainsOperations, customDomainName As String, endpointName As String, profileName As String, resourceGroupName As String, hostName As String) As ErrorResponse
-    parameters:
-    - id: operations
-      type: Microsoft.Azure.Management.Cdn.ICustomDomainsOperations
-      description: "\nThe operations group for this extension method.\n"
-    - id: customDomainName
-      type: System.String
-      description: "\nName of the custom domain within an endpoint.\n"
-    - id: endpointName
-      type: System.String
-      description: "\nName of the endpoint within the CDN profile.\n"
-    - id: profileName
-      type: System.String
-      description: "\nName of the CDN profile within the resource group.\n"
-    - id: resourceGroupName
-      type: System.String
-      description: "\nName of the resource group within the Azure subscription.\n"
-    - id: hostName
-      type: System.String
-      description: "\nThe host name of the custom domain. Must be a domain name.\n"
-    return:
-      type: Microsoft.Azure.Management.Cdn.Models.ErrorResponse
-  overload: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.Update*
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-- uid: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.UpdateAsync(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)
-  commentId: M:Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.UpdateAsync(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)
-  id: UpdateAsync(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)
-  isExtensionMethod: true
-  parent: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions
-  langs:
-  - csharp
-  - vb
-  name: UpdateAsync(ICustomDomainsOperations, String, String, String, String, String, CancellationToken)
-  nameWithType: CustomDomainsOperationsExtensions.UpdateAsync(ICustomDomainsOperations, String, String, String, String, String, CancellationToken)
-  fullName: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.UpdateAsync(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations, System.String, System.String, System.String, System.String, System.String, System.Threading.CancellationToken)
-  type: Method
-  source:
-    remote:
-      path: src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/CustomDomainsOperationsExtensions.cs
-      branch: AutoRest
-      repo: https://github.com/Azure/azure-sdk-for-net.git
-    id: UpdateAsync
-    path: src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/CustomDomainsOperationsExtensions.cs
-    startLine: 288
-  assemblies:
-  - Microsoft.Azure.Management.Cdn
-  namespace: Microsoft.Azure.Management.Cdn
-  summary: "\nUpdates an existing CDN custom domain within an endpoint.\n"
-  example: []
-  syntax:
-    content: public static Task<ErrorResponse> UpdateAsync(this ICustomDomainsOperations operations, string customDomainName, string endpointName, string profileName, string resourceGroupName, string hostName, CancellationToken cancellationToken = null)
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function UpdateAsync(operations As ICustomDomainsOperations, customDomainName As String, endpointName As String, profileName As String, resourceGroupName As String, hostName As String, cancellationToken As CancellationToken = Nothing) As Task(Of ErrorResponse)
-    parameters:
-    - id: operations
-      type: Microsoft.Azure.Management.Cdn.ICustomDomainsOperations
-      description: "\nThe operations group for this extension method.\n"
-    - id: customDomainName
-      type: System.String
-      description: "\nName of the custom domain within an endpoint.\n"
-    - id: endpointName
-      type: System.String
-      description: "\nName of the endpoint within the CDN profile.\n"
-    - id: profileName
-      type: System.String
-      description: "\nName of the CDN profile within the resource group.\n"
-    - id: resourceGroupName
-      type: System.String
-      description: "\nName of the resource group within the Azure subscription.\n"
-    - id: hostName
-      type: System.String
-      description: "\nThe host name of the custom domain. Must be a domain name.\n"
-    - id: cancellationToken
-      type: System.Threading.CancellationToken
-      description: "\nThe cancellation token.\n"
-    return:
-      type: System.Threading.Tasks.Task{Microsoft.Azure.Management.Cdn.Models.ErrorResponse}
-  overload: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.UpdateAsync*
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-- uid: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.DeleteIfExists(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String)
-  commentId: M:Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.DeleteIfExists(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String)
-  id: DeleteIfExists(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String)
-  isExtensionMethod: true
-  parent: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions
-  langs:
-  - csharp
-  - vb
-  name: DeleteIfExists(ICustomDomainsOperations, String, String, String, String)
-  nameWithType: CustomDomainsOperationsExtensions.DeleteIfExists(ICustomDomainsOperations, String, String, String, String)
-  fullName: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.DeleteIfExists(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations, System.String, System.String, System.String, System.String)
-  type: Method
-  source:
-    remote:
-      path: src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/CustomDomainsOperationsExtensions.cs
-      branch: AutoRest
-      repo: https://github.com/Azure/azure-sdk-for-net.git
-    id: DeleteIfExists
-    path: src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/CustomDomainsOperationsExtensions.cs
-    startLine: 314
+    startLine: 251
   assemblies:
   - Microsoft.Azure.Management.Cdn
   namespace: Microsoft.Azure.Management.Cdn
   summary: "\nDeletes an existing CDN custom domain within an endpoint.\n"
   example: []
   syntax:
-    content: public static CustomDomain DeleteIfExists(this ICustomDomainsOperations operations, string customDomainName, string endpointName, string profileName, string resourceGroupName)
+    content: public static CustomDomain Delete(this ICustomDomainsOperations operations, string resourceGroupName, string profileName, string endpointName, string customDomainName)
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Function DeleteIfExists(operations As ICustomDomainsOperations, customDomainName As String, endpointName As String, profileName As String, resourceGroupName As String) As CustomDomain
+      Public Shared Function Delete(operations As ICustomDomainsOperations, resourceGroupName As String, profileName As String, endpointName As String, customDomainName As String) As CustomDomain
     parameters:
     - id: operations
       type: Microsoft.Azure.Management.Cdn.ICustomDomainsOperations
       description: "\nThe operations group for this extension method.\n"
+    - id: resourceGroupName
+      type: System.String
+      description: "\nName of the Resource group within the Azure subscription.\n"
+    - id: profileName
+      type: System.String
+      description: "\nName of the CDN profile which is unique within the resource group.\n"
+    - id: endpointName
+      type: System.String
+      description: "\nName of the endpoint under the profile which is unique globally.\n"
     - id: customDomainName
       type: System.String
       description: "\nName of the custom domain within an endpoint.\n"
-    - id: endpointName
-      type: System.String
-      description: "\nName of the endpoint within the CDN profile.\n"
-    - id: profileName
-      type: System.String
-      description: "\nName of the CDN profile within the resource group.\n"
-    - id: resourceGroupName
-      type: System.String
-      description: "\nName of the resource group within the Azure subscription.\n"
     return:
       type: Microsoft.Azure.Management.Cdn.Models.CustomDomain
-  overload: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.DeleteIfExists*
+  overload: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.Delete*
   modifiers.csharp:
   - public
   - static
   modifiers.vb:
   - Public
   - Shared
-- uid: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.DeleteIfExistsAsync(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)
-  commentId: M:Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.DeleteIfExistsAsync(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)
-  id: DeleteIfExistsAsync(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)
+- uid: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.DeleteAsync(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)
+  commentId: M:Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.DeleteAsync(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)
+  id: DeleteAsync(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)
   isExtensionMethod: true
   parent: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions
   langs:
   - csharp
   - vb
-  name: DeleteIfExistsAsync(ICustomDomainsOperations, String, String, String, String, CancellationToken)
-  nameWithType: CustomDomainsOperationsExtensions.DeleteIfExistsAsync(ICustomDomainsOperations, String, String, String, String, CancellationToken)
-  fullName: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.DeleteIfExistsAsync(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations, System.String, System.String, System.String, System.String, System.Threading.CancellationToken)
+  name: DeleteAsync(ICustomDomainsOperations, String, String, String, String, CancellationToken)
+  nameWithType: CustomDomainsOperationsExtensions.DeleteAsync(ICustomDomainsOperations, String, String, String, String, CancellationToken)
+  fullName: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.DeleteAsync(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations, System.String, System.String, System.String, System.String, System.Threading.CancellationToken)
   type: Method
   source:
     remote:
       path: src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/CustomDomainsOperationsExtensions.cs
       branch: AutoRest
       repo: https://github.com/Azure/azure-sdk-for-net.git
-    id: DeleteIfExistsAsync
+    id: DeleteAsync
     path: src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/CustomDomainsOperationsExtensions.cs
-    startLine: 340
+    startLine: 277
   assemblies:
   - Microsoft.Azure.Management.Cdn
   namespace: Microsoft.Azure.Management.Cdn
   summary: "\nDeletes an existing CDN custom domain within an endpoint.\n"
   example: []
   syntax:
-    content: public static Task<CustomDomain> DeleteIfExistsAsync(this ICustomDomainsOperations operations, string customDomainName, string endpointName, string profileName, string resourceGroupName, CancellationToken cancellationToken = null)
+    content: public static Task<CustomDomain> DeleteAsync(this ICustomDomainsOperations operations, string resourceGroupName, string profileName, string endpointName, string customDomainName, CancellationToken cancellationToken = null)
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Function DeleteIfExistsAsync(operations As ICustomDomainsOperations, customDomainName As String, endpointName As String, profileName As String, resourceGroupName As String, cancellationToken As CancellationToken = Nothing) As Task(Of CustomDomain)
+      Public Shared Function DeleteAsync(operations As ICustomDomainsOperations, resourceGroupName As String, profileName As String, endpointName As String, customDomainName As String, cancellationToken As CancellationToken = Nothing) As Task(Of CustomDomain)
     parameters:
     - id: operations
       type: Microsoft.Azure.Management.Cdn.ICustomDomainsOperations
       description: "\nThe operations group for this extension method.\n"
+    - id: resourceGroupName
+      type: System.String
+      description: "\nName of the Resource group within the Azure subscription.\n"
+    - id: profileName
+      type: System.String
+      description: "\nName of the CDN profile which is unique within the resource group.\n"
+    - id: endpointName
+      type: System.String
+      description: "\nName of the endpoint under the profile which is unique globally.\n"
     - id: customDomainName
       type: System.String
       description: "\nName of the custom domain within an endpoint.\n"
-    - id: endpointName
-      type: System.String
-      description: "\nName of the endpoint within the CDN profile.\n"
-    - id: profileName
-      type: System.String
-      description: "\nName of the CDN profile within the resource group.\n"
-    - id: resourceGroupName
-      type: System.String
-      description: "\nName of the resource group within the Azure subscription.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
       type: System.Threading.Tasks.Task{Microsoft.Azure.Management.Cdn.Models.CustomDomain}
-  overload: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.DeleteIfExistsAsync*
+  overload: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.DeleteAsync*
   modifiers.csharp:
   - public
   - static
   modifiers.vb:
   - Public
   - Shared
-- uid: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.BeginDeleteIfExists(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String)
-  commentId: M:Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.BeginDeleteIfExists(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String)
-  id: BeginDeleteIfExists(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String)
+- uid: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.BeginDelete(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String)
+  commentId: M:Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.BeginDelete(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String)
+  id: BeginDelete(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String)
   isExtensionMethod: true
   parent: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions
   langs:
   - csharp
   - vb
-  name: BeginDeleteIfExists(ICustomDomainsOperations, String, String, String, String)
-  nameWithType: CustomDomainsOperationsExtensions.BeginDeleteIfExists(ICustomDomainsOperations, String, String, String, String)
-  fullName: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.BeginDeleteIfExists(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations, System.String, System.String, System.String, System.String)
+  name: BeginDelete(ICustomDomainsOperations, String, String, String, String)
+  nameWithType: CustomDomainsOperationsExtensions.BeginDelete(ICustomDomainsOperations, String, String, String, String)
+  fullName: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.BeginDelete(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations, System.String, System.String, System.String, System.String)
   type: Method
   source:
     remote:
       path: src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/CustomDomainsOperationsExtensions.cs
       branch: AutoRest
       repo: https://github.com/Azure/azure-sdk-for-net.git
-    id: BeginDeleteIfExists
+    id: BeginDelete
     path: src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/CustomDomainsOperationsExtensions.cs
-    startLine: 366
+    startLine: 303
   assemblies:
   - Microsoft.Azure.Management.Cdn
   namespace: Microsoft.Azure.Management.Cdn
   summary: "\nDeletes an existing CDN custom domain within an endpoint.\n"
   example: []
   syntax:
-    content: public static CustomDomain BeginDeleteIfExists(this ICustomDomainsOperations operations, string customDomainName, string endpointName, string profileName, string resourceGroupName)
+    content: public static CustomDomain BeginDelete(this ICustomDomainsOperations operations, string resourceGroupName, string profileName, string endpointName, string customDomainName)
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Function BeginDeleteIfExists(operations As ICustomDomainsOperations, customDomainName As String, endpointName As String, profileName As String, resourceGroupName As String) As CustomDomain
+      Public Shared Function BeginDelete(operations As ICustomDomainsOperations, resourceGroupName As String, profileName As String, endpointName As String, customDomainName As String) As CustomDomain
     parameters:
     - id: operations
       type: Microsoft.Azure.Management.Cdn.ICustomDomainsOperations
       description: "\nThe operations group for this extension method.\n"
+    - id: resourceGroupName
+      type: System.String
+      description: "\nName of the Resource group within the Azure subscription.\n"
+    - id: profileName
+      type: System.String
+      description: "\nName of the CDN profile which is unique within the resource group.\n"
+    - id: endpointName
+      type: System.String
+      description: "\nName of the endpoint under the profile which is unique globally.\n"
     - id: customDomainName
       type: System.String
       description: "\nName of the custom domain within an endpoint.\n"
-    - id: endpointName
-      type: System.String
-      description: "\nName of the endpoint within the CDN profile.\n"
-    - id: profileName
-      type: System.String
-      description: "\nName of the CDN profile within the resource group.\n"
-    - id: resourceGroupName
-      type: System.String
-      description: "\nName of the resource group within the Azure subscription.\n"
     return:
       type: Microsoft.Azure.Management.Cdn.Models.CustomDomain
-  overload: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.BeginDeleteIfExists*
+  overload: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.BeginDelete*
   modifiers.csharp:
   - public
   - static
   modifiers.vb:
   - Public
   - Shared
-- uid: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.BeginDeleteIfExistsAsync(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)
-  commentId: M:Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.BeginDeleteIfExistsAsync(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)
-  id: BeginDeleteIfExistsAsync(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)
+- uid: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.BeginDeleteAsync(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)
+  commentId: M:Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.BeginDeleteAsync(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)
+  id: BeginDeleteAsync(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)
   isExtensionMethod: true
   parent: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions
   langs:
   - csharp
   - vb
-  name: BeginDeleteIfExistsAsync(ICustomDomainsOperations, String, String, String, String, CancellationToken)
-  nameWithType: CustomDomainsOperationsExtensions.BeginDeleteIfExistsAsync(ICustomDomainsOperations, String, String, String, String, CancellationToken)
-  fullName: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.BeginDeleteIfExistsAsync(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations, System.String, System.String, System.String, System.String, System.Threading.CancellationToken)
+  name: BeginDeleteAsync(ICustomDomainsOperations, String, String, String, String, CancellationToken)
+  nameWithType: CustomDomainsOperationsExtensions.BeginDeleteAsync(ICustomDomainsOperations, String, String, String, String, CancellationToken)
+  fullName: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.BeginDeleteAsync(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations, System.String, System.String, System.String, System.String, System.Threading.CancellationToken)
   type: Method
   source:
     remote:
       path: src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/CustomDomainsOperationsExtensions.cs
       branch: AutoRest
       repo: https://github.com/Azure/azure-sdk-for-net.git
-    id: BeginDeleteIfExistsAsync
+    id: BeginDeleteAsync
     path: src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/CustomDomainsOperationsExtensions.cs
-    startLine: 392
+    startLine: 329
   assemblies:
   - Microsoft.Azure.Management.Cdn
   namespace: Microsoft.Azure.Management.Cdn
   summary: "\nDeletes an existing CDN custom domain within an endpoint.\n"
   example: []
   syntax:
-    content: public static Task<CustomDomain> BeginDeleteIfExistsAsync(this ICustomDomainsOperations operations, string customDomainName, string endpointName, string profileName, string resourceGroupName, CancellationToken cancellationToken = null)
+    content: public static Task<CustomDomain> BeginDeleteAsync(this ICustomDomainsOperations operations, string resourceGroupName, string profileName, string endpointName, string customDomainName, CancellationToken cancellationToken = null)
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Function BeginDeleteIfExistsAsync(operations As ICustomDomainsOperations, customDomainName As String, endpointName As String, profileName As String, resourceGroupName As String, cancellationToken As CancellationToken = Nothing) As Task(Of CustomDomain)
+      Public Shared Function BeginDeleteAsync(operations As ICustomDomainsOperations, resourceGroupName As String, profileName As String, endpointName As String, customDomainName As String, cancellationToken As CancellationToken = Nothing) As Task(Of CustomDomain)
     parameters:
     - id: operations
       type: Microsoft.Azure.Management.Cdn.ICustomDomainsOperations
       description: "\nThe operations group for this extension method.\n"
+    - id: resourceGroupName
+      type: System.String
+      description: "\nName of the Resource group within the Azure subscription.\n"
+    - id: profileName
+      type: System.String
+      description: "\nName of the CDN profile which is unique within the resource group.\n"
+    - id: endpointName
+      type: System.String
+      description: "\nName of the endpoint under the profile which is unique globally.\n"
     - id: customDomainName
       type: System.String
       description: "\nName of the custom domain within an endpoint.\n"
-    - id: endpointName
-      type: System.String
-      description: "\nName of the endpoint within the CDN profile.\n"
-    - id: profileName
-      type: System.String
-      description: "\nName of the CDN profile within the resource group.\n"
-    - id: resourceGroupName
-      type: System.String
-      description: "\nName of the resource group within the Azure subscription.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
       type: System.Threading.Tasks.Task{Microsoft.Azure.Management.Cdn.Models.CustomDomain}
-  overload: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.BeginDeleteIfExistsAsync*
+  overload: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.BeginDeleteAsync*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.ListByEndpointNext(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String)
+  commentId: M:Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.ListByEndpointNext(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String)
+  id: ListByEndpointNext(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String)
+  isExtensionMethod: true
+  parent: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions
+  langs:
+  - csharp
+  - vb
+  name: ListByEndpointNext(ICustomDomainsOperations, String)
+  nameWithType: CustomDomainsOperationsExtensions.ListByEndpointNext(ICustomDomainsOperations, String)
+  fullName: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.ListByEndpointNext(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations, System.String)
+  type: Method
+  source:
+    remote:
+      path: src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/CustomDomainsOperationsExtensions.cs
+      branch: AutoRest
+      repo: https://github.com/Azure/azure-sdk-for-net.git
+    id: ListByEndpointNext
+    path: src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/CustomDomainsOperationsExtensions.cs
+    startLine: 346
+  assemblies:
+  - Microsoft.Azure.Management.Cdn
+  namespace: Microsoft.Azure.Management.Cdn
+  summary: "\nLists the existing CDN custom domains within an endpoint.\n"
+  example: []
+  syntax:
+    content: public static IPage<CustomDomain> ListByEndpointNext(this ICustomDomainsOperations operations, string nextPageLink)
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Function ListByEndpointNext(operations As ICustomDomainsOperations, nextPageLink As String) As IPage(Of CustomDomain)
+    parameters:
+    - id: operations
+      type: Microsoft.Azure.Management.Cdn.ICustomDomainsOperations
+      description: "\nThe operations group for this extension method.\n"
+    - id: nextPageLink
+      type: System.String
+      description: "\nThe NextLink from the previous successful call to List operation.\n"
+    return:
+      type: Microsoft.Rest.Azure.IPage{Microsoft.Azure.Management.Cdn.Models.CustomDomain}
+  overload: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.ListByEndpointNext*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.ListByEndpointNextAsync(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.Threading.CancellationToken)
+  commentId: M:Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.ListByEndpointNextAsync(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.Threading.CancellationToken)
+  id: ListByEndpointNextAsync(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations,System.String,System.Threading.CancellationToken)
+  isExtensionMethod: true
+  parent: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions
+  langs:
+  - csharp
+  - vb
+  name: ListByEndpointNextAsync(ICustomDomainsOperations, String, CancellationToken)
+  nameWithType: CustomDomainsOperationsExtensions.ListByEndpointNextAsync(ICustomDomainsOperations, String, CancellationToken)
+  fullName: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.ListByEndpointNextAsync(Microsoft.Azure.Management.Cdn.ICustomDomainsOperations, System.String, System.Threading.CancellationToken)
+  type: Method
+  source:
+    remote:
+      path: src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/CustomDomainsOperationsExtensions.cs
+      branch: AutoRest
+      repo: https://github.com/Azure/azure-sdk-for-net.git
+    id: ListByEndpointNextAsync
+    path: src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/CustomDomainsOperationsExtensions.cs
+    startLine: 363
+  assemblies:
+  - Microsoft.Azure.Management.Cdn
+  namespace: Microsoft.Azure.Management.Cdn
+  summary: "\nLists the existing CDN custom domains within an endpoint.\n"
+  example: []
+  syntax:
+    content: public static Task<IPage<CustomDomain>> ListByEndpointNextAsync(this ICustomDomainsOperations operations, string nextPageLink, CancellationToken cancellationToken = null)
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Function ListByEndpointNextAsync(operations As ICustomDomainsOperations, nextPageLink As String, cancellationToken As CancellationToken = Nothing) As Task(Of IPage(Of CustomDomain))
+    parameters:
+    - id: operations
+      type: Microsoft.Azure.Management.Cdn.ICustomDomainsOperations
+      description: "\nThe operations group for this extension method.\n"
+    - id: nextPageLink
+      type: System.String
+      description: "\nThe NextLink from the previous successful call to List operation.\n"
+    - id: cancellationToken
+      type: System.Threading.CancellationToken
+      description: "\nThe cancellation token.\n"
+    return:
+      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.IPage{Microsoft.Azure.Management.Cdn.Models.CustomDomain}}
+  overload: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.ListByEndpointNextAsync*
   modifiers.csharp:
   - public
   - static
@@ -1195,22 +1171,21 @@ references:
   name: String
   nameWithType: String
   fullName: System.String
-- uid: System.Collections.Generic.IEnumerable{Microsoft.Azure.Management.Cdn.Models.CustomDomain}
-  commentId: T:System.Collections.Generic.IEnumerable{Microsoft.Azure.Management.Cdn.Models.CustomDomain}
-  parent: System.Collections.Generic
-  definition: System.Collections.Generic.IEnumerable`1
-  name: IEnumerable<CustomDomain>
-  nameWithType: IEnumerable<CustomDomain>
-  fullName: System.Collections.Generic.IEnumerable<Microsoft.Azure.Management.Cdn.Models.CustomDomain>
-  nameWithType.vb: IEnumerable(Of CustomDomain)
-  fullname.vb: System.Collections.Generic.IEnumerable(Of Microsoft.Azure.Management.Cdn.Models.CustomDomain)
-  name.vb: IEnumerable(Of CustomDomain)
+- uid: Microsoft.Rest.Azure.IPage{Microsoft.Azure.Management.Cdn.Models.CustomDomain}
+  commentId: T:Microsoft.Rest.Azure.IPage{Microsoft.Azure.Management.Cdn.Models.CustomDomain}
+  parent: Microsoft.Rest.Azure
+  definition: Microsoft.Rest.Azure.IPage`1
+  name: IPage<CustomDomain>
+  nameWithType: IPage<CustomDomain>
+  fullName: Microsoft.Rest.Azure.IPage<Microsoft.Azure.Management.Cdn.Models.CustomDomain>
+  nameWithType.vb: IPage(Of CustomDomain)
+  fullname.vb: Microsoft.Rest.Azure.IPage(Of Microsoft.Azure.Management.Cdn.Models.CustomDomain)
+  name.vb: IPage(Of CustomDomain)
   spec.csharp:
-  - uid: System.Collections.Generic.IEnumerable`1
-    name: IEnumerable
-    nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
-    isExternal: true
+  - uid: Microsoft.Rest.Azure.IPage`1
+    name: IPage
+    nameWithType: IPage
+    fullName: Microsoft.Rest.Azure.IPage
   - name: <
     nameWithType: <
     fullName: <
@@ -1222,11 +1197,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Collections.Generic.IEnumerable`1
-    name: IEnumerable
-    nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
-    isExternal: true
+  - uid: Microsoft.Rest.Azure.IPage`1
+    name: IPage
+    nameWithType: IPage
+    fullName: Microsoft.Rest.Azure.IPage
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
@@ -1237,51 +1211,49 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Collections.Generic.IEnumerable`1
-  commentId: T:System.Collections.Generic.IEnumerable`1
-  isExternal: true
-  name: IEnumerable<T>
-  nameWithType: IEnumerable<T>
-  fullName: System.Collections.Generic.IEnumerable<T>
-  nameWithType.vb: IEnumerable(Of T)
-  fullname.vb: System.Collections.Generic.IEnumerable(Of T)
-  name.vb: IEnumerable(Of T)
-  spec.csharp:
-  - uid: System.Collections.Generic.IEnumerable`1
-    name: IEnumerable
-    nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: System.Collections.Generic.IEnumerable`1
-    name: IEnumerable
-    nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Collections.Generic
-  commentId: N:System.Collections.Generic
+- uid: Microsoft.Rest.Azure.IPage`1
+  commentId: T:Microsoft.Rest.Azure.IPage`1
   isExternal: false
-  name: System.Collections.Generic
-  nameWithType: System.Collections.Generic
-  fullName: System.Collections.Generic
+  name: IPage<T>
+  nameWithType: IPage<T>
+  fullName: Microsoft.Rest.Azure.IPage<T>
+  nameWithType.vb: IPage(Of T)
+  fullname.vb: Microsoft.Rest.Azure.IPage(Of T)
+  name.vb: IPage(Of T)
+  spec.csharp:
+  - uid: Microsoft.Rest.Azure.IPage`1
+    name: IPage
+    nameWithType: IPage
+    fullName: Microsoft.Rest.Azure.IPage
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Microsoft.Rest.Azure.IPage`1
+    name: IPage
+    nameWithType: IPage
+    fullName: Microsoft.Rest.Azure.IPage
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Rest.Azure
+  commentId: N:Microsoft.Rest.Azure
+  isExternal: false
+  name: Microsoft.Rest.Azure
+  nameWithType: Microsoft.Rest.Azure
+  fullName: Microsoft.Rest.Azure
 - uid: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.ListByEndpointAsync*
   commentId: Overload:Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.ListByEndpointAsync
   isExternal: false
@@ -1295,16 +1267,16 @@ references:
   name: CancellationToken
   nameWithType: CancellationToken
   fullName: System.Threading.CancellationToken
-- uid: System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{Microsoft.Azure.Management.Cdn.Models.CustomDomain}}
-  commentId: T:System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{Microsoft.Azure.Management.Cdn.Models.CustomDomain}}
+- uid: System.Threading.Tasks.Task{Microsoft.Rest.Azure.IPage{Microsoft.Azure.Management.Cdn.Models.CustomDomain}}
+  commentId: T:System.Threading.Tasks.Task{Microsoft.Rest.Azure.IPage{Microsoft.Azure.Management.Cdn.Models.CustomDomain}}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
-  name: Task<IEnumerable<CustomDomain>>
-  nameWithType: Task<IEnumerable<CustomDomain>>
-  fullName: System.Threading.Tasks.Task<System.Collections.Generic.IEnumerable<Microsoft.Azure.Management.Cdn.Models.CustomDomain>>
-  nameWithType.vb: Task(Of IEnumerable(Of CustomDomain))
-  fullname.vb: System.Threading.Tasks.Task(Of System.Collections.Generic.IEnumerable(Of Microsoft.Azure.Management.Cdn.Models.CustomDomain))
-  name.vb: Task(Of IEnumerable(Of CustomDomain))
+  name: Task<IPage<CustomDomain>>
+  nameWithType: Task<IPage<CustomDomain>>
+  fullName: System.Threading.Tasks.Task<Microsoft.Rest.Azure.IPage<Microsoft.Azure.Management.Cdn.Models.CustomDomain>>
+  nameWithType.vb: Task(Of IPage(Of CustomDomain))
+  fullname.vb: System.Threading.Tasks.Task(Of Microsoft.Rest.Azure.IPage(Of Microsoft.Azure.Management.Cdn.Models.CustomDomain))
+  name.vb: Task(Of IPage(Of CustomDomain))
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
@@ -1314,11 +1286,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: System.Collections.Generic.IEnumerable`1
-    name: IEnumerable
-    nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
-    isExternal: true
+  - uid: Microsoft.Rest.Azure.IPage`1
+    name: IPage
+    nameWithType: IPage
+    fullName: Microsoft.Rest.Azure.IPage
   - name: <
     nameWithType: <
     fullName: <
@@ -1341,11 +1312,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: System.Collections.Generic.IEnumerable`1
-    name: IEnumerable
-    nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
-    isExternal: true
+  - uid: Microsoft.Rest.Azure.IPage`1
+    name: IPage
+    nameWithType: IPage
+    fullName: Microsoft.Rest.Azure.IPage
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
@@ -1501,88 +1471,39 @@ references:
   name: BeginCreateAsync
   nameWithType: CustomDomainsOperationsExtensions.BeginCreateAsync
   fullName: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.BeginCreateAsync
-- uid: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.Update*
-  commentId: Overload:Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.Update
+- uid: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.Delete*
+  commentId: Overload:Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.Delete
   isExternal: false
-  name: Update
-  nameWithType: CustomDomainsOperationsExtensions.Update
-  fullName: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.Update
-- uid: Microsoft.Azure.Management.Cdn.Models.ErrorResponse
-  commentId: T:Microsoft.Azure.Management.Cdn.Models.ErrorResponse
-  parent: Microsoft.Azure.Management.Cdn.Models
+  name: Delete
+  nameWithType: CustomDomainsOperationsExtensions.Delete
+  fullName: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.Delete
+- uid: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.DeleteAsync*
+  commentId: Overload:Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.DeleteAsync
   isExternal: false
-  name: ErrorResponse
-  nameWithType: ErrorResponse
-  fullName: Microsoft.Azure.Management.Cdn.Models.ErrorResponse
-- uid: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.UpdateAsync*
-  commentId: Overload:Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.UpdateAsync
+  name: DeleteAsync
+  nameWithType: CustomDomainsOperationsExtensions.DeleteAsync
+  fullName: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.DeleteAsync
+- uid: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.BeginDelete*
+  commentId: Overload:Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.BeginDelete
   isExternal: false
-  name: UpdateAsync
-  nameWithType: CustomDomainsOperationsExtensions.UpdateAsync
-  fullName: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.UpdateAsync
-- uid: System.Threading.Tasks.Task{Microsoft.Azure.Management.Cdn.Models.ErrorResponse}
-  commentId: T:System.Threading.Tasks.Task{Microsoft.Azure.Management.Cdn.Models.ErrorResponse}
-  parent: System.Threading.Tasks
-  definition: System.Threading.Tasks.Task`1
-  name: Task<ErrorResponse>
-  nameWithType: Task<ErrorResponse>
-  fullName: System.Threading.Tasks.Task<Microsoft.Azure.Management.Cdn.Models.ErrorResponse>
-  nameWithType.vb: Task(Of ErrorResponse)
-  fullname.vb: System.Threading.Tasks.Task(Of Microsoft.Azure.Management.Cdn.Models.ErrorResponse)
-  name.vb: Task(Of ErrorResponse)
-  spec.csharp:
-  - uid: System.Threading.Tasks.Task`1
-    name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: Microsoft.Azure.Management.Cdn.Models.ErrorResponse
-    name: ErrorResponse
-    nameWithType: ErrorResponse
-    fullName: Microsoft.Azure.Management.Cdn.Models.ErrorResponse
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: System.Threading.Tasks.Task`1
-    name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: Microsoft.Azure.Management.Cdn.Models.ErrorResponse
-    name: ErrorResponse
-    nameWithType: ErrorResponse
-    fullName: Microsoft.Azure.Management.Cdn.Models.ErrorResponse
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.DeleteIfExists*
-  commentId: Overload:Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.DeleteIfExists
+  name: BeginDelete
+  nameWithType: CustomDomainsOperationsExtensions.BeginDelete
+  fullName: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.BeginDelete
+- uid: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.BeginDeleteAsync*
+  commentId: Overload:Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.BeginDeleteAsync
   isExternal: false
-  name: DeleteIfExists
-  nameWithType: CustomDomainsOperationsExtensions.DeleteIfExists
-  fullName: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.DeleteIfExists
-- uid: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.DeleteIfExistsAsync*
-  commentId: Overload:Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.DeleteIfExistsAsync
+  name: BeginDeleteAsync
+  nameWithType: CustomDomainsOperationsExtensions.BeginDeleteAsync
+  fullName: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.BeginDeleteAsync
+- uid: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.ListByEndpointNext*
+  commentId: Overload:Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.ListByEndpointNext
   isExternal: false
-  name: DeleteIfExistsAsync
-  nameWithType: CustomDomainsOperationsExtensions.DeleteIfExistsAsync
-  fullName: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.DeleteIfExistsAsync
-- uid: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.BeginDeleteIfExists*
-  commentId: Overload:Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.BeginDeleteIfExists
+  name: ListByEndpointNext
+  nameWithType: CustomDomainsOperationsExtensions.ListByEndpointNext
+  fullName: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.ListByEndpointNext
+- uid: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.ListByEndpointNextAsync*
+  commentId: Overload:Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.ListByEndpointNextAsync
   isExternal: false
-  name: BeginDeleteIfExists
-  nameWithType: CustomDomainsOperationsExtensions.BeginDeleteIfExists
-  fullName: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.BeginDeleteIfExists
-- uid: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.BeginDeleteIfExistsAsync*
-  commentId: Overload:Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.BeginDeleteIfExistsAsync
-  isExternal: false
-  name: BeginDeleteIfExistsAsync
-  nameWithType: CustomDomainsOperationsExtensions.BeginDeleteIfExistsAsync
-  fullName: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.BeginDeleteIfExistsAsync
+  name: ListByEndpointNextAsync
+  nameWithType: CustomDomainsOperationsExtensions.ListByEndpointNextAsync
+  fullName: Microsoft.Azure.Management.Cdn.CustomDomainsOperationsExtensions.ListByEndpointNextAsync
