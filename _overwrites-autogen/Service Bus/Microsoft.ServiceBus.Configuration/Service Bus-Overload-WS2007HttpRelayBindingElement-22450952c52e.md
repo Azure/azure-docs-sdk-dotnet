@@ -1,5 +1,5 @@
 ---
-uid: 
+uid: Microsoft.ServiceBus.Configuration.WS2007HttpRelayBindingElement
 remarks: *content
 ---
 ## Remarks  

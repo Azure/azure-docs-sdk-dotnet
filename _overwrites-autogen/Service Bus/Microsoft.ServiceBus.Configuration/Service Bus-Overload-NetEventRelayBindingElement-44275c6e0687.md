@@ -1,5 +1,5 @@
 ---
-uid: 
+uid: Microsoft.ServiceBus.NetEventRelayBinding
 remarks: *content
 ---
 ## Remarks  

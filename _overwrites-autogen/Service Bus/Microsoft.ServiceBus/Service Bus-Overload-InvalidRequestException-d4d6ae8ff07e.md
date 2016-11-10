@@ -1,5 +1,5 @@
 ---
-uid: 
+uid: Microsoft.ServiceBus.InvalidRequestException
 remarks: *content
 ---
 ## Remarks  
