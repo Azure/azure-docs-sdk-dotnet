@@ -1,5 +1,5 @@
 ---
-uid: 
+uid: Microsoft.ServiceBus.Messaging.EventData
 remarks: *content
 ---
 ## Remarks  

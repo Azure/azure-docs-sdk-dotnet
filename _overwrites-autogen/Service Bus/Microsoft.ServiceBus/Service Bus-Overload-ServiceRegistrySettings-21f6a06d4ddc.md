@@ -1,5 +1,5 @@
 ---
-uid: 
+uid: Microsoft.ServiceBus.ServiceRegistrySettings
 remarks: *content
 ---
 ## Remarks  
