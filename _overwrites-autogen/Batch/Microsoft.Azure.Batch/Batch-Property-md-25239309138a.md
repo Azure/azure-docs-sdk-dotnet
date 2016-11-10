@@ -1,0 +1,12 @@
+---
+uid: 
+remarks: *content
+---
+## Remarks  
+ This is an optional OData $select expression string             (see the OData specification).             If you provide a SelectClause, then **only** the properties listed in that clause are populated; other properties             have their default values (typically null).  For example, if you perform a [Microsoft.Azure.Batch](assetId:///N:Microsoft.Azure.Batch?qualifyHint=False&autoUpgrade=True) operation with a SelectClause of `id,displayName`, then each [CloudPool](assetId:///T:Microsoft.Azure.Batch.CloudPool?qualifyHint=False&autoUpgrade=True) will have its             [Id](assetId:///P:Microsoft.Azure.Batch.CloudPool.Id?qualifyHint=False&autoUpgrade=True) and [DisplayName](assetId:///P:Microsoft.Azure.Batch.CloudPool.DisplayName?qualifyHint=False&autoUpgrade=True) properties             populated, but other properties such as [State](assetId:///P:Microsoft.Azure.Batch.CloudPool.State?qualifyHint=False&autoUpgrade=True) will not be retrieved and therefore             will have their default values (typically null).  
+  
+ If, when an entity was retrieved (via a List, Get or Refresh), you specifed a SelectClause which did not include             the property or properties that uniquely identify the object             (usually the Id property, but for [Certificate](assetId:///T:Microsoft.Azure.Batch.Certificate?qualifyHint=False&autoUpgrade=True) the Thumbprint and ThumbprintAlgorithm properties,             then any methods that access the Batch service to retrieve data or perform operations will fail.             This includes most methods on the object, including [Refresh](assetId:///M:Microsoft.Azure.Batch.IRefreshable.Refresh(Microsoft.Azure.Batch.DetailLevel,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})?qualifyHint=False&autoUpgrade=True) and [RefreshAsync](assetId:///M:Microsoft.Azure.Batch.IRefreshable.RefreshAsync(Microsoft.Azure.Batch.DetailLevel,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)?qualifyHint=False&autoUpgrade=True).             You can still access properties (though only properties included in the SelectClause will be populated).  
+  
+ Selections must be specified using REST API attribute names, not .NET property names.  
+  
+ The default is no select expression, which means all properties are returned.

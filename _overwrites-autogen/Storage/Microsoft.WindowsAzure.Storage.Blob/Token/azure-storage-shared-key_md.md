@@ -1,0 +1,1 @@
+Shared Key authentication uses your storage account name and key (available in the Azure Portal) to authenticate requests against Azure Storage. For additional information about Shared Key authentication, see [Authentication for the Azure Storage Services](../Topic/Authentication%20for%20the%20Azure%20Storage%20Services.md).
