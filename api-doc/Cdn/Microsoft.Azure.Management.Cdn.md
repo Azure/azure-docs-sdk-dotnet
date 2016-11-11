@@ -20,13 +20,13 @@ summary: The provisioning status of a resource.
 ---
 ---
 uid: Microsoft.Azure.Management.Cdn.Models.QueryStringCachingBehavior
-summary:
+summary: The query string caching behavior.
 ---
 ---
 uid: Microsoft.Azure.Management.Cdn.Models.ResourceType
-summary:
+summary: The type of the resource.
 ---
 ---
 uid: Microsoft.Azure.Management.Cdn.Models.SkuName
-summary:
+summary: The name of the SKU.
 ---
