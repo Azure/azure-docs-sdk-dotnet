@@ -1,0 +1,7 @@
+---  
+uid: Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.GetMappingDifferences  
+remarks: *content  
+---  
+  
+## Remarks  
+ This method assumes a previous call to [DetectMappingDifferences](assetId:///M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.DetectMappingDifferences(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation,System.String)?qualifyHint=False&autoUpgrade=True) that provides the recovery token parameter.             The result of this method is typically used in subsequent calls to resolve inconsistencies such as              [ResolveMappingDifferences](assetId:///M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.ResolveMappingDifferences(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken,Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.MappingDifferenceResolution)?qualifyHint=False&autoUpgrade=True) or [RebuildMappingsOnShard](assetId:///M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.RebuildMappingsOnShard(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken,System.Collections.Generic.IEnumerable{Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardRange})?qualifyHint=False&autoUpgrade=True).
