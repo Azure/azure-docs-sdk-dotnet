@@ -4,7 +4,7 @@ summary: Specifies that the disk is created from an image.
 ---
 
 ---
-uid:Microsoft.Azure.Management.Compute.Models.DiskCreateOptionTypes.Empty
+uid: Microsoft.Azure.Management.Compute.Models.DiskCreateOptionTypes.Empty
 summary: Specifies that the disk is created in an empty state.
 ---
 
