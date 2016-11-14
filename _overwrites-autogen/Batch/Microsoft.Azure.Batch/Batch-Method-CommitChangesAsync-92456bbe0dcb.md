@@ -1,0 +1,9 @@
+---  
+uid: Microsoft.Azure.Batch.CloudJob.CommitChangesAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)  
+remarks: *content  
+---  
+  
+## Remarks  
+ Updates an existing [CloudJob](assetId:///T:Microsoft.Azure.Batch.CloudJob?qualifyHint=False&autoUpgrade=True) on the Batch service by replacing its properties with the properties of this [CloudJob](assetId:///T:Microsoft.Azure.Batch.CloudJob?qualifyHint=False&autoUpgrade=True) which have been changed.             Unchanged properties are ignored.             All changes since the last time this entity was retrieved from the Batch service (either via [Refresh](assetId:///M:Microsoft.Azure.Batch.CloudJob.Refresh(Microsoft.Azure.Batch.DetailLevel,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})?qualifyHint=False&autoUpgrade=True), [GetJob](assetId:///M:Microsoft.Azure.Batch.JobOperations.GetJob(System.String,Microsoft.Azure.Batch.DetailLevel,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})?qualifyHint=False&autoUpgrade=True),             or [ListJobs](assetId:///M:Microsoft.Azure.Batch.JobOperations.ListJobs(Microsoft.Azure.Batch.DetailLevel,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})?qualifyHint=False&autoUpgrade=True)) are applied.             Properties which are explicitly set to null will cause an exception because the Batch service does not support partial updates which set a property to null.             If you need to set a property to null, use [Commit](assetId:///M:Microsoft.Azure.Batch.CloudJob.Commit(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})?qualifyHint=False&autoUpgrade=True).  
+  
+ This operation runs asynchronously.

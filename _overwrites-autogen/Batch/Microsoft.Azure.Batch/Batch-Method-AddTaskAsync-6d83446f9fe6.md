@@ -1,0 +1,13 @@
+---  
+uid: Microsoft.Azure.Batch.JobOperations.AddTaskAsync(System.String,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.CloudTask},Microsoft.Azure.Batch.BatchClientParallelOptions,System.Collections.Concurrent.ConcurrentBag{System.Collections.Concurrent.ConcurrentDictionary{System.Type,Microsoft.Azure.Batch.IFileStagingArtifact}},System.Nullable{System.TimeSpan},System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})  
+remarks: *content  
+---  
+  
+## Remarks  
+ The add task operation runs asynchronously.  
+  
+ This method is not atomic; that is, it is possible for the method to start adding tasks and             then fail. The collection of tasks to add is broken down into chunks of size at most [MaxTasksInSingleAddTaskCollectionRequest](assetId:///F:Microsoft.Azure.Batch.Constants.MaxTasksInSingleAddTaskCollectionRequest?qualifyHint=False&autoUpgrade=True),             and an AddTaskCollection request is issued for each chunk.  Requests may be issued in parallel according to             the `parallelOptions`.  
+  
+ Issuing a large number of simultaneous requests to the Batch service can incur HTTP connection restrictions.             If you are performing many of these operations in parallel (or have specified a large MaxDegreeOfParallelism in             the parallelOptions) and are seeing client side timeouts, please see              http://msdn.microsoft.com/en-us/library/system.net.servicepointmanager.defaultconnectionlimit%28v=vs.110%29.aspx .  
+  
+ The progress of the operation in the face of errors is determined by [AddTaskCollectionResultHandler](assetId:///T:Microsoft.Azure.Batch.AddTaskCollectionResultHandler?qualifyHint=False&autoUpgrade=True) behavior.             You do not normally need to specify this behavior, as the Batch client uses a default which works in normal circumstances.             If you do want to customize this behavior, specify an AddTaskCollectionResultHandler in the [CustomBehaviors](assetId:///P:Microsoft.Azure.Batch.JobOperations.CustomBehaviors?qualifyHint=False&autoUpgrade=True) or `additionalBehaviors` collections.
