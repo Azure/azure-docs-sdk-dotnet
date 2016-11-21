@@ -6,11 +6,9 @@ items:
   parent: Microsoft.Azure.Management.DataLake.Store.Models
   children:
   - Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.#ctor
-  - Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.#ctor(System.String,System.String,System.String,Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProviderProperties)
-  - Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Id
-  - Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Name
-  - Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Properties
-  - Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Type
+  - Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.#ctor(System.String,System.String,System.String,System.String)
+  - Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.IdProvider
+  - Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Validate
   langs:
   - csharp
   - vb
@@ -32,11 +30,20 @@ items:
   summary: "\nData Lake Store firewall rule information\n"
   example: []
   syntax:
-    content: public class TrustedIdProvider
-    content.vb: Public Class TrustedIdProvider
+    content: 'public class TrustedIdProvider : SubResource, IResource'
+    content.vb: >-
+      Public Class TrustedIdProvider
+          Inherits SubResource
+          Implements IResource
   inheritance:
   - System.Object
+  - Microsoft.Azure.Management.DataLake.Store.Models.SubResource
+  implements:
+  - Microsoft.Rest.Azure.IResource
   inheritedMembers:
+  - Microsoft.Azure.Management.DataLake.Store.Models.SubResource.Id
+  - Microsoft.Azure.Management.DataLake.Store.Models.SubResource.Name
+  - Microsoft.Azure.Management.DataLake.Store.Models.SubResource.Type
   - System.Object.ToString
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
@@ -68,7 +75,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: .ctor
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/Models/TrustedIdProvider.cs
-    startLine: 26
+    startLine: 27
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store.Models
@@ -82,16 +89,16 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.#ctor(System.String,System.String,System.String,Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProviderProperties)
-  commentId: M:Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.#ctor(System.String,System.String,System.String,Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProviderProperties)
-  id: '#ctor(System.String,System.String,System.String,Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProviderProperties)'
+- uid: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.#ctor(System.String,System.String,System.String,System.String)
+  commentId: M:Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.#ctor(System.String,System.String,System.String,System.String)
+  id: '#ctor(System.String,System.String,System.String,System.String)'
   parent: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider
   langs:
   - csharp
   - vb
-  name: TrustedIdProvider(String, String, String, TrustedIdProviderProperties)
-  nameWithType: TrustedIdProvider.TrustedIdProvider(String, String, String, TrustedIdProviderProperties)
-  fullName: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.TrustedIdProvider(System.String, System.String, System.String, Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProviderProperties)
+  name: TrustedIdProvider(String, String, String, String)
+  nameWithType: TrustedIdProvider.TrustedIdProvider(String, String, String, String)
+  fullName: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.TrustedIdProvider(System.String, System.String, System.String, System.String)
   type: Constructor
   source:
     remote:
@@ -107,69 +114,66 @@ items:
   summary: "\nInitializes a new instance of the TrustedIdProvider class.\n"
   example: []
   syntax:
-    content: public TrustedIdProvider(string name = null, string type = null, string id = null, TrustedIdProviderProperties properties = null)
-    content.vb: Public Sub New(name As String = Nothing, type As String = Nothing, id As String = Nothing, properties As TrustedIdProviderProperties = Nothing)
+    content: public TrustedIdProvider(string idProvider, string id = null, string name = null, string type = null)
+    content.vb: Public Sub New(idProvider As String, id As String = Nothing, name As String = Nothing, type As String = Nothing)
     parameters:
-    - id: name
-      type: System.String
-      description: the trusted identity provider's name.
-    - id: type
+    - id: idProvider
       type: System.String
       description: >-
-        the namespace and type of the trusted identity
+        The URL of this trusted identity
 
-        provider.
+        provider
     - id: id
       type: System.String
-      description: the trusted identity provider's full ID.
-    - id: properties
-      type: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProviderProperties
-      description: >-
-        the properties of the trusted identity
-
-        provider.
+      description: Resource Id
+    - id: name
+      type: System.String
+      description: Resource name
+    - id: type
+      type: System.String
+      description: Resource type
   overload: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.#ctor*
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Name
-  commentId: P:Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Name
-  id: Name
+- uid: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.IdProvider
+  commentId: P:Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.IdProvider
+  id: IdProvider
   parent: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider
   langs:
   - csharp
   - vb
-  name: Name
-  nameWithType: TrustedIdProvider.Name
-  fullName: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Name
+  name: IdProvider
+  nameWithType: TrustedIdProvider.IdProvider
+  fullName: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.IdProvider
   type: Property
   source:
     remote:
       path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/Models/TrustedIdProvider.cs
       branch: AutoRest
       repo: https://github.com/Azure/azure-sdk-for-net.git
-    id: Name
+    id: IdProvider
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/Models/TrustedIdProvider.cs
-    startLine: 48
+    startLine: 46
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store.Models
-  summary: "\nGets or sets the trusted identity provider's name.\n"
+  summary: "\nGets or sets the URL of this trusted identity provider\n"
   example: []
   syntax:
     content: >-
-      [JsonProperty(PropertyName = "name")]
+      [JsonProperty(PropertyName = "properties.idProvider")]
 
-      public string Name { get; set; }
+      public string IdProvider { get; set; }
     content.vb: >-
-      <JsonProperty(PropertyName:="name")>
+      <JsonProperty(PropertyName:="properties.idProvider")>
 
-      Public Property Name As String
+      Public Property IdProvider As String
     parameters: []
     return:
       type: System.String
-  overload: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Name*
+  overload: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.IdProvider*
   attributes:
   - type: Newtonsoft.Json.JsonPropertyAttribute
     ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor
@@ -177,166 +181,51 @@ items:
     namedArguments:
     - name: PropertyName
       type: System.String
-      value: name
+      value: properties.idProvider
   modifiers.csharp:
   - public
   - get
   - set
   modifiers.vb:
   - Public
-- uid: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Type
-  commentId: P:Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Type
-  id: Type
+- uid: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Validate
+  commentId: M:Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Validate
+  id: Validate
   parent: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider
   langs:
   - csharp
   - vb
-  name: Type
-  nameWithType: TrustedIdProvider.Type
-  fullName: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Type
-  type: Property
+  name: Validate()
+  nameWithType: TrustedIdProvider.Validate()
+  fullName: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Validate()
+  type: Method
   source:
     remote:
       path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/Models/TrustedIdProvider.cs
       branch: AutoRest
       repo: https://github.com/Azure/azure-sdk-for-net.git
-    id: Type
+    id: Validate
     path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/Models/TrustedIdProvider.cs
-    startLine: 54
+    startLine: 55
   assemblies:
   - Microsoft.Azure.Management.DataLake.Store
   namespace: Microsoft.Azure.Management.DataLake.Store.Models
-  summary: "\nGets the namespace and type of the trusted identity provider.\n"
+  summary: "\nValidate the object.\n"
   example: []
   syntax:
-    content: >-
-      [JsonProperty(PropertyName = "type")]
-
-      public string Type { get; }
-    content.vb: >-
-      <JsonProperty(PropertyName:="type")>
-
-      Public ReadOnly Property Type As String
-    parameters: []
-    return:
-      type: System.String
-  overload: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Type*
-  attributes:
-  - type: Newtonsoft.Json.JsonPropertyAttribute
-    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor
-    arguments: []
-    namedArguments:
-    - name: PropertyName
-      type: System.String
-      value: type
+    content: public virtual void Validate()
+    content.vb: Public Overridable Sub Validate
+  overload: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Validate*
+  exceptions:
+  - type: Microsoft.Rest.ValidationException
+    commentId: T:Microsoft.Rest.ValidationException
+    description: "\nThrown if validation fails\n"
   modifiers.csharp:
   - public
-  - get
+  - virtual
   modifiers.vb:
   - Public
-  - ReadOnly
-- uid: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Id
-  commentId: P:Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Id
-  id: Id
-  parent: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider
-  langs:
-  - csharp
-  - vb
-  name: Id
-  nameWithType: TrustedIdProvider.Id
-  fullName: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Id
-  type: Property
-  source:
-    remote:
-      path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/Models/TrustedIdProvider.cs
-      branch: AutoRest
-      repo: https://github.com/Azure/azure-sdk-for-net.git
-    id: Id
-    path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/Models/TrustedIdProvider.cs
-    startLine: 60
-  assemblies:
-  - Microsoft.Azure.Management.DataLake.Store
-  namespace: Microsoft.Azure.Management.DataLake.Store.Models
-  summary: "\nGets or sets the trusted identity provider's full ID.\n"
-  example: []
-  syntax:
-    content: >-
-      [JsonProperty(PropertyName = "id")]
-
-      public string Id { get; set; }
-    content.vb: >-
-      <JsonProperty(PropertyName:="id")>
-
-      Public Property Id As String
-    parameters: []
-    return:
-      type: System.String
-  overload: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Id*
-  attributes:
-  - type: Newtonsoft.Json.JsonPropertyAttribute
-    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor
-    arguments: []
-    namedArguments:
-    - name: PropertyName
-      type: System.String
-      value: id
-  modifiers.csharp:
-  - public
-  - get
-  - set
-  modifiers.vb:
-  - Public
-- uid: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Properties
-  commentId: P:Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Properties
-  id: Properties
-  parent: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider
-  langs:
-  - csharp
-  - vb
-  name: Properties
-  nameWithType: TrustedIdProvider.Properties
-  fullName: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Properties
-  type: Property
-  source:
-    remote:
-      path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/Models/TrustedIdProvider.cs
-      branch: AutoRest
-      repo: https://github.com/Azure/azure-sdk-for-net.git
-    id: Properties
-    path: src/ResourceManagement/DataLake.Store/Microsoft.Azure.Management.DataLake.Store/Generated/Models/TrustedIdProvider.cs
-    startLine: 66
-  assemblies:
-  - Microsoft.Azure.Management.DataLake.Store
-  namespace: Microsoft.Azure.Management.DataLake.Store.Models
-  summary: "\nGets or sets the properties of the trusted identity provider.\n"
-  example: []
-  syntax:
-    content: >-
-      [JsonProperty(PropertyName = "properties")]
-
-      public TrustedIdProviderProperties Properties { get; set; }
-    content.vb: >-
-      <JsonProperty(PropertyName:="properties")>
-
-      Public Property Properties As TrustedIdProviderProperties
-    parameters: []
-    return:
-      type: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProviderProperties
-  overload: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Properties*
-  attributes:
-  - type: Newtonsoft.Json.JsonPropertyAttribute
-    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor
-    arguments: []
-    namedArguments:
-    - name: PropertyName
-      type: System.String
-      value: properties
-  modifiers.csharp:
-  - public
-  - get
-  - set
-  modifiers.vb:
-  - Public
+  - Overridable
 references:
 - uid: Microsoft.Azure.Management.DataLake.Store.Models
   commentId: N:Microsoft.Azure.Management.DataLake.Store.Models
@@ -351,6 +240,41 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
+- uid: Microsoft.Azure.Management.DataLake.Store.Models.SubResource
+  commentId: T:Microsoft.Azure.Management.DataLake.Store.Models.SubResource
+  parent: Microsoft.Azure.Management.DataLake.Store.Models
+  isExternal: false
+  name: SubResource
+  nameWithType: SubResource
+  fullName: Microsoft.Azure.Management.DataLake.Store.Models.SubResource
+- uid: Microsoft.Rest.Azure.IResource
+  commentId: T:Microsoft.Rest.Azure.IResource
+  parent: Microsoft.Rest.Azure
+  isExternal: false
+  name: IResource
+  nameWithType: IResource
+  fullName: Microsoft.Rest.Azure.IResource
+- uid: Microsoft.Azure.Management.DataLake.Store.Models.SubResource.Id
+  commentId: P:Microsoft.Azure.Management.DataLake.Store.Models.SubResource.Id
+  parent: Microsoft.Azure.Management.DataLake.Store.Models.SubResource
+  isExternal: false
+  name: Id
+  nameWithType: SubResource.Id
+  fullName: Microsoft.Azure.Management.DataLake.Store.Models.SubResource.Id
+- uid: Microsoft.Azure.Management.DataLake.Store.Models.SubResource.Name
+  commentId: P:Microsoft.Azure.Management.DataLake.Store.Models.SubResource.Name
+  parent: Microsoft.Azure.Management.DataLake.Store.Models.SubResource
+  isExternal: false
+  name: Name
+  nameWithType: SubResource.Name
+  fullName: Microsoft.Azure.Management.DataLake.Store.Models.SubResource.Name
+- uid: Microsoft.Azure.Management.DataLake.Store.Models.SubResource.Type
+  commentId: P:Microsoft.Azure.Management.DataLake.Store.Models.SubResource.Type
+  parent: Microsoft.Azure.Management.DataLake.Store.Models.SubResource
+  isExternal: false
+  name: Type
+  nameWithType: SubResource.Type
+  fullName: Microsoft.Azure.Management.DataLake.Store.Models.SubResource.Type
 - uid: System.Object.ToString
   commentId: M:System.Object.ToString
   parent: System.Object
@@ -636,6 +560,12 @@ references:
   name: System
   nameWithType: System
   fullName: System
+- uid: Microsoft.Rest.Azure
+  commentId: N:Microsoft.Rest.Azure
+  isExternal: false
+  name: Microsoft.Rest.Azure
+  nameWithType: Microsoft.Rest.Azure
+  fullName: Microsoft.Rest.Azure
 - uid: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.#ctor*
   commentId: Overload:Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.#ctor
   isExternal: false
@@ -649,34 +579,17 @@ references:
   name: String
   nameWithType: String
   fullName: System.String
-- uid: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProviderProperties
-  commentId: T:Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProviderProperties
-  parent: Microsoft.Azure.Management.DataLake.Store.Models
+- uid: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.IdProvider*
+  commentId: Overload:Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.IdProvider
   isExternal: false
-  name: TrustedIdProviderProperties
-  nameWithType: TrustedIdProviderProperties
-  fullName: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProviderProperties
-- uid: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Name*
-  commentId: Overload:Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Name
+  name: IdProvider
+  nameWithType: TrustedIdProvider.IdProvider
+  fullName: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.IdProvider
+- uid: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Validate*
+  commentId: Overload:Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Validate
   isExternal: false
-  name: Name
-  nameWithType: TrustedIdProvider.Name
-  fullName: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Name
-- uid: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Type*
-  commentId: Overload:Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Type
-  isExternal: false
-  name: Type
-  nameWithType: TrustedIdProvider.Type
-  fullName: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Type
-- uid: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Id*
-  commentId: Overload:Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Id
-  isExternal: false
-  name: Id
-  nameWithType: TrustedIdProvider.Id
-  fullName: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Id
-- uid: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Properties*
-  commentId: Overload:Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Properties
-  isExternal: false
-  name: Properties
-  nameWithType: TrustedIdProvider.Properties
-  fullName: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Properties
+  name: Validate
+  nameWithType: TrustedIdProvider.Validate
+  fullName: Microsoft.Azure.Management.DataLake.Store.Models.TrustedIdProvider.Validate
+- uid: Microsoft.Rest.ValidationException
+  commentId: T:Microsoft.Rest.ValidationException

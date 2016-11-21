@@ -5,6 +5,7 @@ items:
   id: OAuthDataServiceAdapter
   parent: Microsoft.WindowsAzure.MediaServices.Client.OAuth
   children:
+  - Microsoft.WindowsAzure.MediaServices.Client.OAuth.OAuthDataServiceAdapter.#ctor(Microsoft.WindowsAzure.MediaServices.Client.ITokenProvider)
   - Microsoft.WindowsAzure.MediaServices.Client.OAuth.OAuthDataServiceAdapter.#ctor(Microsoft.WindowsAzure.MediaServices.Client.MediaServicesCredentials,System.String,System.String)
   - Microsoft.WindowsAzure.MediaServices.Client.OAuth.OAuthDataServiceAdapter.Adapt(System.Data.Services.Client.DataServiceContext)
   - Microsoft.WindowsAzure.MediaServices.Client.OAuth.OAuthDataServiceAdapter.AddAccessTokenToRequest(System.Net.WebRequest)
@@ -69,15 +70,21 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-media-services
     id: .ctor
     path: src/net/Client/OAuth/OAuthDataServiceAdapter.cs
-    startLine: 50
+    startLine: 42
   assemblies:
   - Microsoft.WindowsAzure.MediaServices.Client
   namespace: Microsoft.WindowsAzure.MediaServices.Client.OAuth
   summary: "\nInitializes a new instance of the <xref href=\"Microsoft.WindowsAzure.MediaServices.Client.OAuth.OAuthDataServiceAdapter\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
   example: []
   syntax:
-    content: public OAuthDataServiceAdapter(MediaServicesCredentials credentials, string trustedRestCertificateHash, string trustedRestSubject)
-    content.vb: Public Sub New(credentials As MediaServicesCredentials, trustedRestCertificateHash As String, trustedRestSubject As String)
+    content: >-
+      [Obsolete("Use the constructor which accepts an ITokenProvider interface")]
+
+      public OAuthDataServiceAdapter(MediaServicesCredentials credentials, string trustedRestCertificateHash, string trustedRestSubject)
+    content.vb: >-
+      <Obsolete("Use the constructor which accepts an ITokenProvider interface")>
+
+      Public Sub New(credentials As MediaServicesCredentials, trustedRestCertificateHash As String, trustedRestSubject As String)
     parameters:
     - id: credentials
       type: Microsoft.WindowsAzure.MediaServices.Client.MediaServicesCredentials
@@ -88,6 +95,48 @@ items:
     - id: trustedRestSubject
       type: System.String
       description: The trusted rest subject.
+  overload: Microsoft.WindowsAzure.MediaServices.Client.OAuth.OAuthDataServiceAdapter.#ctor*
+  attributes:
+  - type: System.ObsoleteAttribute
+    ctor: System.ObsoleteAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: Use the constructor which accepts an ITokenProvider interface
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Microsoft.WindowsAzure.MediaServices.Client.OAuth.OAuthDataServiceAdapter.#ctor(Microsoft.WindowsAzure.MediaServices.Client.ITokenProvider)
+  commentId: M:Microsoft.WindowsAzure.MediaServices.Client.OAuth.OAuthDataServiceAdapter.#ctor(Microsoft.WindowsAzure.MediaServices.Client.ITokenProvider)
+  id: '#ctor(Microsoft.WindowsAzure.MediaServices.Client.ITokenProvider)'
+  parent: Microsoft.WindowsAzure.MediaServices.Client.OAuth.OAuthDataServiceAdapter
+  langs:
+  - csharp
+  - vb
+  name: OAuthDataServiceAdapter(ITokenProvider)
+  nameWithType: OAuthDataServiceAdapter.OAuthDataServiceAdapter(ITokenProvider)
+  fullName: Microsoft.WindowsAzure.MediaServices.Client.OAuth.OAuthDataServiceAdapter.OAuthDataServiceAdapter(Microsoft.WindowsAzure.MediaServices.Client.ITokenProvider)
+  type: Constructor
+  source:
+    remote:
+      path: src/net/Client/OAuth/OAuthDataServiceAdapter.cs
+      branch: master
+      repo: https://github.com/Azure/azure-sdk-for-media-services
+    id: .ctor
+    path: src/net/Client/OAuth/OAuthDataServiceAdapter.cs
+    startLine: 52
+  assemblies:
+  - Microsoft.WindowsAzure.MediaServices.Client
+  namespace: Microsoft.WindowsAzure.MediaServices.Client.OAuth
+  summary: "\nInitializes a new instance of the <xref href=\"Microsoft.WindowsAzure.MediaServices.Client.OAuth.OAuthDataServiceAdapter\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  example: []
+  syntax:
+    content: public OAuthDataServiceAdapter(ITokenProvider tokenProvider)
+    content.vb: Public Sub New(tokenProvider As ITokenProvider)
+    parameters:
+    - id: tokenProvider
+      type: Microsoft.WindowsAzure.MediaServices.Client.ITokenProvider
+      description: Azure Media Services token provider.
   overload: Microsoft.WindowsAzure.MediaServices.Client.OAuth.OAuthDataServiceAdapter.#ctor*
   modifiers.csharp:
   - public
@@ -512,6 +561,13 @@ references:
   name: Microsoft.WindowsAzure.MediaServices.Client
   nameWithType: Microsoft.WindowsAzure.MediaServices.Client
   fullName: Microsoft.WindowsAzure.MediaServices.Client
+- uid: Microsoft.WindowsAzure.MediaServices.Client.ITokenProvider
+  commentId: T:Microsoft.WindowsAzure.MediaServices.Client.ITokenProvider
+  parent: Microsoft.WindowsAzure.MediaServices.Client
+  isExternal: false
+  name: ITokenProvider
+  nameWithType: ITokenProvider
+  fullName: Microsoft.WindowsAzure.MediaServices.Client.ITokenProvider
 - uid: Microsoft.WindowsAzure.MediaServices.Client.OAuth.OAuthDataServiceAdapter.Adapt*
   commentId: Overload:Microsoft.WindowsAzure.MediaServices.Client.OAuth.OAuthDataServiceAdapter.Adapt
   isExternal: false
