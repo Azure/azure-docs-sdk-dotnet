@@ -10,8 +10,10 @@ items:
   - Microsoft.Azure.Management.Storage.IStorageAccountsOperations.CreateWithHttpMessagesAsync(System.String,System.String,Microsoft.Azure.Management.Storage.Models.StorageAccountCreateParameters,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
   - Microsoft.Azure.Management.Storage.IStorageAccountsOperations.DeleteWithHttpMessagesAsync(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
   - Microsoft.Azure.Management.Storage.IStorageAccountsOperations.GetPropertiesWithHttpMessagesAsync(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
+  - Microsoft.Azure.Management.Storage.IStorageAccountsOperations.ListAccountSASWithHttpMessagesAsync(System.String,System.String,Microsoft.Azure.Management.Storage.Models.AccountSasParameters,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
   - Microsoft.Azure.Management.Storage.IStorageAccountsOperations.ListByResourceGroupWithHttpMessagesAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
   - Microsoft.Azure.Management.Storage.IStorageAccountsOperations.ListKeysWithHttpMessagesAsync(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
+  - Microsoft.Azure.Management.Storage.IStorageAccountsOperations.ListServiceSASWithHttpMessagesAsync(System.String,System.String,Microsoft.Azure.Management.Storage.Models.ServiceSasParameters,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
   - Microsoft.Azure.Management.Storage.IStorageAccountsOperations.ListWithHttpMessagesAsync(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
   - Microsoft.Azure.Management.Storage.IStorageAccountsOperations.RegenerateKeyWithHttpMessagesAsync(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
   - Microsoft.Azure.Management.Storage.IStorageAccountsOperations.UpdateWithHttpMessagesAsync(System.String,System.String,Microsoft.Azure.Management.Storage.Models.StorageAccountUpdateParameters,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
@@ -59,6 +61,10 @@ items:
   - Microsoft.Azure.Management.Storage.IStorageAccountsOperations.Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListKeysAsync(System.String,System.String,System.Threading.CancellationToken)
   - Microsoft.Azure.Management.Storage.IStorageAccountsOperations.Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.RegenerateKey(System.String,System.String,System.String)
   - Microsoft.Azure.Management.Storage.IStorageAccountsOperations.Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.RegenerateKeyAsync(System.String,System.String,System.String,System.Threading.CancellationToken)
+  - Microsoft.Azure.Management.Storage.IStorageAccountsOperations.Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListAccountSAS(System.String,System.String,Microsoft.Azure.Management.Storage.Models.AccountSasParameters)
+  - Microsoft.Azure.Management.Storage.IStorageAccountsOperations.Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListAccountSASAsync(System.String,System.String,Microsoft.Azure.Management.Storage.Models.AccountSasParameters,System.Threading.CancellationToken)
+  - Microsoft.Azure.Management.Storage.IStorageAccountsOperations.Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListServiceSAS(System.String,System.String,Microsoft.Azure.Management.Storage.Models.ServiceSasParameters)
+  - Microsoft.Azure.Management.Storage.IStorageAccountsOperations.Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListServiceSASAsync(System.String,System.String,Microsoft.Azure.Management.Storage.Models.ServiceSasParameters,System.Threading.CancellationToken)
   modifiers.csharp:
   - public
   - interface
@@ -83,11 +89,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: CheckNameAvailabilityWithHttpMessagesAsync
     path: src/ResourceManagement/Storage/Microsoft.Azure.Management.Storage/Generated/IStorageAccountsOperations.cs
-    startLine: 35
+    startLine: 36
   assemblies:
   - Microsoft.Azure.Management.Storage
   namespace: Microsoft.Azure.Management.Storage
-  summary: "\nChecks that account name is valid and is not in use.\n"
+  summary: "\nChecks that the storage account name is valid and is not already\nin use.\n"
   example: []
   syntax:
     content: Task<AzureOperationResponse<CheckNameAvailabilityResult>> CheckNameAvailabilityWithHttpMessagesAsync(string name, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = null)
@@ -126,11 +132,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: CreateWithHttpMessagesAsync
     path: src/ResourceManagement/Storage/Microsoft.Azure.Management.Storage/Generated/IStorageAccountsOperations.cs
-    startLine: 61
+    startLine: 62
   assemblies:
   - Microsoft.Azure.Management.Storage
   namespace: Microsoft.Azure.Management.Storage
-  summary: "\nAsynchronously creates a new storage account with the specified\nparameters. If an account is already created and subsequent\ncreate request is issued with different properties, the account\nproperties will be updated. If an account is already created and\nsubsequent create or update request is issued with exact same set\nof properties, the request will succeed.\n"
+  summary: "\nAsynchronously creates a new storage account with the specified\nparameters. If an account is already created and a subsequent\ncreate request is issued with different properties, the account\nproperties will be updated. If an account is already created and\na subsequent create or update request is issued with the exact\nsame set of properties, the request will succeed.\n"
   example: []
   syntax:
     content: Task<AzureOperationResponse<StorageAccount>> CreateWithHttpMessagesAsync(string resourceGroupName, string accountName, StorageAccountCreateParameters parameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = null)
@@ -175,11 +181,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: BeginCreateWithHttpMessagesAsync
     path: src/ResourceManagement/Storage/Microsoft.Azure.Management.Storage/Generated/IStorageAccountsOperations.cs
-    startLine: 87
+    startLine: 88
   assemblies:
   - Microsoft.Azure.Management.Storage
   namespace: Microsoft.Azure.Management.Storage
-  summary: "\nAsynchronously creates a new storage account with the specified\nparameters. If an account is already created and subsequent\ncreate request is issued with different properties, the account\nproperties will be updated. If an account is already created and\nsubsequent create or update request is issued with exact same set\nof properties, the request will succeed.\n"
+  summary: "\nAsynchronously creates a new storage account with the specified\nparameters. If an account is already created and a subsequent\ncreate request is issued with different properties, the account\nproperties will be updated. If an account is already created and\na subsequent create or update request is issued with the exact\nsame set of properties, the request will succeed.\n"
   example: []
   syntax:
     content: Task<AzureOperationResponse<StorageAccount>> BeginCreateWithHttpMessagesAsync(string resourceGroupName, string accountName, StorageAccountCreateParameters parameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = null)
@@ -224,7 +230,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: DeleteWithHttpMessagesAsync
     path: src/ResourceManagement/Storage/Microsoft.Azure.Management.Storage/Generated/IStorageAccountsOperations.cs
-    startLine: 105
+    startLine: 106
   assemblies:
   - Microsoft.Azure.Management.Storage
   namespace: Microsoft.Azure.Management.Storage
@@ -274,7 +280,7 @@ items:
   assemblies:
   - Microsoft.Azure.Management.Storage
   namespace: Microsoft.Azure.Management.Storage
-  summary: "\nReturns the properties for the specified storage account including\nbut not limited to name, account type, location, and account\nstatus. The ListKeys operation should be used to retrieve storage\nkeys.\n"
+  summary: "\nReturns the properties for the specified storage account including\nbut not limited to name, SKU name, location, and account status.\nThe ListKeys operation should be used to retrieve storage keys.\n"
   example: []
   syntax:
     content: Task<AzureOperationResponse<StorageAccount>> GetPropertiesWithHttpMessagesAsync(string resourceGroupName, string accountName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = null)
@@ -320,7 +326,7 @@ items:
   assemblies:
   - Microsoft.Azure.Management.Storage
   namespace: Microsoft.Azure.Management.Storage
-  summary: "\nThe update operation can be used to update the account type,\nencryption, or tags for a storage account. It can also be used to\nmap the account to a custom domain. Only one custom domain is\nsupported per storage account and. replacement/change of custom\ndomain is not supported. In order to replace an old custom\ndomain, the old value must be cleared/unregistered before a new\nvalue may be set. Update of multiple properties is supported.\nThis call does not change the storage keys for the account. If\nyou want to change storage account keys, use the regenerate keys\noperation.  The location and name of the storage account cannot\nbe changed after creation.\n"
+  summary: "\nThe update operation can be used to update the SKU, encryption,\naccess tier, or tags for a storage account. It can also be used\nto map the account to a custom domain. Only one custom domain is\nsupported per storage account; the replacement/change of custom\ndomain is not supported. In order to replace an old custom\ndomain, the old value must be cleared/unregistered before a new\nvalue can be set. The update of multiple properties is supported.\nThis call does not change the storage keys for the account. If\nyou want to change the storage account keys, use the regenerate\nkeys operation. The location and name of the storage account\ncannot be changed after creation.\n"
   example: []
   syntax:
     content: Task<AzureOperationResponse<StorageAccount>> UpdateWithHttpMessagesAsync(string resourceGroupName, string accountName, StorageAccountUpdateParameters parameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = null)
@@ -448,7 +454,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: ListKeysWithHttpMessagesAsync
     path: src/ResourceManagement/Storage/Microsoft.Azure.Management.Storage/Generated/IStorageAccountsOperations.cs
-    startLine: 200
+    startLine: 202
   assemblies:
   - Microsoft.Azure.Management.Storage
   namespace: Microsoft.Azure.Management.Storage
@@ -460,10 +466,10 @@ items:
     parameters:
     - id: resourceGroupName
       type: System.String
-      description: "\nThe name of the resource group.\n"
+      description: "\nThe name of the resource group within the user's subscription.\n"
     - id: accountName
       type: System.String
-      description: "\nThe name of the storage account.\n"
+      description: "\nThe name of the storage account within the specified resource\ngroup. Storage account names must be between 3 and 24 characters\nin length and use numbers and lower-case letters only.\n"
     - id: customHeaders
       type: System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}}
       description: "\nThe headers that will be added to request.\n"
@@ -494,11 +500,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: RegenerateKeyWithHttpMessagesAsync
     path: src/ResourceManagement/Storage/Microsoft.Azure.Management.Storage/Generated/IStorageAccountsOperations.cs
-    startLine: 220
+    startLine: 223
   assemblies:
   - Microsoft.Azure.Management.Storage
   namespace: Microsoft.Azure.Management.Storage
-  summary: "\nRegenerates the access keys for the specified storage account.\n"
+  summary: "\nRegenerates one of the access keys for the specified storage\naccount.\n"
   example: []
   syntax:
     content: Task<AzureOperationResponse<StorageAccountListKeysResult>> RegenerateKeyWithHttpMessagesAsync(string resourceGroupName, string accountName, string keyName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = null)
@@ -525,6 +531,104 @@ items:
   nameWithType.vb: IStorageAccountsOperations.RegenerateKeyWithHttpMessagesAsync(String, String, String, Dictionary(Of String, List(Of String)), CancellationToken)
   fullName.vb: Microsoft.Azure.Management.Storage.IStorageAccountsOperations.RegenerateKeyWithHttpMessagesAsync(System.String, System.String, System.String, System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.List(Of System.String)), System.Threading.CancellationToken)
   name.vb: RegenerateKeyWithHttpMessagesAsync(String, String, String, Dictionary(Of String, List(Of String)), CancellationToken)
+- uid: Microsoft.Azure.Management.Storage.IStorageAccountsOperations.ListAccountSASWithHttpMessagesAsync(System.String,System.String,Microsoft.Azure.Management.Storage.Models.AccountSasParameters,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
+  commentId: M:Microsoft.Azure.Management.Storage.IStorageAccountsOperations.ListAccountSASWithHttpMessagesAsync(System.String,System.String,Microsoft.Azure.Management.Storage.Models.AccountSasParameters,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
+  id: ListAccountSASWithHttpMessagesAsync(System.String,System.String,Microsoft.Azure.Management.Storage.Models.AccountSasParameters,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
+  parent: Microsoft.Azure.Management.Storage.IStorageAccountsOperations
+  langs:
+  - csharp
+  - vb
+  name: ListAccountSASWithHttpMessagesAsync(String, String, AccountSasParameters, Dictionary<String, List<String>>, CancellationToken)
+  nameWithType: IStorageAccountsOperations.ListAccountSASWithHttpMessagesAsync(String, String, AccountSasParameters, Dictionary<String, List<String>>, CancellationToken)
+  fullName: Microsoft.Azure.Management.Storage.IStorageAccountsOperations.ListAccountSASWithHttpMessagesAsync(System.String, System.String, Microsoft.Azure.Management.Storage.Models.AccountSasParameters, System.Collections.Generic.Dictionary<System.String, System.Collections.Generic.List<System.String>>, System.Threading.CancellationToken)
+  type: Method
+  source:
+    remote:
+      path: src/ResourceManagement/Storage/Microsoft.Azure.Management.Storage/Generated/IStorageAccountsOperations.cs
+      branch: AutoRest
+      repo: https://github.com/Azure/azure-sdk-for-net.git
+    id: ListAccountSASWithHttpMessagesAsync
+    path: src/ResourceManagement/Storage/Microsoft.Azure.Management.Storage/Generated/IStorageAccountsOperations.cs
+    startLine: 245
+  assemblies:
+  - Microsoft.Azure.Management.Storage
+  namespace: Microsoft.Azure.Management.Storage
+  summary: "\nList SAS credentials of a storage account.\n"
+  example: []
+  syntax:
+    content: Task<AzureOperationResponse<ListAccountSasResponse>> ListAccountSASWithHttpMessagesAsync(string resourceGroupName, string accountName, AccountSasParameters parameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = null)
+    content.vb: Function ListAccountSASWithHttpMessagesAsync(resourceGroupName As String, accountName As String, parameters As AccountSasParameters, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of ListAccountSasResponse))
+    parameters:
+    - id: resourceGroupName
+      type: System.String
+      description: "\nThe name of the resource group within the user's subscription.\n"
+    - id: accountName
+      type: System.String
+      description: "\nThe name of the storage account within the specified resource\ngroup. Storage account names must be between 3 and 24 characters\nin length and use numbers and lower-case letters only.\n"
+    - id: parameters
+      type: Microsoft.Azure.Management.Storage.Models.AccountSasParameters
+      description: "\nThe parameters to provide to list SAS credentials for the storage\naccount.\n"
+    - id: customHeaders
+      type: System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}}
+      description: "\nThe headers that will be added to request.\n"
+    - id: cancellationToken
+      type: System.Threading.CancellationToken
+      description: "\nThe cancellation token.\n"
+    return:
+      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.Management.Storage.Models.ListAccountSasResponse}}
+  overload: Microsoft.Azure.Management.Storage.IStorageAccountsOperations.ListAccountSASWithHttpMessagesAsync*
+  nameWithType.vb: IStorageAccountsOperations.ListAccountSASWithHttpMessagesAsync(String, String, AccountSasParameters, Dictionary(Of String, List(Of String)), CancellationToken)
+  fullName.vb: Microsoft.Azure.Management.Storage.IStorageAccountsOperations.ListAccountSASWithHttpMessagesAsync(System.String, System.String, Microsoft.Azure.Management.Storage.Models.AccountSasParameters, System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.List(Of System.String)), System.Threading.CancellationToken)
+  name.vb: ListAccountSASWithHttpMessagesAsync(String, String, AccountSasParameters, Dictionary(Of String, List(Of String)), CancellationToken)
+- uid: Microsoft.Azure.Management.Storage.IStorageAccountsOperations.ListServiceSASWithHttpMessagesAsync(System.String,System.String,Microsoft.Azure.Management.Storage.Models.ServiceSasParameters,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
+  commentId: M:Microsoft.Azure.Management.Storage.IStorageAccountsOperations.ListServiceSASWithHttpMessagesAsync(System.String,System.String,Microsoft.Azure.Management.Storage.Models.ServiceSasParameters,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
+  id: ListServiceSASWithHttpMessagesAsync(System.String,System.String,Microsoft.Azure.Management.Storage.Models.ServiceSasParameters,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
+  parent: Microsoft.Azure.Management.Storage.IStorageAccountsOperations
+  langs:
+  - csharp
+  - vb
+  name: ListServiceSASWithHttpMessagesAsync(String, String, ServiceSasParameters, Dictionary<String, List<String>>, CancellationToken)
+  nameWithType: IStorageAccountsOperations.ListServiceSASWithHttpMessagesAsync(String, String, ServiceSasParameters, Dictionary<String, List<String>>, CancellationToken)
+  fullName: Microsoft.Azure.Management.Storage.IStorageAccountsOperations.ListServiceSASWithHttpMessagesAsync(System.String, System.String, Microsoft.Azure.Management.Storage.Models.ServiceSasParameters, System.Collections.Generic.Dictionary<System.String, System.Collections.Generic.List<System.String>>, System.Threading.CancellationToken)
+  type: Method
+  source:
+    remote:
+      path: src/ResourceManagement/Storage/Microsoft.Azure.Management.Storage/Generated/IStorageAccountsOperations.cs
+      branch: AutoRest
+      repo: https://github.com/Azure/azure-sdk-for-net.git
+    id: ListServiceSASWithHttpMessagesAsync
+    path: src/ResourceManagement/Storage/Microsoft.Azure.Management.Storage/Generated/IStorageAccountsOperations.cs
+    startLine: 266
+  assemblies:
+  - Microsoft.Azure.Management.Storage
+  namespace: Microsoft.Azure.Management.Storage
+  summary: "\nList service SAS credentials of a specific resource.\n"
+  example: []
+  syntax:
+    content: Task<AzureOperationResponse<ListServiceSasResponse>> ListServiceSASWithHttpMessagesAsync(string resourceGroupName, string accountName, ServiceSasParameters parameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = null)
+    content.vb: Function ListServiceSASWithHttpMessagesAsync(resourceGroupName As String, accountName As String, parameters As ServiceSasParameters, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of ListServiceSasResponse))
+    parameters:
+    - id: resourceGroupName
+      type: System.String
+      description: "\nThe name of the resource group within the user's subscription.\n"
+    - id: accountName
+      type: System.String
+      description: "\nThe name of the storage account within the specified resource\ngroup. Storage account names must be between 3 and 24 characters\nin length and use numbers and lower-case letters only.\n"
+    - id: parameters
+      type: Microsoft.Azure.Management.Storage.Models.ServiceSasParameters
+      description: "\nThe parameters to provide to list service SAS credentials.\n"
+    - id: customHeaders
+      type: System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}}
+      description: "\nThe headers that will be added to request.\n"
+    - id: cancellationToken
+      type: System.Threading.CancellationToken
+      description: "\nThe cancellation token.\n"
+    return:
+      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.Management.Storage.Models.ListServiceSasResponse}}
+  overload: Microsoft.Azure.Management.Storage.IStorageAccountsOperations.ListServiceSASWithHttpMessagesAsync*
+  nameWithType.vb: IStorageAccountsOperations.ListServiceSASWithHttpMessagesAsync(String, String, ServiceSasParameters, Dictionary(Of String, List(Of String)), CancellationToken)
+  fullName.vb: Microsoft.Azure.Management.Storage.IStorageAccountsOperations.ListServiceSASWithHttpMessagesAsync(System.String, System.String, Microsoft.Azure.Management.Storage.Models.ServiceSasParameters, System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.List(Of System.String)), System.Threading.CancellationToken)
+  name.vb: ListServiceSASWithHttpMessagesAsync(String, String, ServiceSasParameters, Dictionary(Of String, List(Of String)), CancellationToken)
 references:
 - uid: Microsoft.Azure.Management.Storage
   commentId: N:Microsoft.Azure.Management.Storage
@@ -1775,6 +1879,314 @@ references:
     nameWithType: String
     fullName: System.String
     isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    nameWithType: CancellationToken
+    fullName: System.Threading.CancellationToken
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Azure.Management.Storage.IStorageAccountsOperations.Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListAccountSAS(System.String,System.String,Microsoft.Azure.Management.Storage.Models.AccountSasParameters)
+  commentId: M:Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListAccountSAS(Microsoft.Azure.Management.Storage.IStorageAccountsOperations,System.String,System.String,Microsoft.Azure.Management.Storage.Models.AccountSasParameters)
+  parent: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions
+  definition: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListAccountSAS(Microsoft.Azure.Management.Storage.IStorageAccountsOperations,System.String,System.String,Microsoft.Azure.Management.Storage.Models.AccountSasParameters)
+  name: ListAccountSAS(String, String, AccountSasParameters)
+  nameWithType: StorageAccountsOperationsExtensions.ListAccountSAS(String, String, AccountSasParameters)
+  fullName: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListAccountSAS(System.String, System.String, Microsoft.Azure.Management.Storage.Models.AccountSasParameters)
+  spec.csharp:
+  - uid: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListAccountSAS(System.String,System.String,Microsoft.Azure.Management.Storage.Models.AccountSasParameters)
+    name: ListAccountSAS
+    nameWithType: StorageAccountsOperationsExtensions.ListAccountSAS
+    fullName: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListAccountSAS
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.Azure.Management.Storage.Models.AccountSasParameters
+    name: AccountSasParameters
+    nameWithType: AccountSasParameters
+    fullName: Microsoft.Azure.Management.Storage.Models.AccountSasParameters
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListAccountSAS(System.String,System.String,Microsoft.Azure.Management.Storage.Models.AccountSasParameters)
+    name: ListAccountSAS
+    nameWithType: StorageAccountsOperationsExtensions.ListAccountSAS
+    fullName: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListAccountSAS
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.Azure.Management.Storage.Models.AccountSasParameters
+    name: AccountSasParameters
+    nameWithType: AccountSasParameters
+    fullName: Microsoft.Azure.Management.Storage.Models.AccountSasParameters
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Azure.Management.Storage.IStorageAccountsOperations.Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListAccountSASAsync(System.String,System.String,Microsoft.Azure.Management.Storage.Models.AccountSasParameters,System.Threading.CancellationToken)
+  commentId: M:Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListAccountSASAsync(Microsoft.Azure.Management.Storage.IStorageAccountsOperations,System.String,System.String,Microsoft.Azure.Management.Storage.Models.AccountSasParameters,System.Threading.CancellationToken)
+  parent: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions
+  definition: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListAccountSASAsync(Microsoft.Azure.Management.Storage.IStorageAccountsOperations,System.String,System.String,Microsoft.Azure.Management.Storage.Models.AccountSasParameters,System.Threading.CancellationToken)
+  name: ListAccountSASAsync(String, String, AccountSasParameters, CancellationToken)
+  nameWithType: StorageAccountsOperationsExtensions.ListAccountSASAsync(String, String, AccountSasParameters, CancellationToken)
+  fullName: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListAccountSASAsync(System.String, System.String, Microsoft.Azure.Management.Storage.Models.AccountSasParameters, System.Threading.CancellationToken)
+  spec.csharp:
+  - uid: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListAccountSASAsync(System.String,System.String,Microsoft.Azure.Management.Storage.Models.AccountSasParameters,System.Threading.CancellationToken)
+    name: ListAccountSASAsync
+    nameWithType: StorageAccountsOperationsExtensions.ListAccountSASAsync
+    fullName: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListAccountSASAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.Azure.Management.Storage.Models.AccountSasParameters
+    name: AccountSasParameters
+    nameWithType: AccountSasParameters
+    fullName: Microsoft.Azure.Management.Storage.Models.AccountSasParameters
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    nameWithType: CancellationToken
+    fullName: System.Threading.CancellationToken
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListAccountSASAsync(System.String,System.String,Microsoft.Azure.Management.Storage.Models.AccountSasParameters,System.Threading.CancellationToken)
+    name: ListAccountSASAsync
+    nameWithType: StorageAccountsOperationsExtensions.ListAccountSASAsync
+    fullName: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListAccountSASAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.Azure.Management.Storage.Models.AccountSasParameters
+    name: AccountSasParameters
+    nameWithType: AccountSasParameters
+    fullName: Microsoft.Azure.Management.Storage.Models.AccountSasParameters
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    nameWithType: CancellationToken
+    fullName: System.Threading.CancellationToken
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Azure.Management.Storage.IStorageAccountsOperations.Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListServiceSAS(System.String,System.String,Microsoft.Azure.Management.Storage.Models.ServiceSasParameters)
+  commentId: M:Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListServiceSAS(Microsoft.Azure.Management.Storage.IStorageAccountsOperations,System.String,System.String,Microsoft.Azure.Management.Storage.Models.ServiceSasParameters)
+  parent: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions
+  definition: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListServiceSAS(Microsoft.Azure.Management.Storage.IStorageAccountsOperations,System.String,System.String,Microsoft.Azure.Management.Storage.Models.ServiceSasParameters)
+  name: ListServiceSAS(String, String, ServiceSasParameters)
+  nameWithType: StorageAccountsOperationsExtensions.ListServiceSAS(String, String, ServiceSasParameters)
+  fullName: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListServiceSAS(System.String, System.String, Microsoft.Azure.Management.Storage.Models.ServiceSasParameters)
+  spec.csharp:
+  - uid: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListServiceSAS(System.String,System.String,Microsoft.Azure.Management.Storage.Models.ServiceSasParameters)
+    name: ListServiceSAS
+    nameWithType: StorageAccountsOperationsExtensions.ListServiceSAS
+    fullName: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListServiceSAS
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.Azure.Management.Storage.Models.ServiceSasParameters
+    name: ServiceSasParameters
+    nameWithType: ServiceSasParameters
+    fullName: Microsoft.Azure.Management.Storage.Models.ServiceSasParameters
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListServiceSAS(System.String,System.String,Microsoft.Azure.Management.Storage.Models.ServiceSasParameters)
+    name: ListServiceSAS
+    nameWithType: StorageAccountsOperationsExtensions.ListServiceSAS
+    fullName: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListServiceSAS
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.Azure.Management.Storage.Models.ServiceSasParameters
+    name: ServiceSasParameters
+    nameWithType: ServiceSasParameters
+    fullName: Microsoft.Azure.Management.Storage.Models.ServiceSasParameters
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Azure.Management.Storage.IStorageAccountsOperations.Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListServiceSASAsync(System.String,System.String,Microsoft.Azure.Management.Storage.Models.ServiceSasParameters,System.Threading.CancellationToken)
+  commentId: M:Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListServiceSASAsync(Microsoft.Azure.Management.Storage.IStorageAccountsOperations,System.String,System.String,Microsoft.Azure.Management.Storage.Models.ServiceSasParameters,System.Threading.CancellationToken)
+  parent: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions
+  definition: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListServiceSASAsync(Microsoft.Azure.Management.Storage.IStorageAccountsOperations,System.String,System.String,Microsoft.Azure.Management.Storage.Models.ServiceSasParameters,System.Threading.CancellationToken)
+  name: ListServiceSASAsync(String, String, ServiceSasParameters, CancellationToken)
+  nameWithType: StorageAccountsOperationsExtensions.ListServiceSASAsync(String, String, ServiceSasParameters, CancellationToken)
+  fullName: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListServiceSASAsync(System.String, System.String, Microsoft.Azure.Management.Storage.Models.ServiceSasParameters, System.Threading.CancellationToken)
+  spec.csharp:
+  - uid: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListServiceSASAsync(System.String,System.String,Microsoft.Azure.Management.Storage.Models.ServiceSasParameters,System.Threading.CancellationToken)
+    name: ListServiceSASAsync
+    nameWithType: StorageAccountsOperationsExtensions.ListServiceSASAsync
+    fullName: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListServiceSASAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.Azure.Management.Storage.Models.ServiceSasParameters
+    name: ServiceSasParameters
+    nameWithType: ServiceSasParameters
+    fullName: Microsoft.Azure.Management.Storage.Models.ServiceSasParameters
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    nameWithType: CancellationToken
+    fullName: System.Threading.CancellationToken
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListServiceSASAsync(System.String,System.String,Microsoft.Azure.Management.Storage.Models.ServiceSasParameters,System.Threading.CancellationToken)
+    name: ListServiceSASAsync
+    nameWithType: StorageAccountsOperationsExtensions.ListServiceSASAsync
+    fullName: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListServiceSASAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.Azure.Management.Storage.Models.ServiceSasParameters
+    name: ServiceSasParameters
+    nameWithType: ServiceSasParameters
+    fullName: Microsoft.Azure.Management.Storage.Models.ServiceSasParameters
   - name: ', '
     nameWithType: ', '
     fullName: ', '
@@ -3301,6 +3713,366 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListAccountSAS(Microsoft.Azure.Management.Storage.IStorageAccountsOperations,System.String,System.String,Microsoft.Azure.Management.Storage.Models.AccountSasParameters)
+  commentId: M:Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListAccountSAS(Microsoft.Azure.Management.Storage.IStorageAccountsOperations,System.String,System.String,Microsoft.Azure.Management.Storage.Models.AccountSasParameters)
+  isExternal: true
+  name: ListAccountSAS(IStorageAccountsOperations, String, String, AccountSasParameters)
+  nameWithType: StorageAccountsOperationsExtensions.ListAccountSAS(IStorageAccountsOperations, String, String, AccountSasParameters)
+  fullName: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListAccountSAS(Microsoft.Azure.Management.Storage.IStorageAccountsOperations, System.String, System.String, Microsoft.Azure.Management.Storage.Models.AccountSasParameters)
+  spec.csharp:
+  - uid: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListAccountSAS(Microsoft.Azure.Management.Storage.IStorageAccountsOperations,System.String,System.String,Microsoft.Azure.Management.Storage.Models.AccountSasParameters)
+    name: ListAccountSAS
+    nameWithType: StorageAccountsOperationsExtensions.ListAccountSAS
+    fullName: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListAccountSAS
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.Azure.Management.Storage.IStorageAccountsOperations
+    name: IStorageAccountsOperations
+    nameWithType: IStorageAccountsOperations
+    fullName: Microsoft.Azure.Management.Storage.IStorageAccountsOperations
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.Azure.Management.Storage.Models.AccountSasParameters
+    name: AccountSasParameters
+    nameWithType: AccountSasParameters
+    fullName: Microsoft.Azure.Management.Storage.Models.AccountSasParameters
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListAccountSAS(Microsoft.Azure.Management.Storage.IStorageAccountsOperations,System.String,System.String,Microsoft.Azure.Management.Storage.Models.AccountSasParameters)
+    name: ListAccountSAS
+    nameWithType: StorageAccountsOperationsExtensions.ListAccountSAS
+    fullName: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListAccountSAS
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.Azure.Management.Storage.IStorageAccountsOperations
+    name: IStorageAccountsOperations
+    nameWithType: IStorageAccountsOperations
+    fullName: Microsoft.Azure.Management.Storage.IStorageAccountsOperations
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.Azure.Management.Storage.Models.AccountSasParameters
+    name: AccountSasParameters
+    nameWithType: AccountSasParameters
+    fullName: Microsoft.Azure.Management.Storage.Models.AccountSasParameters
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListAccountSASAsync(Microsoft.Azure.Management.Storage.IStorageAccountsOperations,System.String,System.String,Microsoft.Azure.Management.Storage.Models.AccountSasParameters,System.Threading.CancellationToken)
+  commentId: M:Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListAccountSASAsync(Microsoft.Azure.Management.Storage.IStorageAccountsOperations,System.String,System.String,Microsoft.Azure.Management.Storage.Models.AccountSasParameters,System.Threading.CancellationToken)
+  isExternal: true
+  name: ListAccountSASAsync(IStorageAccountsOperations, String, String, AccountSasParameters, CancellationToken)
+  nameWithType: StorageAccountsOperationsExtensions.ListAccountSASAsync(IStorageAccountsOperations, String, String, AccountSasParameters, CancellationToken)
+  fullName: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListAccountSASAsync(Microsoft.Azure.Management.Storage.IStorageAccountsOperations, System.String, System.String, Microsoft.Azure.Management.Storage.Models.AccountSasParameters, System.Threading.CancellationToken)
+  spec.csharp:
+  - uid: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListAccountSASAsync(Microsoft.Azure.Management.Storage.IStorageAccountsOperations,System.String,System.String,Microsoft.Azure.Management.Storage.Models.AccountSasParameters,System.Threading.CancellationToken)
+    name: ListAccountSASAsync
+    nameWithType: StorageAccountsOperationsExtensions.ListAccountSASAsync
+    fullName: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListAccountSASAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.Azure.Management.Storage.IStorageAccountsOperations
+    name: IStorageAccountsOperations
+    nameWithType: IStorageAccountsOperations
+    fullName: Microsoft.Azure.Management.Storage.IStorageAccountsOperations
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.Azure.Management.Storage.Models.AccountSasParameters
+    name: AccountSasParameters
+    nameWithType: AccountSasParameters
+    fullName: Microsoft.Azure.Management.Storage.Models.AccountSasParameters
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    nameWithType: CancellationToken
+    fullName: System.Threading.CancellationToken
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListAccountSASAsync(Microsoft.Azure.Management.Storage.IStorageAccountsOperations,System.String,System.String,Microsoft.Azure.Management.Storage.Models.AccountSasParameters,System.Threading.CancellationToken)
+    name: ListAccountSASAsync
+    nameWithType: StorageAccountsOperationsExtensions.ListAccountSASAsync
+    fullName: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListAccountSASAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.Azure.Management.Storage.IStorageAccountsOperations
+    name: IStorageAccountsOperations
+    nameWithType: IStorageAccountsOperations
+    fullName: Microsoft.Azure.Management.Storage.IStorageAccountsOperations
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.Azure.Management.Storage.Models.AccountSasParameters
+    name: AccountSasParameters
+    nameWithType: AccountSasParameters
+    fullName: Microsoft.Azure.Management.Storage.Models.AccountSasParameters
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    nameWithType: CancellationToken
+    fullName: System.Threading.CancellationToken
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListServiceSAS(Microsoft.Azure.Management.Storage.IStorageAccountsOperations,System.String,System.String,Microsoft.Azure.Management.Storage.Models.ServiceSasParameters)
+  commentId: M:Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListServiceSAS(Microsoft.Azure.Management.Storage.IStorageAccountsOperations,System.String,System.String,Microsoft.Azure.Management.Storage.Models.ServiceSasParameters)
+  isExternal: true
+  name: ListServiceSAS(IStorageAccountsOperations, String, String, ServiceSasParameters)
+  nameWithType: StorageAccountsOperationsExtensions.ListServiceSAS(IStorageAccountsOperations, String, String, ServiceSasParameters)
+  fullName: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListServiceSAS(Microsoft.Azure.Management.Storage.IStorageAccountsOperations, System.String, System.String, Microsoft.Azure.Management.Storage.Models.ServiceSasParameters)
+  spec.csharp:
+  - uid: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListServiceSAS(Microsoft.Azure.Management.Storage.IStorageAccountsOperations,System.String,System.String,Microsoft.Azure.Management.Storage.Models.ServiceSasParameters)
+    name: ListServiceSAS
+    nameWithType: StorageAccountsOperationsExtensions.ListServiceSAS
+    fullName: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListServiceSAS
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.Azure.Management.Storage.IStorageAccountsOperations
+    name: IStorageAccountsOperations
+    nameWithType: IStorageAccountsOperations
+    fullName: Microsoft.Azure.Management.Storage.IStorageAccountsOperations
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.Azure.Management.Storage.Models.ServiceSasParameters
+    name: ServiceSasParameters
+    nameWithType: ServiceSasParameters
+    fullName: Microsoft.Azure.Management.Storage.Models.ServiceSasParameters
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListServiceSAS(Microsoft.Azure.Management.Storage.IStorageAccountsOperations,System.String,System.String,Microsoft.Azure.Management.Storage.Models.ServiceSasParameters)
+    name: ListServiceSAS
+    nameWithType: StorageAccountsOperationsExtensions.ListServiceSAS
+    fullName: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListServiceSAS
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.Azure.Management.Storage.IStorageAccountsOperations
+    name: IStorageAccountsOperations
+    nameWithType: IStorageAccountsOperations
+    fullName: Microsoft.Azure.Management.Storage.IStorageAccountsOperations
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.Azure.Management.Storage.Models.ServiceSasParameters
+    name: ServiceSasParameters
+    nameWithType: ServiceSasParameters
+    fullName: Microsoft.Azure.Management.Storage.Models.ServiceSasParameters
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListServiceSASAsync(Microsoft.Azure.Management.Storage.IStorageAccountsOperations,System.String,System.String,Microsoft.Azure.Management.Storage.Models.ServiceSasParameters,System.Threading.CancellationToken)
+  commentId: M:Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListServiceSASAsync(Microsoft.Azure.Management.Storage.IStorageAccountsOperations,System.String,System.String,Microsoft.Azure.Management.Storage.Models.ServiceSasParameters,System.Threading.CancellationToken)
+  isExternal: true
+  name: ListServiceSASAsync(IStorageAccountsOperations, String, String, ServiceSasParameters, CancellationToken)
+  nameWithType: StorageAccountsOperationsExtensions.ListServiceSASAsync(IStorageAccountsOperations, String, String, ServiceSasParameters, CancellationToken)
+  fullName: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListServiceSASAsync(Microsoft.Azure.Management.Storage.IStorageAccountsOperations, System.String, System.String, Microsoft.Azure.Management.Storage.Models.ServiceSasParameters, System.Threading.CancellationToken)
+  spec.csharp:
+  - uid: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListServiceSASAsync(Microsoft.Azure.Management.Storage.IStorageAccountsOperations,System.String,System.String,Microsoft.Azure.Management.Storage.Models.ServiceSasParameters,System.Threading.CancellationToken)
+    name: ListServiceSASAsync
+    nameWithType: StorageAccountsOperationsExtensions.ListServiceSASAsync
+    fullName: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListServiceSASAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.Azure.Management.Storage.IStorageAccountsOperations
+    name: IStorageAccountsOperations
+    nameWithType: IStorageAccountsOperations
+    fullName: Microsoft.Azure.Management.Storage.IStorageAccountsOperations
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.Azure.Management.Storage.Models.ServiceSasParameters
+    name: ServiceSasParameters
+    nameWithType: ServiceSasParameters
+    fullName: Microsoft.Azure.Management.Storage.Models.ServiceSasParameters
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    nameWithType: CancellationToken
+    fullName: System.Threading.CancellationToken
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListServiceSASAsync(Microsoft.Azure.Management.Storage.IStorageAccountsOperations,System.String,System.String,Microsoft.Azure.Management.Storage.Models.ServiceSasParameters,System.Threading.CancellationToken)
+    name: ListServiceSASAsync
+    nameWithType: StorageAccountsOperationsExtensions.ListServiceSASAsync
+    fullName: Microsoft.Azure.Management.Storage.StorageAccountsOperationsExtensions.ListServiceSASAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.Azure.Management.Storage.IStorageAccountsOperations
+    name: IStorageAccountsOperations
+    nameWithType: IStorageAccountsOperations
+    fullName: Microsoft.Azure.Management.Storage.IStorageAccountsOperations
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.Azure.Management.Storage.Models.ServiceSasParameters
+    name: ServiceSasParameters
+    nameWithType: ServiceSasParameters
+    fullName: Microsoft.Azure.Management.Storage.Models.ServiceSasParameters
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    nameWithType: CancellationToken
+    fullName: System.Threading.CancellationToken
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Microsoft.Azure.Management.Storage.IStorageAccountsOperations.CheckNameAvailabilityWithHttpMessagesAsync*
   commentId: Overload:Microsoft.Azure.Management.Storage.IStorageAccountsOperations.CheckNameAvailabilityWithHttpMessagesAsync
   isExternal: false
@@ -3903,3 +4675,153 @@ references:
   name: RegenerateKeyWithHttpMessagesAsync
   nameWithType: IStorageAccountsOperations.RegenerateKeyWithHttpMessagesAsync
   fullName: Microsoft.Azure.Management.Storage.IStorageAccountsOperations.RegenerateKeyWithHttpMessagesAsync
+- uid: Microsoft.Azure.Management.Storage.IStorageAccountsOperations.ListAccountSASWithHttpMessagesAsync*
+  commentId: Overload:Microsoft.Azure.Management.Storage.IStorageAccountsOperations.ListAccountSASWithHttpMessagesAsync
+  isExternal: false
+  name: ListAccountSASWithHttpMessagesAsync
+  nameWithType: IStorageAccountsOperations.ListAccountSASWithHttpMessagesAsync
+  fullName: Microsoft.Azure.Management.Storage.IStorageAccountsOperations.ListAccountSASWithHttpMessagesAsync
+- uid: Microsoft.Azure.Management.Storage.Models.AccountSasParameters
+  commentId: T:Microsoft.Azure.Management.Storage.Models.AccountSasParameters
+  parent: Microsoft.Azure.Management.Storage.Models
+  isExternal: false
+  name: AccountSasParameters
+  nameWithType: AccountSasParameters
+  fullName: Microsoft.Azure.Management.Storage.Models.AccountSasParameters
+- uid: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.Management.Storage.Models.ListAccountSasResponse}}
+  commentId: T:System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.Management.Storage.Models.ListAccountSasResponse}}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  name: Task<AzureOperationResponse<ListAccountSasResponse>>
+  nameWithType: Task<AzureOperationResponse<ListAccountSasResponse>>
+  fullName: System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Azure.Management.Storage.Models.ListAccountSasResponse>>
+  nameWithType.vb: Task(Of AzureOperationResponse(Of ListAccountSasResponse))
+  fullname.vb: System.Threading.Tasks.Task(Of Microsoft.Rest.Azure.AzureOperationResponse(Of Microsoft.Azure.Management.Storage.Models.ListAccountSasResponse))
+  name.vb: Task(Of AzureOperationResponse(Of ListAccountSasResponse))
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Microsoft.Rest.Azure.AzureOperationResponse`1
+    name: AzureOperationResponse
+    nameWithType: AzureOperationResponse
+    fullName: Microsoft.Rest.Azure.AzureOperationResponse
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Microsoft.Azure.Management.Storage.Models.ListAccountSasResponse
+    name: ListAccountSasResponse
+    nameWithType: ListAccountSasResponse
+    fullName: Microsoft.Azure.Management.Storage.Models.ListAccountSasResponse
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Microsoft.Rest.Azure.AzureOperationResponse`1
+    name: AzureOperationResponse
+    nameWithType: AzureOperationResponse
+    fullName: Microsoft.Rest.Azure.AzureOperationResponse
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Microsoft.Azure.Management.Storage.Models.ListAccountSasResponse
+    name: ListAccountSasResponse
+    nameWithType: ListAccountSasResponse
+    fullName: Microsoft.Azure.Management.Storage.Models.ListAccountSasResponse
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Azure.Management.Storage.IStorageAccountsOperations.ListServiceSASWithHttpMessagesAsync*
+  commentId: Overload:Microsoft.Azure.Management.Storage.IStorageAccountsOperations.ListServiceSASWithHttpMessagesAsync
+  isExternal: false
+  name: ListServiceSASWithHttpMessagesAsync
+  nameWithType: IStorageAccountsOperations.ListServiceSASWithHttpMessagesAsync
+  fullName: Microsoft.Azure.Management.Storage.IStorageAccountsOperations.ListServiceSASWithHttpMessagesAsync
+- uid: Microsoft.Azure.Management.Storage.Models.ServiceSasParameters
+  commentId: T:Microsoft.Azure.Management.Storage.Models.ServiceSasParameters
+  parent: Microsoft.Azure.Management.Storage.Models
+  isExternal: false
+  name: ServiceSasParameters
+  nameWithType: ServiceSasParameters
+  fullName: Microsoft.Azure.Management.Storage.Models.ServiceSasParameters
+- uid: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.Management.Storage.Models.ListServiceSasResponse}}
+  commentId: T:System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.Management.Storage.Models.ListServiceSasResponse}}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  name: Task<AzureOperationResponse<ListServiceSasResponse>>
+  nameWithType: Task<AzureOperationResponse<ListServiceSasResponse>>
+  fullName: System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Azure.Management.Storage.Models.ListServiceSasResponse>>
+  nameWithType.vb: Task(Of AzureOperationResponse(Of ListServiceSasResponse))
+  fullname.vb: System.Threading.Tasks.Task(Of Microsoft.Rest.Azure.AzureOperationResponse(Of Microsoft.Azure.Management.Storage.Models.ListServiceSasResponse))
+  name.vb: Task(Of AzureOperationResponse(Of ListServiceSasResponse))
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Microsoft.Rest.Azure.AzureOperationResponse`1
+    name: AzureOperationResponse
+    nameWithType: AzureOperationResponse
+    fullName: Microsoft.Rest.Azure.AzureOperationResponse
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Microsoft.Azure.Management.Storage.Models.ListServiceSasResponse
+    name: ListServiceSasResponse
+    nameWithType: ListServiceSasResponse
+    fullName: Microsoft.Azure.Management.Storage.Models.ListServiceSasResponse
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Microsoft.Rest.Azure.AzureOperationResponse`1
+    name: AzureOperationResponse
+    nameWithType: AzureOperationResponse
+    fullName: Microsoft.Rest.Azure.AzureOperationResponse
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Microsoft.Azure.Management.Storage.Models.ListServiceSasResponse
+    name: ListServiceSasResponse
+    nameWithType: ListServiceSasResponse
+    fullName: Microsoft.Azure.Management.Storage.Models.ListServiceSasResponse
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
