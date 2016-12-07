@@ -14,25 +14,25 @@ items:
   type: Delegate
   source:
     remote:
-      path: csharp/device/Microsoft.Azure.Devices.Client/DeviceClient.cs
+      path: device/Microsoft.Azure.Devices.Client/DeviceClient.cs
       branch: master
-      repo: https://github.com/Azure/azure-iot-sdks
+      repo: https://github.com/Azure/azure-iot-sdk-csharp.git
     id: MethodCallback
-    path: csharp/device/Microsoft.Azure.Devices.Client/DeviceClient.cs
-    startLine: 27
+    path: device/Microsoft.Azure.Devices.Client/DeviceClient.cs
+    startLine: 32
   assemblies:
-  - Microsoft.Azure.Devices.Client
+  - Microsoft.Azure.Devices.Client.PCL
   namespace: Microsoft.Azure.Devices.Client
   syntax:
-    content: public delegate string MethodCallback(string payload, out MethodStatusType status);
-    content.vb: Public Delegate Function MethodCallback(payload As String, ByRef status As MethodStatusType) As String
+    content: public delegate Task<MethodResponse> MethodCallback(MethodRequest methodRequest, object userContext);
+    content.vb: Public Delegate Function MethodCallback(methodRequest As MethodRequest, userContext As Object) As Task(Of MethodResponse)
     parameters:
-    - id: payload
-      type: System.String
-    - id: status
-      type: Microsoft.Azure.Devices.Client.MethodStatusType
+    - id: methodRequest
+      type: Microsoft.Azure.Devices.Client.MethodRequest
+    - id: userContext
+      type: System.Object
     return:
-      type: System.String
+      type: System.Threading.Tasks.Task{Microsoft.Azure.Devices.Client.MethodResponse}
   modifiers.csharp:
   - public
   - delegate
@@ -46,23 +46,110 @@ references:
   name: Microsoft.Azure.Devices.Client
   nameWithType: Microsoft.Azure.Devices.Client
   fullName: Microsoft.Azure.Devices.Client
-- uid: System.String
-  commentId: T:System.String
-  parent: System
-  isExternal: true
-  name: String
-  nameWithType: String
-  fullName: System.String
-- uid: Microsoft.Azure.Devices.Client.MethodStatusType
-  commentId: T:Microsoft.Azure.Devices.Client.MethodStatusType
+- uid: Microsoft.Azure.Devices.Client.MethodRequest
+  commentId: T:Microsoft.Azure.Devices.Client.MethodRequest
   parent: Microsoft.Azure.Devices.Client
   isExternal: false
-  name: MethodStatusType
-  nameWithType: MethodStatusType
-  fullName: Microsoft.Azure.Devices.Client.MethodStatusType
+  name: MethodRequest
+  nameWithType: MethodRequest
+  fullName: Microsoft.Azure.Devices.Client.MethodRequest
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Threading.Tasks.Task{Microsoft.Azure.Devices.Client.MethodResponse}
+  commentId: T:System.Threading.Tasks.Task{Microsoft.Azure.Devices.Client.MethodResponse}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  name: Task<MethodResponse>
+  nameWithType: Task<MethodResponse>
+  fullName: System.Threading.Tasks.Task<Microsoft.Azure.Devices.Client.MethodResponse>
+  nameWithType.vb: Task(Of MethodResponse)
+  fullname.vb: System.Threading.Tasks.Task(Of Microsoft.Azure.Devices.Client.MethodResponse)
+  name.vb: Task(Of MethodResponse)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Microsoft.Azure.Devices.Client.MethodResponse
+    name: MethodResponse
+    nameWithType: MethodResponse
+    fullName: Microsoft.Azure.Devices.Client.MethodResponse
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Microsoft.Azure.Devices.Client.MethodResponse
+    name: MethodResponse
+    nameWithType: MethodResponse
+    fullName: Microsoft.Azure.Devices.Client.MethodResponse
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System
   commentId: N:System
   isExternal: false
   name: System
   nameWithType: System
   fullName: System
+- uid: System.Threading.Tasks.Task`1
+  commentId: T:System.Threading.Tasks.Task`1
+  isExternal: true
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullname.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: false
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
