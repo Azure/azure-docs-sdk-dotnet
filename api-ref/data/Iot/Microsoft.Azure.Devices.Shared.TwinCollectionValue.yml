@@ -25,16 +25,16 @@ items:
     path: shared/Microsoft.Azure.Devices.Shared/TwinCollectionValue.cs
     startLine: 12
   assemblies:
-  - Microsoft.Azure.Devices.Shared.PCL
+  - Microsoft.Azure.Devices.Shared.WinRT
   namespace: Microsoft.Azure.Devices.Shared
   summary: "\nRepresents a property value in <xref href=\"Microsoft.Azure.Devices.Shared.TwinCollection\" data-throw-if-not-resolved=\"false\"></xref>\n"
   example: []
   syntax:
-    content: 'public class TwinCollectionValue : JValue, IJEnumerable<JToken>, IEnumerable<JToken>, IEnumerable, IJsonLineInfo, IEquatable<JValue>, IFormattable, IComparable, IComparable<JValue>, IConvertible'
+    content: 'public class TwinCollectionValue : JValue, IJEnumerable<JToken>, IEnumerable<JToken>, IEnumerable, IJsonLineInfo, IDynamicMetaObjectProvider, IEquatable<JValue>, IFormattable, IComparable, IComparable<JValue>'
     content.vb: >-
       Public Class TwinCollectionValue
           Inherits JValue
-          Implements IJEnumerable(Of JToken), IEnumerable(Of JToken), IEnumerable, IJsonLineInfo, IEquatable(Of JValue), IFormattable, IComparable, IComparable(Of JValue), IConvertible
+          Implements IJEnumerable(Of JToken), IEnumerable(Of JToken), IEnumerable, IJsonLineInfo, IDynamicMetaObjectProvider, IEquatable(Of JValue), IFormattable, IComparable, IComparable(Of JValue)
   inheritance:
   - System.Object
   - Newtonsoft.Json.Linq.JToken
@@ -44,11 +44,11 @@ items:
   - System.Collections.Generic.IEnumerable{Newtonsoft.Json.Linq.JToken}
   - System.Collections.IEnumerable
   - Newtonsoft.Json.IJsonLineInfo
+  - System.Dynamic.IDynamicMetaObjectProvider
   - System.IEquatable{Newtonsoft.Json.Linq.JValue}
   - System.IFormattable
   - System.IComparable
   - System.IComparable{Newtonsoft.Json.Linq.JValue}
-  - System.IConvertible
   inheritedMembers:
   - Newtonsoft.Json.Linq.JValue.CreateComment(System.String)
   - Newtonsoft.Json.Linq.JValue.CreateString(System.String)
@@ -62,6 +62,7 @@ items:
   - Newtonsoft.Json.Linq.JValue.ToString(System.String)
   - Newtonsoft.Json.Linq.JValue.ToString(System.IFormatProvider)
   - Newtonsoft.Json.Linq.JValue.ToString(System.String,System.IFormatProvider)
+  - Newtonsoft.Json.Linq.JValue.GetMetaObject(System.Linq.Expressions.Expression)
   - Newtonsoft.Json.Linq.JValue.System#IComparable#CompareTo(System.Object)
   - Newtonsoft.Json.Linq.JValue.CompareTo(Newtonsoft.Json.Linq.JValue)
   - Newtonsoft.Json.Linq.JValue.HasValues
@@ -99,6 +100,7 @@ items:
   - Newtonsoft.Json.Linq.JToken.SelectToken(System.String,System.Boolean)
   - Newtonsoft.Json.Linq.JToken.SelectTokens(System.String)
   - Newtonsoft.Json.Linq.JToken.SelectTokens(System.String,System.Boolean)
+  - Newtonsoft.Json.Linq.JToken.System#Dynamic#IDynamicMetaObjectProvider#GetMetaObject(System.Linq.Expressions.Expression)
   - Newtonsoft.Json.Linq.JToken.DeepClone
   - Newtonsoft.Json.Linq.JToken.AddAnnotation(System.Object)
   - Newtonsoft.Json.Linq.JToken.Annotation``1
@@ -149,7 +151,7 @@ items:
     path: shared/Microsoft.Azure.Devices.Shared/TwinCollectionValue.cs
     startLine: 31
   assemblies:
-  - Microsoft.Azure.Devices.Shared.PCL
+  - Microsoft.Azure.Devices.Shared.WinRT
   namespace: Microsoft.Azure.Devices.Shared
   summary: "\nGets the value for the given property name\n"
   example: []
@@ -193,7 +195,7 @@ items:
     path: shared/Microsoft.Azure.Devices.Shared/TwinCollectionValue.cs
     startLine: 58
   assemblies:
-  - Microsoft.Azure.Devices.Shared.PCL
+  - Microsoft.Azure.Devices.Shared.WinRT
   namespace: Microsoft.Azure.Devices.Shared
   summary: "\nGets the Metadata for this property\n"
   example: []
@@ -228,7 +230,7 @@ items:
     path: shared/Microsoft.Azure.Devices.Shared/TwinCollectionValue.cs
     startLine: 67
   assemblies:
-  - Microsoft.Azure.Devices.Shared.PCL
+  - Microsoft.Azure.Devices.Shared.WinRT
   namespace: Microsoft.Azure.Devices.Shared
   summary: "\nGets the LastUpdated time for this property\n"
   example: []
@@ -263,7 +265,7 @@ items:
     path: shared/Microsoft.Azure.Devices.Shared/TwinCollectionValue.cs
     startLine: 76
   assemblies:
-  - Microsoft.Azure.Devices.Shared.PCL
+  - Microsoft.Azure.Devices.Shared.WinRT
   namespace: Microsoft.Azure.Devices.Shared
   summary: "\nGets the LastUpdatedVersion for this property\n"
   example: []
@@ -415,6 +417,13 @@ references:
   name: IJsonLineInfo
   nameWithType: IJsonLineInfo
   fullName: Newtonsoft.Json.IJsonLineInfo
+- uid: System.Dynamic.IDynamicMetaObjectProvider
+  commentId: T:System.Dynamic.IDynamicMetaObjectProvider
+  parent: System.Dynamic
+  isExternal: true
+  name: IDynamicMetaObjectProvider
+  nameWithType: IDynamicMetaObjectProvider
+  fullName: System.Dynamic.IDynamicMetaObjectProvider
 - uid: System.IEquatable{Newtonsoft.Json.Linq.JValue}
   commentId: T:System.IEquatable{Newtonsoft.Json.Linq.JValue}
   parent: System
@@ -517,13 +526,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.IConvertible
-  commentId: T:System.IConvertible
-  parent: System
-  isExternal: true
-  name: IConvertible
-  nameWithType: IConvertible
-  fullName: System.IConvertible
 - uid: Newtonsoft.Json.Linq.JValue.CreateComment(System.String)
   commentId: M:Newtonsoft.Json.Linq.JValue.CreateComment(System.String)
   parent: Newtonsoft.Json.Linq.JValue
@@ -1013,6 +1015,47 @@ references:
     name: IFormatProvider
     nameWithType: IFormatProvider
     fullName: System.IFormatProvider
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Newtonsoft.Json.Linq.JValue.GetMetaObject(System.Linq.Expressions.Expression)
+  commentId: M:Newtonsoft.Json.Linq.JValue.GetMetaObject(System.Linq.Expressions.Expression)
+  parent: Newtonsoft.Json.Linq.JValue
+  isExternal: true
+  name: GetMetaObject(Expression)
+  nameWithType: JValue.GetMetaObject(Expression)
+  fullName: Newtonsoft.Json.Linq.JValue.GetMetaObject(System.Linq.Expressions.Expression)
+  spec.csharp:
+  - uid: Newtonsoft.Json.Linq.JValue.GetMetaObject(System.Linq.Expressions.Expression)
+    name: GetMetaObject
+    nameWithType: JValue.GetMetaObject
+    fullName: Newtonsoft.Json.Linq.JValue.GetMetaObject
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Linq.Expressions.Expression
+    name: Expression
+    nameWithType: Expression
+    fullName: System.Linq.Expressions.Expression
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Newtonsoft.Json.Linq.JValue.GetMetaObject(System.Linq.Expressions.Expression)
+    name: GetMetaObject
+    nameWithType: JValue.GetMetaObject
+    fullName: Newtonsoft.Json.Linq.JValue.GetMetaObject
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Linq.Expressions.Expression
+    name: Expression
+    nameWithType: Expression
+    fullName: System.Linq.Expressions.Expression
     isExternal: true
   - name: )
     nameWithType: )
@@ -2432,6 +2475,49 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Newtonsoft.Json.Linq.JToken.System#Dynamic#IDynamicMetaObjectProvider#GetMetaObject(System.Linq.Expressions.Expression)
+  commentId: M:Newtonsoft.Json.Linq.JToken.System#Dynamic#IDynamicMetaObjectProvider#GetMetaObject(System.Linq.Expressions.Expression)
+  parent: Newtonsoft.Json.Linq.JToken
+  isExternal: true
+  name: IDynamicMetaObjectProvider.GetMetaObject(Expression)
+  nameWithType: JToken.IDynamicMetaObjectProvider.GetMetaObject(Expression)
+  fullName: Newtonsoft.Json.Linq.JToken.System.Dynamic.IDynamicMetaObjectProvider.GetMetaObject(System.Linq.Expressions.Expression)
+  nameWithType.vb: JToken.System.Dynamic.IDynamicMetaObjectProvider.GetMetaObject(Expression)
+  name.vb: System.Dynamic.IDynamicMetaObjectProvider.GetMetaObject(Expression)
+  spec.csharp:
+  - uid: Newtonsoft.Json.Linq.JToken.System#Dynamic#IDynamicMetaObjectProvider#GetMetaObject(System.Linq.Expressions.Expression)
+    name: IDynamicMetaObjectProvider.GetMetaObject
+    nameWithType: JToken.IDynamicMetaObjectProvider.GetMetaObject
+    fullName: Newtonsoft.Json.Linq.JToken.System.Dynamic.IDynamicMetaObjectProvider.GetMetaObject
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Linq.Expressions.Expression
+    name: Expression
+    nameWithType: Expression
+    fullName: System.Linq.Expressions.Expression
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Newtonsoft.Json.Linq.JToken.System#Dynamic#IDynamicMetaObjectProvider#GetMetaObject(System.Linq.Expressions.Expression)
+    name: System.Dynamic.IDynamicMetaObjectProvider.GetMetaObject
+    nameWithType: JToken.System.Dynamic.IDynamicMetaObjectProvider.GetMetaObject
+    fullName: Newtonsoft.Json.Linq.JToken.System.Dynamic.IDynamicMetaObjectProvider.GetMetaObject
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Linq.Expressions.Expression
+    name: Expression
+    nameWithType: Expression
+    fullName: System.Linq.Expressions.Expression
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Newtonsoft.Json.Linq.JToken.DeepClone
   commentId: M:Newtonsoft.Json.Linq.JToken.DeepClone
   parent: Newtonsoft.Json.Linq.JToken
@@ -3175,6 +3261,12 @@ references:
   name: Newtonsoft.Json
   nameWithType: Newtonsoft.Json
   fullName: Newtonsoft.Json
+- uid: System.Dynamic
+  commentId: N:System.Dynamic
+  isExternal: false
+  name: System.Dynamic
+  nameWithType: System.Dynamic
+  fullName: System.Dynamic
 - uid: System.IEquatable`1
   commentId: T:System.IEquatable`1
   isExternal: true
