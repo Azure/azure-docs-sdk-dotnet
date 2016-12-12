@@ -29,13 +29,14 @@ items:
       path: src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
       branch: AutoRest
       repo: https://github.com/Azure/azure-sdk-for-net.git
+      commit: 7cead20bae816484e8ea311f7200fe55ed5555f6
     id: Probe
-    path: src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
-    startLine: 21
+    path: src/azure-sdk-for-net/src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
+    startLine: 23
   assemblies:
   - Microsoft.Azure.Management.Network
   namespace: Microsoft.Azure.Management.Network.Models
-  summary: "\nLoad balancer Probe\n"
+  summary: "\nA load balancer probe.\n"
   example: []
   syntax:
     content: 'public class Probe : SubResource, IResource'
@@ -79,9 +80,10 @@ items:
       path: src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
       branch: AutoRest
       repo: https://github.com/Azure/azure-sdk-for-net.git
+      commit: 7cead20bae816484e8ea311f7200fe55ed5555f6
     id: .ctor
-    path: src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
-    startLine: 27
+    path: src/azure-sdk-for-net/src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
+    startLine: 29
   assemblies:
   - Microsoft.Azure.Management.Network
   namespace: Microsoft.Azure.Management.Network.Models
@@ -111,9 +113,10 @@ items:
       path: src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
       branch: AutoRest
       repo: https://github.com/Azure/azure-sdk-for-net.git
+      commit: 7cead20bae816484e8ea311f7200fe55ed5555f6
     id: .ctor
-    path: src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
-    startLine: 32
+    path: src/azure-sdk-for-net/src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
+    startLine: 66
   assemblies:
   - Microsoft.Azure.Management.Network
   namespace: Microsoft.Azure.Management.Network.Models
@@ -125,24 +128,87 @@ items:
     parameters:
     - id: protocol
       type: System.String
+      description: >-
+        The protocol of the end point. Possible
+
+        values are: 'Http' or 'Tcp'. If 'Tcp' is specified, a received ACK
+
+        is required for the probe to be successful. If 'Http' is specified,
+
+        a 200 OK response from the specifies URI is required for the probe
+
+        to be successful. Possible values include: 'Http', 'Tcp'
     - id: port
       type: System.Int32
+      description: >-
+        The port for communicating the probe. Possible
+
+        values range from 1 to 65535, inclusive.
     - id: id
       type: System.String
+      description: Resource ID.
     - id: loadBalancingRules
       type: System.Collections.Generic.IList{Microsoft.Azure.Management.Network.Models.SubResource}
+      description: >-
+        The load balancer rules that use
+
+        this probe.
     - id: intervalInSeconds
       type: System.Nullable{System.Int32}
+      description: >-
+        The interval, in seconds, for how
+
+        frequently to probe the endpoint for health status. Typically, the
+
+        interval is slightly less than half the allocated timeout period
+
+        (in seconds) which allows two full probes before taking the
+
+        instance out of rotation. The default value is 15, the minimum
+
+        value is 5.
     - id: numberOfProbes
       type: System.Nullable{System.Int32}
+      description: >-
+        The number of probes where if no
+
+        response, will result in stopping further traffic from being
+
+        delivered to the endpoint. This values allows endpoints to be taken
+
+        out of rotation faster or slower than the typical times used in
+
+        Azure.
     - id: requestPath
       type: System.String
+      description: >-
+        The URI used for requesting health status
+
+        from the VM. Path is required if a protocol is set to http.
+
+        Otherwise, it is not allowed. There is no default value.
     - id: provisioningState
       type: System.String
+      description: >-
+        Gets the provisioning state of the
+
+        public IP resource. Possible values are: 'Updating', 'Deleting',
+
+        and 'Failed'.
     - id: name
       type: System.String
+      description: >-
+        Gets name of the resource that is unique within
+
+        a resource group. This name can be used to access the
+
+        resource.
     - id: etag
       type: System.String
+      description: >-
+        A unique read-only string that changes whenever
+
+        the resource is updated.
   overload: Microsoft.Azure.Management.Network.Models.Probe.#ctor*
   nameWithType.vb: Probe.Probe(String, Int32, String, IList(Of SubResource), Nullable(Of Int32), Nullable(Of Int32), String, String, String, String)
   modifiers.csharp:
@@ -167,23 +233,24 @@ items:
       path: src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
       branch: AutoRest
       repo: https://github.com/Azure/azure-sdk-for-net.git
+      commit: 7cead20bae816484e8ea311f7200fe55ed5555f6
     id: LoadBalancingRules
-    path: src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
-    startLine: 49
+    path: src/azure-sdk-for-net/src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
+    startLine: 83
   assemblies:
   - Microsoft.Azure.Management.Network
   namespace: Microsoft.Azure.Management.Network.Models
-  summary: "\nGets Load balancer rules that use this probe\n"
+  summary: "\nGets the load balancer rules that use this probe.\n"
   example: []
   syntax:
     content: >-
       [JsonProperty(PropertyName = "properties.loadBalancingRules")]
 
-      public IList<SubResource> LoadBalancingRules { get; }
+      public IList<SubResource> LoadBalancingRules { get; protected set; }
     content.vb: >-
       <JsonProperty(PropertyName:="properties.loadBalancingRules")>
 
-      Public ReadOnly Property LoadBalancingRules As IList(Of SubResource)
+      Public Property LoadBalancingRules As IList(Of SubResource)
     parameters: []
     return:
       type: System.Collections.Generic.IList{Microsoft.Azure.Management.Network.Models.SubResource}
@@ -199,9 +266,11 @@ items:
   modifiers.csharp:
   - public
   - get
+  - protected set
   modifiers.vb:
   - Public
-  - ReadOnly
+  - Get
+  - Protected Set
 - uid: Microsoft.Azure.Management.Network.Models.Probe.Protocol
   commentId: P:Microsoft.Azure.Management.Network.Models.Probe.Protocol
   id: Protocol
@@ -218,13 +287,14 @@ items:
       path: src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
       branch: AutoRest
       repo: https://github.com/Azure/azure-sdk-for-net.git
+      commit: 7cead20bae816484e8ea311f7200fe55ed5555f6
     id: Protocol
-    path: src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
-    startLine: 59
+    path: src/azure-sdk-for-net/src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
+    startLine: 93
   assemblies:
   - Microsoft.Azure.Management.Network
   namespace: Microsoft.Azure.Management.Network.Models
-  summary: "\nGets or sets the protocol of the end point. Possible values are\nhttp or Tcp. If Tcp is specified, a received ACK is required for\nthe probe to be successful. If http is specified,a 200 OK\nresponse from the specifies URI is required for the probe to be\nsuccessful. Possible values include: 'Http', 'Tcp'\n"
+  summary: "\nGets or sets the protocol of the end point. Possible values are:\n'Http' or 'Tcp'. If 'Tcp' is specified, a received ACK is required\nfor the probe to be successful. If 'Http' is specified, a 200 OK\nresponse from the specifies URI is required for the probe to be\nsuccessful. Possible values include: 'Http', 'Tcp'\n"
   example: []
   syntax:
     content: >-
@@ -269,13 +339,14 @@ items:
       path: src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
       branch: AutoRest
       repo: https://github.com/Azure/azure-sdk-for-net.git
+      commit: 7cead20bae816484e8ea311f7200fe55ed5555f6
     id: Port
-    path: src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
-    startLine: 66
+    path: src/azure-sdk-for-net/src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
+    startLine: 100
   assemblies:
   - Microsoft.Azure.Management.Network
   namespace: Microsoft.Azure.Management.Network.Models
-  summary: "\nGets or sets Port for communicating the probe. Possible values\nrange from 1 to 65535, inclusive.\n"
+  summary: "\nGets or sets the port for communicating the probe. Possible values\nrange from 1 to 65535, inclusive.\n"
   example: []
   syntax:
     content: >-
@@ -320,13 +391,14 @@ items:
       path: src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
       branch: AutoRest
       repo: https://github.com/Azure/azure-sdk-for-net.git
+      commit: 7cead20bae816484e8ea311f7200fe55ed5555f6
     id: IntervalInSeconds
-    path: src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
-    startLine: 76
+    path: src/azure-sdk-for-net/src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
+    startLine: 110
   assemblies:
   - Microsoft.Azure.Management.Network
   namespace: Microsoft.Azure.Management.Network.Models
-  summary: "\nGets or sets the interval, in seconds, for how frequently to probe\nthe endpoint for health status. Typically, the interval is\nslightly less than half the allocated timeout period (in seconds)\nwhich allows two full probes before taking the instance out of\nrotation. The default value is 15, the minimum value is 5\n"
+  summary: "\nGets or sets the interval, in seconds, for how frequently to probe\nthe endpoint for health status. Typically, the interval is slightly\nless than half the allocated timeout period (in seconds) which\nallows two full probes before taking the instance out of rotation.\nThe default value is 15, the minimum value is 5.\n"
   example: []
   syntax:
     content: >-
@@ -371,13 +443,14 @@ items:
       path: src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
       branch: AutoRest
       repo: https://github.com/Azure/azure-sdk-for-net.git
+      commit: 7cead20bae816484e8ea311f7200fe55ed5555f6
     id: NumberOfProbes
-    path: src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
-    startLine: 85
+    path: src/azure-sdk-for-net/src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
+    startLine: 119
   assemblies:
   - Microsoft.Azure.Management.Network
   namespace: Microsoft.Azure.Management.Network.Models
-  summary: "\nGets or sets the number of probes where if no response, will\nresult in stopping further traffic from being delivered to the\nendpoint. This values allows endpoints to be taken out of\nrotation faster or slower than the typical times used in Azure.\n"
+  summary: "\nGets or sets the number of probes where if no response, will result\nin stopping further traffic from being delivered to the endpoint.\nThis values allows endpoints to be taken out of rotation faster or\nslower than the typical times used in Azure.\n"
   example: []
   syntax:
     content: >-
@@ -422,13 +495,14 @@ items:
       path: src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
       branch: AutoRest
       repo: https://github.com/Azure/azure-sdk-for-net.git
+      commit: 7cead20bae816484e8ea311f7200fe55ed5555f6
     id: RequestPath
-    path: src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
-    startLine: 93
+    path: src/azure-sdk-for-net/src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
+    startLine: 127
   assemblies:
   - Microsoft.Azure.Management.Network
   namespace: Microsoft.Azure.Management.Network.Models
-  summary: "\nGets or sets the URI used for requesting health status from the\nVM. Path is required if a protocol is set to http. Otherwise, it\nis not allowed. There is no default value\n"
+  summary: "\nGets or sets the URI used for requesting health status from the VM.\nPath is required if a protocol is set to http. Otherwise, it is not\nallowed. There is no default value.\n"
   example: []
   syntax:
     content: >-
@@ -473,13 +547,14 @@ items:
       path: src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
       branch: AutoRest
       repo: https://github.com/Azure/azure-sdk-for-net.git
+      commit: 7cead20bae816484e8ea311f7200fe55ed5555f6
     id: ProvisioningState
-    path: src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
-    startLine: 100
+    path: src/azure-sdk-for-net/src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
+    startLine: 134
   assemblies:
   - Microsoft.Azure.Management.Network
   namespace: Microsoft.Azure.Management.Network.Models
-  summary: "\nGets provisioning state of the PublicIP resource\nUpdating/Deleting/Failed\n"
+  summary: "\nGets the provisioning state of the public IP resource. Possible\nvalues are: 'Updating', 'Deleting', and 'Failed'.\n"
   example: []
   syntax:
     content: >-
@@ -524,13 +599,14 @@ items:
       path: src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
       branch: AutoRest
       repo: https://github.com/Azure/azure-sdk-for-net.git
+      commit: 7cead20bae816484e8ea311f7200fe55ed5555f6
     id: Name
-    path: src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
-    startLine: 107
+    path: src/azure-sdk-for-net/src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
+    startLine: 141
   assemblies:
   - Microsoft.Azure.Management.Network
   namespace: Microsoft.Azure.Management.Network.Models
-  summary: "\nGets name of the resource that is unique within a resource group.\nThis name can be used to access the resource\n"
+  summary: "\nGets name of the resource that is unique within a resource group.\nThis name can be used to access the resource.\n"
   example: []
   syntax:
     content: >-
@@ -575,13 +651,14 @@ items:
       path: src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
       branch: AutoRest
       repo: https://github.com/Azure/azure-sdk-for-net.git
+      commit: 7cead20bae816484e8ea311f7200fe55ed5555f6
     id: Etag
-    path: src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
-    startLine: 114
+    path: src/azure-sdk-for-net/src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
+    startLine: 148
   assemblies:
   - Microsoft.Azure.Management.Network
   namespace: Microsoft.Azure.Management.Network.Models
-  summary: "\nA unique read-only string that changes whenever the resource is\nupdated\n"
+  summary: "\nGets or sets a unique read-only string that changes whenever the\nresource is updated.\n"
   example: []
   syntax:
     content: >-
@@ -626,18 +703,23 @@ items:
       path: src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
       branch: AutoRest
       repo: https://github.com/Azure/azure-sdk-for-net.git
+      commit: 7cead20bae816484e8ea311f7200fe55ed5555f6
     id: Validate
-    path: src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
-    startLine: 120
+    path: src/azure-sdk-for-net/src/ResourceManagement/Network/Microsoft.Azure.Management.Network/Generated/Models/Probe.cs
+    startLine: 157
   assemblies:
   - Microsoft.Azure.Management.Network
   namespace: Microsoft.Azure.Management.Network.Models
-  summary: "\nValidate the object. Throws ValidationException if validation fails.\n"
+  summary: "\nValidate the object.\n"
   example: []
   syntax:
     content: public virtual void Validate()
     content.vb: Public Overridable Sub Validate
   overload: Microsoft.Azure.Management.Network.Models.Probe.Validate*
+  exceptions:
+  - type: Microsoft.Rest.ValidationException
+    commentId: T:Microsoft.Rest.ValidationException
+    description: "\nThrown if validation fails\n"
   modifiers.csharp:
   - public
   - virtual
@@ -1220,3 +1302,5 @@ references:
   name: Validate
   nameWithType: Probe.Validate
   fullName: Microsoft.Azure.Management.Network.Models.Probe.Validate
+- uid: Microsoft.Rest.ValidationException
+  commentId: T:Microsoft.Rest.ValidationException
