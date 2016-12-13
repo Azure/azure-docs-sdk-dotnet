@@ -7,6 +7,7 @@ items:
   children:
   - Microsoft.ApplicationInsights.DataContracts.MetricTelemetry.#ctor
   - Microsoft.ApplicationInsights.DataContracts.MetricTelemetry.#ctor(System.String,System.Double)
+  - Microsoft.ApplicationInsights.DataContracts.MetricTelemetry.#ctor(System.String,System.Int32,System.Double,System.Double,System.Double,System.Double)
   - Microsoft.ApplicationInsights.DataContracts.MetricTelemetry.Context
   - Microsoft.ApplicationInsights.DataContracts.MetricTelemetry.Count
   - Microsoft.ApplicationInsights.DataContracts.MetricTelemetry.Max
@@ -16,6 +17,7 @@ items:
   - Microsoft.ApplicationInsights.DataContracts.MetricTelemetry.Properties
   - Microsoft.ApplicationInsights.DataContracts.MetricTelemetry.Sequence
   - Microsoft.ApplicationInsights.DataContracts.MetricTelemetry.StandardDeviation
+  - Microsoft.ApplicationInsights.DataContracts.MetricTelemetry.Sum
   - Microsoft.ApplicationInsights.DataContracts.MetricTelemetry.Timestamp
   - Microsoft.ApplicationInsights.DataContracts.MetricTelemetry.Value
   langs:
@@ -30,10 +32,10 @@ items:
       path: src/Core/Managed/Shared/DataContracts/MetricTelemetry.cs
       branch: master
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
-      commit: 309ff76563b7db90cb26c049f9c671c5a61fb8dd
+      commit: 22c9295f8fb7f35d944bc7ce1f9b83c6bf9bc6a1
     id: MetricTelemetry
     path: src/ApplicationInsights-dotnet/src/Core/Managed/Shared/DataContracts/MetricTelemetry.cs
-    startLine: 11
+    startLine: 12
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.DataContracts
@@ -81,10 +83,10 @@ items:
       path: src/Core/Managed/Shared/DataContracts/MetricTelemetry.cs
       branch: master
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
-      commit: 309ff76563b7db90cb26c049f9c671c5a61fb8dd
+      commit: 22c9295f8fb7f35d944bc7ce1f9b83c6bf9bc6a1
     id: .ctor
     path: src/ApplicationInsights-dotnet/src/Core/Managed/Shared/DataContracts/MetricTelemetry.cs
-    startLine: 26
+    startLine: 25
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.DataContracts
@@ -114,18 +116,24 @@ items:
       path: src/Core/Managed/Shared/DataContracts/MetricTelemetry.cs
       branch: master
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
-      commit: 309ff76563b7db90cb26c049f9c671c5a61fb8dd
+      commit: 22c9295f8fb7f35d944bc7ce1f9b83c6bf9bc6a1
     id: .ctor
     path: src/ApplicationInsights-dotnet/src/Core/Managed/Shared/DataContracts/MetricTelemetry.cs
-    startLine: 41
+    startLine: 42
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.DataContracts
   summary: "\nInitializes a new instance of the <xref href=\"Microsoft.ApplicationInsights.DataContracts.MetricTelemetry\" data-throw-if-not-resolved=\"false\"></xref> class with the \nspecified <span class=\"paramref\">metricName</span> and <span class=\"paramref\">metricValue</span>.\n"
   example: []
   syntax:
-    content: public MetricTelemetry(string metricName, double metricValue)
-    content.vb: Public Sub New(metricName As String, metricValue As Double)
+    content: >-
+      [Obsolete("This constructor is obsolete. Use different constructor of this class to represent aggregated metric data or use EventTelemetry type to represent individual events.")]
+
+      public MetricTelemetry(string metricName, double metricValue)
+    content.vb: >-
+      <Obsolete("This constructor is obsolete. Use different constructor of this class to represent aggregated metric data or use EventTelemetry type to represent individual events.")>
+
+      Public Sub New(metricName As String, metricValue As Double)
     parameters:
     - id: metricName
       type: System.String
@@ -136,6 +144,65 @@ items:
   - type: System.ArgumentException
     commentId: T:System.ArgumentException
     description: The <span class="paramref">metricName</span> is null or empty string.
+  attributes:
+  - type: System.ObsoleteAttribute
+    ctor: System.ObsoleteAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: This constructor is obsolete. Use different constructor of this class to represent aggregated metric data or use EventTelemetry type to represent individual events.
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Microsoft.ApplicationInsights.DataContracts.MetricTelemetry.#ctor(System.String,System.Int32,System.Double,System.Double,System.Double,System.Double)
+  commentId: M:Microsoft.ApplicationInsights.DataContracts.MetricTelemetry.#ctor(System.String,System.Int32,System.Double,System.Double,System.Double,System.Double)
+  id: '#ctor(System.String,System.Int32,System.Double,System.Double,System.Double,System.Double)'
+  parent: Microsoft.ApplicationInsights.DataContracts.MetricTelemetry
+  langs:
+  - csharp
+  - vb
+  name: MetricTelemetry(String, Int32, Double, Double, Double, Double)
+  nameWithType: MetricTelemetry.MetricTelemetry(String, Int32, Double, Double, Double, Double)
+  fullName: Microsoft.ApplicationInsights.DataContracts.MetricTelemetry.MetricTelemetry(System.String, System.Int32, System.Double, System.Double, System.Double, System.Double)
+  type: Constructor
+  source:
+    remote:
+      path: src/Core/Managed/Shared/DataContracts/MetricTelemetry.cs
+      branch: master
+      repo: https://github.com/Microsoft/ApplicationInsights-dotnet
+      commit: 22c9295f8fb7f35d944bc7ce1f9b83c6bf9bc6a1
+    id: .ctor
+    path: src/ApplicationInsights-dotnet/src/Core/Managed/Shared/DataContracts/MetricTelemetry.cs
+    startLine: 61
+  assemblies:
+  - Microsoft.ApplicationInsights
+  namespace: Microsoft.ApplicationInsights.DataContracts
+  summary: "\nInitializes a new instance of the <xref href=\"Microsoft.ApplicationInsights.DataContracts.MetricTelemetry\" data-throw-if-not-resolved=\"false\"></xref> class with properties provided.\n"
+  remarks: "\nMetric statistics provided are assumed to be calculated over a period of time equaling 1 minute.\n"
+  example: []
+  syntax:
+    content: public MetricTelemetry(string name, int count, double sum, double min, double max, double standardDeviation)
+    content.vb: Public Sub New(name As String, count As Integer, sum As Double, min As Double, max As Double, standardDeviation As Double)
+    parameters:
+    - id: name
+      type: System.String
+      description: Metric name.
+    - id: count
+      type: System.Int32
+      description: Count of values taken during aggregation interval.
+    - id: sum
+      type: System.Double
+      description: Sum of values taken during aggregation interval.
+    - id: min
+      type: System.Double
+      description: Minimum value taken during aggregation interval.
+    - id: max
+      type: System.Double
+      description: Maximum of values taken during aggregation interval.
+    - id: standardDeviation
+      type: System.Double
+      description: Standard deviation of values taken during aggregation interval.
+  overload: Microsoft.ApplicationInsights.DataContracts.MetricTelemetry.#ctor*
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -156,10 +223,10 @@ items:
       path: src/Core/Managed/Shared/DataContracts/MetricTelemetry.cs
       branch: master
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
-      commit: 309ff76563b7db90cb26c049f9c671c5a61fb8dd
+      commit: 22c9295f8fb7f35d944bc7ce1f9b83c6bf9bc6a1
     id: Timestamp
     path: src/ApplicationInsights-dotnet/src/Core/Managed/Shared/DataContracts/MetricTelemetry.cs
-    startLine: 50
+    startLine: 81
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.DataContracts
@@ -196,10 +263,10 @@ items:
       path: src/Core/Managed/Shared/DataContracts/MetricTelemetry.cs
       branch: master
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
-      commit: 309ff76563b7db90cb26c049f9c671c5a61fb8dd
+      commit: 22c9295f8fb7f35d944bc7ce1f9b83c6bf9bc6a1
     id: Sequence
     path: src/ApplicationInsights-dotnet/src/Core/Managed/Shared/DataContracts/MetricTelemetry.cs
-    startLine: 55
+    startLine: 86
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.DataContracts
@@ -236,10 +303,10 @@ items:
       path: src/Core/Managed/Shared/DataContracts/MetricTelemetry.cs
       branch: master
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
-      commit: 309ff76563b7db90cb26c049f9c671c5a61fb8dd
+      commit: 22c9295f8fb7f35d944bc7ce1f9b83c6bf9bc6a1
     id: Context
     path: src/ApplicationInsights-dotnet/src/Core/Managed/Shared/DataContracts/MetricTelemetry.cs
-    startLine: 60
+    startLine: 91
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.DataContracts
@@ -276,10 +343,10 @@ items:
       path: src/Core/Managed/Shared/DataContracts/MetricTelemetry.cs
       branch: master
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
-      commit: 309ff76563b7db90cb26c049f9c671c5a61fb8dd
+      commit: 22c9295f8fb7f35d944bc7ce1f9b83c6bf9bc6a1
     id: Name
     path: src/ApplicationInsights-dotnet/src/Core/Managed/Shared/DataContracts/MetricTelemetry.cs
-    startLine: 65
+    startLine: 96
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.DataContracts
@@ -314,22 +381,72 @@ items:
       path: src/Core/Managed/Shared/DataContracts/MetricTelemetry.cs
       branch: master
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
-      commit: 309ff76563b7db90cb26c049f9c671c5a61fb8dd
+      commit: 22c9295f8fb7f35d944bc7ce1f9b83c6bf9bc6a1
     id: Value
     path: src/ApplicationInsights-dotnet/src/Core/Managed/Shared/DataContracts/MetricTelemetry.cs
-    startLine: 74
+    startLine: 105
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.DataContracts
   summary: "\nGets or sets the value of this metric.\n"
   example: []
   syntax:
-    content: public double Value { get; set; }
-    content.vb: Public Property Value As Double
+    content: >-
+      [Obsolete("This property is obsolete. Use Sum property instead.")]
+
+      public double Value { get; set; }
+    content.vb: >-
+      <Obsolete("This property is obsolete. Use Sum property instead.")>
+
+      Public Property Value As Double
     parameters: []
     return:
       type: System.Double
   overload: Microsoft.ApplicationInsights.DataContracts.MetricTelemetry.Value*
+  attributes:
+  - type: System.ObsoleteAttribute
+    ctor: System.ObsoleteAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: This property is obsolete. Use Sum property instead.
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Microsoft.ApplicationInsights.DataContracts.MetricTelemetry.Sum
+  commentId: P:Microsoft.ApplicationInsights.DataContracts.MetricTelemetry.Sum
+  id: Sum
+  parent: Microsoft.ApplicationInsights.DataContracts.MetricTelemetry
+  langs:
+  - csharp
+  - vb
+  name: Sum
+  nameWithType: MetricTelemetry.Sum
+  fullName: Microsoft.ApplicationInsights.DataContracts.MetricTelemetry.Sum
+  type: Property
+  source:
+    remote:
+      path: src/Core/Managed/Shared/DataContracts/MetricTelemetry.cs
+      branch: master
+      repo: https://github.com/Microsoft/ApplicationInsights-dotnet
+      commit: 22c9295f8fb7f35d944bc7ce1f9b83c6bf9bc6a1
+    id: Sum
+    path: src/ApplicationInsights-dotnet/src/Core/Managed/Shared/DataContracts/MetricTelemetry.cs
+    startLine: 115
+  assemblies:
+  - Microsoft.ApplicationInsights
+  namespace: Microsoft.ApplicationInsights.DataContracts
+  summary: "\nGets or sets sum of the values of the metric samples.\n"
+  example: []
+  syntax:
+    content: public double Sum { get; set; }
+    content.vb: Public Property Sum As Double
+    parameters: []
+    return:
+      type: System.Double
+  overload: Microsoft.ApplicationInsights.DataContracts.MetricTelemetry.Sum*
   modifiers.csharp:
   - public
   - get
@@ -352,10 +469,10 @@ items:
       path: src/Core/Managed/Shared/DataContracts/MetricTelemetry.cs
       branch: master
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
-      commit: 309ff76563b7db90cb26c049f9c671c5a61fb8dd
+      commit: 22c9295f8fb7f35d944bc7ce1f9b83c6bf9bc6a1
     id: Count
     path: src/ApplicationInsights-dotnet/src/Core/Managed/Shared/DataContracts/MetricTelemetry.cs
-    startLine: 83
+    startLine: 124
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.DataContracts
@@ -390,10 +507,10 @@ items:
       path: src/Core/Managed/Shared/DataContracts/MetricTelemetry.cs
       branch: master
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
-      commit: 309ff76563b7db90cb26c049f9c671c5a61fb8dd
+      commit: 22c9295f8fb7f35d944bc7ce1f9b83c6bf9bc6a1
     id: Min
     path: src/ApplicationInsights-dotnet/src/Core/Managed/Shared/DataContracts/MetricTelemetry.cs
-    startLine: 100
+    startLine: 133
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.DataContracts
@@ -428,10 +545,10 @@ items:
       path: src/Core/Managed/Shared/DataContracts/MetricTelemetry.cs
       branch: master
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
-      commit: 309ff76563b7db90cb26c049f9c671c5a61fb8dd
+      commit: 22c9295f8fb7f35d944bc7ce1f9b83c6bf9bc6a1
     id: Max
     path: src/ApplicationInsights-dotnet/src/Core/Managed/Shared/DataContracts/MetricTelemetry.cs
-    startLine: 117
+    startLine: 142
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.DataContracts
@@ -466,10 +583,10 @@ items:
       path: src/Core/Managed/Shared/DataContracts/MetricTelemetry.cs
       branch: master
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
-      commit: 309ff76563b7db90cb26c049f9c671c5a61fb8dd
+      commit: 22c9295f8fb7f35d944bc7ce1f9b83c6bf9bc6a1
     id: StandardDeviation
     path: src/ApplicationInsights-dotnet/src/Core/Managed/Shared/DataContracts/MetricTelemetry.cs
-    startLine: 134
+    startLine: 151
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.DataContracts
@@ -504,10 +621,10 @@ items:
       path: src/Core/Managed/Shared/DataContracts/MetricTelemetry.cs
       branch: master
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
-      commit: 309ff76563b7db90cb26c049f9c671c5a61fb8dd
+      commit: 22c9295f8fb7f35d944bc7ce1f9b83c6bf9bc6a1
     id: Properties
     path: src/ApplicationInsights-dotnet/src/Core/Managed/Shared/DataContracts/MetricTelemetry.cs
-    startLine: 151
+    startLine: 160
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.DataContracts
@@ -545,10 +662,10 @@ items:
       path: src/Core/Managed/Shared/DataContracts/MetricTelemetry.cs
       branch: master
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
-      commit: 309ff76563b7db90cb26c049f9c671c5a61fb8dd
+      commit: 22c9295f8fb7f35d944bc7ce1f9b83c6bf9bc6a1
     id: Microsoft.ApplicationInsights.Channel.ITelemetry.Sanitize
     path: src/ApplicationInsights-dotnet/src/Core/Managed/Shared/DataContracts/MetricTelemetry.cs
-    startLine: 159
+    startLine: 168
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.DataContracts
@@ -910,6 +1027,13 @@ references:
   name: Double
   nameWithType: Double
   fullName: System.Double
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
 - uid: Microsoft.ApplicationInsights.DataContracts.MetricTelemetry.Timestamp*
   commentId: Overload:Microsoft.ApplicationInsights.DataContracts.MetricTelemetry.Timestamp
   isExternal: false
@@ -975,6 +1099,12 @@ references:
   name: Value
   nameWithType: MetricTelemetry.Value
   fullName: Microsoft.ApplicationInsights.DataContracts.MetricTelemetry.Value
+- uid: Microsoft.ApplicationInsights.DataContracts.MetricTelemetry.Sum*
+  commentId: Overload:Microsoft.ApplicationInsights.DataContracts.MetricTelemetry.Sum
+  isExternal: false
+  name: Sum
+  nameWithType: MetricTelemetry.Sum
+  fullName: Microsoft.ApplicationInsights.DataContracts.MetricTelemetry.Sum
 - uid: Microsoft.ApplicationInsights.DataContracts.MetricTelemetry.Count*
   commentId: Overload:Microsoft.ApplicationInsights.DataContracts.MetricTelemetry.Count
   isExternal: false
