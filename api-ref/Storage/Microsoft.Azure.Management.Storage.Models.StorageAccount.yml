@@ -36,7 +36,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: StorageAccount
     path: src/azure-sdk-for-net/src/ResourceManagement/Storage/Microsoft.Azure.Management.Storage/Generated/Models/StorageAccount.cs
-    startLine: 21
+    startLine: 23
   assemblies:
   - Microsoft.Azure.Management.Storage
   namespace: Microsoft.Azure.Management.Storage.Models
@@ -90,7 +90,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: .ctor
     path: src/azure-sdk-for-net/src/ResourceManagement/Storage/Microsoft.Azure.Management.Storage/Generated/Models/StorageAccount.cs
-    startLine: 27
+    startLine: 29
   assemblies:
   - Microsoft.Azure.Management.Storage
   namespace: Microsoft.Azure.Management.Storage.Models
@@ -122,7 +122,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: .ctor
     path: src/azure-sdk-for-net/src/ResourceManagement/Storage/Microsoft.Azure.Management.Storage/Generated/Models/StorageAccount.cs
-    startLine: 34
+    startLine: 84
   assemblies:
   - Microsoft.Azure.Management.Storage
   namespace: Microsoft.Azure.Management.Storage.Models
@@ -134,42 +134,133 @@ items:
     parameters:
     - id: id
       type: System.String
+      description: Resource Id
     - id: name
       type: System.String
+      description: Resource name
     - id: type
       type: System.String
+      description: Resource type
     - id: location
       type: System.String
+      description: Resource location
     - id: tags
       type: System.Collections.Generic.IDictionary{System.String,System.String}
+      description: >-
+        Tags assigned to a resource; can be used for
+
+        viewing and grouping a resource (across resource groups).
     - id: sku
       type: Microsoft.Azure.Management.Storage.Models.Sku
+      description: Gets the SKU.
     - id: kind
       type: System.Nullable{Microsoft.Azure.Management.Storage.Models.Kind}
+      description: >-
+        Gets the Kind. Possible values include:
+
+        'Storage', 'BlobStorage'
     - id: provisioningState
       type: System.Nullable{Microsoft.Azure.Management.Storage.Models.ProvisioningState}
+      description: >-
+        Gets the status of the storage
+
+        account at the time the operation was called. Possible values
+
+        include: 'Creating', 'ResolvingDNS', 'Succeeded'
     - id: primaryEndpoints
       type: Microsoft.Azure.Management.Storage.Models.Endpoints
+      description: >-
+        Gets the URLs that are used to
+
+        perform a retrieval of a public blob, queue, or table object. Note
+
+        that Standard_ZRS and Premium_LRS accounts only return the blob
+
+        endpoint.
     - id: primaryLocation
       type: System.String
+      description: >-
+        Gets the location of the primary data
+
+        center for the storage account.
     - id: statusOfPrimary
       type: System.Nullable{Microsoft.Azure.Management.Storage.Models.AccountStatus}
+      description: >-
+        Gets the status indicating whether
+
+        the primary location of the storage account is available or
+
+        unavailable. Possible values include: 'available',
+
+        'unavailable'
     - id: lastGeoFailoverTime
       type: System.Nullable{System.DateTime}
+      description: >-
+        Gets the timestamp of the most
+
+        recent instance of a failover to the secondary location. Only the
+
+        most recent timestamp is retained. This element is not returned if
+
+        there has never been a failover instance. Only available if the
+
+        accountType is Standard_GRS or Standard_RAGRS.
     - id: secondaryLocation
       type: System.String
+      description: >-
+        Gets the location of the
+
+        geo-replicated secondary for the storage account. Only available if
+
+        the accountType is Standard_GRS or Standard_RAGRS.
     - id: statusOfSecondary
       type: System.Nullable{Microsoft.Azure.Management.Storage.Models.AccountStatus}
+      description: >-
+        Gets the status indicating whether
+
+        the secondary location of the storage account is available or
+
+        unavailable. Only available if the SKU name is Standard_GRS or
+
+        Standard_RAGRS. Possible values include: 'available',
+
+        'unavailable'
     - id: creationTime
       type: System.Nullable{System.DateTime}
+      description: >-
+        Gets the creation date and time of the
+
+        storage account in UTC.
     - id: customDomain
       type: Microsoft.Azure.Management.Storage.Models.CustomDomain
+      description: >-
+        Gets the custom domain the user assigned
+
+        to this storage account.
     - id: secondaryEndpoints
       type: Microsoft.Azure.Management.Storage.Models.Endpoints
+      description: >-
+        Gets the URLs that are used to
+
+        perform a retrieval of a public blob, queue, or table object from
+
+        the secondary location of the storage account. Only available if
+
+        the SKU name is Standard_RAGRS.
     - id: encryption
       type: Microsoft.Azure.Management.Storage.Models.Encryption
+      description: >-
+        Gets the encryption settings on the
+
+        account. If unspecified, the account is unencrypted.
     - id: accessTier
       type: System.Nullable{Microsoft.Azure.Management.Storage.Models.AccessTier}
+      description: >-
+        Required for storage accounts where kind =
+
+        BlobStorage. The access tier used for billing. Possible values
+
+        include: 'Hot', 'Cool'
   overload: Microsoft.Azure.Management.Storage.Models.StorageAccount.#ctor*
   nameWithType.vb: StorageAccount.StorageAccount(String, String, String, String, IDictionary(Of String, String), Sku, Nullable(Of Kind), Nullable(Of ProvisioningState), Endpoints, String, Nullable(Of AccountStatus), Nullable(Of DateTime), String, Nullable(Of AccountStatus), Nullable(Of DateTime), CustomDomain, Endpoints, Encryption, Nullable(Of AccessTier))
   modifiers.csharp:
@@ -196,7 +287,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: Sku
     path: src/azure-sdk-for-net/src/ResourceManagement/Storage/Microsoft.Azure.Management.Storage/Generated/Models/StorageAccount.cs
-    startLine: 56
+    startLine: 106
   assemblies:
   - Microsoft.Azure.Management.Storage
   namespace: Microsoft.Azure.Management.Storage.Models
@@ -206,11 +297,11 @@ items:
     content: >-
       [JsonProperty(PropertyName = "sku")]
 
-      public Sku Sku { get; }
+      public Sku Sku { get; protected set; }
     content.vb: >-
       <JsonProperty(PropertyName:="sku")>
 
-      Public ReadOnly Property Sku As Sku
+      Public Property Sku As Sku
     parameters: []
     return:
       type: Microsoft.Azure.Management.Storage.Models.Sku
@@ -226,9 +317,11 @@ items:
   modifiers.csharp:
   - public
   - get
+  - protected set
   modifiers.vb:
   - Public
-  - ReadOnly
+  - Get
+  - Protected Set
 - uid: Microsoft.Azure.Management.Storage.Models.StorageAccount.Kind
   commentId: P:Microsoft.Azure.Management.Storage.Models.StorageAccount.Kind
   id: Kind
@@ -247,7 +340,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: Kind
     path: src/azure-sdk-for-net/src/ResourceManagement/Storage/Microsoft.Azure.Management.Storage/Generated/Models/StorageAccount.cs
-    startLine: 62
+    startLine: 112
   assemblies:
   - Microsoft.Azure.Management.Storage
   namespace: Microsoft.Azure.Management.Storage.Models
@@ -257,11 +350,11 @@ items:
     content: >-
       [JsonProperty(PropertyName = "kind")]
 
-      public Kind? Kind { get; }
+      public Kind? Kind { get; protected set; }
     content.vb: >-
       <JsonProperty(PropertyName:="kind")>
 
-      Public ReadOnly Property Kind As Kind?
+      Public Property Kind As Kind?
     parameters: []
     return:
       type: System.Nullable{Microsoft.Azure.Management.Storage.Models.Kind}
@@ -277,9 +370,11 @@ items:
   modifiers.csharp:
   - public
   - get
+  - protected set
   modifiers.vb:
   - Public
-  - ReadOnly
+  - Get
+  - Protected Set
 - uid: Microsoft.Azure.Management.Storage.Models.StorageAccount.ProvisioningState
   commentId: P:Microsoft.Azure.Management.Storage.Models.StorageAccount.ProvisioningState
   id: ProvisioningState
@@ -298,7 +393,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: ProvisioningState
     path: src/azure-sdk-for-net/src/ResourceManagement/Storage/Microsoft.Azure.Management.Storage/Generated/Models/StorageAccount.cs
-    startLine: 70
+    startLine: 120
   assemblies:
   - Microsoft.Azure.Management.Storage
   namespace: Microsoft.Azure.Management.Storage.Models
@@ -308,11 +403,11 @@ items:
     content: >-
       [JsonProperty(PropertyName = "properties.provisioningState")]
 
-      public ProvisioningState? ProvisioningState { get; }
+      public ProvisioningState? ProvisioningState { get; protected set; }
     content.vb: >-
       <JsonProperty(PropertyName:="properties.provisioningState")>
 
-      Public ReadOnly Property ProvisioningState As ProvisioningState?
+      Public Property ProvisioningState As ProvisioningState?
     parameters: []
     return:
       type: System.Nullable{Microsoft.Azure.Management.Storage.Models.ProvisioningState}
@@ -328,9 +423,11 @@ items:
   modifiers.csharp:
   - public
   - get
+  - protected set
   modifiers.vb:
   - Public
-  - ReadOnly
+  - Get
+  - Protected Set
 - uid: Microsoft.Azure.Management.Storage.Models.StorageAccount.PrimaryEndpoints
   commentId: P:Microsoft.Azure.Management.Storage.Models.StorageAccount.PrimaryEndpoints
   id: PrimaryEndpoints
@@ -349,7 +446,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: PrimaryEndpoints
     path: src/azure-sdk-for-net/src/ResourceManagement/Storage/Microsoft.Azure.Management.Storage/Generated/Models/StorageAccount.cs
-    startLine: 78
+    startLine: 128
   assemblies:
   - Microsoft.Azure.Management.Storage
   namespace: Microsoft.Azure.Management.Storage.Models
@@ -359,11 +456,11 @@ items:
     content: >-
       [JsonProperty(PropertyName = "properties.primaryEndpoints")]
 
-      public Endpoints PrimaryEndpoints { get; }
+      public Endpoints PrimaryEndpoints { get; protected set; }
     content.vb: >-
       <JsonProperty(PropertyName:="properties.primaryEndpoints")>
 
-      Public ReadOnly Property PrimaryEndpoints As Endpoints
+      Public Property PrimaryEndpoints As Endpoints
     parameters: []
     return:
       type: Microsoft.Azure.Management.Storage.Models.Endpoints
@@ -379,9 +476,11 @@ items:
   modifiers.csharp:
   - public
   - get
+  - protected set
   modifiers.vb:
   - Public
-  - ReadOnly
+  - Get
+  - Protected Set
 - uid: Microsoft.Azure.Management.Storage.Models.StorageAccount.PrimaryLocation
   commentId: P:Microsoft.Azure.Management.Storage.Models.StorageAccount.PrimaryLocation
   id: PrimaryLocation
@@ -400,7 +499,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: PrimaryLocation
     path: src/azure-sdk-for-net/src/ResourceManagement/Storage/Microsoft.Azure.Management.Storage/Generated/Models/StorageAccount.cs
-    startLine: 85
+    startLine: 135
   assemblies:
   - Microsoft.Azure.Management.Storage
   namespace: Microsoft.Azure.Management.Storage.Models
@@ -410,11 +509,11 @@ items:
     content: >-
       [JsonProperty(PropertyName = "properties.primaryLocation")]
 
-      public string PrimaryLocation { get; }
+      public string PrimaryLocation { get; protected set; }
     content.vb: >-
       <JsonProperty(PropertyName:="properties.primaryLocation")>
 
-      Public ReadOnly Property PrimaryLocation As String
+      Public Property PrimaryLocation As String
     parameters: []
     return:
       type: System.String
@@ -430,9 +529,11 @@ items:
   modifiers.csharp:
   - public
   - get
+  - protected set
   modifiers.vb:
   - Public
-  - ReadOnly
+  - Get
+  - Protected Set
 - uid: Microsoft.Azure.Management.Storage.Models.StorageAccount.StatusOfPrimary
   commentId: P:Microsoft.Azure.Management.Storage.Models.StorageAccount.StatusOfPrimary
   id: StatusOfPrimary
@@ -451,21 +552,21 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: StatusOfPrimary
     path: src/azure-sdk-for-net/src/ResourceManagement/Storage/Microsoft.Azure.Management.Storage/Generated/Models/StorageAccount.cs
-    startLine: 93
+    startLine: 143
   assemblies:
   - Microsoft.Azure.Management.Storage
   namespace: Microsoft.Azure.Management.Storage.Models
-  summary: "\nGets the status indicating whether the primary location of the\nstorage account is available or unavailable. Possible values\ninclude: 'Available', 'Unavailable'\n"
+  summary: "\nGets the status indicating whether the primary location of the\nstorage account is available or unavailable. Possible values\ninclude: 'available', 'unavailable'\n"
   example: []
   syntax:
     content: >-
       [JsonProperty(PropertyName = "properties.statusOfPrimary")]
 
-      public AccountStatus? StatusOfPrimary { get; }
+      public AccountStatus? StatusOfPrimary { get; protected set; }
     content.vb: >-
       <JsonProperty(PropertyName:="properties.statusOfPrimary")>
 
-      Public ReadOnly Property StatusOfPrimary As AccountStatus?
+      Public Property StatusOfPrimary As AccountStatus?
     parameters: []
     return:
       type: System.Nullable{Microsoft.Azure.Management.Storage.Models.AccountStatus}
@@ -481,9 +582,11 @@ items:
   modifiers.csharp:
   - public
   - get
+  - protected set
   modifiers.vb:
   - Public
-  - ReadOnly
+  - Get
+  - Protected Set
 - uid: Microsoft.Azure.Management.Storage.Models.StorageAccount.LastGeoFailoverTime
   commentId: P:Microsoft.Azure.Management.Storage.Models.StorageAccount.LastGeoFailoverTime
   id: LastGeoFailoverTime
@@ -502,21 +605,21 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: LastGeoFailoverTime
     path: src/azure-sdk-for-net/src/ResourceManagement/Storage/Microsoft.Azure.Management.Storage/Generated/Models/StorageAccount.cs
-    startLine: 103
+    startLine: 153
   assemblies:
   - Microsoft.Azure.Management.Storage
   namespace: Microsoft.Azure.Management.Storage.Models
-  summary: "\nGets the timestamp of the most recent instance of a failover to\nthe secondary location. Only the most recent timestamp is\nretained. This element is not returned if there has never been a\nfailover instance. Only available if the accountType is\nStandard_GRS or Standard_RAGRS.\n"
+  summary: "\nGets the timestamp of the most recent instance of a failover to the\nsecondary location. Only the most recent timestamp is retained.\nThis element is not returned if there has never been a failover\ninstance. Only available if the accountType is Standard_GRS or\nStandard_RAGRS.\n"
   example: []
   syntax:
     content: >-
       [JsonProperty(PropertyName = "properties.lastGeoFailoverTime")]
 
-      public DateTime? LastGeoFailoverTime { get; }
+      public DateTime? LastGeoFailoverTime { get; protected set; }
     content.vb: >-
       <JsonProperty(PropertyName:="properties.lastGeoFailoverTime")>
 
-      Public ReadOnly Property LastGeoFailoverTime As Date?
+      Public Property LastGeoFailoverTime As Date?
     parameters: []
     return:
       type: System.Nullable{System.DateTime}
@@ -532,9 +635,11 @@ items:
   modifiers.csharp:
   - public
   - get
+  - protected set
   modifiers.vb:
   - Public
-  - ReadOnly
+  - Get
+  - Protected Set
 - uid: Microsoft.Azure.Management.Storage.Models.StorageAccount.SecondaryLocation
   commentId: P:Microsoft.Azure.Management.Storage.Models.StorageAccount.SecondaryLocation
   id: SecondaryLocation
@@ -553,7 +658,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: SecondaryLocation
     path: src/azure-sdk-for-net/src/ResourceManagement/Storage/Microsoft.Azure.Management.Storage/Generated/Models/StorageAccount.cs
-    startLine: 111
+    startLine: 161
   assemblies:
   - Microsoft.Azure.Management.Storage
   namespace: Microsoft.Azure.Management.Storage.Models
@@ -563,11 +668,11 @@ items:
     content: >-
       [JsonProperty(PropertyName = "properties.secondaryLocation")]
 
-      public string SecondaryLocation { get; }
+      public string SecondaryLocation { get; protected set; }
     content.vb: >-
       <JsonProperty(PropertyName:="properties.secondaryLocation")>
 
-      Public ReadOnly Property SecondaryLocation As String
+      Public Property SecondaryLocation As String
     parameters: []
     return:
       type: System.String
@@ -583,9 +688,11 @@ items:
   modifiers.csharp:
   - public
   - get
+  - protected set
   modifiers.vb:
   - Public
-  - ReadOnly
+  - Get
+  - Protected Set
 - uid: Microsoft.Azure.Management.Storage.Models.StorageAccount.StatusOfSecondary
   commentId: P:Microsoft.Azure.Management.Storage.Models.StorageAccount.StatusOfSecondary
   id: StatusOfSecondary
@@ -604,21 +711,21 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: StatusOfSecondary
     path: src/azure-sdk-for-net/src/ResourceManagement/Storage/Microsoft.Azure.Management.Storage/Generated/Models/StorageAccount.cs
-    startLine: 120
+    startLine: 170
   assemblies:
   - Microsoft.Azure.Management.Storage
   namespace: Microsoft.Azure.Management.Storage.Models
-  summary: "\nGets the status indicating whether the secondary location of the\nstorage account is available or unavailable. Only available if\nthe SKU name is Standard_GRS or Standard_RAGRS. Possible values\ninclude: 'Available', 'Unavailable'\n"
+  summary: "\nGets the status indicating whether the secondary location of the\nstorage account is available or unavailable. Only available if the\nSKU name is Standard_GRS or Standard_RAGRS. Possible values\ninclude: 'available', 'unavailable'\n"
   example: []
   syntax:
     content: >-
       [JsonProperty(PropertyName = "properties.statusOfSecondary")]
 
-      public AccountStatus? StatusOfSecondary { get; }
+      public AccountStatus? StatusOfSecondary { get; protected set; }
     content.vb: >-
       <JsonProperty(PropertyName:="properties.statusOfSecondary")>
 
-      Public ReadOnly Property StatusOfSecondary As AccountStatus?
+      Public Property StatusOfSecondary As AccountStatus?
     parameters: []
     return:
       type: System.Nullable{Microsoft.Azure.Management.Storage.Models.AccountStatus}
@@ -634,9 +741,11 @@ items:
   modifiers.csharp:
   - public
   - get
+  - protected set
   modifiers.vb:
   - Public
-  - ReadOnly
+  - Get
+  - Protected Set
 - uid: Microsoft.Azure.Management.Storage.Models.StorageAccount.CreationTime
   commentId: P:Microsoft.Azure.Management.Storage.Models.StorageAccount.CreationTime
   id: CreationTime
@@ -655,7 +764,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: CreationTime
     path: src/azure-sdk-for-net/src/ResourceManagement/Storage/Microsoft.Azure.Management.Storage/Generated/Models/StorageAccount.cs
-    startLine: 126
+    startLine: 176
   assemblies:
   - Microsoft.Azure.Management.Storage
   namespace: Microsoft.Azure.Management.Storage.Models
@@ -665,11 +774,11 @@ items:
     content: >-
       [JsonProperty(PropertyName = "properties.creationTime")]
 
-      public DateTime? CreationTime { get; }
+      public DateTime? CreationTime { get; protected set; }
     content.vb: >-
       <JsonProperty(PropertyName:="properties.creationTime")>
 
-      Public ReadOnly Property CreationTime As Date?
+      Public Property CreationTime As Date?
     parameters: []
     return:
       type: System.Nullable{System.DateTime}
@@ -685,9 +794,11 @@ items:
   modifiers.csharp:
   - public
   - get
+  - protected set
   modifiers.vb:
   - Public
-  - ReadOnly
+  - Get
+  - Protected Set
 - uid: Microsoft.Azure.Management.Storage.Models.StorageAccount.CustomDomain
   commentId: P:Microsoft.Azure.Management.Storage.Models.StorageAccount.CustomDomain
   id: CustomDomain
@@ -706,7 +817,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: CustomDomain
     path: src/azure-sdk-for-net/src/ResourceManagement/Storage/Microsoft.Azure.Management.Storage/Generated/Models/StorageAccount.cs
-    startLine: 132
+    startLine: 182
   assemblies:
   - Microsoft.Azure.Management.Storage
   namespace: Microsoft.Azure.Management.Storage.Models
@@ -716,11 +827,11 @@ items:
     content: >-
       [JsonProperty(PropertyName = "properties.customDomain")]
 
-      public CustomDomain CustomDomain { get; }
+      public CustomDomain CustomDomain { get; protected set; }
     content.vb: >-
       <JsonProperty(PropertyName:="properties.customDomain")>
 
-      Public ReadOnly Property CustomDomain As CustomDomain
+      Public Property CustomDomain As CustomDomain
     parameters: []
     return:
       type: Microsoft.Azure.Management.Storage.Models.CustomDomain
@@ -736,9 +847,11 @@ items:
   modifiers.csharp:
   - public
   - get
+  - protected set
   modifiers.vb:
   - Public
-  - ReadOnly
+  - Get
+  - Protected Set
 - uid: Microsoft.Azure.Management.Storage.Models.StorageAccount.SecondaryEndpoints
   commentId: P:Microsoft.Azure.Management.Storage.Models.StorageAccount.SecondaryEndpoints
   id: SecondaryEndpoints
@@ -757,7 +870,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: SecondaryEndpoints
     path: src/azure-sdk-for-net/src/ResourceManagement/Storage/Microsoft.Azure.Management.Storage/Generated/Models/StorageAccount.cs
-    startLine: 140
+    startLine: 190
   assemblies:
   - Microsoft.Azure.Management.Storage
   namespace: Microsoft.Azure.Management.Storage.Models
@@ -767,11 +880,11 @@ items:
     content: >-
       [JsonProperty(PropertyName = "properties.secondaryEndpoints")]
 
-      public Endpoints SecondaryEndpoints { get; }
+      public Endpoints SecondaryEndpoints { get; protected set; }
     content.vb: >-
       <JsonProperty(PropertyName:="properties.secondaryEndpoints")>
 
-      Public ReadOnly Property SecondaryEndpoints As Endpoints
+      Public Property SecondaryEndpoints As Endpoints
     parameters: []
     return:
       type: Microsoft.Azure.Management.Storage.Models.Endpoints
@@ -787,9 +900,11 @@ items:
   modifiers.csharp:
   - public
   - get
+  - protected set
   modifiers.vb:
   - Public
-  - ReadOnly
+  - Get
+  - Protected Set
 - uid: Microsoft.Azure.Management.Storage.Models.StorageAccount.Encryption
   commentId: P:Microsoft.Azure.Management.Storage.Models.StorageAccount.Encryption
   id: Encryption
@@ -808,7 +923,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: Encryption
     path: src/azure-sdk-for-net/src/ResourceManagement/Storage/Microsoft.Azure.Management.Storage/Generated/Models/StorageAccount.cs
-    startLine: 147
+    startLine: 197
   assemblies:
   - Microsoft.Azure.Management.Storage
   namespace: Microsoft.Azure.Management.Storage.Models
@@ -818,11 +933,11 @@ items:
     content: >-
       [JsonProperty(PropertyName = "properties.encryption")]
 
-      public Encryption Encryption { get; }
+      public Encryption Encryption { get; protected set; }
     content.vb: >-
       <JsonProperty(PropertyName:="properties.encryption")>
 
-      Public ReadOnly Property Encryption As Encryption
+      Public Property Encryption As Encryption
     parameters: []
     return:
       type: Microsoft.Azure.Management.Storage.Models.Encryption
@@ -838,9 +953,11 @@ items:
   modifiers.csharp:
   - public
   - get
+  - protected set
   modifiers.vb:
   - Public
-  - ReadOnly
+  - Get
+  - Protected Set
 - uid: Microsoft.Azure.Management.Storage.Models.StorageAccount.AccessTier
   commentId: P:Microsoft.Azure.Management.Storage.Models.StorageAccount.AccessTier
   id: AccessTier
@@ -859,21 +976,21 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: AccessTier
     path: src/azure-sdk-for-net/src/ResourceManagement/Storage/Microsoft.Azure.Management.Storage/Generated/Models/StorageAccount.cs
-    startLine: 154
+    startLine: 205
   assemblies:
   - Microsoft.Azure.Management.Storage
   namespace: Microsoft.Azure.Management.Storage.Models
-  summary: "\nRequired for storage accounts where kind = BlobStorage. The access\ntier used for billing. Possible values include: 'Hot', 'Cool'\n"
+  summary: "\nGets required for storage accounts where kind = BlobStorage. The\naccess tier used for billing. Possible values include: 'Hot',\n'Cool'\n"
   example: []
   syntax:
     content: >-
       [JsonProperty(PropertyName = "properties.accessTier")]
 
-      public AccessTier? AccessTier { get; }
+      public AccessTier? AccessTier { get; protected set; }
     content.vb: >-
       <JsonProperty(PropertyName:="properties.accessTier")>
 
-      Public ReadOnly Property AccessTier As AccessTier?
+      Public Property AccessTier As AccessTier?
     parameters: []
     return:
       type: System.Nullable{Microsoft.Azure.Management.Storage.Models.AccessTier}
@@ -889,9 +1006,11 @@ items:
   modifiers.csharp:
   - public
   - get
+  - protected set
   modifiers.vb:
   - Public
-  - ReadOnly
+  - Get
+  - Protected Set
 - uid: Microsoft.Azure.Management.Storage.Models.StorageAccount.Validate
   commentId: M:Microsoft.Azure.Management.Storage.Models.StorageAccount.Validate
   id: Validate
@@ -910,16 +1029,20 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: Validate
     path: src/azure-sdk-for-net/src/ResourceManagement/Storage/Microsoft.Azure.Management.Storage/Generated/Models/StorageAccount.cs
-    startLine: 160
+    startLine: 214
   assemblies:
   - Microsoft.Azure.Management.Storage
   namespace: Microsoft.Azure.Management.Storage.Models
-  summary: "\nValidate the object. Throws ValidationException if validation fails.\n"
+  summary: "\nValidate the object.\n"
   example: []
   syntax:
     content: public virtual void Validate()
     content.vb: Public Overridable Sub Validate
   overload: Microsoft.Azure.Management.Storage.Models.StorageAccount.Validate*
+  exceptions:
+  - type: Microsoft.Rest.ValidationException
+    commentId: T:Microsoft.Rest.ValidationException
+    description: "\nThrown if validation fails\n"
   modifiers.csharp:
   - public
   - virtual
@@ -1779,3 +1902,5 @@ references:
   name: Validate
   nameWithType: StorageAccount.Validate
   fullName: Microsoft.Azure.Management.Storage.Models.StorageAccount.Validate
+- uid: Microsoft.Rest.ValidationException
+  commentId: T:Microsoft.Rest.ValidationException
