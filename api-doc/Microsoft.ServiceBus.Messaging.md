@@ -3,4 +3,4 @@ uid: Microsoft.ServiceBus.Messaging
 summary: *content
 ---
 
-The Microsoft.ServiceBus.Messaging namespace contains classes that provide reliable message queuing and a durable publish/subscribe mechanism on Azure Service Bus.
+The Microsoft.ServiceBus.Messaging namespace contains classes that provide reliable message queuing and a durable publish-subscribe mechanism on Azure Service Bus.
