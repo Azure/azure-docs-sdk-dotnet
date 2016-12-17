@@ -35,11 +35,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: Endpoint
     path: src/azure-sdk-for-net/src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/Models/Endpoint.cs
-    startLine: 19
+    startLine: 26
   assemblies:
   - Microsoft.Azure.Management.Cdn
   namespace: Microsoft.Azure.Management.Cdn.Models
-  summary: "\nCDN endpoint is the entity within a CDN profile containing\nconfiguration information regarding caching behaviors and origins.\nThe CDN endpoint is exposed using the URL format\n&lt;endpointname&gt;.azureedge.net by default, but custom domains can\nalso be created.\n"
+  summary: "\nCDN endpoint is the entity within a CDN profile containing\nconfiguration information such as origin, protocol, content caching and\ndelivery behavior. The CDN endpoint uses the URL format\n&lt;endpointname&gt;.azureedge.net.\n"
   example: []
   syntax:
     content: 'public class Endpoint : Resource, IResource'
@@ -89,7 +89,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: .ctor
     path: src/azure-sdk-for-net/src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/Models/Endpoint.cs
-    startLine: 25
+    startLine: 32
   assemblies:
   - Microsoft.Azure.Management.Cdn
   namespace: Microsoft.Azure.Management.Cdn.Models
@@ -121,7 +121,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: .ctor
     path: src/azure-sdk-for-net/src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/Models/Endpoint.cs
-    startLine: 72
+    startLine: 81
   assemblies:
   - Microsoft.Azure.Management.Cdn
   namespace: Microsoft.Azure.Management.Cdn.Models
@@ -137,11 +137,9 @@ items:
     - id: origins
       type: System.Collections.Generic.IList{Microsoft.Azure.Management.Cdn.Models.DeepCreatedOrigin}
       description: >-
-        The set of origins for the CDN endpoint.
+        The source of the content being delivered via
 
-        When multiple origins exist, the first origin will be used as
-
-        primary and rest will be used as failover options.
+        CDN.
     - id: id
       type: System.String
       description: Resource ID.
@@ -157,34 +155,37 @@ items:
     - id: originHostHeader
       type: System.String
       description: >-
-        The host header the CDN provider
+        The host header CDN sends along with
 
-        will send along with content requests to origins. The default
+        content requests to origin. The default value is the host name of
 
-        value is the host name of the origin.
+        the origin.
     - id: originPath
       type: System.String
-      description: The path used for origin requests.
+      description: >-
+        The path used when CDN sends request to
+
+        origin.
     - id: contentTypesToCompress
       type: System.Collections.Generic.IList{System.String}
       description: >-
-        List of content types on
+        List of content types on which
 
-        which compression will be applied. The value for the elements
-
-        should be a valid MIME type.
+        compression applies. The value should be a valid MIME type.
     - id: isCompressionEnabled
       type: System.Nullable{System.Boolean}
       description: >-
         Indicates whether content
 
-        compression is enabled. The default value is false. If
+        compression is enabled on CDN. Default value is false. If
 
-        compression is enabled, the content transferred from the CDN
+        compression is enabled, content will be served as compressed if
 
-        endpoint to the end user will be compressed. The requested
+        user requests for a compressed version. Content won't be compressed
 
-        content must be larger than 1 byte and smaller than 1 MB.
+        on CDN when requested content is smaller than 1 byte or larger than
+
+        1 MB.
     - id: isHttpAllowed
       type: System.Nullable{System.Boolean}
       description: >-
@@ -214,23 +215,27 @@ items:
       description: >-
         Customer can specify what scenario
 
-        they want this CDN endpoint to optimize. (e.g. Download, Media
+        they want this CDN endpoint to optimize, e.g. Download, Media
 
-        services, and etc.) With this information we can apply scenario
+        services. With this information we can apply scenario driven
 
-        driven optimization.
+        optimization.
     - id: geoFilters
       type: System.Collections.Generic.IList{Microsoft.Azure.Management.Cdn.Models.GeoFilter}
       description: >-
-        The list of geo filters for the CDN
+        List of rules defining user geo access
 
-        endpoint.
+        within a CDN endpoint. Each geo filter defines an acess rule to a
+
+        specified path or content, e.g. block APAC for path
+
+        /pictures/
     - id: hostName
       type: System.String
       description: >-
-        The host name of the endpoint
+        The host name of the endpoint structured as
 
-        {endpointName}.{DNSZone}
+        {endpointName}.{DNSZone}, e.g. consoto.azureedge.net
     - id: resourceState
       type: System.String
       description: >-
@@ -271,11 +276,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: OriginHostHeader
     path: src/azure-sdk-for-net/src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/Models/Endpoint.cs
-    startLine: 95
+    startLine: 103
   assemblies:
   - Microsoft.Azure.Management.Cdn
   namespace: Microsoft.Azure.Management.Cdn.Models
-  summary: "\nGets or sets the host header the CDN provider will send along with\ncontent requests to origins. The default value is the host name\nof the origin.\n"
+  summary: "\nGets or sets the host header CDN sends along with content requests\nto origin. The default value is the host name of the origin.\n"
   example: []
   syntax:
     content: >-
@@ -322,11 +327,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: OriginPath
     path: src/azure-sdk-for-net/src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/Models/Endpoint.cs
-    startLine: 101
+    startLine: 109
   assemblies:
   - Microsoft.Azure.Management.Cdn
   namespace: Microsoft.Azure.Management.Cdn.Models
-  summary: "\nGets or sets the path used for origin requests.\n"
+  summary: "\nGets or sets the path used when CDN sends request to origin.\n"
   example: []
   syntax:
     content: >-
@@ -373,11 +378,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: ContentTypesToCompress
     path: src/azure-sdk-for-net/src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/Models/Endpoint.cs
-    startLine: 108
+    startLine: 116
   assemblies:
   - Microsoft.Azure.Management.Cdn
   namespace: Microsoft.Azure.Management.Cdn.Models
-  summary: "\nGets or sets list of content types on which compression will be\napplied. The value for the elements should be a valid MIME type.\n"
+  summary: "\nGets or sets list of content types on which compression applies.\nThe value should be a valid MIME type.\n"
   example: []
   syntax:
     content: >-
@@ -424,11 +429,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: IsCompressionEnabled
     path: src/azure-sdk-for-net/src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/Models/Endpoint.cs
-    startLine: 118
+    startLine: 126
   assemblies:
   - Microsoft.Azure.Management.Cdn
   namespace: Microsoft.Azure.Management.Cdn.Models
-  summary: "\nGets or sets indicates whether content compression is enabled. The\ndefault value is false. If compression is enabled, the content\ntransferred from the CDN endpoint to the end user will be\ncompressed. The requested content must be larger than 1 byte and\nsmaller than 1 MB.\n"
+  summary: "\nGets or sets indicates whether content compression is enabled on\nCDN. Default value is false. If compression is enabled, content\nwill be served as compressed if user requests for a compressed\nversion. Content won't be compressed on CDN when requested content\nis smaller than 1 byte or larger than 1 MB.\n"
   example: []
   syntax:
     content: >-
@@ -475,7 +480,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: IsHttpAllowed
     path: src/azure-sdk-for-net/src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/Models/Endpoint.cs
-    startLine: 126
+    startLine: 134
   assemblies:
   - Microsoft.Azure.Management.Cdn
   namespace: Microsoft.Azure.Management.Cdn.Models
@@ -526,7 +531,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: IsHttpsAllowed
     path: src/azure-sdk-for-net/src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/Models/Endpoint.cs
-    startLine: 134
+    startLine: 142
   assemblies:
   - Microsoft.Azure.Management.Cdn
   namespace: Microsoft.Azure.Management.Cdn.Models
@@ -577,7 +582,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: QueryStringCachingBehavior
     path: src/azure-sdk-for-net/src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/Models/Endpoint.cs
-    startLine: 142
+    startLine: 150
   assemblies:
   - Microsoft.Azure.Management.Cdn
   namespace: Microsoft.Azure.Management.Cdn.Models
@@ -628,11 +633,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: OptimizationType
     path: src/azure-sdk-for-net/src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/Models/Endpoint.cs
-    startLine: 150
+    startLine: 158
   assemblies:
   - Microsoft.Azure.Management.Cdn
   namespace: Microsoft.Azure.Management.Cdn.Models
-  summary: "\nGets or sets customer can specify what scenario they want this CDN\nendpoint to optimize. (e.g. Download, Media services, and etc.)\nWith this information we can apply scenario driven optimization.\n"
+  summary: "\nGets or sets customer can specify what scenario they want this CDN\nendpoint to optimize, e.g. Download, Media services. With this\ninformation we can apply scenario driven optimization.\n"
   example: []
   syntax:
     content: >-
@@ -679,11 +684,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: GeoFilters
     path: src/azure-sdk-for-net/src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/Models/Endpoint.cs
-    startLine: 156
+    startLine: 166
   assemblies:
   - Microsoft.Azure.Management.Cdn
   namespace: Microsoft.Azure.Management.Cdn.Models
-  summary: "\nGets or sets the list of geo filters for the CDN endpoint.\n"
+  summary: "\nGets or sets list of rules defining user geo access within a CDN\nendpoint. Each geo filter defines an acess rule to a specified path\nor content, e.g. block APAC for path /pictures/\n"
   example: []
   syntax:
     content: >-
@@ -730,21 +735,21 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: HostName
     path: src/azure-sdk-for-net/src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/Models/Endpoint.cs
-    startLine: 162
+    startLine: 173
   assemblies:
   - Microsoft.Azure.Management.Cdn
   namespace: Microsoft.Azure.Management.Cdn.Models
-  summary: "\nGets the host name of the endpoint {endpointName}.{DNSZone}\n"
+  summary: "\nGets the host name of the endpoint structured as\n{endpointName}.{DNSZone}, e.g. consoto.azureedge.net\n"
   example: []
   syntax:
     content: >-
       [JsonProperty(PropertyName = "properties.hostName")]
 
-      public string HostName { get; }
+      public string HostName { get; protected set; }
     content.vb: >-
       <JsonProperty(PropertyName:="properties.hostName")>
 
-      Public ReadOnly Property HostName As String
+      Public Property HostName As String
     parameters: []
     return:
       type: System.String
@@ -760,9 +765,11 @@ items:
   modifiers.csharp:
   - public
   - get
+  - protected set
   modifiers.vb:
   - Public
-  - ReadOnly
+  - Get
+  - Protected Set
 - uid: Microsoft.Azure.Management.Cdn.Models.Endpoint.Origins
   commentId: P:Microsoft.Azure.Management.Cdn.Models.Endpoint.Origins
   id: Origins
@@ -781,11 +788,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: Origins
     path: src/azure-sdk-for-net/src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/Models/Endpoint.cs
-    startLine: 170
+    startLine: 179
   assemblies:
   - Microsoft.Azure.Management.Cdn
   namespace: Microsoft.Azure.Management.Cdn.Models
-  summary: "\nGets or sets the set of origins for the CDN endpoint. When\nmultiple origins exist, the first origin will be used as primary\nand rest will be used as failover options.\n"
+  summary: "\nGets or sets the source of the content being delivered via CDN.\n"
   example: []
   syntax:
     content: >-
@@ -832,7 +839,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: ResourceState
     path: src/azure-sdk-for-net/src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/Models/Endpoint.cs
-    startLine: 178
+    startLine: 187
   assemblies:
   - Microsoft.Azure.Management.Cdn
   namespace: Microsoft.Azure.Management.Cdn.Models
@@ -842,11 +849,11 @@ items:
     content: >-
       [JsonProperty(PropertyName = "properties.resourceState")]
 
-      public string ResourceState { get; }
+      public string ResourceState { get; protected set; }
     content.vb: >-
       <JsonProperty(PropertyName:="properties.resourceState")>
 
-      Public ReadOnly Property ResourceState As String
+      Public Property ResourceState As String
     parameters: []
     return:
       type: System.String
@@ -862,9 +869,11 @@ items:
   modifiers.csharp:
   - public
   - get
+  - protected set
   modifiers.vb:
   - Public
-  - ReadOnly
+  - Get
+  - Protected Set
 - uid: Microsoft.Azure.Management.Cdn.Models.Endpoint.ProvisioningState
   commentId: P:Microsoft.Azure.Management.Cdn.Models.Endpoint.ProvisioningState
   id: ProvisioningState
@@ -883,7 +892,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: ProvisioningState
     path: src/azure-sdk-for-net/src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/Models/Endpoint.cs
-    startLine: 184
+    startLine: 193
   assemblies:
   - Microsoft.Azure.Management.Cdn
   namespace: Microsoft.Azure.Management.Cdn.Models
@@ -893,11 +902,11 @@ items:
     content: >-
       [JsonProperty(PropertyName = "properties.provisioningState")]
 
-      public string ProvisioningState { get; }
+      public string ProvisioningState { get; protected set; }
     content.vb: >-
       <JsonProperty(PropertyName:="properties.provisioningState")>
 
-      Public ReadOnly Property ProvisioningState As String
+      Public Property ProvisioningState As String
     parameters: []
     return:
       type: System.String
@@ -913,9 +922,11 @@ items:
   modifiers.csharp:
   - public
   - get
+  - protected set
   modifiers.vb:
   - Public
-  - ReadOnly
+  - Get
+  - Protected Set
 - uid: Microsoft.Azure.Management.Cdn.Models.Endpoint.Validate
   commentId: M:Microsoft.Azure.Management.Cdn.Models.Endpoint.Validate
   id: Validate
@@ -934,7 +945,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: Validate
     path: src/azure-sdk-for-net/src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/Models/Endpoint.cs
-    startLine: 193
+    startLine: 202
   assemblies:
   - Microsoft.Azure.Management.Cdn
   namespace: Microsoft.Azure.Management.Cdn.Models
