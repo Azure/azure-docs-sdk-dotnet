@@ -20,7 +20,7 @@ function ProcessLastExitCode {
 ProcessLastExitCode $lastexitcode "failed to install latest docfx"
 
 # clean api_ref
-Remove-Item "api-ref\*" -Force -recurse
+Remove-Item "docs-ref-autogen\*" -Force -recurse
 
 # run docfx metadata to generate YAML metadata
 & docfx metadata

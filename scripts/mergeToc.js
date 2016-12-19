@@ -3,15 +3,15 @@
 var fs = require('fs');
 var path = require('path');
 
-// find all toc.yml and metadata files inside api-ref and api-ref-manual respectively
-var apiRefInfo = traverseApiToc("api-ref");
-var apiRefManualInfo = traverseApiToc("api-ref-manual");
+// find all toc.yml and metadata files inside docs-ref-autogen and docs-ref-manual respectively
+var apiRefInfo = traverseApiToc("docs-ref-autogen");
+var apiRefManualInfo = traverseApiToc("docs-ref-manual");
 
 // check if any metadata files has duplicated uid
 checkDuplicateUid(apiRefInfo.ymlList.concat(apiRefManualInfo.ymlList));
 
 // merge all toc.yml into one
-mergeToc(apiRefInfo.tocList.concat(apiRefManualInfo.tocList), "api-ref/toc.yml");
+mergeToc(apiRefInfo.tocList.concat(apiRefManualInfo.tocList), "docs-ref-autogen/toc.yml");
 
 function checkDuplicateUid(ymlList) {
     var record = new Set();
