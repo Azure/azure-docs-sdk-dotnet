@@ -6,10 +6,9 @@ items:
   parent: Microsoft.Azure.Management.Cdn.Models
   children:
   - Microsoft.Azure.Management.Cdn.Models.EdgeNode.#ctor
-  - Microsoft.Azure.Management.Cdn.Models.EdgeNode.#ctor(System.String,System.String,System.Collections.Generic.IList{Microsoft.Azure.Management.Cdn.Models.IpAddressGroup})
+  - Microsoft.Azure.Management.Cdn.Models.EdgeNode.#ctor(System.String,System.Collections.Generic.IList{Microsoft.Azure.Management.Cdn.Models.IpAddressGroup},System.String,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.String})
   - Microsoft.Azure.Management.Cdn.Models.EdgeNode.IpAddressGroups
-  - Microsoft.Azure.Management.Cdn.Models.EdgeNode.Name
-  - Microsoft.Azure.Management.Cdn.Models.EdgeNode.ResourceGroup
+  - Microsoft.Azure.Management.Cdn.Models.EdgeNode.Validate
   langs:
   - csharp
   - vb
@@ -24,18 +23,29 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: EdgeNode
     path: src/azure-sdk-for-net/src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/Models/EdgeNode.cs
-    startLine: 21
+    startLine: 23
   assemblies:
   - Microsoft.Azure.Management.Cdn
   namespace: Microsoft.Azure.Management.Cdn.Models
   summary: "\nEdge node of CDN service.\n"
   example: []
   syntax:
-    content: public class EdgeNode
-    content.vb: Public Class EdgeNode
+    content: 'public class EdgeNode : Resource, IResource'
+    content.vb: >-
+      Public Class EdgeNode
+          Inherits Resource
+          Implements IResource
   inheritance:
   - System.Object
+  - Microsoft.Azure.Management.Cdn.Models.Resource
+  implements:
+  - Microsoft.Rest.Azure.IResource
   inheritedMembers:
+  - Microsoft.Azure.Management.Cdn.Models.Resource.Id
+  - Microsoft.Azure.Management.Cdn.Models.Resource.Name
+  - Microsoft.Azure.Management.Cdn.Models.Resource.Type
+  - Microsoft.Azure.Management.Cdn.Models.Resource.Location
+  - Microsoft.Azure.Management.Cdn.Models.Resource.Tags
   - System.Object.ToString
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
@@ -67,7 +77,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: .ctor
     path: src/azure-sdk-for-net/src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/Models/EdgeNode.cs
-    startLine: 26
+    startLine: 29
   assemblies:
   - Microsoft.Azure.Management.Cdn
   namespace: Microsoft.Azure.Management.Cdn.Models
@@ -81,16 +91,16 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.Azure.Management.Cdn.Models.EdgeNode.#ctor(System.String,System.String,System.Collections.Generic.IList{Microsoft.Azure.Management.Cdn.Models.IpAddressGroup})
-  commentId: M:Microsoft.Azure.Management.Cdn.Models.EdgeNode.#ctor(System.String,System.String,System.Collections.Generic.IList{Microsoft.Azure.Management.Cdn.Models.IpAddressGroup})
-  id: '#ctor(System.String,System.String,System.Collections.Generic.IList{Microsoft.Azure.Management.Cdn.Models.IpAddressGroup})'
+- uid: Microsoft.Azure.Management.Cdn.Models.EdgeNode.#ctor(System.String,System.Collections.Generic.IList{Microsoft.Azure.Management.Cdn.Models.IpAddressGroup},System.String,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.String})
+  commentId: M:Microsoft.Azure.Management.Cdn.Models.EdgeNode.#ctor(System.String,System.Collections.Generic.IList{Microsoft.Azure.Management.Cdn.Models.IpAddressGroup},System.String,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.String})
+  id: '#ctor(System.String,System.Collections.Generic.IList{Microsoft.Azure.Management.Cdn.Models.IpAddressGroup},System.String,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.String})'
   parent: Microsoft.Azure.Management.Cdn.Models.EdgeNode
   langs:
   - csharp
   - vb
-  name: EdgeNode(String, String, IList<IpAddressGroup>)
-  nameWithType: EdgeNode.EdgeNode(String, String, IList<IpAddressGroup>)
-  fullName: Microsoft.Azure.Management.Cdn.Models.EdgeNode.EdgeNode(System.String, System.String, System.Collections.Generic.IList<Microsoft.Azure.Management.Cdn.Models.IpAddressGroup>)
+  name: EdgeNode(String, IList<IpAddressGroup>, String, String, String, IDictionary<String, String>)
+  nameWithType: EdgeNode.EdgeNode(String, IList<IpAddressGroup>, String, String, String, IDictionary<String, String>)
+  fullName: Microsoft.Azure.Management.Cdn.Models.EdgeNode.EdgeNode(System.String, System.Collections.Generic.IList<Microsoft.Azure.Management.Cdn.Models.IpAddressGroup>, System.String, System.String, System.String, System.Collections.Generic.IDictionary<System.String, System.String>)
   type: Constructor
   source:
     remote:
@@ -99,141 +109,42 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: .ctor
     path: src/azure-sdk-for-net/src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/Models/EdgeNode.cs
-    startLine: 36
+    startLine: 40
   assemblies:
   - Microsoft.Azure.Management.Cdn
   namespace: Microsoft.Azure.Management.Cdn.Models
   summary: "\nInitializes a new instance of the EdgeNode class.\n"
   example: []
   syntax:
-    content: public EdgeNode(string name = null, string resourceGroup = null, IList<IpAddressGroup> ipAddressGroups = null)
-    content.vb: Public Sub New(name As String = Nothing, resourceGroup As String = Nothing, ipAddressGroups As IList(Of IpAddressGroup) = Nothing)
+    content: public EdgeNode(string location, IList<IpAddressGroup> ipAddressGroups, string id = null, string name = null, string type = null, IDictionary<string, string> tags = null)
+    content.vb: Public Sub New(location As String, ipAddressGroups As IList(Of IpAddressGroup), id As String = Nothing, name As String = Nothing, type As String = Nothing, tags As IDictionary(Of String, String) = Nothing)
     parameters:
-    - id: name
+    - id: location
       type: System.String
-      description: >-
-        Ip adress group that contains Ipv4 and Ipv6
-
-        addresses
-    - id: resourceGroup
-      type: System.String
-      description: >-
-        The resource group of the edge
-
-        node.
+      description: Resource location.
     - id: ipAddressGroups
       type: System.Collections.Generic.IList{Microsoft.Azure.Management.Cdn.Models.IpAddressGroup}
       description: List of ip address groups.
+    - id: id
+      type: System.String
+      description: Resource ID.
+    - id: name
+      type: System.String
+      description: Resource name.
+    - id: type
+      type: System.String
+      description: Resource type.
+    - id: tags
+      type: System.Collections.Generic.IDictionary{System.String,System.String}
+      description: Resource tags.
   overload: Microsoft.Azure.Management.Cdn.Models.EdgeNode.#ctor*
-  nameWithType.vb: EdgeNode.EdgeNode(String, String, IList(Of IpAddressGroup))
+  nameWithType.vb: EdgeNode.EdgeNode(String, IList(Of IpAddressGroup), String, String, String, IDictionary(Of String, String))
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Microsoft.Azure.Management.Cdn.Models.EdgeNode.EdgeNode(System.String, System.String, System.Collections.Generic.IList(Of Microsoft.Azure.Management.Cdn.Models.IpAddressGroup))
-  name.vb: EdgeNode(String, String, IList(Of IpAddressGroup))
-- uid: Microsoft.Azure.Management.Cdn.Models.EdgeNode.Name
-  commentId: P:Microsoft.Azure.Management.Cdn.Models.EdgeNode.Name
-  id: Name
-  parent: Microsoft.Azure.Management.Cdn.Models.EdgeNode
-  langs:
-  - csharp
-  - vb
-  name: Name
-  nameWithType: EdgeNode.Name
-  fullName: Microsoft.Azure.Management.Cdn.Models.EdgeNode.Name
-  type: Property
-  source:
-    remote:
-      path: src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/Models/EdgeNode.cs
-      branch: AutoRest
-      repo: https://github.com/Azure/azure-sdk-for-net.git
-    id: Name
-    path: src/azure-sdk-for-net/src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/Models/EdgeNode.cs
-    startLine: 46
-  assemblies:
-  - Microsoft.Azure.Management.Cdn
-  namespace: Microsoft.Azure.Management.Cdn.Models
-  summary: "\nGets or sets ip adress group that contains Ipv4 and Ipv6 addresses\n"
-  example: []
-  syntax:
-    content: >-
-      [JsonProperty(PropertyName = "name")]
-
-      public string Name { get; set; }
-    content.vb: >-
-      <JsonProperty(PropertyName:="name")>
-
-      Public Property Name As String
-    parameters: []
-    return:
-      type: System.String
-  overload: Microsoft.Azure.Management.Cdn.Models.EdgeNode.Name*
-  attributes:
-  - type: Newtonsoft.Json.JsonPropertyAttribute
-    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor
-    arguments: []
-    namedArguments:
-    - name: PropertyName
-      type: System.String
-      value: name
-  modifiers.csharp:
-  - public
-  - get
-  - set
-  modifiers.vb:
-  - Public
-- uid: Microsoft.Azure.Management.Cdn.Models.EdgeNode.ResourceGroup
-  commentId: P:Microsoft.Azure.Management.Cdn.Models.EdgeNode.ResourceGroup
-  id: ResourceGroup
-  parent: Microsoft.Azure.Management.Cdn.Models.EdgeNode
-  langs:
-  - csharp
-  - vb
-  name: ResourceGroup
-  nameWithType: EdgeNode.ResourceGroup
-  fullName: Microsoft.Azure.Management.Cdn.Models.EdgeNode.ResourceGroup
-  type: Property
-  source:
-    remote:
-      path: src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/Models/EdgeNode.cs
-      branch: AutoRest
-      repo: https://github.com/Azure/azure-sdk-for-net.git
-    id: ResourceGroup
-    path: src/azure-sdk-for-net/src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/Models/EdgeNode.cs
-    startLine: 52
-  assemblies:
-  - Microsoft.Azure.Management.Cdn
-  namespace: Microsoft.Azure.Management.Cdn.Models
-  summary: "\nGets or sets the resource group of the edge node.\n"
-  example: []
-  syntax:
-    content: >-
-      [JsonProperty(PropertyName = "resourceGroup")]
-
-      public string ResourceGroup { get; set; }
-    content.vb: >-
-      <JsonProperty(PropertyName:="resourceGroup")>
-
-      Public Property ResourceGroup As String
-    parameters: []
-    return:
-      type: System.String
-  overload: Microsoft.Azure.Management.Cdn.Models.EdgeNode.ResourceGroup*
-  attributes:
-  - type: Newtonsoft.Json.JsonPropertyAttribute
-    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor
-    arguments: []
-    namedArguments:
-    - name: PropertyName
-      type: System.String
-      value: resourceGroup
-  modifiers.csharp:
-  - public
-  - get
-  - set
-  modifiers.vb:
-  - Public
+  fullName.vb: Microsoft.Azure.Management.Cdn.Models.EdgeNode.EdgeNode(System.String, System.Collections.Generic.IList(Of Microsoft.Azure.Management.Cdn.Models.IpAddressGroup), System.String, System.String, System.String, System.Collections.Generic.IDictionary(Of System.String, System.String))
+  name.vb: EdgeNode(String, IList(Of IpAddressGroup), String, String, String, IDictionary(Of String, String))
 - uid: Microsoft.Azure.Management.Cdn.Models.EdgeNode.IpAddressGroups
   commentId: P:Microsoft.Azure.Management.Cdn.Models.EdgeNode.IpAddressGroups
   id: IpAddressGroups
@@ -252,7 +163,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: IpAddressGroups
     path: src/azure-sdk-for-net/src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/Models/EdgeNode.cs
-    startLine: 58
+    startLine: 49
   assemblies:
   - Microsoft.Azure.Management.Cdn
   namespace: Microsoft.Azure.Management.Cdn.Models
@@ -260,11 +171,11 @@ items:
   example: []
   syntax:
     content: >-
-      [JsonProperty(PropertyName = "ipAddressGroups")]
+      [JsonProperty(PropertyName = "properties.ipAddressGroups")]
 
       public IList<IpAddressGroup> IpAddressGroups { get; set; }
     content.vb: >-
-      <JsonProperty(PropertyName:="ipAddressGroups")>
+      <JsonProperty(PropertyName:="properties.ipAddressGroups")>
 
       Public Property IpAddressGroups As IList(Of IpAddressGroup)
     parameters: []
@@ -278,13 +189,52 @@ items:
     namedArguments:
     - name: PropertyName
       type: System.String
-      value: ipAddressGroups
+      value: properties.ipAddressGroups
   modifiers.csharp:
   - public
   - get
   - set
   modifiers.vb:
   - Public
+- uid: Microsoft.Azure.Management.Cdn.Models.EdgeNode.Validate
+  commentId: M:Microsoft.Azure.Management.Cdn.Models.EdgeNode.Validate
+  id: Validate
+  parent: Microsoft.Azure.Management.Cdn.Models.EdgeNode
+  langs:
+  - csharp
+  - vb
+  name: Validate()
+  nameWithType: EdgeNode.Validate()
+  fullName: Microsoft.Azure.Management.Cdn.Models.EdgeNode.Validate()
+  type: Method
+  source:
+    remote:
+      path: src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/Models/EdgeNode.cs
+      branch: AutoRest
+      repo: https://github.com/Azure/azure-sdk-for-net.git
+    id: Validate
+    path: src/azure-sdk-for-net/src/ResourceManagement/Cdn/Microsoft.Azure.Management.Cdn/Generated/Models/EdgeNode.cs
+    startLine: 58
+  assemblies:
+  - Microsoft.Azure.Management.Cdn
+  namespace: Microsoft.Azure.Management.Cdn.Models
+  summary: "\nValidate the object.\n"
+  example: []
+  syntax:
+    content: public override void Validate()
+    content.vb: Public Overrides Sub Validate
+  overridden: Microsoft.Azure.Management.Cdn.Models.Resource.Validate
+  overload: Microsoft.Azure.Management.Cdn.Models.EdgeNode.Validate*
+  exceptions:
+  - type: Microsoft.Rest.ValidationException
+    commentId: T:Microsoft.Rest.ValidationException
+    description: "\nThrown if validation fails\n"
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
 references:
 - uid: Microsoft.Azure.Management.Cdn.Models
   commentId: N:Microsoft.Azure.Management.Cdn.Models
@@ -299,6 +249,55 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
+- uid: Microsoft.Azure.Management.Cdn.Models.Resource
+  commentId: T:Microsoft.Azure.Management.Cdn.Models.Resource
+  parent: Microsoft.Azure.Management.Cdn.Models
+  isExternal: false
+  name: Resource
+  nameWithType: Resource
+  fullName: Microsoft.Azure.Management.Cdn.Models.Resource
+- uid: Microsoft.Rest.Azure.IResource
+  commentId: T:Microsoft.Rest.Azure.IResource
+  parent: Microsoft.Rest.Azure
+  isExternal: false
+  name: IResource
+  nameWithType: IResource
+  fullName: Microsoft.Rest.Azure.IResource
+- uid: Microsoft.Azure.Management.Cdn.Models.Resource.Id
+  commentId: P:Microsoft.Azure.Management.Cdn.Models.Resource.Id
+  parent: Microsoft.Azure.Management.Cdn.Models.Resource
+  isExternal: false
+  name: Id
+  nameWithType: Resource.Id
+  fullName: Microsoft.Azure.Management.Cdn.Models.Resource.Id
+- uid: Microsoft.Azure.Management.Cdn.Models.Resource.Name
+  commentId: P:Microsoft.Azure.Management.Cdn.Models.Resource.Name
+  parent: Microsoft.Azure.Management.Cdn.Models.Resource
+  isExternal: false
+  name: Name
+  nameWithType: Resource.Name
+  fullName: Microsoft.Azure.Management.Cdn.Models.Resource.Name
+- uid: Microsoft.Azure.Management.Cdn.Models.Resource.Type
+  commentId: P:Microsoft.Azure.Management.Cdn.Models.Resource.Type
+  parent: Microsoft.Azure.Management.Cdn.Models.Resource
+  isExternal: false
+  name: Type
+  nameWithType: Resource.Type
+  fullName: Microsoft.Azure.Management.Cdn.Models.Resource.Type
+- uid: Microsoft.Azure.Management.Cdn.Models.Resource.Location
+  commentId: P:Microsoft.Azure.Management.Cdn.Models.Resource.Location
+  parent: Microsoft.Azure.Management.Cdn.Models.Resource
+  isExternal: false
+  name: Location
+  nameWithType: Resource.Location
+  fullName: Microsoft.Azure.Management.Cdn.Models.Resource.Location
+- uid: Microsoft.Azure.Management.Cdn.Models.Resource.Tags
+  commentId: P:Microsoft.Azure.Management.Cdn.Models.Resource.Tags
+  parent: Microsoft.Azure.Management.Cdn.Models.Resource
+  isExternal: false
+  name: Tags
+  nameWithType: Resource.Tags
+  fullName: Microsoft.Azure.Management.Cdn.Models.Resource.Tags
 - uid: System.Object.ToString
   commentId: M:System.Object.ToString
   parent: System.Object
@@ -584,6 +583,12 @@ references:
   name: System
   nameWithType: System
   fullName: System
+- uid: Microsoft.Rest.Azure
+  commentId: N:Microsoft.Rest.Azure
+  isExternal: false
+  name: Microsoft.Rest.Azure
+  nameWithType: Microsoft.Rest.Azure
+  fullName: Microsoft.Rest.Azure
 - uid: Microsoft.Azure.Management.Cdn.Models.EdgeNode.#ctor*
   commentId: Overload:Microsoft.Azure.Management.Cdn.Models.EdgeNode.#ctor
   isExternal: false
@@ -639,6 +644,66 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Collections.Generic.IDictionary{System.String,System.String}
+  commentId: T:System.Collections.Generic.IDictionary{System.String,System.String}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IDictionary`2
+  name: IDictionary<String, String>
+  nameWithType: IDictionary<String, String>
+  fullName: System.Collections.Generic.IDictionary<System.String, System.String>
+  nameWithType.vb: IDictionary(Of String, String)
+  fullname.vb: System.Collections.Generic.IDictionary(Of System.String, System.String)
+  name.vb: IDictionary(Of String, String)
+  spec.csharp:
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    nameWithType: IDictionary
+    fullName: System.Collections.Generic.IDictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    nameWithType: IDictionary
+    fullName: System.Collections.Generic.IDictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Collections.Generic.IList`1
   commentId: T:System.Collections.Generic.IList`1
   isExternal: true
@@ -684,21 +749,97 @@ references:
   name: System.Collections.Generic
   nameWithType: System.Collections.Generic
   fullName: System.Collections.Generic
-- uid: Microsoft.Azure.Management.Cdn.Models.EdgeNode.Name*
-  commentId: Overload:Microsoft.Azure.Management.Cdn.Models.EdgeNode.Name
-  isExternal: false
-  name: Name
-  nameWithType: EdgeNode.Name
-  fullName: Microsoft.Azure.Management.Cdn.Models.EdgeNode.Name
-- uid: Microsoft.Azure.Management.Cdn.Models.EdgeNode.ResourceGroup*
-  commentId: Overload:Microsoft.Azure.Management.Cdn.Models.EdgeNode.ResourceGroup
-  isExternal: false
-  name: ResourceGroup
-  nameWithType: EdgeNode.ResourceGroup
-  fullName: Microsoft.Azure.Management.Cdn.Models.EdgeNode.ResourceGroup
+- uid: System.Collections.Generic.IDictionary`2
+  commentId: T:System.Collections.Generic.IDictionary`2
+  isExternal: true
+  name: IDictionary<TKey, TValue>
+  nameWithType: IDictionary<TKey, TValue>
+  fullName: System.Collections.Generic.IDictionary<TKey, TValue>
+  nameWithType.vb: IDictionary(Of TKey, TValue)
+  fullname.vb: System.Collections.Generic.IDictionary(Of TKey, TValue)
+  name.vb: IDictionary(Of TKey, TValue)
+  spec.csharp:
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    nameWithType: IDictionary
+    fullName: System.Collections.Generic.IDictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    nameWithType: IDictionary
+    fullName: System.Collections.Generic.IDictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Microsoft.Azure.Management.Cdn.Models.EdgeNode.IpAddressGroups*
   commentId: Overload:Microsoft.Azure.Management.Cdn.Models.EdgeNode.IpAddressGroups
   isExternal: false
   name: IpAddressGroups
   nameWithType: EdgeNode.IpAddressGroups
   fullName: Microsoft.Azure.Management.Cdn.Models.EdgeNode.IpAddressGroups
+- uid: Microsoft.Azure.Management.Cdn.Models.Resource.Validate
+  commentId: M:Microsoft.Azure.Management.Cdn.Models.Resource.Validate
+  parent: Microsoft.Azure.Management.Cdn.Models.Resource
+  isExternal: false
+  name: Validate()
+  nameWithType: Resource.Validate()
+  fullName: Microsoft.Azure.Management.Cdn.Models.Resource.Validate()
+  spec.csharp:
+  - uid: Microsoft.Azure.Management.Cdn.Models.Resource.Validate
+    name: Validate
+    nameWithType: Resource.Validate
+    fullName: Microsoft.Azure.Management.Cdn.Models.Resource.Validate
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.Azure.Management.Cdn.Models.Resource.Validate
+    name: Validate
+    nameWithType: Resource.Validate
+    fullName: Microsoft.Azure.Management.Cdn.Models.Resource.Validate
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Azure.Management.Cdn.Models.EdgeNode.Validate*
+  commentId: Overload:Microsoft.Azure.Management.Cdn.Models.EdgeNode.Validate
+  isExternal: false
+  name: Validate
+  nameWithType: EdgeNode.Validate
+  fullName: Microsoft.Azure.Management.Cdn.Models.EdgeNode.Validate
+- uid: Microsoft.Rest.ValidationException
+  commentId: T:Microsoft.Rest.ValidationException
