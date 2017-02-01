@@ -12,6 +12,8 @@ items:
   - Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginPowerOff(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
   - Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginPowerOffAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
   - Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimage(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
+  - Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAll(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
+  - Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAllAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
   - Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
   - Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginRestart(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
   - Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginRestartAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
@@ -32,6 +34,8 @@ items:
   - Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.PowerOff(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
   - Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.PowerOffAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
   - Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.Reimage(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
+  - Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.ReimageAll(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
+  - Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.ReimageAllAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
   - Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.ReimageAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
   - Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.Restart(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
   - Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.RestartAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
@@ -51,7 +55,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: VirtualMachineScaleSetVMsOperationsExtensions
     path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-    startLine: 17
+    startLine: 22
   assemblies:
   - Microsoft.Azure.Management.Compute
   namespace: Microsoft.Azure.Management.Compute
@@ -96,18 +100,18 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: Reimage
     path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-    startLine: 35
+    startLine: 40
   assemblies:
   - Microsoft.Azure.Management.Compute
   namespace: Microsoft.Azure.Management.Compute
-  summary: "\nAllows you to re-image(update the version of the installed operating\nsystem) a virtual machine scale set instance.\n"
+  summary: "\nReimages (upgrade the operating system) a specific virtual machine in a VM\nscale set.\n"
   example: []
   syntax:
-    content: public static void Reimage(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId)
+    content: public static OperationStatusResponse Reimage(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId)
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Sub Reimage(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String)
+      Public Shared Function Reimage(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String) As OperationStatusResponse
     parameters:
     - id: operations
       type: Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations
@@ -117,10 +121,12 @@ items:
       description: "\nThe name of the resource group.\n"
     - id: vmScaleSetName
       type: System.String
-      description: "\nThe name of the virtual machine scale set.\n"
+      description: "\nThe name of the VM scale set.\n"
     - id: instanceId
       type: System.String
-      description: "\nThe instance id of the virtual machine.\n"
+      description: "\nThe instance ID of the virtual machine.\n"
+    return:
+      type: Microsoft.Azure.Management.Compute.Models.OperationStatusResponse
   overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.Reimage*
   modifiers.csharp:
   - public
@@ -147,18 +153,18 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: ReimageAsync
     path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-    startLine: 59
+    startLine: 64
   assemblies:
   - Microsoft.Azure.Management.Compute
   namespace: Microsoft.Azure.Management.Compute
-  summary: "\nAllows you to re-image(update the version of the installed operating\nsystem) a virtual machine scale set instance.\n"
+  summary: "\nReimages (upgrade the operating system) a specific virtual machine in a VM\nscale set.\n"
   example: []
   syntax:
-    content: public static Task ReimageAsync(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = null)
+    content: public static Task<OperationStatusResponse> ReimageAsync(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = null)
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Function ReimageAsync(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String, cancellationToken As CancellationToken = Nothing) As Task
+      Public Shared Function ReimageAsync(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String, cancellationToken As CancellationToken = Nothing) As Task(Of OperationStatusResponse)
     parameters:
     - id: operations
       type: Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations
@@ -168,15 +174,15 @@ items:
       description: "\nThe name of the resource group.\n"
     - id: vmScaleSetName
       type: System.String
-      description: "\nThe name of the virtual machine scale set.\n"
+      description: "\nThe name of the VM scale set.\n"
     - id: instanceId
       type: System.String
-      description: "\nThe instance id of the virtual machine.\n"
+      description: "\nThe instance ID of the virtual machine.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task
+      type: System.Threading.Tasks.Task{Microsoft.Azure.Management.Compute.Models.OperationStatusResponse}
   overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.ReimageAsync*
   modifiers.csharp:
   - public
@@ -184,37 +190,37 @@ items:
   modifiers.vb:
   - Public
   - Shared
-- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimage(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
-  commentId: M:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimage(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
-  id: BeginReimage(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
+- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.ReimageAll(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
+  commentId: M:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.ReimageAll(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
+  id: ReimageAll(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
   isExtensionMethod: true
   parent: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions
   langs:
   - csharp
   - vb
-  name: BeginReimage(IVirtualMachineScaleSetVMsOperations, String, String, String)
-  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginReimage(IVirtualMachineScaleSetVMsOperations, String, String, String)
-  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimage(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations, System.String, System.String, System.String)
+  name: ReimageAll(IVirtualMachineScaleSetVMsOperations, String, String, String)
+  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.ReimageAll(IVirtualMachineScaleSetVMsOperations, String, String, String)
+  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.ReimageAll(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations, System.String, System.String, System.String)
   type: Method
   source:
     remote:
       path: src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
       branch: AutoRest
       repo: https://github.com/Azure/azure-sdk-for-net.git
-    id: BeginReimage
+    id: ReimageAll
     path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-    startLine: 80
+    startLine: 89
   assemblies:
   - Microsoft.Azure.Management.Compute
   namespace: Microsoft.Azure.Management.Compute
-  summary: "\nAllows you to re-image(update the version of the installed operating\nsystem) a virtual machine scale set instance.\n"
+  summary: "\nAllows you to re-image all the disks ( including data disks ) in the a\nvirtual machine scale set instance. This operation is only supported for\nmanaged disks.\n"
   example: []
   syntax:
-    content: public static void BeginReimage(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId)
+    content: public static OperationStatusResponse ReimageAll(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId)
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Sub BeginReimage(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String)
+      Public Shared Function ReimageAll(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String) As OperationStatusResponse
     parameters:
     - id: operations
       type: Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations
@@ -224,48 +230,50 @@ items:
       description: "\nThe name of the resource group.\n"
     - id: vmScaleSetName
       type: System.String
-      description: "\nThe name of the virtual machine scale set.\n"
+      description: "\nThe name of the VM scale set.\n"
     - id: instanceId
       type: System.String
-      description: "\nThe instance id of the virtual machine.\n"
-  overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimage*
+      description: "\nThe instance ID of the virtual machine.\n"
+    return:
+      type: Microsoft.Azure.Management.Compute.Models.OperationStatusResponse
+  overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.ReimageAll*
   modifiers.csharp:
   - public
   - static
   modifiers.vb:
   - Public
   - Shared
-- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
-  commentId: M:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
-  id: BeginReimageAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
+- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.ReimageAllAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
+  commentId: M:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.ReimageAllAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
+  id: ReimageAllAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
   isExtensionMethod: true
   parent: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions
   langs:
   - csharp
   - vb
-  name: BeginReimageAsync(IVirtualMachineScaleSetVMsOperations, String, String, String, CancellationToken)
-  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAsync(IVirtualMachineScaleSetVMsOperations, String, String, String, CancellationToken)
-  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations, System.String, System.String, System.String, System.Threading.CancellationToken)
+  name: ReimageAllAsync(IVirtualMachineScaleSetVMsOperations, String, String, String, CancellationToken)
+  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.ReimageAllAsync(IVirtualMachineScaleSetVMsOperations, String, String, String, CancellationToken)
+  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.ReimageAllAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations, System.String, System.String, System.String, System.Threading.CancellationToken)
   type: Method
   source:
     remote:
       path: src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
       branch: AutoRest
       repo: https://github.com/Azure/azure-sdk-for-net.git
-    id: BeginReimageAsync
+    id: ReimageAllAsync
     path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-    startLine: 104
+    startLine: 114
   assemblies:
   - Microsoft.Azure.Management.Compute
   namespace: Microsoft.Azure.Management.Compute
-  summary: "\nAllows you to re-image(update the version of the installed operating\nsystem) a virtual machine scale set instance.\n"
+  summary: "\nAllows you to re-image all the disks ( including data disks ) in the a\nvirtual machine scale set instance. This operation is only supported for\nmanaged disks.\n"
   example: []
   syntax:
-    content: public static Task BeginReimageAsync(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = null)
+    content: public static Task<OperationStatusResponse> ReimageAllAsync(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = null)
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Function BeginReimageAsync(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String, cancellationToken As CancellationToken = Nothing) As Task
+      Public Shared Function ReimageAllAsync(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String, cancellationToken As CancellationToken = Nothing) As Task(Of OperationStatusResponse)
     parameters:
     - id: operations
       type: Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations
@@ -275,16 +283,16 @@ items:
       description: "\nThe name of the resource group.\n"
     - id: vmScaleSetName
       type: System.String
-      description: "\nThe name of the virtual machine scale set.\n"
+      description: "\nThe name of the VM scale set.\n"
     - id: instanceId
       type: System.String
-      description: "\nThe instance id of the virtual machine.\n"
+      description: "\nThe instance ID of the virtual machine.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task
-  overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAsync*
+      type: System.Threading.Tasks.Task{Microsoft.Azure.Management.Compute.Models.OperationStatusResponse}
+  overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.ReimageAllAsync*
   modifiers.csharp:
   - public
   - static
@@ -310,18 +318,18 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: Deallocate
     path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-    startLine: 126
+    startLine: 140
   assemblies:
   - Microsoft.Azure.Management.Compute
   namespace: Microsoft.Azure.Management.Compute
-  summary: "\nAllows you to deallocate a virtual machine scale set virtual machine.\nShuts down the virtual machine and releases the compute resources. You\nare not billed for the compute resources that this virtual machine uses.\n"
+  summary: "\nDeallocates a specific virtual machine in a VM scale set. Shuts down the\nvirtual machine and releases the compute resources it uses. You are not\nbilled for the compute resources of this virtual machine once it is\ndeallocated.\n"
   example: []
   syntax:
-    content: public static void Deallocate(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId)
+    content: public static OperationStatusResponse Deallocate(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId)
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Sub Deallocate(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String)
+      Public Shared Function Deallocate(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String) As OperationStatusResponse
     parameters:
     - id: operations
       type: Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations
@@ -331,10 +339,12 @@ items:
       description: "\nThe name of the resource group.\n"
     - id: vmScaleSetName
       type: System.String
-      description: "\nThe name of the virtual machine scale set.\n"
+      description: "\nThe name of the VM scale set.\n"
     - id: instanceId
       type: System.String
-      description: "\nThe instance id of the virtual machine.\n"
+      description: "\nThe instance ID of the virtual machine.\n"
+    return:
+      type: Microsoft.Azure.Management.Compute.Models.OperationStatusResponse
   overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.Deallocate*
   modifiers.csharp:
   - public
@@ -361,18 +371,18 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: DeallocateAsync
     path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-    startLine: 151
+    startLine: 166
   assemblies:
   - Microsoft.Azure.Management.Compute
   namespace: Microsoft.Azure.Management.Compute
-  summary: "\nAllows you to deallocate a virtual machine scale set virtual machine.\nShuts down the virtual machine and releases the compute resources. You\nare not billed for the compute resources that this virtual machine uses.\n"
+  summary: "\nDeallocates a specific virtual machine in a VM scale set. Shuts down the\nvirtual machine and releases the compute resources it uses. You are not\nbilled for the compute resources of this virtual machine once it is\ndeallocated.\n"
   example: []
   syntax:
-    content: public static Task DeallocateAsync(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = null)
+    content: public static Task<OperationStatusResponse> DeallocateAsync(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = null)
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Function DeallocateAsync(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String, cancellationToken As CancellationToken = Nothing) As Task
+      Public Shared Function DeallocateAsync(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String, cancellationToken As CancellationToken = Nothing) As Task(Of OperationStatusResponse)
     parameters:
     - id: operations
       type: Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations
@@ -382,123 +392,16 @@ items:
       description: "\nThe name of the resource group.\n"
     - id: vmScaleSetName
       type: System.String
-      description: "\nThe name of the virtual machine scale set.\n"
+      description: "\nThe name of the VM scale set.\n"
     - id: instanceId
       type: System.String
-      description: "\nThe instance id of the virtual machine.\n"
+      description: "\nThe instance ID of the virtual machine.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task
+      type: System.Threading.Tasks.Task{Microsoft.Azure.Management.Compute.Models.OperationStatusResponse}
   overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.DeallocateAsync*
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeallocate(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
-  commentId: M:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeallocate(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
-  id: BeginDeallocate(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
-  isExtensionMethod: true
-  parent: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions
-  langs:
-  - csharp
-  - vb
-  name: BeginDeallocate(IVirtualMachineScaleSetVMsOperations, String, String, String)
-  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginDeallocate(IVirtualMachineScaleSetVMsOperations, String, String, String)
-  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeallocate(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations, System.String, System.String, System.String)
-  type: Method
-  source:
-    remote:
-      path: src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-      branch: AutoRest
-      repo: https://github.com/Azure/azure-sdk-for-net.git
-    id: BeginDeallocate
-    path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-    startLine: 173
-  assemblies:
-  - Microsoft.Azure.Management.Compute
-  namespace: Microsoft.Azure.Management.Compute
-  summary: "\nAllows you to deallocate a virtual machine scale set virtual machine.\nShuts down the virtual machine and releases the compute resources. You\nare not billed for the compute resources that this virtual machine uses.\n"
-  example: []
-  syntax:
-    content: public static void BeginDeallocate(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId)
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Sub BeginDeallocate(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String)
-    parameters:
-    - id: operations
-      type: Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations
-      description: "\nThe operations group for this extension method.\n"
-    - id: resourceGroupName
-      type: System.String
-      description: "\nThe name of the resource group.\n"
-    - id: vmScaleSetName
-      type: System.String
-      description: "\nThe name of the virtual machine scale set.\n"
-    - id: instanceId
-      type: System.String
-      description: "\nThe instance id of the virtual machine.\n"
-  overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeallocate*
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeallocateAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
-  commentId: M:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeallocateAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
-  id: BeginDeallocateAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
-  isExtensionMethod: true
-  parent: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions
-  langs:
-  - csharp
-  - vb
-  name: BeginDeallocateAsync(IVirtualMachineScaleSetVMsOperations, String, String, String, CancellationToken)
-  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginDeallocateAsync(IVirtualMachineScaleSetVMsOperations, String, String, String, CancellationToken)
-  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeallocateAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations, System.String, System.String, System.String, System.Threading.CancellationToken)
-  type: Method
-  source:
-    remote:
-      path: src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-      branch: AutoRest
-      repo: https://github.com/Azure/azure-sdk-for-net.git
-    id: BeginDeallocateAsync
-    path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-    startLine: 198
-  assemblies:
-  - Microsoft.Azure.Management.Compute
-  namespace: Microsoft.Azure.Management.Compute
-  summary: "\nAllows you to deallocate a virtual machine scale set virtual machine.\nShuts down the virtual machine and releases the compute resources. You\nare not billed for the compute resources that this virtual machine uses.\n"
-  example: []
-  syntax:
-    content: public static Task BeginDeallocateAsync(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = null)
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function BeginDeallocateAsync(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String, cancellationToken As CancellationToken = Nothing) As Task
-    parameters:
-    - id: operations
-      type: Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations
-      description: "\nThe operations group for this extension method.\n"
-    - id: resourceGroupName
-      type: System.String
-      description: "\nThe name of the resource group.\n"
-    - id: vmScaleSetName
-      type: System.String
-      description: "\nThe name of the virtual machine scale set.\n"
-    - id: instanceId
-      type: System.String
-      description: "\nThe instance id of the virtual machine.\n"
-    - id: cancellationToken
-      type: System.Threading.CancellationToken
-      description: "\nThe cancellation token.\n"
-    return:
-      type: System.Threading.Tasks.Task
-  overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeallocateAsync*
   modifiers.csharp:
   - public
   - static
@@ -524,18 +427,18 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: Delete
     path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-    startLine: 218
+    startLine: 189
   assemblies:
   - Microsoft.Azure.Management.Compute
   namespace: Microsoft.Azure.Management.Compute
-  summary: "\nAllows you to delete a virtual machine scale set.\n"
+  summary: "\nDeletes a virtual machine from a VM scale set.\n"
   example: []
   syntax:
-    content: public static void Delete(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId)
+    content: public static OperationStatusResponse Delete(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId)
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Sub Delete(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String)
+      Public Shared Function Delete(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String) As OperationStatusResponse
     parameters:
     - id: operations
       type: Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations
@@ -545,10 +448,12 @@ items:
       description: "\nThe name of the resource group.\n"
     - id: vmScaleSetName
       type: System.String
-      description: "\nThe name of the virtual machine scale set.\n"
+      description: "\nThe name of the VM scale set.\n"
     - id: instanceId
       type: System.String
-      description: "\nThe instance id of the virtual machine.\n"
+      description: "\nThe instance ID of the virtual machine.\n"
+    return:
+      type: Microsoft.Azure.Management.Compute.Models.OperationStatusResponse
   overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.Delete*
   modifiers.csharp:
   - public
@@ -575,18 +480,18 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: DeleteAsync
     path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-    startLine: 241
+    startLine: 212
   assemblies:
   - Microsoft.Azure.Management.Compute
   namespace: Microsoft.Azure.Management.Compute
-  summary: "\nAllows you to delete a virtual machine scale set.\n"
+  summary: "\nDeletes a virtual machine from a VM scale set.\n"
   example: []
   syntax:
-    content: public static Task DeleteAsync(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = null)
+    content: public static Task<OperationStatusResponse> DeleteAsync(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = null)
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Function DeleteAsync(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String, cancellationToken As CancellationToken = Nothing) As Task
+      Public Shared Function DeleteAsync(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String, cancellationToken As CancellationToken = Nothing) As Task(Of OperationStatusResponse)
     parameters:
     - id: operations
       type: Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations
@@ -596,123 +501,16 @@ items:
       description: "\nThe name of the resource group.\n"
     - id: vmScaleSetName
       type: System.String
-      description: "\nThe name of the virtual machine scale set.\n"
+      description: "\nThe name of the VM scale set.\n"
     - id: instanceId
       type: System.String
-      description: "\nThe instance id of the virtual machine.\n"
+      description: "\nThe instance ID of the virtual machine.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task
+      type: System.Threading.Tasks.Task{Microsoft.Azure.Management.Compute.Models.OperationStatusResponse}
   overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.DeleteAsync*
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDelete(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
-  commentId: M:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDelete(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
-  id: BeginDelete(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
-  isExtensionMethod: true
-  parent: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions
-  langs:
-  - csharp
-  - vb
-  name: BeginDelete(IVirtualMachineScaleSetVMsOperations, String, String, String)
-  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginDelete(IVirtualMachineScaleSetVMsOperations, String, String, String)
-  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDelete(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations, System.String, System.String, System.String)
-  type: Method
-  source:
-    remote:
-      path: src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-      branch: AutoRest
-      repo: https://github.com/Azure/azure-sdk-for-net.git
-    id: BeginDelete
-    path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-    startLine: 261
-  assemblies:
-  - Microsoft.Azure.Management.Compute
-  namespace: Microsoft.Azure.Management.Compute
-  summary: "\nAllows you to delete a virtual machine scale set.\n"
-  example: []
-  syntax:
-    content: public static void BeginDelete(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId)
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Sub BeginDelete(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String)
-    parameters:
-    - id: operations
-      type: Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations
-      description: "\nThe operations group for this extension method.\n"
-    - id: resourceGroupName
-      type: System.String
-      description: "\nThe name of the resource group.\n"
-    - id: vmScaleSetName
-      type: System.String
-      description: "\nThe name of the virtual machine scale set.\n"
-    - id: instanceId
-      type: System.String
-      description: "\nThe instance id of the virtual machine.\n"
-  overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDelete*
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeleteAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
-  commentId: M:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeleteAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
-  id: BeginDeleteAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
-  isExtensionMethod: true
-  parent: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions
-  langs:
-  - csharp
-  - vb
-  name: BeginDeleteAsync(IVirtualMachineScaleSetVMsOperations, String, String, String, CancellationToken)
-  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginDeleteAsync(IVirtualMachineScaleSetVMsOperations, String, String, String, CancellationToken)
-  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeleteAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations, System.String, System.String, System.String, System.Threading.CancellationToken)
-  type: Method
-  source:
-    remote:
-      path: src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-      branch: AutoRest
-      repo: https://github.com/Azure/azure-sdk-for-net.git
-    id: BeginDeleteAsync
-    path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-    startLine: 284
-  assemblies:
-  - Microsoft.Azure.Management.Compute
-  namespace: Microsoft.Azure.Management.Compute
-  summary: "\nAllows you to delete a virtual machine scale set.\n"
-  example: []
-  syntax:
-    content: public static Task BeginDeleteAsync(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = null)
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function BeginDeleteAsync(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String, cancellationToken As CancellationToken = Nothing) As Task
-    parameters:
-    - id: operations
-      type: Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations
-      description: "\nThe operations group for this extension method.\n"
-    - id: resourceGroupName
-      type: System.String
-      description: "\nThe name of the resource group.\n"
-    - id: vmScaleSetName
-      type: System.String
-      description: "\nThe name of the virtual machine scale set.\n"
-    - id: instanceId
-      type: System.String
-      description: "\nThe instance id of the virtual machine.\n"
-    - id: cancellationToken
-      type: System.Threading.CancellationToken
-      description: "\nThe cancellation token.\n"
-    return:
-      type: System.Threading.Tasks.Task
-  overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeleteAsync*
   modifiers.csharp:
   - public
   - static
@@ -738,11 +536,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: Get
     path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-    startLine: 304
+    startLine: 235
   assemblies:
   - Microsoft.Azure.Management.Compute
   namespace: Microsoft.Azure.Management.Compute
-  summary: "\nDisplays information about a virtual machine scale set virtual machine.\n"
+  summary: "\nGets a virtual machine from a VM scale set.\n"
   example: []
   syntax:
     content: public static VirtualMachineScaleSetVM Get(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId)
@@ -759,10 +557,10 @@ items:
       description: "\nThe name of the resource group.\n"
     - id: vmScaleSetName
       type: System.String
-      description: "\nThe name of the virtual machine scale set.\n"
+      description: "\nThe name of the VM scale set.\n"
     - id: instanceId
       type: System.String
-      description: "\nThe instance id of the virtual machine.\n"
+      description: "\nThe instance ID of the virtual machine.\n"
     return:
       type: Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetVM
   overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.Get*
@@ -791,11 +589,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: GetAsync
     path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-    startLine: 327
+    startLine: 258
   assemblies:
   - Microsoft.Azure.Management.Compute
   namespace: Microsoft.Azure.Management.Compute
-  summary: "\nDisplays information about a virtual machine scale set virtual machine.\n"
+  summary: "\nGets a virtual machine from a VM scale set.\n"
   example: []
   syntax:
     content: public static Task<VirtualMachineScaleSetVM> GetAsync(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = null)
@@ -812,10 +610,10 @@ items:
       description: "\nThe name of the resource group.\n"
     - id: vmScaleSetName
       type: System.String
-      description: "\nThe name of the virtual machine scale set.\n"
+      description: "\nThe name of the VM scale set.\n"
     - id: instanceId
       type: System.String
-      description: "\nThe instance id of the virtual machine.\n"
+      description: "\nThe instance ID of the virtual machine.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
@@ -847,11 +645,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: GetInstanceView
     path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-    startLine: 350
+    startLine: 281
   assemblies:
   - Microsoft.Azure.Management.Compute
   namespace: Microsoft.Azure.Management.Compute
-  summary: "\nDisplays the status of a virtual machine scale set virtual machine.\n"
+  summary: "\nGets the status of a virtual machine from a VM scale set.\n"
   example: []
   syntax:
     content: public static VirtualMachineScaleSetVMInstanceView GetInstanceView(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId)
@@ -868,10 +666,10 @@ items:
       description: "\nThe name of the resource group.\n"
     - id: vmScaleSetName
       type: System.String
-      description: "\nThe name of the virtual machine scale set.\n"
+      description: "\nThe name of the VM scale set.\n"
     - id: instanceId
       type: System.String
-      description: "\nThe instance id of the virtual machine.\n"
+      description: "\nThe instance ID of the virtual machine.\n"
     return:
       type: Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetVMInstanceView
   overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.GetInstanceView*
@@ -900,11 +698,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: GetInstanceViewAsync
     path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-    startLine: 373
+    startLine: 304
   assemblies:
   - Microsoft.Azure.Management.Compute
   namespace: Microsoft.Azure.Management.Compute
-  summary: "\nDisplays the status of a virtual machine scale set virtual machine.\n"
+  summary: "\nGets the status of a virtual machine from a VM scale set.\n"
   example: []
   syntax:
     content: public static Task<VirtualMachineScaleSetVMInstanceView> GetInstanceViewAsync(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = null)
@@ -921,10 +719,10 @@ items:
       description: "\nThe name of the resource group.\n"
     - id: vmScaleSetName
       type: System.String
-      description: "\nThe name of the virtual machine scale set.\n"
+      description: "\nThe name of the VM scale set.\n"
     - id: instanceId
       type: System.String
-      description: "\nThe instance id of the virtual machine.\n"
+      description: "\nThe instance ID of the virtual machine.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
@@ -956,11 +754,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: List
     path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-    startLine: 399
+    startLine: 330
   assemblies:
   - Microsoft.Azure.Management.Compute
   namespace: Microsoft.Azure.Management.Compute
-  summary: "\nLists all virtual machines in a VM scale sets.\n"
+  summary: "\nGets a list of all virtual machines in a VM scale sets.\n"
   example: []
   syntax:
     content: public static IPage<VirtualMachineScaleSetVM> List(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string virtualMachineScaleSetName, ODataQuery<VirtualMachineScaleSetVM> odataQuery = null, string select = null)
@@ -977,7 +775,7 @@ items:
       description: "\nThe name of the resource group.\n"
     - id: virtualMachineScaleSetName
       type: System.String
-      description: "\nThe name of the virtual machine scale set.\n"
+      description: "\nThe name of the VM scale set.\n"
     - id: odataQuery
       type: Microsoft.Rest.Azure.OData.ODataQuery{Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetVM}
       description: "\nOData parameters to apply to the operation.\n"
@@ -1015,11 +813,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: ListAsync
     path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-    startLine: 425
+    startLine: 356
   assemblies:
   - Microsoft.Azure.Management.Compute
   namespace: Microsoft.Azure.Management.Compute
-  summary: "\nLists all virtual machines in a VM scale sets.\n"
+  summary: "\nGets a list of all virtual machines in a VM scale sets.\n"
   example: []
   syntax:
     content: public static Task<IPage<VirtualMachineScaleSetVM>> ListAsync(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string virtualMachineScaleSetName, ODataQuery<VirtualMachineScaleSetVM> odataQuery = null, string select = null, CancellationToken cancellationToken = null)
@@ -1036,7 +834,7 @@ items:
       description: "\nThe name of the resource group.\n"
     - id: virtualMachineScaleSetName
       type: System.String
-      description: "\nThe name of the virtual machine scale set.\n"
+      description: "\nThe name of the VM scale set.\n"
     - id: odataQuery
       type: Microsoft.Rest.Azure.OData.ODataQuery{Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetVM}
       description: "\nOData parameters to apply to the operation.\n"
@@ -1077,18 +875,18 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: PowerOff
     path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-    startLine: 448
+    startLine: 381
   assemblies:
   - Microsoft.Azure.Management.Compute
   namespace: Microsoft.Azure.Management.Compute
-  summary: "\nAllows you to power off (stop) a virtual machine in a VM scale set.\n"
+  summary: "\nPower off (stop) a virtual machine in a VM scale set. Note that resources\nare still attached and you are getting charged for the resources. Instead,\nuse deallocate to release resources and avoid charges.\n"
   example: []
   syntax:
-    content: public static void PowerOff(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId)
+    content: public static OperationStatusResponse PowerOff(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId)
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Sub PowerOff(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String)
+      Public Shared Function PowerOff(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String) As OperationStatusResponse
     parameters:
     - id: operations
       type: Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations
@@ -1098,10 +896,12 @@ items:
       description: "\nThe name of the resource group.\n"
     - id: vmScaleSetName
       type: System.String
-      description: "\nThe name of the virtual machine scale set.\n"
+      description: "\nThe name of the VM scale set.\n"
     - id: instanceId
       type: System.String
-      description: "\nThe instance id of the virtual machine.\n"
+      description: "\nThe instance ID of the virtual machine.\n"
+    return:
+      type: Microsoft.Azure.Management.Compute.Models.OperationStatusResponse
   overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.PowerOff*
   modifiers.csharp:
   - public
@@ -1128,18 +928,18 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: PowerOffAsync
     path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-    startLine: 471
+    startLine: 406
   assemblies:
   - Microsoft.Azure.Management.Compute
   namespace: Microsoft.Azure.Management.Compute
-  summary: "\nAllows you to power off (stop) a virtual machine in a VM scale set.\n"
+  summary: "\nPower off (stop) a virtual machine in a VM scale set. Note that resources\nare still attached and you are getting charged for the resources. Instead,\nuse deallocate to release resources and avoid charges.\n"
   example: []
   syntax:
-    content: public static Task PowerOffAsync(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = null)
+    content: public static Task<OperationStatusResponse> PowerOffAsync(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = null)
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Function PowerOffAsync(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String, cancellationToken As CancellationToken = Nothing) As Task
+      Public Shared Function PowerOffAsync(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String, cancellationToken As CancellationToken = Nothing) As Task(Of OperationStatusResponse)
     parameters:
     - id: operations
       type: Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations
@@ -1149,123 +949,16 @@ items:
       description: "\nThe name of the resource group.\n"
     - id: vmScaleSetName
       type: System.String
-      description: "\nThe name of the virtual machine scale set.\n"
+      description: "\nThe name of the VM scale set.\n"
     - id: instanceId
       type: System.String
-      description: "\nThe instance id of the virtual machine.\n"
+      description: "\nThe instance ID of the virtual machine.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task
+      type: System.Threading.Tasks.Task{Microsoft.Azure.Management.Compute.Models.OperationStatusResponse}
   overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.PowerOffAsync*
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginPowerOff(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
-  commentId: M:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginPowerOff(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
-  id: BeginPowerOff(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
-  isExtensionMethod: true
-  parent: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions
-  langs:
-  - csharp
-  - vb
-  name: BeginPowerOff(IVirtualMachineScaleSetVMsOperations, String, String, String)
-  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginPowerOff(IVirtualMachineScaleSetVMsOperations, String, String, String)
-  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginPowerOff(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations, System.String, System.String, System.String)
-  type: Method
-  source:
-    remote:
-      path: src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-      branch: AutoRest
-      repo: https://github.com/Azure/azure-sdk-for-net.git
-    id: BeginPowerOff
-    path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-    startLine: 491
-  assemblies:
-  - Microsoft.Azure.Management.Compute
-  namespace: Microsoft.Azure.Management.Compute
-  summary: "\nAllows you to power off (stop) a virtual machine in a VM scale set.\n"
-  example: []
-  syntax:
-    content: public static void BeginPowerOff(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId)
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Sub BeginPowerOff(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String)
-    parameters:
-    - id: operations
-      type: Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations
-      description: "\nThe operations group for this extension method.\n"
-    - id: resourceGroupName
-      type: System.String
-      description: "\nThe name of the resource group.\n"
-    - id: vmScaleSetName
-      type: System.String
-      description: "\nThe name of the virtual machine scale set.\n"
-    - id: instanceId
-      type: System.String
-      description: "\nThe instance id of the virtual machine.\n"
-  overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginPowerOff*
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginPowerOffAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
-  commentId: M:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginPowerOffAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
-  id: BeginPowerOffAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
-  isExtensionMethod: true
-  parent: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions
-  langs:
-  - csharp
-  - vb
-  name: BeginPowerOffAsync(IVirtualMachineScaleSetVMsOperations, String, String, String, CancellationToken)
-  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginPowerOffAsync(IVirtualMachineScaleSetVMsOperations, String, String, String, CancellationToken)
-  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginPowerOffAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations, System.String, System.String, System.String, System.Threading.CancellationToken)
-  type: Method
-  source:
-    remote:
-      path: src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-      branch: AutoRest
-      repo: https://github.com/Azure/azure-sdk-for-net.git
-    id: BeginPowerOffAsync
-    path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-    startLine: 514
-  assemblies:
-  - Microsoft.Azure.Management.Compute
-  namespace: Microsoft.Azure.Management.Compute
-  summary: "\nAllows you to power off (stop) a virtual machine in a VM scale set.\n"
-  example: []
-  syntax:
-    content: public static Task BeginPowerOffAsync(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = null)
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function BeginPowerOffAsync(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String, cancellationToken As CancellationToken = Nothing) As Task
-    parameters:
-    - id: operations
-      type: Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations
-      description: "\nThe operations group for this extension method.\n"
-    - id: resourceGroupName
-      type: System.String
-      description: "\nThe name of the resource group.\n"
-    - id: vmScaleSetName
-      type: System.String
-      description: "\nThe name of the virtual machine scale set.\n"
-    - id: instanceId
-      type: System.String
-      description: "\nThe instance id of the virtual machine.\n"
-    - id: cancellationToken
-      type: System.Threading.CancellationToken
-      description: "\nThe cancellation token.\n"
-    return:
-      type: System.Threading.Tasks.Task
-  overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginPowerOffAsync*
   modifiers.csharp:
   - public
   - static
@@ -1291,18 +984,18 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: Restart
     path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-    startLine: 534
+    startLine: 429
   assemblies:
   - Microsoft.Azure.Management.Compute
   namespace: Microsoft.Azure.Management.Compute
-  summary: "\nAllows you to restart a virtual machine in a VM scale set.\n"
+  summary: "\nRestarts a virtual machine in a VM scale set.\n"
   example: []
   syntax:
-    content: public static void Restart(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId)
+    content: public static OperationStatusResponse Restart(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId)
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Sub Restart(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String)
+      Public Shared Function Restart(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String) As OperationStatusResponse
     parameters:
     - id: operations
       type: Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations
@@ -1312,10 +1005,12 @@ items:
       description: "\nThe name of the resource group.\n"
     - id: vmScaleSetName
       type: System.String
-      description: "\nThe name of the virtual machine scale set.\n"
+      description: "\nThe name of the VM scale set.\n"
     - id: instanceId
       type: System.String
-      description: "\nThe instance id of the virtual machine.\n"
+      description: "\nThe instance ID of the virtual machine.\n"
+    return:
+      type: Microsoft.Azure.Management.Compute.Models.OperationStatusResponse
   overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.Restart*
   modifiers.csharp:
   - public
@@ -1342,18 +1037,18 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: RestartAsync
     path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-    startLine: 557
+    startLine: 452
   assemblies:
   - Microsoft.Azure.Management.Compute
   namespace: Microsoft.Azure.Management.Compute
-  summary: "\nAllows you to restart a virtual machine in a VM scale set.\n"
+  summary: "\nRestarts a virtual machine in a VM scale set.\n"
   example: []
   syntax:
-    content: public static Task RestartAsync(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = null)
+    content: public static Task<OperationStatusResponse> RestartAsync(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = null)
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Function RestartAsync(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String, cancellationToken As CancellationToken = Nothing) As Task
+      Public Shared Function RestartAsync(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String, cancellationToken As CancellationToken = Nothing) As Task(Of OperationStatusResponse)
     parameters:
     - id: operations
       type: Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations
@@ -1363,123 +1058,16 @@ items:
       description: "\nThe name of the resource group.\n"
     - id: vmScaleSetName
       type: System.String
-      description: "\nThe name of the virtual machine scale set.\n"
+      description: "\nThe name of the VM scale set.\n"
     - id: instanceId
       type: System.String
-      description: "\nThe instance id of the virtual machine.\n"
+      description: "\nThe instance ID of the virtual machine.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task
+      type: System.Threading.Tasks.Task{Microsoft.Azure.Management.Compute.Models.OperationStatusResponse}
   overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.RestartAsync*
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginRestart(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
-  commentId: M:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginRestart(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
-  id: BeginRestart(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
-  isExtensionMethod: true
-  parent: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions
-  langs:
-  - csharp
-  - vb
-  name: BeginRestart(IVirtualMachineScaleSetVMsOperations, String, String, String)
-  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginRestart(IVirtualMachineScaleSetVMsOperations, String, String, String)
-  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginRestart(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations, System.String, System.String, System.String)
-  type: Method
-  source:
-    remote:
-      path: src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-      branch: AutoRest
-      repo: https://github.com/Azure/azure-sdk-for-net.git
-    id: BeginRestart
-    path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-    startLine: 577
-  assemblies:
-  - Microsoft.Azure.Management.Compute
-  namespace: Microsoft.Azure.Management.Compute
-  summary: "\nAllows you to restart a virtual machine in a VM scale set.\n"
-  example: []
-  syntax:
-    content: public static void BeginRestart(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId)
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Sub BeginRestart(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String)
-    parameters:
-    - id: operations
-      type: Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations
-      description: "\nThe operations group for this extension method.\n"
-    - id: resourceGroupName
-      type: System.String
-      description: "\nThe name of the resource group.\n"
-    - id: vmScaleSetName
-      type: System.String
-      description: "\nThe name of the virtual machine scale set.\n"
-    - id: instanceId
-      type: System.String
-      description: "\nThe instance id of the virtual machine.\n"
-  overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginRestart*
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginRestartAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
-  commentId: M:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginRestartAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
-  id: BeginRestartAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
-  isExtensionMethod: true
-  parent: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions
-  langs:
-  - csharp
-  - vb
-  name: BeginRestartAsync(IVirtualMachineScaleSetVMsOperations, String, String, String, CancellationToken)
-  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginRestartAsync(IVirtualMachineScaleSetVMsOperations, String, String, String, CancellationToken)
-  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginRestartAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations, System.String, System.String, System.String, System.Threading.CancellationToken)
-  type: Method
-  source:
-    remote:
-      path: src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-      branch: AutoRest
-      repo: https://github.com/Azure/azure-sdk-for-net.git
-    id: BeginRestartAsync
-    path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-    startLine: 600
-  assemblies:
-  - Microsoft.Azure.Management.Compute
-  namespace: Microsoft.Azure.Management.Compute
-  summary: "\nAllows you to restart a virtual machine in a VM scale set.\n"
-  example: []
-  syntax:
-    content: public static Task BeginRestartAsync(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = null)
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function BeginRestartAsync(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String, cancellationToken As CancellationToken = Nothing) As Task
-    parameters:
-    - id: operations
-      type: Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations
-      description: "\nThe operations group for this extension method.\n"
-    - id: resourceGroupName
-      type: System.String
-      description: "\nThe name of the resource group.\n"
-    - id: vmScaleSetName
-      type: System.String
-      description: "\nThe name of the virtual machine scale set.\n"
-    - id: instanceId
-      type: System.String
-      description: "\nThe instance id of the virtual machine.\n"
-    - id: cancellationToken
-      type: System.Threading.CancellationToken
-      description: "\nThe cancellation token.\n"
-    return:
-      type: System.Threading.Tasks.Task
-  overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginRestartAsync*
   modifiers.csharp:
   - public
   - static
@@ -1505,18 +1093,18 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: Start
     path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-    startLine: 620
+    startLine: 475
   assemblies:
   - Microsoft.Azure.Management.Compute
   namespace: Microsoft.Azure.Management.Compute
-  summary: "\nAllows you to start a virtual machine in a VM scale set.\n"
+  summary: "\nStarts a virtual machine in a VM scale set.\n"
   example: []
   syntax:
-    content: public static void Start(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId)
+    content: public static OperationStatusResponse Start(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId)
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Sub Start(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String)
+      Public Shared Function Start(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String) As OperationStatusResponse
     parameters:
     - id: operations
       type: Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations
@@ -1526,10 +1114,12 @@ items:
       description: "\nThe name of the resource group.\n"
     - id: vmScaleSetName
       type: System.String
-      description: "\nThe name of the virtual machine scale set.\n"
+      description: "\nThe name of the VM scale set.\n"
     - id: instanceId
       type: System.String
-      description: "\nThe instance id of the virtual machine.\n"
+      description: "\nThe instance ID of the virtual machine.\n"
+    return:
+      type: Microsoft.Azure.Management.Compute.Models.OperationStatusResponse
   overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.Start*
   modifiers.csharp:
   - public
@@ -1556,18 +1146,18 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: StartAsync
     path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-    startLine: 643
+    startLine: 498
   assemblies:
   - Microsoft.Azure.Management.Compute
   namespace: Microsoft.Azure.Management.Compute
-  summary: "\nAllows you to start a virtual machine in a VM scale set.\n"
+  summary: "\nStarts a virtual machine in a VM scale set.\n"
   example: []
   syntax:
-    content: public static Task StartAsync(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = null)
+    content: public static Task<OperationStatusResponse> StartAsync(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = null)
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Function StartAsync(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String, cancellationToken As CancellationToken = Nothing) As Task
+      Public Shared Function StartAsync(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String, cancellationToken As CancellationToken = Nothing) As Task(Of OperationStatusResponse)
     parameters:
     - id: operations
       type: Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations
@@ -1577,16 +1167,670 @@ items:
       description: "\nThe name of the resource group.\n"
     - id: vmScaleSetName
       type: System.String
-      description: "\nThe name of the virtual machine scale set.\n"
+      description: "\nThe name of the VM scale set.\n"
     - id: instanceId
       type: System.String
-      description: "\nThe instance id of the virtual machine.\n"
+      description: "\nThe instance ID of the virtual machine.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task
+      type: System.Threading.Tasks.Task{Microsoft.Azure.Management.Compute.Models.OperationStatusResponse}
   overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.StartAsync*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimage(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
+  commentId: M:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimage(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
+  id: BeginReimage(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
+  isExtensionMethod: true
+  parent: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions
+  langs:
+  - csharp
+  - vb
+  name: BeginReimage(IVirtualMachineScaleSetVMsOperations, String, String, String)
+  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginReimage(IVirtualMachineScaleSetVMsOperations, String, String, String)
+  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimage(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations, System.String, System.String, System.String)
+  type: Method
+  source:
+    remote:
+      path: src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
+      branch: AutoRest
+      repo: https://github.com/Azure/azure-sdk-for-net.git
+    id: BeginReimage
+    path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
+    startLine: 522
+  assemblies:
+  - Microsoft.Azure.Management.Compute
+  namespace: Microsoft.Azure.Management.Compute
+  summary: "\nReimages (upgrade the operating system) a specific virtual machine in a VM\nscale set.\n"
+  example: []
+  syntax:
+    content: public static OperationStatusResponse BeginReimage(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId)
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Function BeginReimage(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String) As OperationStatusResponse
+    parameters:
+    - id: operations
+      type: Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations
+      description: "\nThe operations group for this extension method.\n"
+    - id: resourceGroupName
+      type: System.String
+      description: "\nThe name of the resource group.\n"
+    - id: vmScaleSetName
+      type: System.String
+      description: "\nThe name of the VM scale set.\n"
+    - id: instanceId
+      type: System.String
+      description: "\nThe instance ID of the virtual machine.\n"
+    return:
+      type: Microsoft.Azure.Management.Compute.Models.OperationStatusResponse
+  overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimage*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
+  commentId: M:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
+  id: BeginReimageAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
+  isExtensionMethod: true
+  parent: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions
+  langs:
+  - csharp
+  - vb
+  name: BeginReimageAsync(IVirtualMachineScaleSetVMsOperations, String, String, String, CancellationToken)
+  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAsync(IVirtualMachineScaleSetVMsOperations, String, String, String, CancellationToken)
+  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations, System.String, System.String, System.String, System.Threading.CancellationToken)
+  type: Method
+  source:
+    remote:
+      path: src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
+      branch: AutoRest
+      repo: https://github.com/Azure/azure-sdk-for-net.git
+    id: BeginReimageAsync
+    path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
+    startLine: 546
+  assemblies:
+  - Microsoft.Azure.Management.Compute
+  namespace: Microsoft.Azure.Management.Compute
+  summary: "\nReimages (upgrade the operating system) a specific virtual machine in a VM\nscale set.\n"
+  example: []
+  syntax:
+    content: public static Task<OperationStatusResponse> BeginReimageAsync(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = null)
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Function BeginReimageAsync(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String, cancellationToken As CancellationToken = Nothing) As Task(Of OperationStatusResponse)
+    parameters:
+    - id: operations
+      type: Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations
+      description: "\nThe operations group for this extension method.\n"
+    - id: resourceGroupName
+      type: System.String
+      description: "\nThe name of the resource group.\n"
+    - id: vmScaleSetName
+      type: System.String
+      description: "\nThe name of the VM scale set.\n"
+    - id: instanceId
+      type: System.String
+      description: "\nThe instance ID of the virtual machine.\n"
+    - id: cancellationToken
+      type: System.Threading.CancellationToken
+      description: "\nThe cancellation token.\n"
+    return:
+      type: System.Threading.Tasks.Task{Microsoft.Azure.Management.Compute.Models.OperationStatusResponse}
+  overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAsync*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAll(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
+  commentId: M:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAll(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
+  id: BeginReimageAll(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
+  isExtensionMethod: true
+  parent: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions
+  langs:
+  - csharp
+  - vb
+  name: BeginReimageAll(IVirtualMachineScaleSetVMsOperations, String, String, String)
+  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAll(IVirtualMachineScaleSetVMsOperations, String, String, String)
+  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAll(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations, System.String, System.String, System.String)
+  type: Method
+  source:
+    remote:
+      path: src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
+      branch: AutoRest
+      repo: https://github.com/Azure/azure-sdk-for-net.git
+    id: BeginReimageAll
+    path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
+    startLine: 571
+  assemblies:
+  - Microsoft.Azure.Management.Compute
+  namespace: Microsoft.Azure.Management.Compute
+  summary: "\nAllows you to re-image all the disks ( including data disks ) in the a\nvirtual machine scale set instance. This operation is only supported for\nmanaged disks.\n"
+  example: []
+  syntax:
+    content: public static OperationStatusResponse BeginReimageAll(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId)
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Function BeginReimageAll(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String) As OperationStatusResponse
+    parameters:
+    - id: operations
+      type: Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations
+      description: "\nThe operations group for this extension method.\n"
+    - id: resourceGroupName
+      type: System.String
+      description: "\nThe name of the resource group.\n"
+    - id: vmScaleSetName
+      type: System.String
+      description: "\nThe name of the VM scale set.\n"
+    - id: instanceId
+      type: System.String
+      description: "\nThe instance ID of the virtual machine.\n"
+    return:
+      type: Microsoft.Azure.Management.Compute.Models.OperationStatusResponse
+  overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAll*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAllAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
+  commentId: M:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAllAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
+  id: BeginReimageAllAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
+  isExtensionMethod: true
+  parent: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions
+  langs:
+  - csharp
+  - vb
+  name: BeginReimageAllAsync(IVirtualMachineScaleSetVMsOperations, String, String, String, CancellationToken)
+  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAllAsync(IVirtualMachineScaleSetVMsOperations, String, String, String, CancellationToken)
+  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAllAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations, System.String, System.String, System.String, System.Threading.CancellationToken)
+  type: Method
+  source:
+    remote:
+      path: src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
+      branch: AutoRest
+      repo: https://github.com/Azure/azure-sdk-for-net.git
+    id: BeginReimageAllAsync
+    path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
+    startLine: 596
+  assemblies:
+  - Microsoft.Azure.Management.Compute
+  namespace: Microsoft.Azure.Management.Compute
+  summary: "\nAllows you to re-image all the disks ( including data disks ) in the a\nvirtual machine scale set instance. This operation is only supported for\nmanaged disks.\n"
+  example: []
+  syntax:
+    content: public static Task<OperationStatusResponse> BeginReimageAllAsync(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = null)
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Function BeginReimageAllAsync(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String, cancellationToken As CancellationToken = Nothing) As Task(Of OperationStatusResponse)
+    parameters:
+    - id: operations
+      type: Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations
+      description: "\nThe operations group for this extension method.\n"
+    - id: resourceGroupName
+      type: System.String
+      description: "\nThe name of the resource group.\n"
+    - id: vmScaleSetName
+      type: System.String
+      description: "\nThe name of the VM scale set.\n"
+    - id: instanceId
+      type: System.String
+      description: "\nThe instance ID of the virtual machine.\n"
+    - id: cancellationToken
+      type: System.Threading.CancellationToken
+      description: "\nThe cancellation token.\n"
+    return:
+      type: System.Threading.Tasks.Task{Microsoft.Azure.Management.Compute.Models.OperationStatusResponse}
+  overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAllAsync*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeallocate(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
+  commentId: M:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeallocate(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
+  id: BeginDeallocate(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
+  isExtensionMethod: true
+  parent: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions
+  langs:
+  - csharp
+  - vb
+  name: BeginDeallocate(IVirtualMachineScaleSetVMsOperations, String, String, String)
+  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginDeallocate(IVirtualMachineScaleSetVMsOperations, String, String, String)
+  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeallocate(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations, System.String, System.String, System.String)
+  type: Method
+  source:
+    remote:
+      path: src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
+      branch: AutoRest
+      repo: https://github.com/Azure/azure-sdk-for-net.git
+    id: BeginDeallocate
+    path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
+    startLine: 622
+  assemblies:
+  - Microsoft.Azure.Management.Compute
+  namespace: Microsoft.Azure.Management.Compute
+  summary: "\nDeallocates a specific virtual machine in a VM scale set. Shuts down the\nvirtual machine and releases the compute resources it uses. You are not\nbilled for the compute resources of this virtual machine once it is\ndeallocated.\n"
+  example: []
+  syntax:
+    content: public static OperationStatusResponse BeginDeallocate(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId)
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Function BeginDeallocate(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String) As OperationStatusResponse
+    parameters:
+    - id: operations
+      type: Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations
+      description: "\nThe operations group for this extension method.\n"
+    - id: resourceGroupName
+      type: System.String
+      description: "\nThe name of the resource group.\n"
+    - id: vmScaleSetName
+      type: System.String
+      description: "\nThe name of the VM scale set.\n"
+    - id: instanceId
+      type: System.String
+      description: "\nThe instance ID of the virtual machine.\n"
+    return:
+      type: Microsoft.Azure.Management.Compute.Models.OperationStatusResponse
+  overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeallocate*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeallocateAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
+  commentId: M:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeallocateAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
+  id: BeginDeallocateAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
+  isExtensionMethod: true
+  parent: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions
+  langs:
+  - csharp
+  - vb
+  name: BeginDeallocateAsync(IVirtualMachineScaleSetVMsOperations, String, String, String, CancellationToken)
+  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginDeallocateAsync(IVirtualMachineScaleSetVMsOperations, String, String, String, CancellationToken)
+  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeallocateAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations, System.String, System.String, System.String, System.Threading.CancellationToken)
+  type: Method
+  source:
+    remote:
+      path: src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
+      branch: AutoRest
+      repo: https://github.com/Azure/azure-sdk-for-net.git
+    id: BeginDeallocateAsync
+    path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
+    startLine: 648
+  assemblies:
+  - Microsoft.Azure.Management.Compute
+  namespace: Microsoft.Azure.Management.Compute
+  summary: "\nDeallocates a specific virtual machine in a VM scale set. Shuts down the\nvirtual machine and releases the compute resources it uses. You are not\nbilled for the compute resources of this virtual machine once it is\ndeallocated.\n"
+  example: []
+  syntax:
+    content: public static Task<OperationStatusResponse> BeginDeallocateAsync(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = null)
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Function BeginDeallocateAsync(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String, cancellationToken As CancellationToken = Nothing) As Task(Of OperationStatusResponse)
+    parameters:
+    - id: operations
+      type: Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations
+      description: "\nThe operations group for this extension method.\n"
+    - id: resourceGroupName
+      type: System.String
+      description: "\nThe name of the resource group.\n"
+    - id: vmScaleSetName
+      type: System.String
+      description: "\nThe name of the VM scale set.\n"
+    - id: instanceId
+      type: System.String
+      description: "\nThe instance ID of the virtual machine.\n"
+    - id: cancellationToken
+      type: System.Threading.CancellationToken
+      description: "\nThe cancellation token.\n"
+    return:
+      type: System.Threading.Tasks.Task{Microsoft.Azure.Management.Compute.Models.OperationStatusResponse}
+  overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeallocateAsync*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDelete(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
+  commentId: M:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDelete(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
+  id: BeginDelete(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
+  isExtensionMethod: true
+  parent: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions
+  langs:
+  - csharp
+  - vb
+  name: BeginDelete(IVirtualMachineScaleSetVMsOperations, String, String, String)
+  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginDelete(IVirtualMachineScaleSetVMsOperations, String, String, String)
+  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDelete(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations, System.String, System.String, System.String)
+  type: Method
+  source:
+    remote:
+      path: src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
+      branch: AutoRest
+      repo: https://github.com/Azure/azure-sdk-for-net.git
+    id: BeginDelete
+    path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
+    startLine: 671
+  assemblies:
+  - Microsoft.Azure.Management.Compute
+  namespace: Microsoft.Azure.Management.Compute
+  summary: "\nDeletes a virtual machine from a VM scale set.\n"
+  example: []
+  syntax:
+    content: public static OperationStatusResponse BeginDelete(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId)
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Function BeginDelete(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String) As OperationStatusResponse
+    parameters:
+    - id: operations
+      type: Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations
+      description: "\nThe operations group for this extension method.\n"
+    - id: resourceGroupName
+      type: System.String
+      description: "\nThe name of the resource group.\n"
+    - id: vmScaleSetName
+      type: System.String
+      description: "\nThe name of the VM scale set.\n"
+    - id: instanceId
+      type: System.String
+      description: "\nThe instance ID of the virtual machine.\n"
+    return:
+      type: Microsoft.Azure.Management.Compute.Models.OperationStatusResponse
+  overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDelete*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeleteAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
+  commentId: M:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeleteAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
+  id: BeginDeleteAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
+  isExtensionMethod: true
+  parent: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions
+  langs:
+  - csharp
+  - vb
+  name: BeginDeleteAsync(IVirtualMachineScaleSetVMsOperations, String, String, String, CancellationToken)
+  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginDeleteAsync(IVirtualMachineScaleSetVMsOperations, String, String, String, CancellationToken)
+  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeleteAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations, System.String, System.String, System.String, System.Threading.CancellationToken)
+  type: Method
+  source:
+    remote:
+      path: src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
+      branch: AutoRest
+      repo: https://github.com/Azure/azure-sdk-for-net.git
+    id: BeginDeleteAsync
+    path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
+    startLine: 694
+  assemblies:
+  - Microsoft.Azure.Management.Compute
+  namespace: Microsoft.Azure.Management.Compute
+  summary: "\nDeletes a virtual machine from a VM scale set.\n"
+  example: []
+  syntax:
+    content: public static Task<OperationStatusResponse> BeginDeleteAsync(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = null)
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Function BeginDeleteAsync(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String, cancellationToken As CancellationToken = Nothing) As Task(Of OperationStatusResponse)
+    parameters:
+    - id: operations
+      type: Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations
+      description: "\nThe operations group for this extension method.\n"
+    - id: resourceGroupName
+      type: System.String
+      description: "\nThe name of the resource group.\n"
+    - id: vmScaleSetName
+      type: System.String
+      description: "\nThe name of the VM scale set.\n"
+    - id: instanceId
+      type: System.String
+      description: "\nThe instance ID of the virtual machine.\n"
+    - id: cancellationToken
+      type: System.Threading.CancellationToken
+      description: "\nThe cancellation token.\n"
+    return:
+      type: System.Threading.Tasks.Task{Microsoft.Azure.Management.Compute.Models.OperationStatusResponse}
+  overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeleteAsync*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginPowerOff(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
+  commentId: M:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginPowerOff(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
+  id: BeginPowerOff(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
+  isExtensionMethod: true
+  parent: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions
+  langs:
+  - csharp
+  - vb
+  name: BeginPowerOff(IVirtualMachineScaleSetVMsOperations, String, String, String)
+  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginPowerOff(IVirtualMachineScaleSetVMsOperations, String, String, String)
+  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginPowerOff(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations, System.String, System.String, System.String)
+  type: Method
+  source:
+    remote:
+      path: src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
+      branch: AutoRest
+      repo: https://github.com/Azure/azure-sdk-for-net.git
+    id: BeginPowerOff
+    path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
+    startLine: 719
+  assemblies:
+  - Microsoft.Azure.Management.Compute
+  namespace: Microsoft.Azure.Management.Compute
+  summary: "\nPower off (stop) a virtual machine in a VM scale set. Note that resources\nare still attached and you are getting charged for the resources. Instead,\nuse deallocate to release resources and avoid charges.\n"
+  example: []
+  syntax:
+    content: public static OperationStatusResponse BeginPowerOff(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId)
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Function BeginPowerOff(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String) As OperationStatusResponse
+    parameters:
+    - id: operations
+      type: Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations
+      description: "\nThe operations group for this extension method.\n"
+    - id: resourceGroupName
+      type: System.String
+      description: "\nThe name of the resource group.\n"
+    - id: vmScaleSetName
+      type: System.String
+      description: "\nThe name of the VM scale set.\n"
+    - id: instanceId
+      type: System.String
+      description: "\nThe instance ID of the virtual machine.\n"
+    return:
+      type: Microsoft.Azure.Management.Compute.Models.OperationStatusResponse
+  overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginPowerOff*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginPowerOffAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
+  commentId: M:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginPowerOffAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
+  id: BeginPowerOffAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
+  isExtensionMethod: true
+  parent: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions
+  langs:
+  - csharp
+  - vb
+  name: BeginPowerOffAsync(IVirtualMachineScaleSetVMsOperations, String, String, String, CancellationToken)
+  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginPowerOffAsync(IVirtualMachineScaleSetVMsOperations, String, String, String, CancellationToken)
+  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginPowerOffAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations, System.String, System.String, System.String, System.Threading.CancellationToken)
+  type: Method
+  source:
+    remote:
+      path: src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
+      branch: AutoRest
+      repo: https://github.com/Azure/azure-sdk-for-net.git
+    id: BeginPowerOffAsync
+    path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
+    startLine: 744
+  assemblies:
+  - Microsoft.Azure.Management.Compute
+  namespace: Microsoft.Azure.Management.Compute
+  summary: "\nPower off (stop) a virtual machine in a VM scale set. Note that resources\nare still attached and you are getting charged for the resources. Instead,\nuse deallocate to release resources and avoid charges.\n"
+  example: []
+  syntax:
+    content: public static Task<OperationStatusResponse> BeginPowerOffAsync(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = null)
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Function BeginPowerOffAsync(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String, cancellationToken As CancellationToken = Nothing) As Task(Of OperationStatusResponse)
+    parameters:
+    - id: operations
+      type: Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations
+      description: "\nThe operations group for this extension method.\n"
+    - id: resourceGroupName
+      type: System.String
+      description: "\nThe name of the resource group.\n"
+    - id: vmScaleSetName
+      type: System.String
+      description: "\nThe name of the VM scale set.\n"
+    - id: instanceId
+      type: System.String
+      description: "\nThe instance ID of the virtual machine.\n"
+    - id: cancellationToken
+      type: System.Threading.CancellationToken
+      description: "\nThe cancellation token.\n"
+    return:
+      type: System.Threading.Tasks.Task{Microsoft.Azure.Management.Compute.Models.OperationStatusResponse}
+  overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginPowerOffAsync*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginRestart(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
+  commentId: M:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginRestart(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
+  id: BeginRestart(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String)
+  isExtensionMethod: true
+  parent: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions
+  langs:
+  - csharp
+  - vb
+  name: BeginRestart(IVirtualMachineScaleSetVMsOperations, String, String, String)
+  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginRestart(IVirtualMachineScaleSetVMsOperations, String, String, String)
+  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginRestart(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations, System.String, System.String, System.String)
+  type: Method
+  source:
+    remote:
+      path: src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
+      branch: AutoRest
+      repo: https://github.com/Azure/azure-sdk-for-net.git
+    id: BeginRestart
+    path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
+    startLine: 767
+  assemblies:
+  - Microsoft.Azure.Management.Compute
+  namespace: Microsoft.Azure.Management.Compute
+  summary: "\nRestarts a virtual machine in a VM scale set.\n"
+  example: []
+  syntax:
+    content: public static OperationStatusResponse BeginRestart(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId)
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Function BeginRestart(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String) As OperationStatusResponse
+    parameters:
+    - id: operations
+      type: Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations
+      description: "\nThe operations group for this extension method.\n"
+    - id: resourceGroupName
+      type: System.String
+      description: "\nThe name of the resource group.\n"
+    - id: vmScaleSetName
+      type: System.String
+      description: "\nThe name of the VM scale set.\n"
+    - id: instanceId
+      type: System.String
+      description: "\nThe instance ID of the virtual machine.\n"
+    return:
+      type: Microsoft.Azure.Management.Compute.Models.OperationStatusResponse
+  overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginRestart*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginRestartAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
+  commentId: M:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginRestartAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
+  id: BeginRestartAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations,System.String,System.String,System.String,System.Threading.CancellationToken)
+  isExtensionMethod: true
+  parent: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions
+  langs:
+  - csharp
+  - vb
+  name: BeginRestartAsync(IVirtualMachineScaleSetVMsOperations, String, String, String, CancellationToken)
+  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginRestartAsync(IVirtualMachineScaleSetVMsOperations, String, String, String, CancellationToken)
+  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginRestartAsync(Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations, System.String, System.String, System.String, System.Threading.CancellationToken)
+  type: Method
+  source:
+    remote:
+      path: src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
+      branch: AutoRest
+      repo: https://github.com/Azure/azure-sdk-for-net.git
+    id: BeginRestartAsync
+    path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
+    startLine: 790
+  assemblies:
+  - Microsoft.Azure.Management.Compute
+  namespace: Microsoft.Azure.Management.Compute
+  summary: "\nRestarts a virtual machine in a VM scale set.\n"
+  example: []
+  syntax:
+    content: public static Task<OperationStatusResponse> BeginRestartAsync(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = null)
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Function BeginRestartAsync(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String, cancellationToken As CancellationToken = Nothing) As Task(Of OperationStatusResponse)
+    parameters:
+    - id: operations
+      type: Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations
+      description: "\nThe operations group for this extension method.\n"
+    - id: resourceGroupName
+      type: System.String
+      description: "\nThe name of the resource group.\n"
+    - id: vmScaleSetName
+      type: System.String
+      description: "\nThe name of the VM scale set.\n"
+    - id: instanceId
+      type: System.String
+      description: "\nThe instance ID of the virtual machine.\n"
+    - id: cancellationToken
+      type: System.Threading.CancellationToken
+      description: "\nThe cancellation token.\n"
+    return:
+      type: System.Threading.Tasks.Task{Microsoft.Azure.Management.Compute.Models.OperationStatusResponse}
+  overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginRestartAsync*
   modifiers.csharp:
   - public
   - static
@@ -1612,18 +1856,18 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: BeginStart
     path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-    startLine: 663
+    startLine: 813
   assemblies:
   - Microsoft.Azure.Management.Compute
   namespace: Microsoft.Azure.Management.Compute
-  summary: "\nAllows you to start a virtual machine in a VM scale set.\n"
+  summary: "\nStarts a virtual machine in a VM scale set.\n"
   example: []
   syntax:
-    content: public static void BeginStart(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId)
+    content: public static OperationStatusResponse BeginStart(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId)
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Sub BeginStart(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String)
+      Public Shared Function BeginStart(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String) As OperationStatusResponse
     parameters:
     - id: operations
       type: Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations
@@ -1633,10 +1877,12 @@ items:
       description: "\nThe name of the resource group.\n"
     - id: vmScaleSetName
       type: System.String
-      description: "\nThe name of the virtual machine scale set.\n"
+      description: "\nThe name of the VM scale set.\n"
     - id: instanceId
       type: System.String
-      description: "\nThe instance id of the virtual machine.\n"
+      description: "\nThe instance ID of the virtual machine.\n"
+    return:
+      type: Microsoft.Azure.Management.Compute.Models.OperationStatusResponse
   overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginStart*
   modifiers.csharp:
   - public
@@ -1663,18 +1909,18 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: BeginStartAsync
     path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-    startLine: 686
+    startLine: 836
   assemblies:
   - Microsoft.Azure.Management.Compute
   namespace: Microsoft.Azure.Management.Compute
-  summary: "\nAllows you to start a virtual machine in a VM scale set.\n"
+  summary: "\nStarts a virtual machine in a VM scale set.\n"
   example: []
   syntax:
-    content: public static Task BeginStartAsync(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = null)
+    content: public static Task<OperationStatusResponse> BeginStartAsync(this IVirtualMachineScaleSetVMsOperations operations, string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = null)
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Function BeginStartAsync(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String, cancellationToken As CancellationToken = Nothing) As Task
+      Public Shared Function BeginStartAsync(operations As IVirtualMachineScaleSetVMsOperations, resourceGroupName As String, vmScaleSetName As String, instanceId As String, cancellationToken As CancellationToken = Nothing) As Task(Of OperationStatusResponse)
     parameters:
     - id: operations
       type: Microsoft.Azure.Management.Compute.IVirtualMachineScaleSetVMsOperations
@@ -1684,15 +1930,15 @@ items:
       description: "\nThe name of the resource group.\n"
     - id: vmScaleSetName
       type: System.String
-      description: "\nThe name of the virtual machine scale set.\n"
+      description: "\nThe name of the VM scale set.\n"
     - id: instanceId
       type: System.String
-      description: "\nThe instance id of the virtual machine.\n"
+      description: "\nThe instance ID of the virtual machine.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task
+      type: System.Threading.Tasks.Task{Microsoft.Azure.Management.Compute.Models.OperationStatusResponse}
   overload: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginStartAsync*
   modifiers.csharp:
   - public
@@ -1719,11 +1965,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: ListNext
     path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-    startLine: 700
+    startLine: 853
   assemblies:
   - Microsoft.Azure.Management.Compute
   namespace: Microsoft.Azure.Management.Compute
-  summary: "\nLists all virtual machines in a VM scale sets.\n"
+  summary: "\nGets a list of all virtual machines in a VM scale sets.\n"
   example: []
   syntax:
     content: public static IPage<VirtualMachineScaleSetVM> ListNext(this IVirtualMachineScaleSetVMsOperations operations, string nextPageLink)
@@ -1766,11 +2012,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: ListNextAsync
     path: src/azure-sdk-for-net/src/ResourceManagement/Compute/Microsoft.Azure.Management.Compute/Generated/VirtualMachineScaleSetVMsOperationsExtensions.cs
-    startLine: 717
+    startLine: 870
   assemblies:
   - Microsoft.Azure.Management.Compute
   namespace: Microsoft.Azure.Management.Compute
-  summary: "\nLists all virtual machines in a VM scale sets.\n"
+  summary: "\nGets a list of all virtual machines in a VM scale sets.\n"
   example: []
   syntax:
     content: public static Task<IPage<VirtualMachineScaleSetVM>> ListNextAsync(this IVirtualMachineScaleSetVMsOperations operations, string nextPageLink, CancellationToken cancellationToken = null)
@@ -2116,6 +2362,19 @@ references:
   name: String
   nameWithType: String
   fullName: System.String
+- uid: Microsoft.Azure.Management.Compute.Models.OperationStatusResponse
+  commentId: T:Microsoft.Azure.Management.Compute.Models.OperationStatusResponse
+  parent: Microsoft.Azure.Management.Compute.Models
+  isExternal: false
+  name: OperationStatusResponse
+  nameWithType: OperationStatusResponse
+  fullName: Microsoft.Azure.Management.Compute.Models.OperationStatusResponse
+- uid: Microsoft.Azure.Management.Compute.Models
+  commentId: N:Microsoft.Azure.Management.Compute.Models
+  isExternal: false
+  name: Microsoft.Azure.Management.Compute.Models
+  nameWithType: Microsoft.Azure.Management.Compute.Models
+  fullName: Microsoft.Azure.Management.Compute.Models
 - uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.ReimageAsync*
   commentId: Overload:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.ReimageAsync
   isExternal: false
@@ -2129,37 +2388,111 @@ references:
   name: CancellationToken
   nameWithType: CancellationToken
   fullName: System.Threading.CancellationToken
-- uid: System.Threading.Tasks.Task
-  commentId: T:System.Threading.Tasks.Task
+- uid: System.Threading.Tasks.Task{Microsoft.Azure.Management.Compute.Models.OperationStatusResponse}
+  commentId: T:System.Threading.Tasks.Task{Microsoft.Azure.Management.Compute.Models.OperationStatusResponse}
   parent: System.Threading.Tasks
-  isExternal: true
-  name: Task
-  nameWithType: Task
-  fullName: System.Threading.Tasks.Task
+  definition: System.Threading.Tasks.Task`1
+  name: Task<OperationStatusResponse>
+  nameWithType: Task<OperationStatusResponse>
+  fullName: System.Threading.Tasks.Task<Microsoft.Azure.Management.Compute.Models.OperationStatusResponse>
+  nameWithType.vb: Task(Of OperationStatusResponse)
+  fullname.vb: System.Threading.Tasks.Task(Of Microsoft.Azure.Management.Compute.Models.OperationStatusResponse)
+  name.vb: Task(Of OperationStatusResponse)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Microsoft.Azure.Management.Compute.Models.OperationStatusResponse
+    name: OperationStatusResponse
+    nameWithType: OperationStatusResponse
+    fullName: Microsoft.Azure.Management.Compute.Models.OperationStatusResponse
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Microsoft.Azure.Management.Compute.Models.OperationStatusResponse
+    name: OperationStatusResponse
+    nameWithType: OperationStatusResponse
+    fullName: Microsoft.Azure.Management.Compute.Models.OperationStatusResponse
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Threading
   commentId: N:System.Threading
   isExternal: false
   name: System.Threading
   nameWithType: System.Threading
   fullName: System.Threading
+- uid: System.Threading.Tasks.Task`1
+  commentId: T:System.Threading.Tasks.Task`1
+  isExternal: true
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullname.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Threading.Tasks
   commentId: N:System.Threading.Tasks
   isExternal: false
   name: System.Threading.Tasks
   nameWithType: System.Threading.Tasks
   fullName: System.Threading.Tasks
-- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimage*
-  commentId: Overload:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimage
+- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.ReimageAll*
+  commentId: Overload:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.ReimageAll
   isExternal: false
-  name: BeginReimage
-  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginReimage
-  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimage
-- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAsync*
-  commentId: Overload:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAsync
+  name: ReimageAll
+  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.ReimageAll
+  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.ReimageAll
+- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.ReimageAllAsync*
+  commentId: Overload:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.ReimageAllAsync
   isExternal: false
-  name: BeginReimageAsync
-  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAsync
-  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAsync
+  name: ReimageAllAsync
+  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.ReimageAllAsync
+  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.ReimageAllAsync
 - uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.Deallocate*
   commentId: Overload:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.Deallocate
   isExternal: false
@@ -2172,18 +2505,6 @@ references:
   name: DeallocateAsync
   nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.DeallocateAsync
   fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.DeallocateAsync
-- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeallocate*
-  commentId: Overload:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeallocate
-  isExternal: false
-  name: BeginDeallocate
-  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginDeallocate
-  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeallocate
-- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeallocateAsync*
-  commentId: Overload:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeallocateAsync
-  isExternal: false
-  name: BeginDeallocateAsync
-  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginDeallocateAsync
-  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeallocateAsync
 - uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.Delete*
   commentId: Overload:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.Delete
   isExternal: false
@@ -2196,18 +2517,6 @@ references:
   name: DeleteAsync
   nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.DeleteAsync
   fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.DeleteAsync
-- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDelete*
-  commentId: Overload:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDelete
-  isExternal: false
-  name: BeginDelete
-  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginDelete
-  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDelete
-- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeleteAsync*
-  commentId: Overload:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeleteAsync
-  isExternal: false
-  name: BeginDeleteAsync
-  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginDeleteAsync
-  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeleteAsync
 - uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.Get*
   commentId: Overload:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.Get
   isExternal: false
@@ -2221,12 +2530,6 @@ references:
   name: VirtualMachineScaleSetVM
   nameWithType: VirtualMachineScaleSetVM
   fullName: Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetVM
-- uid: Microsoft.Azure.Management.Compute.Models
-  commentId: N:Microsoft.Azure.Management.Compute.Models
-  isExternal: false
-  name: Microsoft.Azure.Management.Compute.Models
-  nameWithType: Microsoft.Azure.Management.Compute.Models
-  fullName: Microsoft.Azure.Management.Compute.Models
 - uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.GetAsync*
   commentId: Overload:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.GetAsync
   isExternal: false
@@ -2272,45 +2575,6 @@ references:
     name: VirtualMachineScaleSetVM
     nameWithType: VirtualMachineScaleSetVM
     fullName: Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetVM
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Threading.Tasks.Task`1
-  commentId: T:System.Threading.Tasks.Task`1
-  isExternal: true
-  name: Task<TResult>
-  nameWithType: Task<TResult>
-  fullName: System.Threading.Tasks.Task<TResult>
-  nameWithType.vb: Task(Of TResult)
-  fullname.vb: System.Threading.Tasks.Task(Of TResult)
-  name.vb: Task(Of TResult)
-  spec.csharp:
-  - uid: System.Threading.Tasks.Task`1
-    name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: TResult
-    nameWithType: TResult
-    fullName: TResult
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: System.Threading.Tasks.Task`1
-    name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: )
     nameWithType: )
     fullName: )
@@ -2627,18 +2891,6 @@ references:
   name: PowerOffAsync
   nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.PowerOffAsync
   fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.PowerOffAsync
-- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginPowerOff*
-  commentId: Overload:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginPowerOff
-  isExternal: false
-  name: BeginPowerOff
-  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginPowerOff
-  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginPowerOff
-- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginPowerOffAsync*
-  commentId: Overload:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginPowerOffAsync
-  isExternal: false
-  name: BeginPowerOffAsync
-  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginPowerOffAsync
-  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginPowerOffAsync
 - uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.Restart*
   commentId: Overload:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.Restart
   isExternal: false
@@ -2651,18 +2903,6 @@ references:
   name: RestartAsync
   nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.RestartAsync
   fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.RestartAsync
-- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginRestart*
-  commentId: Overload:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginRestart
-  isExternal: false
-  name: BeginRestart
-  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginRestart
-  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginRestart
-- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginRestartAsync*
-  commentId: Overload:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginRestartAsync
-  isExternal: false
-  name: BeginRestartAsync
-  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginRestartAsync
-  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginRestartAsync
 - uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.Start*
   commentId: Overload:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.Start
   isExternal: false
@@ -2675,6 +2915,78 @@ references:
   name: StartAsync
   nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.StartAsync
   fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.StartAsync
+- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimage*
+  commentId: Overload:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimage
+  isExternal: false
+  name: BeginReimage
+  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginReimage
+  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimage
+- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAsync*
+  commentId: Overload:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAsync
+  isExternal: false
+  name: BeginReimageAsync
+  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAsync
+  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAsync
+- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAll*
+  commentId: Overload:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAll
+  isExternal: false
+  name: BeginReimageAll
+  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAll
+  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAll
+- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAllAsync*
+  commentId: Overload:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAllAsync
+  isExternal: false
+  name: BeginReimageAllAsync
+  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAllAsync
+  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginReimageAllAsync
+- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeallocate*
+  commentId: Overload:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeallocate
+  isExternal: false
+  name: BeginDeallocate
+  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginDeallocate
+  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeallocate
+- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeallocateAsync*
+  commentId: Overload:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeallocateAsync
+  isExternal: false
+  name: BeginDeallocateAsync
+  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginDeallocateAsync
+  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeallocateAsync
+- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDelete*
+  commentId: Overload:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDelete
+  isExternal: false
+  name: BeginDelete
+  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginDelete
+  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDelete
+- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeleteAsync*
+  commentId: Overload:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeleteAsync
+  isExternal: false
+  name: BeginDeleteAsync
+  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginDeleteAsync
+  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginDeleteAsync
+- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginPowerOff*
+  commentId: Overload:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginPowerOff
+  isExternal: false
+  name: BeginPowerOff
+  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginPowerOff
+  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginPowerOff
+- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginPowerOffAsync*
+  commentId: Overload:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginPowerOffAsync
+  isExternal: false
+  name: BeginPowerOffAsync
+  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginPowerOffAsync
+  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginPowerOffAsync
+- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginRestart*
+  commentId: Overload:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginRestart
+  isExternal: false
+  name: BeginRestart
+  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginRestart
+  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginRestart
+- uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginRestartAsync*
+  commentId: Overload:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginRestartAsync
+  isExternal: false
+  name: BeginRestartAsync
+  nameWithType: VirtualMachineScaleSetVMsOperationsExtensions.BeginRestartAsync
+  fullName: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginRestartAsync
 - uid: Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginStart*
   commentId: Overload:Microsoft.Azure.Management.Compute.VirtualMachineScaleSetVMsOperationsExtensions.BeginStart
   isExternal: false
