@@ -11,6 +11,7 @@ items:
   - Microsoft.Azure.Management.WebSites.Models.DatabaseBackupSetting.ConnectionStringName
   - Microsoft.Azure.Management.WebSites.Models.DatabaseBackupSetting.DatabaseType
   - Microsoft.Azure.Management.WebSites.Models.DatabaseBackupSetting.Name
+  - Microsoft.Azure.Management.WebSites.Models.DatabaseBackupSetting.Validate
   langs:
   - csharp
   - vb
@@ -25,11 +26,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: DatabaseBackupSetting
     path: src/azure-sdk-for-net/src/ResourceManagement/WebSite/Microsoft.Azure.Management.Websites/Generated/Models/DatabaseBackupSetting.cs
-    startLine: 24
+    startLine: 20
   assemblies:
   - Microsoft.Azure.Management.Websites
   namespace: Microsoft.Azure.Management.WebSites.Models
-  summary: "\nNote: properties are serialized in JSON format and stored in DB.\nif new properties are added they might not be in the\nprevious data rows\nso please handle nulls\n"
+  summary: "\nDatabase backup settings.\n"
   example: []
   syntax:
     content: public class DatabaseBackupSetting
@@ -68,7 +69,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: .ctor
     path: src/azure-sdk-for-net/src/ResourceManagement/WebSite/Microsoft.Azure.Management.Websites/Generated/Models/DatabaseBackupSetting.cs
-    startLine: 29
+    startLine: 25
   assemblies:
   - Microsoft.Azure.Management.Websites
   namespace: Microsoft.Azure.Management.WebSites.Models
@@ -100,24 +101,44 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: .ctor
     path: src/azure-sdk-for-net/src/ResourceManagement/WebSite/Microsoft.Azure.Management.Websites/Generated/Models/DatabaseBackupSetting.cs
-    startLine: 34
+    startLine: 40
   assemblies:
   - Microsoft.Azure.Management.Websites
   namespace: Microsoft.Azure.Management.WebSites.Models
   summary: "\nInitializes a new instance of the DatabaseBackupSetting class.\n"
   example: []
   syntax:
-    content: public DatabaseBackupSetting(string databaseType = null, string name = null, string connectionStringName = null, string connectionString = null)
-    content.vb: Public Sub New(databaseType As String = Nothing, name As String = Nothing, connectionStringName As String = Nothing, connectionString As String = Nothing)
+    content: public DatabaseBackupSetting(string databaseType, string name = null, string connectionStringName = null, string connectionString = null)
+    content.vb: Public Sub New(databaseType As String, name As String = Nothing, connectionStringName As String = Nothing, connectionString As String = Nothing)
     parameters:
     - id: databaseType
       type: System.String
+      description: >-
+        Database type (e.g. SqlAzure / MySql).
+
+        Possible values include: 'SqlAzure', 'MySql', 'LocalMySql'
     - id: name
       type: System.String
     - id: connectionStringName
       type: System.String
+      description: >-
+        Contains a connection string
+
+        name that is linked to the SiteConfig.ConnectionStrings.
+
+        This is used during restore with overwrite connection strings
+
+        options.
     - id: connectionString
       type: System.String
+      description: >-
+        Contains a connection string to a
+
+        database which is being backed up or restored. If the restore
+
+        should happen to a new database, the database name inside is the
+
+        new one.
   overload: Microsoft.Azure.Management.WebSites.Models.DatabaseBackupSetting.#ctor*
   modifiers.csharp:
   - public
@@ -141,11 +162,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: DatabaseType
     path: src/azure-sdk-for-net/src/ResourceManagement/WebSite/Microsoft.Azure.Management.Websites/Generated/Models/DatabaseBackupSetting.cs
-    startLine: 45
+    startLine: 52
   assemblies:
   - Microsoft.Azure.Management.Websites
   namespace: Microsoft.Azure.Management.WebSites.Models
-  summary: "\nSqlAzure / MySql\n"
+  summary: "\nGets or sets database type (e.g. SqlAzure / MySql). Possible values\ninclude: 'SqlAzure', 'MySql', 'LocalMySql'\n"
   example: []
   syntax:
     content: >-
@@ -192,7 +213,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: Name
     path: src/azure-sdk-for-net/src/ResourceManagement/WebSite/Microsoft.Azure.Management.Websites/Generated/Models/DatabaseBackupSetting.cs
-    startLine: 50
+    startLine: 57
   assemblies:
   - Microsoft.Azure.Management.Websites
   namespace: Microsoft.Azure.Management.WebSites.Models
@@ -243,11 +264,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: ConnectionStringName
     path: src/azure-sdk-for-net/src/ResourceManagement/WebSite/Microsoft.Azure.Management.Websites/Generated/Models/DatabaseBackupSetting.cs
-    startLine: 59
+    startLine: 66
   assemblies:
   - Microsoft.Azure.Management.Websites
   namespace: Microsoft.Azure.Management.WebSites.Models
-  summary: "\nContains a connection string name that is linked to the\nSiteConfig.ConnectionStrings.\nThis is used during restore with overwrite connection\nstrings options.\n"
+  summary: "\nGets or sets contains a connection string name that is linked to\nthe SiteConfig.ConnectionStrings.\nThis is used during restore with overwrite connection strings\noptions.\n"
   example: []
   syntax:
     content: >-
@@ -294,11 +315,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: ConnectionString
     path: src/azure-sdk-for-net/src/ResourceManagement/WebSite/Microsoft.Azure.Management.Websites/Generated/Models/DatabaseBackupSetting.cs
-    startLine: 67
+    startLine: 74
   assemblies:
   - Microsoft.Azure.Management.Websites
   namespace: Microsoft.Azure.Management.WebSites.Models
-  summary: "\nContains a connection string to a database which is being backed\nup/restored. If the restore should happen to a new database, the\ndatabase name inside is the new one.\n"
+  summary: "\nGets or sets contains a connection string to a database which is\nbeing backed up or restored. If the restore should happen to a new\ndatabase, the database name inside is the new one.\n"
   example: []
   syntax:
     content: >-
@@ -327,6 +348,44 @@ items:
   - set
   modifiers.vb:
   - Public
+- uid: Microsoft.Azure.Management.WebSites.Models.DatabaseBackupSetting.Validate
+  commentId: M:Microsoft.Azure.Management.WebSites.Models.DatabaseBackupSetting.Validate
+  id: Validate
+  parent: Microsoft.Azure.Management.WebSites.Models.DatabaseBackupSetting
+  langs:
+  - csharp
+  - vb
+  name: Validate()
+  nameWithType: DatabaseBackupSetting.Validate()
+  fullName: Microsoft.Azure.Management.WebSites.Models.DatabaseBackupSetting.Validate()
+  type: Method
+  source:
+    remote:
+      path: src/ResourceManagement/WebSite/Microsoft.Azure.Management.Websites/Generated/Models/DatabaseBackupSetting.cs
+      branch: AutoRest
+      repo: https://github.com/Azure/azure-sdk-for-net.git
+    id: Validate
+    path: src/azure-sdk-for-net/src/ResourceManagement/WebSite/Microsoft.Azure.Management.Websites/Generated/Models/DatabaseBackupSetting.cs
+    startLine: 83
+  assemblies:
+  - Microsoft.Azure.Management.Websites
+  namespace: Microsoft.Azure.Management.WebSites.Models
+  summary: "\nValidate the object.\n"
+  example: []
+  syntax:
+    content: public virtual void Validate()
+    content.vb: Public Overridable Sub Validate
+  overload: Microsoft.Azure.Management.WebSites.Models.DatabaseBackupSetting.Validate*
+  exceptions:
+  - type: Microsoft.Rest.ValidationException
+    commentId: T:Microsoft.Rest.ValidationException
+    description: "\nThrown if validation fails\n"
+  modifiers.csharp:
+  - public
+  - virtual
+  modifiers.vb:
+  - Public
+  - Overridable
 references:
 - uid: Microsoft.Azure.Management.WebSites.Models
   commentId: N:Microsoft.Azure.Management.WebSites.Models
@@ -663,3 +722,11 @@ references:
   name: ConnectionString
   nameWithType: DatabaseBackupSetting.ConnectionString
   fullName: Microsoft.Azure.Management.WebSites.Models.DatabaseBackupSetting.ConnectionString
+- uid: Microsoft.Azure.Management.WebSites.Models.DatabaseBackupSetting.Validate*
+  commentId: Overload:Microsoft.Azure.Management.WebSites.Models.DatabaseBackupSetting.Validate
+  isExternal: false
+  name: Validate
+  nameWithType: DatabaseBackupSetting.Validate
+  fullName: Microsoft.Azure.Management.WebSites.Models.DatabaseBackupSetting.Validate
+- uid: Microsoft.Rest.ValidationException
+  commentId: T:Microsoft.Rest.ValidationException
