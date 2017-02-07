@@ -6,6 +6,7 @@ items:
   parent: Microsoft.ApplicationInsights.Channel
   children:
   - Microsoft.ApplicationInsights.Channel.InMemoryChannel.#ctor
+  - Microsoft.ApplicationInsights.Channel.InMemoryChannel.BacklogSize
   - Microsoft.ApplicationInsights.Channel.InMemoryChannel.DeveloperMode
   - Microsoft.ApplicationInsights.Channel.InMemoryChannel.Dispose
   - Microsoft.ApplicationInsights.Channel.InMemoryChannel.EndpointAddress
@@ -76,7 +77,7 @@ items:
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
     id: .ctor
     path: src/ApplicationInsights-dotnet/src/Core/Managed/Shared/Channel/InMemoryChannel.cs
-    startLine: 19
+    startLine: 24
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.Channel
@@ -108,7 +109,7 @@ items:
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
     id: DeveloperMode
     path: src/ApplicationInsights-dotnet/src/Core/Managed/Shared/Channel/InMemoryChannel.cs
-    startLine: 39
+    startLine: 44
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.Channel
@@ -147,7 +148,7 @@ items:
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
     id: SendingInterval
     path: src/ApplicationInsights-dotnet/src/Core/Managed/Shared/Channel/InMemoryChannel.cs
-    startLine: 69
+    startLine: 74
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.Channel
@@ -184,7 +185,7 @@ items:
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
     id: EndpointAddress
     path: src/ApplicationInsights-dotnet/src/Core/Managed/Shared/Channel/InMemoryChannel.cs
-    startLine: 85
+    startLine: 90
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.Channel
@@ -223,11 +224,11 @@ items:
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
     id: MaxTelemetryBufferCapacity
     path: src/ApplicationInsights-dotnet/src/Core/Managed/Shared/Channel/InMemoryChannel.cs
-    startLine: 95
+    startLine: 101
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.Channel
-  summary: "\nGets or sets the maximum number of telemetry items will accumulate in a memory before \nthe <xref href=\"Microsoft.ApplicationInsights.Channel.InMemoryChannel\" data-throw-if-not-resolved=\"false\"></xref> serializing them for transmission to Application Insights.\n"
+  summary: "\nGets or sets the maximum number of telemetry items will accumulate in a memory before \nthe <xref href=\"Microsoft.ApplicationInsights.Channel.InMemoryChannel\" data-throw-if-not-resolved=\"false\"></xref> serializing them for transmission to Application Insights.\nThis is not a hard limit on how many unsent items can be in the buffer.\n"
   example: []
   syntax:
     content: public int MaxTelemetryBufferCapacity { get; set; }
@@ -236,6 +237,43 @@ items:
     return:
       type: System.Int32
   overload: Microsoft.ApplicationInsights.Channel.InMemoryChannel.MaxTelemetryBufferCapacity*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Microsoft.ApplicationInsights.Channel.InMemoryChannel.BacklogSize
+  commentId: P:Microsoft.ApplicationInsights.Channel.InMemoryChannel.BacklogSize
+  id: BacklogSize
+  parent: Microsoft.ApplicationInsights.Channel.InMemoryChannel
+  langs:
+  - csharp
+  - vb
+  name: BacklogSize
+  nameWithType: InMemoryChannel.BacklogSize
+  fullName: Microsoft.ApplicationInsights.Channel.InMemoryChannel.BacklogSize
+  type: Property
+  source:
+    remote:
+      path: src/Core/Managed/Shared/Channel/InMemoryChannel.cs
+      branch: master
+      repo: https://github.com/Microsoft/ApplicationInsights-dotnet
+    id: BacklogSize
+    path: src/ApplicationInsights-dotnet/src/Core/Managed/Shared/Channel/InMemoryChannel.cs
+    startLine: 111
+  assemblies:
+  - Microsoft.ApplicationInsights
+  namespace: Microsoft.ApplicationInsights.Channel
+  summary: "\nGets or sets the maximum number of telemetry items that can be in the backlog to send. This is a hard limit\nand Items will be dropped by the <xref href=\"Microsoft.ApplicationInsights.Channel.InMemoryChannel\" data-throw-if-not-resolved=\"false\"></xref> once this limit is hit until items are drained from the buffer.\n"
+  example: []
+  syntax:
+    content: public int BacklogSize { get; set; }
+    content.vb: Public Property BacklogSize As Integer
+    parameters: []
+    return:
+      type: System.Int32
+  overload: Microsoft.ApplicationInsights.Channel.InMemoryChannel.BacklogSize*
   modifiers.csharp:
   - public
   - get
@@ -260,7 +298,7 @@ items:
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
     id: Send
     path: src/ApplicationInsights-dotnet/src/Core/Managed/Shared/Channel/InMemoryChannel.cs
-    startLine: 104
+    startLine: 120
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.Channel
@@ -297,7 +335,7 @@ items:
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
     id: Flush
     path: src/ApplicationInsights-dotnet/src/Core/Managed/Shared/Channel/InMemoryChannel.cs
-    startLine: 124
+    startLine: 146
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.Channel
@@ -331,7 +369,7 @@ items:
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
     id: Flush
     path: src/ApplicationInsights-dotnet/src/Core/Managed/Shared/Channel/InMemoryChannel.cs
-    startLine: 133
+    startLine: 155
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.Channel
@@ -367,7 +405,7 @@ items:
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
     id: Dispose
     path: src/ApplicationInsights-dotnet/src/Core/Managed/Shared/Channel/InMemoryChannel.cs
-    startLine: 141
+    startLine: 167
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.Channel
@@ -879,6 +917,12 @@ references:
   name: Int32
   nameWithType: Int32
   fullName: System.Int32
+- uid: Microsoft.ApplicationInsights.Channel.InMemoryChannel.BacklogSize*
+  commentId: Overload:Microsoft.ApplicationInsights.Channel.InMemoryChannel.BacklogSize
+  isExternal: false
+  name: BacklogSize
+  nameWithType: InMemoryChannel.BacklogSize
+  fullName: Microsoft.ApplicationInsights.Channel.InMemoryChannel.BacklogSize
 - uid: Microsoft.ApplicationInsights.Channel.InMemoryChannel.Send*
   commentId: Overload:Microsoft.ApplicationInsights.Channel.InMemoryChannel.Send
   isExternal: false
