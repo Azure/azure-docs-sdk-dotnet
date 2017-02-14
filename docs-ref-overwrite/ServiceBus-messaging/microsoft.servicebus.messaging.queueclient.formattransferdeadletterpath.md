@@ -4,7 +4,6 @@ summary: *content
 parameters:
 - id: queuePath
   description: The path to the transfer dead letter receiver queue.
-  type: System.String
 ---
 
 # Summary
