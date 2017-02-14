@@ -6,6 +6,4 @@ parameters:
   description: The path to the transfer dead letter receiver queue.
 ---
 
-# Summary
-
 Utility method that creates the name for the transfer dead letter receiver.
