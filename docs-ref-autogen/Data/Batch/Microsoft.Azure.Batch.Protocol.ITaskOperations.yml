@@ -95,7 +95,7 @@ items:
     parameters:
     - id: jobId
       type: System.String
-      description: "\nThe id of the job to which the task is to be added.\n"
+      description: "\nThe ID of the job to which the task is to be added.\n"
     - id: task
       type: Microsoft.Azure.Batch.Protocol.Models.TaskAddParameter
       description: "\nThe task to be added.\n"
@@ -136,11 +136,12 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: ListWithHttpMessagesAsync
     path: src/azure-sdk-for-net/src/Batch/Client/Src/GeneratedProtocol/ITaskOperations.cs
-    startLine: 77
+    startLine: 82
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch.Protocol
   summary: "\nLists all of the tasks that are associated with the specified job.\n"
+  remarks: "\nFor multi-instance tasks, information such as affinityId,\nexecutionInfo and nodeInfo refer to the primary task. Use the list\nsubtasks API to retrieve information about subtasks.\n"
   example: []
   syntax:
     content: Task<Rest.Azure.AzureOperationResponse<Rest.Azure.IPage<CloudTask>, TaskListHeaders>> ListWithHttpMessagesAsync(string jobId, TaskListOptions taskListOptions = null, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = null)
@@ -148,7 +149,7 @@ items:
     parameters:
     - id: jobId
       type: System.String
-      description: "\nThe id of the job.\n"
+      description: "\nThe ID of the job.\n"
     - id: taskListOptions
       type: Microsoft.Azure.Batch.Protocol.Models.TaskListOptions
       description: "\nAdditional parameters for the operation\n"
@@ -186,11 +187,12 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: AddCollectionWithHttpMessagesAsync
     path: src/azure-sdk-for-net/src/Batch/Client/Src/GeneratedProtocol/ITaskOperations.cs
-    startLine: 105
+    startLine: 122
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch.Protocol
   summary: "\nAdds a collection of tasks to the specified job.\n"
+  remarks: "\nNote that each task must have a unique ID. The Batch service may\nnot return the results for each task in the same order the tasks\nwere submitted in this request. If the server times out or the\nconnection is closed during the request, the request may have been\npartially or fully processed, or not at all. In such cases, the\nuser should re-issue the request. Note that it is up to the user to\ncorrectly handle failures when re-issuing a request. For example,\nyou should use the same task ids during a retry so that if the\nprior operation succeeded, the retry will not create extra tasks\nunexpectedly.\n"
   example: []
   syntax:
     content: Task<Rest.Azure.AzureOperationResponse<TaskAddCollectionResult, TaskAddCollectionHeaders>> AddCollectionWithHttpMessagesAsync(string jobId, IList<TaskAddParameter> value, TaskAddCollectionOptions taskAddCollectionOptions = null, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = null)
@@ -198,7 +200,7 @@ items:
     parameters:
     - id: jobId
       type: System.String
-      description: "\nThe id of the job to which the task collection is to be added.\n"
+      description: "\nThe ID of the job to which the task collection is to be added.\n"
     - id: value
       type: System.Collections.Generic.IList{Microsoft.Azure.Batch.Protocol.Models.TaskAddParameter}
       description: "\nThe collection of tasks to add.\n"
@@ -239,11 +241,12 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: DeleteWithHttpMessagesAsync
     path: src/azure-sdk-for-net/src/Batch/Client/Src/GeneratedProtocol/ITaskOperations.cs
-    startLine: 130
+    startLine: 154
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch.Protocol
   summary: "\nDeletes a task from the specified job.\n"
+  remarks: "\nWhen a task is deleted, all of the files in its directory on the\ncompute node where it ran are also deleted (regardless of the\nretention time). For multi-instance tasks, the delete task\noperation applies synchronously to the primary task; subtasks and\ntheir files are then deleted asynchronously in the background.\n"
   example: []
   syntax:
     content: Task<Rest.Azure.AzureOperationHeaderResponse<TaskDeleteHeaders>> DeleteWithHttpMessagesAsync(string jobId, string taskId, TaskDeleteOptions taskDeleteOptions = null, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = null)
@@ -251,10 +254,10 @@ items:
     parameters:
     - id: jobId
       type: System.String
-      description: "\nThe id of the job from which to delete the task.\n"
+      description: "\nThe ID of the job from which to delete the task.\n"
     - id: taskId
       type: System.String
-      description: "\nThe id of the task to delete.\n"
+      description: "\nThe ID of the task to delete.\n"
     - id: taskDeleteOptions
       type: Microsoft.Azure.Batch.Protocol.Models.TaskDeleteOptions
       description: "\nAdditional parameters for the operation\n"
@@ -292,11 +295,12 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: GetWithHttpMessagesAsync
     path: src/azure-sdk-for-net/src/Batch/Client/Src/GeneratedProtocol/ITaskOperations.cs
-    startLine: 158
+    startLine: 187
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch.Protocol
   summary: "\nGets information about the specified task.\n"
+  remarks: "\nFor multi-instance tasks, information such as affinityId,\nexecutionInfo and nodeInfo refer to the primary task. Use the list\nsubtasks API to retrieve information about subtasks.\n"
   example: []
   syntax:
     content: Task<Rest.Azure.AzureOperationResponse<CloudTask, TaskGetHeaders>> GetWithHttpMessagesAsync(string jobId, string taskId, TaskGetOptions taskGetOptions = null, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = null)
@@ -304,10 +308,10 @@ items:
     parameters:
     - id: jobId
       type: System.String
-      description: "\nThe id of the job that contains the task.\n"
+      description: "\nThe ID of the job that contains the task.\n"
     - id: taskId
       type: System.String
-      description: "\nThe id of the task to get information about.\n"
+      description: "\nThe ID of the task to get information about.\n"
     - id: taskGetOptions
       type: Microsoft.Azure.Batch.Protocol.Models.TaskGetOptions
       description: "\nAdditional parameters for the operation\n"
@@ -345,7 +349,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: UpdateWithHttpMessagesAsync
     path: src/azure-sdk-for-net/src/Batch/Client/Src/GeneratedProtocol/ITaskOperations.cs
-    startLine: 187
+    startLine: 216
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch.Protocol
@@ -357,10 +361,10 @@ items:
     parameters:
     - id: jobId
       type: System.String
-      description: "\nThe id of the job containing the task.\n"
+      description: "\nThe ID of the job containing the task.\n"
     - id: taskId
       type: System.String
-      description: "\nThe id of the task to update.\n"
+      description: "\nThe ID of the task to update.\n"
     - id: constraints
       type: Microsoft.Azure.Batch.Protocol.Models.TaskConstraints
       description: "\nConstraints that apply to this task. If omitted, the task is given\nthe default constraints.\n"
@@ -401,11 +405,12 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: ListSubtasksWithHttpMessagesAsync
     path: src/azure-sdk-for-net/src/Batch/Client/Src/GeneratedProtocol/ITaskOperations.cs
-    startLine: 216
+    startLine: 249
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch.Protocol
   summary: "\nLists all of the subtasks that are associated with the specified\nmulti-instance task.\n"
+  remarks: "\nIf the task is not a multi-instance task then this returns an empty\ncollection.\n"
   example: []
   syntax:
     content: Task<Rest.Azure.AzureOperationResponse<CloudTaskListSubtasksResult, TaskListSubtasksHeaders>> ListSubtasksWithHttpMessagesAsync(string jobId, string taskId, TaskListSubtasksOptions taskListSubtasksOptions = null, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = null)
@@ -413,10 +418,10 @@ items:
     parameters:
     - id: jobId
       type: System.String
-      description: "\nThe id of the job.\n"
+      description: "\nThe ID of the job.\n"
     - id: taskId
       type: System.String
-      description: "\nThe id of the task.\n"
+      description: "\nThe ID of the task.\n"
     - id: taskListSubtasksOptions
       type: Microsoft.Azure.Batch.Protocol.Models.TaskListSubtasksOptions
       description: "\nAdditional parameters for the operation\n"
@@ -454,11 +459,12 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: TerminateWithHttpMessagesAsync
     path: src/azure-sdk-for-net/src/Batch/Client/Src/GeneratedProtocol/ITaskOperations.cs
-    startLine: 241
+    startLine: 280
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch.Protocol
   summary: "\nTerminates the specified task.\n"
+  remarks: "\nWhen the task has been terminated, it moves to the completed state.\nFor multi-instance tasks, the terminate task operation applies\nsynchronously to the primary task; subtasks are then terminated\nasynchronously in the background.\n"
   example: []
   syntax:
     content: Task<Rest.Azure.AzureOperationHeaderResponse<TaskTerminateHeaders>> TerminateWithHttpMessagesAsync(string jobId, string taskId, TaskTerminateOptions taskTerminateOptions = null, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = null)
@@ -466,10 +472,10 @@ items:
     parameters:
     - id: jobId
       type: System.String
-      description: "\nThe id of the job containing the task.\n"
+      description: "\nThe ID of the job containing the task.\n"
     - id: taskId
       type: System.String
-      description: "\nThe id of the task to terminate.\n"
+      description: "\nThe ID of the task to terminate.\n"
     - id: taskTerminateOptions
       type: Microsoft.Azure.Batch.Protocol.Models.TaskTerminateOptions
       description: "\nAdditional parameters for the operation\n"
@@ -507,12 +513,12 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: ReactivateWithHttpMessagesAsync
     path: src/azure-sdk-for-net/src/Batch/Client/Src/GeneratedProtocol/ITaskOperations.cs
-    startLine: 273
+    startLine: 314
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch.Protocol
   summary: "\nReactivates the specified task.\n"
-  remarks: "\nReactivation makes a task eligible to be retried again up to its\nmaximum retry count. This will fail for tasks that are not\ncompleted or that previously completed successfully (with an exit\ncode of 0). Additionally, this will fail if the job has completed\n(or is terminating or deleting).\n"
+  remarks: "\nReactivation makes a task eligible to be retried again up to its\nmaximum retry count. The task's state is changed to active. As the\ntask is no longer in the completed state, any previous exit code or\nscheduling error is no longer available after reactivation. This\nwill fail for tasks that are not completed or that previously\ncompleted successfully (with an exit code of 0). Additionally, this\nwill fail if the job has completed (or is terminating or deleting).\n"
   example: []
   syntax:
     content: Task<Rest.Azure.AzureOperationHeaderResponse<TaskReactivateHeaders>> ReactivateWithHttpMessagesAsync(string jobId, string taskId, TaskReactivateOptions taskReactivateOptions = null, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = null)
@@ -520,10 +526,10 @@ items:
     parameters:
     - id: jobId
       type: System.String
-      description: "\nThe id of the job containing the task.\n"
+      description: "\nThe ID of the job containing the task.\n"
     - id: taskId
       type: System.String
-      description: "\nThe id of the task to reactivate.\n"
+      description: "\nThe ID of the task to reactivate.\n"
     - id: taskReactivateOptions
       type: Microsoft.Azure.Batch.Protocol.Models.TaskReactivateOptions
       description: "\nAdditional parameters for the operation\n"
@@ -561,11 +567,12 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: ListNextWithHttpMessagesAsync
     path: src/azure-sdk-for-net/src/Batch/Client/Src/GeneratedProtocol/ITaskOperations.cs
-    startLine: 298
+    startLine: 344
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch.Protocol
   summary: "\nLists all of the tasks that are associated with the specified job.\n"
+  remarks: "\nFor multi-instance tasks, information such as affinityId,\nexecutionInfo and nodeInfo refer to the primary task. Use the list\nsubtasks API to retrieve information about subtasks.\n"
   example: []
   syntax:
     content: Task<Rest.Azure.AzureOperationResponse<Rest.Azure.IPage<CloudTask>, TaskListHeaders>> ListNextWithHttpMessagesAsync(string nextPageLink, TaskListNextOptions taskListNextOptions = null, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = null)

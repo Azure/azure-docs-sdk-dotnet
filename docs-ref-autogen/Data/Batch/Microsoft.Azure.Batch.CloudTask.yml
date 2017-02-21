@@ -8,6 +8,7 @@ items:
   - Microsoft.Azure.Batch.CloudTask.#ctor(System.String,System.String)
   - Microsoft.Azure.Batch.CloudTask.AffinityInformation
   - Microsoft.Azure.Batch.CloudTask.ApplicationPackageReferences
+  - Microsoft.Azure.Batch.CloudTask.AuthenticationTokenSettings
   - Microsoft.Azure.Batch.CloudTask.CommandLine
   - Microsoft.Azure.Batch.CloudTask.Commit(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})
   - Microsoft.Azure.Batch.CloudTask.CommitAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
@@ -38,7 +39,6 @@ items:
   - Microsoft.Azure.Batch.CloudTask.Refresh(Microsoft.Azure.Batch.DetailLevel,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})
   - Microsoft.Azure.Batch.CloudTask.RefreshAsync(Microsoft.Azure.Batch.DetailLevel,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
   - Microsoft.Azure.Batch.CloudTask.ResourceFiles
-  - Microsoft.Azure.Batch.CloudTask.RunElevated
   - Microsoft.Azure.Batch.CloudTask.StageFiles
   - Microsoft.Azure.Batch.CloudTask.StageFilesAsync(System.Collections.Concurrent.ConcurrentDictionary{System.Type,Microsoft.Azure.Batch.IFileStagingArtifact})
   - Microsoft.Azure.Batch.CloudTask.State
@@ -47,6 +47,7 @@ items:
   - Microsoft.Azure.Batch.CloudTask.Terminate(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})
   - Microsoft.Azure.Batch.CloudTask.TerminateAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
   - Microsoft.Azure.Batch.CloudTask.Url
+  - Microsoft.Azure.Batch.CloudTask.UserIdentity
   langs:
   - csharp
   - vb
@@ -690,12 +691,12 @@ items:
   remarks: The get file operation runs asynchronously.
   example: []
   syntax:
-    content: public Task<NodeFile> GetNodeFileAsync(string fileName, IEnumerable<BatchClientBehavior> additionalBehaviors = null, CancellationToken cancellationToken = null)
-    content.vb: Public Function GetNodeFileAsync(fileName As String, additionalBehaviors As IEnumerable(Of BatchClientBehavior) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of NodeFile)
+    content: public Task<NodeFile> GetNodeFileAsync(string filePath, IEnumerable<BatchClientBehavior> additionalBehaviors = null, CancellationToken cancellationToken = null)
+    content.vb: Public Function GetNodeFileAsync(filePath As String, additionalBehaviors As IEnumerable(Of BatchClientBehavior) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of NodeFile)
     parameters:
-    - id: fileName
+    - id: filePath
       type: System.String
-      description: The name of the file to retrieve.
+      description: The path of the file to retrieve.
     - id: additionalBehaviors
       type: System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior}
       description: A collection of <xref href="Microsoft.Azure.Batch.BatchClientBehavior" data-throw-if-not-resolved="false"></xref> instances that are applied to the Batch service request after the <xref href="Microsoft.Azure.Batch.CloudTask.CustomBehaviors" data-throw-if-not-resolved="false"></xref>.
@@ -739,12 +740,12 @@ items:
   remarks: This is a blocking operation. For a non-blocking equivalent, see <xref href="Microsoft.Azure.Batch.CloudTask.GetNodeFileAsync(System.String%2cSystem.Collections.Generic.IEnumerable%7bMicrosoft.Azure.Batch.BatchClientBehavior%7d%2cSystem.Threading.CancellationToken)" data-throw-if-not-resolved="false"></xref>.
   example: []
   syntax:
-    content: public NodeFile GetNodeFile(string fileName, IEnumerable<BatchClientBehavior> additionalBehaviors = null)
-    content.vb: Public Function GetNodeFile(fileName As String, additionalBehaviors As IEnumerable(Of BatchClientBehavior) = Nothing) As NodeFile
+    content: public NodeFile GetNodeFile(string filePath, IEnumerable<BatchClientBehavior> additionalBehaviors = null)
+    content.vb: Public Function GetNodeFile(filePath As String, additionalBehaviors As IEnumerable(Of BatchClientBehavior) = Nothing) As NodeFile
     parameters:
-    - id: fileName
+    - id: filePath
       type: System.String
-      description: The name of the file to retrieve.
+      description: The path of the file to retrieve.
     - id: additionalBehaviors
       type: System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior}
       description: A collection of <xref href="Microsoft.Azure.Batch.BatchClientBehavior" data-throw-if-not-resolved="false"></xref> instances that are applied to the Batch service request after the <xref href="Microsoft.Azure.Batch.CloudTask.CustomBehaviors" data-throw-if-not-resolved="false"></xref>.
@@ -871,7 +872,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: CustomBehaviors
     path: src/azure-sdk-for-net/src/Batch/Client/Src/Generated/CloudTask.cs
-    startLine: 230
+    startLine: 236
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch
@@ -911,7 +912,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: AffinityInformation
     path: src/azure-sdk-for-net/src/Batch/Client/Src/Generated/CloudTask.cs
-    startLine: 239
+    startLine: 245
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch
@@ -948,7 +949,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: ApplicationPackageReferences
     path: src/azure-sdk-for-net/src/Batch/Client/Src/Generated/CloudTask.cs
-    startLine: 249
+    startLine: 255
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch
@@ -961,6 +962,44 @@ items:
     return:
       type: System.Collections.Generic.IList{Microsoft.Azure.Batch.ApplicationPackageReference}
   overload: Microsoft.Azure.Batch.CloudTask.ApplicationPackageReferences*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Microsoft.Azure.Batch.CloudTask.AuthenticationTokenSettings
+  commentId: P:Microsoft.Azure.Batch.CloudTask.AuthenticationTokenSettings
+  id: AuthenticationTokenSettings
+  parent: Microsoft.Azure.Batch.CloudTask
+  langs:
+  - csharp
+  - vb
+  name: AuthenticationTokenSettings
+  nameWithType: CloudTask.AuthenticationTokenSettings
+  fullName: Microsoft.Azure.Batch.CloudTask.AuthenticationTokenSettings
+  type: Property
+  source:
+    remote:
+      path: src/Batch/Client/Src/Generated/CloudTask.cs
+      branch: AutoRest
+      repo: https://github.com/Azure/azure-sdk-for-net.git
+    id: AuthenticationTokenSettings
+    path: src/azure-sdk-for-net/src/Batch/Client/Src/Generated/CloudTask.cs
+    startLine: 274
+  assemblies:
+  - Microsoft.Azure.Batch
+  namespace: Microsoft.Azure.Batch
+  summary: "\nGets or sets the settings for an authentication token that the task can use to perform Batch service operations.\n"
+  remarks: "\nIf this property is set, the Batch service provides the task with an authentication token which can be used to \nauthenticate Batch service operations without requiring an account access key. The token is provided via the \nAZ_BATCH_AUTHENTICATION_TOKEN environment variable. The operations that the task can carry out using the token \ndepend on the settings. For example, a task can request job permissions in order to add other tasks to the job, \nor check the status of the job or of other tasks.\n"
+  example: []
+  syntax:
+    content: public AuthenticationTokenSettings AuthenticationTokenSettings { get; set; }
+    content.vb: Public Property AuthenticationTokenSettings As AuthenticationTokenSettings
+    parameters: []
+    return:
+      type: Microsoft.Azure.Batch.AuthenticationTokenSettings
+  overload: Microsoft.Azure.Batch.CloudTask.AuthenticationTokenSettings*
   modifiers.csharp:
   - public
   - get
@@ -985,7 +1024,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: CommandLine
     path: src/azure-sdk-for-net/src/Batch/Client/Src/Generated/CloudTask.cs
-    startLine: 266
+    startLine: 288
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch
@@ -1023,7 +1062,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: ComputeNodeInformation
     path: src/azure-sdk-for-net/src/Batch/Client/Src/Generated/CloudTask.cs
-    startLine: 275
+    startLine: 297
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch
@@ -1060,7 +1099,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: Constraints
     path: src/azure-sdk-for-net/src/Batch/Client/Src/Generated/CloudTask.cs
-    startLine: 283
+    startLine: 305
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch
@@ -1097,7 +1136,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: CreationTime
     path: src/azure-sdk-for-net/src/Batch/Client/Src/Generated/CloudTask.cs
-    startLine: 292
+    startLine: 314
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch
@@ -1134,7 +1173,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: DependsOn
     path: src/azure-sdk-for-net/src/Batch/Client/Src/Generated/CloudTask.cs
-    startLine: 305
+    startLine: 327
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch
@@ -1172,7 +1211,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: DisplayName
     path: src/azure-sdk-for-net/src/Batch/Client/Src/Generated/CloudTask.cs
-    startLine: 314
+    startLine: 336
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch
@@ -1209,7 +1248,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: EnvironmentSettings
     path: src/azure-sdk-for-net/src/Batch/Client/Src/Generated/CloudTask.cs
-    startLine: 323
+    startLine: 345
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch
@@ -1246,7 +1285,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: ETag
     path: src/azure-sdk-for-net/src/Batch/Client/Src/Generated/CloudTask.cs
-    startLine: 335
+    startLine: 357
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch
@@ -1283,7 +1322,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: ExecutionInformation
     path: src/azure-sdk-for-net/src/Batch/Client/Src/Generated/CloudTask.cs
-    startLine: 343
+    startLine: 365
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch
@@ -1320,7 +1359,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: ExitConditions
     path: src/azure-sdk-for-net/src/Batch/Client/Src/Generated/CloudTask.cs
-    startLine: 351
+    startLine: 373
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch
@@ -1357,7 +1396,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: FilesToStage
     path: src/azure-sdk-for-net/src/Batch/Client/Src/Generated/CloudTask.cs
-    startLine: 360
+    startLine: 382
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch
@@ -1394,7 +1433,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: Id
     path: src/azure-sdk-for-net/src/Batch/Client/Src/Generated/CloudTask.cs
-    startLine: 372
+    startLine: 394
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch
@@ -1431,7 +1470,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: LastModified
     path: src/azure-sdk-for-net/src/Batch/Client/Src/Generated/CloudTask.cs
-    startLine: 381
+    startLine: 403
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch
@@ -1468,7 +1507,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: MultiInstanceSettings
     path: src/azure-sdk-for-net/src/Batch/Client/Src/Generated/CloudTask.cs
-    startLine: 389
+    startLine: 411
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch
@@ -1505,7 +1544,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: PreviousState
     path: src/azure-sdk-for-net/src/Batch/Client/Src/Generated/CloudTask.cs
-    startLine: 402
+    startLine: 424
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch
@@ -1543,7 +1582,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: PreviousStateTransitionTime
     path: src/azure-sdk-for-net/src/Batch/Client/Src/Generated/CloudTask.cs
-    startLine: 414
+    startLine: 436
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch
@@ -1581,7 +1620,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: ResourceFiles
     path: src/azure-sdk-for-net/src/Batch/Client/Src/Generated/CloudTask.cs
-    startLine: 423
+    startLine: 445
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch
@@ -1594,43 +1633,6 @@ items:
     return:
       type: System.Collections.Generic.IList{Microsoft.Azure.Batch.ResourceFile}
   overload: Microsoft.Azure.Batch.CloudTask.ResourceFiles*
-  modifiers.csharp:
-  - public
-  - get
-  - set
-  modifiers.vb:
-  - Public
-- uid: Microsoft.Azure.Batch.CloudTask.RunElevated
-  commentId: P:Microsoft.Azure.Batch.CloudTask.RunElevated
-  id: RunElevated
-  parent: Microsoft.Azure.Batch.CloudTask
-  langs:
-  - csharp
-  - vb
-  name: RunElevated
-  nameWithType: CloudTask.RunElevated
-  fullName: Microsoft.Azure.Batch.CloudTask.RunElevated
-  type: Property
-  source:
-    remote:
-      path: src/Batch/Client/Src/Generated/CloudTask.cs
-      branch: AutoRest
-      repo: https://github.com/Azure/azure-sdk-for-net.git
-    id: RunElevated
-    path: src/azure-sdk-for-net/src/Batch/Client/Src/Generated/CloudTask.cs
-    startLine: 435
-  assemblies:
-  - Microsoft.Azure.Batch
-  namespace: Microsoft.Azure.Batch
-  summary: "\nGets or sets whether to run the task in elevated mode.\n"
-  example: []
-  syntax:
-    content: public bool ? RunElevated { get; set; }
-    content.vb: Public Property RunElevated As Boolean?
-    parameters: []
-    return:
-      type: System.Nullable{System.Boolean}
-  overload: Microsoft.Azure.Batch.CloudTask.RunElevated*
   modifiers.csharp:
   - public
   - get
@@ -1655,7 +1657,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: State
     path: src/azure-sdk-for-net/src/Batch/Client/Src/Generated/CloudTask.cs
-    startLine: 444
+    startLine: 457
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch
@@ -1692,7 +1694,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: StateTransitionTime
     path: src/azure-sdk-for-net/src/Batch/Client/Src/Generated/CloudTask.cs
-    startLine: 452
+    startLine: 465
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch
@@ -1729,7 +1731,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: Statistics
     path: src/azure-sdk-for-net/src/Batch/Client/Src/Generated/CloudTask.cs
-    startLine: 464
+    startLine: 477
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch
@@ -1767,7 +1769,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: Url
     path: src/azure-sdk-for-net/src/Batch/Client/Src/Generated/CloudTask.cs
-    startLine: 472
+    startLine: 485
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch
@@ -1786,6 +1788,44 @@ items:
   modifiers.vb:
   - Public
   - ReadOnly
+- uid: Microsoft.Azure.Batch.CloudTask.UserIdentity
+  commentId: P:Microsoft.Azure.Batch.CloudTask.UserIdentity
+  id: UserIdentity
+  parent: Microsoft.Azure.Batch.CloudTask
+  langs:
+  - csharp
+  - vb
+  name: UserIdentity
+  nameWithType: CloudTask.UserIdentity
+  fullName: Microsoft.Azure.Batch.CloudTask.UserIdentity
+  type: Property
+  source:
+    remote:
+      path: src/Batch/Client/Src/Generated/CloudTask.cs
+      branch: AutoRest
+      repo: https://github.com/Azure/azure-sdk-for-net.git
+    id: UserIdentity
+    path: src/azure-sdk-for-net/src/Batch/Client/Src/Generated/CloudTask.cs
+    startLine: 496
+  assemblies:
+  - Microsoft.Azure.Batch
+  namespace: Microsoft.Azure.Batch
+  summary: "\nGets or sets the user identity under which the task runs.\n"
+  remarks: "\nIf omitted, the task runs as a non-administrative user unique to the task.\n"
+  example: []
+  syntax:
+    content: public UserIdentity UserIdentity { get; set; }
+    content.vb: Public Property UserIdentity As UserIdentity
+    parameters: []
+    return:
+      type: Microsoft.Azure.Batch.UserIdentity
+  overload: Microsoft.Azure.Batch.CloudTask.UserIdentity*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
 references:
 - uid: Microsoft.Azure.Batch
   commentId: N:Microsoft.Azure.Batch
@@ -3101,6 +3141,19 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Microsoft.Azure.Batch.CloudTask.AuthenticationTokenSettings*
+  commentId: Overload:Microsoft.Azure.Batch.CloudTask.AuthenticationTokenSettings
+  isExternal: false
+  name: AuthenticationTokenSettings
+  nameWithType: CloudTask.AuthenticationTokenSettings
+  fullName: Microsoft.Azure.Batch.CloudTask.AuthenticationTokenSettings
+- uid: Microsoft.Azure.Batch.AuthenticationTokenSettings
+  commentId: T:Microsoft.Azure.Batch.AuthenticationTokenSettings
+  parent: Microsoft.Azure.Batch
+  isExternal: false
+  name: AuthenticationTokenSettings
+  nameWithType: AuthenticationTokenSettings
+  fullName: Microsoft.Azure.Batch.AuthenticationTokenSettings
 - uid: Microsoft.Azure.Batch.CloudTask.CommandLine*
   commentId: Overload:Microsoft.Azure.Batch.CloudTask.CommandLine
   isExternal: false
@@ -3461,12 +3514,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Azure.Batch.CloudTask.RunElevated*
-  commentId: Overload:Microsoft.Azure.Batch.CloudTask.RunElevated
-  isExternal: false
-  name: RunElevated
-  nameWithType: CloudTask.RunElevated
-  fullName: Microsoft.Azure.Batch.CloudTask.RunElevated
 - uid: Microsoft.Azure.Batch.CloudTask.State*
   commentId: Overload:Microsoft.Azure.Batch.CloudTask.State
   isExternal: false
@@ -3500,3 +3547,16 @@ references:
   name: Url
   nameWithType: CloudTask.Url
   fullName: Microsoft.Azure.Batch.CloudTask.Url
+- uid: Microsoft.Azure.Batch.CloudTask.UserIdentity*
+  commentId: Overload:Microsoft.Azure.Batch.CloudTask.UserIdentity
+  isExternal: false
+  name: UserIdentity
+  nameWithType: CloudTask.UserIdentity
+  fullName: Microsoft.Azure.Batch.CloudTask.UserIdentity
+- uid: Microsoft.Azure.Batch.UserIdentity
+  commentId: T:Microsoft.Azure.Batch.UserIdentity
+  parent: Microsoft.Azure.Batch
+  isExternal: false
+  name: UserIdentity
+  nameWithType: UserIdentity
+  fullName: Microsoft.Azure.Batch.UserIdentity

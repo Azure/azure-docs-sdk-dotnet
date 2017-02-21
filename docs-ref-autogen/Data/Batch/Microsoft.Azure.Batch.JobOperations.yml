@@ -22,8 +22,8 @@ items:
   - Microsoft.Azure.Batch.JobOperations.DisableJobAsync(System.String,Microsoft.Azure.Batch.Common.DisableJobOption,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
   - Microsoft.Azure.Batch.JobOperations.EnableJob(System.String,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})
   - Microsoft.Azure.Batch.JobOperations.EnableJobAsync(System.String,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
-  - Microsoft.Azure.Batch.JobOperations.GetAllJobsLifetimeStatistics(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})
-  - Microsoft.Azure.Batch.JobOperations.GetAllJobsLifetimeStatisticsAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
+  - Microsoft.Azure.Batch.JobOperations.GetAllLifetimeStatistics(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})
+  - Microsoft.Azure.Batch.JobOperations.GetAllLifetimeStatisticsAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
   - Microsoft.Azure.Batch.JobOperations.GetJob(System.String,Microsoft.Azure.Batch.DetailLevel,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})
   - Microsoft.Azure.Batch.JobOperations.GetJobAsync(System.String,Microsoft.Azure.Batch.DetailLevel,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
   - Microsoft.Azure.Batch.JobOperations.GetNodeFile(System.String,System.String,System.String,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})
@@ -1436,8 +1436,8 @@ items:
   remarks: The get file operation runs asynchronously.
   example: []
   syntax:
-    content: public Task<NodeFile> GetNodeFileAsync(string jobId, string taskId, string fileName, IEnumerable<BatchClientBehavior> additionalBehaviors = null, CancellationToken cancellationToken = null)
-    content.vb: Public Function GetNodeFileAsync(jobId As String, taskId As String, fileName As String, additionalBehaviors As IEnumerable(Of BatchClientBehavior) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of NodeFile)
+    content: public Task<NodeFile> GetNodeFileAsync(string jobId, string taskId, string filePath, IEnumerable<BatchClientBehavior> additionalBehaviors = null, CancellationToken cancellationToken = null)
+    content.vb: Public Function GetNodeFileAsync(jobId As String, taskId As String, filePath As String, additionalBehaviors As IEnumerable(Of BatchClientBehavior) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of NodeFile)
     parameters:
     - id: jobId
       type: System.String
@@ -1445,9 +1445,9 @@ items:
     - id: taskId
       type: System.String
       description: The id of the task.
-    - id: fileName
+    - id: filePath
       type: System.String
-      description: The name of the file to retrieve.
+      description: The path of the file to retrieve.
     - id: additionalBehaviors
       type: System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior}
       description: A collection of <xref href="Microsoft.Azure.Batch.BatchClientBehavior" data-throw-if-not-resolved="false"></xref> instances that are applied to the Batch service request after the <xref href="Microsoft.Azure.Batch.JobOperations.CustomBehaviors" data-throw-if-not-resolved="false"></xref>.
@@ -1491,8 +1491,8 @@ items:
   remarks: This is a blocking operation.  For a non-blocking equivalent, see <xref href="Microsoft.Azure.Batch.JobOperations.GetNodeFileAsync(System.String%2cSystem.String%2cSystem.String%2cSystem.Collections.Generic.IEnumerable%7bMicrosoft.Azure.Batch.BatchClientBehavior%7d%2cSystem.Threading.CancellationToken)" data-throw-if-not-resolved="false"></xref>.
   example: []
   syntax:
-    content: public NodeFile GetNodeFile(string jobId, string taskId, string fileName, IEnumerable<BatchClientBehavior> additionalBehaviors = null)
-    content.vb: Public Function GetNodeFile(jobId As String, taskId As String, fileName As String, additionalBehaviors As IEnumerable(Of BatchClientBehavior) = Nothing) As NodeFile
+    content: public NodeFile GetNodeFile(string jobId, string taskId, string filePath, IEnumerable<BatchClientBehavior> additionalBehaviors = null)
+    content.vb: Public Function GetNodeFile(jobId As String, taskId As String, filePath As String, additionalBehaviors As IEnumerable(Of BatchClientBehavior) = Nothing) As NodeFile
     parameters:
     - id: jobId
       type: System.String
@@ -1500,9 +1500,9 @@ items:
     - id: taskId
       type: System.String
       description: The id of the task.
-    - id: fileName
+    - id: filePath
       type: System.String
-      description: The name of the file to retrieve.
+      description: The path of the file to retrieve.
     - id: additionalBehaviors
       type: System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior}
       description: A collection of <xref href="Microsoft.Azure.Batch.BatchClientBehavior" data-throw-if-not-resolved="false"></xref> instances that are applied to the Batch service request after the <xref href="Microsoft.Azure.Batch.JobOperations.CustomBehaviors" data-throw-if-not-resolved="false"></xref>.
@@ -1543,8 +1543,8 @@ items:
   remarks: The delete operation runs asynchronously.
   example: []
   syntax:
-    content: public Task DeleteNodeFileAsync(string jobId, string taskId, string fileName, bool ? recursive = null, IEnumerable<BatchClientBehavior> additionalBehaviors = null, CancellationToken cancellationToken = null)
-    content.vb: Public Function DeleteNodeFileAsync(jobId As String, taskId As String, fileName As String, recursive As Boolean? = Nothing, additionalBehaviors As IEnumerable(Of BatchClientBehavior) = Nothing, cancellationToken As CancellationToken = Nothing) As Task
+    content: public Task DeleteNodeFileAsync(string jobId, string taskId, string filePath, bool ? recursive = null, IEnumerable<BatchClientBehavior> additionalBehaviors = null, CancellationToken cancellationToken = null)
+    content.vb: Public Function DeleteNodeFileAsync(jobId As String, taskId As String, filePath As String, recursive As Boolean? = Nothing, additionalBehaviors As IEnumerable(Of BatchClientBehavior) = Nothing, cancellationToken As CancellationToken = Nothing) As Task
     parameters:
     - id: jobId
       type: System.String
@@ -1552,9 +1552,9 @@ items:
     - id: taskId
       type: System.String
       description: The id of the task.
-    - id: fileName
+    - id: filePath
       type: System.String
-      description: The name of the file to delete.
+      description: The path of the file to delete.
     - id: recursive
       type: System.Nullable{System.Boolean}
       description: "\nIf the file-path parameter represents a directory instead of a file, you can set the optional \nrecursive parameter to true to delete the directory and all of the files and subdirectories in it. If recursive is false \nthen the directory must be empty or deletion will fail.\n"
@@ -1601,8 +1601,8 @@ items:
   remarks: This is a blocking operation.  For a non-blocking equivalent, see <xref href="Microsoft.Azure.Batch.JobOperations.DeleteNodeFileAsync(System.String%2cSystem.String%2cSystem.String%2cSystem.Nullable%7bSystem.Boolean%7d%2cSystem.Collections.Generic.IEnumerable%7bMicrosoft.Azure.Batch.BatchClientBehavior%7d%2cSystem.Threading.CancellationToken)" data-throw-if-not-resolved="false"></xref>.
   example: []
   syntax:
-    content: public void DeleteNodeFile(string jobId, string taskId, string fileName, bool ? recursive = null, IEnumerable<BatchClientBehavior> additionalBehaviors = null)
-    content.vb: Public Sub DeleteNodeFile(jobId As String, taskId As String, fileName As String, recursive As Boolean? = Nothing, additionalBehaviors As IEnumerable(Of BatchClientBehavior) = Nothing)
+    content: public void DeleteNodeFile(string jobId, string taskId, string filePath, bool ? recursive = null, IEnumerable<BatchClientBehavior> additionalBehaviors = null)
+    content.vb: Public Sub DeleteNodeFile(jobId As String, taskId As String, filePath As String, recursive As Boolean? = Nothing, additionalBehaviors As IEnumerable(Of BatchClientBehavior) = Nothing)
     parameters:
     - id: jobId
       type: System.String
@@ -1610,9 +1610,9 @@ items:
     - id: taskId
       type: System.String
       description: The id of the task.
-    - id: fileName
+    - id: filePath
       type: System.String
-      description: The name of the file to delete.
+      description: The path of the file to delete.
     - id: recursive
       type: System.Nullable{System.Boolean}
       description: "\nIf the file-path parameter represents a directory instead of a file, you can set the optional \nrecursive parameter to true to delete the directory and all of the files and subdirectories in it. If recursive is false \nthen the directory must be empty or deletion will fail.\n"
@@ -1762,23 +1762,23 @@ items:
   - Public
   fullName.vb: Microsoft.Azure.Batch.JobOperations.AddTask(System.String, System.Collections.Generic.IEnumerable(Of Microsoft.Azure.Batch.CloudTask), Microsoft.Azure.Batch.BatchClientParallelOptions, System.Collections.Concurrent.ConcurrentBag(Of System.Collections.Concurrent.ConcurrentDictionary(Of System.Type, Microsoft.Azure.Batch.IFileStagingArtifact)), System.Nullable(Of System.TimeSpan), System.Collections.Generic.IEnumerable(Of Microsoft.Azure.Batch.BatchClientBehavior))
   name.vb: AddTask(String, IEnumerable(Of CloudTask), BatchClientParallelOptions, ConcurrentBag(Of ConcurrentDictionary(Of Type, IFileStagingArtifact)), Nullable(Of TimeSpan), IEnumerable(Of BatchClientBehavior))
-- uid: Microsoft.Azure.Batch.JobOperations.GetAllJobsLifetimeStatisticsAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
-  commentId: M:Microsoft.Azure.Batch.JobOperations.GetAllJobsLifetimeStatisticsAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
-  id: GetAllJobsLifetimeStatisticsAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
+- uid: Microsoft.Azure.Batch.JobOperations.GetAllLifetimeStatisticsAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
+  commentId: M:Microsoft.Azure.Batch.JobOperations.GetAllLifetimeStatisticsAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
+  id: GetAllLifetimeStatisticsAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
   parent: Microsoft.Azure.Batch.JobOperations
   langs:
   - csharp
   - vb
-  name: GetAllJobsLifetimeStatisticsAsync(IEnumerable<BatchClientBehavior>, CancellationToken)
-  nameWithType: JobOperations.GetAllJobsLifetimeStatisticsAsync(IEnumerable<BatchClientBehavior>, CancellationToken)
-  fullName: Microsoft.Azure.Batch.JobOperations.GetAllJobsLifetimeStatisticsAsync(System.Collections.Generic.IEnumerable<Microsoft.Azure.Batch.BatchClientBehavior>, System.Threading.CancellationToken)
+  name: GetAllLifetimeStatisticsAsync(IEnumerable<BatchClientBehavior>, CancellationToken)
+  nameWithType: JobOperations.GetAllLifetimeStatisticsAsync(IEnumerable<BatchClientBehavior>, CancellationToken)
+  fullName: Microsoft.Azure.Batch.JobOperations.GetAllLifetimeStatisticsAsync(System.Collections.Generic.IEnumerable<Microsoft.Azure.Batch.BatchClientBehavior>, System.Threading.CancellationToken)
   type: Method
   source:
     remote:
       path: src/Batch/Client/Src/JobOperations.cs
       branch: AutoRest
       repo: https://github.com/Azure/azure-sdk-for-net.git
-    id: GetAllJobsLifetimeStatisticsAsync
+    id: GetAllLifetimeStatisticsAsync
     path: src/azure-sdk-for-net/src/Batch/Client/Src/JobOperations.cs
     startLine: 1054
   assemblies:
@@ -1788,8 +1788,8 @@ items:
   remarks: The get statistics operation runs asynchronously.
   example: []
   syntax:
-    content: public Task<JobStatistics> GetAllJobsLifetimeStatisticsAsync(IEnumerable<BatchClientBehavior> additionalBehaviors = null, CancellationToken cancellationToken = null)
-    content.vb: Public Function GetAllJobsLifetimeStatisticsAsync(additionalBehaviors As IEnumerable(Of BatchClientBehavior) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of JobStatistics)
+    content: public Task<JobStatistics> GetAllLifetimeStatisticsAsync(IEnumerable<BatchClientBehavior> additionalBehaviors = null, CancellationToken cancellationToken = null)
+    content.vb: Public Function GetAllLifetimeStatisticsAsync(additionalBehaviors As IEnumerable(Of BatchClientBehavior) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of JobStatistics)
     parameters:
     - id: additionalBehaviors
       type: System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior}
@@ -1800,42 +1800,42 @@ items:
     return:
       type: System.Threading.Tasks.Task{Microsoft.Azure.Batch.JobStatistics}
       description: The aggregated job statistics.
-  overload: Microsoft.Azure.Batch.JobOperations.GetAllJobsLifetimeStatisticsAsync*
-  nameWithType.vb: JobOperations.GetAllJobsLifetimeStatisticsAsync(IEnumerable(Of BatchClientBehavior), CancellationToken)
+  overload: Microsoft.Azure.Batch.JobOperations.GetAllLifetimeStatisticsAsync*
+  nameWithType.vb: JobOperations.GetAllLifetimeStatisticsAsync(IEnumerable(Of BatchClientBehavior), CancellationToken)
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Microsoft.Azure.Batch.JobOperations.GetAllJobsLifetimeStatisticsAsync(System.Collections.Generic.IEnumerable(Of Microsoft.Azure.Batch.BatchClientBehavior), System.Threading.CancellationToken)
-  name.vb: GetAllJobsLifetimeStatisticsAsync(IEnumerable(Of BatchClientBehavior), CancellationToken)
-- uid: Microsoft.Azure.Batch.JobOperations.GetAllJobsLifetimeStatistics(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})
-  commentId: M:Microsoft.Azure.Batch.JobOperations.GetAllJobsLifetimeStatistics(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})
-  id: GetAllJobsLifetimeStatistics(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})
+  fullName.vb: Microsoft.Azure.Batch.JobOperations.GetAllLifetimeStatisticsAsync(System.Collections.Generic.IEnumerable(Of Microsoft.Azure.Batch.BatchClientBehavior), System.Threading.CancellationToken)
+  name.vb: GetAllLifetimeStatisticsAsync(IEnumerable(Of BatchClientBehavior), CancellationToken)
+- uid: Microsoft.Azure.Batch.JobOperations.GetAllLifetimeStatistics(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})
+  commentId: M:Microsoft.Azure.Batch.JobOperations.GetAllLifetimeStatistics(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})
+  id: GetAllLifetimeStatistics(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})
   parent: Microsoft.Azure.Batch.JobOperations
   langs:
   - csharp
   - vb
-  name: GetAllJobsLifetimeStatistics(IEnumerable<BatchClientBehavior>)
-  nameWithType: JobOperations.GetAllJobsLifetimeStatistics(IEnumerable<BatchClientBehavior>)
-  fullName: Microsoft.Azure.Batch.JobOperations.GetAllJobsLifetimeStatistics(System.Collections.Generic.IEnumerable<Microsoft.Azure.Batch.BatchClientBehavior>)
+  name: GetAllLifetimeStatistics(IEnumerable<BatchClientBehavior>)
+  nameWithType: JobOperations.GetAllLifetimeStatistics(IEnumerable<BatchClientBehavior>)
+  fullName: Microsoft.Azure.Batch.JobOperations.GetAllLifetimeStatistics(System.Collections.Generic.IEnumerable<Microsoft.Azure.Batch.BatchClientBehavior>)
   type: Method
   source:
     remote:
       path: src/Batch/Client/Src/JobOperations.cs
       branch: AutoRest
       repo: https://github.com/Azure/azure-sdk-for-net.git
-    id: GetAllJobsLifetimeStatistics
+    id: GetAllLifetimeStatistics
     path: src/azure-sdk-for-net/src/Batch/Client/Src/JobOperations.cs
     startLine: 1080
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch
   summary: "\nGets lifetime summary statistics for all of the jobs in the current account.  \nStatistics are aggregated across all jobs that have ever existed in the account, from account creation to the last update time of the statistics. \n"
-  remarks: This is a blocking operation; for a non-blocking equivalent, see <xref href="Microsoft.Azure.Batch.JobOperations.GetAllJobsLifetimeStatisticsAsync(System.Collections.Generic.IEnumerable%7bMicrosoft.Azure.Batch.BatchClientBehavior%7d%2cSystem.Threading.CancellationToken)" data-throw-if-not-resolved="false"></xref>.
+  remarks: This is a blocking operation; for a non-blocking equivalent, see <xref href="Microsoft.Azure.Batch.JobOperations.GetAllLifetimeStatisticsAsync(System.Collections.Generic.IEnumerable%7bMicrosoft.Azure.Batch.BatchClientBehavior%7d%2cSystem.Threading.CancellationToken)" data-throw-if-not-resolved="false"></xref>.
   example: []
   syntax:
-    content: public JobStatistics GetAllJobsLifetimeStatistics(IEnumerable<BatchClientBehavior> additionalBehaviors = null)
-    content.vb: Public Function GetAllJobsLifetimeStatistics(additionalBehaviors As IEnumerable(Of BatchClientBehavior) = Nothing) As JobStatistics
+    content: public JobStatistics GetAllLifetimeStatistics(IEnumerable<BatchClientBehavior> additionalBehaviors = null)
+    content.vb: Public Function GetAllLifetimeStatistics(additionalBehaviors As IEnumerable(Of BatchClientBehavior) = Nothing) As JobStatistics
     parameters:
     - id: additionalBehaviors
       type: System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior}
@@ -1843,14 +1843,14 @@ items:
     return:
       type: Microsoft.Azure.Batch.JobStatistics
       description: The aggregated job statistics.
-  overload: Microsoft.Azure.Batch.JobOperations.GetAllJobsLifetimeStatistics*
-  nameWithType.vb: JobOperations.GetAllJobsLifetimeStatistics(IEnumerable(Of BatchClientBehavior))
+  overload: Microsoft.Azure.Batch.JobOperations.GetAllLifetimeStatistics*
+  nameWithType.vb: JobOperations.GetAllLifetimeStatistics(IEnumerable(Of BatchClientBehavior))
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Microsoft.Azure.Batch.JobOperations.GetAllJobsLifetimeStatistics(System.Collections.Generic.IEnumerable(Of Microsoft.Azure.Batch.BatchClientBehavior))
-  name.vb: GetAllJobsLifetimeStatistics(IEnumerable(Of BatchClientBehavior))
+  fullName.vb: Microsoft.Azure.Batch.JobOperations.GetAllLifetimeStatistics(System.Collections.Generic.IEnumerable(Of Microsoft.Azure.Batch.BatchClientBehavior))
+  name.vb: GetAllLifetimeStatistics(IEnumerable(Of BatchClientBehavior))
 - uid: Microsoft.Azure.Batch.JobOperations.ListJobPreparationAndReleaseTaskStatus(System.String,Microsoft.Azure.Batch.DetailLevel,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})
   commentId: M:Microsoft.Azure.Batch.JobOperations.ListJobPreparationAndReleaseTaskStatus(System.String,Microsoft.Azure.Batch.DetailLevel,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})
   id: ListJobPreparationAndReleaseTaskStatus(System.String,Microsoft.Azure.Batch.DetailLevel,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})
@@ -3498,12 +3498,12 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Azure.Batch.JobOperations.GetAllJobsLifetimeStatisticsAsync*
-  commentId: Overload:Microsoft.Azure.Batch.JobOperations.GetAllJobsLifetimeStatisticsAsync
+- uid: Microsoft.Azure.Batch.JobOperations.GetAllLifetimeStatisticsAsync*
+  commentId: Overload:Microsoft.Azure.Batch.JobOperations.GetAllLifetimeStatisticsAsync
   isExternal: false
-  name: GetAllJobsLifetimeStatisticsAsync
-  nameWithType: JobOperations.GetAllJobsLifetimeStatisticsAsync
-  fullName: Microsoft.Azure.Batch.JobOperations.GetAllJobsLifetimeStatisticsAsync
+  name: GetAllLifetimeStatisticsAsync
+  nameWithType: JobOperations.GetAllLifetimeStatisticsAsync
+  fullName: Microsoft.Azure.Batch.JobOperations.GetAllLifetimeStatisticsAsync
 - uid: System.Threading.Tasks.Task{Microsoft.Azure.Batch.JobStatistics}
   commentId: T:System.Threading.Tasks.Task{Microsoft.Azure.Batch.JobStatistics}
   parent: System.Threading.Tasks
@@ -3546,14 +3546,14 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Azure.Batch.JobOperations.GetAllJobsLifetimeStatisticsAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
-  commentId: M:Microsoft.Azure.Batch.JobOperations.GetAllJobsLifetimeStatisticsAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
-- uid: Microsoft.Azure.Batch.JobOperations.GetAllJobsLifetimeStatistics*
-  commentId: Overload:Microsoft.Azure.Batch.JobOperations.GetAllJobsLifetimeStatistics
+- uid: Microsoft.Azure.Batch.JobOperations.GetAllLifetimeStatisticsAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
+  commentId: M:Microsoft.Azure.Batch.JobOperations.GetAllLifetimeStatisticsAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
+- uid: Microsoft.Azure.Batch.JobOperations.GetAllLifetimeStatistics*
+  commentId: Overload:Microsoft.Azure.Batch.JobOperations.GetAllLifetimeStatistics
   isExternal: false
-  name: GetAllJobsLifetimeStatistics
-  nameWithType: JobOperations.GetAllJobsLifetimeStatistics
-  fullName: Microsoft.Azure.Batch.JobOperations.GetAllJobsLifetimeStatistics
+  name: GetAllLifetimeStatistics
+  nameWithType: JobOperations.GetAllLifetimeStatistics
+  fullName: Microsoft.Azure.Batch.JobOperations.GetAllLifetimeStatistics
 - uid: Microsoft.Azure.Batch.JobStatistics
   commentId: T:Microsoft.Azure.Batch.JobStatistics
   parent: Microsoft.Azure.Batch

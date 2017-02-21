@@ -97,7 +97,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: .ctor
     path: src/azure-sdk-for-net/src/Batch/Client/Src/GeneratedProtocol/Models/NetworkConfiguration.cs
-    startLine: 40
+    startLine: 39
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch.Protocol.Models
@@ -112,13 +112,11 @@ items:
       description: >-
         The ARM resource identifier of the virtual
 
-        network subnet which the compute nodes of the pool will join. The
+        network subnet which the compute nodes of the pool will join. This
 
-        virtual network must be in the same region and subscription as
+        is of the form
 
-        the Azure Batch account. This property can only be specified for
-
-        pools created with a cloudServiceConfiguration.
+        /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}.
   overload: Microsoft.Azure.Batch.Protocol.Models.NetworkConfiguration.#ctor*
   modifiers.csharp:
   - public
@@ -142,11 +140,12 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: SubnetId
     path: src/azure-sdk-for-net/src/Batch/Client/Src/GeneratedProtocol/Models/NetworkConfiguration.cs
-    startLine: 52
+    startLine: 67
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch.Protocol.Models
-  summary: "\nGets or sets the ARM resource identifier of the virtual network\nsubnet which the compute nodes of the pool will join. The virtual\nnetwork must be in the same region and subscription as the Azure\nBatch account. This property can only be specified for pools\ncreated with a cloudServiceConfiguration.\n"
+  summary: "\nGets or sets the ARM resource identifier of the virtual network\nsubnet which the compute nodes of the pool will join. This is of\nthe form\n/subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}.\n"
+  remarks: "\nThe virtual network must be in the same region and subscription as\nthe Azure Batch account. The specified subnet should have enough\nfree IP addresses to accommodate the number of nodes in the pool.\nIf the subnet doesn't have enough free IP addresses, the pool will\npartially allocate compute nodes, and a resize error will occur.\nThe 'MicrosoftAzureBatch' service principal must have the 'Classic\nVirtual Machine Contributor' Role-Based Access Control (RBAC) role\nfor the specified VNet. The specified subnet must allow\ncommunication from the Azure Batch service to be able to schedule\ntasks on the compute nodes. This can be verified by checking if the\nspecified VNet has any associated Network Security Groups (NSG). If\ncommunication to the compute nodes in the specified subnet is\ndenied by an NSG, then the Batch service will set the state of the\ncompute nodes to unusable. This property can only be specified for\npools created with a cloudServiceConfiguration.\n"
   example: []
   syntax:
     content: >-

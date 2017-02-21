@@ -28,7 +28,7 @@ items:
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch.Protocol.Models
-  summary: "\nConstraints to apply to the Job Manager task.\n"
+  summary: "\nExecution constraints to apply to a task.\n"
   example: []
   syntax:
     content: public class TaskConstraints
@@ -122,13 +122,13 @@ items:
     - id: retentionTime
       type: System.Nullable{System.TimeSpan}
       description: >-
-        The minimum time to retain the working
+        The minimum time to retain the task
 
-        directory for the task on the compute node where it ran, from the
+        directory on the compute node where it ran, from the time it
 
-        time it completes execution. After this time, the Batch service
+        completes execution. After this time, the Batch service may delete
 
-        may delete the working directory and all its contents.
+        the task directory and all its contents.
     - id: maxTaskRetryCount
       type: System.Nullable{System.Int32}
       description: >-
@@ -163,11 +163,12 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: MaxWallClockTime
     path: src/azure-sdk-for-net/src/Batch/Client/Src/GeneratedProtocol/Models/TaskConstraints.cs
-    startLine: 58
+    startLine: 62
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch.Protocol.Models
   summary: "\nGets or sets the maximum elapsed time that the task may run,\nmeasured from the time the task starts. If the task does not\ncomplete within the time limit, the Batch service terminates it.\n"
+  remarks: "\nIf this is not specified, there is no time limit on how long the\ntask may run.\n"
   example: []
   syntax:
     content: >-
@@ -214,12 +215,12 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: RetentionTime
     path: src/azure-sdk-for-net/src/Batch/Client/Src/GeneratedProtocol/Models/TaskConstraints.cs
-    startLine: 70
+    startLine: 75
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch.Protocol.Models
-  summary: "\nGets or sets the minimum time to retain the working directory for\nthe task on the compute node where it ran, from the time it\ncompletes execution. After this time, the Batch service may\ndelete the working directory and all its contents.\n"
-  remarks: "\nThe default is infinite.\n"
+  summary: "\nGets or sets the minimum time to retain the task directory on the\ncompute node where it ran, from the time it completes execution.\nAfter this time, the Batch service may delete the task directory\nand all its contents.\n"
+  remarks: "\nThe default is infinite, i.e. the task directory will be retained\nuntil the compute node is removed or reimaged.\n"
   example: []
   syntax:
     content: >-
@@ -266,11 +267,12 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: MaxTaskRetryCount
     path: src/azure-sdk-for-net/src/Batch/Client/Src/GeneratedProtocol/Models/TaskConstraints.cs
-    startLine: 77
+    startLine: 91
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch.Protocol.Models
   summary: "\nGets or sets the maximum number of times the task may be retried.\nThe Batch service retries a task if its exit code is nonzero.\n"
+  remarks: "\nNote that this value specifically controls the number of retries.\nThe Batch service will try the task once, and may then retry up to\nthis limit. For example, if the maximum retry count is 3, Batch\ntries the task up to 4 times (one initial try and 3 retries). If\nthe maximum retry count is 0, the Batch service does not retry the\ntask. If the maximum retry count is -1, the Batch service retries\nthe task without limit.\n"
   example: []
   syntax:
     content: >-

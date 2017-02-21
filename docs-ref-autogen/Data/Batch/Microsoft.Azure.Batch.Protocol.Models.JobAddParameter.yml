@@ -110,7 +110,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: .ctor
     path: src/azure-sdk-for-net/src/Batch/Client/Src/GeneratedProtocol/Models/JobAddParameter.cs
-    startLine: 64
+    startLine: 62
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch.Protocol.Models
@@ -129,9 +129,9 @@ items:
     - id: poolInfo
       type: Microsoft.Azure.Batch.Protocol.Models.PoolInformation
       description: >-
-        The pool on which the Batch service runs
+        The pool on which the Batch service runs the
 
-        the job's tasks.
+        job's tasks.
     - id: displayName
       type: System.String
       description: The display name for the job.
@@ -161,9 +161,9 @@ items:
       description: >-
         The list of common
 
-        environment variable settings. These environment variables are
+        environment variable settings. These environment variables are set
 
-        set for all tasks in the job (including the Job Manager, Job
+        for all tasks in the job (including the Job Manager, Job
 
         Preparation and Job Release tasks).
     - id: onAllTasksComplete
@@ -171,9 +171,9 @@ items:
       description: >-
         The action the Batch service
 
-        should take when all tasks in the job are in the completed state.
+        should take when all tasks in the job are in the completed
 
-        Possible values include: 'noAction', 'terminateJob'
+        state.
     - id: onTaskFailure
       type: System.Nullable{Microsoft.Azure.Batch.Protocol.Models.OnTaskFailure}
       description: >-
@@ -181,13 +181,9 @@ items:
 
         take when any task in the job fails. A task is considered to have
 
-        failed if it completes with a non-zero exit code and has
+        failed if it completes with a non-zero exit code and has exhausted
 
-        exhausted its retry count, or if it had a scheduling error.
-
-        Possible values include: 'noAction',
-
-        'performExitOptionsJobAction'
+        its retry count, or if it had a scheduling error.
     - id: metadata
       type: System.Collections.Generic.IList{Microsoft.Azure.Batch.Protocol.Models.MetadataItem}
       description: >-
@@ -197,9 +193,9 @@ items:
     - id: usesTaskDependencies
       type: System.Nullable{System.Boolean}
       description: >-
-        The flag that determines if
+        The flag that determines if this
 
-        this job will use tasks with dependencies.
+        job will use tasks with dependencies.
   overload: Microsoft.Azure.Batch.Protocol.Models.JobAddParameter.#ctor*
   nameWithType.vb: JobAddParameter.JobAddParameter(String, PoolInformation, String, Nullable(Of Int32), JobConstraints, JobManagerTask, JobPreparationTask, JobReleaseTask, IList(Of EnvironmentSetting), Nullable(Of OnAllTasksComplete), Nullable(Of OnTaskFailure), IList(Of MetadataItem), Nullable(Of Boolean))
   modifiers.csharp:
@@ -226,12 +222,12 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: Id
     path: src/azure-sdk-for-net/src/Batch/Client/Src/GeneratedProtocol/Models/JobAddParameter.cs
-    startLine: 90
+    startLine: 88
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch.Protocol.Models
   summary: "\nGets or sets a string that uniquely identifies the job within the\naccount.\n"
-  remarks: "\nThe id can contain any combination of alphanumeric characters\nincluding hyphens and underscores, and cannot contain more than\n64 characters. It is common to use a GUID for the id.\n"
+  remarks: "\nThe ID can contain any combination of alphanumeric characters\nincluding hyphens and underscores, and cannot contain more than 64\ncharacters. It is common to use a GUID for the id.\n"
   example: []
   syntax:
     content: >-
@@ -278,11 +274,12 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: DisplayName
     path: src/azure-sdk-for-net/src/Batch/Client/Src/GeneratedProtocol/Models/JobAddParameter.cs
-    startLine: 96
+    startLine: 98
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch.Protocol.Models
   summary: "\nGets or sets the display name for the job.\n"
+  remarks: "\nThe display name need not be unique and can contain any Unicode\ncharacters up to a maximum length of 1024.\n"
   example: []
   syntax:
     content: >-
@@ -329,12 +326,12 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: Priority
     path: src/azure-sdk-for-net/src/Batch/Client/Src/GeneratedProtocol/Models/JobAddParameter.cs
-    startLine: 107
+    startLine: 109
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch.Protocol.Models
   summary: "\nGets or sets the priority of the job.\n"
-  remarks: "\nPriority values can range from -1000 to 1000, with -1000 being\nthe lowest priority and 1000 being the highest priority. The\ndefault value is 0.\n"
+  remarks: "\nPriority values can range from -1000 to 1000, with -1000 being the\nlowest priority and 1000 being the highest priority. The default\nvalue is 0.\n"
   example: []
   syntax:
     content: >-
@@ -381,7 +378,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: Constraints
     path: src/azure-sdk-for-net/src/Batch/Client/Src/GeneratedProtocol/Models/JobAddParameter.cs
-    startLine: 113
+    startLine: 115
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch.Protocol.Models
@@ -432,11 +429,12 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: JobManagerTask
     path: src/azure-sdk-for-net/src/Batch/Client/Src/GeneratedProtocol/Models/JobAddParameter.cs
-    startLine: 120
+    startLine: 137
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch.Protocol.Models
   summary: "\nGets or sets details of a Job Manager task to be launched when the\njob is started.\n"
+  remarks: "\nIf the job does not specify a Job Manager task, the user must\nexplicitly add tasks to the job. If the job does specify a Job\nManager task, the Batch service creates the Job Manager task when\nthe job is created, and will try to schedule the Job Manager task\nbefore scheduling other tasks in the job. The Job Manager task's\ntypical purpose is to control and/or monitor job execution, for\nexample by deciding what additional tasks to run, determining when\nthe work is complete, etc. (However, a Job Manager task is not\nrestricted to these activities - it is a fully-fledged task in the\nsystem and perform whatever actions are required for the job.) For\nexample, a Job Manager task might download a file specified as a\nparameter, analyze the contents of that file and submit additional\ntasks based on those contents.\n"
   example: []
   syntax:
     content: >-
@@ -483,11 +481,12 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: JobPreparationTask
     path: src/azure-sdk-for-net/src/Batch/Client/Src/GeneratedProtocol/Models/JobAddParameter.cs
-    startLine: 126
+    startLine: 148
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch.Protocol.Models
   summary: "\nGets or sets the Job Preparation task.\n"
+  remarks: "\nIf a job has a Job Preparation task, the Batch service will run the\nJob Preparation task on a compute node before starting any tasks of\nthat job on that compute node.\n"
   example: []
   syntax:
     content: >-
@@ -534,11 +533,12 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: JobReleaseTask
     path: src/azure-sdk-for-net/src/Batch/Client/Src/GeneratedProtocol/Models/JobAddParameter.cs
-    startLine: 132
+    startLine: 163
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch.Protocol.Models
   summary: "\nGets or sets the Job Release task.\n"
+  remarks: "\nA Job Release task cannot be specified without also specifying a\nJob Preparation task for the job. The Batch service runs the Job\nRelease task on the compute nodes that have run the Job Preparation\ntask. The primary purpose of the Job Release task is to undo\nchanges to compute nodes made by the Job Preparation task. Example\nactivities include deleting local files, or shutting down services\nthat were started as part of job preparation.\n"
   example: []
   syntax:
     content: >-
@@ -585,11 +585,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: CommonEnvironmentSettings
     path: src/azure-sdk-for-net/src/Batch/Client/Src/GeneratedProtocol/Models/JobAddParameter.cs
-    startLine: 141
+    startLine: 171
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch.Protocol.Models
-  summary: "\nGets or sets the list of common environment variable settings.\nThese environment variables are set for all tasks in the job\n(including the Job Manager, Job Preparation and Job Release\ntasks).\n"
+  summary: "\nGets or sets the list of common environment variable settings.\nThese environment variables are set for all tasks in the job\n(including the Job Manager, Job Preparation and Job Release tasks).\n"
   example: []
   syntax:
     content: >-
@@ -636,7 +636,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: PoolInfo
     path: src/azure-sdk-for-net/src/Batch/Client/Src/GeneratedProtocol/Models/JobAddParameter.cs
-    startLine: 148
+    startLine: 178
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch.Protocol.Models
@@ -687,11 +687,12 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: OnAllTasksComplete
     path: src/azure-sdk-for-net/src/Batch/Client/Src/GeneratedProtocol/Models/JobAddParameter.cs
-    startLine: 156
+    startLine: 198
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch.Protocol.Models
-  summary: "\nGets or sets the action the Batch service should take when all\ntasks in the job are in the completed state. Possible values\ninclude: 'noAction', 'terminateJob'\n"
+  summary: "\nGets or sets the action the Batch service should take when all\ntasks in the job are in the completed state.\n"
+  remarks: "\nNote that if a job contains no tasks, then all tasks are considered\ncomplete. This option is therefore most commonly used with a Job\nManager task; if you want to use automatic job termination without\na Job Manager, you should initially set onAllTasksComplete to\nnoAction and update the job properties to set onAllTasksComplete to\nterminateJob once you have finished adding tasks. Permitted values\nare: noAction - do nothing. The job remains active unless\nterminated or disabled by some other means. terminateJob -\nterminate the job. The job's terminateReason is set to\n'AllTasksComplete'. The default is noAction. Possible values\ninclude: 'noAction', 'terminateJob'\n"
   example: []
   syntax:
     content: >-
@@ -738,11 +739,12 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: OnTaskFailure
     path: src/azure-sdk-for-net/src/Batch/Client/Src/GeneratedProtocol/Models/JobAddParameter.cs
-    startLine: 166
+    startLine: 215
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch.Protocol.Models
-  summary: "\nGets or sets the action the Batch service should take when any\ntask in the job fails. A task is considered to have failed if it\ncompletes with a non-zero exit code and has exhausted its retry\ncount, or if it had a scheduling error. Possible values include:\n'noAction', 'performExitOptionsJobAction'\n"
+  summary: "\nGets or sets the action the Batch service should take when any task\nin the job fails. A task is considered to have failed if it\ncompletes with a non-zero exit code and has exhausted its retry\ncount, or if it had a scheduling error.\n"
+  remarks: "\nnoAction - do nothing. performExitOptionsJobAction - take the\naction associated with the task exit condition in the task's\nexitConditions collection. (This may still result in no action\nbeing taken, if that is what the task specifies.) The default is\nnoAction. Possible values include: 'noAction',\n'performExitOptionsJobAction'\n"
   example: []
   syntax:
     content: >-
@@ -789,11 +791,12 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: Metadata
     path: src/azure-sdk-for-net/src/Batch/Client/Src/GeneratedProtocol/Models/JobAddParameter.cs
-    startLine: 173
+    startLine: 226
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch.Protocol.Models
   summary: "\nGets or sets a list of name-value pairs associated with the job as\nmetadata.\n"
+  remarks: "\nThe Batch service does not assign any meaning to metadata; it is\nsolely for the use of user code.\n"
   example: []
   syntax:
     content: >-
@@ -840,7 +843,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: UsesTaskDependencies
     path: src/azure-sdk-for-net/src/Batch/Client/Src/GeneratedProtocol/Models/JobAddParameter.cs
-    startLine: 180
+    startLine: 233
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch.Protocol.Models
@@ -891,7 +894,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: Validate
     path: src/azure-sdk-for-net/src/Batch/Client/Src/GeneratedProtocol/Models/JobAddParameter.cs
-    startLine: 189
+    startLine: 242
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch.Protocol.Models

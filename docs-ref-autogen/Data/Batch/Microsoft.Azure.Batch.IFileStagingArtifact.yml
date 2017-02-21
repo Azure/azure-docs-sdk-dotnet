@@ -25,7 +25,7 @@ items:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch
   summary: "\nContains information about a file staging process.  File staging is typically performed for\na <xref href=\"Microsoft.Azure.Batch.CloudTask\" data-throw-if-not-resolved=\"false\"></xref> (see <xref href=\"Microsoft.Azure.Batch.CloudTask.FilesToStage\" data-throw-if-not-resolved=\"false\"></xref>).\n"
-  remarks: "\n<p>\nIFileStagingArtifact allows an application to customize and to obtain information about the process of uploading\nfiles to the cloud, for example as part of a task-related operation such as\n<xref href=\"Microsoft.Azure.Batch.JobOperations.AddTaskAsync(System.String%2cSystem.Collections.Generic.IEnumerable%7bMicrosoft.Azure.Batch.CloudTask%7d%2cMicrosoft.Azure.Batch.BatchClientParallelOptions%2cSystem.Collections.Concurrent.ConcurrentBag%7bSystem.Collections.Concurrent.ConcurrentDictionary%7bSystem.Type%2cMicrosoft.Azure.Batch.IFileStagingArtifact%7d%7d%2cSystem.Nullable%7bSystem.TimeSpan%7d%2cSystem.Collections.Generic.IEnumerable%7bMicrosoft.Azure.Batch.BatchClientBehavior%7d)\" data-throw-if-not-resolved=\"false\"></xref>\nor <xref href=\"Microsoft.Azure.Batch.CloudJob.AddTaskAsync(Microsoft.Azure.Batch.CloudTask%2cSystem.Collections.Concurrent.ConcurrentDictionary%7bSystem.Type%2cMicrosoft.Azure.Batch.IFileStagingArtifact%7d%2cSystem.Collections.Generic.IEnumerable%7bMicrosoft.Azure.Batch.BatchClientBehavior%7d%2cSystem.Threading.CancellationToken)\" data-throw-if-not-resolved=\"false\"></xref>.  Applications may use this\ninformation to, for example, find out about containers that were created in Azure Storage as\npart of the upload process.\n</p>\n<p>\nWhen <xref href=\"Microsoft.Azure.Batch.JobOperations.AddTaskAsync(System.String%2cSystem.Collections.Generic.IEnumerable%7bMicrosoft.Azure.Batch.CloudTask%7d%2cMicrosoft.Azure.Batch.BatchClientParallelOptions%2cSystem.Collections.Concurrent.ConcurrentBag%7bSystem.Collections.Concurrent.ConcurrentDictionary%7bSystem.Type%2cMicrosoft.Azure.Batch.IFileStagingArtifact%7d%7d%2cSystem.Nullable%7bSystem.TimeSpan%7d%2cSystem.Collections.Generic.IEnumerable%7bMicrosoft.Azure.Batch.BatchClientBehavior%7d)\" data-throw-if-not-resolved=\"false\"></xref>\nis called, the Batch client sends the tasks to the Batch service in collections.  As each collection is\nprocessed, the Batch client performs file staging for that collection: it examines the tasks to see if\nany of them specify any <xref href=\"Microsoft.Azure.Batch.CloudTask.FilesToStage\" data-throw-if-not-resolved=\"false\"></xref>, and if so creates a dictionary entry for\neach type of <xref href=\"Microsoft.Azure.Batch.FileStaging.IFileStagingProvider\" data-throw-if-not-resolved=\"false\"></xref> in the FilesToStage collection. The key of\nthe dictionary entry is the <xref href=\"System.Type\" data-throw-if-not-resolved=\"false\"></xref> of the IFileStagingProvider and the value is an instance\nof the corresponding implementation of IFileStagingArtifact.  For example, if FilesToStage includes one or more\n<xref href=\"Microsoft.Azure.Batch.FileStaging.FileToStage\" data-throw-if-not-resolved=\"false\"></xref> objects, then the dictionary contains an entry whose key is\ntypeof(FileToStage) and whose value is an instance of <xref href=\"Microsoft.Azure.Batch.FileStaging.SequentialFileStagingArtifact\" data-throw-if-not-resolved=\"false\"></xref>.\n</p>\n<p>\nWhen the Add Task operation completes, or during the Add Task operation if the application is multi-threaded,\nyou can examine the dictionary and convert each IFileStagingArtifact to the appropriate type to retrieve\nthe type-specific information.  For example, if your Add Task operation specified one or more FileToStage objects,\nyou can locate the dictionary entry keyed by typeof(FileToStage), cast the value to SequentialFileStagingArtifact,\nand examine the <xref href=\"Microsoft.Azure.Batch.FileStaging.SequentialFileStagingArtifact.BlobContainerCreated\" data-throw-if-not-resolved=\"false\"></xref> property to\ndetermine if the upload process created a blob container in Azure Storage and if so the name of that container.\nThis example could be useful for cleaning up automatically created containers.\n</p>\n<p>\n(Single-task Add Task operations work similarly, except that in a multi-task Add Task operation, there is\na dictionary for each collection of tasks, and the dictionaries are collected in a <xref href=\"System.Collections.Concurrent.ConcurrentBag%601\" data-throw-if-not-resolved=\"false\"></xref>,\nwhereas in a single-task Add Task operation there is only a single dictionary.)\n</p>\n<p>\nIn a single-task Add Task operation, you can also use the dictionary to customize the file staging process, by pre-populating it with appropriate\nentries.  For example, suppose you wish to control the <xref href=\"Microsoft.Azure.Batch.IFileStagingArtifact.NamingFragment\" data-throw-if-not-resolved=\"false\"></xref> for a group of FileToStage\nobjects.  Then you could initialize the dictionary with <code>{ typeof(FileToStage), new SequentialFileStagingArtifact { NamingFragment = \"myname\" } }</code>\nbefore passing it to AddTaskAsync.  The FileToStage implementation of IFileStagingProvider would then use your\nSequentialFileStagingArtifact instead of creating its own.  (This feature is not available in multi-task\nAdd Task operations.)\n</p>\n<p>\nYou may also encounter IFileStagingArtifact if you are developing a custom <xref href=\"Microsoft.Azure.Batch.FileStaging.IFileStagingProvider\" data-throw-if-not-resolved=\"false\"></xref>.\nIn this case you will typically create a custom implementation of IFileStagingArtifact to report\nimplementation-specific information about your file staging process.\n</p>\n"
+  remarks: "\n<p>\nIFileStagingArtifact allows an application to customize and to obtain information about the process of uploading\nfiles to the cloud, for example as part of a task-related operation such as\n<xref href=\"Microsoft.Azure.Batch.JobOperations.AddTaskAsync(System.String%2cSystem.Collections.Generic.IEnumerable%7bMicrosoft.Azure.Batch.CloudTask%7d%2cMicrosoft.Azure.Batch.BatchClientParallelOptions%2cSystem.Collections.Concurrent.ConcurrentBag%7bSystem.Collections.Concurrent.ConcurrentDictionary%7bSystem.Type%2cMicrosoft.Azure.Batch.IFileStagingArtifact%7d%7d%2cSystem.Nullable%7bSystem.TimeSpan%7d%2cSystem.Collections.Generic.IEnumerable%7bMicrosoft.Azure.Batch.BatchClientBehavior%7d)\" data-throw-if-not-resolved=\"false\"></xref>\nor <xref href=\"Microsoft.Azure.Batch.CloudJob.AddTaskAsync(Microsoft.Azure.Batch.CloudTask%2cSystem.Collections.Concurrent.ConcurrentDictionary%7bSystem.Type%2cMicrosoft.Azure.Batch.IFileStagingArtifact%7d%2cSystem.Collections.Generic.IEnumerable%7bMicrosoft.Azure.Batch.BatchClientBehavior%7d%2cSystem.Threading.CancellationToken)\" data-throw-if-not-resolved=\"false\"></xref>.  Applications may use this\ninformation to, for example, find out about containers that were created in Azure Storage as\npart of the upload process.\n</p>\n<p>\nWhen <xref href=\"Microsoft.Azure.Batch.JobOperations.AddTaskAsync(System.String%2cSystem.Collections.Generic.IEnumerable%7bMicrosoft.Azure.Batch.CloudTask%7d%2cMicrosoft.Azure.Batch.BatchClientParallelOptions%2cSystem.Collections.Concurrent.ConcurrentBag%7bSystem.Collections.Concurrent.ConcurrentDictionary%7bSystem.Type%2cMicrosoft.Azure.Batch.IFileStagingArtifact%7d%7d%2cSystem.Nullable%7bSystem.TimeSpan%7d%2cSystem.Collections.Generic.IEnumerable%7bMicrosoft.Azure.Batch.BatchClientBehavior%7d)\" data-throw-if-not-resolved=\"false\"></xref>\nis called, the Batch client sends the tasks to the Batch service in collections.  As each collection is\nprocessed, the Batch client performs file staging for that collection: it examines the tasks to see if\nany of them specify any <xref href=\"Microsoft.Azure.Batch.CloudTask.FilesToStage\" data-throw-if-not-resolved=\"false\"></xref>, and if so creates a dictionary entry for\neach type of <xref href=\"Microsoft.Azure.Batch.FileStaging.IFileStagingProvider\" data-throw-if-not-resolved=\"false\"></xref> in the FilesToStage collection. The key of\nthe dictionary entry is the <xref href=\"System.Type\" data-throw-if-not-resolved=\"false\"></xref> of the IFileStagingProvider and the value is an instance\nof the corresponding implementation of IFileStagingArtifact.  For example, if FilesToStage includes one or more\nFileToStage objects (from the Microsoft.Azure.Batch.FileStaging library), then the dictionary contains an entry whose key is\ntypeof(FileToStage) and whose value is an instance of SequentialFileStagingArtifact.\n</p>\n<p>\nWhen the Add Task operation completes, or during the Add Task operation if the application is multi-threaded,\nyou can examine the dictionary and convert each IFileStagingArtifact to the appropriate type to retrieve\nthe type-specific information.  For example, if your Add Task operation specified one or more FileToStage objects,\nyou can locate the dictionary entry keyed by typeof(FileToStage), cast the value to SequentialFileStagingArtifact,\nand examine the SequentialFileStagingArtifact.BlobContainerCreated property to\ndetermine if the upload process created a blob container in Azure Storage and if so the name of that container.\nThis example could be useful for cleaning up automatically created containers.\n</p>\n<p>\n(Single-task Add Task operations work similarly, except that in a multi-task Add Task operation, there is\na dictionary for each collection of tasks, and the dictionaries are collected in a <xref href=\"System.Collections.Concurrent.ConcurrentBag%601\" data-throw-if-not-resolved=\"false\"></xref>,\nwhereas in a single-task Add Task operation there is only a single dictionary.)\n</p>\n<p>\nIn a single-task Add Task operation, you can also use the dictionary to customize the file staging process, by pre-populating it with appropriate\nentries.  For example, suppose you wish to control the <xref href=\"Microsoft.Azure.Batch.IFileStagingArtifact.NamingFragment\" data-throw-if-not-resolved=\"false\"></xref> for a group of FileToStage\nobjects.  Then you could initialize the dictionary with <code>{ typeof(FileToStage), new SequentialFileStagingArtifact { NamingFragment = \"myname\" } }</code>\nbefore passing it to AddTaskAsync.  The FileToStage implementation of IFileStagingProvider would then use your\nSequentialFileStagingArtifact instead of creating its own.  (This feature is not available in multi-task\nAdd Task operations.)\n</p>\n<p>\nYou may also encounter IFileStagingArtifact if you are developing a custom <xref href=\"Microsoft.Azure.Batch.FileStaging.IFileStagingProvider\" data-throw-if-not-resolved=\"false\"></xref>.\nIn this case you will typically create a custom implementation of IFileStagingArtifact to report\nimplementation-specific information about your file staging process.\n</p>\n"
   example: []
   syntax:
     content: public interface IFileStagingArtifact
@@ -90,7 +90,6 @@ references:
   commentId: M:Microsoft.Azure.Batch.CloudJob.AddTaskAsync(Microsoft.Azure.Batch.CloudTask,System.Collections.Concurrent.ConcurrentDictionary{System.Type,Microsoft.Azure.Batch.IFileStagingArtifact},System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
 - uid: Microsoft.Azure.Batch.FileStaging.IFileStagingProvider
   commentId: T:Microsoft.Azure.Batch.FileStaging.IFileStagingProvider
-  parent: Microsoft.Azure.Batch.FileStaging
   isExternal: false
   name: IFileStagingProvider
   nameWithType: IFileStagingProvider
@@ -102,20 +101,6 @@ references:
   name: Type
   nameWithType: Type
   fullName: System.Type
-- uid: Microsoft.Azure.Batch.FileStaging.FileToStage
-  commentId: T:Microsoft.Azure.Batch.FileStaging.FileToStage
-  isExternal: false
-  name: FileToStage
-  nameWithType: FileToStage
-  fullName: Microsoft.Azure.Batch.FileStaging.FileToStage
-- uid: Microsoft.Azure.Batch.FileStaging.SequentialFileStagingArtifact
-  commentId: T:Microsoft.Azure.Batch.FileStaging.SequentialFileStagingArtifact
-  isExternal: false
-  name: SequentialFileStagingArtifact
-  nameWithType: SequentialFileStagingArtifact
-  fullName: Microsoft.Azure.Batch.FileStaging.SequentialFileStagingArtifact
-- uid: Microsoft.Azure.Batch.FileStaging.SequentialFileStagingArtifact.BlobContainerCreated
-  commentId: P:Microsoft.Azure.Batch.FileStaging.SequentialFileStagingArtifact.BlobContainerCreated
 - uid: System.Collections.Concurrent.ConcurrentBag`1
   commentId: T:System.Collections.Concurrent.ConcurrentBag`1
   isExternal: true
@@ -157,36 +142,18 @@ references:
     fullName: )
 - uid: Microsoft.Azure.Batch.IFileStagingArtifact.NamingFragment
   commentId: P:Microsoft.Azure.Batch.IFileStagingArtifact.NamingFragment
-  parent: Microsoft.Azure.Batch.IFileStagingArtifact
-  isExternal: false
-  name: NamingFragment
-  nameWithType: IFileStagingArtifact.NamingFragment
-  fullName: Microsoft.Azure.Batch.IFileStagingArtifact.NamingFragment
 - uid: Microsoft.Azure.Batch
   commentId: N:Microsoft.Azure.Batch
   isExternal: false
   name: Microsoft.Azure.Batch
   nameWithType: Microsoft.Azure.Batch
   fullName: Microsoft.Azure.Batch
-- uid: Microsoft.Azure.Batch.FileStaging
-  commentId: N:Microsoft.Azure.Batch.FileStaging
-  isExternal: false
-  name: Microsoft.Azure.Batch.FileStaging
-  nameWithType: Microsoft.Azure.Batch.FileStaging
-  fullName: Microsoft.Azure.Batch.FileStaging
 - uid: System
   commentId: N:System
   isExternal: false
   name: System
   nameWithType: System
   fullName: System
-- uid: Microsoft.Azure.Batch.IFileStagingArtifact
-  commentId: T:Microsoft.Azure.Batch.IFileStagingArtifact
-  parent: Microsoft.Azure.Batch
-  isExternal: false
-  name: IFileStagingArtifact
-  nameWithType: IFileStagingArtifact
-  fullName: Microsoft.Azure.Batch.IFileStagingArtifact
 - uid: Microsoft.Azure.Batch.IFileStagingArtifact.NamingFragment*
   commentId: Overload:Microsoft.Azure.Batch.IFileStagingArtifact.NamingFragment
   isExternal: false

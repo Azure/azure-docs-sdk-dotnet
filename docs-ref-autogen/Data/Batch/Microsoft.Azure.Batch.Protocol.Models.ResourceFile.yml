@@ -115,19 +115,19 @@ items:
       description: >-
         The URL of the file within Azure Blob
 
-        Storage. This URL should include a shared access signature if the
-
-        blob is not publicly readable.
+        Storage.
     - id: filePath
       type: System.String
       description: >-
-        The location to which to download the file,
+        The location on the compute node to which to
 
-        relative to the task's working directory.
+        download the file, relative to the task's working
+
+        directory.
     - id: fileMode
       type: System.String
       description: >-
-        The file mode attribute in octal
+        The file permission mode attribute in octal
 
         format.
   overload: Microsoft.Azure.Batch.Protocol.Models.ResourceFile.#ctor*
@@ -153,11 +153,12 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: BlobSource
     path: src/azure-sdk-for-net/src/Batch/Client/Src/GeneratedProtocol/Models/ResourceFile.cs
-    startLine: 54
+    startLine: 60
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch.Protocol.Models
-  summary: "\nGets or sets the URL of the file within Azure Blob Storage. This\nURL should include a shared access signature if the blob is not\npublicly readable.\n"
+  summary: "\nGets or sets the URL of the file within Azure Blob Storage.\n"
+  remarks: "\nThis URL must be readable using anonymous access; that is, the\nBatch service does not present any credentials when downloading the\nblob. There are two ways to get such a URL for a blob in Azure\nstorage: include a Shared Access Signature (SAS) granting read\npermissions on the blob, or set the ACL for the blob or its\ncontainer to allow public access.\n"
   example: []
   syntax:
     content: >-
@@ -204,11 +205,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: FilePath
     path: src/azure-sdk-for-net/src/Batch/Client/Src/GeneratedProtocol/Models/ResourceFile.cs
-    startLine: 61
+    startLine: 67
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch.Protocol.Models
-  summary: "\nGets or sets the location to which to download the file, relative\nto the task's working directory.\n"
+  summary: "\nGets or sets the location on the compute node to which to download\nthe file, relative to the task's working directory.\n"
   example: []
   syntax:
     content: >-
@@ -255,12 +256,12 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: FileMode
     path: src/azure-sdk-for-net/src/Batch/Client/Src/GeneratedProtocol/Models/ResourceFile.cs
-    startLine: 71
+    startLine: 80
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch.Protocol.Models
-  summary: "\nGets or sets the file mode attribute in octal format.\n"
-  remarks: "\nThis property will be ignored if it is specified for a\nresourceFile which will be downloaded to a Windows compute node.\n"
+  summary: "\nGets or sets the file permission mode attribute in octal format.\n"
+  remarks: "\nThis property applies only to files being downloaded to Linux\ncompute nodes. It will be ignored if it is specified for a\nresourceFile which will be downloaded to a Windows node. If this\nproperty is not specified for a Linux node, then a default value of\n0770 is applied to the file.\n"
   example: []
   syntax:
     content: >-
@@ -307,7 +308,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: Validate
     path: src/azure-sdk-for-net/src/Batch/Client/Src/GeneratedProtocol/Models/ResourceFile.cs
-    startLine: 80
+    startLine: 89
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch.Protocol.Models
