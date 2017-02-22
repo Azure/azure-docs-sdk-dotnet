@@ -129,11 +129,11 @@ items:
     - id: startWindow
       type: System.Nullable{System.TimeSpan}
       description: >-
-        The time interval, starting from the
+        The time interval, starting from the time
 
-        time at which the schedule indicates a job should be created,
+        at which the schedule indicates a job should be created, within
 
-        within which a job must be created.
+        which a job must be created.
     - id: recurrenceInterval
       type: System.Nullable{System.TimeSpan}
       description: >-
@@ -222,11 +222,12 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: DoNotRunAfter
     path: src/azure-sdk-for-net/src/Batch/Client/Src/GeneratedProtocol/Models/Schedule.cs
-    startLine: 73
+    startLine: 78
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch.Protocol.Models
-  summary: "\nGets or sets a time after which no job will be created under this\njob schedule. The schedule will move to the completed state as\nsoon as this deadline is past and there is no active job under\nthis job schedule.\n"
+  summary: "\nGets or sets a time after which no job will be created under this\njob schedule. The schedule will move to the completed state as soon\nas this deadline is past and there is no active job under this job\nschedule.\n"
+  remarks: "\nIf you do not specify a doNotRunAfter time, and you are creating a\nrecurring job schedule, the job schedule will remain active until\nyou explicitly terminate it.\n"
   example: []
   syntax:
     content: >-
@@ -273,12 +274,12 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: StartWindow
     path: src/azure-sdk-for-net/src/Batch/Client/Src/GeneratedProtocol/Models/Schedule.cs
-    startLine: 86
+    startLine: 98
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch.Protocol.Models
-  summary: "\nGets or sets the time interval, starting from the time at which\nthe schedule indicates a job should be created, within which a\njob must be created.\n"
-  remarks: "\nIf a job is not created within the startWindow interval, then the\n'opportunity' is lost; no job will be created until the next\nrecurrence of the schedule.\n"
+  summary: "\nGets or sets the time interval, starting from the time at which the\nschedule indicates a job should be created, within which a job must\nbe created.\n"
+  remarks: "\nIf a job is not created within the startWindow interval, then the\n'opportunity' is lost; no job will be created until the next\nrecurrence of the schedule. If the schedule is recurring, and the\nstartWindow is longer than the recurrence interval, then this is\nequivalent to an infinite startWindow, because the job that is\n'due' in one recurrenceInterval is not carried forward into the\nnext recurrence interval. The default is infinite. The minimum\nvalue is 1 minute. If you specify a lower value, the Batch service\nrejects the schedule with an error; if you are calling the REST API\ndirectly, the HTTP status code is 400 (Bad Request).\n"
   example: []
   syntax:
     content: >-
@@ -325,11 +326,12 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: RecurrenceInterval
     path: src/azure-sdk-for-net/src/Batch/Client/Src/GeneratedProtocol/Models/Schedule.cs
-    startLine: 94
+    startLine: 125
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch.Protocol.Models
-  summary: "\nGets or sets the time interval between the start times of two\nsuccessive jobs under the job schedule. A job schedule can have\nat most one active job under it at any given time.\n"
+  summary: "\nGets or sets the time interval between the start times of two\nsuccessive jobs under the job schedule. A job schedule can have at\nmost one active job under it at any given time.\n"
+  remarks: "\nBecause a job schedule can have at most one active job under it at\nany given time, if it is time to create a new job under a job\nschedule, but the previous job is still running, the Batch service\nwill not create the new job until the previous job finishes. If the\nprevious job does not finish within the startWindow period of the\nnew recurrenceInterval, then no new job will be scheduled for that\ninterval. For recurring jobs, you should normally specify a\njobManagerTask in the jobSpecification. If you do not use\njobManagerTask, you will need an external process to monitor when\njobs are created, add tasks to the jobs and terminate the jobs\nready for the next recurrence. The default is that the schedule\ndoes not recur: one job is created, within the startWindow after\nthe doNotRunUntil time, and the schedule is complete as soon as\nthat job finishes. The minimum value is 1 minute. If you specify a\nlower value, the Batch service rejects the schedule with an error;\nif you are calling the REST API directly, the HTTP status code is\n400 (Bad Request).\n"
   example: []
   syntax:
     content: >-

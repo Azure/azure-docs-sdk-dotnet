@@ -28,8 +28,8 @@ items:
   - Microsoft.Azure.Batch.PoolOperations.EnableComputeNodeSchedulingAsync(System.String,System.String,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
   - Microsoft.Azure.Batch.PoolOperations.EvaluateAutoScale(System.String,System.String,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})
   - Microsoft.Azure.Batch.PoolOperations.EvaluateAutoScaleAsync(System.String,System.String,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
-  - Microsoft.Azure.Batch.PoolOperations.GetAllPoolsLifetimeStatistics(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})
-  - Microsoft.Azure.Batch.PoolOperations.GetAllPoolsLifetimeStatisticsAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
+  - Microsoft.Azure.Batch.PoolOperations.GetAllLifetimeStatistics(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})
+  - Microsoft.Azure.Batch.PoolOperations.GetAllLifetimeStatisticsAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
   - Microsoft.Azure.Batch.PoolOperations.GetComputeNode(System.String,System.String,Microsoft.Azure.Batch.DetailLevel,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})
   - Microsoft.Azure.Batch.PoolOperations.GetComputeNodeAsync(System.String,System.String,Microsoft.Azure.Batch.DetailLevel,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
   - Microsoft.Azure.Batch.PoolOperations.GetNodeFile(System.String,System.String,System.String,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})
@@ -2616,8 +2616,8 @@ items:
   remarks: The get file operation runs asynchronously.
   example: []
   syntax:
-    content: public Task<NodeFile> GetNodeFileAsync(string poolId, string computeNodeId, string fileName, IEnumerable<BatchClientBehavior> additionalBehaviors = null, CancellationToken cancellationToken = null)
-    content.vb: Public Function GetNodeFileAsync(poolId As String, computeNodeId As String, fileName As String, additionalBehaviors As IEnumerable(Of BatchClientBehavior) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of NodeFile)
+    content: public Task<NodeFile> GetNodeFileAsync(string poolId, string computeNodeId, string filePath, IEnumerable<BatchClientBehavior> additionalBehaviors = null, CancellationToken cancellationToken = null)
+    content.vb: Public Function GetNodeFileAsync(poolId As String, computeNodeId As String, filePath As String, additionalBehaviors As IEnumerable(Of BatchClientBehavior) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of NodeFile)
     parameters:
     - id: poolId
       type: System.String
@@ -2625,9 +2625,9 @@ items:
     - id: computeNodeId
       type: System.String
       description: The id of the compute node.
-    - id: fileName
+    - id: filePath
       type: System.String
-      description: The name of the file to retrieve.
+      description: The path of the file to retrieve.
     - id: additionalBehaviors
       type: System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior}
       description: A collection of <xref href="Microsoft.Azure.Batch.BatchClientBehavior" data-throw-if-not-resolved="false"></xref> instances that are applied to the Batch service request after the <xref href="Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" data-throw-if-not-resolved="false"></xref>.
@@ -2636,7 +2636,7 @@ items:
       description: A <xref href="System.Threading.CancellationToken" data-throw-if-not-resolved="false"></xref> for controlling the lifetime of the asynchronous operation.
     return:
       type: System.Threading.Tasks.Task{Microsoft.Azure.Batch.NodeFile}
-      description: A <xref href="Microsoft.Azure.Batch.NodeFile" data-throw-if-not-resolved="false"></xref> containing information about the file, and which can be used to download the file (see <xref href="Microsoft.Azure.Batch.NodeFile.CopyToStreamAsync(System.IO.Stream%2cSystem.Collections.Generic.IEnumerable%7bMicrosoft.Azure.Batch.BatchClientBehavior%7d%2cSystem.Threading.CancellationToken)" data-throw-if-not-resolved="false"></xref>).
+      description: A <xref href="Microsoft.Azure.Batch.NodeFile" data-throw-if-not-resolved="false"></xref> containing information about the file, and which can be used to download the file (see <xref href="Microsoft.Azure.Batch.NodeFile.CopyToStreamAsync(System.IO.Stream%2cMicrosoft.Azure.Batch.GetFileRequestByteRange%2cSystem.Collections.Generic.IEnumerable%7bMicrosoft.Azure.Batch.BatchClientBehavior%7d%2cSystem.Threading.CancellationToken)" data-throw-if-not-resolved="false"></xref>).
   overload: Microsoft.Azure.Batch.PoolOperations.GetNodeFileAsync*
   nameWithType.vb: PoolOperations.GetNodeFileAsync(String, String, String, IEnumerable(Of BatchClientBehavior), CancellationToken)
   modifiers.csharp:
@@ -2671,8 +2671,8 @@ items:
   remarks: This is a blocking operation. For a non-blocking equivalent, see <xref href="Microsoft.Azure.Batch.PoolOperations.GetNodeFileAsync(System.String%2cSystem.String%2cSystem.String%2cSystem.Collections.Generic.IEnumerable%7bMicrosoft.Azure.Batch.BatchClientBehavior%7d%2cSystem.Threading.CancellationToken)" data-throw-if-not-resolved="false"></xref>.
   example: []
   syntax:
-    content: public NodeFile GetNodeFile(string poolId, string computeNodeId, string fileName, IEnumerable<BatchClientBehavior> additionalBehaviors = null)
-    content.vb: Public Function GetNodeFile(poolId As String, computeNodeId As String, fileName As String, additionalBehaviors As IEnumerable(Of BatchClientBehavior) = Nothing) As NodeFile
+    content: public NodeFile GetNodeFile(string poolId, string computeNodeId, string filePath, IEnumerable<BatchClientBehavior> additionalBehaviors = null)
+    content.vb: Public Function GetNodeFile(poolId As String, computeNodeId As String, filePath As String, additionalBehaviors As IEnumerable(Of BatchClientBehavior) = Nothing) As NodeFile
     parameters:
     - id: poolId
       type: System.String
@@ -2680,15 +2680,15 @@ items:
     - id: computeNodeId
       type: System.String
       description: The id of the compute node.
-    - id: fileName
+    - id: filePath
       type: System.String
-      description: The name of the file to retrieve.
+      description: The path of the file to retrieve.
     - id: additionalBehaviors
       type: System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior}
       description: A collection of <xref href="Microsoft.Azure.Batch.BatchClientBehavior" data-throw-if-not-resolved="false"></xref> instances that are applied to the Batch service request after the <xref href="Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" data-throw-if-not-resolved="false"></xref>.
     return:
       type: Microsoft.Azure.Batch.NodeFile
-      description: A <xref href="Microsoft.Azure.Batch.NodeFile" data-throw-if-not-resolved="false"></xref> containing information about the file, and which can be used to download the file (see <xref href="Microsoft.Azure.Batch.NodeFile.CopyToStream(System.IO.Stream%2cSystem.Collections.Generic.IEnumerable%7bMicrosoft.Azure.Batch.BatchClientBehavior%7d)" data-throw-if-not-resolved="false"></xref>).
+      description: A <xref href="Microsoft.Azure.Batch.NodeFile" data-throw-if-not-resolved="false"></xref> containing information about the file, and which can be used to download the file (see <xref href="Microsoft.Azure.Batch.NodeFile.CopyToStream(System.IO.Stream%2cMicrosoft.Azure.Batch.GetFileRequestByteRange%2cSystem.Collections.Generic.IEnumerable%7bMicrosoft.Azure.Batch.BatchClientBehavior%7d)" data-throw-if-not-resolved="false"></xref>).
   overload: Microsoft.Azure.Batch.PoolOperations.GetNodeFile*
   nameWithType.vb: PoolOperations.GetNodeFile(String, String, String, IEnumerable(Of BatchClientBehavior))
   modifiers.csharp:
@@ -2781,8 +2781,8 @@ items:
   remarks: The delete operation runs asynchronously.
   example: []
   syntax:
-    content: public Task DeleteNodeFileAsync(string poolId, string computeNodeId, string fileName, bool ? recursive = null, IEnumerable<BatchClientBehavior> additionalBehaviors = null, CancellationToken cancellationToken = null)
-    content.vb: Public Function DeleteNodeFileAsync(poolId As String, computeNodeId As String, fileName As String, recursive As Boolean? = Nothing, additionalBehaviors As IEnumerable(Of BatchClientBehavior) = Nothing, cancellationToken As CancellationToken = Nothing) As Task
+    content: public Task DeleteNodeFileAsync(string poolId, string computeNodeId, string filePath, bool ? recursive = null, IEnumerable<BatchClientBehavior> additionalBehaviors = null, CancellationToken cancellationToken = null)
+    content.vb: Public Function DeleteNodeFileAsync(poolId As String, computeNodeId As String, filePath As String, recursive As Boolean? = Nothing, additionalBehaviors As IEnumerable(Of BatchClientBehavior) = Nothing, cancellationToken As CancellationToken = Nothing) As Task
     parameters:
     - id: poolId
       type: System.String
@@ -2790,9 +2790,9 @@ items:
     - id: computeNodeId
       type: System.String
       description: The id of the compute node.
-    - id: fileName
+    - id: filePath
       type: System.String
-      description: The name of the file to delete.
+      description: The path of the file to delete.
     - id: recursive
       type: System.Nullable{System.Boolean}
       description: "\nIf the file-path parameter represents a directory instead of a file, you can set the optional \nrecursive parameter to true to delete the directory and all of the files and subdirectories in it. If recursive is false \nthen the directory must be empty or deletion will fail.\n"
@@ -2839,8 +2839,8 @@ items:
   remarks: This is a blocking operation.  For a non-blocking equivalent, see <xref href="Microsoft.Azure.Batch.PoolOperations.DeleteNodeFileAsync(System.String%2cSystem.String%2cSystem.String%2cSystem.Nullable%7bSystem.Boolean%7d%2cSystem.Collections.Generic.IEnumerable%7bMicrosoft.Azure.Batch.BatchClientBehavior%7d%2cSystem.Threading.CancellationToken)" data-throw-if-not-resolved="false"></xref>.
   example: []
   syntax:
-    content: public void DeleteNodeFile(string poolId, string computeNodeId, string fileName, bool ? recursive = null, IEnumerable<BatchClientBehavior> additionalBehaviors = null)
-    content.vb: Public Sub DeleteNodeFile(poolId As String, computeNodeId As String, fileName As String, recursive As Boolean? = Nothing, additionalBehaviors As IEnumerable(Of BatchClientBehavior) = Nothing)
+    content: public void DeleteNodeFile(string poolId, string computeNodeId, string filePath, bool ? recursive = null, IEnumerable<BatchClientBehavior> additionalBehaviors = null)
+    content.vb: Public Sub DeleteNodeFile(poolId As String, computeNodeId As String, filePath As String, recursive As Boolean? = Nothing, additionalBehaviors As IEnumerable(Of BatchClientBehavior) = Nothing)
     parameters:
     - id: poolId
       type: System.String
@@ -2848,9 +2848,9 @@ items:
     - id: computeNodeId
       type: System.String
       description: The id of the compute node.
-    - id: fileName
+    - id: filePath
       type: System.String
-      description: The name of the file to delete.
+      description: The path of the file to delete.
     - id: recursive
       type: System.Nullable{System.Boolean}
       description: "\nIf the file-path parameter represents a directory instead of a file, you can set the optional \nrecursive parameter to true to delete the directory and all of the files and subdirectories in it. If recursive is false \nthen the directory must be empty or deletion will fail.\n"
@@ -2865,34 +2865,34 @@ items:
   - Public
   fullName.vb: Microsoft.Azure.Batch.PoolOperations.DeleteNodeFile(System.String, System.String, System.String, System.Nullable(Of System.Boolean), System.Collections.Generic.IEnumerable(Of Microsoft.Azure.Batch.BatchClientBehavior))
   name.vb: DeleteNodeFile(String, String, String, Nullable(Of Boolean), IEnumerable(Of BatchClientBehavior))
-- uid: Microsoft.Azure.Batch.PoolOperations.GetAllPoolsLifetimeStatisticsAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
-  commentId: M:Microsoft.Azure.Batch.PoolOperations.GetAllPoolsLifetimeStatisticsAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
-  id: GetAllPoolsLifetimeStatisticsAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
+- uid: Microsoft.Azure.Batch.PoolOperations.GetAllLifetimeStatisticsAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
+  commentId: M:Microsoft.Azure.Batch.PoolOperations.GetAllLifetimeStatisticsAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
+  id: GetAllLifetimeStatisticsAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
   parent: Microsoft.Azure.Batch.PoolOperations
   langs:
   - csharp
   - vb
-  name: GetAllPoolsLifetimeStatisticsAsync(IEnumerable<BatchClientBehavior>, CancellationToken)
-  nameWithType: PoolOperations.GetAllPoolsLifetimeStatisticsAsync(IEnumerable<BatchClientBehavior>, CancellationToken)
-  fullName: Microsoft.Azure.Batch.PoolOperations.GetAllPoolsLifetimeStatisticsAsync(System.Collections.Generic.IEnumerable<Microsoft.Azure.Batch.BatchClientBehavior>, System.Threading.CancellationToken)
+  name: GetAllLifetimeStatisticsAsync(IEnumerable<BatchClientBehavior>, CancellationToken)
+  nameWithType: PoolOperations.GetAllLifetimeStatisticsAsync(IEnumerable<BatchClientBehavior>, CancellationToken)
+  fullName: Microsoft.Azure.Batch.PoolOperations.GetAllLifetimeStatisticsAsync(System.Collections.Generic.IEnumerable<Microsoft.Azure.Batch.BatchClientBehavior>, System.Threading.CancellationToken)
   type: Method
   source:
     remote:
       path: src/Batch/Client/Src/PoolOperations.cs
       branch: AutoRest
       repo: https://github.com/Azure/azure-sdk-for-net.git
-    id: GetAllPoolsLifetimeStatisticsAsync
+    id: GetAllLifetimeStatisticsAsync
     path: src/azure-sdk-for-net/src/Batch/Client/Src/PoolOperations.cs
     startLine: 1735
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch
-  summary: "\nGets lifetime summary statistics for all of the pools in the current account.  \nStatistics are aggregated across all pools that have ever existed in the account, from account creation to the last update time of the statistics.\n"
+  summary: "\nGets lifetime summary statistics for all of the pools in the current account.\nStatistics are aggregated across all pools that have ever existed in the account, from account creation to the last update time of the statistics.\n"
   remarks: The get statistics operation runs asynchronously.
   example: []
   syntax:
-    content: public Task<PoolStatistics> GetAllPoolsLifetimeStatisticsAsync(IEnumerable<BatchClientBehavior> additionalBehaviors = null, CancellationToken cancellationToken = null)
-    content.vb: Public Function GetAllPoolsLifetimeStatisticsAsync(additionalBehaviors As IEnumerable(Of BatchClientBehavior) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of PoolStatistics)
+    content: public Task<PoolStatistics> GetAllLifetimeStatisticsAsync(IEnumerable<BatchClientBehavior> additionalBehaviors = null, CancellationToken cancellationToken = null)
+    content.vb: Public Function GetAllLifetimeStatisticsAsync(additionalBehaviors As IEnumerable(Of BatchClientBehavior) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of PoolStatistics)
     parameters:
     - id: additionalBehaviors
       type: System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior}
@@ -2903,42 +2903,42 @@ items:
     return:
       type: System.Threading.Tasks.Task{Microsoft.Azure.Batch.PoolStatistics}
       description: The aggregated pool statistics.
-  overload: Microsoft.Azure.Batch.PoolOperations.GetAllPoolsLifetimeStatisticsAsync*
-  nameWithType.vb: PoolOperations.GetAllPoolsLifetimeStatisticsAsync(IEnumerable(Of BatchClientBehavior), CancellationToken)
+  overload: Microsoft.Azure.Batch.PoolOperations.GetAllLifetimeStatisticsAsync*
+  nameWithType.vb: PoolOperations.GetAllLifetimeStatisticsAsync(IEnumerable(Of BatchClientBehavior), CancellationToken)
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Microsoft.Azure.Batch.PoolOperations.GetAllPoolsLifetimeStatisticsAsync(System.Collections.Generic.IEnumerable(Of Microsoft.Azure.Batch.BatchClientBehavior), System.Threading.CancellationToken)
-  name.vb: GetAllPoolsLifetimeStatisticsAsync(IEnumerable(Of BatchClientBehavior), CancellationToken)
-- uid: Microsoft.Azure.Batch.PoolOperations.GetAllPoolsLifetimeStatistics(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})
-  commentId: M:Microsoft.Azure.Batch.PoolOperations.GetAllPoolsLifetimeStatistics(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})
-  id: GetAllPoolsLifetimeStatistics(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})
+  fullName.vb: Microsoft.Azure.Batch.PoolOperations.GetAllLifetimeStatisticsAsync(System.Collections.Generic.IEnumerable(Of Microsoft.Azure.Batch.BatchClientBehavior), System.Threading.CancellationToken)
+  name.vb: GetAllLifetimeStatisticsAsync(IEnumerable(Of BatchClientBehavior), CancellationToken)
+- uid: Microsoft.Azure.Batch.PoolOperations.GetAllLifetimeStatistics(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})
+  commentId: M:Microsoft.Azure.Batch.PoolOperations.GetAllLifetimeStatistics(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})
+  id: GetAllLifetimeStatistics(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})
   parent: Microsoft.Azure.Batch.PoolOperations
   langs:
   - csharp
   - vb
-  name: GetAllPoolsLifetimeStatistics(IEnumerable<BatchClientBehavior>)
-  nameWithType: PoolOperations.GetAllPoolsLifetimeStatistics(IEnumerable<BatchClientBehavior>)
-  fullName: Microsoft.Azure.Batch.PoolOperations.GetAllPoolsLifetimeStatistics(System.Collections.Generic.IEnumerable<Microsoft.Azure.Batch.BatchClientBehavior>)
+  name: GetAllLifetimeStatistics(IEnumerable<BatchClientBehavior>)
+  nameWithType: PoolOperations.GetAllLifetimeStatistics(IEnumerable<BatchClientBehavior>)
+  fullName: Microsoft.Azure.Batch.PoolOperations.GetAllLifetimeStatistics(System.Collections.Generic.IEnumerable<Microsoft.Azure.Batch.BatchClientBehavior>)
   type: Method
   source:
     remote:
       path: src/Batch/Client/Src/PoolOperations.cs
       branch: AutoRest
       repo: https://github.com/Azure/azure-sdk-for-net.git
-    id: GetAllPoolsLifetimeStatistics
+    id: GetAllLifetimeStatistics
     path: src/azure-sdk-for-net/src/Batch/Client/Src/PoolOperations.cs
     startLine: 1757
   assemblies:
   - Microsoft.Azure.Batch
   namespace: Microsoft.Azure.Batch
   summary: "\nGets lifetime summary statistics for all of the pools in the current account.  \nStatistics are aggregated across all pools that have ever existed in the account, from account creation to the last update time of the statistics.\n"
-  remarks: This is a blocking operation. For a non-blocking equivalent, see <xref href="Microsoft.Azure.Batch.PoolOperations.GetAllPoolsLifetimeStatisticsAsync(System.Collections.Generic.IEnumerable%7bMicrosoft.Azure.Batch.BatchClientBehavior%7d%2cSystem.Threading.CancellationToken)" data-throw-if-not-resolved="false"></xref>.
+  remarks: This is a blocking operation. For a non-blocking equivalent, see <xref href="Microsoft.Azure.Batch.PoolOperations.GetAllLifetimeStatisticsAsync(System.Collections.Generic.IEnumerable%7bMicrosoft.Azure.Batch.BatchClientBehavior%7d%2cSystem.Threading.CancellationToken)" data-throw-if-not-resolved="false"></xref>.
   example: []
   syntax:
-    content: public PoolStatistics GetAllPoolsLifetimeStatistics(IEnumerable<BatchClientBehavior> additionalBehaviors = null)
-    content.vb: Public Function GetAllPoolsLifetimeStatistics(additionalBehaviors As IEnumerable(Of BatchClientBehavior) = Nothing) As PoolStatistics
+    content: public PoolStatistics GetAllLifetimeStatistics(IEnumerable<BatchClientBehavior> additionalBehaviors = null)
+    content.vb: Public Function GetAllLifetimeStatistics(additionalBehaviors As IEnumerable(Of BatchClientBehavior) = Nothing) As PoolStatistics
     parameters:
     - id: additionalBehaviors
       type: System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior}
@@ -2946,14 +2946,14 @@ items:
     return:
       type: Microsoft.Azure.Batch.PoolStatistics
       description: The aggregated pool statistics.
-  overload: Microsoft.Azure.Batch.PoolOperations.GetAllPoolsLifetimeStatistics*
-  nameWithType.vb: PoolOperations.GetAllPoolsLifetimeStatistics(IEnumerable(Of BatchClientBehavior))
+  overload: Microsoft.Azure.Batch.PoolOperations.GetAllLifetimeStatistics*
+  nameWithType.vb: PoolOperations.GetAllLifetimeStatistics(IEnumerable(Of BatchClientBehavior))
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Microsoft.Azure.Batch.PoolOperations.GetAllPoolsLifetimeStatistics(System.Collections.Generic.IEnumerable(Of Microsoft.Azure.Batch.BatchClientBehavior))
-  name.vb: GetAllPoolsLifetimeStatistics(IEnumerable(Of BatchClientBehavior))
+  fullName.vb: Microsoft.Azure.Batch.PoolOperations.GetAllLifetimeStatistics(System.Collections.Generic.IEnumerable(Of Microsoft.Azure.Batch.BatchClientBehavior))
+  name.vb: GetAllLifetimeStatistics(IEnumerable(Of BatchClientBehavior))
 - uid: Microsoft.Azure.Batch.PoolOperations.ListPoolUsageMetrics(System.Nullable{System.DateTime},System.Nullable{System.DateTime},Microsoft.Azure.Batch.DetailLevel,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})
   commentId: M:Microsoft.Azure.Batch.PoolOperations.ListPoolUsageMetrics(System.Nullable{System.DateTime},System.Nullable{System.DateTime},Microsoft.Azure.Batch.DetailLevel,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})
   id: ListPoolUsageMetrics(System.Nullable{System.DateTime},System.Nullable{System.DateTime},Microsoft.Azure.Batch.DetailLevel,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})
@@ -4696,8 +4696,8 @@ references:
   name: NodeFile
   nameWithType: NodeFile
   fullName: Microsoft.Azure.Batch.NodeFile
-- uid: Microsoft.Azure.Batch.NodeFile.CopyToStreamAsync(System.IO.Stream,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
-  commentId: M:Microsoft.Azure.Batch.NodeFile.CopyToStreamAsync(System.IO.Stream,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
+- uid: Microsoft.Azure.Batch.NodeFile.CopyToStreamAsync(System.IO.Stream,Microsoft.Azure.Batch.GetFileRequestByteRange,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
+  commentId: M:Microsoft.Azure.Batch.NodeFile.CopyToStreamAsync(System.IO.Stream,Microsoft.Azure.Batch.GetFileRequestByteRange,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
 - uid: Microsoft.Azure.Batch.PoolOperations.GetNodeFileAsync*
   commentId: Overload:Microsoft.Azure.Batch.PoolOperations.GetNodeFileAsync
   isExternal: false
@@ -4746,8 +4746,8 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Azure.Batch.NodeFile.CopyToStream(System.IO.Stream,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})
-  commentId: M:Microsoft.Azure.Batch.NodeFile.CopyToStream(System.IO.Stream,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})
+- uid: Microsoft.Azure.Batch.NodeFile.CopyToStream(System.IO.Stream,Microsoft.Azure.Batch.GetFileRequestByteRange,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})
+  commentId: M:Microsoft.Azure.Batch.NodeFile.CopyToStream(System.IO.Stream,Microsoft.Azure.Batch.GetFileRequestByteRange,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})
 - uid: Microsoft.Azure.Batch.PoolOperations.GetNodeFileAsync(System.String,System.String,System.String,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
   commentId: M:Microsoft.Azure.Batch.PoolOperations.GetNodeFileAsync(System.String,System.String,System.String,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
 - uid: Microsoft.Azure.Batch.PoolOperations.GetNodeFile*
@@ -4860,12 +4860,12 @@ references:
   name: DeleteNodeFile
   nameWithType: PoolOperations.DeleteNodeFile
   fullName: Microsoft.Azure.Batch.PoolOperations.DeleteNodeFile
-- uid: Microsoft.Azure.Batch.PoolOperations.GetAllPoolsLifetimeStatisticsAsync*
-  commentId: Overload:Microsoft.Azure.Batch.PoolOperations.GetAllPoolsLifetimeStatisticsAsync
+- uid: Microsoft.Azure.Batch.PoolOperations.GetAllLifetimeStatisticsAsync*
+  commentId: Overload:Microsoft.Azure.Batch.PoolOperations.GetAllLifetimeStatisticsAsync
   isExternal: false
-  name: GetAllPoolsLifetimeStatisticsAsync
-  nameWithType: PoolOperations.GetAllPoolsLifetimeStatisticsAsync
-  fullName: Microsoft.Azure.Batch.PoolOperations.GetAllPoolsLifetimeStatisticsAsync
+  name: GetAllLifetimeStatisticsAsync
+  nameWithType: PoolOperations.GetAllLifetimeStatisticsAsync
+  fullName: Microsoft.Azure.Batch.PoolOperations.GetAllLifetimeStatisticsAsync
 - uid: System.Threading.Tasks.Task{Microsoft.Azure.Batch.PoolStatistics}
   commentId: T:System.Threading.Tasks.Task{Microsoft.Azure.Batch.PoolStatistics}
   parent: System.Threading.Tasks
@@ -4908,14 +4908,14 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Azure.Batch.PoolOperations.GetAllPoolsLifetimeStatisticsAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
-  commentId: M:Microsoft.Azure.Batch.PoolOperations.GetAllPoolsLifetimeStatisticsAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
-- uid: Microsoft.Azure.Batch.PoolOperations.GetAllPoolsLifetimeStatistics*
-  commentId: Overload:Microsoft.Azure.Batch.PoolOperations.GetAllPoolsLifetimeStatistics
+- uid: Microsoft.Azure.Batch.PoolOperations.GetAllLifetimeStatisticsAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
+  commentId: M:Microsoft.Azure.Batch.PoolOperations.GetAllLifetimeStatisticsAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)
+- uid: Microsoft.Azure.Batch.PoolOperations.GetAllLifetimeStatistics*
+  commentId: Overload:Microsoft.Azure.Batch.PoolOperations.GetAllLifetimeStatistics
   isExternal: false
-  name: GetAllPoolsLifetimeStatistics
-  nameWithType: PoolOperations.GetAllPoolsLifetimeStatistics
-  fullName: Microsoft.Azure.Batch.PoolOperations.GetAllPoolsLifetimeStatistics
+  name: GetAllLifetimeStatistics
+  nameWithType: PoolOperations.GetAllLifetimeStatistics
+  fullName: Microsoft.Azure.Batch.PoolOperations.GetAllLifetimeStatistics
 - uid: Microsoft.Azure.Batch.PoolStatistics
   commentId: T:Microsoft.Azure.Batch.PoolStatistics
   parent: Microsoft.Azure.Batch
