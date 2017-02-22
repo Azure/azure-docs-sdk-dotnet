@@ -1297,11 +1297,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: CreateKeyAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 55
+    startLine: 59
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nCreates a new, named, key in the specified vault.\n"
+  summary: "\nCreates a new key, stores it, then returns key parameters and attributes to\nthe client. The create key operation can be used to create any key type in\nAzure Key Vault. If the named key already exists, Azure Key Vault creates a\nnew version of the key. Authorization: Requires the keys/create permission.\n"
   example: []
   syntax:
     content: public static Task<KeyBundle> CreateKeyAsync(this IKeyVaultClient operations, string vaultBaseUrl, string keyName, string kty, int ? keySize = null, IList<string> keyOps = null, KeyAttributes keyAttributes = null, IDictionary<string, string> tags = null, CancellationToken cancellationToken = null)
@@ -1315,16 +1315,16 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: keyName
       type: System.String
-      description: "\nThe name of the key\n"
+      description: "\nThe name for the new key. The system will generate the version name for the\nnew key.\n"
     - id: kty
       type: System.String
-      description: "\nThe type of key to create. Valid key types, see JsonWebKeyType. Supported\nJsonWebKey key types (kty) for Elliptic Curve, RSA, HSM, Octet. Possible\nvalues include: 'EC', 'RSA', 'RSA-HSM', 'oct'\n"
+      description: "\nThe type of key to create. For valid key types, see JsonWebKeyType.\nSupported JsonWebKey key types (kty) for Elliptic Curve, RSA, HSM, Octet.\nPossible values include: 'EC', 'RSA', 'RSA-HSM', 'oct'\n"
     - id: keySize
       type: System.Nullable{System.Int32}
-      description: "\nThe key size in bytes. e.g. 1024 or 2048.\n"
+      description: "\nThe key size in bytes. For example, 1024 or 2048.\n"
     - id: keyOps
       type: System.Collections.Generic.IList{System.String}
       description: "\n"
@@ -1333,7 +1333,7 @@ items:
       description: "\n"
     - id: tags
       type: System.Collections.Generic.IDictionary{System.String,System.String}
-      description: "\nApplication-specific metadata in the form of key-value pairs\n"
+      description: "\nApplication specific metadata in the form of key-value pairs.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
@@ -1368,11 +1368,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: ImportKeyAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 90
+    startLine: 98
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nImports a key into the specified vault\n"
+  summary: "\nImports an externally created key, stores it, and returns key parameters\nand attributes to the client. The import key operation may be used to\nimport any key type into an Azure Key Vault. If the named key already\nexists, Azure Key Vault creates a new version of the key. Authorization:\nrequires the keys/import permission.\n"
   example: []
   syntax:
     content: public static Task<KeyBundle> ImportKeyAsync(this IKeyVaultClient operations, string vaultBaseUrl, string keyName, JsonWebKey key, bool ? hsm = null, KeyAttributes keyAttributes = null, IDictionary<string, string> tags = null, CancellationToken cancellationToken = null)
@@ -1386,22 +1386,22 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: keyName
       type: System.String
-      description: "\nThe name of the key\n"
+      description: "\nName for the imported key.\n"
     - id: key
       type: Microsoft.Azure.KeyVault.WebKey.JsonWebKey
       description: "\nThe Json web key\n"
     - id: hsm
       type: System.Nullable{System.Boolean}
-      description: "\nWhether to import as a hardware key (HSM) or software key\n"
+      description: "\nWhether to import as a hardware key (HSM) or software key.\n"
     - id: keyAttributes
       type: Microsoft.Azure.KeyVault.Models.KeyAttributes
-      description: "\nThe key management attributes\n"
+      description: "\nThe key management attributes.\n"
     - id: tags
       type: System.Collections.Generic.IDictionary{System.String,System.String}
-      description: "\nApplication-specific metadata in the form of key-value pairs\n"
+      description: "\nApplication specific metadata in the form of key-value pairs.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
@@ -1436,11 +1436,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: DeleteKeyAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 113
+    startLine: 125
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nDeletes the specified key\n"
+  summary: "\nDeletes a key of any type from storage in Azure Key Vault. The delete key\noperation cannot be used to remove individual versions of a key. This\noperation removes the cryptographic material associated with the key, which\nmeans the key is not usable for Sign/Verify, Wrap/Unwrap or Encrypt/Decrypt\noperations. Authorization: Requires the keys/delete permission.\n"
   example: []
   syntax:
     content: public static Task<KeyBundle> DeleteKeyAsync(this IKeyVaultClient operations, string vaultBaseUrl, string keyName, CancellationToken cancellationToken = null)
@@ -1454,10 +1454,10 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: keyName
       type: System.String
-      description: "\nThe name of the key\n"
+      description: "\nThe name of the key to delete.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
@@ -1489,11 +1489,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: UpdateKeyAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 148
+    startLine: 164
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nUpdates the Key Attributes associated with the specified key\n"
+  summary: "\nThe update key operation changes specified attributes of a stored key and\ncan be applied to any key type and key version stored in Azure Key Vault.\nThe cryptographic material of a key itself cannot be changed. In order to\nperform this operation, the key must already exist in the Key Vault.\nAuthorization: requires the keys/update permission.\n"
   example: []
   syntax:
     content: public static Task<KeyBundle> UpdateKeyAsync(this IKeyVaultClient operations, string vaultBaseUrl, string keyName, string keyVersion, IList<string> keyOps = null, KeyAttributes keyAttributes = null, IDictionary<string, string> tags = null, CancellationToken cancellationToken = null)
@@ -1507,13 +1507,13 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: keyName
       type: System.String
-      description: "\nThe name of the key\n"
+      description: "\nThe name of key to update.\n"
     - id: keyVersion
       type: System.String
-      description: "\nThe version of the key\n"
+      description: "\nThe version of the key to update.\n"
     - id: keyOps
       type: System.Collections.Generic.IList{System.String}
       description: "\nJson web key operations. For more information on possible key operations,\nsee JsonWebKeyOperation.\n"
@@ -1522,7 +1522,7 @@ items:
       description: "\n"
     - id: tags
       type: System.Collections.Generic.IDictionary{System.String,System.String}
-      description: "\nApplication-specific metadata in the form of key-value pairs\n"
+      description: "\nApplication specific metadata in the form of key-value pairs.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
@@ -1557,11 +1557,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: GetKeyAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 174
+    startLine: 193
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nRetrieves the public portion of a key plus its attributes\n"
+  summary: "\nGets the public part of a stored key. The get key operation is applicable\nto all key types. If the requested key is symmetric, then no key material\nis released in the response. Authorization: Requires the keys/get\npermission.\n"
   example: []
   syntax:
     content: public static Task<KeyBundle> GetKeyAsync(this IKeyVaultClient operations, string vaultBaseUrl, string keyName, string keyVersion, CancellationToken cancellationToken = null)
@@ -1575,13 +1575,13 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: keyName
       type: System.String
-      description: "\nThe name of the key\n"
+      description: "\nThe name of the key to get.\n"
     - id: keyVersion
       type: System.String
-      description: "\nThe version of the key\n"
+      description: "\nAdding the version parameter retrieves a specific version of a key.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
@@ -1613,11 +1613,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: GetKeyVersionsAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 201
+    startLine: 222
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nList the versions of the specified key\n"
+  summary: "\nRetrieves a list of individual key versions with the same key name. The\nfull key identifier, attributes, and tags are provided in the response.\nAuthorization: Requires the keys/list permission.\n"
   example: []
   syntax:
     content: public static Task<IPage<KeyItem>> GetKeyVersionsAsync(this IKeyVaultClient operations, string vaultBaseUrl, string keyName, int ? maxresults = null, CancellationToken cancellationToken = null)
@@ -1631,13 +1631,13 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: keyName
       type: System.String
-      description: "\nThe name of the key\n"
+      description: "\nThe name of the key.\n"
     - id: maxresults
       type: System.Nullable{System.Int32}
-      description: "\nMaximum number of results to return in a page. If not specified the\nservice will return up to 25 results.\n"
+      description: "\nMaximum number of results to return in a page. If not specified the service\nwill return up to 25 results.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
@@ -1672,11 +1672,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: GetKeysAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 225
+    startLine: 246
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nList keys in the specified vault\n"
+  summary: "\nList keys in the specified vault.\n"
   example: []
   syntax:
     content: public static Task<IPage<KeyItem>> GetKeysAsync(this IKeyVaultClient operations, string vaultBaseUrl, int ? maxresults = null, CancellationToken cancellationToken = null)
@@ -1690,10 +1690,10 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: maxresults
       type: System.Nullable{System.Int32}
-      description: "\nMaximum number of results to return in a page. If not specified the\nservice will return up to 25 results.\n"
+      description: "\nMaximum number of results to return in a page. If not specified the service\nwill return up to 25 results.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
@@ -1728,7 +1728,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: BackupKeyAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 248
+    startLine: 269
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
@@ -1746,10 +1746,10 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: keyName
       type: System.String
-      description: "\nThe name of the key\n"
+      description: "\nThe name of the key.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
@@ -1781,11 +1781,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: RestoreKeyAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 271
+    startLine: 292
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nRestores the backup key in to a vault\n"
+  summary: "\nRestores a backed up key to a vault.\n"
   example: []
   syntax:
     content: public static Task<KeyBundle> RestoreKeyAsync(this IKeyVaultClient operations, string vaultBaseUrl, byte[] keyBundleBackup, CancellationToken cancellationToken = null)
@@ -1799,10 +1799,10 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: keyBundleBackup
       type: System.Byte[]
-      description: "\nthe backup blob associated with a key bundle\n"
+      description: "\nThe backup blob associated with a key bundle.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
@@ -1837,11 +1837,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: EncryptAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 303
+    startLine: 324
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nEncrypts an arbitrary sequence of bytes using an encryption key that is\nstored in Azure Key Vault.\n"
+  summary: "\nEncrypts an arbitrary sequence of bytes using an encryption key that is\nstored in a key vault.\n"
   example: []
   syntax:
     content: public static Task<KeyOperationResult> EncryptAsync(this IKeyVaultClient operations, string vaultBaseUrl, string keyName, string keyVersion, string algorithm, byte[] value, CancellationToken cancellationToken = null)
@@ -1855,13 +1855,13 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: keyName
       type: System.String
-      description: "\nThe name of the key\n"
+      description: "\nThe name of the key.\n"
     - id: keyVersion
       type: System.String
-      description: "\nThe version of the key\n"
+      description: "\nThe version of the key.\n"
     - id: algorithm
       type: System.String
       description: "\nalgorithm identifier. Possible values include: 'RSA-OAEP', 'RSA1_5'\n"
@@ -1902,11 +1902,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: DecryptAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 334
+    startLine: 355
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nDecrypts a single block of encrypted data\n"
+  summary: "\nDecrypts a single block of encrypted data.\n"
   example: []
   syntax:
     content: public static Task<KeyOperationResult> DecryptAsync(this IKeyVaultClient operations, string vaultBaseUrl, string keyName, string keyVersion, string algorithm, byte[] value, CancellationToken cancellationToken = null)
@@ -1920,13 +1920,13 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: keyName
       type: System.String
-      description: "\nThe name of the key\n"
+      description: "\nThe name of the key.\n"
     - id: keyVersion
       type: System.String
-      description: "\nThe version of the key\n"
+      description: "\nThe version of the key.\n"
     - id: algorithm
       type: System.String
       description: "\nalgorithm identifier. Possible values include: 'RSA-OAEP', 'RSA1_5'\n"
@@ -1967,11 +1967,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: SignAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 367
+    startLine: 388
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nCreates a signature from a digest using the specified key in the vault\n"
+  summary: "\nCreates a signature from a digest using the specified key.\n"
   example: []
   syntax:
     content: public static Task<KeyOperationResult> SignAsync(this IKeyVaultClient operations, string vaultBaseUrl, string keyName, string keyVersion, string algorithm, byte[] value, CancellationToken cancellationToken = null)
@@ -1985,16 +1985,16 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: keyName
       type: System.String
-      description: "\nThe name of the key\n"
+      description: "\nThe name of the key.\n"
     - id: keyVersion
       type: System.String
-      description: "\nThe version of the key\n"
+      description: "\nThe version of the key.\n"
     - id: algorithm
       type: System.String
-      description: "\nThe signing/verification algorithm identifier. For more information on\npossible algorithm types, see JsonWebKeySignatureAlgorithm. Possible\nvalues include: 'RS256', 'RS384', 'RS512', 'RSNULL'\n"
+      description: "\nThe signing/verification algorithm identifier. For more information on\npossible algorithm types, see JsonWebKeySignatureAlgorithm. Possible values\ninclude: 'RS256', 'RS384', 'RS512', 'RSNULL'\n"
     - id: value
       type: System.Byte[]
       description: "\n"
@@ -2032,11 +2032,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: VerifyAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 404
+    startLine: 425
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nVerifies a signature using the specified key\n"
+  summary: "\nVerifies a signature using a specified key.\n"
   example: []
   syntax:
     content: public static Task<KeyVerifyResult> VerifyAsync(this IKeyVaultClient operations, string vaultBaseUrl, string keyName, string keyVersion, string algorithm, byte[] digest, byte[] signature, CancellationToken cancellationToken = null)
@@ -2050,22 +2050,22 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: keyName
       type: System.String
-      description: "\nThe name of the key\n"
+      description: "\nThe name of the key.\n"
     - id: keyVersion
       type: System.String
-      description: "\nThe version of the key\n"
+      description: "\nThe version of the key.\n"
     - id: algorithm
       type: System.String
-      description: "\nThe signing/verification algorithm. For more information on possible\nalgorithm types, see JsonWebKeySignatureAlgorithm. Possible values\ninclude: 'RS256', 'RS384', 'RS512', 'RSNULL'\n"
+      description: "\nThe signing/verification algorithm. For more information on possible\nalgorithm types, see JsonWebKeySignatureAlgorithm. Possible values include:\n'RS256', 'RS384', 'RS512', 'RSNULL'\n"
     - id: digest
       type: System.Byte[]
-      description: "\nThe digest used for signing\n"
+      description: "\nThe digest used for signing.\n"
     - id: signature
       type: System.Byte[]
-      description: "\nThe signature to be verified\n"
+      description: "\nThe signature to be verified.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
@@ -2100,11 +2100,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: WrapKeyAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 435
+    startLine: 456
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nWraps a symmetric key using the specified key\n"
+  summary: "\nWraps a symmetric key using a specified key.\n"
   example: []
   syntax:
     content: public static Task<KeyOperationResult> WrapKeyAsync(this IKeyVaultClient operations, string vaultBaseUrl, string keyName, string keyVersion, string algorithm, byte[] value, CancellationToken cancellationToken = null)
@@ -2118,13 +2118,13 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: keyName
       type: System.String
-      description: "\nThe name of the key\n"
+      description: "\nThe name of the key.\n"
     - id: keyVersion
       type: System.String
-      description: "\nThe version of the key\n"
+      description: "\nThe version of the key.\n"
     - id: algorithm
       type: System.String
       description: "\nalgorithm identifier. Possible values include: 'RSA-OAEP', 'RSA1_5'\n"
@@ -2165,11 +2165,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: UnwrapKeyAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 467
+    startLine: 488
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nUnwraps a symmetric key using the specified key in the vault that has\ninitially been used for wrapping the key.\n"
+  summary: "\nUnwraps a symmetric key using the specified key that was initially used for\nwrapping that key.\n"
   example: []
   syntax:
     content: public static Task<KeyOperationResult> UnwrapKeyAsync(this IKeyVaultClient operations, string vaultBaseUrl, string keyName, string keyVersion, string algorithm, byte[] value, CancellationToken cancellationToken = null)
@@ -2183,13 +2183,13 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: keyName
       type: System.String
-      description: "\nThe name of the key\n"
+      description: "\nThe name of the key.\n"
     - id: keyVersion
       type: System.String
-      description: "\nThe version of the key\n"
+      description: "\nThe version of the key.\n"
     - id: algorithm
       type: System.String
       description: "\nalgorithm identifier. Possible values include: 'RSA-OAEP', 'RSA1_5'\n"
@@ -2230,11 +2230,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: SetSecretAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 502
+    startLine: 523
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nSets a secret in the specified vault.\n"
+  summary: "\nSets a secret in a specified key vault.\n"
   example: []
   syntax:
     content: public static Task<SecretBundle> SetSecretAsync(this IKeyVaultClient operations, string vaultBaseUrl, string secretName, string value, IDictionary<string, string> tags = null, string contentType = null, SecretAttributes secretAttributes = null, CancellationToken cancellationToken = null)
@@ -2248,22 +2248,22 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: secretName
       type: System.String
-      description: "\nThe name of the secret in the given vault\n"
+      description: "\nThe name of the secret.\n"
     - id: value
       type: System.String
-      description: "\nThe value of the secret\n"
+      description: "\nThe value of the secret.\n"
     - id: tags
       type: System.Collections.Generic.IDictionary{System.String,System.String}
-      description: "\nApplication-specific metadata in the form of key-value pairs\n"
+      description: "\nApplication specific metadata in the form of key-value pairs.\n"
     - id: contentType
       type: System.String
-      description: "\nType of the secret value such as a password\n"
+      description: "\nType of the secret value such as a password.\n"
     - id: secretAttributes
       type: Microsoft.Azure.KeyVault.Models.SecretAttributes
-      description: "\nThe secret management attributes\n"
+      description: "\nThe secret management attributes.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
@@ -2298,11 +2298,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: DeleteSecretAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 525
+    startLine: 546
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nDeletes a secret from the specified vault.\n"
+  summary: "\nDeletes a secret from a specified key vault.\n"
   example: []
   syntax:
     content: public static Task<SecretBundle> DeleteSecretAsync(this IKeyVaultClient operations, string vaultBaseUrl, string secretName, CancellationToken cancellationToken = null)
@@ -2316,10 +2316,10 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: secretName
       type: System.String
-      description: "\nThe name of the secret in the given vault\n"
+      description: "\nThe name of the secret.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
@@ -2351,11 +2351,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: UpdateSecretAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 560
+    startLine: 582
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nUpdates the attributes associated with the specified secret\n"
+  summary: "\nUpdates the attributes associated with a specified secret in a given key\nvault.\n"
   example: []
   syntax:
     content: public static Task<SecretBundle> UpdateSecretAsync(this IKeyVaultClient operations, string vaultBaseUrl, string secretName, string secretVersion, string contentType = null, SecretAttributes secretAttributes = null, IDictionary<string, string> tags = null, CancellationToken cancellationToken = null)
@@ -2369,22 +2369,22 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: secretName
       type: System.String
-      description: "\nThe name of the secret in the given vault\n"
+      description: "\nThe name of the secret.\n"
     - id: secretVersion
       type: System.String
-      description: "\nThe version of the secret\n"
+      description: "\nThe version of the secret.\n"
     - id: contentType
       type: System.String
-      description: "\nType of the secret value such as a password\n"
+      description: "\nType of the secret value such as a password.\n"
     - id: secretAttributes
       type: Microsoft.Azure.KeyVault.Models.SecretAttributes
-      description: "\nThe secret management attributes\n"
+      description: "\nThe secret management attributes.\n"
     - id: tags
       type: System.Collections.Generic.IDictionary{System.String,System.String}
-      description: "\nApplication-specific metadata in the form of key-value pairs\n"
+      description: "\nApplication specific metadata in the form of key-value pairs.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
@@ -2419,11 +2419,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: GetSecretAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 586
+    startLine: 608
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nGets a secret.\n"
+  summary: "\nGet a specified secret from a given key vault.\n"
   example: []
   syntax:
     content: public static Task<SecretBundle> GetSecretAsync(this IKeyVaultClient operations, string vaultBaseUrl, string secretName, string secretVersion, CancellationToken cancellationToken = null)
@@ -2437,13 +2437,13 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: secretName
       type: System.String
-      description: "\nThe name of the secret in the given vault\n"
+      description: "\nThe name of the secret.\n"
     - id: secretVersion
       type: System.String
-      description: "\nThe version of the secret\n"
+      description: "\nThe version of the secret.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
@@ -2475,11 +2475,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: GetSecretsAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 610
+    startLine: 632
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nList secrets in the specified vault\n"
+  summary: "\nList secrets in a specified key vault\n"
   example: []
   syntax:
     content: public static Task<IPage<SecretItem>> GetSecretsAsync(this IKeyVaultClient operations, string vaultBaseUrl, int ? maxresults = null, CancellationToken cancellationToken = null)
@@ -2493,10 +2493,10 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: maxresults
       type: System.Nullable{System.Int32}
-      description: "\nMaximum number of results to return in a page. If not specified the\nservice will return up to 25 results.\n"
+      description: "\nMaximum number of results to return in a page. If not specified the service\nwill return up to 25 results.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
@@ -2531,11 +2531,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: GetSecretVersionsAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 637
+    startLine: 659
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nList the versions of the specified secret\n"
+  summary: "\nList the versions of the specified secret.\n"
   example: []
   syntax:
     content: public static Task<IPage<SecretItem>> GetSecretVersionsAsync(this IKeyVaultClient operations, string vaultBaseUrl, string secretName, int ? maxresults = null, CancellationToken cancellationToken = null)
@@ -2549,13 +2549,13 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: secretName
       type: System.String
-      description: "\nThe name of the secret in the given vault\n"
+      description: "\nThe name of the secret.\n"
     - id: maxresults
       type: System.Nullable{System.Int32}
-      description: "\nMaximum number of results to return in a page. If not specified the\nservice will return up to 25 results.\n"
+      description: "\nMaximum number of results to return in a page. If not specified the service\nwill return up to 25 results.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
@@ -2590,11 +2590,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: GetCertificatesAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 661
+    startLine: 683
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nList certificates in the specified vault\n"
+  summary: "\nList certificates in a specified key vault\n"
   example: []
   syntax:
     content: public static Task<IPage<CertificateItem>> GetCertificatesAsync(this IKeyVaultClient operations, string vaultBaseUrl, int ? maxresults = null, CancellationToken cancellationToken = null)
@@ -2608,10 +2608,10 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: maxresults
       type: System.Nullable{System.Int32}
-      description: "\nMaximum number of results to return in a page. If not specified the\nservice will return up to 25 results.\n"
+      description: "\nMaximum number of results to return in a page. If not specified the service\nwill return up to 25 results.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
@@ -2646,11 +2646,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: DeleteCertificateAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 684
+    startLine: 706
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nDeletes a certificate from the specified vault.\n"
+  summary: "\nDeletes a certificate from a specified key vault.\n"
   example: []
   syntax:
     content: public static Task<CertificateBundle> DeleteCertificateAsync(this IKeyVaultClient operations, string vaultBaseUrl, string certificateName, CancellationToken cancellationToken = null)
@@ -2664,10 +2664,10 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: certificateName
       type: System.String
-      description: "\nThe name of the certificate in the given vault\n"
+      description: "\nThe name of the certificate.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
@@ -2699,11 +2699,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: SetCertificateContactsAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 707
+    startLine: 729
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nSets the certificate contacts for the specified vault.\n"
+  summary: "\nSets the certificate contacts for the specified key vault.\n"
   example: []
   syntax:
     content: public static Task<Contacts> SetCertificateContactsAsync(this IKeyVaultClient operations, string vaultBaseUrl, Contacts contacts, CancellationToken cancellationToken = null)
@@ -2717,10 +2717,10 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: contacts
       type: Microsoft.Azure.KeyVault.Models.Contacts
-      description: "\nThe contacts for the vault certificates.\n"
+      description: "\nThe contacts for the key vault certificate.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
@@ -2752,11 +2752,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: GetCertificateContactsAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 727
+    startLine: 749
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nGets the certificate contacts for the specified vault.\n"
+  summary: "\nLists the certificate contacts for a specified key vault.\n"
   example: []
   syntax:
     content: public static Task<Contacts> GetCertificateContactsAsync(this IKeyVaultClient operations, string vaultBaseUrl, CancellationToken cancellationToken = null)
@@ -2770,7 +2770,7 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
@@ -2802,11 +2802,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: DeleteCertificateContactsAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 747
+    startLine: 769
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nDeletes the certificate contacts for the specified vault.\n"
+  summary: "\nDeletes the certificate contacts for a specified key vault.\n"
   example: []
   syntax:
     content: public static Task<Contacts> DeleteCertificateContactsAsync(this IKeyVaultClient operations, string vaultBaseUrl, CancellationToken cancellationToken = null)
@@ -2820,7 +2820,7 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
@@ -2852,11 +2852,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: GetCertificateIssuersAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 771
+    startLine: 793
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nList certificate issuers for the specified vault.\n"
+  summary: "\nList certificate issuers for a specified key vault.\n"
   example: []
   syntax:
     content: public static Task<IPage<CertificateIssuerItem>> GetCertificateIssuersAsync(this IKeyVaultClient operations, string vaultBaseUrl, int ? maxresults = null, CancellationToken cancellationToken = null)
@@ -2870,10 +2870,10 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: maxresults
       type: System.Nullable{System.Int32}
-      description: "\nMaximum number of results to return in a page. If not specified the\nservice will return up to 25 results.\n"
+      description: "\nMaximum number of results to return in a page. If not specified the service\nwill return up to 25 results.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
@@ -2908,7 +2908,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: SetCertificateIssuerAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 806
+    startLine: 828
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
@@ -2926,7 +2926,7 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: issuerName
       type: System.String
       description: "\nThe name of the issuer.\n"
@@ -2973,7 +2973,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: UpdateCertificateIssuerAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 841
+    startLine: 863
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
@@ -2991,7 +2991,7 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: issuerName
       type: System.String
       description: "\nThe name of the issuer.\n"
@@ -3038,11 +3038,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: GetCertificateIssuerAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 864
+    startLine: 886
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nGets the specified certificate issuer.\n"
+  summary: "\nLists the specified certificate issuer.\n"
   example: []
   syntax:
     content: public static Task<IssuerBundle> GetCertificateIssuerAsync(this IKeyVaultClient operations, string vaultBaseUrl, string issuerName, CancellationToken cancellationToken = null)
@@ -3056,7 +3056,7 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: issuerName
       type: System.String
       description: "\nThe name of the issuer.\n"
@@ -3091,7 +3091,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: DeleteCertificateIssuerAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 887
+    startLine: 909
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
@@ -3109,7 +3109,7 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: issuerName
       type: System.String
       description: "\nThe name of the issuer.\n"
@@ -3144,11 +3144,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: CreateCertificateAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 920
+    startLine: 942
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nCreates a new certificate version. If this is the first version, the\ncertificate resource is created.\n"
+  summary: "\nCreates a new certificate. If this is the first version, the certificate\nresource is created.\n"
   example: []
   syntax:
     content: public static Task<CertificateOperation> CreateCertificateAsync(this IKeyVaultClient operations, string vaultBaseUrl, string certificateName, CertificatePolicy certificatePolicy = null, CertificateAttributes certificateAttributes = null, IDictionary<string, string> tags = null, CancellationToken cancellationToken = null)
@@ -3162,19 +3162,19 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: certificateName
       type: System.String
-      description: "\nThe name of the certificate\n"
+      description: "\nThe name of the certificate.\n"
     - id: certificatePolicy
       type: Microsoft.Azure.KeyVault.Models.CertificatePolicy
-      description: "\nThe management policy for the certificate\n"
+      description: "\nThe management policy for the certificate.\n"
     - id: certificateAttributes
       type: Microsoft.Azure.KeyVault.Models.CertificateAttributes
-      description: "\nThe attributes of the certificate (optional)\n"
+      description: "\nThe attributes of the certificate (optional).\n"
     - id: tags
       type: System.Collections.Generic.IDictionary{System.String,System.String}
-      description: "\nApplication-specific metadata in the form of key-value pairs\n"
+      description: "\nApplication specific metadata in the form of key-value pairs.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
@@ -3209,11 +3209,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: ImportCertificateAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 960
+    startLine: 982
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nImports a certificate into the specified vault\n"
+  summary: "\nImports a certificate into a specified key vault.\n"
   example: []
   syntax:
     content: public static Task<CertificateBundle> ImportCertificateAsync(this IKeyVaultClient operations, string vaultBaseUrl, string certificateName, string base64EncodedCertificate, string password = null, CertificatePolicy certificatePolicy = null, CertificateAttributes certificateAttributes = null, IDictionary<string, string> tags = null, CancellationToken cancellationToken = null)
@@ -3227,25 +3227,25 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: certificateName
       type: System.String
-      description: "\nThe name of the certificate\n"
+      description: "\nThe name of the certificate.\n"
     - id: base64EncodedCertificate
       type: System.String
       description: "\nBase64 encoded representation of the certificate object to import. This\ncertificate needs to contain the private key.\n"
     - id: password
       type: System.String
-      description: "\nIf the private key in base64EncodedCertificate is encrypted, the password\nused for encryption\n"
+      description: "\nIf the private key in base64EncodedCertificate is encrypted, the password\nused for encryption.\n"
     - id: certificatePolicy
       type: Microsoft.Azure.KeyVault.Models.CertificatePolicy
-      description: "\nThe management policy for the certificate\n"
+      description: "\nThe management policy for the certificate.\n"
     - id: certificateAttributes
       type: Microsoft.Azure.KeyVault.Models.CertificateAttributes
-      description: "\nThe attributes of the certificate (optional)\n"
+      description: "\nThe attributes of the certificate (optional).\n"
     - id: tags
       type: System.Collections.Generic.IDictionary{System.String,System.String}
-      description: "\nApplication-specific metadata in the form of key-value pairs\n"
+      description: "\nApplication specific metadata in the form of key-value pairs.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
@@ -3280,7 +3280,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: GetCertificateVersionsAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 987
+    startLine: 1009
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
@@ -3298,13 +3298,13 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: certificateName
       type: System.String
-      description: "\nThe name of the certificate\n"
+      description: "\nThe name of the certificate.\n"
     - id: maxresults
       type: System.Nullable{System.Int32}
-      description: "\nMaximum number of results to return in a page. If not specified the\nservice will return up to 25 results.\n"
+      description: "\nMaximum number of results to return in a page. If not specified the service\nwill return up to 25 results.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
@@ -3339,11 +3339,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: GetCertificatePolicyAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 1010
+    startLine: 1032
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nGets the policy for a certificate.\n"
+  summary: "\nLists the policy for a certificate.\n"
   example: []
   syntax:
     content: public static Task<CertificatePolicy> GetCertificatePolicyAsync(this IKeyVaultClient operations, string vaultBaseUrl, string certificateName, CancellationToken cancellationToken = null)
@@ -3357,10 +3357,10 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: certificateName
       type: System.String
-      description: "\nThe name of the certificate in the given vault.\n"
+      description: "\nThe name of the certificate in a given key vault.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
@@ -3392,11 +3392,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: UpdateCertificatePolicyAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 1037
+    startLine: 1059
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nUpdates the policy for a certificate. Set appropriate members in the\ncertificatePolicy that must be updated. Leave others as null.\n"
+  summary: "\nUpdates the policy for a certificate. Set specified members in the\ncertificate policy. Leave others as null.\n"
   example: []
   syntax:
     content: public static Task<CertificatePolicy> UpdateCertificatePolicyAsync(this IKeyVaultClient operations, string vaultBaseUrl, string certificateName, CertificatePolicy certificatePolicy, CancellationToken cancellationToken = null)
@@ -3410,7 +3410,7 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: certificateName
       type: System.String
       description: "\nThe name of the certificate in the given vault.\n"
@@ -3448,11 +3448,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: UpdateCertificateAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 1072
+    startLine: 1094
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nUpdates the attributes associated with the specified certificate\n"
+  summary: "\nUpdates the specified attributes associated with the given certificate.\n"
   example: []
   syntax:
     content: public static Task<CertificateBundle> UpdateCertificateAsync(this IKeyVaultClient operations, string vaultBaseUrl, string certificateName, string certificateVersion, CertificatePolicy certificatePolicy = null, CertificateAttributes certificateAttributes = null, IDictionary<string, string> tags = null, CancellationToken cancellationToken = null)
@@ -3466,22 +3466,22 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: certificateName
       type: System.String
-      description: "\nThe name of the certificate in the given vault\n"
+      description: "\nThe name of the certificate in the given key vault.\n"
     - id: certificateVersion
       type: System.String
-      description: "\nThe version of the certificate\n"
+      description: "\nThe version of the certificate.\n"
     - id: certificatePolicy
       type: Microsoft.Azure.KeyVault.Models.CertificatePolicy
-      description: "\nThe management policy for the certificate\n"
+      description: "\nThe management policy for the certificate.\n"
     - id: certificateAttributes
       type: Microsoft.Azure.KeyVault.Models.CertificateAttributes
-      description: "\nThe attributes of the certificate (optional)\n"
+      description: "\nThe attributes of the certificate (optional).\n"
     - id: tags
       type: System.Collections.Generic.IDictionary{System.String,System.String}
-      description: "\nApplication-specific metadata in the form of key-value pairs\n"
+      description: "\nApplication specific metadata in the form of key-value pairs.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
@@ -3516,11 +3516,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: GetCertificateAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 1098
+    startLine: 1120
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nGets a Certificate.\n"
+  summary: "\nGets information about a specified certificate.\n"
   example: []
   syntax:
     content: public static Task<CertificateBundle> GetCertificateAsync(this IKeyVaultClient operations, string vaultBaseUrl, string certificateName, string certificateVersion, CancellationToken cancellationToken = null)
@@ -3534,13 +3534,13 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: certificateName
       type: System.String
-      description: "\nThe name of the certificate in the given vault\n"
+      description: "\nThe name of the certificate in the given vault.\n"
     - id: certificateVersion
       type: System.String
-      description: "\nThe version of the certificate\n"
+      description: "\nThe version of the certificate.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
@@ -3572,7 +3572,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: UpdateCertificateOperationAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 1124
+    startLine: 1146
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
@@ -3590,10 +3590,10 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: certificateName
       type: System.String
-      description: "\nThe name of the certificate\n"
+      description: "\nThe name of the certificate.\n"
     - id: cancellationRequested
       type: System.Boolean
       description: "\nIndicates if cancellation was requested on the certificate operation.\n"
@@ -3628,11 +3628,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: GetCertificateOperationAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 1147
+    startLine: 1169
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nGets the certificate operation response.\n"
+  summary: "\nGets the operation associated with a specified certificate.\n"
   example: []
   syntax:
     content: public static Task<CertificateOperation> GetCertificateOperationAsync(this IKeyVaultClient operations, string vaultBaseUrl, string certificateName, CancellationToken cancellationToken = null)
@@ -3646,10 +3646,10 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: certificateName
       type: System.String
-      description: "\nThe name of the certificate\n"
+      description: "\nThe name of the certificate.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
@@ -3681,11 +3681,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: DeleteCertificateOperationAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 1170
+    startLine: 1192
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nDeletes the certificate operation.\n"
+  summary: "\nDeletes the operation for a specified certificate.\n"
   example: []
   syntax:
     content: public static Task<CertificateOperation> DeleteCertificateOperationAsync(this IKeyVaultClient operations, string vaultBaseUrl, string certificateName, CancellationToken cancellationToken = null)
@@ -3699,10 +3699,10 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: certificateName
       type: System.String
-      description: "\nThe name of the certificate\n"
+      description: "\nThe name of the certificate.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
@@ -3734,11 +3734,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: MergeCertificateAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 1203
+    startLine: 1225
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nMerges a certificate or a certificate chain with a key pair existing on\nthe server.\n"
+  summary: "\nMerges a certificate or a certificate chain with a key pair existing on the\nserver.\n"
   example: []
   syntax:
     content: public static Task<CertificateBundle> MergeCertificateAsync(this IKeyVaultClient operations, string vaultBaseUrl, string certificateName, IList<byte[]> x509Certificates, CertificateAttributes certificateAttributes = null, IDictionary<string, string> tags = null, CancellationToken cancellationToken = null)
@@ -3752,19 +3752,19 @@ items:
       description: "\nThe operations group for this extension method.\n"
     - id: vaultBaseUrl
       type: System.String
-      description: "\nThe vault name, e.g. https://myvault.vault.azure.net\n"
+      description: "\nThe vault name, for example https://myvault.vault.azure.net.\n"
     - id: certificateName
       type: System.String
-      description: "\nThe name of the certificate\n"
+      description: "\nThe name of the certificate.\n"
     - id: x509Certificates
       type: System.Collections.Generic.IList{System.Byte[]}
-      description: "\nThe certificate or the certificate chain to merge\n"
+      description: "\nThe certificate or the certificate chain to merge.\n"
     - id: certificateAttributes
       type: Microsoft.Azure.KeyVault.Models.CertificateAttributes
-      description: "\nThe attributes of the certificate (optional)\n"
+      description: "\nThe attributes of the certificate (optional).\n"
     - id: tags
       type: System.Collections.Generic.IDictionary{System.String,System.String}
-      description: "\nApplication-specific metadata in the form of key-value pairs\n"
+      description: "\nApplication specific metadata in the form of key-value pairs.\n"
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
@@ -3799,11 +3799,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: GetKeyVersionsNextAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 1223
+    startLine: 1247
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nList the versions of the specified key\n"
+  summary: "\nRetrieves a list of individual key versions with the same key name. The\nfull key identifier, attributes, and tags are provided in the response.\nAuthorization: Requires the keys/list permission.\n"
   example: []
   syntax:
     content: public static Task<IPage<KeyItem>> GetKeyVersionsNextAsync(this IKeyVaultClient operations, string nextPageLink, CancellationToken cancellationToken = null)
@@ -3849,11 +3849,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: GetKeysNextAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 1243
+    startLine: 1267
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nList keys in the specified vault\n"
+  summary: "\nList keys in the specified vault.\n"
   example: []
   syntax:
     content: public static Task<IPage<KeyItem>> GetKeysNextAsync(this IKeyVaultClient operations, string nextPageLink, CancellationToken cancellationToken = null)
@@ -3899,11 +3899,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: GetSecretsNextAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 1263
+    startLine: 1287
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nList secrets in the specified vault\n"
+  summary: "\nList secrets in a specified key vault\n"
   example: []
   syntax:
     content: public static Task<IPage<SecretItem>> GetSecretsNextAsync(this IKeyVaultClient operations, string nextPageLink, CancellationToken cancellationToken = null)
@@ -3949,11 +3949,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: GetSecretVersionsNextAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 1283
+    startLine: 1307
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nList the versions of the specified secret\n"
+  summary: "\nList the versions of the specified secret.\n"
   example: []
   syntax:
     content: public static Task<IPage<SecretItem>> GetSecretVersionsNextAsync(this IKeyVaultClient operations, string nextPageLink, CancellationToken cancellationToken = null)
@@ -3999,11 +3999,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: GetCertificatesNextAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 1303
+    startLine: 1327
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nList certificates in the specified vault\n"
+  summary: "\nList certificates in a specified key vault\n"
   example: []
   syntax:
     content: public static Task<IPage<CertificateItem>> GetCertificatesNextAsync(this IKeyVaultClient operations, string nextPageLink, CancellationToken cancellationToken = null)
@@ -4049,11 +4049,11 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: GetCertificateIssuersNextAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 1323
+    startLine: 1347
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
-  summary: "\nList certificate issuers for the specified vault.\n"
+  summary: "\nList certificate issuers for a specified key vault.\n"
   example: []
   syntax:
     content: public static Task<IPage<CertificateIssuerItem>> GetCertificateIssuersNextAsync(this IKeyVaultClient operations, string nextPageLink, CancellationToken cancellationToken = null)
@@ -4099,7 +4099,7 @@ items:
       repo: https://github.com/Azure/azure-sdk-for-net.git
     id: GetCertificateVersionsNextAsync
     path: src/azure-sdk-for-net/src/KeyVault/Microsoft.Azure.KeyVault/Generated/KeyVaultClientExtensions.cs
-    startLine: 1343
+    startLine: 1367
   assemblies:
   - Microsoft.Azure.KeyVault
   namespace: Microsoft.Azure.KeyVault
