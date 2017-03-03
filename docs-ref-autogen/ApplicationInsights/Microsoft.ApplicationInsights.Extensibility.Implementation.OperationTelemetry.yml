@@ -8,6 +8,7 @@ items:
   - Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry.Context
   - Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry.Duration
   - Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry.Id
+  - Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry.Metrics
   - Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry.Microsoft#ApplicationInsights#Channel#ITelemetry#Sanitize
   - Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry.Name
   - Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry.Properties
@@ -37,10 +38,10 @@ items:
   summary: "\nBase class for telemetry types representing duration in time.\n"
   example: []
   syntax:
-    content: 'public abstract class OperationTelemetry : ITelemetry, ISupportProperties'
+    content: 'public abstract class OperationTelemetry : ITelemetry, ISupportMetrics, ISupportProperties'
     content.vb: >-
       Public MustInherit Class OperationTelemetry
-          Implements ITelemetry, ISupportProperties
+          Implements ITelemetry, ISupportMetrics, ISupportProperties
   inheritance:
   - System.Object
   derivedClasses:
@@ -48,6 +49,7 @@ items:
   - Microsoft.ApplicationInsights.DataContracts.RequestTelemetry
   implements:
   - Microsoft.ApplicationInsights.Channel.ITelemetry
+  - Microsoft.ApplicationInsights.DataContracts.ISupportMetrics
   - Microsoft.ApplicationInsights.DataContracts.ISupportProperties
   inheritedMembers:
   - System.Object.ToString
@@ -83,7 +85,7 @@ items:
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
     id: StartTime
     path: src/ApplicationInsights-dotnet/src/Core/Managed/Shared/Extensibility/Implementation/OperationTelemetry.cs
-    startLine: 15
+    startLine: 17
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.Extensibility.Implementation
@@ -132,7 +134,7 @@ items:
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
     id: Id
     path: src/ApplicationInsights-dotnet/src/Core/Managed/Shared/Extensibility/Implementation/OperationTelemetry.cs
-    startLine: 32
+    startLine: 34
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.Extensibility.Implementation
@@ -171,7 +173,7 @@ items:
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
     id: Name
     path: src/ApplicationInsights-dotnet/src/Core/Managed/Shared/Extensibility/Implementation/OperationTelemetry.cs
-    startLine: 37
+    startLine: 39
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.Extensibility.Implementation
@@ -210,7 +212,7 @@ items:
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
     id: Success
     path: src/ApplicationInsights-dotnet/src/Core/Managed/Shared/Extensibility/Implementation/OperationTelemetry.cs
-    startLine: 42
+    startLine: 44
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.Extensibility.Implementation
@@ -249,7 +251,7 @@ items:
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
     id: Duration
     path: src/ApplicationInsights-dotnet/src/Core/Managed/Shared/Extensibility/Implementation/OperationTelemetry.cs
-    startLine: 47
+    startLine: 49
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.Extensibility.Implementation
@@ -270,6 +272,47 @@ items:
   modifiers.vb:
   - Public
   - MustOverride
+- uid: Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry.Metrics
+  commentId: P:Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry.Metrics
+  id: Metrics
+  parent: Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry
+  langs:
+  - csharp
+  - vb
+  name: Metrics
+  nameWithType: OperationTelemetry.Metrics
+  fullName: Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry.Metrics
+  type: Property
+  source:
+    remote:
+      path: src/Core/Managed/Shared/Extensibility/Implementation/OperationTelemetry.cs
+      branch: master
+      repo: https://github.com/Microsoft/ApplicationInsights-dotnet
+    id: Metrics
+    path: src/ApplicationInsights-dotnet/src/Core/Managed/Shared/Extensibility/Implementation/OperationTelemetry.cs
+    startLine: 54
+  assemblies:
+  - Microsoft.ApplicationInsights
+  namespace: Microsoft.ApplicationInsights.Extensibility.Implementation
+  summary: "\nGets the custom metrics collection.\n"
+  example: []
+  syntax:
+    content: public abstract IDictionary<string, double> Metrics { get; }
+    content.vb: Public MustOverride ReadOnly Property Metrics As IDictionary(Of String, Double)
+    parameters: []
+    return:
+      type: System.Collections.Generic.IDictionary{System.String,System.Double}
+  overload: Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry.Metrics*
+  implements:
+  - Microsoft.ApplicationInsights.DataContracts.ISupportMetrics.Metrics
+  modifiers.csharp:
+  - public
+  - abstract
+  - get
+  modifiers.vb:
+  - Public
+  - MustOverride
+  - ReadOnly
 - uid: Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry.Properties
   commentId: P:Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry.Properties
   id: Properties
@@ -288,7 +331,7 @@ items:
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
     id: Properties
     path: src/ApplicationInsights-dotnet/src/Core/Managed/Shared/Extensibility/Implementation/OperationTelemetry.cs
-    startLine: 52
+    startLine: 59
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.Extensibility.Implementation
@@ -329,7 +372,7 @@ items:
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
     id: Timestamp
     path: src/ApplicationInsights-dotnet/src/Core/Managed/Shared/Extensibility/Implementation/OperationTelemetry.cs
-    startLine: 57
+    startLine: 64
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.Extensibility.Implementation
@@ -370,7 +413,7 @@ items:
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
     id: Context
     path: src/ApplicationInsights-dotnet/src/Core/Managed/Shared/Extensibility/Implementation/OperationTelemetry.cs
-    startLine: 62
+    startLine: 69
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.Extensibility.Implementation
@@ -411,7 +454,7 @@ items:
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
     id: Sequence
     path: src/ApplicationInsights-dotnet/src/Core/Managed/Shared/Extensibility/Implementation/OperationTelemetry.cs
-    startLine: 67
+    startLine: 74
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.Extensibility.Implementation
@@ -453,7 +496,7 @@ items:
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
     id: Microsoft.ApplicationInsights.Channel.ITelemetry.Sanitize
     path: src/ApplicationInsights-dotnet/src/Core/Managed/Shared/Extensibility/Implementation/OperationTelemetry.cs
-    startLine: 78
+    startLine: 85
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.Extensibility.Implementation
@@ -485,7 +528,7 @@ items:
       repo: https://github.com/Microsoft/ApplicationInsights-dotnet
     id: Sanitize
     path: src/ApplicationInsights-dotnet/src/Core/Managed/Shared/Extensibility/Implementation/OperationTelemetry.cs
-    startLine: 86
+    startLine: 93
   assemblies:
   - Microsoft.ApplicationInsights
   namespace: Microsoft.ApplicationInsights.Extensibility.Implementation
@@ -520,6 +563,13 @@ references:
   name: ITelemetry
   nameWithType: ITelemetry
   fullName: Microsoft.ApplicationInsights.Channel.ITelemetry
+- uid: Microsoft.ApplicationInsights.DataContracts.ISupportMetrics
+  commentId: T:Microsoft.ApplicationInsights.DataContracts.ISupportMetrics
+  parent: Microsoft.ApplicationInsights.DataContracts
+  isExternal: false
+  name: ISupportMetrics
+  nameWithType: ISupportMetrics
+  fullName: Microsoft.ApplicationInsights.DataContracts.ISupportMetrics
 - uid: Microsoft.ApplicationInsights.DataContracts.ISupportProperties
   commentId: T:Microsoft.ApplicationInsights.DataContracts.ISupportProperties
   parent: Microsoft.ApplicationInsights.DataContracts
@@ -958,6 +1008,136 @@ references:
   name: TimeSpan
   nameWithType: TimeSpan
   fullName: System.TimeSpan
+- uid: Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry.Metrics*
+  commentId: Overload:Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry.Metrics
+  isExternal: false
+  name: Metrics
+  nameWithType: OperationTelemetry.Metrics
+  fullName: Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry.Metrics
+- uid: Microsoft.ApplicationInsights.DataContracts.ISupportMetrics.Metrics
+  commentId: P:Microsoft.ApplicationInsights.DataContracts.ISupportMetrics.Metrics
+  parent: Microsoft.ApplicationInsights.DataContracts.ISupportMetrics
+  isExternal: false
+  name: Metrics
+  nameWithType: ISupportMetrics.Metrics
+  fullName: Microsoft.ApplicationInsights.DataContracts.ISupportMetrics.Metrics
+- uid: System.Collections.Generic.IDictionary{System.String,System.Double}
+  commentId: T:System.Collections.Generic.IDictionary{System.String,System.Double}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IDictionary`2
+  name: IDictionary<String, Double>
+  nameWithType: IDictionary<String, Double>
+  fullName: System.Collections.Generic.IDictionary<System.String, System.Double>
+  nameWithType.vb: IDictionary(Of String, Double)
+  fullName.vb: System.Collections.Generic.IDictionary(Of System.String, System.Double)
+  name.vb: IDictionary(Of String, Double)
+  spec.csharp:
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    nameWithType: IDictionary
+    fullName: System.Collections.Generic.IDictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Double
+    name: Double
+    nameWithType: Double
+    fullName: System.Double
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    nameWithType: IDictionary
+    fullName: System.Collections.Generic.IDictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Double
+    name: Double
+    nameWithType: Double
+    fullName: System.Double
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.IDictionary`2
+  commentId: T:System.Collections.Generic.IDictionary`2
+  isExternal: true
+  name: IDictionary<TKey, TValue>
+  nameWithType: IDictionary<TKey, TValue>
+  fullName: System.Collections.Generic.IDictionary<TKey, TValue>
+  nameWithType.vb: IDictionary(Of TKey, TValue)
+  fullName.vb: System.Collections.Generic.IDictionary(Of TKey, TValue)
+  name.vb: IDictionary(Of TKey, TValue)
+  spec.csharp:
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    nameWithType: IDictionary
+    fullName: System.Collections.Generic.IDictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    nameWithType: IDictionary
+    fullName: System.Collections.Generic.IDictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: false
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
 - uid: Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry.Properties*
   commentId: Overload:Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry.Properties
   isExternal: false
@@ -1031,63 +1211,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Collections.Generic.IDictionary`2
-  commentId: T:System.Collections.Generic.IDictionary`2
-  isExternal: true
-  name: IDictionary<TKey, TValue>
-  nameWithType: IDictionary<TKey, TValue>
-  fullName: System.Collections.Generic.IDictionary<TKey, TValue>
-  nameWithType.vb: IDictionary(Of TKey, TValue)
-  fullName.vb: System.Collections.Generic.IDictionary(Of TKey, TValue)
-  name.vb: IDictionary(Of TKey, TValue)
-  spec.csharp:
-  - uid: System.Collections.Generic.IDictionary`2
-    name: IDictionary
-    nameWithType: IDictionary
-    fullName: System.Collections.Generic.IDictionary
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: TKey
-    nameWithType: TKey
-    fullName: TKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TValue
-    nameWithType: TValue
-    fullName: TValue
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: System.Collections.Generic.IDictionary`2
-    name: IDictionary
-    nameWithType: IDictionary
-    fullName: System.Collections.Generic.IDictionary
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: TKey
-    nameWithType: TKey
-    fullName: TKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TValue
-    nameWithType: TValue
-    fullName: TValue
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Collections.Generic
-  commentId: N:System.Collections.Generic
-  isExternal: false
-  name: System.Collections.Generic
-  nameWithType: System.Collections.Generic
-  fullName: System.Collections.Generic
 - uid: Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry.Timestamp*
   commentId: Overload:Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry.Timestamp
   isExternal: false
