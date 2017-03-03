@@ -2,7 +2,7 @@
 title: Azure .NET API Reference 
 description: Azure .NET API Reference 
 keywords: Azure .NET, Azure .NET API Reference, Azure .NET class library
-author: casoper
+author: camsoper
 manager: douge
 ms.date: 03/02/2016
 ms.topic: managed-reference
@@ -24,7 +24,7 @@ If you're using Visual Studio, use the **NuGet Package Manager Console** to impo
 
 1. With your Visual Studio solution open, launch the console by clicking **Tools**, followed by **NuGet Packager Manager**, and then click **Package Manager Console**.  
 
-    ![Package Manager Console](./media/index/package-manager.png)
+    ![Package Manager Console](media/index/package-manager.png)
 
 2. In the console window, use the **Install-Package** cmdlet to download and install the NuGet package.  For example, to include the latest version of the [Azure Resource Management Library](http://www.nuget.org/packages/Microsoft.Azure.Management.ResourceManager) for .NET:
 
