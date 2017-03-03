@@ -15,14 +15,16 @@ ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 
 # Azure NuGet Packages
 
-Use the libraries in the .NET SDK for Azure to manage and consume Azure services in your applications.  
+Use the libraries in the .NET SDK for Azure to manage and consume Azure services in your applications.
+
+The .NET SDK for Azure libraries all support [.NET Framework](https://docs.microsoft.com/dotnet/articles/standard/choosing-core-framework-server).  .NET Core support is provided by most packages.  You can verify .NET Core support by checking for a *.NETStandard* dependency, as you can see with [WindowsAzure.Storage](https://www.nuget.org/packages/WindowsAzure.Storage). Some of these packages are in preview, requiring you to opt into search and installation of preview NuGet packages.
 
 ## Packages
 
 **Data plane** packages are used to **consume** Azure services in your .NET applications.  **Management plane** packages are used to **manage** resources in Azure.  **Fluent** management plane packages (ending in **\*.Fluent**) use a [simplified, easy-to-read syntax](https://azure.microsoft.com/blog/simpler-azure-management-libraries-for-net/). Use the fluent packages if you prefer the fluent syntax.
 
-> [!NOTE]
-> For projects using .NET Core, you may need to use a preview version of a given package. Check the dependencies for *.NETStandard* to verify .NET Core support.
+> [!TIP]
+> [Microsoft.Azure.Management.Fluent](https://www.nuget.org/packages/Microsoft.Azure.Management.Fluent) is a rollup package that contains all of the fluent management libraries.
 
 Service | Data plane package | Management plane package
 --------|--------------------|-------------------------
@@ -74,9 +76,6 @@ Operational Insights | | [Microsoft.Azure.Management.OperationalInsights](https:
 [Virtual Network](https://docs.microsoft.com/azure/virtual-network/) | | [Microsoft.Azure.Management.Network.Fluent](https://www.nuget.org/packages/Microsoft.Azure.Management.Network.Fluent)<br/>[Microsoft.Azure.Management.Network](https://www.nuget.org/packages/Microsoft.Azure.Management.Network)
 [Web Apps](https://docs.microsoft.com/azure/app-service-web) | | [Microsoft.Azure.Management.AppService.Fluent](https://www.nuget.org/packages/Microsoft.Azure.Management.AppService.Fluent)<br/>[Microsoft.Azure.Management.Websites](https://www.nuget.org/packages/Microsoft.Azure.Management.Websites)
 
-> [!TIP]
-> [Microsoft.Azure.Management.Fluent](https://www.nuget.org/packages/Microsoft.Azure.Management.Fluent) is a rollup package that contains all of the fluent libraries.
-
 ## Installation
 
 ### Visual Studio
@@ -100,7 +99,7 @@ If you're using Visual Studio, use the **NuGet Package Manager Console** to impo
 
 ### .NET Core
 
-If you're using .NET Core with Visual Studio Code (or any other editor), edit your csproj file to add the package as a **PackageReference** element.  This example uses a specific version of **Microsoft.Azure.Management.ResourceManager**, but you can also use [floating versions](/nuget/consume-packages/package-references-in-project-files#floating-versions).
+If you're using .NET Core with Visual Studio Code (or any other editor), edit your csproj file to add the package as a **PackageReference** element.  This example uses a specific version of **Microsoft.Azure.Management.ResourceManager**, which is the best practice, but NuGet [floating versions](/nuget/consume-packages/package-references-in-project-files#floating-versions) are also supported.
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk">
