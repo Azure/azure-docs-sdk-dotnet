@@ -62,7 +62,7 @@ If you're using .NET Core with Visual Studio Code (or any other editor), edit yo
 
 ## Packages
 
-**Data plane** packages are used to **consume** Azure services in your .NET applications.  **Management plane** packages are used to **manage** resources in Azure.  **Fluent** management plane packages (ending in **\*.Fluent**) use a [simplified, easy-to-read syntax](https://azure.microsoft.com/blog/simpler-azure-management-libraries-for-net/).
+**Data plane** packages are used to **consume** Azure services in your .NET applications.  **Management plane** packages are used to **manage** resources in Azure.  **Fluent** management plane packages (ending in **\*.Fluent**) use a [simplified, easy-to-read syntax](https://azure.microsoft.com/blog/simpler-azure-management-libraries-for-net/). Use the fluent packages only if you prefer the fluent syntax.
 
 > [!NOTE]
 > For projects using .NET Core, you may need to use a preview version of a given package. Check the dependencies for *.NETStandard* to verify .NET Core support.
