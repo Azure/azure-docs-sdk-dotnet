@@ -12,25 +12,6 @@ ms.devlang: dotnet
 ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424
 ---
 
----
-title: .NET for Azure developers | Microsoft Docs
-description: A full catalog of NuGet packages for Azure SDK for .NET
-services: ''
-documentationcenter: net
-author: camsoper
-manager: douge
-editor: ''
-
-ms.assetid: 4b8f8fe6-1b26-4bb4-9be9-6ae757a59e66
-ms.service: multiple
-ms.workload: na
-ms.tgt_pltfrm: multiple
-ms.devlang: net
-ms.topic: article
-ms.date: 12/22/2016
-ms.author: casoper
-
----
 # Azure NuGet Packages
 
 Use the libraries in the .NET SDK for Azure to manage and consume Azure services in your applications.  
@@ -43,7 +24,7 @@ If you're using Visual Studio, use the **NuGet Package Manager Console** to impo
 
 1. With your Visual Studio solution open, launch the console by clicking **Tools**, followed by **NuGet Packager Manager**, and then click **Package Manager Console**.  
 
-    ![Package Manager Console](./media/packages/package-manager.png)
+    ![Package Manager Console](./media/index/package-manager.png)
 
 2. In the console window, use the **Install-Package** cmdlet to download and install the NuGet package.  For example, to include the latest version of the [Azure Resource Management Library](http://www.nuget.org/packages/Microsoft.Azure.Management.Resources) for .NET:
 
