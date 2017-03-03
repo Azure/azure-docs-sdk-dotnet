@@ -1,6 +1,6 @@
 ---
-title: Azure .NET API Reference 
-description: Azure .NET API Reference 
+title: Azure .NET SDK Packages 
+description: Azure .NET SDK Packages 
 keywords: Azure .NET, Azure .NET API Reference, Azure .NET class library
 author: camsoper
 manager: douge
@@ -19,7 +19,7 @@ Use the libraries in the .NET SDK for Azure to manage and consume Azure services
 
 ## Packages
 
-**Data plane** packages are used to **consume** Azure services in your .NET applications.  **Management plane** packages are used to **manage** resources in Azure.  **Fluent** management plane packages (ending in **\*.Fluent**) use a [simplified, easy-to-read syntax](https://azure.microsoft.com/blog/simpler-azure-management-libraries-for-net/). Use the fluent packages only if you prefer the fluent syntax.
+**Data plane** packages are used to **consume** Azure services in your .NET applications.  **Management plane** packages are used to **manage** resources in Azure.  **Fluent** management plane packages (ending in **\*.Fluent**) use a [simplified, easy-to-read syntax](https://azure.microsoft.com/blog/simpler-azure-management-libraries-for-net/). Use the fluent packages if you prefer the fluent syntax.
 
 > [!NOTE]
 > For projects using .NET Core, you may need to use a preview version of a given package. Check the dependencies for *.NETStandard* to verify .NET Core support.
