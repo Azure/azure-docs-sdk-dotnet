@@ -47,11 +47,11 @@ items:
   summary: "\nThe class that represents information about the collected dependency.\n"
   example: []
   syntax:
-    content: 'public sealed class DependencyTelemetry : OperationTelemetry, ITelemetry, ISupportProperties, ISupportSampling'
+    content: 'public sealed class DependencyTelemetry : OperationTelemetry, ITelemetry, ISupportProperties, ISupportSampling, ISupportMetrics'
     content.vb: >-
       Public NotInheritable Class DependencyTelemetry
           Inherits OperationTelemetry
-          Implements ITelemetry, ISupportProperties, ISupportSampling
+          Implements ITelemetry, ISupportProperties, ISupportSampling, ISupportMetrics
   inheritance:
   - System.Object
   - Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry
@@ -59,6 +59,7 @@ items:
   - Microsoft.ApplicationInsights.Channel.ITelemetry
   - Microsoft.ApplicationInsights.DataContracts.ISupportProperties
   - Microsoft.ApplicationInsights.DataContracts.ISupportSampling
+  - Microsoft.ApplicationInsights.DataContracts.ISupportMetrics
   inheritedMembers:
   - Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry.StartTime
   - Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry.Sanitize
@@ -853,17 +854,22 @@ items:
   summary: "\nGets a dictionary of application-defined event metrics.\n"
   example: []
   syntax:
-    content: public IDictionary<string, double> Metrics { get; }
-    content.vb: Public ReadOnly Property Metrics As IDictionary(Of String, Double)
+    content: public override IDictionary<string, double> Metrics { get; }
+    content.vb: Public Overrides ReadOnly Property Metrics As IDictionary(Of String, Double)
     parameters: []
     return:
       type: System.Collections.Generic.IDictionary{System.String,System.Double}
+  overridden: Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry.Metrics
   overload: Microsoft.ApplicationInsights.DataContracts.DependencyTelemetry.Metrics*
+  implements:
+  - Microsoft.ApplicationInsights.DataContracts.ISupportMetrics.Metrics
   modifiers.csharp:
   - public
+  - override
   - get
   modifiers.vb:
   - Public
+  - Overrides
   - ReadOnly
 - uid: Microsoft.ApplicationInsights.DataContracts.DependencyTelemetry.Microsoft#ApplicationInsights#DataContracts#ISupportSampling#SamplingPercentage
   commentId: P:Microsoft.ApplicationInsights.DataContracts.DependencyTelemetry.Microsoft#ApplicationInsights#DataContracts#ISupportSampling#SamplingPercentage
@@ -979,6 +985,13 @@ references:
   name: ISupportSampling
   nameWithType: ISupportSampling
   fullName: Microsoft.ApplicationInsights.DataContracts.ISupportSampling
+- uid: Microsoft.ApplicationInsights.DataContracts.ISupportMetrics
+  commentId: T:Microsoft.ApplicationInsights.DataContracts.ISupportMetrics
+  parent: Microsoft.ApplicationInsights.DataContracts
+  isExternal: false
+  name: ISupportMetrics
+  nameWithType: ISupportMetrics
+  fullName: Microsoft.ApplicationInsights.DataContracts.ISupportMetrics
 - uid: Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry.StartTime
   commentId: P:Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry.StartTime
   parent: Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry
@@ -1728,12 +1741,26 @@ references:
   name: System.Collections.Generic
   nameWithType: System.Collections.Generic
   fullName: System.Collections.Generic
+- uid: Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry.Metrics
+  commentId: P:Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry.Metrics
+  parent: Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry
+  isExternal: false
+  name: Metrics
+  nameWithType: OperationTelemetry.Metrics
+  fullName: Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry.Metrics
 - uid: Microsoft.ApplicationInsights.DataContracts.DependencyTelemetry.Metrics*
   commentId: Overload:Microsoft.ApplicationInsights.DataContracts.DependencyTelemetry.Metrics
   isExternal: false
   name: Metrics
   nameWithType: DependencyTelemetry.Metrics
   fullName: Microsoft.ApplicationInsights.DataContracts.DependencyTelemetry.Metrics
+- uid: Microsoft.ApplicationInsights.DataContracts.ISupportMetrics.Metrics
+  commentId: P:Microsoft.ApplicationInsights.DataContracts.ISupportMetrics.Metrics
+  parent: Microsoft.ApplicationInsights.DataContracts.ISupportMetrics
+  isExternal: false
+  name: Metrics
+  nameWithType: ISupportMetrics.Metrics
+  fullName: Microsoft.ApplicationInsights.DataContracts.ISupportMetrics.Metrics
 - uid: System.Collections.Generic.IDictionary{System.String,System.Double}
   commentId: T:System.Collections.Generic.IDictionary{System.String,System.Double}
   parent: System.Collections.Generic
