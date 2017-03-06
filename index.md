@@ -22,7 +22,7 @@ The .NET SDK for Azure libraries all support [.NET Framework](/dotnet/articles/s
 ## Packages
 
 > [!TIP]
-> [Fluent libraries](https://azure.microsoft.com/blog/simpler-azure-management-libraries-for-net/) (ending in **\*.Fluent**) improve the developer experience by providing a higher-level, object-oriented API optimized for readability and writability. They clarify what is required vs. optional vs. non-modifiable. These libraries can run side-by-side with non-fluent libraries, so use the fluent packages if you prefer that syntax. [Microsoft.Azure.Management.Fluent](https://www.nuget.org/packages/Microsoft.Azure.Management.Fluent) is a rollup package that contains all of the fluent management libraries.
+> [Fluent libraries](https://azure.microsoft.com/blog/simpler-azure-management-libraries-for-net/) (ending in **\*.Fluent**) improve the developer experience by providing a higher-level, object-oriented API optimized for readability and writability. Fluent syntax removes guesswork by clarifying what is required vs. optional vs. non-modifiable. These libraries can run side-by-side with non-fluent libraries, so use the fluent packages if you prefer that syntax. [Microsoft.Azure.Management.Fluent](https://www.nuget.org/packages/Microsoft.Azure.Management.Fluent) is a rollup package that contains all of the fluent management libraries.
 
 Service | Interact with the service | Manage service resources
 --------|---------------------------|-------------------------
@@ -73,9 +73,7 @@ Service | Interact with the service | Manage service resources
 [Virtual Network](/azure/virtual-network/) | | [Microsoft.Azure.Management.Network.Fluent](https://www.nuget.org/packages/Microsoft.Azure.Management.Network.Fluent)<br/>[Microsoft.Azure.Management.Network](https://www.nuget.org/packages/Microsoft.Azure.Management.Network)
 [Web Apps](/azure/app-service-web) | | [Microsoft.Azure.Management.AppService.Fluent](https://www.nuget.org/packages/Microsoft.Azure.Management.AppService.Fluent)<br/>[Microsoft.Azure.Management.Websites](https://www.nuget.org/packages/Microsoft.Azure.Management.Websites)
 
-## Installation
-
-### Visual Studio
+## Install for Visual Studio
 
 If you're using Visual Studio, use the **NuGet Package Manager Console** to import the package into your project.
 
@@ -94,7 +92,7 @@ If you're using Visual Studio, use the **NuGet Package Manager Console** to impo
     Install-Package Microsoft.Azure.Management.ResourceMananger -Version 1.4.0-preview
     ``` 
 
-### .NET Core
+## Install for other editors
 
 If you're using .NET Core with Visual Studio Code (or any other editor), edit your csproj file to add the package as a **PackageReference** element.  This example uses a specific version of **Microsoft.Azure.Management.ResourceManager**, which is the best practice, but NuGet [floating versions](/nuget/consume-packages/package-references-in-project-files#floating-versions) are also supported.
 
