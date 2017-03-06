@@ -22,7 +22,7 @@ The .NET SDK for Azure libraries all support [.NET Framework](/dotnet/articles/s
 ## Packages
 
 > [!TIP]
-> [Fluent libraries](https://azure.microsoft.com/blog/simpler-azure-management-libraries-for-net/) (ending in **\*.Fluent**) improve the developer experience by providing a higher-level, object-oriented API optimized for readability and writability. They clarify what is required vs. optional vs. non-modifiable. These libraries can run side-by-side with non-fluent libraries, so use the fluent packages if you prefer the fluent syntax. [Microsoft.Azure.Management.Fluent](https://www.nuget.org/packages/Microsoft.Azure.Management.Fluent) is a rollup package that contains all of the fluent management libraries.
+> [Fluent libraries](https://azure.microsoft.com/blog/simpler-azure-management-libraries-for-net/) (ending in **\*.Fluent**) improve the developer experience by providing a higher-level, object-oriented API optimized for readability and writability. They clarify what is required vs. optional vs. non-modifiable. These libraries can run side-by-side with non-fluent libraries, so use the fluent packages if you prefer that syntax. [Microsoft.Azure.Management.Fluent](https://www.nuget.org/packages/Microsoft.Azure.Management.Fluent) is a rollup package that contains all of the fluent management libraries.
 
 Service | Interact with the service | Manage service resources
 --------|---------------------------|-------------------------
