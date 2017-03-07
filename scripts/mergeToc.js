@@ -10,8 +10,14 @@ var apiRefManualInfo = traverseApiToc("docs-ref-manual");
 // check if any metadata files has duplicated uid
 checkDuplicateUid(apiRefInfo.ymlList.concat(apiRefManualInfo.ymlList));
 
+let tocList = apiRefInfo.tocList.concat(apiRefManualInfo.tocList);
 // merge all toc.yml into one
-mergeToc(apiRefInfo.tocList.concat(apiRefManualInfo.tocList), "docs-ref-autogen/toc.yml");
+mergeToc(tocList, "docs-ref-autogen/toc.yml");
+
+// remove other toc.yml
+tocList.forEach(tocPath => {
+    fs.unlinkSync(tocPath);
+});
 
 function checkDuplicateUid(ymlList) {
     var record = new Set();
