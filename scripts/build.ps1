@@ -16,7 +16,7 @@ function ProcessLastExitCode {
 }
 
 # install latest docfx
-& cinst docfx
+& cinst docfx -version 2.13.1
 ProcessLastExitCode $lastexitcode "failed to install latest docfx"
 
 # clean api_ref
