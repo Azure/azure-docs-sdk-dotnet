@@ -2,4 +2,4 @@
 uid: Microsoft.WindowsAzure.Storage.DataMovement.TransferContext
 example: *content
 ---
-'Test example 7.'
+Test example 8.
