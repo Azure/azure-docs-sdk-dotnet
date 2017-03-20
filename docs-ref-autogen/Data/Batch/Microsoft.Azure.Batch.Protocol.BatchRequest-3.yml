@@ -29,10 +29,6 @@ items:
   example: []
   syntax:
     content: 'public class BatchRequest<TBody, TOptions, TResponse> : BatchRequestBase<TOptions, TResponse>, IBatchRequest<TResponse>, IBatchRequest where TOptions : IOptions, new ()where TResponse : IAzureOperationResponse'
-    content.vb: >-
-      Public Class BatchRequest(Of TBody, TOptions As {IOptions, New}, TResponse As IAzureOperationResponse)
-          Inherits BatchRequestBase(Of TOptions, TResponse)
-          Implements IBatchRequest(Of TResponse), IBatchRequest
     typeParameters:
     - id: TBody
       description: The type of the body parameters associated with the request.
@@ -40,6 +36,10 @@ items:
       description: The type of the parameters passed outside the request body associated with the request.
     - id: TResponse
       description: The response type expected from the request.
+    content.vb: >-
+      Public Class BatchRequest(Of TBody, TOptions As {IOptions, New}, TResponse As IAzureOperationResponse)
+          Inherits BatchRequestBase(Of TOptions, TResponse)
+          Implements IBatchRequest(Of TResponse), IBatchRequest
   inheritance:
   - System.Object
   - Microsoft.Azure.Batch.Protocol.BatchRequestBase{{TOptions},{TResponse}}
@@ -131,10 +131,10 @@ items:
   example: []
   syntax:
     content: public TBody Parameters { get; set; }
-    content.vb: Public Property Parameters As TBody
     parameters: []
     return:
       type: '{TBody}'
+    content.vb: Public Property Parameters As TBody
   overload: Microsoft.Azure.Batch.Protocol.BatchRequest`3.Parameters*
   nameWithType.vb: BatchRequest(Of TBody, TOptions, TResponse).Parameters
   modifiers.csharp:
@@ -170,7 +170,6 @@ items:
   example: []
   syntax:
     content: public BatchRequest(BatchServiceClient restClient, TBody parameters, CancellationToken cancellationToken)
-    content.vb: Public Sub New(restClient As BatchServiceClient, parameters As TBody, cancellationToken As CancellationToken)
     parameters:
     - id: restClient
       type: Microsoft.Azure.Batch.Protocol.BatchServiceClient
@@ -181,6 +180,7 @@ items:
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: The cancellationToken to use.
+    content.vb: Public Sub New(restClient As BatchServiceClient, parameters As TBody, cancellationToken As CancellationToken)
   overload: Microsoft.Azure.Batch.Protocol.BatchRequest`3.#ctor*
   nameWithType.vb: BatchRequest(Of TBody, TOptions, TResponse).BatchRequest(BatchServiceClient, TBody, CancellationToken)
   modifiers.csharp:

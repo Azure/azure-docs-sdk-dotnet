@@ -78,10 +78,10 @@ items:
   namespace: Microsoft.Azure.EventHubs
   syntax:
     content: public EventHubClient EventHubClient { get; }
-    content.vb: Public ReadOnly Property EventHubClient As EventHubClient
     parameters: []
     return:
       type: Microsoft.Azure.EventHubs.EventHubClient
+    content.vb: Public ReadOnly Property EventHubClient As EventHubClient
   overload: Microsoft.Azure.EventHubs.PartitionSender.EventHubClient*
   modifiers.csharp:
   - public
@@ -113,10 +113,10 @@ items:
   namespace: Microsoft.Azure.EventHubs
   syntax:
     content: public string PartitionId { get; }
-    content.vb: Public ReadOnly Property PartitionId As String
     parameters: []
     return:
       type: System.String
+    content.vb: Public ReadOnly Property PartitionId As String
   overload: Microsoft.Azure.EventHubs.PartitionSender.PartitionId*
   modifiers.csharp:
   - public
@@ -150,13 +150,13 @@ items:
   example: []
   syntax:
     content: public Task SendAsync(EventData eventData)
-    content.vb: Public Function SendAsync(eventData As EventData) As Task
     parameters:
     - id: eventData
       type: Microsoft.Azure.EventHubs.EventData
     return:
       type: Task
       description: A Task that completes when the send operations is done.
+    content.vb: Public Function SendAsync(eventData As EventData) As Task
   overload: Microsoft.Azure.EventHubs.PartitionSender.SendAsync*
   exceptions:
   - type: Microsoft.Azure.EventHubs.EventHubsException
@@ -193,7 +193,6 @@ items:
   - "\nSample code:\n<pre><code>EventHubClient client = EventHubClient.Create(\"__connectionString__\");\nPartitionSender senderToPartitionOne = client.CreatePartitionSender(\"1\");\n\nwhile (true)\n{\n    var events = new List&lt;EventData&gt;();\n    for (int count = 1; count &lt; 11; count++)\n    {\n        var payload = new PayloadEvent(count);\n        byte[] payloadBytes = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload));\n        var sendEvent = new EventData(payloadBytes);\n        var applicationProperties = new Dictionary&lt;string, string&gt;();\n        applicationProperties[\"from\"] = \"csharpClient\";\n        sendEvent.Properties = applicationProperties;\n        events.Add(sendEvent);\n    }\n\n    await senderToPartitionOne.SendAsync(events);\n    Console.WriteLine(\"Sent Batch... Size: {0}\", events.Count);\n\n}</code></pre>\n"
   syntax:
     content: public Task SendAsync(IEnumerable<EventData> eventDatas)
-    content.vb: Public Function SendAsync(eventDatas As IEnumerable(Of EventData)) As Task
     parameters:
     - id: eventDatas
       type: IEnumerable{Microsoft.Azure.EventHubs.EventData}
@@ -201,6 +200,7 @@ items:
     return:
       type: Task
       description: a Task that completes when the send operation is done.
+    content.vb: Public Function SendAsync(eventDatas As IEnumerable(Of EventData)) As Task
   overload: Microsoft.Azure.EventHubs.PartitionSender.SendAsync*
   exceptions:
   - type: Microsoft.Azure.EventHubs.EventHubsException
@@ -237,9 +237,9 @@ items:
   namespace: Microsoft.Azure.EventHubs
   syntax:
     content: public override Task CloseAsync()
-    content.vb: Public Overrides Function CloseAsync As Task
     return:
       type: Task
+    content.vb: Public Overrides Function CloseAsync As Task
   overridden: Microsoft.Azure.EventHubs.ClientEntity.CloseAsync
   overload: Microsoft.Azure.EventHubs.PartitionSender.CloseAsync*
   modifiers.csharp:

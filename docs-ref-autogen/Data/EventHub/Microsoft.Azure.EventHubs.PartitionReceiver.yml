@@ -96,9 +96,9 @@ items:
   example: []
   syntax:
     content: public static readonly string StartOfStream
-    content.vb: Public Shared ReadOnly StartOfStream As String
     return:
       type: System.String
+    content.vb: Public Shared ReadOnly StartOfStream As String
   modifiers.csharp:
   - public
   - static
@@ -133,9 +133,9 @@ items:
   example: []
   syntax:
     content: public static readonly string EndOfStream
-    content.vb: Public Shared ReadOnly EndOfStream As String
     return:
       type: System.String
+    content.vb: Public Shared ReadOnly EndOfStream As String
   modifiers.csharp:
   - public
   - static
@@ -170,9 +170,9 @@ items:
   example: []
   syntax:
     content: public static readonly string DefaultConsumerGroupName
-    content.vb: Public Shared ReadOnly DefaultConsumerGroupName As String
     return:
       type: System.String
+    content.vb: Public Shared ReadOnly DefaultConsumerGroupName As String
   modifiers.csharp:
   - public
   - static
@@ -205,7 +205,6 @@ items:
   namespace: Microsoft.Azure.EventHubs
   syntax:
     content: protected PartitionReceiver(EventHubClient eventHubClient, string consumerGroupName, string partitionId, string startOffset, bool offsetInclusive, DateTime? startTime, long ? epoch)
-    content.vb: Protected Sub New(eventHubClient As EventHubClient, consumerGroupName As String, partitionId As String, startOffset As String, offsetInclusive As Boolean, startTime As DateTime?, epoch As Long?)
     parameters:
     - id: eventHubClient
       type: Microsoft.Azure.EventHubs.EventHubClient
@@ -221,6 +220,7 @@ items:
       type: System.Nullable{DateTime}
     - id: epoch
       type: System.Nullable{System.Int64}
+    content.vb: Protected Sub New(eventHubClient As EventHubClient, consumerGroupName As String, partitionId As String, startOffset As String, offsetInclusive As Boolean, startTime As DateTime?, epoch As Long?)
   overload: Microsoft.Azure.EventHubs.PartitionReceiver.#ctor*
   nameWithType.vb: PartitionReceiver.PartitionReceiver(EventHubClient, String, String, String, Boolean, Nullable(Of DateTime), Nullable(Of Int64))
   modifiers.csharp:
@@ -255,10 +255,10 @@ items:
   example: []
   syntax:
     content: public EventHubClient EventHubClient { get; }
-    content.vb: Public ReadOnly Property EventHubClient As EventHubClient
     parameters: []
     return:
       type: Microsoft.Azure.EventHubs.EventHubClient
+    content.vb: Public ReadOnly Property EventHubClient As EventHubClient
   overload: Microsoft.Azure.EventHubs.PartitionReceiver.EventHubClient*
   modifiers.csharp:
   - public
@@ -292,10 +292,10 @@ items:
   example: []
   syntax:
     content: public string ConsumerGroupName { get; }
-    content.vb: Public ReadOnly Property ConsumerGroupName As String
     parameters: []
     return:
       type: System.String
+    content.vb: Public ReadOnly Property ConsumerGroupName As String
   overload: Microsoft.Azure.EventHubs.PartitionReceiver.ConsumerGroupName*
   modifiers.csharp:
   - public
@@ -329,11 +329,11 @@ items:
   example: []
   syntax:
     content: public string PartitionId { get; }
-    content.vb: Public ReadOnly Property PartitionId As String
     parameters: []
     return:
       type: System.String
       description: The identifier representing the partition from which this receiver is fetching data
+    content.vb: Public ReadOnly Property PartitionId As String
   overload: Microsoft.Azure.EventHubs.PartitionReceiver.PartitionId*
   modifiers.csharp:
   - public
@@ -367,11 +367,11 @@ items:
   example: []
   syntax:
     content: public int PrefetchCount { get; set; }
-    content.vb: Public Property PrefetchCount As Integer
     parameters: []
     return:
       type: System.Int32
       description: The upper limit of events this receiver will actively receive regardless of whether a receive operation is pending.
+    content.vb: Public Property PrefetchCount As Integer
   overload: Microsoft.Azure.EventHubs.PartitionReceiver.PrefetchCount*
   modifiers.csharp:
   - public
@@ -405,11 +405,11 @@ items:
   example: []
   syntax:
     content: public long ? Epoch { get; }
-    content.vb: Public ReadOnly Property Epoch As Long?
     parameters: []
     return:
       type: System.Nullable{System.Int64}
       description: the epoch value that this receiver is currently using for partition ownership.
+    content.vb: Public ReadOnly Property Epoch As Long?
   overload: Microsoft.Azure.EventHubs.PartitionReceiver.Epoch*
   modifiers.csharp:
   - public
@@ -441,10 +441,10 @@ items:
   namespace: Microsoft.Azure.EventHubs
   syntax:
     content: protected DateTime? StartTime { get; }
-    content.vb: Protected ReadOnly Property StartTime As DateTime?
     parameters: []
     return:
       type: System.Nullable{DateTime}
+    content.vb: Protected ReadOnly Property StartTime As DateTime?
   overload: Microsoft.Azure.EventHubs.PartitionReceiver.StartTime*
   modifiers.csharp:
   - protected
@@ -476,10 +476,10 @@ items:
   namespace: Microsoft.Azure.EventHubs
   syntax:
     content: protected bool OffsetInclusive { get; }
-    content.vb: Protected ReadOnly Property OffsetInclusive As Boolean
     parameters: []
     return:
       type: System.Boolean
+    content.vb: Protected ReadOnly Property OffsetInclusive As Boolean
   overload: Microsoft.Azure.EventHubs.PartitionReceiver.OffsetInclusive*
   modifiers.csharp:
   - protected
@@ -511,10 +511,10 @@ items:
   namespace: Microsoft.Azure.EventHubs
   syntax:
     content: protected string StartOffset { get; }
-    content.vb: Protected ReadOnly Property StartOffset As String
     parameters: []
     return:
       type: System.String
+    content.vb: Protected ReadOnly Property StartOffset As String
   overload: Microsoft.Azure.EventHubs.PartitionReceiver.StartOffset*
   modifiers.csharp:
   - protected
@@ -549,13 +549,13 @@ items:
   - "\nSample code:\n<pre><code>EventHubClient client = EventHubClient.Create(\"__connectionString__\");\nPartitionReceiver receiver = client.CreateReceiver(\"ConsumerGroup1\", \"1\");\nIEnumerable&lt;EventData&gt; receivedEvents = await receiver.ReceiveAsync(BatchSize);\n\nwhile (true)\n{\n    int batchSize = 0;\n    if (receivedEvents != null)\n    {\n        foreach (EventData receivedEvent in receivedEvents)\n        {\n            Console.WriteLine(\"Message Payload: {0}\", Encoding.UTF8.GetString(receivedEvent.Body));\n            Console.WriteLine(\"Offset: {0}, SeqNo: {1}, EnqueueTime: {2}\", \n                receivedEvent.SystemProperties.Offset, \n                receivedEvent.SystemProperties.SequenceNumber, \n                receivedEvent.SystemProperties.EnqueuedTime);\n            batchSize++;\n        }\n    }\n\n    Console.WriteLine(\"ReceivedBatch Size: {0}\", batchSize);\n    receivedEvents = await receiver.ReceiveAsync();\n}</code></pre>\n"
   syntax:
     content: public Task<IEnumerable<EventData>> ReceiveAsync(int maxMessageCount)
-    content.vb: Public Function ReceiveAsync(maxMessageCount As Integer) As Task(Of IEnumerable(Of EventData))
     parameters:
     - id: maxMessageCount
       type: System.Int32
     return:
       type: Task{IEnumerable{Microsoft.Azure.EventHubs.EventData}}
       description: A Task that will yield a batch of <xref href="Microsoft.Azure.EventHubs.EventData" data-throw-if-not-resolved="false"></xref> from the partition on which this receiver is created. Returns 'null' if no EventData is present.
+    content.vb: Public Function ReceiveAsync(maxMessageCount As Integer) As Task(Of IEnumerable(Of EventData))
   overload: Microsoft.Azure.EventHubs.PartitionReceiver.ReceiveAsync*
   modifiers.csharp:
   - public
@@ -587,7 +587,6 @@ items:
   example: []
   syntax:
     content: public Task<IEnumerable<EventData>> ReceiveAsync(int maxMessageCount, TimeSpan waitTime)
-    content.vb: Public Function ReceiveAsync(maxMessageCount As Integer, waitTime As TimeSpan) As Task(Of IEnumerable(Of EventData))
     parameters:
     - id: maxMessageCount
       type: System.Int32
@@ -596,6 +595,7 @@ items:
     return:
       type: Task{IEnumerable{Microsoft.Azure.EventHubs.EventData}}
       description: A Task that will yield a batch of <xref href="Microsoft.Azure.EventHubs.EventData" data-throw-if-not-resolved="false"></xref> from the partition on which this receiver is created. Returns 'null' if no EventData is present.
+    content.vb: Public Function ReceiveAsync(maxMessageCount As Integer, waitTime As TimeSpan) As Task(Of IEnumerable(Of EventData))
   overload: Microsoft.Azure.EventHubs.PartitionReceiver.ReceiveAsync*
   modifiers.csharp:
   - public
@@ -625,10 +625,10 @@ items:
   namespace: Microsoft.Azure.EventHubs
   syntax:
     content: public void SetReceiveHandler(IPartitionReceiveHandler receiveHandler)
-    content.vb: Public Sub SetReceiveHandler(receiveHandler As IPartitionReceiveHandler)
     parameters:
     - id: receiveHandler
       type: Microsoft.Azure.EventHubs.IPartitionReceiveHandler
+    content.vb: Public Sub SetReceiveHandler(receiveHandler As IPartitionReceiveHandler)
   overload: Microsoft.Azure.EventHubs.PartitionReceiver.SetReceiveHandler*
   modifiers.csharp:
   - public
@@ -658,9 +658,9 @@ items:
   namespace: Microsoft.Azure.EventHubs
   syntax:
     content: public override sealed Task CloseAsync()
-    content.vb: Public NotOverridable Overrides Function CloseAsync As Task
     return:
       type: Task
+    content.vb: Public NotOverridable Overrides Function CloseAsync As Task
   overridden: Microsoft.Azure.EventHubs.ClientEntity.CloseAsync
   overload: Microsoft.Azure.EventHubs.PartitionReceiver.CloseAsync*
   modifiers.csharp:
@@ -695,7 +695,6 @@ items:
   namespace: Microsoft.Azure.EventHubs
   syntax:
     content: protected abstract Task<IList<EventData>> OnReceiveAsync(int maxMessageCount, TimeSpan waitTime)
-    content.vb: Protected MustOverride Function OnReceiveAsync(maxMessageCount As Integer, waitTime As TimeSpan) As Task(Of IList(Of EventData))
     parameters:
     - id: maxMessageCount
       type: System.Int32
@@ -703,6 +702,7 @@ items:
       type: TimeSpan
     return:
       type: Task{IList{Microsoft.Azure.EventHubs.EventData}}
+    content.vb: Protected MustOverride Function OnReceiveAsync(maxMessageCount As Integer, waitTime As TimeSpan) As Task(Of IList(Of EventData))
   overload: Microsoft.Azure.EventHubs.PartitionReceiver.OnReceiveAsync*
   modifiers.csharp:
   - protected
@@ -734,10 +734,10 @@ items:
   namespace: Microsoft.Azure.EventHubs
   syntax:
     content: protected abstract void OnSetReceiveHandler(IPartitionReceiveHandler receiveHandler)
-    content.vb: Protected MustOverride Sub OnSetReceiveHandler(receiveHandler As IPartitionReceiveHandler)
     parameters:
     - id: receiveHandler
       type: Microsoft.Azure.EventHubs.IPartitionReceiveHandler
+    content.vb: Protected MustOverride Sub OnSetReceiveHandler(receiveHandler As IPartitionReceiveHandler)
   overload: Microsoft.Azure.EventHubs.PartitionReceiver.OnSetReceiveHandler*
   modifiers.csharp:
   - protected
@@ -769,9 +769,9 @@ items:
   namespace: Microsoft.Azure.EventHubs
   syntax:
     content: protected abstract Task OnCloseAsync()
-    content.vb: Protected MustOverride Function OnCloseAsync As Task
     return:
       type: Task
+    content.vb: Protected MustOverride Function OnCloseAsync As Task
   overload: Microsoft.Azure.EventHubs.PartitionReceiver.OnCloseAsync*
   modifiers.csharp:
   - protected

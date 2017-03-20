@@ -91,10 +91,10 @@ items:
   namespace: Microsoft.Azure.EventHubs
   syntax:
     content: public string EventHubName { get; }
-    content.vb: Public ReadOnly Property EventHubName As String
     parameters: []
     return:
       type: System.String
+    content.vb: Public ReadOnly Property EventHubName As String
   overload: Microsoft.Azure.EventHubs.EventHubClient.EventHubName*
   modifiers.csharp:
   - public
@@ -126,10 +126,10 @@ items:
   namespace: Microsoft.Azure.EventHubs
   syntax:
     content: protected object ThisLock { get; }
-    content.vb: Protected ReadOnly Property ThisLock As Object
     parameters: []
     return:
       type: System.Object
+    content.vb: Protected ReadOnly Property ThisLock As Object
   overload: Microsoft.Azure.EventHubs.EventHubClient.ThisLock*
   modifiers.csharp:
   - protected
@@ -161,12 +161,12 @@ items:
   namespace: Microsoft.Azure.EventHubs
   syntax:
     content: public static EventHubClient CreateFromConnectionString(string connectionString)
-    content.vb: Public Shared Function CreateFromConnectionString(connectionString As String) As EventHubClient
     parameters:
     - id: connectionString
       type: System.String
     return:
       type: Microsoft.Azure.EventHubs.EventHubClient
+    content.vb: Public Shared Function CreateFromConnectionString(connectionString As String) As EventHubClient
   overload: Microsoft.Azure.EventHubs.EventHubClient.CreateFromConnectionString*
   modifiers.csharp:
   - public
@@ -198,9 +198,9 @@ items:
   namespace: Microsoft.Azure.EventHubs
   syntax:
     content: public override sealed Task CloseAsync()
-    content.vb: Public NotOverridable Overrides Function CloseAsync As Task
     return:
       type: Task
+    content.vb: Public NotOverridable Overrides Function CloseAsync As Task
   overridden: Microsoft.Azure.EventHubs.ClientEntity.CloseAsync
   overload: Microsoft.Azure.EventHubs.EventHubClient.CloseAsync*
   modifiers.csharp:
@@ -237,7 +237,6 @@ items:
   example: []
   syntax:
     content: public Task SendAsync(EventData eventData)
-    content.vb: Public Function SendAsync(eventData As EventData) As Task
     parameters:
     - id: eventData
       type: Microsoft.Azure.EventHubs.EventData
@@ -245,6 +244,7 @@ items:
     return:
       type: Task
       description: A Task that completes when the send operations is done.
+    content.vb: Public Function SendAsync(eventData As EventData) As Task
   overload: Microsoft.Azure.EventHubs.EventHubClient.SendAsync*
   seealso:
   - linkId: Microsoft.Azure.EventHubs.EventHubClient.SendAsync(Microsoft.Azure.EventHubs.EventData,System.String)
@@ -282,7 +282,6 @@ items:
   - "\nSample code:\n<pre><code>var client = EventHubClient.Create(\"__connectionString__\");\nwhile (true)\n{\n    var events = new List&lt;EventData&gt;();\n    for (int count = 1; count &lt; 11; count++)\n    {\n        var payload = new PayloadEvent(count);\n        byte[] payloadBytes = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload));\n        var sendEvent = new EventData(payloadBytes);\n        var applicationProperties = new Dictionary&lt;string, string&gt;();\n        applicationProperties[\"from\"] = \"csharpClient\";\n        sendEvent.Properties = applicationProperties;\n        events.Add(sendEvent);\n    }\n\n    await client.SendAsync(events);\n    Console.WriteLine(\"Sent Batch... Size: {0}\", events.Count);\n}</code></pre>\n"
   syntax:
     content: public Task SendAsync(IEnumerable<EventData> eventDatas)
-    content.vb: Public Function SendAsync(eventDatas As IEnumerable(Of EventData)) As Task
     parameters:
     - id: eventDatas
       type: IEnumerable{Microsoft.Azure.EventHubs.EventData}
@@ -290,6 +289,7 @@ items:
     return:
       type: Task
       description: A Task that completes when the send operations is done.
+    content.vb: Public Function SendAsync(eventDatas As IEnumerable(Of EventData)) As Task
   overload: Microsoft.Azure.EventHubs.EventHubClient.SendAsync*
   seealso:
   - linkId: Microsoft.Azure.EventHubs.EventHubClient.SendAsync(Microsoft.Azure.EventHubs.EventData,System.String)
@@ -329,7 +329,6 @@ items:
   example: []
   syntax:
     content: public Task SendAsync(EventData eventData, string partitionKey)
-    content.vb: Public Function SendAsync(eventData As EventData, partitionKey As String) As Task
     parameters:
     - id: eventData
       type: Microsoft.Azure.EventHubs.EventData
@@ -340,6 +339,7 @@ items:
     return:
       type: Task
       description: A Task that completes when the send operation is done.
+    content.vb: Public Function SendAsync(eventData As EventData, partitionKey As String) As Task
   overload: Microsoft.Azure.EventHubs.EventHubClient.SendAsync*
   seealso:
   - linkId: Microsoft.Azure.EventHubs.EventHubClient.SendAsync(Microsoft.Azure.EventHubs.EventData)
@@ -376,7 +376,6 @@ items:
   example: []
   syntax:
     content: public Task SendAsync(IEnumerable<EventData> eventDatas, string partitionKey)
-    content.vb: Public Function SendAsync(eventDatas As IEnumerable(Of EventData), partitionKey As String) As Task
     parameters:
     - id: eventDatas
       type: IEnumerable{Microsoft.Azure.EventHubs.EventData}
@@ -387,6 +386,7 @@ items:
     return:
       type: Task
       description: A Task that completes when the send operation is done.
+    content.vb: Public Function SendAsync(eventDatas As IEnumerable(Of EventData), partitionKey As String) As Task
   overload: Microsoft.Azure.EventHubs.EventHubClient.SendAsync*
   seealso:
   - linkId: Microsoft.Azure.EventHubs.EventHubClient.SendAsync(Microsoft.Azure.EventHubs.EventData)
@@ -427,7 +427,6 @@ items:
   example: []
   syntax:
     content: public PartitionSender CreatePartitionSender(string partitionId)
-    content.vb: Public Function CreatePartitionSender(partitionId As String) As PartitionSender
     parameters:
     - id: partitionId
       type: System.String
@@ -435,6 +434,7 @@ items:
     return:
       type: Microsoft.Azure.EventHubs.PartitionSender
       description: The created PartitionSender
+    content.vb: Public Function CreatePartitionSender(partitionId As String) As PartitionSender
   overload: Microsoft.Azure.EventHubs.EventHubClient.CreatePartitionSender*
   seealso:
   - linkId: Microsoft.Azure.EventHubs.PartitionSender
@@ -469,7 +469,6 @@ items:
   example: []
   syntax:
     content: public PartitionReceiver CreateReceiver(string consumerGroupName, string partitionId, string startingOffset)
-    content.vb: Public Function CreateReceiver(consumerGroupName As String, partitionId As String, startingOffset As String) As PartitionReceiver
     parameters:
     - id: consumerGroupName
       type: System.String
@@ -483,6 +482,7 @@ items:
     return:
       type: Microsoft.Azure.EventHubs.PartitionReceiver
       description: The created PartitionReceiver
+    content.vb: Public Function CreateReceiver(consumerGroupName As String, partitionId As String, startingOffset As String) As PartitionReceiver
   overload: Microsoft.Azure.EventHubs.EventHubClient.CreateReceiver*
   seealso:
   - linkId: Microsoft.Azure.EventHubs.PartitionReceiver
@@ -517,7 +517,6 @@ items:
   example: []
   syntax:
     content: public PartitionReceiver CreateReceiver(string consumerGroupName, string partitionId, string startOffset, bool offsetInclusive)
-    content.vb: Public Function CreateReceiver(consumerGroupName As String, partitionId As String, startOffset As String, offsetInclusive As Boolean) As PartitionReceiver
     parameters:
     - id: consumerGroupName
       type: System.String
@@ -537,6 +536,7 @@ items:
     return:
       type: Microsoft.Azure.EventHubs.PartitionReceiver
       description: The created PartitionReceiver
+    content.vb: Public Function CreateReceiver(consumerGroupName As String, partitionId As String, startOffset As String, offsetInclusive As Boolean) As PartitionReceiver
   overload: Microsoft.Azure.EventHubs.EventHubClient.CreateReceiver*
   seealso:
   - linkId: Microsoft.Azure.EventHubs.PartitionReceiver
@@ -571,7 +571,6 @@ items:
   example: []
   syntax:
     content: public PartitionReceiver CreateReceiver(string consumerGroupName, string partitionId, DateTime startTime)
-    content.vb: Public Function CreateReceiver(consumerGroupName As String, partitionId As String, startTime As DateTime) As PartitionReceiver
     parameters:
     - id: consumerGroupName
       type: System.String
@@ -585,6 +584,7 @@ items:
     return:
       type: Microsoft.Azure.EventHubs.PartitionReceiver
       description: The created PartitionReceiver
+    content.vb: Public Function CreateReceiver(consumerGroupName As String, partitionId As String, startTime As DateTime) As PartitionReceiver
   overload: Microsoft.Azure.EventHubs.EventHubClient.CreateReceiver*
   seealso:
   - linkId: Microsoft.Azure.EventHubs.PartitionReceiver
@@ -619,7 +619,6 @@ items:
   example: []
   syntax:
     content: public PartitionReceiver CreateEpochReceiver(string consumerGroupName, string partitionId, string startingOffset, long epoch)
-    content.vb: Public Function CreateEpochReceiver(consumerGroupName As String, partitionId As String, startingOffset As String, epoch As Long) As PartitionReceiver
     parameters:
     - id: consumerGroupName
       type: System.String
@@ -636,6 +635,7 @@ items:
     return:
       type: Microsoft.Azure.EventHubs.PartitionReceiver
       description: The created PartitionReceiver
+    content.vb: Public Function CreateEpochReceiver(consumerGroupName As String, partitionId As String, startingOffset As String, epoch As Long) As PartitionReceiver
   overload: Microsoft.Azure.EventHubs.EventHubClient.CreateEpochReceiver*
   seealso:
   - linkId: Microsoft.Azure.EventHubs.PartitionReceiver
@@ -670,7 +670,6 @@ items:
   example: []
   syntax:
     content: public PartitionReceiver CreateEpochReceiver(string consumerGroupName, string partitionId, string startingOffset, bool offsetInclusive, long epoch)
-    content.vb: Public Function CreateEpochReceiver(consumerGroupName As String, partitionId As String, startingOffset As String, offsetInclusive As Boolean, epoch As Long) As PartitionReceiver
     parameters:
     - id: consumerGroupName
       type: System.String
@@ -690,6 +689,7 @@ items:
     return:
       type: Microsoft.Azure.EventHubs.PartitionReceiver
       description: The created PartitionReceiver
+    content.vb: Public Function CreateEpochReceiver(consumerGroupName As String, partitionId As String, startingOffset As String, offsetInclusive As Boolean, epoch As Long) As PartitionReceiver
   overload: Microsoft.Azure.EventHubs.EventHubClient.CreateEpochReceiver*
   seealso:
   - linkId: Microsoft.Azure.EventHubs.PartitionReceiver
@@ -724,7 +724,6 @@ items:
   example: []
   syntax:
     content: public PartitionReceiver CreateEpochReceiver(string consumerGroupName, string partitionId, DateTime startTime, long epoch)
-    content.vb: Public Function CreateEpochReceiver(consumerGroupName As String, partitionId As String, startTime As DateTime, epoch As Long) As PartitionReceiver
     parameters:
     - id: consumerGroupName
       type: System.String
@@ -741,6 +740,7 @@ items:
     return:
       type: Microsoft.Azure.EventHubs.PartitionReceiver
       description: The created PartitionReceiver
+    content.vb: Public Function CreateEpochReceiver(consumerGroupName As String, partitionId As String, startTime As DateTime, epoch As Long) As PartitionReceiver
   overload: Microsoft.Azure.EventHubs.EventHubClient.CreateEpochReceiver*
   seealso:
   - linkId: Microsoft.Azure.EventHubs.PartitionReceiver
@@ -775,9 +775,9 @@ items:
   example: []
   syntax:
     content: public Task<EventHubRuntimeInformation> GetRuntimeInformationAsync()
-    content.vb: Public Function GetRuntimeInformationAsync As Task(Of EventHubRuntimeInformation)
     return:
       type: Task{Microsoft.Azure.EventHubs.EventHubRuntimeInformation}
+    content.vb: Public Function GetRuntimeInformationAsync As Task(Of EventHubRuntimeInformation)
   overload: Microsoft.Azure.EventHubs.EventHubClient.GetRuntimeInformationAsync*
   modifiers.csharp:
   - public
@@ -807,12 +807,12 @@ items:
   namespace: Microsoft.Azure.EventHubs
   syntax:
     content: public Task<EventHubPartitionRuntimeInformation> GetPartitionRuntimeInformationAsync(string partitionId)
-    content.vb: Public Function GetPartitionRuntimeInformationAsync(partitionId As String) As Task(Of EventHubPartitionRuntimeInformation)
     parameters:
     - id: partitionId
       type: System.String
     return:
       type: Task{Microsoft.Azure.EventHubs.EventHubPartitionRuntimeInformation}
+    content.vb: Public Function GetPartitionRuntimeInformationAsync(partitionId As String) As Task(Of EventHubPartitionRuntimeInformation)
   overload: Microsoft.Azure.EventHubs.EventHubClient.GetPartitionRuntimeInformationAsync*
   modifiers.csharp:
   - public
@@ -842,7 +842,6 @@ items:
   namespace: Microsoft.Azure.EventHubs
   syntax:
     content: protected abstract PartitionReceiver OnCreateReceiver(string consumerGroupName, string partitionId, string startOffset, bool offsetInclusive, DateTime? startTime, long ? epoch)
-    content.vb: Protected MustOverride Function OnCreateReceiver(consumerGroupName As String, partitionId As String, startOffset As String, offsetInclusive As Boolean, startTime As DateTime?, epoch As Long?) As PartitionReceiver
     parameters:
     - id: consumerGroupName
       type: System.String
@@ -858,6 +857,7 @@ items:
       type: System.Nullable{System.Int64}
     return:
       type: Microsoft.Azure.EventHubs.PartitionReceiver
+    content.vb: Protected MustOverride Function OnCreateReceiver(consumerGroupName As String, partitionId As String, startOffset As String, offsetInclusive As Boolean, startTime As DateTime?, epoch As Long?) As PartitionReceiver
   overload: Microsoft.Azure.EventHubs.EventHubClient.OnCreateReceiver*
   nameWithType.vb: EventHubClient.OnCreateReceiver(String, String, String, Boolean, Nullable(Of DateTime), Nullable(Of Int64))
   modifiers.csharp:
@@ -892,9 +892,9 @@ items:
   namespace: Microsoft.Azure.EventHubs
   syntax:
     content: protected abstract Task<EventHubRuntimeInformation> OnGetRuntimeInformationAsync()
-    content.vb: Protected MustOverride Function OnGetRuntimeInformationAsync As Task(Of EventHubRuntimeInformation)
     return:
       type: Task{Microsoft.Azure.EventHubs.EventHubRuntimeInformation}
+    content.vb: Protected MustOverride Function OnGetRuntimeInformationAsync As Task(Of EventHubRuntimeInformation)
   overload: Microsoft.Azure.EventHubs.EventHubClient.OnGetRuntimeInformationAsync*
   modifiers.csharp:
   - protected
@@ -926,12 +926,12 @@ items:
   namespace: Microsoft.Azure.EventHubs
   syntax:
     content: protected abstract Task<EventHubPartitionRuntimeInformation> OnGetPartitionRuntimeInformationAsync(string partitionId)
-    content.vb: Protected MustOverride Function OnGetPartitionRuntimeInformationAsync(partitionId As String) As Task(Of EventHubPartitionRuntimeInformation)
     parameters:
     - id: partitionId
       type: System.String
     return:
       type: Task{Microsoft.Azure.EventHubs.EventHubPartitionRuntimeInformation}
+    content.vb: Protected MustOverride Function OnGetPartitionRuntimeInformationAsync(partitionId As String) As Task(Of EventHubPartitionRuntimeInformation)
   overload: Microsoft.Azure.EventHubs.EventHubClient.OnGetPartitionRuntimeInformationAsync*
   modifiers.csharp:
   - protected
@@ -963,9 +963,9 @@ items:
   namespace: Microsoft.Azure.EventHubs
   syntax:
     content: protected abstract Task OnCloseAsync()
-    content.vb: Protected MustOverride Function OnCloseAsync As Task
     return:
       type: Task
+    content.vb: Protected MustOverride Function OnCloseAsync As Task
   overload: Microsoft.Azure.EventHubs.EventHubClient.OnCloseAsync*
   modifiers.csharp:
   - protected
