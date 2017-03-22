@@ -44,7 +44,7 @@ items:
   - Microsoft.Azure.KeyVault.IKeyVaultClient.GetSecretVersionsWithHttpMessagesAsync(System.String,System.String,System.Nullable{System.Int32},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
   - Microsoft.Azure.KeyVault.IKeyVaultClient.GetSecretWithHttpMessagesAsync(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
   - Microsoft.Azure.KeyVault.IKeyVaultClient.ImportCertificateWithHttpMessagesAsync(System.String,System.String,System.String,System.String,Microsoft.Azure.KeyVault.Models.CertificatePolicy,Microsoft.Azure.KeyVault.Models.CertificateAttributes,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
-  - Microsoft.Azure.KeyVault.IKeyVaultClient.ImportKeyWithHttpMessagesAsync(System.String,System.String,Microsoft.Azure.KeyVault.WebKey.JsonWebKey,System.Nullable{System.Boolean},Microsoft.Azure.KeyVault.Models.KeyAttributes,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
+  - Microsoft.Azure.KeyVault.IKeyVaultClient.ImportKeyWithHttpMessagesAsync(System.String,System.String,JsonWebKey,System.Nullable{System.Boolean},Microsoft.Azure.KeyVault.Models.KeyAttributes,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
   - Microsoft.Azure.KeyVault.IKeyVaultClient.LongRunningOperationRetryTimeout
   - Microsoft.Azure.KeyVault.IKeyVaultClient.MergeCertificateWithHttpMessagesAsync(System.String,System.String,System.Collections.Generic.IList{System.Byte[]},Microsoft.Azure.KeyVault.Models.CertificateAttributes,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
   - Microsoft.Azure.KeyVault.IKeyVaultClient.RestoreKeyWithHttpMessagesAsync(System.String,System.Byte[],System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
@@ -111,7 +111,7 @@ items:
   - Microsoft.Azure.KeyVault.IKeyVaultClient.Microsoft.Azure.KeyVault.KeyVaultClientExtensions.MergeCertificateAsync(System.String,System.String,System.Security.Cryptography.X509Certificates.X509Certificate2Collection,Microsoft.Azure.KeyVault.Models.CertificateAttributes,System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken)
   - Microsoft.Azure.KeyVault.IKeyVaultClient.Microsoft.Azure.KeyVault.KeyVaultClientExtensions.GetPendingCertificateSigningRequestAsync(System.String,System.String,System.Threading.CancellationToken)
   - Microsoft.Azure.KeyVault.IKeyVaultClient.Microsoft.Azure.KeyVault.KeyVaultClientExtensions.CreateKeyAsync(System.String,System.String,System.String,System.Nullable{System.Int32},System.Collections.Generic.IList{System.String},Microsoft.Azure.KeyVault.Models.KeyAttributes,System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken)
-  - Microsoft.Azure.KeyVault.IKeyVaultClient.Microsoft.Azure.KeyVault.KeyVaultClientExtensions.ImportKeyAsync(System.String,System.String,Microsoft.Azure.KeyVault.WebKey.JsonWebKey,System.Nullable{System.Boolean},Microsoft.Azure.KeyVault.Models.KeyAttributes,System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken)
+  - Microsoft.Azure.KeyVault.IKeyVaultClient.Microsoft.Azure.KeyVault.KeyVaultClientExtensions.ImportKeyAsync(System.String,System.String,JsonWebKey,System.Nullable{System.Boolean},Microsoft.Azure.KeyVault.Models.KeyAttributes,System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken)
   - Microsoft.Azure.KeyVault.IKeyVaultClient.Microsoft.Azure.KeyVault.KeyVaultClientExtensions.DeleteKeyAsync(System.String,System.String,System.Threading.CancellationToken)
   - Microsoft.Azure.KeyVault.IKeyVaultClient.Microsoft.Azure.KeyVault.KeyVaultClientExtensions.UpdateKeyAsync(System.String,System.String,System.String,System.Collections.Generic.IList{System.String},Microsoft.Azure.KeyVault.Models.KeyAttributes,System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken)
   - Microsoft.Azure.KeyVault.IKeyVaultClient.Microsoft.Azure.KeyVault.KeyVaultClientExtensions.GetKeyAsync(System.String,System.String,System.String,System.Threading.CancellationToken)
@@ -205,7 +205,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{System.String}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{System.String}}
     content.vb: Function GetPendingCertificateSigningRequestWithHttpMessagesAsync(vault As String, certificateName As String, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of String))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.GetPendingCertificateSigningRequestWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.GetPendingCertificateSigningRequestWithHttpMessagesAsync(String, String, Dictionary(Of String, List(Of String)), CancellationToken)
@@ -239,7 +239,7 @@ items:
     content: JsonSerializerSettings SerializationSettings { get; }
     parameters: []
     return:
-      type: Newtonsoft.Json.JsonSerializerSettings
+      type: JsonSerializerSettings
     content.vb: ReadOnly Property SerializationSettings As JsonSerializerSettings
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.SerializationSettings*
   modifiers.csharp:
@@ -274,7 +274,7 @@ items:
     content: JsonSerializerSettings DeserializationSettings { get; }
     parameters: []
     return:
-      type: Newtonsoft.Json.JsonSerializerSettings
+      type: JsonSerializerSettings
     content.vb: ReadOnly Property DeserializationSettings As JsonSerializerSettings
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.DeserializationSettings*
   modifiers.csharp:
@@ -309,7 +309,7 @@ items:
     content: ServiceClientCredentials Credentials { get; }
     parameters: []
     return:
-      type: Microsoft.Rest.ServiceClientCredentials
+      type: ServiceClientCredentials
     content.vb: ReadOnly Property Credentials As ServiceClientCredentials
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.Credentials*
   modifiers.csharp:
@@ -508,22 +508,22 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.KeyBundle}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.KeyBundle}}
     content.vb: Function CreateKeyWithHttpMessagesAsync(vaultBaseUrl As String, keyName As String, kty As String, keySize As Integer? = Nothing, keyOps As IList(Of String) = Nothing, keyAttributes As KeyAttributes = Nothing, tags As IDictionary(Of String, String) = Nothing, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of KeyBundle))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.CreateKeyWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.CreateKeyWithHttpMessagesAsync(String, String, String, Nullable(Of Int32), IList(Of String), KeyAttributes, IDictionary(Of String, String), Dictionary(Of String, List(Of String)), CancellationToken)
   fullName.vb: Microsoft.Azure.KeyVault.IKeyVaultClient.CreateKeyWithHttpMessagesAsync(System.String, System.String, System.String, System.Nullable(Of System.Int32), System.Collections.Generic.IList(Of System.String), Microsoft.Azure.KeyVault.Models.KeyAttributes, System.Collections.Generic.IDictionary(Of System.String, System.String), System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.List(Of System.String)), System.Threading.CancellationToken)
   name.vb: CreateKeyWithHttpMessagesAsync(String, String, String, Nullable(Of Int32), IList(Of String), KeyAttributes, IDictionary(Of String, String), Dictionary(Of String, List(Of String)), CancellationToken)
-- uid: Microsoft.Azure.KeyVault.IKeyVaultClient.ImportKeyWithHttpMessagesAsync(System.String,System.String,Microsoft.Azure.KeyVault.WebKey.JsonWebKey,System.Nullable{System.Boolean},Microsoft.Azure.KeyVault.Models.KeyAttributes,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
-  commentId: M:Microsoft.Azure.KeyVault.IKeyVaultClient.ImportKeyWithHttpMessagesAsync(System.String,System.String,Microsoft.Azure.KeyVault.WebKey.JsonWebKey,System.Nullable{System.Boolean},Microsoft.Azure.KeyVault.Models.KeyAttributes,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
-  id: ImportKeyWithHttpMessagesAsync(System.String,System.String,Microsoft.Azure.KeyVault.WebKey.JsonWebKey,System.Nullable{System.Boolean},Microsoft.Azure.KeyVault.Models.KeyAttributes,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
+- uid: Microsoft.Azure.KeyVault.IKeyVaultClient.ImportKeyWithHttpMessagesAsync(System.String,System.String,JsonWebKey,System.Nullable{System.Boolean},Microsoft.Azure.KeyVault.Models.KeyAttributes,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
+  commentId: M:Microsoft.Azure.KeyVault.IKeyVaultClient.ImportKeyWithHttpMessagesAsync(System.String,System.String,JsonWebKey,System.Nullable{System.Boolean},Microsoft.Azure.KeyVault.Models.KeyAttributes,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
+  id: ImportKeyWithHttpMessagesAsync(System.String,System.String,JsonWebKey,System.Nullable{System.Boolean},Microsoft.Azure.KeyVault.Models.KeyAttributes,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
   parent: Microsoft.Azure.KeyVault.IKeyVaultClient
   langs:
   - csharp
   - vb
   name: ImportKeyWithHttpMessagesAsync(String, String, JsonWebKey, Nullable<Boolean>, KeyAttributes, IDictionary<String, String>, Dictionary<String, List<String>>, CancellationToken)
   nameWithType: IKeyVaultClient.ImportKeyWithHttpMessagesAsync(String, String, JsonWebKey, Nullable<Boolean>, KeyAttributes, IDictionary<String, String>, Dictionary<String, List<String>>, CancellationToken)
-  fullName: Microsoft.Azure.KeyVault.IKeyVaultClient.ImportKeyWithHttpMessagesAsync(System.String, System.String, Microsoft.Azure.KeyVault.WebKey.JsonWebKey, System.Nullable<System.Boolean>, Microsoft.Azure.KeyVault.Models.KeyAttributes, System.Collections.Generic.IDictionary<System.String, System.String>, System.Collections.Generic.Dictionary<System.String, System.Collections.Generic.List<System.String>>, System.Threading.CancellationToken)
+  fullName: Microsoft.Azure.KeyVault.IKeyVaultClient.ImportKeyWithHttpMessagesAsync(System.String, System.String, JsonWebKey, System.Nullable<System.Boolean>, Microsoft.Azure.KeyVault.Models.KeyAttributes, System.Collections.Generic.IDictionary<System.String, System.String>, System.Collections.Generic.Dictionary<System.String, System.Collections.Generic.List<System.String>>, System.Threading.CancellationToken)
   type: Method
   source:
     remote:
@@ -548,7 +548,7 @@ items:
       type: System.String
       description: "\nName for the imported key.\n"
     - id: key
-      type: Microsoft.Azure.KeyVault.WebKey.JsonWebKey
+      type: JsonWebKey
       description: "\nThe Json web key\n"
     - id: hsm
       type: System.Nullable{System.Boolean}
@@ -566,11 +566,11 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.KeyBundle}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.KeyBundle}}
     content.vb: Function ImportKeyWithHttpMessagesAsync(vaultBaseUrl As String, keyName As String, key As JsonWebKey, hsm As Boolean? = Nothing, keyAttributes As KeyAttributes = Nothing, tags As IDictionary(Of String, String) = Nothing, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of KeyBundle))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.ImportKeyWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.ImportKeyWithHttpMessagesAsync(String, String, JsonWebKey, Nullable(Of Boolean), KeyAttributes, IDictionary(Of String, String), Dictionary(Of String, List(Of String)), CancellationToken)
-  fullName.vb: Microsoft.Azure.KeyVault.IKeyVaultClient.ImportKeyWithHttpMessagesAsync(System.String, System.String, Microsoft.Azure.KeyVault.WebKey.JsonWebKey, System.Nullable(Of System.Boolean), Microsoft.Azure.KeyVault.Models.KeyAttributes, System.Collections.Generic.IDictionary(Of System.String, System.String), System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.List(Of System.String)), System.Threading.CancellationToken)
+  fullName.vb: Microsoft.Azure.KeyVault.IKeyVaultClient.ImportKeyWithHttpMessagesAsync(System.String, System.String, JsonWebKey, System.Nullable(Of System.Boolean), Microsoft.Azure.KeyVault.Models.KeyAttributes, System.Collections.Generic.IDictionary(Of System.String, System.String), System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.List(Of System.String)), System.Threading.CancellationToken)
   name.vb: ImportKeyWithHttpMessagesAsync(String, String, JsonWebKey, Nullable(Of Boolean), KeyAttributes, IDictionary(Of String, String), Dictionary(Of String, List(Of String)), CancellationToken)
 - uid: Microsoft.Azure.KeyVault.IKeyVaultClient.DeleteKeyWithHttpMessagesAsync(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
   commentId: M:Microsoft.Azure.KeyVault.IKeyVaultClient.DeleteKeyWithHttpMessagesAsync(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)
@@ -612,7 +612,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.KeyBundle}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.KeyBundle}}
     content.vb: Function DeleteKeyWithHttpMessagesAsync(vaultBaseUrl As String, keyName As String, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of KeyBundle))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.DeleteKeyWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.DeleteKeyWithHttpMessagesAsync(String, String, Dictionary(Of String, List(Of String)), CancellationToken)
@@ -670,7 +670,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.KeyBundle}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.KeyBundle}}
     content.vb: Function UpdateKeyWithHttpMessagesAsync(vaultBaseUrl As String, keyName As String, keyVersion As String, keyOps As IList(Of String) = Nothing, keyAttributes As KeyAttributes = Nothing, tags As IDictionary(Of String, String) = Nothing, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of KeyBundle))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.UpdateKeyWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.UpdateKeyWithHttpMessagesAsync(String, String, String, IList(Of String), KeyAttributes, IDictionary(Of String, String), Dictionary(Of String, List(Of String)), CancellationToken)
@@ -719,7 +719,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.KeyBundle}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.KeyBundle}}
     content.vb: Function GetKeyWithHttpMessagesAsync(vaultBaseUrl As String, keyName As String, keyVersion As String, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of KeyBundle))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.GetKeyWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.GetKeyWithHttpMessagesAsync(String, String, String, Dictionary(Of String, List(Of String)), CancellationToken)
@@ -768,7 +768,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Rest.Azure.IPage{Microsoft.Azure.KeyVault.Models.KeyItem}}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{IPage{Microsoft.Azure.KeyVault.Models.KeyItem}}}
     content.vb: Function GetKeyVersionsWithHttpMessagesAsync(vaultBaseUrl As String, keyName As String, maxresults As Integer? = Nothing, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of IPage(Of KeyItem)))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.GetKeyVersionsWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.GetKeyVersionsWithHttpMessagesAsync(String, String, Nullable(Of Int32), Dictionary(Of String, List(Of String)), CancellationToken)
@@ -814,7 +814,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Rest.Azure.IPage{Microsoft.Azure.KeyVault.Models.KeyItem}}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{IPage{Microsoft.Azure.KeyVault.Models.KeyItem}}}
     content.vb: Function GetKeysWithHttpMessagesAsync(vaultBaseUrl As String, maxresults As Integer? = Nothing, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of IPage(Of KeyItem)))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.GetKeysWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.GetKeysWithHttpMessagesAsync(String, Nullable(Of Int32), Dictionary(Of String, List(Of String)), CancellationToken)
@@ -860,7 +860,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.BackupKeyResult}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.BackupKeyResult}}
     content.vb: Function BackupKeyWithHttpMessagesAsync(vaultBaseUrl As String, keyName As String, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of BackupKeyResult))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.BackupKeyWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.BackupKeyWithHttpMessagesAsync(String, String, Dictionary(Of String, List(Of String)), CancellationToken)
@@ -906,7 +906,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.KeyBundle}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.KeyBundle}}
     content.vb: Function RestoreKeyWithHttpMessagesAsync(vaultBaseUrl As String, keyBundleBackup As Byte(), customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of KeyBundle))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.RestoreKeyWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.RestoreKeyWithHttpMessagesAsync(String, Byte(), Dictionary(Of String, List(Of String)), CancellationToken)
@@ -961,7 +961,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.KeyOperationResult}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.KeyOperationResult}}
     content.vb: Function EncryptWithHttpMessagesAsync(vaultBaseUrl As String, keyName As String, keyVersion As String, algorithm As String, value As Byte(), customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of KeyOperationResult))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.EncryptWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.EncryptWithHttpMessagesAsync(String, String, String, String, Byte(), Dictionary(Of String, List(Of String)), CancellationToken)
@@ -1016,7 +1016,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.KeyOperationResult}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.KeyOperationResult}}
     content.vb: Function DecryptWithHttpMessagesAsync(vaultBaseUrl As String, keyName As String, keyVersion As String, algorithm As String, value As Byte(), customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of KeyOperationResult))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.DecryptWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.DecryptWithHttpMessagesAsync(String, String, String, String, Byte(), Dictionary(Of String, List(Of String)), CancellationToken)
@@ -1071,7 +1071,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.KeyOperationResult}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.KeyOperationResult}}
     content.vb: Function SignWithHttpMessagesAsync(vaultBaseUrl As String, keyName As String, keyVersion As String, algorithm As String, value As Byte(), customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of KeyOperationResult))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.SignWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.SignWithHttpMessagesAsync(String, String, String, String, Byte(), Dictionary(Of String, List(Of String)), CancellationToken)
@@ -1129,7 +1129,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.KeyVerifyResult}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.KeyVerifyResult}}
     content.vb: Function VerifyWithHttpMessagesAsync(vaultBaseUrl As String, keyName As String, keyVersion As String, algorithm As String, digest As Byte(), signature As Byte(), customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of KeyVerifyResult))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.VerifyWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.VerifyWithHttpMessagesAsync(String, String, String, String, Byte(), Byte(), Dictionary(Of String, List(Of String)), CancellationToken)
@@ -1184,7 +1184,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.KeyOperationResult}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.KeyOperationResult}}
     content.vb: Function WrapKeyWithHttpMessagesAsync(vaultBaseUrl As String, keyName As String, keyVersion As String, algorithm As String, value As Byte(), customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of KeyOperationResult))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.WrapKeyWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.WrapKeyWithHttpMessagesAsync(String, String, String, String, Byte(), Dictionary(Of String, List(Of String)), CancellationToken)
@@ -1239,7 +1239,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.KeyOperationResult}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.KeyOperationResult}}
     content.vb: Function UnwrapKeyWithHttpMessagesAsync(vaultBaseUrl As String, keyName As String, keyVersion As String, algorithm As String, value As Byte(), customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of KeyOperationResult))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.UnwrapKeyWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.UnwrapKeyWithHttpMessagesAsync(String, String, String, String, Byte(), Dictionary(Of String, List(Of String)), CancellationToken)
@@ -1297,7 +1297,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.SecretBundle}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.SecretBundle}}
     content.vb: Function SetSecretWithHttpMessagesAsync(vaultBaseUrl As String, secretName As String, value As String, tags As IDictionary(Of String, String) = Nothing, contentType As String = Nothing, secretAttributes As SecretAttributes = Nothing, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of SecretBundle))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.SetSecretWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.SetSecretWithHttpMessagesAsync(String, String, String, IDictionary(Of String, String), String, SecretAttributes, Dictionary(Of String, List(Of String)), CancellationToken)
@@ -1343,7 +1343,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.SecretBundle}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.SecretBundle}}
     content.vb: Function DeleteSecretWithHttpMessagesAsync(vaultBaseUrl As String, secretName As String, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of SecretBundle))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.DeleteSecretWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.DeleteSecretWithHttpMessagesAsync(String, String, Dictionary(Of String, List(Of String)), CancellationToken)
@@ -1401,7 +1401,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.SecretBundle}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.SecretBundle}}
     content.vb: Function UpdateSecretWithHttpMessagesAsync(vaultBaseUrl As String, secretName As String, secretVersion As String, contentType As String = Nothing, secretAttributes As SecretAttributes = Nothing, tags As IDictionary(Of String, String) = Nothing, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of SecretBundle))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.UpdateSecretWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.UpdateSecretWithHttpMessagesAsync(String, String, String, String, SecretAttributes, IDictionary(Of String, String), Dictionary(Of String, List(Of String)), CancellationToken)
@@ -1450,7 +1450,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.SecretBundle}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.SecretBundle}}
     content.vb: Function GetSecretWithHttpMessagesAsync(vaultBaseUrl As String, secretName As String, secretVersion As String, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of SecretBundle))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.GetSecretWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.GetSecretWithHttpMessagesAsync(String, String, String, Dictionary(Of String, List(Of String)), CancellationToken)
@@ -1496,7 +1496,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Rest.Azure.IPage{Microsoft.Azure.KeyVault.Models.SecretItem}}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{IPage{Microsoft.Azure.KeyVault.Models.SecretItem}}}
     content.vb: Function GetSecretsWithHttpMessagesAsync(vaultBaseUrl As String, maxresults As Integer? = Nothing, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of IPage(Of SecretItem)))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.GetSecretsWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.GetSecretsWithHttpMessagesAsync(String, Nullable(Of Int32), Dictionary(Of String, List(Of String)), CancellationToken)
@@ -1545,7 +1545,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Rest.Azure.IPage{Microsoft.Azure.KeyVault.Models.SecretItem}}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{IPage{Microsoft.Azure.KeyVault.Models.SecretItem}}}
     content.vb: Function GetSecretVersionsWithHttpMessagesAsync(vaultBaseUrl As String, secretName As String, maxresults As Integer? = Nothing, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of IPage(Of SecretItem)))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.GetSecretVersionsWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.GetSecretVersionsWithHttpMessagesAsync(String, String, Nullable(Of Int32), Dictionary(Of String, List(Of String)), CancellationToken)
@@ -1591,7 +1591,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Rest.Azure.IPage{Microsoft.Azure.KeyVault.Models.CertificateItem}}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{IPage{Microsoft.Azure.KeyVault.Models.CertificateItem}}}
     content.vb: Function GetCertificatesWithHttpMessagesAsync(vaultBaseUrl As String, maxresults As Integer? = Nothing, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of IPage(Of CertificateItem)))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.GetCertificatesWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.GetCertificatesWithHttpMessagesAsync(String, Nullable(Of Int32), Dictionary(Of String, List(Of String)), CancellationToken)
@@ -1637,7 +1637,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.CertificateBundle}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.CertificateBundle}}
     content.vb: Function DeleteCertificateWithHttpMessagesAsync(vaultBaseUrl As String, certificateName As String, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of CertificateBundle))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.DeleteCertificateWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.DeleteCertificateWithHttpMessagesAsync(String, String, Dictionary(Of String, List(Of String)), CancellationToken)
@@ -1683,7 +1683,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.Contacts}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.Contacts}}
     content.vb: Function SetCertificateContactsWithHttpMessagesAsync(vaultBaseUrl As String, contacts As Contacts, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of Contacts))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.SetCertificateContactsWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.SetCertificateContactsWithHttpMessagesAsync(String, Contacts, Dictionary(Of String, List(Of String)), CancellationToken)
@@ -1726,7 +1726,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.Contacts}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.Contacts}}
     content.vb: Function GetCertificateContactsWithHttpMessagesAsync(vaultBaseUrl As String, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of Contacts))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.GetCertificateContactsWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.GetCertificateContactsWithHttpMessagesAsync(String, Dictionary(Of String, List(Of String)), CancellationToken)
@@ -1769,7 +1769,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.Contacts}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.Contacts}}
     content.vb: Function DeleteCertificateContactsWithHttpMessagesAsync(vaultBaseUrl As String, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of Contacts))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.DeleteCertificateContactsWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.DeleteCertificateContactsWithHttpMessagesAsync(String, Dictionary(Of String, List(Of String)), CancellationToken)
@@ -1815,7 +1815,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Rest.Azure.IPage{Microsoft.Azure.KeyVault.Models.CertificateIssuerItem}}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{IPage{Microsoft.Azure.KeyVault.Models.CertificateIssuerItem}}}
     content.vb: Function GetCertificateIssuersWithHttpMessagesAsync(vaultBaseUrl As String, maxresults As Integer? = Nothing, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of IPage(Of CertificateIssuerItem)))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.GetCertificateIssuersWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.GetCertificateIssuersWithHttpMessagesAsync(String, Nullable(Of Int32), Dictionary(Of String, List(Of String)), CancellationToken)
@@ -1873,7 +1873,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.IssuerBundle}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.IssuerBundle}}
     content.vb: Function SetCertificateIssuerWithHttpMessagesAsync(vaultBaseUrl As String, issuerName As String, provider As String, credentials As IssuerCredentials = Nothing, organizationDetails As OrganizationDetails = Nothing, attributes As IssuerAttributes = Nothing, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of IssuerBundle))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.SetCertificateIssuerWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.SetCertificateIssuerWithHttpMessagesAsync(String, String, String, IssuerCredentials, OrganizationDetails, IssuerAttributes, Dictionary(Of String, List(Of String)), CancellationToken)
@@ -1931,7 +1931,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.IssuerBundle}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.IssuerBundle}}
     content.vb: Function UpdateCertificateIssuerWithHttpMessagesAsync(vaultBaseUrl As String, issuerName As String, provider As String = Nothing, credentials As IssuerCredentials = Nothing, organizationDetails As OrganizationDetails = Nothing, attributes As IssuerAttributes = Nothing, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of IssuerBundle))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.UpdateCertificateIssuerWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.UpdateCertificateIssuerWithHttpMessagesAsync(String, String, String, IssuerCredentials, OrganizationDetails, IssuerAttributes, Dictionary(Of String, List(Of String)), CancellationToken)
@@ -1977,7 +1977,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.IssuerBundle}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.IssuerBundle}}
     content.vb: Function GetCertificateIssuerWithHttpMessagesAsync(vaultBaseUrl As String, issuerName As String, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of IssuerBundle))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.GetCertificateIssuerWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.GetCertificateIssuerWithHttpMessagesAsync(String, String, Dictionary(Of String, List(Of String)), CancellationToken)
@@ -2023,7 +2023,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.IssuerBundle}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.IssuerBundle}}
     content.vb: Function DeleteCertificateIssuerWithHttpMessagesAsync(vaultBaseUrl As String, issuerName As String, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of IssuerBundle))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.DeleteCertificateIssuerWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.DeleteCertificateIssuerWithHttpMessagesAsync(String, String, Dictionary(Of String, List(Of String)), CancellationToken)
@@ -2078,7 +2078,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.CertificateOperation}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.CertificateOperation}}
     content.vb: Function CreateCertificateWithHttpMessagesAsync(vaultBaseUrl As String, certificateName As String, certificatePolicy As CertificatePolicy = Nothing, certificateAttributes As CertificateAttributes = Nothing, tags As IDictionary(Of String, String) = Nothing, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of CertificateOperation))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.CreateCertificateWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.CreateCertificateWithHttpMessagesAsync(String, String, CertificatePolicy, CertificateAttributes, IDictionary(Of String, String), Dictionary(Of String, List(Of String)), CancellationToken)
@@ -2139,7 +2139,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.CertificateBundle}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.CertificateBundle}}
     content.vb: Function ImportCertificateWithHttpMessagesAsync(vaultBaseUrl As String, certificateName As String, base64EncodedCertificate As String, password As String = Nothing, certificatePolicy As CertificatePolicy = Nothing, certificateAttributes As CertificateAttributes = Nothing, tags As IDictionary(Of String, String) = Nothing, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of CertificateBundle))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.ImportCertificateWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.ImportCertificateWithHttpMessagesAsync(String, String, String, String, CertificatePolicy, CertificateAttributes, IDictionary(Of String, String), Dictionary(Of String, List(Of String)), CancellationToken)
@@ -2188,7 +2188,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Rest.Azure.IPage{Microsoft.Azure.KeyVault.Models.CertificateItem}}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{IPage{Microsoft.Azure.KeyVault.Models.CertificateItem}}}
     content.vb: Function GetCertificateVersionsWithHttpMessagesAsync(vaultBaseUrl As String, certificateName As String, maxresults As Integer? = Nothing, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of IPage(Of CertificateItem)))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.GetCertificateVersionsWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.GetCertificateVersionsWithHttpMessagesAsync(String, String, Nullable(Of Int32), Dictionary(Of String, List(Of String)), CancellationToken)
@@ -2234,7 +2234,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.CertificatePolicy}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.CertificatePolicy}}
     content.vb: Function GetCertificatePolicyWithHttpMessagesAsync(vaultBaseUrl As String, certificateName As String, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of CertificatePolicy))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.GetCertificatePolicyWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.GetCertificatePolicyWithHttpMessagesAsync(String, String, Dictionary(Of String, List(Of String)), CancellationToken)
@@ -2283,7 +2283,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.CertificatePolicy}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.CertificatePolicy}}
     content.vb: Function UpdateCertificatePolicyWithHttpMessagesAsync(vaultBaseUrl As String, certificateName As String, certificatePolicy As CertificatePolicy, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of CertificatePolicy))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.UpdateCertificatePolicyWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.UpdateCertificatePolicyWithHttpMessagesAsync(String, String, CertificatePolicy, Dictionary(Of String, List(Of String)), CancellationToken)
@@ -2341,7 +2341,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.CertificateBundle}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.CertificateBundle}}
     content.vb: Function UpdateCertificateWithHttpMessagesAsync(vaultBaseUrl As String, certificateName As String, certificateVersion As String, certificatePolicy As CertificatePolicy = Nothing, certificateAttributes As CertificateAttributes = Nothing, tags As IDictionary(Of String, String) = Nothing, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of CertificateBundle))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.UpdateCertificateWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.UpdateCertificateWithHttpMessagesAsync(String, String, String, CertificatePolicy, CertificateAttributes, IDictionary(Of String, String), Dictionary(Of String, List(Of String)), CancellationToken)
@@ -2390,7 +2390,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.CertificateBundle}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.CertificateBundle}}
     content.vb: Function GetCertificateWithHttpMessagesAsync(vaultBaseUrl As String, certificateName As String, certificateVersion As String, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of CertificateBundle))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.GetCertificateWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.GetCertificateWithHttpMessagesAsync(String, String, String, Dictionary(Of String, List(Of String)), CancellationToken)
@@ -2439,7 +2439,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.CertificateOperation}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.CertificateOperation}}
     content.vb: Function UpdateCertificateOperationWithHttpMessagesAsync(vaultBaseUrl As String, certificateName As String, cancellationRequested As Boolean, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of CertificateOperation))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.UpdateCertificateOperationWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.UpdateCertificateOperationWithHttpMessagesAsync(String, String, Boolean, Dictionary(Of String, List(Of String)), CancellationToken)
@@ -2485,7 +2485,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.CertificateOperation}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.CertificateOperation}}
     content.vb: Function GetCertificateOperationWithHttpMessagesAsync(vaultBaseUrl As String, certificateName As String, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of CertificateOperation))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.GetCertificateOperationWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.GetCertificateOperationWithHttpMessagesAsync(String, String, Dictionary(Of String, List(Of String)), CancellationToken)
@@ -2531,7 +2531,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.CertificateOperation}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.CertificateOperation}}
     content.vb: Function DeleteCertificateOperationWithHttpMessagesAsync(vaultBaseUrl As String, certificateName As String, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of CertificateOperation))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.DeleteCertificateOperationWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.DeleteCertificateOperationWithHttpMessagesAsync(String, String, Dictionary(Of String, List(Of String)), CancellationToken)
@@ -2586,7 +2586,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.CertificateBundle}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.CertificateBundle}}
     content.vb: Function MergeCertificateWithHttpMessagesAsync(vaultBaseUrl As String, certificateName As String, x509Certificates As IList(Of Byte()), certificateAttributes As CertificateAttributes = Nothing, tags As IDictionary(Of String, String) = Nothing, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of CertificateBundle))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.MergeCertificateWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.MergeCertificateWithHttpMessagesAsync(String, String, IList(Of Byte()), CertificateAttributes, IDictionary(Of String, String), Dictionary(Of String, List(Of String)), CancellationToken)
@@ -2629,7 +2629,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Rest.Azure.IPage{Microsoft.Azure.KeyVault.Models.KeyItem}}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{IPage{Microsoft.Azure.KeyVault.Models.KeyItem}}}
     content.vb: Function GetKeyVersionsNextWithHttpMessagesAsync(nextPageLink As String, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of IPage(Of KeyItem)))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.GetKeyVersionsNextWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.GetKeyVersionsNextWithHttpMessagesAsync(String, Dictionary(Of String, List(Of String)), CancellationToken)
@@ -2672,7 +2672,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Rest.Azure.IPage{Microsoft.Azure.KeyVault.Models.KeyItem}}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{IPage{Microsoft.Azure.KeyVault.Models.KeyItem}}}
     content.vb: Function GetKeysNextWithHttpMessagesAsync(nextPageLink As String, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of IPage(Of KeyItem)))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.GetKeysNextWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.GetKeysNextWithHttpMessagesAsync(String, Dictionary(Of String, List(Of String)), CancellationToken)
@@ -2715,7 +2715,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Rest.Azure.IPage{Microsoft.Azure.KeyVault.Models.SecretItem}}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{IPage{Microsoft.Azure.KeyVault.Models.SecretItem}}}
     content.vb: Function GetSecretsNextWithHttpMessagesAsync(nextPageLink As String, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of IPage(Of SecretItem)))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.GetSecretsNextWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.GetSecretsNextWithHttpMessagesAsync(String, Dictionary(Of String, List(Of String)), CancellationToken)
@@ -2758,7 +2758,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Rest.Azure.IPage{Microsoft.Azure.KeyVault.Models.SecretItem}}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{IPage{Microsoft.Azure.KeyVault.Models.SecretItem}}}
     content.vb: Function GetSecretVersionsNextWithHttpMessagesAsync(nextPageLink As String, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of IPage(Of SecretItem)))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.GetSecretVersionsNextWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.GetSecretVersionsNextWithHttpMessagesAsync(String, Dictionary(Of String, List(Of String)), CancellationToken)
@@ -2801,7 +2801,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Rest.Azure.IPage{Microsoft.Azure.KeyVault.Models.CertificateItem}}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{IPage{Microsoft.Azure.KeyVault.Models.CertificateItem}}}
     content.vb: Function GetCertificatesNextWithHttpMessagesAsync(nextPageLink As String, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of IPage(Of CertificateItem)))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.GetCertificatesNextWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.GetCertificatesNextWithHttpMessagesAsync(String, Dictionary(Of String, List(Of String)), CancellationToken)
@@ -2844,7 +2844,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Rest.Azure.IPage{Microsoft.Azure.KeyVault.Models.CertificateIssuerItem}}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{IPage{Microsoft.Azure.KeyVault.Models.CertificateIssuerItem}}}
     content.vb: Function GetCertificateIssuersNextWithHttpMessagesAsync(nextPageLink As String, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of IPage(Of CertificateIssuerItem)))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.GetCertificateIssuersNextWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.GetCertificateIssuersNextWithHttpMessagesAsync(String, Dictionary(Of String, List(Of String)), CancellationToken)
@@ -2887,7 +2887,7 @@ items:
       type: System.Threading.CancellationToken
       description: "\nThe cancellation token.\n"
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Rest.Azure.IPage{Microsoft.Azure.KeyVault.Models.CertificateItem}}}
+      type: System.Threading.Tasks.Task{AzureOperationResponse{IPage{Microsoft.Azure.KeyVault.Models.CertificateItem}}}
     content.vb: Function GetCertificateVersionsNextWithHttpMessagesAsync(nextPageLink As String, customHeaders As Dictionary(Of String, List(Of String)) = Nothing, cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of IPage(Of CertificateItem)))
   overload: Microsoft.Azure.KeyVault.IKeyVaultClient.GetCertificateVersionsNextWithHttpMessagesAsync*
   nameWithType.vb: IKeyVaultClient.GetCertificateVersionsNextWithHttpMessagesAsync(String, Dictionary(Of String, List(Of String)), CancellationToken)
@@ -5262,18 +5262,18 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Azure.KeyVault.IKeyVaultClient.Microsoft.Azure.KeyVault.KeyVaultClientExtensions.ImportKeyAsync(System.String,System.String,Microsoft.Azure.KeyVault.WebKey.JsonWebKey,System.Nullable{System.Boolean},Microsoft.Azure.KeyVault.Models.KeyAttributes,System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken)
-  commentId: M:Microsoft.Azure.KeyVault.KeyVaultClientExtensions.ImportKeyAsync(Microsoft.Azure.KeyVault.IKeyVaultClient,System.String,System.String,Microsoft.Azure.KeyVault.WebKey.JsonWebKey,System.Nullable{System.Boolean},Microsoft.Azure.KeyVault.Models.KeyAttributes,System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken)
+- uid: Microsoft.Azure.KeyVault.IKeyVaultClient.Microsoft.Azure.KeyVault.KeyVaultClientExtensions.ImportKeyAsync(System.String,System.String,JsonWebKey,System.Nullable{System.Boolean},Microsoft.Azure.KeyVault.Models.KeyAttributes,System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken)
+  commentId: M:Microsoft.Azure.KeyVault.KeyVaultClientExtensions.ImportKeyAsync(Microsoft.Azure.KeyVault.IKeyVaultClient,System.String,System.String,JsonWebKey,System.Nullable{System.Boolean},Microsoft.Azure.KeyVault.Models.KeyAttributes,System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken)
   parent: Microsoft.Azure.KeyVault.KeyVaultClientExtensions
-  definition: Microsoft.Azure.KeyVault.KeyVaultClientExtensions.ImportKeyAsync(Microsoft.Azure.KeyVault.IKeyVaultClient,System.String,System.String,Microsoft.Azure.KeyVault.WebKey.JsonWebKey,System.Nullable{System.Boolean},Microsoft.Azure.KeyVault.Models.KeyAttributes,System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken)
+  definition: Microsoft.Azure.KeyVault.KeyVaultClientExtensions.ImportKeyAsync(Microsoft.Azure.KeyVault.IKeyVaultClient,System.String,System.String,JsonWebKey,System.Nullable{System.Boolean},Microsoft.Azure.KeyVault.Models.KeyAttributes,System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken)
   name: ImportKeyAsync(String, String, JsonWebKey, Nullable<Boolean>, KeyAttributes, IDictionary<String, String>, CancellationToken)
   nameWithType: KeyVaultClientExtensions.ImportKeyAsync(String, String, JsonWebKey, Nullable<Boolean>, KeyAttributes, IDictionary<String, String>, CancellationToken)
-  fullName: Microsoft.Azure.KeyVault.KeyVaultClientExtensions.ImportKeyAsync(System.String, System.String, Microsoft.Azure.KeyVault.WebKey.JsonWebKey, System.Nullable<System.Boolean>, Microsoft.Azure.KeyVault.Models.KeyAttributes, System.Collections.Generic.IDictionary<System.String, System.String>, System.Threading.CancellationToken)
+  fullName: Microsoft.Azure.KeyVault.KeyVaultClientExtensions.ImportKeyAsync(System.String, System.String, JsonWebKey, System.Nullable<System.Boolean>, Microsoft.Azure.KeyVault.Models.KeyAttributes, System.Collections.Generic.IDictionary<System.String, System.String>, System.Threading.CancellationToken)
   nameWithType.vb: KeyVaultClientExtensions.ImportKeyAsync(String, String, JsonWebKey, Nullable(Of Boolean), KeyAttributes, IDictionary(Of String, String), CancellationToken)
-  fullName.vb: Microsoft.Azure.KeyVault.KeyVaultClientExtensions.ImportKeyAsync(System.String, System.String, Microsoft.Azure.KeyVault.WebKey.JsonWebKey, System.Nullable(Of System.Boolean), Microsoft.Azure.KeyVault.Models.KeyAttributes, System.Collections.Generic.IDictionary(Of System.String, System.String), System.Threading.CancellationToken)
+  fullName.vb: Microsoft.Azure.KeyVault.KeyVaultClientExtensions.ImportKeyAsync(System.String, System.String, JsonWebKey, System.Nullable(Of System.Boolean), Microsoft.Azure.KeyVault.Models.KeyAttributes, System.Collections.Generic.IDictionary(Of System.String, System.String), System.Threading.CancellationToken)
   name.vb: ImportKeyAsync(String, String, JsonWebKey, Nullable(Of Boolean), KeyAttributes, IDictionary(Of String, String), CancellationToken)
   spec.csharp:
-  - uid: Microsoft.Azure.KeyVault.KeyVaultClientExtensions.ImportKeyAsync(System.String,System.String,Microsoft.Azure.KeyVault.WebKey.JsonWebKey,System.Nullable{System.Boolean},Microsoft.Azure.KeyVault.Models.KeyAttributes,System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken)
+  - uid: Microsoft.Azure.KeyVault.KeyVaultClientExtensions.ImportKeyAsync(System.String,System.String,JsonWebKey,System.Nullable{System.Boolean},Microsoft.Azure.KeyVault.Models.KeyAttributes,System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken)
     name: ImportKeyAsync
     nameWithType: KeyVaultClientExtensions.ImportKeyAsync
     fullName: Microsoft.Azure.KeyVault.KeyVaultClientExtensions.ImportKeyAsync
@@ -5296,10 +5296,11 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Microsoft.Azure.KeyVault.WebKey.JsonWebKey
+  - uid: JsonWebKey
     name: JsonWebKey
     nameWithType: JsonWebKey
-    fullName: Microsoft.Azure.KeyVault.WebKey.JsonWebKey
+    fullName: JsonWebKey
+    isExternal: true
   - name: ', '
     nameWithType: ', '
     fullName: ', '
@@ -5365,7 +5366,7 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.Azure.KeyVault.KeyVaultClientExtensions.ImportKeyAsync(System.String,System.String,Microsoft.Azure.KeyVault.WebKey.JsonWebKey,System.Nullable{System.Boolean},Microsoft.Azure.KeyVault.Models.KeyAttributes,System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken)
+  - uid: Microsoft.Azure.KeyVault.KeyVaultClientExtensions.ImportKeyAsync(System.String,System.String,JsonWebKey,System.Nullable{System.Boolean},Microsoft.Azure.KeyVault.Models.KeyAttributes,System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken)
     name: ImportKeyAsync
     nameWithType: KeyVaultClientExtensions.ImportKeyAsync
     fullName: Microsoft.Azure.KeyVault.KeyVaultClientExtensions.ImportKeyAsync
@@ -5388,10 +5389,11 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Microsoft.Azure.KeyVault.WebKey.JsonWebKey
+  - uid: JsonWebKey
     name: JsonWebKey
     nameWithType: JsonWebKey
-    fullName: Microsoft.Azure.KeyVault.WebKey.JsonWebKey
+    fullName: JsonWebKey
+    isExternal: true
   - name: ', '
     nameWithType: ', '
     fullName: ', '
@@ -12804,17 +12806,17 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Azure.KeyVault.KeyVaultClientExtensions.ImportKeyAsync(Microsoft.Azure.KeyVault.IKeyVaultClient,System.String,System.String,Microsoft.Azure.KeyVault.WebKey.JsonWebKey,System.Nullable{System.Boolean},Microsoft.Azure.KeyVault.Models.KeyAttributes,System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken)
-  commentId: M:Microsoft.Azure.KeyVault.KeyVaultClientExtensions.ImportKeyAsync(Microsoft.Azure.KeyVault.IKeyVaultClient,System.String,System.String,Microsoft.Azure.KeyVault.WebKey.JsonWebKey,System.Nullable{System.Boolean},Microsoft.Azure.KeyVault.Models.KeyAttributes,System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken)
+- uid: Microsoft.Azure.KeyVault.KeyVaultClientExtensions.ImportKeyAsync(Microsoft.Azure.KeyVault.IKeyVaultClient,System.String,System.String,JsonWebKey,System.Nullable{System.Boolean},Microsoft.Azure.KeyVault.Models.KeyAttributes,System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken)
+  commentId: M:Microsoft.Azure.KeyVault.KeyVaultClientExtensions.ImportKeyAsync(Microsoft.Azure.KeyVault.IKeyVaultClient,System.String,System.String,JsonWebKey,System.Nullable{System.Boolean},Microsoft.Azure.KeyVault.Models.KeyAttributes,System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken)
   isExternal: true
   name: ImportKeyAsync(IKeyVaultClient, String, String, JsonWebKey, Nullable<Boolean>, KeyAttributes, IDictionary<String, String>, CancellationToken)
   nameWithType: KeyVaultClientExtensions.ImportKeyAsync(IKeyVaultClient, String, String, JsonWebKey, Nullable<Boolean>, KeyAttributes, IDictionary<String, String>, CancellationToken)
-  fullName: Microsoft.Azure.KeyVault.KeyVaultClientExtensions.ImportKeyAsync(Microsoft.Azure.KeyVault.IKeyVaultClient, System.String, System.String, Microsoft.Azure.KeyVault.WebKey.JsonWebKey, System.Nullable<System.Boolean>, Microsoft.Azure.KeyVault.Models.KeyAttributes, System.Collections.Generic.IDictionary<System.String, System.String>, System.Threading.CancellationToken)
+  fullName: Microsoft.Azure.KeyVault.KeyVaultClientExtensions.ImportKeyAsync(Microsoft.Azure.KeyVault.IKeyVaultClient, System.String, System.String, JsonWebKey, System.Nullable<System.Boolean>, Microsoft.Azure.KeyVault.Models.KeyAttributes, System.Collections.Generic.IDictionary<System.String, System.String>, System.Threading.CancellationToken)
   nameWithType.vb: KeyVaultClientExtensions.ImportKeyAsync(IKeyVaultClient, String, String, JsonWebKey, Nullable(Of Boolean), KeyAttributes, IDictionary(Of String, String), CancellationToken)
-  fullName.vb: Microsoft.Azure.KeyVault.KeyVaultClientExtensions.ImportKeyAsync(Microsoft.Azure.KeyVault.IKeyVaultClient, System.String, System.String, Microsoft.Azure.KeyVault.WebKey.JsonWebKey, System.Nullable(Of System.Boolean), Microsoft.Azure.KeyVault.Models.KeyAttributes, System.Collections.Generic.IDictionary(Of System.String, System.String), System.Threading.CancellationToken)
+  fullName.vb: Microsoft.Azure.KeyVault.KeyVaultClientExtensions.ImportKeyAsync(Microsoft.Azure.KeyVault.IKeyVaultClient, System.String, System.String, JsonWebKey, System.Nullable(Of System.Boolean), Microsoft.Azure.KeyVault.Models.KeyAttributes, System.Collections.Generic.IDictionary(Of System.String, System.String), System.Threading.CancellationToken)
   name.vb: ImportKeyAsync(IKeyVaultClient, String, String, JsonWebKey, Nullable(Of Boolean), KeyAttributes, IDictionary(Of String, String), CancellationToken)
   spec.csharp:
-  - uid: Microsoft.Azure.KeyVault.KeyVaultClientExtensions.ImportKeyAsync(Microsoft.Azure.KeyVault.IKeyVaultClient,System.String,System.String,Microsoft.Azure.KeyVault.WebKey.JsonWebKey,System.Nullable{System.Boolean},Microsoft.Azure.KeyVault.Models.KeyAttributes,System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken)
+  - uid: Microsoft.Azure.KeyVault.KeyVaultClientExtensions.ImportKeyAsync(Microsoft.Azure.KeyVault.IKeyVaultClient,System.String,System.String,JsonWebKey,System.Nullable{System.Boolean},Microsoft.Azure.KeyVault.Models.KeyAttributes,System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken)
     name: ImportKeyAsync
     nameWithType: KeyVaultClientExtensions.ImportKeyAsync
     fullName: Microsoft.Azure.KeyVault.KeyVaultClientExtensions.ImportKeyAsync
@@ -12844,10 +12846,11 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Microsoft.Azure.KeyVault.WebKey.JsonWebKey
+  - uid: JsonWebKey
     name: JsonWebKey
     nameWithType: JsonWebKey
-    fullName: Microsoft.Azure.KeyVault.WebKey.JsonWebKey
+    fullName: JsonWebKey
+    isExternal: true
   - name: ', '
     nameWithType: ', '
     fullName: ', '
@@ -12913,7 +12916,7 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.Azure.KeyVault.KeyVaultClientExtensions.ImportKeyAsync(Microsoft.Azure.KeyVault.IKeyVaultClient,System.String,System.String,Microsoft.Azure.KeyVault.WebKey.JsonWebKey,System.Nullable{System.Boolean},Microsoft.Azure.KeyVault.Models.KeyAttributes,System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken)
+  - uid: Microsoft.Azure.KeyVault.KeyVaultClientExtensions.ImportKeyAsync(Microsoft.Azure.KeyVault.IKeyVaultClient,System.String,System.String,JsonWebKey,System.Nullable{System.Boolean},Microsoft.Azure.KeyVault.Models.KeyAttributes,System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken)
     name: ImportKeyAsync
     nameWithType: KeyVaultClientExtensions.ImportKeyAsync
     fullName: Microsoft.Azure.KeyVault.KeyVaultClientExtensions.ImportKeyAsync
@@ -12943,10 +12946,11 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Microsoft.Azure.KeyVault.WebKey.JsonWebKey
+  - uid: JsonWebKey
     name: JsonWebKey
     nameWithType: JsonWebKey
-    fullName: Microsoft.Azure.KeyVault.WebKey.JsonWebKey
+    fullName: JsonWebKey
+    isExternal: true
   - name: ', '
     nameWithType: ', '
     fullName: ', '
@@ -18460,15 +18464,15 @@ references:
   name: CancellationToken
   nameWithType: CancellationToken
   fullName: System.Threading.CancellationToken
-- uid: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{System.String}}
-  commentId: T:System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{System.String}}
+- uid: System.Threading.Tasks.Task{AzureOperationResponse{System.String}}
+  commentId: T:System.Threading.Tasks.Task{AzureOperationResponse{System.String}}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
   name: Task<AzureOperationResponse<String>>
   nameWithType: Task<AzureOperationResponse<String>>
-  fullName: System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<System.String>>
+  fullName: System.Threading.Tasks.Task<AzureOperationResponse<System.String>>
   nameWithType.vb: Task(Of AzureOperationResponse(Of String))
-  fullName.vb: System.Threading.Tasks.Task(Of Microsoft.Rest.Azure.AzureOperationResponse(Of System.String))
+  fullName.vb: System.Threading.Tasks.Task(Of AzureOperationResponse(Of System.String))
   name.vb: Task(Of AzureOperationResponse(Of String))
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
@@ -18479,10 +18483,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Microsoft.Rest.Azure.AzureOperationResponse`1
+  - uid: AzureOperationResponse`1
     name: AzureOperationResponse
     nameWithType: AzureOperationResponse
-    fullName: Microsoft.Rest.Azure.AzureOperationResponse
+    fullName: AzureOperationResponse
     isExternal: true
   - name: <
     nameWithType: <
@@ -18507,10 +18511,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Microsoft.Rest.Azure.AzureOperationResponse`1
+  - uid: AzureOperationResponse`1
     name: AzureOperationResponse
     nameWithType: AzureOperationResponse
-    fullName: Microsoft.Rest.Azure.AzureOperationResponse
+    fullName: AzureOperationResponse
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -18640,19 +18644,11 @@ references:
   name: SerializationSettings
   nameWithType: IKeyVaultClient.SerializationSettings
   fullName: Microsoft.Azure.KeyVault.IKeyVaultClient.SerializationSettings
-- uid: Newtonsoft.Json.JsonSerializerSettings
-  commentId: T:Newtonsoft.Json.JsonSerializerSettings
-  parent: Newtonsoft.Json
+- uid: JsonSerializerSettings
   isExternal: true
   name: JsonSerializerSettings
   nameWithType: JsonSerializerSettings
-  fullName: Newtonsoft.Json.JsonSerializerSettings
-- uid: Newtonsoft.Json
-  commentId: N:Newtonsoft.Json
-  isExternal: false
-  name: Newtonsoft.Json
-  nameWithType: Newtonsoft.Json
-  fullName: Newtonsoft.Json
+  fullName: JsonSerializerSettings
 - uid: Microsoft.Azure.KeyVault.IKeyVaultClient.DeserializationSettings*
   commentId: Overload:Microsoft.Azure.KeyVault.IKeyVaultClient.DeserializationSettings
   isExternal: false
@@ -18665,19 +18661,11 @@ references:
   name: Credentials
   nameWithType: IKeyVaultClient.Credentials
   fullName: Microsoft.Azure.KeyVault.IKeyVaultClient.Credentials
-- uid: Microsoft.Rest.ServiceClientCredentials
-  commentId: T:Microsoft.Rest.ServiceClientCredentials
-  parent: Microsoft.Rest
+- uid: ServiceClientCredentials
   isExternal: true
   name: ServiceClientCredentials
   nameWithType: ServiceClientCredentials
-  fullName: Microsoft.Rest.ServiceClientCredentials
-- uid: Microsoft.Rest
-  commentId: N:Microsoft.Rest
-  isExternal: false
-  name: Microsoft.Rest
-  nameWithType: Microsoft.Rest
-  fullName: Microsoft.Rest
+  fullName: ServiceClientCredentials
 - uid: Microsoft.Azure.KeyVault.IKeyVaultClient.ApiVersion*
   commentId: Overload:Microsoft.Azure.KeyVault.IKeyVaultClient.ApiVersion
   isExternal: false
@@ -18946,15 +18934,15 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.KeyBundle}}
-  commentId: T:System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.KeyBundle}}
+- uid: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.KeyBundle}}
+  commentId: T:System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.KeyBundle}}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
   name: Task<AzureOperationResponse<KeyBundle>>
   nameWithType: Task<AzureOperationResponse<KeyBundle>>
-  fullName: System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Azure.KeyVault.Models.KeyBundle>>
+  fullName: System.Threading.Tasks.Task<AzureOperationResponse<Microsoft.Azure.KeyVault.Models.KeyBundle>>
   nameWithType.vb: Task(Of AzureOperationResponse(Of KeyBundle))
-  fullName.vb: System.Threading.Tasks.Task(Of Microsoft.Rest.Azure.AzureOperationResponse(Of Microsoft.Azure.KeyVault.Models.KeyBundle))
+  fullName.vb: System.Threading.Tasks.Task(Of AzureOperationResponse(Of Microsoft.Azure.KeyVault.Models.KeyBundle))
   name.vb: Task(Of AzureOperationResponse(Of KeyBundle))
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
@@ -18965,10 +18953,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Microsoft.Rest.Azure.AzureOperationResponse`1
+  - uid: AzureOperationResponse`1
     name: AzureOperationResponse
     nameWithType: AzureOperationResponse
-    fullName: Microsoft.Rest.Azure.AzureOperationResponse
+    fullName: AzureOperationResponse
     isExternal: true
   - name: <
     nameWithType: <
@@ -18992,10 +18980,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Microsoft.Rest.Azure.AzureOperationResponse`1
+  - uid: AzureOperationResponse`1
     name: AzureOperationResponse
     nameWithType: AzureOperationResponse
-    fullName: Microsoft.Rest.Azure.AzureOperationResponse
+    fullName: AzureOperationResponse
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -19112,19 +19100,11 @@ references:
   name: ImportKeyWithHttpMessagesAsync
   nameWithType: IKeyVaultClient.ImportKeyWithHttpMessagesAsync
   fullName: Microsoft.Azure.KeyVault.IKeyVaultClient.ImportKeyWithHttpMessagesAsync
-- uid: Microsoft.Azure.KeyVault.WebKey.JsonWebKey
-  commentId: T:Microsoft.Azure.KeyVault.WebKey.JsonWebKey
-  parent: Microsoft.Azure.KeyVault.WebKey
-  isExternal: false
+- uid: JsonWebKey
+  isExternal: true
   name: JsonWebKey
   nameWithType: JsonWebKey
-  fullName: Microsoft.Azure.KeyVault.WebKey.JsonWebKey
-- uid: Microsoft.Azure.KeyVault.WebKey
-  commentId: N:Microsoft.Azure.KeyVault.WebKey
-  isExternal: false
-  name: Microsoft.Azure.KeyVault.WebKey
-  nameWithType: Microsoft.Azure.KeyVault.WebKey
-  fullName: Microsoft.Azure.KeyVault.WebKey
+  fullName: JsonWebKey
 - uid: Microsoft.Azure.KeyVault.IKeyVaultClient.DeleteKeyWithHttpMessagesAsync*
   commentId: Overload:Microsoft.Azure.KeyVault.IKeyVaultClient.DeleteKeyWithHttpMessagesAsync
   isExternal: false
@@ -19149,15 +19129,15 @@ references:
   name: GetKeyVersionsWithHttpMessagesAsync
   nameWithType: IKeyVaultClient.GetKeyVersionsWithHttpMessagesAsync
   fullName: Microsoft.Azure.KeyVault.IKeyVaultClient.GetKeyVersionsWithHttpMessagesAsync
-- uid: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Rest.Azure.IPage{Microsoft.Azure.KeyVault.Models.KeyItem}}}
-  commentId: T:System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Rest.Azure.IPage{Microsoft.Azure.KeyVault.Models.KeyItem}}}
+- uid: System.Threading.Tasks.Task{AzureOperationResponse{IPage{Microsoft.Azure.KeyVault.Models.KeyItem}}}
+  commentId: T:System.Threading.Tasks.Task{AzureOperationResponse{IPage{Microsoft.Azure.KeyVault.Models.KeyItem}}}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
   name: Task<AzureOperationResponse<IPage<KeyItem>>>
   nameWithType: Task<AzureOperationResponse<IPage<KeyItem>>>
-  fullName: System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Rest.Azure.IPage<Microsoft.Azure.KeyVault.Models.KeyItem>>>
+  fullName: System.Threading.Tasks.Task<AzureOperationResponse<IPage<Microsoft.Azure.KeyVault.Models.KeyItem>>>
   nameWithType.vb: Task(Of AzureOperationResponse(Of IPage(Of KeyItem)))
-  fullName.vb: System.Threading.Tasks.Task(Of Microsoft.Rest.Azure.AzureOperationResponse(Of Microsoft.Rest.Azure.IPage(Of Microsoft.Azure.KeyVault.Models.KeyItem)))
+  fullName.vb: System.Threading.Tasks.Task(Of AzureOperationResponse(Of IPage(Of Microsoft.Azure.KeyVault.Models.KeyItem)))
   name.vb: Task(Of AzureOperationResponse(Of IPage(Of KeyItem)))
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
@@ -19168,18 +19148,18 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Microsoft.Rest.Azure.AzureOperationResponse`1
+  - uid: AzureOperationResponse`1
     name: AzureOperationResponse
     nameWithType: AzureOperationResponse
-    fullName: Microsoft.Rest.Azure.AzureOperationResponse
+    fullName: AzureOperationResponse
     isExternal: true
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Microsoft.Rest.Azure.IPage`1
+  - uid: IPage`1
     name: IPage
     nameWithType: IPage
-    fullName: Microsoft.Rest.Azure.IPage
+    fullName: IPage
     isExternal: true
   - name: <
     nameWithType: <
@@ -19206,18 +19186,18 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Microsoft.Rest.Azure.AzureOperationResponse`1
+  - uid: AzureOperationResponse`1
     name: AzureOperationResponse
     nameWithType: AzureOperationResponse
-    fullName: Microsoft.Rest.Azure.AzureOperationResponse
+    fullName: AzureOperationResponse
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Microsoft.Rest.Azure.IPage`1
+  - uid: IPage`1
     name: IPage
     nameWithType: IPage
-    fullName: Microsoft.Rest.Azure.IPage
+    fullName: IPage
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -19247,15 +19227,15 @@ references:
   name: BackupKeyWithHttpMessagesAsync
   nameWithType: IKeyVaultClient.BackupKeyWithHttpMessagesAsync
   fullName: Microsoft.Azure.KeyVault.IKeyVaultClient.BackupKeyWithHttpMessagesAsync
-- uid: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.BackupKeyResult}}
-  commentId: T:System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.BackupKeyResult}}
+- uid: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.BackupKeyResult}}
+  commentId: T:System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.BackupKeyResult}}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
   name: Task<AzureOperationResponse<BackupKeyResult>>
   nameWithType: Task<AzureOperationResponse<BackupKeyResult>>
-  fullName: System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Azure.KeyVault.Models.BackupKeyResult>>
+  fullName: System.Threading.Tasks.Task<AzureOperationResponse<Microsoft.Azure.KeyVault.Models.BackupKeyResult>>
   nameWithType.vb: Task(Of AzureOperationResponse(Of BackupKeyResult))
-  fullName.vb: System.Threading.Tasks.Task(Of Microsoft.Rest.Azure.AzureOperationResponse(Of Microsoft.Azure.KeyVault.Models.BackupKeyResult))
+  fullName.vb: System.Threading.Tasks.Task(Of AzureOperationResponse(Of Microsoft.Azure.KeyVault.Models.BackupKeyResult))
   name.vb: Task(Of AzureOperationResponse(Of BackupKeyResult))
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
@@ -19266,10 +19246,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Microsoft.Rest.Azure.AzureOperationResponse`1
+  - uid: AzureOperationResponse`1
     name: AzureOperationResponse
     nameWithType: AzureOperationResponse
-    fullName: Microsoft.Rest.Azure.AzureOperationResponse
+    fullName: AzureOperationResponse
     isExternal: true
   - name: <
     nameWithType: <
@@ -19293,10 +19273,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Microsoft.Rest.Azure.AzureOperationResponse`1
+  - uid: AzureOperationResponse`1
     name: AzureOperationResponse
     nameWithType: AzureOperationResponse
-    fullName: Microsoft.Rest.Azure.AzureOperationResponse
+    fullName: AzureOperationResponse
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -19348,15 +19328,15 @@ references:
   name: EncryptWithHttpMessagesAsync
   nameWithType: IKeyVaultClient.EncryptWithHttpMessagesAsync
   fullName: Microsoft.Azure.KeyVault.IKeyVaultClient.EncryptWithHttpMessagesAsync
-- uid: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.KeyOperationResult}}
-  commentId: T:System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.KeyOperationResult}}
+- uid: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.KeyOperationResult}}
+  commentId: T:System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.KeyOperationResult}}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
   name: Task<AzureOperationResponse<KeyOperationResult>>
   nameWithType: Task<AzureOperationResponse<KeyOperationResult>>
-  fullName: System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Azure.KeyVault.Models.KeyOperationResult>>
+  fullName: System.Threading.Tasks.Task<AzureOperationResponse<Microsoft.Azure.KeyVault.Models.KeyOperationResult>>
   nameWithType.vb: Task(Of AzureOperationResponse(Of KeyOperationResult))
-  fullName.vb: System.Threading.Tasks.Task(Of Microsoft.Rest.Azure.AzureOperationResponse(Of Microsoft.Azure.KeyVault.Models.KeyOperationResult))
+  fullName.vb: System.Threading.Tasks.Task(Of AzureOperationResponse(Of Microsoft.Azure.KeyVault.Models.KeyOperationResult))
   name.vb: Task(Of AzureOperationResponse(Of KeyOperationResult))
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
@@ -19367,10 +19347,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Microsoft.Rest.Azure.AzureOperationResponse`1
+  - uid: AzureOperationResponse`1
     name: AzureOperationResponse
     nameWithType: AzureOperationResponse
-    fullName: Microsoft.Rest.Azure.AzureOperationResponse
+    fullName: AzureOperationResponse
     isExternal: true
   - name: <
     nameWithType: <
@@ -19394,10 +19374,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Microsoft.Rest.Azure.AzureOperationResponse`1
+  - uid: AzureOperationResponse`1
     name: AzureOperationResponse
     nameWithType: AzureOperationResponse
-    fullName: Microsoft.Rest.Azure.AzureOperationResponse
+    fullName: AzureOperationResponse
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -19430,15 +19410,15 @@ references:
   name: VerifyWithHttpMessagesAsync
   nameWithType: IKeyVaultClient.VerifyWithHttpMessagesAsync
   fullName: Microsoft.Azure.KeyVault.IKeyVaultClient.VerifyWithHttpMessagesAsync
-- uid: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.KeyVerifyResult}}
-  commentId: T:System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.KeyVerifyResult}}
+- uid: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.KeyVerifyResult}}
+  commentId: T:System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.KeyVerifyResult}}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
   name: Task<AzureOperationResponse<KeyVerifyResult>>
   nameWithType: Task<AzureOperationResponse<KeyVerifyResult>>
-  fullName: System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Azure.KeyVault.Models.KeyVerifyResult>>
+  fullName: System.Threading.Tasks.Task<AzureOperationResponse<Microsoft.Azure.KeyVault.Models.KeyVerifyResult>>
   nameWithType.vb: Task(Of AzureOperationResponse(Of KeyVerifyResult))
-  fullName.vb: System.Threading.Tasks.Task(Of Microsoft.Rest.Azure.AzureOperationResponse(Of Microsoft.Azure.KeyVault.Models.KeyVerifyResult))
+  fullName.vb: System.Threading.Tasks.Task(Of AzureOperationResponse(Of Microsoft.Azure.KeyVault.Models.KeyVerifyResult))
   name.vb: Task(Of AzureOperationResponse(Of KeyVerifyResult))
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
@@ -19449,10 +19429,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Microsoft.Rest.Azure.AzureOperationResponse`1
+  - uid: AzureOperationResponse`1
     name: AzureOperationResponse
     nameWithType: AzureOperationResponse
-    fullName: Microsoft.Rest.Azure.AzureOperationResponse
+    fullName: AzureOperationResponse
     isExternal: true
   - name: <
     nameWithType: <
@@ -19476,10 +19456,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Microsoft.Rest.Azure.AzureOperationResponse`1
+  - uid: AzureOperationResponse`1
     name: AzureOperationResponse
     nameWithType: AzureOperationResponse
-    fullName: Microsoft.Rest.Azure.AzureOperationResponse
+    fullName: AzureOperationResponse
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -19519,15 +19499,15 @@ references:
   name: SecretAttributes
   nameWithType: SecretAttributes
   fullName: Microsoft.Azure.KeyVault.Models.SecretAttributes
-- uid: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.SecretBundle}}
-  commentId: T:System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.SecretBundle}}
+- uid: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.SecretBundle}}
+  commentId: T:System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.SecretBundle}}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
   name: Task<AzureOperationResponse<SecretBundle>>
   nameWithType: Task<AzureOperationResponse<SecretBundle>>
-  fullName: System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Azure.KeyVault.Models.SecretBundle>>
+  fullName: System.Threading.Tasks.Task<AzureOperationResponse<Microsoft.Azure.KeyVault.Models.SecretBundle>>
   nameWithType.vb: Task(Of AzureOperationResponse(Of SecretBundle))
-  fullName.vb: System.Threading.Tasks.Task(Of Microsoft.Rest.Azure.AzureOperationResponse(Of Microsoft.Azure.KeyVault.Models.SecretBundle))
+  fullName.vb: System.Threading.Tasks.Task(Of AzureOperationResponse(Of Microsoft.Azure.KeyVault.Models.SecretBundle))
   name.vb: Task(Of AzureOperationResponse(Of SecretBundle))
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
@@ -19538,10 +19518,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Microsoft.Rest.Azure.AzureOperationResponse`1
+  - uid: AzureOperationResponse`1
     name: AzureOperationResponse
     nameWithType: AzureOperationResponse
-    fullName: Microsoft.Rest.Azure.AzureOperationResponse
+    fullName: AzureOperationResponse
     isExternal: true
   - name: <
     nameWithType: <
@@ -19565,10 +19545,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Microsoft.Rest.Azure.AzureOperationResponse`1
+  - uid: AzureOperationResponse`1
     name: AzureOperationResponse
     nameWithType: AzureOperationResponse
-    fullName: Microsoft.Rest.Azure.AzureOperationResponse
+    fullName: AzureOperationResponse
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -19607,15 +19587,15 @@ references:
   name: GetSecretsWithHttpMessagesAsync
   nameWithType: IKeyVaultClient.GetSecretsWithHttpMessagesAsync
   fullName: Microsoft.Azure.KeyVault.IKeyVaultClient.GetSecretsWithHttpMessagesAsync
-- uid: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Rest.Azure.IPage{Microsoft.Azure.KeyVault.Models.SecretItem}}}
-  commentId: T:System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Rest.Azure.IPage{Microsoft.Azure.KeyVault.Models.SecretItem}}}
+- uid: System.Threading.Tasks.Task{AzureOperationResponse{IPage{Microsoft.Azure.KeyVault.Models.SecretItem}}}
+  commentId: T:System.Threading.Tasks.Task{AzureOperationResponse{IPage{Microsoft.Azure.KeyVault.Models.SecretItem}}}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
   name: Task<AzureOperationResponse<IPage<SecretItem>>>
   nameWithType: Task<AzureOperationResponse<IPage<SecretItem>>>
-  fullName: System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Rest.Azure.IPage<Microsoft.Azure.KeyVault.Models.SecretItem>>>
+  fullName: System.Threading.Tasks.Task<AzureOperationResponse<IPage<Microsoft.Azure.KeyVault.Models.SecretItem>>>
   nameWithType.vb: Task(Of AzureOperationResponse(Of IPage(Of SecretItem)))
-  fullName.vb: System.Threading.Tasks.Task(Of Microsoft.Rest.Azure.AzureOperationResponse(Of Microsoft.Rest.Azure.IPage(Of Microsoft.Azure.KeyVault.Models.SecretItem)))
+  fullName.vb: System.Threading.Tasks.Task(Of AzureOperationResponse(Of IPage(Of Microsoft.Azure.KeyVault.Models.SecretItem)))
   name.vb: Task(Of AzureOperationResponse(Of IPage(Of SecretItem)))
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
@@ -19626,18 +19606,18 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Microsoft.Rest.Azure.AzureOperationResponse`1
+  - uid: AzureOperationResponse`1
     name: AzureOperationResponse
     nameWithType: AzureOperationResponse
-    fullName: Microsoft.Rest.Azure.AzureOperationResponse
+    fullName: AzureOperationResponse
     isExternal: true
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Microsoft.Rest.Azure.IPage`1
+  - uid: IPage`1
     name: IPage
     nameWithType: IPage
-    fullName: Microsoft.Rest.Azure.IPage
+    fullName: IPage
     isExternal: true
   - name: <
     nameWithType: <
@@ -19664,18 +19644,18 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Microsoft.Rest.Azure.AzureOperationResponse`1
+  - uid: AzureOperationResponse`1
     name: AzureOperationResponse
     nameWithType: AzureOperationResponse
-    fullName: Microsoft.Rest.Azure.AzureOperationResponse
+    fullName: AzureOperationResponse
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Microsoft.Rest.Azure.IPage`1
+  - uid: IPage`1
     name: IPage
     nameWithType: IPage
-    fullName: Microsoft.Rest.Azure.IPage
+    fullName: IPage
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -19705,15 +19685,15 @@ references:
   name: GetCertificatesWithHttpMessagesAsync
   nameWithType: IKeyVaultClient.GetCertificatesWithHttpMessagesAsync
   fullName: Microsoft.Azure.KeyVault.IKeyVaultClient.GetCertificatesWithHttpMessagesAsync
-- uid: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Rest.Azure.IPage{Microsoft.Azure.KeyVault.Models.CertificateItem}}}
-  commentId: T:System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Rest.Azure.IPage{Microsoft.Azure.KeyVault.Models.CertificateItem}}}
+- uid: System.Threading.Tasks.Task{AzureOperationResponse{IPage{Microsoft.Azure.KeyVault.Models.CertificateItem}}}
+  commentId: T:System.Threading.Tasks.Task{AzureOperationResponse{IPage{Microsoft.Azure.KeyVault.Models.CertificateItem}}}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
   name: Task<AzureOperationResponse<IPage<CertificateItem>>>
   nameWithType: Task<AzureOperationResponse<IPage<CertificateItem>>>
-  fullName: System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Rest.Azure.IPage<Microsoft.Azure.KeyVault.Models.CertificateItem>>>
+  fullName: System.Threading.Tasks.Task<AzureOperationResponse<IPage<Microsoft.Azure.KeyVault.Models.CertificateItem>>>
   nameWithType.vb: Task(Of AzureOperationResponse(Of IPage(Of CertificateItem)))
-  fullName.vb: System.Threading.Tasks.Task(Of Microsoft.Rest.Azure.AzureOperationResponse(Of Microsoft.Rest.Azure.IPage(Of Microsoft.Azure.KeyVault.Models.CertificateItem)))
+  fullName.vb: System.Threading.Tasks.Task(Of AzureOperationResponse(Of IPage(Of Microsoft.Azure.KeyVault.Models.CertificateItem)))
   name.vb: Task(Of AzureOperationResponse(Of IPage(Of CertificateItem)))
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
@@ -19724,18 +19704,18 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Microsoft.Rest.Azure.AzureOperationResponse`1
+  - uid: AzureOperationResponse`1
     name: AzureOperationResponse
     nameWithType: AzureOperationResponse
-    fullName: Microsoft.Rest.Azure.AzureOperationResponse
+    fullName: AzureOperationResponse
     isExternal: true
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Microsoft.Rest.Azure.IPage`1
+  - uid: IPage`1
     name: IPage
     nameWithType: IPage
-    fullName: Microsoft.Rest.Azure.IPage
+    fullName: IPage
     isExternal: true
   - name: <
     nameWithType: <
@@ -19762,18 +19742,18 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Microsoft.Rest.Azure.AzureOperationResponse`1
+  - uid: AzureOperationResponse`1
     name: AzureOperationResponse
     nameWithType: AzureOperationResponse
-    fullName: Microsoft.Rest.Azure.AzureOperationResponse
+    fullName: AzureOperationResponse
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Microsoft.Rest.Azure.IPage`1
+  - uid: IPage`1
     name: IPage
     nameWithType: IPage
-    fullName: Microsoft.Rest.Azure.IPage
+    fullName: IPage
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -19797,15 +19777,15 @@ references:
   name: DeleteCertificateWithHttpMessagesAsync
   nameWithType: IKeyVaultClient.DeleteCertificateWithHttpMessagesAsync
   fullName: Microsoft.Azure.KeyVault.IKeyVaultClient.DeleteCertificateWithHttpMessagesAsync
-- uid: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.CertificateBundle}}
-  commentId: T:System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.CertificateBundle}}
+- uid: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.CertificateBundle}}
+  commentId: T:System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.CertificateBundle}}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
   name: Task<AzureOperationResponse<CertificateBundle>>
   nameWithType: Task<AzureOperationResponse<CertificateBundle>>
-  fullName: System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Azure.KeyVault.Models.CertificateBundle>>
+  fullName: System.Threading.Tasks.Task<AzureOperationResponse<Microsoft.Azure.KeyVault.Models.CertificateBundle>>
   nameWithType.vb: Task(Of AzureOperationResponse(Of CertificateBundle))
-  fullName.vb: System.Threading.Tasks.Task(Of Microsoft.Rest.Azure.AzureOperationResponse(Of Microsoft.Azure.KeyVault.Models.CertificateBundle))
+  fullName.vb: System.Threading.Tasks.Task(Of AzureOperationResponse(Of Microsoft.Azure.KeyVault.Models.CertificateBundle))
   name.vb: Task(Of AzureOperationResponse(Of CertificateBundle))
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
@@ -19816,10 +19796,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Microsoft.Rest.Azure.AzureOperationResponse`1
+  - uid: AzureOperationResponse`1
     name: AzureOperationResponse
     nameWithType: AzureOperationResponse
-    fullName: Microsoft.Rest.Azure.AzureOperationResponse
+    fullName: AzureOperationResponse
     isExternal: true
   - name: <
     nameWithType: <
@@ -19843,10 +19823,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Microsoft.Rest.Azure.AzureOperationResponse`1
+  - uid: AzureOperationResponse`1
     name: AzureOperationResponse
     nameWithType: AzureOperationResponse
-    fullName: Microsoft.Rest.Azure.AzureOperationResponse
+    fullName: AzureOperationResponse
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -19874,15 +19854,15 @@ references:
   name: Contacts
   nameWithType: Contacts
   fullName: Microsoft.Azure.KeyVault.Models.Contacts
-- uid: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.Contacts}}
-  commentId: T:System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.Contacts}}
+- uid: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.Contacts}}
+  commentId: T:System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.Contacts}}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
   name: Task<AzureOperationResponse<Contacts>>
   nameWithType: Task<AzureOperationResponse<Contacts>>
-  fullName: System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Azure.KeyVault.Models.Contacts>>
+  fullName: System.Threading.Tasks.Task<AzureOperationResponse<Microsoft.Azure.KeyVault.Models.Contacts>>
   nameWithType.vb: Task(Of AzureOperationResponse(Of Contacts))
-  fullName.vb: System.Threading.Tasks.Task(Of Microsoft.Rest.Azure.AzureOperationResponse(Of Microsoft.Azure.KeyVault.Models.Contacts))
+  fullName.vb: System.Threading.Tasks.Task(Of AzureOperationResponse(Of Microsoft.Azure.KeyVault.Models.Contacts))
   name.vb: Task(Of AzureOperationResponse(Of Contacts))
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
@@ -19893,10 +19873,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Microsoft.Rest.Azure.AzureOperationResponse`1
+  - uid: AzureOperationResponse`1
     name: AzureOperationResponse
     nameWithType: AzureOperationResponse
-    fullName: Microsoft.Rest.Azure.AzureOperationResponse
+    fullName: AzureOperationResponse
     isExternal: true
   - name: <
     nameWithType: <
@@ -19920,10 +19900,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Microsoft.Rest.Azure.AzureOperationResponse`1
+  - uid: AzureOperationResponse`1
     name: AzureOperationResponse
     nameWithType: AzureOperationResponse
-    fullName: Microsoft.Rest.Azure.AzureOperationResponse
+    fullName: AzureOperationResponse
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -19956,15 +19936,15 @@ references:
   name: GetCertificateIssuersWithHttpMessagesAsync
   nameWithType: IKeyVaultClient.GetCertificateIssuersWithHttpMessagesAsync
   fullName: Microsoft.Azure.KeyVault.IKeyVaultClient.GetCertificateIssuersWithHttpMessagesAsync
-- uid: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Rest.Azure.IPage{Microsoft.Azure.KeyVault.Models.CertificateIssuerItem}}}
-  commentId: T:System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Rest.Azure.IPage{Microsoft.Azure.KeyVault.Models.CertificateIssuerItem}}}
+- uid: System.Threading.Tasks.Task{AzureOperationResponse{IPage{Microsoft.Azure.KeyVault.Models.CertificateIssuerItem}}}
+  commentId: T:System.Threading.Tasks.Task{AzureOperationResponse{IPage{Microsoft.Azure.KeyVault.Models.CertificateIssuerItem}}}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
   name: Task<AzureOperationResponse<IPage<CertificateIssuerItem>>>
   nameWithType: Task<AzureOperationResponse<IPage<CertificateIssuerItem>>>
-  fullName: System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Rest.Azure.IPage<Microsoft.Azure.KeyVault.Models.CertificateIssuerItem>>>
+  fullName: System.Threading.Tasks.Task<AzureOperationResponse<IPage<Microsoft.Azure.KeyVault.Models.CertificateIssuerItem>>>
   nameWithType.vb: Task(Of AzureOperationResponse(Of IPage(Of CertificateIssuerItem)))
-  fullName.vb: System.Threading.Tasks.Task(Of Microsoft.Rest.Azure.AzureOperationResponse(Of Microsoft.Rest.Azure.IPage(Of Microsoft.Azure.KeyVault.Models.CertificateIssuerItem)))
+  fullName.vb: System.Threading.Tasks.Task(Of AzureOperationResponse(Of IPage(Of Microsoft.Azure.KeyVault.Models.CertificateIssuerItem)))
   name.vb: Task(Of AzureOperationResponse(Of IPage(Of CertificateIssuerItem)))
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
@@ -19975,18 +19955,18 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Microsoft.Rest.Azure.AzureOperationResponse`1
+  - uid: AzureOperationResponse`1
     name: AzureOperationResponse
     nameWithType: AzureOperationResponse
-    fullName: Microsoft.Rest.Azure.AzureOperationResponse
+    fullName: AzureOperationResponse
     isExternal: true
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Microsoft.Rest.Azure.IPage`1
+  - uid: IPage`1
     name: IPage
     nameWithType: IPage
-    fullName: Microsoft.Rest.Azure.IPage
+    fullName: IPage
     isExternal: true
   - name: <
     nameWithType: <
@@ -20013,18 +19993,18 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Microsoft.Rest.Azure.AzureOperationResponse`1
+  - uid: AzureOperationResponse`1
     name: AzureOperationResponse
     nameWithType: AzureOperationResponse
-    fullName: Microsoft.Rest.Azure.AzureOperationResponse
+    fullName: AzureOperationResponse
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Microsoft.Rest.Azure.IPage`1
+  - uid: IPage`1
     name: IPage
     nameWithType: IPage
-    fullName: Microsoft.Rest.Azure.IPage
+    fullName: IPage
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -20069,15 +20049,15 @@ references:
   name: IssuerAttributes
   nameWithType: IssuerAttributes
   fullName: Microsoft.Azure.KeyVault.Models.IssuerAttributes
-- uid: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.IssuerBundle}}
-  commentId: T:System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.IssuerBundle}}
+- uid: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.IssuerBundle}}
+  commentId: T:System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.IssuerBundle}}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
   name: Task<AzureOperationResponse<IssuerBundle>>
   nameWithType: Task<AzureOperationResponse<IssuerBundle>>
-  fullName: System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Azure.KeyVault.Models.IssuerBundle>>
+  fullName: System.Threading.Tasks.Task<AzureOperationResponse<Microsoft.Azure.KeyVault.Models.IssuerBundle>>
   nameWithType.vb: Task(Of AzureOperationResponse(Of IssuerBundle))
-  fullName.vb: System.Threading.Tasks.Task(Of Microsoft.Rest.Azure.AzureOperationResponse(Of Microsoft.Azure.KeyVault.Models.IssuerBundle))
+  fullName.vb: System.Threading.Tasks.Task(Of AzureOperationResponse(Of Microsoft.Azure.KeyVault.Models.IssuerBundle))
   name.vb: Task(Of AzureOperationResponse(Of IssuerBundle))
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
@@ -20088,10 +20068,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Microsoft.Rest.Azure.AzureOperationResponse`1
+  - uid: AzureOperationResponse`1
     name: AzureOperationResponse
     nameWithType: AzureOperationResponse
-    fullName: Microsoft.Rest.Azure.AzureOperationResponse
+    fullName: AzureOperationResponse
     isExternal: true
   - name: <
     nameWithType: <
@@ -20115,10 +20095,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Microsoft.Rest.Azure.AzureOperationResponse`1
+  - uid: AzureOperationResponse`1
     name: AzureOperationResponse
     nameWithType: AzureOperationResponse
-    fullName: Microsoft.Rest.Azure.AzureOperationResponse
+    fullName: AzureOperationResponse
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -20171,15 +20151,15 @@ references:
   name: CertificateAttributes
   nameWithType: CertificateAttributes
   fullName: Microsoft.Azure.KeyVault.Models.CertificateAttributes
-- uid: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.CertificateOperation}}
-  commentId: T:System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.CertificateOperation}}
+- uid: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.CertificateOperation}}
+  commentId: T:System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.CertificateOperation}}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
   name: Task<AzureOperationResponse<CertificateOperation>>
   nameWithType: Task<AzureOperationResponse<CertificateOperation>>
-  fullName: System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Azure.KeyVault.Models.CertificateOperation>>
+  fullName: System.Threading.Tasks.Task<AzureOperationResponse<Microsoft.Azure.KeyVault.Models.CertificateOperation>>
   nameWithType.vb: Task(Of AzureOperationResponse(Of CertificateOperation))
-  fullName.vb: System.Threading.Tasks.Task(Of Microsoft.Rest.Azure.AzureOperationResponse(Of Microsoft.Azure.KeyVault.Models.CertificateOperation))
+  fullName.vb: System.Threading.Tasks.Task(Of AzureOperationResponse(Of Microsoft.Azure.KeyVault.Models.CertificateOperation))
   name.vb: Task(Of AzureOperationResponse(Of CertificateOperation))
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
@@ -20190,10 +20170,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Microsoft.Rest.Azure.AzureOperationResponse`1
+  - uid: AzureOperationResponse`1
     name: AzureOperationResponse
     nameWithType: AzureOperationResponse
-    fullName: Microsoft.Rest.Azure.AzureOperationResponse
+    fullName: AzureOperationResponse
     isExternal: true
   - name: <
     nameWithType: <
@@ -20217,10 +20197,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Microsoft.Rest.Azure.AzureOperationResponse`1
+  - uid: AzureOperationResponse`1
     name: AzureOperationResponse
     nameWithType: AzureOperationResponse
-    fullName: Microsoft.Rest.Azure.AzureOperationResponse
+    fullName: AzureOperationResponse
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -20253,15 +20233,15 @@ references:
   name: GetCertificatePolicyWithHttpMessagesAsync
   nameWithType: IKeyVaultClient.GetCertificatePolicyWithHttpMessagesAsync
   fullName: Microsoft.Azure.KeyVault.IKeyVaultClient.GetCertificatePolicyWithHttpMessagesAsync
-- uid: System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.CertificatePolicy}}
-  commentId: T:System.Threading.Tasks.Task{Microsoft.Rest.Azure.AzureOperationResponse{Microsoft.Azure.KeyVault.Models.CertificatePolicy}}
+- uid: System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.CertificatePolicy}}
+  commentId: T:System.Threading.Tasks.Task{AzureOperationResponse{Microsoft.Azure.KeyVault.Models.CertificatePolicy}}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
   name: Task<AzureOperationResponse<CertificatePolicy>>
   nameWithType: Task<AzureOperationResponse<CertificatePolicy>>
-  fullName: System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Azure.KeyVault.Models.CertificatePolicy>>
+  fullName: System.Threading.Tasks.Task<AzureOperationResponse<Microsoft.Azure.KeyVault.Models.CertificatePolicy>>
   nameWithType.vb: Task(Of AzureOperationResponse(Of CertificatePolicy))
-  fullName.vb: System.Threading.Tasks.Task(Of Microsoft.Rest.Azure.AzureOperationResponse(Of Microsoft.Azure.KeyVault.Models.CertificatePolicy))
+  fullName.vb: System.Threading.Tasks.Task(Of AzureOperationResponse(Of Microsoft.Azure.KeyVault.Models.CertificatePolicy))
   name.vb: Task(Of AzureOperationResponse(Of CertificatePolicy))
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
@@ -20272,10 +20252,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Microsoft.Rest.Azure.AzureOperationResponse`1
+  - uid: AzureOperationResponse`1
     name: AzureOperationResponse
     nameWithType: AzureOperationResponse
-    fullName: Microsoft.Rest.Azure.AzureOperationResponse
+    fullName: AzureOperationResponse
     isExternal: true
   - name: <
     nameWithType: <
@@ -20299,10 +20279,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Microsoft.Rest.Azure.AzureOperationResponse`1
+  - uid: AzureOperationResponse`1
     name: AzureOperationResponse
     nameWithType: AzureOperationResponse
-    fullName: Microsoft.Rest.Azure.AzureOperationResponse
+    fullName: AzureOperationResponse
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '

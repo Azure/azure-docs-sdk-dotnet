@@ -6,7 +6,7 @@ items:
   parent: Microsoft.Azure.Devices
   children:
   - Microsoft.Azure.Devices.JobClient.CancelJobAsync(System.String)
-  - Microsoft.Azure.Devices.JobClient.CancelJobAsync(System.String,System.Threading.CancellationToken)
+  - Microsoft.Azure.Devices.JobClient.CancelJobAsync(System.String,CancellationToken)
   - Microsoft.Azure.Devices.JobClient.CloseAsync
   - Microsoft.Azure.Devices.JobClient.CreateFromConnectionString(System.String)
   - Microsoft.Azure.Devices.JobClient.CreateQuery
@@ -16,12 +16,12 @@ items:
   - Microsoft.Azure.Devices.JobClient.Dispose
   - Microsoft.Azure.Devices.JobClient.Dispose(System.Boolean)
   - Microsoft.Azure.Devices.JobClient.GetJobAsync(System.String)
-  - Microsoft.Azure.Devices.JobClient.GetJobAsync(System.String,System.Threading.CancellationToken)
+  - Microsoft.Azure.Devices.JobClient.GetJobAsync(System.String,CancellationToken)
   - Microsoft.Azure.Devices.JobClient.OpenAsync
-  - Microsoft.Azure.Devices.JobClient.ScheduleDeviceMethodAsync(System.String,System.String,Microsoft.Azure.Devices.CloudToDeviceMethod,System.DateTime,System.Int64)
-  - Microsoft.Azure.Devices.JobClient.ScheduleDeviceMethodAsync(System.String,System.String,Microsoft.Azure.Devices.CloudToDeviceMethod,System.DateTime,System.Int64,System.Threading.CancellationToken)
-  - Microsoft.Azure.Devices.JobClient.ScheduleTwinUpdateAsync(System.String,System.String,Microsoft.Azure.Devices.Shared.Twin,System.DateTime,System.Int64)
-  - Microsoft.Azure.Devices.JobClient.ScheduleTwinUpdateAsync(System.String,System.String,Microsoft.Azure.Devices.Shared.Twin,System.DateTime,System.Int64,System.Threading.CancellationToken)
+  - Microsoft.Azure.Devices.JobClient.ScheduleDeviceMethodAsync(System.String,System.String,Microsoft.Azure.Devices.CloudToDeviceMethod,DateTime,System.Int64)
+  - Microsoft.Azure.Devices.JobClient.ScheduleDeviceMethodAsync(System.String,System.String,Microsoft.Azure.Devices.CloudToDeviceMethod,DateTime,System.Int64,CancellationToken)
+  - Microsoft.Azure.Devices.JobClient.ScheduleTwinUpdateAsync(System.String,System.String,Microsoft.Azure.Devices.Shared.Twin,DateTime,System.Int64)
+  - Microsoft.Azure.Devices.JobClient.ScheduleTwinUpdateAsync(System.String,System.String,Microsoft.Azure.Devices.Shared.Twin,DateTime,System.Int64,CancellationToken)
   langs:
   - csharp
   - vb
@@ -46,19 +46,9 @@ items:
     content: 'public abstract class JobClient : IDisposable'
     content.vb: >-
       Public MustInherit Class JobClient
-          Implements IDisposable
+          Inherits IDisposable
   inheritance:
   - System.Object
-  implements:
-  - System.IDisposable
-  inheritedMembers:
-  - System.Object.Equals(System.Object)
-  - System.Object.Equals(System.Object,System.Object)
-  - System.Object.GetHashCode
-  - System.Object.GetType
-  - System.Object.MemberwiseClone
-  - System.Object.ReferenceEquals(System.Object,System.Object)
-  - System.Object.ToString
   modifiers.csharp:
   - public
   - abstract
@@ -135,8 +125,6 @@ items:
     content: public void Dispose()
     content.vb: Public Sub Dispose
   overload: Microsoft.Azure.Devices.JobClient.Dispose*
-  implements:
-  - System.IDisposable.Dispose
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -206,7 +194,7 @@ items:
   syntax:
     content: public abstract Task OpenAsync()
     return:
-      type: System.Threading.Tasks.Task
+      type: Task
     content.vb: Public MustOverride Function OpenAsync As Task
   overload: Microsoft.Azure.Devices.JobClient.OpenAsync*
   modifiers.csharp:
@@ -242,7 +230,7 @@ items:
   syntax:
     content: public abstract Task CloseAsync()
     return:
-      type: System.Threading.Tasks.Task
+      type: Task
     content.vb: Public MustOverride Function CloseAsync As Task
   overload: Microsoft.Azure.Devices.JobClient.CloseAsync*
   modifiers.csharp:
@@ -282,7 +270,7 @@ items:
       type: System.String
       description: Id of the Job to retrieve
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Azure.Devices.JobResponse}
+      type: Task{Microsoft.Azure.Devices.JobResponse}
       description: The matching JobResponse object
     content.vb: Public MustOverride Function GetJobAsync(jobId As String) As Task(Of JobResponse)
   overload: Microsoft.Azure.Devices.JobClient.GetJobAsync*
@@ -292,16 +280,16 @@ items:
   modifiers.vb:
   - Public
   - MustOverride
-- uid: Microsoft.Azure.Devices.JobClient.GetJobAsync(System.String,System.Threading.CancellationToken)
-  commentId: M:Microsoft.Azure.Devices.JobClient.GetJobAsync(System.String,System.Threading.CancellationToken)
-  id: GetJobAsync(System.String,System.Threading.CancellationToken)
+- uid: Microsoft.Azure.Devices.JobClient.GetJobAsync(System.String,CancellationToken)
+  commentId: M:Microsoft.Azure.Devices.JobClient.GetJobAsync(System.String,CancellationToken)
+  id: GetJobAsync(System.String,CancellationToken)
   parent: Microsoft.Azure.Devices.JobClient
   langs:
   - csharp
   - vb
   name: GetJobAsync(String, CancellationToken)
   nameWithType: JobClient.GetJobAsync(String, CancellationToken)
-  fullName: Microsoft.Azure.Devices.JobClient.GetJobAsync(System.String, System.Threading.CancellationToken)
+  fullName: Microsoft.Azure.Devices.JobClient.GetJobAsync(System.String, CancellationToken)
   type: Method
   source:
     remote:
@@ -323,10 +311,10 @@ items:
       type: System.String
       description: Id of the job to retrieve
     - id: cancellationToken
-      type: System.Threading.CancellationToken
+      type: CancellationToken
       description: Task cancellation token
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Azure.Devices.JobResponse}
+      type: Task{Microsoft.Azure.Devices.JobResponse}
       description: The matching JobResponse object
     content.vb: Public MustOverride Function GetJobAsync(jobId As String, cancellationToken As CancellationToken) As Task(Of JobResponse)
   overload: Microsoft.Azure.Devices.JobClient.GetJobAsync*
@@ -545,7 +533,7 @@ items:
       type: System.String
       description: Id of the Job to cancel
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Azure.Devices.JobResponse}
+      type: Task{Microsoft.Azure.Devices.JobResponse}
     content.vb: Public MustOverride Function CancelJobAsync(jobId As String) As Task(Of JobResponse)
   overload: Microsoft.Azure.Devices.JobClient.CancelJobAsync*
   modifiers.csharp:
@@ -554,16 +542,16 @@ items:
   modifiers.vb:
   - Public
   - MustOverride
-- uid: Microsoft.Azure.Devices.JobClient.CancelJobAsync(System.String,System.Threading.CancellationToken)
-  commentId: M:Microsoft.Azure.Devices.JobClient.CancelJobAsync(System.String,System.Threading.CancellationToken)
-  id: CancelJobAsync(System.String,System.Threading.CancellationToken)
+- uid: Microsoft.Azure.Devices.JobClient.CancelJobAsync(System.String,CancellationToken)
+  commentId: M:Microsoft.Azure.Devices.JobClient.CancelJobAsync(System.String,CancellationToken)
+  id: CancelJobAsync(System.String,CancellationToken)
   parent: Microsoft.Azure.Devices.JobClient
   langs:
   - csharp
   - vb
   name: CancelJobAsync(String, CancellationToken)
   nameWithType: JobClient.CancelJobAsync(String, CancellationToken)
-  fullName: Microsoft.Azure.Devices.JobClient.CancelJobAsync(System.String, System.Threading.CancellationToken)
+  fullName: Microsoft.Azure.Devices.JobClient.CancelJobAsync(System.String, CancellationToken)
   type: Method
   source:
     remote:
@@ -585,10 +573,10 @@ items:
       type: System.String
       description: Id of the job to cancel
     - id: cancellationToken
-      type: System.Threading.CancellationToken
+      type: CancellationToken
       description: Task cancellation token
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Azure.Devices.JobResponse}
+      type: Task{Microsoft.Azure.Devices.JobResponse}
     content.vb: Public MustOverride Function CancelJobAsync(jobId As String, cancellationToken As CancellationToken) As Task(Of JobResponse)
   overload: Microsoft.Azure.Devices.JobClient.CancelJobAsync*
   modifiers.csharp:
@@ -597,16 +585,16 @@ items:
   modifiers.vb:
   - Public
   - MustOverride
-- uid: Microsoft.Azure.Devices.JobClient.ScheduleDeviceMethodAsync(System.String,System.String,Microsoft.Azure.Devices.CloudToDeviceMethod,System.DateTime,System.Int64)
-  commentId: M:Microsoft.Azure.Devices.JobClient.ScheduleDeviceMethodAsync(System.String,System.String,Microsoft.Azure.Devices.CloudToDeviceMethod,System.DateTime,System.Int64)
-  id: ScheduleDeviceMethodAsync(System.String,System.String,Microsoft.Azure.Devices.CloudToDeviceMethod,System.DateTime,System.Int64)
+- uid: Microsoft.Azure.Devices.JobClient.ScheduleDeviceMethodAsync(System.String,System.String,Microsoft.Azure.Devices.CloudToDeviceMethod,DateTime,System.Int64)
+  commentId: M:Microsoft.Azure.Devices.JobClient.ScheduleDeviceMethodAsync(System.String,System.String,Microsoft.Azure.Devices.CloudToDeviceMethod,DateTime,System.Int64)
+  id: ScheduleDeviceMethodAsync(System.String,System.String,Microsoft.Azure.Devices.CloudToDeviceMethod,DateTime,System.Int64)
   parent: Microsoft.Azure.Devices.JobClient
   langs:
   - csharp
   - vb
   name: ScheduleDeviceMethodAsync(String, String, CloudToDeviceMethod, DateTime, Int64)
   nameWithType: JobClient.ScheduleDeviceMethodAsync(String, String, CloudToDeviceMethod, DateTime, Int64)
-  fullName: Microsoft.Azure.Devices.JobClient.ScheduleDeviceMethodAsync(System.String, System.String, Microsoft.Azure.Devices.CloudToDeviceMethod, System.DateTime, System.Int64)
+  fullName: Microsoft.Azure.Devices.JobClient.ScheduleDeviceMethodAsync(System.String, System.String, Microsoft.Azure.Devices.CloudToDeviceMethod, DateTime, System.Int64)
   type: Method
   source:
     remote:
@@ -634,15 +622,15 @@ items:
       type: Microsoft.Azure.Devices.CloudToDeviceMethod
       description: Method call parameters
     - id: startTimeUtc
-      type: System.DateTime
+      type: DateTime
       description: Date time in Utc to start the job
     - id: maxExecutionTimeInSeconds
       type: System.Int64
       description: Max execution time in seconds, i.e., ttl duration the job can run
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Azure.Devices.JobResponse}
+      type: Task{Microsoft.Azure.Devices.JobResponse}
       description: A JobResponse object
-    content.vb: Public MustOverride Function ScheduleDeviceMethodAsync(jobId As String, queryCondition As String, cloudToDeviceMethod As CloudToDeviceMethod, startTimeUtc As Date, maxExecutionTimeInSeconds As Long) As Task(Of JobResponse)
+    content.vb: Public MustOverride Function ScheduleDeviceMethodAsync(jobId As String, queryCondition As String, cloudToDeviceMethod As CloudToDeviceMethod, startTimeUtc As DateTime, maxExecutionTimeInSeconds As Long) As Task(Of JobResponse)
   overload: Microsoft.Azure.Devices.JobClient.ScheduleDeviceMethodAsync*
   modifiers.csharp:
   - public
@@ -650,16 +638,16 @@ items:
   modifiers.vb:
   - Public
   - MustOverride
-- uid: Microsoft.Azure.Devices.JobClient.ScheduleDeviceMethodAsync(System.String,System.String,Microsoft.Azure.Devices.CloudToDeviceMethod,System.DateTime,System.Int64,System.Threading.CancellationToken)
-  commentId: M:Microsoft.Azure.Devices.JobClient.ScheduleDeviceMethodAsync(System.String,System.String,Microsoft.Azure.Devices.CloudToDeviceMethod,System.DateTime,System.Int64,System.Threading.CancellationToken)
-  id: ScheduleDeviceMethodAsync(System.String,System.String,Microsoft.Azure.Devices.CloudToDeviceMethod,System.DateTime,System.Int64,System.Threading.CancellationToken)
+- uid: Microsoft.Azure.Devices.JobClient.ScheduleDeviceMethodAsync(System.String,System.String,Microsoft.Azure.Devices.CloudToDeviceMethod,DateTime,System.Int64,CancellationToken)
+  commentId: M:Microsoft.Azure.Devices.JobClient.ScheduleDeviceMethodAsync(System.String,System.String,Microsoft.Azure.Devices.CloudToDeviceMethod,DateTime,System.Int64,CancellationToken)
+  id: ScheduleDeviceMethodAsync(System.String,System.String,Microsoft.Azure.Devices.CloudToDeviceMethod,DateTime,System.Int64,CancellationToken)
   parent: Microsoft.Azure.Devices.JobClient
   langs:
   - csharp
   - vb
   name: ScheduleDeviceMethodAsync(String, String, CloudToDeviceMethod, DateTime, Int64, CancellationToken)
   nameWithType: JobClient.ScheduleDeviceMethodAsync(String, String, CloudToDeviceMethod, DateTime, Int64, CancellationToken)
-  fullName: Microsoft.Azure.Devices.JobClient.ScheduleDeviceMethodAsync(System.String, System.String, Microsoft.Azure.Devices.CloudToDeviceMethod, System.DateTime, System.Int64, System.Threading.CancellationToken)
+  fullName: Microsoft.Azure.Devices.JobClient.ScheduleDeviceMethodAsync(System.String, System.String, Microsoft.Azure.Devices.CloudToDeviceMethod, DateTime, System.Int64, CancellationToken)
   type: Method
   source:
     remote:
@@ -687,18 +675,18 @@ items:
       type: Microsoft.Azure.Devices.CloudToDeviceMethod
       description: Method call parameters
     - id: startTimeUtc
-      type: System.DateTime
+      type: DateTime
       description: Date time in Utc to start the job
     - id: maxExecutionTimeInSeconds
       type: System.Int64
       description: Max execution time in seconds, i.e., ttl duration the job can run
     - id: cancellationToken
-      type: System.Threading.CancellationToken
+      type: CancellationToken
       description: Task cancellation token
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Azure.Devices.JobResponse}
+      type: Task{Microsoft.Azure.Devices.JobResponse}
       description: A JobResponse object
-    content.vb: Public MustOverride Function ScheduleDeviceMethodAsync(jobId As String, queryCondition As String, cloudToDeviceMethod As CloudToDeviceMethod, startTimeUtc As Date, maxExecutionTimeInSeconds As Long, cancellationToken As CancellationToken) As Task(Of JobResponse)
+    content.vb: Public MustOverride Function ScheduleDeviceMethodAsync(jobId As String, queryCondition As String, cloudToDeviceMethod As CloudToDeviceMethod, startTimeUtc As DateTime, maxExecutionTimeInSeconds As Long, cancellationToken As CancellationToken) As Task(Of JobResponse)
   overload: Microsoft.Azure.Devices.JobClient.ScheduleDeviceMethodAsync*
   modifiers.csharp:
   - public
@@ -706,16 +694,16 @@ items:
   modifiers.vb:
   - Public
   - MustOverride
-- uid: Microsoft.Azure.Devices.JobClient.ScheduleTwinUpdateAsync(System.String,System.String,Microsoft.Azure.Devices.Shared.Twin,System.DateTime,System.Int64)
-  commentId: M:Microsoft.Azure.Devices.JobClient.ScheduleTwinUpdateAsync(System.String,System.String,Microsoft.Azure.Devices.Shared.Twin,System.DateTime,System.Int64)
-  id: ScheduleTwinUpdateAsync(System.String,System.String,Microsoft.Azure.Devices.Shared.Twin,System.DateTime,System.Int64)
+- uid: Microsoft.Azure.Devices.JobClient.ScheduleTwinUpdateAsync(System.String,System.String,Microsoft.Azure.Devices.Shared.Twin,DateTime,System.Int64)
+  commentId: M:Microsoft.Azure.Devices.JobClient.ScheduleTwinUpdateAsync(System.String,System.String,Microsoft.Azure.Devices.Shared.Twin,DateTime,System.Int64)
+  id: ScheduleTwinUpdateAsync(System.String,System.String,Microsoft.Azure.Devices.Shared.Twin,DateTime,System.Int64)
   parent: Microsoft.Azure.Devices.JobClient
   langs:
   - csharp
   - vb
   name: ScheduleTwinUpdateAsync(String, String, Twin, DateTime, Int64)
   nameWithType: JobClient.ScheduleTwinUpdateAsync(String, String, Twin, DateTime, Int64)
-  fullName: Microsoft.Azure.Devices.JobClient.ScheduleTwinUpdateAsync(System.String, System.String, Microsoft.Azure.Devices.Shared.Twin, System.DateTime, System.Int64)
+  fullName: Microsoft.Azure.Devices.JobClient.ScheduleTwinUpdateAsync(System.String, System.String, Microsoft.Azure.Devices.Shared.Twin, DateTime, System.Int64)
   type: Method
   source:
     remote:
@@ -743,15 +731,15 @@ items:
       type: Microsoft.Azure.Devices.Shared.Twin
       description: Twin object to use for the update
     - id: startTimeUtc
-      type: System.DateTime
+      type: DateTime
       description: Date time in Utc to start the job
     - id: maxExecutionTimeInSeconds
       type: System.Int64
       description: Max execution time in seconds, i.e., ttl duration the job can run
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Azure.Devices.JobResponse}
+      type: Task{Microsoft.Azure.Devices.JobResponse}
       description: A JobResponse object
-    content.vb: Public MustOverride Function ScheduleTwinUpdateAsync(jobId As String, queryCondition As String, twin As Twin, startTimeUtc As Date, maxExecutionTimeInSeconds As Long) As Task(Of JobResponse)
+    content.vb: Public MustOverride Function ScheduleTwinUpdateAsync(jobId As String, queryCondition As String, twin As Twin, startTimeUtc As DateTime, maxExecutionTimeInSeconds As Long) As Task(Of JobResponse)
   overload: Microsoft.Azure.Devices.JobClient.ScheduleTwinUpdateAsync*
   modifiers.csharp:
   - public
@@ -759,16 +747,16 @@ items:
   modifiers.vb:
   - Public
   - MustOverride
-- uid: Microsoft.Azure.Devices.JobClient.ScheduleTwinUpdateAsync(System.String,System.String,Microsoft.Azure.Devices.Shared.Twin,System.DateTime,System.Int64,System.Threading.CancellationToken)
-  commentId: M:Microsoft.Azure.Devices.JobClient.ScheduleTwinUpdateAsync(System.String,System.String,Microsoft.Azure.Devices.Shared.Twin,System.DateTime,System.Int64,System.Threading.CancellationToken)
-  id: ScheduleTwinUpdateAsync(System.String,System.String,Microsoft.Azure.Devices.Shared.Twin,System.DateTime,System.Int64,System.Threading.CancellationToken)
+- uid: Microsoft.Azure.Devices.JobClient.ScheduleTwinUpdateAsync(System.String,System.String,Microsoft.Azure.Devices.Shared.Twin,DateTime,System.Int64,CancellationToken)
+  commentId: M:Microsoft.Azure.Devices.JobClient.ScheduleTwinUpdateAsync(System.String,System.String,Microsoft.Azure.Devices.Shared.Twin,DateTime,System.Int64,CancellationToken)
+  id: ScheduleTwinUpdateAsync(System.String,System.String,Microsoft.Azure.Devices.Shared.Twin,DateTime,System.Int64,CancellationToken)
   parent: Microsoft.Azure.Devices.JobClient
   langs:
   - csharp
   - vb
   name: ScheduleTwinUpdateAsync(String, String, Twin, DateTime, Int64, CancellationToken)
   nameWithType: JobClient.ScheduleTwinUpdateAsync(String, String, Twin, DateTime, Int64, CancellationToken)
-  fullName: Microsoft.Azure.Devices.JobClient.ScheduleTwinUpdateAsync(System.String, System.String, Microsoft.Azure.Devices.Shared.Twin, System.DateTime, System.Int64, System.Threading.CancellationToken)
+  fullName: Microsoft.Azure.Devices.JobClient.ScheduleTwinUpdateAsync(System.String, System.String, Microsoft.Azure.Devices.Shared.Twin, DateTime, System.Int64, CancellationToken)
   type: Method
   source:
     remote:
@@ -796,18 +784,18 @@ items:
       type: Microsoft.Azure.Devices.Shared.Twin
       description: Twin object to use for the update
     - id: startTimeUtc
-      type: System.DateTime
+      type: DateTime
       description: Date time in Utc to start the job
     - id: maxExecutionTimeInSeconds
       type: System.Int64
       description: Max execution time in seconds, i.e., ttl duration the job can run
     - id: cancellationToken
-      type: System.Threading.CancellationToken
+      type: CancellationToken
       description: Task cancellation token
     return:
-      type: System.Threading.Tasks.Task{Microsoft.Azure.Devices.JobResponse}
+      type: Task{Microsoft.Azure.Devices.JobResponse}
       description: A JobResponse object
-    content.vb: Public MustOverride Function ScheduleTwinUpdateAsync(jobId As String, queryCondition As String, twin As Twin, startTimeUtc As Date, maxExecutionTimeInSeconds As Long, cancellationToken As CancellationToken) As Task(Of JobResponse)
+    content.vb: Public MustOverride Function ScheduleTwinUpdateAsync(jobId As String, queryCondition As String, twin As Twin, startTimeUtc As DateTime, maxExecutionTimeInSeconds As Long, cancellationToken As CancellationToken) As Task(Of JobResponse)
   overload: Microsoft.Azure.Devices.JobClient.ScheduleTwinUpdateAsync*
   modifiers.csharp:
   - public
@@ -829,292 +817,6 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: System.IDisposable
-  commentId: T:System.IDisposable
-  parent: System
-  isExternal: true
-  name: IDisposable
-  nameWithType: IDisposable
-  fullName: System.IDisposable
-- uid: System.Object.Equals(System.Object)
-  commentId: M:System.Object.Equals(System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object,System.Object)
-  commentId: M:System.Object.Equals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetHashCode
-  commentId: M:System.Object.GetHashCode
-  parent: System.Object
-  isExternal: true
-  name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
-  spec.csharp:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetType
-  commentId: M:System.Object.GetType
-  parent: System.Object
-  isExternal: true
-  name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
-  spec.csharp:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.MemberwiseClone
-  commentId: M:System.Object.MemberwiseClone
-  parent: System.Object
-  isExternal: true
-  name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
-  spec.csharp:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ReferenceEquals(System.Object,System.Object)
-  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ToString
-  commentId: M:System.Object.ToString
-  parent: System.Object
-  isExternal: true
-  name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
-  spec.csharp:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: false
@@ -1147,37 +849,6 @@ references:
   name: Dispose
   nameWithType: JobClient.Dispose
   fullName: Microsoft.Azure.Devices.JobClient.Dispose
-- uid: System.IDisposable.Dispose
-  commentId: M:System.IDisposable.Dispose
-  parent: System.IDisposable
-  isExternal: true
-  name: Dispose()
-  nameWithType: IDisposable.Dispose()
-  fullName: System.IDisposable.Dispose()
-  spec.csharp:
-  - uid: System.IDisposable.Dispose
-    name: Dispose
-    nameWithType: IDisposable.Dispose
-    fullName: System.IDisposable.Dispose
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.IDisposable.Dispose
-    name: Dispose
-    nameWithType: IDisposable.Dispose
-    fullName: System.IDisposable.Dispose
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Boolean
   commentId: T:System.Boolean
   parent: System
@@ -1191,19 +862,11 @@ references:
   name: OpenAsync
   nameWithType: JobClient.OpenAsync
   fullName: Microsoft.Azure.Devices.JobClient.OpenAsync
-- uid: System.Threading.Tasks.Task
-  commentId: T:System.Threading.Tasks.Task
-  parent: System.Threading.Tasks
+- uid: Task
   isExternal: true
   name: Task
   nameWithType: Task
-  fullName: System.Threading.Tasks.Task
-- uid: System.Threading.Tasks
-  commentId: N:System.Threading.Tasks
-  isExternal: false
-  name: System.Threading.Tasks
-  nameWithType: System.Threading.Tasks
-  fullName: System.Threading.Tasks
+  fullName: Task
 - uid: Microsoft.Azure.Devices.JobClient.CloseAsync*
   commentId: Overload:Microsoft.Azure.Devices.JobClient.CloseAsync
   isExternal: false
@@ -1216,21 +879,20 @@ references:
   name: GetJobAsync
   nameWithType: JobClient.GetJobAsync
   fullName: Microsoft.Azure.Devices.JobClient.GetJobAsync
-- uid: System.Threading.Tasks.Task{Microsoft.Azure.Devices.JobResponse}
-  commentId: T:System.Threading.Tasks.Task{Microsoft.Azure.Devices.JobResponse}
-  parent: System.Threading.Tasks
-  definition: System.Threading.Tasks.Task`1
+- uid: Task{Microsoft.Azure.Devices.JobResponse}
+  commentId: '!:Task{Microsoft.Azure.Devices.JobResponse}'
+  definition: Task`1
   name: Task<JobResponse>
   nameWithType: Task<JobResponse>
-  fullName: System.Threading.Tasks.Task<Microsoft.Azure.Devices.JobResponse>
+  fullName: Task<Microsoft.Azure.Devices.JobResponse>
   nameWithType.vb: Task(Of JobResponse)
-  fullName.vb: System.Threading.Tasks.Task(Of Microsoft.Azure.Devices.JobResponse)
+  fullName.vb: Task(Of Microsoft.Azure.Devices.JobResponse)
   name.vb: Task(Of JobResponse)
   spec.csharp:
-  - uid: System.Threading.Tasks.Task`1
+  - uid: Task`1
     name: Task
     nameWithType: Task
-    fullName: System.Threading.Tasks.Task
+    fullName: Task
     isExternal: true
   - name: <
     nameWithType: <
@@ -1243,10 +905,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Threading.Tasks.Task`1
+  - uid: Task`1
     name: Task
     nameWithType: Task
-    fullName: System.Threading.Tasks.Task
+    fullName: Task
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -1258,58 +920,49 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Threading.Tasks.Task`1
-  commentId: T:System.Threading.Tasks.Task`1
+- uid: Task`1
   isExternal: true
-  name: Task<TResult>
-  nameWithType: Task<TResult>
-  fullName: System.Threading.Tasks.Task<TResult>
-  nameWithType.vb: Task(Of TResult)
-  fullName.vb: System.Threading.Tasks.Task(Of TResult)
-  name.vb: Task(Of TResult)
+  name: Task<>
+  nameWithType: Task<>
+  fullName: Task<>
+  nameWithType.vb: Task(Of )
+  fullName.vb: Task(Of )
+  name.vb: Task(Of )
   spec.csharp:
-  - uid: System.Threading.Tasks.Task`1
+  - uid: Task`1
     name: Task
     nameWithType: Task
-    fullName: System.Threading.Tasks.Task
+    fullName: Task
     isExternal: true
   - name: <
     nameWithType: <
     fullName: <
-  - name: TResult
-    nameWithType: TResult
-    fullName: TResult
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Threading.Tasks.Task`1
+  - uid: Task`1
     name: Task
     nameWithType: Task
-    fullName: System.Threading.Tasks.Task
+    fullName: Task
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: TResult
-    nameWithType: TResult
-    fullName: TResult
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Threading.CancellationToken
-  commentId: T:System.Threading.CancellationToken
-  parent: System.Threading
+- uid: CancellationToken
   isExternal: true
   name: CancellationToken
   nameWithType: CancellationToken
-  fullName: System.Threading.CancellationToken
-- uid: System.Threading
-  commentId: N:System.Threading
-  isExternal: false
-  name: System.Threading
-  nameWithType: System.Threading
-  fullName: System.Threading
+  fullName: CancellationToken
 - uid: Microsoft.Azure.Devices.JobClient.CreateQuery*
   commentId: Overload:Microsoft.Azure.Devices.JobClient.CreateQuery
   isExternal: false
@@ -1324,7 +977,7 @@ references:
   nameWithType: IQuery
   fullName: Microsoft.Azure.Devices.IQuery
 - uid: System.Nullable{System.Int32}
-  commentId: T:System.Nullable{System.Int32}
+  commentId: '!:System.Nullable{System.Int32}'
   parent: System
   definition: System.Nullable`1
   name: Nullable<Int32>
@@ -1407,7 +1060,7 @@ references:
     nameWithType: )
     fullName: )
 - uid: System.Nullable{Microsoft.Azure.Devices.JobType}
-  commentId: T:System.Nullable{Microsoft.Azure.Devices.JobType}
+  commentId: '!:System.Nullable{Microsoft.Azure.Devices.JobType}'
   parent: System
   definition: System.Nullable`1
   name: Nullable<JobType>
@@ -1449,7 +1102,7 @@ references:
     nameWithType: )
     fullName: )
 - uid: System.Nullable{Microsoft.Azure.Devices.JobStatus}
-  commentId: T:System.Nullable{Microsoft.Azure.Devices.JobStatus}
+  commentId: '!:System.Nullable{Microsoft.Azure.Devices.JobStatus}'
   parent: System
   definition: System.Nullable`1
   name: Nullable<JobStatus>
@@ -1509,13 +1162,11 @@ references:
   name: CloudToDeviceMethod
   nameWithType: CloudToDeviceMethod
   fullName: Microsoft.Azure.Devices.CloudToDeviceMethod
-- uid: System.DateTime
-  commentId: T:System.DateTime
-  parent: System
+- uid: DateTime
   isExternal: true
   name: DateTime
   nameWithType: DateTime
-  fullName: System.DateTime
+  fullName: DateTime
 - uid: System.Int64
   commentId: T:System.Int64
   parent: System
