@@ -1,3 +1,5 @@
+"use strict";
+
 let glob = require("glob");
 let path = require("path");
 let exec = require("child-process-promise").exec;
