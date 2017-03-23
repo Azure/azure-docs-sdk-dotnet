@@ -11,6 +11,7 @@ items:
   - Microsoft.Azure.EventHubs.Processor.ICheckpointManager.DeleteCheckpointAsync(System.String)
   - Microsoft.Azure.EventHubs.Processor.ICheckpointManager.GetCheckpointAsync(System.String)
   - Microsoft.Azure.EventHubs.Processor.ICheckpointManager.UpdateCheckpointAsync(Microsoft.Azure.EventHubs.Processor.Checkpoint)
+  - Microsoft.Azure.EventHubs.Processor.ICheckpointManager.UpdateCheckpointAsync(Microsoft.Azure.EventHubs.Processor.Lease,Microsoft.Azure.EventHubs.Processor.Checkpoint)
   langs:
   - csharp
   - vb
@@ -137,41 +138,6 @@ items:
       description: Checkpoint info for the given partition, or null if none has been previously stored.
     content.vb: Function GetCheckpointAsync(partitionId As String) As Task(Of Checkpoint)
   overload: Microsoft.Azure.EventHubs.Processor.ICheckpointManager.GetCheckpointAsync*
-- uid: Microsoft.Azure.EventHubs.Processor.ICheckpointManager.CreateCheckpointIfNotExistsAsync(System.String)
-  commentId: M:Microsoft.Azure.EventHubs.Processor.ICheckpointManager.CreateCheckpointIfNotExistsAsync(System.String)
-  id: CreateCheckpointIfNotExistsAsync(System.String)
-  parent: Microsoft.Azure.EventHubs.Processor.ICheckpointManager
-  langs:
-  - csharp
-  - vb
-  name: CreateCheckpointIfNotExistsAsync(String)
-  nameWithType: ICheckpointManager.CreateCheckpointIfNotExistsAsync(String)
-  fullName: Microsoft.Azure.EventHubs.Processor.ICheckpointManager.CreateCheckpointIfNotExistsAsync(System.String)
-  type: Method
-  source:
-    remote:
-      path: src/Microsoft.Azure.EventHubs.Processor/ICheckpointManager.cs
-      branch: master
-      repo: https://github.com/Azure/azure-event-hubs-dotnet
-    id: CreateCheckpointIfNotExistsAsync
-    path: src/azure-eventhub/src/Microsoft.Azure.EventHubs.Processor/ICheckpointManager.cs
-    startLine: 46
-  assemblies:
-  - Microsoft.Azure.EventHubs.Processor
-  namespace: Microsoft.Azure.EventHubs.Processor
-  summary: "\nCreate the checkpoint for the given partition if it doesn't exist. Do nothing if it does exist.\nThe offset/sequenceNumber for a freshly-created checkpoint should be set to StartOfStream/0.\n"
-  example: []
-  syntax:
-    content: Task<Checkpoint> CreateCheckpointIfNotExistsAsync(string partitionId)
-    parameters:
-    - id: partitionId
-      type: System.String
-      description: Id of partition to create the checkpoint for.
-    return:
-      type: Task{Microsoft.Azure.EventHubs.Processor.Checkpoint}
-      description: The checkpoint for the given partition, whether newly created or already existing.
-    content.vb: Function CreateCheckpointIfNotExistsAsync(partitionId As String) As Task(Of Checkpoint)
-  overload: Microsoft.Azure.EventHubs.Processor.ICheckpointManager.CreateCheckpointIfNotExistsAsync*
 - uid: Microsoft.Azure.EventHubs.Processor.ICheckpointManager.UpdateCheckpointAsync(Microsoft.Azure.EventHubs.Processor.Checkpoint)
   commentId: M:Microsoft.Azure.EventHubs.Processor.ICheckpointManager.UpdateCheckpointAsync(Microsoft.Azure.EventHubs.Processor.Checkpoint)
   id: UpdateCheckpointAsync(Microsoft.Azure.EventHubs.Processor.Checkpoint)
@@ -190,21 +156,90 @@ items:
       repo: https://github.com/Azure/azure-event-hubs-dotnet
     id: UpdateCheckpointAsync
     path: src/azure-eventhub/src/Microsoft.Azure.EventHubs.Processor/ICheckpointManager.cs
-    startLine: 52
+    startLine: 40
+  assemblies:
+  - Microsoft.Azure.EventHubs.Processor
+  namespace: Microsoft.Azure.EventHubs.Processor
+  syntax:
+    content: Task UpdateCheckpointAsync(Checkpoint checkpoint)
+    parameters:
+    - id: checkpoint
+      type: Microsoft.Azure.EventHubs.Processor.Checkpoint
+    return:
+      type: Task
+    content.vb: Function UpdateCheckpointAsync(checkpoint As Checkpoint) As Task
+  overload: Microsoft.Azure.EventHubs.Processor.ICheckpointManager.UpdateCheckpointAsync*
+- uid: Microsoft.Azure.EventHubs.Processor.ICheckpointManager.CreateCheckpointIfNotExistsAsync(System.String)
+  commentId: M:Microsoft.Azure.EventHubs.Processor.ICheckpointManager.CreateCheckpointIfNotExistsAsync(System.String)
+  id: CreateCheckpointIfNotExistsAsync(System.String)
+  parent: Microsoft.Azure.EventHubs.Processor.ICheckpointManager
+  langs:
+  - csharp
+  - vb
+  name: CreateCheckpointIfNotExistsAsync(String)
+  nameWithType: ICheckpointManager.CreateCheckpointIfNotExistsAsync(String)
+  fullName: Microsoft.Azure.EventHubs.Processor.ICheckpointManager.CreateCheckpointIfNotExistsAsync(System.String)
+  type: Method
+  source:
+    remote:
+      path: src/Microsoft.Azure.EventHubs.Processor/ICheckpointManager.cs
+      branch: master
+      repo: https://github.com/Azure/azure-event-hubs-dotnet
+    id: CreateCheckpointIfNotExistsAsync
+    path: src/azure-eventhub/src/Microsoft.Azure.EventHubs.Processor/ICheckpointManager.cs
+    startLine: 49
+  assemblies:
+  - Microsoft.Azure.EventHubs.Processor
+  namespace: Microsoft.Azure.EventHubs.Processor
+  summary: "\nCreate the checkpoint for the given partition if it doesn't exist. Do nothing if it does exist.\nThe offset/sequenceNumber for a freshly-created checkpoint should be set to StartOfStream/0.\n"
+  example: []
+  syntax:
+    content: Task<Checkpoint> CreateCheckpointIfNotExistsAsync(string partitionId)
+    parameters:
+    - id: partitionId
+      type: System.String
+      description: Id of partition to create the checkpoint for.
+    return:
+      type: Task{Microsoft.Azure.EventHubs.Processor.Checkpoint}
+      description: The checkpoint for the given partition, whether newly created or already existing.
+    content.vb: Function CreateCheckpointIfNotExistsAsync(partitionId As String) As Task(Of Checkpoint)
+  overload: Microsoft.Azure.EventHubs.Processor.ICheckpointManager.CreateCheckpointIfNotExistsAsync*
+- uid: Microsoft.Azure.EventHubs.Processor.ICheckpointManager.UpdateCheckpointAsync(Microsoft.Azure.EventHubs.Processor.Lease,Microsoft.Azure.EventHubs.Processor.Checkpoint)
+  commentId: M:Microsoft.Azure.EventHubs.Processor.ICheckpointManager.UpdateCheckpointAsync(Microsoft.Azure.EventHubs.Processor.Lease,Microsoft.Azure.EventHubs.Processor.Checkpoint)
+  id: UpdateCheckpointAsync(Microsoft.Azure.EventHubs.Processor.Lease,Microsoft.Azure.EventHubs.Processor.Checkpoint)
+  parent: Microsoft.Azure.EventHubs.Processor.ICheckpointManager
+  langs:
+  - csharp
+  - vb
+  name: UpdateCheckpointAsync(Lease, Checkpoint)
+  nameWithType: ICheckpointManager.UpdateCheckpointAsync(Lease, Checkpoint)
+  fullName: Microsoft.Azure.EventHubs.Processor.ICheckpointManager.UpdateCheckpointAsync(Microsoft.Azure.EventHubs.Processor.Lease, Microsoft.Azure.EventHubs.Processor.Checkpoint)
+  type: Method
+  source:
+    remote:
+      path: src/Microsoft.Azure.EventHubs.Processor/ICheckpointManager.cs
+      branch: master
+      repo: https://github.com/Azure/azure-event-hubs-dotnet
+    id: UpdateCheckpointAsync
+    path: src/azure-eventhub/src/Microsoft.Azure.EventHubs.Processor/ICheckpointManager.cs
+    startLine: 56
   assemblies:
   - Microsoft.Azure.EventHubs.Processor
   namespace: Microsoft.Azure.EventHubs.Processor
   summary: "\nUpdate the checkpoint in the store with the offset/sequenceNumber in the provided checkpoint.\n"
   example: []
   syntax:
-    content: Task UpdateCheckpointAsync(Checkpoint checkpoint)
+    content: Task UpdateCheckpointAsync(Lease lease, Checkpoint checkpoint)
     parameters:
+    - id: lease
+      type: Microsoft.Azure.EventHubs.Processor.Lease
+      description: Partition information against which to perform a checkpoint.
     - id: checkpoint
       type: Microsoft.Azure.EventHubs.Processor.Checkpoint
       description: offset/sequeceNumber to update the store with.
     return:
       type: Task
-    content.vb: Function UpdateCheckpointAsync(checkpoint As Checkpoint) As Task
+    content.vb: Function UpdateCheckpointAsync(lease As Lease, checkpoint As Checkpoint) As Task
   overload: Microsoft.Azure.EventHubs.Processor.ICheckpointManager.UpdateCheckpointAsync*
 - uid: Microsoft.Azure.EventHubs.Processor.ICheckpointManager.DeleteCheckpointAsync(System.String)
   commentId: M:Microsoft.Azure.EventHubs.Processor.ICheckpointManager.DeleteCheckpointAsync(System.String)
@@ -224,7 +259,7 @@ items:
       repo: https://github.com/Azure/azure-event-hubs-dotnet
     id: DeleteCheckpointAsync
     path: src/azure-eventhub/src/Microsoft.Azure.EventHubs.Processor/ICheckpointManager.cs
-    startLine: 60
+    startLine: 64
   assemblies:
   - Microsoft.Azure.EventHubs.Processor
   namespace: Microsoft.Azure.EventHubs.Processor
@@ -393,12 +428,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Azure.EventHubs.Processor.ICheckpointManager.CreateCheckpointIfNotExistsAsync*
-  commentId: Overload:Microsoft.Azure.EventHubs.Processor.ICheckpointManager.CreateCheckpointIfNotExistsAsync
-  isExternal: false
-  name: CreateCheckpointIfNotExistsAsync
-  nameWithType: ICheckpointManager.CreateCheckpointIfNotExistsAsync
-  fullName: Microsoft.Azure.EventHubs.Processor.ICheckpointManager.CreateCheckpointIfNotExistsAsync
 - uid: Microsoft.Azure.EventHubs.Processor.ICheckpointManager.UpdateCheckpointAsync*
   commentId: Overload:Microsoft.Azure.EventHubs.Processor.ICheckpointManager.UpdateCheckpointAsync
   isExternal: false
@@ -417,6 +446,19 @@ references:
   name: Task
   nameWithType: Task
   fullName: Task
+- uid: Microsoft.Azure.EventHubs.Processor.ICheckpointManager.CreateCheckpointIfNotExistsAsync*
+  commentId: Overload:Microsoft.Azure.EventHubs.Processor.ICheckpointManager.CreateCheckpointIfNotExistsAsync
+  isExternal: false
+  name: CreateCheckpointIfNotExistsAsync
+  nameWithType: ICheckpointManager.CreateCheckpointIfNotExistsAsync
+  fullName: Microsoft.Azure.EventHubs.Processor.ICheckpointManager.CreateCheckpointIfNotExistsAsync
+- uid: Microsoft.Azure.EventHubs.Processor.Lease
+  commentId: T:Microsoft.Azure.EventHubs.Processor.Lease
+  parent: Microsoft.Azure.EventHubs.Processor
+  isExternal: false
+  name: Lease
+  nameWithType: Lease
+  fullName: Microsoft.Azure.EventHubs.Processor.Lease
 - uid: Microsoft.Azure.EventHubs.Processor.ICheckpointManager.DeleteCheckpointAsync*
   commentId: Overload:Microsoft.Azure.EventHubs.Processor.ICheckpointManager.DeleteCheckpointAsync
   isExternal: false
