@@ -14,10 +14,11 @@ let tocList = apiRefInfo.tocList.concat(apiRefManualInfo.tocList);
 // merge all toc.yml into one
 mergeToc(tocList, "docs-ref-autogen/toc.yml");
 
+// Comment the following remove toc.yml code to work around the manual folder toc missing issue.
 // remove other toc.yml
-tocList.forEach(tocPath => {
-    fs.unlinkSync(tocPath);
-});
+// tocList.forEach(tocPath => {
+//   fs.unlinkSync(tocPath);
+// });
 
 function checkDuplicateUid(ymlList) {
     var record = new Set();
