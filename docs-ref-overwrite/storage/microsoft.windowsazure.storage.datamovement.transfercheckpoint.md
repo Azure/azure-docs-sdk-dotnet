@@ -1,6 +1,6 @@
 ---
-uid: microsoft.windowsazure.storage.datamovement.transfercheckpoint
-remarks: *content 
+uid: Microsoft.WindowsAzure.Storage.DataMovement.TransferContext
+remarks: *content
 ---
 
 ## Example
