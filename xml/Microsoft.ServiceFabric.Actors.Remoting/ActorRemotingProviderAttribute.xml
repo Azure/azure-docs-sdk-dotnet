@@ -1,0 +1,123 @@
+<Type Name="ActorRemotingProviderAttribute" FullName="Microsoft.ServiceFabric.Actors.Remoting.ActorRemotingProviderAttribute">
+  <TypeSignature Language="C#" Value="public abstract class ActorRemotingProviderAttribute : Attribute" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit ActorRemotingProviderAttribute extends System.Attribute" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.ServiceFabric.Actors.Remoting.ActorRemotingProviderAttribute" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.ServiceFabric.Actors</AssemblyName>
+    <AssemblyVersion>5.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Attribute</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.AttributeUsage(System.AttributeTargets.Assembly)</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>
+            This is a base type for attribute that sets the default remoting provider to use for 
+            remoting the actor interfaces defined or used in the assembly.
+            </summary>
+    <remarks>
+      <para>
+                On service side, implementation of this attribute is looked up by
+                <see cref="T:Microsoft.ServiceFabric.Actors.Runtime.ActorService" /> to create default 
+                <see cref="T:Microsoft.ServiceFabric.Services.Remoting.Runtime.IServiceRemotingListener" /> for it. 
+                </para>
+      <para>
+                On client side, implementation of this attribute is looked up by 
+                <see cref="T:Microsoft.ServiceFabric.Actors.Client.ActorProxyFactory" /> constructor to create a default
+                <see cref="T:Microsoft.ServiceFabric.Services.Remoting.Client.IServiceRemotingClientFactory" /> when it is not specified.
+                </para>
+      <para>
+                Note that on client side when actor proxy is created using the static <see cref="T:Microsoft.ServiceFabric.Actors.Client.ActorProxy" />
+                class, it uses a default <see cref="T:Microsoft.ServiceFabric.Actors.Client.ActorProxyFactory" /> once and hence the provider lookup 
+                happens only for the first time in an assembly, after which the same provider is used.
+                </para>
+      <para>
+                This attribute is looked up in the following order:
+                <list type="number"><item>
+                        In the entry <see cref="T:System.Reflection.Assembly" /> obtained by calling method <see cref="M:System.Reflection.Assembly.GetEntryAssembly" /></item><item>
+                        In the <see cref="T:System.Reflection.Assembly" /> that defines the remote interface for which listener or proxy is being created. 
+                    </item></list></para>
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="protected ActorRemotingProviderAttribute ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.ServiceFabric.Actors.Remoting.ActorRemotingProviderAttribute.#ctor" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>
+                Instantiates a new <see cref="T:Microsoft.ServiceFabric.Actors.Remoting.ActorRemotingProviderAttribute" />.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateServiceRemotingClientFactory">
+      <MemberSignature Language="C#" Value="public abstract Microsoft.ServiceFabric.Services.Remoting.Client.IServiceRemotingClientFactory CreateServiceRemotingClientFactory (Microsoft.ServiceFabric.Services.Remoting.IServiceRemotingCallbackClient callbackClient);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.ServiceFabric.Services.Remoting.Client.IServiceRemotingClientFactory CreateServiceRemotingClientFactory(class Microsoft.ServiceFabric.Services.Remoting.IServiceRemotingCallbackClient callbackClient) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.ServiceFabric.Actors.Remoting.ActorRemotingProviderAttribute.CreateServiceRemotingClientFactory(Microsoft.ServiceFabric.Services.Remoting.IServiceRemotingCallbackClient)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.ServiceFabric.Services.Remoting.Client.IServiceRemotingClientFactory</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="callbackClient" Type="Microsoft.ServiceFabric.Services.Remoting.IServiceRemotingCallbackClient" />
+      </Parameters>
+      <Docs>
+        <param name="callbackClient">
+                Client implementation where the callbacks should be dispatched.
+            </param>
+        <summary>
+                Creates a service remoting client factory to connected to the remoted actor interfaces.
+            </summary>
+        <returns>
+                An <see cref="T:Microsoft.ServiceFabric.Services.Remoting.Client.IServiceRemotingClientFactory" />
+                that can be used with <see cref="T:Microsoft.ServiceFabric.Actors.Client.ActorProxyFactory" /> to 
+                generate actor proxy to talk to the actor over remoted actor interface.
+            </returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateServiceRemotingListener">
+      <MemberSignature Language="C#" Value="public abstract Microsoft.ServiceFabric.Services.Remoting.Runtime.IServiceRemotingListener CreateServiceRemotingListener (Microsoft.ServiceFabric.Actors.Runtime.ActorService actorService);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.ServiceFabric.Services.Remoting.Runtime.IServiceRemotingListener CreateServiceRemotingListener(class Microsoft.ServiceFabric.Actors.Runtime.ActorService actorService) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.ServiceFabric.Actors.Remoting.ActorRemotingProviderAttribute.CreateServiceRemotingListener(Microsoft.ServiceFabric.Actors.Runtime.ActorService)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.ServiceFabric.Services.Remoting.Runtime.IServiceRemotingListener</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="actorService" Type="Microsoft.ServiceFabric.Actors.Runtime.ActorService" />
+      </Parameters>
+      <Docs>
+        <param name="actorService">
+                The implementation of the actor service that hosts the actors whose interfaces
+                needs to be remoted.
+            </param>
+        <summary>
+                Creates a service remoting listener for remoting the actor interfaces.
+            </summary>
+        <returns>
+                An <see cref="T:Microsoft.ServiceFabric.Services.Remoting.Runtime.IServiceRemotingListener" /> 
+                for the specified actor service.
+            </returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

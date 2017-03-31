@@ -1,0 +1,591 @@
+<Type Name="RecoveryManager" FullName="Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager">
+  <TypeSignature Language="C#" Value="public sealed class RecoveryManager" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit RecoveryManager extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Azure.SqlDatabase.ElasticScale.Client</AssemblyName>
+    <AssemblyVersion>1.3.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>
+            Manages various recovery related tasks for a shard map manager. It helps 
+            resolving data corruption issues between shard map information stored
+            locally on the shards and in the global shard map manager database. 
+            It also helps with certain 'oops' recovery scenarios where reconstruction
+            of shard maps from database backups or database copies is necessary.
+            </summary>
+    <remarks>
+            Note that some of the recovery methods can cause unrecoverable data loss when not used 
+            properly. It is recommend to take backups or copies of all databases that participate 
+            in recovery operations. 
+            </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="AttachShard">
+      <MemberSignature Language="C#" Value="public void AttachShard (Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation location);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void AttachShard(class Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation location) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.AttachShard(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.3.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="location" Type="Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation" />
+      </Parameters>
+      <Docs>
+        <param name="location">Location of the shard being attached.</param>
+        <summary>
+            Attaches a shard to the shard map manager. Earlier versions
+            of mappings for the same shard map will automatically be updated 
+            if more recent versions are found on the shard to be attached.
+            After attaching a shard, <see cref="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.DetectMappingDifferences(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation,System.String)" />
+            should be called to check for any inconsistencies that warrant
+            manual conflict resolution.
+            </summary>
+        <remarks>
+            Note that this method can cause unrecoverable data loss. Make sure you have taken backups or copies 
+            of your databases and only then proceed with great care.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AttachShard">
+      <MemberSignature Language="C#" Value="public void AttachShard (Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation location, string shardMapName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void AttachShard(class Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation location, string shardMapName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.AttachShard(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation,System.String)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.3.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="location" Type="Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation" />
+        <Parameter Name="shardMapName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="location">Location of the shard being attached.</param>
+        <param name="shardMapName">Optional string to filter on the shard map name.</param>
+        <summary>
+            Attaches a shard to the shard map manager. Earlier versions
+            of mappings for the same shard map will automatically be updated 
+            if more recent versions are found on the shard to be attached.
+            Shard location will be upgraded to latest version of local store as part of this operation.
+            After attaching a shard, <see cref="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.DetectMappingDifferences(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation,System.String)" />
+            should be called to check for any inconsistencies that warrant
+            manual conflict resolution.
+            </summary>
+        <remarks>
+            Note that this method can cause unrecoverable data loss. Make sure you have taken backups or copies 
+            of your databases and only then proceed with great care.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DetachShard">
+      <MemberSignature Language="C#" Value="public void DetachShard (Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation location);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DetachShard(class Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation location) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.DetachShard(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.3.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="location" Type="Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation" />
+      </Parameters>
+      <Docs>
+        <param name="location">Location of the shard being detached.</param>
+        <summary>
+            Detaches the given shard from the shard map manager. Mappings pointing to the 
+            shard to be deleted will automatically be removed by this method.
+            </summary>
+        <remarks>
+            Note that this method can cause unrecoverable data loss. Make sure you have taken backups or copies 
+            of your databases and only then proceed with great care.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DetachShard">
+      <MemberSignature Language="C#" Value="public void DetachShard (Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation location, string shardMapName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DetachShard(class Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation location, string shardMapName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.DetachShard(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation,System.String)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.3.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="location" Type="Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation" />
+        <Parameter Name="shardMapName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="location">Location of the shard being detached.</param>
+        <param name="shardMapName">Optional string to filter on shard map name.</param>
+        <summary>
+            Detaches the given shard from the shard map manager. Mappings pointing to the 
+            shard to be deleted will automatically be removed by this method.
+            </summary>
+        <remarks>
+            Note that this method can cause unrecoverable data loss. Make sure you have taken backups or copies 
+            of your databases and only then proceed with great care.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DetectMappingDifferences">
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken&gt; DetectMappingDifferences (Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation location);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.Generic.IEnumerable`1&lt;class Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken&gt; DetectMappingDifferences(class Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation location) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.DetectMappingDifferences(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.3.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="location" Type="Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation" />
+      </Parameters>
+      <Docs>
+        <param name="location">Location of shard for which to detect inconsistencies.</param>
+        <summary>
+            Enumerates differences in the mappings between the global shard map manager database and the local shard 
+            database in the specified shard location.
+            </summary>
+        <returns>Collection of tokens to be used for further resolution tasks (see <see cref="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.ResolveMappingDifferences(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken,Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.MappingDifferenceResolution)" />).</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DetectMappingDifferences">
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken&gt; DetectMappingDifferences (Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation location, string shardMapName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.Generic.IEnumerable`1&lt;class Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken&gt; DetectMappingDifferences(class Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation location, string shardMapName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.DetectMappingDifferences(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation,System.String)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.3.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="location" Type="Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation" />
+        <Parameter Name="shardMapName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="location">Location of shard for which to detect inconsistencies.</param>
+        <param name="shardMapName">Optional parameter to specify a particular shard map.</param>
+        <summary>
+            Enumerates differences in the mappings between the global shard map manager database and the local shard 
+            database in the specified shard location.
+            </summary>
+        <returns>Collection of tokens to be used for further resolution tasks (see <see cref="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.ResolveMappingDifferences(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken,Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.MappingDifferenceResolution)" />).</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetMappingDifferences">
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.IDictionary&lt;Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardRange,Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.MappingLocation&gt; GetMappingDifferences (Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken token);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.Generic.IDictionary`2&lt;class Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardRange, valuetype Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.MappingLocation&gt; GetMappingDifferences(class Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken token) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.GetMappingDifferences(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.3.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.IDictionary&lt;Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardRange,Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.MappingLocation&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="token" Type="Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken" />
+      </Parameters>
+      <Docs>
+        <param name="token">Recovery token returned from <see cref="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.DetectMappingDifferences(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation,System.String)" />.</param>
+        <summary>
+            Returns a dictionary of range-to-location key-value pairs. The location returned is an enumerator stating 
+            whether a given range (or point) is present only in the local shard map, only in the global shard map, or both. 
+            Ranges not contained in either shard map cannot contain differences so those ranges are not shown.
+            </summary>
+        <returns>The set of ranges and their corresponding <see cref="T:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.MappingLocation" />.</returns>
+        <remarks>
+            This method assumes a previous call to <see cref="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.DetectMappingDifferences(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation,System.String)" /> that provides the recovery token parameter.
+            The result of this method is typically used in subsequent calls to resolve inconsistencies such as 
+            <see cref="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.ResolveMappingDifferences(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken,Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.MappingDifferenceResolution)" /> or <see cref="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.RebuildMappingsOnShard(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken,System.Collections.Generic.IEnumerable{Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardRange})" />. 
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetShardInfo">
+      <MemberSignature Language="C#" Value="public void GetShardInfo (Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken token, out Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardMapType mapType, out string shardMapName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void GetShardInfo(class Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken token, valuetype Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardMapType mapType, string shardMapName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.GetShardInfo(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken,Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardMapType@,System.String@)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.3.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId="1#")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId="2#")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="token" Type="Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken" />
+        <Parameter Name="mapType" Type="Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardMapType&amp;" RefType="out" />
+        <Parameter Name="shardMapName" Type="System.String&amp;" RefType="out" />
+      </Parameters>
+      <Docs>
+        <param name="token">Recovery token returned from <see cref="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.DetectMappingDifferences(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation,System.String)" />.</param>
+        <param name="mapType">Output Shardmap type (Range or List).</param>
+        <param name="shardMapName">Output name of shard map.</param>
+        <summary>
+            Retrieves shard map type and name based on the token returned from <see cref="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.DetectMappingDifferences(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation,System.String)" />.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetShardInfo">
+      <MemberSignature Language="C#" Value="public void GetShardInfo (Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken token, out Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardMapType mapType, out string shardMapName, out Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation shardLocation);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void GetShardInfo(class Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken token, valuetype Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardMapType mapType, string shardMapName, class Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation shardLocation) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.GetShardInfo(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken,Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardMapType@,System.String@,Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation@)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.3.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId="3#")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId="1#")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId="2#")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="token" Type="Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken" />
+        <Parameter Name="mapType" Type="Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardMapType&amp;" RefType="out" />
+        <Parameter Name="shardMapName" Type="System.String&amp;" RefType="out" />
+        <Parameter Name="shardLocation" Type="Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation&amp;" RefType="out" />
+      </Parameters>
+      <Docs>
+        <param name="token">Recovery token returned from <see cref="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.DetectMappingDifferences(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation,System.String)" />.</param>
+        <param name="mapType">Outputs shard map type (Range or List).</param>
+        <param name="shardMapName">Outputs shard map name.</param>
+        <param name="shardLocation">Outputs shard location</param>
+        <summary>
+            Retrieves shard map type, name and shard location based on the token returned from <see cref="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.DetectMappingDifferences(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation,System.String)" />.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetShardLocation">
+      <MemberSignature Language="C#" Value="public Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation GetShardLocation (Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken token);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation GetShardLocation(class Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken token) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.GetShardLocation(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.3.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="token" Type="Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken" />
+      </Parameters>
+      <Docs>
+        <param name="token">Recovery token returned from <see cref="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.DetectMappingDifferences(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation,System.String)" /></param>
+        <summary>
+            Returns the shard location of the local shard map processed by <see cref="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.DetectMappingDifferences(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation,System.String)" />.
+            </summary>
+        <returns>Location of the shard corresponding to the set of mapping differences detected in <see cref="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.DetectMappingDifferences(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation,System.String)" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetShardMapName">
+      <MemberSignature Language="C#" Value="public string GetShardMapName (Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken token);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance string GetShardMapName(class Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken token) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.GetShardMapName(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.3.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="token" Type="Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken" />
+      </Parameters>
+      <Docs>
+        <param name="token">Recovery token returned from <see cref="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.DetectMappingDifferences(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation,System.String)" />.</param>
+        <summary>
+            Returns the shard map name of the shard map processed by <see cref="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.DetectMappingDifferences(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation,System.String)" />.
+            </summary>
+        <returns>The name of the shard map for the given recovery token.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetShardMapType">
+      <MemberSignature Language="C#" Value="public Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardMapType GetShardMapType (Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken token);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance valuetype Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardMapType GetShardMapType(class Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken token) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.GetShardMapType(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.3.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardMapType</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="token" Type="Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken" />
+      </Parameters>
+      <Docs>
+        <param name="token">Recovery token returned from <see cref="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.DetectMappingDifferences(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation,System.String)" />.</param>
+        <summary>
+            Returns the shard map type of the shard map processed by <see cref="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.DetectMappingDifferences(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation,System.String)" />.
+            </summary>
+        <returns>The type of shard map (list, range, etc...) corresponding to the recovery token.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RebuildMappingsOnShard">
+      <MemberSignature Language="C#" Value="public void RebuildMappingsOnShard (Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken token, System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardRange&gt; ranges);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RebuildMappingsOnShard(class Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken token, class System.Collections.Generic.IEnumerable`1&lt;class Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardRange&gt; ranges) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.RebuildMappingsOnShard(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken,System.Collections.Generic.IEnumerable{Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardRange})" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.3.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId="1")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="token" Type="Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken" />
+        <Parameter Name="ranges" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardRange&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="token">The recovery token from a previous call to <see cref="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.DetectMappingDifferences(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation,System.String)" />.</param>
+        <param name="ranges">The set of ranges to keep on the local shard when rebuilding the local shard map.</param>
+        <summary>
+             Rebuilds a local range shard map from a list of inconsistent shard ranges
+             detected by <see cref="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.DetectMappingDifferences(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation,System.String)" /> and then accessed by <see cref="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.GetMappingDifferences(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken)" />.
+             The resulting local range shard map will always still be inconsistent with 
+             the global shard map in the shard map manager database. A subsequent call to <see cref="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.ResolveMappingDifferences(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken,Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.MappingDifferenceResolution)" />
+             is necessary to bring the system back to a healthy state.
+             </summary>
+        <remarks>
+             Note that this method can cause unrecoverable data loss. Make sure you have taken backups or copies 
+             of your databases and only then proceed with great care.
+            
+             Only shard ranges with inconsistencies can be rebuilt using this method. All ranges with no inconsistencies between
+             the local shard and the global shard map will be kept intact on the local shard and are not affected by this call.
+             Subsequent changes to the non-conflicting mappings can be made later using the regular interfaces in the shard map manager. 
+             It is not necessary to use the recovery manager to change non-conflicting mappings.
+             </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RebuildMappingsOnShardMapManagerFromShards">
+      <MemberSignature Language="C#" Value="public void RebuildMappingsOnShardMapManagerFromShards (System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation&gt; shardLocations);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RebuildMappingsOnShardMapManagerFromShards(class System.Collections.Generic.IEnumerable`1&lt;class Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation&gt; shardLocations) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.RebuildMappingsOnShardMapManagerFromShards(System.Collections.Generic.IEnumerable{Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation})" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.3.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId="0")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="shardLocations" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="shardLocations">Collection of shard locations.</param>
+        <summary>
+            Given a collection of shard locations, reconstructs the shard map manager based on mapping information
+            stored in the individual shards. The specified
+            shards need to be registered already in the global shard map. This method only 
+            rebuilds mappings. It does not rebuild shard membership within the global shard map.
+            If the information in the individual shard maps is or becomes inconsistent, the behavior is undefined.
+            No cross shard locks are taken, so if any shards become inconsistent during the execution of this
+            method, the final state of the global shard map may be corrupt.
+            </summary>
+        <remarks>
+            Note that this method can cause unrecoverable data loss. Make sure you have taken backups or copies 
+            of your databases and only then proceed with great care.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RebuildMappingsOnShardMapManagerFromShards">
+      <MemberSignature Language="C#" Value="public void RebuildMappingsOnShardMapManagerFromShards (System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation&gt; shardLocations, string shardMapName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RebuildMappingsOnShardMapManagerFromShards(class System.Collections.Generic.IEnumerable`1&lt;class Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation&gt; shardLocations, string shardMapName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.RebuildMappingsOnShardMapManagerFromShards(System.Collections.Generic.IEnumerable{Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation},System.String)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.3.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId="0")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="shardLocations" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation&gt;" />
+        <Parameter Name="shardMapName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="shardLocations">Collection of shard locations.</param>
+        <param name="shardMapName">Optional name of shard map. If omitted, will attempt to recover from all shard maps present on each shard.</param>
+        <summary>
+            Given a collection of shard locations, reconstructs the shard map manager based on mapping information
+            stored in the individual shards. The specified
+            shards need to be registered already in the global shard map. This method only 
+            rebuilds mappings. It does not rebuild shard membership within the global shard map.
+            If the information in the individual shard maps is or becomes inconsistent, the behavior is undefined.
+            No cross shard locks are taken, so if any shards become inconsistent during the execution of this
+            method, the final state of the global shard map may be corrupt.
+            </summary>
+        <remarks>
+            Note that this method can cause unrecoverable data loss. Make sure you have taken backups or copies 
+            of your databases and only then proceed with great care.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RebuildMappingsOnShardsFromShardMapManager">
+      <MemberSignature Language="C#" Value="public void RebuildMappingsOnShardsFromShardMapManager (System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation&gt; shardLocations);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RebuildMappingsOnShardsFromShardMapManager(class System.Collections.Generic.IEnumerable`1&lt;class Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation&gt; shardLocations) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.RebuildMappingsOnShardsFromShardMapManager(System.Collections.Generic.IEnumerable{Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation})" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.3.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId="0")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="shardLocations" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="shardLocations">Collection of shard locations.</param>
+        <summary>
+            Given a collection of shard locations, reconstructs local shard maps based 
+            on the mapping information stored in the global shard map. The specified
+            shards need to be registered already in the global shard map. This method only 
+            rebuilds mappings. It does not rebuild shard membership within the global shard map.
+            </summary>
+        <remarks>
+            Note that this method can cause unrecoverable data loss. Make sure you have taken backups or copies 
+            of your databases and only then proceed with great care.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RebuildMappingsOnShardsFromShardMapManager">
+      <MemberSignature Language="C#" Value="public void RebuildMappingsOnShardsFromShardMapManager (System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation&gt; shardLocations, string shardMapName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RebuildMappingsOnShardsFromShardMapManager(class System.Collections.Generic.IEnumerable`1&lt;class Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation&gt; shardLocations, string shardMapName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.RebuildMappingsOnShardsFromShardMapManager(System.Collections.Generic.IEnumerable{Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation},System.String)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.3.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId="0")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="shardLocations" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation&gt;" />
+        <Parameter Name="shardMapName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="shardLocations">Collection of shard locations.</param>
+        <param name="shardMapName">Optional parameter to filter by shard map name. If omitted, all shard maps will be rebuilt.</param>
+        <summary>
+            Given a collection of shard locations, reconstructs local shard maps based 
+            on the mapping information stored in the global shard map. The specified
+            shards need to be registered already in the global shard map. This method only 
+            rebuilds mappings. It does not rebuild shard membership within the global shard map.
+            </summary>
+        <remarks>
+            Note that this method can cause unrecoverable data loss. Make sure you have taken backups or copies 
+            of your databases and only then proceed with great care.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ResolveMappingDifferences">
+      <MemberSignature Language="C#" Value="public void ResolveMappingDifferences (Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken token, Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.MappingDifferenceResolution resolution);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void ResolveMappingDifferences(class Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken token, valuetype Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.MappingDifferenceResolution resolution) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.ResolveMappingDifferences(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken,Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.MappingDifferenceResolution)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.3.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="token" Type="Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryToken" />
+        <Parameter Name="resolution" Type="Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.MappingDifferenceResolution" />
+      </Parameters>
+      <Docs>
+        <param name="token">Recovery token returned from <see cref="M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.Recovery.RecoveryManager.DetectMappingDifferences(Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardLocation,System.String)" />.</param>
+        <param name="resolution">The resolution strategy to be used for resolution.</param>
+        <summary>
+            Selects one of the shard maps (either local or global) as a source of truth and brings 
+            mappings on both shard maps in sync.
+            </summary>
+        <remarks>
+            Note that this method can cause unrecoverable data loss. Make sure you have taken backups or copies 
+            of your databases and only then proceed with great care.
+            </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>
