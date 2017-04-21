@@ -9,11 +9,13 @@
 ### [Lazy resource creation](dotnet-sdk-azure-lazy-creation.md)
 ### [Reactive development](dotnet-sdk-azure-reactive.sdk.md)
 ## [Release notes](dotnet-sdk-azure-release-notes.md)
+
 # Sample Code
 ## [Virtual machines](dotnet-sdk-azure-virtual-machine-samples.md)
 ## [Resource groups](dotnet-sdk-azure-resource-groups-samples.md)
 ## [Web Apps](dotnet-sdk-azure-web-apps-samples.md)
 ## [Resource manager](dotnet-sdk-azure-sql-database-samples.md)
+
 # [Reference](/dotnet/api)
 ## Storage
 ### Package 1
