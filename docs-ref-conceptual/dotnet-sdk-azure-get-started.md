@@ -1,7 +1,7 @@
 ---
-title: Get started with the Azure SDK for Java
-description: Get started with basic use of the Azure SDK for Java with your own Azure subscription.
-keywords: Azure, Java, SDK, API ,authenticate, get-started
+title: Get started with the Azure SDK for .NET
+description: Get started with basic use of the Azure SDK for .NET with your own Azure subscription.
+keywords: Azure, .NET, SDK, API ,authenticate, get-started
 author: rloutlaw
 ms.author: routlaw
 manager: douge
@@ -14,7 +14,7 @@ ms.service: multiple
 ms.assetid: b1e10b79-f75e-4605-aecd-eed64873e2d3
 ---
 
-# Get started with the Azure SDK for Java
+# Get started with the Azure SDK for .NET
 
 > [!WARNING]
 > TODO: Port to .NET
