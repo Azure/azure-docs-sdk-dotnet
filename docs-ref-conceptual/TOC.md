@@ -4,7 +4,7 @@
 ### [Packages for managing Azure resources](management-packages.md)
 ### [Get started](dotnet-sdk-azure-get-started.md)
 ## [Authentication](dotnet-sdk-azure-authenticate.md)
-### [Create a service principal](/cli/azure/create-an-azure-service-principal-azure-cli?toc=%2fazure%2fdotnet%2ftoc.json&bc=%2fazure%2fdotnet%2fbreadcrumb%2ftoc.json)
+### [Create a service principal](https://docs.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli?toc=%2fazure%2fdotnet%2ftoc.json&bc=%2fazure%2fdotnet%2fbreadcrumb%2ftoc.json)
 ## [Patterns](dotnet-sdk-azure-patterns.md)
 ### [Lazy resource creation](dotnet-sdk-azure-lazy-creation.md)
 ### [Reactive development](dotnet-sdk-azure-reactive.sdk.md)
