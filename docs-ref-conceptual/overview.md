@@ -38,7 +38,7 @@ VirtualMachine linuxVM = azure.virtualMachines().define(linuxVmName)
            .create();
  ```
 
-Review the [install instructions](dotnet-sdk-azure-install.md) to start using the SDK immediately with your Maven or Gradle projects. Set up authentication and run sample code against your own Azure subscription in the [get started article](dotnet-sdk-azure-get-started.md). The [patterns article](dotnet-sdk-azure-patterns.md) article goes into the conventions the SDK uses and how to leverage them to simplify your application code. New features, breaking changes, and migration instructions are available in the [release notes](dotnet-sdk-release-notes.md).
+Review the [install instructions](dotnet-sdk-azure-install.md) to start using the SDK immediately with your Maven or Gradle projects. Set up authentication and run sample code against your own Azure subscription in the [get started article](dotnet-sdk-azure-get-started.md). The [concepts article](dotnet-sdk-azure-patterns.md) goes into the conventions the SDK uses and how to leverage them to simplify your application code. New features, breaking changes, and migration instructions are available in the [release notes](dotnet-sdk-release-notes.md).
 
 The following samples cover common automation tasks with the Azure SDK for Java and are formatted for copy and paste into you own apps:
 
