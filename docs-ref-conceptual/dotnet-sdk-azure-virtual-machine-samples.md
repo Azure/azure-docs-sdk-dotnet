@@ -11,7 +11,7 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: java
 ms.service: multiple
-ms.assetid: 1eeb166f-8253-4fde-82d2-43997fda7819
+ms.assetid: 
 ---
 
 # Azure SDK for Java samples for virtual machines

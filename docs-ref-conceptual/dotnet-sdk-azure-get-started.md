@@ -1,50 +1,51 @@
 ---
-title: Get started with the Azure SDK for .NET
-description: Get started with basic use of the Azure SDK for .NET with your own Azure subscription.
+title: Get started with Azure Management Libraries for .NET
+description: Get started with basic use of the Azure Management Libraries for .NET with your own Azure subscription.
 keywords: Azure, .NET, SDK, API ,authenticate, get-started
-author: rloutlaw
-ms.author: routlaw
+author: camsoper
+ms.author: casoper
 manager: douge
 ms.date: 04/16/2017
 ms.topic: get-started-article
 ms.prod: azure
 ms.technology: azure
-ms.devlang: java
+ms.devlang: dotnet
 ms.service: multiple
-ms.assetid: b1e10b79-f75e-4605-aecd-eed64873e2d3
+ms.assetid: 
 ---
 
-# Get started with the Azure SDK for .NET
-
-> [!WARNING]
-> TODO: Port to .NET
+# Get started with the Azure Management Libraries for .NET
 
 ## Prerequisites
 
 - An Azure account. If you don't have one , [get a free trial](https://azure.microsoft.com/free/)
-- [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
-- [Maven 3](http://maven.apache.org/download.cgi)
 - [Azure CLI 2.0](https://docs.microsoft.com/en-us/cli/azure/install-az-cli2)
 
-This get started guide uses the Maven build tool to build and run Java source code, but other build tools such as Gradle or SBT work fine with the Java SDK for Azure. 
+This guide uses Visual Studio.  See the [installation guide](dotnet-sdk-azure-install.md) to learn how to use Azure Management Libraries for .NET in your .NET Core applications without Visual Studio.
 
 ## Set up authentication
 
-Your Java application needs permissions to read and create resources in your Azure subscription in order to use the Java SDK for Azure. Create a service principal and configure your app to run with its credentials to grant this access. Service principals provide a way to create a non-interactive account associated with your identity to which you grant only the privileges your app needs to run.
+Your .NET application needs permissions to read and create resources in your Azure subscription in order to use the Azure Management Libraries for .NET. Create a service principal and configure your app to run with its credentials to grant this access. Service principals provide a way to create a non-interactive account associated with your identity to which you grant only the privileges your app needs to run.
 
-[Create a service principal using the Azure CLI 2.0](/cli/azure/create-an-azure-service-principal-azure-cli), and make sure to capture the output seen below from the tool:
+[Create a service principal using the Azure CLI 2.0](/cli/azure/create-an-azure-service-principal-azure-cli#create-a-service-principal-for-your-application), like this:
+
+```azurecli
+az ad sp create-for-rbac --name AzureDotNetTest --password "password"
+```
+
+Make sure to capture the output seen below from the tool:
 
 ```json
 {
-  "appId": "a487e0c1-82af-47d9-9a0b-af184eb87646d",
-  "displayName": "JavaSDKTest",
-  "name": "http://JavaSDKTest",
-  "password": password,
+  "appId": "8dc524be-7611-4996-81eb-279155696a54",
+  "displayName": "AzureDotNetTest",
+  "name": "http://AzureDotNetTest",
+  "password": "password",
   "tenant": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
 }
 ```
 
-Next, create a properties file on your system using the service principal credentials:
+Next, create a text file named `azureauth.properties` using the service principal credentials:
 
 ```text
 # sample management library properties file
@@ -52,10 +53,10 @@ subscription=########-####-####-####-############
 client=########-####-####-####-############
 key=XXXXXXXXXXXXXXXX
 tenant=########-####-####-####-############
-managementURI=https\://management.core.windows.net/
-baseURL=https\://management.azure.com/
-authURL=https\://login.windows.net/
-graphURL=https\://graph.windows.net/
+managementURI=https://management.core.windows.net/
+baseURL=https://management.azure.com/
+authURL=https://login.windows.net/
+graphURL=https://graph.windows.net/
 ```
 
 - subscription: use the *id* value from `az account show` in the Azure CLI 2.0.
@@ -63,192 +64,154 @@ graphURL=https\://graph.windows.net/
 - key: use the *password* value from the service principal output .
 - tenant: use the *tenant* value from the service principal output.
 
-Save this file in a secure location on your system where your code can read it. Set an environment variable with the full path to the file in your shell, for example:
+Save this file in a secure location on your system where your code can read it. Set an environment variable named `AZURE_AUTH_LOCATION` with the full path to the file, for example:
 
-```bash
-export AZURE_AUTH_LOCATION=/Users/raisa/azureauth.properties
+![System environment variable dialog](media/dotnet-sdk-azure-get-started/environment-var.png)
+
+## Create a new project 
+
+Create a new console application project.  In Visual Studio, do this by clicking **File**, **New**, and then clicking **Project...**.  Under the Visual C# templates, select **Console App (.NET Core)**, name your project, and then click **OK**.
+
+![New project dialog](media/dotnet-sdk-azure-get-started/new-project.png)
+
+When the new console app is created, open the Package Manager Console by clicking **Tools**, **NuGet Package Manager**, and then click **Package Manager Console**.  In the console, install the latest version of the Fluent Azure Management Libraries for .NET by entering:
+
+```powershell
+Install-Package Microsoft.Azure.Management.Fluent -pre
 ```
-
-## Create a Maven project and import the SDK dependency
-
-Create a new Maven project from the command line in a new directory on your system:
-
-```
-mkdir java-sdk-test
-cd java-sdk-test
-mvn archetype:generate -DgroupId=com.fabrikam -DartifactId=testSDKApp -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
-```
-
-This creates a basic Maven project under the `testSDKApp` folder. Add the the following entry into the project `pom.xml`'s dependency section to import the Java SDK for Azure.
-
-```XML
-<dependency>
-    <groupId>com.microsoft.azure</groupId>
-    <artifactId>azure</artifactId>
-    <version>1.0.0-beta5</version>
-</dependency>
-```
-
-Also add an entry to use the maven-exec-plugin to run the sample:
-
-```XML
-<build>
-    <plugins>
-        <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>exec-maven-plugin</artifactId>
-            <configuration>
-                <mainClass>com.fabrikam.testSDKApp.AzureSDKApp</mainClass>
-            </configuration>
-        </plugin>
-    </plugins>
-</build>
- ```
-
 
 ## Create a virtual machine
 
-Create a new file named AzureSDKApp.java in the project's `src/main/java` directory. Add the following code, making sure to provide an actual username and password for the virtual machine:
+Edit your application's `Program.cs` file.  Replace the `using` declarations at the top with the following:
 
-```java
-package com.fabrikam.testSDKApp;
+```csharp
+using System;
+using Microsoft.Azure.Management.Compute.Fluent;
+using Microsoft.Azure.Management.Compute.Fluent.Models;
+using Microsoft.Azure.Management.Fluent;
+using Microsoft.Azure.Management.ResourceManager.Fluent;
+using Microsoft.Azure.Management.ResourceManager.Fluent.Core;
+```
 
-import com.microsoft.azure.management.Azure;
-import com.microsoft.azure.management.compute.VirtualMachine;
-import com.microsoft.azure.management.compute.KnownLinuxVirtualMachineImage;
-import com.microsoft.azure.management.compute.VirtualMachineSizeTypes;
-import com.microsoft.rest.LogLevel;
-import com.microsoft.azure.management.resources.fluentcore.arm.Region;
+Replace the `Main` method with the following.  Be sure to provide an actual `username` and `password` for the virtual machine.
 
-import java.io.File;
+```csharp
+static void Main(string[] args)
+{
+    // Set some variables...
+    string username = "MY_USERNAME";
+    string password = "MY_PASSWORD";
+    string rgName = "sampleResourceGroup";
+    string windowsVmName = "sampleWindowsVM";
+    string publicIpDnsLabel = "samplePublicIP";
 
-public class AzureSDKApp {
+    // Authenticate
+    var credentials = SdkContext.AzureCredentialsFactory
+        .FromFile(Environment.GetEnvironmentVariable("AZURE_AUTH_LOCATION"));
+    var azure = Azure
+        .Configure()
+        .WithLogLevel(HttpLoggingDelegatingHandler.Level.Basic)
+        .Authenticate(credentials)
+        .WithDefaultSubscription();
 
-    public static void main(String[] args) {
+    // Create the VM
+    Console.WriteLine("Creating VM...");
+    var windowsVM = azure.VirtualMachines.Define(windowsVmName)
+        .WithRegion(Region.USEast)
+        .WithNewResourceGroup(rgName)
+        .WithNewPrimaryNetwork("10.0.0.0/28")
+        .WithPrimaryPrivateIPAddressDynamic()
+        .WithNewPrimaryPublicIPAddress(publicIpDnsLabel)
+        .WithPopularWindowsImage(KnownWindowsVirtualMachineImage.WindowsServer2012R2Datacenter)
+        .WithAdminUsername(username)
+        .WithAdminPassword(password)
+        .WithSize(VirtualMachineSizeTypes.StandardD3V2)
+        .Create();
 
-        final String userName = "YOUR_VM_USERNAME";
-        final String password = "YOUR_VM_PASSWORD";
-
-        try {
-
-            // use the properties file with the service principal information to authenticate
-            // change the name of the environment variable if you used a different name in the previous step
-            final File credFile = new File(System.getenv("AZURE_AUTH_LOCATION"));    
-            Azure azure = Azure.configure()
-                    .withLogLevel(LogLevel.BASIC)
-                    .authenticate(credFile)
-                    .withDefaultSubscription();
-           
-            // create a Ubuntu virtual machine in a new resource group 
-            VirtualMachine linuxVM = azure.virtualMachines().define("testLinuxVM")
-                    .withRegion(Region.US_EAST)
-                    .withNewResourceGroup("sampleResourceGroup")
-                    .withNewPrimaryNetwork("10.0.0.0/24")
-                    .withPrimaryPrivateIpAddressDynamic()
-                    .withoutPrimaryPublicIpAddress()
-                    .withPopularLinuxImage(KnownLinuxVirtualMachineImage.UBUNTU_SERVER_16_04_LTS)
-                    .withRootUsername(userName)
-                    .withRootPassword(password)
-                    .withUnmanagedDisks()
-                    .withSize(VirtualMachineSizeTypes.STANDARD_D3_V2)
-                    .create();   
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        }
-    }
+    // Wait for the user
+    Console.WriteLine("Press enter to continue...");
+    Console.ReadLine();
 }
 ```
 
-Run the sample from the command line:
+Press **F5** to run the sample.
 
-```
-mvn compile exec:java
-```
-
-You'll see some REST requests and responses in the console as the SDK makes its underlying calls to the Azure REST API to configure the virtual machine and its resources. When the program finishes, verify the virtual machine in your subscription with the Azure CLI 2.0:
+After several minutes, the program will finish, prompting you to press enter. After pressing enter, verify the virtual machine in your subscription with the Azure CLI 2.0:
 
 ```azurecli
 az vm list --resource-group sampleResourceGroup
 ```
 
-Once you've verified that the code worked, delete the VM from the CLI
+Once you've verified that the code worked, delete the resource group, which contains the VM, its NIC, the virtual network, and the public IP address.
 
 ```azurecli
-az vm delete --resourceGroup sampleResourceGroup --name testLinuxVM
+az group delete --name sampleResourceGroup
 ```
 
 ## Deploy a web app from a GitHub repo
 
-Replace the code in AzureSDKApp.java with the following class. Update the appName variable to a unique value before running the code.
+Now you'll modify your code to create a deploy a new web app from an existing GitHub repository. Replace the `Main` with the following code:
 
-```java
-package com.fabrikam.testSDKApp;
+```csharp
+static void Main(string[] args)
+{
+    // Set some variables...
+    string rgName = "sampleResourceGroup";
 
-import com.microsoft.azure.management.Azure;
-import com.microsoft.azure.management.resources.fluentcore.utils.SdkContext;
-import com.microsoft.azure.management.appservice.WebApp;
-import com.microsoft.rest.LogLevel;
-import com.microsoft.azure.management.resources.fluentcore.arm.Region;
+    // The following generates a random web app name. You can
+    // use your own, but ensure it is unique. Test uniqueness by browsing to:
+    // http://<appName>.azurewebsites.net
+    string appName = SdkContext.RandomResourceName("WebApp", 20);
 
-import java.io.File;
+    // Authenticate
+    var credentials = SdkContext.AzureCredentialsFactory
+        .FromFile(Environment.GetEnvironmentVariable("AZURE_AUTH_LOCATION"));
+    var azure = Azure
+        .Configure()
+        .WithLogLevel(HttpLoggingDelegatingHandler.Level.Basic)
+        .Authenticate(credentials)
+        .WithDefaultSubscription();
 
-public class AzureSDKApp {
+    // Create the web app
+    Console.WriteLine("Creating Web App...");
+    var app = azure.WebApps.Define(appName)
+        .WithRegion(Region.USEast)
+        .WithNewResourceGroup(rgName)
+        .WithNewFreeAppServicePlan()
+        .DefineSourceControl()
+        .WithPublicGitRepository("https://github.com/Azure-Samples/app-service-web-dotnet-get-started")
+        .WithBranch("master")
+        .Attach()
+        .Create();
 
-    public static void main(String[] args) {
-        try {
+    // Wait for the user
+    Console.WriteLine("Press enter to continue...");
+    Console.ReadLine();
 
-            final File credFile = new File(System.getenv("AZURE_AUTH_LOCATION"));
-            final String appName = "YOUR_APP_NAME";
-            
-            Azure azure = Azure.configure()
-                    .withLogLevel(LogLevel.BASIC)
-                    .authenticate(credFile)
-                    .withDefaultSubscription();
-
-            WebApp app = azure.webApps().define(appName)
-                    .withNewResourceGroup("sampleResourceGroup")
-                    .withNewAppServicePlan("testAppServicePlan")
-                    .withRegion(Region.US_WEST2)
-                    .withFreePricingTier()
-                    .defineSourceControl()
-                    .withPublicGitRepository(
-                       "https://github.com/Azure-Samples/app-service-web-dotnet-get-started")
-                    .withBranch("master")
-                    .attach()
-                    .create();
-            
-           
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        }
-    }
 }
 ```
 
-Run the code as before using Maven
+Run the code as before by pressing **F5**.
 
-```
-mvn clean compile exec:java
-```
+> [!IMPORTANT]
+> Be sure to note the name of the web application in the console output.  You'll need it to verify the deployment.
 
-This code will deploy a .NET app directly from a public GitHub repo into Azure App Service. Verify the deployment through the CLI:
+This code will deploy a .NET app directly from a public GitHub repo into Azure App Service. Verify the deployment by opening a browser and navigating to `http://<appName>.azurewebsites.net`, where `<appName>` is the name of the web app.
+
+After you've verified the deployment, cleanup your resource group as before.
 
 ```azurecli
-az appservice web browse --name appname
+az group delete --name sampleResourceGroup
 ```
 
 ## Explore sample code
 
-To learn more about how to use the Azure SDK for Java to manage resources and automate tasks, see our sample code for [virtual machines](java-sdk-azure-virtual-machine-samples.md), [web apps](java-sdk-azure-web-apps-samples.md), [resource groups](java-sdk-azure-resource-groups-samples.md), and [SQL database](java-sdk-azure-sql-databases.md).
+TBD
 
 ## Reference and release notes
 
-A complete [SDK reference](java-sdk-azure-reference.md) is available. Review the [release notes](java-sdk-azure-release-notes.md) to learn about new features, updates and changes to the SDK.
+TBD
 
 ## Get help and give feedback
 
-Post questions to the community on [Stack Overflow](http://stackoverflow.com/questions/tagged/azure+java) and open issues against the SDK on the [project GitHub](https://github.com/Azure/azure-sdk-for-java).
+Post questions to the community on [Stack Overflow](http://stackoverflow.com/questions/tagged/azure-sdk-.net) and open issues against the SDK on the [project GitHub](https://github.com/Azure/azure-sdk-for-net).
