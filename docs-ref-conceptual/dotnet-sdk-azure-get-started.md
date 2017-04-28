@@ -19,7 +19,7 @@ ms.assetid:
 ## Prerequisites
 
 - An Azure account. If you don't have one , [get a free trial](https://azure.microsoft.com/free/)
-- [Azure CLI 2.0](https://docs.microsoft.com/en-us/cli/azure/install-az-cli2)
+- [Azure PowerShell](https://docs.microsoft.com/en-us/powershell/azure/install-azurerm-ps)
 
 This guide uses Visual Studio.  See the [installation guide](dotnet-sdk-azure-install.md) to learn how to use Azure Management Libraries for .NET in your .NET Core applications without Visual Studio.
 
@@ -27,46 +27,63 @@ This guide uses Visual Studio.  See the [installation guide](dotnet-sdk-azure-in
 
 Your .NET application needs permissions to read and create resources in your Azure subscription in order to use the Azure Management Libraries for .NET. Create a service principal and configure your app to run with its credentials to grant this access. Service principals provide a way to create a non-interactive account associated with your identity to which you grant only the privileges your app needs to run.
 
-[Create a service principal using the Azure CLI 2.0](/cli/azure/create-an-azure-service-principal-azure-cli#create-a-service-principal-for-your-application), like this:
+First, login to Azure PowerShell:
 
-```azurecli
-az ad sp create-for-rbac --name AzureDotNetTest --password "password"
+```powershell
+Login-AzureRmAccount
 ```
 
-Make sure to capture the output seen below from the tool:
+Note the information displayed about your tenant and subscription:
 
-```json
-{
-  "appId": "8dc524be-7611-4996-81eb-279155696a54",
-  "displayName": "AzureDotNetTest",
-  "name": "http://AzureDotNetTest",
-  "password": "password",
-  "tenant": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-}
+```text
+Environment           : AzureCloud
+Account               : joeuser@contoso.com
+TenantId              : 43413cc1-5886-4711-9804-8cfea3d1c3ee
+SubscriptionId        : 15dbcfa8-4b93-4c9a-881c-6189d39f04d4
+SubscriptionName      : my-subscription
+CurrentStorageAccount : 
+```
+
+[Create a service principal using PowerShell](/powershell/azure/create-azure-service-principal-azureps), like this:
+
+```powershell
+# Create the service principal (use a strong password)
+New-AzureRmADServicePrincipal -DisplayName "AzureDotNetTest" -Password "password" | `
+    Select DisplayName, ApplicationID
+```
+
+Make sure to note the ApplicationID:
+
+```plaintext
+DisplayName     ApplicationId
+-----------     -------------
+AzureDotNetTest a2ab11af-01aa-4759-8345-7803287dbd39
 ```
 
 Next, create a text file named `azureauth.properties` using the service principal credentials:
 
 ```text
 # sample management library properties file
-subscription=########-####-####-####-############
-client=########-####-####-####-############
-key=XXXXXXXXXXXXXXXX
-tenant=########-####-####-####-############
+subscription=15dbcfa8-4b93-4c9a-881c-6189d39f04d4
+client=a2ab11af-01aa-4759-8345-7803287dbd39
+key=password
+tenant=43413cc1-5886-4711-9804-8cfea3d1c3ee
 managementURI=https://management.core.windows.net/
 baseURL=https://management.azure.com/
 authURL=https://login.windows.net/
 graphURL=https://graph.windows.net/
 ```
 
-- subscription: use the *id* value from `az account show` in the Azure CLI 2.0.
-- client: use the *appId* value from the output taken from a service principal output.
-- key: use the *password* value from the service principal output .
-- tenant: use the *tenant* value from the service principal output.
+- subscription: use the *SubscriptionId* value from when you ran `Login-AzureRmAccount`.
+- client: use the *ApplicationId* value from the output taken from a service principal output.
+- key: use the *-Password* parameter you assigned when you ran `New-AzureRmADServicePrincipal` (without quotes).
+- tenant: use the *TenantId* value from when you ran `Login-AzureRmAccount`.
 
-Save this file in a secure location on your system where your code can read it. Set an environment variable named `AZURE_AUTH_LOCATION` with the full path to the file, for example:
+Save this file in a secure location on your system where your code can read it. Use PowerShell to set an environment variable named `AZURE_AUTH_LOCATION` with the full path to the file, for example:
 
-![System environment variable dialog](media/dotnet-sdk-azure-get-started/environment-var.png)
+```powershell
+[Environment]::SetEnvironmentVariable("AZURE_AUTH_LOCATION", "C:\src\azureauth.properties", "User")
+```
 
 ## Create a new project 
 
@@ -77,7 +94,7 @@ Create a new console application project.  In Visual Studio, do this by clicking
 When the new console app is created, open the Package Manager Console by clicking **Tools**, **NuGet Package Manager**, and then click **Package Manager Console**.  In the console, install the latest version of the Fluent Azure Management Libraries for .NET by entering:
 
 ```powershell
-Install-Package Microsoft.Azure.Management.Fluent -pre
+Install-Package Microsoft.Azure.Management.Fluent
 ```
 
 ## Create a virtual machine
@@ -108,6 +125,7 @@ static void Main(string[] args)
     // Authenticate
     var credentials = SdkContext.AzureCredentialsFactory
         .FromFile(Environment.GetEnvironmentVariable("AZURE_AUTH_LOCATION"));
+
     var azure = Azure
         .Configure()
         .WithLogLevel(HttpLoggingDelegatingHandler.Level.Basic)
@@ -138,19 +156,19 @@ Press **F5** to run the sample.
 
 After several minutes, the program will finish, prompting you to press enter. After pressing enter, verify the virtual machine in your subscription with the Azure CLI 2.0:
 
-```azurecli
-az vm list --resource-group sampleResourceGroup
+```powershell
+Get-AzureRmVm -ResourceGroupName sampleResourceGroup
 ```
 
 Once you've verified that the code worked, delete the resource group, which contains the VM, its NIC, the virtual network, and the public IP address.
 
-```azurecli
-az group delete --name sampleResourceGroup
+```powershell
+Remove-AzureRmResourceGroup -ResourceGroupName sampleResourceGroup
 ```
 
 ## Deploy a web app from a GitHub repo
 
-Now you'll modify your code to create a deploy a new web app from an existing GitHub repository. Replace the `Main` with the following code:
+Now you'll modify your code to create a deploy a new web app from an existing GitHub repository. Replace the `Main` method with the following code:
 
 ```csharp
 static void Main(string[] args)
@@ -166,6 +184,7 @@ static void Main(string[] args)
     // Authenticate
     var credentials = SdkContext.AzureCredentialsFactory
         .FromFile(Environment.GetEnvironmentVariable("AZURE_AUTH_LOCATION"));
+
     var azure = Azure
         .Configure()
         .WithLogLevel(HttpLoggingDelegatingHandler.Level.Basic)
@@ -200,8 +219,8 @@ This code will deploy a .NET app directly from a public GitHub repo into Azure A
 
 After you've verified the deployment, cleanup your resource group as before.
 
-```azurecli
-az group delete --name sampleResourceGroup
+```powershell
+Remove-AzureRmResourceGroup -ResourceGroupName sampleResourceGroup
 ```
 
 ## Explore sample code

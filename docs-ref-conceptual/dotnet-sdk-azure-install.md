@@ -31,39 +31,29 @@ If you're using Visual Studio, use the **NuGet Package Manager Console** to impo
 
     ![Package Manager Console](media/dotnet-sdk-azure-install/package-manager.png)
 
-2. In the console window, use the **Install-Package** cmdlet to download and install the NuGet package.  For example, to include the latest version of the [Azure Resource Management Library](http://www.nuget.org/packages/Microsoft.Azure.Management.ResourceManager) for .NET:
+2. In the console window, use the **Install-Package** cmdlet to download and install the NuGet package.  For example, to include the latest version of the fluent [Microsoft Azure Management Client Library](http://www.nuget.org/packages/Microsoft.Azure.Management.Fluent) for .NET:
 
     ```powershell
-    Install-Package Microsoft.Azure.Management.ResourceManager -Pre 
+    Install-Package Microsoft.Azure.Management.Fluent
     ``` 
     To use a specific version, include the version number like this:
 
     ```powershell
-    Install-Package Microsoft.Azure.Management.ResourceMananger -Version 1.4.0-preview
+    Install-Package Microsoft.Azure.Management.Fluent -Version 1.0.0
     ``` 
 
 ### .NET Core
 
-If you're using .NET Core with Visual Studio Code (or any other editor), edit your csproj file to add the package as a **PackageReference** element.  This example uses a specific version of **Microsoft.Azure.Management.ResourceManager**, which is the best practice, but NuGet [floating versions](/nuget/consume-packages/package-references-in-project-files#floating-versions) are also supported.
+If you're using .NET Core with Visual Studio Code (or any other editor), use the `dotnet add package` command.  The following will include the latest version of the fluent [Microsoft Azure Management Client Library](http://www.nuget.org/packages/Microsoft.Azure.Management.Fluent) for .NET:
 
-```xml
-<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp1.1</TargetFramework>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Azure.Management.ResourceManager" Version="1.4.0-preview" />
-  </ItemGroup>
-
-</Project>
+```bash
+dotnet add package Microsoft.Azure.Management.Fluent
 ```
+To use a specific version, include the version number like this:
 
-> [!TIP]
-> Previous versions of .NET Core used project.json files instead of csproj.  To learn about mapping project.json to csproj, [see this document](/dotnet/articles/core/tools/project-json-to-csproj).
-
+```bash
+dotnet add package Microsoft.Azure.Management.Fluent -v 1.0.0
+```
 
 ## Verify your install
 
@@ -179,4 +169,4 @@ Service | Package
 
 ## Next steps
 
-Now that the SDK is ready to use, visit the [get started with the Azure SDK for Java] guide to see it in action.
+TBD

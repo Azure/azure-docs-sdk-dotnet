@@ -36,11 +36,11 @@ var windowsVM = azure.VirtualMachines.Define(windowsVmName)
 
 Review the [install instructions](dotnet-sdk-azure-install.md) to start using the libraries immediately with your projects. Set up authentication and run sample code against your own Azure subscription in the [get started article](dotnet-sdk-azure-get-started.md). The [concepts article](dotnet-sdk-azure-patterns.md) goes into the conventions the SDK uses and how to leverage them to simplify your application code. New features, breaking changes, and migration instructions are available in the [release notes](dotnet-sdk-release-notes.md).
 
-The following samples cover common automation tasks with the Azure SDK for Java and are formatted for copy and paste into you own apps:
+The following samples cover common automation tasks with the Azure Libraries for .NET and are formatted for copy and paste into you own apps:
 
 - [Virtual machines](dotnet-sdk-azure-virtual-machine-samples.md)
 - [Resource groups](dotnet-sdk-azure-resource-groups-samples.md)
 - [Web apps](dotnet-sdk-azure-web-apps-samples.md)
 - [SQL Database](dotnet-sdk-azure-sql-database-samples.md)
 
-An up to date [reference](#) is available for all packages and classes in the SDK.
+An up to date [reference](#) is available for all packages and classes.
