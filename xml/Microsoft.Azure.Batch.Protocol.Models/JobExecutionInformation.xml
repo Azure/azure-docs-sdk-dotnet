@@ -11,7 +11,10 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
+    <summary>
+            Contains information about the execution of a job in the Azure Batch
+            service.
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -25,7 +28,9 @@
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Initializes a new instance of the JobExecutionInformation class.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -45,12 +50,17 @@
         <Parameter Name="terminateReason" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="startTime">To be added.</param>
-        <param name="endTime">To be added.</param>
-        <param name="poolId">To be added.</param>
-        <param name="schedulingError">To be added.</param>
-        <param name="terminateReason">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="startTime">The start time of the job.</param>
+        <param name="endTime">The completion time of the job.</param>
+        <param name="poolId">The ID of the pool to which this job is
+            assigned.</param>
+        <param name="schedulingError">Details of any error encountered by
+            the service in starting the job.</param>
+        <param name="terminateReason">A string describing the reason the
+            job ended.</param>
+        <summary>
+            Initializes a new instance of the JobExecutionInformation class.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -71,9 +81,13 @@
         <ReturnType>System.Nullable&lt;System.DateTime&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the completion time of the job.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            This property is set only if the job is in the completed state.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="PoolId">
@@ -93,9 +107,19 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the ID of the pool to which this job is assigned.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            This element contains the actual pool where the job is assigned.
+            When you get job details from the service, they also contain a
+            poolInfo element, which contains the pool configuration data from
+            when the job was added or updated. That poolInfo element may also
+            contain a poolId element. If it does, the two IDs are the same. If
+            it does not, it means the job ran on an auto pool, and this
+            property contains the id of that auto pool.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="SchedulingError">
@@ -115,9 +139,14 @@
         <ReturnType>Microsoft.Azure.Batch.Protocol.Models.JobSchedulingError</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets details of any error encountered by the service in
+            starting the job.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            This property is not set if there was no error starting the job.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="StartTime">
@@ -137,9 +166,13 @@
         <ReturnType>System.DateTime</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the start time of the job.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            This is the time at which the job was created.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="TerminateReason">
@@ -159,9 +192,25 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets a string describing the reason the job ended.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            This property is set only if the job is in the completed state. If
+            the Batch service terminates the job, it sets the reason as
+            follows: JMComplete - the Job Manager task completed, and
+            killJobOnCompletion was set to true. MaxWallClockTimeExpiry - the
+            job reached its maxWallClockTime constraint. TerminateJobSchedule -
+            the job ran as part of a schedule, and the schedule terminated.
+            AllTasksComplete - the job's onAllTasksComplete attribute is set to
+            terminateJob, and all tasks in the job are complete. TaskFailed -
+            the job's onTaskFailure attribute is set to
+            performExitOptionsJobAction, and a task in the job failed with an
+            exit condition that specified a jobAction of terminateJob. Any
+            other string is a user-defined reason specified in a call to the
+            'Terminate a job' operation.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="Validate">
@@ -177,8 +226,13 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Validate the object.
+            </summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:Microsoft.Rest.ValidationException">
+            Thrown if validation fails
+            </exception>
       </Docs>
     </Member>
   </Members>

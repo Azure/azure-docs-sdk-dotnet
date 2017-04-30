@@ -11,8 +11,13 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>
+            A <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> which you can use to specify under what conditions an operation to
+            add multiple tasks to a job should retry, terminate or be considered successful.
+            </summary>
+    <remarks>You do not need to specify this behavior explicitly; if you do not, a default behavior
+            is used.  This behavior uses the <see cref="M:Microsoft.Azure.Batch.AddTaskCollectionResultHandler.DefaultAddTaskCollectionResultHandler(Microsoft.Azure.Batch.AddTaskResult,System.Threading.CancellationToken)" />
+            criteria.</remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -27,8 +32,11 @@
         <Parameter Name="resultHandler" Type="System.Func&lt;Microsoft.Azure.Batch.AddTaskResult,System.Threading.CancellationToken,Microsoft.Azure.Batch.AddTaskResultStatus&gt;" />
       </Parameters>
       <Docs>
-        <param name="resultHandler">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="resultHandler">A function that defines whether a particular Add Task operation is considered
+            successful or unsuccessful, and whether it may be retried.</param>
+        <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.Batch.AddTaskCollectionResultHandler" /> class with the specified result handler function.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -48,10 +56,15 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="addTaskResult">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="addTaskResult">The result of a single Add Task operation.</param>
+        <param name="cancellationToken">The cancellation token associated with the AddTaskCollection operation.</param>
+        <summary>
+            The default result handler for the <see cref="T:Microsoft.Azure.Batch.AddTaskCollectionResultHandler" /> behavior. This handler
+            treats success and 'TaskExists' errors as successful, retries server errors (HTTP 5xx), and throws
+            <see cref="T:Microsoft.Azure.Batch.AddTaskCollectionTerminatedException" /> on client error (HTTP 4xx).
+            </summary>
+        <returns>An <see cref="T:Microsoft.Azure.Batch.AddTaskResultStatus" /> which indicates whether the <paramref name="addTaskResult" />
+            is classified as a success or as requiring a retry.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -67,7 +80,10 @@
         <ReturnType>System.Func&lt;Microsoft.Azure.Batch.AddTaskResult,System.Threading.CancellationToken,Microsoft.Azure.Batch.AddTaskResultStatus&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the function that defines whether a particular Add Task operation is considered
+            successful or unsuccessful, and whether it may be retried.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>

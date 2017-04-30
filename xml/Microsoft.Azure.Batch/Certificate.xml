@@ -18,7 +18,9 @@
     </Interface>
   </Interfaces>
   <Docs>
-    <summary>To be added.</summary>
+    <summary>
+            A certificate that can be installed on compute nodes and can be used to authenticate operations on a node.
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -37,9 +39,17 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.Certificate.CustomBehaviors" />.</param>
+        <summary>
+            Cancels a failed deletion of the certificate.  This can be done only when
+            the certificate is in the <see cref="F:Microsoft.Azure.Batch.Common.CertificateState.DeleteFailed" /> state, and restores the certificate to the <see cref="F:Microsoft.Azure.Batch.Common.CertificateState.Active" /> state.
+            </summary>
+        <remarks>
+          <para>If you still wish to delete the certificate (instead of returning it to Active), you do not need to cancel
+            the failed deletion. You must make sure that the certificate is not being used by any resources, and then you
+            can try again to delete the certificate (see <see cref="M:Microsoft.Azure.Batch.Certificate.Delete(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})" />.</para>
+          <para>This is a blocking operation. For a non-blocking equivalent, see <see cref="M:Microsoft.Azure.Batch.Certificate.CancelDeleteAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" />.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="CancelDeleteAsync">
@@ -63,11 +73,19 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="additionalBehaviors">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.Certificate.CustomBehaviors" />.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> for controlling the lifetime of the asynchronous operation.</param>
+        <summary>
+            Cancels a failed deletion of the certificate.  This can be done only when
+            the certificate is in the <see cref="F:Microsoft.Azure.Batch.Common.CertificateState.DeleteFailed" /> state, and restores the certificate to the <see cref="F:Microsoft.Azure.Batch.Common.CertificateState.Active" /> state.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> object that represents the asynchronous operation.</returns>
+        <remarks>
+          <para>If you still wish to delete the certificate (instead of returning it to Active), you do not need to cancel
+            the failed deletion. You must make sure that the certificate is not being used by any resources, and then you
+            can try again to delete the certificate (see <see cref="M:Microsoft.Azure.Batch.Certificate.DeleteAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" />.</para>
+          <para>The cancel delete operation runs asynchronously.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="CertificateFormat">
@@ -82,7 +100,9 @@
         <ReturnType>System.Nullable&lt;Microsoft.Azure.Batch.Common.CertificateFormat&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the format of the certificate data.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -102,9 +122,11 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.Certificate.CustomBehaviors" />.</param>
+        <summary>
+            Adds the certificate to the Batch account.
+            </summary>
+        <remarks>This is a blocking operation. For a non-blocking equivalent, see <see cref="M:Microsoft.Azure.Batch.Certificate.CommitAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" />.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CommitAsync">
@@ -128,11 +150,13 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="additionalBehaviors">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.Certificate.CustomBehaviors" />.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> for controlling the lifetime of the asynchronous operation.</param>
+        <summary>
+            Adds the certificate to the Batch account.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous operation.</returns>
+        <remarks>The commit operation runs asynchronously.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CustomBehaviors">
@@ -147,9 +171,15 @@
         <ReturnType>System.Collections.Generic.IList&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets a list of behaviors that modify or customize requests to the Batch service
+            made via this <see cref="T:Microsoft.Azure.Batch.Certificate" />.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+          <para>These behaviors are inherited by child objects.</para>
+          <para>Modifications are applied in the order of the collection. The last write wins.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="Data">
@@ -164,9 +194,16 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the base64-encoded raw certificate data (contents of the .pfx or .cer file or data from which the <see cref="T:Microsoft.Azure.Batch.Certificate" /> 
+            was created).
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+          <para>This property is set when creating a new <see cref="T:Microsoft.Azure.Batch.Certificate" />. It is not defined for certificates 
+            retrieved from the Batch service.</para>
+          <para>The maximum size is 10 KB.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="Delete">
@@ -184,9 +221,27 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.Certificate.CustomBehaviors" />.</param>
+        <summary>
+            Deletes the certificate from the Batch account.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous operation.</returns>
+        <remarks>
+          <para>The delete operation requests that the certificate be deleted.  The request puts the certificate in the <see cref="F:Microsoft.Azure.Batch.Common.CertificateState.Deleting" /> state.
+            The Batch service will perform the actual certificate deletion without any further client action.</para>
+          <para>You cannot delete a certificate if a resource (pool or compute node) is using it. Before you can delete a certificate, you must therefore make sure that:</para>
+          <list type="bullet">
+            <item>
+              <description>The certificate is not associated with any pools.</description>
+            </item>
+            <item>
+              <description>The certificate is not installed on any compute nodes.  (Even if you remove a certificate from a pool, it is not removed from existing compute nodes in that pool until they restart.)</description>
+            </item>
+          </list>
+          <para>If you try to delete a certificate that is in use, the deletion fails. The certificate state changes to <see cref="F:Microsoft.Azure.Batch.Common.CertificateState.DeleteFailed" />.
+            You can use <see cref="M:Microsoft.Azure.Batch.Certificate.CancelDeleteAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" /> to set the status back to Active if you decide that you want to continue using the certificate.</para>
+          <para>This is a blocking operation. For a non-blocking equivalent, see <see cref="M:Microsoft.Azure.Batch.Certificate.DeleteAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" />.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="DeleteAsync">
@@ -210,11 +265,28 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="additionalBehaviors">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.Certificate.CustomBehaviors" />.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> for controlling the lifetime of the asynchronous operation.</param>
+        <summary>
+            Deletes the certificate from the Batch account.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous operation.</returns>
+        <remarks>
+          <para>The delete operation requests that the certificate be deleted.  The request puts the certificate in the <see cref="F:Microsoft.Azure.Batch.Common.CertificateState.Deleting" /> state.
+            The Batch service will perform the actual certificate deletion without any further client action.</para>
+          <para>You cannot delete a certificate if a resource (pool or compute node) is using it. Before you can delete a certificate, you must therefore make sure that:</para>
+          <list type="bullet">
+            <item>
+              <description>The certificate is not associated with any pools.</description>
+            </item>
+            <item>
+              <description>The certificate is not installed on any compute nodes.  (Even if you remove a certificate from a pool, it is not removed from existing compute nodes in that pool until they restart.)</description>
+            </item>
+          </list>
+          <para>If you try to delete a certificate that is in use, the deletion fails. The certificate state changes to <see cref="F:Microsoft.Azure.Batch.Common.CertificateState.DeleteFailed" />.
+            You can use <see cref="M:Microsoft.Azure.Batch.Certificate.CancelDeleteAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" /> to set the status back to Active if you decide that you want to continue using the certificate.</para>
+          <para>The delete operation runs asynchronously.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="DeleteCertificateError">
@@ -229,9 +301,13 @@
         <ReturnType>Microsoft.Azure.Batch.DeleteCertificateError</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the error that occurred on the last attempt to delete this certificate.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            This property is null unless the certificate is in the <see cref="F:Microsoft.Azure.Batch.Common.CertificateState.DeleteFailed" /> state.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="Password">
@@ -246,9 +322,14 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the password to access the certificate private key.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            This property is set when creating a new <see cref="T:Microsoft.Azure.Batch.Certificate" /> from .pfx format data (see <see cref="M:Microsoft.Azure.Batch.CertificateOperations.CreateCertificate(System.Byte[],System.String)" /> and <see cref="M:Microsoft.Azure.Batch.CertificateOperations.CreateCertificate(System.String,System.String)" />). It is not defined for 
+            certificates retrieved from the Batch service.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="PreviousState">
@@ -263,9 +344,14 @@
         <ReturnType>System.Nullable&lt;Microsoft.Azure.Batch.Common.CertificateState&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the previous state of the certificate.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            If the certificate is in its initial <see cref="F:Microsoft.Azure.Batch.Common.CertificateState.Active" /> state, the PreviousState property 
+            is not defined.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="PreviousStateTransitionTime">
@@ -280,9 +366,14 @@
         <ReturnType>System.Nullable&lt;System.DateTime&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the time at which the certificate entered its previous state.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            If the certificate is in its initial <see cref="F:Microsoft.Azure.Batch.Common.CertificateState.Active" /> state, the PreviousStateTransitionTime 
+            property is not defined.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="PublicData">
@@ -297,7 +388,9 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the public part of the certificate as a string containing base-64 encoded .cer format data.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -318,9 +411,11 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="detailLevel">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="detailLevel">The detail level for the refresh.  If a detail level which omits the <see cref="P:Microsoft.Azure.Batch.Certificate.Thumbprint" /> or <see cref="P:Microsoft.Azure.Batch.Certificate.ThumbprintAlgorithm" /> property is specified, refresh will fail.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.Certificate.CustomBehaviors" />.</param>
+        <summary>
+            Refreshes the current <see cref="T:Microsoft.Azure.Batch.Certificate" />.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -346,11 +441,13 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="detailLevel">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="detailLevel">The detail level for the refresh.  If a detail level which omits the <see cref="P:Microsoft.Azure.Batch.Certificate.Thumbprint" /> or <see cref="P:Microsoft.Azure.Batch.Certificate.ThumbprintAlgorithm" /> property is specified, refresh will fail.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.Certificate.CustomBehaviors" />.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> for controlling the lifetime of the asynchronous operation.</param>
+        <summary>
+            Refreshes the current <see cref="T:Microsoft.Azure.Batch.Certificate" />.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> representing the asynchronous refresh operation.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -366,7 +463,9 @@
         <ReturnType>System.Nullable&lt;Microsoft.Azure.Batch.Common.CertificateState&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the current state of the certificate.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -383,7 +482,9 @@
         <ReturnType>System.Nullable&lt;System.DateTime&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the time at which the certificate entered its current state.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -400,7 +501,9 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the thumbprint of the certificate. This is a sequence of up to 40 hex digits.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -417,7 +520,9 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the algorithm used to derive the thumbprint.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -434,7 +539,9 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the URL of the certificate.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
