@@ -25,7 +25,7 @@ This guide uses Visual Studio.  See the [installation guide](dotnet-sdk-azure-in
 
 ## Set up authentication
 
-[!include[<title>](<filepath>)]
+[!include[File-based authentication](includes/file-based-auth.md)]
 
 ## Create a new project 
 
