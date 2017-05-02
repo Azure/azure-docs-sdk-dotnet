@@ -25,8 +25,6 @@ This guide uses Visual Studio.  See the [installation guide](dotnet-sdk-azure-in
 
 ## Set up authentication
 
-[!include[<title>](<filepath>)]
-
 ## Create a new project 
 
 Create a new console application project.  In Visual Studio, do this by clicking **File**, **New**, and then clicking **Project...**.  Under the Visual C# templates, select **Console App (.NET Core)**, name your project, and then click **OK**.
