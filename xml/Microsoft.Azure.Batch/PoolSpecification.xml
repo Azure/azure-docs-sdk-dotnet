@@ -11,7 +11,9 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
+    <summary>
+            The specification for a pool.
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -25,7 +27,9 @@
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.Batch.PoolSpecification" /> class.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -41,7 +45,9 @@
         <ReturnType>System.Collections.Generic.IList&lt;Microsoft.Azure.Batch.ApplicationPackageReference&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets a list of application package references to be installed on each compute node in the pool.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -58,9 +64,17 @@
         <ReturnType>System.Nullable&lt;System.Boolean&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets whether the pool size should automatically adjust over time.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+          <para>If false, the <see cref="P:Microsoft.Azure.Batch.PoolSpecification.TargetDedicated" /> property is required.</para>
+          <para>If true, the <see cref="P:Microsoft.Azure.Batch.PoolSpecification.AutoScaleFormula" /> 
+            property is required. The pool automatically resizes according to the formula.</para>
+          <para>The default value 
+            is false.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="AutoScaleEvaluationInterval">
@@ -75,9 +89,13 @@
         <ReturnType>System.Nullable&lt;System.TimeSpan&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets a time interval at which to automatically adjust the pool size according to the <see cref="P:Microsoft.Azure.Batch.PoolSpecification.AutoScaleFormula" />.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            The default value is 15 minutes. The minimum allowed value is 5 minutes.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="AutoScaleFormula">
@@ -92,9 +110,17 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets a formula for the desired number of compute nodes in the pool.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+          <para>For how to write autoscale formulas, see https://azure.microsoft.com/documentation/articles/batch-automatic-scaling/. 
+            This property is required if <see cref="P:Microsoft.Azure.Batch.PoolSpecification.AutoScaleEnabled" /> is set to true. It must be null if AutoScaleEnabled 
+            is false.</para>
+          <para>The formula is checked for validity before the pool is created. If the formula is not valid, 
+            an exception is thrown when you try to commit the <see cref="T:Microsoft.Azure.Batch.PoolSpecification" />.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="CertificateReferences">
@@ -109,7 +135,9 @@
         <ReturnType>System.Collections.Generic.IList&lt;Microsoft.Azure.Batch.CertificateReference&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets a list of certificates to be installed on each compute node in the pool.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -126,9 +154,13 @@
         <ReturnType>Microsoft.Azure.Batch.CloudServiceConfiguration</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the <see cref="P:Microsoft.Azure.Batch.PoolSpecification.CloudServiceConfiguration" /> for the pool.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            This property is mutually exclusive with <see cref="P:Microsoft.Azure.Batch.PoolSpecification.VirtualMachineConfiguration" />.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="DisplayName">
@@ -143,7 +175,9 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the display name for the pool.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -160,9 +194,14 @@
         <ReturnType>System.Nullable&lt;System.Boolean&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets whether the pool permits direct communication between its compute nodes.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            Enabling inter-node communication limits the maximum size of the pool due to deployment restrictions on the nodes 
+            of the pool. This may result in the pool not reaching its desired size.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="MaxTasksPerComputeNode">
@@ -177,9 +216,14 @@
         <ReturnType>System.Nullable&lt;System.Int32&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the maximum number of tasks that can run concurrently on a single compute node in the pool.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            The default value is 1. The maximum value of this setting depends on the size of the compute nodes in the pool 
+            (the <see cref="P:Microsoft.Azure.Batch.PoolSpecification.VirtualMachineSize" /> property).
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="Metadata">
@@ -194,7 +238,9 @@
         <ReturnType>System.Collections.Generic.IList&lt;Microsoft.Azure.Batch.MetadataItem&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets a list of name-value pairs associated with the pool as metadata.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -211,7 +257,9 @@
         <ReturnType>Microsoft.Azure.Batch.NetworkConfiguration</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the network configuration of the pool.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -228,9 +276,15 @@
         <ReturnType>System.Nullable&lt;System.TimeSpan&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the timeout for allocation of compute nodes to the pool.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+          <para>This timeout applies only to manual scaling; it has no effect when <see cref="P:Microsoft.Azure.Batch.PoolSpecification.AutoScaleEnabled" /> is set 
+            to true.</para>
+          <para>The default value is 15 minutes. The minimum value is 5 minutes.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="StartTask">
@@ -245,7 +299,10 @@
         <ReturnType>Microsoft.Azure.Batch.StartTask</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets a task to run on each compute node as it joins the pool. The task runs when the node is added to 
+            the pool or when the node is restarted.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -262,9 +319,14 @@
         <ReturnType>System.Nullable&lt;System.Int32&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the desired number of compute nodes in the pool.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            This setting cannot be specified if <see cref="P:Microsoft.Azure.Batch.PoolSpecification.AutoScaleEnabled" /> is set to true. It is required if AutoScaleEnabled 
+            is set to false.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="TaskSchedulingPolicy">
@@ -279,7 +341,9 @@
         <ReturnType>Microsoft.Azure.Batch.TaskSchedulingPolicy</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets how tasks are distributed among compute nodes in the pool.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -296,7 +360,9 @@
         <ReturnType>System.Collections.Generic.IList&lt;Microsoft.Azure.Batch.UserAccount&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the list of user accounts to be created on each node in the pool.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -313,9 +379,13 @@
         <ReturnType>Microsoft.Azure.Batch.VirtualMachineConfiguration</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the <see cref="P:Microsoft.Azure.Batch.PoolSpecification.VirtualMachineConfiguration" /> of the pool.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            This property is mutually exclusive with <see cref="P:Microsoft.Azure.Batch.PoolSpecification.CloudServiceConfiguration" />.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="VirtualMachineSize">
@@ -330,9 +400,20 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the size of the virtual machines in the pool.  All virtual machines in a pool are the same size.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+          <para>For information about available sizes of virtual machines for Cloud Services pools (pools created with 
+            a <see cref="P:Microsoft.Azure.Batch.PoolSpecification.CloudServiceConfiguration" />), see https://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/. 
+            Batch supports all Cloud Services VM sizes except ExtraSmall.</para>
+          <para>For information about available VM 
+            sizes for pools using images from the Virtual Machines Marketplace (pools created with a <see cref="P:Microsoft.Azure.Batch.PoolSpecification.VirtualMachineConfiguration" />) 
+            see https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/ or https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/. 
+            Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (for example STANDARD_GS, 
+            STANDARD_DS, and STANDARD_DSV2 series).</para>
+        </remarks>
       </Docs>
     </Member>
   </Members>

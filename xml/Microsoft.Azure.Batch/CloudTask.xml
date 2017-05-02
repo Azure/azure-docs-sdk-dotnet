@@ -18,7 +18,12 @@
     </Interface>
   </Interfaces>
   <Docs>
-    <summary>To be added.</summary>
+    <summary>
+            An Azure Batch task.  A task is a piece of work that is associated with a job and runs on a compute node.
+            </summary>
+    <summary>
+            An Azure Batch task. A task is a piece of work that is associated with a job and runs on a compute node.
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -35,10 +40,13 @@
         <Parameter Name="commandline" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="id">To be added.</param>
-        <param name="commandline">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="id">The id of the task.</param>
+        <param name="commandline">The command line of the task.</param>
+        <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.Batch.CloudTask" /> class.
+            </summary>
+        <remarks>The newly created CloudTask is initially not associated with any task in the Batch service.
+            To associate it with a job and submit it to the Batch service, use <see cref="M:Microsoft.Azure.Batch.JobOperations.AddTaskAsync(System.String,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.CloudTask},Microsoft.Azure.Batch.BatchClientParallelOptions,System.Collections.Concurrent.ConcurrentBag{System.Collections.Concurrent.ConcurrentDictionary{System.Type,Microsoft.Azure.Batch.IFileStagingArtifact}},System.Nullable{System.TimeSpan},System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})" />.</remarks>
       </Docs>
     </Member>
     <Member MemberName="AffinityInformation">
@@ -53,7 +61,9 @@
         <ReturnType>Microsoft.Azure.Batch.AffinityInformation</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets a locality hint that can be used by the Batch service to select a node on which to start the task.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -70,7 +80,10 @@
         <ReturnType>System.Collections.Generic.IList&lt;Microsoft.Azure.Batch.ApplicationPackageReference&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets a list of application packages that the Batch service will deploy to the compute node before running 
+            the command line.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -87,9 +100,17 @@
         <ReturnType>Microsoft.Azure.Batch.AuthenticationTokenSettings</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the settings for an authentication token that the task can use to perform Batch service operations.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            If this property is set, the Batch service provides the task with an authentication token which can be used to 
+            authenticate Batch service operations without requiring an account access key. The token is provided via the 
+            AZ_BATCH_AUTHENTICATION_TOKEN environment variable. The operations that the task can carry out using the token 
+            depend on the settings. For example, a task can request job permissions in order to add other tasks to the job, 
+            or check the status of the job or of other tasks.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="CommandLine">
@@ -104,9 +125,15 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the command line of the task.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment 
+            variable expansion. If you want to take advantage of such features, you should invoke the shell in the command 
+            line, for example using "cmd /c MyCommand" in Windows or "/bin/sh -c MyCommand" in Linux.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="Commit">
@@ -124,9 +151,14 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.CloudTask.CustomBehaviors" />.</param>
+        <summary>
+            Commits all pending changes to this <see cref="T:Microsoft.Azure.Batch.CloudTask" /> to the Azure Batch service.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> object that represents the asynchronous operation.</returns>
+        <remarks>
+          <para>This is a blocking operation. For a non-blocking equivalent, see <see cref="M:Microsoft.Azure.Batch.CloudTask.CommitAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" />.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="CommitAsync">
@@ -150,11 +182,13 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="additionalBehaviors">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.CloudTask.CustomBehaviors" />.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> for controlling the lifetime of the asynchronous operation.</param>
+        <summary>
+            Commits all pending changes to this <see cref="T:Microsoft.Azure.Batch.CloudTask" /> to the Azure Batch service.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> object that represents the asynchronous operation.</returns>
+        <remarks>The commit operation runs asynchronously.</remarks>
       </Docs>
     </Member>
     <Member MemberName="ComputeNodeInformation">
@@ -169,7 +203,9 @@
         <ReturnType>Microsoft.Azure.Batch.ComputeNodeInformation</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets information about the compute node on which the task ran.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -186,7 +222,9 @@
         <ReturnType>Microsoft.Azure.Batch.TaskConstraints</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the execution constraints that apply to this task.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -203,7 +241,9 @@
         <ReturnType>System.Nullable&lt;System.DateTime&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the creation time of the task.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -220,9 +260,15 @@
         <ReturnType>System.Collections.Generic.IList&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets a list of behaviors that modify or customize requests to the Batch service
+            made via this <see cref="T:Microsoft.Azure.Batch.CloudTask" />.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+          <para>These behaviors are inherited by child objects.</para>
+          <para>Modifications are applied in the order of the collection. The last write wins.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="Delete">
@@ -240,9 +286,11 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.CloudTask.CustomBehaviors" />.</param>
+        <summary>
+            Deletes this <see cref="T:Microsoft.Azure.Batch.CloudTask" />.
+            </summary>
+        <remarks>This is a blocking operation. For a non-blocking equivalent, see <see cref="M:Microsoft.Azure.Batch.CloudTask.DeleteAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" />.</remarks>
       </Docs>
     </Member>
     <Member MemberName="DeleteAsync">
@@ -261,11 +309,13 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="additionalBehaviors">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.CloudTask.CustomBehaviors" />.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> for controlling the lifetime of the asynchronous operation.</param>
+        <summary>
+            Deletes this <see cref="T:Microsoft.Azure.Batch.CloudTask" />.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous operation.</returns>
+        <remarks>The delete operation runs asynchronously.</remarks>
       </Docs>
     </Member>
     <Member MemberName="DependsOn">
@@ -280,9 +330,15 @@
         <ReturnType>Microsoft.Azure.Batch.TaskDependencies</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets any other tasks that this <see cref="T:Microsoft.Azure.Batch.CloudTask" /> depends on. The task will not be scheduled until 
+            all depended-on tasks have completed successfully.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            The job must set <see cref="P:Microsoft.Azure.Batch.CloudJob.UsesTaskDependencies" /> to true in order to use task dependencies. If UsesTaskDependencies 
+            is false (the default), adding a task with dependencies will fail with an error.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="DisplayName">
@@ -297,7 +353,9 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the display name of the task.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -314,7 +372,9 @@
         <ReturnType>System.Collections.Generic.IList&lt;Microsoft.Azure.Batch.EnvironmentSetting&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets a list of environment variable settings for the task.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -331,7 +391,9 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the ETag for the task.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -348,7 +410,9 @@
         <ReturnType>Microsoft.Azure.Batch.TaskExecutionInformation</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the execution information for the task.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -365,7 +429,9 @@
         <ReturnType>Microsoft.Azure.Batch.ExitConditions</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets how the Batch service should respond when the task completes.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -382,7 +448,9 @@
         <ReturnType>System.Collections.Generic.IList&lt;Microsoft.Azure.Batch.FileStaging.IFileStagingProvider&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets a list of files to be staged for the task.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -403,11 +471,13 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="filePath">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="filePath">The path of the file to retrieve.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.CloudTask.CustomBehaviors" />.</param>
+        <summary>
+            Gets the specified <see cref="T:Microsoft.Azure.Batch.NodeFile" /> from the <see cref="T:Microsoft.Azure.Batch.CloudTask" />'s directory on its compute node.
+            </summary>
+        <returns>A <see cref="T:Microsoft.Azure.Batch.NodeFile" /> representing the specified file.</returns>
+        <remarks>This is a blocking operation. For a non-blocking equivalent, see <see cref="M:Microsoft.Azure.Batch.CloudTask.GetNodeFileAsync(System.String,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" />.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetNodeFileAsync">
@@ -427,12 +497,14 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="filePath">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="filePath">The path of the file to retrieve.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.CloudTask.CustomBehaviors" />.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> for controlling the lifetime of the asynchronous operation.</param>
+        <summary>
+            Gets the specified <see cref="T:Microsoft.Azure.Batch.NodeFile" /> from the <see cref="T:Microsoft.Azure.Batch.CloudTask" />'s directory on its compute node.
+            </summary>
+        <returns>A <see cref="T:Microsoft.Azure.Batch.NodeFile" /> representing the specified file.</returns>
+        <remarks>The get file operation runs asynchronously.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Id">
@@ -447,7 +519,9 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the id of the task.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -464,7 +538,9 @@
         <ReturnType>System.Nullable&lt;System.DateTime&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the last modified time of the task.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -486,12 +562,15 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="recursive">To be added.</param>
-        <param name="detailLevel">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="recursive">If true, performs a recursive list of all files of the task. If false, returns only the files in the root task directory.</param>
+        <param name="detailLevel">A <see cref="T:Microsoft.Azure.Batch.DetailLevel" /> used for filtering the list and for controlling which properties are retrieved from the service.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.CloudTask.CustomBehaviors" /> and <paramref name="detailLevel" />.</param>
+        <summary>
+            Enumerates the files in the <see cref="T:Microsoft.Azure.Batch.CloudTask" />'s directory on its compute node.
+            </summary>
+        <returns>An <see cref="T:Microsoft.Azure.Batch.IPagedEnumerable`1" /> that can be used to enumerate files asynchronously or synchronously.</returns>
+        <remarks>This method returns immediately; the file data is retrieved from the Batch service only when the collection is enumerated.
+            Retrieval is non-atomic; file data is retrieved in pages during enumeration of the collection.</remarks>
       </Docs>
     </Member>
     <Member MemberName="ListSubtasks">
@@ -510,11 +589,14 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="detailLevel">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="detailLevel">A <see cref="T:Microsoft.Azure.Batch.DetailLevel" /> used for filtering the list and for controlling which properties are retrieved from the service.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.CloudTask.CustomBehaviors" /> and <paramref name="detailLevel" />.</param>
+        <summary>
+            Enumerates the subtasks of the multi-instance <see cref="T:Microsoft.Azure.Batch.CloudTask" />.
+            </summary>
+        <returns>An <see cref="T:Microsoft.Azure.Batch.IPagedEnumerable`1" /> that can be used to enumerate files asynchronously or synchronously.</returns>
+        <remarks>This method returns immediately; the file data is retrieved from the Batch service only when the collection is enumerated.
+            Retrieval is non-atomic; file data is retrieved in pages during enumeration of the collection.</remarks>
       </Docs>
     </Member>
     <Member MemberName="MultiInstanceSettings">
@@ -529,7 +611,9 @@
         <ReturnType>Microsoft.Azure.Batch.MultiInstanceSettings</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets information about how to run the multi-instance task.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -546,9 +630,14 @@
         <ReturnType>System.Nullable&lt;Microsoft.Azure.Batch.Common.TaskState&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the previous state of the task.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            If the task is in its initial <see cref="F:Microsoft.Azure.Batch.Common.TaskState.Active" /> state, the PreviousState property is not 
+            defined.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="PreviousStateTransitionTime">
@@ -563,9 +652,14 @@
         <ReturnType>System.Nullable&lt;System.DateTime&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the time at which the task entered its previous state.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            If the task is in its initial <see cref="F:Microsoft.Azure.Batch.Common.TaskState.Active" /> state, the PreviousStateTransitionTime property 
+            is not defined.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="Reactivate">
@@ -583,9 +677,22 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.CloudTask.CustomBehaviors" />.</param>
+        <summary>
+            Reactivates this <see cref="T:Microsoft.Azure.Batch.CloudTask" />, allowing it to run again even if its retry count has been exhausted.
+            </summary>
+        <remarks>
+          <para>
+            Reactivation makes a task eligible to be retried again up to its maximum retry count.
+            </para>
+          <para>
+            This operation will fail for tasks that are not completed or that previously completed successfully (with an exit code of 0).
+            Additionally, this will fail if the job is in the <see cref="F:Microsoft.Azure.Batch.Common.JobState.Completed" /> or <see cref="F:Microsoft.Azure.Batch.Common.JobState.Terminating" /> or <see cref="F:Microsoft.Azure.Batch.Common.JobState.Deleting" /> state.
+            </para>
+          <para>
+            This is a blocking operation. For a non-blocking equivalent, see <see cref="M:Microsoft.Azure.Batch.CloudTask.ReactivateAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" />.
+            </para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="ReactivateAsync">
@@ -604,11 +711,24 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="additionalBehaviors">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.CloudTask.CustomBehaviors" />.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> for controlling the lifetime of the asynchronous operation.</param>
+        <summary>
+            Reactivates this <see cref="T:Microsoft.Azure.Batch.CloudTask" />, allowing it to run again even if its retry count has been exhausted.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous operation.</returns>
+        <remarks>
+          <para>
+            Reactivation makes a task eligible to be retried again up to its maximum retry count.
+            </para>
+          <para>
+            This operation will fail for tasks that are not completed or that previously completed successfully (with an exit code of 0).
+            Additionally, this will fail if the job is in the <see cref="F:Microsoft.Azure.Batch.Common.JobState.Completed" /> or <see cref="F:Microsoft.Azure.Batch.Common.JobState.Terminating" /> or <see cref="F:Microsoft.Azure.Batch.Common.JobState.Deleting" /> state.
+            </para>
+          <para>
+            The reactivate operation runs asynchronously.
+            </para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="Refresh">
@@ -627,9 +747,11 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="detailLevel">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="detailLevel">The detail level for the refresh.  If a detail level which omits the <see cref="P:Microsoft.Azure.Batch.CloudTask.Id" /> property is specified, refresh will fail.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.CloudTask.CustomBehaviors" />.</param>
+        <summary>
+            Refreshes the current <see cref="T:Microsoft.Azure.Batch.CloudTask" />.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -655,11 +777,13 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="detailLevel">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="detailLevel">The detail level for the refresh.  If a detail level which omits the <see cref="P:Microsoft.Azure.Batch.CloudTask.Id" /> property is specified, refresh will fail.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.CloudTask.CustomBehaviors" />.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> for controlling the lifetime of the asynchronous operation.</param>
+        <summary>
+            Refreshes the current <see cref="T:Microsoft.Azure.Batch.CloudTask" />.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous operation.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -675,7 +799,10 @@
         <ReturnType>System.Collections.Generic.IList&lt;Microsoft.Azure.Batch.ResourceFile&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets a list of files that the Batch service will download to the compute node before running the command 
+            line.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -693,9 +820,12 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>
+            Stages the files listed in the <see cref="P:Microsoft.Azure.Batch.CloudTask.FilesToStage" /> list.
+            </summary>
+        <returns>A collection of information about the file staging process.
+            For more information see <see cref="T:Microsoft.Azure.Batch.IFileStagingArtifact" />.</returns>
+        <remarks>This is a blocking operation. For a non-blocking equivalent, see <see cref="M:Microsoft.Azure.Batch.CloudTask.StageFilesAsync(System.Collections.Concurrent.ConcurrentDictionary{System.Type,Microsoft.Azure.Batch.IFileStagingArtifact})" />.</remarks>
       </Docs>
     </Member>
     <Member MemberName="StageFilesAsync">
@@ -718,10 +848,13 @@
         <Parameter Name="allFileStagingArtifacts" Type="System.Collections.Concurrent.ConcurrentDictionary&lt;System.Type,Microsoft.Azure.Batch.IFileStagingArtifact&gt;" />
       </Parameters>
       <Docs>
-        <param name="allFileStagingArtifacts">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="allFileStagingArtifacts">An optional collection to customize and receive information about the file staging process.
+            For more information see <see cref="T:Microsoft.Azure.Batch.IFileStagingArtifact" />.</param>
+        <summary>
+            Stages the files listed in the <see cref="P:Microsoft.Azure.Batch.CloudTask.FilesToStage" /> list.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous operation.</returns>
+        <remarks>The staging operation runs asynchronously.</remarks>
       </Docs>
     </Member>
     <Member MemberName="State">
@@ -736,7 +869,9 @@
         <ReturnType>System.Nullable&lt;Microsoft.Azure.Batch.Common.TaskState&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the current state of the task.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -753,7 +888,9 @@
         <ReturnType>System.Nullable&lt;System.DateTime&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the time at which the task entered its current state.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -770,9 +907,14 @@
         <ReturnType>Microsoft.Azure.Batch.TaskStatistics</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets resource usage statistics for the task.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            This property is populated only if the <see cref="T:Microsoft.Azure.Batch.CloudTask" /> was retrieved with an <see cref="P:Microsoft.Azure.Batch.ODATADetailLevel.ExpandClause" /> 
+            including the 'stats' attribute; otherwise it is null.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="Terminate">
@@ -790,9 +932,11 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.CloudTask.CustomBehaviors" />.</param>
+        <summary>
+            Terminates this <see cref="T:Microsoft.Azure.Batch.CloudTask" />, marking it as completed.
+            </summary>
+        <remarks>This is a blocking operation. For a non-blocking equivalent, see <see cref="M:Microsoft.Azure.Batch.CloudTask.TerminateAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" />.</remarks>
       </Docs>
     </Member>
     <Member MemberName="TerminateAsync">
@@ -811,11 +955,13 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="additionalBehaviors">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.CloudTask.CustomBehaviors" />.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> for controlling the lifetime of the asynchronous operation.</param>
+        <summary>
+            Terminates this <see cref="T:Microsoft.Azure.Batch.CloudTask" />, marking it as completed.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> object that represents the asynchronous operation.</returns>
+        <remarks>The terminate operation runs asynchronously.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Url">
@@ -830,7 +976,9 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the URL of the task.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -847,9 +995,13 @@
         <ReturnType>Microsoft.Azure.Batch.UserIdentity</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the user identity under which the task runs.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            If omitted, the task runs as a non-administrative user unique to the task.
+            </remarks>
       </Docs>
     </Member>
   </Members>

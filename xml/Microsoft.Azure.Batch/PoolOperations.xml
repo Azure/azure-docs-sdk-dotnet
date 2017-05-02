@@ -15,7 +15,9 @@
     </Interface>
   </Interfaces>
   <Docs>
-    <summary>To be added.</summary>
+    <summary>
+            Performs pool-related operations on an Azure Batch account.
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -36,11 +38,19 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="targetOSVersion">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool.</param>
+        <param name="targetOSVersion">The Azure Guest OS version to be installed on the virtual machines in the pool.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <summary>
+            Changes the operating system version of the specified pool.
+            </summary>
+        <remarks>
+          <para>During the change OS version operation, the Batch service traverses the nodes of the pool, changing the OS version of compute nodes.  When a compute node is chosen, any tasks running on that node are removed from the node and requeued to be rerun later (or on a different compute node).  The node will be unavailable until the version change is complete.</para>
+          <para>The operation will result in temporarily reduced pool capacity as nodes are taken out of service to have their OS version changed. Although the Batch service tries to avoid changing all compute nodes at the same time, it does not guarantee to do this (particularly on small pools); therefore, the operation may result in the pool being temporarily unavailable to run tasks.</para>
+          <para>When you request an OS version change, the pool state changes to <see cref="F:Microsoft.Azure.Batch.Common.PoolState.Upgrading" />.  When all compute nodes have finished changing version, the pool state returns to <see cref="F:Microsoft.Azure.Batch.Common.PoolState.Active" />.</para>
+          <para>While the version change is in progress, the pool's <see cref="P:Microsoft.Azure.Batch.CloudServiceConfiguration.CurrentOSVersion" /> reflects the OS version that nodes are changing from, and <see cref="P:Microsoft.Azure.Batch.CloudServiceConfiguration.TargetOSVersion" /> reflects the OS version that nodes are changing to. Once the change is complete, CurrentOSVersion is updated to reflect the OS version now running on all nodes.</para>
+          <para>This is a blocking operation. For a non-blocking equivalent, see <see cref="M:Microsoft.Azure.Batch.PoolOperations.ChangeOSVersionAsync(System.String,System.String,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" />.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="ChangeOSVersionAsync">
@@ -61,13 +71,21 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="targetOSVersion">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool.</param>
+        <param name="targetOSVersion">The Azure Guest OS version to be installed on the virtual machines in the pool.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> for controlling the lifetime of the asynchronous operation.</param>
+        <summary>
+            Changes the operating system version of the specified pool.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous operation.</returns>
+        <remarks>
+          <para>During the change OS version operation, the Batch service traverses the nodes of the pool, changing the OS version of compute nodes.  When a compute node is chosen, any tasks running on that node are removed from the node and requeued to be rerun later (or on a different compute node).  The node will be unavailable until the version change is complete.</para>
+          <para>The operation will result in temporarily reduced pool capacity as nodes are taken out of service to have their OS version changed. Although the Batch service tries to avoid changing all compute nodes at the same time, it does not guarantee to do this (particularly on small pools); therefore, the operation may result in the pool being temporarily unavailable to run tasks.</para>
+          <para>When you request an OS version change, the pool state changes to <see cref="F:Microsoft.Azure.Batch.Common.PoolState.Upgrading" />.  When all compute nodes have finished changing version, the pool state returns to <see cref="F:Microsoft.Azure.Batch.Common.PoolState.Active" />.</para>
+          <para>While the version change is in progress, the pool's <see cref="P:Microsoft.Azure.Batch.CloudServiceConfiguration.CurrentOSVersion" /> reflects the OS version that nodes are changing from, and <see cref="P:Microsoft.Azure.Batch.CloudServiceConfiguration.TargetOSVersion" /> reflects the OS version that nodes are changing to. Once the change is complete, CurrentOSVersion is updated to reflect the OS version now running on all nodes.</para>
+          <para>The change version operation runs asynchronously.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateComputeNodeUser">
@@ -86,11 +104,14 @@
         <Parameter Name="computeNodeId" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="computeNodeId">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool that contains the compute node.</param>
+        <param name="computeNodeId">The id of the compute node where the user account will be created.</param>
+        <summary>
+            Creates a <see cref="T:Microsoft.Azure.Batch.ComputeNodeUser" /> representing a new compute node user account that
+            does not yet exist in the Batch service.
+            </summary>
+        <returns>An unbound <see cref="T:Microsoft.Azure.Batch.ComputeNodeUser" /> representing a new user account that has not been added to the compute node.</returns>
+        <remarks>To add the new user, call <see cref="M:Microsoft.Azure.Batch.ComputeNodeUser.CommitAsync(Microsoft.Azure.Batch.ComputeNodeUserCommitSemantics,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" />.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreatePool">
@@ -106,8 +127,11 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>
+            Creates an instance of CloudPool that is unbound and does not have a consistency relationship to any pool in the Batch service.
+            </summary>
+        <returns>A <see cref="T:Microsoft.Azure.Batch.CloudPool" /> representing a new pool that has not been added to the Batch service.
+            To add the pool to the Batch account, call <see cref="M:Microsoft.Azure.Batch.CloudPool.CommitAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" />.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -129,13 +153,20 @@
         <Parameter Name="targetDedicated" Type="System.Nullable&lt;System.Int32&gt;" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="virtualMachineSize">To be added.</param>
-        <param name="cloudServiceConfiguration">To be added.</param>
-        <param name="targetDedicated">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool.</param>
+        <param name="virtualMachineSize">The size of virtual machines in the pool.  See https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-size-specs/ for sizes.</param>
+        <param name="cloudServiceConfiguration">The <see cref="T:Microsoft.Azure.Batch.CloudServiceConfiguration" /> for the pool.</param>
+        <param name="targetDedicated">The desired number of compute nodes in the pool. If omitted, you must set the <see cref="P:Microsoft.Azure.Batch.CloudPool.AutoScaleEnabled" /> property.</param>
+        <summary>
+            Creates an instance of CloudPool that is unbound and does not have a consistency relationship to any pool in the Batch service.
+            </summary>
+        <returns>A <see cref="T:Microsoft.Azure.Batch.CloudPool" /> representing a new pool that has not been added to the Batch service.
+            To add the pool to the Batch account, call <see cref="M:Microsoft.Azure.Batch.CloudPool.CommitAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" />.</returns>
+        <remarks>
+          <para>For information about Azure Guest OS families, see https://azure.microsoft.com/documentation/articles/cloud-services-guestos-update-matrix/ </para>
+          <para>For information about available sizes of virtual machines, see https://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/.
+            Batch supports all Azure cloud service VM sizes except ExtraSmall.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="CreatePool">
@@ -156,12 +187,15 @@
         <Parameter Name="targetDedicated" Type="System.Nullable&lt;System.Int32&gt;" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="virtualMachineSize">To be added.</param>
-        <param name="virtualMachineConfiguration">To be added.</param>
-        <param name="targetDedicated">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="poolId">The id of the pool.</param>
+        <param name="virtualMachineSize">The size of virtual machines in the pool.  See https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-size-specs/ for sizes.</param>
+        <param name="virtualMachineConfiguration">The <see cref="T:Microsoft.Azure.Batch.VirtualMachineConfiguration" /> for the pool.</param>
+        <param name="targetDedicated">The desired number of compute nodes in the pool. If omitted, you must set the <see cref="P:Microsoft.Azure.Batch.CloudPool.AutoScaleEnabled" /> property.</param>
+        <summary>
+            Creates an instance of CloudPool that is unbound and does not have a consistency relationship to any pool in the Batch service.
+            </summary>
+        <returns>A <see cref="T:Microsoft.Azure.Batch.CloudPool" /> representing a new pool that has not been added to the Batch service.
+            To add the pool to the Batch account, call <see cref="M:Microsoft.Azure.Batch.CloudPool.CommitAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" />.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -177,9 +211,15 @@
         <ReturnType>System.Collections.Generic.IList&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets a list of behaviors that modify or customize requests to the Batch service
+            made via this <see cref="T:Microsoft.Azure.Batch.PoolOperations" />.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+          <para>These behaviors are inherited by child objects.</para>
+          <para>Modifications are applied in the order of the collection. The last write wins.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="DeleteComputeNodeUser">
@@ -200,12 +240,17 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="computeNodeId">To be added.</param>
-        <param name="userName">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool that contains the compute node.</param>
+        <param name="computeNodeId">The id of the compute node from which you want to delete the user account.</param>
+        <param name="userName">The name of the user account to be deleted.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <summary>
+            Deletes the specified user account from the specified compute node.
+            </summary>
+        <remarks>
+          <para>You can delete a user account from a compute node only when it is in the <see cref="F:Microsoft.Azure.Batch.Common.ComputeNodeState.Idle" /> or <see cref="F:Microsoft.Azure.Batch.Common.ComputeNodeState.Running" /> state.</para>
+          <para>This is a blocking operation. For a non-blocking equivalent, see <see cref="M:Microsoft.Azure.Batch.PoolOperations.DeleteComputeNodeUserAsync(System.String,System.String,System.String,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" />.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="DeleteComputeNodeUserAsync">
@@ -227,14 +272,19 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="computeNodeId">To be added.</param>
-        <param name="userName">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool that contains the compute node.</param>
+        <param name="computeNodeId">The id of the compute node from which you want to delete the user account.</param>
+        <param name="userName">The name of the user account to be deleted.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> for controlling the lifetime of the asynchronous operation.</param>
+        <summary>
+            Deletes the specified user account from the specified compute node.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous operation.</returns>
+        <remarks>
+          <para>You can delete a user account from a compute node only when it is in the <see cref="F:Microsoft.Azure.Batch.Common.ComputeNodeState.Idle" /> or <see cref="F:Microsoft.Azure.Batch.Common.ComputeNodeState.Running" /> state.</para>
+          <para>The delete operation runs asynchronously.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="DeleteNodeFile">
@@ -256,13 +306,19 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="computeNodeId">To be added.</param>
-        <param name="filePath">To be added.</param>
-        <param name="recursive">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool that contains the compute node.</param>
+        <param name="computeNodeId">The id of the compute node.</param>
+        <param name="filePath">The path of the file to delete.</param>
+        <param name="recursive">
+            If the file-path parameter represents a directory instead of a file, you can set the optional 
+            recursive parameter to true to delete the directory and all of the files and subdirectories in it. If recursive is false 
+            then the directory must be empty or deletion will fail.
+            </param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <summary>
+            Deletes the specified file from the specified compute node.
+            </summary>
+        <remarks>This is a blocking operation.  For a non-blocking equivalent, see <see cref="M:Microsoft.Azure.Batch.PoolOperations.DeleteNodeFileAsync(System.String,System.String,System.String,System.Nullable{System.Boolean},System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" />.</remarks>
       </Docs>
     </Member>
     <Member MemberName="DeleteNodeFileAsync">
@@ -285,15 +341,21 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="computeNodeId">To be added.</param>
-        <param name="filePath">To be added.</param>
-        <param name="recursive">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool that contains the compute node.</param>
+        <param name="computeNodeId">The id of the compute node.</param>
+        <param name="filePath">The path of the file to delete.</param>
+        <param name="recursive">
+            If the file-path parameter represents a directory instead of a file, you can set the optional 
+            recursive parameter to true to delete the directory and all of the files and subdirectories in it. If recursive is false 
+            then the directory must be empty or deletion will fail.
+            </param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> for controlling the lifetime of the asynchronous operation.</param>
+        <summary>
+            Deletes the specified file from the specified compute node.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous operation.</returns>
+        <remarks>The delete operation runs asynchronously.</remarks>
       </Docs>
     </Member>
     <Member MemberName="DeletePool">
@@ -312,10 +374,16 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool to delete.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <summary>
+            Deletes the specified pool.
+            </summary>
+        <remarks>
+          <para>The delete operation requests that the pool be deleted.  The request puts the pool in the <see cref="F:Microsoft.Azure.Batch.Common.PoolState.Deleting" /> state.
+            The Batch service will requeue any running tasks and perform the actual pool deletion without any further client action.</para>
+          <remarks>This is a blocking operation. For a non-blocking equivalent, see <see cref="M:Microsoft.Azure.Batch.PoolOperations.DeletePoolAsync(System.String,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" />.</remarks>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="DeletePoolAsync">
@@ -340,12 +408,18 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool to delete.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> for controlling the lifetime of the asynchronous operation.</param>
+        <summary>
+            Deletes the specified pool.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> object that represents the asynchronous operation.</returns>
+        <remarks>
+          <para>The delete operation requests that the pool be deleted.  The request puts the pool in the <see cref="F:Microsoft.Azure.Batch.Common.PoolState.Deleting" /> state.
+            The Batch service will requeue any running tasks and perform the actual pool deletion without any further client action.</para>
+          <para>The delete operation runs asynchronously.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="DisableAutoScale">
@@ -364,10 +438,14 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <summary>
+            Disables automatic scaling on the specified pool.
+            </summary>
+        <remarks>
+          <para>This is a blocking operation. For a non-blocking equivalent, see <see cref="M:Microsoft.Azure.Batch.PoolOperations.DisableAutoScaleAsync(System.String,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" />.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="DisableAutoScaleAsync">
@@ -392,12 +470,16 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> for controlling the lifetime of the asynchronous operation.</param>
+        <summary>
+            Disables automatic scaling on the specified pool.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous operation.</returns>
+        <remarks>
+          <para>The disable autoscale operation runs asynchronously.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="DisableComputeNodeScheduling">
@@ -418,12 +500,14 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="computeNodeId">To be added.</param>
-        <param name="disableComputeNodeSchedulingOption">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool.</param>
+        <param name="computeNodeId">The id of the compute node.</param>
+        <param name="disableComputeNodeSchedulingOption">Specifies what to do with currently running tasks. The default is <see cref="F:Microsoft.Azure.Batch.Common.DisableComputeNodeSchedulingOption.Requeue" />.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <summary>
+            Disables task scheduling on the specified compute node.
+            </summary>
+        <remarks>This is a blocking operation. For a non-blocking equivalent, see <see cref="M:Microsoft.Azure.Batch.PoolOperations.DisableComputeNodeSchedulingAsync(System.String,System.String,System.Nullable{Microsoft.Azure.Batch.Common.DisableComputeNodeSchedulingOption},System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" />.</remarks>
       </Docs>
     </Member>
     <Member MemberName="DisableComputeNodeSchedulingAsync">
@@ -445,14 +529,16 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="computeNodeId">To be added.</param>
-        <param name="disableComputeNodeSchedulingOption">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool.</param>
+        <param name="computeNodeId">The id of the compute node.</param>
+        <param name="disableComputeNodeSchedulingOption">Specifies what to do with currently running tasks. The default is <see cref="F:Microsoft.Azure.Batch.Common.DisableComputeNodeSchedulingOption.Requeue" />.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> for controlling the lifetime of the asynchronous operation.</param>
+        <summary>
+            Disables task scheduling on the specified compute node.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous operation.</returns>
+        <remarks>This operation runs asynchronously.</remarks>
       </Docs>
     </Member>
     <Member MemberName="EnableAutoScale">
@@ -473,12 +559,18 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="autoscaleFormula">To be added.</param>
-        <param name="autoscaleEvaluationInterval">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool.</param>
+        <param name="autoscaleFormula">The formula for the desired number of compute nodes in the pool.</param>
+        <param name="autoscaleEvaluationInterval">The time interval at which to automatically adjust the pool size according to the AutoScale formula. The default value is 15 minutes. The minimum allowed value is 5 minutes.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <summary>
+            Enables automatic scaling on the specified pool.
+            </summary>
+        <remarks>
+          <para>The formula is checked for validity before it is applied to the pool. If the formula is not valid, an exception occurs.</para>
+          <para>You cannot enable automatic scaling on a pool if a resize operation is in progress on the pool.</para>
+          <para>This is a blocking operation. For a non-blocking equivalent, see <see cref="M:Microsoft.Azure.Batch.PoolOperations.EnableAutoScaleAsync(System.String,System.String,System.Nullable{System.TimeSpan},System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" />.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="EnableAutoScaleAsync">
@@ -505,14 +597,20 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="autoscaleFormula">To be added.</param>
-        <param name="autoscaleEvaluationInterval">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool.</param>
+        <param name="autoscaleFormula">The formula for the desired number of compute nodes in the pool.</param>
+        <param name="autoscaleEvaluationInterval">The time interval at which to automatically adjust the pool size according to the AutoScale formula. The default value is 15 minutes. The minimum allowed value is 5 minutes.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> for controlling the lifetime of the asynchronous operation.</param>
+        <summary>
+            Enables automatic scaling on the specified pool.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous operation.</returns>
+        <remarks>
+          <para>The formula is checked for validity before it is applied to the pool. If the formula is not valid, an exception occurs.</para>
+          <para>You cannot enable automatic scaling on a pool if a resize operation is in progress on the pool.</para>
+          <para>The enable autoscale operation runs asynchronously.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="EnableComputeNodeScheduling">
@@ -532,11 +630,13 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="computeNodeId">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool.</param>
+        <param name="computeNodeId">The id of the compute node.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <summary>
+            Enables task scheduling on the specified compute node.
+            </summary>
+        <remarks>This is a blocking operation. For a non-blocking equivalent, see <see cref="M:Microsoft.Azure.Batch.PoolOperations.EnableComputeNodeScheduling(System.String,System.String,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})" />.</remarks>
       </Docs>
     </Member>
     <Member MemberName="EnableComputeNodeSchedulingAsync">
@@ -557,13 +657,15 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="computeNodeId">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool.</param>
+        <param name="computeNodeId">The id of the compute node.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> for controlling the lifetime of the asynchronous operation.</param>
+        <summary>
+            Enables task scheduling on the specified compute node.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous operation.</returns>
+        <remarks>This operation runs asynchronously.</remarks>
       </Docs>
     </Member>
     <Member MemberName="EvaluateAutoScale">
@@ -583,12 +685,20 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="autoscaleFormula">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool.</param>
+        <param name="autoscaleFormula">The formula to be evaluated on the pool.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <summary>
+            Gets the result of evaluating an automatic scaling formula on the specified pool.  This 
+            is primarily for validating an autoscale formula, as it simply returns the result
+            without applying the formula to the pool.
+            </summary>
+        <returns>The result of evaluating the <paramref name="autoscaleFormula" /> on the specified pool.</returns>
+        <remarks>
+          <para>The formula is validated and its results calculated, but is not applied to the pool.  To apply the formula to the pool, use <see cref="M:Microsoft.Azure.Batch.PoolOperations.EnableAutoScale(System.String,System.String,System.Nullable{System.TimeSpan},System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})" />.</para>
+          <para>This method does not change any state of the pool, and does not affect the <see cref="P:Microsoft.Azure.Batch.CloudPool.LastModified" /> or <see cref="P:Microsoft.Azure.Batch.CloudPool.ETag" />.</para>
+          <para>This is a blocking operation. For a non-blocking equivalent, see <see cref="M:Microsoft.Azure.Batch.PoolOperations.EvaluateAutoScaleAsync(System.String,System.String,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" />.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="EvaluateAutoScaleAsync">
@@ -614,13 +724,21 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="autoscaleFormula">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool.</param>
+        <param name="autoscaleFormula">The formula to be evaluated on the pool.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> for controlling the lifetime of the asynchronous operation.</param>
+        <summary>
+            Gets the result of evaluating an automatic scaling formula on the specified pool.  This 
+            is primarily for validating an autoscale formula, as it simply returns the result
+            without applying the formula to the pool.
+            </summary>
+        <returns>The result of evaluating the <paramref name="autoscaleFormula" /> on the specified pool.</returns>
+        <remarks>
+          <para>The formula is validated and its results calculated, but is not applied to the pool.  To apply the formula to the pool, use <see cref="M:Microsoft.Azure.Batch.PoolOperations.EnableAutoScaleAsync(System.String,System.String,System.Nullable{System.TimeSpan},System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" />.</para>
+          <para>This method does not change any state of the pool, and does not affect the <see cref="P:Microsoft.Azure.Batch.CloudPool.LastModified" /> or <see cref="P:Microsoft.Azure.Batch.CloudPool.ETag" />.</para>
+          <para>The evaluate operation runs asynchronously.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="GetAllLifetimeStatistics">
@@ -638,10 +756,13 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <summary>
+            Gets lifetime summary statistics for all of the pools in the current account.  
+            Statistics are aggregated across all pools that have ever existed in the account, from account creation to the last update time of the statistics.
+            </summary>
+        <returns>The aggregated pool statistics.</returns>
+        <remarks>This is a blocking operation. For a non-blocking equivalent, see <see cref="M:Microsoft.Azure.Batch.PoolOperations.GetAllLifetimeStatisticsAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" />.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetAllLifetimeStatisticsAsync">
@@ -665,11 +786,14 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="additionalBehaviors">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> for controlling the lifetime of the asynchronous operation.</param>
+        <summary>
+            Gets lifetime summary statistics for all of the pools in the current account.
+            Statistics are aggregated across all pools that have ever existed in the account, from account creation to the last update time of the statistics.
+            </summary>
+        <returns>The aggregated pool statistics.</returns>
+        <remarks>The get statistics operation runs asynchronously.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetComputeNode">
@@ -690,13 +814,15 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="computeNodeId">To be added.</param>
-        <param name="detailLevel">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool.</param>
+        <param name="computeNodeId">The id of the compute node to get from the pool.</param>
+        <param name="detailLevel">A <see cref="T:Microsoft.Azure.Batch.DetailLevel" /> used for controlling which properties are retrieved from the service.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <summary>
+            Gets the specified compute node.
+            </summary>
+        <returns>A <see cref="T:Microsoft.Azure.Batch.ComputeNode" /> containing information about the specified compute node.</returns>
+        <remarks>This is a blocking operation. For a non-blocking equivalent, see <see cref="M:Microsoft.Azure.Batch.PoolOperations.GetComputeNodeAsync(System.String,System.String,Microsoft.Azure.Batch.DetailLevel,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" />.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetComputeNodeAsync">
@@ -718,14 +844,16 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="computeNodeId">To be added.</param>
-        <param name="detailLevel">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool.</param>
+        <param name="computeNodeId">The id of the compute node to get from the pool.</param>
+        <param name="detailLevel">A <see cref="T:Microsoft.Azure.Batch.DetailLevel" /> used for controlling which properties are retrieved from the service.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" /> and <paramref name="detailLevel" />.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> for controlling the lifetime of the asynchronous operation.</param>
+        <summary>
+            Gets the specified compute node.
+            </summary>
+        <returns>A <see cref="T:Microsoft.Azure.Batch.ComputeNode" /> containing information about the specified compute node.</returns>
+        <remarks>The get node operation runs asynchronously.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetNodeFile">
@@ -746,13 +874,15 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="computeNodeId">To be added.</param>
-        <param name="filePath">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool that contains the compute node.</param>
+        <param name="computeNodeId">The id of the compute node.</param>
+        <param name="filePath">The path of the file to retrieve.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <summary>
+            Gets information about a file on a compute node.
+            </summary>
+        <returns>A <see cref="T:Microsoft.Azure.Batch.NodeFile" /> containing information about the file, and which can be used to download the file (see <see cref="M:Microsoft.Azure.Batch.NodeFile.CopyToStream(System.IO.Stream,Microsoft.Azure.Batch.GetFileRequestByteRange,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})" />).</returns>
+        <remarks>This is a blocking operation. For a non-blocking equivalent, see <see cref="M:Microsoft.Azure.Batch.PoolOperations.GetNodeFileAsync(System.String,System.String,System.String,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" />.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetNodeFileAsync">
@@ -774,14 +904,16 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="computeNodeId">To be added.</param>
-        <param name="filePath">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool that contains the compute node.</param>
+        <param name="computeNodeId">The id of the compute node.</param>
+        <param name="filePath">The path of the file to retrieve.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> for controlling the lifetime of the asynchronous operation.</param>
+        <summary>
+            Gets information about a file on a compute node.
+            </summary>
+        <returns>A <see cref="T:Microsoft.Azure.Batch.NodeFile" /> containing information about the file, and which can be used to download the file (see <see cref="M:Microsoft.Azure.Batch.NodeFile.CopyToStreamAsync(System.IO.Stream,Microsoft.Azure.Batch.GetFileRequestByteRange,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" />).</returns>
+        <remarks>The get file operation runs asynchronously.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetPool">
@@ -801,12 +933,14 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="detailLevel">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool to get.</param>
+        <param name="detailLevel">A <see cref="T:Microsoft.Azure.Batch.DetailLevel" /> used for controlling which properties are retrieved from the service.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" /> and <paramref name="detailLevel" />.</param>
+        <summary>
+            Gets the specified <see cref="T:Microsoft.Azure.Batch.CloudPool" />.
+            </summary>
+        <returns>A <see cref="T:Microsoft.Azure.Batch.CloudPool" /> containing information about the specified Azure Batch pool.</returns>
+        <remarks>This is a blocking operation. For a non-blocking equivalent, see <see cref="M:Microsoft.Azure.Batch.PoolOperations.GetPoolAsync(System.String,Microsoft.Azure.Batch.DetailLevel,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" />.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetPoolAsync">
@@ -832,13 +966,15 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="detailLevel">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool to get.</param>
+        <param name="detailLevel">A <see cref="T:Microsoft.Azure.Batch.DetailLevel" /> used for controlling which properties are retrieved from the service.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" /> and <paramref name="detailLevel" />.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> for controlling the lifetime of the asynchronous operation.</param>
+        <summary>
+            Gets the specified <see cref="T:Microsoft.Azure.Batch.CloudPool" />.
+            </summary>
+        <returns>A <see cref="T:Microsoft.Azure.Batch.CloudPool" /> containing information about the specified Azure Batch pool.</returns>
+        <remarks>The get pool operation runs asynchronously.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetRDPFile">
@@ -859,12 +995,21 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="computeNodeId">To be added.</param>
-        <param name="rdpStream">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool that contains the compute node.</param>
+        <param name="computeNodeId">The id of the compute node for which to get a Remote Desktop file.</param>
+        <param name="rdpStream">The <see cref="T:System.IO.Stream" /> into which the RDP file contents will be written.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <summary>
+            Gets a Remote Desktop Protocol (RDP) file for the specified node.
+            </summary>
+        <remarks>
+          <para>This method does not close the <paramref name="rdpStream" /> stream, and it does not reset the position after writing.
+            It is the caller's responsibility to close the stream, or to reset the position if required.</para>
+          <para>This is a blocking operation. For a non-blocking equivalent, see <see cref="M:Microsoft.Azure.Batch.PoolOperations.GetRDPFileAsync(System.String,System.String,System.IO.Stream,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" />.</para>
+          <para>This method can be invoked only if the pool is created with a <see cref="T:Microsoft.Azure.Batch.CloudServiceConfiguration" /> property. 
+            If this method is invoked on pools created with <see cref="T:Microsoft.Azure.Batch.VirtualMachineConfiguration" />, then Batch service returns 409 (Conflict). 
+            For pools with <see cref="T:Microsoft.Azure.Batch.VirtualMachineConfiguration" /> property, the new method <see cref="M:Microsoft.Azure.Batch.PoolOperations.GetRemoteLoginSettings(System.String,System.String,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})" /> must be used.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="GetRDPFile">
@@ -885,12 +1030,20 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="computeNodeId">To be added.</param>
-        <param name="rdpFileNameToCreate">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool that contains the compute node.</param>
+        <param name="computeNodeId">The id of the compute node for which to get a Remote Desktop file.</param>
+        <param name="rdpFileNameToCreate">The file path at which to create the RDP file.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <summary>
+            Gets a Remote Desktop Protocol file for the specified node.
+            </summary>
+        <remarks>
+          <para>If the file specified by <paramref name="rdpFileNameToCreate" /> already exists, it is overwritten.</para>
+          <para>This is a blocking operation. For a non-blocking equivalent, see <see cref="M:Microsoft.Azure.Batch.PoolOperations.GetRDPFileAsync(System.String,System.String,System.String,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" />.</para>
+          <para>This method can be invoked only if the pool is created with a <see cref="T:Microsoft.Azure.Batch.CloudServiceConfiguration" /> property. 
+            If this method is invoked on pools created with <see cref="T:Microsoft.Azure.Batch.VirtualMachineConfiguration" />, then Batch service returns 409 (Conflict). 
+            For pools with <see cref="T:Microsoft.Azure.Batch.VirtualMachineConfiguration" /> property, the new method <see cref="M:Microsoft.Azure.Batch.PoolOperations.GetRemoteLoginSettings(System.String,System.String,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})" /> must be used.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="GetRDPFileAsync">
@@ -912,14 +1065,23 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="computeNodeId">To be added.</param>
-        <param name="rdpStream">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool that contains the compute node.</param>
+        <param name="computeNodeId">The id of the compute node for which to get a Remote Desktop file.</param>
+        <param name="rdpStream">The <see cref="T:System.IO.Stream" /> into which the RDP file contents will be written.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> for controlling the lifetime of the asynchronous operation.</param>
+        <summary>
+            Gets a Remote Desktop Protocol (RDP) file for the specified node.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous operation.</returns>
+        <remarks>
+          <para>This method does not close the <paramref name="rdpStream" /> stream, and it does not reset the position after writing.
+            It is the caller's responsibility to close the stream, or to reset the position if required.</para>
+          <para>The get RDP file operation runs asynchronously.</para>
+          <para>This method can be invoked only if the pool is created with a <see cref="T:Microsoft.Azure.Batch.CloudServiceConfiguration" /> property. 
+            If this method is invoked on pools created with <see cref="T:Microsoft.Azure.Batch.VirtualMachineConfiguration" />, then Batch service returns 409 (Conflict). 
+            For pools with <see cref="T:Microsoft.Azure.Batch.VirtualMachineConfiguration" /> property, the new method <see cref="M:Microsoft.Azure.Batch.PoolOperations.GetRemoteLoginSettings(System.String,System.String,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})" /> must be used.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="GetRDPFileAsync">
@@ -941,14 +1103,22 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="computeNodeId">To be added.</param>
-        <param name="rdpFileNameToCreate">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool that contains the compute node.</param>
+        <param name="computeNodeId">The id of the compute node for which to get a Remote Desktop file.</param>
+        <param name="rdpFileNameToCreate">The file path at which to create the RDP file.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> for controlling the lifetime of the asynchronous operation.</param>
+        <summary>
+            Gets a Remote Desktop Protocol file for the specified node.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous operation.</returns>
+        <remarks>
+          <para>If the file specified by <paramref name="rdpFileNameToCreate" /> already exists, it is overwritten.</para>
+          <para>The get RDP file operation runs asynchronously.</para>
+          <para>This method can be invoked only if the pool is created with a <see cref="T:Microsoft.Azure.Batch.CloudServiceConfiguration" /> property. 
+            If this method is invoked on pools created with <see cref="T:Microsoft.Azure.Batch.VirtualMachineConfiguration" />, then Batch service returns 409 (Conflict). 
+            For pools with <see cref="T:Microsoft.Azure.Batch.VirtualMachineConfiguration" /> property, the new method <see cref="M:Microsoft.Azure.Batch.PoolOperations.GetRemoteLoginSettingsAsync(System.String,System.String,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" /> must be used.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="GetRemoteLoginSettings">
@@ -968,12 +1138,19 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="computeNodeId">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="poolId">The id of the pool that contains the compute node.</param>
+        <param name="computeNodeId">The id of the compute node for which to get a Remote Desktop file.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <summary>
+            Gets the settings required for remote login to a compute node.
+            </summary>
         <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+          <para>This is a blocking operation. For a non-blocking equivalent, see <see cref="M:Microsoft.Azure.Batch.PoolOperations.GetRemoteLoginSettingsAsync(System.String,System.String,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" />.</para>
+          <para>This method can be invoked only if the pool is created with a <see cref="T:Microsoft.Azure.Batch.VirtualMachineConfiguration" /> property. 
+            If this method is invoked on pools created with <see cref="T:Microsoft.Azure.Batch.CloudServiceConfiguration" />, then Batch service returns 409 (Conflict). 
+            For pools with a <see cref="T:Microsoft.Azure.Batch.CloudServiceConfiguration" /> property, one of the GetRDPFileAsync/GetRDPFile methods must be used.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="GetRemoteLoginSettingsAsync">
@@ -994,13 +1171,20 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="computeNodeId">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool that contains the compute node.</param>
+        <param name="computeNodeId">The id of the compute node for which to get a Remote Desktop file.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> for controlling the lifetime of the asynchronous operation.</param>
+        <summary>
+            Gets the settings required for remote login to a compute node.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous operation.</returns>
+        <remarks>
+          <para>The get remote login settings operation runs asynchronously.</para>
+          <para>This method can be invoked only if the pool is created with a <see cref="T:Microsoft.Azure.Batch.VirtualMachineConfiguration" /> property. 
+            If this method is invoked on pools created with <see cref="T:Microsoft.Azure.Batch.CloudServiceConfiguration" />, then Batch service returns 409 (Conflict). 
+            For pools with a <see cref="T:Microsoft.Azure.Batch.CloudServiceConfiguration" /> property, one of the GetRDPFileAsync/GetRDPFile methods must be used.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="ListComputeNodes">
@@ -1020,12 +1204,15 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="detailLevel">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool.</param>
+        <param name="detailLevel">A <see cref="T:Microsoft.Azure.Batch.DetailLevel" /> used for filtering the list and for controlling which properties are retrieved from the service.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" /> and <paramref name="detailLevel" />.</param>
+        <summary>
+            Enumerates the <see cref="T:Microsoft.Azure.Batch.ComputeNode">compute nodes</see> of the specified pool.
+            </summary>
+        <returns>An <see cref="T:Microsoft.Azure.Batch.IPagedEnumerable`1" /> that can be used to enumerate compute nodes asynchronously or synchronously.</returns>
+        <remarks>This method returns immediately; the nodes are retrieved from the Batch service only when the collection is enumerated.
+            Retrieval is non-atomic; nodes are retrieved in pages during enumeration of the collection.</remarks>
       </Docs>
     </Member>
     <Member MemberName="ListNodeAgentSkus">
@@ -1044,10 +1231,12 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="detailLevel">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="detailLevel">A <see cref="T:Microsoft.Azure.Batch.DetailLevel" /> used for filtering the list and for controlling which properties are retrieved from the service.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" /> and <paramref name="detailLevel" />.</param>
+        <summary>
+            Enumerates the node agent Sku values supported by Batch Service. 
+            </summary>
+        <returns>An <see cref="T:Microsoft.Azure.Batch.IPagedEnumerable`1" /> that can be used to enumerate node agent sku values asynchronously or synchronously.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -1070,14 +1259,17 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="computeNodeId">To be added.</param>
-        <param name="recursive">To be added.</param>
-        <param name="detailLevel">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool that contains the compute node.</param>
+        <param name="computeNodeId">The id of the compute node.</param>
+        <param name="recursive">If true, recursively enumerates all files on the compute node. If false, enumerates only the files in the compute node root directory.</param>
+        <param name="detailLevel">A <see cref="T:Microsoft.Azure.Batch.DetailLevel" /> used for filtering the list and for controlling which properties are retrieved from the service.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" /> and <paramref name="detailLevel" />.</param>
+        <summary>
+            Enumerates files on the specified compute node.
+            </summary>
+        <returns>An <see cref="T:Microsoft.Azure.Batch.IPagedEnumerable`1" /> that can be used to enumerate files asynchronously or synchronously.</returns>
+        <remarks>This method returns immediately; the file data is retrieved from the Batch service only when the collection is enumerated.
+            Retrieval is non-atomic; file data is retrieved in pages during enumeration of the collection.</remarks>
       </Docs>
     </Member>
     <Member MemberName="ListPools">
@@ -1096,11 +1288,14 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="detailLevel">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="detailLevel">A <see cref="T:Microsoft.Azure.Batch.DetailLevel" /> used for filtering the list and for controlling which properties are retrieved from the service.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" /> and <paramref name="detailLevel" />.</param>
+        <summary>
+            Enumerates the <see cref="T:Microsoft.Azure.Batch.CloudPool">pools</see> in the Batch account.
+            </summary>
+        <returns>An <see cref="T:Microsoft.Azure.Batch.IPagedEnumerable`1" /> that can be used to enumerate pools asynchronously or synchronously.</returns>
+        <remarks>This method returns immediately; the pools are retrieved from the Batch service only when the collection is enumerated.
+            Retrieval is non-atomic; pools are retrieved in pages during enumeration of the collection.</remarks>
       </Docs>
     </Member>
     <Member MemberName="ListPoolUsageMetrics">
@@ -1121,13 +1316,16 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="startTime">To be added.</param>
-        <param name="endTime">To be added.</param>
-        <param name="detailLevel">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="startTime">The start time of the aggregation interval covered by this entry.</param>
+        <param name="endTime">The end time of the aggregation interval for this entry.</param>
+        <param name="detailLevel">A <see cref="T:Microsoft.Azure.Batch.DetailLevel" /> used for filtering the list and for controlling which properties are retrieved from the service.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" /> and <paramref name="detailLevel" />.</param>
+        <summary>
+            Enumerates pool usage metrics.
+            </summary>
+        <returns>An <see cref="T:Microsoft.Azure.Batch.IPagedEnumerable`1" /> that can be used to enumerate metrics asynchronously or synchronously.</returns>
+        <remarks>This method returns immediately; the metrics data is retrieved from the Batch service only when the collection is enumerated.
+            Retrieval is non-atomic; metrics data is retrieved in pages during enumeration of the collection.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Reboot">
@@ -1148,12 +1346,17 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="computeNodeId">To be added.</param>
-        <param name="rebootOption">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool that contains the compute node.</param>
+        <param name="computeNodeId">The id of the compute node to reboot.</param>
+        <param name="rebootOption">Specifies when to reboot the node and what to do with currently running tasks. The default is <see cref="F:Microsoft.Azure.Batch.Common.ComputeNodeRebootOption.Requeue" />.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <summary>
+            Reboots the specified compute node.
+            </summary>
+        <remarks>
+          <para>You can reboot a compute node only when it is in the <see cref="F:Microsoft.Azure.Batch.Common.ComputeNodeState.Idle" /> or <see cref="F:Microsoft.Azure.Batch.Common.ComputeNodeState.Running" /> state.</para>
+          <para>This is a blocking operation. For a non-blocking equivalent, see <see cref="M:Microsoft.Azure.Batch.PoolOperations.RebootAsync(System.String,System.String,System.Nullable{Microsoft.Azure.Batch.Common.ComputeNodeRebootOption},System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" />.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="RebootAsync">
@@ -1175,14 +1378,19 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="computeNodeId">To be added.</param>
-        <param name="rebootOption">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool that contains the compute node.</param>
+        <param name="computeNodeId">The id of the compute node to reboot.</param>
+        <param name="rebootOption">Specifies when to reboot the node and what to do with currently running tasks. The default is <see cref="F:Microsoft.Azure.Batch.Common.ComputeNodeRebootOption.Requeue" />.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> for controlling the lifetime of the asynchronous operation.</param>
+        <summary>
+            Reboots the specified compute node.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous operation.</returns>
+        <remarks>
+          <para>You can reboot a compute node only when it is in the <see cref="F:Microsoft.Azure.Batch.Common.ComputeNodeState.Idle" /> or <see cref="F:Microsoft.Azure.Batch.Common.ComputeNodeState.Running" /> state.</para>
+          <para>The reboot operation runs asynchronously.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="Reimage">
@@ -1203,12 +1411,17 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="computeNodeId">To be added.</param>
-        <param name="reimageOption">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool that contains the compute node.</param>
+        <param name="computeNodeId">The id of the compute node to reimage.</param>
+        <param name="reimageOption">Specifies when to reimage the node and what to do with currently running tasks. The default is <see cref="F:Microsoft.Azure.Batch.Common.ComputeNodeReimageOption.Requeue" />.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <summary>
+            Reinstalls the operating system on the specified compute node.
+            </summary>
+        <remarks>
+          <para>You can reimage a compute node only when it is in the <see cref="F:Microsoft.Azure.Batch.Common.ComputeNodeState.Idle" /> or <see cref="F:Microsoft.Azure.Batch.Common.ComputeNodeState.Running" /> state.</para>
+          <para>This is a blocking operation. For a non-blocking equivalent, see <see cref="M:Microsoft.Azure.Batch.PoolOperations.ReimageAsync(System.String,System.String,System.Nullable{Microsoft.Azure.Batch.Common.ComputeNodeReimageOption},System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" />.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="ReimageAsync">
@@ -1230,14 +1443,19 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="computeNodeId">To be added.</param>
-        <param name="reimageOption">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool that contains the compute node.</param>
+        <param name="computeNodeId">The id of the compute node to reimage.</param>
+        <param name="reimageOption">Specifies when to reimage the node and what to do with currently running tasks. The default is <see cref="F:Microsoft.Azure.Batch.Common.ComputeNodeReimageOption.Requeue" />.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> for controlling the lifetime of the asynchronous operation.</param>
+        <summary>
+            Reinstalls the operating system on the specified compute node.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous operation.</returns>
+        <remarks>
+          <para>You can reimage a compute node only when it is in the <see cref="F:Microsoft.Azure.Batch.Common.ComputeNodeState.Idle" /> or <see cref="F:Microsoft.Azure.Batch.Common.ComputeNodeState.Running" /> state.</para>
+          <para>The reimage operation runs asynchronously.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="RemoveFromPool">
@@ -1259,13 +1477,20 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="computeNode">To be added.</param>
-        <param name="deallocationOption">To be added.</param>
-        <param name="resizeTimeout">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool.</param>
+        <param name="computeNode">The <see cref="T:Microsoft.Azure.Batch.ComputeNode" /> to remove from the pool.</param>
+        <param name="deallocationOption">Specifies when nodes may be removed from the pool. The default is <see cref="F:Microsoft.Azure.Batch.Common.ComputeNodeDeallocationOption.Requeue" />.</param>
+        <param name="resizeTimeout">Specifies the timeout for removal of compute nodes from the pool. The default value is 15 minutes. The minimum value is 5 minutes.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <summary>
+            Removes the specified compute node from the specified pool.
+            </summary>
+        <remarks>
+          <para>If you need to remove multiple compute nodes from a pool, it is more efficient to use the <see cref="M:Microsoft.Azure.Batch.PoolOperations.RemoveFromPool(System.String,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.ComputeNode},System.Nullable{Microsoft.Azure.Batch.Common.ComputeNodeDeallocationOption},System.Nullable{System.TimeSpan},System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})" /> overload.</para>
+          <para>You can only remove nodes from a pool when the <see cref="P:Microsoft.Azure.Batch.CloudPool.AllocationState" /> of the pool is <see cref="F:Microsoft.Azure.Batch.Common.AllocationState.Steady" />. If the pool is already resizing, an exception occurs.</para>
+          <para>When you remove nodes from a pool, the pool's AllocationState changes from Steady to <see cref="F:Microsoft.Azure.Batch.Common.AllocationState.Resizing" />.</para>
+          <para>This is a blocking operation. For a non-blocking equivalent, see <see cref="M:Microsoft.Azure.Batch.PoolOperations.RemoveFromPoolAsync(System.String,Microsoft.Azure.Batch.ComputeNode,System.Nullable{Microsoft.Azure.Batch.Common.ComputeNodeDeallocationOption},System.Nullable{System.TimeSpan},System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})" />.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="RemoveFromPool">
@@ -1287,13 +1512,19 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="computeNodes">To be added.</param>
-        <param name="deallocationOption">To be added.</param>
-        <param name="resizeTimeout">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool.</param>
+        <param name="computeNodes">The <see cref="T:Microsoft.Azure.Batch.ComputeNode">compute nodes</see> to remove from the pool.</param>
+        <param name="deallocationOption">Specifies when nodes may be removed from the pool. The default is <see cref="F:Microsoft.Azure.Batch.Common.ComputeNodeDeallocationOption.Requeue" />.</param>
+        <param name="resizeTimeout">Specifies the timeout for removal of compute nodes from the pool. The default value is 15 minutes. The minimum value is 5 minutes.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <summary>
+            Removes the specified compute nodes from the specified pool.
+            </summary>
+        <remarks>
+          <para>You can only remove nodes from a pool when the <see cref="P:Microsoft.Azure.Batch.CloudPool.AllocationState" /> of the pool is <see cref="F:Microsoft.Azure.Batch.Common.AllocationState.Steady" />. If the pool is already resizing, an exception occurs.</para>
+          <para>When you remove nodes from a pool, the pool's AllocationState changes from Steady to <see cref="F:Microsoft.Azure.Batch.Common.AllocationState.Resizing" />.</para>
+          <para>This is a blocking operation. For a non-blocking equivalent, see <see cref="M:Microsoft.Azure.Batch.PoolOperations.RemoveFromPoolAsync(System.String,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.ComputeNode},System.Nullable{Microsoft.Azure.Batch.Common.ComputeNodeDeallocationOption},System.Nullable{System.TimeSpan},System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" />.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="RemoveFromPool">
@@ -1315,13 +1546,19 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="computeNodeIds">To be added.</param>
-        <param name="deallocationOption">To be added.</param>
-        <param name="resizeTimeout">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool.</param>
+        <param name="computeNodeIds">The ids of the compute nodes to remove from the pool.</param>
+        <param name="deallocationOption">Specifies when nodes may be removed from the pool. The default is <see cref="F:Microsoft.Azure.Batch.Common.ComputeNodeDeallocationOption.Requeue" />.</param>
+        <param name="resizeTimeout">Specifies the timeout for removal of compute nodes from the pool. The default value is 15 minutes. The minimum value is 5 minutes.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <summary>
+            Removes the specified compute nodes from the specified pool.
+            </summary>
+        <remarks>
+          <para>You can only remove nodes from a pool when the <see cref="P:Microsoft.Azure.Batch.CloudPool.AllocationState" /> of the pool is <see cref="F:Microsoft.Azure.Batch.Common.AllocationState.Steady" />. If the pool is already resizing, an exception occurs.</para>
+          <para>When you remove nodes from a pool, the pool's AllocationState changes from Steady to <see cref="F:Microsoft.Azure.Batch.Common.AllocationState.Resizing" />.</para>
+          <para>This is a blocking operation. For a non-blocking equivalent, see <see cref="M:Microsoft.Azure.Batch.PoolOperations.RemoveFromPoolAsync(System.String,System.Collections.Generic.IEnumerable{System.String},System.Nullable{Microsoft.Azure.Batch.Common.ComputeNodeDeallocationOption},System.Nullable{System.TimeSpan},System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" />.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="RemoveFromPool">
@@ -1343,13 +1580,20 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="computeNodeId">To be added.</param>
-        <param name="deallocationOption">To be added.</param>
-        <param name="resizeTimeout">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool.</param>
+        <param name="computeNodeId">The id of the compute node to remove from the pool.</param>
+        <param name="deallocationOption">Specifies when nodes may be removed from the pool. The default is <see cref="F:Microsoft.Azure.Batch.Common.ComputeNodeDeallocationOption.Requeue" />.</param>
+        <param name="resizeTimeout">Specifies the timeout for removal of compute nodes from the pool. The default value is 15 minutes. The minimum value is 5 minutes.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <summary>
+            Removes the specified compute node from the specified pool.
+            </summary>
+        <remarks>
+          <para>If you need to remove multiple compute nodes from a pool, it is more efficient to use the <see cref="M:Microsoft.Azure.Batch.PoolOperations.RemoveFromPool(System.String,System.Collections.Generic.IEnumerable{System.String},System.Nullable{Microsoft.Azure.Batch.Common.ComputeNodeDeallocationOption},System.Nullable{System.TimeSpan},System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})" /> overload.</para>
+          <para>You can only remove nodes from a pool when the <see cref="P:Microsoft.Azure.Batch.CloudPool.AllocationState" /> of the pool is <see cref="F:Microsoft.Azure.Batch.Common.AllocationState.Steady" />. If the pool is already resizing, an exception occurs.</para>
+          <para>When you remove nodes from a pool, the pool's AllocationState changes from Steady to <see cref="F:Microsoft.Azure.Batch.Common.AllocationState.Resizing" />.</para>
+          <para>This is a blocking operation. For a non-blocking equivalent, see <see cref="M:Microsoft.Azure.Batch.PoolOperations.RemoveFromPoolAsync(System.String,System.String,System.Nullable{Microsoft.Azure.Batch.Common.ComputeNodeDeallocationOption},System.Nullable{System.TimeSpan},System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})" />.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="RemoveFromPoolAsync">
@@ -1371,14 +1615,21 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="computeNode">To be added.</param>
-        <param name="deallocationOption">To be added.</param>
-        <param name="resizeTimeout">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool.</param>
+        <param name="computeNode">The <see cref="T:Microsoft.Azure.Batch.ComputeNode" /> to remove from the pool.</param>
+        <param name="deallocationOption">Specifies when nodes may be removed from the pool. The default is <see cref="F:Microsoft.Azure.Batch.Common.ComputeNodeDeallocationOption.Requeue" />.</param>
+        <param name="resizeTimeout">Specifies the timeout for removal of compute nodes from the pool. The default value is 15 minutes. The minimum value is 5 minutes.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <summary>
+            Removes the specified compute node from the specified pool.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous operation.</returns>
+        <remarks>
+          <para>If you need to remove multiple compute nodes from a pool, it is more efficient to use the <see cref="M:Microsoft.Azure.Batch.PoolOperations.RemoveFromPoolAsync(System.String,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.ComputeNode},System.Nullable{Microsoft.Azure.Batch.Common.ComputeNodeDeallocationOption},System.Nullable{System.TimeSpan},System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" /> overload.</para>
+          <para>You can only remove nodes from a pool when the <see cref="P:Microsoft.Azure.Batch.CloudPool.AllocationState" /> of the pool is <see cref="F:Microsoft.Azure.Batch.Common.AllocationState.Steady" />. If the pool is already resizing, an exception occurs.</para>
+          <para>When you remove nodes from a pool, the pool's AllocationState changes from Steady to <see cref="F:Microsoft.Azure.Batch.Common.AllocationState.Resizing" />.</para>
+          <para>The remove operation runs asynchronously.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="RemoveFromPoolAsync">
@@ -1400,14 +1651,21 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="computeNodeId">To be added.</param>
-        <param name="deallocationOption">To be added.</param>
-        <param name="resizeTimeout">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool.</param>
+        <param name="computeNodeId">The id of the compute node to remove from the pool.</param>
+        <param name="deallocationOption">Specifies when nodes may be removed from the pool. The default is <see cref="F:Microsoft.Azure.Batch.Common.ComputeNodeDeallocationOption.Requeue" />.</param>
+        <param name="resizeTimeout">Specifies the timeout for removal of compute nodes from the pool. The default value is 15 minutes. The minimum value is 5 minutes.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <summary>
+            Removes the specified compute node from the specified pool.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous operation.</returns>
+        <remarks>
+          <para>If you need to remove multiple compute nodes from a pool, it is more efficient to use the <see cref="M:Microsoft.Azure.Batch.PoolOperations.RemoveFromPoolAsync(System.String,System.Collections.Generic.IEnumerable{System.String},System.Nullable{Microsoft.Azure.Batch.Common.ComputeNodeDeallocationOption},System.Nullable{System.TimeSpan},System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" /> overload.</para>
+          <para>You can only remove nodes from a pool when the <see cref="P:Microsoft.Azure.Batch.CloudPool.AllocationState" /> of the pool is <see cref="F:Microsoft.Azure.Batch.Common.AllocationState.Steady" />. If the pool is already resizing, an exception occurs.</para>
+          <para>When you remove nodes from a pool, the pool's AllocationState changes from Steady to <see cref="F:Microsoft.Azure.Batch.Common.AllocationState.Resizing" />.</para>
+          <para>The remove operation runs asynchronously.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="RemoveFromPoolAsync">
@@ -1435,15 +1693,21 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="computeNodes">To be added.</param>
-        <param name="deallocationOption">To be added.</param>
-        <param name="resizeTimeout">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool.</param>
+        <param name="computeNodes">The <see cref="T:Microsoft.Azure.Batch.ComputeNode">compute nodes</see> to remove from the pool.</param>
+        <param name="deallocationOption">Specifies when nodes may be removed from the pool. The default is <see cref="F:Microsoft.Azure.Batch.Common.ComputeNodeDeallocationOption.Requeue" />.</param>
+        <param name="resizeTimeout">Specifies the timeout for removal of compute nodes from the pool. The default value is 15 minutes. The minimum value is 5 minutes.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> for controlling the lifetime of the asynchronous operation.</param>
+        <summary>
+            Removes the specified compute nodes from the specified pool.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous operation.</returns>
+        <remarks>
+          <para>You can only remove nodes from a pool when the <see cref="P:Microsoft.Azure.Batch.CloudPool.AllocationState" /> of the pool is <see cref="F:Microsoft.Azure.Batch.Common.AllocationState.Steady" />. If the pool is already resizing, an exception occurs.</para>
+          <para>When you remove nodes from a pool, the pool's AllocationState changes from Steady to <see cref="F:Microsoft.Azure.Batch.Common.AllocationState.Resizing" />.</para>
+          <para>The remove operation runs asynchronously.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="RemoveFromPoolAsync">
@@ -1466,15 +1730,21 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="computeNodeIds">To be added.</param>
-        <param name="deallocationOption">To be added.</param>
-        <param name="resizeTimeout">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool.</param>
+        <param name="computeNodeIds">The ids of the compute nodes to remove from the pool.</param>
+        <param name="deallocationOption">Specifies when nodes may be removed from the pool. The default is <see cref="F:Microsoft.Azure.Batch.Common.ComputeNodeDeallocationOption.Requeue" />.</param>
+        <param name="resizeTimeout">Specifies the timeout for removal of compute nodes from the pool. The default value is 15 minutes. The minimum value is 5 minutes.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> for controlling the lifetime of the asynchronous operation.</param>
+        <summary>
+            Removes the specified compute nodes from the specified pool.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous operation.</returns>
+        <remarks>
+          <para>You can only remove nodes from a pool when the <see cref="P:Microsoft.Azure.Batch.CloudPool.AllocationState" /> of the pool is <see cref="F:Microsoft.Azure.Batch.Common.AllocationState.Steady" />. If the pool is already resizing, an exception occurs.</para>
+          <para>When you remove nodes from a pool, the pool's AllocationState changes from Steady to <see cref="F:Microsoft.Azure.Batch.Common.AllocationState.Resizing" />.</para>
+          <para>The remove operation runs asynchronously.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="ResizePool">
@@ -1496,13 +1766,24 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="targetDedicated">To be added.</param>
-        <param name="resizeTimeout">To be added.</param>
-        <param name="deallocationOption">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool.</param>
+        <param name="targetDedicated">The desired number of compute nodes in the pool.</param>
+        <param name="resizeTimeout">The timeout for allocation of compute nodes to the pool or removal of compute nodes from the pool. If the pool has not reached the target size after this time, the resize is stopped. The default is 15 minutes.</param>
+        <param name="deallocationOption">Specifies when nodes may be removed from the pool, if the pool size is decreasing. The default is <see cref="F:Microsoft.Azure.Batch.Common.ComputeNodeDeallocationOption.Requeue" />.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <summary>
+            Resizes the specified pool.
+            </summary>
+        <remarks>
+          <para>The resize operation requests that the pool be resized.  The request puts the pool in the <see cref="F:Microsoft.Azure.Batch.Common.AllocationState.Resizing" /> allocation state.
+            The Batch service will perform the actual resize without any further client action, and set the allocation state to <see cref="F:Microsoft.Azure.Batch.Common.AllocationState.Steady" /> once complete.</para>
+          <para>
+            You can only resize a pool when its <see cref="P:Microsoft.Azure.Batch.CloudPool.AllocationState" /> is <see cref="F:Microsoft.Azure.Batch.Common.AllocationState.Steady" />.
+            You cannot resize pools which are configured for automatic scaling (that is, the <see cref="P:Microsoft.Azure.Batch.CloudPool.AutoScaleEnabled" /> property of the pool is true).
+            If you decrease the pool size, the Batch service chooses which nodes to remove.  To remove specific nodes, call <see cref="M:Microsoft.Azure.Batch.PoolOperations.RemoveFromPool(System.String,System.Collections.Generic.IEnumerable{System.String},System.Nullable{Microsoft.Azure.Batch.Common.ComputeNodeDeallocationOption},System.Nullable{System.TimeSpan},System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior})" />.
+            </para>
+          <para>This is a blocking operation. For a non-blocking equivalent, see <see cref="M:Microsoft.Azure.Batch.PoolOperations.ResizePoolAsync(System.String,System.Int32,System.Nullable{System.TimeSpan},System.Nullable{Microsoft.Azure.Batch.Common.ComputeNodeDeallocationOption},System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" />.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="ResizePoolAsync">
@@ -1525,15 +1806,26 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="targetDedicated">To be added.</param>
-        <param name="resizeTimeout">To be added.</param>
-        <param name="deallocationOption">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool.</param>
+        <param name="targetDedicated">The desired number of compute nodes in the pool.</param>
+        <param name="resizeTimeout">The timeout for allocation of compute nodes to the pool or removal of compute nodes from the pool. If the pool has not reached the target size after this time, the resize is stopped. The default is 15 minutes.</param>
+        <param name="deallocationOption">Specifies when nodes may be removed from the pool, if the pool size is decreasing. The default is <see cref="F:Microsoft.Azure.Batch.Common.ComputeNodeDeallocationOption.Requeue" />.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> for controlling the lifetime of the asynchronous operation.</param>
+        <summary>
+            Resizes the specified pool.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous operation.</returns>
+        <remarks>
+          <para>The resize operation requests that the pool be resized.  The request puts the pool in the <see cref="F:Microsoft.Azure.Batch.Common.AllocationState.Resizing" /> allocation state.
+            The Batch service will perform the actual resize without any further client action, and set the allocation state to <see cref="F:Microsoft.Azure.Batch.Common.AllocationState.Steady" /> once complete.</para>
+          <para>
+            You can only resize a pool when its <see cref="P:Microsoft.Azure.Batch.CloudPool.AllocationState" /> is <see cref="F:Microsoft.Azure.Batch.Common.AllocationState.Steady" />.
+            You cannot resize pools which are configured for automatic scaling (that is, the <see cref="P:Microsoft.Azure.Batch.CloudPool.AutoScaleEnabled" /> property of the pool is true).
+            If you decrease the pool size, the Batch service chooses which nodes to remove.  To remove specific nodes, call <see cref="M:Microsoft.Azure.Batch.PoolOperations.RemoveFromPoolAsync(System.String,System.Collections.Generic.IEnumerable{System.String},System.Nullable{Microsoft.Azure.Batch.Common.ComputeNodeDeallocationOption},System.Nullable{System.TimeSpan},System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" />.
+            </para>
+          <para>The resize operation runs asynchronously.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="StopResizePool">
@@ -1552,10 +1844,20 @@
         <Parameter Name="additionalBehaviors" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.BatchClientBehavior&gt;" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <summary>
+            Stops a pool resize operation.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous operation.</returns>
+        <remarks>
+          <para>
+            This operation stops an ongoing resize operation on the pool.  The pool size will stabilize at the number of nodes it is at
+            when the stop operation is done.  During the stop operation, the pool <see cref="P:Microsoft.Azure.Batch.CloudPool.AllocationState" /> changes first
+            to <see cref="F:Microsoft.Azure.Batch.Common.AllocationState.Stopping" /> and then to <see cref="F:Microsoft.Azure.Batch.Common.AllocationState.Steady" />.
+            </para>
+          <para>This is a blocking operation. For a non-blocking equivalent, see <see cref="M:Microsoft.Azure.Batch.PoolOperations.StopResizePoolAsync(System.String,System.Collections.Generic.IEnumerable{Microsoft.Azure.Batch.BatchClientBehavior},System.Threading.CancellationToken)" />.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="StopResizePoolAsync">
@@ -1575,12 +1877,21 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="poolId">To be added.</param>
-        <param name="additionalBehaviors">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="poolId">The id of the pool.</param>
+        <param name="additionalBehaviors">A collection of <see cref="T:Microsoft.Azure.Batch.BatchClientBehavior" /> instances that are applied to the Batch service request after the <see cref="P:Microsoft.Azure.Batch.PoolOperations.CustomBehaviors" />.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> for controlling the lifetime of the asynchronous operation.</param>
+        <summary>
+            Stops a pool resize operation.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous operation.</returns>
+        <remarks>
+          <para>
+            This operation stops an ongoing resize operation on the pool.  The pool size will stabilize at the number of nodes it is at
+            when the stop operation is done.  During the stop operation, the pool <see cref="P:Microsoft.Azure.Batch.CloudPool.AllocationState" /> changes first
+            to <see cref="F:Microsoft.Azure.Batch.Common.AllocationState.Stopping" /> and then to <see cref="F:Microsoft.Azure.Batch.Common.AllocationState.Steady" />.
+            </para>
+          <para>The stop resize operation runs asynchronously.</para>
+        </remarks>
       </Docs>
     </Member>
   </Members>
