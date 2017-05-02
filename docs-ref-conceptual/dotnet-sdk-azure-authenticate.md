@@ -22,28 +22,7 @@ TBD
 
 ## File-based authentication
 
-The simplest way to authenticate is to create a `*.properties` file that contains credentials for an [Azure service principal](/azure/active-directory/develop/active-directory-application-objects).
-
-```text
-# sample management library properties file
-subscription=########-####-####-####-############
-client=########-####-####-####-############
-key=XXXXXXXXXXXXXXXX
-tenant=########-####-####-####-############
-managementURI=https://management.core.windows.net/
-baseURL=https://management.azure.com/
-authURL=https://login.windows.net/
-graphURL=https://graph.windows.net/
-```
-
-- subscription: use the *id* value from `az account show` in the Azure CLI 2.0.
-- client: use the *appId* value from the output taken from a service principal output.
-- key: use the *password* value from the service principal output .
-- tenant: use the *tenant* value from the service principal output.
-
-Save this file in a secure location on your system where your code can read it. Set an environment variable named `AZURE_AUTH_LOCATION` with the full path to the file, for example:
-
-![System environment variable dialog](media/dotnet-sdk-azure-authenticate/environment-var.png)
+[!include[File-based authentication](includes/file-based-auth.md)]
 
 Create the entry point `Azure` object to start working with the API:
 
@@ -54,7 +33,6 @@ var credentials = SdkContext.AzureCredentialsFactory
 
 var azure = Azure
     .Configure()
-    .WithLogLevel(HttpLoggingDelegatingHandler.Level.Basic)
     .Authenticate(credentials)
     .WithDefaultSubscription();
 ```

@@ -1,5 +1,5 @@
 ---
-title: Install Azure Libraries for .NET
+title: Install Azure libraries for .NET
 description: Import Azure Management Libraries for .NET into your project
 keywords: Azure, .NET, SDK, API, NuGet
 author: camsoper
@@ -14,9 +14,9 @@ ms.service: multiple
 ms.assetid:
 ---
 
-# Install Azure Libraries for .NET
+# Install Azure libraries for .NET
 
-Use the Azure Libraries for .NET to manage, integrate, and consume Azure services in your .NET applications.
+Use the Azure libraries for .NET to manage, integrate, and consume Azure services in your .NET applications.
 
 * [Packages for managing Azure resources](#mgmt)
 * [Packages for integrating Azure services and consuming data](#data)
@@ -42,7 +42,7 @@ If you're using Visual Studio, use the **NuGet Package Manager Console** to impo
     Install-Package Microsoft.Azure.Management.Fluent -Version 1.0.0
     ``` 
 
-### .NET Core
+### Command line
 
 If you're using .NET Core with Visual Studio Code (or any other editor), use the `dotnet add package` command.  The following will include the latest version of the fluent [Microsoft Azure Management Client Library](http://www.nuget.org/packages/Microsoft.Azure.Management.Fluent) for .NET:
 
@@ -54,41 +54,6 @@ To use a specific version, include the version number like this:
 ```bash
 dotnet add package Microsoft.Azure.Management.Fluent -v 1.0.0
 ```
-
-## Verify your install
-
-After configuring your build tool or IDE, create a new class source file in the location appropriate to your project tooling with the following contents:
-
-```csharp
-using System;
-using Microsoft.Azure.Management.Fluent;
-using Microsoft.Azure.Management.ResourceManager.Fluent.Authentication;
-
-namespace MyApplication
-{
-    class AzureDotNet
-    {
-        static void Main(string[] args)
-        {
-            AzureCredentials credentials = null;
-
-            try
-            {
-                IAzure azure = Azure.Configure()
-                    .Authenticate(credentials)
-                    .WithDefaultSubscription();
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.StackTrace);
-            }
-        }
-    }
-}
-```
-
-If you're using Visual Studio, the installation of the packages is successful if `IAzure` and `AzureCredentials` resolve (no red highlighting). On the command line for .NET Core, run the code with `dotnet run` and verify that the compile is successful.
 
 ## <a id="mgmt" />Azure Management Libraries for .NET
 
@@ -123,7 +88,7 @@ Service | Fluent package | Standard package
 [Logic Apps](/azure/logic-apps/) | | [![Microsoft.Azure.Management.Logic](https://img.shields.io/nuget/v/Microsoft.Azure.Management.Logic.svg)](https://www.nuget.org/packages/Microsoft.Azure.Management.Logic)
 [MachineLearning](/azure/machine-learning/) | | [![Microsoft.Azure.Management.MachineLearning](https://img.shields.io/nuget/v/Microsoft.Azure.Management.Logic.svg)](https://www.nuget.org/packages/Microsoft.Azure.Management.MachineLearning)
 [Media Services](/azure/media-services/) | | [![Microsoft.Azure.Management.Media](https://img.shields.io/nuget/v/Microsoft.Azure.Management.Media.svg)](https://www.nuget.org/packages/Microsoft.Azure.Management.Media)
-[Monitor](/azure/monitoring-and-diagnostics/) | | [![Microsoft.Azure.Insights](https://img.shields.io/nuget/v/Microsoft.Azure.Management.Insights.svg)](https://www.nuget.org/packages/Microsoft.Azure.Insights)
+[Monitor](/azure/monitoring-and-diagnostics/) | | [![Microsoft.Azure.Insights](https://img.shields.io/nuget/v/Microsoft.Azure.Insights.svg)](https://www.nuget.org/packages/Microsoft.Azure.Insights)
 [Notification Hubs](/azure/notification-hubs/) | | [![Microsoft.Azure.Management.NotificationHubs](https://img.shields.io/nuget/v/Microsoft.Azure.Management.NotificationHubs.svg)](https://www.nuget.org/packages/Microsoft.Azure.Management.NotificationHubs)
 [PowerBI Embedded](/azure/power-bi-embedded/) | | [![Microsoft.Azure.Management.PowerBIEmbedded](https://img.shields.io/nuget/v/Microsoft.Azure.Management.PowerBIEmbedded.svg)](https://www.nuget.org/packages/Microsoft.Azure.Management.PowerBIEmbedded)
 [Recovery Services](/azure/site-recovery/) | | [![Microsoft.Azure.Management.RecoveryServices](https://img.shields.io/nuget/v/Microsoft.Azure.Management.RecoveryServices.svg)](https://www.nuget.org/packages/Microsoft.Azure.Management.RecoveryServices)
@@ -166,6 +131,41 @@ Service | Package
 [Storage](/azure/storage/) | [![WindowsAzure.Storage](https://img.shields.io/nuget/v/WindowsAzure.Storage.svg)](http://www.nuget.org/packages/WindowsAzure.Storage) 
 
 \* *- Denotes package is currently incompatible with .NET Core.*
+
+## Verify your install
+
+After configuring your build tool or IDE, create a new class source file in the location appropriate to your project tooling with the following contents:
+
+```csharp
+using System;
+using Microsoft.Azure.Management.Fluent;
+using Microsoft.Azure.Management.ResourceManager.Fluent.Authentication;
+
+namespace MyApplication
+{
+    class AzureDotNet
+    {
+        static void Main(string[] args)
+        {
+            AzureCredentials credentials = null;
+
+            try
+            {
+                IAzure azure = Azure.Configure()
+                    .Authenticate(credentials)
+                    .WithDefaultSubscription();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+            }
+        }
+    }
+}
+```
+
+If you're using Visual Studio, the installation of the packages is successful if `IAzure` and `AzureCredentials` resolve (no red highlighting). On the command line for .NET Core, run the code with `dotnet run` and verify that the compile is successful.
 
 ## Next steps
 
