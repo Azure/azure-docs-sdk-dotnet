@@ -8,7 +8,9 @@
   </AssemblyInfo>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
+    <summary>
+            Provides basic file staging features.
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -25,8 +27,11 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>
+            Returns an instance of IFileStagingArtifact with whatever values the implementation requires.
+            This will be called during file staging whenever a staging artifact has not been otherwise provided.
+            </summary>
+        <returns>An instance of IFileStagingArtifact with whatever values the implementation requires.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -42,7 +47,10 @@
         <ReturnType>System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Batch.ResourceFile&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            The collection of ResourceFile objects that are the result of file staging.   
+            Must be set by the IFileStagingProvider.StageFilesAsync() method.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -63,10 +71,16 @@
         <Parameter Name="fileStagingArtifact" Type="Microsoft.Azure.Batch.IFileStagingArtifact" />
       </Parameters>
       <Docs>
-        <param name="filesToStage">To be added.</param>
-        <param name="fileStagingArtifact">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="filesToStage">Collection of all file staging objects to be staged.  All instances must have the same implementation type.</param>
+        <param name="fileStagingArtifact">IFileStagingProvider specific staging artifacts including error/progress.</param>
+        <summary>
+            Begins an asynchronous operation to stage all of the files in the given collection.
+            When file staging begins, all instances of IFileStagingProvider are bucketized by their implementation type.
+            This produces one collection of instances per implementation.
+            Each implmentation of IFileStagingProvider has a StageFilesAsync() method.  That method is called once with the 
+            collection produced by the bucketization step oulined above.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> object that represents the asynchronous operation.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -83,7 +97,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Performs client-side validation on the current object.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>

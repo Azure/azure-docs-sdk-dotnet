@@ -11,7 +11,9 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
+    <summary>
+            Information about a start task running on a compute node.
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -25,7 +27,9 @@
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Initializes a new instance of the StartTaskInformation class.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -47,14 +51,23 @@
         <Parameter Name="lastRetryTime" Type="System.Nullable&lt;System.DateTime&gt;" />
       </Parameters>
       <Docs>
-        <param name="state">To be added.</param>
-        <param name="startTime">To be added.</param>
-        <param name="retryCount">To be added.</param>
-        <param name="endTime">To be added.</param>
-        <param name="exitCode">To be added.</param>
-        <param name="schedulingError">To be added.</param>
-        <param name="lastRetryTime">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="state">The state of the start task on the compute
+            node.</param>
+        <param name="startTime">The time at which the start task started
+            running.</param>
+        <param name="retryCount">The number of times the task has been
+            retried by the Batch service.</param>
+        <param name="endTime">The time at which the start task stopped
+            running.</param>
+        <param name="exitCode">The exit code of the program specified on
+            the start task command line.</param>
+        <param name="schedulingError">Any error encountered scheduling the
+            start task.</param>
+        <param name="lastRetryTime">The most recent time at which a retry
+            of the task started running.</param>
+        <summary>
+            Initializes a new instance of the StartTaskInformation class.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -75,9 +88,16 @@
         <ReturnType>System.Nullable&lt;System.DateTime&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the time at which the start task stopped running.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            This is the end time of the most recent run of the start task, if
+            that run has completed (even if that run failed and a retry is
+            pending). This element is not present if the start task is
+            currently running.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="ExitCode">
@@ -97,9 +117,21 @@
         <ReturnType>System.Nullable&lt;System.Int32&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the exit code of the program specified on the start
+            task command line.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            This property is set only if the start task is in the completed
+            state. In general, the exit code for a process reflects the
+            specific convention implemented by the application developer for
+            that process. If you use the exit code value to make decisions in
+            your code, be sure that you know the exit code convention used by
+            the application process. However, if the Batch service terminates
+            the start task (due to timeout, or user termination via the API)
+            you may see an operating system-defined exit code.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="LastRetryTime">
@@ -119,9 +151,19 @@
         <ReturnType>System.Nullable&lt;System.DateTime&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the most recent time at which a retry of the task
+            started running.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            This element is present only if the task was retried (i.e.
+            retryCount is nonzero). If present, this is typically the same as
+            startTime, but may be different if the task has been restarted for
+            reasons other than retry; for example, if the compute node was
+            rebooted during a retry, then the startTime is updated but the
+            lastRetryTime is not.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="RetryCount">
@@ -141,9 +183,15 @@
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the number of times the task has been retried by the
+            Batch service.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            The task is retried if it exits with a nonzero exit code, up to the
+            specified MaxTaskRetryCount.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="SchedulingError">
@@ -163,7 +211,9 @@
         <ReturnType>Microsoft.Azure.Batch.Protocol.Models.TaskSchedulingError</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets any error encountered scheduling the start task.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -185,9 +235,15 @@
         <ReturnType>System.DateTime</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the time at which the start task started running.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            This value is reset every time the task is restarted or retried
+            (that is, this is the most recent time at which the start task
+            started running).
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="State">
@@ -207,9 +263,17 @@
         <ReturnType>Microsoft.Azure.Batch.Protocol.Models.StartTaskState</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the state of the start task on the compute node.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            running - The start task is currently running. completed - The
+            start task has exited with exit code 0, or the start task has
+            failed and the retry limit has reached, or the start task process
+            did not run due to scheduling errors. Possible values include:
+            'running', 'completed'
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="Validate">
@@ -225,8 +289,13 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Validate the object.
+            </summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:Microsoft.Rest.ValidationException">
+            Thrown if validation fails
+            </exception>
       </Docs>
     </Member>
   </Members>
