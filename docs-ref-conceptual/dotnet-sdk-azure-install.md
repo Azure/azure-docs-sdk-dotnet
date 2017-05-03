@@ -131,7 +131,3 @@ Service | Package
 [Storage](/azure/storage/) | [![WindowsAzure.Storage](https://img.shields.io/nuget/v/WindowsAzure.Storage.svg)](http://www.nuget.org/packages/WindowsAzure.Storage) 
 
 \* *- Denotes package is currently incompatible with .NET Core.*
-
-## Next steps
-
-TBD
