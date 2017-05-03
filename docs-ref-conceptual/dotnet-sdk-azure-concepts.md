@@ -42,7 +42,7 @@ var sql = azure.SqlServers.Define(sqlServerName)
     .Create();
 ```
 
-As seen above, most fluent "conversations" you have with the API starts with selecting the appropriate resource collection for the Azure resources you need to work with.  Intellisense in Visual Studio then guides you through the conversation. 
+As seen above, most fluent "conversations" you have with the API start with selecting the appropriate resource collection for the Azure resources you need to work with.  Intellisense in Visual Studio then guides you through the conversation. 
 
 ![GIF of Intellisense in Visual Studio driving a fluent conversation](media/dotnet-sdk-azure-concepts/vs-fluent.gif)   
 
