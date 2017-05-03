@@ -20,7 +20,7 @@ This article details several concepts that will help you understand how to effec
 
 ## Building resources using a fluent interface
 
-Fluent interfaces let you customize objects using method chains instead of long parameter lists.  This allows you to customize the objects as you create them. For example, the entry-point Azure object is created using a fluent interface:
+A fluent interface is a specific form of the builder pattern that creates objects through a method chain that enforces correct configuration of a resource. For example, the entry-point Azure object is created using a fluent interface:
 
 ```csharp
 var azure = Azure
@@ -42,7 +42,9 @@ var sql = azure.SqlServers.Define(sqlServerName)
             .Create();
 ```
 
-As seen above, most fluent "conversations" you have with the API starts with selecting the appropriate resource collection for the Azure resources you need to work with.  Intellisense in Visual Studio then guides you through the conversation.    
+As seen above, most fluent "conversations" you have with the API starts with selecting the appropriate resource collection for the Azure resources you need to work with.  Intellisense in Visual Studio then guides you through the conversation. 
+
+![GIF of Intellisense in Visual Studio driving a fluent conversation](media/dotnet-sdk-azure-concepts/vs-fluent.gif)   
 
 ## Lists and iterations
 
