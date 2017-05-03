@@ -90,15 +90,15 @@ static void Main(string[] args)
     // Create the storage account
     Console.WriteLine("Creating storage account...");
     var storage = azure.StorageAccounts.Define(storageAccountName)
-                    .WithRegion(Region.USEast)
-                    .WithNewResourceGroup(rgName)
-                    .Create();
+        .WithRegion(Region.USEast)
+        .WithNewResourceGroup(rgName)
+        .Create();
 
     var storageKeys = storage.GetKeys();
     string storageConnectionString = "DefaultEndpointsProtocol=https;"
-            + "AccountName=" + storage.Name
-            + ";AccountKey=" + storageKeys[0].Value
-            + ";EndpointSuffix=core.windows.net";
+        + "AccountName=" + storage.Name
+        + ";AccountKey=" + storageKeys[0].Value
+        + ";EndpointSuffix=core.windows.net";
 
     var account = CloudStorageAccount.Parse(storageConnectionString);
     var serviceClient = account.CreateCloudBlobClient();
@@ -110,7 +110,7 @@ static void Main(string[] args)
 
     // Make the container public
     var containerPermissions = new BlobContainerPermissions()
-            { PublicAccess = BlobContainerPublicAccessType.Container };
+        { PublicAccess = BlobContainerPublicAccessType.Container };
     container.SetPermissionsAsync(containerPermissions).Wait();
     
     // write a blob to the container

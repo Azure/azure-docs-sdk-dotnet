@@ -105,7 +105,7 @@ Service | Fluent package | Standard package
 [Virtual Network](/azure/virtual-network/) | [![Microsoft.Azure.Management.Network.Fluent](https://img.shields.io/nuget/v/Microsoft.Azure.Management.Network.Fluent.svg)](https://www.nuget.org/packages/Microsoft.Azure.Management.Network.Fluent) | [![Microsoft.Azure.Management.Network](https://img.shields.io/nuget/v/Microsoft.Azure.Management.Network.svg)](https://www.nuget.org/packages/Microsoft.Azure.Management.Network)
 [Web Apps](/azure/app-service-web) | [![Microsoft.Azure.Management.AppService.Fluent](https://img.shields.io/nuget/v/Microsoft.Azure.Management.AppService.Fluent.svg)](https://www.nuget.org/packages/Microsoft.Azure.Management.AppService.Fluent) | [![Microsoft.Azure.Management.Websites](https://img.shields.io/nuget/v/Microsoft.Azure.Management.Websites.svg)](https://www.nuget.org/packages/Microsoft.Azure.Management.Websites)
 
-## <a id="data" />Azure Data Libraries for .NET
+## <a id="data" />Azure Client Libraries for .NET
 
 Use these libraries to **consume and integrate** Azure services in your applications.  For example, your application may need to store documents in DocumentDB, read blobs from Azure Storage, or use SQL Database.
 
