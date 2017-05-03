@@ -1,64 +1,69 @@
 ---
-title: Azure SDK for Java release notes | Microsoft Docs
-description: See what's new and watch for breaking changes in the Java SDK for Java
-keywords: Azure,  Java, API, reference,  notes,  updates, deprecate
-author: routlaw
+title: Azure management libraries for .NET release notes | Microsoft Docs
+description: See what's new and watch for breaking changes in the Azure management libraries for .NET.
+keywords: Azure, .NET, API, reference, notes,  updates, deprecate
+author: camsoper
+ms.author: casoper
 manager: douge
-ms.assetid: 1f128cf9-f747-4344-84e1-f9964709deb8
+ms.assetid:
 ms.service: Azure
-ms.devlang: java
+ms.devlang: dotnet
 ms.topic: reference
 ms.technology: Azure
-ms.date: 3/06/2016
+ms.date: 05/03/2017
 ---
 
-# Release Notes for 1.0.0-beta5
+# Release Notes 
 
-## What's new
+## Feature Availability and Road Map as of Version 1.0.0 ##
+### April 26, 2017
 
-### Feature 1
+<table>
+  <tr>
+    <th align="left">Service | feature</th>
+    <th align="left">Available as GA</th>
+    <th align="left">Available as Preview</th>
+    <th align="left">Coming soon</th>
+  </tr>
+  <tr>
+    <td>Compute</td>
+    <td>Virtual machines and VM extensions<br>Virtual machine scale sets<br>Managed disks</td>
+    <td></td>
+    <td valign="top">Azure container services<br>Azure container registry</td>
+  </tr>
+  <tr>
+    <td>Storage</td>
+    <td>Storage accounts</td>
+    <td></td>
+    <td>Encryption</td>
+  </tr>
+  <tr>
+    <td>SQL Database</td>
+    <td>Databases<br>Firewalls<br>Elastic pools</td>
+    <td></td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td>Networking</td>
+    <td>Virtual networks<br>Network interfaces<br>IP addresses<br>Routing table<br>Network security groups<br>DNS<br>Traffic managers</td>
+    <td valign="top">Load balancers<br>Application gateways</td>
+    <td valign="top"></td>
+  </tr>
+  <tr>
+    <td>More services</td>
+    <td>Resource Manager<br>Key Vault<br>Redis<br>CDN<br>Batch</td>
+    <td valign="top">App service - Web apps<br>Functions<br>Service bus</td>
+    <td valign="top">Monitor<br>Graph RBAC<br>DocumentDB<br>Scheduler</td>
+  </tr>
+  <tr>
+    <td>Fundamentals</td>
+    <td>Authentication - core</td>
+    <td>Async methods</td>
+    <td valign="top"></td>
+  </tr>
+</table>
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris cursus lorem ipsum, ut gravida leo interdum eget. Nulla maximus, sem.
+> [!WARNING] 
+> *Preview* features are flagged in documentation comments in libraries. These features are subject to change. They can be modified in any way (or even removed) in the future.
 
-### Feature 2
-
-Fusce accumsan placerat iaculis. Phasellus rutrum, mauris non sagittis tincidunt, lacus urna malesuada nunc, a accumsan nibh justo a magna.
-
-## API changes
-
-### `Create()` defaults to managed disks
-
-In `VirtualMachine, VirtualMachineScaleSet` and `VirtualMachineScaleSetVM` the OS and data disks getters and withers default to managed disks. The withers and getters for storage account based (unmanaged) OS and data disks are renamed to include the term `unmanaged`.
-
-### `Create()` creates unmanaged disks on explicit requests
-
-Starting in 1.0.0-beta5, if you like to continue to use the storage account based (unmanaged) operating system and data disks, you may use `withUnmanagedDisks()` in the `define() ... create()` method chain. 
-
-```java
-    azure.virtualMachines().define("myLinuxVM")
-       .withRegion(Region.US_EAST)
-       .withNewResourceGroup(rgName)
-       .withNewPrimaryNetwork("10.0.0.0/28")
-       .withPrimaryPrivateIpAddressDynamic()
-       .withNewPrimaryPublicIpAddress("mylinuxvmdns")
-       .withPopularLinuxImage(KnownLinuxVirtualMachineImage.UBUNTU_SERVER_16_04_LTS)
-       .withRootUsername("tirekicker")
-       .withSsh(sshKey)
-       // Unmanaged disks - uses Storage Account
-       .withUnmanagedDisks()
-       .withSize(VirtualMachineSizeTypes.STANDARD_D3_V2)
-       .create();
-```
-
-See the [manage virtual machine with unmanaged disks](https://github.com/azure-samples/compute-java-manage-virtual-machine-with-unmanaged-disks) sample for more code examples.
-
-## Migration 
-
-[Migrate from Beta 4](migrate-from-beta-4.md)    
-[Migrate from 0.91](migrate-from-before-1.md)
-
-## Previous versions
-
-[1.0.0-beta4 release notes](release-notes-1-0-0-beta4.md)   
-[1.0.0-beta3 release notes](release-notes-1-0-0-beta3.md)
-
+[!include[Contribute and community](includes/contribute.md)]
