@@ -27,6 +27,8 @@ This guide uses Visual Studio.  See the [installation guide](dotnet-sdk-azure-in
 
 ## Set up authentication
 
+[!include[Create service principal](includes/create-sp.md)]
+
 [!include[File-based authentication](includes/file-based-auth.md)]
 
 ## Create a new project 
@@ -119,8 +121,7 @@ static void Main(string[] args)
 
     // Wait for the user
     Console.WriteLine("Press enter to continue...");
-    Console.ReadLine();
-        
+    Console.ReadLine();        
 }
 ```
 
@@ -290,6 +291,7 @@ static void Main(string[] args)
         .WithBranch("master")
         .Attach()
         .Create();
+    Console.WriteLine("Your web app is live at: https://{0}", app.HostNames.First());
 
     // Wait for the user
     Console.WriteLine("Press enter to continue...");
@@ -313,10 +315,8 @@ Remove-AzureRmResourceGroup -ResourceGroupName sampleResourceGroup
 
 To learn more about how to use the Azure libraries for .NET to manage resources and automate tasks, see our sample code for [virtual machines](dotnet-sdk-azure-virtual-machine-samples.md), [web apps](dotnet-sdk-azure-web-apps-samples.md) and [SQL database](dotnet-sdk-azure-sql-database-samples.md).
 
-## Reference and release notes
+## Reference
 
 A [reference](http://docs.microsoft.com/dotnet/api) is available for all packages.
 
-## Get help and give feedback
-
-Post questions to the community on [Stack Overflow](http://stackoverflow.com/questions/tagged/azure-sdk-.net) and open issues against the SDK on the [project GitHub](https://github.com/Azure/azure-sdk-for-net).
+[!include[Contribute and community](includes/contribute.md)]
