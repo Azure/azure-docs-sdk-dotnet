@@ -11,7 +11,9 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
+    <summary>
+            Information about the execution of a task.
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -25,7 +27,9 @@
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Initializes a new instance of the TaskExecutionInformation class.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -48,15 +52,26 @@
         <Parameter Name="lastRequeueTime" Type="System.Nullable&lt;System.DateTime&gt;" />
       </Parameters>
       <Docs>
-        <param name="retryCount">To be added.</param>
-        <param name="requeueCount">To be added.</param>
-        <param name="startTime">To be added.</param>
-        <param name="endTime">To be added.</param>
-        <param name="exitCode">To be added.</param>
-        <param name="schedulingError">To be added.</param>
-        <param name="lastRetryTime">To be added.</param>
-        <param name="lastRequeueTime">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="retryCount">The number of times the task has been
+            retried by the Batch service.</param>
+        <param name="requeueCount">The number of times the task has been
+            requeued by the Batch service as the result of a user
+            request.</param>
+        <param name="startTime">The time at which the task started
+            running.</param>
+        <param name="endTime">The time at which the task completed.</param>
+        <param name="exitCode">The exit code of the program specified on
+            the task command line.</param>
+        <param name="schedulingError">Details of any error encountered
+            scheduling the task.</param>
+        <param name="lastRetryTime">The most recent time at which a retry
+            of the task started running.</param>
+        <param name="lastRequeueTime">The most recent time at which the
+            task has been requeued by the Batch service as the result of a user
+            request.</param>
+        <summary>
+            Initializes a new instance of the TaskExecutionInformation class.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -77,9 +92,13 @@
         <ReturnType>System.Nullable&lt;System.DateTime&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the time at which the task completed.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            This property is set only if the task is in the Completed state.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="ExitCode">
@@ -99,9 +118,21 @@
         <ReturnType>System.Nullable&lt;System.Int32&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the exit code of the program specified on the task
+            command line.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            This property is set only if the task is in the completed state. In
+            general, the exit code for a process reflects the specific
+            convention implemented by the application developer for that
+            process. If you use the exit code value to make decisions in your
+            code, be sure that you know the exit code convention used by the
+            application process. However, if the Batch service terminates the
+            task (due to timeout, or user termination via the API) you may see
+            an operating system-defined exit code.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="LastRequeueTime">
@@ -121,9 +152,14 @@
         <ReturnType>System.Nullable&lt;System.DateTime&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the most recent time at which the task has been
+            requeued by the Batch service as the result of a user request.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            This property is set only if the requeueCount is nonzero.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="LastRetryTime">
@@ -143,9 +179,19 @@
         <ReturnType>System.Nullable&lt;System.DateTime&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the most recent time at which a retry of the task
+            started running.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            This element is present only if the task was retried (i.e.
+            retryCount is nonzero). If present, this is typically the same as
+            startTime, but may be different if the task has been restarted for
+            reasons other than retry; for example, if the compute node was
+            rebooted during a retry, then the startTime is updated but the
+            lastRetryTime is not.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="RequeueCount">
@@ -165,9 +211,17 @@
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the number of times the task has been requeued by the
+            Batch service as the result of a user request.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            When the user removes nodes from a pool (by resizing/shrinking the
+            pool) or when the job is being disabled, the user can specify that
+            running tasks on the nodes be requeued for execution. This count
+            tracks how many times the task has been requeued for these reasons.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="RetryCount">
@@ -187,9 +241,15 @@
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the number of times the task has been retried by the
+            Batch service.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            The task is retried if it exits with a nonzero exit code, up to the
+            specified maxTaskRetryCount.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="SchedulingError">
@@ -209,9 +269,13 @@
         <ReturnType>Microsoft.Azure.Batch.Protocol.Models.TaskSchedulingError</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets details of any error encountered scheduling the task.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            This property is set only if the task is in the completed state.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="StartTime">
@@ -231,9 +295,19 @@
         <ReturnType>System.Nullable&lt;System.DateTime&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the time at which the task started running.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            'Running' corresponds to the running state, so if the task
+            specifies resource files or application packages, then the start
+            time reflects the time at which the task started downloading or
+            deploying these. If the task has been restarted or retried, this is
+            the most recent time at which the task started running. This
+            property is present only for tasks that are in the running or
+            completed state.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="Validate">
@@ -249,8 +323,13 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Validate the object.
+            </summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:Microsoft.Rest.ValidationException">
+            Thrown if validation fails
+            </exception>
       </Docs>
     </Member>
   </Members>
