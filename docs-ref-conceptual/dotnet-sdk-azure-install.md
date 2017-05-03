@@ -132,41 +132,6 @@ Service | Package
 
 \* *- Denotes package is currently incompatible with .NET Core.*
 
-## Verify your install
-
-After configuring your build tool or IDE, create a new class source file in the location appropriate to your project tooling with the following contents:
-
-```csharp
-using System;
-using Microsoft.Azure.Management.Fluent;
-using Microsoft.Azure.Management.ResourceManager.Fluent.Authentication;
-
-namespace MyApplication
-{
-    class AzureDotNet
-    {
-        static void Main(string[] args)
-        {
-            AzureCredentials credentials = null;
-
-            try
-            {
-                IAzure azure = Azure.Configure()
-                    .Authenticate(credentials)
-                    .WithDefaultSubscription();
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.StackTrace);
-            }
-        }
-    }
-}
-```
-
-If you're using Visual Studio, the installation of the packages is successful if `IAzure` and `AzureCredentials` resolve (no red highlighting). On the command line for .NET Core, run the code with `dotnet run` and verify that the compile is successful.
-
 ## Next steps
 
 TBD

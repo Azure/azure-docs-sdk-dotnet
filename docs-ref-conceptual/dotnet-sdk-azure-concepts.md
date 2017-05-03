@@ -1,5 +1,5 @@
 ---
-title: Azure Management Libraries for .NET usage concepts and patterns
+title: Azure management libraries usage concepts and patterns
 description: 
 keywords: Azure, .NET, SDK, API, patterns, concepts, fluent, logging
 author: camsoper
@@ -16,19 +16,20 @@ ms.assetid:
 
 # Azure management library concepts
 
-This article details several concepts that will help you understand how to effectively use the Azure Management Libraries for .NET.
+This article details several concepts that will help you understand how to effectively use the Azure management libraries for .NET.
 
-## Building resources through a fluent interface
+## Building resources using a fluent interface
 
-Fluent interfaces let you customize objects using method chains instead of long parameter lists.  This allows you to customize the objects as you create them. For example, the entry-point Azure object is created using a fluent interface:
+A fluent interface is a specific form of the builder pattern that creates objects through a method chain that enforces correct configuration of a resource. For example, the entry-point Azure object is created using a fluent interface:
 
 ```csharp
 var azure = Azure
     .Configure()
-    .WithLogLevel(HttpLoggingDelegatingHandler.Level.Basic)
     .Authenticate(credentials)
     .WithDefaultSubscription();
 ```
+
+## Resource collections
 
 The `Microsoft.Azure.Management.Fluent.Azure` object shown above is the entry point for all resource creation in the fluent management libraries. Select which type of resources to work with using the resource collections in the `Azure` object. For example, for SQL Database:
 
@@ -41,11 +42,13 @@ var sql = azure.SqlServers.Define(sqlServerName)
             .Create();
 ```
 
-Most fluent conversations you have with the API starts with selecting the appropriate resource collection for the Azure resources you need to work with.  Intellisense in Visual Studio then guides you through the "conversation."    
+As seen above, most fluent "conversations" you have with the API starts with selecting the appropriate resource collection for the Azure resources you need to work with.  Intellisense in Visual Studio then guides you through the conversation. 
+
+![GIF of Intellisense in Visual Studio driving a fluent conversation](media/dotnet-sdk-azure-concepts/vs-fluent.gif)   
 
 ## Lists and iterations
 
-Every resource collection has a `List()` method to return every instance of that resource in your current subscription. For example, `azure.SqlServers.List()` returns all SQL servers in the subscription.
+Every resource collection has a `List()` method to return every instance of that resource in your current subscription. For example, `Azure.SqlServers.List()` returns all SQL servers in the subscription.
 
 Use the `ListByResourceGroup()` method to scope the returned List to a specific [Azure resource group](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview#resource-groups).  
 
@@ -61,78 +64,120 @@ foreach(var vm in vmList)
 
 ## Actionable verbs
 
-> [!WARNING]
-> **TODO**: Port to .NET.
-
 Resource collection methods with verbs in their names take immediate action in Azure. These methods work synchronously and block execution in the current thread until they complete. 
 
-| Verb   |  Sample Usage |
+| Verb   |  Sample usage |
 |--------|---------------|
-| create | `azure.virtualMachines().create(listOfVMCreatables)` |
-| apply  | `virtualMachineScaleSet.update().withCapacity(6).apply()` |
-| delete | `azure.disks().deleteById(id)` | 
-| list   | `azure.sqlServers().list()` | 
-| get    | `VirtualMachine vm  = azure.virtualMachines().getByResourceGroup(group, vmName)` |
+| Create | `azure.VirtualMachines.Create(listOfVMCreatables)` |
+| Apply  | `virtualMachineScaleSet.Update().WithCapacity(6).Apply()` |
+| Delete | `azure.Disks.DeleteById(id)` | 
+| List   | `azure.SqlServers.List()` | 
+| Get    | `var vm  = azure.VirtualMachines.GetByResourceGroup(group, vmName)` |
 
 >[!NOTE]
-> `define()` and `update()` are verbs but do not block unless followed by a `create()` or `apply()`.
+> `Define()` and `Update()` are verbs but do not block unless followed by a `Create()` or `Apply()`.
  
-Asynchronous versions of these methods exist with a `Async` suffix use [Reactive extensions](https://github.com/ReactiveX/RxJava). 
-
 Specific resource objects have verbs that change the state of the resource in Azure. For example:
 
-```java
-VirtualMachine vmToRestart = azure.getVirtualMachines().getById(id);
-vmToRestart.restart();
+```csharp
+var vmToRestart = azure.VirtualMachines.GetById(id);
+vmToRestart.Restart();
 ```
-These resource collection verbs generally do not have asynchronous versions in the management API.
+
+Most of the methods described in this section have an asynchronous version as well, denoted by the suffix `Async`.
+
+```csharp
+Task restartTask = azure.VirtualMachines.GetById(id).RestartAsync();
+```
 
 ## Lazy resource creation
 
-> [!WARNING]
-> **TODO**: Port to .NET.
-
 A challenge when creating Azure resources arises when a new resource depends on another resource that doesn't yet exist. An example is reserving a public IP address and setting up a disk when creating a new virtual machine. You don't want to verify reserving the address or the creating the disk, you just want to configure the virtual machine with those resources.
 
-Use `Creatable<T>` objects to define Azure resources for use in your code but only create them when needed in Azure. Code written with `Creatable<T>` objects offloads resource creation in the Azure environment to the management API, boosting performance. 
+Use creatable objects to define Azure resources for use in your code but only create them when needed in Azure. Code written with creatable objects offloads resource creation in the Azure environment to the management API, boosting performance. 
 
-Generate `Creatable<T>` objects through the resource collections' `define()` verb:
+Generate creatable objects through the resource collections' `Define()` verb without a `Create()` verb:
 
-```java
-Creatable<PublicIPAddress> publicIPAddressCreatable = azure.publicIPAddresses().define(publicIPAddressName)
-                    .withRegion(Region.US_EAST)
-                    .withNewResourceGroup(rgName);
+```csharp
+// Init a creatable Public IP Address
+var publicIpAddressCreatable = azure.PublicIPAddresses.Define("publicIPAddressName")
+                                .WithRegion(Region.USEast)
+                                .WithNewResourceGroup(rgName);
 ```
 
-The Azure resource defined by the `Creatable<T>` does not yet exist in your subscription. A `Creatable<T>` is a local representation of a resource that the management API will create when its needed. Use this `Creatable<T>` to define other Azure resources that need this resource. 
+The Azure resource defined by the creatable object does not yet exist in your subscription. A creatable object is a local representation of a resource that the management API will create when it's needed (when `.Create()` is called). Use this creatable object in the definition of other Azure resources that need this resource. 
 
-```java
-Creatable<VirtualMachine> vmCreatable = azure.virtualMachines().define("creatableVM")
+```csharp
+// Init a creatable VM using the creatable Public IP Address
+var vmCreatable = azure.VirtualMachines.Define("creatableVM")
+        // ...
         .withNewPrimaryPublicIPAddress(publicIPAddressCreatable)
+        // ...
 ```
 
-Create the resources in your Azure subscription using the  `create()` method for the resource collection. 
+Create the resources in your Azure subscription using the `Create()` method for the resource collection. 
 
-```java
-CreatedResources<VirtualMachine> virtualMachine = azure.virtualMachines().create(vmCreatable);
+```csharp
+// Create the VM and its Public IP Address
+var virtualMachine = azure.VirtualMachines.Create(vmCreatable);
 ```
 
-Passing `Creatable<T>` to `create()` calls returns a `CreatedResources` object instead of a single resource object.  The `CreatedResources<T>` object lets you access all resources created by the `create()` call, not just the type from the resource collection. To access the public IP address created in Azure for the virtual machine created in the above example:
+Passing creatable objects to `Create()` returns a `ICreatedResources` object instead of a single resource object.  The `CreatedRelatedResource` object lets you access all resources created by the `Create()` call, not just the type from the resource collection. To access the public IP address created in Azure for the virtual machine created in the above example:
 
-```java
-PublicIPAddress pip = (PublicIPAddress) virtualMachine.createdRelatedResource(publicIPAddressCreatable.key());
+```csharp
+var pip = virtualMachine.CreatedRelatedResource(publicIPAddressCreatable.Key()) as PublicIPAddress;;
 ```    
 
 ## Exception handling
 
-> [!WARNING]
-> **TODO**: Port to .NET.
+The management API defines exception classes that extend `Microsoft.Rest.RestException`. Catch exceptions generated by management API, with a `catch (RestException exception)` block after the relevant `try` statement.
 
-The management API currently defines Exception classes that extend `com.microsoft.rest.RestException`. Catch exceptions generated by management API, with a `catch (RestException exception)` block after the relevant `try` statement.
+## Logs and tracing
 
-## Logs and trace
+Logging in the fluent Azure management libraries for .NET leverages the underlying [AutoRest](https://github.com/Azure/AutoRest) service client tracing.
 
-Configure the amount of logging from the management API when you build the entry point `Azure` object using `withLogLevel()`. The following trace levels exist:
+Create a class that implements `Microsoft.Rest.IServiceClientTracingInterceptor`.  This class will be responsible for intercepting log messages and passing them to whatever logging mechanism you're using.  In this example, we're just writing messages to the console, but you could also pass them to Log4Net, `Microsoft.Extensions.Logging`, or any other logging framework.
+
+```csharp
+class ConsoleTracer : IServiceClientTracingInterceptor
+{
+    public void Information(string message)
+    {
+        Console.WriteLine(message);
+    }
+
+    public void TraceError(string invocationId, Exception exception)
+    {
+        Console.WriteLine("Exception in {0}: {1}", invocationId, exception);
+    }
+
+    public void ReceiveResponse(string invocationId, HttpResponseMessage response) { }
+
+    public void SendRequest(string invocationId, HttpRequestMessage request) { }
+
+    public void Configuration(string source, string name, string value) { }
+
+    public void EnterMethod(string invocationId, object instance, string method, IDictionary<string, object> parameters) { }
+
+    public void ExitMethod(string invocationId, object returnValue) { }
+}
+```
+
+Before creating the `Microsoft.Azure.Management.Fluent.Azure` object, initialize the `IServiceClientTracingInterceptor` you created above by calling `ServiceClientTracing.AddTracingInterceptor()` and set `ServiceClientTracing.IsEnabled` to *true*.  When you create the `Azure` object, include the `.WithDelegatingHandler()` and `.WithLogLevel()` methods to wire up the client to AutoRest's service client tracing.
+
+```csharp
+ServiceClientTracing.AddTracingInterceptor(new ConsoleTracer());
+ServiceClientTracing.IsEnabled = true;
+
+var azure = Azure
+    .Configure()
+    .WithDelegatingHandler(new HttpLoggingDelegatingHandler())
+    .WithLogLevel(HttpLoggingDelegatingHandler.Level.Basic)
+    .Authenticate(credentials)
+    .WithDefaultSubscription();
+```
+
+The `HttpLoggingDelegatingHandler` log levels are defined as follows:
 
 | Trace level | Logging enabled 
 | ------------ | ---------------
