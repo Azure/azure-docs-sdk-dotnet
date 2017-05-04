@@ -16,7 +16,7 @@ ms.assetid:
 
 # Get started with the Azure libraries for .NET
 
-This tutorial demonstrates the usage of several Azure libraries for .NET.
+This tutorial demonstrates the usage of several Azure libraries for .NET.  You will set up authentication, create and use an Azure Storage account, create and use an Azure SQL Database, deploy some virtual machines, and deploy an Azure App Service Web App from GitHub.
 
 ## Prerequisites
 
