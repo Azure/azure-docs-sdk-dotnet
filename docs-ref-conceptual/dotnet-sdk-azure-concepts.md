@@ -35,14 +35,14 @@ The `Microsoft.Azure.Management.Fluent.Azure` object shown above is the entry po
 
 ```csharp
 var sql = azure.SqlServers.Define(sqlServerName)
-            .WithRegion(Region.USEast)
-            .WithNewResourceGroup(rgName)
-            .WithAdministratorLogin(administratorLogin)
-            .WithAdministratorPassword(administratorPassword)
-            .Create();
+    .WithRegion(Region.USEast)
+    .WithNewResourceGroup(rgName)
+    .WithAdministratorLogin(administratorLogin)
+    .WithAdministratorPassword(administratorPassword)
+    .Create();
 ```
 
-As seen above, most fluent "conversations" you have with the API starts with selecting the appropriate resource collection for the Azure resources you need to work with.  Intellisense in Visual Studio then guides you through the conversation. 
+As seen above, most fluent "conversations" you have with the API start with selecting the appropriate resource collection for the Azure resources you need to work with.  Intellisense in Visual Studio then guides you through the conversation. 
 
 ![GIF of Intellisense in Visual Studio driving a fluent conversation](media/dotnet-sdk-azure-concepts/vs-fluent.gif)   
 
@@ -101,8 +101,8 @@ Generate creatable objects through the resource collections' `Define()` verb wit
 ```csharp
 // Init a creatable Public IP Address
 var publicIpAddressCreatable = azure.PublicIPAddresses.Define("publicIPAddressName")
-                                .WithRegion(Region.USEast)
-                                .WithNewResourceGroup(rgName);
+    .WithRegion(Region.USEast)
+    .WithNewResourceGroup(rgName);
 ```
 
 The Azure resource defined by the creatable object does not yet exist in your subscription. A creatable object is a local representation of a resource that the management API will create when it's needed (when `.Create()` is called). Use this creatable object in the definition of other Azure resources that need this resource. 
@@ -110,9 +110,9 @@ The Azure resource defined by the creatable object does not yet exist in your su
 ```csharp
 // Init a creatable VM using the creatable Public IP Address
 var vmCreatable = azure.VirtualMachines.Define("creatableVM")
-        // ...
-        .withNewPrimaryPublicIPAddress(publicIPAddressCreatable)
-        // ...
+    // ...
+    .withNewPrimaryPublicIPAddress(publicIPAddressCreatable)
+    // ...
 ```
 
 Create the resources in your Azure subscription using the `Create()` method for the resource collection. 
