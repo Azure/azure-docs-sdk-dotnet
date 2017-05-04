@@ -11,7 +11,10 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
+    <summary>
+            A Job Release task to run on job completion on any compute node where
+            the job has run.
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -25,7 +28,9 @@
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Initializes a new instance of the JobReleaseTask class.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -47,14 +52,32 @@
         <Parameter Name="userIdentity" Type="Microsoft.Azure.Batch.Protocol.Models.UserIdentity" />
       </Parameters>
       <Docs>
-        <param name="commandLine">To be added.</param>
-        <param name="id">To be added.</param>
-        <param name="resourceFiles">To be added.</param>
-        <param name="environmentSettings">To be added.</param>
-        <param name="maxWallClockTime">To be added.</param>
-        <param name="retentionTime">To be added.</param>
-        <param name="userIdentity">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="commandLine">The command line of the Job Release
+            task.</param>
+        <param name="id">A string that uniquely identifies the Job Release
+            task within the job.</param>
+        <param name="resourceFiles">A list of files that the Batch service
+            will download to the compute node before running the command
+            line.</param>
+        <param name="environmentSettings">A list of environment variable
+            settings for the Job Release task.</param>
+        <param name="maxWallClockTime">The maximum elapsed time that the
+            Job Release task may run on a given compute node, measured from the
+            time the task starts. If the task does not complete within the time
+            limit, the Batch service terminates it. The default value is 15
+            minutes. You may not specify a timeout longer than 15 minutes. If
+            you do, the Batch service rejects it with an error; if you are
+            calling the REST API directly, the HTTP status code is 400 (Bad
+            Request).</param>
+        <param name="retentionTime">The minimum time to retain the task
+            directory for the Job Release task on the compute node. After this
+            time, the Batch service may delete the task directory and all its
+            contents.</param>
+        <param name="userIdentity">The user identity under which the Job
+            Release task runs.</param>
+        <summary>
+            Initializes a new instance of the JobReleaseTask class.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -75,9 +98,17 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the command line of the Job Release task.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            The command line does not run under a shell, and therefore cannot
+            take advantage of shell features such as environment variable
+            expansion. If you want to take advantage of such features, you
+            should invoke the shell in the command line, for example using "cmd
+            /c MyCommand" in Windows or "/bin/sh -c MyCommand" in Linux.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="EnvironmentSettings">
@@ -97,7 +128,10 @@
         <ReturnType>System.Collections.Generic.IList&lt;Microsoft.Azure.Batch.Protocol.Models.EnvironmentSetting&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets a list of environment variable settings for the Job
+            Release task.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -119,9 +153,21 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets a string that uniquely identifies the Job Release task
+            within the job.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            The ID can contain any combination of alphanumeric characters
+            including hyphens and underscores and cannot contain more than 64
+            characters. If you do not specify this property, the Batch service
+            assigns a default value of 'jobrelease'. No other task in the job
+            can have the same id as the Job Release task. If you try to submit
+            a task with the same id, the Batch service rejects the request with
+            error code TaskIdSameAsJobReleaseTask; if you are calling the REST
+            API directly, the HTTP status code is 409 (Conflict).
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="MaxWallClockTime">
@@ -141,7 +187,15 @@
         <ReturnType>System.Nullable&lt;System.TimeSpan&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the maximum elapsed time that the Job Release task may
+            run on a given compute node, measured from the time the task
+            starts. If the task does not complete within the time limit, the
+            Batch service terminates it. The default value is 15 minutes. You
+            may not specify a timeout longer than 15 minutes. If you do, the
+            Batch service rejects it with an error; if you are calling the REST
+            API directly, the HTTP status code is 400 (Bad Request).
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -163,9 +217,15 @@
         <ReturnType>System.Collections.Generic.IList&lt;Microsoft.Azure.Batch.Protocol.Models.ResourceFile&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets a list of files that the Batch service will download
+            to the compute node before running the command line.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            Files listed under this element are located in the task's working
+            directory.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="RetentionTime">
@@ -185,9 +245,16 @@
         <ReturnType>System.Nullable&lt;System.TimeSpan&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the minimum time to retain the task directory for the
+            Job Release task on the compute node. After this time, the Batch
+            service may delete the task directory and all its contents.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            The default is infinite, i.e. the task directory will be retained
+            until the compute node is removed or reimaged.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="UserIdentity">
@@ -207,9 +274,15 @@
         <ReturnType>Microsoft.Azure.Batch.Protocol.Models.UserIdentity</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the user identity under which the Job Release task
+            runs.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            If omitted, the task runs as a non-administrative user unique to
+            the task.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="Validate">
@@ -225,8 +298,13 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Validate the object.
+            </summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:Microsoft.Rest.ValidationException">
+            Thrown if validation fails
+            </exception>
       </Docs>
     </Member>
   </Members>
