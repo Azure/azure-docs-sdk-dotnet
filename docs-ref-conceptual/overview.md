@@ -20,7 +20,7 @@ The Azure libraries for .NET let you use Azure services and manage Azure resourc
 
 ## Consume Azure services
 
-Use services such as SQL Database, Azure Storage, Active Directory, and DocumentDB in your Java applications with native APIs. Import the libraries for the services you want to use from [the complete list](/dotnet-sdk-azure-install/#data) and check out the [.NET developer center](https://azure.microsoft.com/develop/net/) to learn more about building .NET apps with Azure services.
+Use services such as SQL Database, Azure Storage, Active Directory, and DocumentDB in your .NET applications with native APIs. Import the libraries for the services you want to use from [the complete list](/dotnet-sdk-azure-install/#data) and check out the [.NET developer center](https://azure.microsoft.com/develop/net/) to learn more about building .NET apps with Azure services.
 
 ## Manage Azure resources
 
