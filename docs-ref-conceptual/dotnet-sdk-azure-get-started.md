@@ -37,7 +37,7 @@ Create a new console application project.  In Visual Studio, do this by clicking
 
 ![New project dialog](media/dotnet-sdk-azure-get-started/new-project.png)
 
-When the new console app is created, open the Package Manager Console by clicking **Tools**, **NuGet Package Manager**, and then click **Package Manager Console**.  In the console, the packages you'll need by executing the following three commands:
+When the new console app is created, open the Package Manager Console by clicking **Tools**, **NuGet Package Manager**, and then click **Package Manager Console**.  In the console, get the packages you'll need by executing the following three commands:
 
 ```powershell
 # Azure Management Libraries for .NET (Fluent)
