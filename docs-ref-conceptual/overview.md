@@ -18,15 +18,11 @@ ms.assetid:
 
 The Azure libraries for .NET let you use Azure services and manage Azure resources from your application code. The libraries are available as [NuGet packages](dotnet-sdk-azure-install.md) for use in your .NET projects. 
 
-## Consume Azure services
-
-Use services such as SQL Database, Azure Storage, Active Directory, and DocumentDB in your Java applications with native APIs. Import the libraries for the services you want to use from [the complete list](/dotnet-sdk-azure-install/#data) and check out the [.NET developer center](https://azure.microsoft.com/develop/net/) to learn more about building .NET apps with Azure services.
-
 ## Manage Azure resources
 
 The Azure libraries for .NET let you create and manage Azure resources from your .NET applications.
 
-Many of the packages for managing Azure resources have a [fluent](dotnet-sdk-azure-concepts.md) interface to configure resources exactly to your specifications. For example, to add a Windows VM in an existing Azure resource group:
+Many of the packages for managing Azure resources have a [fluent](dotnet-sdk-azure-concepts.md) interface to configure resources exactly to your specifications. For example, to create a Windows VM you would write the following code::
 
 ```csharp
 var windowsVM = azure.VirtualMachines.Define(windowsVmName)
@@ -42,7 +38,11 @@ var windowsVM = azure.VirtualMachines.Define(windowsVmName)
     .Create();
  ```
 
-Review the [install instructions](dotnet-sdk-azure-install.md) to start using the libraries immediately with your projects. Set up authentication and run sample code against your own Azure subscription in the [get started article](dotnet-sdk-azure-get-started.md). The [concepts article](dotnet-sdk-azure-concepts.md) goes into the conventions the SDK uses and how to leverage them to simplify your application code. New features, breaking changes, and migration instructions are available in the [release notes](dotnet-sdk-azure-release-notes.md).
+Review the [install instructions](dotnet-sdk-azure-install.md) to start using the libraries immediately with your projects. Then read the [get started article](dotnet-sdk-azure-get-started.md) to set up authentication and run sample code against your own Azure subscription.  The [concepts article](dotnet-sdk-azure-concepts.md) goes into the conventions the SDK uses and how to leverage them to simplify your application code. New features, breaking changes, and migration instructions are available in the [release notes](dotnet-sdk-azure-release-notes.md).
+
+## Consume Azure services
+
+In addition to using .NET APIs to create and programmatically manage resources within Azure, you can also then use .NET APIs to connect your applications to these resources and use them at runtime.  For example, you might connect to a SQL Database or store data within Azure Storage.  You can identify which NuGet package to use for a particular Azure service by browsing our [full list of NuGet packages](dotnet-sdk-azure-install#data).  Check out the [.NET developer center](https://azure.microsoft.com/develop/net/) to learn more about building .NET apps with Azure services.
 
 ## Samples
 

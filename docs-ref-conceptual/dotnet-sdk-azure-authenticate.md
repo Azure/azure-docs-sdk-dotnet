@@ -18,7 +18,7 @@ ms.assetid:
 
 ## Connect to services with connection strings
 
-Most Azure service libraries require a connection string or keys to authenticate access the service from your app. For example, SQL Database uses a standard SQL connection string:
+Most Azure service libraries require a connection string or keys for authentication. For example, SQL Database uses a standard SQL connection string:
 
 ```csharp
 var builder = new SqlConnectionStringBuilder();
