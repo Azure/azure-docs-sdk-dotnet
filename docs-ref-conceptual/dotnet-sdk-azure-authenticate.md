@@ -5,7 +5,7 @@ keywords: Azure, .NET, SDK, API, authentication, active directory, service princ
 author: camsoper
 ms.author: casoper
 manager: douge
-ms.date: 04/16/2017
+ms.date: 05/08/2017
 ms.topic: article
 ms.prod: azure
 ms.technology: azure

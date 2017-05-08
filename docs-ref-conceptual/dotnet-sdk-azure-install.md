@@ -5,7 +5,7 @@ keywords: Azure, .NET, SDK, API, NuGet
 author: camsoper
 ms.author: casoper
 manager: douge
-ms.date: 04/16/2017
+ms.date: 05/08/2017
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -64,6 +64,7 @@ Use these libraries to **manage and provision** Azure resources in your applicat
 
 Service | Package
 --------|---------
+All fluent libraries | [Microsoft.Azure.Management.Fluent](https://www.nuget.org/packages/Microsoft.Azure.Management.Fluent)
 [Analysis Services](/azure/analysis-services/) | [Microsoft.Azure.Management.Analysis](https://www.nuget.org/packages/Microsoft.Azure.Management.Analysis)
 [ApiManagement](/azure/api-management/) | [Microsoft.Azure.Management.ApiManagement](https://www.nuget.org/packages/Microsoft.Azure.Management.ApiManagement)
 [Authorization](/rest/api/authorization) | [Microsoft.Azure.Management.Authorization](https://www.nuget.org/packages/Microsoft.Azure.Management.Authorization)
@@ -96,7 +97,7 @@ Service | Package
 [Resource Manager](/azure/azure-resource-manager/) | [Microsoft.Azure.Management.ResourceManager.Fluent](https://www.nuget.org/packages/Microsoft.Azure.Management.ResourceManager.Fluent)<br/>[Microsoft.Azure.Management.ResourceManager](https://www.nuget.org/packages/Microsoft.Azure.Management.ResourceManager)
 [Scheduler](/azure/scheduler/) | [Microsoft.Azure.Management.Scheduler](https://www.nuget.org/packages/Microsoft.Azure.Management.Scheduler)
 [Search](/azure/search/) | [Microsoft.Azure.Management.Search](https://www.nuget.org/packages/Microsoft.Azure.Management.Search)
-[Service Bus](/azure/service-bus/) | [Microsoft.Azure.Management.ServiceBus](https://www.nuget.org/packages/Microsoft.Azure.Management.ServiceBus)
+[Service Bus](/azure/service-bus/) | [Microsoft.Azure.Management.ServiceBus.Fluent](https://www.nuget.org/packages/Microsoft.Azure.Management.ServiceBus.Fluent)<br/>[Microsoft.Azure.Management.ServiceBus](https://www.nuget.org/packages/Microsoft.Azure.Management.ServiceBus)
 [SQL Database](/azure/sql-database/) | [Microsoft.Azure.Management.Sql.Fluent](https://www.nuget.org/packages/Microsoft.Azure.Management.Sql.Fluent)<br/>[Microsoft.Azure.Management.Sql](https://www.nuget.org/packages/Microsoft.Azure.Management.Sql)
 [Storage](/azure/storage/) | [Microsoft.Azure.Management.Storage.Fluent](https://www.nuget.org/packages/Microsoft.Azure.Management.Storage.Fluent)<br/>[Microsoft.Azure.Management.Storage](https://www.nuget.org/packages/Microsoft.Azure.Management.Storage)<br/>[Microsoft.Azure.Storage.DataMovement](https://www.nuget.org/packages/Microsoft.Azure.Storage.DataMovement)
 [Stream Analytics](/azure/stream-analytics/) | [Microsoft.Azure.Management.StreamAnalytics](https://www.nuget.org/packages/Microsoft.Azure.Management.StreamAnalytics)
