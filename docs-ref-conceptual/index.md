@@ -22,7 +22,7 @@ The Azure libraries for .NET let you use Azure services and manage Azure resourc
 
 The Azure libraries for .NET let you create and manage Azure resources from your .NET applications.
 
-Many of the packages for managing Azure resources have a [fluent](dotnet-sdk-azure-concepts.md) interface to configure resources exactly to your specifications. For example, to create a Windows VM you would write the following code::
+Many of the packages for managing Azure resources have a [fluent](dotnet-sdk-azure-concepts.md) interface to configure resources exactly to your specifications. For example, to create a Windows VM you would write the following code:
 
 ```csharp
 var windowsVM = azure.VirtualMachines.Define(windowsVmName)
