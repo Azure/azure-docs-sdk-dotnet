@@ -4,7 +4,7 @@
   <TypeSignature Language="DocId" Value="T:System.Fabric.IStateReplicator" />
   <AssemblyInfo>
     <AssemblyName>System.Fabric</AssemblyName>
-    <AssemblyVersion>5.0.0.0</AssemblyVersion>
+    <AssemblyVersion>255.0.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Interfaces />
   <Docs>
@@ -20,7 +20,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.IStateReplicator.GetCopyStream" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Fabric.IOperationStream</ReturnType>
@@ -56,7 +56,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.IStateReplicator.GetReplicationStream" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Fabric.IOperationStream</ReturnType>
@@ -92,7 +92,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.IStateReplicator.ReplicateAsync(System.Fabric.OperationData,System.Threading.CancellationToken,System.Int64@)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -130,7 +130,9 @@
           <para>Check current state – The service examines its current state to ensure that the operation is valid and can or should be performed. This check also helps ensure data consistency. It is performed by the service code.</para>
           <para>Acquire Locks – The service should acquire the necessary locks to prevent additional operations from occurring at the same time. This operation helps ensure isolation and consistency.</para>
           <para>Attempt Operation (optional) – The service can attempt the operation locally. This step reserves and allocates space and performs all the necessary computations. This step includes everything but the actual commit of the result. This operation improves the durability of the operation and makes later failures very unlikely.</para>
-          <para>Manufacture the OperationData – An <see cref="T:System.Fabric.OperationData" /> object is the representation of the Write(x) that was presented to the service. The <see cref="T:System.Fabric.OperationData" /> object contains the state change to be transferred with acknowledgement from the Primary replica to the Secondary replicas. The data that the service places in the OperationData defines the atomic update that the <see cref="T:System.Fabric.FabricReplicator" /> transfers to the Secondary replicas. Note that creating of the <see cref="T:System.Fabric.OperationData" /> object requires one or more byte arrays. The service must itself determine and serialize the change in state, and then provide this set of bytes to the FabricReplicator via <see cref="M:System.Fabric.IStateReplicator.ReplicateAsync(System.Fabric.OperationData,System.Threading.CancellationToken,System.Int64@)" />. The service sends the operation to the FabricReplicator and receives a logical sequence number (LSN) in return. The LSN is the identity for the operation and helps both the service and Service Fabric ensure that operations are always applied in the same order everywhere.The service should record the OperationData along with its LSN in an ordered list of in-flight operations. This ensures that when the operations are completed, they can be consistently applied in the correct order.</para>
+          <para>Manufacture the OperationData – An <see cref="T:System.Fabric.OperationData" /> object is the representation of the
+            Write(x) that was presented to the service. The <see cref="T:System.Fabric.OperationData" /> object contains the state change to be transferred with acknowledgement from the Primary replica to the Secondary replicas. The data that the service places in the OperationData defines the atomic update that the <see cref="T:System.Fabric.FabricReplicator" /> transfers to the Secondary replicas. Note that creating of the 
+            <see cref="T:System.Fabric.OperationData" /> object requires one or more byte arrays. The service must itself determine and serialize the change in state, and then provide this set of bytes to the FabricReplicator via <see cref="M:System.Fabric.IStateReplicator.ReplicateAsync(System.Fabric.OperationData,System.Threading.CancellationToken,System.Int64@)" />. The service sends the operation to the FabricReplicator and receives a logical sequence number (LSN) in return. The LSN is the identity for the operation and helps both the service and Service Fabric ensure that operations are always applied in the same order everywhere.The service should record the OperationData along with its LSN in an ordered list of in-flight operations. This ensures that when the operations are completed, they can be consistently applied in the correct order.</para>
           <para>Release Locks - Continue processing or waiting for further requests.</para>
           <para>Part 2: Completing requests and responding: The Primary replica receives a callback that indicates that the operation has been applied. ReplicateAsync is completed. This callback indicates that the operation has been acknowledged by a quorum of the replicas in the replica set. When the Primary replica receives this callback, it should perform the following actions: </para>
           <para>Find the corresponding operation that is indicated by the long LSN that is returned from ReplicateAsync in the service’s in-flight list and mark it as "QuorumAck’d". </para>
@@ -176,7 +178,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.IStateReplicator.UpdateReplicatorSettings(System.Fabric.ReplicatorSettings)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>

@@ -855,11 +855,6 @@
       <AssemblyInfo>
         <AssemblyVersion>5.0.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <Attributes>
-        <Attribute>
-          <AttributeName>System.Obsolete("This API is subject to removal or change in future releases.", false)</AttributeName>
-        </Attribute>
-      </Attributes>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
@@ -872,65 +867,32 @@
       <Docs>
         <typeparam name="T">Type that will be serialized and deserialized.</typeparam>
         <param name="stateSerializer">
-             The state serializer to be added.
-             </param>
+            The state serializer to be added.
+            </param>
         <summary>
-             Registers a custom serializer for all reliable collections.
-             </summary>
+            Registers a custom serializer for all reliable collections.
+            </summary>
         <returns>
-             True if the custom serializer was added.
-             False if a custom serializer for the given type already exists.
-             </returns>
+            True if the custom serializer was added.
+            False if a custom serializer for the given type already exists.
+            </returns>
         <remarks>
           <para>
-             When a reliable collection needs to serialize an object, it asks the state manager for a serializer for the given type.
-             The state manager will first check if there is a custom serializer registered for the input type. If not, it will check if one of the built-in
-             serializers can serialize the type. The state manager has built-in serializers for the following types: guid, bool, byte, sbyte, char, decimal, double,
-             float, int, uint, long, ulong, short, ushort and string. If not, it will use <see cref="T:System.Runtime.Serialization.DataContractSerializer" />.
-             </para>
+            When a reliable collection needs to serialize an object, it asks the state manager for a serializer for the given type.
+            The state manager will first check if there is a custom serializer registered for the input type. If not, it will check if one of the built-in
+            serializers can serialize the type. The state manager has built-in serializers for the following types: guid, bool, byte, sbyte, char, decimal, double,
+            float, int, uint, long, ulong, short, ushort and string. If not, it will use <see cref="T:System.Runtime.Serialization.DataContractSerializer" />.
+            </para>
           <para>
-             Serializers must be infinitely forwards and backwards compatible. For the types that are using built-in serializers, Service Fabric ensures
-             forwards and backwards compatibility. However, if a custom serializer is added for a type with a built-in serializer, the custom serializer
-             must be compatible with the built-in serialization format for that type.
-             </para>
+            Serializers must be infinitely forwards and backwards compatible. For the types that are using built-in serializers, Service Fabric ensures
+            forwards and backwards compatibility. However, if a custom serializer is added for a type with a built-in serializer, the custom serializer
+            must be compatible with the built-in serialization format for that type.
+            </para>
           <para>
-             This method can only be called during the onInitializeStateSerializersEvent callback that was given in the <see cref="T:Microsoft.ServiceFabric.Data.ReliableStateManagerConfiguration" />
-             when the state manager was created.
-             </para>
-          <para>
-             The onInitializeStateSerializersEvent callback is set during construction of a state manager, and the callback must in turn call this method on
-             <see cref="T:Microsoft.ServiceFabric.Data.IReliableStateManager" />. In order to register a callback on itself during construction, an adapter must be used to forward the initialize
-             callback back to the ReliableStateManager instance that is being created. Inside the callback, call this method to register custom serializers.
-             </para>
+            This method should be called from the constructor of the Stateful Service. 
+            This ensures that the Reliable Collections have the necessary serializers before recovery of the persisted state begins.
+            </para>
         </remarks>
-        <example>
-          <code>
-             class InitializationCallbackAdapter
-             {
-                 public Task OnInitialize()
-                 {
-                     this.StateManager.TryAddStateSerializer(new MyStateSerializer());
-                     return Task.FromResult(true);
-                 }
-            
-                 public IReliableStateManager StateManager { get; set; }
-             }
-            
-             class MyStatefulService : StatefulService
-             {
-                 public MyStatefulService(StatefulServiceContext context)
-                     : this(context, new InitializationCallbackAdapter())
-                 {
-                 }
-            
-                 public MyStatefulService(StatefulServiceContext context, InitializationCallbackAdapter adapter)
-                     : base(context, new ReliableStateManager(context, new ReliableStateManagerConfiguration(onInitializeStateSerializersEvent: adapter.OnInitialize)))
-                 {
-                     adapter.StateManager = this.StateManager;
-                 }
-             }
-             </code>
-        </example>
       </Docs>
     </Member>
     <Member MemberName="TryGetAsync&lt;T&gt;">
