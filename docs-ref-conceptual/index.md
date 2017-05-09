@@ -22,7 +22,7 @@ The Azure libraries for .NET let you use Azure services and manage Azure resourc
 
 The Azure libraries for .NET let you create and manage Azure resources from your .NET applications.
 
-Many of the packages for managing Azure resources have a [fluent](dotnet-sdk-azure-concepts.md) interface to configure resources exactly to your specifications. For example, to create a Windows VM you would write the following code::
+Many of the packages for managing Azure resources have a [fluent](dotnet-sdk-azure-concepts.md) interface to configure resources exactly to your specifications. For example, to create a Windows VM you would write the following code:
 
 ```csharp
 var windowsVM = azure.VirtualMachines.Define(windowsVmName)
@@ -42,7 +42,7 @@ Review the [install instructions](dotnet-sdk-azure-install.md) to start using th
 
 ## Consume Azure services
 
-In addition to using .NET APIs to create and programmatically manage resources within Azure, you can also then use .NET APIs to connect your applications to these resources and use them at runtime.  For example, you might connect to a SQL Database or store data within Azure Storage.  You can identify which NuGet package to use for a particular Azure service by browsing our [full list of NuGet packages](dotnet-sdk-azure-install#data).  Check out the [.NET developer center](https://azure.microsoft.com/develop/net/) to learn more about building .NET apps with Azure services.
+In addition to using .NET APIs to create and programmatically manage resources within Azure, you can also then use .NET APIs to connect your applications to these resources and use them at runtime.  For example, you might connect to a SQL Database or store data within Azure Storage.  You can identify which NuGet package to use for a particular Azure service by browsing our [full list of NuGet packages](dotnet-sdk-azure-install.md#data).  Check out the [.NET developer center](https://azure.microsoft.com/develop/net/) to learn more about building .NET apps with Azure services.
 
 ## Samples
 
