@@ -42,7 +42,7 @@ Review the [install instructions](dotnet-sdk-azure-install.md) to start using th
 
 ## Consume Azure services
 
-In addition to using .NET APIs to create and programmatically manage resources within Azure, you can also then use .NET APIs to connect your applications to these resources and use them at runtime.  For example, you might connect to a SQL Database or store data within Azure Storage.  You can identify which NuGet package to use for a particular Azure service by browsing our [full list of NuGet packages](dotnet-sdk-azure-install#data).  Check out the [.NET developer center](https://azure.microsoft.com/develop/net/) to learn more about building .NET apps with Azure services.
+In addition to using .NET APIs to create and programmatically manage resources within Azure, you can also then use .NET APIs to connect your applications to these resources and use them at runtime.  For example, you might connect to a SQL Database or store data within Azure Storage.  You can identify which NuGet package to use for a particular Azure service by browsing our [full list of NuGet packages](dotnet-sdk-azure-install.md#data).  Check out the [.NET developer center](https://azure.microsoft.com/develop/net/) to learn more about building .NET apps with Azure services.
 
 ## Samples
 
