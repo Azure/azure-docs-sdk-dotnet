@@ -4,7 +4,7 @@
   <TypeSignature Language="DocId" Value="T:System.Fabric.IStatefulServiceReplica" />
   <AssemblyInfo>
     <AssemblyName>System.Fabric</AssemblyName>
-    <AssemblyVersion>5.0.0.0</AssemblyVersion>
+    <AssemblyVersion>255.0.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Interfaces />
   <Docs>
@@ -13,9 +13,9 @@
     </summary>
     <remarks>
       <para>
-                Stateful service types must implement this interface.</para>
+                Stateful service types must implement this interface. The <see href="https://docs.microsoft.com/dotnet/api/microsoft.servicefabric.services.runtime.statefulservice">Reliable Stateful service</see> implements this interface and handles replica lifecycle internally. </para>
       <para>
-                The logic of a stateful service type includes behavior that is invoked on Primary replicas and behavior that is invoked on Secondary replicas.</para>
+                The logic of a stateful service type includes behavior that is invoked on primary replicas and behavior that is invoked on secondary replicas.</para>
       <para>
                 If the service author wants to make use of the provided <see cref="T:System.Fabric.FabricReplicator" />, then the service must also implement <see cref="T:System.Fabric.IStateProvider" /> to use the implementation of <see cref="T:System.Fabric.IStateReplicator" /> that is provided by <see cref="T:System.Fabric.FabricReplicator" />.</para>
     </remarks>
@@ -27,7 +27,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.IStatefulServiceReplica.Abort" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -35,12 +35,12 @@
       <Parameters />
       <Docs>
         <summary>
-          <para>Ungracefully terminates an instance.</para>
+          <para>Ungracefully terminates the service replica.</para>
         </summary>
         <remarks>
-          <para>Lease loss and, in response to the service, the use of <see cref="M:System.Fabric.IServicePartition.ReportFault(System.Fabric.FaultType)" /> 
+          <para>Network issues resulting in Service Fabric process shutdown and the use of <see cref="M:System.Fabric.IServicePartition.ReportFault(System.Fabric.FaultType)" /> 
             to report a <see cref="F:System.Fabric.FaultType.Permanent" /> fault are examples of ungraceful termination. When this method is invoked, 
-            the service instance should immediately release and clean up all references and return.</para>
+            the service replica should immediately release and clean up all references and return.</para>
         </remarks>
       </Docs>
     </Member>
@@ -50,7 +50,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.IStatefulServiceReplica.ChangeRoleAsync(System.Fabric.ReplicaRole,System.Threading.CancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -73,7 +73,7 @@
             Note that cancellation is advisory and that the operation might still be completed even if it is canceled.</para>
         </param>
         <summary>
-          <para>Changes the role of a Primary or Secondary replica. </para>
+          <para>Changes the role of the service replica to one of the <see cref="T:System.Fabric.ReplicaRole" />. </para>
         </summary>
         <returns>
           <para>Returns <see cref="T:System.Threading.Tasks.Task`1" /> of type <see cref="T:System.String" />, the service’s new connection address that is to be associated
@@ -81,8 +81,10 @@
         </returns>
         <remarks>
           <para>The new role is indicated as a parameter. When the service transitions to the new role, the service has a chance to update its current listening address.
-            The listening address is the address where clients connect to it. This enables the service when it is a Primary replica to only claim some resources such as ports 
-            when communication from clients is expected.</para>
+            The listening address is the address where clients connect to it and the one returned via the 
+            <see href="https://docs.microsoft.com/dotnet/api/microsoft.servicefabric.services.client.servicepartitionresolver#Microsoft_ServiceFabric_Services_Client_ServicePartitionResolver_ResolveAsync_System_Fabric_ResolvedServicePartition_System_Threading_CancellationToken_">ResolveAsync</see> API. 
+            This enables the service when it is a primary replica to only claim some resources such as ports when communication from clients is expected.</para>
+          <seealso href="https://docs.microsoft.com/azure/service-fabric/service-fabric-reliable-services-communication" />
         </remarks>
       </Docs>
     </Member>
@@ -92,7 +94,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.IStatefulServiceReplica.CloseAsync(System.Threading.CancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -106,7 +108,7 @@
             Note that cancellation is advisory and that the operation might still be completed even if it is canceled.</para>
         </param>
         <summary>
-          <para>Closes the service replica when it is being shut down.</para>
+          <para>Closes the service replica gracefully when it is being shut down.</para>
         </summary>
         <returns>
           <para>Returns <see cref="T:System.Threading.Tasks.Task" />.</para>
@@ -120,7 +122,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.IStatefulServiceReplica.Initialize(System.Fabric.StatefulServiceInitializationParameters)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -144,7 +146,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.IStatefulServiceReplica.OpenAsync(System.Fabric.ReplicaOpenMode,System.Fabric.IStatefulServicePartition,System.Threading.CancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.IReplicator&gt;</ReturnType>
