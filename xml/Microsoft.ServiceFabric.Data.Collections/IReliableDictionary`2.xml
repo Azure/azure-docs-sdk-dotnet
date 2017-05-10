@@ -21,21 +21,20 @@
     </Interface>
   </Interfaces>
   <Docs>
-    <typeparam name="TKey">The type of the keys in the reliable dictionary.</typeparam>
-    <typeparam name="TValue">
-            The type of the values in the reliable dictionary.</typeparam>
+    <typeparam name="TKey">The type of the keys in the Reliable Dictionary.</typeparam>
+    <typeparam name="TValue">The type of the values in the Reliable Dictionary.</typeparam>
     <summary>
-            Represents a reliable collection of key/value pairs that are persisted and replicated.
-            </summary>
-    <remarks>Keys or values stored in this dictionary MUST NOT be mutated outside the context of an operation on the 
-            dictionary.  It is highly recommended to make both <typeparamref name="TKey" /> and <typeparamref name="TValue" /> 
+      <para>Represents a Reliable Collection of key/value pairs that are persisted and replicated.</para>
+    </summary>
+    <remarks>
+      <para>Keys or values stored in this dictionary MUST NOT be mutated outside the context of an operation on the 
+            dictionary. It is highly recommended to make both <typeparamref name="TKey" /> and <typeparamref name="TValue" /> 
             immutable in order to avoid accidental data corruption.
-            
-            <para>
-            The transaction is the unit of concurrency. Users can have multiple transactions in-flight at any given point of time, but for a given transaction each API must be called one at a time.
+            See <see href="https://docs.microsoft.com/azure/service-fabric/service-fabric-work-with-reliable-collections">here</see> for common pitfalls.</para>
+      <para>The transaction is the unit of concurrency. Users can have multiple transactions in-flight at any given point of time, but for a given transaction each API must be called one at a time.
             When calling any asynchronous Reliable Collection method that takes an <see cref="T:Microsoft.ServiceFabric.Data.ITransaction" />, you must wait for completion of the returned Task before calling
-            another method using the same transaction.
-            </para></remarks>
+            another method using the same transaction. See examples of transactions <see href="https://docs.microsoft.com/azure/service-fabric/service-fabric-work-with-reliable-collections">here</see>.</para>
+    </remarks>
   </Docs>
   <Members>
     <Member MemberName="AddAsync">
@@ -59,18 +58,18 @@
         <param name="key">The key to be added.</param>
         <param name="value">The value to be added. The value can be null for reference types.</param>
         <summary>
-            Adds the specified key/value pair to the reliable dictionary.
+            Adds the specified key/value pair to the Reliable Dictionary.
             </summary>
         <returns>A task that represents the asynchronous add operation.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="tx" /> is null, or <paramref name="key" /> is null or cannot be serialized.</exception>
-        <exception cref="T:System.ArgumentException">A value with the same key already exists in the dictionary.</exception>
+        <exception cref="T:System.ArgumentException">A value with the same key already exists in the Reliable Dictionary.</exception>
         <exception cref="T:System.TimeoutException">The operation failed to complete within the default timeout.</exception>
         <exception cref="T:System.Fabric.FabricNotPrimaryException">The exception that is thrown when the <see cref="T:Microsoft.ServiceFabric.Data.Collections.IReliableDictionary`2" /> is not in <see cref="F:System.Fabric.ReplicaRole.Primary" />.</exception>
         <exception cref="T:System.InvalidOperationException">
             The exception that is thrown when a method call is invalid for the object's current state.
-            Example, transaction used is already terminated: committed or aborted.
+            For example, the transaction used has already been terminated because it has been committed or aborted.
             </exception>
         <exception cref="T:System.Fabric.FabricObjectClosedException">Indicates that the Reliable Dictionary is closed or deleted.</exception>
       </Docs>
@@ -100,19 +99,19 @@
         <param name="timeout">The amount of time to wait for the operation to complete before throwing a TimeoutException. Primarily used to prevent deadlocks. The default is 4 seconds.</param>
         <param name="cancellationToken">The token to monitor for cancellation requests. The default is None.</param>
         <summary>
-            Adds the specified key/value pair to the reliable dictionary.
+            Adds the specified key/value pair to the Reliable Dictionary.
             </summary>
         <returns>A task that represents the asynchronous add operation.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="tx" /> is null, or <paramref name="key" /> is null or cannot be serialized.</exception>
-        <exception cref="T:System.ArgumentException">A value with the same key already exists in the dictionary, or <paramref name="timeout" /> is negative.</exception>
+        <exception cref="T:System.ArgumentException">A value with the same key already exists in the Reliable Dictionary, or <paramref name="timeout" /> is negative.</exception>
         <exception cref="T:System.TimeoutException">The operation failed to complete within the given timeout.</exception>
         <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
         <exception cref="T:System.Fabric.FabricNotPrimaryException">The exception that is thrown when the <see cref="T:Microsoft.ServiceFabric.Data.Collections.IReliableDictionary`2" /> is not in <see cref="F:System.Fabric.ReplicaRole.Primary" />.</exception>
         <exception cref="T:System.InvalidOperationException">
             The exception that is thrown when a method call is invalid for the object's current state.
-            Example, transaction used is already terminated: committed or aborted.
+            For example, the transaction used has already been terminated because it has been committed or aborted.
             </exception>
         <exception cref="T:System.Fabric.FabricObjectClosedException">Indicates that the Reliable Dictionary is closed or deleted.</exception>
       </Docs>
@@ -140,8 +139,8 @@
         <param name="addValueFactory">The function used to generate a value for an absent key.</param>
         <param name="updateValueFactory">The function used to generate a new value for an existing key based on the key's existing value.</param>
         <summary>
-            Uses the specified functions to add a key/value pair to the reliable dictionary if the key does not already exist,
-            or to update a key/value pair in the reliable dictionary if the key already exists.
+            Uses the specified functions to add a key/value pair to the Reliable Dictionary if the key does not already exist,
+            or to update a key/value pair in the Reliable Dictionary if the key already exists.
             </summary>
         <returns>
             Task that represents the asynchronous add or update operation. The task result is the new value for the key. This will be
@@ -154,7 +153,7 @@
         <exception cref="T:System.Fabric.FabricNotPrimaryException">The exception that is thrown when the <see cref="T:Microsoft.ServiceFabric.Data.Collections.IReliableDictionary`2" /> is not in <see cref="F:System.Fabric.ReplicaRole.Primary" />.</exception>
         <exception cref="T:System.InvalidOperationException">
             The exception that is thrown when a method call is invalid for the object's current state.
-            Example, transaction used is already terminated: committed or aborted.
+            For example, the transaction used has already been terminated because it has been committed or aborted.
             </exception>
         <exception cref="T:System.Fabric.FabricObjectClosedException">Indicates that the Reliable Dictionary is closed or deleted.</exception>
       </Docs>
@@ -182,8 +181,8 @@
         <param name="addValue">The value to be added for an absent key. The value can be null for reference types.</param>
         <param name="updateValueFactory">The function used to generate a new value for an existing key based on the key's existing value.</param>
         <summary>
-            Adds a key/value pair to the reliable dictionary if the key does not already exist, or updates a key/value pair 
-            in the reliable dictionary by using the specified function if the key already exists.
+            Adds a key/value pair to the Reliable Dictionary if the key does not already exist, or updates a key/value pair 
+            in the Reliable Dictionary by using the specified function if the key already exists.
             </summary>
         <returns>
             Task that represents the asynchronous add or update operation. The task result is the new value for the key. This will be
@@ -196,7 +195,7 @@
         <exception cref="T:System.Fabric.FabricNotPrimaryException">The exception that is thrown when the <see cref="T:Microsoft.ServiceFabric.Data.Collections.IReliableDictionary`2" /> is not in <see cref="F:System.Fabric.ReplicaRole.Primary" />.</exception>
         <exception cref="T:System.InvalidOperationException">
             The exception that is thrown when a method call is invalid for the object's current state.
-            Example, transaction used is already terminated: committed or aborted.
+            For example, the transaction used has already been terminated because it has been committed or aborted.
             </exception>
         <exception cref="T:System.Fabric.FabricObjectClosedException">Indicates that the Reliable Dictionary is closed or deleted.</exception>
       </Docs>
@@ -228,8 +227,8 @@
         <param name="timeout">The amount of time to wait for the operation to complete before throwing a TimeoutException. Primarily used to prevent deadlocks. The default is 4 seconds.</param>
         <param name="cancellationToken">The token to monitor for cancellation requests. The default is None.</param>
         <summary>
-            Uses the specified functions to add a key/value pair to the reliable dictionary if the key does not already exist,
-            or to update a key/value pair in the reliable dictionary if the key already exists.
+            Uses the specified functions to add a key/value pair to the Reliable Dictionary if the key does not already exist,
+            or to update a key/value pair in the Reliable Dictionary if the key already exists.
             </summary>
         <returns>
             Task that represents the asynchronous add or update operation. The task result is the new value for the key. This will be
@@ -245,7 +244,7 @@
         <exception cref="T:System.Fabric.FabricNotPrimaryException">The exception that is thrown when the <see cref="T:Microsoft.ServiceFabric.Data.Collections.IReliableDictionary`2" /> is not in <see cref="F:System.Fabric.ReplicaRole.Primary" />.</exception>
         <exception cref="T:System.InvalidOperationException">
             The exception that is thrown when a method call is invalid for the object's current state.
-            Example, transaction used is already terminated: committed or aborted.
+            For example, the transaction used has already been terminated because it has been committed or aborted.
             </exception>
         <exception cref="T:System.Fabric.FabricObjectClosedException">Indicates that the Reliable Dictionary is closed or deleted.</exception>
       </Docs>
@@ -277,8 +276,8 @@
         <param name="timeout">The amount of time to wait for the operation to complete before throwing a TimeoutException. Primarily used to prevent deadlocks. The default is 4 seconds.</param>
         <param name="cancellationToken">The token to monitor for cancellation requests. The default is None.</param>
         <summary>
-            Adds a key/value pair to the reliable dictionary if the key does not already exist, or updates a key/value pair 
-            in the reliable dictionary by using the specified function if the key already exists.
+            Adds a key/value pair to the Reliable Dictionary if the key does not already exist, or updates a key/value pair 
+            in the Reliable Dictionary by using the specified function if the key already exists.
             </summary>
         <returns>
             Task that represents the asynchronous add or update operation. The task result is the new value for the key. This will be
@@ -294,7 +293,7 @@
         <exception cref="T:System.Fabric.FabricNotPrimaryException">The exception that is thrown when the <see cref="T:Microsoft.ServiceFabric.Data.Collections.IReliableDictionary`2" /> is not in <see cref="F:System.Fabric.ReplicaRole.Primary" />.</exception>
         <exception cref="T:System.InvalidOperationException">
             The exception that is thrown when a method call is invalid for the object's current state.
-            Example, transaction used is already terminated: committed or aborted.
+            For example, the transaction used has already been terminated because it has been committed or aborted.
             </exception>
         <exception cref="T:System.Fabric.FabricObjectClosedException">Indicates that the Reliable Dictionary is closed or deleted.</exception>
       </Docs>
@@ -318,7 +317,7 @@
         <param name="timeout">The amount of time to wait for the operation to complete before throwing a TimeoutException. Primarily used to prevent deadlocks. The default is 4 seconds.</param>
         <param name="cancellationToken">The token to monitor for cancellation requests. The default is None.</param>
         <summary>
-            Removes all keys and values from the reliable dictionary.
+            Removes all keys and values from the Reliable Dictionary.
             </summary>
         <returns>Task that represents the asynchronous clear operation.</returns>
         <remarks>To be added.</remarks>
@@ -346,9 +345,9 @@
       </Parameters>
       <Docs>
         <param name="tx">Transaction to associate this operation with.</param>
-        <param name="key">The key to locate in the reliable dictionary.</param>
+        <param name="key">The key to locate in the Reliable Dictionary.</param>
         <summary>
-            Determines whether the reliable dictionary contains the specified key.
+            Determines whether the Reliable Dictionary contains the specified key.
             </summary>
         <returns>A task that represents the asynchronous operation. The task result indicates whether the key exists.</returns>
         <remarks>To be added.</remarks>
@@ -356,14 +355,14 @@
           <paramref name="tx" /> is null, or <paramref name="key" /> is null or cannot be serialized.</exception>
         <exception cref="T:System.TimeoutException">The operation failed to complete within the default timeout.</exception>
         <exception cref="T:System.Fabric.FabricNotReadableException">
-            Exception indicates that the Reliable Dictionary cannot serve reads at the moment.
-            <see cref="T:System.Fabric.FabricNotReadableException" /> can be thrown in all <see cref="T:System.Fabric.ReplicaRole" />s.
-            One example for it being thrown in the <see cref="F:System.Fabric.ReplicaRole.Primary" /> is loss of <see cref="P:System.Fabric.IStatefulServicePartition.ReadStatus" />.
-            One example for it being thrown in the <see cref="F:System.Fabric.ReplicaRole.ActiveSecondary" /> is that Reliable Collection's state is not yet consistent.
+            Indicates that the IReliableDictionary cannot serve reads at the moment.
+            This exception can be thrown in all <see cref="T:System.Fabric.ReplicaRole" />s.
+            One reason it may be thrown in the <see cref="F:System.Fabric.ReplicaRole.Primary" /> role is loss of <see cref="P:System.Fabric.IStatefulServicePartition.ReadStatus" />.
+            One reason it may be thrown in the <see cref="F:System.Fabric.ReplicaRole.ActiveSecondary" /> role is that Reliable Collection's state is not yet consistent.
             </exception>
         <exception cref="T:System.InvalidOperationException">
             The exception that is thrown when a method call is invalid for the object's current state.
-            Example, transaction used is already terminated: committed or aborted.
+            For example, the transaction used has already been terminated because it has been committed or aborted.
             </exception>
         <exception cref="T:System.Fabric.FabricObjectClosedException">Indicates that the Reliable Dictionary is closed or deleted.</exception>
       </Docs>
@@ -386,10 +385,10 @@
       </Parameters>
       <Docs>
         <param name="tx">Transaction to associate this operation with.</param>
-        <param name="key">The key to locate in the reliable dictionary.</param>
+        <param name="key">The key to locate in the Reliable Dictionary.</param>
         <param name="lockMode">Type of locking to use for this read operation.</param>
         <summary>
-            Determines whether the reliable dictionary contains the specified key.
+            Determines whether the Reliable Dictionary contains the specified key.
             </summary>
         <returns>A task that represents the asynchronous operation. The task result indicates whether the key exists.</returns>
         <remarks>To be added.</remarks>
@@ -397,14 +396,14 @@
           <paramref name="tx" /> is null, or <paramref name="key" /> is null or cannot be serialized.</exception>
         <exception cref="T:System.TimeoutException">The operation failed to complete within the default timeout.</exception>
         <exception cref="T:System.Fabric.FabricNotReadableException">
-            Exception indicates that the Reliable Dictionary cannot serve reads at the moment.
-            <see cref="T:System.Fabric.FabricNotReadableException" /> can be thrown in all <see cref="T:System.Fabric.ReplicaRole" />s.
-            One example for it being thrown in the <see cref="F:System.Fabric.ReplicaRole.Primary" /> is loss of <see cref="P:System.Fabric.IStatefulServicePartition.ReadStatus" />.
-            One example for it being thrown in the <see cref="F:System.Fabric.ReplicaRole.ActiveSecondary" /> is that Reliable Collection's state is not yet consistent.
+            Indicates that the IReliableDictionary cannot serve reads at the moment.
+            This exception can be thrown in all <see cref="T:System.Fabric.ReplicaRole" />s.
+            One reason it may be thrown in the <see cref="F:System.Fabric.ReplicaRole.Primary" /> role is loss of <see cref="P:System.Fabric.IStatefulServicePartition.ReadStatus" />.
+            One reason it may be thrown in the <see cref="F:System.Fabric.ReplicaRole.ActiveSecondary" /> role is that Reliable Collection's state is not yet consistent.
             </exception>
         <exception cref="T:System.InvalidOperationException">
             The exception that is thrown when a method call is invalid for the object's current state.
-            Example, transaction used is already terminated: committed or aborted.
+            For example, the transaction used has already been terminated because it has been committed or aborted.
             </exception>
         <exception cref="T:System.Fabric.FabricObjectClosedException">Indicates that the Reliable Dictionary is closed or deleted.</exception>
       </Docs>
@@ -428,11 +427,11 @@
       </Parameters>
       <Docs>
         <param name="tx">Transaction to associate this operation with.</param>
-        <param name="key">The key to locate in the reliable dictionary.</param>
+        <param name="key">The key to locate in the Reliable Dictionary.</param>
         <param name="timeout">The amount of time to wait for the operation to complete before throwing a TimeoutException. Primarily used to prevent deadlocks. The default is 4 seconds.</param>
         <param name="cancellationToken">The token to monitor for cancellation requests. The default is None.</param>
         <summary>
-            Determines whether the reliable dictionary contains the specified key.
+            Determines whether the Reliable Dictionary contains the specified key.
             </summary>
         <returns>A task that represents the asynchronous operation. The task result indicates whether the key exists.</returns>
         <remarks>To be added.</remarks>
@@ -443,14 +442,14 @@
         <exception cref="T:System.TimeoutException">The operation failed to complete within the given timeout.</exception>
         <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
         <exception cref="T:System.Fabric.FabricNotReadableException">
-            Exception indicates that the Reliable Dictionary cannot serve reads at the moment.
-            <see cref="T:System.Fabric.FabricNotReadableException" /> can be thrown in all <see cref="T:System.Fabric.ReplicaRole" />s.
-            One example for it being thrown in the <see cref="F:System.Fabric.ReplicaRole.Primary" /> is loss of <see cref="P:System.Fabric.IStatefulServicePartition.ReadStatus" />.
-            One example for it being thrown in the <see cref="F:System.Fabric.ReplicaRole.ActiveSecondary" /> is that Reliable Collection's state is not yet consistent.
+            Indicates that the IReliableDictionary cannot serve reads at the moment.
+            This exception can be thrown in all <see cref="T:System.Fabric.ReplicaRole" />s.
+            One reason it may be thrown in the <see cref="F:System.Fabric.ReplicaRole.Primary" /> role is loss of <see cref="P:System.Fabric.IStatefulServicePartition.ReadStatus" />.
+            One reason it may be thrown in the <see cref="F:System.Fabric.ReplicaRole.ActiveSecondary" /> role is that Reliable Collection's state is not yet consistent.
             </exception>
         <exception cref="T:System.InvalidOperationException">
             The exception that is thrown when a method call is invalid for the object's current state.
-            Example, transaction used is already terminated: committed or aborted.
+            For example, the transaction used has already been terminated because it has been committed or aborted.
             </exception>
         <exception cref="T:System.Fabric.FabricObjectClosedException">Indicates that the Reliable Dictionary is closed or deleted.</exception>
       </Docs>
@@ -475,12 +474,12 @@
       </Parameters>
       <Docs>
         <param name="tx">Transaction to associate this operation with.</param>
-        <param name="key">The key to locate in the reliable dictionary.</param>
+        <param name="key">The key to locate in the Reliable Dictionary.</param>
         <param name="lockMode">Type of locking to use for this read operation.</param>
         <param name="timeout">The amount of time to wait for the operation to complete before throwing a TimeoutException. Primarily used to prevent deadlocks. The default is 4 seconds.</param>
         <param name="cancellationToken">The token to monitor for cancellation requests. The default is None.</param>
         <summary>
-            Determines whether the reliable dictionary contains the specified key.
+            Determines whether the Reliable Dictionary contains the specified key.
             </summary>
         <returns>A task that represents the asynchronous operation. The task result indicates whether the key exists.</returns>
         <remarks>To be added.</remarks>
@@ -491,14 +490,14 @@
         <exception cref="T:System.TimeoutException">The operation failed to complete within the given timeout.</exception>
         <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
         <exception cref="T:System.Fabric.FabricNotReadableException">
-            Exception indicates that the Reliable Dictionary cannot serve reads at the moment.
-            <see cref="T:System.Fabric.FabricNotReadableException" /> can be thrown in all <see cref="T:System.Fabric.ReplicaRole" />s.
-            One example for it being thrown in the <see cref="F:System.Fabric.ReplicaRole.Primary" /> is loss of <see cref="P:System.Fabric.IStatefulServicePartition.ReadStatus" />.
-            One example for it being thrown in the <see cref="F:System.Fabric.ReplicaRole.ActiveSecondary" /> is that Reliable Collection's state is not yet consistent.
+            Indicates that the IReliableDictionary cannot serve reads at the moment.
+            This exception can be thrown in all <see cref="T:System.Fabric.ReplicaRole" />s.
+            One reason it may be thrown in the <see cref="F:System.Fabric.ReplicaRole.Primary" /> role is loss of <see cref="P:System.Fabric.IStatefulServicePartition.ReadStatus" />.
+            One reason it may be thrown in the <see cref="F:System.Fabric.ReplicaRole.ActiveSecondary" /> role is that Reliable Collection's state is not yet consistent.
             </exception>
         <exception cref="T:System.InvalidOperationException">
             The exception that is thrown when a method call is invalid for the object's current state.
-            Example, transaction used is already terminated: committed or aborted.
+            For example, the transaction used has already been terminated because it has been committed or aborted.
             </exception>
         <exception cref="T:System.Fabric.FabricObjectClosedException">Indicates that the Reliable Dictionary is closed or deleted.</exception>
       </Docs>
@@ -518,26 +517,32 @@
         <Parameter Name="txn" Type="Microsoft.ServiceFabric.Data.ITransaction" />
       </Parameters>
       <Docs>
-        <param name="txn">Transaction to associate this operation with.</param>
+        <param name="txn">The transaction to associate this operation with.</param>
         <summary>
-            Creates an async enumerator over the <see cref="T:Microsoft.ServiceFabric.Data.Collections.IReliableDictionary`2" />.
+            Creates an asynchronous enumerator over the <see cref="T:Microsoft.ServiceFabric.Data.Collections.IReliableDictionary`2" />.
             </summary>
-        <returns>An enumerator for the reliable dictionary.</returns>
+        <returns>
+          <para>A task that represents the asynchronous create enumerable operation. The task result is an enumerator for the Reliable Dictionary.</para>
+        </returns>
         <remarks>
-            The enumerator returned from the reliable dictionary is safe to use concurrently with reads and writes
-            to the dictionary. It represents a snapshot consistent view of the dictionary.
-            </remarks>
+          <para>The returned enumerator is safe to use concurrently with reads and writes to the Reliable Dictionary.
+            It represents a snapshot consistent view. Please note that <see cref="M:Microsoft.ServiceFabric.Data.IAsyncEnumerable`1.GetAsyncEnumerator" /> needs to be called on
+            the returned IAsyncEnumerable in order to enumerate. Example usage can be
+            seen <see href="https://github.com/Azure-Samples/service-fabric-dotnet-web-reference-app/blob/master/ReferenceApp/Inventory.Service/InventoryService.cs">here</see>.</para>
+        </remarks>
         <exception cref="T:System.Fabric.FabricNotReadableException">
-            Exception indicates that the Reliable Dictionary cannot serve reads at the moment.
-            <see cref="T:System.Fabric.FabricNotReadableException" /> can be thrown in all <see cref="T:System.Fabric.ReplicaRole" />s.
-            One example for it being thrown in the <see cref="F:System.Fabric.ReplicaRole.Primary" /> is loss of <see cref="P:System.Fabric.IStatefulServicePartition.ReadStatus" />.
-            One example for it being thrown in the <see cref="F:System.Fabric.ReplicaRole.ActiveSecondary" /> is that Reliable Collection's state is not yet consistent.
+            Indicates that the IReliableDictionary cannot serve reads at the moment.
+            This exception can be thrown in all <see cref="T:System.Fabric.ReplicaRole" />s.
+            One reason it may be thrown in the <see cref="F:System.Fabric.ReplicaRole.Primary" /> role is loss of <see cref="P:System.Fabric.IStatefulServicePartition.ReadStatus" />.
+            One reason it may be thrown in the <see cref="F:System.Fabric.ReplicaRole.ActiveSecondary" /> role is that Reliable Collection's state is not yet consistent.
             </exception>
         <exception cref="T:System.InvalidOperationException">
-            The exception that is thrown when a method call is invalid for the object's current state.
-            Example, transaction used is already terminated: committed or aborted.
-            </exception>
-        <exception cref="T:System.Fabric.FabricObjectClosedException">Indicates that the Reliable Dictionary is closed or deleted.</exception>
+          <para>Indicates that a method call is invalid for the object's current state.
+            For example, the transaction used has already been terminated because it has been committed or aborted.</para>
+        </exception>
+        <exception cref="T:System.Fabric.FabricObjectClosedException">
+          <para>Indicates that the Reliable Dictionary is closed or deleted.</para>
+        </exception>
       </Docs>
     </Member>
     <Member MemberName="CreateEnumerableAsync">
@@ -556,21 +561,33 @@
         <Parameter Name="enumerationMode" Type="Microsoft.ServiceFabric.Data.Collections.EnumerationMode" />
       </Parameters>
       <Docs>
-        <param name="txn">Transaction to associate this operation with.</param>
-        <param name="enumerationMode">The enumeration mode to use. The default is Unordered.</param>
+        <param name="txn">The transaction to associate this operation with.</param>
+        <param name="enumerationMode">The enumeration mode to use. The default is Unordered. Ordered enumeration is ascending only. </param>
         <summary>
-            Creates an async enumerator over the reliable dictionary.
+            Creates an asynchronous enumerator over the <see cref="T:Microsoft.ServiceFabric.Data.Collections.IReliableDictionary`2" />.
             </summary>
-        <returns>An enumerator for the reliable dictionary.</returns>
+        <returns>
+          <para>A task that represents the asynchronous create enumerable operation. The task result is an enumerator for the Reliable Dictionary.</para>
+        </returns>
         <remarks>
-            The enumerator returned from the reliable dictionary is safe to use concurrently with reads and writes
-            to the dictionary. It represents a snapshot consistent view of the dictionary.
-            </remarks>
-        <exception cref="T:System.InvalidOperationException">
-            The exception that is thrown when a method call is invalid for the object's current state.
-            Example, transaction used is already terminated: committed or aborted.
+          <para>The returned enumerator is safe to use concurrently with reads and writes to the Reliable Dictionary.
+            It represents a snapshot consistent view. Please note that <see cref="M:Microsoft.ServiceFabric.Data.IAsyncEnumerable`1.GetAsyncEnumerator" /> needs to be called on
+            the returned IAsyncEnumerable in order to enumerate. Example usage can be
+            seen <see href="https://github.com/Azure-Samples/service-fabric-dotnet-web-reference-app/blob/master/ReferenceApp/Inventory.Service/InventoryService.cs">here</see>.</para>
+        </remarks>
+        <exception cref="T:System.Fabric.FabricNotReadableException">
+            Indicates that the IReliableDictionary cannot serve reads at the moment.
+            This exception can be thrown in all <see cref="T:System.Fabric.ReplicaRole" />s.
+            One reason it may be thrown in the <see cref="F:System.Fabric.ReplicaRole.Primary" /> role is loss of <see cref="P:System.Fabric.IStatefulServicePartition.ReadStatus" />.
+            One reason it may be thrown in the <see cref="F:System.Fabric.ReplicaRole.ActiveSecondary" /> role is that Reliable Collection's state is not yet consistent.
             </exception>
-        <exception cref="T:System.Fabric.FabricObjectClosedException">Indicates that the Reliable Dictionary is closed or deleted.</exception>
+        <exception cref="T:System.InvalidOperationException">
+          <para>Indicates that a method call is invalid for the object's current state.
+            For example, the transaction used has already been terminated because it has been committed or aborted.</para>
+        </exception>
+        <exception cref="T:System.Fabric.FabricObjectClosedException">
+          <para>Indicates that the Reliable Dictionary is closed or deleted.</para>
+        </exception>
       </Docs>
     </Member>
     <Member MemberName="CreateEnumerableAsync">
@@ -590,22 +607,34 @@
         <Parameter Name="enumerationMode" Type="Microsoft.ServiceFabric.Data.Collections.EnumerationMode" />
       </Parameters>
       <Docs>
-        <param name="txn">Transaction to associate this operation with.</param>
-        <param name="filter">Predicate that filters the keys to include in the enumeration.</param>
-        <param name="enumerationMode">The enumeration mode to use. The default is Unordered.</param>
+        <param name="txn">The transaction to associate this operation with.</param>
+        <param name="filter">Predicate that filters the key-value pairs to include in the enumeration based on the key.</param>
+        <param name="enumerationMode">The enumeration mode to use. The default is Unordered. Ordered enumeration is ascending only.</param>
         <summary>
-            Creates an async enumerable over the reliable dictionary.
+            Creates an asynchronous enumerator over the <see cref="T:Microsoft.ServiceFabric.Data.Collections.IReliableDictionary`2" />.
             </summary>
-        <returns>An enumerator for the reliable dictionary.</returns>
+        <returns>
+          <para>A task that represents the asynchronous create enumerable operation. The task result is an enumerator for the Reliable Dictionary.</para>
+        </returns>
         <remarks>
-            The enumerator returned from the reliable dictionary is safe to use concurrently with reads and writes
-            to the dictionary. It represents a snapshot consistent view of the dictionary.
-            </remarks>
-        <exception cref="T:System.InvalidOperationException">
-            The exception that is thrown when a method call is invalid for the object's current state.
-            Example, transaction used is already terminated: committed or aborted.
+          <para>The returned enumerator is safe to use concurrently with reads and writes to the Reliable Dictionary.
+            It represents a snapshot consistent view. Please note that <see cref="M:Microsoft.ServiceFabric.Data.IAsyncEnumerable`1.GetAsyncEnumerator" /> needs to be called on
+            the returned IAsyncEnumerable in order to enumerate. Example usage can be
+            seen <see href="https://github.com/Azure-Samples/service-fabric-dotnet-web-reference-app/blob/master/ReferenceApp/Inventory.Service/InventoryService.cs">here</see>.</para>
+        </remarks>
+        <exception cref="T:System.Fabric.FabricNotReadableException">
+            Indicates that the IReliableDictionary cannot serve reads at the moment.
+            This exception can be thrown in all <see cref="T:System.Fabric.ReplicaRole" />s.
+            One reason it may be thrown in the <see cref="F:System.Fabric.ReplicaRole.Primary" /> role is loss of <see cref="P:System.Fabric.IStatefulServicePartition.ReadStatus" />.
+            One reason it may be thrown in the <see cref="F:System.Fabric.ReplicaRole.ActiveSecondary" /> role is that Reliable Collection's state is not yet consistent.
             </exception>
-        <exception cref="T:System.Fabric.FabricObjectClosedException">Indicates that the Reliable Dictionary is closed or deleted.</exception>
+        <exception cref="T:System.InvalidOperationException">
+          <para>Indicates that a method call is invalid for the object's current state.
+            For example, the transaction used has already been terminated because it has been committed or aborted.</para>
+        </exception>
+        <exception cref="T:System.Fabric.FabricObjectClosedException">
+          <para>Indicates that the Reliable Dictionary is closed or deleted.</para>
+        </exception>
       </Docs>
     </Member>
     <Member MemberName="DictionaryChanged">
@@ -621,7 +650,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Occurs when the dictionary changes.
+            Occurs when the Reliable Dictionary changes.
             For example, addition, update or removal of an item.
             </summary>
         <remarks>To be added.</remarks>
@@ -648,12 +677,12 @@
         <param name="key">The key of the element to add.</param>
         <param name="valueFactory">The function used to generate a value for the key.</param>
         <summary>
-            Adds a key/value pair to the reliable dictionary by using the specified function, if the key does not already exist.
+            Adds a key/value pair to the Reliable Dictionary by using the specified function, if the key does not already exist.
             </summary>
         <returns>
             A task that represents the asynchronous add operation. The task result is the value for the key. This will be
-            either the existing value for the key if the key is already in the dictionary, or the new value for the key
-            as returned by valueFactory if the key was not in the dictionary.
+            either the existing value for the key if the key is already in the Reliable Dictionary, or the new value for the key
+            as returned by valueFactory if the key was not in the Reliable Dictionary.
             </returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
@@ -662,7 +691,7 @@
         <exception cref="T:System.Fabric.FabricNotPrimaryException">The exception that is thrown when the <see cref="T:Microsoft.ServiceFabric.Data.Collections.IReliableDictionary`2" /> is not in <see cref="F:System.Fabric.ReplicaRole.Primary" />.</exception>
         <exception cref="T:System.InvalidOperationException">
             The exception that is thrown when a method call is invalid for the object's current state.
-            Example, transaction used is already terminated: committed or aborted.
+            For example, the transaction used has already been terminated because it has been committed or aborted.
             </exception>
         <exception cref="T:System.Fabric.FabricObjectClosedException">Indicates that the Reliable Dictionary is closed or deleted.</exception>
       </Docs>
@@ -688,12 +717,12 @@
         <param name="key">The key of the element to add.</param>
         <param name="value">The value to be added, if the key does not already exist.</param>
         <summary>
-            Adds a key/value pair to the reliable dictionary if the key does not already exist.
+            Adds a key/value pair to the Reliable Dictionary if the key does not already exist.
             If the key exists no updates will be made to the value.
             </summary>
         <returns>
             A task that represents the asynchronous add operation. The task result is the value for the key. This will be either the
-            existing value for the key if the key is already in the dictionary, or the new value if the key was not in the dictionary.
+            existing value for the key if the key is already in the Reliable Dictionary, or the new value if the key was not in the Reliable Dictionary.
             </returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
@@ -702,7 +731,7 @@
         <exception cref="T:System.Fabric.FabricNotPrimaryException">The exception that is thrown when the <see cref="T:Microsoft.ServiceFabric.Data.Collections.IReliableDictionary`2" /> is not in <see cref="F:System.Fabric.ReplicaRole.Primary" />.</exception>
         <exception cref="T:System.InvalidOperationException">
             The exception that is thrown when a method call is invalid for the object's current state.
-            Example, transaction used is already terminated: committed or aborted.
+            For example, the transaction used has already been terminated because it has been committed or aborted.
             </exception>
         <exception cref="T:System.Fabric.FabricObjectClosedException">Indicates that the Reliable Dictionary is closed or deleted.</exception>
       </Docs>
@@ -732,12 +761,12 @@
         <param name="timeout">The amount of time to wait for the operation to complete before throwing a TimeoutException. Primarily used to prevent deadlocks. The default is 4 seconds.</param>
         <param name="cancellationToken">The token to monitor for cancellation requests. The default is None.</param>
         <summary>
-            Adds a key/value pair to the reliable dictionary by using the specified function, if the key does not already exist.
+            Adds a key/value pair to the Reliable Dictionary by using the specified function, if the key does not already exist.
             </summary>
         <returns>
             A task that represents the asynchronous add operation. The task result is the value for the key. This will be
-            either the existing value for the key if the key is already in the dictionary, or the new value for the key
-            as returned by valueFactory if the key was not in the dictionary.
+            either the existing value for the key if the key is already in the Reliable Dictionary, or the new value for the key
+            as returned by valueFactory if the key was not in the Reliable Dictionary.
             </returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
@@ -749,7 +778,7 @@
         <exception cref="T:System.Fabric.FabricNotPrimaryException">The exception that is thrown when the <see cref="T:Microsoft.ServiceFabric.Data.Collections.IReliableDictionary`2" /> is not in <see cref="F:System.Fabric.ReplicaRole.Primary" />.</exception>
         <exception cref="T:System.InvalidOperationException">
             The exception that is thrown when a method call is invalid for the object's current state.
-            Example, transaction used is already terminated: committed or aborted.
+            For example, the transaction used has already been terminated because it has been committed or aborted.
             </exception>
         <exception cref="T:System.Fabric.FabricObjectClosedException">Indicates that the Reliable Dictionary is closed or deleted.</exception>
       </Docs>
@@ -779,11 +808,11 @@
         <param name="timeout">The amount of time to wait for the operation to complete before throwing a TimeoutException. Primarily used to prevent deadlocks. The default is 4 seconds.</param>
         <param name="cancellationToken">The token to monitor for cancellation requests. The default is None.</param>
         <summary>
-            Adds a key/value pair to the reliable dictionary if the key does not already exist.
+            Adds a key/value pair to the Reliable Dictionary if the key does not already exist.
             </summary>
         <returns>
             A task that represents the asynchronous add operation. The task result is the value for the key. This will be either the
-            existing value for the key if the key is already in the dictionary, or the new value if the key was not in the dictionary.
+            existing value for the key if the key is already in the Reliable Dictionary, or the new value if the key was not in the Reliable Dictionary.
             </returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
@@ -795,7 +824,7 @@
         <exception cref="T:System.Fabric.FabricNotPrimaryException">The exception that is thrown when the <see cref="T:Microsoft.ServiceFabric.Data.Collections.IReliableDictionary`2" /> is not in <see cref="F:System.Fabric.ReplicaRole.Primary" />.</exception>
         <exception cref="T:System.InvalidOperationException">
             The exception that is thrown when a method call is invalid for the object's current state.
-            Example, transaction used is already terminated: committed or aborted.
+            For example, the transaction used has already been terminated because it has been committed or aborted.
             </exception>
         <exception cref="T:System.Fabric.FabricObjectClosedException">Indicates that the Reliable Dictionary is closed or deleted.</exception>
       </Docs>
@@ -813,7 +842,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Occurs when dictionary is being rebuild during copy, restore and recovery.
+            A function that is called when the Reliable Dictionary is being rebuilt during copy, restore or recovery.
             </summary>
         <value>
             The asynchronous rebuild notification function. 
@@ -822,6 +851,7 @@
         <remarks>
           <see cref="T:Microsoft.ServiceFabric.Data.Notifications.NotifyDictionaryChangedEventArgs`2" /> can only be used within this callback.
             Once the asynchronous callback completes, the <see cref="T:Microsoft.ServiceFabric.Data.Notifications.NotifyDictionaryRebuildEventArgs`2" /> becomes invalid. 
+            See <see href="https://docs.microsoft.com/azure/service-fabric/service-fabric-reliable-services-notifications">here</see> for more information. 
             </remarks>
       </Docs>
     </Member>
@@ -846,20 +876,20 @@
         <param name="key">The key whose value should be updated.</param>
         <param name="value">The value that replaces the value of the element that has the specified <paramref name="key" />.</param>
         <summary>
-            Adds a key/value pair to the reliable dictionary if the key does not already exist, or updates a key/value pair
-            in the reliable dictionary if the key already exists.
+            Adds a key/value pair to the Reliable Dictionary if the key does not already exist, or updates a key/value pair
+            in the Reliable Dictionary if the key already exists.
             </summary>
         <returns>A task that represents the asynchronous update operation.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="tx" /> is null, or <paramref name="key" /> is null or cannot be serialized.</exception>
         <exception cref="T:System.ArgumentException">
-          <paramref name="key" /> does not exist in the dictionary.</exception>
+          <paramref name="key" /> does not exist in the Reliable Dictionary.</exception>
         <exception cref="T:System.TimeoutException">The operation failed to complete within the default timeout.</exception>
         <exception cref="T:System.Fabric.FabricNotPrimaryException">The exception that is thrown when the <see cref="T:Microsoft.ServiceFabric.Data.Collections.IReliableDictionary`2" /> is not in <see cref="F:System.Fabric.ReplicaRole.Primary" />.</exception>
         <exception cref="T:System.InvalidOperationException">
             The exception that is thrown when a method call is invalid for the object's current state.
-            Example, transaction used is already terminated: committed or aborted.
+            For example, the transaction used has already been terminated because it has been committed or aborted.
             </exception>
         <exception cref="T:System.Fabric.FabricObjectClosedException">Indicates that the Reliable Dictionary is closed or deleted.</exception>
       </Docs>
@@ -889,21 +919,21 @@
         <param name="timeout">The amount of time to wait for the operation to complete before throwing a TimeoutException. Primarily used to prevent deadlocks. The default is 4 seconds.</param>
         <param name="cancellationToken">The token to monitor for cancellation requests. The default is None.</param>
         <summary>
-            Adds a key/value pair to the reliable dictionary if the key does not already exist, or updates a key/value pair
-            in the reliable dictionary if the key already exists.
+            Adds a key/value pair to the Reliable Dictionary if the key does not already exist, or updates a key/value pair
+            in the Reliable Dictionary if the key already exists.
             </summary>
         <returns>A task that represents the asynchronous update operation.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="tx" /> is null, or <paramref name="key" /> is null or cannot be serialized.</exception>
         <exception cref="T:System.ArgumentException">
-          <paramref name="key" /> does not exist in the dictionary, or <paramref name="timeout" /> is negative.</exception>
+          <paramref name="key" /> does not exist in the Reliable Dictionary, or <paramref name="timeout" /> is negative.</exception>
         <exception cref="T:System.TimeoutException">The operation failed to complete within the given timeout.</exception>
         <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
         <exception cref="T:System.Fabric.FabricNotPrimaryException">The exception that is thrown when the <see cref="T:Microsoft.ServiceFabric.Data.Collections.IReliableDictionary`2" /> is not in <see cref="F:System.Fabric.ReplicaRole.Primary" />.</exception>
         <exception cref="T:System.InvalidOperationException">
             The exception that is thrown when a method call is invalid for the object's current state.
-            Example, transaction used is already terminated: committed or aborted.
+            For example, the transaction used has already been terminated because it has been committed or aborted.
             </exception>
         <exception cref="T:System.Fabric.FabricObjectClosedException">Indicates that the Reliable Dictionary is closed or deleted.</exception>
       </Docs>
@@ -929,7 +959,7 @@
         <param name="key">The key of the element to add.</param>
         <param name="value">The value of the element to add. The value can be null for reference types.</param>
         <summary>
-            Attempts to add the specified key and value to the reliable dictionary.
+            Attempts to add the specified key and value to the Reliable Dictionary.
             </summary>
         <returns>A task that represents the asynchronous add operation. The task result indicates whether the key/value pair was added.</returns>
         <remarks>To be added.</remarks>
@@ -939,7 +969,7 @@
         <exception cref="T:System.Fabric.FabricNotPrimaryException">The exception that is thrown when the <see cref="T:Microsoft.ServiceFabric.Data.Collections.IReliableDictionary`2" /> is not in <see cref="F:System.Fabric.ReplicaRole.Primary" />.</exception>
         <exception cref="T:System.InvalidOperationException">
             The exception that is thrown when a method call is invalid for the object's current state.
-            Example, transaction used is already terminated: committed or aborted.
+            For example, the transaction used has already been terminated because it has been committed or aborted.
             </exception>
         <exception cref="T:System.Fabric.FabricObjectClosedException">Indicates that the Reliable Dictionary is closed or deleted.</exception>
       </Docs>
@@ -969,7 +999,7 @@
         <param name="timeout">The amount of time to wait for the operation to complete before throwing a TimeoutException. Primarily used to prevent deadlocks. The default is 4 seconds.</param>
         <param name="cancellationToken">The token to monitor for cancellation requests. The default is None.</param>
         <summary>
-            Attempts to add the specified key and value to the reliable dictionary.
+            Attempts to add the specified key and value to the Reliable Dictionary.
             </summary>
         <returns>A task that represents the asynchronous add operation. The task result indicates whether the key/value pair was added.</returns>
         <remarks>To be added.</remarks>
@@ -982,7 +1012,7 @@
         <exception cref="T:System.Fabric.FabricNotPrimaryException">The exception that is thrown when the <see cref="T:Microsoft.ServiceFabric.Data.Collections.IReliableDictionary`2" /> is not in <see cref="F:System.Fabric.ReplicaRole.Primary" />.</exception>
         <exception cref="T:System.InvalidOperationException">
             The exception that is thrown when a method call is invalid for the object's current state.
-            Example, transaction used is already terminated: committed or aborted.
+            For example, the transaction used has already been terminated because it has been committed or aborted.
             </exception>
         <exception cref="T:System.Fabric.FabricObjectClosedException">Indicates that the Reliable Dictionary is closed or deleted.</exception>
       </Docs>
@@ -1006,25 +1036,25 @@
         <param name="tx">Transaction to associate this operation with.</param>
         <param name="key">The key of the value to get.</param>
         <summary>
-            Attempts to get the value associated with the specified key from the reliable dictionary.
+            Attempts to get the value associated with the specified key from the Reliable Dictionary.
             </summary>
         <returns>
             A task that represents the asynchronous read operation. The task result is a tuple indicating
-            whether the key was found in the dictionary and if so, the value.
+            whether the key was found in the Reliable Dictionary and if so, the value.
             </returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="tx" /> is null, or <paramref name="key" /> is null or cannot be serialized.</exception>
         <exception cref="T:System.TimeoutException">The operation failed to complete within the default timeout.</exception>
         <exception cref="T:System.Fabric.FabricNotReadableException">
-            Exception indicates that the Reliable Dictionary cannot serve reads at the moment.
-            <see cref="T:System.Fabric.FabricNotReadableException" /> can be thrown in all <see cref="T:System.Fabric.ReplicaRole" />s.
-            One example for it being thrown in the <see cref="F:System.Fabric.ReplicaRole.Primary" /> is loss of <see cref="P:System.Fabric.IStatefulServicePartition.ReadStatus" />.
-            One example for it being thrown in the <see cref="F:System.Fabric.ReplicaRole.ActiveSecondary" /> is that Reliable Dictionary's state is not yet consistent.
+            Indicates that the IReliableDictionary cannot serve reads at the moment.
+            This exception can be thrown in all <see cref="T:System.Fabric.ReplicaRole" />s.
+            One reason it may be thrown in the <see cref="F:System.Fabric.ReplicaRole.Primary" /> role is loss of <see cref="P:System.Fabric.IStatefulServicePartition.ReadStatus" />.
+            One reason it may be thrown in the <see cref="F:System.Fabric.ReplicaRole.ActiveSecondary" /> role is that Reliable Collection's state is not yet consistent.
             </exception>
         <exception cref="T:System.InvalidOperationException">
             The exception that is thrown when a method call is invalid for the object's current state.
-            Example, transaction used is already terminated: committed or aborted.
+            For example, the transaction used has already been terminated because it has been committed or aborted.
             </exception>
         <exception cref="T:System.Fabric.FabricObjectClosedException">Indicates that the Reliable Dictionary is closed or deleted.</exception>
       </Docs>
@@ -1050,25 +1080,25 @@
         <param name="key">The key of the value to get.</param>
         <param name="lockMode">Type of locking to use for this read operation.</param>
         <summary>
-            Attempts to get the value associated with the specified key from the reliable dictionary.
+            Attempts to get the value associated with the specified key from the Reliable Dictionary.
             </summary>
         <returns>
             A task that represents the asynchronous read operation. The task result is a tuple indicating
-            whether the key was found in the dictionary and if so, the value.
+            whether the key was found in the Reliable Dictionary and if so, the value.
             </returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="tx" /> is null, or <paramref name="key" /> is null or cannot be serialized.</exception>
         <exception cref="T:System.TimeoutException">The operation failed to complete within the default timeout.</exception>
         <exception cref="T:System.Fabric.FabricNotReadableException">
-            Exception indicates that the Reliable Dictionary cannot serve reads at the moment.
-            <see cref="T:System.Fabric.FabricNotReadableException" /> can be thrown in all <see cref="T:System.Fabric.ReplicaRole" />s.
-            One example for it being thrown in the <see cref="F:System.Fabric.ReplicaRole.Primary" /> is loss of <see cref="P:System.Fabric.IStatefulServicePartition.ReadStatus" />.
-            One example for it being thrown in the <see cref="F:System.Fabric.ReplicaRole.ActiveSecondary" /> is that Reliable Dictionary's state is not yet consistent.
+            Indicates that the IReliableDictionary cannot serve reads at the moment.
+            This exception can be thrown in all <see cref="T:System.Fabric.ReplicaRole" />s.
+            One reason it may be thrown in the <see cref="F:System.Fabric.ReplicaRole.Primary" /> role is loss of <see cref="P:System.Fabric.IStatefulServicePartition.ReadStatus" />.
+            One reason it may be thrown in the <see cref="F:System.Fabric.ReplicaRole.ActiveSecondary" /> role is that Reliable Collection's state is not yet consistent.
             </exception>
         <exception cref="T:System.InvalidOperationException">
             The exception that is thrown when a method call is invalid for the object's current state.
-            Example, transaction used is already terminated: committed or aborted.
+            For example, the transaction used has already been terminated because it has been committed or aborted.
             </exception>
         <exception cref="T:System.Fabric.FabricObjectClosedException">Indicates that the Reliable Dictionary is closed or deleted.</exception>
       </Docs>
@@ -1096,11 +1126,11 @@
         <param name="timeout">The amount of time to wait for the operation to complete before throwing a TimeoutException. Primarily used to prevent deadlocks. The default is 4 seconds.</param>
         <param name="cancellationToken">The token to monitor for cancellation requests. The default is None.</param>
         <summary>
-            Attempts to get the value associated with the specified key from the reliable dictionary.
+            Attempts to get the value associated with the specified key from the Reliable Dictionary.
             </summary>
         <returns>
             A task that represents the asynchronous read operation. The task result is a tuple indicating
-            whether the key was found in the dictionary and if so, the value.
+            whether the key was found in the Reliable Dictionary and if so, the value.
             </returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
@@ -1110,14 +1140,14 @@
         <exception cref="T:System.TimeoutException">The operation failed to complete within the given timeout.</exception>
         <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
         <exception cref="T:System.Fabric.FabricNotReadableException">
-            Exception indicates that the Reliable Dictionary cannot serve reads at the moment.
-            <see cref="T:System.Fabric.FabricNotReadableException" /> can be thrown in all <see cref="T:System.Fabric.ReplicaRole" />s.
-            One example for it being thrown in the <see cref="F:System.Fabric.ReplicaRole.Primary" /> is loss of <see cref="P:System.Fabric.IStatefulServicePartition.ReadStatus" />.
-            One example for it being thrown in the <see cref="F:System.Fabric.ReplicaRole.ActiveSecondary" /> is that Reliable Dictionary's state is not yet consistent.
+            Indicates that the IReliableDictionary cannot serve reads at the moment.
+            This exception can be thrown in all <see cref="T:System.Fabric.ReplicaRole" />s.
+            One reason it may be thrown in the <see cref="F:System.Fabric.ReplicaRole.Primary" /> role is loss of <see cref="P:System.Fabric.IStatefulServicePartition.ReadStatus" />.
+            One reason it may be thrown in the <see cref="F:System.Fabric.ReplicaRole.ActiveSecondary" /> role is that Reliable Collection's state is not yet consistent.
             </exception>
         <exception cref="T:System.InvalidOperationException">
             The exception that is thrown when a method call is invalid for the object's current state.
-            Example, transaction used is already terminated: committed or aborted.
+            For example, the transaction used has already been terminated because it has been committed or aborted.
             </exception>
         <exception cref="T:System.Fabric.FabricObjectClosedException">Indicates that the Reliable Dictionary is closed or deleted.</exception>
       </Docs>
@@ -1147,11 +1177,11 @@
         <param name="timeout">The amount of time to wait for the operation to complete before throwing a TimeoutException. Primarily used to prevent deadlocks. The default is 4 seconds.</param>
         <param name="cancellationToken">The token to monitor for cancellation requests. The default is None.</param>
         <summary>
-            Attempts to get the value associated with the specified key from the reliable dictionary.
+            Attempts to get the value associated with the specified key from the Reliable Dictionary.
             </summary>
         <returns>
             A task that represents the asynchronous read operation. The task result is a tuple indicating
-            whether the key was found in the dictionary and if so, the value.
+            whether the key was found in the Reliable Dictionary and if so, the value.
             </returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
@@ -1161,14 +1191,14 @@
         <exception cref="T:System.TimeoutException">The operation failed to complete within the given timeout.</exception>
         <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
         <exception cref="T:System.Fabric.FabricNotReadableException">
-            Exception indicates that the Reliable Dictionary cannot serve reads at the moment.
-            <see cref="T:System.Fabric.FabricNotReadableException" /> can be thrown in all <see cref="T:System.Fabric.ReplicaRole" />s.
-            One example for it being thrown in the <see cref="F:System.Fabric.ReplicaRole.Primary" /> is loss of <see cref="P:System.Fabric.IStatefulServicePartition.ReadStatus" />.
-            One example for it being thrown in the <see cref="F:System.Fabric.ReplicaRole.ActiveSecondary" /> is that Reliable Dictionary's state is not yet consistent.
+            Indicates that the IReliableDictionary cannot serve reads at the moment.
+            This exception can be thrown in all <see cref="T:System.Fabric.ReplicaRole" />s.
+            One reason it may be thrown in the <see cref="F:System.Fabric.ReplicaRole.Primary" /> role is loss of <see cref="P:System.Fabric.IStatefulServicePartition.ReadStatus" />.
+            One reason it may be thrown in the <see cref="F:System.Fabric.ReplicaRole.ActiveSecondary" /> role is that Reliable Collection's state is not yet consistent.
             </exception>
         <exception cref="T:System.InvalidOperationException">
             The exception that is thrown when a method call is invalid for the object's current state.
-            Example, transaction used is already terminated: committed or aborted.
+            For example, the transaction used has already been terminated because it has been committed or aborted.
             </exception>
         <exception cref="T:System.Fabric.FabricObjectClosedException">Indicates that the Reliable Dictionary is closed or deleted.</exception>
       </Docs>
@@ -1192,11 +1222,11 @@
         <param name="tx">Transaction to associate this operation with.</param>
         <param name="key">The key of the element to remove.</param>
         <summary>
-            Attempts to remove the value with the specified key from the reliable dictionary.
+            Attempts to remove the value with the specified key from the Reliable Dictionary.
             </summary>
         <returns>
             Task that represents the asynchronous remove operation. The task result is a tuple indicating
-            whether the key was removed from the dictionary and if so, the value.
+            whether the key was removed from the Reliable Dictionary and if so, the value.
             </returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
@@ -1205,7 +1235,7 @@
         <exception cref="T:System.Fabric.FabricNotPrimaryException">The exception that is thrown when the <see cref="T:Microsoft.ServiceFabric.Data.Collections.IReliableDictionary`2" /> is not in <see cref="F:System.Fabric.ReplicaRole.Primary" />.</exception>
         <exception cref="T:System.InvalidOperationException">
             The exception that is thrown when a method call is invalid for the object's current state.
-            Example, transaction used is already terminated: committed or aborted.
+            For example, the transaction used has already been terminated because it has been committed or aborted.
             </exception>
         <exception cref="T:System.Fabric.FabricObjectClosedException">Indicates that the Reliable Dictionary is closed or deleted.</exception>
       </Docs>
@@ -1233,11 +1263,11 @@
         <param name="timeout">The amount of time to wait for the operation to complete before throwing a TimeoutException. Primarily used to prevent deadlocks. The default is 4 seconds.</param>
         <param name="cancellationToken">The token to monitor for cancellation requests. The default is None.</param>
         <summary>
-            Attempts to remove the value with the specified key from the reliable dictionary.
+            Attempts to remove the value with the specified key from the Reliable Dictionary.
             </summary>
         <returns>
             Task that represents the asynchronous remove operation. The task result is a tuple indicating
-            whether the key was removed from the dictionary and if so, the value.
+            whether the key was removed from the Reliable Dictionary and if so, the value.
             </returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
@@ -1249,7 +1279,7 @@
         <exception cref="T:System.Fabric.FabricNotPrimaryException">The exception that is thrown when the <see cref="T:Microsoft.ServiceFabric.Data.Collections.IReliableDictionary`2" /> is not in <see cref="F:System.Fabric.ReplicaRole.Primary" />.</exception>
         <exception cref="T:System.InvalidOperationException">
             The exception that is thrown when a method call is invalid for the object's current state.
-            Example, transaction used is already terminated: committed or aborted.
+            For example, the transaction used has already been terminated because it has been committed or aborted.
             </exception>
         <exception cref="T:System.Fabric.FabricObjectClosedException">Indicates that the Reliable Dictionary is closed or deleted.</exception>
       </Docs>
@@ -1287,7 +1317,7 @@
         <exception cref="T:System.Fabric.FabricNotPrimaryException">The exception that is thrown when the <see cref="T:Microsoft.ServiceFabric.Data.Collections.IReliableDictionary`2" /> is not in <see cref="F:System.Fabric.ReplicaRole.Primary" />.</exception>
         <exception cref="T:System.InvalidOperationException">
             The exception that is thrown when a method call is invalid for the object's current state.
-            Example, transaction used is already terminated: committed or aborted.
+            For example, the transaction used has already been terminated because it has been committed or aborted.
             </exception>
         <exception cref="T:System.Fabric.FabricObjectClosedException">Indicates that the Reliable Dictionary is closed or deleted.</exception>
       </Docs>
@@ -1332,7 +1362,7 @@
         <exception cref="T:System.Fabric.FabricNotPrimaryException">The exception that is thrown when the <see cref="T:Microsoft.ServiceFabric.Data.Collections.IReliableDictionary`2" /> is not in <see cref="F:System.Fabric.ReplicaRole.Primary" />.</exception>
         <exception cref="T:System.InvalidOperationException">
             The exception that is thrown when a method call is invalid for the object's current state.
-            Example, transaction used is already terminated: committed or aborted.
+            For example, the transaction used has already been terminated because it has been committed or aborted.
             </exception>
         <exception cref="T:System.Fabric.FabricObjectClosedException">Indicates that the Reliable Dictionary is closed or deleted.</exception>
       </Docs>
