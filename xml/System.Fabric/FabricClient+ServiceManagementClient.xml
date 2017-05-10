@@ -4,7 +4,7 @@
   <TypeSignature Language="DocId" Value="T:System.Fabric.FabricClient.ServiceManagementClient" />
   <AssemblyInfo>
     <AssemblyName>System.Fabric</AssemblyName>
-    <AssemblyVersion>5.0.0.0</AssemblyVersion>
+    <AssemblyVersion>255.0.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -23,7 +23,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.CreateServiceAsync(System.Fabric.Description.ServiceDescription)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -33,7 +33,7 @@
       </Parameters>
       <Docs>
         <param name="description">
-          <para>The configuration for the service.</para>
+          <para>The configuration for the service. A <see cref="T:System.Fabric.Description.ServiceDescription" /> contains all of the information necessary to create a service.</para>
         </param>
         <summary>
           <para>Instantiates a service with specified description.</para>
@@ -42,11 +42,13 @@
           <para>The instantiated service.</para>
         </returns>
         <remarks>
+          <para>The default timeout is one minute for which the system will allow this operation to continue before returning <see cref="T:System.TimeoutException" />.</para>
           <para>Service Fabric name will be implicitly created if it does not already exist.</para>
         </remarks>
         <exception cref="T:System.Fabric.FabricObjectClosedException">
           <para>The <see cref="T:System.Fabric.FabricClient" /> object is in a closed state. Dispose of the <see cref="T:System.Fabric.FabricClient" /> object you are using and instantiate a new <see cref="T:System.Fabric.FabricClient" /> object.</para>
         </exception>
+        <exception cref="T:System.ArgumentNullException">When <paramref name="description" /> is null.</exception>
       </Docs>
     </Member>
     <Member MemberName="CreateServiceAsync">
@@ -55,7 +57,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.CreateServiceAsync(System.Fabric.Description.ServiceDescription,System.TimeSpan,System.Threading.CancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -67,7 +69,7 @@
       </Parameters>
       <Docs>
         <param name="serviceDescription">
-          <para>The configuration for the service.</para>
+          <para>The configuration for the service. A <see cref="T:System.Fabric.Description.ServiceDescription" /> contains all of the information necessary to create a service.</para>
         </param>
         <param name="timeout">
           <para>The maximum amount of time the system will allow this operation to continue before returning <see cref="T:System.TimeoutException" />.</para>
@@ -76,7 +78,9 @@
           <para>The <see cref="T:System.Threading.CancellationToken" />that the operation is observing. It can be used to propagate notification that the operation should be canceled.</para>
         </param>
         <summary>
-          <para>Instantiates a service with specified description.</para>
+          <para>Instantiates a service with specified description. 
+            Also takes in timeout interval, which is the maximum of time the system will allow this operation to continue before returning <see cref="T:System.TimeoutException" /> and cancellation-token that the operation is observing. 
+            </para>
         </summary>
         <returns>
           <para>The instantiated service.</para>
@@ -87,37 +91,26 @@
         <exception cref="T:System.Fabric.FabricObjectClosedException">
           <para>The <see cref="T:System.Fabric.FabricClient" /> object is in a closed state. Dispose of the <see cref="T:System.Fabric.FabricClient" /> object you are using and instantiate a new <see cref="T:System.Fabric.FabricClient" /> object.</para>
         </exception>
+        <exception cref="T:System.ArgumentNullException">When <paramref name="serviceDescription" /> is null.</exception>
       </Docs>
     </Member>
     <Member MemberName="CreateServiceFromTemplateAsync">
-      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task CreateServiceFromTemplateAsync (Uri applicationName, Uri serviceName, string serviceTypeName, byte[] initializationData);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task CreateServiceFromTemplateAsync(class System.Uri applicationName, class System.Uri serviceName, string serviceTypeName, unsigned int8[] initializationData) cil managed" />
-      <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.CreateServiceFromTemplateAsync(System.Uri,System.Uri,System.String,System.Byte[])" />
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task CreateServiceFromTemplateAsync (System.Fabric.Description.ServiceFromTemplateDescription serviceFromTemplateDescription);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task CreateServiceFromTemplateAsync(class System.Fabric.Description.ServiceFromTemplateDescription serviceFromTemplateDescription) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.CreateServiceFromTemplateAsync(System.Fabric.Description.ServiceFromTemplateDescription)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="applicationName" Type="System.Uri" />
-        <Parameter Name="serviceName" Type="System.Uri" />
-        <Parameter Name="serviceTypeName" Type="System.String" />
-        <Parameter Name="initializationData" Type="System.Byte[]" />
+        <Parameter Name="serviceFromTemplateDescription" Type="System.Fabric.Description.ServiceFromTemplateDescription" />
       </Parameters>
       <Docs>
-        <param name="applicationName">
-          <para>The Service Fabric Name of the application under which the service will be created.</para>
-        </param>
-        <param name="serviceName">
-          <para>The Service Fabric Name of the service.</para>
-        </param>
-        <param name="serviceTypeName">
-          <para>The name of the service type. This has to be same as the ServiceTypeName specified in the Service Manifest.</para>
-        </param>
-        <param name="initializationData">
-          <para>The initialization data to be passed in to the new service.</para>
+        <param name="serviceFromTemplateDescription">
+          <para>Describes the Service to be created from service template specified in application manifest.</para>
         </param>
         <summary>
           <para>Instantiates a service from the template specified in the Application Manifest.</para>
@@ -133,7 +126,7 @@
         </exception>
         <exception cref="T:System.Fabric.FabricElementNotFoundException">
           <para>
-            <see cref="F:System.Fabric.FabricErrorCode.ServiceTemplateNotFound" />: The service template does not exist</para>
+            <see cref="F:System.Fabric.FabricErrorCode.ServiceTemplateNotFound" />: The service template does not exist.</para>
         </exception>
         <exception cref="T:System.TimeoutException">
           <para>The request timed out but may have already been accepted for processing by the system.</para>
@@ -144,36 +137,24 @@
       </Docs>
     </Member>
     <Member MemberName="CreateServiceFromTemplateAsync">
-      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task CreateServiceFromTemplateAsync (Uri applicationName, Uri serviceName, string serviceTypeName, byte[] initializationData, TimeSpan timeout, System.Threading.CancellationToken cancellationToken);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task CreateServiceFromTemplateAsync(class System.Uri applicationName, class System.Uri serviceName, string serviceTypeName, unsigned int8[] initializationData, valuetype System.TimeSpan timeout, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.CreateServiceFromTemplateAsync(System.Uri,System.Uri,System.String,System.Byte[],System.TimeSpan,System.Threading.CancellationToken)" />
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task CreateServiceFromTemplateAsync (System.Fabric.Description.ServiceFromTemplateDescription serviceFromTemplateDescription, TimeSpan timeout, System.Threading.CancellationToken cancellationToken);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task CreateServiceFromTemplateAsync(class System.Fabric.Description.ServiceFromTemplateDescription serviceFromTemplateDescription, valuetype System.TimeSpan timeout, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.CreateServiceFromTemplateAsync(System.Fabric.Description.ServiceFromTemplateDescription,System.TimeSpan,System.Threading.CancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="applicationName" Type="System.Uri" />
-        <Parameter Name="serviceName" Type="System.Uri" />
-        <Parameter Name="serviceTypeName" Type="System.String" />
-        <Parameter Name="initializationData" Type="System.Byte[]" />
+        <Parameter Name="serviceFromTemplateDescription" Type="System.Fabric.Description.ServiceFromTemplateDescription" />
         <Parameter Name="timeout" Type="System.TimeSpan" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="applicationName">
-          <para>The Service Fabric Name of the application under which the service will be created.</para>
-        </param>
-        <param name="serviceName">
-          <para>The Service Fabric Name of the service.</para>
-        </param>
-        <param name="serviceTypeName">
-          <para>The name of the service type. This has to be same as the ServiceTypeName specified in the Service Manifest.</para>
-        </param>
-        <param name="initializationData">
-          <para>The initialization data to be passed in to the new service.</para>
+        <param name="serviceFromTemplateDescription">
+          <para>Describes a service to be created from service template specified in application manifest.</para>
         </param>
         <param name="timeout">
           <para>The maximum amount of time the system will allow this operation to continue before returning <see cref="T:System.TimeoutException" />.</para>
@@ -205,13 +186,142 @@
         </exception>
       </Docs>
     </Member>
+    <Member MemberName="CreateServiceFromTemplateAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task CreateServiceFromTemplateAsync (Uri applicationName, Uri serviceName, string serviceTypeName, byte[] initializationData);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task CreateServiceFromTemplateAsync(class System.Uri applicationName, class System.Uri serviceName, string serviceTypeName, unsigned int8[] initializationData) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.CreateServiceFromTemplateAsync(System.Uri,System.Uri,System.String,System.Byte[])" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="applicationName" Type="System.Uri" />
+        <Parameter Name="serviceName" Type="System.Uri" />
+        <Parameter Name="serviceTypeName" Type="System.String" />
+        <Parameter Name="initializationData" Type="System.Byte[]" />
+      </Parameters>
+      <Docs>
+        <param name="applicationName">
+          <para>The Service Fabric Name of the application under which the service will be created.</para>
+        </param>
+        <param name="serviceName">
+          <para>The Service Fabric Name of the service.</para>
+        </param>
+        <param name="serviceTypeName">
+          <para>The name of the service type. This has to be same as the ServiceTypeName specified in the service manifest.</para>
+        </param>
+        <param name="initializationData">
+          <para>The initialization data represents the custom data provided by the creator of the service. Service Fabric does not parse this data. 
+            This data would be available in every instance or replica in <see cref="T:System.Fabric.StatefulServiceContext" /> or <see cref="T:System.Fabric.StatelessServiceContext" />.            
+            It cannot be changed after the service is created. 
+            </para>
+        </param>
+        <summary>
+          <para>Instantiates a service from the template specified in the Application Manifest.</para>
+        </summary>
+        <returns>
+          <para>The instantiated service.</para>
+        </returns>
+        <remarks>
+          <para>Service Fabric name will be implicitly created if it does not already exist.</para>
+          <para>The default timeout is one minute for which the system will allow this operation to continue before returning <see cref="T:System.TimeoutException" />.</para>
+        </remarks>
+        <exception cref="T:System.Fabric.FabricObjectClosedException">
+          <para>The <see cref="T:System.Fabric.FabricClient" /> object is in a closed state. Dispose of the <see cref="T:System.Fabric.FabricClient" /> object you are using and instantiate a new <see cref="T:System.Fabric.FabricClient" /> object.</para>
+        </exception>
+        <exception cref="T:System.Fabric.FabricElementNotFoundException">
+          <para>
+            <see cref="F:System.Fabric.FabricErrorCode.ServiceTemplateNotFound" />: The service template does not exist</para>
+        </exception>
+        <exception cref="T:System.TimeoutException">
+          <para>The request timed out but may have already been accepted for processing by the system.</para>
+        </exception>
+        <exception cref="T:System.OperationCanceledException">
+          <para>The request was canceled before the timeout expired but may have already been accepted for processing by the system.</para>
+        </exception>
+        <exception cref="T:System.ArgumentNullException">When <paramref name="applicationName" /> or <paramref name="serviceName" /> are null.</exception>
+        <exception cref="T:System.ArgumentException">When <paramref name="serviceTypeName" /> is null or white-space.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateServiceFromTemplateAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task CreateServiceFromTemplateAsync (Uri applicationName, Uri serviceName, string serviceTypeName, byte[] initializationData, TimeSpan timeout, System.Threading.CancellationToken cancellationToken);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task CreateServiceFromTemplateAsync(class System.Uri applicationName, class System.Uri serviceName, string serviceTypeName, unsigned int8[] initializationData, valuetype System.TimeSpan timeout, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.CreateServiceFromTemplateAsync(System.Uri,System.Uri,System.String,System.Byte[],System.TimeSpan,System.Threading.CancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="applicationName" Type="System.Uri" />
+        <Parameter Name="serviceName" Type="System.Uri" />
+        <Parameter Name="serviceTypeName" Type="System.String" />
+        <Parameter Name="initializationData" Type="System.Byte[]" />
+        <Parameter Name="timeout" Type="System.TimeSpan" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="applicationName">
+          <para>The Service Fabric Name of the application under which the service will be created.</para>
+        </param>
+        <param name="serviceName">
+          <para>The Service Fabric Name of the service.</para>
+        </param>
+        <param name="serviceTypeName">
+          <para>The name of the service type. This has to be same as the ServiceTypeName specified in the service manifest.</para>
+        </param>
+        <param name="initializationData">
+          <para>The initialization data represents the custom data provided by the creator of the service. Service Fabric does not parse this data. 
+            This data would be available in every instance or replica in <see cref="T:System.Fabric.StatefulServiceContext" /> or <see cref="T:System.Fabric.StatelessServiceContext" />.            
+            It cannot be changed after the service is created. 
+            </para>
+        </param>
+        <param name="timeout">
+          <para>The maximum amount of time the system will allow this operation to continue before returning <see cref="T:System.TimeoutException" />.</para>
+        </param>
+        <param name="cancellationToken">
+          <para>The <see cref="T:System.Threading.CancellationToken" /> that the operation is observing. It can be used to propagate notification that the operation should be canceled.</para>
+        </param>
+        <summary>
+          <para>Instantiates a service from the template specified in the Application Manifest.
+            Also takes in timeout interval, which is the maximum of time the system will allow this operation to continue before returning <see cref="T:System.TimeoutException" /> and cancellation-token that the operation is observing. 
+            </para>
+        </summary>
+        <returns>
+          <para>The instantiated service.</para>
+        </returns>
+        <remarks>
+          <para>Service Fabric name will be implicitly created if it does not already exist.</para>
+        </remarks>
+        <exception cref="T:System.Fabric.FabricObjectClosedException">
+          <para>The <see cref="T:System.Fabric.FabricClient" /> object is in a closed state. Dispose of the <see cref="T:System.Fabric.FabricClient" /> object you are using and instantiate a new <see cref="T:System.Fabric.FabricClient" /> object.</para>
+        </exception>
+        <exception cref="T:System.Fabric.FabricElementNotFoundException">
+          <para>
+            <see cref="F:System.Fabric.FabricErrorCode.ServiceTemplateNotFound" />: The service template does not exist.</para>
+        </exception>
+        <exception cref="T:System.TimeoutException">
+          <para>The request timed out but may have already been accepted for processing by the system.</para>
+        </exception>
+        <exception cref="T:System.OperationCanceledException">
+          <para>The request was canceled before the timeout expired but may have already been accepted for processing by the system.</para>
+        </exception>
+        <exception cref="T:System.ArgumentNullException">When <paramref name="applicationName" /> or <paramref name="serviceName" /> are null.</exception>
+        <exception cref="T:System.ArgumentException">When <paramref name="serviceTypeName" /> is null or white-space.</exception>
+      </Docs>
+    </Member>
     <Member MemberName="DeleteServiceAsync">
       <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task DeleteServiceAsync (System.Fabric.Description.DeleteServiceDescription deleteServiceDescription);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task DeleteServiceAsync(class System.Fabric.Description.DeleteServiceDescription deleteServiceDescription) cil managed" />
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.DeleteServiceAsync(System.Fabric.Description.DeleteServiceDescription)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -232,10 +342,12 @@
         <remarks>
           <para>Service Fabric name will be implicitly and recursively deleted if the application is Service Fabric managed.</para>
           <para>A forceful deletion call can convert on-going normal deletion to forceful one.</para>
+          <para>The default timeout is one minute for which the system will allow this operation to continue before returning <see cref="T:System.TimeoutException" />.</para>
         </remarks>
         <exception cref="T:System.Fabric.FabricObjectClosedException">
           <para>The <see cref="T:System.Fabric.FabricClient" /> object is in a closed state. Dispose of the <see cref="T:System.Fabric.FabricClient" /> object you are using and instantiate a new <see cref="T:System.Fabric.FabricClient" /> object.</para>
         </exception>
+        <exception cref="T:System.ArgumentNullException">When <paramref name="deleteServiceDescription" /> is null.</exception>
       </Docs>
     </Member>
     <Member MemberName="DeleteServiceAsync">
@@ -244,11 +356,11 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.DeleteServiceAsync(System.Uri)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Obsolete("This api is deprecated, use overload taking DeleteServiceDescription instead.", false)</AttributeName>
+          <AttributeName>System.Obsolete("This API is deprecated, use overload taking DeleteServiceDescription instead.", false)</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -259,7 +371,7 @@
       </Parameters>
       <Docs>
         <param name="serviceName">
-          <para>The Service Fabric Name of the service.</para>
+          <para>The Service Fabric name of the service.</para>
         </param>
         <summary>
           <para>Deletes the specified service instance.</para>
@@ -269,10 +381,12 @@
         </returns>
         <remarks>
           <para>Service Fabric name will be implicitly and recursively deleted if the application is Service Fabric managed.</para>
+          <para>The default timeout is one minute for which the system will allow this operation to continue before returning <see cref="T:System.TimeoutException" />.</para>
         </remarks>
         <exception cref="T:System.Fabric.FabricObjectClosedException">
           <para>The <see cref="T:System.Fabric.FabricClient" /> object is in a closed state. Dispose of the <see cref="T:System.Fabric.FabricClient" /> object you are using and instantiate a new <see cref="T:System.Fabric.FabricClient" /> object.</para>
         </exception>
+        <exception cref="T:System.ArgumentNullException">When <paramref name="serviceName" /> is null.</exception>
       </Docs>
     </Member>
     <Member MemberName="DeleteServiceAsync">
@@ -281,7 +395,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.DeleteServiceAsync(System.Fabric.Description.DeleteServiceDescription,System.TimeSpan,System.Threading.CancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -302,7 +416,9 @@
           <para>The <see cref="T:System.Threading.CancellationToken" /> that the operation is observing. It can be used to propagate notification that the operation should be canceled.</para>
         </param>
         <summary>
-          <para>Deletes the specified service instance.</para>
+          <para>Deletes the specified service instance.
+            Also takes in timeout interval, which is the maximum of time the system will allow this operation to continue before returning <see cref="T:System.TimeoutException" /> and cancellation-token that the operation is observing. 
+            </para>
         </summary>
         <returns>
           <para>The deleted service instance.</para>
@@ -314,6 +430,7 @@
         <exception cref="T:System.Fabric.FabricObjectClosedException">
           <para>The <see cref="T:System.Fabric.FabricClient" /> object is in a closed state. Dispose of the <see cref="T:System.Fabric.FabricClient" /> object you are using and instantiate a new <see cref="T:System.Fabric.FabricClient" /> object.</para>
         </exception>
+        <exception cref="T:System.ArgumentNullException">When <paramref name="deleteServiceDescription" /> is null.</exception>
       </Docs>
     </Member>
     <Member MemberName="DeleteServiceAsync">
@@ -322,11 +439,11 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.DeleteServiceAsync(System.Uri,System.TimeSpan,System.Threading.CancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Obsolete("This api is deprecated, use overload taking DeleteServiceDescription instead.", false)</AttributeName>
+          <AttributeName>System.Obsolete("This API is deprecated, use overload taking DeleteServiceDescription instead.", false)</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -339,7 +456,7 @@
       </Parameters>
       <Docs>
         <param name="serviceName">
-          <para>The Service Fabric Name of the service.</para>
+          <para>The Service Fabric name of the service.</para>
         </param>
         <param name="timeout">
           <para>The maximum amount of time the system will allow this operation to continue before returning <see cref="T:System.TimeoutException" />.</para>
@@ -348,7 +465,9 @@
           <para>The <see cref="T:System.Threading.CancellationToken" /> that the operation is observing. It can be used to propagate notification that the operation should be canceled.</para>
         </param>
         <summary>
-          <para>Deletes the specified service instance.</para>
+          <para>Deletes the specified service instance.
+            Also takes in timeout interval, which is the maximum of time the system will allow this operation to continue before returning <see cref="T:System.TimeoutException" /> and cancellation-token that the operation is observing. 
+            </para>
         </summary>
         <returns>
           <para>The deleted service instance.</para>
@@ -359,6 +478,7 @@
         <exception cref="T:System.Fabric.FabricObjectClosedException">
           <para>The <see cref="T:System.Fabric.FabricClient" /> object is in a closed state. Dispose of the <see cref="T:System.Fabric.FabricClient" /> object you are using and instantiate a new <see cref="T:System.Fabric.FabricClient" /> object.</para>
         </exception>
+        <exception cref="T:System.ArgumentNullException">When <paramref name="serviceName" /> is null.</exception>
       </Docs>
     </Member>
     <Member MemberName="GetServiceDescriptionAsync">
@@ -367,7 +487,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.GetServiceDescriptionAsync(System.Uri)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.Description.ServiceDescription&gt;</ReturnType>
@@ -386,12 +506,14 @@
           <para>The Service Description for the specified service instance.</para>
         </returns>
         <remarks>
+          <para>The default timeout is one minute for which the system will allow this operation to continue before returning <see cref="T:System.TimeoutException" />.</para>
           <para>
             <see cref="M:System.Fabric.FabricClient.ServiceManagementClient.GetServiceDescriptionAsync(System.Uri)" /> is the most efficient way of determining whether a name is associated with a service.</para>
         </remarks>
         <exception cref="T:System.Fabric.FabricObjectClosedException">
           <para>The <see cref="T:System.Fabric.FabricClient" /> object is in a closed state. Dispose of the <see cref="T:System.Fabric.FabricClient" /> object you are using and instantiate a new <see cref="T:System.Fabric.FabricClient" /> object.</para>
         </exception>
+        <exception cref="T:System.ArgumentNullException">When <paramref name="serviceName" /> is null.</exception>
       </Docs>
     </Member>
     <Member MemberName="GetServiceDescriptionAsync">
@@ -400,7 +522,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.GetServiceDescriptionAsync(System.Uri,System.TimeSpan,System.Threading.CancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.Description.ServiceDescription&gt;</ReturnType>
@@ -421,7 +543,9 @@
           <para>The <see cref="T:System.Threading.CancellationToken" /> that the operation is observing. It can be used to propagate notification that the operation should be canceled.</para>
         </param>
         <summary>
-          <para>Gets the Service Description for the specified service instance.</para>
+          <para>Gets the Service Description for the specified service instance.
+            Also takes in timeout interval, which is the maximum of time the system will allow this operation to continue before returning <see cref="T:System.TimeoutException" /> and cancellation-token that the operation is observing. 
+            </para>
         </summary>
         <returns>
           <para>The Service Description for the specified service instance.</para>
@@ -433,6 +557,7 @@
         <exception cref="T:System.Fabric.FabricObjectClosedException">
           <para>The <see cref="T:System.Fabric.FabricClient" /> object is in a closed state. Dispose of the <see cref="T:System.Fabric.FabricClient" /> object you are using and instantiate a new <see cref="T:System.Fabric.FabricClient" /> object.</para>
         </exception>
+        <exception cref="T:System.ArgumentNullException">When <paramref name="serviceName" /> is null.</exception>
       </Docs>
     </Member>
     <Member MemberName="GetServiceManifestAsync">
@@ -441,7 +566,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.GetServiceManifestAsync(System.String,System.String,System.String)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.String&gt;</ReturnType>
@@ -462,12 +587,14 @@
           <para>The name of the service manifest referenced in the application manifest.</para>
         </param>
         <summary>
-          <para>Gets the provisioned service manifest document in the specified ApplicationTypeName and ApplicationTypeVersion.</para>
+          <para>Gets the provisioned service manifest document in the specified application type name and application type version.</para>
         </summary>
         <returns>
           <para>The provisioned service manifest document.</para>
         </returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+          <para>The default timeout is one minute for which the system will allow this operation to continue before returning <see cref="T:System.TimeoutException" />.</para>
+        </remarks>
         <exception cref="T:System.Fabric.FabricObjectClosedException">
           <para>The <see cref="T:System.Fabric.FabricClient" /> object is in a closed state. Dispose of the <see cref="T:System.Fabric.FabricClient" /> object you are using and instantiate a new <see cref="T:System.Fabric.FabricClient" /> object.</para>
         </exception>
@@ -479,7 +606,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.GetServiceManifestAsync(System.String,System.String,System.String,System.TimeSpan,System.Threading.CancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.String&gt;</ReturnType>
@@ -508,15 +635,20 @@
           <para>The <see cref="T:System.Threading.CancellationToken" /> that the operation is observing. It can be used to propagate notification that the operation should be canceled.</para>
         </param>
         <summary>
-          <para>Gets the provisioned Service manifest document in the specified ApplicationTypeName and ApplicationTypeVersion.</para>
+          <para>Gets the provisioned service manifest document in the specified application type name and application type version.
+            Also takes in timeout interval, which is the maximum of time the system will allow this operation to continue before returning <see cref="T:System.TimeoutException" /> and cancellation-token that the operation is observing. 
+            </para>
         </summary>
         <returns>
           <para>The provisioned service manifest document</para>
         </returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+          <para>The default timeout is one minute for which the system will allow this operation to continue before returning <see cref="T:System.TimeoutException" />.</para>
+        </remarks>
         <exception cref="T:System.Fabric.FabricObjectClosedException">
           <para>The <see cref="T:System.Fabric.FabricClient" /> object is in a closed state. Dispose of the <see cref="T:System.Fabric.FabricClient" /> object you are using and instantiate a new <see cref="T:System.Fabric.FabricClient" /> object.</para>
         </exception>
+        <exception cref="T:System.ArgumentException">If <paramref name="applicationTypeName" /> or <paramref name="applicationTypeVersion" /> or <paramref name="serviceManifestName" /> are null/empty.</exception>
       </Docs>
     </Member>
     <Member MemberName="RegisterServiceNotificationFilterAsync">
@@ -525,7 +657,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.RegisterServiceNotificationFilterAsync(System.Fabric.Description.ServiceNotificationFilterDescription)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Int64&gt;</ReturnType>
@@ -541,9 +673,12 @@
           <para>Registers a <see cref="T:System.Fabric.Description.ServiceNotificationFilterDescription" />.</para>
         </summary>
         <returns>
-          <para>An ID corresponding to the registered <see cref="T:System.Fabric.Description.ServiceNotificationFilterDescription" /> that can be used to unregister the same filter through <see cref="M:System.Fabric.FabricClient.ServiceManagementClient.UnregisterServiceNotificationFilterAsync(System.Int64)" />.</para>
+          <para>A <see cref="T:System.Threading.Tasks.Task" /> representing the async operation. The task result is an ID corresponding to the registered <see cref="T:System.Fabric.Description.ServiceNotificationFilterDescription" /> that can be used to unregister the same filter through <see cref="M:System.Fabric.FabricClient.ServiceManagementClient.UnregisterServiceNotificationFilterAsync(System.Int64)" />.</para>
         </returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+          <para>The default timeout is one minute for which the system will allow this operation to continue before returning <see cref="T:System.TimeoutException" />.</para>
+        </remarks>
+        <exception cref="T:System.ArgumentNullException">If <paramref name="description" /> is null.</exception>
       </Docs>
     </Member>
     <Member MemberName="RegisterServiceNotificationFilterAsync">
@@ -552,7 +687,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.RegisterServiceNotificationFilterAsync(System.Fabric.Description.ServiceNotificationFilterDescription,System.TimeSpan,System.Threading.CancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Int64&gt;</ReturnType>
@@ -573,12 +708,15 @@
           <para>Reserved for future use.</para>
         </param>
         <summary>
-          <para>Registers a <see cref="T:System.Fabric.Description.ServiceNotificationFilterDescription" />.</para>
+          <para>Registers a <see cref="T:System.Fabric.Description.ServiceNotificationFilterDescription" />.
+            Also takes in timeout interval, which is the maximum of time the system will allow this operation to continue before returning <see cref="T:System.TimeoutException" /> and cancellation-token that the operation is observing. 
+            </para>
         </summary>
         <returns>
-          <para>An ID corresponding to the registered <see cref="T:System.Fabric.Description.ServiceNotificationFilterDescription" /> that can be used to unregister the same filter through <see cref="M:System.Fabric.FabricClient.ServiceManagementClient.UnregisterServiceNotificationFilterAsync(System.Int64)" />.</para>
+          <para>A <see cref="T:System.Threading.Tasks.Task" /> representing the async operation. The task result is an ID corresponding to the registered <see cref="T:System.Fabric.Description.ServiceNotificationFilterDescription" /> that can be used to unregister the same filter through <see cref="M:System.Fabric.FabricClient.ServiceManagementClient.UnregisterServiceNotificationFilterAsync(System.Int64)" />.</para>
         </returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">If <paramref name="description" /> is null.</exception>
       </Docs>
     </Member>
     <Member MemberName="RegisterServicePartitionResolutionChangeHandler">
@@ -587,7 +725,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.RegisterServicePartitionResolutionChangeHandler(System.Uri,System.Fabric.ServicePartitionResolutionChangeHandler)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Int64</ReturnType>
@@ -616,6 +754,7 @@
         <exception cref="T:System.Fabric.FabricObjectClosedException">
           <para>The <see cref="T:System.Fabric.FabricClient" /> object is in a closed state. Dispose of the <see cref="T:System.Fabric.FabricClient" /> object you are using and instantiate a new <see cref="T:System.Fabric.FabricClient" /> object.</para>
         </exception>
+        <exception cref="T:System.ArgumentNullException">If <paramref name="serviceName" /> or <paramref name="callback" /> are null.</exception>
       </Docs>
     </Member>
     <Member MemberName="RegisterServicePartitionResolutionChangeHandler">
@@ -624,7 +763,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.RegisterServicePartitionResolutionChangeHandler(System.Uri,System.Int64,System.Fabric.ServicePartitionResolutionChangeHandler)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Int64</ReturnType>
@@ -657,6 +796,7 @@
         <exception cref="T:System.Fabric.FabricObjectClosedException">
           <para>The <see cref="T:System.Fabric.FabricClient" /> object is in a closed state. Dispose of the <see cref="T:System.Fabric.FabricClient" /> object you are using and instantiate a new <see cref="T:System.Fabric.FabricClient" /> object.</para>
         </exception>
+        <exception cref="T:System.ArgumentNullException">If <paramref name="serviceName" /> or <paramref name="callback" /> are null.</exception>
       </Docs>
     </Member>
     <Member MemberName="RegisterServicePartitionResolutionChangeHandler">
@@ -665,7 +805,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.RegisterServicePartitionResolutionChangeHandler(System.Uri,System.String,System.Fabric.ServicePartitionResolutionChangeHandler)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Int64</ReturnType>
@@ -698,6 +838,8 @@
         <exception cref="T:System.Fabric.FabricObjectClosedException">
           <para>The <see cref="T:System.Fabric.FabricClient" /> object is in a closed state. Dispose of the <see cref="T:System.Fabric.FabricClient" /> object you are using and instantiate a new <see cref="T:System.Fabric.FabricClient" /> object.</para>
         </exception>
+        <exception cref="T:System.ArgumentNullException">If <paramref name="serviceName" /> or <paramref name="callback" /> are null.</exception>
+        <exception cref="T:System.ArgumentException">If <paramref name="partitionKey" /> is null or empty.</exception>
       </Docs>
     </Member>
     <Member MemberName="RemoveReplicaAsync">
@@ -706,7 +848,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.RemoveReplicaAsync(System.String,System.Guid,System.Int64)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -734,15 +876,16 @@
         </returns>
         <remarks>
           <para>This API gives a running replica the chance to cleanup its state and be gracefully shutdown. </para>
+          <para>The default timeout is one minute for which the system will allow this operation to continue before returning <see cref="T:System.TimeoutException" />.</para>
           <para>WARNING: There are no safety checks performed when this API is used. Incorrect use of this API can lead to data loss for stateful services.</para>
         </remarks>
         <exception cref="T:System.Fabric.FabricObjectClosedException">
           <para>
-                See <see href="https://azure.microsoft.com/documentation/articles/service-fabric-errors-and-exceptions/" /> for handling common FabricClient failures.</para>
+                See <see href="https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-errors-and-exceptions" /> for handling common FabricClient failures.</para>
         </exception>
         <exception cref="T:System.TimeoutException">
           <para>
-                See <see href="https://azure.microsoft.com/documentation/articles/service-fabric-errors-and-exceptions/" /> for handling common FabricClient failures.</para>
+                See <see href="https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-errors-and-exceptions" /> for handling common FabricClient failures.</para>
         </exception>
         <exception cref="T:System.Fabric.FabricException">
           <para>
@@ -750,8 +893,9 @@
           <para>
             <see cref="F:System.Fabric.FabricErrorCode.InvalidReplicaStateForReplicaOperation" /> is returned if the replica or instance id cannot be restarted or removed at this time as it is in an invalid state. For example, the replica is already in the process of being closed.</para>
           <para>
-                See also <see href="https://azure.microsoft.com/documentation/articles/service-fabric-errors-and-exceptions/" /> for handling common FabricClient failures.</para>
+                See also <see href="https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-errors-and-exceptions" /> for handling common FabricClient failures.</para>
         </exception>
+        <exception cref="T:System.ArgumentException">If <paramref name="nodeName" /> is null or empty.</exception>
       </Docs>
     </Member>
     <Member MemberName="RemoveReplicaAsync">
@@ -760,7 +904,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.RemoveReplicaAsync(System.String,System.Guid,System.Int64,System.Boolean)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -795,14 +939,15 @@
           <para>If the forceRemove flag is set then no such opportunity is given. Service Fabric will terminate the host for that replica and any persisted state of that replica will be leaked. </para>
           <para>WARNING: There are no safety checks performed when this API is used. Incorrect use of this API can lead to data loss for stateful services.</para>
           <para>In addition, the forceRemove flag impacts all other replicas hosted in the same process.</para>
+          <para>The default timeout is one minute for which the system will allow this operation to continue before returning <see cref="T:System.TimeoutException" />.</para>
         </remarks>
         <exception cref="T:System.Fabric.FabricObjectClosedException">
           <para>
-                See <see href="https://azure.microsoft.com/documentation/articles/service-fabric-errors-and-exceptions/" /> for handling common FabricClient failures.</para>
+                See <see href="https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-errors-and-exceptions" /> for handling common FabricClient failures.</para>
         </exception>
         <exception cref="T:System.TimeoutException">
           <para>
-                See <see href="https://azure.microsoft.com/documentation/articles/service-fabric-errors-and-exceptions/" /> for handling common FabricClient failures.</para>
+                See <see href="https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-errors-and-exceptions" /> for handling common FabricClient failures.</para>
         </exception>
         <exception cref="T:System.Fabric.FabricException">
           <para>
@@ -810,8 +955,9 @@
           <para>
             <see cref="F:System.Fabric.FabricErrorCode.InvalidReplicaStateForReplicaOperation" /> is returned if the replica or instance id cannot be restarted or removed at this time as it is in an invalid state. For example, the replica is already in the process of being closed.</para>
           <para>
-                See also <see href="https://azure.microsoft.com/documentation/articles/service-fabric-errors-and-exceptions/" /> for handling common FabricClient failures.</para>
+                See also <see href="https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-errors-and-exceptions" /> for handling common FabricClient failures.</para>
         </exception>
+        <exception cref="T:System.ArgumentException">If <paramref name="nodeName" /> is null or empty.</exception>
       </Docs>
     </Member>
     <Member MemberName="RemoveReplicaAsync">
@@ -820,7 +966,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.RemoveReplicaAsync(System.String,System.Guid,System.Int64,System.TimeSpan,System.Threading.CancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -849,7 +995,9 @@
           <para>The optional cancellation token that the operation is observing. It can be used to send a notification that the operation should be canceled. Note that cancellation is advisory and that the operation may still be completed even if it is cancelled.</para>
         </param>
         <summary>
-          <para>Removes a service replica running on a node.</para>
+          <para>Removes a service replica running on a node.
+            Also takes in timeout interval, which is the maximum of time the system will allow this operation to continue before returning <see cref="T:System.TimeoutException" /> and cancellation-token that the operation is observing. 
+            </para>
         </summary>
         <returns>
           <para>A Task representing the acknowledgment of the request.</para>
@@ -860,11 +1008,11 @@
         </remarks>
         <exception cref="T:System.Fabric.FabricObjectClosedException">
           <para>
-                See <see href="https://azure.microsoft.com/documentation/articles/service-fabric-errors-and-exceptions/" /> for handling common FabricClient failures.</para>
+                See <see href="https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-errors-and-exceptions" /> for handling common FabricClient failures.</para>
         </exception>
         <exception cref="T:System.TimeoutException">
           <para>
-                See <see href="https://azure.microsoft.com/documentation/articles/service-fabric-errors-and-exceptions/" /> for handling common FabricClient failures.</para>
+                See <see href="https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-errors-and-exceptions" /> for handling common FabricClient failures.</para>
         </exception>
         <exception cref="T:System.Fabric.FabricException">
           <para>
@@ -872,8 +1020,9 @@
           <para>
             <see cref="F:System.Fabric.FabricErrorCode.InvalidReplicaStateForReplicaOperation" /> is returned if the replica or instance id cannot be restarted or removed at this time as it is in an invalid state. For example, the replica is already in the process of being closed.</para>
           <para>
-                See also <see href="https://azure.microsoft.com/documentation/articles/service-fabric-errors-and-exceptions/" /> for handling common FabricClient failures.</para>
+                See also <see href="https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-errors-and-exceptions" /> for handling common FabricClient failures.</para>
         </exception>
+        <exception cref="T:System.ArgumentException">If <paramref name="nodeName" /> is null or empty.</exception>
       </Docs>
     </Member>
     <Member MemberName="RemoveReplicaAsync">
@@ -882,7 +1031,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.RemoveReplicaAsync(System.String,System.Guid,System.Int64,System.Boolean,System.TimeSpan,System.Threading.CancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -915,7 +1064,9 @@
           <para>The optional cancellation token that the operation is observing. It can be used to send a notification that the operation should be canceled. Note that cancellation is advisory and that the operation may still be completed even if it is cancelled.</para>
         </param>
         <summary>
-          <para>Removes a service replica running on a node.</para>
+          <para>Removes a service replica running on a node.
+            Also takes in timeout interval, which is the maximum of time the system will allow this operation to continue before returning <see cref="T:System.TimeoutException" /> and cancellation-token that the operation is observing. 
+            </para>
         </summary>
         <returns>
           <para>A Task representing the acknowledgment of the request.</para>
@@ -928,11 +1079,11 @@
         </remarks>
         <exception cref="T:System.Fabric.FabricObjectClosedException">
           <para>
-                See <see href="https://azure.microsoft.com/documentation/articles/service-fabric-errors-and-exceptions/" /> for handling common FabricClient failures.</para>
+                See <see href="https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-errors-and-exceptions" /> for handling common FabricClient failures.</para>
         </exception>
         <exception cref="T:System.TimeoutException">
           <para>
-                See <see href="https://azure.microsoft.com/documentation/articles/service-fabric-errors-and-exceptions/" /> for handling common FabricClient failures.</para>
+                See <see href="https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-errors-and-exceptions" /> for handling common FabricClient failures.</para>
         </exception>
         <exception cref="T:System.Fabric.FabricException">
           <para>
@@ -940,8 +1091,9 @@
           <para>
             <see cref="F:System.Fabric.FabricErrorCode.InvalidReplicaStateForReplicaOperation" /> is returned if the replica or instance id cannot be restarted or removed at this time as it is in an invalid state. For example, the replica is already in the process of being closed.</para>
           <para>
-                See also <see href="https://azure.microsoft.com/documentation/articles/service-fabric-errors-and-exceptions/" /> for handling common FabricClient failures.</para>
+                See also <see href="https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-errors-and-exceptions" /> for handling common FabricClient failures.</para>
         </exception>
+        <exception cref="T:System.ArgumentException">If <paramref name="nodeName" /> is null or empty.</exception>
       </Docs>
     </Member>
     <Member MemberName="ResolveServicePartitionAsync">
@@ -950,7 +1102,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.ResolveServicePartitionAsync(System.Uri)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.ResolvedServicePartition&gt;</ReturnType>
@@ -983,7 +1135,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.ResolveServicePartitionAsync(System.Uri,System.Fabric.ResolvedServicePartition)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.ResolvedServicePartition&gt;</ReturnType>
@@ -1021,7 +1173,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.ResolveServicePartitionAsync(System.Uri,System.Int64)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.ResolvedServicePartition&gt;</ReturnType>
@@ -1058,7 +1210,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.ResolveServicePartitionAsync(System.Uri,System.String)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.ResolvedServicePartition&gt;</ReturnType>
@@ -1095,7 +1247,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.ResolveServicePartitionAsync(System.Uri,System.TimeSpan)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.ResolvedServicePartition&gt;</ReturnType>
@@ -1132,7 +1284,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.ResolveServicePartitionAsync(System.Uri,System.Fabric.ResolvedServicePartition,System.TimeSpan)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.ResolvedServicePartition&gt;</ReturnType>
@@ -1171,7 +1323,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.ResolveServicePartitionAsync(System.Uri,System.Int64,System.Fabric.ResolvedServicePartition)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.ResolvedServicePartition&gt;</ReturnType>
@@ -1213,7 +1365,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.ResolveServicePartitionAsync(System.Uri,System.Int64,System.TimeSpan)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.ResolvedServicePartition&gt;</ReturnType>
@@ -1254,7 +1406,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.ResolveServicePartitionAsync(System.Uri,System.String,System.Fabric.ResolvedServicePartition)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.ResolvedServicePartition&gt;</ReturnType>
@@ -1296,7 +1448,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.ResolveServicePartitionAsync(System.Uri,System.String,System.TimeSpan)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.ResolvedServicePartition&gt;</ReturnType>
@@ -1337,7 +1489,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.ResolveServicePartitionAsync(System.Uri,System.TimeSpan,System.Threading.CancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.ResolvedServicePartition&gt;</ReturnType>
@@ -1378,7 +1530,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.ResolveServicePartitionAsync(System.Uri,System.Fabric.ResolvedServicePartition,System.TimeSpan,System.Threading.CancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.ResolvedServicePartition&gt;</ReturnType>
@@ -1425,7 +1577,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.ResolveServicePartitionAsync(System.Uri,System.Int64,System.Fabric.ResolvedServicePartition,System.TimeSpan)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.ResolvedServicePartition&gt;</ReturnType>
@@ -1471,7 +1623,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.ResolveServicePartitionAsync(System.Uri,System.Int64,System.TimeSpan,System.Threading.CancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.ResolvedServicePartition&gt;</ReturnType>
@@ -1516,7 +1668,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.ResolveServicePartitionAsync(System.Uri,System.String,System.Fabric.ResolvedServicePartition,System.TimeSpan)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.ResolvedServicePartition&gt;</ReturnType>
@@ -1562,7 +1714,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.ResolveServicePartitionAsync(System.Uri,System.String,System.TimeSpan,System.Threading.CancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.ResolvedServicePartition&gt;</ReturnType>
@@ -1607,7 +1759,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.ResolveServicePartitionAsync(System.Uri,System.Int64,System.Fabric.ResolvedServicePartition,System.TimeSpan,System.Threading.CancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.ResolvedServicePartition&gt;</ReturnType>
@@ -1658,7 +1810,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.ResolveServicePartitionAsync(System.Uri,System.String,System.Fabric.ResolvedServicePartition,System.TimeSpan,System.Threading.CancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.ResolvedServicePartition&gt;</ReturnType>
@@ -1708,7 +1860,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.RestartReplicaAsync(System.String,System.Guid,System.Int64)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -1736,14 +1888,15 @@
         </returns>
         <remarks>
           <para>WARNING: There are no safety checks performed when this API is used. Incorrect use of this API can lead to availability loss for stateful services.</para>
+          <para>The default timeout is one minute for which the system will allow this operation to continue before returning <see cref="T:System.TimeoutException" />.</para>
         </remarks>
         <exception cref="T:System.Fabric.FabricObjectClosedException">
           <para>
-                See <see href="https://azure.microsoft.com/documentation/articles/service-fabric-errors-and-exceptions/" /> for handling common FabricClient failures.</para>
+                See <see href="https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-errors-and-exceptions" /> for handling common FabricClient failures.</para>
         </exception>
         <exception cref="T:System.TimeoutException">
           <para>
-                See <see href="https://azure.microsoft.com/documentation/articles/service-fabric-errors-and-exceptions/" /> for handling common FabricClient failures.</para>
+                See <see href="https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-errors-and-exceptions" /> for handling common FabricClient failures.</para>
         </exception>
         <exception cref="T:System.Fabric.FabricException">
           <para>
@@ -1753,8 +1906,9 @@
           <para>
             <see cref="F:System.Fabric.FabricErrorCode.InvalidReplicaOperation" /> is returned if the replica does not belong to a stateful persisted service. Only stateful persisted replicas can be restarted.</para>
           <para>
-                See also <see href="https://azure.microsoft.com/documentation/articles/service-fabric-errors-and-exceptions/" /> for handling common FabricClient failures.</para>
+                See also <see href="https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-errors-and-exceptions" /> for handling common FabricClient failures.</para>
         </exception>
+        <exception cref="T:System.ArgumentException">If <paramref name="nodeName" /> is null or empty.</exception>
       </Docs>
     </Member>
     <Member MemberName="RestartReplicaAsync">
@@ -1763,7 +1917,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.RestartReplicaAsync(System.String,System.Guid,System.Int64,System.TimeSpan,System.Threading.CancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -1792,7 +1946,9 @@
           <para>The optional cancellation token that the operation is observing. It can be used to send a notification that the operation should be canceled. Note that cancellation is advisory and that the operation may still be completed even if it is cancelled.</para>
         </param>
         <summary>
-          <para>Restarts a service replica of a persisted service running on a node.</para>
+          <para>Restarts a service replica of a persisted service running on a node.
+            Also takes in timeout interval, which is the maximum of time the system will allow this operation to continue before returning <see cref="T:System.TimeoutException" /> and cancellation-token that the operation is observing. 
+            </para>
         </summary>
         <returns>
           <para>A Task representing the acknowledgment of the request.</para>
@@ -1802,11 +1958,11 @@
         </remarks>
         <exception cref="T:System.Fabric.FabricObjectClosedException">
           <para>
-                See <see href="https://azure.microsoft.com/documentation/articles/service-fabric-errors-and-exceptions/" /> for handling common FabricClient failures.</para>
+                See <see href="https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-errors-and-exceptions" /> for handling common FabricClient failures.</para>
         </exception>
         <exception cref="T:System.TimeoutException">
           <para>
-                See <see href="https://azure.microsoft.com/documentation/articles/service-fabric-errors-and-exceptions/" /> for handling common FabricClient failures.</para>
+                See <see href="https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-errors-and-exceptions" /> for handling common FabricClient failures.</para>
         </exception>
         <exception cref="T:System.Fabric.FabricException">
           <para>
@@ -1816,8 +1972,9 @@
           <para>
             <see cref="F:System.Fabric.FabricErrorCode.InvalidReplicaOperation" /> is returned if the replica does not belong to a stateful persisted service. Only stateful persisted replicas can be restarted.</para>
           <para>
-                See also <see href="https://azure.microsoft.com/documentation/articles/service-fabric-errors-and-exceptions/" /> for handling common FabricClient failures.</para>
+                See also <see href="https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-errors-and-exceptions" /> for handling common FabricClient failures.</para>
         </exception>
+        <exception cref="T:System.ArgumentException">If <paramref name="nodeName" /> is null or empty.</exception>
       </Docs>
     </Member>
     <Member MemberName="ServiceNotificationFilterMatched">
@@ -1826,7 +1983,7 @@
       <MemberSignature Language="DocId" Value="E:System.Fabric.FabricClient.ServiceManagementClient.ServiceNotificationFilterMatched" />
       <MemberType>Event</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.EventHandler</ReturnType>
@@ -1896,7 +2053,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.UnregisterServiceNotificationFilterAsync(System.Int64)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -1915,8 +2072,9 @@
           <para>A <see cref="T:System.Threading.Tasks.Task" /> representing the async operation.</para>
         </returns>
         <remarks>
-            It's not necessary to unregister individual filters if the client itself will no longer be used since all <see cref="T:System.Fabric.Description.ServiceNotificationFilterDescription" /> objects registered by the <see cref="T:System.Fabric.FabricClient" /> will be automatically unregistered when client is disposed.
-            </remarks>
+          <para>It's not necessary to unregister individual filters if the client itself will no longer be used since all <see cref="T:System.Fabric.Description.ServiceNotificationFilterDescription" /> objects registered by the <see cref="T:System.Fabric.FabricClient" /> will be automatically unregistered when client is disposed.</para>
+          <para>The default timeout is one minute for which the system will allow this operation to continue before returning <see cref="T:System.TimeoutException" />.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="UnregisterServiceNotificationFilterAsync">
@@ -1925,7 +2083,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.UnregisterServiceNotificationFilterAsync(System.Int64,System.TimeSpan,System.Threading.CancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -1962,7 +2120,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.UnregisterServicePartitionResolutionChangeHandler(System.Int64)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1989,7 +2147,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.UpdateServiceAsync(System.Uri,System.Fabric.Description.ServiceUpdateDescription)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -2012,12 +2170,14 @@
           <para>The updated service.</para>
         </returns>
         <remarks>
+          <para>The default timeout is one minute for which the system will allow this operation to continue before returning <see cref="T:System.TimeoutException" />. </para>
           <para>NOTE: To safely increase both the <see cref="P:System.Fabric.Description.StatefulServiceUpdateDescription.MinReplicaSetSize" /> and the <see cref="P:System.Fabric.Description.StatefulServiceUpdateDescription.TargetReplicaSetSize" /> first increase the <see cref="P:System.Fabric.Description.StatefulServiceUpdateDescription.TargetReplicaSetSize" /> and wait for additional replicas to be created and then increase the <see cref="P:System.Fabric.Description.StatefulServiceUpdateDescription.MinReplicaSetSize" /></para>
         </remarks>
         <exception cref="T:System.Fabric.FabricObjectClosedException">
           <para>The <see cref="T:System.Fabric.FabricClient" /> object is in a closed state.
             Dispose of the<see cref="T:System.Fabric.FabricClient" /> object you are using and instantiate a new <see cref="T:System.Fabric.FabricClient" /> object.</para>
         </exception>
+        <exception cref="T:System.ArgumentNullException">When <paramref name="name" /> or <paramref name="updateDescription" /> are null.</exception>
       </Docs>
     </Member>
     <Member MemberName="UpdateServiceAsync">
@@ -2026,7 +2186,7 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.ServiceManagementClient.UpdateServiceAsync(System.Uri,System.Fabric.Description.ServiceUpdateDescription,System.TimeSpan,System.Threading.CancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -2051,7 +2211,9 @@
           <para>The <see cref="T:System.Threading.CancellationToken" /> that the operation is observing. It can be used to propagate notification that the operation should be canceled.</para>
         </param>
         <summary>
-          <para>Updates a service with the specified description.</para>
+          <para>Updates a service with the specified description.
+            Also takes in timeout interval, which is the maximum of time the system will allow this operation to continue before returning <see cref="T:System.TimeoutException" /> and cancellation-token that the operation is observing. 
+            </para>
         </summary>
         <returns>
           <para>The updated service.</para>
@@ -2063,6 +2225,7 @@
           <para>The <see cref="T:System.Fabric.FabricClient" /> object is in a closed state.
             Dispose of the<see cref="T:System.Fabric.FabricClient" /> object you are using and instantiate a new <see cref="T:System.Fabric.FabricClient" /> object.</para>
         </exception>
+        <exception cref="T:System.ArgumentNullException">When <paramref name="name" /> or <paramref name="serviceUpdateDescription" /> are null.</exception>
       </Docs>
     </Member>
   </Members>

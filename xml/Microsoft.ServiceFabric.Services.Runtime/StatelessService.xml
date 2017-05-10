@@ -5,6 +5,7 @@
   <AssemblyInfo>
     <AssemblyName>Microsoft.ServiceFabric.Services</AssemblyName>
     <AssemblyVersion>5.0.0.0</AssemblyVersion>
+    <AssemblyVersion>255.0.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -25,6 +26,7 @@
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="serviceContext" Type="System.Fabric.StatelessServiceContext" />
@@ -46,6 +48,7 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Fabric.StatelessServiceContext</ReturnType>
@@ -68,6 +71,7 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Collections.Generic.IEnumerable&lt;Microsoft.ServiceFabric.Services.Communication.Runtime.ServiceInstanceListener&gt;</ReturnType>
@@ -78,7 +82,10 @@
             Override this method to supply the communication listeners for the service instance. The endpoints returned by the communication listener's
             are stored as a JSON string of ListenerName, Endpoint string pairs like 
             {"Endpoints":{"Listener1":"Endpoint1","Listener2":"Endpoint2" ...}}
-            </summary>
+            <para>
+            For information about Reliable Services life cycle please see
+            https://docs.microsoft.com/azure/service-fabric/service-fabric-reliable-services-lifecycle
+            </para></summary>
         <returns>List of ServiceInstanceListeners</returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -90,6 +97,7 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Collections.Generic.IReadOnlyDictionary&lt;System.String,System.String&gt;</ReturnType>
@@ -114,6 +122,7 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -123,7 +132,10 @@
         <summary>
             Notification that the service is being aborted.  RunAsync MAY be running concurrently
             with the execution of this method, as cancellation is not awaited on the abort path.
-            </summary>
+            <para>
+            For information about Reliable Services life cycle please see
+            https://docs.microsoft.com/azure/service-fabric/service-fabric-reliable-services-lifecycle
+            </para></summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -134,6 +146,7 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -146,7 +159,10 @@
         <summary>
             This method is called as the final step of closing the service.
             Override this method to be notified that Close has completed for this instance's internal components.
-            </summary>
+            <para>
+            For information about Reliable Services life cycle please see
+            https://docs.microsoft.com/azure/service-fabric/service-fabric-reliable-services-lifecycle
+            </para></summary>
         <returns>
             A <see cref="T:System.Threading.Tasks.Task">Task</see> that represents outstanding operation.
             </returns>
@@ -160,6 +176,7 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -172,7 +189,10 @@
         <summary>
             This method is called as the final step of opening the service.
             Override this method to be notified that Open has completed for this instance's internal components.
-            </summary>
+            <para>
+            For information about Reliable Services life cycle please see
+            https://docs.microsoft.com/azure/service-fabric/service-fabric-reliable-services-lifecycle
+            </para></summary>
         <returns>
             A <see cref="T:System.Threading.Tasks.Task">Task</see> that represents outstanding operation.
             </returns>
@@ -186,6 +206,7 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Fabric.IStatelessServicePartition</ReturnType>
@@ -208,6 +229,7 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>255.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -218,13 +240,46 @@
       <Docs>
         <param name="cancellationToken">Cancellation token to monitor for cancellation requests.</param>
         <summary>
-            Services that want to implement a background task which runs when it is opened,
-            just override this method with their logic.
-            </summary>
+            Services that want to implement a background task, which runs when the service comes up,
+            should override this method with their logic.
+            <para>
+            For information about Reliable Services life cycle please see
+            https://docs.microsoft.com/azure/service-fabric/service-fabric-reliable-services-lifecycle
+            </para></summary>
         <returns>
             A <see cref="T:System.Threading.Tasks.Task">Task</see> that represents outstanding operation.
             </returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            Please ensure you follow these guidelines when overriding <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatelessService.RunAsync(System.Threading.CancellationToken)" />:
+            <list type="bullet"><item><description>
+                    Make sure <paramref name="cancellationToken" /> passed to <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatelessService.RunAsync(System.Threading.CancellationToken)" /> is honored and once 
+                    it has been signaled, <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatelessService.RunAsync(System.Threading.CancellationToken)" /> exits gracefully as soon as possible. Please note that
+                    if <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatelessService.RunAsync(System.Threading.CancellationToken)" /> has finished its intended work, it does not need to wait for 
+                    <paramref name="cancellationToken" /> to be signaled and can return gracefully.
+                    </description></item><item><description>
+                    Service Fabric runtime does not handle all exception(s) escaping from <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatelessService.RunAsync(System.Threading.CancellationToken)" />. If an unhandled
+                    exception escapes from <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatelessService.RunAsync(System.Threading.CancellationToken)" />, then Service Fabric runtime takes following action(s):
+                    <list type="bullet"><item><description>
+                            If a <see cref="T:System.Fabric.FabricException" /> (or one of its derived exception) escapes from <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatelessService.RunAsync(System.Threading.CancellationToken)" />, 
+                            Service Fabric runtime will drop this service instance and a new instance will be created. A health warning
+                            will be appear in Service Fabric Explorer containing details about unhandled exception.
+                            </description></item><item><description>
+                            If an <see cref="T:System.OperationCanceledException" /> escapes from <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatelessService.RunAsync(System.Threading.CancellationToken)" /> and Service Fabric runtime
+                            has requested cancellation by signaling <paramref name="cancellationToken" /> passed to <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatelessService.RunAsync(System.Threading.CancellationToken)" />,
+                            Service Fabric runtime handles this exception and considers it as graceful completion of <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatelessService.RunAsync(System.Threading.CancellationToken)" />.
+                            </description></item><item><description>
+                            If an <see cref="T:System.OperationCanceledException" /> escapes from <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatelessService.RunAsync(System.Threading.CancellationToken)" /> and Service Fabric runtime
+                            has NOT requested cancellation by signaling <paramref name="cancellationToken" /> passed to <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatelessService.RunAsync(System.Threading.CancellationToken)" />,
+                            the process that is hosting this service instance is brought down. This will impact all other service instances 
+                            that are hosted by the same process. The details about unhandled exceptions can be viewed in Windows Event Viewer.
+                            </description></item><item><description>
+                            If an exception of any other type escapes from <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatelessService.RunAsync(System.Threading.CancellationToken)" /> then the process that is hosting this
+                            service instance is brought down. This will impact all other service instances that are hosted by the
+                            same process. The details about unhandled exceptions can be viewed in Windows Event Viewer.
+                            </description></item></list></description></item></list><para>
+            Failing to conform to these guidelines can cause fail-over, reconfiguration or upgrade of your service to get stuck
+            and can impact availability of your service.
+            </para></remarks>
       </Docs>
     </Member>
   </Members>

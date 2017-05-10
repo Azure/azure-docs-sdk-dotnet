@@ -17,9 +17,12 @@
   <Docs>
     <typeparam name="T">The type of the elements in the collection.</typeparam>
     <summary>
-            Defines methods for manipulating reliable collections.
-            </summary>
-    <remarks>To be added.</remarks>
+      <para>Defines methods for manipulating Reliable Collections.</para>
+    </summary>
+    <remarks>
+      <para>More information on Reliable Collections can be seen
+            <see href="https://docs.microsoft.com/azure/service-fabric/service-fabric-reliable-services-reliable-collections">here</see>.</para>
+    </remarks>
   </Docs>
   <Members>
     <Member MemberName="ClearAsync">
@@ -36,12 +39,19 @@
       <Parameters />
       <Docs>
         <summary>
-            Removes all state from the <see cref="T:Microsoft.ServiceFabric.Data.Collections.IReliableCollection`1" />, including replicated and persisted state.
-            </summary>
-        <returns>A task that represents the asynchronous clear operation.</returns>
+          <para>Removes all state from the <see cref="T:Microsoft.ServiceFabric.Data.Collections.IReliableCollection`1" />, including replicated and persisted state.</para>
+        </summary>
+        <returns>
+          <para>A task that represents the asynchronous clear operation.</para>
+        </returns>
         <remarks>To be added.</remarks>
-        <exception cref="T:System.Fabric.FabricNotPrimaryException">The exception that is thrown when the <cref name="IReliableQueue{T}" /> is not in <cref name="ReplicaRole.Primary" />.</exception>
-        <exception cref="T:System.TimeoutException">The operation failed to complete within the given timeout.</exception>
+        <exception cref="T:System.Fabric.FabricNotPrimaryException">
+          <para>Thrown when attempting to perform this operation
+            on a <cref name="IReliableCollection{T}" /> that is not in the <see cref="F:System.Fabric.ReplicaRole.Primary" /> role.</para>
+        </exception>
+        <exception cref="T:System.TimeoutException">
+          <para>Indicates that this operation failed to complete within the given timeout.</para>
+        </exception>
       </Docs>
     </Member>
     <Member MemberName="GetCountAsync">
@@ -59,22 +69,33 @@
         <Parameter Name="tx" Type="Microsoft.ServiceFabric.Data.ITransaction" />
       </Parameters>
       <Docs>
-        <param name="tx">Transaction to associate this operation with.</param>
+        <param name="tx">
+            The transaction to associate this operation with. See examples of
+            transactions <see href="https://docs.microsoft.com/azure/service-fabric/service-fabric-work-with-reliable-collections">here</see>.
+            </param>
         <summary>
-            Gets the number of elements contained in the <see cref="T:Microsoft.ServiceFabric.Data.Collections.IReliableCollection`1" />.
-            </summary>
-        <returns>A task that represents the asynchronous operation. The task result indicates the number of elements.</returns>
+          <para>Gets the number of elements contained in the <see cref="T:Microsoft.ServiceFabric.Data.Collections.IReliableCollection`1" />.</para>
+        </summary>
+        <returns>
+          <para>A task that represents the asynchronous operation, indicating the number of elements.</para>
+        </returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.Fabric.FabricNotReadableException">
-            Exception indicates that the  <cref name="IReliableCollection{T}" /> cannot serve reads at the moment.
-            <cref name="FabricNotReadableException" /> can be thrown in all <cref name="ReplicaRole" />s.
-            One example for it being thrown in the <cref name="ReplicaRole.Primary" /> is loss of <cref name="IStatefulServicePartition.ReadStatus" />.
-            One example for it being thrown in the <cref name="ReplicaRole.ActiveSecondary" /> is that Reliable Collection's state is not yet consistent.
-            </exception>
+          <para>Indicates that the IReliableCollection cannot serve reads at the moment.
+            This exception can be thrown in all <see cref="T:System.Fabric.ReplicaRole" />s.
+            One reason it may be thrown in the <see cref="F:System.Fabric.ReplicaRole.Primary" /> role is loss of <see cref="P:System.Fabric.IStatefulServicePartition.ReadStatus" />.
+            One reason it may be thrown in the <see cref="F:System.Fabric.ReplicaRole.ActiveSecondary" /> role is that Reliable Collection's state is not yet consistent.</para>
+        </exception>
         <exception cref="T:System.InvalidOperationException">
-            The exception that is thrown when a method call is invalid for the object's current state.
-            Example, transaction used is already terminated: committed or aborted.
-            </exception>
+          <para>Thrown when a method call is invalid for the object's current state.
+            For example, the transaction used has already been terminated because it has been committed or aborted.</para>
+        </exception>
+        <exception cref="T:System.Fabric.FabricNotPrimaryException">
+          <para>Thrown when attempting to perform this operation on a <see cref="T:Microsoft.ServiceFabric.Data.Collections.IReliableCollection`1" /> 
+            that is not in the <see cref="F:System.Fabric.ReplicaRole.Primary" /> role.
+            In some instances, read operations, such as this one, can be performed from secondary replicas 
+            depending on the implementation of the IReliableCollection used.</para>
+        </exception>
       </Docs>
     </Member>
   </Members>

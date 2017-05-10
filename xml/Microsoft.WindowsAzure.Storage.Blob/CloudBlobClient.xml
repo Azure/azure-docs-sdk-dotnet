@@ -11,11 +11,20 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>
-            Provides a client-side logical representation of Microsoft Azure Blob storage.
-            </summary>
+    <summary>Provides a client-side logical representation of Microsoft Azure Blob storage.</summary>
     <remarks>
       <format type="text/markdown"><![CDATA[  
+  
+## Remarks  
+ The Blob service client provides an abstraction for developing against Azure Blob storage. This object serves as an entry point in your code for programming with blobs.  
+  
+ The Blob service client stores credentials for use in subsequent operations. Valid credentials may be your account name and account key, or a shared access signature (SAS). You may also create a service client for anonymous operations.  
+  
+ You can use the service client to configure settings on the Blob service itself, such as storage analytics and CORS. The service client may also store other settings for requests against Blob storage. For example, you can specify options on the service client's <xref:Microsoft.WindowsAzure.Storage.Blob.CloudBlobClient.DefaultRequestOptions%2A> property, such as a default retry policy or server timeout for all Blob service operations that use the service client.  
+  
+ A simple way to return an instance of a CloudBlobClient object is to create a <xref:Microsoft.WindowsAzure.Storage.CloudStorageAccount> object to represent your account, and then call the <xref:Microsoft.WindowsAzure.Storage.CloudStorageAccount.CreateCloudBlobClient%2A> method (shown in the example below). You can also use the CloudBlobClient constructors to create a new instance.  
+  
+   
   
 ## Examples  
 
@@ -48,11 +57,17 @@
       </Parameters>
       <Docs>
         <param name="baseUri">A <see cref="T:System.Uri" /> object containing the Blob service endpoint to use to create the client.</param>
-        <summary>
-            Initializes a new instance of the <see cref="T:Microsoft.WindowsAzure.Storage.Blob.CloudBlobClient" /> class using the specified Blob service endpoint
-            and anonymous credentials.
-            </summary>
-        <remarks>To be added.</remarks>
+        <summary>Initializes a new instance of the <see cref="T:Microsoft.WindowsAzure.Storage.Blob.CloudBlobClient" /> class using the specified Blob service endpoint             and anonymous credentials.</summary>
+        <remarks>
+          <format type="text/markdown"><![CDATA[  
+  
+## Remarks  
+  
+> [!NOTE]
+>  For examples and comprehensive usage information about this and other overloads of the CloudBlobClient constructor, see the CloudBlobClient constructor summary.  
+  
+ ]]></format>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -70,11 +85,17 @@
       <Docs>
         <param name="storageUri">A <see cref="P:Microsoft.WindowsAzure.Storage.Blob.CloudBlobClient.StorageUri" /> object containing the Blob service endpoint to use to create the client.</param>
         <param name="credentials">A <see cref="T:Microsoft.WindowsAzure.Storage.Auth.StorageCredentials" /> object.</param>
-        <summary>
-            Initializes a new instance of the <see cref="T:Microsoft.WindowsAzure.Storage.Blob.CloudBlobClient" /> class using the specified Blob service endpoint
-            and account credentials.
-            </summary>
-        <remarks>To be added.</remarks>
+        <summary>Initializes a new instance of the <see cref="T:Microsoft.WindowsAzure.Storage.Blob.CloudBlobClient" /> class using the specified Blob service endpoint             and account credentials.</summary>
+        <remarks>
+          <format type="text/markdown"><![CDATA[  
+  
+## Remarks  
+  
+> [!NOTE]
+>  For examples and comprehensive usage information about this and other overloads of the CloudBlobClient constructor, see the CloudBlobClient constructor summary.  
+  
+ ]]></format>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -92,11 +113,17 @@
       <Docs>
         <param name="baseUri">A <see cref="T:System.Uri" /> object containing the Blob service endpoint to use to create the client.</param>
         <param name="credentials">A <see cref="T:Microsoft.WindowsAzure.Storage.Auth.StorageCredentials" /> object.</param>
-        <summary>
-            Initializes a new instance of the <see cref="T:Microsoft.WindowsAzure.Storage.Blob.CloudBlobClient" /> class using the specified Blob service endpoint
-            and account credentials.
-            </summary>
-        <remarks>To be added.</remarks>
+        <summary>Initializes a new instance of the <see cref="T:Microsoft.WindowsAzure.Storage.Blob.CloudBlobClient" /> class using the specified Blob service endpoint             and account credentials.</summary>
+        <remarks>
+          <format type="text/markdown"><![CDATA[  
+  
+## Remarks  
+  
+> [!NOTE]
+>  For examples and comprehensive usage information about this and other overloads of the CloudBlobClient constructor, see the CloudBlobClient constructor summary.  
+  
+ ]]></format>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="AuthenticationScheme">
@@ -111,14 +138,35 @@
         <ReturnType>Microsoft.WindowsAzure.Storage.AuthenticationScheme</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>
-            Gets or sets the authentication scheme to use to sign HTTP requests.
-            </summary>
-        <value>To be added.</value>
+        <summary>Gets or sets the authentication scheme that the service client is using to sign HTTP requests (Shared Key or Shared Key Lite).</summary>
+        <value>A string indicating the authentication scheme ("SharedKey" or "SharedKeyLite").</value>
         <remarks>
-            This property is set only when Shared Key or Shared Key Lite credentials are used; it does not apply to authentication via a shared access signature 
-            or anonymous access.
-            </remarks>
+          <format type="text/markdown"><![CDATA[  
+  
+## Remarks  
+ This property is set only when Shared Key or Shared Key Lite credentials are used; it does not apply to authentication via a shared access signature (SAS) or to anonymous access.  
+  
+   
+  
+## Examples  
+  
+```csharp  
+private static void PrintServiceClientProperties(CloudBlobClient blobClient)  
+{  
+    Console.WriteLine("-----Blob Service Client Properties-----");  
+    Console.WriteLine("Storage account name: {0}", blobClient.Credentials.AccountName);  
+    Console.WriteLine("Authentication Scheme: {0}", blobClient.AuthenticationScheme);  
+    Console.WriteLine("Base URI: {0}", blobClient.BaseUri);  
+    Console.WriteLine("Primary URI: {0}", blobClient.StorageUri.PrimaryUri);  
+    Console.WriteLine("Secondary URI: {0}", blobClient.StorageUri.SecondaryUri);  
+    Console.WriteLine("Default buffer size: {0}", blobClient.BufferManager.GetDefaultBufferSize());  
+    Console.WriteLine("Default delimiter: {0}", blobClient.DefaultDelimiter);  
+    Console.WriteLine();  
+}  
+```  
+  
+ ]]></format>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="BaseUri">
@@ -133,11 +181,30 @@
         <ReturnType>System.Uri</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>
-            Gets the base URI for the Blob service client at the primary location.
-            </summary>
+        <summary>Gets the base URI for the Blob service client at the primary location.</summary>
         <value>A <see cref="T:System.Uri" /> object containing the base URI used to construct the Blob service client at the primary location.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+          <format type="text/markdown"><![CDATA[  
+  
+## Examples  
+  
+```csharp  
+private static void PrintServiceClientProperties(CloudBlobClient blobClient)  
+{  
+    Console.WriteLine("-----Blob Service Client Properties-----");  
+    Console.WriteLine("Storage account name: {0}", blobClient.Credentials.AccountName);  
+    Console.WriteLine("Authentication Scheme: {0}", blobClient.AuthenticationScheme);  
+    Console.WriteLine("Base URI: {0}", blobClient.BaseUri);  
+    Console.WriteLine("Primary URI: {0}", blobClient.StorageUri.PrimaryUri);  
+    Console.WriteLine("Secondary URI: {0}", blobClient.StorageUri.SecondaryUri);  
+    Console.WriteLine("Default buffer size: {0}", blobClient.BufferManager.GetDefaultBufferSize());  
+    Console.WriteLine("Default delimiter: {0}", blobClient.DefaultDelimiter);  
+    Console.WriteLine();  
+}  
+```  
+  
+ ]]></format>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="BeginGetBlobReferenceFromServer">
@@ -165,11 +232,20 @@
         <param name="blobUri">A <see cref="T:System.Uri" /> containing the URI of the blob. The service assumes this is the URI for the blob at the primary location.</param>
         <param name="callback">An <see cref="T:System.AsyncCallback" /> delegate that will receive notification when the asynchronous operation completes.</param>
         <param name="state">A user-defined object that will be passed to the callback delegate.</param>
-        <summary>
-            Begins an asynchronous operation to get a reference to a blob.
-            </summary>
+        <summary>Begins an asynchronous operation to get a reference to a blob by making a request to the service.</summary>
         <returns>An <see cref="T:Microsoft.WindowsAzure.Storage.ICancellableAsyncResult" /> that references the asynchronous operation.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+          <format type="text/markdown"><![CDATA[  
+  
+## Remarks  
+  
+> [!NOTE]
+>  Microsoft recommends that you call asynchronous methods in your code whenever possible for optimal performance. The recommended methods are those that use the Async/Await pattern. For more information about asynchronous programming in .NET with Async/Await, see [Asynchronous Programming with Async and Await (C# and Visual Basic)](https://msdn.microsoft.com/library/hh191443.aspx).  
+>   
+>  The corresponding method that uses Async/Await is <xref:Microsoft.WindowsAzure.Storage.Blob.CloudBlobClient.GetBlobReferenceFromServerAsync%2A>.  
+  
+ ]]></format>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="BeginGetBlobReferenceFromServer">
@@ -203,11 +279,20 @@
         <param name="operationContext">An <see cref="T:Microsoft.WindowsAzure.Storage.OperationContext" /> object that represents the context for the current operation.</param>
         <param name="callback">An <see cref="T:System.AsyncCallback" /> delegate that will receive notification when the asynchronous operation completes.</param>
         <param name="state">A user-defined object that will be passed to the callback delegate.</param>
-        <summary>
-            Begins an asynchronous operation to get a reference to a blob.
-            </summary>
+        <summary>Begins an asynchronous operation to get a reference to a blob by making a request to the service.</summary>
         <returns>An <see cref="T:Microsoft.WindowsAzure.Storage.ICancellableAsyncResult" /> that references the asynchronous operation.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+          <format type="text/markdown"><![CDATA[  
+  
+## Remarks  
+  
+> [!NOTE]
+>  Microsoft recommends that you call asynchronous methods in your code whenever possible for optimal performance. The recommended methods are those that use the Async/Await pattern. For more information about asynchronous programming in .NET with Async/Await, see [Asynchronous Programming with Async and Await (C# and Visual Basic)](https://msdn.microsoft.com/library/hh191443.aspx).  
+>   
+>  The corresponding method that uses Async/Await is <xref:Microsoft.WindowsAzure.Storage.Blob.CloudBlobClient.GetBlobReferenceFromServerAsync%2A>.  
+  
+ ]]></format>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="BeginGetBlobReferenceFromServer">
@@ -241,11 +326,20 @@
         <param name="operationContext">An <see cref="T:Microsoft.WindowsAzure.Storage.OperationContext" /> object that represents the context for the current operation.</param>
         <param name="callback">An <see cref="T:System.AsyncCallback" /> delegate that will receive notification when the asynchronous operation completes.</param>
         <param name="state">A user-defined object that will be passed to the callback delegate.</param>
-        <summary>
-            Begins an asynchronous operation to get a reference to a blob.
-            </summary>
+        <summary>Begins an asynchronous operation to get a reference to a blob by making a request to the service.</summary>
         <returns>An <see cref="T:Microsoft.WindowsAzure.Storage.ICancellableAsyncResult" /> that references the asynchronous operation.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+          <format type="text/markdown"><![CDATA[  
+  
+## Remarks  
+  
+> [!NOTE]
+>  Microsoft recommends that you call asynchronous methods in your code whenever possible for optimal performance. The recommended methods are those that use the Async/Await pattern. For more information about asynchronous programming in .NET with Async/Await, see [Asynchronous Programming with Async and Await (C# and Visual Basic)](https://msdn.microsoft.com/library/hh191443.aspx).  
+>   
+>  The corresponding method that uses Async/Await is <xref:Microsoft.WindowsAzure.Storage.Blob.CloudBlobClient.GetBlobReferenceFromServerAsync%2A>.  
+  
+ ]]></format>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="BeginGetServiceProperties">
@@ -271,11 +365,20 @@
       <Docs>
         <param name="callback">An <see cref="T:System.AsyncCallback" /> delegate that will receive notification when the asynchronous operation completes.</param>
         <param name="state">A user-defined object to be passed to the callback delegate.</param>
-        <summary>
-            Begins an asynchronous operation to get service properties for the Blob service.
-            </summary>
+        <summary>Begins an asynchronous operation to get service properties for the Blob service.</summary>
         <returns>An <see cref="T:Microsoft.WindowsAzure.Storage.ICancellableAsyncResult" /> that references the asynchronous operation.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+          <format type="text/markdown"><![CDATA[  
+  
+## Remarks  
+  
+> [!NOTE]
+>  Microsoft recommends that you call asynchronous methods in your code whenever possible for optimal performance. The recommended methods are those that use the Async/Await pattern. For more information about asynchronous programming in .NET with Async/Await, see [Asynchronous Programming with Async and Await (C# and Visual Basic)](https://msdn.microsoft.com/library/hh191443.aspx).  
+>   
+>  The corresponding method that uses Async/Await is <xref:Microsoft.WindowsAzure.Storage.Blob.CloudBlobClient.GetServicePropertiesAsync%2A>.  
+  
+ ]]></format>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="BeginGetServiceProperties">
@@ -305,11 +408,20 @@
         <param name="operationContext">An <see cref="T:Microsoft.WindowsAzure.Storage.OperationContext" /> object that represents the context for the current operation.</param>
         <param name="callback">An <see cref="T:System.AsyncCallback" /> delegate that will receive notification when the asynchronous operation completes.</param>
         <param name="state">A user-defined object to be passed to the callback delegate.</param>
-        <summary>
-            Begins an asynchronous operation to get service properties for the Blob service.
-            </summary>
+        <summary>Begins an asynchronous operation to get service properties for the Blob service.</summary>
         <returns>An <see cref="T:Microsoft.WindowsAzure.Storage.ICancellableAsyncResult" /> that references the asynchronous operation.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+          <format type="text/markdown"><![CDATA[  
+  
+## Remarks  
+  
+> [!NOTE]
+>  Microsoft recommends that you call asynchronous methods in your code whenever possible for optimal performance. The recommended methods are those that use the Async/Await pattern. For more information about asynchronous programming in .NET with Async/Await, see [Asynchronous Programming with Async and Await (C# and Visual Basic)](https://msdn.microsoft.com/library/hh191443.aspx).  
+>   
+>  The corresponding method that uses Async/Await is <xref:Microsoft.WindowsAzure.Storage.Blob.CloudBlobClient.GetServicePropertiesAsync%2A>.  
+  
+ ]]></format>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="BeginGetServiceStats">
@@ -335,11 +447,20 @@
       <Docs>
         <param name="callback">An <see cref="T:System.AsyncCallback" /> delegate that will receive notification when the asynchronous operation completes.</param>
         <param name="state">A user-defined object to be passed to the callback delegate.</param>
-        <summary>
-            Begins an asynchronous operation to get service stats for the secondary Blob service endpoint.
-            </summary>
+        <summary>Begins an asynchronous operation to get service stats for the secondary Blob service endpoint.</summary>
         <returns>An <see cref="T:Microsoft.WindowsAzure.Storage.ICancellableAsyncResult" /> that references the asynchronous operation.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+          <format type="text/markdown"><![CDATA[  
+  
+## Remarks  
+  
+> [!NOTE]
+>  Microsoft recommends that you call asynchronous methods in your code whenever possible for optimal performance. The recommended methods are those that use the Async/Await pattern. For more information about asynchronous programming in .NET with Async/Await, see [Asynchronous Programming with Async and Await (C# and Visual Basic)](https://msdn.microsoft.com/library/hh191443.aspx).  
+>   
+>  The corresponding method that uses Async/Await is <xref:Microsoft.WindowsAzure.Storage.Blob.CloudBlobClient.GetServiceStatsAsync%2A>.  
+  
+ ]]></format>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="BeginGetServiceStats">
@@ -369,11 +490,20 @@
         <param name="operationContext">An <see cref="T:Microsoft.WindowsAzure.Storage.OperationContext" /> object that represents the context for the current operation.</param>
         <param name="callback">An <see cref="T:System.AsyncCallback" /> delegate that will receive notification when the asynchronous operation completes.</param>
         <param name="state">A user-defined object to be passed to the callback delegate.</param>
-        <summary>
-            Begins an asynchronous operation to get service stats for the secondary Blob service endpoint.
-            </summary>
+        <summary>Begins an asynchronous operation to get service stats for the secondary Blob service endpoint.</summary>
         <returns>An <see cref="T:Microsoft.WindowsAzure.Storage.ICancellableAsyncResult" /> that references the asynchronous operation.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+          <format type="text/markdown"><![CDATA[  
+  
+## Remarks  
+  
+> [!NOTE]
+>  Microsoft recommends that you call asynchronous methods in your code whenever possible for optimal performance. The recommended methods are those that use the Async/Await pattern. For more information about asynchronous programming in .NET with Async/Await, see [Asynchronous Programming with Async and Await (C# and Visual Basic)](https://msdn.microsoft.com/library/hh191443.aspx).  
+>   
+>  The corresponding method that uses Async/Await is <xref:Microsoft.WindowsAzure.Storage.Blob.CloudBlobClient.GetServiceStatsAsync%2A>.  
+  
+ ]]></format>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="BeginListBlobsSegmented">
@@ -403,12 +533,20 @@
         <param name="currentToken">A <see cref="T:Microsoft.WindowsAzure.Storage.Blob.BlobContinuationToken" /> object returned by a previous listing operation.</param>
         <param name="callback">An <see cref="T:System.AsyncCallback" /> delegate that will receive notification when the asynchronous operation completes.</param>
         <param name="state">A user-defined object that will be passed to the callback delegate.</param>
-        <summary>
-            Begins an asynchronous operation to return a result segment containing a collection of blob items 
-            in the container.
-            </summary>
+        <summary>Begins an asynchronous operation to return a result segment containing a collection of blob items              in the container.</summary>
         <returns>An <see cref="T:Microsoft.WindowsAzure.Storage.ICancellableAsyncResult" /> that references the asynchronous operation.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+          <format type="text/markdown"><![CDATA[  
+  
+## Remarks  
+  
+> [!NOTE]
+>  [!INCLUDE[azure-storage-async-alert](~/includes/azure-storage-async-alert-md.md)]  
+>   
+>  The analogous method that uses Async/Await is <xref:Microsoft.WindowsAzure.Storage.Blob.CloudBlobClient.ListBlobsSegmentedAsync%2A>.  
+  
+ ]]></format>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="BeginListBlobsSegmented">
@@ -442,19 +580,26 @@
         <param name="prefix">A string containing the blob name prefix, including the container name.</param>
         <param name="useFlatBlobListing">A boolean value that specifies whether to list blobs in a flat listing, or whether to list blobs hierarchically, by virtual directory.</param>
         <param name="blobListingDetails">A <see cref="T:Microsoft.WindowsAzure.Storage.Blob.BlobListingDetails" /> enumeration describing which items to include in the listing.</param>
-        <param name="maxResults">A non-negative integer value that indicates the maximum number of results to be returned at a time, up to the 
-            per-operation limit of 5000. If this value is <c>null</c>, the maximum possible number of results will be returned, up to 5000.</param>
+        <param name="maxResults">A non-negative integer value that indicates the maximum number of results to be returned at a time, up to the              per-operation limit of 5000. If this value is <c>null</c>, the maximum possible number of results will be returned, up to 5000.</param>
         <param name="currentToken">A <see cref="T:Microsoft.WindowsAzure.Storage.Blob.BlobContinuationToken" /> object returned by a previous listing operation.</param>
         <param name="options">A <see cref="T:Microsoft.WindowsAzure.Storage.Blob.BlobRequestOptions" /> object that specifies additional options for the request.</param>
         <param name="operationContext">An <see cref="T:Microsoft.WindowsAzure.Storage.OperationContext" /> object that represents the context for the current operation.</param>
         <param name="callback">An <see cref="T:System.AsyncCallback" /> delegate that will receive notification when the asynchronous operation completes.</param>
         <param name="state">A user-defined object that will be passed to the callback delegate.</param>
-        <summary>
-            Begins an asynchronous operation to return a result segment containing a collection of blob items 
-            in the container.
-            </summary>
+        <summary>Begins an asynchronous operation to return a result segment containing a collection of blob items              in the container.</summary>
         <returns>An <see cref="T:Microsoft.WindowsAzure.Storage.ICancellableAsyncResult" /> that references the asynchronous operation.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+          <format type="text/markdown"><![CDATA[  
+  
+## Remarks  
+  
+> [!NOTE]
+>  [!INCLUDE[azure-storage-async-alert](~/includes/azure-storage-async-alert-md.md)]  
+>   
+>  The analogous method that uses Async/Await is <xref:Microsoft.WindowsAzure.Storage.Blob.CloudBlobClient.ListBlobsSegmentedAsync%2A>.  
+  
+ ]]></format>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="BeginListContainersSegmented">
