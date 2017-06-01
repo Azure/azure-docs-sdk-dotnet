@@ -77,38 +77,66 @@
         <Parameter Name="stats" Type="Microsoft.Azure.Batch.Protocol.Models.PoolStatistics" />
       </Parameters>
       <Docs>
-        <param name="id">To be added.</param>
-        <param name="displayName">To be added.</param>
-        <param name="url">To be added.</param>
-        <param name="eTag">To be added.</param>
-        <param name="lastModified">To be added.</param>
-        <param name="creationTime">To be added.</param>
-        <param name="state">To be added.</param>
-        <param name="stateTransitionTime">To be added.</param>
-        <param name="allocationState">To be added.</param>
-        <param name="allocationStateTransitionTime">To be added.</param>
-        <param name="vmSize">To be added.</param>
-        <param name="cloudServiceConfiguration">To be added.</param>
-        <param name="virtualMachineConfiguration">To be added.</param>
-        <param name="resizeTimeout">To be added.</param>
-        <param name="resizeError">To be added.</param>
-        <param name="currentDedicated">To be added.</param>
-        <param name="targetDedicated">To be added.</param>
-        <param name="enableAutoScale">To be added.</param>
-        <param name="autoScaleFormula">To be added.</param>
-        <param name="autoScaleEvaluationInterval">To be added.</param>
-        <param name="autoScaleRun">To be added.</param>
-        <param name="enableInterNodeCommunication">To be added.</param>
-        <param name="networkConfiguration">To be added.</param>
-        <param name="startTask">To be added.</param>
-        <param name="certificateReferences">To be added.</param>
-        <param name="applicationPackageReferences">To be added.</param>
-        <param name="maxTasksPerNode">To be added.</param>
-        <param name="taskSchedulingPolicy">To be added.</param>
-        <param name="userAccounts">To be added.</param>
-        <param name="metadata">To be added.</param>
-        <param name="stats">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="id">A string that uniquely identifies the pool within
+            the account.</param>
+        <param name="displayName">The display name for the pool.</param>
+        <param name="url">The URL of the pool.</param>
+        <param name="eTag">The ETag of the pool.</param>
+        <param name="lastModified">The last modified time of the
+            pool.</param>
+        <param name="creationTime">The creation time of the pool.</param>
+        <param name="state">The current state of the pool.</param>
+        <param name="stateTransitionTime">The time at which the pool
+            entered its current state.</param>
+        <param name="allocationState">Whether the pool is resizing.</param>
+        <param name="allocationStateTransitionTime">The time at which the
+            pool entered its current allocation state.</param>
+        <param name="vmSize">The size of virtual machines in the pool. All
+            virtual machines in a pool are the same size.</param>
+        <param name="cloudServiceConfiguration">The cloud service
+            configuration for the pool.</param>
+        <param name="virtualMachineConfiguration">The virtual machine
+            configuration for the pool.</param>
+        <param name="resizeTimeout">The timeout for allocation of compute
+            nodes to the pool.</param>
+        <param name="resizeError">Details of any error encountered while
+            performing the last resize on the pool.</param>
+        <param name="currentDedicated">The number of compute nodes
+            currently in the pool.</param>
+        <param name="targetDedicated">The desired number of compute nodes
+            in the pool.</param>
+        <param name="enableAutoScale">Whether the pool size should
+            automatically adjust over time.</param>
+        <param name="autoScaleFormula">A formula for the desired number of
+            compute nodes in the pool.</param>
+        <param name="autoScaleEvaluationInterval">The time interval at
+            which to automatically adjust the pool size according to the
+            autoscale formula.</param>
+        <param name="autoScaleRun">The results and errors from the last
+            execution of the autoscale formula.</param>
+        <param name="enableInterNodeCommunication">Whether the pool permits
+            direct communication between nodes.</param>
+        <param name="networkConfiguration">The network configuration for
+            the pool.</param>
+        <param name="startTask">A task specified to run on each compute
+            node as it joins the pool.</param>
+        <param name="certificateReferences">The list of certificates to be
+            installed on each compute node in the pool.</param>
+        <param name="applicationPackageReferences">The list of application
+            packages to be installed on each compute node in the pool.</param>
+        <param name="maxTasksPerNode">The maximum number of tasks that can
+            run concurrently on a single compute node in the pool.</param>
+        <param name="taskSchedulingPolicy">How the Batch service
+            distributes tasks between compute nodes in the pool.</param>
+        <param name="userAccounts">The list of user accounts to be created
+            on each node in the pool.</param>
+        <param name="metadata">A list of name-value pairs associated with
+            the pool as metadata.</param>
+        <param name="stats">Utilization and resource usage statistics for
+            the entire lifetime of the pool.</param>
+        <summary>
+            Initializes a new instance of the CloudPool class.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -538,7 +566,9 @@
         <ReturnType>System.Nullable&lt;System.Int32&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the number of compute nodes currently in the pool.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -769,9 +799,8 @@
         <value>To be added.</value>
         <remarks>
             This is the last time at which the pool level data, such as the
-            targetDedicatedNodes or enableAutoscale settings, changed. It does
-            not factor in node-level changes such as a compute node changing
-            state.
+            targetDedicated or enableAutoscale settings, changed. It does not
+            factor in node-level changes such as a compute node changing state.
             </remarks>
       </Docs>
     </Member>
@@ -869,9 +898,15 @@
         <ReturnType>Microsoft.Azure.Batch.Protocol.Models.ResizeError</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets details of any error encountered while performing the
+            last resize on the pool.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            This property is set only if an error occurred during the last pool
+            resize, and only when the pool allocationState is Steady.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="ResizeErrors">
@@ -1061,9 +1096,14 @@
         <ReturnType>System.Nullable&lt;System.Int32&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the desired number of compute nodes in the pool.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            This property is not set if enableAutoScale is true. It is required
+            if enableAutoScale is false.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="TargetDedicatedNodes">

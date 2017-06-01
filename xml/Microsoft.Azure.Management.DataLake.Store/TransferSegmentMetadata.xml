@@ -16,7 +16,9 @@
     </Attribute>
   </Attributes>
   <Docs>
-    <summary>To be added.</summary>
+    <summary>
+            Represents metadata for a particular file segment.
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -35,10 +37,22 @@
         <Parameter Name="fileLength" Type="System.Int64" />
       </Parameters>
       <Docs>
-        <param name="fileLength">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="fileLength">The length of the file, in bytes.</param>
+        <summary>
+            Calculates the number of segments a file of the given length should be split into.
+            The method to calculate this is based on some empirical measurements that allows both the number of segments and the length of each segment to grow as the input file size grows.
+            They both grow on a logarithmic pattern as the file length increases.
+            The formula is roughly this:
+            * Multiplier = Min(100, 50 * 2 ^ Log10(FileLengthInGB))
+            * SegmentCount = Max(1, Multiplier * 2 ^ Log10(FileLengthInGB)
+            Essentially we quadruple the number of segments for each tenfold increase in the file length, with certain caps. The formula is designed to support both small files and
+            extremely large files (and not cause very small segment lengths or very large number of segments).
+            </summary>
+        <returns>
+            The number of segments to split the file into. Returns 0 if fileLength is 0.
+            </returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">File Length cannot be negative</exception>
       </Docs>
     </Member>
     <Member MemberName="CalculateSegmentLength">
@@ -57,11 +71,14 @@
         <Parameter Name="segmentCount" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="fileLength">To be added.</param>
-        <param name="segmentCount">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="fileLength">The length of the file, in bytes.</param>
+        <param name="segmentCount">The number of segments to split the file into.</param>
+        <summary>
+            Calculates the length of a typical (non-terminal) segment for a file of the given length that is split into the given number of segments.
+            </summary>
+        <returns />
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">Number of segments must be a positive integer</exception>
       </Docs>
     </Member>
     <Member MemberName="Length">
@@ -81,8 +98,12 @@
         <ReturnType>System.Int64</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>
+            Gets or sets a value indicating the size of the segment (in bytes).
+            </summary>
+        <value>
+            The length.
+            </value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -103,8 +124,12 @@
         <ReturnType>System.Int64</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>
+            Gets or sets a value indicating the starting offset of the segment in the file.
+            </summary>
+        <value>
+            The offset.
+            </value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -125,8 +150,12 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>
+            Gets or sets a value indicating the stream path assigned to this segment.
+            </summary>
+        <value>
+            The path.
+            </value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -147,8 +176,12 @@
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>
+            Gets or sets a value indicating the number (sequence) of the segment in the file.
+            </summary>
+        <value>
+            The segment number.
+            </value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -169,8 +202,12 @@
         <ReturnType>Microsoft.Azure.Management.DataLake.Store.SegmentTransferStatus</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>
+            Gets or sets a value indicating the current upload status for this segment.
+            </summary>
+        <value>
+            The status.
+            </value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
