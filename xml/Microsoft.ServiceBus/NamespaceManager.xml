@@ -1986,7 +1986,21 @@
             a combination of entity name (including starts with), entity length (Gt or Lt), created, updated, and accessed time (Gt or Lt).</summary>
         <returns>An 
             <see cref="T:System.Collections.Generic.IEnumerable`1" /> object that represents the collection of all queues in the service namespace or returns an empty collection if no queue exists.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            Filter expression formats:  {Propery} {Logical Operator} {Value} AND {Filter expression}
+                                        {Function} {Logical Operator} {Value} AND {Filter expression}
+            -----------------------------------------------------------------------------------------
+            Available properties:       Path | ModifiedAt | AccessedAt | CreatedAt | MessageCount
+            Logical operators:          Eq | Ne | Gt | Ge | Lt | Le  
+            Value:                      A value of the corresponding property type
+            Functions:                  startswith({Propery}, {Value})
+            </remarks>
+        <example>
+          <code>
+            var queuesWithMessages = namespaceManager.GetQueues("messageCount Gt 0");
+            var queuesStartsWith = namespaceManager.GetQueues($"startswith(path, 'queue') eq true");
+            </code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="GetQueuesAsync">
@@ -2025,7 +2039,21 @@
         <param name="filter">The string used to filter the queues to be retrieved.</param>
         <summary>Asynchronously retrieves an enumerable collection of all queues in the service namespace with specified filter.</summary>
         <returns>The asynchronous operation.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            Filter expression formats:  {Propery} {Logical Operator} {Value} AND {Filter expression}
+                                        {Function} {Logical Operator} {Value} AND {Filter expression}
+            -----------------------------------------------------------------------------------------
+            Available properties:       Path | ModifiedAt | AccessedAt | CreatedAt | MessageCount
+            Logical operators:          Eq | Ne | Gt | Ge | Lt | Le  
+            Value:                      A value of the corresponding property type
+            Functions:                  startswith({Propery}, {Value})
+            </remarks>
+        <example>
+          <code>
+            var queuesWithMessages = await namespaceManager.GetQueuesAsync("messageCount Gt 0");
+            var queuesStartsWith = await namespaceManager.GetQueuesAsync($"startswith(path, 'queue') eq true");
+            </code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="GetRelay">
@@ -2200,9 +2228,21 @@
         <param name="filter">The string used to filter the rules to be retrieved.</param>
         <summary>Retrieves an enumerable collection of all rules in the 
             service namespace with specified topic path, subscription name and filter.</summary>
-        <returns>An 
-            <see cref="T:System.Collections.Generic.IEnumerable`1" /> object that represents the collection of all rules in the service namespace or returns an empty collection if no rule exists.</returns>
-        <remarks>To be added.</remarks>
+        <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1" /> object that represents the collection of 
+            all rules in the service namespace or returns an empty collection if no rule exists.</returns>
+        <remarks>
+            Filter expression format:   {Propery} {Logical Operator} {Value} {Filter expression}
+            -----------------------------------------------------------------------------------------
+            Available properties:       ModifiedAt | AccessedAt | CreatedAt
+            Logical operators:          Eq | Ne | Gt | Ge | Lt | Le  
+            Value:                      A value of the corresponding property type
+            </remarks>
+        <example>
+          <code>
+            var fiveMinutesAgo = DateTime.UtcNow.AddMinutes(-5).ToString("M/dd/yyyy hh:mm:ss");
+            var rulesInTheLast5Minutes = namespaceManager.GetRules(topicName, subscriptionName, $"createdAt gt '{fiveMinutesAgo}'");
+            </code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="GetRulesAsync">
@@ -2251,7 +2291,19 @@
         <summary>Asynchronously retrieves an enumerable collection of all rules in 
             the service namespace with specified topic path, subscription name and filter.</summary>
         <returns>The asynchronous operation.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            Filter expression format:   {Propery} {Logical Operator} {Value} {Filter expression}
+            -----------------------------------------------------------------------------------------
+            Available properties:       ModifiedAt | AccessedAt | CreatedAt
+            Logical operators:          Eq | Ne | Gt | Ge | Lt | Le  
+            Value:                      A value of the corresponding property type
+            </remarks>
+        <example>
+          <code>
+            var fiveMinutesAgo = DateTime.UtcNow.AddMinutes(-5).ToString("M/dd/yyyy hh:mm:ss");
+            var rulesInTheLast5Minutes = await namespaceManager.GetRulesAsync(topicName, subscriptionName, $"createdAt gt '{fiveMinutesAgo}'");
+            </code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="GetSubscription">
@@ -2347,7 +2399,21 @@
         <summary>Retrieves an enumerable collection of all subscriptions in the service namespace with specified topic path and filter.</summary>
         <returns>An 
             <see cref="T:System.Collections.Generic.IEnumerable`1" /> object that represents the collection of all subscriptions in the service namespace or returns an empty collection if no subscription exists.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            Filter expression formats:  {Propery} {Logical Operator} {Value} AND {Filter expression}
+                                        {Function} {Logical Operator} {Value} AND {Filter expression}
+            -----------------------------------------------------------------------------------------
+            Available properties:       ModifiedAt | AccessedAt | CreatedAt | MessageCount
+            Logical operators:          Eq | Ne | Gt | Ge | Lt | Le  
+            Value:                      A value of the corresponding property type
+            Functions:                  startswith({Propery}, {Value})
+            </remarks>
+        <example>
+          <code>
+            var subscriptionsWithMessages = namespaceManager.GetSubscriptions("topicName", "messageCount Gt 0");
+            var subscriptionsStartsWith = namespaceManager.GetSubscriptions("topicName", $"startswith(path, 'subscription') eq true");
+            </code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="GetSubscriptionsAsync">
@@ -2391,7 +2457,21 @@
         <param name="filter">The string used to filter the subscriptions to be retrieved.</param>
         <summary>Asynchronously retrieves an enumerable collection of all subscriptions in the service namespace.</summary>
         <returns>The asynchronous operation.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            Filter expression formats:  {Propery} {Logical Operator} {Value} AND {Filter expression}
+                                        {Function} {Logical Operator} {Value} AND {Filter expression}
+            -----------------------------------------------------------------------------------------
+            Available properties:       ModifiedAt | AccessedAt | CreatedAt | MessageCount
+            Logical operators:          Eq | Ne | Gt | Ge | Lt | Le  
+            Value:                      A value of the corresponding property type
+            Functions:                  startswith({Propery}, {Value})
+            </remarks>
+        <example>
+          <code>
+            var subscriptionsWithMessages = await namespaceManager.GetSubscriptionsAsync("topicName", "messageCount Gt 0");
+            var subscriptionsStartsWith = await namespaceManager.GetSubscriptionsAsync("topicName", $"startswith(path, 'subscription') eq true");
+            </code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="GetTopic">
@@ -2496,7 +2576,21 @@
             combination of entity name (including starts with), entity length (Gt or Lt), created, updated, and accessed time (Gt or Lt).</summary>
         <returns>An 
             <see cref="T:System.Collections.Generic.IEnumerable`1" /> object that represents the collection of topics under the current namespace, or returns an empty collection if no topic exists.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            Filter expression formats:  {Propery} {Logical Operator} {Value} AND {Filter expression}
+                                        {Function} {Logical Operator} {Value} AND {Filter expression}
+            -----------------------------------------------------------------------------------------
+            Available properties:       Path | ModifiedAt | AccessedAt | CreatedAt | MessageCount
+            Logical operators:          Eq | Ne | Gt | Ge | Lt | Le  
+            Value:                      A value of the corresponding property type
+            Functions:                  startswith({Propery}, {Value})
+            </remarks>
+        <example>
+          <code>
+            var topicsWithMessages = namespaceManager.GetTopics("messageCount Gt 0");
+            var topicsStartsWith = namespaceManager.GetTopics($"startswith(path, 'topic') eq true");
+            </code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="GetTopicsAsync">
@@ -2535,7 +2629,21 @@
         <param name="filter">The string used to filter the topics to be retrieved.</param>
         <summary>Asynchronously retrieves a collection of topics in a service namespace.</summary>
         <returns>The asynchronous operation.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            Filter expression formats:  {Propery} {Logical Operator} {Value} AND {Filter expression}
+                                        {Function} {Logical Operator} {Value} AND {Filter expression}
+            -----------------------------------------------------------------------------------------
+            Available properties:       Path | ModifiedAt | AccessedAt | CreatedAt | MessageCount
+            Logical operators:          Eq | Ne | Gt | Ge | Lt | Le  
+            Value:                      A value of the corresponding property type
+            Functions:                  startswith({Propery}, {Value})
+            </remarks>
+        <example>
+          <code>
+            var topicsWithMessages = await namespaceManager.GetTopicsAsync("messageCount Gt 0");
+            var topicsStartsWith = await namespaceManager.GetTopicsAsync($"startswith(path, 'topic') eq true");
+            </code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="GetVersionInfo">

@@ -1,0 +1,326 @@
+<Type Name="DocumentCollection" FullName="Microsoft.Azure.Documents.DocumentCollection">
+  <TypeSignature Language="C#" Value="public class DocumentCollection : Microsoft.Azure.Documents.Resource" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit DocumentCollection extends Microsoft.Azure.Documents.Resource" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Azure.Documents.DocumentCollection" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
+    <AssemblyVersion>1.14.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Microsoft.Azure.Documents.Resource</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>
+            Represents a document collection in the Azure DocumentDB database service. A collection is a named logical container for documents. 
+            </summary>
+    <remarks>
+            A database may contain zero or more named collections and each collection consists of zero or more JSON documents. 
+            Being schema-free, the documents in a collection do not need to share the same structure or fields. Since collections are application resources, 
+            they can be authorized using either the master key or resource keys.
+            Refer to <see>http://azure.microsoft.com/documentation/articles/documentdb-resources/#collections</see> for more details on collections.
+            </remarks>
+    <example>
+            The example below creates a new partitioned collection with 50000 Request-per-Unit throughput.
+            The partition key is the first level 'country' property in all the documents within this collection.
+            <code language="c#"><![CDATA[
+            DocumentCollection collection = await client.CreateDocumentCollectionAsync(
+                databaseLink,
+                new DocumentCollection 
+                { 
+                    Id = "MyCollection",
+                    PartitionKey = new PartitionKeyDefinition
+                    {
+                        Paths = new Collection<string> { "/country" }
+                    }
+                }, 
+                new RequestOptions { OfferThroughput = 50000} ).Result;
+            ]]></code></example>
+    <example>
+            The example below creates a new collection with OfferThroughput set to 10000.
+            <code language="c#"><![CDATA[
+            DocumentCollection collection = await client.CreateDocumentCollectionAsync(
+                databaseLink,
+                new DocumentCollection { Id = "MyCollection" }, 
+                new RequestOptions { OfferThroughput = 10000} ).Result;
+            ]]></code></example>
+    <example>
+            The example below creates a new collection with a custom indexing policy.
+            <code language="c#"><![CDATA[
+            DocumentCollection collectionSpec = new DocumentCollection { Id ="MyCollection" };
+            collectionSpec.IndexingPolicy.Automatic = true;
+            collectionSpec.IndexingPolicy.IndexingMode = IndexingMode.Consistent;
+            collection = await client.CreateDocumentCollectionAsync(database.SelfLink, collectionSpec);
+            ]]></code></example>
+    <example>
+            The example below creates a document of type Book inside this collection.
+            <code language="c#"><![CDATA[
+            Document doc = await client.CreateDocumentAsync(collection.SelfLink, new Book { Title = "War and Peace" });
+            ]]></code></example>
+    <example>
+            The example below queries for a Database by Id to retrieve the SelfLink.
+            <code language="c#"><![CDATA[
+            using Microsoft.Azure.Documents.Linq;
+            DocumentCollection collection = client.CreateDocumentCollectionQuery(databaseLink).Where(c => c.Id == "myColl").AsEnumerable().FirstOrDefault();
+            string collectionLink = collection.SelfLink;
+            ]]></code></example>
+    <example>
+            The example below deletes this collection.
+            <code language="c#"><![CDATA[
+            await client.DeleteDocumentCollectionAsync(collection.SelfLink);
+            ]]></code></example>
+    <altmember cref="T:Microsoft.Azure.Documents.IndexingPolicy" />
+    <altmember cref="T:Microsoft.Azure.Documents.PartitionKeyDefinition" />
+    <altmember cref="T:Microsoft.Azure.Documents.Document" />
+    <altmember cref="T:Microsoft.Azure.Documents.Database" />
+    <altmember cref="T:Microsoft.Azure.Documents.Offer" />
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public DocumentCollection ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Documents.DocumentCollection.#ctor" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.Documents.DocumentCollection" /> class for the Azure DocumentDB database service.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ConflictsLink">
+      <MemberSignature Language="C#" Value="public string ConflictsLink { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ConflictsLink" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.DocumentCollection.ConflictsLink" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets the self-link for conflicts in a collection from the Azure DocumentDB database service.
+            </summary>
+        <value>
+            The self-link for conflicts in a collection.
+            </value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DefaultTimeToLive">
+      <MemberSignature Language="C#" Value="public Nullable&lt;int&gt; DefaultTimeToLive { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;int32&gt; DefaultTimeToLive" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.DocumentCollection.DefaultTimeToLive" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(NullValueHandling=Newtonsoft.Json.NullValueHandling.Ignore, PropertyName="defaultTtl")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;System.Int32&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets the default time to live in seconds for documents in a collection from the Azure DocumentDB database service.
+            </summary>
+        <value>
+            It is an optional property.
+            A valid value must be either a nonzero positive integer, '-1', or <c>null</c>.
+            By default, DefaultTimeToLive is set to null meaning the time to live is turned off for the collection.
+            The unit of measurement is seconds. The maximum allowed value is 2147483647.
+            </value>
+        <remarks>
+          <para>
+            The <see cref="P:Microsoft.Azure.Documents.DocumentCollection.DefaultTimeToLive" /> will be applied to all the documents in the collection as the default time-to-live policy.
+            The individual document could override the default time-to-live policy by setting its <see cref="P:Microsoft.Azure.Documents.Document.TimeToLive" />.
+            </para>
+          <para>
+            When the <see cref="P:Microsoft.Azure.Documents.DocumentCollection.DefaultTimeToLive" /> is <c>null</c>, the time-to-live will be turned off for the collection.
+            It means all the documents will never expire. The individual document's <see cref="P:Microsoft.Azure.Documents.Document.TimeToLive" /> will be disregarded.
+            </para>
+          <para>
+            When the <see cref="P:Microsoft.Azure.Documents.DocumentCollection.DefaultTimeToLive" /> is '-1', the time-to-live will be turned on for the collection.
+            By default, all the documents will never expire. The individual document could be given a specific time-to-live value by setting its
+            <see cref="P:Microsoft.Azure.Documents.Document.TimeToLive" />. The document's <see cref="P:Microsoft.Azure.Documents.Document.TimeToLive" /> will be honored, and the expired documents
+            will be deleted in background.
+            </para>
+          <para>
+            When the <see cref="P:Microsoft.Azure.Documents.DocumentCollection.DefaultTimeToLive" /> is a nonzero positive integer, the time-to-live will be turned on for the collection.
+            And a default time-to-live in seconds will be applied to all the documents. A document will be expired after the
+            specified <see cref="P:Microsoft.Azure.Documents.DocumentCollection.DefaultTimeToLive" /> value in seconds since its last write time.
+            The individual document could override the default time-to-live policy by setting its <see cref="P:Microsoft.Azure.Documents.Document.TimeToLive" />.
+            Please refer to the <see cref="P:Microsoft.Azure.Documents.Document.TimeToLive" /> for more details about evaluating the final time-to-live policy of a document.
+            </para>
+        </remarks>
+        <example>
+            The example below disables time-to-live on a collection.
+            <code language="c#"><![CDATA[
+                collection.DefaultTimeToLive = null;
+            ]]></code></example>
+        <example>
+            The example below enables time-to-live on a collection. By default, all the documents never expire.
+            <code language="c#"><![CDATA[
+                collection.DefaultTimeToLive = -1;
+            ]]></code></example>
+        <example>
+            The example below enables time-to-live on a collection. By default, the document will expire after 1000 seconds
+            since its last write time.
+            <code language="c#"><![CDATA[
+                collection.DefaultTimeToLive = 1000;
+            ]]></code></example>
+        <altmember cref="T:Microsoft.Azure.Documents.Document" />
+      </Docs>
+    </Member>
+    <Member MemberName="DocumentsLink">
+      <MemberSignature Language="C#" Value="public string DocumentsLink { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string DocumentsLink" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.DocumentCollection.DocumentsLink" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="_docs")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets the self-link for documents in a collection from the Azure DocumentDB database service.
+            </summary>
+        <value>
+            The self-link for documents in a collection.
+            </value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IndexingPolicy">
+      <MemberSignature Language="C#" Value="public Microsoft.Azure.Documents.IndexingPolicy IndexingPolicy { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Azure.Documents.IndexingPolicy IndexingPolicy" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.DocumentCollection.IndexingPolicy" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Azure.Documents.IndexingPolicy</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets the <see cref="P:Microsoft.Azure.Documents.DocumentCollection.IndexingPolicy" /> associated with the collection from the Azure DocumentDB database service. 
+            </summary>
+        <value>
+            The indexing policy associated with the collection.
+            </value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PartitionKey">
+      <MemberSignature Language="C#" Value="public Microsoft.Azure.Documents.PartitionKeyDefinition PartitionKey { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Azure.Documents.PartitionKeyDefinition PartitionKey" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.DocumentCollection.PartitionKey" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="partitionKey")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.Azure.Documents.PartitionKeyDefinition</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets <see cref="T:Microsoft.Azure.Documents.PartitionKeyDefinition" /> object in the Azure DocumentDB database service.
+            </summary>
+        <value>
+          <see cref="T:Microsoft.Azure.Documents.PartitionKeyDefinition" /> object.
+            </value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="StoredProceduresLink">
+      <MemberSignature Language="C#" Value="public string StoredProceduresLink { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string StoredProceduresLink" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.DocumentCollection.StoredProceduresLink" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="_sprocs")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets the self-link for stored procedures in a collection from the Azure DocumentDB database service.
+            </summary>
+        <value>
+            The self-link for stored procedures in a collection.
+            </value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TriggersLink">
+      <MemberSignature Language="C#" Value="public string TriggersLink { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string TriggersLink" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.DocumentCollection.TriggersLink" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets the self-link for triggers in a collection from the Azure DocumentDB database service.
+            </summary>
+        <value>
+            The self-link for triggers in a collection.
+            </value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UserDefinedFunctionsLink">
+      <MemberSignature Language="C#" Value="public string UserDefinedFunctionsLink { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string UserDefinedFunctionsLink" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.DocumentCollection.UserDefinedFunctionsLink" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets the self-link for user defined functions in a collection from the Azure DocumentDB database service.
+            </summary>
+        <value>
+            The self-link for user defined functions in a collection.
+            </value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>
