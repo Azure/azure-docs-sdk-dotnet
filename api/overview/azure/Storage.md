@@ -13,6 +13,7 @@ ms.devlang: dotnet
 ms.service: multiple
 uid: azure.net.sdk.landingPage.services.Storage
 type: container
+
 ---
 
 # Azure storage management library concepts
