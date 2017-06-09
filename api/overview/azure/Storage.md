@@ -11,7 +11,6 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
 ms.service: multiple
-ms.assetid: 
 ---
 
 # Azure storage management library concepts
