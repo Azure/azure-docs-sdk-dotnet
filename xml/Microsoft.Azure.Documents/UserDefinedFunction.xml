@@ -1,0 +1,81 @@
+<Type Name="UserDefinedFunction" FullName="Microsoft.Azure.Documents.UserDefinedFunction">
+  <TypeSignature Language="C#" Value="public class UserDefinedFunction : Microsoft.Azure.Documents.Resource" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit UserDefinedFunction extends Microsoft.Azure.Documents.Resource" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Azure.Documents.UserDefinedFunction" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
+    <AssemblyVersion>1.14.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Microsoft.Azure.Documents.Resource</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>
+            Represents a user defined function in the Azure DocumentDB database service.
+            </summary>
+    <remarks>
+            Azure DocumentDB supports JavaScript user defined functions (UDFs) which are stored in the database and can be used inside queries. 
+            Refer to http://azure.microsoft.com/documentation/articles/documentdb-sql-query/#javascript-integration for how to use UDFs within queries.
+            Refer to http://azure.microsoft.com/documentation/articles/documentdb-programming/#udf for more details about implementing UDFs in JavaScript.
+            </remarks>
+    <example>
+            The following examples show how to register and use UDFs.
+            <code language="c#"><![CDATA[
+            await client.CreateUserDefinedFunctionAsync(collectionLink, new UserDefinedFunction { Id = "calculateTax", Body = @"function(amt) { return amt * 0.05; }" });
+            client.CreateDocumentQuery<Book>(collectionLink, "SELECT VALUE udf.calculateTax(b.price) FROM books b");
+            client.CreateDocumentQuery<Book>(collectionLink, new SqlQuerySpec("SELECT VALUE udf.calculateTax(b.price) FROM books b"));
+            client.CreateDocumentQuery<Book>(collectionLink).Select(b => UserDefinedFunctionProvider.Invoke("calculateTax", b.Price));
+            
+            await client.CreateUserDefinedFunctionAsync(collectionLink, new UserDefinedFunction { Id = "toLowerCase", Body = @"function(s) { return s.ToLowerCase(); }" });
+            client.CreateDocumentQuery<Book>(collectionLink, "SELECT * FROM books b WHERE b.toLowerCase = 'war and peace'");
+            client.CreateDocumentQuery<Book>(collectionLink, new SqlQuerySpec(
+                "SELECT * FROM books b WHERE b.toLowerCase = @bookNameLowerCase",
+                new SqlParameterCollection(new SqlParameter[] {new SqlParameter { Name = "@bookNameLowerCase", Value = "War And Peace".ToLower()
+             }})));
+             client.CreateDocumentQuery<Book>(collectionLink).Where(b => UserDefinedFunctionProvider.Invoke("toLowerCase", b.Title) == "war and peace");
+             ]]></code></example>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public UserDefinedFunction ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Documents.UserDefinedFunction.#ctor" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.Documents.UserDefinedFunction" /> class for the Azure DocumentDB database service.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Body">
+      <MemberSignature Language="C#" Value="public string Body { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Body" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.UserDefinedFunction.Body" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="body")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets the body of the user defined function for the Azure DocumentDB database service.
+            </summary>
+        <value>The body of the user defined function.</value>
+        <remarks>This must be a valid JavaScript function e.g. "function (input) { return input.toLowerCase(); }".</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>
