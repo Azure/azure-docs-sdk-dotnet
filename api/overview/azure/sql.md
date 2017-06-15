@@ -41,8 +41,6 @@ dotnet add package System.Data.SqlClient
 
 ## Example
 
-Create a new web app.
-
 ```csharp
 
 using (SqlConnection connection = new SqlConnection(connectionString))
