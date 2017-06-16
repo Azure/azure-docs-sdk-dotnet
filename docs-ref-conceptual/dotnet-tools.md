@@ -61,7 +61,7 @@ Tool (click link to download) | Notes | Docs
 
 Tool (click link to download) | Notes | Docs
 ------------------------------|-------|------
-Azure Cloud Shell | Cloud-hosted command-line Azure tools, including Azure CLI 2.0, .NET Core, and more. | [Read more here...](../../cloud-shell/overview.md)
+Azure Cloud Shell | Cloud-hosted command-line Azure tools, including Azure CLI 2.0, .NET Core, and more. | [Read more here...](/azure/cloud-shell/overview/)
 [Azure CLI 2.0](/cli/azure/install-azure-cli) | Python must be installed on your computer to use the Azure CLI 2.0. | [Read more here...](https://docs.microsoft.com/cli/azure/overview)
 [Azure Powershell](/powershell/azureps-cmdlets-docs/) | Currently Windows-only, coming soon to Linux and Mac. | [Read more here...](/powershell/)
 [Storage Explorer](https://storageexplorer.com/) ([Windows](https://go.microsoft.com/fwlink/?LinkId=698844&clcid=0x409), [Mac](https://go.microsoft.com/fwlink/?LinkId=698845&clcid=0x409), [Linux](https://go.microsoft.com/fwlink/?LinkId=722418&clcid=0x409)) | Standalone app for managing Azure Storage data. Available for Windows, Mac, and Linux. | [Read more here...](https://docs.microsoft.com/api/Redirect/en-us/documentation/articles/vs-azure-tools-storage-manage-with-storage-explorer/)

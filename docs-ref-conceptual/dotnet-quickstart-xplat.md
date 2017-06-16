@@ -49,14 +49,14 @@ cosmosAuthKey=$(az cosmosdb list-keys -n $cosmosdbname -g DotNetAzureTutorial --
 
 ## Download and configure the application
 
-The application you're going to deploy is a [simple to-do app](https://github.com/CamSoper/dotnet-core-todo) written using ASP.NET MVC Core using the CosmosDB client libraries.  Now you'll get the code for this tutorial and configure it with your CosmosDB information.
+The application you're going to deploy is a [simple to-do app](https://github.com/Azure-Samples/dotnet-cosmosdb-quickstart/) written using ASP.NET MVC Core using the CosmosDB client libraries.  Now you'll get the code for this tutorial and configure it with your CosmosDB information.
 
 ```azurecli-interactive
 # Get the code from GitHub
-git clone https://github.com/CamSoper/dotnet-core-todo
+git clone https://github.com/Azure-Samples/dotnet-cosmosdb-quickstart
 
 # Change the working directory
-cd dotnet-core-todo
+cd dotnet-cosmosdb-quickstart
 
 # Replace authKey and endpoint values in appsettings.json
 sed -i "s|AUTHKEYVALUE|$cosmosAuthKey|g" appsettings.json
@@ -67,7 +67,8 @@ git commit -a -m "Modified settings"
 
 ```
 
-> [!NOTE] If you've never run `git commit` in this environment before, you may be prompted to set your identity. Follow the on-screen instructions and then re-run the `git commit` command.
+> [!NOTE]
+> If you've never run `git commit` in this environment before, you may be prompted to set your identity. Follow the on-screen instructions and then re-run the `git commit` command.
 
 Restore the NuGet packages and build the application.
 
@@ -76,7 +77,8 @@ dotnet restore
 dotnet build
 ```
 
-> [!TIP] If you are using the tools on your own machine, you can test the application by running `dotnet run` and browsing to the displayed `localhost` address.  You are not able to browse to this address in the Cloud Shell, however.  
+> [!TIP]
+> If you are using the tools on your own machine, you can test the application by running `dotnet run` and browsing to the displayed `localhost` address.  You are not able to browse to this address in the Cloud Shell, however.  
 
 ## Configure Azure App Service and deploy the web app
 

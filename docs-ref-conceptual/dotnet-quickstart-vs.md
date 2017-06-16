@@ -52,10 +52,10 @@ Make a note of the displayed **authKey**and **endpoint**
 
 Let's get the sample code for this walkthrough and hook it up to our DocumentDB account.
 
-1. Download the sample code.  You can [get it from GitHub](https://github.com/camsoper/dotnet-core-todo), or if you have the [git command line client](https://git-scm.com/), clone it to your local machine with the following command:
+1. Download the sample code.  You can [get it from GitHub](https://github.com/Azure-Samples/dotnet-cosmosdb-quickstart/), or if you have the [git command line client](https://git-scm.com/), clone it to your local machine with the following command:
 
     ```cmd
-    git clone https://github.com/camsoper/dotnet-core-todo
+    git clone https://github.com/Azure-Samples/dotnet-cosmosdb-quickstart
     ```
 
 2. Open **todo.csproj** in Visual Studio.
