@@ -14,7 +14,7 @@ ms.service: multiple
 ms.assetid:
 ---
 
-# Install Azure libraries for .NET
+# Azure libraries for .NET
 
 Use the Azure libraries for .NET to manage, integrate, and consume Azure services in your .NET applications.
 

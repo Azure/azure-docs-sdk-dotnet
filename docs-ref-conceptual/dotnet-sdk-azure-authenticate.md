@@ -14,7 +14,7 @@ ms.service: multiple
 ms.assetid: 
 ---
 
-# Authenticate with the Azure Management Libraries for .NET
+# Authenticate with the Azure Libraries for .NET
 
 ## Connect to services with connection strings
 
