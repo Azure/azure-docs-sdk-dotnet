@@ -2,10 +2,10 @@
 title: Azure Database for PostgreSQL libraries for .NET
 description: Reference documentation for the .NET client libraries for Azure Database for PostgreSQL
 keywords: Azure, .NET ODBC, SDK, API, SQL, ADO.NET, database, PostGres, PostgreSQL 
-author: rloutlaw
-ms.author: routlaw
+author: camsoper
+ms.author: casoper
 manager: douge
-ms.date: 05/17/2017
+ms.date: 06/20/2017
 ms.topic: article
 ms.prod: azure
 ms.technology: azure

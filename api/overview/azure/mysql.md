@@ -5,7 +5,7 @@ keywords: Azure, .NET, SDK, API, SQL, database, MySQL
 author: camsoper
 ms.author: casoper
 manager: douge
-ms.date: 06/12/2017
+ms.date: 06/20/2017
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
