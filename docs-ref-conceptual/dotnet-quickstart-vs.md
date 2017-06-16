@@ -70,7 +70,7 @@ Let's get the sample code for this walkthrough and hook it up to your CosmosDB a
 
 4. Press **F5** to restore the project's NuGet packages, build the project, and run it locally.
 
-The web application should run locally in your browser.  Note the the data you enter in the application is being stored in your CosmosDB account.  You can [view your data in the Azure portal](https://docs.microsoft.com/en-us/azure/documentdb/documentdb-view-json-document-explorer).
+The web application should run locally in your browser.  You can add new items to the to-do list by clicking **Create New**.  Note the data you enter in the application is being stored in your CosmosDB account.  You can [view your data in the Azure portal](https://docs.microsoft.com/en-us/azure/documentdb/documentdb-view-json-document-explorer).
 
 ## Deploying the application as an Azure Web App
 
@@ -91,8 +91,6 @@ You've successfully built an application that uses Azure services like DocumentD
     * Select or create an **App Service Plan** to determine the pricing your your application.  Here's [more information about App Service Plans](/azure/app-service/azure-web-sites-web-hosting-plans-in-depth-overview).
 
 4. Click **Create** to deploy the application.  When deployment is complete, a browser will open with your deployed application.
-
-You can add new items to the to-do list by clicking **Create New**.
 
 ![The completed app](./media/dotnet-quickstart/todo.png)
 
