@@ -5,7 +5,7 @@ keywords: Azure .NET, SDK, Azure .NET API Reference, Azure .NET class library
 author: camsoper
 manager: douge
 ms.author: casoper
-ms.date: 04/04/2017
+ms.date: 06/20/2017
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -121,6 +121,10 @@ The application will be built remotely and deployed.  Test the application by br
 ```azurecli-interactive
 az webapp show -n $webappname -g DotNetAzureTutorial --query defaultHostName -o tsv
 ```
+
+You can add new items to the to-do list by clicking **Create New**.
+
+![The completed app](./media/dotnet-quickstart/todo.png)
 
 ## Clean up
 

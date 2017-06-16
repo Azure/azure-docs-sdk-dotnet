@@ -5,7 +5,7 @@ keywords: Azure .NET, SDK, Azure .NET API Reference, Azure .NET class library
 author: camsoper
 manager: douge
 ms.author: casoper
-ms.date: 04/04/2017
+ms.date: 06/20/2017
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -46,11 +46,11 @@ printf "\n\nauthKey: $cosmosAuthKey\nendpoint: $cosmosEndpoint\n\n"
 
 ```
 
-Make a note of the displayed **authKey**and **endpoint** 
+Make a note of the displayed **authKey** and **endpoint** 
 
 ## Downloading and running the application
 
-Let's get the sample code for this walkthrough and hook it up to our DocumentDB account.
+Let's get the sample code for this walkthrough and hook it up to your CosmosDB account.
 
 1. Download the sample code.  You can [get it from GitHub](https://github.com/Azure-Samples/dotnet-cosmosdb-quickstart/), or if you have the [git command line client](https://git-scm.com/), clone it to your local machine with the following command:
 
@@ -91,6 +91,10 @@ You've successfully built an application that uses Azure services like DocumentD
     * Select or create an **App Service Plan** to determine the pricing your your application.  Here's [more information about App Service Plans](/azure/app-service/azure-web-sites-web-hosting-plans-in-depth-overview).
 
 4. Click **Create** to deploy the application.  When deployment is complete, a browser will open with your deployed application.
+
+You can add new items to the to-do list by clicking **Create New**.
+
+![The completed app](./media/dotnet-quickstart/todo.png)
 
 ## Clean up
 
