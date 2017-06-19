@@ -5,7 +5,7 @@ keywords: Azure, .NET, SDK, API, NuGet
 author: camsoper
 ms.author: casoper
 manager: douge
-ms.date: 05/08/2017
+ms.date: 06/20/2017
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -14,7 +14,7 @@ ms.service: multiple
 ms.assetid:
 ---
 
-# Install Azure libraries for .NET
+# Azure libraries for .NET
 
 Use the Azure libraries for .NET to manage, integrate, and consume Azure services in your .NET applications.
 
@@ -122,7 +122,9 @@ Service | Package
 [IoT Hub](/azure/iot-hub/) | [Microsoft.Azure.Devices](https://www.nuget.org/packages/Microsoft.Azure.Devices)&nbsp;<b>&#42;</b><br/>[Microsoft.Azure.Devices.Client](https://www.nuget.org/packages/Microsoft.Azure.Devices.Client)
 [Key Vault](/azure/key-vault/) | [Microsoft.Azure.KeyVault](https://www.nuget.org/packages/Microsoft.Azure.KeyVault)
 [Media Services](/azure/media-services/) | [windowsazure.mediaservices.extensions](https://www.nuget.org/packages/windowsazure.mediaservices.extensions)&nbsp;<b>&#42;</b> 
+[MySQL](/azure/MySQL/) | [MySql.Data](https://www.nuget.org/packages/MySql.Data)
 [Notification Hubs](/azure/notification-hubs/) | [Microsoft.Azure.NotificationHubs](https://www.nuget.org/packages/Microsoft.Azure.NotificationHubs)&nbsp;<b>&#42;</b><br/>[WindowsAzure.Messaging.Managed](https://www.nuget.org/packages/WindowsAzure.Messaging.Managed)&nbsp;<b>&#42;</b>
+[PostgreSQL](/azure/postgresql/) | [Npgsql](https://www.nuget.org/packages/Npgsql/)
 [Redis Cache](/azure/redis-cache/) | [StackExchange.Redis](https://www.nuget.org/packages/StackExchange.Redis/)
 [Search](/azure/search/) | [Microsoft.Azure.Search](https://www.nuget.org/packages/Microsoft.Azure.Search)&nbsp;<b>&#42;</b>
 [Service Bus](/azure/service-bus/) | [WindowsAzure.ServiceBus](https://www.nuget.org/packages/WindowsAzure.ServiceBus)&nbsp;<b>&#42;</b>
