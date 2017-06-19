@@ -45,7 +45,29 @@ ms.service: multiple
             </div>
         </div>
     </li>
+    <li>
+        <div class="cardSize">
+            <div class="cardPadding">
+                <div class="card">
+                    <div class="cardText">
+                        <a href="https://www.visualstudio.com/docs/build/get-started/aspnet-4-ci-cd-azure-automatic">
+                            <h2>VSTS CI/CD</h2>
+                            <span>Use VSTS to deploy apps to Azure.</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
 </ul>
+
+## Five-minute quickstarts
+
+Create and deploy an app using your favorite tools in five minutes.
+
+* [App Service](/azure/app-service-web/app-service-web-get-started-dotnet?toc=%2fdotnet%2fazure%2ftoc.json&bc=%2fdotnet%2fazure_breadcrumb%2ftoc.json)
+* [SQL Database](/azure/sql-database/sql-database-connect-query-dotnet?toc=%2fdotnet%2fazure%2ftoc.json&bc=%2fdotnet%2fazure_breadcrumb%2ftoc.json)
+* [CosmosDB](/azure/cosmos-db/documentdb-dotnet-application?toc=%2fdotnet%2fazure%2ftoc.json&bc=%2fdotnet%2fazure_breadcrumb%2ftoc.json)
 
 ## Manage Azure resources
 
@@ -67,19 +89,12 @@ var windowsVM = azure.VirtualMachines.Define(windowsVmName)
 
 [Get started with the Azure management libraries for .NET](dotnet-sdk-azure-get-started.md)
 
-## Five-minute quickstarts
 
-Create and deploy an app using your favorite tools in five minutes.
+## Tutorials
 
-* [Visual Studio](dotnet-quickstart-vs.md)
-* [Command line](dotnet-quickstart-xplat.md)
+Learn how to use Azure services and tools in your .NET apps.
 
-## Tutorials and samples
-
-Complete walkthroughs for app creation and deployment.
-
-* [App Service](/azure/app-service-web/app-service-web-get-started-dotnet?toc=%2fdotnet%2fazure%2ftoc.json&bc=%2fdotnet%2fazure_breadcrumb%2ftoc.json)
-* [SQL Database](/azure/sql-database/sql-database-connect-query-dotnet?toc=%2fdotnet%2fazure%2ftoc.json&bc=%2fdotnet%2fazure_breadcrumb%2ftoc.json)
-* [CosmosDB](/azure/cosmos-db/documentdb-dotnet-application?toc=%2fdotnet%2fazure%2ftoc.json&bc=%2fdotnet%2fazure_breadcrumb%2ftoc.json)
+* [Deploy from Visual Studio](dotnet-quickstart-vs.md)
+* [Deploy from the command line](dotnet-quickstart-xplat.md)
 * [Azure Storage](/azure/storage/storage-dotnet-how-to-use-blob-storage?toc=%2fdotnet%2fazure%2ftoc.json&bc=%2fdotnet%2fazure_breadcrumb%2ftoc.json)
 * [Redis Cache](/azure/redis-cache/cache-web-app-howto?toc=%2fdotnet%2fazure%2ftoc.json&bc=%2fdotnet%2fazure_breadcrumb%2ftoc.json)
