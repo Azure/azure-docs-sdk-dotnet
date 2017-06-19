@@ -5,7 +5,7 @@ keywords: Azure, .NET, SDK, API, authentication, active directory, service princ
 author: camsoper
 ms.author: casoper
 manager: douge
-ms.date: 05/08/2017
+ms.date: 06/20/2017
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -14,7 +14,7 @@ ms.service: multiple
 ms.assetid: 
 ---
 
-# Authenticate with the Azure Management Libraries for .NET
+# Authenticate with the Azure Libraries for .NET
 
 ## Connect to services with connection strings
 
@@ -72,7 +72,7 @@ var account = CloudStorageAccount.Parse(storageConnectionString);
 // Do things with the account here...
 ```
 
-Other libraries require your application to run with a [service prinicpal](https://docs.microsoft.com/azure/active-directory/develop/active-directory-application-objects) authorizing the application to run with granted credentials. This configuration is similar to the object-based authentication steps for the management library listed below.
+Other libraries require your application to run with a [service principal](https://docs.microsoft.com/azure/active-directory/develop/active-directory-application-objects) authorizing the application to run with granted credentials. This configuration is similar to the object-based authentication steps for the management library listed below.
 
 ## <a name="mgmt-auth"></a>Azure management libraries for .NET authentication
 

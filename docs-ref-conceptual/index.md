@@ -1,28 +1,55 @@
 ---
-title: Azure libraries for .NET
-description: Overview of the Azure SDK for .NET
+title: Azure for .NET developers - Tutorials, API Reference | Microsoft Docs
+description: Tools, SDKs, tutorials, and samples to help you create and deploy .NET apps to Azure.
 keywords: Azure, .NET, SDK, API, NuGet
 author: camsoper
 ms.author: casoper
 manager: douge
-ms.date: 05/08/2017
+layout: LandingPage
+ms.date: 06/20/2017
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
 ms.service: multiple
-ms.assetid: 
 ---
 
-# Azure libraries for .NET
+# Azure for .NET developers
 
-The Azure libraries for .NET let you use Azure services and manage Azure resources from your application code. The libraries are available as [NuGet packages](dotnet-sdk-azure-install.md) for use in your .NET projects. 
+<ul class="panelContent">
+    <li> 
+        <div class="cardSize">
+            <div class="cardPadding">
+                <div class="card">
+                    <div class="cardText">
+                        <a href="dotnet-tools.md">
+                            <h2>Tools</h2>
+                            <span>Download Azure tools and plugins.</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="cardSize">
+            <div class="cardPadding">
+                <div class="card">
+                    <div class="cardText">
+                        <a href="dotnet-sdk-azure-install.md">
+                            <h2>Libraries</h2>
+                            <span>Use services and manage Azure resources.</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+</ul>
 
 ## Manage Azure resources
 
-The Azure libraries for .NET let you create and manage Azure resources from your .NET applications.
-
-Many of the packages for managing Azure resources have a [fluent](dotnet-sdk-azure-concepts.md) interface to configure resources exactly to your specifications. For example, to create a Windows VM you would write the following code:
+Import the [Azure management libraries for .NET](dotnet-sdk-azure-install.md) to manage your Azure resources with an easy-to-use [fluent API](dotnet-sdk-azure-concepts.md). 
 
 ```csharp
 var windowsVM = azure.VirtualMachines.Define(windowsVmName)
@@ -38,20 +65,21 @@ var windowsVM = azure.VirtualMachines.Define(windowsVmName)
     .Create();
  ```
 
-Review the [install instructions](dotnet-sdk-azure-install.md) to start using the libraries immediately with your projects. Then read the [get started article](dotnet-sdk-azure-get-started.md) to set up authentication and run sample code against your own Azure subscription.  The [concepts article](dotnet-sdk-azure-concepts.md) goes into the conventions the SDK uses and how to leverage them to simplify your application code. New features, breaking changes, and migration instructions are available in the [release notes](dotnet-sdk-azure-release-notes.md).
+[Get started with the Azure management libraries for .NET](dotnet-sdk-azure-get-started.md)
 
-## Consume Azure services
+## Five-minute quickstarts
 
-In addition to using .NET APIs to create and programmatically manage resources within Azure, you can also then use .NET APIs to connect your applications to these resources and use them at runtime.  For example, you might connect to a SQL Database or store data within Azure Storage.  You can identify which NuGet package to use for a particular Azure service by browsing our [full list of NuGet packages](dotnet-sdk-azure-install.md#data).  Check out the [.NET developer center](https://azure.microsoft.com/develop/net/) to learn more about building .NET apps with Azure services.
+Create and deploy an app using your favorite tools in five minutes.
 
-## Samples
+* [Visual Studio](dotnet-quickstart-vs.md)
+* [Command line](dotnet-quickstart-xplat.md)
 
-The following samples cover common automation tasks with the Azure libraries for .NET:
+## Tutorials and samples
 
-- [Virtual machines](dotnet-sdk-azure-virtual-machine-samples.md)
-- [Web apps](dotnet-sdk-azure-web-apps-samples.md)
-- [SQL Database](dotnet-sdk-azure-sql-database-samples.md)
+Complete walkthroughs for app creation and deployment.
 
-A unified [reference](/dotnet/api/overview/azure/?view=azure-dotnet) is available for all packages in both the service and management libraries. New features, breaking changes, and migration instructions are available in the [release notes](dotnet-sdk-azure-release-notes.md).
-
-[!include[Contribute and community](includes/contribute.md)]
+* [App Service](/azure/app-service-web/app-service-web-get-started-dotnet?toc=%2fdotnet%2fazure%2ftoc.json&bc=%2fdotnet%2fazure_breadcrumb%2ftoc.json)
+* [SQL Database](/azure/sql-database/sql-database-connect-query-dotnet?toc=%2fdotnet%2fazure%2ftoc.json&bc=%2fdotnet%2fazure_breadcrumb%2ftoc.json)
+* [CosmosDB](/azure/cosmos-db/documentdb-dotnet-application?toc=%2fdotnet%2fazure%2ftoc.json&bc=%2fdotnet%2fazure_breadcrumb%2ftoc.json)
+* [Azure Storage](/azure/storage/storage-dotnet-how-to-use-blob-storage?toc=%2fdotnet%2fazure%2ftoc.json&bc=%2fdotnet%2fazure_breadcrumb%2ftoc.json)
+* [Redis Cache](/azure/redis-cache/cache-web-app-howto?toc=%2fdotnet%2fazure%2ftoc.json&bc=%2fdotnet%2fazure_breadcrumb%2ftoc.json)

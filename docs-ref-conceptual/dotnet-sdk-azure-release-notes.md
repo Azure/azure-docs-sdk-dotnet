@@ -10,7 +10,7 @@ ms.service: Azure
 ms.devlang: dotnet
 ms.topic: reference
 ms.technology: Azure
-ms.date: 05/08/2017
+ms.date: 06/20/2017
 ---
 
 # Release Notes 
