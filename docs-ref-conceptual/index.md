@@ -68,7 +68,7 @@ ms.service: multiple
                         </div>
                         <div class="cardText">
                             <h3 style="margin-bottom: 0; font-size: 24px">Team Services CI/CD</h3>
-                            <p style="font-size: 1rem">Deploy to Azure with Visual Studio Team Services.</p>
+                            <p style="font-size: 1rem">Deploy with Visual Studio Team Services.</p>
                         </div>
                     </div>
                 </div>
