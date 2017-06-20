@@ -21,15 +21,16 @@ ms.service: multiple
         <a href="dotnet-tools.md">
             <div class="cardSize">
                 <div class="cardPadding">
-                    <div class="card">
+
+                    <div class="card" style="height: 84px">
                         <div class="cardImageOuter">
-                            <div class="cardImage">
+                            <div class="cardImage" style="margin-top: 12px">
                                 <img src="/media/common/i_tools.svg" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
-                            <h2>Tools</h2>
-                            Download Azure tools and plugins.
+                            <h3 style="margin-bottom: 0; font-size: 24px">Tools</h3>
+                            <p style="font-size: 1rem">Download Azure tools and plugins.</p>
                         </div>
                     </div>
                 </div>
@@ -40,15 +41,15 @@ ms.service: multiple
         <a href="dotnet-sdk-azure-install.md">
             <div class="cardSize">
                 <div class="cardPadding">
-                    <div class="card">
+                    <div class="card" style="height: 84px">
                         <div class="cardImageOuter">
-                            <div class="cardImage">
+                            <div class="cardImage" style="margin-top: 12px">
                                 <img src="/media/common/i_reference.svg" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
-                            <h2>Libraries</h2>
-                            Use services and manage Azure resources.
+                            <h3 style="margin-bottom: 0; font-size: 24px">Libraries</h3>
+                            <p style="font-size: 1rem">Use services and manage Azure resources.</p>
                         </div>
                     </div>
                 </div>
@@ -59,15 +60,15 @@ ms.service: multiple
         <a href="https://docs.microsoft.com/azure/virtual-machines/windows/tutorial-vsts-iis-cicd">
             <div class="cardSize">
                 <div class="cardPadding">
-                    <div class="card">
+                    <div class="card" style="height: 84px">
                         <div class="cardImageOuter">
-                            <div class="cardImage">
+                            <div class="cardImage" style="margin-top: 12px">
                                 <img src="/media/common/i_deploy.svg" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
-                            <h2>Jenkins CI/CD</h2>
-                            Use Jenkins to deploy apps to Azure.
+                            <h3 style="margin-bottom: 0; font-size: 24px">Jenkins CI/CD</h3>
+                            <p style="font-size: 1rem">Use Jenkins to deploy apps to Azure.</p>
                         </div>
                     </div>
                 </div>
@@ -76,13 +77,13 @@ ms.service: multiple
     </li>
 </ul>
 
-## Five-minute quickstarts
+## Five-minute Quickstarts
 
-Create and deploy a sample app in five minutes.
+Learn how to build .NET apps with Azure services.
 
-* [App Service](/azure/app-service-web/app-service-web-get-started-dotnet)
-* [SQL Database](/azure/sql-database/sql-database-connect-query-dotnet)
-* [CosmosDB](/azure/cosmos-db/documentdb-dotnet-application)
+* [Deploy a ASP.NET webapp](/azure/app-service-web/app-service-web-get-started-dotnet)
+* [Connect to Azure SQL Database](/azure/sql-database/sql-database-connect-query-dotnet)
+* [Build a NoSQL app with CosmosDB](/azure/cosmos-db/documentdb-dotnet-application)
 
 ## Free PluralSight video training
 
@@ -133,5 +134,4 @@ var windowsVM = azure.VirtualMachines.Define(windowsVmName)
 
 Learn how to use Azure services and tools in your .NET apps.
 
-* [Azure Storage](/azure/storage/storage-dotnet-how-to-use-blob-storage)
-* [Redis Cache](/azure/redis-cache/cache-web-app-howto)
+* [ASP.NET with SQL Database](/azure/app-service-web/app-service-web-tutorial-dotnet-sqldatabase)
