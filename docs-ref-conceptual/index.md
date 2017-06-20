@@ -16,58 +16,97 @@ ms.service: multiple
 
 # Azure for .NET developers
 
-<ul class="panelContent">
-    <li> 
-        <div class="cardSize">
-            <div class="cardPadding">
-                <div class="card">
-                    <div class="cardText">
-                        <a href="dotnet-tools.md">
-                            <h2>Tools</h2>
-                            <span>Download Azure tools and plugins.</span>
-                        </a>
+<ul class="cardsY panelContent">
+    <li>
+        <a href="dotnet-tools.md">
+            <div class="cardSize">
+                <div class="cardPadding">
+                    <div class="card" style="height: 84px">
+                        <div class="cardImageOuter">
+                            <div class="cardImage" style="margin-top: 12px">
+                                <img src="/media/common/i_tools.svg" alt="" />
+                            </div>
+                        </div>
+                        <div class="cardText">
+                            <h3 style="margin-bottom: 0; font-size: 24px">Tools</h3>
+                            <p style="font-size: 1rem">Download Azure tools and plugins.</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </a>
     </li>
     <li>
-        <div class="cardSize">
-            <div class="cardPadding">
-                <div class="card">
-                    <div class="cardText">
-                        <a href="dotnet-sdk-azure-install.md">
-                            <h2>Libraries</h2>
-                            <span>Use services and manage Azure resources.</span>
-                        </a>
+        <a href="dotnet-sdk-azure-install.md">
+            <div class="cardSize">
+                <div class="cardPadding">
+                    <div class="card" style="height: 84px">
+                        <div class="cardImageOuter">
+                            <div class="cardImage" style="margin-top: 12px">
+                                <img src="/media/common/i_reference.svg" alt="" />
+                            </div>
+                        </div>
+                        <div class="cardText">
+                            <h3 style="margin-bottom: 0; font-size: 24px">Libraries</h3>
+                            <p style="font-size: 1rem">Use services and manage Azure resources.</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </a>
     </li>
     <li>
-        <div class="cardSize">
-            <div class="cardPadding">
-                <div class="card">
-                    <div class="cardText">
-                        <a href="https://www.visualstudio.com/docs/build/get-started/aspnet-4-ci-cd-azure-automatic">
-                            <h2>VSTS CI/CD</h2>
-                            <span>Use VSTS to deploy apps to Azure.</span>
-                        </a>
+        <a href="https://docs.microsoft.com/azure/virtual-machines/windows/tutorial-vsts-iis-cicd">
+            <div class="cardSize">
+                <div class="cardPadding">
+                    <div class="card" style="height: 84px">
+                        <div class="cardImageOuter">
+                            <div class="cardImage" style="margin-top: 12px">
+                                <img src="/media/common/i_deploy.svg" alt="" />
+                            </div>
+                        </div>
+                        <div class="cardText">
+                            <h3 style="margin-bottom: 0; font-size: 24px">Jenkins CI/CD</h3>
+                            <p style="font-size: 1rem">Use Jenkins to deploy apps to Azure.</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </a>
     </li>
 </ul>
 
-## Five-minute quickstarts
+## Five-minute Quickstarts
 
-Create and deploy an app using your favorite tools in five minutes.
+Learn how to build .NET apps with Azure services.
 
-* [App Service](/azure/app-service-web/app-service-web-get-started-dotnet?toc=%2fdotnet%2fazure%2ftoc.json&bc=%2fdotnet%2fazure_breadcrumb%2ftoc.json)
-* [SQL Database](/azure/sql-database/sql-database-connect-query-dotnet?toc=%2fdotnet%2fazure%2ftoc.json&bc=%2fdotnet%2fazure_breadcrumb%2ftoc.json)
-* [CosmosDB](/azure/cosmos-db/documentdb-dotnet-application?toc=%2fdotnet%2fazure%2ftoc.json&bc=%2fdotnet%2fazure_breadcrumb%2ftoc.json)
+* [Deploy a ASP.NET webapp](/azure/app-service-web/app-service-web-get-started-dotnet)
+* [Connect to Azure SQL Database](/azure/sql-database/sql-database-connect-query-dotnet)
+* [Build a NoSQL app with CosmosDB](/azure/cosmos-db/documentdb-dotnet-application)
+
+## Free PluralSight video training
+
+<ul class="panelContent cardsW">
+   <li>
+      <div class="cardSize">
+         <div class="cardPadding">
+            <div class="card">
+               <div class="cardImageOuter">
+                  <div class="cardImage">
+                     <a href="https://www.pluralsight.com/courses/developing-dotnet-microsoft-azure-getting-started?twoid=d6abac77-7dcc-4d33-9e03-f85e78989f02" data-linktype="external">
+                     <img alt="" src="https://docs.microsoft.com/azure/app-service-web/media/index/video-training-dotnet.png" data-linktype="external"></a>
+                  </div>
+               </div>
+               <div class="cardText">
+                  <p>
+                     <a href="https://www.pluralsight.com/courses/developing-dotnet-microsoft-azure-getting-started?twoid=d6abac77-7dcc-4d33-9e03-f85e78989f02" data-linktype="external">Developing with .NET</a>
+                  </p>
+               </div>
+            </div>
+         </div>
+      </div>
+   </li>
+</ul>
 
 ## Manage Azure resources
 
@@ -94,7 +133,4 @@ var windowsVM = azure.VirtualMachines.Define(windowsVmName)
 
 Learn how to use Azure services and tools in your .NET apps.
 
-* [Deploy from Visual Studio](dotnet-quickstart-vs.md)
-* [Deploy from the command line](dotnet-quickstart-xplat.md)
-* [Azure Storage](/azure/storage/storage-dotnet-how-to-use-blob-storage?toc=%2fdotnet%2fazure%2ftoc.json&bc=%2fdotnet%2fazure_breadcrumb%2ftoc.json)
-* [Redis Cache](/azure/redis-cache/cache-web-app-howto?toc=%2fdotnet%2fazure%2ftoc.json&bc=%2fdotnet%2fazure_breadcrumb%2ftoc.json)
+* [ASP.NET with SQL Database](/azure/app-service-web/app-service-web-tutorial-dotnet-sqldatabase)
