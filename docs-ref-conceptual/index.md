@@ -24,7 +24,7 @@ ms.service: multiple
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage">
-                                <img src="media/common/i_tools.svg" alt="" />
+                                <img src="/media/common/i_tools.svg" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
@@ -43,7 +43,7 @@ ms.service: multiple
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage">
-                                <img src="media/common/i_reference.svg" alt="" />
+                                <img src="/media/common/i_reference.svg" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
@@ -62,7 +62,7 @@ ms.service: multiple
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage">
-                                <img src="media/common/i_deploy.svg" alt="" />
+                                <img src="/media/common/i_deploy.svg" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
