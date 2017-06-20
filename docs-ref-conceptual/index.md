@@ -110,7 +110,7 @@ Create and deploy a sample app in five minutes.
 
 ## Manage Azure resources
 
-Install our easy-to-use fluent [.NET APIs](otnet-sdk-azure-install.md) to manage Azure resources. 
+Install our easy-to-use fluent [.NET APIs](dotnet-sdk-azure-install.md) to manage Azure resources. 
 
 ```csharp
 var windowsVM = azure.VirtualMachines.Define(windowsVmName)
