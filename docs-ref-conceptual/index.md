@@ -1,28 +1,117 @@
 ---
-title: Azure libraries for .NET
-description: Overview of the Azure SDK for .NET
+title: Azure for .NET developers - Tutorials, API Reference | Microsoft Docs
+description: Tools, SDKs, tutorials, and samples to help you create and deploy .NET apps to Azure.
 keywords: Azure, .NET, SDK, API, NuGet
 author: camsoper
 ms.author: casoper
 manager: douge
-ms.date: 05/08/2017
+layout: LandingPage
+ms.date: 06/20/2017
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
 ms.service: multiple
-ms.assetid: 
 ---
 
-# Azure libraries for .NET
+# Azure for .NET developers
 
-The Azure libraries for .NET let you use Azure services and manage Azure resources from your application code. The libraries are available as [NuGet packages](dotnet-sdk-azure-install.md) for use in your .NET projects. 
+<ul class="cardsY panelContent">
+    <li>
+        <a href="dotnet-tools.md">
+            <div class="cardSize">
+                <div class="cardPadding">
+
+                    <div class="card" style="height: 84px">
+                        <div class="cardImageOuter">
+                            <div class="cardImage" style="margin-top: 12px">
+                                <img src="/media/common/i_tools.svg" alt="" />
+                            </div>
+                        </div>
+                        <div class="cardText">
+                            <h3 style="margin-bottom: 0; font-size: 24px">Tools</h3>
+                            <p style="font-size: 1rem">Download Azure tools and plugins.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </li>
+    <li>
+        <a href="dotnet-sdk-azure-install.md">
+            <div class="cardSize">
+                <div class="cardPadding">
+                    <div class="card" style="height: 84px">
+                        <div class="cardImageOuter">
+                            <div class="cardImage" style="margin-top: 12px">
+                                <img src="/media/common/i_reference.svg" alt="" />
+                            </div>
+                        </div>
+                        <div class="cardText">
+                            <h3 style="margin-bottom: 0; font-size: 24px">Libraries</h3>
+                            <p style="font-size: 1rem">Use services and manage Azure resources.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </li>
+    <li>
+        <a href="https://docs.microsoft.com/azure/virtual-machines/windows/tutorial-vsts-iis-cicd">
+            <div class="cardSize">
+                <div class="cardPadding">
+                    <div class="card" style="height: 84px">
+                        <div class="cardImageOuter">
+                            <div class="cardImage" style="margin-top: 12px">
+                                <img src="/media/common/i_deploy.svg" alt="" />
+                            </div>
+                        </div>
+                        <div class="cardText">
+                            <h3 style="margin-bottom: 0; font-size: 24px">Jenkins CI/CD</h3>
+                            <p style="font-size: 1rem">Use Jenkins to deploy apps to Azure.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </li>
+</ul>
+
+## Five-minute Quickstarts
+
+Learn how to build .NET apps with Azure services.
+
+* [Deploy a ASP.NET webapp](/azure/app-service-web/app-service-web-get-started-dotnet)
+* [Connect to Azure SQL Database](/azure/sql-database/sql-database-connect-query-dotnet)
+* [Build a NoSQL app with CosmosDB](/azure/cosmos-db/documentdb-dotnet-application)
+
+## Free PluralSight video training
+
+<ul class="panelContent cardsW">
+   <li>
+      <div class="cardSize">
+         <div class="cardPadding">
+            <div class="card">
+               <div class="cardImageOuter">
+                  <div class="cardImage">
+                     <a href="https://www.pluralsight.com/courses/developing-dotnet-microsoft-azure-getting-started?twoid=d6abac77-7dcc-4d33-9e03-f85e78989f02" data-linktype="external">
+                     <img alt="" src="https://docs.microsoft.com/azure/app-service-web/media/index/video-training-dotnet.png" data-linktype="external"></a>
+                  </div>
+               </div>
+               <div class="cardText">
+                  <p>
+                     <a href="https://www.pluralsight.com/courses/developing-dotnet-microsoft-azure-getting-started?twoid=d6abac77-7dcc-4d33-9e03-f85e78989f02" data-linktype="external">Developing with .NET</a>
+                  </p>
+               </div>
+            </div>
+         </div>
+      </div>
+   </li>
+</ul>
 
 ## Manage Azure resources
 
-The Azure libraries for .NET let you create and manage Azure resources from your .NET applications.
-
-Many of the packages for managing Azure resources have a [fluent](dotnet-sdk-azure-concepts.md) interface to configure resources exactly to your specifications. For example, to create a Windows VM you would write the following code:
+Install our easy-to-use fluent [.NET APIs](dotnet-sdk-azure-install.md) to manage Azure resources. 
 
 ```csharp
 var windowsVM = azure.VirtualMachines.Define(windowsVmName)
@@ -38,20 +127,11 @@ var windowsVM = azure.VirtualMachines.Define(windowsVmName)
     .Create();
  ```
 
-Review the [install instructions](dotnet-sdk-azure-install.md) to start using the libraries immediately with your projects. Then read the [get started article](dotnet-sdk-azure-get-started.md) to set up authentication and run sample code against your own Azure subscription.  The [concepts article](dotnet-sdk-azure-concepts.md) goes into the conventions the SDK uses and how to leverage them to simplify your application code. New features, breaking changes, and migration instructions are available in the [release notes](dotnet-sdk-azure-release-notes.md).
+[Get started with the Azure management libraries for .NET](dotnet-sdk-azure-get-started.md)
 
-## Consume Azure services
 
-In addition to using .NET APIs to create and programmatically manage resources within Azure, you can also then use .NET APIs to connect your applications to these resources and use them at runtime.  For example, you might connect to a SQL Database or store data within Azure Storage.  You can identify which NuGet package to use for a particular Azure service by browsing our [full list of NuGet packages](dotnet-sdk-azure-install.md#data).  Check out the [.NET developer center](https://azure.microsoft.com/develop/net/) to learn more about building .NET apps with Azure services.
+## Tutorials
 
-## Samples
+Learn how to use Azure services and tools in your .NET apps.
 
-The following samples cover common automation tasks with the Azure libraries for .NET:
-
-- [Virtual machines](dotnet-sdk-azure-virtual-machine-samples.md)
-- [Web apps](dotnet-sdk-azure-web-apps-samples.md)
-- [SQL Database](dotnet-sdk-azure-sql-database-samples.md)
-
-A unified [reference](/dotnet/api/overview/azure/?view=azure-dotnet) is available for all packages in both the service and management libraries. New features, breaking changes, and migration instructions are available in the [release notes](dotnet-sdk-azure-release-notes.md).
-
-[!include[Contribute and community](includes/contribute.md)]
+* [ASP.NET with SQL Database](/azure/app-service-web/app-service-web-tutorial-dotnet-sqldatabase)
