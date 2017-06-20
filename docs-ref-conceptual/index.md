@@ -133,5 +133,4 @@ var windowsVM = azure.VirtualMachines.Define(windowsVmName)
 
 Learn how to use Azure services and tools in your .NET apps.
 
-* [Azure Storage](/azure/storage/storage-dotnet-how-to-use-blob-storage)
-* [Redis Cache](/azure/redis-cache/cache-web-app-howto)
+* [ASP.NET with SQL Database](/azure/app-service-web/app-service-web-tutorial-dotnet-sqldatabase)
