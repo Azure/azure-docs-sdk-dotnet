@@ -78,11 +78,11 @@ ms.service: multiple
 
 ## Five-minute quickstarts
 
-Create and deploy an app using your favorite tools in five minutes.
+Create and deploy a sample app in five minutes.
 
-* [App Service](/azure/app-service-web/app-service-web-get-started-dotnet?toc=%2fdotnet%2fazure%2ftoc.json&bc=%2fdotnet%2fazure_breadcrumb%2ftoc.json)
-* [SQL Database](/azure/sql-database/sql-database-connect-query-dotnet?toc=%2fdotnet%2fazure%2ftoc.json&bc=%2fdotnet%2fazure_breadcrumb%2ftoc.json)
-* [CosmosDB](/azure/cosmos-db/documentdb-dotnet-application?toc=%2fdotnet%2fazure%2ftoc.json&bc=%2fdotnet%2fazure_breadcrumb%2ftoc.json)
+* [App Service](/azure/app-service-web/app-service-web-get-started-dotnet)
+* [SQL Database](/azure/sql-database/sql-database-connect-query-dotnet)
+* [CosmosDB](/azure/cosmos-db/documentdb-dotnet-application)
 
 ## Free PluralSight video training
 
@@ -110,7 +110,7 @@ Create and deploy an app using your favorite tools in five minutes.
 
 ## Manage Azure resources
 
-Import the [Azure management libraries for .NET](dotnet-sdk-azure-install.md) to manage your Azure resources with an easy-to-use [fluent API](dotnet-sdk-azure-concepts.md). 
+Install our easy-to-use fluent [.NET APIs](otnet-sdk-azure-install.md) to manage Azure resources. 
 
 ```csharp
 var windowsVM = azure.VirtualMachines.Define(windowsVmName)
