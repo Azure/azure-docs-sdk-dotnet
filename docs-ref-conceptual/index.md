@@ -21,6 +21,7 @@ ms.service: multiple
         <a href="dotnet-tools.md">
             <div class="cardSize">
                 <div class="cardPadding">
+
                     <div class="card" style="height: 84px">
                         <div class="cardImageOuter">
                             <div class="cardImage" style="margin-top: 12px">
@@ -110,7 +111,7 @@ Learn how to build .NET apps with Azure services.
 
 ## Manage Azure resources
 
-Import the [Azure management libraries for .NET](dotnet-sdk-azure-install.md) to manage your Azure resources with an easy-to-use [fluent API](dotnet-sdk-azure-concepts.md). 
+Install our easy-to-use fluent [.NET APIs](dotnet-sdk-azure-install.md) to manage Azure resources. 
 
 ```csharp
 var windowsVM = azure.VirtualMachines.Define(windowsVmName)
