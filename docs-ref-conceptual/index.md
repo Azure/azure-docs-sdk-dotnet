@@ -16,62 +16,101 @@ ms.service: multiple
 
 # Azure for .NET developers
 
-<ul class="panelContent">
-    <li> 
-        <div class="cardSize">
-            <div class="cardPadding">
-                <div class="card">
-                    <div class="cardText">
-                        <a href="dotnet-tools.md">
+<ul class="cardsY panelContent">
+    <li>
+        <a href="dotnet-tools.md">
+            <div class="cardSize">
+                <div class="cardPadding">
+                    <div class="card">
+                        <div class="cardImageOuter">
+                            <div class="cardImage">
+                                <img src="/media/common/i_tools.svg" alt="" />
+                            </div>
+                        </div>
+                        <div class="cardText">
                             <h2>Tools</h2>
-                            <span>Download Azure tools and plugins.</span>
-                        </a>
+                            Download Azure tools and plugins.
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </a>
     </li>
     <li>
-        <div class="cardSize">
-            <div class="cardPadding">
-                <div class="card">
-                    <div class="cardText">
-                        <a href="dotnet-sdk-azure-install.md">
+        <a href="dotnet-sdk-azure-install.md">
+            <div class="cardSize">
+                <div class="cardPadding">
+                    <div class="card">
+                        <div class="cardImageOuter">
+                            <div class="cardImage">
+                                <img src="/media/common/i_reference.svg" alt="" />
+                            </div>
+                        </div>
+                        <div class="cardText">
                             <h2>Libraries</h2>
-                            <span>Use services and manage Azure resources.</span>
-                        </a>
+                            Use services and manage Azure resources.
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </a>
     </li>
     <li>
-        <div class="cardSize">
-            <div class="cardPadding">
-                <div class="card">
-                    <div class="cardText">
-                        <a href="https://www.visualstudio.com/docs/build/get-started/aspnet-4-ci-cd-azure-automatic">
-                            <h2>VSTS CI/CD</h2>
-                            <span>Use VSTS to deploy apps to Azure.</span>
-                        </a>
+        <a href="https://docs.microsoft.com/azure/virtual-machines/windows/tutorial-vsts-iis-cicd">
+            <div class="cardSize">
+                <div class="cardPadding">
+                    <div class="card">
+                        <div class="cardImageOuter">
+                            <div class="cardImage">
+                                <img src="/media/common/i_deploy.svg" alt="" />
+                            </div>
+                        </div>
+                        <div class="cardText">
+                            <h2>Jenkins CI/CD</h2>
+                            Use Jenkins to deploy apps to Azure.
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </a>
     </li>
 </ul>
 
 ## Five-minute quickstarts
 
-Create and deploy an app using your favorite tools in five minutes.
+Create and deploy a sample app in five minutes.
 
-* [App Service](/azure/app-service-web/app-service-web-get-started-dotnet?toc=%2fdotnet%2fazure%2ftoc.json&bc=%2fdotnet%2fazure_breadcrumb%2ftoc.json)
-* [SQL Database](/azure/sql-database/sql-database-connect-query-dotnet?toc=%2fdotnet%2fazure%2ftoc.json&bc=%2fdotnet%2fazure_breadcrumb%2ftoc.json)
-* [CosmosDB](/azure/cosmos-db/documentdb-dotnet-application?toc=%2fdotnet%2fazure%2ftoc.json&bc=%2fdotnet%2fazure_breadcrumb%2ftoc.json)
+* [App Service](/azure/app-service-web/app-service-web-get-started-dotnet)
+* [SQL Database](/azure/sql-database/sql-database-connect-query-dotnet)
+* [CosmosDB](/azure/cosmos-db/documentdb-dotnet-application)
+
+## Free PluralSight video training
+
+<ul class="panelContent cardsW">
+   <li>
+      <div class="cardSize">
+         <div class="cardPadding">
+            <div class="card">
+               <div class="cardImageOuter">
+                  <div class="cardImage">
+                     <a href="https://www.pluralsight.com/courses/developing-dotnet-microsoft-azure-getting-started?twoid=d6abac77-7dcc-4d33-9e03-f85e78989f02" data-linktype="external">
+                     <img alt="" src="https://docs.microsoft.com/azure/app-service-web/media/index/video-training-dotnet.png" data-linktype="external"></a>
+                  </div>
+               </div>
+               <div class="cardText">
+                  <p>
+                     <a href="https://www.pluralsight.com/courses/developing-dotnet-microsoft-azure-getting-started?twoid=d6abac77-7dcc-4d33-9e03-f85e78989f02" data-linktype="external">Developing with .NET</a>
+                  </p>
+               </div>
+            </div>
+         </div>
+      </div>
+   </li>
+</ul>
 
 ## Manage Azure resources
 
-Import the [Azure management libraries for .NET](dotnet-sdk-azure-install.md) to manage your Azure resources with an easy-to-use [fluent API](dotnet-sdk-azure-concepts.md). 
+Install our easy-to-use fluent [.NET APIs](dotnet-sdk-azure-install.md) to manage Azure resources. 
 
 ```csharp
 var windowsVM = azure.VirtualMachines.Define(windowsVmName)
@@ -94,7 +133,5 @@ var windowsVM = azure.VirtualMachines.Define(windowsVmName)
 
 Learn how to use Azure services and tools in your .NET apps.
 
-* [Deploy from Visual Studio](dotnet-quickstart-vs.md)
-* [Deploy from the command line](dotnet-quickstart-xplat.md)
-* [Azure Storage](/azure/storage/storage-dotnet-how-to-use-blob-storage?toc=%2fdotnet%2fazure%2ftoc.json&bc=%2fdotnet%2fazure_breadcrumb%2ftoc.json)
-* [Redis Cache](/azure/redis-cache/cache-web-app-howto?toc=%2fdotnet%2fazure%2ftoc.json&bc=%2fdotnet%2fazure_breadcrumb%2ftoc.json)
+* [Azure Storage](/azure/storage/storage-dotnet-how-to-use-blob-storage)
+* [Redis Cache](/azure/redis-cache/cache-web-app-howto)
