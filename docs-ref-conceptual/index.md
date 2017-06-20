@@ -29,7 +29,7 @@ ms.service: multiple
                         </div>
                         <div class="cardText">
                             <h3 style="margin-bottom: 0; font-size: 24px">Tools</h3>
-                            Download Azure tools and plugins.
+                            <p style="font-size: 1rem">Download Azure tools and plugins.</p>
                         </div>
                     </div>
                 </div>
@@ -48,7 +48,7 @@ ms.service: multiple
                         </div>
                         <div class="cardText">
                             <h3 style="margin-bottom: 0; font-size: 24px">Libraries</h3>
-                            Use services and manage Azure resources.
+                            <p style="font-size: 1rem">Use services and manage Azure resources.</p>
                         </div>
                     </div>
                 </div>
