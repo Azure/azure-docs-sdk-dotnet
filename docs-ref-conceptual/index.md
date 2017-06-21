@@ -67,8 +67,8 @@ ms.service: multiple
                             </div>
                         </div>
                         <div class="cardText">
-                            <h3 style="margin-bottom: 0; font-size: 24px">Jenkins CI/CD</h3>
-                            <p style="font-size: 1rem">Use Jenkins to deploy apps to Azure.</p>
+                            <h3 style="margin-bottom: 0; font-size: 24px">Team Services CI/CD</h3>
+                            <p style="font-size: 1rem">Deploy with Visual Studio Team Services.</p>
                         </div>
                     </div>
                 </div>
