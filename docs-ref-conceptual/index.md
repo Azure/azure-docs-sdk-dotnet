@@ -30,7 +30,7 @@ ms.service: multiple
                         </div>
                         <div class="cardText">
                             <h3 style="margin-bottom: 0; font-size: 24px">Tools</h3>
-                            <p style="font-size: 1rem">Download Azure tools and plugins.</p>
+                            <p style="font-size: 1rem">Download Azure tools and plugins</p>
                         </div>
                     </div>
                 </div>
@@ -49,7 +49,7 @@ ms.service: multiple
                         </div>
                         <div class="cardText">
                             <h3 style="margin-bottom: 0; font-size: 24px">Libraries</h3>
-                            <p style="font-size: 1rem">Use services and manage Azure resources.</p>
+                            <p style="font-size: 1rem">Use services and manage Azure resources</p>
                         </div>
                     </div>
                 </div>
@@ -68,7 +68,7 @@ ms.service: multiple
                         </div>
                         <div class="cardText">
                             <h3 style="margin-bottom: 0; font-size: 24px">Team Services CI/CD</h3>
-                            <p style="font-size: 1rem">Deploy with Visual Studio Team Services.</p>
+                            <p style="font-size: 1rem">Deploy with Visual Studio Team Services</p>
                         </div>
                     </div>
                 </div>
@@ -81,7 +81,7 @@ ms.service: multiple
 
 Learn how to build .NET apps with Azure services.
 
-* [Deploy a ASP.NET webapp](/azure/app-service-web/app-service-web-get-started-dotnet)
+* [Deploy a ASP.NET web app](/azure/app-service-web/app-service-web-get-started-dotnet)
 * [Connect to Azure SQL Database](/azure/sql-database/sql-database-connect-query-dotnet)
 * [Build a NoSQL app with CosmosDB](/azure/cosmos-db/documentdb-dotnet-application)
 
