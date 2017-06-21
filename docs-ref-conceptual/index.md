@@ -21,7 +21,6 @@ ms.service: multiple
         <a href="dotnet-tools.md">
             <div class="cardSize">
                 <div class="cardPadding">
-
                     <div class="card" style="height: 84px">
                         <div class="cardImageOuter">
                             <div class="cardImage" style="margin-top: 12px">
