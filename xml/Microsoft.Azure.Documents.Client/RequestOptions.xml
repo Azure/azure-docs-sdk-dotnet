@@ -1,0 +1,518 @@
+<Type Name="RequestOptions" FullName="Microsoft.Azure.Documents.Client.RequestOptions">
+  <TypeSignature Language="C#" Value="public sealed class RequestOptions" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit RequestOptions extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Azure.Documents.Client.RequestOptions" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
+    <AssemblyVersion>1.14.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>
+            Encapsulates options that can be specified for different requests issued to the Azure DocumentDB database service.
+            </summary>
+    <remarks>
+            Some of these options are valid for specific operations only. 
+            For example, 
+            <para>PreTriggerInclude can be used only on create, replace and delete operations on a <see cref="T:Microsoft.Azure.Documents.Document" /> or <see cref="T:Microsoft.Azure.Documents.Attachment" />. </para><para>ETag, while valid on Replace* and Delete* operations, would have no impact on a Read*, CreateQuery* or Create* operations.</para></remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public RequestOptions ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Documents.Client.RequestOptions.#ctor" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AccessCondition">
+      <MemberSignature Language="C#" Value="public Microsoft.Azure.Documents.Client.AccessCondition AccessCondition { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Azure.Documents.Client.AccessCondition AccessCondition" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.Client.RequestOptions.AccessCondition" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Azure.Documents.Client.AccessCondition</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets the condition (ETag) associated with the request in the Azure DocumentDB database service.
+            </summary>
+        <value>
+            The condition (ETag) associated with the request.
+            </value>
+        <remarks>
+            Most commonly used with the Delete* and Replace* methods of <see cref="T:Microsoft.Azure.Documents.Client.DocumentClient" /> such as <see cref="M:Microsoft.Azure.Documents.Client.DocumentClient.ReplaceDocumentAsync(Microsoft.Azure.Documents.Document,Microsoft.Azure.Documents.Client.RequestOptions)" /> 
+            or <see cref="M:Microsoft.Azure.Documents.Client.DocumentClient.ReplaceDocumentAsync(System.String,System.Object,Microsoft.Azure.Documents.Client.RequestOptions)" /> methods,
+            but can be used with other methods like <see cref="M:Microsoft.Azure.Documents.Client.DocumentClient.ReadDocumentAsync(System.String,Microsoft.Azure.Documents.Client.RequestOptions)" /> for caching scenarios. 
+            </remarks>
+        <example>
+            The following example shows how to use RequestOptions with <see cref="M:Microsoft.Azure.Documents.Client.DocumentClient.ReplaceDocumentAsync(System.String,System.Object,Microsoft.Azure.Documents.Client.RequestOptions)" /> to 
+            specify the set of <see cref="P:Microsoft.Azure.Documents.Client.RequestOptions.AccessCondition" /> to be used when updating a document
+            <code language="c#"><![CDATA[
+            // If ETag is current, then this will succeed. Otherwise the request will fail with HTTP 412 Precondition Failure
+            await client.ReplaceDocumentAsync(
+                readCopyOfBook.SelfLink, 
+                new Book { Title = "Moby Dick", Price = 14.99 },
+                new RequestOptions 
+                { 
+                    AccessCondition = new AccessCondition 
+                    { 
+                        Condition = readCopyOfBook.ETag, 
+                        Type = AccessConditionType.IfMatch 
+                    } 
+                 });
+            ]]></code></example>
+        <see cref="T:Microsoft.Azure.Documents.Client.AccessCondition" />
+      </Docs>
+    </Member>
+    <Member MemberName="ConsistencyLevel">
+      <MemberSignature Language="C#" Value="public Nullable&lt;Microsoft.Azure.Documents.ConsistencyLevel&gt; ConsistencyLevel { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;valuetype Microsoft.Azure.Documents.ConsistencyLevel&gt; ConsistencyLevel" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.Client.RequestOptions.ConsistencyLevel" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;Microsoft.Azure.Documents.ConsistencyLevel&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets the consistency level required for the request in the Azure DocumentDB database service.
+            </summary>
+        <value>
+            The consistency level required for the request.
+            </value>
+        <remarks>
+            DocumentDB offers 4 different consistency levels. Strong, Bounded Staleness, Session and Eventual - in order of strongest to weakest consistency.
+            <para>
+            While this is set at a database account level, DocumentDB allows a developer to weaken the default consistency level
+            for each individual request. 
+            </para></remarks>
+        <example>
+            This example uses RequestOptions to lower the consistency level to Eventual for this single Read operation. 
+            <code language="c#"><![CDATA[
+            Document doc = client.ReadDocumentAsync(documentLink, new RequestOptions { ConsistencyLevel = ConsistencyLevel.Eventual });
+            ]]></code></example>
+        <altmember cref="P:Microsoft.Azure.Documents.Client.RequestOptions.ConsistencyLevel" />
+      </Docs>
+    </Member>
+    <Member MemberName="DisableRUPerMinuteUsage">
+      <MemberSignature Language="C#" Value="public bool DisableRUPerMinuteUsage { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool DisableRUPerMinuteUsage" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.Client.RequestOptions.DisableRUPerMinuteUsage" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+             Gets or sets the <see cref="P:Microsoft.Azure.Documents.Client.RequestOptions.DisableRUPerMinuteUsage" /> for the current request in the Azure DocumentDB database service.
+            </summary>
+        <value>To be added.</value>
+        <remarks>
+          <para> 
+            DisableRUPerMinuteUsage is used to enable/disable Request Units(RUs)/minute capacity to serve the request if regular provisioned RUs/second is exhausted.
+            </para>
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="EnableScriptLogging">
+      <MemberSignature Language="C#" Value="public bool EnableScriptLogging { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool EnableScriptLogging" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.Client.RequestOptions.EnableScriptLogging" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+             Gets or sets the <see cref="P:Microsoft.Azure.Documents.Client.RequestOptions.EnableScriptLogging" /> for the current request in the Azure DocumentDB database service.
+            </summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>
+            EnableScriptLogging is used to enable/disable logging in JavaScript stored procedures.
+            </para>
+        </remarks>
+        <example>
+            The following example shows how to enable logging in stored procedures using <see cref="P:Microsoft.Azure.Documents.Client.RequestOptions.EnableScriptLogging" />.
+            <code language="c#"><![CDATA[
+            await client.ExecuteStoredProcedureAsync(
+                document.SelfLink,
+                new RequestOptions { EnableScriptLogging = true } );
+            ]]></code></example>
+      </Docs>
+    </Member>
+    <Member MemberName="IndexingDirective">
+      <MemberSignature Language="C#" Value="public Nullable&lt;Microsoft.Azure.Documents.IndexingDirective&gt; IndexingDirective { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;valuetype Microsoft.Azure.Documents.IndexingDirective&gt; IndexingDirective" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.Client.RequestOptions.IndexingDirective" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;Microsoft.Azure.Documents.IndexingDirective&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets the indexing directive (Include or Exclude) for the request in the Azure DocumentDB database service.
+            </summary>
+        <value>
+            The indexing directive to use with a request.
+            </value>
+        <remarks>To be added.</remarks>
+        <example>
+            The following example shows how to explicitly index a document in a collection with 
+            automatic indexing turned off.
+            <code language="c#"><![CDATA[
+            client.CreateDocumentAsync(defaultCollection.SelfLink,
+                new { id = "AndersenFamily", isRegistered = true },
+                new RequestOptions { IndexingDirective = IndexingDirective.Include });
+            ]]></code></example>
+        <altmember cref="T:Microsoft.Azure.Documents.IndexingPolicy" />
+        <altmember cref="P:Microsoft.Azure.Documents.Client.RequestOptions.IndexingDirective" />
+      </Docs>
+    </Member>
+    <Member MemberName="OfferEnableRUPerMinuteThroughput">
+      <MemberSignature Language="C#" Value="public bool OfferEnableRUPerMinuteThroughput { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool OfferEnableRUPerMinuteThroughput" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.Client.RequestOptions.OfferEnableRUPerMinuteThroughput" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets the <see cref="P:Microsoft.Azure.Documents.Client.RequestOptions.OfferEnableRUPerMinuteThroughput" /> for a collection in the Azure DocumentDB database service
+            </summary>
+        <value>
+            Represents Request Units(RU)/Minute throughput is enabled/disabled for a collection in the Azure DocumentDB database service.
+            </value>
+        <remarks>
+            This option is only valid when creating a document collection.
+            </remarks>
+        <example>
+            The followng example shows how to create a collection with RU/Minute throughput offer.
+            <code language="c#"><![CDATA[
+            await client.CreateDocumentCollectionAsync(
+                database.SelfLink, 
+                new DocumentCollection { Id = "newcoll" }, 
+                new RequestOptions { OfferThroughput = 4000, OfferEnableRUPerMinuteThroughput  = true });
+            ]]></code></example>
+        <altmember cref="T:Microsoft.Azure.Documents.DocumentCollection" />
+        <altmember cref="T:Microsoft.Azure.Documents.OfferV2" />
+      </Docs>
+    </Member>
+    <Member MemberName="OfferThroughput">
+      <MemberSignature Language="C#" Value="public Nullable&lt;int&gt; OfferThroughput { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;int32&gt; OfferThroughput" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.Client.RequestOptions.OfferThroughput" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;System.Int32&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets the offer throughput provisioned for a collection in measurement of Requests-per-Unit in the Azure DocumentDB database service.
+            </summary>
+        <value>
+            The provisioned throughtput for this offer.
+            </value>
+        <remarks>
+            This option is only valid when creating a document collection.
+            <para>
+            Refer to http://azure.microsoft.com/documentation/articles/documentdb-performance-levels/ for details on provision offer throughput.
+            </para></remarks>
+        <example>
+            The followng example shows how to create a collection with offer throughtput.
+            <code language="c#"><![CDATA[
+            await client.CreateDocumentCollectionAsync(
+                database.SelfLink, 
+                new DocumentCollection { Id = "newcoll" }, 
+                new RequestOptions { OfferThroughput = 50000 });
+            ]]></code></example>
+        <altmember cref="T:Microsoft.Azure.Documents.DocumentCollection" />
+        <altmember cref="T:Microsoft.Azure.Documents.OfferV2" />
+      </Docs>
+    </Member>
+    <Member MemberName="OfferType">
+      <MemberSignature Language="C#" Value="public string OfferType { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string OfferType" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.Client.RequestOptions.OfferType" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets the offer type for the resource in the Azure DocumentDB database service.
+            </summary>
+        <value>
+            The offer type value.
+            </value>
+        <remarks>
+            This option is only valid when creating a document collection.
+            <para>
+            Refer to http://azure.microsoft.comdocumentation/articles/documentdb-performance-levels/ for the list of valid
+            offer types.
+            </para></remarks>
+        <example>
+            The followng example shows how to create a collection with the S2 offer.
+            <code language="c#"><![CDATA[
+            await client.CreateDocumentCollectionAsync(
+                database.SelfLink, 
+                new DocumentCollection { Id = "newcoll" }, 
+                new RequestOptions { OfferType = "S2" });
+            ]]></code></example>
+        <altmember cref="T:Microsoft.Azure.Documents.DocumentCollection" />
+        <altmember cref="T:Microsoft.Azure.Documents.Offer" />
+      </Docs>
+    </Member>
+    <Member MemberName="PartitionKey">
+      <MemberSignature Language="C#" Value="public Microsoft.Azure.Documents.PartitionKey PartitionKey { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Azure.Documents.PartitionKey PartitionKey" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.Client.RequestOptions.PartitionKey" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Azure.Documents.PartitionKey</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets the <see cref="P:Microsoft.Azure.Documents.Client.RequestOptions.PartitionKey" /> for the current request in the Azure DocumentDB database service.
+            </summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>
+            Partition key is used to identify the target partition for this request.  It must be set on read and delete
+            operations for all document requests; create, read, update and delete operations for all document attachment requests;
+            and execute operation on stored producedures.
+            
+            For create and update operations on documents, the partition key is optional.  When absent, the client library will
+            extract the partition key from the document before sending the request to the server.
+            </para>
+        </remarks>
+        <example>
+            The following example shows how to read a document in a partitioned collection using <see cref="P:Microsoft.Azure.Documents.Client.RequestOptions.PartitionKey" />.
+            The example assumes the collection is created with a <see cref="T:Microsoft.Azure.Documents.PartitionKeyDefinition" /> of the 'id' property in all the documents.
+            <code language="c#"><![CDATA[
+            await client.ReadDocumentAsync(
+                document.SelfLink, 
+                new RequestOptions { PartitionKey = new PartitionKey(document.Id) } );
+            ]]></code></example>
+        <altmember cref="T:Microsoft.Azure.Documents.DocumentCollection" />
+        <altmember cref="T:Microsoft.Azure.Documents.PartitionKeyDefinition" />
+      </Docs>
+    </Member>
+    <Member MemberName="PopulateQuotaInfo">
+      <MemberSignature Language="C#" Value="public bool PopulateQuotaInfo { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool PopulateQuotaInfo" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.Client.RequestOptions.PopulateQuotaInfo" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+             Gets or sets the <see cref="P:Microsoft.Azure.Documents.Client.RequestOptions.PopulateQuotaInfo" /> for document collection read requests in the Azure DocumentDB database service.
+            </summary>
+        <value>To be added.</value>
+        <remarks>
+          <para> 
+            PopulateQuotaInfo is used to enable/disable getting document collection quota related stats for document collection read requests.
+            </para>
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PostTriggerInclude">
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.IList&lt;string&gt; PostTriggerInclude { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.IList`1&lt;string&gt; PostTriggerInclude" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.Client.RequestOptions.PostTriggerInclude" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.IList&lt;System.String&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets the trigger to be invoked after the operation in the Azure DocumentDB database service.
+            </summary>
+        <value>
+            The trigger to be invoked after the operation.
+            </value>
+        <remarks>
+            Only valid when used with Create, Replace and Delete methods for documents.
+            Currently only one PreTrigger is permitted per operation.
+            </remarks>
+        <example>
+            The following example shows how to use RequestOptions to include a PostTrigger to execute after persisting the document.
+            <code language="c#"><![CDATA[
+            client.CreateDocumentAsync(collection.SelfLink, 
+            new { id = "AndersenFamily", isRegistered = true },
+            new RequestOptions { PostTriggerInclude = new List<string> { "updateMetadata" } });
+            ]]></code></example>
+        <see cref="T:Microsoft.Azure.Documents.Trigger" />
+      </Docs>
+    </Member>
+    <Member MemberName="PreTriggerInclude">
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.IList&lt;string&gt; PreTriggerInclude { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.IList`1&lt;string&gt; PreTriggerInclude" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.Client.RequestOptions.PreTriggerInclude" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.IList&lt;System.String&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets the trigger to be invoked before the operation in the Azure DocumentDB database service.
+            </summary>
+        <value> 
+            The trigger to be invoked before the operation.
+            </value>
+        <remarks>
+            Only valid when used with Create, Replace and Delete methods for documents.
+            Currently only one PreTrigger is permitted per operation.
+            </remarks>
+        <example>
+            The following example shows how to use RequestOptions to include a PreTrigger to execute before persisting the document.
+            <code language="c#"><![CDATA[
+            client.CreateDocumentAsync(collection.SelfLink, 
+                new { id = "AndersenFamily", isRegistered = true },
+                new RequestOptions { PreTriggerInclude = new List<string> { "validateDocumentContents" } });
+            ]]></code></example>
+        <see cref="T:Microsoft.Azure.Documents.Trigger" />
+        <see cref="T:System.Collections.Generic.IList`1" />
+      </Docs>
+    </Member>
+    <Member MemberName="ResourceTokenExpirySeconds">
+      <MemberSignature Language="C#" Value="public Nullable&lt;int&gt; ResourceTokenExpirySeconds { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;int32&gt; ResourceTokenExpirySeconds" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.Client.RequestOptions.ResourceTokenExpirySeconds" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;System.Int32&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets the expiry time for resource token. Used when creating/updating/reading permissions in the Azure DocumentDB database service.
+            </summary>
+        <value>
+            The expiry time in seconds for the resource token.
+            </value>
+        <remarks>
+            When working with Azure DocumentDB Users and Permissions, the way to instantiate an instance of <see cref="T:Microsoft.Azure.Documents.Client.DocumentClient" /> is to 
+            get the <see cref="P:Microsoft.Azure.Documents.Permission.Token" /> for the resource the <see cref="T:Microsoft.Azure.Documents.User" /> wants to access and pass this 
+            to the authKeyOrResourceToken parameter of <see cref="T:Microsoft.Azure.Documents.Client.DocumentClient" /> constructor
+            <para>
+            When requesting this Token, a RequestOption for ResourceTokenExpirySeconds can be used to set the length of time to elapse before the token expires.
+            This value can range from 10 seconds, to 5 hours (or 18,000 seconds)
+            The default value for this, should none be supplied is 1 hour (or 3,600 seconds).
+            </para></remarks>
+        <altmember cref="T:Microsoft.Azure.Documents.Client.DocumentClient" />
+        <altmember cref="T:Microsoft.Azure.Documents.Permission" />
+        <altmember cref="T:Microsoft.Azure.Documents.User" />
+      </Docs>
+    </Member>
+    <Member MemberName="SessionToken">
+      <MemberSignature Language="C#" Value="public string SessionToken { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string SessionToken" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.Client.RequestOptions.SessionToken" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+             Gets or sets the token for use with session consistency in the Azure DocumentDB database service.
+             </summary>
+        <value>
+             The token for use with session consistency.
+             </value>
+        <remarks>
+             One of the <see cref="P:Microsoft.Azure.Documents.Client.RequestOptions.ConsistencyLevel" /> for Azure DocumentDB is Session. In fact, this is the deault level applied to accounts. 
+             <para>
+             When working with Session consistency, each new write request to Azure DocumentDB is assigned a new SessionToken.
+             The DocumentClient will use this token internally with each read/query request to ensure that the set consistency level is maintained.
+              
+             <para>
+             In some scenarios you need to manage this Session yourself; 
+             Consider a web application with multiple nodes, each node will have its own instance of <see cref="T:Microsoft.Azure.Documents.Client.DocumentClient" />
+             If you wanted these nodes to participate in the same session (to be able read your own writes consistently across web tiers) 
+             you would have to send the SessionToken from <see cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" /> of the write action on one node
+             to the client tier, using a cookie or some other mechanism, and have that token flow back to the web tier for subsequent reads.
+             If you are using a round-robin load balancer which does not maintain session affinity between requests, such as the Azure Load Balancer,  
+             the read could potentially land on a different node to the write request, where the session was created. 
+             </para><para>
+             If you do not flow the Azure DocumentDB SessionToken across as described above you could end up with inconsistent read results for a period of time.
+             </para></para></remarks>
+        <example>
+             This example shows how you can retrieve the SessionToken from a <see cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" /> 
+             and then use it on a different instance of <see cref="T:Microsoft.Azure.Documents.Client.DocumentClient" /> within <see cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
+             This example assumes that the each instance of the client is running from code within a different AppDomain, such as on different nodes in the case of multiple node web application
+             <code language="c#"><![CDATA[
+             string sessionToken;
+             string docSelfLink;
+            
+             using (DocumentClient client = new DocumentClient(new Uri(""), ""))
+             {
+                 ResourceResponse<Document> response = client.CreateDocumentAsync(collection.SelfLink, new { id = "an id", value = "some value" }).Result;
+                 sessionToken = response.SessionToken;
+                 Document created = response.Resource;
+                 docSelfLink = created.SelfLink;
+             }
+                
+             using (DocumentClient client = new DocumentClient(new Uri(""), ""))
+             {
+                 ResourceResponse<Document> read = client.ReadDocumentAsync(docSelfLink, new RequestOptions { SessionToken = sessionToken }).Result; 
+             }
+             ]]></code></example>
+        <altmember cref="P:Microsoft.Azure.Documents.Client.RequestOptions.ConsistencyLevel" />
+      </Docs>
+    </Member>
+  </Members>
+</Type>
