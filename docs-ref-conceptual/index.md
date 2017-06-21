@@ -30,7 +30,7 @@ ms.service: multiple
                         </div>
                         <div class="cardText">
                             <h3 style="margin-bottom: 0; font-size: 24px">Tools</h3>
-                            <p style="font-size: 1rem">Download Azure tools and plugins</p>
+                            <p style="font-size: 1rem">Download Azure tools and plug-ins</p>
                         </div>
                     </div>
                 </div>
