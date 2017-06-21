@@ -77,7 +77,7 @@ ms.service: multiple
     </li>
 </ul>
 
-## Five-minute Quickstarts
+## 5-Minute Quickstarts
 
 Learn how to build .NET apps with Azure services.
 
@@ -85,7 +85,7 @@ Learn how to build .NET apps with Azure services.
 * [Connect to Azure SQL Database](/azure/sql-database/sql-database-connect-query-dotnet)
 * [Build a NoSQL app with CosmosDB](/azure/cosmos-db/documentdb-dotnet-application)
 
-## Free PluralSight video training
+## Free PluralSight Video Training
 
 <ul class="panelContent cardsW">
    <li>
@@ -109,7 +109,7 @@ Learn how to build .NET apps with Azure services.
    </li>
 </ul>
 
-## Manage Azure resources
+## Manage Azure Resources
 
 Install our easy-to-use fluent [.NET APIs](dotnet-sdk-azure-install.md) to manage Azure resources. 
 
@@ -130,7 +130,7 @@ var windowsVM = azure.VirtualMachines.Define(windowsVmName)
 [Get started with the Azure management libraries for .NET](dotnet-sdk-azure-get-started.md)
 
 
-## Tutorials
+## Step-by-Step Tutorials
 
 Learn how to use Azure services and tools in your .NET apps.
 
