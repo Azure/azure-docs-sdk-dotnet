@@ -24,7 +24,7 @@ Use the Azure libraries for .NET to manage, integrate, and consume Azure service
 |--------|--------|--------|
 | [Active Directory](/dotnet/api/overview/azure/activedirectory) | [App Service](/dotnet/api/overview/azure/appservice) | [Automation](/dotnet/api/overview/azure/automation) |
 | [Backup](/dotnet/api/overview/azure/backup) | [Batch](/dotnet/api/overview/azure/batch) | [Billing](/dotnet/api/overview/azure/billing) |
-| [CDN](/dotnet/api/overview/azure/cdn) | [Cosmos DB](/dotnet-test-service-pages/cosmosdb) | [Data Factories](/dotnet/api/overview/azure/datafactories) |
+| [CDN](/dotnet/api/overview/azure/cdn) | [Cosmos DB](/dotnet/api/overview/azure/cosmosdb) | [Data Factories](/dotnet/api/overview/azure/datafactories) |
 | [Data Lake Analytics](/dotnet/api/overview/azure/datalakeanalytics) | [Data Lake Store](/dotnet/api/overview/azure/datalakestore) | [Devices](/dotnet/api/overview/azure/devices) |
 | [DNS](/dotnet/api/overview/azure/dns) | [Event Hub](/dotnet/api/overview/azure/eventhub) | [HD Insights](/dotnet/api/overview/azure/hdinsights) |
 | [Insights](/dotnet/api/overview/azure/insights) | [IoT](/dotnet/api/overview/azure/iot) | [Key Vault](/dotnet/api/overview/azure/keyvault) |
