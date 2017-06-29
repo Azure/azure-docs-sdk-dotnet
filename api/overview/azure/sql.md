@@ -1,5 +1,5 @@
 ---
-title: Azure SQL Database libraries for .NET
+title: Azure .NET SQL Database APIs
 description: Reference for Azure SQL Database libraries for .NET
 keywords: Azure, .NET, SDK, API, SQL, database
 author: camsoper
@@ -13,7 +13,7 @@ ms.devlang: dotnet
 ms.service: multiple
 ---
 
-# Azure SQL Database libraries for .NET
+# Azure .NET SQL Database APIs
 
 ## Overview
 
@@ -21,11 +21,13 @@ Work with data stored in  [Azure SQL Database](https://docs.microsoft.com/azure/
 
 The management libraries provide an interface to create, manage, and scale Azure SQL Database deployments from your .NET code. Set up and manage databases in [elastic pools](https://docs.microsoft.com/azure/sql-database/sql-database-elastic-pool) to share resources and configure databases across multiple regions from your code.
 
-## Import the libraries
+## Install the packages
+
+[Get started with Azure libraries for .NET](dotnet-sdk-azure-get-started.md).
 
 ### Visual Studio 
 
-In the [Package Manager](https://docs.microsoft.com/dotnet/azure/dotnet-sdk-azure-install?view=azure-dotnet) window, use the following cmdlet:
+In the Package Manager console, execute:
 
 ```powershell
 # Client library
@@ -37,7 +39,7 @@ Install-Package Microsoft.Azure.Management.Sql.Fluent
 
 ### .NET Core command line
 
-Execute the following command in your project directory:
+In your project directory, execute:
 
 ```bash
 # Client library
@@ -46,37 +48,57 @@ dotnet add package System.Data.SqlClient
 # Management library
 dotnet add package Microsoft.Azure.Management.Sql.Fluent
 ```
-
 ## Example
 
 ```csharp
+// Create the Azure management object
+IAzure azure = Azure
+    .Configure()
+    .Authenticate(credentials)
+    .WithDefaultSubscription();
 
-using (SqlConnection connection = new SqlConnection(connectionString))
+// Create the SQL server and database
+ISqlServer sqlServer = azure.SqlServers.Define(sqlServerName)
+    .WithRegion(Region.USEast)
+    .WithNewResourceGroup(rgName)
+    .WithAdministratorLogin(adminUser)
+    .WithAdministratorPassword(dbPassword)
+    .WithNewFirewallRule("0.0.0.0", "255.255.255.255")
+    .Create();
+
+ISqlDatabase sqlDb = sqlServer.Databases.Define(sqlDbName).Create();
+
+// Build the connection string
+SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+builder.DataSource = sqlServer.FullyQualifiedDomainName;
+builder.InitialCatalog = sqlDbName;
+builder.UserID = adminUser + "@" + sqlServer.Name; // Format user ID as "user@server"
+builder.Password = dbPassword;
+builder.Encrypt = true;
+builder.TrustServerCertificate = true;
+
+using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
 {
-        // Create the Command and Parameter objects.
-        SqlCommand command = new SqlCommand(queryString, connection);
-        command.Parameters.AddWithValue("@widgetId", paramValue);
+    // connect to the database
+    conn.Open();
 
-        // Open the connection in a try/catch block. 
-        // Create and execute the DataReader, writing the result
-        // set to the console window.
-        try
-        {
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-                        Console.WriteLine("\t{0}\t{1}\t{2}",
-                        reader[0], reader[1], reader[2]);
-                }
-                reader.Close();
-        }
-        catch (Exception ex)
-        {
-                Console.WriteLine(ex.Message);
-        }
-        Console.ReadLine();
+    // Create a table
+    SqlCommand createCommand = new SqlCommand("CREATE TABLE CLOUD (name varchar(255), code int);", conn);
+    createCommand.ExecuteNonQuery();
+
+    // Insert a row
+    SqlCommand insertCommand = new SqlCommand("INSERT INTO CLOUD (name, code ) VALUES ('Azure', 1);", conn);
+    insertCommand.ExecuteNonQuery();
+
+    // Read rows
+    SqlCommand selectCommand = new SqlCommand("SELECT * FROM CLOUD", conn);
+    SqlDataReader results = selectCommand.ExecuteReader();
+    while(results.Read())
+    {
+        Console.WriteLine("Name: {0} Code: {1}", results[0], results[1]);
+    }
 }
+ 
 ```
 
 ## Samples
