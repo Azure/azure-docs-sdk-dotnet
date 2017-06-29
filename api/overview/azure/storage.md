@@ -33,7 +33,11 @@ Create, update, and manage Azure Storage accounts and query and regenerate acces
 In the [Package Manager](https://docs.microsoft.com/dotnet/azure/dotnet-sdk-azure-install?view=azure-dotnet) window, use the following cmdlet:
 
 ```powershell
+# Client library
 Install-Package WindowsAzure.Storage
+
+# Management library
+Install-Package Microsoft.Azure.Management.Storage.Fluent
 ``` 
 
 ### .NET Core command line
@@ -41,7 +45,11 @@ Install-Package WindowsAzure.Storage
 Execute the following command in your project directory:
 
 ```bash
+# Client library
 dotnet add package WindowsAzure.Storage
+
+# Management library
+dotnet add package Microsoft.Azure.Management.Storage.Fluent
 ```
 ## Example usage
 

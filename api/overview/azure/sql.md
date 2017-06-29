@@ -28,7 +28,11 @@ The management libraries provide an interface to create, manage, and scale Azure
 In the [Package Manager](https://docs.microsoft.com/dotnet/azure/dotnet-sdk-azure-install?view=azure-dotnet) window, use the following cmdlet:
 
 ```powershell
+# Client library
 Install-Package System.Data.SqlClient
+
+# Management library
+Install-Package Microsoft.Azure.Management.Sql.Fluent
 ``` 
 
 ### .NET Core command line
@@ -36,7 +40,11 @@ Install-Package System.Data.SqlClient
 Execute the following command in your project directory:
 
 ```bash
+# Client library
 dotnet add package System.Data.SqlClient
+
+# Management library
+dotnet add package Microsoft.Azure.Management.Sql.Fluent
 ```
 
 ## Example
