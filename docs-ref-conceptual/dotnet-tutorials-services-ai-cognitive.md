@@ -26,7 +26,7 @@ For sample source code, see the list of [Azure service samples](https://azure.mi
 | [Custom vision][4] | Analyze images using custom classifications. |
 | [Video indexer][5] | Get started with the Video Indexer API.|
 
-[1]: azure/cognitive-services/computer-vision/tutorials/csharptutorial
+[1]: /azure/cognitive-services/computer-vision/tutorials/csharptutorial
 [2]: /azure/cognitive-services/face/tutorials/faceapiincsharptutorial
 [3]: /azure/cognitive-services/bing-web-search/csharp-ranking-tutorial
 [4]: /azure/cognitive-services/custom-vision-service/csharp-tutorial
