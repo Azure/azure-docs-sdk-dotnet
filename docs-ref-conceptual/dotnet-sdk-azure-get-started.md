@@ -23,8 +23,6 @@ This tutorial demonstrates the usage of several Azure libraries for .NET.  You w
 - An Azure account. If you don't have one, [get a free trial](https://azure.microsoft.com/free/)
 - [Azure PowerShell](https://docs.microsoft.com/en-us/powershell/azure/install-azurerm-ps)
 
-This guide uses Visual Studio.  See the [installation guide](dotnet-sdk-azure-install.md) to learn how to use Azure Management Libraries for .NET in your .NET Core applications without Visual Studio.
-
 ## Set up authentication
 
 [!include[Create service principal](includes/create-sp.md)]

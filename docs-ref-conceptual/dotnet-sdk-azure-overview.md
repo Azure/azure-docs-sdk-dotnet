@@ -37,11 +37,11 @@ var windowsVM = azure.VirtualMachines.Define(windowsVmName)
     .Create();
  ```
 
-Review the [install instructions](dotnet-sdk-azure-install.md) to start using the libraries immediately with your projects. Then read the [get started article](dotnet-sdk-azure-get-started.md) to set up authentication and run sample code against your own Azure subscription.  The [concepts article](dotnet-sdk-azure-concepts.md) goes into the conventions the SDK uses and how to leverage them to simplify your application code. New features, breaking changes, and migration instructions are available in the [release notes](dotnet-sdk-azure-release-notes.md).
+Review the [.NET service list](dotnet-sdk-azure-install.md) to start using the libraries immediately with your projects. Then read the [get started article](dotnet-sdk-azure-get-started.md) to set up authentication and run sample code against your own Azure subscription.  The [concepts article](dotnet-sdk-azure-concepts.md) goes into the conventions the SDK uses and how to leverage them to simplify your application code. New features, breaking changes, and migration instructions are available in the [release notes](dotnet-sdk-azure-release-notes.md).
 
 ## Consume Azure services
 
-In addition to using .NET APIs to create and programmatically manage resources within Azure, you can also then use .NET APIs to connect your applications to these resources and use them at runtime.  For example, you might connect to a SQL Database or store data within Azure Storage.  You can identify which NuGet package to use for a particular Azure service by browsing our [full list of NuGet packages](dotnet-sdk-azure-install.md#data).  
+In addition to using .NET APIs to create and programmatically manage resources within Azure, you can also then use .NET APIs to connect your applications to these resources and use them at runtime.  For example, you might connect to a SQL Database or store data within Azure Storage.  You can identify which NuGet package to use for a particular Azure service by browsing our [full list of service APIs](dotnet-sdk-azure-install.md).  
 
 ## Samples
 
