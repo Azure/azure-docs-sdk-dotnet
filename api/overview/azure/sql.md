@@ -23,7 +23,7 @@ The management libraries provide an interface to create, manage, and scale Azure
 
 ## Install the packages
 
-[Get started with Azure libraries for .NET](/dotnet/azure/dotnet-sdk-azure-get-started).
+[Get started with Azure libraries for .NET](/dotnet/azure/dotnet-sdk-azure-get-started)
 
 ### Visual Studio 
 

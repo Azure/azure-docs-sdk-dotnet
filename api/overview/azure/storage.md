@@ -28,7 +28,7 @@ Create, update, and manage Azure Storage accounts and query and regenerate acces
 
 ## Install the packages
 
-[Get started with Azure APIs for .NET](/dotnet/azure/dotnet-sdk-azure-get-started).
+[Get started with Azure APIs for .NET](/dotnet/azure/dotnet-sdk-azure-get-started)
 
 ### Visual Studio 
 
