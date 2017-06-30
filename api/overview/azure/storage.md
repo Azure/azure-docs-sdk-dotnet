@@ -59,7 +59,7 @@ dotnet add package Microsoft.Azure.Management.Storage.Fluent
 
 ## Example usage
 
-The following code writes a new file to an existing blob storage container using a provided [storage connection string](https://docs.microsoft.com/azure/storage/storage-configure-connection-string).
+The following code creates a storage account, and then writes a new file to a blob storage container.
 
 ```csharp
 // Create the Azure management object
