@@ -55,7 +55,7 @@ dotnet add package WindowsAzure.Storage
 dotnet add package Microsoft.Azure.Management.Storage.Fluent
 ```
 
-[Get started with Azure libraries for .NET](/dotnet/azure/dotnet-sdk-azure-get-started)
+To learn more about the Azure .NET APIs, see [Get started with the Azure .NET APIs](/dotnet/azure/dotnet-sdk-azure-get-started).
 
 ## Example usage
 
