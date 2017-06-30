@@ -19,16 +19,17 @@ ms.service: multiple
 
 Use the Azure Storage client libraries to:
 
-- Read and write objects and files from [Azure Blob storage](https://docs.microsoft.com/azure/storage/storage-dotnet-how-to-use-blobs)
-- Send and receive messages between cloud-connected applications with [Azure Queue storage](https://docs.microsoft.com/azure/storage/storage-dotnet-how-to-use-queues)
-- Read and write large structured data with [Azure Table storage](https://docs.microsoft.com/azure/storage/storage-dotnet-how-to-use-tables) 
-- Share storage between apps with [Azure File storage](https://docs.microsoft.com/azure/storage/storage-dotnet-how-to-use-files)
+* Read and write objects and files from [Azure Blob storage](https://docs.microsoft.com/azure/storage/storage-dotnet-how-to-use-blobs).
+* Send and receive messages between cloud-connected applications with [Azure Queue storage](https://docs.microsoft.com/azure/storage/storage-dotnet-how-to-use-queues).
+* Read and write large structured data with [Azure Table storage](https://docs.microsoft.com/azure/storage/storage-dotnet-how-to-use-tables).
+* Share storage between apps with [Azure File storage](https://docs.microsoft.com/azure/storage/storage-dotnet-how-to-use-files).
 
-Create, update, and manage Azure Storage accounts and query and regenerate access keys from your .NET code with the management libraries.
+Use the Azure Storage management libraries to:
+
+* Create, update, and manage Azure Storage accounts.
+* Query and regenerate access keys from your .NET code.
 
 ## Install the packages
-
-[Get started with Azure APIs for .NET](/dotnet/azure/dotnet-sdk-azure-get-started)
 
 ### Visual Studio 
 
@@ -53,6 +54,8 @@ dotnet add package WindowsAzure.Storage
 # Management library
 dotnet add package Microsoft.Azure.Management.Storage.Fluent
 ```
+
+[Get started with Azure libraries for .NET](/dotnet/azure/dotnet-sdk-azure-get-started)
 
 ## Example usage
 

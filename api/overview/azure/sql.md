@@ -17,13 +17,18 @@ ms.service: multiple
 
 ## Overview
 
-Work with data stored in  [Azure SQL Database](https://docs.microsoft.com/azure/sql-database/sql-database-technical-overview) from .NET with the data provider for SQL Server.  The provider can be used to issue SQL queries directly from your code through [ADO.NET](/dotnet/framework/data/adonet/) or through object-relational mappers like [Entity Framework](https://docs.microsoft.com/ef/).
+Azure SQL Database uses the same client libraries as SQL Server.  Use the client libraries to:
 
-The management libraries provide an interface to create, manage, and scale Azure SQL Database deployments from your .NET code. Set up and manage databases in [elastic pools](https://docs.microsoft.com/azure/sql-database/sql-database-elastic-pool) to share resources and configure databases across multiple regions from your code.
+* Connect and authenticate with your database.
+* Execute ad-hoc T-SQL statements.
+* Execute stored procedures.
+
+Use the Azure SQL Database management libraries to:
+
+* Create and manage Azure SQL Database server instances.
+* Scale Azure SQL Database.
 
 ## Install the packages
-
-[Get started with Azure libraries for .NET](/dotnet/azure/dotnet-sdk-azure-get-started)
 
 ### Visual Studio 
 
@@ -48,6 +53,9 @@ dotnet add package System.Data.SqlClient
 # Management library
 dotnet add package Microsoft.Azure.Management.Sql.Fluent
 ```
+
+[Get started with Azure libraries for .NET](/dotnet/azure/dotnet-sdk-azure-get-started)
+
 ## Example
 
 ```csharp
