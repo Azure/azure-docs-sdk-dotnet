@@ -17,19 +17,15 @@ ms.service: multiple
 
 ## Overview
 
-[Azure SQL Database](https://docs.microsoft.com/azure/sql-database/sql-database-technical-overview) is a relational database service using the Microsoft SQL Server engine that supports relational, JSON, spatial, and XML data. 
+[Azure SQL Database](https://docs.microsoft.com/azure/sql-database/sql-database-technical-overview) is a database service using the Microsoft SQL Server engine that supports relational, JSON, spatial, and XML data. 
 
 To learn more about the Azure .NET APIs, see [Get started with the Azure .NET APIs](/dotnet/azure/dotnet-sdk-azure-get-started).
 
-## Client package
+## Client library
 
-Azure SQL Database uses the same client libraries as on-premises SQL Server. Use these .NET client libraries for Azure SQL Database to:
+Use the .NET SQL client library to connect and authenticate with your database and execute ad-hoc T-SQL statements and stored procedures.
 
-* Connect and authenticate with your database.
-* Execute ad-hoc T-SQL statements.
-* Execute stored procedures.
-
-Install the [Nuget package]( https://www.nuget.org/packages/System.Data.SqlClient) directly from the Visual Studio [Package Manager console](https://docs.microsoft.com/nuget/tools/package-manager-console) or with the [.NET Core CLI](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package).
+Install the [NuGet package]( https://www.nuget.org/packages/System.Data.SqlClient) directly from the Visual Studio [Package Manager console](https://docs.microsoft.com/nuget/tools/package-manager-console) or with the [.NET Core CLI](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package).
 
 #### Visual Studio Package Manager
 
@@ -46,6 +42,13 @@ dotnet add package System.Data.SqlClient
 ### Example
 
 ```csharp
+/* Include this 'using' directive:
+using System.Data.SqlClient;
+*/
+
+// Always store connection strings securely. 
+string connectionString = "your connection string here";
+
 // Best practice is to scope the SqlConnection to a "using" block
 using (SqlConnection conn = new SqlConnection(connectionString))
 {
@@ -53,7 +56,7 @@ using (SqlConnection conn = new SqlConnection(connectionString))
     conn.Open();
 
     // Read rows
-    SqlCommand selectCommand = new SqlCommand("SELECT * FROM CLOUD", conn);
+    SqlCommand selectCommand = new SqlCommand("SELECT * FROM MyTable", conn);
     SqlDataReader results = selectCommand.ExecuteReader();
     
     // Enumerate over the rows
@@ -64,14 +67,11 @@ using (SqlConnection conn = new SqlConnection(connectionString))
 }
 ```
 
-## Management package
+## Management library
 
-Use the Azure SQL Database management package to:
+Use the Azure SQL Database management library to create, manage, and scale Azure SQL Database server instances.
 
-* Create and manage Azure SQL Database server instances.
-* Scale Azure SQL Database.
-
-Install the [Nuget package](https://www.nuget.org/packages/Microsoft.Azure.Management.Sql.Fluent/) directly from the Visual Studio [Package Manager console](https://docs.microsoft.com/nuget/tools/package-manager-console) or with the [.NET Core CLI](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package).
+Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Management.Sql.Fluent/) directly from the Visual Studio [Package Manager console](https://docs.microsoft.com/nuget/tools/package-manager-console) or with the [.NET Core CLI](https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package).
 
 #### Visual Studio Package Manager
 
@@ -88,6 +88,11 @@ dotnet add package Microsoft.Azure.Management.Sql.Fluent
 ### Example
 
 ```csharp
+/* Include these 'using' directives:
+using Microsoft.Azure.Management.Sql.Fluent;
+using Microsoft.Azure.Management.ResourceManager.Fluent.Core;
+*/
+
 // Create the SQL server instance
 ISqlServer sqlServer = azure.SqlServers.Define(sqlServerName)
     .WithRegion(Region.USEast)
