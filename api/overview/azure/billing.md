@@ -54,4 +54,6 @@ billingClient.Invoices.List();
 
 ## Samples
 
-[.NET Core Billing Invoice Download](https://github.com/Azure-Samples/billing-dotnet-core-invoice-download)
+* [Usage API](https://azure.microsoft.com/en-us/resources/samples/billing-dotnet-usage-api/)
+* [RateCard API](https://azure.microsoft.com/en-us/resources/samples/billing-dotnet-ratecard-api/)
+* [Multi-Tenant Web Application](https://azure.microsoft.com/en-us/resources/samples/billing-dotnet-webapp-multitenant/)
