@@ -41,13 +41,17 @@ dotnet add package System.Data.SqlClient
 
 ### Example
 
+This example connects to a database and reads rows from a table.
+
 ```csharp
 /* Include this 'using' directive:
 using System.Data.SqlClient;
 */
 
 // Always store connection strings securely. 
-string connectionString = "your connection string here";
+string connectionString = "Server=tcp:[serverName].database.windows.net;" 
+    + "Database=myDataBase;User ID=[loginname]@[serverName];Password=myPassword;"
+    + "Trusted_Connection=False;Encrypt=True;";
 
 // Best practice is to scope the SqlConnection to a "using" block
 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -66,6 +70,9 @@ using (SqlConnection conn = new SqlConnection(connectionString))
     }
 }
 ```
+
+> [!div class="nextstepaction"]
+> [Explore the client APIs](/dotnet/api/overview/azure/sql/client)
 
 ## Management library
 
@@ -87,24 +94,32 @@ dotnet add package Microsoft.Azure.Management.Sql.Fluent
 
 ### Example
 
+This example creates a new SQL Database server instance and then creates a new database on that instance.
+
 ```csharp
 /* Include these 'using' directives:
 using Microsoft.Azure.Management.Sql.Fluent;
 using Microsoft.Azure.Management.ResourceManager.Fluent.Core;
 */
 
+string startAddress = "0.0.0.0";
+string endAddress = "255.255.255.255;
+
 // Create the SQL server instance
-ISqlServer sqlServer = azure.SqlServers.Define(sqlServerName)
+ISqlServer sqlServer = azure.SqlServers.Define("UniqueServerName")
     .WithRegion(Region.USEast)
-    .WithNewResourceGroup(rgName)
-    .WithAdministratorLogin(adminUser)
-    .WithAdministratorPassword(adminPassword)
+    .WithNewResourceGroup("ResourceGroupName")
+    .WithAdministratorLogin("UserName")
+    .WithAdministratorPassword("Password")
     .WithNewFirewallRule(startAddress, endAddress)
     .Create();
 
 // Create the database
-ISqlDatabase sqlDb = sqlServer.Databases.Define(sqlDbName).Create();
+ISqlDatabase sqlDb = sqlServer.Databases.Define("DatabaseName").Create();
 ```
+
+> [!div class="nextstepaction"]
+> [Explore the management APIs](/dotnet/api/overview/azure/sql/management)
 
 ## Samples
 

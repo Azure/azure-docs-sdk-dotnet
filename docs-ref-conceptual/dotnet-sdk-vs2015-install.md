@@ -18,7 +18,7 @@ The **Azure SDK for Visual Studio 2015** and **Service Fabric SDK and Tools for 
 
 ## Using the Web Platform Installer
 
-1. Browse to the [Web Platform Installer site](https://www.microsoft.com/web/downloads/platform.aspx).  Click **Free Download** to download and run the installer.
+1. Download and run [Web Platform Installer site](http://go.microsoft.com/fwlink/?LinkId=255386).
 
 2. On the **Spotlight** tab, click the **Add** buttons next to **Microsoft Azure Service Fabric SDK and Tools - x.x.xxx (VS2015)** and **Microsoft Azure SDK for .NET (VS2015) - x.x.x**, and then click the **Install** button.
 
