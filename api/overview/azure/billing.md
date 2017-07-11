@@ -3,7 +3,7 @@ title: Azure Billing libraries for .NET
 description: Reference for Azure Billing libraries for .NET
 keywords: Azure, .NET, SDK, API, Billing
 author: spboyer
-ms.author: camsoper
+ms.author: casoper
 manager: douge
 ms.date: 07/07/2017
 ms.topic: article
