@@ -18,7 +18,7 @@ ms.service: multiple
 
 Azure Billing API (preview) provides programmatic access to your Azure billing information and invoices.
 
-## Client library
+## Management library
 
 Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Management.Billing) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
 
@@ -51,6 +51,9 @@ billingClient.SubscriptionId = subscriptionId;
 // Get list of invoices
 billingClient.Invoices.List();
 ```
+
+> [!div class="nextstepaction"]
+> [Explore the management APIs](/dotnet/api/overview/azure/billing/management)
 
 ## Samples
 

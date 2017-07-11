@@ -38,7 +38,7 @@ dotnet add package Microsoft.ServiceFabric
 The following example copies an application package to the image store, provisions the application type, and creates an application instance.
 
 ```csharp
-/* Include these Azure Management dependencies
+/* Include these dependencies
 using System.Fabric;
 using System.Fabric.Description;
 */
@@ -56,6 +56,9 @@ fabricClient.ApplicationManager.ProvisionApplicationAsync(packagePathInImageStor
 ApplicationDescription appDesc = new ApplicationDescription(new Uri(appName), appType, appVersion);
 fabricClient.ApplicationManager.CreateApplicationAsync(appDesc).Wait();
 ```
+
+> [!div class="nextstepaction"]
+> [Explore the client APIs](/dotnet/api/overview/azure/servicefabric/management)
 
 ## Samples
 
