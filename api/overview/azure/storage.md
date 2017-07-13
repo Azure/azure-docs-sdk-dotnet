@@ -13,7 +13,7 @@ ms.devlang: dotnet
 ms.service: multiple
 ---
 
-# Azure .NET Storage APIs
+# Azure Storage APIs for .NET
 
 ## Overview
 

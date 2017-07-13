@@ -6,7 +6,7 @@ author: spboyer
 ms.author: casoper
 manager: douge
 ms.date: 07/10/2017
-ms.topic: article
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
@@ -43,15 +43,15 @@ dotnet add package Microsoft.Azure.Search
    using Microsoft.Azure.Search.Models;
 */
 
-    // A service endpoint and an api-key are required on a connection.
-    // Set them in a config file (not shown) and then connect to the client.
-    IConfigurationBuilder builder = new ConfigurationBuilder().AddJsonFile("appsettings.json");
-    IConfigurationRoot configuration = builder.Build();
+// A service endpoint and an api-key are required on a connection.
+// Set them in a config file (not shown) and then connect to the client.
+IConfigurationBuilder builder = new ConfigurationBuilder().AddJsonFile("appsettings.json");
+IConfigurationRoot configuration = builder.Build();
 
-    SearchServiceClient serviceClient = CreateSearchServiceClient(configuration);
+SearchServiceClient serviceClient = CreateSearchServiceClient(configuration);
 
-    // Create an index named hotels
-    ISearchIndexClient indexClient = serviceClient.Indexes.GetClient("hotels");
+// Create an index named hotels
+ISearchIndexClient indexClient = serviceClient.Indexes.GetClient("hotels");
 
 ```
 

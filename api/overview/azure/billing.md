@@ -6,7 +6,7 @@ author: spboyer
 ms.author: casoper
 manager: douge
 ms.date: 07/07/2017
-ms.topic: article
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
@@ -37,7 +37,7 @@ dotnet add package Microsoft.Azure.Management.Billing
 Connect to Azure and get a list of invoices.
 
 ```csharp
-/* Include these Azure Management dependencies
+/* Include these directives
 using Microsoft.Rest.Azure.Authentication;
 using Microsoft.Azure.Management.Billing;
 using Microsoft.Azure.Management.Billing.Models;
