@@ -14,6 +14,7 @@ ms.devlang: dotnet
 
 # Tools for .NET Azure developers
 
+Whatever your operating system, we have a great set of tools to help you develop using .NET on Azure.
 
 ## [Windows](#tab/windows)
 
@@ -21,16 +22,16 @@ ms.devlang: dotnet
 
 ### Step 1: Download Visual Studio 2017
 
-You can skip this step if you have previously installed Visual Studio 2017.
+You can skip this step if you already have Visual Studio 2017 installed.
 
 > [!div class="nextstepaction"]
 > [Download Visual Studio 2017](https://www.visualstudio.com/downloads/)
 
 ### Step 2: Install the two Azure workloads
 
-![Visual Studio Installer](media/dotnet-tools/azure-workloads.png)
+After launching the Visual Studio installer, make sure the Azure and ASP.NET web development workloads are checked.
 
-Check and install the Azure and ASP.NET and web development workloads by launching the Visual Studio Installer.
+![Visual Studio Installer](media/dotnet-tools/azure-workloads.png)
 
 [Visual Studio 2015 Instructions](dotnet-sdk-vs2015-install.md)
 
@@ -40,21 +41,16 @@ Check and install the Azure and ASP.NET and web development workloads by launchi
 
 ### Step 1: Download Visual Studio for Mac
 
+During install, Azure tools are already enabled by default.
+
 > [!div class="nextstepaction"]
 > [Download Visual Studio for Mac](https://www.visualstudio.com/vs/visual-studio-mac/)
 
-### Step 2: Install the Azure workload
-
 ![Visual Studio for Mac Installer](media/dotnet-tools/azure-vsmac.png)
-
-During install, Azure tools are already enabled by default... Keep them checked!
 
 ## [Linux](#tab/linux)
 
 <img src="https://docs.microsoft.com/en-us/media/logos/logo_vs-code.svg" width="50" height="50"></img>
-
-#### Cross Platform Tools (Windows, Mac, Linux)
-We also have a set of tools available that run on Windows, Mac, and Linux you can install.
 
 ### Step 1: Download .NET Core SDK
 
@@ -65,7 +61,7 @@ The core SDK and command-line tools for .NET apps.
 
 ### Step 2: Visual Studio Code
 
-Editing and debugging on any OS.
+Edit and debug .NET apps on any OS.
 
 > [!div class="nextstepaction"]
 > [Download Visual Studio Code](https://code.visualstudio.com)
