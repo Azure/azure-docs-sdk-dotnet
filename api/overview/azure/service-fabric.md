@@ -63,3 +63,6 @@ fabricClient.ApplicationManager.CreateApplicationAsync(appDesc).Wait();
 ## Samples
 
 * [Deploy and remove applications using FabricClient](https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-deploy-remove-applications-fabricclient)
+
+[PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
+[DotNetCLI]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package
