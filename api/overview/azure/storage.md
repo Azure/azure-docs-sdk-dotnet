@@ -1,5 +1,5 @@
 ---
-title: Azure Storage libraries for .NET
+title: Azure .NET Storage APIs
 description: Reference for Azure Storage libraries for .NET
 keywords: Azure, .NET, SDK, API, storage, blob
 author: camsoper
@@ -13,59 +13,92 @@ ms.devlang: dotnet
 ms.service: multiple
 ---
 
-# Azure Storage libraries
+# Azure Storage APIs for .NET
 
 ## Overview
 
 Use the Azure Storage client libraries to:
 
-- Read and write objects and files from [Azure Blob storage](https://docs.microsoft.com/azure/storage/storage-dotnet-how-to-use-blobs)
-- Send and receive messages between cloud-connected applications with [Azure Queue storage](https://docs.microsoft.com/azure/storage/storage-dotnet-how-to-use-queues)
-- Read and write large structured data with [Azure Table storage](https://docs.microsoft.com/azure/storage/storage-dotnet-how-to-use-tables) 
-- Share storage between apps with [Azure File storage](https://docs.microsoft.com/azure/storage/storage-dotnet-how-to-use-files)
+* Read and write objects and files from [Azure Blob storage](https://docs.microsoft.com/azure/storage/storage-dotnet-how-to-use-blobs).
+* Send and receive messages between cloud-connected applications with [Azure Queue storage](https://docs.microsoft.com/azure/storage/storage-dotnet-how-to-use-queues).
+* Read and write large structured data with [Azure Table storage](https://docs.microsoft.com/azure/storage/storage-dotnet-how-to-use-tables).
+* Share storage between apps with [Azure File storage](https://docs.microsoft.com/azure/storage/storage-dotnet-how-to-use-files).
 
-Create, update, and manage Azure Storage accounts and query and regenerate access keys from your .NET code with the management libraries.
+Use the Azure Storage management libraries to:
 
-## Import the libraries
+* Create, update, and manage Azure Storage accounts.
+* Query and regenerate access keys from your .NET code.
+
+## Install the packages
 
 ### Visual Studio 
 
-In the [Package Manager](https://docs.microsoft.com/dotnet/azure/dotnet-sdk-azure-install?view=azure-dotnet) window, use the following cmdlet:
+In the Package Manager console, execute:
 
 ```powershell
+# Client library
 Install-Package WindowsAzure.Storage
+
+# Management library
+Install-Package Microsoft.Azure.Management.Storage.Fluent
 ``` 
 
 ### .NET Core command line
 
-Execute the following command in your project directory:
+In your project directory, execute:
 
 ```bash
+# Client library
 dotnet add package WindowsAzure.Storage
+
+# Management library
+dotnet add package Microsoft.Azure.Management.Storage.Fluent
 ```
+
+To learn more about the Azure .NET APIs, see [Get started with the Azure .NET APIs](/dotnet/azure/dotnet-sdk-azure-get-started).
+
 ## Example usage
 
-The following code writes a new file to an existing blob storage container using a provided [storage connection string](https://docs.microsoft.com/azure/storage/storage-configure-connection-string).
+The following code creates a storage account, and then writes a new file to a blob storage container.
 
 ```csharp
-// Retrieve storage account from connection string.
-CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
-    CloudConfigurationManager.GetSetting("StorageConnectionString"));
+// Create the Azure management object
+IAzure azure = Azure
+    .Configure()
+    .Authenticate(credentials)
+    .WithDefaultSubscription();
 
-// Create the blob client.
-CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+// Create the storage account
+IStorageAccount storage = azure.StorageAccounts.Define(storageAccountName)
+    .WithRegion(Region.USEast)
+    .WithNewResourceGroup(rgName)
+    .Create();
 
-// Retrieve reference to a previously created container.
-CloudBlobContainer container = blobClient.GetContainerReference("mycontainer");
+// Build a storage connection string
+var storageKeys = storage.GetKeys();
+string storageConnectionString = "DefaultEndpointsProtocol=https;"
+    + "AccountName=" + storage.Name
+    + ";AccountKey=" + storageKeys[0].Value
+    + ";EndpointSuffix=core.windows.net";
 
-// Retrieve reference to a blob named "myblob".
-CloudBlockBlob blockBlob = container.GetBlockBlobReference("myblob");
+//Create a client to connect to the storage account
+CloudStorageAccount account = CloudStorageAccount.Parse(storageConnectionString);
+CloudBlobClient serviceClient = account.CreateCloudBlobClient();
 
-// Create or overwrite the "myblob" blob with contents from a local file.
-using (var fileStream = System.IO.File.OpenRead(@"path\myfile"))
-{
-    blockBlob.UploadFromStream(fileStream);
-}
+// Create container. Name must be lower case.
+CloudBlobContainer container = serviceClient.GetContainerReference("helloazure");
+container.CreateIfNotExistsAsync().Wait();
+
+// Make the container public
+BlobContainerPermissions containerPermissions = new BlobContainerPermissions()
+    { PublicAccess = BlobContainerPublicAccessType.Container };
+container.SetPermissionsAsync(containerPermissions).Wait();
+
+// write a blob to the container
+CloudBlockBlob blob = container.GetBlockBlobReference("helloazure.txt");
+blob.UploadTextAsync("Hello, Azure!").Wait();
+Console.WriteLine("Your blob is located at {0}", blob.StorageUri.PrimaryUri);     
+
 ```
 
 ## Samples

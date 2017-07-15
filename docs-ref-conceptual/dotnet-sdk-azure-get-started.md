@@ -1,5 +1,5 @@
 ---
-title: Get started with Azure Management Libraries for .NET
+title: Get started with Azure .NET APIs
 description: Get started with basic use of the Azure libraries for .NET with your own Azure subscription.
 keywords: Azure, .NET, SDK, API ,authenticate, get-started
 author: camsoper
@@ -14,16 +14,14 @@ ms.service: multiple
 ms.assetid: 
 ---
 
-# Get started with the Azure libraries for .NET
+# Get started with the Azure .NET APIs
 
-This tutorial demonstrates the usage of several Azure libraries for .NET.  You will set up authentication, create and use an Azure Storage account, create and use an Azure SQL Database, deploy some virtual machines, and deploy an Azure App Service Web App from GitHub.
+This tutorial demonstrates the usage of several [Azure APIs for .NET](/dotnet/api/overview/azure/).  You will set up authentication, create and use an Azure Storage account, create and use an Azure SQL Database, deploy some virtual machines, and deploy an Azure App Service Web App from GitHub.
 
 ## Prerequisites
 
 - An Azure account. If you don't have one, [get a free trial](https://azure.microsoft.com/free/)
 - [Azure PowerShell](https://docs.microsoft.com/en-us/powershell/azure/install-azurerm-ps)
-
-This guide uses Visual Studio.  See the [installation guide](dotnet-sdk-azure-install.md) to learn how to use Azure Management Libraries for .NET in your .NET Core applications without Visual Studio.
 
 ## Set up authentication
 
