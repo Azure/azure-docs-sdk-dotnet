@@ -14,9 +14,9 @@ ms.service: multiple
 ms.assetid: 
 ---
 
-# Azure management library for .NET concepts
+# Azure management library for .NET fluent concepts
 
-This article details several concepts that will help you understand how to effectively use the Azure management libraries for .NET.
+This article will help you understand how to effectively use the fluent interface in the Azure management libraries for .NET.
 
 ## Building resources using a fluent interface
 
