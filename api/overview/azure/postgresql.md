@@ -17,29 +17,25 @@ ms.service: postgresql
 
 ## Overview
 
+Work with data and resources stored in [Azure Database for PostgreSQL](https://docs.microsoft.com/azure/postgresql/).
+
+## Client API
+
 The recommended client library for accessing Azure Database for PostgreSQL is the open-source [Npgsql ADO.NET data provider](http://www.npgsql.org/). Use the ADO.NET provider to connect to the database and execute SQL statements directly or through Entity Framework with the Npgsql's [Entity Framework 6](http://www.npgsql.org/ef6/index.html) or [Entity Framework Core](http://www.npgsql.org/efcore/index.html) providers.
 
-Learn more about [Azure Database for PostgreSQL](https://docs.microsoft.com/azure/postgresql/).
-
-## Import the libraries
-
-### Visual Studio 
-
-In the [Package Manager](https://docs.microsoft.com/dotnet/azure/dotnet-sdk-azure-install?view=azure-dotnet) window, use the following cmdlet:
+#### Visual Studio Package Manager
 
 ```powershell
 Install-Package Npgsql
-``` 
+```
 
-### .NET Core command line
-
-Execute the following command in your project directory:
+#### .NET Core CLI
 
 ```bash
 dotnet add package Npgsql
 ```
 
-## Example
+### Example
 
 ```csharp
 using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
@@ -72,9 +68,7 @@ using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
 }
 ```
 
-## Samples
+### Samples
 
 - [ADO.NET code examples](/dotnet/framework/data/adonet/ado-net-code-examples)
 - [Design a PostgreSQL database using the Azure CLI](https://docs.microsoft.com/azure/postgresql/tutorial-design-database-using-azure-cli) 
-
-Explore more [sample .NET code](https://azure.microsoft.com/resources/samples/?platform=.NET) you can use in your apps.
