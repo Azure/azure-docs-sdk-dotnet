@@ -17,28 +17,27 @@ ms.service: mysql
 
 ## Overview
 
-The recommended client library for accessing Azure Database for MySQL is MySQL's [Connector/Net](https://dev.mysql.com/doc/connector-net/en). Use the package to connect to the database and execute SQL statements directly.  
-Learn more about [Azure Database for MySQL](https://docs.microsoft.com/azure/MySQL/)
+Work with data and resources stored in [Azure Database for MySQL](/azure/mysql/overview).
 
-## Import the libraries
+## Client APIs
 
-### Visual Studio 
+The recommended client library for accessing Azure Database for MySQL is MySQL's [Connector/Net](https://dev.mysql.com/doc/connector-net/en). Use the package to connect to the database and execute SQL statements directly. 
 
-In the [Package Manager](https://docs.microsoft.com/dotnet/azure/dotnet-sdk-azure-install?view=azure-dotnet) window, use the following cmdlet:
+#### Visual Studio Package Manager
 
 ```powershell
 Install-Package MySql.Data
-``` 
+```
 
-### .NET Core command line
-
-Execute the following command in your project directory:
+#### .NET Core CLI
 
 ```bash
 dotnet add package MySql.Data
 ```
 
-## Example
+### Example
+
+Connect to a MySQL database and execute a query:
 
 ```csharp
 using (MySqlConnection connection = new MySqlConnection(connectionString))
@@ -75,5 +74,3 @@ using (MySqlConnection connection = new MySqlConnection(connectionString))
 
 - [ADO.NET code examples](/dotnet/framework/data/adonet/ado-net-code-examples)
 - [Design a MySQL database using the Azure CLI](https://docs.microsoft.com/azure/mysql/tutorial-design-database-using-cli) 
-
-Explore more [sample .NET code](https://azure.microsoft.com/resources/samples/?platform=.NET) you can use in your apps.
