@@ -17,27 +17,27 @@ ms.service: multiple
 
 ## Overview
 
-Define, configure, and deploy new Windows and Linux virtual machines and virtual machine scale sets from your code with the Azure management libraries for .NET. The libraries also let start and stop existing virtual machines and attach or detach disks to stopped VMs in your subscription.
+On-demand, scalable computing resources running Linux or Windows.
 
-## Import the libraries
+To get started with Azure virtual machines, see [Create a Linux virtual machine with the Azure portal](https://review.docs.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-portal).
 
-### Visual Studio 
+## Management APIs
 
-In the [Package Manager](https://docs.microsoft.com/dotnet/azure/dotnet-sdk-azure-install?view=azure-dotnet) window, use the following cmdlet:
+Create, configure, and scale out Windows and Linux virtual machines in Azure from your code with the management API.
+
+#### Visual Studio Package Manager
 
 ```powershell
 Install-Package Microsoft.Azure.Management.Compute.Fluent
-``` 
+```
 
-### .NET Core command line
-
-Execute the following command in your project directory:
+#### .NET Core CLI
 
 ```bash
 dotnet add package Microsoft.Azure.Management.Compute.Fluent
 ```
 
-## Example
+### Example
 
 Create a Windows VM.
 
@@ -55,6 +55,12 @@ var windowsVM = azure.VirtualMachines.Define(windowsVmName)
     .Create();
 ```
 
-## Samples
+[!div class="nextstepaction"]
+[Explore the management APIs](https://review.docs.microsoft.com/en-us/dotnet/api/overview/azure/virtualmachines/management?view=azure-dotnet)
 
-- [Azure management libraries for .NET samples for virtual machines](/dotnet/azure/dotnet-sdk-azure-virtual-machine-samples)
+### Samples
+
+* [Create and manage virtual machines](/dotnet/azure/dotnet-sdk-azure-virtual-machine-samples)
+* [Deploy an SSH-enabled VM with a Template with .NET](https://azure.microsoft.com/en-us/resources/samples/resource-manager-dotnet-template-deployment/)
+
+View the [complete list](https://azure.microsoft.com/en-us/resources/samples/?platform=dotnet&term=VM) of virtual machine samples.
