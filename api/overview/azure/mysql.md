@@ -37,7 +37,7 @@ Install-Package MySql.Data
 dotnet add package MySql.Data
 ```
 
-### Example
+### Code Example
 
 Connect to a MySQL database and execute a query:
 

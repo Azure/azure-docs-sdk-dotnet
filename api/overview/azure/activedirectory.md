@@ -39,7 +39,7 @@ Install-Package Microsoft.IdentityModel.Clients.ActiveDirectory
 dotnet add package Microsoft.IdentityModel.Clients.ActiveDirectory
 ```
 
-### Example
+### Code Example
 
 Retrieve an access token for a desktop application.
 

@@ -37,7 +37,7 @@ Install-Package Npgsql
 dotnet add package Npgsql
 ```
 
-### Example
+### Code Example
 
 ```csharp
 /* Include this 'using' directive...

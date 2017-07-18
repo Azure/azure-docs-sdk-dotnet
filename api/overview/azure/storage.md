@@ -39,7 +39,7 @@ Install-Package WindowsAzure.Storage
 dotnet add package WindowsAzure.Storage
 ```
 
-### Example
+### Code Example
 
 This example creates a new blob to a new container in an existing storage account.
 
@@ -88,7 +88,7 @@ Install-Package Microsoft.Azure.Management.Storage.Fluent
 dotnet add package Microsoft.Azure.Management.Storage.Fluent
 ````
 
-### Example
+### Code Example
 
 This example creates a storage account.
 
