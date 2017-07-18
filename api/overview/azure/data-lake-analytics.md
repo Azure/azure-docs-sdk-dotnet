@@ -65,7 +65,7 @@ var adls = new AdlClient.StoreClient(auth, adls_account);
 
 ## Samples
 
-* [Azure DataLake .NET Client Example](https://azure.microsoft.com/en-us/resources/samples/data-lake-dotnet-client/)
+* [Azure Data Lake .NET Client Example](https://azure.microsoft.com/en-us/resources/samples/data-lake-dotnet-client/)
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
 [DotNetCLI]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package
