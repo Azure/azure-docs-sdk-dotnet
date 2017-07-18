@@ -5,7 +5,7 @@ keywords: Azure, .NET, SDK, API, AAD, Active Directory
 author: camsoper
 ms.author: casoper
 manager: douge
-ms.date: 06/20/2017
+ms.date: 07/17/2017
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -24,6 +24,8 @@ To get started with Azure Active Directory, see [ASP.NET web app sign-in and sig
 ## Client library
 
 Connect and authenticate users or applications over OAuth2, OpenID Connect, Active Directory Graph API authentication or [SAML 2.0](https://docs.microsoft.com/azure/active-directory/develop/active-directory-saml-protocol-reference).
+
+Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Management.AppService.Fluent) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
 
 #### Visual Studio Package Manager
 
@@ -71,3 +73,5 @@ Explore the full collection of [Azure Active Directory code samples](https://doc
 [1]: [https://azure.microsoft.com/en-us/resources/samples/active-directory-dotnet-webapp-openidconnect/]
 [2]: [https://azure.microsoft.com/en-us/resources/samples/active-directory-dotnet-webapp-webapi-oauth2-appidentity/]
 [3]: [https://azure.microsoft.com/en-us/resources/samples/active-directory-dotnet-webapp-roleclaims/]
+[PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
+[DotNetCLI]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package

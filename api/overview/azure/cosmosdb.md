@@ -5,7 +5,7 @@ keywords: Azure, .NET, SDK, API, CosmosDB
 author: camsoper
 ms.author: casoper
 manager: douge
-ms.date: 07/13/2017
+ms.date: 07/17/2017
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
@@ -23,6 +23,8 @@ ms.service: multiple
 
 Use the CosmosDB .NET client library to access and store data in a CosmosDB data store.
 
+Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.DocumentDB.Core) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
+
 #### Visual Studio Package Manager
 
 ```powershell
@@ -37,10 +39,17 @@ dotnet add package Microsoft.Azure.DocumentDB.Core
 
 ### Example
 
---Example overview--
+This example connects to an existing CosmosDB DocumentDB API database, reads a document from a collection, and deserializes it as an `Item` object.
 
 ```csharp
-/* Code goes here */
+/* Include this "using" directive:
+using Microsoft.Azure.Documents.Client;
+*/
+
+DocumentClient client = new DocumentClient(endpointUri, authKeyString);
+Uri documentUri = UriFactory.CreateDocumentUri("MyDatabaseName", "MyCollectionName", "DocumentId");
+// "Item" is a class defined elsewhere...
+Item item = client.ReadDocumentAsync<Item>(documentUri).ToString()).Result;
 ```
 
 > [!div class="nextstepaction"]

@@ -5,7 +5,7 @@ keywords: Azure, .NET, SDK, API, SQL, database, MySQL
 author: camsoper
 ms.author: casoper
 manager: douge
-ms.date: 06/20/2017
+ms.date: 07/17/2017
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -22,6 +22,8 @@ Work with data and resources stored in [Azure Database for MySQL](/azure/mysql/o
 ## Client APIs
 
 The recommended client library for accessing Azure Database for MySQL is MySQL's [Connector/Net](https://dev.mysql.com/doc/connector-net/en). Use the package to connect to the database and execute SQL statements directly. 
+
+Install the [NuGet package](https://www.nuget.org/packages/MySql.Data) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
 
 #### Visual Studio Package Manager
 
@@ -40,33 +42,28 @@ dotnet add package MySql.Data
 Connect to a MySQL database and execute a query:
 
 ```csharp
-using (MySqlConnection connection = new MySqlConnection(connectionString))
-{
-        // Create the Command and Parameter objects.
-        MySqlCommand command = new MySqlCommand(queryString, connection);
-        command.Parameters.AddWithValue("@widgetId", paramValue);
+/* Include this "using" directive...
+using MySql.Data.MySqlClient;
+*/
 
-        // Open the connection in a try/catch block. 
-        // Create and execute the DataReader, writing the result
-        // set to the console window.
-        try
-        {
-                connection.Open();
-                using (var reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                            Console.WriteLine("\t{0}\t{1}\t{2}",
-                            reader[0], reader[1], reader[2]);
-                    }
-                }
-                
-        }
-        catch (Exception ex)
-        {
-                Console.WriteLine(ex.Message);
-        }
-        Console.ReadLine();
+string connectionString = "Server=[servername].mysql.database.azure.com; " +
+    "Database=myDataBase; Uid=[userid]@[servername]; Pwd=myPassword;";
+
+// Best practice is to scope the MySqlConnection to a "using" block
+using (MySqlConnection conn = new MySqlConnection(connectionString))
+{
+    // Connect to the database
+    conn.Open();
+
+    // Read rows
+    MySqlCommand selectCommand = new MySqlCommand("SELECT * FROM MyTable", conn);
+    MySqlDataReader results = selectCommand.ExecuteReader();
+    
+    // Enumerate over the rows
+    while(results.Read())
+    {
+        Console.WriteLine("Column 0: {0} Column 1: {1}", results[0], results[1]);
+    }
 }
 ```
 
@@ -74,3 +71,6 @@ using (MySqlConnection connection = new MySqlConnection(connectionString))
 
 - [ADO.NET code examples](/dotnet/framework/data/adonet/ado-net-code-examples)
 - [Design a MySQL database using the Azure CLI](https://docs.microsoft.com/azure/mysql/tutorial-design-database-using-cli) 
+
+[PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
+[DotNetCLI]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package

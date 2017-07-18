@@ -25,6 +25,8 @@ To get started with Azure virtual machines, see [Create a Linux virtual machine 
 
 Create, configure, and scale out Windows and Linux virtual machines in Azure from your code with the management API.
 
+Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Management.Compute.Fluent) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
+
 #### Visual Studio Package Manager
 
 ```powershell
@@ -42,15 +44,21 @@ dotnet add package Microsoft.Azure.Management.Compute.Fluent
 Create a Windows VM.
 
 ```csharp
-var windowsVM = azure.VirtualMachines.Define(windowsVmName)
+/* Include these "using" directives...
+using Microsoft.Azure.Management.Compute.Fluent;
+using Microsoft.Azure.Management.Compute.Fluent.Models;
+using Microsoft.Azure.Management.ResourceManager.Fluent.Core;
+*/
+
+IVirtualMachine windowsVM = azure.VirtualMachines.Define("MyVirtualMachine")
     .WithRegion(Region.USEast)
-    .WithNewResourceGroup(rgName)
+    .WithNewResourceGroup("MyResourceGroup")
     .WithNewPrimaryNetwork("10.0.0.0/28")
     .WithPrimaryPrivateIPAddressDynamic()
-    .WithNewPrimaryPublicIPAddress(publicIpDnsLabel)
+    .WithNewPrimaryPublicIPAddress("MyIPAddressLabel")
     .WithPopularWindowsImage(KnownWindowsVirtualMachineImage.WindowsServer2012R2Datacenter)
-    .WithAdminUsername(username)
-    .WithAdminPassword(password)
+    .WithAdminUsername("UserName")
+    .WithAdminPassword("Password")
     .WithSize(VirtualMachineSizeTypes.StandardD3V2)
     .Create();
 ```
@@ -64,3 +72,6 @@ var windowsVM = azure.VirtualMachines.Define(windowsVmName)
 * [Deploy an SSH-enabled VM with a Template with .NET](https://azure.microsoft.com/en-us/resources/samples/resource-manager-dotnet-template-deployment/)
 
 View the [complete list](https://azure.microsoft.com/en-us/resources/samples/?platform=dotnet&term=VM) of virtual machine samples.
+
+[PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
+[DotNetCLI]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package
