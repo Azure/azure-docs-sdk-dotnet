@@ -17,11 +17,11 @@ ms.service: multiple
 
 ## Overview
 
---Overview text here--
+The Azure Relay service creates hybrid applications by enabling you to securely expose services that reside within a corporate enterprise network to the public cloud, without having to open a firewall connection, or require intrusive changes to a corporate network infrastructure. Relay supports a variety of different transport protocols and web services standards.
+  		  
+Learn more about [Azure Relay](https://docs.microsoft.com/en-us/azure/service-bus-relay/relay-what-is-it).
 
 ## Client library
-
---Service Bus Relay client overview text here--
 
 Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Relay) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
 
@@ -35,22 +35,9 @@ Install-Package Microsoft.Azure.Relay
 dotnet add package Microsoft.Azure.Relay
 ```
 
-### Example
-
---Example overview--
-
-```csharp
-/* Code goes here */
-```
-
 > [!div class="nextstepaction"]
 > [Explore the client APIs](/dotnet/api/overview/azure/relay/client)
 
-
-
 ## Samples
 
---Samples list here--
-
-[PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
-[DotNetCLI]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package
+Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=dotnet) you can use in your apps.
