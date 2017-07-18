@@ -35,6 +35,22 @@
              }})));
              client.CreateDocumentQuery<Book>(collectionLink).Where(b => UserDefinedFunctionProvider.Invoke("toLowerCase", b.Title) == "war and peace");
              ]]></code></example>
+    <example>
+            The following examples show how to register and use UDFs.
+            <code language="c#"><![CDATA[
+            await client.CreateUserDefinedFunctionAsync(collectionLink, new UserDefinedFunction { Id = "calculateTax", Body = @"function(amt) { return amt * 0.05; }" });
+            client.CreateDocumentQuery<Book>(collectionLink, "SELECT VALUE udf.calculateTax(b.price) FROM books b");
+            client.CreateDocumentQuery<Book>(collectionLink, new SqlQuerySpec("SELECT VALUE udf.calculateTax(b.price) FROM books b"));
+            client.CreateDocumentQuery<Book>(collectionLink).Select(b => UserDefinedFunctionProvider.Invoke("calculateTax", b.Price));
+            
+            await client.CreateUserDefinedFunctionAsync(collectionLink, new UserDefinedFunction { Id = "toLowerCase", Body = @"function(s) { return s.ToLowerCase(); }" });
+            client.CreateDocumentQuery<Book>(collectionLink, "SELECT * FROM books b WHERE b.toLowerCase = 'war and peace'");
+            client.CreateDocumentQuery<Book>(collectionLink, new SqlQuerySpec(
+                "SELECT * FROM books b WHERE b.toLowerCase = @bookNameLowerCase",
+                new SqlParameterCollection(new SqlParameter[] {new SqlParameter { Name = "@bookNameLowerCase", Value = "War And Peace".ToLower()
+             }})));
+             client.CreateDocumentQuery<Book>(collectionLink).Where(b => UserDefinedFunctionProvider.Invoke("toLowerCase", b.Title) == "war and peace");
+             ]]></code></example>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -44,6 +60,7 @@
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -60,6 +77,7 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
