@@ -17,44 +17,61 @@ ms.service: multiple
 
 ## Overview
 
-Define, configure, and deploy new Windows and Linux virtual machines and virtual machine scale sets from your code with the Azure management libraries for .NET. The libraries also let start and stop existing virtual machines and attach or detach disks to stopped VMs in your subscription.
+On-demand, scalable computing resources running Linux or Windows.
 
-## Import the libraries
+To get started with Azure virtual machines, see [Create a Linux virtual machine with the Azure portal](https://review.docs.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-portal).
 
-### Visual Studio 
+## Management APIs
 
-In the [Package Manager](https://docs.microsoft.com/dotnet/azure/dotnet-sdk-azure-install?view=azure-dotnet) window, use the following cmdlet:
+Create, configure, and scale out Windows and Linux virtual machines in Azure from your code with the management API.
+
+Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Management.Compute.Fluent) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
+
+#### Visual Studio Package Manager
 
 ```powershell
 Install-Package Microsoft.Azure.Management.Compute.Fluent
-``` 
+```
 
-### .NET Core command line
-
-Execute the following command in your project directory:
+#### .NET Core CLI
 
 ```bash
 dotnet add package Microsoft.Azure.Management.Compute.Fluent
 ```
 
-## Example
+### Example
 
 Create a Windows VM.
 
 ```csharp
-var windowsVM = azure.VirtualMachines.Define(windowsVmName)
+/* Include these "using" directives...
+using Microsoft.Azure.Management.Compute.Fluent;
+using Microsoft.Azure.Management.Compute.Fluent.Models;
+using Microsoft.Azure.Management.ResourceManager.Fluent.Core;
+*/
+
+IVirtualMachine windowsVM = azure.VirtualMachines.Define("MyVirtualMachine")
     .WithRegion(Region.USEast)
-    .WithNewResourceGroup(rgName)
+    .WithNewResourceGroup("MyResourceGroup")
     .WithNewPrimaryNetwork("10.0.0.0/28")
     .WithPrimaryPrivateIPAddressDynamic()
-    .WithNewPrimaryPublicIPAddress(publicIpDnsLabel)
+    .WithNewPrimaryPublicIPAddress("MyIPAddressLabel")
     .WithPopularWindowsImage(KnownWindowsVirtualMachineImage.WindowsServer2012R2Datacenter)
-    .WithAdminUsername(username)
-    .WithAdminPassword(password)
+    .WithAdminUsername("UserName")
+    .WithAdminPassword("Password")
     .WithSize(VirtualMachineSizeTypes.StandardD3V2)
     .Create();
 ```
 
-## Samples
+> [!div class="nextstepaction"]
+> [Explore the management APIs](https://review.docs.microsoft.com/en-us/dotnet/api/overview/azure/virtualmachines/management?view=azure-dotnet)
 
-- [Azure management libraries for .NET samples for virtual machines](/dotnet/azure/dotnet-sdk-azure-virtual-machine-samples)
+### Samples
+
+* [Create and manage virtual machines](/dotnet/azure/dotnet-sdk-azure-virtual-machine-samples)
+* [Deploy an SSH-enabled VM with a Template with .NET](https://azure.microsoft.com/en-us/resources/samples/resource-manager-dotnet-template-deployment/)
+
+View the [complete list](https://azure.microsoft.com/en-us/resources/samples/?platform=dotnet&term=VM) of virtual machine samples.
+
+[PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
+[DotNetCLI]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package
