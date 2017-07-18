@@ -37,7 +37,7 @@ Install-Package Microsoft.Azure.DocumentDB.Core
 dotnet add package Microsoft.Azure.DocumentDB.Core
 ```
 
-### Example
+### Code Example
 
 This example connects to an existing CosmosDB DocumentDB API database, reads a document from a collection, and deserializes it as an `Item` object.
 

@@ -35,7 +35,7 @@ Install-Package Microsoft.Azure.Search
 dotnet add package Microsoft.Azure.Search
 ```
 
-### Example
+### Code Example
 
 ```csharp
 /* Include these 'using' directives:

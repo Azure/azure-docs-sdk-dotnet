@@ -50,7 +50,7 @@ During install, Azure tools are already enabled by default.
 
 ## [Linux](#tab/linux)
 
-<img src="https://docs.microsoft.com/en-us/media/logos/logo_vs-code.svg" width="50" height="50"></img>
+<img src="https://docs.microsoft.com/en-us/visualstudio/products/images/vs-code.svg" width="50" height="50"></img>
 
 ### Step 1: Download .NET Core SDK
 
