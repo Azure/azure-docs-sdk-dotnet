@@ -40,5 +40,4 @@ dotnet add package Microsoft.Azure.Management.TrafficManager.Fluent
 
 ## Samples
 
-Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=dotnet) you can use in your apps.
-
+Explore more [sample .NET code](https://azure.microsoft.com/resources/samples/?platform=dotnet) you can use in your apps.
