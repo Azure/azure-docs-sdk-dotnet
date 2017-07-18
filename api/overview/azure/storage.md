@@ -67,8 +67,8 @@ CloudBlockBlob blob = container.GetBlockBlobReference("helloworld.txt");
 blob.UploadTextAsync("Hello, World!").Wait();
 ```
 
-[!div class="nextstepactions"]
-[Explore the client APIs](/dotnet/api/overview/azure/storage/client)
+> [!div class="nextstepactions"]
+> [Explore the client APIs](/dotnet/api/overview/azure/storage/client)
 
 ## Management APIs
 
@@ -93,7 +93,7 @@ dotnet add package Microsoft.Azure.Management.Storage.Fluent
 This example creates a storage account.
 
 ```csharp
-/* Include this "using" directive
+/* Include this "using" directive...
 using Microsoft.Azure.Management.Storage.Fluent
 */
 
@@ -103,8 +103,8 @@ IStorageAccount storage = azure.StorageAccounts.Define(storageAccountName)
     .Create();
 ```
 
-[!div class="nextstepactions"]
-[Explore the management APIs](/dotnet/api/overview/azure/storage/management)
+> [!div class="nextstepactions"]
+> [Explore the management APIs](/dotnet/api/overview/azure/storage/management)
 
 ## Samples
 

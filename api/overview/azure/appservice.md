@@ -52,7 +52,7 @@ dotnet add package Microsoft.Azure.Management.AppService.Fluent
 Create a new web app.
 
 ```csharp
-/* Include these "using" directives:
+/* Include these "using" directives...
 using Microsoft.Azure.Management.ResourceManager.Fluent.Core;
 using Microsoft.Azure.Management.AppService.Fluent;
 */
@@ -65,8 +65,8 @@ IWebApp app1 = azure.WebApps
     .Create();
 ```
 
-[!div class="nextstepaction"]
-[Explore the Management APIs](/dotnet/api/overview/azure/appservice/management)
+> [!div class="nextstepaction"]
+> [Explore the Management APIs](/dotnet/api/overview/azure/appservice/management)
 
 ### Samples
 

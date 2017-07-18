@@ -44,7 +44,7 @@ dotnet add package System.Data.SqlClient
 This example connects to a database and reads rows from a table.
 
 ```csharp
-/* Include this 'using' directive:
+/* Include this 'using' directive...
 using System.Data.SqlClient;
 */
 
@@ -97,7 +97,7 @@ dotnet add package Microsoft.Azure.Management.Sql.Fluent
 This example creates a new SQL Database server instance and then creates a new database on that instance.
 
 ```csharp
-/* Include these 'using' directives:
+/* Include these 'using' directives...
 using Microsoft.Azure.Management.Sql.Fluent;
 using Microsoft.Azure.Management.ResourceManager.Fluent.Core;
 */

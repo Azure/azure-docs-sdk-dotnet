@@ -44,7 +44,12 @@ dotnet add package Microsoft.IdentityModel.Clients.ActiveDirectory
 Retrieve an access token for a desktop application.
 
 ```csharp
+/* Include this "using" directive...
+using Microsoft.IdentityModel.Clients.ActiveDirectory;
+*/
+
 AuthenticationResult result = null;
+AuthenticationContext authContext = new AuthenticationContext("https://someauthority.com");
 try
 {
     result = await authContext.AcquireTokenAsync(graphResourceId, clientId, redirectUri, new PlatformParameters(PromptBehavior.Auto));
@@ -59,8 +64,8 @@ catch (AdalException ex)
 }
 ```
 
-[!div class="nextstepaction"]
-[Explore the client APIs](/dotnet/api/overview/azure/activedirectory/client)
+> [!div class="nextstepaction"]
+> [Explore the client APIs](/dotnet/api/overview/azure/activedirectory/client)
 
 ### Samples
 

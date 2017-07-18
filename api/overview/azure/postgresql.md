@@ -40,7 +40,7 @@ dotnet add package Npgsql
 ### Example
 
 ```csharp
-/* Include this 'using' directive:
+/* Include this 'using' directive...
 using Npgsql;
 */
 
