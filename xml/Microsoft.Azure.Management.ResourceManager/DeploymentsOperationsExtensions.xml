@@ -39,7 +39,8 @@
             The operations group for this extension method.
             </param>
         <param name="resourceGroupName">
-            The name of the resource group. The name is case insensitive.
+            The name of the resource group to deploy the resources to. The name is
+            case insensitive. The resource group must already exist.
             </param>
         <param name="deploymentName">
             The name of the deployment.
@@ -48,10 +49,13 @@
             Additional parameters supplied to the operation.
             </param>
         <summary>
-            Create a named template deployment using a template.
+            Deploys resources to a resource group.
             </summary>
         <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            You can provide the template and parameters directly in the request or
+            link to JSON files.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="BeginCreateOrUpdateAsync">
@@ -82,7 +86,8 @@
             The operations group for this extension method.
             </param>
         <param name="resourceGroupName">
-            The name of the resource group. The name is case insensitive.
+            The name of the resource group to deploy the resources to. The name is
+            case insensitive. The resource group must already exist.
             </param>
         <param name="deploymentName">
             The name of the deployment.
@@ -94,10 +99,13 @@
             The cancellation token.
             </param>
         <summary>
-            Create a named template deployment using a template.
+            Deploys resources to a resource group.
             </summary>
         <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            You can provide the template and parameters directly in the request or
+            link to JSON files.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="BeginDelete">
@@ -121,15 +129,28 @@
             The operations group for this extension method.
             </param>
         <param name="resourceGroupName">
-            The name of the resource group. The name is case insensitive.
+            The name of the resource group with the deployment to delete. The name is
+            case insensitive.
             </param>
         <param name="deploymentName">
-            The name of the deployment to be deleted.
+            The name of the deployment to delete.
             </param>
         <summary>
-            Delete deployment.
+            Deletes a deployment from the deployment history.
             </summary>
-        <remarks>To be added.</remarks>
+        <remarks>
+            A template deployment that is currently running cannot be deleted.
+            Deleting a template deployment removes the associated deployment
+            operations. Deleting a template deployment does not affect the state of
+            the resource group. This is an asynchronous operation that returns a
+            status of 202 until the template deployment is successfully deleted. The
+            Location response header contains the URI that is used to obtain the
+            status of the process. While the process is running, a call to the URI in
+            the Location header returns a status of 202. When the process finishes,
+            the URI in the Location header returns a status of 204 on success. If the
+            asynchronous request failed, the URI in the Location header returns an
+            error-level status code.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="BeginDeleteAsync">
@@ -159,19 +180,32 @@
             The operations group for this extension method.
             </param>
         <param name="resourceGroupName">
-            The name of the resource group. The name is case insensitive.
+            The name of the resource group with the deployment to delete. The name is
+            case insensitive.
             </param>
         <param name="deploymentName">
-            The name of the deployment to be deleted.
+            The name of the deployment to delete.
             </param>
         <param name="cancellationToken">
             The cancellation token.
             </param>
         <summary>
-            Delete deployment.
+            Deletes a deployment from the deployment history.
             </summary>
         <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            A template deployment that is currently running cannot be deleted.
+            Deleting a template deployment removes the associated deployment
+            operations. Deleting a template deployment does not affect the state of
+            the resource group. This is an asynchronous operation that returns a
+            status of 202 until the template deployment is successfully deleted. The
+            Location response header contains the URI that is used to obtain the
+            status of the process. While the process is running, a call to the URI in
+            the Location header returns a status of 202. When the process finishes,
+            the URI in the Location header returns a status of 204 on success. If the
+            asynchronous request failed, the URI in the Location header returns an
+            error-level status code.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="Cancel">
@@ -198,12 +232,17 @@
             The name of the resource group. The name is case insensitive.
             </param>
         <param name="deploymentName">
-            The name of the deployment.
+            The name of the deployment to cancel.
             </param>
         <summary>
-            Cancel a currently running template deployment.
+            Cancels a currently running template deployment.
             </summary>
-        <remarks>To be added.</remarks>
+        <remarks>
+            You can cancel a deployment only if the provisioningState is Accepted or
+            Running. After the deployment is canceled, the provisioningState is set
+            to Canceled. Canceling a template deployment stops the currently running
+            template deployment and leaves the resource group partially deployed.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="CancelAsync">
@@ -236,16 +275,21 @@
             The name of the resource group. The name is case insensitive.
             </param>
         <param name="deploymentName">
-            The name of the deployment.
+            The name of the deployment to cancel.
             </param>
         <param name="cancellationToken">
             The cancellation token.
             </param>
         <summary>
-            Cancel a currently running template deployment.
+            Cancels a currently running template deployment.
             </summary>
         <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            You can cancel a deployment only if the provisioningState is Accepted or
+            Running. After the deployment is canceled, the provisioningState is set
+            to Canceled. Canceling a template deployment stops the currently running
+            template deployment and leaves the resource group partially deployed.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="CheckExistence">
@@ -269,13 +313,14 @@
             The operations group for this extension method.
             </param>
         <param name="resourceGroupName">
-            The name of the resource group to check. The name is case insensitive.
+            The name of the resource group with the deployment to check. The name is
+            case insensitive.
             </param>
         <param name="deploymentName">
-            The name of the deployment.
+            The name of the deployment to check.
             </param>
         <summary>
-            Checks whether deployment exists.
+            Checks whether the deployment exists.
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
@@ -308,16 +353,17 @@
             The operations group for this extension method.
             </param>
         <param name="resourceGroupName">
-            The name of the resource group to check. The name is case insensitive.
+            The name of the resource group with the deployment to check. The name is
+            case insensitive.
             </param>
         <param name="deploymentName">
-            The name of the deployment.
+            The name of the deployment to check.
             </param>
         <param name="cancellationToken">
             The cancellation token.
             </param>
         <summary>
-            Checks whether deployment exists.
+            Checks whether the deployment exists.
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
@@ -345,7 +391,8 @@
             The operations group for this extension method.
             </param>
         <param name="resourceGroupName">
-            The name of the resource group. The name is case insensitive.
+            The name of the resource group to deploy the resources to. The name is
+            case insensitive. The resource group must already exist.
             </param>
         <param name="deploymentName">
             The name of the deployment.
@@ -354,10 +401,13 @@
             Additional parameters supplied to the operation.
             </param>
         <summary>
-            Create a named template deployment using a template.
+            Deploys resources to a resource group.
             </summary>
         <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            You can provide the template and parameters directly in the request or
+            link to JSON files.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateOrUpdateAsync">
@@ -388,7 +438,8 @@
             The operations group for this extension method.
             </param>
         <param name="resourceGroupName">
-            The name of the resource group. The name is case insensitive.
+            The name of the resource group to deploy the resources to. The name is
+            case insensitive. The resource group must already exist.
             </param>
         <param name="deploymentName">
             The name of the deployment.
@@ -400,10 +451,13 @@
             The cancellation token.
             </param>
         <summary>
-            Create a named template deployment using a template.
+            Deploys resources to a resource group.
             </summary>
         <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            You can provide the template and parameters directly in the request or
+            link to JSON files.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="Delete">
@@ -427,15 +481,28 @@
             The operations group for this extension method.
             </param>
         <param name="resourceGroupName">
-            The name of the resource group. The name is case insensitive.
+            The name of the resource group with the deployment to delete. The name is
+            case insensitive.
             </param>
         <param name="deploymentName">
-            The name of the deployment to be deleted.
+            The name of the deployment to delete.
             </param>
         <summary>
-            Delete deployment.
+            Deletes a deployment from the deployment history.
             </summary>
-        <remarks>To be added.</remarks>
+        <remarks>
+            A template deployment that is currently running cannot be deleted.
+            Deleting a template deployment removes the associated deployment
+            operations. Deleting a template deployment does not affect the state of
+            the resource group. This is an asynchronous operation that returns a
+            status of 202 until the template deployment is successfully deleted. The
+            Location response header contains the URI that is used to obtain the
+            status of the process. While the process is running, a call to the URI in
+            the Location header returns a status of 202. When the process finishes,
+            the URI in the Location header returns a status of 204 on success. If the
+            asynchronous request failed, the URI in the Location header returns an
+            error-level status code.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="DeleteAsync">
@@ -465,19 +532,32 @@
             The operations group for this extension method.
             </param>
         <param name="resourceGroupName">
-            The name of the resource group. The name is case insensitive.
+            The name of the resource group with the deployment to delete. The name is
+            case insensitive.
             </param>
         <param name="deploymentName">
-            The name of the deployment to be deleted.
+            The name of the deployment to delete.
             </param>
         <param name="cancellationToken">
             The cancellation token.
             </param>
         <summary>
-            Delete deployment.
+            Deletes a deployment from the deployment history.
             </summary>
         <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            A template deployment that is currently running cannot be deleted.
+            Deleting a template deployment removes the associated deployment
+            operations. Deleting a template deployment does not affect the state of
+            the resource group. This is an asynchronous operation that returns a
+            status of 202 until the template deployment is successfully deleted. The
+            Location response header contains the URI that is used to obtain the
+            status of the process. While the process is running, a call to the URI in
+            the Location header returns a status of 202. When the process finishes,
+            the URI in the Location header returns a status of 204 on success. If the
+            asynchronous request failed, the URI in the Location header returns an
+            error-level status code.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="ExportTemplate">
@@ -504,10 +584,10 @@
             The name of the resource group. The name is case insensitive.
             </param>
         <param name="deploymentName">
-            The name of the deployment.
+            The name of the deployment from which to get the template.
             </param>
         <summary>
-            Exports a deployment template.
+            Exports the template used for specified deployment.
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
@@ -543,13 +623,13 @@
             The name of the resource group. The name is case insensitive.
             </param>
         <param name="deploymentName">
-            The name of the deployment.
+            The name of the deployment from which to get the template.
             </param>
         <param name="cancellationToken">
             The cancellation token.
             </param>
         <summary>
-            Exports a deployment template.
+            Exports the template used for specified deployment.
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
@@ -576,13 +656,13 @@
             The operations group for this extension method.
             </param>
         <param name="resourceGroupName">
-            The name of the resource group to get. The name is case insensitive.
+            The name of the resource group. The name is case insensitive.
             </param>
         <param name="deploymentName">
-            The name of the deployment.
+            The name of the deployment to get.
             </param>
         <summary>
-            Get a deployment.
+            Gets a deployment.
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
@@ -615,25 +695,25 @@
             The operations group for this extension method.
             </param>
         <param name="resourceGroupName">
-            The name of the resource group to get. The name is case insensitive.
+            The name of the resource group. The name is case insensitive.
             </param>
         <param name="deploymentName">
-            The name of the deployment.
+            The name of the deployment to get.
             </param>
         <param name="cancellationToken">
             The cancellation token.
             </param>
         <summary>
-            Get a deployment.
+            Gets a deployment.
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="List">
-      <MemberSignature Language="C#" Value="public static Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.ResourceManager.Models.DeploymentExtended&gt; List (this Microsoft.Azure.Management.ResourceManager.IDeploymentsOperations operations, string resourceGroupName, Microsoft.Rest.Azure.OData.ODataQuery&lt;Microsoft.Azure.Management.ResourceManager.Models.DeploymentExtendedFilter&gt; odataQuery = null);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.Rest.Azure.IPage`1&lt;class Microsoft.Azure.Management.ResourceManager.Models.DeploymentExtended&gt; List(class Microsoft.Azure.Management.ResourceManager.IDeploymentsOperations operations, string resourceGroupName, class Microsoft.Rest.Azure.OData.ODataQuery`1&lt;class Microsoft.Azure.Management.ResourceManager.Models.DeploymentExtendedFilter&gt; odataQuery) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.ResourceManager.DeploymentsOperationsExtensions.List(Microsoft.Azure.Management.ResourceManager.IDeploymentsOperations,System.String,Microsoft.Rest.Azure.OData.ODataQuery{Microsoft.Azure.Management.ResourceManager.Models.DeploymentExtendedFilter})" />
+    <Member MemberName="ListByResourceGroup">
+      <MemberSignature Language="C#" Value="public static Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.ResourceManager.Models.DeploymentExtended&gt; ListByResourceGroup (this Microsoft.Azure.Management.ResourceManager.IDeploymentsOperations operations, string resourceGroupName, Microsoft.Rest.Azure.OData.ODataQuery&lt;Microsoft.Azure.Management.ResourceManager.Models.DeploymentExtendedFilter&gt; odataQuery = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.Rest.Azure.IPage`1&lt;class Microsoft.Azure.Management.ResourceManager.Models.DeploymentExtended&gt; ListByResourceGroup(class Microsoft.Azure.Management.ResourceManager.IDeploymentsOperations operations, string resourceGroupName, class Microsoft.Rest.Azure.OData.ODataQuery`1&lt;class Microsoft.Azure.Management.ResourceManager.Models.DeploymentExtendedFilter&gt; odataQuery) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.ResourceManager.DeploymentsOperationsExtensions.ListByResourceGroup(Microsoft.Azure.Management.ResourceManager.IDeploymentsOperations,System.String,Microsoft.Rest.Azure.OData.ODataQuery{Microsoft.Azure.Management.ResourceManager.Models.DeploymentExtendedFilter})" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
@@ -651,29 +731,30 @@
             The operations group for this extension method.
             </param>
         <param name="resourceGroupName">
-            The name of the resource group to filter by. The name is case insensitive.
+            The name of the resource group with the deployments to get. The name is
+            case insensitive.
             </param>
         <param name="odataQuery">
             OData parameters to apply to the operation.
             </param>
         <summary>
-            Get a list of deployments.
+            Get all the deployments for a resource group.
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="ListAsync">
-      <MemberSignature Language="C#" Value="public static System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.ResourceManager.Models.DeploymentExtended&gt;&gt; ListAsync (this Microsoft.Azure.Management.ResourceManager.IDeploymentsOperations operations, string resourceGroupName, Microsoft.Rest.Azure.OData.ODataQuery&lt;Microsoft.Azure.Management.ResourceManager.Models.DeploymentExtendedFilter&gt; odataQuery = null, System.Threading.CancellationToken cancellationToken = null);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.IPage`1&lt;class Microsoft.Azure.Management.ResourceManager.Models.DeploymentExtended&gt;&gt; ListAsync(class Microsoft.Azure.Management.ResourceManager.IDeploymentsOperations operations, string resourceGroupName, class Microsoft.Rest.Azure.OData.ODataQuery`1&lt;class Microsoft.Azure.Management.ResourceManager.Models.DeploymentExtendedFilter&gt; odataQuery, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.ResourceManager.DeploymentsOperationsExtensions.ListAsync(Microsoft.Azure.Management.ResourceManager.IDeploymentsOperations,System.String,Microsoft.Rest.Azure.OData.ODataQuery{Microsoft.Azure.Management.ResourceManager.Models.DeploymentExtendedFilter},System.Threading.CancellationToken)" />
+    <Member MemberName="ListByResourceGroupAsync">
+      <MemberSignature Language="C#" Value="public static System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.ResourceManager.Models.DeploymentExtended&gt;&gt; ListByResourceGroupAsync (this Microsoft.Azure.Management.ResourceManager.IDeploymentsOperations operations, string resourceGroupName, Microsoft.Rest.Azure.OData.ODataQuery&lt;Microsoft.Azure.Management.ResourceManager.Models.DeploymentExtendedFilter&gt; odataQuery = null, System.Threading.CancellationToken cancellationToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.IPage`1&lt;class Microsoft.Azure.Management.ResourceManager.Models.DeploymentExtended&gt;&gt; ListByResourceGroupAsync(class Microsoft.Azure.Management.ResourceManager.IDeploymentsOperations operations, string resourceGroupName, class Microsoft.Rest.Azure.OData.ODataQuery`1&lt;class Microsoft.Azure.Management.ResourceManager.Models.DeploymentExtendedFilter&gt; odataQuery, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.ResourceManager.DeploymentsOperationsExtensions.ListByResourceGroupAsync(Microsoft.Azure.Management.ResourceManager.IDeploymentsOperations,System.String,Microsoft.Rest.Azure.OData.ODataQuery{Microsoft.Azure.Management.ResourceManager.Models.DeploymentExtendedFilter},System.Threading.CancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.Management.ResourceManager.DeploymentsOperationsExtensions/&lt;ListAsync&gt;d__15))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.Management.ResourceManager.DeploymentsOperationsExtensions/&lt;ListByResourceGroupAsync&gt;d__15))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -690,7 +771,8 @@
             The operations group for this extension method.
             </param>
         <param name="resourceGroupName">
-            The name of the resource group to filter by. The name is case insensitive.
+            The name of the resource group with the deployments to get. The name is
+            case insensitive.
             </param>
         <param name="odataQuery">
             OData parameters to apply to the operation.
@@ -699,16 +781,16 @@
             The cancellation token.
             </param>
         <summary>
-            Get a list of deployments.
+            Get all the deployments for a resource group.
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="ListNext">
-      <MemberSignature Language="C#" Value="public static Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.ResourceManager.Models.DeploymentExtended&gt; ListNext (this Microsoft.Azure.Management.ResourceManager.IDeploymentsOperations operations, string nextPageLink);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.Rest.Azure.IPage`1&lt;class Microsoft.Azure.Management.ResourceManager.Models.DeploymentExtended&gt; ListNext(class Microsoft.Azure.Management.ResourceManager.IDeploymentsOperations operations, string nextPageLink) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.ResourceManager.DeploymentsOperationsExtensions.ListNext(Microsoft.Azure.Management.ResourceManager.IDeploymentsOperations,System.String)" />
+    <Member MemberName="ListByResourceGroupNext">
+      <MemberSignature Language="C#" Value="public static Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.ResourceManager.Models.DeploymentExtended&gt; ListByResourceGroupNext (this Microsoft.Azure.Management.ResourceManager.IDeploymentsOperations operations, string nextPageLink);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.Rest.Azure.IPage`1&lt;class Microsoft.Azure.Management.ResourceManager.Models.DeploymentExtended&gt; ListByResourceGroupNext(class Microsoft.Azure.Management.ResourceManager.IDeploymentsOperations operations, string nextPageLink) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.ResourceManager.DeploymentsOperationsExtensions.ListByResourceGroupNext(Microsoft.Azure.Management.ResourceManager.IDeploymentsOperations,System.String)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
@@ -728,23 +810,23 @@
             The NextLink from the previous successful call to List operation.
             </param>
         <summary>
-            Get a list of deployments.
+            Get all the deployments for a resource group.
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="ListNextAsync">
-      <MemberSignature Language="C#" Value="public static System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.ResourceManager.Models.DeploymentExtended&gt;&gt; ListNextAsync (this Microsoft.Azure.Management.ResourceManager.IDeploymentsOperations operations, string nextPageLink, System.Threading.CancellationToken cancellationToken = null);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.IPage`1&lt;class Microsoft.Azure.Management.ResourceManager.Models.DeploymentExtended&gt;&gt; ListNextAsync(class Microsoft.Azure.Management.ResourceManager.IDeploymentsOperations operations, string nextPageLink, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.ResourceManager.DeploymentsOperationsExtensions.ListNextAsync(Microsoft.Azure.Management.ResourceManager.IDeploymentsOperations,System.String,System.Threading.CancellationToken)" />
+    <Member MemberName="ListByResourceGroupNextAsync">
+      <MemberSignature Language="C#" Value="public static System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.ResourceManager.Models.DeploymentExtended&gt;&gt; ListByResourceGroupNextAsync (this Microsoft.Azure.Management.ResourceManager.IDeploymentsOperations operations, string nextPageLink, System.Threading.CancellationToken cancellationToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.IPage`1&lt;class Microsoft.Azure.Management.ResourceManager.Models.DeploymentExtended&gt;&gt; ListByResourceGroupNextAsync(class Microsoft.Azure.Management.ResourceManager.IDeploymentsOperations operations, string nextPageLink, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.ResourceManager.DeploymentsOperationsExtensions.ListByResourceGroupNextAsync(Microsoft.Azure.Management.ResourceManager.IDeploymentsOperations,System.String,System.Threading.CancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.Management.ResourceManager.DeploymentsOperationsExtensions/&lt;ListNextAsync&gt;d__21))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.Management.ResourceManager.DeploymentsOperationsExtensions/&lt;ListByResourceGroupNextAsync&gt;d__21))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -766,7 +848,7 @@
             The cancellation token.
             </param>
         <summary>
-            Get a list of deployments.
+            Get all the deployments for a resource group.
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
@@ -794,16 +876,18 @@
             The operations group for this extension method.
             </param>
         <param name="resourceGroupName">
-            The name of the resource group. The name is case insensitive.
+            The name of the resource group the template will be deployed to. The name
+            is case insensitive.
             </param>
         <param name="deploymentName">
             The name of the deployment.
             </param>
         <param name="parameters">
-            Deployment to validate.
+            Parameters to validate.
             </param>
         <summary>
-            Validate a deployment template.
+            Validates whether the specified template is syntactically correct and will
+            be accepted by Azure Resource Manager..
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
@@ -837,19 +921,21 @@
             The operations group for this extension method.
             </param>
         <param name="resourceGroupName">
-            The name of the resource group. The name is case insensitive.
+            The name of the resource group the template will be deployed to. The name
+            is case insensitive.
             </param>
         <param name="deploymentName">
             The name of the deployment.
             </param>
         <param name="parameters">
-            Deployment to validate.
+            Parameters to validate.
             </param>
         <param name="cancellationToken">
             The cancellation token.
             </param>
         <summary>
-            Validate a deployment template.
+            Validates whether the specified template is syntactically correct and will
+            be accepted by Azure Resource Manager..
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
