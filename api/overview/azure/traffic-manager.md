@@ -5,7 +5,7 @@ keywords: Azure, .NET, SDK, API, Traffic Manager
 author: camsoper
 ms.author: casoper
 manager: douge
-ms.date: 07/14/2017
+ms.date: 07/19/2017
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
