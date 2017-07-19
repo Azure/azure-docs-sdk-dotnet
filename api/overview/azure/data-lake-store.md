@@ -49,13 +49,8 @@ using AdlClient.Models
 Authentication auth = new Authentication("microsoft.onmicrosoft.com"); // change this to YOUR tenant
 auth.Authenticate();
 
-// Collect info about the Azure resources needed for this connection
-string subid = "<Azure Subscription Id>";
-string rg = "<Azure Resource Group>";
-string adls_name = "<Store Account User Name>";
-
 // Identify the accounts
-StoreAccountRef adls_account = new StoreAccountRef(subid, rg, adls_name);
+StoreAccountRef adls_account = new StoreAccountRef(subscriptionId, resourceGroup, userName);
 
 // Create the clients
 AzureClient az = new AzureClient(auth);
