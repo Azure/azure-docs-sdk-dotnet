@@ -2,7 +2,7 @@
 title: Azure Stream Analytics libraries for .NET
 description: Reference for Azure Stream Analytics libraries for .NET
 keywords: Azure, .NET, SDK, API, Stream Analytics
-author: casoper
+author: camsoper
 ms.author: casoper
 manager: douge
 ms.date: 07/19/2017
@@ -88,7 +88,7 @@ StreamingJob createStreamingJobResult = streamAnalyticsManagementClient.Streamin
 
 - [Management .NET SDK: Set up and run analytics jobs using the Azure Stream Analytics API for .NET](/azure/stream-analytics/stream-analytics-dotnet-management-sdk)
 
-View the [complete list](https://azure.microsoft.com/en-us/resources/samples/?platform=dotnet&service=stream-analytics) of Azure Stream Analytics samples.
+View the [complete list](https://azure.microsoft.com/resources/samples/?platform=dotnet&service=stream-analytics) of Azure Stream Analytics samples.
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
-[DotNetCLI]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package
+[DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
