@@ -35,7 +35,7 @@ Install-Package Microsoft.Azure.Management.DataLake.Analytics
 dotnet add package Microsoft.Azure.Management.DataLake.Analytics
 ```
 
-### Example
+### Code Example
 
 This example creates the clients to connect with and manage the analytics account.
 
