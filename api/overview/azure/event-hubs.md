@@ -5,7 +5,7 @@ keywords: Azure, .NET, SDK, API, Event Hubs
 author: camsoper
 ms.author: casoper
 manager: douge
-ms.date: 07/14/2017
+ms.date: 07/19/2017
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
@@ -17,11 +17,52 @@ ms.service: multiple
 
 ## Overview
 
---Overview text here--
+Azure Event Hubs is a highly scalable data streaming platform and event ingestion service. Event Hubs is capable of receiving and processing millions of events per second. Event Hubs can process and store events, data, or telemetry produced by distributed software and devices. Data sent to an event hub can be transformed and stored using any real-time analytics provider or batching/storage adapters. With the ability to provide publish-subscribe capabilities with low latency and at massive scale, Event Hubs serves as the "on ramp" for big data.
+
+To learn more about Azure Event Hubs, read the article [What is Event Hubs?](/event-hubs/event-hubs-what-is-event-hubs)
+
+To get started, check out the [Event Hubs Programming Guide](/event-hubs/event-hubs-programming-guide).
+
+## Management library
+
+Use the Event Hubs management library to create, update, and remove hubs and consumer groups.
+
+Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Management.EventHub) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
+
+#### Visual Studio Package Manager
+
+```powershell
+Install-Package Microsoft.Azure.Management.EventHub
+```
+
+```bash
+dotnet add package Microsoft.Azure.Management.EventHub
+```
+
+### Example
+
+The following code creates a new event hub.
+
+```csharp
+TokenCredentials creds = new TokenCredentials(token);
+EventHubManagementClient ehClient = new EventHubManagementClient(creds)
+{
+    SubscriptionId = subscriptionId
+};
+
+EventHubCreateOrUpdateParameters ehParams = new EventHubCreateOrUpdateParameters()
+{
+    Location = location
+};
+
+Console.WriteLine("Creating Event Hub...");
+await ehClient.EventHubs.CreateOrUpdateAsync(resourceGroupName, namespaceName, EventHubName, ehParams);
+Console.WriteLine("Created Event Hub successfully.");
+```
 
 ## Client library
 
---Event Hubs client overview text here--
+Use the Event Hubs client to send and receive messages to and from Event Hubs.
 
 Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.EventHubs) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
 
@@ -37,20 +78,34 @@ dotnet add package Microsoft.Azure.EventHubs
 
 ### Example
 
---Example overview--
+The following code creates an Event Hubs client and sends a message to the hub.
 
 ```csharp
-/* Code goes here */
+EventHubsConnectionStringBuilder connectionStringBuilder = new EventHubsConnectionStringBuilder(eventHubConnectionString)
+{
+    EntityPath = eventHubEntityPath
+};
+
+EventHubClient eventHubClient = EventHubClient.CreateFromConnectionString(connectionStringBuilder.ToString());
+string message = $"Message {i}";
+Console.WriteLine($"Sending message: {message}");
+await eventHubClient.SendAsync(new EventData(Encoding.UTF8.GetBytes(message)));
 ```
 
 > [!div class="nextstepaction"]
 > [Explore the client APIs](/dotnet/api/overview/azure/eventhub/client)
 
+## Tutorials
 
+* [Send events to Azure Event Hubs using the .NET Framework](/event-hubs/event-hubs-dotnet-framework-getstarted-send)
+
+* [Receive events from Azure Event Hubs using the .NET Framework](/event-hubs/event-hubs-dotnet-framework-getstarted-receive-eph)
 
 ## Samples
 
---Samples list here--
+* [Azure Event Hubs Samples](https://github.com/Azure/azure-event-hubs/tree/master/samples)
+
+Explore more [sample .NET code](https://azure.microsoft.com/resources/samples/?platform=dotnet) you can use in your apps.
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
-[DotNetCLI]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package
+[DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
