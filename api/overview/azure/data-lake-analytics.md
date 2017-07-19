@@ -44,17 +44,12 @@ This example creates the clients to connect with and manage the analytics accoun
 using AdlClient 
 */
 
-/// Setup authentication for this demo
+// Setup authentication for this demo
 Authentication auth = new Authentication("microsoft.onmicrosoft.com"); // change this to YOUR tenant
 auth.Authenticate();
 
-// Collect info about the Azure resources needed for this demo
-string subid = "<Subscription Id>";
-string rg = "<Resource Group>";
-string adla_name = "<user Name>";
-
 // Identify the accounts
-AnalyticsAccountRef adla_account = new AnalyticsAccountRef(subid, rg, adla_name);
+AnalyticsAccountRef adla_account = new AnalyticsAccountRef(subscriptionId, resourceGroup, userName);
 
 // Create the clients
 AzureClient az = new AzureClient(auth);
