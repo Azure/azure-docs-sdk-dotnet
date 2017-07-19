@@ -2,7 +2,7 @@
 title: Azure Stream Analytics libraries for .NET
 description: Reference for Azure Stream Analytics libraries for .NET
 keywords: Azure, .NET, SDK, API, Stream Analytics
-author: marouill
+author: casoper
 ms.author: casoper
 manager: douge
 ms.date: 07/19/2017
