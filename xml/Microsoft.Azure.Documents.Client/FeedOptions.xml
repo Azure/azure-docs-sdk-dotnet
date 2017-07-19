@@ -26,6 +26,7 @@
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -42,6 +43,7 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -65,6 +67,7 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -90,6 +93,13 @@
                 collectionLink, new FeedOptions { EnableCrossPartitionQuery = true }).Where(b => b.Price > 1000);
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            // Enable cross partition query.
+            var queryable = client.CreateDocumentQuery<Book>(
+                collectionLink, new FeedOptions { EnableCrossPartitionQuery = true }).Where(b => b.Price > 1000);
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="EnableLowPrecisionOrderBy">
@@ -99,6 +109,7 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Nullable&lt;System.Boolean&gt;</ReturnType>
@@ -120,6 +131,7 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Nullable&lt;System.Boolean&gt;</ReturnType>
@@ -140,6 +152,13 @@
                 collectionLink, new FeedOptions { EnableScanInQuery = true }).Where(b => b.Price > 1000);
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            // Enable scan when Range index is not specified.
+            var queryable = client.CreateDocumentQuery<Book>(
+                collectionLink, new FeedOptions { EnableScanInQuery = true }).Where(b => b.Price > 1000);
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="MaxBufferedItemCount">
@@ -149,6 +168,7 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
@@ -173,6 +193,12 @@
             MaximumBufferSize = 10, MaxDegreeOfParallelism = 2 });
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            var queryable = client.CreateDocumentQuery<Book>(collectionLink, new FeedOptions { 
+            MaximumBufferSize = 10, MaxDegreeOfParallelism = 2 });
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="MaxDegreeOfParallelism">
@@ -182,6 +208,7 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
@@ -204,6 +231,12 @@
             MaxDegreeOfParallelism = 5});
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            var queryable = client.CreateDocumentQuery<Book>(collectionLink, new FeedOptions { 
+            MaxDegreeOfParallelism = 5});
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="MaxItemCount">
@@ -213,6 +246,7 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Nullable&lt;System.Int32&gt;</ReturnType>
@@ -240,6 +274,18 @@
             }
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            // Fetch query results 10 at a time.
+            using (var queryable = client.CreateDocumentQuery<Book>(collectionLink, new FeedOptions { MaxItemCount = 10 }))
+            {
+                while (queryable.HasResults)
+                {
+                    FeedResponse<Book> response = await queryable.ExecuteNext<Book>();
+                }
+            }
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="PartitionKey">
@@ -249,6 +295,7 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Documents.PartitionKey</ReturnType>
@@ -278,6 +325,14 @@
             ]]></code></example>
         <altmember cref="T:Microsoft.Azure.Documents.DocumentCollection" />
         <altmember cref="T:Microsoft.Azure.Documents.PartitionKeyDefinition" />
+        <example>
+            The following example shows how to read a document feed in a partitioned collection using <see cref="P:Microsoft.Azure.Documents.Client.FeedOptions.PartitionKey" />.
+            The example assumes the collection is created with a <see cref="T:Microsoft.Azure.Documents.PartitionKeyDefinition" /> on the 'country' property in all the documents.
+            <code language="c#"><![CDATA[
+            await client.ReadDocumentFeedAsync(
+                collection.SelfLink, 
+                new RequestOptions { PartitionKey = new PartitionKey("USA") } );
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="PopulateQueryMetrics">
@@ -287,6 +342,7 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -310,6 +366,7 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -328,6 +385,12 @@
             var queryable = client.CreateDocumentQuery<Book>(collectionLink, new FeedOptions { RequestContinuation = prevQuery.ResponseContinuation });
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            // Resume query execution using the continuation from the previous query
+            var queryable = client.CreateDocumentQuery<Book>(collectionLink, new FeedOptions { RequestContinuation = prevQuery.ResponseContinuation });
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="ResponseContinuationTokenLimitInKb">
@@ -337,6 +400,7 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Nullable&lt;System.Int32&gt;</ReturnType>
@@ -360,6 +424,7 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -376,6 +441,12 @@
             In this case, round-trip the token from end user to the application and then back to DocumentDB so that a session
             can be preserved across servers.
             </remarks>
+        <example>
+          <code language="c#"><![CDATA[
+            var queryable = client.CreateDocumentQuery<Book>(
+                collectionLink, new FeedOptions { SessionToken = lastSessionToken });
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             var queryable = client.CreateDocumentQuery<Book>(
