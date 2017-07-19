@@ -58,7 +58,7 @@ fabricClient.ApplicationManager.CreateApplicationAsync(appDesc).Wait();
 ```
 
 > [!div class="nextstepaction"]
-> [Explore the client APIs](/dotnet/api/overview/azure/servicefabric/management)
+> [Explore the client APIs](/dotnet/api/overview/azure/servicefabric/client)
 
 ## Samples
 
