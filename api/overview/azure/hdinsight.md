@@ -17,9 +17,9 @@ ms.service: multiple
 
 ## Overview
 
-The HDInsight Service has a .NET SDK that provides classes that relate to the creation, configuration, submission, and monitoring of Hadoop jobs managed by an Azure HDInsight Service. In addition, it provides classes to manage Azure subscriptions using the HDInsight Service and to configure the clusters, storage accounts, MapReduce programs, and the Hive and Oozie components associated with the HDInsight clusters that are managed by an Azure subscription.
+The HDInsight Service .NET SDK provides classes that relate to the creation, configuration, submission, and monitoring of Hadoop jobs managed by an Azure HDInsight Service. In addition, it provides classes to manage Azure subscriptions using the HDInsight Service and to configure the clusters, storage accounts, and other assets associate with the HDInsight clusters that are managed by an Azure subscription.
 
-## Client library
+## Management library for Jobs
 
 Use the Azure HDInsight client SDK to create, manage, and monitor jobs on a Hadoop cluster. 
 
@@ -57,7 +57,7 @@ HiveJobSubmissionParameters parameters = new HiveJobSubmissionParameters
 var jobResponse = managementClient.JobManagement.SubmitHiveJob(parameters);
 ```
 
-## Management library
+## Management library for clusters
 
 Use the Azure HDInsight management SDK to create, manage, start, stop, and scale Hadoop clusters.
 
@@ -110,7 +110,8 @@ managementClient.Clusters.Create("<ExistingResourceGroupName>", "<NewClusterName
 - [Run Hive jobs](https://docs.microsoft.com/azure/hdinsight/hdinsight-hadoop-use-hive-dotnet-sdk)
 - [Run Pig jobs](https://docs.microsoft.com/azure/hdinsight/hdinsight-hadoop-use-pig-dotnet-sdk)
 - [More jobs](https://docs.microsoft.com/azure/hdinsight/hdinsight-submit-hadoop-jobs-programmatically)
-
+- 
+View the [complete list](https://azure.microsoft.com/resources/samples/?platform=dotnet&service=hdinsight) of Azure SQL Database samples.
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
 [DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
