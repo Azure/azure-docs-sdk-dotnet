@@ -65,10 +65,6 @@ JobCreateParameters jcParam = new JobCreateParameters
 
 // create runbook job. This gives back the Job
 Job job = automationManagementClient.Jobs.Create(automationAccountName, jcParam).Job;
-
-string jobId = job.Properties.JobId.ToString();
-
-Console.WriteLine("Job Started for Runbook {0} with Job Id: {1}", runbookName, jobId);
 ```
 
 > [!div class="nextstepaction"]
