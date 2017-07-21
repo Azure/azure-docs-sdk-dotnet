@@ -82,7 +82,7 @@ This example creates an HDInsight two node Linux Hadoop cluster with an existing
 ```csharp
 HDInsightManagementClient managementClient = new HDInsightManagementClient(authToken);
 // Set parameters for the new cluster
-var parameters = new ClusterCreateParameters
+ClusterCreateParameters parameters = new ClusterCreateParameters
 {
     ClusterSizeInNodes = 2,
     UserName = "admin",
