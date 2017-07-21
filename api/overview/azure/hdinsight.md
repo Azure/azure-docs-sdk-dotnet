@@ -37,7 +37,7 @@ Install-Package Microsoft.Azure.Management.HDInsight.Job
 dotnet add package Microsoft.Azure.Management.HDInsight.Job
 ```
 
-#### Example
+#### Code Example
 
 This example runs a Hive job in a Hadoop cluster.
 
@@ -75,7 +75,7 @@ Install-Package Microsoft.Azure.Management.HDInsight
 dotnet add package Microsoft.Azure.Management.HDInsight
 ```
 
-#### Example
+#### Code Example
 
 This example creates an HDInsight two node Linux Hadoop cluster with an existing Azure Blob Storage.
 

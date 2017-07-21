@@ -33,7 +33,7 @@ Install-Package Microsoft.ServiceFabric
 dotnet add package Microsoft.ServiceFabric
 ```
 
-### Example
+### Code Example
 
 The following example copies an application package to the image store, provisions the application type, and creates an application instance.
 

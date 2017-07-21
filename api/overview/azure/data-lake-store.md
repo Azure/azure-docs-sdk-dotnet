@@ -35,7 +35,7 @@ Install-Package Microsoft.Azure.Management.DataLake.Store
 dotnet add package Microsoft.Azure.Management.DataLake.Store
 ```
 
-### Example
+### Code Example
 
 This example authenticates to an analytics account and store and creates the clients necessary for management.
 

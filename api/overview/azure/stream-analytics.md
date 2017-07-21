@@ -38,7 +38,7 @@ Install-Package Microsoft.Azure.Management.StreamAnalytics
 dotnet add package Microsoft.Azure.Management.StreamAnalytics
 ```
 
-### Example
+### Code Example
 
 This example instantiates a Stream Analytics client and creates a streaming job.
 

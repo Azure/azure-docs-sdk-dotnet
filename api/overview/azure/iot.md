@@ -43,7 +43,7 @@ Install-Package Microsoft.Azure.Devices.Client
 ```bash
 dotnet add package Microsoft.Azure.Devices.Client
 ```
-### Examples 
+### Code Examples 
 
 This example connects to the IoT Hub and sends one message per second.
 

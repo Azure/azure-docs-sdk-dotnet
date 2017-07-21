@@ -32,7 +32,7 @@ Install-Package Microsoft.Azure.Management.Billing
 dotnet add package Microsoft.Azure.Management.Billing
 ```
 
-### Example
+### Code Example
 
 Connect to Azure and get a list of invoices.
 

@@ -39,7 +39,7 @@ Install-Package Microsoft.Azure.Management.EventHub
 dotnet add package Microsoft.Azure.Management.EventHub
 ```
 
-### Example
+### Code Example
 
 The following code creates a new event hub.
 
@@ -76,7 +76,7 @@ Install-Package Microsoft.Azure.EventHubs
 dotnet add package Microsoft.Azure.EventHubs
 ```
 
-### Example
+### Code Example
 
 The following code creates an Event Hubs client and sends a message to the hub.
 

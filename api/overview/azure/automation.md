@@ -39,7 +39,7 @@ Install-Package Microsoft.Azure.Management.Automation
 dotnet add package Microsoft.Azure.Management.Automation
 ```
 
-### Example
+### Code Example
 
 The following example illustrates how to start a new job based on an existing runbook.
 

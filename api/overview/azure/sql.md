@@ -10,7 +10,7 @@ ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: multiple
+ms.service: sql
 ---
 
 # Azure SQL Database APIs for .NET
@@ -39,7 +39,7 @@ Install-Package System.Data.SqlClient
 dotnet add package System.Data.SqlClient
 ```
 
-### Example
+### Code Example
 
 This example connects to a database and reads rows from a table.
 
@@ -92,7 +92,7 @@ Install-Package Microsoft.Azure.Management.Sql.Fluent
 dotnet add package Microsoft.Azure.Management.Sql.Fluent
 ```
 
-### Example
+### Code Example
 
 This example creates a new SQL Database server instance and then creates a new database on that instance.
 

@@ -47,7 +47,7 @@ Install-Package Microsoft.Azure.Management.AppService.Fluent
 dotnet add package Microsoft.Azure.Management.AppService.Fluent
 ```
 
-### Example
+### Code Example
 
 Create a new web app.
 

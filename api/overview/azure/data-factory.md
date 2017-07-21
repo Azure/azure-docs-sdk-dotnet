@@ -43,7 +43,7 @@ Install-Package Microsoft.Azure.Management.DataFactories
 dotnet add package Microsoft.Azure.Management.DataFactories
 ```
 
-### Example
+### Code Example
 
 The following example uses the management library to create a data factory.
 

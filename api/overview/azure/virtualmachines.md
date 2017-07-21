@@ -39,7 +39,7 @@ Install-Package Microsoft.Azure.Management.Compute.Fluent
 dotnet add package Microsoft.Azure.Management.Compute.Fluent
 ```
 
-### Example
+### Code Example
 
 Create a Windows VM.
 
