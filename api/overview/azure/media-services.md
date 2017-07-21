@@ -53,7 +53,7 @@ The following code example uses Media Services .NET SDK to perform the following
 using Microsoft.WindowsAzure.MediaServices.Client;
 */
 
-CloudMediaContext context = new CloudMediaContext(new Uri("<MediaServiceRESTAPIEndpoint>"), tokenProvider);
+CloudMediaContext context = new CloudMediaContext(new Uri(mediaServiceRESTAPIEndpoint), tokenProvider);
 
 // Get an uploaded asset.
 IAsset asset = context.Assets.FirstOrDefault();
@@ -83,8 +83,6 @@ task.OutputAssets.AddNew("Output asset", AssetCreationOptions.None);
 
 job.Submit();
 job.GetExecutionProgressTask(CancellationToken.None).Wait();
-
-//TODO: use job.OutputMediaAssets[0] to retrieve the media asset
 ```
 
 > [!div class="nextstepaction"]
