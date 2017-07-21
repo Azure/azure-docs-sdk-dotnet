@@ -45,7 +45,7 @@ dotnet add package Microsoft.Azure.Devices.Client
 ```
 ### Examples 
 
-This example connects to the IoT Hub and sends a message every 1 second.
+This example connects to the IoT Hub and sends one message per second.
 
 ```csharp
 string deviceKey = "<deviceKey>";
@@ -67,8 +67,8 @@ while (true)
         temperature = currentTemperature,
         humidity = currentHumidity
     };
-    var messageString = JsonConvert.SerializeObject(telemetryDataPoint);
-    var message = new Message(Encoding.ASCII.GetBytes(messageString));
+    string messageString = JsonConvert.SerializeObject(telemetryDataPoint);
+    Message message = new Message(Encoding.ASCII.GetBytes(messageString));
     message.Properties.Add("temperatureAlert", (currentTemperature > 30) ? "true" : "false");
 
     await deviceClient.SendEventAsync(message);
