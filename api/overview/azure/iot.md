@@ -48,15 +48,17 @@ dotnet add package Microsoft.Azure.Devices.Client
 This example connects to the IoT Hub and sends a message every 1 second.
 
 ```csharp
-int _messageId = 1;
 string deviceKey = "<deviceKey>";
 string deviceId = "<deviceId>";
-DeviceClient deviceClient = DeviceClient.Create("<IoTHubHostname>", new DeviceAuthenticationWithRegistrySymmetricKey(deviceId, deviceKey), TransportType.Mqtt);
+string iotHubHostName = "<IoTHubHostname>";
+var deviceAuthentication = new DeviceAuthenticationWithRegistrySymmetricKey(deviceId, deviceKey);
+
+DeviceClient deviceClient = DeviceClient.Create(iotHubHostName, deviceAuthentication, TransportType.Mqtt);
 
 while (true)
 {
-    var currentTemperature = 20 + Rand.NextDouble() * 15;
-    var currentHumidity = 60 + Rand.NextDouble() * 20;
+    double currentTemperature = 20 + Rand.NextDouble() * 15;
+    double currentHumidity = 60 + Rand.NextDouble() * 20;
 
     var telemetryDataPoint = new
     {
@@ -76,6 +78,7 @@ while (true)
 }
 ```
 
+
 > [!div class="nextstepaction"]
 > [Explore the management APIs](/dotnet/api/overview/azure/devices/client)
 
@@ -83,9 +86,9 @@ while (true)
 
 - [Generic Web Service to Event Hub scenario](https://azure.microsoft.com/resources/samples/event-hubs-dotnet-importfromweb/)
 
-View the [complete list](https://azure.microsoft.com/resources/samples/?platform=dotnet&service=iot-hub) of Azure IoT Hubsamples.
+View the [complete list](https://azure.microsoft.com/resources/samples/?platform=dotnet&service=iot-hub) of Azure IoT Upsamples.
 
-View the [Azure IoT Hub developer guide](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide) for more guidances.
+View the [Azure IoT Hub developer guide](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide) for more guidance.
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
 [DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
