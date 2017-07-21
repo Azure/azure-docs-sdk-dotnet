@@ -51,7 +51,7 @@ This example connects to the IoT Hub and sends a message every 1 second.
 string deviceKey = "<deviceKey>";
 string deviceId = "<deviceId>";
 string iotHubHostName = "<IoTHubHostname>";
-var deviceAuthentication = new DeviceAuthenticationWithRegistrySymmetricKey(deviceId, deviceKey);
+DeviceAuthenticationWithRegistrySymmetricKeyvar deviceAuthentication = new DeviceAuthenticationWithRegistrySymmetricKey(deviceId, deviceKey);
 
 DeviceClient deviceClient = DeviceClient.Create(iotHubHostName, deviceAuthentication, TransportType.Mqtt);
 
