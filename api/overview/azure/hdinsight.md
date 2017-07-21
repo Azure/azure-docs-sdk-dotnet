@@ -19,7 +19,9 @@ ms.service: multiple
 
 The HDInsight Service .NET SDK provides classes that relate to the creation, configuration, submission, and monitoring of Hadoop jobs managed by an Azure HDInsight Service. In addition, it provides classes to manage Azure subscriptions using the HDInsight Service and to configure the clusters, storage accounts, and other assets associate with the HDInsight clusters that are managed by an Azure subscription.
 
-## Management library for Jobs
+## Management libraries
+
+### Jobs
 
 Use the Azure HDInsight client SDK to create, manage, and monitor jobs on a Hadoop cluster. 
 
@@ -35,7 +37,7 @@ Install-Package Microsoft.Azure.Management.HDInsight.Job
 dotnet add package Microsoft.Azure.Management.HDInsight.Job
 ```
 
-### Example
+#### Example
 
 This example runs a Hive job in a Hadoop cluster.
 
@@ -57,7 +59,7 @@ HiveJobSubmissionParameters parameters = new HiveJobSubmissionParameters
 var jobResponse = managementClient.JobManagement.SubmitHiveJob(parameters);
 ```
 
-## Management library for clusters
+### HDInsight
 
 Use the Azure HDInsight management SDK to create, manage, start, stop, and scale Hadoop clusters.
 
@@ -73,7 +75,7 @@ Install-Package Microsoft.Azure.Management.HDInsight
 dotnet add package Microsoft.Azure.Management.HDInsight
 ```
 
-### Example
+#### Example
 
 This example creates an HDInsight two node Linux Hadoop cluster with an existing Azure Blob Storage.
 
