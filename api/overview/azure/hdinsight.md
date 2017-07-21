@@ -17,7 +17,7 @@ ms.service: multiple
 
 ## Overview
 
-The HDInsight Service .NET SDK provides classes that relate to the creation, configuration, submission, and monitoring of Hadoop jobs managed by an Azure HDInsight Service. In addition, it provides classes to manage Azure subscriptions using the HDInsight Service and to configure the clusters, storage accounts, and other assets associate with the HDInsight clusters that are managed by an Azure subscription.
+The HDInsight Service .NET SDK provides classes that relate to the creation, configuration, submission, and monitoring of Hadoop jobs managed by an Azure HDInsight Service. In addition, it provides classes to manage Azure subscriptions using the HDInsight Service and to configure the clusters, storage accounts, and other assets associated with the HDInsight clusters that are managed by an Azure subscription.
 
 ## Management libraries
 
@@ -56,7 +56,7 @@ HiveJobSubmissionParameters parameters = new HiveJobSubmissionParameters
     Arguments = arguments
 };
 
-var jobResponse = managementClient.JobManagement.SubmitHiveJob(parameters);
+JobSubmissionResponse jobResponse = managementClient.JobManagement.SubmitHiveJob(parameters);
 ```
 
 ### HDInsight
@@ -112,7 +112,7 @@ managementClient.Clusters.Create("<ExistingResourceGroupName>", "<NewClusterName
 - [Run Hive jobs](https://docs.microsoft.com/azure/hdinsight/hdinsight-hadoop-use-hive-dotnet-sdk)
 - [Run Pig jobs](https://docs.microsoft.com/azure/hdinsight/hdinsight-hadoop-use-pig-dotnet-sdk)
 - [More jobs](https://docs.microsoft.com/azure/hdinsight/hdinsight-submit-hadoop-jobs-programmatically)
-- 
+
 View the [complete list](https://azure.microsoft.com/resources/samples/?platform=dotnet&service=hdinsight) of Azure SQL Database samples.
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
