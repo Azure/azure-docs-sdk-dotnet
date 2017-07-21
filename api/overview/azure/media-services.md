@@ -35,10 +35,6 @@ Install the [NuGet package](https://www.nuget.org/packages/windowsazure.mediaser
 Install-Package windowsazure.mediaservices
 ```
 
-```bash
-dotnet add package windowsazure.mediaservices
-```
-
 ### Example
 
 The following code example uses Media Services .NET SDK to perform the following tasks:
