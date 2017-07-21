@@ -57,13 +57,10 @@ The following code example uses Media Services .NET SDK to perform the following
 using Microsoft.WindowsAzure.MediaServices.Client;
 */
 
-string mediaProcessorName = "Media Encoder Standard";
-var tokenCredentials = new AzureAdTokenCredentials("<AADTenantDomain>", AzureEnvironments.AzureCloudEnvironment);
-var tokenProvider = new AzureAdTokenProvider(tokenCredentials);
-var context = new CloudMediaContext(new Uri("<MediaServiceRESTAPIEndpoint>"), tokenProvider);
+CloudMediaContext context = new CloudMediaContext(new Uri("<MediaServiceRESTAPIEndpoint>"), tokenProvider);
 
 // Get an uploaded asset.
-var asset = context.Assets.FirstOrDefault();
+IAsset asset = context.Assets.FirstOrDefault();
 
 // Encode and generate the output using the "Adaptive Streaming" preset.
 // Declare a new job.
@@ -72,8 +69,10 @@ IJob job = context.Jobs.Create("Media Encoder Standard Job");
 // processor to use for the specific task.
 IMediaProcessor processor = context.MediaProcessors.Where(p => p.Name == mediaProcessorName)
     .ToList().OrderBy(p => new Version(p.Version)).LastOrDefault();
-if (processor == null)
+if (processor == null) 
+{
     throw new ArgumentException(string.Format("Unknown media processor", mediaProcessorName));
+}
 
 // Create a task with the encoding details, using a string preset.
 // In this case "Adaptive Streaming" preset is used.
