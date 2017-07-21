@@ -67,7 +67,7 @@ client.DataFactories.CreateOrUpdate(resourceGroupName,
 
 ## Samples
 
-* [MyDriving - An Azure IOT and Mobile Sample Application](https://azure.microsoft.com/en-us/resources/samples/mydriving/) that uses Data Factory to drive insights.
+* [MyDriving - An Azure IOT and Mobile Sample Application](https://azure.microsoft.com/resources/samples/mydriving/) that uses Data Factory to drive insights.
 
 Explore more [sample .NET code](https://azure.microsoft.com/resources/samples/?platform=dotnet) you can use in your apps.
 
