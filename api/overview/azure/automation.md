@@ -5,7 +5,7 @@ keywords: Azure, .NET, SDK, API, Automation
 author: camsoper
 ms.author: casoper
 manager: douge
-ms.date: 07/14/2017
+ms.date: 07/21/2017
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
@@ -15,8 +15,17 @@ ms.service: multiple
 
 # Azure Automation libraries for .NET
 
+## Overview
+
+Microsoft Azure Automation provides a way for users to automate the tasks that are commonly performed in a cloud and enterprise environment. It saves time and increases the reliability of regular administrative tasks. Tasks can be scheduled to automatically run at regular intervals. You can automate processes using runbooks or automate configuration management using [Desired State Configuration](/automation/automation-dsc-overview). Azure Automation uses runbooks. A runbook is a set of tasks that perform some automated process.
+
+Learn more by reading the [Azure Automation Overview](/automation/automation-intro).
+
+To view an architecture overview and build your first runbook, visit [Getting Started with Azure Automation](/automation/automation-offering-get-started).
 
 ## Management library
+
+Using the management library to manage runbooks and jobs and manage Desired State Configuration settings.
 
 Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Management.Automation) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
 
@@ -30,10 +39,42 @@ Install-Package Microsoft.Azure.Management.Automation
 dotnet add package Microsoft.Azure.Management.Automation
 ```
 
+### Code Example
+
+The following example illustrates how to start a new job based on an existing runbook.
+
+```csharp
+/*
+  using Microsoft.Azure.Management.Automation;
+*/
+AutomationManagementClient client =
+    new AutomationManagementClient(new CertificateCloudCredentials(subscriptionId, cert));
+
+// Create job create parameters
+JobCreateParameters jcParam = new JobCreateParameters
+{
+    Properties = new JobCreateProperties
+    {
+        Runbook = new RunbookAssociationProperty
+        {
+            Name = runbookName
+        },
+        Parameters = null // optional parameters here
+    }
+};
+
+// create runbook job. This gives back the Job
+Job job = automationManagementClient.Jobs.Create(automationAccountName, jcParam).Job;
+```
+
 > [!div class="nextstepaction"]
 > [Explore the management APIs](/dotnet/api/overview/azure/automation/management)
 
+## Samples
 
+* [AzureBot](https://github.com/Microsoft/AzureBot) uses the automation library with the [Bot Framework](https://docs.microsoft.com/bot-framework/) and [Cognitive Services](/cognitive-services) to improve developer productivity on Azure
+
+Explore more [sample .NET code](https://azure.microsoft.com/resources/samples/?platform=dotnet) you can use in your apps.
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
-[DotNetCLI]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package
+[DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
