@@ -5,12 +5,12 @@ keywords: Azure, .NET, SDK, API, SQL, database
 author: camsoper
 ms.author: casoper
 manager: douge
-ms.date: 06/20/2017
+ms.date: 07/21/2017
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: multiple
+ms.service: sql
 ---
 
 # Azure SQL Database APIs for .NET
@@ -19,7 +19,7 @@ ms.service: multiple
 
 [Azure SQL Database](https://docs.microsoft.com/azure/sql-database/sql-database-technical-overview) is a database service using the Microsoft SQL Server engine that supports relational, JSON, spatial, and XML data. 
 
-To learn more about the Azure .NET APIs, see [Get started with the Azure .NET APIs](/dotnet/azure/dotnet-sdk-azure-get-started).
+To learn more about the using SQL Database with .NET, see [Use .NET with Visual Studio to connect and query an Azure SQL database](https://docs.microsoft.com/azure/sql-database/sql-database-connect-query-dotnet-visual-studio).
 
 ## Client library
 
