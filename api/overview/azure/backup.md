@@ -21,7 +21,7 @@ Azure Backup is the cloud service you can use to back up, protect, and restore y
 
 Learn more about Azure Backup by reading [What is Azure Backup?](/azure/backup/backup-introduction-to-azure-backup)
 
-Get started with a walkthrough to [Back up Azure virtual machines to Recovery Services vaults](https://docs.microsoft.com/en-us/azure/backup/backup-azure-vms-first-look-arm).
+Get started with a walkthrough to [Back up Azure virtual machines to Recovery Services vaults](/azure/backup/backup-azure-vms-first-look-arm).
 
 ## Management library
 
@@ -53,4 +53,4 @@ BaseRecoveryServicesJobResponse resp =
 > [Explore the management APIs](/dotnet/api/overview/azure/backup/management)
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
-[DotNetCLI]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package
+[DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
