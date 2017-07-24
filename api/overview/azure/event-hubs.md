@@ -19,9 +19,9 @@ ms.service: multiple
 
 Azure Event Hubs is a highly scalable data streaming platform and event ingestion service. Event Hubs is capable of receiving and processing millions of events per second. Event Hubs can process and store events, data, or telemetry produced by distributed software and devices. Data sent to an event hub can be transformed and stored using any real-time analytics provider or batching/storage adapters. With the ability to provide publish-subscribe capabilities with low latency and at massive scale, Event Hubs serves as the "on ramp" for big data.
 
-To learn more about Azure Event Hubs, read the article [What is Event Hubs?](/event-hubs/event-hubs-what-is-event-hubs)
+To learn more about Azure Event Hubs, read the article [What is Event Hubs?](/azure/event-hubs/event-hubs-what-is-event-hubs)
 
-To get started, check out the [Event Hubs Programming Guide](/event-hubs/event-hubs-programming-guide).
+To get started, check out the [Event Hubs Programming Guide](/azure/event-hubs/event-hubs-programming-guide).
 
 ## Management library
 
@@ -97,9 +97,9 @@ await eventHubClient.SendAsync(new EventData(Encoding.UTF8.GetBytes(message)));
 
 ## Tutorials
 
-* [Send events to Azure Event Hubs using the .NET Framework](/event-hubs/event-hubs-dotnet-framework-getstarted-send)
+* [Send events to Azure Event Hubs using the .NET Framework](/azure/event-hubs/event-hubs-dotnet-framework-getstarted-send)
 
-* [Receive events from Azure Event Hubs using the .NET Framework](/event-hubs/event-hubs-dotnet-framework-getstarted-receive-eph)
+* [Receive events from Azure Event Hubs using the .NET Framework](/azure/event-hubs/event-hubs-dotnet-framework-getstarted-receive-eph)
 
 ## Samples
 
