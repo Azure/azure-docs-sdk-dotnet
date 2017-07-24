@@ -17,15 +17,15 @@ ms.service: multiple
 
 ## Overview
 
-Azure Data Factory is a cloud-based data integration service. It enables you to create data-driven workflows in the cloud to orchestrate and automate data movement and data transformation. Using Azure Data Factory, you can create and schedule data-driven workflows (called pipelines). Pipelines ingest data from disparate data stores and process/transform the data by using compute services. You can integrate with services such as [Azure HDInsight Hadoop](/hdinsight/), Spark, [Azure Data Lake Analytics](/data-lake-analytics/), and [Azure Machine Learning](/machine-learning). Publish output data to data stores such as [Azure SQL Data Warehouse](/sql-data-warehouse) for business intelligence (BI) applications to consume.
+Azure Data Factory is a cloud-based data integration service. It enables you to create data-driven workflows in the cloud to orchestrate and automate data movement and data transformation. Using Azure Data Factory, you can create and schedule data-driven workflows (called pipelines). Pipelines ingest data from disparate data stores and process/transform the data by using compute services. You can integrate with services such as [Azure HDInsight Hadoop](/azure/hdinsight/), Spark, [Azure Data Lake Analytics](/data-lake-analytics/), and [Azure Machine Learning](/azure/machine-learning). Publish output data to data stores such as [Azure SQL Data Warehouse](/azure/sql-data-warehouse) for business intelligence (BI) applications to consume.
 
-To learn more, read the [Introduction to Azure Data Factory](/data-factory/data-factory-introduction).
+To learn more, read the [Introduction to Azure Data Factory](/azure/data-factory/data-factory-introduction).
 
 Get started with one of the following tutorials:
 
-* [Create a pipeline to copy data](/data-factory/data-factory-copy-data-from-azure-blob-storage-to-sql-database)
-* [Create a pipeline to transform data](/data-factory/data-factory-build-your-first-pipeline)
-* [Move data between on-premises sources and the cloud](/data-factory/data-factory-move-data-between-onprem-and-cloud)
+* [Create a pipeline to copy data](/azure/data-factory/data-factory-copy-data-from-azure-blob-storage-to-sql-database)
+* [Create a pipeline to transform data](/azure/data-factory/data-factory-build-your-first-pipeline)
+* [Move data between on-premises sources and the cloud](/azure/data-factory/data-factory-move-data-between-onprem-and-cloud)
 
 ## Management library
 
