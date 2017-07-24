@@ -5,7 +5,7 @@ keywords: Azure, .NET ODBC, SDK, API, SQL, ADO.NET, database, PostGres, PostgreS
 author: camsoper
 ms.author: casoper
 manager: douge
-ms.date: 06/20/2017
+ms.date: 07/17/2017
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -17,64 +17,58 @@ ms.service: postgresql
 
 ## Overview
 
+Work with data and resources stored in [Azure Database for PostgreSQL](https://docs.microsoft.com/azure/postgresql/).
+
+## Client API
+
 The recommended client library for accessing Azure Database for PostgreSQL is the open-source [Npgsql ADO.NET data provider](http://www.npgsql.org/). Use the ADO.NET provider to connect to the database and execute SQL statements directly or through Entity Framework with the Npgsql's [Entity Framework 6](http://www.npgsql.org/ef6/index.html) or [Entity Framework Core](http://www.npgsql.org/efcore/index.html) providers.
 
-Learn more about [Azure Database for PostgreSQL](https://docs.microsoft.com/azure/postgresql/).
+Install the [NuGet package](https://www.nuget.org/packages/Npgsql) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
 
-## Import the libraries
-
-### Visual Studio 
-
-In the [Package Manager](https://docs.microsoft.com/dotnet/azure/dotnet-sdk-azure-install?view=azure-dotnet) window, use the following cmdlet:
+#### Visual Studio Package Manager
 
 ```powershell
 Install-Package Npgsql
-``` 
+```
 
-### .NET Core command line
-
-Execute the following command in your project directory:
+#### .NET Core CLI
 
 ```bash
 dotnet add package Npgsql
 ```
 
-## Example
+### Code Example
 
 ```csharp
-using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
-{
-        // Create the Command and Parameter objects.
-        NpgsqlCommand command = new NpgsqlCommand(queryString, connection);
-        command.Parameters.AddWithValue("@widgetId", paramValue);
+/* Include this 'using' directive...
+using Npgsql;
+*/
 
-        // Open the connection in a try/catch block. 
-        // Create and execute the DataReader, writing the result
-        // set to the console window.
-        try
-        {
-                connection.Open();
-                using (var reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                            Console.WriteLine("\t{0}\t{1}\t{2}",
-                            reader[0], reader[1], reader[2]);
-                    }
-                }
-                
-        }
-        catch (Exception ex)
-        {
-                Console.WriteLine(ex.Message);
-        }
-        Console.ReadLine();
+// Always store connection strings securely. 
+string connectionString = "Server=[servername].postgres.database.azure.com; " +
+    "Port=5432; Database=myDataBase; User Id=[userid]@[servername]; Password=password;";
+
+// Best practice is to scope the NpgsqlConnection to a "using" block
+using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
+{
+    // Connect to the database
+    conn.Open();
+
+    // Read rows
+    NpgsqlCommand selectCommand = new NpgsqlCommand("SELECT * FROM MyTable", conn);
+    NpgsqlDataReader results = selectCommand.ExecuteReader();
+    
+    // Enumerate over the rows
+    while(results.Read())
+    {
+        Console.WriteLine("Column 0: {0} Column 1: {1}", results[0], results[1]);
+    }
 }
 ```
 
-## Samples
+### Samples
 
 - [ADO.NET code examples](/dotnet/framework/data/adonet/ado-net-code-examples)
 - [Design a PostgreSQL database using the Azure CLI](https://docs.microsoft.com/azure/postgresql/tutorial-design-database-using-azure-cli) 
-
-Explore more [sample .NET code](https://azure.microsoft.com/resources/samples/?platform=.NET) you can use in your apps.
+[PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
+[DotNetCLI]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package

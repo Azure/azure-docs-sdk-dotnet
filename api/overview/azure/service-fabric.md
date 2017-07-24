@@ -33,7 +33,7 @@ Install-Package Microsoft.ServiceFabric
 dotnet add package Microsoft.ServiceFabric
 ```
 
-### Example
+### Code Example
 
 The following example copies an application package to the image store, provisions the application type, and creates an application instance.
 
@@ -58,7 +58,7 @@ fabricClient.ApplicationManager.CreateApplicationAsync(appDesc).Wait();
 ```
 
 > [!div class="nextstepaction"]
-> [Explore the client APIs](/dotnet/api/overview/azure/servicefabric/management)
+> [Explore the client APIs](/dotnet/api/overview/azure/servicefabric/client)
 
 ## Samples
 

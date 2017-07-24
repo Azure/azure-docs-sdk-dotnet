@@ -18,11 +18,11 @@ The **Azure SDK for Visual Studio 2015** and **Service Fabric SDK and Tools for 
 
 ## Using the Web Platform Installer
 
-1. Download and run [Web Platform Installer site](http://go.microsoft.com/fwlink/?LinkId=255386).
+1. Download and run this [Web Platform Installer bootstrapper](https://www.microsoft.com/web/handlers/webpi.ashx?command=getinstallerredirect&appid=VWDOrVs2015AzurePack;MicrosoftAzure-ServiceFabric-VS2015).  
 
-2. On the **Spotlight** tab, click the **Add** buttons next to **Microsoft Azure Service Fabric SDK and Tools - x.x.xxx (VS2015)** and **Microsoft Azure SDK for .NET (VS2015) - x.x.x**, and then click the **Install** button.
+2. The bootstrapper will install Web Platform Installer (if needed) and automatically put the **Azure SDK for Visual Studio 2015** and **Service Fabric SDK and Tools for Visual Studio 2015** items in your *Items to be installed* list.  Click **Install**.
 
-    ![Web PI](media\dotnet-sdk-vs2015-install\webpi.png)
+    ![Web Platform Installer](media/dotnet-sdk-vs2015-install/webpi.png)
 
 3. On the next screen, click **I Accept**.  Web PI will begin downloading and installing the components you selected.
 

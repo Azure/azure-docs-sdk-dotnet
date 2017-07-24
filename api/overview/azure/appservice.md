@@ -5,7 +5,7 @@ keywords: Azure, .NET, SDK, API, web apps, app service, mobile, asp.net
 author: camsoper
 ms.author: casoper
 manager: douge
-ms.date: 06/09/2017
+ms.date: 07/17/2017
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -26,40 +26,54 @@ ms.service: multiple
 
 ## Overview
 
-Deploy, manage, and scale web apps, APIs, and mobile apps running in [Azure App Service](https://docs.microsoft.com/azure/app-service) from your .NET code using the management libraries. The management libraries also provide a .NET interface for automating app configuration as an alternative to using the Azure portal, [PowerShell](https://docs.microsoft.com/powershell/azure/get-started-azureps?view=azurermps-4.0.0), or [CLI](https://docs.microsoft.com/cli/azure/install-azure-cli).
+[Azure App Service](/azure/app-service/app-service-value-prop-what-is) allows you to deploy and scale websites, web applications, services, and REST APIs.
 
-## Import the libraries
+## Management API
 
-### Visual Studio 
+Deploy, manage, and scale elements hosted in Azure App Service with the management API.
 
-In the [Package Manager](https://docs.microsoft.com/dotnet/azure/dotnet-sdk-azure-install?view=azure-dotnet) window, use the following cmdlet:
+Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Management.AppService.Fluent) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
+
+
+#### Visual Studio package manager
 
 ```powershell
 Install-Package Microsoft.Azure.Management.AppService.Fluent
-``` 
+```
 
-### .NET Core command line
-
-Execute the following command in your project directory:
+#### .NET Core CLI
 
 ```bash
 dotnet add package Microsoft.Azure.Management.AppService.Fluent
 ```
 
-## Example
+### Code Example
 
 Create a new web app.
 
 ```csharp
+/* Include these "using" directives...
+using Microsoft.Azure.Management.ResourceManager.Fluent.Core;
+using Microsoft.Azure.Management.AppService.Fluent;
+*/
 
-var app1 = azure.WebApps
-        .Define(app1Name)
-        .WithRegion(Region.USWest)
-        .WithNewResourceGroup(rg1Name)
-        .WithNewWindowsPlan(PricingTier.StandardS1)
-        .Create();
+IWebApp app1 = azure.WebApps
+    .Define("MyUniqueWebAddress")
+    .WithRegion(Region.USWest)
+    .WithNewResourceGroup("MyResourceGroup")
+    .WithNewWindowsPlan(PricingTier.StandardS1)
+    .Create();
 ```
 
-## Samples
+> [!div class="nextstepaction"]
+> [Explore the Management APIs](/dotnet/api/overview/azure/appservice/management)
 
-- [Azure management libraries for .NET samples for web apps](/dotnet/azure/dotnet-sdk-azure-web-apps-samples)
+### Samples
+
+* [Manage your web apps with the .NET SDK for Azure](https://azure.microsoft.com/en-us/resources/samples/app-service-web-dotnet-manage/)
+* [ASP.NET sample for Azure App Service](https://azure.microsoft.com/en-us/resources/samples/app-service-web-dotnet-get-started/)
+
+View the [complete list](https://azure.microsoft.com/en-us/resources/samples/?platform=dotnet&term=app%20service) of Azure App Service samples.
+
+[PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
+[DotNetCLI]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package

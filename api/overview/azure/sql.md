@@ -5,12 +5,12 @@ keywords: Azure, .NET, SDK, API, SQL, database
 author: camsoper
 ms.author: casoper
 manager: douge
-ms.date: 06/20/2017
+ms.date: 07/21/2017
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: multiple
+ms.service: sql
 ---
 
 # Azure SQL Database APIs for .NET
@@ -19,7 +19,7 @@ ms.service: multiple
 
 [Azure SQL Database](https://docs.microsoft.com/azure/sql-database/sql-database-technical-overview) is a database service using the Microsoft SQL Server engine that supports relational, JSON, spatial, and XML data. 
 
-To learn more about the Azure .NET APIs, see [Get started with the Azure .NET APIs](/dotnet/azure/dotnet-sdk-azure-get-started).
+To learn more about the using SQL Database with .NET, see [Use .NET with Visual Studio to connect and query an Azure SQL database](https://docs.microsoft.com/azure/sql-database/sql-database-connect-query-dotnet-visual-studio).
 
 ## Client library
 
@@ -39,12 +39,12 @@ Install-Package System.Data.SqlClient
 dotnet add package System.Data.SqlClient
 ```
 
-### Example
+### Code Example
 
 This example connects to a database and reads rows from a table.
 
 ```csharp
-/* Include this 'using' directive:
+/* Include this 'using' directive...
 using System.Data.SqlClient;
 */
 
@@ -92,12 +92,12 @@ Install-Package Microsoft.Azure.Management.Sql.Fluent
 dotnet add package Microsoft.Azure.Management.Sql.Fluent
 ```
 
-### Example
+### Code Example
 
 This example creates a new SQL Database server instance and then creates a new database on that instance.
 
 ```csharp
-/* Include these 'using' directives:
+/* Include these 'using' directives...
 using Microsoft.Azure.Management.Sql.Fluent;
 using Microsoft.Azure.Management.ResourceManager.Fluent.Core;
 */

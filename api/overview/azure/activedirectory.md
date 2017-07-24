@@ -5,7 +5,7 @@ keywords: Azure, .NET, SDK, API, AAD, Active Directory
 author: camsoper
 ms.author: casoper
 manager: douge
-ms.date: 06/20/2017
+ms.date: 07/17/2017
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -17,34 +17,39 @@ ms.service: multiple
 
 ## Overview
 
-Sign-on users to web apps and control access to API and applications with Azure Active Directory. The [Azure Active Directory authentication library (ADAL) for .NET](https://github.com/AzureAD/azure-activedirectory-library-for-dotnet) provides an interface to set up OAuth2, OpenID Connect, and Active Directory Graph API authentication flows and provides support for single sign-on with [SAML 2.0](https://docs.microsoft.com/azure/active-directory/develop/active-directory-saml-protocol-reference).
+Sign-on users and manage access to applications and APIs with Azure Active Directory.
 
-The management libraries provide an interface to configure [role based access control](https://docs.microsoft.com/azure/active-directory/role-based-access-control-what-is) and assign identities (such as users and [service principals](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-application-objects)) to those roles.
+To get started with Azure Active Directory, see [ASP.NET web app sign-in and sign-out with Azure AD](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-devquickstarts-webapp-dotnet).
 
-## Import the libraries
+## Client library
 
-### Visual Studio 
+Connect and authenticate users or applications over OAuth2, OpenID Connect, Active Directory Graph API authentication or [SAML 2.0](https://docs.microsoft.com/azure/active-directory/develop/active-directory-saml-protocol-reference).
 
-In the [Package Manager](https://docs.microsoft.com/dotnet/azure/dotnet-sdk-azure-install?view=azure-dotnet) window, use the following cmdlet:
+Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Management.AppService.Fluent) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
+
+#### Visual Studio Package Manager
 
 ```powershell
 Install-Package Microsoft.IdentityModel.Clients.ActiveDirectory
-``` 
+```
 
-### .NET Core command line
-
-Execute the following command in your project directory:
+#### .NET Core CLI
 
 ```bash
 dotnet add package Microsoft.IdentityModel.Clients.ActiveDirectory
 ```
 
-## Example
+### Code Example
 
 Retrieve an access token for a desktop application.
 
 ```csharp
+/* Include this "using" directive...
+using Microsoft.IdentityModel.Clients.ActiveDirectory;
+*/
+
 AuthenticationResult result = null;
+AuthenticationContext authContext = new AuthenticationContext("https://someauthority.com");
 try
 {
     result = await authContext.AcquireTokenAsync(graphResourceId, clientId, redirectUri, new PlatformParameters(PromptBehavior.Auto));
@@ -59,6 +64,19 @@ catch (AdalException ex)
 }
 ```
 
-## Samples
+> [!div class="nextstepaction"]
+> [Explore the client APIs](/dotnet/api/overview/azure/activedirectory/client)
+
+### Samples
+
+* [Use OpenID Connect to authenticate users from an Azure AD tenant][1]
+* [Use Oauth2 to call a web API with application permissions][2]
+* [Use role-based access control (RBAC) in an application][3]
 
 Explore the full collection of [Azure Active Directory code samples](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-code-samples).
+
+[1]: [https://azure.microsoft.com/en-us/resources/samples/active-directory-dotnet-webapp-openidconnect/]
+[2]: [https://azure.microsoft.com/en-us/resources/samples/active-directory-dotnet-webapp-webapi-oauth2-appidentity/]
+[3]: [https://azure.microsoft.com/en-us/resources/samples/active-directory-dotnet-webapp-roleclaims/]
+[PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
+[DotNetCLI]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package
