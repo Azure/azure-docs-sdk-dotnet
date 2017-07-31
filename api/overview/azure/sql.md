@@ -5,7 +5,7 @@ keywords: Azure, .NET, SDK, API, SQL, database
 author: camsoper
 ms.author: casoper
 manager: douge
-ms.date: 07/21/2017
+ms.date: 07/31/2017
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -103,7 +103,7 @@ using Microsoft.Azure.Management.ResourceManager.Fluent.Core;
 */
 
 string startAddress = "0.0.0.0";
-string endAddress = "255.255.255.255;
+string endAddress = "255.255.255.255";
 
 // Create the SQL server instance
 ISqlServer sqlServer = azure.SqlServers.Define("UniqueServerName")

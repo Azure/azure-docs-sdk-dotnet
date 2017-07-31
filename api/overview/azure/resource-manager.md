@@ -5,7 +5,7 @@ keywords: Azure, .NET, SDK, API, Resource Manager
 author: camsoper
 ms.author: casoper
 manager: douge
-ms.date: 07/14/2017
+ms.date: 07/31/2017
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
@@ -17,12 +17,11 @@ ms.service: multiple
 
 ## Overview
 
---Overview text here--
-
+Azure Resource Manager enables you to work with the resources in your solution as a group.  For more information about Resource Manager, see [Azure Resource Manager overview](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview).
 
 ## Management library
 
---Resource Manager management blurb here--
+The Azure Resource Manager library for .NET enables you to create, update, delete, and list resources and resource groups.
 
 Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Management.ResourceManager.Fluent) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
 
@@ -38,10 +37,18 @@ dotnet add package Microsoft.Azure.Management.ResourceManager.Fluent
 
 ### Example
 
---Example overview--
+This example creates a new resource group.
 
 ```csharp
-/* Code goes here */
+/* Include these "using" directives.
+using Microsoft.Azure.Management.ResourceManager.Fluent
+using Microsoft.Azure.Management.ResourceManager.Fluent.Core;
+*/
+
+IResourceGroup resourceGroup = azure.ResourceGroups
+    .Define("ResourceGroupName")
+    .WithRegion(Region.USWest)
+    .Create();
 ```
 
 > [!div class="nextstepaction"]
@@ -50,7 +57,11 @@ dotnet add package Microsoft.Azure.Management.ResourceManager.Fluent
 
 ## Samples
 
---Samples list here--
+* [Manage resource groups](https://github.com/Azure-Samples/resources-dotnet-manage-resource-group)
+* [Manage resources](https://github.com/Azure-Samples/resources-dotnet-manage-resource)
+* [Deploy resources with ARM templates](https://github.com/Azure-Samples/resources-dotnet-deploy-using-arm-template)
+* [Deploy resources with ARM templates (with progress)](https://github.com/Azure-Samples/resources-dotnet-deploy-using-arm-template-with-progress)
+
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
 [DotNetCLI]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package

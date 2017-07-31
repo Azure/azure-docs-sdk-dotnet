@@ -5,24 +5,26 @@ keywords: Azure, .NET, SDK, API, CDN
 author: camsoper
 ms.author: casoper
 manager: douge
-ms.date: 07/14/2017
+ms.date: 07/31/2017
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: multiple
+ms.service: cdn
 ---
 
 # Azure CDN libraries for .NET
 
 ## Overview
 
---Overview text here--
+The Azure Content Delivery Network (CDN) caches static web content at strategically placed locations to provide maximum throughput for delivering content to users. The CDN offers developers a global solution for delivering high-bandwidth content by caching the content at physical nodes across the world.
+
+To learn more about Azure CDN, see [Overview of the Azure Content Delivery Network](https://docs.microsoft.com/azure/cdn/cdn-overview).
 
 
 ## Management library
 
---CDN management blurb here--
+You can use the Azure CDN Library for .NET to automate creation and management of CDN profiles and endpoints. 
 
 Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Management.Cdn.Fluent) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
 
@@ -38,10 +40,21 @@ dotnet add package Microsoft.Azure.Management.Cdn.Fluent
 
 ### Example
 
---Example overview--
+This example creates a new CDN profile with a new endpoint pointed to `www.contoso.com`.
 
 ```csharp
-/* Code goes here */
+/* Include these "using" directives.
+using Microsoft.Azure.Management.Cdn.Fluent;
+using Microsoft.Azure.Management.ResourceManager.Fluent.Core;
+*/
+
+ICdnProfile profileDefinition = azure.CdnProfiles.Define("CdnProfileName")
+    .WithRegion(Region.USCentral)
+    .WithExistingResourceGroup("ResourceGroupName")
+    .WithStandardVerizonSku()
+    .WithNewEndpoint("www.contoso.com")
+    .Create();
+
 ```
 
 > [!div class="nextstepaction"]
@@ -50,7 +63,7 @@ dotnet add package Microsoft.Azure.Management.Cdn.Fluent
 
 ## Samples
 
---Samples list here--
+* [Getting started with CDN - Manage CDN - in .NET](https://github.com/Azure-Samples/cdn-dotnet-manage-cdn)
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
 [DotNetCLI]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package
