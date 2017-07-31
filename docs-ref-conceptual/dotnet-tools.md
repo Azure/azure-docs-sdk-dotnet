@@ -18,33 +18,57 @@ Whatever your operating system, we have a great set of tools to help you develop
 
 ## [Windows](#tab/windows)
 
-<img src="https://docs.microsoft.com/en-us/media/logos/logo_vs-ide.svg" width="50" height="50"></img>
+<table>
+  <tr>
+    <td width="50">
+        <img src="https://docs.microsoft.com/en-us/media/logos/logo_vs-ide.svg" width="50" height="50"></img>
+    </td>
+    <td>
+        Visual Studio 2017 has built-in support for Azure development.
+    </td>
+  </tr>
+</table>
 
 ### Step 1: Download Visual Studio 2017
 
 You can skip this step if you already have Visual Studio 2017 installed.
 
+Still using Visual Studio 2015?  [click here for installation instructions](dotnet-sdk-vs2015-install.md).
+
 > [!div class="nextstepaction"]
 > [Download Visual Studio 2017](https://www.visualstudio.com/downloads/)
 
+
 ### Step 2: Install the two Azure workloads
 
-After launching the Visual Studio installer, make sure the Azure and ASP.NET web development workloads are checked.
+After launching the Visual Studio 2017 installer, make sure the Azure and ASP.NET web development workloads are checked.
 
 ![Visual Studio Installer](media/dotnet-tools/azure-workloads.png)
 
-[Visual Studio 2015 Instructions](dotnet-sdk-vs2015-install.md)
+### Step 3: Develop with .NET on Azure
+
+Get started by [deploying your first .NET app on Azure](https://docs.microsoft.com/azure/app-service-web/app-service-web-get-started-dotnet).
+
 
 ## [macOS](#tab/macos)
+<table>
+  <tr>
+    <td width="50">
+        <img src="https://docs.microsoft.com/en-us/media/logos/logo_vs-mac.svg" width="50" height="50"></img>
+    </td>
+    <td>
+        Visual Studio for Mac has everything you need for Azure development.
+    </td>
+  </tr>
+</table>
 
-<img src="https://docs.microsoft.com/en-us/media/logos/logo_vs-mac.svg" width="50" height="50"></img>
 
 ### Step 1: Download Visual Studio for Mac
 
-During install, Azure tools are already enabled by default.
-
 > [!div class="nextstepaction"]
 > [Download Visual Studio for Mac](https://www.visualstudio.com/vs/visual-studio-mac/)
+
+During install, Azure tools are already enabled by default.
 
 ![Visual Studio for Mac Installer](media/dotnet-tools/azure-vsmac.png)
 
