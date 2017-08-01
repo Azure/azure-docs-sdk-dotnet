@@ -16,7 +16,7 @@ ms.service: multiple
 # Azure Virtual Network libraries for .NET
 
 ## Overview
-The [Azure Virtual Network](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview) service enables you to securely connect Azure resources to each other with virtual networks (VNets). A VNet is a representation of your own network in the cloud. You can also connect VNets to each other, enabling resources connected to either VNet to communicate with each other. 
+The [Azure Virtual Network](/azure/virtual-network/virtual-networks-overview) service enables you to securely connect Azure resources to each other with virtual networks (VNets). A VNet is a representation of your own network in the cloud. You can also connect VNets to each other, enabling resources connected to either VNet to communicate with each other. 
 
 ## Management library
 
@@ -74,11 +74,20 @@ using (NetworkManagementClient client = new NetworkManagementClient(credentials)
             }
         }
     };
-   await client.VirtualNetworks.CreateOrUpdateAsync("resourceGroupName", "vNetName", vnet);
+   await client.VirtualNetworks.CreateOrUpdateAsync(resourceGroupName, vNetName, vnet);
 }
 
 ```
 
+## Samples
+- [Managing Virtual Networks with subnets](https://github.com/Azure-Samples/network-dotnet-manage-virtual-network)
+
+Explore more [.NET sample code](https://azure.microsoft.com/resources/samples/?platform=dotnet) that you can use in your apps.
+
 > [!div class="nextstepaction"]
 > [Explore the management APIs](/dotnet/api/overview/azure/network/management)
+
+ 
+[PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console 
+[DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package 
 
