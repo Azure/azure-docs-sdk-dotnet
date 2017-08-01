@@ -76,16 +76,16 @@ using (BatchClient batchClient = await BatchClient.OpenAsync(credentials))
 
 Use the management library to programmatically manage Batch accounts, quotas, and application packages.
 
-Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Management.Batch.Fluent) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
+Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Management.Batch) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
 
 #### Visual Studio Package Manager
 
 ```powershell
-Install-Package Microsoft.Azure.Management.Batch.Fluent
+Install-Package Microsoft.Azure.Management.Batch
 ```
 
 ```bash
-dotnet add package Microsoft.Azure.Management.Batch.Fluent
+dotnet add package Microsoft.Azure.Management.Batch
 ```
 
 ### Example
@@ -94,8 +94,8 @@ The following example retrieves the quota for the subscription, creates an accou
 
 ```csharp
 /*
-using Microsoft.Azure.Management.Batch.Fluent;
-using Microsoft.Azure.Management.Batch.Fluent.Models;
+using Microsoft.Azure.Management.Batch;
+using Microsoft.Azure.Management.Batch.Models;
 using Microsoft.Rest;
 */
 using (BatchManagementClient batchManagementClient = new BatchManagementClient(new TokenCredentials(accessToken)))
@@ -103,12 +103,12 @@ using (BatchManagementClient batchManagementClient = new BatchManagementClient(n
     batchManagementClient.SubscriptionId = subscriptionId;
 
     // Get the account quota for the subscription
-    BatchLocationQuotaInner quotaResponse = await batchManagementClient.Location.GetQuotasAsync(location);
+    BatchLocationQuota quotaResponse = await batchManagementClient.Location.GetQuotasAsync(location);
     Console.WriteLine("Your subscription can create {0} account(s) in the {1} region.", quotaResponse.AccountQuota, location);
 
     // Create account
     await batchManagementClient.BatchAccount.CreateAsync(ResourceGroupName, accountName, 
-        new BatchAccountCreateParametersInner() { Location = location });
+        new BatchAccountCreateParameters() { Location = location });
 
     // Regenerate primary account key
     BatchAccountKeys newKeys = await batchManagementClient.BatchAccount.RegenerateKeyAsync(
