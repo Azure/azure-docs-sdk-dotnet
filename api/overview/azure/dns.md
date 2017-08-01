@@ -21,16 +21,16 @@ Use the Microsoft Azure DNS libraries for .NET to create and modify DNS zones an
 
 Use the management library to create and modify DNS zones and records that are hosted in Azure.
 
-Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Management.Dns.Fluent) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
+Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Management.Dns) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
 
 #### Visual Studio Package Manager
 
 ```powershell
-Install-Package Microsoft.Azure.Management.Dns.Fluent
+Install-Package Microsoft.Azure.Management.Dns
 ```
 
 ```bash
-dotnet add package Microsoft.Azure.Management.Dns.Fluent
+dotnet add package Microsoft.Azure.Management.Dns
 ```
 
 ### Example
@@ -39,9 +39,12 @@ The following example creates a new DNS zone.
 
 ```csharp
 /*
+using Microsoft.Rest.Azure.Authentication;
 using Microsoft.Azure.Management.Dns;
 using Microsoft.Azure.Management.Dns.Models;
 */
+Microsoft.Rest.ServiceClientCredentials serviceCreds = await ApplicationTokenProvider.LoginSilentAsync(tenantId, clientId, secret);
+DnsManagementClient dnsClient = new DnsManagementClient(serviceCreds);            
 Zone dnsZoneParams = new Zone("global");
 dnsZoneParams.Tags = new Dictionary<string, string>();
 dnsZoneParams.Tags.Add("dept", "finance");
