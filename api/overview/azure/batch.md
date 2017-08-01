@@ -5,7 +5,7 @@ keywords: Azure, .NET, SDK, API, Batch
 author: camsoper
 ms.author: casoper
 manager: douge
-ms.date: 07/31/2017
+ms.date: 08/01/2017
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
@@ -44,8 +44,9 @@ The following example uses the client SDK to create a job to run in Azure Batch.
 ```csharp
 /*
 using Microsoft.Azure.Batch.Auth;
-using Microsoft.Azure.Batch.Common;
+using Microsoft.Azure.Batch;
 */
+BatchSharedKeyCredentials credentials = new BatchSharedKeyCredentials(batchUrl, accountName, accountKey);
 using (BatchClient batchClient = await BatchClient.OpenAsync(credentials))
 {
     //set up pool specification and information along with resource files here
@@ -93,19 +94,21 @@ The following example retrieves the quota for the subscription, creates an accou
 
 ```csharp
 /*
-using Microsoft.Azure.Management.Batch;
-using Microsoft.Azure.Management.Batch.Models;
+using Microsoft.Azure.Management.Batch.Fluent;
+using Microsoft.Azure.Management.Batch.Fluent.Models;
+using Microsoft.Rest;
 */
 using (BatchManagementClient batchManagementClient = new BatchManagementClient(new TokenCredentials(accessToken)))
 {
     batchManagementClient.SubscriptionId = subscriptionId;
 
     // Get the account quota for the subscription
-    BatchLocationQuota quotaResponse = await batchManagementClient.Location.GetQuotasAsync(location);
+    BatchLocationQuotaInner quotaResponse = await batchManagementClient.Location.GetQuotasAsync(location);
     Console.WriteLine("Your subscription can create {0} account(s) in the {1} region.", quotaResponse.AccountQuota, location);
 
     // Create account
-    await batchManagementClient.BatchAccount.CreateAsync(ResourceGroupName, accountName, new BatchAccountCreateParameters() { Location = location });
+    await batchManagementClient.BatchAccount.CreateAsync(ResourceGroupName, accountName, 
+        new BatchAccountCreateParametersInner() { Location = location });
 
     // Regenerate primary account key
     BatchAccountKeys newKeys = await batchManagementClient.BatchAccount.RegenerateKeyAsync(
