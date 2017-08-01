@@ -33,6 +33,8 @@ Install the [NuGet package](https://www.nuget.org/packages/Azure.Batch) directly
 Install-Package Azure.Batch
 ```
 
+#### .NET Core CLI
+
 ```bash
 dotnet add package Azure.Batch
 ```
@@ -83,6 +85,8 @@ Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Manag
 ```powershell
 Install-Package Microsoft.Azure.Management.Batch
 ```
+
+#### .NET Core CLI
 
 ```bash
 dotnet add package Microsoft.Azure.Management.Batch
