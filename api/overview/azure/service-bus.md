@@ -5,7 +5,7 @@ keywords: Azure, .NET, SDK, API, Service Bus
 author: camsoper
 ms.author: casoper
 manager: douge
-ms.date: 07/14/2017
+ms.date: 08/01/2017
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
@@ -14,6 +14,10 @@ ms.service: multiple
 ---
 
 # Azure Service Bus libraries for .NET
+
+## Overview
+
+[Azure Service Bus](https://docs.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview) is a messaging infrastructure that sits between applications allowing them to exchange messages for improved scale and resiliency.
 
 ## Client library
 
@@ -25,8 +29,22 @@ Install the [NuGet package](https://www.nuget.org/packages/WindowsAzure.ServiceB
 Install-Package WindowsAzure.ServiceBus
 ```
 
+#### .NET Core CLI
+
 ```bash
 dotnet add package WindowsAzure.ServiceBus
+```
+
+### Code Example
+
+This example sends a message to a Service Bus queue.
+
+```csharp
+// using Microsoft.ServiceBus.Messaging;
+
+QueueClient client = QueueClient.CreateFromConnectionString(connectionString, queueName);
+BrokeredMessage message = new BrokeredMessage("This is a test message!");
+client.Send(message);
 ```
 
 > [!div class="nextstepaction"]
@@ -43,8 +61,29 @@ Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Manag
 Install-Package Microsoft.Azure.Management.ServiceBus.Fluent
 ```
 
+#### .NET Core CLI
+
 ```bash
 dotnet add package Microsoft.Azure.Management.ServiceBus.Fluent
+```
+
+### Code Example
+
+This example creates a Service Bus queue with a maximum size of 1024MB.
+
+```csharp
+// using Microsoft.Azure.Management.ServiceBus.Fluent;
+// using Microsoft.Azure.Management.ServiceBus.Fluent.Models;
+
+using (ServiceBusManagementClient client = new ServiceBusManagementClient(credentials))
+{
+    client.SubscriptionId = subscriptionId;
+    QueueInner parameters = new QueueInner
+    {
+        MaxSizeInMegabytes = 1024
+    };
+    await client.Queues.CreateOrUpdateAsync(resourceGroupName, namespaceName, queueName, parameters);
+}
 ```
 
 > [!div class="nextstepaction"]
