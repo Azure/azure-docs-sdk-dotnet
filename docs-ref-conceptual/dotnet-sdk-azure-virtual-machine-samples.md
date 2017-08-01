@@ -1,11 +1,11 @@
 ---
-title: Azure management libraries for .NET virtual machine samples
-description: Get sample code for creating and updating Azure virtual machines using the Azure management libraries for .NET.
+title: Sample code that illustrates Azure virtual machine management with .NET
+description: Get sample code for creating and updating Azure virtual machines using .NET
 keywords: Azure, .NET, SDK, API, virtual machines
 author: camsoper
 ms.author: casoper
 manager: douge
-ms.date: 06/20/2017
+ms.date: 08/01/2017
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -14,66 +14,19 @@ ms.service: multiple
 ms.assetid: 
 ---
 
-# Azure management libraries for .NET samples for virtual machines
+# Azure virtual machine management samples for .NET
 
 This article links to source you can use to create and configure Azure virtual machines.
-
-[!include[Sample prerequisites](includes/sample-prereqs.md)]
 
 ## Manage virtual machines
 
 Create, modify, start, stop, and delete virtual machines.
 
-```cmd
-git clone https://github.com/Azure-Samples/managed-disk-dotnet-create-virtual-machine-using-custom-image-from-VHD.git
-```
-
-## Create a virtual machine from a custom image
-
-Create a custom virtual machine image and use it to create new virtual machines. 
-
-```cmd
-git clone https://github.com/Azure-Samples/managed-disk-dotnet-create-virtual-machine-using-custom-image-from-VHD.git
-```
-
-## Create a virtual machine using specialized VHD from a snapshot
-
-Create snapshot from the virtual machine's OS and data disks, create managed disks from the snapshots, then create a virtual machine by attaching the managed disks.
-
-```cmd
-git clone https://github.com/Azure-Samples/managed-disk-dotnet-create-virtual-machine-using-specialized-disk-from-snapshot.git
-```
-
-## Create virtual machines in parallel in the same network
-
-Create virtual machines in the same region on the same virtual network with two subnets in parallel. 
-
-```cmd
-git clone https://github.com/Azure-Samples/compute-dotnet-manage-virtual-machines-with-network-in-parallel.git
-```
-
-## Create virtual machines across regions in parallel
-
-Create and load balance a set of virtual machines across multiple Azure regions.
-
-```cmd
-git clone https://github.com/Azure-Samples/compute-dotnet-create-virtual-machines-across-regions-in-parallel.git
-```
-
-## Manage virtual networks
-
-Create a virtual network with subnets.
-
-```cmd
-git clone https://github.com/Azure-Samples/network-dotnet-manage-virtual-network.git
-```
-
-## Create a virtual machine scale set with a load balancer
-
-Create a VM scale set, set up a load balancer, and get SSH connection strings to the scale set VMs.
-
-```cmd
-git clone https://github.com/Azure-Samples/compute-dotnet-manage-virtual-machine-scale-sets.git
-```
+* [Create Virtual Machine using Custom Image from VHD](https://github.com/Azure-Samples/managed-disk-dotnet-create-virtual-machine-using-custom-image-from-VHD)
+* [Create a virtual machine using specialized VHD from a snapshot](https://github.com/Azure-Samples/managed-disk-dotnet-create-virtual-machine-using-specialized-disk-from-snapshot)
+* [Create virtual machines in parallel in the same network](https://github.com/Azure-Samples/compute-dotnet-manage-virtual-machines-with-network-in-parallel)
+* [Create virtual machines across multiple Azure regions in parallel](https://github.com/Azure-Samples/compute-dotnet-create-virtual-machines-across-regions-in-parallel)
+* [Manage virtual networks with subnets](https://github.com/Azure-Samples/network-dotnet-manage-virtual-network)
+* [Create a virtual machine scale set with a load balancer](https://github.com/Azure-Samples/compute-dotnet-manage-virtual-machine-scale-sets)
 
 [!include[More samples](includes/more-samples.md)]
