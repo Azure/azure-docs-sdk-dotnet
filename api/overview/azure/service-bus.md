@@ -69,7 +69,7 @@ dotnet add package Microsoft.Azure.Management.ServiceBus.Fluent
 
 ### Code Example
 
-This example creates a Service Bus queue with a maximum size of 1024MB.
+This example creates a Service Bus queue with a maximum size of 1024 MB.
 
 ```csharp
 // using Microsoft.Azure.Management.ServiceBus.Fluent;
