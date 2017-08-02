@@ -21,18 +21,12 @@ ms.service: multiple
 
 ## Client library
 
-Install the [NuGet package](https://www.nuget.org/packages/WindowsAzure.ServiceBus) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
+Install the [NuGet package](https://www.nuget.org/packages/WindowsAzure.ServiceBus) directly from the Visual Studio [Package Manager console][PackageManager].
 
 #### Visual Studio Package Manager
 
 ```powershell
 Install-Package WindowsAzure.ServiceBus
-```
-
-#### .NET Core CLI
-
-```bash
-dotnet add package WindowsAzure.ServiceBus
 ```
 
 ### Code Example
