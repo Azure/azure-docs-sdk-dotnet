@@ -74,20 +74,21 @@ using (NetworkManagementClient client = new NetworkManagementClient(credentials)
             }
         }
     };
-   await client.VirtualNetworks.CreateOrUpdateAsync(resourceGroupName, vNetName, vnet);
+    
+    await client.VirtualNetworks.CreateOrUpdateAsync(resourceGroupName, vNetName, vnet);
 }
 
 ```
+
+> [!div class="nextstepaction"]
+> [Explore the management APIs](/dotnet/api/overview/azure/network/management)
 
 ## Samples
 - [Managing Virtual Networks with subnets](https://github.com/Azure-Samples/network-dotnet-manage-virtual-network)
 
 Explore more [.NET sample code](https://azure.microsoft.com/resources/samples/?platform=dotnet) that you can use in your apps.
 
-> [!div class="nextstepaction"]
-> [Explore the management APIs](/dotnet/api/overview/azure/network/management)
 
- 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console 
 [DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package 
 
