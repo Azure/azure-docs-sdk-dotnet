@@ -1,11 +1,11 @@
 ---
-title: Azure PowerBI Embedded libraries for .NET
-description: Reference for Azure PowerBI Embedded libraries for .NET
-keywords: Azure, .NET, SDK, API, PowerBI Embedded
+title: Power BI Embedded libraries for .NET
+description: Reference for Power BI Embedded libraries for .NET
+keywords: Azure, .NET, SDK, API, Power BI Embedded
 author: camsoper
 ms.author: casoper
 manager: douge
-ms.date: 07/31/2017
+ms.date: 08/03/2017
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
@@ -13,7 +13,7 @@ ms.devlang: dotnet
 ms.service: multiple
 ---
 
-# Azure PowerBI Embedded libraries for .NET
+# Power BI Embedded libraries for .NET
 
 [Power BI](https://powerbi.microsoft.com/) is a cloud-based business analytics service that gives you a single view of your most critical business data.
 
@@ -21,7 +21,7 @@ To learn more about using Power BI with .NET, see [Embedding with Power BI](http
 
 ## Client library
 
-Use the client library to connect with PowerBI APIs to access and interact with data sets and reports.
+Use the client library to connect with Power BI APIs to access and interact with data sets and reports.
 
 Install the [NuGet package](https://www.nuget.org/packages/Microsoft.PowerBI.Api) directly from the Visual Studio [Package Manager console][PackageManager].
 
@@ -71,7 +71,7 @@ using (var client = new PowerBIClient(new Uri(apiUrl), tokenCredentials))
 ## Samples
 
 * [Power BI Developer Samples](https://github.com/Microsoft/PowerBI-Developer-Samples)
-* [PowerBI .NET GitHub repo](https://github.com/Microsoft/PowerBI-CSharp)
+* [Power BI .NET GitHub repo](https://github.com/Microsoft/PowerBI-CSharp)
 
 Explore more [sample .NET code](https://azure.microsoft.com/resources/samples/?platform=dotnet) you can use in your apps.
 
