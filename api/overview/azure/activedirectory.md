@@ -69,14 +69,11 @@ catch (AdalException ex)
 
 ### Samples
 
-* [Use OpenID Connect to authenticate users from an Azure AD tenant][1]
-* [Use Oauth2 to call a web API with application permissions][2]
-* [Use role-based access control (RBAC) in an application][3]
+* [Use OpenID Connect to authenticate users from an Azure AD tenant](https://github.com/Azure-Samples/active-directory-dotnet-webapp-openidconnect)
+* [Use Oauth2 to call a web API with application permissions](https://github.com/Azure-Samples/active-directory-dotnet-webapp-webapi-oauth2-appidentity)
+* [Use role-based access control (RBAC) in an application](https://github.com/Azure-Samples/active-directory-dotnet-webapp-roleclaims)
 
 Explore the full collection of [Azure Active Directory code samples](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-code-samples).
 
-[1]: [https://azure.microsoft.com/en-us/resources/samples/active-directory-dotnet-webapp-openidconnect/]
-[2]: [https://azure.microsoft.com/en-us/resources/samples/active-directory-dotnet-webapp-webapi-oauth2-appidentity/]
-[3]: [https://azure.microsoft.com/en-us/resources/samples/active-directory-dotnet-webapp-roleclaims/]
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
 [DotNetCLI]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package
