@@ -40,7 +40,7 @@ The following example retrieves and displays a list of datasets and reports.
 using Microsoft.PowerBI.Api.V2;
 using Microsoft.PowerBI.Api.V2.Models;
 */
-using (var client = new PowerBIClient(new Uri(apiUrl), tokenCredentials))
+using (PowerBIClient client = new PowerBIClient(new Uri(apiUrl), tokenCredentials))
 {
 
     Console.WriteLine("\r*** DATASETS ***\r");
