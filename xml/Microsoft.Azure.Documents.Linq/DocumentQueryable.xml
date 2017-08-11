@@ -1,4 +1,4 @@
-<Type Name="DocumentQueryable" FullName="Microsoft.Azure.Documents.Linq.DocumentQueryable">
+﻿<Type Name="DocumentQueryable" FullName="Microsoft.Azure.Documents.Linq.DocumentQueryable">
   <TypeSignature Language="C#" Value="public static class DocumentQueryable" />
   <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract sealed beforefieldinit DocumentQueryable extends System.Object" />
   <TypeSignature Language="DocId" Value="T:Microsoft.Azure.Documents.Linq.DocumentQueryable" />
@@ -50,6 +50,25 @@
             </summary>
         <returns>An IDocumentQuery{T} that can evaluate the query.</returns>
         <remarks>To be added.</remarks>
+        <example>
+            This example shows how to run a query asynchronously using the AsDocumentQuery() interface.
+            
+            <code language="c#"><![CDATA[
+            using (var queryable = client.CreateDocumentQuery<Book>(
+                collectionLink,
+                new FeedOptions { MaxItemCount = 10 })
+                .Where(b => b.Title == "War and Peace")
+                .AsDocumentQuery())
+            {
+                while (queryable.HasMoreResults) 
+                {
+                    foreach(Book b in await queryable.ExecuteNextAsync<Book>())
+                    {
+                        // Iterate through books
+                    }
+                }
+            }
+            ]]></code></example>
         <example>
             This example shows how to run a query asynchronously using the AsDocumentQuery() interface.
             

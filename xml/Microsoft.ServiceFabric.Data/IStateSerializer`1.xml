@@ -1,4 +1,4 @@
-<Type Name="IStateSerializer&lt;T&gt;" FullName="Microsoft.ServiceFabric.Data.IStateSerializer&lt;T&gt;">
+﻿<Type Name="IStateSerializer&lt;T&gt;" FullName="Microsoft.ServiceFabric.Data.IStateSerializer&lt;T&gt;">
   <TypeSignature Language="C#" Value="public interface IStateSerializer&lt;T&gt;" />
   <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IStateSerializer`1&lt;T&gt;" />
   <TypeSignature Language="DocId" Value="T:Microsoft.ServiceFabric.Data.IStateSerializer`1" />
@@ -18,6 +18,51 @@
     <remarks>
              Use <see cref="M:Microsoft.ServiceFabric.Data.IReliableStateManager.TryAddStateSerializer``1(Microsoft.ServiceFabric.Data.IStateSerializer{``0})" /> to register a custom serializer.
              </remarks>
+    <example>
+             In this example, implementation of the Read and Write overloads simply call their counterpart overloads.
+             The currentValue and baseValue parameters are not set by the platform and should be ignored.
+             <code>
+             class Order
+             {
+                 public byte Warehouse { get; set; }
+                 public short District { get; set; }
+                 public int Customer { get; set; }
+                 public long OrderNumber { get; set; }
+             }
+            
+             class OrderSerializer : IStateSerializer&lt;Order&gt;
+             {
+                 void Write(Order value, BinaryWriter writer)
+                 {
+                     writer.Write(value.Warehouse);
+                     writer.Write(value.District);
+                     writer.Write(value.Customer);
+                     writer.Write(value.OrderNumber);
+                 }
+            
+                 Order Read(BinaryReader reader)
+                 {
+                     Order value = new Order();
+            
+                     value.Warehouse = reader.ReadByte();
+                     value.District = reader.ReadInt16();
+                     value.Customer = reader.ReadInt32();
+                     value.OrderNumber = reader.ReadInt64();
+            
+                     return value;
+                 }
+            
+                 void Write(Order currentValue, Order newValue, BinaryWriter writer)
+                 {
+                     this.Write(newValue, writer);
+                 }
+            
+                 Order Read(Order baseValue, BinaryReader reader)
+                 {
+                     return this.Read(reader);
+                 }
+             }
+             </code></example>
     <example>
              In this example, implementation of the Read and Write overloads simply call their counterpart overloads.
              The currentValue and baseValue parameters are not set by the platform and should be ignored.
