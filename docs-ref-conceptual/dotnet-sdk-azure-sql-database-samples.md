@@ -1,11 +1,11 @@
 ---
-title: Azure management libraries for .NET SQL Database samples
-description: Get sample code for creating and updating Azure SQL Database using the Azure management libraries for .NET.
+title: Sample code for using Azure databases with .NET
+description: Get sample code for creating applications using Azure databases with .NET
 keywords: Azure, .NET, SDK, API, SQL, database
 author: camsoper
 ms.author: casoper
 manager: douge
-ms.date: 06/20/2017
+ms.date: 07/25/2017
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -14,34 +14,17 @@ ms.service: multiple
 ms.assetid: 
 ---
 
-# Azure management libraries for .NET samples for SQL Database
+# Sample code for using Azure databases with .NET
 
-This article links to source you can use to create and configure Azure SQL Database.
+The following sample code illustrate using Azure databases with .NET
+If you need code for other tasks, you can browse the full list of [.NET samples](https://azure.microsoft.com/resources/samples/?term=dotnet).
 
-[!include[Sample prerequisites](includes/sample-prereqs.md)]
+- [ASP.NET and SQL Database sample for Azure App Service](https://azure.microsoft.com/resources/samples/dotnet-sqldb-tutorial/)
 
-## Create and manage SQL databases
+- [Web application development with ASP.NET MVC using DocumentDB](https://azure.microsoft.com/resources/samples/documentdb-dotnet-todo-app/)
 
-Create SQL databases, set performance levels, and configure firewalls
+- [Developing a .NET app using Azure CosmosDB MongoDB API](https://azure.microsoft.com/resources/samples/azure-cosmos-db-mongodb-dotnet-getting-started/)
 
-```cmd
-git clone https://github.com/Azure-Samples/sql-database-dotnet-manage-db.git
-```
-
-## Manage SQL databases in elastic pools
-
-Create, delete, and move SQL databases in and out of elastic pools.
-
-```cmd
-git clone https://github.com/Azure-Samples/sql-database-dotnet-manage-sql-dbs-in-elastic-pool.git
-```
-
-## Manage SQL databases across regions
-
-Create a master SQL databases and read-only databases from the master in multiple regions. Connect VMs to their nearest SQL database instance with a virtual network and firewall rules.
-
-```cmd
-git clone https://github.com/Azure-Samples/sql-database-dotnet-manage-sql-databases-across-regions.git
-```
+- [Developing a .NET console app using DocumentDB](https://azure.microsoft.com/resources/samples/documentdb-dotnet-getting-started/)
 
 [!include[More samples](includes/more-samples.md)]
