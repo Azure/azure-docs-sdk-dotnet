@@ -1,4 +1,4 @@
-<Type Name="TopicClient" FullName="Microsoft.ServiceBus.Messaging.TopicClient">
+﻿<Type Name="TopicClient" FullName="Microsoft.ServiceBus.Messaging.TopicClient">
   <TypeSignature Language="C#" Value="public abstract class TopicClient : Microsoft.ServiceBus.Messaging.ClientEntity" />
   <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit TopicClient extends Microsoft.ServiceBus.Messaging.ClientEntity" />
   <TypeSignature Language="DocId" Value="T:Microsoft.ServiceBus.Messaging.TopicClient" />
@@ -45,6 +45,37 @@
              </code>
     </example>
     <altmember cref="P:Microsoft.ServiceBus.Messaging.TopicClient.MessagingFactory" />
+    <example>
+      <code>
+             // Create settings for the MessagingFactory (for rutime operations)
+             MessagingFactorySettings factorySettings = new MessagingFactorySettings()
+             {
+                NetMessagingTransportSettings = new NetMessagingTransportSettings(),
+                Credential = TransportClientCredentialBase.CreateSharedSecretCredential(IssuerName, IssuerKey),
+             };
+            
+             // Create the MessagingFactory
+             MessagingFactory factory = 
+             MessagingFactory.Create(myServiceBusNamespace, factorySettings);
+            
+             //********************************************************************************
+             //                          Sending messages to a Topic
+             //********************************************************************************
+            
+             // Create topic client
+             TopicClient myTopicClient = factory.CreateTopicClient(myTopic);
+            
+             // Create a sender
+             //MessageSender myMessageSender = myTopicClient.CreateSender(SendMode.Default);
+            
+             // Send messages
+             List &lt;object&gt; Issues = new List &lt;object&gt;();
+             foreach (var issue in Issues)
+             {
+                myMessageSender.Send(new BrokeredMessage(issue));
+             }
+             </code>
+    </example>
     <example>
       <code>
              // Create settings for the MessagingFactory (for rutime operations)
@@ -479,8 +510,7 @@
         <Parameter Name="fromSequenceNumber" Type="System.Int64" />
       </Parameters>
       <Docs>
-        <param name="fromSequenceNumber">
-        </param>
+        <param name="fromSequenceNumber"></param>
         <summary />
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
@@ -527,10 +557,8 @@
         <Parameter Name="messageCount" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="fromSequenceNumber">
-        </param>
-        <param name="messageCount">
-        </param>
+        <param name="fromSequenceNumber"></param>
+        <param name="messageCount"></param>
         <summary />
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
@@ -552,8 +580,7 @@
         <Parameter Name="messageCount" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="messageCount">
-        </param>
+        <param name="messageCount"></param>
         <summary />
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
@@ -576,10 +603,8 @@
         <Parameter Name="messageCount" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="fromSequenceNumber">
-        </param>
-        <param name="messageCount">
-        </param>
+        <param name="fromSequenceNumber"></param>
+        <param name="messageCount"></param>
         <summary />
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
