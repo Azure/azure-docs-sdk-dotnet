@@ -18,10 +18,32 @@
   </Attributes>
   <Docs>
     <summary>
-      <para>The exception that is thrown when the Service Fabric object is currently closed.</para>
+      <para>
+            The exception that is thrown when the Service Fabric object is currently in a closed state due to one of the following conditions:
+                1. The Service Fabric Object is being deleted.
+                2. The Service Fabric Object is not reachable due to a failover.
+            </para>
     </summary>
     <remarks>
       <para>Examples of when this exception can be observed are when a service attempts to perform an operation on Service Fabric or the <see cref="T:System.Fabric.FabricReplicator" /> while it is in the Closed state or when an API is invoked on a <see cref="T:System.Fabric.FabricClient" /> object when it is in the Closed state.</para>
+      <para>
+            Handling <see cref="T:System.Fabric.FabricObjectClosedException" /> for <see cref="T:System.Fabric.FabricClient" /> calls:
+                If a FabricClient call sees <see cref="T:System.Fabric.FabricObjectClosedException" />, see <see href="https://docs.microsoft.com/azure/service-fabric/service-fabric-errors-and-exceptions">FabricClient Exception Handling</see> for handling common FabricClient failures.
+            </para>
+      <para>
+            Handling <see cref="T:System.Fabric.FabricObjectClosedException" /> for <see href="https://docs.microsoft.com/azure/service-fabric/service-fabric-reliable-services-reliable-collections">Reliable Collections</see> :
+                1. If the service sees <see cref="T:System.Fabric.FabricObjectClosedException" /> in <see href="https://docs.microsoft.com/dotnet/api/microsoft.servicefabric.services.runtime.statefulservicebase.runasync?viewFallbackFrom=servicefabricsvcs#Microsoft_ServiceFabric_Services_Runtime_StatefulServiceBase_RunAsync_System_Threading_CancellationToken_">RunAsync</see>, 
+                    it should catch the exception and return from <see href="https://docs.microsoft.com/dotnet/api/microsoft.servicefabric.services.runtime.statefulservicebase.runasync?viewFallbackFrom=servicefabricsvcs#Microsoft_ServiceFabric_Services_Runtime_StatefulServiceBase_RunAsync_System_Threading_CancellationToken_">RunAsync</see>.
+                    The <see cref="T:System.Threading.CancellationToken" /> passed to <see href="https://docs.microsoft.com/dotnet/api/microsoft.servicefabric.services.runtime.statefulservicebase.runasync?viewFallbackFrom=servicefabricsvcs#Microsoft_ServiceFabric_Services_Runtime_StatefulServiceBase_RunAsync_System_Threading_CancellationToken_">RunAsync</see> would be signalled. All background tasks should complete execution when this cancellation is signalled.
+                2. If the service sees <see cref="T:System.Fabric.FabricObjectClosedException" /> while processing a client request (e.g. via their communication listener), the service should throw the exception to the client to signal the client that it should re-resolve the service in order to locate the new Primary.
+            
+            [NOTE] If an <see href="https://docs.microsoft.com/dotnet/api/microsoft.servicefabric.data.ireliablestate?view=azure-dotnet">IReliableState</see> was removed via <see href="https://docs.microsoft.com/dotnet/api/microsoft.servicefabric.data.ireliablestatemanager.removeasync?view=azure-dotnet#Microsoft_ServiceFabric_Data_IReliableStateManager_RemoveAsync_Microsoft_ServiceFabric_Data_ITransaction_System_Uri_System_TimeSpan_">IReliableStateManager.RemoveAsync()</see>,
+            any calls trying to access this <see href="https://docs.microsoft.com/dotnet/api/microsoft.servicefabric.data.ireliablestate?view=azure-dotnet">IReliableState</see> would see <see cref="T:System.Fabric.FabricObjectClosedException" />. These calls needs to be synchronized with the <see href="https://docs.microsoft.com/dotnet/api/microsoft.servicefabric.data.ireliablestatemanager.removeasync?view=azure-dotnet#Microsoft_ServiceFabric_Data_IReliableStateManager_RemoveAsync_Microsoft_ServiceFabric_Data_ITransaction_System_Uri_System_TimeSpan_">IReliableStateManager.RemoveAsync()</see> call and should know that the <see href="https://docs.microsoft.com/dotnet/api/microsoft.servicefabric.data.ireliablestate?view=azure-dotnet">IReliableState</see> has been removed.
+            Possible ways to handle this case are:
+                1. Recreate the <see href="https://docs.microsoft.com/dotnet/api/microsoft.servicefabric.data.ireliablestate?view=azure-dotnet">IReliableState</see> if it was removed and retry the operation.
+                2. Ignore the <see href="https://docs.microsoft.com/dotnet/api/microsoft.servicefabric.data.ireliablestate?view=azure-dotnet">IReliableState</see> and process other <see href="https://docs.microsoft.com/dotnet/api/microsoft.servicefabric.data.ireliablestate?view=azure-dotnet">IReliableState</see> in the service.
+                3. Use locks to avoid the race. Hence if a remove call comes in, the user can stop processing the <see href="https://docs.microsoft.com/dotnet/api/microsoft.servicefabric.data.ireliablestate?view=azure-dotnet">IReliableState</see> further.
+            </para>
     </remarks>
   </Docs>
   <Members>

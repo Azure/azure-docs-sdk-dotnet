@@ -5,6 +5,11 @@
   <AssemblyInfo>
     <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
     <AssemblyVersion>1.14.0.0</AssemblyVersion>
+    <AssemblyVersion>1.16.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Azure.DocumentDB.Core</AssemblyName>
+    <AssemblyVersion>1.5.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>Microsoft.Azure.Documents.Resource</BaseTypeName>
@@ -172,6 +177,55 @@
             <code language="c#"><![CDATA[
             await client.DeleteDocumentCollectionAsync(collection.SelfLink);
             ]]></code></example>
+    <example>
+            The example below creates a new partitioned collection with 50000 Request-per-Unit throughput.
+            The partition key is the first level 'country' property in all the documents within this collection.
+            <code language="c#"><![CDATA[
+            DocumentCollection collection = await client.CreateDocumentCollectionAsync(
+                databaseLink,
+                new DocumentCollection 
+                { 
+                    Id = "MyCollection",
+                    PartitionKey = new PartitionKeyDefinition
+                    {
+                        Paths = new Collection<string> { "/country" }
+                    }
+                }, 
+                new RequestOptions { OfferThroughput = 50000} ).Result;
+            ]]></code></example>
+    <example>
+            The example below creates a new collection with OfferThroughput set to 10000.
+            <code language="c#"><![CDATA[
+            DocumentCollection collection = await client.CreateDocumentCollectionAsync(
+                databaseLink,
+                new DocumentCollection { Id = "MyCollection" }, 
+                new RequestOptions { OfferThroughput = 10000} ).Result;
+            ]]></code></example>
+    <example>
+            The example below creates a new collection with a custom indexing policy.
+            <code language="c#"><![CDATA[
+            DocumentCollection collectionSpec = new DocumentCollection { Id ="MyCollection" };
+            collectionSpec.IndexingPolicy.Automatic = true;
+            collectionSpec.IndexingPolicy.IndexingMode = IndexingMode.Consistent;
+            collection = await client.CreateDocumentCollectionAsync(database.SelfLink, collectionSpec);
+            ]]></code></example>
+    <example>
+            The example below creates a document of type Book inside this collection.
+            <code language="c#"><![CDATA[
+            Document doc = await client.CreateDocumentAsync(collection.SelfLink, new Book { Title = "War and Peace" });
+            ]]></code></example>
+    <example>
+            The example below queries for a Database by Id to retrieve the SelfLink.
+            <code language="c#"><![CDATA[
+            using Microsoft.Azure.Documents.Linq;
+            DocumentCollection collection = client.CreateDocumentCollectionQuery(databaseLink).Where(c => c.Id == "myColl").AsEnumerable().FirstOrDefault();
+            string collectionLink = collection.SelfLink;
+            ]]></code></example>
+    <example>
+            The example below deletes this collection.
+            <code language="c#"><![CDATA[
+            await client.DeleteDocumentCollectionAsync(collection.SelfLink);
+            ]]></code></example>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -180,8 +234,13 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Documents.DocumentCollection.#ctor" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.14.0.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyVersion>1.16.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.DocumentDB.Core</AssemblyName>
+        <AssemblyVersion>1.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -197,8 +256,13 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.DocumentCollection.ConflictsLink" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.14.0.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyVersion>1.16.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.DocumentDB.Core</AssemblyName>
+        <AssemblyVersion>1.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -219,8 +283,13 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.DocumentCollection.DefaultTimeToLive" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.14.0.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyVersion>1.16.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.DocumentDB.Core</AssemblyName>
+        <AssemblyVersion>1.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -312,6 +381,22 @@
             <code language="c#"><![CDATA[
                 collection.DefaultTimeToLive = 1000;
             ]]></code></example>
+        <example>
+            The example below disables time-to-live on a collection.
+            <code language="c#"><![CDATA[
+                collection.DefaultTimeToLive = null;
+            ]]></code></example>
+        <example>
+            The example below enables time-to-live on a collection. By default, all the documents never expire.
+            <code language="c#"><![CDATA[
+                collection.DefaultTimeToLive = -1;
+            ]]></code></example>
+        <example>
+            The example below enables time-to-live on a collection. By default, the document will expire after 1000 seconds
+            since its last write time.
+            <code language="c#"><![CDATA[
+                collection.DefaultTimeToLive = 1000;
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="DocumentsLink">
@@ -320,8 +405,13 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.DocumentCollection.DocumentsLink" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.14.0.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyVersion>1.16.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.DocumentDB.Core</AssemblyName>
+        <AssemblyVersion>1.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -347,8 +437,13 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.DocumentCollection.IndexingPolicy" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.14.0.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyVersion>1.16.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.DocumentDB.Core</AssemblyName>
+        <AssemblyVersion>1.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Documents.IndexingPolicy</ReturnType>
@@ -369,8 +464,13 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.DocumentCollection.PartitionKey" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.14.0.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyVersion>1.16.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.DocumentDB.Core</AssemblyName>
+        <AssemblyVersion>1.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -396,8 +496,13 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.DocumentCollection.StoredProceduresLink" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.14.0.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyVersion>1.16.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.DocumentDB.Core</AssemblyName>
+        <AssemblyVersion>1.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -423,8 +528,13 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.DocumentCollection.TriggersLink" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.14.0.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyVersion>1.16.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.DocumentDB.Core</AssemblyName>
+        <AssemblyVersion>1.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -445,8 +555,13 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.DocumentCollection.UserDefinedFunctionsLink" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.14.0.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyVersion>1.16.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.DocumentDB.Core</AssemblyName>
+        <AssemblyVersion>1.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
