@@ -17,7 +17,7 @@ ms.service: multiple
 
 ## Overview
 
-Application Insights is an extensible application performance management service for web developers. You can use the classes in the ApplicationInsights namespace to build a client application that can read and interact with telemetry gathered by the Application Insights service.
+Application Insights is an extensible monitoring & diagnostics service for web developers with powerful ad-hoc analytics capabilities. You can use the classes in the ApplicationInsights namespace to configure telemetry collection and send any custom telemetry from your applications that you want to monitor.
 
 ## Client library
 
