@@ -51,6 +51,8 @@ client.TrackEvent("MyCustomEvent");
 
 ## Samples
 
+- [Application Insights Analytics with OpenSchema](https://azure.microsoft.com/resources/samples/guidance-appinsights-openschema/)
+
 View the [complete list](https://azure.microsoft.com/resources/samples/?service=application-insights&platform=dotnet) of Azure Application Insights samples.
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
