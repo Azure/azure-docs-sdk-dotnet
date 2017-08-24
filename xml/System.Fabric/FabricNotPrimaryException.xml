@@ -23,7 +23,14 @@
     <remarks>
       <para>The <see cref="T:System.Fabric.FabricNotPrimaryException" /> indicates that the operation cannot be performed because the callee is currently not a primary. 
             An example of when this exception can be observed is if a Secondary replica attempted to replicate an operation via 
-            <see cref="M:System.Fabric.IStateReplicator.ReplicateAsync(System.Fabric.OperationData,System.Threading.CancellationToken,System.Int64@)" /></para>
+            <see cref="M:System.Fabric.IStateReplicator.ReplicateAsync(System.Fabric.OperationData,System.Threading.CancellationToken,System.Int64@)" />. A likely scenario is that the replica is no longer the Primary.</para>
+      <para>
+            Handling <see cref="T:System.Fabric.FabricNotPrimaryException" /> for <see href="https://docs.microsoft.com/azure/service-fabric/service-fabric-reliable-services-reliable-collections">Reliable Collections</see> :
+                1. If the service sees <see cref="T:System.Fabric.FabricNotPrimaryException" /> in <see href="https://docs.microsoft.com/dotnet/api/microsoft.servicefabric.services.runtime.statefulservicebase.runasync?viewFallbackFrom=servicefabricsvcs#Microsoft_ServiceFabric_Services_Runtime_StatefulServiceBase_RunAsync_System_Threading_CancellationToken_">RunAsync</see>, 
+                    it should catch the exception, complete all tasks and return from <see href="https://docs.microsoft.com/dotnet/api/microsoft.servicefabric.services.runtime.statefulservicebase.runasync?viewFallbackFrom=servicefabricsvcs#Microsoft_ServiceFabric_Services_Runtime_StatefulServiceBase_RunAsync_System_Threading_CancellationToken_">RunAsync</see>. 
+                    The <see cref="T:System.Threading.CancellationToken" /> passed to <see href="https://docs.microsoft.com/dotnet/api/microsoft.servicefabric.services.runtime.statefulservicebase.runasync?viewFallbackFrom=servicefabricsvcs#Microsoft_ServiceFabric_Services_Runtime_StatefulServiceBase_RunAsync_System_Threading_CancellationToken_">RunAsync</see> would be signalled. All background tasks should complete execution when this cancellation is signalled.
+                2. If the service sees <see cref="T:System.Fabric.FabricNotPrimaryException" /> while processing a client request (e.g. via their communication listener), the service should throw the exception to the client to signal the client that it should re-resolve the service in order to locate the new Primary.
+            </para>
     </remarks>
   </Docs>
   <Members>

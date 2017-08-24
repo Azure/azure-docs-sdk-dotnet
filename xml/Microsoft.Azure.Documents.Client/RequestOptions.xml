@@ -5,6 +5,11 @@
   <AssemblyInfo>
     <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
     <AssemblyVersion>1.14.0.0</AssemblyVersion>
+    <AssemblyVersion>1.16.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Azure.DocumentDB.Core</AssemblyName>
+    <AssemblyVersion>1.5.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -26,8 +31,13 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Documents.Client.RequestOptions.#ctor" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.14.0.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyVersion>1.16.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.DocumentDB.Core</AssemblyName>
+        <AssemblyVersion>1.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -41,8 +51,13 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.Client.RequestOptions.AccessCondition" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.14.0.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyVersion>1.16.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.DocumentDB.Core</AssemblyName>
+        <AssemblyVersion>1.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Documents.Client.AccessCondition</ReturnType>
@@ -111,6 +126,23 @@
                     } 
                  });
             ]]></code></example>
+        <example>
+            The following example shows how to use RequestOptions with <see cref="M:Microsoft.Azure.Documents.Client.DocumentClient.ReplaceDocumentAsync(System.String,System.Object,Microsoft.Azure.Documents.Client.RequestOptions)" /> to 
+            specify the set of <see cref="P:Microsoft.Azure.Documents.Client.RequestOptions.AccessCondition" /> to be used when updating a document
+            <code language="c#"><![CDATA[
+            // If ETag is current, then this will succeed. Otherwise the request will fail with HTTP 412 Precondition Failure
+            await client.ReplaceDocumentAsync(
+                readCopyOfBook.SelfLink, 
+                new Book { Title = "Moby Dick", Price = 14.99 },
+                new RequestOptions 
+                { 
+                    AccessCondition = new AccessCondition 
+                    { 
+                        Condition = readCopyOfBook.ETag, 
+                        Type = AccessConditionType.IfMatch 
+                    } 
+                 });
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="ConsistencyLevel">
@@ -119,8 +151,13 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.Client.RequestOptions.ConsistencyLevel" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.14.0.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyVersion>1.16.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.DocumentDB.Core</AssemblyName>
+        <AssemblyVersion>1.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Nullable&lt;Microsoft.Azure.Documents.ConsistencyLevel&gt;</ReturnType>
@@ -154,6 +191,11 @@
             <code language="c#"><![CDATA[
             Document doc = client.ReadDocumentAsync(documentLink, new RequestOptions { ConsistencyLevel = ConsistencyLevel.Eventual });
             ]]></code></example>
+        <example>
+            This example uses RequestOptions to lower the consistency level to Eventual for this single Read operation. 
+            <code language="c#"><![CDATA[
+            Document doc = client.ReadDocumentAsync(documentLink, new RequestOptions { ConsistencyLevel = ConsistencyLevel.Eventual });
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="DisableRUPerMinuteUsage">
@@ -162,8 +204,13 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.Client.RequestOptions.DisableRUPerMinuteUsage" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.14.0.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyVersion>1.16.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.DocumentDB.Core</AssemblyName>
+        <AssemblyVersion>1.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -186,8 +233,13 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.Client.RequestOptions.EnableScriptLogging" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.14.0.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyVersion>1.16.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.DocumentDB.Core</AssemblyName>
+        <AssemblyVersion>1.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -223,6 +275,13 @@
                 document.SelfLink,
                 new RequestOptions { EnableScriptLogging = true } );
             ]]></code></example>
+        <example>
+            The following example shows how to enable logging in stored procedures using <see cref="P:Microsoft.Azure.Documents.Client.RequestOptions.EnableScriptLogging" />.
+            <code language="c#"><![CDATA[
+            await client.ExecuteStoredProcedureAsync(
+                document.SelfLink,
+                new RequestOptions { EnableScriptLogging = true } );
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="IndexingDirective">
@@ -231,8 +290,13 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.Client.RequestOptions.IndexingDirective" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.14.0.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyVersion>1.16.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.DocumentDB.Core</AssemblyName>
+        <AssemblyVersion>1.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Nullable&lt;Microsoft.Azure.Documents.IndexingDirective&gt;</ReturnType>
@@ -271,6 +335,14 @@
                 new { id = "AndersenFamily", isRegistered = true },
                 new RequestOptions { IndexingDirective = IndexingDirective.Include });
             ]]></code></example>
+        <example>
+            The following example shows how to explicitly index a document in a collection with 
+            automatic indexing turned off.
+            <code language="c#"><![CDATA[
+            client.CreateDocumentAsync(defaultCollection.SelfLink,
+                new { id = "AndersenFamily", isRegistered = true },
+                new RequestOptions { IndexingDirective = IndexingDirective.Include });
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="OfferEnableRUPerMinuteThroughput">
@@ -279,8 +351,13 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.Client.RequestOptions.OfferEnableRUPerMinuteThroughput" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.14.0.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyVersion>1.16.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.DocumentDB.Core</AssemblyName>
+        <AssemblyVersion>1.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -321,6 +398,14 @@
                 new DocumentCollection { Id = "newcoll" }, 
                 new RequestOptions { OfferThroughput = 4000, OfferEnableRUPerMinuteThroughput  = true });
             ]]></code></example>
+        <example>
+            The followng example shows how to create a collection with RU/Minute throughput offer.
+            <code language="c#"><![CDATA[
+            await client.CreateDocumentCollectionAsync(
+                database.SelfLink, 
+                new DocumentCollection { Id = "newcoll" }, 
+                new RequestOptions { OfferThroughput = 4000, OfferEnableRUPerMinuteThroughput  = true });
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="OfferThroughput">
@@ -329,8 +414,13 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.Client.RequestOptions.OfferThroughput" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.14.0.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyVersion>1.16.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.DocumentDB.Core</AssemblyName>
+        <AssemblyVersion>1.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Nullable&lt;System.Int32&gt;</ReturnType>
@@ -373,6 +463,14 @@
                 new DocumentCollection { Id = "newcoll" }, 
                 new RequestOptions { OfferThroughput = 50000 });
             ]]></code></example>
+        <example>
+            The followng example shows how to create a collection with offer throughtput.
+            <code language="c#"><![CDATA[
+            await client.CreateDocumentCollectionAsync(
+                database.SelfLink, 
+                new DocumentCollection { Id = "newcoll" }, 
+                new RequestOptions { OfferThroughput = 50000 });
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="OfferType">
@@ -381,8 +479,13 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.Client.RequestOptions.OfferType" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.14.0.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyVersion>1.16.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.DocumentDB.Core</AssemblyName>
+        <AssemblyVersion>1.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -426,6 +529,14 @@
                 new DocumentCollection { Id = "newcoll" }, 
                 new RequestOptions { OfferType = "S2" });
             ]]></code></example>
+        <example>
+            The followng example shows how to create a collection with the S2 offer.
+            <code language="c#"><![CDATA[
+            await client.CreateDocumentCollectionAsync(
+                database.SelfLink, 
+                new DocumentCollection { Id = "newcoll" }, 
+                new RequestOptions { OfferType = "S2" });
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="PartitionKey">
@@ -434,8 +545,13 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.Client.RequestOptions.PartitionKey" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.14.0.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyVersion>1.16.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.DocumentDB.Core</AssemblyName>
+        <AssemblyVersion>1.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Documents.PartitionKey</ReturnType>
@@ -481,6 +597,14 @@
                 document.SelfLink, 
                 new RequestOptions { PartitionKey = new PartitionKey(document.Id) } );
             ]]></code></example>
+        <example>
+            The following example shows how to read a document in a partitioned collection using <see cref="P:Microsoft.Azure.Documents.Client.RequestOptions.PartitionKey" />.
+            The example assumes the collection is created with a <see cref="T:Microsoft.Azure.Documents.PartitionKeyDefinition" /> of the 'id' property in all the documents.
+            <code language="c#"><![CDATA[
+            await client.ReadDocumentAsync(
+                document.SelfLink, 
+                new RequestOptions { PartitionKey = new PartitionKey(document.Id) } );
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="PopulateQuotaInfo">
@@ -489,8 +613,13 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.Client.RequestOptions.PopulateQuotaInfo" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.14.0.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyVersion>1.16.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.DocumentDB.Core</AssemblyName>
+        <AssemblyVersion>1.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -513,8 +642,13 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.Client.RequestOptions.PostTriggerInclude" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.14.0.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyVersion>1.16.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.DocumentDB.Core</AssemblyName>
+        <AssemblyVersion>1.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Collections.Generic.IList&lt;System.String&gt;</ReturnType>
@@ -552,6 +686,13 @@
             new { id = "AndersenFamily", isRegistered = true },
             new RequestOptions { PostTriggerInclude = new List<string> { "updateMetadata" } });
             ]]></code></example>
+        <example>
+            The following example shows how to use RequestOptions to include a PostTrigger to execute after persisting the document.
+            <code language="c#"><![CDATA[
+            client.CreateDocumentAsync(collection.SelfLink, 
+            new { id = "AndersenFamily", isRegistered = true },
+            new RequestOptions { PostTriggerInclude = new List<string> { "updateMetadata" } });
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="PreTriggerInclude">
@@ -560,8 +701,13 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.Client.RequestOptions.PreTriggerInclude" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.14.0.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyVersion>1.16.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.DocumentDB.Core</AssemblyName>
+        <AssemblyVersion>1.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Collections.Generic.IList&lt;System.String&gt;</ReturnType>
@@ -600,6 +746,13 @@
                 new { id = "AndersenFamily", isRegistered = true },
                 new RequestOptions { PreTriggerInclude = new List<string> { "validateDocumentContents" } });
             ]]></code></example>
+        <example>
+            The following example shows how to use RequestOptions to include a PreTrigger to execute before persisting the document.
+            <code language="c#"><![CDATA[
+            client.CreateDocumentAsync(collection.SelfLink, 
+                new { id = "AndersenFamily", isRegistered = true },
+                new RequestOptions { PreTriggerInclude = new List<string> { "validateDocumentContents" } });
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="ResourceTokenExpirySeconds">
@@ -608,8 +761,13 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.Client.RequestOptions.ResourceTokenExpirySeconds" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.14.0.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyVersion>1.16.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.DocumentDB.Core</AssemblyName>
+        <AssemblyVersion>1.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Nullable&lt;System.Int32&gt;</ReturnType>
@@ -641,8 +799,13 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.Client.RequestOptions.SessionToken" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.14.0.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.Documents.Client</AssemblyName>
+        <AssemblyVersion>1.14.0.0</AssemblyVersion>
+        <AssemblyVersion>1.16.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.DocumentDB.Core</AssemblyName>
+        <AssemblyVersion>1.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -693,6 +856,27 @@
              }
              ]]></code></example>
         <altmember cref="P:Microsoft.Azure.Documents.Client.RequestOptions.ConsistencyLevel" />
+        <example>
+             This example shows how you can retrieve the SessionToken from a <see cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" /> 
+             and then use it on a different instance of <see cref="T:Microsoft.Azure.Documents.Client.DocumentClient" /> within <see cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
+             This example assumes that the each instance of the client is running from code within a different AppDomain, such as on different nodes in the case of multiple node web application
+             <code language="c#"><![CDATA[
+             string sessionToken;
+             string docSelfLink;
+            
+             using (DocumentClient client = new DocumentClient(new Uri(""), ""))
+             {
+                 ResourceResponse<Document> response = client.CreateDocumentAsync(collection.SelfLink, new { id = "an id", value = "some value" }).Result;
+                 sessionToken = response.SessionToken;
+                 Document created = response.Resource;
+                 docSelfLink = created.SelfLink;
+             }
+                
+             using (DocumentClient client = new DocumentClient(new Uri(""), ""))
+             {
+                 ResourceResponse<Document> read = client.ReadDocumentAsync(docSelfLink, new RequestOptions { SessionToken = sessionToken }).Result; 
+             }
+             ]]></code></example>
         <example>
              This example shows how you can retrieve the SessionToken from a <see cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" /> 
              and then use it on a different instance of <see cref="T:Microsoft.Azure.Documents.Client.DocumentClient" /> within <see cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />

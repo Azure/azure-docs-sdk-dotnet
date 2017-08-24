@@ -34,7 +34,9 @@
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Initializes a new instance of the <see cref="T:System.Fabric.Description.PagedApplicationTypeQueryDescription" /> class.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -58,14 +60,46 @@
         <value>To be added.</value>
         <remarks>
           <para>
-            Defaults to null, which matches all application types.
+            Defaults to null, which matches all the application types.
             </para>
           <para>
             This parameter matches against the case sensitive exact application type names defined in the application manifest
-            of all provisioned application types. For example, the value "Test" does not match "TestApp" because it is only a partial match.
-            This value should not contain the version of the application type,
-            and matches all versions of the same application type name.
-            To request all application types do not set this value.
+            of all provisioned or provisioning application types. For example, the value "Test" does not match "TestApp" because it is only a partial match.
+            This value should not contain the version of the application type, and matches all versions of the same application type name.
+            To request all the application types do not set this value.
+            </para>
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ApplicationTypeVersionFilter">
+      <MemberSignature Language="C#" Value="public string ApplicationTypeVersionFilter { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ApplicationTypeVersionFilter" />
+      <MemberSignature Language="DocId" Value="P:System.Fabric.Description.PagedApplicationTypeQueryDescription.ApplicationTypeVersionFilter" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Fabric</AssemblyName>
+        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+          <para>
+            Gets or sets the application type version to get details for.
+            </para>
+        </summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>
+            Defaults to null, which matches all the application type versions of a given application type name. 
+            This filter should be provided only if an application type name filter is also provided.
+            </para>
+          <para>
+            This parameter matches against the case sensitive exact application type version defined in the application manifest
+            of all provisioned or provisioning application types.
+            For example, version "v1" does not match version "v1.0" because it is only a partial match.
+            To request all the application type versions of an application type name, do not set this value.
             </para>
         </remarks>
       </Docs>
@@ -85,20 +119,20 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <para>Gets or sets the continuation token used to ensure correct paging behavior.</para>
+          <para>Gets or sets the continuation token which can be used to retrieve the next page.</para>
         </summary>
         <value>To be added.</value>
         <remarks>
           <para>
-            Defaults to null, which returns page one of query results. 
+            Defaults to null, which returns page one of query results.
             </para>
           <para>
-            It is possible that enough results are returned such that they can not fit into the returned message.
+            If too many results respect the filter, they may not fit into one message.
             Paging is used to account for this by splitting the collection of <see cref="T:System.Fabric.Query.ApplicationType" />s into separate pages.
             The continuation token is used to know where the previous page left off, carrying significance only to the query itself.
             This value should be generated from
             running this query, and can be passed into the next query request in order to get subsequent pages.
-            A continuation token value is returned as part of the result only if there is a subsequent page.
+            A non-null continuation token value is returned as part of the result only if there is a subsequent page.
             </para>
         </remarks>
       </Docs>
@@ -151,11 +185,11 @@
         <value>To be added.</value>
         <remarks>
           <para>
-            If this value is not set, it is not used to limit the number of returned <see cref="T:System.Fabric.Query.ApplicationType" />s.
+            Defaults to the max value of type long.
             </para>
           <para>This defines only the upper bound for the number of application types returned, not a minimum.
-            For example, if the page at most fits 100 returned items according to max message size restrictions defined in the configuration, 
-            and the MaxResults value is set to 200, then only 100 results are returned, even if 200 application types match
+            For example, if the page fits at most 1000 returned items according to max message size restrictions defined in the configuration, 
+            and the MaxResults value is set to 2000, then only 1000 results are returned, even if 2000 application types match
             the query description.
             </para>
         </remarks>
