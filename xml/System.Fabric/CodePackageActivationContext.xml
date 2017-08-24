@@ -1,6 +1,6 @@
 ﻿<Type Name="CodePackageActivationContext" FullName="System.Fabric.CodePackageActivationContext">
-  <TypeSignature Language="C#" Value="public class CodePackageActivationContext : IDisposable, System.Fabric.ICodePackageActivationContext" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit CodePackageActivationContext extends System.Object implements class System.Fabric.ICodePackageActivationContext, class System.IDisposable" />
+  <TypeSignature Language="C#" Value="public class CodePackageActivationContext : IDisposable, System.Fabric.ICodePackageActivationContext2" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit CodePackageActivationContext extends System.Object implements class System.Fabric.ICodePackageActivationContext, class System.Fabric.ICodePackageActivationContext2, class System.IDisposable" />
   <TypeSignature Language="DocId" Value="T:System.Fabric.CodePackageActivationContext" />
   <AssemblyInfo>
     <AssemblyName>System.Fabric</AssemblyName>
@@ -12,7 +12,7 @@
   </Base>
   <Interfaces>
     <Interface>
-      <InterfaceName>System.Fabric.ICodePackageActivationContext</InterfaceName>
+      <InterfaceName>System.Fabric.ICodePackageActivationContext2</InterfaceName>
     </Interface>
     <Interface>
       <InterfaceName>System.IDisposable</InterfaceName>
@@ -1081,11 +1081,68 @@
         <Parameter Name="healthInfo" Type="System.Fabric.Health.HealthInformation" />
       </Parameters>
       <Docs>
-        <param name="healthInfo">Health information that is to be reported.</param>
+        <param name="healthInfo">The <see cref="T:System.Fabric.Health.HealthInformation" /> that describes the health report information,
+            such as source, property, and health state.</param>
         <summary>
             Reports health for current application. 
             </summary>
-        <remarks>Read more about health reporting at <see href="https://docs.microsoft.com/azure/service-fabric/service-fabric-diagnostics-how-to-report-and-check-service-health" />.</remarks>
+        <remarks>
+          <para>The health information describes the report details, like the source ID, the property, the health state
+            and other relevant details.
+            The code package activation context uses an internal health client to send the reports to the health store.
+            The client optimizes messages to Health Manager by batching reports per a configured duration (Default: 30 seconds).
+            If the report has high priority, you can specify send options to send it immediately by using
+            <see cref="M:System.Fabric.CodePackageActivationContext.ReportApplicationHealth(System.Fabric.Health.HealthInformation,System.Fabric.Health.HealthReportSendOptions)" />.
+            </para>
+          <para>Read more about <see href="https://docs.microsoft.com/azure/service-fabric/service-fabric-report-health">health reporting</see>.</para>
+        </remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <para>Returned when a null reference is passed to a method that does not accept it as a valid argument.</para>
+        </exception>
+        <exception cref="T:System.Fabric.FabricException">
+          <para>Caused by one of the following:</para>
+          <para>
+            <see cref="F:System.Fabric.FabricErrorCode.FabricHealthStaleReport" />.</para>
+          <para>
+            <see cref="F:System.Fabric.FabricErrorCode.FabricHealthMaxReportsReached" />.</para>
+        </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="ReportApplicationHealth">
+      <MemberSignature Language="C#" Value="public void ReportApplicationHealth (System.Fabric.Health.HealthInformation healthInfo, System.Fabric.Health.HealthReportSendOptions sendOptions);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void ReportApplicationHealth(class System.Fabric.Health.HealthInformation healthInfo, class System.Fabric.Health.HealthReportSendOptions sendOptions) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Fabric.CodePackageActivationContext.ReportApplicationHealth(System.Fabric.Health.HealthInformation,System.Fabric.Health.HealthReportSendOptions)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Fabric</AssemblyName>
+        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="healthInfo" Type="System.Fabric.Health.HealthInformation" />
+        <Parameter Name="sendOptions" Type="System.Fabric.Health.HealthReportSendOptions" />
+      </Parameters>
+      <Docs>
+        <param name="healthInfo">The <see cref="T:System.Fabric.Health.HealthInformation" /> that describes the health report information,
+            such as source, property, and health state.</param>
+        <param name="sendOptions">
+          <para>The <see cref="T:System.Fabric.Health.HealthReportSendOptions" /> that controls how the report is sent.</para>
+        </param>
+        <summary>
+            Reports health for current application.
+            Specifies options to control how the report is sent.
+            </summary>
+        <remarks>
+          <para>The health information describes the report details, like the source ID, the property, the health state
+            and other relevant details.
+            The code package activation context uses an internal health client to send the reports to the health store.
+            The client optimizes messages to Health Manager by batching reports per a configured duration (Default: 30 seconds).
+            If the report has high priority, you can specify send options to send it immediately.
+            </para>
+          <para>Read more about <see href="https://docs.microsoft.com/azure/service-fabric/service-fabric-report-health">health reporting</see>.</para>
+        </remarks>
         <exception cref="T:System.ArgumentNullException">
           <para>Returned when a null reference is passed to a method that does not accept it as a valid argument.</para>
         </exception>
@@ -1115,11 +1172,67 @@
         <Parameter Name="healthInfo" Type="System.Fabric.Health.HealthInformation" />
       </Parameters>
       <Docs>
-        <param name="healthInfo">Health information that is to be reported.</param>
+        <param name="healthInfo">The <see cref="T:System.Fabric.Health.HealthInformation" /> that describes the health report information,
+            such as source, property, and health state.</param>
         <summary>
             Reports health for current deployed application. 
             </summary>
-        <remarks>Read more about health reporting at <see href="https://docs.microsoft.com/azure/service-fabric/service-fabric-diagnostics-how-to-report-and-check-service-health" />.</remarks>
+        <remarks>
+          <para>The health information describes the report details, like the source ID, the property, the health state
+            and other relevant details.
+            The code package activation context uses an internal health client to send the reports to the health store.
+            The client optimizes messages to Health Manager by batching reports per a configured duration (Default: 30 seconds).
+            If the report has high priority, you can specify send options to send it immediately by using
+            <see cref="M:System.Fabric.CodePackageActivationContext.ReportDeployedApplicationHealth(System.Fabric.Health.HealthInformation,System.Fabric.Health.HealthReportSendOptions)" />.
+            </para>
+          <para>Read more about <see href="https://docs.microsoft.com/azure/service-fabric/service-fabric-report-health">health reporting</see>.</para>
+        </remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <para>Returned when a null reference is passed to a method that does not accept it as a valid argument.</para>
+        </exception>
+        <exception cref="T:System.Fabric.FabricException">
+          <para>Caused by one of the following:</para>
+          <para>
+            <see cref="F:System.Fabric.FabricErrorCode.FabricHealthStaleReport" />.</para>
+          <para>
+            <see cref="F:System.Fabric.FabricErrorCode.FabricHealthMaxReportsReached" />.</para>
+        </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="ReportDeployedApplicationHealth">
+      <MemberSignature Language="C#" Value="public void ReportDeployedApplicationHealth (System.Fabric.Health.HealthInformation healthInfo, System.Fabric.Health.HealthReportSendOptions sendOptions);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void ReportDeployedApplicationHealth(class System.Fabric.Health.HealthInformation healthInfo, class System.Fabric.Health.HealthReportSendOptions sendOptions) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Fabric.CodePackageActivationContext.ReportDeployedApplicationHealth(System.Fabric.Health.HealthInformation,System.Fabric.Health.HealthReportSendOptions)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Fabric</AssemblyName>
+        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="healthInfo" Type="System.Fabric.Health.HealthInformation" />
+        <Parameter Name="sendOptions" Type="System.Fabric.Health.HealthReportSendOptions" />
+      </Parameters>
+      <Docs>
+        <param name="healthInfo">The <see cref="T:System.Fabric.Health.HealthInformation" /> that describes the health report information,
+            such as source, property, and health state.</param>
+        <param name="sendOptions">
+          <para>The <see cref="T:System.Fabric.Health.HealthReportSendOptions" /> that controls how the report is sent.</para>
+        </param>
+        <summary>
+            Reports health for current deployed application. 
+            </summary>
+        <remarks>
+          <para>The health information describes the report details, like the source ID, the property, the health state
+            and other relevant details.
+            The code package activation context uses an internal health client to send the reports to the health store.
+            The client optimizes messages to Health Manager by batching reports per a configured duration (Default: 30 seconds).
+            If the report has high priority, you can specify send options to send it immediately.
+            </para>
+          <para>Read more about <see href="https://docs.microsoft.com/azure/service-fabric/service-fabric-report-health">health reporting</see>.</para>
+        </remarks>
         <exception cref="T:System.ArgumentNullException">
           <para>Returned when a null reference is passed to a method that does not accept it as a valid argument.</para>
         </exception>
@@ -1149,11 +1262,21 @@
         <Parameter Name="healthInfo" Type="System.Fabric.Health.HealthInformation" />
       </Parameters>
       <Docs>
-        <param name="healthInfo">Health information that is to be reported.</param>
+        <param name="healthInfo">The <see cref="T:System.Fabric.Health.HealthInformation" /> that describes the health report information,
+            such as source, property, and health state.</param>
         <summary>
             Reports health for current deployed service package. 
             </summary>
-        <remarks>Read more about health reporting at <see href="https://docs.microsoft.com/azure/service-fabric/service-fabric-diagnostics-how-to-report-and-check-service-health" />.</remarks>
+        <remarks>
+          <para>The health information describes the report details, like the source ID, the property, the health state
+            and other relevant details.
+            The code package activation context uses an internal health client to send the reports to the health store.
+            The client optimizes messages to Health Manager by batching reports per a configured duration (Default: 30 seconds).
+            If the report has high priority, you can specify send options to send it immediately by using
+            <see cref="M:System.Fabric.CodePackageActivationContext.ReportDeployedServicePackageHealth(System.Fabric.Health.HealthInformation,System.Fabric.Health.HealthReportSendOptions)" />.
+            </para>
+          <para>Read more about <see href="https://docs.microsoft.com/azure/service-fabric/service-fabric-report-health">health reporting</see>.</para>
+        </remarks>
         <exception cref="T:System.ArgumentNullException">
           <para>Returned when a null reference is passed to a method that does not accept it as a valid argument.</para>
         </exception>
@@ -1164,6 +1287,96 @@
           <para>
             <see cref="F:System.Fabric.FabricErrorCode.FabricHealthMaxReportsReached" />.</para>
         </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="ReportDeployedServicePackageHealth">
+      <MemberSignature Language="C#" Value="public void ReportDeployedServicePackageHealth (System.Fabric.Health.HealthInformation healthInfo, System.Fabric.Health.HealthReportSendOptions sendOptions);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void ReportDeployedServicePackageHealth(class System.Fabric.Health.HealthInformation healthInfo, class System.Fabric.Health.HealthReportSendOptions sendOptions) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Fabric.CodePackageActivationContext.ReportDeployedServicePackageHealth(System.Fabric.Health.HealthInformation,System.Fabric.Health.HealthReportSendOptions)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Fabric</AssemblyName>
+        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="healthInfo" Type="System.Fabric.Health.HealthInformation" />
+        <Parameter Name="sendOptions" Type="System.Fabric.Health.HealthReportSendOptions" />
+      </Parameters>
+      <Docs>
+        <param name="healthInfo">The <see cref="T:System.Fabric.Health.HealthInformation" /> that describes the health report information,
+            such as source, property, and health state.</param>
+        <param name="sendOptions">
+          <para>The <see cref="T:System.Fabric.Health.HealthReportSendOptions" /> that controls how the report is sent.</para>
+        </param>
+        <summary>
+            Reports health for current deployed service package. 
+            </summary>
+        <remarks>
+          <para>The health information describes the report details, like the source ID, the property, the health state
+            and other relevant details.
+            The code package activation context uses an internal health client to send the reports to the health store.
+            The client optimizes messages to Health Manager by batching reports per a configured duration (Default: 30 seconds).
+            If the report has high priority, you can specify send options to send it immediately.
+            </para>
+          <para>Read more about <see href="https://docs.microsoft.com/azure/service-fabric/service-fabric-report-health">health reporting</see>.</para>
+        </remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <para>Returned when a null reference is passed to a method that does not accept it as a valid argument.</para>
+        </exception>
+        <exception cref="T:System.Fabric.FabricException">
+          <para>Caused by one of the following:</para>
+          <para>
+            <see cref="F:System.Fabric.FabricErrorCode.FabricHealthStaleReport" />.</para>
+          <para>
+            <see cref="F:System.Fabric.FabricErrorCode.FabricHealthMaxReportsReached" />.</para>
+        </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="ServiceListenAddress">
+      <MemberSignature Language="C#" Value="public string ServiceListenAddress { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ServiceListenAddress" />
+      <MemberSignature Language="DocId" Value="P:System.Fabric.CodePackageActivationContext.ServiceListenAddress" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Fabric</AssemblyName>
+        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+          <para>The address at which the service should start the communication listener.</para>
+        </summary>
+        <value>
+          <para>The address at which the service should start the communication listener.</para>
+        </value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ServicePublishAddress">
+      <MemberSignature Language="C#" Value="public string ServicePublishAddress { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ServicePublishAddress" />
+      <MemberSignature Language="DocId" Value="P:System.Fabric.CodePackageActivationContext.ServicePublishAddress" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Fabric</AssemblyName>
+        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+          <para>The address which the service should publish as the listen address.</para>
+        </summary>
+        <value>
+          <para>The address which the service should publish as the listen address.</para>
+        </value>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="TempDirectory">

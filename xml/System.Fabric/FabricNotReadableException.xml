@@ -18,9 +18,22 @@
   </Attributes>
   <Docs>
     <summary>
-      <para>Represents an exception that is thrown when a partition cannot accept reads.</para>
+      <para>
+            Represents an exception that is thrown when a partition or a replica cannot accept reads.
+            </para>
     </summary>
-    <remarks>To be added.</remarks>
+    <remarks>
+      <para>
+            The exception can be seen in the following 2 scenarios :
+                1. The partition does not have a read quorum.
+                2. The service is trying to read from an <see href="https://msdn.microsoft.com/library/azure/dn707635.aspx">IdleSecondary replica</see>.
+            </para>
+      <para>
+            Handling <see cref="T:System.Fabric.FabricNotReadableException" /> for <see href="https://docs.microsoft.com/azure/service-fabric/service-fabric-reliable-services-reliable-collections">Reliable Collections</see> :
+            If <see cref="T:System.Fabric.FabricNotReadableException" /> is seen by the service or a client call, the exception should be caught, current transaction should be disposed and all the operations should be retried with a new transaction object.
+            Read status will eventually be granted or a non-retriable exception will be thrown. An optional backoff can be added before retrying.
+            </para>
+    </remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">

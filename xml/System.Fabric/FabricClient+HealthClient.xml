@@ -4929,145 +4929,83 @@
         </summary>
         <remarks>
           <para>
-             When a cluster is secured, the health client needs Administrator permission to be able to send the reports.
+             When a cluster is secured, the health client needs administrator permission to be able to send the reports.
+             Read more about <see href="https://docs.microsoft.com/azure/service-fabric/service-fabric-connect-to-secure-cluster">connecting to a cluster using the FabricClient APIs</see>.
+            </para>
+          <para>
+             For more information about health reporting, see <see href="https://docs.microsoft.com/azure/service-fabric/service-fabric-health-introduction">Service Fabric health monitoring</see>.
+            </para>
+        </remarks>
+        <exception cref="T:System.Fabric.FabricObjectClosedException">
+          <para>The <see cref="T:System.Fabric.FabricClient" /> object is in a closed state. Dispose of the <see cref="T:System.Fabric.FabricClient" /> object you are using and instantiate a new <see cref="T:System.Fabric.FabricClient" /> object.</para>
+        </exception>
+        <exception cref="T:System.ArgumentNullException">
+          <para>Returned when a null reference is passed to a method that does not accept it as a valid argument.</para>
+        </exception>
+        <exception cref="T:System.Fabric.FabricException">
+          <para>Caused by one of the following:</para>
+          <para>
+            <see cref="F:System.Fabric.FabricErrorCode.FabricHealthStaleReport" />.</para>
+          <para>
+            <see cref="F:System.Fabric.FabricErrorCode.FabricHealthMaxReportsReached" />.</para>
+          <para>
+            <see cref="F:System.Fabric.FabricErrorCode.InvalidCredentialType" />.</para>
+          <para>
+            <see cref="F:System.Fabric.FabricErrorCode.InvalidX509FindType" />.</para>
+          <para>
+            <see cref="F:System.Fabric.FabricErrorCode.InvalidX509StoreLocation" />.</para>
+          <para>
+            <see cref="F:System.Fabric.FabricErrorCode.InvalidX509StoreName" />.</para>
+          <para>
+            <see cref="F:System.Fabric.FabricErrorCode.InvalidX509Thumbprint" />.</para>
+          <para>
+            <see cref="F:System.Fabric.FabricErrorCode.InvalidProtectionLevel" />.</para>
+          <para>
+            <see cref="F:System.Fabric.FabricErrorCode.InvalidX509Store" />.</para>
+          <para>
+            <see cref="F:System.Fabric.FabricErrorCode.InvalidSubjectName" />.</para>
+          <para>
+            <see cref="F:System.Fabric.FabricErrorCode.InvalidAllowedCommonNameList" />.</para>
+        </exception>
+        <exception cref="T:System.UnauthorizedAccessException">
+          <para>Caused by one of the following:</para>
+          <para>E_ACCESSDENIED is returned when the access check has failed for this operation.</para>
+        </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="ReportHealth">
+      <MemberSignature Language="C#" Value="public void ReportHealth (System.Fabric.Health.HealthReport healthReport, System.Fabric.Health.HealthReportSendOptions sendOptions);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void ReportHealth(class System.Fabric.Health.HealthReport healthReport, class System.Fabric.Health.HealthReportSendOptions sendOptions) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.HealthClient.ReportHealth(System.Fabric.Health.HealthReport,System.Fabric.Health.HealthReportSendOptions)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Fabric</AssemblyName>
+        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="healthReport" Type="System.Fabric.Health.HealthReport" />
+        <Parameter Name="sendOptions" Type="System.Fabric.Health.HealthReportSendOptions" />
+      </Parameters>
+      <Docs>
+        <param name="healthReport">
+          <para>The <see cref="T:System.Fabric.Health.HealthReport" /> to submit.</para>
+        </param>
+        <param name="sendOptions">
+          <para>The <see cref="T:System.Fabric.Health.HealthReportSendOptions" /> that controls how the report is sent.</para>
+        </param>
+        <summary>
+          <para>Reports health on a Service Fabric entity and passes send options to control how the report is sent.</para>
+        </summary>
+        <remarks>
+          <para>
+             When a cluster is secured, the health client needs administrator permission to be able to send the reports.
              Read more about <see href="https://docs.microsoft.com/azure/service-fabric/service-fabric-connect-to-secure-cluster">connecting to a cluster using the FabricClient APIs.</see></para>
           <para>
-             For more information, see <see href="https://docs.microsoft.com/azure/service-fabric/service-fabric-health-introduction">Service Fabric health monitoring.</see></para>
-        </remarks>
-        <remarks>
-          <para>Read more about health reporting at 
-             <see href="https://docs.microsoft.com/azure/service-fabric/service-fabric-diagnostics-how-to-report-and-check-service-health" />.</para>
-          <para>The following example reports the health of a partition.</para>
-          <code language="c#">static bool ReportPartitionHealth(string clusterConnection)
-            {
-                // By default, health reports are sent within 30 seconds. Because this
-                //   FabricClient object will not exist for 30 seconds, health reports
-                //   will be sent immediately.
-                FabricClientSettings fabricClientSettings = new FabricClientSettings()
-                {
-                    HealthReportSendInterval = new TimeSpan(0)
-                };
-            
-                // Create the fabric client.
-                FabricClient fabricClient = new FabricClient(fabricClientSettings, clusterConnection);
-            
-                // Create the PartitionHealthReport
-                PartitionHealthReport partitionHealth = new PartitionHealthReport(
-                    new System.Guid("a199fb35d8534da795aeb398e57fb112"),            // partitionID
-                    new HealthInformation("ExternalWatchdog",                       // sourceID
-                        "LogicProperty",                                            // property name
-                        HealthState.Ok)                                             // health state
-                    {
-                        Description = "Description of health report goes here.",    // description
-                        TimeToLive = TimeSpan.FromMinutes(60)                       // time to live
-                    });
-            
-                // Report health
-                try
-                {
-                    fabricClient.HealthManager.ReportHealth(partitionHealth);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("Error: " + e.Message);
-            
-                    if (e.InnerException != null)
-                        Console.WriteLine("  Inner Exception: " + e.InnerException.Message);
-            
-                    return false;
-                }
-            
-                Console.WriteLine("Partition health reported successfully.");
-                return true;
-            }
-            </code>
-          <para>The following example reports the health of an application</para>
-          <code language="c#">static bool ReportApplicationHealth(string clusterConnection)
-            {
-                Uri applicationName = new Uri("fabric:/myapp/todo");
-            
-                // By default, health reports are sent within 30 seconds. Because this
-                //   FabricClient object will not exist for 30 seconds, health reports
-                //   will be sent immediately.
-                FabricClientSettings fabricClientSettings = new FabricClientSettings()
-                {
-                    HealthReportSendInterval = new TimeSpan(0)
-                };
-            
-                // Create the fabric client.
-                FabricClient fabricClient = new FabricClient(fabricClientSettings, clusterConnection);
-            
-                // Create the health report.
-                ApplicationHealthReport applicationHealthReport = new ApplicationHealthReport(applicationName, 
-                    new HealthInformation("InternalWatchdog", "LogicProperty", HealthState.Ok)
-                    {
-                        Description = "Description of health report goes here.",
-                        TimeToLive = TimeSpan.FromMinutes(60)
-                    });
-            
-                // Report health
-                try
-                {
-                    fabricClient.HealthManager.ReportHealth(applicationHealthReport);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("Error: " + e.Message);
-            
-                    if (e.InnerException != null)
-                        Console.WriteLine("  Inner Exception: " + e.InnerException.Message);
-            
-                    return false;
-                }
-            
-                Console.WriteLine("Application health reported successfully.");
-                return true;
-            }
-            </code>
-          <para>The following example reports the health of a deployed application.</para>
-          <code language="c#">static bool ReportDeployedApplicationHealth(string clusterConnection)
-            {
-                Uri applicationName = new Uri("fabric:/myapp/todo");
-            
-                // By default, health reports are sent within 30 seconds. Because this
-                //   FabricClient object will not exist for 30 seconds, health reports
-                //   will be sent immediately.
-                FabricClientSettings fabricClientSettings = new FabricClientSettings()
-                {
-                    HealthReportSendInterval = new TimeSpan(0)
-                };
-            
-                // Create the fabric client.
-                FabricClient fabricClient = new FabricClient(fabricClientSettings, clusterConnection);
-            
-                // Create the health report.
-                DeployedApplicationHealthReport deployedAppHealthReport = new DeployedApplicationHealthReport(
-                    applicationName, "Node1", 
-                    new HealthInformation("ExternalWatchdog", "LogicProperty", HealthState.Ok)
-                    {
-                        Description = "Description of health report.",
-                        TimeToLive = TimeSpan.FromMinutes(60)
-                    });
-            
-                // Report health
-                try
-                {
-                    fabricClient.HealthManager.ReportHealth(deployedAppHealthReport);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("Error: " + e.Message);
-            
-                    if (e.InnerException != null)
-                        Console.WriteLine("  Inner Exception: " + e.InnerException.Message);
-            
-                    return false;
-                }
-            
-                Console.WriteLine("Deployed application health reported successfully.");
-                return true;
-            }
-            </code>
+             For more information about health reporting, see <see href="https://docs.microsoft.com/azure/service-fabric/service-fabric-health-introduction">Service Fabric health monitoring</see>.
+            </para>
         </remarks>
         <exception cref="T:System.Fabric.FabricObjectClosedException">
           <para>The <see cref="T:System.Fabric.FabricClient" /> object is in a closed state. Dispose of the <see cref="T:System.Fabric.FabricClient" /> object you are using and instantiate a new <see cref="T:System.Fabric.FabricClient" /> object.</para>
