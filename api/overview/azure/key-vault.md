@@ -17,7 +17,7 @@ ms.service: multiple
 
 ## Overview
 
-Azure Key Vault helps safeguard cryptographic keys and secrets used by cloud applications and services. By using Key Vault, you can encrypt keys and secrets. Assets may include authentication keys, storage account keys, data encryption keys, certificates, and passwords. Keys in Azure Key Vault are protected by hardware security modules (HSMs). For added assurance, you can import or generate keys in HSMs. Key Vault also integrates with DevOps to generate certificates and secrets for assets such as virtual machines that may be created as part of your deployment pipeline.
+Azure Key Vault helps safeguard cryptographic keys and secrets used by cloud applications and services.
 
 Read more about [What is Key Vault?](/azure/key-vault/key-vault-whatis) then [Get started with Azure Key Vault](/azure/key-vault/key-vault-get-started) or learn how to [Use Key Vault from a web app](/azure/key-vault/key-vault-use-from-web-application).
 

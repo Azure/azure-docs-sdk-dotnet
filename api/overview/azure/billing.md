@@ -57,9 +57,9 @@ billingClient.Invoices.List();
 
 ## Samples
 
-* [Usage API](https://azure.microsoft.com/en-us/resources/samples/billing-dotnet-usage-api/)
-* [RateCard API](https://azure.microsoft.com/en-us/resources/samples/billing-dotnet-ratecard-api/)
-* [Multi-Tenant Web Application](https://azure.microsoft.com/en-us/resources/samples/billing-dotnet-webapp-multitenant/)
+* [Usage API](https://github.com/Azure-Samples/billing-dotnet-usage-api)
+* [RateCard API](https://github.com/Azure-Samples/billing-dotnet-ratecard-api)
+* [Multi-Tenant Web Application](https://github.com/Azure-Samples/billing-dotnet-webapp-multitenant)
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
 [DotNetCLI]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package

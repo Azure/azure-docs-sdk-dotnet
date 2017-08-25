@@ -19,6 +19,8 @@ ms.service: multiple
 
 Azure Data Lake Store is an enterprise-wide hyper-scale repository for big data analytic workloads. Azure Data Lake enables you to capture data of any size, type, and ingestion speed in one single place for operational and exploratory analytics.
 
+To learn more, see [Overview of Azure Data Lake Store](/azure/data-lake-store/data-lake-store-overview).
+
 ## Management library
 
 Use the management library to connect to and manage your big data repositories.
