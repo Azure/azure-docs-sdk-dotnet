@@ -80,6 +80,13 @@ Other libraries require your application to run with a [service principal](https
 
 Now that the service principal is created, two options are available to authenticate to the service principal to create and manage resources.
 
+For both options you will need to add the following nuget packages to your project.
+
+```
+Install-Package Microsoft.Azure.Management.Fluent
+Install-Package Microsoft.Azure.Management.ResourceManager.Fluent
+```
+
 ### Authenticate with token credentials
 
 The first method is to build the token credential object in code.  You should store the credentials securely in a configuration file, the registry, or Azure KeyVault.
@@ -99,7 +106,7 @@ var credentials = SdkContext.AzureCredentialsFactory
 Then create the entry point `Azure` object to start working with the API:
 
 ```csharp
-var azure = Azure
+var azure = Microsoft.Azure.Management.Fluent.Azure
     .Configure()
     .Authenticate(credentials)
     .WithDefaultSubscription();
@@ -118,7 +125,7 @@ Read the contents of the file and create the entry point `Azure` object to start
 var credentials = SdkContext.AzureCredentialsFactory
     .FromFile(Environment.GetEnvironmentVariable("AZURE_AUTH_LOCATION"));
 
-var azure = Azure
+var azure = Microsoft.Azure.Management.Fluent.Azure
     .Configure()
     .Authenticate(credentials)
     .WithDefaultSubscription();
