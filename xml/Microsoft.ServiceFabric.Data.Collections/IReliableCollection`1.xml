@@ -1,4 +1,4 @@
-<Type Name="IReliableCollection&lt;T&gt;" FullName="Microsoft.ServiceFabric.Data.Collections.IReliableCollection&lt;T&gt;">
+﻿<Type Name="IReliableCollection&lt;T&gt;" FullName="Microsoft.ServiceFabric.Data.Collections.IReliableCollection&lt;T&gt;">
   <TypeSignature Language="C#" Value="public interface IReliableCollection&lt;T&gt; : Microsoft.ServiceFabric.Data.IReliableState" />
   <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IReliableCollection`1&lt;T&gt; implements class Microsoft.ServiceFabric.Data.IReliableState" />
   <TypeSignature Language="DocId" Value="T:Microsoft.ServiceFabric.Data.Collections.IReliableCollection`1" />
@@ -32,6 +32,7 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyName>Microsoft.ServiceFabric.Data.Interfaces</AssemblyName>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -61,6 +62,7 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyName>Microsoft.ServiceFabric.Data.Interfaces</AssemblyName>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Int64&gt;</ReturnType>
@@ -87,15 +89,17 @@
             One reason it may be thrown in the <see cref="F:System.Fabric.ReplicaRole.ActiveSecondary" /> role is that Reliable Collection's state is not yet consistent.</para>
         </exception>
         <exception cref="T:System.InvalidOperationException">
-          <para>Thrown when a method call is invalid for the object's current state.
-            For example, the transaction used has already been terminated because it has been committed or aborted.</para>
-        </exception>
+            Thrown when a method call is invalid for the object's current state.
+            Example, transaction used is already terminated: committed or aborted by the user.
+            If this exception is thrown, it is highly likely that there is a bug in the service code of the use of transactions.
+            </exception>
         <exception cref="T:System.Fabric.FabricNotPrimaryException">
           <para>Thrown when attempting to perform this operation on a <see cref="T:Microsoft.ServiceFabric.Data.Collections.IReliableCollection`1" /> 
             that is not in the <see cref="F:System.Fabric.ReplicaRole.Primary" /> role.
             In some instances, read operations, such as this one, can be performed from secondary replicas 
             depending on the implementation of the IReliableCollection used.</para>
         </exception>
+        <exception cref="T:System.Fabric.TransactionFaultedException">The transaction has been internally faulted by the system. Retry the operation on a new transaction</exception>
       </Docs>
     </Member>
   </Members>
