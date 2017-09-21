@@ -120,6 +120,22 @@
                     } 
                  });
             ]]></code></example>
+    <example>
+            The following example shows how to use AccessCondition with DocumentClient.
+            <code language="c#"><![CDATA[
+            // If ETag is current, then this will succeed. Otherwise the request will fail with HTTP 412 Precondition Failure
+            await client.ReplaceDocumentAsync(
+                readCopyOfBook.SelfLink, 
+                new Book { Title = "Moby Dick", Price = 14.99 },
+                new RequestOptions 
+                { 
+                    AccessCondition = new AccessCondition 
+                    { 
+                        Condition = readCopyOfBook.ETag, 
+                        Type = AccessConditionType.IfMatch 
+                    } 
+                 });
+            ]]></code></example>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
