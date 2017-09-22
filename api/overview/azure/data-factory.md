@@ -26,7 +26,7 @@ To learn more, read the [Introduction to Azure Data Factory](/azure/data-factory
 
 Use the management library to create and schedule data-driven workflows (pipelines) in Data Factory V2 (Preview).  For more information, see [Create a data factory and pipeline using .NET SDK](/azure/data-factory/quickstart-create-data-factory-dot-net).
 
-Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Management.DataFactories) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
+Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Management.DataFactory) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
 
 #### Visual Studio Package Manager
 
@@ -36,8 +36,8 @@ Install-Package Microsoft.Azure.Management.DataFactory -Prerelease
 ```
 
 ```bash
-# Be sure to include the version number from the NuGet package page
-dotnet add package Microsoft.Azure.Management.DataFactory --version x.x.x
+# Be sure to include the most recent version from the NuGet package page
+dotnet add package Microsoft.Azure.Management.DataFactory --version 0.2.0-preview
 ```
 
 ### Code Example
