@@ -5,12 +5,13 @@ keywords: Azure, .NET, SDK, API, Data Factory
 author: camsoper
 ms.author: casoper
 manager: douge
-ms.date: 07/20/2017
+ms.date: 09/22/2017
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: multiple
+ms.service: data-factory
+ms.custom: devcenter
 ---
 
 # Azure Data Factory libraries for .NET
@@ -21,9 +22,50 @@ Azure Data Factory is a cloud-based data integration service. It enables you to 
 
 To learn more, read the [Introduction to Azure Data Factory](/azure/data-factory/data-factory-introduction).
 
-## Management library
+## Management library - Data Factory V2 (Preview)
 
-Use the management library to create and schedule data-driven workflows (pipelines).
+Use the management library to create and schedule data-driven workflows (pipelines) in Data Factory V2 (Preview).  For more information, see [Create a data factory and pipeline using .NET SDK](/azure/data-factory/quickstart-create-data-factory-dot-net).
+
+Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Management.DataFactory) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
+
+#### Visual Studio Package Manager
+
+```powershell
+# Get the most recent prerelease package
+Install-Package Microsoft.Azure.Management.DataFactory -Prerelease
+```
+
+```bash
+# Be sure to include the most recent version from the NuGet package page
+dotnet add package Microsoft.Azure.Management.DataFactory --version 0.2.0-preview
+```
+
+### Code Example
+
+The following example uses the management library to create a data factory.
+
+```csharp
+/*
+using Microsoft.Azure.Management.ResourceManager;
+using Microsoft.Azure.Management.DataFactory;
+using Microsoft.Azure.Management.DataFactory.Models;
+*/
+
+DataFactoryManagementClient client = new DataFactoryManagementClient(tokenCredentials) { SubscriptionId = subscriptionId };
+Factory dataFactory = new Factory
+{
+    Location = region,
+    Identity = new FactoryIdentity()
+};
+client.Factories.CreateOrUpdate(resourceGroup, dataFactoryName, dataFactory);
+```
+
+> [!div class="nextstepaction"]
+> [Explore the management APIs](/dotnet/api/microsoft.azure.management.datafactory)
+
+## Management library - Data Factory V1
+
+Use the management library to create and schedule data-driven workflows (pipelines) in Data Factory Version 1.  For more information, review the documentation for [Data Factory Version 1](/azure/data-factory/v1/data-factory-introduction).
 
 Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Management.DataFactories) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
 
