@@ -5,14 +5,35 @@
   <AssemblyInfo>
     <AssemblyName>Microsoft.Azure.EventHubs</AssemblyName>
     <AssemblyVersion>1.0.1.0</AssemblyVersion>
+    <AssemblyVersion>1.0.3.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
+    <summary>
+            EventHubsConnectionStringBuilder can be used to construct a connection string which can establish communication with Event Hubs entities.
+            It can also be used to perform basic validation on an existing connection string.
+            <para />
+            A connection string is basically a string consisted of key-value pair separated by ";". 
+            Basic format is "&lt;key&gt;=&lt;value&gt;[;&lt;key&gt;=&lt;value&gt;]" where supported key name are as follow:
+            <para /> Endpoint - the URL that contains the Event Hubs namespace
+            <para /> EntityPath - the path to the Event Hub entity
+            <para /> SharedAccessKeyName - the key name to the corresponding shared access policy rule for the namespace, or entity.
+            <para /> SharedAccessKey - the key for the corresponding shared access policy rule of the namespace or entity.
+            </summary>
     <remarks>To be added.</remarks>
+    <example>
+            Sample code:
+            <code>
+            var connectionStringBuiler = new EventHubsConnectionStringBuilder(
+                "amqps://EventHubsNamespaceName.servicebus.windows.net", 
+                "EventHubsEntityName", // Event Hub Name 
+                "SharedAccessSignatureKeyName", 
+                "SharedAccessSignatureKey");
+             string connectionString = connectionStringBuiler.ToString();
+            </code></example>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -21,15 +42,19 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.EventHubs.EventHubsConnectionStringBuilder.#ctor(System.String)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.0.1.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.EventHubs</AssemblyName>
+        <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.0.3.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="connectionString" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="connectionString">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="connectionString">Event Hubs ConnectionString</param>
+        <summary>
+            ConnectionString format:
+            Endpoint=sb://namespace_DNS_Name;EntityPath=EVENT_HUB_NAME;SharedAccessKeyName=SHARED_ACCESS_KEY_NAME;SharedAccessKey=SHARED_ACCESS_KEY
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -39,8 +64,9 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.EventHubs.EventHubsConnectionStringBuilder.#ctor(System.Uri,System.String,System.String,System.String)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.0.1.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.EventHubs</AssemblyName>
+        <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.0.3.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="endpointAddress" Type="System.Uri" />
@@ -49,11 +75,37 @@
         <Parameter Name="sharedAccessKey" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="endpointAddress">To be added.</param>
-        <param name="entityPath">To be added.</param>
-        <param name="sharedAccessKeyName">To be added.</param>
-        <param name="sharedAccessKey">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="endpointAddress">Fully qualified domain name for Event Hubs. Most likely, {yournamespace}.servicebus.windows.net</param>
+        <param name="entityPath">Entity path or Event Hub name.</param>
+        <param name="sharedAccessKeyName">Shared Access Key name</param>
+        <param name="sharedAccessKey">Shared Access Key</param>
+        <summary>
+            Build a connection string consumable by <see cref="M:Microsoft.Azure.EventHubs.EventHubClient.CreateFromConnectionString(System.String)" /></summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public EventHubsConnectionStringBuilder (Uri endpointAddress, string entityPath, string sharedAccessSignature, TimeSpan operationTimeout);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Uri endpointAddress, string entityPath, string sharedAccessSignature, valuetype System.TimeSpan operationTimeout) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.EventHubs.EventHubsConnectionStringBuilder.#ctor(System.Uri,System.String,System.String,System.TimeSpan)" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.EventHubs</AssemblyName>
+        <AssemblyVersion>1.0.3.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="endpointAddress" Type="System.Uri" />
+        <Parameter Name="entityPath" Type="System.String" />
+        <Parameter Name="sharedAccessSignature" Type="System.String" />
+        <Parameter Name="operationTimeout" Type="System.TimeSpan" />
+      </Parameters>
+      <Docs>
+        <param name="endpointAddress">Fully qualified domain name for Event Hubs. Most likely, {yournamespace}.servicebus.windows.net</param>
+        <param name="entityPath">Entity path or Event Hub name.</param>
+        <param name="sharedAccessSignature">Shared Access Signature</param>
+        <param name="operationTimeout">Operation timeout for Event Hubs operations</param>
+        <summary>
+            Build a connection string consumable by <see cref="M:Microsoft.Azure.EventHubs.EventHubClient.CreateFromConnectionString(System.String)" /></summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -63,8 +115,9 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.EventHubs.EventHubsConnectionStringBuilder.#ctor(System.Uri,System.String,System.String,System.String,System.TimeSpan)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.0.1.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.EventHubs</AssemblyName>
+        <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.0.3.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="endpointAddress" Type="System.Uri" />
@@ -74,12 +127,13 @@
         <Parameter Name="operationTimeout" Type="System.TimeSpan" />
       </Parameters>
       <Docs>
-        <param name="endpointAddress">To be added.</param>
-        <param name="entityPath">To be added.</param>
-        <param name="sharedAccessKeyName">To be added.</param>
-        <param name="sharedAccessKey">To be added.</param>
-        <param name="operationTimeout">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="endpointAddress">Fully qualified domain name for Event Hubs. Most likely, {yournamespace}.servicebus.windows.net</param>
+        <param name="entityPath">Entity path or Event Hub name.</param>
+        <param name="sharedAccessKeyName">Shared Access Key name</param>
+        <param name="sharedAccessKey">Shared Access Key</param>
+        <param name="operationTimeout">Operation timeout for Event Hubs operations</param>
+        <summary>
+            Build a connection string consumable by <see cref="M:Microsoft.Azure.EventHubs.EventHubClient.CreateFromConnectionString(System.String)" /></summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -89,16 +143,19 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.EventHubs.EventHubsConnectionStringBuilder.Clone" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.0.1.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.EventHubs</AssemblyName>
+        <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.0.3.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.EventHubs.EventHubsConnectionStringBuilder</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>
+            Creates a cloned object of the current <see cref="T:Microsoft.Azure.EventHubs.EventHubsConnectionStringBuilder" />.
+            </summary>
+        <returns>A new <see cref="T:Microsoft.Azure.EventHubs.EventHubsConnectionStringBuilder" /></returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -108,14 +165,17 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.EventHubs.EventHubsConnectionStringBuilder.Endpoint" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.0.1.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.EventHubs</AssemblyName>
+        <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.0.3.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Uri</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the Event Hubs endpoint.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -126,14 +186,17 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.EventHubs.EventHubsConnectionStringBuilder.EntityPath" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.0.1.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.EventHubs</AssemblyName>
+        <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.0.3.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Get the entity path value from the connection string
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -144,14 +207,16 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.EventHubs.EventHubsConnectionStringBuilder.OperationTimeout" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.0.1.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.EventHubs</AssemblyName>
+        <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.0.3.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.TimeSpan</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            OperationTimeout is applied in erroneous situations to notify the caller about the relevant <see cref="T:Microsoft.Azure.EventHubs.EventHubsException" /></summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -162,15 +227,18 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.EventHubs.EventHubsConnectionStringBuilder.SasKey" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.0.1.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.EventHubs</AssemblyName>
+        <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.0.3.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>
+            Get the shared access policy key value from the connection string
+            </summary>
+        <value>Shared Access Signature key</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -180,15 +248,38 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.EventHubs.EventHubsConnectionStringBuilder.SasKeyName" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.0.1.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.EventHubs</AssemblyName>
+        <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.0.3.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Get the shared access policy owner name from the connection string
+            </summary>
         <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SharedAccessSignature">
+      <MemberSignature Language="C#" Value="public string SharedAccessSignature { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string SharedAccessSignature" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.EventHubs.EventHubsConnectionStringBuilder.SharedAccessSignature" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.EventHubs</AssemblyName>
+        <AssemblyVersion>1.0.3.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets the SAS access token.
+            </summary>
+        <value>Shared Access Signature</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -198,16 +289,41 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.EventHubs.EventHubsConnectionStringBuilder.ToString" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.0.1.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.EventHubs</AssemblyName>
+        <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.0.3.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>
+            Returns an interoperable connection string that can be used to connect to Event Hubs Namespace
+            </summary>
+        <returns>the connection string</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TransportType">
+      <MemberSignature Language="C#" Value="public Microsoft.Azure.EventHubs.TransportType TransportType { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.Azure.EventHubs.TransportType TransportType" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.EventHubs.EventHubsConnectionStringBuilder.TransportType" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.EventHubs</AssemblyName>
+        <AssemblyVersion>1.0.3.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Azure.EventHubs.TransportType</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Transport type for the client connection.
+            Avaiable options are Amqp and AmqpWebSockets.
+            Defaults to Amqp if not specified.
+            </summary>
+        <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
