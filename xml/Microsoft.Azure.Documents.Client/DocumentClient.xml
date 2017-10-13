@@ -86,6 +86,9 @@
     <threadSafety>
             This type is thread safe.
             </threadSafety>
+    <threadSafety>
+            This type is thread safe.
+            </threadSafety>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -919,6 +922,35 @@
             
             //Now you will have a Document in your database with two attachments.
             ]]></code></example>
+        <example>
+            The example below creates a new document, and then creates a new attachment for that document
+            <code language="c#"><![CDATA[
+            dynamic d = new 
+            {
+                id = "DOC1800243243470"
+            };
+                
+            Document doc = await client.CreateDocumentAsync(collectionSelfLink, d);
+            
+            //Create an Attachment which links to binary content stored somewhere else
+            //Use the MediaLink property of Attachment to set where the binary resides
+            //MediaLink can also point at another Attachment within DocumentDB.
+            Attachment a = await client.CreateAttachmentAsync(doc.SelfLink, new Attachment { Id = "foo", ContentType = "text/plain", MediaLink = "link to your media" });
+            
+            //Because Attachment is a Dynamic object you can use SetPropertyValue method to any property you like
+            //Even if that property doesn't exist. Here we are creating two new properties on the Attachment we created above.
+            a.SetPropertyValue("Foo", "some value");
+            a.SetPropertyValue("Bar", "some value");
+            
+            //Now update the Attachment object in the database to persist the new properties on the object
+            client.ReplaceAttachmentAsync(a);
+            
+            //Let's now create another Attachment except this time we're going to use a Dynamic object instead 
+            //of a <see cref="Microsoft.Azure.Documents.Attachment"/> as we did above.
+            var b = await client.CreateAttachmentAsync(doc.SelfLink, new { id = "foo", contentType = "text/plain", media="link to your media", a = 5, b = 6 });
+            
+            //Now you will have a Document in your database with two attachments.
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="CreateAttachmentAsync">
@@ -1011,6 +1043,22 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.IO.Stream" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            //This attachment could be any binary you want to attach. Like images, videos, word documents, pdfs etc. it doesn't matter
+            using (FileStream fileStream = new FileStream(@".\something.pdf", FileMode.Open))
+            {
+                //Create the attachment
+                Attachment attachment = await client.CreateAttachmentAsync("dbs/db_rid/colls/coll_rid/docs/doc_rid/attachments/", 
+                                                    fileStream, 
+                                                    new MediaOptions 
+                                                    { 
+                                                        ContentType = "application/pdf", 
+                                                        Slug = "something.pdf" 
+                                                    });
+            }
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             //This attachment could be any binary you want to attach. Like images, videos, word documents, pdfs etc. it doesn't matter
@@ -1329,6 +1377,14 @@
                 Console.WriteLine("Id: {0}, MediaLink:{1}", attachment.Id, attachment.MediaLink);
             }
             ]]></code></example>
+        <example>
+            This example below queries for plain text attachments using LINQ.
+            <code language="c#"><![CDATA[
+            foreach (Attachment attachment in client.CreateAttachmentQuery(document.SelfLink).Where(a => a.ContentType == "text/plain"))
+            {
+                Console.WriteLine("Id: {0}, MediaLink:{1}", attachment.Id, attachment.MediaLink);
+            }
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="CreateAttachmentQuery">
@@ -1530,6 +1586,18 @@
                  Console.WriteLine("Id: {0}, Priority:{1}", attachment.id, attachment.priority);
              }
              ]]></code></example>
+        <example>
+             This example below queries for plain text attachments using a parameterized SQL query string.
+             <code language="c#"><![CDATA[
+             var query = new SqlQuerySpec(
+                 "SELECT * FROM attachments a WHERE a.priority = @priority", 
+                 new SqlParameterCollection(new SqlParameter[] { new SqlParameter { Name = "@priority", Value = 0 } }));
+            
+             foreach (dynamic attachment in client.CreateAttachmentQuery<dynamic>(document.SelfLink, query))
+             {
+                 Console.WriteLine("Id: {0}, Priority:{1}", attachment.id, attachment.priority);
+             }
+             ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="CreateAttachmentQuery">
@@ -1576,6 +1644,16 @@
         </example>
         <altmember cref="T:Microsoft.Azure.Documents.Attachment" />
         <altmember cref="T:Microsoft.Azure.Documents.Linq.IDocumentQuery" />
+        <example>
+          <code language="c#"><![CDATA[
+            foreach (Attachment attachment in client.CreateAttachmentQuery<dynamic>(
+                document.SelfLink, 
+                "SELECT * FROM attachments a WHERE a.priority = 0"))
+            {
+                Console.WriteLine("Id: {0}, Priority:{1}", attachment.id, attachment.priority);
+            }
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             foreach (Attachment attachment in client.CreateAttachmentQuery<dynamic>(
@@ -1947,6 +2025,21 @@
                 Console.WriteLine("Id: {0}, MediaLink:{1}", attachment.Id, attachment.MediaLink);
             }
             ]]></code></example>
+        <example>
+            This example below queries against attachments of custom types.
+            <code language="c#"><![CDATA[
+            public class PriorityAttachment : Attachment
+            {
+                [JsonProperty("priority")]
+                public int Priority;
+            }
+            
+            foreach (PriorityAttachment attachment in 
+                client.CreateAttachmentQuery<PriorityAttachment>(document.SelfLink).Where(a => a.Priority == 0))
+            {
+                Console.WriteLine("Id: {0}, MediaLink:{1}", attachment.Id, attachment.MediaLink);
+            }
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="CreateAttachmentQuery&lt;T&gt;">
@@ -2036,6 +2129,18 @@
              ]]></code></example>
         <altmember cref="T:Microsoft.Azure.Documents.Attachment" />
         <altmember cref="T:Microsoft.Azure.Documents.Linq.IDocumentQuery" />
+        <example>
+             This example below queries for plain text attachments using a parameterized SQL query string.
+             <code language="c#"><![CDATA[
+             var query = new SqlQuerySpec(
+                 "SELECT * FROM attachments a WHERE a.contentType = @contentType", 
+                 new SqlParameterCollection(new SqlParameter[] { new SqlParameter { Name = "@contentType", Value = "text/plain" } }));
+            
+             foreach (Attachment attachment in client.CreateAttachmentQuery(document.SelfLink, query))
+             {
+                 Console.WriteLine("Id: {0}, MediaLink:{1}", attachment.Id, attachment.MediaLink);
+             }
+             ]]></code></example>
         <example>
              This example below queries for plain text attachments using a parameterized SQL query string.
              <code language="c#"><![CDATA[
@@ -2306,6 +2411,16 @@
                 Console.WriteLine("Id: {0}, MediaLink:{1}", attachment.Id, attachment.MediaLink);
             }
             ]]></code></example>
+        <example>
+            This example below queries for plain text attachments using a SQL query string.
+            <code language="c#"><![CDATA[
+            foreach (Attachment attachment in client.CreateAttachmentQuery(
+                document.SelfLink, 
+                "SELECT * FROM attachments a WHERE a.contentType = 'text/plain'"))
+            {
+                Console.WriteLine("Id: {0}, MediaLink:{1}", attachment.Id, attachment.MediaLink);
+            }
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="CreateAttachmentQuery&lt;T&gt;">
@@ -2421,6 +2536,11 @@
             ]]></code></example>
         <altmember cref="T:Microsoft.Azure.Documents.Conflict" />
         <altmember cref="T:Microsoft.Azure.Documents.Linq.IDocumentQuery" />
+        <example>
+            This example below queries for conflicts by id.
+            <code language="c#"><![CDATA[
+            Conflict conflict = client.CreateConflictQuery(collectionLink).Where(c => c.Id == "summary").AsEnumerable().FirstOrDefault();
+            ]]></code></example>
         <example>
             This example below queries for conflicts by id.
             <code language="c#"><![CDATA[
@@ -2606,6 +2726,12 @@
             var query = new SqlQuerySpec("SELECT * FROM conflicts c WHERE c.id = @id", new SqlParameterCollection(new SqlParameter[] { new SqlParameter { Name = "@id", Value = "summary" }}));
             dynamic conflict = client.CreateConflictQuery<dynamic>(collectionLink, query).AsEnumerable().FirstOrDefault();
             ]]></code></example>
+        <example>
+            This example below queries for conflicts by id.
+            <code language="c#"><![CDATA[
+            var query = new SqlQuerySpec("SELECT * FROM conflicts c WHERE c.id = @id", new SqlParameterCollection(new SqlParameter[] { new SqlParameter { Name = "@id", Value = "summary" }}));
+            dynamic conflict = client.CreateConflictQuery<dynamic>(collectionLink, query).AsEnumerable().FirstOrDefault();
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="CreateConflictQuery">
@@ -2648,6 +2774,12 @@
             ]]></code></example>
         <altmember cref="T:Microsoft.Azure.Documents.Conflict" />
         <altmember cref="T:Microsoft.Azure.Documents.Linq.IDocumentQuery" />
+        <example>
+            This example below queries for conflicts by id.
+            <code language="c#"><![CDATA[
+            var query = new SqlQuerySpec("SELECT * FROM conflicts c WHERE c.id = @id", new SqlParameterCollection(new SqlParameter[] { new SqlParameter { Name = "@id", Value = "summary" }}));
+            Conflict conflict = client.CreateConflictQuery(collectionLink, query).AsEnumerable().FirstOrDefault();
+            ]]></code></example>
         <example>
             This example below queries for conflicts by id.
             <code language="c#"><![CDATA[
@@ -2833,6 +2965,23 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+            The example below creates a new <see cref="T:Microsoft.Azure.Documents.Database" /> with an Id property of 'MyDatabase'
+            This code snippet is intended to be used from within an asynchronous method as it uses the await keyword
+            <code language="c#"><![CDATA[
+            using (DocumentClient client = new DocumentClient(new Uri("service endpoint"), "auth key"))
+            {
+                Database db = await client.CreateDatabaseAsync(new Database { Id = "MyDatabase" });
+            }
+            ]]></code></example>
+        <example>
+            If you would like to construct a <see cref="T:Microsoft.Azure.Documents.Database" /> from within a synchronous method then you need to use the following code
+            <code language="c#"><![CDATA[
+            using (DocumentClient client = new DocumentClient(new Uri("service endpoint"), "auth key"))
+            {
+                Database db = client.CreateDatabaseAsync(new Database { Id = "MyDatabase" }).Result;
+            }
+            ]]></code></example>
         <example>
             The example below creates a new <see cref="T:Microsoft.Azure.Documents.Database" /> with an Id property of 'MyDatabase'
             This code snippet is intended to be used from within an asynchronous method as it uses the await keyword
@@ -3230,6 +3379,23 @@
                 Database db = client.CreateDatabaseIfNotExistsAsync(new Database { Id = "MyDatabase" }).Result;
             }
             ]]></code></example>
+        <example>
+            The example below creates a new <see cref="T:Microsoft.Azure.Documents.Database" /> with an Id property of 'MyDatabase'
+            This code snippet is intended to be used from within an asynchronous method as it uses the await keyword
+            <code language="c#"><![CDATA[
+            using (DocumentClient client = new DocumentClient(new Uri("service endpoint"), "auth key"))
+            {
+                Database db = await client.CreateDatabaseIfNotExistsAsync(new Database { Id = "MyDatabase" });
+            }
+            ]]></code></example>
+        <example>
+            If you would like to construct a <see cref="T:Microsoft.Azure.Documents.Database" /> from within a synchronous method then you need to use the following code
+            <code language="c#"><![CDATA[
+            using (DocumentClient client = new DocumentClient(new Uri("service endpoint"), "auth key"))
+            {
+                Database db = client.CreateDatabaseIfNotExistsAsync(new Database { Id = "MyDatabase" }).Result;
+            }
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="CreateDatabaseQuery">
@@ -3267,6 +3433,11 @@
             ]]></code></example>
         <altmember cref="T:Microsoft.Azure.Documents.Database" />
         <altmember cref="T:Microsoft.Azure.Documents.Linq.IDocumentQuery" />
+        <example>
+            This example below queries for databases by id.
+            <code language="c#"><![CDATA[
+            Database database = client.CreateDatabaseQuery().Where(d => d.Id == "mydb").AsEnumerable().FirstOrDefault();
+            ]]></code></example>
         <example>
             This example below queries for databases by id.
             <code language="c#"><![CDATA[
@@ -3429,6 +3600,13 @@
                 new SqlParameterCollection(new SqlParameter[] { new SqlParameter { Name = "@id", Value = "mydb" }}));
             dynamic database = client.CreateDatabaseQuery<dynamic>(query).AsEnumerable().FirstOrDefault();
             ]]></code></example>
+        <example>
+            This example below queries for databases by id.
+            <code language="c#"><![CDATA[
+            var query = new SqlQuerySpec("SELECT * FROM dbs d WHERE d.id = @id",
+                new SqlParameterCollection(new SqlParameter[] { new SqlParameter { Name = "@id", Value = "mydb" }}));
+            dynamic database = client.CreateDatabaseQuery<dynamic>(query).AsEnumerable().FirstOrDefault();
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="CreateDatabaseQuery">
@@ -3468,6 +3646,11 @@
             ]]></code></example>
         <altmember cref="T:Microsoft.Azure.Documents.Database" />
         <altmember cref="T:Microsoft.Azure.Documents.Linq.IDocumentQuery" />
+        <example>
+            This example below queries for databases by id.
+            <code language="c#"><![CDATA[
+            Database database = client.CreateDatabaseQuery("SELECT * FROM dbs d WHERE d.id = 'mydb'").AsEnumerable().FirstOrDefault();
+            ]]></code></example>
         <example>
             This example below queries for databases by id.
             <code language="c#"><![CDATA[
@@ -3609,6 +3792,53 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+            DocumentDB supports a number of different ways to work with documents. A document can extend <see cref="T:Microsoft.Azure.Documents.Resource" /><code language="c#"><![CDATA[
+            public class MyObject : Resource
+            {
+                public string MyProperty {get; set;}
+            }
+            
+            using (DocumentClient client = new DocumentClient(new Uri("service endpoint"), "auth key"))
+            {
+                Document doc = await client.CreateDocumentAsync("dbs/db_rid/colls/coll_rid/", new MyObject { MyProperty = "A Value" });
+            }
+            ]]></code></example>
+        <example>
+            A document can be any POCO object that can be serialized to JSON, even if it doesn't extend from <see cref="T:Microsoft.Azure.Documents.Resource" /><code language="c#"><![CDATA[
+            public class MyPOCO
+            {
+                public string MyProperty {get; set;}
+            }
+            
+            using (DocumentClient client = new DocumentClient(new Uri("service endpoint"), "auth key"))
+            {
+                Document doc = await client.CreateDocumentAsync("dbs/db_rid/colls/coll_rid/", new MyPOCO { MyProperty = "A Value" });
+            }
+            ]]></code></example>
+        <example>
+            Finally, a Document can also be a dynamic object
+            <code language="c#"><![CDATA[
+            using (DocumentClient client = new DocumentClient(new Uri("service endpoint"), "auth key"))
+            {
+                Document doc = await client.CreateDocumentAsync("dbs/db_rid/colls/coll_rid/", new { SomeProperty = "A Value" } );
+            }
+            ]]></code></example>
+        <example>
+            Create a Document and execute a Pre and Post Trigger
+            <code language="c#"><![CDATA[
+            using (DocumentClient client = new DocumentClient(new Uri("service endpoint"), "auth key"))
+            {
+                Document doc = await client.CreateDocumentAsync(
+                    "dbs/db_rid/colls/coll_rid/",
+                    new { id = "DOC123213443" },
+                    new RequestOptions
+                    {
+                        PreTriggerInclude = new List<string> { "MyPreTrigger" },
+                        PostTriggerInclude = new List<string> { "MyPostTrigger" }
+                    });
+            }
+            ]]></code></example>
         <example>
             DocumentDB supports a number of different ways to work with documents. A document can extend <see cref="T:Microsoft.Azure.Documents.Resource" /><code language="c#"><![CDATA[
             public class MyObject : Resource
@@ -4491,6 +4721,37 @@
             }
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            string partitionKeyRangeId = "0";   // Use client.ReadPartitionKeyRangeFeedAsync() to obtain the ranges.
+            string checkpointContinuation = null;
+            ChangeFeedOptions options = new ChangeFeedOptions
+            {
+                PartitionKeyRangeId = partitionKeyRangeId,
+                RequestContinuation = checkpointContinuation,
+                StartFromBeginning = true,
+            };
+            using(var query = client.CreateDocumentChangeFeedQuery(collection.SelfLink, options))
+            {
+                while (true)
+                {
+                    do
+                    {
+                        var response = await query.ExecuteNextAsync<Document>();
+                        if (response.Count > 0)
+                        {
+                            var docs = new List<Document>();
+                            docs.AddRange(response);
+                            // Process the documents.
+                            // Checkpoint response.ResponseContinuation.
+                        }
+                    }
+                    while (query.HasMoreResults);
+                    Task.Delay(TimeSpan.FromMilliseconds(500)); // Or break here and use checkpointed continuation token later.
+                }       
+            }
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="CreateDocumentChangeFeedQuery">
@@ -4578,6 +4839,18 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            using (DocumentClient client = new DocumentClient(new Uri("service endpoint"), "auth key"))
+            {
+                //Create a new collection with an OfferThroughput set to 10000
+                //Not passing in RequestOptions.OfferThroughput will result in a collection with the default OfferThroughput set. 
+                DocumentCollection coll = await client.CreateDocumentCollectionAsync(databaseLink,
+                    new DocumentCollection { Id = "My Collection" }, 
+                    new RequestOptions { OfferThroughput = 10000} );
+            }
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             using (DocumentClient client = new DocumentClient(new Uri("service endpoint"), "auth key"))
@@ -4908,6 +5181,18 @@
             }
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            using (DocumentClient client = new DocumentClient(new Uri("service endpoint"), "auth key"))
+            {
+                //Create a new collection with an OfferThroughput set to 10000
+                //Not passing in RequestOptions.OfferThroughput will result in a collection with the default OfferThroughput set. 
+                DocumentCollection coll = await client.CreateDocumentCollectionIfNotExistsAsync(databaseLink,
+                    new DocumentCollection { Id = "My Collection" }, 
+                    new RequestOptions { OfferThroughput = 10000} );
+            }
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="CreateDocumentCollectionIfNotExistsAsync">
@@ -4981,6 +5266,11 @@
             ]]></code></example>
         <altmember cref="T:Microsoft.Azure.Documents.DocumentCollection" />
         <altmember cref="T:Microsoft.Azure.Documents.Linq.IDocumentQuery" />
+        <example>
+            This example below queries for collections by id.
+            <code language="c#"><![CDATA[
+            DocumentCollection collection = client.CreateDocumentCollectionQuery(databaseLink).Where(c => c.Id == "myColl").AsEnumerable().FirstOrDefault();
+            ]]></code></example>
         <example>
             This example below queries for collections by id.
             <code language="c#"><![CDATA[
@@ -5166,6 +5456,12 @@
             var query = new SqlQuerySpec("SELECT * FROM colls c WHERE c.id = @id", new SqlParameterCollection(new SqlParameter[] { new SqlParameter { Name = "@id", Value = "mycoll" }}));
             DocumentCollection collection = client.CreateDocumentCollectionQuery(databaseLink, query).AsEnumerable().FirstOrDefault();
             ]]></code></example>
+        <example>
+            This example below queries for collections by id.
+            <code language="c#"><![CDATA[
+            var query = new SqlQuerySpec("SELECT * FROM colls c WHERE c.id = @id", new SqlParameterCollection(new SqlParameter[] { new SqlParameter { Name = "@id", Value = "mycoll" }}));
+            DocumentCollection collection = client.CreateDocumentCollectionQuery(databaseLink, query).AsEnumerable().FirstOrDefault();
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="CreateDocumentCollectionQuery">
@@ -5207,6 +5503,11 @@
             ]]></code></example>
         <altmember cref="T:Microsoft.Azure.Documents.DocumentCollection" />
         <altmember cref="T:Microsoft.Azure.Documents.Linq.IDocumentQuery" />
+        <example>
+            This example below queries for collections by id.
+            <code language="c#"><![CDATA[
+            DocumentCollection collection = client.CreateDocumentCollectionQuery(databaseLink, "SELECT * FROM colls c WHERE c.id = 'mycoll'").AsEnumerable().FirstOrDefault();
+            ]]></code></example>
         <example>
             This example below queries for collections by id.
             <code language="c#"><![CDATA[
@@ -5369,6 +5670,13 @@
              ]]></code></example>
         <altmember cref="T:Microsoft.Azure.Documents.Document" />
         <altmember cref="T:Microsoft.Azure.Documents.Linq.IDocumentQuery" />
+        <example>
+             This example below queries for documents by id.
+             <code language="c#"><![CDATA[
+             Document document = client.CreateDocumentQuery<Document>(collectionLink)
+                 .Where(d => d.Id == "War and Peace").AsEnumerable().FirstOrDefault();
+            
+             ]]></code></example>
         <example>
              This example below queries for documents by id.
              <code language="c#"><![CDATA[
@@ -5661,6 +5969,16 @@
                 
             dynamic document = client.CreateDocumentQuery<dynamic>(collectionLink, query).AsEnumerable().FirstOrDefault();
             ]]></code></example>
+        <example>
+            This example below queries for book documents.
+            <code language="c#"><![CDATA[
+            // SQL querying allows dynamic property access
+            var query = new SqlQuerySpec(
+                "SELECT * FROM books b WHERE b.title = @title", 
+                new SqlParameterCollection(new SqlParameter[] { new SqlParameter { Name = "@title", Value = "War and Peace" }}));
+                
+            dynamic document = client.CreateDocumentQuery<dynamic>(collectionLink, query).AsEnumerable().FirstOrDefault();
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="CreateDocumentQuery">
@@ -5704,6 +6022,13 @@
             ]]></code></example>
         <altmember cref="T:Microsoft.Azure.Documents.Document" />
         <altmember cref="T:Microsoft.Azure.Documents.Linq.IDocumentQuery" />
+        <example>
+            This example below queries for book documents.
+            <code language="c#"><![CDATA[
+            // SQL querying allows dynamic property access
+            dynamic document = client.CreateDocumentQuery<dynamic>(collectionLink,
+                "SELECT * FROM books b WHERE b.title == 'War and Peace'").AsEnumerable().FirstOrDefault();
+            ]]></code></example>
         <example>
             This example below queries for book documents.
             <code language="c#"><![CDATA[
@@ -6153,6 +6478,53 @@
             ]]></code></example>
         <altmember cref="T:Microsoft.Azure.Documents.Document" />
         <altmember cref="T:Microsoft.Azure.Documents.Linq.IDocumentQuery" />
+        <example>
+            This example below queries for some book documents.
+            <code language="c#"><![CDATA[
+            public class Book 
+            {
+                [JsonProperty("title")]
+                public string Title {get; set;}
+                
+                public Author Author {get; set;}
+                
+                public int Price {get; set;}
+            }
+            
+            public class Author
+            {
+                public string FirstName {get; set;}
+                public string LastName {get; set;}
+            }
+             
+            // Query by the Title property
+            Book book = client.CreateDocumentQuery<Book>(collectionLink).Where(b => b.Title == "War and Peace").AsEnumerable().FirstOrDefault();
+            
+            // Query a nested property
+            Book otherBook = client.CreateDocumentQuery<Book>(collectionLink).Where(b => b.Author.FirstName == "Leo").AsEnumerable().FirstOrDefault();
+            
+            // Perform a range query (needs an IndexType.Range on price or FeedOptions.EnableScansInQuery)
+            foreach (Book matchingBook in client.CreateDocumentQuery<Book>(collectionLink).Where(b => b.Price > 100))
+            {
+                // Iterate through books
+            }
+            
+            // Query asychronously. Optionally set FeedOptions.MaxItemCount to control page size
+            using (var queryable = client.CreateDocumentQuery<Book>(
+                collectionLink,
+                new FeedOptions { MaxItemCount = 10 })
+                .Where(b => b.Title == "War and Peace")
+                .AsDocumentQuery())
+            {
+                while (queryable.HasMoreResults) 
+                {
+                    foreach(Book b in await queryable.ExecuteNextAsync<Book>())
+                    {
+                        // Iterate through books
+                    }
+                }
+            }
+            ]]></code></example>
         <example>
             This example below queries for some book documents.
             <code language="c#"><![CDATA[
@@ -7407,6 +7779,66 @@
                 }
             }
             ]]></code></example>
+        <example>
+            This example below queries for some book documents.
+            <code language="c#"><![CDATA[
+            public class Book 
+            {
+                [JsonProperty("title")]
+                public string Title {get; set;}
+                
+                public Author Author {get; set;}
+                
+                public int Price {get; set;}
+            }
+            
+            public class Author
+            {
+                public string FirstName {get; set;}
+                public string LastName {get; set;}
+            }
+            
+            // Query using Title
+            Book book, otherBook;
+            
+            var query = new SqlQuerySpec(
+                "SELECT * FROM books b WHERE b.title = @title", 
+                new SqlParameterCollection(new SqlParameter[] { new SqlParameter { Name = "@title", Value = "War and Peace" }}));
+            book = client.CreateDocumentQuery<Book>(collectionLink, query).AsEnumerable().FirstOrDefault();
+            
+            // Query a nested property
+            query = new SqlQuerySpec(
+                "SELECT * FROM books b WHERE b.Author.FirstName = @firstName", 
+                new SqlParameterCollection(new SqlParameter[] { new SqlParameter { Name = "@firstName", Value = "Leo" }}));
+            otherBook = client.CreateDocumentQuery<Book>(collectionLink, query).AsEnumerable().FirstOrDefault();
+            
+            // Perform a range query (needs an IndexType.Range on price or FeedOptions.EnableScansInQuery)
+            query = new SqlQuerySpec(
+                "SELECT * FROM books b WHERE b.Price > @minPrice", 
+                new SqlParameterCollection(new SqlParameter[] { new SqlParameter { Name = "@minPrice", Value = 1000 }}));
+            foreach (Book b in client.CreateDocumentQuery<Book>(
+                collectionLink, query))
+            {
+                // Iterate through books
+            }
+            
+            // Query asychronously. Optionally set FeedOptions.MaxItemCount to control page size
+            query = new SqlQuerySpec(
+                "SELECT * FROM books b WHERE b.title = @title", 
+                new SqlParameterCollection(new SqlParameter[] { new SqlParameter { Name = "@title", Value = "War and Peace" }}));
+                
+            using (var queryable = client.CreateDocumentQuery<Book>(collectionLink, query, 
+                new FeedOptions { MaxItemCount = 10 }).AsDocumentQuery())
+            {
+                while (queryable.HasMoreResults) 
+                {
+                    foreach(Book b in await queryable.ExecuteNextAsync<Book>())
+                    {
+                        // Iterate through books
+                    }
+                }
+            }
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="CreateDocumentQuery&lt;T&gt;">
@@ -7495,6 +7927,54 @@
             ]]></code></example>
         <altmember cref="T:Microsoft.Azure.Documents.Document" />
         <altmember cref="T:Microsoft.Azure.Documents.Linq.IDocumentQuery" />
+        <example>
+            This example below queries for some book documents.
+            <code language="c#"><![CDATA[
+            public class Book 
+            {
+                [JsonProperty("title")]
+                public string Title {get; set;}
+                
+                public Author Author {get; set;}
+                
+                public int Price {get; set;}
+            }
+            
+            public class Author
+            {
+                public string FirstName {get; set;}
+                public string LastName {get; set;}
+            }
+            
+            // Query by the Title property
+            Book book = client.CreateDocumentQuery<Book>(collectionLink, 
+                "SELECT * FROM books b WHERE b.title  = 'War and Peace'").AsEnumerable().FirstOrDefault();
+            
+            // Query a nested property
+            Book otherBook = client.CreateDocumentQuery<Book>(collectionLink,
+                "SELECT * FROM books b WHERE b.Author.FirstName = 'Leo'").AsEnumerable().FirstOrDefault();
+            
+            // Perform a range query (needs an IndexType.Range on price or FeedOptions.EnableScansInQuery)
+            foreach (Book matchingBook in client.CreateDocumentQuery<Book>(
+                collectionLink, "SELECT * FROM books b where b.Price > 1000"))
+            {
+                // Iterate through books
+            }
+            
+            // Query asychronously. Optionally set FeedOptions.MaxItemCount to control page size
+            using (var queryable = client.CreateDocumentQuery<Book>(collectionLink, 
+                "SELECT * FROM books b WHERE b.title  = 'War and Peace'", 
+                new FeedOptions { MaxItemCount = 10 }).AsDocumentQuery())
+            {
+                while (queryable.HasMoreResults) 
+                {
+                    foreach(Book b in await queryable.ExecuteNextAsync<Book>())
+                    {
+                        // Iterate through books
+                    }
+                }
+            }
+            ]]></code></example>
         <example>
             This example below queries for some book documents.
             <code language="c#"><![CDATA[
@@ -8426,6 +8906,15 @@
             // Find the offer for the collection by SelfLink
             Offer offer = client.CreateOfferQuery().Where(o => o.Resource == collectionSelfLink).AsEnumerable().FirstOrDefault();
             ]]></code></example>
+        <example>
+            This example below queries for offers
+            <code language="c#"><![CDATA[
+            // Find the first collection with the S3 offer type
+            Offer offer = client.CreateOfferQuery().Where(o => o.OfferType == "S3").AsEnumerable().FirstOrDefault();
+            
+            // Find the offer for the collection by SelfLink
+            Offer offer = client.CreateOfferQuery().Where(o => o.Resource == collectionSelfLink).AsEnumerable().FirstOrDefault();
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="CreateOfferQuery">
@@ -8470,6 +8959,15 @@
             ]]></code></example>
         <altmember cref="T:Microsoft.Azure.Documents.Offer" />
         <altmember cref="T:Microsoft.Azure.Documents.Linq.IDocumentQuery" />
+        <example>
+            This example below queries for offers
+            <code language="c#"><![CDATA[
+            // Find the first collection with the S3 offer type
+            Offer offer = client.CreateOfferQuery("SELECT * FROM offers o WHERE o.offerType = @offerType",
+            new SqlParameterCollection(new SqlParameter[] { new SqlParameter { Name = "@offerType", Value = "S3" }}))
+            .AsEnumerable().FirstOrDefault();
+            
+            ]]></code></example>
         <example>
             This example below queries for offers
             <code language="c#"><![CDATA[
@@ -8704,6 +9202,16 @@
             Offer offer = client.CreateOfferQuery(
                 string.Format("SELECT * FROM offers o WHERE o.resource = '{0}'", collectionSelfLink)).AsEnumerable().FirstOrDefault();
             ]]></code></example>
+        <example>
+            This example below queries for offers
+            <code language="c#"><![CDATA[
+            // Find the first collection with the S3 offer type
+            Offer offer = client.CreateOfferQuery("SELECT * FROM offers o WHERE o.offerType = 'S3'").AsEnumerable().FirstOrDefault();
+            
+            // Find the offer for the collection by SelfLink
+            Offer offer = client.CreateOfferQuery(
+                string.Format("SELECT * FROM offers o WHERE o.resource = '{0}'", collectionSelfLink)).AsEnumerable().FirstOrDefault();
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="CreatePermissionAsync">
@@ -8752,6 +9260,12 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            //Create a read-only permission object for a specific user
+            Permission p = await client.CreatePermissionAsync(userLink, new Permission { Id = "ReadPermission", PermissionMode = PermissionMode.Read });
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             //Create a read-only permission object for a specific user
@@ -8885,6 +9399,11 @@
             ]]></code></example>
         <altmember cref="T:Microsoft.Azure.Documents.Permission" />
         <altmember cref="T:Microsoft.Azure.Documents.Linq.IDocumentQuery" />
+        <example>
+            This example below queries for permissions by id.
+            <code language="c#"><![CDATA[
+            Permission perm = client.CreatePermissionQuery(userLink).Where(p => p.id == "readonly").AsEnumerable().FirstOrDefault();
+            ]]></code></example>
         <example>
             This example below queries for permissions by id.
             <code language="c#"><![CDATA[
@@ -9103,6 +9622,15 @@
                 
             Permission perm = client.CreatePermissionQuery(usersLink, query).AsEnumerable().FirstOrDefault();
             ]]></code></example>
+        <example>
+            This example below queries for permissions by id.
+            <code language="c#"><![CDATA[
+            var query = new SqlQuerySpec(
+                "SELECT * FROM perms p WHERE p.id = @id", 
+                new SqlParameterCollection(new SqlParameter[] { new SqlParameter { Name = "@id", Value = "readonly" }}));
+                
+            Permission perm = client.CreatePermissionQuery(usersLink, query).AsEnumerable().FirstOrDefault();
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="CreatePermissionQuery">
@@ -9145,6 +9673,12 @@
             ]]></code></example>
         <altmember cref="T:Microsoft.Azure.Documents.Permission" />
         <altmember cref="T:Microsoft.Azure.Documents.Linq.IDocumentQuery" />
+        <example>
+            This example below queries for permissions by id.
+            <code language="c#"><![CDATA[
+            Permission perm = client.CreatePermissionQuery(userLink, 
+                "SELECT * FROM perms p WHERE p.id = 'readonly'").AsEnumerable().FirstOrDefault();
+            ]]></code></example>
         <example>
             This example below queries for permissions by id.
             <code language="c#"><![CDATA[
@@ -9458,6 +9992,19 @@
             });
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            //Create a new stored procedure called "HelloWorldSproc" that takes in a single param called "name".
+            StoredProcedure sproc = await client.CreateStoredProcedureAsync(collectionLink, new StoredProcedure
+            {
+               Id = "HelloWorldSproc",
+               Body = @"function (name){
+                           var response = getContext().getResponse();
+                           response.setBody('Hello ' + name);
+                        }"
+            });
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="CreateStoredProcedureAsync">
@@ -9531,6 +10078,11 @@
             ]]></code></example>
         <altmember cref="T:Microsoft.Azure.Documents.StoredProcedure" />
         <altmember cref="T:Microsoft.Azure.Documents.Linq.IDocumentQuery" />
+        <example>
+            This example below queries for stored procedures by id.
+            <code language="c#"><![CDATA[
+            StoredProcedure storedProcedure = client.CreateStoredProcedureQuery(collectionLink).Where(c => c.Id == "helloWorld").AsEnumerable().FirstOrDefault();
+            ]]></code></example>
         <example>
             This example below queries for stored procedures by id.
             <code language="c#"><![CDATA[
@@ -9715,6 +10267,12 @@
             var query = new SqlQuerySpec("SELECT * FROM sprocs s WHERE s.id = @id", new SqlParameterCollection(new SqlParameter[] { new SqlParameter { Name = "@id", Value = "HelloWorld" }}));
             StoredProcedure storedProcedure = client.CreateStoredProcedureQuery(collectionLink, query).AsEnumerable().FirstOrDefault();
             ]]></code></example>
+        <example>
+            This example below queries for stored procedures by id.
+            <code language="c#"><![CDATA[
+            var query = new SqlQuerySpec("SELECT * FROM sprocs s WHERE s.id = @id", new SqlParameterCollection(new SqlParameter[] { new SqlParameter { Name = "@id", Value = "HelloWorld" }}));
+            StoredProcedure storedProcedure = client.CreateStoredProcedureQuery(collectionLink, query).AsEnumerable().FirstOrDefault();
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="CreateStoredProcedureQuery">
@@ -9755,6 +10313,11 @@
             StoredProcedure storedProcedure = client.CreateStoredProcedureQuery(collectionLink, "SELECT * FROM sprocs s WHERE s.id = 'HelloWorld'").AsEnumerable().FirstOrDefault();
             ]]></code></example>
         <altmember cref="T:Microsoft.Azure.Documents.StoredProcedure" />
+        <example>
+            This example below queries for stored procedures by id.
+            <code language="c#"><![CDATA[
+            StoredProcedure storedProcedure = client.CreateStoredProcedureQuery(collectionLink, "SELECT * FROM sprocs s WHERE s.id = 'HelloWorld'").AsEnumerable().FirstOrDefault();
+            ]]></code></example>
         <example>
             This example below queries for stored procedures by id.
             <code language="c#"><![CDATA[
@@ -10190,6 +10753,31 @@
             });
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            //Create a trigger that validates the contents of a document as it is created and adds a 'timestamp' property if one was not found. 
+            Trigger trig = await client.CreateTriggerAsync(collectionLink, new Trigger
+            {
+                Id = "ValidateDocuments",
+                Body = @"function validate() {
+                                    var context = getContext();
+                                    var request = context.getRequest();                                                             
+                                    var documentToCreate = request.getBody();
+                                    
+                                    // validate properties
+                                    if (!('timestamp' in documentToCreate)) {
+                                        var ts = new Date();
+                                        documentToCreate['timestamp'] = ts.getTime();
+                                    }
+                                    
+                                    // update the document that will be created
+                                    request.setBody(documentToCreate);
+                                  }",
+                TriggerType = TriggerType.Pre,
+                TriggerOperation = TriggerOperation.Create
+            });
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="CreateTriggerAsync">
@@ -10263,6 +10851,11 @@
             ]]></code></example>
         <altmember cref="T:Microsoft.Azure.Documents.Trigger" />
         <altmember cref="T:Microsoft.Azure.Documents.Linq.IDocumentQuery" />
+        <example>
+            This example below queries for triggers by id.
+            <code language="c#"><![CDATA[
+            Trigger trigger = client.CreateTriggerQuery(collectionLink).Where(t => t.Id == "validate").AsEnumerable().FirstOrDefault();
+            ]]></code></example>
         <example>
             This example below queries for triggers by id.
             <code language="c#"><![CDATA[
@@ -10448,6 +11041,12 @@
             var query = new SqlQuerySpec("SELECT * FROM triggers t WHERE t.id = @id", new SqlParameterCollection(new SqlParameter[] { new SqlParameter { Name = "@id", Value = "HelloWorld" }}));
             Trigger trigger = client.CreateTriggerQuery(collectionLink, query).AsEnumerable().FirstOrDefault();
             ]]></code></example>
+        <example>
+            This example below queries for triggers by id.
+            <code language="c#"><![CDATA[
+            var query = new SqlQuerySpec("SELECT * FROM triggers t WHERE t.id = @id", new SqlParameterCollection(new SqlParameter[] { new SqlParameter { Name = "@id", Value = "HelloWorld" }}));
+            Trigger trigger = client.CreateTriggerQuery(collectionLink, query).AsEnumerable().FirstOrDefault();
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="CreateTriggerQuery">
@@ -10489,6 +11088,11 @@
             ]]></code></example>
         <altmember cref="T:Microsoft.Azure.Documents.Trigger" />
         <altmember cref="T:Microsoft.Azure.Documents.Linq.IDocumentQuery" />
+        <example>
+            This example below queries for triggers by id.
+            <code language="c#"><![CDATA[
+            Trigger trigger = client.CreateTriggerQuery(collectionLink, "SELECT * FROM triggers t WHERE t.id = 'validate'").AsEnumerable().FirstOrDefault();
+            ]]></code></example>
         <example>
             This example below queries for triggers by id.
             <code language="c#"><![CDATA[
@@ -10655,6 +11259,12 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            //Create a new user called joeBloggs in the specified database
+            User user = await client.CreateUserAsync(databaseLink, new User { Id = "joeBloggs" });
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             //Create a new user called joeBloggs in the specified database
@@ -10923,6 +11533,18 @@
             });
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            //Create a user defined function that converts a string to upper case
+            UserDefinedFunction udf = client.CreateUserDefinedFunctionAsync(collectionLink, new UserDefinedFunction
+            {
+               Id = "ToUpper",
+               Body = @"function toUpper(input) {
+                                   return input.toUpperCase();
+                                }",
+            });
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="CreateUserDefinedFunctionAsync">
@@ -10996,6 +11618,11 @@
             ]]></code></example>
         <altmember cref="T:Microsoft.Azure.Documents.UserDefinedFunction" />
         <altmember cref="T:Microsoft.Azure.Documents.Linq.IDocumentQuery" />
+        <example>
+            This example below queries for user-defined functions by id.
+            <code language="c#"><![CDATA[
+            UserDefinedFunction udf = client.CreateUserDefinedFunctionQuery(collectionLink).Where(u => u.Id == "sqrt").AsEnumerable().FirstOrDefault();
+            ]]></code></example>
         <example>
             This example below queries for user-defined functions by id.
             <code language="c#"><![CDATA[
@@ -11181,6 +11808,12 @@
             var query = new SqlQuerySpec("SELECT * FROM udfs u WHERE u.id = @id", new SqlParameterCollection(new SqlParameter[] { new SqlParameter { Name = "@id", Value = "sqrt" }}));
             UserDefinedFunction udf = client.CreateUserDefinedFunctionQuery(collectionLink, query).AsEnumerable().FirstOrDefault();
             ]]></code></example>
+        <example>
+            This example below queries for user-defined functions by id.
+            <code language="c#"><![CDATA[
+            var query = new SqlQuerySpec("SELECT * FROM udfs u WHERE u.id = @id", new SqlParameterCollection(new SqlParameter[] { new SqlParameter { Name = "@id", Value = "sqrt" }}));
+            UserDefinedFunction udf = client.CreateUserDefinedFunctionQuery(collectionLink, query).AsEnumerable().FirstOrDefault();
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="CreateUserDefinedFunctionQuery">
@@ -11222,6 +11855,11 @@
             ]]></code></example>
         <altmember cref="T:Microsoft.Azure.Documents.UserDefinedFunction" />
         <altmember cref="T:Microsoft.Azure.Documents.Linq.IDocumentQuery" />
+        <example>
+            This example below queries for user-defined functions by id.
+            <code language="c#"><![CDATA[
+            UserDefinedFunction udf = client.CreateUserDefinedFunctionQuery(collectionLink, "SELECT * FROM udfs u WHERE u.id = 'sqrt'").AsEnumerable().FirstOrDefault();
+            ]]></code></example>
         <example>
             This example below queries for user-defined functions by id.
             <code language="c#"><![CDATA[
@@ -11379,6 +12017,11 @@
             ]]></code></example>
         <altmember cref="T:Microsoft.Azure.Documents.User" />
         <altmember cref="T:Microsoft.Azure.Documents.Linq.IDocumentQuery" />
+        <example>
+            This example below queries for users by id.
+            <code language="c#"><![CDATA[
+            User user = client.CreateUserQuery(usersLink).Where(u => u.Id == "userid5").AsEnumerable().FirstOrDefault();
+            ]]></code></example>
         <example>
             This example below queries for users by id.
             <code language="c#"><![CDATA[
@@ -11597,6 +12240,15 @@
                 
             User user = client.CreateUserQuery(usersLink, query).AsEnumerable().FirstOrDefault();
             ]]></code></example>
+        <example>
+            This example below queries for users by id.
+            <code language="c#"><![CDATA[
+            var query = new SqlQuerySpec(
+                "SELECT * FROM users u WHERE u.id = @id", 
+                new SqlParameterCollection(new SqlParameter[] { new SqlParameter { Name = "@id", Value = "userid5" }}));
+                
+            User user = client.CreateUserQuery(usersLink, query).AsEnumerable().FirstOrDefault();
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="CreateUserQuery">
@@ -11638,6 +12290,11 @@
             ]]></code></example>
         <altmember cref="T:Microsoft.Azure.Documents.User" />
         <altmember cref="T:Microsoft.Azure.Documents.Linq.IDocumentQuery" />
+        <example>
+            This example below queries for users by id.
+            <code language="c#"><![CDATA[
+            User user = client.CreateUserQuery(usersLink, "SELECT * FROM users u WHERE u.id = 'userid5'").AsEnumerable().FirstOrDefault();
+            ]]></code></example>
         <example>
             This example below queries for users by id.
             <code language="c#"><![CDATA[
@@ -11786,6 +12443,9 @@
         <summary>
             Delete an <see cref="T:Microsoft.Azure.Documents.Attachment" /> from the the Azure DocumentDB database service as an asynchronous operation.
             </summary>
+        <returns>A <see cref="N:System.Threading.Tasks" /> containing a <see cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" /> which will contain information about the request issued.</returns>
+        <returns />
+        <returns>A <see cref="N:System.Threading.Tasks" /> containing a <see cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" /> which will contain information about the request issued.</returns>
         <returns />
         <returns>A <see cref="N:System.Threading.Tasks" /> containing a <see cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" /> which will contain information about the request issued.</returns>
         <returns />
@@ -11829,6 +12489,13 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            //Delete an attachment using its selfLink property
+            //To get the attachmentLink you would have to query for the Attachment, using CreateAttachmentQuery(),  and then refer to its .SelfLink property
+            await client.DeleteAttachmentAsync(attachmentLink);
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             //Delete an attachment using its selfLink property
@@ -12047,6 +12714,13 @@
             await client.DeleteConflictAsync(conflictLink);
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            //Delete a conflict using its selfLink property.
+            //To get the conflictLink you would have to query for the Conflict object, using CreateConflictQuery(), and then refer to its .SelfLink property
+            await client.DeleteConflictAsync(conflictLink);
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="DeleteConflictAsync">
@@ -12125,6 +12799,13 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            //Delete a database using its selfLink property
+            //To get the databaseLink you would have to query for the Database, using CreateDatabaseQuery(),  and then refer to its .SelfLink property
+            await client.DeleteDatabaseAsync(databaseLink);
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             //Delete a database using its selfLink property
@@ -12343,6 +13024,13 @@
             await client.DeleteDocumentAsync(documentLink);
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            //Delete a document using its selfLink property
+            //To get the documentLink you would have to query for the Document, using CreateDocumentQuery(),  and then refer to its .SelfLink property
+            await client.DeleteDocumentAsync(documentLink);
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="DeleteDocumentAsync">
@@ -12421,6 +13109,13 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            //Delete a collection using its selfLink property
+            //To get the collectionLink you would have to query for the Collection, using CreateDocumentCollectionQuery(),  and then refer to its .SelfLink property
+            await client.DeleteDocumentCollectionAsync(collectionLink);
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             //Delete a collection using its selfLink property
@@ -12639,6 +13334,13 @@
             await client.DeletePermissionAsync(permissionLink);
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            //Delete a permission using its selfLink property.
+            //To get the permissionLink you would have to query for the Permission object, using CreateStoredProcedureQuery(), and then refer to its .SelfLink property
+            await client.DeletePermissionAsync(permissionLink);
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="DeletePermissionAsync">
@@ -12717,6 +13419,13 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            //Delete a stored procedure using its selfLink property.
+            //To get the sprocLink you would have to query for the Stored Procedure, using CreateStoredProcedureQuery(),  and then refer to its .SelfLink property
+            await client.DeleteStoredProcedureAsync(sprocLink);
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             //Delete a stored procedure using its selfLink property.
@@ -12935,6 +13644,13 @@
             await client.DeleteTriggerAsync(triggerLink);
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            //Delete a trigger using its selfLink property.
+            //To get the triggerLink you would have to query for the Trigger, using CreateTriggerQuery(),  and then refer to its .SelfLink property
+            await client.DeleteTriggerAsync(triggerLink);
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="DeleteTriggerAsync">
@@ -13013,6 +13729,13 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            //Delete a user using its selfLink property.
+            //To get the userLink you would have to query for the User object, using CreateUserQuery(), and then refer to its .SelfLink property
+            await client.DeleteUserAsync(userLink);
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             //Delete a user using its selfLink property.
@@ -13231,6 +13954,13 @@
             await client.DeleteUserDefinedFunctionAsync(functionLink);
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            //Delete a user defined function using its selfLink property.
+            //To get the functionLink you would have to query for the User Defined Function, using CreateUserDefinedFunctionQuery(),  and then refer to its .SelfLink property
+            await client.DeleteUserDefinedFunctionAsync(functionLink);
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="DeleteUserDefinedFunctionAsync">
@@ -13355,6 +14085,12 @@
             if (client != null) client.Dispose();
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            DocumentClient client = new DocumentClient(new Uri("service endpoint"), "auth key"); 
+            if (client != null) client.Dispose();
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="ExecuteStoredProcedureAsync&lt;TValue&gt;">
@@ -13413,6 +14149,18 @@
         <altmember cref="T:Microsoft.Azure.Documents.StoredProcedure" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.StoredProcedureResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            //Execute a StoredProcedure with ResourceId of "sproc_rid" that takes two "Player" documents, does some stuff, and returns a bool
+            StoredProcedureResponse<bool> sprocResponse = await client.ExecuteStoredProcedureAsync<bool>(
+                                                                    "/dbs/db_rid/colls/col_rid/sprocs/sproc_rid/",
+                                                                    new Player { id="1", name="joe" } , 
+                                                                    new Player { id="2", name="john" } 
+                                                                );
+                                                                
+            if (sprocResponse.Response) Console.WriteLine("Congrats, the stored procedure did some stuff");
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             //Execute a StoredProcedure with ResourceId of "sproc_rid" that takes two "Player" documents, does some stuff, and returns a bool
@@ -13767,6 +14515,19 @@
             if (sprocResponse.Response) Console.WriteLine("Congrats, the stored procedure did some stuff");
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            //Execute a StoredProcedure with ResourceId of "sproc_rid" that takes two "Player" documents, does some stuff, and returns a bool
+            StoredProcedureResponse<bool> sprocResponse = await client.ExecuteStoredProcedureAsync<bool>(
+                                                                    "/dbs/db_rid/colls/col_rid/sprocs/sproc_rid/", 
+                                                                    new RequestOptions { PartitionKey = new PartitionKey(1) },
+                                                                    new Player { id="1", name="joe" } , 
+                                                                    new Player { id="2", name="john" } 
+                                                                );
+                                                                
+            if (sprocResponse.Response) Console.WriteLine("Congrats, the stored procedure did some stuff");
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="ExecuteStoredProcedureAsync&lt;TValue&gt;">
@@ -13902,6 +14663,14 @@
             If there are any initialization exceptions, this method will throw them (set on the task). 
             Alternately, calling any API will throw initialization exception at the first call.
             </remarks>
+        <example>
+          <code language="c#"><![CDATA[
+            using (DocumentClient client = new DocumentClient(new Uri("service endpoint"), "auth key"))
+            {
+                await client.OpenAsync();
+            }
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             using (DocumentClient client = new DocumentClient(new Uri("service endpoint"), "auth key"))
@@ -14198,6 +14967,17 @@
             Attachment attachment = await client.ReadAttachmentAsync(attachLink);
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            //Reads an Attachment resource where 
+            // - sample_db is the ID property of the Database
+            // - sample_coll is the ID property of the DocumentCollection
+            // - sample_doc is the ID property of the Document
+            // - attachment_id is the ID property of the Attachment resource you wish to read. 
+            var attachLink = "/dbs/sample_db/colls/sample_coll/docs/sample_doc/attachments/attachment_id/";
+            Attachment attachment = await client.ReadAttachmentAsync(attachLink);
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="ReadAttachmentAsync">
@@ -14254,6 +15034,17 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            //Reads an Attachment resource where 
+            // - db_id is the ID property of the Database
+            // - coll_id is the ID property of the DocumentCollection
+            // - doc_id is the ID property of the Document
+            // - attachment_id is the ID property of the Attachment resource you wish to read. 
+            var attachLink = UriFactory.CreateAttachmentUri("db_id", "coll_id", "doc_id", "attachment_id");
+            Attachment attachment = await client.ReadAttachmentAsync(attachLink);
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             //Reads an Attachment resource where 
@@ -14428,6 +15219,28 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            int count = 0;
+            string continuation = string.Empty;            
+            do
+            {
+                // Read Attachment feed 10 items at a time until there are no more to read
+                FeedResponse<Attachment> response = await client.ReadAttachmentFeedAsync("/dbs/db_rid/colls/coll_rid/docs/doc_rid/attachments/ ", 
+                                                                new FeedOptions 
+                                                                { 
+                                                                    MaxItemCount = 10, 
+                                                                    RequestContinuation = continuation 
+                                                                });
+                
+                // Append the item count
+                count += response.Count;
+                
+                // Get the continuation so that we know when to stop.
+                 continuation = response.ResponseContinuation;
+            } while (!string.IsNullOrEmpty(continuation));
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             int count = 0;
@@ -14843,6 +15656,16 @@
             Conflict conflict = await client.ReadConflictAsync(conflictLink);
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            //Reads a Conflict resource from a Database
+            // - sample_database is the ID of the database
+            // - sample_collection is the ID of the collection
+            // - conflict_id is the ID of the conflict to be read
+            var conflictLink = "/dbs/sample_database/colls/sample_collection/conflicts/conflict_id";
+            Conflict conflict = await client.ReadConflictAsync(conflictLink);
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="ReadConflictAsync">
@@ -14898,6 +15721,16 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            //Reads a Conflict resource where 
+            // - db_id is the ID property of the Database
+            // - coll_id is the ID property of the DocumentCollection
+            // - conflict_id is the ID property of the Conflict you wish to read. 
+            var conflictLink = UriFactory.CreateConflictUri("db_id", "coll_id", "conflict_id");
+            Conflict conflict = await client.ReadConflictAsync(conflictLink);
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             //Reads a Conflict resource where 
@@ -15061,6 +15894,28 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            int count = 0;
+            string continuation = string.Empty;            
+            do
+            {
+                // Read the feed 10 items at a time until there are no more items to read
+                FeedResponse<Conflict> response = await client.ReadConflictAsync("/dbs/db_rid/colls/coll_rid/conflicts/", 
+                                                                new FeedOptions 
+                                                                { 
+                                                                    MaxItemCount = 10, 
+                                                                    RequestContinuation = continuation 
+                                                                });
+                
+                // Append the item count
+                count += response.Count;
+                
+                // Get the continuation so that we know when to stop.
+                 continuation = response.ResponseContinuation;
+            } while (!string.IsNullOrEmpty(continuation));
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             int count = 0;
@@ -15454,6 +16309,14 @@
             Database database = await client.ReadDatabaseAsync(dbLink);
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            //Reads a Database resource where 
+            // - database_id is the ID property of the Database resource you wish to read. 
+            var dbLink = "/dbs/database_id";
+            Database database = await client.ReadDatabaseAsync(dbLink);
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="ReadDatabaseAsync">
@@ -15507,6 +16370,14 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            //Reads a Database resource where 
+            // - db_id is the ID property of the Database you wish to read. 
+            var dbLink = UriFactory.CreateDatabaseUri("db_id");
+            Database database = await client.ReadDatabaseAsync(dbLink);
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             //Reads a Database resource where 
@@ -15646,6 +16517,27 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            int count = 0;
+            string continuation = string.Empty;            
+            do
+            {
+                // Read the feed 10 items at a time until there are no more items to read
+                FeedResponse<Database> response = await client.ReadDatabaseFeedAsync(new FeedOptions 
+                                                                            { 
+                                                                                MaxItemCount = 10, 
+                                                                                RequestContinuation = continuation 
+                                                                            });
+                
+                // Append the item count
+                count += response.Count;
+                
+                // Get the continuation so that we know when to stop.
+                 continuation = response.ResponseContinuation;
+            } while (!string.IsNullOrEmpty(continuation));
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             int count = 0;
@@ -16019,6 +16911,16 @@
             Document doc = await client.ReadDocumentAsync(docLink);
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            //This reads a document record from a database & collection where 
+            // - sample_database is the ID of the database
+            // - sample_collection is the ID of the collection
+            // - document_id is the ID of the document resource
+            var docLink = "dbs/sample_database/colls/sample_collection/docs/document_id";
+            Document doc = await client.ReadDocumentAsync(docLink);
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="ReadDocumentAsync">
@@ -16074,6 +16976,16 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            //Reads a Document resource where 
+            // - db_id is the ID property of the Database
+            // - coll_id is the ID property of the DocumentCollection
+            // - doc_id is the ID property of the Document you wish to read. 
+            var docUri = UriFactory.CreateDocumentUri("db_id", "coll_id", "doc_id");
+            Document document = await client.ReadDocumentAsync(docUri);
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             //Reads a Document resource where 
@@ -16345,6 +17257,16 @@
             Customer customer = await client.ReadDocumentAsync<Customer>(docLink);
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            //This reads a document record from a database & collection where 
+            // - sample_database is the ID of the database
+            // - sample_collection is the ID of the collection
+            // - document_id is the ID of the document resource
+            var docLink = "dbs/sample_database/colls/sample_collection/docs/document_id";
+            Customer customer = await client.ReadDocumentAsync<Customer>(docLink);
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="ReadDocumentAsync&lt;T&gt;">
@@ -16408,6 +17330,16 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.DocumentResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            //Reads a Document resource where 
+            // - db_id is the ID property of the Database
+            // - coll_id is the ID property of the DocumentCollection
+            // - doc_id is the ID property of the Document you wish to read. 
+            var docUri = UriFactory.CreateDocumentUri("db_id", "coll_id", "doc_id");
+            Customer customer = await client.ReadDocumentAsync<Customer>(docUri);
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             //Reads a Document resource where 
@@ -16660,6 +17592,15 @@
             DocumentCollection coll = await client.ReadDocumentCollectionAsync(collLink);
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            //This reads a DocumentCollection record from a database where 
+            // - sample_database is the ID of the database
+            // - collection_id is the ID of the collection resource to be read
+            var collLink = "/dbs/sample_database/colls/collection_id";
+            DocumentCollection coll = await client.ReadDocumentCollectionAsync(collLink);
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="ReadDocumentCollectionAsync">
@@ -16714,6 +17655,15 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            //Reads a Document resource where 
+            // - db_id is the ID property of the Database
+            // - coll_id is the ID property of the DocumentCollection you wish to read. 
+            var collLink = UriFactory.CreateCollectionUri("db_id", "coll_id");
+            DocumentCollection coll = await client.ReadDocumentCollectionAsync(collLink);
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             //Reads a Document resource where 
@@ -16867,6 +17817,28 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            int count = 0;
+            string continuation = string.Empty;            
+            do
+            {
+                // Read the feed 10 items at a time until there are no more items to read
+                FeedResponse<DocumentCollection> response = await client.ReadDocumentCollectionFeedAsync("/dbs/db_rid/colls/", 
+                                                                new FeedOptions 
+                                                                { 
+                                                                    MaxItemCount = 10, 
+                                                                    RequestContinuation = continuation 
+                                                                });
+                
+                // Append the item count
+                count += response.Count;
+                
+                // Get the continuation so that we know when to stop.
+                 continuation = response.ResponseContinuation;
+            } while (!string.IsNullOrEmpty(continuation));
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             int count = 0;
@@ -17405,6 +18377,28 @@
             } while (!string.IsNullOrEmpty(continuation));
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            int count = 0;
+            string continuation = string.Empty;            
+            do
+            {
+                // Read the feed 10 items at a time until there are no more items to read
+                FeedResponse<dynamic> response = await client.ReadDocumentFeedAsync("/dbs/db_rid/colls/coll_rid/docs/", 
+                                                                new FeedOptions 
+                                                                { 
+                                                                    MaxItemCount = 10, 
+                                                                    RequestContinuation = continuation 
+                                                                });
+                
+                // Append the item count
+                count += response.Count;
+                
+                // Get the continuation so that we know when to stop.
+                 continuation = response.ResponseContinuation;
+            } while (!string.IsNullOrEmpty(continuation));
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="ReadDocumentFeedAsync">
@@ -17670,6 +18664,14 @@
             Offer offer = await client.ReadOfferAsync(offerLink);
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            //Reads an Offer resource from a Database
+            // - offer_id is the ID of the conflict to be read
+            var offerLink = "/offers/offer_id";
+            Offer offer = await client.ReadOfferAsync(offerLink);
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="ReadOffersFeedAsync">
@@ -17730,6 +18732,27 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            int count = 0;
+            string continuation = string.Empty;            
+            do
+            {
+                // Read the feed 10 items at a time until there are no more items to read
+                FeedResponse<Offer> response = await client.ReadOfferAsync(new FeedOptions 
+                                                                            { 
+                                                                                MaxItemCount = 10, 
+                                                                                RequestContinuation = continuation 
+                                                                            });
+                
+                // Append the item count
+                count += response.Count;
+                
+                // Get the continuation so that we know when to stop.
+                 continuation = response.ResponseContinuation;
+            } while (!string.IsNullOrEmpty(continuation));
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             int count = 0;
@@ -18145,6 +19168,21 @@
             while (!string.IsNullOrEmpty(response.ResponseContinuation));
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            FeedResponse<PartitionKeyRange> response = null;
+            List<string> ids = new List<string>();
+            do
+            {
+                response = await client.ReadPartitionKeyRangeFeedAsync(collection.SelfLink, new FeedOptions { MaxItemCount = 1000 });
+                foreach (var item in response)
+                {
+                    ids.Add(item.Id);
+                }
+            }
+            while (!string.IsNullOrEmpty(response.ResponseContinuation));
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="ReadPartitionKeyRangeFeedAsync">
@@ -18200,6 +19238,22 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.FeedResponse`1" />
         <altmember cref="M:Microsoft.Azure.Documents.Client.UriFactory.CreatePartitionKeyRangesUri(System.String,System.String)" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            Uri partitionKeyRangesUri = UriFactory.CreatePartitionKeyRangesUri(database.Id, collection.Id);
+            FeedResponse<PartitionKeyRange> response = null;
+            List<string> ids = new List<string>();
+            do
+            {
+                response = await client.ReadPartitionKeyRangeFeedAsync(partitionKeyRangesUri, new FeedOptions { MaxItemCount = 1000 });
+                foreach (var item in response)
+                {
+                    ids.Add(item.Id);
+                }
+            }
+            while (!string.IsNullOrEmpty(response.ResponseContinuation));
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             Uri partitionKeyRangesUri = UriFactory.CreatePartitionKeyRangesUri(database.Id, collection.Id);
@@ -18523,6 +19577,16 @@
             Permission permission = await client.ReadPermissionAsync(permissionLink);
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            //Reads a Permission resource from a Database and User where 
+            // - sample_database is the ID of the database
+            // - sample_user is the ID of the user
+            // - permission_id is the ID of the permission to be read
+            var permissionLink = "/dbs/sample_database/users/sample_user/permissions/permission_id";
+            Permission permission = await client.ReadPermissionAsync(permissionLink);
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="ReadPermissionAsync">
@@ -18578,6 +19642,16 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            //Reads a Permission resource where 
+            // - db_id is the ID property of the Database
+            // - user_id is the ID property of the User 
+            // - permission_id is the ID property of the Permission you wish to read. 
+            var permissionLink = UriFactory.CreatePermissionUri("db_id", "coll_id", "user_id");
+            Permission permission = await client.ReadPermissionAsync(permissionLink);
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             //Reads a Permission resource where 
@@ -18741,6 +19815,28 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            int count = 0;
+            string continuation = string.Empty;            
+            do
+            {
+                // Read the feed 10 items at a time until there are no more items to read
+                FeedResponse<Permission> response = await client.ReadPermissionFeedAsync("/dbs/db_rid/users/user_rid/permissions/", 
+                                                                new FeedOptions 
+                                                                { 
+                                                                    MaxItemCount = 10, 
+                                                                    RequestContinuation = continuation 
+                                                                });
+                
+                // Append the item count
+                count += response.Count;
+                
+                // Get the continuation so that we know when to stop.
+                 continuation = response.ResponseContinuation;
+            } while (!string.IsNullOrEmpty(continuation));
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             int count = 0;
@@ -19156,6 +20252,16 @@
             StoredProcedure sproc = await client.ReadStoredProcedureAsync(sprocLink);
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            //Reads a StoredProcedure from a Database and DocumentCollection where 
+            // - sample_database is the ID of the database
+            // - sample_collection is the ID of the collection
+            // - sproc_id is the ID of the stored procedure to be read
+            var sprocLink = "/dbs/sample_database/colls/sample_collection/sprocs/sproc_id";
+            StoredProcedure sproc = await client.ReadStoredProcedureAsync(sprocLink);
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="ReadStoredProcedureAsync">
@@ -19211,6 +20317,16 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            //Reads a StoredProcedure resource where 
+            // - db_id is the ID property of the Database
+            // - coll_id is the ID property of the DocumentCollection 
+            // - sproc_id is the ID property of the StoredProcedure you wish to read. 
+            var sprocLink = UriFactory.CreateStoredProcedureUri("db_id", "coll_id", "sproc_id");
+            StoredProcedure sproc = await client.ReadStoredProcedureAsync(sprocLink);
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             //Reads a StoredProcedure resource where 
@@ -19374,6 +20490,28 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            int count = 0;
+            string continuation = string.Empty;            
+            do
+            {
+                // Read the feed 10 items at a time until there are no more items to read
+                FeedResponse<StoredProcedure> response = await client.ReadStoredProcedureFeedAsync("/dbs/db_rid/colls/col_rid/sprocs/", 
+                                                                new FeedOptions 
+                                                                { 
+                                                                    MaxItemCount = 10, 
+                                                                    RequestContinuation = continuation 
+                                                                });
+                
+                // Append the item count
+                count += response.Count;
+                
+                // Get the continuation so that we know when to stop.
+                 continuation = response.ResponseContinuation;
+            } while (!string.IsNullOrEmpty(continuation));
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             int count = 0;
@@ -19789,6 +20927,16 @@
             Trigger trigger = await client.ReadTriggerAsync(triggerLink);
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            //Reads a Trigger from a Database and DocumentCollection where 
+            // - sample_database is the ID of the database
+            // - sample_collection is the ID of the collection
+            // - trigger_id is the ID of the trigger to be read
+            var triggerLink = "/dbs/sample_database/colls/sample_collection/triggers/trigger_id";
+            Trigger trigger = await client.ReadTriggerAsync(triggerLink);
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="ReadTriggerAsync">
@@ -19844,6 +20992,16 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            //Reads a Trigger resource where 
+            // - db_id is the ID property of the Database
+            // - coll_id is the ID property of the DocumentCollection 
+            // - trigger_id is the ID property of the Trigger you wish to read. 
+            var triggerLink = UriFactory.CreateTriggerUri("db_id", "coll_id", "trigger_id");
+            Trigger trigger = await client.ReadTriggerAsync(triggerLink);
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             //Reads a Trigger resource where 
@@ -20007,6 +21165,28 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            int count = 0;
+            string continuation = string.Empty;            
+            do
+            {
+                // Read the feed 10 items at a time until there are no more items to read
+                FeedResponse<Trigger> response = await client.ReadTriggerFeedAsync("/dbs/db_rid/colls/col_rid/triggers/", 
+                                                                new FeedOptions 
+                                                                { 
+                                                                    MaxItemCount = 10, 
+                                                                    RequestContinuation = continuation 
+                                                                });
+                
+                // Append the item count
+                count += response.Count;
+                
+                // Get the continuation so that we know when to stop.
+                 continuation = response.ResponseContinuation;
+            } while (!string.IsNullOrEmpty(continuation));
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             int count = 0;
@@ -20411,6 +21591,15 @@
             User user = await client.ReadUserAsync(userLink);
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            //Reads a User resource from a Database
+            // - sample_database is the ID of the database
+            // - user_id is the ID of the user to be read
+            var userLink = "/dbs/sample_database/users/user_id";
+            User user = await client.ReadUserAsync(userLink);
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="ReadUserAsync">
@@ -20465,6 +21654,15 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            //Reads a User resource where 
+            // - db_id is the ID property of the Database
+            // - user_id is the ID property of the User you wish to read. 
+            var userLink = UriFactory.CreateUserUri("db_id", "user_id");
+            User user = await client.ReadUserAsync(userLink);
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             //Reads a User resource where 
@@ -20618,6 +21816,16 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
         <altmember cref="T:System.Uri" />
+        <example>
+          <code language="c#"><![CDATA[
+            //Reads a User Defined Function from a Database and DocumentCollection where 
+            // - sample_database is the ID of the database
+            // - sample_collection is the ID of the collection
+            // - udf_id is the ID of the user-defined function to be read
+            var udfLink = "/dbs/sample_database/colls/sample_collection/udfs/udf_id";
+            UserDefinedFunction udf = await client.ReadUserDefinedFunctionAsync(udfLink);
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             //Reads a User Defined Function from a Database and DocumentCollection where 
@@ -20873,6 +22081,16 @@
             UserDefinedFunction udf = await client.ReadUserDefinedFunctionAsync(udfLink);
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            //Reads a UserDefinedFunction resource where 
+            // - db_id is the ID property of the Database
+            // - coll_id is the ID property of the DocumentCollection 
+            // - udf_id is the ID property of the UserDefinedFunction you wish to read. 
+            var udfLink = UriFactory.CreateUserDefinedFunctionUri("db_id", "coll_id", "udf_id");
+            UserDefinedFunction udf = await client.ReadUserDefinedFunctionAsync(udfLink);
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="ReadUserDefinedFunctionFeedAsync">
@@ -20936,6 +22154,28 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            int count = 0;
+            string continuation = string.Empty;            
+            do
+            {
+                // Read the feed 10 items at a time until there are no more items to read
+                FeedResponse<UserDefinedFunction> response = await client.ReadUserDefinedFunctionFeedAsync("/dbs/db_rid/colls/col_rid/udfs/", 
+                                                                new FeedOptions 
+                                                                { 
+                                                                    MaxItemCount = 10, 
+                                                                    RequestContinuation = continuation 
+                                                                });
+                
+                // Append the item count
+                count += response.Count;
+                
+                // Get the continuation so that we know when to stop.
+                 continuation = response.ResponseContinuation;
+            } while (!string.IsNullOrEmpty(continuation));
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             int count = 0;
@@ -21471,6 +22711,28 @@
             } while (!string.IsNullOrEmpty(continuation));
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            int count = 0;
+            string continuation = string.Empty;            
+            do
+            {
+                // Read the feed 10 items at a time until there are no more items to read
+                FeedResponse<User> response = await client.ReadUserFeedAsync("/dbs/db_rid/users/", 
+                                                                new FeedOptions 
+                                                                { 
+                                                                    MaxItemCount = 10, 
+                                                                    RequestContinuation = continuation 
+                                                                });
+                
+                // Append the item count
+                count += response.Count;
+                
+                // Get the continuation so that we know when to stop.
+                 continuation = response.ResponseContinuation;
+            } while (!string.IsNullOrEmpty(continuation));
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="ReadUserFeedAsync">
@@ -21559,6 +22821,21 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            //Fetch the item to be updated
+            Attachment attachment = client.CreateAttachmentQuery(attachmentLink)
+                                        .Where(r => r.Id == "attachment id")    
+                                        .AsEnumerable()
+                                        .SingleOrDefault();
+                   
+            //Update some properties on the found resource
+            attachment.MediaLink = "updated value";
+            
+            //Now persist these changes to the database by replacing the original resource
+            Attachment updated = await client.ReplaceAttachmentAsync(attachment);
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             //Fetch the item to be updated
@@ -21949,6 +23226,21 @@
             //Now persist these changes to the database by replacing the original resource
             Document updated = await client.ReplaceDocumentAsync(doc);
             ]]></code></example>
+        <example>
+            This example uses <see cref="T:Microsoft.Azure.Documents.Document" /> and takes advantage of the fact that it is a dynamic object and uses SetProperty to dynamically update properties on the document
+            <code language="c#"><![CDATA[
+            //Fetch the Document to be updated
+            Document doc = client.CreateDocumentQuery<Document>(collectionLink)
+                                        .Where(r => r.Id == "doc id")    
+                                        .AsEnumerable()
+                                        .SingleOrDefault();
+                   
+            //Update some properties on the found resource
+            doc.SetPropertyValue("MyProperty", "updated value");
+            
+            //Now persist these changes to the database by replacing the original resource
+            Document updated = await client.ReplaceDocumentAsync(doc);
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="ReplaceDocumentAsync">
@@ -22016,6 +23308,30 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+            In this example, instead of using a strongly typed <see cref="T:Microsoft.Azure.Documents.Document" />, we will work with our own POCO object and not rely on the dynamic nature of the Document class.
+            <code language="c#"><![CDATA[
+            public class MyPoco
+            {
+                public string Id {get; set;}
+                public string MyProperty {get; set;}
+            }
+            
+            //Get the doc back as a Document so you have access to doc.SelfLink
+            Document doc = client.CreateDocumentQuery<Document>(collectionLink)
+                                   .Where(r => r.Id == "doc id")    
+                                   .AsEnumerable()
+                                   .SingleOrDefault();
+                   
+            //Now dynamically cast doc back to your MyPoco
+            MyPoco poco = (dynamic)doc;
+            
+            //Update some properties of the poco object
+            poco.MyProperty = "updated value";
+                   
+            //Now persist these changes to the database using doc.SelLink and the update poco object
+            Document updated = await client.ReplaceDocumentAsync(doc.SelfLink, poco);
+            ]]></code></example>
         <example>
             In this example, instead of using a strongly typed <see cref="T:Microsoft.Azure.Documents.Document" />, we will work with our own POCO object and not rely on the dynamic nature of the Document class.
             <code language="c#"><![CDATA[
@@ -22560,6 +23876,21 @@
             Offer updated = await client.ReplaceOfferAsync(offer);
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            //Fetch the resource to be updated
+            Offer offer = client.CreateOfferQuery()
+                                     .Where(r => r.ResourceLink == "collection selfLink")    
+                                     .AsEnumerable()
+                                     .SingleOrDefault();
+                          
+            //Change the user mode to All
+            offer.OfferType = "S3";
+                    
+            //Now persist these changes to the database by replacing the original resource
+            Offer updated = await client.ReplaceOfferAsync(offer);
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="ReplacePermissionAsync">
@@ -22616,6 +23947,21 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            //Fetch the resource to be updated
+            Permission permission = client.CreatePermissionQuery(permissionsLink)
+                                                .Where(r => r.Id == "permission id")    
+                                                .AsEnumerable()
+                                                .SingleOrDefault();
+                          
+            //Change the permission mode to All
+            permission.PermissionMode = PermissionMode.All;
+                    
+            //Now persist these changes to the database by replacing the original resource
+            Permission updated = await client.ReplacePermissionAsync(permission);
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             //Fetch the resource to be updated
@@ -23006,6 +24352,21 @@
             StoredProcedure updated = await client.ReplaceStoredProcedureAsync(sproc);
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            //Fetch the resource to be updated
+            StoredProcedure sproc = client.CreateStoredProcedureQuery(sprocsLink)
+                                             .Where(r => r.Id == "sproc id")    
+                                             .AsEnumerable()
+                                             .SingleOrDefault();
+                          
+            //Update some properties on the found resource
+            sproc.Body = "function () {new javascript body for sproc}";
+                    
+            //Now persist these changes to the database by replacing the original resource
+            StoredProcedure updated = await client.ReplaceStoredProcedureAsync(sproc);
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="ReplaceStoredProcedureAsync">
@@ -23096,6 +24457,21 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            //Fetch the resource to be updated
+            Trigger trigger = client.CreateTriggerQuery(sprocsLink)
+                                          .Where(r => r.Id == "trigger id")    
+                                          .AsEnumerable()
+                                          .SingleOrDefault();
+                          
+            //Update some properties on the found resource
+            trigger.Body = "function () {new javascript body for trigger}";
+                    
+            //Now persist these changes to the database by replacing the original resource
+            Trigger updated = await client.ReplaceTriggerAsync(sproc);
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             //Fetch the resource to be updated
@@ -23486,6 +24862,21 @@
             User updated = await client.ReplaceUserAsync(user);
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            //Fetch the resource to be updated
+            User user = client.CreateUserQuery(usersLink)
+                                     .Where(r => r.Id == "user id")    
+                                     .AsEnumerable()
+                                     .SingleOrDefault();
+                          
+            //Change the user mode to All
+            user.Id = "some new method";
+                    
+            //Now persist these changes to the database by replacing the original resource
+            User updated = await client.ReplaceUserAsync(user);
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="ReplaceUserAsync">
@@ -23576,6 +24967,21 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            //Fetch the resource to be updated
+            UserDefinedFunction udf = client.CreateUserDefinedFunctionQuery(functionsLink)
+                                                .Where(r => r.Id == "udf id")    
+                                                .AsEnumerable()
+                                                .SingleOrDefault();
+                          
+            //Update some properties on the found resource
+            udf.Body = "function () {new javascript body for udf}";
+                    
+            //Now persist these changes to the database by replacing the original resource
+            UserDefinedFunction updated = await client.ReplaceUserDefinedFunctionAsync(udf);
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             //Fetch the resource to be updated
@@ -24059,6 +25465,21 @@
             }
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            //This attachment could be any binary you want to attach. Like images, videos, word documents, pdfs etc. it doesn't matter
+            using (FileStream fileStream = new FileStream(@".\something.pdf", FileMode.Open))
+            {
+                //Update the attachment media
+                await client.UpdateMediaAsync("/medias/media_rid", fileStream, 
+                                new MediaOptions 
+                                { 
+                                    ContentType = "application/pdf", 
+                                    Slug = "something.pdf" 
+                                });
+            }
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="UpsertAttachmentAsync">
@@ -24115,6 +25536,22 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+            The example below creates a new document, and then upserts a new attachment for that document
+            <code language="c#"><![CDATA[
+            dynamic d = new 
+            {
+                id = "DOC1800243243470"
+            };
+                
+            Document doc = await client.CreateDocumentAsync(collectionSelfLink, d);
+            
+            //Upsert an Attachment which links to binary content stored somewhere else
+            //Use the MediaLink property of Attachment to set where the binary resides
+            //MediaLink can also point at another Attachment within DocumentDB.
+            Attachment a = await client.UpsertAttachmentAsync(doc.SelfLink, new Attachment { Id = "foo", ContentType = "text/plain", MediaLink = "link to your media" });
+            
+            ]]></code></example>
         <example>
             The example below creates a new document, and then upserts a new attachment for that document
             <code language="c#"><![CDATA[
@@ -24367,6 +25804,22 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.IO.Stream" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            //This attachment could be any binary you want to attach. Like images, videos, word documents, pdfs etc. it doesn't matter
+            using (FileStream fileStream = new FileStream(@".\something.pdf", FileMode.Open))
+            {
+                //Upsert the attachment
+                Attachment attachment = await client.UpsertAttachmentAsync("dbs/db_rid/colls/coll_rid/docs/doc_rid/attachments/", 
+                                                    fileStream, 
+                                                    new MediaOptions 
+                                                    { 
+                                                        ContentType = "application/pdf", 
+                                                        Slug = "something.pdf" 
+                                                    });
+            }
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             //This attachment could be any binary you want to attach. Like images, videos, word documents, pdfs etc. it doesn't matter
@@ -25124,6 +26577,53 @@
                     });
             }
             ]]></code></example>
+        <example>
+            DocumentDB supports a number of different ways to work with documents. A document can extend <see cref="T:Microsoft.Azure.Documents.Resource" /><code language="c#"><![CDATA[
+            public class MyObject : Resource
+            {
+                public string MyProperty {get; set;}
+            }
+            
+            using (DocumentClient client = new DocumentClient(new Uri("service endpoint"), "auth key"))
+            {
+                Document doc = await client.UpsertDocumentAsync("dbs/db_rid/colls/coll_rid/", new MyObject { MyProperty = "A Value" });
+            }
+            ]]></code></example>
+        <example>
+            A document can be any POCO object that can be serialized to JSON, even if it doesn't extend from <see cref="T:Microsoft.Azure.Documents.Resource" /><code language="c#"><![CDATA[
+            public class MyPOCO
+            {
+                public string MyProperty {get; set;}
+            }
+            
+            using (DocumentClient client = new DocumentClient(new Uri("service endpoint"), "auth key"))
+            {
+                Document doc = await client.UpsertDocumentAsync("dbs/db_rid/colls/coll_rid/", new MyPOCO { MyProperty = "A Value" });
+            }
+            ]]></code></example>
+        <example>
+            A Document can also be a dynamic object
+            <code language="c#"><![CDATA[
+            using (DocumentClient client = new DocumentClient(new Uri("service endpoint"), "auth key"))
+            {
+                Document doc = await client.UpsertDocumentAsync("dbs/db_rid/colls/coll_rid/", new { SomeProperty = "A Value" } );
+            }
+            ]]></code></example>
+        <example>
+            Upsert a Document and execute a Pre and Post Trigger
+            <code language="c#"><![CDATA[
+            using (DocumentClient client = new DocumentClient(new Uri("service endpoint"), "auth key"))
+            {
+                Document doc = await client.UpsertDocumentAsync(
+                    "dbs/db_rid/colls/coll_rid/",
+                    new { id = "DOC123213443" },
+                    new RequestOptions
+                    {
+                        PreTriggerInclude = new List<string> { "MyPreTrigger" },
+                        PostTriggerInclude = new List<string> { "MyPostTrigger" }
+                    });
+            }
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="UpsertDocumentAsync">
@@ -25208,6 +26708,12 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            //Upsert a read-only permission object for a specific user
+            Permission p = await client.UpsertPermissionAsync(userLink, new Permission { Id = "ReadPermission", PermissionMode = PermissionMode.Read });
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             //Upsert a read-only permission object for a specific user
@@ -25357,6 +26863,19 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            //Upsert a new stored procedure called "HelloWorldSproc" that takes in a single param called "name".
+            StoredProcedure sproc = await client.UpsertStoredProcedureAsync(collectionLink, new StoredProcedure
+            {
+               Id = "HelloWorldSproc",
+               Body = @"function (name){
+                           var response = getContext().getResponse();
+                           response.setBody('Hello ' + name);
+                        }"
+            });
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             //Upsert a new stored procedure called "HelloWorldSproc" that takes in a single param called "name".
@@ -25838,6 +27357,31 @@
             });
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            //Upsert a trigger that validates the contents of a document as it is created and adds a 'timestamp' property if one was not found. 
+            Trigger trig = await client.UpsertTriggerAsync(collectionLink, new Trigger
+            {
+                Id = "ValidateDocuments",
+                Body = @"function validate() {
+                                    var context = getContext();
+                                    var request = context.getRequest();                                                             
+                                    var documentToCreate = request.getBody();
+                                    
+                                    // validate properties
+                                    if (!('timestamp' in documentToCreate)) {
+                                        var ts = new Date();
+                                        documentToCreate['timestamp'] = ts.getTime();
+                                    }
+                                    
+                                    // update the document that will be created
+                                    request.setBody(documentToCreate);
+                                  }",
+                TriggerType = TriggerType.Pre,
+                TriggerOperation = TriggerOperation.Create
+            });
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="UpsertTriggerAsync">
@@ -25920,6 +27464,12 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            //Upsert a new user called joeBloggs in the specified database
+            User user = await client.UpsertUserAsync(databaseLink, new User { Id = "joeBloggs" });
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             //Upsert a new user called joeBloggs in the specified database
@@ -26068,6 +27618,18 @@
         <altmember cref="T:Microsoft.Azure.Documents.Client.RequestOptions" />
         <altmember cref="T:Microsoft.Azure.Documents.Client.ResourceResponse`1" />
         <altmember cref="T:System.Threading.Tasks.Task" />
+        <example>
+          <code language="c#"><![CDATA[
+            //Upsert a user defined function that converts a string to upper case
+            UserDefinedFunction udf = client.UpsertUserDefinedFunctionAsync(collectionLink, new UserDefinedFunction
+            {
+               Id = "ToUpper",
+               Body = @"function toUpper(input) {
+                                   return input.toUpperCase();
+                                }",
+            });
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             //Upsert a user defined function that converts a string to upper case
