@@ -536,6 +536,43 @@
                      cancellationToken);
              }
              ]]></code></example>
+        <example>
+             This example shows how to monitor the queue's count infinitely, until the cancellation token is canceled.
+             <code><![CDATA[
+             protected override async Task RunAsync(CancellationToken cancellationToken)
+             {
+                 var concurrentQueue = await this.StateManager.GetOrAddAsync<IReliableConcurrentQueue<long>>(new Uri("fabric:/concurrentQueue"));
+            
+                 // Assumption: values are being enqueued/dequeued in another place (e.g. the communication listener).
+                 var observer = Task.Run(
+                     async () =>
+                         {
+                             while (true)
+                             {
+                                 cancellationToken.ThrowIfCancellationRequested();
+            
+                                 try
+                                 {
+                                     Console.WriteLine("Count: " + concurrentQueue.Count);
+                                 }
+                                 catch (FabricNotReadableException e)
+                                 {
+                                     // Retry until the queue is readable or a different exception is thrown.
+                                     Console.WriteLine("Queue is not readable, retrying the observation: " + e);
+                                 }
+                                 catch (FabricObjectClosedException e)
+                                 {
+                                     // Gracefully exit as this is happening due to replica close.
+                                     Console.WriteLine("Replica is closing, stopping observer: " + e);
+                                     return;
+                                 }
+                                 
+                                 await Task.Delay(TimeSpan.FromMilliseconds(100), cancellationToken);
+                             }
+                         },
+                     cancellationToken);
+             }
+             ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="EnqueueAsync">
@@ -789,6 +826,117 @@
         <exception cref="T:System.Fabric.FabricTransientException">The replica saw a transient failure. Retry the operation on a new transaction</exception>
         <exception cref="T:System.Fabric.FabricException">The replica saw a non retriable failure other than the types defined above. Cleanup and rethrow the exception</exception>
         <exception cref="T:System.Fabric.TransactionFaultedException">The transaction has been internally faulted by the system. Retry the operation on a new transaction</exception>
+        <example>
+             This example shows how to use <see cref="M:Microsoft.ServiceFabric.Data.Collections.IReliableConcurrentQueue`1.EnqueueAsync(Microsoft.ServiceFabric.Data.ITransaction,`0,System.Threading.CancellationToken,System.Nullable{System.TimeSpan})" /> to enqueue a value with retry.
+             <code><![CDATA[
+             protected override async Task RunAsync(CancellationToken cancellationToken)
+             {
+                 var concurrentQueue = await this.StateManager.GetOrAddAsync<IReliableConcurrentQueue<long>>(new Uri("fabric:/concurrentQueue"));
+            
+                 while (true)
+                 {
+                     cancellationToken.ThrowIfCancellationRequested();
+             
+                     try
+                     {
+                         using (var tx = this.StateManager.CreateTransaction())
+                         {
+                             await concurrentQueue.EnqueueAsync(tx, 12L, cancellationToken);
+                             await tx.CommitAsync();
+            
+                             return;
+                         }
+                     }
+                     catch (TransactionFaultedException e)
+                     {
+                         // This indicates that the transaction was internally faulted by the system. One possible cause for this is that the transaction was long running
+                         // and blocked a checkpoint. Increasing the "ReliableStateManagerReplicatorSettings.CheckpointThresholdInMB" will help reduce the chances of running into this exception
+                         Console.WriteLine("Transaction was internally faulted, retrying the transaction: " + e);
+                     }
+                     catch (FabricNotPrimaryException e)
+                     {
+                         // Gracefully exit RunAsync as the new primary should have RunAsync invoked on it and continue work.
+                         // If instead enqueue was being executed as part of a client request, the client would be signaled to re-resolve.
+                         Console.WriteLine("Replica is not primary, exiting RunAsync: " + e);
+                         return;
+                     }
+                     catch (FabricNotReadableException e)
+                     {
+                         // Retry until the queue is readable or a different exception is thrown.
+                         Console.WriteLine("Queue is not readable, retrying the transaction: " + e);
+                     }
+                     catch (FabricObjectClosedException e)
+                     {
+                         // Gracefully exit RunAsync as this is happening due to replica close.
+                         // If instead enqueue was being executed as part of a client request, the client would be signaled to re-resolve.
+                         Console.WriteLine("Replica is closing, exiting RunAsync: " + e);
+                         return;
+                     }
+                     catch (TimeoutException e)
+                     {
+                         Console.WriteLine("Encountered TimeoutException during EnqueueAsync, retrying the transaction: " + e);
+                     }
+                     catch (FabricTransientException e)
+                     {
+                         // Retry until the queue is writable or a different exception is thrown.
+                         Console.WriteLine("Queue is currently not writable, retrying the transaction: " + e);
+                     }
+            
+                     // Delay and retry.
+                     await Task.Delay(TimeSpan.FromMilliseconds(100), cancellationToken);
+                 }
+             }
+             ]]></code></example>
+        <example>
+             This example shows how to use <see cref="M:Microsoft.ServiceFabric.Data.Collections.IReliableConcurrentQueue`1.EnqueueAsync(Microsoft.ServiceFabric.Data.ITransaction,`0,System.Threading.CancellationToken,System.Nullable{System.TimeSpan})" /> to enqueue a value with retry.
+             <code><![CDATA[
+             protected override async Task RunAsync(CancellationToken cancellationToken)
+             {
+                 var concurrentQueue = await this.StateManager.GetOrAddAsync<IReliableConcurrentQueue<long>>(new Uri("fabric:/concurrentQueue"));
+            
+                 while (true)
+                 {
+                     cancellationToken.ThrowIfCancellationRequested();
+             
+                     try
+                     {
+                         using (var tx = this.StateManager.CreateTransaction())
+                         {
+                             await concurrentQueue.EnqueueAsync(tx, 12L, cancellationToken);
+                             await tx.CommitAsync();
+            
+                             return;
+                         }
+                     }
+                     catch (FabricNotPrimaryException e)
+                     {
+                         // Gracefully exit RunAsync as the new primary should have RunAsync invoked on it and continue work.
+                         // If instead enqueue was being executed as part of a client request, the client would be signaled to re-resolve.
+                         Console.WriteLine("Replica is not primary, exiting RunAsync: " + e);
+                         return;
+                     }
+                     catch (FabricNotReadableException e)
+                     {
+                         // Retry until the queue is readable or a different exception is thrown.
+                         Console.WriteLine("Queue is not readable, retrying the transaction: " + e);
+                     }
+                     catch (FabricObjectClosedException e)
+                     {
+                         // Gracefully exit RunAsync as this is happening due to replica close.
+                         // If instead enqueue was being executed as part of a client request, the client would be signaled to re-resolve.
+                         Console.WriteLine("Replica is closing, exiting RunAsync: " + e);
+                         return;
+                     }
+                     catch (TimeoutException e)
+                     {
+                         Console.WriteLine("Encountered TimeoutException during EnqueueAsync, retrying the transaction: " + e);
+                     }
+            
+                     // Delay and retry.
+                     await Task.Delay(TimeSpan.FromMilliseconds(100), cancellationToken);
+                 }
+             }
+             ]]></code></example>
         <example>
              This example shows how to use <see cref="M:Microsoft.ServiceFabric.Data.Collections.IReliableConcurrentQueue`1.EnqueueAsync(Microsoft.ServiceFabric.Data.ITransaction,`0,System.Threading.CancellationToken,System.Nullable{System.TimeSpan})" /> to enqueue a value with retry.
              <code><![CDATA[
@@ -2027,6 +2175,132 @@
         <exception cref="T:System.Fabric.FabricTransientException">The replica saw a transient failure. Retry the operation on a new transaction</exception>
         <exception cref="T:System.Fabric.FabricException">The replica saw a non retriable failure other than the types defined above. Cleanup and rethrow the exception</exception>
         <exception cref="T:System.Fabric.TransactionFaultedException">The transaction has been internally faulted by the system. Retry the operation on a new transaction</exception>
+        <example>
+            This example shows how to dequeue and log infinitely with retry, until the cancellation token is canceled.  
+            <code><![CDATA[
+            protected override async Task RunAsync(CancellationToken cancellationToken)
+            {
+                var concurrentQueue = await this.StateManager.GetOrAddAsync<IReliableConcurrentQueue<long>>(new Uri("fabric:/concurrentQueue"));
+            
+                // Assumption: values are being enqueued by another source (e.g. the communication listener).
+                while (true)
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+            
+                    try
+                    {
+                        using (var tx = this.StateManager.CreateTransaction())
+                        {
+                            var dequeueOutput = await concurrentQueue.TryDequeueAsync(tx, cancellationToken, TimeSpan.FromMilliseconds(100));
+                            await tx.CommitAsync();
+            
+                            if (dequeueOutput.HasValue)
+                            {
+                                Console.WriteLine("Dequeue # " + dequeueOutput);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Could not dequeue in the given time");
+                            }
+                        }
+                    }
+                    catch (TransactionFaultedException e)
+                    {
+                        // This indicates that the transaction was internally faulted by the system. One possible cause for this is that the transaction was long running
+                        // and blocked a checkpoint. Increasing the "ReliableStateManagerReplicatorSettings.CheckpointThresholdInMB" will help reduce the chances of running into this exception
+                        Console.WriteLine("Transaction was internally faulted, retrying the transaction: " + e);
+                    }
+                    catch (FabricNotPrimaryException e)
+                    {
+                        // Gracefully exit RunAsync as the new primary should have RunAsync invoked on it and continue work.
+                        // If instead dequeue was being executed as part of a client request, the client would be signaled to re-resolve.
+                        Console.WriteLine("Replica is not primary, exiting RunAsync: " + e);
+                        return;
+                    }
+                    catch (FabricNotReadableException e)
+                    {
+                        // Retry until the queue is readable or a different exception is thrown.
+                        Console.WriteLine("Queue is not readable, retrying the transaction: " + e);
+                    }
+                    catch (FabricObjectClosedException e)
+                    {
+                        // Gracefully exit RunAsync as this is happening due to replica close.
+                        // If instead dequeue was being executed as part of a client request, the client would be signaled to re-resolve.
+                        Console.WriteLine("Replica is closing, exiting RunAsync: " + e);
+                        return;
+                    }
+                    catch (TimeoutException e)
+                    {
+                        Console.WriteLine("Encountered TimeoutException during DequeueAsync, retrying the transaction: " + e);
+                    }
+                    catch (FabricTransientException e)
+                    {
+                        // Retry until the queue is writable or a different exception is thrown.
+                        Console.WriteLine("Queue is currently not writable, retrying the transaction: " + e);
+                    }
+            
+                    // Delay and retry.
+                    await Task.Delay(TimeSpan.FromMilliseconds(100), cancellationToken);
+                }
+            }
+            ]]></code></example>
+        <example>
+            This example shows how to dequeue and log infinitely with retry, until the cancellation token is canceled.  
+            <code><![CDATA[
+            protected override async Task RunAsync(CancellationToken cancellationToken)
+            {
+                var concurrentQueue = await this.StateManager.GetOrAddAsync<IReliableConcurrentQueue<long>>(new Uri("fabric:/concurrentQueue"));
+            
+                // Assumption: values are being enqueued by another source (e.g. the communication listener).
+                while (true)
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+            
+                    try
+                    {
+                        using (var tx = this.StateManager.CreateTransaction())
+                        {
+                            var dequeueOutput = await concurrentQueue.TryDequeueAsync(tx, cancellationToken, TimeSpan.FromMilliseconds(100));
+                            await tx.CommitAsync();
+            
+                            if (dequeueOutput.HasValue)
+                            {
+                                Console.WriteLine("Dequeue # " + dequeueOutput);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Could not dequeue in the given time");
+                            }
+                        }
+                    }
+                    catch (FabricNotPrimaryException e)
+                    {
+                        // Gracefully exit RunAsync as the new primary should have RunAsync invoked on it and continue work.
+                        // If instead dequeue was being executed as part of a client request, the client would be signaled to re-resolve.
+                        Console.WriteLine("Replica is not primary, exiting RunAsync: " + e);
+                        return;
+                    }
+                    catch (FabricNotReadableException e)
+                    {
+                        // Retry until the queue is readable or a different exception is thrown.
+                        Console.WriteLine("Queue is not readable, retrying the transaction: " + e);
+                    }
+                    catch (FabricObjectClosedException e)
+                    {
+                        // Gracefully exit RunAsync as this is happening due to replica close.
+                        // If instead dequeue was being executed as part of a client request, the client would be signaled to re-resolve.
+                        Console.WriteLine("Replica is closing, exiting RunAsync: " + e);
+                        return;
+                    }
+                    catch (TimeoutException e)
+                    {
+                        Console.WriteLine("Encountered TimeoutException during DequeueAsync, retrying the transaction: " + e);
+                    }
+                    // Delay and retry.
+                    await Task.Delay(TimeSpan.FromMilliseconds(100), cancellationToken);
+                }
+            }
+            ]]></code></example>
         <example>
             This example shows how to dequeue and log infinitely with retry, until the cancellation token is canceled.  
             <code><![CDATA[
