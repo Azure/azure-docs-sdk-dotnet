@@ -2,7 +2,7 @@
 title: Azure Service Fabric libraries for .NET
 description: Reference for Azure Service Fabric libraries for .NET
 keywords: Azure, .NET, SDK, API, Service Fabric
-author: casoper
+author: camsoper
 ms.author: casoper
 manager: douge
 ms.date: 10/13/2017
