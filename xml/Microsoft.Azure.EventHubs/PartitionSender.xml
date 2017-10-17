@@ -5,14 +5,20 @@
   <AssemblyInfo>
     <AssemblyName>Microsoft.Azure.EventHubs</AssemblyName>
     <AssemblyVersion>1.0.1.0</AssemblyVersion>
+    <AssemblyVersion>1.0.3.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>Microsoft.Azure.EventHubs.ClientEntity</BaseTypeName>
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
+    <summary>
+            This sender class is a logical representation of sending events to a specific EventHub partition. Do not use this class
+            if you do not care about sending events to specific partitions, instead use <see cref="M:Microsoft.Azure.EventHubs.EventHubClient.SendAsync(Microsoft.Azure.EventHubs.EventData)" />.
+            </summary>
     <remarks>To be added.</remarks>
+    <altmember cref="M:Microsoft.Azure.EventHubs.EventHubClient.CreatePartitionSender(System.String)" />
+    <altmember cref="M:Microsoft.Azure.EventHubs.EventHubClient.CreateFromConnectionString(System.String)" />
   </Docs>
   <Members>
     <Member MemberName="CloseAsync">
@@ -21,8 +27,9 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.EventHubs.PartitionSender.CloseAsync" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.0.1.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.EventHubs</AssemblyName>
+        <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.0.3.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -34,8 +41,10 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>
+            Closes and releases resources for the <see cref="T:Microsoft.Azure.EventHubs.PartitionSender" />.
+            </summary>
+        <returns>An asynchronous operation</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -45,14 +54,17 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.EventHubs.PartitionSender.EventHubClient" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.0.1.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.EventHubs</AssemblyName>
+        <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.0.3.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.EventHubs.EventHubClient</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the <see cref="P:Microsoft.Azure.EventHubs.PartitionSender.EventHubClient" /> associated with this PartitionSender.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -63,14 +75,17 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.EventHubs.PartitionSender.PartitionId" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.0.1.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.EventHubs</AssemblyName>
+        <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.0.3.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the partition ID for this <see cref="T:Microsoft.Azure.EventHubs.PartitionSender" />.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -81,8 +96,9 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.EventHubs.PartitionSender.SendAsync(Microsoft.Azure.EventHubs.EventData)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.0.1.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.EventHubs</AssemblyName>
+        <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.0.3.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -91,10 +107,17 @@
         <Parameter Name="eventData" Type="Microsoft.Azure.EventHubs.EventData" />
       </Parameters>
       <Docs>
-        <param name="eventData">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="eventData">the <see cref="T:Microsoft.Azure.EventHubs.EventData" /> to be sent.</param>
+        <summary>
+            Send <see cref="T:Microsoft.Azure.EventHubs.EventData" /> to a specific EventHub partition. The target partition is pre-determined when this PartitionSender was created.
+            This send pattern emphasizes data correlation over general availability and latency.
+            <para>There are 3 ways to send to EventHubs, each exposed as a method (along with its sendBatch overload):</para><para>i.   <see cref="M:Microsoft.Azure.EventHubs.EventHubClient.SendAsync(Microsoft.Azure.EventHubs.EventData)" /> or <see cref="M:Microsoft.Azure.EventHubs.EventHubClient.SendAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.EventHubs.EventData})" /></para><para>ii.  <see cref="M:Microsoft.Azure.EventHubs.EventHubClient.SendAsync(Microsoft.Azure.EventHubs.EventData,System.String)" /> or <see cref="M:Microsoft.Azure.EventHubs.EventHubClient.SendAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.EventHubs.EventData},System.String)" /></para><para>iii. <see cref="M:Microsoft.Azure.EventHubs.PartitionSender.SendAsync(Microsoft.Azure.EventHubs.EventData)" /> or <see cref="M:Microsoft.Azure.EventHubs.PartitionSender.SendAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.EventHubs.EventData})" /></para>
+            Use this type of send if:
+            <para>a. The client wants to take direct control of distribution of data across partitions. In this case client is responsible for making sure there is at least one sender per event hub partition.</para><para>b. User cannot use partition key as a mean to direct events to specific partition, yet there is a need for data correlation with partitioning scheme.</para></summary>
+        <returns>A Task that completes when the send operations is done.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:Microsoft.Azure.EventHubs.MessageSizeExceededException">the total size of the <see cref="T:Microsoft.Azure.EventHubs.EventData" /> exceeds a pre-defined limit set by the service. Default is 256k bytes.</exception>
+        <exception cref="T:Microsoft.Azure.EventHubs.EventHubsException">Event Hubs service encountered problems during the operation.</exception>
       </Docs>
     </Member>
     <Member MemberName="SendAsync">
@@ -103,8 +126,9 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.EventHubs.PartitionSender.SendAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.EventHubs.EventData})" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>1.0.1.0</AssemblyVersion>
         <AssemblyName>Microsoft.Azure.EventHubs</AssemblyName>
+        <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.0.3.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -118,10 +142,93 @@
         <Parameter Name="eventDatas" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.EventHubs.EventData&gt;" />
       </Parameters>
       <Docs>
-        <param name="eventDatas">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="eventDatas">batch of events to send to EventHub</param>
+        <summary>
+            Send <see cref="T:Microsoft.Azure.EventHubs.EventData" /> to a specific EventHub partition. The targeted partition is pre-determined when this PartitionSender was created.
+            <para>
+            There are 3 ways to send to EventHubs, to understand this particular type of send refer to the overload <see cref="M:Microsoft.Azure.EventHubs.PartitionSender.SendAsync(Microsoft.Azure.EventHubs.EventData)" />, which is the same type of send and is used to send single <see cref="T:Microsoft.Azure.EventHubs.EventData" />.
+            </para>
+            Sending a batch of <see cref="T:Microsoft.Azure.EventHubs.EventData" />'s is useful in the following cases:
+            <para>i.    Efficient send - sending a batch of <see cref="T:Microsoft.Azure.EventHubs.EventData" /> maximizes the overall throughput by optimally using the number of sessions created to EventHubs' service.</para><para>ii.   Sending multiple <see cref="T:Microsoft.Azure.EventHubs.EventData" />'s in a Transaction. To acheive ACID properties, the Gateway Service will forward all <see cref="T:Microsoft.Azure.EventHubs.EventData" />'s in the batch to a single EventHub partition.</para></summary>
+        <returns>a Task that completes when the send operation is done.</returns>
         <remarks>To be added.</remarks>
+        <example>
+            Sample code:
+            <code>
+            EventHubClient client = EventHubClient.Create("__connectionString__");
+            PartitionSender senderToPartitionOne = client.CreatePartitionSender("1");
+                    
+            while (true)
+            {
+                var events = new List&lt;EventData&gt;();
+                for (int count = 1; count &lt; 11; count++)
+                {
+                    var payload = new PayloadEvent(count);
+                    byte[] payloadBytes = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload));
+                    var sendEvent = new EventData(payloadBytes);
+                    var applicationProperties = new Dictionary&lt;string, string&gt;();
+                    applicationProperties["from"] = "csharpClient";
+                    sendEvent.Properties = applicationProperties;
+                    events.Add(sendEvent);
+                }
+                    
+                await senderToPartitionOne.SendAsync(events);
+                Console.WriteLine("Sent Batch... Size: {0}", events.Count);
+                
+            }
+            </code></example>
+        <exception cref="T:Microsoft.Azure.EventHubs.MessageSizeExceededException">the total size of the <see cref="T:Microsoft.Azure.EventHubs.EventData" /> exceeds a pre-defined limit set by the service. Default is 256k bytes.</exception>
+        <exception cref="T:Microsoft.Azure.EventHubs.EventHubsException">Event Hubs service encountered problems during the operation.</exception>
+        <example>
+            Sample code:
+            <code>
+            EventHubClient client = EventHubClient.Create("__connectionString__");
+            PartitionSender senderToPartitionOne = client.CreatePartitionSender("1");
+                    
+            while (true)
+            {
+                var events = new List&lt;EventData&gt;();
+                for (int count = 1; count &lt; 11; count++)
+                {
+                    var payload = new PayloadEvent(count);
+                    byte[] payloadBytes = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload));
+                    var sendEvent = new EventData(payloadBytes);
+                    var applicationProperties = new Dictionary&lt;string, string&gt;();
+                    applicationProperties["from"] = "csharpClient";
+                    sendEvent.Properties = applicationProperties;
+                    events.Add(sendEvent);
+                }
+                    
+                await senderToPartitionOne.SendAsync(events);
+                Console.WriteLine("Sent Batch... Size: {0}", events.Count);
+                
+            }
+            </code></example>
+        <example>
+            Sample code:
+            <code>
+            EventHubClient client = EventHubClient.Create("__connectionString__");
+            PartitionSender senderToPartitionOne = client.CreatePartitionSender("1");
+                    
+            while (true)
+            {
+                var events = new List&lt;EventData&gt;();
+                for (int count = 1; count &lt; 11; count++)
+                {
+                    var payload = new PayloadEvent(count);
+                    byte[] payloadBytes = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload));
+                    var sendEvent = new EventData(payloadBytes);
+                    var applicationProperties = new Dictionary&lt;string, string&gt;();
+                    applicationProperties["from"] = "csharpClient";
+                    sendEvent.Properties = applicationProperties;
+                    events.Add(sendEvent);
+                }
+                    
+                await senderToPartitionOne.SendAsync(events);
+                Console.WriteLine("Sent Batch... Size: {0}", events.Count);
+                
+            }
+            </code></example>
       </Docs>
     </Member>
   </Members>
