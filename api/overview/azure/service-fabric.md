@@ -16,7 +16,7 @@ ms.service: service-fabric
 
 ## Overview
 
-Azure Service Fabric is a distributed systems platform that makes it easy to package, deploy, and manage scalable and reliable microservices and containers.
+Azure Service Fabric is a distributed systems platform that makes it easy to package, deploy, and manage scalable and reliable microservices and containers.  For more information, see the [Azure Service Fabric Documentation](/azure/service-fabric/).
 
 ## Client library
 
