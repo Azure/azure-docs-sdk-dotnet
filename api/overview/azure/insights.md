@@ -4,13 +4,14 @@ description: Reference for Azure Application Insights libraries for .NET
 keywords: Azure, .NET, SDK, API, Application AppInsights
 author: camsoper
 ms.author: casoper
-manager: douge
-ms.date: 07/24/2017
+manager: wpickett
+ms.date: 10/19/2017
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: multiple
+ms.service: application-insights
+ms.custom: devcenter, svc-overview
 ---
 
 # Azure Application Insights libraries for .NET

@@ -4,13 +4,14 @@ description: Reference for Azure Storage libraries for .NET
 keywords: Azure, .NET, SDK, API, storage, blob
 author: camsoper
 ms.author: casoper
-manager: douge
-ms.date: 07/17/2017
-ms.topic: article
+manager: wpickett
+ms.date: 10/19/2017
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: multiple
+ms.service: storage
+ms.custom: devcenter, svc-overview
 ---
 
 # Azure Storage APIs for .NET
