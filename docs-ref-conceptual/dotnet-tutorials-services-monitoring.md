@@ -2,13 +2,15 @@
 title: Tutorials for managing and monitoring .NET apps in Azure 
 description: Monitor health and performance of your .NET application running in Azure and instrument telemetry to save information about how people use your app.
 author: camsoper
-manager: douge
-ms.devlang: dotnet
-ms.topic: article
-ms.service: Azure
-ms.technology: Azure
-ms.date: 06/09/2017
 ms.author: casoper
+manager: wpickett
+ms.date: 10/19/2017
+ms.topic: reference
+ms.prod: azure
+ms.technology: azure
+ms.devlang: dotnet
+ms.service: multiple
+ms.custom: devcenter
 ---
 
 # Tutorials for monitoring and managing your .NET apps in Azure

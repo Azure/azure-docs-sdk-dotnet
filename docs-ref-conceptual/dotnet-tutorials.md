@@ -2,13 +2,15 @@
 title: Tutorials for .NET apps in Azure
 description: Tutorials to build and add features to your web and mobile .NET apps using Azure services.
 author: camsoper
-manager: douge
-ms.devlang: dotnet
-ms.topic: article
-ms.service: Azure
-ms.technology: Azure
-ms.date: 06/29/2017
 ms.author: casoper
+manager: wpickett
+ms.date: 10/19/2017
+ms.topic: reference
+ms.prod: azure
+ms.technology: azure
+ms.devlang: dotnet
+ms.service: multiple
+ms.custom: devcenter
 ---
 
 # Tutorials for building .NET apps in Azure

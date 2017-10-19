@@ -4,14 +4,14 @@ description: Authenticate into the Azure libraries for .NET
 keywords: Azure, .NET, SDK, API, authentication, active directory, service principal
 author: camsoper
 ms.author: casoper
-manager: douge
-ms.date: 06/20/2017
-ms.topic: article
+manager: wpickett
+ms.date: 10/19/2017
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
 ms.service: multiple
-ms.assetid: 
+ms.custom: devcenter
 ---
 
 # Authenticate with the Azure Libraries for .NET

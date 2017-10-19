@@ -4,13 +4,14 @@ description: See what's new and watch for breaking changes in the Azure manageme
 keywords: Azure, .NET, API, reference, notes,  updates, deprecate
 author: camsoper
 ms.author: casoper
-manager: douge
-ms.assetid:
-ms.service: Azure
-ms.devlang: dotnet
+manager: wpickett
+ms.date: 10/19/2017
 ms.topic: reference
-ms.technology: Azure
-ms.date: 06/20/2017
+ms.prod: azure
+ms.technology: azure
+ms.devlang: dotnet
+ms.service: multiple
+ms.custom: devcenter
 ---
 
 # Release Notes 
