@@ -4,13 +4,14 @@ description: Reference for Azure Redis Cache libraries for .NET
 keywords: Azure, .NET, SDK, API, Redis Cache
 author: camsoper
 ms.author: casoper
-manager: douge
-ms.date: 07/31/2017
+manager: wpickett
+ms.date: 10/19/2017
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
 ms.service: redis-cache
+ms.custom: devcenter, svc-overview
 ---
 
 # Azure Redis Cache libraries for .NET

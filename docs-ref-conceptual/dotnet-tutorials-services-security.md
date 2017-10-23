@@ -2,13 +2,15 @@
 title: .NET tutorials for securing your Azure apps
 description: Tutorials for application security and identity management in your .NET apps runing on Azure.
 author: camsoper
-manager: douge
-ms.devlang: dotnet
-ms.topic: article
-ms.service: Azure
-ms.technology: Azure
-ms.date: 06/09/2017
 ms.author: casoper
+manager: wpickett
+ms.date: 10/19/2017
+ms.topic: reference
+ms.prod: azure
+ms.technology: azure
+ms.devlang: dotnet
+ms.service: multiple
+ms.custom: devcenter
 ---
 
 # Tutorials for authenticating users in your .NET apps running on Azure
