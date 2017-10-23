@@ -42,7 +42,7 @@ This example creates a new resource group.
 
 ```csharp
 /* Include these "using" directives.
-using Microsoft.Azure.Management.ResourceManager.Fluent
+using Microsoft.Azure.Management.ResourceManager.Fluent;
 using Microsoft.Azure.Management.ResourceManager.Fluent.Core;
 */
 
