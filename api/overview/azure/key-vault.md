@@ -103,4 +103,4 @@ using (KeyVaultManagementClient client = new KeyVaultManagementClient(
 Explore more [sample .NET code](https://azure.microsoft.com/resources/samples/?platform=dotnet) you can use in your apps.
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
-[DotNetCLI]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package
+[DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
