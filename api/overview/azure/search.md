@@ -87,4 +87,4 @@ dotnet add package Microsoft.Azure.Management.Search
 Find more search samples in the [Azure samples repository](https://github.com/Azure-Samples/) on Github.
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
-[DotNetCLI]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package
+[DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package

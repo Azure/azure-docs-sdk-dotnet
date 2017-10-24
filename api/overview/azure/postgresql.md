@@ -72,4 +72,4 @@ using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
 - [ADO.NET code examples](/dotnet/framework/data/adonet/ado-net-code-examples)
 - [Design a PostgreSQL database using the Azure CLI](https://docs.microsoft.com/azure/postgresql/tutorial-design-database-using-azure-cli) 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
-[DotNetCLI]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package
+[DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
