@@ -63,4 +63,4 @@ billingClient.Invoices.List();
 * [Multi-Tenant Web Application](https://github.com/Azure-Samples/billing-dotnet-webapp-multitenant)
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
-[DotNetCLI]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package
+[DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package

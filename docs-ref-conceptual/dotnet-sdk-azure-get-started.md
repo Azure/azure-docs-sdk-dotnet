@@ -21,7 +21,7 @@ This tutorial demonstrates the usage of several [Azure APIs for .NET](/dotnet/ap
 ## Prerequisites
 
 - An Azure account. If you don't have one, [get a free trial](https://azure.microsoft.com/free/)
-- [Azure PowerShell](https://docs.microsoft.com/en-us/powershell/azure/install-azurerm-ps)
+- [Azure PowerShell](/powershell/azure/install-azurerm-ps)
 
 ## Set up authentication
 

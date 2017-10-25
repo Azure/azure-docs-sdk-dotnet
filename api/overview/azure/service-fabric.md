@@ -126,7 +126,7 @@ dotnet add package Microsoft.Azure.Management.ServiceFabric
 
 ## Samples
 
-* [Deploy and remove applications using FabricClient](https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-deploy-remove-applications-fabricclient)
+* [Deploy and remove applications using FabricClient](/azure/service-fabric/service-fabric-deploy-remove-applications-fabricclient)
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
-[DotNetCLI]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package
+[DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
