@@ -20,7 +20,7 @@ ms.custom: devcenter, svc-overview
 
 The Azure Relay service creates hybrid applications by enabling you to securely expose services that reside within a corporate enterprise network to the public cloud, without having to open a firewall connection, or require intrusive changes to a corporate network infrastructure. Relay supports a variety of different transport protocols and web services standards.
   		  
-Learn more about [Azure Relay](https://docs.microsoft.com/en-us/azure/service-bus-relay/relay-what-is-it).
+Learn more about [Azure Relay](/azure/service-bus-relay/relay-what-is-it).
 
 ## Client library
 
