@@ -5,6 +5,7 @@
   <AssemblyInfo>
     <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
     <AssemblyVersion>7.1.0.0</AssemblyVersion>
+    <AssemblyVersion>8.0.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Interfaces />
   <Docs>
@@ -22,6 +23,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
         <AssemblyVersion>7.1.0.0</AssemblyVersion>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Batch.Protocol.Models.TaskAddCollectionResult,Microsoft.Azure.Batch.Protocol.Models.TaskAddCollectionHeaders&gt;&gt;</ReturnType>
@@ -38,7 +40,11 @@
             The ID of the job to which the task collection is to be added.
             </param>
         <param name="value">
-            The collection of tasks to add.
+            The collection of tasks to add. The total serialized size of this
+            collection must be less than 4MB. If it is greater than 4MB (for
+            example if each task has 100's of resource files or environment
+            variables), the request will fail with code 'RequestBodyTooLarge'
+            and should be retried again with fewer tasks.
             </param>
         <param name="taskAddCollectionOptions">
             Additional parameters for the operation
@@ -61,9 +67,16 @@
             partially or fully processed, or not at all. In such cases, the
             user should re-issue the request. Note that it is up to the user to
             correctly handle failures when re-issuing a request. For example,
-            you should use the same task ids during a retry so that if the
+            you should use the same task IDs during a retry so that if the
             prior operation succeeded, the retry will not create extra tasks
-            unexpectedly.
+            unexpectedly. If the response contains any tasks which failed to
+            add, a client can retry the request. In a retry, it is most
+            efficient to resubmit only tasks that failed to add, and to omit
+            tasks that were successfully added on the first attempt. The
+            maximum lifetime of a task from addition to completion is 7 days.
+            If a task has not completed within 7 days of being added it will be
+            terminated by the Batch service and left in whatever state it was
+            in at that time.
             </remarks>
         <exception cref="T:Microsoft.Azure.Batch.Protocol.Models.BatchErrorException">
             Thrown when the operation returned an invalid status code
@@ -84,6 +97,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
         <AssemblyVersion>7.1.0.0</AssemblyVersion>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationHeaderResponse&lt;Microsoft.Azure.Batch.Protocol.Models.TaskAddHeaders&gt;&gt;</ReturnType>
@@ -115,7 +129,12 @@
             Adds a task to the specified job.
             </summary>
         <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            The maximum lifetime of a task from addition to completion is 7
+            days. If a task has not completed within 7 days of being added it
+            will be terminated by the Batch service and left in whatever state
+            it was in at that time.
+            </remarks>
         <exception cref="T:Microsoft.Azure.Batch.Protocol.Models.BatchErrorException">
             Thrown when the operation returned an invalid status code
             </exception>
@@ -132,6 +151,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
         <AssemblyVersion>7.1.0.0</AssemblyVersion>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationHeaderResponse&lt;Microsoft.Azure.Batch.Protocol.Models.TaskDeleteHeaders&gt;&gt;</ReturnType>
@@ -186,6 +206,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
         <AssemblyVersion>7.1.0.0</AssemblyVersion>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Batch.Protocol.Models.CloudTask,Microsoft.Azure.Batch.Protocol.Models.TaskGetHeaders&gt;&gt;</ReturnType>
@@ -241,6 +262,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
         <AssemblyVersion>7.1.0.0</AssemblyVersion>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Batch.Protocol.Models.CloudTask&gt;,Microsoft.Azure.Batch.Protocol.Models.TaskListHeaders&gt;&gt;</ReturnType>
@@ -292,6 +314,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
         <AssemblyVersion>7.1.0.0</AssemblyVersion>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Batch.Protocol.Models.CloudTaskListSubtasksResult,Microsoft.Azure.Batch.Protocol.Models.TaskListSubtasksHeaders&gt;&gt;</ReturnType>
@@ -347,6 +370,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
         <AssemblyVersion>7.1.0.0</AssemblyVersion>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Batch.Protocol.Models.CloudTask&gt;,Microsoft.Azure.Batch.Protocol.Models.TaskListHeaders&gt;&gt;</ReturnType>
@@ -398,6 +422,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
         <AssemblyVersion>7.1.0.0</AssemblyVersion>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationHeaderResponse&lt;Microsoft.Azure.Batch.Protocol.Models.TaskReactivateHeaders&gt;&gt;</ReturnType>
@@ -426,17 +451,20 @@
             The cancellation token.
             </param>
         <summary>
-            Reactivates the specified task.
+            Reactivates a task, allowing it to run again even if its retry
+            count has been exhausted.
             </summary>
         <returns>To be added.</returns>
         <remarks>
             Reactivation makes a task eligible to be retried again up to its
             maximum retry count. The task's state is changed to active. As the
             task is no longer in the completed state, any previous exit code or
-            scheduling error is no longer available after reactivation. This
-            will fail for tasks that are not completed or that previously
-            completed successfully (with an exit code of 0). Additionally, this
-            will fail if the job has completed (or is terminating or deleting).
+            failure information is no longer available after reactivation. Each
+            time a task is reactivated, its retry count is reset to 0.
+            Reactivation will fail for tasks that are not completed or that
+            previously completed successfully (with an exit code of 0).
+            Additionally, it will fail if the job has completed (or is
+            terminating or deleting).
             </remarks>
         <exception cref="T:Microsoft.Azure.Batch.Protocol.Models.BatchErrorException">
             Thrown when the operation returned an invalid status code
@@ -454,6 +482,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
         <AssemblyVersion>7.1.0.0</AssemblyVersion>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationHeaderResponse&lt;Microsoft.Azure.Batch.Protocol.Models.TaskTerminateHeaders&gt;&gt;</ReturnType>
@@ -507,6 +536,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
         <AssemblyVersion>7.1.0.0</AssemblyVersion>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationHeaderResponse&lt;Microsoft.Azure.Batch.Protocol.Models.TaskUpdateHeaders&gt;&gt;</ReturnType>
@@ -528,7 +558,8 @@
             </param>
         <param name="constraints">
             Constraints that apply to this task. If omitted, the task is given
-            the default constraints.
+            the default constraints. For multi-instance tasks, updating the
+            retention time applies only to the primary task and not subtasks.
             </param>
         <param name="taskUpdateOptions">
             Additional parameters for the operation
