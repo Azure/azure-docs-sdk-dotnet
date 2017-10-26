@@ -4,14 +4,14 @@ description: Get sample code for creating and updating Azure virtual machines us
 keywords: Azure, .NET, SDK, API, virtual machines
 author: camsoper
 ms.author: casoper
-manager: douge
-ms.date: 08/01/2017
-ms.topic: article
+manager: wpickett
+ms.date: 10/19/2017
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
 ms.service: multiple
-ms.assetid: 
+ms.custom: devcenter
 ---
 
 # Azure virtual machine management samples for .NET

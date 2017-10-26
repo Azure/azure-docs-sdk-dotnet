@@ -4,13 +4,14 @@ description: Reference documentation for the .NET client libraries for Azure Dat
 keywords: Azure, .NET, SDK, API, SQL, database, MySQL 
 author: camsoper
 ms.author: casoper
-manager: douge
-ms.date: 07/17/2017
-ms.topic: article
+manager: wpickett
+ms.date: 10/19/2017
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
 ms.service: mysql
+ms.custom: devcenter, svc-overview
 ---
 
 # Azure Database for MySQL libraries for .NET
@@ -73,4 +74,4 @@ using (MySqlConnection conn = new MySqlConnection(connectionString))
 - [Design a MySQL database using the Azure CLI](https://docs.microsoft.com/azure/mysql/tutorial-design-database-using-cli) 
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
-[DotNetCLI]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package
+[DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package

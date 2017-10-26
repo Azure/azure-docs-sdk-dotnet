@@ -4,13 +4,14 @@ description: Reference for Azure IoT libraries for .NET
 keywords: Azure, .NET, SDK, API, IoT
 author: camsoper
 ms.author: casoper
-manager: douge
-ms.date: 07/21/2017
+manager: wpickett
+ms.date: 10/19/2017
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: multiple
+ms.service: iot-hub
+ms.custom: devcenter, svc-overview
 ---
 
 # Azure IoT libraries for .NET

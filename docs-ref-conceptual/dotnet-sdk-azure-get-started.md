@@ -4,14 +4,14 @@ description: Get started with basic use of the Azure libraries for .NET with you
 keywords: Azure, .NET, SDK, API ,authenticate, get-started
 author: camsoper
 ms.author: casoper
-manager: douge
-ms.date: 06/20/2017
-ms.topic: get-started-article
+manager: wpickett
+ms.date: 10/19/2017
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
 ms.service: multiple
-ms.assetid: 
+ms.custom: devcenter
 ---
 
 # Get started with the Azure .NET APIs
@@ -21,7 +21,7 @@ This tutorial demonstrates the usage of several [Azure APIs for .NET](/dotnet/ap
 ## Prerequisites
 
 - An Azure account. If you don't have one, [get a free trial](https://azure.microsoft.com/free/)
-- [Azure PowerShell](https://docs.microsoft.com/en-us/powershell/azure/install-azurerm-ps)
+- [Azure PowerShell](/powershell/azure/install-azurerm-ps)
 
 ## Set up authentication
 

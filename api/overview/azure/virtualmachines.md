@@ -4,13 +4,14 @@ description: Reference for Azure compute libraries for .NET
 keywords: Azure, .NET, SDK, API, VM, virtual machines, compute
 author: camsoper
 ms.author: casoper
-manager: douge
-ms.date: 06/20/2017
-ms.topic: article
+manager: wpickett
+ms.date: 10/19/2017
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: multiple
+ms.service: virtual-machines
+ms.custom: devcenter, svc-overview
 ---
 
 # Azure virtual machine libraries for .NET
@@ -74,4 +75,4 @@ IVirtualMachine windowsVM = azure.VirtualMachines.Define("MyVirtualMachine")
 View the [complete list](https://azure.microsoft.com/en-us/resources/samples/?platform=dotnet&term=VM) of virtual machine samples.
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
-[DotNetCLI]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package
+[DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package

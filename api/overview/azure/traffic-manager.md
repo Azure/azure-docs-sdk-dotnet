@@ -4,13 +4,14 @@ description: Reference for Azure Traffic Manager libraries for .NET
 keywords: Azure, .NET, SDK, API, Traffic Manager
 author: camsoper
 ms.author: casoper
-manager: douge
-ms.date: 07/19/2017
+manager: wpickett
+ms.date: 10/19/2017
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: multiple
+ms.service: traffic-manager
+ms.custom: devcenter, svc-overview
 ---
 
 # Azure Traffic Manager libraries for .NET
@@ -19,7 +20,7 @@ ms.service: multiple
 
 Microsoft Azure Traffic Manager allows you to control the distribution of user traffic for service endpoints in different datacenters. Service endpoints supported by Traffic Manager include Azure VMs, Web Apps, and cloud services. You can also use Traffic Manager with external, non-Azure endpoints.
 
-Learn more about [Azure Traffic Manager](https://docs.microsoft.com/en-us/azure/traffic-manager/traffic-manager-overview).	
+Learn more about [Azure Traffic Manager](/azure/traffic-manager/traffic-manager-overview).	
 
 ## Management library
 
@@ -43,4 +44,4 @@ dotnet add package Microsoft.Azure.Management.TrafficManager.Fluent
 Explore more [sample .NET code](https://azure.microsoft.com/resources/samples/?platform=dotnet) you can use in your apps.
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
-[DotNetCLI]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package
+[DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package

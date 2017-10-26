@@ -4,14 +4,14 @@ description: Get sample code for creating and updating resources using the Azure
 keywords: Azure, .NET, SDK, API, sample, example
 author: camsoper
 ms.author: casoper
-manager: douge
-ms.date: 06/20/2017
-ms.topic: article
+manager: wpickett
+ms.date: 10/19/2017
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
 ms.service: multiple
-ms.assetid: 
+ms.custom: devcenter
 ---
 
 # Azure management libraries for .NET sample instructions
@@ -23,7 +23,7 @@ This article describes the prerequisites and authentication required for running
 * [Visual Studio 2017](https://www.visualstudio.com/vs/) or [.NET Core SDK](https://www.microsoft.com/net/download/core)
 * A [Microsoft Azure subscription](https://azure.microsoft.com/free/)
 * [Git command line client](https://git-scm.com/)
-* [Azure PowerShell](https://docs.microsoft.com/en-us/powershell/azure/install-azurerm-ps)
+* [Azure PowerShell](/powershell/azure/install-azurerm-ps)
 
 ## Authentication for all samples
 

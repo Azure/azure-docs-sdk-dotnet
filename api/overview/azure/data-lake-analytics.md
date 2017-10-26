@@ -4,13 +4,14 @@ description: Reference for Azure Data Lake Analytics libraries for .NET
 keywords: Azure, .NET, SDK, API, Data Lake Analytics
 author: camsoper
 ms.author: casoper
-manager: douge
-ms.date: 07/18/2017
+manager: wpickett
+ms.date: 10/19/2017
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: multiple
+ms.service: data-lake-analytics
+ms.custom: devcenter, svc-overview
 ---
 
 # Azure Data Lake Analytics libraries for .NET
@@ -67,4 +68,4 @@ AnalyticsClient adla = new AnalyticsClient(auth, adla_account);
 Explore more [sample .NET code](https://azure.microsoft.com/resources/samples/?platform=dotnet) you can use in your apps.
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
-[DotNetCLI]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package
+[DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package

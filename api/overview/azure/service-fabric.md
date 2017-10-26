@@ -4,13 +4,14 @@ description: Reference for Azure Service Fabric libraries for .NET
 keywords: Azure, .NET, SDK, API, Service Fabric
 author: camsoper
 ms.author: casoper
-manager: douge
-ms.date: 10/13/2017
-ms.topic: article
+manager: wpickett
+ms.date: 10/19/2017
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
 ms.service: service-fabric
+ms.custom: devcenter, svc-overview
 ---
 # Azure Service Fabric libraries for .NET
 
@@ -125,7 +126,7 @@ dotnet add package Microsoft.Azure.Management.ServiceFabric
 
 ## Samples
 
-* [Deploy and remove applications using FabricClient](https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-deploy-remove-applications-fabricclient)
+* [Deploy and remove applications using FabricClient](/azure/service-fabric/service-fabric-deploy-remove-applications-fabricclient)
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
-[DotNetCLI]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package
+[DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
