@@ -1,7 +1,7 @@
 ---
-title: Azure Traffic Manager libraries for .NET
-description: Reference for Azure Traffic Manager libraries for .NET
-keywords: Azure, .NET, SDK, API, Traffic Manager
+title: Azure Monitor libraries for .NET
+description: Reference for Azure Monitor libraries for .NET
+keywords: Azure, .NET, SDK, API, Monitor
 author: camsoper
 ms.author: casoper
 manager: wpickett
@@ -10,34 +10,34 @@ ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: traffic-manager
+ms.service: multip
 ms.custom: devcenter, svc-overview
 ---
 
-# Azure Traffic Manager libraries for .NET
+# Azure Monitor libraries for .NET
 
 ## Overview
 
-Microsoft Azure Traffic Manager allows you to control the distribution of user traffic for service endpoints in different datacenters. Service endpoints supported by Traffic Manager include Azure VMs, Web Apps, and cloud services. You can also use Traffic Manager with external, non-Azure endpoints.
+Azure Monitor helps you track performance, maintain security, and identify trends.
 
-Learn more about [Azure Traffic Manager](/azure/traffic-manager/traffic-manager-overview).	
+Learn more about [Azure Monitor](/azure/monitoring-and-diagnostics/).	
 
 ## Management library
 
-Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Management.TrafficManager.Fluent) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
+Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Management.Monitor.Fluent) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
 
 #### Visual Studio Package Manager
 
 ```powershell
-Install-Package Microsoft.Azure.Management.TrafficManager.Fluent
+Install-Package Microsoft.Azure.Management.Monitor.Fluent
 ```
 
 ```bash
-dotnet add package Microsoft.Azure.Management.TrafficManager.Fluent
+dotnet add package Microsoft.Azure.Management.Monitor.Fluent
 ```
 
 > [!div class="nextstepaction"]
-> [Explore the management APIs](/dotnet/api/overview/azure/trafficmanager/management)
+> [Explore the management APIs](/dotnet/api/overview/azure/monitor/management)
 
 ## Samples
 

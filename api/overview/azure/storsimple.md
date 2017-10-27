@@ -1,7 +1,7 @@
 ---
 title: Azure StorSimple libraries for .NET
 description: Reference for Azure StorSimple libraries for .NET
-keywords: Azure, .NET, SDK, API, Monitor
+keywords: Azure, .NET, SDK, API, StorSimple
 author: camsoper
 ms.author: casoper
 manager: wpickett
