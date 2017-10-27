@@ -5,6 +5,7 @@
   <AssemblyInfo>
     <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
     <AssemblyVersion>7.1.0.0</AssemblyVersion>
+    <AssemblyVersion>8.0.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -12,9 +13,10 @@
   <Interfaces />
   <Docs>
     <summary>
-            A reference to an Azure Virtual Machines Marketplace image. To get the
-            list of all imageReferences verified by Azure Batch, see the 'List
-            supported node agent SKUs' operation.
+            A reference to an Azure Virtual Machines Marketplace image or a custom
+            Azure Virtual Machine image. To get the list of all Azure Marketplace
+            image references verified by Azure Batch, see the 'List node agent
+            SKUs' operation.
             </summary>
     <remarks>To be added.</remarks>
   </Docs>
@@ -27,6 +29,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
         <AssemblyVersion>7.1.0.0</AssemblyVersion>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -37,19 +40,20 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ImageReference (string publisher, string offer, string sku, string version = null);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string publisher, string offer, string sku, string version) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Batch.Protocol.Models.ImageReference.#ctor(System.String,System.String,System.String,System.String)" />
+      <MemberSignature Language="C#" Value="public ImageReference (string publisher = null, string offer = null, string sku = null, string version = null, string virtualMachineImageId = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string publisher, string offer, string sku, string version, string virtualMachineImageId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Batch.Protocol.Models.ImageReference.#ctor(System.String,System.String,System.String,System.String,System.String)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
-        <AssemblyVersion>7.1.0.0</AssemblyVersion>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="publisher" Type="System.String" />
         <Parameter Name="offer" Type="System.String" />
         <Parameter Name="sku" Type="System.String" />
         <Parameter Name="version" Type="System.String" />
+        <Parameter Name="virtualMachineImageId" Type="System.String" />
       </Parameters>
       <Docs>
         <param name="publisher">The publisher of the Azure Virtual Machines
@@ -60,6 +64,10 @@
             image.</param>
         <param name="version">The version of the Azure Virtual Machines
             Marketplace image.</param>
+        <param name="virtualMachineImageId">The ARM resource identifier of
+            the virtual machine image. Computes nodes of the pool will be
+            created using this custom image. This is of the form
+            /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}</param>
         <summary>
             Initializes a new instance of the ImageReference class.
             </summary>
@@ -74,6 +82,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
         <AssemblyVersion>7.1.0.0</AssemblyVersion>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -102,6 +111,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
         <AssemblyVersion>7.1.0.0</AssemblyVersion>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -130,6 +140,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
         <AssemblyVersion>7.1.0.0</AssemblyVersion>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -150,29 +161,6 @@
             </remarks>
       </Docs>
     </Member>
-    <Member MemberName="Validate">
-      <MemberSignature Language="C#" Value="public virtual void Validate ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Validate() cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Batch.Protocol.Models.ImageReference.Validate" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
-        <AssemblyVersion>7.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Void</ReturnType>
-      </ReturnValue>
-      <Parameters />
-      <Docs>
-        <summary>
-            Validate the object.
-            </summary>
-        <remarks>To be added.</remarks>
-        <exception cref="T:Microsoft.Rest.ValidationException">
-            Thrown if validation fails
-            </exception>
-      </Docs>
-    </Member>
     <Member MemberName="Version">
       <MemberSignature Language="C#" Value="public string Version { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance string Version" />
@@ -181,6 +169,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
         <AssemblyVersion>7.1.0.0</AssemblyVersion>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -199,6 +188,41 @@
         <remarks>
             A value of 'latest' can be specified to select the latest version
             of an image. If omitted, the default is 'latest'.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="VirtualMachineImageId">
+      <MemberSignature Language="C#" Value="public string VirtualMachineImageId { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string VirtualMachineImageId" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Batch.Protocol.Models.ImageReference.VirtualMachineImageId" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="virtualMachineImageId")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets the ARM resource identifier of the virtual machine
+            image. Computes nodes of the pool will be created using this custom
+            image. This is of the form
+            /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}
+            </summary>
+        <value>To be added.</value>
+        <remarks>
+            This property is mutually exclusive with other ImageReference
+            properties. The virtual machine image must be in the same region
+            and subscription as the Azure Batch account. For information about
+            the firewall settings for the Batch node agent to communicate with
+            the Batch service see
+            https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration.
             </remarks>
       </Docs>
     </Member>

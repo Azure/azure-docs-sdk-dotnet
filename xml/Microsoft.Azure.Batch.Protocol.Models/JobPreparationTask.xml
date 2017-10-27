@@ -5,6 +5,7 @@
   <AssemblyInfo>
     <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
     <AssemblyVersion>7.1.0.0</AssemblyVersion>
+    <AssemblyVersion>8.0.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -15,7 +16,26 @@
             A Job Preparation task to run before any tasks of the job on any given
             compute node.
             </summary>
-    <remarks>To be added.</remarks>
+    <remarks>
+            You can use Job Preparation to prepare a compute node to run tasks for
+            the job. Activities commonly performed in Job Preparation include:
+            Downloading common resource files used by all the tasks in the job. The
+            Job Preparation task can download these common resource files to the
+            shared location on the compute node. (AZ_BATCH_NODE_ROOT_DIR\shared),
+            or starting a local service on the compute node so that all tasks of
+            that job can communicate with it. If the Job Preparation task fails
+            (that is, exhausts its retry count before exiting with exit code 0),
+            Batch will not run tasks of this job on the compute node. The node
+            remains ineligible to run tasks of this job until it is reimaged. The
+            node remains active and can be used for other jobs. The Job Preparation
+            task can run multiple times on the same compute node. Therefore, you
+            should write the Job Preparation task to handle re-execution. If the
+            compute node is rebooted, the Job Preparation task is run again on the
+            node before scheduling any other task of the job, if
+            rerunOnNodeRebootAfterSuccess is true or if the Job Preparation task
+            did not previously complete. If the compute node is reimaged, the Job
+            Preparation task is run again before scheduling any task of the job.
+            </remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -26,6 +46,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
         <AssemblyVersion>7.1.0.0</AssemblyVersion>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -36,17 +57,18 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public JobPreparationTask (string commandLine, string id = null, System.Collections.Generic.IList&lt;Microsoft.Azure.Batch.Protocol.Models.ResourceFile&gt; resourceFiles = null, System.Collections.Generic.IList&lt;Microsoft.Azure.Batch.Protocol.Models.EnvironmentSetting&gt; environmentSettings = null, Microsoft.Azure.Batch.Protocol.Models.TaskConstraints constraints = null, Nullable&lt;bool&gt; waitForSuccess = null, Microsoft.Azure.Batch.Protocol.Models.UserIdentity userIdentity = null, Nullable&lt;bool&gt; rerunOnNodeRebootAfterSuccess = null);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string commandLine, string id, class System.Collections.Generic.IList`1&lt;class Microsoft.Azure.Batch.Protocol.Models.ResourceFile&gt; resourceFiles, class System.Collections.Generic.IList`1&lt;class Microsoft.Azure.Batch.Protocol.Models.EnvironmentSetting&gt; environmentSettings, class Microsoft.Azure.Batch.Protocol.Models.TaskConstraints constraints, valuetype System.Nullable`1&lt;bool&gt; waitForSuccess, class Microsoft.Azure.Batch.Protocol.Models.UserIdentity userIdentity, valuetype System.Nullable`1&lt;bool&gt; rerunOnNodeRebootAfterSuccess) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Batch.Protocol.Models.JobPreparationTask.#ctor(System.String,System.String,System.Collections.Generic.IList{Microsoft.Azure.Batch.Protocol.Models.ResourceFile},System.Collections.Generic.IList{Microsoft.Azure.Batch.Protocol.Models.EnvironmentSetting},Microsoft.Azure.Batch.Protocol.Models.TaskConstraints,System.Nullable{System.Boolean},Microsoft.Azure.Batch.Protocol.Models.UserIdentity,System.Nullable{System.Boolean})" />
+      <MemberSignature Language="C#" Value="public JobPreparationTask (string commandLine, string id = null, Microsoft.Azure.Batch.Protocol.Models.TaskContainerSettings containerSettings = null, System.Collections.Generic.IList&lt;Microsoft.Azure.Batch.Protocol.Models.ResourceFile&gt; resourceFiles = null, System.Collections.Generic.IList&lt;Microsoft.Azure.Batch.Protocol.Models.EnvironmentSetting&gt; environmentSettings = null, Microsoft.Azure.Batch.Protocol.Models.TaskConstraints constraints = null, Nullable&lt;bool&gt; waitForSuccess = null, Microsoft.Azure.Batch.Protocol.Models.UserIdentity userIdentity = null, Nullable&lt;bool&gt; rerunOnNodeRebootAfterSuccess = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string commandLine, string id, class Microsoft.Azure.Batch.Protocol.Models.TaskContainerSettings containerSettings, class System.Collections.Generic.IList`1&lt;class Microsoft.Azure.Batch.Protocol.Models.ResourceFile&gt; resourceFiles, class System.Collections.Generic.IList`1&lt;class Microsoft.Azure.Batch.Protocol.Models.EnvironmentSetting&gt; environmentSettings, class Microsoft.Azure.Batch.Protocol.Models.TaskConstraints constraints, valuetype System.Nullable`1&lt;bool&gt; waitForSuccess, class Microsoft.Azure.Batch.Protocol.Models.UserIdentity userIdentity, valuetype System.Nullable`1&lt;bool&gt; rerunOnNodeRebootAfterSuccess) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Batch.Protocol.Models.JobPreparationTask.#ctor(System.String,System.String,Microsoft.Azure.Batch.Protocol.Models.TaskContainerSettings,System.Collections.Generic.IList{Microsoft.Azure.Batch.Protocol.Models.ResourceFile},System.Collections.Generic.IList{Microsoft.Azure.Batch.Protocol.Models.EnvironmentSetting},Microsoft.Azure.Batch.Protocol.Models.TaskConstraints,System.Nullable{System.Boolean},Microsoft.Azure.Batch.Protocol.Models.UserIdentity,System.Nullable{System.Boolean})" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
-        <AssemblyVersion>7.1.0.0</AssemblyVersion>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="commandLine" Type="System.String" />
         <Parameter Name="id" Type="System.String" />
+        <Parameter Name="containerSettings" Type="Microsoft.Azure.Batch.Protocol.Models.TaskContainerSettings" />
         <Parameter Name="resourceFiles" Type="System.Collections.Generic.IList&lt;Microsoft.Azure.Batch.Protocol.Models.ResourceFile&gt;" />
         <Parameter Name="environmentSettings" Type="System.Collections.Generic.IList&lt;Microsoft.Azure.Batch.Protocol.Models.EnvironmentSetting&gt;" />
         <Parameter Name="constraints" Type="Microsoft.Azure.Batch.Protocol.Models.TaskConstraints" />
@@ -59,6 +81,8 @@
             task.</param>
         <param name="id">A string that uniquely identifies the Job
             Preparation task within the job.</param>
+        <param name="containerSettings">The settings for the container
+            under which the Job Preparation task runs.</param>
         <param name="resourceFiles">A list of files that the Batch service
             will download to the compute node before running the command
             line.</param>
@@ -68,7 +92,9 @@
             Preparation task.</param>
         <param name="waitForSuccess">Whether the Batch service should wait
             for the Job Preparation task to complete successfully before
-            scheduling any other tasks of the job on the compute node.</param>
+            scheduling any other tasks of the job on the compute node. A Job
+            Preparation task has completed successfully if it exits with exit
+            code 0.</param>
         <param name="userIdentity">The user identity under which the Job
             Preparation task runs.</param>
         <param name="rerunOnNodeRebootAfterSuccess">Whether the Batch
@@ -88,6 +114,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
         <AssemblyVersion>7.1.0.0</AssemblyVersion>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -119,6 +146,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
         <AssemblyVersion>7.1.0.0</AssemblyVersion>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -136,6 +164,38 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
+    <Member MemberName="ContainerSettings">
+      <MemberSignature Language="C#" Value="public Microsoft.Azure.Batch.Protocol.Models.TaskContainerSettings ContainerSettings { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Azure.Batch.Protocol.Models.TaskContainerSettings ContainerSettings" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Batch.Protocol.Models.JobPreparationTask.ContainerSettings" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="containerSettings")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.Azure.Batch.Protocol.Models.TaskContainerSettings</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets the settings for the container under which the Job
+            Preparation task runs.
+            </summary>
+        <value>To be added.</value>
+        <remarks>
+            When this is specified, all directories recursively below the
+            AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the
+            node) are mapped into the container, all task environment variables
+            are mapped into the container, and the task command line is
+            executed in the container.
+            </remarks>
+      </Docs>
+    </Member>
     <Member MemberName="EnvironmentSettings">
       <MemberSignature Language="C#" Value="public System.Collections.Generic.IList&lt;Microsoft.Azure.Batch.Protocol.Models.EnvironmentSetting&gt; EnvironmentSettings { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.IList`1&lt;class Microsoft.Azure.Batch.Protocol.Models.EnvironmentSetting&gt; EnvironmentSettings" />
@@ -144,6 +204,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
         <AssemblyVersion>7.1.0.0</AssemblyVersion>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -170,6 +231,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
         <AssemblyVersion>7.1.0.0</AssemblyVersion>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -190,7 +252,7 @@
             including hyphens and underscores and cannot contain more than 64
             characters. If you do not specify this property, the Batch service
             assigns a default value of 'jobpreparation'. No other task in the
-            job can have the same id as the Job Preparation task. If you try to
+            job can have the same ID as the Job Preparation task. If you try to
             submit a task with the same id, the Batch service rejects the
             request with error code TaskIdSameAsJobPreparationTask; if you are
             calling the REST API directly, the HTTP status code is 409
@@ -206,6 +268,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
         <AssemblyVersion>7.1.0.0</AssemblyVersion>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -239,6 +302,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
         <AssemblyVersion>7.1.0.0</AssemblyVersion>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -268,6 +332,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
         <AssemblyVersion>7.1.0.0</AssemblyVersion>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -285,7 +350,8 @@
         <value>To be added.</value>
         <remarks>
             If omitted, the task runs as a non-administrative user unique to
-            the task.
+            the task on Windows nodes, or a a non-administrative user unique to
+            the pool on Linux nodes.
             </remarks>
       </Docs>
     </Member>
@@ -297,6 +363,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
         <AssemblyVersion>7.1.0.0</AssemblyVersion>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -320,6 +387,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
         <AssemblyVersion>7.1.0.0</AssemblyVersion>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -333,7 +401,8 @@
         <summary>
             Gets or sets whether the Batch service should wait for the Job
             Preparation task to complete successfully before scheduling any
-            other tasks of the job on the compute node.
+            other tasks of the job on the compute node. A Job Preparation task
+            has completed successfully if it exits with exit code 0.
             </summary>
         <value>To be added.</value>
         <remarks>
