@@ -1,6 +1,6 @@
 ---
-title: .NET for Azure developers
-description: .NET for Azure developers
+title: Deploy to Azure from the command line with .NET Core
+description: This article describes how to deploy an ASP.NET Core application to an Azure App Service using command-line tools.
 keywords: Azure .NET, SDK, Azure .NET API Reference, Azure .NET class library
 author: camsoper
 manager: douge
@@ -13,7 +13,7 @@ ms.devlang: dotnet
 ms.assetid: 
 ---
 
-# Get started with .NET CLI tools for Azure developers
+# Deploy to Azure from the command line with .NET Core
 
 This tutorial will walk you through building and deploying a Microsoft Azure application using .NET Core.  When finished, you'll have a web-based to-do application built in ASP.NET MVC Core, hosted as an Azure Web App, and using Azure CosmosDB for data storage.
 
