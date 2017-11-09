@@ -2189,6 +2189,56 @@
                 }
             }
             </code></example>
+        <example>
+            The following example shows how to register for and process service notifications:
+            <code language="cs">
+            namespace ServiceNotificationsExample
+            {
+                class Program
+                {
+                    static void Main(string[] args)
+                    {
+                        var client = new FabricClient(new string[] { "[cluster_endpoint]:[client_port]" });
+            
+                        var filter = new ServiceNotificationFilterDescription()
+                        {
+                            Name = new Uri("fabric:/my_application"),
+                            MatchNamePrefix = true,
+                        };
+            
+                        client.ServiceManager.ServiceNotificationFilterMatched += (s, e) =&gt; OnNotification(e);
+            
+                        var filterId = client.ServiceManager.RegisterServiceNotificationFilterAsync(filter).Result;
+            
+                        Console.WriteLine(
+                            "Registered filter: name={0} id={1}",
+                            filter.Name,
+                            filterId);
+            
+                        Console.ReadLine();
+            
+                        client.ServiceManager.UnregisterServiceNotificationFilterAsync(filterId).Wait();
+            
+                        Console.WriteLine(
+                            "Unregistered filter: name={0} id={1}",
+                            filter.Name,
+                            filterId);
+                    }
+            
+                    private static void OnNotification(EventArgs e)
+                    {
+                        var castedEventArgs = (FabricClient.ServiceManagementClient.ServiceNotificationEventArgs)e;
+            
+                        var notification = castedEventArgs.Notification;
+            
+                        Console.WriteLine(
+                            "[{0}] received notification for service '{1}'",
+                            DateTime.UtcNow,
+                            notification.ServiceName);
+                    }
+                }
+            }
+            </code></example>
       </Docs>
     </Member>
     <Member MemberName="UnregisterServiceNotificationFilterAsync">
