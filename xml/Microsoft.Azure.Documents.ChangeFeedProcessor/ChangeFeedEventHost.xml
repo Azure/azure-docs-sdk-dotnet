@@ -4,6 +4,7 @@
   <TypeSignature Language="DocId" Value="T:Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.Azure.Documents.ChangeFeedProcessor</AssemblyName>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <AssemblyVersion>1.17.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
@@ -168,6 +169,53 @@
             }
             ]]></code>
     </example>
+    <example>
+      <code language="c#"><![CDATA[
+            class DocumentFeedObserver : IChangeFeedObserver
+            {
+                private static int s_totalDocs = 0;
+                public Task OpenAsync(ChangeFeedObserverContext context)
+                {
+                    Console.WriteLine("Worker opened, {0}", context.PartitionKeyRangeId);
+                    return Task.CompletedTask;  // Requires targeting .NET 4.6+.
+                }
+                public Task CloseAsync(ChangeFeedObserverContext context, ChangeFeedObserverCloseReason reason)
+                {
+                    Console.WriteLine("Worker closed, {0}", context.PartitionKeyRangeId);
+                    return Task.CompletedTask;
+                }
+                public Task ProcessChangesAsync(ChangeFeedObserverContext context, IReadOnlyList<Document> docs)
+                {
+                    Console.WriteLine("Change feed: total {0} doc(s)", Interlocked.Add(ref s_totalDocs, docs.Count));
+                    return Task.CompletedTask;
+                }
+            }
+            static async Task StartChangeFeedHost()
+            {
+                string hostName = Guid.NewGuid().ToString();
+                DocumentCollectionInfo documentCollectionLocation = new DocumentCollectionInfo
+                {
+                    Uri = new Uri("https://YOUR_SERVICE.documents.azure.com:443/"),
+                    MasterKey = "YOUR_SECRET_KEY==",
+                    DatabaseName = "db1",
+                    CollectionName = "documents"
+                };
+                DocumentCollectionInfo leaseCollectionLocation = new DocumentCollectionInfo
+                {
+                    Uri = new Uri("https://YOUR_SERVICE.documents.azure.com:443/"),
+                    MasterKey = "YOUR_SECRET_KEY==",
+                    DatabaseName = "db1",
+                    CollectionName = "leases"
+                };
+                Console.WriteLine("Main program: Creating ChangeFeedEventHost...");
+                ChangeFeedEventHost host = new ChangeFeedEventHost(hostName, documentCollectionLocation, leaseCollectionLocation);
+                await host.RegisterObserverAsync<DocumentFeedObserver>();
+                Console.WriteLine("Main program: press Enter to stop...");
+                Console.ReadLine();
+                await host.UnregisterObserversAsync();
+            }
+            ]]></code>
+    </example>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -177,6 +225,7 @@
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Documents.ChangeFeedProcessor</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <AssemblyVersion>1.17.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
@@ -201,6 +250,7 @@
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Documents.ChangeFeedProcessor</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <AssemblyVersion>1.17.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
@@ -229,14 +279,12 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Documents.ChangeFeedProcessor</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <AssemblyVersion>1.17.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Diagnostics.DebuggerStepThrough</AttributeName>
-        </Attribute>
-        <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost/&lt;GetEstimatedRemainingWork&gt;d__a))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost/&lt;GetEstimatedRemainingWork&gt;d__26))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -258,6 +306,7 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Documents.ChangeFeedProcessor</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <AssemblyVersion>1.17.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -276,14 +325,12 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Documents.ChangeFeedProcessor</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <AssemblyVersion>1.17.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Diagnostics.DebuggerStepThrough</AttributeName>
-        </Attribute>
-        <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost/&lt;RegisterObserverAsync&gt;d__0`1))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost/&lt;RegisterObserverAsync&gt;d__23`1))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -313,14 +360,12 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Documents.ChangeFeedProcessor</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <AssemblyVersion>1.17.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Diagnostics.DebuggerStepThrough</AttributeName>
-        </Attribute>
-        <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost/&lt;RegisterObserverFactoryAsync&gt;d__3))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost/&lt;RegisterObserverFactoryAsync&gt;d__24))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -346,14 +391,12 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Documents.ChangeFeedProcessor</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <AssemblyVersion>1.17.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Diagnostics.DebuggerStepThrough</AttributeName>
-        </Attribute>
-        <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost/&lt;UnregisterObserversAsync&gt;d__6))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost/&lt;UnregisterObserversAsync&gt;d__25))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
