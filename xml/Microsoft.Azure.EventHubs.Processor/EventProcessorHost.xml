@@ -2,16 +2,20 @@
   <TypeSignature Language="C#" Value="public sealed class EventProcessorHost" />
   <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit EventProcessorHost extends System.Object" />
   <TypeSignature Language="DocId" Value="T:Microsoft.Azure.EventHubs.Processor.EventProcessorHost" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class EventProcessorHost" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.Azure.EventHubs.Processor</AssemblyName>
     <AssemblyVersion>1.0.1.0</AssemblyVersion>
+    <AssemblyVersion>1.0.3.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
+    <summary>
+            Represents a host for processing Event Hubs event data.
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -19,10 +23,12 @@
       <MemberSignature Language="C#" Value="public EventProcessorHost (string eventHubPath, string consumerGroupName, string eventHubConnectionString, string storageConnectionString, string leaseContainerName);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string eventHubPath, string consumerGroupName, string eventHubConnectionString, string storageConnectionString, string leaseContainerName) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.EventHubs.Processor.EventProcessorHost.#ctor(System.String,System.String,System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (eventHubPath As String, consumerGroupName As String, eventHubConnectionString As String, storageConnectionString As String, leaseContainerName As String)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.EventHubs.Processor</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.0.3.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="eventHubPath" Type="System.String" />
@@ -32,12 +38,23 @@
         <Parameter Name="leaseContainerName" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="eventHubPath">To be added.</param>
-        <param name="consumerGroupName">To be added.</param>
-        <param name="eventHubConnectionString">To be added.</param>
-        <param name="storageConnectionString">To be added.</param>
-        <param name="leaseContainerName">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="eventHubPath">The name of the EventHub.</param>
+        <param name="consumerGroupName">The name of the consumer group within the Event Hub.</param>
+        <param name="eventHubConnectionString">Connection string for the Event Hub to receive from.</param>
+        <param name="storageConnectionString">Connection string to Azure Storage account used for leases and checkpointing.</param>
+        <param name="leaseContainerName">Azure Storage container name for use by built-in lease and checkpoint manager.</param>
+        <summary>
+             Create a new host to process events from an Event Hub.
+             
+             <para>Since Event Hubs are frequently used for scale-out, high-traffic scenarios, generally there will
+             be only one host per process, and the processes will be run on separate machines. However, it is
+             supported to run multiple hosts on one machine, or even within one process, if throughput is not
+             a concern.</para>
+            
+             This overload of the constructor uses the default, built-in lease and checkpoint managers. The
+             Azure Storage account specified by the storageConnectionString parameter is used by the built-in
+             managers to record leases and checkpoints.
+             </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -45,10 +62,12 @@
       <MemberSignature Language="C#" Value="public EventProcessorHost (string hostName, string eventHubPath, string consumerGroupName, string eventHubConnectionString, Microsoft.Azure.EventHubs.Processor.ICheckpointManager checkpointManager, Microsoft.Azure.EventHubs.Processor.ILeaseManager leaseManager);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string hostName, string eventHubPath, string consumerGroupName, string eventHubConnectionString, class Microsoft.Azure.EventHubs.Processor.ICheckpointManager checkpointManager, class Microsoft.Azure.EventHubs.Processor.ILeaseManager leaseManager) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.EventHubs.Processor.EventProcessorHost.#ctor(System.String,System.String,System.String,System.String,Microsoft.Azure.EventHubs.Processor.ICheckpointManager,Microsoft.Azure.EventHubs.Processor.ILeaseManager)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (hostName As String, eventHubPath As String, consumerGroupName As String, eventHubConnectionString As String, checkpointManager As ICheckpointManager, leaseManager As ILeaseManager)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.EventHubs.Processor</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.0.3.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="hostName" Type="System.String" />
@@ -59,13 +78,19 @@
         <Parameter Name="leaseManager" Type="Microsoft.Azure.EventHubs.Processor.ILeaseManager" />
       </Parameters>
       <Docs>
-        <param name="hostName">To be added.</param>
-        <param name="eventHubPath">To be added.</param>
-        <param name="consumerGroupName">To be added.</param>
-        <param name="eventHubConnectionString">To be added.</param>
-        <param name="checkpointManager">To be added.</param>
-        <param name="leaseManager">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="hostName">Name of the processor host. MUST BE UNIQUE. Strongly recommend including a Guid to ensure uniqueness.</param>
+        <param name="eventHubPath">The name of the EventHub.</param>
+        <param name="consumerGroupName">The name of the consumer group within the Event Hub.</param>
+        <param name="eventHubConnectionString">Connection string for the Event Hub to receive from.</param>
+        <param name="checkpointManager">Object implementing ICheckpointManager which handles partition checkpointing.</param>
+        <param name="leaseManager">Object implementing ILeaseManager which handles leases for partitions.</param>
+        <summary>
+            Create a new host to process events from an Event Hub.
+            
+            <para>This overload of the constructor allows maximum flexibility.
+            This one allows the caller to specify the name of the processor host as well.
+            The overload also allows the caller to provide their own lease and checkpoint managers to replace the built-in
+            ones based on Azure Storage.</para></summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -73,10 +98,12 @@
       <MemberSignature Language="C#" Value="public EventProcessorHost (string hostName, string eventHubPath, string consumerGroupName, string eventHubConnectionString, string storageConnectionString, string leaseContainerName, string storageBlobPrefix = null);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string hostName, string eventHubPath, string consumerGroupName, string eventHubConnectionString, string storageConnectionString, string leaseContainerName, string storageBlobPrefix) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.EventHubs.Processor.EventProcessorHost.#ctor(System.String,System.String,System.String,System.String,System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (hostName As String, eventHubPath As String, consumerGroupName As String, eventHubConnectionString As String, storageConnectionString As String, leaseContainerName As String, Optional storageBlobPrefix As String = null)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.EventHubs.Processor</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.0.3.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="hostName" Type="System.String" />
@@ -88,14 +115,17 @@
         <Parameter Name="storageBlobPrefix" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="hostName">To be added.</param>
-        <param name="eventHubPath">To be added.</param>
-        <param name="consumerGroupName">To be added.</param>
-        <param name="eventHubConnectionString">To be added.</param>
-        <param name="storageConnectionString">To be added.</param>
-        <param name="leaseContainerName">To be added.</param>
-        <param name="storageBlobPrefix">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="hostName">A name for this event processor host. See method notes.</param>
+        <param name="eventHubPath">The name of the EventHub.</param>
+        <param name="consumerGroupName">The name of the consumer group within the Event Hub.</param>
+        <param name="eventHubConnectionString">Connection string for the Event Hub to receive from.</param>
+        <param name="storageConnectionString">Connection string to Azure Storage account used for leases and checkpointing.</param>
+        <param name="leaseContainerName">Azure Storage container name for use by built-in lease and checkpoint manager.</param>
+        <param name="storageBlobPrefix">Prefix used when naming blobs within the storage container.</param>
+        <summary>
+            Create a new host to process events from an Event Hub.
+            
+            <para>This overload of the constructor uses the default, built-in lease and checkpoint managers.</para></summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -103,16 +133,20 @@
       <MemberSignature Language="C#" Value="public string ConsumerGroupName { get; }" />
       <MemberSignature Language="ILAsm" Value=".property instance string ConsumerGroupName" />
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.EventHubs.Processor.EventProcessorHost.ConsumerGroupName" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ConsumerGroupName As String" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.EventHubs.Processor</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.0.3.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the consumer group name.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -121,16 +155,20 @@
       <MemberSignature Language="C#" Value="public string EventHubPath { get; }" />
       <MemberSignature Language="ILAsm" Value=".property instance string EventHubPath" />
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.EventHubs.Processor.EventProcessorHost.EventHubPath" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property EventHubPath As String" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.EventHubs.Processor</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.0.3.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the event hub path.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -139,16 +177,21 @@
       <MemberSignature Language="C#" Value="public string HostName { get; }" />
       <MemberSignature Language="ILAsm" Value=".property instance string HostName" />
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.EventHubs.Processor.EventProcessorHost.HostName" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property HostName As String" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.EventHubs.Processor</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.0.3.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Returns processor host name.
+            If the processor host name was automatically generated, this is the only way to get it.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -157,10 +200,12 @@
       <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task RegisterEventProcessorAsync&lt;T&gt; () where T : Microsoft.Azure.EventHubs.Processor.IEventProcessornew();" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task RegisterEventProcessorAsync&lt;.ctor (class Microsoft.Azure.EventHubs.Processor.IEventProcessor) T&gt;() cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.EventHubs.Processor.EventProcessorHost.RegisterEventProcessorAsync``1" />
+      <MemberSignature Language="VB.NET" Value="Public Function RegisterEventProcessorAsync(Of T As {IEventProcessorNew}) () As Task" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.EventHubs.Processor</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.0.3.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -175,9 +220,12 @@
       </TypeParameters>
       <Parameters />
       <Docs>
-        <typeparam name="T">To be added.</typeparam>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <typeparam name="T">Implementation of your application specific <see cref="T:Microsoft.Azure.EventHubs.Processor.IEventProcessor" />.</typeparam>
+        <summary>
+            This registers <see cref="T:Microsoft.Azure.EventHubs.Processor.IEventProcessor" /> implementation with the host using <see cref="T:Microsoft.Azure.EventHubs.Processor.DefaultEventProcessorFactory`1" />.  
+            This also starts the host and causes it to start participating in the partition distribution process.
+            </summary>
+        <returns>A task to indicate EventProcessorHost instance is started.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -185,10 +233,12 @@
       <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task RegisterEventProcessorAsync&lt;T&gt; (Microsoft.Azure.EventHubs.Processor.EventProcessorOptions processorOptions) where T : Microsoft.Azure.EventHubs.Processor.IEventProcessornew();" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task RegisterEventProcessorAsync&lt;.ctor (class Microsoft.Azure.EventHubs.Processor.IEventProcessor) T&gt;(class Microsoft.Azure.EventHubs.Processor.EventProcessorOptions processorOptions) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.EventHubs.Processor.EventProcessorHost.RegisterEventProcessorAsync``1(Microsoft.Azure.EventHubs.Processor.EventProcessorOptions)" />
+      <MemberSignature Language="VB.NET" Value="Public Function RegisterEventProcessorAsync(Of T As {IEventProcessorNew}) (processorOptions As EventProcessorOptions) As Task" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.EventHubs.Processor</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.0.3.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -205,10 +255,15 @@
         <Parameter Name="processorOptions" Type="Microsoft.Azure.EventHubs.Processor.EventProcessorOptions" />
       </Parameters>
       <Docs>
-        <typeparam name="T">To be added.</typeparam>
-        <param name="processorOptions">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <typeparam name="T">Implementation of your application specific <see cref="T:Microsoft.Azure.EventHubs.Processor.IEventProcessor" />.</typeparam>
+        <param name="processorOptions">
+          <see cref="P:Microsoft.Azure.EventHubs.Processor.EventProcessorHost.EventProcessorOptions" /> to control various aspects of message pump created when ownership 
+            is acquired for a particular partition of EventHub.</param>
+        <summary>
+            This registers <see cref="T:Microsoft.Azure.EventHubs.Processor.IEventProcessor" /> implementation with the host using <see cref="T:Microsoft.Azure.EventHubs.Processor.DefaultEventProcessorFactory`1" />.  
+            This also starts the host and causes it to start participating in the partition distribution process.
+            </summary>
+        <returns>A task to indicate EventProcessorHost instance is started.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -216,10 +271,12 @@
       <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task RegisterEventProcessorFactoryAsync (Microsoft.Azure.EventHubs.Processor.IEventProcessorFactory factory);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task RegisterEventProcessorFactoryAsync(class Microsoft.Azure.EventHubs.Processor.IEventProcessorFactory factory) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.EventHubs.Processor.EventProcessorHost.RegisterEventProcessorFactoryAsync(Microsoft.Azure.EventHubs.Processor.IEventProcessorFactory)" />
+      <MemberSignature Language="VB.NET" Value="Public Function RegisterEventProcessorFactoryAsync (factory As IEventProcessorFactory) As Task" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.EventHubs.Processor</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.0.3.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -228,9 +285,13 @@
         <Parameter Name="factory" Type="Microsoft.Azure.EventHubs.Processor.IEventProcessorFactory" />
       </Parameters>
       <Docs>
-        <param name="factory">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="factory">Instance of <see cref="T:Microsoft.Azure.EventHubs.Processor.IEventProcessorFactory" /> implementation.</param>
+        <summary>
+            This registers <see cref="T:Microsoft.Azure.EventHubs.Processor.IEventProcessorFactory" /> implementation with the host which is used to create an instance of 
+            <see cref="T:Microsoft.Azure.EventHubs.Processor.IEventProcessor" /> when it takes ownership of a partition.  This also starts the host and causes it to start participating 
+            in the partition distribution process.
+            </summary>
+        <returns>A task to indicate EventProcessorHost instance is started.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -238,10 +299,12 @@
       <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task RegisterEventProcessorFactoryAsync (Microsoft.Azure.EventHubs.Processor.IEventProcessorFactory factory, Microsoft.Azure.EventHubs.Processor.EventProcessorOptions processorOptions);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task RegisterEventProcessorFactoryAsync(class Microsoft.Azure.EventHubs.Processor.IEventProcessorFactory factory, class Microsoft.Azure.EventHubs.Processor.EventProcessorOptions processorOptions) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.EventHubs.Processor.EventProcessorHost.RegisterEventProcessorFactoryAsync(Microsoft.Azure.EventHubs.Processor.IEventProcessorFactory,Microsoft.Azure.EventHubs.Processor.EventProcessorOptions)" />
+      <MemberSignature Language="VB.NET" Value="Public Function RegisterEventProcessorFactoryAsync (factory As IEventProcessorFactory, processorOptions As EventProcessorOptions) As Task" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.EventHubs.Processor</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.0.3.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -256,10 +319,16 @@
         <Parameter Name="processorOptions" Type="Microsoft.Azure.EventHubs.Processor.EventProcessorOptions" />
       </Parameters>
       <Docs>
-        <param name="factory">To be added.</param>
-        <param name="processorOptions">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="factory">Instance of <see cref="T:Microsoft.Azure.EventHubs.Processor.IEventProcessorFactory" /> implementation.</param>
+        <param name="processorOptions">
+          <see cref="P:Microsoft.Azure.EventHubs.Processor.EventProcessorHost.EventProcessorOptions" /> to control various aspects of message pump created when ownership 
+            is acquired for a particular partition of EventHub.</param>
+        <summary>
+            This registers <see cref="T:Microsoft.Azure.EventHubs.Processor.IEventProcessorFactory" /> implementation with the host which is used to create an instance of 
+            <see cref="T:Microsoft.Azure.EventHubs.Processor.IEventProcessor" /> when it takes ownership of a partition.  This also starts the host and causes it to start participating 
+            in the partition distribution process.
+            </summary>
+        <returns>A task to indicate EventProcessorHost instance is started.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -267,10 +336,12 @@
       <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task UnregisterEventProcessorAsync ();" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task UnregisterEventProcessorAsync() cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.EventHubs.Processor.EventProcessorHost.UnregisterEventProcessorAsync" />
+      <MemberSignature Language="VB.NET" Value="Public Function UnregisterEventProcessorAsync () As Task" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.EventHubs.Processor</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.0.3.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -282,8 +353,10 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>
+            Stop processing events.  Does not return until the shutdown is complete.
+            </summary>
+        <returns />
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
