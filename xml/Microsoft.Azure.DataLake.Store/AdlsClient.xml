@@ -13,7 +13,11 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
+    <summary>
+            Client of Azure data lake store. It contains the public APIs to perform operations of REST API which are easier to call and more usable than Core APIs. Core APIs provide more freedom but ADLSClient provide more commonly used forms.
+            It encapsulates the Authorization token and token refresh. Contains factory methods that takes a ServiceClientCredential or a string auth token and returns instance of this class. For every operation it provides
+            a async and sync version. Every sync method is a wait on async method with exception of Create and Concurrent append. Currently this class is not inheritable since it has not exposed constructors.
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -32,7 +36,9 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Azure data lake store account name including full domain name
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -55,16 +61,18 @@
         <Parameter Name="suffix" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="suffix">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="suffix">User Agent suffix</param>
+        <summary>
+            Adds the user agent suffix
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="BulkDownload">
-      <MemberSignature Language="C#" Value="public Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus BulkDownload (string srcPath, string destPath, int numThreads = -1, Microsoft.Azure.DataLake.Store.IfExists shouldOverwrite = Microsoft.Azure.DataLake.Store.IfExists.Overwrite, IProgress&lt;Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus&gt; progressTracker = null, bool notRecurse = false);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus BulkDownload(string srcPath, string destPath, int32 numThreads, valuetype Microsoft.Azure.DataLake.Store.IfExists shouldOverwrite, class System.IProgress`1&lt;class Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus&gt; progressTracker, bool notRecurse) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.DataLake.Store.AdlsClient.BulkDownload(System.String,System.String,System.Int32,Microsoft.Azure.DataLake.Store.IfExists,System.IProgress{Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus},System.Boolean)" />
-      <MemberSignature Language="VB.NET" Value="Public Function BulkDownload (srcPath As String, destPath As String, Optional numThreads As Integer = -1, Optional shouldOverwrite As IfExists = Microsoft.Azure.DataLake.Store.IfExists.Overwrite, Optional progressTracker As IProgress(Of TransferStatus) = null, Optional notRecurse As Boolean = false) As TransferStatus" />
+      <MemberSignature Language="C#" Value="public virtual Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus BulkDownload (string srcPath, string destPath, int numThreads = -1, Microsoft.Azure.DataLake.Store.IfExists shouldOverwrite = Microsoft.Azure.DataLake.Store.IfExists.Overwrite, IProgress&lt;Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus&gt; progressTracker = null, bool notRecurse = false, bool resume = false, System.Threading.CancellationToken cancelToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus BulkDownload(string srcPath, string destPath, int32 numThreads, valuetype Microsoft.Azure.DataLake.Store.IfExists shouldOverwrite, class System.IProgress`1&lt;class Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus&gt; progressTracker, bool notRecurse, bool resume, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.DataLake.Store.AdlsClient.BulkDownload(System.String,System.String,System.Int32,Microsoft.Azure.DataLake.Store.IfExists,System.IProgress{Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus},System.Boolean,System.Boolean,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function BulkDownload (srcPath As String, destPath As String, Optional numThreads As Integer = -1, Optional shouldOverwrite As IfExists = Microsoft.Azure.DataLake.Store.IfExists.Overwrite, Optional progressTracker As IProgress(Of TransferStatus) = null, Optional notRecurse As Boolean = false, Optional resume As Boolean = false, Optional cancelToken As CancellationToken = null) As TransferStatus" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.DataLake.Store</AssemblyName>
@@ -80,24 +88,31 @@
         <Parameter Name="shouldOverwrite" Type="Microsoft.Azure.DataLake.Store.IfExists" />
         <Parameter Name="progressTracker" Type="System.IProgress&lt;Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus&gt;" />
         <Parameter Name="notRecurse" Type="System.Boolean" />
+        <Parameter Name="resume" Type="System.Boolean" />
+        <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="srcPath">To be added.</param>
-        <param name="destPath">To be added.</param>
-        <param name="numThreads">To be added.</param>
-        <param name="shouldOverwrite">To be added.</param>
-        <param name="progressTracker">To be added.</param>
-        <param name="notRecurse">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="srcPath">Remote source path</param>
+        <param name="destPath">Local destination path. It should always be a directory.</param>
+        <param name="numThreads">Number of threads- if not passed will take default number of threads (8 times the number of physical cores)</param>
+        <param name="shouldOverwrite">Whether to overwrite or skip if the destination exists</param>
+        <param name="progressTracker">Progresstracker to track progress of file transfer</param>
+        <param name="notRecurse">If true then does an enumeration till level one else does recursive enumeration</param>
+        <param name="resume">If true then we want to resume from last transfer</param>
+        <param name="cancelToken">Cancel token</param>
+        <summary>
+            Download directory or file from remote server to local. Transfers the contents under source directory under 
+            the destination directory. Transfers the source file and saves it as the destination path.
+            </summary>
+        <returns>Transfer status encapsulating the details of download</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="BulkUpload">
-      <MemberSignature Language="C#" Value="public Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus BulkUpload (string srcPath, string destPath, int numThreads = -1, Microsoft.Azure.DataLake.Store.IfExists shouldOverwrite = Microsoft.Azure.DataLake.Store.IfExists.Overwrite, IProgress&lt;Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus&gt; progressTracker = null, bool notRecurse = false);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus BulkUpload(string srcPath, string destPath, int32 numThreads, valuetype Microsoft.Azure.DataLake.Store.IfExists shouldOverwrite, class System.IProgress`1&lt;class Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus&gt; progressTracker, bool notRecurse) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.DataLake.Store.AdlsClient.BulkUpload(System.String,System.String,System.Int32,Microsoft.Azure.DataLake.Store.IfExists,System.IProgress{Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus},System.Boolean)" />
-      <MemberSignature Language="VB.NET" Value="Public Function BulkUpload (srcPath As String, destPath As String, Optional numThreads As Integer = -1, Optional shouldOverwrite As IfExists = Microsoft.Azure.DataLake.Store.IfExists.Overwrite, Optional progressTracker As IProgress(Of TransferStatus) = null, Optional notRecurse As Boolean = false) As TransferStatus" />
+      <MemberSignature Language="C#" Value="public virtual Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus BulkUpload (string srcPath, string destPath, int numThreads = -1, Microsoft.Azure.DataLake.Store.IfExists shouldOverwrite = Microsoft.Azure.DataLake.Store.IfExists.Overwrite, IProgress&lt;Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus&gt; progressTracker = null, bool notRecurse = false, bool resume = false, bool isBinary = false, System.Threading.CancellationToken cancelToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus BulkUpload(string srcPath, string destPath, int32 numThreads, valuetype Microsoft.Azure.DataLake.Store.IfExists shouldOverwrite, class System.IProgress`1&lt;class Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus&gt; progressTracker, bool notRecurse, bool resume, bool isBinary, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.DataLake.Store.AdlsClient.BulkUpload(System.String,System.String,System.Int32,Microsoft.Azure.DataLake.Store.IfExists,System.IProgress{Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus},System.Boolean,System.Boolean,System.Boolean,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function BulkUpload (srcPath As String, destPath As String, Optional numThreads As Integer = -1, Optional shouldOverwrite As IfExists = Microsoft.Azure.DataLake.Store.IfExists.Overwrite, Optional progressTracker As IProgress(Of TransferStatus) = null, Optional notRecurse As Boolean = false, Optional resume As Boolean = false, Optional isBinary As Boolean = false, Optional cancelToken As CancellationToken = null) As TransferStatus" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.DataLake.Store</AssemblyName>
@@ -113,16 +128,56 @@
         <Parameter Name="shouldOverwrite" Type="Microsoft.Azure.DataLake.Store.IfExists" />
         <Parameter Name="progressTracker" Type="System.IProgress&lt;Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus&gt;" />
         <Parameter Name="notRecurse" Type="System.Boolean" />
+        <Parameter Name="resume" Type="System.Boolean" />
+        <Parameter Name="isBinary" Type="System.Boolean" />
+        <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="srcPath">To be added.</param>
-        <param name="destPath">To be added.</param>
-        <param name="numThreads">To be added.</param>
-        <param name="shouldOverwrite">To be added.</param>
-        <param name="progressTracker">To be added.</param>
-        <param name="notRecurse">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="srcPath">Local source path</param>
+        <param name="destPath">Remote destination path - It should always be a directory.</param>
+        <param name="numThreads">Number of threads- if not passed will take default number of threads (8 times the number of physical cores)</param>
+        <param name="shouldOverwrite">Whether to overwrite or skip if the destination exists</param>
+        <param name="progressTracker">Progresstracker to track progress of file transfer</param>
+        <param name="notRecurse">If true then does an enumeration till level one else does recursive enumeration</param>
+        <param name="resume">If true then we want to resume from last transfer</param>
+        <param name="isBinary">If false then writes files to data lake at newline boundaries. If true, then this is not guranteed but the upload will be faster.</param>
+        <param name="cancelToken">Cancellation token</param>
+        <summary>
+            Upload directory or file from local to remote. Transfers the contents under source directory under 
+            the destination directory. Transfers the source file and saves it as the destination path.
+            </summary>
+        <returns>Transfer Status encapsulating the details of upload</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ChangeAcl">
+      <MemberSignature Language="C#" Value="public Microsoft.Azure.DataLake.Store.AclTools.AclProcessorStats ChangeAcl (string path, System.Collections.Generic.List&lt;Microsoft.Azure.DataLake.Store.Acl.AclEntry&gt; aclEntries, Microsoft.Azure.DataLake.Store.AclTools.RequestedAclType type, int threadCount = -1);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Azure.DataLake.Store.AclTools.AclProcessorStats ChangeAcl(string path, class System.Collections.Generic.List`1&lt;class Microsoft.Azure.DataLake.Store.Acl.AclEntry&gt; aclEntries, valuetype Microsoft.Azure.DataLake.Store.AclTools.RequestedAclType type, int32 threadCount) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.DataLake.Store.AdlsClient.ChangeAcl(System.String,System.Collections.Generic.List{Microsoft.Azure.DataLake.Store.Acl.AclEntry},Microsoft.Azure.DataLake.Store.AclTools.RequestedAclType,System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Function ChangeAcl (path As String, aclEntries As List(Of AclEntry), type As RequestedAclType, Optional threadCount As Integer = -1) As AclProcessorStats" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.DataLake.Store</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Azure.DataLake.Store.AclTools.AclProcessorStats</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="path" Type="System.String" />
+        <Parameter Name="aclEntries" Type="System.Collections.Generic.List&lt;Microsoft.Azure.DataLake.Store.Acl.AclEntry&gt;" />
+        <Parameter Name="type" Type="Microsoft.Azure.DataLake.Store.AclTools.RequestedAclType" />
+        <Parameter Name="threadCount" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="path">The root directory path from where the Acl change will begin</param>
+        <param name="aclEntries">Acl entries to add or set or remove depending on the input</param>
+        <param name="type">Type of modification <see cref="T:Microsoft.Azure.DataLake.Store.AclTools.RequestedAclType" /></param>
+        <param name="threadCount">Number of threads to use</param>
+        <summary>
+            Change Acl (Modify, set and remove) recursively on a directory tree
+            </summary>
+        <returns>Stats- total number of files and directories processed</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -146,11 +201,13 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="rwx">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="path">Path of the file or directory</param>
+        <param name="rwx">Permission to check in "rwx" string form. For example if the user wants to see if it has read, execute permission, the string would be r-x </param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Checks if the user/group has specified access of the given path
+            </summary>
+        <returns>True if client has access to the path else false</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -167,7 +224,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;CheckAccessAsync&gt;d__58))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;CheckAccessAsync&gt;d__59))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -179,11 +236,13 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="rwx">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="path">Path of the file or directory</param>
+        <param name="rwx">Permission to check in "rwx" string form. For example if the user wants to see if it has read, execute permission, the string would be r-x </param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Asynchronously checks if the user/group has specified access of the given path
+            </summary>
+        <returns>True if client has access to the path else false</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -205,9 +264,11 @@
         <Parameter Name="path" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="path">Path name</param>
+        <summary>
+            Checks whether file or directory exists
+            </summary>
+        <returns>True if the path exists else false</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -226,16 +287,18 @@
         <ReturnType>System.Int64</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Client object ID
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="ConcatenateFiles">
-      <MemberSignature Language="C#" Value="public void ConcatenateFiles (string destination, System.Collections.Generic.List&lt;string&gt; concatFiles, bool deleteSource = false, System.Threading.CancellationToken cancelToken = null);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void ConcatenateFiles(string destination, class System.Collections.Generic.List`1&lt;string&gt; concatFiles, bool deleteSource, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual void ConcatenateFiles (string destination, System.Collections.Generic.List&lt;string&gt; concatFiles, bool deleteSource = false, System.Threading.CancellationToken cancelToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void ConcatenateFiles(string destination, class System.Collections.Generic.List`1&lt;string&gt; concatFiles, bool deleteSource, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.DataLake.Store.AdlsClient.ConcatenateFiles(System.String,System.Collections.Generic.List{System.String},System.Boolean,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Sub ConcatenateFiles (destination As String, concatFiles As List(Of String), Optional deleteSource As Boolean = false, Optional cancelToken As CancellationToken = null)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Sub ConcatenateFiles (destination As String, concatFiles As List(Of String), Optional deleteSource As Boolean = false, Optional cancelToken As CancellationToken = null)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.DataLake.Store</AssemblyName>
@@ -252,11 +315,13 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="destination">To be added.</param>
-        <param name="concatFiles">To be added.</param>
-        <param name="deleteSource">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="destination">Path of the destination</param>
+        <param name="concatFiles">List containing paths of the source files</param>
+        <param name="deleteSource">If true then deletes the source directory if all the files under it are concatenated</param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Synchronous API to concatenate source files to a destination file
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -273,7 +338,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;ConcatenateFilesAsync&gt;d__52))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;ConcatenateFilesAsync&gt;d__53))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -286,11 +351,13 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="destination">To be added.</param>
-        <param name="concatFiles">To be added.</param>
-        <param name="deleteSource">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="destination">Path of the destination</param>
+        <param name="concatFiles">List containing paths of the source files</param>
+        <param name="deleteSource">If true then deletes the source directory if all the files under it are concatenated</param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Asynchronous API to concatenate source files to a destination file
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -317,12 +384,14 @@
         <Parameter Name="length" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="autoCreate">To be added.</param>
-        <param name="dataBytes">To be added.</param>
-        <param name="offset">To be added.</param>
-        <param name="length">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of the file</param>
+        <param name="autoCreate"></param>
+        <param name="dataBytes">Array of bytes to write to the file</param>
+        <param name="offset">Offset in the byte array</param>
+        <param name="length">Number of bytes to write from the offset</param>
+        <summary>
+            Synchronous API to perform concurrent append at server. The offset at which append will occur is determined by server.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -339,7 +408,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;ConcurrentAppendAsync&gt;d__77))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;ConcurrentAppendAsync&gt;d__78))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -354,13 +423,15 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="autoCreate">To be added.</param>
-        <param name="dataBytes">To be added.</param>
-        <param name="offset">To be added.</param>
-        <param name="length">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of the file</param>
+        <param name="autoCreate"></param>
+        <param name="dataBytes">Array of bytes to write to the file</param>
+        <param name="offset">Offset in the byte array</param>
+        <param name="length">Number of bytes to write from the offset</param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Asynchronous API to perform concurrent append at server. The offset at which append will occur is determined by server. Asynchronous operation.
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -384,10 +455,12 @@
         <Parameter Name="creds" Type="Microsoft.Rest.ServiceClientCredentials" />
       </Parameters>
       <Docs>
-        <param name="accountFqdn">To be added.</param>
-        <param name="creds">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="accountFqdn">Azure data lake store account name including full domain name  (e.g. contoso.azuredatalakestore.net)</param>
+        <param name="creds">Credentials that retrieves the Auth token</param>
+        <summary>
+            Factory method that returns a AdlsClient
+            </summary>
+        <returns>AdlsClient</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -410,18 +483,20 @@
         <Parameter Name="token" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="accountFqdn">To be added.</param>
-        <param name="token">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="accountFqdn">Azure data lake store account name including full domain name (e.g. contoso.azuredatalakestore.net)</param>
+        <param name="token">Full authorization Token e.g. Bearing: abcddsfere.....</param>
+        <summary>
+            Factory method that returns a AdlsClient
+            </summary>
+        <returns>AdlsClient</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateDirectory">
-      <MemberSignature Language="C#" Value="public bool CreateDirectory (string dirName, string octalPermission = null, System.Threading.CancellationToken cancelToken = null);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool CreateDirectory(string dirName, string octalPermission, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual bool CreateDirectory (string dirName, string octalPermission = null, System.Threading.CancellationToken cancelToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool CreateDirectory(string dirName, string octalPermission, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.DataLake.Store.AdlsClient.CreateDirectory(System.String,System.String,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Function CreateDirectory (dirName As String, Optional octalPermission As String = null, Optional cancelToken As CancellationToken = null) As Boolean" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateDirectory (dirName As String, Optional octalPermission As String = null, Optional cancelToken As CancellationToken = null) As Boolean" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.DataLake.Store</AssemblyName>
@@ -437,11 +512,13 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="dirName">To be added.</param>
-        <param name="octalPermission">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="dirName">Name of directory</param>
+        <param name="octalPermission">Octal permission</param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Synchronous API to create a directory
+            </summary>
+        <returns>true if it creates the directory else false</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -458,7 +535,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;CreateDirectoryAsync&gt;d__34))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;CreateDirectoryAsync&gt;d__35))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -470,19 +547,21 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="dirName">To be added.</param>
-        <param name="octalPermission">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="dirName">Name of directory</param>
+        <param name="octalPermission">Octal permission</param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Asynchronous API to create a directory
+            </summary>
+        <returns>true if it creates the directory else false</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateFile">
-      <MemberSignature Language="C#" Value="public Microsoft.Azure.DataLake.Store.AdlsOutputStream CreateFile (string filename, Microsoft.Azure.DataLake.Store.IfExists mode, string octalPermission = null, bool createParent = true);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Azure.DataLake.Store.AdlsOutputStream CreateFile(string filename, valuetype Microsoft.Azure.DataLake.Store.IfExists mode, string octalPermission, bool createParent) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual Microsoft.Azure.DataLake.Store.AdlsOutputStream CreateFile (string filename, Microsoft.Azure.DataLake.Store.IfExists mode, string octalPermission = null, bool createParent = true);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Azure.DataLake.Store.AdlsOutputStream CreateFile(string filename, valuetype Microsoft.Azure.DataLake.Store.IfExists mode, string octalPermission, bool createParent) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.DataLake.Store.AdlsClient.CreateFile(System.String,Microsoft.Azure.DataLake.Store.IfExists,System.String,System.Boolean)" />
-      <MemberSignature Language="VB.NET" Value="Public Function CreateFile (filename As String, mode As IfExists, Optional octalPermission As String = null, Optional createParent As Boolean = true) As AdlsOutputStream" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateFile (filename As String, mode As IfExists, Optional octalPermission As String = null, Optional createParent As Boolean = true) As AdlsOutputStream" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.DataLake.Store</AssemblyName>
@@ -499,12 +578,14 @@
         <Parameter Name="createParent" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="filename">To be added.</param>
-        <param name="mode">To be added.</param>
-        <param name="octalPermission">To be added.</param>
-        <param name="createParent">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="filename">File name</param>
+        <param name="mode">Overwrites the existing file if the mode is Overwrite</param>
+        <param name="octalPermission">Octal permission string</param>
+        <param name="createParent">If true creates any non-existing parent directories</param>
+        <summary>
+            Synchronous API that creates a file and returns the stream to write data to that file in ADLS
+            </summary>
+        <returns>Output stream</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -521,7 +602,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;CreateFileAsync&gt;d__42))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;CreateFileAsync&gt;d__43))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -535,21 +616,23 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="filename">To be added.</param>
-        <param name="mode">To be added.</param>
-        <param name="octalPermission">To be added.</param>
-        <param name="createParent">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="filename">File name</param>
+        <param name="mode">Overwrites the existing file if the mode is Overwrite</param>
+        <param name="octalPermission">Octal permission string, can be null</param>
+        <param name="createParent">If true creates any non-existing parent directories</param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Asynchronous API that creates a file and returns the stream to write data to that file in ADLS
+            </summary>
+        <returns>Output stream</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Delete">
-      <MemberSignature Language="C#" Value="public bool Delete (string path, System.Threading.CancellationToken cancelToken = null);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool Delete(string path, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual bool Delete (string path, System.Threading.CancellationToken cancelToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool Delete(string path, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.DataLake.Store.AdlsClient.Delete(System.String,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Function Delete (path As String, Optional cancelToken As CancellationToken = null) As Boolean" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function Delete (path As String, Optional cancelToken As CancellationToken = null) As Boolean" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.DataLake.Store</AssemblyName>
@@ -564,10 +647,12 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="path">Path of file or directory</param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Synchronous api to delete a file or directory. For directory it will only delete if it is empty.
+            </summary>
+        <returns>True if the path is deleted successfully else false</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -584,7 +669,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;DeleteAsync&gt;d__44))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;DeleteAsync&gt;d__45))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -595,18 +680,20 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="path">Path of file or directory</param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Asynchronous api to delete a file or directory. For directory it will only delete if it is empty.
+            </summary>
+        <returns>True if the path is deleted successfully else false</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="DeleteRecursive">
-      <MemberSignature Language="C#" Value="public bool DeleteRecursive (string path, System.Threading.CancellationToken cancelToken = null);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool DeleteRecursive(string path, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual bool DeleteRecursive (string path, System.Threading.CancellationToken cancelToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool DeleteRecursive(string path, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.DataLake.Store.AdlsClient.DeleteRecursive(System.String,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Function DeleteRecursive (path As String, Optional cancelToken As CancellationToken = null) As Boolean" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function DeleteRecursive (path As String, Optional cancelToken As CancellationToken = null) As Boolean" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.DataLake.Store</AssemblyName>
@@ -621,10 +708,12 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="path">Path of file or directory</param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Synchronous api to delete a file or directory recursively. If it is a non-empty directory then it deletes the sub-directories or files.
+            </summary>
+        <returns>True if the path is deleted successfully else false</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -641,7 +730,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;DeleteRecursiveAsync&gt;d__46))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;DeleteRecursiveAsync&gt;d__47))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -652,18 +741,20 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="path">Path of file or directory</param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Asynchronous api to delete a file or directory recursively
+            </summary>
+        <returns>True if the path is deleted successfully else false</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="EnumerateDirectory">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.DataLake.Store.DirectoryEntry&gt; EnumerateDirectory (string path, Microsoft.Azure.DataLake.Store.UserGroupRepresentation userIdFormat = Microsoft.Azure.DataLake.Store.UserGroupRepresentation.ObjectID, System.Threading.CancellationToken cancelToken = null);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.Generic.IEnumerable`1&lt;class Microsoft.Azure.DataLake.Store.DirectoryEntry&gt; EnumerateDirectory(string path, valuetype Microsoft.Azure.DataLake.Store.UserGroupRepresentation userIdFormat, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.DataLake.Store.DirectoryEntry&gt; EnumerateDirectory (string path, Microsoft.Azure.DataLake.Store.UserGroupRepresentation userIdFormat = Microsoft.Azure.DataLake.Store.UserGroupRepresentation.ObjectID, System.Threading.CancellationToken cancelToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Collections.Generic.IEnumerable`1&lt;class Microsoft.Azure.DataLake.Store.DirectoryEntry&gt; EnumerateDirectory(string path, valuetype Microsoft.Azure.DataLake.Store.UserGroupRepresentation userIdFormat, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.DataLake.Store.AdlsClient.EnumerateDirectory(System.String,Microsoft.Azure.DataLake.Store.UserGroupRepresentation,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Function EnumerateDirectory (path As String, Optional userIdFormat As UserGroupRepresentation = Microsoft.Azure.DataLake.Store.UserGroupRepresentation.ObjectID, Optional cancelToken As CancellationToken = null) As IEnumerable(Of DirectoryEntry)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function EnumerateDirectory (path As String, Optional userIdFormat As UserGroupRepresentation = Microsoft.Azure.DataLake.Store.UserGroupRepresentation.ObjectID, Optional cancelToken As CancellationToken = null) As IEnumerable(Of DirectoryEntry)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.DataLake.Store</AssemblyName>
@@ -679,19 +770,22 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="userIdFormat">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="path">Path of the directory</param>
+        <param name="userIdFormat">Way the user or group object will be represented</param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Returns a enumerable that enumerates the sub-directories or files contained in a directory.
+            By default listAfter and listBefore is empty and we enuerate all the directory entries.
+            </summary>
+        <returns>Enumerable that enumerates over the contents</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetAclStatus">
-      <MemberSignature Language="C#" Value="public Microsoft.Azure.DataLake.Store.Acl.AclStatus GetAclStatus (string path, Microsoft.Azure.DataLake.Store.UserGroupRepresentation userIdFormat = Microsoft.Azure.DataLake.Store.UserGroupRepresentation.ObjectID, System.Threading.CancellationToken cancelToken = null);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Azure.DataLake.Store.Acl.AclStatus GetAclStatus(string path, valuetype Microsoft.Azure.DataLake.Store.UserGroupRepresentation userIdFormat, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual Microsoft.Azure.DataLake.Store.Acl.AclStatus GetAclStatus (string path, Microsoft.Azure.DataLake.Store.UserGroupRepresentation userIdFormat = Microsoft.Azure.DataLake.Store.UserGroupRepresentation.ObjectID, System.Threading.CancellationToken cancelToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Azure.DataLake.Store.Acl.AclStatus GetAclStatus(string path, valuetype Microsoft.Azure.DataLake.Store.UserGroupRepresentation userIdFormat, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.DataLake.Store.AdlsClient.GetAclStatus(System.String,Microsoft.Azure.DataLake.Store.UserGroupRepresentation,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Function GetAclStatus (path As String, Optional userIdFormat As UserGroupRepresentation = Microsoft.Azure.DataLake.Store.UserGroupRepresentation.ObjectID, Optional cancelToken As CancellationToken = null) As AclStatus" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetAclStatus (path As String, Optional userIdFormat As UserGroupRepresentation = Microsoft.Azure.DataLake.Store.UserGroupRepresentation.ObjectID, Optional cancelToken As CancellationToken = null) As AclStatus" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.DataLake.Store</AssemblyName>
@@ -707,10 +801,12 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="userIdFormat">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of the file or directory</param>
+        <param name="userIdFormat">way to represent the user/group object</param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Gets the ACL entry list, owner ID, group ID, octal permission and sticky bit (only for a directory) of the file/directory
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -728,7 +824,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;GetAclStatusAsync&gt;d__74))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;GetAclStatusAsync&gt;d__75))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -740,19 +836,21 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="userIdFormat">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of the file or directory</param>
+        <param name="userIdFormat">way to represent the user/group object</param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Asynchronously gets the ACL entry list, owner ID, group ID, octal permission and sticky bit (only for a directory) of the file/directory
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetAppendStream">
-      <MemberSignature Language="C#" Value="public Microsoft.Azure.DataLake.Store.AdlsOutputStream GetAppendStream (string filename, System.Threading.CancellationToken cancelToken = null);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Azure.DataLake.Store.AdlsOutputStream GetAppendStream(string filename, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual Microsoft.Azure.DataLake.Store.AdlsOutputStream GetAppendStream (string filename, System.Threading.CancellationToken cancelToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Azure.DataLake.Store.AdlsOutputStream GetAppendStream(string filename, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.DataLake.Store.AdlsClient.GetAppendStream(System.String,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Function GetAppendStream (filename As String, Optional cancelToken As CancellationToken = null) As AdlsOutputStream" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetAppendStream (filename As String, Optional cancelToken As CancellationToken = null) As AdlsOutputStream" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.DataLake.Store</AssemblyName>
@@ -767,10 +865,12 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="filename">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="filename">File name</param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Synchronous API that returns the stream to write data to a file in ADLS
+            </summary>
+        <returns>Output stream</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -787,7 +887,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;GetAppendStreamAsync&gt;d__40))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;GetAppendStreamAsync&gt;d__41))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -798,10 +898,12 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="filename">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="filename">File name</param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Asynchronous API that returns the stream to write data to a file in ADLS
+            </summary>
+        <returns>Output stream</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -824,19 +926,21 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="numThreads">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of the directory or file</param>
+        <param name="numThreads">Number of threads</param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Gets content summary of a file or directory
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetDirectoryEntry">
-      <MemberSignature Language="C#" Value="public Microsoft.Azure.DataLake.Store.DirectoryEntry GetDirectoryEntry (string path, Microsoft.Azure.DataLake.Store.UserGroupRepresentation userIdFormat = Microsoft.Azure.DataLake.Store.UserGroupRepresentation.ObjectID, System.Threading.CancellationToken cancelToken = null);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Azure.DataLake.Store.DirectoryEntry GetDirectoryEntry(string path, valuetype Microsoft.Azure.DataLake.Store.UserGroupRepresentation userIdFormat, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual Microsoft.Azure.DataLake.Store.DirectoryEntry GetDirectoryEntry (string path, Microsoft.Azure.DataLake.Store.UserGroupRepresentation userIdFormat = Microsoft.Azure.DataLake.Store.UserGroupRepresentation.ObjectID, System.Threading.CancellationToken cancelToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Azure.DataLake.Store.DirectoryEntry GetDirectoryEntry(string path, valuetype Microsoft.Azure.DataLake.Store.UserGroupRepresentation userIdFormat, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.DataLake.Store.AdlsClient.GetDirectoryEntry(System.String,Microsoft.Azure.DataLake.Store.UserGroupRepresentation,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Function GetDirectoryEntry (path As String, Optional userIdFormat As UserGroupRepresentation = Microsoft.Azure.DataLake.Store.UserGroupRepresentation.ObjectID, Optional cancelToken As CancellationToken = null) As DirectoryEntry" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetDirectoryEntry (path As String, Optional userIdFormat As UserGroupRepresentation = Microsoft.Azure.DataLake.Store.UserGroupRepresentation.ObjectID, Optional cancelToken As CancellationToken = null) As DirectoryEntry" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.DataLake.Store</AssemblyName>
@@ -852,11 +956,13 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="userIdFormat">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="path">Path of file or directory</param>
+        <param name="userIdFormat">Way the user or group object will be represented</param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Synchronously gets meta data like full path, type (file or directory), group, user, permission, length,last Access Time,last Modified Time, expiry time, acl Bit, replication Factor
+            </summary>
+        <returns>Returns the metadata of the file or directory</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -873,7 +979,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;GetDirectoryEntryAsync&gt;d__50))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;GetDirectoryEntryAsync&gt;d__51))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -885,11 +991,13 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="uid">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="path">Path of file or directory</param>
+        <param name="uid">Way the user or group object will be represented</param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Asynchronously gets meta data like full path, type (file or directory), group, user, permission, length,last Access Time,last Modified Time, expiry time, acl Bit, replication Factor
+            </summary>
+        <returns>Returns the metadata of the file or directory</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -912,18 +1020,61 @@
         <Parameter Name="defaultMessage" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="resp">To be added.</param>
-        <param name="defaultMessage">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="resp">Response encapsulating errors or exceptions</param>
+        <param name="defaultMessage">Default message</param>
+        <summary>
+            Returns a ADLS Exception based on response from the server
+            </summary>
+        <returns>Adls Exception</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetFileProperties">
+      <MemberSignature Language="C#" Value="public void GetFileProperties (string path, bool getAclUsage, string dumpFileName, bool getDiskUsage = true, bool saveToLocal = true, int numThreads = -1, bool displayFiles = false, bool displayConsistentAcl = true, long maxDepth = 9223372036854775807);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void GetFileProperties(string path, bool getAclUsage, string dumpFileName, bool getDiskUsage, bool saveToLocal, int32 numThreads, bool displayFiles, bool displayConsistentAcl, int64 maxDepth) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.DataLake.Store.AdlsClient.GetFileProperties(System.String,System.Boolean,System.String,System.Boolean,System.Boolean,System.Int32,System.Boolean,System.Boolean,System.Int64)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub GetFileProperties (path As String, getAclUsage As Boolean, dumpFileName As String, Optional getDiskUsage As Boolean = true, Optional saveToLocal As Boolean = true, Optional numThreads As Integer = -1, Optional displayFiles As Boolean = false, Optional displayConsistentAcl As Boolean = true, Optional maxDepth As Long = 9223372036854775807)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.DataLake.Store</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="path" Type="System.String" />
+        <Parameter Name="getAclUsage" Type="System.Boolean" />
+        <Parameter Name="dumpFileName" Type="System.String" />
+        <Parameter Name="getDiskUsage" Type="System.Boolean" />
+        <Parameter Name="saveToLocal" Type="System.Boolean" />
+        <Parameter Name="numThreads" Type="System.Int32" />
+        <Parameter Name="displayFiles" Type="System.Boolean" />
+        <Parameter Name="displayConsistentAcl" Type="System.Boolean" />
+        <Parameter Name="maxDepth" Type="System.Int64" />
+      </Parameters>
+      <Docs>
+        <param name="path">Path of the file or directory</param>
+        <param name="getAclUsage">True if we want Acl usage</param>
+        <param name="dumpFileName">Filename containing the ACL or Disk usage dump</param>
+        <param name="getDiskUsage">True if we want disk usage</param>
+        <param name="saveToLocal">True if we want to save to local file else save to ADL</param>
+        <param name="numThreads">Number of threads</param>
+        <param name="displayFiles">True if we want to display properties of files. By default we show properties of directories</param>
+        <param name="displayConsistentAcl">if True then we wont dump the acl property of a directory/file if it's parent directory has same acl for all of its descendants. For ex: If 
+                                                the root ("/") has same Acl for all it's descendants, then we will show the Acl for the root only. If this flag is false, then we show the Acl for all directories or files</param>
+        <param name="maxDepth">Maximum depth till which we want to view the properties</param>
+        <summary>
+            Recursively dumps file property of alldirectories or/and files under the given path to a local or adl file. File property can be disk usage or Acl or both.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetReadStream">
-      <MemberSignature Language="C#" Value="public Microsoft.Azure.DataLake.Store.AdlsInputStream GetReadStream (string filename, System.Threading.CancellationToken cancelToken = null);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Azure.DataLake.Store.AdlsInputStream GetReadStream(string filename, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual Microsoft.Azure.DataLake.Store.AdlsInputStream GetReadStream (string filename, System.Threading.CancellationToken cancelToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Azure.DataLake.Store.AdlsInputStream GetReadStream(string filename, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.DataLake.Store.AdlsClient.GetReadStream(System.String,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Function GetReadStream (filename As String, Optional cancelToken As CancellationToken = null) As AdlsInputStream" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetReadStream (filename As String, Optional cancelToken As CancellationToken = null) As AdlsInputStream" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.DataLake.Store</AssemblyName>
@@ -938,18 +1089,20 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="filename">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="filename">File name</param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Synchronous API that returns the stream to read data from file in ADLS
+            </summary>
+        <returns>Input stream</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetReadStream">
-      <MemberSignature Language="C#" Value="public Microsoft.Azure.DataLake.Store.AdlsInputStream GetReadStream (string filename, int bufferCapacity, System.Threading.CancellationToken cancelToken = null);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Azure.DataLake.Store.AdlsInputStream GetReadStream(string filename, int32 bufferCapacity, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual Microsoft.Azure.DataLake.Store.AdlsInputStream GetReadStream (string filename, int bufferCapacity, System.Threading.CancellationToken cancelToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Azure.DataLake.Store.AdlsInputStream GetReadStream(string filename, int32 bufferCapacity, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.DataLake.Store.AdlsClient.GetReadStream(System.String,System.Int32,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Function GetReadStream (filename As String, bufferCapacity As Integer, Optional cancelToken As CancellationToken = null) As AdlsInputStream" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetReadStream (filename As String, bufferCapacity As Integer, Optional cancelToken As CancellationToken = null) As AdlsInputStream" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.DataLake.Store</AssemblyName>
@@ -965,11 +1118,13 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="filename">To be added.</param>
-        <param name="bufferCapacity">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="filename">File name</param>
+        <param name="bufferCapacity"> Buffer Capacity</param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Synchronous API that returns the stream to read data from file in ADLS
+            </summary>
+        <returns>Input stream</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -986,7 +1141,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;GetReadStreamAsync&gt;d__36))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;GetReadStreamAsync&gt;d__37))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -997,10 +1152,12 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="filename">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="filename">File name</param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Asynchronous API that returns the stream to read data from file in ADLS
+            </summary>
+        <returns>Input stream</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -1017,7 +1174,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;GetReadStreamAsync&gt;d__38))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;GetReadStreamAsync&gt;d__39))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -1029,19 +1186,21 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="filename">To be added.</param>
-        <param name="bufferCapacity">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="filename">File name</param>
+        <param name="bufferCapacity"> Buffer Capacity</param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Asynchronous API that returns the stream to read data from file in ADLS
+            </summary>
+        <returns>Input stream</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="ModifyAclEntries">
-      <MemberSignature Language="C#" Value="public void ModifyAclEntries (string path, System.Collections.Generic.List&lt;Microsoft.Azure.DataLake.Store.Acl.AclEntry&gt; aclSpec, System.Threading.CancellationToken cancelToken = null);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void ModifyAclEntries(string path, class System.Collections.Generic.List`1&lt;class Microsoft.Azure.DataLake.Store.Acl.AclEntry&gt; aclSpec, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual void ModifyAclEntries (string path, System.Collections.Generic.List&lt;Microsoft.Azure.DataLake.Store.Acl.AclEntry&gt; aclSpec, System.Threading.CancellationToken cancelToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void ModifyAclEntries(string path, class System.Collections.Generic.List`1&lt;class Microsoft.Azure.DataLake.Store.Acl.AclEntry&gt; aclSpec, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.DataLake.Store.AdlsClient.ModifyAclEntries(System.String,System.Collections.Generic.List{Microsoft.Azure.DataLake.Store.Acl.AclEntry},System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Sub ModifyAclEntries (path As String, aclSpec As List(Of AclEntry), Optional cancelToken As CancellationToken = null)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Sub ModifyAclEntries (path As String, aclSpec As List(Of AclEntry), Optional cancelToken As CancellationToken = null)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.DataLake.Store</AssemblyName>
@@ -1057,10 +1216,12 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="aclSpec">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of the file or directory</param>
+        <param name="aclSpec">List of Acl Entries to modify</param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Modifies acl entries of a file or directory with given ACL list. It merges the exisitng ACL list with given list.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -1077,7 +1238,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;ModifyAclEntriesAsync&gt;d__62))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;ModifyAclEntriesAsync&gt;d__63))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -1089,19 +1250,21 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="aclSpec">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of the file or directory</param>
+        <param name="aclSpec">List of Acl Entries to modify</param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Asynchronously modifies acl entries of a file or directory with given ACL list. It merges the exisitng ACL list with given list.
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="RemoveAclEntries">
-      <MemberSignature Language="C#" Value="public void RemoveAclEntries (string path, System.Collections.Generic.List&lt;Microsoft.Azure.DataLake.Store.Acl.AclEntry&gt; aclSpec, System.Threading.CancellationToken cancelToken = null);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RemoveAclEntries(string path, class System.Collections.Generic.List`1&lt;class Microsoft.Azure.DataLake.Store.Acl.AclEntry&gt; aclSpec, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual void RemoveAclEntries (string path, System.Collections.Generic.List&lt;Microsoft.Azure.DataLake.Store.Acl.AclEntry&gt; aclSpec, System.Threading.CancellationToken cancelToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void RemoveAclEntries(string path, class System.Collections.Generic.List`1&lt;class Microsoft.Azure.DataLake.Store.Acl.AclEntry&gt; aclSpec, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.DataLake.Store.AdlsClient.RemoveAclEntries(System.String,System.Collections.Generic.List{Microsoft.Azure.DataLake.Store.Acl.AclEntry},System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Sub RemoveAclEntries (path As String, aclSpec As List(Of AclEntry), Optional cancelToken As CancellationToken = null)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Sub RemoveAclEntries (path As String, aclSpec As List(Of AclEntry), Optional cancelToken As CancellationToken = null)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.DataLake.Store</AssemblyName>
@@ -1117,10 +1280,12 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="aclSpec">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of the file or directory</param>
+        <param name="aclSpec">List of Acl Entries to remove</param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Removes specified Acl Entries for a file or directory.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -1137,7 +1302,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;RemoveAclEntriesAsync&gt;d__68))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;RemoveAclEntriesAsync&gt;d__69))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -1149,19 +1314,21 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="aclSpec">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of the file or directory</param>
+        <param name="aclSpec">List of Acl Entries to remove</param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Asynchronously removes specified Acl Entries for a file or directory.
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="RemoveAllAcls">
-      <MemberSignature Language="C#" Value="public void RemoveAllAcls (string path, System.Threading.CancellationToken cancelToken = null);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RemoveAllAcls(string path, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual void RemoveAllAcls (string path, System.Threading.CancellationToken cancelToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void RemoveAllAcls(string path, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.DataLake.Store.AdlsClient.RemoveAllAcls(System.String,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Sub RemoveAllAcls (path As String, Optional cancelToken As CancellationToken = null)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Sub RemoveAllAcls (path As String, Optional cancelToken As CancellationToken = null)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.DataLake.Store</AssemblyName>
@@ -1176,9 +1343,11 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of the file or directory</param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Removes all Acl Entries for a file or directory.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -1195,7 +1364,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;RemoveAllAclsAsync&gt;d__70))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;RemoveAllAclsAsync&gt;d__71))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -1206,18 +1375,20 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of the file or directory</param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Asynchronously removes all Acl Entries for a file or directory.
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="RemoveDefaultAcls">
-      <MemberSignature Language="C#" Value="public void RemoveDefaultAcls (string path, System.Threading.CancellationToken cancelToken = null);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RemoveDefaultAcls(string path, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual void RemoveDefaultAcls (string path, System.Threading.CancellationToken cancelToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void RemoveDefaultAcls(string path, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.DataLake.Store.AdlsClient.RemoveDefaultAcls(System.String,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Sub RemoveDefaultAcls (path As String, Optional cancelToken As CancellationToken = null)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Sub RemoveDefaultAcls (path As String, Optional cancelToken As CancellationToken = null)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.DataLake.Store</AssemblyName>
@@ -1232,9 +1403,11 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of the file or directory</param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Removes all Acl Entries of AclScope default for a file or directory.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -1251,7 +1424,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;RemoveDefaultAclsAsync&gt;d__72))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;RemoveDefaultAclsAsync&gt;d__73))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -1262,18 +1435,20 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of the file or directory</param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Asynchronously removes all Acl Entries of AclScope default for a file or directory.
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Rename">
-      <MemberSignature Language="C#" Value="public bool Rename (string path, string destination, bool overwrite = false, System.Threading.CancellationToken cancelToken = null);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool Rename(string path, string destination, bool overwrite, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual bool Rename (string path, string destination, bool overwrite = false, System.Threading.CancellationToken cancelToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool Rename(string path, string destination, bool overwrite, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.DataLake.Store.AdlsClient.Rename(System.String,System.String,System.Boolean,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Function Rename (path As String, destination As String, Optional overwrite As Boolean = false, Optional cancelToken As CancellationToken = null) As Boolean" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function Rename (path As String, destination As String, Optional overwrite As Boolean = false, Optional cancelToken As CancellationToken = null) As Boolean" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.DataLake.Store</AssemblyName>
@@ -1290,12 +1465,17 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="destination">To be added.</param>
-        <param name="overwrite">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="path">Path of the source file or directory</param>
+        <param name="destination">Destination path</param>
+        <param name="overwrite">For file: If true then overwrites the destination file if it exists 
+                                    For directory: If the destination directory exists, then this flag has no use. Because it puts the source one level under destination.
+                                                   If there is a subdirectory with same name as source one level under the destination path, this flag has no use, rename fails  </param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Synchronous API to rename a file or directory.
+            For renaming directory: If the destination exists then it puts the source directory one level under the destination.
+            </summary>
+        <returns>True if the path is renamed successfully else false</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -1312,7 +1492,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;RenameAsync&gt;d__48))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;RenameAsync&gt;d__49))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -1325,20 +1505,23 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="destination">To be added.</param>
-        <param name="overwrite">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="path">Path of the source file or directory</param>
+        <param name="destination">Destination path. For directory: If the destination exists then it puts the source directory one level under the destination. If tthere is a subdirectory with same name as source one level under the destination path, rename fails</param>
+        <param name="overwrite">For file: If true then overwrites the destination file if it exists. Rename of folders cannot result in an overwrite of the target.</param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Asynchronous API to rename a file or directory.
+            For renaming directory: If the destination exists then it puts the source directory one level under the destination.
+            </summary>
+        <returns>True if the path is renamed successfully else false</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="SetAcl">
-      <MemberSignature Language="C#" Value="public void SetAcl (string path, System.Collections.Generic.List&lt;Microsoft.Azure.DataLake.Store.Acl.AclEntry&gt; aclSpec, System.Threading.CancellationToken cancelToken = null);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetAcl(string path, class System.Collections.Generic.List`1&lt;class Microsoft.Azure.DataLake.Store.Acl.AclEntry&gt; aclSpec, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual void SetAcl (string path, System.Collections.Generic.List&lt;Microsoft.Azure.DataLake.Store.Acl.AclEntry&gt; aclSpec, System.Threading.CancellationToken cancelToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void SetAcl(string path, class System.Collections.Generic.List`1&lt;class Microsoft.Azure.DataLake.Store.Acl.AclEntry&gt; aclSpec, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.DataLake.Store.AdlsClient.SetAcl(System.String,System.Collections.Generic.List{Microsoft.Azure.DataLake.Store.Acl.AclEntry},System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Sub SetAcl (path As String, aclSpec As List(Of AclEntry), Optional cancelToken As CancellationToken = null)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Sub SetAcl (path As String, aclSpec As List(Of AclEntry), Optional cancelToken As CancellationToken = null)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.DataLake.Store</AssemblyName>
@@ -1354,10 +1537,12 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="aclSpec">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of the file or directory</param>
+        <param name="aclSpec">List of Acl Entries to set </param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Sets Acl Entries for a file or directory. It wipes out the existing Acl entries for the path.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -1374,7 +1559,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;SetAclAsync&gt;d__64))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;SetAclAsync&gt;d__65))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -1386,19 +1571,21 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="aclSpec">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of the file or directory</param>
+        <param name="aclSpec">List of Acl Entries to set </param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Asynchronously sets Acl Entries for a file or directory. It wipes out the existing Acl entries for the path.
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="SetExpiryTime">
-      <MemberSignature Language="C#" Value="public void SetExpiryTime (string path, Microsoft.Azure.DataLake.Store.ExpiryOption eopt, long expiryTime, System.Threading.CancellationToken cancelToken = null);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetExpiryTime(string path, valuetype Microsoft.Azure.DataLake.Store.ExpiryOption eopt, int64 expiryTime, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual void SetExpiryTime (string path, Microsoft.Azure.DataLake.Store.ExpiryOption eopt, long expiryTime, System.Threading.CancellationToken cancelToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void SetExpiryTime(string path, valuetype Microsoft.Azure.DataLake.Store.ExpiryOption eopt, int64 expiryTime, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.DataLake.Store.AdlsClient.SetExpiryTime(System.String,Microsoft.Azure.DataLake.Store.ExpiryOption,System.Int64,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Sub SetExpiryTime (path As String, eopt As ExpiryOption, expiryTime As Long, Optional cancelToken As CancellationToken = null)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Sub SetExpiryTime (path As String, eopt As ExpiryOption, expiryTime As Long, Optional cancelToken As CancellationToken = null)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.DataLake.Store</AssemblyName>
@@ -1415,11 +1602,13 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="eopt">To be added.</param>
-        <param name="expiryTime">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of the file</param>
+        <param name="eopt">Different type of expiry method for example: never expire, relative to now, etc that defines how to evaluate expiryTime</param>
+        <param name="expiryTime">Expiry time value in milliseconds. It's interpretation depends on what ExpiryOption user passes</param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Synchronously sets the expiry time
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -1436,7 +1625,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;SetExpiryTimeAsync&gt;d__56))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;SetExpiryTimeAsync&gt;d__57))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -1449,20 +1638,22 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="eopt">To be added.</param>
-        <param name="expiryTime">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of the file</param>
+        <param name="eopt">Different type of expiry method for example: never expire, relative to now, etc that defines how to evaluate expiryTime</param>
+        <param name="expiryTime">Expiry time value. It's interpretation depends on what ExpiryOption user passes</param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Asynchronously sets the expiry time
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="SetOwner">
-      <MemberSignature Language="C#" Value="public void SetOwner (string path, string owner, string group, System.Threading.CancellationToken cancelToken = null);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetOwner(string path, string owner, string group, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual void SetOwner (string path, string owner, string group, System.Threading.CancellationToken cancelToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void SetOwner(string path, string owner, string group, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.DataLake.Store.AdlsClient.SetOwner(System.String,System.String,System.String,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Sub SetOwner (path As String, owner As String, group As String, Optional cancelToken As CancellationToken = null)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Sub SetOwner (path As String, owner As String, group As String, Optional cancelToken As CancellationToken = null)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.DataLake.Store</AssemblyName>
@@ -1479,11 +1670,13 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="owner">To be added.</param>
-        <param name="group">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of file or directory</param>
+        <param name="owner">Owner ID</param>
+        <param name="group">Group ID</param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Sets the owner or/and group of the path
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -1500,7 +1693,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;SetOwnerAsync&gt;d__67))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;SetOwnerAsync&gt;d__68))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -1513,20 +1706,22 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="owner">To be added.</param>
-        <param name="group">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of file or directory</param>
+        <param name="owner">Owner ID</param>
+        <param name="group">Group ID</param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Asynchronously sets the owner or/and group of the path
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="SetPermission">
-      <MemberSignature Language="C#" Value="public void SetPermission (string path, string permission, System.Threading.CancellationToken cancelToken = null);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetPermission(string path, string permission, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual void SetPermission (string path, string permission, System.Threading.CancellationToken cancelToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void SetPermission(string path, string permission, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.DataLake.Store.AdlsClient.SetPermission(System.String,System.String,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Sub SetPermission (path As String, permission As String, Optional cancelToken As CancellationToken = null)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Sub SetPermission (path As String, permission As String, Optional cancelToken As CancellationToken = null)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.DataLake.Store</AssemblyName>
@@ -1542,10 +1737,13 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="permission">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of the file or directory</param>
+        <param name="permission">Permission to check in unix octal form. For example if the user wants to see if owner has read, write execute permission, all groups has read write
+                                     permission and others has read permission the string would be 741 </param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Sets the permission of the specified path
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -1562,7 +1760,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;SetPermissionAsync&gt;d__60))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;SetPermissionAsync&gt;d__61))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -1574,10 +1772,13 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="permission">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of the file or directory</param>
+        <param name="permission">Permission to check in unix octal form. For example if the user wants to see if owner has read, write execute permission, all groups has read write
+                                     permission and others has read permission the string would be 741 </param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Asynchronously sets the permission of the specified path
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -1600,8 +1801,10 @@
         <Parameter Name="accessToken" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="accessToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="accessToken">Access token</param>
+        <summary>
+            Sets the auth token.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
