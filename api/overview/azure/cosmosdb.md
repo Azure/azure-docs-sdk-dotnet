@@ -42,7 +42,7 @@ dotnet add package Microsoft.Azure.DocumentDB.Core
 
 ### Code Example
 
-This example connects to an existing Cosmos DB DocumentDB API database, reads a document from a collection, and deserializes it as an `Item` object.   
+This example connects to an existing CosmosDB DocumentDB API database, reads a document from a collection, and deserializes it as an `Item` object.   
 
 ```csharp
 /* Include this "using" directive...
