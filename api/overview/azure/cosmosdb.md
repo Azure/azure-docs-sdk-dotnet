@@ -5,7 +5,7 @@ keywords: Azure, .NET, SDK, API, CosmosDB
 author: camsoper
 ms.author: casoper
 manager: wpickett
-ms.date: 10/19/2017
+ms.date: 11/17/2017
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
