@@ -13,7 +13,12 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
+    <summary>
+            Core layer. It contains methods for REST APIs. For each rest api command it sends a HTTP request to server.
+            We have both async and sync versions of CREATE, APPEND, OPEN, CONCURRENTAPPEND. The reason we have that is if the application is doing these operations heavily using explicit threads,
+            then using async-await internally creates unecessary threads in threadpool and performance degrades due to context switching. Application can create explicit threads in cases of uploader and downloader.
+            All these operation also call sync versions of MakeCall in WebTransport layer.
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -62,18 +67,23 @@
         <Parameter Name="resp" Type="Microsoft.Azure.DataLake.Store.OperationResponse" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="leaseId">To be added.</param>
-        <param name="sessionId">To be added.</param>
-        <param name="flag">To be added.</param>
-        <param name="offsetFile">To be added.</param>
-        <param name="dataBytes">To be added.</param>
-        <param name="offset">To be added.</param>
-        <param name="length">To be added.</param>
-        <param name="client">To be added.</param>
-        <param name="req">To be added.</param>
-        <param name="resp">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of the file</param>
+        <param name="leaseId">String containing the lease ID, when a client obtains a lease on a file no other client can make edits to the file </param>
+        <param name="sessionId">UUID that is used to obtain the file handler (stream) easily at server</param>
+        <param name="flag">Pass SyncFlag.DATA when writing bytes of data
+                               Pass SyncFlag.METADATA when metadata of the file like length, modified instant needs to be updated to be consistent
+                               with the actual data of file. After passing SyncFlag.METADATA GetFileStatus and ListStatus returns consistent data.
+                               Pass SyncFlag.CLOSE when no more data needs to be appended, file metadata is updated, lease is released and the stream is closed  </param>
+        <param name="offsetFile">Offset in the file at which data will be appended</param>
+        <param name="dataBytes">Array of bytes to write to the file</param>
+        <param name="offset">Offset in the byte array</param>
+        <param name="length">Number of bytes to write from the offset</param>
+        <param name="client">ADLS Client</param>
+        <param name="req">Options to change behavior of the Http request </param>
+        <param name="resp">Stores the response/ouput of the Http request </param>
+        <summary>
+            Append data to file. This is a synchronous operation.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -111,19 +121,24 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="leaseId">To be added.</param>
-        <param name="sessionId">To be added.</param>
-        <param name="flag">To be added.</param>
-        <param name="offsetFile">To be added.</param>
-        <param name="dataBytes">To be added.</param>
-        <param name="offset">To be added.</param>
-        <param name="length">To be added.</param>
-        <param name="client">To be added.</param>
-        <param name="req">To be added.</param>
-        <param name="resp">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of the file</param>
+        <param name="leaseId">String containing the lease ID, when a client obtains a lease on a file no other client can make edits to the file </param>
+        <param name="sessionId">UUID that is used to obtain the file handler (stream) easily at server</param>
+        <param name="flag">Pass SyncFlag.DATA when writing bytes of data
+                               Pass SyncFlag.METADATA when metadata of the file like length, modified instant needs to be updated to be consistent
+                               with the actual data of file. After passing SyncFlag.METADATA GetFileStatus and ListStatus returns consistent data.
+                               Pass SyncFlag.CLOSE when no more data needs to be appended, file metadata is updated, lease is released and the stream is closed  </param>
+        <param name="offsetFile">Offset in the file at which data will be appended</param>
+        <param name="dataBytes">Array of bytes to write to the file</param>
+        <param name="offset">Offset in the byte array</param>
+        <param name="length">Number of bytes to write from the offset</param>
+        <param name="client">ADLS Client</param>
+        <param name="req">Options to change behavior of the Http request </param>
+        <param name="resp">Stores the response/ouput of the Http request </param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Append data to file. This is an asynchronous operation.
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -156,13 +171,15 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="rwx">To be added.</param>
-        <param name="client">To be added.</param>
-        <param name="req">To be added.</param>
-        <param name="resp">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of the file or directory</param>
+        <param name="rwx">Permission to check in "rwx" string form. For example if the user wants to see if it has read, execute permission, the string would be r-x </param>
+        <param name="client">ADLS Client</param>
+        <param name="req">Options to change behavior of the Http request </param>
+        <param name="resp">Stores the response/ouput of the Http request </param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Checks if the user/group has specified access of the given path
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -195,13 +212,15 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="sourceFiles">To be added.</param>
-        <param name="client">To be added.</param>
-        <param name="req">To be added.</param>
-        <param name="resp">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of the destination</param>
+        <param name="sourceFiles">List containing paths of the source files</param>
+        <param name="client">ADLS Client</param>
+        <param name="req">Options to change behavior of the Http request </param>
+        <param name="resp">Stores the response/ouput of the Http request </param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Concatenate source files to a destination file. By default it wont delete source directory
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -235,14 +254,16 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="sourceFiles">To be added.</param>
-        <param name="deleteSourceDirectory">To be added.</param>
-        <param name="client">To be added.</param>
-        <param name="req">To be added.</param>
-        <param name="resp">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of the destination</param>
+        <param name="sourceFiles">List containing paths of the source files</param>
+        <param name="deleteSourceDirectory">If true then deletes the source directory if all the files under it are concatenated</param>
+        <param name="client">ADLS Client</param>
+        <param name="req">Options to change behavior of the Http request </param>
+        <param name="resp">Stores the response/ouput of the Http request </param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Concatenate source files to a destination file
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -272,15 +293,17 @@
         <Parameter Name="resp" Type="Microsoft.Azure.DataLake.Store.OperationResponse" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="autoCreate">To be added.</param>
-        <param name="dataBytes">To be added.</param>
-        <param name="offset">To be added.</param>
-        <param name="length">To be added.</param>
-        <param name="client">To be added.</param>
-        <param name="req">To be added.</param>
-        <param name="resp">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of the file</param>
+        <param name="autoCreate"></param>
+        <param name="dataBytes">Array of bytes to write to the file</param>
+        <param name="offset">Offset in the byte array</param>
+        <param name="length">Number of bytes to write from the offset</param>
+        <param name="client">ADLS Client</param>
+        <param name="req">Options to change behavior of the Http request </param>
+        <param name="resp">Stores the response/ouput of the Http request </param>
+        <summary>
+            Performs concurrent append synchronously at server. The offset at which append will occur is determined by server
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -315,16 +338,18 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="autoCreate">To be added.</param>
-        <param name="dataBytes">To be added.</param>
-        <param name="offset">To be added.</param>
-        <param name="length">To be added.</param>
-        <param name="client">To be added.</param>
-        <param name="req">To be added.</param>
-        <param name="resp">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of the file</param>
+        <param name="autoCreate"></param>
+        <param name="dataBytes">Array of bytes to write to the file</param>
+        <param name="offset">Offset in the byte array</param>
+        <param name="length">Number of bytes to write from the offset</param>
+        <param name="client">ADLS Client</param>
+        <param name="req">Options to change behavior of the Http request </param>
+        <param name="resp">Stores the response/ouput of the Http request </param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Performs concurrent append asynchronously at server. The offset at which append will occur is determined by server
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -359,20 +384,25 @@
         <Parameter Name="resp" Type="Microsoft.Azure.DataLake.Store.OperationResponse" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="overwrite">To be added.</param>
-        <param name="octalPermission">To be added.</param>
-        <param name="leaseId">To be added.</param>
-        <param name="sessionId">To be added.</param>
-        <param name="createParent">To be added.</param>
-        <param name="flag">To be added.</param>
-        <param name="dataBytes">To be added.</param>
-        <param name="offset">To be added.</param>
-        <param name="length">To be added.</param>
-        <param name="client">To be added.</param>
-        <param name="req">To be added.</param>
-        <param name="resp">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of the file</param>
+        <param name="overwrite">Overwrites the existing file if the flag is true</param>
+        <param name="octalPermission">Octal permission string</param>
+        <param name="leaseId">String containing the lease ID, when a client obtains a lease on a file no other client can make edits to the file </param>
+        <param name="sessionId">UUID that is used to obtain the file handler (stream) easily at server</param>
+        <param name="createParent">If true creates any non-existing parent directories</param>
+        <param name="flag">Pass SyncFlag.DATA when writing bytes of data
+                               Pass SyncFlag.METADATA when metadata of the file like length, modified instant needs to be updated to be consistent
+                               with the actual data of file. After passing SyncFlag.METADATA GetFileStatus and ListStatus returns consistent data.
+                               Pass SyncFlag.CLOSE when no more data needs to be appended, file metadata is updated, lease is released and the stream is closed  </param>
+        <param name="dataBytes">Array of bytes to write to the file</param>
+        <param name="offset">Offset in the byte array</param>
+        <param name="length">Number of bytes to write from the offset</param>
+        <param name="client">ADLS Client</param>
+        <param name="req">Options to change behavior of the Http request </param>
+        <param name="resp">Stores the response/ouput of the Http request </param>
+        <summary>
+            Create a new file. This is a synchronous operation.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -412,21 +442,26 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="overwrite">To be added.</param>
-        <param name="octalPermission">To be added.</param>
-        <param name="leaseId">To be added.</param>
-        <param name="sessionId">To be added.</param>
-        <param name="createParent">To be added.</param>
-        <param name="flag">To be added.</param>
-        <param name="dataBytes">To be added.</param>
-        <param name="offset">To be added.</param>
-        <param name="length">To be added.</param>
-        <param name="client">To be added.</param>
-        <param name="req">To be added.</param>
-        <param name="resp">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of the file</param>
+        <param name="overwrite">Overwrites the existing file if the flag is true</param>
+        <param name="octalPermission">Octal permission string</param>
+        <param name="leaseId">String containing the lease ID, when a client obtains a lease on a file no other client can make edits to the file </param>
+        <param name="sessionId">UUID that is used to obtain the file handler (stream) easily at server</param>
+        <param name="createParent">If true creates any non-existing parent directories</param>
+        <param name="flag">Pass SyncFlag.DATA when writing bytes of data
+                               Pass SyncFlag.METADATA when metadata of the file like length, modified instant needs to be updated to be consistent
+                               with the actual data of file. After passing SyncFlag.METADATA GetFileStatus and ListStatus returns consistent data.
+                               Pass SyncFlag.CLOSE when no more data needs to be appended, file metadata is updated, lease is released and the stream is closed  </param>
+        <param name="dataBytes">Array of bytes to write to the file</param>
+        <param name="offset">Offset in the byte array</param>
+        <param name="length">Number of bytes to write from the offset</param>
+        <param name="client">ADLS Client</param>
+        <param name="req">Options to change behavior of the Http request </param>
+        <param name="resp">Stores the response/ouput of the Http request </param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Create a new file. This is an asynchronous operation.
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -459,14 +494,16 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="recursive">To be added.</param>
-        <param name="client">To be added.</param>
-        <param name="req">To be added.</param>
-        <param name="resp">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="path">Path of the file or directory</param>
+        <param name="recursive"></param>
+        <param name="client">ADLS Client</param>
+        <param name="req">Options to change behavior of the Http request </param>
+        <param name="resp">Stores the response/ouput of the Http request </param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Deletes a file or directory
+            </summary>
+        <returns>True if delete is successful</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -498,14 +535,16 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="userIdFormat">To be added.</param>
-        <param name="client">To be added.</param>
-        <param name="req">To be added.</param>
-        <param name="resp">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="path">Path of the file or directory</param>
+        <param name="userIdFormat">way to represent the user/group object</param>
+        <param name="client">ADLS Client</param>
+        <param name="req">Options to change behavior of the Http request </param>
+        <param name="resp">Stores the response/ouput of the Http request </param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Gets the ACL entry list, owner ID, group ID, octal permission and sticky bit (only for a directory) of the file/directory
+            </summary>
+        <returns>Acl information: ACL entry list, owner ID, group ID, octal permission and sticky bit</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -536,13 +575,15 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="client">To be added.</param>
-        <param name="req">To be added.</param>
-        <param name="resp">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="path">Path of the directory or file</param>
+        <param name="client">ADLS Client</param>
+        <param name="req">Options to change behavior of the Http request </param>
+        <param name="resp">Stores the response/ouput of the Http request </param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Gets content summary of a file or directory
+            </summary>
+        <returns>ContentSummary of the path</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -574,14 +615,16 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="userIdFormat">To be added.</param>
-        <param name="client">To be added.</param>
-        <param name="req">To be added.</param>
-        <param name="resp">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="path">Path of the file or directory</param>
+        <param name="userIdFormat">Way the user or group object will be represented</param>
+        <param name="client">ADLS Client</param>
+        <param name="req">Options to change behavior of the Http request </param>
+        <param name="resp">Stores the response/ouput of the Http request </param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Gets meta data like full path, type (file or directory), group, user, permission, length,last Access Time,last Modified Time, expiry time, acl Bit, replication Factor
+            </summary>
+        <returns>Returns the metadata of the file or directory</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -616,17 +659,19 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="listAfter">To be added.</param>
-        <param name="listBefore">To be added.</param>
-        <param name="listSize">To be added.</param>
-        <param name="userIdFormat">To be added.</param>
-        <param name="client">To be added.</param>
-        <param name="req">To be added.</param>
-        <param name="resp">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="path">Path of the directory</param>
+        <param name="listAfter">Filename after which list of files should be obtained from server</param>
+        <param name="listBefore">Filename till which list of files should be obtained from server</param>
+        <param name="listSize">List size to obtain from server</param>
+        <param name="userIdFormat">Way the user or group object will be represented</param>
+        <param name="client">ADLS Client</param>
+        <param name="req">Options to change behavior of the Http request </param>
+        <param name="resp">Stores the response/ouput of the Http request </param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Lists the sub-directories or files contained in a directory
+            </summary>
+        <returns>List of directoryentries</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -658,14 +703,16 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="octalPermission">To be added.</param>
-        <param name="client">To be added.</param>
-        <param name="req">To be added.</param>
-        <param name="resp">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="path">Path of the directory</param>
+        <param name="octalPermission">Octal Permission</param>
+        <param name="client">ADLS Client</param>
+        <param name="req">Options to change behavior of the Http request </param>
+        <param name="resp">Stores the response/ouput of the Http request </param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Creates a directory. 
+            </summary>
+        <returns>true if it creates the directory else false</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -697,13 +744,15 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="aclSpecList">To be added.</param>
-        <param name="client">To be added.</param>
-        <param name="req">To be added.</param>
-        <param name="resp">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of the file or directory</param>
+        <param name="aclSpecList">List of Acl Entries to modify</param>
+        <param name="client">ADLS Client</param>
+        <param name="req">Options to change behavior of the Http request </param>
+        <param name="resp">Stores the response/ouput of the Http request </param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Modifies acl entries of a file or directory with given ACL list. It merges the exisitng ACL list with given list.
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -736,13 +785,15 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="aclSpec">To be added.</param>
-        <param name="client">To be added.</param>
-        <param name="req">To be added.</param>
-        <param name="resp">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of the file or directory</param>
+        <param name="aclSpec">AclSpec string that contains the ACL entries delimited by comma </param>
+        <param name="client">ADLS Client</param>
+        <param name="req">Options to change behavior of the Http request </param>
+        <param name="resp">Stores the response/ouput of the Http request </param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Modifies acl entries of a file or directory with given ACL list. It merges the exisitng ACL list with given list.
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -773,17 +824,19 @@
         <Parameter Name="resp" Type="Microsoft.Azure.DataLake.Store.OperationResponse" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="sessionId">To be added.</param>
-        <param name="offsetFile">To be added.</param>
-        <param name="buffer">To be added.</param>
-        <param name="offset">To be added.</param>
-        <param name="lengthFile">To be added.</param>
-        <param name="client">To be added.</param>
-        <param name="req">To be added.</param>
-        <param name="resp">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="path">Path of the file</param>
+        <param name="sessionId">UUID that is used to obtain the file handler (stream) easily at server</param>
+        <param name="offsetFile">Offset in the file at which data will be read from</param>
+        <param name="buffer"> Buffer where data read will be stored</param>
+        <param name="offset">Offset in buffer where data will be read</param>
+        <param name="lengthFile">Length of the data to be read</param>
+        <param name="client">ADLS Client</param>
+        <param name="req">Options to change behavior of the Http request </param>
+        <param name="resp">Stores the response/ouput of the Http request </param>
+        <summary>
+            Reads a file from server. This is synchronous operation.
+            </summary>
+        <returns>Number of bytes read</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -819,18 +872,20 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="sessionId">To be added.</param>
-        <param name="offsetFile">To be added.</param>
-        <param name="buffer">To be added.</param>
-        <param name="offset">To be added.</param>
-        <param name="lengthFile">To be added.</param>
-        <param name="client">To be added.</param>
-        <param name="req">To be added.</param>
-        <param name="resp">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="path">Path of the file</param>
+        <param name="sessionId">UUID that is used to obtain the file handler (stream) easily at server</param>
+        <param name="offsetFile">Offset in the file at which data will be read from</param>
+        <param name="buffer"> Buffer where data read will be stored</param>
+        <param name="offset">Offset in buffer where data will be read</param>
+        <param name="lengthFile">Length of the data to be read</param>
+        <param name="client">ADLS Client</param>
+        <param name="req">Options to change behavior of the Http request </param>
+        <param name="resp">Stores the response/ouput of the Http request </param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Reads a file from server. This is an asynchronous operation.
+            </summary>
+        <returns>Number of bytes read</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -861,12 +916,14 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="client">To be added.</param>
-        <param name="req">To be added.</param>
-        <param name="resp">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of the file or directory</param>
+        <param name="client">ADLS Client</param>
+        <param name="req">Options to change behavior of the Http request </param>
+        <param name="resp">Stores the response/ouput of the Http request </param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Removes all Acl Entries for a file or directory.
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -899,13 +956,15 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="aclSpecList">To be added.</param>
-        <param name="client">To be added.</param>
-        <param name="req">To be added.</param>
-        <param name="resp">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of the file or directory</param>
+        <param name="aclSpecList">List of Acl Entries to remove</param>
+        <param name="client">ADLS Client</param>
+        <param name="req">Options to change behavior of the Http request </param>
+        <param name="resp">Stores the response/ouput of the Http request </param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Removes specified Acl Entries for a file or directory.
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -938,13 +997,15 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="aclSpec">To be added.</param>
-        <param name="client">To be added.</param>
-        <param name="req">To be added.</param>
-        <param name="resp">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of the file or directory</param>
+        <param name="aclSpec">string containing Acl Entries to remove</param>
+        <param name="client">ADLS Client</param>
+        <param name="req">Options to change behavior of the Http request </param>
+        <param name="resp">Stores the response/ouput of the Http request </param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Removes specified Acl Entries for a file or directory.
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -976,12 +1037,14 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="client">To be added.</param>
-        <param name="req">To be added.</param>
-        <param name="resp">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of the file or directory</param>
+        <param name="client">ADLS Client</param>
+        <param name="req">Options to change behavior of the Http request </param>
+        <param name="resp">Stores the response/ouput of the Http request </param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Removes all Acl Entries of AclScope default for a file or directory.
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -1015,15 +1078,20 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="destination">To be added.</param>
-        <param name="overwrite">To be added.</param>
-        <param name="client">To be added.</param>
-        <param name="req">To be added.</param>
-        <param name="resp">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="path">Path of the source file or directory</param>
+        <param name="destination">Destination path</param>
+        <param name="overwrite">For file: If true then overwrites the destination file if it exists 
+                                    For directory: If the destination directory exists, then this flag has no use. Because it puts the source one level under destination.
+                                                   If there is a subdirectory with same name as source one level under the destination path, this flag has no use. Rename fails  </param>
+        <param name="client">ADLS Client</param>
+        <param name="req">Options to change behavior of the Http request </param>
+        <param name="resp">Stores the response/ouput of the Http request </param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Renames a path.
+            For renaming directory: If the destination exists then it puts the source directory one level under the destination.
+            </summary>
+        <returns>True if rename is successful else false</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -1055,13 +1123,15 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="aclSpecList">To be added.</param>
-        <param name="client">To be added.</param>
-        <param name="req">To be added.</param>
-        <param name="resp">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of the file or directory</param>
+        <param name="aclSpecList">List of Acl Entries to set </param>
+        <param name="client">ADLS Client</param>
+        <param name="req">Options to change behavior of the Http request </param>
+        <param name="resp">Stores the response/ouput of the Http request </param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Sets Acl Entries for a file or directory. It wipes out the existing Acl entries for the path.
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -1094,13 +1164,15 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="aclSpec">To be added.</param>
-        <param name="client">To be added.</param>
-        <param name="req">To be added.</param>
-        <param name="resp">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of the file or directory</param>
+        <param name="aclSpec">AclSpec string that contains the ACL entries delimited by comma </param>
+        <param name="client">ADLS Client</param>
+        <param name="req">Options to change behavior of the Http request </param>
+        <param name="resp">Stores the response/ouput of the Http request </param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Sets Acl Entries for a file or directory. It wipes out the existing Acl entries for the path.
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -1134,14 +1206,16 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="opt">To be added.</param>
-        <param name="expiryTime">To be added.</param>
-        <param name="client">To be added.</param>
-        <param name="req">To be added.</param>
-        <param name="resp">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of the file</param>
+        <param name="opt">Different type of expiry method for example: never expire, relative to now, etc that defines how to evaluate expiryTime</param>
+        <param name="expiryTime">Expiry time value. It's interepreation depends on what ExpiryOption user passes</param>
+        <param name="client">ADLS Client</param>
+        <param name="req">Options to change behavior of the Http request </param>
+        <param name="resp">Stores the response/ouput of the Http request </param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Set the expiry time
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -1175,15 +1249,17 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="user">To be added.</param>
-        <param name="group">To be added.</param>
-        <param name="client">To be added.</param>
-        <param name="req">To be added.</param>
-        <param name="resp">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="path">Path of file or directory</param>
+        <param name="user">Owner Id of the path</param>
+        <param name="group">Group Id of the path</param>
+        <param name="client">ADLS Client</param>
+        <param name="req">Options to change behavior of the Http request </param>
+        <param name="resp">Stores the response/ouput of the Http request </param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Sets the owner or/and group of the path
+            </summary>
+        <returns />
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -1215,13 +1291,16 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <param name="permission">To be added.</param>
-        <param name="client">To be added.</param>
-        <param name="req">To be added.</param>
-        <param name="resp">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="path">Path of the file or directory</param>
+        <param name="permission">Permission to check in unix octal form. For example if the user wants to see if owner has read, write execute permission, all groups has read write
+                                     permission and others has read permission the string would be 741 </param>
+        <param name="client">ADLS Client</param>
+        <param name="req">Options to change behavior of the Http request </param>
+        <param name="resp">Stores the response/ouput of the Http request </param>
+        <param name="cancelToken">CancellationToken to cancel the request</param>
+        <summary>
+            Sets the permission of the specified path
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
