@@ -26,7 +26,7 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="protected PartitionReceiver (Microsoft.Azure.EventHubs.EventHubClient eventHubClient, string consumerGroupName, string partitionId, string startOffset, bool offsetInclusive, Nullable&lt;DateTime&gt; startTime, Nullable&lt;long&gt; epoch);" />
+      <MemberSignature Language="C#" Value="protected internal PartitionReceiver (Microsoft.Azure.EventHubs.EventHubClient eventHubClient, string consumerGroupName, string partitionId, string startOffset, bool offsetInclusive, Nullable&lt;DateTime&gt; startTime, Nullable&lt;long&gt; epoch);" />
       <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig specialname rtspecialname instance void .ctor(class Microsoft.Azure.EventHubs.EventHubClient eventHubClient, string consumerGroupName, string partitionId, string startOffset, bool offsetInclusive, valuetype System.Nullable`1&lt;valuetype System.DateTime&gt; startTime, valuetype System.Nullable`1&lt;int64&gt; epoch) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.EventHubs.PartitionReceiver.#ctor(Microsoft.Azure.EventHubs.EventHubClient,System.String,System.String,System.String,System.Boolean,System.Nullable{System.DateTime},System.Nullable{System.Int64})" />
       <MemberType>Constructor</MemberType>
@@ -332,6 +332,60 @@
             </summary>
         <returns>A Task that will yield a batch of <see cref="T:Microsoft.Azure.EventHubs.EventData" /> from the partition on which this receiver is created. Returns 'null' if no EventData is present.</returns>
         <remarks>To be added.</remarks>
+        <example>
+            Sample code:
+            <code>
+            EventHubClient client = EventHubClient.Create("__connectionString__");
+            PartitionReceiver receiver = client.CreateReceiver("ConsumerGroup1", "1");
+            IEnumerable&lt;EventData&gt; receivedEvents = await receiver.ReceiveAsync(BatchSize);
+                 
+            while (true)
+            {
+                int batchSize = 0;
+                if (receivedEvents != null)
+                {
+                    foreach (EventData receivedEvent in receivedEvents)
+                    {
+                        Console.WriteLine("Message Payload: {0}", Encoding.UTF8.GetString(receivedEvent.Body));
+                        Console.WriteLine("Offset: {0}, SeqNo: {1}, EnqueueTime: {2}", 
+                            receivedEvent.SystemProperties.Offset, 
+                            receivedEvent.SystemProperties.SequenceNumber, 
+                            receivedEvent.SystemProperties.EnqueuedTime);
+                        batchSize++;
+                    }
+                }
+                     
+                Console.WriteLine("ReceivedBatch Size: {0}", batchSize);
+                receivedEvents = await receiver.ReceiveAsync();
+            }
+            </code></example>
+        <example>
+            Sample code:
+            <code>
+            EventHubClient client = EventHubClient.Create("__connectionString__");
+            PartitionReceiver receiver = client.CreateReceiver("ConsumerGroup1", "1");
+            IEnumerable&lt;EventData&gt; receivedEvents = await receiver.ReceiveAsync(BatchSize);
+                 
+            while (true)
+            {
+                int batchSize = 0;
+                if (receivedEvents != null)
+                {
+                    foreach (EventData receivedEvent in receivedEvents)
+                    {
+                        Console.WriteLine("Message Payload: {0}", Encoding.UTF8.GetString(receivedEvent.Body));
+                        Console.WriteLine("Offset: {0}, SeqNo: {1}, EnqueueTime: {2}", 
+                            receivedEvent.SystemProperties.Offset, 
+                            receivedEvent.SystemProperties.SequenceNumber, 
+                            receivedEvent.SystemProperties.EnqueuedTime);
+                        batchSize++;
+                    }
+                }
+                     
+                Console.WriteLine("ReceivedBatch Size: {0}", batchSize);
+                receivedEvents = await receiver.ReceiveAsync();
+            }
+            </code></example>
         <example>
             Sample code:
             <code>
