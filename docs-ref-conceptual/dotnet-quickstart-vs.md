@@ -1,6 +1,6 @@
 ---
-title: .NET for Azure developers
-description: .NET for Azure developers
+title: Deploy to Azure from Visual Studio
+description: This tutorial will walk you through building and deploying a Microsoft Azure application using Visual Studio and .NET.
 keywords: Azure .NET, SDK, Azure .NET API Reference, Azure .NET class library
 author: camsoper
 manager: douge
@@ -13,7 +13,7 @@ ms.devlang: dotnet
 ms.assetid: 
 ---
 
-# Get started with .NET for Azure developers
+# Deploy to Azure from Visual Studio
 
 This tutorial will walk you through building and deploying a Microsoft Azure application using Visual Studio and .NET.  When finished, you'll have a web-based to-do application built in ASP.NET MVC Core, hosted as an Azure Web App, and using Azure CosmosDB for data storage.
 

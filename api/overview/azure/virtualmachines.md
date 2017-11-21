@@ -65,7 +65,7 @@ IVirtualMachine windowsVM = azure.VirtualMachines.Define("MyVirtualMachine")
 ```
 
 > [!div class="nextstepaction"]
-> [Explore the management APIs](https://review.docs.microsoft.com/en-us/dotnet/api/overview/azure/virtualmachines/management?view=azure-dotnet)
+> [Explore the management APIs](https://docs.microsoft.com/en-us/dotnet/api/overview/azure/virtualmachines/management?view=azure-dotnet)
 
 ### Samples
 
