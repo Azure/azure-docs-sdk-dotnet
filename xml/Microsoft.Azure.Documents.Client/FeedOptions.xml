@@ -170,6 +170,13 @@
                 collectionLink, new FeedOptions { EnableCrossPartitionQuery = true }).Where(b => b.Price > 1000);
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            // Enable cross partition query.
+            var queryable = client.CreateDocumentQuery<Book>(
+                collectionLink, new FeedOptions { EnableCrossPartitionQuery = true }).Where(b => b.Price > 1000);
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="EnableLowPrecisionOrderBy">
@@ -229,6 +236,13 @@
             Option is true if scan on queries is enabled; otherwise, false.
             </value>
         <remarks>To be added.</remarks>
+        <example>
+          <code language="c#"><![CDATA[
+            // Enable scan when Range index is not specified.
+            var queryable = client.CreateDocumentQuery<Book>(
+                collectionLink, new FeedOptions { EnableScanInQuery = true }).Where(b => b.Price > 1000);
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             // Enable scan when Range index is not specified.
@@ -368,6 +382,12 @@
             MaximumBufferSize = 10, MaxDegreeOfParallelism = 2 });
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            var queryable = client.CreateDocumentQuery<Book>(collectionLink, new FeedOptions { 
+            MaximumBufferSize = 10, MaxDegreeOfParallelism = 2 });
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="MaxDegreeOfParallelism">
@@ -449,6 +469,12 @@
             MaxDegreeOfParallelism = 5});
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            var queryable = client.CreateDocumentQuery<Book>(collectionLink, new FeedOptions { 
+            MaxDegreeOfParallelism = 5});
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="MaxItemCount">
@@ -481,6 +507,18 @@
             Used for query pagination.
             '-1' Used for dynamic page size.
             </remarks>
+        <example>
+          <code language="c#"><![CDATA[
+            // Fetch query results 10 at a time.
+            using (var queryable = client.CreateDocumentQuery<Book>(collectionLink, new FeedOptions { MaxItemCount = 10 }))
+            {
+                while (queryable.HasResults)
+                {
+                    FeedResponse<Book> response = await queryable.ExecuteNext<Book>();
+                }
+            }
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             // Fetch query results 10 at a time.
@@ -679,6 +717,14 @@
                 collection.SelfLink, 
                 new RequestOptions { PartitionKey = new PartitionKey("USA") } );
             ]]></code></example>
+        <example>
+            The following example shows how to read a document feed in a partitioned collection using <see cref="P:Microsoft.Azure.Documents.Client.FeedOptions.PartitionKey" />.
+            The example assumes the collection is created with a <see cref="T:Microsoft.Azure.Documents.PartitionKeyDefinition" /> on the 'country' property in all the documents.
+            <code language="c#"><![CDATA[
+            await client.ReadDocumentFeedAsync(
+                collection.SelfLink, 
+                new RequestOptions { PartitionKey = new PartitionKey("USA") } );
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="PartitionKeyRangeId">
@@ -719,6 +765,13 @@
                 new RequestOptions { PartitionKeyRangeId = "20" } );
             ]]></code></example>
         <altmember cref="T:Microsoft.Azure.Documents.DocumentCollection" />
+        <example>
+            The following example shows how to read a document feed in a partitioned collection from partition key range "20".
+            <code language="c#"><![CDATA[
+            await client.ReadDocumentFeedAsync(
+                collection.SelfLink, 
+                new RequestOptions { PartitionKeyRangeId = "20" } );
+            ]]></code></example>
         <example>
             The following example shows how to read a document feed in a partitioned collection from partition key range "20".
             <code language="c#"><![CDATA[
@@ -876,6 +929,12 @@
             var queryable = client.CreateDocumentQuery<Book>(collectionLink, new FeedOptions { RequestContinuation = prevQuery.ResponseContinuation });
             ]]></code>
         </example>
+        <example>
+          <code language="c#"><![CDATA[
+            // Resume query execution using the continuation from the previous query
+            var queryable = client.CreateDocumentQuery<Book>(collectionLink, new FeedOptions { RequestContinuation = prevQuery.ResponseContinuation });
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="ResponseContinuationTokenLimitInKb">
@@ -940,6 +999,12 @@
             In this case, round-trip the token from end user to the application and then back to Azure Cosmos DB so that a session
             can be preserved across servers.
             </remarks>
+        <example>
+          <code language="c#"><![CDATA[
+            var queryable = client.CreateDocumentQuery<Book>(
+                collectionLink, new FeedOptions { SessionToken = lastSessionToken });
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
             var queryable = client.CreateDocumentQuery<Book>(
