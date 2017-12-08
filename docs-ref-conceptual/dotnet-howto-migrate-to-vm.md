@@ -17,6 +17,31 @@ ms.custom: devcenter
 
 This document provides an overview of how to migrate an ASP.NET web application from on-premises to an Azure Virtual Machine.
 
+## Quickstart
+
+Learn how to create a virtual machine and publish your app to it:
+
+<ul class="panelContent cardsFTitle">
+    <li>
+        <a href="https://tutorials.visualstudio.com/aspnet-vm/intro">
+        <div class="cardSize">
+            <div class="cardPadding">
+                <div class="card">
+                    <div class="cardImageOuter">
+                        <div class="cardImage">
+                            <img src="https://docs.microsoft.com/azure/media/index/virtualmachine.svg" alt="" />
+                        </div>
+                    </div>
+                    <div class="cardText">
+                        <h3>Publish to an Azure VM</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </a>
+    </li>
+</ul>
+
 ## Get Started
 
 These tutorials demonstrate the steps to create (or migrate) a virtual machine, publish your web application to it, and other tasks that may be required to support your application in Azure.
