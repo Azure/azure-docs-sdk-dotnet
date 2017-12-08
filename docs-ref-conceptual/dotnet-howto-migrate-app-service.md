@@ -53,4 +53,4 @@ If your application persists data, you will need to update it to use Azure Stora
 ## Next steps
 
 > [!div class="nextstepaction"]
-> [Migrate an ASP.NET Web application to an Azure Virtual Machine](dotnet-howto-migrate-to-vm.md)
+> [Migrate an ASP.NET Web application to Azure App Service](https://aka.ms/azure-webapp-migrate)
