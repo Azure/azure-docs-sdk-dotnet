@@ -6,7 +6,7 @@ author: camsoper
 manager: wpickett
 ms.author: casoper
 ms.date: 11/15/2017
-ms.topic: article
+ms.topic: landing-page
 ms.technology: azure
 ms.devlang: dotnet
 ms.service: virtual-machines
@@ -21,16 +21,14 @@ This document provides an overview of how to migrate an ASP.NET web application 
 
 Learn how to create a virtual machine and publish your app to it:
 
-<ul class="cardsM cols cols3">
-    <li>
-        <a class="card" href="https://tutorials.visualstudio.com/aspnet-vm/intro" data-linktype="external">
-            <img class="cardImage" role="presentation" src="https://docs.microsoft.com/azure/media/index/virtualmachine.svg" alt="" data-linktype="external" />
-            <div class="cardText">
-                <h3>Publish to an Azure VM</h3>
-            </div>
+<div class="ico48Case halfStack">
+    <div class="ico48Link">
+        <a href="https://tutorials.visualstudio.com/aspnet-vm/intro" data-linktype="absolute-path">
+            <img width="48" height="48" alt="Publish to an Azure VM" src="https://docs.microsoft.com/azure/media/index/virtualmachine.svg" data-linktype="absolute-path"><br />
+            <span>Publish to an Azure VM</span>
         </a>
-    </li>
-</ul>
+    </div>
+</div>
 
 ## Get Started
 
