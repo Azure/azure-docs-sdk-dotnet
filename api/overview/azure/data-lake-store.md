@@ -22,6 +22,39 @@ Azure Data Lake Store is an enterprise-wide hyper-scale repository for big data 
 
 To learn more, see [Overview of Azure Data Lake Store](/azure/data-lake-store/data-lake-store-overview).
 
+## Client library
+
+Use the client library to perform filesystem operations on Data Lake Store, such as creating folders in a Data Lake Store account, uploading files, and downloading files.  For a full tutorial on using Data Lake Store with .NET, see [Filesystem operations on Azure Data Lake Store using .NET SDK](/azure/data-lake-store/data-lake-store-data-operations-net-sdk).
+
+Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Management.DataLake.Store) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
+
+#### Visual Studio Package Manager
+
+```powershell
+Install-Package Microsoft.Azure.DataLake.Store
+```
+
+```bash
+dotnet add package Microsoft.Azure.DataLake.Store
+```
+### Authentication
+
+* For end-user authentication for your application, see [End-user authentication with Data Lake Store using .NET SDK](/azure/data-lake-store/data-lake-store-end-user-authenticate-net-sdk).
+* For service-to-service authentication for your application, see [Service-to-service authentication with Data Lake Store using .NET SDK](/azure/data-lake-store/data-lake-store-service-to-service-authenticate-net-sdk).
+
+### Code Example
+
+The following snippet creates the Data Lake Store filesystem client object, which is used to issue requests to the service.
+
+```csharp
+// Create client objects
+AdlsClient client = AdlsClient.CreateClient(_adlsAccountName, adlCreds);
+```
+
+> [!div class="nextstepaction"]
+> [Explore the client APIs](/dotnet/api/overview/azure/datalakestore/client)
+
+
 ## Management library
 
 Use the management library to connect to and manage your big data repositories.
@@ -38,30 +71,9 @@ Install-Package Microsoft.Azure.Management.DataLake.Store
 dotnet add package Microsoft.Azure.Management.DataLake.Store
 ```
 
-### Code Example
-
-This example authenticates to an analytics account and store and creates the clients necessary for management.
-
-```csharp
-/*
-using AdlClient
-using AdlClient.Models 
-*/
-
-// Setup authentication 
-Authentication auth = new Authentication("microsoft.onmicrosoft.com"); // change this to YOUR tenant
-auth.Authenticate();
-
-// Identify the accounts
-StoreAccountRef adls_account = new StoreAccountRef(subscriptionId, resourceGroup, userName);
-
-// Create the clients
-AzureClient az = new AzureClient(auth);
-StoreClient adls = new StoreClient(auth, adls_account);
-```
-
 > [!div class="nextstepaction"]
-> [Explore the management APIs](/dotnet/api/overview/azure/datalakestore/management)
+> [Explore the client APIs](/dotnet/api/overview/azure/datalakestore/management)
+
 
 ## Samples
 
