@@ -763,6 +763,50 @@
                 Console.WriteLine("Sent Batch... Size: {0}", events.Count);
             }
             </code></example>
+        <example>
+            Sample code:
+            <code>
+            var client = EventHubClient.Create("__connectionString__");
+            while (true)
+            {
+                var events = new List&lt;EventData&gt;();
+                for (int count = 1; count &lt; 11; count++)
+                {
+                    var payload = new PayloadEvent(count);
+                    byte[] payloadBytes = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload));
+                    var sendEvent = new EventData(payloadBytes);
+                    var applicationProperties = new Dictionary&lt;string, string&gt;();
+                    applicationProperties["from"] = "csharpClient";
+                    sendEvent.Properties = applicationProperties;
+                    events.Add(sendEvent);
+                }
+                    
+                await client.SendAsync(events);
+                Console.WriteLine("Sent Batch... Size: {0}", events.Count);
+            }
+            </code></example>
+        <example>
+            Sample code:
+            <code>
+            var client = EventHubClient.Create("__connectionString__");
+            while (true)
+            {
+                var events = new List&lt;EventData&gt;();
+                for (int count = 1; count &lt; 11; count++)
+                {
+                    var payload = new PayloadEvent(count);
+                    byte[] payloadBytes = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload));
+                    var sendEvent = new EventData(payloadBytes);
+                    var applicationProperties = new Dictionary&lt;string, string&gt;();
+                    applicationProperties["from"] = "csharpClient";
+                    sendEvent.Properties = applicationProperties;
+                    events.Add(sendEvent);
+                }
+                    
+                await client.SendAsync(events);
+                Console.WriteLine("Sent Batch... Size: {0}", events.Count);
+            }
+            </code></example>
       </Docs>
     </Member>
     <Member MemberName="SendAsync">

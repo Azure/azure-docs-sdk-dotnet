@@ -6,6 +6,7 @@
   <AssemblyInfo>
     <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
     <AssemblyVersion>0.0.6.0</AssemblyVersion>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Interfaces>
     <Interface>
@@ -14,34 +15,43 @@
   </Interfaces>
   <Docs>
     <summary>
-            An interface used to describe common functionality for receiving messages from queues and subscriptions.
+            An interface used to describe common functionality for receiving messages from <see cref="T:Microsoft.Azure.ServiceBus.IQueueClient" /> and <see cref="T:Microsoft.Azure.ServiceBus.ISubscriptionClient" />.
             </summary>
-    <remarks>To be added.</remarks>
+    <remarks>Use <see cref="T:Microsoft.Azure.ServiceBus.Core.IMessageReceiver" /> for advanced set of functionality.</remarks>
+    <altmember cref="T:Microsoft.Azure.ServiceBus.Core.IMessageReceiver" />
+    <altmember cref="T:Microsoft.Azure.ServiceBus.IQueueClient" />
+    <altmember cref="T:Microsoft.Azure.ServiceBus.ISubscriptionClient" />
   </Docs>
   <Members>
     <Member MemberName="AbandonAsync">
-      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task AbandonAsync (string lockToken);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task AbandonAsync(string lockToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.ServiceBus.Core.IReceiverClient.AbandonAsync(System.String)" />
-      <MemberSignature Language="VB.NET" Value="Public Function AbandonAsync (lockToken As String) As Task" />
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task AbandonAsync (string lockToken, System.Collections.Generic.IDictionary&lt;string,object&gt; propertiesToModify = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task AbandonAsync(string lockToken, class System.Collections.Generic.IDictionary`2&lt;string, object&gt; propertiesToModify) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.ServiceBus.Core.IReceiverClient.AbandonAsync(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})" />
+      <MemberSignature Language="VB.NET" Value="Public Function AbandonAsync (lockToken As String, Optional propertiesToModify As IDictionary(Of String, Object) = null) As Task" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
-        <AssemblyVersion>0.0.6.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
       </ReturnValue>
       <Parameters>
         <Parameter Name="lockToken" Type="System.String" />
+        <Parameter Name="propertiesToModify" Type="System.Collections.Generic.IDictionary&lt;System.String,System.Object&gt;" />
       </Parameters>
       <Docs>
         <param name="lockToken">The lock token of the corresponding message to abandon.</param>
+        <param name="propertiesToModify">The properties of the message to modify while abandoning the message.</param>
         <summary>
             Abandons a <see cref="T:Microsoft.Azure.ServiceBus.Message" /> using a lock token. This will make the message available again for processing.
             </summary>
-        <returns>The asynchronous operation.</returns>
-        <remarks>A lock token can be found in <see cref="P:Microsoft.Azure.ServiceBus.Message.SystemPropertiesCollection.LockToken" />, only when <see cref="P:Microsoft.Azure.ServiceBus.Core.IReceiverClient.ReceiveMode" /> is set to <see cref="F:Microsoft.Azure.ServiceBus.ReceiveMode.PeekLock" />.</remarks>
+        <returns>To be added.</returns>
+        <remarks>A lock token can be found in <see cref="P:Microsoft.Azure.ServiceBus.Message.SystemPropertiesCollection.LockToken" />,
+            only when <see cref="P:Microsoft.Azure.ServiceBus.Core.IReceiverClient.ReceiveMode" /> is set to <see cref="F:Microsoft.Azure.ServiceBus.ReceiveMode.PeekLock" />.
+            Abandoning a message will increase the delivery count on the message.
+            This operation can only be performed on messages that were received by this receiver.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="CompleteAsync">
@@ -53,6 +63,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>0.0.6.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -63,36 +74,82 @@
       <Docs>
         <param name="lockToken">The lock token of the corresponding message to complete.</param>
         <summary>
-            Completes a <see cref="T:Microsoft.Azure.ServiceBus.Message" /> using a lock token.
+            Completes a <see cref="T:Microsoft.Azure.ServiceBus.Message" /> using its lock token. This will delete the message from the queue.
             </summary>
         <returns>The asynchronous operation.</returns>
-        <remarks>A lock token can be found in <see cref="P:Microsoft.Azure.ServiceBus.Message.SystemPropertiesCollection.LockToken" />, only when <see cref="P:Microsoft.Azure.ServiceBus.Core.IReceiverClient.ReceiveMode" /> is set to <see cref="F:Microsoft.Azure.ServiceBus.ReceiveMode.PeekLock" />.</remarks>
+        <remarks>
+            A lock token can be found in <see cref="P:Microsoft.Azure.ServiceBus.Message.SystemPropertiesCollection.LockToken" />,
+            only when <see cref="P:Microsoft.Azure.ServiceBus.Core.IReceiverClient.ReceiveMode" /> is set to <see cref="F:Microsoft.Azure.ServiceBus.ReceiveMode.PeekLock" />.
+            This operation can only be performed on messages that were received by this receiver.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="DeadLetterAsync">
-      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task DeadLetterAsync (string lockToken);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task DeadLetterAsync(string lockToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.ServiceBus.Core.IReceiverClient.DeadLetterAsync(System.String)" />
-      <MemberSignature Language="VB.NET" Value="Public Function DeadLetterAsync (lockToken As String) As Task" />
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task DeadLetterAsync (string lockToken, System.Collections.Generic.IDictionary&lt;string,object&gt; propertiesToModify = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task DeadLetterAsync(string lockToken, class System.Collections.Generic.IDictionary`2&lt;string, object&gt; propertiesToModify) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.ServiceBus.Core.IReceiverClient.DeadLetterAsync(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})" />
+      <MemberSignature Language="VB.NET" Value="Public Function DeadLetterAsync (lockToken As String, Optional propertiesToModify As IDictionary(Of String, Object) = null) As Task" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
-        <AssemblyVersion>0.0.6.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
       </ReturnValue>
       <Parameters>
         <Parameter Name="lockToken" Type="System.String" />
+        <Parameter Name="propertiesToModify" Type="System.Collections.Generic.IDictionary&lt;System.String,System.Object&gt;" />
       </Parameters>
       <Docs>
         <param name="lockToken">The lock token of the corresponding message to deadletter.</param>
+        <param name="propertiesToModify">The properties of the message to modify while moving to sub-queue.</param>
         <summary>
-            Moves a message to the deadletter queue.
+            Moves a message to the deadletter sub-queue.
             </summary>
-        <returns>The asynchronous operation.</returns>
-        <remarks>A lock token can be found in <see cref="P:Microsoft.Azure.ServiceBus.Message.SystemPropertiesCollection.LockToken" />, only when <see cref="P:Microsoft.Azure.ServiceBus.Core.IReceiverClient.ReceiveMode" /> is set to <see cref="F:Microsoft.Azure.ServiceBus.ReceiveMode.PeekLock" />. 
-            In order to receive a message from the deadletter queue, you will need a new <see cref="T:Microsoft.Azure.ServiceBus.Core.IMessageReceiver" />, with the corresponding path. You can use <see cref="M:Microsoft.Azure.ServiceBus.EntityNameHelper.FormatDeadLetterPath(System.String)" /> to help with this.</remarks>
+        <returns>To be added.</returns>
+        <remarks>
+            A lock token can be found in <see cref="P:Microsoft.Azure.ServiceBus.Message.SystemPropertiesCollection.LockToken" />,
+            only when <see cref="P:Microsoft.Azure.ServiceBus.Core.IReceiverClient.ReceiveMode" /> is set to <see cref="F:Microsoft.Azure.ServiceBus.ReceiveMode.PeekLock" />.
+            In order to receive a message from the deadletter queue, you will need a new <see cref="T:Microsoft.Azure.ServiceBus.Core.IMessageReceiver" />, with the corresponding path.
+            You can use <see cref="M:Microsoft.Azure.ServiceBus.EntityNameHelper.FormatDeadLetterPath(System.String)" /> to help with this.
+            This operation can only be performed on messages that were received by this receiver.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DeadLetterAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task DeadLetterAsync (string lockToken, string deadLetterReason, string deadLetterErrorDescription = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task DeadLetterAsync(string lockToken, string deadLetterReason, string deadLetterErrorDescription) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.ServiceBus.Core.IReceiverClient.DeadLetterAsync(System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function DeadLetterAsync (lockToken As String, deadLetterReason As String, Optional deadLetterErrorDescription As String = null) As Task" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="lockToken" Type="System.String" />
+        <Parameter Name="deadLetterReason" Type="System.String" />
+        <Parameter Name="deadLetterErrorDescription" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="lockToken">The lock token of the corresponding message to deadletter.</param>
+        <param name="deadLetterReason">The reason for deadlettering the message.</param>
+        <param name="deadLetterErrorDescription">The error description for deadlettering the message.</param>
+        <summary>
+            Moves a message to the deadletter sub-queue.
+            </summary>
+        <returns>To be added.</returns>
+        <remarks>
+            A lock token can be found in <see cref="P:Microsoft.Azure.ServiceBus.Message.SystemPropertiesCollection.LockToken" />,
+            only when <see cref="P:Microsoft.Azure.ServiceBus.Core.IReceiverClient.ReceiveMode" /> is set to <see cref="F:Microsoft.Azure.ServiceBus.ReceiveMode.PeekLock" />.
+            In order to receive a message from the deadletter queue, you will need a new <see cref="T:Microsoft.Azure.ServiceBus.Core.IMessageReceiver" />, with the corresponding path.
+            You can use <see cref="M:Microsoft.Azure.ServiceBus.EntityNameHelper.FormatDeadLetterPath(System.String)" /> to help with this.
+            This operation can only be performed on messages that were received by this receiver.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="Path">
@@ -104,6 +161,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>0.0.6.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -116,6 +174,42 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
+    <Member MemberName="PrefetchCount">
+      <MemberSignature Language="C#" Value="public int PrefetchCount { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 PrefetchCount" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.ServiceBus.Core.IReceiverClient.PrefetchCount" />
+      <MemberSignature Language="VB.NET" Value="Public Property PrefetchCount As Integer" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Prefetch speeds up the message flow by aiming to have a message readily available for local retrieval when and before the application asks for one using Receive.
+            Setting a non-zero value prefetches PrefetchCount number of messages.
+            Setting the value to zero turns prefetch off.
+            Defaults to 0.
+            </summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>
+            When Prefetch is enabled, the receiver will quietly acquire more messages, up to the PrefetchCount limit, than what the application
+            immediately asks for. A single initial Receive/ReceiveAsync call will therefore acquire a message for immediate consumption
+            that will be returned as soon as available, and the client will proceed to acquire further messages to fill the prefetch buffer in the background.
+            </para>
+          <para>
+            While messages are available in the prefetch buffer, any subsequent ReceiveAsync calls will be immediately satisfied from the buffer, and the buffer is
+            replenished in the background as space becomes available.If there are no messages available for delivery, the receive operation will drain the
+            buffer and then wait or block as expected.
+            </para>
+          <para>Updates to this value take effect on the next receive call to the service.</para>
+        </remarks>
+      </Docs>
+    </Member>
     <Member MemberName="ReceiveMode">
       <MemberSignature Language="C#" Value="public Microsoft.Azure.ServiceBus.ReceiveMode ReceiveMode { get; }" />
       <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.Azure.ServiceBus.ReceiveMode ReceiveMode" />
@@ -125,51 +219,29 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>0.0.6.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.ServiceBus.ReceiveMode</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            Gets the <see cref="M:Microsoft.Azure.ServiceBus.ReceiveMode.#ctor" /> of the current receiver.
+            Gets the <see cref="T:Microsoft.Azure.ServiceBus.ReceiveMode" /> of the current receiver.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="RegisterMessageHandler">
-      <MemberSignature Language="C#" Value="public void RegisterMessageHandler (Func&lt;Microsoft.Azure.ServiceBus.Message,System.Threading.CancellationToken,System.Threading.Tasks.Task&gt; handler);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void RegisterMessageHandler(class System.Func`3&lt;class Microsoft.Azure.ServiceBus.Message, valuetype System.Threading.CancellationToken, class System.Threading.Tasks.Task&gt; handler) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.ServiceBus.Core.IReceiverClient.RegisterMessageHandler(System.Func{Microsoft.Azure.ServiceBus.Message,System.Threading.CancellationToken,System.Threading.Tasks.Task})" />
-      <MemberSignature Language="VB.NET" Value="Public Sub RegisterMessageHandler (handler As Func(Of Message, CancellationToken, Task))" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
-        <AssemblyVersion>0.0.6.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Void</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="handler" Type="System.Func&lt;Microsoft.Azure.ServiceBus.Message,System.Threading.CancellationToken,System.Threading.Tasks.Task&gt;" />
-      </Parameters>
-      <Docs>
-        <param name="handler">A <see cref="T:System.Func`3" /> that processes messages.</param>
-        <summary>
-            Registers a message handler and begins a new thread to receive messages.
-            </summary>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="RegisterMessageHandler">
-      <MemberSignature Language="C#" Value="public void RegisterMessageHandler (Func&lt;Microsoft.Azure.ServiceBus.Message,System.Threading.CancellationToken,System.Threading.Tasks.Task&gt; handler, Microsoft.Azure.ServiceBus.MessageHandlerOptions registerHandlerOptions);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void RegisterMessageHandler(class System.Func`3&lt;class Microsoft.Azure.ServiceBus.Message, valuetype System.Threading.CancellationToken, class System.Threading.Tasks.Task&gt; handler, class Microsoft.Azure.ServiceBus.MessageHandlerOptions registerHandlerOptions) cil managed" />
+      <MemberSignature Language="C#" Value="public void RegisterMessageHandler (Func&lt;Microsoft.Azure.ServiceBus.Message,System.Threading.CancellationToken,System.Threading.Tasks.Task&gt; handler, Microsoft.Azure.ServiceBus.MessageHandlerOptions messageHandlerOptions);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void RegisterMessageHandler(class System.Func`3&lt;class Microsoft.Azure.ServiceBus.Message, valuetype System.Threading.CancellationToken, class System.Threading.Tasks.Task&gt; handler, class Microsoft.Azure.ServiceBus.MessageHandlerOptions messageHandlerOptions) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.ServiceBus.Core.IReceiverClient.RegisterMessageHandler(System.Func{Microsoft.Azure.ServiceBus.Message,System.Threading.CancellationToken,System.Threading.Tasks.Task},Microsoft.Azure.ServiceBus.MessageHandlerOptions)" />
       <MemberSignature Language="VB.NET" Value="Public Sub RegisterMessageHandler (handler As Func(Of Message, CancellationToken, Task), registerHandlerOptions As MessageHandlerOptions)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>0.0.6.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -180,11 +252,42 @@
       </Parameters>
       <Docs>
         <param name="handler">A <see cref="T:System.Func`3" /> that processes messages.</param>
+        <param name="messageHandlerOptions">The <see cref="T:Microsoft.Azure.ServiceBus.MessageHandlerOptions" /> options used to configure the settings of the pump.</param>
         <param name="registerHandlerOptions">The <see cref="T:Microsoft.Azure.ServiceBus.MessageHandlerOptions" /> options used to register a message handler.</param>
         <summary>
-            Registers a message handler and begins a new thread to receive messages.
+            Receive messages continuously from the entity. Registers a message handler and begins a new thread to receive messages.
+            This handler(<see cref="T:System.Func`3" />) is awaited on every time a new message is received by the receiver.
             </summary>
-        <remarks>To be added.</remarks>
+        <remarks>Enable prefetch to speed up the receive rate.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RegisterMessageHandler">
+      <MemberSignature Language="C#" Value="public void RegisterMessageHandler (Func&lt;Microsoft.Azure.ServiceBus.Message,System.Threading.CancellationToken,System.Threading.Tasks.Task&gt; handler, Func&lt;Microsoft.Azure.ServiceBus.ExceptionReceivedEventArgs,System.Threading.Tasks.Task&gt; exceptionReceivedHandler);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void RegisterMessageHandler(class System.Func`3&lt;class Microsoft.Azure.ServiceBus.Message, valuetype System.Threading.CancellationToken, class System.Threading.Tasks.Task&gt; handler, class System.Func`2&lt;class Microsoft.Azure.ServiceBus.ExceptionReceivedEventArgs, class System.Threading.Tasks.Task&gt; exceptionReceivedHandler) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.ServiceBus.Core.IReceiverClient.RegisterMessageHandler(System.Func{Microsoft.Azure.ServiceBus.Message,System.Threading.CancellationToken,System.Threading.Tasks.Task},System.Func{Microsoft.Azure.ServiceBus.ExceptionReceivedEventArgs,System.Threading.Tasks.Task})" />
+      <MemberSignature Language="VB.NET" Value="Public Sub RegisterMessageHandler (handler As Func(Of Message, CancellationToken, Task), exceptionReceivedHandler As Func(Of ExceptionReceivedEventArgs, Task))" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="handler" Type="System.Func&lt;Microsoft.Azure.ServiceBus.Message,System.Threading.CancellationToken,System.Threading.Tasks.Task&gt;" />
+        <Parameter Name="exceptionReceivedHandler" Type="System.Func&lt;Microsoft.Azure.ServiceBus.ExceptionReceivedEventArgs,System.Threading.Tasks.Task&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="handler">A <see cref="T:System.Func`3" /> that processes messages.</param>
+        <param name="exceptionReceivedHandler">A <see cref="T:System.Func`2" /> that is invoked during exceptions.
+            <see cref="T:Microsoft.Azure.ServiceBus.ExceptionReceivedEventArgs" /> contains contextual information regarding the exception.</param>
+        <summary>
+            Receive messages continuously from the entity. Registers a message handler and begins a new thread to receive messages.
+            This handler(<see cref="T:System.Func`3" />) is awaited on every time a new message is received by the receiver.
+            </summary>
+        <remarks>Enable prefetch to speed up the receive rate.
+            Use <see cref="M:Microsoft.Azure.ServiceBus.Core.IReceiverClient.RegisterMessageHandler(System.Func{Microsoft.Azure.ServiceBus.Message,System.Threading.CancellationToken,System.Threading.Tasks.Task},Microsoft.Azure.ServiceBus.MessageHandlerOptions)" /> to configure the settings of the pump.</remarks>
       </Docs>
     </Member>
   </Members>
