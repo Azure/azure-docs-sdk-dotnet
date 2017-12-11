@@ -103,6 +103,11 @@
             var distanceQuery = documents.Where(document => document.Location.Distance(new Point(20.1, 20)) < 20000);
             ]]></code>
         </example>
+        <example>
+          <code><![CDATA[
+            var distanceQuery = documents.Where(document => document.Location.Distance(new Point(20.1, 20)) < 20000);
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="Intersects">
@@ -136,6 +141,11 @@
             </summary>
         <returns>Returns true if geometry1 intersects with geometry2, otherwise returns false.</returns>
         <remarks>To be added.</remarks>
+        <example>
+          <code><![CDATA[
+            var distanceQuery = documents.Where(document => document.Location.Intersects(new Point(20.1, 20)));
+            ]]></code>
+        </example>
         <example>
           <code><![CDATA[
             var distanceQuery = documents.Where(document => document.Location.Intersects(new Point(20.1, 20)));
@@ -220,6 +230,14 @@
         <remarks>
             Currently this function supports <paramref name="geometry" /> of type <see cref="F:Microsoft.Azure.Documents.Spatial.GeometryType.Point" /> and <see cref="F:Microsoft.Azure.Documents.Spatial.GeometryType.Polygon" />.
             </remarks>
+        <example>
+          <para>
+            This example select all the documents which contain invalid geometries which were not indexed.
+            </para>
+          <code><![CDATA[
+            var invalidDocuments = documents.Where(document => !document.Location.IsValid());
+            ]]></code>
+        </example>
         <example>
           <para>
             This example select all the documents which contain invalid geometries which were not indexed.
@@ -402,6 +420,14 @@
             var invalidReason = documents.Where(document => !document.Location.IsValid()).Select(document => document.Location.IsValidDetailed());
             ]]></code>
         </example>
+        <example>
+          <para>
+            This example select all the documents which contain invalid geometries which were not indexed.
+            </para>
+          <code><![CDATA[
+            var invalidReason = documents.Where(document => !document.Location.IsValid()).Select(document => document.Location.IsValidDetailed());
+            ]]></code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="Within">
@@ -440,6 +466,20 @@
         <remarks>
             Currently this function supports <paramref name="inner" /> geometry of type <see cref="F:Microsoft.Azure.Documents.Spatial.GeometryType.Point" /> and outer geometry of type <see cref="F:Microsoft.Azure.Documents.Spatial.GeometryType.Polygon" />.
             </remarks>
+        <example>
+          <code><![CDATA[
+            Polygon polygon = new Polygon(
+                   new[]
+                   {
+                        new Position(10, 10),
+                        new Position(30, 10),
+                        new Position(30, 30),
+                        new Position(10, 30),
+                        new Position(10, 10)
+                   });
+            var withinQuery = documents.Where(document => document.Location.Within(polygon));
+            ]]></code>
+        </example>
         <example>
           <code><![CDATA[
             Polygon polygon = new Polygon(

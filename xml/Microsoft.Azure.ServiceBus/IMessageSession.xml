@@ -6,6 +6,7 @@
   <AssemblyInfo>
     <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
     <AssemblyVersion>0.0.6.0</AssemblyVersion>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Interfaces>
     <Interface>
@@ -14,30 +15,42 @@
   </Interfaces>
   <Docs>
     <summary>
-            Interface used to describe a MessageSession.
+            Describes a Session object. IMessageSession can be used to perform operations on sessions.
             </summary>
-    <remarks>To be added.</remarks>
+    <remarks>
+      <para>
+            Service Bus Sessions, also called 'Groups' in the AMQP 1.0 protocol, are unbounded sequences of related messages. ServiceBus guarantees ordering of messages in a session.
+            </para>
+      <para>
+            Any sender can create a session when submitting messages into a Topic or Queue by setting the <see cref="P:Microsoft.Azure.ServiceBus.Message.SessionId" /> property on Message to some
+            application defined unique identifier. At the AMQP 1.0 protocol level, this value maps to the group-id property.
+            </para>
+      <para>
+            Sessions come into existence when there is at least one message with the session's SessionId in the Queue or Topic subscription.
+            Once a Session exists, there is no defined moment or gesture for when the session expires or disappears.
+            </para>
+    </remarks>
   </Docs>
   <Members>
     <Member MemberName="GetStateAsync">
-      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;System.IO.Stream&gt; GetStateAsync ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class System.IO.Stream&gt; GetStateAsync() cil managed" />
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;byte[]&gt; GetStateAsync ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;unsigned int8[]&gt; GetStateAsync() cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.ServiceBus.IMessageSession.GetStateAsync" />
-      <MemberSignature Language="VB.NET" Value="Public Function GetStateAsync () As Task(Of Stream)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetStateAsync () As Task(Of Byte())" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
-        <AssemblyVersion>0.0.6.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>System.Threading.Tasks.Task&lt;System.IO.Stream&gt;</ReturnType>
+        <ReturnType>System.Threading.Tasks.Task&lt;System.Byte[]&gt;</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
         <summary>
             Gets the session state.
             </summary>
-        <returns>The asynchronous operation</returns>
+        <returns>The session state as byte array.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -50,13 +63,14 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>0.0.6.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.DateTime</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            Gets the time that the session is locked until as UTC.
+            Gets the time that the session identified by <see cref="P:Microsoft.Azure.ServiceBus.IMessageSession.SessionId" /> is locked until for this client.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -71,6 +85,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>0.0.6.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -78,10 +93,19 @@
       <Parameters />
       <Docs>
         <summary>
-            Renews the session lock.
+            Renews the lock on the session specified by the <see cref="P:Microsoft.Azure.ServiceBus.IMessageSession.SessionId" />. The lock will be renewed based on the setting specified on the entity.
             </summary>
         <returns>The asynchronous operation</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+          <para>
+            When you accept a session, the session is locked for this client instance by the service for a duration as specified during the Queue/Subscription creation.
+            If processing of the session requires longer than this duration, the session-lock needs to be renewed. 
+            For each renewal, it resets the time the session is locked by the LockDuration set on the Entity.
+            </para>
+          <para>
+            Renewal of session renews all the messages in the session as well. Each individual message need not be renewed.
+            </para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="SessionId">
@@ -93,6 +117,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>0.0.6.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -106,28 +131,27 @@
       </Docs>
     </Member>
     <Member MemberName="SetStateAsync">
-      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task SetStateAsync (System.IO.Stream sessionState);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task SetStateAsync(class System.IO.Stream sessionState) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.ServiceBus.IMessageSession.SetStateAsync(System.IO.Stream)" />
-      <MemberSignature Language="VB.NET" Value="Public Function SetStateAsync (sessionState As Stream) As Task" />
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task SetStateAsync (byte[] sessionState);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task SetStateAsync(unsigned int8[] sessionState) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.ServiceBus.IMessageSession.SetStateAsync(System.Byte[])" />
+      <MemberSignature Language="VB.NET" Value="Public Function SetStateAsync (sessionState As Byte()) As Task" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
-        <AssemblyVersion>0.0.6.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="sessionState" Type="System.IO.Stream" />
+        <Parameter Name="sessionState" Type="System.Byte[]" />
       </Parameters>
       <Docs>
-        <param name="sessionState">A <see cref="T:System.IO.Stream" /> of session state</param>
+        <param name="sessionState">A byte array of session state</param>
         <summary>
-            Sets the session state.
-            </summary>
-        <returns>The asynchronous operation</returns>
-        <remarks>To be added.</remarks>
+            Set a custom state on the session which can be later retrieved using <see cref="M:Microsoft.Azure.ServiceBus.IMessageSession.GetStateAsync" /></summary>
+        <returns>To be added.</returns>
+        <remarks>This state is stored on Service Bus forever unless you set an empty state on it.</remarks>
       </Docs>
     </Member>
   </Members>
