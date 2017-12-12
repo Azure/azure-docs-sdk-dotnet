@@ -78,6 +78,36 @@
                         return Task.CompletedTask;
                     });
              </code></example>
+    <example>
+             Create a new SubscriptionClient
+             <code>
+             ISubscriptionClient subscriptionClient = new SubscriptionClient(
+                 namespaceConnectionString,
+                 topicName,
+                 subscriptionName,
+                 ReceiveMode.PeekLock,
+                 RetryExponential);
+             </code>
+            
+             Register a message handler which will be invoked every time a message is received.
+             <code>
+             subscriptionClient.RegisterMessageHandler(
+                    async (message, token) =&gt;
+                    {
+                        // Process the message
+                        Console.WriteLine($"Received message: SequenceNumber:{message.SystemProperties.SequenceNumber} Body:{Encoding.UTF8.GetString(message.Body)}");
+            
+                        // Complete the message so that it is not received again.
+                        // This can be done only if the subscriptionClient is opened in ReceiveMode.PeekLock mode.
+                        await subscriptionClient.CompleteAsync(message.SystemProperties.LockToken);
+                    },
+                    async (exceptionEvent) =&gt;
+                    {
+                        // Process the exception
+                        Console.WriteLine("Exception = " + exceptionEvent.Exception);
+                        return Task.CompletedTask;
+                    });
+             </code></example>
   </Docs>
   <Members>
     <Member MemberName="AddRuleAsync">
