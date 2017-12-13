@@ -3,6 +3,7 @@
   <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit UserDefinedFunction extends Microsoft.Azure.Documents.Resource" />
   <TypeSignature Language="DocId" Value="T:Microsoft.Azure.Documents.UserDefinedFunction" />
   <TypeSignature Language="VB.NET" Value="Public Class UserDefinedFunction&#xA;Inherits Resource" />
+  <TypeSignature Language="F#" Value="type UserDefinedFunction = class&#xA;    inherit Resource" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.Azure.DocumentDB.Core</AssemblyName>
     <AssemblyVersion>1.6.0.0</AssemblyVersion>
@@ -26,6 +27,22 @@
             Refer to http://azure.microsoft.com/documentation/articles/documentdb-sql-query/#javascript-integration for how to use UDFs within queries.
             Refer to http://azure.microsoft.com/documentation/articles/documentdb-programming/#udf for more details about implementing UDFs in JavaScript.
             </remarks>
+    <example>
+            The following examples show how to register and use UDFs.
+            <code language="c#"><![CDATA[
+            await client.CreateUserDefinedFunctionAsync(collectionLink, new UserDefinedFunction { Id = "calculateTax", Body = @"function(amt) { return amt * 0.05; }" });
+            client.CreateDocumentQuery<Book>(collectionLink, "SELECT VALUE udf.calculateTax(b.price) FROM books b");
+            client.CreateDocumentQuery<Book>(collectionLink, new SqlQuerySpec("SELECT VALUE udf.calculateTax(b.price) FROM books b"));
+            client.CreateDocumentQuery<Book>(collectionLink).Select(b => UserDefinedFunctionProvider.Invoke("calculateTax", b.Price));
+            
+            await client.CreateUserDefinedFunctionAsync(collectionLink, new UserDefinedFunction { Id = "toLowerCase", Body = @"function(s) { return s.ToLowerCase(); }" });
+            client.CreateDocumentQuery<Book>(collectionLink, "SELECT * FROM books b WHERE b.toLowerCase = 'war and peace'");
+            client.CreateDocumentQuery<Book>(collectionLink, new SqlQuerySpec(
+                "SELECT * FROM books b WHERE b.toLowerCase = @bookNameLowerCase",
+                new SqlParameterCollection(new SqlParameter[] {new SqlParameter { Name = "@bookNameLowerCase", Value = "War And Peace".ToLower()
+             }})));
+             client.CreateDocumentQuery<Book>(collectionLink).Where(b => UserDefinedFunctionProvider.Invoke("toLowerCase", b.Title) == "war and peace");
+             ]]></code></example>
     <example>
             The following examples show how to register and use UDFs.
             <code language="c#"><![CDATA[
@@ -233,6 +250,7 @@
       <MemberSignature Language="ILAsm" Value=".property instance string Body" />
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.UserDefinedFunction.Body" />
       <MemberSignature Language="VB.NET" Value="Public Property Body As String" />
+      <MemberSignature Language="F#" Value="member this.Body : string with get, set" Usage="Microsoft.Azure.Documents.UserDefinedFunction.Body" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.DocumentDB.Core</AssemblyName>

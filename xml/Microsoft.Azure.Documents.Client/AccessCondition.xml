@@ -3,6 +3,7 @@
   <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit AccessCondition extends System.Object" />
   <TypeSignature Language="DocId" Value="T:Microsoft.Azure.Documents.Client.AccessCondition" />
   <TypeSignature Language="VB.NET" Value="Public NotInheritable Class AccessCondition" />
+  <TypeSignature Language="F#" Value="type AccessCondition = class" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.Azure.DocumentDB.Core</AssemblyName>
     <AssemblyVersion>1.6.0.0</AssemblyVersion>
@@ -217,6 +218,22 @@
                     } 
                  });
             ]]></code></example>
+    <example>
+            The following example shows how to use AccessCondition with DocumentClient.
+            <code language="c#"><![CDATA[
+            // If ETag is current, then this will succeed. Otherwise the request will fail with HTTP 412 Precondition Failure
+            await client.ReplaceDocumentAsync(
+                readCopyOfBook.SelfLink, 
+                new Book { Title = "Moby Dick", Price = 14.99 },
+                new RequestOptions 
+                { 
+                    AccessCondition = new AccessCondition 
+                    { 
+                        Condition = readCopyOfBook.ETag, 
+                        Type = AccessConditionType.IfMatch 
+                    } 
+                 });
+            ]]></code></example>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -246,6 +263,7 @@
       <MemberSignature Language="ILAsm" Value=".property instance string Condition" />
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.Client.AccessCondition.Condition" />
       <MemberSignature Language="VB.NET" Value="Public Property Condition As String" />
+      <MemberSignature Language="F#" Value="member this.Condition : string with get, set" Usage="Microsoft.Azure.Documents.Client.AccessCondition.Condition" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.DocumentDB.Core</AssemblyName>
@@ -276,6 +294,7 @@
       <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.Azure.Documents.Client.AccessConditionType Type" />
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.Client.AccessCondition.Type" />
       <MemberSignature Language="VB.NET" Value="Public Property Type As AccessConditionType" />
+      <MemberSignature Language="F#" Value="member this.Type : Microsoft.Azure.Documents.Client.AccessConditionType with get, set" Usage="Microsoft.Azure.Documents.Client.AccessCondition.Type" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.DocumentDB.Core</AssemblyName>
