@@ -3,6 +3,7 @@
   <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit PartitionSender extends Microsoft.Azure.EventHubs.ClientEntity" />
   <TypeSignature Language="DocId" Value="T:Microsoft.Azure.EventHubs.PartitionSender" />
   <TypeSignature Language="VB.NET" Value="Public NotInheritable Class PartitionSender&#xA;Inherits ClientEntity" />
+  <TypeSignature Language="F#" Value="type PartitionSender = class&#xA;    inherit ClientEntity" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.Azure.EventHubs</AssemblyName>
     <AssemblyVersion>1.0.3.0</AssemblyVersion>
@@ -26,6 +27,7 @@
       <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Threading.Tasks.Task CloseAsync() cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.EventHubs.PartitionSender.CloseAsync" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Function CloseAsync () As Task" />
+      <MemberSignature Language="F#" Value="override this.CloseAsync : unit -&gt; System.Threading.Tasks.Task" Usage="partitionSender.CloseAsync " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.EventHubs</AssemblyName>
@@ -53,6 +55,7 @@
       <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Azure.EventHubs.EventHubClient EventHubClient" />
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.EventHubs.PartitionSender.EventHubClient" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property EventHubClient As EventHubClient" />
+      <MemberSignature Language="F#" Value="member this.EventHubClient : Microsoft.Azure.EventHubs.EventHubClient" Usage="Microsoft.Azure.EventHubs.PartitionSender.EventHubClient" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.EventHubs</AssemblyName>
@@ -74,6 +77,7 @@
       <MemberSignature Language="ILAsm" Value=".property instance string PartitionId" />
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.EventHubs.PartitionSender.PartitionId" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property PartitionId As String" />
+      <MemberSignature Language="F#" Value="member this.PartitionId : string" Usage="Microsoft.Azure.EventHubs.PartitionSender.PartitionId" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.EventHubs</AssemblyName>
@@ -94,6 +98,7 @@
       <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task SendAsync (Microsoft.Azure.EventHubs.EventData eventData);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task SendAsync(class Microsoft.Azure.EventHubs.EventData eventData) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.EventHubs.PartitionSender.SendAsync(Microsoft.Azure.EventHubs.EventData)" />
+      <MemberSignature Language="F#" Value="member this.SendAsync : Microsoft.Azure.EventHubs.EventData -&gt; System.Threading.Tasks.Task" Usage="partitionSender.SendAsync eventData" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.EventHubs</AssemblyName>
@@ -124,6 +129,7 @@
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task SendAsync(class System.Collections.Generic.IEnumerable`1&lt;class Microsoft.Azure.EventHubs.EventData&gt; eventDatas) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.EventHubs.PartitionSender.SendAsync(System.Collections.Generic.IEnumerable{Microsoft.Azure.EventHubs.EventData})" />
       <MemberSignature Language="VB.NET" Value="Public Function SendAsync (eventDatas As IEnumerable(Of EventData)) As Task" />
+      <MemberSignature Language="F#" Value="member this.SendAsync : seq&lt;Microsoft.Azure.EventHubs.EventData&gt; -&gt; System.Threading.Tasks.Task" Usage="partitionSender.SendAsync eventDatas" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.EventHubs</AssemblyName>
@@ -178,6 +184,31 @@
             </code></example>
         <exception cref="T:Microsoft.Azure.EventHubs.MessageSizeExceededException">the total size of the <see cref="T:Microsoft.Azure.EventHubs.EventData" /> exceeds a pre-defined limit set by the service. Default is 256k bytes.</exception>
         <exception cref="T:Microsoft.Azure.EventHubs.EventHubsException">Event Hubs service encountered problems during the operation.</exception>
+        <example>
+            Sample code:
+            <code>
+            EventHubClient client = EventHubClient.Create("__connectionString__");
+            PartitionSender senderToPartitionOne = client.CreatePartitionSender("1");
+                    
+            while (true)
+            {
+                var events = new List&lt;EventData&gt;();
+                for (int count = 1; count &lt; 11; count++)
+                {
+                    var payload = new PayloadEvent(count);
+                    byte[] payloadBytes = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload));
+                    var sendEvent = new EventData(payloadBytes);
+                    var applicationProperties = new Dictionary&lt;string, string&gt;();
+                    applicationProperties["from"] = "csharpClient";
+                    sendEvent.Properties = applicationProperties;
+                    events.Add(sendEvent);
+                }
+                    
+                await senderToPartitionOne.SendAsync(events);
+                Console.WriteLine("Sent Batch... Size: {0}", events.Count);
+                
+            }
+            </code></example>
         <example>
             Sample code:
             <code>
