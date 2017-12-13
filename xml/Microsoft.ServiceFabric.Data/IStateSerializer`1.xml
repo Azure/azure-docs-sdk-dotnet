@@ -3,6 +3,7 @@
   <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IStateSerializer`1&lt;T&gt;" />
   <TypeSignature Language="DocId" Value="T:Microsoft.ServiceFabric.Data.IStateSerializer`1" />
   <TypeSignature Language="VB.NET" Value="Public Interface IStateSerializer(Of T)" />
+  <TypeSignature Language="F#" Value="type IStateSerializer&lt;'T&gt; = interface" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.ServiceFabric.Data.Interfaces</AssemblyName>
     <AssemblyVersion>5.0.0.0</AssemblyVersion>
@@ -559,12 +560,58 @@
                  }
              }
              </code></example>
+    <example>
+             In this example, implementation of the Read and Write overloads simply call their counterpart overloads.
+             The currentValue and baseValue parameters are not set by the platform and should be ignored.
+             <code>
+             class Order
+             {
+                 public byte Warehouse { get; set; }
+                 public short District { get; set; }
+                 public int Customer { get; set; }
+                 public long OrderNumber { get; set; }
+             }
+            
+             class OrderSerializer : IStateSerializer&lt;Order&gt;
+             {
+                 void Write(Order value, BinaryWriter writer)
+                 {
+                     writer.Write(value.Warehouse);
+                     writer.Write(value.District);
+                     writer.Write(value.Customer);
+                     writer.Write(value.OrderNumber);
+                 }
+            
+                 Order Read(BinaryReader reader)
+                 {
+                     Order value = new Order();
+            
+                     value.Warehouse = reader.ReadByte();
+                     value.District = reader.ReadInt16();
+                     value.Customer = reader.ReadInt32();
+                     value.OrderNumber = reader.ReadInt64();
+            
+                     return value;
+                 }
+            
+                 void Write(Order currentValue, Order newValue, BinaryWriter writer)
+                 {
+                     this.Write(newValue, writer);
+                 }
+            
+                 Order Read(Order baseValue, BinaryReader reader)
+                 {
+                     return this.Read(reader);
+                 }
+             }
+             </code></example>
   </Docs>
   <Members>
     <Member MemberName="Read">
       <MemberSignature Language="C#" Value="public T Read (System.IO.BinaryReader binaryReader);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance !T Read(class System.IO.BinaryReader binaryReader) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.ServiceFabric.Data.IStateSerializer`1.Read(System.IO.BinaryReader)" />
+      <MemberSignature Language="F#" Value="abstract member Read : System.IO.BinaryReader -&gt; 'T" Usage="iStateSerializer.Read binaryReader" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceFabric.Data.Interfaces</AssemblyName>
@@ -592,6 +639,7 @@
       <MemberSignature Language="C#" Value="public T Read (T baseValue, System.IO.BinaryReader binaryReader);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance !T Read(!T baseValue, class System.IO.BinaryReader binaryReader) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.ServiceFabric.Data.IStateSerializer`1.Read(`0,System.IO.BinaryReader)" />
+      <MemberSignature Language="F#" Value="abstract member Read : 'T * System.IO.BinaryReader -&gt; 'T" Usage="iStateSerializer.Read (baseValue, binaryReader)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceFabric.Data.Interfaces</AssemblyName>
@@ -621,6 +669,7 @@
       <MemberSignature Language="C#" Value="public void Write (T value, System.IO.BinaryWriter binaryWriter);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Write(!T value, class System.IO.BinaryWriter binaryWriter) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.ServiceFabric.Data.IStateSerializer`1.Write(`0,System.IO.BinaryWriter)" />
+      <MemberSignature Language="F#" Value="abstract member Write : 'T * System.IO.BinaryWriter -&gt; unit" Usage="iStateSerializer.Write (value, binaryWriter)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceFabric.Data.Interfaces</AssemblyName>
@@ -649,6 +698,7 @@
       <MemberSignature Language="C#" Value="public void Write (T baseValue, T targetValue, System.IO.BinaryWriter binaryWriter);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Write(!T baseValue, !T targetValue, class System.IO.BinaryWriter binaryWriter) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.ServiceFabric.Data.IStateSerializer`1.Write(`0,`0,System.IO.BinaryWriter)" />
+      <MemberSignature Language="F#" Value="abstract member Write : 'T * 'T * System.IO.BinaryWriter -&gt; unit" Usage="iStateSerializer.Write (baseValue, targetValue, binaryWriter)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceFabric.Data.Interfaces</AssemblyName>

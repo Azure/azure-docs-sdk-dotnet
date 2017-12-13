@@ -3,6 +3,7 @@
   <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit EventHubConsumerGroup extends Microsoft.ServiceBus.Messaging.ClientEntity" />
   <TypeSignature Language="DocId" Value="T:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup" />
   <TypeSignature Language="VB.NET" Value="Public NotInheritable Class EventHubConsumerGroup&#xA;Inherits ClientEntity" />
+  <TypeSignature Language="F#" Value="type EventHubConsumerGroup = class&#xA;    inherit ClientEntity" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.ServiceBus</AssemblyName>
     <AssemblyVersion>3.0.0.0</AssemblyVersion>
@@ -21,6 +22,7 @@
       <MemberSignature Language="C#" Value="public Microsoft.ServiceBus.Messaging.EventHubReceiver CreateReceiver (string partitionId, Microsoft.ServiceBus.Messaging.ReceiverOptions receiverOptions = null);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.ServiceBus.Messaging.EventHubReceiver CreateReceiver(string partitionId, class Microsoft.ServiceBus.Messaging.ReceiverOptions receiverOptions) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.CreateReceiver(System.String,Microsoft.ServiceBus.Messaging.ReceiverOptions)" />
+      <MemberSignature Language="F#" Value="member this.CreateReceiver : string * Microsoft.ServiceBus.Messaging.ReceiverOptions -&gt; Microsoft.ServiceBus.Messaging.EventHubReceiver" Usage="eventHubConsumerGroup.CreateReceiver (partitionId, receiverOptions)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -61,6 +63,7 @@
       <MemberSignature Language="C#" Value="public Microsoft.ServiceBus.Messaging.EventHubReceiver CreateReceiver (string partitionId, DateTime startingDateTimeUtc, Microsoft.ServiceBus.Messaging.ReceiverOptions receiverOptions = null);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.ServiceBus.Messaging.EventHubReceiver CreateReceiver(string partitionId, valuetype System.DateTime startingDateTimeUtc, class Microsoft.ServiceBus.Messaging.ReceiverOptions receiverOptions) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.CreateReceiver(System.String,System.DateTime,Microsoft.ServiceBus.Messaging.ReceiverOptions)" />
+      <MemberSignature Language="F#" Value="member this.CreateReceiver : string * DateTime * Microsoft.ServiceBus.Messaging.ReceiverOptions -&gt; Microsoft.ServiceBus.Messaging.EventHubReceiver" Usage="eventHubConsumerGroup.CreateReceiver (partitionId, startingDateTimeUtc, receiverOptions)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -101,6 +104,7 @@
       <MemberSignature Language="C#" Value="public Microsoft.ServiceBus.Messaging.EventHubReceiver CreateReceiver (string partitionId, long epoch, Microsoft.ServiceBus.Messaging.ReceiverOptions receiverOptions = null);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.ServiceBus.Messaging.EventHubReceiver CreateReceiver(string partitionId, int64 epoch, class Microsoft.ServiceBus.Messaging.ReceiverOptions receiverOptions) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.CreateReceiver(System.String,System.Int64,Microsoft.ServiceBus.Messaging.ReceiverOptions)" />
+      <MemberSignature Language="F#" Value="member this.CreateReceiver : string * int64 * Microsoft.ServiceBus.Messaging.ReceiverOptions -&gt; Microsoft.ServiceBus.Messaging.EventHubReceiver" Usage="eventHubConsumerGroup.CreateReceiver (partitionId, epoch, receiverOptions)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -136,6 +140,7 @@
       <MemberSignature Language="C#" Value="public Microsoft.ServiceBus.Messaging.EventHubReceiver CreateReceiver (string partitionId, string startingOffset, Microsoft.ServiceBus.Messaging.ReceiverOptions receiverOptions = null);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.ServiceBus.Messaging.EventHubReceiver CreateReceiver(string partitionId, string startingOffset, class Microsoft.ServiceBus.Messaging.ReceiverOptions receiverOptions) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.CreateReceiver(System.String,System.String,Microsoft.ServiceBus.Messaging.ReceiverOptions)" />
+      <MemberSignature Language="F#" Value="member this.CreateReceiver : string * string * Microsoft.ServiceBus.Messaging.ReceiverOptions -&gt; Microsoft.ServiceBus.Messaging.EventHubReceiver" Usage="eventHubConsumerGroup.CreateReceiver (partitionId, startingOffset, receiverOptions)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -343,12 +348,28 @@
                 
                 var eventData = receiver.Receive();
             </code>
+        <code>
+                // the following code snippet creates a receiver that receive events
+                // from the first partitions of the default consumer gorup.
+                
+                // assume we have obtained the description which will gives us the partition ids.
+                EventHubDescription description;
+                
+                EventHubClient client = EventHubClient.CreateFromConnectionString(connection);
+                var defaultGroup = client.GetDefaultConsumerGroup();
+                var receiver = defaultGroup.CreateReceiver(
+                                    description.PartitionIds.First(), 
+                                    EventHubConsumerGroup.StartOfStream);
+                
+                var eventData = receiver.Receive();
+            </code>
       </Docs>
     </Member>
     <Member MemberName="CreateReceiver">
       <MemberSignature Language="C#" Value="public Microsoft.ServiceBus.Messaging.EventHubReceiver CreateReceiver (string partitionId, DateTime startingDateTimeUtc, long epoch, Microsoft.ServiceBus.Messaging.ReceiverOptions receiverOptions = null);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.ServiceBus.Messaging.EventHubReceiver CreateReceiver(string partitionId, valuetype System.DateTime startingDateTimeUtc, int64 epoch, class Microsoft.ServiceBus.Messaging.ReceiverOptions receiverOptions) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.CreateReceiver(System.String,System.DateTime,System.Int64,Microsoft.ServiceBus.Messaging.ReceiverOptions)" />
+      <MemberSignature Language="F#" Value="member this.CreateReceiver : string * DateTime * int64 * Microsoft.ServiceBus.Messaging.ReceiverOptions -&gt; Microsoft.ServiceBus.Messaging.EventHubReceiver" Usage="eventHubConsumerGroup.CreateReceiver (partitionId, startingDateTimeUtc, epoch, receiverOptions)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -387,6 +408,7 @@
       <MemberSignature Language="C#" Value="public Microsoft.ServiceBus.Messaging.EventHubReceiver CreateReceiver (string partitionId, string startingOffset, bool offsetInclusive, Microsoft.ServiceBus.Messaging.ReceiverOptions receiverOptions = null);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.ServiceBus.Messaging.EventHubReceiver CreateReceiver(string partitionId, string startingOffset, bool offsetInclusive, class Microsoft.ServiceBus.Messaging.ReceiverOptions receiverOptions) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.CreateReceiver(System.String,System.String,System.Boolean,Microsoft.ServiceBus.Messaging.ReceiverOptions)" />
+      <MemberSignature Language="F#" Value="member this.CreateReceiver : string * string * bool * Microsoft.ServiceBus.Messaging.ReceiverOptions -&gt; Microsoft.ServiceBus.Messaging.EventHubReceiver" Usage="eventHubConsumerGroup.CreateReceiver (partitionId, startingOffset, offsetInclusive, receiverOptions)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -652,12 +674,33 @@
                 // eventData will have offset == storedOffset
                 var eventData = receiver.Receive();
             </code>
+        <code>
+                // the following code snippet creates a receiver that receive events
+                // from the first partitions of the default consumer group. It uses
+                // a previously stored offset as starting offset and return that event 
+                // as the first event
+                
+                // assume we have obtained the description which will gives us the partition ids.
+                // Also assume user has retrieved the stored offset 
+                EventHubDescription description;
+                string storedOffset = "2478";
+                
+                EventHubClient client = EventHubClient.CreateFromConnectionString(connection);
+                var defaultGroup = client.GetDefaultConsumerGroup();
+                var receiver = defaultGroup.CreateReceiver(
+                                    description.PartitionIds.First(), 
+                                    storedOffset);
+                
+                // eventData will have offset == storedOffset
+                var eventData = receiver.Receive();
+            </code>
       </Docs>
     </Member>
     <Member MemberName="CreateReceiver">
       <MemberSignature Language="C#" Value="public Microsoft.ServiceBus.Messaging.EventHubReceiver CreateReceiver (string partitionId, string startingOffset, long epoch, Microsoft.ServiceBus.Messaging.ReceiverOptions receiverOptions = null);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.ServiceBus.Messaging.EventHubReceiver CreateReceiver(string partitionId, string startingOffset, int64 epoch, class Microsoft.ServiceBus.Messaging.ReceiverOptions receiverOptions) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.CreateReceiver(System.String,System.String,System.Int64,Microsoft.ServiceBus.Messaging.ReceiverOptions)" />
+      <MemberSignature Language="F#" Value="member this.CreateReceiver : string * string * int64 * Microsoft.ServiceBus.Messaging.ReceiverOptions -&gt; Microsoft.ServiceBus.Messaging.EventHubReceiver" Usage="eventHubConsumerGroup.CreateReceiver (partitionId, startingOffset, epoch, receiverOptions)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -692,6 +735,7 @@
       <MemberSignature Language="C#" Value="public Microsoft.ServiceBus.Messaging.EventHubReceiver CreateReceiver (string partitionId, string startingOffset, bool offsetInclusive, long epoch, Microsoft.ServiceBus.Messaging.ReceiverOptions receiverOptions = null);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.ServiceBus.Messaging.EventHubReceiver CreateReceiver(string partitionId, string startingOffset, bool offsetInclusive, int64 epoch, class Microsoft.ServiceBus.Messaging.ReceiverOptions receiverOptions) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.CreateReceiver(System.String,System.String,System.Boolean,System.Int64,Microsoft.ServiceBus.Messaging.ReceiverOptions)" />
+      <MemberSignature Language="F#" Value="member this.CreateReceiver : string * string * bool * int64 * Microsoft.ServiceBus.Messaging.ReceiverOptions -&gt; Microsoft.ServiceBus.Messaging.EventHubReceiver" Usage="eventHubConsumerGroup.CreateReceiver (partitionId, startingOffset, offsetInclusive, epoch, receiverOptions)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -724,6 +768,7 @@
       <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.ServiceBus.Messaging.EventHubReceiver&gt; CreateReceiverAsync (string partitionId, Microsoft.ServiceBus.Messaging.ReceiverOptions receiverOptions = null);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task`1&lt;class Microsoft.ServiceBus.Messaging.EventHubReceiver&gt; CreateReceiverAsync(string partitionId, class Microsoft.ServiceBus.Messaging.ReceiverOptions receiverOptions) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.CreateReceiverAsync(System.String,Microsoft.ServiceBus.Messaging.ReceiverOptions)" />
+      <MemberSignature Language="F#" Value="member this.CreateReceiverAsync : string * Microsoft.ServiceBus.Messaging.ReceiverOptions -&gt; System.Threading.Tasks.Task&lt;Microsoft.ServiceBus.Messaging.EventHubReceiver&gt;" Usage="eventHubConsumerGroup.CreateReceiverAsync (partitionId, receiverOptions)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -753,6 +798,7 @@
       <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.ServiceBus.Messaging.EventHubReceiver&gt; CreateReceiverAsync (string partitionId, DateTime startingDateTimeUtc, Microsoft.ServiceBus.Messaging.ReceiverOptions receiverOptions = null);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task`1&lt;class Microsoft.ServiceBus.Messaging.EventHubReceiver&gt; CreateReceiverAsync(string partitionId, valuetype System.DateTime startingDateTimeUtc, class Microsoft.ServiceBus.Messaging.ReceiverOptions receiverOptions) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.CreateReceiverAsync(System.String,System.DateTime,Microsoft.ServiceBus.Messaging.ReceiverOptions)" />
+      <MemberSignature Language="F#" Value="member this.CreateReceiverAsync : string * DateTime * Microsoft.ServiceBus.Messaging.ReceiverOptions -&gt; System.Threading.Tasks.Task&lt;Microsoft.ServiceBus.Messaging.EventHubReceiver&gt;" Usage="eventHubConsumerGroup.CreateReceiverAsync (partitionId, startingDateTimeUtc, receiverOptions)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -784,6 +830,7 @@
       <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.ServiceBus.Messaging.EventHubReceiver&gt; CreateReceiverAsync (string partitionId, long epoch, Microsoft.ServiceBus.Messaging.ReceiverOptions receiverOptions = null);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task`1&lt;class Microsoft.ServiceBus.Messaging.EventHubReceiver&gt; CreateReceiverAsync(string partitionId, int64 epoch, class Microsoft.ServiceBus.Messaging.ReceiverOptions receiverOptions) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.CreateReceiverAsync(System.String,System.Int64,Microsoft.ServiceBus.Messaging.ReceiverOptions)" />
+      <MemberSignature Language="F#" Value="member this.CreateReceiverAsync : string * int64 * Microsoft.ServiceBus.Messaging.ReceiverOptions -&gt; System.Threading.Tasks.Task&lt;Microsoft.ServiceBus.Messaging.EventHubReceiver&gt;" Usage="eventHubConsumerGroup.CreateReceiverAsync (partitionId, epoch, receiverOptions)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -814,6 +861,7 @@
       <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.ServiceBus.Messaging.EventHubReceiver&gt; CreateReceiverAsync (string partitionId, string startingOffset, Microsoft.ServiceBus.Messaging.ReceiverOptions receiverOptions = null);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task`1&lt;class Microsoft.ServiceBus.Messaging.EventHubReceiver&gt; CreateReceiverAsync(string partitionId, string startingOffset, class Microsoft.ServiceBus.Messaging.ReceiverOptions receiverOptions) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.CreateReceiverAsync(System.String,System.String,Microsoft.ServiceBus.Messaging.ReceiverOptions)" />
+      <MemberSignature Language="F#" Value="member this.CreateReceiverAsync : string * string * Microsoft.ServiceBus.Messaging.ReceiverOptions -&gt; System.Threading.Tasks.Task&lt;Microsoft.ServiceBus.Messaging.EventHubReceiver&gt;" Usage="eventHubConsumerGroup.CreateReceiverAsync (partitionId, startingOffset, receiverOptions)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -841,6 +889,7 @@
       <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.ServiceBus.Messaging.EventHubReceiver&gt; CreateReceiverAsync (string partitionId, DateTime startingDateTimeUtc, long epoch, Microsoft.ServiceBus.Messaging.ReceiverOptions receiverOptions = null);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task`1&lt;class Microsoft.ServiceBus.Messaging.EventHubReceiver&gt; CreateReceiverAsync(string partitionId, valuetype System.DateTime startingDateTimeUtc, int64 epoch, class Microsoft.ServiceBus.Messaging.ReceiverOptions receiverOptions) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.CreateReceiverAsync(System.String,System.DateTime,System.Int64,Microsoft.ServiceBus.Messaging.ReceiverOptions)" />
+      <MemberSignature Language="F#" Value="member this.CreateReceiverAsync : string * DateTime * int64 * Microsoft.ServiceBus.Messaging.ReceiverOptions -&gt; System.Threading.Tasks.Task&lt;Microsoft.ServiceBus.Messaging.EventHubReceiver&gt;" Usage="eventHubConsumerGroup.CreateReceiverAsync (partitionId, startingDateTimeUtc, epoch, receiverOptions)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -874,6 +923,7 @@
       <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.ServiceBus.Messaging.EventHubReceiver&gt; CreateReceiverAsync (string partitionId, string startingOffset, bool offsetInclusive, Microsoft.ServiceBus.Messaging.ReceiverOptions receiverOptions = null);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task`1&lt;class Microsoft.ServiceBus.Messaging.EventHubReceiver&gt; CreateReceiverAsync(string partitionId, string startingOffset, bool offsetInclusive, class Microsoft.ServiceBus.Messaging.ReceiverOptions receiverOptions) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.CreateReceiverAsync(System.String,System.String,System.Boolean,Microsoft.ServiceBus.Messaging.ReceiverOptions)" />
+      <MemberSignature Language="F#" Value="member this.CreateReceiverAsync : string * string * bool * Microsoft.ServiceBus.Messaging.ReceiverOptions -&gt; System.Threading.Tasks.Task&lt;Microsoft.ServiceBus.Messaging.EventHubReceiver&gt;" Usage="eventHubConsumerGroup.CreateReceiverAsync (partitionId, startingOffset, offsetInclusive, receiverOptions)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -1138,12 +1188,33 @@
                 // eventData will have offset == storedOffset
                 var eventData = receiver.Receive();
             </code>
+        <code>
+                // The following code snippet creates a receiver that receive events
+                // from the first partitions of the default consumer group. It uses
+                // a previously stored offset as starting offset and return that event 
+                // as the first event
+                
+                // assume we have obtained the description which will gives us the partition ids.
+                // Also assume user has retrieved the stored offset 
+                EventHubDescription description;
+                string storedOffset = "2478";
+                
+                EventHubClient client = EventHubClient.CreateFromConnectionString(connection);
+                var defaultGroup = client.GetDefaultConsumerGroup();
+                var receiver = defaultGroup.CreateReceiver(
+                                    description.PartitionIds.First(), 
+                                    storedOffset);
+                
+                // eventData will have offset == storedOffset
+                var eventData = receiver.Receive();
+            </code>
       </Docs>
     </Member>
     <Member MemberName="CreateReceiverAsync">
       <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.ServiceBus.Messaging.EventHubReceiver&gt; CreateReceiverAsync (string partitionId, string startingOffset, long epoch, Microsoft.ServiceBus.Messaging.ReceiverOptions receiverOptions = null);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task`1&lt;class Microsoft.ServiceBus.Messaging.EventHubReceiver&gt; CreateReceiverAsync(string partitionId, string startingOffset, int64 epoch, class Microsoft.ServiceBus.Messaging.ReceiverOptions receiverOptions) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.CreateReceiverAsync(System.String,System.String,System.Int64,Microsoft.ServiceBus.Messaging.ReceiverOptions)" />
+      <MemberSignature Language="F#" Value="member this.CreateReceiverAsync : string * string * int64 * Microsoft.ServiceBus.Messaging.ReceiverOptions -&gt; System.Threading.Tasks.Task&lt;Microsoft.ServiceBus.Messaging.EventHubReceiver&gt;" Usage="eventHubConsumerGroup.CreateReceiverAsync (partitionId, startingOffset, epoch, receiverOptions)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -1174,6 +1245,7 @@
       <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.ServiceBus.Messaging.EventHubReceiver&gt; CreateReceiverAsync (string partitionId, string startingOffset, bool offsetInclusive, long epoch, Microsoft.ServiceBus.Messaging.ReceiverOptions receiverOptions = null);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task`1&lt;class Microsoft.ServiceBus.Messaging.EventHubReceiver&gt; CreateReceiverAsync(string partitionId, string startingOffset, bool offsetInclusive, int64 epoch, class Microsoft.ServiceBus.Messaging.ReceiverOptions receiverOptions) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.CreateReceiverAsync(System.String,System.String,System.Boolean,System.Int64,Microsoft.ServiceBus.Messaging.ReceiverOptions)" />
+      <MemberSignature Language="F#" Value="member this.CreateReceiverAsync : string * string * bool * int64 * Microsoft.ServiceBus.Messaging.ReceiverOptions -&gt; System.Threading.Tasks.Task&lt;Microsoft.ServiceBus.Messaging.EventHubReceiver&gt;" Usage="eventHubConsumerGroup.CreateReceiverAsync (partitionId, startingOffset, offsetInclusive, epoch, receiverOptions)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -1207,6 +1279,7 @@
       <MemberSignature Language="ILAsm" Value=".field public static literal string DefaultGroupName" />
       <MemberSignature Language="DocId" Value="F:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.DefaultGroupName" />
       <MemberSignature Language="VB.NET" Value="Public Const DefaultGroupName As String " />
+      <MemberSignature Language="F#" Value="val mutable DefaultGroupName : string" Usage="Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.DefaultGroupName" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -1228,6 +1301,7 @@
       <MemberSignature Language="ILAsm" Value=".property instance bool EnableReceiverRuntimeMetric" />
       <MemberSignature Language="DocId" Value="P:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.EnableReceiverRuntimeMetric" />
       <MemberSignature Language="VB.NET" Value="Public Property EnableReceiverRuntimeMetric As Boolean" />
+      <MemberSignature Language="F#" Value="member this.EnableReceiverRuntimeMetric : bool with get, set" Usage="Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.EnableReceiverRuntimeMetric" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -1247,6 +1321,7 @@
       <MemberSignature Language="ILAsm" Value=".field public static literal string EndOfStream" />
       <MemberSignature Language="DocId" Value="F:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.EndOfStream" />
       <MemberSignature Language="VB.NET" Value="Public Const EndOfStream As String " />
+      <MemberSignature Language="F#" Value="val mutable EndOfStream : string" Usage="Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.EndOfStream" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -1442,6 +1517,21 @@
                 
                 var eventData = receiver.Receive();
             </code>
+        <code>
+                // the following code snippet creates a receiver that receive events
+                // from the first partitions of the default consumer gorup.
+                
+                // assume we have obtained the description which will gives us the partition ids.
+                EventHubDescription description;
+                
+                EventHubClient client = EventHubClient.CreateFromConnectionString(connection);
+                var defaultGroup = client.GetDefaultConsumerGroup();
+                var receiver = defaultGroup.CreateReceiver(
+                                    description.PartitionIds.First(), 
+                                    EventHubConsumerGroup.EndOfStream);
+                
+                var eventData = receiver.Receive();
+            </code>
       </Docs>
     </Member>
     <Member MemberName="EventHubPath">
@@ -1449,6 +1539,7 @@
       <MemberSignature Language="ILAsm" Value=".property instance string EventHubPath" />
       <MemberSignature Language="DocId" Value="P:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.EventHubPath" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property EventHubPath As String" />
+      <MemberSignature Language="F#" Value="member this.EventHubPath : string" Usage="Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.EventHubPath" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -1468,6 +1559,7 @@
       <MemberSignature Language="ILAsm" Value=".event class System.EventHandler`1&lt;class Microsoft.ServiceBus.Messaging.EventProcessorFaultedEventArgs&gt; EventProcessorLifeCycleManagerFaulted" />
       <MemberSignature Language="DocId" Value="E:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.EventProcessorLifeCycleManagerFaulted" />
       <MemberSignature Language="VB.NET" Value="Public Event EventProcessorLifeCycleManagerFaulted As EventHandler(Of EventProcessorFaultedEventArgs) " />
+      <MemberSignature Language="F#" Value="member this.EventProcessorLifeCycleManagerFaulted : EventHandler&lt;Microsoft.ServiceBus.Messaging.EventProcessorFaultedEventArgs&gt; " Usage="member this.EventProcessorLifeCycleManagerFaulted : System.EventHandler&lt;Microsoft.ServiceBus.Messaging.EventProcessorFaultedEventArgs&gt; " />
       <MemberType>Event</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -1486,6 +1578,7 @@
       <MemberSignature Language="ILAsm" Value=".property instance string GroupName" />
       <MemberSignature Language="DocId" Value="P:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.GroupName" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property GroupName As String" />
+      <MemberSignature Language="F#" Value="member this.GroupName : string" Usage="Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.GroupName" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -1505,6 +1598,7 @@
       <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void OnAbort() cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.OnAbort" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnAbort ()" />
+      <MemberSignature Language="F#" Value="override this.OnAbort : unit -&gt; unit" Usage="eventHubConsumerGroup.OnAbort " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -1524,6 +1618,7 @@
       <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.IAsyncResult OnBeginClose(valuetype System.TimeSpan timeout, class System.AsyncCallback callback, object state) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.OnBeginClose(System.TimeSpan,System.AsyncCallback,System.Object)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Function OnBeginClose (timeout As TimeSpan, callback As AsyncCallback, state As Object) As IAsyncResult" />
+      <MemberSignature Language="F#" Value="override this.OnBeginClose : TimeSpan * AsyncCallback * obj -&gt; IAsyncResult" Usage="eventHubConsumerGroup.OnBeginClose (timeout, callback, state)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -1551,6 +1646,7 @@
       <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.IAsyncResult OnBeginOpen(valuetype System.TimeSpan timeout, class System.AsyncCallback callback, object state) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.OnBeginOpen(System.TimeSpan,System.AsyncCallback,System.Object)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Function OnBeginOpen (timeout As TimeSpan, callback As AsyncCallback, state As Object) As IAsyncResult" />
+      <MemberSignature Language="F#" Value="override this.OnBeginOpen : TimeSpan * AsyncCallback * obj -&gt; IAsyncResult" Usage="eventHubConsumerGroup.OnBeginOpen (timeout, callback, state)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -1578,6 +1674,7 @@
       <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void OnClose(valuetype System.TimeSpan timeout) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.OnClose(System.TimeSpan)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnClose (timeout As TimeSpan)" />
+      <MemberSignature Language="F#" Value="override this.OnClose : TimeSpan -&gt; unit" Usage="eventHubConsumerGroup.OnClose timeout" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -1600,6 +1697,7 @@
       <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void OnEndClose(class System.IAsyncResult result) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.OnEndClose(System.IAsyncResult)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnEndClose (result As IAsyncResult)" />
+      <MemberSignature Language="F#" Value="override this.OnEndClose : IAsyncResult -&gt; unit" Usage="eventHubConsumerGroup.OnEndClose result" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -1622,6 +1720,7 @@
       <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void OnEndOpen(class System.IAsyncResult result) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.OnEndOpen(System.IAsyncResult)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnEndOpen (result As IAsyncResult)" />
+      <MemberSignature Language="F#" Value="override this.OnEndOpen : IAsyncResult -&gt; unit" Usage="eventHubConsumerGroup.OnEndOpen result" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -1644,6 +1743,7 @@
       <MemberSignature Language="ILAsm" Value=".property instance int32 PrefetchCount" />
       <MemberSignature Language="DocId" Value="P:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.PrefetchCount" />
       <MemberSignature Language="VB.NET" Value="Public Property PrefetchCount As Integer" />
+      <MemberSignature Language="F#" Value="member this.PrefetchCount : int with get, set" Usage="Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.PrefetchCount" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -1669,6 +1769,7 @@
       <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;int64&gt; PrefetchSizeInBytes" />
       <MemberSignature Language="DocId" Value="P:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.PrefetchSizeInBytes" />
       <MemberSignature Language="VB.NET" Value="Public Property PrefetchSizeInBytes As Nullable(Of Long)" />
+      <MemberSignature Language="F#" Value="member this.PrefetchSizeInBytes : Nullable&lt;int64&gt; with get, set" Usage="Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.PrefetchSizeInBytes" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -1695,6 +1796,7 @@
       <MemberSignature Language="C#" Value="public void RegisterProcessor&lt;T&gt; (Microsoft.ServiceBus.Messaging.Lease lease, Microsoft.ServiceBus.Messaging.ICheckpointManager checkpointManager) where T : Microsoft.ServiceBus.Messaging.IEventProcessor;" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RegisterProcessor&lt;(class Microsoft.ServiceBus.Messaging.IEventProcessor) T&gt;(class Microsoft.ServiceBus.Messaging.Lease lease, class Microsoft.ServiceBus.Messaging.ICheckpointManager checkpointManager) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.RegisterProcessor``1(Microsoft.ServiceBus.Messaging.Lease,Microsoft.ServiceBus.Messaging.ICheckpointManager)" />
+      <MemberSignature Language="F#" Value="member this.RegisterProcessor : Microsoft.ServiceBus.Messaging.Lease * Microsoft.ServiceBus.Messaging.ICheckpointManager -&gt; unit (requires 'T :&gt; Microsoft.ServiceBus.Messaging.IEventProcessor)" Usage="eventHubConsumerGroup.RegisterProcessor (lease, checkpointManager)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -1732,6 +1834,7 @@
       <MemberSignature Language="C#" Value="public void RegisterProcessor&lt;T&gt; (Microsoft.ServiceBus.Messaging.Lease lease, Microsoft.ServiceBus.Messaging.ICheckpointManager checkpointManager, Microsoft.ServiceBus.Messaging.EventProcessorOptions processorOptions) where T : Microsoft.ServiceBus.Messaging.IEventProcessor;" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RegisterProcessor&lt;(class Microsoft.ServiceBus.Messaging.IEventProcessor) T&gt;(class Microsoft.ServiceBus.Messaging.Lease lease, class Microsoft.ServiceBus.Messaging.ICheckpointManager checkpointManager, class Microsoft.ServiceBus.Messaging.EventProcessorOptions processorOptions) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.RegisterProcessor``1(Microsoft.ServiceBus.Messaging.Lease,Microsoft.ServiceBus.Messaging.ICheckpointManager,Microsoft.ServiceBus.Messaging.EventProcessorOptions)" />
+      <MemberSignature Language="F#" Value="member this.RegisterProcessor : Microsoft.ServiceBus.Messaging.Lease * Microsoft.ServiceBus.Messaging.ICheckpointManager * Microsoft.ServiceBus.Messaging.EventProcessorOptions -&gt; unit (requires 'T :&gt; Microsoft.ServiceBus.Messaging.IEventProcessor)" Usage="eventHubConsumerGroup.RegisterProcessor (lease, checkpointManager, processorOptions)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -1771,6 +1874,7 @@
       <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task RegisterProcessorAsync&lt;T&gt; (Microsoft.ServiceBus.Messaging.Lease lease, Microsoft.ServiceBus.Messaging.ICheckpointManager checkpointManager) where T : Microsoft.ServiceBus.Messaging.IEventProcessor;" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task RegisterProcessorAsync&lt;(class Microsoft.ServiceBus.Messaging.IEventProcessor) T&gt;(class Microsoft.ServiceBus.Messaging.Lease lease, class Microsoft.ServiceBus.Messaging.ICheckpointManager checkpointManager) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.RegisterProcessorAsync``1(Microsoft.ServiceBus.Messaging.Lease,Microsoft.ServiceBus.Messaging.ICheckpointManager)" />
+      <MemberSignature Language="F#" Value="member this.RegisterProcessorAsync : Microsoft.ServiceBus.Messaging.Lease * Microsoft.ServiceBus.Messaging.ICheckpointManager -&gt; System.Threading.Tasks.Task (requires 'T :&gt; Microsoft.ServiceBus.Messaging.IEventProcessor)" Usage="eventHubConsumerGroup.RegisterProcessorAsync (lease, checkpointManager)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -1805,6 +1909,7 @@
       <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task RegisterProcessorAsync&lt;T&gt; (Microsoft.ServiceBus.Messaging.Lease lease, Microsoft.ServiceBus.Messaging.ICheckpointManager checkpointManager, Microsoft.ServiceBus.Messaging.EventProcessorOptions processorOptions) where T : Microsoft.ServiceBus.Messaging.IEventProcessor;" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task RegisterProcessorAsync&lt;(class Microsoft.ServiceBus.Messaging.IEventProcessor) T&gt;(class Microsoft.ServiceBus.Messaging.Lease lease, class Microsoft.ServiceBus.Messaging.ICheckpointManager checkpointManager, class Microsoft.ServiceBus.Messaging.EventProcessorOptions processorOptions) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.RegisterProcessorAsync``1(Microsoft.ServiceBus.Messaging.Lease,Microsoft.ServiceBus.Messaging.ICheckpointManager,Microsoft.ServiceBus.Messaging.EventProcessorOptions)" />
+      <MemberSignature Language="F#" Value="member this.RegisterProcessorAsync : Microsoft.ServiceBus.Messaging.Lease * Microsoft.ServiceBus.Messaging.ICheckpointManager * Microsoft.ServiceBus.Messaging.EventProcessorOptions -&gt; System.Threading.Tasks.Task (requires 'T :&gt; Microsoft.ServiceBus.Messaging.IEventProcessor)" Usage="eventHubConsumerGroup.RegisterProcessorAsync (lease, checkpointManager, processorOptions)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -1842,6 +1947,7 @@
       <MemberSignature Language="C#" Value="public void RegisterProcessorFactory (Microsoft.ServiceBus.Messaging.Lease lease, Microsoft.ServiceBus.Messaging.ICheckpointManager checkpointManager, Microsoft.ServiceBus.Messaging.IEventProcessorFactory eventProcessorFactory);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RegisterProcessorFactory(class Microsoft.ServiceBus.Messaging.Lease lease, class Microsoft.ServiceBus.Messaging.ICheckpointManager checkpointManager, class Microsoft.ServiceBus.Messaging.IEventProcessorFactory eventProcessorFactory) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.RegisterProcessorFactory(Microsoft.ServiceBus.Messaging.Lease,Microsoft.ServiceBus.Messaging.ICheckpointManager,Microsoft.ServiceBus.Messaging.IEventProcessorFactory)" />
+      <MemberSignature Language="F#" Value="member this.RegisterProcessorFactory : Microsoft.ServiceBus.Messaging.Lease * Microsoft.ServiceBus.Messaging.ICheckpointManager * Microsoft.ServiceBus.Messaging.IEventProcessorFactory -&gt; unit" Usage="eventHubConsumerGroup.RegisterProcessorFactory (lease, checkpointManager, eventProcessorFactory)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -1867,6 +1973,23 @@
              <see cref="P:Microsoft.ServiceBus.Messaging.Lease.Offset" />. Use this overload to create an event processor that checkpoints the message offset using a custom implementation of 
              <see cref="T:Microsoft.ServiceBus.Messaging.ICheckpointManager" />.</summary>
         <remarks>To be added.</remarks>
+        <code>
+                 // TestEventProcessorFactory implements IEventProcessorFactory
+                 var processorFactory = new TestEventProcessorFactory();
+                
+                 // Register event processor with each shard to start consuming messages
+                 var subscriberGroup = receiveClient.GetDefaultConsumerGroup();
+                 foreach (var partitionId in hubDescription.PartitionIds)
+                 {
+                     Lease lease = new Lease()
+                     {
+                         PartitionId = partitionId,
+                         Offset = EventHubTestUtils.DefaultStartingOffset
+                     };
+            
+                     subscriberGroup.RegisterProcessorFactory(lease, new TestCheckpointManager(), processorFactory);
+                 }
+             </code>
         <code>
                  // TestEventProcessorFactory implements IEventProcessorFactory
                  var processorFactory = new TestEventProcessorFactory();
@@ -2077,6 +2200,7 @@
       <MemberSignature Language="C#" Value="public void RegisterProcessorFactory (Microsoft.ServiceBus.Messaging.Lease lease, Microsoft.ServiceBus.Messaging.ICheckpointManager checkpointManager, Microsoft.ServiceBus.Messaging.IEventProcessorFactory eventProcessorFactory, Microsoft.ServiceBus.Messaging.EventProcessorOptions processorOptions);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RegisterProcessorFactory(class Microsoft.ServiceBus.Messaging.Lease lease, class Microsoft.ServiceBus.Messaging.ICheckpointManager checkpointManager, class Microsoft.ServiceBus.Messaging.IEventProcessorFactory eventProcessorFactory, class Microsoft.ServiceBus.Messaging.EventProcessorOptions processorOptions) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.RegisterProcessorFactory(Microsoft.ServiceBus.Messaging.Lease,Microsoft.ServiceBus.Messaging.ICheckpointManager,Microsoft.ServiceBus.Messaging.IEventProcessorFactory,Microsoft.ServiceBus.Messaging.EventProcessorOptions)" />
+      <MemberSignature Language="F#" Value="member this.RegisterProcessorFactory : Microsoft.ServiceBus.Messaging.Lease * Microsoft.ServiceBus.Messaging.ICheckpointManager * Microsoft.ServiceBus.Messaging.IEventProcessorFactory * Microsoft.ServiceBus.Messaging.EventProcessorOptions -&gt; unit" Usage="eventHubConsumerGroup.RegisterProcessorFactory (lease, checkpointManager, eventProcessorFactory, processorOptions)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -2308,12 +2432,30 @@
                      subscriberGroup.RegisterProcessorFactory(lease, new TestCheckpointManager(), processorFactory);
                  }
              </code>
+        <code>
+                 // TestEventProcessorFactory implements IEventProcessorFactory
+                 var processorFactory = new TestEventProcessorFactory();
+                
+                 // Register event processor with each shard to start consuming messages
+                 var subscriberGroup = receiveClient.GetDefaultConsumerGroup();
+                 foreach (var partitionId in hubDescription.PartitionIds)
+                 {
+                     Lease lease = new Lease()
+                     {
+                         PartitionId = partitionId,
+                         Offset = EventHubTestUtils.DefaultStartingOffset
+                     };
+            
+                     subscriberGroup.RegisterProcessorFactory(lease, new TestCheckpointManager(), processorFactory);
+                 }
+             </code>
       </Docs>
     </Member>
     <Member MemberName="RegisterProcessorFactoryAsync">
       <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task RegisterProcessorFactoryAsync (Microsoft.ServiceBus.Messaging.Lease lease, Microsoft.ServiceBus.Messaging.ICheckpointManager checkpointManager, Microsoft.ServiceBus.Messaging.IEventProcessorFactory eventProcessorFactory);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task RegisterProcessorFactoryAsync(class Microsoft.ServiceBus.Messaging.Lease lease, class Microsoft.ServiceBus.Messaging.ICheckpointManager checkpointManager, class Microsoft.ServiceBus.Messaging.IEventProcessorFactory eventProcessorFactory) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.RegisterProcessorFactoryAsync(Microsoft.ServiceBus.Messaging.Lease,Microsoft.ServiceBus.Messaging.ICheckpointManager,Microsoft.ServiceBus.Messaging.IEventProcessorFactory)" />
+      <MemberSignature Language="F#" Value="member this.RegisterProcessorFactoryAsync : Microsoft.ServiceBus.Messaging.Lease * Microsoft.ServiceBus.Messaging.ICheckpointManager * Microsoft.ServiceBus.Messaging.IEventProcessorFactory -&gt; System.Threading.Tasks.Task" Usage="eventHubConsumerGroup.RegisterProcessorFactoryAsync (lease, checkpointManager, eventProcessorFactory)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -2528,12 +2670,29 @@
                     await subscriberGroup.RegisterProcessorFactoryAsync(lease, new TestCheckpointManager(), processorFactory);
                 }
             </code>
+        <code>
+                TestEventProcessorFactory processorFactory = new TestEventProcessorFactory();
+            
+                // Register event processor with each shard to start consuming messages
+                var subscriberGroup = receiveClient.GetDefaultConsumerGroup();
+                foreach (var partitionId in hubDescription.PartitionIds)
+                {
+                    Lease lease = new Lease()
+                    {
+                        PartitionId = partitionId,
+                        Offset = EventHubTestUtils.DefaultStartingOffset
+                    };
+                
+                    await subscriberGroup.RegisterProcessorFactoryAsync(lease, new TestCheckpointManager(), processorFactory);
+                }
+            </code>
       </Docs>
     </Member>
     <Member MemberName="RegisterProcessorFactoryAsync">
       <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task RegisterProcessorFactoryAsync (Microsoft.ServiceBus.Messaging.Lease lease, Microsoft.ServiceBus.Messaging.ICheckpointManager checkpointManager, Microsoft.ServiceBus.Messaging.IEventProcessorFactory eventProcessorFactory, Microsoft.ServiceBus.Messaging.EventProcessorOptions processorOptions);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task RegisterProcessorFactoryAsync(class Microsoft.ServiceBus.Messaging.Lease lease, class Microsoft.ServiceBus.Messaging.ICheckpointManager checkpointManager, class Microsoft.ServiceBus.Messaging.IEventProcessorFactory eventProcessorFactory, class Microsoft.ServiceBus.Messaging.EventProcessorOptions processorOptions) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.RegisterProcessorFactoryAsync(Microsoft.ServiceBus.Messaging.Lease,Microsoft.ServiceBus.Messaging.ICheckpointManager,Microsoft.ServiceBus.Messaging.IEventProcessorFactory,Microsoft.ServiceBus.Messaging.EventProcessorOptions)" />
+      <MemberSignature Language="F#" Value="member this.RegisterProcessorFactoryAsync : Microsoft.ServiceBus.Messaging.Lease * Microsoft.ServiceBus.Messaging.ICheckpointManager * Microsoft.ServiceBus.Messaging.IEventProcessorFactory * Microsoft.ServiceBus.Messaging.EventProcessorOptions -&gt; System.Threading.Tasks.Task" Usage="eventHubConsumerGroup.RegisterProcessorFactoryAsync (lease, checkpointManager, eventProcessorFactory, processorOptions)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -2762,6 +2921,23 @@
                      subscriberGroup.RegisterProcessorFactory(lease, new TestCheckpointManager(), processorFactory);
                  }
              </code>
+        <code>
+                 // TestEventProcessorFactory implements IEventProcessorFactory
+                 var processorFactory = new TestEventProcessorFactory();
+                
+                 // Register event processor with each shard to start consuming messages
+                 var subscriberGroup = receiveClient.GetDefaultConsumerGroup();
+                 foreach (var partitionId in hubDescription.PartitionIds)
+                 {
+                     Lease lease = new Lease()
+                     {
+                         PartitionId = partitionId,
+                         Offset = EventHubTestUtils.DefaultStartingOffset
+                     };
+            
+                     subscriberGroup.RegisterProcessorFactory(lease, new TestCheckpointManager(), processorFactory);
+                 }
+             </code>
       </Docs>
     </Member>
     <Member MemberName="StartOfStream">
@@ -2769,6 +2945,7 @@
       <MemberSignature Language="ILAsm" Value=".field public static literal string StartOfStream" />
       <MemberSignature Language="DocId" Value="F:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.StartOfStream" />
       <MemberSignature Language="VB.NET" Value="Public Const StartOfStream As String " />
+      <MemberSignature Language="F#" Value="val mutable StartOfStream : string" Usage="Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.StartOfStream" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -2963,12 +3140,28 @@
                 
                 var eventData = receiver.Receive();
             </code>
+        <code>
+                // the following code snippet creates a receiver that receive events
+                // from the first partitions of the default consumer gorup.
+                
+                // assume we have obtained the description which will gives us the partition ids.
+                EventHubDescription description;
+                
+                EventHubClient client = EventHubClient.CreateFromConnectionString(connection);
+                var defaultGroup = client.GetDefaultConsumerGroup();
+                var receiver = defaultGroup.CreateReceiver(
+                                    description.PartitionIds.First(), 
+                                    EventHubConsumerGroup.StartOfStream);
+                
+                var eventData = receiver.Receive();
+            </code>
       </Docs>
     </Member>
     <Member MemberName="UnregisterProcessor">
       <MemberSignature Language="C#" Value="public void UnregisterProcessor (Microsoft.ServiceBus.Messaging.Lease lease, Microsoft.ServiceBus.Messaging.CloseReason reason);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void UnregisterProcessor(class Microsoft.ServiceBus.Messaging.Lease lease, valuetype Microsoft.ServiceBus.Messaging.CloseReason reason) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.UnregisterProcessor(Microsoft.ServiceBus.Messaging.Lease,Microsoft.ServiceBus.Messaging.CloseReason)" />
+      <MemberSignature Language="F#" Value="member this.UnregisterProcessor : Microsoft.ServiceBus.Messaging.Lease * Microsoft.ServiceBus.Messaging.CloseReason -&gt; unit" Usage="eventHubConsumerGroup.UnregisterProcessor (lease, reason)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>
@@ -2996,6 +3189,7 @@
       <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task UnregisterProcessorAsync (Microsoft.ServiceBus.Messaging.Lease lease, Microsoft.ServiceBus.Messaging.CloseReason reason);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task UnregisterProcessorAsync(class Microsoft.ServiceBus.Messaging.Lease lease, valuetype Microsoft.ServiceBus.Messaging.CloseReason reason) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.ServiceBus.Messaging.EventHubConsumerGroup.UnregisterProcessorAsync(Microsoft.ServiceBus.Messaging.Lease,Microsoft.ServiceBus.Messaging.CloseReason)" />
+      <MemberSignature Language="F#" Value="member this.UnregisterProcessorAsync : Microsoft.ServiceBus.Messaging.Lease * Microsoft.ServiceBus.Messaging.CloseReason -&gt; System.Threading.Tasks.Task" Usage="eventHubConsumerGroup.UnregisterProcessorAsync (lease, reason)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceBus</AssemblyName>

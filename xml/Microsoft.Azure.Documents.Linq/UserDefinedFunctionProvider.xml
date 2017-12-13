@@ -3,6 +3,7 @@
   <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract sealed beforefieldinit UserDefinedFunctionProvider extends System.Object" />
   <TypeSignature Language="DocId" Value="T:Microsoft.Azure.Documents.Linq.UserDefinedFunctionProvider" />
   <TypeSignature Language="VB.NET" Value="Public Class UserDefinedFunctionProvider" />
+  <TypeSignature Language="F#" Value="type UserDefinedFunctionProvider = class" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.Azure.DocumentDB.Core</AssemblyName>
     <AssemblyVersion>1.6.0.0</AssemblyVersion>
@@ -29,6 +30,7 @@
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig object Invoke(string udfName, object[] arguments) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Documents.Linq.UserDefinedFunctionProvider.Invoke(System.String,System.Object[])" />
       <MemberSignature Language="VB.NET" Value="Public Shared Function Invoke (udfName As String, ParamArray arguments As Object()) As Object" />
+      <MemberSignature Language="F#" Value="static member Invoke : string * obj[] -&gt; obj" Usage="Microsoft.Azure.Documents.Linq.UserDefinedFunctionProvider.Invoke (udfName, arguments)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.DocumentDB.Core</AssemblyName>
@@ -76,6 +78,16 @@
             ]]></code>
         </example>
         <altmember cref="T:Microsoft.Azure.Documents.UserDefinedFunction" />
+        <example>
+          <code language="c#"><![CDATA[
+             await client.CreateUserDefinedFunctionAsync(collectionLink, new UserDefinedFunction { Id = "calculateTax", Body = @"function(amt) { return amt * 0.05; }" });
+             var queryable = client.CreateDocumentQuery<Book>(collectionLink).Select(b => UserDefinedFunctionProvider.Invoke("calculateTax", b.Price));
+             
+            // Equivalent to SELECT * FROM books b WHERE udf.toLowerCase(b.title) = 'war and peace'" 
+            await client.CreateUserDefinedFunctionAsync(collectionLink, new UserDefinedFunction { Id = "toLowerCase", Body = @"function(s) { return s.ToLowerCase(); }" });
+            queryable = client.CreateDocumentQuery<Book>(collectionLink).Where(b => UserDefinedFunctionProvider.Invoke("toLowerCase", b.Title) == "war and peace");
+            ]]></code>
+        </example>
         <example>
           <code language="c#"><![CDATA[
              await client.CreateUserDefinedFunctionAsync(collectionLink, new UserDefinedFunction { Id = "calculateTax", Body = @"function(amt) { return amt * 0.05; }" });

@@ -3,6 +3,7 @@
   <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit ChangeFeedEventHost extends System.Object" />
   <TypeSignature Language="DocId" Value="T:Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost" />
   <TypeSignature Language="VB.NET" Value="Public Class ChangeFeedEventHost" />
+  <TypeSignature Language="F#" Value="type ChangeFeedEventHost = class&#xA;    interface IPartitionObserver&lt;DocumentServiceLease&gt;" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.Azure.Documents.ChangeFeedProcessor</AssemblyName>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
@@ -593,6 +594,53 @@
             }
             ]]></code>
     </example>
+    <example>
+      <code language="c#"><![CDATA[
+            class DocumentFeedObserver : IChangeFeedObserver
+            {
+                private static int s_totalDocs = 0;
+                public Task OpenAsync(ChangeFeedObserverContext context)
+                {
+                    Console.WriteLine("Worker opened, {0}", context.PartitionKeyRangeId);
+                    return Task.CompletedTask;  // Requires targeting .NET 4.6+.
+                }
+                public Task CloseAsync(ChangeFeedObserverContext context, ChangeFeedObserverCloseReason reason)
+                {
+                    Console.WriteLine("Worker closed, {0}", context.PartitionKeyRangeId);
+                    return Task.CompletedTask;
+                }
+                public Task ProcessChangesAsync(ChangeFeedObserverContext context, IReadOnlyList<Document> docs)
+                {
+                    Console.WriteLine("Change feed: total {0} doc(s)", Interlocked.Add(ref s_totalDocs, docs.Count));
+                    return Task.CompletedTask;
+                }
+            }
+            static async Task StartChangeFeedHost()
+            {
+                string hostName = Guid.NewGuid().ToString();
+                DocumentCollectionInfo documentCollectionLocation = new DocumentCollectionInfo
+                {
+                    Uri = new Uri("https://YOUR_SERVICE.documents.azure.com:443/"),
+                    MasterKey = "YOUR_SECRET_KEY==",
+                    DatabaseName = "db1",
+                    CollectionName = "documents"
+                };
+                DocumentCollectionInfo leaseCollectionLocation = new DocumentCollectionInfo
+                {
+                    Uri = new Uri("https://YOUR_SERVICE.documents.azure.com:443/"),
+                    MasterKey = "YOUR_SECRET_KEY==",
+                    DatabaseName = "db1",
+                    CollectionName = "leases"
+                };
+                Console.WriteLine("Main program: Creating ChangeFeedEventHost...");
+                ChangeFeedEventHost host = new ChangeFeedEventHost(hostName, documentCollectionLocation, leaseCollectionLocation);
+                await host.RegisterObserverAsync<DocumentFeedObserver>();
+                Console.WriteLine("Main program: press Enter to stop...");
+                Console.ReadLine();
+                await host.UnregisterObserversAsync();
+            }
+            ]]></code>
+    </example>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -600,6 +648,7 @@
       <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string hostName, class Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo documentCollectionLocation, class Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo auxCollectionLocation) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost.#ctor(System.String,Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo,Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo)" />
       <MemberSignature Language="VB.NET" Value="Public Sub New (hostName As String, documentCollectionLocation As DocumentCollectionInfo, auxCollectionLocation As DocumentCollectionInfo)" />
+      <MemberSignature Language="F#" Value="new Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost : string * Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo * Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo -&gt; Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost" Usage="new Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost (hostName, documentCollectionLocation, auxCollectionLocation)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Documents.ChangeFeedProcessor</AssemblyName>
@@ -625,6 +674,7 @@
       <MemberSignature Language="C#" Value="public ChangeFeedEventHost (string hostName, Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo documentCollectionLocation, Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo auxCollectionLocation, Microsoft.Azure.Documents.Client.ChangeFeedOptions changeFeedOptions, Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedHostOptions hostOptions);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string hostName, class Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo documentCollectionLocation, class Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo auxCollectionLocation, class Microsoft.Azure.Documents.Client.ChangeFeedOptions changeFeedOptions, class Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedHostOptions hostOptions) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost.#ctor(System.String,Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo,Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo,Microsoft.Azure.Documents.Client.ChangeFeedOptions,Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedHostOptions)" />
+      <MemberSignature Language="F#" Value="new Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost : string * Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo * Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo * Microsoft.Azure.Documents.Client.ChangeFeedOptions * Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedHostOptions -&gt; Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost" Usage="new Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost (hostName, documentCollectionLocation, auxCollectionLocation, changeFeedOptions, hostOptions)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Documents.ChangeFeedProcessor</AssemblyName>
@@ -655,6 +705,7 @@
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task`1&lt;int64&gt; GetEstimatedRemainingWork() cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost.GetEstimatedRemainingWork" />
       <MemberSignature Language="VB.NET" Value="Public Function GetEstimatedRemainingWork () As Task(Of Long)" />
+      <MemberSignature Language="F#" Value="member this.GetEstimatedRemainingWork : unit -&gt; System.Threading.Tasks.Task&lt;int64&gt;" Usage="changeFeedEventHost.GetEstimatedRemainingWork " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Documents.ChangeFeedProcessor</AssemblyName>
@@ -683,6 +734,7 @@
       <MemberSignature Language="ILAsm" Value=".property instance string HostName" />
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost.HostName" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property HostName As String" />
+      <MemberSignature Language="F#" Value="member this.HostName : string" Usage="Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost.HostName" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Documents.ChangeFeedProcessor</AssemblyName>
@@ -703,6 +755,7 @@
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task RegisterObserverAsync&lt;.ctor (class Microsoft.Azure.Documents.ChangeFeedProcessor.IChangeFeedObserver) T&gt;() cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost.RegisterObserverAsync``1" />
       <MemberSignature Language="VB.NET" Value="Public Function RegisterObserverAsync(Of T As {IChangeFeedObserverNew}) () As Task" />
+      <MemberSignature Language="F#" Value="member this.RegisterObserverAsync : unit -&gt; System.Threading.Tasks.Task (requires 'T :&gt; Microsoft.Azure.Documents.ChangeFeedProcessor.IChangeFeedObserver and 'T : (new : unit -&gt; 'T))" Usage="changeFeedEventHost.RegisterObserverAsync " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Documents.ChangeFeedProcessor</AssemblyName>
@@ -739,6 +792,7 @@
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task RegisterObserverFactoryAsync(class Microsoft.Azure.Documents.ChangeFeedProcessor.IChangeFeedObserverFactory factory) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost.RegisterObserverFactoryAsync(Microsoft.Azure.Documents.ChangeFeedProcessor.IChangeFeedObserverFactory)" />
       <MemberSignature Language="VB.NET" Value="Public Function RegisterObserverFactoryAsync (factory As IChangeFeedObserverFactory) As Task" />
+      <MemberSignature Language="F#" Value="member this.RegisterObserverFactoryAsync : Microsoft.Azure.Documents.ChangeFeedProcessor.IChangeFeedObserverFactory -&gt; System.Threading.Tasks.Task" Usage="changeFeedEventHost.RegisterObserverFactoryAsync factory" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Documents.ChangeFeedProcessor</AssemblyName>
@@ -771,6 +825,7 @@
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task UnregisterObserversAsync() cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost.UnregisterObserversAsync" />
       <MemberSignature Language="VB.NET" Value="Public Function UnregisterObserversAsync () As Task" />
+      <MemberSignature Language="F#" Value="member this.UnregisterObserversAsync : unit -&gt; System.Threading.Tasks.Task" Usage="changeFeedEventHost.UnregisterObserversAsync " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Documents.ChangeFeedProcessor</AssemblyName>
