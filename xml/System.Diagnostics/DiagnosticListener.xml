@@ -1,0 +1,394 @@
+﻿<Type Name="DiagnosticListener" FullName="System.Diagnostics.DiagnosticListener">
+  <TypeSignature Language="C#" Value="public class DiagnosticListener : System.Diagnostics.DiagnosticSource, IDisposable, IObservable&lt;System.Collections.Generic.KeyValuePair&lt;string,object&gt;&gt;" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit DiagnosticListener extends System.Diagnostics.DiagnosticSource implements class System.IDisposable, class System.IObservable`1&lt;valuetype System.Collections.Generic.KeyValuePair`2&lt;string, object&gt;&gt;" />
+  <TypeSignature Language="DocId" Value="T:System.Diagnostics.DiagnosticListener" />
+  <TypeSignature Language="VB.NET" Value="Public Class DiagnosticListener&#xA;Inherits DiagnosticSource&#xA;Implements IDisposable, IObservable(Of KeyValuePair(Of String, Object))" />
+  <TypeSignature Language="F#" Value="type DiagnosticListener = class&#xA;    inherit DiagnosticSource&#xA;    interface IObservable&lt;KeyValuePair&lt;string, obj&gt;&gt;&#xA;    interface IDisposable" />
+  <TypeSignature Language="C++ CLI" Value="public ref class DiagnosticListener : System::Diagnostics::DiagnosticSource, IDisposable, IObservable&lt;System::Collections::Generic::KeyValuePair&lt;System::String ^, System::Object ^&gt;&gt;" />
+  <AssemblyInfo>
+    <AssemblyName>System.Diagnostics.DiagnosticSource</AssemblyName>
+    <AssemblyVersion>4.0.2.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Diagnostics.DiagnosticSource</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.IDisposable</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>System.IObservable&lt;System.Collections.Generic.KeyValuePair&lt;System.String,System.Object&gt;&gt;</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Docs>
+    <summary>
+            A DiagnosticListener is something that forwards on events written with DiagnosticSource.
+            It is an IObservable (has Subscribe method), and it also has a Subscribe overloads that
+            lets you specify a 'IsEnabled' predicate that users of DiagnosticSource will use for 
+            'quick checks'.   
+            
+            The item in the stream is a KeyValuePair[string, object] where the string is the name
+            of the diagnostic item and the object is the payload (typically an anonymous type).  
+            
+            There may be many DiagnosticListeners in the system, but we encourage the use of
+            The DiagnosticSource.DefaultSource which goes to the DiagnosticListener.DefaultListener.
+            
+            If you need to see 'everything' you can subscribe to the 'AllListeners' event that
+            will fire for every live DiagnosticListener in the appdomain (past or present). 
+            
+            Please See the DiagnosticSource Users Guide 
+            https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md
+            for instructions on its use.  
+            </summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public DiagnosticListener (string name);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string name) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Diagnostics.DiagnosticListener.#ctor(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (name As String)" />
+      <MemberSignature Language="F#" Value="new System.Diagnostics.DiagnosticListener : string -&gt; System.Diagnostics.DiagnosticListener" Usage="new System.Diagnostics.DiagnosticListener name" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; DiagnosticListener(System::String ^ name);" />
+      <MemberSignature Language="C++ CX" Value="public:&#xA; DiagnosticListener(Platform::String ^ name);" />
+      <MemberSignature Language="C++ WINRT" Value=" DiagnosticListener(std::wstring const &amp; name);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Diagnostics.DiagnosticSource</AssemblyName>
+        <AssemblyVersion>4.0.2.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="name" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="name">To be added.</param>
+        <summary>
+            Make a new DiagnosticListener, it is a NotificationSource, which means the returned result can be used to 
+            log notifications, but it also has a Subscribe method so notifications can be forwarded
+            arbitrarily.  Thus its job is to forward things from the producer to all the listeners
+            (multi-casting).    Generally you should not be making your own DiagnosticListener but use the
+            DiagnosticListener.Default, so that notifications are as 'public' as possible.  
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AllListeners">
+      <MemberSignature Language="C#" Value="public static IObservable&lt;System.Diagnostics.DiagnosticListener&gt; AllListeners { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property class System.IObservable`1&lt;class System.Diagnostics.DiagnosticListener&gt; AllListeners" />
+      <MemberSignature Language="DocId" Value="P:System.Diagnostics.DiagnosticListener.AllListeners" />
+      <MemberSignature Language="VB.NET" Value="Public Shared ReadOnly Property AllListeners As IObservable(Of DiagnosticListener)" />
+      <MemberSignature Language="F#" Value="member this.AllListeners : IObservable&lt;System.Diagnostics.DiagnosticListener&gt;" Usage="System.Diagnostics.DiagnosticListener.AllListeners" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static property IObservable&lt;System::Diagnostics::DiagnosticListener ^&gt; ^ AllListeners { IObservable&lt;System::Diagnostics::DiagnosticListener ^&gt; ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Diagnostics.DiagnosticSource</AssemblyName>
+        <AssemblyVersion>4.0.2.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.IObservable&lt;System.Diagnostics.DiagnosticListener&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            When you subscribe to this you get callbacks for all NotificationListeners in the appdomain
+            as well as those that occurred in the past, and all future Listeners created in the future. 
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Dispose">
+      <MemberSignature Language="C#" Value="public virtual void Dispose ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Dispose() cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Diagnostics.DiagnosticListener.Dispose" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Sub Dispose ()" />
+      <MemberSignature Language="F#" Value="abstract member Dispose : unit -&gt; unit&#xA;override this.Dispose : unit -&gt; unit" Usage="diagnosticListener.Dispose " />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void Dispose();" />
+      <MemberSignature Language="C++ CX" Value="public:&#xA; virtual void Dispose();" />
+      <MemberSignature Language="C++ WINRT" Value=" virtual void Dispose();" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:System.IDisposable.Dispose</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>System.Diagnostics.DiagnosticSource</AssemblyName>
+        <AssemblyVersion>4.0.2.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+            Clean up the NotificationListeners.   Notification listeners do NOT DIE ON THEIR OWN
+            because they are in a global list (for discoverability).  You must dispose them explicitly. 
+            Note that we do not do the Dispose(bool) pattern because we frankly don't want to support
+            subclasses that have non-managed state.   
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsEnabled">
+      <MemberSignature Language="C#" Value="public bool IsEnabled ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool IsEnabled() cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Diagnostics.DiagnosticListener.IsEnabled" />
+      <MemberSignature Language="VB.NET" Value="Public Function IsEnabled () As Boolean" />
+      <MemberSignature Language="F#" Value="override this.IsEnabled : unit -&gt; bool" Usage="diagnosticListener.IsEnabled " />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool IsEnabled();" />
+      <MemberSignature Language="C++ CX" Value="public:&#xA; bool IsEnabled();" />
+      <MemberSignature Language="C++ WINRT" Value="bool IsEnabled();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Diagnostics.DiagnosticSource</AssemblyName>
+        <AssemblyVersion>4.0.2.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+            Determines whether there are any registered subscribers
+            </summary>
+        <returns>To be added.</returns>
+        <remarks> If there is an expensive setup for the notification,
+            you may call IsEnabled() as the first and most efficient check before doing this setup. 
+            Producers may optionally use this check before IsEnabled(string) in the most performance-critical parts of the system
+            to ensure somebody listens to the DiagnosticListener at all.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsEnabled">
+      <MemberSignature Language="C#" Value="public override bool IsEnabled (string name);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool IsEnabled(string name) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Diagnostics.DiagnosticListener.IsEnabled(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function IsEnabled (name As String) As Boolean" />
+      <MemberSignature Language="F#" Value="override this.IsEnabled : string -&gt; bool" Usage="diagnosticListener.IsEnabled name" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override bool IsEnabled(System::String ^ name);" />
+      <MemberSignature Language="C++ CX" Value="public:&#xA; override bool IsEnabled(Platform::String ^ name);" />
+      <MemberSignature Language="C++ WINRT" Value=" override bool IsEnabled(std::wstring const &amp; name);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Diagnostics.DiagnosticSource</AssemblyName>
+        <AssemblyVersion>4.0.2.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="name" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="name">To be added.</param>
+        <summary>
+            Override abstract method
+            </summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsEnabled">
+      <MemberSignature Language="C#" Value="public override bool IsEnabled (string name, object arg1, object arg2 = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool IsEnabled(string name, object arg1, object arg2) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Diagnostics.DiagnosticListener.IsEnabled(System.String,System.Object,System.Object)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function IsEnabled (name As String, arg1 As Object, Optional arg2 As Object = null) As Boolean" />
+      <MemberSignature Language="F#" Value="override this.IsEnabled : string * obj * obj -&gt; bool" Usage="diagnosticListener.IsEnabled (name, arg1, arg2)" />
+      <MemberSignature Language="C++ WINRT" Value=" override bool IsEnabled(std::wstring const &amp; name, winrt::Windows::Foundation::IInspectable const &amp; arg1, winrt::Windows::Foundation::IInspectable const &amp; arg2 = null);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Diagnostics.DiagnosticSource</AssemblyName>
+        <AssemblyVersion>4.0.2.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="name" Type="System.String" />
+        <Parameter Name="arg1" Type="System.Object" />
+        <Parameter Name="arg2" Type="System.Object" />
+      </Parameters>
+      <Docs>
+        <param name="name">To be added.</param>
+        <param name="arg1">To be added.</param>
+        <param name="arg2">To be added.</param>
+        <summary>
+            Override abstract method
+            </summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Name">
+      <MemberSignature Language="C#" Value="public string Name { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Name" />
+      <MemberSignature Language="DocId" Value="P:System.Diagnostics.DiagnosticListener.Name" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Name As String" />
+      <MemberSignature Language="F#" Value="member this.Name : string" Usage="System.Diagnostics.DiagnosticListener.Name" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Name { System::String ^ get(); };" />
+      <MemberSignature Language="C++ CX" Value="public:&#xA; property Platform::String ^ Name { Platform::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Diagnostics.DiagnosticSource</AssemblyName>
+        <AssemblyVersion>4.0.2.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            When a DiagnosticListener is created it is given a name.   Return this.  
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Subscribe">
+      <MemberSignature Language="C#" Value="public virtual IDisposable Subscribe (IObserver&lt;System.Collections.Generic.KeyValuePair&lt;string,object&gt;&gt; observer);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.IDisposable Subscribe(class System.IObserver`1&lt;valuetype System.Collections.Generic.KeyValuePair`2&lt;string, object&gt;&gt; observer) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Diagnostics.DiagnosticListener.Subscribe(System.IObserver{System.Collections.Generic.KeyValuePair{System.String,System.Object}})" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function Subscribe (observer As IObserver(Of KeyValuePair(Of String, Object))) As IDisposable" />
+      <MemberSignature Language="F#" Value="abstract member Subscribe : IObserver&lt;System.Collections.Generic.KeyValuePair&lt;string, obj&gt;&gt; -&gt; IDisposable&#xA;override this.Subscribe : IObserver&lt;System.Collections.Generic.KeyValuePair&lt;string, obj&gt;&gt; -&gt; IDisposable" Usage="diagnosticListener.Subscribe observer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual IDisposable ^ Subscribe(IObserver&lt;System::Collections::Generic::KeyValuePair&lt;System::String ^, System::Object ^&gt;&gt; ^ observer);" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:System.IObservable`1.Subscribe(System.IObserver{`0})</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>System.Diagnostics.DiagnosticSource</AssemblyName>
+        <AssemblyVersion>4.0.2.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.IDisposable</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="observer" Type="System.IObserver&lt;System.Collections.Generic.KeyValuePair&lt;System.String,System.Object&gt;&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="observer">To be added.</param>
+        <summary>
+            Same as other Subscribe overload where the predicate is assumed to always return true.  
+            </summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Subscribe">
+      <MemberSignature Language="C#" Value="public virtual IDisposable Subscribe (IObserver&lt;System.Collections.Generic.KeyValuePair&lt;string,object&gt;&gt; observer, Func&lt;string,object,object,bool&gt; isEnabled);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.IDisposable Subscribe(class System.IObserver`1&lt;valuetype System.Collections.Generic.KeyValuePair`2&lt;string, object&gt;&gt; observer, class System.Func`4&lt;string, object, object, bool&gt; isEnabled) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Diagnostics.DiagnosticListener.Subscribe(System.IObserver{System.Collections.Generic.KeyValuePair{System.String,System.Object}},System.Func{System.String,System.Object,System.Object,System.Boolean})" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function Subscribe (observer As IObserver(Of KeyValuePair(Of String, Object)), isEnabled As Func(Of String, Object, Object, Boolean)) As IDisposable" />
+      <MemberSignature Language="F#" Value="abstract member Subscribe : IObserver&lt;System.Collections.Generic.KeyValuePair&lt;string, obj&gt;&gt; * Func&lt;string, obj, obj, bool&gt; -&gt; IDisposable&#xA;override this.Subscribe : IObserver&lt;System.Collections.Generic.KeyValuePair&lt;string, obj&gt;&gt; * Func&lt;string, obj, obj, bool&gt; -&gt; IDisposable" Usage="diagnosticListener.Subscribe (observer, isEnabled)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual IDisposable ^ Subscribe(IObserver&lt;System::Collections::Generic::KeyValuePair&lt;System::String ^, System::Object ^&gt;&gt; ^ observer, Func&lt;System::String ^, System::Object ^, System::Object ^, bool&gt; ^ isEnabled);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Diagnostics.DiagnosticSource</AssemblyName>
+        <AssemblyVersion>4.0.2.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.IDisposable</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="observer" Type="System.IObserver&lt;System.Collections.Generic.KeyValuePair&lt;System.String,System.Object&gt;&gt;" />
+        <Parameter Name="isEnabled" Type="System.Func&lt;System.String,System.Object,System.Object,System.Boolean&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="observer">Subscriber (IObserver)</param>
+        <param name="isEnabled">Filters events based on their name (string) and context objects that could be null.
+            Note that producer may first call filter with event name only and null context arguments and filter should
+            return true if consumer is interested in any of such events. Producers that support 
+            context-based filtering will invoke isEnabled again with context for more prcise filtering.
+            Use Subscribe overload with name-based filtering if producer does NOT support context-based filtering</param>
+        <summary>
+            Add a subscriber (Observer).  If 'IsEnabled' == null (or not present), then the Source's IsEnabled 
+            will always return true.  
+            </summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Subscribe">
+      <MemberSignature Language="C#" Value="public virtual IDisposable Subscribe (IObserver&lt;System.Collections.Generic.KeyValuePair&lt;string,object&gt;&gt; observer, Predicate&lt;string&gt; isEnabled);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.IDisposable Subscribe(class System.IObserver`1&lt;valuetype System.Collections.Generic.KeyValuePair`2&lt;string, object&gt;&gt; observer, class System.Predicate`1&lt;string&gt; isEnabled) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Diagnostics.DiagnosticListener.Subscribe(System.IObserver{System.Collections.Generic.KeyValuePair{System.String,System.Object}},System.Predicate{System.String})" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function Subscribe (observer As IObserver(Of KeyValuePair(Of String, Object)), isEnabled As Predicate(Of String)) As IDisposable" />
+      <MemberSignature Language="F#" Value="abstract member Subscribe : IObserver&lt;System.Collections.Generic.KeyValuePair&lt;string, obj&gt;&gt; * Predicate&lt;string&gt; -&gt; IDisposable&#xA;override this.Subscribe : IObserver&lt;System.Collections.Generic.KeyValuePair&lt;string, obj&gt;&gt; * Predicate&lt;string&gt; -&gt; IDisposable" Usage="diagnosticListener.Subscribe (observer, isEnabled)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual IDisposable ^ Subscribe(IObserver&lt;System::Collections::Generic::KeyValuePair&lt;System::String ^, System::Object ^&gt;&gt; ^ observer, Predicate&lt;System::String ^&gt; ^ isEnabled);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Diagnostics.DiagnosticSource</AssemblyName>
+        <AssemblyVersion>4.0.2.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.IDisposable</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="observer" Type="System.IObserver&lt;System.Collections.Generic.KeyValuePair&lt;System.String,System.Object&gt;&gt;" />
+        <Parameter Name="isEnabled" Type="System.Predicate&lt;System.String&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="observer">To be added.</param>
+        <param name="isEnabled">To be added.</param>
+        <summary>
+            Add a subscriber (Observer).  If 'IsEnabled' == null (or not present), then the Source's IsEnabled 
+            will always return true.  
+            </summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ToString">
+      <MemberSignature Language="C#" Value="public override string ToString ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string ToString() cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Diagnostics.DiagnosticListener.ToString" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function ToString () As String" />
+      <MemberSignature Language="F#" Value="override this.ToString : unit -&gt; string" Usage="diagnosticListener.ToString " />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override System::String ^ ToString();" />
+      <MemberSignature Language="C++ CX" Value="public:&#xA; override Platform::String ^ ToString();" />
+      <MemberSignature Language="C++ WINRT" Value=" override std::wstring ToString();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Diagnostics.DiagnosticSource</AssemblyName>
+        <AssemblyVersion>4.0.2.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+            Return the name for the ToString() to aid in debugging.  
+            </summary>
+        <returns />
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Write">
+      <MemberSignature Language="C#" Value="public override void Write (string name, object value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void Write(string name, object value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Diagnostics.DiagnosticListener.Write(System.String,System.Object)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub Write (name As String, value As Object)" />
+      <MemberSignature Language="F#" Value="override this.Write : string * obj -&gt; unit" Usage="diagnosticListener.Write (name, value)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void Write(System::String ^ name, System::Object ^ value);" />
+      <MemberSignature Language="C++ CX" Value="public:&#xA; override void Write(Platform::String ^ name, Platform::Object ^ value);" />
+      <MemberSignature Language="C++ WINRT" Value=" override void Write(std::wstring const &amp; name, winrt::Windows::Foundation::IInspectable const &amp; value);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Diagnostics.DiagnosticSource</AssemblyName>
+        <AssemblyVersion>4.0.2.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="name" Type="System.String" />
+        <Parameter Name="value" Type="System.Object" />
+      </Parameters>
+      <Docs>
+        <param name="name">To be added.</param>
+        <param name="value">To be added.</param>
+        <summary>
+            Override abstract method
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>
