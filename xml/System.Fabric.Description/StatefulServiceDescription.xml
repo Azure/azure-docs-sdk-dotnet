@@ -4,6 +4,7 @@
   <TypeSignature Language="DocId" Value="T:System.Fabric.Description.StatefulServiceDescription" />
   <TypeSignature Language="VB.NET" Value="Public NotInheritable Class StatefulServiceDescription&#xA;Inherits ServiceDescription" />
   <TypeSignature Language="F#" Value="type StatefulServiceDescription = class&#xA;    inherit ServiceDescription" />
+  <TypeSignature Language="C++ CLI" Value="public ref class StatefulServiceDescription sealed : System::Fabric::Description::ServiceDescription" />
   <AssemblyInfo>
     <AssemblyName>System.Fabric</AssemblyName>
     <AssemblyVersion>6.0.0.0</AssemblyVersion>
@@ -26,6 +27,9 @@
       <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
       <MemberSignature Language="DocId" Value="M:System.Fabric.Description.StatefulServiceDescription.#ctor" />
       <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; StatefulServiceDescription();" />
+      <MemberSignature Language="C++ CX" Value="public:&#xA; StatefulServiceDescription();" />
+      <MemberSignature Language="C++ WINRT" Value=" StatefulServiceDescription();" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>System.Fabric</AssemblyName>
@@ -45,6 +49,8 @@
       <MemberSignature Language="DocId" Value="P:System.Fabric.Description.StatefulServiceDescription.HasPersistedState" />
       <MemberSignature Language="VB.NET" Value="Public Property HasPersistedState As Boolean" />
       <MemberSignature Language="F#" Value="member this.HasPersistedState : bool with get, set" Usage="System.Fabric.Description.StatefulServiceDescription.HasPersistedState" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool HasPersistedState { bool get(); void set(bool value); };" />
+      <MemberSignature Language="C++ CX" Value="public:&#xA; property bool HasPersistedState { bool get(); void set(bool value); };" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>System.Fabric</AssemblyName>
@@ -82,6 +88,8 @@
       <MemberSignature Language="DocId" Value="P:System.Fabric.Description.StatefulServiceDescription.MinReplicaSetSize" />
       <MemberSignature Language="VB.NET" Value="Public Property MinReplicaSetSize As Integer" />
       <MemberSignature Language="F#" Value="member this.MinReplicaSetSize : int with get, set" Usage="System.Fabric.Description.StatefulServiceDescription.MinReplicaSetSize" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int MinReplicaSetSize { int get(); void set(int value); };" />
+      <MemberSignature Language="C++ CX" Value="public:&#xA; property int MinReplicaSetSize { int get(); void set(int value); };" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>System.Fabric</AssemblyName>
@@ -98,20 +106,18 @@
           <para>The minimum allowed replica set size for this service.</para>
         </value>
         <remarks>
-          <para>Defines the minimum number of replicas that Service Fabric will keep in its view of the Replica Set for a given partition. For example, if 
-            the <see cref="P:System.Fabric.Description.StatefulServiceDescription.TargetReplicaSetSize" /> is set to five (5) then normally (without failures) 
-            there will be five replicas in the view of the replica set. However this number will decrease during failures. The 
-            <see cref="P:System.Fabric.Description.StatefulServiceDescription.MinReplicaSetSize" /> defines the minimum number of replicas in the view, so for 
-            example if the <see cref="P:System.Fabric.Description.StatefulServiceDescription.TargetReplicaSetSize" /> is five and the 
-            <see cref="P:System.Fabric.Description.StatefulServiceDescription.MinReplicaSetSize" /> is three, then even if there are three concurrent failures 
-            (resulting  in only two remaining replicas running) will still have three replicas in its view of the replica set (two up and one down). Since  
-            uses majority quorum of the number of replicas maintained in this view, majority quorum of the 
-            <see cref="P:System.Fabric.Description.StatefulServiceDescription.MinReplicaSetSize" /> is minimum level of reliability of any operation: in the 
-            prior example, with Target = 5 and Min = 3, with 3 concurrent failures, there are two remaining up replicas (and one down), and the majority 
-            quorum of 3 (the <see cref="P:System.Fabric.Description.StatefulServiceDescription.MinReplicaSetSize" />) is 2. This means that the primary will 
-            continue to be able to replicate operations AND that the remaining secondary replica MUST apply the operation in order for the replica set (partition) 
-            to make progress. If the total number of replicas drops below the majority quorum of the 
-            <see cref="P:System.Fabric.Description.StatefulServiceDescription.MinReplicaSetSize" /> then further writes will be disallowed.</para>
+          <para>
+            Defines the minimum number of replicas that Service Fabric will keep in its view of the replica set for a given partition. For example, if 
+            the <see cref="P:System.Fabric.Description.StatefulServiceDescription.TargetReplicaSetSize" /> is set to five, then normally (without failures) 
+            there will be five replicas in the view of the replica set. However, this number will decrease during failures.
+            For example, if the <see cref="P:System.Fabric.Description.StatefulServiceDescription.TargetReplicaSetSize" /> is five and the 
+            <see cref="P:System.Fabric.Description.StatefulServiceDescription.MinReplicaSetSize" /> is three, then three concurrent failures will leave
+            three replicas in the replica set's view (two up, one down). Service Fabric uses majority quorum on the number of replicas
+            maintained in this view, which is two for this example. This means that the primary will continue to be able
+            to replicate operations AND that the remaining secondary replica MUST apply the operation in order for the replica set to make progress.
+            If the total number of replicas drops below the majority quorum of the <see cref="P:System.Fabric.Description.StatefulServiceDescription.MinReplicaSetSize" />,
+            then further writes will be disallowed.
+            </para>
         </remarks>
       </Docs>
     </Member>
@@ -121,6 +127,7 @@
       <MemberSignature Language="DocId" Value="P:System.Fabric.Description.StatefulServiceDescription.QuorumLossWaitDuration" />
       <MemberSignature Language="VB.NET" Value="Public Property QuorumLossWaitDuration As Nullable(Of TimeSpan)" />
       <MemberSignature Language="F#" Value="member this.QuorumLossWaitDuration : Nullable&lt;TimeSpan&gt; with get, set" Usage="System.Fabric.Description.StatefulServiceDescription.QuorumLossWaitDuration" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Nullable&lt;TimeSpan&gt; QuorumLossWaitDuration { Nullable&lt;TimeSpan&gt; get(); void set(Nullable&lt;TimeSpan&gt; value); };" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>System.Fabric</AssemblyName>
@@ -148,6 +155,7 @@
       <MemberSignature Language="DocId" Value="P:System.Fabric.Description.StatefulServiceDescription.ReplicaRestartWaitDuration" />
       <MemberSignature Language="VB.NET" Value="Public Property ReplicaRestartWaitDuration As Nullable(Of TimeSpan)" />
       <MemberSignature Language="F#" Value="member this.ReplicaRestartWaitDuration : Nullable&lt;TimeSpan&gt; with get, set" Usage="System.Fabric.Description.StatefulServiceDescription.ReplicaRestartWaitDuration" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Nullable&lt;TimeSpan&gt; ReplicaRestartWaitDuration { Nullable&lt;TimeSpan&gt; get(); void set(Nullable&lt;TimeSpan&gt; value); };" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>System.Fabric</AssemblyName>
@@ -178,6 +186,7 @@
       <MemberSignature Language="DocId" Value="P:System.Fabric.Description.StatefulServiceDescription.StandByReplicaKeepDuration" />
       <MemberSignature Language="VB.NET" Value="Public Property StandByReplicaKeepDuration As Nullable(Of TimeSpan)" />
       <MemberSignature Language="F#" Value="member this.StandByReplicaKeepDuration : Nullable&lt;TimeSpan&gt; with get, set" Usage="System.Fabric.Description.StatefulServiceDescription.StandByReplicaKeepDuration" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Nullable&lt;TimeSpan&gt; StandByReplicaKeepDuration { Nullable&lt;TimeSpan&gt; get(); void set(Nullable&lt;TimeSpan&gt; value); };" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>System.Fabric</AssemblyName>
@@ -209,6 +218,8 @@
       <MemberSignature Language="DocId" Value="P:System.Fabric.Description.StatefulServiceDescription.TargetReplicaSetSize" />
       <MemberSignature Language="VB.NET" Value="Public Property TargetReplicaSetSize As Integer" />
       <MemberSignature Language="F#" Value="member this.TargetReplicaSetSize : int with get, set" Usage="System.Fabric.Description.StatefulServiceDescription.TargetReplicaSetSize" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int TargetReplicaSetSize { int get(); void set(int value); };" />
+      <MemberSignature Language="C++ CX" Value="public:&#xA; property int TargetReplicaSetSize { int get(); void set(int value); };" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>System.Fabric</AssemblyName>

@@ -1,21 +1,24 @@
 ﻿<Type Name="ProvisionApplicationTypeDescription" FullName="System.Fabric.Description.ProvisionApplicationTypeDescription">
-  <TypeSignature Language="C#" Value="public sealed class ProvisionApplicationTypeDescription" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit ProvisionApplicationTypeDescription extends System.Object" />
+  <TypeSignature Language="C#" Value="public sealed class ProvisionApplicationTypeDescription : System.Fabric.Description.ProvisionApplicationTypeDescriptionBase" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit ProvisionApplicationTypeDescription extends System.Fabric.Description.ProvisionApplicationTypeDescriptionBase" />
   <TypeSignature Language="DocId" Value="T:System.Fabric.Description.ProvisionApplicationTypeDescription" />
-  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class ProvisionApplicationTypeDescription" />
-  <TypeSignature Language="F#" Value="type ProvisionApplicationTypeDescription = class" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class ProvisionApplicationTypeDescription&#xA;Inherits ProvisionApplicationTypeDescriptionBase" />
+  <TypeSignature Language="F#" Value="type ProvisionApplicationTypeDescription = class&#xA;    inherit ProvisionApplicationTypeDescriptionBase" />
+  <TypeSignature Language="C++ CLI" Value="public ref class ProvisionApplicationTypeDescription sealed : System::Fabric::Description::ProvisionApplicationTypeDescriptionBase" />
   <AssemblyInfo>
     <AssemblyName>System.Fabric</AssemblyName>
     <AssemblyVersion>6.0.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
+    <BaseTypeName FrameworkAlternate="azure-dotnet">System.Fabric.Description.ProvisionApplicationTypeDescriptionBase</BaseTypeName>
   </Base>
   <Interfaces />
   <Docs>
     <summary>
-      <para>Describes an application type to be provisioned by using 
-            <see cref="M:System.Fabric.FabricClient.ApplicationManagementClient.ProvisionApplicationAsync(System.Fabric.Description.ProvisionApplicationTypeDescription,System.TimeSpan,System.Threading.CancellationToken)" />.</para>
+      <para>Describes a provision application type operation which uses an application package copied to a relative path in the image store.
+            The application type can be provisioned using
+            <see cref="M:System.Fabric.FabricClient.ApplicationManagementClient.ProvisionApplicationAsync(System.Fabric.Description.ProvisionApplicationTypeDescriptionBase,System.TimeSpan,System.Threading.CancellationToken)" />.</para>
     </summary>
     <remarks>To be added.</remarks>
   </Docs>
@@ -26,6 +29,9 @@
       <MemberSignature Language="DocId" Value="M:System.Fabric.Description.ProvisionApplicationTypeDescription.#ctor(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Sub New (buildPath As String)" />
       <MemberSignature Language="F#" Value="new System.Fabric.Description.ProvisionApplicationTypeDescription : string -&gt; System.Fabric.Description.ProvisionApplicationTypeDescription" Usage="new System.Fabric.Description.ProvisionApplicationTypeDescription buildPath" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; ProvisionApplicationTypeDescription(System::String ^ buildPath);" />
+      <MemberSignature Language="C++ CX" Value="public:&#xA; ProvisionApplicationTypeDescription(Platform::String ^ buildPath);" />
+      <MemberSignature Language="C++ WINRT" Value=" ProvisionApplicationTypeDescription(std::wstring const &amp; buildPath);" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>System.Fabric</AssemblyName>
@@ -40,39 +46,14 @@
             <see cref="M:System.Fabric.FabricClient.ApplicationManagementClient.CopyApplicationPackage(System.String,System.String,System.String,System.TimeSpan)" />.</para>
         </param>
         <summary>
-          <para>Instantiates an instance of <see cref="T:System.Fabric.Description.ProvisionApplicationTypeDescription" />.</para>
+          <para>Creates an instance of <see cref="T:System.Fabric.Description.ProvisionApplicationTypeDescription" />
+            using the relative path to the application package in the image store.</para>
         </summary>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="Async">
-      <MemberSignature Language="C#" Value="public bool Async { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool Async" />
-      <MemberSignature Language="DocId" Value="P:System.Fabric.Description.ProvisionApplicationTypeDescription.Async" />
-      <MemberSignature Language="VB.NET" Value="Public Property Async As Boolean" />
-      <MemberSignature Language="F#" Value="member this.Async : bool with get, set" Usage="System.Fabric.Description.ProvisionApplicationTypeDescription.Async" />
-      <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>System.Fabric</AssemblyName>
-        <AssemblyVersion>6.0.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Boolean</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>
-          <para>Gets or sets the flag indicating whether provisioning should occur asynchronously.</para>
-        </summary>
-        <value>
-          <para>If this flag is false, then the behavior is equivalent to calling
-            <see cref="M:System.Fabric.FabricClient.ApplicationManagementClient.ProvisionApplicationAsync(System.String,System.TimeSpan,System.Threading.CancellationToken)" />. The timeout argument is applied to the provision operation itself and the returned task completes only when the provision operation completes in the system.</para>
-          <para>If this flag is true, then the timeout argument is only applied to message delivery
-            and the returned task completes once the system has accepted the request.
-            The system will process the provision operation without any timeout limit and its state can be queried
-            using <see cref="M:System.Fabric.FabricClient.QueryClient.GetApplicationTypeListAsync" />.
-            The pending provision operation can be interrupted using <see cref="M:System.Fabric.FabricClient.ApplicationManagementClient.UnprovisionApplicationAsync(System.String,System.String)" />.</para>
-        </value>
-        <remarks>To be added.</remarks>
+        <remarks>
+          <para>
+            The pending provision operation can be interrupted using <see cref="M:System.Fabric.FabricClient.ApplicationManagementClient.UnprovisionApplicationAsync(System.Fabric.Description.UnprovisionApplicationTypeDescription)" />.
+            </para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="BuildPath">
@@ -81,6 +62,8 @@
       <MemberSignature Language="DocId" Value="P:System.Fabric.Description.ProvisionApplicationTypeDescription.BuildPath" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property BuildPath As String" />
       <MemberSignature Language="F#" Value="member this.BuildPath : string" Usage="System.Fabric.Description.ProvisionApplicationTypeDescription.BuildPath" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ BuildPath { System::String ^ get(); };" />
+      <MemberSignature Language="C++ CX" Value="public:&#xA; property Platform::String ^ BuildPath { Platform::String ^ get(); };" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>System.Fabric</AssemblyName>
@@ -97,6 +80,32 @@
         <value>
           <para>The application package build path.</para>
         </value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ToString">
+      <MemberSignature Language="C#" Value="public override string ToString ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string ToString() cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Fabric.Description.ProvisionApplicationTypeDescription.ToString" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function ToString () As String" />
+      <MemberSignature Language="F#" Value="override this.ToString : unit -&gt; string" Usage="provisionApplicationTypeDescription.ToString " />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override System::String ^ ToString();" />
+      <MemberSignature Language="C++ CX" Value="public:&#xA; override Platform::String ^ ToString();" />
+      <MemberSignature Language="C++ WINRT" Value=" override std::wstring ToString();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Fabric</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+            Gets a string representation of the provision application type operation.
+            </summary>
+        <returns>A string representation of the provision application type operation.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
