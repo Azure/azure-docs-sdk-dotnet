@@ -11,6 +11,7 @@
     <AssemblyName>Microsoft.WindowsAzure.Storage</AssemblyName>
     <AssemblyVersion>8.4.0.0</AssemblyVersion>
     <AssemblyVersion>8.7.0.0</AssemblyVersion>
+    <AssemblyVersion>9.0.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -40,6 +41,7 @@
         <AssemblyName>Microsoft.WindowsAzure.Storage</AssemblyName>
         <AssemblyVersion>8.4.0.0</AssemblyVersion>
         <AssemblyVersion>8.7.0.0</AssemblyVersion>
+        <AssemblyVersion>9.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -61,35 +63,39 @@
         <AssemblyName>Microsoft.WindowsAzure.Storage</AssemblyName>
         <AssemblyVersion>8.4.0.0</AssemblyVersion>
         <AssemblyVersion>8.7.0.0</AssemblyVersion>
+        <AssemblyVersion>9.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Nullable&lt;System.Boolean&gt;</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            Gets or sets a value that indicates whether a conditional failure should be absorbed on a retry attempt
-            for the request. 
-            </summary>
+             Gets or sets a value that indicates whether a conditional failure should be absorbed on a retry attempt
+             for the request. 
+             </summary>
         <value>To be added.</value>
         <remarks>
-            This option is used only by the <see cref="T:Microsoft.WindowsAzure.Storage.Blob.CloudAppendBlob" /> object in the <b>UploadFrom*</b> methods, 
-            the <b>AppendFrom*</b> methods, and the <b>BlobWriteStream</b> class. By default, it is set to <c>false</c>. 
-            Set this option to <c>true</c> only for single-writer scenarios. 
-            Setting this option to <c>true</c> in a multi-writer scenario may lead to corrupted blob data.
-            
-            When calling "UploadFrom*" on an append blob, the Storage Client breaks the input data
-            up into a number of data blocks, and uploads each data block with an "append block" operation.
-            Normally, an "IfAppendPositionEqual" access condition is added to the append block operation, so that the
-            upload operation will fail if some other process somewhere has appended data in the middle of this data stream.
-            However, this can result in a false failure in a very specific case. If an append operation fails with a timeout,
-            there is a chance that the operation succeeded on the service, but the "success" response did not make it back to the client.
-            In this case, the client will retry, and then get an "append position not met" failure.
-            
-            Setting this value to <c>true</c> results in the upload operation continuing when it sees an "append position not met"
-            failure on retry - accounting for the above possibility. However, this loses protection in the multi-writer
-            scenario - if multiple threads are uploading to the blob at once, and this value is set to <c>true</c>, some data
-            may be lost, because the client thinks the data was uploaded, when in fact it was the other process' data.
-            </remarks>
+             This option is used only by the <see cref="T:Microsoft.WindowsAzure.Storage.Blob.CloudAppendBlob" /> object in the <b>UploadFrom*</b> methods, 
+             the <b>AppendFrom*</b> methods, and the <b>BlobWriteStream</b> class. By default, it is set to <c>false</c>. 
+             Set this option to <c>true</c> only for single-writer scenarios. 
+             Setting this option to <c>true</c> in a multi-writer scenario may lead to corrupted blob data.
+             
+             When calling "UploadFrom*" on an append blob, the Storage Client breaks the input data
+             up into a number of data blocks, and uploads each data block with an "append block" operation.
+             Normally, an "IfAppendPositionEqual" access condition is added to the append block operation, so that the
+             upload operation will fail if some other process somewhere has appended data in the middle of this data stream.
+             However, this can result in a false failure in a very specific case. If an append operation fails with a timeout,
+             there is a chance that the operation succeeded on the service, but the "success" response did not make it back to the client.
+             In this case, the client will retry, and then get an "append position not met" failure.
+             
+             Setting this value to <c>true</c> results in the upload operation continuing when it sees an "append position not met"
+             failure on retry - accounting for the above possibility. However, this loses protection in the multi-writer
+             scenario - if multiple threads are uploading to the blob at once, and this value is set to <c>true</c>, some data
+             may be lost, because the client thinks the data was uploaded, when in fact it was the other process' data.
+             
+            ## Examples
+            [!code-csharp[Absorb_Conditional_Errors_On_Retry_Sample](~/azure-storage-net/Test/ClassLibraryCommon/Blob/CloudAppendBlobTest.cs#sample_BlobRequestOptions_AbsorbConditionalErrorsOnRetry "Absorb Conditional Errors On Retry Sample")]  
+             </remarks>
       </Docs>
     </Member>
     <Member MemberName="DisableContentMD5Validation">
@@ -104,21 +110,25 @@
         <AssemblyName>Microsoft.WindowsAzure.Storage</AssemblyName>
         <AssemblyVersion>8.4.0.0</AssemblyVersion>
         <AssemblyVersion>8.7.0.0</AssemblyVersion>
+        <AssemblyVersion>9.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Nullable&lt;System.Boolean&gt;</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            Gets or sets a value to indicate that MD5 validation will be disabled when downloading blobs.
-            </summary>
+             Gets or sets a value to indicate that MD5 validation will be disabled when downloading blobs.
+             </summary>
         <value>Use <c>true</c> to disable MD5 validation; <c>false</c> to enable MD5 validation. Default is <c>false</c>.</value>
         <remarks>
-            When downloading a blob, if the value already exists on the blob, the Storage service 
-            will include the MD5 hash of the entire blob as a header. This option controls 
-            whether or not the Storage Client will validate that MD5 hash on download.
-            See <see cref="P:Microsoft.WindowsAzure.Storage.Blob.BlobRequestOptions.StoreBlobContentMD5" /> for more details.
-            </remarks>
+             When downloading a blob, if the value already exists on the blob, the Storage service 
+             will include the MD5 hash of the entire blob as a header. This option controls 
+             whether or not the Storage Client will validate that MD5 hash on download.
+             See <see cref="P:Microsoft.WindowsAzure.Storage.Blob.BlobRequestOptions.StoreBlobContentMD5" /> for more details.
+             
+            ## Examples
+            [!code-csharp[Disable_Content_MD5_Validation_Sample](~/azure-storage-net/Test/ClassLibraryCommon/Blob/MD5FlagsTest.cs#sample_BlobRequestOptions_DisableContentMD5Validation "Disable Content MD5 Validation Sample")]        
+             </remarks>
       </Docs>
     </Member>
     <Member MemberName="EncryptionPolicy">
@@ -134,6 +144,7 @@
         <AssemblyName>Microsoft.WindowsAzure.Storage</AssemblyName>
         <AssemblyVersion>8.4.0.0</AssemblyVersion>
         <AssemblyVersion>8.7.0.0</AssemblyVersion>
+        <AssemblyVersion>9.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.WindowsAzure.Storage.Blob.BlobEncryptionPolicy</ReturnType>
@@ -143,7 +154,10 @@
             Gets or sets the encryption policy for the request.
             </summary>
         <value>An object of type <see cref="P:Microsoft.WindowsAzure.Storage.Blob.BlobRequestOptions.EncryptionPolicy" />.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            ## Examples
+            [!code-csharp[Encryption_Policy_Sample](~/azure-storage-net/Test/ClassLibraryCommon/Blob/BlobClientEncryptionTests.cs#sample_RequestOptions_EncryptionPolicy "Encryption Policy Sample")]        
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="LocationMode">
@@ -161,6 +175,7 @@
         <AssemblyName>Microsoft.WindowsAzure.Storage</AssemblyName>
         <AssemblyVersion>8.4.0.0</AssemblyVersion>
         <AssemblyVersion>8.7.0.0</AssemblyVersion>
+        <AssemblyVersion>9.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Nullable&lt;Microsoft.WindowsAzure.Storage.RetryPolicies.LocationMode&gt;</ReturnType>
@@ -173,6 +188,8 @@
         <remarks>The LocationMode specifies in which locations the Storage Client 
              will attempt to make the request. This is only valid for RA-GRS accounts - accounts 
              where data can be read from either the primary or the secondary endpoint.
+              ## Examples
+              [!code-csharp[LocationMode_Sample](~/azure-storage-net/Test/ClassLibraryCommon/Blob/BlobUploadDownloadTest.cs#sample_RequestOptions_LocationMode "LocationMode Sample")]        
             </remarks>
       </Docs>
     </Member>
@@ -191,6 +208,7 @@
         <AssemblyName>Microsoft.WindowsAzure.Storage</AssemblyName>
         <AssemblyVersion>8.4.0.0</AssemblyVersion>
         <AssemblyVersion>8.7.0.0</AssemblyVersion>
+        <AssemblyVersion>9.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Nullable&lt;System.TimeSpan&gt;</ReturnType>
@@ -205,6 +223,8 @@
             If the total amount of time spent in the API - across all REST requests, 
             retries, etc - exceeds this value, the client will timeout. This value 
             is only tracked on the client, it is not sent to the service.
+             ## Examples
+             [!code-csharp[Maximum_Execution_Time_Sample](~/azure-storage-net/Test/ClassLibraryCommon/Blob/BlobUploadDownloadTest.cs#sample_RequestOptions_ServerTimeout_MaximumExecutionTime "Maximum Execution Time Sample")]        
             </remarks>
       </Docs>
     </Member>
@@ -220,6 +240,7 @@
         <AssemblyName>Microsoft.WindowsAzure.Storage</AssemblyName>
         <AssemblyVersion>8.4.0.0</AssemblyVersion>
         <AssemblyVersion>8.7.0.0</AssemblyVersion>
+        <AssemblyVersion>9.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Nullable&lt;System.Int32&gt;</ReturnType>
@@ -235,6 +256,8 @@
              at a given time. Default is 1 (no parallelism). Setting this value higher may result in 
              faster blob uploads, depending on the network between the client and the Azure Storage service.
              If blobs are small (less than 256 MB), keeping this value equal to 1 is advised.
+              ## Examples
+              [!code-csharp[Parallel_Operation_ThreadCount_Sample](~/azure-storage-net/Test/ClassLibraryCommon/Blob/BlobUploadDownloadTest.cs#sample_BlobRequestOptions_ParallelOperationThreadCount "Parallel Operation ThreadCount Sample")]        
             </remarks>
       </Docs>
     </Member>
@@ -253,6 +276,7 @@
         <AssemblyName>Microsoft.WindowsAzure.Storage</AssemblyName>
         <AssemblyVersion>8.4.0.0</AssemblyVersion>
         <AssemblyVersion>8.7.0.0</AssemblyVersion>
+        <AssemblyVersion>9.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Nullable&lt;System.Boolean&gt;</ReturnType>
@@ -268,6 +292,9 @@
             is not encrypted/decrypted with an encryption policy. If this value 
             is false (the default), any data being downloaded that is not encrypted
             will be returned as-is.
+            
+             ## Examples
+             [!code-csharp[Require_Encryption_Sample](~/azure-storage-net/Test/ClassLibraryCommon/Blob/BlobUploadDownloadTest.cs#sample_RequestOptions_RequireEncryption "Require Encryption Sample")]        
             </remarks>
       </Docs>
     </Member>
@@ -287,6 +314,7 @@
         <AssemblyName>Microsoft.WindowsAzure.Storage</AssemblyName>
         <AssemblyVersion>8.4.0.0</AssemblyVersion>
         <AssemblyVersion>8.7.0.0</AssemblyVersion>
+        <AssemblyVersion>9.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.WindowsAzure.Storage.RetryPolicies.IRetryPolicy</ReturnType>
@@ -303,6 +331,9 @@
              If not set, the Storage Client uses an exponential backoff retry policy, where the wait time gets
              exponentially longer between requests, up to a total of around 30 seconds.
              The default retry policy is recommended for most scenarios.
+             
+            ## Examples
+              [!code-csharp[Retry_Policy_Sample](~/azure-storage-net/Test/ClassLibraryCommon/Blob/BlobUploadDownloadTest.cs#sample_RequestOptions_RetryPolicy "Retry Policy Sample")]         
             </remarks>
       </Docs>
     </Member>
@@ -321,6 +352,7 @@
         <AssemblyName>Microsoft.WindowsAzure.Storage</AssemblyName>
         <AssemblyVersion>8.4.0.0</AssemblyVersion>
         <AssemblyVersion>8.7.0.0</AssemblyVersion>
+        <AssemblyVersion>9.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Nullable&lt;System.TimeSpan&gt;</ReturnType>
@@ -336,6 +368,9 @@
             (UploadFromStream, for example, or if the request retries), this timeout 
             will be applied separately to each request. This value is not 
             tracked or validated on the client, it is only passed to the Storage service.
+            
+             ## Examples
+             [!code-csharp[Server_Timeout_Sample](~/azure-storage-net/Test/ClassLibraryCommon/Blob/BlobUploadDownloadTest.cs#sample_RequestOptions_ServerTimeout_MaximumExecutionTime "Server Timeout Sample")]         
             </remarks>
       </Docs>
     </Member>
@@ -351,6 +386,7 @@
         <AssemblyName>Microsoft.WindowsAzure.Storage</AssemblyName>
         <AssemblyVersion>8.4.0.0</AssemblyVersion>
         <AssemblyVersion>8.7.0.0</AssemblyVersion>
+        <AssemblyVersion>9.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Nullable&lt;System.Int64&gt;</ReturnType>
@@ -376,6 +412,7 @@
         <AssemblyName>Microsoft.WindowsAzure.Storage</AssemblyName>
         <AssemblyVersion>8.4.0.0</AssemblyVersion>
         <AssemblyVersion>8.7.0.0</AssemblyVersion>
+        <AssemblyVersion>9.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Nullable&lt;System.Boolean&gt;</ReturnType>
@@ -395,6 +432,8 @@
             the MD5 hash of the content will be validated, unless "DisableContentMD5Validation" is set.
             Note that this value is not validated on the Azure Storage service on either upload or download of data; 
             it is merely stored and returned.
+             ## Examples
+             [!code-csharp[Store_Blob_Content_MD5_Sample](~/azure-storage-net/Test/ClassLibraryCommon/Blob/MD5FlagsTest.cs#sample_BlobRequestOptions_StoreBlobContentMD5 "Store Blob Content MD5 Sample")] 
             </remarks>
       </Docs>
     </Member>
@@ -410,6 +449,7 @@
         <AssemblyName>Microsoft.WindowsAzure.Storage</AssemblyName>
         <AssemblyVersion>8.4.0.0</AssemblyVersion>
         <AssemblyVersion>8.7.0.0</AssemblyVersion>
+        <AssemblyVersion>9.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Nullable&lt;System.Boolean&gt;</ReturnType>
@@ -428,6 +468,8 @@
             This option applies to both upload and download operations.
             Note that HTTPS does a similar check during transit. If you are using HTTPS, 
             we recommend this feature be off.
+             ## Examples
+             [!code-csharp[Use_Transactional_MD5_Sample](~/azure-storage-net/Test/ClassLibraryCommon/Blob/MD5FlagsTest.cs#sample_BlobRequestOptions_UseTransactionalMD5 "Use Transactional MD5 Sample")] 
             </remarks>
       </Docs>
     </Member>
