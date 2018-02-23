@@ -63,7 +63,7 @@ AnalyticsClient adla = new AnalyticsClient(auth, adla_account);
 > [Explore the management APIs](/dotnet/api/overview/azure/datalakeanalytics/management)
 
 ## Samples
-* [Azure Data Lake .NET Client Example](https://azure.microsoft.com/en-us/resources/samples/data-lake-dotnet-client/)
+* [Azure Data Lake .NET Client Example](https://azure.microsoft.com/resources/samples/data-lake-dotnet-client/)
 
 Explore more [sample .NET code](https://azure.microsoft.com/resources/samples/?platform=dotnet) you can use in your apps.
 
