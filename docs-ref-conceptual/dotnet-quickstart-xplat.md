@@ -10,7 +10,6 @@ ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.assetid: 
 ---
 
 # Deploy to Azure from the command line with .NET Core
