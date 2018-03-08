@@ -1,4 +1,4 @@
-﻿<Type Name="ISubscriptionClient" FullName="Microsoft.Azure.ServiceBus.ISubscriptionClient">
+<Type Name="ISubscriptionClient" FullName="Microsoft.Azure.ServiceBus.ISubscriptionClient">
   <TypeSignature Language="C#" Value="public interface ISubscriptionClient : Microsoft.Azure.ServiceBus.Core.IReceiverClient" />
   <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract ISubscriptionClient implements class Microsoft.Azure.ServiceBus.Core.IReceiverClient, class Microsoft.Azure.ServiceBus.IClientEntity" />
   <TypeSignature Language="DocId" Value="T:Microsoft.Azure.ServiceBus.ISubscriptionClient" />
@@ -23,6 +23,36 @@
              SubscriptionClient can be used for all basic interactions with a Service Bus Subscription.
              </summary>
     <remarks>Use <see cref="T:Microsoft.Azure.ServiceBus.Core.MessageReceiver" /> for advanced set of functionality.</remarks>
+    <example>
+             Create a new SubscriptionClient
+             <code>
+             ISubscriptionClient subscriptionClient = new SubscriptionClient(
+                 namespaceConnectionString,
+                 topicName,
+                 subscriptionName,
+                 ReceiveMode.PeekLock,
+                 RetryExponential);
+             </code>
+            
+             Register a message handler which will be invoked every time a message is received.
+             <code>
+             subscriptionClient.RegisterMessageHandler(
+                    async (message, token) =&gt;
+                    {
+                        // Process the message
+                        Console.WriteLine($"Received message: SequenceNumber:{message.SystemProperties.SequenceNumber} Body:{Encoding.UTF8.GetString(message.Body)}");
+            
+                        // Complete the message so that it is not received again.
+                        // This can be done only if the subscriptionClient is opened in ReceiveMode.PeekLock mode.
+                        await subscriptionClient.CompleteAsync(message.SystemProperties.LockToken);
+                    },
+                    async (exceptionEvent) =&gt;
+                    {
+                        // Process the exception
+                        Console.WriteLine("Exception = " + exceptionEvent.Exception);
+                        return Task.CompletedTask;
+                    });
+             </code></example>
     <example>
              Create a new SubscriptionClient
              <code>

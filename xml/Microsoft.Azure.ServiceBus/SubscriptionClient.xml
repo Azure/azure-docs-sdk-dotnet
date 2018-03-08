@@ -1,4 +1,4 @@
-﻿<Type Name="SubscriptionClient" FullName="Microsoft.Azure.ServiceBus.SubscriptionClient">
+<Type Name="SubscriptionClient" FullName="Microsoft.Azure.ServiceBus.SubscriptionClient">
   <TypeSignature Language="C#" Value="public class SubscriptionClient : Microsoft.Azure.ServiceBus.ClientEntity, Microsoft.Azure.ServiceBus.ISubscriptionClient" />
   <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit SubscriptionClient extends Microsoft.Azure.ServiceBus.ClientEntity implements class Microsoft.Azure.ServiceBus.Core.IReceiverClient, class Microsoft.Azure.ServiceBus.IClientEntity, class Microsoft.Azure.ServiceBus.ISubscriptionClient" />
   <TypeSignature Language="DocId" Value="T:Microsoft.Azure.ServiceBus.SubscriptionClient" />
@@ -25,6 +25,36 @@
              SubscriptionClient can be used for all basic interactions with a Service Bus Subscription.
              </summary>
     <remarks>It uses AMQP protocol for communicating with service bus. Use <see cref="T:Microsoft.Azure.ServiceBus.Core.MessageReceiver" /> for advanced set of functionality.</remarks>
+    <example>
+             Create a new SubscriptionClient
+             <code>
+             ISubscriptionClient subscriptionClient = new SubscriptionClient(
+                 namespaceConnectionString,
+                 topicName,
+                 subscriptionName,
+                 ReceiveMode.PeekLock,
+                 RetryExponential);
+             </code>
+            
+             Register a message handler which will be invoked every time a message is received.
+             <code>
+             subscriptionClient.RegisterMessageHandler(
+                    async (message, token) =&gt;
+                    {
+                        // Process the message
+                        Console.WriteLine($"Received message: SequenceNumber:{message.SystemProperties.SequenceNumber} Body:{Encoding.UTF8.GetString(message.Body)}");
+            
+                        // Complete the message so that it is not received again.
+                        // This can be done only if the subscriptionClient is opened in ReceiveMode.PeekLock mode.
+                        await subscriptionClient.CompleteAsync(message.SystemProperties.LockToken);
+                    },
+                    async (exceptionEvent) =&gt;
+                    {
+                        // Process the exception
+                        Console.WriteLine("Exception = " + exceptionEvent.Exception);
+                        return Task.CompletedTask;
+                    });
+             </code></example>
     <example>
              Create a new SubscriptionClient
              <code>
@@ -659,8 +689,8 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="handler" Type="System.Func&lt;Microsoft.Azure.ServiceBus.Message,System.Threading.CancellationToken,System.Threading.Tasks.Task&gt;" />
-        <Parameter Name="registerHandlerOptions" Type="Microsoft.Azure.ServiceBus.MessageHandlerOptions" />
+        <Parameter Name="handler" Type="System.Func&lt;Microsoft.Azure.ServiceBus.Message,System.Threading.CancellationToken,System.Threading.Tasks.Task&gt;" Index="0" />
+        <Parameter Name="messageHandlerOptions" Type="Microsoft.Azure.ServiceBus.MessageHandlerOptions" Index="1" FrameworkAlternate="azure-dotnet" />
       </Parameters>
       <Docs>
         <param name="handler">A <see cref="T:System.Func`3" /> that processes messages.</param>

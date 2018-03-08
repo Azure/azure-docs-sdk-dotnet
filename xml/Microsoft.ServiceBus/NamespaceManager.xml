@@ -1,4 +1,4 @@
-﻿<Type Name="NamespaceManager" FullName="Microsoft.ServiceBus.NamespaceManager">
+<Type Name="NamespaceManager" FullName="Microsoft.ServiceBus.NamespaceManager">
   <TypeSignature Language="C#" Value="public sealed class NamespaceManager" />
   <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit NamespaceManager extends System.Object" />
   <TypeSignature Language="DocId" Value="T:Microsoft.ServiceBus.NamespaceManager" />
@@ -19,6 +19,12 @@
     <summary>Represents an anchor class used in managing entities, such as queues, topics, subscriptions, and rules, in your 
             service namespace. You must provide service namespace address and access credentials in order to manage your service namespace.</summary>
     <remarks>To be added.</remarks>
+    <example>
+      <code>
+             NamespaceManagerSettings nsSettings = new NamespaceManagerSettings(); // with credentials and operation timeout
+             NamespaceManager manager = new NamespaceManager(new Uri("baseUri"), nsSettings);
+            </code>
+    </example>
     <example>
       <code>
              NamespaceManagerSettings nsSettings = new NamespaceManagerSettings(); // with credentials and operation timeout
@@ -2152,9 +2158,12 @@
         <Parameter Name="name" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="eventHubPath"></param>
-        <param name="consumerGroupName"></param>
-        <param name="name"></param>
+        <param name="eventHubPath">
+        </param>
+        <param name="consumerGroupName">
+        </param>
+        <param name="name">
+        </param>
         <summary />
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
@@ -2395,6 +2404,12 @@
             var queuesStartsWith = namespaceManager.GetQueues($"startswith(path, 'queue') eq true");
             </code>
         </example>
+        <example>
+          <code>
+            var queuesWithMessages = namespaceManager.GetQueues("messageCount Gt 0");
+            var queuesStartsWith = namespaceManager.GetQueues($"startswith(path, 'queue') eq true");
+            </code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="GetQueuesAsync">
@@ -2450,6 +2465,12 @@
             Value:                      A value of the corresponding property type
             Functions:                  startswith({Propery}, {Value})
             </remarks>
+        <example>
+          <code>
+            var queuesWithMessages = await namespaceManager.GetQueuesAsync("messageCount Gt 0");
+            var queuesStartsWith = await namespaceManager.GetQueuesAsync($"startswith(path, 'queue') eq true");
+            </code>
+        </example>
         <example>
           <code>
             var queuesWithMessages = await namespaceManager.GetQueuesAsync("messageCount Gt 0");
@@ -2677,6 +2698,12 @@
             var rulesInTheLast5Minutes = namespaceManager.GetRules(topicName, subscriptionName, $"createdAt gt '{fiveMinutesAgo}'");
             </code>
         </example>
+        <example>
+          <code>
+            var fiveMinutesAgo = DateTime.UtcNow.AddMinutes(-5).ToString("M/dd/yyyy hh:mm:ss");
+            var rulesInTheLast5Minutes = namespaceManager.GetRules(topicName, subscriptionName, $"createdAt gt '{fiveMinutesAgo}'");
+            </code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="GetRulesAsync">
@@ -2740,6 +2767,12 @@
             Logical operators:          Eq | Ne | Gt | Ge | Lt | Le  
             Value:                      A value of the corresponding property type
             </remarks>
+        <example>
+          <code>
+            var fiveMinutesAgo = DateTime.UtcNow.AddMinutes(-5).ToString("M/dd/yyyy hh:mm:ss");
+            var rulesInTheLast5Minutes = await namespaceManager.GetRulesAsync(topicName, subscriptionName, $"createdAt gt '{fiveMinutesAgo}'");
+            </code>
+        </example>
         <example>
           <code>
             var fiveMinutesAgo = DateTime.UtcNow.AddMinutes(-5).ToString("M/dd/yyyy hh:mm:ss");
@@ -2874,6 +2907,12 @@
             var subscriptionsStartsWith = namespaceManager.GetSubscriptions("topicName", $"startswith(path, 'subscription') eq true");
             </code>
         </example>
+        <example>
+          <code>
+            var subscriptionsWithMessages = namespaceManager.GetSubscriptions("topicName", "messageCount Gt 0");
+            var subscriptionsStartsWith = namespaceManager.GetSubscriptions("topicName", $"startswith(path, 'subscription') eq true");
+            </code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="GetSubscriptionsAsync">
@@ -2934,6 +2973,12 @@
             Value:                      A value of the corresponding property type
             Functions:                  startswith({Propery}, {Value})
             </remarks>
+        <example>
+          <code>
+            var subscriptionsWithMessages = await namespaceManager.GetSubscriptionsAsync("topicName", "messageCount Gt 0");
+            var subscriptionsStartsWith = await namespaceManager.GetSubscriptionsAsync("topicName", $"startswith(path, 'subscription') eq true");
+            </code>
+        </example>
         <example>
           <code>
             var subscriptionsWithMessages = await namespaceManager.GetSubscriptionsAsync("topicName", "messageCount Gt 0");
@@ -3077,6 +3122,12 @@
             var topicsStartsWith = namespaceManager.GetTopics($"startswith(path, 'topic') eq true");
             </code>
         </example>
+        <example>
+          <code>
+            var topicsWithMessages = namespaceManager.GetTopics("messageCount Gt 0");
+            var topicsStartsWith = namespaceManager.GetTopics($"startswith(path, 'topic') eq true");
+            </code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="GetTopicsAsync">
@@ -3132,6 +3183,12 @@
             Value:                      A value of the corresponding property type
             Functions:                  startswith({Propery}, {Value})
             </remarks>
+        <example>
+          <code>
+            var topicsWithMessages = await namespaceManager.GetTopicsAsync("messageCount Gt 0");
+            var topicsStartsWith = await namespaceManager.GetTopicsAsync($"startswith(path, 'topic') eq true");
+            </code>
+        </example>
         <example>
           <code>
             var topicsWithMessages = await namespaceManager.GetTopicsAsync("messageCount Gt 0");

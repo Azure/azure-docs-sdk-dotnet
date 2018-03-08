@@ -1,4 +1,4 @@
-﻿<Type Name="IMessageReceiver" FullName="Microsoft.Azure.ServiceBus.Core.IMessageReceiver">
+<Type Name="IMessageReceiver" FullName="Microsoft.Azure.ServiceBus.Core.IMessageReceiver">
   <TypeSignature Language="C#" Value="public interface IMessageReceiver : Microsoft.Azure.ServiceBus.Core.IReceiverClient" />
   <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IMessageReceiver implements class Microsoft.Azure.ServiceBus.Core.IReceiverClient, class Microsoft.Azure.ServiceBus.IClientEntity" />
   <TypeSignature Language="DocId" Value="T:Microsoft.Azure.ServiceBus.Core.IMessageReceiver" />
@@ -31,6 +31,20 @@
     <altmember cref="T:Microsoft.Azure.ServiceBus.Core.MessageReceiver" />
     <altmember cref="T:Microsoft.Azure.ServiceBus.QueueClient" />
     <altmember cref="T:Microsoft.Azure.ServiceBus.SubscriptionClient" />
+    <example>
+             Create a new MessageReceiver to receive a message from a Subscription
+             <code>
+             IMessageReceiver messageReceiver = new MessageReceiver(
+                 namespaceConnectionString,
+                 EntityNameHelper.FormatSubscriptionPath(topicName, subscriptionName),
+                 ReceiveMode.PeekLock);
+             </code>
+            
+             Receive a message from the Subscription.
+             <code>
+             var message = await messageReceiver.ReceiveAsync();
+             await messageReceiver.CompleteAsync(message.SystemProperties.LockToken);
+             </code></example>
     <example>
              Create a new MessageReceiver to receive a message from a Subscription
              <code>
@@ -334,7 +348,7 @@
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.ServiceBus.Message&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="serverWaitTime" Type="System.TimeSpan" />
+        <Parameter Name="operationTimeout" Type="System.TimeSpan" Index="0" FrameworkAlternate="azure-dotnet" />
       </Parameters>
       <Docs>
         <param name="operationTimeout">The time span the client waits for receiving a message before it times out.</param>
@@ -367,8 +381,8 @@
         <ReturnType>System.Threading.Tasks.Task&lt;System.Collections.Generic.IList&lt;Microsoft.Azure.ServiceBus.Message&gt;&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="maxMessageCount" Type="System.Int32" />
-        <Parameter Name="serverWaitTime" Type="System.TimeSpan" />
+        <Parameter Name="maxMessageCount" Type="System.Int32" Index="0" />
+        <Parameter Name="operationTimeout" Type="System.TimeSpan" Index="1" FrameworkAlternate="azure-dotnet" />
       </Parameters>
       <Docs>
         <param name="maxMessageCount">The maximum number of messages that will be received.</param>
