@@ -1,4 +1,4 @@
-<Type Name="MessageExtensions" FullName="Microsoft.Azure.ServiceBus.Diagnostics.MessageExtensions">
+﻿<Type Name="MessageExtensions" FullName="Microsoft.Azure.ServiceBus.Diagnostics.MessageExtensions">
   <TypeSignature Language="C#" Value="public static class MessageExtensions" />
   <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract sealed beforefieldinit MessageExtensions extends System.Object" />
   <TypeSignature Language="DocId" Value="T:Microsoft.Azure.ServiceBus.Diagnostics.MessageExtensions" />
@@ -59,35 +59,6 @@
             
             Returned <see cref="T:System.Diagnostics.Activity" /> needs to be started before it can be used (see example below)
             </remarks>
-        <example>
-          <code>
-            async Task ProcessAsync()
-            {
-               var message = await messageReceiver.ReceiveAsync();
-               var activity = message.ExtractActivity();
-               activity.Start();
-               Logger.LogInformation($"Message received, Id = {Activity.Current.Id}")
-               try 
-               {
-                  // process message
-               }
-               catch (Exception ex)
-               {
-                    Logger.LogError($"Exception {ex}, Id = {Activity.Current.Id}")
-               }
-               finally 
-               {
-                    activity.Stop();
-                    // Activity is stopped, we no longer have it in Activity.Current, let's user activity now
-                    Logger.LogInformation($"Message processed, Id = {activity.Id}, Duration = {activity.Duration}")
-               }
-            }
-            </code>
-            
-            Note that every log is stamped with <see cref="P:System.Diagnostics.Activity.Current" />.Id, that could be used within 
-            any nested method call (sync or async) - <see cref="P:System.Diagnostics.Activity.Current" /> is an ambient context that flows with async method calls.
-            
-            </example>
         <example>
           <code>
             async Task ProcessAsync()

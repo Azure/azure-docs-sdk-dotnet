@@ -1,4 +1,4 @@
-<Type Name="JsonWebKeyVerifier" FullName="Microsoft.Azure.KeyVault.WebKey.JsonWebKeyVerifier">
+﻿<Type Name="JsonWebKeyVerifier" FullName="Microsoft.Azure.KeyVault.WebKey.JsonWebKeyVerifier">
   <TypeSignature Language="C#" Value="public abstract class JsonWebKeyVerifier" />
   <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit JsonWebKeyVerifier extends System.Object" />
   <TypeSignature Language="DocId" Value="T:Microsoft.Azure.KeyVault.WebKey.JsonWebKeyVerifier" />
@@ -140,10 +140,6 @@
             C# property names.</para>
         <para>This method doesn't have to add <code>"kid"</code>, <code>"kty"</code> and <code>"key_ops"</code>.
             Thes properties are assumed to be useful to all keys.</para>
-        <para>This method must add JSON property names, such as <code>"crv"</code>, <code>"p"</code>, etc. It must not add
-            C# property names.</para>
-        <para>This method doesn't have to add <code>"kid"</code>, <code>"kty"</code> and <code>"key_ops"</code>.
-            Thes properties are assumed to be useful to all keys.</para>
       </Docs>
     </Member>
     <Member MemberName="GetVerifier">
@@ -236,10 +232,6 @@
             <code>false</code> otherwise.</returns>
         <remarks>To be added.</remarks>
         <para>This method is used to protect private key material from accidental leakage.</para>
-        <para>If no private key property (for the key type) is specified in the instance, the method must return
-            <code>false</code> and not modify the <paramref name="specifiedProps" /> parameter.</para>
-        <para>If one or more private key property is specified, the method must return <code>true</code> and optionally
-            set <paramref name="specifiedProps" /> with a value - typically a <see cref="T:System.Collections.Generic.List`1" /> - containing the specified properties.</para>
         <para>If no private key property (for the key type) is specified in the instance, the method must return
             <code>false</code> and not modify the <paramref name="specifiedProps" /> parameter.</para>
         <para>If one or more private key property is specified, the method must return <code>true</code> and optionally
@@ -418,10 +410,6 @@
             <code>true</code> and not modify the <paramref name="missingProps" /> parameter.</para>
         <para>If some public key property is missing, the method must return <code>false</code> and set <paramref name="missingProps" />
             with a value - typically a <see cref="T:System.Collections.Generic.List`1" /> - containing all missing properties.</para>
-        <para>If all required public key properties (for the key type) are specified in the instance, the method must return
-            <code>true</code> and not modify the <paramref name="missingProps" /> parameter.</para>
-        <para>If some public key property is missing, the method must return <code>false</code> and set <paramref name="missingProps" />
-            with a value - typically a <see cref="T:System.Collections.Generic.List`1" /> - containing all missing properties.</para>
       </Docs>
     </Member>
     <Member MemberName="IsPublicKeyCrypto">
@@ -492,16 +480,6 @@
             <paramref name="errorMsg" />.</para>
         <para>If some issue is found, this method must return <code>false</code> and tell more details in the
             <paramref name="errorMsg" /> parameter.</para>
-        <para>Because fully validating a key may require unfeasable amount of resources, this method only has to check
-            for obvious issues. As a guideline, we say that the code only verifies obvious issues if it runs in constant time.
-            It's perfectly valid for implementors to do nothing and simply return <code>true</code>.</para>
-        <para>This method assumes that <see cref="M:Microsoft.Azure.KeyVault.WebKey.JsonWebKeyVerifier.IsPublicKeyComplete(Microsoft.Azure.KeyVault.WebKey.JsonWebKey,System.Collections.Generic.ICollection{System.String}@)" /> was called and returned <code>true</code>. It
-            doesn't test again for the presence of required properties. It may throw <see cref="T:System.NullReferenceException" />
-            if the caller doesn't see <see cref="M:Microsoft.Azure.KeyVault.WebKey.JsonWebKeyVerifier.IsPublicKeyComplete(Microsoft.Azure.KeyVault.WebKey.JsonWebKey,System.Collections.Generic.ICollection{System.String}@)" /> returning <code>true</code> first.</para>
-        <para>If the valiation code finds no issue, this method must return <code>true</code> without modifying the value of 
-            <paramref name="errorMsg" />.</para>
-        <para>If some issue is found, this method must return <code>false</code> and tell more details in the
-            <paramref name="errorMsg" /> parameter.</para>
       </Docs>
     </Member>
     <Member MemberName="IsSecretKeyComplete">
@@ -532,10 +510,6 @@
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
-        <para>If all required secret key properties (for the key type) are specified in the instance, the method must return
-            <code>true</code> and not modify the <paramref name="missingProps" /> parameter.</para>
-        <para>If some property is missing, the method must return <code>false</code> and set <paramref name="missingProps" />
-            to a value - typically a <see cref="T:System.Collections.Generic.List`1" /> - containing all missing properties.</para>
         <para>If all required secret key properties (for the key type) are specified in the instance, the method must return
             <code>true</code> and not modify the <paramref name="missingProps" /> parameter.</para>
         <para>If some property is missing, the method must return <code>false</code> and set <paramref name="missingProps" />
@@ -581,16 +555,6 @@
             <paramref name="errorMsg" />.</para>
         <para>If some issue is found, this method must return <code>false</code> and tell more details in the
             <paramref name="errorMsg" /> parameter.</para>
-        <para>Because fully validating a key may require unfeasable amount of resources, this method only has to check
-            for obvious issues. As a guideline, we say that the code only verifies obvious issues if it runs in constant time.
-            It's perfectly valid for implementors to do nothing and simply return <code>true</code>.</para>
-        <para>This method assumes that <see cref="M:Microsoft.Azure.KeyVault.WebKey.JsonWebKeyVerifier.IsSecretKeyComplete(Microsoft.Azure.KeyVault.WebKey.JsonWebKey,System.Collections.Generic.ICollection{System.String}@)" /> was called and returned <code>true</code>. It
-            doesn't test again for the presence of required properties. It may throw <see cref="T:System.NullReferenceException" />
-            if the caller doesn't see <see cref="M:Microsoft.Azure.KeyVault.WebKey.JsonWebKeyVerifier.IsSecretKeyComplete(Microsoft.Azure.KeyVault.WebKey.JsonWebKey,System.Collections.Generic.ICollection{System.String}@)" /> returning <code>true</code> first.</para>
-        <para>If the valiation code finds no issue, this method must return <code>true</code> without modifying the value of 
-            <paramref name="errorMsg" />.</para>
-        <para>If some issue is found, this method must return <code>false</code> and tell more details in the
-            <paramref name="errorMsg" /> parameter.</para>
       </Docs>
     </Member>
     <Member MemberName="IsSymmetricKeyComplete">
@@ -621,10 +585,6 @@
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
-        <para>If all required symmetric key properties (for the key type) are specified in the instance, the method must return
-            <code>true</code> and not modify the <paramref name="missingProps" /> parameter.</para>
-        <para>If some property is missing, the method must return <code>false</code> and set <paramref name="missingProps" />
-            to a value - typically a <see cref="T:System.Collections.Generic.List`1" /> - containing all missing properties.</para>
         <para>If all required symmetric key properties (for the key type) are specified in the instance, the method must return
             <code>true</code> and not modify the <paramref name="missingProps" /> parameter.</para>
         <para>If some property is missing, the method must return <code>false</code> and set <paramref name="missingProps" />
@@ -687,16 +647,6 @@
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
-        <para>Because fully validating a key may require unfeasable amount of resources, this method only has to check
-            for obvious issues. As a guideline, we say that the code only verifies obvious issues if it runs in constant time.
-            It's perfectly valid for implementors to do nothing and simply return <code>true</code>.</para>
-        <para>This method assumes that <see cref="M:Microsoft.Azure.KeyVault.WebKey.JsonWebKeyVerifier.IsSymmetricKeyComplete(Microsoft.Azure.KeyVault.WebKey.JsonWebKey,System.Collections.Generic.ICollection{System.String}@)" /> was called and returned <code>true</code>. It
-            doesn't test again for the presence of required properties. It may throw <see cref="T:System.NullReferenceException" />
-            if the caller doesn't see <see cref="M:Microsoft.Azure.KeyVault.WebKey.JsonWebKeyVerifier.IsSymmetricKeyComplete(Microsoft.Azure.KeyVault.WebKey.JsonWebKey,System.Collections.Generic.ICollection{System.String}@)" /> returning <code>true</code> first.</para>
-        <para>If the valiation code finds no issue, this method must return <code>true</code> without modifying the value of 
-            <paramref name="errorMsg" />.</para>
-        <para>If some issue is found, this method must return <code>false</code> and tell more details in the
-            <paramref name="errorMsg" /> parameter.</para>
         <para>Because fully validating a key may require unfeasable amount of resources, this method only has to check
             for obvious issues. As a guideline, we say that the code only verifies obvious issues if it runs in constant time.
             It's perfectly valid for implementors to do nothing and simply return <code>true</code>.</para>
@@ -882,9 +832,6 @@
         <para>Verification first examines the <see cref="P:Microsoft.Azure.KeyVault.WebKey.JsonWebKey.Kty" /> property to select a verifier instance
             (for more information, see the <see cref="M:Microsoft.Azure.KeyVault.WebKey.JsonWebKeyVerifier.Register(Microsoft.Azure.KeyVault.WebKey.JsonWebKeyVerifier)" /> method). If a verifier is found, it's used to check
             if the key conforms to the corresponding key type.</para>
-        <para>Verification first examines the <see cref="P:Microsoft.Azure.KeyVault.WebKey.JsonWebKey.Kty" /> property to select a verifier instance
-            (for more information, see the <see cref="M:Microsoft.Azure.KeyVault.WebKey.JsonWebKeyVerifier.Register(Microsoft.Azure.KeyVault.WebKey.JsonWebKeyVerifier)" /> method). If a verifier is found, it's used to check
-            if the key conforms to the corresponding key type.</para>
       </Docs>
     </Member>
     <Member MemberName="VerifyByKeyType">
@@ -908,12 +855,9 @@
         <Parameter Name="error" Type="System.String&amp;" RefType="ref" />
       </Parameters>
       <Docs>
-        <param name="webKey">
-        </param>
-        <param name="options">
-        </param>
-        <param name="error">
-        </param>
+        <param name="webKey"></param>
+        <param name="options"></param>
+        <param name="error"></param>
         <summary>
             Verifies the specified JsonWebKey instance according to <see cref="P:Microsoft.Azure.KeyVault.WebKey.JsonWebKey.Kty" />.
             </summary>
