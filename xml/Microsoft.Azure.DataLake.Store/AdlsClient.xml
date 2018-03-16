@@ -21,6 +21,7 @@
             Client of Azure data lake store. It contains the public APIs to perform operations of REST API which are easier to call and more usable than Core APIs. Core APIs provide more freedom but ADLSClient provide more commonly used forms.
             It encapsulates the Authorization token and token refresh. Contains factory methods that takes a ServiceClientCredential or a string auth token and returns instance of this class. For every operation it provides
             a async and sync version. Every sync method is a wait on async method with exception of Create and Concurrent append. Currently this class is not inheritable since it has not exposed constructors.
+            Adls use NLog for logging. adls.dotnet.* is the name of the logger to obtain all logs.
             </summary>
     <remarks>To be added.</remarks>
   </Docs>
@@ -1146,12 +1147,12 @@
       </Docs>
     </Member>
     <Member MemberName="GetFileProperties">
-      <MemberSignature Language="C#" Value="public virtual void GetFileProperties (string path, bool getAclUsage, string dumpFileName, bool getDiskUsage = true, bool saveToLocal = true, int numThreads = -1, bool displayFiles = false, bool hideConsistentAcl = true, long maxDepth = 9223372036854775807);" />
+      <MemberSignature Language="C#" Value="public virtual void GetFileProperties (string path, bool getAclUsage, string dumpFileName, bool getDiskUsage = true, bool saveToLocal = true, int numThreads = -1, bool displayFiles = false, bool hideConsistentAcl = false, long maxDepth = 9223372036854775807);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void GetFileProperties(string path, bool getAclUsage, string dumpFileName, bool getDiskUsage, bool saveToLocal, int32 numThreads, bool displayFiles, bool hideConsistentAcl, int64 maxDepth) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.DataLake.Store.AdlsClient.GetFileProperties(System.String,System.Boolean,System.String,System.Boolean,System.Boolean,System.Int32,System.Boolean,System.Boolean,System.Int64)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Sub GetFileProperties (path As String, getAclUsage As Boolean, dumpFileName As String, Optional getDiskUsage As Boolean = true, Optional saveToLocal As Boolean = true, Optional numThreads As Integer = -1, Optional displayFiles As Boolean = false, Optional hideConsistentAcl As Boolean = true, Optional maxDepth As Long = 9223372036854775807)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Sub GetFileProperties (path As String, getAclUsage As Boolean, dumpFileName As String, Optional getDiskUsage As Boolean = true, Optional saveToLocal As Boolean = true, Optional numThreads As Integer = -1, Optional displayFiles As Boolean = false, Optional hideConsistentAcl As Boolean = false, Optional maxDepth As Long = 9223372036854775807)" />
       <MemberSignature Language="F#" Value="abstract member GetFileProperties : string * bool * string * bool * bool * int * bool * bool * int64 -&gt; unit&#xA;override this.GetFileProperties : string * bool * string * bool * bool * int * bool * bool * int64 -&gt; unit" Usage="adlsClient.GetFileProperties (path, getAclUsage, dumpFileName, getDiskUsage, saveToLocal, numThreads, displayFiles, hideConsistentAcl, maxDepth)" />
-      <MemberSignature Language="C++ WINRT" Value=" virtual void GetFileProperties(std::wstring const &amp; path, bool getAclUsage, std::wstring const &amp; dumpFileName, bool getDiskUsage = true, bool saveToLocal = true, int numThreads = -1, bool displayFiles = false, bool hideConsistentAcl = true, long maxDepth = 9223372036854775807);" />
+      <MemberSignature Language="C++ WINRT" Value=" virtual void GetFileProperties(std::wstring const &amp; path, bool getAclUsage, std::wstring const &amp; dumpFileName, bool getDiskUsage = true, bool saveToLocal = true, int numThreads = -1, bool displayFiles = false, bool hideConsistentAcl = false, long maxDepth = 9223372036854775807);" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.DataLake.Store</AssemblyName>
@@ -1178,9 +1179,10 @@
         <param name="getDiskUsage">True if we want disk usage</param>
         <param name="saveToLocal">True if we want to save to local file else save to ADL</param>
         <param name="numThreads">Number of threads</param>
-        <param name="displayFiles">True if we want to display properties of files. By default we show properties of directories</param>
+        <param name="displayFiles">True if we want to display properties of files. By default we show properties of directories. If this is false we would not retrieve Acls for files.</param>
         <param name="hideConsistentAcl">if True then we wont dump the acl property of a directory/file if it's parent directory has same acl for all of its descendants. For ex: If 
-                                                the root ("/") has same Acl for all it's descendants, then we will show the Acl for the root only. If this flag is false, then we show the Acl for all directories or files</param>
+                                                the root ("/") has same Acl for all it's descendants, then we will show the Acl for the root only. If this flag is false, then we show the Acl for all directories or files.
+                                            This cannot be true when displayFiles is false because consistent Acl cannot be determined unless we retrieve acls for the files.</param>
         <param name="maxDepth">Maximum depth till which we want to view the properties</param>
         <summary>
             Recursively dumps file property of alldirectories or/and files under the given path to a local or adl file. File property can be disk usage or Acl or both.
