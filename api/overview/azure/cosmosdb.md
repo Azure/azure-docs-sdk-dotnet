@@ -1,7 +1,7 @@
 ---
-title: Azure CosmosDB libraries for .NET
-description: Reference for Azure CosmosDB libraries for .NET
-keywords: Azure, .NET, SDK, API, CosmosDB
+title: Azure Cosmos DB libraries for .NET
+description: Reference for Azure Cosmos DB libraries for .NET
+keywords: Azure, .NET, SDK, API, Cosmos DB
 author: camsoper
 ms.author: casoper
 manager: wpickett
@@ -14,17 +14,17 @@ ms.service: cosmos-db
 ms.custom: devcenter, svc-overview
 ---
 
-# Azure CosmosDB libraries for .NET
+# Azure Cosmos DB libraries for .NET
 
 ## Overview
 
-[Azure CosmosDB](https://docs.microsoft.com/azure/cosmos-db/introduction) is a distributed and scalable data store, supporting multiple different types of databases.
+[Azure Cosmos DB](https://docs.microsoft.com/azure/cosmos-db/introduction) is a distributed and scalable data store, supporting multiple different types of databases.
 
-[Get started with CosmosDB](https://docs.microsoft.com/azure/cosmos-db/create-documentdb-dotnet).
+[Get started with Cosmos DB](https://docs.microsoft.com/azure/cosmos-db/create-sql-api-dotnet).
 
 ## Client library
 
-Use the CosmosDB .NET client library to access and store data in an existing CosmosDB data store.  To automate creation of a new CosmosDB account, use the Azure portal, CLI, or PowerShell.
+Use the Azure Cosmos DB .NET client library to access and store data in an existing Azure Cosmos DB data store.  To automate creation of a new Azure Cosmos DB account, use the Azure portal, CLI, or PowerShell.
 
 Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.DocumentDB.Core) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
 
@@ -42,7 +42,7 @@ dotnet add package Microsoft.Azure.DocumentDB.Core
 
 ### Code Example
 
-This example connects to an existing CosmosDB DocumentDB API database, reads a document from a collection, and deserializes it as an `Item` object.   
+This example connects to an existing Azure Cosmos DB SQL API database, reads a document from a collection, and deserializes it as an `Item` object.   
 
 ```csharp
 /* Include this "using" directive...
