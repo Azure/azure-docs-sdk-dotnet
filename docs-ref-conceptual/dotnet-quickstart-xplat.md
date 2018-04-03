@@ -14,7 +14,7 @@ ms.devlang: dotnet
 
 # Deploy to Azure from the command line with .NET Core
 
-This tutorial will walk you through building and deploying a Microsoft Azure application using .NET Core.  When finished, you'll have a web-based to-do application built in ASP.NET MVC Core, hosted as an Azure Web App, and using Azure CosmosDB for data storage.
+This tutorial will walk you through building and deploying a Microsoft Azure application using .NET Core.  When finished, you'll have a web-based to-do application built in ASP.NET MVC Core, hosted as an Azure Web App, and using Azure Cosmos DB for data storage.
 
 ## Prerequisites
 
@@ -25,9 +25,9 @@ This tutorial will walk you through building and deploying a Microsoft Azure app
 
 The [Azure Cloud Shell](/azure/cloud-shell/) has all of the optional prerequisites for this tutorial preinstalled.  You only need to install the optional components above if you wish to run the tutorial locally.  To quickly launch the Cloud Shell, just click the **Try it** button in the top-right of any of the below code blocks.
 
-## Create a CosmosDB account
+## Create an Azure Cosmos DB account
 
-CosmosDB is used for data storage in this tutorial, so you'll need to create an account.  Run this script locally or in the Cloud Shell to create an Azure CosmosDB DocumentDB API account.
+Azure Cosmos DB is used for data storage in this tutorial, so you'll need to create an account.  Run this script locally or in the Cloud Shell to create an Azure Cosmos DB SQL API account.
 
 ```azurecli-interactive
 # Create the DotNetAzureTutorial resource group
@@ -37,7 +37,7 @@ az group create --name DotNetAzureTutorial --location EastUS
 let randomNum=$RANDOM*$RANDOM
 cosmosdbname=dotnettutorial$randomNum
 
-# Create the CosmosDB account
+# Create the Azure Cosmos DB account
 az cosmosdb create --name $cosmosdbname --resource-group DotNetAzureTutorial
 
 # Retrieve the endpoint and key (you'll need these later)
@@ -48,7 +48,7 @@ cosmosAuthKey=$(az cosmosdb list-keys -n $cosmosdbname -g DotNetAzureTutorial --
 
 ## Download and configure the application
 
-The application you're going to deploy is a [simple to-do app](https://github.com/Azure-Samples/dotnet-cosmosdb-quickstart/) written using ASP.NET MVC Core using the CosmosDB client libraries.  Now you'll get the code for this tutorial and configure it with your CosmosDB information.
+The application you're going to deploy is a [simple to-do app](https://github.com/Azure-Samples/dotnet-cosmosdb-quickstart/) written using ASP.NET MVC Core using the Azure Cosmos DB client libraries.  Now you'll get the code for this tutorial and configure it with your Azure Cosmos DB information.
 
 ```azurecli-interactive
 # Get the code from GitHub
@@ -127,7 +127,7 @@ You can add new items to the to-do list by clicking **Create New**.
 
 ## Clean up
 
-When you're done testing the app and inspecting the code and resources, you can delete the Web App and CosmosDB account by deleting the resource group.
+When you're done testing the app and inspecting the code and resources, you can delete the Web App and Azure Cosmos DB account by deleting the resource group.
 
 ```azurecli-interactive
 az group delete -n DotNetAzureTutorial

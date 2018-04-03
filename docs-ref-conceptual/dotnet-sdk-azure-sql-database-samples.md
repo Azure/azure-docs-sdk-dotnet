@@ -22,8 +22,8 @@ If you need code for other tasks, you can browse the full list of [.NET samples]
 
 - [Web application development with ASP.NET MVC using DocumentDB](https://azure.microsoft.com/resources/samples/documentdb-dotnet-todo-app/)
 
-- [Developing a .NET app using Azure CosmosDB MongoDB API](https://azure.microsoft.com/resources/samples/azure-cosmos-db-mongodb-dotnet-getting-started/)
+- [Developing a .NET app using Azure Cosmos DB MongoDB API](https://azure.microsoft.com/resources/samples/azure-cosmos-db-mongodb-dotnet-getting-started/)
 
-- [Developing a .NET console app using DocumentDB](https://azure.microsoft.com/resources/samples/documentdb-dotnet-getting-started/)
+- [Developing a .NET console app using Azure Cosmos DB](https://azure.microsoft.com/resources/samples/documentdb-dotnet-getting-started/)
 
 [!include[More samples](includes/more-samples.md)]

@@ -53,7 +53,7 @@ ms.custom: devcenter
     <td>More services</td>
     <td>Resource Manager<br>Key Vault<br>Redis<br>CDN<br>Batch</td>
     <td valign="top">App service - Web apps<br>Functions<br>Service bus</td>
-    <td valign="top">Monitor<br>Graph RBAC<br>DocumentDB<br>Scheduler</td>
+    <td valign="top">Monitor<br>Graph RBAC<br>Azure Cosmos DB<br>Scheduler</td>
   </tr>
   <tr>
     <td>Fundamentals</td>
