@@ -22,7 +22,7 @@ For sample source code, see the list of [Azure service samples](https://azure.mi
 |---|---|
 | **Web Apps**||
 | [Create an ASP.NET web app with Azure SQL Database][1] | Create a simple web application that stores data in Azure SQL Database. | 
-| [Create an ASP.NET web app with CosmosDB][2] | Create a web application using CosmosDB's DocumentDB API. | 
+| [Create an ASP.NET web app with Azure Cosmos DB][2] | Create a web application using the Azure Cosmos DB SQL API. | 
 | **API Apps**||
 | [Create and deploy a Web API][3] | Create and deploy a .NET Web API with Swagger. | 
 | **Media Services** | |
@@ -36,7 +36,7 @@ For sample source code, see the list of [Azure service samples](https://azure.mi
 
 
 [1]: /azure/app-service-web/app-service-web-tutorial-dotnet-sqldatabase
-[2]: /azure/documentdb/documentdb-dotnet-application
+[2]: /azure/cosmos-db/sql-api-dotnet-application
 [3]: /azure/app-service-api/app-service-api-dotnet-get-started
 [4]: /azure/media-services/media-services-dotnet-get-started
 [5]: /azure/search/search-howto-dotnet-sdk
