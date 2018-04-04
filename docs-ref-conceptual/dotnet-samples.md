@@ -1,22 +1,26 @@
 ---
-layout: HubPage
-ms.topic: hub-page
+layout: LandingPage
+ms.topic: landing-page
 title: Azure Code Samples for .NET
 description: Learn how to use .NET to create a variety of applications on any platform using C#, Visual Basic, and F#. Browse API reference, sample code, tutorials, and more.
 ---
 
 <div id="main" class="v2">
 <div class="container">
-<h1>Azure Code Samples for .NET</h1>
-<p>These are the top samples we recommend for getting started with Azure using .NET. You can also browse the <a href="https://azure.microsoft.com/en-us/resources/samples/?platform=dotnet&sort=2">complete collection of samples</a>.
-    <ul id="samples" class="cardsC">
+    <ul class="cardsC panelContent" id="samples" style="margin-top: 0px; display: flex;">
+        <li class="fullSpan">
+            <div class="container intro">
+                <h1>Azure Code Samples for .NET</h1>
+                <p>These are the top samples we recommend for getting started with Azure using .NET. You can also browse the <a href="https://azure.microsoft.com/resources/samples/?platform=dotnet&sort=2">complete collection of samples</a></p>.
+            </div>
+        </li>
         <li>
             <div class="cardSize">
                 <div class="cardPadding">
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage bgdAccent1">
-                                <img src="/dotnet/azure/docs-ref-conceptual/media/dotnet-samples/generic-thumbnail.png" alt="" />
+                                <img src="/dotnet/docs-ref-conceptual/media/dotnet-samples/generic-thumbnail.png" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
@@ -35,7 +39,7 @@ description: Learn how to use .NET to create a variety of applications on any pl
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage bgdAccent1">
-                                <img src="/dotnet/azure/docs-ref-conceptual/media/dotnet-samples/generic-thumbnail.png" alt="" />
+                                <img src="/dotnet/docs-ref-conceptual/media/dotnet-samples/generic-thumbnail.png" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
@@ -54,7 +58,7 @@ description: Learn how to use .NET to create a variety of applications on any pl
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage bgdAccent1">
-                                <img src="/dotnet/azure/docs-ref-conceptual/media/dotnet-samples/generic-thumbnail.png" alt="" />
+                                <img src="/dotnet/docs-ref-conceptual/media/dotnet-samples/generic-thumbnail.png" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
@@ -73,7 +77,7 @@ description: Learn how to use .NET to create a variety of applications on any pl
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage bgdAccent1">
-                                <img src="/dotnet/azure/docs-ref-conceptual/media/dotnet-samples/generic-thumbnail.png" alt="" />
+                                <img src="/dotnet/docs-ref-conceptual/media/dotnet-samples/generic-thumbnail.png" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
@@ -92,7 +96,7 @@ description: Learn how to use .NET to create a variety of applications on any pl
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage bgdAccent1">
-                                <img src="/dotnet/azure/docs-ref-conceptual/media/dotnet-samples/generic-thumbnail.png" alt="" />
+                                <img src="/dotnet/docs-ref-conceptual/media/dotnet-samples/generic-thumbnail.png" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
@@ -111,7 +115,7 @@ description: Learn how to use .NET to create a variety of applications on any pl
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage bgdAccent1">
-                                <img src="/dotnet/azure/docs-ref-conceptual/media/dotnet-samples/generic-thumbnail.png" alt="" />
+                                <img src="/dotnet/docs-ref-conceptual/media/dotnet-samples/generic-thumbnail.png" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
