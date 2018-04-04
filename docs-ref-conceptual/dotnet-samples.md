@@ -4,16 +4,12 @@ ms.topic: landing-page
 title: Azure Code Samples for .NET
 description: Learn how to use .NET to create a variety of applications on any platform using C#, Visual Basic, and F#. Browse API reference, sample code, tutorials, and more.
 ---
+# Azure Code Samples for .NET
+These are the top samples we recommend for getting started with Azure using .NET. You can also browse the [complete collection of samples](https://azure.microsoft.com/resources/samples/?platform=dotnet&sort=2).
 
 <div id="main" class="v2">
 <div class="container">
-    <ul class="cardsC panelContent" id="samples" style="margin-top: 0px; display: flex;">
-        <li class="fullSpan">
-            <div class="container intro">
-                <h1>Azure Code Samples for .NET</h1>
-                <p>These are the top samples we recommend for getting started with Azure using .NET. You can also browse the <a href="https://azure.microsoft.com/resources/samples/?platform=dotnet&sort=2">complete collection of samples</a></p>.
-            </div>
-        </li>
+    <ul class="cardsC panelContent" id="samples" style="margin-top: 20px; display: flex;">
         <li>
             <div class="cardSize">
                 <div class="cardPadding">
