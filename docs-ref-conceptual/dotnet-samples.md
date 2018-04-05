@@ -16,7 +16,7 @@ These are the top samples we recommend for getting started with Azure using .NET
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage bgdAccent1">
-                                <img src="/dotnet/docs-ref-conceptual/media/dotnet-samples/generic-thumbnail.png" alt="" />
+                                <img src="/dotnet/docs-ref-conceptual/media/dotnet-samples/web-app.png" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
@@ -35,13 +35,13 @@ These are the top samples we recommend for getting started with Azure using .NET
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage bgdAccent1">
-                                <img src="/dotnet/docs-ref-conceptual/media/dotnet-samples/generic-thumbnail.png" alt="" />
+                                <img src="/dotnet/docs-ref-conceptual/media/dotnet-samples/github.png" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
                             <a href="https://docs.microsoft.com/azure/azure-functions/functions-create-github-webhook-triggered-function">
                                 <h3>Trigger events from GitHub</h3>
-                                <p>Shows how to trigger events based on GitHub actions.</p>
+                                <p>Shows how to trigger events based on GitHub actions using Azure Functions and webhooks.</p>
                             </a>
                         </div>
                     </div>
@@ -54,13 +54,13 @@ These are the top samples we recommend for getting started with Azure using .NET
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage bgdAccent1">
-                                <img src="/dotnet/docs-ref-conceptual/media/dotnet-samples/generic-thumbnail.png" alt="" />
+                                <img src="/dotnet/docs-ref-conceptual/media/dotnet-samples/photo-gallery.png" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
                             <a href="https://azure.microsoft.com/resources/samples/storage-blobs-dotnet-webapp/">
                                 <h3>Photo Gallery</h3>
-                                <p>Shows how to create a web page where users can upload pictures to the cloud.</p>
+                                <p>Shows how to create a webpage where users can upload pictures to the cloud with Azure Web Apps and Azure blob storage.</p>
                             </a>
                         </div>
                     </div>
@@ -73,13 +73,13 @@ These are the top samples we recommend for getting started with Azure using .NET
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage bgdAccent1">
-                                <img src="/dotnet/docs-ref-conceptual/media/dotnet-samples/generic-thumbnail.png" alt="" />
+                                <img src="/dotnet/docs-ref-conceptual/media/dotnet-samples/voting-app.png" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
                             <a href="https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-prepare-app">
                                 <h3>Voting app</h3>
-                                <p>AKS is pretty neat and this voting app uses it.</p>
+                                <p>Shows how to create a simple voting application using Kubernetes and Docker containers.</p>
                             </a>
                         </div>
                     </div>
@@ -92,7 +92,7 @@ These are the top samples we recommend for getting started with Azure using .NET
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage bgdAccent1">
-                                <img src="/dotnet/docs-ref-conceptual/media/dotnet-samples/generic-thumbnail.png" alt="" />
+                                <img src="/dotnet/docs-ref-conceptual/media/dotnet-samples/cognitive-services.png" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
@@ -111,13 +111,13 @@ These are the top samples we recommend for getting started with Azure using .NET
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage bgdAccent1">
-                                <img src="/dotnet/docs-ref-conceptual/media/dotnet-samples/generic-thumbnail.png" alt="" />
+                                <img src="/dotnet/docs-ref-conceptual/media/dotnet-samples/cosmosdb.png" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
                             <a href="https://github.com/JeremyLikness/explore-cosmos-db">
                                 <h3>Explore Cosmos DB</h3>
-                                <p>Cosmos DB is also pretty neat.</p>
+                                <p>Shows CosmosDB basics with .NET Core and Mongo.</p>
                             </a>
                         </div>
                     </div>
