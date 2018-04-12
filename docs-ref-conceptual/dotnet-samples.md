@@ -1,8 +1,17 @@
 ---
+title: Azure Code Samples for .NET
+description: Code samples for .NET and Azure.
 layout: LandingPage
 ms.topic: landing-page
-title: Azure Code Samples for .NET
-description: Learn how to use .NET to create a variety of applications on any platform using C#, Visual Basic, and F#. Browse API reference, sample code, tutorials, and more.
+author: camsoper
+ms.author: casoper
+manager: wpickett
+ms.date: 04/12/2018
+ms.topic: reference
+ms.technology: azure
+ms.devlang: dotnet
+ms.service: multiple
+ms.custom: devcenter
 ---
 # Azure Code Samples for .NET
 These are the top samples we recommend for getting started with Azure using .NET. You can also browse the [complete collection of samples](https://azure.microsoft.com/resources/samples/?platform=dotnet&sort=2).
@@ -16,7 +25,9 @@ These are the top samples we recommend for getting started with Azure using .NET
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage bgdAccent1">
-                                <img src="/dotnet/docs-ref-conceptual/media/dotnet-samples/web-app.png" alt="" />
+                                <a href="https://docs.microsoft.com/azure/app-service/app-service-web-tutorial-dotnet-sqldatabase">
+                                    <img src="/dotnet/docs-ref-conceptual/media/dotnet-samples/web-app.png" alt="" />
+                                </a>
                             </div>
                         </div>
                         <div class="cardText">
@@ -35,7 +46,9 @@ These are the top samples we recommend for getting started with Azure using .NET
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage bgdAccent1">
-                                <img src="/dotnet/docs-ref-conceptual/media/dotnet-samples/github.png" alt="" />
+                                <a href="https://docs.microsoft.com/azure/azure-functions/functions-create-github-webhook-triggered-function">
+                                    <img src="/dotnet/docs-ref-conceptual/media/dotnet-samples/github.png" alt="" />
+                                </a>
                             </div>
                         </div>
                         <div class="cardText">
@@ -54,7 +67,9 @@ These are the top samples we recommend for getting started with Azure using .NET
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage bgdAccent1">
-                                <img src="/dotnet/docs-ref-conceptual/media/dotnet-samples/photo-gallery.png" alt="" />
+                                <a href="https://azure.microsoft.com/resources/samples/storage-blobs-dotnet-webapp/">
+                                    <img src="/dotnet/docs-ref-conceptual/media/dotnet-samples/photo-gallery.png" alt="" />
+                                </a>
                             </div>
                         </div>
                         <div class="cardText">
@@ -73,7 +88,9 @@ These are the top samples we recommend for getting started with Azure using .NET
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage bgdAccent1">
-                                <img src="/dotnet/docs-ref-conceptual/media/dotnet-samples/voting-app.png" alt="" />
+                                <a href="https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-prepare-app">
+                                    <img src="/dotnet/docs-ref-conceptual/media/dotnet-samples/voting-app.png" alt="" />
+                                </a>
                             </div>
                         </div>
                         <div class="cardText">
@@ -92,7 +109,9 @@ These are the top samples we recommend for getting started with Azure using .NET
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage bgdAccent1">
-                                <img src="/dotnet/docs-ref-conceptual/media/dotnet-samples/cognitive-services.png" alt="" />
+                                 <a href="https://docs.microsoft.com/azure/cognitive-services/computer-vision/tutorials/csharptutorial">                       
+                                    <img src="/dotnet/docs-ref-conceptual/media/dotnet-samples/cognitive-services.png" alt="" />
+                                </a>
                             </div>
                         </div>
                         <div class="cardText">
@@ -108,19 +127,19 @@ These are the top samples we recommend for getting started with Azure using .NET
         <li>
             <div class="cardSize">
                 <div class="cardPadding">
-                    <div class="card">
-                        <div class="cardImageOuter">
-                            <div class="cardImage bgdAccent1">
-                                <img src="/dotnet/docs-ref-conceptual/media/dotnet-samples/cosmosdb.png" alt="" />
+                    <a href="https://github.com/JeremyLikness/explore-cosmos-db">
+                        <div class="card">
+                            <div class="cardImageOuter">
+                                <div class="cardImage bgdAccent1">
+                                    <img src="/dotnet/docs-ref-conceptual/media/dotnet-samples/cosmosdb.png" alt="" />
+                                </div>
+                            </div>
+                            <div class="cardText">
+                                    <h3>Explore Cosmos DB</h3>
+                                    <p>Shows CosmosDB basics with .NET Core and Mongo.</p>
                             </div>
                         </div>
-                        <div class="cardText">
-                            <a href="https://github.com/JeremyLikness/explore-cosmos-db">
-                                <h3>Explore Cosmos DB</h3>
-                                <p>Shows CosmosDB basics with .NET Core and Mongo.</p>
-                            </a>
-                        </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </li>             
