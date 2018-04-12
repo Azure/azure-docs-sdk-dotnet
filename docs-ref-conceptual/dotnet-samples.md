@@ -98,7 +98,7 @@ These are the top samples we recommend for getting started with Azure using .NET
             <li>
                 <div class="cardSize">
                     <div class="cardPadding">
-                        <a href="https://docs.microsoft.com/azure/cognitive-services/computer-vision/tutorials/csharptutorial">  
+                        <a href="https://docs.microsoft.com/azure/cognitive-services/computer-vision/tutorials/csharptutorial">
                             <div class="card">
                                 <div class="cardImageOuter">
                                     <div class="cardImage bgdAccent1">
