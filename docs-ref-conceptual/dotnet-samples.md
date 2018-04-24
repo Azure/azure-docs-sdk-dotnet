@@ -14,7 +14,7 @@ ms.service: multiple
 ms.custom: devcenter
 ---
 # Azure Code Samples for .NET
-These are the top samples we recommend for getting started with Azure using .NET. You can also browse the [complete collection of samples](https://azure.microsoft.com/resources/samples/?platform=dotnet&sort=2).
+These are the top samples, tutorials, and examples we recommend for getting started with Azure using .NET.
 
 <div id="main" class="v2">
     <div class="container">
@@ -136,3 +136,5 @@ These are the top samples we recommend for getting started with Azure using .NET
         </ul>
     </div>
 </div>
+
+You can also browse the [complete collection of samples](https://azure.microsoft.com/resources/samples/?platform=dotnet&sort=2).
