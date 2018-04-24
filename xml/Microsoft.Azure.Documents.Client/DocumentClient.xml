@@ -745,6 +745,35 @@
             
             //Now you will have a Document in your database with two attachments.
             ]]></code></example>
+        <example>
+            The example below creates a new document, and then creates a new attachment for that document
+            <code language="c#"><![CDATA[
+            dynamic d = new 
+            {
+                id = "DOC1800243243470"
+            };
+                
+            Document doc = await client.CreateDocumentAsync(collectionSelfLink, d);
+            
+            //Create an Attachment which links to binary content stored somewhere else
+            //Use the MediaLink property of Attachment to set where the binary resides
+            //MediaLink can also point at another Attachment within Azure Cosmos DB.
+            Attachment a = await client.CreateAttachmentAsync(doc.SelfLink, new Attachment { Id = "foo", ContentType = "text/plain", MediaLink = "link to your media" });
+            
+            //Because Attachment is a Dynamic object you can use SetPropertyValue method to any property you like
+            //Even if that property doesn't exist. Here we are creating two new properties on the Attachment we created above.
+            a.SetPropertyValue("Foo", "some value");
+            a.SetPropertyValue("Bar", "some value");
+            
+            //Now update the Attachment object in the database to persist the new properties on the object
+            client.ReplaceAttachmentAsync(a);
+            
+            //Let's now create another Attachment except this time we're going to use a Dynamic object instead 
+            //of a <see cref="Microsoft.Azure.Documents.Attachment"/> as we did above.
+            var b = await client.CreateAttachmentAsync(doc.SelfLink, new { id = "foo", contentType = "text/plain", media="link to your media", a = 5, b = 6 });
+            
+            //Now you will have a Document in your database with two attachments.
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="CreateAttachmentAsync">
