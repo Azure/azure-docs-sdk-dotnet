@@ -17,7 +17,7 @@ ms.custom: devcenter
 
 Build event-driven applications that listen and react to events from Azure services and custom sources using simple HTTP-based event handling with Azure Event Grid.
 
-[Learn more](/azure/event-grid/overview) about Azure Event Grid and get started with the [Azure Blob storage event tutorial](/azure/storage/blobs/storage-blob-event-quickstart-powershell).
+[Learn more](/azure/event-grid/overview) about Azure Event Grid and get started with the [Azure Blob storage event tutorial](/azure/storage/blobs/storage-blob-event-quickstart-powershell). 
 
 ## Publish SDK
 
@@ -37,11 +37,11 @@ Install-Package Microsoft.Azure.EventGrid
 dotnet add package Microsoft.Azure.EventGrid 
 ```
 
-### Example code
+### Sample usage
 
 The following code authenticates with Azure and publishes an event from a simple JSON object to the `example` topic:
 
-```chsarp
+```csharp
 // create a list object for the events that will be send
 List<EventGridEvent> eventList = new List<EventGridEvent>();
 
@@ -68,6 +68,9 @@ EventGridClient client = new EventGridClient(topicCredentials);
 client.PublishEventsAsync($"{gridname}.{regionprefix}.eventgrid.azure.net", eventList).Wait();
 ```
 
+> [!div class="nextstepaction"]
+> [Explore the client APIs](/dotnet/api/overview/azure/eventgrid/client)
+
 ## Management SDK
 
 Create, update, or delete Event Grid instances, topics, and subscriptions with the management SDK.
@@ -87,9 +90,9 @@ Install-Package Microsoft.Azure.Management.EventGrid
 dotnet add package Microsoft.Azure.Management.EventGrid
 ```
 
-### Example code
+> [!div class="nextstepaction"]
+> [Explore the management APIs](/dotnet/api/overview/azure/eventgrid/management)
 
-```chsarp
-```
+## Learn more
 
-
+- [Receive events using the Event Grid SDK](/azure/event-grid/receive-events)
