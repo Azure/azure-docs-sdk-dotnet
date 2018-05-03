@@ -39,33 +39,23 @@ dotnet add package Microsoft.Azure.EventGrid
 
 ### Sample usage
 
-The following code authenticates with Azure and publishes an event from a simple JSON object to the `example` topic:
+The following code authenticates with Azure and publishes an event from a simple JSON object to the `topic-name` topic. The topic key and endpoint address can be retreived from Azure PowerShell:
+
+```powershell
+$endpoint = (Get-AzureRmEventGridTopic -ResourceGroupName gridResourceGroup -Name <topic-name>).Endpoint
+$keys = Get-AzureRmEventGridTopicKey -ResourceGroupName gridResourceGroup -Name <topic-name>
+```
 
 ```csharp
-// create a list object for the events that will be send
-List<EventGridEvent> eventList = new List<EventGridEvent>();
+string topicEndpoint = "https://<topic-name>.<region>-1.eventgrid.azure.net/api/events";
+string topicKey = "<topic-key>";
+string topicHostname = new Uri(topicEndpoint).Host;
 
-// loop through adding events to the list
-foreach (var message in eventHubMessages)
-{
-    EventGridEvent myEvent = new EventGridEvent()
-    {
-        Id = Guid.NewGuid().ToString(),
-        EventTime = DateTime.UtcNow,
-        EventType = $"{eventType}",
-        Subject = $"{eventMessage}",
-        Data = $"{eventData}",
-        DataVersion = "1.0"
-    };
-    eventList.Add(myEvent);
-}
-
-// create the topic credential 
 TopicCredentials topicCredentials = new TopicCredentials(topicKey);
-
-// Create the client object and publish/send to topic
 EventGridClient client = new EventGridClient(topicCredentials);
-client.PublishEventsAsync($"{gridname}.{regionprefix}.eventgrid.azure.net", eventList).Wait();
+
+client.PublishEventsAsync(topicHostname, GetEventsList()).GetAwaiter().GetResult();
+Console.Write("Published events to Event Grid.");
 ```
 
 This snippet handles events published when creating a new blob in [Azure Storage](/azure/storage/blobs/storage-blob-event-overview).
