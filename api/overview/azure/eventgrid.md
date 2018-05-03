@@ -39,7 +39,7 @@ dotnet add package Microsoft.Azure.EventGrid
 
 ### Sample usage
 
-The following code authenticates with Azure and publishes a `List` of  `EventGridEvent` event to a topic. The topic key and endpoint address can be retrieved from Azure PowerShell:
+The following code authenticates with Azure and publishes a `List` of  `EventGridEvent` events of a custom type (in this example, `Contoso.Items.ItemsReceivedEvent` ) to a topic. The topic key and endpoint address used in the sample can be retrieved from Azure PowerShell:
 
 ```powershell
 $endpoint = (Get-AzureRmEventGridTopic -ResourceGroupName gridResourceGroup -Name <topic-name>).Endpoint
