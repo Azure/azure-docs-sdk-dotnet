@@ -68,6 +68,40 @@ EventGridClient client = new EventGridClient(topicCredentials);
 client.PublishEventsAsync($"{gridname}.{regionprefix}.eventgrid.azure.net", eventList).Wait();
 ```
 
+This snippet handles events published when creating a new blob in [Azure Storage](/azure/storage/blobs/storage-blob-event-overview)
+
+```csharp
+string response = string.Empty;
+const string SubscriptionValidationEvent = "Microsoft.EventGrid.SubscriptionValidationEvent";
+const string StorageBlobCreatedEvent = "Microsoft.Storage.BlobCreated";
+
+string requestContent = await req.Content.ReadAsStringAsync();
+EventGridEvent[] eventGridEvents = JsonConvert.DeserializeObject<EventGridEvent[]>(requestContent);
+
+foreach (EventGridEvent eventGridEvent in eventGridEvents)
+{
+    JObject dataObject = eventGridEvent.Data as JObject;
+
+    // Deserialize the event data into the appropriate type based on event type 
+    if (string.Equals(eventGridEvent.EventType, SubscriptionValidationEvent, StringComparison.OrdinalIgnoreCase))
+    {
+        var eventData = dataObject.ToObject<SubscriptionValidationEventData>();
+        log.Info($"Got SubscriptionValidation event data, validation code: {eventData.ValidationCode}, topic: {eventGridEvent.Topic}");
+
+        // Do any additional validation (as required) and then return back the below response
+        var responseData = new SubscriptionValidationResponseData();
+        responseData.ValidationResponse = eventData.ValidationCode;
+        return req.CreateResponse(HttpStatusCode.OK, responseData);
+    }
+
+    else if (string.Equals(eventGridEvent.EventType, StorageBlobCreatedEvent, StringComparison.OrdinalIgnoreCase))
+    {
+        var eventData = dataObject.ToObject<StorageBlobCreatedEventData>();
+        log.Info($"Got BlobCreated event data, blob URI {eventData.Url}");
+    }
+}
+```
+
 > [!div class="nextstepaction"]
 > [Explore the client APIs](/dotnet/api/overview/azure/eventgrid/client)
 
