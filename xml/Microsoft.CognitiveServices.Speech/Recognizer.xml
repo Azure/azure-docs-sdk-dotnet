@@ -123,15 +123,37 @@
                Console.WriteLine("Speech Recognition: Recognition result: " + result);
              }
              </code></example>
+        <example>
+             Create a speech recognizer, setup an event handler for session events
+             <code>
+             static void MySessionEventHandler(object sender, RecognitionEventArgs e)
+             {
+                 Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "Speech recognition event: {0} ", e.ToString()));
+             }
+            
+             static async Task SpeechRecognizerSample()
+             {
+                 var factory = SpeechFactory.FromSubscription("YourSubscriptionKey", "");
+                 SpeechRecognizer reco = factory.CreateSpeechRecognizerWithFileInput("audioFileName");
+            
+                 reco.OnSpeechDetectedEvent += MySessionEventHandler;
+            
+                 // Starts recognition.
+                 var result = await reco.RecognizeAsync();
+            
+                 reco.OnSpeechDetectedEvent -= MySessionEventHandler;
+                 Console.WriteLine("Speech Recognition: Recognition result: " + result);
+             }
+             </code></example>
       </Docs>
     </Member>
-    <Member MemberName="OnSpeechDetectectedEvent">
-      <MemberSignature Language="C#" Value="public event EventHandler&lt;Microsoft.CognitiveServices.Speech.RecognitionEventArgs&gt; OnSpeechDetectectedEvent;" />
-      <MemberSignature Language="ILAsm" Value=".event class System.EventHandler`1&lt;class Microsoft.CognitiveServices.Speech.RecognitionEventArgs&gt; OnSpeechDetectectedEvent" />
-      <MemberSignature Language="DocId" Value="E:Microsoft.CognitiveServices.Speech.Recognizer.OnSpeechDetectectedEvent" />
-      <MemberSignature Language="VB.NET" Value="Public Event OnSpeechDetectectedEvent As EventHandler(Of RecognitionEventArgs) " />
-      <MemberSignature Language="F#" Value="member this.OnSpeechDetectectedEvent : EventHandler&lt;Microsoft.CognitiveServices.Speech.RecognitionEventArgs&gt; " Usage="member this.OnSpeechDetectectedEvent : System.EventHandler&lt;Microsoft.CognitiveServices.Speech.RecognitionEventArgs&gt; " />
-      <MemberSignature Language="C++ CLI" Value="public:&#xA; event EventHandler&lt;Microsoft::CognitiveServices::Speech::RecognitionEventArgs ^&gt; ^ OnSpeechDetectectedEvent;" />
+    <Member MemberName="OnSpeechDetectedEvent">
+      <MemberSignature Language="C#" Value="public event EventHandler&lt;Microsoft.CognitiveServices.Speech.RecognitionEventArgs&gt; OnSpeechDetectedEvent;" />
+      <MemberSignature Language="ILAsm" Value=".event class System.EventHandler`1&lt;class Microsoft.CognitiveServices.Speech.RecognitionEventArgs&gt; OnSpeechDetectedEvent" />
+      <MemberSignature Language="DocId" Value="E:Microsoft.CognitiveServices.Speech.Recognizer.OnSpeechDetectedEvent" />
+      <MemberSignature Language="VB.NET" Value="Public Event OnSpeechDetectedEvent As EventHandler(Of RecognitionEventArgs) " />
+      <MemberSignature Language="F#" Value="member this.OnSpeechDetectedEvent : EventHandler&lt;Microsoft.CognitiveServices.Speech.RecognitionEventArgs&gt; " Usage="member this.OnSpeechDetectedEvent : System.EventHandler&lt;Microsoft.CognitiveServices.Speech.RecognitionEventArgs&gt; " />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; event EventHandler&lt;Microsoft::CognitiveServices::Speech::RecognitionEventArgs ^&gt; ^ OnSpeechDetectedEvent;" />
       <MemberType>Event</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.CognitiveServices.Speech.csharp</AssemblyName>
