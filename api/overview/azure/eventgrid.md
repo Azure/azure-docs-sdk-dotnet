@@ -68,7 +68,7 @@ EventGridClient client = new EventGridClient(topicCredentials);
 client.PublishEventsAsync($"{gridname}.{regionprefix}.eventgrid.azure.net", eventList).Wait();
 ```
 
-This snippet handles events published when creating a new blob in [Azure Storage](/azure/storage/blobs/storage-blob-event-overview)
+This snippet handles events published when creating a new blob in [Azure Storage](/azure/storage/blobs/storage-blob-event-overview).
 
 ```csharp
 string response = string.Empty;
@@ -130,3 +130,6 @@ dotnet add package Microsoft.Azure.Management.EventGrid
 ## Learn more
 
 - [Receive events using the Event Grid SDK](/azure/event-grid/receive-events)
+
+[PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
+[DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
