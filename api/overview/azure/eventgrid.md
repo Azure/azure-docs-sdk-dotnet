@@ -39,7 +39,7 @@ dotnet add package Microsoft.Azure.EventGrid
 
 ### Sample usage
 
-The following code authenticates with Azure and publishes an event from a simple JSON object to the `topic-name` topic. The topic key and endpoint address can be retreived from Azure PowerShell:
+The following code authenticates with Azure and publishes a `List` of  `EventGridEvent` event to a topic. The topic key and endpoint address can be retrieved from Azure PowerShell:
 
 ```powershell
 $endpoint = (Get-AzureRmEventGridTopic -ResourceGroupName gridResourceGroup -Name <topic-name>).Endpoint
@@ -56,6 +56,28 @@ EventGridClient client = new EventGridClient(topicCredentials);
 
 client.PublishEventsAsync(topicHostname, GetEventsList()).GetAwaiter().GetResult();
 Console.Write("Published events to Event Grid.");
+
+static IList<EventGridEvent> GetEventsList()
+{
+    List<EventGridEvent> eventsList = new List<EventGridEvent>();
+    for (int i = 0; i < 1; i++)
+    {
+        eventsList.Add(new EventGridEvent()
+        {
+            Id = Guid.NewGuid().ToString(),
+            EventType = "Contoso.Items.ItemReceivedEvent",
+            Data = new ContosoItemReceivedEventData()
+            {
+                ItemUri = "ContosoSuperItemUri"
+            },
+
+            EventTime = DateTime.Now,
+            Subject = "Door1",
+            DataVersion = "2.0"
+        });
+    }
+    return eventsList;
+}
 ```
 
 This snippet handles events published when creating a new blob in [Azure Storage](/azure/storage/blobs/storage-blob-event-overview).
