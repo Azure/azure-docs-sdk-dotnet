@@ -1,12 +1,12 @@
 ﻿<Type Name="ChangeFeedObserverContext" FullName="Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedObserverContext">
-  <TypeSignature Language="C#" Value="public class ChangeFeedObserverContext" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit ChangeFeedObserverContext extends System.Object" />
+  <TypeSignature Language="C#" Value="public abstract class ChangeFeedObserverContext" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit ChangeFeedObserverContext extends System.Object" />
   <TypeSignature Language="DocId" Value="T:Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedObserverContext" />
-  <TypeSignature Language="VB.NET" Value="Public Class ChangeFeedObserverContext" />
+  <TypeSignature Language="VB.NET" Value="Public MustInherit Class ChangeFeedObserverContext" />
   <TypeSignature Language="F#" Value="type ChangeFeedObserverContext = class" />
-  <TypeSignature Language="C++ CLI" Value="public ref class ChangeFeedObserverContext" />
-  <TypeSignature Language="C++ WINRT" Value="[Windows::Foundation::Metadata::WebHostHidden]&#xA;class ChangeFeedObserverContext" />
-  <TypeSignature Language="C++ CX" Value="[Windows::Foundation::Metadata::WebHostHidden]&#xA;public ref class ChangeFeedObserverContext" />
+  <TypeSignature Language="C++ CLI" Value="public ref class ChangeFeedObserverContext abstract" />
+  <TypeSignature Language="C++ WINRT" Value="[Windows::Foundation::Metadata::WebHostHidden]&#xA;class ChangeFeedObserverContext abstract" />
+  <TypeSignature Language="C++ CX" Value="[Windows::Foundation::Metadata::WebHostHidden]&#xA;public ref class ChangeFeedObserverContext abstract" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.Azure.Documents.ChangeFeedProcessor</AssemblyName>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
@@ -14,11 +14,17 @@
     <AssemblyVersion>1.3.1.0</AssemblyVersion>
     <AssemblyVersion>1.3.2.0</AssemblyVersion>
     <AssemblyVersion>1.17.0.0</AssemblyVersion>
+    <AssemblyVersion>2.0.1.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
   <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.Obsolete("Switch to the ChangeFeedProcessorBuilder for building the change feed processor and use new interface Microsoft.Azure.Documents.ChangeFeedProcessor.FeedProcessing.IChangeFeedObserverContext.")</AttributeName>
+    </Attribute>
+  </Attributes>
   <Docs>
     <summary>
             The context passed to <see cref="T:Microsoft.Azure.Documents.ChangeFeedProcessor.IChangeFeedObserver" /> events.
@@ -26,19 +32,39 @@
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="protected ChangeFeedObserverContext ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedObserverContext.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Protected Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; ChangeFeedObserverContext();" />
+      <MemberSignature Language="C++ CX" Value="protected:&#xA; ChangeFeedObserverContext();" />
+      <MemberSignature Language="C++ WINRT" Value=" ChangeFeedObserverContext();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Documents.ChangeFeedProcessor</AssemblyName>
+        <AssemblyVersion>2.0.1.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="CheckpointAsync">
-      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task CheckpointAsync ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task CheckpointAsync() cil managed" />
+      <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task CheckpointAsync ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task CheckpointAsync() cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedObserverContext.CheckpointAsync" />
-      <MemberSignature Language="VB.NET" Value="Public Function CheckpointAsync () As Task" />
-      <MemberSignature Language="F#" Value="member this.CheckpointAsync : unit -&gt; System.Threading.Tasks.Task" Usage="changeFeedObserverContext.CheckpointAsync " />
-      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Threading::Tasks::Task ^ CheckpointAsync();" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride Function CheckpointAsync () As Task" />
+      <MemberSignature Language="F#" Value="abstract member CheckpointAsync : unit -&gt; System.Threading.Tasks.Task" Usage="changeFeedObserverContext.CheckpointAsync " />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract System::Threading::Tasks::Task ^ CheckpointAsync();" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Documents.ChangeFeedProcessor</AssemblyName>
         <AssemblyVersion>1.3.0.0</AssemblyVersion>
         <AssemblyVersion>1.3.1.0</AssemblyVersion>
         <AssemblyVersion>1.3.2.0</AssemblyVersion>
+        <AssemblyVersion>2.0.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -46,20 +72,24 @@
       <Parameters />
       <Docs>
         <summary>
-            This provides a way for manual checkpointing (useful when ChangeFeedHostOptions.IsAutoCheckpointEnabled is set to false).
+            Checkpoints progress of a stream. This method is valid only if manual checkpoint was configured.
+            Client may accept multiple change feed batches to process in parallel.
+            Once first N document processing was finished the client can call checkpoint on the last completed batches in the row.
+            In case of automatic checkpointing this is method throws.
             </summary>
-        <returns>To be added.</returns>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" />.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:Microsoft.Azure.Documents.ChangeFeedProcessor.Exceptions.LeaseLostException">Thrown if other host acquired the lease or the lease was deleted</exception>
       </Docs>
     </Member>
     <Member MemberName="FeedResponse">
-      <MemberSignature Language="C#" Value="public Microsoft.Azure.Documents.Client.IFeedResponse&lt;Microsoft.Azure.Documents.Document&gt; FeedResponse { get; }" />
+      <MemberSignature Language="C#" Value="public Microsoft.Azure.Documents.Client.IFeedResponse&lt;Microsoft.Azure.Documents.Document&gt; FeedResponse { get; protected set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Azure.Documents.Client.IFeedResponse`1&lt;class Microsoft.Azure.Documents.Document&gt; FeedResponse" />
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedObserverContext.FeedResponse" />
-      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property FeedResponse As IFeedResponse(Of Document)" />
-      <MemberSignature Language="F#" Value="member this.FeedResponse : Microsoft.Azure.Documents.Client.IFeedResponse&lt;Microsoft.Azure.Documents.Document&gt;" Usage="Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedObserverContext.FeedResponse" />
-      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Azure::Documents::Client::IFeedResponse&lt;Microsoft::Azure::Documents::Document ^&gt; ^ FeedResponse { Microsoft::Azure::Documents::Client::IFeedResponse&lt;Microsoft::Azure::Documents::Document ^&gt; ^ get(); };" />
-      <MemberSignature Language="C++ CX" Value="public:&#xA; property Microsoft::Azure::Documents::Client::IFeedResponse&lt;Microsoft::Azure::Documents::Document ^&gt; ^ FeedResponse { Microsoft::Azure::Documents::Client::IFeedResponse&lt;Microsoft::Azure::Documents::Document ^&gt; ^ get(); };" />
+      <MemberSignature Language="VB.NET" Value="Public Property FeedResponse As IFeedResponse(Of Document)" />
+      <MemberSignature Language="F#" Value="member this.FeedResponse : Microsoft.Azure.Documents.Client.IFeedResponse&lt;Microsoft.Azure.Documents.Document&gt; with get, set" Usage="Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedObserverContext.FeedResponse" />
+      <MemberSignature Language="C++ CLI" Value="public:  property Microsoft::Azure::Documents::Client::IFeedResponse&lt;Microsoft::Azure::Documents::Document ^&gt; ^ FeedResponse {  public:&#xA;Microsoft::Azure::Documents::Client::IFeedResponse&lt;Microsoft::Azure::Documents::Document ^&gt; ^ get(); protected:&#xA; void set(Microsoft::Azure::Documents::Client::IFeedResponse&lt;Microsoft::Azure::Documents::Document ^&gt; ^ value); };" />
+      <MemberSignature Language="C++ CX" Value="public:  property Microsoft::Azure::Documents::Client::IFeedResponse&lt;Microsoft::Azure::Documents::Document ^&gt; ^ FeedResponse {  public:&#xA;Microsoft::Azure::Documents::Client::IFeedResponse&lt;Microsoft::Azure::Documents::Document ^&gt; ^ get(); protected:&#xA; void set(Microsoft::Azure::Documents::Client::IFeedResponse&lt;Microsoft::Azure::Documents::Document ^&gt; ^ value); };" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Documents.ChangeFeedProcessor</AssemblyName>
@@ -68,26 +98,27 @@
         <AssemblyVersion>1.3.1.0</AssemblyVersion>
         <AssemblyVersion>1.3.2.0</AssemblyVersion>
         <AssemblyVersion>1.17.0.0</AssemblyVersion>
+        <AssemblyVersion>2.0.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Documents.Client.IFeedResponse&lt;Microsoft.Azure.Documents.Document&gt;</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            Gets the response from the underlying <see cref="M:Microsoft.Azure.Documents.Linq.IDocumentQuery`1.ExecuteNextAsync(System.Threading.CancellationToken)" /> call.
+            Gets or sets the response from the underlying <see cref="M:Microsoft.Azure.Documents.Linq.IDocumentQuery`1.ExecuteNextAsync(System.Threading.CancellationToken)" /> call.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="PartitionKeyRangeId">
-      <MemberSignature Language="C#" Value="public string PartitionKeyRangeId { get; }" />
+      <MemberSignature Language="C#" Value="public string PartitionKeyRangeId { get; protected set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance string PartitionKeyRangeId" />
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedObserverContext.PartitionKeyRangeId" />
-      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property PartitionKeyRangeId As String" />
-      <MemberSignature Language="F#" Value="member this.PartitionKeyRangeId : string" Usage="Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedObserverContext.PartitionKeyRangeId" />
-      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ PartitionKeyRangeId { System::String ^ get(); };" />
-      <MemberSignature Language="C++ CX" Value="public:&#xA; property Platform::String ^ PartitionKeyRangeId { Platform::String ^ get(); };" />
+      <MemberSignature Language="VB.NET" Value="Public Property PartitionKeyRangeId As String" />
+      <MemberSignature Language="F#" Value="member this.PartitionKeyRangeId : string with get, set" Usage="Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedObserverContext.PartitionKeyRangeId" />
+      <MemberSignature Language="C++ CLI" Value="public:  property System::String ^ PartitionKeyRangeId {  public:&#xA;System::String ^ get(); protected:&#xA; void set(System::String ^ value); };" />
+      <MemberSignature Language="C++ CX" Value="public:  property Platform::String ^ PartitionKeyRangeId {  public:&#xA;Platform::String ^ get(); protected:&#xA; void set(Platform::String ^ value); };" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Documents.ChangeFeedProcessor</AssemblyName>
@@ -96,13 +127,14 @@
         <AssemblyVersion>1.3.1.0</AssemblyVersion>
         <AssemblyVersion>1.3.2.0</AssemblyVersion>
         <AssemblyVersion>1.17.0.0</AssemblyVersion>
+        <AssemblyVersion>2.0.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            Gets the id of the partition for current event.
+            Gets or sets the id of the partition for current event.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
