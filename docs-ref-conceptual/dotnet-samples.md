@@ -1,6 +1,6 @@
 ---
-title: Azure Code Samples for .NET
-description: Code samples for .NET and Azure.
+title: Azure C# code samples for .NET
+description: C# code samples for .NET and Azure.
 layout: LandingPage
 ms.topic: landing-page
 author: camsoper
@@ -13,8 +13,9 @@ ms.devlang: dotnet
 ms.service: multiple
 ms.custom: devcenter
 ---
-# Azure Code Samples for .NET
-These are the top samples, tutorials, and examples we recommend for getting started with Azure using .NET.
+# Azure C# code samples for .NET
+
+These are the top samples, tutorials, and examples we recommend for getting started with Azure using C# and .NET.
 
 <div id="main" class="v2">
     <div class="container">
@@ -31,7 +32,7 @@ These are the top samples, tutorials, and examples we recommend for getting star
                                 </div>
                                 <div class="cardText">
                                     <h3>Basic website</h3>
-                                    <p>Shows how to create a simple website that can store information in a SQL backend.</p>
+                                    <p>Learn how to create a simple ASP.NET Core website that stores information in a SQL backend.</p>
                                 </div>
                             </div>
                         </a>
@@ -41,7 +42,7 @@ These are the top samples, tutorials, and examples we recommend for getting star
             <li>
                 <div class="cardSize">
                     <div class="cardPadding">
-                        <a href="https://docs.microsoft.com/azure/azure-functions/functions-create-github-webhook-triggered-function">
+                        <a href="https://github.com/JeremyLikness/ShortLink">
                             <div class="card">
                                 <div class="cardImageOuter">
                                     <div class="cardImage bgdAccent1">
@@ -49,8 +50,8 @@ These are the top samples, tutorials, and examples we recommend for getting star
                                     </div>
                                 </div>
                                 <div class="cardText">
-                                    <h3>Trigger events from GitHub</h3>
-                                    <p>Shows how to trigger events based on GitHub actions using Azure Functions and webhooks.</p>
+                                    <h3>URL Shortener</h3>
+                                    <p>Learn how to trigger actions using serverless Azure Functions.</p>
                                 </div>
                             </div>
                         </a>
@@ -69,7 +70,7 @@ These are the top samples, tutorials, and examples we recommend for getting star
                                 </div>
                                 <div class="cardText">
                                     <h3>Photo Gallery</h3>
-                                    <p>Shows how to create a webpage where users can upload pictures to the cloud with Azure Web Apps and Azure blob storage.</p>
+                                    <p>Learn how to upload, download and access image files from the cloud using Azure Blob Storage.</p>
                                 </div>
                             </div>
                         </div>
@@ -79,7 +80,7 @@ These are the top samples, tutorials, and examples we recommend for getting star
             <li>
                 <div class="cardSize">
                     <div class="cardPadding">
-                        <a href="https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-prepare-app">
+                        <a href="https://github.com/Azure-Samples/service-fabric-dotnet-quickstart">
                             <div class="card">
                                 <div class="cardImageOuter">
                                     <div class="cardImage bgdAccent1">
@@ -88,7 +89,7 @@ These are the top samples, tutorials, and examples we recommend for getting star
                                 </div>
                                 <div class="cardText">
                                     <h3>Voting app</h3>
-                                    <p>Shows how to create a simple voting application using Kubernetes and Docker containers.</p>
+                                    <p>Learn how to create reliable microservices in a distributed app using Azure Service Fabric.</p>
                                 </div>
                             </div>
                         </a>
@@ -125,8 +126,8 @@ These are the top samples, tutorials, and examples we recommend for getting star
                                     </div>
                                 </div>
                                 <div class="cardText">
-                                    <h3>Explore Cosmos DB</h3>
-                                    <p>Shows CosmosDB basics with .NET Core and Mongo.</p>
+                                    <h3>Cloud Database</h3>
+                                    <p>Learn how to do basic searches, creation and editing in a modern cloud database using Cosmos DB.</p>
                                 </div>
                             </div>
                         </a>
