@@ -20,8 +20,10 @@
     <summary>
             Client of Azure data lake store. It contains the public APIs to perform operations of REST API which are easier to call and more usable than Core APIs. Core APIs provide more freedom but ADLSClient provide more commonly used forms.
             It encapsulates the Authorization token and token refresh. Contains factory methods that takes a ServiceClientCredential or a string auth token and returns instance of this class. For every operation it provides
-            a async and sync version. Every sync method is a wait on async method with exception of Create and Concurrent append. Currently this class is not inheritable since it has not exposed constructors.
-            Adls use NLog for logging. adls.dotnet.* is the name of the logger to obtain all logs.
+            a async and sync version. Every sync method is a wait on async method with exception of Create and Concurrent append. 
+            All APIs are thread safe with some exceptions in CreateFile and GetAppendStream. CreateFile and GetAppendStream cannot be called for the same path from different threads because writing is done with a lease so there will lease conflicts
+            If an application wants to perform multi-threaded operations using this SDK it is highly recomended to set ServicePointManager.DefaultConnectionLimit to the number of threads application wants the sdk to use before creating any instance of AdlsClient.
+            By default ServicePointManager.DefaultConnectionLimit is set to 2. Adls use NLog for logging. adls.dotnet.* is the name of the logger to obtain all logs.
             </summary>
     <remarks>To be added.</remarks>
   </Docs>
@@ -137,6 +139,8 @@
         <summary>
             Download directory or file from remote server to local. Transfers the contents under source directory under 
             the destination directory. Transfers the source file and saves it as the destination path.
+            It is highly recomended to set ServicePointManager.DefaultConnectionLimit to the number of threads application wants the sdk to use before creating any instance of AdlsClient.
+            By default ServicePointManager.DefaultConnectionLimit is set to 2.
             </summary>
         <returns>Transfer status encapsulating the details of download</returns>
         <remarks>To be added.</remarks>
@@ -180,6 +184,8 @@
         <summary>
             Upload directory or file from local to remote. Transfers the contents under source directory under 
             the destination directory. Transfers the source file and saves it as the destination path.
+            It is highly recomended to set ServicePointManager.DefaultConnectionLimit to the number of threads application wants the sdk to use before creating any instance of AdlsClient.
+            By default ServicePointManager.DefaultConnectionLimit is set to 2.
             </summary>
         <returns>Transfer Status encapsulating the details of upload</returns>
         <remarks>To be added.</remarks>
@@ -212,6 +218,8 @@
         <param name="threadCount">Number of threads to use</param>
         <summary>
             Change Acl (Modify, set and remove) recursively on a directory tree
+            It is highly recomended to set ServicePointManager.DefaultConnectionLimit to the number of threads application wants the sdk to use before creating any instance of AdlsClient.
+            By default ServicePointManager.DefaultConnectionLimit is set to 2.
             </summary>
         <returns>Stats- total number of files and directories processed</returns>
         <remarks>To be added.</remarks>
@@ -262,7 +270,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;CheckAccessAsync&gt;d__63))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;CheckAccessAsync&gt;d__68))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -339,6 +347,27 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
+    <Member MemberName="ClientLogger">
+      <MemberSignature Language="C#" Value="protected static readonly NLog.Logger ClientLogger;" />
+      <MemberSignature Language="ILAsm" Value=".field family static initonly class NLog.Logger ClientLogger" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Azure.DataLake.Store.AdlsClient.ClientLogger" />
+      <MemberSignature Language="VB.NET" Value="Protected Shared ReadOnly ClientLogger As Logger " />
+      <MemberSignature Language="F#" Value=" staticval mutable ClientLogger : NLog.Logger" Usage="Microsoft.Azure.DataLake.Store.AdlsClient.ClientLogger" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.DataLake.Store</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>NLog.Logger</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Logger to log information (debug/error/trace) regarding client
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="ConcatenateFiles">
       <MemberSignature Language="C#" Value="public virtual void ConcatenateFiles (string destination, System.Collections.Generic.List&lt;string&gt; concatFiles, bool deleteSource = false, System.Threading.CancellationToken cancelToken = null);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void ConcatenateFiles(string destination, class System.Collections.Generic.List`1&lt;string&gt; concatFiles, bool deleteSource, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
@@ -385,7 +414,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;ConcatenateFilesAsync&gt;d__57))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;ConcatenateFilesAsync&gt;d__62))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -460,7 +489,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;ConcurrentAppendAsync&gt;d__82))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;ConcurrentAppendAsync&gt;d__87))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -515,7 +544,8 @@
         <param name="creds">Credentials that retrieves the Auth token</param>
         <summary>
             Factory method that creates an instance of AdlsClient using ServiceClientCredential. If an application wants to perform multi-threaded operations using this SDK
-            it is recomended to set ServicePointManager.DefaultConnectionLimit to the number of threads application wants the sdk to use before creating any instance of AdlsClient.
+            it is highly recomended to set ServicePointManager.DefaultConnectionLimit to the number of threads application wants the sdk to use before creating any instance of AdlsClient.
+            By default ServicePointManager.DefaultConnectionLimit is set to 2.
             </summary>
         <returns>AdlsClient</returns>
         <remarks>To be added.</remarks>
@@ -545,10 +575,11 @@
       </Parameters>
       <Docs>
         <param name="accountFqdn">Azure data lake store account name including full domain name (e.g. contoso.azuredatalakestore.net)</param>
-        <param name="token">Full authorization Token e.g. Bearing: abcddsfere.....</param>
+        <param name="token">Full authorization Token e.g. Bearer abcddsfere.....</param>
         <summary>
             Factory method that creates an instance AdlsClient using the token key. If an application wants to perform multi-threaded operations using this SDK
-            it is recomended to set ServicePointManager.DefaultConnectionLimit to the number of threads application wants the sdk to use before creating any instance of AdlsClient.
+            it is highly recomended to set ServicePointManager.DefaultConnectionLimit to the number of threads application wants the sdk to use before creating any instance of AdlsClient.
+            By default ServicePointManager.DefaultConnectionLimit is set to 2.
             </summary>
         <returns>AdlsClient</returns>
         <remarks>To be added.</remarks>
@@ -599,7 +630,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;CreateDirectoryAsync&gt;d__39))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;CreateDirectoryAsync&gt;d__44))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -615,7 +646,7 @@
         <param name="octalPermission">Octal permission</param>
         <param name="cancelToken">CancellationToken to cancel the request</param>
         <summary>
-            Asynchronous API to create a directory
+            Asynchronous API to create a directory.
             </summary>
         <returns>true if it creates the directory else false</returns>
         <remarks>To be added.</remarks>
@@ -671,7 +702,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;CreateFileAsync&gt;d__47))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;CreateFileAsync&gt;d__52))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -768,7 +799,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;DeleteAsync&gt;d__49))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;DeleteAsync&gt;d__54))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -831,7 +862,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;DeleteRecursiveAsync&gt;d__51))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;DeleteRecursiveAsync&gt;d__56))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -928,7 +959,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;GetAclStatusAsync&gt;d__79))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;GetAclStatusAsync&gt;d__84))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -996,7 +1027,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;GetAppendStreamAsync&gt;d__45))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;GetAppendStreamAsync&gt;d__50))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -1043,7 +1074,9 @@
         <param name="numThreads">Number of threads</param>
         <param name="cancelToken">CancellationToken to cancel the request</param>
         <summary>
-            Gets content summary of a file or directory
+            Gets content summary of a file or directory.
+            It is highly recomended to set ServicePointManager.DefaultConnectionLimit to the number of threads application wants the sdk to use before creating any instance of AdlsClient.
+            By default ServicePointManager.DefaultConnectionLimit is set to 2.
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
@@ -1094,7 +1127,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;GetDirectoryEntryAsync&gt;d__55))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;GetDirectoryEntryAsync&gt;d__60))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -1180,12 +1213,13 @@
         <param name="saveToLocal">True if we want to save to local file else save to ADL</param>
         <param name="numThreads">Number of threads</param>
         <param name="displayFiles">True if we want to display properties of files. By default we show properties of directories. If this is false we would not retrieve Acls for files.</param>
-        <param name="hideConsistentAcl">if True then we wont dump the acl property of a directory/file if it's parent directory has same acl for all of its descendants. For ex: If 
-                                                the root ("/") has same Acl for all it's descendants, then we will show the Acl for the root only. If this flag is false, then we show the Acl for all directories or files.
-                                            This cannot be true when displayFiles is false because consistent Acl cannot be determined unless we retrieve acls for the files.</param>
+        <param name="hideConsistentAcl">Do not show directory subtree if the ACLs are the same throughout the entire subtree. This 
+                                            makes it easier to see only the paths up to which the ACLs differ. For example if all files and folders under /a/b are the same, do not show the subtree under /a/b, and just output /a/b with 'True' in the Consistent ACL column. Cannot be set if IncludeFiles is not set, because consistent Acl cannot be determined without retrieving acls for the files.</param>
         <param name="maxDepth">Maximum depth till which we want to view the properties</param>
         <summary>
             Recursively dumps file property of alldirectories or/and files under the given path to a local or adl file. File property can be disk usage or Acl or both.
+            It is highly recomended to set ServicePointManager.DefaultConnectionLimit to the number of threads application wants the sdk to use before creating any instance of AdlsClient.
+            By default ServicePointManager.DefaultConnectionLimit is set to 2.
             </summary>
         <remarks>To be added.</remarks>
       </Docs>
@@ -1264,7 +1298,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;GetReadStreamAsync&gt;d__41))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;GetReadStreamAsync&gt;d__46))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -1298,7 +1332,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;GetReadStreamAsync&gt;d__43))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;GetReadStreamAsync&gt;d__48))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -1364,7 +1398,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;ModifyAclEntriesAsync&gt;d__67))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;ModifyAclEntriesAsync&gt;d__72))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -1430,7 +1464,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;RemoveAclEntriesAsync&gt;d__73))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;RemoveAclEntriesAsync&gt;d__78))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -1494,7 +1528,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;RemoveAllAclsAsync&gt;d__75))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;RemoveAllAclsAsync&gt;d__80))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -1556,7 +1590,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;RemoveDefaultAclsAsync&gt;d__77))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;RemoveDefaultAclsAsync&gt;d__82))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -1626,7 +1660,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;RenameAsync&gt;d__53))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;RenameAsync&gt;d__58))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -1695,7 +1729,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;SetAclAsync&gt;d__69))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;SetAclAsync&gt;d__74))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -1763,7 +1797,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;SetExpiryTimeAsync&gt;d__61))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;SetExpiryTimeAsync&gt;d__66))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -1833,7 +1867,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;SetOwnerAsync&gt;d__72))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;SetOwnerAsync&gt;d__77))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -1902,7 +1936,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;SetPermissionAsync&gt;d__65))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.DataLake.Store.AdlsClient/&lt;SetPermissionAsync&gt;d__70))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
