@@ -17,7 +17,8 @@
   <Interfaces />
   <Docs>
     <summary>
-            Core layer. It contains methods for REST APIs. For each rest api command it sends a HTTP request to server.
+            Core is a stateless class. It contains thread safe methods for REST APIs. For each rest api command it sends a HTTP request to server. 
+            Every API is threadsafe with some exceptions in Create and Append (Listed in the documentation of the respective apis).
             We have both async and sync versions of CREATE, APPEND, OPEN, CONCURRENTAPPEND. The reason we have that is if the application is doing these operations heavily using explicit threads,
             then using async-await internally creates unecessary threads in threadpool and performance degrades due to context switching. Application can create explicit threads in cases of uploader and downloader.
             All these operation also call sync versions of MakeCall in WebTransport layer.
@@ -91,7 +92,9 @@
         <param name="req">Options to change behavior of the Http request </param>
         <param name="resp">Stores the response/ouput of the Http request </param>
         <summary>
-            Append data to file. This is a synchronous operation.
+            Append data to file. This is a synchronous operation. 
+            
+            Not threadsafe when Append is called for same path from different threads. 
             </summary>
         <remarks>To be added.</remarks>
       </Docs>
@@ -148,6 +151,8 @@
         <param name="cancelToken">CancellationToken to cancel the request</param>
         <summary>
             Append data to file. This is an asynchronous operation.
+            
+            Not threadsafe when AppendAsync is called for same path from different threads. 
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
@@ -422,6 +427,8 @@
         <param name="resp">Stores the response/ouput of the Http request </param>
         <summary>
             Create a new file. This is a synchronous operation.
+            
+            Not threadsafe when Create is called for same path from different threads with different leaseId. 
             </summary>
         <remarks>To be added.</remarks>
       </Docs>
@@ -482,6 +489,8 @@
         <param name="cancelToken">CancellationToken to cancel the request</param>
         <summary>
             Create a new file. This is an asynchronous operation.
+            
+            Not threadsafe when CreateAsync is called multiple times for same path with different leaseId. 
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
