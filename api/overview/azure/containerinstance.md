@@ -57,6 +57,21 @@ This example creates a container group with a single container using the async c
 <!-- SOURCE REPO: https://github.com/Azure-Samples/aci-docs-sample-dotnet -->
 [!code-csharp[create_container_group_polling](~/aci-docs-sample-dotnet/Program.cs#create_container_group_polling "Create single-container group with async and polling")]
 
+### Create task-based container group
+
+This example creates a container group with a single task-based container. The container is configured with a [restart policy](/azure/container-instances/container-instances-restart-policy) of "Never" and a [custom command line](/azure/container-instances/container-instances-restart-policy#command-line-override).
+
+If you want to run a single command with several command-line arguments, for example `echo FOO BAR`, you must supply them as a string array to the `WithStartingCommandLines` method. For example:
+
+`WithStartingCommandLines("echo", "FOO", "BAR")`
+
+If, however, you want to run multiple commands with (potentially) multiple arguments, you must execute a shell and pass the chained commands as an argument. For example, this executes both an `echo` and a `tail` command:
+
+`WithStartingCommandLines("/bin/sh", "-c", "echo FOO BAR && tail -f /dev/null")`
+
+<!-- SOURCE REPO: https://github.com/Azure-Samples/aci-docs-sample-dotnet -->
+[!code-csharp[create_container_group_task](~/aci-docs-sample-dotnet/Program.cs#create_container_group_task "Run a task-based container")]
+
 ### List container groups
 
 This example lists the container groups in a resource group.
