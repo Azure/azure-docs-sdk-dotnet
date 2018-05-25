@@ -36,10 +36,49 @@ dotnet add package Microsoft.Azure.Management.ContainerInstance.Fluent
 
 ## Examples
 
-The following example creates a container group with a single container.
+### Create container group - single container
+
+This example creates a container group with a single container.
 
 <!-- SOURCE REPO: https://github.com/Azure-Samples/aci-docs-sample-dotnet -->
 [!code-csharp[create_container_group](~/aci-docs-sample-dotnet/Program.cs#create_container_group "Create single-container group")]
+
+### Create container group - multiple containers
+
+This example creates a container group with two containers: an application container and a sidecar container.
+
+<!-- SOURCE REPO: https://github.com/Azure-Samples/aci-docs-sample-dotnet -->
+[!code-csharp[create_container_group_multi](~/aci-docs-sample-dotnet/Program.cs#create_container_group_multi "Create multi-container group")]
+
+### Asynchronous container create with polling
+
+This example creates a container group with a single container using the async create method. It then polls Azure for the container group, and outputs the container group's status until its state is "Running."
+
+<!-- SOURCE REPO: https://github.com/Azure-Samples/aci-docs-sample-dotnet -->
+[!code-csharp[create_container_group_polling](~/aci-docs-sample-dotnet/Program.cs#create_container_group_polling "Create single-container group with async and polling")]
+
+### List container groups
+
+This example lists the container groups in a resource group.
+
+<!-- SOURCE REPO: https://github.com/Azure-Samples/aci-docs-sample-dotnet -->
+[!code-csharp[list_container_groups](~/aci-docs-sample-dotnet/Program.cs#list_container_groups "List container groups")]
+
+### Get an existing container group
+
+This example gets a specific container group residing in a resource group and then prints a few of its properties and their values.
+
+<!-- SOURCE REPO: https://github.com/Azure-Samples/aci-docs-sample-dotnet -->
+[!code-csharp[get_container_group](~/aci-docs-sample-dotnet/Program.cs#get_container_group "Get container group")]
+
+### Delete a container group
+
+This example deletes a container group from a resource group.
+
+<!-- SOURCE REPO: https://github.com/Azure-Samples/aci-docs-sample-dotnet -->
+[!code-csharp[delete_container_group](~/aci-docs-sample-dotnet/Program.cs#delete_container_group "Delete container group")]
+
+## API reference
 
 > [!div class="nextstepaction"]
 > [Explore the management APIs](/dotnet/api/overview/azure/containerinstances/management)
