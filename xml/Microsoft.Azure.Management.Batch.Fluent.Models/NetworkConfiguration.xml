@@ -13,7 +13,9 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
+    <summary>
+            The network configuration for a pool.
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -29,7 +31,9 @@
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Initializes a new instance of the NetworkConfiguration class.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -49,9 +53,15 @@
         <Parameter Name="endpointConfiguration" Type="Microsoft.Azure.Management.Batch.Fluent.Models.PoolEndpointConfiguration" />
       </Parameters>
       <Docs>
-        <param name="subnetId">To be added.</param>
-        <param name="endpointConfiguration">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="subnetId">The ARM resource identifier of the virtual
+            network subnet which the compute nodes of the pool will join. This
+            is of the form
+            /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}.</param>
+        <param name="endpointConfiguration">The configuration for endpoints
+            on compute nodes in the Batch pool.</param>
+        <summary>
+            Initializes a new instance of the NetworkConfiguration class.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -75,9 +85,15 @@
         <ReturnType>Microsoft.Azure.Management.Batch.Fluent.Models.PoolEndpointConfiguration</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the configuration for endpoints on compute nodes in
+            the Batch pool.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            Pool endpoint configuration is only supported on pools with the
+            virtualMachineConfiguration property.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="SubnetId">
@@ -100,9 +116,40 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the ARM resource identifier of the virtual network
+            subnet which the compute nodes of the pool will join. This is of
+            the form
+            /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            The virtual network must be in the same region and subscription as
+            the Azure Batch account. The specified subnet should have enough
+            free IP addresses to accommodate the number of nodes in the pool.
+            If the subnet doesn't have enough free IP addresses, the pool will
+            partially allocate compute nodes, and a resize error will occur.
+            The 'MicrosoftAzureBatch' service principal must have the 'Classic
+            Virtual Machine Contributor' Role-Based Access Control (RBAC) role
+            for the specified VNet. The specified subnet must allow
+            communication from the Azure Batch service to be able to schedule
+            tasks on the compute nodes. This can be verified by checking if the
+            specified VNet has any associated Network Security Groups (NSG). If
+            communication to the compute nodes in the specified subnet is
+            denied by an NSG, then the Batch service will set the state of the
+            compute nodes to unusable. For pools created via
+            virtualMachineConfiguration the Batch account must have
+            poolAllocationMode userSubscription in order to use a VNet. If the
+            specified VNet has any associated Network Security Groups (NSG),
+            then a few reserved system ports must be enabled for inbound
+            communication. For pools created with a virtual machine
+            configuration, enable ports 29876 and 29877, as well as port 22 for
+            Linux and port 3389 for Windows. For pools created with a cloud
+            service configuration, enable ports 10100, 20100, and 30100. Also
+            enable outbound connections to Azure Storage on port 443. For more
+            details see:
+            https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="Validate">
@@ -121,8 +168,13 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Validate the object.
+            </summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:Microsoft.Rest.ValidationException">
+            Thrown if validation fails
+            </exception>
       </Docs>
     </Member>
   </Members>

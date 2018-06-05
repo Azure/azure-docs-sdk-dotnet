@@ -13,7 +13,10 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
+    <summary>
+            A reference to a certificate to be installed on compute nodes in a
+            pool. This must exist inside the same account as the pool.
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -29,7 +32,9 @@
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Initializes a new instance of the CertificateReference class.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -51,11 +56,18 @@
         <Parameter Name="visibility" Type="System.Collections.Generic.IList&lt;Microsoft.Azure.Management.Batch.Fluent.Models.CertificateVisibility&gt;" />
       </Parameters>
       <Docs>
-        <param name="id">To be added.</param>
-        <param name="storeLocation">To be added.</param>
-        <param name="storeName">To be added.</param>
-        <param name="visibility">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="id">The fully qualified ID of the certificate to
+            install on the pool. This must be inside the same batch account as
+            the pool.</param>
+        <param name="storeLocation">The location of the certificate store
+            on the compute node into which to install the certificate.</param>
+        <param name="storeName">The name of the certificate store on the
+            compute node into which to install the certificate.</param>
+        <param name="visibility">Which user accounts on the compute node
+            should have access to the private data of the certificate.</param>
+        <summary>
+            Initializes a new instance of the CertificateReference class.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -79,7 +91,11 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the fully qualified ID of the certificate to install
+            on the pool. This must be inside the same batch account as the
+            pool.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -104,9 +120,24 @@
         <ReturnType>System.Nullable&lt;Microsoft.Azure.Management.Batch.Fluent.Models.CertificateStoreLocation&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the location of the certificate store on the compute
+            node into which to install the certificate.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            The default value is currentUser. This property is applicable only
+            for pools configured with Windows nodes (that is, created with
+            cloudServiceConfiguration, or with virtualMachineConfiguration
+            using a Windows image reference). For Linux compute nodes, the
+            certificates are stored in a directory inside the task working
+            directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is
+            supplied to the task to query for this location. For certificates
+            with visibility of 'remoteUser', a 'certs' directory is created in
+            the user's home directory (e.g., /home/{user-name}/certs) and
+            certificates are placed in that directory. Possible values include:
+            'CurrentUser', 'LocalMachine'
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="StoreName">
@@ -129,9 +160,19 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the name of the certificate store on the compute node
+            into which to install the certificate.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            This property is applicable only for pools configured with Windows
+            nodes (that is, created with cloudServiceConfiguration, or with
+            virtualMachineConfiguration using a Windows image reference).
+            Common store names include: My, Root, CA, Trust, Disallowed,
+            TrustedPeople, TrustedPublisher, AuthRoot, AddressBook, but any
+            custom store name can also be used. The default value is My.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="Validate">
@@ -150,8 +191,13 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Validate the object.
+            </summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:Microsoft.Rest.ValidationException">
+            Thrown if validation fails
+            </exception>
       </Docs>
     </Member>
     <Member MemberName="Visibility">
@@ -174,9 +220,22 @@
         <ReturnType>System.Collections.Generic.IList&lt;Microsoft.Azure.Management.Batch.Fluent.Models.CertificateVisibility&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+             Gets or sets which user accounts on the compute node should have
+             access to the private data of the certificate.
+             </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+             Values are:
+            
+             starttask - The user account under which the start task is run.
+             task - The accounts under which job tasks are run.
+             remoteuser - The accounts under which users remotely access the
+             node.
+            
+             You can specify more than one visibility in this collection. The
+             default is all accounts.
+             </remarks>
       </Docs>
     </Member>
   </Members>

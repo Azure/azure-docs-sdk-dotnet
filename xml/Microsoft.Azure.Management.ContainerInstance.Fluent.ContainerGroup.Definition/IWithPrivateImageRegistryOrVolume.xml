@@ -1,9 +1,9 @@
 ﻿<Type Name="IWithPrivateImageRegistryOrVolume" FullName="Microsoft.Azure.Management.ContainerInstance.Fluent.ContainerGroup.Definition.IWithPrivateImageRegistryOrVolume">
-  <TypeSignature Language="C#" Value="public interface IWithPrivateImageRegistryOrVolume : Microsoft.Azure.Management.ContainerInstance.Fluent.ContainerGroup.Definition.IWithPrivateImageRegistry" />
-  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IWithPrivateImageRegistryOrVolume implements class Microsoft.Azure.Management.ContainerInstance.Fluent.ContainerGroup.Definition.IWithPrivateImageRegistry" />
+  <TypeSignature Language="C#" Value="public interface IWithPrivateImageRegistryOrVolume : Microsoft.Azure.Management.ContainerInstance.Fluent.ContainerGroup.Definition.IWithPrivateImageRegistry, Microsoft.Azure.Management.ContainerInstance.Fluent.ContainerGroup.Definition.IWithPrivateImageRegistryOrVolumeBeta, Microsoft.Azure.Management.ResourceManager.Fluent.Core.IBeta" />
+  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IWithPrivateImageRegistryOrVolume implements class Microsoft.Azure.Management.ContainerInstance.Fluent.ContainerGroup.Definition.IWithPrivateImageRegistry, class Microsoft.Azure.Management.ContainerInstance.Fluent.ContainerGroup.Definition.IWithPrivateImageRegistryOrVolumeBeta, class Microsoft.Azure.Management.ResourceManager.Fluent.Core.IBeta" />
   <TypeSignature Language="DocId" Value="T:Microsoft.Azure.Management.ContainerInstance.Fluent.ContainerGroup.Definition.IWithPrivateImageRegistryOrVolume" />
-  <TypeSignature Language="VB.NET" Value="Public Interface IWithPrivateImageRegistryOrVolume&#xA;Implements IWithPrivateImageRegistry" />
-  <TypeSignature Language="F#" Value="type IWithPrivateImageRegistryOrVolume = interface&#xA;    interface IWithPrivateImageRegistry" />
+  <TypeSignature Language="VB.NET" Value="Public Interface IWithPrivateImageRegistryOrVolume&#xA;Implements IBeta, IWithPrivateImageRegistry, IWithPrivateImageRegistryOrVolumeBeta" />
+  <TypeSignature Language="F#" Value="type IWithPrivateImageRegistryOrVolume = interface&#xA;    interface IWithPrivateImageRegistry&#xA;    interface IWithPrivateImageRegistryOrVolumeBeta&#xA;    interface IBeta" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.Azure.Management.ContainerInstance.Fluent</AssemblyName>
     <AssemblyVersion>1.0.0.60</AssemblyVersion>
@@ -12,9 +12,17 @@
     <Interface>
       <InterfaceName>Microsoft.Azure.Management.ContainerInstance.Fluent.ContainerGroup.Definition.IWithPrivateImageRegistry</InterfaceName>
     </Interface>
+    <Interface>
+      <InterfaceName>Microsoft.Azure.Management.ContainerInstance.Fluent.ContainerGroup.Definition.IWithPrivateImageRegistryOrVolumeBeta</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>Microsoft.Azure.Management.ResourceManager.Fluent.Core.IBeta</InterfaceName>
+    </Interface>
   </Interfaces>
   <Docs>
-    <summary>To be added.</summary>
+    <summary>
+            The stage of the container group definition allowing to specify a private image registry or a volume.
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -36,34 +44,14 @@
         <Parameter Name="name" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="name">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="name">The name of the volume.</param>
+        <summary>
+            Begins the definition of a volume that can be shared by the container instances in the container group.
+            The definition must be completed with a call to  VolumeDefinitionStages.WithVolumeAttach.attach().
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="WithEmptyDirectoryVolume">
-      <MemberSignature Language="C#" Value="public Microsoft.Azure.Management.ContainerInstance.Fluent.ContainerGroup.Definition.IWithFirstContainerInstance WithEmptyDirectoryVolume (string name);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Azure.Management.ContainerInstance.Fluent.ContainerGroup.Definition.IWithFirstContainerInstance WithEmptyDirectoryVolume(string name) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.ContainerInstance.Fluent.ContainerGroup.Definition.IWithPrivateImageRegistryOrVolume.WithEmptyDirectoryVolume(System.String)" />
-      <MemberSignature Language="VB.NET" Value="Public Function WithEmptyDirectoryVolume (name As String) As IWithFirstContainerInstance" />
-      <MemberSignature Language="F#" Value="abstract member WithEmptyDirectoryVolume : string -&gt; Microsoft.Azure.Management.ContainerInstance.Fluent.ContainerGroup.Definition.IWithFirstContainerInstance" Usage="iWithPrivateImageRegistryOrVolume.WithEmptyDirectoryVolume name" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.Azure.Management.ContainerInstance.Fluent</AssemblyName>
-        <AssemblyVersion>1.0.0.60</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>Microsoft.Azure.Management.ContainerInstance.Fluent.ContainerGroup.Definition.IWithFirstContainerInstance</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="name" Type="System.String" />
-      </Parameters>
-      <Docs>
-        <param name="name">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <return>The next stage of the definition.</return>
       </Docs>
     </Member>
     <Member MemberName="WithNewAzureFileShareVolume">
@@ -85,11 +73,14 @@
         <Parameter Name="shareName" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="volumeName">To be added.</param>
-        <param name="shareName">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="volumeName">The name of the volume.</param>
+        <param name="shareName">The Azure file share name to be created.</param>
+        <summary>
+            Specifies a new Azure file share name to be created.
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <return>The next stage of the definition.</return>
       </Docs>
     </Member>
     <Member MemberName="WithoutVolume">
@@ -108,9 +99,13 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Skips the definition of volumes to be shared by the container instances.
+            An IllegalArgumentException will be thrown if a container instance attempts to define a volume mounting.
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <return>The next stage of the definition.</return>
       </Docs>
     </Member>
   </Members>

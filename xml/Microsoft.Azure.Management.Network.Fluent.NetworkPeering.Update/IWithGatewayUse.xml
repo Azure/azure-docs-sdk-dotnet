@@ -13,7 +13,9 @@
   </AssemblyInfo>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
+    <summary>
+            The stage of a network peering update allowing to control the gateway use by or on the remote network.
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -36,9 +38,13 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Allows the remote network to use this network's gateway (a.k.a. gateway transit), but does not start the use of the gateway by the remote network.
+            If this network is currently configured to use the remote network's gateway, that use will be automatically disabled, as these two settings cannot be used together.
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <return>The next stage of the update.</return>
       </Docs>
     </Member>
     <Member MemberName="WithGatewayUseByRemoteNetworkStarted">
@@ -60,9 +66,16 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Allows and starts the use of this network's gateway by the remote network (a.k.a. gateway transit).
+            If the remote network is not in the same subscription as this network, then gateway use by the remote gateway will only be allowed
+            on this network, but not started. The matching peering on the remote network must be modified explicitly to start it.
+            If this network is currently configured to use the remote network's gateway, that use will be automatically disabled, as these two settings cannot be used together.
+            Before gateway use by a remote network can be started, a working gateway must already be in place within this network.
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <return>The next stage of the update.</return>
       </Docs>
     </Member>
     <Member MemberName="WithGatewayUseOnRemoteNetworkStarted">
@@ -84,9 +97,17 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Starts the use of the remote network's gateway.
+            If the remote network is in the same subscription, remote gateway use by this network (a.k.a. gateway transit) will also be automatically allowed on the remote network's side.
+            Otherwise, this network will only be configured to use the remote gateway, but the matching peering on the remote network must still be additionally modified
+            explicitly to allow gateway use by this network.
+            If this network is currently configured to allow the remote network to use its gateway, that use will be automatically disabled, as these two settings cannot be used together.
+            Before gateway use on a remote network can be started, a working gateway must already be in place within the remote network.
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <return>The next stage of the update.</return>
       </Docs>
     </Member>
     <Member MemberName="WithoutAnyGatewayUse">
@@ -108,9 +129,16 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Disables any gateway use by this network and the remote one.
+            This will have effect on the remote network only if the remote network is in the same subscription as this network.
+            Otherwise, only this network's use of the remote network's gateway will be stopped, but the use of this network's gateway
+            by the remote network will only be disallowed. You will have to update the remote network's peering explicitly to properly stop
+            its use of this network's gateway.
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <return>The next stage of the update.</return>
       </Docs>
     </Member>
     <Member MemberName="WithoutGatewayUseByRemoteNetwork">
@@ -132,9 +160,14 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Stops and disallows the use of this network's gateway by the remote network.
+            If the remote network is not in the same subscription, then the use of that network's gateway by this network will be stopped but not disallowed
+            by the remote network. The matching peering on the remote network must still be explicitly updated to also disallow such use.
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <return>The next stage of the update.</return>
       </Docs>
     </Member>
     <Member MemberName="WithoutGatewayUseOnRemoteNetwork">
@@ -156,9 +189,12 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Stops this network's use of the remote network's gateway.
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <return>The next stage of the definition.</return>
       </Docs>
     </Member>
   </Members>
