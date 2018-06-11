@@ -42,7 +42,7 @@ If you'd like to see the following code examples in context, you can find them i
 
 ## Authentication
 
-One of the easiest ways to authenticate SDK clients is with [file-based authentication][sdk-auth]. File-based authentication parses a credentials file when instantiating the [Azure][iazure] client object, which then uses those credentials when authenticating with Azure. To use file-based authentication:
+One of the easiest ways to authenticate SDK clients is with [file-based authentication][sdk-auth]. File-based authentication parses a credentials file when instantiating the [IAzure][iazure] client object, which then uses those credentials when authenticating with Azure. To use file-based authentication:
 
 1. Create a credentials file with the [Azure CLI](/cli/azure) or [Cloud Shell](https://shell.azure.com/):
 
@@ -50,29 +50,21 @@ One of the easiest ways to authenticate SDK clients is with [file-based authenti
 
    If you use the [Cloud Shell](https://shell.azure.com/) to generate the credentials file, copy its contents into a local file that your .NET application can access.
 
-2. Set the `AZURE_AUTH_LOCATION` environment variable to the full path of the generated credentials file. For example:
+2. Set the `AZURE_AUTH_LOCATION` environment variable to the full path of the generated credentials file. For example (in the Bash shell):
 
    ```bash
    export AZURE_AUTH_LOCATION=/home/yourusername/my.azureauth
    ```
 
-   ```powershell
-   $env:AZURE_AUTH_LOCATION = "C:\Users\yourusername\my.azureauth"
-   ```
-
-   ```cmd
-   setx AZURE_AUTH_LOCATION "%USERPROFILE%\my.azureauth"
-   ```
-
-Once you've created the credentials file and populated the `AZURE_AUTH_LOCATION` environment variable, use [Azure.Authenticate][iazure-authenticate] method to initialize the `Azure` client object. The example project first obtains the `AZURE_AUTH_LOCATION` value, then calls a method that returns an initialized `Azure` client object:
+Once you've created the credentials file and populated the `AZURE_AUTH_LOCATION` environment variable, use the [Azure.Authenticate][iazure-authenticate] method to initialize the [IAzure][iazure] client object. The example project first obtains the `AZURE_AUTH_LOCATION` value, then calls a method that returns an initialized `IAzure` client object:
 
 <!-- SOURCE REPO: https://github.com/Azure-Samples/aci-docs-sample-dotnet -->
-[!code-csharm[authenticate](~/aci-docs-sample-dotnet/Program.cs#L29-L35 "Get environment variable")]
+[!code-csharp[authenticate](~/aci-docs-sample-dotnet/Program.cs#L29-L35 "Get environment variable")]
 
-The `Azure` instance is returned from this method, which is then passed as the first parameter to all other methods in the sample application:
+This method from the sample application returns the initialized [IAzure][iazure] instance, which is then passed as the first parameter to all other methods in the sample:
 
 <!-- SOURCE REPO: https://github.com/Azure-Samples/aci-docs-sample-dotnet -->
-[!code-csharm[authenticate](~/aci-docs-sample-dotnet/Program.cs#azure_auth "Authenticate IAzure client object")]
+[!code-csharp[authenticate](~/aci-docs-sample-dotnet/Program.cs#azure_auth"Authenticate IAzure client object")]
 
 For more details about the available authentication methods in the .NET management libraries for Azure, see [Authentication in Azure Management Libraries for .NET][sdk-auth].
 
