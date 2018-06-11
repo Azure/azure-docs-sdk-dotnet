@@ -64,7 +64,7 @@ Once you've created the credentials file and populated the `AZURE_AUTH_LOCATION`
 This method from the sample application returns the initialized [IAzure][iazure] instance, which is then passed as the first parameter to all other methods in the sample:
 
 <!-- SOURCE REPO: https://github.com/Azure-Samples/aci-docs-sample-dotnet -->
-[!code-csharp[authenticate](~/aci-docs-sample-dotnet/Program.cs#azure_auth"Authenticate IAzure client object")]
+[!code-csharp[authenticate](~/aci-docs-sample-dotnet/Program.cs#azure_auth "Authenticate IAzure client object")]
 
 For more details about the available authentication methods in the .NET management libraries for Azure, see [Authentication in Azure Management Libraries for .NET][sdk-auth].
 
