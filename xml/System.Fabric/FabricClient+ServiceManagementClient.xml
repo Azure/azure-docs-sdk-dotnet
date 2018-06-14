@@ -730,7 +730,12 @@
           <para>A <see cref="T:System.Threading.Tasks.Task" /> representing the async operation. The task result is an ID corresponding to the registered <see cref="T:System.Fabric.Description.ServiceNotificationFilterDescription" /> that can be used to unregister the same filter through <see cref="M:System.Fabric.FabricClient.ServiceManagementClient.UnregisterServiceNotificationFilterAsync(System.Int64)" />.</para>
         </returns>
         <remarks>
-          <para>The default timeout is one minute for which the system will allow this operation to continue before returning <see cref="T:System.TimeoutException" />.</para>
+          <para>
+            The default timeout is one minute for which the system will allow this operation to continue before returning <see cref="T:System.TimeoutException" />.
+            </para>
+          <para>
+            There is a cache of service endpoints in the client that gets updated by notifications and this same cache is used to satisfy complaint based resolution requests (see <see cref="M:System.Fabric.FabricClient.ServiceManagementClient.ResolveServicePartitionAsync(System.Uri,System.Fabric.ResolvedServicePartition)" />). Applications that both register for notifications and use complaint based resolution on the same client instance typically only need to pass null for the <see cref="T:System.Fabric.ResolvedServicePartition" /> argument during resolution. This will always return the endpoints in the client cache updated by the latest notification. The notification mechanism itself will keep the client cache updated when service endpoints change, there is no need to convert from a <see cref="T:System.Fabric.ServiceNotification" /> to a <see cref="T:System.Fabric.ResolvedServicePartition" /> for the purposes of refreshing the client cache.
+            </para>
         </remarks>
         <exception cref="T:System.ArgumentNullException">If <paramref name="description" /> is null.</exception>
       </Docs>
@@ -792,6 +797,11 @@
         <AssemblyName>System.Fabric</AssemblyName>
         <AssemblyVersion>6.0.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Obsolete("This API is obsolete. Use RegisterServiceNotificationFilterAsync instead.", false)</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Int64</ReturnType>
       </ReturnValue>
@@ -834,6 +844,11 @@
         <AssemblyName>System.Fabric</AssemblyName>
         <AssemblyVersion>6.0.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Obsolete("This API is obsolete. Use RegisterServiceNotificationFilterAsync instead.", false)</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Int64</ReturnType>
       </ReturnValue>
@@ -880,6 +895,11 @@
         <AssemblyName>System.Fabric</AssemblyName>
         <AssemblyVersion>6.0.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Obsolete("This API is obsolete. Use RegisterServiceNotificationFilterAsync instead.", false)</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Int64</ReturnType>
       </ReturnValue>

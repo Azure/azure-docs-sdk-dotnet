@@ -1,0 +1,66 @@
+<Type Name="DefaultServicesTypeServiceGroupServicePackageActivationMode" FullName="System.Fabric.Management.ServiceModel.DefaultServicesTypeServiceGroupServicePackageActivationMode">
+  <TypeSignature Language="C#" Value="public enum DefaultServicesTypeServiceGroupServicePackageActivationMode" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed DefaultServicesTypeServiceGroupServicePackageActivationMode extends System.Enum" />
+  <TypeSignature Language="DocId" Value="T:System.Fabric.Management.ServiceModel.DefaultServicesTypeServiceGroupServicePackageActivationMode" />
+  <TypeSignature Language="VB.NET" Value="Public Enum DefaultServicesTypeServiceGroupServicePackageActivationMode" />
+  <TypeSignature Language="F#" Value="type DefaultServicesTypeServiceGroupServicePackageActivationMode = " />
+  <AssemblyInfo>
+    <AssemblyName>System.Fabric.Management.ServiceModel</AssemblyName>
+    <AssemblyVersion>6.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Enum</BaseTypeName>
+  </Base>
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.CodeDom.Compiler.GeneratedCode("xsd", "4.0.30319.17929")</AttributeName>
+    </Attribute>
+    <Attribute>
+      <AttributeName>System.Xml.Serialization.XmlType(AnonymousType=true, Namespace="http://schemas.microsoft.com/2011/01/fabric")</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="ExclusiveProcess">
+      <MemberSignature Language="C#" Value="ExclusiveProcess" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Fabric.Management.ServiceModel.DefaultServicesTypeServiceGroupServicePackageActivationMode ExclusiveProcess = int32(1)" />
+      <MemberSignature Language="DocId" Value="F:System.Fabric.Management.ServiceModel.DefaultServicesTypeServiceGroupServicePackageActivationMode.ExclusiveProcess" />
+      <MemberSignature Language="VB.NET" Value="ExclusiveProcess" />
+      <MemberSignature Language="F#" Value="ExclusiveProcess = 1" Usage="System.Fabric.Management.ServiceModel.DefaultServicesTypeServiceGroupServicePackageActivationMode.ExclusiveProcess" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Fabric.Management.ServiceModel</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Fabric.Management.ServiceModel.DefaultServicesTypeServiceGroupServicePackageActivationMode</ReturnType>
+      </ReturnValue>
+      <MemberValue>1</MemberValue>
+      <Docs>
+        <summary>To be added.</summary>
+      </Docs>
+    </Member>
+    <Member MemberName="SharedProcess">
+      <MemberSignature Language="C#" Value="SharedProcess" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Fabric.Management.ServiceModel.DefaultServicesTypeServiceGroupServicePackageActivationMode SharedProcess = int32(0)" />
+      <MemberSignature Language="DocId" Value="F:System.Fabric.Management.ServiceModel.DefaultServicesTypeServiceGroupServicePackageActivationMode.SharedProcess" />
+      <MemberSignature Language="VB.NET" Value="SharedProcess" />
+      <MemberSignature Language="F#" Value="SharedProcess = 0" Usage="System.Fabric.Management.ServiceModel.DefaultServicesTypeServiceGroupServicePackageActivationMode.SharedProcess" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Fabric.Management.ServiceModel</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Fabric.Management.ServiceModel.DefaultServicesTypeServiceGroupServicePackageActivationMode</ReturnType>
+      </ReturnValue>
+      <MemberValue>0</MemberValue>
+      <Docs>
+        <summary>To be added.</summary>
+      </Docs>
+    </Member>
+  </Members>
+</Type>
