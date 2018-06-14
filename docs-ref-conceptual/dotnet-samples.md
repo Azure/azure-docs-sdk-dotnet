@@ -1,0 +1,141 @@
+---
+title: Azure C# code samples for .NET
+description: C# code samples for .NET and Azure.
+layout: LandingPage
+ms.topic: landing-page
+author: camsoper
+ms.author: casoper
+manager: wpickett
+ms.date: 04/12/2018
+ms.topic: reference
+ms.technology: azure
+ms.devlang: dotnet
+ms.service: multiple
+ms.custom: devcenter
+---
+# Azure C# code samples for .NET
+
+These are the top samples, tutorials, and examples we recommend for getting started with Azure using C# and .NET.
+
+<div id="main" class="v2">
+    <div class="container">
+        <ul class="cardsC panelContent" id="samples" style="margin-top: 20px; display: flex;">
+            <li>
+                <div class="cardSize">
+                    <div class="cardPadding">
+                        <a href="https://docs.microsoft.com/azure/app-service/app-service-web-tutorial-dotnet-sqldatabase">
+                            <div class="card">
+                                <div class="cardImageOuter">
+                                    <div class="cardImage bgdAccent1">
+                                        <img src="/dotnet/docs-ref-conceptual/media/dotnet-samples/web-app.png" alt="" />
+                                    </div>
+                                </div>
+                                <div class="cardText">
+                                    <h3>Basic website</h3>
+                                    <p>Learn how to create a simple ASP.NET Core website that stores information in a SQL backend.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="cardSize">
+                    <div class="cardPadding">
+                        <a href="https://github.com/JeremyLikness/ShortLink">
+                            <div class="card">
+                                <div class="cardImageOuter">
+                                    <div class="cardImage bgdAccent1">
+                                        <img src="/dotnet/docs-ref-conceptual/media/dotnet-samples/github.png" alt="" />
+                                    </div>
+                                </div>
+                                <div class="cardText">
+                                    <h3>URL Shortener</h3>
+                                    <p>Learn how to trigger actions using serverless Azure Functions.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="cardSize">
+                    <a href="https://azure.microsoft.com/resources/samples/storage-blobs-dotnet-webapp/">
+                        <div class="cardPadding">
+                            <div class="card">
+                                <div class="cardImageOuter">
+                                    <div class="cardImage bgdAccent1">
+                                        <img src="/dotnet/docs-ref-conceptual/media/dotnet-samples/photo-gallery.png" alt="" />
+                                    </div>
+                                </div>
+                                <div class="cardText">
+                                    <h3>Photo Gallery</h3>
+                                    <p>Learn how to upload, download and access image files from the cloud using Azure Blob Storage.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="cardSize">
+                    <div class="cardPadding">
+                        <a href="https://github.com/Azure-Samples/service-fabric-dotnet-quickstart">
+                            <div class="card">
+                                <div class="cardImageOuter">
+                                    <div class="cardImage bgdAccent1">
+                                        <img src="/dotnet/docs-ref-conceptual/media/dotnet-samples/voting-app.png" alt="" />
+                                    </div>
+                                </div>
+                                <div class="cardText">
+                                    <h3>Voting app</h3>
+                                    <p>Learn how to create reliable microservices in a distributed app using Azure Service Fabric.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="cardSize">
+                    <div class="cardPadding">
+                        <a href="https://docs.microsoft.com/azure/cognitive-services/computer-vision/tutorials/csharptutorial">
+                            <div class="card">
+                                <div class="cardImageOuter">
+                                    <div class="cardImage bgdAccent1">
+                                        <img src="/dotnet/docs-ref-conceptual/media/dotnet-samples/cognitive-services.png" alt="" />
+                                    </div>
+                                </div>
+                                <div class="cardText">
+                                    <h3>Analyze images with AI</h3>
+                                    <p>Shows how to use Cognitive Services to detect visual features in images.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="cardSize">
+                    <div class="cardPadding">
+                        <a href="https://github.com/JeremyLikness/explore-cosmos-db">
+                            <div class="card">
+                                <div class="cardImageOuter">
+                                    <div class="cardImage bgdAccent1">
+                                        <img src="/dotnet/docs-ref-conceptual/media/dotnet-samples/cosmosdb.png" alt="" />
+                                    </div>
+                                </div>
+                                <div class="cardText">
+                                    <h3>Cloud Database</h3>
+                                    <p>Learn how to do basic searches, creation and editing in a modern cloud database using Cosmos DB.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </li>             
+        </ul>
+    </div>
+</div>
+
+You can also browse the [complete collection of samples](https://azure.microsoft.com/resources/samples/?platform=dotnet&sort=2).

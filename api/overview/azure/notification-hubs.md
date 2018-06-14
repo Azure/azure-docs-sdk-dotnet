@@ -37,7 +37,7 @@ dotnet add package Microsoft.Azure.NotificationHubs
 
 ### Code Example
 
-This example connects to a database and reads rows from a table.
+This example connects to a Notification Hub and sends a Windows Push Notification Service (WNS) message.
 
 ```csharp
 NotificationHubClient hub = NotificationHubClient
