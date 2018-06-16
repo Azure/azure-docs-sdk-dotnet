@@ -5,7 +5,7 @@ keywords: Azure, .NET, SDK, API, Container Instances, ACI
 author: mmacy
 ms.author: marsma
 manager: jeconnoc
-ms.date: 05/25/2018
+ms.date: 06/11/2018
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
@@ -34,30 +34,62 @@ Install-Package Microsoft.Azure.Management.ContainerInstance.Fluent
 dotnet add package Microsoft.Azure.Management.ContainerInstance.Fluent
 ```
 
-## Examples
+## Example source
 
-### Create container group - single container
+If you'd like to see the following code examples in context, you can find them in the following GitHub repository:
+
+[Azure-Samples/aci-docs-sample-dotnet](https://github.com/Azure-Samples/aci-docs-sample-dotnet)
+
+## Authentication
+
+One of the easiest ways to authenticate SDK clients is with [file-based authentication][sdk-auth]. File-based authentication parses a credentials file when instantiating the [IAzure][iazure] client object, which then uses those credentials when authenticating with Azure. To use file-based authentication:
+
+1. Create a credentials file with the [Azure CLI](/cli/azure) or [Cloud Shell](https://shell.azure.com/):
+
+   `az ad sp create-for-rbac --sdk-auth > my.azureauth`
+
+   If you use the [Cloud Shell](https://shell.azure.com/) to generate the credentials file, copy its contents into a local file that your .NET application can access.
+
+2. Set the `AZURE_AUTH_LOCATION` environment variable to the full path of the generated credentials file. For example (in the Bash shell):
+
+   ```bash
+   export AZURE_AUTH_LOCATION=/home/yourusername/my.azureauth
+   ```
+
+Once you've created the credentials file and populated the `AZURE_AUTH_LOCATION` environment variable, use the [Azure.Authenticate][iazure-authenticate] method to initialize the [IAzure][iazure] client object. The example project first obtains the `AZURE_AUTH_LOCATION` value, then calls a method that returns an initialized `IAzure` client object:
+
+<!-- SOURCE REPO: https://github.com/Azure-Samples/aci-docs-sample-dotnet -->
+[!code-csharp[authenticate](~/aci-docs-sample-dotnet/Program.cs#L29-L35 "Get environment variable")]
+
+This method from the sample application returns the initialized [IAzure][iazure] instance, which is then passed as the first parameter to all other methods in the sample:
+
+<!-- SOURCE REPO: https://github.com/Azure-Samples/aci-docs-sample-dotnet -->
+[!code-csharp[authenticate](~/aci-docs-sample-dotnet/Program.cs#azure_auth "Authenticate IAzure client object")]
+
+For more details about the available authentication methods in the .NET management libraries for Azure, see [Authentication in Azure Management Libraries for .NET][sdk-auth].
+
+## Create container group - single container
 
 This example creates a container group with a single container.
 
 <!-- SOURCE REPO: https://github.com/Azure-Samples/aci-docs-sample-dotnet -->
 [!code-csharp[create_container_group](~/aci-docs-sample-dotnet/Program.cs#create_container_group "Create single-container group")]
 
-### Create container group - multiple containers
+## Create container group - multiple containers
 
 This example creates a container group with two containers: an application container and a sidecar container.
 
 <!-- SOURCE REPO: https://github.com/Azure-Samples/aci-docs-sample-dotnet -->
 [!code-csharp[create_container_group_multi](~/aci-docs-sample-dotnet/Program.cs#create_container_group_multi "Create multi-container group")]
 
-### Asynchronous container create with polling
+## Asynchronous container create with polling
 
 This example creates a container group with a single container using the async create method. It then polls Azure for the container group, and outputs the container group's status until its state is "Running."
 
 <!-- SOURCE REPO: https://github.com/Azure-Samples/aci-docs-sample-dotnet -->
 [!code-csharp[create_container_group_polling](~/aci-docs-sample-dotnet/Program.cs#create_container_group_polling "Create single-container group with async and polling")]
 
-### Create task-based container group
+## Create task-based container group
 
 This example creates a container group with a single task-based container. The container is configured with a [restart policy](/azure/container-instances/container-instances-restart-policy) of "Never" and a [custom command line](/azure/container-instances/container-instances-restart-policy#command-line-override).
 
@@ -72,21 +104,21 @@ If, however, you want to run multiple commands with (potentially) multiple argum
 <!-- SOURCE REPO: https://github.com/Azure-Samples/aci-docs-sample-dotnet -->
 [!code-csharp[create_container_group_task](~/aci-docs-sample-dotnet/Program.cs#create_container_group_task "Run a task-based container")]
 
-### List container groups
+## List container groups
 
 This example lists the container groups in a resource group.
 
 <!-- SOURCE REPO: https://github.com/Azure-Samples/aci-docs-sample-dotnet -->
 [!code-csharp[list_container_groups](~/aci-docs-sample-dotnet/Program.cs#list_container_groups "List container groups")]
 
-### Get an existing container group
+## Get an existing container group
 
 This example gets a specific container group residing in a resource group and then prints a few of its properties and their values.
 
 <!-- SOURCE REPO: https://github.com/Azure-Samples/aci-docs-sample-dotnet -->
 [!code-csharp[get_container_group](~/aci-docs-sample-dotnet/Program.cs#get_container_group "Get container group")]
 
-### Delete a container group
+## Delete a container group
 
 This example deletes a container group from a resource group.
 
@@ -110,7 +142,13 @@ This example deletes a container group from a resource group.
 
 Explore more [sample .NET code](https://azure.microsoft.com/resources/samples/?platform=dotnet) you can use in your apps.
 
-[PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
-[DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
-[samples]: https://azure.microsoft.com/resources/samples/?sort=0&term=ACI
+<!-- LINKS - External -->
 [aci-docs-sample-dotnet]: https://github.com/Azure-Samples/aci-docs-sample-dotnet
+[samples]: https://azure.microsoft.com/resources/samples/?sort=0&term=ACI
+[sdk-auth]: https://github.com/Azure/azure-libraries-for-net/blob/master/AUTH.md
+
+<!-- LINKS - Internal -->
+[DotNetCLI]: /dotnet/core/tools/dotnet-add-package
+[PackageManager]: /nuget/tools/package-manager-console
+[iazure]: /dotnet/api/microsoft.azure.management.fluent.azure
+[iazure-authenticate]: /dotnet/api/microsoft.azure.management.fluent.azure.authenticate
