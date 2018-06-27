@@ -6,8 +6,7 @@ author: camsoper
 manager: wpickett
 ms.author: casoper
 ms.date: 11/15/2017
-layout: LandingPage
-ms.topic: landing-page
+ms.topic: article
 ms.technology: azure
 ms.devlang: dotnet
 ms.service: virtual-machines
