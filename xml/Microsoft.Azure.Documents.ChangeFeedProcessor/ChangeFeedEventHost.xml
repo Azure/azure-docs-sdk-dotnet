@@ -1,30 +1,17 @@
 ﻿<Type Name="ChangeFeedEventHost" FullName="Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost">
   <TypeSignature Language="C#" Value="public class ChangeFeedEventHost" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi ChangeFeedEventHost extends System.Object" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit ChangeFeedEventHost extends System.Object" />
   <TypeSignature Language="DocId" Value="T:Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost" />
   <TypeSignature Language="VB.NET" Value="Public Class ChangeFeedEventHost" />
-  <TypeSignature Language="F#" Value="type ChangeFeedEventHost = class" />
-  <TypeSignature Language="C++ CLI" Value="public ref class ChangeFeedEventHost" />
-  <TypeSignature Language="C++ WINRT" Value="[Windows::Foundation::Metadata::WebHostHidden]&#xA;class ChangeFeedEventHost" />
+  <TypeSignature Language="F#" Value="type ChangeFeedEventHost = class&#xA;    interface IPartitionObserver&lt;DocumentServiceLease&gt;" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.Azure.Documents.ChangeFeedProcessor</AssemblyName>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <AssemblyVersion>1.3.0.0</AssemblyVersion>
-    <AssemblyVersion>1.3.1.0</AssemblyVersion>
-    <AssemblyVersion>1.3.2.0</AssemblyVersion>
-    <AssemblyVersion>1.17.0.0</AssemblyVersion>
-    <AssemblyVersion>2.0.1.0</AssemblyVersion>
-    <AssemblyVersion>2.0.2.0</AssemblyVersion>
+    <AssemblyVersion>1.3.3.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
   <Interfaces />
-  <Attributes>
-    <Attribute>
-      <AttributeName>System.Obsolete("Switch to the ChangeFeedProcessorBuilder class and use the BuildAsync method for building the change feed processor host or the BuildEstimatorAsync method for building the remaining work estimator.")</AttributeName>
-    </Attribute>
-  </Attributes>
   <Docs>
     <summary>
             Simple host for distributing change feed events across observers and thus allowing these observers scale.
@@ -39,7 +26,7 @@
             It uses auxiliary document collection for managing leases for a partition.
             Every EventProcessorHost instance is performing the following two tasks:
                 1) Renew Leases: It keeps track of leases currently owned by the host and continuously keeps on renewing the leases.
-                2) Acquire Leases: Each instance continuously polls all leases to check if there are any leases it should acquire
+                2) Acquire Leases: Each instance continuously polls all leases to check if there are any leases it should acquire 
                 for the system to get into balanced state.
             </remarks>
     <example>
@@ -92,33 +79,25 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ChangeFeedEventHost (string hostName, Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo documentCollectionLocation, Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo leaseCollectionLocation);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string hostName, class Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo documentCollectionLocation, class Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo leaseCollectionLocation) cil managed" />
+      <MemberSignature Language="C#" Value="public ChangeFeedEventHost (string hostName, Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo documentCollectionLocation, Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo auxCollectionLocation);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string hostName, class Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo documentCollectionLocation, class Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo auxCollectionLocation) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost.#ctor(System.String,Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo,Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo)" />
-      <MemberSignature Language="VB.NET" Value="Public Sub New (hostName As String, documentCollectionLocation As DocumentCollectionInfo, leaseCollectionLocation As DocumentCollectionInfo)" />
-      <MemberSignature Language="F#" Value="new Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost : string * Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo * Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo -&gt; Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost" Usage="new Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost (hostName, documentCollectionLocation, leaseCollectionLocation)" />
-      <MemberSignature Language="C++ CLI" Value="public:&#xA; ChangeFeedEventHost(System::String ^ hostName, Microsoft::Azure::Documents::ChangeFeedProcessor::DocumentCollectionInfo ^ documentCollectionLocation, Microsoft::Azure::Documents::ChangeFeedProcessor::DocumentCollectionInfo ^ leaseCollectionLocation);" />
-      <MemberSignature Language="C++ WINRT" Value=" ChangeFeedEventHost(std::wstring const &amp; hostName, Microsoft::Azure::Documents::ChangeFeedProcessor::DocumentCollectionInfo const &amp; documentCollectionLocation, Microsoft::Azure::Documents::ChangeFeedProcessor::DocumentCollectionInfo const &amp; leaseCollectionLocation);" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (hostName As String, documentCollectionLocation As DocumentCollectionInfo, auxCollectionLocation As DocumentCollectionInfo)" />
+      <MemberSignature Language="F#" Value="new Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost : string * Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo * Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo -&gt; Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost" Usage="new Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost (hostName, documentCollectionLocation, auxCollectionLocation)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Documents.ChangeFeedProcessor</AssemblyName>
-        <AssemblyVersion>1.0.0.0</AssemblyVersion>
-        <AssemblyVersion>1.3.0.0</AssemblyVersion>
-        <AssemblyVersion>1.3.1.0</AssemblyVersion>
-        <AssemblyVersion>1.3.2.0</AssemblyVersion>
-        <AssemblyVersion>1.17.0.0</AssemblyVersion>
-        <AssemblyVersion>2.0.1.0</AssemblyVersion>
-        <AssemblyVersion>2.0.2.0</AssemblyVersion>
+        <AssemblyVersion>1.3.3.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="hostName" Type="System.String" Index="0" />
-        <Parameter Name="documentCollectionLocation" Type="Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo" Index="1" />
-        <Parameter Name="leaseCollectionLocation" Type="Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo" Index="2" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="hostName" Type="System.String" />
+        <Parameter Name="documentCollectionLocation" Type="Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo" />
+        <Parameter Name="auxCollectionLocation" Type="Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo" />
       </Parameters>
       <Docs>
         <param name="hostName">Unique name for this host.</param>
         <param name="documentCollectionLocation">Specifies location of the DocumentDB collection to monitor changes for.</param>
-        <param name="leaseCollectionLocation">To be added.</param>
+        <param name="auxCollectionLocation">Specifies location of auxiliary data for load-balancing instances of <see cref="T:Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost" />.</param>
         <summary>
             Initializes a new instance of the <see cref="T:Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost" /> class.
             </summary>
@@ -126,66 +105,28 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ChangeFeedEventHost (string hostName, Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo feedCollectionLocation, Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo leaseCollectionLocation, Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedHostOptions changeFeedHostOptions);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string hostName, class Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo feedCollectionLocation, class Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo leaseCollectionLocation, class Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedHostOptions changeFeedHostOptions) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost.#ctor(System.String,Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo,Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo,Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedHostOptions)" />
-      <MemberSignature Language="F#" Value="new Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost : string * Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo * Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo * Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedHostOptions -&gt; Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost" Usage="new Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost (hostName, feedCollectionLocation, leaseCollectionLocation, changeFeedHostOptions)" />
-      <MemberSignature Language="C++ CLI" Value="public:&#xA; ChangeFeedEventHost(System::String ^ hostName, Microsoft::Azure::Documents::ChangeFeedProcessor::DocumentCollectionInfo ^ feedCollectionLocation, Microsoft::Azure::Documents::ChangeFeedProcessor::DocumentCollectionInfo ^ leaseCollectionLocation, Microsoft::Azure::Documents::ChangeFeedProcessor::ChangeFeedHostOptions ^ changeFeedHostOptions);" />
-      <MemberSignature Language="C++ WINRT" Value=" ChangeFeedEventHost(std::wstring const &amp; hostName, Microsoft::Azure::Documents::ChangeFeedProcessor::DocumentCollectionInfo const &amp; feedCollectionLocation, Microsoft::Azure::Documents::ChangeFeedProcessor::DocumentCollectionInfo const &amp; leaseCollectionLocation, Microsoft::Azure::Documents::ChangeFeedProcessor::ChangeFeedHostOptions const &amp; changeFeedHostOptions);" />
+      <MemberSignature Language="C#" Value="public ChangeFeedEventHost (string hostName, Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo documentCollectionLocation, Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo auxCollectionLocation, Microsoft.Azure.Documents.Client.ChangeFeedOptions changeFeedOptions, Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedHostOptions hostOptions);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string hostName, class Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo documentCollectionLocation, class Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo auxCollectionLocation, class Microsoft.Azure.Documents.Client.ChangeFeedOptions changeFeedOptions, class Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedHostOptions hostOptions) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost.#ctor(System.String,Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo,Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo,Microsoft.Azure.Documents.Client.ChangeFeedOptions,Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedHostOptions)" />
+      <MemberSignature Language="F#" Value="new Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost : string * Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo * Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo * Microsoft.Azure.Documents.Client.ChangeFeedOptions * Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedHostOptions -&gt; Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost" Usage="new Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost (hostName, documentCollectionLocation, auxCollectionLocation, changeFeedOptions, hostOptions)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Documents.ChangeFeedProcessor</AssemblyName>
-        <AssemblyVersion>2.0.1.0</AssemblyVersion>
-        <AssemblyVersion>2.0.2.0</AssemblyVersion>
+        <AssemblyVersion>1.3.3.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="hostName" Type="System.String" />
-        <Parameter Name="feedCollectionLocation" Type="Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo" />
-        <Parameter Name="leaseCollectionLocation" Type="Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo" />
-        <Parameter Name="changeFeedHostOptions" Type="Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedHostOptions" />
+        <Parameter Name="documentCollectionLocation" Type="Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo" />
+        <Parameter Name="auxCollectionLocation" Type="Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo" />
+        <Parameter Name="changeFeedOptions" Type="Microsoft.Azure.Documents.Client.ChangeFeedOptions" />
+        <Parameter Name="hostOptions" Type="Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedHostOptions" />
       </Parameters>
       <Docs>
         <param name="hostName">Unique name for this host.</param>
-        <param name="feedCollectionLocation">Specifies location of the Cosmos DB collection to monitor changes for.</param>
-        <param name="leaseCollectionLocation">Specifies location of auxiliary data for load-balancing instances of <see cref="T:Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost" />.</param>
-        <param name="changeFeedHostOptions">Additional options to control load-balancing of <see cref="T:Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost" /> instances.</param>
-        <summary>
-            Initializes a new instance of the <see cref="T:Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost" /> class.
-            </summary>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ChangeFeedEventHost (string hostName, Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo feedCollectionLocation, Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo leaseCollectionLocation, Microsoft.Azure.Documents.Client.ChangeFeedOptions changeFeedOptions, Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedHostOptions changeFeedHostOptions);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string hostName, class Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo feedCollectionLocation, class Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo leaseCollectionLocation, class Microsoft.Azure.Documents.Client.ChangeFeedOptions changeFeedOptions, class Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedHostOptions changeFeedHostOptions) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost.#ctor(System.String,Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo,Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo,Microsoft.Azure.Documents.Client.ChangeFeedOptions,Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedHostOptions)" />
-      <MemberSignature Language="F#" Value="new Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost : string * Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo * Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo * Microsoft.Azure.Documents.Client.ChangeFeedOptions * Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedHostOptions -&gt; Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost" Usage="new Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost (hostName, feedCollectionLocation, leaseCollectionLocation, changeFeedOptions, changeFeedHostOptions)" />
-      <MemberSignature Language="C++ CLI" Value="public:&#xA; ChangeFeedEventHost(System::String ^ hostName, Microsoft::Azure::Documents::ChangeFeedProcessor::DocumentCollectionInfo ^ feedCollectionLocation, Microsoft::Azure::Documents::ChangeFeedProcessor::DocumentCollectionInfo ^ leaseCollectionLocation, Microsoft::Azure::Documents::Client::ChangeFeedOptions ^ changeFeedOptions, Microsoft::Azure::Documents::ChangeFeedProcessor::ChangeFeedHostOptions ^ changeFeedHostOptions);" />
-      <MemberSignature Language="C++ WINRT" Value=" ChangeFeedEventHost(std::wstring const &amp; hostName, Microsoft::Azure::Documents::ChangeFeedProcessor::DocumentCollectionInfo const &amp; feedCollectionLocation, Microsoft::Azure::Documents::ChangeFeedProcessor::DocumentCollectionInfo const &amp; leaseCollectionLocation, Microsoft::Azure::Documents::Client::ChangeFeedOptions const &amp; changeFeedOptions, Microsoft::Azure::Documents::ChangeFeedProcessor::ChangeFeedHostOptions const &amp; changeFeedHostOptions);" />
-      <MemberType>Constructor</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.Azure.Documents.ChangeFeedProcessor</AssemblyName>
-        <AssemblyVersion>1.0.0.0</AssemblyVersion>
-        <AssemblyVersion>1.3.0.0</AssemblyVersion>
-        <AssemblyVersion>1.3.1.0</AssemblyVersion>
-        <AssemblyVersion>1.3.2.0</AssemblyVersion>
-        <AssemblyVersion>1.17.0.0</AssemblyVersion>
-        <AssemblyVersion>2.0.1.0</AssemblyVersion>
-        <AssemblyVersion>2.0.2.0</AssemblyVersion>
-      </AssemblyInfo>
-      <Parameters>
-        <Parameter Name="hostName" Type="System.String" Index="0" />
-        <Parameter Name="feedCollectionLocation" Type="Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo" Index="1" FrameworkAlternate="azure-dotnet" />
-        <Parameter Name="leaseCollectionLocation" Type="Microsoft.Azure.Documents.ChangeFeedProcessor.DocumentCollectionInfo" Index="2" FrameworkAlternate="azure-dotnet" />
-        <Parameter Name="changeFeedOptions" Type="Microsoft.Azure.Documents.Client.ChangeFeedOptions" Index="3" />
-        <Parameter Name="changeFeedHostOptions" Type="Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedHostOptions" Index="4" FrameworkAlternate="azure-dotnet" />
-      </Parameters>
-      <Docs>
-        <param name="hostName">Unique name for this host.</param>
-        <param name="feedCollectionLocation">Specifies location of the Cosmos DB collection to monitor changes for.</param>
-        <param name="leaseCollectionLocation">Specifies location of auxiliary data for load-balancing instances of <see cref="T:Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost" />.</param>
-        <param name="changeFeedOptions">Options to pass to the DocumentClient.CreateDocumentChangeFeedQuery API.</param>
-        <param name="changeFeedHostOptions">Additional options to control load-balancing of <see cref="T:Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost" /> instances.</param>
+        <param name="documentCollectionLocation">Specifies location of the DocumentDB collection to monitor changes for.</param>
+        <param name="auxCollectionLocation">Specifies location of auxiliary data for load-balancing instances of <see cref="T:Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost" />.</param>
+        <param name="changeFeedOptions">Options to pass to the Microsoft.AzureDocuments.DocumentClient.CreateChangeFeedQuery API.</param>
+        <param name="hostOptions">Additional options to control load-balancing of <see cref="T:Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost" /> instances.</param>
         <summary>
             Initializes a new instance of the <see cref="T:Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost" /> class.
             </summary>
@@ -198,21 +139,14 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost.GetEstimatedRemainingWork" />
       <MemberSignature Language="VB.NET" Value="Public Function GetEstimatedRemainingWork () As Task(Of Long)" />
       <MemberSignature Language="F#" Value="member this.GetEstimatedRemainingWork : unit -&gt; System.Threading.Tasks.Task&lt;int64&gt;" Usage="changeFeedEventHost.GetEstimatedRemainingWork " />
-      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Threading::Tasks::Task&lt;long&gt; ^ GetEstimatedRemainingWork();" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Documents.ChangeFeedProcessor</AssemblyName>
-        <AssemblyVersion>1.0.0.0</AssemblyVersion>
-        <AssemblyVersion>1.3.0.0</AssemblyVersion>
-        <AssemblyVersion>1.3.1.0</AssemblyVersion>
-        <AssemblyVersion>1.3.2.0</AssemblyVersion>
-        <AssemblyVersion>1.17.0.0</AssemblyVersion>
-        <AssemblyVersion>2.0.1.0</AssemblyVersion>
-        <AssemblyVersion>2.0.2.0</AssemblyVersion>
+        <AssemblyVersion>1.3.3.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost/&lt;GetEstimatedRemainingWork&gt;d__11))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost/&lt;GetEstimatedRemainingWork&gt;d__26))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -227,27 +161,40 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
+    <Member MemberName="HostName">
+      <MemberSignature Language="C#" Value="public string HostName { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string HostName" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost.HostName" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property HostName As String" />
+      <MemberSignature Language="F#" Value="member this.HostName : string" Usage="Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost.HostName" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Documents.ChangeFeedProcessor</AssemblyName>
+        <AssemblyVersion>1.3.3.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the host name, which is a unique name for the instance.</summary>
+        <value>The host name.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="RegisterObserverAsync&lt;T&gt;">
       <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task RegisterObserverAsync&lt;T&gt; () where T : Microsoft.Azure.Documents.ChangeFeedProcessor.IChangeFeedObservernew();" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task RegisterObserverAsync&lt;.ctor (class Microsoft.Azure.Documents.ChangeFeedProcessor.IChangeFeedObserver) T&gt;() cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost.RegisterObserverAsync``1" />
       <MemberSignature Language="VB.NET" Value="Public Function RegisterObserverAsync(Of T As {IChangeFeedObserverNew}) () As Task" />
       <MemberSignature Language="F#" Value="member this.RegisterObserverAsync : unit -&gt; System.Threading.Tasks.Task (requires 'T :&gt; Microsoft.Azure.Documents.ChangeFeedProcessor.IChangeFeedObserver and 'T : (new : unit -&gt; 'T))" Usage="changeFeedEventHost.RegisterObserverAsync " />
-      <MemberSignature Language="C++ CLI" Value="public:&#xA;generic &lt;typename T&gt;&#xA; where T : Microsoft::Azure::Documents::ChangeFeedProcessor::IChangeFeedObservergcnew() System::Threading::Tasks::Task ^ RegisterObserverAsync();" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Documents.ChangeFeedProcessor</AssemblyName>
-        <AssemblyVersion>1.0.0.0</AssemblyVersion>
-        <AssemblyVersion>1.3.0.0</AssemblyVersion>
-        <AssemblyVersion>1.3.1.0</AssemblyVersion>
-        <AssemblyVersion>1.3.2.0</AssemblyVersion>
-        <AssemblyVersion>1.17.0.0</AssemblyVersion>
-        <AssemblyVersion>2.0.1.0</AssemblyVersion>
-        <AssemblyVersion>2.0.2.0</AssemblyVersion>
+        <AssemblyVersion>1.3.3.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost/&lt;RegisterObserverAsync&gt;d__8`1))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost/&lt;RegisterObserverAsync&gt;d__24`1))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -276,21 +223,14 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost.RegisterObserverFactoryAsync(Microsoft.Azure.Documents.ChangeFeedProcessor.IChangeFeedObserverFactory)" />
       <MemberSignature Language="VB.NET" Value="Public Function RegisterObserverFactoryAsync (factory As IChangeFeedObserverFactory) As Task" />
       <MemberSignature Language="F#" Value="member this.RegisterObserverFactoryAsync : Microsoft.Azure.Documents.ChangeFeedProcessor.IChangeFeedObserverFactory -&gt; System.Threading.Tasks.Task" Usage="changeFeedEventHost.RegisterObserverFactoryAsync factory" />
-      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Threading::Tasks::Task ^ RegisterObserverFactoryAsync(Microsoft::Azure::Documents::ChangeFeedProcessor::IChangeFeedObserverFactory ^ factory);" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Documents.ChangeFeedProcessor</AssemblyName>
-        <AssemblyVersion>1.0.0.0</AssemblyVersion>
-        <AssemblyVersion>1.3.0.0</AssemblyVersion>
-        <AssemblyVersion>1.3.1.0</AssemblyVersion>
-        <AssemblyVersion>1.3.2.0</AssemblyVersion>
-        <AssemblyVersion>1.17.0.0</AssemblyVersion>
-        <AssemblyVersion>2.0.1.0</AssemblyVersion>
-        <AssemblyVersion>2.0.2.0</AssemblyVersion>
+        <AssemblyVersion>1.3.3.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost/&lt;RegisterObserverFactoryAsync&gt;d__9))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost/&lt;RegisterObserverFactoryAsync&gt;d__25))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -315,21 +255,14 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost.UnregisterObserversAsync" />
       <MemberSignature Language="VB.NET" Value="Public Function UnregisterObserversAsync () As Task" />
       <MemberSignature Language="F#" Value="member this.UnregisterObserversAsync : unit -&gt; System.Threading.Tasks.Task" Usage="changeFeedEventHost.UnregisterObserversAsync " />
-      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Threading::Tasks::Task ^ UnregisterObserversAsync();" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Documents.ChangeFeedProcessor</AssemblyName>
-        <AssemblyVersion>1.0.0.0</AssemblyVersion>
-        <AssemblyVersion>1.3.0.0</AssemblyVersion>
-        <AssemblyVersion>1.3.1.0</AssemblyVersion>
-        <AssemblyVersion>1.3.2.0</AssemblyVersion>
-        <AssemblyVersion>1.17.0.0</AssemblyVersion>
-        <AssemblyVersion>2.0.1.0</AssemblyVersion>
-        <AssemblyVersion>2.0.2.0</AssemblyVersion>
+        <AssemblyVersion>1.3.3.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost/&lt;UnregisterObserversAsync&gt;d__10))</AttributeName>
+          <AttributeName>System.Runtime.CompilerServices.AsyncStateMachine(typeof(Microsoft.Azure.Documents.ChangeFeedProcessor.ChangeFeedEventHost/&lt;UnregisterObserversAsync&gt;d__27))</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -337,7 +270,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Asynchronously shuts down the host instance. This method maintains the leases on all partitions currently held, and enables each
+        <summary>Asynchronously shuts down the host instance. This method maintains the leases on all partitions currently held, and enables each 
             host instance to shut down cleanly by invoking the method with object.</summary>
         <returns>A task that indicates the host instance has stopped.</returns>
         <remarks>To be added.</remarks>
