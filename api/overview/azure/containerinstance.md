@@ -7,8 +7,6 @@ ms.author: marsma
 manager: jeconnoc
 ms.date: 06/11/2018
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: dcontainer-instances
 ms.custom: devcenter, svc-overview
