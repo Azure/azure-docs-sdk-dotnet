@@ -6,8 +6,6 @@ ms.author: routlaw
 manager: angerobe
 ms.date: 04/16/2018
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: event-grid
 ms.custom: devcenter
