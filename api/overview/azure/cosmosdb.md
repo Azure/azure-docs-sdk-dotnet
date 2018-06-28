@@ -49,7 +49,7 @@ using Microsoft.Azure.Documents.Client;
 
 DocumentClient client = new DocumentClient(endpointUri, authKeyString);
 Uri documentUri = UriFactory.CreateDocumentUri("MyDatabaseName", "MyCollectionName", "DocumentId");
-SomeClass myObject = client.ReadDocumentAsync<SomeClass>(documentUri).ToString()).Result;
+SomeClass myObject = client.ReadDocumentAsync<SomeClass>(documentUri).ToString().Result;
 ```
 
 > [!div class="nextstepaction"]
