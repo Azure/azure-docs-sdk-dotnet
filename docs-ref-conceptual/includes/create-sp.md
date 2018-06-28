@@ -19,7 +19,8 @@ CurrentStorageAccount :
 
 [Create a service principal using PowerShell](/powershell/azure/create-azure-service-principal-azureps) as shown below. 
 
->[!NOTE] If the *New-AzureRmADServicePrincipal* cmdlet returns "Another object with the same value for property identifierUris already exists," there is already a service principal by that name in your tenant. Use a different value for the **DisplayName** parameter. 
+> [!NOTE]
+> If the `New-AzureRmADServicePrincipal` cmdlet below returns "Another object with the same value for property identifierUris already exists," there is already a service principal by that name in your tenant. Use a different value for the **DisplayName** parameter. 
 
 ```powershell
 # Create the service principal (use a strong password)
