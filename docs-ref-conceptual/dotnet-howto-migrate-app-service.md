@@ -15,7 +15,7 @@ ms.custom: devcenter
 
 # Migrate your .NET web app or service to Azure App Service 
 
-[App Service](https://docs.microsoft.com/azure/app-service/app-service-web-overview#why-use-web-apps) is a fully-managed compute platform service that is optimized for hosting scalable websites and web applications. This document provides information on how to lift-and-shift an existing application to Azure App Service, modifications to consider, and additional resources for moving to the cloud.
+[Azure App Service](https://docs.microsoft.com/azure/app-service/app-service-web-overview#why-use-web-apps) is a fully-managed compute platform that's optimized to host scalable web apps. This article provides information on how to lift-and-shift an existing application to Azure App Service, modifications to consider, and additional resources for moving to the cloud.
 
 Ready to get started? [Publish your ASP.NET + SQL application to Azure App Service](https://go.microsoft.com/fwlink/?linkid=863214).
 
@@ -112,4 +112,4 @@ If your app cannot be migrated directly to App Service, consider App Service usi
 ## Next steps
 
 > [!div class="nextstepaction"]
-> [Migrate an ASP.NET Web application to Azure App Service](https://aka.ms/azure-webapp-migrate)
+> [Migrate an ASP.NET web application to Azure App Service](https://aka.ms/azure-webapp-migrate)

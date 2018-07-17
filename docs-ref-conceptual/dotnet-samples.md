@@ -1,21 +1,21 @@
 ---
-title: Azure C# code samples for .NET
-description: C# code samples for .NET and Azure.
+title: Azure C# code samples for .NET and .NET Core
+description: C# code samples for Azure using .NET, .NET Core, ASP.NET, and ASP.NET Core.
 layout: LandingPage
 ms.topic: landing-page
 author: camsoper
 ms.author: casoper
 manager: wpickett
-ms.date: 04/12/2018
+ms.date: 07/17/2018
 ms.topic: reference
 ms.technology: azure
 ms.devlang: dotnet
 ms.service: multiple
 ms.custom: devcenter
 ---
-# Azure C# code samples for .NET
+# Azure C# code samples for .NET and .NET Core
 
-These are the top samples, tutorials, and examples we recommend for getting started with Azure using C# and .NET.
+These are the top samples, tutorials, and examples we recommend for getting started with Azure using C# and .NET and .NET Core.
 
 <div id="main" class="v2">
     <div class="container">
@@ -31,8 +31,8 @@ These are the top samples, tutorials, and examples we recommend for getting star
                                     </div>
                                 </div>
                                 <div class="cardText">
-                                    <h3>Basic website</h3>
-                                    <p>Learn how to create a simple ASP.NET Core website that stores information in a SQL backend.</p>
+                                    <h3>Basic web app</h3>
+                                    <p>Learn how to create a simple ASP.NET Core web app on Azure App Service that stores information in an Azure SQL backend.</p>
                                 </div>
                             </div>
                         </a>
@@ -108,7 +108,7 @@ These are the top samples, tutorials, and examples we recommend for getting star
                                 </div>
                                 <div class="cardText">
                                     <h3>Analyze images with AI</h3>
-                                    <p>Shows how to use Cognitive Services to detect visual features in images.</p>
+                                    <p>Shows how to use Azure Cognitive Services to detect visual features in images.</p>
                                 </div>
                             </div>
                         </a>
@@ -127,13 +127,13 @@ These are the top samples, tutorials, and examples we recommend for getting star
                                 </div>
                                 <div class="cardText">
                                     <h3>Cloud Database</h3>
-                                    <p>Learn how to do basic searches, creation and editing in a modern cloud database using Cosmos DB.</p>
+                                    <p>Learn how to do basic searches, creation and editing in a modern cloud database using Azure Cosmos DB.</p>
                                 </div>
                             </div>
                         </a>
                     </div>
                 </div>
-            </li>             
+            </li>
         </ul>
     </div>
 </div>
