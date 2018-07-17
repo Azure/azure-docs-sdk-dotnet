@@ -1,10 +1,10 @@
 ---
-title: Tutorials for .NET apps in Azure
-description: Tutorials to build and add features to your web and mobile .NET apps using Azure services.
+title: Tutorials for .NET and .NET Core apps in Azure
+description: Tutorials to build and add features to your web and mobile apps using Azure services and .NET, .NET Core, ASP.NET, and ASP.NET Core.
 author: camsoper
 ms.author: casoper
 manager: wpickett
-ms.date: 10/19/2017
+ms.date: 07/17/2018
 ms.topic: reference
 ms.technology: azure
 ms.devlang: dotnet
@@ -12,7 +12,7 @@ ms.service: multiple
 ms.custom: devcenter
 ---
 
-# Tutorials for building .NET apps in Azure
+# Tutorials for building .NET and .NET Core apps in Azure
 
 The following table links to in-depth tutorials for building .NET apps running on Azure.
 
@@ -21,7 +21,7 @@ For sample source code, see the list of [Azure service samples](https://azure.mi
 | | |
 |---|---|
 | **Web Apps**||
-| [Create an ASP.NET web app with Azure SQL Database][1] | Create a simple web application that stores data in Azure SQL Database. | 
+| [Create an ASP.NET web app with Azure SQL Database][1] | Create a simple web application that stores data in Azure SQL Database. |
 | **API Apps**||
 | [Create and deploy a Web API][3] | Create and deploy a .NET Web API with Swagger. | 
 | **Azure Container Service** ||
@@ -29,10 +29,10 @@ For sample source code, see the list of [Azure service samples](https://azure.mi
 | **SQL Database** ||
 | [Use .NET to connect and query data][5] | Use ADO.NET to connect to an Azure SQL database, and then use Transact-SQL statements to query, insert, update, and delete data in the database | 
 | **Azure Database for PostgreSQL** ||
-| [Use .NET to connect and query data][6] | Use SQL statements to query, insert, update, and delete data in the database. | 
+| [Use .NET to connect and query data][6] | Use SQL statements to query, insert, update, and delete data in the database. |
 | **Azure Cosmos DB** ||
-| [Getting started with the Azure Cosmos DB SQL API][7] | Create a simple console application with the Azure Cosmos DB SQL API. | 
-| [Create an ASP.NET web app with the Azure Cosmos DB SQL API][8] | Create a web application with the Azure Cosmos DB SQL API. | 
+| [Getting started with the Azure Cosmos DB SQL API][7] | Create a simple console application with the Azure Cosmos DB SQL API. |
+| [Create an ASP.NET web app with the Azure Cosmos DB SQL API][8] | Create a web application with the Azure Cosmos DB SQL API. |
 
 [1]: /azure/app-service-web/app-service-web-tutorial-dotnet-sqldatabase
 [2]: /azure/cosmos-db/sql-api-dotnet-application
