@@ -1,11 +1,11 @@
 ---
-title: Tools for Azure .NET developers
-description: Get the tools to start using the Azure .NET libraries from a Windows, Linux, or Mac environment.
+title: Tools for Azure .NET and .NET Core developers
+description: Get the tools to start using the Azure .NET libraries from a Windows, Linux, and Mac environment.
 keywords: Azure .NET, SDK, Azure .NET API Reference, Azure .NET class library
 author: camsoper
 ms.author: casoper
 manager: wpickett
-ms.date: 10/19/2017
+ms.date: 07/17/2018
 ms.topic: reference
 ms.technology: azure
 ms.devlang: dotnet
@@ -13,9 +13,9 @@ ms.service: multiple
 ms.custom: devcenter
 ---
 
-# Tools for .NET Azure developers
+# Tools for .NET and .NET Core Azure developers
 
-Whatever your operating system, we have a great set of tools to help you develop using .NET on Azure.
+Whatever your operating system, we have a great set of tools to help you develop on Azure using .NET, .NET Core, ASP.NET and ASP.NET Core.
 
 ## [Windows](#tab/windows)
 
@@ -39,7 +39,6 @@ Still using Visual Studio 2015?  [click here for installation instructions](dotn
 > [!div class="nextstepaction"]
 > [Download Visual Studio 2017](https://www.visualstudio.com/downloads/)
 
-
 ### Step 2: Install the two Azure workloads
 
 After launching the Visual Studio 2017 installer, make sure the Azure and ASP.NET web development workloads are checked.
@@ -48,8 +47,7 @@ After launching the Visual Studio 2017 installer, make sure the Azure and ASP.NE
 
 ### Step 3: Develop with .NET on Azure
 
-Get started by [deploying your first .NET app on Azure](https://docs.microsoft.com/azure/app-service-web/app-service-web-get-started-dotnet).
-
+Get started by [deploying your first ASP.NET Core web app on Azure App Service](https://docs.microsoft.com/azure/app-service-web/app-service-web-get-started-dotnet).
 
 ## [macOS](#tab/macos)
 <table>
@@ -62,7 +60,6 @@ Get started by [deploying your first .NET app on Azure](https://docs.microsoft.c
     </td>
   </tr>
 </table>
-
 
 ### Step 1: Download Visual Studio for Mac
 
@@ -77,16 +74,16 @@ During install, Azure tools are already enabled by default.
 
 <img src="https://docs.microsoft.com/en-us/visualstudio/products/images/vs-code.svg" width="50" height="50"></img>
 
-### Step 1: Download .NET Core SDK
+### Step 1: Download the .NET Core SDK
 
-The core SDK and command-line tools for .NET apps.
+The SDK and command-line tools for .NET Core apps.
 
 > [!div class="nextstepaction"]
 > [Download .NET Core SDK](https://www.microsoft.com/net/core)
 
 ### Step 2: Visual Studio Code
 
-Edit and debug .NET apps on any OS.
+Edit and debug .NET Core apps on any operating system: Windows, Mac, and Linux.
 
 > [!div class="nextstepaction"]
 > [Download Visual Studio Code](https://code.visualstudio.com)
