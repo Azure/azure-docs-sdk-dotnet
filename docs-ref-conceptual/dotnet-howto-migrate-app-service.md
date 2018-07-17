@@ -55,14 +55,14 @@ Some elements and attributes are not defined in the Azure App Service IIS schema
 In Azure App Service each Web App and all of the applications under it run in the same application pool. Consider establishing a single application pool with common settings or creating a separate Web App for each application.
 
 ## COM and COM+ components  
-Azure App Service does not allow the registration of COM components on the platform. If your site(s) or application(s) make use of any COM components, these would need to be rewritten in managed code and deployed with the site or application.  
+Azure App Service does not allow the registration of COM components on the platform. If your app makes use of any COM components, these would need to be rewritten in managed code and deployed with the site or application.  
 
 ## Physical directories 
 Azure App Service does not allow physical drive access. You may need to use a [Azure Files]((https://docs.microsoft.com/azure/storage/files/storage-files-introduction) to access files via SMB. [Azure Blob Storage]((https://docs.microsoft.com/azure/storage/blobs/storage-blobs-introduction) can store files for access via HTTPS. 
 
 ## On-premise resources
 
-Verify access to on-premise resources as these will likely need to be migrated or changed. The following are options for mitigating access to on-premise resources:
+Verify access to on-premise resources as these may need to be migrated or changed. The following are options for mitigating access to on-premise resources:
 
 * Create a VPN connecting App Service to on-premise resources using [Azure Virtual Networks](https://docs.microsoft.com/en-us/azure/app-service/web-sites-integrate-with-vnet).
 * Securely expose on-premise services to the cloud without firewall changes using [Azure Relay](https://docs.microsoft.com/en-us/azure/service-bus-relay/relay-what-is-it).
@@ -70,9 +70,9 @@ Verify access to on-premise resources as these will likely need to be migrated o
 * Use platform-as-a-service offerings in the cloud to reduce dependecies. For example, rather than connect to an on-premise mail server, consider using [SendGrid](https://docs.microsoft.com/en-us/azure/sendgrid-dotnet-how-to-send-email). 
 
 ## ISAPI Filters  
-Azure App Service can support the use of ISAPI Filters, however, the DLL(s) must be deployed with your site and registered via the web.config.  
+Azure App Service can support the use of ISAPI Filters, however, the ISAPI DLL must be deployed with your site and registered via web.config.  
 
-## HTTPS bindings  
+## HTTPS bindings and SSL 
 HTTPS bindings will not be migrated, nor will the SSL certificates associated with your web sites. [SSL certificates can be manually uploaded](https://docs.microsoft.com/azure/app-service/app-service-web-tutorial-custom-ssl) after site migration is completed, however.  
 
 ## SharePoint and FrontPage 
