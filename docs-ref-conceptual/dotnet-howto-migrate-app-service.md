@@ -38,7 +38,7 @@ WSHttpContextBinding |
 
 Azure App Service supports anonymous authentication by default and Forms authentication when intended. Windows authentication can be used by integrating with Azure Active Directory and ADFS only. [Learn more about how to integrate your on-premises directories with Azure Active Directory](https://docs.microsoft.com/azure/active-directory/connect/active-directory-aadconnect).
 
-## Usage of assemblies in the GAC (Global Assembly Cache) 
+## Assemblies in the GAC (Global Assembly Cache) 
 
 This isn't supported. Consider local copy assemblies to \bin. Custom .MSIs installed on the server (e.g. PDF generators, etc.) cannot be used.  
 
@@ -49,13 +49,10 @@ Everything traditionally configured via applicationHost.config in your applicati
 IIS5 Compatibility Mode is not supported. In Azure App Service each Web App and all of the applications under it run in the same worker process with a specific set of [application pool](http://technet.microsoft.com/en-us/library/cc735247(v=WS.10).aspx).
 
 ### IIS7+ Schema Compliance:  
-One or more elements and/or attributes are being used which are not defined in Azure App Service IIS schema. Consider using [XDT transforms](http://azure.microsoft.com/documentation/articles/web-sites-transform-extend/).
+Some elements and attributes are not defined in the Azure App Service IIS schema. If you encounter issues, consider using [XDT transforms](http://azure.microsoft.com/documentation/articles/web-sites-transform-extend/).
 
 ### Single Application Pool Per Site  
-In Azure App Service each Web App and all of the applications under it, run in the same application pool. Consider establishing a single application pool with common settings or creating a separate Web App for each application.
-
-## SQL Database configuration
-If your application is using an on-premises database, you have several options for your web app. [Read more about migrating SQL databases to Azure](https://go.microsoft.com/fwlink/?linkid=863217).
+In Azure App Service each Web App and all of the applications under it run in the same application pool. Consider establishing a single application pool with common settings or creating a separate Web App for each application.
 
 ## COM and COM+ components  
 Azure App Service does not allow the registration of COM components on the platform. If your site(s) or application(s) make use of any COM components, these would need to be rewritten in managed code and deployed with the site or application.  
@@ -65,21 +62,21 @@ Azure App Service does not allow physical drive access. You may need to use a [A
 
 ## On-premise resources
 
-Verify access to on-premise resources as these will likely need to be migrated/changed. The following are options for mitigating access to on-premise resources:
+Verify access to on-premise resources as these will likely need to be migrated or changed. The following are options for mitigating access to on-premise resources:
 
 * Create a VPN connecting App Service to on-premise resources using [Azure Virtual Networks](https://docs.microsoft.com/en-us/azure/app-service/web-sites-integrate-with-vnet).
 * Securely expose on-premise services to the cloud without firewall changes using [Azure Relay](https://docs.microsoft.com/en-us/azure/service-bus-relay/relay-what-is-it).
-* Migrate certain other dependencies, such as a [SQL database](https://docs.microsoft.com/azure/sql-database/sql-database-cloud-migrate), to Azure.
+* Migrate certain other dependencies, such as a [SQL database](https://go.microsoft.com/fwlink/?linkid=863217), to Azure.
 * Use platform-as-a-service offerings in the cloud to reduce dependecies. For example, rather than connect to an on-premise mail server, consider using [SendGrid](https://docs.microsoft.com/en-us/azure/sendgrid-dotnet-how-to-send-email). 
 
 ## ISAPI Filters  
 Azure App Service can support the use of ISAPI Filters, however, the DLL(s) must be deployed with your site and registered via the web.config.  
 
 ## HTTPS bindings  
-HTTPS bindings will not be migrated, nor will the SSL certificates associated with your web sites. SSL Certificates can be manually uploaded after site migration is completed, however.  
+HTTPS bindings will not be migrated, nor will the SSL certificates associated with your web sites. [SSL certificates can be manually uploaded](https://docs.microsoft.com/azure/app-service/app-service-web-tutorial-custom-ssl) after site migration is completed, however.  
 
 ## SharePoint and FrontPage 
-SharePoint and FrontPage Server Extensions (FPSE), are not supported.
+SharePoint and FrontPage Server Extensions (FPSE) are not supported.
 
 ## Web site size  
 Free sites have a size limit of 1 GB of content. If your site is greater than 1 GB, you must upgrade to a paid SKU. See [App Service pricing](https://azure.microsoft.com/pricing/details/app-service/windows/). 
@@ -94,14 +91,13 @@ AAD does not work with free apps. To use AAD, you must upgrade the app SKU. See 
 Your current on-premises solutions for monitoring and diagnostics are unlikely to work in the cloud. However, Azure provides tools for logging, monitoring, and diagnostics so that you can identify and debug issues with web apps. You can easily enable diagnostics for your web app in its configuration, and you can view the logs recorded in Azure Application Insights. [Learn more about enabling diagnostics logging for web apps](https://docs.microsoft.com/azure/app-service/web-sites-enable-diagnostic-log).
 
 ## Connection Strings and application settings
-One option for keeping information safe is to use [Azure KeyVault](https://docs.microsoft.com/azure/key-vault/), a service that securely stores sensitive information used in your application. Alternatively, you can store this data as an App Service setting.
+Consider using [Azure KeyVault](https://docs.microsoft.com/azure/key-vault/), a service that securely stores sensitive information used in your application. Alternatively, you can store this data as an App Service setting.
 
 ## DNS
-You may need to update DNS configurations based on the requirements of your application. These DNS settings can be configured in the App Service [custom domain settings](https://docs.microsoft.com/azure/app-service/app-service-web-tutorial-custom-domain). Another factor to consider is [binding an existing custom SSL certificate](https://docs.microsoft.com/azure/app-service/app-service-web-tutorial-custom-ssl).
+You may need to update DNS configurations based on the requirements of your application. These DNS settings can be configured in the App Service [custom domain settings](https://docs.microsoft.com/azure/app-service/app-service-web-tutorial-custom-domain). 
 
 ## Azure App Service with Windows Containers
-
-If your app cannot be migrated directly to App Service, consider App Service using Windows Containers (Link TBD), which enable access to the GAC, COM components, MSIs, full access to .NET FX APIs, DirectX, and more.
+If your app cannot be migrated directly to App Service, consider App Service using Windows Containers (%TODO%: Link), which enables usage of the GAC, COM components, MSIs, full access to .NET FX APIs, DirectX, and more.
 
 ## Additional Reading
 
