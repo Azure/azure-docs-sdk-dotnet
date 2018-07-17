@@ -15,7 +15,7 @@ ms.custom: devcenter
 
 # Migrate your .NET web app or service to Azure App Service 
 
-Most ASP.NET websites (Webforms, MVC) and services (Web API, WCF) can move directly to Azure App Service with no changes. Some may need minor changes while others may need some refactoring. This document is a compatibility checklist to help you determine if you're ready.
+Most ASP.NET websites (Webforms, MVC) and services (Web API, WCF) can move directly to Azure App Service with no changes. Some may need minor changes while others may need some refactoring.
 
 ## Port Bindings
 
