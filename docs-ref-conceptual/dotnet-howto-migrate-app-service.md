@@ -58,7 +58,7 @@ In Azure App Service each Web App and all of the applications under it run in th
 Azure App Service does not allow the registration of COM components on the platform. If your app makes use of any COM components, these would need to be rewritten in managed code and deployed with the site or application.  
 
 ## Physical directories 
-Azure App Service does not allow physical drive access. You may need to use a [Azure Files]((https://docs.microsoft.com/azure/storage/files/storage-files-introduction) to access files via SMB. [Azure Blob Storage]((https://docs.microsoft.com/azure/storage/blobs/storage-blobs-introduction) can store files for access via HTTPS. 
+Azure App Service does not allow physical drive access. You may need to use a [Azure Files](https://docs.microsoft.com/azure/storage/files/storage-files-introduction) to access files via SMB. [Azure Blob Storage](https://docs.microsoft.com/azure/storage/blobs/storage-blobs-introduction) can store files for access via HTTPS. 
 
 ## On-premise resources
 
