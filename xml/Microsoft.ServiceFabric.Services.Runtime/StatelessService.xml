@@ -14,7 +14,7 @@
   <Interfaces />
   <Docs>
     <summary>
-            Represents the Microsoft Service Fabric based stateless reliable service base class. 
+            Represents the Microsoft Service Fabric based stateless reliable service base class.
             Derive from this class to implement a Microsoft Service Fabric based stateless reliable service.
             </summary>
     <remarks>To be added.</remarks>
@@ -35,11 +35,9 @@
         <Parameter Name="serviceContext" Type="System.Fabric.StatelessServiceContext" />
       </Parameters>
       <Docs>
-        <param name="serviceContext">
-            A <see cref="T:System.Fabric.StatelessServiceContext" /> that describes the service context.
-            </param>
+        <param name="serviceContext">A <see cref="T:System.Fabric.StatelessServiceContext" /> that describes the context in which service is created.</param>
         <summary>
-            Creates a new <see cref="T:Microsoft.ServiceFabric.Services.Runtime.StatelessService" /> instance.
+            Initializes a new instance of the <see cref="T:Microsoft.ServiceFabric.Services.Runtime.StatelessService" /> class.
             </summary>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException" />
@@ -91,7 +89,7 @@
       <Docs>
         <summary>
             Override this method to supply the communication listeners for the service instance. The endpoints returned by the communication listener's
-            are stored as a JSON string of ListenerName, Endpoint string pairs like 
+            are stored as a JSON string of ListenerName, Endpoint string pairs like
             {"Endpoints":{"Listener1":"Endpoint1","Listener2":"Endpoint2" ...}}
             <para>
             For information about Reliable Services life cycle please see
@@ -241,10 +239,10 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Service partition to which current service instance belongs. 
+            Gets service partition that this service instance belongs to.
             </summary>
         <value>
-            An <see cref="T:System.Fabric.IStatelessServicePartition" /> that represents the 
+            An <see cref="T:System.Fabric.IStatelessServicePartition" /> that represents the
             partition to which this service replica belongs.
             </value>
         <remarks>To be added.</remarks>
@@ -284,15 +282,15 @@
         <remarks>
             Please ensure you follow these guidelines when overriding <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatelessService.RunAsync(System.Threading.CancellationToken)" />:
             <list type="bullet"><item><description>
-                    Make sure <paramref name="cancellationToken" /> passed to <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatelessService.RunAsync(System.Threading.CancellationToken)" /> is honored and once 
+                    Make sure <paramref name="cancellationToken" /> passed to <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatelessService.RunAsync(System.Threading.CancellationToken)" /> is honored and once
                     it has been signaled, <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatelessService.RunAsync(System.Threading.CancellationToken)" /> exits gracefully as soon as possible. Please note that
-                    if <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatelessService.RunAsync(System.Threading.CancellationToken)" /> has finished its intended work, it does not need to wait for 
+                    if <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatelessService.RunAsync(System.Threading.CancellationToken)" /> has finished its intended work, it does not need to wait for
                     <paramref name="cancellationToken" /> to be signaled and can return gracefully.
                     </description></item><item><description>
                     Service Fabric runtime does not handle all exception(s) escaping from <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatelessService.RunAsync(System.Threading.CancellationToken)" />. If an unhandled
                     exception escapes from <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatelessService.RunAsync(System.Threading.CancellationToken)" />, then Service Fabric runtime takes following action(s):
                     <list type="bullet"><item><description>
-                            If a <see cref="T:System.Fabric.FabricException" /> (or one of its derived exception) escapes from <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatelessService.RunAsync(System.Threading.CancellationToken)" />, 
+                            If a <see cref="T:System.Fabric.FabricException" /> (or one of its derived exception) escapes from <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatelessService.RunAsync(System.Threading.CancellationToken)" />,
                             Service Fabric runtime will drop this service instance and a new instance will be created. A health warning
                             will be appear in Service Fabric Explorer containing details about unhandled exception.
                             </description></item><item><description>
@@ -302,7 +300,7 @@
                             </description></item><item><description>
                             If an <see cref="T:System.OperationCanceledException" /> escapes from <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatelessService.RunAsync(System.Threading.CancellationToken)" /> and Service Fabric runtime
                             has NOT requested cancellation by signaling <paramref name="cancellationToken" /> passed to <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatelessService.RunAsync(System.Threading.CancellationToken)" />,
-                            the process that is hosting this service instance is brought down. This will impact all other service instances 
+                            the process that is hosting this service instance is brought down. This will impact all other service instances
                             that are hosted by the same process. The details about unhandled exceptions can be viewed in Windows Event Viewer.
                             </description></item><item><description>
                             If an exception of any other type escapes from <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatelessService.RunAsync(System.Threading.CancellationToken)" /> then the process that is hosting this
