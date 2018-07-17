@@ -11,7 +11,6 @@
   <Base>
     <BaseTypeName>System.Attribute</BaseTypeName>
   </Base>
-  <Interfaces />
   <Attributes>
     <Attribute FrameworkAlternate="azure-dotnet">
       <AttributeName>System.AttributeUsage(System.AttributeTargets.Assembly)</AttributeName>
@@ -19,32 +18,32 @@
   </Attributes>
   <Docs>
     <summary>
-            This is a base type for attribute that sets the default service remoting provider to use for 
+            This is a base type for attribute that sets the default service remoting provider to use for
             remoting the service interfaces defined and used in the assembly.
             </summary>
     <remarks>
       <para>
                 On service side, implementation of this attribute is looked up by
-                <see cref="M:Microsoft.ServiceFabric.Services.Remoting.Runtime.ServiceRemotingExtensions.CreateServiceRemotingListener``1(``0,System.Fabric.StatefulServiceContext)" /> and
-                <see cref="M:Microsoft.ServiceFabric.Services.Remoting.Runtime.ServiceRemotingExtensions.CreateServiceRemotingListener``1(``0,System.Fabric.StatelessServiceContext)" /> 
-                methods on the runtime to create a default <see cref="T:Microsoft.ServiceFabric.Services.Remoting.Runtime.IServiceRemotingListener" /> for the stateful and stateless services. 
+                <see cref="M:Microsoft.ServiceFabric.Services.Remoting.Runtime.ServiceRemotingExtensions.CreateServiceRemotingReplicaListeners``1(``0)" /> and
+                <see cref="M:Microsoft.ServiceFabric.Services.Remoting.Runtime.ServiceRemotingExtensions.CreateServiceRemotingInstanceListeners``1(``0)" />
+                methods on the runtime to create a default <see cref="T:Microsoft.ServiceFabric.Services.Remoting.Runtime.IServiceRemotingListener" /> for the stateful and stateless services.
                 </para>
       <para>
-                On client side, implementation of this attribute is looked up by 
-                <see cref="T:Microsoft.ServiceFabric.Services.Remoting.V1.Client.ServiceProxyFactory" /> constructor to create a default
-                <see cref="T:Microsoft.ServiceFabric.Services.Remoting.V1.Client.IServiceRemotingClientFactory" /> when it is not specified.
+                On client side, implementation of this attribute is looked up by
+                <see cref="T:Microsoft.ServiceFabric.Services.Remoting.V2.Client.ServiceProxyFactory" /> constructor to create a default
+                <see cref="T:Microsoft.ServiceFabric.Services.Remoting.V2.Client.IServiceRemotingClientFactory" /> when it is not specified.
                 </para>
       <para>
                 Note that on client side
-                <see cref="M:Microsoft.ServiceFabric.Services.Remoting.Client.ServiceProxy.Create``1(System.Uri,Microsoft.ServiceFabric.Services.Client.ServicePartitionKey,Microsoft.ServiceFabric.Services.Communication.Client.TargetReplicaSelector,System.String)" /> 
-                method create a default <see cref="T:Microsoft.ServiceFabric.Services.Remoting.V1.Client.ServiceProxyFactory" /> once and hence the provider lookup happens
+                <see cref="M:Microsoft.ServiceFabric.Services.Remoting.Client.ServiceProxy.Create``1(System.Uri,Microsoft.ServiceFabric.Services.Client.ServicePartitionKey,Microsoft.ServiceFabric.Services.Communication.Client.TargetReplicaSelector,System.String)" />
+                method create a default <see cref="T:Microsoft.ServiceFabric.Services.Remoting.V2.Client.ServiceProxyFactory" /> once and hence the provider lookup happens
                 only for the first time, after which the same provider is used.
                 </para>
       <para>
                 The order in which this attribute is looked up is as follows:
                 <list type="number"><item>
                         In the entry <see cref="T:System.Reflection.Assembly" /> obtained by calling method <see cref="M:System.Reflection.Assembly.GetEntryAssembly" /></item><item>
-                        In the <see cref="T:System.Reflection.Assembly" /> that defines the remote interface for which listener or proxy is being created. 
+                        In the <see cref="T:System.Reflection.Assembly" /> that defines the remote interface for which listener or proxy is being created.
                     </item></list></para>
     </remarks>
   </Docs>
@@ -59,10 +58,9 @@
         <AssemblyName>Microsoft.ServiceFabric.Services.Remoting</AssemblyName>
         <AssemblyVersion>6.0.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <Parameters />
       <Docs>
         <summary>
-            Initializes a new instance of the ServiceRemotingProviderAttribute class.
+            Initializes a new instance of the <see cref="T:Microsoft.ServiceFabric.Services.Remoting.ServiceRemotingProviderAttribute" /> class.
             </summary>
         <remarks>To be added.</remarks>
       </Docs>
@@ -87,7 +85,7 @@
       <Docs>
         <param name="callbackClient">Client implementation where the callbacks should be dispatched.</param>
         <summary>
-            Creates a service remoting client factory that can be used by the 
+            Creates a service remoting client factory that can be used by the
             <see cref="T:Microsoft.ServiceFabric.Services.Remoting.V1.Client.ServiceProxyFactory" /> to create a proxy for the remoted interface of the service.
             </summary>
         <returns>An <see cref="T:Microsoft.ServiceFabric.Services.Remoting.V1.Client.IServiceRemotingClientFactory" />.</returns>
@@ -114,8 +112,8 @@
       <Docs>
         <param name="callbackMessageHandler">Client implementation where the callbacks should be dispatched.</param>
         <summary>
-            Creates a V2 service remoting client factory that can be used by the 
-            <see cref="T:Microsoft.ServiceFabric.Services.Remoting.V1.Client.ServiceProxyFactory" /> to create a proxy for the remoted interface of the service.
+            Creates a V2 service remoting client factory that can be used by the
+            <see cref="T:Microsoft.ServiceFabric.Services.Remoting.V2.Client.ServiceProxyFactory" /> to create a proxy for the remoted interface of the service.
             </summary>
         <returns>An <see cref="T:Microsoft.ServiceFabric.Services.Remoting.V2.Client.IServiceRemotingClientFactory" />.</returns>
         <remarks>To be added.</remarks>
@@ -148,72 +146,67 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="CreateServiceRemotingListenerV2">
-      <MemberSignature Language="C#" Value="public abstract Microsoft.ServiceFabric.Services.Remoting.Runtime.IServiceRemotingListener CreateServiceRemotingListenerV2 (System.Fabric.ServiceContext serviceContext, Microsoft.ServiceFabric.Services.Remoting.IService serviceImplementation);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.ServiceFabric.Services.Remoting.Runtime.IServiceRemotingListener CreateServiceRemotingListenerV2(class System.Fabric.ServiceContext serviceContext, class Microsoft.ServiceFabric.Services.Remoting.IService serviceImplementation) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.ServiceFabric.Services.Remoting.ServiceRemotingProviderAttribute.CreateServiceRemotingListenerV2(System.Fabric.ServiceContext,Microsoft.ServiceFabric.Services.Remoting.IService)" />
-      <MemberSignature Language="F#" Value="abstract member CreateServiceRemotingListenerV2 : System.Fabric.ServiceContext * Microsoft.ServiceFabric.Services.Remoting.IService -&gt; Microsoft.ServiceFabric.Services.Remoting.Runtime.IServiceRemotingListener" Usage="serviceRemotingProviderAttribute.CreateServiceRemotingListenerV2 (serviceContext, serviceImplementation)" />
+    <Member MemberName="CreateServiceRemotingListeners">
+      <MemberSignature Language="C#" Value="public abstract System.Collections.Generic.Dictionary&lt;string,Func&lt;System.Fabric.ServiceContext,Microsoft.ServiceFabric.Services.Remoting.IService,Microsoft.ServiceFabric.Services.Remoting.Runtime.IServiceRemotingListener&gt;&gt; CreateServiceRemotingListeners ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Collections.Generic.Dictionary`2&lt;string, class System.Func`3&lt;class System.Fabric.ServiceContext, class Microsoft.ServiceFabric.Services.Remoting.IService, class Microsoft.ServiceFabric.Services.Remoting.Runtime.IServiceRemotingListener&gt;&gt; CreateServiceRemotingListeners() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.ServiceFabric.Services.Remoting.ServiceRemotingProviderAttribute.CreateServiceRemotingListeners" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride Function CreateServiceRemotingListeners () As Dictionary(Of String, Func(Of ServiceContext, IService, IServiceRemotingListener))" />
+      <MemberSignature Language="F#" Value="abstract member CreateServiceRemotingListeners : unit -&gt; System.Collections.Generic.Dictionary&lt;string, Func&lt;System.Fabric.ServiceContext, Microsoft.ServiceFabric.Services.Remoting.IService, Microsoft.ServiceFabric.Services.Remoting.Runtime.IServiceRemotingListener&gt;&gt;" Usage="serviceRemotingProviderAttribute.CreateServiceRemotingListeners " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceFabric.Services.Remoting</AssemblyName>
         <AssemblyVersion>6.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>Microsoft.ServiceFabric.Services.Remoting.Runtime.IServiceRemotingListener</ReturnType>
+        <ReturnType>System.Collections.Generic.Dictionary&lt;System.String,System.Func&lt;System.Fabric.ServiceContext,Microsoft.ServiceFabric.Services.Remoting.IService,Microsoft.ServiceFabric.Services.Remoting.Runtime.IServiceRemotingListener&gt;&gt;</ReturnType>
       </ReturnValue>
-      <Parameters>
-        <Parameter Name="serviceContext" Type="System.Fabric.ServiceContext" />
-        <Parameter Name="serviceImplementation" Type="Microsoft.ServiceFabric.Services.Remoting.IService" />
-      </Parameters>
       <Docs>
-        <param name="serviceContext">The context of the service for which the remoting listener is being constructed.</param>
-        <param name="serviceImplementation">The service implementation object.</param>
         <summary>
-            Creates a V2 service remoting listener for remoting the service interface.
+            Returns the func method that creates the remoting listeners.
             </summary>
-        <returns>An <see cref="T:Microsoft.ServiceFabric.Services.Remoting.Runtime.IServiceRemotingListener" /> for the specified service.</returns>
+        <returns>Func</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="RemotingClient">
-      <MemberSignature Language="C#" Value="public Microsoft.ServiceFabric.Services.Remoting.RemotingClient RemotingClient { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.ServiceFabric.Services.Remoting.RemotingClient RemotingClient" />
-      <MemberSignature Language="DocId" Value="P:Microsoft.ServiceFabric.Services.Remoting.ServiceRemotingProviderAttribute.RemotingClient" />
-      <MemberSignature Language="VB.NET" Value="Public Property RemotingClient As RemotingClient" />
-      <MemberSignature Language="F#" Value="member this.RemotingClient : Microsoft.ServiceFabric.Services.Remoting.RemotingClient with get, set" Usage="Microsoft.ServiceFabric.Services.Remoting.ServiceRemotingProviderAttribute.RemotingClient" />
+    <Member MemberName="RemotingClientVersion">
+      <MemberSignature Language="C#" Value="public Microsoft.ServiceFabric.Services.Remoting.RemotingClientVersion RemotingClientVersion { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.ServiceFabric.Services.Remoting.RemotingClientVersion RemotingClientVersion" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.ServiceFabric.Services.Remoting.ServiceRemotingProviderAttribute.RemotingClientVersion" />
+      <MemberSignature Language="VB.NET" Value="Public Property RemotingClientVersion As RemotingClientVersion" />
+      <MemberSignature Language="F#" Value="member this.RemotingClientVersion : Microsoft.ServiceFabric.Services.Remoting.RemotingClientVersion with get, set" Usage="Microsoft.ServiceFabric.Services.Remoting.ServiceRemotingProviderAttribute.RemotingClientVersion" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceFabric.Services.Remoting</AssemblyName>
         <AssemblyVersion>6.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>Microsoft.ServiceFabric.Services.Remoting.RemotingClient</ReturnType>
+        <ReturnType>Microsoft.ServiceFabric.Services.Remoting.RemotingClientVersion</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            RemotingClient is used to determine where  V1 or V2 remoting Client is used.
+            Gets or sets the version of the remoting client to use.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="RemotingListener">
-      <MemberSignature Language="C#" Value="public Microsoft.ServiceFabric.Services.Remoting.RemotingListener RemotingListener { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.ServiceFabric.Services.Remoting.RemotingListener RemotingListener" />
-      <MemberSignature Language="DocId" Value="P:Microsoft.ServiceFabric.Services.Remoting.ServiceRemotingProviderAttribute.RemotingListener" />
-      <MemberSignature Language="VB.NET" Value="Public Property RemotingListener As RemotingListener" />
-      <MemberSignature Language="F#" Value="member this.RemotingListener : Microsoft.ServiceFabric.Services.Remoting.RemotingListener with get, set" Usage="Microsoft.ServiceFabric.Services.Remoting.ServiceRemotingProviderAttribute.RemotingListener" />
+    <Member MemberName="RemotingListenerVersion">
+      <MemberSignature Language="C#" Value="public Microsoft.ServiceFabric.Services.Remoting.RemotingListenerVersion RemotingListenerVersion { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.ServiceFabric.Services.Remoting.RemotingListenerVersion RemotingListenerVersion" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.ServiceFabric.Services.Remoting.ServiceRemotingProviderAttribute.RemotingListenerVersion" />
+      <MemberSignature Language="VB.NET" Value="Public Property RemotingListenerVersion As RemotingListenerVersion" />
+      <MemberSignature Language="F#" Value="member this.RemotingListenerVersion : Microsoft.ServiceFabric.Services.Remoting.RemotingListenerVersion with get, set" Usage="Microsoft.ServiceFabric.Services.Remoting.ServiceRemotingProviderAttribute.RemotingListenerVersion" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceFabric.Services.Remoting</AssemblyName>
         <AssemblyVersion>6.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>Microsoft.ServiceFabric.Services.Remoting.RemotingListener</ReturnType>
+        <ReturnType>Microsoft.ServiceFabric.Services.Remoting.RemotingListenerVersion</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            RemotingListener is used to determine where listener is in V1, V2 or Compact Mode.
+            Gets or sets the version that the remoting listener to use.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>

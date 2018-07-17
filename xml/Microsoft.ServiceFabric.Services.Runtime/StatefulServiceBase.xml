@@ -36,13 +36,13 @@
       </Parameters>
       <Docs>
         <param name="serviceContext">
-            A <see cref="T:System.Fabric.StatefulServiceContext" /> describes the service context, which it provides information like replica ID, partition ID, and service name.
+            A <see cref="T:System.Fabric.StatefulServiceContext" /> that this service is created under. The context provides information like replica ID, partition ID, and service name.
             </param>
         <param name="stateProviderReplica">
-            A <see cref="T:Microsoft.ServiceFabric.Data.IStateProviderReplica" /> represents a reliable state provider replica.
+            A <see cref="T:Microsoft.ServiceFabric.Data.IStateProviderReplica2" /> represents a reliable state provider replica.
             </param>
         <summary>
-            Creates a new stateful service.
+            Initializes a new instance of the <see cref="T:Microsoft.ServiceFabric.Services.Runtime.StatefulServiceBase" /> class.
             </summary>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException" />
@@ -154,7 +154,7 @@
       <Docs>
         <summary>
             Override this method to supply the communication listeners for the service replica. The endpoints returned by the communication listener
-            are stored as a JSON string of ListenerName, Endpoint string pairs like 
+            are stored as a JSON string of ListenerName, Endpoint string pairs like
             <code>{"Endpoints":{"Listener1":"Endpoint1","Listener2":"Endpoint2" ...}}</code><para>
             For information about Reliable Services life cycle please see
             https://docs.microsoft.com/azure/service-fabric/service-fabric-reliable-services-lifecycle
@@ -211,7 +211,7 @@
       <Docs>
         <summary>
             The notification that the service is being aborted. RunAsync MAY be running concurrently
-            with the execution of this method, as cancellation is not awaited on the abort path. 
+            with the execution of this method, as cancellation is not awaited on the abort path.
             <para>
             For information about Reliable Services life cycle please see
             https://docs.microsoft.com/azure/service-fabric/service-fabric-reliable-services-lifecycle
@@ -314,7 +314,7 @@
           <see cref="T:System.Threading.CancellationToken" /> to monitor for cancellation requests.
             </param>
         <summary>
-            This method is called during suspected data loss. 
+            This method is called during suspected data loss.
             You can override this method to restore the service in case of data loss.
             </summary>
         <returns>
@@ -408,10 +408,10 @@
       </ReturnValue>
       <Docs>
         <summary>
-            The service partition to which current service replica belongs. 
+            Gets the service partition to which current service replica belongs.
             </summary>
         <value>
-            An <see cref="T:System.Fabric.IStatefulServicePartition" /> that represents the 
+            An <see cref="T:System.Fabric.IStatefulServicePartition" /> that represents the
             partition to which this service replica belongs.
             </value>
         <remarks>To be added.</remarks>
@@ -440,7 +440,7 @@
         <param name="cancellationToken">Cancellation token to monitor for cancellation requests.</param>
         <summary>
             This method is implemented as a processing loop and will only be called when the replica is primary with write status.
-            Override this method with the application logic. 
+            Override this method with the application logic.
             <para>
             For information about Reliable Services life cycle please see
             https://docs.microsoft.com/azure/service-fabric/service-fabric-reliable-services-lifecycle
@@ -451,15 +451,15 @@
         <remarks>
             Please ensure you follow these guidelines when overriding <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatefulServiceBase.RunAsync(System.Threading.CancellationToken)" />:
             <list type="bullet"><item><description>
-                    Make sure <paramref name="cancellationToken" /> passed to <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatefulServiceBase.RunAsync(System.Threading.CancellationToken)" /> is honored and once 
+                    Make sure <paramref name="cancellationToken" /> passed to <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatefulServiceBase.RunAsync(System.Threading.CancellationToken)" /> is honored and once
                     it has been signaled, <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatefulServiceBase.RunAsync(System.Threading.CancellationToken)" /> exits gracefully as soon as possible. Please note that
-                    if <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatefulServiceBase.RunAsync(System.Threading.CancellationToken)" /> has finished its intended work, it does not need to wait for 
+                    if <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatefulServiceBase.RunAsync(System.Threading.CancellationToken)" /> has finished its intended work, it does not need to wait for
                     <paramref name="cancellationToken" /> to be signaled and can return gracefully.
                     </description></item><item><description>
                     Service Fabric runtime does not handle all exception(s) escaping from <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatefulServiceBase.RunAsync(System.Threading.CancellationToken)" />. If an unhandled
                     exception escapes from <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatefulServiceBase.RunAsync(System.Threading.CancellationToken)" />, then Service Fabric runtime takes following action(s):
                     <list type="bullet"><item><description>
-                            If a <see cref="T:System.Fabric.FabricException" /> (or one of its derived exception) escapes from <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatefulServiceBase.RunAsync(System.Threading.CancellationToken)" />, 
+                            If a <see cref="T:System.Fabric.FabricException" /> (or one of its derived exception) escapes from <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatefulServiceBase.RunAsync(System.Threading.CancellationToken)" />,
                             Service Fabric runtime will restart this service replica. A health warning will be appear in Service Fabric
                             Explorer containing details about unhandled exception.
                             </description></item><item><description>
@@ -469,7 +469,7 @@
                             </description></item><item><description>
                             If an <see cref="T:System.OperationCanceledException" /> escapes from <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatefulServiceBase.RunAsync(System.Threading.CancellationToken)" /> and Service Fabric runtime
                             has NOT requested cancellation by signaling <paramref name="cancellationToken" /> passed to <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatefulServiceBase.RunAsync(System.Threading.CancellationToken)" />,
-                            the process that is hosting this service replica is brought down. This will impact all other service replicas 
+                            the process that is hosting this service replica is brought down. This will impact all other service replicas
                             that are hosted by the same process. The details about unhandled exceptions can be viewed in Windows Event Viewer.
                             </description></item><item><description>
                             If an exception of any other type escapes from <see cref="M:Microsoft.ServiceFabric.Services.Runtime.StatefulServiceBase.RunAsync(System.Threading.CancellationToken)" /> then the process that is hosting this
