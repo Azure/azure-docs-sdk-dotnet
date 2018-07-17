@@ -15,20 +15,20 @@ ms.custom: devcenter
 
 # Migrate your .NET web app or service to Azure App Service 
 
-[App Service](https://docs.microsoft.com/azure/app-service/app-service-web-overview#why-use-web-apps) is a fully-managed compute platform service that is optimized for hosting scalable websites and web applications. This document provides information on how to lift-and-shift an existing application to Azure App Service, modifications to consider, and additional resources for moving to the cloud.
+[App Service](https://docs.microsoft.com/azure/app-service/app-service-web-overview#why-use-web-apps) is a fully-managed compute platform service that is optimized for hosting scalable websites and web applications. This document provides information on how to lift-and-shift an existing application to Azure App Service, modifications to consider, and additional resources for moving to the cloud. Most ASP.NET websites (Webforms, MVC) and services (Web API, WCF) can move directly to Azure App Service with no changes. Some may need minor changes while others may need some refactoring.
 
 Ready to get started? [Publish your ASP.NET + SQL application to Azure App Service](https://go.microsoft.com/fwlink/?linkid=863214).
 
 ## Considerations
 
-### On-premise resources (including SQL Server)
+### On-premises resources (including SQL Server)
 
-Verify access to on-premise resources as these may need to be migrated or changed. The following are options for mitigating access to on-premise resources:
+Verify access to on-premises resources as these may need to be migrated or changed. The following are options for mitigating access to on-premises resources:
 
-* Create a VPN connecting App Service to on-premise resources using [Azure Virtual Networks](https://docs.microsoft.com/en-us/azure/app-service/web-sites-integrate-with-vnet).
-* Securely expose on-premise services to the cloud without firewall changes using [Azure Relay](https://docs.microsoft.com/en-us/azure/service-bus-relay/relay-what-is-it).
+* Create a VPN connecting App Service to on-premises resources using [Azure Virtual Networks](https://docs.microsoft.com/en-us/azure/app-service/web-sites-integrate-with-vnet).
+* Securely expose on-premises services to the cloud without firewall changes using [Azure Relay](https://docs.microsoft.com/en-us/azure/service-bus-relay/relay-what-is-it).
 * Migrate dependencies such as a [SQL database](https://go.microsoft.com/fwlink/?linkid=863217) to Azure.
-* Use platform-as-a-service offerings in the cloud to reduce dependecies. For example, rather than connect to an on-premise mail server, consider using [SendGrid](https://docs.microsoft.com/en-us/azure/sendgrid-dotnet-how-to-send-email). 
+* Use platform-as-a-service offerings in the cloud to reduce dependecies. For example, rather than connect to an on-premises mail server, consider using [SendGrid](https://docs.microsoft.com/en-us/azure/sendgrid-dotnet-how-to-send-email). 
 
 ### Port Bindings
 
