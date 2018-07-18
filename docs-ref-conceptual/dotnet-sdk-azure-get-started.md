@@ -1,11 +1,11 @@
 ---
-title: Get started with Azure .NET APIs
-description: Get started with basic use of the Azure libraries for .NET with your own Azure subscription.
-keywords: Azure, .NET, SDK, API ,authenticate, get-started
+title: Get started with Azure .NET and .NET Core APIs
+description: Get started with basic use of the Azure libraries for .NET and .NET Core with your own Azure subscription.
+keywords: Azure, .NET, .NET Core, ASP.NET, ASP.NET Core SDK, API ,authenticate, get-started
 author: camsoper
 ms.author: casoper
 manager: wpickett
-ms.date: 10/19/2017
+ms.date: 07/17/2018
 ms.topic: reference
 ms.technology: azure
 ms.devlang: dotnet
@@ -13,7 +13,7 @@ ms.service: multiple
 ms.custom: devcenter
 ---
 
-# Get started with the Azure .NET APIs
+# Get started with the Azure .NET and .NET Core APIs
 
 This tutorial demonstrates the usage of several [Azure APIs for .NET](/dotnet/api/overview/azure/).  You will set up authentication, create and use an Azure Storage account, create and use an Azure SQL Database, deploy some virtual machines, and deploy an Azure App Service Web App from GitHub.
 
@@ -196,11 +196,11 @@ Replace the `Main` method with the following, making sure to assign a strong pas
 
     Console.WriteLine("Creating database...");
     var sqlDb = sqlServer.Databases.Define(sqlDbName).Create();
-    
+
     // Display information for connecting later...
     Console.WriteLine("Created database {0} in server {1}.", sqlDbName, sqlServer.FullyQualifiedDomainName);
     Console.WriteLine("Your user name is {0}.", adminUser + "@" + sqlServer.Name);
-    
+
     // Build the connection string
     var builder = new SqlConnectionStringBuilder();
     builder.DataSource = sqlServer.FullyQualifiedDomainName;
@@ -236,11 +236,12 @@ Replace the `Main` method with the following, making sure to assign a strong pas
     Console.ReadLine();
 }
 ```
+
 Run the code as before by pressing **F5**.  The console output should validate that the server was created and works as expected, but you can connect to it directly with a tool like SQL Server Management Studio if you like.
 
 ## Write a blob into a new storage account
 
-This example will create a storage account and upload a blob.  
+This example creates a storage account and upload a blob.  
 
 Replace the `Main` method with the following.
 
@@ -275,7 +276,7 @@ static void Main(string[] args)
 
     var account = CloudStorageAccount.Parse(storageConnectionString);
     var serviceClient = account.CreateCloudBlobClient();
-    
+
     // Create container. Name must be lower case.
     Console.WriteLine("Creating container...");
     var container = serviceClient.GetContainerReference("helloazure");
@@ -285,7 +286,7 @@ static void Main(string[] args)
     var containerPermissions = new BlobContainerPermissions()
         { PublicAccess = BlobContainerPublicAccessType.Container };
     container.SetPermissionsAsync(containerPermissions).Wait();
-    
+
     // write a blob to the container
     Console.WriteLine("Uploading blob...");
     var blob = container.GetBlockBlobReference("helloazure.txt");
@@ -294,13 +295,13 @@ static void Main(string[] args)
 
     // Wait for the user
     Console.WriteLine("Press enter to continue...");
-    Console.ReadLine();        
+    Console.ReadLine();
 }
 ```
 
 Press **F5** to run the sample.
 
-After several minutes, the program will finish. Verify the blob was uploaded by browsing to the URL displayed in the console.  You should see the text "Hello, Azure!" in your browser.
+After several minutes, the program finishes. Verify the blob was uploaded by browsing to the URL displayed in the console.  You should see the text "Hello, Azure!" in your browser.
 
 ## Clean up
 
@@ -312,6 +313,7 @@ Delete all the resources you created by entering the following in PowerShell:
 ```powershell
 Remove-AzureRmResourceGroup -ResourceGroupName sampleResourceGroup
 ```
+
 ## Explore more samples
 
 To learn more about how to use the Azure libraries for .NET to manage resources and automate tasks, see our sample code for [virtual machines](dotnet-sdk-azure-virtual-machine-samples.md), [web apps](dotnet-sdk-azure-web-apps-samples.md) and [SQL database](dotnet-sdk-azure-sql-database-samples.md).

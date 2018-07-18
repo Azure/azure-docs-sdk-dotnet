@@ -8,7 +8,6 @@
     <AssemblyName>Microsoft.ServiceFabric.Services.Remoting</AssemblyName>
     <AssemblyVersion>6.0.0.0</AssemblyVersion>
   </AssemblyInfo>
-  <Interfaces />
   <Docs>
     <summary>
             Defines the interface that must be implemented for providing custom serialization for the remoting request.
@@ -30,21 +29,20 @@
       <ReturnValue>
         <ReturnType>Microsoft.ServiceFabric.Services.Remoting.V2.IServiceRemotingMessageBodyFactory</ReturnType>
       </ReturnValue>
-      <Parameters />
       <Docs>
         <summary>
             Create a IServiceRemotingMessageBodyFactory used for creating remoting request and response body.
             </summary>
-        <returns />
+        <returns>A custom <see cref="T:Microsoft.ServiceFabric.Services.Remoting.V2.IServiceRemotingMessageBodyFactory" /> that can be used for creating remoting request and response message bodies.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateRequestMessageSerializer">
-      <MemberSignature Language="C#" Value="public Microsoft.ServiceFabric.Services.Remoting.V2.IServiceRemotingRequestMessageBodySerializer CreateRequestMessageSerializer (Type serviceInterfaceType, System.Collections.Generic.IEnumerable&lt;Type&gt; requestBodyTypes);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.ServiceFabric.Services.Remoting.V2.IServiceRemotingRequestMessageBodySerializer CreateRequestMessageSerializer(class System.Type serviceInterfaceType, class System.Collections.Generic.IEnumerable`1&lt;class System.Type&gt; requestBodyTypes) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.ServiceFabric.Services.Remoting.V2.IServiceRemotingMessageSerializationProvider.CreateRequestMessageSerializer(System.Type,System.Collections.Generic.IEnumerable{System.Type})" />
-      <MemberSignature Language="VB.NET" Value="Public Function CreateRequestMessageSerializer (serviceInterfaceType As Type, requestBodyTypes As IEnumerable(Of Type)) As IServiceRemotingRequestMessageBodySerializer" />
-      <MemberSignature Language="F#" Value="abstract member CreateRequestMessageSerializer : Type * seq&lt;Type&gt; -&gt; Microsoft.ServiceFabric.Services.Remoting.V2.IServiceRemotingRequestMessageBodySerializer" Usage="iServiceRemotingMessageSerializationProvider.CreateRequestMessageSerializer (serviceInterfaceType, requestBodyTypes)" />
+      <MemberSignature Language="C#" Value="public Microsoft.ServiceFabric.Services.Remoting.V2.IServiceRemotingRequestMessageBodySerializer CreateRequestMessageSerializer (Type serviceInterfaceType, System.Collections.Generic.IEnumerable&lt;Type&gt; requestWrappedTypes, System.Collections.Generic.IEnumerable&lt;Type&gt; requestBodyTypes = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.ServiceFabric.Services.Remoting.V2.IServiceRemotingRequestMessageBodySerializer CreateRequestMessageSerializer(class System.Type serviceInterfaceType, class System.Collections.Generic.IEnumerable`1&lt;class System.Type&gt; requestWrappedTypes, class System.Collections.Generic.IEnumerable`1&lt;class System.Type&gt; requestBodyTypes) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.ServiceFabric.Services.Remoting.V2.IServiceRemotingMessageSerializationProvider.CreateRequestMessageSerializer(System.Type,System.Collections.Generic.IEnumerable{System.Type},System.Collections.Generic.IEnumerable{System.Type})" />
+      <MemberSignature Language="VB.NET" Value="Public Function CreateRequestMessageSerializer (serviceInterfaceType As Type, requestWrappedTypes As IEnumerable(Of Type), Optional requestBodyTypes As IEnumerable(Of Type) = null) As IServiceRemotingRequestMessageBodySerializer" />
+      <MemberSignature Language="F#" Value="abstract member CreateRequestMessageSerializer : Type * seq&lt;Type&gt; * seq&lt;Type&gt; -&gt; Microsoft.ServiceFabric.Services.Remoting.V2.IServiceRemotingRequestMessageBodySerializer" Usage="iServiceRemotingMessageSerializationProvider.CreateRequestMessageSerializer (serviceInterfaceType, requestWrappedTypes, requestBodyTypes)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceFabric.Services.Remoting</AssemblyName>
@@ -55,24 +53,29 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="serviceInterfaceType" Type="System.Type" />
+        <Parameter Name="requestWrappedTypes" Type="System.Collections.Generic.IEnumerable&lt;System.Type&gt;" />
         <Parameter Name="requestBodyTypes" Type="System.Collections.Generic.IEnumerable&lt;System.Type&gt;" />
       </Parameters>
       <Docs>
         <param name="serviceInterfaceType">User service interface</param>
+        <param name="requestWrappedTypes">Wrapped Request object Types for all method</param>
         <param name="requestBodyTypes">Parameters for all the methods in the serviceInterfaceType</param>
         <summary>
-            Creates IServiceRemotingRequestMessageBodySerializer for a serviceInterface .
+            Creates a serializer that can serialize and deserialize the remoting request message bodies for the specified service interface.
             </summary>
-        <returns />
+        <returns>
+            An <see cref="T:Microsoft.ServiceFabric.Services.Remoting.V2.IServiceRemotingRequestMessageBodySerializer" /> that can serialize and deserialize
+            the remoting request message bodies created by the custom service remoting message body factory.
+            </returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateResponseMessageSerializer">
-      <MemberSignature Language="C#" Value="public Microsoft.ServiceFabric.Services.Remoting.V2.IServiceRemotingResponseMessageBodySerializer CreateResponseMessageSerializer (Type serviceInterfaceType, System.Collections.Generic.IEnumerable&lt;Type&gt; responseBodyTypes);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.ServiceFabric.Services.Remoting.V2.IServiceRemotingResponseMessageBodySerializer CreateResponseMessageSerializer(class System.Type serviceInterfaceType, class System.Collections.Generic.IEnumerable`1&lt;class System.Type&gt; responseBodyTypes) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.ServiceFabric.Services.Remoting.V2.IServiceRemotingMessageSerializationProvider.CreateResponseMessageSerializer(System.Type,System.Collections.Generic.IEnumerable{System.Type})" />
-      <MemberSignature Language="VB.NET" Value="Public Function CreateResponseMessageSerializer (serviceInterfaceType As Type, responseBodyTypes As IEnumerable(Of Type)) As IServiceRemotingResponseMessageBodySerializer" />
-      <MemberSignature Language="F#" Value="abstract member CreateResponseMessageSerializer : Type * seq&lt;Type&gt; -&gt; Microsoft.ServiceFabric.Services.Remoting.V2.IServiceRemotingResponseMessageBodySerializer" Usage="iServiceRemotingMessageSerializationProvider.CreateResponseMessageSerializer (serviceInterfaceType, responseBodyTypes)" />
+      <MemberSignature Language="C#" Value="public Microsoft.ServiceFabric.Services.Remoting.V2.IServiceRemotingResponseMessageBodySerializer CreateResponseMessageSerializer (Type serviceInterfaceType, System.Collections.Generic.IEnumerable&lt;Type&gt; responseWrappedTypes, System.Collections.Generic.IEnumerable&lt;Type&gt; responseBodyTypes = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.ServiceFabric.Services.Remoting.V2.IServiceRemotingResponseMessageBodySerializer CreateResponseMessageSerializer(class System.Type serviceInterfaceType, class System.Collections.Generic.IEnumerable`1&lt;class System.Type&gt; responseWrappedTypes, class System.Collections.Generic.IEnumerable`1&lt;class System.Type&gt; responseBodyTypes) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.ServiceFabric.Services.Remoting.V2.IServiceRemotingMessageSerializationProvider.CreateResponseMessageSerializer(System.Type,System.Collections.Generic.IEnumerable{System.Type},System.Collections.Generic.IEnumerable{System.Type})" />
+      <MemberSignature Language="VB.NET" Value="Public Function CreateResponseMessageSerializer (serviceInterfaceType As Type, responseWrappedTypes As IEnumerable(Of Type), Optional responseBodyTypes As IEnumerable(Of Type) = null) As IServiceRemotingResponseMessageBodySerializer" />
+      <MemberSignature Language="F#" Value="abstract member CreateResponseMessageSerializer : Type * seq&lt;Type&gt; * seq&lt;Type&gt; -&gt; Microsoft.ServiceFabric.Services.Remoting.V2.IServiceRemotingResponseMessageBodySerializer" Usage="iServiceRemotingMessageSerializationProvider.CreateResponseMessageSerializer (serviceInterfaceType, responseWrappedTypes, responseBodyTypes)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceFabric.Services.Remoting</AssemblyName>
@@ -83,15 +86,20 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="serviceInterfaceType" Type="System.Type" />
+        <Parameter Name="responseWrappedTypes" Type="System.Collections.Generic.IEnumerable&lt;System.Type&gt;" />
         <Parameter Name="responseBodyTypes" Type="System.Collections.Generic.IEnumerable&lt;System.Type&gt;" />
       </Parameters>
       <Docs>
         <param name="serviceInterfaceType">User service interface</param>
+        <param name="responseWrappedTypes">Wrapped Response object Types for all methods</param>
         <param name="responseBodyTypes">Return Types for all the methods in the serviceInterfaceType</param>
         <summary>
-             Creates IServiceRemotingResponseMessageBodySerializer for a serviceInterface .
-             </summary>
-        <returns />
+            Creates a serializer that can serialize and deserialize the remoting response message bodies for the specified service interface.
+            </summary>
+        <returns>
+            An <see cref="T:Microsoft.ServiceFabric.Services.Remoting.V2.IServiceRemotingResponseMessageBodySerializer" /> that can serialize and deserialize
+            the remoting response message bodies created by the custom service remoting message body factory.
+            </returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
