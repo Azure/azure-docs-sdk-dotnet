@@ -5,7 +5,7 @@ keywords: Azure, .NET, .NET Core, ASP.NET, ASP.NET Core SDK, API ,authenticate, 
 author: camsoper
 ms.author: casoper
 manager: wpickett
-ms.date: 08/21/2017
+ms.date: 08/22/2018
 ms.topic: reference
 ms.technology: azure
 ms.devlang: dotnet
