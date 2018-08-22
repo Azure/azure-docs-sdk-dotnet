@@ -49,4 +49,4 @@ The service principal information is displayed as JSON.
 }
 ```
 
-Copy and paste the JSON output to Notepad.
+Copy and paste the JSON output to a text editor for use later.
