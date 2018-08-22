@@ -77,7 +77,7 @@ static void Main(string[] args)
     string password = "MY_PASSWORD";
     string rgName = "sampleResourceGroup";
     string windowsVmName = "sampleWindowsVM";
-    string publicIpDnsLabel = "samplePublicIP";
+    string publicIpDnsLabel = "samplePublicIP" + (new Random().Next(0,100000)).ToString();
 
     // Authenticate
     var credentials = SdkContext.AzureCredentialsFactory
@@ -111,10 +111,10 @@ static void Main(string[] args)
 
 Press **F5** to run the sample.
 
-After several minutes, the program will finish, prompting you to press enter. After pressing enter, verify the virtual machine in your subscription with PowerShell:
+After several minutes, the program will finish, prompting you to press enter. After pressing enter, verify the virtual machine in your subscription with the Cloud Shell:
 
-```powershell
-Get-AzureRmVm -ResourceGroupName sampleResourceGroup
+```azurecli-interactive
+az vm list
 ```
 
 ## Deploy a web app from a GitHub repo
@@ -307,10 +307,10 @@ After several minutes, the program finishes. Verify the blob was uploaded by bro
 > [!IMPORTANT]
 > If you don't clean up your resources from this tutorial, you will continue to be charged for them.  Be sure to do this step.
 
-Delete all the resources you created by entering the following in PowerShell:
+Delete all the resources you created by entering the following in the Cloud Shell:
 
-```powershell
-Remove-AzureRmResourceGroup -ResourceGroupName sampleResourceGroup
+```azurecli-interactive
+az group delete --name sampleResourceGroup
 ```
 
 ## Explore more samples
