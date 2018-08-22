@@ -5,7 +5,7 @@ keywords: Azure, .NET, .NET Core, ASP.NET, ASP.NET Core SDK, API ,authenticate, 
 author: camsoper
 ms.author: casoper
 manager: wpickett
-ms.date: 07/17/2018
+ms.date: 08/21/2017
 ms.topic: reference
 ms.technology: azure
 ms.devlang: dotnet
@@ -20,7 +20,6 @@ This tutorial demonstrates the usage of several [Azure APIs for .NET](/dotnet/ap
 ## Prerequisites
 
 - An Azure account. If you don't have one, [get a free trial](https://azure.microsoft.com/free/)
-- [Azure PowerShell](/powershell/azure/install-azurerm-ps)
 
 ## Set up authentication
 
