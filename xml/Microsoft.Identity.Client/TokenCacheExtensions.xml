@@ -7,37 +7,78 @@
   <AssemblyInfo>
     <AssemblyName>Microsoft.Identity.Client</AssemblyName>
     <AssemblyVersion>1.1.4.0</AssemblyVersion>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
   <Interfaces />
   <Docs>
-    <summary />
-    <remarks>To be added.</remarks>
+    <summary>
+            Extension methods used to subscribe to cache serialization events, and to effectively serialize and deserialize the cache
+            </summary>
+    <remarks>New in MSAL.NET 2.x: it's now possible to deserialize the token cache in two formats, the ADAL V3 legacy token cache
+            format, and the new unified cache format, common to ADAL.NET, MSAL.NET, and other libraries on the same platform (MSAL.objc, on iOS)</remarks>
   </Docs>
   <Members>
     <Member MemberName="Deserialize">
-      <MemberSignature Language="C#" Value="public static void Deserialize (this Microsoft.Identity.Client.TokenCache tokenCache, byte[] state);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void Deserialize(class Microsoft.Identity.Client.TokenCache tokenCache, unsigned int8[] state) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Identity.Client.TokenCacheExtensions.Deserialize(Microsoft.Identity.Client.TokenCache,System.Byte[])" />
-      <MemberSignature Language="F#" Value="static member Deserialize : Microsoft.Identity.Client.TokenCache * byte[] -&gt; unit" Usage="Microsoft.Identity.Client.TokenCacheExtensions.Deserialize (tokenCache, state)" />
+      <MemberSignature Language="C#" Value="public static void Deserialize (this Microsoft.Identity.Client.TokenCache tokenCache, byte[] state);" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void Deserialize(class Microsoft.Identity.Client.TokenCache tokenCache, unsigned int8[] state) cil managed" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Identity.Client.TokenCacheExtensions.Deserialize(Microsoft.Identity.Client.TokenCache,System.Byte[])" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="F#" Value="static member Deserialize : Microsoft.Identity.Client.TokenCache * byte[] -&gt; unit" Usage="Microsoft.Identity.Client.TokenCacheExtensions.Deserialize (tokenCache, state)" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="C#" Value="public static void Deserialize (this Microsoft.Identity.Client.TokenCache tokenCache, byte[] unifiedState);" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void Deserialize(class Microsoft.Identity.Client.TokenCache tokenCache, unsigned int8[] unifiedState) cil managed" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Identity.Client.TokenCacheExtensions.Deserialize(Microsoft.Identity.Client.TokenCache,System.Byte[])" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="F#" Value="static member Deserialize : Microsoft.Identity.Client.TokenCache * byte[] -&gt; unit" Usage="Microsoft.Identity.Client.TokenCacheExtensions.Deserialize (tokenCache, unifiedState)" FrameworkAlternate="azure-dotnet-preview" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>1.1.4.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="tokenCache" Type="Microsoft.Identity.Client.TokenCache" RefType="this" Index="0" />
+        <Parameter Name="state" Type="System.Byte[]" Index="1" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="unifiedState" Type="System.Byte[]" Index="1" FrameworkAlternate="azure-dotnet-preview" />
+      </Parameters>
+      <Docs>
+        <param name="tokenCache">Token cache to deserialize (to fill-in from the state)</param>
+        <param name="state"></param>
+        <param name="unifiedState">Array of bytes containing serialized Msal cache data</param>
+        <summary>
+            Deserializes the token cache from a serialization blob in the unified cache format
+            </summary>
+        <remarks>
+          <paramref name="unifiedState" />Is a Json blob containing access tokens, refresh tokens, id tokens and accounts information.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DeserializeUnifiedAndAdalCache">
+      <MemberSignature Language="C#" Value="public static void DeserializeUnifiedAndAdalCache (this Microsoft.Identity.Client.TokenCache tokenCache, Microsoft.Identity.Core.Cache.CacheData cacheData);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void DeserializeUnifiedAndAdalCache(class Microsoft.Identity.Client.TokenCache tokenCache, class Microsoft.Identity.Core.Cache.CacheData cacheData) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Identity.Client.TokenCacheExtensions.DeserializeUnifiedAndAdalCache(Microsoft.Identity.Client.TokenCache,Microsoft.Identity.Core.Cache.CacheData)" />
+      <MemberSignature Language="F#" Value="static member DeserializeUnifiedAndAdalCache : Microsoft.Identity.Client.TokenCache * Microsoft.Identity.Core.Cache.CacheData -&gt; unit" Usage="Microsoft.Identity.Client.TokenCacheExtensions.DeserializeUnifiedAndAdalCache (tokenCache, cacheData)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Identity.Client</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
         <Parameter Name="tokenCache" Type="Microsoft.Identity.Client.TokenCache" RefType="this" />
-        <Parameter Name="state" Type="System.Byte[]" />
+        <Parameter Name="cacheData" Type="Microsoft.Identity.Core.Cache.CacheData" />
       </Parameters>
       <Docs>
-        <param name="tokenCache"></param>
-        <param name="state"></param>
-        <summary />
+        <param name="tokenCache">Token cache to deserialize (to fill-in from the state)</param>
+        <param name="cacheData">Array of bytes containing serialicache data</param>
+        <summary>
+            Deserializes the token cache from a serialization blob in both format (ADAL V3 format, and unified cache format)
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -50,6 +91,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>1.1.4.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Byte[]</ReturnType>
@@ -58,9 +100,36 @@
         <Parameter Name="tokenCache" Type="Microsoft.Identity.Client.TokenCache" RefType="this" />
       </Parameters>
       <Docs>
-        <param name="tokenCache"></param>
-        <summary />
-        <returns />
+        <param name="tokenCache">Token cache to serialize</param>
+        <summary>
+            Serializes the entire token cache, in the unified cache format only
+            </summary>
+        <returns>array of bytes containing the serialized unified cache</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SerializeUnifiedAndAdalCache">
+      <MemberSignature Language="C#" Value="public static Microsoft.Identity.Core.Cache.CacheData SerializeUnifiedAndAdalCache (this Microsoft.Identity.Client.TokenCache tokenCache);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.Identity.Core.Cache.CacheData SerializeUnifiedAndAdalCache(class Microsoft.Identity.Client.TokenCache tokenCache) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Identity.Client.TokenCacheExtensions.SerializeUnifiedAndAdalCache(Microsoft.Identity.Client.TokenCache)" />
+      <MemberSignature Language="F#" Value="static member SerializeUnifiedAndAdalCache : Microsoft.Identity.Client.TokenCache -&gt; Microsoft.Identity.Core.Cache.CacheData" Usage="Microsoft.Identity.Client.TokenCacheExtensions.SerializeUnifiedAndAdalCache tokenCache" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Identity.Client</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Identity.Core.Cache.CacheData</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="tokenCache" Type="Microsoft.Identity.Client.TokenCache" RefType="this" />
+      </Parameters>
+      <Docs>
+        <param name="tokenCache">Token cache to serialize</param>
+        <summary>
+            Serializes the entire token cache in both the ADAL V3 and unified cache formats.
+            </summary>
+        <returns>Serialized token cache <see cref="T:Microsoft.Identity.Core.Cache.CacheData" /></returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -73,6 +142,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>1.1.4.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -82,10 +152,16 @@
         <Parameter Name="afterAccess" Type="Microsoft.Identity.Client.TokenCache+TokenCacheNotification" />
       </Parameters>
       <Docs>
-        <param name="tokencache"></param>
-        <param name="afterAccess"></param>
-        <summary />
-        <remarks>To be added.</remarks>
+        <param name="tokencache">Token cache that was accessed</param>
+        <param name="afterAccess">Delegate set in order to handle the cache serialization in the case where the <see cref="P:Microsoft.Identity.Client.TokenCache.HasStateChanged" />
+            member of the cache is <c>true</c></param>
+        <summary>
+            Sets a delegate to be notified after any library method accesses the cache. This gives an option to the
+            delegate to serialize a cache entry for the application and accounts specified in the <see cref="T:Microsoft.Identity.Client.TokenCacheNotificationArgs" />.
+            See https://aka.ms/msal-net-token-cache-serialization
+            </summary>
+        <remarks>In the case where the delegate is used to serialize the cache entierely (not just a row), it might
+            want to call <see cref="M:Microsoft.Identity.Client.TokenCacheExtensions.Serialize(Microsoft.Identity.Client.TokenCache)" /></remarks>
       </Docs>
     </Member>
     <Member MemberName="SetBeforeAccess">
@@ -97,6 +173,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>1.1.4.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -106,10 +183,15 @@
         <Parameter Name="beforeAccess" Type="Microsoft.Identity.Client.TokenCache+TokenCacheNotification" />
       </Parameters>
       <Docs>
-        <param name="tokencache"></param>
-        <param name="beforeAccess"></param>
-        <summary />
-        <remarks>To be added.</remarks>
+        <param name="tokencache">Token cache that will be accessed</param>
+        <param name="beforeAccess">Delegate set in order to handle the cache deserialiation</param>
+        <summary>
+            Sets a delegate to be notified before any library method accesses the cache. This gives an option to the
+            delegate to deserialize a cache entry for the application and accounts specified in the <see cref="T:Microsoft.Identity.Client.TokenCacheNotificationArgs" />.
+            See https://aka.ms/msal-net-token-cache-serialization
+            </summary>
+        <remarks>In the case where the delegate is used to deserialize the cache, it might
+            want to call <see cref="M:Microsoft.Identity.Client.TokenCacheExtensions.Deserialize(Microsoft.Identity.Client.TokenCache,System.Byte[])" /></remarks>
       </Docs>
     </Member>
     <Member MemberName="SetBeforeWrite">
@@ -121,6 +203,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>1.1.4.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -130,9 +213,12 @@
         <Parameter Name="beforeWrite" Type="Microsoft.Identity.Client.TokenCache+TokenCacheNotification" />
       </Parameters>
       <Docs>
-        <param name="tokencache"></param>
-        <param name="beforeWrite"></param>
-        <summary />
+        <param name="tokencache">Token cache that will be accessed</param>
+        <param name="beforeWrite">Delegate set in order to prepare the cache serialization</param>
+        <summary>
+            Sets a delegate called before any library method writes to the cache. This gives an option to the delegate
+            to reload the cache state from a row in database and lock that row. That database row can then be unlocked in the delegate
+            registered with <see cref="M:Microsoft.Identity.Client.TokenCacheExtensions.SetAfterAccess(Microsoft.Identity.Client.TokenCache,Microsoft.Identity.Client.TokenCache.TokenCacheNotification)" /></summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>

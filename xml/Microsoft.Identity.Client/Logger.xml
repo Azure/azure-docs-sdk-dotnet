@@ -7,6 +7,7 @@
   <AssemblyInfo>
     <AssemblyName>Microsoft.Identity.Client</AssemblyName>
     <AssemblyVersion>1.1.4.0</AssemblyVersion>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -14,28 +15,93 @@
   <Interfaces />
   <Docs>
     <summary>
-            MSAL Logger class that allows developers to configure log level, configure callbacks etc.
-            </summary>
+             Static class that allows application developers to set a callback to handle logs, specify the level
+             of logs desired and if they accept to log Personally Identifiable Information (PII) or not
+             </summary>
     <remarks>To be added.</remarks>
+    <example>
+      <code>
+             private static void Log(LogLevel level, string message, bool containsPii)
+             {
+              if (containsPii)
+              {
+               Console.ForegroundColor = ConsoleColor.Red;
+              }
+               Console.WriteLine($"{level} {message}");
+               Console.ResetColor();
+              }
+            
+             private async Task CallProtectedApiWithLoggingAsync(string[] args)
+             {
+              PublicClientApplication application = new PublicClientApplication(clientID);
+              Logger.LogCallback = Log;
+              Logger.Level = LogLevel.Info;
+              Logger.PiiLoggingEnabled = true;
+              AuthenticationResult result = await application.AcquireTokenAsync(
+                                                         new string[] { "User.Read" });
+              ...
+             }
+             </code>
+    </example>
   </Docs>
   <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public Logger ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Identity.Client.Logger.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Identity.Client</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DefaultLoggingEnabled">
+      <MemberSignature Language="C#" Value="public static bool DefaultLoggingEnabled { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property bool DefaultLoggingEnabled" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Identity.Client.Logger.DefaultLoggingEnabled" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Property DefaultLoggingEnabled As Boolean" />
+      <MemberSignature Language="F#" Value="member this.DefaultLoggingEnabled : bool with get, set" Usage="Microsoft.Identity.Client.Logger.DefaultLoggingEnabled" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Identity.Client</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Flag to enable/disable logging to platform defaults. In Desktop/UWP, Event Tracing is used. In iOS, NSLog is used.
+            In android, logcat is used. The default value is <c>false</c></summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="Level">
-      <MemberSignature Language="C#" Value="public static Microsoft.Identity.Client.Logger.LogLevel Level { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property valuetype Microsoft.Identity.Client.Logger/LogLevel Level" />
+      <MemberSignature Language="C#" Value="public static Microsoft.Identity.Client.LogLevel Level { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property valuetype Microsoft.Identity.Client.LogLevel Level" />
       <MemberSignature Language="DocId" Value="P:Microsoft.Identity.Client.Logger.Level" />
-      <MemberSignature Language="VB.NET" Value="Public Shared Property Level As Logger.LogLevel" />
-      <MemberSignature Language="F#" Value="member this.Level : Microsoft.Identity.Client.Logger.LogLevel with get, set" Usage="Microsoft.Identity.Client.Logger.Level" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Property Level As LogLevel" />
+      <MemberSignature Language="F#" Value="member this.Level : Microsoft.Identity.Client.LogLevel with get, set" Usage="Microsoft.Identity.Client.Logger.Level" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>1.1.4.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>Microsoft.Identity.Client.Logger+LogLevel</ReturnType>
+        <ReturnType>Microsoft.Identity.Client.LogLevel</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            Configurable log level. Default value is Info.
+            Enables you to configure the level of logging you want. The default value is <see cref="F:Microsoft.Identity.Client.LogLevel.Info" />. Setting it to <see cref="F:Microsoft.Identity.Client.LogLevel.Error" /> will only get errors
+            Setting it to <see cref="F:Microsoft.Identity.Client.LogLevel.Warning" /> will get errors and warning, etc..
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -51,17 +117,25 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>1.1.4.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Identity.Client.LogCallback</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            Callback instance that can be provided by the developer to consume and publish logs in a custom manner. 
+            Callback instance that you can set in your app to consume and publish logs in a custom manner. 
+            If <see cref="P:Microsoft.Identity.Client.Logger.PiiLoggingEnabled" /> is set to <c>true</c>, this method will receive the messages twice: 
+            once with the <c>containsPii</c> parameter equals <c>false</c> and the message without PII, 
+            and a second time with the <c>containsPii</c> parameter equals to <c>true</c> and the message might contain PII. 
+            In some cases (when the message does not contain PII), the message will be the same.
+            <para />
             The property can only be set once and it will throw an ArgumentException if called twice.
+            For details see https://aka.ms/msal-net-logging
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">will be thrown if the LogCallback was already set</exception>
       </Docs>
     </Member>
     <Member MemberName="PiiLoggingEnabled">
@@ -74,17 +148,21 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>1.1.4.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            Flag to enable/disable logging of PII data. PII logs are never written to default outputs like Console, Logcat or NSLog.
-            Default is set to false.
+            Flag to enable/disable logging of Personally Identifiable data (PII) data. 
+            PII logs are never written to default outputs like Console, Logcat or NSLog
+            Default is set to <c>false</c>, which ensures that your application is compliant with GDPR. You can set
+            it to <c>true</c> for advanced debugging requiring PII
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
+        <altmember cref="P:Microsoft.Identity.Client.Logger.DefaultLoggingEnabled" />
       </Docs>
     </Member>
   </Members>
