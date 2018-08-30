@@ -7,6 +7,7 @@
   <AssemblyInfo>
     <AssemblyName>Microsoft.Identity.Client</AssemblyName>
     <AssemblyVersion>1.1.4.0</AssemblyVersion>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Interfaces />
   <Docs>
@@ -14,8 +15,51 @@
             Component containing common validation methods
             </summary>
     <remarks>To be added.</remarks>
+    <Summary>
+            Abstract class containing common API methods and properties. Both <see cref="T:PublicClientApplication" /> and <see cref="T:ConfidentialClientApplication" /> 
+            extend this class. For details see https://aka.ms/msal-net-client-applications
+            </Summary>
+    <Summary>
+            Interface defining common API methods and properties. Both <see cref="T:PublicClientApplication" /> and <see cref="T:ConfidentialClientApplication" /> 
+            extend this class. For details see https://aka.ms/msal-net-client-applications
+            </Summary>
   </Docs>
   <Members>
+    <Member MemberName="AcquireTokenSilentAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt; AcquireTokenSilentAsync (System.Collections.Generic.IEnumerable&lt;string&gt; scopes, Microsoft.Identity.Client.IAccount account);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Identity.Client.AuthenticationResult&gt; AcquireTokenSilentAsync(class System.Collections.Generic.IEnumerable`1&lt;string&gt; scopes, class Microsoft.Identity.Client.IAccount account) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Identity.Client.IClientApplicationBase.AcquireTokenSilentAsync(System.Collections.Generic.IEnumerable{System.String},Microsoft.Identity.Client.IAccount)" />
+      <MemberSignature Language="VB.NET" Value="Public Function AcquireTokenSilentAsync (scopes As IEnumerable(Of String), account As IAccount) As Task(Of AuthenticationResult)" />
+      <MemberSignature Language="F#" Value="abstract member AcquireTokenSilentAsync : seq&lt;string&gt; * Microsoft.Identity.Client.IAccount -&gt; System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt;" Usage="iClientApplicationBase.AcquireTokenSilentAsync (scopes, account)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Identity.Client</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="scopes" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" />
+        <Parameter Name="account" Type="Microsoft.Identity.Client.IAccount" />
+      </Parameters>
+      <Docs>
+        <param name="scopes">Scopes requested to access a protected API</param>
+        <param name="account">Account for which the token is requested. <see cref="T:Microsoft.Identity.Client.IAccount" /></param>
+        <summary>
+            Attempts to acquire an access token for the <paramref name="account" /> from the user token cache. 
+            </summary>
+        <returns>An <see cref="T:Microsoft.Identity.Client.AuthenticationResult" /> containing the requested token</returns>
+        <remarks>
+            The access token is considered a match if it contains <b>at least</b> all the requested scopes.
+            This means that an access token with more scopes than requested could be returned as well. If the access token is expired or 
+            close to expiration (within 5 minute window), then the cached refresh token (if available) is used to acquire a new access token by making a silent network call.
+            See https://aka.ms/msal-net-acuiretokensilent for more details
+            </remarks>
+        <exception cref="T:Microsoft.Identity.Client.MsalUiRequiredException">can be thrown in the case where an interaction is required with the end user of the application, 
+            for instance so that the user consents, or re-signs-in (for instance if the password expirred), or performs two factor authentication</exception>
+      </Docs>
+    </Member>
     <Member MemberName="AcquireTokenSilentAsync">
       <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt; AcquireTokenSilentAsync (System.Collections.Generic.IEnumerable&lt;string&gt; scopes, Microsoft.Identity.Client.IUser user);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Identity.Client.AuthenticationResult&gt; AcquireTokenSilentAsync(class System.Collections.Generic.IEnumerable`1&lt;string&gt; scopes, class Microsoft.Identity.Client.IUser user) cil managed" />
@@ -44,6 +88,49 @@
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AcquireTokenSilentAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt; AcquireTokenSilentAsync (System.Collections.Generic.IEnumerable&lt;string&gt; scopes, Microsoft.Identity.Client.IAccount account, string authority, bool forceRefresh);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Identity.Client.AuthenticationResult&gt; AcquireTokenSilentAsync(class System.Collections.Generic.IEnumerable`1&lt;string&gt; scopes, class Microsoft.Identity.Client.IAccount account, string authority, bool forceRefresh) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Identity.Client.IClientApplicationBase.AcquireTokenSilentAsync(System.Collections.Generic.IEnumerable{System.String},Microsoft.Identity.Client.IAccount,System.String,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Function AcquireTokenSilentAsync (scopes As IEnumerable(Of String), account As IAccount, authority As String, forceRefresh As Boolean) As Task(Of AuthenticationResult)" />
+      <MemberSignature Language="F#" Value="abstract member AcquireTokenSilentAsync : seq&lt;string&gt; * Microsoft.Identity.Client.IAccount * string * bool -&gt; System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt;" Usage="iClientApplicationBase.AcquireTokenSilentAsync (scopes, account, authority, forceRefresh)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Identity.Client</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="scopes" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" />
+        <Parameter Name="account" Type="Microsoft.Identity.Client.IAccount" />
+        <Parameter Name="authority" Type="System.String" />
+        <Parameter Name="forceRefresh" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="scopes">Scopes requested to access a protected API</param>
+        <param name="account">Account for which the token is requested. <see cref="T:Microsoft.Identity.Client.IAccount" /></param>
+        <param name="authority">Specific authority for which the token is requested. Passing a different value than configured in the application constructor
+            narrows down the selection of tenants for which to get a tenant, but does not change the configured value</param>
+        <param name="forceRefresh">If <c>true</c>, the will ignore the access token in the cache and attempt to acquire new access token 
+            using the refresh token for the account if this one is available. This can be useful in the case when the application developer wants to make
+            sure that conditional access policies are applies immediately, rather than after the expiration of the access token</param>
+        <summary>
+            Attempts to acquire and access token for the <paramref name="account" /> from the user token cache, with advanced parameters making a network call.
+            </summary>
+        <returns>An <see cref="T:Microsoft.Identity.Client.AuthenticationResult" /> containing the requested token</returns>
+        <remarks>
+            The access token is considered a match if it contains <b>at least</b> all the requested scopes. This means that an access token with more scopes than 
+            requested could be returned as well. If the access token is expired or close to expiration (within 5 minute window), 
+            then the cached refresh token (if available) is used to acquire a new access token by making a silent network call.
+            See https://aka.ms/msal-net-acquiretokensilent for more details
+            </remarks>
+        <exception cref="T:Microsoft.Identity.Client.MsalUiRequiredException">can be thrown in the case where an interaction is required with the end user of the application, 
+            for instance, if no refresh token was in the cache, or the user needs to consents, or re-sign-in (for instance if the password expirred), 
+            or performs two factor authentication</exception>
       </Docs>
     </Member>
     <Member MemberName="AcquireTokenSilentAsync">
@@ -90,6 +177,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>1.1.4.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -100,6 +188,11 @@
         <remarks>To be added.</remarks>
         <Summary>
             Authority provided by the developer or default authority used by the library.
+            </Summary>
+        <Summary>
+            Gets the URL of the authority, or the security token service (STS) from which MSAL.NET will acquire security tokens.
+            The return value of this propety is either the value provided by the developer in the constructor of the application, or otherwise 
+            the value of the <see cref="P:Microsoft.Identity.Client.ClientApplicationBase.Authority" /> static member (that is <c>https://login.microsoftonline.com/common/</c>)
             </Summary>
       </Docs>
     </Member>
@@ -113,13 +206,15 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>1.1.4.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            Will be a default value. Can be overridden by the developer. Once set, application will bind to the client Id.
+            Gets the Client ID (also known as Application ID) of the application as registered in the application registration portal (https://aka.ms/msal-net-register-app)
+            and as passed in the constructor of the application.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -135,16 +230,68 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>1.1.4.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            Identifier of the component consuming MSAL and it is intended for libraries/SDKs that consume MSAL. This will allow for 
-            disambiguation between MSAL usage by the app vs MSAL usage by component libraries.
+            Identifier of the component (libraries/SDK) consuming MSAL.NET. 
+            This will allow for disambiguation between MSAL usage by the app vs MSAL usage by component libraries.
             </summary>
         <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetAccountAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.IAccount&gt; GetAccountAsync (string identifier);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Identity.Client.IAccount&gt; GetAccountAsync(string identifier) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Identity.Client.IClientApplicationBase.GetAccountAsync(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetAccountAsync (identifier As String) As Task(Of IAccount)" />
+      <MemberSignature Language="F#" Value="abstract member GetAccountAsync : string -&gt; System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.IAccount&gt;" Usage="iClientApplicationBase.GetAccountAsync identifier" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Identity.Client</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.IAccount&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="identifier" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="identifier">Account identifier. The value of the identifier will probably have been stored value from the
+            value of the <see cref="P:Microsoft.Identity.Client.AccountId.Identifier" /> property of <see cref="T:Microsoft.Identity.Client.AccountId" />. 
+            You typically get the account id from an <see cref="T:Microsoft.Identity.Client.IAccount" /> by using the <see cref="P:Microsoft.Identity.Client.IAccount.HomeAccountId" /> property&gt;</param>
+        <summary>
+            Get the <see cref="T:Microsoft.Identity.Client.IAccount" /> by its identifier among the accounts available in the token cache.
+            </summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetAccountsAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;System.Collections.Generic.IEnumerable&lt;Microsoft.Identity.Client.IAccount&gt;&gt; GetAccountsAsync ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class System.Collections.Generic.IEnumerable`1&lt;class Microsoft.Identity.Client.IAccount&gt;&gt; GetAccountsAsync() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Identity.Client.IClientApplicationBase.GetAccountsAsync" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetAccountsAsync () As Task(Of IEnumerable(Of IAccount))" />
+      <MemberSignature Language="F#" Value="abstract member GetAccountsAsync : unit -&gt; System.Threading.Tasks.Task&lt;seq&lt;Microsoft.Identity.Client.IAccount&gt;&gt;" Usage="iClientApplicationBase.GetAccountsAsync " />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Identity.Client</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;System.Collections.Generic.IEnumerable&lt;Microsoft.Identity.Client.IAccount&gt;&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+            Returns all the available <see cref="T:Microsoft.Identity.Client.IAccount">accounts</see> in the user token cache for the application.
+            </summary>
+        <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -158,7 +305,16 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>1.1.4.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="azure-dotnet-preview">
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute FrameworkAlternate="azure-dotnet-preview">
+          <AttributeName>System.Obsolete("Use GetAccountAsync instead and pass IAccount.HomeAccountId.Identifier (See https://aka.ms/msal-net-2-released)", true)</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>Microsoft.Identity.Client.IUser</ReturnType>
       </ReturnValue>
@@ -166,11 +322,12 @@
         <Parameter Name="identifier" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="identifier">user identifier</param>
+        <param name="identifier">Identifier of the user to retrieve</param>
         <summary>
-            Get user by identifier from users available in the cache.
+            In MSAL 1.x, return a user from its identifier. From MSAL 2.x, use <see cref="M:Microsoft.Identity.Client.IClientApplicationBase.GetAccountsAsync" /> instead.
+            See https://aka.ms/msal-net-2-released for more details.
             </summary>
-        <returns>To be added.</returns>
+        <returns>the user in the cache with the identifier passed as an argument</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -184,17 +341,26 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>1.1.4.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            Redirect Uri configured in the portal. Will have a default value. Not required if the developer is using the
-            default client Id.
+            The redirect URI (also known as Reply URI or Reply URL), is the URI at which Azure AD will contact back the application with the tokens. 
+            This redirect URI needs to be registered in the app registration (https://aka.ms/msal-net-register-app)
+            In MSAL.NET, <see cref="T:PublicClientApplication" /> define the following default RedirectUri values:
+            <list type="bullet"><item><description><c>urn:ietf:wg:oauth:2.0:oob</c> for desktop (.NET Framework and .NET Core) applications</description></item><item><description><c>msal{ClientId}</c> for Xamarin iOS and Xamarin Android (as this will be used by the system web browser by default on these
+            platforms to call back the application)
+            </description></item></list>
+            These default URIs could change in the future.
+            In <see cref="T:Microsoft.Identity.Client.ConfidentialClientApplication" />, this can be the URL of the Web application / Web API.
             </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>This is especially important when you deploy an application that you have initially tested locally; 
+            you then need to add the reply URL of the deployed application in the application registration portal.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="Remove">
@@ -207,7 +373,16 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>1.1.4.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="azure-dotnet-preview">
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute FrameworkAlternate="azure-dotnet-preview">
+          <AttributeName>System.Obsolete("Use RemoveAccountAsync instead (See https://aka.ms/msal-net-2-released)", true)</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
@@ -215,10 +390,37 @@
         <Parameter Name="user" Type="Microsoft.Identity.Client.IUser" />
       </Parameters>
       <Docs>
-        <param name="user">instance of the user that needs to be removed</param>
+        <param name="user">User to remove from the cache</param>
         <summary>
-            Removes all cached tokens for the specified user.
+            In MSAL 1.x removed a user from the cache. From MSAL 2.x, use <see cref="M:Microsoft.Identity.Client.IClientApplicationBase.RemoveAsync(Microsoft.Identity.Client.IAccount)" /> instead.
+            See https://aka.ms/msal-net-2-released for more details.
             </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RemoveAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task RemoveAsync (Microsoft.Identity.Client.IAccount account);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task RemoveAsync(class Microsoft.Identity.Client.IAccount account) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Identity.Client.IClientApplicationBase.RemoveAsync(Microsoft.Identity.Client.IAccount)" />
+      <MemberSignature Language="VB.NET" Value="Public Function RemoveAsync (account As IAccount) As Task" />
+      <MemberSignature Language="F#" Value="abstract member RemoveAsync : Microsoft.Identity.Client.IAccount -&gt; System.Threading.Tasks.Task" Usage="iClientApplicationBase.RemoveAsync account" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Identity.Client</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="account" Type="Microsoft.Identity.Client.IAccount" />
+      </Parameters>
+      <Docs>
+        <param name="account">instance of the account that needs to be removed</param>
+        <summary>
+            Removes all tokens in the cache for the specified account.
+            </summary>
+        <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -232,14 +434,16 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>1.1.4.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            Sets or Gets the custom query parameters that may be sent to the STS for dogfood testing. This parameter should not be set by the 
-            developers as it may have adverse effect on the application.
+            Sets or Gets a custom query parameters that may be sent to the STS for dogfood testing or debugging. This is a string of segments
+            of the form <c>key=value</c> separated by an ampersand character.
+            Unless requested otherwise, this parameter should not be set by application developers as it may have adverse effect on the application.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -255,13 +459,26 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>1.1.4.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="azure-dotnet-preview">
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute FrameworkAlternate="azure-dotnet-preview">
+          <AttributeName>System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute FrameworkAlternate="azure-dotnet-preview">
+          <AttributeName>System.Obsolete("Use GetAccountsAsync instead (See https://aka.ms/msal-net-2-released)", true)</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Collections.Generic.IEnumerable&lt;Microsoft.Identity.Client.IUser&gt;</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            Returns a user-centric view over the cache that provides a list of all the available users in the cache.
+            In MSAL 1.x returned an enumeration of <see cref="T:Microsoft.Identity.Client.IUser" />. From MSAL 2.x, use <see cref="M:Microsoft.Identity.Client.IClientApplicationBase.GetAccountsAsync" /> instead.
+            See https://aka.ms/msal-net-2-released for more details.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -277,13 +494,16 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>1.1.4.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            Gets a value indicating whether address validation is ON or OFF.
+            Gets a boolean value telling the application if the authority needs to be verified against a list of known authorities. The default
+            value is <c>true</c>. It should currently be set to <c>false</c> for Azure AD B2C authorities as those are customer specific 
+            (a list of known B2C authorities cannot be maintained by MSAL.NET)
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>

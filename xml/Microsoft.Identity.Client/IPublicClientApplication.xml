@@ -7,6 +7,7 @@
   <AssemblyInfo>
     <AssemblyName>Microsoft.Identity.Client</AssemblyName>
     <AssemblyVersion>1.1.4.0</AssemblyVersion>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Interfaces>
     <Interface>
@@ -15,7 +16,9 @@
   </Interfaces>
   <Docs>
     <summary>
-            Component to be used for native applications (Desktop/UWP/iOS/Android).
+            Interface to be used with desktop or mobile applications (Desktop / UWP / Xamarin.iOS / Xamarin.Android).
+            public client applications are not trusted to safely keep application secrets, and therefore they only access Web APIs in the name of the user only 
+            (they only support public client flows). For details see https://aka.ms/msal-net-client-applications
             </summary>
     <remarks>To be added.</remarks>
   </Docs>
@@ -30,6 +33,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>1.1.4.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt;</ReturnType>
@@ -38,11 +42,40 @@
         <Parameter Name="scopes" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" />
       </Parameters>
       <Docs>
-        <param name="scopes">Array of scopes requested for resource</param>
+        <param name="scopes">Scopes requested to access a protected API</param>
         <summary>
-            Interactive request to acquire token. 
+            Interactive request to acquire token for the specified scopes. The user is required to select an account
             </summary>
-        <returns>Authentication result containing token of the user</returns>
+        <returns>Authentication result containing a token for the requested scopes and account</returns>
+        <remarks>The user will be signed-in interactively if needed,
+            and will consent to scopes and do multi-factor authentication if such a policy was enabled in the Azure AD tenant.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AcquireTokenAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt; AcquireTokenAsync (System.Collections.Generic.IEnumerable&lt;string&gt; scopes, Microsoft.Identity.Client.IAccount account);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Identity.Client.AuthenticationResult&gt; AcquireTokenAsync(class System.Collections.Generic.IEnumerable`1&lt;string&gt; scopes, class Microsoft.Identity.Client.IAccount account) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Identity.Client.IPublicClientApplication.AcquireTokenAsync(System.Collections.Generic.IEnumerable{System.String},Microsoft.Identity.Client.IAccount)" />
+      <MemberSignature Language="VB.NET" Value="Public Function AcquireTokenAsync (scopes As IEnumerable(Of String), account As IAccount) As Task(Of AuthenticationResult)" />
+      <MemberSignature Language="F#" Value="abstract member AcquireTokenAsync : seq&lt;string&gt; * Microsoft.Identity.Client.IAccount -&gt; System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt;" Usage="iPublicClientApplication.AcquireTokenAsync (scopes, account)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Identity.Client</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="scopes" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" />
+        <Parameter Name="account" Type="Microsoft.Identity.Client.IAccount" />
+      </Parameters>
+      <Docs>
+        <param name="scopes">Scopes requested to access a protected API</param>
+        <param name="account">Account to use for the interactive token acquisition. See <see cref="T:Microsoft.Identity.Client.IAccount" /> for ways to get an account</param>
+        <summary>
+            Interactive request to acquire token for the specified scopes. The user will need to sign-in but an account will be proposed
+            based on the provided <paramref name="account" /></summary>
+        <returns>Authentication result containing a token for the requested scopes and account</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -84,6 +117,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>1.1.4.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt;</ReturnType>
@@ -93,13 +127,15 @@
         <Parameter Name="parent" Type="Microsoft.Identity.Client.UIParent" />
       </Parameters>
       <Docs>
-        <param name="scopes">Array of scopes requested for resource</param>
-        <param name="parent">Object contains reference to parent window/activity. REQUIRED for Xamarin.Android only.</param>
+        <param name="scopes">Scopes requested to access a protected API</param>
+        <param name="parent">Object containing a reference to the parent window/activity. REQUIRED for Xamarin.Android only.</param>
         <summary>
-            Interactive request to acquire token. 
+            Interactive request to acquire token for the specified scopes. The interactive window will be parented to the specified
+            window. The user will be required to select an account
             </summary>
-        <returns>Authentication result containing token of the user</returns>
-        <remarks>To be added.</remarks>
+        <returns>Authentication result containing a token for the requested scopes and account</returns>
+        <remarks>The user will be signed-in interactively if needed,
+            and will consent to scopes and do multi-factor authentication if such a policy was enabled in the Azure AD tenant.</remarks>
       </Docs>
     </Member>
     <Member MemberName="AcquireTokenAsync">
@@ -112,6 +148,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>1.1.4.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt;</ReturnType>
@@ -121,12 +158,42 @@
         <Parameter Name="loginHint" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="scopes">Array of scopes requested for resource</param>
-        <param name="loginHint">Identifier of the user. Generally a UPN.</param>
+        <param name="scopes">Scopes requested to access a protected API</param>
+        <param name="loginHint">Identifier of the user. Generally in UserPrincipalName (UPN) format, e.g. <c>john.doe@contoso.com</c></param>
         <summary>
-            Interactive request to acquire token. 
-            </summary>
-        <returns>Authentication result containing token of the user</returns>
+            Interactive request to acquire token for the specified scopes. The user will need to sign-in but an account will be proposed
+            based on the <paramref name="loginHint" /></summary>
+        <returns>Authentication result containing a token for the requested scopes and account</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AcquireTokenAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt; AcquireTokenAsync (System.Collections.Generic.IEnumerable&lt;string&gt; scopes, Microsoft.Identity.Client.IAccount account, Microsoft.Identity.Client.UIParent parent);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Identity.Client.AuthenticationResult&gt; AcquireTokenAsync(class System.Collections.Generic.IEnumerable`1&lt;string&gt; scopes, class Microsoft.Identity.Client.IAccount account, class Microsoft.Identity.Client.UIParent parent) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Identity.Client.IPublicClientApplication.AcquireTokenAsync(System.Collections.Generic.IEnumerable{System.String},Microsoft.Identity.Client.IAccount,Microsoft.Identity.Client.UIParent)" />
+      <MemberSignature Language="VB.NET" Value="Public Function AcquireTokenAsync (scopes As IEnumerable(Of String), account As IAccount, parent As UIParent) As Task(Of AuthenticationResult)" />
+      <MemberSignature Language="F#" Value="abstract member AcquireTokenAsync : seq&lt;string&gt; * Microsoft.Identity.Client.IAccount * Microsoft.Identity.Client.UIParent -&gt; System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt;" Usage="iPublicClientApplication.AcquireTokenAsync (scopes, account, parent)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Identity.Client</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="scopes" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" />
+        <Parameter Name="account" Type="Microsoft.Identity.Client.IAccount" />
+        <Parameter Name="parent" Type="Microsoft.Identity.Client.UIParent" />
+      </Parameters>
+      <Docs>
+        <param name="scopes">Scopes requested to access a protected API</param>
+        <param name="account">Account to use for the interactive token acquisition. See <see cref="T:Microsoft.Identity.Client.IAccount" /> for ways to get an account</param>
+        <param name="parent">Object containing a reference to the parent window/activity. REQUIRED for Xamarin.Android only.</param>
+        <summary>
+            Interactive request to acquire token for the specified scopes. The user will need to sign-in but an account will be proposed
+            based on the provided <paramref name="account" /></summary>
+        <returns>Authentication result containing a token for the requested scopes and account</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -170,6 +237,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>1.1.4.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt;</ReturnType>
@@ -180,13 +248,48 @@
         <Parameter Name="parent" Type="Microsoft.Identity.Client.UIParent" />
       </Parameters>
       <Docs>
-        <param name="scopes">Array of scopes requested for resource</param>
-        <param name="loginHint">Identifier of the user. Generally a UPN.</param>
-        <param name="parent">Object contains reference to parent window/activity. REQUIRED for Xamarin.Android only.</param>
+        <param name="scopes">Scopes requested to access a protected API</param>
+        <param name="loginHint">Identifier of the user. Generally in UserPrincipalName (UPN) format, e.g. <c>john.doe@contoso.com</c></param>
+        <param name="parent">Object containing a reference to the parent window/activity. REQUIRED for Xamarin.Android only.</param>
         <summary>
-            Interactive request to acquire token. 
+            Interactive request to acquire token for the specified scopes. The interactive window will be parented to the specified
+            window. . The user will need to sign-in but an account will be proposed
+            based on the <paramref name="loginHint" /></summary>
+        <returns>Authentication result containing a token for the requested scopes and login</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AcquireTokenAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt; AcquireTokenAsync (System.Collections.Generic.IEnumerable&lt;string&gt; scopes, Microsoft.Identity.Client.IAccount account, Microsoft.Identity.Client.UIBehavior behavior, string extraQueryParameters);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Identity.Client.AuthenticationResult&gt; AcquireTokenAsync(class System.Collections.Generic.IEnumerable`1&lt;string&gt; scopes, class Microsoft.Identity.Client.IAccount account, valuetype Microsoft.Identity.Client.UIBehavior behavior, string extraQueryParameters) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Identity.Client.IPublicClientApplication.AcquireTokenAsync(System.Collections.Generic.IEnumerable{System.String},Microsoft.Identity.Client.IAccount,Microsoft.Identity.Client.UIBehavior,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function AcquireTokenAsync (scopes As IEnumerable(Of String), account As IAccount, behavior As UIBehavior, extraQueryParameters As String) As Task(Of AuthenticationResult)" />
+      <MemberSignature Language="F#" Value="abstract member AcquireTokenAsync : seq&lt;string&gt; * Microsoft.Identity.Client.IAccount * Microsoft.Identity.Client.UIBehavior * string -&gt; System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt;" Usage="iPublicClientApplication.AcquireTokenAsync (scopes, account, behavior, extraQueryParameters)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Identity.Client</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="scopes" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" />
+        <Parameter Name="account" Type="Microsoft.Identity.Client.IAccount" />
+        <Parameter Name="behavior" Type="Microsoft.Identity.Client.UIBehavior" />
+        <Parameter Name="extraQueryParameters" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="scopes">Scopes requested to access a protected API</param>
+        <param name="account">Account to use for the interactive token acquisition. See <see cref="T:Microsoft.Identity.Client.IAccount" /> for ways to get an account</param>
+        <param name="behavior">Designed interactive experience for the user.</param>
+        <param name="extraQueryParameters">This parameter will be appended as is to the query string in the HTTP authentication request to the authority. 
+            This is expected to be a string of segments of the form <c>key=value</c> separated by an ampersand character.
+            The parameter can be null.</param>
+        <summary>
+            Interactive request to acquire token for an account with control of the UI behavior and possiblity of passing extra query parameters like additional claims
             </summary>
-        <returns>Authentication result containing token of the user</returns>
+        <returns>Authentication result containing a token for the requested scopes and account</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -232,6 +335,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>1.1.4.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt;</ReturnType>
@@ -243,14 +347,52 @@
         <Parameter Name="extraQueryParameters" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="scopes">Array of scopes requested for resource</param>
-        <param name="loginHint">Identifier of the user. Generally a UPN.</param>
-        <param name="behavior">Enumeration to control UI behavior.</param>
-        <param name="extraQueryParameters">This parameter will be appended as is to the query string in the HTTP authentication request to the authority. The parameter can be null.</param>
+        <param name="scopes">Scopes requested to access a protected API</param>
+        <param name="loginHint">Identifier of the user. Generally in UserPrincipalName (UPN) format, e.g. <c>john.doe@contoso.com</c></param>
+        <param name="behavior">Designed interactive experience for the user.</param>
+        <param name="extraQueryParameters">This parameter will be appended as is to the query string in the HTTP authentication request to the authority. 
+            This is expected to be a string of segments of the form <c>key=value</c> separated by an ampersand character.
+            The parameter can be null.</param>
         <summary>
-            Interactive request to acquire token. 
+            Interactive request to acquire token for a login with control of the UI behavior and possiblity of passing extra query parameters like additional claims
             </summary>
-        <returns>Authentication result containing token of the user</returns>
+        <returns>Authentication result containing a token for the requested scopes and account</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AcquireTokenAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt; AcquireTokenAsync (System.Collections.Generic.IEnumerable&lt;string&gt; scopes, Microsoft.Identity.Client.IAccount account, Microsoft.Identity.Client.UIBehavior behavior, string extraQueryParameters, Microsoft.Identity.Client.UIParent parent);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Identity.Client.AuthenticationResult&gt; AcquireTokenAsync(class System.Collections.Generic.IEnumerable`1&lt;string&gt; scopes, class Microsoft.Identity.Client.IAccount account, valuetype Microsoft.Identity.Client.UIBehavior behavior, string extraQueryParameters, class Microsoft.Identity.Client.UIParent parent) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Identity.Client.IPublicClientApplication.AcquireTokenAsync(System.Collections.Generic.IEnumerable{System.String},Microsoft.Identity.Client.IAccount,Microsoft.Identity.Client.UIBehavior,System.String,Microsoft.Identity.Client.UIParent)" />
+      <MemberSignature Language="VB.NET" Value="Public Function AcquireTokenAsync (scopes As IEnumerable(Of String), account As IAccount, behavior As UIBehavior, extraQueryParameters As String, parent As UIParent) As Task(Of AuthenticationResult)" />
+      <MemberSignature Language="F#" Value="abstract member AcquireTokenAsync : seq&lt;string&gt; * Microsoft.Identity.Client.IAccount * Microsoft.Identity.Client.UIBehavior * string * Microsoft.Identity.Client.UIParent -&gt; System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt;" Usage="iPublicClientApplication.AcquireTokenAsync (scopes, account, behavior, extraQueryParameters, parent)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Identity.Client</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="scopes" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" />
+        <Parameter Name="account" Type="Microsoft.Identity.Client.IAccount" />
+        <Parameter Name="behavior" Type="Microsoft.Identity.Client.UIBehavior" />
+        <Parameter Name="extraQueryParameters" Type="System.String" />
+        <Parameter Name="parent" Type="Microsoft.Identity.Client.UIParent" />
+      </Parameters>
+      <Docs>
+        <param name="scopes">Scopes requested to access a protected API</param>
+        <param name="account">Account to use for the interactive token acquisition. See <see cref="T:Microsoft.Identity.Client.IAccount" /> for ways to get an account</param>
+        <param name="behavior">Designed interactive experience for the user.</param>
+        <param name="extraQueryParameters">This parameter will be appended as is to the query string in the HTTP authentication request to the authority. 
+            This is expected to be a string of segments of the form <c>key=value</c> separated by an ampersand character.
+            The parameter can be null.</param>
+        <param name="parent">Object containing a reference to the parent window/activity. REQUIRED for Xamarin.Android only.</param>
+        <summary>
+            Interactive request to acquire token for an account with control of the UI behavior and possiblity of passing extra query parameters like additional claims
+            </summary>
+        <returns>Authentication result containing a token for the requested scopes and account</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -298,6 +440,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>1.1.4.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt;</ReturnType>
@@ -310,15 +453,57 @@
         <Parameter Name="parent" Type="Microsoft.Identity.Client.UIParent" />
       </Parameters>
       <Docs>
-        <param name="scopes">Array of scopes requested for resource</param>
-        <param name="loginHint">Identifier of the user. Generally a UPN.</param>
-        <param name="behavior">Enumeration to control UI behavior.</param>
-        <param name="extraQueryParameters">This parameter will be appended as is to the query string in the HTTP authentication request to the authority. The parameter can be null.</param>
-        <param name="parent">Object contains reference to parent window/activity. REQUIRED for Xamarin.Android only.</param>
+        <param name="scopes">Scopes requested to access a protected API</param>
+        <param name="loginHint">Identifier of the user. Generally in UserPrincipalName (UPN) format, e.g. <c>john.doe@contoso.com</c></param>
+        <param name="behavior">Designed interactive experience for the user.</param>
+        <param name="extraQueryParameters">This parameter will be appended as is to the query string in the HTTP authentication request to the authority. 
+            This is expected to be a string of segments of the form <c>key=value</c> separated by an ampersand character.
+            The parameter can be null.</param>
+        <param name="parent">Object containing a reference to the parent window/activity. REQUIRED for Xamarin.Android only.</param>
         <summary>
-            Interactive request to acquire token. 
+            Interactive request to acquire token for a login with control of the UI behavior and possiblity of passing extra query parameters like additional claims
             </summary>
-        <returns>Authentication result containing token of the user</returns>
+        <returns>Authentication result containing a token for the requested scopes and account</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AcquireTokenAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt; AcquireTokenAsync (System.Collections.Generic.IEnumerable&lt;string&gt; scopes, Microsoft.Identity.Client.IAccount account, Microsoft.Identity.Client.UIBehavior behavior, string extraQueryParameters, System.Collections.Generic.IEnumerable&lt;string&gt; extraScopesToConsent, string authority);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Identity.Client.AuthenticationResult&gt; AcquireTokenAsync(class System.Collections.Generic.IEnumerable`1&lt;string&gt; scopes, class Microsoft.Identity.Client.IAccount account, valuetype Microsoft.Identity.Client.UIBehavior behavior, string extraQueryParameters, class System.Collections.Generic.IEnumerable`1&lt;string&gt; extraScopesToConsent, string authority) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Identity.Client.IPublicClientApplication.AcquireTokenAsync(System.Collections.Generic.IEnumerable{System.String},Microsoft.Identity.Client.IAccount,Microsoft.Identity.Client.UIBehavior,System.String,System.Collections.Generic.IEnumerable{System.String},System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function AcquireTokenAsync (scopes As IEnumerable(Of String), account As IAccount, behavior As UIBehavior, extraQueryParameters As String, extraScopesToConsent As IEnumerable(Of String), authority As String) As Task(Of AuthenticationResult)" />
+      <MemberSignature Language="F#" Value="abstract member AcquireTokenAsync : seq&lt;string&gt; * Microsoft.Identity.Client.IAccount * Microsoft.Identity.Client.UIBehavior * string * seq&lt;string&gt; * string -&gt; System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt;" Usage="iPublicClientApplication.AcquireTokenAsync (scopes, account, behavior, extraQueryParameters, extraScopesToConsent, authority)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Identity.Client</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="scopes" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" />
+        <Parameter Name="account" Type="Microsoft.Identity.Client.IAccount" />
+        <Parameter Name="behavior" Type="Microsoft.Identity.Client.UIBehavior" />
+        <Parameter Name="extraQueryParameters" Type="System.String" />
+        <Parameter Name="extraScopesToConsent" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" />
+        <Parameter Name="authority" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="scopes">Scopes requested to access a protected API</param>
+        <param name="account">Account to use for the interactive token acquisition. See <see cref="T:Microsoft.Identity.Client.IAccount" /> for ways to get an account</param>
+        <param name="behavior">Designed interactive experience for the user.</param>
+        <param name="extraQueryParameters">This parameter will be appended as is to the query string in the HTTP authentication request to the authority. 
+            This is expected to be a string of segments of the form <c>key=value</c> separated by an ampersand character.
+            The parameter can be null.</param>
+        <param name="extraScopesToConsent">Scopes that you can request the end user to consent upfront, in addition to the scopes for the protected Web API
+            for which you want to acquire a security token.</param>
+        <param name="authority">Specific authority for which the token is requested. Passing a different value than configured does not change the configured value</param>
+        <summary>
+            Interactive request to acquire token for a given account, with the possibility of controlling the user experience, passing extra query
+            parameters, providing extra scopes that the user can pre-consent to, and overriding the authority pre-configured in the application
+            </summary>
+        <returns>Authentication result containing a token for the requested scopes and account</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -368,6 +553,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>1.1.4.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt;</ReturnType>
@@ -381,16 +567,62 @@
         <Parameter Name="authority" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="scopes">Array of scopes requested for resource</param>
-        <param name="loginHint">Identifier of the user. Generally a UPN.</param>
-        <param name="behavior">Enumeration to control UI behavior.</param>
-        <param name="extraQueryParameters">This parameter will be appended as is to the query string in the HTTP authentication request to the authority. The parameter can be null.</param>
-        <param name="extraScopesToConsent">Array of scopes for which a developer can request consent upfront.</param>
+        <param name="scopes">scopes requested to access a protected API</param>
+        <param name="loginHint">Identifier of the user. Generally in UserPrincipalName (UPN) format, e.g. <c>john.doe@contoso.com</c></param>
+        <param name="behavior">Designed interactive experience for the user.</param>
+        <param name="extraQueryParameters">This parameter will be appended as is to the query string in the HTTP authentication request to the authority. 
+            This is expected to be a string of segments of the form <c>key=value</c> separated by an ampersand character.
+            The parameter can be null.</param>
+        <param name="extraScopesToConsent">scopes that you can request the end user to consent upfront, in addition to the scopes for the protected Web API
+            for which you want to acquire a security token.</param>
         <param name="authority">Specific authority for which the token is requested. Passing a different value than configured does not change the configured value</param>
         <summary>
-            Interactive request to acquire token. 
+            Interactive request to acquire token for a given login, with the possibility of controlling the user experience, passing extra query
+            parameters, providing extra scopes that the user can pre-consent to, and overriding the authority pre-configured in the application
             </summary>
-        <returns>Authentication result containing token of the user</returns>
+        <returns>Authentication result containing a token for the requested scopes and account</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AcquireTokenAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt; AcquireTokenAsync (System.Collections.Generic.IEnumerable&lt;string&gt; scopes, Microsoft.Identity.Client.IAccount account, Microsoft.Identity.Client.UIBehavior behavior, string extraQueryParameters, System.Collections.Generic.IEnumerable&lt;string&gt; extraScopesToConsent, string authority, Microsoft.Identity.Client.UIParent parent);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Identity.Client.AuthenticationResult&gt; AcquireTokenAsync(class System.Collections.Generic.IEnumerable`1&lt;string&gt; scopes, class Microsoft.Identity.Client.IAccount account, valuetype Microsoft.Identity.Client.UIBehavior behavior, string extraQueryParameters, class System.Collections.Generic.IEnumerable`1&lt;string&gt; extraScopesToConsent, string authority, class Microsoft.Identity.Client.UIParent parent) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Identity.Client.IPublicClientApplication.AcquireTokenAsync(System.Collections.Generic.IEnumerable{System.String},Microsoft.Identity.Client.IAccount,Microsoft.Identity.Client.UIBehavior,System.String,System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.Identity.Client.UIParent)" />
+      <MemberSignature Language="VB.NET" Value="Public Function AcquireTokenAsync (scopes As IEnumerable(Of String), account As IAccount, behavior As UIBehavior, extraQueryParameters As String, extraScopesToConsent As IEnumerable(Of String), authority As String, parent As UIParent) As Task(Of AuthenticationResult)" />
+      <MemberSignature Language="F#" Value="abstract member AcquireTokenAsync : seq&lt;string&gt; * Microsoft.Identity.Client.IAccount * Microsoft.Identity.Client.UIBehavior * string * seq&lt;string&gt; * string * Microsoft.Identity.Client.UIParent -&gt; System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt;" Usage="iPublicClientApplication.AcquireTokenAsync (scopes, account, behavior, extraQueryParameters, extraScopesToConsent, authority, parent)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Identity.Client</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="scopes" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" />
+        <Parameter Name="account" Type="Microsoft.Identity.Client.IAccount" />
+        <Parameter Name="behavior" Type="Microsoft.Identity.Client.UIBehavior" />
+        <Parameter Name="extraQueryParameters" Type="System.String" />
+        <Parameter Name="extraScopesToConsent" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" />
+        <Parameter Name="authority" Type="System.String" />
+        <Parameter Name="parent" Type="Microsoft.Identity.Client.UIParent" />
+      </Parameters>
+      <Docs>
+        <param name="scopes">Scopes requested to access a protected API</param>
+        <param name="account">Account to use for the interactive token acquisition. See <see cref="T:Microsoft.Identity.Client.IAccount" /> for ways to get an account</param>
+        <param name="behavior">Designed interactive experience for the user.</param>
+        <param name="extraQueryParameters">This parameter will be appended as is to the query string in the HTTP authentication request to the authority. 
+            This is expected to be a string of segments of the form <c>key=value</c> separated by an ampersand character.
+            The parameter can be null.</param>
+        <param name="extraScopesToConsent">Scopes that you can request the end user to consent upfront, in addition to the scopes for the protected Web API
+            for which you want to acquire a security token.</param>
+        <param name="authority">Specific authority for which the token is requested. Passing a different value than configured does not change the configured value</param>
+        <param name="parent">Object containing a reference to the parent window/activity. REQUIRED for Xamarin.Android only.</param>
+        <summary>
+            Interactive request to acquire token for a given account, with the possibility of controlling the user experience, passing extra query
+            parameters, providing extra scopes that the user can pre-consent to, and overriding the authority pre-configured in the application
+            </summary>
+        <returns>Authentication result containing a token for the requested scopes and account</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -442,6 +674,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>1.1.4.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt;</ReturnType>
@@ -456,17 +689,21 @@
         <Parameter Name="parent" Type="Microsoft.Identity.Client.UIParent" />
       </Parameters>
       <Docs>
-        <param name="scopes">Array of scopes requested for resource</param>
-        <param name="loginHint">Identifier of the user. Generally a UPN.</param>
-        <param name="behavior">Enumeration to control UI behavior.</param>
-        <param name="extraQueryParameters">This parameter will be appended as is to the query string in the HTTP authentication request to the authority. The parameter can be null.</param>
-        <param name="extraScopesToConsent">Array of scopes for which a developer can request consent upfront.</param>
+        <param name="scopes">Scopes requested to access a protected API</param>
+        <param name="loginHint">Identifier of the user. Generally in UserPrincipalName (UPN) format, e.g. <c>john.doe@contoso.com</c></param>
+        <param name="behavior">Designed interactive experience for the user.</param>
+        <param name="extraQueryParameters">This parameter will be appended as is to the query string in the HTTP authentication request to the authority. 
+            This is expected to be a string of segments of the form <c>key=value</c> separated by an ampersand character.
+            The parameter can be null.</param>
+        <param name="extraScopesToConsent">Scopes that you can request the end user to consent upfront, in addition to the scopes for the protected Web API
+            for which you want to acquire a security token.</param>
         <param name="authority">Specific authority for which the token is requested. Passing a different value than configured does not change the configured value</param>
-        <param name="parent">Object contains reference to parent window/activity. REQUIRED for Xamarin.Android only.</param>
+        <param name="parent">Object containing a reference to the parent window/activity. REQUIRED for Xamarin.Android only.</param>
         <summary>
-            Interactive request to acquire token. 
+            Interactive request to acquire token for a given login, with the possibility of controlling the user experience, passing extra query
+            parameters, providing extra scopes that the user can pre-consent to, and overriding the authority pre-configured in the application
             </summary>
-        <returns>Authentication result containing token of the user</returns>
+        <returns>Authentication result containing a token for the requested scopes and account</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
