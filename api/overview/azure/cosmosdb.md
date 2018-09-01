@@ -16,7 +16,7 @@ ms.custom: devcenter, svc-overview
 
 ## Overview
 
-[Azure Cosmos DB](https://docs.microsoft.com/azure/cosmos-db/introduction) is a globally distributed, multi-model database service. It is designed such that you can elastically and independently scale throughput and storage across any number of geographical regions with a comprehensive SLA. With Azure Cosmos DB You can store and access document, key-value, wide-column, and graph databases by using APIs and programming models. 
+[Azure Cosmos DB](https://docs.microsoft.com/azure/cosmos-db/introduction) is a globally distributed, multi-model database service. It is designed to elastically and independently scale throughput and storage across any number of geographical regions with a comprehensive SLA. With Azure Cosmos DB, you can store and access document, key-value, wide-column, and graph databases by using APIs and programming models. 
 
 [Get started with Cosmos DB](https://docs.microsoft.com/azure/cosmos-db/create-sql-api-dotnet).
 
