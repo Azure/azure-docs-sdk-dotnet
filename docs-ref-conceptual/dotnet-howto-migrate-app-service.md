@@ -5,7 +5,7 @@ keywords: Azure .NET, ASP.NET, WCF, App Service, Web App, migrate, migration
 author: camsoper
 manager: wpickett
 ms.author: casoper
-ms.date: 07/16/2018
+ms.date: 08/11/2018
 ms.topic: article
 ms.technology: azure
 ms.devlang: dotnet
@@ -109,7 +109,7 @@ If your app cannot be migrated directly to App Service, consider App Service usi
 * [Moving your database to the cloud](https://go.microsoft.com/fwlink/?linkid=863217)
 * [Azure Web App sandbox details and restrictions](https://github.com/projectkudu/kudu/wiki/Azure-Web-App-sandbox)
 
-## Next steps
+## Next Steps
 
 > [!div class="nextstepaction"]
-> [Migrate an ASP.NET Web application to Azure App Service](https://aka.ms/azure-webapp-migrate)
+> [Deploy the app from Visual Studio](https://docs.microsoft.com/visualstudio/deployment/quickstart-deploy-to-azure?view=vs-2017)

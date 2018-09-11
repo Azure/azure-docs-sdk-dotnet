@@ -5,12 +5,12 @@ keywords: Azure .NET, SDK, Azure .NET API Reference, Azure .NET class library
 author: camsoper
 ms.author: casoper
 manager: wpickett
-ms.date: 07/17/2018
+ms.date: 08/11/2018
 ms.topic: reference
 ms.technology: azure
 ms.devlang: dotnet
 ms.service: multiple
-ms.custom: devcenter
+ms.custom: devcenter, vs-azure
 ---
 
 # Tools for .NET and .NET Core Azure developers
@@ -72,18 +72,46 @@ During install, Azure tools are already enabled by default.
 
 ## [Linux](#tab/linux)
 
-<img src="https://docs.microsoft.com/en-us/visualstudio/products/images/vs-code.svg" width="50" height="50"></img>
+<table>
+  <tr>
+    <td width="50">
+        <img src="https://docs.microsoft.com/en-us/visualstudio/products/images/vs-code.svg" width="50" height="50"></img>
+    </td>
+    <td>
+        Visual Studio Code has everything you need for Azure development on Linux. In addition, Visual Studio supports ASP.NET Core apps on Azure App Service for Linux.
+    </td>
+  </tr>
+</table>
 
-### Step 1: Download the .NET Core SDK
+### Step 1: Download the .NET Core SDK (VS Code)
 
 The SDK and command-line tools for .NET Core apps.
 
 > [!div class="nextstepaction"]
 > [Download .NET Core SDK](https://www.microsoft.com/net/core)
 
-### Step 2: Visual Studio Code
+### Step 2: Visual Studio Code (VS Code)
 
 Edit and debug .NET Core apps on any operating system: Windows, Mac, and Linux.
 
 > [!div class="nextstepaction"]
 > [Download Visual Studio Code](https://code.visualstudio.com)
+
+For development with Visual Studio, take the following steps instead.
+
+### Step 1: Download Visual Studio 2017 (Visual Studio)
+
+You can skip this step if you already have Visual Studio 2017 installed.
+
+Still using Visual Studio 2015?  [click here for installation instructions](dotnet-sdk-vs2015-install.md).
+
+> [!div class="nextstepaction"]
+> [Download Visual Studio 2017](https://www.visualstudio.com/downloads/)
+
+### Step 2: Install the two Azure workloads (Visual Studio)
+
+After launching the Visual Studio 2017 installer, make sure the Azure and ASP.NET web development workloads are checked.
+
+![Visual Studio Installer](media/dotnet-tools/azure-workloads.png)
+
+To deploy, use the App Service on Linux option in the **Publish** tool.
