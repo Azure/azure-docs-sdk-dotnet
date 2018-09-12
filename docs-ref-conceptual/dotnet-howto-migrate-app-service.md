@@ -25,10 +25,10 @@ Ready to get started? [Publish your ASP.NET + SQL application to Azure App Servi
 
 Verify access to on-premises resources as these may need to be migrated or changed. The following are options for mitigating access to on-premises resources:
 
-* Create a VPN connecting App Service to on-premises resources using [Azure Virtual Networks](https://docs.microsoft.com/en-us/azure/app-service/web-sites-integrate-with-vnet).
-* Securely expose on-premises services to the cloud without firewall changes using [Azure Relay](https://docs.microsoft.com/en-us/azure/service-bus-relay/relay-what-is-it).
+* Create a VPN connecting App Service to on-premises resources using [Azure Virtual Networks](https://docs.microsoft.com/azure/app-service/web-sites-integrate-with-vnet).
+* Securely expose on-premises services to the cloud without firewall changes using [Azure Relay](https://docs.microsoft.com/azure/service-bus-relay/relay-what-is-it).
 * Migrate dependencies such as a [SQL database](https://go.microsoft.com/fwlink/?linkid=863217) to Azure.
-* Use platform-as-a-service offerings in the cloud to reduce dependecies. For example, rather than connect to an on-premises mail server, consider using [SendGrid](https://docs.microsoft.com/en-us/azure/sendgrid-dotnet-how-to-send-email). 
+* Use platform-as-a-service offerings in the cloud to reduce dependecies. For example, rather than connect to an on-premises mail server, consider using [SendGrid](https://docs.microsoft.com/azure/sendgrid-dotnet-how-to-send-email). 
 
 ### Port Bindings
 
@@ -59,7 +59,7 @@ This isn't supported. Consider copying required assemblies to the app's `\bin` f
 Everything traditionally configured via applicationHost.config in your application can now be configured through the Azure portal. This applies to AppPool bitness, enable/disable websockets, managed pipeline version, .NET Framework version (2.0/4.0), etc. To modify your [application settings](https://docs.microsoft.com/azure/app-service/web-sites-configure), navigate to the [Azure portal](https://portal.azure.com), open the blade for your web app, and then select the **Application Settings** tab.
 
 #### IIS5 Compatibility Mode
-IIS5 Compatibility Mode is not supported. In Azure App Service each Web App and all of the applications under it run in the same worker process with a specific set of [application pool](http://technet.microsoft.com/en-us/library/cc735247(v=WS.10).aspx).
+IIS5 Compatibility Mode is not supported. In Azure App Service each Web App and all of the applications under it run in the same worker process with a specific set of [application pool](http://technet.microsoft.com/library/cc735247(v=WS.10).aspx).
 
 #### IIS7+ schema compliance  
 Some elements and attributes are not defined in the Azure App Service IIS schema. If you encounter issues, consider using [XDT transforms](http://azure.microsoft.com/documentation/articles/web-sites-transform-extend/).
