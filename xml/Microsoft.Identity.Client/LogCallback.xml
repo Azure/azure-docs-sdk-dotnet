@@ -1,18 +1,19 @@
 ﻿<Type Name="LogCallback" FullName="Microsoft.Identity.Client.LogCallback">
-  <TypeSignature Language="C#" Value="public delegate void LogCallback(Logger.LogLevel level, string message, bool containsPii);" />
+  <TypeSignature Language="C#" Value="public delegate void LogCallback(LogLevel level, string message, bool containsPii);" />
   <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed LogCallback extends System.MulticastDelegate" />
   <TypeSignature Language="DocId" Value="T:Microsoft.Identity.Client.LogCallback" />
-  <TypeSignature Language="VB.NET" Value="Public Delegate Sub LogCallback(level As Logger.LogLevel, message As String, containsPii As Boolean)" />
-  <TypeSignature Language="F#" Value="type LogCallback = delegate of Logger.LogLevel * string * bool -&gt; unit" />
+  <TypeSignature Language="VB.NET" Value="Public Delegate Sub LogCallback(level As LogLevel, message As String, containsPii As Boolean)" />
+  <TypeSignature Language="F#" Value="type LogCallback = delegate of LogLevel * string * bool -&gt; unit" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.Identity.Client</AssemblyName>
     <AssemblyVersion>1.1.4.0</AssemblyVersion>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Delegate</BaseTypeName>
   </Base>
   <Parameters>
-    <Parameter Name="level" Type="Microsoft.Identity.Client.Logger+LogLevel" />
+    <Parameter Name="level" Type="Microsoft.Identity.Client.LogLevel" />
     <Parameter Name="message" Type="System.String" />
     <Parameter Name="containsPii" Type="System.Boolean" />
   </Parameters>
@@ -20,13 +21,22 @@
     <ReturnType>System.Void</ReturnType>
   </ReturnValue>
   <Docs>
-    <param name="level">Log level of the message</param>
+    <param name="level">Log level of the log message to process</param>
     <param name="message">Pre-formatted log message</param>
-    <param name="containsPii">Indicates if the log message contains PII. If Logger.PiiLoggingEnabled is set to 
-            false then this value is always false.</param>
+    <param name="containsPii">Indicates if the log message contains Organizational Identifiable Information (OII)
+            or Personally Identifiable Information (PII) nor not. 
+            If <see cref="P:Microsoft.Identity.Client.Logger.PiiLoggingEnabled" /> is set to <c>false</c> then this value is always false.
+            Otherwise it will be <c>true</c> when the message contains PII.</param>
     <summary>
-            Callback delegate that allows the developer to consume logs handle them in a custom manner.
+            Callback delegate that allows application developers to consume logs, and handle them in a custom manner. This
+            callback is set on the <see cref="P:Microsoft.Identity.Client.Logger.LogCallback" /> member of the <see cref="T:Microsoft.Identity.Client.Logger" /> static class.
+            If <see cref="P:Microsoft.Identity.Client.Logger.PiiLoggingEnabled" /> is set to <c>true</c>, this method will receive the messages twice: 
+            once with the <c>containsPii</c> parameter equals <c>false</c> and the message without PII, 
+            and a second time with the <c>containsPii</c> parameter equals to <c>true</c> and the message might contain PII. 
+            In some cases (when the message does not contain PII), the message will be the same.
+            For details see https://aka.ms/msal-net-logging
             </summary>
     <remarks>To be added.</remarks>
+    <altmember cref="T:Microsoft.Identity.Client.Logger" />
   </Docs>
 </Type>

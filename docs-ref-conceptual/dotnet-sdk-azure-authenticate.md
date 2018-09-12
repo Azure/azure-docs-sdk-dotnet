@@ -5,7 +5,7 @@ keywords: Azure, .NET, SDK, API, authentication, active directory, service princ
 author: camsoper
 ms.author: casoper
 manager: wpickett
-ms.date: 10/19/2017
+ms.date: 08/22/2018
 ms.topic: reference
 ms.technology: azure
 ms.devlang: dotnet
@@ -98,9 +98,7 @@ var credentials = SdkContext.AzureCredentialsFactory
     AzureEnvironment.AzureGlobalCloud);
 ```
 
-- clientId: use the *ApplicationId* value from the service principal output.
-- clientSecret: use the *-Password* parameter you assigned when you ran `New-AzureRmADServicePrincipal` (without quotes).
-- tenantId: use the *TenantId* value from when you ran `Login-AzureRmAccount`.
+Use the *clientId*, *clientSecret*, and *tenantId* values from the JSON output when you created the service principal.
 
 Then create the entry point `Azure` object to start working with the API:
 

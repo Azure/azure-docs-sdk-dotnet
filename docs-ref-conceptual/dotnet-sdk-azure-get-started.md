@@ -5,7 +5,7 @@ keywords: Azure, .NET, .NET Core, ASP.NET, ASP.NET Core SDK, API ,authenticate, 
 author: camsoper
 ms.author: casoper
 manager: wpickett
-ms.date: 07/17/2018
+ms.date: 08/22/2018
 ms.topic: reference
 ms.technology: azure
 ms.devlang: dotnet
@@ -20,7 +20,6 @@ This tutorial demonstrates the usage of several [Azure APIs for .NET](/dotnet/ap
 ## Prerequisites
 
 - An Azure account. If you don't have one, [get a free trial](https://azure.microsoft.com/free/)
-- [Azure PowerShell](/powershell/azure/install-azurerm-ps)
 
 ## Set up authentication
 
@@ -78,7 +77,7 @@ static void Main(string[] args)
     string password = "MY_PASSWORD";
     string rgName = "sampleResourceGroup";
     string windowsVmName = "sampleWindowsVM";
-    string publicIpDnsLabel = "samplePublicIP";
+    string publicIpDnsLabel = "samplePublicIP" + (new Random().Next(0,100000)).ToString();
 
     // Authenticate
     var credentials = SdkContext.AzureCredentialsFactory
@@ -112,10 +111,10 @@ static void Main(string[] args)
 
 Press **F5** to run the sample.
 
-After several minutes, the program will finish, prompting you to press enter. After pressing enter, verify the virtual machine in your subscription with PowerShell:
+After several minutes, the program will finish, prompting you to press enter. After pressing enter, verify the virtual machine in your subscription with the Cloud Shell:
 
-```powershell
-Get-AzureRmVm -ResourceGroupName sampleResourceGroup
+```azurecli-interactive
+az vm list
 ```
 
 ## Deploy a web app from a GitHub repo
@@ -308,10 +307,10 @@ After several minutes, the program finishes. Verify the blob was uploaded by bro
 > [!IMPORTANT]
 > If you don't clean up your resources from this tutorial, you will continue to be charged for them.  Be sure to do this step.
 
-Delete all the resources you created by entering the following in PowerShell:
+Delete all the resources you created by entering the following in the Cloud Shell:
 
-```powershell
-Remove-AzureRmResourceGroup -ResourceGroupName sampleResourceGroup
+```azurecli-interactive
+az group delete --name sampleResourceGroup
 ```
 
 ## Explore more samples
