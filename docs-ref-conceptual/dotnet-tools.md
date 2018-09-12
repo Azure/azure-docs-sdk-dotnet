@@ -83,23 +83,27 @@ During install, Azure tools are already enabled by default.
   </tr>
 </table>
 
-### Step 1: Download the .NET Core SDK (VS Code)
+### VS Code
+
+#### Step 1: Download the .NET Core SDK
 
 The SDK and command-line tools for .NET Core apps.
 
 > [!div class="nextstepaction"]
 > [Download .NET Core SDK](https://www.microsoft.com/net/core)
 
-### Step 2: Visual Studio Code (VS Code)
+#### Step 2: Visual Studio Code
 
 Edit and debug .NET Core apps on any operating system: Windows, Mac, and Linux.
 
 > [!div class="nextstepaction"]
 > [Download Visual Studio Code](https://code.visualstudio.com)
 
+### Visual Studio
+
 For development with Visual Studio, take the following steps instead.
 
-### Step 1: Download Visual Studio 2017 (Visual Studio)
+#### Step 1: Download Visual Studio
 
 You can skip this step if you already have Visual Studio 2017 installed.
 
@@ -108,7 +112,7 @@ Still using Visual Studio 2015?  [click here for installation instructions](dotn
 > [!div class="nextstepaction"]
 > [Download Visual Studio 2017](https://www.visualstudio.com/downloads/)
 
-### Step 2: Install the two Azure workloads (Visual Studio)
+#### Step 2: Install the required workloads
 
 After launching the Visual Studio 2017 installer, make sure the Azure and ASP.NET web development workloads are checked.
 
