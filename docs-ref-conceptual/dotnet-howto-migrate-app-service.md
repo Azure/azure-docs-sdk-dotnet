@@ -5,7 +5,7 @@ keywords: Azure .NET, ASP.NET, WCF, App Service, Web App, migrate, migration
 author: camsoper
 manager: wpickett
 ms.author: casoper
-ms.date: 07/16/2018
+ms.date: 08/11/2018
 ms.topic: article
 ms.technology: azure
 ms.devlang: dotnet
@@ -73,7 +73,7 @@ Azure App Service does not allow the registration of COM components on the platf
 ### Physical directories 
 Azure App Service does not allow physical drive access. You may need to use a [Azure Files](https://docs.microsoft.com/azure/storage/files/storage-files-introduction) to access files via SMB. [Azure Blob Storage](https://docs.microsoft.com/azure/storage/blobs/storage-blobs-introduction) can store files for access via HTTPS.  
 
-### ISAPI Filters  
+### ISAPI filters  
 Azure App Service can support the use of ISAPI Filters, however, the ISAPI DLL must be deployed with your site and registered via web.config.  
 
 ### HTTPS bindings and SSL 
@@ -91,10 +91,10 @@ For SQL Server databases, please check the current [SQL Database pricing](http:/
 ### Azure Active Directory (AAD) integration  
 AAD does not work with free apps. To use AAD, you must upgrade the app SKU. See [App Service pricing](https://azure.microsoft.com/pricing/details/app-service/windows/).
 
-### Monitoring and Diagnostics
+### Monitoring and diagnostics
 Your current on-premises solutions for monitoring and diagnostics are unlikely to work in the cloud. However, Azure provides tools for logging, monitoring, and diagnostics so that you can identify and debug issues with web apps. You can easily enable diagnostics for your web app in its configuration, and you can view the logs recorded in Azure Application Insights. [Learn more about enabling diagnostics logging for web apps](https://docs.microsoft.com/azure/app-service/web-sites-enable-diagnostic-log).
 
-### Connection Strings and application settings
+### Connection strings and application settings
 Consider using [Azure KeyVault](https://docs.microsoft.com/azure/key-vault/), a service that securely stores sensitive information used in your application. Alternatively, you can store this data as an App Service setting.
 
 ### DNS
@@ -103,7 +103,7 @@ You may need to update DNS configurations based on the requirements of your appl
 ## Azure App Service with Windows Containers
 If your app cannot be migrated directly to App Service, consider App Service using Windows Containers, which enables usage of the GAC, COM components, MSIs, full access to .NET FX APIs, DirectX, and more.
 
-## Additional Reading
+## Additional reading
 
 * [How to determine if your app qualifies for App Service](https://azure.microsoft.com/downloads/migration-assistant/)
 * [Moving your database to the cloud](https://go.microsoft.com/fwlink/?linkid=863217)
@@ -112,4 +112,4 @@ If your app cannot be migrated directly to App Service, consider App Service usi
 ## Next steps
 
 > [!div class="nextstepaction"]
-> [Migrate an ASP.NET Web application to Azure App Service](https://aka.ms/azure-webapp-migrate)
+> [Deploy the app from Visual Studio](https://docs.microsoft.com/visualstudio/deployment/quickstart-deploy-to-azure?view=vs-2017)
