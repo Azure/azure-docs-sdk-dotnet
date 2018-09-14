@@ -21,7 +21,7 @@ For sample source code, see the list of [Azure service samples](https://azure.mi
 | | |
 |---|---|
 |**Active Directory**||
-| [Adding an Azure Active Directory by using Connected Services in Visual Studio][5] | Connect a web app to Azure AD in Visual Studio |
+| [Add Azure Active Directory to your web application by using Visual Studio Connected Services][5] | Connect a web app to Azure AD in Visual Studio |
 | [Web app sign-in and sign-out with Azure AD][1] | Sign users in and out of your ASP.NET with the ADAL library. |
 | [Desktop application authentication with Azure AD][2]| Integrate Azure AD into a Windows Desktop WPF app using ADAL. | 
 | [Web API authentication with Azure AD][3] | Protect a web API using bearer tokens from Azure AD. |
