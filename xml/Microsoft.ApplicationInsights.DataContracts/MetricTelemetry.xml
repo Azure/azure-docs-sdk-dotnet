@@ -7,6 +7,7 @@
   <AssemblyInfo>
     <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
     <AssemblyVersion>2.7.0.0</AssemblyVersion>
+    <AssemblyVersion>2.7.2.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -20,7 +21,9 @@
     </Interface>
   </Interfaces>
   <Docs>
-    <summary>To be added.</summary>
+    <summary>
+            Telemetry type used to track metrics. Represents a sample set of values with a specified count, sum, max, min, and standard deviation.
+            <a href="https://go.microsoft.com/fwlink/?linkid=525722#trackmetric">Learn more</a></summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -33,10 +36,14 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.ApplicationInsights.DataContracts.MetricTelemetry" /> class with empty
+            properties.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -50,6 +57,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="metricName" Type="System.String" />
@@ -58,8 +66,12 @@
       <Docs>
         <param name="metricName">To be added.</param>
         <param name="metricValue">To be added.</param>
-        <summary>To be added.</summary>
+        <summary>
+            Obsolete - use MetricTelemetry(name,count,sum,min,max,standardDeviation). Initializes a new instance of the <see cref="T:Microsoft.ApplicationInsights.DataContracts.MetricTelemetry" /> class with the
+            specified <paramref name="metricName" /> and <paramref name="metricValue" />.
+            </summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">The <paramref name="metricName" /> is null or empty string.</exception>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -72,6 +84,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="name" Type="System.String" />
@@ -82,14 +95,23 @@
         <Parameter Name="standardDeviation" Type="System.Double" />
       </Parameters>
       <Docs>
-        <param name="name">To be added.</param>
-        <param name="count">To be added.</param>
-        <param name="sum">To be added.</param>
-        <param name="min">To be added.</param>
-        <param name="max">To be added.</param>
-        <param name="standardDeviation">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="name">Metric name.</param>
+        <param name="count">Count of values taken during aggregation interval.</param>
+        <param name="sum">Sum of values taken during aggregation interval.</param>
+        <param name="min">Minimum value taken during aggregation interval.</param>
+        <param name="max">Maximum of values taken during aggregation interval.</param>
+        <param name="standardDeviation">Standard deviation of values taken during aggregation interval.</param>
+        <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.ApplicationInsights.DataContracts.MetricTelemetry" /> class with properties provided.
+            </summary>
+        <remarks>
+            Metrics should always be pre-aggregated across a time period before being sent.
+            Most applications do not need to explicitly create <c>MetricTelemetry</c> objects. Instead, use one of
+            the <c>GetMetric(..)</c> overloads on the <see cref="T:Microsoft.ApplicationInsights.TelemetryClient" /> class to get a metric object
+            for accessing SDK pre-aggregation capabilities. <br />
+            However, you can use this ctor to create metric telemetry items if you have implemented your own metric
+            aggregation. In that case, use <see cref="M:Microsoft.ApplicationInsights.TelemetryClient.Track(Microsoft.ApplicationInsights.Channel.ITelemetry)" /> method to send your aggregates.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -102,6 +124,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="metricNamespace" Type="System.String" />
@@ -113,15 +136,24 @@
         <Parameter Name="standardDeviation" Type="System.Double" />
       </Parameters>
       <Docs>
-        <param name="metricNamespace">To be added.</param>
-        <param name="name">To be added.</param>
-        <param name="count">To be added.</param>
-        <param name="sum">To be added.</param>
-        <param name="min">To be added.</param>
-        <param name="max">To be added.</param>
-        <param name="standardDeviation">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="metricNamespace">Metric namespace.</param>
+        <param name="name">Metric name.</param>
+        <param name="count">Count of values taken during aggregation interval.</param>
+        <param name="sum">Sum of values taken during aggregation interval.</param>
+        <param name="min">Minimum value taken during aggregation interval.</param>
+        <param name="max">Maximum of values taken during aggregation interval.</param>
+        <param name="standardDeviation">Standard deviation of values taken during aggregation interval.</param>
+        <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.ApplicationInsights.DataContracts.MetricTelemetry" /> class with properties provided.
+            </summary>
+        <remarks>
+            Metrics should always be pre-aggregated across a time period before being sent.
+            Most applications do not need to explicitly create <c>MetricTelemetry</c> objects. Instead, use one of
+            the <c>GetMetric(..)</c> overloads on the <see cref="T:Microsoft.ApplicationInsights.TelemetryClient" /> class to get a metric object
+            for accessing SDK pre-aggregation capabilities. <br />
+            However, you can use this ctor to create metric telemetry items if you have implemented your own metric
+            aggregation. In that case, use <see cref="M:Microsoft.ApplicationInsights.TelemetryClient.Track(Microsoft.ApplicationInsights.Channel.ITelemetry)" /> method to send your aggregates.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="Context">
@@ -137,12 +169,15 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.ApplicationInsights.DataContracts.TelemetryContext</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the context associated with the current telemetry item.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -157,12 +192,15 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Nullable&lt;System.Int32&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the number of values in the sample set.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -180,14 +218,17 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.ApplicationInsights.Channel.ITelemetry</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>
+            Deeply clones a <see cref="T:Microsoft.ApplicationInsights.DataContracts.MetricTelemetry" /> object.
+            </summary>
+        <returns>A cloned instance.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -201,12 +242,15 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Nullable&lt;System.Double&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the max value of this metric across the sample set.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -221,12 +265,15 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the name of the metric.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -243,13 +290,16 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Sanitizes the properties based on constraints.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -263,12 +313,15 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Nullable&lt;System.Double&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the min value of this metric across the sample set.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -283,12 +336,15 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the name of the metric.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -306,12 +362,15 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Collections.Generic.IDictionary&lt;System.String,System.String&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets a dictionary of application-defined property names and values providing additional information about this metric.
+            <a href="https://go.microsoft.com/fwlink/?linkid=525722#properties">Learn more</a></summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -329,12 +388,15 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the value that defines absolute order of the telemetry item.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -349,12 +411,15 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Nullable&lt;System.Double&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the standard deviation of this metric across the sample set.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -369,12 +434,15 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Double</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets sum of the values of the metric samples.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -392,12 +460,15 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.DateTimeOffset</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets date and time when event was recorded.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -412,6 +483,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute FrameworkAlternate="azure-dotnet">
@@ -422,7 +494,9 @@
         <ReturnType>System.Double</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the value of this metric.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>

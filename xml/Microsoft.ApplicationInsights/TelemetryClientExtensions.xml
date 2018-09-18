@@ -7,6 +7,7 @@
   <AssemblyInfo>
     <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
     <AssemblyVersion>2.7.0.0</AssemblyVersion>
+    <AssemblyVersion>2.7.2.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -18,7 +19,9 @@
     </Attribute>
   </Attributes>
   <Docs>
-    <summary>To be added.</summary>
+    <summary>
+            Extension class to telemetry client that creates operation object with the respective fields initialized.
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -31,6 +34,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.ApplicationInsights.Extensibility.IOperationHolder&lt;T&gt;</ReturnType>
@@ -48,12 +52,39 @@
         <Parameter Name="activity" Type="System.Diagnostics.Activity" />
       </Parameters>
       <Docs>
-        <typeparam name="T">To be added.</typeparam>
-        <param name="telemetryClient">To be added.</param>
-        <param name="activity">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <typeparam name="T">Type of the telemetry item.</typeparam>
+        <param name="telemetryClient">Telemetry client object.</param>
+        <param name="activity">Activity to get tracing context and telemetry properties from.</param>
+        <summary>
+            Creates an operation object with a respective telemetry item using <see cref="T:System.Diagnostics.Activity" /> instance that holds tracing context. 
+            </summary>
+        <returns>Operation item object with a new telemetry item having current start time and timestamp.</returns>
+        <remarks>
+          <para>Activity represents tracing context; it contains correlation identifiers and extended properties that are propagated to external calls.
+            See <a href="https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.DiagnosticSource/src/ActivityUserGuide.md" /> for more details.</para>
+          <para>When Activity instance is passed to StartOperation, it is expected that Activity has ParentId (if it was provided by upstream service), but has not been started yet.
+            It may also have additional Tags and Baggage to augument telemetry.</para>
+        </remarks>
+        <example>
+          <code>
+              // receive message from a queue service (or any kind of the request/message from external service)
+              var message = queue.Receive();
+            
+              // Extract tracing context from the message before processing it
+              // Note that some protocols may define how Activity should be serialized into the message,
+              // and some client SDKs implemeting them may provide Extract method.
+              // For other protocols/libraries, serialization has to be agreed between procuder and consumer
+              // and Inject/Extract pattern to be implemented
+              var activity = message.ExtractActivity();
+            
+              // Track processing of the message
+              using (telemetryClient.StartOperation&lt;RequestTelemetry&gt;(activity))
+              {
+                // process message
+              }
+             // telemetry is reported when operation is disposed.
+            </code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="StartOperation&lt;T&gt;">
@@ -65,6 +96,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.ApplicationInsights.Extensibility.IOperationHolder&lt;T&gt;</ReturnType>
@@ -82,11 +114,13 @@
         <Parameter Name="operationName" Type="System.String" />
       </Parameters>
       <Docs>
-        <typeparam name="T">To be added.</typeparam>
-        <param name="telemetryClient">To be added.</param>
-        <param name="operationName">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <typeparam name="T">Type of the telemetry item.</typeparam>
+        <param name="telemetryClient">Telemetry client object.</param>
+        <param name="operationName">Name of the operation that customer is planning to propagate.</param>
+        <summary>
+            Start operation creates an operation object with a respective telemetry item. 
+            </summary>
+        <returns>Operation item object with a new telemetry item having current start time and timestamp.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -99,6 +133,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.ApplicationInsights.Extensibility.IOperationHolder&lt;T&gt;</ReturnType>
@@ -115,11 +150,13 @@
         <Parameter Name="operationTelemetry" Type="T" />
       </Parameters>
       <Docs>
-        <typeparam name="T">To be added.</typeparam>
-        <param name="telemetryClient">To be added.</param>
-        <param name="operationTelemetry">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <typeparam name="T">Type of the telemetry item.</typeparam>
+        <param name="telemetryClient">Telemetry client object.</param>
+        <param name="operationTelemetry">Operation to start.</param>
+        <summary>
+            Creates an operation object with a given telemetry item. 
+            </summary>
+        <returns>Operation item object with a new telemetry item having current start time and timestamp.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -132,6 +169,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.ApplicationInsights.Extensibility.IOperationHolder&lt;T&gt;</ReturnType>
@@ -151,13 +189,15 @@
         <Parameter Name="parentOperationId" Type="System.String" />
       </Parameters>
       <Docs>
-        <typeparam name="T">To be added.</typeparam>
-        <param name="telemetryClient">To be added.</param>
-        <param name="operationName">To be added.</param>
-        <param name="operationId">To be added.</param>
-        <param name="parentOperationId">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <typeparam name="T">Type of the telemetry item.</typeparam>
+        <param name="telemetryClient">Telemetry client object.</param>
+        <param name="operationName">Name of the operation that customer is planning to propagate.</param>
+        <param name="operationId">Operation ID to set in the new operation.</param>
+        <param name="parentOperationId">Optional parent operation ID to set in the new operation.</param>
+        <summary>
+            Start operation creates an operation object with a respective telemetry item. 
+            </summary>
+        <returns>Operation item object with a new telemetry item having current start time and timestamp.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -170,6 +210,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -187,9 +228,11 @@
       </Parameters>
       <Docs>
         <typeparam name="T">To be added.</typeparam>
-        <param name="telemetryClient">To be added.</param>
-        <param name="operation">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="telemetryClient">Telemetry client object.</param>
+        <param name="operation">Operation object to compute duration and track.</param>
+        <summary>
+            Stop operation computes the duration of the operation and tracks it using the respective telemetry client.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
