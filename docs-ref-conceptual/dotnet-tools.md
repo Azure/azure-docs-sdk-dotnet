@@ -5,12 +5,12 @@ keywords: Azure .NET, SDK, Azure .NET API Reference, Azure .NET class library
 author: camsoper
 ms.author: casoper
 manager: wpickett
-ms.date: 07/17/2018
+ms.date: 08/11/2018
 ms.topic: reference
 ms.technology: azure
 ms.devlang: dotnet
 ms.service: multiple
-ms.custom: devcenter
+ms.custom: devcenter, vs-azure
 ---
 
 # Tools for .NET and .NET Core Azure developers
@@ -72,7 +72,16 @@ During install, Azure tools are already enabled by default.
 
 ## [Linux](#tab/linux)
 
-<img src="https://docs.microsoft.com/en-us/visualstudio/products/images/vs-code.svg" width="50" height="50"></img>
+<table>
+  <tr>
+    <td width="50">
+        <img src="https://docs.microsoft.com/en-us/visualstudio/products/images/vs-code.svg" width="50" height="50"></img>
+    </td>
+    <td>
+        Visual Studio Code has everything you need for Azure development on Linux.
+    </td>
+  </tr>
+</table>
 
 ### Step 1: Download the .NET Core SDK
 
