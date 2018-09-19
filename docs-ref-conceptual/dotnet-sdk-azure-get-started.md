@@ -69,7 +69,7 @@ Azure offers several services for storing your data depending on your needs. The
 > [!TIP]
 > For more information, see [Choose the right data store](https://docs.microsoft.com/azure/architecture/guide/technology-choices/data-store-overview).
 
-## Diagnosing Problems in the Cloud
+## Diagnosing problems in the Cloud
 Once you deploy your application to Azure, you may run into cases where it worked in development but doesn’t in Azure. Below are two good places to start when diagnosing issues:
 
 * **Remote debug from Visual Studio**: Most Azure compute services (including the services discussed in this document) support remote debugging with Visual Studio and acquiring logs. To explore Visual Studio’s capabilities with your application, open the Cloud Explorer tool window by typing “Cloud Explorer” into Visual Studio’s quick launch toolbar (in the upper-right corner), and then locate your application in the tree. For details, see [Diagnosing errors in your cloud apps](https://blogs.msdn.microsoft.com/webdev/2018/02/07/diagnosing-errors-on-your-cloud-apps).
