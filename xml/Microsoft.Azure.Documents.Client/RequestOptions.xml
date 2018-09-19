@@ -72,13 +72,30 @@
             The condition (ETag) associated with the request.
             </value>
         <remarks>
-            Most commonly used with the Delete* and Replace* methods of <see cref="T:Microsoft.Azure.Documents.Client.DocumentClient" /> such as <see cref="M:Microsoft.Azure.Documents.Client.DocumentClient.ReplaceDocumentAsync(Microsoft.Azure.Documents.Document,Microsoft.Azure.Documents.Client.RequestOptions)" />
-            or <see cref="M:Microsoft.Azure.Documents.Client.DocumentClient.ReplaceDocumentAsync(System.String,System.Object,Microsoft.Azure.Documents.Client.RequestOptions)" /> methods,
-            but can be used with other methods like <see cref="M:Microsoft.Azure.Documents.Client.DocumentClient.ReadDocumentAsync(System.String,Microsoft.Azure.Documents.Client.RequestOptions)" /> for caching scenarios.
+            Most commonly used with the Delete* and Replace* methods of <see cref="T:Microsoft.Azure.Documents.Client.DocumentClient" /> such as <see cref="M:Microsoft.Azure.Documents.Client.DocumentClient.ReplaceDocumentAsync(Microsoft.Azure.Documents.Document,Microsoft.Azure.Documents.Client.RequestOptions,System.Threading.CancellationToken)" />
+            or <see cref="M:Microsoft.Azure.Documents.Client.DocumentClient.ReplaceDocumentAsync(System.String,System.Object,Microsoft.Azure.Documents.Client.RequestOptions,System.Threading.CancellationToken)" /> methods,
+            but can be used with other methods like <see cref="M:Microsoft.Azure.Documents.Client.DocumentClient.ReadDocumentAsync(System.String,Microsoft.Azure.Documents.Client.RequestOptions,System.Threading.CancellationToken)" /> for caching scenarios.
             </remarks>
         <see cref="T:Microsoft.Azure.Documents.Client.AccessCondition" />
         <example>
             The following example shows how to use RequestOptions with <see cref="M:Microsoft.Azure.Documents.Client.DocumentClient.ReplaceDocumentAsync(System.String,System.Object,Microsoft.Azure.Documents.Client.RequestOptions)" /> to
+            specify the set of <see cref="P:Microsoft.Azure.Documents.Client.RequestOptions.AccessCondition" /> to be used when updating a document
+            <code language="c#"><![CDATA[
+            // If ETag is current, then this will succeed. Otherwise the request will fail with HTTP 412 Precondition Failure
+            await client.ReplaceDocumentAsync(
+                readCopyOfBook.SelfLink,
+                new Book { Title = "Moby Dick", Price = 14.99 },
+                new RequestOptions
+                {
+                    AccessCondition = new AccessCondition
+                    {
+                        Condition = readCopyOfBook.ETag,
+                        Type = AccessConditionType.IfMatch
+                    }
+                 });
+            ]]></code></example>
+        <example>
+            The following example shows how to use RequestOptions with <see cref="M:Microsoft.Azure.Documents.Client.DocumentClient.ReplaceDocumentAsync(System.String,System.Object,Microsoft.Azure.Documents.Client.RequestOptions,System.Threading.CancellationToken)" /> to
             specify the set of <see cref="P:Microsoft.Azure.Documents.Client.RequestOptions.AccessCondition" /> to be used when updating a document
             <code language="c#"><![CDATA[
             // If ETag is current, then this will succeed. Otherwise the request will fail with HTTP 412 Precondition Failure

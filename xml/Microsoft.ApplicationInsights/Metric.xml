@@ -7,13 +7,19 @@
   <AssemblyInfo>
     <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
     <AssemblyVersion>2.7.0.0</AssemblyVersion>
+    <AssemblyVersion>2.7.2.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
+    <summary>
+            Represents a zero- or multi-dimensional metric.<br />
+            Contains convenience methods to track, aggregate and send values.<br />
+            A <c>Metric</c> instance groups one or more <c>MetricSeries</c> that actually track and aggregate values along with
+            naming and configuration attributes that identify the metric and define how it will be aggregated. 
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -27,6 +33,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute FrameworkAlternate="azure-dotnet">
@@ -38,8 +45,12 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>
+            Gets all metric series contained in this metric.
+            Each metric contains a special zero-dimension series, plus one series per unique dimension-values combination.
+            </summary>
+        <returns>All metric series contained in this metric.
+            Each metric contains a special zero-dimension series, plus one series per unique dimension-values combination.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -53,6 +64,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute FrameworkAlternate="azure-dotnet">
@@ -66,9 +78,11 @@
         <Parameter Name="dimensionNumber" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="dimensionNumber">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="dimensionNumber">1-based dimension number. Currently it can be <c>1</c> ... <c>10</c>.</param>
+        <summary>
+            Gets the values known for dimension identified by the specified 1-based dimension index.
+            </summary>
+        <returns>The values known for the specified dimension.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -82,12 +96,15 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.ApplicationInsights.Metrics.MetricIdentifier</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the identifier of a metric groups together the MetricNamespace, the MetricId, and the dimensions of the metric, if any.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -102,12 +119,16 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the current number of metric series contained in this metric. 
+            Each metric contains a special zero-dimension series, plus one series per unique dimension-values combination.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -122,6 +143,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -130,8 +152,13 @@
         <Parameter Name="metricValue" Type="System.Double" />
       </Parameters>
       <Docs>
-        <param name="metricValue">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="metricValue">The value to be aggregated.</param>
+        <summary>
+            Tracks the specified value.<br />
+            An aggregate representing tracked values will be automatically sent to the cloud ingestion endpoint at the end of each aggregation period.<br />
+            This method uses the zero-dimensional <c>MetricSeries</c> associated with this metric.
+            Use <c>TrackValue(..)</c> to track values into <c>MetricSeries</c> associated with specific dimension-values in multi-dimensional metrics.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -145,6 +172,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -153,9 +181,854 @@
         <Parameter Name="metricValue" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="metricValue">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="metricValue">The value to be aggregated.</param>
+        <summary>
+            Tracks the specified value.<br />
+            An aggregate representing tracked values will be automatically sent to the cloud ingestion endpoint at the end of each aggregation period.<br />
+            This method uses the zero-dimensional <c>MetricSeries</c> associated with this metric.
+            Use <c>TrackValue(..)</c> to track values into <c>MetricSeries</c> associated with specific dimension-values in multi-dimensional metrics.
+            </summary>
         <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TrackValue">
+      <MemberSignature Language="C#" Value="public bool TrackValue (double metricValue, string dimension1Value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TrackValue(float64 metricValue, string dimension1Value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TrackValue(System.Double,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function TrackValue (metricValue As Double, dimension1Value As String) As Boolean" />
+      <MemberSignature Language="F#" Value="member this.TrackValue : double * string -&gt; bool" Usage="metric.TrackValue (metricValue, dimension1Value)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="metricValue" Type="System.Double" />
+        <Parameter Name="dimension1Value" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="metricValue">The value to be aggregated.</param>
+        <param name="dimension1Value">The value of the 1st dimension.</param>
+        <summary>
+            Tracks the specified value using the <c>MetricSeries</c> associated with the specified dimension value.<br />
+            An aggregate representing tracked values will be automatically sent to the cloud ingestion endpoint at the end of each aggregation period.
+            This overload may only be used with 1-dimensional metrics. Use other overloads to specify a matching number of dimension values for this metric.
+            </summary>
+        <returns>
+          <c>True</c> if the specified value was added to the <c>MetricSeries</c> indicated by the specified dimension name;
+            <c>False</c> if the indicated series could not be created because a dimension cap or a metric series cap was reached.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">If the number of specified dimension names does not match the dimensionality of this <c>Metric</c>.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="TrackValue">
+      <MemberSignature Language="C#" Value="public bool TrackValue (object metricValue, string dimension1Value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TrackValue(object metricValue, string dimension1Value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TrackValue(System.Object,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function TrackValue (metricValue As Object, dimension1Value As String) As Boolean" />
+      <MemberSignature Language="F#" Value="member this.TrackValue : obj * string -&gt; bool" Usage="metric.TrackValue (metricValue, dimension1Value)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="metricValue" Type="System.Object" />
+        <Parameter Name="dimension1Value" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="metricValue">The value to be aggregated.</param>
+        <param name="dimension1Value">The value of the 1st dimension.</param>
+        <summary>
+            Tracks the specified value using the <c>MetricSeries</c> associated with the specified dimension value.<br />
+            An aggregate representing tracked values will be automatically sent to the cloud ingestion endpoint at the end of each aggregation period.
+            This overload may only be used with 1-dimensional metrics. Use other overloads to specify a matching number of dimension values for this metric.
+            </summary>
+        <returns>
+          <c>True</c> if the specified value was added to the <c>MetricSeries</c> indicated by the specified dimension name;
+            <c>False</c> if the indicated series could not be created because a dimension cap or a metric series cap was reached.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">If the number of specified dimension names does not match the dimensionality of this <c>Metric</c>.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="TrackValue">
+      <MemberSignature Language="C#" Value="public bool TrackValue (double metricValue, string dimension1Value, string dimension2Value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TrackValue(float64 metricValue, string dimension1Value, string dimension2Value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TrackValue(System.Double,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function TrackValue (metricValue As Double, dimension1Value As String, dimension2Value As String) As Boolean" />
+      <MemberSignature Language="F#" Value="member this.TrackValue : double * string * string -&gt; bool" Usage="metric.TrackValue (metricValue, dimension1Value, dimension2Value)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="metricValue" Type="System.Double" />
+        <Parameter Name="dimension1Value" Type="System.String" />
+        <Parameter Name="dimension2Value" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="metricValue">The value to be aggregated.</param>
+        <param name="dimension1Value">The value of the 1st dimension.</param>
+        <param name="dimension2Value">The value of the 2nd dimension.</param>
+        <summary>
+            Tracks the specified value using the <c>MetricSeries</c> associated with the specified dimension values.<br />
+            An aggregate representing tracked values will be automatically sent to the cloud ingestion endpoint at the end of each aggregation period.
+            This overload may only be used with 2-dimensional metrics. Use other overloads to specify a matching number of dimension values for this metric.
+            </summary>
+        <returns>
+          <c>True</c> if the specified value was added to the <c>MetricSeries</c> indicated by the specified dimension name;
+            <c>False</c> if the indicated series could not be created because a dimension cap or a metric series cap was reached.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">If the number of specified dimension names does not match the dimensionality of this <c>Metric</c>.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="TrackValue">
+      <MemberSignature Language="C#" Value="public bool TrackValue (object metricValue, string dimension1Value, string dimension2Value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TrackValue(object metricValue, string dimension1Value, string dimension2Value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TrackValue(System.Object,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function TrackValue (metricValue As Object, dimension1Value As String, dimension2Value As String) As Boolean" />
+      <MemberSignature Language="F#" Value="member this.TrackValue : obj * string * string -&gt; bool" Usage="metric.TrackValue (metricValue, dimension1Value, dimension2Value)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="metricValue" Type="System.Object" />
+        <Parameter Name="dimension1Value" Type="System.String" />
+        <Parameter Name="dimension2Value" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="metricValue">The value to be aggregated.</param>
+        <param name="dimension1Value">The value of the 1st dimension.</param>
+        <param name="dimension2Value">The value of the 2nd dimension.</param>
+        <summary>
+            Tracks the specified value using the <c>MetricSeries</c> associated with the specified dimension values.<br />
+            An aggregate representing tracked values will be automatically sent to the cloud ingestion endpoint at the end of each aggregation period.
+            This overload may only be used with 2-dimensional metrics. Use other overloads to specify a matching number of dimension values for this metric.
+            </summary>
+        <returns>
+          <c>True</c> if the specified value was added to the <c>MetricSeries</c> indicated by the specified dimension name;
+            <c>False</c> if the indicated series could not be created because a dimension cap or a metric series cap was reached.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">If the number of specified dimension names does not match the dimensionality of this <c>Metric</c>.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="TrackValue">
+      <MemberSignature Language="C#" Value="public bool TrackValue (double metricValue, string dimension1Value, string dimension2Value, string dimension3Value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TrackValue(float64 metricValue, string dimension1Value, string dimension2Value, string dimension3Value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TrackValue(System.Double,System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function TrackValue (metricValue As Double, dimension1Value As String, dimension2Value As String, dimension3Value As String) As Boolean" />
+      <MemberSignature Language="F#" Value="member this.TrackValue : double * string * string * string -&gt; bool" Usage="metric.TrackValue (metricValue, dimension1Value, dimension2Value, dimension3Value)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="metricValue" Type="System.Double" />
+        <Parameter Name="dimension1Value" Type="System.String" />
+        <Parameter Name="dimension2Value" Type="System.String" />
+        <Parameter Name="dimension3Value" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="metricValue">The value to be aggregated.</param>
+        <param name="dimension1Value">The value of the 1st dimension.</param>
+        <param name="dimension2Value">The value of the 2nd dimension.</param>
+        <param name="dimension3Value">The value of the 3rd dimension.</param>
+        <summary>
+            Tracks the specified value using the <c>MetricSeries</c> associated with the specified dimension values.<br />
+            An aggregate representing tracked values will be automatically sent to the cloud ingestion endpoint at the end of each aggregation period.
+            This overload may only be used with 3-dimensional metrics. Use other overloads to specify a matching number of dimension values for this metric.
+            </summary>
+        <returns>
+          <c>True</c> if the specified value was added to the <c>MetricSeries</c> indicated by the specified dimension name;
+            <c>False</c> if the indicated series could not be created because a dimension cap or a metric series cap was reached.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">If the number of specified dimension names does not match the dimensionality of this <c>Metric</c>.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="TrackValue">
+      <MemberSignature Language="C#" Value="public bool TrackValue (object metricValue, string dimension1Value, string dimension2Value, string dimension3Value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TrackValue(object metricValue, string dimension1Value, string dimension2Value, string dimension3Value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TrackValue(System.Object,System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function TrackValue (metricValue As Object, dimension1Value As String, dimension2Value As String, dimension3Value As String) As Boolean" />
+      <MemberSignature Language="F#" Value="member this.TrackValue : obj * string * string * string -&gt; bool" Usage="metric.TrackValue (metricValue, dimension1Value, dimension2Value, dimension3Value)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="metricValue" Type="System.Object" />
+        <Parameter Name="dimension1Value" Type="System.String" />
+        <Parameter Name="dimension2Value" Type="System.String" />
+        <Parameter Name="dimension3Value" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="metricValue">The value to be aggregated.</param>
+        <param name="dimension1Value">The value of the 1st dimension.</param>
+        <param name="dimension2Value">The value of the 2nd dimension.</param>
+        <param name="dimension3Value">The value of the 3rd dimension.</param>
+        <summary>
+            Tracks the specified value using the <c>MetricSeries</c> associated with the specified dimension values.<br />
+            An aggregate representing tracked values will be automatically sent to the cloud ingestion endpoint at the end of each aggregation period.
+            This overload may only be used with 3-dimensional metrics. Use other overloads to specify a matching number of dimension values for this metric.
+            </summary>
+        <returns>
+          <c>True</c> if the specified value was added to the <c>MetricSeries</c> indicated by the specified dimension name;
+            <c>False</c> if the indicated series could not be created because a dimension cap or a metric series cap was reached.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">If the number of specified dimension names does not match the dimensionality of this <c>Metric</c>.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="TrackValue">
+      <MemberSignature Language="C#" Value="public bool TrackValue (double metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TrackValue(float64 metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TrackValue(System.Double,System.String,System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function TrackValue (metricValue As Double, dimension1Value As String, dimension2Value As String, dimension3Value As String, dimension4Value As String) As Boolean" />
+      <MemberSignature Language="F#" Value="member this.TrackValue : double * string * string * string * string -&gt; bool" Usage="metric.TrackValue (metricValue, dimension1Value, dimension2Value, dimension3Value, dimension4Value)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="metricValue" Type="System.Double" />
+        <Parameter Name="dimension1Value" Type="System.String" />
+        <Parameter Name="dimension2Value" Type="System.String" />
+        <Parameter Name="dimension3Value" Type="System.String" />
+        <Parameter Name="dimension4Value" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="metricValue">The value to be aggregated.</param>
+        <param name="dimension1Value">The value of the 1st dimension.</param>
+        <param name="dimension2Value">The value of the 2nd dimension.</param>
+        <param name="dimension3Value">The value of the 3rd dimension.</param>
+        <param name="dimension4Value">The value of the 4th dimension.</param>
+        <summary>
+            Tracks the specified value using the <c>MetricSeries</c> associated with the specified dimension values.<br />
+            An aggregate representing tracked values will be automatically sent to the cloud ingestion endpoint at the end of each aggregation period.
+            This overload may only be used with 4-dimensional metrics. Use other overloads to specify a matching number of dimension values for this metric.
+            </summary>
+        <returns>
+          <c>True</c> if the specified value was added to the <c>MetricSeries</c> indicated by the specified dimension name;
+            <c>False</c> if the indicated series could not be created because a dimension cap or a metric series cap was reached.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">If the number of specified dimension names does not match the dimensionality of this <c>Metric</c>.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="TrackValue">
+      <MemberSignature Language="C#" Value="public bool TrackValue (object metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TrackValue(object metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TrackValue(System.Object,System.String,System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function TrackValue (metricValue As Object, dimension1Value As String, dimension2Value As String, dimension3Value As String, dimension4Value As String) As Boolean" />
+      <MemberSignature Language="F#" Value="member this.TrackValue : obj * string * string * string * string -&gt; bool" Usage="metric.TrackValue (metricValue, dimension1Value, dimension2Value, dimension3Value, dimension4Value)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="metricValue" Type="System.Object" />
+        <Parameter Name="dimension1Value" Type="System.String" />
+        <Parameter Name="dimension2Value" Type="System.String" />
+        <Parameter Name="dimension3Value" Type="System.String" />
+        <Parameter Name="dimension4Value" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="metricValue">The value to be aggregated.</param>
+        <param name="dimension1Value">The value of the 1st dimension.</param>
+        <param name="dimension2Value">The value of the 2nd dimension.</param>
+        <param name="dimension3Value">The value of the 3rd dimension.</param>
+        <param name="dimension4Value">The value of the 4th dimension.</param>
+        <summary>
+            Tracks the specified value using the <c>MetricSeries</c> associated with the specified dimension values.<br />
+            An aggregate representing tracked values will be automatically sent to the cloud ingestion endpoint at the end of each aggregation period.
+            This overload may only be used with 4-dimensional metrics. Use other overloads to specify a matching number of dimension values for this metric.
+            </summary>
+        <returns>
+          <c>True</c> if the specified value was added to the <c>MetricSeries</c> indicated by the specified dimension name;
+            <c>False</c> if the indicated series could not be created because a dimension cap or a metric series cap was reached.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">If the number of specified dimension names does not match the dimensionality of this <c>Metric</c>.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="TrackValue">
+      <MemberSignature Language="C#" Value="public bool TrackValue (double metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TrackValue(float64 metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TrackValue(System.Double,System.String,System.String,System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function TrackValue (metricValue As Double, dimension1Value As String, dimension2Value As String, dimension3Value As String, dimension4Value As String, dimension5Value As String) As Boolean" />
+      <MemberSignature Language="F#" Value="member this.TrackValue : double * string * string * string * string * string -&gt; bool" Usage="metric.TrackValue (metricValue, dimension1Value, dimension2Value, dimension3Value, dimension4Value, dimension5Value)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="metricValue" Type="System.Double" />
+        <Parameter Name="dimension1Value" Type="System.String" />
+        <Parameter Name="dimension2Value" Type="System.String" />
+        <Parameter Name="dimension3Value" Type="System.String" />
+        <Parameter Name="dimension4Value" Type="System.String" />
+        <Parameter Name="dimension5Value" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="metricValue">The value to be aggregated.</param>
+        <param name="dimension1Value">The value of the 1st dimension.</param>
+        <param name="dimension2Value">The value of the 2nd dimension.</param>
+        <param name="dimension3Value">The value of the 3rd dimension.</param>
+        <param name="dimension4Value">The value of the 4th dimension.</param>
+        <param name="dimension5Value">The value of the 5th dimension.</param>
+        <summary>
+            Tracks the specified value using the <c>MetricSeries</c> associated with the specified dimension values.<br />
+            An aggregate representing tracked values will be automatically sent to the cloud ingestion endpoint at the end of each aggregation period.
+            This overload may only be used with 5-dimensional metrics. Use other overloads to specify a matching number of dimension values for this metric.
+            </summary>
+        <returns>
+          <c>True</c> if the specified value was added to the <c>MetricSeries</c> indicated by the specified dimension name;
+            <c>False</c> if the indicated series could not be created because a dimension cap or a metric series cap was reached.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">If the number of specified dimension names does not match the dimensionality of this <c>Metric</c>.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="TrackValue">
+      <MemberSignature Language="C#" Value="public bool TrackValue (object metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TrackValue(object metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TrackValue(System.Object,System.String,System.String,System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function TrackValue (metricValue As Object, dimension1Value As String, dimension2Value As String, dimension3Value As String, dimension4Value As String, dimension5Value As String) As Boolean" />
+      <MemberSignature Language="F#" Value="member this.TrackValue : obj * string * string * string * string * string -&gt; bool" Usage="metric.TrackValue (metricValue, dimension1Value, dimension2Value, dimension3Value, dimension4Value, dimension5Value)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="metricValue" Type="System.Object" />
+        <Parameter Name="dimension1Value" Type="System.String" />
+        <Parameter Name="dimension2Value" Type="System.String" />
+        <Parameter Name="dimension3Value" Type="System.String" />
+        <Parameter Name="dimension4Value" Type="System.String" />
+        <Parameter Name="dimension5Value" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="metricValue">The value to be aggregated.</param>
+        <param name="dimension1Value">The value of the 1st dimension.</param>
+        <param name="dimension2Value">The value of the 2nd dimension.</param>
+        <param name="dimension3Value">The value of the 3rd dimension.</param>
+        <param name="dimension4Value">The value of the 4th dimension.</param>
+        <param name="dimension5Value">The value of the 5th dimension.</param>
+        <summary>
+            Tracks the specified value using the <c>MetricSeries</c> associated with the specified dimension values.<br />
+            An aggregate representing tracked values will be automatically sent to the cloud ingestion endpoint at the end of each aggregation period.
+            This overload may only be used with 5-dimensional metrics. Use other overloads to specify a matching number of dimension values for this metric.
+            </summary>
+        <returns>
+          <c>True</c> if the specified value was added to the <c>MetricSeries</c> indicated by the specified dimension name;
+            <c>False</c> if the indicated series could not be created because a dimension cap or a metric series cap was reached.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">If the number of specified dimension names does not match the dimensionality of this <c>Metric</c>.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="TrackValue">
+      <MemberSignature Language="C#" Value="public bool TrackValue (double metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TrackValue(float64 metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TrackValue(System.Double,System.String,System.String,System.String,System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function TrackValue (metricValue As Double, dimension1Value As String, dimension2Value As String, dimension3Value As String, dimension4Value As String, dimension5Value As String, dimension6Value As String) As Boolean" />
+      <MemberSignature Language="F#" Value="member this.TrackValue : double * string * string * string * string * string * string -&gt; bool" Usage="metric.TrackValue (metricValue, dimension1Value, dimension2Value, dimension3Value, dimension4Value, dimension5Value, dimension6Value)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="metricValue" Type="System.Double" />
+        <Parameter Name="dimension1Value" Type="System.String" />
+        <Parameter Name="dimension2Value" Type="System.String" />
+        <Parameter Name="dimension3Value" Type="System.String" />
+        <Parameter Name="dimension4Value" Type="System.String" />
+        <Parameter Name="dimension5Value" Type="System.String" />
+        <Parameter Name="dimension6Value" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="metricValue">The value to be aggregated.</param>
+        <param name="dimension1Value">The value of the 1st dimension.</param>
+        <param name="dimension2Value">The value of the 2nd dimension.</param>
+        <param name="dimension3Value">The value of the 3rd dimension.</param>
+        <param name="dimension4Value">The value of the 4th dimension.</param>
+        <param name="dimension5Value">The value of the 5th dimension.</param>
+        <param name="dimension6Value">The value of the 6th dimension.</param>
+        <summary>
+            Tracks the specified value using the <c>MetricSeries</c> associated with the specified dimension values.<br />
+            An aggregate representing tracked values will be automatically sent to the cloud ingestion endpoint at the end of each aggregation period.
+            This overload may only be used with 6-dimensional metrics. Use other overloads to specify a matching number of dimension values for this metric.
+            </summary>
+        <returns>
+          <c>True</c> if the specified value was added to the <c>MetricSeries</c> indicated by the specified dimension name;
+            <c>False</c> if the indicated series could not be created because a dimension cap or a metric series cap was reached.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">If the number of specified dimension names does not match the dimensionality of this <c>Metric</c>.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="TrackValue">
+      <MemberSignature Language="C#" Value="public bool TrackValue (object metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TrackValue(object metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TrackValue(System.Object,System.String,System.String,System.String,System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function TrackValue (metricValue As Object, dimension1Value As String, dimension2Value As String, dimension3Value As String, dimension4Value As String, dimension5Value As String, dimension6Value As String) As Boolean" />
+      <MemberSignature Language="F#" Value="member this.TrackValue : obj * string * string * string * string * string * string -&gt; bool" Usage="metric.TrackValue (metricValue, dimension1Value, dimension2Value, dimension3Value, dimension4Value, dimension5Value, dimension6Value)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="metricValue" Type="System.Object" />
+        <Parameter Name="dimension1Value" Type="System.String" />
+        <Parameter Name="dimension2Value" Type="System.String" />
+        <Parameter Name="dimension3Value" Type="System.String" />
+        <Parameter Name="dimension4Value" Type="System.String" />
+        <Parameter Name="dimension5Value" Type="System.String" />
+        <Parameter Name="dimension6Value" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="metricValue">The value to be aggregated.</param>
+        <param name="dimension1Value">The value of the 1st dimension.</param>
+        <param name="dimension2Value">The value of the 2nd dimension.</param>
+        <param name="dimension3Value">The value of the 3rd dimension.</param>
+        <param name="dimension4Value">The value of the 4th dimension.</param>
+        <param name="dimension5Value">The value of the 5th dimension.</param>
+        <param name="dimension6Value">The value of the 6th dimension.</param>
+        <summary>
+            Tracks the specified value using the <c>MetricSeries</c> associated with the specified dimension values.<br />
+            An aggregate representing tracked values will be automatically sent to the cloud ingestion endpoint at the end of each aggregation period.
+            This overload may only be used with 6-dimensional metrics. Use other overloads to specify a matching number of dimension values for this metric.
+            </summary>
+        <returns>
+          <c>True</c> if the specified value was added to the <c>MetricSeries</c> indicated by the specified dimension name;
+            <c>False</c> if the indicated series could not be created because a dimension cap or a metric series cap was reached.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">If the number of specified dimension names does not match the dimensionality of this <c>Metric</c>.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="TrackValue">
+      <MemberSignature Language="C#" Value="public bool TrackValue (double metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value, string dimension7Value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TrackValue(float64 metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value, string dimension7Value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TrackValue(System.Double,System.String,System.String,System.String,System.String,System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function TrackValue (metricValue As Double, dimension1Value As String, dimension2Value As String, dimension3Value As String, dimension4Value As String, dimension5Value As String, dimension6Value As String, dimension7Value As String) As Boolean" />
+      <MemberSignature Language="F#" Value="member this.TrackValue : double * string * string * string * string * string * string * string -&gt; bool" Usage="metric.TrackValue (metricValue, dimension1Value, dimension2Value, dimension3Value, dimension4Value, dimension5Value, dimension6Value, dimension7Value)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="metricValue" Type="System.Double" />
+        <Parameter Name="dimension1Value" Type="System.String" />
+        <Parameter Name="dimension2Value" Type="System.String" />
+        <Parameter Name="dimension3Value" Type="System.String" />
+        <Parameter Name="dimension4Value" Type="System.String" />
+        <Parameter Name="dimension5Value" Type="System.String" />
+        <Parameter Name="dimension6Value" Type="System.String" />
+        <Parameter Name="dimension7Value" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="metricValue">The value to be aggregated.</param>
+        <param name="dimension1Value">The value of the 1st dimension.</param>
+        <param name="dimension2Value">The value of the 2nd dimension.</param>
+        <param name="dimension3Value">The value of the 3rd dimension.</param>
+        <param name="dimension4Value">The value of the 4th dimension.</param>
+        <param name="dimension5Value">The value of the 5th dimension.</param>
+        <param name="dimension6Value">The value of the 6th dimension.</param>
+        <param name="dimension7Value">The value of the 7th dimension.</param>
+        <summary>
+            Tracks the specified value using the <c>MetricSeries</c> associated with the specified dimension values.<br />
+            An aggregate representing tracked values will be automatically sent to the cloud ingestion endpoint at the end of each aggregation period.
+            This overload may only be used with 7-dimensional metrics. Use other overloads to specify a matching number of dimension values for this metric.
+            </summary>
+        <returns>
+          <c>True</c> if the specified value was added to the <c>MetricSeries</c> indicated by the specified dimension name;
+            <c>False</c> if the indicated series could not be created because a dimension cap or a metric series cap was reached.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">If the number of specified dimension names does not match the dimensionality of this <c>Metric</c>.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="TrackValue">
+      <MemberSignature Language="C#" Value="public bool TrackValue (object metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value, string dimension7Value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TrackValue(object metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value, string dimension7Value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TrackValue(System.Object,System.String,System.String,System.String,System.String,System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function TrackValue (metricValue As Object, dimension1Value As String, dimension2Value As String, dimension3Value As String, dimension4Value As String, dimension5Value As String, dimension6Value As String, dimension7Value As String) As Boolean" />
+      <MemberSignature Language="F#" Value="member this.TrackValue : obj * string * string * string * string * string * string * string -&gt; bool" Usage="metric.TrackValue (metricValue, dimension1Value, dimension2Value, dimension3Value, dimension4Value, dimension5Value, dimension6Value, dimension7Value)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="metricValue" Type="System.Object" />
+        <Parameter Name="dimension1Value" Type="System.String" />
+        <Parameter Name="dimension2Value" Type="System.String" />
+        <Parameter Name="dimension3Value" Type="System.String" />
+        <Parameter Name="dimension4Value" Type="System.String" />
+        <Parameter Name="dimension5Value" Type="System.String" />
+        <Parameter Name="dimension6Value" Type="System.String" />
+        <Parameter Name="dimension7Value" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="metricValue">The value to be aggregated.</param>
+        <param name="dimension1Value">The value of the 1st dimension.</param>
+        <param name="dimension2Value">The value of the 2nd dimension.</param>
+        <param name="dimension3Value">The value of the 3rd dimension.</param>
+        <param name="dimension4Value">The value of the 4th dimension.</param>
+        <param name="dimension5Value">The value of the 5th dimension.</param>
+        <param name="dimension6Value">The value of the 6th dimension.</param>
+        <param name="dimension7Value">The value of the 7th dimension.</param>
+        <summary>
+            Tracks the specified value using the <c>MetricSeries</c> associated with the specified dimension values.<br />
+            An aggregate representing tracked values will be automatically sent to the cloud ingestion endpoint at the end of each aggregation period.
+            This overload may only be used with 7-dimensional metrics. Use other overloads to specify a matching number of dimension values for this metric.
+            </summary>
+        <returns>
+          <c>True</c> if the specified value was added to the <c>MetricSeries</c> indicated by the specified dimension name;
+            <c>False</c> if the indicated series could not be created because a dimension cap or a metric series cap was reached.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">If the number of specified dimension names does not match the dimensionality of this <c>Metric</c>.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="TrackValue">
+      <MemberSignature Language="C#" Value="public bool TrackValue (double metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value, string dimension7Value, string dimension8Value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TrackValue(float64 metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value, string dimension7Value, string dimension8Value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TrackValue(System.Double,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function TrackValue (metricValue As Double, dimension1Value As String, dimension2Value As String, dimension3Value As String, dimension4Value As String, dimension5Value As String, dimension6Value As String, dimension7Value As String, dimension8Value As String) As Boolean" />
+      <MemberSignature Language="F#" Value="member this.TrackValue : double * string * string * string * string * string * string * string * string -&gt; bool" Usage="metric.TrackValue (metricValue, dimension1Value, dimension2Value, dimension3Value, dimension4Value, dimension5Value, dimension6Value, dimension7Value, dimension8Value)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="metricValue" Type="System.Double" />
+        <Parameter Name="dimension1Value" Type="System.String" />
+        <Parameter Name="dimension2Value" Type="System.String" />
+        <Parameter Name="dimension3Value" Type="System.String" />
+        <Parameter Name="dimension4Value" Type="System.String" />
+        <Parameter Name="dimension5Value" Type="System.String" />
+        <Parameter Name="dimension6Value" Type="System.String" />
+        <Parameter Name="dimension7Value" Type="System.String" />
+        <Parameter Name="dimension8Value" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="metricValue">The value to be aggregated.</param>
+        <param name="dimension1Value">The value of the 1st dimension.</param>
+        <param name="dimension2Value">The value of the 2nd dimension.</param>
+        <param name="dimension3Value">The value of the 3rd dimension.</param>
+        <param name="dimension4Value">The value of the 4th dimension.</param>
+        <param name="dimension5Value">The value of the 5th dimension.</param>
+        <param name="dimension6Value">The value of the 6th dimension.</param>
+        <param name="dimension7Value">The value of the 7th dimension.</param>
+        <param name="dimension8Value">The value of the 8th dimension.</param>
+        <summary>
+            Tracks the specified value using the <c>MetricSeries</c> associated with the specified dimension values.<br />
+            An aggregate representing tracked values will be automatically sent to the cloud ingestion endpoint at the end of each aggregation period.
+            This overload may only be used with 8-dimensional metrics. Use other overloads to specify a matching number of dimension values for this metric.
+            </summary>
+        <returns>
+          <c>True</c> if the specified value was added to the <c>MetricSeries</c> indicated by the specified dimension name;
+            <c>False</c> if the indicated series could not be created because a dimension cap or a metric series cap was reached.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">If the number of specified dimension names does not match the dimensionality of this <c>Metric</c>.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="TrackValue">
+      <MemberSignature Language="C#" Value="public bool TrackValue (object metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value, string dimension7Value, string dimension8Value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TrackValue(object metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value, string dimension7Value, string dimension8Value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TrackValue(System.Object,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function TrackValue (metricValue As Object, dimension1Value As String, dimension2Value As String, dimension3Value As String, dimension4Value As String, dimension5Value As String, dimension6Value As String, dimension7Value As String, dimension8Value As String) As Boolean" />
+      <MemberSignature Language="F#" Value="member this.TrackValue : obj * string * string * string * string * string * string * string * string -&gt; bool" Usage="metric.TrackValue (metricValue, dimension1Value, dimension2Value, dimension3Value, dimension4Value, dimension5Value, dimension6Value, dimension7Value, dimension8Value)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="metricValue" Type="System.Object" />
+        <Parameter Name="dimension1Value" Type="System.String" />
+        <Parameter Name="dimension2Value" Type="System.String" />
+        <Parameter Name="dimension3Value" Type="System.String" />
+        <Parameter Name="dimension4Value" Type="System.String" />
+        <Parameter Name="dimension5Value" Type="System.String" />
+        <Parameter Name="dimension6Value" Type="System.String" />
+        <Parameter Name="dimension7Value" Type="System.String" />
+        <Parameter Name="dimension8Value" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="metricValue">The value to be aggregated.</param>
+        <param name="dimension1Value">The value of the 1st dimension.</param>
+        <param name="dimension2Value">The value of the 2nd dimension.</param>
+        <param name="dimension3Value">The value of the 3rd dimension.</param>
+        <param name="dimension4Value">The value of the 4th dimension.</param>
+        <param name="dimension5Value">The value of the 5th dimension.</param>
+        <param name="dimension6Value">The value of the 6th dimension.</param>
+        <param name="dimension7Value">The value of the 7th dimension.</param>
+        <param name="dimension8Value">The value of the 8th dimension.</param>
+        <summary>
+            Tracks the specified value using the <c>MetricSeries</c> associated with the specified dimension values.<br />
+            An aggregate representing tracked values will be automatically sent to the cloud ingestion endpoint at the end of each aggregation period.
+            This overload may only be used with 8-dimensional metrics. Use other overloads to specify a matching number of dimension values for this metric.
+            </summary>
+        <returns>
+          <c>True</c> if the specified value was added to the <c>MetricSeries</c> indicated by the specified dimension name;
+            <c>False</c> if the indicated series could not be created because a dimension cap or a metric series cap was reached.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">If the number of specified dimension names does not match the dimensionality of this <c>Metric</c>.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="TrackValue">
+      <MemberSignature Language="C#" Value="public bool TrackValue (double metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value, string dimension7Value, string dimension8Value, string dimension9Value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TrackValue(float64 metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value, string dimension7Value, string dimension8Value, string dimension9Value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TrackValue(System.Double,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function TrackValue (metricValue As Double, dimension1Value As String, dimension2Value As String, dimension3Value As String, dimension4Value As String, dimension5Value As String, dimension6Value As String, dimension7Value As String, dimension8Value As String, dimension9Value As String) As Boolean" />
+      <MemberSignature Language="F#" Value="member this.TrackValue : double * string * string * string * string * string * string * string * string * string -&gt; bool" Usage="metric.TrackValue (metricValue, dimension1Value, dimension2Value, dimension3Value, dimension4Value, dimension5Value, dimension6Value, dimension7Value, dimension8Value, dimension9Value)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="metricValue" Type="System.Double" />
+        <Parameter Name="dimension1Value" Type="System.String" />
+        <Parameter Name="dimension2Value" Type="System.String" />
+        <Parameter Name="dimension3Value" Type="System.String" />
+        <Parameter Name="dimension4Value" Type="System.String" />
+        <Parameter Name="dimension5Value" Type="System.String" />
+        <Parameter Name="dimension6Value" Type="System.String" />
+        <Parameter Name="dimension7Value" Type="System.String" />
+        <Parameter Name="dimension8Value" Type="System.String" />
+        <Parameter Name="dimension9Value" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="metricValue">The value to be aggregated.</param>
+        <param name="dimension1Value">The value of the 1st dimension.</param>
+        <param name="dimension2Value">The value of the 2nd dimension.</param>
+        <param name="dimension3Value">The value of the 3rd dimension.</param>
+        <param name="dimension4Value">The value of the 4th dimension.</param>
+        <param name="dimension5Value">The value of the 5th dimension.</param>
+        <param name="dimension6Value">The value of the 6th dimension.</param>
+        <param name="dimension7Value">The value of the 7th dimension.</param>
+        <param name="dimension8Value">The value of the 8th dimension.</param>
+        <param name="dimension9Value">The value of the 9th dimension.</param>
+        <summary>
+            Tracks the specified value using the <c>MetricSeries</c> associated with the specified dimension values.<br />
+            An aggregate representing tracked values will be automatically sent to the cloud ingestion endpoint at the end of each aggregation period.
+            This overload may only be used with 9-dimensional metrics. Use other overloads to specify a matching number of dimension values for this metric.
+            </summary>
+        <returns>
+          <c>True</c> if the specified value was added to the <c>MetricSeries</c> indicated by the specified dimension name;
+            <c>False</c> if the indicated series could not be created because a dimension cap or a metric series cap was reached.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">If the number of specified dimension names does not match the dimensionality of this <c>Metric</c>.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="TrackValue">
+      <MemberSignature Language="C#" Value="public bool TrackValue (object metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value, string dimension7Value, string dimension8Value, string dimension9Value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TrackValue(object metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value, string dimension7Value, string dimension8Value, string dimension9Value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TrackValue(System.Object,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function TrackValue (metricValue As Object, dimension1Value As String, dimension2Value As String, dimension3Value As String, dimension4Value As String, dimension5Value As String, dimension6Value As String, dimension7Value As String, dimension8Value As String, dimension9Value As String) As Boolean" />
+      <MemberSignature Language="F#" Value="member this.TrackValue : obj * string * string * string * string * string * string * string * string * string -&gt; bool" Usage="metric.TrackValue (metricValue, dimension1Value, dimension2Value, dimension3Value, dimension4Value, dimension5Value, dimension6Value, dimension7Value, dimension8Value, dimension9Value)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="metricValue" Type="System.Object" />
+        <Parameter Name="dimension1Value" Type="System.String" />
+        <Parameter Name="dimension2Value" Type="System.String" />
+        <Parameter Name="dimension3Value" Type="System.String" />
+        <Parameter Name="dimension4Value" Type="System.String" />
+        <Parameter Name="dimension5Value" Type="System.String" />
+        <Parameter Name="dimension6Value" Type="System.String" />
+        <Parameter Name="dimension7Value" Type="System.String" />
+        <Parameter Name="dimension8Value" Type="System.String" />
+        <Parameter Name="dimension9Value" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="metricValue">The value to be aggregated.</param>
+        <param name="dimension1Value">The value of the 1st dimension.</param>
+        <param name="dimension2Value">The value of the 2nd dimension.</param>
+        <param name="dimension3Value">The value of the 3rd dimension.</param>
+        <param name="dimension4Value">The value of the 4th dimension.</param>
+        <param name="dimension5Value">The value of the 5th dimension.</param>
+        <param name="dimension6Value">The value of the 6th dimension.</param>
+        <param name="dimension7Value">The value of the 7th dimension.</param>
+        <param name="dimension8Value">The value of the 8th dimension.</param>
+        <param name="dimension9Value">The value of the 9th dimension.</param>
+        <summary>
+            Tracks the specified value using the <c>MetricSeries</c> associated with the specified dimension values.<br />
+            An aggregate representing tracked values will be automatically sent to the cloud ingestion endpoint at the end of each aggregation period.
+            This overload may only be used with 9-dimensional metrics. Use other overloads to specify a matching number of dimension values for this metric.
+            </summary>
+        <returns>
+          <c>True</c> if the specified value was added to the <c>MetricSeries</c> indicated by the specified dimension name;
+            <c>False</c> if the indicated series could not be created because a dimension cap or a metric series cap was reached.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">If the number of specified dimension names does not match the dimensionality of this <c>Metric</c>.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="TrackValue">
+      <MemberSignature Language="C#" Value="public bool TrackValue (double metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value, string dimension7Value, string dimension8Value, string dimension9Value, string dimension10Value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TrackValue(float64 metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value, string dimension7Value, string dimension8Value, string dimension9Value, string dimension10Value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TrackValue(System.Double,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function TrackValue (metricValue As Double, dimension1Value As String, dimension2Value As String, dimension3Value As String, dimension4Value As String, dimension5Value As String, dimension6Value As String, dimension7Value As String, dimension8Value As String, dimension9Value As String, dimension10Value As String) As Boolean" />
+      <MemberSignature Language="F#" Value="member this.TrackValue : double * string * string * string * string * string * string * string * string * string * string -&gt; bool" Usage="metric.TrackValue (metricValue, dimension1Value, dimension2Value, dimension3Value, dimension4Value, dimension5Value, dimension6Value, dimension7Value, dimension8Value, dimension9Value, dimension10Value)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="metricValue" Type="System.Double" />
+        <Parameter Name="dimension1Value" Type="System.String" />
+        <Parameter Name="dimension2Value" Type="System.String" />
+        <Parameter Name="dimension3Value" Type="System.String" />
+        <Parameter Name="dimension4Value" Type="System.String" />
+        <Parameter Name="dimension5Value" Type="System.String" />
+        <Parameter Name="dimension6Value" Type="System.String" />
+        <Parameter Name="dimension7Value" Type="System.String" />
+        <Parameter Name="dimension8Value" Type="System.String" />
+        <Parameter Name="dimension9Value" Type="System.String" />
+        <Parameter Name="dimension10Value" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="metricValue">The value to be aggregated.</param>
+        <param name="dimension1Value">The value of the 1st dimension.</param>
+        <param name="dimension2Value">The value of the 2nd dimension.</param>
+        <param name="dimension3Value">The value of the 3rd dimension.</param>
+        <param name="dimension4Value">The value of the 4th dimension.</param>
+        <param name="dimension5Value">The value of the 5th dimension.</param>
+        <param name="dimension6Value">The value of the 6th dimension.</param>
+        <param name="dimension7Value">The value of the 7th dimension.</param>
+        <param name="dimension8Value">The value of the 8th dimension.</param>
+        <param name="dimension9Value">The value of the 9th dimension.</param>
+        <param name="dimension10Value">The value of the 10th dimension.</param>
+        <summary>
+            Tracks the specified value using the <c>MetricSeries</c> associated with the specified dimension values.<br />
+            An aggregate representing tracked values will be automatically sent to the cloud ingestion endpoint at the end of each aggregation period.
+            This overload may only be used with 10-dimensional metrics. Use other overloads to specify a matching number of dimension values for this metric.
+            </summary>
+        <returns>
+          <c>True</c> if the specified value was added to the <c>MetricSeries</c> indicated by the specified dimension name;
+            <c>False</c> if the indicated series could not be created because a dimension cap or a metric series cap was reached.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">If the number of specified dimension names does not match the dimensionality of this <c>Metric</c>.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="TrackValue">
+      <MemberSignature Language="C#" Value="public bool TrackValue (object metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value, string dimension7Value, string dimension8Value, string dimension9Value, string dimension10Value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TrackValue(object metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value, string dimension7Value, string dimension8Value, string dimension9Value, string dimension10Value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TrackValue(System.Object,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function TrackValue (metricValue As Object, dimension1Value As String, dimension2Value As String, dimension3Value As String, dimension4Value As String, dimension5Value As String, dimension6Value As String, dimension7Value As String, dimension8Value As String, dimension9Value As String, dimension10Value As String) As Boolean" />
+      <MemberSignature Language="F#" Value="member this.TrackValue : obj * string * string * string * string * string * string * string * string * string * string -&gt; bool" Usage="metric.TrackValue (metricValue, dimension1Value, dimension2Value, dimension3Value, dimension4Value, dimension5Value, dimension6Value, dimension7Value, dimension8Value, dimension9Value, dimension10Value)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="metricValue" Type="System.Object" />
+        <Parameter Name="dimension1Value" Type="System.String" />
+        <Parameter Name="dimension2Value" Type="System.String" />
+        <Parameter Name="dimension3Value" Type="System.String" />
+        <Parameter Name="dimension4Value" Type="System.String" />
+        <Parameter Name="dimension5Value" Type="System.String" />
+        <Parameter Name="dimension6Value" Type="System.String" />
+        <Parameter Name="dimension7Value" Type="System.String" />
+        <Parameter Name="dimension8Value" Type="System.String" />
+        <Parameter Name="dimension9Value" Type="System.String" />
+        <Parameter Name="dimension10Value" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="metricValue">The value to be aggregated.</param>
+        <param name="dimension1Value">The value of the 1st dimension.</param>
+        <param name="dimension2Value">The value of the 2nd dimension.</param>
+        <param name="dimension3Value">The value of the 3rd dimension.</param>
+        <param name="dimension4Value">The value of the 4th dimension.</param>
+        <param name="dimension5Value">The value of the 5th dimension.</param>
+        <param name="dimension6Value">The value of the 6th dimension.</param>
+        <param name="dimension7Value">The value of the 7th dimension.</param>
+        <param name="dimension8Value">The value of the 8th dimension.</param>
+        <param name="dimension9Value">The value of the 9th dimension.</param>
+        <param name="dimension10Value">The value of the 10th dimension.</param>
+        <summary>
+            Tracks the specified value using the <c>MetricSeries</c> associated with the specified dimension values.<br />
+            An aggregate representing tracked values will be automatically sent to the cloud ingestion endpoint at the end of each aggregation period.
+            This overload may only be used with 10-dimensional metrics. Use other overloads to specify a matching number of dimension values for this metric.
+            </summary>
+        <returns>
+          <c>True</c> if the specified value was added to the <c>MetricSeries</c> indicated by the specified dimension name;
+            <c>False</c> if the indicated series could not be created because a dimension cap or a metric series cap was reached.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">If the number of specified dimension names does not match the dimensionality of this <c>Metric</c>.</exception>
       </Docs>
     </Member>
     <Member MemberName="TryGetDataSeries">
@@ -168,6 +1041,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -176,9 +1050,14 @@
         <Parameter Name="series" Type="Microsoft.ApplicationInsights.Metrics.MetricSeries" RefType="out" />
       </Parameters>
       <Docs>
-        <param name="series">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="series">Will be set to the zero-dimensional <c>MetricSeries</c> associated with this metric</param>
+        <summary>
+            Gets a <c>MetricSeries</c> associated with this metric.<br />
+            This overload gets the zero-dimensional <c>MetricSeries</c> associated with this metric.
+            Every metric, regardless of its dimensionality, has such a zero-dimensional <c>MetricSeries</c>.
+            </summary>
+        <returns>
+          <c>True</c>.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -192,6 +1071,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -201,11 +1081,18 @@
         <Parameter Name="dimension1Value" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="series">To be added.</param>
-        <param name="dimension1Value">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="series">If this method returns <c>True</c>: Will be set to the <c>MetricSeries</c> associated with the specified dimension value.<br />
+            Otherwise: Will be set to <c>null</c>.</param>
+        <param name="dimension1Value">The value of the 1st dimension.</param>
+        <summary>
+            Gets or creates the <c>MetricSeries</c> associated with the specified dimension value.<br />
+            This overload may only be used with 1-dimensional metrics. Use other overloads to specify a matching number of dimension values for this metric.
+            </summary>
+        <returns>
+          <c>True</c> if the <c>MetricSeries</c> indicated by the specified dimension name could be retrieved (or created);
+            <c>False</c> if the indicated series could not be retrieved or created because a dimension cap or a metric series cap was reached.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">If the number of specified dimension names does not match the dimensionality of this <c>Metric</c>.</exception>
       </Docs>
     </Member>
     <Member MemberName="TryGetDataSeries">
@@ -218,6 +1105,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -234,12 +1122,22 @@
         </Parameter>
       </Parameters>
       <Docs>
-        <param name="series">To be added.</param>
-        <param name="createIfNotExists">To be added.</param>
-        <param name="dimensionValues">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="series">If this method returns <c>True</c>: Will be set to the <c>MetricSeries</c> associated with the specified dimension values.<br />
+            Otherwise: Will be set to <c>null</c>.</param>
+        <param name="createIfNotExists">Whether to attempt creating a metric series for the specified dimension values if it does not exist.</param>
+        <param name="dimensionValues">The values of the dimensions for the required metric series.</param>
+        <summary>
+            Gets or creates the <c>MetricSeries</c> associated with the specified dimension values.<br />
+            This overload used metrics of any valid dimensionality:
+            The number of elements in the specified <c>dimensionValues</c> array must exactly match the dimensionality of this metric,
+            and that array may not contain nulls. Specify a null-array for zero-dimensional metrics.
+            </summary>
+        <returns>
+          <c>True</c> if the <c>MetricSeries</c> indicated by the specified dimension names could be retrieved or created;
+            <c>False</c> if the indicated series could not be retrieved or created because <c>createIfNotExists</c> is <c>false</c>
+            or because a dimension cap or a metric series cap was reached.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">If the number of specified dimension names does not match the dimensionality of this <c>Metric</c>.</exception>
       </Docs>
     </Member>
     <Member MemberName="TryGetDataSeries">
@@ -252,6 +1150,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -262,12 +1161,19 @@
         <Parameter Name="dimension2Value" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="series">To be added.</param>
-        <param name="dimension1Value">To be added.</param>
-        <param name="dimension2Value">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="series">If this method returns <c>True</c>: Will be set to the <c>MetricSeries</c> associated with the specified dimension value.<br />
+            Otherwise: Will be set to <c>null</c>.</param>
+        <param name="dimension1Value">The value of the 1st dimension.</param>
+        <param name="dimension2Value">The value of the 2nd dimension.</param>
+        <summary>
+            Gets or creates the <c>MetricSeries</c> associated with the specified dimension values.<br />
+            This overload may only be used with 2-dimensional metrics. Use other overloads to specify a matching number of dimension values for this metric.
+            </summary>
+        <returns>
+          <c>True</c> if the <c>MetricSeries</c> indicated by the specified dimension name could be retrieved (or created);
+            <c>False</c> if the indicated series could not be retrieved or created because a dimension cap or a metric series cap was reached.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">If the number of specified dimension names does not match the dimensionality of this <c>Metric</c>.</exception>
       </Docs>
     </Member>
     <Member MemberName="TryGetDataSeries">
@@ -280,6 +1186,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -291,13 +1198,20 @@
         <Parameter Name="dimension3Value" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="series">To be added.</param>
-        <param name="dimension1Value">To be added.</param>
-        <param name="dimension2Value">To be added.</param>
-        <param name="dimension3Value">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="series">If this method returns <c>True</c>: Will be set to the <c>MetricSeries</c> associated with the specified dimension value.<br />
+            Otherwise: Will be set to <c>null</c>.</param>
+        <param name="dimension1Value">The value of the 1st dimension.</param>
+        <param name="dimension2Value">The value of the 2nd dimension.</param>
+        <param name="dimension3Value">The value of the 3rd dimension.</param>
+        <summary>
+            Gets or creates the <c>MetricSeries</c> associated with the specified dimension values.<br />
+            This overload may only be used with 3-dimensional metrics. Use other overloads to specify a matching number of dimension values for this metric.
+            </summary>
+        <returns>
+          <c>True</c> if the <c>MetricSeries</c> indicated by the specified dimension name could be retrieved (or created);
+            <c>False</c> if the indicated series could not be retrieved or created because a dimension cap or a metric series cap was reached.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">If the number of specified dimension names does not match the dimensionality of this <c>Metric</c>.</exception>
       </Docs>
     </Member>
     <Member MemberName="TryGetDataSeries">
@@ -310,6 +1224,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -322,14 +1237,21 @@
         <Parameter Name="dimension4Value" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="series">To be added.</param>
-        <param name="dimension1Value">To be added.</param>
-        <param name="dimension2Value">To be added.</param>
-        <param name="dimension3Value">To be added.</param>
-        <param name="dimension4Value">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="series">If this method returns <c>True</c>: Will be set to the <c>MetricSeries</c> associated with the specified dimension value.<br />
+            Otherwise: Will be set to <c>null</c>.</param>
+        <param name="dimension1Value">The value of the 1st dimension.</param>
+        <param name="dimension2Value">The value of the 2nd dimension.</param>
+        <param name="dimension3Value">The value of the 3rd dimension.</param>
+        <param name="dimension4Value">The value of the 4th dimension.</param>
+        <summary>
+            Gets or creates the <c>MetricSeries</c> associated with the specified dimension values.<br />
+            This overload may only be used with 4-dimensional metrics. Use other overloads to specify a matching number of dimension values for this metric.
+            </summary>
+        <returns>
+          <c>True</c> if the <c>MetricSeries</c> indicated by the specified dimension name could be retrieved (or created);
+            <c>False</c> if the indicated series could not be retrieved or created because a dimension cap or a metric series cap was reached.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">If the number of specified dimension names does not match the dimensionality of this <c>Metric</c>.</exception>
       </Docs>
     </Member>
     <Member MemberName="TryGetDataSeries">
@@ -342,6 +1264,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -355,15 +1278,22 @@
         <Parameter Name="dimension5Value" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="series">To be added.</param>
-        <param name="dimension1Value">To be added.</param>
-        <param name="dimension2Value">To be added.</param>
-        <param name="dimension3Value">To be added.</param>
-        <param name="dimension4Value">To be added.</param>
-        <param name="dimension5Value">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="series">If this method returns <c>True</c>: Will be set to the <c>MetricSeries</c> associated with the specified dimension value.<br />
+            Otherwise: Will be set to <c>null</c>.</param>
+        <param name="dimension1Value">The value of the 1st dimension.</param>
+        <param name="dimension2Value">The value of the 2nd dimension.</param>
+        <param name="dimension3Value">The value of the 3rd dimension.</param>
+        <param name="dimension4Value">The value of the 4th dimension.</param>
+        <param name="dimension5Value">The value of the 5th dimension.</param>
+        <summary>
+            Gets or creates the <c>MetricSeries</c> associated with the specified dimension values.<br />
+            This overload may only be used with 5-dimensional metrics. Use other overloads to specify a matching number of dimension values for this metric.
+            </summary>
+        <returns>
+          <c>True</c> if the <c>MetricSeries</c> indicated by the specified dimension name could be retrieved (or created);
+            <c>False</c> if the indicated series could not be retrieved or created because a dimension cap or a metric series cap was reached.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">If the number of specified dimension names does not match the dimensionality of this <c>Metric</c>.</exception>
       </Docs>
     </Member>
     <Member MemberName="TryGetDataSeries">
@@ -376,6 +1306,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -390,16 +1321,23 @@
         <Parameter Name="dimension6Value" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="series">To be added.</param>
-        <param name="dimension1Value">To be added.</param>
-        <param name="dimension2Value">To be added.</param>
-        <param name="dimension3Value">To be added.</param>
-        <param name="dimension4Value">To be added.</param>
-        <param name="dimension5Value">To be added.</param>
-        <param name="dimension6Value">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="series">If this method returns <c>True</c>: Will be set to the <c>MetricSeries</c> associated with the specified dimension value.<br />
+            Otherwise: Will be set to <c>null</c>.</param>
+        <param name="dimension1Value">The value of the 1st dimension.</param>
+        <param name="dimension2Value">The value of the 2nd dimension.</param>
+        <param name="dimension3Value">The value of the 3rd dimension.</param>
+        <param name="dimension4Value">The value of the 4th dimension.</param>
+        <param name="dimension5Value">The value of the 5th dimension.</param>
+        <param name="dimension6Value">The value of the 6th dimension.</param>
+        <summary>
+            Gets or creates the <c>MetricSeries</c> associated with the specified dimension values.<br />
+            This overload may only be used with 6-dimensional metrics. Use other overloads to specify a matching number of dimension values for this metric.
+            </summary>
+        <returns>
+          <c>True</c> if the <c>MetricSeries</c> indicated by the specified dimension name could be retrieved (or created);
+            <c>False</c> if the indicated series could not be retrieved or created because a dimension cap or a metric series cap was reached.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">If the number of specified dimension names does not match the dimensionality of this <c>Metric</c>.</exception>
       </Docs>
     </Member>
     <Member MemberName="TryGetDataSeries">
@@ -412,6 +1350,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -427,17 +1366,24 @@
         <Parameter Name="dimension7Value" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="series">To be added.</param>
-        <param name="dimension1Value">To be added.</param>
-        <param name="dimension2Value">To be added.</param>
-        <param name="dimension3Value">To be added.</param>
-        <param name="dimension4Value">To be added.</param>
-        <param name="dimension5Value">To be added.</param>
-        <param name="dimension6Value">To be added.</param>
-        <param name="dimension7Value">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="series">If this method returns <c>True</c>: Will be set to the <c>MetricSeries</c> associated with the specified dimension value.<br />
+            Otherwise: Will be set to <c>null</c>.</param>
+        <param name="dimension1Value">The value of the 1st dimension.</param>
+        <param name="dimension2Value">The value of the 2nd dimension.</param>
+        <param name="dimension3Value">The value of the 3rd dimension.</param>
+        <param name="dimension4Value">The value of the 4th dimension.</param>
+        <param name="dimension5Value">The value of the 5th dimension.</param>
+        <param name="dimension6Value">The value of the 6th dimension.</param>
+        <param name="dimension7Value">The value of the 7th dimension.</param>
+        <summary>
+            Gets or creates the <c>MetricSeries</c> associated with the specified dimension values.<br />
+            This overload may only be used with 7-dimensional metrics. Use other overloads to specify a matching number of dimension values for this metric.
+            </summary>
+        <returns>
+          <c>True</c> if the <c>MetricSeries</c> indicated by the specified dimension name could be retrieved (or created);
+            <c>False</c> if the indicated series could not be retrieved or created because a dimension cap or a metric series cap was reached.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">If the number of specified dimension names does not match the dimensionality of this <c>Metric</c>.</exception>
       </Docs>
     </Member>
     <Member MemberName="TryGetDataSeries">
@@ -450,6 +1396,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -466,18 +1413,25 @@
         <Parameter Name="dimension8Value" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="series">To be added.</param>
-        <param name="dimension1Value">To be added.</param>
-        <param name="dimension2Value">To be added.</param>
-        <param name="dimension3Value">To be added.</param>
-        <param name="dimension4Value">To be added.</param>
-        <param name="dimension5Value">To be added.</param>
-        <param name="dimension6Value">To be added.</param>
-        <param name="dimension7Value">To be added.</param>
-        <param name="dimension8Value">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="series">If this method returns <c>True</c>: Will be set to the <c>MetricSeries</c> associated with the specified dimension value.<br />
+            Otherwise: Will be set to <c>null</c>.</param>
+        <param name="dimension1Value">The value of the 1st dimension.</param>
+        <param name="dimension2Value">The value of the 2nd dimension.</param>
+        <param name="dimension3Value">The value of the 3rd dimension.</param>
+        <param name="dimension4Value">The value of the 4th dimension.</param>
+        <param name="dimension5Value">The value of the 5th dimension.</param>
+        <param name="dimension6Value">The value of the 6th dimension.</param>
+        <param name="dimension7Value">The value of the 7th dimension.</param>
+        <param name="dimension8Value">The value of the 8th dimension.</param>
+        <summary>
+            Gets or creates the <c>MetricSeries</c> associated with the specified dimension values.<br />
+            This overload may only be used with 8-dimensional metrics. Use other overloads to specify a matching number of dimension values for this metric.
+            </summary>
+        <returns>
+          <c>True</c> if the <c>MetricSeries</c> indicated by the specified dimension name could be retrieved (or created);
+            <c>False</c> if the indicated series could not be retrieved or created because a dimension cap or a metric series cap was reached.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">If the number of specified dimension names does not match the dimensionality of this <c>Metric</c>.</exception>
       </Docs>
     </Member>
     <Member MemberName="TryGetDataSeries">
@@ -490,6 +1444,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -507,19 +1462,26 @@
         <Parameter Name="dimension9Value" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="series">To be added.</param>
-        <param name="dimension1Value">To be added.</param>
-        <param name="dimension2Value">To be added.</param>
-        <param name="dimension3Value">To be added.</param>
-        <param name="dimension4Value">To be added.</param>
-        <param name="dimension5Value">To be added.</param>
-        <param name="dimension6Value">To be added.</param>
-        <param name="dimension7Value">To be added.</param>
-        <param name="dimension8Value">To be added.</param>
-        <param name="dimension9Value">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="series">If this method returns <c>True</c>: Will be set to the <c>MetricSeries</c> associated with the specified dimension value.<br />
+            Otherwise: Will be set to <c>null</c>.</param>
+        <param name="dimension1Value">The value of the 1st dimension.</param>
+        <param name="dimension2Value">The value of the 2nd dimension.</param>
+        <param name="dimension3Value">The value of the 3rd dimension.</param>
+        <param name="dimension4Value">The value of the 4th dimension.</param>
+        <param name="dimension5Value">The value of the 5th dimension.</param>
+        <param name="dimension6Value">The value of the 6th dimension.</param>
+        <param name="dimension7Value">The value of the 7th dimension.</param>
+        <param name="dimension8Value">The value of the 8th dimension.</param>
+        <param name="dimension9Value">The value of the 9th dimension.</param>
+        <summary>
+            Gets or creates the <c>MetricSeries</c> associated with the specified dimension values.<br />
+            This overload may only be used with 9-dimensional metrics. Use other overloads to specify a matching number of dimension values for this metric.
+            </summary>
+        <returns>
+          <c>True</c> if the <c>MetricSeries</c> indicated by the specified dimension name could be retrieved (or created);
+            <c>False</c> if the indicated series could not be retrieved or created because a dimension cap or a metric series cap was reached.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">If the number of specified dimension names does not match the dimensionality of this <c>Metric</c>.</exception>
       </Docs>
     </Member>
     <Member MemberName="TryGetDataSeries">
@@ -532,6 +1494,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -550,720 +1513,27 @@
         <Parameter Name="dimension10Value" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="series">To be added.</param>
-        <param name="dimension1Value">To be added.</param>
-        <param name="dimension2Value">To be added.</param>
-        <param name="dimension3Value">To be added.</param>
-        <param name="dimension4Value">To be added.</param>
-        <param name="dimension5Value">To be added.</param>
-        <param name="dimension6Value">To be added.</param>
-        <param name="dimension7Value">To be added.</param>
-        <param name="dimension8Value">To be added.</param>
-        <param name="dimension9Value">To be added.</param>
-        <param name="dimension10Value">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="series">If this method returns <c>True</c>: Will be set to the <c>MetricSeries</c> associated with the specified dimension value.<br />
+            Otherwise: Will be set to <c>null</c>.</param>
+        <param name="dimension1Value">The value of the 1st dimension.</param>
+        <param name="dimension2Value">The value of the 2nd dimension.</param>
+        <param name="dimension3Value">The value of the 3rd dimension.</param>
+        <param name="dimension4Value">The value of the 4th dimension.</param>
+        <param name="dimension5Value">The value of the 5th dimension.</param>
+        <param name="dimension6Value">The value of the 6th dimension.</param>
+        <param name="dimension7Value">The value of the 7th dimension.</param>
+        <param name="dimension8Value">The value of the 8th dimension.</param>
+        <param name="dimension9Value">The value of the 9th dimension.</param>
+        <param name="dimension10Value">The value of the 10th dimension.</param>
+        <summary>
+            Gets or creates the <c>MetricSeries</c> associated with the specified dimension values.<br />
+            This overload may only be used with 10-dimensional metrics. Use other overloads to specify a matching number of dimension values for this metric.
+            </summary>
+        <returns>
+          <c>True</c> if the <c>MetricSeries</c> indicated by the specified dimension name could be retrieved (or created);
+            <c>False</c> if the indicated series could not be retrieved or created because a dimension cap or a metric series cap was reached.</returns>
         <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="TryTrackValue">
-      <MemberSignature Language="C#" Value="public bool TryTrackValue (double metricValue, string dimension1Value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TryTrackValue(float64 metricValue, string dimension1Value) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TryTrackValue(System.Double,System.String)" />
-      <MemberSignature Language="VB.NET" Value="Public Function TryTrackValue (metricValue As Double, dimension1Value As String) As Boolean" />
-      <MemberSignature Language="F#" Value="member this.TryTrackValue : double * string -&gt; bool" Usage="metric.TryTrackValue (metricValue, dimension1Value)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
-        <AssemblyVersion>2.7.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Boolean</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="metricValue" Type="System.Double" />
-        <Parameter Name="dimension1Value" Type="System.String" />
-      </Parameters>
-      <Docs>
-        <param name="metricValue">To be added.</param>
-        <param name="dimension1Value">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="TryTrackValue">
-      <MemberSignature Language="C#" Value="public bool TryTrackValue (object metricValue, string dimension1Value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TryTrackValue(object metricValue, string dimension1Value) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TryTrackValue(System.Object,System.String)" />
-      <MemberSignature Language="VB.NET" Value="Public Function TryTrackValue (metricValue As Object, dimension1Value As String) As Boolean" />
-      <MemberSignature Language="F#" Value="member this.TryTrackValue : obj * string -&gt; bool" Usage="metric.TryTrackValue (metricValue, dimension1Value)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
-        <AssemblyVersion>2.7.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Boolean</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="metricValue" Type="System.Object" />
-        <Parameter Name="dimension1Value" Type="System.String" />
-      </Parameters>
-      <Docs>
-        <param name="metricValue">To be added.</param>
-        <param name="dimension1Value">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="TryTrackValue">
-      <MemberSignature Language="C#" Value="public bool TryTrackValue (double metricValue, string dimension1Value, string dimension2Value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TryTrackValue(float64 metricValue, string dimension1Value, string dimension2Value) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TryTrackValue(System.Double,System.String,System.String)" />
-      <MemberSignature Language="VB.NET" Value="Public Function TryTrackValue (metricValue As Double, dimension1Value As String, dimension2Value As String) As Boolean" />
-      <MemberSignature Language="F#" Value="member this.TryTrackValue : double * string * string -&gt; bool" Usage="metric.TryTrackValue (metricValue, dimension1Value, dimension2Value)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
-        <AssemblyVersion>2.7.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Boolean</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="metricValue" Type="System.Double" />
-        <Parameter Name="dimension1Value" Type="System.String" />
-        <Parameter Name="dimension2Value" Type="System.String" />
-      </Parameters>
-      <Docs>
-        <param name="metricValue">To be added.</param>
-        <param name="dimension1Value">To be added.</param>
-        <param name="dimension2Value">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="TryTrackValue">
-      <MemberSignature Language="C#" Value="public bool TryTrackValue (object metricValue, string dimension1Value, string dimension2Value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TryTrackValue(object metricValue, string dimension1Value, string dimension2Value) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TryTrackValue(System.Object,System.String,System.String)" />
-      <MemberSignature Language="VB.NET" Value="Public Function TryTrackValue (metricValue As Object, dimension1Value As String, dimension2Value As String) As Boolean" />
-      <MemberSignature Language="F#" Value="member this.TryTrackValue : obj * string * string -&gt; bool" Usage="metric.TryTrackValue (metricValue, dimension1Value, dimension2Value)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
-        <AssemblyVersion>2.7.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Boolean</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="metricValue" Type="System.Object" />
-        <Parameter Name="dimension1Value" Type="System.String" />
-        <Parameter Name="dimension2Value" Type="System.String" />
-      </Parameters>
-      <Docs>
-        <param name="metricValue">To be added.</param>
-        <param name="dimension1Value">To be added.</param>
-        <param name="dimension2Value">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="TryTrackValue">
-      <MemberSignature Language="C#" Value="public bool TryTrackValue (double metricValue, string dimension1Value, string dimension2Value, string dimension3Value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TryTrackValue(float64 metricValue, string dimension1Value, string dimension2Value, string dimension3Value) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TryTrackValue(System.Double,System.String,System.String,System.String)" />
-      <MemberSignature Language="VB.NET" Value="Public Function TryTrackValue (metricValue As Double, dimension1Value As String, dimension2Value As String, dimension3Value As String) As Boolean" />
-      <MemberSignature Language="F#" Value="member this.TryTrackValue : double * string * string * string -&gt; bool" Usage="metric.TryTrackValue (metricValue, dimension1Value, dimension2Value, dimension3Value)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
-        <AssemblyVersion>2.7.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Boolean</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="metricValue" Type="System.Double" />
-        <Parameter Name="dimension1Value" Type="System.String" />
-        <Parameter Name="dimension2Value" Type="System.String" />
-        <Parameter Name="dimension3Value" Type="System.String" />
-      </Parameters>
-      <Docs>
-        <param name="metricValue">To be added.</param>
-        <param name="dimension1Value">To be added.</param>
-        <param name="dimension2Value">To be added.</param>
-        <param name="dimension3Value">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="TryTrackValue">
-      <MemberSignature Language="C#" Value="public bool TryTrackValue (object metricValue, string dimension1Value, string dimension2Value, string dimension3Value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TryTrackValue(object metricValue, string dimension1Value, string dimension2Value, string dimension3Value) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TryTrackValue(System.Object,System.String,System.String,System.String)" />
-      <MemberSignature Language="VB.NET" Value="Public Function TryTrackValue (metricValue As Object, dimension1Value As String, dimension2Value As String, dimension3Value As String) As Boolean" />
-      <MemberSignature Language="F#" Value="member this.TryTrackValue : obj * string * string * string -&gt; bool" Usage="metric.TryTrackValue (metricValue, dimension1Value, dimension2Value, dimension3Value)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
-        <AssemblyVersion>2.7.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Boolean</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="metricValue" Type="System.Object" />
-        <Parameter Name="dimension1Value" Type="System.String" />
-        <Parameter Name="dimension2Value" Type="System.String" />
-        <Parameter Name="dimension3Value" Type="System.String" />
-      </Parameters>
-      <Docs>
-        <param name="metricValue">To be added.</param>
-        <param name="dimension1Value">To be added.</param>
-        <param name="dimension2Value">To be added.</param>
-        <param name="dimension3Value">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="TryTrackValue">
-      <MemberSignature Language="C#" Value="public bool TryTrackValue (double metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TryTrackValue(float64 metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TryTrackValue(System.Double,System.String,System.String,System.String,System.String)" />
-      <MemberSignature Language="VB.NET" Value="Public Function TryTrackValue (metricValue As Double, dimension1Value As String, dimension2Value As String, dimension3Value As String, dimension4Value As String) As Boolean" />
-      <MemberSignature Language="F#" Value="member this.TryTrackValue : double * string * string * string * string -&gt; bool" Usage="metric.TryTrackValue (metricValue, dimension1Value, dimension2Value, dimension3Value, dimension4Value)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
-        <AssemblyVersion>2.7.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Boolean</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="metricValue" Type="System.Double" />
-        <Parameter Name="dimension1Value" Type="System.String" />
-        <Parameter Name="dimension2Value" Type="System.String" />
-        <Parameter Name="dimension3Value" Type="System.String" />
-        <Parameter Name="dimension4Value" Type="System.String" />
-      </Parameters>
-      <Docs>
-        <param name="metricValue">To be added.</param>
-        <param name="dimension1Value">To be added.</param>
-        <param name="dimension2Value">To be added.</param>
-        <param name="dimension3Value">To be added.</param>
-        <param name="dimension4Value">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="TryTrackValue">
-      <MemberSignature Language="C#" Value="public bool TryTrackValue (object metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TryTrackValue(object metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TryTrackValue(System.Object,System.String,System.String,System.String,System.String)" />
-      <MemberSignature Language="VB.NET" Value="Public Function TryTrackValue (metricValue As Object, dimension1Value As String, dimension2Value As String, dimension3Value As String, dimension4Value As String) As Boolean" />
-      <MemberSignature Language="F#" Value="member this.TryTrackValue : obj * string * string * string * string -&gt; bool" Usage="metric.TryTrackValue (metricValue, dimension1Value, dimension2Value, dimension3Value, dimension4Value)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
-        <AssemblyVersion>2.7.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Boolean</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="metricValue" Type="System.Object" />
-        <Parameter Name="dimension1Value" Type="System.String" />
-        <Parameter Name="dimension2Value" Type="System.String" />
-        <Parameter Name="dimension3Value" Type="System.String" />
-        <Parameter Name="dimension4Value" Type="System.String" />
-      </Parameters>
-      <Docs>
-        <param name="metricValue">To be added.</param>
-        <param name="dimension1Value">To be added.</param>
-        <param name="dimension2Value">To be added.</param>
-        <param name="dimension3Value">To be added.</param>
-        <param name="dimension4Value">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="TryTrackValue">
-      <MemberSignature Language="C#" Value="public bool TryTrackValue (double metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TryTrackValue(float64 metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TryTrackValue(System.Double,System.String,System.String,System.String,System.String,System.String)" />
-      <MemberSignature Language="VB.NET" Value="Public Function TryTrackValue (metricValue As Double, dimension1Value As String, dimension2Value As String, dimension3Value As String, dimension4Value As String, dimension5Value As String) As Boolean" />
-      <MemberSignature Language="F#" Value="member this.TryTrackValue : double * string * string * string * string * string -&gt; bool" Usage="metric.TryTrackValue (metricValue, dimension1Value, dimension2Value, dimension3Value, dimension4Value, dimension5Value)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
-        <AssemblyVersion>2.7.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Boolean</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="metricValue" Type="System.Double" />
-        <Parameter Name="dimension1Value" Type="System.String" />
-        <Parameter Name="dimension2Value" Type="System.String" />
-        <Parameter Name="dimension3Value" Type="System.String" />
-        <Parameter Name="dimension4Value" Type="System.String" />
-        <Parameter Name="dimension5Value" Type="System.String" />
-      </Parameters>
-      <Docs>
-        <param name="metricValue">To be added.</param>
-        <param name="dimension1Value">To be added.</param>
-        <param name="dimension2Value">To be added.</param>
-        <param name="dimension3Value">To be added.</param>
-        <param name="dimension4Value">To be added.</param>
-        <param name="dimension5Value">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="TryTrackValue">
-      <MemberSignature Language="C#" Value="public bool TryTrackValue (object metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TryTrackValue(object metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TryTrackValue(System.Object,System.String,System.String,System.String,System.String,System.String)" />
-      <MemberSignature Language="VB.NET" Value="Public Function TryTrackValue (metricValue As Object, dimension1Value As String, dimension2Value As String, dimension3Value As String, dimension4Value As String, dimension5Value As String) As Boolean" />
-      <MemberSignature Language="F#" Value="member this.TryTrackValue : obj * string * string * string * string * string -&gt; bool" Usage="metric.TryTrackValue (metricValue, dimension1Value, dimension2Value, dimension3Value, dimension4Value, dimension5Value)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
-        <AssemblyVersion>2.7.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Boolean</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="metricValue" Type="System.Object" />
-        <Parameter Name="dimension1Value" Type="System.String" />
-        <Parameter Name="dimension2Value" Type="System.String" />
-        <Parameter Name="dimension3Value" Type="System.String" />
-        <Parameter Name="dimension4Value" Type="System.String" />
-        <Parameter Name="dimension5Value" Type="System.String" />
-      </Parameters>
-      <Docs>
-        <param name="metricValue">To be added.</param>
-        <param name="dimension1Value">To be added.</param>
-        <param name="dimension2Value">To be added.</param>
-        <param name="dimension3Value">To be added.</param>
-        <param name="dimension4Value">To be added.</param>
-        <param name="dimension5Value">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="TryTrackValue">
-      <MemberSignature Language="C#" Value="public bool TryTrackValue (double metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TryTrackValue(float64 metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TryTrackValue(System.Double,System.String,System.String,System.String,System.String,System.String,System.String)" />
-      <MemberSignature Language="VB.NET" Value="Public Function TryTrackValue (metricValue As Double, dimension1Value As String, dimension2Value As String, dimension3Value As String, dimension4Value As String, dimension5Value As String, dimension6Value As String) As Boolean" />
-      <MemberSignature Language="F#" Value="member this.TryTrackValue : double * string * string * string * string * string * string -&gt; bool" Usage="metric.TryTrackValue (metricValue, dimension1Value, dimension2Value, dimension3Value, dimension4Value, dimension5Value, dimension6Value)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
-        <AssemblyVersion>2.7.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Boolean</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="metricValue" Type="System.Double" />
-        <Parameter Name="dimension1Value" Type="System.String" />
-        <Parameter Name="dimension2Value" Type="System.String" />
-        <Parameter Name="dimension3Value" Type="System.String" />
-        <Parameter Name="dimension4Value" Type="System.String" />
-        <Parameter Name="dimension5Value" Type="System.String" />
-        <Parameter Name="dimension6Value" Type="System.String" />
-      </Parameters>
-      <Docs>
-        <param name="metricValue">To be added.</param>
-        <param name="dimension1Value">To be added.</param>
-        <param name="dimension2Value">To be added.</param>
-        <param name="dimension3Value">To be added.</param>
-        <param name="dimension4Value">To be added.</param>
-        <param name="dimension5Value">To be added.</param>
-        <param name="dimension6Value">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="TryTrackValue">
-      <MemberSignature Language="C#" Value="public bool TryTrackValue (object metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TryTrackValue(object metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TryTrackValue(System.Object,System.String,System.String,System.String,System.String,System.String,System.String)" />
-      <MemberSignature Language="VB.NET" Value="Public Function TryTrackValue (metricValue As Object, dimension1Value As String, dimension2Value As String, dimension3Value As String, dimension4Value As String, dimension5Value As String, dimension6Value As String) As Boolean" />
-      <MemberSignature Language="F#" Value="member this.TryTrackValue : obj * string * string * string * string * string * string -&gt; bool" Usage="metric.TryTrackValue (metricValue, dimension1Value, dimension2Value, dimension3Value, dimension4Value, dimension5Value, dimension6Value)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
-        <AssemblyVersion>2.7.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Boolean</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="metricValue" Type="System.Object" />
-        <Parameter Name="dimension1Value" Type="System.String" />
-        <Parameter Name="dimension2Value" Type="System.String" />
-        <Parameter Name="dimension3Value" Type="System.String" />
-        <Parameter Name="dimension4Value" Type="System.String" />
-        <Parameter Name="dimension5Value" Type="System.String" />
-        <Parameter Name="dimension6Value" Type="System.String" />
-      </Parameters>
-      <Docs>
-        <param name="metricValue">To be added.</param>
-        <param name="dimension1Value">To be added.</param>
-        <param name="dimension2Value">To be added.</param>
-        <param name="dimension3Value">To be added.</param>
-        <param name="dimension4Value">To be added.</param>
-        <param name="dimension5Value">To be added.</param>
-        <param name="dimension6Value">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="TryTrackValue">
-      <MemberSignature Language="C#" Value="public bool TryTrackValue (double metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value, string dimension7Value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TryTrackValue(float64 metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value, string dimension7Value) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TryTrackValue(System.Double,System.String,System.String,System.String,System.String,System.String,System.String,System.String)" />
-      <MemberSignature Language="VB.NET" Value="Public Function TryTrackValue (metricValue As Double, dimension1Value As String, dimension2Value As String, dimension3Value As String, dimension4Value As String, dimension5Value As String, dimension6Value As String, dimension7Value As String) As Boolean" />
-      <MemberSignature Language="F#" Value="member this.TryTrackValue : double * string * string * string * string * string * string * string -&gt; bool" Usage="metric.TryTrackValue (metricValue, dimension1Value, dimension2Value, dimension3Value, dimension4Value, dimension5Value, dimension6Value, dimension7Value)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
-        <AssemblyVersion>2.7.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Boolean</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="metricValue" Type="System.Double" />
-        <Parameter Name="dimension1Value" Type="System.String" />
-        <Parameter Name="dimension2Value" Type="System.String" />
-        <Parameter Name="dimension3Value" Type="System.String" />
-        <Parameter Name="dimension4Value" Type="System.String" />
-        <Parameter Name="dimension5Value" Type="System.String" />
-        <Parameter Name="dimension6Value" Type="System.String" />
-        <Parameter Name="dimension7Value" Type="System.String" />
-      </Parameters>
-      <Docs>
-        <param name="metricValue">To be added.</param>
-        <param name="dimension1Value">To be added.</param>
-        <param name="dimension2Value">To be added.</param>
-        <param name="dimension3Value">To be added.</param>
-        <param name="dimension4Value">To be added.</param>
-        <param name="dimension5Value">To be added.</param>
-        <param name="dimension6Value">To be added.</param>
-        <param name="dimension7Value">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="TryTrackValue">
-      <MemberSignature Language="C#" Value="public bool TryTrackValue (object metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value, string dimension7Value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TryTrackValue(object metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value, string dimension7Value) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TryTrackValue(System.Object,System.String,System.String,System.String,System.String,System.String,System.String,System.String)" />
-      <MemberSignature Language="VB.NET" Value="Public Function TryTrackValue (metricValue As Object, dimension1Value As String, dimension2Value As String, dimension3Value As String, dimension4Value As String, dimension5Value As String, dimension6Value As String, dimension7Value As String) As Boolean" />
-      <MemberSignature Language="F#" Value="member this.TryTrackValue : obj * string * string * string * string * string * string * string -&gt; bool" Usage="metric.TryTrackValue (metricValue, dimension1Value, dimension2Value, dimension3Value, dimension4Value, dimension5Value, dimension6Value, dimension7Value)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
-        <AssemblyVersion>2.7.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Boolean</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="metricValue" Type="System.Object" />
-        <Parameter Name="dimension1Value" Type="System.String" />
-        <Parameter Name="dimension2Value" Type="System.String" />
-        <Parameter Name="dimension3Value" Type="System.String" />
-        <Parameter Name="dimension4Value" Type="System.String" />
-        <Parameter Name="dimension5Value" Type="System.String" />
-        <Parameter Name="dimension6Value" Type="System.String" />
-        <Parameter Name="dimension7Value" Type="System.String" />
-      </Parameters>
-      <Docs>
-        <param name="metricValue">To be added.</param>
-        <param name="dimension1Value">To be added.</param>
-        <param name="dimension2Value">To be added.</param>
-        <param name="dimension3Value">To be added.</param>
-        <param name="dimension4Value">To be added.</param>
-        <param name="dimension5Value">To be added.</param>
-        <param name="dimension6Value">To be added.</param>
-        <param name="dimension7Value">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="TryTrackValue">
-      <MemberSignature Language="C#" Value="public bool TryTrackValue (double metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value, string dimension7Value, string dimension8Value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TryTrackValue(float64 metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value, string dimension7Value, string dimension8Value) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TryTrackValue(System.Double,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)" />
-      <MemberSignature Language="VB.NET" Value="Public Function TryTrackValue (metricValue As Double, dimension1Value As String, dimension2Value As String, dimension3Value As String, dimension4Value As String, dimension5Value As String, dimension6Value As String, dimension7Value As String, dimension8Value As String) As Boolean" />
-      <MemberSignature Language="F#" Value="member this.TryTrackValue : double * string * string * string * string * string * string * string * string -&gt; bool" Usage="metric.TryTrackValue (metricValue, dimension1Value, dimension2Value, dimension3Value, dimension4Value, dimension5Value, dimension6Value, dimension7Value, dimension8Value)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
-        <AssemblyVersion>2.7.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Boolean</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="metricValue" Type="System.Double" />
-        <Parameter Name="dimension1Value" Type="System.String" />
-        <Parameter Name="dimension2Value" Type="System.String" />
-        <Parameter Name="dimension3Value" Type="System.String" />
-        <Parameter Name="dimension4Value" Type="System.String" />
-        <Parameter Name="dimension5Value" Type="System.String" />
-        <Parameter Name="dimension6Value" Type="System.String" />
-        <Parameter Name="dimension7Value" Type="System.String" />
-        <Parameter Name="dimension8Value" Type="System.String" />
-      </Parameters>
-      <Docs>
-        <param name="metricValue">To be added.</param>
-        <param name="dimension1Value">To be added.</param>
-        <param name="dimension2Value">To be added.</param>
-        <param name="dimension3Value">To be added.</param>
-        <param name="dimension4Value">To be added.</param>
-        <param name="dimension5Value">To be added.</param>
-        <param name="dimension6Value">To be added.</param>
-        <param name="dimension7Value">To be added.</param>
-        <param name="dimension8Value">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="TryTrackValue">
-      <MemberSignature Language="C#" Value="public bool TryTrackValue (object metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value, string dimension7Value, string dimension8Value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TryTrackValue(object metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value, string dimension7Value, string dimension8Value) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TryTrackValue(System.Object,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)" />
-      <MemberSignature Language="VB.NET" Value="Public Function TryTrackValue (metricValue As Object, dimension1Value As String, dimension2Value As String, dimension3Value As String, dimension4Value As String, dimension5Value As String, dimension6Value As String, dimension7Value As String, dimension8Value As String) As Boolean" />
-      <MemberSignature Language="F#" Value="member this.TryTrackValue : obj * string * string * string * string * string * string * string * string -&gt; bool" Usage="metric.TryTrackValue (metricValue, dimension1Value, dimension2Value, dimension3Value, dimension4Value, dimension5Value, dimension6Value, dimension7Value, dimension8Value)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
-        <AssemblyVersion>2.7.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Boolean</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="metricValue" Type="System.Object" />
-        <Parameter Name="dimension1Value" Type="System.String" />
-        <Parameter Name="dimension2Value" Type="System.String" />
-        <Parameter Name="dimension3Value" Type="System.String" />
-        <Parameter Name="dimension4Value" Type="System.String" />
-        <Parameter Name="dimension5Value" Type="System.String" />
-        <Parameter Name="dimension6Value" Type="System.String" />
-        <Parameter Name="dimension7Value" Type="System.String" />
-        <Parameter Name="dimension8Value" Type="System.String" />
-      </Parameters>
-      <Docs>
-        <param name="metricValue">To be added.</param>
-        <param name="dimension1Value">To be added.</param>
-        <param name="dimension2Value">To be added.</param>
-        <param name="dimension3Value">To be added.</param>
-        <param name="dimension4Value">To be added.</param>
-        <param name="dimension5Value">To be added.</param>
-        <param name="dimension6Value">To be added.</param>
-        <param name="dimension7Value">To be added.</param>
-        <param name="dimension8Value">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="TryTrackValue">
-      <MemberSignature Language="C#" Value="public bool TryTrackValue (double metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value, string dimension7Value, string dimension8Value, string dimension9Value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TryTrackValue(float64 metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value, string dimension7Value, string dimension8Value, string dimension9Value) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TryTrackValue(System.Double,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)" />
-      <MemberSignature Language="VB.NET" Value="Public Function TryTrackValue (metricValue As Double, dimension1Value As String, dimension2Value As String, dimension3Value As String, dimension4Value As String, dimension5Value As String, dimension6Value As String, dimension7Value As String, dimension8Value As String, dimension9Value As String) As Boolean" />
-      <MemberSignature Language="F#" Value="member this.TryTrackValue : double * string * string * string * string * string * string * string * string * string -&gt; bool" Usage="metric.TryTrackValue (metricValue, dimension1Value, dimension2Value, dimension3Value, dimension4Value, dimension5Value, dimension6Value, dimension7Value, dimension8Value, dimension9Value)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
-        <AssemblyVersion>2.7.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Boolean</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="metricValue" Type="System.Double" />
-        <Parameter Name="dimension1Value" Type="System.String" />
-        <Parameter Name="dimension2Value" Type="System.String" />
-        <Parameter Name="dimension3Value" Type="System.String" />
-        <Parameter Name="dimension4Value" Type="System.String" />
-        <Parameter Name="dimension5Value" Type="System.String" />
-        <Parameter Name="dimension6Value" Type="System.String" />
-        <Parameter Name="dimension7Value" Type="System.String" />
-        <Parameter Name="dimension8Value" Type="System.String" />
-        <Parameter Name="dimension9Value" Type="System.String" />
-      </Parameters>
-      <Docs>
-        <param name="metricValue">To be added.</param>
-        <param name="dimension1Value">To be added.</param>
-        <param name="dimension2Value">To be added.</param>
-        <param name="dimension3Value">To be added.</param>
-        <param name="dimension4Value">To be added.</param>
-        <param name="dimension5Value">To be added.</param>
-        <param name="dimension6Value">To be added.</param>
-        <param name="dimension7Value">To be added.</param>
-        <param name="dimension8Value">To be added.</param>
-        <param name="dimension9Value">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="TryTrackValue">
-      <MemberSignature Language="C#" Value="public bool TryTrackValue (object metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value, string dimension7Value, string dimension8Value, string dimension9Value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TryTrackValue(object metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value, string dimension7Value, string dimension8Value, string dimension9Value) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TryTrackValue(System.Object,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)" />
-      <MemberSignature Language="VB.NET" Value="Public Function TryTrackValue (metricValue As Object, dimension1Value As String, dimension2Value As String, dimension3Value As String, dimension4Value As String, dimension5Value As String, dimension6Value As String, dimension7Value As String, dimension8Value As String, dimension9Value As String) As Boolean" />
-      <MemberSignature Language="F#" Value="member this.TryTrackValue : obj * string * string * string * string * string * string * string * string * string -&gt; bool" Usage="metric.TryTrackValue (metricValue, dimension1Value, dimension2Value, dimension3Value, dimension4Value, dimension5Value, dimension6Value, dimension7Value, dimension8Value, dimension9Value)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
-        <AssemblyVersion>2.7.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Boolean</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="metricValue" Type="System.Object" />
-        <Parameter Name="dimension1Value" Type="System.String" />
-        <Parameter Name="dimension2Value" Type="System.String" />
-        <Parameter Name="dimension3Value" Type="System.String" />
-        <Parameter Name="dimension4Value" Type="System.String" />
-        <Parameter Name="dimension5Value" Type="System.String" />
-        <Parameter Name="dimension6Value" Type="System.String" />
-        <Parameter Name="dimension7Value" Type="System.String" />
-        <Parameter Name="dimension8Value" Type="System.String" />
-        <Parameter Name="dimension9Value" Type="System.String" />
-      </Parameters>
-      <Docs>
-        <param name="metricValue">To be added.</param>
-        <param name="dimension1Value">To be added.</param>
-        <param name="dimension2Value">To be added.</param>
-        <param name="dimension3Value">To be added.</param>
-        <param name="dimension4Value">To be added.</param>
-        <param name="dimension5Value">To be added.</param>
-        <param name="dimension6Value">To be added.</param>
-        <param name="dimension7Value">To be added.</param>
-        <param name="dimension8Value">To be added.</param>
-        <param name="dimension9Value">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="TryTrackValue">
-      <MemberSignature Language="C#" Value="public bool TryTrackValue (double metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value, string dimension7Value, string dimension8Value, string dimension9Value, string dimension10Value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TryTrackValue(float64 metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value, string dimension7Value, string dimension8Value, string dimension9Value, string dimension10Value) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TryTrackValue(System.Double,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)" />
-      <MemberSignature Language="VB.NET" Value="Public Function TryTrackValue (metricValue As Double, dimension1Value As String, dimension2Value As String, dimension3Value As String, dimension4Value As String, dimension5Value As String, dimension6Value As String, dimension7Value As String, dimension8Value As String, dimension9Value As String, dimension10Value As String) As Boolean" />
-      <MemberSignature Language="F#" Value="member this.TryTrackValue : double * string * string * string * string * string * string * string * string * string * string -&gt; bool" Usage="metric.TryTrackValue (metricValue, dimension1Value, dimension2Value, dimension3Value, dimension4Value, dimension5Value, dimension6Value, dimension7Value, dimension8Value, dimension9Value, dimension10Value)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
-        <AssemblyVersion>2.7.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Boolean</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="metricValue" Type="System.Double" />
-        <Parameter Name="dimension1Value" Type="System.String" />
-        <Parameter Name="dimension2Value" Type="System.String" />
-        <Parameter Name="dimension3Value" Type="System.String" />
-        <Parameter Name="dimension4Value" Type="System.String" />
-        <Parameter Name="dimension5Value" Type="System.String" />
-        <Parameter Name="dimension6Value" Type="System.String" />
-        <Parameter Name="dimension7Value" Type="System.String" />
-        <Parameter Name="dimension8Value" Type="System.String" />
-        <Parameter Name="dimension9Value" Type="System.String" />
-        <Parameter Name="dimension10Value" Type="System.String" />
-      </Parameters>
-      <Docs>
-        <param name="metricValue">To be added.</param>
-        <param name="dimension1Value">To be added.</param>
-        <param name="dimension2Value">To be added.</param>
-        <param name="dimension3Value">To be added.</param>
-        <param name="dimension4Value">To be added.</param>
-        <param name="dimension5Value">To be added.</param>
-        <param name="dimension6Value">To be added.</param>
-        <param name="dimension7Value">To be added.</param>
-        <param name="dimension8Value">To be added.</param>
-        <param name="dimension9Value">To be added.</param>
-        <param name="dimension10Value">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="TryTrackValue">
-      <MemberSignature Language="C#" Value="public bool TryTrackValue (object metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value, string dimension7Value, string dimension8Value, string dimension9Value, string dimension10Value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TryTrackValue(object metricValue, string dimension1Value, string dimension2Value, string dimension3Value, string dimension4Value, string dimension5Value, string dimension6Value, string dimension7Value, string dimension8Value, string dimension9Value, string dimension10Value) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.ApplicationInsights.Metric.TryTrackValue(System.Object,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)" />
-      <MemberSignature Language="VB.NET" Value="Public Function TryTrackValue (metricValue As Object, dimension1Value As String, dimension2Value As String, dimension3Value As String, dimension4Value As String, dimension5Value As String, dimension6Value As String, dimension7Value As String, dimension8Value As String, dimension9Value As String, dimension10Value As String) As Boolean" />
-      <MemberSignature Language="F#" Value="member this.TryTrackValue : obj * string * string * string * string * string * string * string * string * string * string -&gt; bool" Usage="metric.TryTrackValue (metricValue, dimension1Value, dimension2Value, dimension3Value, dimension4Value, dimension5Value, dimension6Value, dimension7Value, dimension8Value, dimension9Value, dimension10Value)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
-        <AssemblyVersion>2.7.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Boolean</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="metricValue" Type="System.Object" />
-        <Parameter Name="dimension1Value" Type="System.String" />
-        <Parameter Name="dimension2Value" Type="System.String" />
-        <Parameter Name="dimension3Value" Type="System.String" />
-        <Parameter Name="dimension4Value" Type="System.String" />
-        <Parameter Name="dimension5Value" Type="System.String" />
-        <Parameter Name="dimension6Value" Type="System.String" />
-        <Parameter Name="dimension7Value" Type="System.String" />
-        <Parameter Name="dimension8Value" Type="System.String" />
-        <Parameter Name="dimension9Value" Type="System.String" />
-        <Parameter Name="dimension10Value" Type="System.String" />
-      </Parameters>
-      <Docs>
-        <param name="metricValue">To be added.</param>
-        <param name="dimension1Value">To be added.</param>
-        <param name="dimension2Value">To be added.</param>
-        <param name="dimension3Value">To be added.</param>
-        <param name="dimension4Value">To be added.</param>
-        <param name="dimension5Value">To be added.</param>
-        <param name="dimension6Value">To be added.</param>
-        <param name="dimension7Value">To be added.</param>
-        <param name="dimension8Value">To be added.</param>
-        <param name="dimension9Value">To be added.</param>
-        <param name="dimension10Value">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">If the number of specified dimension names does not match the dimensionality of this <c>Metric</c>.</exception>
       </Docs>
     </Member>
   </Members>
