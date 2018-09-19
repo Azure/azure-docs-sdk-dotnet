@@ -15,7 +15,7 @@ ms.custom: devcenter
 
 # Get started with Azure and .NET
 
-This document provides an overview of key concepts and services .NET developers need get started developing apps using Azure services.
+This document provides an overview of key concepts and services .NET developers should be familar with to get started developing apps using Azure services.
 
 ## Key Concepts
 
