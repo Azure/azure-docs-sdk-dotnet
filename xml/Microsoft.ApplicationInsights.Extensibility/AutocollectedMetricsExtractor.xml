@@ -7,6 +7,7 @@
   <AssemblyInfo>
     <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
     <AssemblyVersion>2.7.0.0</AssemblyVersion>
+    <AssemblyVersion>2.7.2.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -23,7 +24,24 @@
     </Interface>
   </Interfaces>
   <Docs>
-    <summary>To be added.</summary>
+    <summary>
+            Extracts auto-collected, pre-aggregated (aka. "standard") metrics from telemetry.
+            Metric Extractors participate in the telemetry pipeline as telemetry processors. They examine telemetry items going through
+            the pipeline and create pre-aggregated metrics based on the encountered items. The metrics can be anything. For example, one may
+            choose to extract a metric for "Request Duration" from RequestTelemetry items. Or one may choose to create a metric "Cows Sold"
+            from specific user-tracked EventTelemetry items that contain respective information. 
+            <br />
+            Metric Extractors should be placed into the pipeline after telemetry initializers and before any telemetry processors that may
+            perform any kind of filtering, e.g. before any sampling processors. Placing metric extractors after any filters will prevent them
+            from seeing all potentially relevant telemetry which will skew the extracted metrics.
+            <br />
+            This extractor is responsible for aggregating auto-collected, pre-aggregated (aka. "standard") metrics, such as failed request
+            count, dependency call durations and similar. Users may use the same pattern to create their own extractors for any metrics
+            they want from any kind of telemetry. 
+            This extractor contains several implementations of the (internal) <c>ISpecificAutocollectedMetricsExtractor</c>-interface to which
+            it delegates the aggregation of particular metrics. All those implementations share the
+            same (dedicated) <see cref="T:Microsoft.ApplicationInsights.Metrics.MetricManager" />-instance for metric aggregation.
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -37,13 +55,16 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="nextProcessorInPipeline" Type="Microsoft.ApplicationInsights.Extensibility.ITelemetryProcessor" />
       </Parameters>
       <Docs>
-        <param name="nextProcessorInPipeline">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="nextProcessorInPipeline">Subsequent telemetry processor.</param>
+        <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.ApplicationInsights.Extensibility.AutocollectedMetricsExtractor" /> class.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -60,14 +81,17 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>
+            Disposes this telemetry extractor.
+            </summary>
+        <remarks>This class is sealed. The pattern "private void Dispose(bool disposing)" is not applicable.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Initialize">
@@ -83,6 +107,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -91,8 +116,14 @@
         <Parameter Name="configuration" Type="Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration" />
       </Parameters>
       <Docs>
-        <param name="configuration">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="configuration">The telemetric configuration to be used by this extractor.</param>
+        <summary>
+            This class implements the <see cref="T:Microsoft.ApplicationInsights.Extensibility.ITelemetryModule" /> interface by defining this method.
+            It will be called by the infrastructure when the telemetry pipeline is being built.
+            This will ensure that the extractor is initialized using the same <see cref="T:Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration" /> as the rest of the pipeline.
+            Specifically, this will also ensure that the <see cref="T:Microsoft.ApplicationInsights.TelemetryClient" /> used internally for sending extracted metrics uses
+            the same configuration.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -106,12 +137,16 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the <see cref="P:Microsoft.ApplicationInsights.Extensibility.Implementation.Metrics.DependencyMetricsExtractor.MaxDependencyTypesToDiscover" />-property.
+            See the remarks for the <see cref="T:Microsoft.ApplicationInsights.Extensibility.Implementation.Metrics.DependencyMetricsExtractor" />-class for more info.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -129,6 +164,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
+        <AssemblyVersion>2.7.2.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -137,8 +173,12 @@
         <Parameter Name="item" Type="Microsoft.ApplicationInsights.Channel.ITelemetry" />
       </Parameters>
       <Docs>
-        <param name="item">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="item">The telemetry item from which the metrics will be extracted.</param>
+        <summary>
+            This class implements the <see cref="T:Microsoft.ApplicationInsights.Extensibility.ITelemetryProcessor" /> interface by defining this method.
+            This method will be called by the pipeline for each telemetry item that goes through it.
+            It invokes <see cref="M:Microsoft.ApplicationInsights.Extensibility.AutocollectedMetricsExtractor.ExtractMetrics(Microsoft.ApplicationInsights.Channel.ITelemetry)" /> to actually do the extraction.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
