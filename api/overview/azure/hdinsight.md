@@ -12,7 +12,9 @@ ms.service: hd-insight
 ms.custom: devcenter, svc-overview
 ---
 
-# Azure HDInsight libraries for .NET 2.X
+# Azure HDInsight .NET SDK
+
+## Azure HDInsight libraries for .NET 2.X
 
 ## Overview
 
@@ -117,7 +119,7 @@ View the [complete list](https://azure.microsoft.com/resources/samples/?platform
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
 [DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
 
-# HDInsight .NET Management SDK 3.X Preview
+## HDInsight .NET Management SDK 3.X Preview
 
 ## Overview
 The HDInsight .NET SDK provides classes and methods that allow you to manage your HDInsight clusters. It includes operations to create, delete, update, list, scale, execute script actions, monitor, get properties of HDInsight clusters, and more.
