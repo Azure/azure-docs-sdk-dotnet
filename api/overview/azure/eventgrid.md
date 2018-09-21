@@ -110,7 +110,7 @@ foreach (EventGridEvent receivedEvent in events)
 ```
 
 > [!div class="nextstepaction"]
-> [Explore the client APIs](/dotnet/api/overview/azure/eventgrid/client)
+> [Explore the publishing APIs](/dotnet/api/overview/azure/eventgrid/publish)
 
 ## Management SDK
 
