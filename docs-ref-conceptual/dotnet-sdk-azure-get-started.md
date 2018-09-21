@@ -43,9 +43,7 @@ Generally, the more your application favors FaaS and PaaS models, the more benef
 * [Azure Virtual Machines](https://docs.microsoft.com/azure/virtual-machines/): If App Service doesn’t meet your needs for hosting an existing application due to specific dependencies, Virtual Machines will be the easiest place to start. To get started with Virtual Machines and ASP.NET or WCF, see [Deploy an ASP.NET app to an Azure virtual machine](https://tutorials.visualstudio.com/aspnet-vm/intro).
 
 > [!TIP]
-> For a more complete list of Azure services, see [Overview of Azure compute options](https://docs.microsoft.com/azure/architecture/guide/technology-choices/compute-overview#azure-compute-options).
-> &nbsp;
-> For more information on choosing a service, see [Decision tree for Azure compute services](https://docs.microsoft.com/azure/architecture/guide/technology-choices/compute-decision-tree).
+> For a more complete list of Azure services, see [Overview of Azure compute options](https://docs.microsoft.com/azure/architecture/guide/technology-choices/compute-overview#azure-compute-options). For more information on choosing a service, see [Decision tree for Azure compute services](https://docs.microsoft.com/azure/architecture/guide/technology-choices/compute-decision-tree).
 
 ## Choosing a data storage service
 
