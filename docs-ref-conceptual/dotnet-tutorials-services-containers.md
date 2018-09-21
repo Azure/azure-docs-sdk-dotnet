@@ -2,7 +2,6 @@
 title: .NET tutorials for deploying containers in Azure
 description: Deploy .NET applications in Docker containers in Azure and scale them with DC/OS, Mesos, or Kubernetes.
 ms.date: 10/19/2017
-ms.custom: devcenter
 ---
 
 # Container deployment tutorials with .NET on Azure

@@ -2,7 +2,6 @@
 title: Tutorials for using storage in your .NET apps in Azure
 description: Save objects and work with files in your .NET applications running in Azure
 ms.date: 10/19/2017
-ms.custom: devcenter
 ---
 
 # Tutorials for working with storage in your .NET apps on Azure.

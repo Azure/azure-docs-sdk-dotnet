@@ -2,7 +2,6 @@
 title: .NET tutorials for using Azure databases
 description: Tutorials for connecting to and using Azure databases in your .NET applications.
 ms.date: 10/19/2017
-ms.custom: devcenter
 ---
 
 # Tutorials for using .NET with Azure databases

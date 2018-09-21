@@ -4,7 +4,6 @@ description: Learn which Azure migration path is right for your ASP.NET web appl
 author: CESARDELATORRE
 ms.author: cesardl
 ms.date: 11/15/2017
-ms.custom: devcenter, casoper
 ---
 
 # Choose the right Azure hosting option

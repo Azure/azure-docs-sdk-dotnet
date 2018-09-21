@@ -1,15 +1,9 @@
 ---
 title: Azure Cosmos DB libraries for .NET
 description: Reference for Azure Cosmos DB libraries for .NET
-keywords: Azure, .NET, SDK, API, Cosmos DB
-author: camsoper
-ms.author: casoper
-manager: wpickett
 ms.date: 08/31/2018
 ms.topic: reference
-ms.devlang: dotnet
 ms.service: cosmos-db
-ms.custom: devcenter, svc-overview
 ---
 
 # Azure Cosmos DB libraries for .NET

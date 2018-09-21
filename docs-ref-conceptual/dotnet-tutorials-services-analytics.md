@@ -2,7 +2,6 @@
 title: .NET tutorials for data analytics in Azure  | Microsoft Docs
 description: Develop data analytics applications with Microsoft Azure services.
 ms.date: 10/19/2017
-ms.custom: devcenter
 ---
 
 # Data analytics tutorials with .NET on Azure

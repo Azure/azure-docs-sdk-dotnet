@@ -2,7 +2,6 @@
 title: Get started with Azure .NET and .NET Core APIs
 description: Get started with basic use of the Azure libraries for .NET and .NET Core with your own Azure subscription.
 ms.date: 08/22/2018
-ms.custom: devcenter
 ---
 
 # Get started with the Azure .NET and .NET Core APIs

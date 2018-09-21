@@ -2,7 +2,6 @@
 title: Azure management libraries for .NET release notes | Microsoft Docs
 description: See what's new and watch for breaking changes in the Azure management libraries for .NET.
 ms.date: 10/19/2017
-ms.custom: devcenter
 ---
 
 # Release Notes 

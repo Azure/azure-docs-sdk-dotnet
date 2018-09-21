@@ -1,15 +1,9 @@
 ---
 title: Azure SQL Database APIs for .NET
 description: Reference for Azure SQL Database libraries for .NET
-keywords: Azure, .NET, SDK, API, SQL, SQL Database
-author: camsoper
-ms.author: casoper
-manager: wpickett
 ms.date: 10/19/2017
 ms.topic: reference
-ms.devlang: dotnet
 ms.service: sql-database
-ms.custom: devcenter, svc-overview
 ---
 
 # Azure SQL Database APIs for .NET
