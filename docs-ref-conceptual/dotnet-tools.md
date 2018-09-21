@@ -1,15 +1,7 @@
 ---
 title: Tools for Azure .NET and .NET Core developers
 description: Get the tools to start using the Azure .NET libraries from a Windows, Linux, and Mac environment.
-keywords: Azure .NET, SDK, Azure .NET API Reference, Azure .NET class library
-author: camsoper
-ms.author: casoper
-manager: wpickett
 ms.date: 08/11/2018
-ms.topic: reference
-ms.technology: azure
-ms.devlang: dotnet
-ms.service: multiple
 ms.custom: devcenter, vs-azure
 ---
 
