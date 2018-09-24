@@ -1,15 +1,9 @@
 ---
 title: Azure Active Directory libraries for .NET
 description: Reference for Azure Active Directory libraries for .NET
-keywords: Azure, .NET, SDK, API, AAD, Active Directory
-author: camsoper
-ms.author: casoper
-manager: wpickett
 ms.date: 10/19/2017
 ms.topic: reference
-ms.devlang: dotnet
 ms.service: active-directory
-ms.custom: devcenter, svc-overview
 ---
 
 # Azure Active Directory libraries for .NET

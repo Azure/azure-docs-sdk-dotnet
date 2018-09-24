@@ -1,15 +1,7 @@
 ---
 title: Deploy to Azure from Visual Studio
 description: This tutorial will walk you through building and deploying a Microsoft Azure application using Visual Studio and .NET.
-keywords: Azure .NET, SDK, Azure .NET API Reference, Azure .NET class library
-author: camsoper
-manager: douge
-ms.author: casoper
 ms.date: 06/20/2017
-ms.topic: article
-ms.prod: azure
-ms.technology: azure
-ms.devlang: dotnet
 ---
 
 # Deploy to Azure from Visual Studio

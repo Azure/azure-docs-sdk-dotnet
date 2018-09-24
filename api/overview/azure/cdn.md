@@ -1,15 +1,9 @@
 ---
 title: Azure CDN libraries for .NET
 description: Reference for Azure CDN libraries for .NET
-keywords: Azure, .NET, SDK, API, CDN
-author: camsoper
-ms.author: casoper
-manager: wpickett
 ms.date: 10/19/2017
 ms.topic: reference
-ms.devlang: dotnet
 ms.service: cdn
-ms.custom: devcenter, svc-overview
 ---
 
 # Azure CDN libraries for .NET

@@ -1,16 +1,7 @@
 ---
 title: Azure .NET APIs
 description: Overview of the Azure APIs for .NET
-keywords: Azure, .NET, SDK, API, NuGet, libraries, packages
-author: camsoper
-ms.author: casoper
-manager: wpickett
 ms.date: 10/19/2017
-ms.topic: reference
-ms.technology: azure
-ms.devlang: dotnet
-ms.service: multiple
-ms.custom: devcenter
 ---
 
 # Azure .NET APIs

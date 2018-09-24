@@ -1,15 +1,9 @@
 ---
 title: Azure App Service libraries for .NET
 description: Reference for Azure App Service libraries for .NET
-keywords: Azure, .NET, SDK, API, web apps, app service, mobile, asp.net
-author: camsoper
-ms.author: casoper
-manager: wpickett
 ms.date: 10/19/2017
 ms.topic: reference
-ms.devlang: dotnet
 ms.service: app-service
-ms.custom: devcenter, svc-overview
 ---
 
 # Azure App Service libraries for .NET

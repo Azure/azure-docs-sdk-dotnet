@@ -1,16 +1,7 @@
 ---
 title: Azure management libraries for .NET release notes | Microsoft Docs
 description: See what's new and watch for breaking changes in the Azure management libraries for .NET.
-keywords: Azure, .NET, API, reference, notes,  updates, deprecate
-author: camsoper
-ms.author: casoper
-manager: wpickett
 ms.date: 10/19/2017
-ms.topic: reference
-ms.technology: azure
-ms.devlang: dotnet
-ms.service: multiple
-ms.custom: devcenter
 ---
 
 # Release Notes 

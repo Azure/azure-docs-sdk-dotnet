@@ -1,15 +1,9 @@
 ---
 title: Azure Search libraries for .NET
 description: Reference for Azure Search libraries for .NET
-keywords: Azure, .NET, SDK, API, Search
-author: camsoper
-ms.author: casoper
-manager: wpickett
 ms.date: 10/19/2017
 ms.topic: reference
-ms.devlang: dotnet
 ms.service: search
-ms.custom: devcenter, svc-overview
 ---
 
 # Azure Search libraries for .NET
