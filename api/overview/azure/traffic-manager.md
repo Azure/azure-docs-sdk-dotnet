@@ -1,15 +1,9 @@
 ---
 title: Azure Traffic Manager libraries for .NET
 description: Reference for Azure Traffic Manager libraries for .NET
-keywords: Azure, .NET, SDK, API, Traffic Manager
-author: camsoper
-ms.author: casoper
-manager: wpickett
 ms.date: 10/19/2017
 ms.topic: reference
-ms.devlang: dotnet
 ms.service: traffic-manager
-ms.custom: devcenter, svc-overview
 ---
 
 # Azure Traffic Manager libraries for .NET

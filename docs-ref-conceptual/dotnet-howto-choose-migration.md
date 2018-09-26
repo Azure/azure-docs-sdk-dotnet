@@ -1,16 +1,9 @@
 ---
 title: Choose the right Azure hosting option
 description: Learn which Azure migration path is right for your ASP.NET web application.
-keywords: Azure .NET, ASP.NET, App Service, VM, virtual machine, Web App, migrate, migration
 author: CESARDELATORRE
-manager: wpickett
 ms.author: cesardl
 ms.date: 11/15/2017
-ms.topic: article
-ms.technology: azure
-ms.devlang: dotnet
-ms.service: multiple
-ms.custom: devcenter, casoper
 ---
 
 # Choose the right Azure hosting option

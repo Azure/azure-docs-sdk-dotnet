@@ -1,15 +1,9 @@
 ---
 title: Azure Database for MySQL libraries for .NET
 description: Reference documentation for the .NET client libraries for Azure Database for MySQL
-keywords: Azure, .NET, SDK, API, SQL, database, MySQL 
-author: camsoper
-ms.author: casoper
-manager: wpickett
 ms.date: 10/19/2017
 ms.topic: reference
-ms.devlang: dotnet
 ms.service: mysql
-ms.custom: devcenter, svc-overview
 ---
 
 # Azure Database for MySQL libraries for .NET

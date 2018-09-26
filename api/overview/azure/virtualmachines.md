@@ -1,15 +1,9 @@
 ---
 title: Azure compute libraries for .NET
 description: Reference for Azure compute libraries for .NET
-keywords: Azure, .NET, SDK, API, VM, virtual machines, compute
-author: camsoper
-ms.author: casoper
-manager: wpickett
 ms.date: 10/19/2017
 ms.topic: reference
-ms.devlang: dotnet
 ms.service: virtual-machines
-ms.custom: devcenter, svc-overview
 ---
 
 # Azure virtual machine libraries for .NET

@@ -1,15 +1,9 @@
 ---
 title: Azure HDInsight .NET SDK
 description: Reference for Azure HDInsight .NET SDK
-keywords: Azure, .NET, SDK, API, HDInsight
-author: tylerfox
-ms.author: tyfox
-manager: arindamc
 ms.date: 9/19/2018
 ms.topic: reference
-ms.devlang: dotnet
 ms.service: hd-insight
-ms.custom: devcenter, svc-overview
 ---
 
 # Azure HDInsight .NET SDK
@@ -122,13 +116,16 @@ View the [complete list](https://azure.microsoft.com/resources/samples/?platform
 ## HDInsight .NET Management SDK 3.X Preview
 
 ## Overview
+
 The HDInsight .NET SDK provides classes and methods that allow you to manage your HDInsight clusters. It includes operations to create, delete, update, list, scale, execute script actions, monitor, get properties of HDInsight clusters, and more.
 
 ## Prerequisites
+
 * An Azure account. If you don't have one, [get a free trial](https://azure.microsoft.com/free/).
 * [Visual Studio](https://visualstudio.microsoft.com/downloads/)
 
 ## SDK Installation
+
 From your Visual Studio project, open the Package Manager Console by clicking **Tools**, **NuGet Package Manager**, and then click **Package Manager Console**.
 
 In the Package Manager Console, execute the following commands:
@@ -140,12 +137,14 @@ In the Package Manager Console, execute the following commands:
 ```
 
 ## Authentication
+
 The SDK first needs to be authenticated with your Azure subscription.  Follow the example below to create a service principal and use it to authenticate. After this is done, you will have an instance of an `HDInsightManagementClient`, which contains many methods (outlined in below sections) that can be used to perform management operations.
 
 > [!NOTE]
 > There are other ways to authenticate besides the below example that could potentially be better suited for your needs. All methods are outlined here: [Authenticate with the Azure Libraries for .NET](https://docs.microsoft.com/en-us/dotnet/azure/dotnet-sdk-azure-authenticate?view=azure-dotnet)
 
 ### Authentication Example Using a Service Principal
+
 First, login to [Azure Cloud Shell](https://shell.azure.com/bash). Verify you are currently using the subscription in which you want the service principal created. 
 
 ```azurecli-interactive
@@ -241,24 +240,29 @@ namespace HDI_SDK_Test
 
 
 ## Cluster Management
+
 > [!NOTE]
 > This section assumes you have already authenticated and constructed an `HDInsightManagementClient` instance and store it in a variable called `client`. Instructions for authenticating and obtaining an `HDInsightManagementClient` can be found in the Authentication section above.
 
 ### Create a Cluster
+
 A new cluster can be created by calling `client.Clusters.Create()`. 
 
 #### Example
+
 This example demonstrates how to create a Spark cluster with 2 head nodes and 1 worker node.
 
 > [!NOTE]
 > You first need to create a Resource Group and Storage Account, as explained below. If you have already created these, you can skip these steps.
 
 ##### Creating a Resource Group
+
 You can create a resource group using the [Azure Cloud Shell](https://shell.azure.com/bash) by running
 ```azurecli-interactive
 az group create -l <Region Name (i.e. eastus)> --n <Resource Group Name>
 ```
 ##### Creating a Storage Account
+
 You can create a storage account using the [Azure Cloud Shell](https://shell.azure.com/bash) by running:
 ```azurecli-interactive
 az storage account create -n <Storage Account Name> -g <Existing Resource Group Name> -l <Region Name (i.e. eastus)> --sku <SKU i.e. Standard_LRS>
@@ -372,13 +376,15 @@ client.Clusters.Create(
 ```
 
 ### Get Cluster Details
+
 To get properties for a given cluster:
 
 ```csharp
 client.Clusters.Get("<Resource Group Name>", "<Cluster Name>");
 ```
-https://docs.microsoft.com/en-us/dotnet/api/microsoft.azure.management.hdinsight.models.cluster?view=azure-dotnet-preview
+
 #### Example
+
 You can use `get` to confirm that you have successfully created your cluster.
 
 ```csharp
@@ -400,10 +406,12 @@ The output should look like:
 ### List Clusters
 
 #### List Clusters Under The Subscription
+
 ```csharp
 client.Clusters.List();
 ```
 #### List Clusters By Resource Group
+
 ```csharp
 client.Clusters.ListByResourceGroup("<Resource Group Name>");
 ```
@@ -430,6 +438,7 @@ while (true)
 ```
 
 ### Delete a Cluster
+
 To delete a cluster:
 
 ```csharp
@@ -437,6 +446,7 @@ client.Clusters.Delete("<Resource Group Name>", "<Cluster Name>");
 ```
 
 ### Update Cluster Tags
+
 You can update the tags of a given cluster like so:
 
 ```csharp
@@ -449,6 +459,7 @@ client.Clusters.Update("<Resource Group Name>", "<Cluster Name>", new ClusterPat
 ```
 
 ### Scale Cluster
+
 You can scale a given cluster's number of worker nodes by specifying a new size like so:
 
 ```csharp
@@ -456,6 +467,7 @@ client.Clusters.Resize("<Resource Group Name>", "<Cluster Name>", <Num of Worker
 ```
 
 ## Cluster Monitoring
+
 The HDInsight Management SDK can also be used to manage monitoring on your clusters via the Operations Management Suite (OMS).
 
 ### Enable OMS Monitoring
@@ -470,6 +482,7 @@ client.Extension.EnableMonitoring("<Resource Group Name", "Cluster Name", new Cl
 ```
 
 ### View Status Of OMS Monitoring
+
 To get the status of OMS on your cluster:
 
 ```csharp
@@ -477,6 +490,7 @@ client.Extension.GetMonitoringStatus("<Resource Group Name", "Cluster Name");
 ```
 
 ### Disable OMS Monitoring
+
 To disable OMS on your cluster:
 
 ```csharp
@@ -484,11 +498,13 @@ client.Extension.DisableMonitoring("<Resource Group Name>", "<Cluster Name>");
 ```
 
 ## Script Actions
+
 HDInsight provides a configuration method called script actions that invokes custom scripts to customize the cluster.
 > [!NOTE]
 > More information on how to use script actions can be found here: [Customize Linux-based HDInsight clusters using script actions](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-hadoop-customize-cluster-linux)
 
 ### Execute Script Actions
+
 You can execute script actions on a given cluster like so:
 
 ```csharp
@@ -498,6 +514,7 @@ client.Clusters.ExecuteScriptActions("<Resource Group Name>", "<Cluster Name>", 
 ```
 
 ### Delete Script Action
+
 To delete a specified persisted script action on a given cluster:
 
 ```csharp
@@ -533,6 +550,7 @@ while (true)
 ```
 
 ### List All Scripts' Execution History
+
 To list all scripts' execution history for the specified cluster:
 
 ```csharp
@@ -540,6 +558,7 @@ client.script_execution_history.list("<Resource Group Name>", "<Cluster Name>");
 ```
 
 #### Example
+
 This example prints all the details for all past script executions.
 
 ```csharp

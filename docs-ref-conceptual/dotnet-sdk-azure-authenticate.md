@@ -1,16 +1,7 @@
 ---
 title: Authenticate with the Azure libraries for .NET
 description: Authenticate into the Azure libraries for .NET
-keywords: Azure, .NET, SDK, API, authentication, active directory, service principal
-author: camsoper
-ms.author: casoper
-manager: wpickett
 ms.date: 08/22/2018
-ms.topic: reference
-ms.technology: azure
-ms.devlang: dotnet
-ms.service: multiple
-ms.custom: devcenter
 ---
 
 # Authenticate with the Azure Libraries for .NET

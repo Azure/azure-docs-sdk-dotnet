@@ -1,15 +1,9 @@
 ---
 title: Azure Virtual Network libraries for .NET
 description: Reference for Azure Virtual Network libraries for .NET
-keywords: Azure, .NET, SDK, API, Virtual Network
-author: camsoper
-ms.author: casoper
-manager: wpickett
 ms.date: 10/19/2017
 ms.topic: reference
-ms.devlang: dotnet
 ms.service: virtual-network
-ms.custom: devcenter, svc-overview
 ---
 
 # Azure Virtual Network libraries for .NET
