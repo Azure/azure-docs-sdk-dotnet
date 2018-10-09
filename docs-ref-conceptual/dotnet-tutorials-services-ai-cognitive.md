@@ -1,15 +1,7 @@
 ---
 title: .NET tutorials for AI and cognitive services in Azure  | Microsoft Docs
-description: Add AI and cognitive services into your .NET apps with Microsoft Azure services. 
-author: camsoper
-ms.author: casoper
-manager: wpickett
+description: Add AI and cognitive services into your .NET apps with Microsoft Azure services.
 ms.date: 10/19/2017
-ms.topic: reference
-ms.technology: azure
-ms.devlang: dotnet
-ms.service: multiple
-ms.custom: devcenter
 ---
 
 # Azure AI and cognitive service tutorials using .NET

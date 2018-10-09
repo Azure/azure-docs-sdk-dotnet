@@ -1,15 +1,9 @@
 ---
 title: Azure Media Services libraries for .NET
 description: Reference for Azure Media Services libraries for .NET
-keywords: Azure, .NET, SDK, API, Media Services
-author: camsoper
-ms.author: casoper
-manager: wpickett
 ms.date: 10/19/2017
 ms.topic: reference
-ms.devlang: dotnet
 ms.service: media-services
-ms.custom: devcenter, svc-overview
 ---
 
 # Azure Media Services libraries for .NET

@@ -2,16 +2,7 @@
 title: Azure C# code samples for .NET and .NET Core
 description: C# code samples for Azure using .NET, .NET Core, ASP.NET, and ASP.NET Core.
 layout: LandingPage
-ms.topic: landing-page
-author: camsoper
-ms.author: casoper
-manager: wpickett
 ms.date: 07/17/2018
-ms.topic: reference
-ms.technology: azure
-ms.devlang: dotnet
-ms.service: multiple
-ms.custom: devcenter
 ---
 # Azure C# code samples for .NET and .NET Core
 

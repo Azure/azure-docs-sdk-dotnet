@@ -1,15 +1,9 @@
 ---
 title: Azure Mobile libraries for .NET
 description: Reference for Azure Mobile libraries for .NET
-keywords: Azure, .NET, SDK, API, Mobile
-author: camsoper
-ms.author: casoper
-manager: wpickett
 ms.date: 10/19/2017
 ms.topic: reference
-ms.devlang: dotnet
 ms.service: app-service
-ms.custom: devcenter, svc-overview
 ---
 
 # Azure Mobile libraries for .NET

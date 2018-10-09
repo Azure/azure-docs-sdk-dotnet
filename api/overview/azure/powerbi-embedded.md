@@ -1,15 +1,9 @@
 ---
 title: Power BI Embedded libraries for .NET
 description: Reference for Power BI Embedded libraries for .NET
-keywords: Azure, .NET, SDK, API, Power BI Embedded
-author: camsoper
-ms.author: casoper
-manager: wpickett
 ms.date: 10/19/2017
 ms.topic: reference
-ms.devlang: dotnet
 ms.service: multiple
-ms.custom: devcenter, svc-overview
 ---
 
 # Power BI Embedded libraries for .NET

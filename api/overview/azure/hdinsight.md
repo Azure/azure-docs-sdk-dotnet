@@ -1,15 +1,9 @@
 ---
 title: Azure HDInsight .NET SDK
 description: Reference for Azure HDInsight .NET SDK
-keywords: Azure, .NET, SDK, API, HDInsight
-author: tylerfox
-ms.author: tyfox
-manager: arindamc
 ms.date: 9/19/2018
 ms.topic: reference
-ms.devlang: dotnet
 ms.service: hd-insight
-ms.custom: devcenter, svc-overview
 ---
 
 # Azure HDInsight .NET SDK

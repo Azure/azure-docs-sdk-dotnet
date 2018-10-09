@@ -1,15 +1,9 @@
 ---
 title: Azure Notification Hubs libraries for .NET
 description: Reference for Azure Notification Hubs libraries for .NET
-keywords: Azure, .NET, SDK, API, Notification Hubs
-author: camsoper
-ms.author: casoper
-manager: wpickett
 ms.date: 10/19/2017
 ms.topic: reference
-ms.devlang: dotnet
 ms.service: notification-hubs
-ms.custom: devcenter, svc-overview
 ---
 
 # Azure Notification Hubs libraries for .NET

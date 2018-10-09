@@ -1,0 +1,97 @@
+<Type Name="UserLoginInformation" FullName="Microsoft.Azure.Management.ResourceManager.Fluent.Authentication.UserLoginInformation">
+  <TypeSignature Language="C#" Value="public class UserLoginInformation" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit UserLoginInformation extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Azure.Management.ResourceManager.Fluent.Authentication.UserLoginInformation" />
+  <TypeSignature Language="VB.NET" Value="Public Class UserLoginInformation" />
+  <TypeSignature Language="F#" Value="type UserLoginInformation = class" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Azure.Management.ResourceManager.Fluent</AssemblyName>
+    <AssemblyVersion>1.0.0.60</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public UserLoginInformation ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.ResourceManager.Fluent.Authentication.UserLoginInformation.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.ResourceManager.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ClientId">
+      <MemberSignature Language="C#" Value="public string ClientId { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ClientId" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.ResourceManager.Fluent.Authentication.UserLoginInformation.ClientId" />
+      <MemberSignature Language="VB.NET" Value="Public Property ClientId As String" />
+      <MemberSignature Language="F#" Value="member this.ClientId : string with get, set" Usage="Microsoft.Azure.Management.ResourceManager.Fluent.Authentication.UserLoginInformation.ClientId" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.ResourceManager.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Password">
+      <MemberSignature Language="C#" Value="public string Password { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Password" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.ResourceManager.Fluent.Authentication.UserLoginInformation.Password" />
+      <MemberSignature Language="VB.NET" Value="Public Property Password As String" />
+      <MemberSignature Language="F#" Value="member this.Password : string with get, set" Usage="Microsoft.Azure.Management.ResourceManager.Fluent.Authentication.UserLoginInformation.Password" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.ResourceManager.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UserName">
+      <MemberSignature Language="C#" Value="public string UserName { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string UserName" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.ResourceManager.Fluent.Authentication.UserLoginInformation.UserName" />
+      <MemberSignature Language="VB.NET" Value="Public Property UserName As String" />
+      <MemberSignature Language="F#" Value="member this.UserName : string with get, set" Usage="Microsoft.Azure.Management.ResourceManager.Fluent.Authentication.UserLoginInformation.UserName" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.ResourceManager.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

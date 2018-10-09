@@ -1,16 +1,8 @@
 ---
 title: Tools for Azure .NET and .NET Core developers
 description: Get the tools to start using the Azure .NET libraries from a Windows, Linux, and Mac environment.
-keywords: Azure .NET, SDK, Azure .NET API Reference, Azure .NET class library
-author: camsoper
-ms.author: casoper
-manager: wpickett
 ms.date: 08/11/2018
-ms.topic: reference
-ms.technology: azure
-ms.devlang: dotnet
-ms.service: multiple
-ms.custom: devcenter, vs-azure
+ms.custom: azure-dotnet-devcenter, azure-dotnet-devcenter-authored, azure-dotnet-devcenter-conceptual, vs-azure
 ---
 
 # Tools for .NET and .NET Core Azure developers
@@ -22,7 +14,7 @@ Whatever your operating system, we have a great set of tools to help you develop
 <table>
   <tr>
     <td width="50">
-        <img src="https://docs.microsoft.com/en-us/media/logos/logo_vs-ide.svg" width="50" height="50"></img>
+        <img src="https://docs.microsoft.com/media/logos/logo_vs-ide.svg" width="50" height="50"></img>
     </td>
     <td>
         Visual Studio 2017 has built-in support for Azure development.
@@ -53,7 +45,7 @@ Get started by [deploying your first ASP.NET Core web app on Azure App Service](
 <table>
   <tr>
     <td width="50">
-        <img src="https://docs.microsoft.com/en-us/media/logos/logo_vs-mac.svg" width="50" height="50"></img>
+        <img src="https://docs.microsoft.com/media/logos/logo_vs-mac.svg" width="50" height="50"></img>
     </td>
     <td>
         Visual Studio for Mac has everything you need for Azure development.
@@ -75,7 +67,7 @@ During install, Azure tools are already enabled by default.
 <table>
   <tr>
     <td width="50">
-        <img src="https://docs.microsoft.com/en-us/visualstudio/products/images/vs-code.svg" width="50" height="50"></img>
+        <img src="https://docs.microsoft.com/media/logos/logo_vs-code.svg" width="50" height="50"></img>
     </td>
     <td>
         Visual Studio Code has everything you need for Azure development on Linux.
