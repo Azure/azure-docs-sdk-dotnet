@@ -1,0 +1,37 @@
+<Type Name="ManagedDataDiskCollection" FullName="Microsoft.Azure.Management.Compute.Fluent.ManagedDataDiskCollection">
+  <TypeSignature Language="C#" Value="public class ManagedDataDiskCollection" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit ManagedDataDiskCollection extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Azure.Management.Compute.Fluent.ManagedDataDiskCollection" />
+  <TypeSignature Language="VB.NET" Value="Public Class ManagedDataDiskCollection" />
+  <TypeSignature Language="F#" Value="type ManagedDataDiskCollection = class" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Azure.Management.Compute.Fluent</AssemblyName>
+    <AssemblyVersion>1.0.0.60</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public ManagedDataDiskCollection ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.Compute.Fluent.ManagedDataDiskCollection.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.Compute.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>
