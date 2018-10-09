@@ -3,7 +3,7 @@ title: Azure Service Bus Relay libraries for .NET
 description: Reference for Azure Service Bus Relay libraries for .NET
 ms.date: 10/19/2017
 ms.topic: reference
-ms.service: service-bus
+ms.service: service-bus-relay
 ---
 
 # Azure Service Bus Relay libraries for .NET

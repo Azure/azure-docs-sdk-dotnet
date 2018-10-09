@@ -3,7 +3,7 @@ title: Azure Monitor libraries for .NET
 description: Reference for Azure Monitor libraries for .NET
 ms.date: 10/27/2017
 ms.topic: reference
-ms.service: multiple
+ms.service: monitoring-alerts
 ---
 
 # Azure Monitor libraries for .NET

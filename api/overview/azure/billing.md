@@ -3,7 +3,7 @@ title: Azure Billing libraries for .NET
 description: Reference for Azure Billing libraries for .NET
 ms.date: 10/19/2017
 ms.topic: reference
-ms.service: multiple
+ms.service: billing
 ---
 # Azure Billing libraries for .NET
 
