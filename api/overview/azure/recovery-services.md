@@ -3,7 +3,7 @@ title: Azure Recovery Services and Backup libraries for .NET
 description: Reference for Azure Recovery Services and Backup libraries for .NET
 ms.date: 10/19/2017
 ms.topic: reference
-ms.service: recovery-services
+ms.service: backup
 ---
 
 # Azure Recovery Services and Backup libraries for .NET

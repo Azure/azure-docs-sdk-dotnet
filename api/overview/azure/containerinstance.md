@@ -3,7 +3,7 @@ title: Azure Container Instances libraries for .NET
 description: Reference for Azure Container Instances libraries for .NET
 ms.date: 06/11/2018
 ms.topic: reference
-ms.service: dcontainer-instances
+ms.service: container-instances
 ---
 
 # Azure Container Instances libraries for .NET
