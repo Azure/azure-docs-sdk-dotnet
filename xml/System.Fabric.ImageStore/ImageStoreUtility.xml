@@ -1,0 +1,135 @@
+﻿<Type Name="ImageStoreUtility" FullName="System.Fabric.ImageStore.ImageStoreUtility">
+  <TypeSignature Language="C#" Value="public class ImageStoreUtility" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit ImageStoreUtility extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:System.Fabric.ImageStore.ImageStoreUtility" />
+  <TypeSignature Language="VB.NET" Value="Public Class ImageStoreUtility" />
+  <TypeSignature Language="F#" Value="type ImageStoreUtility = class" />
+  <AssemblyInfo>
+    <AssemblyName>System.Fabric</AssemblyName>
+    <AssemblyVersion>6.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>
+            Provides supplementary utility methods for application package deployment
+            </summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public ImageStoreUtility ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Fabric.ImageStore.ImageStoreUtility.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Fabric</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ArchiveApplicationPackage">
+      <MemberSignature Language="C#" Value="public static void ArchiveApplicationPackage (string appPackageRootDirectory, System.Fabric.IImageStoreProgressHandler progressHandler);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void ArchiveApplicationPackage(string appPackageRootDirectory, class System.Fabric.IImageStoreProgressHandler progressHandler) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Fabric.ImageStore.ImageStoreUtility.ArchiveApplicationPackage(System.String,System.Fabric.IImageStoreProgressHandler)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub ArchiveApplicationPackage (appPackageRootDirectory As String, progressHandler As IImageStoreProgressHandler)" />
+      <MemberSignature Language="F#" Value="static member ArchiveApplicationPackage : string * System.Fabric.IImageStoreProgressHandler -&gt; unit" Usage="System.Fabric.ImageStore.ImageStoreUtility.ArchiveApplicationPackage (appPackageRootDirectory, progressHandler)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Fabric</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="appPackageRootDirectory" Type="System.String" />
+        <Parameter Name="progressHandler" Type="System.Fabric.IImageStoreProgressHandler" />
+      </Parameters>
+      <Docs>
+        <param name="appPackageRootDirectory">The application package root directory.</param>
+        <param name="progressHandler">An optional handler for tracking progress of the compression operation.</param>
+        <summary>
+            Compresses all service package sub-directories (i.e. code/config/data packages) found under the application package root directory.
+            </summary>
+        <remarks>
+          <para>
+            Package checksums are computed on the resulting compressed package files rather than the original uncompressed contents. This means that when uploading compressed packages that were previously uncompressed, their versions must be changed in the Service Manifest.
+            Alternatively, simply omit the sub-package whose contents have not changed from the overall application package.
+            Also note that changing the last modified timestamp of a compressed package's contents will also result in changing the package's checksum.
+            </para>
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GenerateApplicationPackageChecksumFiles">
+      <MemberSignature Language="C#" Value="public static void GenerateApplicationPackageChecksumFiles (string appPackageRootDirectory, System.Fabric.IImageStoreProgressHandler progressHandler, bool isImageStoreServiceEnabled = true);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void GenerateApplicationPackageChecksumFiles(string appPackageRootDirectory, class System.Fabric.IImageStoreProgressHandler progressHandler, bool isImageStoreServiceEnabled) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Fabric.ImageStore.ImageStoreUtility.GenerateApplicationPackageChecksumFiles(System.String,System.Fabric.IImageStoreProgressHandler,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub GenerateApplicationPackageChecksumFiles (appPackageRootDirectory As String, progressHandler As IImageStoreProgressHandler, Optional isImageStoreServiceEnabled As Boolean = true)" />
+      <MemberSignature Language="F#" Value="static member GenerateApplicationPackageChecksumFiles : string * System.Fabric.IImageStoreProgressHandler * bool -&gt; unit" Usage="System.Fabric.ImageStore.ImageStoreUtility.GenerateApplicationPackageChecksumFiles (appPackageRootDirectory, progressHandler, isImageStoreServiceEnabled)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Fabric</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="appPackageRootDirectory" Type="System.String" />
+        <Parameter Name="progressHandler" Type="System.Fabric.IImageStoreProgressHandler" />
+        <Parameter Name="isImageStoreServiceEnabled" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="appPackageRootDirectory">The application package root directory.</param>
+        <param name="progressHandler">An optional handler for tracking progress of the checksum generation.</param>
+        <param name="isImageStoreServiceEnabled">Should be set to true if the cluster's ImageStoreConnectionString is set to "fabric:ImageStore", false otherwise.</param>
+        <summary>
+            Generates checksum files for all service package sub-directories (i.e. code/config/data packages) and service manifests found under the application package root directory.
+            </summary>
+        <remarks>
+          <para>
+            The cluster will automatically generate checksums during application type registration if they're not already part of the application package. This method can be used to incur the cost of checksum file generation while preparing the application package, which will reduce the cost of registering the application type package for large packages.
+            </para>
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TryExtractApplicationPackage">
+      <MemberSignature Language="C#" Value="public static bool TryExtractApplicationPackage (string appPackageRootDirectory, System.Fabric.IImageStoreProgressHandler progressHandler);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool TryExtractApplicationPackage(string appPackageRootDirectory, class System.Fabric.IImageStoreProgressHandler progressHandler) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Fabric.ImageStore.ImageStoreUtility.TryExtractApplicationPackage(System.String,System.Fabric.IImageStoreProgressHandler)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function TryExtractApplicationPackage (appPackageRootDirectory As String, progressHandler As IImageStoreProgressHandler) As Boolean" />
+      <MemberSignature Language="F#" Value="static member TryExtractApplicationPackage : string * System.Fabric.IImageStoreProgressHandler -&gt; bool" Usage="System.Fabric.ImageStore.ImageStoreUtility.TryExtractApplicationPackage (appPackageRootDirectory, progressHandler)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Fabric</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="appPackageRootDirectory" Type="System.String" />
+        <Parameter Name="progressHandler" Type="System.Fabric.IImageStoreProgressHandler" />
+      </Parameters>
+      <Docs>
+        <param name="appPackageRootDirectory">The application package root directory.</param>
+        <param name="progressHandler">An optional handler for tracking progress of the uncompression operation.</param>
+        <summary>
+            Uncompresses all service package sub-directories (i.e. code/config/data packages) found under the application package root directory.
+            </summary>
+        <returns>
+          <para>True if any compressed packages were found, false otherwise.</para>
+        </returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>
