@@ -3,7 +3,7 @@ title: Azure HDInsight .NET SDK
 description: Reference for Azure HDInsight .NET SDK
 ms.date: 9/19/2018
 ms.topic: reference
-ms.service: hd-insight
+ms.service: hdinsight
 ---
 
 # Azure HDInsight .NET SDK
@@ -117,7 +117,7 @@ View the [complete list](https://azure.microsoft.com/resources/samples/?platform
 
 ## Overview
 
-The HDInsight .NET SDK provides classes and methods that allow you to manage your HDInsight clusters. It includes operations to create, delete, update, list, scale, execute script actions, monitor, get properties of HDInsight clusters, and more.
+The HDInsight .NET SDK provides classes and methods that allow you to manage your HDInsight clusters. It includes operations to create, delete, update, list, resize, execute script actions, monitor, get properties of HDInsight clusters, and more.
 
 ## Prerequisites
 
@@ -458,9 +458,9 @@ client.Clusters.Update("<Resource Group Name>", "<Cluster Name>", new ClusterPat
 client.Clusters.Update("<Resource Group Name>", "<Cluster Name>", new ClusterPatchParameters(new Dictionary<string, string> { { "tag1Name", "tag1Value" }, { "tag2Name", "tag2Value" } }));
 ```
 
-### Scale Cluster
+### Resize Cluster
 
-You can scale a given cluster's number of worker nodes by specifying a new size like so:
+You can resize a given cluster's number of worker nodes by specifying a new size like so:
 
 ```csharp
 client.Clusters.Resize("<Resource Group Name>", "<Cluster Name>", <Num of Worker Nodes (int)>)

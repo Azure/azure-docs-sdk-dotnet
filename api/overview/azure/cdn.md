@@ -3,7 +3,7 @@ title: Azure CDN libraries for .NET
 description: Reference for Azure CDN libraries for .NET
 ms.date: 10/19/2017
 ms.topic: reference
-ms.service: cdn
+ms.service: azure-cdn
 ---
 
 # Azure CDN libraries for .NET
