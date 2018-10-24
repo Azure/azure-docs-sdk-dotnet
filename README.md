@@ -2,7 +2,7 @@
 
 ### Overview
 
-This repository houses raw content for the Azure .NET SDK API documentation, [hosted on docs.microsoft.com](https://docs.microsoft.com/dotnet/api/overview/azure/?view=azure-dotnet).
+This repository houses raw content for the Azure .NET SDK API documentation, [hosted on docs.microsoft.com](https://docs.microsoft.com/dotnet/api/overview/azure/?view=azure-dotnet). Content provided here is generated from various NuGet packages that provide tooling to interact and manage Azure services.
 
 ### Code of Conduct
 
