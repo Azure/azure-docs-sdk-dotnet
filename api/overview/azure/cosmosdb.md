@@ -40,7 +40,6 @@ To install the preview of version 3.0, which targets .NET standard:
 
 ```powershell
 Install-Package Microsoft.Azure.Cosmos -prerelease
-
 ```
 
 #### .NET Core CLI
