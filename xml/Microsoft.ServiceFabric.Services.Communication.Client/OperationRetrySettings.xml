@@ -42,11 +42,11 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public OperationRetrySettings (TimeSpan maxRetryBackoffIntervalOnTransientErrors, TimeSpan maxRetryBackoffIntervalOnNonTransientErrors, int defaultMaxRetryCount);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.TimeSpan maxRetryBackoffIntervalOnTransientErrors, valuetype System.TimeSpan maxRetryBackoffIntervalOnNonTransientErrors, int32 defaultMaxRetryCount) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.ServiceFabric.Services.Communication.Client.OperationRetrySettings.#ctor(System.TimeSpan,System.TimeSpan,System.Int32)" />
-      <MemberSignature Language="VB.NET" Value="Public Sub New (maxRetryBackoffIntervalOnTransientErrors As TimeSpan, maxRetryBackoffIntervalOnNonTransientErrors As TimeSpan, defaultMaxRetryCount As Integer)" />
-      <MemberSignature Language="F#" Value="new Microsoft.ServiceFabric.Services.Communication.Client.OperationRetrySettings : TimeSpan * TimeSpan * int -&gt; Microsoft.ServiceFabric.Services.Communication.Client.OperationRetrySettings" Usage="new Microsoft.ServiceFabric.Services.Communication.Client.OperationRetrySettings (maxRetryBackoffIntervalOnTransientErrors, maxRetryBackoffIntervalOnNonTransientErrors, defaultMaxRetryCount)" />
+      <MemberSignature Language="C#" Value="public OperationRetrySettings (TimeSpan maxRetryBackoffIntervalOnTransientErrors, TimeSpan maxRetryBackoffIntervalOnNonTransientErrors, int defaultMaxRetryCountForTransientErrors, int defaultMaxRetryCountForNonTransientErrors = 2147483647);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.TimeSpan maxRetryBackoffIntervalOnTransientErrors, valuetype System.TimeSpan maxRetryBackoffIntervalOnNonTransientErrors, int32 defaultMaxRetryCountForTransientErrors, int32 defaultMaxRetryCountForNonTransientErrors) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.ServiceFabric.Services.Communication.Client.OperationRetrySettings.#ctor(System.TimeSpan,System.TimeSpan,System.Int32,System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (maxRetryBackoffIntervalOnTransientErrors As TimeSpan, maxRetryBackoffIntervalOnNonTransientErrors As TimeSpan, defaultMaxRetryCountForTransientErrors As Integer, Optional defaultMaxRetryCountForNonTransientErrors As Integer = 2147483647)" />
+      <MemberSignature Language="F#" Value="new Microsoft.ServiceFabric.Services.Communication.Client.OperationRetrySettings : TimeSpan * TimeSpan * int * int -&gt; Microsoft.ServiceFabric.Services.Communication.Client.OperationRetrySettings" Usage="new Microsoft.ServiceFabric.Services.Communication.Client.OperationRetrySettings (maxRetryBackoffIntervalOnTransientErrors, maxRetryBackoffIntervalOnNonTransientErrors, defaultMaxRetryCountForTransientErrors, defaultMaxRetryCountForNonTransientErrors)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceFabric.Services</AssemblyName>
@@ -55,7 +55,8 @@
       <Parameters>
         <Parameter Name="maxRetryBackoffIntervalOnTransientErrors" Type="System.TimeSpan" />
         <Parameter Name="maxRetryBackoffIntervalOnNonTransientErrors" Type="System.TimeSpan" />
-        <Parameter Name="defaultMaxRetryCount" Type="System.Int32" />
+        <Parameter Name="defaultMaxRetryCountForTransientErrors" Type="System.Int32" />
+        <Parameter Name="defaultMaxRetryCountForNonTransientErrors" Type="System.Int32" />
       </Parameters>
       <Docs>
         <param name="maxRetryBackoffIntervalOnTransientErrors">
@@ -64,8 +65,11 @@
         <param name="maxRetryBackoffIntervalOnNonTransientErrors">
             Specifies the maximum interval to back-off before retrying incase of Non transient errors
             </param>
-        <param name="defaultMaxRetryCount">
-            Specifies the maximum number of times to retry.
+        <param name="defaultMaxRetryCountForTransientErrors">
+            Specifies the maximum number of times to retry for transient errors.
+            </param>
+        <param name="defaultMaxRetryCountForNonTransientErrors">
+            Specifies the maximum number of times to retry for non-transient errors.
             </param>
         <summary>
             Initializes a new instance of the <see cref="T:Microsoft.ServiceFabric.Services.Communication.Client.OperationRetrySettings" /> class with the supplied settings.
@@ -73,12 +77,12 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="DefaultMaxRetryCount">
-      <MemberSignature Language="C#" Value="public int DefaultMaxRetryCount { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance int32 DefaultMaxRetryCount" />
-      <MemberSignature Language="DocId" Value="P:Microsoft.ServiceFabric.Services.Communication.Client.OperationRetrySettings.DefaultMaxRetryCount" />
-      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property DefaultMaxRetryCount As Integer" />
-      <MemberSignature Language="F#" Value="member this.DefaultMaxRetryCount : int" Usage="Microsoft.ServiceFabric.Services.Communication.Client.OperationRetrySettings.DefaultMaxRetryCount" />
+    <Member MemberName="DefaultMaxRetryCountForNonTransientErrors">
+      <MemberSignature Language="C#" Value="public int DefaultMaxRetryCountForNonTransientErrors { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 DefaultMaxRetryCountForNonTransientErrors" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.ServiceFabric.Services.Communication.Client.OperationRetrySettings.DefaultMaxRetryCountForNonTransientErrors" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property DefaultMaxRetryCountForNonTransientErrors As Integer" />
+      <MemberSignature Language="F#" Value="member this.DefaultMaxRetryCountForNonTransientErrors : int" Usage="Microsoft.ServiceFabric.Services.Communication.Client.OperationRetrySettings.DefaultMaxRetryCountForNonTransientErrors" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.ServiceFabric.Services</AssemblyName>
@@ -89,7 +93,29 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Gets the maximum number of times to retry.
+            Gets the maximum number of times to retry for non -transient errors.
+            </summary>
+        <value>Maximum number of times to retry a specific non-transient exception.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DefaultMaxRetryCountForTransientErrors">
+      <MemberSignature Language="C#" Value="public int DefaultMaxRetryCountForTransientErrors { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 DefaultMaxRetryCountForTransientErrors" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.ServiceFabric.Services.Communication.Client.OperationRetrySettings.DefaultMaxRetryCountForTransientErrors" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property DefaultMaxRetryCountForTransientErrors As Integer" />
+      <MemberSignature Language="F#" Value="member this.DefaultMaxRetryCountForTransientErrors : int" Usage="Microsoft.ServiceFabric.Services.Communication.Client.OperationRetrySettings.DefaultMaxRetryCountForTransientErrors" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.ServiceFabric.Services</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets the maximum number of times to retry for transient errors.
             </summary>
         <value>Maximum number of times to retry a specific exception.</value>
         <remarks>To be added.</remarks>
