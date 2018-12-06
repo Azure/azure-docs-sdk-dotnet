@@ -1,21 +1,17 @@
 ﻿<Type Name="RSACryptoServiceProviderProxy" FullName="Microsoft.IdentityModel.Tokens.RSACryptoServiceProviderProxy">
-  <TypeSignature Language="C#" Value="public class RSACryptoServiceProviderProxy : IDisposable" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit RSACryptoServiceProviderProxy extends System.Object implements class System.IDisposable" />
+  <TypeSignature Language="C#" Value="public class RSACryptoServiceProviderProxy : System.Security.Cryptography.RSA" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit RSACryptoServiceProviderProxy extends System.Security.Cryptography.RSA" />
   <TypeSignature Language="DocId" Value="T:Microsoft.IdentityModel.Tokens.RSACryptoServiceProviderProxy" />
-  <TypeSignature Language="VB.NET" Value="Public Class RSACryptoServiceProviderProxy&#xA;Implements IDisposable" />
-  <TypeSignature Language="F#" Value="type RSACryptoServiceProviderProxy = class&#xA;    interface IDisposable" />
+  <TypeSignature Language="VB.NET" Value="Public Class RSACryptoServiceProviderProxy&#xA;Inherits RSA" />
+  <TypeSignature Language="F#" Value="type RSACryptoServiceProviderProxy = class&#xA;    inherit RSA" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.IdentityModel.Tokens</AssemblyName>
-    <AssemblyVersion>5.2.4.0</AssemblyVersion>
+    <AssemblyVersion>5.3.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
-    <BaseTypeName>System.Object</BaseTypeName>
+    <BaseTypeName>System.Security.Cryptography.RSA</BaseTypeName>
   </Base>
-  <Interfaces>
-    <Interface>
-      <InterfaceName>System.IDisposable</InterfaceName>
-    </Interface>
-  </Interfaces>
+  <Interfaces />
   <Docs>
     <summary>
             The purpose of this class is to ensure that we obtain an RsaCryptoServiceProvider that supports SHA-256 signatures.
@@ -33,7 +29,7 @@
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.IdentityModel.Tokens</AssemblyName>
-        <AssemblyVersion>5.2.4.0</AssemblyVersion>
+        <AssemblyVersion>5.3.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="rsa" Type="System.Security.Cryptography.RSACryptoServiceProvider" />
@@ -46,6 +42,7 @@
             Initializes an new instance of <see cref="T:Microsoft.IdentityModel.Tokens.RSACryptoServiceProviderProxy" />.
             </summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">if <paramref name="rsa" /> is null.</exception>
       </Docs>
     </Member>
     <Member MemberName="Decrypt">
@@ -53,11 +50,11 @@
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance unsigned int8[] Decrypt(unsigned int8[] input, bool fOAEP) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.IdentityModel.Tokens.RSACryptoServiceProviderProxy.Decrypt(System.Byte[],System.Boolean)" />
       <MemberSignature Language="VB.NET" Value="Public Function Decrypt (input As Byte(), fOAEP As Boolean) As Byte()" />
-      <MemberSignature Language="F#" Value="member this.Decrypt : byte[] * bool -&gt; byte[]" Usage="rSACryptoServiceProviderProxy.Decrypt (input, fOAEP)" />
+      <MemberSignature Language="F#" Value="override this.Decrypt : byte[] * bool -&gt; byte[]" Usage="rSACryptoServiceProviderProxy.Decrypt (input, fOAEP)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.IdentityModel.Tokens</AssemblyName>
-        <AssemblyVersion>5.2.4.0</AssemblyVersion>
+        <AssemblyVersion>5.3.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Byte[]</ReturnType>
@@ -68,36 +65,64 @@
       </Parameters>
       <Docs>
         <param name="input">The data to be decrypted.</param>
-        <param name="fOAEP">true to perform direct System.Security.Cryptography.RSA decryption using OAEP padding (only available on a computer running Microsoft Windows XP or later);o
-            therwise, false to use PKCS#1 v1.5 padding.</param>
+        <param name="fOAEP">true to perform direct System.Security.Cryptography.RSA decryption using OAEP padding
+            (only available on a computer running Microsoft Windows XP or later) otherwise, false to use PKCS#1 v1.5 padding.</param>
         <summary>
             Decrypts data with the System.Security.Cryptography.RSA algorithm.
             </summary>
-        <returns />
+        <returns>decrypted bytes.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">if <paramref name="input" /> is null or has Length == 0.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="DecryptValue">
+      <MemberSignature Language="C#" Value="public override byte[] DecryptValue (byte[] input);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance unsigned int8[] DecryptValue(unsigned int8[] input) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.IdentityModel.Tokens.RSACryptoServiceProviderProxy.DecryptValue(System.Byte[])" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function DecryptValue (input As Byte()) As Byte()" />
+      <MemberSignature Language="F#" Value="override this.DecryptValue : byte[] -&gt; byte[]" Usage="rSACryptoServiceProviderProxy.DecryptValue input" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.IdentityModel.Tokens</AssemblyName>
+        <AssemblyVersion>5.3.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Byte[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="input" Type="System.Byte[]" />
+      </Parameters>
+      <Docs>
+        <param name="input">the bytes to decrypt.</param>
+        <summary>
+            Decrypts the input.
+            </summary>
+        <returns>decrypted bytes</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">if <paramref name="input" /> is null or Length == 0.</exception>
       </Docs>
     </Member>
     <Member MemberName="Dispose">
-      <MemberSignature Language="C#" Value="public void Dispose ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Dispose() cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.IdentityModel.Tokens.RSACryptoServiceProviderProxy.Dispose" />
-      <MemberSignature Language="VB.NET" Value="Public Sub Dispose ()" />
-      <MemberSignature Language="F#" Value="abstract member Dispose : unit -&gt; unit&#xA;override this.Dispose : unit -&gt; unit" Usage="rSACryptoServiceProviderProxy.Dispose " />
+      <MemberSignature Language="C#" Value="protected override void Dispose (bool disposing);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void Dispose(bool disposing) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.IdentityModel.Tokens.RSACryptoServiceProviderProxy.Dispose(System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub Dispose (disposing As Boolean)" />
+      <MemberSignature Language="F#" Value="override this.Dispose : bool -&gt; unit" Usage="rSACryptoServiceProviderProxy.Dispose disposing" />
       <MemberType>Method</MemberType>
-      <Implements>
-        <InterfaceMember>M:System.IDisposable.Dispose</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.IdentityModel.Tokens</AssemblyName>
-        <AssemblyVersion>5.2.4.0</AssemblyVersion>
+        <AssemblyVersion>5.3.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
-      <Parameters />
+      <Parameters>
+        <Parameter Name="disposing" Type="System.Boolean" />
+      </Parameters>
       <Docs>
+        <param name="disposing">true, if called from Dispose(), false, if invoked inside a finalizer.</param>
         <summary>
-            Releases all resources used by the current instance of the <see cref="T:Microsoft.IdentityModel.Tokens.RSACryptoServiceProviderProxy" /> class.
+            Calls to release managed resources.
             </summary>
         <remarks>To be added.</remarks>
       </Docs>
@@ -107,11 +132,11 @@
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance unsigned int8[] Encrypt(unsigned int8[] input, bool fOAEP) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.IdentityModel.Tokens.RSACryptoServiceProviderProxy.Encrypt(System.Byte[],System.Boolean)" />
       <MemberSignature Language="VB.NET" Value="Public Function Encrypt (input As Byte(), fOAEP As Boolean) As Byte()" />
-      <MemberSignature Language="F#" Value="member this.Encrypt : byte[] * bool -&gt; byte[]" Usage="rSACryptoServiceProviderProxy.Encrypt (input, fOAEP)" />
+      <MemberSignature Language="F#" Value="override this.Encrypt : byte[] * bool -&gt; byte[]" Usage="rSACryptoServiceProviderProxy.Encrypt (input, fOAEP)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.IdentityModel.Tokens</AssemblyName>
-        <AssemblyVersion>5.2.4.0</AssemblyVersion>
+        <AssemblyVersion>5.3.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Byte[]</ReturnType>
@@ -127,81 +152,183 @@
         <summary>
              Encrypts data with the System.Security.Cryptography.RSA algorithm.
             </summary>
-        <returns />
+        <returns>encrypted bytes.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">if <paramref name="input" /> is null or has Length == 0.</exception>
       </Docs>
     </Member>
-    <Member MemberName="Finalize">
-      <MemberSignature Language="C#" Value="~RSACryptoServiceProviderProxy ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void Finalize() cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.IdentityModel.Tokens.RSACryptoServiceProviderProxy.Finalize" />
-      <MemberSignature Language="VB.NET" Value="Finalize ()" />
-      <MemberSignature Language="F#" Value="override this.Finalize : unit -&gt; unit" Usage="rSACryptoServiceProviderProxy.Finalize " />
+    <Member MemberName="EncryptValue">
+      <MemberSignature Language="C#" Value="public override byte[] EncryptValue (byte[] input);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance unsigned int8[] EncryptValue(unsigned int8[] input) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.IdentityModel.Tokens.RSACryptoServiceProviderProxy.EncryptValue(System.Byte[])" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function EncryptValue (input As Byte()) As Byte()" />
+      <MemberSignature Language="F#" Value="override this.EncryptValue : byte[] -&gt; byte[]" Usage="rSACryptoServiceProviderProxy.EncryptValue input" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.IdentityModel.Tokens</AssemblyName>
-        <AssemblyVersion>5.2.4.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Void</ReturnType>
-      </ReturnValue>
-      <Parameters />
-      <Docs>
-        <summary>
-            Destructs the <see cref="T:Microsoft.IdentityModel.Tokens.RSACryptoServiceProviderProxy" /> instance.
-            </summary>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="SignData">
-      <MemberSignature Language="C#" Value="public byte[] SignData (byte[] signingInput, object hash);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance unsigned int8[] SignData(unsigned int8[] signingInput, object hash) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.IdentityModel.Tokens.RSACryptoServiceProviderProxy.SignData(System.Byte[],System.Object)" />
-      <MemberSignature Language="VB.NET" Value="Public Function SignData (signingInput As Byte(), hash As Object) As Byte()" />
-      <MemberSignature Language="F#" Value="member this.SignData : byte[] * obj -&gt; byte[]" Usage="rSACryptoServiceProviderProxy.SignData (signingInput, hash)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.IdentityModel.Tokens</AssemblyName>
-        <AssemblyVersion>5.2.4.0</AssemblyVersion>
+        <AssemblyVersion>5.3.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Byte[]</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="signingInput" Type="System.Byte[]" />
+        <Parameter Name="input" Type="System.Byte[]" />
+      </Parameters>
+      <Docs>
+        <param name="input">the bytes to encrypt.</param>
+        <summary>
+            Encrypts the input.
+            </summary>
+        <returns>encrypted bytes.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">if <paramref name="input" /> is null or Length == 0.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="ExportParameters">
+      <MemberSignature Language="C#" Value="public override System.Security.Cryptography.RSAParameters ExportParameters (bool includePrivateParameters);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance valuetype System.Security.Cryptography.RSAParameters ExportParameters(bool includePrivateParameters) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.IdentityModel.Tokens.RSACryptoServiceProviderProxy.ExportParameters(System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function ExportParameters (includePrivateParameters As Boolean) As RSAParameters" />
+      <MemberSignature Language="F#" Value="override this.ExportParameters : bool -&gt; System.Security.Cryptography.RSAParameters" Usage="rSACryptoServiceProviderProxy.ExportParameters includePrivateParameters" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.IdentityModel.Tokens</AssemblyName>
+        <AssemblyVersion>5.3.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Security.Cryptography.RSAParameters</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="includePrivateParameters" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="includePrivateParameters">flag to control is private parameters are included.</param>
+        <summary>
+            Exports rsa parameters as <see cref="T:System.Security.Cryptography.RSAParameters" /></summary>
+        <returns>
+          <see cref="T:System.Security.Cryptography.RSAParameters" />
+        </returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ImportParameters">
+      <MemberSignature Language="C#" Value="public override void ImportParameters (System.Security.Cryptography.RSAParameters parameters);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void ImportParameters(valuetype System.Security.Cryptography.RSAParameters parameters) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.IdentityModel.Tokens.RSACryptoServiceProviderProxy.ImportParameters(System.Security.Cryptography.RSAParameters)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub ImportParameters (parameters As RSAParameters)" />
+      <MemberSignature Language="F#" Value="override this.ImportParameters : System.Security.Cryptography.RSAParameters -&gt; unit" Usage="rSACryptoServiceProviderProxy.ImportParameters parameters" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.IdentityModel.Tokens</AssemblyName>
+        <AssemblyVersion>5.3.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="parameters" Type="System.Security.Cryptography.RSAParameters" />
+      </Parameters>
+      <Docs>
+        <param name="parameters">to import.</param>
+        <summary>
+            Imports rsa parameters as <see cref="T:System.Security.Cryptography.RSAParameters" /></summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="KeyExchangeAlgorithm">
+      <MemberSignature Language="C#" Value="public override string KeyExchangeAlgorithm { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string KeyExchangeAlgorithm" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.IdentityModel.Tokens.RSACryptoServiceProviderProxy.KeyExchangeAlgorithm" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides ReadOnly Property KeyExchangeAlgorithm As String" />
+      <MemberSignature Language="F#" Value="member this.KeyExchangeAlgorithm : string" Usage="Microsoft.IdentityModel.Tokens.RSACryptoServiceProviderProxy.KeyExchangeAlgorithm" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.IdentityModel.Tokens</AssemblyName>
+        <AssemblyVersion>5.3.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets the KeyExchangeAlgorithm
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SignatureAlgorithm">
+      <MemberSignature Language="C#" Value="public override string SignatureAlgorithm { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string SignatureAlgorithm" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.IdentityModel.Tokens.RSACryptoServiceProviderProxy.SignatureAlgorithm" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides ReadOnly Property SignatureAlgorithm As String" />
+      <MemberSignature Language="F#" Value="member this.SignatureAlgorithm : string" Usage="Microsoft.IdentityModel.Tokens.RSACryptoServiceProviderProxy.SignatureAlgorithm" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.IdentityModel.Tokens</AssemblyName>
+        <AssemblyVersion>5.3.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets the SignatureAlgorithm
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SignData">
+      <MemberSignature Language="C#" Value="public byte[] SignData (byte[] input, object hash);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance unsigned int8[] SignData(unsigned int8[] input, object hash) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.IdentityModel.Tokens.RSACryptoServiceProviderProxy.SignData(System.Byte[],System.Object)" />
+      <MemberSignature Language="VB.NET" Value="Public Function SignData (input As Byte(), hash As Object) As Byte()" />
+      <MemberSignature Language="F#" Value="override this.SignData : byte[] * obj -&gt; byte[]" Usage="rSACryptoServiceProviderProxy.SignData (input, hash)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.IdentityModel.Tokens</AssemblyName>
+        <AssemblyVersion>5.3.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Byte[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="input" Type="System.Byte[]" />
         <Parameter Name="hash" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="signingInput">The input byte array for which to compute the hash.</param>
+        <param name="input">The input byte array for which to compute the hash.</param>
         <param name="hash">The hash algorithm to use to create the hash value. </param>
         <summary>
             Computes the hash value of the specified byte array using the specified hash algorithm, and signs the resulting hash value.
             </summary>
         <returns>The <see cref="T:System.Security.Cryptography.RSA" /> Signature for the specified data.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">if <paramref name="hash" /> is null.</exception>
       </Docs>
     </Member>
     <Member MemberName="VerifyData">
-      <MemberSignature Language="C#" Value="public bool VerifyData (byte[] signingInput, object hash, byte[] signature);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool VerifyData(unsigned int8[] signingInput, object hash, unsigned int8[] signature) cil managed" />
+      <MemberSignature Language="C#" Value="public bool VerifyData (byte[] input, object hash, byte[] signature);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool VerifyData(unsigned int8[] input, object hash, unsigned int8[] signature) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.IdentityModel.Tokens.RSACryptoServiceProviderProxy.VerifyData(System.Byte[],System.Object,System.Byte[])" />
-      <MemberSignature Language="VB.NET" Value="Public Function VerifyData (signingInput As Byte(), hash As Object, signature As Byte()) As Boolean" />
-      <MemberSignature Language="F#" Value="member this.VerifyData : byte[] * obj * byte[] -&gt; bool" Usage="rSACryptoServiceProviderProxy.VerifyData (signingInput, hash, signature)" />
+      <MemberSignature Language="VB.NET" Value="Public Function VerifyData (input As Byte(), hash As Object, signature As Byte()) As Boolean" />
+      <MemberSignature Language="F#" Value="override this.VerifyData : byte[] * obj * byte[] -&gt; bool" Usage="rSACryptoServiceProviderProxy.VerifyData (input, hash, signature)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.IdentityModel.Tokens</AssemblyName>
-        <AssemblyVersion>5.2.4.0</AssemblyVersion>
+        <AssemblyVersion>5.3.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="signingInput" Type="System.Byte[]" />
+        <Parameter Name="input" Type="System.Byte[]" />
         <Parameter Name="hash" Type="System.Object" />
         <Parameter Name="signature" Type="System.Byte[]" />
       </Parameters>
       <Docs>
-        <param name="signingInput">The input byte array.</param>
+        <param name="input">The input byte array.</param>
         <param name="hash">The hash algorithm to use to create the hash value.</param>
         <param name="signature">The signature byte array to be verified.</param>
         <summary>
@@ -209,6 +336,7 @@
             </summary>
         <returns>true if the signature is valid; otherwise, false.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">if <paramref name="signature" /> is null or Length == 0.</exception>
       </Docs>
     </Member>
   </Members>

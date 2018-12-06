@@ -1,16 +1,7 @@
 ---
 title: Azure management libraries for .NET usage concepts and patterns
 description: 
-keywords: Azure, .NET, SDK, API, patterns, concepts, fluent, logging
-author: camsoper
-ms.author: casoper
-manager: wpickett
 ms.date: 10/19/2017
-ms.topic: reference
-ms.technology: azure
-ms.devlang: dotnet
-ms.service: multiple
-ms.custom: devcenter
 ---
 
 # Azure management library for .NET fluent concepts

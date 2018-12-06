@@ -1,15 +1,9 @@
 ---
 title: Azure Container Instances libraries for .NET
 description: Reference for Azure Container Instances libraries for .NET
-keywords: Azure, .NET, SDK, API, Container Instances, ACI
-author: mmacy
-ms.author: marsma
-manager: jeconnoc
 ms.date: 06/11/2018
 ms.topic: reference
-ms.devlang: dotnet
-ms.service: dcontainer-instances
-ms.custom: devcenter, svc-overview
+ms.service: container-instances
 ---
 
 # Azure Container Instances libraries for .NET

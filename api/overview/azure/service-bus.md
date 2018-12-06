@@ -1,15 +1,9 @@
 ---
 title: Azure Service Bus libraries for .NET
 description: Reference for Azure Service Bus libraries for .NET
-keywords: Azure, .NET, SDK, API, Service Bus
-author: camsoper
-ms.author: casoper
-manager: wpickett
 ms.date: 10/19/2017
 ms.topic: reference
-ms.devlang: dotnet
-ms.service: service-bus
-ms.custom: devcenter, svc-overview
+ms.service: service-bus-messaging
 ---
 
 # Azure Service Bus libraries for .NET

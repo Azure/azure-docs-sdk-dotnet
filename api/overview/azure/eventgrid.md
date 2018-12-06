@@ -1,14 +1,9 @@
 ---
 title: Azure Event Grid libraries for .NET
 description: Reference for Azure Event Grid libraries for .NET
-author: rloutlaw 
-ms.author: routlaw    
-manager: angerobe
 ms.date: 04/16/2018
 ms.topic: reference
-ms.devlang: dotnet
 ms.service: event-grid
-ms.custom: devcenter
 ---
 
 # Azure Event Grid libraries for .NET
@@ -115,7 +110,7 @@ foreach (EventGridEvent receivedEvent in events)
 ```
 
 > [!div class="nextstepaction"]
-> [Explore the client APIs](/dotnet/api/overview/azure/eventgrid/client)
+> [Explore the publishing APIs](/dotnet/api/overview/azure/eventgrid/publish)
 
 ## Management SDK
 

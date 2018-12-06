@@ -22,73 +22,64 @@
              <code>
              public async Task TranslationContinuousRecognitionAsync()
              {
-                 // Creates an instance of a speech factory with specified subscription key and service region. 
+                 // Creates an instance of a speech translation config with specified subscription key and service region. 
                  // Replace with your own subscription key and service region (e.g., "westus").
-                 var factory = SpeechFactory.FromSubscription("YourSubscriptionKey", "YourServiceRegion");
+                 var config = SpeechTranslationConfig.FromSubscription("YourSubscriptionKey", "YourServiceRegion");
             
                  // Sets source and target languages.
                  string fromLanguage = "en-US";
-                 <![CDATA[List<string> toLanguages = new List<string>() { "de" };]]>
+                 config.SpeechRecognitionLanguage = fromLanguage;
+                 config.AddTargetLanguage("de");
             
                  // Sets voice name of synthesis output.
                  const string GermanVoice = "de-DE-Hedda";
-            
-                 // Creates a translation recognizer using microphone as audio input, and requires voice output.
-                 using (var recognizer = factory.CreateTranslationRecognizer(fromLanguage, toLanguages, GermanVoice))
+                 config.VoiceName = GermanVoice;
+                 // Creates a translation recognizer using microphone as audio input.
+                 using (var recognizer = new TranslationRecognizer(config))
                  {
                      // Subscribes to events.
-                     recognizer.IntermediateResultReceived += (s, e) =&gt;
+                     recognizer.Recognizing += (s, e) =&gt;
                      {
-                         Console.WriteLine($"\nPartial result: recognized in {fromLanguage}: {e.Result.Text}.");
-                         if (e.Result.TranslationStatus == TranslationStatus.Success)
+                         Console.WriteLine($"RECOGNIZING in '{fromLanguage}': Text={e.Result.Text}");
+                         foreach (var element in e.Result.Translations)
                          {
+                             Console.WriteLine($"    TRANSLATING into '{element.Key}': {element.Value}");
+                         }
+                     };
+            
+                     recognizer.Recognized += (s, e) =&gt;
+                     {
+                         if (e.Result.Reason == ResultReason.TranslatedSpeech)
+                         {
+                             Console.WriteLine($"\nFinal result: Reason: {e.Result.Reason.ToString()}, recognized text in {fromLanguage}: {e.Result.Text}.");
                              foreach (var element in e.Result.Translations)
                              {
-                                 Console.WriteLine($"    Translated into {element.Key}: {element.Value}");
+                                 Console.WriteLine($"    TRANSLATING into '{element.Key}': {element.Value}");
                              }
                          }
                      };
             
-                     recognizer.FinalResultReceived += (s, e) =&gt;
+                     recognizer.Synthesizing += (s, e) =&gt;
                      {
-                         var result = e.Result;
-                         if (result.RecognitionStatus == RecognitionStatus.Recognized)
-                         {
-                             Console.WriteLine($"\nFinal result: Status: {result.RecognitionStatus.ToString()}, recognized text in {fromLanguage}: {result.Text}.");
-                             if (result.TranslationStatus == TranslationStatus.Success)
-                             {
-                                 foreach (var element in result.Translations)
-                                 {
-                                     Console.WriteLine($"    Translated into {element.Key}: {element.Value}");
-                                 }
-                             }
-                         }
+                         var audio = e.Result.GetAudio();
+                         Console.WriteLine(audio.Length != 0
+                             ? $"AudioSize: {audio.Length}"
+                             : $"AudioSize: {audio.Length} (end of synthesis data)");
                      };
             
-                     recognizer.SynthesisResultReceived += (s, e) =&gt;
+                     recognizer.Canceled += (s, e) =&gt;
                      {
-                         if (e.Result.Status == SynthesisStatus.Success)
-                         {
-                             Console.WriteLine($"Synthesis result received. Size of audio data: {e.Result.Audio.Length}");
-                         }
-                         else if (e.Result.Status == SynthesisStatus.SynthesisEnd)
-                         {
-                             Console.WriteLine($"Synthesis result: end of synthesis result.");
-                         }
-                         else
-                         {
-                             Console.WriteLine($"Synthesis error. Status: {e.Result.Status.ToString()}, Failure reason: {e.Result.FailureReason}");
-                         }
+                         Console.WriteLine($"\nRecognition canceled. Reason: {e.Reason}; ErrorDetails: {e.ErrorDetails}");
                      };
             
-                     recognizer.RecognitionErrorRaised += (s, e) =&gt;
+                     recognizer.SessionStarted += (s, e) =&gt;
                      {
-                         Console.WriteLine($"\nAn error occurred. Status: {e.Status.ToString()}");
+                         Console.WriteLine("\nSession started event.");
                      };
             
-                     recognizer.OnSessionEvent += (s, e) =&gt;
+                     recognizer.SessionStopped += (s, e) =&gt;
                      {
-                         Console.WriteLine($"\nSession event. Event: {e.EventType.ToString()}.");
+                         Console.WriteLine("\nSession stopped event.");
                      };
             
                      // Starts continuous recognition. Uses StopContinuousRecognitionAsync() to stop recognition.
@@ -107,6 +98,96 @@
              </code></example>
   </Docs>
   <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public TranslationRecognizer (Microsoft.CognitiveServices.Speech.SpeechTranslationConfig config);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Microsoft.CognitiveServices.Speech.SpeechTranslationConfig config) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer.#ctor(Microsoft.CognitiveServices.Speech.SpeechTranslationConfig)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (config As SpeechTranslationConfig)" />
+      <MemberSignature Language="F#" Value="new Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer : Microsoft.CognitiveServices.Speech.SpeechTranslationConfig -&gt; Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer" Usage="new Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer config" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.CognitiveServices.Speech.csharp</AssemblyName>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="config" Type="Microsoft.CognitiveServices.Speech.SpeechTranslationConfig" />
+      </Parameters>
+      <Docs>
+        <param name="config">Translation config.</param>
+        <summary>
+            Creates a translation recognizer using the default microphone input for a specified translation configuration.
+            </summary>
+        <returns>A translation recognizer instance.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public TranslationRecognizer (Microsoft.CognitiveServices.Speech.SpeechTranslationConfig config, Microsoft.CognitiveServices.Speech.Audio.AudioConfig audioConfig);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Microsoft.CognitiveServices.Speech.SpeechTranslationConfig config, class Microsoft.CognitiveServices.Speech.Audio.AudioConfig audioConfig) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer.#ctor(Microsoft.CognitiveServices.Speech.SpeechTranslationConfig,Microsoft.CognitiveServices.Speech.Audio.AudioConfig)" />
+      <MemberSignature Language="F#" Value="new Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer : Microsoft.CognitiveServices.Speech.SpeechTranslationConfig * Microsoft.CognitiveServices.Speech.Audio.AudioConfig -&gt; Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer" Usage="new Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer (config, audioConfig)" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.CognitiveServices.Speech.csharp</AssemblyName>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="config" Type="Microsoft.CognitiveServices.Speech.SpeechTranslationConfig" />
+        <Parameter Name="audioConfig" Type="Microsoft.CognitiveServices.Speech.Audio.AudioConfig" />
+      </Parameters>
+      <Docs>
+        <param name="config">Translation config.</param>
+        <param name="audioConfig">Audio config.</param>
+        <summary>
+            Creates a translation recognizer using the specified speech translator and audio configuration.
+            </summary>
+        <returns>A translation recognizer instance.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AuthorizationToken">
+      <MemberSignature Language="C#" Value="public string AuthorizationToken { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string AuthorizationToken" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer.AuthorizationToken" />
+      <MemberSignature Language="VB.NET" Value="Public Property AuthorizationToken As String" />
+      <MemberSignature Language="F#" Value="member this.AuthorizationToken : string with get, set" Usage="Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer.AuthorizationToken" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.CognitiveServices.Speech.csharp</AssemblyName>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets/sets authorization token used to communicate with the service.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Canceled">
+      <MemberSignature Language="C#" Value="public event EventHandler&lt;Microsoft.CognitiveServices.Speech.Translation.TranslationRecognitionCanceledEventArgs&gt; Canceled;" />
+      <MemberSignature Language="ILAsm" Value=".event class System.EventHandler`1&lt;class Microsoft.CognitiveServices.Speech.Translation.TranslationRecognitionCanceledEventArgs&gt; Canceled" />
+      <MemberSignature Language="DocId" Value="E:Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer.Canceled" />
+      <MemberSignature Language="VB.NET" Value="Public Event Canceled As EventHandler(Of TranslationRecognitionCanceledEventArgs) " />
+      <MemberSignature Language="F#" Value="member this.Canceled : EventHandler&lt;Microsoft.CognitiveServices.Speech.Translation.TranslationRecognitionCanceledEventArgs&gt; " Usage="member this.Canceled : System.EventHandler&lt;Microsoft.CognitiveServices.Speech.Translation.TranslationRecognitionCanceledEventArgs&gt; " />
+      <MemberType>Event</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.CognitiveServices.Speech.csharp</AssemblyName>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.EventHandler&lt;Microsoft.CognitiveServices.Speech.Translation.TranslationRecognitionCanceledEventArgs&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            The event <see cref="E:Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer.Canceled" /> signals that the speech to text/synthesis translation was canceled.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="Dispose">
       <MemberSignature Language="C#" Value="protected override void Dispose (bool disposing);" />
       <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void Dispose(bool disposing) cil managed" />
@@ -130,168 +211,101 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="FinalResultReceived">
-      <MemberSignature Language="C#" Value="public event EventHandler&lt;Microsoft.CognitiveServices.Speech.Translation.TranslationTextResultEventArgs&gt; FinalResultReceived;" />
-      <MemberSignature Language="ILAsm" Value=".event class System.EventHandler`1&lt;class Microsoft.CognitiveServices.Speech.Translation.TranslationTextResultEventArgs&gt; FinalResultReceived" />
-      <MemberSignature Language="DocId" Value="E:Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer.FinalResultReceived" />
-      <MemberSignature Language="VB.NET" Value="Public Event FinalResultReceived As EventHandler(Of TranslationTextResultEventArgs) " />
-      <MemberSignature Language="F#" Value="member this.FinalResultReceived : EventHandler&lt;Microsoft.CognitiveServices.Speech.Translation.TranslationTextResultEventArgs&gt; " Usage="member this.FinalResultReceived : System.EventHandler&lt;Microsoft.CognitiveServices.Speech.Translation.TranslationTextResultEventArgs&gt; " />
-      <MemberType>Event</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.CognitiveServices.Speech.csharp</AssemblyName>
-        <AssemblyVersion>0.0.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.EventHandler&lt;Microsoft.CognitiveServices.Speech.Translation.TranslationTextResultEventArgs&gt;</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>
-            The event <see cref="E:Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer.FinalResultReceived" /> signals that a final recognition result is received.
-            </summary>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="IntermediateResultReceived">
-      <MemberSignature Language="C#" Value="public event EventHandler&lt;Microsoft.CognitiveServices.Speech.Translation.TranslationTextResultEventArgs&gt; IntermediateResultReceived;" />
-      <MemberSignature Language="ILAsm" Value=".event class System.EventHandler`1&lt;class Microsoft.CognitiveServices.Speech.Translation.TranslationTextResultEventArgs&gt; IntermediateResultReceived" />
-      <MemberSignature Language="DocId" Value="E:Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer.IntermediateResultReceived" />
-      <MemberSignature Language="VB.NET" Value="Public Event IntermediateResultReceived As EventHandler(Of TranslationTextResultEventArgs) " />
-      <MemberSignature Language="F#" Value="member this.IntermediateResultReceived : EventHandler&lt;Microsoft.CognitiveServices.Speech.Translation.TranslationTextResultEventArgs&gt; " Usage="member this.IntermediateResultReceived : System.EventHandler&lt;Microsoft.CognitiveServices.Speech.Translation.TranslationTextResultEventArgs&gt; " />
-      <MemberType>Event</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.CognitiveServices.Speech.csharp</AssemblyName>
-        <AssemblyVersion>0.0.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.EventHandler&lt;Microsoft.CognitiveServices.Speech.Translation.TranslationTextResultEventArgs&gt;</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>
-            The event <see cref="E:Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer.IntermediateResultReceived" /> signals that an intermediate recognition result is received.
-            </summary>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="OutputVoiceName">
-      <MemberSignature Language="C#" Value="public string OutputVoiceName { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance string OutputVoiceName" />
-      <MemberSignature Language="DocId" Value="P:Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer.OutputVoiceName" />
-      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property OutputVoiceName As String" />
-      <MemberSignature Language="F#" Value="member this.OutputVoiceName : string" Usage="Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer.OutputVoiceName" />
+    <Member MemberName="Properties">
+      <MemberSignature Language="C#" Value="public Microsoft.CognitiveServices.Speech.PropertyCollection Properties { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.CognitiveServices.Speech.PropertyCollection Properties" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer.Properties" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Properties As PropertyCollection" />
+      <MemberSignature Language="F#" Value="member this.Properties : Microsoft.CognitiveServices.Speech.PropertyCollection" Usage="Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer.Properties" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.CognitiveServices.Speech.csharp</AssemblyName>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>System.String</ReturnType>
+        <ReturnType>Microsoft.CognitiveServices.Speech.PropertyCollection</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            Gets the name of output voice.
+            The collection or properties and their values defined for this <see cref="T:Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer" />.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="Parameters">
-      <MemberSignature Language="C#" Value="public Microsoft.CognitiveServices.Speech.IRecognizerParameters Parameters { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.CognitiveServices.Speech.IRecognizerParameters Parameters" />
-      <MemberSignature Language="DocId" Value="P:Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer.Parameters" />
-      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Parameters As IRecognizerParameters" />
-      <MemberSignature Language="F#" Value="member this.Parameters : Microsoft.CognitiveServices.Speech.IRecognizerParameters" Usage="Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer.Parameters" />
-      <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.CognitiveServices.Speech.csharp</AssemblyName>
-        <AssemblyVersion>0.0.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>Microsoft.CognitiveServices.Speech.IRecognizerParameters</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>
-            The collection of parameters and their values defined for this <see cref="T:Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer" />.
-            </summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="RecognitionErrorRaised">
-      <MemberSignature Language="C#" Value="public event EventHandler&lt;Microsoft.CognitiveServices.Speech.RecognitionErrorEventArgs&gt; RecognitionErrorRaised;" />
-      <MemberSignature Language="ILAsm" Value=".event class System.EventHandler`1&lt;class Microsoft.CognitiveServices.Speech.RecognitionErrorEventArgs&gt; RecognitionErrorRaised" />
-      <MemberSignature Language="DocId" Value="E:Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer.RecognitionErrorRaised" />
-      <MemberSignature Language="VB.NET" Value="Public Event RecognitionErrorRaised As EventHandler(Of RecognitionErrorEventArgs) " />
-      <MemberSignature Language="F#" Value="member this.RecognitionErrorRaised : EventHandler&lt;Microsoft.CognitiveServices.Speech.RecognitionErrorEventArgs&gt; " Usage="member this.RecognitionErrorRaised : System.EventHandler&lt;Microsoft.CognitiveServices.Speech.RecognitionErrorEventArgs&gt; " />
+    <Member MemberName="Recognized">
+      <MemberSignature Language="C#" Value="public event EventHandler&lt;Microsoft.CognitiveServices.Speech.Translation.TranslationRecognitionEventArgs&gt; Recognized;" />
+      <MemberSignature Language="ILAsm" Value=".event class System.EventHandler`1&lt;class Microsoft.CognitiveServices.Speech.Translation.TranslationRecognitionEventArgs&gt; Recognized" />
+      <MemberSignature Language="DocId" Value="E:Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer.Recognized" />
+      <MemberSignature Language="VB.NET" Value="Public Event Recognized As EventHandler(Of TranslationRecognitionEventArgs) " />
+      <MemberSignature Language="F#" Value="member this.Recognized : EventHandler&lt;Microsoft.CognitiveServices.Speech.Translation.TranslationRecognitionEventArgs&gt; " Usage="member this.Recognized : System.EventHandler&lt;Microsoft.CognitiveServices.Speech.Translation.TranslationRecognitionEventArgs&gt; " />
       <MemberType>Event</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.CognitiveServices.Speech.csharp</AssemblyName>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>System.EventHandler&lt;Microsoft.CognitiveServices.Speech.RecognitionErrorEventArgs&gt;</ReturnType>
+        <ReturnType>System.EventHandler&lt;Microsoft.CognitiveServices.Speech.Translation.TranslationRecognitionEventArgs&gt;</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            The event <see cref="E:Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer.RecognitionErrorRaised" /> signals that an error occurred during recognition.
+            The event <see cref="E:Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer.Recognized" /> signals that a final recognition result is received.
             </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="RecognizeAsync">
-      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.CognitiveServices.Speech.Translation.TranslationTextResult&gt; RecognizeAsync ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task`1&lt;class Microsoft.CognitiveServices.Speech.Translation.TranslationTextResult&gt; RecognizeAsync() cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer.RecognizeAsync" />
-      <MemberSignature Language="VB.NET" Value="Public Function RecognizeAsync () As Task(Of TranslationTextResult)" />
-      <MemberSignature Language="F#" Value="member this.RecognizeAsync : unit -&gt; System.Threading.Tasks.Task&lt;Microsoft.CognitiveServices.Speech.Translation.TranslationTextResult&gt;" Usage="translationRecognizer.RecognizeAsync " />
+    <Member MemberName="RecognizeOnceAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.CognitiveServices.Speech.Translation.TranslationRecognitionResult&gt; RecognizeOnceAsync ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task`1&lt;class Microsoft.CognitiveServices.Speech.Translation.TranslationRecognitionResult&gt; RecognizeOnceAsync() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer.RecognizeOnceAsync" />
+      <MemberSignature Language="VB.NET" Value="Public Function RecognizeOnceAsync () As Task(Of TranslationRecognitionResult)" />
+      <MemberSignature Language="F#" Value="member this.RecognizeOnceAsync : unit -&gt; System.Threading.Tasks.Task&lt;Microsoft.CognitiveServices.Speech.Translation.TranslationRecognitionResult&gt;" Usage="translationRecognizer.RecognizeOnceAsync " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.CognitiveServices.Speech.csharp</AssemblyName>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.CognitiveServices.Speech.Translation.TranslationTextResult&gt;</ReturnType>
+        <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.CognitiveServices.Speech.Translation.TranslationRecognitionResult&gt;</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
         <summary>
              Starts recognition and translation, and stops after the first utterance is recognized. The task returns the translation text as result.
-             Note: RecognizeAsync() returns when the first utterance has been recognized, so it is suitable only for single shot recognition like command or query. For long-running recognition, use StartContinuousRecognitionAsync() instead.
+             Note: RecognizeOnceAsync() returns when the first utterance has been recognized, so it is suitable only for single shot recognition like command or query. For long-running recognition, use StartContinuousRecognitionAsync() instead.
              </summary>
-        <returns>A task representing the recognition operation. The task returns a value of <see cref="T:Microsoft.CognitiveServices.Speech.Translation.TranslationTextResult" /></returns>
+        <returns>A task representing the recognition operation. The task returns a value of <see cref="T:Microsoft.CognitiveServices.Speech.Translation.TranslationRecognitionResult" /></returns>
         <remarks>To be added.</remarks>
         <example>
              Create a translation recognizer, get and print the recognition result
              <code>
              public async Task TranslationSingleShotRecognitionAsync()
              {
-                 // Creates an instance of a speech factory with specified subscription key and service region. 
+                 // Creates an instance of a speech translation config with specified subscription key and service region. 
                  // Replace with your own subscription key and service region (e.g., "westus").
-                 var factory = SpeechFactory.FromSubscription("YourSubscriptionKey", "YourServiceRegion");
+                 var config = SpeechTranslationConfig.FromSubscription("YourSubscriptionKey", "YourServiceRegion");
             
                  string fromLanguage = "en-US";
-                 <![CDATA[var toLanguages = new List<string>() { "de" };]]>
+                 config.SpeechRecognitionLanguage = fromLanguage;
+                 config.AddTargetLanguage("de");
             
                  // Creates a translation recognizer.
-                 using (var recognizer = factory.CreateTranslationRecognizer(fromLanguage, toLanguages))
+                 using (var recognizer = new TranslationRecognizer(config))
                  {
                      // Starts recognizing.
                      Console.WriteLine("Say something...");
             
-                     // Performs recognition.
-                     // RecognizeAsync() returns when the first utterance has been recognized, so it is suitable 
-                     // only for single shot recognition like command or query. For long-running recognition, use
-                     // StartContinuousRecognitionAsync() instead.
-                     var result = await recognizer.RecognizeAsync();
+                     // Performs recognition. RecognizeOnceAsync() returns when the first utterance has been recognized,
+                     // so it is suitable only for single shot recognition like command or query. For long-running
+                     // recognition, use StartContinuousRecognitionAsync() instead.
+                     var result = await recognizer.RecognizeOnceAsync();
             
-                     if (result.RecognitionStatus == RecognitionStatus.Recognized)
+                     if (result.Reason == ResultReason.TranslatedSpeech)
                      {
-                         Console.WriteLine($"\nFinal result: Status: {result.RecognitionStatus.ToString()}, recognized text: {result.Text}.");
-                         if (result.TranslationStatus == TranslationStatus.Success)
+                         Console.WriteLine($"\nFinal result: Reason: {result.Reason.ToString()}, recognized text: {result.Text}.");
+                         foreach (var element in result.Translations)
                          {
-                             foreach (var element in result.Translations)
-                             {
-                                 Console.WriteLine($"    Translated into {element.Key}: {element.Value}");
-                             }
+                             Console.WriteLine($"    TRANSLATING into '{element.Key}': {element.Value}");
                          }
                      }
                  }
@@ -299,12 +313,33 @@
              </code></example>
       </Docs>
     </Member>
-    <Member MemberName="SourceLanguage">
-      <MemberSignature Language="C#" Value="public string SourceLanguage { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance string SourceLanguage" />
-      <MemberSignature Language="DocId" Value="P:Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer.SourceLanguage" />
-      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property SourceLanguage As String" />
-      <MemberSignature Language="F#" Value="member this.SourceLanguage : string" Usage="Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer.SourceLanguage" />
+    <Member MemberName="Recognizing">
+      <MemberSignature Language="C#" Value="public event EventHandler&lt;Microsoft.CognitiveServices.Speech.Translation.TranslationRecognitionEventArgs&gt; Recognizing;" />
+      <MemberSignature Language="ILAsm" Value=".event class System.EventHandler`1&lt;class Microsoft.CognitiveServices.Speech.Translation.TranslationRecognitionEventArgs&gt; Recognizing" />
+      <MemberSignature Language="DocId" Value="E:Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer.Recognizing" />
+      <MemberSignature Language="VB.NET" Value="Public Event Recognizing As EventHandler(Of TranslationRecognitionEventArgs) " />
+      <MemberSignature Language="F#" Value="member this.Recognizing : EventHandler&lt;Microsoft.CognitiveServices.Speech.Translation.TranslationRecognitionEventArgs&gt; " Usage="member this.Recognizing : System.EventHandler&lt;Microsoft.CognitiveServices.Speech.Translation.TranslationRecognitionEventArgs&gt; " />
+      <MemberType>Event</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.CognitiveServices.Speech.csharp</AssemblyName>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.EventHandler&lt;Microsoft.CognitiveServices.Speech.Translation.TranslationRecognitionEventArgs&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            The event <see cref="E:Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer.Recognizing" /> signals that an intermediate recognition result is received.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SpeechRecognitionLanguage">
+      <MemberSignature Language="C#" Value="public string SpeechRecognitionLanguage { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string SpeechRecognitionLanguage" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer.SpeechRecognitionLanguage" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property SpeechRecognitionLanguage As String" />
+      <MemberSignature Language="F#" Value="member this.SpeechRecognitionLanguage : string" Usage="Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer.SpeechRecognitionLanguage" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.CognitiveServices.Speech.csharp</AssemblyName>
@@ -367,7 +402,7 @@
         <summary>
             Starts speech recognition on a continuous audio stream with keyword spotting, until StopKeywordRecognitionAsync() is called.
             User must subscribe to events to receive recognition results.
-            Note: Key word spotting functionality is only available on the Cognitive Services Device SDK. This functionality is currently not included in the SDK itself.
+            Note: Keyword spotting functionality is only available on the Cognitive Services Device SDK. This functionality is currently not included in the SDK itself.
             </summary>
         <returns>A task representing the asynchronous operation that starts the recognition.</returns>
         <remarks>To be added.</remarks>
@@ -420,45 +455,67 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="SynthesisResultReceived">
-      <MemberSignature Language="C#" Value="public event EventHandler&lt;Microsoft.CognitiveServices.Speech.Translation.TranslationSynthesisResultEventArgs&gt; SynthesisResultReceived;" />
-      <MemberSignature Language="ILAsm" Value=".event class System.EventHandler`1&lt;class Microsoft.CognitiveServices.Speech.Translation.TranslationSynthesisResultEventArgs&gt; SynthesisResultReceived" />
-      <MemberSignature Language="DocId" Value="E:Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer.SynthesisResultReceived" />
-      <MemberSignature Language="VB.NET" Value="Public Event SynthesisResultReceived As EventHandler(Of TranslationSynthesisResultEventArgs) " />
-      <MemberSignature Language="F#" Value="member this.SynthesisResultReceived : EventHandler&lt;Microsoft.CognitiveServices.Speech.Translation.TranslationSynthesisResultEventArgs&gt; " Usage="member this.SynthesisResultReceived : System.EventHandler&lt;Microsoft.CognitiveServices.Speech.Translation.TranslationSynthesisResultEventArgs&gt; " />
+    <Member MemberName="Synthesizing">
+      <MemberSignature Language="C#" Value="public event EventHandler&lt;Microsoft.CognitiveServices.Speech.Translation.TranslationSynthesisEventArgs&gt; Synthesizing;" />
+      <MemberSignature Language="ILAsm" Value=".event class System.EventHandler`1&lt;class Microsoft.CognitiveServices.Speech.Translation.TranslationSynthesisEventArgs&gt; Synthesizing" />
+      <MemberSignature Language="DocId" Value="E:Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer.Synthesizing" />
+      <MemberSignature Language="VB.NET" Value="Public Event Synthesizing As EventHandler(Of TranslationSynthesisEventArgs) " />
+      <MemberSignature Language="F#" Value="member this.Synthesizing : EventHandler&lt;Microsoft.CognitiveServices.Speech.Translation.TranslationSynthesisEventArgs&gt; " Usage="member this.Synthesizing : System.EventHandler&lt;Microsoft.CognitiveServices.Speech.Translation.TranslationSynthesisEventArgs&gt; " />
       <MemberType>Event</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.CognitiveServices.Speech.csharp</AssemblyName>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>System.EventHandler&lt;Microsoft.CognitiveServices.Speech.Translation.TranslationSynthesisResultEventArgs&gt;</ReturnType>
+        <ReturnType>System.EventHandler&lt;Microsoft.CognitiveServices.Speech.Translation.TranslationSynthesisEventArgs&gt;</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            The event <see cref="E:Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer.SynthesisResultReceived" /> signals that a translation synthesis result is received.
+            The event <see cref="E:Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer.Synthesizing" /> signals that a translation synthesis result is received.
             </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="TargetLanguages">
-      <MemberSignature Language="C#" Value="public string[] TargetLanguages { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance string[] TargetLanguages" />
+      <MemberSignature Language="C#" Value="public System.Collections.ObjectModel.ReadOnlyCollection&lt;string&gt; TargetLanguages { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.ObjectModel.ReadOnlyCollection`1&lt;string&gt; TargetLanguages" />
       <MemberSignature Language="DocId" Value="P:Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer.TargetLanguages" />
-      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property TargetLanguages As String()" />
-      <MemberSignature Language="F#" Value="member this.TargetLanguages : string[]" Usage="Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer.TargetLanguages" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property TargetLanguages As ReadOnlyCollection(Of String)" />
+      <MemberSignature Language="F#" Value="member this.TargetLanguages : System.Collections.ObjectModel.ReadOnlyCollection&lt;string&gt;" Usage="Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer.TargetLanguages" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.CognitiveServices.Speech.csharp</AssemblyName>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>System.String[]</ReturnType>
+        <ReturnType>System.Collections.ObjectModel.ReadOnlyCollection&lt;System.String&gt;</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
             Gets target languages for translation that were set when the recognizer was created.
             The language is specified in BCP-47 format. The translation will provide translated text for each of language.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="VoiceName">
+      <MemberSignature Language="C#" Value="public string VoiceName { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string VoiceName" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer.VoiceName" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property VoiceName As String" />
+      <MemberSignature Language="F#" Value="member this.VoiceName : string" Usage="Microsoft.CognitiveServices.Speech.Translation.TranslationRecognizer.VoiceName" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.CognitiveServices.Speech.csharp</AssemblyName>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets the name of output voice if speech synthesis is used.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>

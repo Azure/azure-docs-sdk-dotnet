@@ -1,15 +1,7 @@
 ---
 title: Tutorials for messaging and IoT with .NET on Azure | Microsoft Docs
 description: Send messages between cloud applications and between devices and the cloud using .NET and Azure services.
-author: camsoper
-ms.author: casoper
-manager: wpickett
 ms.date: 10/19/2017
-ms.topic: reference
-ms.technology: azure
-ms.devlang: dotnet
-ms.service: multiple
-ms.custom: devcenter
 ---
 
 # .NET tutorials for enterprise messaging and Internet of Things (IoT)

@@ -1,16 +1,9 @@
 ---
 title: Choose the right Azure hosting option
 description: Learn which Azure migration path is right for your ASP.NET web application.
-keywords: Azure .NET, ASP.NET, App Service, VM, virtual machine, Web App, migrate, migration
 author: CESARDELATORRE
-manager: wpickett
 ms.author: cesardl
 ms.date: 11/15/2017
-ms.topic: article
-ms.technology: azure
-ms.devlang: dotnet
-ms.service: multiple
-ms.custom: devcenter, casoper
 ---
 
 # Choose the right Azure hosting option
@@ -32,7 +25,7 @@ The following table shows several comparisons and recommendations to help you ch
 
 |                 | Azure VMs | Azure App Service | Windows Containers |
 |-----------------|-----------|-------------------|--------------------|
-|When to use      |<ul><li>Application has strong dependencies on the server and local .msi installations.</li><li>You want to easiest application migration path</li></ul>|App has no dependencies on the server, it is just a clean ASP.NET web app (MVC, WebForm) or N-Tier app (Web API, WCf) accessing a database server. |<ul><li>Application has dependencies on the original server but those dependencies can be included in the Docker Windows image.</li><li>Want to modernize the app so it is [Cloud DevOps-Ready](https://docs.microsoft.com/dotnet/standard/modernize-with-azure-and-containers/lift-and-shift-existing-apps-devops/reasons-to-lift-and-shift-existing-net-apps-to-cloud-devops-ready-applications)</li></ul>|
+|When to use      |<ul><li>Application has strong dependencies on the server and local .msi installations.</li><li>You want the easiest application migration path</li></ul>|App has no dependencies on the server, it is just a clean ASP.NET web app (MVC, WebForm) or N-Tier app (Web API, WCf) accessing a database server. |<ul><li>Application has dependencies on the original server but those dependencies can be included in the Docker Windows image.</li><li>Want to modernize the app so it is [Cloud DevOps-Ready](https://docs.microsoft.com/dotnet/standard/modernize-with-azure-and-containers/lift-and-shift-existing-apps-devops/reasons-to-lift-and-shift-existing-net-apps-to-cloud-devops-ready-applications)</li></ul>|
 |Pros & benefits  |<ul><li>Easiest migration path</li><li>Familiar environment. Deployment environment is a VM so very similar to on-premises servers.</li></ul> |Ongoing PaaS maintenance, simplest way to manage and scale apps in Azure. |<ul><li>Prepared for the future, Cloud DevOps-Ready with dependencies included in the app’s containers.</li><li>Almost no need to re-factor .NET /C# code.</li></ul> |
 |Cons             |It is IaaS. Maintenance is costly. You have to manage VMs infrastructure about networking, load-balancer, scale-out, IIS management, etc. |<ul><li>Not all apps are [supported](http://www.migratetoazure.net/ReadinessAssessment)</li><li>Some apps might need to be refactored and even slightly re-architected, so they support Azure App Service.</li></ul> |<ul><li>Docker’s skills learning curve</li><li>Some code and app configuration settings changes</li></ul>|
 |Requirements |Windows Server VM with the same requirements than the app for on-premises | Azure App Service requirements specified at the [Compatibility analysis for Azure App Service](https://www.migratetoazure.net/Resources). |<ul><li>[Windows Server 2016 with Containers - Azure VM](https://azuremarketplace.microsoft.com/marketplace/apps/Microsoft.WindowsServer?tab=Overview)<br />or</li><li>[Azure Container Service (AKS)](https://azure.microsoft.com/services/container-service/) (That is Kubernetes orchestrator)<br />or<li>[Azure Service Fabric](https://azure.microsoft.com/services/service-fabric/) orchestrator</li></ul> |
