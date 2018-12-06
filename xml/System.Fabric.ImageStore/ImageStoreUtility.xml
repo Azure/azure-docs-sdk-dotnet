@@ -68,6 +68,45 @@
         </remarks>
       </Docs>
     </Member>
+    <Member MemberName="ExpandSfpkg">
+      <MemberSignature Language="C#" Value="public static void ExpandSfpkg (string sfpkgFilePath, string appPackageRootDirectory);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void ExpandSfpkg(string sfpkgFilePath, string appPackageRootDirectory) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Fabric.ImageStore.ImageStoreUtility.ExpandSfpkg(System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub ExpandSfpkg (sfpkgFilePath As String, appPackageRootDirectory As String)" />
+      <MemberSignature Language="F#" Value="static member ExpandSfpkg : string * string -&gt; unit" Usage="System.Fabric.ImageStore.ImageStoreUtility.ExpandSfpkg (sfpkgFilePath, appPackageRootDirectory)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Fabric</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sfpkgFilePath" Type="System.String" />
+        <Parameter Name="appPackageRootDirectory" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="sfpkgFilePath">
+          <para>The path to the sfpkg file, which must exist and have '.sfpkg' extension.</para>
+        </param>
+        <param name="appPackageRootDirectory">
+          <para>The directory where the package is expanded. If it exists, it will be first deleted to ensure the resulting application package is valid.</para>
+        </param>
+        <summary>
+            Expands the specified sfpkg file in the application package folder.
+            </summary>
+        <remarks>
+          <para>If the destination directory doesn't exist, it is created.</para>
+          <para>If the destination folder contains the sfpkg to be extracted, the package is extracted in place and, when extraction is complete, the sfpkg is deleted, to ensure the folder is a valid application package. Otherwise, the sfpkg is not deleted.</para>
+          <para>If the destination folder exists, it must not contain other files or folders.</para>
+          <para>
+            The command does not perform any validation on the sfpkg or the expanded package.
+            </para>
+          <para>If the sfpkg was created using <see cref="M:System.Fabric.ImageStore.ImageStoreUtility.GenerateSfpkg(System.String,System.String,System.Boolean,System.String)" />, the <paramref name="sfpkgFilePath" /> is the returned value.</para>
+        </remarks>
+      </Docs>
+    </Member>
     <Member MemberName="GenerateApplicationPackageChecksumFiles">
       <MemberSignature Language="C#" Value="public static void GenerateApplicationPackageChecksumFiles (string appPackageRootDirectory, System.Fabric.IImageStoreProgressHandler progressHandler, bool isImageStoreServiceEnabled = true);" />
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig void GenerateApplicationPackageChecksumFiles(string appPackageRootDirectory, class System.Fabric.IImageStoreProgressHandler progressHandler, bool isImageStoreServiceEnabled) cil managed" />
@@ -98,6 +137,63 @@
           <para>
             The cluster will automatically generate checksums during application type registration if they're not already part of the application package. This method can be used to incur the cost of checksum file generation while preparing the application package, which will reduce the cost of registering the application type package for large packages.
             </para>
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GenerateSfpkg">
+      <MemberSignature Language="C#" Value="public static string GenerateSfpkg (string appPackageRootDirectory, string destinationDirectory, bool applyCompression = true, string sfpkgName = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig string GenerateSfpkg(string appPackageRootDirectory, string destinationDirectory, bool applyCompression, string sfpkgName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Fabric.ImageStore.ImageStoreUtility.GenerateSfpkg(System.String,System.String,System.Boolean,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GenerateSfpkg (appPackageRootDirectory As String, destinationDirectory As String, Optional applyCompression As Boolean = true, Optional sfpkgName As String = null) As String" />
+      <MemberSignature Language="F#" Value="static member GenerateSfpkg : string * string * bool * string -&gt; string" Usage="System.Fabric.ImageStore.ImageStoreUtility.GenerateSfpkg (appPackageRootDirectory, destinationDirectory, applyCompression, sfpkgName)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Fabric</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="appPackageRootDirectory" Type="System.String" />
+        <Parameter Name="destinationDirectory" Type="System.String" />
+        <Parameter Name="applyCompression" Type="System.Boolean" />
+        <Parameter Name="sfpkgName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="appPackageRootDirectory">
+          <para>The application package root directory. It must exist.</para>
+        </param>
+        <param name="destinationDirectory">
+          <para>The folder where the sfpkg file is placed. If it doesn't exist, it is created.</para>
+        </param>
+        <param name="applyCompression">
+          <para>If true, the package is
+            <see href="https://docs.microsoft.com/azure/service-fabric/service-fabric-package-apps#compress-a-package">compressed</see>
+            before generating the sfpkg, inside <paramref name="appPackageRootDirectory" />.
+            If the package is already compressed, no changes are made. To compress, the appPackageRootDirectory must allow write access.
+            If false, the sfpkg is generated using the application package as it is, either compressed or uncompressed. Default: true.</para>
+        </param>
+        <param name="sfpkgName">
+          <para>The name of the sfpkg file.</para>
+        </param>
+        <summary>
+          <para>
+            Creates a 'sfpkg' file from the application package found in the specified application package root directory.
+            </para>
+        </summary>
+        <returns>
+          <para>The path to the sfpkg file. Can be used to expand the sfpkg using <see cref="M:System.Fabric.ImageStore.ImageStoreUtility.ExpandSfpkg(System.String,System.String)" />.</para>
+        </returns>
+        <remarks>
+          <para>
+            If sfpkgName is not specified or null, the generated package takes the name of the application package root folder, adding the '.sfpkg' extension.
+            If the specified name has no extension or a different extension, the extension is replaced with '.sfpkg'.
+            </para>
+          <para>The destination directory can't be same or a child of the application package root directory, as extraction will fail.</para>
+          <para>No validation is performed to ensure the package is valid. Please test the package before generating the sfpkg.</para>
+          <para>The sfpkg can be uploaded to an external store and used for provisioning.</para>
+          <para>To expand the sfpkg to see the original content, use <see cref="M:System.Fabric.ImageStore.ImageStoreUtility.ExpandSfpkg(System.String,System.String)" /></para>
         </remarks>
       </Docs>
     </Member>
