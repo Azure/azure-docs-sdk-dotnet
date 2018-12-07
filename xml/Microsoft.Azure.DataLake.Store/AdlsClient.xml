@@ -125,6 +125,8 @@
         <summary>
             Download directory or file from remote server to local. Transfers the contents under source directory under 
             the destination directory. Transfers the source file and saves it as the destination path.
+            This method does not throw any exception for any entry's transfer failure. Refer the return value <see cref="T:Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus" /> to 
+            get the status/exception of each entry's transfer.
             It is highly recomended to set ServicePointManager.DefaultConnectionLimit to the number of threads application wants the sdk to use before creating any instance of AdlsClient.
             By default ServicePointManager.DefaultConnectionLimit is set to 2.
             </summary>
@@ -165,13 +167,18 @@
         <param name="progressTracker">Progresstracker to track progress of file transfer</param>
         <param name="notRecurse">If true then does an enumeration till level one else does recursive enumeration</param>
         <param name="resume">If true then we want to resume from last transfer</param>
-        <param name="isBinary">If false then writes files to data lake at newline boundaries. If true, then this is not guranteed but the upload will be faster.</param>
+        <param name="isBinary">If false then writes files to data lake at newline boundaries, however if the file has no newline within 4MB chunks it will throw exception.
+            If true, then upload at new line boundaries is not guranteed but the upload will be faster. By default false, if file has no newlines within 4MB chunks true should be apssed</param>
         <param name="cancelToken">Cancellation token</param>
         <summary>
             Upload directory or file from local to remote. Transfers the contents under source directory under 
             the destination directory. Transfers the source file and saves it as the destination path.
+            This method does not throw any exception for any entry's transfer failure. Refer the return value <see cref="T:Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus" /> to 
+            get the status/exception of each entry's transfer.
             It is highly recomended to set ServicePointManager.DefaultConnectionLimit to the number of threads application wants the sdk to use before creating any instance of AdlsClient.
             By default ServicePointManager.DefaultConnectionLimit is set to 2.
+            By default files are uploaded at new line boundaries. However if files does not have newline within 4MB chunks,
+            the transfer will fail. In that case it is required to pass true to <paramref name="isBinary" /> to avoid uploads at newline boundaries.
             </summary>
         <returns>Transfer Status encapsulating the details of upload</returns>
         <remarks>To be added.</remarks>
