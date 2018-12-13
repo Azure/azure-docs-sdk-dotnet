@@ -13,4 +13,4 @@ ms.service: batch-ai
 
 ## Namespaces
 
-[Management]((/dotnet/api/overview/azure/batchai/management))
+[Management](/dotnet/api/overview/azure/batchai/management)
