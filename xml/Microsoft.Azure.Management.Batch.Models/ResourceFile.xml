@@ -7,6 +7,7 @@
   <AssemblyInfo>
     <AssemblyName>Microsoft.Azure.Management.Batch</AssemblyName>
     <AssemblyVersion>6.0.0.0</AssemblyVersion>
+    <AssemblyVersion>7.0.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -14,7 +15,7 @@
   <Interfaces />
   <Docs>
     <summary>
-            A file to be downloaded from Azure blob storage to a compute node.
+            A single file or multiple files to be downloaded to a compute node.
             </summary>
     <remarks>To be added.</remarks>
   </Docs>
@@ -28,6 +29,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Management.Batch</AssemblyName>
         <AssemblyVersion>6.0.0.0</AssemblyVersion>
+        <AssemblyVersion>7.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -38,24 +40,33 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ResourceFile (string blobSource, string filePath, string fileMode = null);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string blobSource, string filePath, string fileMode) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.Batch.Models.ResourceFile.#ctor(System.String,System.String,System.String)" />
-      <MemberSignature Language="VB.NET" Value="Public Sub New (blobSource As String, filePath As String, Optional fileMode As String = null)" />
-      <MemberSignature Language="F#" Value="new Microsoft.Azure.Management.Batch.Models.ResourceFile : string * string * string -&gt; Microsoft.Azure.Management.Batch.Models.ResourceFile" Usage="new Microsoft.Azure.Management.Batch.Models.ResourceFile (blobSource, filePath, fileMode)" />
+      <MemberSignature Language="C#" Value="public ResourceFile (string autoStorageContainerName = null, string storageContainerUrl = null, string httpUrl = null, string blobPrefix = null, string filePath = null, string fileMode = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string autoStorageContainerName, string storageContainerUrl, string httpUrl, string blobPrefix, string filePath, string fileMode) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.Batch.Models.ResourceFile.#ctor(System.String,System.String,System.String,System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (Optional autoStorageContainerName As String = null, Optional storageContainerUrl As String = null, Optional httpUrl As String = null, Optional blobPrefix As String = null, Optional filePath As String = null, Optional fileMode As String = null)" />
+      <MemberSignature Language="F#" Value="new Microsoft.Azure.Management.Batch.Models.ResourceFile : string * string * string * string * string * string -&gt; Microsoft.Azure.Management.Batch.Models.ResourceFile" Usage="new Microsoft.Azure.Management.Batch.Models.ResourceFile (autoStorageContainerName, storageContainerUrl, httpUrl, blobPrefix, filePath, fileMode)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Management.Batch</AssemblyName>
-        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+        <AssemblyVersion>7.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="blobSource" Type="System.String" />
+        <Parameter Name="autoStorageContainerName" Type="System.String" />
+        <Parameter Name="storageContainerUrl" Type="System.String" />
+        <Parameter Name="httpUrl" Type="System.String" />
+        <Parameter Name="blobPrefix" Type="System.String" />
         <Parameter Name="filePath" Type="System.String" />
         <Parameter Name="fileMode" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="blobSource">The URL of the file within Azure Blob
-            Storage.</param>
+        <param name="autoStorageContainerName">The storage container name
+            in the auto storage account.</param>
+        <param name="storageContainerUrl">The URL of the blob container
+            within Azure Blob Storage.</param>
+        <param name="httpUrl">The URL of the file to download.</param>
+        <param name="blobPrefix">The blob prefix to use when downloading
+            blobs from an Azure Storage container. Only the blobs whose names
+            begin with the specified prefix will be downloaded.</param>
         <param name="filePath">The location on the compute node to which to
             download the file, relative to the task's working
             directory.</param>
@@ -67,20 +78,20 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="BlobSource">
-      <MemberSignature Language="C#" Value="public string BlobSource { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance string BlobSource" />
-      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.Batch.Models.ResourceFile.BlobSource" />
-      <MemberSignature Language="VB.NET" Value="Public Property BlobSource As String" />
-      <MemberSignature Language="F#" Value="member this.BlobSource : string with get, set" Usage="Microsoft.Azure.Management.Batch.Models.ResourceFile.BlobSource" />
+    <Member MemberName="AutoStorageContainerName">
+      <MemberSignature Language="C#" Value="public string AutoStorageContainerName { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string AutoStorageContainerName" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.Batch.Models.ResourceFile.AutoStorageContainerName" />
+      <MemberSignature Language="VB.NET" Value="Public Property AutoStorageContainerName As String" />
+      <MemberSignature Language="F#" Value="member this.AutoStorageContainerName : string with get, set" Usage="Microsoft.Azure.Management.Batch.Models.ResourceFile.AutoStorageContainerName" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Management.Batch</AssemblyName>
-        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+        <AssemblyVersion>7.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute FrameworkAlternate="azure-dotnet">
-          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="blobSource")</AttributeName>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="autoStorageContainerName")</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -88,16 +99,48 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Gets or sets the URL of the file within Azure Blob Storage.
+            Gets or sets the storage container name in the auto storage
+            account.
             </summary>
         <value>To be added.</value>
         <remarks>
-            This URL must be readable using anonymous access; that is, the
-            Batch service does not present any credentials when downloading the
-            blob. There are two ways to get such a URL for a blob in Azure
-            storage: include a Shared Access Signature (SAS) granting read
-            permissions on the blob, or set the ACL for the blob or its
-            container to allow public access.
+            The autoStorageContainerName, storageContainerUrl and httpUrl
+            properties are mutually exclusive and one of them must be
+            specified.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="BlobPrefix">
+      <MemberSignature Language="C#" Value="public string BlobPrefix { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string BlobPrefix" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.Batch.Models.ResourceFile.BlobPrefix" />
+      <MemberSignature Language="VB.NET" Value="Public Property BlobPrefix As String" />
+      <MemberSignature Language="F#" Value="member this.BlobPrefix : string with get, set" Usage="Microsoft.Azure.Management.Batch.Models.ResourceFile.BlobPrefix" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.Batch</AssemblyName>
+        <AssemblyVersion>7.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="azure-dotnet">
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="blobPrefix")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets the blob prefix to use when downloading blobs from an
+            Azure Storage container. Only the blobs whose names begin with the
+            specified prefix will be downloaded.
+            </summary>
+        <value>To be added.</value>
+        <remarks>
+            The property is valid only when autoStorageContainerName or
+            storageContainerUrl is used. This prefix can be a partial filename
+            or a subdirectory. If a prefix is not specified, all the files in
+            the container will be downloaded.
             </remarks>
       </Docs>
     </Member>
@@ -111,6 +154,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Management.Batch</AssemblyName>
         <AssemblyVersion>6.0.0.0</AssemblyVersion>
+        <AssemblyVersion>7.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute FrameworkAlternate="azure-dotnet">
@@ -144,6 +188,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Management.Batch</AssemblyName>
         <AssemblyVersion>6.0.0.0</AssemblyVersion>
+        <AssemblyVersion>7.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute FrameworkAlternate="azure-dotnet">
@@ -159,32 +204,91 @@
             the file, relative to the task's working directory.
             </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            If the httpUrl property is specified, the filePath is required and
+            describes the path which the file will be downloaded to, including
+            the filename. Otherwise, if the autoStorageContainerName or
+            storageContainerUrl property is specified, filePath is optional and
+            is the directory to download the files to. In the case where
+            filePath is used as a directory, any directory structure already
+            associated with the input data will be retained in full and
+            appended to the specified filePath directory. The specified
+            relative path cannot break out of the task's working directory (for
+            example by using '..').
+            </remarks>
       </Docs>
     </Member>
-    <Member MemberName="Validate">
-      <MemberSignature Language="C#" Value="public virtual void Validate ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Validate() cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.Batch.Models.ResourceFile.Validate" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Sub Validate ()" />
-      <MemberSignature Language="F#" Value="abstract member Validate : unit -&gt; unit&#xA;override this.Validate : unit -&gt; unit" Usage="resourceFile.Validate " />
-      <MemberType>Method</MemberType>
+    <Member MemberName="HttpUrl">
+      <MemberSignature Language="C#" Value="public string HttpUrl { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string HttpUrl" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.Batch.Models.ResourceFile.HttpUrl" />
+      <MemberSignature Language="VB.NET" Value="Public Property HttpUrl As String" />
+      <MemberSignature Language="F#" Value="member this.HttpUrl : string with get, set" Usage="Microsoft.Azure.Management.Batch.Models.ResourceFile.HttpUrl" />
+      <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Management.Batch</AssemblyName>
-        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+        <AssemblyVersion>7.0.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="azure-dotnet">
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="httpUrl")</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
-        <ReturnType>System.Void</ReturnType>
+        <ReturnType>System.String</ReturnType>
       </ReturnValue>
-      <Parameters />
       <Docs>
         <summary>
-            Validate the object.
+            Gets or sets the URL of the file to download.
             </summary>
-        <remarks>To be added.</remarks>
-        <exception cref="T:Microsoft.Rest.ValidationException">
-            Thrown if validation fails
-            </exception>
+        <value>To be added.</value>
+        <remarks>
+            The autoStorageContainerName, storageContainerUrl and httpUrl
+            properties are mutually exclusive and one of them must be
+            specified. If the URL is Azure Blob Storage, it must be readable
+            using anonymous access; that is, the Batch service does not present
+            any credentials when downloading the blob. There are two ways to
+            get such a URL for a blob in Azure storage: include a Shared Access
+            Signature (SAS) granting read permissions on the blob, or set the
+            ACL for the blob or its container to allow public access.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="StorageContainerUrl">
+      <MemberSignature Language="C#" Value="public string StorageContainerUrl { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string StorageContainerUrl" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.Batch.Models.ResourceFile.StorageContainerUrl" />
+      <MemberSignature Language="VB.NET" Value="Public Property StorageContainerUrl As String" />
+      <MemberSignature Language="F#" Value="member this.StorageContainerUrl : string with get, set" Usage="Microsoft.Azure.Management.Batch.Models.ResourceFile.StorageContainerUrl" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.Batch</AssemblyName>
+        <AssemblyVersion>7.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="azure-dotnet">
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="storageContainerUrl")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets the URL of the blob container within Azure Blob
+            Storage.
+            </summary>
+        <value>To be added.</value>
+        <remarks>
+            The autoStorageContainerName, storageContainerUrl and httpUrl
+            properties are mutually exclusive and one of them must be
+            specified. This URL must be readable and listable using anonymous
+            access; that is, the Batch service does not present any credentials
+            when downloading the blob. There are two ways to get such a URL for
+            a blob in Azure storage: include a Shared Access Signature (SAS)
+            granting read and list permissions on the blob, or set the ACL for
+            the blob or its container to allow public access.
+            </remarks>
       </Docs>
     </Member>
   </Members>
