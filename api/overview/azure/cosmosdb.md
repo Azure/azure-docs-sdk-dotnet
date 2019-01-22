@@ -51,7 +51,7 @@ dotnet add package Microsoft.Azure.Cosmos
 
 ### Code Example
 
-This example connects to an existing Azure Cosmos DB SQL API database, reads a document from a collection, and deserializes it as an `Item` object. This example uses version 2.x of the .NET SDK.   
+This example connects to an existing Azure Cosmos DB SQL API database, reads a document from a collection, and deserializes it as an `TodoItem` object. This example uses version 2.x of the .NET SDK.   
 
 ```csharp
 /* Include this "using" directive...
@@ -60,7 +60,7 @@ using Microsoft.Azure.Documents.Client;
 
 DocumentClient client = new DocumentClient(endpointUri, authKeyString);
 Uri documentUri = UriFactory.CreateDocumentUri("MyDatabaseName", "MyCollectionName", "DocumentId");
-SomeClass myObject = client.ReadDocumentAsync<SomeClass>(documentUri).ToString();
+var todoItem = client.ReadDocumentAsync<TodoItem>(documentUri);
 ```
 
 This example connects to an existing Azure Cosmos DB SQL API database, creates a new database and container, reads an item from the container, and deserializes it to a `TodoItem` object. This example uses version 3.x of the .NET SDK.   
