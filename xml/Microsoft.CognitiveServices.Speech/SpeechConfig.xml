@@ -7,6 +7,7 @@
   <AssemblyInfo>
     <AssemblyName>Microsoft.CognitiveServices.Speech.csharp</AssemblyName>
     <AssemblyVersion>0.0.0.0</AssemblyVersion>
+    <AssemblyVersion>1.3.0.28</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -20,27 +21,29 @@
   </Docs>
   <Members>
     <Member MemberName="AuthorizationToken">
-      <MemberSignature Language="C#" Value="public string AuthorizationToken { get; }" />
+      <MemberSignature Language="C#" Value="public string AuthorizationToken { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance string AuthorizationToken" />
       <MemberSignature Language="DocId" Value="P:Microsoft.CognitiveServices.Speech.SpeechConfig.AuthorizationToken" />
-      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property AuthorizationToken As String" />
-      <MemberSignature Language="F#" Value="member this.AuthorizationToken : string" Usage="Microsoft.CognitiveServices.Speech.SpeechConfig.AuthorizationToken" />
+      <MemberSignature Language="VB.NET" Value="Public Property AuthorizationToken As String" />
+      <MemberSignature Language="F#" Value="member this.AuthorizationToken : string with get, set" Usage="Microsoft.CognitiveServices.Speech.SpeechConfig.AuthorizationToken" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.CognitiveServices.Speech.csharp</AssemblyName>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
+        <AssemblyVersion>1.3.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            Gets the authorization token.
-            If authorization token is set, the subscription key is ignored.
+            Gets/sets the authorization token.
             Note: The caller needs to ensure that the authorization token is valid. Before the authorization token
-            expires, the caller needs to refresh it by setting the property `AuthorizationToken` on the corresponding
-            recognizer with a new valid token.
-            Refresh
+            expires, the caller needs to refresh it by calling this setter with a new valid token.
+            As configuration values are copied when creating a new recognizer, the new token value will not apply to recognizers that have already been created.
+            For recognizers that have been created before, you need to set authorization token of the corresponding recognizer
+            to refresh the token. Otherwise, the recognizers will encounter errors during recognition.
+            Changed in version 1.3.0.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -56,6 +59,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.CognitiveServices.Speech.csharp</AssemblyName>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
+        <AssemblyVersion>1.3.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -78,6 +82,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.CognitiveServices.Speech.csharp</AssemblyName>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
+        <AssemblyVersion>1.3.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.CognitiveServices.Speech.SpeechConfig</ReturnType>
@@ -92,8 +97,10 @@
         <summary>
             Creates an instance of the speech config with specified authorization token and region.
             Note: The caller needs to ensure that the authorization token is valid. Before the authorization token
-            expires, the caller needs to refresh it by setting the property `AuthorizationToken` on the corresponding
-            recognizer with a new valid token.
+            expires, the caller needs to refresh it by calling this setter with a new valid token.
+            As configuration values are copied when creating a new recognizer, the new token value will not apply to recognizers that have already been created.
+            For recognizers that have been created before, you need to set authorization token of the corresponding recognizer
+            to refresh the token. Otherwise, the recognizers will encounter errors during recognition.
             </summary>
         <returns>A speech config instance.</returns>
         <remarks>To be added.</remarks>
@@ -109,6 +116,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.CognitiveServices.Speech.csharp</AssemblyName>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
+        <AssemblyVersion>1.3.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.CognitiveServices.Speech.SpeechConfig</ReturnType>
@@ -127,6 +135,8 @@
             For example, if language is defined in the uri as query parameter "language=de-DE", and also set by CreateSpeechRecognizer("en-US"),
             the language setting in uri takes precedence, and the effective language is "de-DE".
             Only the parameters that are not specified in the endpoint URL can be set by other APIs.
+            Note: To use authorization token with FromEndpoint, pass an empty string to the subscriptionKey in the FromEndpoint method,
+            and then set the AuthorizationToken property on the created SpeechConfig instance to use the authorization token.
             </summary>
         <returns>A speech config instance.</returns>
         <remarks>To be added.</remarks>
@@ -142,6 +152,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.CognitiveServices.Speech.csharp</AssemblyName>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
+        <AssemblyVersion>1.3.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.CognitiveServices.Speech.SpeechConfig</ReturnType>
@@ -161,6 +172,33 @@
       </Docs>
     </Member>
     <Member MemberName="GetProperty">
+      <MemberSignature Language="C#" Value="public string GetProperty (Microsoft.CognitiveServices.Speech.PropertyId id);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance string GetProperty(valuetype Microsoft.CognitiveServices.Speech.PropertyId id) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.CognitiveServices.Speech.SpeechConfig.GetProperty(Microsoft.CognitiveServices.Speech.PropertyId)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetProperty (id As PropertyId) As String" />
+      <MemberSignature Language="F#" Value="member this.GetProperty : Microsoft.CognitiveServices.Speech.PropertyId -&gt; string" Usage="speechConfig.GetProperty id" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.CognitiveServices.Speech.csharp</AssemblyName>
+        <AssemblyVersion>1.3.0.28</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="id" Type="Microsoft.CognitiveServices.Speech.PropertyId" />
+      </Parameters>
+      <Docs>
+        <param name="id">PropertyId of the property</param>
+        <summary>
+            Gets the property by propertyId
+            Added in version 1.3.0.
+            </summary>
+        <returns>Value of the property</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetProperty">
       <MemberSignature Language="C#" Value="public string GetProperty (string name);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance string GetProperty(string name) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.CognitiveServices.Speech.SpeechConfig.GetProperty(System.String)" />
@@ -170,6 +208,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.CognitiveServices.Speech.csharp</AssemblyName>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
+        <AssemblyVersion>1.3.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -196,6 +235,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.CognitiveServices.Speech.csharp</AssemblyName>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
+        <AssemblyVersion>1.3.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.CognitiveServices.Speech.OutputFormat</ReturnType>
@@ -218,6 +258,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.CognitiveServices.Speech.csharp</AssemblyName>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
+        <AssemblyVersion>1.3.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -231,6 +272,34 @@
       </Docs>
     </Member>
     <Member MemberName="SetProperty">
+      <MemberSignature Language="C#" Value="public void SetProperty (Microsoft.CognitiveServices.Speech.PropertyId id, string value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetProperty(valuetype Microsoft.CognitiveServices.Speech.PropertyId id, string value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.CognitiveServices.Speech.SpeechConfig.SetProperty(Microsoft.CognitiveServices.Speech.PropertyId,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub SetProperty (id As PropertyId, value As String)" />
+      <MemberSignature Language="F#" Value="member this.SetProperty : Microsoft.CognitiveServices.Speech.PropertyId * string -&gt; unit" Usage="speechConfig.SetProperty (id, value)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.CognitiveServices.Speech.csharp</AssemblyName>
+        <AssemblyVersion>1.3.0.28</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="id" Type="Microsoft.CognitiveServices.Speech.PropertyId" />
+        <Parameter Name="value" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="id">PropertyId of the property</param>
+        <param name="value">Value of the property</param>
+        <summary>
+            Sets the property by propertyId
+            Added in version 1.3.0.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SetProperty">
       <MemberSignature Language="C#" Value="public void SetProperty (string name, string value);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetProperty(string name, string value) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.CognitiveServices.Speech.SpeechConfig.SetProperty(System.String,System.String)" />
@@ -240,6 +309,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.CognitiveServices.Speech.csharp</AssemblyName>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
+        <AssemblyVersion>1.3.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -258,6 +328,34 @@
       </Docs>
     </Member>
     <Member MemberName="SetProxy">
+      <MemberSignature Language="C#" Value="public void SetProxy (string proxyHostName, int proxyPort);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetProxy(string proxyHostName, int32 proxyPort) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.CognitiveServices.Speech.SpeechConfig.SetProxy(System.String,System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub SetProxy (proxyHostName As String, proxyPort As Integer)" />
+      <MemberSignature Language="F#" Value="member this.SetProxy : string * int -&gt; unit" Usage="speechConfig.SetProxy (proxyHostName, proxyPort)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.CognitiveServices.Speech.csharp</AssemblyName>
+        <AssemblyVersion>1.3.0.28</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="proxyHostName" Type="System.String" />
+        <Parameter Name="proxyPort" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="proxyHostName">The host name of the proxy server.</param>
+        <param name="proxyPort">The port number of the proxy server.</param>
+        <summary>
+            Sets proxy configuration.
+            Added in version 1.3.0
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SetProxy">
       <MemberSignature Language="C#" Value="public void SetProxy (string proxyHostName, int proxyPort, string proxyUserName, string proxyPassword);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetProxy(string proxyHostName, int32 proxyPort, string proxyUserName, string proxyPassword) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.CognitiveServices.Speech.SpeechConfig.SetProxy(System.String,System.Int32,System.String,System.String)" />
@@ -267,6 +365,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.CognitiveServices.Speech.csharp</AssemblyName>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
+        <AssemblyVersion>1.3.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -278,10 +377,10 @@
         <Parameter Name="proxyPassword" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="proxyHostName">The host name of the proxy server</param>
-        <param name="proxyPort">The port number of the proxy server</param>
-        <param name="proxyUserName">The user name of the proxy server</param>
-        <param name="proxyPassword">The password of the proxy server</param>
+        <param name="proxyHostName">The host name of the proxy server, without the protocol scheme (http://)</param>
+        <param name="proxyPort">The port number of the proxy server.</param>
+        <param name="proxyUserName">The user name of the proxy server.</param>
+        <param name="proxyPassword">The password of the proxy server.</param>
         <summary>
             Sets proxy configuration.
             Added in version 1.1.0
@@ -299,6 +398,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.CognitiveServices.Speech.csharp</AssemblyName>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
+        <AssemblyVersion>1.3.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -321,6 +421,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.CognitiveServices.Speech.csharp</AssemblyName>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
+        <AssemblyVersion>1.3.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
