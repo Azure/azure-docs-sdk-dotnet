@@ -1,0 +1,63 @@
+﻿<Type Name="ICustomWebUi" FullName="Microsoft.Identity.Client.Extensibility.ICustomWebUi">
+  <TypeSignature Language="C#" Value="public interface ICustomWebUi" />
+  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract ICustomWebUi" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Identity.Client.Extensibility.ICustomWebUi" />
+  <TypeSignature Language="VB.NET" Value="Public Interface ICustomWebUi" />
+  <TypeSignature Language="F#" Value="type ICustomWebUi = interface" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Identity.Client</AssemblyName>
+    <AssemblyVersion>3.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces />
+  <Docs>
+    <summary>
+                Interface that MSAL.NET extender can implement to provide their own Web UI in public client applications
+                to sign-in user and have them consented part of the Authorization code flow.
+                MSAL.NET provides an embedded web view for Windows and Mac, but there are other scenarios not yet supported.
+                This extensibility point enables them to provide such UI in a secure way
+            </summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="AcquireAuthorizationCodeAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Uri&gt; AcquireAuthorizationCodeAsync (Uri authorizationUri, Uri redirectUri);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class System.Uri&gt; AcquireAuthorizationCodeAsync(class System.Uri authorizationUri, class System.Uri redirectUri) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Identity.Client.Extensibility.ICustomWebUi.AcquireAuthorizationCodeAsync(System.Uri,System.Uri)" />
+      <MemberSignature Language="VB.NET" Value="Public Function AcquireAuthorizationCodeAsync (authorizationUri As Uri, redirectUri As Uri) As Task(Of Uri)" />
+      <MemberSignature Language="F#" Value="abstract member AcquireAuthorizationCodeAsync : Uri * Uri -&gt; System.Threading.Tasks.Task&lt;Uri&gt;" Usage="iCustomWebUi.AcquireAuthorizationCodeAsync (authorizationUri, redirectUri)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Identity.Client</AssemblyName>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;System.Uri&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="authorizationUri" Type="System.Uri" />
+        <Parameter Name="redirectUri" Type="System.Uri" />
+      </Parameters>
+      <Docs>
+        <param name="authorizationUri">
+                 URI computed by MSAL.NET that will let the UI extension
+                 navigate to the STS authorization endpoint in order to sign-in the user and have them consent
+             </param>
+        <param name="redirectUri"></param>
+        <summary>
+                 Method called by MSAL.NET to delegate the authentication code Web with with the STS
+             </summary>
+        <returns>
+                 The URI returned back from the STS authorization endpoint. This URI contains a code=CODE
+                 parameters that MSAL.NET will extract
+             </returns>
+        <remarks>
+                 The authorizationUri is crafted to leverage PKCE in order to protect the token from a man
+                 in the middle attack. Only MSAL.NET can redeem the code.
+            
+                 In the event of cancellation, the implementer should return OperationCanceledException.
+                 In the event of failure, the implementer should throw MsalCustomWebUiFailedException.
+             </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>
