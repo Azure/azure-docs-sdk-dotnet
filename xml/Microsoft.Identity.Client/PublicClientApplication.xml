@@ -1,9 +1,9 @@
 ﻿<Type Name="PublicClientApplication" FullName="Microsoft.Identity.Client.PublicClientApplication">
-  <TypeSignature Language="C#" Value="public sealed class PublicClientApplication : Microsoft.Identity.Client.ClientApplicationBase, Microsoft.Identity.Client.IPublicClientApplication" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed PublicClientApplication extends Microsoft.Identity.Client.ClientApplicationBase implements class Microsoft.Identity.Client.IClientApplicationBase, class Microsoft.Identity.Client.IPublicClientApplication" />
+  <TypeSignature Language="C#" Value="public sealed class PublicClientApplication : Microsoft.Identity.Client.ClientApplicationBase, Microsoft.Identity.Client.IByRefreshToken, Microsoft.Identity.Client.IPublicClientApplication" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit PublicClientApplication extends Microsoft.Identity.Client.ClientApplicationBase implements class Microsoft.Identity.Client.IByRefreshToken, class Microsoft.Identity.Client.IClientApplicationBase, class Microsoft.Identity.Client.IPublicClientApplication" />
   <TypeSignature Language="DocId" Value="T:Microsoft.Identity.Client.PublicClientApplication" />
-  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class PublicClientApplication&#xA;Inherits ClientApplicationBase&#xA;Implements IPublicClientApplication" />
-  <TypeSignature Language="F#" Value="type PublicClientApplication = class&#xA;    inherit ClientApplicationBase&#xA;    interface IPublicClientApplication&#xA;    interface IClientApplicationBase" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class PublicClientApplication&#xA;Inherits ClientApplicationBase&#xA;Implements IByRefreshToken, IPublicClientApplication" />
+  <TypeSignature Language="F#" Value="type PublicClientApplication = class&#xA;    inherit ClientApplicationBase&#xA;    interface IPublicClientApplication&#xA;    interface IClientApplicationBase&#xA;    interface IByRefreshToken" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.Identity.Client</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -20,6 +20,9 @@
   </Base>
   <Interfaces>
     <Interface>
+      <InterfaceName>Microsoft.Identity.Client.IByRefreshToken</InterfaceName>
+    </Interface>
+    <Interface>
       <InterfaceName>Microsoft.Identity.Client.IClientApplicationBase</InterfaceName>
     </Interface>
     <Interface>
@@ -29,22 +32,20 @@
   <Docs>
     <summary>
             Class to be used to acquire tokens in desktop or mobile applications (Desktop / UWP / Xamarin.iOS / Xamarin.Android).
-            public client applications are not trusted to safely keep application secrets, and therefore they only access Web APIs in the name of the user only 
+            public client applications are not trusted to safely keep application secrets, and therefore they only access Web APIs in the name of the user only
             (they only support public client flows). For details see https://aka.ms/msal-net-client-applications
             </summary>
     <remarks>
       <list type="bullet">
         <item>
-          <description>Contrary to <see cref="T:Microsoft.Identity.Client.ConfidentialClientApplication" />, public clients are unable to hold configuration time secrets, 
+          <description>Contrary to <see cref="T:Microsoft.Identity.Client.ConfidentialClientApplication" />, public clients are unable to hold configuration time secrets,
             and as a result have no client secret</description>
         </item>
         <item>
           <description>the redirect URL is pre-proposed by the library. It does not need to be passed in the constructor</description>
         </item>
         <item>
-          <description>.NET Core does not support UI, and therefore this platform does not provide the interactive token acquisition methods. Actually
-            until MSAL.NET supports Windows integrated authentication, Username/Password, and Device Code Flow, the .NET Core platform does not
-            provide any public client application flows</description>
+          <description>.NET Core does not support UI, and therefore this platform does not provide the interactive token acquisition methods</description>
         </item>
       </list>
     </remarks>
@@ -76,10 +77,10 @@
         <Parameter Name="clientId" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="clientId">Client ID (also known as App ID) of the application as registered in the 
+        <param name="clientId">Client ID (also known as App ID) of the application as registered in the
             application registration portal (https://aka.ms/msal-net-register-app)/. REQUIRED</param>
         <summary>
-            Consutructor of the application. It will use https://login.microsoftonline.com/common as the default authority.
+            Constructor of the application. It will use https://login.microsoftonline.com/common as the default authority.
             </summary>
         <remarks>To be added.</remarks>
       </Docs>
@@ -107,16 +108,16 @@
         <Parameter Name="authority" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="clientId">Client ID (also named Application ID) of the application as registered in the 
+        <param name="clientId">Client ID (also named Application ID) of the application as registered in the
             application registration portal (https://aka.ms/msal-net-register-app)/. REQUIRED</param>
         <param name="authority">Authority of the security token service (STS) from which MSAL.NET will acquire the tokens.
             Usual authorities are:
             <list type="bullet"><item><description><c>https://login.microsoftonline.com/tenant/</c>, where <c>tenant</c> is the tenant ID of the Azure AD tenant
             or a domain associated with this Azure AD tenant, in order to sign-in user of a specific organization only</description></item><item><description><c>https://login.microsoftonline.com/common/</c> to signing users with any work and school accounts or Microsoft personal account</description></item><item><description><c>https://login.microsoftonline.com/organizations/</c> to signing users with any work and school accounts</description></item><item><description><c>https://login.microsoftonline.com/consumers/</c> to signing users with only personal Microsoft account (live)</description></item></list>
-            Note that this setting needs to be consistent with what is declared in the application registration portal 
+            Note that this setting needs to be consistent with what is declared in the application registration portal
             </param>
         <summary>
-            Consutructor of the application.
+            Constructor of the application.
             </summary>
         <remarks>To be added.</remarks>
       </Docs>
@@ -457,7 +458,7 @@
         <param name="scopes">Scopes requested to access a protected API</param>
         <param name="account">Account to use for the interactive token acquisition. See <see cref="T:Microsoft.Identity.Client.IAccount" /> for ways to get an account</param>
         <param name="behavior">Designed interactive experience for the user.</param>
-        <param name="extraQueryParameters">This parameter will be appended as is to the query string in the HTTP authentication request to the authority. 
+        <param name="extraQueryParameters">This parameter will be appended as is to the query string in the HTTP authentication request to the authority.
             This is expected to be a string of segments of the form <c>key=value</c> separated by an ampersand character.
             The parameter can be null.</param>
         <summary>
@@ -536,7 +537,7 @@
         <param name="scopes">Scopes requested to access a protected API</param>
         <param name="loginHint">Identifier of the user. Generally in UserPrincipalName (UPN) format, e.g. <c>john.doe@contoso.com</c></param>
         <param name="behavior">Designed interactive experience for the user.</param>
-        <param name="extraQueryParameters">This parameter will be appended as is to the query string in the HTTP authentication request to the authority. 
+        <param name="extraQueryParameters">This parameter will be appended as is to the query string in the HTTP authentication request to the authority.
             This is expected to be a string of segments of the form <c>key=value</c> separated by an ampersand character.
             The parameter can be null.</param>
         <summary>
@@ -618,7 +619,7 @@
         <param name="scopes">Scopes requested to access a protected API</param>
         <param name="account">Account to use for the interactive token acquisition. See <see cref="T:Microsoft.Identity.Client.IAccount" /> for ways to get an account</param>
         <param name="behavior">Designed interactive experience for the user.</param>
-        <param name="extraQueryParameters">This parameter will be appended as is to the query string in the HTTP authentication request to the authority. 
+        <param name="extraQueryParameters">This parameter will be appended as is to the query string in the HTTP authentication request to the authority.
             This is expected to be a string of segments of the form <c>key=value</c> separated by an ampersand character.
             The parameter can be null.</param>
         <param name="parent">Object containing a reference to the parent window/activity. REQUIRED for Xamarin.Android only.</param>
@@ -701,7 +702,7 @@
         <param name="scopes">Scopes requested to access a protected API</param>
         <param name="loginHint">Identifier of the user. Generally in UserPrincipalName (UPN) format, e.g. <c>john.doe@contoso.com</c></param>
         <param name="behavior">Designed interactive experience for the user.</param>
-        <param name="extraQueryParameters">This parameter will be appended as is to the query string in the HTTP authentication request to the authority. 
+        <param name="extraQueryParameters">This parameter will be appended as is to the query string in the HTTP authentication request to the authority.
             This is expected to be a string of segments of the form <c>key=value</c> separated by an ampersand character.
             The parameter can be null.</param>
         <param name="parent">Object containing a reference to the parent window/activity. REQUIRED for Xamarin.Android only.</param>
@@ -789,7 +790,7 @@
         <param name="scopes">Scopes requested to access a protected API</param>
         <param name="account">Account to use for the interactive token acquisition. See <see cref="T:Microsoft.Identity.Client.IAccount" /> for ways to get an account</param>
         <param name="behavior">Designed interactive experience for the user.</param>
-        <param name="extraQueryParameters">This parameter will be appended as is to the query string in the HTTP authentication request to the authority. 
+        <param name="extraQueryParameters">This parameter will be appended as is to the query string in the HTTP authentication request to the authority.
             This is expected to be a string of segments of the form <c>key=value</c> separated by an ampersand character.
             The parameter can be null.</param>
         <param name="extraScopesToConsent">Scopes that you can request the end user to consent upfront, in addition to the scopes for the protected Web API
@@ -880,7 +881,7 @@
         <param name="scopes">Scopes requested to access a protected API</param>
         <param name="loginHint">Identifier of the user. Generally in UserPrincipalName (UPN) format, e.g. <c>john.doe@contoso.com</c></param>
         <param name="behavior">Designed interactive experience for the user.</param>
-        <param name="extraQueryParameters">This parameter will be appended as is to the query string in the HTTP authentication request to the authority. 
+        <param name="extraQueryParameters">This parameter will be appended as is to the query string in the HTTP authentication request to the authority.
             This is expected to be a string of segments of the form <c>key=value</c> separated by an ampersand character.
             The parameter can be null.</param>
         <param name="extraScopesToConsent">Scopes that you can request the end user to consent upfront, in addition to the scopes for the protected Web API
@@ -974,7 +975,7 @@
         <param name="scopes">Scopes requested to access a protected API</param>
         <param name="account">Account to use for the interactive token acquisition. See <see cref="T:Microsoft.Identity.Client.IAccount" /> for ways to get an account</param>
         <param name="behavior">Designed interactive experience for the user.</param>
-        <param name="extraQueryParameters">This parameter will be appended as is to the query string in the HTTP authentication request to the authority. 
+        <param name="extraQueryParameters">This parameter will be appended as is to the query string in the HTTP authentication request to the authority.
             This is expected to be a string of segments of the form <c>key=value</c> separated by an ampersand character.
             The parameter can be null.</param>
         <param name="extraScopesToConsent">scopes that you can request the end user to consent upfront, in addition to the scopes for the protected Web API
@@ -1069,7 +1070,7 @@
         <param name="scopes">Scopes requested to access a protected API</param>
         <param name="loginHint">Identifier of the user. Generally in UserPrincipalName (UPN) format, e.g. <c>john.doe@contoso.com</c></param>
         <param name="behavior">Designed interactive experience for the user.</param>
-        <param name="extraQueryParameters">This parameter will be appended as is to the query string in the HTTP authentication request to the authority. 
+        <param name="extraQueryParameters">This parameter will be appended as is to the query string in the HTTP authentication request to the authority.
             This is expected to be a string of segments of the form <c>key=value</c> separated by an ampersand character.
             The parameter can be null.</param>
         <param name="extraScopesToConsent">scopes that you can request the end user to consent upfront, in addition to the scopes for the protected Web API
@@ -1151,7 +1152,7 @@
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="scopes" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" Index="0" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="scopes" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" Index="0" FrameworkAlternate="azure-dotnet;azure-dotnet-preview" />
       </Parameters>
       <Docs>
         <param name="scopes">Scopes requested to access a protected API</param>
@@ -1192,8 +1193,8 @@
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="scopes" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" Index="0" FrameworkAlternate="azure-dotnet" />
-        <Parameter Name="username" Type="System.String" Index="1" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="scopes" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" Index="0" FrameworkAlternate="azure-dotnet;azure-dotnet-preview" />
+        <Parameter Name="username" Type="System.String" Index="1" FrameworkAlternate="azure-dotnet;azure-dotnet-preview" />
       </Parameters>
       <Docs>
         <param name="scopes">Scopes requested to access a protected API</param>
@@ -1272,9 +1273,9 @@
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="scopes" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" Index="0" FrameworkAlternate="azure-dotnet" />
-        <Parameter Name="username" Type="System.String" Index="1" FrameworkAlternate="azure-dotnet" />
-        <Parameter Name="securePassword" Type="System.Security.SecureString" Index="2" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="scopes" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" Index="0" FrameworkAlternate="azure-dotnet;azure-dotnet-preview" />
+        <Parameter Name="username" Type="System.String" Index="1" FrameworkAlternate="azure-dotnet;azure-dotnet-preview" />
+        <Parameter Name="securePassword" Type="System.Security.SecureString" Index="2" FrameworkAlternate="azure-dotnet;azure-dotnet-preview" />
       </Parameters>
       <Docs>
         <param name="scopes">Scopes requested to access a protected API</param>
@@ -1307,13 +1308,13 @@
         <AssemblyVersion>3.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
-        <Attribute FrameworkAlternate="azure-dotnet">
+        <Attribute>
           <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
         </Attribute>
-        <Attribute FrameworkAlternate="">
+        <Attribute FrameworkAlternate="azure-dotnet">
           <AttributeName>System.Obsolete("Use overload with SecureString instead (See https://aka.ms/msal-net-up)", true)</AttributeName>
         </Attribute>
-        <Attribute FrameworkAlternate="azure-dotnet">
+        <Attribute FrameworkAlternate="azure-dotnet-preview">
           <AttributeName>System.Obsolete("Use overload with SecureString instead (See https://aka.ms/msal-net-3-breaking-changes and https://aka.ms/msal-net-up)", true)</AttributeName>
         </Attribute>
       </Attributes>
@@ -1321,9 +1322,9 @@
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="scopes" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" Index="0" FrameworkAlternate="azure-dotnet" />
-        <Parameter Name="username" Type="System.String" Index="1" FrameworkAlternate="azure-dotnet" />
-        <Parameter Name="password" Type="System.String" Index="2" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="scopes" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" Index="0" FrameworkAlternate="azure-dotnet;azure-dotnet-preview" />
+        <Parameter Name="username" Type="System.String" Index="1" FrameworkAlternate="azure-dotnet;azure-dotnet-preview" />
+        <Parameter Name="password" Type="System.String" Index="2" FrameworkAlternate="azure-dotnet;azure-dotnet-preview" />
       </Parameters>
       <Docs>
         <param name="scopes">Scopes requested to access a protected API</param>
@@ -1355,7 +1356,7 @@
         <AssemblyVersion>3.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
-        <Attribute FrameworkAlternate="azure-dotnet">
+        <Attribute>
           <AttributeName>System.CLSCompliant(false)</AttributeName>
         </Attribute>
       </Attributes>
@@ -1459,8 +1460,8 @@
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="scopes" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" Index="0" FrameworkAlternate="azure-dotnet" />
-        <Parameter Name="deviceCodeResultCallback" Type="System.Func&lt;Microsoft.Identity.Client.DeviceCodeResult,System.Threading.Tasks.Task&gt;" Index="1" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="scopes" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" Index="0" FrameworkAlternate="azure-dotnet;azure-dotnet-preview" />
+        <Parameter Name="deviceCodeResultCallback" Type="System.Func&lt;Microsoft.Identity.Client.DeviceCodeResult,System.Threading.Tasks.Task&gt;" Index="1" FrameworkAlternate="azure-dotnet;azure-dotnet-preview" />
       </Parameters>
       <Docs>
         <param name="scopes">Scopes requested to access a protected API</param>
@@ -1501,9 +1502,9 @@
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="scopes" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" Index="0" FrameworkAlternate="azure-dotnet" />
-        <Parameter Name="deviceCodeResultCallback" Type="System.Func&lt;Microsoft.Identity.Client.DeviceCodeResult,System.Threading.Tasks.Task&gt;" Index="1" FrameworkAlternate="azure-dotnet" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="2" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="scopes" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" Index="0" FrameworkAlternate="azure-dotnet;azure-dotnet-preview" />
+        <Parameter Name="deviceCodeResultCallback" Type="System.Func&lt;Microsoft.Identity.Client.DeviceCodeResult,System.Threading.Tasks.Task&gt;" Index="1" FrameworkAlternate="azure-dotnet;azure-dotnet-preview" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="2" FrameworkAlternate="azure-dotnet;azure-dotnet-preview" />
       </Parameters>
       <Docs>
         <param name="scopes">Scopes requested to access a protected API</param>
@@ -1546,9 +1547,9 @@
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="scopes" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" Index="0" FrameworkAlternate="azure-dotnet" />
-        <Parameter Name="extraQueryParameters" Type="System.String" Index="1" FrameworkAlternate="azure-dotnet" />
-        <Parameter Name="deviceCodeResultCallback" Type="System.Func&lt;Microsoft.Identity.Client.DeviceCodeResult,System.Threading.Tasks.Task&gt;" Index="2" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="scopes" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" Index="0" FrameworkAlternate="azure-dotnet;azure-dotnet-preview" />
+        <Parameter Name="extraQueryParameters" Type="System.String" Index="1" FrameworkAlternate="azure-dotnet;azure-dotnet-preview" />
+        <Parameter Name="deviceCodeResultCallback" Type="System.Func&lt;Microsoft.Identity.Client.DeviceCodeResult,System.Threading.Tasks.Task&gt;" Index="2" FrameworkAlternate="azure-dotnet;azure-dotnet-preview" />
       </Parameters>
       <Docs>
         <param name="scopes">Scopes requested to access a protected API</param>
@@ -1592,10 +1593,10 @@
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="scopes" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" Index="0" FrameworkAlternate="azure-dotnet" />
-        <Parameter Name="extraQueryParameters" Type="System.String" Index="1" FrameworkAlternate="azure-dotnet" />
-        <Parameter Name="deviceCodeResultCallback" Type="System.Func&lt;Microsoft.Identity.Client.DeviceCodeResult,System.Threading.Tasks.Task&gt;" Index="2" FrameworkAlternate="azure-dotnet" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="3" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="scopes" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" Index="0" FrameworkAlternate="azure-dotnet;azure-dotnet-preview" />
+        <Parameter Name="extraQueryParameters" Type="System.String" Index="1" FrameworkAlternate="azure-dotnet;azure-dotnet-preview" />
+        <Parameter Name="deviceCodeResultCallback" Type="System.Func&lt;Microsoft.Identity.Client.DeviceCodeResult,System.Threading.Tasks.Task&gt;" Index="2" FrameworkAlternate="azure-dotnet;azure-dotnet-preview" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="3" FrameworkAlternate="azure-dotnet;azure-dotnet-preview" />
       </Parameters>
       <Docs>
         <param name="scopes">Scopes requested to access a protected API</param>
