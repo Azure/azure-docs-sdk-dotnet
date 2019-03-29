@@ -17,10 +17,10 @@
   </Docs>
   <Members>
     <Member MemberName="CreateWithHttpMessagesAsync">
-      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.HttpOperationResponse&gt; CreateWithHttpMessagesAsync (string largePersonGroupId, string name = null, string userData = null, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = null, System.Threading.CancellationToken cancellationToken = null);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.HttpOperationResponse&gt; CreateWithHttpMessagesAsync(string largePersonGroupId, string name, string userData, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.CognitiveServices.Vision.Face.ILargePersonGroupOperations.CreateWithHttpMessagesAsync(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
-      <MemberSignature Language="F#" Value="abstract member CreateWithHttpMessagesAsync : string * string * string * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.HttpOperationResponse&gt;" Usage="iLargePersonGroupOperations.CreateWithHttpMessagesAsync (largePersonGroupId, name, userData, customHeaders, cancellationToken)" />
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.HttpOperationResponse&gt; CreateWithHttpMessagesAsync (string largePersonGroupId, string name = null, string userData = null, string recognitionModel = null, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = null, System.Threading.CancellationToken cancellationToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.HttpOperationResponse&gt; CreateWithHttpMessagesAsync(string largePersonGroupId, string name, string userData, string recognitionModel, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.CognitiveServices.Vision.Face.ILargePersonGroupOperations.CreateWithHttpMessagesAsync(System.String,System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
+      <MemberSignature Language="F#" Value="abstract member CreateWithHttpMessagesAsync : string * string * string * string * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.HttpOperationResponse&gt;" Usage="iLargePersonGroupOperations.CreateWithHttpMessagesAsync (largePersonGroupId, name, userData, recognitionModel, customHeaders, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.CognitiveServices.Vision.Face</AssemblyName>
@@ -33,37 +33,70 @@
         <Parameter Name="largePersonGroupId" Type="System.String" />
         <Parameter Name="name" Type="System.String" />
         <Parameter Name="userData" Type="System.String" />
+        <Parameter Name="recognitionModel" Type="System.String" />
         <Parameter Name="customHeaders" Type="System.Collections.Generic.Dictionary&lt;System.String,System.Collections.Generic.List&lt;System.String&gt;&gt;" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
         <param name="largePersonGroupId">
-            Id referencing a particular large person group.
-            </param>
+             Id referencing a particular large person group.
+             </param>
         <param name="name">
-            User defined name, maximum length is 128.
-            </param>
+             User defined name, maximum length is 128.
+             </param>
         <param name="userData">
-            User specified data. Length should not exceed 16KB.
-            </param>
+             User specified data. Length should not exceed 16KB.
+             </param>
+        <param name="recognitionModel">
+             Possible values include: 'recognition_01', 'recognition_02'
+             </param>
         <param name="customHeaders">
-            The headers that will be added to request.
-            </param>
+             The headers that will be added to request.
+             </param>
         <param name="cancellationToken">
-            The cancellation token.
-            </param>
+             The cancellation token.
+             </param>
         <summary>
-            Create a new large person group with specified largePersonGroupId,
-            name and user-provided userData.
-            </summary>
+             Create a new large person group with user-specified
+             largePersonGroupId, name, an optional userData and
+             recognitionModel.
+             &lt;br /&gt; A large person group is the container of the uploaded
+             person data, including face images and face recognition feature,
+             and up to 1,000,000 people.
+             &lt;br /&gt; After creation, use [LargePersonGroup Person -
+             Create](/docs/services/563879b61984550e40cbbe8d/operations/599adcba3a7b9412a4d53f40)
+             to add person into the group, and call [LargePersonGroup -
+             Train](/docs/services/563879b61984550e40cbbe8d/operations/599ae2d16ac60f11b48b5aa4)
+             to get this group ready for [Face -
+             Identify](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395239).
+             &lt;br /&gt; The person face, image, and userData will be stored on
+             server until [LargePersonGroup Person -
+             Delete](/docs/services/563879b61984550e40cbbe8d/operations/599ade5c6ac60f11b48b5aa2)
+             or [LargePersonGroup -
+             Delete](/docs/services/563879b61984550e40cbbe8d/operations/599adc216ac60f11b48b5a9f)
+             is called.
+             &lt;br /&gt;
+             * Free-tier subscription quota: 1,000 large person groups.
+             * S0-tier subscription quota: 1,000,000 large person groups.
+             &lt;br /&gt;
+             'recognitionModel' should be specified to associate with this large
+             person group. The default value for 'recognitionModel' is
+             'recognition_01', if the latest model needed, please explicitly
+             specify the model you need in this parameter. New faces that are
+             added to an existing large person group will use the recognition
+             model that's already associated with the collection. Existing face
+             features in a large person group can't be updated to features
+             extracted by another version of recognition model.
+            
+             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:Microsoft.Azure.CognitiveServices.Vision.Face.Models.APIErrorException">
-            Thrown when the operation returned an invalid status code
-            </exception>
+             Thrown when the operation returned an invalid status code
+             </exception>
         <exception cref="T:Microsoft.Rest.ValidationException">
-            Thrown when a required parameter is null
-            </exception>
+             Thrown when a required parameter is null
+             </exception>
       </Docs>
     </Member>
     <Member MemberName="DeleteWithHttpMessagesAsync">
@@ -154,10 +187,10 @@
       </Docs>
     </Member>
     <Member MemberName="GetWithHttpMessagesAsync">
-      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.HttpOperationResponse&lt;Microsoft.Azure.CognitiveServices.Vision.Face.Models.LargePersonGroup&gt;&gt; GetWithHttpMessagesAsync (string largePersonGroupId, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = null, System.Threading.CancellationToken cancellationToken = null);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.HttpOperationResponse`1&lt;class Microsoft.Azure.CognitiveServices.Vision.Face.Models.LargePersonGroup&gt;&gt; GetWithHttpMessagesAsync(string largePersonGroupId, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.CognitiveServices.Vision.Face.ILargePersonGroupOperations.GetWithHttpMessagesAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
-      <MemberSignature Language="F#" Value="abstract member GetWithHttpMessagesAsync : string * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.HttpOperationResponse&lt;Microsoft.Azure.CognitiveServices.Vision.Face.Models.LargePersonGroup&gt;&gt;" Usage="iLargePersonGroupOperations.GetWithHttpMessagesAsync (largePersonGroupId, customHeaders, cancellationToken)" />
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.HttpOperationResponse&lt;Microsoft.Azure.CognitiveServices.Vision.Face.Models.LargePersonGroup&gt;&gt; GetWithHttpMessagesAsync (string largePersonGroupId, Nullable&lt;bool&gt; returnRecognitionModel = false, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = null, System.Threading.CancellationToken cancellationToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.HttpOperationResponse`1&lt;class Microsoft.Azure.CognitiveServices.Vision.Face.Models.LargePersonGroup&gt;&gt; GetWithHttpMessagesAsync(string largePersonGroupId, valuetype System.Nullable`1&lt;bool&gt; returnRecognitionModel, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.CognitiveServices.Vision.Face.ILargePersonGroupOperations.GetWithHttpMessagesAsync(System.String,System.Nullable{System.Boolean},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
+      <MemberSignature Language="F#" Value="abstract member GetWithHttpMessagesAsync : string * Nullable&lt;bool&gt; * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.HttpOperationResponse&lt;Microsoft.Azure.CognitiveServices.Vision.Face.Models.LargePersonGroup&gt;&gt;" Usage="iLargePersonGroupOperations.GetWithHttpMessagesAsync (largePersonGroupId, returnRecognitionModel, customHeaders, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.CognitiveServices.Vision.Face</AssemblyName>
@@ -168,41 +201,51 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="largePersonGroupId" Type="System.String" />
+        <Parameter Name="returnRecognitionModel" Type="System.Nullable&lt;System.Boolean&gt;" />
         <Parameter Name="customHeaders" Type="System.Collections.Generic.Dictionary&lt;System.String,System.Collections.Generic.List&lt;System.String&gt;&gt;" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
         <param name="largePersonGroupId">
-            Id referencing a particular large person group.
-            </param>
+             Id referencing a particular large person group.
+             </param>
+        <param name="returnRecognitionModel">
+             A value indicating whether the operation should return
+             'recognitionModel' in response.
+             </param>
         <param name="customHeaders">
-            The headers that will be added to request.
-            </param>
+             The headers that will be added to request.
+             </param>
         <param name="cancellationToken">
-            The cancellation token.
-            </param>
+             The cancellation token.
+             </param>
         <summary>
-            Retrieve the information of a large person group, including its
-            name and userData.
-            </summary>
+             Retrieve the information of a large person group, including its
+             name, userData and recognitionModel. This API returns large person
+             group information only, use [LargePersonGroup Person -
+             List](/docs/services/563879b61984550e40cbbe8d/operations/599adda06ac60f11b48b5aa1)
+             instead to retrieve person information under the large person
+             group.
+            
+             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:Microsoft.Azure.CognitiveServices.Vision.Face.Models.APIErrorException">
-            Thrown when the operation returned an invalid status code
-            </exception>
+             Thrown when the operation returned an invalid status code
+             </exception>
         <exception cref="T:Microsoft.Rest.SerializationException">
-            Thrown when unable to deserialize the response
-            </exception>
+             Thrown when unable to deserialize the response
+             </exception>
         <exception cref="T:Microsoft.Rest.ValidationException">
-            Thrown when a required parameter is null
-            </exception>
+             Thrown when a required parameter is null
+             </exception>
       </Docs>
     </Member>
     <Member MemberName="ListWithHttpMessagesAsync">
-      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.HttpOperationResponse&lt;System.Collections.Generic.IList&lt;Microsoft.Azure.CognitiveServices.Vision.Face.Models.LargePersonGroup&gt;&gt;&gt; ListWithHttpMessagesAsync (string start = null, Nullable&lt;int&gt; top = 1000, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = null, System.Threading.CancellationToken cancellationToken = null);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.HttpOperationResponse`1&lt;class System.Collections.Generic.IList`1&lt;class Microsoft.Azure.CognitiveServices.Vision.Face.Models.LargePersonGroup&gt;&gt;&gt; ListWithHttpMessagesAsync(string start, valuetype System.Nullable`1&lt;int32&gt; top, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.CognitiveServices.Vision.Face.ILargePersonGroupOperations.ListWithHttpMessagesAsync(System.String,System.Nullable{System.Int32},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
-      <MemberSignature Language="F#" Value="abstract member ListWithHttpMessagesAsync : string * Nullable&lt;int&gt; * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.HttpOperationResponse&lt;System.Collections.Generic.IList&lt;Microsoft.Azure.CognitiveServices.Vision.Face.Models.LargePersonGroup&gt;&gt;&gt;" Usage="iLargePersonGroupOperations.ListWithHttpMessagesAsync (start, top, customHeaders, cancellationToken)" />
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.HttpOperationResponse&lt;System.Collections.Generic.IList&lt;Microsoft.Azure.CognitiveServices.Vision.Face.Models.LargePersonGroup&gt;&gt;&gt; ListWithHttpMessagesAsync (string start = null, Nullable&lt;int&gt; top = 1000, Nullable&lt;bool&gt; returnRecognitionModel = false, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = null, System.Threading.CancellationToken cancellationToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.HttpOperationResponse`1&lt;class System.Collections.Generic.IList`1&lt;class Microsoft.Azure.CognitiveServices.Vision.Face.Models.LargePersonGroup&gt;&gt;&gt; ListWithHttpMessagesAsync(string start, valuetype System.Nullable`1&lt;int32&gt; top, valuetype System.Nullable`1&lt;bool&gt; returnRecognitionModel, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.CognitiveServices.Vision.Face.ILargePersonGroupOperations.ListWithHttpMessagesAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
+      <MemberSignature Language="F#" Value="abstract member ListWithHttpMessagesAsync : string * Nullable&lt;int&gt; * Nullable&lt;bool&gt; * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.HttpOperationResponse&lt;System.Collections.Generic.IList&lt;Microsoft.Azure.CognitiveServices.Vision.Face.Models.LargePersonGroup&gt;&gt;&gt;" Usage="iLargePersonGroupOperations.ListWithHttpMessagesAsync (start, top, returnRecognitionModel, customHeaders, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.CognitiveServices.Vision.Face</AssemblyName>
@@ -214,37 +257,60 @@
       <Parameters>
         <Parameter Name="start" Type="System.String" />
         <Parameter Name="top" Type="System.Nullable&lt;System.Int32&gt;" />
+        <Parameter Name="returnRecognitionModel" Type="System.Nullable&lt;System.Boolean&gt;" />
         <Parameter Name="customHeaders" Type="System.Collections.Generic.Dictionary&lt;System.String,System.Collections.Generic.List&lt;System.String&gt;&gt;" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
         <param name="start">
-            List large person groups from the least largePersonGroupId greater
-            than the "start".
-            </param>
+             List large person groups from the least largePersonGroupId greater
+             than the "start".
+             </param>
         <param name="top">
-            The number of large person groups to list.
-            </param>
+             The number of large person groups to list.
+             </param>
+        <param name="returnRecognitionModel">
+             A value indicating whether the operation should return
+             'recognitionModel' in response.
+             </param>
         <param name="customHeaders">
-            The headers that will be added to request.
-            </param>
+             The headers that will be added to request.
+             </param>
         <param name="cancellationToken">
-            The cancellation token.
-            </param>
+             The cancellation token.
+             </param>
         <summary>
-            List large person groups and their information.
-            </summary>
+             List all existing large person groups’s largePersonGroupId, name,
+             userData and recognitionModel.&lt;br /&gt;
+             * Large person groups are stored in alphabetical order of
+             largePersonGroupId.
+             * "start" parameter (string, optional) is a user-provided
+             largePersonGroupId value that returned entries have larger ids by
+             string comparison. "start" set to empty to indicate return from the
+             first item.
+             * "top" parameter (int, optional) specifies the number of entries
+             to return. A maximal of 1000 entries can be returned in one call.
+             To fetch more, you can specify "start" with the last retuned
+             entry’s Id of the current call.
+             &lt;br /&gt;
+             For example, total 5 large person groups: "group1", ..., "group5".
+             &lt;br /&gt; "start=&amp;top=" will return all 5 groups.
+             &lt;br /&gt; "start=&amp;top=2" will return "group1", "group2".
+             &lt;br /&gt; "start=group2&amp;top=3" will return "group3",
+             "group4", "group5".
+            
+             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:Microsoft.Azure.CognitiveServices.Vision.Face.Models.APIErrorException">
-            Thrown when the operation returned an invalid status code
-            </exception>
+             Thrown when the operation returned an invalid status code
+             </exception>
         <exception cref="T:Microsoft.Rest.SerializationException">
-            Thrown when unable to deserialize the response
-            </exception>
+             Thrown when unable to deserialize the response
+             </exception>
         <exception cref="T:Microsoft.Rest.ValidationException">
-            Thrown when a required parameter is null
-            </exception>
+             Thrown when a required parameter is null
+             </exception>
       </Docs>
     </Member>
     <Member MemberName="TrainWithHttpMessagesAsync">
