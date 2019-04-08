@@ -38,7 +38,7 @@
         <Parameter Name="maxSizeInBytes" Type="System.Int64" />
       </Parameters>
       <Docs>
-        <param name="maxSizeInBytes">The maximum size of the serialized batch message.</param>
+        <param name="maxSizeInBytes">The maximum size of the serialized batch message, a value of -1 indicates the allowed buffer size is unknown.</param>
         <summary>
             Creates a batch with the specified maximum size in bytes.
             </summary>
@@ -142,6 +142,11 @@
             the EventData object. It is possible that the application may get exceptions from the send call
             if the batched EventData objects cannot be sent in a batch. For example, they contain different
             <see cref="P:Microsoft.ServiceBus.Messaging.EventData.PartitionKey" /> values.
+            For an unknown buffer size (indicated by a -1 for MaxSize during construction) special handling is done:
+            1.  Small messages are added up to a 256k limit, which will work for both "Basic" and "Standard" Event
+                Hub namespace types.
+            2.  If the first message is &gt; 256k then it is allowed up to a 4MB maximum size with no further messages
+                allowed.  The SendBatch will fail if the EventHub namespace doesn't support that size.
             </remarks>
         <exception cref="T:System.ArgumentNullException">Thrown when the EventData is null.</exception>
         <exception cref="T:System.ObjectDisposedException">Thrown when the batch is already disposed.</exception>
