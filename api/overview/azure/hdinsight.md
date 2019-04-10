@@ -485,9 +485,11 @@ while (true)
 
 Use the Azure HDInsight jobs SDK for .NET to create, manage, and monitor jobs on a Hadoop cluster.
 
+### SDK Installation
+
 Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Management.HDInsight.Job) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
 
-### Visual Studio Package Manager
+#### Visual Studio Package Manager
 
 ```powershell
 Install-Package Microsoft.Azure.Management.HDInsight.Job
