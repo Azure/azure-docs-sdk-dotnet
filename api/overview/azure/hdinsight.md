@@ -3,9 +3,6 @@ title: Azure HDInsight SDK for .NET
 description: Reference for Azure HDInsight SDK for .NET
 ms.date: 04/10/2019
 ms.topic: reference
-author: tylerfox
-ms.author: tyfox
-ms.reviewer: jasonh
 ms.service: hdinsight
 ---
 
