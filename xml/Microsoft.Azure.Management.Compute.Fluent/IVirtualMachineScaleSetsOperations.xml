@@ -256,7 +256,10 @@
             </param>
         <summary>
             Perform maintenance on one or more virtual machines in a VM scale
-            set.
+            set. Operation on instances which are not eligible for perform
+            maintenance will be failed. Please refer to best practices for more
+            details:
+            https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-maintenance-notifications
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
@@ -427,10 +430,10 @@
       </Docs>
     </Member>
     <Member MemberName="BeginReimageWithHttpMessagesAsync">
-      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&gt; BeginReimageWithHttpMessagesAsync (string resourceGroupName, string vmScaleSetName, System.Collections.Generic.IList&lt;string&gt; instanceIds = null, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = null, System.Threading.CancellationToken cancellationToken = null);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.AzureOperationResponse&gt; BeginReimageWithHttpMessagesAsync(string resourceGroupName, string vmScaleSetName, class System.Collections.Generic.IList`1&lt;string&gt; instanceIds, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.Compute.Fluent.IVirtualMachineScaleSetsOperations.BeginReimageWithHttpMessagesAsync(System.String,System.String,System.Collections.Generic.IList{System.String},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
-      <MemberSignature Language="F#" Value="abstract member BeginReimageWithHttpMessagesAsync : string * string * System.Collections.Generic.IList&lt;string&gt; * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&gt;" Usage="iVirtualMachineScaleSetsOperations.BeginReimageWithHttpMessagesAsync (resourceGroupName, vmScaleSetName, instanceIds, customHeaders, cancellationToken)" />
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&gt; BeginReimageWithHttpMessagesAsync (string resourceGroupName, string vmScaleSetName, Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetReimageParametersInner vmScaleSetReimageInput = null, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = null, System.Threading.CancellationToken cancellationToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.AzureOperationResponse&gt; BeginReimageWithHttpMessagesAsync(string resourceGroupName, string vmScaleSetName, class Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetReimageParametersInner vmScaleSetReimageInput, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.Compute.Fluent.IVirtualMachineScaleSetsOperations.BeginReimageWithHttpMessagesAsync(System.String,System.String,Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetReimageParametersInner,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
+      <MemberSignature Language="F#" Value="abstract member BeginReimageWithHttpMessagesAsync : string * string * Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetReimageParametersInner * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&gt;" Usage="iVirtualMachineScaleSetsOperations.BeginReimageWithHttpMessagesAsync (resourceGroupName, vmScaleSetName, vmScaleSetReimageInput, customHeaders, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Management.Compute.Fluent</AssemblyName>
@@ -442,7 +445,7 @@
       <Parameters>
         <Parameter Name="resourceGroupName" Type="System.String" />
         <Parameter Name="vmScaleSetName" Type="System.String" />
-        <Parameter Name="instanceIds" Type="System.Collections.Generic.IList&lt;System.String&gt;" />
+        <Parameter Name="vmScaleSetReimageInput" Type="Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetReimageParametersInner" />
         <Parameter Name="customHeaders" Type="System.Collections.Generic.Dictionary&lt;System.String,System.Collections.Generic.List&lt;System.String&gt;&gt;" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
@@ -453,10 +456,8 @@
         <param name="vmScaleSetName">
             The name of the VM scale set.
             </param>
-        <param name="instanceIds">
-            The virtual machine scale set instance ids. Omitting the virtual
-            machine scale set instance ids will result in the operation being
-            performed on all virtual machines in the virtual machine scale set.
+        <param name="vmScaleSetReimageInput">
+            Parameters for Reimaging VM ScaleSet.
             </param>
         <param name="customHeaders">
             The headers that will be added to request.
@@ -466,7 +467,9 @@
             </param>
         <summary>
             Reimages (upgrade the operating system) one or more virtual
-            machines in a VM scale set.
+            machines in a VM scale set which don't have a ephemeral OS disk,
+            for virtual machines who have a ephemeral OS disk the virtual
+            machine is reset to initial state.
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
@@ -631,10 +634,10 @@
       </Docs>
     </Member>
     <Member MemberName="BeginUpdateWithHttpMessagesAsync">
-      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetInner&gt;&gt; BeginUpdateWithHttpMessagesAsync (string resourceGroupName, string vmScaleSetName, Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetUpdate parameters, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = null, System.Threading.CancellationToken cancellationToken = null);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.AzureOperationResponse`1&lt;class Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetInner&gt;&gt; BeginUpdateWithHttpMessagesAsync(string resourceGroupName, string vmScaleSetName, class Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetUpdate parameters, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.Compute.Fluent.IVirtualMachineScaleSetsOperations.BeginUpdateWithHttpMessagesAsync(System.String,System.String,Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetUpdate,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
-      <MemberSignature Language="F#" Value="abstract member BeginUpdateWithHttpMessagesAsync : string * string * Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetUpdate * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetInner&gt;&gt;" Usage="iVirtualMachineScaleSetsOperations.BeginUpdateWithHttpMessagesAsync (resourceGroupName, vmScaleSetName, parameters, customHeaders, cancellationToken)" />
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetInner&gt;&gt; BeginUpdateWithHttpMessagesAsync (string resourceGroupName, string vmScaleSetName, Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetUpdateInner parameters, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = null, System.Threading.CancellationToken cancellationToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.AzureOperationResponse`1&lt;class Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetInner&gt;&gt; BeginUpdateWithHttpMessagesAsync(string resourceGroupName, string vmScaleSetName, class Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetUpdateInner parameters, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.Compute.Fluent.IVirtualMachineScaleSetsOperations.BeginUpdateWithHttpMessagesAsync(System.String,System.String,Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetUpdateInner,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
+      <MemberSignature Language="F#" Value="abstract member BeginUpdateWithHttpMessagesAsync : string * string * Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetUpdateInner * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetInner&gt;&gt;" Usage="iVirtualMachineScaleSetsOperations.BeginUpdateWithHttpMessagesAsync (resourceGroupName, vmScaleSetName, parameters, customHeaders, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Management.Compute.Fluent</AssemblyName>
@@ -646,7 +649,7 @@
       <Parameters>
         <Parameter Name="resourceGroupName" Type="System.String" />
         <Parameter Name="vmScaleSetName" Type="System.String" />
-        <Parameter Name="parameters" Type="Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetUpdate" />
+        <Parameter Name="parameters" Type="Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetUpdateInner" />
         <Parameter Name="customHeaders" Type="System.Collections.Generic.Dictionary&lt;System.String,System.Collections.Generic.List&lt;System.String&gt;&gt;" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
@@ -1436,7 +1439,10 @@
             </param>
         <summary>
             Perform maintenance on one or more virtual machines in a VM scale
-            set.
+            set. Operation on instances which are not eligible for perform
+            maintenance will be failed. Please refer to best practices for more
+            details:
+            https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-maintenance-notifications
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
@@ -1607,10 +1613,10 @@
       </Docs>
     </Member>
     <Member MemberName="ReimageWithHttpMessagesAsync">
-      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&gt; ReimageWithHttpMessagesAsync (string resourceGroupName, string vmScaleSetName, System.Collections.Generic.IList&lt;string&gt; instanceIds = null, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = null, System.Threading.CancellationToken cancellationToken = null);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.AzureOperationResponse&gt; ReimageWithHttpMessagesAsync(string resourceGroupName, string vmScaleSetName, class System.Collections.Generic.IList`1&lt;string&gt; instanceIds, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.Compute.Fluent.IVirtualMachineScaleSetsOperations.ReimageWithHttpMessagesAsync(System.String,System.String,System.Collections.Generic.IList{System.String},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
-      <MemberSignature Language="F#" Value="abstract member ReimageWithHttpMessagesAsync : string * string * System.Collections.Generic.IList&lt;string&gt; * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&gt;" Usage="iVirtualMachineScaleSetsOperations.ReimageWithHttpMessagesAsync (resourceGroupName, vmScaleSetName, instanceIds, customHeaders, cancellationToken)" />
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&gt; ReimageWithHttpMessagesAsync (string resourceGroupName, string vmScaleSetName, Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetReimageParametersInner vmScaleSetReimageInput = null, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = null, System.Threading.CancellationToken cancellationToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.AzureOperationResponse&gt; ReimageWithHttpMessagesAsync(string resourceGroupName, string vmScaleSetName, class Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetReimageParametersInner vmScaleSetReimageInput, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.Compute.Fluent.IVirtualMachineScaleSetsOperations.ReimageWithHttpMessagesAsync(System.String,System.String,Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetReimageParametersInner,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
+      <MemberSignature Language="F#" Value="abstract member ReimageWithHttpMessagesAsync : string * string * Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetReimageParametersInner * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&gt;" Usage="iVirtualMachineScaleSetsOperations.ReimageWithHttpMessagesAsync (resourceGroupName, vmScaleSetName, vmScaleSetReimageInput, customHeaders, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Management.Compute.Fluent</AssemblyName>
@@ -1622,7 +1628,7 @@
       <Parameters>
         <Parameter Name="resourceGroupName" Type="System.String" />
         <Parameter Name="vmScaleSetName" Type="System.String" />
-        <Parameter Name="instanceIds" Type="System.Collections.Generic.IList&lt;System.String&gt;" />
+        <Parameter Name="vmScaleSetReimageInput" Type="Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetReimageParametersInner" />
         <Parameter Name="customHeaders" Type="System.Collections.Generic.Dictionary&lt;System.String,System.Collections.Generic.List&lt;System.String&gt;&gt;" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
@@ -1633,10 +1639,8 @@
         <param name="vmScaleSetName">
             The name of the VM scale set.
             </param>
-        <param name="instanceIds">
-            The virtual machine scale set instance ids. Omitting the virtual
-            machine scale set instance ids will result in the operation being
-            performed on all virtual machines in the virtual machine scale set.
+        <param name="vmScaleSetReimageInput">
+            Parameters for Reimaging VM ScaleSet.
             </param>
         <param name="customHeaders">
             The headers that will be added to request.
@@ -1646,7 +1650,9 @@
             </param>
         <summary>
             Reimages (upgrade the operating system) one or more virtual
-            machines in a VM scale set.
+            machines in a VM scale set which don't have a ephemeral OS disk,
+            for virtual machines who have a ephemeral OS disk the virtual
+            machine is reset to initial state.
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
@@ -1811,10 +1817,10 @@
       </Docs>
     </Member>
     <Member MemberName="UpdateWithHttpMessagesAsync">
-      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetInner&gt;&gt; UpdateWithHttpMessagesAsync (string resourceGroupName, string vmScaleSetName, Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetUpdate parameters, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = null, System.Threading.CancellationToken cancellationToken = null);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.AzureOperationResponse`1&lt;class Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetInner&gt;&gt; UpdateWithHttpMessagesAsync(string resourceGroupName, string vmScaleSetName, class Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetUpdate parameters, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.Compute.Fluent.IVirtualMachineScaleSetsOperations.UpdateWithHttpMessagesAsync(System.String,System.String,Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetUpdate,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
-      <MemberSignature Language="F#" Value="abstract member UpdateWithHttpMessagesAsync : string * string * Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetUpdate * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetInner&gt;&gt;" Usage="iVirtualMachineScaleSetsOperations.UpdateWithHttpMessagesAsync (resourceGroupName, vmScaleSetName, parameters, customHeaders, cancellationToken)" />
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetInner&gt;&gt; UpdateWithHttpMessagesAsync (string resourceGroupName, string vmScaleSetName, Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetUpdateInner parameters, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = null, System.Threading.CancellationToken cancellationToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.AzureOperationResponse`1&lt;class Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetInner&gt;&gt; UpdateWithHttpMessagesAsync(string resourceGroupName, string vmScaleSetName, class Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetUpdateInner parameters, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.Compute.Fluent.IVirtualMachineScaleSetsOperations.UpdateWithHttpMessagesAsync(System.String,System.String,Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetUpdateInner,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
+      <MemberSignature Language="F#" Value="abstract member UpdateWithHttpMessagesAsync : string * string * Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetUpdateInner * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetInner&gt;&gt;" Usage="iVirtualMachineScaleSetsOperations.UpdateWithHttpMessagesAsync (resourceGroupName, vmScaleSetName, parameters, customHeaders, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Management.Compute.Fluent</AssemblyName>
@@ -1826,7 +1832,7 @@
       <Parameters>
         <Parameter Name="resourceGroupName" Type="System.String" />
         <Parameter Name="vmScaleSetName" Type="System.String" />
-        <Parameter Name="parameters" Type="Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetUpdate" />
+        <Parameter Name="parameters" Type="Microsoft.Azure.Management.Compute.Fluent.Models.VirtualMachineScaleSetUpdateInner" />
         <Parameter Name="customHeaders" Type="System.Collections.Generic.Dictionary&lt;System.String,System.Collections.Generic.List&lt;System.String&gt;&gt;" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
