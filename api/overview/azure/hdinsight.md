@@ -8,7 +8,7 @@ ms.service: hdinsight
 
 # Azure HDInsight SDK for .NET
 
-Azure HDInsight offers management and jobs SDKs for .NET that provide classes for managing your HDInsight cluster and submitting and monitoring Hadoop jobs.
+Azure HDInsight offers management and job SDKs for .NET that provide classes for managing your HDInsight cluster and submitting and monitoring Hadoop jobs.
 
 ## Management
 
@@ -476,11 +476,9 @@ while (true)
 }
 ```
 
----
-
 ## Jobs
 
-Use the Azure HDInsight jobs SDK for .NET to create, manage, and monitor jobs on a Hadoop cluster.
+Use the Azure HDInsight job SDK for .NET to create, manage, and monitor jobs on a Hadoop cluster.
 
 ### SDK Installation
 
