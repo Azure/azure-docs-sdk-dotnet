@@ -140,7 +140,11 @@ namespace HDI_SDK_Test
 
 ### Create a Cluster
 
-A new cluster can be created by calling `client.Clusters.Create()`. 
+A new cluster can be created by calling `client.Clusters.Create()`.
+
+#### Samples
+
+Code samples for creating several common types of HDInsight clusters are available: [HDInsight .NET Samples](https://github.com/Azure-Samples/hdinsight-dotnet-sdk-samples).
 
 #### Example
 
@@ -268,10 +272,6 @@ client.Clusters.Create(
     parameters
 );
 ```
-
-#### Samples
-
-Code samples for creating several common types of HDInsight clusters are also available: [HDInsight .NET Samples](https://github.com/Azure-Samples/hdinsight-dotnet-sdk-samples).
 
 ### Get Cluster Details
 
