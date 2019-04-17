@@ -26,7 +26,7 @@ From your Visual Studio project, open the Package Manager Console by clicking **
 In the Package Manager Console, execute the following commands:
 
 ```
-  Install-Package Microsoft.Azure.Management.HDInsight -Version 3.1.0-preview
+  Install-Package Microsoft.Azure.Management.HDInsight
   Install-Package Microsoft.Azure.Management.Fluent
   Install-Package Microsoft.Azure.Management.ResourceManager.Fluent
 ```
