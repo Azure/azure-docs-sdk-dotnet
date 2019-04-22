@@ -14,6 +14,8 @@
     <AssemblyVersion>2.7.0.0</AssemblyVersion>
     <AssemblyVersion>2.7.1.0</AssemblyVersion>
     <AssemblyVersion>3.0.0.0</AssemblyVersion>
+    <AssemblyVersion>3.0.5.0</AssemblyVersion>
+    <AssemblyVersion>3.0.6.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -38,28 +40,33 @@
             Abstract class containing common API methods and properties. Both <see cref="T:PublicClientApplication" /> and <see cref="T:ConfidentialClientApplication" /> 
             extend this class. For details see https://aka.ms/msal-net-client-applications
             </Summary>
+    <Summary>
+            Abstract class containing common API methods and properties. Both <see cref="T:PublicClientApplication" /> and <see cref="T:ConfidentialClientApplication" />
+            extend this class. For details see https://aka.ms/msal-net-client-applications
+            </Summary>
   </Docs>
   <Members>
     <Member MemberName="AcquireTokenSilent">
-      <MemberSignature Language="C#" Value="public Microsoft.Identity.Client.ApiConfig.AcquireTokenSilentParameterBuilder AcquireTokenSilent (System.Collections.Generic.IEnumerable&lt;string&gt; scopes, Microsoft.Identity.Client.IAccount account = null);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Identity.Client.ApiConfig.AcquireTokenSilentParameterBuilder AcquireTokenSilent(class System.Collections.Generic.IEnumerable`1&lt;string&gt; scopes, class Microsoft.Identity.Client.IAccount account) cil managed" />
+      <MemberSignature Language="C#" Value="public Microsoft.Identity.Client.AcquireTokenSilentParameterBuilder AcquireTokenSilent (System.Collections.Generic.IEnumerable&lt;string&gt; scopes, Microsoft.Identity.Client.IAccount account);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Identity.Client.AcquireTokenSilentParameterBuilder AcquireTokenSilent(class System.Collections.Generic.IEnumerable`1&lt;string&gt; scopes, class Microsoft.Identity.Client.IAccount account) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Identity.Client.ClientApplicationBase.AcquireTokenSilent(System.Collections.Generic.IEnumerable{System.String},Microsoft.Identity.Client.IAccount)" />
-      <MemberSignature Language="VB.NET" Value="Public Function AcquireTokenSilent (scopes As IEnumerable(Of String), Optional account As IAccount = null) As AcquireTokenSilentParameterBuilder" />
-      <MemberSignature Language="F#" Value="abstract member AcquireTokenSilent : seq&lt;string&gt; * Microsoft.Identity.Client.IAccount -&gt; Microsoft.Identity.Client.ApiConfig.AcquireTokenSilentParameterBuilder&#xA;override this.AcquireTokenSilent : seq&lt;string&gt; * Microsoft.Identity.Client.IAccount -&gt; Microsoft.Identity.Client.ApiConfig.AcquireTokenSilentParameterBuilder" Usage="clientApplicationBase.AcquireTokenSilent (scopes, account)" />
+      <MemberSignature Language="VB.NET" Value="Public Function AcquireTokenSilent (scopes As IEnumerable(Of String), account As IAccount) As AcquireTokenSilentParameterBuilder" />
+      <MemberSignature Language="F#" Value="abstract member AcquireTokenSilent : seq&lt;string&gt; * Microsoft.Identity.Client.IAccount -&gt; Microsoft.Identity.Client.AcquireTokenSilentParameterBuilder&#xA;override this.AcquireTokenSilent : seq&lt;string&gt; * Microsoft.Identity.Client.IAccount -&gt; Microsoft.Identity.Client.AcquireTokenSilentParameterBuilder" Usage="clientApplicationBase.AcquireTokenSilent (scopes, account)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.Identity.Client.IClientApplicationBase.AcquireTokenSilent(System.Collections.Generic.IEnumerable{System.String},Microsoft.Identity.Client.IAccount)</InterfaceMember>
       </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
-        <AssemblyVersion>3.0.0.0</AssemblyVersion>
+        <AssemblyVersion>3.0.5.0</AssemblyVersion>
+        <AssemblyVersion>3.0.6.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>Microsoft.Identity.Client.ApiConfig.AcquireTokenSilentParameterBuilder</ReturnType>
+        <ReturnType>Microsoft.Identity.Client.AcquireTokenSilentParameterBuilder</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="scopes" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" />
-        <Parameter Name="account" Type="Microsoft.Identity.Client.IAccount" />
+        <Parameter Name="scopes" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="account" Type="Microsoft.Identity.Client.IAccount" Index="1" FrameworkAlternate="azure-dotnet-preview" />
       </Parameters>
       <Docs>
         <param name="scopes">Scopes requested to access a protected API</param>
@@ -67,28 +74,77 @@
              If nothing is passed and no Account or LoginHint are provided then if one and only
              one account is in the cache, that account is used.  Otherwise, an exception will be thrown.  <see cref="T:Microsoft.Identity.Client.IAccount" /></param>
         <summary>
-             [V3 API] Attempts to acquire an access token for the <paramref name="account" /> from the user token cache, 
-             with advanced parameters controlling the network call. See https://aka.ms/msal-net-acquiretokensilent for more details
+             [V3 API] Attempts to acquire an access token for the <paramref name="account" /> from the user token cache.
+             See https://aka.ms/msal-net-acquiretokensilent for more details
              </summary>
-        <returns>An <see cref="T:Microsoft.Identity.Client.ApiConfig.AcquireTokenSilentParameterBuilder" /> used to build the token request, adding optional
+        <returns>An <see cref="T:Microsoft.Identity.Client.AcquireTokenSilentParameterBuilder" /> used to build the token request, adding optional
              parameters</returns>
         <remarks>
              The access token is considered a match if it contains <b>at least</b> all the requested scopes. This means that an access token with more scopes than
-             requested could be returned as well. If the access token is expired or close to expiration (within a 5 minute window),
+             requested could be returned. If the access token is expired or close to expiration - within a 5 minute window -
              then the cached refresh token (if available) is used to acquire a new access token by making a silent network call.
             
              See also the additional parameters that you can set chain:
-             <see cref="M:Microsoft.Identity.Client.ApiConfig.AbstractAcquireTokenParameterBuilder`1.WithAuthority(System.String,System.Boolean)" /> or one of its
+             <see cref="M:Microsoft.Identity.Client.AbstractAcquireTokenParameterBuilder`1.WithAuthority(System.String,System.Boolean)" /> or one of its
              overrides to request a token for a different authority than the one set at the application construction
-             <see cref="M:Microsoft.Identity.Client.ApiConfig.AcquireTokenSilentParameterBuilder.WithForceRefresh(System.Boolean)" /> to bypass the user token cache and
+             <see cref="M:Microsoft.Identity.Client.AcquireTokenSilentParameterBuilder.WithForceRefresh(System.Boolean)" /> to bypass the user token cache and
              force refreshing the token, as well as
-             <see cref="M:Microsoft.Identity.Client.ApiConfig.AbstractAcquireTokenParameterBuilder`1.WithExtraQueryParameters(System.Collections.Generic.Dictionary{System.String,System.String})" /> to
+             <see cref="M:Microsoft.Identity.Client.AbstractAcquireTokenParameterBuilder`1.WithExtraQueryParameters(System.Collections.Generic.Dictionary{System.String,System.String})" /> to
              specify extra query parameters
-             
-             You can also use null for <paramref name="account" /> and then use one of the following:
-             <see cref="M:Microsoft.Identity.Client.ApiConfig.AcquireTokenSilentParameterBuilder.WithAccount(Microsoft.Identity.Client.IAccount)" /> or 
-             <see cref="M:Microsoft.Identity.Client.ApiConfig.AcquireTokenSilentParameterBuilder.WithLoginHint(System.String)" /> to specify the account in the
-             case where your application manages several accounts.
+            
+             </remarks>
+        <exception cref="T:Microsoft.Identity.Client.MsalUiRequiredException">will be thrown in the case where an interaction is required with the end user of the application,
+             for instance, if no refresh token was in the cache,a or the user needs to consent, or re-sign-in (for instance if the password expired),
+             or the user needs to perform two factor authentication</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="AcquireTokenSilent">
+      <MemberSignature Language="C#" Value="public Microsoft.Identity.Client.AcquireTokenSilentParameterBuilder AcquireTokenSilent (System.Collections.Generic.IEnumerable&lt;string&gt; scopes, string loginHint);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Identity.Client.AcquireTokenSilentParameterBuilder AcquireTokenSilent(class System.Collections.Generic.IEnumerable`1&lt;string&gt; scopes, string loginHint) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Identity.Client.ClientApplicationBase.AcquireTokenSilent(System.Collections.Generic.IEnumerable{System.String},System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function AcquireTokenSilent (scopes As IEnumerable(Of String), loginHint As String) As AcquireTokenSilentParameterBuilder" />
+      <MemberSignature Language="F#" Value="abstract member AcquireTokenSilent : seq&lt;string&gt; * string -&gt; Microsoft.Identity.Client.AcquireTokenSilentParameterBuilder&#xA;override this.AcquireTokenSilent : seq&lt;string&gt; * string -&gt; Microsoft.Identity.Client.AcquireTokenSilentParameterBuilder" Usage="clientApplicationBase.AcquireTokenSilent (scopes, loginHint)" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.Identity.Client.IClientApplicationBase.AcquireTokenSilent(System.Collections.Generic.IEnumerable{System.String},System.String)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Identity.Client</AssemblyName>
+        <AssemblyVersion>3.0.5.0</AssemblyVersion>
+        <AssemblyVersion>3.0.6.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Identity.Client.AcquireTokenSilentParameterBuilder</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="scopes" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="loginHint" Type="System.String" Index="1" FrameworkAlternate="azure-dotnet-preview" />
+      </Parameters>
+      <Docs>
+        <param name="scopes">Scopes requested to access a protected API</param>
+        <param name="loginHint">Typically the username, in UPN format, e.g. johnd@contoso.com </param>
+        <summary>
+             [V3 API] Attempts to acquire an access token for the <see cref="T:Microsoft.Identity.Client.IAccount" />
+             having the <see cref="P:Microsoft.Identity.Client.IAccount.Username" /> match the given <paramref name="loginHint" />, from the user token cache.
+             See https://aka.ms/msal-net-acquiretokensilent for more details
+             </summary>
+        <returns>An <see cref="T:Microsoft.Identity.Client.AcquireTokenSilentParameterBuilder" /> used to build the token request, adding optional
+             parameters</returns>
+        <remarks>
+             If multiple <see cref="T:Microsoft.Identity.Client.IAccount" /> match the <paramref name="loginHint" />, or if none do, an exception is thrown.
+            
+             The access token is considered a match if it contains <b>at least</b> all the requested scopes. This means that an access token with more scopes than
+             requested could be returned. If the access token is expired or close to expiration - within a 5 minute window -
+             then the cached refresh token (if available) is used to acquire a new access token by making a silent network call.
+            
+             See also the additional parameters that you can set chain:
+             <see cref="M:Microsoft.Identity.Client.AbstractAcquireTokenParameterBuilder`1.WithAuthority(System.String,System.Boolean)" /> or one of its
+             overrides to request a token for a different authority than the one set at the application construction
+             <see cref="M:Microsoft.Identity.Client.AcquireTokenSilentParameterBuilder.WithForceRefresh(System.Boolean)" /> to bypass the user token cache and
+             force refreshing the token, as well as
+             <see cref="M:Microsoft.Identity.Client.AbstractAcquireTokenParameterBuilder`1.WithExtraQueryParameters(System.Collections.Generic.Dictionary{System.String,System.String})" /> to
+             specify extra query parameters
+            
              </remarks>
         <exception cref="T:Microsoft.Identity.Client.MsalUiRequiredException">will be thrown in the case where an interaction is required with the end user of the application,
              for instance, if no refresh token was in the cache,a or the user needs to consent, or re-sign-in (for instance if the password expired),
@@ -115,7 +171,14 @@
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
         <AssemblyVersion>2.7.1.0</AssemblyVersion>
         <AssemblyVersion>3.0.0.0</AssemblyVersion>
+        <AssemblyVersion>3.0.5.0</AssemblyVersion>
+        <AssemblyVersion>3.0.6.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="azure-dotnet-preview">
+          <AttributeName>System.Obsolete("Use AcquireTokenSilent instead.See https://aka.ms/msal-net-3-breaking-changes", true)</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt;</ReturnType>
       </ReturnValue>
@@ -161,7 +224,14 @@
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
         <AssemblyVersion>2.7.1.0</AssemblyVersion>
         <AssemblyVersion>3.0.0.0</AssemblyVersion>
+        <AssemblyVersion>3.0.5.0</AssemblyVersion>
+        <AssemblyVersion>3.0.6.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="azure-dotnet-preview">
+          <AttributeName>System.Obsolete("Use AcquireTokenSilent instead.See https://aka.ms/msal-net-3-breaking-changes", true)</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt;</ReturnType>
       </ReturnValue>
@@ -197,21 +267,22 @@
       </Docs>
     </Member>
     <Member MemberName="AppConfig">
-      <MemberSignature Language="C#" Value="public Microsoft.Identity.Client.AppConfig.IAppConfig AppConfig { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Identity.Client.AppConfig.IAppConfig AppConfig" />
+      <MemberSignature Language="C#" Value="public Microsoft.Identity.Client.IAppConfig AppConfig { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Identity.Client.IAppConfig AppConfig" />
       <MemberSignature Language="DocId" Value="P:Microsoft.Identity.Client.ClientApplicationBase.AppConfig" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property AppConfig As IAppConfig" />
-      <MemberSignature Language="F#" Value="member this.AppConfig : Microsoft.Identity.Client.AppConfig.IAppConfig" Usage="Microsoft.Identity.Client.ClientApplicationBase.AppConfig" />
+      <MemberSignature Language="F#" Value="member this.AppConfig : Microsoft.Identity.Client.IAppConfig" Usage="Microsoft.Identity.Client.ClientApplicationBase.AppConfig" />
       <MemberType>Property</MemberType>
       <Implements>
         <InterfaceMember>P:Microsoft.Identity.Client.IClientApplicationBase.AppConfig</InterfaceMember>
       </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
-        <AssemblyVersion>3.0.0.0</AssemblyVersion>
+        <AssemblyVersion>3.0.5.0</AssemblyVersion>
+        <AssemblyVersion>3.0.6.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>Microsoft.Identity.Client.AppConfig.IAppConfig</ReturnType>
+        <ReturnType>Microsoft.Identity.Client.IAppConfig</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
@@ -241,6 +312,8 @@
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
         <AssemblyVersion>2.7.1.0</AssemblyVersion>
         <AssemblyVersion>3.0.0.0</AssemblyVersion>
+        <AssemblyVersion>3.0.5.0</AssemblyVersion>
+        <AssemblyVersion>3.0.6.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -281,7 +354,14 @@
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
         <AssemblyVersion>2.7.1.0</AssemblyVersion>
         <AssemblyVersion>3.0.0.0</AssemblyVersion>
+        <AssemblyVersion>3.0.5.0</AssemblyVersion>
+        <AssemblyVersion>3.0.6.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="azure-dotnet-preview">
+          <AttributeName>System.Obsolete("Use AppConfig.ClientId instead.See https://aka.ms/msal-net-3-breaking-changes", true)</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
@@ -314,13 +394,15 @@
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
         <AssemblyVersion>2.7.1.0</AssemblyVersion>
         <AssemblyVersion>3.0.0.0</AssemblyVersion>
+        <AssemblyVersion>3.0.5.0</AssemblyVersion>
+        <AssemblyVersion>3.0.6.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute FrameworkAlternate="azure-dotnet-preview">
           <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
         </Attribute>
         <Attribute FrameworkAlternate="azure-dotnet-preview">
-          <AttributeName>System.Obsolete("Use WithComponent on AbstractApplicationBuilder&lt;T&gt; to configure this instead. See https://aka.ms/msal-net-3-breaking-changes", true)</AttributeName>
+          <AttributeName>System.Obsolete("Use WithComponent on AbstractApplicationBuilder&lt;T&gt; to configure this instead.See https://aka.ms/msal-net-3-breaking-changes", true)</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -328,7 +410,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Identifier of the component (libraries/SDK) consuming MSAL.NET. 
+            Identifier of the component (libraries/SDK) consuming MSAL.NET.
             This will allow for disambiguation between MSAL usage by the app vs MSAL usage by component libraries.
             </summary>
         <value>To be added.</value>
@@ -355,6 +437,8 @@
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
         <AssemblyVersion>2.7.1.0</AssemblyVersion>
         <AssemblyVersion>3.0.0.0</AssemblyVersion>
+        <AssemblyVersion>3.0.5.0</AssemblyVersion>
+        <AssemblyVersion>3.0.6.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.IAccount&gt;</ReturnType>
@@ -394,6 +478,8 @@
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
         <AssemblyVersion>2.7.1.0</AssemblyVersion>
         <AssemblyVersion>3.0.0.0</AssemblyVersion>
+        <AssemblyVersion>3.0.5.0</AssemblyVersion>
+        <AssemblyVersion>3.0.6.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Collections.Generic.IEnumerable&lt;Microsoft.Identity.Client.IAccount&gt;&gt;</ReturnType>
@@ -427,6 +513,8 @@
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
         <AssemblyVersion>2.7.1.0</AssemblyVersion>
         <AssemblyVersion>3.0.0.0</AssemblyVersion>
+        <AssemblyVersion>3.0.5.0</AssemblyVersion>
+        <AssemblyVersion>3.0.6.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -472,10 +560,12 @@
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
         <AssemblyVersion>2.7.1.0</AssemblyVersion>
         <AssemblyVersion>3.0.0.0</AssemblyVersion>
+        <AssemblyVersion>3.0.5.0</AssemblyVersion>
+        <AssemblyVersion>3.0.6.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute FrameworkAlternate="azure-dotnet-preview">
-          <AttributeName>System.Obsolete("Should be set using AbstractApplicationBuilder&lt;T&gt;.WithRedirectUri and can be viewed with ClientApplicationBase.AppConfig.RedirectUri. See https://aka.ms/msal-net-3-breaking-changes", true)</AttributeName>
+          <AttributeName>System.Obsolete("Should be set using AbstractApplicationBuilder&lt;T&gt;.WithRedirectUri and can be viewed with ClientApplicationBase.AppConfig.RedirectUri.See https://aka.ms/msal-net-3-breaking-changes", true)</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -517,6 +607,8 @@
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
         <AssemblyVersion>2.7.1.0</AssemblyVersion>
         <AssemblyVersion>3.0.0.0</AssemblyVersion>
+        <AssemblyVersion>3.0.5.0</AssemblyVersion>
+        <AssemblyVersion>3.0.6.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -561,6 +653,8 @@
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
         <AssemblyVersion>2.7.1.0</AssemblyVersion>
         <AssemblyVersion>3.0.0.0</AssemblyVersion>
+        <AssemblyVersion>3.0.5.0</AssemblyVersion>
+        <AssemblyVersion>3.0.6.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -597,13 +691,15 @@
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
         <AssemblyVersion>2.7.1.0</AssemblyVersion>
         <AssemblyVersion>3.0.0.0</AssemblyVersion>
+        <AssemblyVersion>3.0.5.0</AssemblyVersion>
+        <AssemblyVersion>3.0.6.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute FrameworkAlternate="azure-dotnet-preview">
           <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
         </Attribute>
         <Attribute FrameworkAlternate="azure-dotnet-preview">
-          <AttributeName>System.Obsolete("Use ExtraQueryParameters on each call instead. See https://aka.ms/msal-net-3-breaking-changes", true)</AttributeName>
+          <AttributeName>System.Obsolete("Use ExtraQueryParameters on each call instead.See https://aka.ms/msal-net-3-breaking-changes", true)</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -639,6 +735,8 @@
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
         <AssemblyVersion>2.7.1.0</AssemblyVersion>
         <AssemblyVersion>3.0.0.0</AssemblyVersion>
+        <AssemblyVersion>3.0.5.0</AssemblyVersion>
+        <AssemblyVersion>3.0.6.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -676,6 +774,8 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>3.0.0.0</AssemblyVersion>
+        <AssemblyVersion>3.0.5.0</AssemblyVersion>
+        <AssemblyVersion>3.0.6.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Identity.Client.ITokenCache</ReturnType>
@@ -690,6 +790,13 @@
             User token cache. This case holds id tokens, access tokens and refresh tokens for accounts. It's used 
             and updated silently if needed when calling <see cref="M:Microsoft.Identity.Client.ClientApplicationBase.AcquireTokenSilent(System.Collections.Generic.IEnumerable{System.String},Microsoft.Identity.Client.IAccount)" />
             or one of the overrides of <see cref="M:Microsoft.Identity.Client.ClientApplicationBase.AcquireTokenSilentAsync(System.Collections.Generic.IEnumerable{System.String},Microsoft.Identity.Client.IAccount)" />.
+            It is updated by each AcquireTokenXXX method, with the exception of <c>AcquireTokenForClient</c> which only uses the application
+            cache (see <c>IConfidentialClientApplication</c>).
+            </Summary>
+        <Summary>
+            User token cache. This case holds id tokens, access tokens and refresh tokens for accounts. It's used
+            and updated silently if needed when calling <see cref="M:Microsoft.Identity.Client.ClientApplicationBase.AcquireTokenSilent(System.Collections.Generic.IEnumerable{System.String},Microsoft.Identity.Client.IAccount)" />
+            or one of the overrides of <see cref="M:Microsoft.Identity.Client.ClientApplicationBase.AcquireTokenSilent(System.Collections.Generic.IEnumerable{System.String},Microsoft.Identity.Client.IAccount)" />.
             It is updated by each AcquireTokenXXX method, with the exception of <c>AcquireTokenForClient</c> which only uses the application
             cache (see <c>IConfidentialClientApplication</c>).
             </Summary>
@@ -712,13 +819,15 @@
         <AssemblyVersion>2.7.0.0</AssemblyVersion>
         <AssemblyVersion>2.7.1.0</AssemblyVersion>
         <AssemblyVersion>3.0.0.0</AssemblyVersion>
+        <AssemblyVersion>3.0.5.0</AssemblyVersion>
+        <AssemblyVersion>3.0.6.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute FrameworkAlternate="azure-dotnet-preview">
           <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
         </Attribute>
         <Attribute FrameworkAlternate="azure-dotnet-preview">
-          <AttributeName>System.Obsolete("Can be set on AbstractApplicationBuilder&lt;T&gt;.WithAuthority as needed. See https://aka.ms/msal-net-3-breaking-changes", true)</AttributeName>
+          <AttributeName>System.Obsolete("Can be set on AbstractApplicationBuilder&lt;T&gt;.WithAuthority as needed.See https://aka.ms/msal-net-3-breaking-changes", true)</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
