@@ -23,7 +23,7 @@
     <Assembly Name="Microsoft.Azure.Management.MixedReality" Version="0.0.0.0" />
     <Assembly Name="Microsoft.Azure.Management.Network" Version="19.5.0.0" />
     <Assembly Name="Microsoft.Azure.Management.ResourceGraph" Version="0.10.0.0" />
-    <Assembly Name="Microsoft.Azure.Management.StorageSync" Version="0.0.0.0" />
+    <Assembly Name="Microsoft.Azure.Management.StorageSync" Version="3.0.0.0" />
     <Assembly Name="Microsoft.Azure.Search.Common" Version="6.0.0.0" />
     <Assembly Name="Microsoft.Azure.Search.Data" Version="6.0.0.0" />
     <Assembly Name="Microsoft.Azure.Search" Version="6.0.0.0" />
@@ -19184,6 +19184,7 @@
     <Type Name="Microsoft.Azure.Management.StorageSync.Models.CloudEndpoint" Id="T:Microsoft.Azure.Management.StorageSync.Models.CloudEndpoint">
       <Member Id="M:Microsoft.Azure.Management.StorageSync.Models.CloudEndpoint.#ctor" />
       <Member Id="M:Microsoft.Azure.Management.StorageSync.Models.CloudEndpoint.#ctor(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)" />
+      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.CloudEndpoint.AzureFileShareName" />
       <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.CloudEndpoint.BackupEnabled" />
       <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.CloudEndpoint.FriendlyName" />
       <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.CloudEndpoint.LastOperationName" />
@@ -19191,14 +19192,13 @@
       <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.CloudEndpoint.PartnershipId" />
       <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.CloudEndpoint.ProvisioningState" />
       <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.CloudEndpoint.StorageAccountResourceId" />
-      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.CloudEndpoint.StorageAccountShareName" />
       <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.CloudEndpoint.StorageAccountTenantId" />
     </Type>
     <Type Name="Microsoft.Azure.Management.StorageSync.Models.CloudEndpointCreateParameters" Id="T:Microsoft.Azure.Management.StorageSync.Models.CloudEndpointCreateParameters">
       <Member Id="M:Microsoft.Azure.Management.StorageSync.Models.CloudEndpointCreateParameters.#ctor" />
       <Member Id="M:Microsoft.Azure.Management.StorageSync.Models.CloudEndpointCreateParameters.#ctor(System.String,System.String,System.String,System.String,System.String,System.String)" />
+      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.CloudEndpointCreateParameters.AzureFileShareName" />
       <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.CloudEndpointCreateParameters.StorageAccountResourceId" />
-      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.CloudEndpointCreateParameters.StorageAccountShareName" />
       <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.CloudEndpointCreateParameters.StorageAccountTenantId" />
     </Type>
     <Type Name="Microsoft.Azure.Management.StorageSync.Models.CloudEndpointsCreateHeaders" Id="T:Microsoft.Azure.Management.StorageSync.Models.CloudEndpointsCreateHeaders">
@@ -19264,6 +19264,13 @@
       <Member Id="M:Microsoft.Azure.Management.StorageSync.Models.CloudEndpointsRestoreheartbeatHeaders.#ctor(System.String,System.String)" />
       <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.CloudEndpointsRestoreheartbeatHeaders.XMsCorrelationRequestId" />
       <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.CloudEndpointsRestoreheartbeatHeaders.XMsRequestId" />
+    </Type>
+    <Type Name="Microsoft.Azure.Management.StorageSync.Models.FilesNotSyncingError" Id="T:Microsoft.Azure.Management.StorageSync.Models.FilesNotSyncingError">
+      <Member Id="M:Microsoft.Azure.Management.StorageSync.Models.FilesNotSyncingError.#ctor" />
+      <Member Id="M:Microsoft.Azure.Management.StorageSync.Models.FilesNotSyncingError.#ctor(System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64})" />
+      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.FilesNotSyncingError.ErrorCode" />
+      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.FilesNotSyncingError.PersistentCount" />
+      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.FilesNotSyncingError.TransientCount" />
     </Type>
     <Type Name="Microsoft.Azure.Management.StorageSync.Models.NameAvailabilityReason" Id="T:Microsoft.Azure.Management.StorageSync.Models.NameAvailabilityReason">
       <Member Id="F:Microsoft.Azure.Management.StorageSync.Models.NameAvailabilityReason.AlreadyExists" />
@@ -19448,7 +19455,7 @@
     </Type>
     <Type Name="Microsoft.Azure.Management.StorageSync.Models.ServerEndpoint" Id="T:Microsoft.Azure.Management.StorageSync.Models.ServerEndpoint">
       <Member Id="M:Microsoft.Azure.Management.StorageSync.Models.ServerEndpoint.#ctor" />
-      <Member Id="M:Microsoft.Azure.Management.StorageSync.Models.ServerEndpoint.#ctor(System.String,System.String,System.String,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String,System.String,System.String,System.String,Microsoft.Azure.Management.StorageSync.Models.ServerEndpointHealth,System.String,System.String,System.String,System.String)" />
+      <Member Id="M:Microsoft.Azure.Management.StorageSync.Models.ServerEndpoint.#ctor(System.String,System.String,System.String,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String,System.String,System.String,System.String,Microsoft.Azure.Management.StorageSync.Models.ServerEndpointSyncStatus,System.String,System.String,System.String,System.String)" />
       <Member Id="M:Microsoft.Azure.Management.StorageSync.Models.ServerEndpoint.Validate" />
       <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.ServerEndpoint.CloudTiering" />
       <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.ServerEndpoint.FriendlyName" />
@@ -19477,19 +19484,6 @@
       <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.ServerEndpointCreateParameters.ServerResourceId" />
       <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.ServerEndpointCreateParameters.TierFilesOlderThanDays" />
       <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.ServerEndpointCreateParameters.VolumeFreeSpacePercent" />
-    </Type>
-    <Type Name="Microsoft.Azure.Management.StorageSync.Models.ServerEndpointHealth" Id="T:Microsoft.Azure.Management.StorageSync.Models.ServerEndpointHealth">
-      <Member Id="M:Microsoft.Azure.Management.StorageSync.Models.ServerEndpointHealth.#ctor" />
-      <Member Id="M:Microsoft.Azure.Management.StorageSync.Models.ServerEndpointHealth.#ctor(System.String,System.String,System.String,System.Nullable{System.DateTime},Microsoft.Azure.Management.StorageSync.Models.SyncSessionStatus,Microsoft.Azure.Management.StorageSync.Models.SyncSessionStatus,Microsoft.Azure.Management.StorageSync.Models.SyncProgressStatus,System.String)" />
-      <Member Id="M:Microsoft.Azure.Management.StorageSync.Models.ServerEndpointHealth.Validate" />
-      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.ServerEndpointHealth.CombinedHealth" />
-      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.ServerEndpointHealth.CurrentProgress" />
-      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.ServerEndpointHealth.DownloadHealth" />
-      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.ServerEndpointHealth.DownloadStatus" />
-      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.ServerEndpointHealth.LastUpdatedTimestamp" />
-      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.ServerEndpointHealth.OfflineDataTransferStatus" />
-      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.ServerEndpointHealth.UploadHealth" />
-      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.ServerEndpointHealth.UploadStatus" />
     </Type>
     <Type Name="Microsoft.Azure.Management.StorageSync.Models.ServerEndpointsCreateHeaders" Id="T:Microsoft.Azure.Management.StorageSync.Models.ServerEndpointsCreateHeaders">
       <Member Id="M:Microsoft.Azure.Management.StorageSync.Models.ServerEndpointsCreateHeaders.#ctor" />
@@ -19533,6 +19527,21 @@
       <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.ServerEndpointsUpdateHeaders.Location" />
       <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.ServerEndpointsUpdateHeaders.XMsCorrelationRequestId" />
       <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.ServerEndpointsUpdateHeaders.XMsRequestId" />
+    </Type>
+    <Type Name="Microsoft.Azure.Management.StorageSync.Models.ServerEndpointSyncStatus" Id="T:Microsoft.Azure.Management.StorageSync.Models.ServerEndpointSyncStatus">
+      <Member Id="M:Microsoft.Azure.Management.StorageSync.Models.ServerEndpointSyncStatus.#ctor" />
+      <Member Id="M:Microsoft.Azure.Management.StorageSync.Models.ServerEndpointSyncStatus.#ctor(System.String,System.String,System.String,System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},Microsoft.Azure.Management.StorageSync.Models.SyncSessionStatus,Microsoft.Azure.Management.StorageSync.Models.SyncSessionStatus,Microsoft.Azure.Management.StorageSync.Models.SyncActivityStatus,Microsoft.Azure.Management.StorageSync.Models.SyncActivityStatus,System.String)" />
+      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.ServerEndpointSyncStatus.CombinedHealth" />
+      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.ServerEndpointSyncStatus.DownloadActivity" />
+      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.ServerEndpointSyncStatus.DownloadHealth" />
+      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.ServerEndpointSyncStatus.DownloadStatus" />
+      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.ServerEndpointSyncStatus.LastUpdatedTimestamp" />
+      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.ServerEndpointSyncStatus.OfflineDataTransferStatus" />
+      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.ServerEndpointSyncStatus.SyncActivity" />
+      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.ServerEndpointSyncStatus.TotalPersistentFilesNotSyncingCount" />
+      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.ServerEndpointSyncStatus.UploadActivity" />
+      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.ServerEndpointSyncStatus.UploadHealth" />
+      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.ServerEndpointSyncStatus.UploadStatus" />
     </Type>
     <Type Name="Microsoft.Azure.Management.StorageSync.Models.ServerEndpointUpdateParameters" Id="T:Microsoft.Azure.Management.StorageSync.Models.ServerEndpointUpdateParameters">
       <Member Id="M:Microsoft.Azure.Management.StorageSync.Models.ServerEndpointUpdateParameters.#ctor" />
@@ -19631,6 +19640,16 @@
       <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.SubscriptionState.Properties" />
       <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.SubscriptionState.State" />
     </Type>
+    <Type Name="Microsoft.Azure.Management.StorageSync.Models.SyncActivityStatus" Id="T:Microsoft.Azure.Management.StorageSync.Models.SyncActivityStatus">
+      <Member Id="M:Microsoft.Azure.Management.StorageSync.Models.SyncActivityStatus.#ctor" />
+      <Member Id="M:Microsoft.Azure.Management.StorageSync.Models.SyncActivityStatus.#ctor(System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64})" />
+      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.SyncActivityStatus.AppliedBytes" />
+      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.SyncActivityStatus.AppliedItemCount" />
+      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.SyncActivityStatus.PerItemErrorCount" />
+      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.SyncActivityStatus.Timestamp" />
+      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.SyncActivityStatus.TotalBytes" />
+      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.SyncActivityStatus.TotalItemCount" />
+    </Type>
     <Type Name="Microsoft.Azure.Management.StorageSync.Models.SyncGroup" Id="T:Microsoft.Azure.Management.StorageSync.Models.SyncGroup">
       <Member Id="M:Microsoft.Azure.Management.StorageSync.Models.SyncGroup.#ctor" />
       <Member Id="M:Microsoft.Azure.Management.StorageSync.Models.SyncGroup.#ctor(System.String,System.String,System.String,System.String,System.String)" />
@@ -19666,26 +19685,16 @@
       <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.SyncGroupsListByStorageSyncServiceHeaders.XMsCorrelationRequestId" />
       <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.SyncGroupsListByStorageSyncServiceHeaders.XMsRequestId" />
     </Type>
-    <Type Name="Microsoft.Azure.Management.StorageSync.Models.SyncProgressStatus" Id="T:Microsoft.Azure.Management.StorageSync.Models.SyncProgressStatus">
-      <Member Id="M:Microsoft.Azure.Management.StorageSync.Models.SyncProgressStatus.#ctor" />
-      <Member Id="M:Microsoft.Azure.Management.StorageSync.Models.SyncProgressStatus.#ctor(System.Nullable{System.DateTime},System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32})" />
-      <Member Id="M:Microsoft.Azure.Management.StorageSync.Models.SyncProgressStatus.Validate" />
-      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.SyncProgressStatus.AppliedBytes" />
-      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.SyncProgressStatus.AppliedItemCount" />
-      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.SyncProgressStatus.PerItemErrorCount" />
-      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.SyncProgressStatus.ProgressTimestamp" />
-      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.SyncProgressStatus.SyncDirection" />
-      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.SyncProgressStatus.TotalBytes" />
-      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.SyncProgressStatus.TotalItemCount" />
-    </Type>
     <Type Name="Microsoft.Azure.Management.StorageSync.Models.SyncSessionStatus" Id="T:Microsoft.Azure.Management.StorageSync.Models.SyncSessionStatus">
       <Member Id="M:Microsoft.Azure.Management.StorageSync.Models.SyncSessionStatus.#ctor" />
-      <Member Id="M:Microsoft.Azure.Management.StorageSync.Models.SyncSessionStatus.#ctor(System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32})" />
-      <Member Id="M:Microsoft.Azure.Management.StorageSync.Models.SyncSessionStatus.Validate" />
+      <Member Id="M:Microsoft.Azure.Management.StorageSync.Models.SyncSessionStatus.#ctor(System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Collections.Generic.IList{Microsoft.Azure.Management.StorageSync.Models.FilesNotSyncingError})" />
+      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.SyncSessionStatus.FilesNotSyncingErrors" />
       <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.SyncSessionStatus.LastSyncPerItemErrorCount" />
       <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.SyncSessionStatus.LastSyncResult" />
       <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.SyncSessionStatus.LastSyncSuccessTimestamp" />
       <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.SyncSessionStatus.LastSyncTimestamp" />
+      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.SyncSessionStatus.PersistentFilesNotSyncingCount" />
+      <Member Id="P:Microsoft.Azure.Management.StorageSync.Models.SyncSessionStatus.TransientFilesNotSyncingCount" />
     </Type>
     <Type Name="Microsoft.Azure.Management.StorageSync.Models.TrackedResource" Id="T:Microsoft.Azure.Management.StorageSync.Models.TrackedResource">
       <Member Id="M:Microsoft.Azure.Management.StorageSync.Models.TrackedResource.#ctor" />
