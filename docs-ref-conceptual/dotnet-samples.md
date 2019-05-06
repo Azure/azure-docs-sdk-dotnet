@@ -8,6 +8,7 @@ ms.date: 07/17/2018
 
 These are the top samples, tutorials, and examples we recommend for getting started with Azure using C# and .NET and .NET Core.
 
+## Suggested samples
 <div id="main" class="v2">
     <div class="container">
         <ul class="cardsC panelContent" id="samples" style="margin-top: 20px; display: flex;">
@@ -129,4 +130,9 @@ These are the top samples, tutorials, and examples we recommend for getting star
     </div>
 </div>
 
+## SmartHotel360
+
+The [SmartHotel360 reference apps](https://azure.microsoft.com/campaigns/smarthotel360/) contain several examples using .NET Core in a microservices architecture. Watch the [demo app overview](https://azure.microsoft.com/resources/videos/smarthotel360-demo-app-overview/) or view the [source code](https://github.com/Microsoft/SmartHotel360).
+
+## More samples
 You can also browse the [complete collection of samples](https://azure.microsoft.com/resources/samples/?platform=dotnet&sort=2).
