@@ -8,7 +8,7 @@ ms.date: 07/17/2018
 
 The following table links to in-depth tutorials for building .NET apps running on Azure.
 
-For sample source code, see the list of [Azure service samples](https://azure.microsoft.com/resources/samples/?platform=dotnet).
+For sample source code, see the list of [Azure service samples](https://azure.microsoft.com/resources/samples/?platform=dotnet&sort=2).
 
 | | |
 |---|---|
