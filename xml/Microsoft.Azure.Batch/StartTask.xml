@@ -7,6 +7,7 @@
   <AssemblyInfo>
     <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
     <AssemblyVersion>10.0.0.0</AssemblyVersion>
+    <AssemblyVersion>11.0.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -18,13 +19,16 @@
             or reimaged.
             </summary>
     <remarks>
-            Batch will retry tasks when a recovery operation is triggered on a compute node. Examples of recovery operations 
+      <para>Batch will retry tasks when a recovery operation is triggered on a compute node. Examples of recovery operations 
             include (but are not limited to) when an unhealthy compute node is rebooted or a compute node disappeared due to 
             host failure. Retries due to recovery operations are independent of and are not counted against the <see cref="P:Microsoft.Azure.Batch.TaskConstraints.MaxTaskRetryCount" />. Even if the <see cref="P:Microsoft.Azure.Batch.TaskConstraints.MaxTaskRetryCount" /> is 0, an internal retry due to a recovery operation 
             may occur. Because of this, all tasks should be idempotent. This means tasks need to tolerate being interrupted and 
-            restarted without causing any corruption or duplicate data. The best practice for long running tasks is to use some 
-            form of checkpointing.
-            </remarks>
+            restarted without causing any corruption or duplicate data.</para>
+      <para>The best practice for long running tasks 
+            is to use some form of checkpointing. Special care should be taken to avoid start tasks which create breakaway process 
+            or install/launch services from the start task working directory, as this will block Batch from being able to re-run 
+            the start task.</para>
+    </remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -36,6 +40,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
         <AssemblyVersion>10.0.0.0</AssemblyVersion>
+        <AssemblyVersion>11.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -53,6 +58,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
         <AssemblyVersion>10.0.0.0</AssemblyVersion>
+        <AssemblyVersion>11.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="commandLine" Type="System.String" />
@@ -75,6 +81,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
         <AssemblyVersion>10.0.0.0</AssemblyVersion>
+        <AssemblyVersion>11.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -103,6 +110,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
         <AssemblyVersion>10.0.0.0</AssemblyVersion>
+        <AssemblyVersion>11.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Batch.TaskContainerSettings</ReturnType>
@@ -115,7 +123,8 @@
         <remarks>
             When this is specified, all directories recursively below the AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch 
             directories on the node) are mapped into the container, all task environment variables are mapped into the container, 
-            and the task command line is executed in the container.
+            and the task command line is executed in the container. Files produced in the container outside of AZ_BATCH_NODE_ROOT_DIR 
+            might not be reflected to the host disk, meaning that Batch file APIs will not be able to access them.
             </remarks>
       </Docs>
     </Member>
@@ -129,6 +138,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
         <AssemblyVersion>10.0.0.0</AssemblyVersion>
+        <AssemblyVersion>11.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Collections.Generic.IList&lt;Microsoft.Azure.Batch.EnvironmentSetting&gt;</ReturnType>
@@ -151,6 +161,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
         <AssemblyVersion>10.0.0.0</AssemblyVersion>
+        <AssemblyVersion>11.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Nullable&lt;System.Int32&gt;</ReturnType>
@@ -173,6 +184,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
         <AssemblyVersion>10.0.0.0</AssemblyVersion>
+        <AssemblyVersion>11.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Collections.Generic.IList&lt;Microsoft.Azure.Batch.ResourceFile&gt;</ReturnType>
@@ -200,6 +212,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
         <AssemblyVersion>10.0.0.0</AssemblyVersion>
+        <AssemblyVersion>11.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Batch.UserIdentity</ReturnType>
@@ -224,6 +237,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
         <AssemblyVersion>10.0.0.0</AssemblyVersion>
+        <AssemblyVersion>11.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Nullable&lt;System.Boolean&gt;</ReturnType>
