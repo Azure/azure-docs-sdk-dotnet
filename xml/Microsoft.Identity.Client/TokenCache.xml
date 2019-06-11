@@ -1,12 +1,13 @@
 ﻿<Type Name="TokenCache" FullName="Microsoft.Identity.Client.TokenCache">
   <TypeSignature Language="C#" Value="public sealed class TokenCache" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit TokenCache extends System.Object implements class Microsoft.Identity.Client.ITokenCache" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit TokenCache extends System.Object implements class Microsoft.Identity.Client.ITokenCache, class Microsoft.Identity.Client.ITokenCacheSerializer" />
   <TypeSignature Language="DocId" Value="T:Microsoft.Identity.Client.TokenCache" />
   <TypeSignature Language="VB.NET" Value="Public NotInheritable Class TokenCache" />
-  <TypeSignature Language="F#" Value="type TokenCache = class&#xA;    interface ITokenCache" />
+  <TypeSignature Language="F#" Value="type TokenCache = class&#xA;    interface ITokenCache&#xA;    interface ITokenCacheSerializer" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.Identity.Client</AssemblyName>
     <AssemblyVersion>3.0.8.0</AssemblyVersion>
+    <AssemblyVersion>4.0.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -14,6 +15,9 @@
   <Interfaces>
     <Interface>
       <InterfaceName>Microsoft.Identity.Client.ITokenCache</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>Microsoft.Identity.Client.ITokenCacheSerializer</InterfaceName>
     </Interface>
   </Interfaces>
   <Docs>
@@ -35,6 +39,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>3.0.8.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -59,10 +64,14 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>3.0.8.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Obsolete("This is expected to be removed in MSAL.NET v3 and ADAL.NET v5. We recommend using SerializeMsalV3/DeserializeMsalV3. Read more: https://aka.ms/msal-net-3x-cache-breaking-change", false)</AttributeName>
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Obsolete("This is expected to be removed in MSAL.NET v5. We recommend using SerializeMsalV3/DeserializeMsalV3. Read more: https://aka.ms/msal-net-3x-cache-breaking-change", false)</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -76,11 +85,11 @@
         <summary>
             Deserializes the token cache from a serialization blob in the unified cache format
             Obsolete: Please use specialized Deserialization methods.
-            <see cref="M:Microsoft.Identity.Client.TokenCache.DeserializeMsalV2(System.Byte[])" /> replaces <see cref="M:Microsoft.Identity.Client.TokenCache.Deserialize(System.Byte[])" /><see cref="M:Microsoft.Identity.Client.TokenCache.SerializeMsalV3" />/<see cref="M:Microsoft.Identity.Client.TokenCache.DeserializeMsalV3(System.Byte[],System.Boolean)" /> Is our recommended way of serializing/deserializing.
-            <see cref="M:Microsoft.Identity.Client.TokenCache.DeserializeAdalV3(System.Byte[])" /> For interoperability with ADAL.NET v3
+            <see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.DeserializeMsalV2(System.Byte[])" /> replaces <see cref="M:Microsoft.Identity.Client.TokenCache.Deserialize(System.Byte[])" /><see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.SerializeMsalV3" />/<see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.DeserializeMsalV3(System.Byte[],System.Boolean)" /> Is our recommended way of serializing/deserializing.
+            <see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.DeserializeAdalV3(System.Byte[])" /> For interoperability with ADAL.NET v3
             </summary>
         <remarks>
-          <see cref="M:Microsoft.Identity.Client.TokenCache.SerializeMsalV3" />/<see cref="M:Microsoft.Identity.Client.TokenCache.DeserializeMsalV3(System.Byte[],System.Boolean)" /> is compatible with other MSAL libraries such as MSAL for Python and MSAL for Java.
+          <see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.SerializeMsalV3" />/<see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.DeserializeMsalV3(System.Byte[],System.Boolean)" /> is compatible with other MSAL libraries such as MSAL for Python and MSAL for Java.
             <paramref name="msalV2State" />Is a Json blob containing access tokens, refresh tokens, id tokens and accounts information.
             </remarks>
       </Docs>
@@ -98,7 +107,16 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>3.0.8.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Obsolete("This is removed in MSAL.NET v4. Read more: https://aka.ms/msal-net-4x-cache-breaking-change", false)</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
@@ -108,10 +126,7 @@
       <Docs>
         <param name="adalV3State">Array of bytes containing serialized Adal.NET V3 cache data</param>
         <summary>
-            Deserializes the token cache to the ADAL.NET 3.x cache format.
-            If you need to maintain SSO between an application using ADAL 3.x or MSAL 2.x and this application using MSAL 3.x,
-            you might also want to serialize and deserialize with <see cref="M:Microsoft.Identity.Client.TokenCache.SerializeAdalV3" />/<see cref="M:Microsoft.Identity.Client.TokenCache.DeserializeAdalV3(System.Byte[])" /> or <see cref="M:Microsoft.Identity.Client.TokenCache.SerializeMsalV2" />/<see cref="M:Microsoft.Identity.Client.TokenCache.DeserializeMsalV2(System.Byte[])" />,
-            otherwise just use <see cref="M:Microsoft.Identity.Client.TokenCache.SerializeMsalV3" />/<see cref="M:Microsoft.Identity.Client.TokenCache.DeserializeMsalV3(System.Byte[],System.Boolean)" />.
+            This is removed in MSAL.NET v4. Read more: https://aka.ms/msal-net-4x-cache-breaking-change
             </summary>
         <remarks>
           <see cref="M:Microsoft.Identity.Client.TokenCache.SerializeMsalV3" />/<see cref="M:Microsoft.Identity.Client.TokenCache.DeserializeMsalV3(System.Byte[],System.Boolean)" /> is compatible with other MSAL libraries such as MSAL for Python and MSAL for Java.
@@ -131,7 +146,16 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>3.0.8.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Obsolete("This is removed in MSAL.NET v4. Read more: https://aka.ms/msal-net-4x-cache-breaking-change", false)</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
@@ -141,10 +165,7 @@
       <Docs>
         <param name="msalV2State">Array of bytes containing serialized MsalV2 cache data</param>
         <summary>
-            Deserializes the token cache to the MSAL.NET 2.x unified cache format, which is compatible with ADAL.NET v4 and other MSAL.NET v2 applications.
-            If you need to maintain SSO between an application using ADAL 3.x or MSAL 2.x and this application using MSAL 3.x,
-            you might also want to serialize and deserialize with <see cref="M:Microsoft.Identity.Client.TokenCache.SerializeAdalV3" />/<see cref="M:Microsoft.Identity.Client.TokenCache.DeserializeAdalV3(System.Byte[])" /> or <see cref="M:Microsoft.Identity.Client.TokenCache.SerializeMsalV2" />/<see cref="M:Microsoft.Identity.Client.TokenCache.DeserializeMsalV2(System.Byte[])" />,
-            otherwise just use <see cref="M:Microsoft.Identity.Client.TokenCache.SerializeMsalV3" />/<see cref="M:Microsoft.Identity.Client.TokenCache.DeserializeMsalV3(System.Byte[],System.Boolean)" />.
+            This is removed in MSAL.NET v4. Read more: https://aka.ms/msal-net-4x-cache-breaking-change
             </summary>
         <remarks>
           <paramref name="msalV2State" />Is a Json blob containing access tokens, refresh tokens, id tokens and accounts information.
@@ -155,10 +176,10 @@
       </Docs>
     </Member>
     <Member MemberName="DeserializeMsalV3">
-      <MemberSignature Language="C#" Value="public void DeserializeMsalV3 (byte[] msalV3State, bool shouldClearExistingCache = false);" />
+      <MemberSignature Language="C#" Value="public void DeserializeMsalV3 (byte[] msalV3State, bool shouldClearExistingCache);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void DeserializeMsalV3(unsigned int8[] msalV3State, bool shouldClearExistingCache) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Identity.Client.TokenCache.DeserializeMsalV3(System.Byte[],System.Boolean)" />
-      <MemberSignature Language="VB.NET" Value="Public Sub DeserializeMsalV3 (msalV3State As Byte(), Optional shouldClearExistingCache As Boolean = false)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub DeserializeMsalV3 (msalV3State As Byte(), shouldClearExistingCache As Boolean)" />
       <MemberSignature Language="F#" Value="abstract member DeserializeMsalV3 : byte[] * bool -&gt; unit&#xA;override this.DeserializeMsalV3 : byte[] * bool -&gt; unit" Usage="tokenCache.DeserializeMsalV3 (msalV3State, shouldClearExistingCache)" />
       <MemberType>Method</MemberType>
       <Implements>
@@ -167,7 +188,16 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>3.0.8.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Obsolete("This is removed in MSAL.NET v4. Read more: https://aka.ms/msal-net-4x-cache-breaking-change", false)</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
@@ -179,10 +209,7 @@
         <param name="msalV3State">Byte stream representation of the cache</param>
         <param name="shouldClearExistingCache">Set to true to clear MSAL cache contents.  Defaults to false.</param>
         <summary>
-            De-serializes from the MSAL.NET V3 cache format.
-            If you need to maintain SSO between an application using ADAL 3.x or MSAL 2.x and this application using MSAL 3.x,
-            you might also want to serialize and deserialize with <see cref="M:Microsoft.Identity.Client.TokenCache.SerializeAdalV3" />/<see cref="M:Microsoft.Identity.Client.TokenCache.DeserializeAdalV3(System.Byte[])" /> or <see cref="M:Microsoft.Identity.Client.TokenCache.SerializeMsalV2" />/<see cref="M:Microsoft.Identity.Client.TokenCache.DeserializeMsalV2(System.Byte[])" />,
-            otherwise just use <see cref="M:Microsoft.Identity.Client.TokenCache.SerializeMsalV3" />/<see cref="M:Microsoft.Identity.Client.TokenCache.DeserializeMsalV3(System.Byte[],System.Boolean)" />.
+            This is removed in MSAL.NET v4. Read more: https://aka.ms/msal-net-4x-cache-breaking-change
             </summary>
         <remarks>
             This format is compatible with other MSAL libraries such as MSAL for Python and MSAL for Java.
@@ -204,10 +231,14 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>3.0.8.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Obsolete("This is expected to be removed in MSAL.NET v3 and ADAL.NET v5. We recommend using SerializeMsalV3/DeserializeMsalV3. Read more: https://aka.ms/msal-net-3x-cache-breaking-change", false)</AttributeName>
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Obsolete("This is expected to be removed in MSAL.NET v5. We recommend using SerializeMsalV3/DeserializeMsalV3. Read more: https://aka.ms/msal-net-3x-cache-breaking-change", false)</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -222,7 +253,7 @@
             Deserializes the token cache from a serialization blob in both format (ADAL V3 format, and unified cache format)
             </summary>
         <remarks>
-          <see cref="M:Microsoft.Identity.Client.TokenCache.SerializeMsalV3" />/<see cref="M:Microsoft.Identity.Client.TokenCache.DeserializeMsalV3(System.Byte[],System.Boolean)" /> is compatible with other MSAL libraries such as MSAL for Python and MSAL for Java.
+          <see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.SerializeMsalV3" />/<see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.DeserializeMsalV3(System.Byte[],System.Boolean)" /> is compatible with other MSAL libraries such as MSAL for Python and MSAL for Java.
             </remarks>
       </Docs>
     </Member>
@@ -236,10 +267,14 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>3.0.8.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
           <AttributeName>System.Obsolete("Please use the equivalent flag TokenCacheNotificationArgs.HasStateChanged, which indicates if the operation triggering the notification is modifying the cache or not. Setting the flag is not required.")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -252,6 +287,152 @@
             Caller applications should reset the flag after serializing and persisting the state of the cache.
             </summary>
         <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.Identity.Client.ITokenCacheSerializer.DeserializeAdalV3">
+      <MemberSignature Language="C#" Value="void ITokenCacheSerializer.DeserializeAdalV3 (byte[] adalV3State);" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void Microsoft.Identity.Client.ITokenCacheSerializer.DeserializeAdalV3(unsigned int8[] adalV3State) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Identity.Client.TokenCache.Microsoft#Identity#Client#ITokenCacheSerializer#DeserializeAdalV3(System.Byte[])" />
+      <MemberSignature Language="VB.NET" Value="Sub DeserializeAdalV3 (adalV3State As Byte()) Implements ITokenCacheSerializer.DeserializeAdalV3" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.Identity.Client.ITokenCache.DeserializeAdalV3(System.Byte[])</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Identity.Client</AssemblyName>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="adalV3State" Type="System.Byte[]" />
+      </Parameters>
+      <Docs>
+        <param name="adalV3State">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.Identity.Client.ITokenCacheSerializer.DeserializeMsalV2">
+      <MemberSignature Language="C#" Value="void ITokenCacheSerializer.DeserializeMsalV2 (byte[] msalV2State);" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void Microsoft.Identity.Client.ITokenCacheSerializer.DeserializeMsalV2(unsigned int8[] msalV2State) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Identity.Client.TokenCache.Microsoft#Identity#Client#ITokenCacheSerializer#DeserializeMsalV2(System.Byte[])" />
+      <MemberSignature Language="VB.NET" Value="Sub DeserializeMsalV2 (msalV2State As Byte()) Implements ITokenCacheSerializer.DeserializeMsalV2" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.Identity.Client.ITokenCache.DeserializeMsalV2(System.Byte[])</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Identity.Client</AssemblyName>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="msalV2State" Type="System.Byte[]" />
+      </Parameters>
+      <Docs>
+        <param name="msalV2State">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.Identity.Client.ITokenCacheSerializer.DeserializeMsalV3">
+      <MemberSignature Language="C#" Value="void ITokenCacheSerializer.DeserializeMsalV3 (byte[] msalV3State, bool shouldClearExistingCache);" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void Microsoft.Identity.Client.ITokenCacheSerializer.DeserializeMsalV3(unsigned int8[] msalV3State, bool shouldClearExistingCache) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Identity.Client.TokenCache.Microsoft#Identity#Client#ITokenCacheSerializer#DeserializeMsalV3(System.Byte[],System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Sub DeserializeMsalV3 (msalV3State As Byte(), shouldClearExistingCache As Boolean) Implements ITokenCacheSerializer.DeserializeMsalV3" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.Identity.Client.ITokenCache.DeserializeMsalV3(System.Byte[],System.Boolean)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Identity.Client</AssemblyName>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="msalV3State" Type="System.Byte[]" />
+        <Parameter Name="shouldClearExistingCache" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="msalV3State">To be added.</param>
+        <param name="shouldClearExistingCache">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.Identity.Client.ITokenCacheSerializer.SerializeAdalV3">
+      <MemberSignature Language="C#" Value="byte[] ITokenCacheSerializer.SerializeAdalV3 ();" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance unsigned int8[] Microsoft.Identity.Client.ITokenCacheSerializer.SerializeAdalV3() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Identity.Client.TokenCache.Microsoft#Identity#Client#ITokenCacheSerializer#SerializeAdalV3" />
+      <MemberSignature Language="VB.NET" Value="Function SerializeAdalV3 () As Byte() Implements ITokenCacheSerializer.SerializeAdalV3" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.Identity.Client.ITokenCache.SerializeAdalV3</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Identity.Client</AssemblyName>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Byte[]</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.Identity.Client.ITokenCacheSerializer.SerializeMsalV2">
+      <MemberSignature Language="C#" Value="byte[] ITokenCacheSerializer.SerializeMsalV2 ();" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance unsigned int8[] Microsoft.Identity.Client.ITokenCacheSerializer.SerializeMsalV2() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Identity.Client.TokenCache.Microsoft#Identity#Client#ITokenCacheSerializer#SerializeMsalV2" />
+      <MemberSignature Language="VB.NET" Value="Function SerializeMsalV2 () As Byte() Implements ITokenCacheSerializer.SerializeMsalV2" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.Identity.Client.ITokenCache.SerializeMsalV2</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Identity.Client</AssemblyName>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Byte[]</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.Identity.Client.ITokenCacheSerializer.SerializeMsalV3">
+      <MemberSignature Language="C#" Value="byte[] ITokenCacheSerializer.SerializeMsalV3 ();" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance unsigned int8[] Microsoft.Identity.Client.ITokenCacheSerializer.SerializeMsalV3() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Identity.Client.TokenCache.Microsoft#Identity#Client#ITokenCacheSerializer#SerializeMsalV3" />
+      <MemberSignature Language="VB.NET" Value="Function SerializeMsalV3 () As Byte() Implements ITokenCacheSerializer.SerializeMsalV3" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.Identity.Client.ITokenCache.SerializeMsalV3</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Identity.Client</AssemblyName>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Byte[]</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -268,10 +449,14 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>3.0.8.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Obsolete("This is expected to be removed in MSAL.NET v3 and ADAL.NET v5. We recommend using SerializeMsalV3/DeserializeMsalV3. Read more: https://aka.ms/msal-net-3x-cache-breaking-change", false)</AttributeName>
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Obsolete("This is expected to be removed in MSAL.NET v5. We recommend using SerializeMsalV3/DeserializeMsalV3. Read more: https://aka.ms/msal-net-3x-cache-breaking-change", false)</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -280,15 +465,15 @@
       <Parameters />
       <Docs>
         <summary>
-            Serializes using the <see cref="M:Microsoft.Identity.Client.TokenCache.SerializeMsalV2" /> serializer.
+            Serializes using the <see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.SerializeMsalV2" /> serializer.
             Obsolete: Please use specialized Serialization methods.
-            <see cref="M:Microsoft.Identity.Client.TokenCache.SerializeMsalV2" /> replaces <see cref="M:Microsoft.Identity.Client.TokenCache.Serialize" />.
-            <see cref="M:Microsoft.Identity.Client.TokenCache.SerializeMsalV3" />/<see cref="M:Microsoft.Identity.Client.TokenCache.DeserializeMsalV3(System.Byte[],System.Boolean)" /> Is our recommended way of serializing/deserializing.
-            <see cref="M:Microsoft.Identity.Client.TokenCache.SerializeAdalV3" /> For interoperability with ADAL.NET v3.
+            <see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.SerializeMsalV2" /> replaces <see cref="M:Microsoft.Identity.Client.TokenCache.Serialize" />.
+            <see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.SerializeMsalV3" />/<see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.DeserializeMsalV3(System.Byte[],System.Boolean)" /> Is our recommended way of serializing/deserializing.
+            <see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.SerializeAdalV3" /> For interoperability with ADAL.NET v3.
             </summary>
-        <returns>array of bytes, <see cref="M:Microsoft.Identity.Client.TokenCache.SerializeMsalV2" /></returns>
+        <returns>array of bytes, <see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.SerializeMsalV2" /></returns>
         <remarks>
-          <see cref="M:Microsoft.Identity.Client.TokenCache.SerializeMsalV3" />/<see cref="M:Microsoft.Identity.Client.TokenCache.DeserializeMsalV3(System.Byte[],System.Boolean)" /> is compatible with other MSAL libraries such as MSAL for Python and MSAL for Java.
+          <see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.SerializeMsalV3" />/<see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.DeserializeMsalV3(System.Byte[],System.Boolean)" /> is compatible with other MSAL libraries such as MSAL for Python and MSAL for Java.
             </remarks>
       </Docs>
     </Member>
@@ -305,17 +490,23 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>3.0.8.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Obsolete("This is removed in MSAL.NET v4. Read more: https://aka.ms/msal-net-4x-cache-breaking-change", false)</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Byte[]</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
         <summary>
-            Serializes the token cache to the ADAL.NET 3.x cache format.
-            If you need to maintain SSO between an application using ADAL 3.x or MSAL 2.x and this application using MSAL 3.x,
-            you might also want to serialize and deserialize with <see cref="M:Microsoft.Identity.Client.TokenCache.SerializeAdalV3" />/<see cref="M:Microsoft.Identity.Client.TokenCache.DeserializeAdalV3(System.Byte[])" /> or <see cref="M:Microsoft.Identity.Client.TokenCache.SerializeMsalV2" />/<see cref="M:Microsoft.Identity.Client.TokenCache.DeserializeMsalV2(System.Byte[])" />,
-            otherwise just use <see cref="M:Microsoft.Identity.Client.TokenCache.SerializeMsalV3" />/<see cref="M:Microsoft.Identity.Client.TokenCache.DeserializeMsalV3(System.Byte[],System.Boolean)" />.
+            This is removed in MSAL.NET v4. Read more: https://aka.ms/msal-net-4x-cache-breaking-change
             </summary>
         <returns>array of bytes containing the serialized ADAL.NET V3 cache data</returns>
         <remarks>
@@ -336,17 +527,23 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>3.0.8.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Obsolete("This is removed in MSAL.NET v4. Read more: https://aka.ms/msal-net-4x-cache-breaking-change", false)</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Byte[]</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
         <summary>
-            Serializes the token cache to the MSAL.NET 2.x unified cache format, which is compatible with ADAL.NET v4 and other MSAL.NET v2 applications.
-            If you need to maintain SSO between an application using ADAL 3.x or MSAL 2.x and this application using MSAL 3.x,
-            you might also want to serialize and deserialize with <see cref="M:Microsoft.Identity.Client.TokenCache.SerializeAdalV3" />/<see cref="M:Microsoft.Identity.Client.TokenCache.DeserializeAdalV3(System.Byte[])" /> or <see cref="M:Microsoft.Identity.Client.TokenCache.SerializeMsalV2" />/<see cref="M:Microsoft.Identity.Client.TokenCache.DeserializeMsalV2(System.Byte[])" />,
-            otherwise just use <see cref="M:Microsoft.Identity.Client.TokenCache.SerializeMsalV3" />/<see cref="M:Microsoft.Identity.Client.TokenCache.DeserializeMsalV3(System.Byte[],System.Boolean)" />.
+            This is removed in MSAL.NET v4. Read more: https://aka.ms/msal-net-4x-cache-breaking-change
             </summary>
         <returns>array of bytes containing the serialized MsalV2 cache</returns>
         <remarks>
@@ -367,17 +564,23 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>3.0.8.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Obsolete("This is removed in MSAL.NET v4. Read more: https://aka.ms/msal-net-4x-cache-breaking-change", false)</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Byte[]</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
         <summary>
-            Serializes the token cache, in the MSAL.NET V3 cache format.
-            If you need to maintain SSO between an application using ADAL 3.x or MSAL 2.x and this application using MSAL 3.x,
-            you might also want to serialize and deserialize with <see cref="M:Microsoft.Identity.Client.TokenCache.SerializeAdalV3" />/<see cref="M:Microsoft.Identity.Client.TokenCache.DeserializeAdalV3(System.Byte[])" /> or <see cref="M:Microsoft.Identity.Client.TokenCache.SerializeMsalV2" />/<see cref="M:Microsoft.Identity.Client.TokenCache.DeserializeMsalV2(System.Byte[])" />,
-            otherwise just use <see cref="M:Microsoft.Identity.Client.TokenCache.SerializeMsalV3" />/<see cref="M:Microsoft.Identity.Client.TokenCache.DeserializeMsalV3(System.Byte[],System.Boolean)" />.
+            This is removed in MSAL.NET v4. Read more: https://aka.ms/msal-net-4x-cache-breaking-change
             </summary>
         <returns>Byte stream representation of the cache</returns>
         <remarks>
@@ -398,10 +601,14 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>3.0.8.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Obsolete("This is expected to be removed in MSAL.NET v3 and ADAL.NET v5. We recommend using SerializeMsalV3/DeserializeMsalV3. Read more: https://aka.ms/msal-net-3x-cache-breaking-change", false)</AttributeName>
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Obsolete("This is expected to be removed in MSAL.NET v5. We recommend using SerializeMsalV3/DeserializeMsalV3. Read more: https://aka.ms/msal-net-3x-cache-breaking-change", false)</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -414,7 +621,7 @@
             </summary>
         <returns>Serialized token cache <see cref="T:Microsoft.Identity.Client.Cache.CacheData" /></returns>
         <remarks>
-          <see cref="M:Microsoft.Identity.Client.TokenCache.SerializeMsalV3" />/<see cref="M:Microsoft.Identity.Client.TokenCache.DeserializeMsalV3(System.Byte[],System.Boolean)" /> is compatible with other MSAL libraries such as MSAL for Python and MSAL for Java.
+          <see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.SerializeMsalV3" />/<see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.DeserializeMsalV3(System.Byte[],System.Boolean)" /> is compatible with other MSAL libraries such as MSAL for Python and MSAL for Java.
             </remarks>
       </Docs>
     </Member>
@@ -431,6 +638,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>3.0.8.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -450,6 +658,32 @@
             want to call <see cref="M:Microsoft.Identity.Client.TokenCache.Serialize" /></remarks>
       </Docs>
     </Member>
+    <Member MemberName="SetAfterAccessAsync">
+      <MemberSignature Language="C#" Value="public void SetAfterAccessAsync (Func&lt;Microsoft.Identity.Client.TokenCacheNotificationArgs,System.Threading.Tasks.Task&gt; afterAccess);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void SetAfterAccessAsync(class System.Func`2&lt;class Microsoft.Identity.Client.TokenCacheNotificationArgs, class System.Threading.Tasks.Task&gt; afterAccess) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Identity.Client.TokenCache.SetAfterAccessAsync(System.Func{Microsoft.Identity.Client.TokenCacheNotificationArgs,System.Threading.Tasks.Task})" />
+      <MemberSignature Language="VB.NET" Value="Public Sub SetAfterAccessAsync (afterAccess As Func(Of TokenCacheNotificationArgs, Task))" />
+      <MemberSignature Language="F#" Value="abstract member SetAfterAccessAsync : Func&lt;Microsoft.Identity.Client.TokenCacheNotificationArgs, System.Threading.Tasks.Task&gt; -&gt; unit&#xA;override this.SetAfterAccessAsync : Func&lt;Microsoft.Identity.Client.TokenCacheNotificationArgs, System.Threading.Tasks.Task&gt; -&gt; unit" Usage="tokenCache.SetAfterAccessAsync afterAccess" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.Identity.Client.ITokenCache.SetAfterAccessAsync(System.Func{Microsoft.Identity.Client.TokenCacheNotificationArgs,System.Threading.Tasks.Task})</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Identity.Client</AssemblyName>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="afterAccess" Type="System.Func&lt;Microsoft.Identity.Client.TokenCacheNotificationArgs,System.Threading.Tasks.Task&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="afterAccess"></param>
+        <summary />
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="SetBeforeAccess">
       <MemberSignature Language="C#" Value="public void SetBeforeAccess (Microsoft.Identity.Client.TokenCacheCallback beforeAccess);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void SetBeforeAccess(class Microsoft.Identity.Client.TokenCacheCallback beforeAccess) cil managed" />
@@ -463,6 +697,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>3.0.8.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -481,6 +716,32 @@
             want to call <see cref="M:Microsoft.Identity.Client.TokenCache.Deserialize(System.Byte[])" /></remarks>
       </Docs>
     </Member>
+    <Member MemberName="SetBeforeAccessAsync">
+      <MemberSignature Language="C#" Value="public void SetBeforeAccessAsync (Func&lt;Microsoft.Identity.Client.TokenCacheNotificationArgs,System.Threading.Tasks.Task&gt; beforeAccess);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void SetBeforeAccessAsync(class System.Func`2&lt;class Microsoft.Identity.Client.TokenCacheNotificationArgs, class System.Threading.Tasks.Task&gt; beforeAccess) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Identity.Client.TokenCache.SetBeforeAccessAsync(System.Func{Microsoft.Identity.Client.TokenCacheNotificationArgs,System.Threading.Tasks.Task})" />
+      <MemberSignature Language="VB.NET" Value="Public Sub SetBeforeAccessAsync (beforeAccess As Func(Of TokenCacheNotificationArgs, Task))" />
+      <MemberSignature Language="F#" Value="abstract member SetBeforeAccessAsync : Func&lt;Microsoft.Identity.Client.TokenCacheNotificationArgs, System.Threading.Tasks.Task&gt; -&gt; unit&#xA;override this.SetBeforeAccessAsync : Func&lt;Microsoft.Identity.Client.TokenCacheNotificationArgs, System.Threading.Tasks.Task&gt; -&gt; unit" Usage="tokenCache.SetBeforeAccessAsync beforeAccess" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.Identity.Client.ITokenCache.SetBeforeAccessAsync(System.Func{Microsoft.Identity.Client.TokenCacheNotificationArgs,System.Threading.Tasks.Task})</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Identity.Client</AssemblyName>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="beforeAccess" Type="System.Func&lt;Microsoft.Identity.Client.TokenCacheNotificationArgs,System.Threading.Tasks.Task&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="beforeAccess"></param>
+        <summary />
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="SetBeforeWrite">
       <MemberSignature Language="C#" Value="public void SetBeforeWrite (Microsoft.Identity.Client.TokenCacheCallback beforeWrite);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void SetBeforeWrite(class Microsoft.Identity.Client.TokenCacheCallback beforeWrite) cil managed" />
@@ -494,6 +755,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>3.0.8.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -510,6 +772,32 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
+    <Member MemberName="SetBeforeWriteAsync">
+      <MemberSignature Language="C#" Value="public void SetBeforeWriteAsync (Func&lt;Microsoft.Identity.Client.TokenCacheNotificationArgs,System.Threading.Tasks.Task&gt; beforeWrite);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void SetBeforeWriteAsync(class System.Func`2&lt;class Microsoft.Identity.Client.TokenCacheNotificationArgs, class System.Threading.Tasks.Task&gt; beforeWrite) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Identity.Client.TokenCache.SetBeforeWriteAsync(System.Func{Microsoft.Identity.Client.TokenCacheNotificationArgs,System.Threading.Tasks.Task})" />
+      <MemberSignature Language="VB.NET" Value="Public Sub SetBeforeWriteAsync (beforeWrite As Func(Of TokenCacheNotificationArgs, Task))" />
+      <MemberSignature Language="F#" Value="abstract member SetBeforeWriteAsync : Func&lt;Microsoft.Identity.Client.TokenCacheNotificationArgs, System.Threading.Tasks.Task&gt; -&gt; unit&#xA;override this.SetBeforeWriteAsync : Func&lt;Microsoft.Identity.Client.TokenCacheNotificationArgs, System.Threading.Tasks.Task&gt; -&gt; unit" Usage="tokenCache.SetBeforeWriteAsync beforeWrite" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.Identity.Client.ITokenCache.SetBeforeWriteAsync(System.Func{Microsoft.Identity.Client.TokenCacheNotificationArgs,System.Threading.Tasks.Task})</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Identity.Client</AssemblyName>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="beforeWrite" Type="System.Func&lt;Microsoft.Identity.Client.TokenCacheNotificationArgs,System.Threading.Tasks.Task&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="beforeWrite"></param>
+        <summary />
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="SetIosKeychainSecurityGroup">
       <MemberSignature Language="C#" Value="public void SetIosKeychainSecurityGroup (string securityGroup);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void SetIosKeychainSecurityGroup(string securityGroup) cil managed" />
@@ -523,6 +811,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Identity.Client</AssemblyName>
         <AssemblyVersion>3.0.8.0</AssemblyVersion>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
