@@ -18648,14 +18648,8 @@
   </Namespace>
   <Namespace Name="Microsoft.FeatureManagement">
     <Type Name="Microsoft.FeatureManagement.AspNetCoreFeatureManagementBuilderExtensions" Id="T:Microsoft.FeatureManagement.AspNetCoreFeatureManagementBuilderExtensions">
-      <Member Id="M:Microsoft.FeatureManagement.AspNetCoreFeatureManagementBuilderExtensions.UseDisabledFeaturesHandler(Microsoft.FeatureManagement.IFeatureManagementBuilder,Microsoft.FeatureManagement.IDisabledFeaturesHandler)" />
+      <Member Id="M:Microsoft.FeatureManagement.AspNetCoreFeatureManagementBuilderExtensions.UseDisabledFeaturesHandler(Microsoft.FeatureManagement.IFeatureManagementBuilder,Microsoft.FeatureManagement.Mvc.IDisabledFeaturesHandler)" />
       <Member Id="M:Microsoft.FeatureManagement.AspNetCoreFeatureManagementBuilderExtensions.UseDisabledFeaturesHandler(Microsoft.FeatureManagement.IFeatureManagementBuilder,System.Action{System.Collections.Generic.IEnumerable{System.String},Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext})" />
-    </Type>
-    <Type Name="Microsoft.FeatureManagement.FeatureAttribute" Id="T:Microsoft.FeatureManagement.FeatureAttribute">
-      <Member Id="M:Microsoft.FeatureManagement.FeatureAttribute.#ctor(System.Object[])" />
-      <Member Id="M:Microsoft.FeatureManagement.FeatureAttribute.#ctor(System.String[])" />
-      <Member Id="M:Microsoft.FeatureManagement.FeatureAttribute.OnActionExecutionAsync(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate)" />
-      <Member Id="P:Microsoft.FeatureManagement.FeatureAttribute.Features" />
     </Type>
     <Type Name="Microsoft.FeatureManagement.FeatureFilterEvaluationContext" Id="T:Microsoft.FeatureManagement.FeatureFilterEvaluationContext">
       <Member Id="M:Microsoft.FeatureManagement.FeatureFilterEvaluationContext.#ctor" />
@@ -18669,14 +18663,12 @@
     <Type Name="Microsoft.FeatureManagement.FilterCollectionExtensions" Id="T:Microsoft.FeatureManagement.FilterCollectionExtensions">
       <Member Id="M:Microsoft.FeatureManagement.FilterCollectionExtensions.AddForFeature``1(Microsoft.AspNetCore.Mvc.Filters.FilterCollection,System.String)" />
     </Type>
-    <Type Name="Microsoft.FeatureManagement.IDisabledFeaturesHandler" Id="T:Microsoft.FeatureManagement.IDisabledFeaturesHandler">
-      <Member Id="M:Microsoft.FeatureManagement.IDisabledFeaturesHandler.HandleDisabledFeatures(System.Collections.Generic.IEnumerable{System.String},Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)" />
-    </Type>
     <Type Name="Microsoft.FeatureManagement.IFeatureFilter" Id="T:Microsoft.FeatureManagement.IFeatureFilter">
       <Member Id="M:Microsoft.FeatureManagement.IFeatureFilter.Evaluate(Microsoft.FeatureManagement.FeatureFilterEvaluationContext)" />
     </Type>
     <Type Name="Microsoft.FeatureManagement.IFeatureManagementBuilder" Id="T:Microsoft.FeatureManagement.IFeatureManagementBuilder">
       <Member Id="M:Microsoft.FeatureManagement.IFeatureManagementBuilder.AddFeatureFilter``1" />
+      <Member Id="M:Microsoft.FeatureManagement.IFeatureManagementBuilder.AddSessionManager``1" />
       <Member Id="P:Microsoft.FeatureManagement.IFeatureManagementBuilder.Services" />
     </Type>
     <Type Name="Microsoft.FeatureManagement.IFeatureManager" Id="T:Microsoft.FeatureManagement.IFeatureManager">
@@ -18686,6 +18678,10 @@
     <Type Name="Microsoft.FeatureManagement.ISessionManager" Id="T:Microsoft.FeatureManagement.ISessionManager">
       <Member Id="M:Microsoft.FeatureManagement.ISessionManager.Set(System.String,System.Boolean)" />
       <Member Id="M:Microsoft.FeatureManagement.ISessionManager.TryGet(System.String,System.Boolean@)" />
+    </Type>
+    <Type Name="Microsoft.FeatureManagement.RequirementType" Id="T:Microsoft.FeatureManagement.RequirementType">
+      <Member Id="F:Microsoft.FeatureManagement.RequirementType.All" />
+      <Member Id="F:Microsoft.FeatureManagement.RequirementType.Any" />
     </Type>
     <Type Name="Microsoft.FeatureManagement.RouteBuilderExtensions" Id="T:Microsoft.FeatureManagement.RouteBuilderExtensions">
       <Member Id="M:Microsoft.FeatureManagement.RouteBuilderExtensions.MapRouteForFeature(Microsoft.AspNetCore.Routing.IRouteBuilder,System.String,System.String,System.String,System.Object,System.Object,System.Object)" />
@@ -18709,10 +18705,27 @@
       <Member Id="M:Microsoft.FeatureManagement.FeatureFilters.TimeWindowFilter.Evaluate(Microsoft.FeatureManagement.FeatureFilterEvaluationContext)" />
     </Type>
   </Namespace>
-  <Namespace Name="Microsoft.FeatureManagement.TagHelpers">
-    <Type Name="Microsoft.FeatureManagement.TagHelpers.FeatureTagHelper" Id="T:Microsoft.FeatureManagement.TagHelpers.FeatureTagHelper">
-      <Member Id="M:Microsoft.FeatureManagement.TagHelpers.FeatureTagHelper.#ctor(Microsoft.FeatureManagement.IFeatureManagerSnapshot)" />
-      <Member Id="M:Microsoft.FeatureManagement.TagHelpers.FeatureTagHelper.Process(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)" />
+  <Namespace Name="Microsoft.FeatureManagement.Mvc">
+    <Type Name="Microsoft.FeatureManagement.Mvc.FeatureGateAttribute" Id="T:Microsoft.FeatureManagement.Mvc.FeatureGateAttribute">
+      <Member Id="M:Microsoft.FeatureManagement.Mvc.FeatureGateAttribute.#ctor(Microsoft.FeatureManagement.RequirementType,System.Object[])" />
+      <Member Id="M:Microsoft.FeatureManagement.Mvc.FeatureGateAttribute.#ctor(Microsoft.FeatureManagement.RequirementType,System.String[])" />
+      <Member Id="M:Microsoft.FeatureManagement.Mvc.FeatureGateAttribute.#ctor(System.Object[])" />
+      <Member Id="M:Microsoft.FeatureManagement.Mvc.FeatureGateAttribute.#ctor(System.String[])" />
+      <Member Id="M:Microsoft.FeatureManagement.Mvc.FeatureGateAttribute.OnActionExecutionAsync(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate)" />
+      <Member Id="P:Microsoft.FeatureManagement.Mvc.FeatureGateAttribute.Features" />
+      <Member Id="P:Microsoft.FeatureManagement.Mvc.FeatureGateAttribute.RequirementType" />
+    </Type>
+    <Type Name="Microsoft.FeatureManagement.Mvc.IDisabledFeaturesHandler" Id="T:Microsoft.FeatureManagement.Mvc.IDisabledFeaturesHandler">
+      <Member Id="M:Microsoft.FeatureManagement.Mvc.IDisabledFeaturesHandler.HandleDisabledFeatures(System.Collections.Generic.IEnumerable{System.String},Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)" />
+    </Type>
+  </Namespace>
+  <Namespace Name="Microsoft.FeatureManagement.Mvc.TagHelpers">
+    <Type Name="Microsoft.FeatureManagement.Mvc.TagHelpers.FeatureTagHelper" Id="T:Microsoft.FeatureManagement.Mvc.TagHelpers.FeatureTagHelper">
+      <Member Id="M:Microsoft.FeatureManagement.Mvc.TagHelpers.FeatureTagHelper.#ctor(Microsoft.FeatureManagement.IFeatureManagerSnapshot)" />
+      <Member Id="M:Microsoft.FeatureManagement.Mvc.TagHelpers.FeatureTagHelper.Process(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)" />
+      <Member Id="P:Microsoft.FeatureManagement.Mvc.TagHelpers.FeatureTagHelper.Name" />
+      <Member Id="P:Microsoft.FeatureManagement.Mvc.TagHelpers.FeatureTagHelper.Negate" />
+      <Member Id="P:Microsoft.FeatureManagement.Mvc.TagHelpers.FeatureTagHelper.Requirement" />
     </Type>
   </Namespace>
   <Namespace Name="Microsoft.Identity.Client">
