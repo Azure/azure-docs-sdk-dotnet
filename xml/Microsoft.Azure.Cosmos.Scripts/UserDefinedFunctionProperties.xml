@@ -7,6 +7,7 @@
   <AssemblyInfo>
     <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
     <AssemblyVersion>3.0.0.18</AssemblyVersion>
+    <AssemblyVersion>3.0.0.19</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -48,6 +49,33 @@
                  }
              }
              ]]></code></example>
+    <example>
+             The following examples show how to register and use UDFs.
+             <code language="c#"><![CDATA[
+             await this.container.UserDefinedFunctions.CreateUserDefinedFunctionAsync(
+                 new UserDefinedFunctionProperties 
+                 { 
+                     Id = "calculateTax", 
+                     Body = @"function(amt) { return amt * 0.05; }" 
+                 });
+            
+             QueryDefinition sqlQuery = new QueryDefinition(
+                 "SELECT VALUE udf.calculateTax(t.cost) FROM toDoActivity t where t.cost > @expensive and t.status = @status")
+                 .WithParameter("@expensive", 9000)
+                 .WithParameter("@status", "Done");
+            
+             FeedIterator<double> feedIterator = this.container.Items.GetItemsQueryIterator<double>(
+                 sqlQueryDefinition: sqlQuery,
+                 partitionKey: "Done");
+            
+             while (feedIterator.HasMoreResults)
+             {
+                 foreach (var tax in await feedIterator.FetchNextSetAsync())
+                 {
+                     Console.WriteLine(tax);
+                 }
+             }
+             ]]></code></example>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -59,6 +87,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
         <AssemblyVersion>3.0.0.18</AssemblyVersion>
+        <AssemblyVersion>3.0.0.19</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -76,6 +105,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
         <AssemblyVersion>3.0.0.18</AssemblyVersion>
+        <AssemblyVersion>3.0.0.19</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -103,6 +133,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
         <AssemblyVersion>3.0.0.18</AssemblyVersion>
+        <AssemblyVersion>3.0.0.19</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -134,6 +165,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
         <AssemblyVersion>3.0.0.18</AssemblyVersion>
+        <AssemblyVersion>3.0.0.19</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
