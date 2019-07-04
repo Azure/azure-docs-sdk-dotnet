@@ -1,0 +1,175 @@
+﻿<Type Name="ExponentialRetry" FullName="Azure.Messaging.EventHubs.ExponentialRetry">
+  <TypeSignature Language="C#" Value="public sealed class ExponentialRetry : Azure.Messaging.EventHubs.Retry" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit ExponentialRetry extends Azure.Messaging.EventHubs.Retry" />
+  <TypeSignature Language="DocId" Value="T:Azure.Messaging.EventHubs.ExponentialRetry" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class ExponentialRetry&#xA;Inherits Retry" />
+  <TypeSignature Language="F#" Value="type ExponentialRetry = class&#xA;    inherit Retry" />
+  <AssemblyInfo>
+    <AssemblyName>Azure.Messaging.EventHubs</AssemblyName>
+    <AssemblyVersion>5.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Azure.Messaging.EventHubs.Retry</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>
+               A policy to govern retrying of messaging operations in which the delay between retries will grow in an
+               exponential manner, allowing more time to recover as the number of retries increases.
+             </summary>
+    <remarks>To be added.</remarks>
+    <altmember cref="T:Azure.Messaging.EventHubs.Retry" />
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public ExponentialRetry (TimeSpan minimumBackoff, TimeSpan maximumBackoff, int maximumRetryCount);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.TimeSpan minimumBackoff, valuetype System.TimeSpan maximumBackoff, int32 maximumRetryCount) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Messaging.EventHubs.ExponentialRetry.#ctor(System.TimeSpan,System.TimeSpan,System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (minimumBackoff As TimeSpan, maximumBackoff As TimeSpan, maximumRetryCount As Integer)" />
+      <MemberSignature Language="F#" Value="new Azure.Messaging.EventHubs.ExponentialRetry : TimeSpan * TimeSpan * int -&gt; Azure.Messaging.EventHubs.ExponentialRetry" Usage="new Azure.Messaging.EventHubs.ExponentialRetry (minimumBackoff, maximumBackoff, maximumRetryCount)" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Messaging.EventHubs</AssemblyName>
+        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="minimumBackoff" Type="System.TimeSpan" />
+        <Parameter Name="maximumBackoff" Type="System.TimeSpan" />
+        <Parameter Name="maximumRetryCount" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="minimumBackoff">The minimum time period permissible for backing off between retries.</param>
+        <param name="maximumBackoff">The maximum time period permissible for backing off between retries.</param>
+        <param name="maximumRetryCount">The maximum number of retries allowed.</param>
+        <summary>
+               Initializes a new instance of the <see cref="T:Azure.Messaging.EventHubs.ExponentialRetry" /> class.
+             </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CalculateNextRetryInterval">
+      <MemberSignature Language="C#" Value="protected override Nullable&lt;TimeSpan&gt; CalculateNextRetryInterval (Exception lastException, TimeSpan remainingTime, int baseWaitSeconds, int retryCount);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance valuetype System.Nullable`1&lt;valuetype System.TimeSpan&gt; CalculateNextRetryInterval(class System.Exception lastException, valuetype System.TimeSpan remainingTime, int32 baseWaitSeconds, int32 retryCount) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Messaging.EventHubs.ExponentialRetry.CalculateNextRetryInterval(System.Exception,System.TimeSpan,System.Int32,System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Function CalculateNextRetryInterval (lastException As Exception, remainingTime As TimeSpan, baseWaitSeconds As Integer, retryCount As Integer) As Nullable(Of TimeSpan)" />
+      <MemberSignature Language="F#" Value="override this.CalculateNextRetryInterval : Exception * TimeSpan * int * int -&gt; Nullable&lt;TimeSpan&gt;" Usage="exponentialRetry.CalculateNextRetryInterval (lastException, remainingTime, baseWaitSeconds, retryCount)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Messaging.EventHubs</AssemblyName>
+        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;System.TimeSpan&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="lastException" Type="System.Exception" />
+        <Parameter Name="remainingTime" Type="System.TimeSpan" />
+        <Parameter Name="baseWaitSeconds" Type="System.Int32" />
+        <Parameter Name="retryCount" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="lastException">The last exception that was observed for the operation to be retried.</param>
+        <param name="remainingTime">The amount of time remaining for the cumulative timeout across retry attempts.</param>
+        <param name="baseWaitSeconds">The number of seconds to base the suggested retry interval on; this should be used as the minimum interval returned under normal circumstances.</param>
+        <param name="retryCount">The number of retries that have already been attempted.</param>
+        <summary>
+               Allows a concrete retry policy implementation to offer a base retry interval to be used in
+               the calculations performed by <see cref="M:Azure.Messaging.EventHubs.Retry.GetNextRetryInterval(System.Exception,System.TimeSpan,System.Int32)" />.
+             </summary>
+        <returns>The amount of time to delay before retrying the associated operation; if <c>null</c>, then the operation is no longer eligible to be retried.</returns>
+        <remarks>
+               The interval produced by this method is considered non-authoritative and is subject to adjustment by the
+               <see cref="M:Azure.Messaging.EventHubs.Retry.GetNextRetryInterval(System.Exception,System.TimeSpan,System.Int32)" /> implementation.
+             </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Equals">
+      <MemberSignature Language="C#" Value="public override bool Equals (object obj);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Messaging.EventHubs.ExponentialRetry.Equals(System.Object)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function Equals (obj As Object) As Boolean" />
+      <MemberSignature Language="F#" Value="override this.Equals : obj -&gt; bool" Usage="exponentialRetry.Equals obj" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Messaging.EventHubs</AssemblyName>
+        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="obj" Type="System.Object" />
+      </Parameters>
+      <Docs>
+        <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
+        <summary>
+               Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.
+             </summary>
+        <returns>
+          <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetHashCode">
+      <MemberSignature Language="C#" Value="public override int GetHashCode ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Messaging.EventHubs.ExponentialRetry.GetHashCode" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function GetHashCode () As Integer" />
+      <MemberSignature Language="F#" Value="override this.GetHashCode : unit -&gt; int" Usage="exponentialRetry.GetHashCode " />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Messaging.EventHubs</AssemblyName>
+        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+               Returns a hash code for this instance.
+             </summary>
+        <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ToString">
+      <MemberSignature Language="C#" Value="public override string ToString ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string ToString() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Messaging.EventHubs.ExponentialRetry.ToString" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function ToString () As String" />
+      <MemberSignature Language="F#" Value="override this.ToString : unit -&gt; string" Usage="exponentialRetry.ToString " />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Messaging.EventHubs</AssemblyName>
+        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+               Converts the instance to string representation.
+             </summary>
+        <returns>A <see cref="T:System.String" /> that represents this instance.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>
