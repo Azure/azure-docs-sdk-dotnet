@@ -1,7 +1,7 @@
 ---
 title: Azure Cosmos DB libraries for .NET
 description: Reference for Azure Cosmos DB libraries for .NET
-ms.date: 08/31/2018
+ms.date: 06/18/2019
 ms.topic: reference
 ms.service: cosmos-db
 ---
@@ -18,7 +18,7 @@ ms.service: cosmos-db
 
 Use the Azure Cosmos DB .NET client library to access and store data in an existing Azure Cosmos DB data store. To automate creation of a new Azure Cosmos DB account, use the Azure portal, CLI, or PowerShell.
 
-Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.DocumentDB.Core) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
+Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Cosmos) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
 
 To install version 2.x:
 
@@ -69,7 +69,9 @@ This example connects to an existing Azure Cosmos DB SQL API database, creates a
 using (CosmosClient cosmosClient = new CosmosClient("endpoint", "primaryKey"))
 {
     // Read item from container
-    CosmosItemResponse<TodoItem> todoItemResponse = await cosmosClient.Databases["DatabaseId"].Containers["ContainerId"].Items.ReadItemAsync<TodoItem>("partitionKeyValue", "ItemId");
+    CosmosItemResponse<TodoItem> todoItemResponse = await cosmosClient
+                .GetContainer("DatabaseId", "ContainerId")
+                .ReadItemAsync<TodoItem>("ItemId", new PartitionKey("partitionKeyValue"));
 }
 ```
 
@@ -78,9 +80,7 @@ using (CosmosClient cosmosClient = new CosmosClient("endpoint", "primaryKey"))
 
 ## Samples
 
-* [Developing a .NET app using Azure Cosmos DB's SQL API (Version 2.x)](https://github.com/Azure-Samples/documentdb-dotnet-todo-app/)
-* [Developing a .NET app using Azure Cosmos DB's SQL API (Version 3.x Preview)](https://github.com/Azure-Samples/cosmos-dotnet-todo-app/)
-* [Developing a .NET Core app using Azure Cosmos DB's SQL API (Version 3.x Preview)](https://github.com/Azure-Samples/cosmos-dotnet-core-getting-started)
+* [Developing a .NET app using Azure Cosmos DB's SQL API](https://github.com/Azure-Samples/cosmos-dotnet-todo-app/)
 
 View the [complete list](https://azure.microsoft.com/resources/samples/?platform=dotnet&term=cosmosdb) of Azure Cosmos DB samples.
 
