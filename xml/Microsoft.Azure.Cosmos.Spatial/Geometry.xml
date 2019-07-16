@@ -145,6 +145,39 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
+    <Member MemberName="Distance">
+      <MemberSignature Language="C#" Value="public double Distance (Microsoft.Azure.Cosmos.Spatial.Geometry to);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance float64 Distance(class Microsoft.Azure.Cosmos.Spatial.Geometry to) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Cosmos.Spatial.Geometry.Distance(Microsoft.Azure.Cosmos.Spatial.Geometry)" />
+      <MemberSignature Language="VB.NET" Value="Public Function Distance (to As Geometry) As Double" />
+      <MemberSignature Language="F#" Value="member this.Distance : Microsoft.Azure.Cosmos.Spatial.Geometry -&gt; double" Usage="geometry.Distance to" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Double</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="to" Type="Microsoft.Azure.Cosmos.Spatial.Geometry" />
+      </Parameters>
+      <Docs>
+        <param name="to">Second <see cref="T:Microsoft.Azure.Cosmos.Spatial.Geometry" />.</param>
+        <summary>
+            Distance in meters between two geometries in the Azure Cosmos DB service.
+            </summary>
+        <returns>Returns distance in meters between two geometries.</returns>
+        <remarks>
+            Today this function support only geometries of <see cref="F:Microsoft.Azure.Cosmos.Spatial.GeometryType.Point" /> type.
+            </remarks>
+        <example>
+          <code><![CDATA[
+            var distanceQuery = documents.Where(document => document.Location.Distance(new Point(20.1, 20)) < 20000);
+            ]]></code>
+        </example>
+      </Docs>
+    </Member>
     <Member MemberName="Equals">
       <MemberSignature Language="C#" Value="public override bool Equals (object obj);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed" />
@@ -198,6 +231,117 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
+    <Member MemberName="Intersects">
+      <MemberSignature Language="C#" Value="public bool Intersects (Microsoft.Azure.Cosmos.Spatial.Geometry geometry2);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool Intersects(class Microsoft.Azure.Cosmos.Spatial.Geometry geometry2) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Cosmos.Spatial.Geometry.Intersects(Microsoft.Azure.Cosmos.Spatial.Geometry)" />
+      <MemberSignature Language="VB.NET" Value="Public Function Intersects (geometry2 As Geometry) As Boolean" />
+      <MemberSignature Language="F#" Value="member this.Intersects : Microsoft.Azure.Cosmos.Spatial.Geometry -&gt; bool" Usage="geometry.Intersects geometry2" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="geometry2" Type="Microsoft.Azure.Cosmos.Spatial.Geometry" />
+      </Parameters>
+      <Docs>
+        <param name="geometry2">Second <see cref="T:Microsoft.Azure.Cosmos.Spatial.Geometry" />.</param>
+        <summary>
+            Checks if current geometry1 intersects with geometry2.
+            </summary>
+        <returns>Returns true if geometry1 intersects with geometry2, otherwise returns false.</returns>
+        <remarks>To be added.</remarks>
+        <example>
+          <code><![CDATA[
+            var distanceQuery = documents.Where(document => document.Location.Intersects(new Point(20.1, 20)));
+            ]]></code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="IsValid">
+      <MemberSignature Language="C#" Value="public bool IsValid ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool IsValid() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Cosmos.Spatial.Geometry.IsValid" />
+      <MemberSignature Language="VB.NET" Value="Public Function IsValid () As Boolean" />
+      <MemberSignature Language="F#" Value="member this.IsValid : unit -&gt; bool" Usage="geometry.IsValid " />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+          <para>
+            Determines if the geometry specified is valid and can be indexed
+            or used in queries by Azure Cosmos DB service.
+            </para>
+          <para>
+            If a geometry is not valid, it will not be indexed. Also during query time invalid geometries are equivalent to <c>undefined</c>.
+            </para>
+        </summary>
+        <returns>
+          <c>true</c> if geometry is valid. <c>false</c> otherwise.</returns>
+        <remarks>
+            Currently this function supports geometry of type <see cref="F:Microsoft.Azure.Cosmos.Spatial.GeometryType.Point" /> and <see cref="F:Microsoft.Azure.Cosmos.Spatial.GeometryType.Polygon" />.
+            </remarks>
+        <example>
+          <para>
+            This example select all the documents which contain invalid geometries which were not indexed.
+            </para>
+          <code><![CDATA[
+            var invalidDocuments = documents.Where(document => !document.Location.IsValid());
+            ]]></code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="IsValidDetailed">
+      <MemberSignature Language="C#" Value="public Microsoft.Azure.Cosmos.Spatial.GeometryValidationResult IsValidDetailed ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Azure.Cosmos.Spatial.GeometryValidationResult IsValidDetailed() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Cosmos.Spatial.Geometry.IsValidDetailed" />
+      <MemberSignature Language="VB.NET" Value="Public Function IsValidDetailed () As GeometryValidationResult" />
+      <MemberSignature Language="F#" Value="member this.IsValidDetailed : unit -&gt; Microsoft.Azure.Cosmos.Spatial.GeometryValidationResult" Usage="geometry.IsValidDetailed " />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Azure.Cosmos.Spatial.GeometryValidationResult</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+          <para>
+            Determines if the geometry specified is valid and can be indexed
+            or used in queries by Azure Cosmos DB service
+            and if invalid, gives the additional reason as a string value.
+            </para>
+          <para>
+            If a geometry is not valid, it will not be indexed. Also during query time invalid geometries are equivalent to <c>undefined</c>.
+            </para>
+        </summary>
+        <returns>Instance of <see cref="T:Microsoft.Azure.Cosmos.Spatial.GeometryValidationResult" />.</returns>
+        <remarks>
+            Currently this function supports geometry of type <see cref="F:Microsoft.Azure.Cosmos.Spatial.GeometryType.Point" /> and <see cref="F:Microsoft.Azure.Cosmos.Spatial.GeometryType.Polygon" />.
+            </remarks>
+        <example>
+          <para>
+            This example select all the documents which contain invalid geometries which were not indexed.
+            </para>
+          <code><![CDATA[
+            var invalidReason = documents.Where(document => !document.Location.IsValid()).Select(document => document.Location.IsValidDetailed());
+            ]]></code>
+        </example>
+      </Docs>
+    </Member>
     <Member MemberName="Type">
       <MemberSignature Language="C#" Value="public Microsoft.Azure.Cosmos.Spatial.GeometryType Type { get; }" />
       <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.Azure.Cosmos.Spatial.GeometryType Type" />
@@ -231,6 +375,51 @@
             Type of geometry.
             </value>
         <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Within">
+      <MemberSignature Language="C#" Value="public bool Within (Microsoft.Azure.Cosmos.Spatial.Geometry outer);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool Within(class Microsoft.Azure.Cosmos.Spatial.Geometry outer) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Cosmos.Spatial.Geometry.Within(Microsoft.Azure.Cosmos.Spatial.Geometry)" />
+      <MemberSignature Language="VB.NET" Value="Public Function Within (outer As Geometry) As Boolean" />
+      <MemberSignature Language="F#" Value="member this.Within : Microsoft.Azure.Cosmos.Spatial.Geometry -&gt; bool" Usage="geometry.Within outer" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="outer" Type="Microsoft.Azure.Cosmos.Spatial.Geometry" />
+      </Parameters>
+      <Docs>
+        <param name="outer">Outer <see cref="T:Microsoft.Azure.Cosmos.Spatial.Geometry" />.</param>
+        <summary>
+            Determines if current inner <see cref="T:Microsoft.Azure.Cosmos.Spatial.Geometry" /> is fully contained inside <paramref name="outer" /><see cref="T:Microsoft.Azure.Cosmos.Spatial.Geometry" /> in the Azure Cosmos DB service.
+            </summary>
+        <returns>
+          <c>true</c> if current inner <see cref="T:Microsoft.Azure.Cosmos.Spatial.Geometry" /> is fully contained inside <paramref name="outer" /><see cref="T:Microsoft.Azure.Cosmos.Spatial.Geometry" />.
+            <c>false</c> otherwise.
+            </returns>
+        <remarks>
+            Currently this function supports current geometry of type <see cref="F:Microsoft.Azure.Cosmos.Spatial.GeometryType.Point" /> and outer geometry of type <see cref="F:Microsoft.Azure.Cosmos.Spatial.GeometryType.Polygon" />.
+            </remarks>
+        <example>
+          <code><![CDATA[
+            Polygon polygon = new Polygon(
+                   new[]
+                   {
+                        new Position(10, 10),
+                        new Position(30, 10),
+                        new Position(30, 30),
+                        new Position(10, 30),
+                        new Position(10, 10)
+                   });
+            var withinQuery = documents.Where(document => document.Location.Within(polygon));
+            ]]></code>
+        </example>
       </Docs>
     </Member>
   </Members>
