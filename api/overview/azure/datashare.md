@@ -24,7 +24,7 @@ dotnet add package Microsoft.Azure.Management.DataShare
 
 ### Code Example
 
-The following example uses the management library to create a Data Share account.
+This example creates a Data Share account.
 
 ```csharp
 /*
