@@ -1,3 +1,8 @@
+---
+title: Azure Data Share libraries for .NET
+description: Reference for Azure Data Share libraries for .NET
+---
+
 # Azure Data Share libraries for .NET
 
 ## Overview
