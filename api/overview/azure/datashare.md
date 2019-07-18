@@ -2,7 +2,7 @@
 
 ## Overview
 
-[Azure Data Share](https://azure.microsoft.com/en-us/services/data-share/) is a cloud-based service which helps customers share data with other organizations. It provides centralized management, monitoring, and governance for sharing data from multiple Azure data sources. Using this service, you can quickly create shares which consist of multiple datasets from a variety of Azure data stores. You can invite your customers and external partners to access these shares through incremental snapshots of your data, and revoke access as needed.
+[Azure Data Share](https://azure.microsoft.com/services/data-share/) is a cloud-based service which helps customers share data with other organizations. It provides centralized management, monitoring, and governance for sharing data from multiple Azure data sources. Using this service, you can quickly create shares which consist of multiple datasets from a variety of Azure data stores. You can invite your customers and external partners to access these shares through incremental snapshots of your data, and revoke access as needed.
 
 ## Management library
 
