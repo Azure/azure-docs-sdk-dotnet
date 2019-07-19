@@ -1,6 +1,11 @@
 ---
 title: Azure Data Share libraries for .NET
 description: Reference for Azure Data Share libraries for .NET
+author: zachcmadsen
+ms.author: t-zamads
+ms.date: 07/19/2019
+ms.topic: reference
+ms.service: data-share
 ---
 
 # Azure Data Share libraries for .NET
