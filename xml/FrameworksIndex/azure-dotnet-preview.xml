@@ -46,6 +46,12 @@
     <Assembly Name="Microsoft.IdentityModel.Clients.ActiveDirectory" Version="4.0.0.0" />
   </Assemblies>
   <Namespace Name="Azure.ApplicationModel.Configuration">
+    <Type Name="Azure.ApplicationModel.Configuration.AzureClientBuilderExtensions" Id="T:Azure.ApplicationModel.Configuration.AzureClientBuilderExtensions">
+      <Member Id="M:Azure.ApplicationModel.Configuration.AzureClientBuilderExtensions.AddEventHubClient``1(``0,System.String)" />
+      <Member Id="M:Azure.ApplicationModel.Configuration.AzureClientBuilderExtensions.AddEventHubClient``1(``0,System.String,System.String)" />
+      <Member Id="M:Azure.ApplicationModel.Configuration.AzureClientBuilderExtensions.AddEventHubClient``2(``0,``1)" />
+      <Member Id="M:Azure.ApplicationModel.Configuration.AzureClientBuilderExtensions.AddEventHubClientWithHost``1(``0,System.String,System.String)" />
+    </Type>
     <Type Name="Azure.ApplicationModel.Configuration.ConfigurationClient" Id="T:Azure.ApplicationModel.Configuration.ConfigurationClient">
       <Member Id="M:Azure.ApplicationModel.Configuration.ConfigurationClient.#ctor" />
       <Member Id="M:Azure.ApplicationModel.Configuration.ConfigurationClient.#ctor(System.String)" />
@@ -132,17 +138,6 @@
     </Type>
   </Namespace>
   <Namespace Name="Azure">
-    <Type Name="Azure.AsyncCollection`1" Id="T:Azure.AsyncCollection`1">
-      <Member Id="M:Azure.AsyncCollection`1.#ctor" />
-      <Member Id="M:Azure.AsyncCollection`1.#ctor(System.Threading.CancellationToken)" />
-      <Member Id="M:Azure.AsyncCollection`1.ByPage(System.String,System.Nullable{System.Int32})" />
-      <Member Id="M:Azure.AsyncCollection`1.Equals(System.Object)" />
-      <Member Id="M:Azure.AsyncCollection`1.GetAsyncEnumerator(System.Threading.CancellationToken)" />
-      <Member Id="M:Azure.AsyncCollection`1.GetEnumerator" />
-      <Member Id="M:Azure.AsyncCollection`1.GetHashCode" />
-      <Member Id="M:Azure.AsyncCollection`1.ToString" />
-      <Member Id="P:Azure.AsyncCollection`1.CancellationToken" />
-    </Type>
     <Type Name="Azure.AzureExtensions" Id="T:Azure.AzureExtensions">
       <Member Id="M:Azure.AzureExtensions.WaitCompletionAsync``1(System.Threading.Tasks.Task{Azure.Operation{``0}},System.Threading.CancellationToken)" />
     </Type>
@@ -170,15 +165,6 @@
       <Member Id="P:Azure.Operation`1.HasValue" />
       <Member Id="P:Azure.Operation`1.PollingInterval" />
       <Member Id="P:Azure.Operation`1.Value" />
-    </Type>
-    <Type Name="Azure.Page`1" Id="T:Azure.Page`1">
-      <Member Id="M:Azure.Page`1.#ctor(`0[],System.String,Azure.Response)" />
-      <Member Id="M:Azure.Page`1.Equals(System.Object)" />
-      <Member Id="M:Azure.Page`1.GetHashCode" />
-      <Member Id="M:Azure.Page`1.GetRawResponse" />
-      <Member Id="M:Azure.Page`1.ToString" />
-      <Member Id="P:Azure.Page`1.ContinuationToken" />
-      <Member Id="P:Azure.Page`1.Values" />
     </Type>
     <Type Name="Azure.Request" Id="T:Azure.Request">
       <Member Id="M:Azure.Request.#ctor" />
@@ -482,16 +468,39 @@
       <Member Id="M:Azure.Identity.ClientCertificateCredential.#ctor(System.String,System.String,System.Security.Cryptography.X509Certificates.X509Certificate2,Azure.Identity.IdentityClientOptions)" />
       <Member Id="M:Azure.Identity.ClientCertificateCredential.GetToken(System.String[],System.Threading.CancellationToken)" />
       <Member Id="M:Azure.Identity.ClientCertificateCredential.GetTokenAsync(System.String[],System.Threading.CancellationToken)" />
+      <Member Id="P:Azure.Identity.ClientCertificateCredential.ClientCertificate" />
+      <Member Id="P:Azure.Identity.ClientCertificateCredential.ClientId" />
+      <Member Id="P:Azure.Identity.ClientCertificateCredential.TenantId" />
     </Type>
     <Type Name="Azure.Identity.ClientSecretCredential" Id="T:Azure.Identity.ClientSecretCredential">
       <Member Id="M:Azure.Identity.ClientSecretCredential.#ctor(System.String,System.String,System.String)" />
       <Member Id="M:Azure.Identity.ClientSecretCredential.#ctor(System.String,System.String,System.String,Azure.Identity.IdentityClientOptions)" />
       <Member Id="M:Azure.Identity.ClientSecretCredential.GetToken(System.String[],System.Threading.CancellationToken)" />
       <Member Id="M:Azure.Identity.ClientSecretCredential.GetTokenAsync(System.String[],System.Threading.CancellationToken)" />
+      <Member Id="P:Azure.Identity.ClientSecretCredential.ClientId" />
+      <Member Id="P:Azure.Identity.ClientSecretCredential.ClientSecret" />
+      <Member Id="P:Azure.Identity.ClientSecretCredential.TenantId" />
     </Type>
     <Type Name="Azure.Identity.DefaultAzureCredential" Id="T:Azure.Identity.DefaultAzureCredential">
       <Member Id="M:Azure.Identity.DefaultAzureCredential.#ctor" />
       <Member Id="M:Azure.Identity.DefaultAzureCredential.#ctor(Azure.Identity.IdentityClientOptions)" />
+    </Type>
+    <Type Name="Azure.Identity.DeviceCodeCredential" Id="T:Azure.Identity.DeviceCodeCredential">
+      <Member Id="M:Azure.Identity.DeviceCodeCredential.#ctor" />
+      <Member Id="M:Azure.Identity.DeviceCodeCredential.#ctor(System.String,System.Func{Azure.Identity.DeviceCodeInfo,System.Threading.CancellationToken,System.Threading.Tasks.Task})" />
+      <Member Id="M:Azure.Identity.DeviceCodeCredential.#ctor(System.String,System.Func{Azure.Identity.DeviceCodeInfo,System.Threading.CancellationToken,System.Threading.Tasks.Task},Azure.Identity.IdentityClientOptions)" />
+      <Member Id="M:Azure.Identity.DeviceCodeCredential.GetToken(System.String[],System.Threading.CancellationToken)" />
+      <Member Id="M:Azure.Identity.DeviceCodeCredential.GetTokenAsync(System.String[],System.Threading.CancellationToken)" />
+    </Type>
+    <Type Name="Azure.Identity.DeviceCodeInfo" Id="T:Azure.Identity.DeviceCodeInfo">
+      <Member Id="P:Azure.Identity.DeviceCodeInfo.ClientId" />
+      <Member Id="P:Azure.Identity.DeviceCodeInfo.DeviceCode" />
+      <Member Id="P:Azure.Identity.DeviceCodeInfo.ExpiresOn" />
+      <Member Id="P:Azure.Identity.DeviceCodeInfo.Interval" />
+      <Member Id="P:Azure.Identity.DeviceCodeInfo.Message" />
+      <Member Id="P:Azure.Identity.DeviceCodeInfo.Scopes" />
+      <Member Id="P:Azure.Identity.DeviceCodeInfo.UserCode" />
+      <Member Id="P:Azure.Identity.DeviceCodeInfo.VerificationUrl" />
     </Type>
     <Type Name="Azure.Identity.EnvironmentCredential" Id="T:Azure.Identity.EnvironmentCredential">
       <Member Id="M:Azure.Identity.EnvironmentCredential.#ctor" />
@@ -503,10 +512,23 @@
       <Member Id="M:Azure.Identity.IdentityClientOptions.#ctor" />
       <Member Id="P:Azure.Identity.IdentityClientOptions.AuthorityHost" />
     </Type>
+    <Type Name="Azure.Identity.InteractiveBrowserCredential" Id="T:Azure.Identity.InteractiveBrowserCredential">
+      <Member Id="M:Azure.Identity.InteractiveBrowserCredential.#ctor(System.String)" />
+      <Member Id="M:Azure.Identity.InteractiveBrowserCredential.#ctor(System.String,Azure.Identity.IdentityClientOptions)" />
+      <Member Id="M:Azure.Identity.InteractiveBrowserCredential.GetToken(System.String[],System.Threading.CancellationToken)" />
+      <Member Id="M:Azure.Identity.InteractiveBrowserCredential.GetTokenAsync(System.String[],System.Threading.CancellationToken)" />
+    </Type>
     <Type Name="Azure.Identity.ManagedIdentityCredential" Id="T:Azure.Identity.ManagedIdentityCredential">
       <Member Id="M:Azure.Identity.ManagedIdentityCredential.#ctor(System.String,Azure.Identity.IdentityClientOptions)" />
       <Member Id="M:Azure.Identity.ManagedIdentityCredential.GetToken(System.String[],System.Threading.CancellationToken)" />
       <Member Id="M:Azure.Identity.ManagedIdentityCredential.GetTokenAsync(System.String[],System.Threading.CancellationToken)" />
+    </Type>
+    <Type Name="Azure.Identity.UsernamePasswordCredential" Id="T:Azure.Identity.UsernamePasswordCredential">
+      <Member Id="M:Azure.Identity.UsernamePasswordCredential.#ctor" />
+      <Member Id="M:Azure.Identity.UsernamePasswordCredential.#ctor(System.String,System.Security.SecureString,System.String,System.String)" />
+      <Member Id="M:Azure.Identity.UsernamePasswordCredential.#ctor(System.String,System.Security.SecureString,System.String,System.String,Azure.Identity.IdentityClientOptions)" />
+      <Member Id="M:Azure.Identity.UsernamePasswordCredential.GetToken(System.String[],System.Threading.CancellationToken)" />
+      <Member Id="M:Azure.Identity.UsernamePasswordCredential.GetTokenAsync(System.String[],System.Threading.CancellationToken)" />
     </Type>
   </Namespace>
   <Namespace Name="Azure.Messaging.EventHubs.Authorization">
@@ -518,17 +540,31 @@
     </Type>
   </Namespace>
   <Namespace Name="Azure.Messaging.EventHubs">
+    <Type Name="Azure.Messaging.EventHubs.BatchOptions" Id="T:Azure.Messaging.EventHubs.BatchOptions">
+      <Member Id="M:Azure.Messaging.EventHubs.BatchOptions.#ctor" />
+      <Member Id="M:Azure.Messaging.EventHubs.BatchOptions.Equals(System.Object)" />
+      <Member Id="M:Azure.Messaging.EventHubs.BatchOptions.GetHashCode" />
+      <Member Id="M:Azure.Messaging.EventHubs.BatchOptions.ToString" />
+      <Member Id="P:Azure.Messaging.EventHubs.BatchOptions.MaximumizeInBytes" />
+    </Type>
     <Type Name="Azure.Messaging.EventHubs.EventData" Id="T:Azure.Messaging.EventHubs.EventData">
       <Member Id="M:Azure.Messaging.EventHubs.EventData.#ctor(System.ReadOnlyMemory{System.Byte})" />
       <Member Id="M:Azure.Messaging.EventHubs.EventData.Equals(System.Object)" />
       <Member Id="M:Azure.Messaging.EventHubs.EventData.GetHashCode" />
       <Member Id="M:Azure.Messaging.EventHubs.EventData.ToString" />
       <Member Id="P:Azure.Messaging.EventHubs.EventData.Body" />
-      <Member Id="P:Azure.Messaging.EventHubs.EventData.EnqueuedTimeUtc" />
+      <Member Id="P:Azure.Messaging.EventHubs.EventData.EnqueuedTime" />
       <Member Id="P:Azure.Messaging.EventHubs.EventData.Offset" />
       <Member Id="P:Azure.Messaging.EventHubs.EventData.PartitionKey" />
       <Member Id="P:Azure.Messaging.EventHubs.EventData.Properties" />
       <Member Id="P:Azure.Messaging.EventHubs.EventData.SequenceNumber" />
+    </Type>
+    <Type Name="Azure.Messaging.EventHubs.EventDataBatch" Id="T:Azure.Messaging.EventHubs.EventDataBatch">
+      <Member Id="M:Azure.Messaging.EventHubs.EventDataBatch.Dispose" />
+      <Member Id="M:Azure.Messaging.EventHubs.EventDataBatch.TryAdd(Azure.Messaging.EventHubs.EventData)" />
+      <Member Id="P:Azure.Messaging.EventHubs.EventDataBatch.Count" />
+      <Member Id="P:Azure.Messaging.EventHubs.EventDataBatch.MaximumSizeInBytes" />
+      <Member Id="P:Azure.Messaging.EventHubs.EventDataBatch.SizeInBytes" />
     </Type>
     <Type Name="Azure.Messaging.EventHubs.EventHubClient" Id="T:Azure.Messaging.EventHubs.EventHubClient">
       <Member Id="M:Azure.Messaging.EventHubs.EventHubClient.#ctor" />
@@ -549,16 +585,16 @@
       <Member Id="M:Azure.Messaging.EventHubs.EventHubClient.GetPartitionPropertiesAsync(System.String,System.Threading.CancellationToken)" />
       <Member Id="M:Azure.Messaging.EventHubs.EventHubClient.GetPropertiesAsync(System.Threading.CancellationToken)" />
       <Member Id="M:Azure.Messaging.EventHubs.EventHubClient.ToString" />
-      <Member Id="P:Azure.Messaging.EventHubs.EventHubClient.EventHubPath" />
+      <Member Id="P:Azure.Messaging.EventHubs.EventHubClient.EventHubName" />
+      <Member Id="P:Azure.Messaging.EventHubs.EventHubClient.RetryPolicy" />
     </Type>
     <Type Name="Azure.Messaging.EventHubs.EventHubClientOptions" Id="T:Azure.Messaging.EventHubs.EventHubClientOptions">
       <Member Id="M:Azure.Messaging.EventHubs.EventHubClientOptions.#ctor" />
       <Member Id="M:Azure.Messaging.EventHubs.EventHubClientOptions.Equals(System.Object)" />
       <Member Id="M:Azure.Messaging.EventHubs.EventHubClientOptions.GetHashCode" />
       <Member Id="M:Azure.Messaging.EventHubs.EventHubClientOptions.ToString" />
-      <Member Id="P:Azure.Messaging.EventHubs.EventHubClientOptions.DefaultTimeout" />
       <Member Id="P:Azure.Messaging.EventHubs.EventHubClientOptions.Proxy" />
-      <Member Id="P:Azure.Messaging.EventHubs.EventHubClientOptions.Retry" />
+      <Member Id="P:Azure.Messaging.EventHubs.EventHubClientOptions.RetryOptions" />
       <Member Id="P:Azure.Messaging.EventHubs.EventHubClientOptions.TransportType" />
     </Type>
     <Type Name="Azure.Messaging.EventHubs.EventHubConsumer" Id="T:Azure.Messaging.EventHubs.EventHubConsumer">
@@ -570,10 +606,15 @@
       <Member Id="M:Azure.Messaging.EventHubs.EventHubConsumer.Equals(System.Object)" />
       <Member Id="M:Azure.Messaging.EventHubs.EventHubConsumer.GetHashCode" />
       <Member Id="M:Azure.Messaging.EventHubs.EventHubConsumer.ReceiveAsync(System.Int32,System.Nullable{System.TimeSpan},System.Threading.CancellationToken)" />
+      <Member Id="M:Azure.Messaging.EventHubs.EventHubConsumer.SubscribeToEvents(System.Nullable{System.TimeSpan},System.Threading.CancellationToken)" />
+      <Member Id="M:Azure.Messaging.EventHubs.EventHubConsumer.SubscribeToEvents(System.Threading.CancellationToken)" />
       <Member Id="M:Azure.Messaging.EventHubs.EventHubConsumer.ToString" />
       <Member Id="P:Azure.Messaging.EventHubs.EventHubConsumer.ConsumerGroup" />
+      <Member Id="P:Azure.Messaging.EventHubs.EventHubConsumer.EventHubName" />
+      <Member Id="P:Azure.Messaging.EventHubs.EventHubConsumer.Identifier" />
       <Member Id="P:Azure.Messaging.EventHubs.EventHubConsumer.OwnerLevel" />
       <Member Id="P:Azure.Messaging.EventHubs.EventHubConsumer.PartitionId" />
+      <Member Id="P:Azure.Messaging.EventHubs.EventHubConsumer.RetryPolicy" />
       <Member Id="P:Azure.Messaging.EventHubs.EventHubConsumer.StartingPosition" />
     </Type>
     <Type Name="Azure.Messaging.EventHubs.EventHubConsumerOptions" Id="T:Azure.Messaging.EventHubs.EventHubConsumerOptions">
@@ -584,59 +625,65 @@
       <Member Id="P:Azure.Messaging.EventHubs.EventHubConsumerOptions.Identifier" />
       <Member Id="P:Azure.Messaging.EventHubs.EventHubConsumerOptions.OwnerLevel" />
       <Member Id="P:Azure.Messaging.EventHubs.EventHubConsumerOptions.PrefetchCount" />
-      <Member Id="P:Azure.Messaging.EventHubs.EventHubConsumerOptions.Retry" />
+      <Member Id="P:Azure.Messaging.EventHubs.EventHubConsumerOptions.RetryOptions" />
     </Type>
     <Type Name="Azure.Messaging.EventHubs.EventHubProducer" Id="T:Azure.Messaging.EventHubs.EventHubProducer">
       <Member Id="M:Azure.Messaging.EventHubs.EventHubProducer.#ctor" />
       <Member Id="M:Azure.Messaging.EventHubs.EventHubProducer.Close(System.Threading.CancellationToken)" />
       <Member Id="M:Azure.Messaging.EventHubs.EventHubProducer.CloseAsync(System.Threading.CancellationToken)" />
+      <Member Id="M:Azure.Messaging.EventHubs.EventHubProducer.CreateBatchAsync(Azure.Messaging.EventHubs.BatchOptions,System.Threading.CancellationToken)" />
+      <Member Id="M:Azure.Messaging.EventHubs.EventHubProducer.CreateBatchAsync(System.Threading.CancellationToken)" />
       <Member Id="M:Azure.Messaging.EventHubs.EventHubProducer.DisposeAsync" />
       <Member Id="M:Azure.Messaging.EventHubs.EventHubProducer.Equals(System.Object)" />
       <Member Id="M:Azure.Messaging.EventHubs.EventHubProducer.GetHashCode" />
       <Member Id="M:Azure.Messaging.EventHubs.EventHubProducer.SendAsync(Azure.Messaging.EventHubs.EventData,Azure.Messaging.EventHubs.SendOptions,System.Threading.CancellationToken)" />
       <Member Id="M:Azure.Messaging.EventHubs.EventHubProducer.SendAsync(Azure.Messaging.EventHubs.EventData,System.Threading.CancellationToken)" />
+      <Member Id="M:Azure.Messaging.EventHubs.EventHubProducer.SendAsync(Azure.Messaging.EventHubs.EventDataBatch,System.Threading.CancellationToken)" />
       <Member Id="M:Azure.Messaging.EventHubs.EventHubProducer.SendAsync(System.Collections.Generic.IEnumerable{Azure.Messaging.EventHubs.EventData},Azure.Messaging.EventHubs.SendOptions,System.Threading.CancellationToken)" />
       <Member Id="M:Azure.Messaging.EventHubs.EventHubProducer.SendAsync(System.Collections.Generic.IEnumerable{Azure.Messaging.EventHubs.EventData},System.Threading.CancellationToken)" />
       <Member Id="M:Azure.Messaging.EventHubs.EventHubProducer.ToString" />
-      <Member Id="P:Azure.Messaging.EventHubs.EventHubProducer.EventHubPath" />
+      <Member Id="P:Azure.Messaging.EventHubs.EventHubProducer.EventHubName" />
       <Member Id="P:Azure.Messaging.EventHubs.EventHubProducer.PartitionId" />
+      <Member Id="P:Azure.Messaging.EventHubs.EventHubProducer.RetryPolicy" />
     </Type>
     <Type Name="Azure.Messaging.EventHubs.EventHubProducerOptions" Id="T:Azure.Messaging.EventHubs.EventHubProducerOptions">
       <Member Id="M:Azure.Messaging.EventHubs.EventHubProducerOptions.#ctor" />
       <Member Id="M:Azure.Messaging.EventHubs.EventHubProducerOptions.Equals(System.Object)" />
       <Member Id="M:Azure.Messaging.EventHubs.EventHubProducerOptions.GetHashCode" />
       <Member Id="M:Azure.Messaging.EventHubs.EventHubProducerOptions.ToString" />
-      <Member Id="M:Azure.Messaging.EventHubs.EventHubProducerOptions.ValidateTimeout(System.Nullable{System.TimeSpan})" />
       <Member Id="P:Azure.Messaging.EventHubs.EventHubProducerOptions.PartitionId" />
-      <Member Id="P:Azure.Messaging.EventHubs.EventHubProducerOptions.Retry" />
-      <Member Id="P:Azure.Messaging.EventHubs.EventHubProducerOptions.Timeout" />
+      <Member Id="P:Azure.Messaging.EventHubs.EventHubProducerOptions.RetryOptions" />
+    </Type>
+    <Type Name="Azure.Messaging.EventHubs.EventHubRetryPolicy" Id="T:Azure.Messaging.EventHubs.EventHubRetryPolicy">
+      <Member Id="M:Azure.Messaging.EventHubs.EventHubRetryPolicy.#ctor" />
+      <Member Id="M:Azure.Messaging.EventHubs.EventHubRetryPolicy.CalculateRetryDelay(System.Exception,System.Int32)" />
+      <Member Id="M:Azure.Messaging.EventHubs.EventHubRetryPolicy.CalculateTryTimeout(System.Int32)" />
+      <Member Id="M:Azure.Messaging.EventHubs.EventHubRetryPolicy.Equals(System.Object)" />
+      <Member Id="M:Azure.Messaging.EventHubs.EventHubRetryPolicy.GetHashCode" />
+      <Member Id="M:Azure.Messaging.EventHubs.EventHubRetryPolicy.ToString" />
     </Type>
     <Type Name="Azure.Messaging.EventHubs.EventPosition" Id="T:Azure.Messaging.EventHubs.EventPosition">
       <Member Id="M:Azure.Messaging.EventHubs.EventPosition.#ctor" />
       <Member Id="M:Azure.Messaging.EventHubs.EventPosition.Equals(System.Object)" />
-      <Member Id="M:Azure.Messaging.EventHubs.EventPosition.FromEnqueuedTime(System.DateTime)" />
-      <Member Id="M:Azure.Messaging.EventHubs.EventPosition.FromOffset(System.Int32)" />
+      <Member Id="M:Azure.Messaging.EventHubs.EventPosition.FromEnqueuedTime(System.DateTimeOffset)" />
+      <Member Id="M:Azure.Messaging.EventHubs.EventPosition.FromOffset(System.Int64)" />
       <Member Id="M:Azure.Messaging.EventHubs.EventPosition.FromSequenceNumber(System.Int64,System.Boolean)" />
       <Member Id="M:Azure.Messaging.EventHubs.EventPosition.GetHashCode" />
       <Member Id="M:Azure.Messaging.EventHubs.EventPosition.ToString" />
       <Member Id="P:Azure.Messaging.EventHubs.EventPosition.Earliest" />
       <Member Id="P:Azure.Messaging.EventHubs.EventPosition.Latest" />
     </Type>
-    <Type Name="Azure.Messaging.EventHubs.ExponentialRetry" Id="T:Azure.Messaging.EventHubs.ExponentialRetry">
-      <Member Id="M:Azure.Messaging.EventHubs.ExponentialRetry.#ctor(System.TimeSpan,System.TimeSpan,System.Int32)" />
-      <Member Id="M:Azure.Messaging.EventHubs.ExponentialRetry.CalculateNextRetryInterval(System.Exception,System.TimeSpan,System.Int32,System.Int32)" />
-      <Member Id="M:Azure.Messaging.EventHubs.ExponentialRetry.Equals(System.Object)" />
-      <Member Id="M:Azure.Messaging.EventHubs.ExponentialRetry.GetHashCode" />
-      <Member Id="M:Azure.Messaging.EventHubs.ExponentialRetry.ToString" />
+    <Type Name="Azure.Messaging.EventHubs.RetryMode" Id="T:Azure.Messaging.EventHubs.RetryMode">
+      <Member Id="F:Azure.Messaging.EventHubs.RetryMode.Exponential" />
+      <Member Id="F:Azure.Messaging.EventHubs.RetryMode.Fixed" />
     </Type>
-    <Type Name="Azure.Messaging.EventHubs.Retry" Id="T:Azure.Messaging.EventHubs.Retry">
-      <Member Id="M:Azure.Messaging.EventHubs.Retry.#ctor" />
-      <Member Id="M:Azure.Messaging.EventHubs.Retry.CalculateNextRetryInterval(System.Exception,System.TimeSpan,System.Int32,System.Int32)" />
-      <Member Id="M:Azure.Messaging.EventHubs.Retry.Equals(System.Object)" />
-      <Member Id="M:Azure.Messaging.EventHubs.Retry.GetHashCode" />
-      <Member Id="M:Azure.Messaging.EventHubs.Retry.ToString" />
-      <Member Id="P:Azure.Messaging.EventHubs.Retry.Default" />
-      <Member Id="P:Azure.Messaging.EventHubs.Retry.NoRetry" />
+    <Type Name="Azure.Messaging.EventHubs.RetryOptions" Id="T:Azure.Messaging.EventHubs.RetryOptions">
+      <Member Id="M:Azure.Messaging.EventHubs.RetryOptions.#ctor" />
+      <Member Id="P:Azure.Messaging.EventHubs.RetryOptions.Delay" />
+      <Member Id="P:Azure.Messaging.EventHubs.RetryOptions.MaximumDelay" />
+      <Member Id="P:Azure.Messaging.EventHubs.RetryOptions.MaximumRetries" />
+      <Member Id="P:Azure.Messaging.EventHubs.RetryOptions.Mode" />
+      <Member Id="P:Azure.Messaging.EventHubs.RetryOptions.TryTimeout" />
     </Type>
     <Type Name="Azure.Messaging.EventHubs.SendOptions" Id="T:Azure.Messaging.EventHubs.SendOptions">
       <Member Id="M:Azure.Messaging.EventHubs.SendOptions.#ctor" />
@@ -650,20 +697,100 @@
       <Member Id="F:Azure.Messaging.EventHubs.TransportType.AmqpWebSockets" />
     </Type>
   </Namespace>
+  <Namespace Name="Azure.Messaging.EventHubs.Errors">
+    <Type Name="Azure.Messaging.EventHubs.Errors.ConsumerDisconnectedException" Id="T:Azure.Messaging.EventHubs.Errors.ConsumerDisconnectedException" />
+    <Type Name="Azure.Messaging.EventHubs.Errors.EventHubsCommunicationException" Id="T:Azure.Messaging.EventHubs.Errors.EventHubsCommunicationException" />
+    <Type Name="Azure.Messaging.EventHubs.Errors.EventHubsException" Id="T:Azure.Messaging.EventHubs.Errors.EventHubsException">
+      <Member Id="P:Azure.Messaging.EventHubs.Errors.EventHubsException.IsTransient" />
+      <Member Id="P:Azure.Messaging.EventHubs.Errors.EventHubsException.Message" />
+      <Member Id="P:Azure.Messaging.EventHubs.Errors.EventHubsException.ResourceName" />
+    </Type>
+    <Type Name="Azure.Messaging.EventHubs.Errors.EventHubsResourceNotFoundException" Id="T:Azure.Messaging.EventHubs.Errors.EventHubsResourceNotFoundException" />
+    <Type Name="Azure.Messaging.EventHubs.Errors.EventHubsTimeoutException" Id="T:Azure.Messaging.EventHubs.Errors.EventHubsTimeoutException" />
+    <Type Name="Azure.Messaging.EventHubs.Errors.MessageSizeExceededException" Id="T:Azure.Messaging.EventHubs.Errors.MessageSizeExceededException" />
+    <Type Name="Azure.Messaging.EventHubs.Errors.QuotaExceededException" Id="T:Azure.Messaging.EventHubs.Errors.QuotaExceededException" />
+    <Type Name="Azure.Messaging.EventHubs.Errors.ServiceBusyException" Id="T:Azure.Messaging.EventHubs.Errors.ServiceBusyException" />
+  </Namespace>
   <Namespace Name="Azure.Messaging.EventHubs.Metadata">
     <Type Name="Azure.Messaging.EventHubs.Metadata.EventHubProperties" Id="T:Azure.Messaging.EventHubs.Metadata.EventHubProperties">
-      <Member Id="P:Azure.Messaging.EventHubs.Metadata.EventHubProperties.CreatedAtUtc" />
+      <Member Id="P:Azure.Messaging.EventHubs.Metadata.EventHubProperties.CreatedAt" />
+      <Member Id="P:Azure.Messaging.EventHubs.Metadata.EventHubProperties.Name" />
       <Member Id="P:Azure.Messaging.EventHubs.Metadata.EventHubProperties.PartitionIds" />
-      <Member Id="P:Azure.Messaging.EventHubs.Metadata.EventHubProperties.Path" />
     </Type>
     <Type Name="Azure.Messaging.EventHubs.Metadata.PartitionProperties" Id="T:Azure.Messaging.EventHubs.Metadata.PartitionProperties">
       <Member Id="P:Azure.Messaging.EventHubs.Metadata.PartitionProperties.BeginningSequenceNumber" />
-      <Member Id="P:Azure.Messaging.EventHubs.Metadata.PartitionProperties.EventHubPath" />
+      <Member Id="P:Azure.Messaging.EventHubs.Metadata.PartitionProperties.EventHubName" />
       <Member Id="P:Azure.Messaging.EventHubs.Metadata.PartitionProperties.Id" />
       <Member Id="P:Azure.Messaging.EventHubs.Metadata.PartitionProperties.IsEmpty" />
       <Member Id="P:Azure.Messaging.EventHubs.Metadata.PartitionProperties.LastEnqueuedOffset" />
       <Member Id="P:Azure.Messaging.EventHubs.Metadata.PartitionProperties.LastEnqueuedSequenceNumber" />
-      <Member Id="P:Azure.Messaging.EventHubs.Metadata.PartitionProperties.LastEnqueuedTimeUtc" />
+      <Member Id="P:Azure.Messaging.EventHubs.Metadata.PartitionProperties.LastEnqueuedTime" />
+    </Type>
+  </Namespace>
+  <Namespace Name="Azure.Messaging.EventHubs.Processor">
+    <Type Name="Azure.Messaging.EventHubs.Processor.Checkpoint" Id="T:Azure.Messaging.EventHubs.Processor.Checkpoint">
+      <Member Id="P:Azure.Messaging.EventHubs.Processor.Checkpoint.ConsumerGroup" />
+      <Member Id="P:Azure.Messaging.EventHubs.Processor.Checkpoint.EventHubName" />
+      <Member Id="P:Azure.Messaging.EventHubs.Processor.Checkpoint.Offset" />
+      <Member Id="P:Azure.Messaging.EventHubs.Processor.Checkpoint.OwnerIdentifier" />
+      <Member Id="P:Azure.Messaging.EventHubs.Processor.Checkpoint.PartitionId" />
+      <Member Id="P:Azure.Messaging.EventHubs.Processor.Checkpoint.SequenceNumber" />
+    </Type>
+    <Type Name="Azure.Messaging.EventHubs.Processor.CheckpointManager" Id="T:Azure.Messaging.EventHubs.Processor.CheckpointManager">
+      <Member Id="M:Azure.Messaging.EventHubs.Processor.CheckpointManager.UpdateCheckpointAsync(Azure.Messaging.EventHubs.EventData)" />
+      <Member Id="M:Azure.Messaging.EventHubs.Processor.CheckpointManager.UpdateCheckpointAsync(System.Int64,System.Int64)" />
+      <Member Id="P:Azure.Messaging.EventHubs.Processor.CheckpointManager.OwnerIdentifier" />
+    </Type>
+    <Type Name="Azure.Messaging.EventHubs.Processor.EventProcessor" Id="T:Azure.Messaging.EventHubs.Processor.EventProcessor">
+      <Member Id="M:Azure.Messaging.EventHubs.Processor.EventProcessor.#ctor(System.String,Azure.Messaging.EventHubs.EventHubClient,System.Func{Azure.Messaging.EventHubs.Processor.PartitionContext,Azure.Messaging.EventHubs.Processor.CheckpointManager,Azure.Messaging.EventHubs.Processor.IPartitionProcessor},Azure.Messaging.EventHubs.Processor.PartitionManager,Azure.Messaging.EventHubs.Processor.EventProcessorOptions)" />
+      <Member Id="M:Azure.Messaging.EventHubs.Processor.EventProcessor.StartAsync" />
+      <Member Id="M:Azure.Messaging.EventHubs.Processor.EventProcessor.StopAsync" />
+      <Member Id="P:Azure.Messaging.EventHubs.Processor.EventProcessor.Identifier" />
+    </Type>
+    <Type Name="Azure.Messaging.EventHubs.Processor.EventProcessorOptions" Id="T:Azure.Messaging.EventHubs.Processor.EventProcessorOptions">
+      <Member Id="M:Azure.Messaging.EventHubs.Processor.EventProcessorOptions.#ctor" />
+      <Member Id="P:Azure.Messaging.EventHubs.Processor.EventProcessorOptions.InitialEventPosition" />
+      <Member Id="P:Azure.Messaging.EventHubs.Processor.EventProcessorOptions.MaximumMessageCount" />
+      <Member Id="P:Azure.Messaging.EventHubs.Processor.EventProcessorOptions.MaximumReceiveWaitTime" />
+    </Type>
+    <Type Name="Azure.Messaging.EventHubs.Processor.InMemoryPartitionManager" Id="T:Azure.Messaging.EventHubs.Processor.InMemoryPartitionManager">
+      <Member Id="M:Azure.Messaging.EventHubs.Processor.InMemoryPartitionManager.#ctor(System.Action{System.String})" />
+      <Member Id="M:Azure.Messaging.EventHubs.Processor.InMemoryPartitionManager.ClaimOwnershipAsync(System.Collections.Generic.IEnumerable{Azure.Messaging.EventHubs.Processor.PartitionOwnership})" />
+      <Member Id="M:Azure.Messaging.EventHubs.Processor.InMemoryPartitionManager.ListOwnershipAsync(System.String,System.String)" />
+      <Member Id="M:Azure.Messaging.EventHubs.Processor.InMemoryPartitionManager.UpdateCheckpointAsync(Azure.Messaging.EventHubs.Processor.Checkpoint)" />
+    </Type>
+    <Type Name="Azure.Messaging.EventHubs.Processor.IPartitionProcessor" Id="T:Azure.Messaging.EventHubs.Processor.IPartitionProcessor">
+      <Member Id="M:Azure.Messaging.EventHubs.Processor.IPartitionProcessor.CloseAsync(Azure.Messaging.EventHubs.Processor.PartitionProcessorCloseReason)" />
+      <Member Id="M:Azure.Messaging.EventHubs.Processor.IPartitionProcessor.InitializeAsync" />
+      <Member Id="M:Azure.Messaging.EventHubs.Processor.IPartitionProcessor.ProcessErrorAsync(System.Exception,System.Threading.CancellationToken)" />
+      <Member Id="M:Azure.Messaging.EventHubs.Processor.IPartitionProcessor.ProcessEventsAsync(System.Collections.Generic.IEnumerable{Azure.Messaging.EventHubs.EventData},System.Threading.CancellationToken)" />
+    </Type>
+    <Type Name="Azure.Messaging.EventHubs.Processor.PartitionContext" Id="T:Azure.Messaging.EventHubs.Processor.PartitionContext">
+      <Member Id="P:Azure.Messaging.EventHubs.Processor.PartitionContext.ConsumerGroup" />
+      <Member Id="P:Azure.Messaging.EventHubs.Processor.PartitionContext.EventHubName" />
+      <Member Id="P:Azure.Messaging.EventHubs.Processor.PartitionContext.PartitionId" />
+    </Type>
+    <Type Name="Azure.Messaging.EventHubs.Processor.PartitionManager" Id="T:Azure.Messaging.EventHubs.Processor.PartitionManager">
+      <Member Id="M:Azure.Messaging.EventHubs.Processor.PartitionManager.#ctor" />
+      <Member Id="M:Azure.Messaging.EventHubs.Processor.PartitionManager.ClaimOwnershipAsync(System.Collections.Generic.IEnumerable{Azure.Messaging.EventHubs.Processor.PartitionOwnership})" />
+      <Member Id="M:Azure.Messaging.EventHubs.Processor.PartitionManager.ListOwnershipAsync(System.String,System.String)" />
+      <Member Id="M:Azure.Messaging.EventHubs.Processor.PartitionManager.UpdateCheckpointAsync(Azure.Messaging.EventHubs.Processor.Checkpoint)" />
+    </Type>
+    <Type Name="Azure.Messaging.EventHubs.Processor.PartitionOwnership" Id="T:Azure.Messaging.EventHubs.Processor.PartitionOwnership">
+      <Member Id="P:Azure.Messaging.EventHubs.Processor.PartitionOwnership.ConsumerGroup" />
+      <Member Id="P:Azure.Messaging.EventHubs.Processor.PartitionOwnership.ETag" />
+      <Member Id="P:Azure.Messaging.EventHubs.Processor.PartitionOwnership.EventHubName" />
+      <Member Id="P:Azure.Messaging.EventHubs.Processor.PartitionOwnership.LastModifiedTime" />
+      <Member Id="P:Azure.Messaging.EventHubs.Processor.PartitionOwnership.Offset" />
+      <Member Id="P:Azure.Messaging.EventHubs.Processor.PartitionOwnership.OwnerIdentifier" />
+      <Member Id="P:Azure.Messaging.EventHubs.Processor.PartitionOwnership.PartitionId" />
+      <Member Id="P:Azure.Messaging.EventHubs.Processor.PartitionOwnership.SequenceNumber" />
+    </Type>
+    <Type Name="Azure.Messaging.EventHubs.Processor.PartitionProcessorCloseReason" Id="T:Azure.Messaging.EventHubs.Processor.PartitionProcessorCloseReason">
+      <Member Id="F:Azure.Messaging.EventHubs.Processor.PartitionProcessorCloseReason.EventHubException" />
+      <Member Id="F:Azure.Messaging.EventHubs.Processor.PartitionProcessorCloseReason.OwnershipLost" />
+      <Member Id="F:Azure.Messaging.EventHubs.Processor.PartitionProcessorCloseReason.Shutdown" />
+      <Member Id="F:Azure.Messaging.EventHubs.Processor.PartitionProcessorCloseReason.Unknown" />
     </Type>
   </Namespace>
   <Namespace Name="Azure.Security.KeyVault.Keys">
@@ -893,6 +1020,20 @@
     </Type>
   </Namespace>
   <Namespace Name="Azure.Storage.Blobs">
+    <Type Name="Azure.Storage.Blobs.AzureClientBuilderExtensions" Id="T:Azure.Storage.Blobs.AzureClientBuilderExtensions">
+      <Member Id="M:Azure.Storage.Blobs.AzureClientBuilderExtensions.AddBlobServiceClient``1(``0,System.String)" />
+      <Member Id="M:Azure.Storage.Blobs.AzureClientBuilderExtensions.AddBlobServiceClient``1(``0,System.Uri)" />
+      <Member Id="M:Azure.Storage.Blobs.AzureClientBuilderExtensions.AddBlobServiceClient``1(``0,System.Uri,Azure.Storage.StorageSharedKeyCredential)" />
+      <Member Id="M:Azure.Storage.Blobs.AzureClientBuilderExtensions.AddBlobServiceClient``2(``0,``1)" />
+      <Member Id="M:Azure.Storage.Blobs.AzureClientBuilderExtensions.AddFileServiceClient``1(``0,System.String)" />
+      <Member Id="M:Azure.Storage.Blobs.AzureClientBuilderExtensions.AddFileServiceClient``1(``0,System.Uri)" />
+      <Member Id="M:Azure.Storage.Blobs.AzureClientBuilderExtensions.AddFileServiceClient``1(``0,System.Uri,Azure.Storage.StorageSharedKeyCredential)" />
+      <Member Id="M:Azure.Storage.Blobs.AzureClientBuilderExtensions.AddFileServiceClient``2(``0,``1)" />
+      <Member Id="M:Azure.Storage.Blobs.AzureClientBuilderExtensions.AddQueueServiceClient``1(``0,System.String)" />
+      <Member Id="M:Azure.Storage.Blobs.AzureClientBuilderExtensions.AddQueueServiceClient``1(``0,System.Uri)" />
+      <Member Id="M:Azure.Storage.Blobs.AzureClientBuilderExtensions.AddQueueServiceClient``1(``0,System.Uri,Azure.Storage.StorageSharedKeyCredential)" />
+      <Member Id="M:Azure.Storage.Blobs.AzureClientBuilderExtensions.AddQueueServiceClient``2(``0,``1)" />
+    </Type>
     <Type Name="Azure.Storage.Blobs.BlobClient" Id="T:Azure.Storage.Blobs.BlobClient">
       <Member Id="M:Azure.Storage.Blobs.BlobClient.#ctor" />
       <Member Id="M:Azure.Storage.Blobs.BlobClient.#ctor(System.String,System.String,System.String)" />
@@ -1335,32 +1476,32 @@
     </Type>
     <Type Name="Azure.Storage.Blobs.Models.BlobsModelFactory" Id="T:Azure.Storage.Blobs.Models.BlobsModelFactory">
       <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.AccountInfo(Azure.Storage.Blobs.Models.SkuName,Azure.Storage.Blobs.Models.AccountKind)" />
-      <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.BlobAppendInfo(Azure.ETag,System.DateTimeOffset,System.Byte[],System.String,System.Int32,System.Boolean)" />
-      <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.BlobContentInfo(Azure.ETag,System.DateTimeOffset,System.Byte[],System.Int64)" />
-      <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.BlobCopyInfo(Azure.ETag,System.DateTimeOffset,System.String,Azure.Storage.Blobs.Models.CopyStatus)" />
+      <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.BlobAppendInfo(Azure.Core.Http.ETag,System.DateTimeOffset,System.Byte[],System.String,System.Int32,System.Boolean)" />
+      <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.BlobContentInfo(Azure.Core.Http.ETag,System.DateTimeOffset,System.Byte[],System.Int64)" />
+      <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.BlobCopyInfo(Azure.Core.Http.ETag,System.DateTimeOffset,System.String,Azure.Storage.Blobs.Models.CopyStatus)" />
       <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.BlobHierarchyItem(System.String,Azure.Storage.Blobs.Models.BlobItem)" />
-      <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.BlobInfo(Azure.ETag,System.DateTimeOffset)" />
+      <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.BlobInfo(Azure.Core.Http.ETag,System.DateTimeOffset)" />
       <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.BlobItem(System.String,Azure.Storage.Blobs.Models.BlobItemProperties,System.Nullable{System.Boolean},System.String,System.Collections.Generic.IDictionary{System.String,System.String})" />
-      <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.BlobItemProperties(System.String,System.Nullable{System.DateTimeOffset},System.Nullable{Azure.ETag},System.Nullable{System.Int64},System.String,System.String,System.String,System.Byte[],System.String,System.String,System.Nullable{System.Int64},System.Nullable{Azure.Storage.Blobs.Models.BlobType},System.Nullable{Azure.Storage.Blobs.Models.LeaseStatus},System.Nullable{Azure.Storage.Blobs.Models.LeaseState},System.Nullable{Azure.Storage.Blobs.Models.LeaseDurationType},System.Nullable{System.DateTimeOffset},System.Nullable{Azure.Storage.Blobs.Models.CopyStatus},System.Uri,System.String,System.Nullable{System.DateTimeOffset},System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.String,System.Nullable{System.DateTimeOffset},System.Nullable{System.Int32},Azure.Storage.Blobs.Models.AccessTier,System.Nullable{System.Boolean},Azure.Storage.Blobs.Models.ArchiveStatus,System.Nullable{System.DateTimeOffset})" />
-      <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.BlobProperties(System.DateTimeOffset,Azure.Storage.Blobs.Models.LeaseDurationType,Azure.Storage.Blobs.Models.LeaseState,Azure.Storage.Blobs.Models.LeaseStatus,System.String,System.String,Azure.ETag,System.Byte[],System.Collections.Generic.IEnumerable{System.String},System.String,System.Boolean,System.Collections.Generic.IEnumerable{System.String},Azure.Storage.Blobs.Models.CopyStatus,System.String,System.Uri,System.Int64,System.String,System.String,System.String,System.Int32,System.String,System.Boolean,System.DateTimeOffset,System.String,Azure.Storage.Blobs.Models.BlobType,System.Boolean,System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.DateTimeOffset,System.DateTimeOffset,System.Int64)" />
+      <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.BlobItemProperties(System.String,System.Nullable{System.DateTimeOffset},System.Nullable{Azure.Core.Http.ETag},System.Nullable{System.Int64},System.String,System.String,System.String,System.Byte[],System.String,System.String,System.Nullable{System.Int64},System.Nullable{Azure.Storage.Blobs.Models.BlobType},System.Nullable{Azure.Storage.Blobs.Models.LeaseStatus},System.Nullable{Azure.Storage.Blobs.Models.LeaseState},System.Nullable{Azure.Storage.Blobs.Models.LeaseDurationType},System.Nullable{System.DateTimeOffset},System.Nullable{Azure.Storage.Blobs.Models.CopyStatus},System.Uri,System.String,System.Nullable{System.DateTimeOffset},System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.String,System.Nullable{System.DateTimeOffset},System.Nullable{System.Int32},Azure.Storage.Blobs.Models.AccessTier,System.Nullable{System.Boolean},Azure.Storage.Blobs.Models.ArchiveStatus,System.Nullable{System.DateTimeOffset})" />
+      <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.BlobProperties(System.DateTimeOffset,Azure.Storage.Blobs.Models.LeaseDurationType,Azure.Storage.Blobs.Models.LeaseState,Azure.Storage.Blobs.Models.LeaseStatus,System.String,System.String,Azure.Core.Http.ETag,System.Byte[],System.Collections.Generic.IEnumerable{System.String},System.String,System.Boolean,System.Collections.Generic.IEnumerable{System.String},Azure.Storage.Blobs.Models.CopyStatus,System.String,System.Uri,System.Int64,System.String,System.String,System.String,System.Int32,System.String,System.Boolean,System.DateTimeOffset,System.String,Azure.Storage.Blobs.Models.BlobType,System.Boolean,System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.DateTimeOffset,System.DateTimeOffset,System.Int64)" />
       <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.BlobServiceStatistics(Azure.Storage.Blobs.Models.GeoReplication)" />
-      <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.BlobSnapshotInfo(System.String,Azure.ETag,System.DateTimeOffset)" />
+      <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.BlobSnapshotInfo(System.String,Azure.Core.Http.ETag,System.DateTimeOffset)" />
       <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.Block(System.String,System.Int32)" />
       <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.BlockInfo(System.Byte[])" />
       <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.BlockList(System.Collections.Generic.IEnumerable{Azure.Storage.Blobs.Models.Block},System.Collections.Generic.IEnumerable{Azure.Storage.Blobs.Models.Block})" />
       <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.ClearRange(System.Int64,System.Int64)" />
-      <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.ContainerAccessPolicy(Azure.Storage.Blobs.Models.PublicAccessType,Azure.ETag,System.DateTimeOffset,System.Collections.Generic.IEnumerable{Azure.Storage.Blobs.Models.SignedIdentifier})" />
-      <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.ContainerInfo(Azure.ETag,System.DateTimeOffset)" />
+      <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.ContainerAccessPolicy(Azure.Storage.Blobs.Models.PublicAccessType,Azure.Core.Http.ETag,System.DateTimeOffset,System.Collections.Generic.IEnumerable{Azure.Storage.Blobs.Models.SignedIdentifier})" />
+      <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.ContainerInfo(Azure.Core.Http.ETag,System.DateTimeOffset)" />
       <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.ContainerItem(System.String,Azure.Storage.Blobs.Models.ContainerProperties,System.Collections.Generic.IDictionary{System.String,System.String})" />
-      <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.ContainerProperties(System.DateTimeOffset,Azure.ETag,System.Nullable{Azure.Storage.Blobs.Models.LeaseStatus},System.Nullable{Azure.Storage.Blobs.Models.LeaseState},System.Nullable{Azure.Storage.Blobs.Models.LeaseDurationType},System.Nullable{Azure.Storage.Blobs.Models.PublicAccessType},System.Nullable{System.Boolean},System.Nullable{System.Boolean})" />
+      <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.ContainerProperties(System.DateTimeOffset,Azure.Core.Http.ETag,System.Nullable{Azure.Storage.Blobs.Models.LeaseStatus},System.Nullable{Azure.Storage.Blobs.Models.LeaseState},System.Nullable{Azure.Storage.Blobs.Models.LeaseDurationType},System.Nullable{Azure.Storage.Blobs.Models.PublicAccessType},System.Nullable{System.Boolean},System.Nullable{System.Boolean})" />
       <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.CopyFromUriOperation(System.String,System.Boolean,System.Nullable{System.Int64},Azure.Response)" />
       <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.GeoReplication(Azure.Storage.Blobs.Models.GeoReplicationStatus,System.DateTimeOffset)" />
-      <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.Lease(Azure.ETag,System.DateTimeOffset,System.String)" />
-      <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.PageBlobInfo(Azure.ETag,System.DateTimeOffset,System.Int64)" />
-      <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.PageInfo(Azure.ETag,System.DateTimeOffset,System.Byte[],System.Int64)" />
+      <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.Lease(Azure.Core.Http.ETag,System.DateTimeOffset,System.String)" />
+      <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.PageBlobInfo(Azure.Core.Http.ETag,System.DateTimeOffset,System.Int64)" />
+      <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.PageInfo(Azure.Core.Http.ETag,System.DateTimeOffset,System.Byte[],System.Int64)" />
       <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.PageList(System.Collections.Generic.IEnumerable{Azure.Storage.Blobs.Models.PageRange},System.Collections.Generic.IEnumerable{Azure.Storage.Blobs.Models.ClearRange})" />
       <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.PageRange(System.Int64,System.Int64)" />
-      <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.PageRangesInfo(System.DateTimeOffset,Azure.ETag,System.Int64,Azure.Storage.Blobs.Models.PageList)" />
+      <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.PageRangesInfo(System.DateTimeOffset,Azure.Core.Http.ETag,System.Int64,Azure.Storage.Blobs.Models.PageList)" />
       <Member Id="M:Azure.Storage.Blobs.Models.BlobsModelFactory.UserDelegationKey(System.String,System.String,System.DateTimeOffset,System.DateTimeOffset,System.String,System.String,System.String)" />
     </Type>
     <Type Name="Azure.Storage.Blobs.Models.BlobSnapshotInfo" Id="T:Azure.Storage.Blobs.Models.BlobSnapshotInfo">
@@ -1440,13 +1581,6 @@
       <Member Id="P:Azure.Storage.Blobs.Models.ContainerProperties.LeaseState" />
       <Member Id="P:Azure.Storage.Blobs.Models.ContainerProperties.LeaseStatus" />
       <Member Id="P:Azure.Storage.Blobs.Models.ContainerProperties.PublicAccess" />
-    </Type>
-    <Type Name="Azure.Storage.Blobs.Models.CopyFromUriOperation" Id="T:Azure.Storage.Blobs.Models.CopyFromUriOperation">
-      <Member Id="M:Azure.Storage.Blobs.Models.CopyFromUriOperation.UpdateStatus(System.Threading.CancellationToken)" />
-      <Member Id="M:Azure.Storage.Blobs.Models.CopyFromUriOperation.UpdateStatusAsync(System.Threading.CancellationToken)" />
-      <Member Id="P:Azure.Storage.Blobs.Models.CopyFromUriOperation.HasCompleted" />
-      <Member Id="P:Azure.Storage.Blobs.Models.CopyFromUriOperation.HasValue" />
-      <Member Id="P:Azure.Storage.Blobs.Models.CopyFromUriOperation.Id" />
     </Type>
     <Type Name="Azure.Storage.Blobs.Models.CopyStatus" Id="T:Azure.Storage.Blobs.Models.CopyStatus">
       <Member Id="F:Azure.Storage.Blobs.Models.CopyStatus.Aborted" />
@@ -1604,7 +1738,7 @@
       <Member Id="F:Azure.Storage.Blobs.Models.PublicAccessType.Container" />
     </Type>
     <Type Name="Azure.Storage.Blobs.Models.ReleasedObjectInfo" Id="T:Azure.Storage.Blobs.Models.ReleasedObjectInfo">
-      <Member Id="M:Azure.Storage.Blobs.Models.ReleasedObjectInfo.#ctor(Azure.ETag,System.DateTimeOffset)" />
+      <Member Id="M:Azure.Storage.Blobs.Models.ReleasedObjectInfo.#ctor(Azure.Core.Http.ETag,System.DateTimeOffset)" />
       <Member Id="M:Azure.Storage.Blobs.Models.ReleasedObjectInfo.Equals(Azure.Storage.Blobs.Models.ReleasedObjectInfo)" />
       <Member Id="M:Azure.Storage.Blobs.Models.ReleasedObjectInfo.Equals(System.Object)" />
       <Member Id="M:Azure.Storage.Blobs.Models.ReleasedObjectInfo.GetHashCode" />
@@ -1746,8 +1880,8 @@
       <Member Id="M:Azure.Storage.Blobs.Specialized.LeaseClient.Change(System.String,System.Nullable{Azure.Storage.Blobs.Models.HttpAccessConditions},System.Threading.CancellationToken)" />
       <Member Id="M:Azure.Storage.Blobs.Specialized.LeaseClient.ChangeAsync(System.String,System.Nullable{Azure.Storage.Blobs.Models.HttpAccessConditions},System.Threading.CancellationToken)" />
       <Member Id="M:Azure.Storage.Blobs.Specialized.LeaseClient.Release(System.Nullable{Azure.Storage.Blobs.Models.HttpAccessConditions},System.Threading.CancellationToken)" />
-      <Member Id="M:Azure.Storage.Blobs.Specialized.LeaseClient.ReleaseAsync(System.Nullable{Azure.Storage.Blobs.Models.HttpAccessConditions},System.Boolean,System.Threading.CancellationToken)" />
       <Member Id="M:Azure.Storage.Blobs.Specialized.LeaseClient.ReleaseAsync(System.Nullable{Azure.Storage.Blobs.Models.HttpAccessConditions},System.Threading.CancellationToken)" />
+      <Member Id="M:Azure.Storage.Blobs.Specialized.LeaseClient.ReleaseInternal(System.Nullable{Azure.Storage.Blobs.Models.HttpAccessConditions},System.Boolean,System.Threading.CancellationToken)" />
       <Member Id="M:Azure.Storage.Blobs.Specialized.LeaseClient.Renew(System.Nullable{Azure.Storage.Blobs.Models.HttpAccessConditions},System.Threading.CancellationToken)" />
       <Member Id="M:Azure.Storage.Blobs.Specialized.LeaseClient.RenewAsync(System.Nullable{Azure.Storage.Blobs.Models.HttpAccessConditions},System.Threading.CancellationToken)" />
       <Member Id="P:Azure.Storage.Blobs.Specialized.LeaseClient.BlobClient" />
@@ -1929,8 +2063,8 @@
       <Member Id="M:Azure.Storage.Files.ShareClient.SetMetadata(System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken)" />
       <Member Id="M:Azure.Storage.Files.ShareClient.SetMetadataAsync(System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken)" />
       <Member Id="M:Azure.Storage.Files.ShareClient.SetQuota(System.Int32,System.Threading.CancellationToken)" />
-      <Member Id="M:Azure.Storage.Files.ShareClient.SetQuotaAsync(System.Int32,System.Boolean,System.Threading.CancellationToken)" />
       <Member Id="M:Azure.Storage.Files.ShareClient.SetQuotaAsync(System.Int32,System.Threading.CancellationToken)" />
+      <Member Id="M:Azure.Storage.Files.ShareClient.SetQuotaInternal(System.Int32,System.Boolean,System.Threading.CancellationToken)" />
       <Member Id="M:Azure.Storage.Files.ShareClient.WithSnapshot(System.String)" />
       <Member Id="P:Azure.Storage.Files.ShareClient.Pipeline" />
       <Member Id="P:Azure.Storage.Files.ShareClient.Uri" />
@@ -2055,21 +2189,21 @@
     </Type>
     <Type Name="Azure.Storage.Files.Models.FilesModelFactory" Id="T:Azure.Storage.Files.Models.FilesModelFactory">
       <Member Id="M:Azure.Storage.Files.Models.FilesModelFactory.Range(System.Int64,System.Int64)" />
-      <Member Id="M:Azure.Storage.Files.Models.FilesModelFactory.ShareInfo(Azure.ETag,System.DateTimeOffset)" />
+      <Member Id="M:Azure.Storage.Files.Models.FilesModelFactory.ShareInfo(Azure.Core.Http.ETag,System.DateTimeOffset)" />
       <Member Id="M:Azure.Storage.Files.Models.FilesModelFactory.ShareItem(System.String,Azure.Storage.Files.Models.ShareItemProperties,System.String,System.Collections.Generic.IDictionary{System.String,System.String})" />
-      <Member Id="M:Azure.Storage.Files.Models.FilesModelFactory.ShareItemProperties(System.Nullable{System.DateTimeOffset},System.Nullable{Azure.ETag},System.Nullable{System.Int32})" />
-      <Member Id="M:Azure.Storage.Files.Models.FilesModelFactory.ShareProperties(System.Collections.Generic.IDictionary{System.String,System.String},Azure.ETag,System.DateTimeOffset,System.Int32)" />
-      <Member Id="M:Azure.Storage.Files.Models.FilesModelFactory.ShareSnapshotInfo(System.String,Azure.ETag,System.DateTimeOffset)" />
+      <Member Id="M:Azure.Storage.Files.Models.FilesModelFactory.ShareItemProperties(System.Nullable{System.DateTimeOffset},System.Nullable{Azure.Core.Http.ETag},System.Nullable{System.Int32})" />
+      <Member Id="M:Azure.Storage.Files.Models.FilesModelFactory.ShareProperties(System.Collections.Generic.IDictionary{System.String,System.String},Azure.Core.Http.ETag,System.DateTimeOffset,System.Int32)" />
+      <Member Id="M:Azure.Storage.Files.Models.FilesModelFactory.ShareSnapshotInfo(System.String,Azure.Core.Http.ETag,System.DateTimeOffset)" />
       <Member Id="M:Azure.Storage.Files.Models.FilesModelFactory.ShareStatistics(System.Int32)" />
       <Member Id="M:Azure.Storage.Files.Models.FilesModelFactory.StorageClosedHandlesSegment(System.String,System.Int32)" />
-      <Member Id="M:Azure.Storage.Files.Models.FilesModelFactory.StorageDirectoryInfo(Azure.ETag,System.DateTimeOffset)" />
-      <Member Id="M:Azure.Storage.Files.Models.FilesModelFactory.StorageDirectoryProperties(System.Collections.Generic.IDictionary{System.String,System.String},Azure.ETag,System.DateTimeOffset,System.Boolean)" />
-      <Member Id="M:Azure.Storage.Files.Models.FilesModelFactory.StorageFileCopyInfo(Azure.ETag,System.DateTimeOffset,System.String,Azure.Storage.Files.Models.CopyStatus)" />
-      <Member Id="M:Azure.Storage.Files.Models.FilesModelFactory.StorageFileInfo(Azure.ETag,System.DateTimeOffset,System.Boolean)" />
+      <Member Id="M:Azure.Storage.Files.Models.FilesModelFactory.StorageDirectoryInfo(Azure.Core.Http.ETag,System.DateTimeOffset)" />
+      <Member Id="M:Azure.Storage.Files.Models.FilesModelFactory.StorageDirectoryProperties(System.Collections.Generic.IDictionary{System.String,System.String},Azure.Core.Http.ETag,System.DateTimeOffset,System.Boolean)" />
+      <Member Id="M:Azure.Storage.Files.Models.FilesModelFactory.StorageFileCopyInfo(Azure.Core.Http.ETag,System.DateTimeOffset,System.String,Azure.Storage.Files.Models.CopyStatus)" />
+      <Member Id="M:Azure.Storage.Files.Models.FilesModelFactory.StorageFileInfo(Azure.Core.Http.ETag,System.DateTimeOffset,System.Boolean)" />
       <Member Id="M:Azure.Storage.Files.Models.FilesModelFactory.StorageFileItem(System.Boolean,System.String,System.Nullable{System.Int64})" />
-      <Member Id="M:Azure.Storage.Files.Models.FilesModelFactory.StorageFileProperties(System.DateTimeOffset,Azure.ETag,System.Byte[],System.Collections.Generic.IEnumerable{System.String},System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.DateTimeOffset,System.String,System.String,System.String,System.Int64,System.String,Azure.Storage.Files.Models.Header,Azure.Storage.Files.Models.CopyStatus,System.Collections.Generic.IDictionary{System.String,System.String},System.Boolean,System.String)" />
-      <Member Id="M:Azure.Storage.Files.Models.FilesModelFactory.StorageFileRangeInfo(System.DateTimeOffset,Azure.ETag,System.Int64,System.Collections.Generic.IEnumerable{Azure.Storage.Files.Models.Range})" />
-      <Member Id="M:Azure.Storage.Files.Models.FilesModelFactory.StorageFileUploadInfo(Azure.ETag,System.DateTimeOffset,System.Byte[],System.Boolean)" />
+      <Member Id="M:Azure.Storage.Files.Models.FilesModelFactory.StorageFileProperties(System.DateTimeOffset,Azure.Core.Http.ETag,System.Byte[],System.Collections.Generic.IEnumerable{System.String},System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.DateTimeOffset,System.String,System.String,System.String,System.Int64,System.String,Azure.Storage.Files.Models.Header,Azure.Storage.Files.Models.CopyStatus,System.Collections.Generic.IDictionary{System.String,System.String},System.Boolean,System.String)" />
+      <Member Id="M:Azure.Storage.Files.Models.FilesModelFactory.StorageFileRangeInfo(System.DateTimeOffset,Azure.Core.Http.ETag,System.Int64,System.Collections.Generic.IEnumerable{Azure.Storage.Files.Models.Range})" />
+      <Member Id="M:Azure.Storage.Files.Models.FilesModelFactory.StorageFileUploadInfo(Azure.Core.Http.ETag,System.DateTimeOffset,System.Byte[],System.Boolean)" />
       <Member Id="M:Azure.Storage.Files.Models.FilesModelFactory.StorageHandle(System.String,System.String,System.String,System.String,System.String,System.DateTimeOffset,System.String,System.Nullable{System.DateTimeOffset})" />
     </Type>
     <Type Name="Azure.Storage.Files.Models.GetFilesAndDirectoriesOptions" Id="T:Azure.Storage.Files.Models.GetFilesAndDirectoriesOptions">
@@ -2461,7 +2595,6 @@
   </Namespace>
   <Namespace Name="Azure.Storage.Queues">
     <Type Name="Azure.Storage.Queues.QueueClient" Id="T:Azure.Storage.Queues.QueueClient">
-      <Member Id="F:Azure.Storage.Queues.QueueClient.MaxMessagesDequeue" />
       <Member Id="F:Azure.Storage.Queues.QueueClient.MaxMessagesPeek" />
       <Member Id="F:Azure.Storage.Queues.QueueClient.MessageMaxBytes" />
       <Member Id="M:Azure.Storage.Queues.QueueClient.#ctor" />
@@ -2843,6 +2976,7 @@
     </Type>
     <Type Name="Azure.Storage.StorageSharedKeyCredential" Id="T:Azure.Storage.StorageSharedKeyCredential">
       <Member Id="M:Azure.Storage.StorageSharedKeyCredential.#ctor(System.String,System.String)" />
+      <Member Id="M:Azure.Storage.StorageSharedKeyCredential.SetAccountKey(System.String)" />
       <Member Id="P:Azure.Storage.StorageSharedKeyCredential.AccountName" />
     </Type>
   </Namespace>
@@ -23625,6 +23759,16 @@
       <Member Id="F:Microsoft.IdentityModel.Clients.ActiveDirectory.Native.AsymmetricPaddingMode.Oaep" />
       <Member Id="F:Microsoft.IdentityModel.Clients.ActiveDirectory.Native.AsymmetricPaddingMode.Pkcs1" />
       <Member Id="F:Microsoft.IdentityModel.Clients.ActiveDirectory.Native.AsymmetricPaddingMode.Pss" />
+    </Type>
+  </Namespace>
+  <Namespace Name="TrackOne">
+    <Type Name="TrackOne.TokenScope" Id="T:TrackOne.TokenScope">
+      <Member Id="F:TrackOne.TokenScope.Entity" />
+      <Member Id="F:TrackOne.TokenScope.Namespace" />
+    </Type>
+    <Type Name="TrackOne.TransportType" Id="T:TrackOne.TransportType">
+      <Member Id="F:TrackOne.TransportType.Amqp" />
+      <Member Id="F:TrackOne.TransportType.AmqpWebSockets" />
     </Type>
   </Namespace>
 </Framework>
