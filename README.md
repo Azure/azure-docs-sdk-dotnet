@@ -4,6 +4,8 @@
 
 This repository houses raw content for the Azure .NET SDK API documentation, [hosted on docs.microsoft.com](https://docs.microsoft.com/dotnet/api/overview/azure/?view=azure-dotnet). Content provided here is generated from various NuGet packages that provide tooling to interact and manage Azure services.
 
+Conceptual content has moved to https://github.com/microsoftdocs/azure-dev-docs - please file issues and make contributions there.
+
 ### Code of Conduct
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
