@@ -14,12 +14,42 @@
   <Interfaces />
   <Docs>
     <summary>
-               Contains information about a partition that an <see cref="T:Azure.Messaging.EventHubs.Processor.IPartitionProcessor" /> will
-               be processing events from.
+               Contains information about a partition that a partition processor will be processing
+               events from.  It's also responsible for the creation of checkpoints.  The interaction
+               with the chosen storage service is done via <see cref="T:Azure.Messaging.EventHubs.Processor.PartitionManager" />.
              </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="protected internal PartitionContext (string eventHubName, string consumerGroup, string partitionId, string ownerIdentifier, Azure.Messaging.EventHubs.Processor.PartitionManager partitionManager);" />
+      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig specialname rtspecialname instance void .ctor(string eventHubName, string consumerGroup, string partitionId, string ownerIdentifier, class Azure.Messaging.EventHubs.Processor.PartitionManager partitionManager) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Messaging.EventHubs.Processor.PartitionContext.#ctor(System.String,System.String,System.String,System.String,Azure.Messaging.EventHubs.Processor.PartitionManager)" />
+      <MemberSignature Language="F#" Value="new Azure.Messaging.EventHubs.Processor.PartitionContext : string * string * string * string * Azure.Messaging.EventHubs.Processor.PartitionManager -&gt; Azure.Messaging.EventHubs.Processor.PartitionContext" Usage="new Azure.Messaging.EventHubs.Processor.PartitionContext (eventHubName, consumerGroup, partitionId, ownerIdentifier, partitionManager)" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Messaging.EventHubs</AssemblyName>
+        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="eventHubName" Type="System.String" />
+        <Parameter Name="consumerGroup" Type="System.String" />
+        <Parameter Name="partitionId" Type="System.String" />
+        <Parameter Name="ownerIdentifier" Type="System.String" />
+        <Parameter Name="partitionManager" Type="Azure.Messaging.EventHubs.Processor.PartitionManager" />
+      </Parameters>
+      <Docs>
+        <param name="eventHubName">The name of the specific Event Hub this context is associated with, relative to the Event Hubs namespace that contains it.</param>
+        <param name="consumerGroup">The name of the consumer group this context is associated with.</param>
+        <param name="partitionId">The identifier of the Event Hub partition this context is associated with.</param>
+        <param name="ownerIdentifier">The identifier of the associated <see cref="T:Azure.Messaging.EventHubs.Processor.EventProcessor`1" /> instance.</param>
+        <param name="partitionManager">Interacts with the storage system with responsibility for creation of checkpoints.</param>
+        <summary>
+               Initializes a new instance of the <see cref="T:Azure.Messaging.EventHubs.Processor.PartitionContext" /> class.
+             </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="ConsumerGroup">
       <MemberSignature Language="C#" Value="public string ConsumerGroup { get; }" />
       <MemberSignature Language="ILAsm" Value=".property instance string ConsumerGroup" />
@@ -65,6 +95,28 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
+    <Member MemberName="OwnerIdentifier">
+      <MemberSignature Language="C#" Value="public string OwnerIdentifier { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string OwnerIdentifier" />
+      <MemberSignature Language="DocId" Value="P:Azure.Messaging.EventHubs.Processor.PartitionContext.OwnerIdentifier" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property OwnerIdentifier As String" />
+      <MemberSignature Language="F#" Value="member this.OwnerIdentifier : string" Usage="Azure.Messaging.EventHubs.Processor.PartitionContext.OwnerIdentifier" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Messaging.EventHubs</AssemblyName>
+        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+               The identifier of the associated <see cref="T:Azure.Messaging.EventHubs.Processor.EventProcessor`1" /> instance.
+             </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="PartitionId">
       <MemberSignature Language="C#" Value="public string PartitionId { get; }" />
       <MemberSignature Language="ILAsm" Value=".property instance string PartitionId" />
@@ -84,6 +136,59 @@
                The identifier of the Event Hub partition this context is associated with.
              </summary>
         <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UpdateCheckpointAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task UpdateCheckpointAsync (Azure.Messaging.EventHubs.EventData eventData);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task UpdateCheckpointAsync(class Azure.Messaging.EventHubs.EventData eventData) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Messaging.EventHubs.Processor.PartitionContext.UpdateCheckpointAsync(Azure.Messaging.EventHubs.EventData)" />
+      <MemberSignature Language="F#" Value="abstract member UpdateCheckpointAsync : Azure.Messaging.EventHubs.EventData -&gt; System.Threading.Tasks.Task&#xA;override this.UpdateCheckpointAsync : Azure.Messaging.EventHubs.EventData -&gt; System.Threading.Tasks.Task" Usage="partitionContext.UpdateCheckpointAsync eventData" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Messaging.EventHubs</AssemblyName>
+        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="eventData" Type="Azure.Messaging.EventHubs.EventData" />
+      </Parameters>
+      <Docs>
+        <param name="eventData">The event containing the information to be stored in the checkpoint.</param>
+        <summary>
+               Updates the checkpoint using the given information for the associated partition and consumer group in the chosen storage service.
+             </summary>
+        <returns>A task to be resolved on when the operation has completed.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UpdateCheckpointAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task UpdateCheckpointAsync (long offset, long sequenceNumber);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task UpdateCheckpointAsync(int64 offset, int64 sequenceNumber) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Messaging.EventHubs.Processor.PartitionContext.UpdateCheckpointAsync(System.Int64,System.Int64)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function UpdateCheckpointAsync (offset As Long, sequenceNumber As Long) As Task" />
+      <MemberSignature Language="F#" Value="abstract member UpdateCheckpointAsync : int64 * int64 -&gt; System.Threading.Tasks.Task&#xA;override this.UpdateCheckpointAsync : int64 * int64 -&gt; System.Threading.Tasks.Task" Usage="partitionContext.UpdateCheckpointAsync (offset, sequenceNumber)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Messaging.EventHubs</AssemblyName>
+        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="offset" Type="System.Int64" />
+        <Parameter Name="sequenceNumber" Type="System.Int64" />
+      </Parameters>
+      <Docs>
+        <param name="offset">The offset of the <see cref="T:Azure.Messaging.EventHubs.EventData" /> the new checkpoint will be associated with.</param>
+        <param name="sequenceNumber">The sequence number assigned to the <see cref="T:Azure.Messaging.EventHubs.EventData" /> the new checkpoint will be associated with.</param>
+        <summary>
+               Updates the checkpoint using the given information for the associated partition and consumer group in the chosen storage service.
+             </summary>
+        <returns>A task to be resolved on when the operation has completed.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>

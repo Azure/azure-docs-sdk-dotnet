@@ -273,6 +273,37 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
+    <Member MemberName="LastEnqueuedEventInformation">
+      <MemberSignature Language="C#" Value="public Azure.Messaging.EventHubs.Metadata.LastEnqueuedEventProperties LastEnqueuedEventInformation { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Azure.Messaging.EventHubs.Metadata.LastEnqueuedEventProperties LastEnqueuedEventInformation" />
+      <MemberSignature Language="DocId" Value="P:Azure.Messaging.EventHubs.EventHubConsumer.LastEnqueuedEventInformation" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property LastEnqueuedEventInformation As LastEnqueuedEventProperties" />
+      <MemberSignature Language="F#" Value="member this.LastEnqueuedEventInformation : Azure.Messaging.EventHubs.Metadata.LastEnqueuedEventProperties" Usage="Azure.Messaging.EventHubs.EventHubConsumer.LastEnqueuedEventInformation" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Messaging.EventHubs</AssemblyName>
+        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Messaging.EventHubs.Metadata.LastEnqueuedEventProperties</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+               A set of information about the last enqueued event of a partition, as observed by the consumer as
+               events are received from the Event Hubs service.
+             </summary>
+        <value>
+          <c>null</c>, if the information was not requested by setting <see cref="P:Azure.Messaging.EventHubs.EventHubConsumerOptions.TrackLastEnqueuedEventInformation" />;
+               otherwise, the properties describing the most recently enqueued event in the partition.
+             </value>
+        <remarks>
+               When information about the partition's last enqueued event is being tracked, each event received from the Event Hubs
+               service will carry metadata about the partition that it otherwise would not. This results in a small amount of
+               additional network bandwidth consumption that is generally a favorable trade-off when considered
+               against periodically making requests for partition properties using the Event Hub client.
+             </remarks>
+      </Docs>
+    </Member>
     <Member MemberName="OwnerLevel">
       <MemberSignature Language="C#" Value="public Nullable&lt;long&gt; OwnerLevel { get; }" />
       <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;int64&gt; OwnerLevel" />
@@ -445,12 +476,23 @@
         <AssemblyName>Azure.Messaging.EventHubs</AssemblyName>
         <AssemblyVersion>5.0.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Runtime.CompilerServices.AsyncIteratorStateMachine(typeof(Azure.Messaging.EventHubs.EventHubConsumer/&lt;SubscribeToEvents&gt;d__41))</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Collections.Generic.IAsyncEnumerable&lt;Azure.Messaging.EventHubs.EventData&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
         <Parameter Name="maximumWaitTime" Type="System.Nullable&lt;System.TimeSpan&gt;" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken">
+          <Attributes>
+            <Attribute>
+              <AttributeName>System.Runtime.CompilerServices.EnumeratorCancellation</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
       </Parameters>
       <Docs>
         <param name="maximumWaitTime">The maximum amount of time to wait to for an event to be available before emitting an empty item; if <c>null</c>, empty items will not be published.</param>
