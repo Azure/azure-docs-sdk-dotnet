@@ -140,6 +140,7 @@
             </remarks>
         <altmember cref="M:Microsoft.Azure.Cosmos.Fluent.CosmosClientBuilder.WithConnectionModeDirect" />
         <altmember cref="M:Microsoft.Azure.Cosmos.Fluent.CosmosClientBuilder.WithConnectionModeGateway(System.Nullable{System.Int32})" />
+        <altmember cref="M:Microsoft.Azure.Cosmos.Fluent.CosmosClientBuilder.WithConnectionModeGateway(System.Nullable{System.Int32},System.Net.IWebProxy)" />
       </Docs>
     </Member>
     <Member MemberName="ConsistencyLevel">
@@ -225,6 +226,62 @@
             This setting is only applicable in Gateway mode.
             </remarks>
         <altmember cref="M:Microsoft.Azure.Cosmos.Fluent.CosmosClientBuilder.WithConnectionModeGateway(System.Nullable{System.Int32})" />
+        <altmember cref="M:Microsoft.Azure.Cosmos.Fluent.CosmosClientBuilder.WithConnectionModeGateway(System.Nullable{System.Int32},System.Net.IWebProxy)" />
+      </Docs>
+    </Member>
+    <Member MemberName="IdleTcpConnectionTimeout">
+      <MemberSignature Language="C#" Value="public Nullable&lt;TimeSpan&gt; IdleTcpConnectionTimeout { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;valuetype System.TimeSpan&gt; IdleTcpConnectionTimeout" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Cosmos.CosmosClientOptions.IdleTcpConnectionTimeout" />
+      <MemberSignature Language="VB.NET" Value="Public Property IdleTcpConnectionTimeout As Nullable(Of TimeSpan)" />
+      <MemberSignature Language="F#" Value="member this.IdleTcpConnectionTimeout : Nullable&lt;TimeSpan&gt; with get, set" Usage="Microsoft.Azure.Cosmos.CosmosClientOptions.IdleTcpConnectionTimeout" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
+        <AssemblyVersion>3.2.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;System.TimeSpan&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            (Direct/TCP) Controls the amount of idle time after which unused connections are closed.
+            </summary>
+        <value>
+            By default, idle connections are kept open indefinitely. Value must be greater than or equal to 10 minutes. Recommended values are between 20 minutes and 24 hours.
+            </value>
+        <remarks>
+            Mainly useful for sparse infrequent access to a large database account.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MaxRequestsPerTcpConnection">
+      <MemberSignature Language="C#" Value="public Nullable&lt;int&gt; MaxRequestsPerTcpConnection { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;int32&gt; MaxRequestsPerTcpConnection" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Cosmos.CosmosClientOptions.MaxRequestsPerTcpConnection" />
+      <MemberSignature Language="VB.NET" Value="Public Property MaxRequestsPerTcpConnection As Nullable(Of Integer)" />
+      <MemberSignature Language="F#" Value="member this.MaxRequestsPerTcpConnection : Nullable&lt;int&gt; with get, set" Usage="Microsoft.Azure.Cosmos.CosmosClientOptions.MaxRequestsPerTcpConnection" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
+        <AssemblyVersion>3.2.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;System.Int32&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            (Direct/TCP) Controls the number of requests allowed simultaneously over a single TCP connection. When more requests are in flight simultaneously, the direct/TCP client will open additional connections.
+            </summary>
+        <value>
+            The default settings allow 30 simultaneous requests per connection.
+            Do not set this value lower than 4 requests per connection or higher than 50-100 requests per connection.       
+            The former can lead to a large number of connections to be created. 
+            The latter can lead to head of line blocking, high latency and timeouts.
+            </value>
+        <remarks>
+            Applications with a very high degree of parallelism per connection, with large requests or responses, or with very tight latency requirements might get better performance with 8-16 requests per connection.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="MaxRetryAttemptsOnRateLimitedRequests">
@@ -279,6 +336,57 @@
             The minimum interval is seconds. Any interval that is smaller will be ignored.
             </remarks>
         <altmember cref="M:Microsoft.Azure.Cosmos.Fluent.CosmosClientBuilder.WithThrottlingRetryOptions(System.TimeSpan,System.Int32)" />
+      </Docs>
+    </Member>
+    <Member MemberName="MaxTcpConnectionsPerEndpoint">
+      <MemberSignature Language="C#" Value="public Nullable&lt;int&gt; MaxTcpConnectionsPerEndpoint { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;int32&gt; MaxTcpConnectionsPerEndpoint" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Cosmos.CosmosClientOptions.MaxTcpConnectionsPerEndpoint" />
+      <MemberSignature Language="VB.NET" Value="Public Property MaxTcpConnectionsPerEndpoint As Nullable(Of Integer)" />
+      <MemberSignature Language="F#" Value="member this.MaxTcpConnectionsPerEndpoint : Nullable&lt;int&gt; with get, set" Usage="Microsoft.Azure.Cosmos.CosmosClientOptions.MaxTcpConnectionsPerEndpoint" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
+        <AssemblyVersion>3.2.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;System.Int32&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            (Direct/TCP) Controls the maximum number of TCP connections that may be opened to each Cosmos DB back-end.
+            Together with MaxRequestsPerTcpConnection, this setting limits the number of requests that are simultaneously sent to a single Cosmos DB back-end(MaxRequestsPerTcpConnection x MaxTcpConnectionPerEndpoint).
+            </summary>
+        <value>
+            The default value is 65,535. Value must be greater than or equal to 16.
+            </value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OpenTcpConnectionTimeout">
+      <MemberSignature Language="C#" Value="public Nullable&lt;TimeSpan&gt; OpenTcpConnectionTimeout { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;valuetype System.TimeSpan&gt; OpenTcpConnectionTimeout" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Cosmos.CosmosClientOptions.OpenTcpConnectionTimeout" />
+      <MemberSignature Language="VB.NET" Value="Public Property OpenTcpConnectionTimeout As Nullable(Of TimeSpan)" />
+      <MemberSignature Language="F#" Value="member this.OpenTcpConnectionTimeout : Nullable&lt;TimeSpan&gt; with get, set" Usage="Microsoft.Azure.Cosmos.CosmosClientOptions.OpenTcpConnectionTimeout" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
+        <AssemblyVersion>3.2.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;System.TimeSpan&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            (Direct/TCP) Controls the amount of time allowed for trying to establish a connection.
+            </summary>
+        <value>
+            The default timeout is 5 seconds. Recommended values are greater than or equal to 5 seconds.
+            </value>
+        <remarks>
+            When the time elapses, the attempt is cancelled and an error is returned. Longer timeouts will delay retries and failures.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="RequestTimeout">
@@ -367,6 +475,17 @@
             
             CosmosClient client = new CosmosClient("endpoint", "key", clientOptions);
             </example>
+        <example>
+            // An example on how to set a custom serializer. For basic serializer options look at CosmosSerializationOptions
+            CosmosSerializer ignoreNullSerializer = new MyCustomIgnoreNullSerializer();
+                    
+            CosmosClientOptions clientOptions = new CosmosClientOptions()
+            {
+                Serializer = ignoreNullSerializer
+            };
+            
+            CosmosClient client = new CosmosClient("endpoint", "key", clientOptions);
+            </example>
       </Docs>
     </Member>
     <Member MemberName="SerializerOptions">
@@ -386,7 +505,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Get to set optional serializer options. 
+            Get to set optional serializer options.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -401,6 +520,28 @@
             
             CosmosClient client = new CosmosClient("endpoint", "key", clientOptions);
             </example>
+      </Docs>
+    </Member>
+    <Member MemberName="WebProxy">
+      <MemberSignature Language="C#" Value="public System.Net.IWebProxy WebProxy { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.IWebProxy WebProxy" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Cosmos.CosmosClientOptions.WebProxy" />
+      <MemberSignature Language="VB.NET" Value="Public Property WebProxy As IWebProxy" />
+      <MemberSignature Language="F#" Value="member this.WebProxy : System.Net.IWebProxy with get, set" Usage="Microsoft.Azure.Cosmos.CosmosClientOptions.WebProxy" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
+        <AssemblyVersion>3.2.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Net.IWebProxy</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            (Gateway/Https) Get or set the proxy information used for web requests.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
   </Members>
