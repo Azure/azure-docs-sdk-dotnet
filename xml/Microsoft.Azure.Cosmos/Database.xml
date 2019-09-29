@@ -362,6 +362,43 @@
              ]]></code></example>
       </Docs>
     </Member>
+    <Member MemberName="CreateUserAsync">
+      <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.UserResponse&gt; CreateUserAsync (string id, Microsoft.Azure.Cosmos.RequestOptions requestOptions = null, System.Threading.CancellationToken cancellationToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Azure.Cosmos.UserResponse&gt; CreateUserAsync(string id, class Microsoft.Azure.Cosmos.RequestOptions requestOptions, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Cosmos.Database.CreateUserAsync(System.String,Microsoft.Azure.Cosmos.RequestOptions,System.Threading.CancellationToken)" />
+      <MemberSignature Language="F#" Value="abstract member CreateUserAsync : string * Microsoft.Azure.Cosmos.RequestOptions * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.UserResponse&gt;" Usage="database.CreateUserAsync (id, requestOptions, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
+        <AssemblyVersion>3.2.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.UserResponse&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="id" Type="System.String" />
+        <Parameter Name="requestOptions" Type="Microsoft.Azure.Cosmos.RequestOptions" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="id">The cosmos user id</param>
+        <param name="requestOptions">(Optional) The options for the user request <see cref="T:Microsoft.Azure.Cosmos.RequestOptions" /></param>
+        <param name="cancellationToken">(Optional) <see cref="T:System.Threading.CancellationToken" /> representing request cancellation.</param>
+        <summary>
+             Creates a user as an asynchronous operation in the Azure Cosmos service.
+             </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> containing a <see cref="T:Microsoft.Azure.Cosmos.UserResponse" /> which wraps a <see cref="T:Microsoft.Azure.Cosmos.UserProperties" /> containing the read resource record.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">If <paramref name="id" /> is not set.</exception>
+        <exception cref="T:Microsoft.Azure.Cosmos.CosmosException">This exception can encapsulate many different types of errors. To determine the specific error always look at the StatusCode property. Some common codes you may get when creating a user are:
+             <list type="table"><listheader><term>StatusCode</term><description>Reason for exception</description></listheader><item><term>400</term><description>BadRequest - This means something was wrong with the request supplied. It is likely that an id was not supplied for the new user.</description></item><item><term>409</term><description>Conflict - This means a <see cref="T:Microsoft.Azure.Cosmos.UserProperties" /> with an id matching the id you supplied already existed.</description></item></list></exception>
+        <example>
+          <code language="c#"><![CDATA[
+             UserResponse response = await this.cosmosDatabase.CreateUserAsync(Guid.NewGuid().ToString());
+             ]]></code>
+        </example>
+      </Docs>
+    </Member>
     <Member MemberName="DefineContainer">
       <MemberSignature Language="C#" Value="public abstract Microsoft.Azure.Cosmos.Fluent.ContainerBuilder DefineContainer (string name, string partitionKeyPath);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Azure.Cosmos.Fluent.ContainerBuilder DefineContainer(string name, string partitionKeyPath) cil managed" />
@@ -533,6 +570,12 @@
         <example>
           <code language="c#"><![CDATA[
             Database db = this.cosmosClient.GetDatabase("myDatabaseId"];
+            DatabaseResponse response = await db.GetContainer("testcontainer");
+            ]]></code>
+        </example>
+        <example>
+          <code language="c#"><![CDATA[
+            Database db = this.cosmosClient.GetDatabase("myDatabaseId");
             DatabaseResponse response = await db.GetContainer("testcontainer");
             ]]></code>
         </example>
@@ -755,6 +798,146 @@
             ]]></code></example>
       </Docs>
     </Member>
+    <Member MemberName="GetUser">
+      <MemberSignature Language="C#" Value="public abstract Microsoft.Azure.Cosmos.User GetUser (string id);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Azure.Cosmos.User GetUser(string id) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Cosmos.Database.GetUser(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride Function GetUser (id As String) As User" />
+      <MemberSignature Language="F#" Value="abstract member GetUser : string -&gt; Microsoft.Azure.Cosmos.User" Usage="database.GetUser id" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
+        <AssemblyVersion>3.2.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Azure.Cosmos.User</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="id" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="id">The cosmos user id.</param>
+        <summary>
+            Returns a reference to a user object.
+            </summary>
+        <returns>Cosmos user reference</returns>
+        <remarks>
+            Returns a User reference. Reference doesn't guarantees existence.
+            Please ensure user already exists or is created through a create operation.
+            </remarks>
+        <example>
+          <code language="c#"><![CDATA[
+            Database db = this.cosmosClient.GetDatabase("myDatabaseId");
+            User user = await db.GetUser("userId");
+            UserResponse response = await user.ReadAsync();
+            ]]></code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="GetUserQueryIterator&lt;T&gt;">
+      <MemberSignature Language="C#" Value="public abstract Microsoft.Azure.Cosmos.FeedIterator&lt;T&gt; GetUserQueryIterator&lt;T&gt; (Microsoft.Azure.Cosmos.QueryDefinition queryDefinition, string continuationToken = null, Microsoft.Azure.Cosmos.QueryRequestOptions requestOptions = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Azure.Cosmos.FeedIterator`1&lt;!!T&gt; GetUserQueryIterator&lt;T&gt;(class Microsoft.Azure.Cosmos.QueryDefinition queryDefinition, string continuationToken, class Microsoft.Azure.Cosmos.QueryRequestOptions requestOptions) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Cosmos.Database.GetUserQueryIterator``1(Microsoft.Azure.Cosmos.QueryDefinition,System.String,Microsoft.Azure.Cosmos.QueryRequestOptions)" />
+      <MemberSignature Language="F#" Value="abstract member GetUserQueryIterator : Microsoft.Azure.Cosmos.QueryDefinition * string * Microsoft.Azure.Cosmos.QueryRequestOptions -&gt; Microsoft.Azure.Cosmos.FeedIterator&lt;'T&gt;" Usage="database.GetUserQueryIterator (queryDefinition, continuationToken, requestOptions)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
+        <AssemblyVersion>3.2.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Azure.Cosmos.FeedIterator&lt;T&gt;</ReturnType>
+      </ReturnValue>
+      <TypeParameters>
+        <TypeParameter Name="T" />
+      </TypeParameters>
+      <Parameters>
+        <Parameter Name="queryDefinition" Type="Microsoft.Azure.Cosmos.QueryDefinition" />
+        <Parameter Name="continuationToken" Type="System.String" />
+        <Parameter Name="requestOptions" Type="Microsoft.Azure.Cosmos.QueryRequestOptions" />
+      </Parameters>
+      <Docs>
+        <typeparam name="T">To be added.</typeparam>
+        <param name="queryDefinition">The cosmos SQL query definition.</param>
+        <param name="continuationToken">(Optional) The continuation token in the Azure Cosmos DB service.</param>
+        <param name="requestOptions">(Optional) The options for the user query request <see cref="T:Microsoft.Azure.Cosmos.QueryRequestOptions" /></param>
+        <summary>
+            This method creates a query for users under an database using a SQL statement. It returns a FeedIterator.
+            For more information on preparing SQL statements with parameterized values, please see <see cref="T:Microsoft.Azure.Cosmos.QueryDefinition" /> overload.
+            </summary>
+        <returns>An iterator to go through the users</returns>
+        <remarks>To be added.</remarks>
+        <example>
+            This create the type feed iterator for users with queryDefinition as input.
+            <code language="c#"><![CDATA[
+            string queryText = "SELECT * FROM c where c.id like @testId";
+            QueryDefinition queryDefinition = new QueryDefinition(queryText);
+            queryDefinition.WithParameter("@testId", "testUserId");
+            FeedIterator<UserProperties> resultSet = this.cosmosDatabase.GetUserQueryIterator<UserProperties>(queryDefinition);
+            while (feedIterator.HasMoreResults)
+            {
+                foreach (UserProperties properties in await feedIterator.ReadNextAsync())
+                {
+                    Console.WriteLine(properties.Id);
+                }
+            }
+            ]]></code></example>
+      </Docs>
+    </Member>
+    <Member MemberName="GetUserQueryIterator&lt;T&gt;">
+      <MemberSignature Language="C#" Value="public abstract Microsoft.Azure.Cosmos.FeedIterator&lt;T&gt; GetUserQueryIterator&lt;T&gt; (string queryText = null, string continuationToken = null, Microsoft.Azure.Cosmos.QueryRequestOptions requestOptions = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Azure.Cosmos.FeedIterator`1&lt;!!T&gt; GetUserQueryIterator&lt;T&gt;(string queryText, string continuationToken, class Microsoft.Azure.Cosmos.QueryRequestOptions requestOptions) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Cosmos.Database.GetUserQueryIterator``1(System.String,System.String,Microsoft.Azure.Cosmos.QueryRequestOptions)" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride Function GetUserQueryIterator(Of T) (Optional queryText As String = null, Optional continuationToken As String = null, Optional requestOptions As QueryRequestOptions = null) As FeedIterator(Of T)" />
+      <MemberSignature Language="F#" Value="abstract member GetUserQueryIterator : string * string * Microsoft.Azure.Cosmos.QueryRequestOptions -&gt; Microsoft.Azure.Cosmos.FeedIterator&lt;'T&gt;" Usage="database.GetUserQueryIterator (queryText, continuationToken, requestOptions)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
+        <AssemblyVersion>3.2.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Azure.Cosmos.FeedIterator&lt;T&gt;</ReturnType>
+      </ReturnValue>
+      <TypeParameters>
+        <TypeParameter Name="T" />
+      </TypeParameters>
+      <Parameters>
+        <Parameter Name="queryText" Type="System.String" />
+        <Parameter Name="continuationToken" Type="System.String" />
+        <Parameter Name="requestOptions" Type="Microsoft.Azure.Cosmos.QueryRequestOptions" />
+      </Parameters>
+      <Docs>
+        <typeparam name="T">To be added.</typeparam>
+        <param name="queryText">The cosmos SQL query text.</param>
+        <param name="continuationToken">(Optional) The continuation token in the Azure Cosmos DB service.</param>
+        <param name="requestOptions">(Optional) The options for the user query request <see cref="T:Microsoft.Azure.Cosmos.QueryRequestOptions" /></param>
+        <summary>
+            This method creates a query for users under an database using a SQL statement. It returns a FeedIterator.
+            For more information on preparing SQL statements with parameterized values, please see <see cref="T:Microsoft.Azure.Cosmos.QueryDefinition" /> overload.
+            </summary>
+        <returns>An iterator to go through the users</returns>
+        <remarks>To be added.</remarks>
+        <example>
+            1. This create the type feed iterator for users with queryText as input,
+            <code language="c#"><![CDATA[
+            string queryText = "SELECT * FROM c where c.id like '%testId%'";
+            FeedIterator<UserProperties> resultSet = this.cosmosDatabase.GetUserQueryIterator<UserProperties>(queryText);
+            while (feedIterator.HasMoreResults)
+            {
+                FeedResponse<UserProperties> iterator = await feedIterator.ReadNextAsync(this.cancellationToken);
+            }
+            ]]></code></example>
+        <example>
+            2. This create the type feed iterator for users without queryText, retrieving all users.
+            <code language="c#"><![CDATA[
+            FeedIterator<UserProperties> resultSet = this.cosmosDatabase.GetUserQueryIterator<ContainerProperties>();
+            while (feedIterator.HasMoreResults)
+            {
+                FeedResponse<UserProperties> iterator =
+                await feedIterator.ReadNextAsync(this.cancellationToken);
+            }
+            ]]></code></example>
+      </Docs>
+    </Member>
     <Member MemberName="Id">
       <MemberSignature Language="C#" Value="public abstract string Id { get; }" />
       <MemberSignature Language="ILAsm" Value=".property instance string Id" />
@@ -927,7 +1110,7 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="requestOptions">(Optional) The options for the throughput request.<see cref="T:Microsoft.Azure.Cosmos.RequestOptions" /></param>
+        <param name="requestOptions">The options for the throughput request.<see cref="T:Microsoft.Azure.Cosmos.RequestOptions" /></param>
         <param name="cancellationToken">(Optional) <see cref="T:System.Threading.CancellationToken" /> representing request cancellation.</param>
         <summary>
             Gets database throughput in measurement of request units per second in the Azure Cosmos service.
@@ -951,6 +1134,22 @@
             The following example shows how to get throughput, MinThroughput and is replace in progress
             <code language="c#"><![CDATA[
             ThroughputResponse response = await database.ReadThroughputAsync();
+            Console.WriteLine($"Throughput: {response.Resource?.Throughput}");
+            Console.WriteLine($"MinThroughput: {response.MinThroughput}");
+            Console.WriteLine($"IsReplacePending: {response.IsReplacePending}");
+            ]]></code></example>
+        <example>
+            The following example shows how to get the throughput
+            <code language="c#"><![CDATA[
+             RequestOptions requestOptions = new RequestOptions();
+            ThroughputProperties throughputProperties = await database.ReadThroughputAsync(requestOptions);
+            Console.WriteLine($"Throughput: {throughputProperties?.Throughput}");
+            ]]></code></example>
+        <example>
+            The following example shows how to get throughput, MinThroughput and is replace in progress
+            <code language="c#"><![CDATA[
+            RequestOptions requestOptions = new RequestOptions();
+            ThroughputResponse response = await database.ReadThroughputAsync(requestOptions);
             Console.WriteLine($"Throughput: {response.Resource?.Throughput}");
             Console.WriteLine($"MinThroughput: {response.MinThroughput}");
             Console.WriteLine($"IsReplacePending: {response.IsReplacePending}");
@@ -996,6 +1195,43 @@
             <code language="c#"><![CDATA[
             ThroughputResponse throughput = await this.cosmosDatabase.ReplaceThroughputAsync(10000);
             ]]></code></example>
+      </Docs>
+    </Member>
+    <Member MemberName="UpsertUserAsync">
+      <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.UserResponse&gt; UpsertUserAsync (string id, Microsoft.Azure.Cosmos.RequestOptions requestOptions = null, System.Threading.CancellationToken cancellationToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Azure.Cosmos.UserResponse&gt; UpsertUserAsync(string id, class Microsoft.Azure.Cosmos.RequestOptions requestOptions, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Cosmos.Database.UpsertUserAsync(System.String,Microsoft.Azure.Cosmos.RequestOptions,System.Threading.CancellationToken)" />
+      <MemberSignature Language="F#" Value="abstract member UpsertUserAsync : string * Microsoft.Azure.Cosmos.RequestOptions * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.UserResponse&gt;" Usage="database.UpsertUserAsync (id, requestOptions, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
+        <AssemblyVersion>3.2.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.UserResponse&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="id" Type="System.String" />
+        <Parameter Name="requestOptions" Type="Microsoft.Azure.Cosmos.RequestOptions" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="id">The cosmos user id.</param>
+        <param name="requestOptions">(Optional) The options for the user request <see cref="T:Microsoft.Azure.Cosmos.RequestOptions" /></param>
+        <param name="cancellationToken">(Optional) <see cref="T:System.Threading.CancellationToken" /> representing request cancellation.</param>
+        <summary>
+             Upserts a user as an asynchronous operation in the Azure Cosmos service.
+             </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> containing a <see cref="T:Microsoft.Azure.Cosmos.UserResponse" /> which wraps a <see cref="T:Microsoft.Azure.Cosmos.UserProperties" /> containing the read resource record.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">If <paramref name="id" /> is not set.</exception>
+        <exception cref="T:Microsoft.Azure.Cosmos.CosmosException">This exception can encapsulate many different types of errors. To determine the specific error always look at the StatusCode property. Some common codes you may get when creating a user are:
+             <list type="table"><listheader><term>StatusCode</term><description>Reason for exception</description></listheader><item><term>400</term><description>BadRequest - This means something was wrong with the request supplied. It is likely that an id was not supplied for the new user.</description></item></list></exception>
+        <example>
+          <code language="c#"><![CDATA[
+             UserResponse response = await this.cosmosDatabase.UpsertUserAsync(Guid.NewGuid().ToString());
+             ]]></code>
+        </example>
       </Docs>
     </Member>
   </Members>
