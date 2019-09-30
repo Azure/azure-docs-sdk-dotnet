@@ -75,106 +75,6 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="CreateBatch">
-      <MemberSignature Language="C#" Value="public abstract Microsoft.Azure.Cosmos.Batch CreateBatch (Microsoft.Azure.Cosmos.PartitionKey partitionKey);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Azure.Cosmos.Batch CreateBatch(valuetype Microsoft.Azure.Cosmos.PartitionKey partitionKey) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Cosmos.Container.CreateBatch(Microsoft.Azure.Cosmos.PartitionKey)" />
-      <MemberSignature Language="F#" Value="abstract member CreateBatch : Microsoft.Azure.Cosmos.PartitionKey -&gt; Microsoft.Azure.Cosmos.Batch" Usage="container.CreateBatch partitionKey" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
-        <AssemblyVersion>3.2.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>Microsoft.Azure.Cosmos.Batch</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="partitionKey" Type="Microsoft.Azure.Cosmos.PartitionKey" Index="0" FrameworkAlternate="azure-dotnet-preview" />
-      </Parameters>
-      <Docs>
-        <param name="partitionKey">The partition key for all items in the batch. <see cref="T:Microsoft.Azure.Cosmos.PartitionKey" />.</param>
-        <summary>
-             Initializes a new instance of the <see cref="T:Microsoft.Azure.Cosmos.Batch" /> class.
-             </summary>
-        <returns>An instance of <see cref="T:Microsoft.Azure.Cosmos.Batch" /></returns>
-        <remarks>To be added.</remarks>
-        <example>
-             This example atomically modifies a set of documents as a batch.
-             <code language="c#"><![CDATA[
-             public class ToDoActivity
-             {
-                 public string type { get; set; }
-                 public string id { get; set; }
-                 public string status { get; set; }
-             }
-            
-             string activityType = "personal";
-             ToDoActivity test1 = new ToDoActivity()
-             {
-                 type = activityType,
-                 id = "learning",
-                 status = "ToBeDone"
-             };
-            
-             ToDoActivity test2 = new ToDoActivity()
-             {
-                 type = activityType,
-                 id = "shopping",
-                 status = "Done"
-             };
-            
-             ToDoActivity test3 = new ToDoActivity()
-             {
-                 type = activityType,
-                 id = "swimming",
-                 status = "ToBeDone"
-             };
-            
-             using (BatchResponse batchResponse = await container.CreateBatch(new Cosmos.PartitionKey(activityType))
-                 .CreateItem<ToDoActivity>(test1)
-                 .ReplaceItem<ToDoActivity>(test2.id, test2)
-                 .UpsertItem<ToDoActivity>(test3)
-                 .DeleteItem("reading")
-                 .CreateItemStream(streamPayload1)
-                 .ReplaceItemStream("eating", streamPayload2)
-                 .UpsertItemStream(streamPayload3)
-                 .ExecuteAsync())
-             {
-                if (!batchResponse.IsSuccessStatusCode)
-                {
-                    // Handle and log exception
-                    return;
-                }
-            
-                // Look up interested results - eg. via typed access on operation results
-                BatchOperationResult<ToDoActivity> replaceResult = batchResponse.GetOperationResultAtIndex<ToDoActivity>(0);
-                ToDoActivity readActivity = replaceResult.Resource;
-             }
-             ]]></code></example>
-        <example>
-             This example atomically reads a set of documents as a batch.
-             <code language="c#"><![CDATA[
-             string activityType = "personal";
-             using (BatchResponse batchResponse = await container.CreateBatch(new Cosmos.PartitionKey(activityType))
-                .ReadItem("playing")
-                .ReadItem("walking")
-                .ReadItem("jogging")
-                .ReadItem("running")
-                .ExecuteAsync())
-             {
-                 // Look up interested results - eg. via direct access to operation result stream
-                 List<string> resultItems = new List<string>();
-                 foreach (BatchOperationResult operationResult in batchResponse)
-                 {
-                     using (StreamReader streamReader = new StreamReader(operationResult.ResourceStream))
-                     {
-                         resultItems.Add(await streamReader.ReadToEndAsync());
-                     }
-                 }
-             }
-             ]]></code></example>
-      </Docs>
-    </Member>
     <Member MemberName="CreateItemAsync&lt;T&gt;">
       <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.ItemResponse&lt;T&gt;&gt; CreateItemAsync&lt;T&gt; (T item, Nullable&lt;Microsoft.Azure.Cosmos.PartitionKey&gt; partitionKey = null, Microsoft.Azure.Cosmos.ItemRequestOptions requestOptions = null, System.Threading.CancellationToken cancellationToken = null);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Azure.Cosmos.ItemResponse`1&lt;!!T&gt;&gt; CreateItemAsync&lt;T&gt;(!!T item, valuetype System.Nullable`1&lt;valuetype Microsoft.Azure.Cosmos.PartitionKey&gt; partitionKey, class Microsoft.Azure.Cosmos.ItemRequestOptions requestOptions, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
@@ -365,6 +265,12 @@
         <example>
           <code language="c#"><![CDATA[
             Container container = this.database.Containers["containerId"];
+            ContainerResponse response = await container.DeleteContainerAsync();
+            ]]></code>
+        </example>
+        <example>
+          <code language="c#"><![CDATA[
+            Container container = this.database.GetContainer("containerId");
             ContainerResponse response = await container.DeleteContainerAsync();
             ]]></code>
         </example>
@@ -1392,7 +1298,7 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="requestOptions">(Optional) The options for the throughput request.<see cref="T:Microsoft.Azure.Cosmos.RequestOptions" /></param>
+        <param name="requestOptions">The options for the throughput request.<see cref="T:Microsoft.Azure.Cosmos.RequestOptions" /></param>
         <param name="cancellationToken">(Optional) <see cref="T:System.Threading.CancellationToken" /> representing request cancellation.</param>
         <summary>
             Gets container throughput in measurement of request units per second in the Azure Cosmos service.
@@ -1415,6 +1321,22 @@
             The following example shows how to get throughput, MinThroughput and is replace in progress
             <code language="c#"><![CDATA[
             ThroughputResponse response = await container.ReadThroughputAsync();
+            Console.WriteLine($"Throughput: {response.Resource?.Throughput}");
+            Console.WriteLine($"MinThroughput: {response.MinThroughput}");
+            Console.WriteLine($"IsReplacePending: {response.IsReplacePending}");
+            ]]></code></example>
+        <example>
+            The following example shows how to get the throughput
+            <code language="c#"><![CDATA[
+            RequestOptions requestOptions = new RequestOptions();
+            ThroughputProperties throughputProperties = await container.ReadThroughputAsync(requestOptions);
+            Console.WriteLine($"Throughput: {throughputProperties?.Throughput}");
+            ]]></code></example>
+        <example>
+            The following example shows how to get throughput, MinThroughput and is replace in progress
+            <code language="c#"><![CDATA[
+            RequestOptions requestOptions = new RequestOptions();
+            ThroughputResponse response = await container.ReadThroughputAsync(requestOptions);
             Console.WriteLine($"Throughput: {response.Resource?.Throughput}");
             Console.WriteLine($"MinThroughput: {response.MinThroughput}");
             Console.WriteLine($"IsReplacePending: {response.IsReplacePending}");

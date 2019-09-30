@@ -7,13 +7,15 @@
   <AssemblyInfo>
     <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
     <AssemblyVersion>2.10.0.0</AssemblyVersion>
+    <AssemblyVersion>2.11.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
   <Interfaces />
   <Docs>
-    <summary>@ToDo: Complete documentation before stable release. {526}</summary>
+    <summary>Metric related extension methods for the <c>TelemetryClient</c>.
+            Note that these APIs are in the ...Extensibility namespace and do not pollute the API surfact for users who do not import it.</summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -26,6 +28,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.ApplicationInsights</AssemblyName>
         <AssemblyVersion>2.10.0.0</AssemblyVersion>
+        <AssemblyVersion>2.11.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.ApplicationInsights.Metrics.MetricManager</ReturnType>
@@ -35,10 +38,19 @@
         <Parameter Name="aggregationScope" Type="Microsoft.ApplicationInsights.MetricAggregationScope" />
       </Parameters>
       <Docs>
-        <param name="telemetryClient">@ToDo: Complete documentation before stable release. {225}</param>
-        <param name="aggregationScope">@ToDo: Complete documentation before stable release. {281}</param>
-        <summary>@ToDo: Complete documentation before stable release. {811}</summary>
-        <returns>@ToDo: Complete documentation before stable release. {736}</returns>
+        <param name="telemetryClient">The telemetry client for which to get the metric manager.</param>
+        <param name="aggregationScope">If <c>MetricAggregationScope.TelemetryClient</c> is specified,
+            the metric manager specific to this client is returned. Such manager aggregates metrics for this
+            client object only. Two metrics with exactly the same id, namespace and dimensions would be aggregated
+            separately for different telemetry client objects when this scope is used.<br />
+            If <c>MetricAggregationScope.TelemetryConfiguration</c> is specified,
+            the metric manager for the telemetry configuration of this client is returned. Such manager aggregates
+            metrics for all clients that use that telemetry configuration. Two metrics with exactly the same id,
+            namespace and dimensions would be aggregated together for different telemetry client objects that use
+            the same telemetry configuration when this scope is used. <br /><seealso cref="T:Microsoft.ApplicationInsights.MetricAggregationScope" /></param>
+        <summary>Gets the <c>MetricManager</c> for this <c>TelemetryClient</c> at the specified scope.
+            If a metric manager does not exist at the specified scope, it is created.</summary>
+        <returns>The metric manager for this telemetry client at the specified scope.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>

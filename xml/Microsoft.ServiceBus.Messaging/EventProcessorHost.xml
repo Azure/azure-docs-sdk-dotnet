@@ -17,7 +17,15 @@
     </Interface>
   </Interfaces>
   <Docs>
-    <summary>Represents a host for processing Event Hubs event data.</summary>
+    <summary>
+            A very simple host for processing EventHub messages.  It takes care of distributing EventHub partitions among EventProcessorHost
+            instances.  It creates an Azure Block Blob for each partition in EventHub and use these blobs for managing lease for a partition.
+            Every EventProcessorHost instance is performing the following two tasks:
+                1) Renew Leases: It keeps track of leases currently owned by the host and continuously keeps on renewing the leases.
+                2) Acquire Leases: Each instance continuously polls all the lease blobs to check if there are any leases it should acquire 
+                for the system to get into balanced state.
+            Client application needs to implement <see cref="T:Microsoft.ServiceBus.Messaging.IEventProcessor" /> and register processor implementation with EventProcessorHost.
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -39,11 +47,13 @@
         <Parameter Name="storageConnectionString" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="eventHubPath">To be added.</param>
-        <param name="consumerGroupName">To be added.</param>
-        <param name="eventHubConnectionString">To be added.</param>
-        <param name="storageConnectionString">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="eventHubPath">Event Hub path to start receiving messages from.</param>
+        <param name="consumerGroupName">Name of Event Hub consumer group to start receiving messages from.</param>
+        <param name="eventHubConnectionString">Connection string for Event Hub.</param>
+        <param name="storageConnectionString">Connection string of Azure Blob storage account to use for partition distribution.</param>
+        <summary>
+            Creates new instance of EventProcessorHost.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -66,12 +76,17 @@
         <Parameter Name="storageClientFactory" Type="System.Func&lt;Microsoft.WindowsAzure.Storage.Blob.CloudBlobClient&gt;" />
       </Parameters>
       <Docs>
-        <param name="hostName">To be added.</param>
-        <param name="eventHubPath">To be added.</param>
-        <param name="consumerGroupName">To be added.</param>
-        <param name="eventHubClientFactory">To be added.</param>
-        <param name="storageClientFactory">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="hostName">Name for EventProcessorHost instance.  This must be unique for each instance of the host.</param>
+        <param name="eventHubPath">EventHub path to start receiving messages from.</param>
+        <param name="consumerGroupName">Name of EventHub consumer group to start receiving messages from.</param>
+        <param name="eventHubClientFactory">Factory to initialize <see cref="T:Microsoft.ServiceBus.Messaging.MessagingFactory" /> to be used by EventProcessorHost for creating <see cref="T:Microsoft.ServiceBus.Messaging.EventHubClient" />
+            and eventually <see cref="T:Microsoft.ServiceBus.Messaging.EventHubReceiver" />.  EventProcessorHost maintains a pool of these <see cref="T:Microsoft.ServiceBus.Messaging.MessagingFactory" /> objects and will use provided factory whenever
+            a new instance needs to be created based on <see cref="P:Microsoft.ServiceBus.Messaging.PartitionManagerOptions.MaxReceiveClients" /> option.</param>
+        <param name="storageClientFactory">Factory to initialize <see cref="P:Microsoft.ServiceBus.Messaging.EventProcessorHost.CloudBlobClient" /> which is used by EventProcessorHost for lease management and partition 
+            distribution among available hosts.</param>
+        <summary>
+            Creates new instance of EventProcessorHost.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -94,7 +109,8 @@
         <Parameter Name="storageConnectionString" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="hostName">The name of the <see cref="T:Microsoft.ServiceBus.Messaging.EventProcessorHost" /> instance. This name must be unique for each instance of the host.</param>
+        <param name="hostName">The name of the 
+            <see cref="T:Microsoft.ServiceBus.Messaging.EventProcessorHost" /> instance. This name must be unique for each instance of the host.</param>
         <param name="eventHubPath">The path to the Event Hub from which to start receiving event data.</param>
         <param name="consumerGroupName">The name of the Event Hubs consumer group from which to start receiving event data.</param>
         <param name="eventHubConnectionString">The connection string for the Event Hub.</param>
@@ -124,14 +140,20 @@
         <Parameter Name="leaseBlobPrefix" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="hostName">To be added.</param>
-        <param name="eventHubPath">To be added.</param>
-        <param name="consumerGroupName">To be added.</param>
-        <param name="eventHubClientFactory">To be added.</param>
-        <param name="storageClientFactory">To be added.</param>
-        <param name="leaseContainerName">To be added.</param>
-        <param name="leaseBlobPrefix">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="hostName">Name for EventProcessorHost instance.  This must be unique for each instance of the host.</param>
+        <param name="eventHubPath">EventHub path to start receiving messages from.</param>
+        <param name="consumerGroupName">Name of EventHub consumer group to start receiving messages from.</param>
+        <param name="eventHubClientFactory">Factory to initialize <see cref="T:Microsoft.ServiceBus.Messaging.MessagingFactory" /> to be used by EventProcessorHost for creating <see cref="T:Microsoft.ServiceBus.Messaging.EventHubClient" />
+            and eventually <see cref="T:Microsoft.ServiceBus.Messaging.EventHubReceiver" />.  EventProcessorHost maintains a pool of these <see cref="T:Microsoft.ServiceBus.Messaging.MessagingFactory" /> objects and will use provided factory whenever
+            a new instance needs to be created based on <see cref="P:Microsoft.ServiceBus.Messaging.PartitionManagerOptions.MaxReceiveClients" /> option.</param>
+        <param name="storageClientFactory">Factory to initialize <see cref="P:Microsoft.ServiceBus.Messaging.EventProcessorHost.CloudBlobClient" /> which is used by EventProcessorHost for lease management and partition 
+            distribution among available hosts.</param>
+        <param name="leaseContainerName">Name of Azure Blob container where all lease blobs are created.  If this is not passed in then EventHub path 
+            is used as the name of Azure Blob container.</param>
+        <param name="leaseBlobPrefix">The prefix of lease blob files.</param>
+        <summary>
+            Creates new instance of EventProcessorHost.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -156,14 +178,16 @@
         <Parameter Name="leaseBlobPrefix" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="hostName">To be added.</param>
-        <param name="eventHubPath">To be added.</param>
-        <param name="consumerGroupName">To be added.</param>
-        <param name="eventHubConnectionString">To be added.</param>
-        <param name="storageConnectionString">To be added.</param>
-        <param name="leaseContainerName">To be added.</param>
-        <param name="leaseBlobPrefix">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="hostName">The name of the 
+            <see cref="T:Microsoft.ServiceBus.Messaging.EventProcessorHost" /> instance. This name must be unique for each instance of the host.</param>
+        <param name="eventHubPath">The path to the Event Hub from which to start receiving event data.</param>
+        <param name="consumerGroupName">The name of the Event Hubs consumer group from which to start receiving event data.</param>
+        <param name="eventHubConnectionString">The connection string for the Event Hub.</param>
+        <param name="storageConnectionString">The connection string for the Azure Blob storage account to use for partition distribution.</param>
+        <param name="leaseContainerName">The name of the Azure Blob container in which all lease blobs are created. If this 
+            parameter is not supplied, then the Event Hubs path is used as the name of the Azure Blob container.</param>
+        <param name="leaseBlobPrefix">The prefix of lease blob files.</param>
+        <summary>Initializes a new instance of the <see cref="T:Microsoft.ServiceBus.Messaging.EventProcessorHost" /> class.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -248,7 +272,9 @@
         <ReturnType>Microsoft.ServiceBus.Messaging.PartitionManagerOptions</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the <see cref="T:Microsoft.ServiceBus.Messaging.PartitionManagerOptions" /> instance used by the <see cref="T:Microsoft.ServiceBus.Messaging.EventProcessorHost" /> object.</summary>
+        <summary>Gets or sets the 
+            <see cref="T:Microsoft.ServiceBus.Messaging.PartitionManagerOptions" /> instance used by the 
+            <see cref="T:Microsoft.ServiceBus.Messaging.EventProcessorHost" /> object.</summary>
         <value>The <see cref="T:Microsoft.ServiceBus.Messaging.PartitionManagerOptions" /> instance.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -277,7 +303,9 @@
       <Parameters />
       <Docs>
         <typeparam name="T">Implementation of your application-specific <see cref="T:Microsoft.ServiceBus.Messaging.IEventProcessor" />.</typeparam>
-        <summary>Asynchronously registers the <see cref="T:Microsoft.ServiceBus.Messaging.IEventProcessor" /> interface implementation with the host using the <see cref="T:Microsoft.ServiceBus.Messaging.DefaultEventProcessorFactory`1" /> factory. This method also starts the host and enables it to start participating in the partition distribution process.</summary>
+        <summary>Asynchronously registers the 
+            <see cref="T:Microsoft.ServiceBus.Messaging.IEventProcessor" /> interface implementation with the host using the 
+            <see cref="T:Microsoft.ServiceBus.Messaging.DefaultEventProcessorFactory`1" /> factory. This method also starts the host and enables it to start participating in the partition distribution process.</summary>
         <returns>A task indicating that the <see cref="T:Microsoft.ServiceBus.Messaging.EventProcessorHost" /> instance has started.</returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -307,10 +335,15 @@
         <Parameter Name="processorOptions" Type="Microsoft.ServiceBus.Messaging.EventProcessorOptions" />
       </Parameters>
       <Docs>
-        <typeparam name="T">Implementation of your application-specific <see cref="T:Microsoft.ServiceBus.Messaging.IEventProcessor" />.</typeparam>
-        <param name="processorOptions">An <see cref="T:Microsoft.ServiceBus.Messaging.EventProcessorOptions" /> object that controls various aspects of the event pump created when ownership is acquired for a given Event Hubs partition.</param>
-        <summary>Asynchronously registers the <see cref="T:Microsoft.ServiceBus.Messaging.IEventProcessor" /> interface implementation with the host using the <see cref="T:Microsoft.ServiceBus.Messaging.DefaultEventProcessorFactory`1" /> factory. This method also starts the host and enables it to start participating in the partition distribution process.</summary>
-        <returns>A task indicating that the <see cref="T:Microsoft.ServiceBus.Messaging.EventProcessorHost" /> instance has started.</returns>
+        <typeparam name="T">Implementation of your application specific <see cref="T:Microsoft.ServiceBus.Messaging.IEventProcessor" />.</typeparam>
+        <param name="processorOptions">
+          <see cref="T:Microsoft.ServiceBus.Messaging.EventProcessorOptions" /> to control various aspects of message pump created when ownership 
+            is acquired for a particular partition of EventHub.</param>
+        <summary>
+            This registers <see cref="T:Microsoft.ServiceBus.Messaging.IEventProcessor" /> implementation with the host using <see cref="T:Microsoft.ServiceBus.Messaging.DefaultEventProcessorFactory`1" />.  
+            This also starts the host and causes it to start participating in the partition distribution process.
+            </summary>
+        <returns>A task to indicate EventProcessorHost instance is started.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -332,9 +365,13 @@
         <Parameter Name="factory" Type="Microsoft.ServiceBus.Messaging.IEventProcessorFactory" />
       </Parameters>
       <Docs>
-        <param name="factory">The factory to register.</param>
-        <summary>Asynchronously registers the event processor factory.</summary>
-        <returns>The task representing the asynchronous operation.</returns>
+        <param name="factory">Instance of <see cref="T:Microsoft.ServiceBus.Messaging.IEventProcessorFactory" /> implementation.</param>
+        <summary>
+            This registers <see cref="T:Microsoft.ServiceBus.Messaging.IEventProcessorFactory" /> implementation with the host which is used to create an instance of 
+            <see cref="T:Microsoft.ServiceBus.Messaging.IEventProcessor" /> when it takes ownership of a partition.  This also starts the host and causes it to start participating 
+            in the partition distribution process.
+            </summary>
+        <returns>A task to indicate EventProcessorHost instance is started.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -357,10 +394,16 @@
         <Parameter Name="processorOptions" Type="Microsoft.ServiceBus.Messaging.EventProcessorOptions" />
       </Parameters>
       <Docs>
-        <param name="factory">The factory to register.</param>
-        <param name="processorOptions">An <see cref="T:Microsoft.ServiceBus.Messaging.EventProcessorOptions" /> object that controls various aspects of the event pump created when ownership is acquired for a given Event Hubs partition.</param>
-        <summary>Asynchronously registers the event processor factory.</summary>
-        <returns>Returns <see cref="T:System.Threading.Tasks.Task" />.</returns>
+        <param name="factory">Instance of <see cref="T:Microsoft.ServiceBus.Messaging.IEventProcessorFactory" /> implementation.</param>
+        <param name="processorOptions">
+          <see cref="T:Microsoft.ServiceBus.Messaging.EventProcessorOptions" /> to control various aspects of message pump created when ownership 
+            is acquired for a particular partition of EventHub.</param>
+        <summary>
+            This registers <see cref="T:Microsoft.ServiceBus.Messaging.IEventProcessorFactory" /> implementation with the host which is used to create an instance of 
+            <see cref="T:Microsoft.ServiceBus.Messaging.IEventProcessor" /> when it takes ownership of a partition.  This also starts the host and causes it to start participating 
+            in the partition distribution process.
+            </summary>
+        <returns>A task to indicate EventProcessorHost instance is started.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -380,7 +423,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Reset all Event Hubs receiver connections used by this instance of EventProcessorHost.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -402,8 +447,9 @@
         <Parameter Name="partitionId" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="partitionId">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="partitionId">
+        </param>
+        <summary />
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -423,7 +469,11 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Asynchronously shuts down the <see cref="T:Microsoft.ServiceBus.Messaging.EventProcessorHost" /> instance. This method maintains the leases on all partitions currently held, and enables each <see cref="T:Microsoft.ServiceBus.Messaging.IEventProcessor" /> instance to shut down cleanly by invoking the <see cref="M:Microsoft.ServiceBus.Messaging.IEventProcessor.CloseAsync(Microsoft.ServiceBus.Messaging.PartitionContext,Microsoft.ServiceBus.Messaging.CloseReason)" /> method with a <see cref="F:Microsoft.ServiceBus.Messaging.CloseReason.Shutdown" /> object.</summary>
+        <summary>Asynchronously shuts down the 
+            <see cref="T:Microsoft.ServiceBus.Messaging.EventProcessorHost" /> instance. This method maintains the leases on all partitions currently held, and enables each 
+            <see cref="T:Microsoft.ServiceBus.Messaging.IEventProcessor" /> instance to shut down cleanly by invoking the 
+            <see cref="M:Microsoft.ServiceBus.Messaging.IEventProcessor.CloseAsync(Microsoft.ServiceBus.Messaging.PartitionContext,Microsoft.ServiceBus.Messaging.CloseReason)" /> method with a 
+            <see cref="F:Microsoft.ServiceBus.Messaging.CloseReason.Shutdown" /> object.</summary>
         <returns>A task that indicates the <see cref="T:Microsoft.ServiceBus.Messaging.EventProcessorHost" /> instance has stopped.</returns>
         <remarks>To be added.</remarks>
       </Docs>
