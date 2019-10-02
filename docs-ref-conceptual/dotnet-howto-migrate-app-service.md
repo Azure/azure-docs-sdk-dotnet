@@ -7,7 +7,7 @@ ms.service: app-service
 
 # Migrate your .NET web app or service to Azure App Service 
 
-[App Service](https://docs.microsoft.com/azure/app-service/app-service-web-overview#why-use-web-apps) is a fully-managed compute platform service that is optimized for hosting scalable websites and web applications. This document provides information on how to lift-and-shift an existing application to Azure App Service, modifications to consider, and additional resources for moving to the cloud. Most ASP.NET websites (Webforms, MVC) and services (Web API, WCF) can move directly to Azure App Service with no changes. Some may need minor changes while others may need some refactoring.
+[App Service](https://docs.microsoft.com/azure/app-service/app-service-web-overview#why-use-web-apps) is a fully-managed compute platform service that is optimized for hosting scalable websites and web applications. This document provides information on how to lift-and-shift an existing application to Azure App Service, modifications to consider, and additional resources for [moving to the cloud](https://azure.microsoft.com/migration/web-applications/). Most ASP.NET websites (Webforms, MVC) and services (Web API, WCF) can move directly to Azure App Service with no changes. Some may need minor changes while others may need some refactoring.
 
 Ready to get started? [Publish your ASP.NET + SQL application to Azure App Service](https://go.microsoft.com/fwlink/?linkid=863214).
 
@@ -97,7 +97,7 @@ If your app cannot be migrated directly to App Service, consider App Service usi
 
 ## Additional reading
 
-* [How to determine if your app qualifies for App Service](https://azure.microsoft.com/downloads/migration-assistant/)
+* [How to determine if your app qualifies for App Service](https://appmigration.microsoft.com/)
 * [Moving your database to the cloud](https://go.microsoft.com/fwlink/?linkid=863217)
 * [Azure Web App sandbox details and restrictions](https://github.com/projectkudu/kudu/wiki/Azure-Web-App-sandbox)
 
