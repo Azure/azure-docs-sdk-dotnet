@@ -1,13 +1,21 @@
 ---
 title: Tools for Azure .NET and .NET Core developers
 description: Get the tools to start using the Azure .NET libraries from a Windows, Linux, and Mac environment.
-ms.date: 08/11/2018
+ms.date: 10/01/2018
 ms.custom: azure-dotnet-devcenter, azure-dotnet-devcenter-authored, azure-dotnet-devcenter-conceptual, vs-azure
 ---
 
 # Tools for .NET and .NET Core Azure developers
 
-Whatever your operating system, we have a great set of tools to help you develop on Azure using .NET, .NET Core, ASP.NET and ASP.NET Core.
+## SDK downloads
+
+Azure libraries for .NET are implemented as [NuGet packages](https://www.nuget.org/packages?q=windowsazureofficial). See the [API Reference](/dotnet/api/overview/azure/?view=azure-dotnet) for installation instructions organized by Azure service.
+
+## Development tools
+
+Visual Studio has tooling for many Azure services built-in. Some Azure services have additional tools or emulators available, such as [Azure Storage Explorer](https://azure.microsoft.com/en-us/features/storage-explorer/). See the documentation for your Azure service for any additional tools, if necessary.
+
+These instructions install the recommended starting development environment for your operating system. 
 
 ## [Windows](#tab/windows)
 
@@ -17,25 +25,23 @@ Whatever your operating system, we have a great set of tools to help you develop
         <img src="https://docs.microsoft.com/media/logos/logo_vs-ide.svg" width="50" height="50"></img>
     </td>
     <td>
-        Visual Studio 2017 has built-in support for Azure development.
+        Visual Studio versions 2017 and later have built-in support for Azure development. The below steps describe enabling Azure development support in Visual Studio.<br />
+        <br />
+        For Visual Studio 2015 and earlier, [follow these instructions](dotnet-sdk-vs2015-install.md).
     </td>
   </tr>
 </table>
 
-### Step 1: Download Visual Studio 2017
+### Step 1: Download Visual Studio 2019
 
-You can skip this step if you already have Visual Studio 2017 installed.
-
-Still using Visual Studio 2015?  [click here for installation instructions](dotnet-sdk-vs2015-install.md).
+You can skip this step if you already have Visual Studio 2019 installed.
 
 > [!div class="nextstepaction"]
-> [Download Visual Studio 2017](https://www.visualstudio.com/downloads/)
+> [Download Visual Studio 2019](https://www.visualstudio.com/downloads/)
 
 ### Step 2: Install the two Azure workloads
 
-After launching the Visual Studio 2017 installer, make sure the Azure and ASP.NET web development workloads are checked.
-
-![Visual Studio Installer](media/dotnet-tools/azure-workloads.png)
+In the Visual Studio installer, install Visual Studio (or modify an existing installation). Make sure the *Azure development* and *ASP.NET and web development* workloads are selected.
 
 ### Step 3: Develop with .NET on Azure
 
@@ -58,9 +64,7 @@ Get started by [deploying your first ASP.NET Core web app on Azure App Service](
 > [!div class="nextstepaction"]
 > [Download Visual Studio for Mac](https://www.visualstudio.com/vs/visual-studio-mac/)
 
-During install, Azure tools are already enabled by default.
-
-![Visual Studio for Mac Installer](media/dotnet-tools/azure-vsmac.png)
+During installation, Azure tools are selected by default.
 
 ## [Linux](#tab/linux)
 
@@ -80,7 +84,7 @@ During install, Azure tools are already enabled by default.
 The SDK and command-line tools for .NET Core apps.
 
 > [!div class="nextstepaction"]
-> [Download .NET Core SDK](https://www.microsoft.com/net/core)
+> [Download .NET Core SDK](https://dotnet.microsoft.com/download)
 
 ### Step 2: Visual Studio Code
 
