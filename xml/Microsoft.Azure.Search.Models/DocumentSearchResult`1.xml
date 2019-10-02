@@ -7,6 +7,7 @@
   <AssemblyInfo>
     <AssemblyName>Microsoft.Azure.Search.Data</AssemblyName>
     <AssemblyVersion>10.0.0.0</AssemblyVersion>
+    <AssemblyVersion>10.0.1.0</AssemblyVersion>
   </AssemblyInfo>
   <TypeParameters>
     <TypeParameter Name="T" />
@@ -17,7 +18,9 @@
   <Interfaces />
   <Docs>
     <typeparam name="T">To be added.</typeparam>
-    <summary>To be added.</summary>
+    <summary>
+            Response containing search results from an Azure Search index.
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -31,6 +34,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Search.Data</AssemblyName>
         <AssemblyVersion>10.0.0.0</AssemblyVersion>
+        <AssemblyVersion>10.0.1.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="results" Type="System.Collections.Generic.IList&lt;Microsoft.Azure.Search.Models.SearchResult&lt;T&gt;&gt;" />
@@ -40,12 +44,18 @@
         <Parameter Name="continuationToken" Type="Microsoft.Azure.Search.Models.SearchContinuationToken" />
       </Parameters>
       <Docs>
-        <param name="results">To be added.</param>
-        <param name="count">To be added.</param>
-        <param name="coverage">To be added.</param>
-        <param name="facets">To be added.</param>
-        <param name="continuationToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="results">The sequence of results returned by the query.</param>
+        <param name="count">The total count of results found by the search operation, or null if the count was not requested.</param>
+        <param name="coverage">A value indicating the percentage of the index that was included in the query, or null if
+            MinimumCoverage was not set in the <c cref="T:Microsoft.Azure.Search.Models.SearchParameters">SearchParameters</c>.</param>
+        <param name="facets">The facet query results for the search operation, or null if the query did not include any facet
+            expressions.</param>
+        <param name="continuationToken">A continuation token that is used to continue fetching search results. This is necessary when
+            Azure Search cannot fulfill a search request with a single response.</param>
+        <summary>
+            Initializes a new instance of the DocumentSearchResult class. This constructor is intended to be used for test purposes, since
+            the properties of this class are immutable.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -59,14 +69,33 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Search.Data</AssemblyName>
         <AssemblyVersion>10.0.0.0</AssemblyVersion>
+        <AssemblyVersion>10.0.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Search.Models.SearchContinuationToken</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets a continuation token that is used to continue fetching search results. This is necessary when Azure
+            Search cannot fulfill a search request with a single response.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+          <para>
+            This property will be null unless Azure Search can't return all the requested documents in a single Search
+            response. That can happen for different reasons which are implementation-specific and subject to change.
+            Robust clients should always be ready to handle cases where fewer documents than expected are returned and
+            a continuation token is included to continue retrieving documents. If this property is not null, you can
+            pass its value to the
+            <c cref="M:Microsoft.Azure.Search.IDocumentsOperations.ContinueSearchWithHttpMessagesAsync(Microsoft.Azure.Search.Models.SearchContinuationToken,Microsoft.Azure.Search.Models.SearchRequestOptions,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">ContinueSearchAsync</c>
+            method to retrieve more search results.
+            </para>
+          <para>
+            Note that this property is not meant to help you implement paging of search results. You can implement
+            paging using the <c cref="P:Microsoft.Azure.Search.Models.SearchParameters.Top">Top</c> and <c cref="P:Microsoft.Azure.Search.Models.SearchParameters.Skip">Skip</c>
+            search parameters.
+            </para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="Count">
@@ -79,6 +108,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Search.Data</AssemblyName>
         <AssemblyVersion>10.0.0.0</AssemblyVersion>
+        <AssemblyVersion>10.0.1.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -89,7 +119,14 @@
         <ReturnType>System.Nullable&lt;System.Int64&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the total count of results found by the search operation, or
+            null if the count was not requested. If present, the count may be
+            greater than the number of results in this response. This can
+            happen if you use the $top or $skip parameters, or if Azure Search
+            can't return all the requested documents in a single Search
+            response.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -104,6 +141,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Search.Data</AssemblyName>
         <AssemblyVersion>10.0.0.0</AssemblyVersion>
+        <AssemblyVersion>10.0.1.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -114,7 +152,11 @@
         <ReturnType>System.Nullable&lt;System.Double&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets a value indicating the percentage of the index that was
+            included in the query, or null if minimumCoverage was not specified
+            in the request.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -129,6 +171,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Search.Data</AssemblyName>
         <AssemblyVersion>10.0.0.0</AssemblyVersion>
+        <AssemblyVersion>10.0.1.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -139,7 +182,11 @@
         <ReturnType>System.Collections.Generic.IDictionary&lt;System.String,System.Collections.Generic.IList&lt;Microsoft.Azure.Search.Models.FacetResult&gt;&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the facet query results for the search operation, organized as
+            a collection of buckets for each faceted field; null if the query
+            did not include any facet expressions.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -154,6 +201,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Search.Data</AssemblyName>
         <AssemblyVersion>10.0.0.0</AssemblyVersion>
+        <AssemblyVersion>10.0.1.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -164,7 +212,9 @@
         <ReturnType>System.Collections.Generic.IList&lt;Microsoft.Azure.Search.Models.SearchResult&lt;T&gt;&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the sequence of results returned by the query.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
