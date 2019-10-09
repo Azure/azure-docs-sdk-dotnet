@@ -7,13 +7,16 @@
   <AssemblyInfo>
     <AssemblyName>Microsoft.Azure.Search.Data</AssemblyName>
     <AssemblyVersion>10.0.0.0</AssemblyVersion>
+    <AssemblyVersion>10.0.1.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
+    <summary>
+            Provides factory methods for creating a batch of document write operations to send to the Azure Search index.
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -27,6 +30,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Search.Data</AssemblyName>
         <AssemblyVersion>10.0.0.0</AssemblyVersion>
+        <AssemblyVersion>10.0.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Search.Models.IndexBatch&lt;Microsoft.Azure.Search.Models.Document&gt;</ReturnType>
@@ -36,10 +40,12 @@
         <Parameter Name="keyValues" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" />
       </Parameters>
       <Docs>
-        <param name="keyName">To be added.</param>
-        <param name="keyValues">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="keyName">The name of the key field that uniquely identifies documents in the index.</param>
+        <param name="keyValues">The keys of the documents to delete.</param>
+        <summary>
+            Creates a new IndexBatch for deleting a batch of documents.
+            </summary>
+        <returns>A new IndexBatch.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -53,6 +59,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Search.Data</AssemblyName>
         <AssemblyVersion>10.0.0.0</AssemblyVersion>
+        <AssemblyVersion>10.0.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Search.Models.IndexBatch&lt;T&gt;</ReturnType>
@@ -64,10 +71,14 @@
         <Parameter Name="documents" Type="System.Collections.Generic.IEnumerable&lt;T&gt;" />
       </Parameters>
       <Docs>
-        <typeparam name="T">To be added.</typeparam>
-        <param name="documents">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <typeparam name="T">
+            The CLR type that maps to the index schema. Instances of this type can be stored as documents in the index.
+            </typeparam>
+        <param name="documents">The documents to delete; Fields other than the key are ignored.</param>
+        <summary>
+            Creates a new IndexBatch for deleting a batch of documents.
+            </summary>
+        <returns>A new IndexBatch.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -81,6 +92,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Search.Data</AssemblyName>
         <AssemblyVersion>10.0.0.0</AssemblyVersion>
+        <AssemblyVersion>10.0.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Search.Models.IndexBatch&lt;T&gt;</ReturnType>
@@ -92,11 +104,22 @@
         <Parameter Name="documents" Type="System.Collections.Generic.IEnumerable&lt;T&gt;" />
       </Parameters>
       <Docs>
-        <typeparam name="T">To be added.</typeparam>
-        <param name="documents">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <typeparam name="T">
+            The CLR type that maps to the index schema. Instances of this type can be stored as documents in the index.
+            </typeparam>
+        <param name="documents">The documents to merge; Set only the properties that you want to change.</param>
+        <summary>
+            Creates a new IndexBatch for merging documents into existing documents in the index.
+            </summary>
+        <returns>A new IndexBatch.</returns>
+        <remarks>
+          <para>If type T contains non-nullable value-typed properties, these properties may not merge correctly. If you
+            do not set such a property, it will automatically take its default value (for example, 0 for int or false
+            for bool), which will override the value of the property currently stored in the index, even if this was
+            not your intent. For this reason, it is strongly recommended that you always declare value-typed
+            properties to be nullable in type T.</para>
+          <para>The above does not apply if you are using <c cref="T:Microsoft.Azure.Search.Models.Document">Document</c> as type T.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="MergeOrUpload&lt;T&gt;">
@@ -109,6 +132,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Search.Data</AssemblyName>
         <AssemblyVersion>10.0.0.0</AssemblyVersion>
+        <AssemblyVersion>10.0.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Search.Models.IndexBatch&lt;T&gt;</ReturnType>
@@ -120,11 +144,23 @@
         <Parameter Name="documents" Type="System.Collections.Generic.IEnumerable&lt;T&gt;" />
       </Parameters>
       <Docs>
-        <typeparam name="T">To be added.</typeparam>
-        <param name="documents">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <typeparam name="T">
+            The CLR type that maps to the index schema. Instances of this type can be stored as documents in the index.
+            </typeparam>
+        <param name="documents">The documents to merge or upload.</param>
+        <summary>
+            Creates a new IndexBatch for uploading documents to the index, or merging them into existing documents
+            for those that already exist in the index.
+            </summary>
+        <returns>A new IndexBatch.</returns>
+        <remarks>
+          <para>If type T contains non-nullable value-typed properties, these properties may not merge correctly. If you
+            do not set such a property, it will automatically take its default value (for example, 0 for int or false
+            for bool), which will override the value of the property currently stored in the index, even if this was
+            not your intent. For this reason, it is strongly recommended that you always declare value-typed
+            properties to be nullable in type T.</para>
+          <para>The above does not apply if you are using <c cref="T:Microsoft.Azure.Search.Models.Document">Document</c> as type T.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="New&lt;T&gt;">
@@ -137,6 +173,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Search.Data</AssemblyName>
         <AssemblyVersion>10.0.0.0</AssemblyVersion>
+        <AssemblyVersion>10.0.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Search.Models.IndexBatch&lt;T&gt;</ReturnType>
@@ -148,11 +185,18 @@
         <Parameter Name="actions" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Search.Models.IndexAction&lt;T&gt;&gt;" />
       </Parameters>
       <Docs>
-        <typeparam name="T">To be added.</typeparam>
-        <param name="actions">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <typeparam name="T">
+            The CLR type that maps to the index schema. Instances of this type can be stored as documents in the index.
+            </typeparam>
+        <param name="actions">The index actions to include in the batch.</param>
+        <summary>
+            Creates a new instance of the IndexBatch class.
+            </summary>
+        <returns>A new IndexBatch.</returns>
+        <remarks>
+            You can use this method as a convenience if you don't want to explicitly specify your model class as a
+            type parameter.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="Upload&lt;T&gt;">
@@ -165,6 +209,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Search.Data</AssemblyName>
         <AssemblyVersion>10.0.0.0</AssemblyVersion>
+        <AssemblyVersion>10.0.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Search.Models.IndexBatch&lt;T&gt;</ReturnType>
@@ -176,10 +221,14 @@
         <Parameter Name="documents" Type="System.Collections.Generic.IEnumerable&lt;T&gt;" />
       </Parameters>
       <Docs>
-        <typeparam name="T">To be added.</typeparam>
-        <param name="documents">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <typeparam name="T">
+            The CLR type that maps to the index schema. Instances of this type can be stored as documents in the index.
+            </typeparam>
+        <param name="documents">The documents to upload.</param>
+        <summary>
+            Creates a new IndexBatch for uploading documents to the index.
+            </summary>
+        <returns>A new IndexBatch.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
