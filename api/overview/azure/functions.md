@@ -3,7 +3,7 @@ title: Azure Functions libraries for .NET
 description: Reference for Azure Functions libraries for .NET
 ms.date: 10/15/2019
 ms.topic: reference
-ms.service: app-service
+ms.service: azure-functions
 ---
 
 # Azure Functions libraries for .NET
