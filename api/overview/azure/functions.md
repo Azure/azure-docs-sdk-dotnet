@@ -39,5 +39,5 @@ dotnet add package Microsoft.Azure.WebJobs.Extensions.DurableTask
 
 View the [complete list](/samples/browse/?products=azure-functions&languages=csharp) of Azure Functions samples.
 
-[PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
-[DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
+[PackageManager]: /nuget/tools/package-manager-console
+[DotNetCLI]: /dotnet/core/tools/dotnet-add-package
