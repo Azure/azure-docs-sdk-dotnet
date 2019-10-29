@@ -18,6 +18,8 @@ ms.service: azure-functions
 
 Install the extension [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.DurableTask) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
 
+The Azure API reference documentation supports [version 2.x of the Durable Functions extension](/dotnet/api/overview/azure/functions/runtime). 
+
 ### Visual Studio package manager
 
 ```powershell
