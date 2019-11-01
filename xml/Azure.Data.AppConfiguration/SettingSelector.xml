@@ -14,8 +14,14 @@
   <Interfaces />
   <Docs>
     <summary>
-            Set of options for selecting <see cref="T:Azure.Data.AppConfiguration.ConfigurationSetting" /> from the configuration store.
-            </summary>
+      <para>
+        <see cref="T:Azure.Data.AppConfiguration.SettingSelector" /> is a set of options that allows selecting
+            a filtered set of <see cref="T:Azure.Data.AppConfiguration.ConfigurationSetting" /> entities from the
+            configuration store, and optionally allows indicating which fields of
+            each setting to retreive.</para>
+      <para>Literals or filters may be specified for keys and labels.</para>
+      <para>For more information, <see href="https://github.com/Azure/AppConfiguration/blob/master/docs/REST/kv.md#filtering" />.</para>
+    </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -32,7 +38,8 @@
       <Parameters />
       <Docs>
         <summary>
-            Creates a SettingSelector with Any wildcards for both Key and Label properties
+            Creates a <see cref="T:Azure.Data.AppConfiguration.SettingSelector" /> that will retrieve all <see cref="T:Azure.Data.AppConfiguration.ConfigurationSetting" /> entities in the
+            configuration store by setting both Key and Label filters to Any.
             </summary>
         <remarks>To be added.</remarks>
       </Docs>
@@ -53,10 +60,11 @@
         <Parameter Name="label" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="key">The primary identifier of a configuration setting.</param>
-        <param name="label">The value used to group configuration settings.</param>
+        <param name="key">A key or key filter indicating which <see cref="T:Azure.Data.AppConfiguration.ConfigurationSetting" /> entities to select.</param>
+        <param name="label">A label or label filter indicating which <see cref="T:Azure.Data.AppConfiguration.ConfigurationSetting" /> entities to select</param>
         <summary>
-            Creates a SettingSelector
+            Creates a <see cref="T:Azure.Data.AppConfiguration.SettingSelector" /> that will retrieve <see cref="T:Azure.Data.AppConfiguration.ConfigurationSetting" /> entities that match
+            the passed-in keys and labels.
             </summary>
         <remarks>To be added.</remarks>
       </Docs>
@@ -77,7 +85,8 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Wildcard that symbolizes any value when used in filters.
+            A wildcard that matches any key or any label when passed as a filter
+            to Keys or Labels.
             </summary>
         <remarks>To be added.</remarks>
       </Docs>
@@ -98,35 +107,11 @@
       </ReturnValue>
       <Docs>
         <summary>
-            If set, then key values will be retrieved exactly as they existed at the provided time.
+            Indicates the point in time in the revision history of the selected <see cref="T:Azure.Data.AppConfiguration.ConfigurationSetting" /> entities to retrieve.
+            If set, all properties of the <see cref="T:Azure.Data.AppConfiguration.ConfigurationSetting" /> entities in the returned group will be exactly what they
+            were at this time.
             </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="Equals">
-      <MemberSignature Language="C#" Value="public bool Equals (Azure.Data.AppConfiguration.SettingSelector other);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool Equals(class Azure.Data.AppConfiguration.SettingSelector other) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Data.AppConfiguration.SettingSelector.Equals(Azure.Data.AppConfiguration.SettingSelector)" />
-      <MemberSignature Language="VB.NET" Value="Public Function Equals (other As SettingSelector) As Boolean" />
-      <MemberSignature Language="F#" Value="override this.Equals : Azure.Data.AppConfiguration.SettingSelector -&gt; bool" Usage="settingSelector.Equals other" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Azure.Data.AppConfiguration</AssemblyName>
-        <AssemblyVersion>1.0.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Boolean</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="other" Type="Azure.Data.AppConfiguration.SettingSelector" />
-      </Parameters>
-      <Docs>
-        <param name="other">The instance to compare to.</param>
-        <summary>
-            Check if two SettingSelector instances are equal.
-            </summary>
-        <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -177,7 +162,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Allows requesting a specific set of fields.
+            The fields of the <see cref="T:Azure.Data.AppConfiguration.ConfigurationSetting" /> to retrieve for each setting in the retrieved group.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -212,11 +197,11 @@
       </Docs>
     </Member>
     <Member MemberName="Keys">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.IList&lt;string&gt; Keys { get; set; }" />
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.IList&lt;string&gt; Keys { get; }" />
       <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.IList`1&lt;string&gt; Keys" />
       <MemberSignature Language="DocId" Value="P:Azure.Data.AppConfiguration.SettingSelector.Keys" />
-      <MemberSignature Language="VB.NET" Value="Public Property Keys As IList(Of String)" />
-      <MemberSignature Language="F#" Value="member this.Keys : System.Collections.Generic.IList&lt;string&gt; with get, set" Usage="Azure.Data.AppConfiguration.SettingSelector.Keys" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Keys As IList(Of String)" />
+      <MemberSignature Language="F#" Value="member this.Keys : System.Collections.Generic.IList&lt;string&gt;" Usage="Azure.Data.AppConfiguration.SettingSelector.Keys" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Data.AppConfiguration</AssemblyName>
@@ -227,18 +212,18 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Keys that will be used to filter.
+            Keys or key filters that will be used to select a set of <see cref="T:Azure.Data.AppConfiguration.ConfigurationSetting" /> entities.
             </summary>
         <value>To be added.</value>
         <remarks>See the documentation for this client library for details on the format of filter expressions.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Labels">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.IList&lt;string&gt; Labels { get; set; }" />
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.IList&lt;string&gt; Labels { get; }" />
       <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.IList`1&lt;string&gt; Labels" />
       <MemberSignature Language="DocId" Value="P:Azure.Data.AppConfiguration.SettingSelector.Labels" />
-      <MemberSignature Language="VB.NET" Value="Public Property Labels As IList(Of String)" />
-      <MemberSignature Language="F#" Value="member this.Labels : System.Collections.Generic.IList&lt;string&gt; with get, set" Usage="Azure.Data.AppConfiguration.SettingSelector.Labels" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Labels As IList(Of String)" />
+      <MemberSignature Language="F#" Value="member this.Labels : System.Collections.Generic.IList&lt;string&gt;" Usage="Azure.Data.AppConfiguration.SettingSelector.Labels" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Data.AppConfiguration</AssemblyName>
@@ -249,7 +234,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Labels that will be used to filter.
+            Labels or label filters that will be used to select a set of <see cref="T:Azure.Data.AppConfiguration.ConfigurationSetting" /> entities.
             </summary>
         <value>To be added.</value>
         <remarks>See the documentation for this client library for details on the format of filter expressions.</remarks>
