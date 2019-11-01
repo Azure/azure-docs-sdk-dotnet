@@ -13,7 +13,9 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
+    <summary>
+            Represents an HTTP pipeline transport used to send HTTP requests and receive responses.
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -34,23 +36,51 @@
       </Docs>
     </Member>
     <Member MemberName="CreateRequest">
-      <MemberSignature Language="C#" Value="public abstract Azure.Core.Http.Request CreateRequest ();" FrameworkAlternate="azure-dotnet-preview" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Core.Http.Request CreateRequest() cil managed" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="C#" Value="public abstract Azure.Core.Request CreateRequest ();" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Core.Request CreateRequest() cil managed" FrameworkAlternate="azure-dotnet-preview" />
       <MemberSignature Language="DocId" Value="M:Azure.Core.Pipeline.HttpPipelineTransport.CreateRequest" FrameworkAlternate="azure-dotnet-preview" />
       <MemberSignature Language="VB.NET" Value="Public MustOverride Function CreateRequest () As Request" FrameworkAlternate="azure-dotnet-preview" />
-      <MemberSignature Language="F#" Value="abstract member CreateRequest : unit -&gt; Azure.Core.Http.Request" Usage="httpPipelineTransport.CreateRequest " FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="F#" Value="abstract member CreateRequest : unit -&gt; Azure.Core.Request" Usage="httpPipelineTransport.CreateRequest " FrameworkAlternate="azure-dotnet-preview" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Core</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>Azure.Core.Http.Request</ReturnType>
+        <ReturnType>Azure.Core.Request</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>
+            Creates a new transport specific instance of <see cref="T:Azure.Core.Request" />. This should not be called directly, <see cref="M:Azure.Core.Pipeline.HttpPipeline.CreateRequest" /> or
+            <see cref="M:Azure.Core.Pipeline.HttpPipeline.CreateMessage" /> should be used instead.
+            </summary>
+        <returns />
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Process">
+      <MemberSignature Language="C#" Value="public abstract void Process (Azure.Core.HttpMessage message);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Process(class Azure.Core.HttpMessage message) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Core.Pipeline.HttpPipelineTransport.Process(Azure.Core.HttpMessage)" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride Sub Process (message As HttpMessage)" />
+      <MemberSignature Language="F#" Value="abstract member Process : Azure.Core.HttpMessage -&gt; unit" Usage="httpPipelineTransport.Process message" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Core</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="message" Type="Azure.Core.HttpMessage" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+      </Parameters>
+      <Docs>
+        <param name="message">The <see cref="T:Azure.Core.HttpMessage" /> containing request and response.</param>
+        <summary>
+            Sends the request contained by the <paramref name="message" /> and sets the <see cref="P:Azure.Core.HttpMessage.Response" /> property to received response synchronously.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -69,7 +99,7 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="message" Type="Azure.Core.Pipeline.HttpPipelineMessage" />
+        <Parameter Name="message" Type="Azure.Core.Pipeline.HttpPipelineMessage" Index="0" FrameworkAlternate="azure-dotnet" />
       </Parameters>
       <Docs>
         <param name="message">To be added.</param>
@@ -78,11 +108,37 @@
       </Docs>
     </Member>
     <Member MemberName="ProcessAsync">
-      <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task ProcessAsync (Azure.Core.Pipeline.HttpPipelineMessage message);" FrameworkAlternate="azure-dotnet" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task ProcessAsync(class Azure.Core.Pipeline.HttpPipelineMessage message) cil managed" FrameworkAlternate="azure-dotnet" />
-      <MemberSignature Language="DocId" Value="M:Azure.Core.Pipeline.HttpPipelineTransport.ProcessAsync(Azure.Core.Pipeline.HttpPipelineMessage)" FrameworkAlternate="azure-dotnet" />
-      <MemberSignature Language="VB.NET" Value="Public MustOverride Function ProcessAsync (message As HttpPipelineMessage) As Task" FrameworkAlternate="azure-dotnet" />
-      <MemberSignature Language="F#" Value="abstract member ProcessAsync : Azure.Core.Pipeline.HttpPipelineMessage -&gt; System.Threading.Tasks.Task" Usage="httpPipelineTransport.ProcessAsync message" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.ValueTask ProcessAsync (Azure.Core.HttpMessage message);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance valuetype System.Threading.Tasks.ValueTask ProcessAsync(class Azure.Core.HttpMessage message) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Core.Pipeline.HttpPipelineTransport.ProcessAsync(Azure.Core.HttpMessage)" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride Function ProcessAsync (message As HttpMessage) As ValueTask" />
+      <MemberSignature Language="F#" Value="abstract member ProcessAsync : Azure.Core.HttpMessage -&gt; System.Threading.Tasks.ValueTask" Usage="httpPipelineTransport.ProcessAsync message" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Core</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.ValueTask</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="message" Type="Azure.Core.HttpMessage" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+      </Parameters>
+      <Docs>
+        <param name="message">The <see cref="T:Azure.Core.HttpMessage" /> containing request and response.</param>
+        <summary>
+            Sends the request contained by the <paramref name="message" /> and sets the <see cref="P:Azure.Core.HttpMessage.Response" /> property to received response asynchronously.
+            </summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ProcessAsync">
+      <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task ProcessAsync (Azure.Core.Pipeline.HttpPipelineMessage message);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task ProcessAsync(class Azure.Core.Pipeline.HttpPipelineMessage message) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Core.Pipeline.HttpPipelineTransport.ProcessAsync(Azure.Core.Pipeline.HttpPipelineMessage)" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride Function ProcessAsync (message As HttpPipelineMessage) As Task" />
+      <MemberSignature Language="F#" Value="abstract member ProcessAsync : Azure.Core.Pipeline.HttpPipelineMessage -&gt; System.Threading.Tasks.Task" Usage="httpPipelineTransport.ProcessAsync message" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Core</AssemblyName>
