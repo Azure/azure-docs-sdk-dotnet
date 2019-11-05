@@ -20,7 +20,13 @@
     </Interface>
   </Interfaces>
   <Docs>
-    <summary>To be added.</summary>
+    <summary>
+            The backend storage provider that provides the actual durability of Durable Functions.
+            This is functionally a superset of <see cref="T:DurableTask.Core.IOrchestrationService" /> and <see cref="T:DurableTask.Core.IOrchestrationServiceClient" />.
+            If the storage provider does not any of the Durable Functions specific operations, they can use this class
+            directly with the expectation that only those interfaces will be implemented. All of the Durable Functions specific
+            methods/operations are virtual and can be overwritten by creating a subclass.
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -42,11 +48,15 @@
         <Parameter Name="connectionName" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="storageProviderName">To be added.</param>
-        <param name="service">To be added.</param>
-        <param name="serviceClient">To be added.</param>
-        <param name="connectionName">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="storageProviderName">The name of the storage backend providing the durability.</param>
+        <param name="service">The internal <see cref="T:DurableTask.Core.IOrchestrationService" /> that provides functionality
+            for this classes implementions of <see cref="T:DurableTask.Core.IOrchestrationService" />.</param>
+        <param name="serviceClient">The internal <see cref="T:DurableTask.Core.IOrchestrationServiceClient" /> that provides functionality
+            for this classes implementions of <see cref="T:DurableTask.Core.IOrchestrationServiceClient" />.</param>
+        <param name="connectionName">The name of the app setting that stores connection details for the storage provider.</param>
+        <summary>
+            Creates the default <see cref="T:Microsoft.Azure.WebJobs.Extensions.DurableTask.DurabilityProvider" />.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -75,6 +85,7 @@
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="AbandonTaskOrchestrationWorkItemAsync">
@@ -102,6 +113,7 @@
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="CompleteTaskActivityWorkItemAsync">
@@ -131,6 +143,7 @@
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="CompleteTaskOrchestrationWorkItemAsync">
@@ -169,6 +182,7 @@
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="ConnectionName">
@@ -186,7 +200,10 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            The name of the environment variable that contains connection details for how to connect to storage providers.
+            Corresponds to the <see cref="P:Microsoft.Azure.WebJobs.Extensions.DurableTask.DurableClientAttribute.ConnectionName" /> for binding data.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -213,6 +230,7 @@
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="CreateAsync">
@@ -240,6 +258,7 @@
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="CreateIfNotExistsAsync">
@@ -264,6 +283,7 @@
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="CreateTaskOrchestrationAsync">
@@ -291,6 +311,7 @@
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="CreateTaskOrchestrationAsync">
@@ -320,6 +341,7 @@
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="DeleteAsync">
@@ -344,6 +366,7 @@
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="DeleteAsync">
@@ -371,6 +394,7 @@
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="EventBehaviourForContinueAsNew">
@@ -394,6 +418,7 @@
         <summary>To be added.</summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="ForceTerminateTaskOrchestrationAsync">
@@ -423,6 +448,7 @@
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="GetAllOrchestrationStates">
@@ -442,9 +468,11 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="cancellationToken">A token to cancel the request.</param>
+        <summary>
+            Gets the status of all orchestration instances.
+            </summary>
+        <returns>Returns a task which completes when the status has been fetched.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -468,12 +496,14 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="createdTimeFrom">To be added.</param>
-        <param name="createdTimeTo">To be added.</param>
-        <param name="runtimeStatus">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="createdTimeFrom">Return orchestration instances which were created after this DateTime.</param>
+        <param name="createdTimeTo">Return orchestration instances which were created before this DateTime.</param>
+        <param name="runtimeStatus">Return orchestration instances which matches the runtimeStatus.</param>
+        <param name="cancellationToken">A token to cancel the request.</param>
+        <summary>
+            Gets the status of all orchestration instances within the specified parameters.
+            </summary>
+        <returns>Returns a task which completes when the status has been fetched.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -501,6 +531,7 @@
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="GetDelayInSecondsAfterOnProcessException">
@@ -527,6 +558,7 @@
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="GetOrchestrationHistoryAsync">
@@ -556,6 +588,7 @@
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="GetOrchestrationStateAsync">
@@ -585,6 +618,7 @@
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="GetOrchestrationStateAsync">
@@ -614,6 +648,7 @@
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="GetOrchestrationStateWithInputsAsync">
@@ -635,10 +670,12 @@
         <Parameter Name="showInput" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="instanceId">To be added.</param>
-        <param name="showInput">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="instanceId">The ID of the orchestration instance to query.</param>
+        <param name="showInput">If set, fetch and return the input for the orchestration instance.</param>
+        <summary>
+            Gets the state of the specified orchestration instance.
+            </summary>
+        <returns>Returns a task which completes when the state has been fetched.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -660,10 +697,12 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="condition">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="condition">The filtering conditions of the query.</param>
+        <param name="cancellationToken">A token to cancel the request.</param>
+        <summary>
+            Gets paginated result of all orchestration instances that match query status parameters.
+            </summary>
+        <returns>Paginated result of orchestration state.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -694,6 +733,7 @@
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="LockNextTaskActivityWorkItem">
@@ -722,6 +762,7 @@
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="LockNextTaskOrchestrationWorkItemAsync">
@@ -750,6 +791,7 @@
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="MaxConcurrentTaskActivityWorkItems">
@@ -773,6 +815,7 @@
         <summary>To be added.</summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="MaxConcurrentTaskOrchestrationWorkItems">
@@ -796,6 +839,7 @@
         <summary>To be added.</summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="PurgeHistoryByFilters">
@@ -818,11 +862,13 @@
         <Parameter Name="runtimeStatus" Type="System.Collections.Generic.IEnumerable&lt;DurableTask.Core.OrchestrationStatus&gt;" />
       </Parameters>
       <Docs>
-        <param name="createdTimeFrom">To be added.</param>
-        <param name="createdTimeTo">To be added.</param>
-        <param name="runtimeStatus">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="createdTimeFrom">Purge the history of orchestration instances which were created after this DateTime.</param>
+        <param name="createdTimeTo">Purge the history of orchestration instances which were created before this DateTime.</param>
+        <param name="runtimeStatus">Purge the history of orchestration instances which matches the runtimeStatus.</param>
+        <summary>
+            Purges history that meet the required parameters.
+            </summary>
+        <returns>The number of instances purged.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -844,9 +890,11 @@
         <Parameter Name="instanceId" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="instanceId">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="instanceId">The instance id for the instance history to purge.</param>
+        <summary>
+            Purges the instance history for the provided instance id.
+            </summary>
+        <returns>The number of instances purged.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -877,6 +925,7 @@
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="ReleaseTaskOrchestrationWorkItemAsync">
@@ -904,6 +953,7 @@
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="RenewTaskActivityWorkItemLockAsync">
@@ -931,6 +981,7 @@
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="RenewTaskOrchestrationWorkItemLockAsync">
@@ -958,6 +1009,7 @@
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="RetrieveSerializedEntityState">
@@ -977,9 +1029,11 @@
         <Parameter Name="entityId" Type="Microsoft.Azure.WebJobs.Extensions.DurableTask.EntityId" />
       </Parameters>
       <Docs>
-        <param name="entityId">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="entityId">Entity id to fetch state for.</param>
+        <summary>
+            Retrieves the state for a serialized entity.
+            </summary>
+        <returns>State for the entity.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -1002,10 +1056,12 @@
         <Parameter Name="reason" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="instanceId">To be added.</param>
-        <param name="reason">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="instanceId">The ID of the orchestration instance to rewind.</param>
+        <param name="reason">The reason for rewinding the orchestration instance.</param>
+        <summary>
+            Rewinds the specified failed orchestration instance with a reason.
+            </summary>
+        <returns>A task that completes when the rewind message is enqueued.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -1034,6 +1090,7 @@
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="SendTaskOrchestrationMessageBatchAsync">
@@ -1056,7 +1113,7 @@
       <Parameters>
         <Parameter Name="messages" Type="DurableTask.Core.TaskMessage[]">
           <Attributes>
-            <Attribute FrameworkAlternate="azure-dotnet">
+            <Attribute>
               <AttributeName>System.ParamArray</AttributeName>
             </Attribute>
           </Attributes>
@@ -1067,6 +1124,7 @@
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="StartAsync">
@@ -1091,6 +1149,7 @@
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="StopAsync">
@@ -1115,6 +1174,7 @@
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="StopAsync">
@@ -1142,6 +1202,7 @@
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="SupportsEntities">
@@ -1159,7 +1220,9 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Specifies whether the durability provider supports Durable Entities.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -1185,6 +1248,7 @@
         <summary>To be added.</summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="TaskOrchestrationDispatcherCount">
@@ -1208,6 +1272,7 @@
         <summary>To be added.</summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="ValidateDelayTime">
@@ -1228,10 +1293,13 @@
         <Parameter Name="errorMessage" Type="System.String" RefType="out" />
       </Parameters>
       <Docs>
-        <param name="timespan">To be added.</param>
-        <param name="errorMessage">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="timespan">The timespan that the code will have to wait for.</param>
+        <param name="errorMessage">The error message if the timespan is invalid.</param>
+        <summary>
+            Uses durability provider specific logic to verify whether a timespan for a timer, timeout
+            or retry interval is allowed by the provider.
+            </summary>
+        <returns>A boolean indicating whether the time interval is valid.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -1265,6 +1333,7 @@
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
   </Members>
