@@ -10,7 +10,9 @@
   </AssemblyInfo>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
+    <summary>
+            Provides functionality available to durable orchestration clients.
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -34,12 +36,20 @@
         <Parameter Name="returnInternalServerErrorOnFailure" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="request">To be added.</param>
-        <param name="instanceId">To be added.</param>
-        <param name="returnInternalServerErrorOnFailure">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="request">The HTTP request that triggered the current orchestration instance.</param>
+        <param name="instanceId">The ID of the orchestration instance to check.</param>
+        <param name="returnInternalServerErrorOnFailure">Optional parameter that configures the http response code returned. Defaults to <c>false</c>.
+            If <c>true</c>, the returned http response code will be a 500 when the orchestrator is in a failed state, when <c>false</c> it will
+            return 200.</param>
+        <summary>
+            Creates an HTTP response that is useful for checking the status of the specified instance.
+            </summary>
+        <returns>An HTTP 202 response with a Location header and a payload containing instance control URLs.</returns>
+        <remarks>
+            The payload of the returned <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult" /> contains HTTP API URLs that can
+            be used to query the status of the orchestration, raise events to the orchestration, or
+            terminate the orchestration.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateCheckStatusResponse">
@@ -62,12 +72,20 @@
         <Parameter Name="returnInternalServerErrorOnFailure" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="request">To be added.</param>
-        <param name="instanceId">To be added.</param>
-        <param name="returnInternalServerErrorOnFailure">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="request">The HTTP request that triggered the current orchestration instance.</param>
+        <param name="instanceId">The ID of the orchestration instance to check.</param>
+        <param name="returnInternalServerErrorOnFailure">Optional parameter that configures the http response code returned. Defaults to <c>false</c>.
+            If <c>true</c>, the returned http response code will be a 500 when the orchestrator is in a failed state, when <c>false</c> it will
+            return 200.</param>
+        <summary>
+            Creates an HTTP response that is useful for checking the status of the specified instance.
+            </summary>
+        <returns>An HTTP 202 response with a Location header and a payload containing instance control URLs.</returns>
+        <remarks>
+            The payload of the returned <see cref="T:System.Net.Http.HttpResponseMessage" /> contains HTTP API URLs that can
+            be used to query the status of the orchestration, raise events to the orchestration, or
+            terminate the orchestration.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateHttpManagementPayload">
@@ -88,9 +106,11 @@
         <Parameter Name="instanceId" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="instanceId">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="instanceId">The ID of the orchestration instance to check.</param>
+        <summary>
+            Creates a <see cref="T:Microsoft.Azure.WebJobs.Extensions.DurableTask.HttpManagementPayload" /> object that contains status, terminate and send external event HTTP endpoints.
+            </summary>
+        <returns>Instance of the <see cref="T:Microsoft.Azure.WebJobs.Extensions.DurableTask.HttpManagementPayload" /> class.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -111,9 +131,11 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="cancellationToken">Cancellation token that can be used to cancel the status query operation.</param>
+        <summary>
+            Gets all the status of the orchestration instances.
+            </summary>
+        <returns>Returns orchestration status for all instances.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -135,10 +157,12 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="condition">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="condition">Return orchestration instances that match the specified conditions.</param>
+        <param name="cancellationToken">Cancellation token that can be used to cancel the status query operation.</param>
+        <summary>
+            Gets the status of all orchestration instances with paging that match the specified conditions.
+            </summary>
+        <returns>Returns each page of orchestration status for all instances and continuation token of next page.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -162,12 +186,14 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="createdTimeFrom">To be added.</param>
-        <param name="createdTimeTo">To be added.</param>
-        <param name="runtimeStatus">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="createdTimeFrom">Return orchestration instances which were created after this DateTime.</param>
+        <param name="createdTimeTo">Return orchestration instances which were created before this DateTime.</param>
+        <param name="runtimeStatus">Return orchestration instances which matches the runtimeStatus.</param>
+        <param name="cancellationToken">Cancellation token that can be used to cancel the status query operation.</param>
+        <summary>
+            Gets the status of all orchestration instances that match the specified conditions.
+            </summary>
+        <returns>Returns orchestration status for all instances.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -192,12 +218,14 @@
         <Parameter Name="showInput" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="instanceId">To be added.</param>
-        <param name="showHistory">To be added.</param>
-        <param name="showHistoryOutput">To be added.</param>
-        <param name="showInput">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="instanceId">The ID of the orchestration instance to query.</param>
+        <param name="showHistory">Boolean marker for including execution history in the response.</param>
+        <param name="showHistoryOutput">Boolean marker for including input and output in the execution history response.</param>
+        <param name="showInput">If set, fetch and return the input for the orchestration instance.</param>
+        <summary>
+            Gets the status of the specified orchestration instance.
+            </summary>
+        <returns>Returns a task which completes when the status has been fetched.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -219,9 +247,11 @@
         <Parameter Name="instanceId" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="instanceId">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="instanceId">The ID of the orchestration instance to purge.</param>
+        <summary>
+            Purge the history for a concrete instance.
+            </summary>
+        <returns>Returns an instance of <see cref="T:Microsoft.Azure.WebJobs.Extensions.DurableTask.PurgeHistoryResult" />.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -245,11 +275,13 @@
         <Parameter Name="runtimeStatus" Type="System.Collections.Generic.IEnumerable&lt;DurableTask.Core.OrchestrationStatus&gt;" />
       </Parameters>
       <Docs>
-        <param name="createdTimeFrom">To be added.</param>
-        <param name="createdTimeTo">To be added.</param>
-        <param name="runtimeStatus">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="createdTimeFrom">Start creation time for querying instances for purging.</param>
+        <param name="createdTimeTo">End creation time for querying instances for purging.</param>
+        <param name="runtimeStatus">List of runtime status for querying instances for purging. Only Completed, Terminated, or Failed will be processed.</param>
+        <summary>
+            Purge the orchestration history for instances that match the conditions.
+            </summary>
+        <returns>Returns an instance of <see cref="T:Microsoft.Azure.WebJobs.Extensions.DurableTask.PurgeHistoryResult" />.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -273,12 +305,22 @@
         <Parameter Name="eventData" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="instanceId">To be added.</param>
-        <param name="eventName">To be added.</param>
-        <param name="eventData">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="instanceId">The ID of the orchestration instance that will handle the event.</param>
+        <param name="eventName">The name of the event.</param>
+        <param name="eventData">The JSON-serializeable data associated with the event.</param>
+        <summary>
+            Sends an event notification message to a waiting orchestration instance.
+            </summary>
+        <returns>A task that completes when the event notification message has been enqueued.</returns>
+        <remarks>
+          <para>
+            In order to handle the event, the target orchestration instance must be waiting for an
+            event named <paramref name="eventName" /> using the
+            <see cref="M:Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationContext.WaitForExternalEvent``1(System.String)" /> API.
+            </para>
+        </remarks>
+        <exception cref="T:System.ArgumentException">The instance id does not corespond to a valid orchestration instance.</exception>
+        <exception cref="T:System.InvalidOperationException">The orchestration instance with the provided instance id is not running.</exception>
       </Docs>
     </Member>
     <Member MemberName="RaiseEventAsync">
@@ -303,14 +345,27 @@
         <Parameter Name="connectionName" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="taskHubName">To be added.</param>
-        <param name="instanceId">To be added.</param>
-        <param name="eventName">To be added.</param>
-        <param name="eventData">To be added.</param>
-        <param name="connectionName">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="taskHubName">The TaskHubName of the orchestration that will handle the event.</param>
+        <param name="instanceId">The ID of the orchestration instance that will handle the event.</param>
+        <param name="eventName">The name of the event.</param>
+        <param name="eventData">The JSON-serializeable data associated with the event.</param>
+        <param name="connectionName">The name of the connection string associated with <paramref name="taskHubName" />.</param>
+        <summary>
+            Sends an event notification message to a waiting orchestration instance.
+            </summary>
+        <returns>A task that completes when the event notification message has been enqueued.</returns>
+        <remarks>
+          <para>
+            In order to handle the event, the target orchestration instance must be waiting for an
+            event named <paramref name="eventName" /> using the
+            <see cref="M:Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationContext.WaitForExternalEvent``1(System.String)" /> API.
+            </para>
+          <para>
+            If the specified instance is not found or not running, this operation will throw an exception.
+            </para>
+        </remarks>
+        <exception cref="T:System.ArgumentException">The instance id does not corespond to a valid orchestration instance.</exception>
+        <exception cref="T:System.InvalidOperationException">The orchestration instance with the provided instance id is not running.</exception>
       </Docs>
     </Member>
     <Member MemberName="RewindAsync">
@@ -337,10 +392,12 @@
         <Parameter Name="reason" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="instanceId">To be added.</param>
-        <param name="reason">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="instanceId">The ID of the orchestration instance to rewind.</param>
+        <param name="reason">The reason for rewinding the orchestration instance.</param>
+        <summary>
+            Rewinds the specified failed orchestration instance with a reason.
+            </summary>
+        <returns>A task that completes when the rewind message is enqueued.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -367,13 +424,22 @@
         <Parameter Name="input" Type="T" />
       </Parameters>
       <Docs>
-        <typeparam name="T">To be added.</typeparam>
-        <param name="orchestratorFunctionName">To be added.</param>
-        <param name="instanceId">To be added.</param>
-        <param name="input">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <typeparam name="T">The type of the input value for the orchestrator function.</typeparam>
+        <param name="orchestratorFunctionName">The name of the orchestrator function to start.</param>
+        <param name="instanceId">The ID to use for the new orchestration instance.</param>
+        <param name="input">JSON-serializeable input value for the orchestrator function.</param>
+        <summary>
+            Starts a new instance of the specified orchestrator function.
+            </summary>
+        <returns>A task that completes when the orchestration is started. The task contains the instance id of the started
+            orchestratation instance.</returns>
+        <remarks>
+            If an orchestration instance with the specified ID already exists, the existing instance
+            will be silently replaced by this new instance.
+            </remarks>
+        <exception cref="T:System.ArgumentException">
+            The specified function does not exist, is disabled, or is not an orchestrator function.
+            </exception>
       </Docs>
     </Member>
     <Member MemberName="TaskHubName">
@@ -391,8 +457,12 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>
+            Gets the name of the task hub configured on this client instance.
+            </summary>
+        <value>
+            The name of the task hub.
+            </value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -415,11 +485,20 @@
         <Parameter Name="reason" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="instanceId">To be added.</param>
-        <param name="reason">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="instanceId">The ID of the orchestration instance to terminate.</param>
+        <param name="reason">The reason for terminating the orchestration instance.</param>
+        <summary>
+            Terminates a running orchestration instance.
+            </summary>
+        <returns>A task that completes when the terminate message is enqueued if necessary.</returns>
+        <remarks>
+          <para>
+            Terminating an orchestration instance has no effect on any in-flight activity function executions
+            or sub-orchestrations that were started by the current orchestration instance.
+            </para>
+        </remarks>
+        <exception cref="T:System.ArgumentException">The instance id does not corespond to a valid orchestration instance.</exception>
+        <exception cref="T:System.InvalidOperationException">The orchestration instance with the provided instance id is not running.</exception>
       </Docs>
     </Member>
     <Member MemberName="WaitForCompletionOrCreateCheckStatusResponseAsync">
@@ -443,13 +522,21 @@
         <Parameter Name="retryInterval" Type="System.TimeSpan" />
       </Parameters>
       <Docs>
-        <param name="request">To be added.</param>
-        <param name="instanceId">To be added.</param>
-        <param name="timeout">To be added.</param>
-        <param name="retryInterval">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="request">The HTTP request that triggered the current function.</param>
+        <param name="instanceId">The unique ID of the instance to check.</param>
+        <param name="timeout">Total allowed timeout for output from the durable function. The default value is 10 seconds.</param>
+        <param name="retryInterval">The timeout between checks for output from the durable function. The default value is 1 second.</param>
+        <summary>
+            Creates an HTTP response which either contains a payload of management URLs for a non-completed instance
+            or contains the payload containing the output of the completed orchestration.
+            </summary>
+        <returns>An HTTP response which may include a 202 and location header or a 200 with the durable function output in the response body.</returns>
+        <remarks>
+            If the orchestration instance completes within the specified timeout, then the HTTP response payload will
+            contain the output of the orchestration instance formatted as JSON. However, if the orchestration does not
+            complete within the specified timeout, then the HTTP response will be identical to that of the
+            <see cref="M:Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationClient.CreateCheckStatusResponse(Microsoft.AspNetCore.Http.HttpRequest,System.String,System.Boolean)" /> API.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="WaitForCompletionOrCreateCheckStatusResponseAsync">
@@ -473,13 +560,21 @@
         <Parameter Name="retryInterval" Type="System.TimeSpan" />
       </Parameters>
       <Docs>
-        <param name="request">To be added.</param>
-        <param name="instanceId">To be added.</param>
-        <param name="timeout">To be added.</param>
-        <param name="retryInterval">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="request">The HTTP request that triggered the current function.</param>
+        <param name="instanceId">The unique ID of the instance to check.</param>
+        <param name="timeout">Total allowed timeout for output from the durable function. The default value is 10 seconds.</param>
+        <param name="retryInterval">The timeout between checks for output from the durable function. The default value is 1 second.</param>
+        <summary>
+            Creates an HTTP response which either contains a payload of management URLs for a non-completed instance
+            or contains the payload containing the output of the completed orchestration.
+            </summary>
+        <returns>An HTTP response which may include a 202 and location header or a 200 with the durable function output in the response body.</returns>
+        <remarks>
+            If the orchestration instance completes within the specified timeout, then the HTTP response payload will
+            contain the output of the orchestration instance formatted as JSON. However, if the orchestration does not
+            complete within the specified timeout, then the HTTP response will be identical to that of the
+            <see cref="M:Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationClient.CreateCheckStatusResponse(System.Net.Http.HttpRequestMessage,System.String,System.Boolean)" /> API.
+            </remarks>
       </Docs>
     </Member>
   </Members>

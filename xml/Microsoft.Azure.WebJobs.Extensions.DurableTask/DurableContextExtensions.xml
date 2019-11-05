@@ -13,7 +13,9 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
+    <summary>
+            Defines convenient overloads for calling the context methods, for all the contexts.
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -37,12 +39,23 @@
         <Parameter Name="input" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="functionName">To be added.</param>
-        <param name="input">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="context">The context object.</param>
+        <param name="functionName">The name of the activity function to call.</param>
+        <param name="input">The JSON-serializeable input to pass to the activity function.</param>
+        <summary>
+            Schedules an activity function named <paramref name="functionName" /> for execution.
+            </summary>
+        <returns>A durable task that completes when the called function completes or fails.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">
+            The specified function does not exist, is disabled, or is not an orchestrator function.
+            </exception>
+        <exception cref="T:System.InvalidOperationException">
+            The current thread is different than the thread which started the orchestrator execution.
+            </exception>
+        <exception cref="T:Microsoft.Azure.WebJobs.Extensions.DurableTask.FunctionFailedException">
+            The activity function failed with an unhandled exception.
+            </exception>
       </Docs>
     </Member>
     <Member MemberName="CallActivityWithRetryAsync">
@@ -65,13 +78,27 @@
         <Parameter Name="input" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="functionName">To be added.</param>
-        <param name="retryOptions">To be added.</param>
-        <param name="input">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="context">The context object.</param>
+        <param name="functionName">The name of the activity function to call.</param>
+        <param name="retryOptions">The retry option for the activity function.</param>
+        <param name="input">The JSON-serializeable input to pass to the activity function.</param>
+        <summary>
+            Schedules an activity function named <paramref name="functionName" /> for execution with retry options.
+            </summary>
+        <returns>A durable task that completes when the called activity function completes or fails.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+            The retry option object is null.
+            </exception>
+        <exception cref="T:System.ArgumentException">
+            The specified function does not exist, is disabled, or is not an orchestrator function.
+            </exception>
+        <exception cref="T:System.InvalidOperationException">
+            The current thread is different than the thread which started the orchestrator execution.
+            </exception>
+        <exception cref="T:Microsoft.Azure.WebJobs.Extensions.DurableTask.FunctionFailedException">
+            The activity function failed with an unhandled exception.
+            </exception>
       </Docs>
     </Member>
     <Member MemberName="CallEntityAsync">
@@ -93,11 +120,13 @@
         <Parameter Name="operationName" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="entityId">To be added.</param>
-        <param name="operationName">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="context">The context object.</param>
+        <param name="entityId">The target entity.</param>
+        <param name="operationName">The name of the operation.</param>
+        <summary>
+            Calls an operation on an entity and waits for it to complete.
+            </summary>
+        <returns>A task representing the completion of the operation on the entity.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -123,12 +152,14 @@
         <Parameter Name="operationName" Type="System.String" />
       </Parameters>
       <Docs>
-        <typeparam name="TResult">To be added.</typeparam>
-        <param name="context">To be added.</param>
-        <param name="entityId">To be added.</param>
-        <param name="operationName">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <typeparam name="TResult">The JSON-serializable result type of the operation.</typeparam>
+        <param name="context">The context object.</param>
+        <param name="entityId">The target entity.</param>
+        <param name="operationName">The name of the operation.</param>
+        <summary>
+            Calls an operation on an entity and returns the result asynchronously.
+            </summary>
+        <returns>A task representing the result of the operation.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -152,12 +183,23 @@
         <Parameter Name="input" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="functionName">To be added.</param>
-        <param name="input">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="context">The context object.</param>
+        <param name="functionName">The name of the orchestrator function to call.</param>
+        <param name="input">The JSON-serializeable input to pass to the orchestrator function.</param>
+        <summary>
+            Schedules an orchestrator function named <paramref name="functionName" /> for execution.
+            </summary>
+        <returns>A durable task that completes when the called orchestrator function completes or fails.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">
+            The specified function does not exist, is disabled, or is not an orchestrator function.
+            </exception>
+        <exception cref="T:System.InvalidOperationException">
+            The current thread is different than the thread which started the orchestrator execution.
+            </exception>
+        <exception cref="T:Microsoft.Azure.WebJobs.Extensions.DurableTask.FunctionFailedException">
+            The sub-orchestrator function failed with an unhandled exception.
+            </exception>
       </Docs>
     </Member>
     <Member MemberName="CallSubOrchestratorAsync">
@@ -181,13 +223,24 @@
         <Parameter Name="input" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="functionName">To be added.</param>
-        <param name="instanceId">To be added.</param>
-        <param name="input">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="context">The context object.</param>
+        <param name="functionName">The name of the orchestrator function to call.</param>
+        <param name="instanceId">A unique ID to use for the sub-orchestration instance.</param>
+        <param name="input">The JSON-serializeable input to pass to the orchestrator function.</param>
+        <summary>
+            Schedules an orchestrator function named <paramref name="functionName" /> for execution.
+            </summary>
+        <returns>A durable task that completes when the called orchestrator function completes or fails.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">
+            The specified function does not exist, is disabled, or is not an orchestrator function.
+            </exception>
+        <exception cref="T:System.InvalidOperationException">
+            The current thread is different than the thread which started the orchestrator execution.
+            </exception>
+        <exception cref="T:Microsoft.Azure.WebJobs.Extensions.DurableTask.FunctionFailedException">
+            The activity function failed with an unhandled exception.
+            </exception>
       </Docs>
     </Member>
     <Member MemberName="CallSubOrchestratorAsync&lt;TResult&gt;">
@@ -213,13 +266,24 @@
         <Parameter Name="input" Type="System.Object" />
       </Parameters>
       <Docs>
-        <typeparam name="TResult">To be added.</typeparam>
-        <param name="context">To be added.</param>
-        <param name="functionName">To be added.</param>
-        <param name="input">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <typeparam name="TResult">The return type of the scheduled orchestrator function.</typeparam>
+        <param name="context">The context object.</param>
+        <param name="functionName">The name of the orchestrator function to call.</param>
+        <param name="input">The JSON-serializeable input to pass to the orchestrator function.</param>
+        <summary>
+            Schedules an orchestration function named <paramref name="functionName" /> for execution.
+            </summary>
+        <returns>A durable task that completes when the called orchestrator function completes or fails.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">
+            The specified function does not exist, is disabled, or is not an orchestrator function.
+            </exception>
+        <exception cref="T:System.InvalidOperationException">
+            The current thread is different than the thread which started the orchestrator execution.
+            </exception>
+        <exception cref="T:Microsoft.Azure.WebJobs.Extensions.DurableTask.FunctionFailedException">
+            The activity function failed with an unhandled exception.
+            </exception>
       </Docs>
     </Member>
     <Member MemberName="CallSubOrchestratorWithRetryAsync">
@@ -242,13 +306,27 @@
         <Parameter Name="input" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="functionName">To be added.</param>
-        <param name="retryOptions">To be added.</param>
-        <param name="input">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="context">The context object.</param>
+        <param name="functionName">The name of the orchestrator function to call.</param>
+        <param name="retryOptions">The retry option for the orchestrator function.</param>
+        <param name="input">The JSON-serializeable input to pass to the orchestrator function.</param>
+        <summary>
+            Schedules an orchestrator function named <paramref name="functionName" /> for execution with retry options.
+            </summary>
+        <returns>A durable task that completes when the called orchestrator function completes or fails.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+            The retry option object is null.
+            </exception>
+        <exception cref="T:System.ArgumentException">
+            The specified function does not exist, is disabled, or is not an orchestrator function.
+            </exception>
+        <exception cref="T:System.InvalidOperationException">
+            The current thread is different than the thread which started the orchestrator execution.
+            </exception>
+        <exception cref="T:Microsoft.Azure.WebJobs.Extensions.DurableTask.FunctionFailedException">
+            The activity function failed with an unhandled exception.
+            </exception>
       </Docs>
     </Member>
     <Member MemberName="CallSubOrchestratorWithRetryAsync">
@@ -272,14 +350,28 @@
         <Parameter Name="input" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="functionName">To be added.</param>
-        <param name="retryOptions">To be added.</param>
-        <param name="instanceId">To be added.</param>
-        <param name="input">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="context">The context object.</param>
+        <param name="functionName">The name of the orchestrator function to call.</param>
+        <param name="retryOptions">The retry option for the orchestrator function.</param>
+        <param name="instanceId">A unique ID to use for the sub-orchestration instance.</param>
+        <param name="input">The JSON-serializeable input to pass to the orchestrator function.</param>
+        <summary>
+            Schedules an orchestrator function named <paramref name="functionName" /> for execution with retry options.
+            </summary>
+        <returns>A durable task that completes when the called orchestrator function completes or fails.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+            The retry option object is null.
+            </exception>
+        <exception cref="T:System.ArgumentException">
+            The specified function does not exist, is disabled, or is not an orchestrator function.
+            </exception>
+        <exception cref="T:System.InvalidOperationException">
+            The current thread is different than the thread which started the orchestrator execution.
+            </exception>
+        <exception cref="T:Microsoft.Azure.WebJobs.Extensions.DurableTask.FunctionFailedException">
+            The activity function failed with an unhandled exception.
+            </exception>
       </Docs>
     </Member>
     <Member MemberName="CallSubOrchestratorWithRetryAsync&lt;TResult&gt;">
@@ -305,14 +397,28 @@
         <Parameter Name="input" Type="System.Object" />
       </Parameters>
       <Docs>
-        <typeparam name="TResult">To be added.</typeparam>
-        <param name="context">To be added.</param>
-        <param name="functionName">To be added.</param>
-        <param name="retryOptions">To be added.</param>
-        <param name="input">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <typeparam name="TResult">The return type of the scheduled orchestrator function.</typeparam>
+        <param name="context">The context object.</param>
+        <param name="functionName">The name of the orchestrator function to call.</param>
+        <param name="retryOptions">The retry option for the orchestrator function.</param>
+        <param name="input">The JSON-serializeable input to pass to the orchestrator function.</param>
+        <summary>
+            Schedules an orchestrator function named <paramref name="functionName" /> for execution with retry options.
+            </summary>
+        <returns>A durable task that completes when the called orchestrator function completes or fails.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+            The retry option object is null.
+            </exception>
+        <exception cref="T:System.ArgumentException">
+            The specified function does not exist, is disabled, or is not an orchestrator function.
+            </exception>
+        <exception cref="T:System.InvalidOperationException">
+            The current thread is different than the thread which started the orchestrator execution.
+            </exception>
+        <exception cref="T:Microsoft.Azure.WebJobs.Extensions.DurableTask.FunctionFailedException">
+            The activity function failed with an unhandled exception.
+            </exception>
       </Docs>
     </Member>
     <Member MemberName="CreateReplaySafeLogger">
@@ -334,10 +440,13 @@
         <Parameter Name="logger" Type="Microsoft.Extensions.Logging.ILogger" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="logger">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="context">The context object.</param>
+        <param name="logger">An instance of ILogger.</param>
+        <summary>
+            Returns an instance of ILogger that is replay safe, ensuring the logger logs only when the orchestrator
+            is not replaying that line of code.
+            </summary>
+        <returns>An instance of a replay safe ILogger.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -361,12 +470,18 @@
         <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="fireAt">To be added.</param>
-        <param name="cancelToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The context object.</param>
+        <param name="fireAt">The time at which the timer should expire.</param>
+        <param name="cancelToken">The <c>CancellationToken</c> to use for cancelling the timer.</param>
+        <summary>
+            Creates a durable timer that expires at a specified time.
+            </summary>
+        <returns>A durable task that completes when the durable timer expires.</returns>
+        <remarks>
+            All durable timers created using this method must either expire or be cancelled
+            using the <paramref name="cancelToken" /> before the orchestrator function completes.
+            Otherwise the underlying framework will keep the instance alive until the timer expires.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="GetStatusAsync">
@@ -388,10 +503,12 @@
         <Parameter Name="instanceId" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="client">To be added.</param>
-        <param name="instanceId">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="client">The client object.</param>
+        <param name="instanceId">The ID of the orchestration instance to query.</param>
+        <summary>
+            Gets the status of the specified orchestration instance.
+            </summary>
+        <returns>Returns a task which completes when the status has been fetched.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -415,11 +532,13 @@
         <Parameter Name="showHistory" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="client">To be added.</param>
-        <param name="instanceId">To be added.</param>
-        <param name="showHistory">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="client">The client object.</param>
+        <param name="instanceId">The ID of the orchestration instance to query.</param>
+        <param name="showHistory">Boolean marker for including execution history in the response.</param>
+        <summary>
+            Gets the status of the specified orchestration instance.
+            </summary>
+        <returns>Returns a task which completes when the status has been fetched.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -443,12 +562,22 @@
         <Parameter Name="eventName" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="client">To be added.</param>
-        <param name="instanceId">To be added.</param>
-        <param name="eventName">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="client">The client object.</param>
+        <param name="instanceId">The ID of the orchestration instance that will handle the event.</param>
+        <param name="eventName">The name of the event.</param>
+        <summary>
+            Sends an event notification message to a waiting orchestration instance.
+            </summary>
+        <returns>A task that completes when the event notification message has been enqueued.</returns>
+        <remarks>
+          <para>
+            In order to handle the event, the target orchestration instance must be waiting for an
+            event named <paramref name="eventName" /> using the
+            <see cref="M:Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationContext.WaitForExternalEvent``1(System.String)" /> API.
+            </para>
+        </remarks>
+        <exception cref="T:System.ArgumentException">The instance id does not corespond to a valid orchestration instance.</exception>
+        <exception cref="T:System.InvalidOperationException">The orchestration instance with the provided instance id is not running.</exception>
       </Docs>
     </Member>
     <Member MemberName="StartNewAsync">
@@ -470,11 +599,17 @@
         <Parameter Name="orchestratorFunctionName" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="client">To be added.</param>
-        <param name="orchestratorFunctionName">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="client">The client object.</param>
+        <param name="orchestratorFunctionName">The name of the orchestrator function to start.</param>
+        <summary>
+            Starts a new execution of the specified orchestrator function.
+            </summary>
+        <returns>A task that completes when the orchestration is started. The task contains the instance id of the started
+            orchestratation instance.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">
+            The specified function does not exist, is disabled, or is not an orchestrator function.
+            </exception>
       </Docs>
     </Member>
     <Member MemberName="StartNewAsync">
@@ -497,12 +632,18 @@
         <Parameter Name="instanceId" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="client">To be added.</param>
-        <param name="orchestratorFunctionName">To be added.</param>
-        <param name="instanceId">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="client">The client object.</param>
+        <param name="orchestratorFunctionName">The name of the orchestrator function to start.</param>
+        <param name="instanceId">The ID to use for the new orchestration instance.</param>
+        <summary>
+            Starts a new execution of the specified orchestrator function.
+            </summary>
+        <returns>A task that completes when the orchestration is started. The task contains the instance id of the started
+            orchestratation instance.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">
+            The specified function does not exist, is disabled, or is not an orchestrator function.
+            </exception>
       </Docs>
     </Member>
     <Member MemberName="StartNewAsync&lt;T&gt;">
@@ -532,13 +673,55 @@
         <Parameter Name="input" Type="T" />
       </Parameters>
       <Docs>
-        <typeparam name="T">To be added.</typeparam>
-        <param name="client">To be added.</param>
-        <param name="orchestratorFunctionName">To be added.</param>
-        <param name="input">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <typeparam name="T">The type of the input value for the orchestrator function.</typeparam>
+        <param name="client">The client object.</param>
+        <param name="orchestratorFunctionName">The name of the orchestrator function to start.</param>
+        <param name="input">JSON-serializeable input value for the orchestrator function.</param>
+        <summary>
+            Starts a new execution of the specified orchestrator function.
+            </summary>
+        <returns>A task that completes when the orchestration is started. The task contains the instance id of the started
+            orchestratation instance.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">
+            The specified function does not exist, is disabled, or is not an orchestrator function.
+            </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="WaitForCompletionOrCreateCheckStatusResponseAsync">
+      <MemberSignature Language="C#" Value="public static System.Threading.Tasks.Task&lt;Microsoft.AspNetCore.Mvc.IActionResult&gt; WaitForCompletionOrCreateCheckStatusResponseAsync (this Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationClient client, Microsoft.AspNetCore.Http.HttpRequest request, string instanceId);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Threading.Tasks.Task`1&lt;class Microsoft.AspNetCore.Mvc.IActionResult&gt; WaitForCompletionOrCreateCheckStatusResponseAsync(class Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationClient client, class Microsoft.AspNetCore.Http.HttpRequest request, string instanceId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.WebJobs.Extensions.DurableTask.DurableContextExtensions.WaitForCompletionOrCreateCheckStatusResponseAsync(Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationClient,Microsoft.AspNetCore.Http.HttpRequest,System.String)" />
+      <MemberSignature Language="VB.NET" Value="&lt;Extension()&gt;&#xA;Public Function WaitForCompletionOrCreateCheckStatusResponseAsync (client As IDurableOrchestrationClient, request As HttpRequest, instanceId As String) As Task(Of IActionResult)" />
+      <MemberSignature Language="F#" Value="static member WaitForCompletionOrCreateCheckStatusResponseAsync : Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationClient * Microsoft.AspNetCore.Http.HttpRequest * string -&gt; System.Threading.Tasks.Task&lt;Microsoft.AspNetCore.Mvc.IActionResult&gt;" Usage="Microsoft.Azure.WebJobs.Extensions.DurableTask.DurableContextExtensions.WaitForCompletionOrCreateCheckStatusResponseAsync (client, request, instanceId)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.WebJobs.Extensions.DurableTask</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.AspNetCore.Mvc.IActionResult&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="client" Type="Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationClient" RefType="this" />
+        <Parameter Name="request" Type="Microsoft.AspNetCore.Http.HttpRequest" />
+        <Parameter Name="instanceId" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="client">The client object.</param>
+        <param name="request">The HTTP request that triggered the current function.</param>
+        <param name="instanceId">The unique ID of the instance to check.</param>
+        <summary>
+            Creates an HTTP response which either contains a payload of management URLs for a non-completed instance
+            or contains the payload containing the output of the completed orchestration.
+            </summary>
+        <returns>An HTTP response which may include a 202 and location header or a 200 with the durable function output in the response body.</returns>
+        <remarks>
+            If the orchestration instance completes within the default 10 second timeout, then the HTTP response payload will
+            contain the output of the orchestration instance formatted as JSON. However, if the orchestration does not
+            complete within this timeout, then the HTTP response will be identical to that of the
+            <see cref="M:Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationClient.CreateCheckStatusResponse(Microsoft.AspNetCore.Http.HttpRequest,System.String,System.Boolean)" /> API.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="WaitForCompletionOrCreateCheckStatusResponseAsync">
@@ -561,12 +744,58 @@
         <Parameter Name="instanceId" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="client">To be added.</param>
-        <param name="request">To be added.</param>
-        <param name="instanceId">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="client">The client object.</param>
+        <param name="request">The HTTP request that triggered the current function.</param>
+        <param name="instanceId">The unique ID of the instance to check.</param>
+        <summary>
+            Creates an HTTP response which either contains a payload of management URLs for a non-completed instance
+            or contains the payload containing the output of the completed orchestration.
+            </summary>
+        <returns>An HTTP response which may include a 202 and location header or a 200 with the durable function output in the response body.</returns>
+        <remarks>
+            If the orchestration instance completes within the default 10 second timeout, then the HTTP response payload will
+            contain the output of the orchestration instance formatted as JSON. However, if the orchestration does not
+            complete within this timeout, then the HTTP response will be identical to that of the
+            <see cref="M:Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationClient.CreateCheckStatusResponse(System.Net.Http.HttpRequestMessage,System.String,System.Boolean)" /> API.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="WaitForCompletionOrCreateCheckStatusResponseAsync">
+      <MemberSignature Language="C#" Value="public static System.Threading.Tasks.Task&lt;Microsoft.AspNetCore.Mvc.IActionResult&gt; WaitForCompletionOrCreateCheckStatusResponseAsync (this Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationClient client, Microsoft.AspNetCore.Http.HttpRequest request, string instanceId, TimeSpan timeout);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Threading.Tasks.Task`1&lt;class Microsoft.AspNetCore.Mvc.IActionResult&gt; WaitForCompletionOrCreateCheckStatusResponseAsync(class Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationClient client, class Microsoft.AspNetCore.Http.HttpRequest request, string instanceId, valuetype System.TimeSpan timeout) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.WebJobs.Extensions.DurableTask.DurableContextExtensions.WaitForCompletionOrCreateCheckStatusResponseAsync(Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationClient,Microsoft.AspNetCore.Http.HttpRequest,System.String,System.TimeSpan)" />
+      <MemberSignature Language="VB.NET" Value="&lt;Extension()&gt;&#xA;Public Function WaitForCompletionOrCreateCheckStatusResponseAsync (client As IDurableOrchestrationClient, request As HttpRequest, instanceId As String, timeout As TimeSpan) As Task(Of IActionResult)" />
+      <MemberSignature Language="F#" Value="static member WaitForCompletionOrCreateCheckStatusResponseAsync : Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationClient * Microsoft.AspNetCore.Http.HttpRequest * string * TimeSpan -&gt; System.Threading.Tasks.Task&lt;Microsoft.AspNetCore.Mvc.IActionResult&gt;" Usage="Microsoft.Azure.WebJobs.Extensions.DurableTask.DurableContextExtensions.WaitForCompletionOrCreateCheckStatusResponseAsync (client, request, instanceId, timeout)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.WebJobs.Extensions.DurableTask</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.AspNetCore.Mvc.IActionResult&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="client" Type="Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationClient" RefType="this" />
+        <Parameter Name="request" Type="Microsoft.AspNetCore.Http.HttpRequest" />
+        <Parameter Name="instanceId" Type="System.String" />
+        <Parameter Name="timeout" Type="System.TimeSpan" />
+      </Parameters>
+      <Docs>
+        <param name="client">The client object.</param>
+        <param name="request">The HTTP request that triggered the current function.</param>
+        <param name="instanceId">The unique ID of the instance to check.</param>
+        <param name="timeout">Total allowed timeout for output from the durable function. The default value is 10 seconds.</param>
+        <summary>
+            Creates an HTTP response which either contains a payload of management URLs for a non-completed instance
+            or contains the payload containing the output of the completed orchestration.
+            </summary>
+        <returns>An HTTP response which may include a 202 and location header or a 200 with the durable function output in the response body.</returns>
+        <remarks>
+            If the orchestration instance completes within the specified timeout, then the HTTP response payload will
+            contain the output of the orchestration instance formatted as JSON. However, if the orchestration does not
+            complete within the specified timeout, then the HTTP response will be identical to that of the
+            <see cref="M:Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationClient.CreateCheckStatusResponse(Microsoft.AspNetCore.Http.HttpRequest,System.String,System.Boolean)" /> API.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="WaitForCompletionOrCreateCheckStatusResponseAsync">
@@ -590,13 +819,21 @@
         <Parameter Name="timeout" Type="System.TimeSpan" />
       </Parameters>
       <Docs>
-        <param name="client">To be added.</param>
-        <param name="request">To be added.</param>
-        <param name="instanceId">To be added.</param>
-        <param name="timeout">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="client">The client object.</param>
+        <param name="request">The HTTP request that triggered the current function.</param>
+        <param name="instanceId">The unique ID of the instance to check.</param>
+        <param name="timeout">Total allowed timeout for output from the durable function. The default value is 10 seconds.</param>
+        <summary>
+            Creates an HTTP response which either contains a payload of management URLs for a non-completed instance
+            or contains the payload containing the output of the completed orchestration.
+            </summary>
+        <returns>An HTTP response which may include a 202 and location header or a 200 with the durable function output in the response body.</returns>
+        <remarks>
+            If the orchestration instance completes within the specified timeout, then the HTTP response payload will
+            contain the output of the orchestration instance formatted as JSON. However, if the orchestration does not
+            complete within the specified timeout, then the HTTP response will be identical to that of the
+            <see cref="M:Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationClient.CreateCheckStatusResponse(System.Net.Http.HttpRequestMessage,System.String,System.Boolean)" /> API.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="WaitForExternalEvent">
@@ -618,11 +855,16 @@
         <Parameter Name="name" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="name">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The context object.</param>
+        <param name="name">The name of the event to wait for.</param>
+        <summary>
+            Waits asynchronously for an event to be raised with name <paramref name="name" />.
+            </summary>
+        <returns>A durable task that completes when the external event is received.</returns>
+        <remarks>
+            External clients can raise events to a waiting orchestration instance using
+            <see cref="M:Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationClient.RaiseEventAsync(System.String,System.String,System.Object)" /> with the object parameter set to <c>null</c>.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="WaitForExternalEvent">
@@ -645,12 +887,20 @@
         <Parameter Name="timeout" Type="System.TimeSpan" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="name">To be added.</param>
-        <param name="timeout">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The context object.</param>
+        <param name="name">The name of the event to wait for.</param>
+        <param name="timeout">The duration after which to throw a TimeoutException.</param>
+        <summary>
+            Waits asynchronously for an event to be raised with name <paramref name="name" />.
+            </summary>
+        <returns>A durable task that completes when the external event is received.</returns>
+        <remarks>
+            External clients can raise events to a waiting orchestration instance using
+            <see cref="M:Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationClient.RaiseEventAsync(System.String,System.String,System.Object)" /> with the object parameter set to <c>null</c>.
+            </remarks>
+        <exception cref="T:System.TimeoutException">
+            The external event was not received before the timeout expired.
+            </exception>
       </Docs>
     </Member>
   </Members>
