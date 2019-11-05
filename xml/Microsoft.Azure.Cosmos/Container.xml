@@ -13,6 +13,8 @@
     <AssemblyVersion>3.3.0.0</AssemblyVersion>
     <AssemblyVersion>3.3.1.0</AssemblyVersion>
     <AssemblyVersion>3.3.2.0</AssemblyVersion>
+    <AssemblyVersion>3.3.3.0</AssemblyVersion>
+    <AssemblyVersion>3.4.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -49,6 +51,8 @@
         <AssemblyVersion>3.3.0.0</AssemblyVersion>
         <AssemblyVersion>3.3.1.0</AssemblyVersion>
         <AssemblyVersion>3.3.2.0</AssemblyVersion>
+        <AssemblyVersion>3.3.3.0</AssemblyVersion>
+        <AssemblyVersion>3.4.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -72,6 +76,8 @@
         <AssemblyVersion>3.3.0.0</AssemblyVersion>
         <AssemblyVersion>3.3.1.0</AssemblyVersion>
         <AssemblyVersion>3.3.2.0</AssemblyVersion>
+        <AssemblyVersion>3.3.3.0</AssemblyVersion>
+        <AssemblyVersion>3.4.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.Conflicts</ReturnType>
@@ -99,6 +105,8 @@
         <AssemblyVersion>3.3.0.0</AssemblyVersion>
         <AssemblyVersion>3.3.1.0</AssemblyVersion>
         <AssemblyVersion>3.3.2.0</AssemblyVersion>
+        <AssemblyVersion>3.3.3.0</AssemblyVersion>
+        <AssemblyVersion>3.4.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.ItemResponse&lt;T&gt;&gt;</ReturnType>
@@ -175,6 +183,8 @@
         <AssemblyVersion>3.3.0.0</AssemblyVersion>
         <AssemblyVersion>3.3.1.0</AssemblyVersion>
         <AssemblyVersion>3.3.2.0</AssemblyVersion>
+        <AssemblyVersion>3.3.3.0</AssemblyVersion>
+        <AssemblyVersion>3.4.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.ResponseMessage&gt;</ReturnType>
@@ -241,6 +251,108 @@
             ]]></code></example>
       </Docs>
     </Member>
+    <Member MemberName="CreateTransactionalBatch">
+      <MemberSignature Language="C#" Value="public abstract Microsoft.Azure.Cosmos.TransactionalBatch CreateTransactionalBatch (Microsoft.Azure.Cosmos.PartitionKey partitionKey);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Azure.Cosmos.TransactionalBatch CreateTransactionalBatch(valuetype Microsoft.Azure.Cosmos.PartitionKey partitionKey) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Cosmos.Container.CreateTransactionalBatch(Microsoft.Azure.Cosmos.PartitionKey)" />
+      <MemberSignature Language="F#" Value="abstract member CreateTransactionalBatch : Microsoft.Azure.Cosmos.PartitionKey -&gt; Microsoft.Azure.Cosmos.TransactionalBatch" Usage="container.CreateTransactionalBatch partitionKey" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
+        <AssemblyVersion>3.4.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Azure.Cosmos.TransactionalBatch</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="partitionKey" Type="Microsoft.Azure.Cosmos.PartitionKey" />
+      </Parameters>
+      <Docs>
+        <param name="partitionKey">The partition key for all items in the batch. <see cref="T:Microsoft.Azure.Cosmos.PartitionKey" />.</param>
+        <summary>
+             Initializes a new instance of the <see cref="T:Microsoft.Azure.Cosmos.TransactionalBatch" /> class
+             that can be used to perform operations across multiple items
+             in the container with the provided partition key in a transactional manner.
+             </summary>
+        <returns>A new instance of <see cref="T:Microsoft.Azure.Cosmos.TransactionalBatch" />.</returns>
+        <remarks>To be added.</remarks>
+        <example>
+             This example atomically modifies a set of documents as a batch.
+             <code language="c#"><![CDATA[
+             public class ToDoActivity
+             {
+                 public string type { get; set; }
+                 public string id { get; set; }
+                 public string status { get; set; }
+             }
+            
+             string activityType = "personal";
+             ToDoActivity test1 = new ToDoActivity()
+             {
+                 type = activityType,
+                 id = "learning",
+                 status = "ToBeDone"
+             };
+            
+             ToDoActivity test2 = new ToDoActivity()
+             {
+                 type = activityType,
+                 id = "shopping",
+                 status = "Done"
+             };
+            
+             ToDoActivity test3 = new ToDoActivity()
+             {
+                 type = activityType,
+                 id = "swimming",
+                 status = "ToBeDone"
+             };
+            
+             using (TransactionalBatchResponse batchResponse = await container.CreateTransactionalBatch(new Cosmos.PartitionKey(activityType))
+                 .CreateItem<ToDoActivity>(test1)
+                 .ReplaceItem<ToDoActivity>(test2.id, test2)
+                 .UpsertItem<ToDoActivity>(test3)
+                 .DeleteItem("reading")
+                 .CreateItemStream(streamPayload1)
+                 .ReplaceItemStream("eating", streamPayload2)
+                 .UpsertItemStream(streamPayload3)
+                 .ExecuteAsync())
+             {
+                if (!batchResponse.IsSuccessStatusCode)
+                {
+                    // Handle and log exception
+                    return;
+                }
+            
+                // Look up interested results - eg. via typed access on operation results
+                TransactionalBatchOperationResult<ToDoActivity> replaceResult = batchResponse.GetOperationResultAtIndex<ToDoActivity>(0);
+                ToDoActivity readActivity = replaceResult.Resource;
+             }
+             ]]></code></example>
+        <example>
+             This example atomically reads a set of documents as a batch.
+             <code language="c#"><![CDATA[
+             string activityType = "personal";
+             using (TransactionalBatchResponse batchResponse = await container.CreateTransactionalBatch(new Cosmos.PartitionKey(activityType))
+                .ReadItem("playing")
+                .ReadItem("walking")
+                .ReadItem("jogging")
+                .ReadItem("running")
+                .ExecuteAsync())
+             {
+                 // Look up interested results - eg. via direct access to operation result stream
+                 List<string> resultItems = new List<string>();
+                 foreach (TransactionalBatchOperationResult operationResult in batchResponse)
+                 {
+                     using (StreamReader streamReader = new StreamReader(operationResult.ResourceStream))
+                     {
+                         resultItems.Add(await streamReader.ReadToEndAsync());
+                     }
+                 }
+             }
+             ]]></code></example>
+      </Docs>
+    </Member>
     <Member MemberName="DeleteContainerAsync">
       <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.ContainerResponse&gt; DeleteContainerAsync (Microsoft.Azure.Cosmos.ContainerRequestOptions requestOptions = null, System.Threading.CancellationToken cancellationToken = null);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Azure.Cosmos.ContainerResponse&gt; DeleteContainerAsync(class Microsoft.Azure.Cosmos.ContainerRequestOptions requestOptions, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
@@ -256,6 +368,8 @@
         <AssemblyVersion>3.3.0.0</AssemblyVersion>
         <AssemblyVersion>3.3.1.0</AssemblyVersion>
         <AssemblyVersion>3.3.2.0</AssemblyVersion>
+        <AssemblyVersion>3.3.3.0</AssemblyVersion>
+        <AssemblyVersion>3.4.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.ContainerResponse&gt;</ReturnType>
@@ -309,6 +423,8 @@
         <AssemblyVersion>3.3.0.0</AssemblyVersion>
         <AssemblyVersion>3.3.1.0</AssemblyVersion>
         <AssemblyVersion>3.3.2.0</AssemblyVersion>
+        <AssemblyVersion>3.3.3.0</AssemblyVersion>
+        <AssemblyVersion>3.4.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.ResponseMessage&gt;</ReturnType>
@@ -348,6 +464,8 @@
         <AssemblyVersion>3.3.0.0</AssemblyVersion>
         <AssemblyVersion>3.3.1.0</AssemblyVersion>
         <AssemblyVersion>3.3.2.0</AssemblyVersion>
+        <AssemblyVersion>3.3.3.0</AssemblyVersion>
+        <AssemblyVersion>3.4.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.ItemResponse&lt;T&gt;&gt;</ReturnType>
@@ -402,6 +520,8 @@
         <AssemblyVersion>3.3.0.0</AssemblyVersion>
         <AssemblyVersion>3.3.1.0</AssemblyVersion>
         <AssemblyVersion>3.3.2.0</AssemblyVersion>
+        <AssemblyVersion>3.3.3.0</AssemblyVersion>
+        <AssemblyVersion>3.4.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.ResponseMessage&gt;</ReturnType>
@@ -466,6 +586,8 @@
         <AssemblyVersion>3.3.0.0</AssemblyVersion>
         <AssemblyVersion>3.3.1.0</AssemblyVersion>
         <AssemblyVersion>3.3.2.0</AssemblyVersion>
+        <AssemblyVersion>3.3.3.0</AssemblyVersion>
+        <AssemblyVersion>3.4.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.ChangeFeedProcessorBuilder</ReturnType>
@@ -504,6 +626,8 @@
         <AssemblyVersion>3.3.0.0</AssemblyVersion>
         <AssemblyVersion>3.3.1.0</AssemblyVersion>
         <AssemblyVersion>3.3.2.0</AssemblyVersion>
+        <AssemblyVersion>3.3.3.0</AssemblyVersion>
+        <AssemblyVersion>3.4.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.ChangeFeedProcessorBuilder</ReturnType>
@@ -541,6 +665,8 @@
         <AssemblyVersion>3.3.0.0</AssemblyVersion>
         <AssemblyVersion>3.3.1.0</AssemblyVersion>
         <AssemblyVersion>3.3.2.0</AssemblyVersion>
+        <AssemblyVersion>3.3.3.0</AssemblyVersion>
+        <AssemblyVersion>3.4.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Linq.IOrderedQueryable&lt;T&gt;</ReturnType>
@@ -568,7 +694,7 @@
              It is recommended to always use ToFeedIterator(), and to do the asynchronous execution.
              </remarks>
         <remarks>
-             The Azure Cosmos DB LINQ provider compiles LINQ to SQL statements. Refer to http://azure.microsoft.com/documentation/articles/documentdb-sql-query/#linq-to-documentdb-sql for the list of expressions supported by the Azure Cosmos DB LINQ provider. ToString() on the generated IQueryable returns the translated SQL statement. The Azure Cosmos DB provider translates JSON.NET and DataContract serialization attributes for members to their JSON property names.
+             The Azure Cosmos DB LINQ provider compiles LINQ to SQL statements. Refer to https://docs.microsoft.com/azure/cosmos-db/sql-query-linq-to-sql for the list of expressions supported by the Azure Cosmos DB LINQ provider. ToString() on the generated IQueryable returns the translated SQL statement. The Azure Cosmos DB provider translates JSON.NET and DataContract serialization attributes for members to their JSON property names.
              </remarks>
         <example>
              1. This example below shows LINQ query generation and blocked execution.
@@ -643,6 +769,8 @@
         <AssemblyVersion>3.3.0.0</AssemblyVersion>
         <AssemblyVersion>3.3.1.0</AssemblyVersion>
         <AssemblyVersion>3.3.2.0</AssemblyVersion>
+        <AssemblyVersion>3.3.3.0</AssemblyVersion>
+        <AssemblyVersion>3.4.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.FeedIterator&lt;T&gt;</ReturnType>
@@ -730,6 +858,8 @@
         <AssemblyVersion>3.3.0.0</AssemblyVersion>
         <AssemblyVersion>3.3.1.0</AssemblyVersion>
         <AssemblyVersion>3.3.2.0</AssemblyVersion>
+        <AssemblyVersion>3.3.3.0</AssemblyVersion>
+        <AssemblyVersion>3.4.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.FeedIterator&lt;T&gt;</ReturnType>
@@ -835,6 +965,8 @@
         <AssemblyVersion>3.3.0.0</AssemblyVersion>
         <AssemblyVersion>3.3.1.0</AssemblyVersion>
         <AssemblyVersion>3.3.2.0</AssemblyVersion>
+        <AssemblyVersion>3.3.3.0</AssemblyVersion>
+        <AssemblyVersion>3.4.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.FeedIterator</ReturnType>
@@ -928,6 +1060,8 @@
         <AssemblyVersion>3.3.0.0</AssemblyVersion>
         <AssemblyVersion>3.3.1.0</AssemblyVersion>
         <AssemblyVersion>3.3.2.0</AssemblyVersion>
+        <AssemblyVersion>3.3.3.0</AssemblyVersion>
+        <AssemblyVersion>3.4.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.FeedIterator</ReturnType>
@@ -1044,6 +1178,8 @@
         <AssemblyVersion>3.3.0.0</AssemblyVersion>
         <AssemblyVersion>3.3.1.0</AssemblyVersion>
         <AssemblyVersion>3.3.2.0</AssemblyVersion>
+        <AssemblyVersion>3.3.3.0</AssemblyVersion>
+        <AssemblyVersion>3.4.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -1071,6 +1207,8 @@
         <AssemblyVersion>3.3.0.0</AssemblyVersion>
         <AssemblyVersion>3.3.1.0</AssemblyVersion>
         <AssemblyVersion>3.3.2.0</AssemblyVersion>
+        <AssemblyVersion>3.3.3.0</AssemblyVersion>
+        <AssemblyVersion>3.4.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.ContainerResponse&gt;</ReturnType>
@@ -1120,6 +1258,8 @@
         <AssemblyVersion>3.3.0.0</AssemblyVersion>
         <AssemblyVersion>3.3.1.0</AssemblyVersion>
         <AssemblyVersion>3.3.2.0</AssemblyVersion>
+        <AssemblyVersion>3.3.3.0</AssemblyVersion>
+        <AssemblyVersion>3.4.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.ResponseMessage&gt;</ReturnType>
@@ -1161,6 +1301,8 @@
         <AssemblyVersion>3.3.0.0</AssemblyVersion>
         <AssemblyVersion>3.3.1.0</AssemblyVersion>
         <AssemblyVersion>3.3.2.0</AssemblyVersion>
+        <AssemblyVersion>3.3.3.0</AssemblyVersion>
+        <AssemblyVersion>3.4.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.ItemResponse&lt;T&gt;&gt;</ReturnType>
@@ -1233,6 +1375,8 @@
         <AssemblyVersion>3.3.0.0</AssemblyVersion>
         <AssemblyVersion>3.3.1.0</AssemblyVersion>
         <AssemblyVersion>3.3.2.0</AssemblyVersion>
+        <AssemblyVersion>3.3.3.0</AssemblyVersion>
+        <AssemblyVersion>3.4.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.ResponseMessage&gt;</ReturnType>
@@ -1316,6 +1460,8 @@
         <AssemblyVersion>3.3.0.0</AssemblyVersion>
         <AssemblyVersion>3.3.1.0</AssemblyVersion>
         <AssemblyVersion>3.3.2.0</AssemblyVersion>
+        <AssemblyVersion>3.3.3.0</AssemblyVersion>
+        <AssemblyVersion>3.4.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Nullable&lt;System.Int32&gt;&gt;</ReturnType>
@@ -1358,6 +1504,8 @@
         <AssemblyVersion>3.3.0.0</AssemblyVersion>
         <AssemblyVersion>3.3.1.0</AssemblyVersion>
         <AssemblyVersion>3.3.2.0</AssemblyVersion>
+        <AssemblyVersion>3.3.3.0</AssemblyVersion>
+        <AssemblyVersion>3.4.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.ThroughputResponse&gt;</ReturnType>
@@ -1427,6 +1575,8 @@
         <AssemblyVersion>3.3.0.0</AssemblyVersion>
         <AssemblyVersion>3.3.1.0</AssemblyVersion>
         <AssemblyVersion>3.3.2.0</AssemblyVersion>
+        <AssemblyVersion>3.3.3.0</AssemblyVersion>
+        <AssemblyVersion>3.4.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.ContainerResponse&gt;</ReturnType>
@@ -1482,6 +1632,8 @@
         <AssemblyVersion>3.3.0.0</AssemblyVersion>
         <AssemblyVersion>3.3.1.0</AssemblyVersion>
         <AssemblyVersion>3.3.2.0</AssemblyVersion>
+        <AssemblyVersion>3.3.3.0</AssemblyVersion>
+        <AssemblyVersion>3.4.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.ResponseMessage&gt;</ReturnType>
@@ -1526,6 +1678,8 @@
         <AssemblyVersion>3.3.0.0</AssemblyVersion>
         <AssemblyVersion>3.3.1.0</AssemblyVersion>
         <AssemblyVersion>3.3.2.0</AssemblyVersion>
+        <AssemblyVersion>3.3.3.0</AssemblyVersion>
+        <AssemblyVersion>3.4.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.ItemResponse&lt;T&gt;&gt;</ReturnType>
@@ -1594,6 +1748,8 @@
         <AssemblyVersion>3.3.0.0</AssemblyVersion>
         <AssemblyVersion>3.3.1.0</AssemblyVersion>
         <AssemblyVersion>3.3.2.0</AssemblyVersion>
+        <AssemblyVersion>3.3.3.0</AssemblyVersion>
+        <AssemblyVersion>3.4.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.ResponseMessage&gt;</ReturnType>
@@ -1680,6 +1836,8 @@
         <AssemblyVersion>3.3.0.0</AssemblyVersion>
         <AssemblyVersion>3.3.1.0</AssemblyVersion>
         <AssemblyVersion>3.3.2.0</AssemblyVersion>
+        <AssemblyVersion>3.3.3.0</AssemblyVersion>
+        <AssemblyVersion>3.4.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.ThroughputResponse&gt;</ReturnType>
@@ -1730,6 +1888,8 @@
         <AssemblyVersion>3.3.0.0</AssemblyVersion>
         <AssemblyVersion>3.3.1.0</AssemblyVersion>
         <AssemblyVersion>3.3.2.0</AssemblyVersion>
+        <AssemblyVersion>3.3.3.0</AssemblyVersion>
+        <AssemblyVersion>3.4.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.Scripts.Scripts</ReturnType>
@@ -1757,6 +1917,8 @@
         <AssemblyVersion>3.3.0.0</AssemblyVersion>
         <AssemblyVersion>3.3.1.0</AssemblyVersion>
         <AssemblyVersion>3.3.2.0</AssemblyVersion>
+        <AssemblyVersion>3.3.3.0</AssemblyVersion>
+        <AssemblyVersion>3.4.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.ItemResponse&lt;T&gt;&gt;</ReturnType>
@@ -1833,6 +1995,8 @@
         <AssemblyVersion>3.3.0.0</AssemblyVersion>
         <AssemblyVersion>3.3.1.0</AssemblyVersion>
         <AssemblyVersion>3.3.2.0</AssemblyVersion>
+        <AssemblyVersion>3.3.3.0</AssemblyVersion>
+        <AssemblyVersion>3.4.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.ResponseMessage&gt;</ReturnType>
