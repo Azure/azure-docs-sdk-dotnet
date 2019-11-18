@@ -1,20 +1,20 @@
 ---
-title: Azure Redis Cache libraries for .NET
-description: Reference for Azure Redis Cache libraries for .NET
+title: Azure Cache for Redis libraries for .NET
+description: Reference for Azure Cache for Redis libraries for .NET
 ms.date: 10/19/2017
 ms.topic: reference
-ms.service: redis-cache
+ms.service: cache
 ---
 
-# Azure Redis Cache libraries for .NET
+# Azure Cache for Redis libraries for .NET
 
 ## Overview
 
-Azure Redis Cache is a secure data cache and messaging broker that provides high throughput and low-latency access to data for applications.  For more information, see [How to Use Redis Cache](https://docs.microsoft.com/azure/redis-cache/cache-dotnet-how-to-use-azure-redis-cache).
+Azure Cache for Redis is a secure data cache and messaging broker that provides high throughput and low-latency access to data for applications.  For more information, see [How to Use Azure Cache for Redis](/azure/azure-cache-for-redis/cache-dotnet-how-to-use-azure-redis-cache).
 
 ## Client library
 
-Azure Redis Cache is compatible with any Redis client API, including `StackExchange.Redis`.
+Azure Cache for Redis is compatible with any Redis client API, including `StackExchange.Redis`.
 
 Install the [NuGet package](https://www.nuget.org/packages/StackExchange.Redis) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
 
@@ -30,7 +30,7 @@ dotnet add package StackExchange.Redis
 
 ### Example
 
-This example connects to a Redis Cache database instance, adds some strings to the cache by name, and then retrieves them again.
+This example connects to a Azure Cache for Redis database instance, adds some strings to the cache by name, and then retrieves them again.
 
 ```csharp
 /* Include this "using" directive.
@@ -53,7 +53,7 @@ int key2 = (int)cache.StringGet("key2");
 
 ## Management library
 
-The Redis Cache management library allows you to manage Redis Cache resources and access keys.
+The Azure Cache for Redis management library allows you to manage Azure Cache for Redis resources and access keys.
 
 Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Management.Redis.Fluent) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
 
@@ -69,7 +69,7 @@ dotnet add package Microsoft.Azure.Management.Redis.Fluent
 
 ### Example
 
-This example creates a new Redis Cache.
+This example creates a new Azure Cache for Redis.
 
 ```csharp
 /* Include these "using" directives...
