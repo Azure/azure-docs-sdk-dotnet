@@ -7,6 +7,7 @@
   <AssemblyInfo>
     <AssemblyName>System.Fabric</AssemblyName>
     <AssemblyVersion>6.0.0.0</AssemblyVersion>
+    <AssemblyVersion>7.0.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Fabric.Description.ServiceDescription</BaseTypeName>
@@ -28,6 +29,7 @@
       <AssemblyInfo>
         <AssemblyName>System.Fabric</AssemblyName>
         <AssemblyVersion>6.0.0.0</AssemblyVersion>
+        <AssemblyVersion>7.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -47,6 +49,7 @@
       <AssemblyInfo>
         <AssemblyName>System.Fabric</AssemblyName>
         <AssemblyVersion>6.0.0.0</AssemblyVersion>
+        <AssemblyVersion>7.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
@@ -62,7 +65,77 @@
           <para>The <see cref="P:System.Fabric.Description.StatelessServiceDescription.InstanceCount" /> property indicates the number of instances to be
             created for this service. The specified number of instances will be maintained by Service Fabric. For a partitioned stateless service,
             <see cref="P:System.Fabric.Description.StatelessServiceDescription.InstanceCount" /> indicates the number of instances to be kept per partition.</para>
-        </remarks>
+            Note, -1 is a special value for <see cref="P:System.Fabric.Description.StatelessServiceDescription.InstanceCount" />. If <see cref="P:System.Fabric.Description.StatelessServiceDescription.InstanceCount" />
+            is set to -1, the number of instances to be kept per partition is equal to the number of nodes on which the instances are allowed to be placed according to the placement constraints on the service.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MinInstanceCount">
+      <MemberSignature Language="C#" Value="public int MinInstanceCount { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 MinInstanceCount" />
+      <MemberSignature Language="DocId" Value="P:System.Fabric.Description.StatelessServiceDescription.MinInstanceCount" />
+      <MemberSignature Language="VB.NET" Value="Public Property MinInstanceCount As Integer" />
+      <MemberSignature Language="F#" Value="member this.MinInstanceCount : int with get, set" Usage="System.Fabric.Description.StatelessServiceDescription.MinInstanceCount" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Fabric</AssemblyName>
+        <AssemblyVersion>7.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+          <para>Gets or sets the minimum instance count. </para>
+        </summary>
+        <value>
+          <para>The minimum instance count. Defaults to 1 if not provided.</para>
+        </value>
+        <remarks>
+          <para>The <see cref="P:System.Fabric.Description.StatelessServiceDescription.MinInstanceCount" /> property indicates the minimum number of 
+            instances that must be up to meet the <see href="https://docs.microsoft.com/en-us/rest/api/servicefabric/sfclient-model-ensureavailabilitysafetycheck">EnsureAvailability safety check</see> during operations like upgrade or deactivate node.
+            The actual number that is used is max(
+            <see cref="P:System.Fabric.Description.StatelessServiceDescription.MinInstanceCount" />, 
+            ceil( <see cref="P:System.Fabric.Description.StatelessServiceDescription.MinInstancePercentage" />/100.0 * <see cref="P:System.Fabric.Description.StatelessServiceDescription.InstanceCount" />) 
+            ). </para>
+            Note, if <see cref="P:System.Fabric.Description.StatelessServiceDescription.InstanceCount" /> is set to -1, during MinInstanceCount computation -1 is first converted
+            into the number of nodes on which the instances are allowed to be placed according to the placement constraints on the service.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MinInstancePercentage">
+      <MemberSignature Language="C#" Value="public int MinInstancePercentage { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 MinInstancePercentage" />
+      <MemberSignature Language="DocId" Value="P:System.Fabric.Description.StatelessServiceDescription.MinInstancePercentage" />
+      <MemberSignature Language="VB.NET" Value="Public Property MinInstancePercentage As Integer" />
+      <MemberSignature Language="F#" Value="member this.MinInstancePercentage : int with get, set" Usage="System.Fabric.Description.StatelessServiceDescription.MinInstancePercentage" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Fabric</AssemblyName>
+        <AssemblyVersion>7.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+          <para>Gets or sets the minimum instance percentage. </para>
+        </summary>
+        <value>
+          <para>The minimum instance percentage. Defaults to 0 if not provided. Note that the MinInstanceCount parameter must always be greater than 0, so 
+            defaulting to 0 guarantees MinInstancePercentage has no effect because MinInstanceCount will have precedence. </para>
+        </value>
+        <remarks>
+          <para>The <see cref="P:System.Fabric.Description.StatelessServiceDescription.MinInstancePercentage" /> property is the minimum percentage of
+            <see cref="P:System.Fabric.Description.StatelessServiceDescription.InstanceCount" /> that must be up to meet the  
+            <see href="https://docs.microsoft.com/en-us/rest/api/servicefabric/sfclient-model-ensureavailabilitysafetycheck">EnsureAvailability safety check</see> during operations like upgrade or deactivate node.
+            The actual number that is used is max(
+            <see cref="P:System.Fabric.Description.StatelessServiceDescription.MinInstanceCount" />, 
+            ceil( <see cref="P:System.Fabric.Description.StatelessServiceDescription.MinInstancePercentage" />/100.0 * <see cref="P:System.Fabric.Description.StatelessServiceDescription.InstanceCount" />) 
+            ). </para>
+            Note, if <see cref="P:System.Fabric.Description.StatelessServiceDescription.InstanceCount" /> is set to -1, during MinInstancePercentage computation, -1 is first converted
+            into the number of nodes on which the instances are allowed to be placed according to the placement constraints on the service.
+            </remarks>
       </Docs>
     </Member>
   </Members>
