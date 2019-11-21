@@ -1,0 +1,109 @@
+<Type Name="DeviceDetails" FullName="Microsoft.Azure.Management.StorSimple.Fluent.Models.DeviceDetails">
+  <TypeSignature Language="C#" Value="public class DeviceDetails" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit DeviceDetails extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Azure.Management.StorSimple.Fluent.Models.DeviceDetails" />
+  <TypeSignature Language="VB.NET" Value="Public Class DeviceDetails" />
+  <TypeSignature Language="F#" Value="type DeviceDetails = class" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+    <AssemblyVersion>1.0.0.60</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public DeviceDetails ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.StorSimple.Fluent.Models.DeviceDetails.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public DeviceDetails (Nullable&lt;int&gt; endpointCount = null, Nullable&lt;int&gt; volumeContainerCount = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Nullable`1&lt;int32&gt; endpointCount, valuetype System.Nullable`1&lt;int32&gt; volumeContainerCount) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.StorSimple.Fluent.Models.DeviceDetails.#ctor(System.Nullable{System.Int32},System.Nullable{System.Int32})" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (Optional endpointCount As Nullable(Of Integer) = null, Optional volumeContainerCount As Nullable(Of Integer) = null)" />
+      <MemberSignature Language="F#" Value="new Microsoft.Azure.Management.StorSimple.Fluent.Models.DeviceDetails : Nullable&lt;int&gt; * Nullable&lt;int&gt; -&gt; Microsoft.Azure.Management.StorSimple.Fluent.Models.DeviceDetails" Usage="new Microsoft.Azure.Management.StorSimple.Fluent.Models.DeviceDetails (endpointCount, volumeContainerCount)" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="endpointCount" Type="System.Nullable&lt;System.Int32&gt;" />
+        <Parameter Name="volumeContainerCount" Type="System.Nullable&lt;System.Int32&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="endpointCount">To be added.</param>
+        <param name="volumeContainerCount">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="EndpointCount">
+      <MemberSignature Language="C#" Value="public Nullable&lt;int&gt; EndpointCount { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;int32&gt; EndpointCount" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.StorSimple.Fluent.Models.DeviceDetails.EndpointCount" />
+      <MemberSignature Language="VB.NET" Value="Public Property EndpointCount As Nullable(Of Integer)" />
+      <MemberSignature Language="F#" Value="member this.EndpointCount : Nullable&lt;int&gt; with get, set" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.DeviceDetails.EndpointCount" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="endpointCount")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;System.Int32&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="VolumeContainerCount">
+      <MemberSignature Language="C#" Value="public Nullable&lt;int&gt; VolumeContainerCount { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;int32&gt; VolumeContainerCount" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.StorSimple.Fluent.Models.DeviceDetails.VolumeContainerCount" />
+      <MemberSignature Language="VB.NET" Value="Public Property VolumeContainerCount As Nullable(Of Integer)" />
+      <MemberSignature Language="F#" Value="member this.VolumeContainerCount : Nullable&lt;int&gt; with get, set" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.DeviceDetails.VolumeContainerCount" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="volumeContainerCount")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;System.Int32&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

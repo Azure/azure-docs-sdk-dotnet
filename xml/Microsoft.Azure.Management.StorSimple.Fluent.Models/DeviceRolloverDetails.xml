@@ -1,0 +1,136 @@
+<Type Name="DeviceRolloverDetails" FullName="Microsoft.Azure.Management.StorSimple.Fluent.Models.DeviceRolloverDetails">
+  <TypeSignature Language="C#" Value="public class DeviceRolloverDetails" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit DeviceRolloverDetails extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Azure.Management.StorSimple.Fluent.Models.DeviceRolloverDetails" />
+  <TypeSignature Language="VB.NET" Value="Public Class DeviceRolloverDetails" />
+  <TypeSignature Language="F#" Value="type DeviceRolloverDetails = class" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+    <AssemblyVersion>1.0.0.60</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public DeviceRolloverDetails ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.StorSimple.Fluent.Models.DeviceRolloverDetails.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public DeviceRolloverDetails (Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.AuthorizationEligibility&gt; authorizationEligibility = null, Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.AuthorizationStatus&gt; authorizationStatus = null, Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.InEligibilityCategory&gt; inEligibilityReason = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Nullable`1&lt;valuetype Microsoft.Azure.Management.StorSimple.Fluent.Models.AuthorizationEligibility&gt; authorizationEligibility, valuetype System.Nullable`1&lt;valuetype Microsoft.Azure.Management.StorSimple.Fluent.Models.AuthorizationStatus&gt; authorizationStatus, valuetype System.Nullable`1&lt;valuetype Microsoft.Azure.Management.StorSimple.Fluent.Models.InEligibilityCategory&gt; inEligibilityReason) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.StorSimple.Fluent.Models.DeviceRolloverDetails.#ctor(System.Nullable{Microsoft.Azure.Management.StorSimple.Fluent.Models.AuthorizationEligibility},System.Nullable{Microsoft.Azure.Management.StorSimple.Fluent.Models.AuthorizationStatus},System.Nullable{Microsoft.Azure.Management.StorSimple.Fluent.Models.InEligibilityCategory})" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (Optional authorizationEligibility As Nullable(Of AuthorizationEligibility) = null, Optional authorizationStatus As Nullable(Of AuthorizationStatus) = null, Optional inEligibilityReason As Nullable(Of InEligibilityCategory) = null)" />
+      <MemberSignature Language="F#" Value="new Microsoft.Azure.Management.StorSimple.Fluent.Models.DeviceRolloverDetails : Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.AuthorizationEligibility&gt; * Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.AuthorizationStatus&gt; * Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.InEligibilityCategory&gt; -&gt; Microsoft.Azure.Management.StorSimple.Fluent.Models.DeviceRolloverDetails" Usage="new Microsoft.Azure.Management.StorSimple.Fluent.Models.DeviceRolloverDetails (authorizationEligibility, authorizationStatus, inEligibilityReason)" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="authorizationEligibility" Type="System.Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.AuthorizationEligibility&gt;" />
+        <Parameter Name="authorizationStatus" Type="System.Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.AuthorizationStatus&gt;" />
+        <Parameter Name="inEligibilityReason" Type="System.Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.InEligibilityCategory&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="authorizationEligibility">To be added.</param>
+        <param name="authorizationStatus">To be added.</param>
+        <param name="inEligibilityReason">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AuthorizationEligibility">
+      <MemberSignature Language="C#" Value="public Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.AuthorizationEligibility&gt; AuthorizationEligibility { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;valuetype Microsoft.Azure.Management.StorSimple.Fluent.Models.AuthorizationEligibility&gt; AuthorizationEligibility" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.StorSimple.Fluent.Models.DeviceRolloverDetails.AuthorizationEligibility" />
+      <MemberSignature Language="VB.NET" Value="Public Property AuthorizationEligibility As Nullable(Of AuthorizationEligibility)" />
+      <MemberSignature Language="F#" Value="member this.AuthorizationEligibility : Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.AuthorizationEligibility&gt; with get, set" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.DeviceRolloverDetails.AuthorizationEligibility" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="authorizationEligibility")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.AuthorizationEligibility&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AuthorizationStatus">
+      <MemberSignature Language="C#" Value="public Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.AuthorizationStatus&gt; AuthorizationStatus { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;valuetype Microsoft.Azure.Management.StorSimple.Fluent.Models.AuthorizationStatus&gt; AuthorizationStatus" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.StorSimple.Fluent.Models.DeviceRolloverDetails.AuthorizationStatus" />
+      <MemberSignature Language="VB.NET" Value="Public Property AuthorizationStatus As Nullable(Of AuthorizationStatus)" />
+      <MemberSignature Language="F#" Value="member this.AuthorizationStatus : Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.AuthorizationStatus&gt; with get, set" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.DeviceRolloverDetails.AuthorizationStatus" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="authorizationStatus")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.AuthorizationStatus&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="InEligibilityReason">
+      <MemberSignature Language="C#" Value="public Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.InEligibilityCategory&gt; InEligibilityReason { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;valuetype Microsoft.Azure.Management.StorSimple.Fluent.Models.InEligibilityCategory&gt; InEligibilityReason" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.StorSimple.Fluent.Models.DeviceRolloverDetails.InEligibilityReason" />
+      <MemberSignature Language="VB.NET" Value="Public Property InEligibilityReason As Nullable(Of InEligibilityCategory)" />
+      <MemberSignature Language="F#" Value="member this.InEligibilityReason : Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.InEligibilityCategory&gt; with get, set" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.DeviceRolloverDetails.InEligibilityReason" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="inEligibilityReason")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.InEligibilityCategory&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

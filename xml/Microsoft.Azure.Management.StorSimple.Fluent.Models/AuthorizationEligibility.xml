@@ -1,0 +1,73 @@
+<Type Name="AuthorizationEligibility" FullName="Microsoft.Azure.Management.StorSimple.Fluent.Models.AuthorizationEligibility">
+  <TypeSignature Language="C#" Value="public enum AuthorizationEligibility" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed AuthorizationEligibility extends System.Enum" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Azure.Management.StorSimple.Fluent.Models.AuthorizationEligibility" />
+  <TypeSignature Language="VB.NET" Value="Public Enum AuthorizationEligibility" />
+  <TypeSignature Language="F#" Value="type AuthorizationEligibility = " />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+    <AssemblyVersion>1.0.0.60</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Enum</BaseTypeName>
+  </Base>
+  <Attributes>
+    <Attribute>
+      <AttributeName>Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="Eligible">
+      <MemberSignature Language="C#" Value="Eligible" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Microsoft.Azure.Management.StorSimple.Fluent.Models.AuthorizationEligibility Eligible = int32(1)" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Azure.Management.StorSimple.Fluent.Models.AuthorizationEligibility.Eligible" />
+      <MemberSignature Language="VB.NET" Value="Eligible" />
+      <MemberSignature Language="F#" Value="Eligible = 1" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.AuthorizationEligibility.Eligible" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Runtime.Serialization.EnumMember(Value="Eligible")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.Azure.Management.StorSimple.Fluent.Models.AuthorizationEligibility</ReturnType>
+      </ReturnValue>
+      <MemberValue>1</MemberValue>
+      <Docs>
+        <summary>To be added.</summary>
+      </Docs>
+    </Member>
+    <Member MemberName="InEligible">
+      <MemberSignature Language="C#" Value="InEligible" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Microsoft.Azure.Management.StorSimple.Fluent.Models.AuthorizationEligibility InEligible = int32(0)" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Azure.Management.StorSimple.Fluent.Models.AuthorizationEligibility.InEligible" />
+      <MemberSignature Language="VB.NET" Value="InEligible" />
+      <MemberSignature Language="F#" Value="InEligible = 0" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.AuthorizationEligibility.InEligible" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Runtime.Serialization.EnumMember(Value="InEligible")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.Azure.Management.StorSimple.Fluent.Models.AuthorizationEligibility</ReturnType>
+      </ReturnValue>
+      <MemberValue>0</MemberValue>
+      <Docs>
+        <summary>To be added.</summary>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

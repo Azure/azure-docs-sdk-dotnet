@@ -1,0 +1,97 @@
+<Type Name="BackupJobCreationType" FullName="Microsoft.Azure.Management.StorSimple.Fluent.Models.BackupJobCreationType">
+  <TypeSignature Language="C#" Value="public enum BackupJobCreationType" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed BackupJobCreationType extends System.Enum" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Azure.Management.StorSimple.Fluent.Models.BackupJobCreationType" />
+  <TypeSignature Language="VB.NET" Value="Public Enum BackupJobCreationType" />
+  <TypeSignature Language="F#" Value="type BackupJobCreationType = " />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+    <AssemblyVersion>1.0.0.60</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Enum</BaseTypeName>
+  </Base>
+  <Attributes>
+    <Attribute>
+      <AttributeName>Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="Adhoc">
+      <MemberSignature Language="C#" Value="Adhoc" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Microsoft.Azure.Management.StorSimple.Fluent.Models.BackupJobCreationType Adhoc = int32(0)" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Azure.Management.StorSimple.Fluent.Models.BackupJobCreationType.Adhoc" />
+      <MemberSignature Language="VB.NET" Value="Adhoc" />
+      <MemberSignature Language="F#" Value="Adhoc = 0" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.BackupJobCreationType.Adhoc" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Runtime.Serialization.EnumMember(Value="Adhoc")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.Azure.Management.StorSimple.Fluent.Models.BackupJobCreationType</ReturnType>
+      </ReturnValue>
+      <MemberValue>0</MemberValue>
+      <Docs>
+        <summary>To be added.</summary>
+      </Docs>
+    </Member>
+    <Member MemberName="BySchedule">
+      <MemberSignature Language="C#" Value="BySchedule" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Microsoft.Azure.Management.StorSimple.Fluent.Models.BackupJobCreationType BySchedule = int32(1)" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Azure.Management.StorSimple.Fluent.Models.BackupJobCreationType.BySchedule" />
+      <MemberSignature Language="VB.NET" Value="BySchedule" />
+      <MemberSignature Language="F#" Value="BySchedule = 1" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.BackupJobCreationType.BySchedule" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Runtime.Serialization.EnumMember(Value="BySchedule")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.Azure.Management.StorSimple.Fluent.Models.BackupJobCreationType</ReturnType>
+      </ReturnValue>
+      <MemberValue>1</MemberValue>
+      <Docs>
+        <summary>To be added.</summary>
+      </Docs>
+    </Member>
+    <Member MemberName="BySSM">
+      <MemberSignature Language="C#" Value="BySSM" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Microsoft.Azure.Management.StorSimple.Fluent.Models.BackupJobCreationType BySSM = int32(2)" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Azure.Management.StorSimple.Fluent.Models.BackupJobCreationType.BySSM" />
+      <MemberSignature Language="VB.NET" Value="BySSM" />
+      <MemberSignature Language="F#" Value="BySSM = 2" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.BackupJobCreationType.BySSM" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Runtime.Serialization.EnumMember(Value="BySSM")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.Azure.Management.StorSimple.Fluent.Models.BackupJobCreationType</ReturnType>
+      </ReturnValue>
+      <MemberValue>2</MemberValue>
+      <Docs>
+        <summary>To be added.</summary>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

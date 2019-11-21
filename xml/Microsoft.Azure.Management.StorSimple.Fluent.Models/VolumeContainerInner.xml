@@ -1,0 +1,304 @@
+<Type Name="VolumeContainerInner" FullName="Microsoft.Azure.Management.StorSimple.Fluent.Models.VolumeContainerInner">
+  <TypeSignature Language="C#" Value="public class VolumeContainerInner : Microsoft.Azure.Management.StorSimple.Fluent.Models.BaseModel" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit VolumeContainerInner extends Microsoft.Azure.Management.StorSimple.Fluent.Models.BaseModel" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Azure.Management.StorSimple.Fluent.Models.VolumeContainerInner" />
+  <TypeSignature Language="VB.NET" Value="Public Class VolumeContainerInner&#xA;Inherits BaseModel" />
+  <TypeSignature Language="F#" Value="type VolumeContainerInner = class&#xA;    inherit BaseModel" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+    <AssemblyVersion>1.0.0.60</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Microsoft.Azure.Management.StorSimple.Fluent.Models.BaseModel</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>Microsoft.Rest.Serialization.JsonTransformation</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public VolumeContainerInner ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.StorSimple.Fluent.Models.VolumeContainerInner.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public VolumeContainerInner (string storageAccountCredentialId, string id = null, string name = null, string type = null, Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.Kind&gt; kind = null, Microsoft.Azure.Management.StorSimple.Fluent.Models.AsymmetricEncryptedSecret encryptionKey = null, Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.EncryptionStatus&gt; encryptionStatus = null, Nullable&lt;int&gt; volumeCount = null, Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.OwnerShipStatus&gt; ownerShipStatus = null, Nullable&lt;int&gt; bandWidthRateInMbps = null, string bandwidthSettingId = null, Nullable&lt;long&gt; totalCloudStorageUsageInBytes = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string storageAccountCredentialId, string id, string name, string type, valuetype System.Nullable`1&lt;valuetype Microsoft.Azure.Management.StorSimple.Fluent.Models.Kind&gt; kind, class Microsoft.Azure.Management.StorSimple.Fluent.Models.AsymmetricEncryptedSecret encryptionKey, valuetype System.Nullable`1&lt;valuetype Microsoft.Azure.Management.StorSimple.Fluent.Models.EncryptionStatus&gt; encryptionStatus, valuetype System.Nullable`1&lt;int32&gt; volumeCount, valuetype System.Nullable`1&lt;valuetype Microsoft.Azure.Management.StorSimple.Fluent.Models.OwnerShipStatus&gt; ownerShipStatus, valuetype System.Nullable`1&lt;int32&gt; bandWidthRateInMbps, string bandwidthSettingId, valuetype System.Nullable`1&lt;int64&gt; totalCloudStorageUsageInBytes) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.StorSimple.Fluent.Models.VolumeContainerInner.#ctor(System.String,System.String,System.String,System.String,System.Nullable{Microsoft.Azure.Management.StorSimple.Fluent.Models.Kind},Microsoft.Azure.Management.StorSimple.Fluent.Models.AsymmetricEncryptedSecret,System.Nullable{Microsoft.Azure.Management.StorSimple.Fluent.Models.EncryptionStatus},System.Nullable{System.Int32},System.Nullable{Microsoft.Azure.Management.StorSimple.Fluent.Models.OwnerShipStatus},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64})" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (storageAccountCredentialId As String, Optional id As String = null, Optional name As String = null, Optional type As String = null, Optional kind As Nullable(Of Kind) = null, Optional encryptionKey As AsymmetricEncryptedSecret = null, Optional encryptionStatus As Nullable(Of EncryptionStatus) = null, Optional volumeCount As Nullable(Of Integer) = null, Optional ownerShipStatus As Nullable(Of OwnerShipStatus) = null, Optional bandWidthRateInMbps As Nullable(Of Integer) = null, Optional bandwidthSettingId As String = null, Optional totalCloudStorageUsageInBytes As Nullable(Of Long) = null)" />
+      <MemberSignature Language="F#" Value="new Microsoft.Azure.Management.StorSimple.Fluent.Models.VolumeContainerInner : string * string * string * string * Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.Kind&gt; * Microsoft.Azure.Management.StorSimple.Fluent.Models.AsymmetricEncryptedSecret * Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.EncryptionStatus&gt; * Nullable&lt;int&gt; * Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.OwnerShipStatus&gt; * Nullable&lt;int&gt; * string * Nullable&lt;int64&gt; -&gt; Microsoft.Azure.Management.StorSimple.Fluent.Models.VolumeContainerInner" Usage="new Microsoft.Azure.Management.StorSimple.Fluent.Models.VolumeContainerInner (storageAccountCredentialId, id, name, type, kind, encryptionKey, encryptionStatus, volumeCount, ownerShipStatus, bandWidthRateInMbps, bandwidthSettingId, totalCloudStorageUsageInBytes)" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="storageAccountCredentialId" Type="System.String" />
+        <Parameter Name="id" Type="System.String" />
+        <Parameter Name="name" Type="System.String" />
+        <Parameter Name="type" Type="System.String" />
+        <Parameter Name="kind" Type="System.Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.Kind&gt;" />
+        <Parameter Name="encryptionKey" Type="Microsoft.Azure.Management.StorSimple.Fluent.Models.AsymmetricEncryptedSecret" />
+        <Parameter Name="encryptionStatus" Type="System.Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.EncryptionStatus&gt;" />
+        <Parameter Name="volumeCount" Type="System.Nullable&lt;System.Int32&gt;" />
+        <Parameter Name="ownerShipStatus" Type="System.Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.OwnerShipStatus&gt;" />
+        <Parameter Name="bandWidthRateInMbps" Type="System.Nullable&lt;System.Int32&gt;" />
+        <Parameter Name="bandwidthSettingId" Type="System.String" />
+        <Parameter Name="totalCloudStorageUsageInBytes" Type="System.Nullable&lt;System.Int64&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="storageAccountCredentialId">To be added.</param>
+        <param name="id">To be added.</param>
+        <param name="name">To be added.</param>
+        <param name="type">To be added.</param>
+        <param name="kind">To be added.</param>
+        <param name="encryptionKey">To be added.</param>
+        <param name="encryptionStatus">To be added.</param>
+        <param name="volumeCount">To be added.</param>
+        <param name="ownerShipStatus">To be added.</param>
+        <param name="bandWidthRateInMbps">To be added.</param>
+        <param name="bandwidthSettingId">To be added.</param>
+        <param name="totalCloudStorageUsageInBytes">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="BandWidthRateInMbps">
+      <MemberSignature Language="C#" Value="public Nullable&lt;int&gt; BandWidthRateInMbps { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;int32&gt; BandWidthRateInMbps" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.StorSimple.Fluent.Models.VolumeContainerInner.BandWidthRateInMbps" />
+      <MemberSignature Language="VB.NET" Value="Public Property BandWidthRateInMbps As Nullable(Of Integer)" />
+      <MemberSignature Language="F#" Value="member this.BandWidthRateInMbps : Nullable&lt;int&gt; with get, set" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.VolumeContainerInner.BandWidthRateInMbps" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="properties.bandWidthRateInMbps")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;System.Int32&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="BandwidthSettingId">
+      <MemberSignature Language="C#" Value="public string BandwidthSettingId { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string BandwidthSettingId" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.StorSimple.Fluent.Models.VolumeContainerInner.BandwidthSettingId" />
+      <MemberSignature Language="VB.NET" Value="Public Property BandwidthSettingId As String" />
+      <MemberSignature Language="F#" Value="member this.BandwidthSettingId : string with get, set" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.VolumeContainerInner.BandwidthSettingId" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="properties.bandwidthSettingId")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="EncryptionKey">
+      <MemberSignature Language="C#" Value="public Microsoft.Azure.Management.StorSimple.Fluent.Models.AsymmetricEncryptedSecret EncryptionKey { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Azure.Management.StorSimple.Fluent.Models.AsymmetricEncryptedSecret EncryptionKey" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.StorSimple.Fluent.Models.VolumeContainerInner.EncryptionKey" />
+      <MemberSignature Language="VB.NET" Value="Public Property EncryptionKey As AsymmetricEncryptedSecret" />
+      <MemberSignature Language="F#" Value="member this.EncryptionKey : Microsoft.Azure.Management.StorSimple.Fluent.Models.AsymmetricEncryptedSecret with get, set" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.VolumeContainerInner.EncryptionKey" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="properties.encryptionKey")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.Azure.Management.StorSimple.Fluent.Models.AsymmetricEncryptedSecret</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="EncryptionStatus">
+      <MemberSignature Language="C#" Value="public Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.EncryptionStatus&gt; EncryptionStatus { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;valuetype Microsoft.Azure.Management.StorSimple.Fluent.Models.EncryptionStatus&gt; EncryptionStatus" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.StorSimple.Fluent.Models.VolumeContainerInner.EncryptionStatus" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property EncryptionStatus As Nullable(Of EncryptionStatus)" />
+      <MemberSignature Language="F#" Value="member this.EncryptionStatus : Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.EncryptionStatus&gt;" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.VolumeContainerInner.EncryptionStatus" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="properties.encryptionStatus")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.EncryptionStatus&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OwnerShipStatus">
+      <MemberSignature Language="C#" Value="public Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.OwnerShipStatus&gt; OwnerShipStatus { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;valuetype Microsoft.Azure.Management.StorSimple.Fluent.Models.OwnerShipStatus&gt; OwnerShipStatus" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.StorSimple.Fluent.Models.VolumeContainerInner.OwnerShipStatus" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property OwnerShipStatus As Nullable(Of OwnerShipStatus)" />
+      <MemberSignature Language="F#" Value="member this.OwnerShipStatus : Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.OwnerShipStatus&gt;" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.VolumeContainerInner.OwnerShipStatus" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="properties.ownerShipStatus")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.OwnerShipStatus&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="StorageAccountCredentialId">
+      <MemberSignature Language="C#" Value="public string StorageAccountCredentialId { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string StorageAccountCredentialId" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.StorSimple.Fluent.Models.VolumeContainerInner.StorageAccountCredentialId" />
+      <MemberSignature Language="VB.NET" Value="Public Property StorageAccountCredentialId As String" />
+      <MemberSignature Language="F#" Value="member this.StorageAccountCredentialId : string with get, set" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.VolumeContainerInner.StorageAccountCredentialId" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="properties.storageAccountCredentialId")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TotalCloudStorageUsageInBytes">
+      <MemberSignature Language="C#" Value="public Nullable&lt;long&gt; TotalCloudStorageUsageInBytes { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;int64&gt; TotalCloudStorageUsageInBytes" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.StorSimple.Fluent.Models.VolumeContainerInner.TotalCloudStorageUsageInBytes" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property TotalCloudStorageUsageInBytes As Nullable(Of Long)" />
+      <MemberSignature Language="F#" Value="member this.TotalCloudStorageUsageInBytes : Nullable&lt;int64&gt;" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.VolumeContainerInner.TotalCloudStorageUsageInBytes" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="properties.totalCloudStorageUsageInBytes")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;System.Int64&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Validate">
+      <MemberSignature Language="C#" Value="public virtual void Validate ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Validate() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.StorSimple.Fluent.Models.VolumeContainerInner.Validate" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Sub Validate ()" />
+      <MemberSignature Language="F#" Value="abstract member Validate : unit -&gt; unit&#xA;override this.Validate : unit -&gt; unit" Usage="volumeContainerInner.Validate " />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="VolumeCount">
+      <MemberSignature Language="C#" Value="public Nullable&lt;int&gt; VolumeCount { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;int32&gt; VolumeCount" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.StorSimple.Fluent.Models.VolumeContainerInner.VolumeCount" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property VolumeCount As Nullable(Of Integer)" />
+      <MemberSignature Language="F#" Value="member this.VolumeCount : Nullable&lt;int&gt;" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.VolumeContainerInner.VolumeCount" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="properties.volumeCount")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;System.Int32&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

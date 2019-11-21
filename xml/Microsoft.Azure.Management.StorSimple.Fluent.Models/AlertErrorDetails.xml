@@ -1,0 +1,136 @@
+<Type Name="AlertErrorDetails" FullName="Microsoft.Azure.Management.StorSimple.Fluent.Models.AlertErrorDetails">
+  <TypeSignature Language="C#" Value="public class AlertErrorDetails" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit AlertErrorDetails extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Azure.Management.StorSimple.Fluent.Models.AlertErrorDetails" />
+  <TypeSignature Language="VB.NET" Value="Public Class AlertErrorDetails" />
+  <TypeSignature Language="F#" Value="type AlertErrorDetails = class" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+    <AssemblyVersion>1.0.0.60</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public AlertErrorDetails ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.StorSimple.Fluent.Models.AlertErrorDetails.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public AlertErrorDetails (string errorCode = null, string errorMessage = null, Nullable&lt;int&gt; occurences = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string errorCode, string errorMessage, valuetype System.Nullable`1&lt;int32&gt; occurences) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.StorSimple.Fluent.Models.AlertErrorDetails.#ctor(System.String,System.String,System.Nullable{System.Int32})" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (Optional errorCode As String = null, Optional errorMessage As String = null, Optional occurences As Nullable(Of Integer) = null)" />
+      <MemberSignature Language="F#" Value="new Microsoft.Azure.Management.StorSimple.Fluent.Models.AlertErrorDetails : string * string * Nullable&lt;int&gt; -&gt; Microsoft.Azure.Management.StorSimple.Fluent.Models.AlertErrorDetails" Usage="new Microsoft.Azure.Management.StorSimple.Fluent.Models.AlertErrorDetails (errorCode, errorMessage, occurences)" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="errorCode" Type="System.String" />
+        <Parameter Name="errorMessage" Type="System.String" />
+        <Parameter Name="occurences" Type="System.Nullable&lt;System.Int32&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="errorCode">To be added.</param>
+        <param name="errorMessage">To be added.</param>
+        <param name="occurences">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ErrorCode">
+      <MemberSignature Language="C#" Value="public string ErrorCode { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ErrorCode" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.StorSimple.Fluent.Models.AlertErrorDetails.ErrorCode" />
+      <MemberSignature Language="VB.NET" Value="Public Property ErrorCode As String" />
+      <MemberSignature Language="F#" Value="member this.ErrorCode : string with get, set" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.AlertErrorDetails.ErrorCode" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="errorCode")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ErrorMessage">
+      <MemberSignature Language="C#" Value="public string ErrorMessage { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ErrorMessage" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.StorSimple.Fluent.Models.AlertErrorDetails.ErrorMessage" />
+      <MemberSignature Language="VB.NET" Value="Public Property ErrorMessage As String" />
+      <MemberSignature Language="F#" Value="member this.ErrorMessage : string with get, set" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.AlertErrorDetails.ErrorMessage" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="errorMessage")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Occurences">
+      <MemberSignature Language="C#" Value="public Nullable&lt;int&gt; Occurences { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;int32&gt; Occurences" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.StorSimple.Fluent.Models.AlertErrorDetails.Occurences" />
+      <MemberSignature Language="VB.NET" Value="Public Property Occurences As Nullable(Of Integer)" />
+      <MemberSignature Language="F#" Value="member this.Occurences : Nullable&lt;int&gt; with get, set" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.AlertErrorDetails.Occurences" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="occurences")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;System.Int32&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

@@ -1,0 +1,163 @@
+<Type Name="DataStatistics" FullName="Microsoft.Azure.Management.StorSimple.Fluent.Models.DataStatistics">
+  <TypeSignature Language="C#" Value="public class DataStatistics" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit DataStatistics extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Azure.Management.StorSimple.Fluent.Models.DataStatistics" />
+  <TypeSignature Language="VB.NET" Value="Public Class DataStatistics" />
+  <TypeSignature Language="F#" Value="type DataStatistics = class" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+    <AssemblyVersion>1.0.0.60</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public DataStatistics ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.StorSimple.Fluent.Models.DataStatistics.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public DataStatistics (Nullable&lt;long&gt; totalData = null, Nullable&lt;long&gt; processedData = null, Nullable&lt;long&gt; cloudData = null, Nullable&lt;long&gt; throughput = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Nullable`1&lt;int64&gt; totalData, valuetype System.Nullable`1&lt;int64&gt; processedData, valuetype System.Nullable`1&lt;int64&gt; cloudData, valuetype System.Nullable`1&lt;int64&gt; throughput) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.StorSimple.Fluent.Models.DataStatistics.#ctor(System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64})" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (Optional totalData As Nullable(Of Long) = null, Optional processedData As Nullable(Of Long) = null, Optional cloudData As Nullable(Of Long) = null, Optional throughput As Nullable(Of Long) = null)" />
+      <MemberSignature Language="F#" Value="new Microsoft.Azure.Management.StorSimple.Fluent.Models.DataStatistics : Nullable&lt;int64&gt; * Nullable&lt;int64&gt; * Nullable&lt;int64&gt; * Nullable&lt;int64&gt; -&gt; Microsoft.Azure.Management.StorSimple.Fluent.Models.DataStatistics" Usage="new Microsoft.Azure.Management.StorSimple.Fluent.Models.DataStatistics (totalData, processedData, cloudData, throughput)" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="totalData" Type="System.Nullable&lt;System.Int64&gt;" />
+        <Parameter Name="processedData" Type="System.Nullable&lt;System.Int64&gt;" />
+        <Parameter Name="cloudData" Type="System.Nullable&lt;System.Int64&gt;" />
+        <Parameter Name="throughput" Type="System.Nullable&lt;System.Int64&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="totalData">To be added.</param>
+        <param name="processedData">To be added.</param>
+        <param name="cloudData">To be added.</param>
+        <param name="throughput">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CloudData">
+      <MemberSignature Language="C#" Value="public Nullable&lt;long&gt; CloudData { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;int64&gt; CloudData" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.StorSimple.Fluent.Models.DataStatistics.CloudData" />
+      <MemberSignature Language="VB.NET" Value="Public Property CloudData As Nullable(Of Long)" />
+      <MemberSignature Language="F#" Value="member this.CloudData : Nullable&lt;int64&gt; with get, set" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.DataStatistics.CloudData" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="cloudData")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;System.Int64&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ProcessedData">
+      <MemberSignature Language="C#" Value="public Nullable&lt;long&gt; ProcessedData { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;int64&gt; ProcessedData" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.StorSimple.Fluent.Models.DataStatistics.ProcessedData" />
+      <MemberSignature Language="VB.NET" Value="Public Property ProcessedData As Nullable(Of Long)" />
+      <MemberSignature Language="F#" Value="member this.ProcessedData : Nullable&lt;int64&gt; with get, set" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.DataStatistics.ProcessedData" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="processedData")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;System.Int64&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Throughput">
+      <MemberSignature Language="C#" Value="public Nullable&lt;long&gt; Throughput { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;int64&gt; Throughput" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.StorSimple.Fluent.Models.DataStatistics.Throughput" />
+      <MemberSignature Language="VB.NET" Value="Public Property Throughput As Nullable(Of Long)" />
+      <MemberSignature Language="F#" Value="member this.Throughput : Nullable&lt;int64&gt; with get, set" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.DataStatistics.Throughput" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="throughput")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;System.Int64&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TotalData">
+      <MemberSignature Language="C#" Value="public Nullable&lt;long&gt; TotalData { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;int64&gt; TotalData" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.StorSimple.Fluent.Models.DataStatistics.TotalData" />
+      <MemberSignature Language="VB.NET" Value="Public Property TotalData As Nullable(Of Long)" />
+      <MemberSignature Language="F#" Value="member this.TotalData : Nullable&lt;int64&gt; with get, set" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.DataStatistics.TotalData" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="totalData")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;System.Int64&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

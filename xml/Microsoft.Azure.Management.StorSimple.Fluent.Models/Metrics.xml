@@ -1,0 +1,325 @@
+<Type Name="Metrics" FullName="Microsoft.Azure.Management.StorSimple.Fluent.Models.Metrics">
+  <TypeSignature Language="C#" Value="public class Metrics" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit Metrics extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Azure.Management.StorSimple.Fluent.Models.Metrics" />
+  <TypeSignature Language="VB.NET" Value="Public Class Metrics" />
+  <TypeSignature Language="F#" Value="type Metrics = class" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+    <AssemblyVersion>1.0.0.60</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public Metrics ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.StorSimple.Fluent.Models.Metrics.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public Metrics (string resourceId = null, Nullable&lt;DateTime&gt; startTime = null, Nullable&lt;DateTime&gt; endTime = null, string timeGrain = null, Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricAggregationType&gt; primaryAggregation = null, Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricName name = null, System.Collections.Generic.IList&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricDimension&gt; dimensions = null, Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricUnit&gt; unit = null, string type = null, System.Collections.Generic.IList&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricData&gt; values = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string resourceId, valuetype System.Nullable`1&lt;valuetype System.DateTime&gt; startTime, valuetype System.Nullable`1&lt;valuetype System.DateTime&gt; endTime, string timeGrain, valuetype System.Nullable`1&lt;valuetype Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricAggregationType&gt; primaryAggregation, class Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricName name, class System.Collections.Generic.IList`1&lt;class Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricDimension&gt; dimensions, valuetype System.Nullable`1&lt;valuetype Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricUnit&gt; unit, string type, class System.Collections.Generic.IList`1&lt;class Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricData&gt; values) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.StorSimple.Fluent.Models.Metrics.#ctor(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricAggregationType},Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricName,System.Collections.Generic.IList{Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricDimension},System.Nullable{Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricUnit},System.String,System.Collections.Generic.IList{Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricData})" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (Optional resourceId As String = null, Optional startTime As Nullable(Of DateTime) = null, Optional endTime As Nullable(Of DateTime) = null, Optional timeGrain As String = null, Optional primaryAggregation As Nullable(Of MetricAggregationType) = null, Optional name As MetricName = null, Optional dimensions As IList(Of MetricDimension) = null, Optional unit As Nullable(Of MetricUnit) = null, Optional type As String = null, Optional values As IList(Of MetricData) = null)" />
+      <MemberSignature Language="F#" Value="new Microsoft.Azure.Management.StorSimple.Fluent.Models.Metrics : string * Nullable&lt;DateTime&gt; * Nullable&lt;DateTime&gt; * string * Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricAggregationType&gt; * Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricName * System.Collections.Generic.IList&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricDimension&gt; * Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricUnit&gt; * string * System.Collections.Generic.IList&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricData&gt; -&gt; Microsoft.Azure.Management.StorSimple.Fluent.Models.Metrics" Usage="new Microsoft.Azure.Management.StorSimple.Fluent.Models.Metrics (resourceId, startTime, endTime, timeGrain, primaryAggregation, name, dimensions, unit, type, values)" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="resourceId" Type="System.String" />
+        <Parameter Name="startTime" Type="System.Nullable&lt;System.DateTime&gt;" />
+        <Parameter Name="endTime" Type="System.Nullable&lt;System.DateTime&gt;" />
+        <Parameter Name="timeGrain" Type="System.String" />
+        <Parameter Name="primaryAggregation" Type="System.Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricAggregationType&gt;" />
+        <Parameter Name="name" Type="Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricName" />
+        <Parameter Name="dimensions" Type="System.Collections.Generic.IList&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricDimension&gt;" />
+        <Parameter Name="unit" Type="System.Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricUnit&gt;" />
+        <Parameter Name="type" Type="System.String" />
+        <Parameter Name="values" Type="System.Collections.Generic.IList&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricData&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="resourceId">To be added.</param>
+        <param name="startTime">To be added.</param>
+        <param name="endTime">To be added.</param>
+        <param name="timeGrain">To be added.</param>
+        <param name="primaryAggregation">To be added.</param>
+        <param name="name">To be added.</param>
+        <param name="dimensions">To be added.</param>
+        <param name="unit">To be added.</param>
+        <param name="type">To be added.</param>
+        <param name="values">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Dimensions">
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.IList&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricDimension&gt; Dimensions { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.IList`1&lt;class Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricDimension&gt; Dimensions" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.StorSimple.Fluent.Models.Metrics.Dimensions" />
+      <MemberSignature Language="VB.NET" Value="Public Property Dimensions As IList(Of MetricDimension)" />
+      <MemberSignature Language="F#" Value="member this.Dimensions : System.Collections.Generic.IList&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricDimension&gt; with get, set" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.Metrics.Dimensions" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="dimensions")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.IList&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricDimension&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="EndTime">
+      <MemberSignature Language="C#" Value="public Nullable&lt;DateTime&gt; EndTime { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;valuetype System.DateTime&gt; EndTime" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.StorSimple.Fluent.Models.Metrics.EndTime" />
+      <MemberSignature Language="VB.NET" Value="Public Property EndTime As Nullable(Of DateTime)" />
+      <MemberSignature Language="F#" Value="member this.EndTime : Nullable&lt;DateTime&gt; with get, set" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.Metrics.EndTime" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="endTime")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;System.DateTime&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Name">
+      <MemberSignature Language="C#" Value="public Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricName Name { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricName Name" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.StorSimple.Fluent.Models.Metrics.Name" />
+      <MemberSignature Language="VB.NET" Value="Public Property Name As MetricName" />
+      <MemberSignature Language="F#" Value="member this.Name : Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricName with get, set" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.Metrics.Name" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="name")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricName</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PrimaryAggregation">
+      <MemberSignature Language="C#" Value="public Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricAggregationType&gt; PrimaryAggregation { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;valuetype Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricAggregationType&gt; PrimaryAggregation" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.StorSimple.Fluent.Models.Metrics.PrimaryAggregation" />
+      <MemberSignature Language="VB.NET" Value="Public Property PrimaryAggregation As Nullable(Of MetricAggregationType)" />
+      <MemberSignature Language="F#" Value="member this.PrimaryAggregation : Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricAggregationType&gt; with get, set" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.Metrics.PrimaryAggregation" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="primaryAggregation")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricAggregationType&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ResourceId">
+      <MemberSignature Language="C#" Value="public string ResourceId { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ResourceId" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.StorSimple.Fluent.Models.Metrics.ResourceId" />
+      <MemberSignature Language="VB.NET" Value="Public Property ResourceId As String" />
+      <MemberSignature Language="F#" Value="member this.ResourceId : string with get, set" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.Metrics.ResourceId" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="resourceId")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="StartTime">
+      <MemberSignature Language="C#" Value="public Nullable&lt;DateTime&gt; StartTime { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;valuetype System.DateTime&gt; StartTime" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.StorSimple.Fluent.Models.Metrics.StartTime" />
+      <MemberSignature Language="VB.NET" Value="Public Property StartTime As Nullable(Of DateTime)" />
+      <MemberSignature Language="F#" Value="member this.StartTime : Nullable&lt;DateTime&gt; with get, set" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.Metrics.StartTime" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="startTime")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;System.DateTime&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TimeGrain">
+      <MemberSignature Language="C#" Value="public string TimeGrain { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string TimeGrain" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.StorSimple.Fluent.Models.Metrics.TimeGrain" />
+      <MemberSignature Language="VB.NET" Value="Public Property TimeGrain As String" />
+      <MemberSignature Language="F#" Value="member this.TimeGrain : string with get, set" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.Metrics.TimeGrain" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="timeGrain")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Type">
+      <MemberSignature Language="C#" Value="public string Type { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Type" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.StorSimple.Fluent.Models.Metrics.Type" />
+      <MemberSignature Language="VB.NET" Value="Public Property Type As String" />
+      <MemberSignature Language="F#" Value="member this.Type : string with get, set" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.Metrics.Type" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="type")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Unit">
+      <MemberSignature Language="C#" Value="public Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricUnit&gt; Unit { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;valuetype Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricUnit&gt; Unit" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.StorSimple.Fluent.Models.Metrics.Unit" />
+      <MemberSignature Language="VB.NET" Value="Public Property Unit As Nullable(Of MetricUnit)" />
+      <MemberSignature Language="F#" Value="member this.Unit : Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricUnit&gt; with get, set" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.Metrics.Unit" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="unit")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricUnit&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Values">
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.IList&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricData&gt; Values { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.IList`1&lt;class Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricData&gt; Values" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.StorSimple.Fluent.Models.Metrics.Values" />
+      <MemberSignature Language="VB.NET" Value="Public Property Values As IList(Of MetricData)" />
+      <MemberSignature Language="F#" Value="member this.Values : System.Collections.Generic.IList&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricData&gt; with get, set" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.Metrics.Values" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="values")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.IList&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.MetricData&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

@@ -1,0 +1,176 @@
+<Type Name="UpdatesInner" FullName="Microsoft.Azure.Management.StorSimple.Fluent.Models.UpdatesInner">
+  <TypeSignature Language="C#" Value="public class UpdatesInner : Microsoft.Azure.Management.StorSimple.Fluent.Models.BaseModel" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit UpdatesInner extends Microsoft.Azure.Management.StorSimple.Fluent.Models.BaseModel" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Azure.Management.StorSimple.Fluent.Models.UpdatesInner" />
+  <TypeSignature Language="VB.NET" Value="Public Class UpdatesInner&#xA;Inherits BaseModel" />
+  <TypeSignature Language="F#" Value="type UpdatesInner = class&#xA;    inherit BaseModel" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+    <AssemblyVersion>1.0.0.60</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Microsoft.Azure.Management.StorSimple.Fluent.Models.BaseModel</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>Microsoft.Rest.Serialization.JsonTransformation</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public UpdatesInner ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.StorSimple.Fluent.Models.UpdatesInner.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public UpdatesInner (string id = null, string name = null, string type = null, Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.Kind&gt; kind = null, Nullable&lt;bool&gt; regularUpdatesAvailable = null, Nullable&lt;bool&gt; maintenanceModeUpdatesAvailable = null, Nullable&lt;bool&gt; isUpdateInProgress = null, Nullable&lt;DateTime&gt; lastUpdatedTime = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string id, string name, string type, valuetype System.Nullable`1&lt;valuetype Microsoft.Azure.Management.StorSimple.Fluent.Models.Kind&gt; kind, valuetype System.Nullable`1&lt;bool&gt; regularUpdatesAvailable, valuetype System.Nullable`1&lt;bool&gt; maintenanceModeUpdatesAvailable, valuetype System.Nullable`1&lt;bool&gt; isUpdateInProgress, valuetype System.Nullable`1&lt;valuetype System.DateTime&gt; lastUpdatedTime) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.StorSimple.Fluent.Models.UpdatesInner.#ctor(System.String,System.String,System.String,System.Nullable{Microsoft.Azure.Management.StorSimple.Fluent.Models.Kind},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.DateTime})" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (Optional id As String = null, Optional name As String = null, Optional type As String = null, Optional kind As Nullable(Of Kind) = null, Optional regularUpdatesAvailable As Nullable(Of Boolean) = null, Optional maintenanceModeUpdatesAvailable As Nullable(Of Boolean) = null, Optional isUpdateInProgress As Nullable(Of Boolean) = null, Optional lastUpdatedTime As Nullable(Of DateTime) = null)" />
+      <MemberSignature Language="F#" Value="new Microsoft.Azure.Management.StorSimple.Fluent.Models.UpdatesInner : string * string * string * Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.Kind&gt; * Nullable&lt;bool&gt; * Nullable&lt;bool&gt; * Nullable&lt;bool&gt; * Nullable&lt;DateTime&gt; -&gt; Microsoft.Azure.Management.StorSimple.Fluent.Models.UpdatesInner" Usage="new Microsoft.Azure.Management.StorSimple.Fluent.Models.UpdatesInner (id, name, type, kind, regularUpdatesAvailable, maintenanceModeUpdatesAvailable, isUpdateInProgress, lastUpdatedTime)" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="id" Type="System.String" />
+        <Parameter Name="name" Type="System.String" />
+        <Parameter Name="type" Type="System.String" />
+        <Parameter Name="kind" Type="System.Nullable&lt;Microsoft.Azure.Management.StorSimple.Fluent.Models.Kind&gt;" />
+        <Parameter Name="regularUpdatesAvailable" Type="System.Nullable&lt;System.Boolean&gt;" />
+        <Parameter Name="maintenanceModeUpdatesAvailable" Type="System.Nullable&lt;System.Boolean&gt;" />
+        <Parameter Name="isUpdateInProgress" Type="System.Nullable&lt;System.Boolean&gt;" />
+        <Parameter Name="lastUpdatedTime" Type="System.Nullable&lt;System.DateTime&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="id">To be added.</param>
+        <param name="name">To be added.</param>
+        <param name="type">To be added.</param>
+        <param name="kind">To be added.</param>
+        <param name="regularUpdatesAvailable">To be added.</param>
+        <param name="maintenanceModeUpdatesAvailable">To be added.</param>
+        <param name="isUpdateInProgress">To be added.</param>
+        <param name="lastUpdatedTime">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsUpdateInProgress">
+      <MemberSignature Language="C#" Value="public Nullable&lt;bool&gt; IsUpdateInProgress { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;bool&gt; IsUpdateInProgress" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.StorSimple.Fluent.Models.UpdatesInner.IsUpdateInProgress" />
+      <MemberSignature Language="VB.NET" Value="Public Property IsUpdateInProgress As Nullable(Of Boolean)" />
+      <MemberSignature Language="F#" Value="member this.IsUpdateInProgress : Nullable&lt;bool&gt; with get, set" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.UpdatesInner.IsUpdateInProgress" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="properties.isUpdateInProgress")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;System.Boolean&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="LastUpdatedTime">
+      <MemberSignature Language="C#" Value="public Nullable&lt;DateTime&gt; LastUpdatedTime { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;valuetype System.DateTime&gt; LastUpdatedTime" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.StorSimple.Fluent.Models.UpdatesInner.LastUpdatedTime" />
+      <MemberSignature Language="VB.NET" Value="Public Property LastUpdatedTime As Nullable(Of DateTime)" />
+      <MemberSignature Language="F#" Value="member this.LastUpdatedTime : Nullable&lt;DateTime&gt; with get, set" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.UpdatesInner.LastUpdatedTime" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="properties.lastUpdatedTime")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;System.DateTime&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MaintenanceModeUpdatesAvailable">
+      <MemberSignature Language="C#" Value="public Nullable&lt;bool&gt; MaintenanceModeUpdatesAvailable { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;bool&gt; MaintenanceModeUpdatesAvailable" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.StorSimple.Fluent.Models.UpdatesInner.MaintenanceModeUpdatesAvailable" />
+      <MemberSignature Language="VB.NET" Value="Public Property MaintenanceModeUpdatesAvailable As Nullable(Of Boolean)" />
+      <MemberSignature Language="F#" Value="member this.MaintenanceModeUpdatesAvailable : Nullable&lt;bool&gt; with get, set" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.UpdatesInner.MaintenanceModeUpdatesAvailable" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="properties.maintenanceModeUpdatesAvailable")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;System.Boolean&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RegularUpdatesAvailable">
+      <MemberSignature Language="C#" Value="public Nullable&lt;bool&gt; RegularUpdatesAvailable { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;bool&gt; RegularUpdatesAvailable" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.StorSimple.Fluent.Models.UpdatesInner.RegularUpdatesAvailable" />
+      <MemberSignature Language="VB.NET" Value="Public Property RegularUpdatesAvailable As Nullable(Of Boolean)" />
+      <MemberSignature Language="F#" Value="member this.RegularUpdatesAvailable : Nullable&lt;bool&gt; with get, set" Usage="Microsoft.Azure.Management.StorSimple.Fluent.Models.UpdatesInner.RegularUpdatesAvailable" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.StorSimple.Fluent</AssemblyName>
+        <AssemblyVersion>1.0.0.60</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Newtonsoft.Json.JsonProperty(PropertyName="properties.regularUpdatesAvailable")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;System.Boolean&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>
