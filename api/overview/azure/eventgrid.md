@@ -16,7 +16,7 @@ Build event-driven applications that listen and react to events from Azure servi
 
 Create events, authenticate, and post to topics using the Azure Event Grid Client SDK.
 
-Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Management.Network.Fluent) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
+Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.EventGrid) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
 
 #### Visual Studio Package Manager
 
@@ -116,7 +116,7 @@ foreach (EventGridEvent receivedEvent in events)
 
 Create, update, or delete Event Grid instances, topics, and subscriptions with the management SDK.
 
-Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Management.Network.Fluent) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
+Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Management.EventGrid) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
 
 
 #### Visual Studio Package Manager
