@@ -6,15 +6,6 @@
   <TypeSignature Language="F#" Value="type Scripts = class" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
-    <AssemblyVersion>3.0.0.0</AssemblyVersion>
-    <AssemblyVersion>3.1.0.0</AssemblyVersion>
-    <AssemblyVersion>3.1.1.0</AssemblyVersion>
-    <AssemblyVersion>3.2.0.0</AssemblyVersion>
-    <AssemblyVersion>3.3.0.0</AssemblyVersion>
-    <AssemblyVersion>3.3.1.0</AssemblyVersion>
-    <AssemblyVersion>3.3.2.0</AssemblyVersion>
-    <AssemblyVersion>3.3.3.0</AssemblyVersion>
-    <AssemblyVersion>3.4.0.0</AssemblyVersion>
     <AssemblyVersion>3.4.1.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
@@ -39,15 +30,6 @@
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
-        <AssemblyVersion>3.0.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.1.0</AssemblyVersion>
-        <AssemblyVersion>3.2.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.1.0</AssemblyVersion>
-        <AssemblyVersion>3.3.2.0</AssemblyVersion>
-        <AssemblyVersion>3.3.3.0</AssemblyVersion>
-        <AssemblyVersion>3.4.0.0</AssemblyVersion>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
@@ -64,15 +46,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
-        <AssemblyVersion>3.0.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.1.0</AssemblyVersion>
-        <AssemblyVersion>3.2.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.1.0</AssemblyVersion>
-        <AssemblyVersion>3.3.2.0</AssemblyVersion>
-        <AssemblyVersion>3.3.3.0</AssemblyVersion>
-        <AssemblyVersion>3.4.0.0</AssemblyVersion>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -119,40 +92,6 @@
                     if (!isAccepted) throw new Error(""The query wasn't accepted by the server. Try again/use continuation token between API and script."");
                 }";
                 
-             Scripts scripts = this.container.GetScripts();
-             StoredProcedureProperties storedProcedure = new StoredProcedureProperties(id, sprocBody);
-             CosmosStoredProcedure cosmosStoredProcedure = await scripts.CreateStoredProcedureAsync(storedProcedure);
-             
-             // Execute the stored procedure
-             CosmosItemResponse<string> sprocResponse = await scripts.ExecuteStoredProcedureAsync<string, string>(
-                                           id, 
-                                           "Item as a string: ", 
-                                           new PartitionKey(testPartitionId));
-             Console.WriteLine("sprocResponse.Resource");
-             ]]></code></example>
-        <example>
-              This creates and executes a stored procedure that appends a string to the first item returned from the query.
-             <code language="c#"><![CDATA[
-             string sprocBody = @"function simple(prefix)
-                {
-                    var collection = getContext().getCollection();
-            
-                    // Query documents and take 1st item.
-                    var isAccepted = collection.queryDocuments(
-                    collection.getSelfLink(),
-                    'SELECT * FROM root r',
-                    function(err, feed, options) {
-                        if (err)throw err;
-            
-                        // Check the feed and if it's empty, set the body to 'no docs found',
-                        // Otherwise just take 1st element from the feed.
-                        if (!feed || !feed.length) getContext().getResponse().setBody(""no docs found"");
-                        else getContext().getResponse().setBody(prefix + JSON.stringify(feed[0]));
-                    });
-            
-                    if (!isAccepted) throw new Error(""The query wasn't accepted by the server. Try again/use continuation token between API and script."");
-                }";
-                
              Scripts scripts = this.container.Scripts;
              StoredProcedureProperties storedProcedure = new StoredProcedureProperties(id, sprocBody);
              StoredProcedureResponse storedProcedureResponse = await scripts.CreateStoredProcedureAsync(storedProcedure);
@@ -174,15 +113,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
-        <AssemblyVersion>3.0.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.1.0</AssemblyVersion>
-        <AssemblyVersion>3.2.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.1.0</AssemblyVersion>
-        <AssemblyVersion>3.3.2.0</AssemblyVersion>
-        <AssemblyVersion>3.3.3.0</AssemblyVersion>
-        <AssemblyVersion>3.4.0.0</AssemblyVersion>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -206,36 +136,6 @@
         <exception cref="T:System.AggregateException">Represents a consolidation of failures that occurred during async processing. Look within InnerExceptions to find the actual exception(s)</exception>
         <exception cref="T:Microsoft.Azure.Cosmos.CosmosException">This exception can encapsulate many different types of errors. To determine the specific error always look at the StatusCode property. Some common codes you may get when creating a Document are:
              <list type="table"><listheader><term>StatusCode</term><description>Reason for exception</description></listheader><item><term>400</term><description>BadRequest - This means something was wrong with the request supplied. It is likely that an Id was not supplied for the new trigger or that the Body was malformed.</description></item><item><term>403</term><description>Forbidden - You have reached your quota of triggers for the collection supplied. Contact support to have this quota increased.</description></item><item><term>409</term><description>Conflict - This means a <see cref="T:Microsoft.Azure.Cosmos.Scripts.TriggerProperties" /> with an id matching the id you supplied already existed.</description></item><item><term>413</term><description>RequestEntityTooLarge - This means the body of the <see cref="T:Microsoft.Azure.Cosmos.Scripts.TriggerProperties" /> you tried to create was too large.</description></item></list></exception>
-        <example>
-              This creates a trigger then uses the trigger in a create item.
-             <code language="c#"><![CDATA[
-             Scripts scripts = this.container.GetScripts();
-             CosmosTrigger cosmosTrigger = await scripts.CreateTriggerAsync(
-                 new TriggerProperties
-                 {
-                     Id = "addTax",
-                     Body = @"function AddTax() {
-                         var item = getContext().getRequest().getBody();
-            
-                         // calculate the tax.
-                         item.tax = item.cost * .15;
-            
-                         // Update the request -- this is what is going to be inserted.
-                         getContext().getRequest().setBody(item);
-                     }",
-                     TriggerOperation = TriggerOperation.All,
-                     TriggerType = TriggerType.Pre
-                 });
-            
-             CosmosItemRequestOptions options = new CosmosItemRequestOptions()
-             {
-                 PreTriggers = new List<string>() { cosmosTrigger.Id },
-             };
-            
-             // Create a new item with trigger set in the request options
-             CosmosItemResponse<dynamic> createdItem = await this.container.Items.CreateItemAsync<dynamic>(item.status, item, options);
-             double itemTax = createdItem.Resource.tax;
-             ]]></code></example>
         <example>
               This creates a trigger then uses the trigger in a create item.
              <code language="c#"><![CDATA[
@@ -276,15 +176,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
-        <AssemblyVersion>3.0.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.1.0</AssemblyVersion>
-        <AssemblyVersion>3.2.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.1.0</AssemblyVersion>
-        <AssemblyVersion>3.3.2.0</AssemblyVersion>
-        <AssemblyVersion>3.3.3.0</AssemblyVersion>
-        <AssemblyVersion>3.4.0.0</AssemblyVersion>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -308,34 +199,6 @@
         <exception cref="T:System.AggregateException">Represents a consolidation of failures that occurred during async processing. Look within InnerExceptions to find the actual exception(s)</exception>
         <exception cref="T:Microsoft.Azure.Cosmos.CosmosException">This exception can encapsulate many different types of errors. To determine the specific error always look at the StatusCode property. Some common codes you may get when creating a user defined function are:
              <list type="table"><listheader><term>StatusCode</term><description>Reason for exception</description></listheader><item><term>400</term><description>BadRequest - This means something was wrong with the request supplied. It is likely that an Id was not supplied for the new user defined function or that the Body was malformed.</description></item><item><term>403</term><description>Forbidden - You have reached your quota of user defined functions for the collection supplied. Contact support to have this quota increased.</description></item><item><term>409</term><description>Conflict - This means a <see cref="T:Microsoft.Azure.Cosmos.Scripts.UserDefinedFunctionProperties" /> with an id matching the id you supplied already existed.</description></item><item><term>413</term><description>RequestEntityTooLarge - This means the body of the <see cref="T:Microsoft.Azure.Cosmos.Scripts.UserDefinedFunctionProperties" /> you tried to create was too large.</description></item></list></exception>
-        <example>
-              This creates a user defined function then uses the function in an item query.
-             <code language="c#"><![CDATA[
-             Scripts scripts = this.container.GetScripts();
-             await scripts.UserDefinedFunctions.CreateUserDefinedFunctionAsync(
-                 new UserDefinedFunctionProperties 
-                 { 
-                     Id = "calculateTax", 
-                     Body = @"function(amt) { return amt * 0.05; }" 
-                 });
-            
-             QueryDefinition sqlQuery = new QueryDefinition(
-                 "SELECT VALUE udf.calculateTax(t.cost) FROM toDoActivity t where t.cost > @expensive and t.status = @status")
-                 .WithParameter("@expensive", 9000)
-                 .WithParameter("@status", "Done");
-            
-             FeedIterator<double> setIterator = this.container.Items.GetItemsQueryIterator<double>(
-                 sqlQueryDefinition: sqlQuery,
-                 partitionKey: "Done");
-            
-             while (setIterator.HasMoreResults)
-             {
-                 foreach (var tax in await setIterator.ReadNextAsync())
-                 {
-                     Console.WriteLine(tax);
-                 }
-             }
-             ]]></code></example>
         <example>
               This creates a user defined function then uses the function in an item query.
              <code language="c#"><![CDATA[
@@ -374,15 +237,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
-        <AssemblyVersion>3.0.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.1.0</AssemblyVersion>
-        <AssemblyVersion>3.2.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.1.0</AssemblyVersion>
-        <AssemblyVersion>3.3.2.0</AssemblyVersion>
-        <AssemblyVersion>3.3.3.0</AssemblyVersion>
-        <AssemblyVersion>3.4.0.0</AssemblyVersion>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -408,12 +262,6 @@
         <example>
             This examples gets a reference to an existing stored procedure and deletes it.
             <code language="c#"><![CDATA[
-            Scripts scripts = this.container.GetScripts();
-            CosmosResponseMessage response = await scripts.DeleteStoredProcedureAsync("taxUdfId");
-            ]]></code></example>
-        <example>
-            This examples gets a reference to an existing stored procedure and deletes it.
-            <code language="c#"><![CDATA[
             Scripts scripts = this.container.Scripts;
             StoredProcedureResponse response = await scripts.DeleteStoredProcedureAsync("taxUdfId");
             ]]></code></example>
@@ -427,15 +275,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
-        <AssemblyVersion>3.0.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.1.0</AssemblyVersion>
-        <AssemblyVersion>3.2.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.1.0</AssemblyVersion>
-        <AssemblyVersion>3.3.2.0</AssemblyVersion>
-        <AssemblyVersion>3.3.3.0</AssemblyVersion>
-        <AssemblyVersion>3.4.0.0</AssemblyVersion>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -458,12 +297,6 @@
         <example>
             This examples gets a reference to an existing trigger and deletes it.
             <code language="c#"><![CDATA[
-            Scripts scripts = this.container.GetScripts();
-            TriggerResponse response = await scripts.DeleteTriggerAsync("existingId");
-            ]]></code></example>
-        <example>
-            This examples gets a reference to an existing trigger and deletes it.
-            <code language="c#"><![CDATA[
             Scripts scripts = this.container.Scripts;
             TriggerResponse response = await scripts.DeleteTriggerAsync("existingId");
             ]]></code></example>
@@ -477,15 +310,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
-        <AssemblyVersion>3.0.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.1.0</AssemblyVersion>
-        <AssemblyVersion>3.2.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.1.0</AssemblyVersion>
-        <AssemblyVersion>3.3.2.0</AssemblyVersion>
-        <AssemblyVersion>3.3.3.0</AssemblyVersion>
-        <AssemblyVersion>3.4.0.0</AssemblyVersion>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -508,12 +332,6 @@
         <example>
             This examples gets a reference to an existing user defined function and deletes it.
             <code language="c#"><![CDATA[
-            Scripts scripts = this.container.GetScripts();
-            UserDefinedFunctionResponse response = await this.container.DeleteUserDefinedFunctionAsync("existingId");
-            ]]></code></example>
-        <example>
-            This examples gets a reference to an existing user defined function and deletes it.
-            <code language="c#"><![CDATA[
             Scripts scripts = this.container.Scripts;
             UserDefinedFunctionResponse response = await this.container.DeleteUserDefinedFunctionAsync("existingId");
             ]]></code></example>
@@ -527,15 +345,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
-        <AssemblyVersion>3.0.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.1.0</AssemblyVersion>
-        <AssemblyVersion>3.2.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.1.0</AssemblyVersion>
-        <AssemblyVersion>3.3.2.0</AssemblyVersion>
-        <AssemblyVersion>3.3.3.0</AssemblyVersion>
-        <AssemblyVersion>3.4.0.0</AssemblyVersion>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -611,15 +420,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
-        <AssemblyVersion>3.0.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.1.0</AssemblyVersion>
-        <AssemblyVersion>3.2.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.1.0</AssemblyVersion>
-        <AssemblyVersion>3.3.2.0</AssemblyVersion>
-        <AssemblyVersion>3.3.3.0</AssemblyVersion>
-        <AssemblyVersion>3.4.0.0</AssemblyVersion>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -696,15 +496,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
-        <AssemblyVersion>3.0.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.1.0</AssemblyVersion>
-        <AssemblyVersion>3.2.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.1.0</AssemblyVersion>
-        <AssemblyVersion>3.3.2.0</AssemblyVersion>
-        <AssemblyVersion>3.3.3.0</AssemblyVersion>
-        <AssemblyVersion>3.4.0.0</AssemblyVersion>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -749,15 +540,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
-        <AssemblyVersion>3.0.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.1.0</AssemblyVersion>
-        <AssemblyVersion>3.2.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.1.0</AssemblyVersion>
-        <AssemblyVersion>3.3.2.0</AssemblyVersion>
-        <AssemblyVersion>3.3.3.0</AssemblyVersion>
-        <AssemblyVersion>3.4.0.0</AssemblyVersion>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -799,15 +581,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
-        <AssemblyVersion>3.0.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.1.0</AssemblyVersion>
-        <AssemblyVersion>3.2.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.1.0</AssemblyVersion>
-        <AssemblyVersion>3.3.2.0</AssemblyVersion>
-        <AssemblyVersion>3.3.3.0</AssemblyVersion>
-        <AssemblyVersion>3.4.0.0</AssemblyVersion>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -848,15 +621,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
-        <AssemblyVersion>3.0.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.1.0</AssemblyVersion>
-        <AssemblyVersion>3.2.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.1.0</AssemblyVersion>
-        <AssemblyVersion>3.3.2.0</AssemblyVersion>
-        <AssemblyVersion>3.3.3.0</AssemblyVersion>
-        <AssemblyVersion>3.4.0.0</AssemblyVersion>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -894,15 +658,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
-        <AssemblyVersion>3.0.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.1.0</AssemblyVersion>
-        <AssemblyVersion>3.2.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.1.0</AssemblyVersion>
-        <AssemblyVersion>3.3.2.0</AssemblyVersion>
-        <AssemblyVersion>3.3.3.0</AssemblyVersion>
-        <AssemblyVersion>3.4.0.0</AssemblyVersion>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -947,15 +702,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
-        <AssemblyVersion>3.0.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.1.0</AssemblyVersion>
-        <AssemblyVersion>3.2.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.1.0</AssemblyVersion>
-        <AssemblyVersion>3.3.2.0</AssemblyVersion>
-        <AssemblyVersion>3.3.3.0</AssemblyVersion>
-        <AssemblyVersion>3.4.0.0</AssemblyVersion>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -997,15 +743,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
-        <AssemblyVersion>3.0.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.1.0</AssemblyVersion>
-        <AssemblyVersion>3.2.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.1.0</AssemblyVersion>
-        <AssemblyVersion>3.3.2.0</AssemblyVersion>
-        <AssemblyVersion>3.3.3.0</AssemblyVersion>
-        <AssemblyVersion>3.4.0.0</AssemblyVersion>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1046,15 +783,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
-        <AssemblyVersion>3.0.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.1.0</AssemblyVersion>
-        <AssemblyVersion>3.2.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.1.0</AssemblyVersion>
-        <AssemblyVersion>3.3.2.0</AssemblyVersion>
-        <AssemblyVersion>3.3.3.0</AssemblyVersion>
-        <AssemblyVersion>3.4.0.0</AssemblyVersion>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1092,15 +820,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
-        <AssemblyVersion>3.0.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.1.0</AssemblyVersion>
-        <AssemblyVersion>3.2.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.1.0</AssemblyVersion>
-        <AssemblyVersion>3.3.2.0</AssemblyVersion>
-        <AssemblyVersion>3.3.3.0</AssemblyVersion>
-        <AssemblyVersion>3.4.0.0</AssemblyVersion>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1145,15 +864,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
-        <AssemblyVersion>3.0.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.1.0</AssemblyVersion>
-        <AssemblyVersion>3.2.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.1.0</AssemblyVersion>
-        <AssemblyVersion>3.3.2.0</AssemblyVersion>
-        <AssemblyVersion>3.3.3.0</AssemblyVersion>
-        <AssemblyVersion>3.4.0.0</AssemblyVersion>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1195,15 +905,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
-        <AssemblyVersion>3.0.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.1.0</AssemblyVersion>
-        <AssemblyVersion>3.2.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.1.0</AssemblyVersion>
-        <AssemblyVersion>3.3.2.0</AssemblyVersion>
-        <AssemblyVersion>3.3.3.0</AssemblyVersion>
-        <AssemblyVersion>3.4.0.0</AssemblyVersion>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1244,15 +945,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
-        <AssemblyVersion>3.0.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.1.0</AssemblyVersion>
-        <AssemblyVersion>3.2.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.1.0</AssemblyVersion>
-        <AssemblyVersion>3.3.2.0</AssemblyVersion>
-        <AssemblyVersion>3.3.3.0</AssemblyVersion>
-        <AssemblyVersion>3.4.0.0</AssemblyVersion>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1290,15 +982,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
-        <AssemblyVersion>3.0.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.1.0</AssemblyVersion>
-        <AssemblyVersion>3.2.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.1.0</AssemblyVersion>
-        <AssemblyVersion>3.3.2.0</AssemblyVersion>
-        <AssemblyVersion>3.3.3.0</AssemblyVersion>
-        <AssemblyVersion>3.4.0.0</AssemblyVersion>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1326,12 +1009,6 @@
         <example>
              This reads an existing stored procedure.
             <code language="c#"><![CDATA[
-            Scripts scripts = this.container.GetScripts();
-            CosmosStoredProcedure storedProcedure = await scripts.ReadStoredProcedureAsync("ExistingId");
-            ]]></code></example>
-        <example>
-             This reads an existing stored procedure.
-            <code language="c#"><![CDATA[
             Scripts scripts = this.container.Scripts;
             StoredProcedureResponse storedProcedure = await scripts.ReadStoredProcedureAsync("ExistingId");
             ]]></code></example>
@@ -1345,15 +1022,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
-        <AssemblyVersion>3.0.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.1.0</AssemblyVersion>
-        <AssemblyVersion>3.2.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.1.0</AssemblyVersion>
-        <AssemblyVersion>3.3.2.0</AssemblyVersion>
-        <AssemblyVersion>3.3.3.0</AssemblyVersion>
-        <AssemblyVersion>3.4.0.0</AssemblyVersion>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1380,13 +1048,6 @@
         <example>
              This reads an existing trigger
             <code language="c#"><![CDATA[
-            Scripts scripts = this.container.GetScripts();
-            TriggerResponse response = await scripts.ReadTriggerAsync("ExistingId");
-            TriggerProperties triggerProperties = response;
-            ]]></code></example>
-        <example>
-             This reads an existing trigger
-            <code language="c#"><![CDATA[
             Scripts scripts = this.container.Scripts;
             TriggerResponse response = await scripts.ReadTriggerAsync("ExistingId");
             TriggerProperties triggerProperties = response;
@@ -1401,15 +1062,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
-        <AssemblyVersion>3.0.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.1.0</AssemblyVersion>
-        <AssemblyVersion>3.2.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.1.0</AssemblyVersion>
-        <AssemblyVersion>3.3.2.0</AssemblyVersion>
-        <AssemblyVersion>3.3.3.0</AssemblyVersion>
-        <AssemblyVersion>3.4.0.0</AssemblyVersion>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1436,13 +1088,6 @@
         <example>
              This reads an existing user defined function.
             <code language="c#"><![CDATA[
-            Scripts scripts = this.container.GetScripts();
-            UserDefinedFunctionResponse response = await scripts.ReadUserDefinedFunctionAsync("ExistingId");
-            UserDefinedFunctionProperties udfProperties = response;
-            ]]></code></example>
-        <example>
-             This reads an existing user defined function.
-            <code language="c#"><![CDATA[
             Scripts scripts = this.container.Scripts;
             UserDefinedFunctionResponse response = await scripts.ReadUserDefinedFunctionAsync("ExistingId");
             UserDefinedFunctionProperties udfProperties = response;
@@ -1457,15 +1102,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
-        <AssemblyVersion>3.0.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.1.0</AssemblyVersion>
-        <AssemblyVersion>3.2.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.1.0</AssemblyVersion>
-        <AssemblyVersion>3.3.2.0</AssemblyVersion>
-        <AssemblyVersion>3.3.3.0</AssemblyVersion>
-        <AssemblyVersion>3.4.0.0</AssemblyVersion>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1504,23 +1140,6 @@
                  getContext().getRequest().setBody(item);
              }";
              
-             Scripts scripts = this.container.GetScripts();
-             CosmosResponseMessage response = await scripts.ReplaceStoredProcedureAsync("testTriggerId", body);
-             ]]></code></example>
-        <example>
-             This examples replaces an existing stored procedure.
-             <code language="c#"><![CDATA[
-             //Updated body
-             string body = @"function AddTax() {
-                 var item = getContext().getRequest().getBody();
-            
-                 // Validate/calculate the tax.
-                 item.tax = item.cost* .15;
-            
-                 // Update the request -- this is what is going to be inserted.
-                 getContext().getRequest().setBody(item);
-             }";
-             
              Scripts scripts = this.container.Scripts;
              StoredProcedureResponse response = await scripts.ReplaceStoredProcedureAsync(new StoredProcedureProperties("testTriggerId", body));
              ]]></code></example>
@@ -1534,15 +1153,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
-        <AssemblyVersion>3.0.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.1.0</AssemblyVersion>
-        <AssemblyVersion>3.2.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.1.0</AssemblyVersion>
-        <AssemblyVersion>3.3.2.0</AssemblyVersion>
-        <AssemblyVersion>3.3.3.0</AssemblyVersion>
-        <AssemblyVersion>3.4.0.0</AssemblyVersion>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1584,28 +1194,6 @@
                  TriggerType = TriggerType.Post
              };
              
-             Scripts scripts = this.container.GetScripts();
-             TriggerResponse response = await scripts.ReplaceTriggerAsync(triggerSettigs);
-             ]]></code></example>
-        <example>
-             This examples replaces an existing trigger.
-             <code language="c#"><![CDATA[
-             TriggerProperties triggerProperties = new TriggerProperties
-             {
-                 Id = "testTriggerId",
-                 Body = @"function AddTax() {
-                     var item = getContext().getRequest().getBody();
-            
-                     // Validate/calculate the tax.
-                     item.tax = item.cost* .15;
-            
-                     // Update the request -- this is what is going to be inserted.
-                     getContext().getRequest().setBody(item);
-                 }",
-                 TriggerOperation = TriggerOperation.All,
-                 TriggerType = TriggerType.Post
-             };
-             
              Scripts scripts = this.container.Scripts;
              TriggerResponse response = await scripts.ReplaceTriggerAsync(triggerSettigs);
              ]]></code></example>
@@ -1619,15 +1207,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
-        <AssemblyVersion>3.0.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.0.0</AssemblyVersion>
-        <AssemblyVersion>3.1.1.0</AssemblyVersion>
-        <AssemblyVersion>3.2.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.0.0</AssemblyVersion>
-        <AssemblyVersion>3.3.1.0</AssemblyVersion>
-        <AssemblyVersion>3.3.2.0</AssemblyVersion>
-        <AssemblyVersion>3.3.3.0</AssemblyVersion>
-        <AssemblyVersion>3.4.0.0</AssemblyVersion>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1649,19 +1228,6 @@
             A <see cref="T:System.Threading.Tasks.Task" /> containing a <see cref="T:Microsoft.Azure.Cosmos.Scripts.UserDefinedFunctionResponse" /> which wraps a <see cref="T:Microsoft.Azure.Cosmos.Scripts.UserDefinedFunctionProperties" /> containing the updated resource record.
             </returns>
         <remarks>To be added.</remarks>
-        <example>
-            This examples replaces an existing user defined function.
-            <code language="c#"><![CDATA[
-            Scripts scripts = this.container.GetScripts();
-            UserDefinedFunctionProperties udfProperties = new UserDefinedFunctionProperties
-            {
-                Id = "testUserDefinedFunId",
-                Body = "function(amt) { return amt * 0.15; }",
-            };
-            
-            UserDefinedFunctionResponse response = await scripts.ReplaceUserDefinedFunctionAsync(udfProperties);
-            UserDefinedFunctionProperties udfProperties = response;
-            ]]></code></example>
         <example>
             This examples replaces an existing user defined function.
             <code language="c#"><![CDATA[
