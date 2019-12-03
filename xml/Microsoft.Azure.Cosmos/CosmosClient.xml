@@ -7,6 +7,7 @@
   <AssemblyInfo>
     <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
     <AssemblyVersion>3.4.1.0</AssemblyVersion>
+    <AssemblyVersion>3.5.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -22,8 +23,8 @@
             This client can be used to configure and execute requests in the Azure Cosmos DB database service.
             
             CosmosClient is thread-safe. Its recommended to maintain a single instance of CosmosClient per lifetime 
-            of the application which enables efficient connection management and performance. Please refer to 
-            performance guide at <see href="https://docs.microsoft.com/azure/cosmos-db/performance-tips" />.
+            of the application which enables efficient connection management and performance. Please refer to the
+            <see href="https://docs.microsoft.com/azure/cosmos-db/performance-tips">performance guide</see>.
             </summary>
     <remarks>
       <seealso cref="T:Microsoft.Azure.Cosmos.CosmosClientOptions" />
@@ -34,24 +35,6 @@
       <seealso href="https://docs.microsoft.com/azure/cosmos-db/partitioning-overview" />
       <seealso href="https://docs.microsoft.com/azure/cosmos-db/request-units" />
     </remarks>
-    <example>
-            This example create a <see cref="T:Microsoft.Azure.Cosmos.CosmosClient" />, <see cref="T:Microsoft.Azure.Cosmos.Database" />, and a <see cref="T:Microsoft.Azure.Cosmos.Container" />.
-            The CosmosClient is created with the connection string and configured to use "East US 2" region.
-            <code language="c#"><![CDATA[
-            using Microsoft.Azure.Cosmos;
-            
-            CosmosClient cosmosClient = new CosmosClient(
-                        "connection-string-from-portal", 
-                        new CosmosClientOptions()
-                        {
-                            ApplicationRegion = Regions.EastUS2,
-                        });
-            
-            Database db = await client.CreateDatabaseAsync("database-id");
-            Container container = await db.CreateContainerAsync("container-id");
-            
-            // Dispose cosmosClient at application exit
-            ]]></code></example>
     <example>
             This example create a <see cref="T:Microsoft.Azure.Cosmos.CosmosClient" />, <see cref="T:Microsoft.Azure.Cosmos.Database" />, and a <see cref="T:Microsoft.Azure.Cosmos.Container" />.
             The CosmosClient is created with the AccountEndpoint, AccountKey or ResourceToken and configured to use "East US 2" region.
@@ -87,6 +70,61 @@
             
             // Dispose cosmosClient at application exit
             ]]></code></example>
+    <example>
+            This example create a <see cref="T:Microsoft.Azure.Cosmos.CosmosClient" />, <see cref="T:Microsoft.Azure.Cosmos.Database" />, and a <see cref="T:Microsoft.Azure.Cosmos.Container" />.
+            The CosmosClient is created with the connection string and configured to use "East US 2" region.
+            <code language="c#"><![CDATA[
+            using Microsoft.Azure.Cosmos;
+            
+            CosmosClient cosmosClient = new CosmosClient(
+                        "connection-string-from-portal", 
+                        new CosmosClientOptions()
+                        {
+                            ApplicationRegion = Regions.EastUS2,
+                        });
+            
+            Database db = await client.CreateDatabaseAsync("database-id");
+            Container container = await db.CreateContainerAsync("container-id");
+            
+            // Dispose cosmosClient at application exit
+            ]]></code></example>
+    <example>
+            This example creates a <see cref="T:Microsoft.Azure.Cosmos.CosmosClient" />, <see cref="T:Microsoft.Azure.Cosmos.Database" />, and a <see cref="T:Microsoft.Azure.Cosmos.Container" />.
+            The CosmosClient is created with the AccountEndpoint, AccountKey or ResourceToken and configured to use "East US 2" region.
+            <code language="c#"><![CDATA[
+            using Microsoft.Azure.Cosmos;
+            
+            CosmosClient cosmosClient = new CosmosClient(
+                        "account-endpoint-from-portal", 
+                        "account-key-from-portal", 
+                        new CosmosClientOptions()
+                        {
+                            ApplicationRegion = Regions.EastUS2,
+                        });
+            
+            Database db = await client.CreateDatabaseAsync("database-id");
+            Container container = await db.CreateContainerAsync("container-id");
+            
+            // Dispose cosmosClient at application exit
+            ]]></code></example>
+    <example>
+            This example creates a <see cref="T:Microsoft.Azure.Cosmos.CosmosClient" />, <see cref="T:Microsoft.Azure.Cosmos.Database" />, and a <see cref="T:Microsoft.Azure.Cosmos.Container" />.
+            The CosmosClient is created through builder pattern using <see cref="T:Microsoft.Azure.Cosmos.Fluent.CosmosClientBuilder" />.
+            <code language="c#"><![CDATA[
+            using Microsoft.Azure.Cosmos;
+            using Microsoft.Azure.Cosmos.Fluent;
+            
+            CosmosClient cosmosClient = new CosmosClientBuilder("connection-string-from-portal")
+                .WithApplicationRegion("East US 2")
+                .Build();
+            
+            Database db = await client.CreateDatabaseAsync("database-id")
+            Container container = await db.CreateContainerAsync("container-id");
+            
+            // Dispose cosmosClient at application exit
+            ]]></code></example>
+    <altmember cref="T:Microsoft.Azure.Cosmos.CosmosClientOptions" />
+    <altmember cref="T:Microsoft.Azure.Cosmos.Fluent.CosmosClientBuilder" />
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -98,6 +136,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
+        <AssemblyVersion>3.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -117,6 +156,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
+        <AssemblyVersion>3.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="connectionString" Type="System.String" />
@@ -126,11 +166,11 @@
         <param name="connectionString">The connection string to the cosmos account. ex: https://mycosmosaccount.documents.azure.com:443/;AccountKey=SuperSecretKey; </param>
         <param name="clientOptions">(Optional) client options</param>
         <summary>
-            Create a new CosmosClient with the connection string
+            Creates a new CosmosClient with the connection string.
             
             CosmosClient is thread-safe. Its recommended to maintain a single instance of CosmosClient per lifetime 
-            of the application which enables efficient connection management and performance. Please refer to 
-            performance guide at <see href="https://docs.microsoft.com/azure/cosmos-db/performance-tips" />.
+            of the application which enables efficient connection management and performance. Please refer to the
+            <see href="https://docs.microsoft.com/azure/cosmos-db/performance-tips">performance guide</see>.
             </summary>
         <remarks>
           <seealso cref="T:Microsoft.Azure.Cosmos.CosmosClientOptions" />
@@ -153,6 +193,8 @@
             
             // Dispose cosmosClient at application exit
             ]]></code></example>
+        <altmember cref="T:Microsoft.Azure.Cosmos.CosmosClientOptions" />
+        <altmember cref="T:Microsoft.Azure.Cosmos.Fluent.CosmosClientBuilder" />
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -165,6 +207,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
+        <AssemblyVersion>3.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="accountEndpoint" Type="System.String" />
@@ -176,11 +219,11 @@
         <param name="authKeyOrResourceToken">The cosmos account key or resource token to use to create the client.</param>
         <param name="clientOptions">(Optional) client options</param>
         <summary>
-            Create a new CosmosClient with the account endpoint URI string and account key
+            Creates a new CosmosClient with the account endpoint URI string and account key.
             
             CosmosClient is thread-safe. Its recommended to maintain a single instance of CosmosClient per lifetime 
-            of the application which enables efficient connection management and performance. Please refer to 
-            performance guide at <see href="https://docs.microsoft.com/azure/cosmos-db/performance-tips" />.
+            of the application which enables efficient connection management and performance. Please refer to the
+            <see href="https://docs.microsoft.com/azure/cosmos-db/performance-tips">performance guide</see>.
             </summary>
         <remarks>
           <seealso cref="T:Microsoft.Azure.Cosmos.CosmosClientOptions" />
@@ -203,6 +246,8 @@
             
             // Dispose cosmosClient at application exit
             ]]></code></example>
+        <altmember cref="T:Microsoft.Azure.Cosmos.CosmosClientOptions" />
+        <altmember cref="T:Microsoft.Azure.Cosmos.Fluent.CosmosClientBuilder" />
       </Docs>
     </Member>
     <Member MemberName="ClientOptions">
@@ -215,13 +260,14 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
+        <AssemblyVersion>3.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.CosmosClientOptions</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            The <see cref="T:Microsoft.Azure.Cosmos.CosmosClientOptions" /> used initialize CosmosClient
+            The <see cref="T:Microsoft.Azure.Cosmos.CosmosClientOptions" /> used initialize CosmosClient.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -236,6 +282,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
+        <AssemblyVersion>3.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.DatabaseResponse&gt;</ReturnType>
@@ -252,7 +299,7 @@
         <param name="requestOptions">(Optional) A set of options that can be set.</param>
         <param name="cancellationToken">(Optional) <see cref="T:System.Threading.CancellationToken" /> representing request cancellation.</param>
         <summary>
-             Send a request for creating a database.
+             Sends a request for creating a database.
             
              A database manages users, permissions and a set of containers.
              Each Azure Cosmos DB Database Account is able to support multiple independent named databases,
@@ -277,6 +324,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
+        <AssemblyVersion>3.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.DatabaseResponse&gt;</ReturnType>
@@ -303,7 +351,8 @@
              documents. Since databases are an administrative resource, the Service Master Key will be
              required in order to access and successfully complete any action using the User APIs.</para>
         </summary>
-        <returns>A <see cref="T:System.Threading.Tasks.Task" /> containing a <see cref="T:Microsoft.Azure.Cosmos.DatabaseResponse" /> which wraps a <see cref="T:Microsoft.Azure.Cosmos.DatabaseProperties" /> containing the resource record.</returns>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> containing a <see cref="T:Microsoft.Azure.Cosmos.DatabaseResponse" /> which wraps a <see cref="T:Microsoft.Azure.Cosmos.DatabaseProperties" /> containing the resource record.
+             <list type="table"><listheader><term>StatusCode</term><description>Common success StatusCodes for the CreateDatabaseIfNotExistsAsync operation</description></listheader><item><term>201</term><description>Created - New database is created.</description></item><item><term>200</term><description>Accepted - This means the database already exists.</description></item></list></returns>
         <remarks>
           <seealso href="https://docs.microsoft.com/azure/cosmos-db/request-units" /> for details on provision throughput.
              </remarks>
@@ -332,6 +381,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
+        <AssemblyVersion>3.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.ResponseMessage&gt;</ReturnType>
@@ -377,6 +427,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
+        <AssemblyVersion>3.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -399,6 +450,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
+        <AssemblyVersion>3.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -424,6 +476,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
+        <AssemblyVersion>3.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Uri</ReturnType>
@@ -449,6 +502,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
+        <AssemblyVersion>3.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.Container</ReturnType>
@@ -458,8 +512,8 @@
         <Parameter Name="containerId" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="databaseId">cosmos database name</param>
-        <param name="containerId">cosmos container name</param>
+        <param name="databaseId">Cosmos database name</param>
+        <param name="containerId">Cosmos container name</param>
         <summary>
             Returns a proxy reference to a container. 
             </summary>
@@ -482,6 +536,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
+        <AssemblyVersion>3.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.Database</ReturnType>
@@ -490,7 +545,7 @@
         <Parameter Name="id" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="id">The cosmos database id</param>
+        <param name="id">The Cosmos database id</param>
         <summary>
             Returns a proxy reference to a database. 
             </summary>
@@ -518,6 +573,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
+        <AssemblyVersion>3.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.FeedIterator&lt;T&gt;</ReturnType>
@@ -534,7 +590,7 @@
         <typeparam name="T">To be added.</typeparam>
         <param name="queryDefinition">The cosmos SQL query definition.</param>
         <param name="continuationToken">The continuation token in the Azure Cosmos DB service.</param>
-        <param name="requestOptions">(Optional) The options for the item query request <see cref="T:Microsoft.Azure.Cosmos.QueryRequestOptions" /></param>
+        <param name="requestOptions">(Optional) The options for the item query request.</param>
         <summary>
             This method creates a query for databases under an Cosmos DB Account using a SQL statement with parameterized values. It returns a FeedIterator.
             For more information on preparing SQL statements with parameterized values, please see <see cref="T:Microsoft.Azure.Cosmos.QueryDefinition" />.
@@ -556,6 +612,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
+        <AssemblyVersion>3.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.FeedIterator&lt;T&gt;</ReturnType>
@@ -572,7 +629,7 @@
         <typeparam name="T">To be added.</typeparam>
         <param name="queryText">The cosmos SQL query text.</param>
         <param name="continuationToken">The continuation token in the Azure Cosmos DB service.</param>
-        <param name="requestOptions">(Optional) The options for the item query request <see cref="T:Microsoft.Azure.Cosmos.QueryRequestOptions" /></param>
+        <param name="requestOptions">(Optional) The options for the item query request.</param>
         <summary>
             This method creates a query for databases under an Cosmos DB Account using a SQL statement. It returns a FeedIterator.
             For more information on preparing SQL statements with parameterized values, please see <see cref="T:Microsoft.Azure.Cosmos.QueryDefinition" /> overload.
@@ -593,6 +650,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
+        <AssemblyVersion>3.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.FeedIterator</ReturnType>
@@ -605,7 +663,7 @@
       <Docs>
         <param name="queryDefinition">The cosmos SQL query definition.</param>
         <param name="continuationToken">The continuation token in the Azure Cosmos DB service.</param>
-        <param name="requestOptions">(Optional) The options for the query request <see cref="T:Microsoft.Azure.Cosmos.QueryRequestOptions" /></param>
+        <param name="requestOptions">(Optional) The options for the query request.</param>
         <summary>
             This method creates a query for databases under an Cosmos DB Account using a SQL statement with parameterized values. It returns a FeedIterator.
             For more information on preparing SQL statements with parameterized values, please see <see cref="T:Microsoft.Azure.Cosmos.QueryDefinition" />.
@@ -627,6 +685,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
+        <AssemblyVersion>3.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.FeedIterator</ReturnType>
@@ -639,7 +698,7 @@
       <Docs>
         <param name="queryText">The cosmos SQL query text.</param>
         <param name="continuationToken">The continuation token in the Azure Cosmos DB service.</param>
-        <param name="requestOptions">(Optional) The options for the query request <see cref="T:Microsoft.Azure.Cosmos.QueryRequestOptions" /></param>
+        <param name="requestOptions">(Optional) The options for the query request.</param>
         <summary>
             This method creates a query for databases under an Cosmos DB Account using a SQL statement. It returns a FeedIterator.
             For more information on preparing SQL statements with parameterized values, please see <see cref="T:Microsoft.Azure.Cosmos.QueryDefinition" /> overload.
@@ -661,6 +720,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
+        <AssemblyVersion>3.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.AccountProperties&gt;</ReturnType>
@@ -668,7 +728,8 @@
       <Parameters />
       <Docs>
         <summary>
-            Read Azure Cosmos DB account properties <see cref="T:Microsoft.Azure.Cosmos.AccountProperties" /></summary>
+            Reads the <see cref="T:Microsoft.Azure.Cosmos.AccountProperties" /> for the Azure Cosmos DB account.
+            </summary>
         <returns>
             A <see cref="T:Microsoft.Azure.Cosmos.AccountProperties" /> wrapped in a <see cref="T:System.Threading.Tasks.Task" /> object.
             </returns>
