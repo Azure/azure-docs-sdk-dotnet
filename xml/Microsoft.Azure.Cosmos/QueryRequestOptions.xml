@@ -7,6 +7,7 @@
   <AssemblyInfo>
     <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
     <AssemblyVersion>3.4.1.0</AssemblyVersion>
+    <AssemblyVersion>3.5.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>Microsoft.Azure.Cosmos.RequestOptions</BaseTypeName>
@@ -28,6 +29,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
+        <AssemblyVersion>3.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -45,6 +47,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
+        <AssemblyVersion>3.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Nullable&lt;Microsoft.Azure.Cosmos.ConsistencyLevel&gt;</ReturnType>
@@ -73,6 +76,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
+        <AssemblyVersion>3.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Nullable&lt;System.Boolean&gt;</ReturnType>
@@ -97,6 +101,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
+        <AssemblyVersion>3.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Nullable&lt;System.Boolean&gt;</ReturnType>
@@ -122,6 +127,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
+        <AssemblyVersion>3.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Nullable&lt;System.Int32&gt;</ReturnType>
@@ -152,6 +158,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
+        <AssemblyVersion>3.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Nullable&lt;System.Int32&gt;</ReturnType>
@@ -181,6 +188,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
+        <AssemblyVersion>3.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Nullable&lt;System.Int32&gt;</ReturnType>
@@ -209,6 +217,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
+        <AssemblyVersion>3.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Nullable&lt;Microsoft.Azure.Cosmos.PartitionKey&gt;</ReturnType>
@@ -233,6 +242,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
+        <AssemblyVersion>3.5.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Nullable&lt;System.Int32&gt;</ReturnType>
@@ -247,6 +257,46 @@
             ResponseContinuationTokenLimitInKb is used to limit the length of continuation token in the query response. Valid values are &gt;= 0.
             </para>
         </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SessionToken">
+      <MemberSignature Language="C#" Value="public string SessionToken { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string SessionToken" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Cosmos.QueryRequestOptions.SessionToken" />
+      <MemberSignature Language="VB.NET" Value="Public Property SessionToken As String" />
+      <MemberSignature Language="F#" Value="member this.SessionToken : string with get, set" Usage="Microsoft.Azure.Cosmos.QueryRequestOptions.SessionToken" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
+        <AssemblyVersion>3.5.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+             Gets or sets the token for use with session consistency in the Azure Cosmos DB service.
+             </summary>
+        <value>
+             The token for use with session consistency.
+             </value>
+        <remarks>
+             One of the <see cref="P:Microsoft.Azure.Cosmos.QueryRequestOptions.ConsistencyLevel" /> for Azure Cosmos DB is Session. In fact, this is the default level applied to accounts.
+             <para>
+             When working with Session consistency, each new write request to Azure Cosmos DB is assigned a new SessionToken.
+             The DocumentClient will use this token internally with each read/query request to ensure that the set consistency level is maintained.
+            
+             <para>
+             In some scenarios you need to manage this Session yourself;
+             Consider a web application with multiple nodes, each node will have its own instance of <see cref="T:Microsoft.Azure.Cosmos.DocumentClient" />
+             If you wanted these nodes to participate in the same session (to be able read your own writes consistently across web tiers)
+             you would have to send the SessionToken from <see cref="T:Microsoft.Azure.Cosmos.QueryResponse`1" /> of the write action on one node
+             to the client tier, using a cookie or some other mechanism, and have that token flow back to the web tier for subsequent reads.
+             If you are using a round-robin load balancer which does not maintain session affinity between requests, such as the Azure Load Balancer,
+             the read could potentially land on a different node to the write request, where the session was created.
+             </para><para>
+             If you do not flow the Azure Cosmos DB SessionToken across as described above you could end up with inconsistent read results for a period of time.
+             </para></para></remarks>
       </Docs>
     </Member>
   </Members>
