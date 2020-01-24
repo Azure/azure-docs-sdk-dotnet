@@ -9,6 +9,7 @@
     <AssemblyVersion>3.4.1.0</AssemblyVersion>
     <AssemblyVersion>3.5.0.0</AssemblyVersion>
     <AssemblyVersion>3.5.1.0</AssemblyVersion>
+    <AssemblyVersion>3.6.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -39,6 +40,7 @@
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
         <AssemblyVersion>3.5.1.0</AssemblyVersion>
+        <AssemblyVersion>3.6.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -57,6 +59,7 @@
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
         <AssemblyVersion>3.5.1.0</AssemblyVersion>
+        <AssemblyVersion>3.6.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.ContainerResponse&gt;</ReturnType>
@@ -113,6 +116,7 @@
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
         <AssemblyVersion>3.5.1.0</AssemblyVersion>
+        <AssemblyVersion>3.6.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.ContainerResponse&gt;</ReturnType>
@@ -160,6 +164,7 @@
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
         <AssemblyVersion>3.5.1.0</AssemblyVersion>
+        <AssemblyVersion>3.6.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.ContainerResponse&gt;</ReturnType>
@@ -231,6 +236,7 @@
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
         <AssemblyVersion>3.5.1.0</AssemblyVersion>
+        <AssemblyVersion>3.6.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.ContainerResponse&gt;</ReturnType>
@@ -278,6 +284,7 @@
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
         <AssemblyVersion>3.5.1.0</AssemblyVersion>
+        <AssemblyVersion>3.6.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.ResponseMessage&gt;</ReturnType>
@@ -327,6 +334,7 @@
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
         <AssemblyVersion>3.5.1.0</AssemblyVersion>
+        <AssemblyVersion>3.6.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.UserResponse&gt;</ReturnType>
@@ -367,6 +375,7 @@
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
         <AssemblyVersion>3.5.1.0</AssemblyVersion>
+        <AssemblyVersion>3.6.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.Fluent.ContainerBuilder</ReturnType>
@@ -426,6 +435,7 @@
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
         <AssemblyVersion>3.5.1.0</AssemblyVersion>
+        <AssemblyVersion>3.6.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.DatabaseResponse&gt;</ReturnType>
@@ -471,6 +481,7 @@
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
         <AssemblyVersion>3.5.1.0</AssemblyVersion>
+        <AssemblyVersion>3.6.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.ResponseMessage&gt;</ReturnType>
@@ -516,6 +527,7 @@
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
         <AssemblyVersion>3.5.1.0</AssemblyVersion>
+        <AssemblyVersion>3.6.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.Container</ReturnType>
@@ -558,6 +570,7 @@
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
         <AssemblyVersion>3.5.1.0</AssemblyVersion>
+        <AssemblyVersion>3.6.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.FeedIterator&lt;T&gt;</ReturnType>
@@ -599,6 +612,21 @@
                 }
             }
             ]]></code></example>
+        <example>
+            This create the type feed iterator for containers with queryDefinition as input.
+            <code language="c#"><![CDATA[
+            QueryDefinition queryDefinition = new QueryDefinition("SELECT * FROM c where c.status like @status");
+                .WithParameter("@status", "start%");
+            FeedIterator<ContainerProperties> feedIterator = this.cosmosDatabase.GetContainerQueryIterator<ContainerProperties>(queryDefinition);
+            while (feedIterator.HasMoreResults)
+            {
+                FeedResponse<ContainerProperties> response = await feedIterator.ReadNextAsync();
+                foreach (var container in response)
+                {
+                    Console.WriteLine(container);
+                }
+            }
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="GetContainerQueryIterator&lt;T&gt;">
@@ -613,6 +641,7 @@
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
         <AssemblyVersion>3.5.1.0</AssemblyVersion>
+        <AssemblyVersion>3.6.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.FeedIterator&lt;T&gt;</ReturnType>
@@ -660,6 +689,33 @@
             await feedIterator.ReadNextAsync(this.cancellationToken);
             }
             ]]></code></example>
+        <example>
+            1. This create the type feed iterator for containers with queryText as input,
+            <code language="c#"><![CDATA[
+            string queryText = "SELECT * FROM c where c.status like 'start%'";
+            FeedIterator<ContainerProperties> feedIterator = this.cosmosDatabase.GetContainerQueryIterator<ContainerProperties>(queryText);
+            while (feedIterator.HasMoreResults)
+            {
+                FeedResponse<ContainerProperties> response = await feedIterator.ReadNextAsync();
+                foreach (var container in response)
+                {
+                    Console.WriteLine(container);
+                }
+            }
+            ]]></code></example>
+        <example>
+            2. This create the type feed iterator for containers without queryText, retrieving all containers.
+            <code language="c#"><![CDATA[
+            FeedIterator<ContainerProperties> feedIterator = this.cosmosDatabase.GetContainerQueryIterator<ContainerProperties>();
+            while (feedIterator.HasMoreResults)
+            {
+                FeedResponse<ContainerProperties> response = await feedIterator.ReadNextAsync();
+                foreach (var container in response)
+                {
+                    Console.WriteLine(container);
+                }
+            }
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="GetContainerQueryStreamIterator">
@@ -673,6 +729,7 @@
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
         <AssemblyVersion>3.5.1.0</AssemblyVersion>
+        <AssemblyVersion>3.6.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.FeedIterator</ReturnType>
@@ -713,6 +770,24 @@
                 }
             }
             ]]></code></example>
+        <example>
+            This create the stream feed iterator for containers with queryDefinition as input.
+            <code language="c#"><![CDATA[
+            string queryText = "SELECT * FROM c where c.status like 'start%'";
+            QueryDefinition queryDefinition = new QueryDefinition(queryText);
+            FeedIterator feedIterator = this.cosmosDatabase.GetContainerQueryStreamIterator(queryDefinition);
+            while (feedIterator.HasMoreResults)
+            {
+                using (ResponseMessage response = await feedIterator.ReadNextAsync())
+                {
+                    using (StreamReader sr = new StreamReader(response.Content))
+                    using (JsonTextReader jtr = new JsonTextReader(sr))
+                    {
+                        JObject result = JObject.Load(jtr);
+                    }
+                }
+            }
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="GetContainerQueryStreamIterator">
@@ -727,6 +802,7 @@
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
         <AssemblyVersion>3.5.1.0</AssemblyVersion>
+        <AssemblyVersion>3.6.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.FeedIterator</ReturnType>
@@ -770,6 +846,43 @@
             await feedIterator.ReadNextAsync(this.cancellationToken);
             }
             ]]></code></example>
+        <example>
+            1. This create the stream feed iterator for containers with queryText as input.
+            <code language="c#"><![CDATA[
+            FeedIterator feedIterator = this.Container.GetItemQueryStreamIterator(
+                "SELECT * FROM c where c.status like 'start%'");
+            while (feedIterator.HasMoreResults)
+            {
+                // Stream iterator returns a response with status for errors
+                using(ResponseMessage response = await feedIterator.ReadNextAsync())
+                {
+                    // Handle failure scenario. 
+                    if(!response.IsSuccessStatusCode)
+                    {
+                        // Log the response.Diagnostics and handle the error
+                        throw new Exception(response.Message);
+                    }
+                }
+            }
+            ]]></code></example>
+        <example>
+            2. This create the stream feed iterator for containers without queryText, retrieving all container.
+            <code language="c#"><![CDATA[
+            FeedIterator feedIterator = this.cosmosDatabase.GetContainerQueryStreamIterator();
+            while (feedIterator.HasMoreResults)
+            {
+                // Stream iterator returns a response with status
+                using(ResponseMessage response = await feedIterator.ReadNextAsync())
+                {
+                    // Handle failure scenario. 
+                    if(!response.IsSuccessStatusCode)
+                    {
+                        // Log the response.Diagnostics and handle the error
+                        throw new Exception(response.Message);
+                    }
+                }
+            }
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="GetUser">
@@ -784,6 +897,7 @@
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
         <AssemblyVersion>3.5.1.0</AssemblyVersion>
+        <AssemblyVersion>3.6.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.User</ReturnType>
@@ -821,6 +935,7 @@
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
         <AssemblyVersion>3.5.1.0</AssemblyVersion>
+        <AssemblyVersion>3.6.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.FeedIterator&lt;T&gt;</ReturnType>
@@ -859,6 +974,20 @@
                 }
             }
             ]]></code></example>
+        <example>
+            This create the type feed iterator for users with queryDefinition as input.
+            <code language="c#"><![CDATA[
+            QueryDefinition queryDefinition = new QueryDefinition("SELECT * FROM c where c.status like @status")
+                .WithParameter("@status", "start%");
+            FeedIterator<UserProperties> resultSet = this.cosmosDatabase.GetUserQueryIterator<UserProperties>(queryDefinition);
+            while (feedIterator.HasMoreResults)
+            {
+                foreach (UserProperties properties in await feedIterator.ReadNextAsync())
+                {
+                    Console.WriteLine(properties.Id);
+                }
+            }
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="GetUserQueryIterator&lt;T&gt;">
@@ -873,6 +1002,7 @@
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
         <AssemblyVersion>3.5.1.0</AssemblyVersion>
+        <AssemblyVersion>3.6.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.FeedIterator&lt;T&gt;</ReturnType>
@@ -916,6 +1046,33 @@
                 await feedIterator.ReadNextAsync(this.cancellationToken);
             }
             ]]></code></example>
+        <example>
+            1. This create the type feed iterator for users with queryText as input,
+            <code language="c#"><![CDATA[
+            string queryText = "SELECT * FROM c where c.status like 'start%'";
+            FeedIterator<UserProperties> HasMoreResults = this.cosmosDatabase.GetUserQueryIterator<UserProperties>(queryText);
+            while (feedIterator.HasMoreResults)
+            {
+                FeedResponse<UserProperties> response = await feedIterator.ReadNextAsync();
+                foreach (var user in response)
+                {
+                    Console.WriteLine(user);
+                }
+            }
+            ]]></code></example>
+        <example>
+            2. This create the type feed iterator for users without queryText, retrieving all users.
+            <code language="c#"><![CDATA[
+            FeedIterator<UserProperties> feedIterator = this.cosmosDatabase.GetUserQueryIterator<ContainerProperties>();
+            while (feedIterator.HasMoreResults)
+            {
+                FeedResponse<UserProperties> response = await feedIterator.ReadNextAsync();
+                foreach (var user in response)
+                {
+                    Console.WriteLine(user);
+                }
+            }
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="Id">
@@ -930,6 +1087,7 @@
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
         <AssemblyVersion>3.5.1.0</AssemblyVersion>
+        <AssemblyVersion>3.6.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -953,6 +1111,7 @@
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
         <AssemblyVersion>3.5.1.0</AssemblyVersion>
+        <AssemblyVersion>3.6.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.DatabaseResponse&gt;</ReturnType>
@@ -1005,6 +1164,7 @@
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
         <AssemblyVersion>3.5.1.0</AssemblyVersion>
+        <AssemblyVersion>3.6.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.ResponseMessage&gt;</ReturnType>
@@ -1051,6 +1211,7 @@
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
         <AssemblyVersion>3.5.1.0</AssemblyVersion>
+        <AssemblyVersion>3.6.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Nullable&lt;System.Int32&gt;&gt;</ReturnType>
@@ -1063,6 +1224,7 @@
         <summary>
             Gets database throughput in measurement of request units per second in the Azure Cosmos service.
             </summary>
+        <returns>Provisioned throughput in request units per second</returns>
         <returns>
             The provisioned throughput for this database.
             </returns>
@@ -1087,6 +1249,7 @@
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
         <AssemblyVersion>3.5.1.0</AssemblyVersion>
+        <AssemblyVersion>3.6.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.ThroughputResponse&gt;</ReturnType>
@@ -1101,6 +1264,7 @@
         <summary>
             Gets database throughput in measurement of request units per second in the Azure Cosmos service.
             </summary>
+        <returns>The throughput response.</returns>
         <returns>
             The provisioned throughput for this database.
             </returns>
@@ -1136,6 +1300,7 @@
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
         <AssemblyVersion>3.5.1.0</AssemblyVersion>
+        <AssemblyVersion>3.6.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.ThroughputResponse&gt;</ReturnType>
@@ -1152,6 +1317,7 @@
         <summary>
             Sets throughput provisioned for a database in measurement of request units per second in the Azure Cosmos service.
             </summary>
+        <returns>The throughput response.</returns>
         <returns>
             The provisioned throughput for this database.
             </returns>
@@ -1176,6 +1342,7 @@
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
         <AssemblyVersion>3.5.1.0</AssemblyVersion>
+        <AssemblyVersion>3.6.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.UserResponse&gt;</ReturnType>
