@@ -9,6 +9,7 @@
     <AssemblyVersion>3.4.1.0</AssemblyVersion>
     <AssemblyVersion>3.5.0.0</AssemblyVersion>
     <AssemblyVersion>3.5.1.0</AssemblyVersion>
+    <AssemblyVersion>3.6.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -32,6 +33,7 @@
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
         <AssemblyVersion>3.5.1.0</AssemblyVersion>
+        <AssemblyVersion>3.6.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -50,6 +52,7 @@
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
         <AssemblyVersion>3.5.1.0</AssemblyVersion>
+        <AssemblyVersion>3.6.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.PermissionResponse&gt;</ReturnType>
@@ -92,6 +95,7 @@
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
         <AssemblyVersion>3.5.1.0</AssemblyVersion>
+        <AssemblyVersion>3.6.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.UserResponse&gt;</ReturnType>
@@ -130,6 +134,7 @@
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
         <AssemblyVersion>3.5.1.0</AssemblyVersion>
+        <AssemblyVersion>3.6.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.Permission</ReturnType>
@@ -166,6 +171,7 @@
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
         <AssemblyVersion>3.5.1.0</AssemblyVersion>
+        <AssemblyVersion>3.6.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.FeedIterator&lt;T&gt;</ReturnType>
@@ -206,6 +212,20 @@
                 }
             }
             ]]></code></example>
+        <example>
+            This create the type feed iterator for permissions with queryDefinition as input.
+            <code language="c#"><![CDATA[
+            QueryDefinition queryDefinition = new QueryDefinition("SELECT * FROM c where c.status like @status")
+                .WithParameter("@status", "start%");
+            FeedIterator<PermissionProperties> resultSet = this.user.GetPermissionQueryIterator<PermissionProperties>(queryDefinition);
+            while (feedIterator.HasMoreResults)
+            {
+                foreach (PermissionProperties properties in await feedIterator.ReadNextAsync())
+                {
+                    Console.WriteLine(properties.Id);
+                }
+            }
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="GetPermissionQueryIterator&lt;T&gt;">
@@ -220,6 +240,7 @@
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
         <AssemblyVersion>3.5.1.0</AssemblyVersion>
+        <AssemblyVersion>3.6.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.FeedIterator&lt;T&gt;</ReturnType>
@@ -264,6 +285,33 @@
                 await feedIterator.ReadNextAsync(this.cancellationToken);
             }
             ]]></code></example>
+        <example>
+            1. This create the type feed iterator for permission with queryText as input,
+            <code language="c#"><![CDATA[
+            string queryText = "SELECT * FROM c where c.status like 'start%'";
+            FeedIterator<PermissionProperties> feedIterator = this.users.GetPermissionQueryIterator<PermissionProperties>(queryText);
+            while (feedIterator.HasMoreResults)
+            {
+                FeedResponse<PermissionProperties> response = await feedIterator.ReadNextAsync();
+                foreach (var permission in response)
+                {
+                    Console.WriteLine(permission);
+                }
+            }
+            ]]></code></example>
+        <example>
+            2. This create the type feed iterator for permissions without queryText, retrieving all permissions.
+            <code language="c#"><![CDATA[
+            FeedIterator<PermissionProperties> feedIterator = this.user.GetPermissionQueryIterator<PermissionProperties>();
+            while (feedIterator.HasMoreResults)
+            {
+                FeedResponse<PermissionProperties> response = await feedIterator.ReadNextAsync();
+                foreach (var permission in response)
+                {
+                    Console.WriteLine(permission);
+                }
+            }
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="Id">
@@ -278,6 +326,7 @@
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
         <AssemblyVersion>3.5.1.0</AssemblyVersion>
+        <AssemblyVersion>3.6.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -301,6 +350,7 @@
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
         <AssemblyVersion>3.5.1.0</AssemblyVersion>
+        <AssemblyVersion>3.6.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.UserResponse&gt;</ReturnType>
@@ -340,6 +390,7 @@
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
         <AssemblyVersion>3.5.1.0</AssemblyVersion>
+        <AssemblyVersion>3.6.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.UserResponse&gt;</ReturnType>
@@ -383,6 +434,7 @@
         <AssemblyVersion>3.4.1.0</AssemblyVersion>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
         <AssemblyVersion>3.5.1.0</AssemblyVersion>
+        <AssemblyVersion>3.6.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.PermissionResponse&gt;</ReturnType>
