@@ -1,110 +1,54 @@
 ---
-title: Azure .NET Storage APIs
-description: Reference for Azure Storage libraries for .NET
-ms.date: 10/19/2017
+title: Azure Storage client libraries for .NET
+description: The Azure Storage client libraries for .NET offer a convenient interface for making calls to Azure Storage.
+ms.date: 01/29/2020
 ms.topic: reference
 ms.service: storage
 ---
 
-# Azure Storage APIs for .NET
+# Azure Storage client libraries for .NET
 
-## Overview
+The Azure Storage client libraries for .NET offer a convenient interface for making calls to Azure Storage. For more information about Azure Storage, see [Introduction to Azure Storage](/azure/storage/common/storage-introduction).
 
-Read and write files, blob (object) data, key-value pairs, and messages from your .NET applications with [Azure Storage](https://docs.microsoft.com/azure/storage/storage-introduction).
+## Libraries for data access
 
-To get started with Azure Storage, see [Get started with Azure Blob storage using .NET](/azure/storage/storage-dotnet-how-to-use-blobs).
+The latest version of the Azure Storage client library is version 12.x. Microsoft recommends using version 12.x for new applications.
 
-## Client library
+If you cannot update existing applications to version 12.x, then Microsoft recommends using version 11.x.
 
-Use [connection strings](/azure/storage/storage-create-storage-account#manage-your-storage-account) to connect to an Azure Storage account, then use the client libraries' classes and methods to work with blob, table, file, or queue storage.
+### Version 12.x
 
-Install the [NuGet package](https://www.nuget.org/packages/WindowsAzure.Storage) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
+The version 12.x client libraries for .NET are part of the Azure SDK for .NET. The source code for the Azure Storage client libraries for .NET is available on [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/storage).
 
-#### Visual Studio Package Manager
+Use the following version 12.x libraries to work with blobs, files, and queues:
 
-```powershell
-Install-Package WindowsAzure.Storage
-```
+| Library | Reference | Package | Source |
+|----------------------------------------|-------------------------------------------------------------|-----------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
+|    Azure.Storage.Blobs.Batch    |         |    [Nuget](https://www.nuget.org/packages/Azure.Storage.Blobs.Batch/)    |    [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/storage/Azure.Storage.Blobs.Batch)    |
+|    Azure.Storage.Blobs.Cryptography    |         |         |    [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/storage/Azure.Storage.Blobs.Cryptography)    |
+|    Azure.Storage.Blobs    |    [Reference](/dotnet/api/azure.storage.blobs)    |    [Nuget](https://www.nuget.org/packages/Azure.Storage.Blobs/)    |    [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/storage/Azure.Storage.Blobs)    |
+|    Azure.Storage.Common    |         |    [Nuget](https://www.nuget.org/packages/Azure.Storage.Common/)    |    [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/storage/Azure.Storage.Common)    |
+|    Azure.Storage.Files.DataLake    |    [Reference](/dotnet/api/azure.storage.files.datalake)    |    [Nuget](https://www.nuget.org/packages/Azure.Storage.Files.DataLake/)    |    [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/storage/Azure.Storage.Files.DataLake)    |
+|    Azure.Storage.Files.Shares    |    [Reference](/dotnet/api/azure.storage.files.shares)    |    [Nuget](https://www.nuget.org/packages/Azure.Storage.Files.Shares/)    |    [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/storage/Azure.Storage.Files.Shares)    |
+|    Azure.Storage.Queues    |    [Reference](/dotnet/api/azure.storage.queues)    |    [Nuget](https://www.nuget.org/packages/Azure.Storage.Queues/)    |    [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/storage/Azure.Storage.Queues)    |
 
-### .NET Core CLI
+### Version 11.x
 
-```bash
-dotnet add package WindowsAzure.Storage
-```
+The source code for the Azure Storage client libraries for .NET is available on [GitHub](https://github.com/Azure/azure-storage-net).
 
-### Code Example
+Use the following version 11.x libraries to work with blobs, files, and queues:
 
-This example creates a new blob to a new container in an existing storage account.
+| Library | Reference | Package | Source |
+|--------------------------------------|---------------------------------------------------------------|-------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
+|    Microsoft.Azure.Storage.Blob    |    [Reference](/dotnet/api/microsoft.azure.storage.blob)    |    [Nuget](https://www.nuget.org/packages/Microsoft.Azure.Storage.Blob/)    |    [GitHub](https://github.com/Azure/azure-storage-net/tree/master/Blob)    |
+|    Microsoft.Azure.Storage.Common    |    [Reference](/dotnet/api/microsoft.azure.storage.common)    |    [Nuget](https://www.nuget.org/packages/Microsoft.Azure.Storage.Common/)    |    [GitHub](https://github.com/Azure/azure-storage-net/tree/master/Common)    |
+|    Microsoft.Azure.Storage.File    |    [Reference](/dotnet/api/microsoft.azure.storage.file)    |    [Nuget](https://www.nuget.org/packages/Microsoft.Azure.Storage.File/)    |    [GitHub](https://github.com/Azure/azure-storage-net/tree/master/File)    |
+|    Microsoft.Azure.Storage.Queue    |    [Reference](/dotnet/api/microsoft.azure.storage.queue)    |    [Nuget](https://www.nuget.org/packages/Microsoft.Azure.Storage.Queue/)    |    [GitHub](https://github.com/Azure/azure-storage-net/tree/master/Queue)    |
 
-```csharp
-/* Include these "using" directives...
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Blob;
-*/
+## Libraries for resource management
 
-string storageConnectionString = "DefaultEndpointsProtocol=https;"
-    + "AccountName=[Storage Account Name]"
-    + ";AccountKey=[Storage Account Key]"
-    + ";EndpointSuffix=core.windows.net";
+Use the following library to work with the Azure Storage resource provider:
 
-CloudStorageAccount account = CloudStorageAccount.Parse(storageConnectionString);
-CloudBlobClient serviceClient = account.CreateCloudBlobClient();
-
-// Create container. Name must be lower case.
-Console.WriteLine("Creating container...");
-var container = serviceClient.GetContainerReference("mycontainer");
-container.CreateIfNotExistsAsync().Wait();
-
-// write a blob to the container
-CloudBlockBlob blob = container.GetBlockBlobReference("helloworld.txt");
-blob.UploadTextAsync("Hello, World!").Wait();
-```
-
-> [!div class="nextstepactions"]
-> [Explore the client APIs](/dotnet/api/overview/azure/storage/client)
-
-## Management APIs
-
-Create and manage Azure Storage accounts and connection keys with the management API.
-
-Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Management.Storage.Fluent) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
-
-#### Visual Studio package manager
-
-```powershell
-Install-Package Microsoft.Azure.Management.Storage.Fluent
-```
-
-#### .NET Core CLI
-
-````bash
-dotnet add package Microsoft.Azure.Management.Storage.Fluent
-````
-
-### Code Example
-
-This example creates a storage account.
-
-```csharp
-/* Include this "using" directive...
-using Microsoft.Azure.Management.Storage.Fluent
-*/
-
-IStorageAccount storage = azure.StorageAccounts.Define(storageAccountName)
-    .WithRegion(Region.USEast)
-    .WithNewResourceGroup(rgName)
-    .Create();
-```
-
-> [!div class="nextstepactions"]
-> [Explore the management APIs](/dotnet/api/overview/azure/storage/management)
-
-## Samples
-
-* [Get started with Azure Blob Storage in .NET](https://azure.microsoft.com/resources/samples/storage-blob-dotnet-getting-started/) 
-* [Get started with Azure Queue Storage in .NET](https://azure.microsoft.com/resources/samples/storage-queue-dotnet-getting-started/)
-
-View the [complete list](https://azure.microsoft.com/resources/samples/?platform=dotnet&term=storage) of Azure Storage samples.
-
-[PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
-[DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
+|    Library    |    Reference    |    Package    |    Source    |
+|------------------------------------------|-------------------------------------------------------------------|-----------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
+|    Microsoft.Azure.Management.Storage    |    [Reference](/dotnet/api/microsoft.azure.management.storage)    |    [Nuget](https://www.nuget.org/packages/Microsoft.Azure.Management.Storage/)    |    [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/storage/Microsoft.Azure.Management.Storage)    |
