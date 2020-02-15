@@ -70,9 +70,9 @@ Other libraries require your application to run with a [service principal](https
 
 Now that the service principal is created, two options are available to authenticate to the service principal to create and manage resources.
 
-For both options you will need to add the following nuget packages to your project.
+For both options you will need to add the following NuGet packages to your project.
 
-```
+```powershell
 Install-Package Microsoft.Azure.Management.Fluent
 Install-Package Microsoft.Azure.Management.ResourceManager.Fluent
 ```

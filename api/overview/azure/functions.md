@@ -28,7 +28,7 @@ Install-Package Microsoft.Azure.WebJobs.Extensions.DurableTask
 
 ### .NET Core CLI
 
-```bash
+```dotnetcli
 dotnet add package Microsoft.Azure.WebJobs.Extensions.DurableTask
 ```
 

@@ -25,7 +25,7 @@ From your Visual Studio project, open the Package Manager Console by clicking **
 
 In the Package Manager Console, execute the following commands:
 
-```
+```powershell
   Install-Package Microsoft.Azure.Management.HDInsight
   Install-Package Microsoft.Azure.Management.Fluent
   Install-Package Microsoft.Azure.Management.ResourceManager.Fluent
@@ -297,6 +297,7 @@ The output should look like:
 <Cluster Name>
 /subscriptions/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/resourceGroups/<Resource Group Name>/providers/Microsoft.HDInsight/clusters/<Cluster Name>
 ```
+
 > [!NOTE]
 > The return value of `get`, stored in variable `myCluster`, is of type `Microsoft.Azure.Management.HDInsight.ModelsCluster`. A full list of this object's properties can be found [here](https://docs.microsoft.com/en-us/dotnet/api/microsoft.azure.management.hdinsight.models.cluster?view=azure-dotnet-preview).
 
@@ -490,7 +491,7 @@ Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Manag
 Install-Package Microsoft.Azure.Management.HDInsight.Job
 ```
 
-```bash
+```dotnetcli
 dotnet add package Microsoft.Azure.Management.HDInsight.Job
 ```
 

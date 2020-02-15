@@ -24,7 +24,7 @@ Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Relay
 Install-Package Microsoft.Azure.Relay
 ```
 
-```bash
+```dotnetcli
 dotnet add package Microsoft.Azure.Relay
 ```
 

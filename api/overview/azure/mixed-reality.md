@@ -31,7 +31,7 @@ Install-Package Microsoft.Azure.Management.MixedReality
 
 #### .NET Core CLI
 
-```bash
+```dotnetcli
 dotnet add package Microsoft.Azure.Management.MixedReality
 ```
 

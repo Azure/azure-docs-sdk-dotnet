@@ -24,7 +24,7 @@ Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Searc
 Install-Package Microsoft.Azure.Search
 ```
 
-```bash
+```dotnetcli
 dotnet add package Microsoft.Azure.Search
 ```
 
@@ -64,7 +64,7 @@ Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Manag
 Install-Package Microsoft.Azure.Management.Search
 ```
 
-```bash
+```dotnetcli
 dotnet add package Microsoft.Azure.Management.Search
 ```
 

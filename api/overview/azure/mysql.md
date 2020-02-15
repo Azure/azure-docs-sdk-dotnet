@@ -26,7 +26,7 @@ Install-Package MySql.Data
 
 #### .NET Core CLI
 
-```bash
+```dotnetcli
 dotnet add package MySql.Data
 ```
 
