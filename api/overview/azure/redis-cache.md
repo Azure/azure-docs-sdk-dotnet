@@ -24,7 +24,7 @@ Install the [NuGet package](https://www.nuget.org/packages/StackExchange.Redis) 
 Install-Package StackExchange.Redis
 ```
 
-```bash
+```dotnetcli
 dotnet add package StackExchange.Redis
 ```
 
@@ -63,7 +63,7 @@ Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Manag
 Install-Package Microsoft.Azure.Management.Redis.Fluent
 ```
 
-```bash
+```dotnetcli
 dotnet add package Microsoft.Azure.Management.Redis.Fluent
 ```
 

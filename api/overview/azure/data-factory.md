@@ -27,7 +27,7 @@ Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Manag
 Install-Package Microsoft.Azure.Management.DataFactory -Prerelease
 ```
 
-```bash
+```dotnetcli
 # Be sure to include the most recent version from the NuGet package page
 dotnet add package Microsoft.Azure.Management.DataFactory --version 0.2.0-preview
 ```
@@ -67,7 +67,7 @@ Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Manag
 Install-Package Microsoft.Azure.Management.DataFactories
 ```
 
-```bash
+```dotnetcli
 dotnet add package Microsoft.Azure.Management.DataFactories
 ```
 

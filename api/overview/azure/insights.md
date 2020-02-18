@@ -24,7 +24,7 @@ Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Application
 Install-Package Microsoft.ApplicationInsights 
 ```
 
-```bash
+```dotnetcli
 dotnet add package Microsoft.ApplicationInsights 
 ```
 

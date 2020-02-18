@@ -26,7 +26,7 @@ Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Event
 Install-Package Microsoft.Azure.EventHubs
 ```
 
-```bash
+```dotnetcli
 dotnet add package Microsoft.Azure.EventHubs
 ```
 
@@ -61,7 +61,7 @@ Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Manag
 Install-Package Microsoft.Azure.Management.EventHub
 ```
 
-```bash
+```dotnetcli
 dotnet add package Microsoft.Azure.Management.EventHub
 ```
 

@@ -28,7 +28,7 @@ Install-Package Microsoft.Azure.Management.DataShare
 
 #### .NET Core CLI
 
-```bash
+```dotnetcli
 dotnet add package Microsoft.Azure.Management.DataShare
 ```
 

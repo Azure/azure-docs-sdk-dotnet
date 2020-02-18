@@ -28,7 +28,7 @@ Install-Package System.Data.SqlClient
 
 #### .NET Core CLI
 
-```bash
+```dotnetcli
 dotnet add package System.Data.SqlClient
 ```
 
@@ -81,7 +81,7 @@ Install-Package Microsoft.Azure.Management.Sql.Fluent
 
 #### .NET Core command line
 
-```bash
+```dotnetcli
 dotnet add package Microsoft.Azure.Management.Sql.Fluent
 ```
 

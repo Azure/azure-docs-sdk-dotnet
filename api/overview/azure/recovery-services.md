@@ -25,14 +25,13 @@ Install-Package Microsoft.Azure.Management.RecoveryServices.Backup
 
 #### .NET Core CLI
 
-```bash
+```dotnetcli
 dotnet add package Microsoft.Azure.Management.RecoveryServices
 dotnet add package Microsoft.Azure.Management.RecoveryServices.Backup
 ```
 
 > [!div class="nextstepaction"]
 > [Explore the management APIs](/dotnet/api/overview/azure/recoveryservices/management)
-
 
 ## Code Example
 

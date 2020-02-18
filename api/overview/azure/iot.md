@@ -33,9 +33,10 @@ Install the [NuGet package]( https://www.nuget.org/packages/Microsoft.Azure.Devi
 Install-Package Microsoft.Azure.Devices.Client
 ```
 
-```bash
+```dotnetcli
 dotnet add package Microsoft.Azure.Devices.Client
 ```
+
 ### Code Examples 
 
 This example connects to the IoT Hub and sends one message per second.

@@ -52,7 +52,7 @@ Install-Package Microsoft.Azure.Management.ServiceBus.Fluent
 
 #### .NET Core CLI
 
-```bash
+```dotnetcli
 dotnet add package Microsoft.Azure.Management.ServiceBus.Fluent
 ```
 

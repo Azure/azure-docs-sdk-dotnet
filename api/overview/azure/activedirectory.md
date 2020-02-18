@@ -28,7 +28,7 @@ Install-Package Microsoft.IdentityModel.Clients.ActiveDirectory
 
 #### .NET Core CLI
 
-```bash
+```dotnetcli
 dotnet add package Microsoft.IdentityModel.Clients.ActiveDirectory
 ```
 

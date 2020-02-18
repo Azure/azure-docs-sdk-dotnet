@@ -57,6 +57,7 @@ Let's get the sample code for this walkthrough and hook it up to your Azure Cosm
     "authKey": "AUTHKEYVALUE",
     "endpoint": "ENDPOINTVALUE",
     ```
+
     Replace **AUTHKEYVALUE** and **ENDPOINTVALUE** with the values you noted earlier.
 
 4. Press **F5** to restore the project's NuGet packages, build the project, and run it locally.

@@ -27,7 +27,7 @@ Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Manag
 Install-Package Microsoft.Azure.Management.Cdn.Fluent
 ```
 
-```bash
+```dotnetcli
 dotnet add package Microsoft.Azure.Management.Cdn.Fluent
 ```
 

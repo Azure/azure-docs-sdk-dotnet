@@ -26,7 +26,7 @@ Install-Package Npgsql
 
 #### .NET Core CLI
 
-```bash
+```dotnetcli
 dotnet add package Npgsql
 ```
 

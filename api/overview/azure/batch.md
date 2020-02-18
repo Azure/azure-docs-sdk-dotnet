@@ -28,7 +28,7 @@ Install-Package Azure.Batch
 
 #### .NET Core CLI
 
-```bash
+```dotnetcli
 dotnet add package Azure.Batch
 ```
 
@@ -81,7 +81,7 @@ Install-Package Microsoft.Azure.Management.Batch
 
 #### .NET Core CLI
 
-```bash
+```dotnetcli
 dotnet add package Microsoft.Azure.Management.Batch
 ```
 
