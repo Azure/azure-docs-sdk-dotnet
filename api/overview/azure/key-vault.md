@@ -26,7 +26,7 @@ Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.KeyVa
 Install-Package Microsoft.Azure.KeyVault
 ```
 
-```bash
+```dotnetcli
 dotnet add package Microsoft.Azure.KeyVault
 ```
 
@@ -57,7 +57,7 @@ Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Manag
 Install-Package Microsoft.Azure.Management.KeyVault.Fluent
 ```
 
-```bash
+```dotnetcli
 dotnet add package Microsoft.Azure.Management.KeyVault.Fluent
 ```
 

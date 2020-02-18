@@ -23,7 +23,7 @@ Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Notif
 Install-Package Microsoft.Azure.NotificationHubs
 ```
 
-```bash
+```dotnetcli
 dotnet add package Microsoft.Azure.NotificationHubs
 ```
 
@@ -51,7 +51,7 @@ Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Manag
 Install-Package Microsoft.Azure.Management.NotificationHubs
 ```
 
-```bash
+```dotnetcli
 dotnet add package Microsoft.Azure.Management.NotificationHubs
 ```
 

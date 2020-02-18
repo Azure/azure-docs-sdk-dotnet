@@ -26,7 +26,7 @@ Install-Package Microsoft.Azure.EventGrid
 
 #### .NET Core CLI
 
-```bash
+```dotnetcli
 dotnet add package Microsoft.Azure.EventGrid 
 ```
 
@@ -127,7 +127,7 @@ Install-Package Microsoft.Azure.Management.EventGrid
 
 #### .NET Core CLI
 
-```bash
+```dotnetcli
 dotnet add package Microsoft.Azure.Management.EventGrid
 ```
 

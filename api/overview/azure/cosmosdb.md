@@ -30,7 +30,7 @@ Install-Package Microsoft.Azure.DocumentDB.Core
 
 #### .NET Core CLI
 
-```bash
+```dotnetcli
 dotnet add package Microsoft.Azure.DocumentDB.Core
 ```
 
@@ -44,10 +44,9 @@ Install-Package Microsoft.Azure.Cosmos
 
 #### .NET Core CLI
 
-```bash
+```dotnetcli
 dotnet add package Microsoft.Azure.Cosmos
 ```
-
 
 ### Code Example
 

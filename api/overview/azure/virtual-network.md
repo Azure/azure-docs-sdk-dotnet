@@ -23,11 +23,12 @@ Install-Package Microsoft.Azure.Management.Network.Fluent
 
 #### .NET Core CLI
 
-```bash
+```dotnetcli
 dotnet add package Microsoft.Azure.Management.Network.Fluent
 ```
 
 ### Code Example
+
 This example shows how you can create a virtual network.
 
 ```csharp

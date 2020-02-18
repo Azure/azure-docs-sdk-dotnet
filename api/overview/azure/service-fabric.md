@@ -27,7 +27,7 @@ Install the [NuGet package](https://www.nuget.org/packages/Microsoft.ServiceFabr
 Install-Package Microsoft.ServiceFabric
 ```
 
-```bash
+```dotnetcli
 dotnet add package Microsoft.ServiceFabric
 ```
 
@@ -109,7 +109,7 @@ Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Manag
 Install-Package Microsoft.Azure.Management.ServiceFabric
 ```
 
-```bash
+```dotnetcli
 dotnet add package Microsoft.Azure.Management.ServiceFabric
 ```
 
