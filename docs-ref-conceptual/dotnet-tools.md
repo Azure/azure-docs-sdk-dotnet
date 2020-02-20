@@ -11,6 +11,9 @@ ms.custom: azure-dotnet-devcenter, azure-dotnet-devcenter-authored, azure-dotnet
 
 Azure libraries for .NET are implemented as [NuGet packages](https://www.nuget.org/packages?q=windowsazureofficial). See the [API Reference](/dotnet/api/overview/azure/?view=azure-dotnet) for installation instructions organized by Azure service.
 
+> [!IMPORTANT]
+> Beginning with Visual Studio 2017, Azure SDK for .NET has been deprecated in favor of the Azure development workload in Visual Studio. The Azure development workload includes the functionality of the Azure SDK for .NET. For information about Azure SDK for .NET support, see [Support and Retirement Information for the Azure SDK for .NET and APIs](https://docs.microsoft.com/previous-versions/azure/reference/dn479282(v=azure.100)).
+
 ## Development tools
 
 Visual Studio has tooling for many Azure services built-in. Some Azure services have additional tools or emulators available, such as [Azure Storage Explorer](https://azure.microsoft.com/en-us/features/storage-explorer/). See the documentation for your Azure service for any additional tools, if necessary.
@@ -27,7 +30,7 @@ These instructions install the recommended starting development environment for 
     <td>
         Visual Studio versions 2017 and later have built-in support for Azure development. The below steps describe enabling Azure development support in Visual Studio.<br />
         <br />
-        For Visual Studio 2015 and earlier, [follow these instructions](dotnet-sdk-vs2015-install.md).
+        For Visual Studio 2015 and earlier, <a href="dotnet-sdk-vs2015-install.md">follow these instructions</a>.
     </td>
   </tr>
 </table>
