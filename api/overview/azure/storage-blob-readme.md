@@ -12,7 +12,7 @@ ms.technology: azure
 ms.service: storage
 ---
 
-# Azure Storage Blobs for .NET README - Version 12.3.0
+# Azure Storage Blobs for .NET Readme - Version 12.3.0
 
 > Server Version: 2019-07-07 and 2019-02-02
 
