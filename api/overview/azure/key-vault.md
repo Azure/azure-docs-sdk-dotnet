@@ -1,7 +1,7 @@
 ---
 title: Azure Key Vault libraries for .NET
 description: Reference for Azure Key Vault libraries for .NET
-ms.date: 10/19/2017
+ms.date: 03/04/2020
 ms.topic: reference
 ms.service: key-vault
 ---
@@ -10,36 +10,39 @@ ms.service: key-vault
 
 ## Overview
 
-Azure Key Vault helps safeguard cryptographic keys and secrets used by cloud applications and services.
-
-Read more about [What is Key Vault?](/azure/key-vault/key-vault-whatis) then [Get started with Azure Key Vault](/azure/key-vault/key-vault-get-started) or learn how to [Use Key Vault from a web app](/azure/key-vault/key-vault-use-from-web-application).
+Azure Key Vault helps safeguard cryptographic keys and secrets used by cloud applications and services.  Read more at [What is Key Vault?](/azure/key-vault/key-vault-whatis,) then learn how to use the SDK at [Get started with the Azure Key Vault client library for .NET (SDK v4)](/azure/key-vault/quick-create-net).
 
 ## Client library
 
-Use the client library to manage keys and related assets such as certificates and secrets.
-
-Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.KeyVault) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
+Client libraries to manage keys, secrets and certificates can be installed from NuGet, either directly from the Visual Studio [Package Manager console][/nuget/consume-packages/install-use-packages-powershell] or with the [.NET Core CLI][/dotnet/core/tools/].
+- [Azure.Security.KeyVault.Keys](https://www.nuget.org/packages/Azure.Security.KeyVault.Keys/)
+- [Azure.Security.KeyVault.Secrets](https://www.nuget.org/packages/Azure.Security.KeyVault.Secrets/)
+- [Azure.Security.KeyVault.Certificates](https://www.nuget.org/packages/Azure.Security.KeyVault.Certificates/)
 
 #### Visual Studio Package Manager
 
 ```powershell
-Install-Package Microsoft.Azure.KeyVault
+Install-Package Azure.Security.KeyVault.Keys
+Install-Package Azure.Security.KeyVault.Secrets
+Install-Package Azure.Security.KeyVault.Certificates
 ```
 
 ```dotnetcli
-dotnet add package Microsoft.Azure.KeyVault
+dotnet add package Azure.Security.KeyVault.Keys
+dotnet add package Azure.Security.KeyVault.Secrets
+dotnet add package Azure.Security.KeyVault.Certificates
 ```
 
 ### Example
 
-The following example retrieves the secret for a specific key that is identified in the application settings.
+The following example uses [Azure.Security.KeyVault.Secrets](https://www.nuget.org/packages/Azure.Security.KeyVault.Secrets/) to retrieve the secret for a specific key that is identified in the application settings.
 
 ```csharp
-KeyVaultClient kv = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(securityToken));
+var client = new SecretClient(new Uri(kvUri), new DefaultAzureCredential());
 
-SecretBundle sec = await kv.GetSecretAsync(WebConfigurationManager.AppSettings["SecretUri"]);
+KeyVaultSecret secret = client.GetSecret(secretName);
 
-// sec.Value holds the secret
+// secret.Value holds the secret
 ```
 
 > [!div class="nextstepaction"]
