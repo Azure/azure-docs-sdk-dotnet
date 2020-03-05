@@ -14,7 +14,8 @@ Azure Key Vault helps safeguard cryptographic keys and secrets used by cloud app
 
 ## Client library
 
-Client libraries to manage keys, secrets and certificates can be installed from NuGet, either directly from the Visual Studio [Package Manager console][/nuget/consume-packages/install-use-packages-powershell] or with the [.NET Core CLI][/dotnet/core/tools/].
+Client libraries to manage keys, secrets and certificates can be installed from NuGet, either directly from the Visual Studio [Package Manager console](/nuget/consume-packages/install-use-packages-powershell) or with the [.NET Core CLI](/dotnet/core/tools/).
+
 - [Azure.Security.KeyVault.Keys](https://www.nuget.org/packages/Azure.Security.KeyVault.Keys/)
 - [Azure.Security.KeyVault.Secrets](https://www.nuget.org/packages/Azure.Security.KeyVault.Secrets/)
 - [Azure.Security.KeyVault.Certificates](https://www.nuget.org/packages/Azure.Security.KeyVault.Certificates/)
