@@ -79,7 +79,7 @@ job.GetExecutionProgressTask(CancellationToken.None).Wait();
 ```
 
 > [!div class="nextstepaction"]
-> [Explore the client APIs](/dotnet/api/overview/azure/mediaservices/client)
+> [Explore the client APIs](/dotnet/api/overview/azure/mediaservices/client(legacy))
 
 ## Samples
 
