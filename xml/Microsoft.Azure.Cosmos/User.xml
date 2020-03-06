@@ -42,9 +42,10 @@
       </Docs>
     </Member>
     <Member MemberName="CreatePermissionAsync">
-      <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.PermissionResponse&gt; CreatePermissionAsync (Microsoft.Azure.Cosmos.PermissionProperties permissionProperties, Nullable&lt;int&gt; tokenExpiryInSeconds = default, Microsoft.Azure.Cosmos.RequestOptions requestOptions = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.PermissionResponse&gt; CreatePermissionAsync (Microsoft.Azure.Cosmos.PermissionProperties permissionProperties, int? tokenExpiryInSeconds = default, Microsoft.Azure.Cosmos.RequestOptions requestOptions = default, System.Threading.CancellationToken cancellationToken = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Azure.Cosmos.PermissionResponse&gt; CreatePermissionAsync(class Microsoft.Azure.Cosmos.PermissionProperties permissionProperties, valuetype System.Nullable`1&lt;int32&gt; tokenExpiryInSeconds, class Microsoft.Azure.Cosmos.RequestOptions requestOptions, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Cosmos.User.CreatePermissionAsync(Microsoft.Azure.Cosmos.PermissionProperties,System.Nullable{System.Int32},Microsoft.Azure.Cosmos.RequestOptions,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride Function CreatePermissionAsync (permissionProperties As PermissionProperties, Optional tokenExpiryInSeconds As Nullable(Of Integer) = null, Optional requestOptions As RequestOptions = null, Optional cancellationToken As CancellationToken = null) As Task(Of PermissionResponse)" />
       <MemberSignature Language="F#" Value="abstract member CreatePermissionAsync : Microsoft.Azure.Cosmos.PermissionProperties * Nullable&lt;int&gt; * Microsoft.Azure.Cosmos.RequestOptions * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.PermissionResponse&gt;" Usage="user.CreatePermissionAsync (permissionProperties, tokenExpiryInSeconds, requestOptions, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -88,6 +89,7 @@
       <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.UserResponse&gt; DeleteAsync (Microsoft.Azure.Cosmos.RequestOptions requestOptions = default, System.Threading.CancellationToken cancellationToken = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Azure.Cosmos.UserResponse&gt; DeleteAsync(class Microsoft.Azure.Cosmos.RequestOptions requestOptions, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Cosmos.User.DeleteAsync(Microsoft.Azure.Cosmos.RequestOptions,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride Function DeleteAsync (Optional requestOptions As RequestOptions = null, Optional cancellationToken As CancellationToken = null) As Task(Of UserResponse)" />
       <MemberSignature Language="F#" Value="abstract member DeleteAsync : Microsoft.Azure.Cosmos.RequestOptions * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.UserResponse&gt;" Usage="user.DeleteAsync (requestOptions, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -164,6 +166,7 @@
       <MemberSignature Language="C#" Value="public abstract Microsoft.Azure.Cosmos.FeedIterator&lt;T&gt; GetPermissionQueryIterator&lt;T&gt; (Microsoft.Azure.Cosmos.QueryDefinition queryDefinition, string continuationToken = default, Microsoft.Azure.Cosmos.QueryRequestOptions requestOptions = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Azure.Cosmos.FeedIterator`1&lt;!!T&gt; GetPermissionQueryIterator&lt;T&gt;(class Microsoft.Azure.Cosmos.QueryDefinition queryDefinition, string continuationToken, class Microsoft.Azure.Cosmos.QueryRequestOptions requestOptions) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Cosmos.User.GetPermissionQueryIterator``1(Microsoft.Azure.Cosmos.QueryDefinition,System.String,Microsoft.Azure.Cosmos.QueryRequestOptions)" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride Function GetPermissionQueryIterator(Of T) (queryDefinition As QueryDefinition, Optional continuationToken As String = null, Optional requestOptions As QueryRequestOptions = null) As FeedIterator(Of T)" />
       <MemberSignature Language="F#" Value="abstract member GetPermissionQueryIterator : Microsoft.Azure.Cosmos.QueryDefinition * string * Microsoft.Azure.Cosmos.QueryRequestOptions -&gt; Microsoft.Azure.Cosmos.FeedIterator&lt;'T&gt;" Usage="user.GetPermissionQueryIterator (queryDefinition, continuationToken, requestOptions)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -197,21 +200,6 @@
         <remarks>
             Reading permissions will generate a new ResourceTokens. Prior ResourceTokens will still be valid.
             </remarks>
-        <example>
-            This create the type feed iterator for permissions with queryDefinition as input.
-            <code language="c#"><![CDATA[
-            string queryText = "SELECT * FROM c where c.id like @testId";
-            QueryDefinition queryDefinition = new QueryDefinition(queryText);
-            queryDefinition.WithParameter("@testId", "testPermissionId");
-            FeedIterator<PermissionProperties> resultSet = this.user.GetPermissionQueryIterator<PermissionProperties>(queryDefinition);
-            while (feedIterator.HasMoreResults)
-            {
-                foreach (PermissionProperties properties in await feedIterator.ReadNextAsync())
-                {
-                    Console.WriteLine(properties.Id);
-                }
-            }
-            ]]></code></example>
         <example>
             This create the type feed iterator for permissions with queryDefinition as input.
             <code language="c#"><![CDATA[
@@ -264,27 +252,6 @@
             </summary>
         <returns>An iterator to go through the permission</returns>
         <remarks>To be added.</remarks>
-        <example>
-            1. This create the type feed iterator for permission with queryText as input,
-            <code language="c#"><![CDATA[
-            string queryText = "SELECT * FROM c where c.id like '%testId%'";
-            FeedIterator<PermissionProperties> resultSet = this.users.GetPermissionQueryIterator<PermissionProperties>(queryText);
-            while (feedIterator.HasMoreResults)
-            {
-                FeedResponse<PermissionProperties> iterator =
-                await feedIterator.ReadNextAsync(this.cancellationToken);
-            }
-            ]]></code></example>
-        <example>
-            2. This create the type feed iterator for permissions without queryText, retrieving all permissions.
-            <code language="c#"><![CDATA[
-            FeedIterator<PermissionProperties> resultSet = this.user.GetPermissionQueryIterator<PermissionProperties>();
-            while (feedIterator.HasMoreResults)
-            {
-                FeedResponse<PermissionProperties> iterator =
-                await feedIterator.ReadNextAsync(this.cancellationToken);
-            }
-            ]]></code></example>
         <example>
             1. This create the type feed iterator for permission with queryText as input,
             <code language="c#"><![CDATA[
@@ -343,6 +310,7 @@
       <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.UserResponse&gt; ReadAsync (Microsoft.Azure.Cosmos.RequestOptions requestOptions = default, System.Threading.CancellationToken cancellationToken = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Azure.Cosmos.UserResponse&gt; ReadAsync(class Microsoft.Azure.Cosmos.RequestOptions requestOptions, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Cosmos.User.ReadAsync(Microsoft.Azure.Cosmos.RequestOptions,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride Function ReadAsync (Optional requestOptions As RequestOptions = null, Optional cancellationToken As CancellationToken = null) As Task(Of UserResponse)" />
       <MemberSignature Language="F#" Value="abstract member ReadAsync : Microsoft.Azure.Cosmos.RequestOptions * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.UserResponse&gt;" Usage="user.ReadAsync (requestOptions, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -383,6 +351,7 @@
       <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.UserResponse&gt; ReplaceAsync (Microsoft.Azure.Cosmos.UserProperties userProperties, Microsoft.Azure.Cosmos.RequestOptions requestOptions = default, System.Threading.CancellationToken cancellationToken = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Azure.Cosmos.UserResponse&gt; ReplaceAsync(class Microsoft.Azure.Cosmos.UserProperties userProperties, class Microsoft.Azure.Cosmos.RequestOptions requestOptions, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Cosmos.User.ReplaceAsync(Microsoft.Azure.Cosmos.UserProperties,Microsoft.Azure.Cosmos.RequestOptions,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride Function ReplaceAsync (userProperties As UserProperties, Optional requestOptions As RequestOptions = null, Optional cancellationToken As CancellationToken = null) As Task(Of UserResponse)" />
       <MemberSignature Language="F#" Value="abstract member ReplaceAsync : Microsoft.Azure.Cosmos.UserProperties * Microsoft.Azure.Cosmos.RequestOptions * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.UserResponse&gt;" Usage="user.ReplaceAsync (userProperties, requestOptions, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -424,9 +393,10 @@
       </Docs>
     </Member>
     <Member MemberName="UpsertPermissionAsync">
-      <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.PermissionResponse&gt; UpsertPermissionAsync (Microsoft.Azure.Cosmos.PermissionProperties permissionProperties, Nullable&lt;int&gt; tokenExpiryInSeconds = default, Microsoft.Azure.Cosmos.RequestOptions requestOptions = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.PermissionResponse&gt; UpsertPermissionAsync (Microsoft.Azure.Cosmos.PermissionProperties permissionProperties, int? tokenExpiryInSeconds = default, Microsoft.Azure.Cosmos.RequestOptions requestOptions = default, System.Threading.CancellationToken cancellationToken = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Azure.Cosmos.PermissionResponse&gt; UpsertPermissionAsync(class Microsoft.Azure.Cosmos.PermissionProperties permissionProperties, valuetype System.Nullable`1&lt;int32&gt; tokenExpiryInSeconds, class Microsoft.Azure.Cosmos.RequestOptions requestOptions, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Cosmos.User.UpsertPermissionAsync(Microsoft.Azure.Cosmos.PermissionProperties,System.Nullable{System.Int32},Microsoft.Azure.Cosmos.RequestOptions,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride Function UpsertPermissionAsync (permissionProperties As PermissionProperties, Optional tokenExpiryInSeconds As Nullable(Of Integer) = null, Optional requestOptions As RequestOptions = null, Optional cancellationToken As CancellationToken = null) As Task(Of PermissionResponse)" />
       <MemberSignature Language="F#" Value="abstract member UpsertPermissionAsync : Microsoft.Azure.Cosmos.PermissionProperties * Nullable&lt;int&gt; * Microsoft.Azure.Cosmos.RequestOptions * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.PermissionResponse&gt;" Usage="user.UpsertPermissionAsync (permissionProperties, tokenExpiryInSeconds, requestOptions, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
