@@ -13,7 +13,7 @@ Azure libraries for .NET are implemented as [NuGet packages](https://www.nuget.o
 
 ## Development tools
 
-Visual Studio has tooling for many Azure services built-in. Some Azure services have additional tools or emulators available, such as [Azure Storage Explorer](https://azure.microsoft.com/en-us/features/storage-explorer/). See the documentation for your Azure service for any additional tools, if necessary.
+Visual Studio has tooling for many Azure services built-in. Some Azure services have additional tools or emulators available, such as [Azure Storage Explorer](https://azure.microsoft.com/features/storage-explorer/). See the documentation for your Azure service for any additional tools, if necessary.
 
 These instructions install the recommended starting development environment for your operating system. 
 
@@ -27,7 +27,7 @@ These instructions install the recommended starting development environment for 
     <td>
         Visual Studio versions 2017 and later have built-in support for Azure development. The below steps describe enabling Azure development support in Visual Studio.<br />
         <br />
-        For Visual Studio 2015 and earlier, [follow these instructions](dotnet-sdk-vs2015-install.md).
+        For Visual Studio 2015 and earlier, <a href="dotnet-sdk-vs2015-install.md">follow these instructions</a>.
     </td>
   </tr>
 </table>
