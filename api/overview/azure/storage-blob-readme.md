@@ -5,14 +5,14 @@ keywords: Azure, .NET, SDK, API, Storage, Queue
 author: maggiepint
 ms.author: magpint
 manager: twolley
-ms.date: 02/21/2020
+ms.date: 03/12/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.service: storage
 ---
 
-# Azure Storage Blobs for .NET Readme - Version 12.3.0
+# Azure Storage Blobs for .NET Readme - Version 12.4.0
 
 > Server Version: 2019-07-07 and 2019-02-02
 

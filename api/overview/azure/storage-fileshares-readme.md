@@ -5,7 +5,7 @@ keywords: Azure, .NET, SDK, API, Storage, Queue
 author: maggiepint
 ms.author: magpint
 manager: twolley
-ms.date: 02/21/2020
+ms.date: 03/12/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -13,7 +13,7 @@ ms.service: storage
 ---
 
 
-# Azure File Shares for .NET Readme - Version 12.1.0
+# Azure File Shares for .NET Readme - Version 12.2.0
 
 > Server Version: 2019-07-07
 

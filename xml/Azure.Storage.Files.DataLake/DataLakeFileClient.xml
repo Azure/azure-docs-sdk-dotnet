@@ -281,6 +281,7 @@
         <summary>
              The <see cref="M:Azure.Storage.Files.DataLake.DataLakeFileClient.Append(System.IO.Stream,System.Int64,System.Byte[],System.String,System.IProgress{System.Int64},System.Threading.CancellationToken)" /> operation uploads data to be appended to a file.  Data can only be appended to a file.
              To apply perviously uploaded data to a file, call Flush Data.
+             Append is currently limited to 100 MB per request.  To upload large files all at once, consider using <see cref="M:Azure.Storage.Files.DataLake.DataLakeFileClient.Upload(System.IO.Stream)" />.
             
              For more information, see <see href="https://docs.microsoft.com/en-us/rest/api/storageservices/datalakestoragegen2/path/update" />.
              </summary>
@@ -347,6 +348,7 @@
         <summary>
              The <see cref="M:Azure.Storage.Files.DataLake.DataLakeFileClient.AppendAsync(System.IO.Stream,System.Int64,System.Byte[],System.String,System.IProgress{System.Int64},System.Threading.CancellationToken)" /> operation uploads data to be appended to a file.  Data can only be appended to a file.
              To apply perviously uploaded data to a file, call Flush Data.
+             Append is currently limited to 100 MB per request.  To upload large files all at once, consider using <see cref="M:Azure.Storage.Files.DataLake.DataLakeFileClient.UploadAsync(System.IO.Stream)" />.
             
              For more information, see <see href="https://docs.microsoft.com/en-us/rest/api/storageservices/datalakestoragegen2/path/update" />.
              </summary>
@@ -388,7 +390,7 @@
              new file or directory..
              </param>
         <param name="metadata">
-             Optional custom metadata to set for this file or directory..
+             Optional custom metadata to set for this file or directory.
              </param>
         <param name="permissions">
              Optional and only valid if Hierarchical Namespace is enabled for the account. Sets POSIX access
@@ -407,14 +409,16 @@
              </param>
         <param name="conditions">
              Optional <see cref="T:Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions" /> to add
-             conditions on the creation of this file or directory..
+             conditions on the creation of this file or directory.
              </param>
         <param name="cancellationToken">
              Optional <see cref="T:System.Threading.CancellationToken" /> to propagate
              notifications that the operation should be cancelled.
              </param>
         <summary>
-             The <see cref="M:Azure.Storage.Files.DataLake.DataLakeFileClient.Create(Azure.Storage.Files.DataLake.Models.PathHttpHeaders,System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String,Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions,System.Threading.CancellationToken)" /> operation creates a file or directory.
+             The <see cref="M:Azure.Storage.Files.DataLake.DataLakeFileClient.Create(Azure.Storage.Files.DataLake.Models.PathHttpHeaders,System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String,Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions,System.Threading.CancellationToken)" /> operation creates a file.
+             If the file already exists, it will be overwritten.  If you don't intent to overwrite
+             an existing file, consider using the <see cref="M:Azure.Storage.Files.DataLake.DataLakeFileClient.CreateIfNotExists(Azure.Storage.Files.DataLake.Models.PathHttpHeaders,System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String,System.Threading.CancellationToken)" /> API.
             
              For more information, see https://docs.microsoft.com/en-us/rest/api/storageservices/datalakestoragegen2/path/create.
              </summary>
@@ -456,7 +460,7 @@
              new file or directory..
              </param>
         <param name="metadata">
-             Optional custom metadata to set for this file or directory..
+             Optional custom metadata to set for this file or directory.
              </param>
         <param name="permissions">
              Optional and only valid if Hierarchical Namespace is enabled for the account. Sets POSIX access
@@ -475,14 +479,144 @@
              </param>
         <param name="conditions">
              Optional <see cref="T:Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions" /> to add
-             conditions on the creation of this file or directory..
+             conditions on the creation of this file or directory.
              </param>
         <param name="cancellationToken">
              Optional <see cref="T:System.Threading.CancellationToken" /> to propagate
              notifications that the operation should be cancelled.
              </param>
         <summary>
-             The <see cref="M:Azure.Storage.Files.DataLake.DataLakeFileClient.Create(Azure.Storage.Files.DataLake.Models.PathHttpHeaders,System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String,Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions,System.Threading.CancellationToken)" /> operation creates a file or directory.
+             The <see cref="M:Azure.Storage.Files.DataLake.DataLakeFileClient.Create(Azure.Storage.Files.DataLake.Models.PathHttpHeaders,System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String,Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions,System.Threading.CancellationToken)" /> operation creates a file.
+             If the file already exists, it will be overwritten.  If you don't intent to overwrite
+             an existing file, consider using the <see cref="M:Azure.Storage.Files.DataLake.DataLakeFileClient.CreateIfNotExistsAsync(Azure.Storage.Files.DataLake.Models.PathHttpHeaders,System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String,System.Threading.CancellationToken)" /> API.
+            
+             For more information, see https://docs.microsoft.com/en-us/rest/api/storageservices/datalakestoragegen2/path/create.
+             </summary>
+        <returns>
+             A <see cref="T:Azure.Response`1" /> describing the
+             newly created file.
+             </returns>
+        <remarks>
+             A <see cref="T:Azure.RequestFailedException" /> will be thrown if
+             a failure occurs.
+             </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateIfNotExists">
+      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt; CreateIfNotExists (Azure.Storage.Files.DataLake.Models.PathHttpHeaders httpHeaders = default, System.Collections.Generic.IDictionary&lt;string,string&gt; metadata = default, string permissions = default, string umask = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Storage.Files.DataLake.Models.PathInfo&gt; CreateIfNotExists(class Azure.Storage.Files.DataLake.Models.PathHttpHeaders httpHeaders, class System.Collections.Generic.IDictionary`2&lt;string, string&gt; metadata, string permissions, string umask, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Storage.Files.DataLake.DataLakeFileClient.CreateIfNotExists(Azure.Storage.Files.DataLake.Models.PathHttpHeaders,System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateIfNotExists (Optional httpHeaders As PathHttpHeaders = null, Optional metadata As IDictionary(Of String, String) = null, Optional permissions As String = null, Optional umask As String = null, Optional cancellationToken As CancellationToken = null) As Response(Of PathInfo)" />
+      <MemberSignature Language="F#" Value="override this.CreateIfNotExists : Azure.Storage.Files.DataLake.Models.PathHttpHeaders * System.Collections.Generic.IDictionary&lt;string, string&gt; * string * string * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;" Usage="dataLakeFileClient.CreateIfNotExists (httpHeaders, metadata, permissions, umask, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Storage.Files.DataLake</AssemblyName>
+        <AssemblyVersion>12.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="httpHeaders" Type="Azure.Storage.Files.DataLake.Models.PathHttpHeaders" />
+        <Parameter Name="metadata" Type="System.Collections.Generic.IDictionary&lt;System.String,System.String&gt;" />
+        <Parameter Name="permissions" Type="System.String" />
+        <Parameter Name="umask" Type="System.String" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="httpHeaders">
+             Optional standard HTTP header properties that can be set for the
+             new file or directory..
+             </param>
+        <param name="metadata">
+             Optional custom metadata to set for this file or directory..
+             </param>
+        <param name="permissions">
+             Optional and only valid if Hierarchical Namespace is enabled for the account. Sets POSIX access
+             permissions for the file owner, the file owning group, and others. Each class may be granted read,
+             write, or execute permission. The sticky bit is also supported. Both symbolic (rwxrw-rw-) and 4-digit
+             octal notation (e.g. 0766) are supported.
+             </param>
+        <param name="umask">
+             Optional and only valid if Hierarchical Namespace is enabled for the account.
+             When creating a file or directory and the parent folder does not have a default ACL,
+             the umask restricts the permissions of the file or directory to be created. The resulting
+             permission is given by p bitwise-and ^u, where p is the permission and u is the umask. For example,
+             if p is 0777 and u is 0057, then the resulting permission is 0720. The default permission is
+             0777 for a directory and 0666 for a file. The default umask is 0027. The umask must be specified
+             in 4-digit octal notation (e.g. 0766).
+             </param>
+        <param name="cancellationToken">
+             Optional <see cref="T:System.Threading.CancellationToken" /> to propagate
+             notifications that the operation should be cancelled.
+             </param>
+        <summary>
+             The <see cref="M:Azure.Storage.Files.DataLake.DataLakeFileClient.CreateIfNotExists(Azure.Storage.Files.DataLake.Models.PathHttpHeaders,System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String,System.Threading.CancellationToken)" /> operation creates a file.
+             If the file already exists, it is not changed.
+            
+             For more information, see https://docs.microsoft.com/en-us/rest/api/storageservices/datalakestoragegen2/path/create.
+             </summary>
+        <returns>
+             A <see cref="T:Azure.Response`1" /> describing the
+             newly created file.
+             </returns>
+        <remarks>
+             A <see cref="T:Azure.RequestFailedException" /> will be thrown if
+             a failure occurs.
+             </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateIfNotExistsAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;&gt; CreateIfNotExistsAsync (Azure.Storage.Files.DataLake.Models.PathHttpHeaders httpHeaders = default, System.Collections.Generic.IDictionary&lt;string,string&gt; metadata = default, string permissions = default, string umask = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Storage.Files.DataLake.Models.PathInfo&gt;&gt; CreateIfNotExistsAsync(class Azure.Storage.Files.DataLake.Models.PathHttpHeaders httpHeaders, class System.Collections.Generic.IDictionary`2&lt;string, string&gt; metadata, string permissions, string umask, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Storage.Files.DataLake.DataLakeFileClient.CreateIfNotExistsAsync(Azure.Storage.Files.DataLake.Models.PathHttpHeaders,System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateIfNotExistsAsync (Optional httpHeaders As PathHttpHeaders = null, Optional metadata As IDictionary(Of String, String) = null, Optional permissions As String = null, Optional umask As String = null, Optional cancellationToken As CancellationToken = null) As Task(Of Response(Of PathInfo))" />
+      <MemberSignature Language="F#" Value="override this.CreateIfNotExistsAsync : Azure.Storage.Files.DataLake.Models.PathHttpHeaders * System.Collections.Generic.IDictionary&lt;string, string&gt; * string * string * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;&gt;" Usage="dataLakeFileClient.CreateIfNotExistsAsync (httpHeaders, metadata, permissions, umask, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Storage.Files.DataLake</AssemblyName>
+        <AssemblyVersion>12.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="httpHeaders" Type="Azure.Storage.Files.DataLake.Models.PathHttpHeaders" />
+        <Parameter Name="metadata" Type="System.Collections.Generic.IDictionary&lt;System.String,System.String&gt;" />
+        <Parameter Name="permissions" Type="System.String" />
+        <Parameter Name="umask" Type="System.String" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="httpHeaders">
+             Optional standard HTTP header properties that can be set for the
+             new file or directory..
+             </param>
+        <param name="metadata">
+             Optional custom metadata to set for this file or directory..
+             </param>
+        <param name="permissions">
+             Optional and only valid if Hierarchical Namespace is enabled for the account. Sets POSIX access
+             permissions for the file owner, the file owning group, and others. Each class may be granted read,
+             write, or execute permission. The sticky bit is also supported. Both symbolic (rwxrw-rw-) and 4-digit
+             octal notation (e.g. 0766) are supported.
+             </param>
+        <param name="umask">
+             Optional and only valid if Hierarchical Namespace is enabled for the account.
+             When creating a file or directory and the parent folder does not have a default ACL,
+             the umask restricts the permissions of the file or directory to be created. The resulting
+             permission is given by p bitwise-and ^u, where p is the permission and u is the umask. For example,
+             if p is 0777 and u is 0057, then the resulting permission is 0720. The default permission is
+             0777 for a directory and 0666 for a file. The default umask is 0027. The umask must be specified
+             in 4-digit octal notation (e.g. 0766).
+             </param>
+        <param name="cancellationToken">
+             Optional <see cref="T:System.Threading.CancellationToken" /> to propagate
+             notifications that the operation should be cancelled.
+             </param>
+        <summary>
+             The <see cref="M:Azure.Storage.Files.DataLake.DataLakeFileClient.CreateIfNotExistsAsync(Azure.Storage.Files.DataLake.Models.PathHttpHeaders,System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String,System.Threading.CancellationToken)" /> operation creates a file.
+             If the file already exists, it is not changed.
             
              For more information, see https://docs.microsoft.com/en-us/rest/api/storageservices/datalakestoragegen2/path/create.
              </summary>
@@ -569,6 +703,92 @@
         <summary>
              The <see cref="M:Azure.Storage.Files.DataLake.DataLakeFileClient.DeleteAsync(Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions,System.Threading.CancellationToken)" /> operation marks the specified path
              deletion. The path is later deleted during
+             garbage collection.
+            
+             For more information, see <see href="https://docs.microsoft.com/en-us/rest/api/storageservices/datalakestoragegen2/path/delete" />.
+             </summary>
+        <returns>
+             A <see cref="T:Azure.Response" /> on successfully deleting.
+             </returns>
+        <remarks>
+             A <see cref="T:Azure.RequestFailedException" /> will be thrown if
+             a failure occurs.
+             </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DeleteIfExists">
+      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;bool&gt; DeleteIfExists (Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions conditions = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;bool&gt; DeleteIfExists(class Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions conditions, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Storage.Files.DataLake.DataLakeFileClient.DeleteIfExists(Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function DeleteIfExists (Optional conditions As DataLakeRequestConditions = null, Optional cancellationToken As CancellationToken = null) As Response(Of Boolean)" />
+      <MemberSignature Language="F#" Value="override this.DeleteIfExists : Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions * System.Threading.CancellationToken -&gt; Azure.Response&lt;bool&gt;" Usage="dataLakeFileClient.DeleteIfExists (conditions, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Storage.Files.DataLake</AssemblyName>
+        <AssemblyVersion>12.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Response&lt;System.Boolean&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="conditions" Type="Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="conditions">
+             Optional <see cref="T:Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions" /> to add conditions on
+             deleting this path.
+             </param>
+        <param name="cancellationToken">
+             Optional <see cref="T:System.Threading.CancellationToken" /> to propagate
+             notifications that the operation should be cancelled.
+             </param>
+        <summary>
+             The <see cref="M:Azure.Storage.Files.DataLake.DataLakeFileClient.DeleteIfExists(Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions,System.Threading.CancellationToken)" /> operation marks the specified file
+             for deletion, if the file exists. The file is later deleted during
+             garbage collection.
+            
+             For more information, see <see href="https://docs.microsoft.com/en-us/rest/api/storageservices/datalakestoragegen2/path/delete" />.
+             </summary>
+        <returns>
+             A <see cref="T:Azure.Response" /> on successfully deleting.
+             </returns>
+        <remarks>
+             A <see cref="T:Azure.RequestFailedException" /> will be thrown if
+             a failure occurs.
+             </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DeleteIfExistsAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;bool&gt;&gt; DeleteIfExistsAsync (Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions conditions = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;bool&gt;&gt; DeleteIfExistsAsync(class Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions conditions, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Storage.Files.DataLake.DataLakeFileClient.DeleteIfExistsAsync(Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function DeleteIfExistsAsync (Optional conditions As DataLakeRequestConditions = null, Optional cancellationToken As CancellationToken = null) As Task(Of Response(Of Boolean))" />
+      <MemberSignature Language="F#" Value="override this.DeleteIfExistsAsync : Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;bool&gt;&gt;" Usage="dataLakeFileClient.DeleteIfExistsAsync (conditions, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Storage.Files.DataLake</AssemblyName>
+        <AssemblyVersion>12.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&lt;System.Boolean&gt;&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="conditions" Type="Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="conditions">
+             Optional <see cref="T:Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions" /> to add conditions on
+             deleting this path.
+             </param>
+        <param name="cancellationToken">
+             Optional <see cref="T:System.Threading.CancellationToken" /> to propagate
+             notifications that the operation should be cancelled.
+             </param>
+        <summary>
+             The <see cref="M:Azure.Storage.Files.DataLake.DataLakeFileClient.DeleteIfExistsAsync(Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions,System.Threading.CancellationToken)" /> operation marks the specified file
+             for deletion, if the file exists. The file is later deleted during
              garbage collection.
             
              For more information, see <see href="https://docs.microsoft.com/en-us/rest/api/storageservices/datalakestoragegen2/path/delete" />.
@@ -918,6 +1138,29 @@
              A <see cref="T:Azure.RequestFailedException" /> will be thrown if
              a failure occurs.
              </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MaxUploadBytes">
+      <MemberSignature Language="C#" Value="public virtual int MaxUploadBytes { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 MaxUploadBytes" />
+      <MemberSignature Language="DocId" Value="P:Azure.Storage.Files.DataLake.DataLakeFileClient.MaxUploadBytes" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable ReadOnly Property MaxUploadBytes As Integer" />
+      <MemberSignature Language="F#" Value="member this.MaxUploadBytes : int" Usage="Azure.Storage.Files.DataLake.DataLakeFileClient.MaxUploadBytes" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Storage.Files.DataLake</AssemblyName>
+        <AssemblyVersion>12.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets the maximum number of bytes that can be sent in a call
+            to <see cref="M:Azure.Storage.Files.DataLake.DataLakeFileClient.UploadAsync(System.IO.Stream,Azure.Storage.Files.DataLake.Models.PathHttpHeaders,Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions,System.IProgress{System.Int64},Azure.Storage.StorageTransferOptions,System.Threading.CancellationToken)" />.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Read">
@@ -1895,6 +2138,582 @@
         <returns>
              A <see cref="T:Azure.Response`1" /> describing the updated
              path.
+             </returns>
+        <remarks>
+             A <see cref="T:Azure.RequestFailedException" /> will be thrown if
+             a failure occurs.
+             </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Upload">
+      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt; Upload (System.IO.Stream content);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Storage.Files.DataLake.Models.PathInfo&gt; Upload(class System.IO.Stream content) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Storage.Files.DataLake.DataLakeFileClient.Upload(System.IO.Stream)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function Upload (content As Stream) As Response(Of PathInfo)" />
+      <MemberSignature Language="F#" Value="abstract member Upload : System.IO.Stream -&gt; Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;&#xA;override this.Upload : System.IO.Stream -&gt; Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;" Usage="dataLakeFileClient.Upload content" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Storage.Files.DataLake</AssemblyName>
+        <AssemblyVersion>12.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="content" Type="System.IO.Stream" />
+      </Parameters>
+      <Docs>
+        <param name="content">
+             A <see cref="T:System.IO.Stream" /> containing the content to upload.
+             </param>
+        <summary>
+             The <see cref="M:Azure.Storage.Files.DataLake.DataLakeFileClient.Upload(System.IO.Stream,System.Boolean,System.Threading.CancellationToken)" />
+             operation creates and uploads content to a file.  If the file already exists, its content will be overwriten.
+            
+             For more information, see <see href="https://docs.microsoft.com/en-us/rest/api/storageservices/datalakestoragegen2/path/update" />.
+             </summary>
+        <returns>
+             A <see cref="T:Azure.Response`1" /> describing the
+             state of the updated file.
+             </returns>
+        <remarks>
+             A <see cref="T:Azure.RequestFailedException" /> will be thrown if
+             a failure occurs.
+             </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Upload">
+      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt; Upload (string path);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Storage.Files.DataLake.Models.PathInfo&gt; Upload(string path) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Storage.Files.DataLake.DataLakeFileClient.Upload(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function Upload (path As String) As Response(Of PathInfo)" />
+      <MemberSignature Language="F#" Value="abstract member Upload : string -&gt; Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;&#xA;override this.Upload : string -&gt; Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;" Usage="dataLakeFileClient.Upload path" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Storage.Files.DataLake</AssemblyName>
+        <AssemblyVersion>12.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="path" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="path">
+             A file path containing the content to upload.
+             </param>
+        <summary>
+             The <see cref="M:Azure.Storage.Files.DataLake.DataLakeFileClient.Upload(System.IO.Stream,System.Boolean,System.Threading.CancellationToken)" />
+             operation creates and uploads content to a file.  If the file already exists, its content will be overwriten.
+            
+             For more information, see <see href="https://docs.microsoft.com/en-us/rest/api/storageservices/datalakestoragegen2/path/update" />.
+             </summary>
+        <returns>
+             A <see cref="T:Azure.Response`1" /> describing the
+             state of the updated block blob.
+             </returns>
+        <remarks>
+             A <see cref="T:Azure.RequestFailedException" /> will be thrown if
+             a failure occurs.
+             </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Upload">
+      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt; Upload (System.IO.Stream content, bool overwrite = false, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Storage.Files.DataLake.Models.PathInfo&gt; Upload(class System.IO.Stream content, bool overwrite, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Storage.Files.DataLake.DataLakeFileClient.Upload(System.IO.Stream,System.Boolean,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function Upload (content As Stream, Optional overwrite As Boolean = false, Optional cancellationToken As CancellationToken = null) As Response(Of PathInfo)" />
+      <MemberSignature Language="F#" Value="abstract member Upload : System.IO.Stream * bool * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;&#xA;override this.Upload : System.IO.Stream * bool * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;" Usage="dataLakeFileClient.Upload (content, overwrite, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Storage.Files.DataLake</AssemblyName>
+        <AssemblyVersion>12.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="content" Type="System.IO.Stream" />
+        <Parameter Name="overwrite" Type="System.Boolean" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="content">
+             A <see cref="T:System.IO.Stream" /> containing the content to upload.
+             </param>
+        <param name="overwrite">
+             Whether the upload should overwrite an existing file.  The
+             default value is false.
+             </param>
+        <param name="cancellationToken">
+             Optional <see cref="T:System.Threading.CancellationToken" /> to propagate
+             notifications that the operation should be cancelled.
+             </param>
+        <summary>
+             The <see cref="M:Azure.Storage.Files.DataLake.DataLakeFileClient.Upload(System.IO.Stream,System.Boolean,System.Threading.CancellationToken)" />
+             operation creates and uploads content to a file.  If the file already exists, its content will be overwriten.
+            
+             For more information, see <see href="https://docs.microsoft.com/en-us/rest/api/storageservices/datalakestoragegen2/path/update" />.
+             </summary>
+        <returns>
+             A <see cref="T:Azure.Response`1" /> describing the
+             state of the updated file.
+             </returns>
+        <remarks>
+             A <see cref="T:Azure.RequestFailedException" /> will be thrown if
+             a failure occurs.
+             </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Upload">
+      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt; Upload (string path, bool overwrite = false, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Storage.Files.DataLake.Models.PathInfo&gt; Upload(string path, bool overwrite, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Storage.Files.DataLake.DataLakeFileClient.Upload(System.String,System.Boolean,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function Upload (path As String, Optional overwrite As Boolean = false, Optional cancellationToken As CancellationToken = null) As Response(Of PathInfo)" />
+      <MemberSignature Language="F#" Value="abstract member Upload : string * bool * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;&#xA;override this.Upload : string * bool * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;" Usage="dataLakeFileClient.Upload (path, overwrite, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Storage.Files.DataLake</AssemblyName>
+        <AssemblyVersion>12.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="path" Type="System.String" />
+        <Parameter Name="overwrite" Type="System.Boolean" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="path">
+             A file path containing the content to upload.
+             </param>
+        <param name="overwrite">
+             Whether the upload should overwrite an existing file.  The
+             default value is false.
+             </param>
+        <param name="cancellationToken">
+             Optional <see cref="T:System.Threading.CancellationToken" /> to propagate
+             notifications that the operation should be cancelled.
+             </param>
+        <summary>
+             The <see cref="M:Azure.Storage.Files.DataLake.DataLakeFileClient.Upload(System.IO.Stream,System.Boolean,System.Threading.CancellationToken)" />
+             operation creates and uploads content to a file.  If the file already exists, its content will be overwriten.
+            
+             For more information, see <see href="https://docs.microsoft.com/en-us/rest/api/storageservices/datalakestoragegen2/path/update" />.
+             </summary>
+        <returns>
+             A <see cref="T:Azure.Response`1" /> describing the
+             state of the updated block blob.
+             </returns>
+        <remarks>
+             A <see cref="T:Azure.RequestFailedException" /> will be thrown if
+             a failure occurs.
+             </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Upload">
+      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt; Upload (System.IO.Stream content, Azure.Storage.Files.DataLake.Models.PathHttpHeaders httpHeaders = default, Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions conditions = default, IProgress&lt;long&gt; progressHandler = default, Azure.Storage.StorageTransferOptions transferOptions = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Storage.Files.DataLake.Models.PathInfo&gt; Upload(class System.IO.Stream content, class Azure.Storage.Files.DataLake.Models.PathHttpHeaders httpHeaders, class Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions conditions, class System.IProgress`1&lt;int64&gt; progressHandler, valuetype Azure.Storage.StorageTransferOptions transferOptions, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Storage.Files.DataLake.DataLakeFileClient.Upload(System.IO.Stream,Azure.Storage.Files.DataLake.Models.PathHttpHeaders,Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions,System.IProgress{System.Int64},Azure.Storage.StorageTransferOptions,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function Upload (content As Stream, Optional httpHeaders As PathHttpHeaders = null, Optional conditions As DataLakeRequestConditions = null, Optional progressHandler As IProgress(Of Long) = null, Optional transferOptions As StorageTransferOptions = null, Optional cancellationToken As CancellationToken = null) As Response(Of PathInfo)" />
+      <MemberSignature Language="F#" Value="abstract member Upload : System.IO.Stream * Azure.Storage.Files.DataLake.Models.PathHttpHeaders * Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions * IProgress&lt;int64&gt; * Azure.Storage.StorageTransferOptions * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;&#xA;override this.Upload : System.IO.Stream * Azure.Storage.Files.DataLake.Models.PathHttpHeaders * Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions * IProgress&lt;int64&gt; * Azure.Storage.StorageTransferOptions * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;" Usage="dataLakeFileClient.Upload (content, httpHeaders, conditions, progressHandler, transferOptions, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Storage.Files.DataLake</AssemblyName>
+        <AssemblyVersion>12.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="content" Type="System.IO.Stream" />
+        <Parameter Name="httpHeaders" Type="Azure.Storage.Files.DataLake.Models.PathHttpHeaders" />
+        <Parameter Name="conditions" Type="Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions" />
+        <Parameter Name="progressHandler" Type="System.IProgress&lt;System.Int64&gt;" />
+        <Parameter Name="transferOptions" Type="Azure.Storage.StorageTransferOptions" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="content">
+             A <see cref="T:System.IO.Stream" /> containing the content to upload.
+             </param>
+        <param name="httpHeaders">
+             Optional standard HTTP header properties that can be set for the file.
+             </param>
+        <param name="conditions">
+             Optional <see cref="T:Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions" /> to apply to the request.
+             </param>
+        <param name="progressHandler">
+             Optional <see cref="T:System.IProgress`1" /> to provide
+             progress updates about data transfers.
+             </param>
+        <param name="transferOptions">
+             Optional <see cref="T:Azure.Storage.StorageTransferOptions" /> to configure
+             parallel transfer behavior.
+             </param>
+        <param name="cancellationToken">
+             Optional <see cref="T:System.Threading.CancellationToken" /> to propagate
+             notifications that the operation should be cancelled.
+             </param>
+        <summary>
+             The <see cref="M:Azure.Storage.Files.DataLake.DataLakeFileClient.Upload(System.IO.Stream,Azure.Storage.Files.DataLake.Models.PathHttpHeaders,Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions,System.IProgress{System.Int64},Azure.Storage.StorageTransferOptions,System.Threading.CancellationToken)" />
+             operation creates and uploads content to a file.  If the file already exists, its content will be overwriten.
+            
+             For more information, see <see href="https://docs.microsoft.com/en-us/rest/api/storageservices/datalakestoragegen2/path/update" />.
+             </summary>
+        <returns>
+             A <see cref="T:Azure.Response`1" /> describing the
+             state of the updated file.
+             </returns>
+        <remarks>
+             A <see cref="T:Azure.RequestFailedException" /> will be thrown if
+             a failure occurs.
+             </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Upload">
+      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt; Upload (string path, Azure.Storage.Files.DataLake.Models.PathHttpHeaders httpHeaders = default, Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions conditions = default, IProgress&lt;long&gt; progressHandler = default, Azure.Storage.StorageTransferOptions transferOptions = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Storage.Files.DataLake.Models.PathInfo&gt; Upload(string path, class Azure.Storage.Files.DataLake.Models.PathHttpHeaders httpHeaders, class Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions conditions, class System.IProgress`1&lt;int64&gt; progressHandler, valuetype Azure.Storage.StorageTransferOptions transferOptions, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Storage.Files.DataLake.DataLakeFileClient.Upload(System.String,Azure.Storage.Files.DataLake.Models.PathHttpHeaders,Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions,System.IProgress{System.Int64},Azure.Storage.StorageTransferOptions,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function Upload (path As String, Optional httpHeaders As PathHttpHeaders = null, Optional conditions As DataLakeRequestConditions = null, Optional progressHandler As IProgress(Of Long) = null, Optional transferOptions As StorageTransferOptions = null, Optional cancellationToken As CancellationToken = null) As Response(Of PathInfo)" />
+      <MemberSignature Language="F#" Value="abstract member Upload : string * Azure.Storage.Files.DataLake.Models.PathHttpHeaders * Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions * IProgress&lt;int64&gt; * Azure.Storage.StorageTransferOptions * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;&#xA;override this.Upload : string * Azure.Storage.Files.DataLake.Models.PathHttpHeaders * Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions * IProgress&lt;int64&gt; * Azure.Storage.StorageTransferOptions * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;" Usage="dataLakeFileClient.Upload (path, httpHeaders, conditions, progressHandler, transferOptions, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Storage.Files.DataLake</AssemblyName>
+        <AssemblyVersion>12.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="path" Type="System.String" />
+        <Parameter Name="httpHeaders" Type="Azure.Storage.Files.DataLake.Models.PathHttpHeaders" />
+        <Parameter Name="conditions" Type="Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions" />
+        <Parameter Name="progressHandler" Type="System.IProgress&lt;System.Int64&gt;" />
+        <Parameter Name="transferOptions" Type="Azure.Storage.StorageTransferOptions" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="path">
+             A file path containing the content to upload.
+             </param>
+        <param name="httpHeaders">
+             Optional standard HTTP header properties that can be set for the file.
+            </param>
+        <param name="conditions">
+             Optional <see cref="T:Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions" /> to apply to the request.
+             </param>
+        <param name="progressHandler">
+             Optional <see cref="T:System.IProgress`1" /> to provide
+             progress updates about data transfers.
+             </param>
+        <param name="transferOptions">
+             Optional <see cref="T:Azure.Storage.StorageTransferOptions" /> to configure
+             parallel transfer behavior.
+             </param>
+        <param name="cancellationToken">
+             Optional <see cref="T:System.Threading.CancellationToken" /> to propagate
+             notifications that the operation should be cancelled.
+             </param>
+        <summary>
+             The <see cref="M:Azure.Storage.Files.DataLake.DataLakeFileClient.Upload(System.String,Azure.Storage.Files.DataLake.Models.PathHttpHeaders,Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions,System.IProgress{System.Int64},Azure.Storage.StorageTransferOptions,System.Threading.CancellationToken)" />
+             operation creates and uploads content to a file.  If the file already exists, its content will be overwriten.
+            
+             For more information, see <see href="https://docs.microsoft.com/en-us/rest/api/storageservices/datalakestoragegen2/path/update" />.
+             </summary>
+        <returns>
+             A <see cref="T:Azure.Response`1" /> describing the
+             state of the updated block blob.
+             </returns>
+        <remarks>
+             A <see cref="T:Azure.RequestFailedException" /> will be thrown if
+             a failure occurs.
+             </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UploadAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;&gt; UploadAsync (System.IO.Stream content);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Storage.Files.DataLake.Models.PathInfo&gt;&gt; UploadAsync(class System.IO.Stream content) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Storage.Files.DataLake.DataLakeFileClient.UploadAsync(System.IO.Stream)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function UploadAsync (content As Stream) As Task(Of Response(Of PathInfo))" />
+      <MemberSignature Language="F#" Value="abstract member UploadAsync : System.IO.Stream -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;&gt;&#xA;override this.UploadAsync : System.IO.Stream -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;&gt;" Usage="dataLakeFileClient.UploadAsync content" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Storage.Files.DataLake</AssemblyName>
+        <AssemblyVersion>12.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="content" Type="System.IO.Stream" />
+      </Parameters>
+      <Docs>
+        <param name="content">
+             A <see cref="T:System.IO.Stream" /> containing the content to upload.
+             </param>
+        <summary>
+             The <see cref="M:Azure.Storage.Files.DataLake.DataLakeFileClient.UploadAsync(System.IO.Stream,System.Boolean,System.Threading.CancellationToken)" />
+             operation creates and uploads content to a file.  If the file already exists, its content will be overwriten.
+            
+             For more information, see <see href="https://docs.microsoft.com/en-us/rest/api/storageservices/datalakestoragegen2/path/update" />.
+             </summary>
+        <returns>
+             A <see cref="T:Azure.Response`1" /> describing the
+             state of the updated block blob.
+             </returns>
+        <remarks>
+             A <see cref="T:Azure.RequestFailedException" /> will be thrown if
+             a failure occurs.
+             </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UploadAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;&gt; UploadAsync (string path);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Storage.Files.DataLake.Models.PathInfo&gt;&gt; UploadAsync(string path) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Storage.Files.DataLake.DataLakeFileClient.UploadAsync(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function UploadAsync (path As String) As Task(Of Response(Of PathInfo))" />
+      <MemberSignature Language="F#" Value="abstract member UploadAsync : string -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;&gt;&#xA;override this.UploadAsync : string -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;&gt;" Usage="dataLakeFileClient.UploadAsync path" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Storage.Files.DataLake</AssemblyName>
+        <AssemblyVersion>12.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="path" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="path">
+             A file path containing the content to upload.
+             </param>
+        <summary>
+             The <see cref="M:Azure.Storage.Files.DataLake.DataLakeFileClient.UploadAsync(System.IO.Stream,System.Boolean,System.Threading.CancellationToken)" />
+             operation creates and uploads content to a file.  If the file already exists, its content will be overwriten.
+            
+             For more information, see <see href="https://docs.microsoft.com/en-us/rest/api/storageservices/datalakestoragegen2/path/update" />.
+             </summary>
+        <returns>
+             A <see cref="T:Azure.Response`1" /> describing the
+             state of the updated block blob.
+             </returns>
+        <remarks>
+             A <see cref="T:Azure.RequestFailedException" /> will be thrown if
+             a failure occurs.
+             </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UploadAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;&gt; UploadAsync (System.IO.Stream content, bool overwrite = false, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Storage.Files.DataLake.Models.PathInfo&gt;&gt; UploadAsync(class System.IO.Stream content, bool overwrite, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Storage.Files.DataLake.DataLakeFileClient.UploadAsync(System.IO.Stream,System.Boolean,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function UploadAsync (content As Stream, Optional overwrite As Boolean = false, Optional cancellationToken As CancellationToken = null) As Task(Of Response(Of PathInfo))" />
+      <MemberSignature Language="F#" Value="abstract member UploadAsync : System.IO.Stream * bool * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;&gt;&#xA;override this.UploadAsync : System.IO.Stream * bool * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;&gt;" Usage="dataLakeFileClient.UploadAsync (content, overwrite, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Storage.Files.DataLake</AssemblyName>
+        <AssemblyVersion>12.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="content" Type="System.IO.Stream" />
+        <Parameter Name="overwrite" Type="System.Boolean" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="content">
+             A <see cref="T:System.IO.Stream" /> containing the content to upload.
+             </param>
+        <param name="overwrite">
+             Whether the upload should overwrite an existing file.  The
+             default value is false.
+             </param>
+        <param name="cancellationToken">
+             Optional <see cref="T:System.Threading.CancellationToken" /> to propagate
+             notifications that the operation should be cancelled.
+             </param>
+        <summary>
+             The <see cref="M:Azure.Storage.Files.DataLake.DataLakeFileClient.UploadAsync(System.IO.Stream,System.Boolean,System.Threading.CancellationToken)" />
+             operation creates and uploads content to a file.  If the file already exists, its content will be overwriten.
+            
+             For more information, see <see href="https://docs.microsoft.com/en-us/rest/api/storageservices/datalakestoragegen2/path/update" />.
+             </summary>
+        <returns>
+             A <see cref="T:Azure.Response`1" /> describing the
+             state of the updated block blob.
+             </returns>
+        <remarks>
+             A <see cref="T:Azure.RequestFailedException" /> will be thrown if
+             a failure occurs.
+             </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UploadAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;&gt; UploadAsync (string path, bool overwrite = false, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Storage.Files.DataLake.Models.PathInfo&gt;&gt; UploadAsync(string path, bool overwrite, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Storage.Files.DataLake.DataLakeFileClient.UploadAsync(System.String,System.Boolean,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function UploadAsync (path As String, Optional overwrite As Boolean = false, Optional cancellationToken As CancellationToken = null) As Task(Of Response(Of PathInfo))" />
+      <MemberSignature Language="F#" Value="abstract member UploadAsync : string * bool * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;&gt;&#xA;override this.UploadAsync : string * bool * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;&gt;" Usage="dataLakeFileClient.UploadAsync (path, overwrite, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Storage.Files.DataLake</AssemblyName>
+        <AssemblyVersion>12.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="path" Type="System.String" />
+        <Parameter Name="overwrite" Type="System.Boolean" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="path">
+             A file path containing the content to upload.
+             </param>
+        <param name="overwrite">
+             Whether the upload should overwrite an existing file.  The
+             default value is false.
+             </param>
+        <param name="cancellationToken">
+             Optional <see cref="T:System.Threading.CancellationToken" /> to propagate
+             notifications that the operation should be cancelled.
+             </param>
+        <summary>
+             The <see cref="M:Azure.Storage.Files.DataLake.DataLakeFileClient.UploadAsync(System.IO.Stream,System.Boolean,System.Threading.CancellationToken)" />
+             operation creates and uploads content to a file.  If the file already exists, its content will be overwriten.
+            
+             For more information, see <see href="https://docs.microsoft.com/en-us/rest/api/storageservices/datalakestoragegen2/path/update" />.
+             </summary>
+        <returns>
+             A <see cref="T:Azure.Response`1" /> describing the
+             state of the updated block blob.
+             </returns>
+        <remarks>
+             A <see cref="T:Azure.RequestFailedException" /> will be thrown if
+             a failure occurs.
+             </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UploadAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;&gt; UploadAsync (System.IO.Stream content, Azure.Storage.Files.DataLake.Models.PathHttpHeaders httpHeaders = default, Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions conditions = default, IProgress&lt;long&gt; progressHandler = default, Azure.Storage.StorageTransferOptions transferOptions = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Storage.Files.DataLake.Models.PathInfo&gt;&gt; UploadAsync(class System.IO.Stream content, class Azure.Storage.Files.DataLake.Models.PathHttpHeaders httpHeaders, class Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions conditions, class System.IProgress`1&lt;int64&gt; progressHandler, valuetype Azure.Storage.StorageTransferOptions transferOptions, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Storage.Files.DataLake.DataLakeFileClient.UploadAsync(System.IO.Stream,Azure.Storage.Files.DataLake.Models.PathHttpHeaders,Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions,System.IProgress{System.Int64},Azure.Storage.StorageTransferOptions,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function UploadAsync (content As Stream, Optional httpHeaders As PathHttpHeaders = null, Optional conditions As DataLakeRequestConditions = null, Optional progressHandler As IProgress(Of Long) = null, Optional transferOptions As StorageTransferOptions = null, Optional cancellationToken As CancellationToken = null) As Task(Of Response(Of PathInfo))" />
+      <MemberSignature Language="F#" Value="abstract member UploadAsync : System.IO.Stream * Azure.Storage.Files.DataLake.Models.PathHttpHeaders * Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions * IProgress&lt;int64&gt; * Azure.Storage.StorageTransferOptions * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;&gt;&#xA;override this.UploadAsync : System.IO.Stream * Azure.Storage.Files.DataLake.Models.PathHttpHeaders * Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions * IProgress&lt;int64&gt; * Azure.Storage.StorageTransferOptions * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;&gt;" Usage="dataLakeFileClient.UploadAsync (content, httpHeaders, conditions, progressHandler, transferOptions, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Storage.Files.DataLake</AssemblyName>
+        <AssemblyVersion>12.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="content" Type="System.IO.Stream" />
+        <Parameter Name="httpHeaders" Type="Azure.Storage.Files.DataLake.Models.PathHttpHeaders" />
+        <Parameter Name="conditions" Type="Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions" />
+        <Parameter Name="progressHandler" Type="System.IProgress&lt;System.Int64&gt;" />
+        <Parameter Name="transferOptions" Type="Azure.Storage.StorageTransferOptions" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="content">
+             A <see cref="T:System.IO.Stream" /> containing the content to upload.
+             </param>
+        <param name="httpHeaders">
+             Optional standard HTTP header properties that can be set for the file.
+            </param>
+        <param name="conditions">
+             Optional <see cref="T:Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions" /> to apply to the request.
+             </param>
+        <param name="transferOptions">
+             Optional <see cref="T:Azure.Storage.StorageTransferOptions" /> to configure
+             parallel transfer behavior.
+             </param>
+        <param name="progressHandler">
+             Optional <see cref="T:System.IProgress`1" /> to provide
+             progress updates about data transfers.
+             </param>
+        <param name="cancellationToken">
+             Optional <see cref="T:System.Threading.CancellationToken" /> to propagate
+             notifications that the operation should be cancelled.
+             </param>
+        <summary>
+             The <see cref="M:Azure.Storage.Files.DataLake.DataLakeFileClient.UploadAsync(System.IO.Stream,Azure.Storage.Files.DataLake.Models.PathHttpHeaders,Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions,System.IProgress{System.Int64},Azure.Storage.StorageTransferOptions,System.Threading.CancellationToken)" />
+             operation creates and uploads content to a file.  If the file already exists, its content will be overwriten.
+            
+             For more information, see <see href="https://docs.microsoft.com/en-us/rest/api/storageservices/datalakestoragegen2/path/update" />.
+             </summary>
+        <returns>
+             A <see cref="T:Azure.Response`1" /> describing the
+             state of the updated block blob.
+             </returns>
+        <remarks>
+             A <see cref="T:Azure.RequestFailedException" /> will be thrown if
+             a failure occurs.
+             </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UploadAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;&gt; UploadAsync (string path, Azure.Storage.Files.DataLake.Models.PathHttpHeaders httpHeaders = default, Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions conditions = default, IProgress&lt;long&gt; progressHandler = default, Azure.Storage.StorageTransferOptions transferOptions = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Storage.Files.DataLake.Models.PathInfo&gt;&gt; UploadAsync(string path, class Azure.Storage.Files.DataLake.Models.PathHttpHeaders httpHeaders, class Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions conditions, class System.IProgress`1&lt;int64&gt; progressHandler, valuetype Azure.Storage.StorageTransferOptions transferOptions, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Storage.Files.DataLake.DataLakeFileClient.UploadAsync(System.String,Azure.Storage.Files.DataLake.Models.PathHttpHeaders,Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions,System.IProgress{System.Int64},Azure.Storage.StorageTransferOptions,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function UploadAsync (path As String, Optional httpHeaders As PathHttpHeaders = null, Optional conditions As DataLakeRequestConditions = null, Optional progressHandler As IProgress(Of Long) = null, Optional transferOptions As StorageTransferOptions = null, Optional cancellationToken As CancellationToken = null) As Task(Of Response(Of PathInfo))" />
+      <MemberSignature Language="F#" Value="abstract member UploadAsync : string * Azure.Storage.Files.DataLake.Models.PathHttpHeaders * Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions * IProgress&lt;int64&gt; * Azure.Storage.StorageTransferOptions * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;&gt;&#xA;override this.UploadAsync : string * Azure.Storage.Files.DataLake.Models.PathHttpHeaders * Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions * IProgress&lt;int64&gt; * Azure.Storage.StorageTransferOptions * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;&gt;" Usage="dataLakeFileClient.UploadAsync (path, httpHeaders, conditions, progressHandler, transferOptions, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Storage.Files.DataLake</AssemblyName>
+        <AssemblyVersion>12.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Files.DataLake.Models.PathInfo&gt;&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="path" Type="System.String" />
+        <Parameter Name="httpHeaders" Type="Azure.Storage.Files.DataLake.Models.PathHttpHeaders" />
+        <Parameter Name="conditions" Type="Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions" />
+        <Parameter Name="progressHandler" Type="System.IProgress&lt;System.Int64&gt;" />
+        <Parameter Name="transferOptions" Type="Azure.Storage.StorageTransferOptions" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="path">
+             A file path containing the content to upload.
+             </param>
+        <param name="httpHeaders">
+             Optional standard HTTP header properties that can be set for the file.
+            </param>
+        <param name="conditions">
+             Optional <see cref="T:Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions" /> to apply to the request.
+             </param>
+        <param name="progressHandler">
+             Optional <see cref="T:System.IProgress`1" /> to provide
+             progress updates about data transfers.
+             </param>
+        <param name="transferOptions">
+             Optional <see cref="T:Azure.Storage.StorageTransferOptions" /> to configure
+             parallel transfer behavior.
+             </param>
+        <param name="cancellationToken">
+             Optional <see cref="T:System.Threading.CancellationToken" /> to propagate
+             notifications that the operation should be cancelled.
+             </param>
+        <summary>
+             The <see cref="M:Azure.Storage.Files.DataLake.DataLakeFileClient.UploadAsync(System.String,Azure.Storage.Files.DataLake.Models.PathHttpHeaders,Azure.Storage.Files.DataLake.Models.DataLakeRequestConditions,System.IProgress{System.Int64},Azure.Storage.StorageTransferOptions,System.Threading.CancellationToken)" />
+             operation creates and uploads content to a file.  If the file already exists, its content will be overwriten.
+            
+             For more information, see <see href="https://docs.microsoft.com/en-us/rest/api/storageservices/datalakestoragegen2/path/update" />.
+             </summary>
+        <returns>
+             A <see cref="T:Azure.Response`1" /> describing the
+             state of the updated block blob.
              </returns>
         <remarks>
              A <see cref="T:Azure.RequestFailedException" /> will be thrown if
