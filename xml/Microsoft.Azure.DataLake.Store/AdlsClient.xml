@@ -134,6 +134,55 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
+    <Member MemberName="BulkDownload">
+      <MemberSignature Language="C#" Value="public virtual Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus BulkDownload (string srcPath, string destPath, int numThreads, Microsoft.Azure.DataLake.Store.IfExists shouldOverwrite, bool disableTransferLogging, IProgress&lt;Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus&gt; progressTracker, bool notRecurse, bool resume, System.Threading.CancellationToken cancelToken);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus BulkDownload(string srcPath, string destPath, int32 numThreads, valuetype Microsoft.Azure.DataLake.Store.IfExists shouldOverwrite, bool disableTransferLogging, class System.IProgress`1&lt;class Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus&gt; progressTracker, bool notRecurse, bool resume, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.DataLake.Store.AdlsClient.BulkDownload(System.String,System.String,System.Int32,Microsoft.Azure.DataLake.Store.IfExists,System.Boolean,System.IProgress{Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus},System.Boolean,System.Boolean,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function BulkDownload (srcPath As String, destPath As String, numThreads As Integer, shouldOverwrite As IfExists, disableTransferLogging As Boolean, progressTracker As IProgress(Of TransferStatus), notRecurse As Boolean, resume As Boolean, cancelToken As CancellationToken) As TransferStatus" />
+      <MemberSignature Language="F#" Value="abstract member BulkDownload : string * string * int * Microsoft.Azure.DataLake.Store.IfExists * bool * IProgress&lt;Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus&gt; * bool * bool * System.Threading.CancellationToken -&gt; Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus&#xA;override this.BulkDownload : string * string * int * Microsoft.Azure.DataLake.Store.IfExists * bool * IProgress&lt;Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus&gt; * bool * bool * System.Threading.CancellationToken -&gt; Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus" Usage="adlsClient.BulkDownload (srcPath, destPath, numThreads, shouldOverwrite, disableTransferLogging, progressTracker, notRecurse, resume, cancelToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.DataLake.Store</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="srcPath" Type="System.String" />
+        <Parameter Name="destPath" Type="System.String" />
+        <Parameter Name="numThreads" Type="System.Int32" />
+        <Parameter Name="shouldOverwrite" Type="Microsoft.Azure.DataLake.Store.IfExists" />
+        <Parameter Name="disableTransferLogging" Type="System.Boolean" />
+        <Parameter Name="progressTracker" Type="System.IProgress&lt;Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus&gt;" />
+        <Parameter Name="notRecurse" Type="System.Boolean" />
+        <Parameter Name="resume" Type="System.Boolean" />
+        <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="srcPath">Remote source path</param>
+        <param name="destPath">Local destination path. It should always be a directory.</param>
+        <param name="numThreads">Number of threads- Default -1 if not passed will take default number of threads (8 times the number of physical cores)</param>
+        <param name="shouldOverwrite">Whether to overwrite or skip if the destination exists, Default IfExists.Overwrite</param>
+        <param name="disableTransferLogging">If true, logging of transfer progress is disabled. This and <paramref name="resume" /> cannot be true at same time. Default false</param>
+        <param name="progressTracker">Progresstracker to track progress of file transfer, Default null</param>
+        <param name="notRecurse">If true then does an enumeration till level one else does recursive enumeration, default false</param>
+        <param name="resume">If true then we want to resume from last transfer, default false</param>
+        <param name="cancelToken">Cancel token</param>
+        <summary>
+            Download directory or file from remote server to local. Transfers the contents under source directory under 
+            the destination directory. Transfers the source file and saves it as the destination path.
+            This method does not throw any exception for any entry's transfer failure. Refer the return value <see cref="T:Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus" /> to 
+            get the status/exception of each entry's transfer.
+            By default logs the transfer progress in system's temp path, so that user can recover using <paramref name="resume" /> if upload has crashed.
+            This progress logging can be disabled using <paramref name="disableTransferLogging" />.
+            It is highly recomended to set ServicePointManager.DefaultConnectionLimit to the number of threads application wants the sdk to use before creating any instance of AdlsClient.
+            By default ServicePointManager.DefaultConnectionLimit is set to 2.
+            </summary>
+        <returns>Transfer status encapsulating the details of download</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="BulkUpload">
       <MemberSignature Language="C#" Value="public virtual Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus BulkUpload (string srcPath, string destPath, int numThreads = -1, Microsoft.Azure.DataLake.Store.IfExists shouldOverwrite = Microsoft.Azure.DataLake.Store.IfExists.Overwrite, IProgress&lt;Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus&gt; progressTracker = default, bool notRecurse = false, bool resume = false, bool isBinary = false, System.Threading.CancellationToken cancelToken = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus BulkUpload(string srcPath, string destPath, int32 numThreads, valuetype Microsoft.Azure.DataLake.Store.IfExists shouldOverwrite, class System.IProgress`1&lt;class Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus&gt; progressTracker, bool notRecurse, bool resume, bool isBinary, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
@@ -175,6 +224,60 @@
             the destination directory. Transfers the source file and saves it as the destination path.
             This method does not throw any exception for any entry's transfer failure. Refer the return value <see cref="T:Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus" /> to 
             get the status/exception of each entry's transfer.
+            It is highly recomended to set ServicePointManager.DefaultConnectionLimit to the number of threads application wants the sdk to use before creating any instance of AdlsClient.
+            By default ServicePointManager.DefaultConnectionLimit is set to 2.
+            By default files are uploaded at new line boundaries. However if files does not have newline within 4MB chunks,
+            the transfer will fail. In that case it is required to pass true to <paramref name="isBinary" /> to avoid uploads at newline boundaries.
+            </summary>
+        <returns>Transfer Status encapsulating the details of upload</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="BulkUpload">
+      <MemberSignature Language="C#" Value="public virtual Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus BulkUpload (string srcPath, string destPath, int numThreads, Microsoft.Azure.DataLake.Store.IfExists shouldOverwrite, bool disableTransferLogging, IProgress&lt;Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus&gt; progressTracker, bool notRecurse, bool resume, bool isBinary, System.Threading.CancellationToken cancelToken);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus BulkUpload(string srcPath, string destPath, int32 numThreads, valuetype Microsoft.Azure.DataLake.Store.IfExists shouldOverwrite, bool disableTransferLogging, class System.IProgress`1&lt;class Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus&gt; progressTracker, bool notRecurse, bool resume, bool isBinary, valuetype System.Threading.CancellationToken cancelToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.DataLake.Store.AdlsClient.BulkUpload(System.String,System.String,System.Int32,Microsoft.Azure.DataLake.Store.IfExists,System.Boolean,System.IProgress{Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus},System.Boolean,System.Boolean,System.Boolean,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function BulkUpload (srcPath As String, destPath As String, numThreads As Integer, shouldOverwrite As IfExists, disableTransferLogging As Boolean, progressTracker As IProgress(Of TransferStatus), notRecurse As Boolean, resume As Boolean, isBinary As Boolean, cancelToken As CancellationToken) As TransferStatus" />
+      <MemberSignature Language="F#" Value="abstract member BulkUpload : string * string * int * Microsoft.Azure.DataLake.Store.IfExists * bool * IProgress&lt;Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus&gt; * bool * bool * bool * System.Threading.CancellationToken -&gt; Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus&#xA;override this.BulkUpload : string * string * int * Microsoft.Azure.DataLake.Store.IfExists * bool * IProgress&lt;Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus&gt; * bool * bool * bool * System.Threading.CancellationToken -&gt; Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus" Usage="adlsClient.BulkUpload (srcPath, destPath, numThreads, shouldOverwrite, disableTransferLogging, progressTracker, notRecurse, resume, isBinary, cancelToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.DataLake.Store</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="srcPath" Type="System.String" />
+        <Parameter Name="destPath" Type="System.String" />
+        <Parameter Name="numThreads" Type="System.Int32" />
+        <Parameter Name="shouldOverwrite" Type="Microsoft.Azure.DataLake.Store.IfExists" />
+        <Parameter Name="disableTransferLogging" Type="System.Boolean" />
+        <Parameter Name="progressTracker" Type="System.IProgress&lt;Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus&gt;" />
+        <Parameter Name="notRecurse" Type="System.Boolean" />
+        <Parameter Name="resume" Type="System.Boolean" />
+        <Parameter Name="isBinary" Type="System.Boolean" />
+        <Parameter Name="cancelToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="srcPath">Local source path</param>
+        <param name="destPath">Remote destination path - It should always be a directory.</param>
+        <param name="numThreads">Number of threads- Default -1, if not passed will take default number of threads (8 times the number of physical cores)</param>
+        <param name="shouldOverwrite">Whether to overwrite or skip if the destination exists, Default IfExists.Overwrite</param>
+        <param name="disableTransferLogging">If true, logging of transfer progress is disabled. This and <paramref name="resume" /> cannot be true at same time. Default false</param>
+        <param name="progressTracker">Progresstracker to track progress of file transfer, Default null</param>
+        <param name="notRecurse">If true then does an enumeration till level one else does recursive enumeration, Default false</param>
+        <param name="resume">If true then we want to resume from last transfer, Default false</param>
+        <param name="isBinary">If false then writes files to data lake at newline boundaries, however if the file has no newline within 4MB chunks it will throw exception.
+            If true, then upload at new line boundaries is not guranteed but the upload will be faster. By default false, if file has no newlines within 4MB chunks true should be apssed</param>
+        <param name="cancelToken">Cancellation token</param>
+        <summary>
+            Upload directory or file from local to remote. Transfers the contents under source directory under 
+            the destination directory. Transfers the source file and saves it as the destination path.
+            This method does not throw any exception for any entry's transfer failure. Refer the return value <see cref="T:Microsoft.Azure.DataLake.Store.FileTransfer.TransferStatus" /> to 
+            get the status/exception of each entry's transfer.
+            By default logs the transfer progress in system's temp path, so that user can recover using <paramref name="resume" /> if upload has crashed.
+            This progress logging can be disabled using <paramref name="disableTransferLogging" />.
             It is highly recomended to set ServicePointManager.DefaultConnectionLimit to the number of threads application wants the sdk to use before creating any instance of AdlsClient.
             By default ServicePointManager.DefaultConnectionLimit is set to 2.
             By default files are uploaded at new line boundaries. However if files does not have newline within 4MB chunks,
