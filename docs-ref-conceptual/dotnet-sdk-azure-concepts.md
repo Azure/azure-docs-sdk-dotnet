@@ -1,6 +1,6 @@
 ---
 title: Azure management libraries for .NET usage concepts and patterns
-description: 
+description: Use the fluent interface in Azure management libraries for .NET to create objects through a method chain that enforces correct configuration. 
 ms.date: 10/19/2017
 ---
 
