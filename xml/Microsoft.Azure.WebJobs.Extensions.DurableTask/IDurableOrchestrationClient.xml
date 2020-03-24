@@ -125,6 +125,11 @@
         <AssemblyName>Microsoft.Azure.WebJobs.Extensions.DurableTask</AssemblyName>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Obsolete</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Collections.Generic.IList&lt;Microsoft.Azure.WebJobs.Extensions.DurableTask.DurableOrchestrationStatus&gt;&gt;</ReturnType>
       </ReturnValue>
@@ -151,6 +156,11 @@
         <AssemblyName>Microsoft.Azure.WebJobs.Extensions.DurableTask</AssemblyName>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Obsolete</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.WebJobs.Extensions.DurableTask.OrchestrationStatusQueryResult&gt;</ReturnType>
       </ReturnValue>
@@ -179,6 +189,11 @@
         <AssemblyName>Microsoft.Azure.WebJobs.Extensions.DurableTask</AssemblyName>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Obsolete</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Collections.Generic.IList&lt;Microsoft.Azure.WebJobs.Extensions.DurableTask.DurableOrchestrationStatus&gt;&gt;</ReturnType>
       </ReturnValue>
@@ -229,6 +244,34 @@
             Gets the status of the specified orchestration instance.
             </summary>
         <returns>Returns a task which completes when the status has been fetched.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ListInstancesAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Azure.WebJobs.Extensions.DurableTask.OrchestrationStatusQueryResult&gt; ListInstancesAsync (Microsoft.Azure.WebJobs.Extensions.DurableTask.OrchestrationStatusQueryCondition condition, System.Threading.CancellationToken cancellationToken);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Azure.WebJobs.Extensions.DurableTask.OrchestrationStatusQueryResult&gt; ListInstancesAsync(class Microsoft.Azure.WebJobs.Extensions.DurableTask.OrchestrationStatusQueryCondition condition, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationClient.ListInstancesAsync(Microsoft.Azure.WebJobs.Extensions.DurableTask.OrchestrationStatusQueryCondition,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Function ListInstancesAsync (condition As OrchestrationStatusQueryCondition, cancellationToken As CancellationToken) As Task(Of OrchestrationStatusQueryResult)" />
+      <MemberSignature Language="F#" Value="abstract member ListInstancesAsync : Microsoft.Azure.WebJobs.Extensions.DurableTask.OrchestrationStatusQueryCondition * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Azure.WebJobs.Extensions.DurableTask.OrchestrationStatusQueryResult&gt;" Usage="iDurableOrchestrationClient.ListInstancesAsync (condition, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.WebJobs.Extensions.DurableTask</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.WebJobs.Extensions.DurableTask.OrchestrationStatusQueryResult&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="condition" Type="Microsoft.Azure.WebJobs.Extensions.DurableTask.OrchestrationStatusQueryCondition" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="condition">Return orchestration instances that match the specified conditions.</param>
+        <param name="cancellationToken">Cancellation token that can be used to cancel the status query operation.</param>
+        <summary>
+            Gets the status of all orchestration instances with paging that match the specified conditions.
+            </summary>
+        <returns>Returns each page of orchestration status for all instances and continuation token of next page.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -495,6 +538,12 @@
             </summary>
         <returns>A task that completes when the terminate message is enqueued if necessary.</returns>
         <remarks>
+          <para>
+            A terminated instance will eventually transition into the <see cref="F:Microsoft.Azure.WebJobs.Extensions.DurableTask.OrchestrationRuntimeStatus.Terminated" /> state.
+            However, this transition will not happen immediately. Rather, the terminate operation will be queued in the task hub
+            along with other operations for that instance. You can use the <see cref="M:Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationClient.GetStatusAsync(System.String,System.Boolean,System.Boolean,System.Boolean)" />
+            method to know when a terminated instance has actually reached the Terminated state.
+            </para>
           <para>
             Terminating an orchestration instance has no effect on any in-flight activity function executions
             or sub-orchestrations that were started by the current orchestration instance.
