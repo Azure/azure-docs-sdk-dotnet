@@ -1,22 +1,33 @@
 <Type Name="EventProcessorClient" FullName="Azure.Messaging.EventHubs.EventProcessorClient">
-  <TypeSignature Language="C#" Value="public class EventProcessorClient" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit EventProcessorClient extends System.Object" />
+  <TypeSignature Language="C#" Value="public class EventProcessorClient" FrameworkAlternate="azure-dotnet" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit EventProcessorClient extends System.Object" FrameworkAlternate="azure-dotnet" />
   <TypeSignature Language="DocId" Value="T:Azure.Messaging.EventHubs.EventProcessorClient" />
-  <TypeSignature Language="VB.NET" Value="Public Class EventProcessorClient" />
-  <TypeSignature Language="F#" Value="type EventProcessorClient = class" />
+  <TypeSignature Language="VB.NET" Value="Public Class EventProcessorClient" FrameworkAlternate="azure-dotnet" />
+  <TypeSignature Language="F#" Value="type EventProcessorClient = class" FrameworkAlternate="azure-dotnet" />
+  <TypeSignature Language="C#" Value="public class EventProcessorClient : Azure.Messaging.EventHubs.Primitives.EventProcessor&lt;Azure.Messaging.EventHubs.Primitives.EventProcessorPartition&gt;" FrameworkAlternate="azure-dotnet-preview" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit EventProcessorClient extends Azure.Messaging.EventHubs.Primitives.EventProcessor`1&lt;class Azure.Messaging.EventHubs.Primitives.EventProcessorPartition&gt;" FrameworkAlternate="azure-dotnet-preview" />
+  <TypeSignature Language="VB.NET" Value="Public Class EventProcessorClient&#xA;Inherits EventProcessor(Of EventProcessorPartition)" FrameworkAlternate="azure-dotnet-preview" />
+  <TypeSignature Language="F#" Value="type EventProcessorClient = class&#xA;    inherit EventProcessor&lt;EventProcessorPartition&gt;" FrameworkAlternate="azure-dotnet-preview" />
   <AssemblyInfo>
     <AssemblyName>Azure.Messaging.EventHubs.Processor</AssemblyName>
     <AssemblyVersion>5.0.1.0</AssemblyVersion>
+    <AssemblyVersion>5.1.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
+    <BaseTypeName FrameworkAlternate="azure-dotnet-preview">Azure.Messaging.EventHubs.Primitives.EventProcessor&lt;Azure.Messaging.EventHubs.Primitives.EventProcessorPartition&gt;</BaseTypeName>
+    <BaseTypeArguments>
+      <BaseTypeArgument TypeParamName="!0">Azure.Messaging.EventHubs.Primitives.EventProcessorPartition</BaseTypeArgument>
+    </BaseTypeArguments>
   </Base>
   <Interfaces />
   <Docs>
     <summary>
-               Consumes events for the configured Event Hub and consumer group across all partitions, making them available for processing
-               through the provided handlers.
-             </summary>
+               Allows for consuming and processing events across all partitions of a given Event Hub within the scope of a specific
+               consumer group.  The processor is capable of collaborating with other instances for the same Event Hub and consumer
+               group pairing to share work by using a common storage platform to communicate.  Fault tolerance is also built-in,
+               allowing the processor to be resilient in the face of errors.
+             </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -29,6 +40,7 @@
       <AssemblyInfo>
         <AssemblyName>Azure.Messaging.EventHubs.Processor</AssemblyName>
         <AssemblyVersion>5.0.1.0</AssemblyVersion>
+        <AssemblyVersion>5.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -48,6 +60,7 @@
       <AssemblyInfo>
         <AssemblyName>Azure.Messaging.EventHubs.Processor</AssemblyName>
         <AssemblyVersion>5.0.1.0</AssemblyVersion>
+        <AssemblyVersion>5.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="checkpointStore" Type="Azure.Storage.Blobs.BlobContainerClient" />
@@ -62,13 +75,15 @@
                Initializes a new instance of the <see cref="T:Azure.Messaging.EventHubs.EventProcessorClient" /> class.
              </summary>
         <remarks>
-               If the connection string is copied from the Event Hubs namespace, it will likely not contain the name of the desired Event Hub,
+          <para>The container associated with the <paramref name="checkpointStore" /> is expected to exist; the <see cref="T:Azure.Messaging.EventHubs.EventProcessorClient" />
+               does not assume the ability to manage the storage account and is safe to run without permission to manage the storage account.</para>
+          <para>If the connection string is copied from the Event Hubs namespace, it will likely not contain the name of the desired Event Hub,
                which is needed.  In this case, the name can be added manually by adding ";EntityPath=[[ EVENT HUB NAME ]]" to the end of the
                connection string.  For example, ";EntityPath=telemetry-hub".
             
                If you have defined a shared access policy directly on the Event Hub itself, then copying the connection string from that
-               Event Hub will result in a connection string that contains the name.
-             </remarks>
+               Event Hub will result in a connection string that contains the name.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -81,6 +96,7 @@
       <AssemblyInfo>
         <AssemblyName>Azure.Messaging.EventHubs.Processor</AssemblyName>
         <AssemblyVersion>5.0.1.0</AssemblyVersion>
+        <AssemblyVersion>5.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="checkpointStore" Type="Azure.Storage.Blobs.BlobContainerClient" />
@@ -97,13 +113,15 @@
                Initializes a new instance of the <see cref="T:Azure.Messaging.EventHubs.EventProcessorClient" /> class.
              </summary>
         <remarks>
-               If the connection string is copied from the Event Hubs namespace, it will likely not contain the name of the desired Event Hub,
+          <para>The container associated with the <paramref name="checkpointStore" /> is expected to exist; the <see cref="T:Azure.Messaging.EventHubs.EventProcessorClient" />
+               does not assume the ability to manage the storage account and is safe to run without permission to manage the storage account.</para>
+          <para>If the connection string is copied from the Event Hubs namespace, it will likely not contain the name of the desired Event Hub,
                which is needed.  In this case, the name can be added manually by adding ";EntityPath=[[ EVENT HUB NAME ]]" to the end of the
                connection string.  For example, ";EntityPath=telemetry-hub".
             
                If you have defined a shared access policy directly on the Event Hub itself, then copying the connection string from that
-               Event Hub will result in a connection string that contains the name.
-             </remarks>
+               Event Hub will result in a connection string that contains the name.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -116,6 +134,7 @@
       <AssemblyInfo>
         <AssemblyName>Azure.Messaging.EventHubs.Processor</AssemblyName>
         <AssemblyVersion>5.0.1.0</AssemblyVersion>
+        <AssemblyVersion>5.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="checkpointStore" Type="Azure.Storage.Blobs.BlobContainerClient" />
@@ -132,10 +151,12 @@
                Initializes a new instance of the <see cref="T:Azure.Messaging.EventHubs.EventProcessorClient" /> class.
              </summary>
         <remarks>
-               If the connection string is copied from the Event Hub itself, it will contain the name of the desired Event Hub,
+          <para>The container associated with the <paramref name="checkpointStore" /> is expected to exist; the <see cref="T:Azure.Messaging.EventHubs.EventProcessorClient" />
+               does not assume the ability to manage the storage account and is safe to run without permission to manage the storage account.</para>
+          <para>If the connection string is copied from the Event Hub itself, it will contain the name of the desired Event Hub,
                and can be used directly without passing the <paramref name="eventHubName" />.  The name of the Event Hub should be
-               passed only once, either as part of the connection string or separately.
-             </remarks>
+               passed only once, either as part of the connection string or separately.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -148,6 +169,7 @@
       <AssemblyInfo>
         <AssemblyName>Azure.Messaging.EventHubs.Processor</AssemblyName>
         <AssemblyVersion>5.0.1.0</AssemblyVersion>
+        <AssemblyVersion>5.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="checkpointStore" Type="Azure.Storage.Blobs.BlobContainerClient" />
@@ -166,10 +188,12 @@
                Initializes a new instance of the <see cref="T:Azure.Messaging.EventHubs.EventProcessorClient" /> class.
              </summary>
         <remarks>
-               If the connection string is copied from the Event Hub itself, it will contain the name of the desired Event Hub,
+          <para>The container associated with the <paramref name="checkpointStore" /> is expected to exist; the <see cref="T:Azure.Messaging.EventHubs.EventProcessorClient" />
+               does not assume the ability to manage the storage account and is safe to run without permission to manage the storage account.</para>
+          <para>If the connection string is copied from the Event Hub itself, it will contain the name of the desired Event Hub,
                and can be used directly without passing the <paramref name="eventHubName" />.  The name of the Event Hub should be
-               passed only once, either as part of the connection string or separately.
-             </remarks>
+               passed only once, either as part of the connection string or separately.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -182,6 +206,7 @@
       <AssemblyInfo>
         <AssemblyName>Azure.Messaging.EventHubs.Processor</AssemblyName>
         <AssemblyVersion>5.0.1.0</AssemblyVersion>
+        <AssemblyVersion>5.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="checkpointStore" Type="Azure.Storage.Blobs.BlobContainerClient" />
@@ -196,11 +221,44 @@
         <param name="consumerGroup">The name of the consumer group this processor is associated with.  Events are read in the context of this group.</param>
         <param name="fullyQualifiedNamespace">The fully qualified Event Hubs namespace to connect to.  This is likely to be similar to <c>{yournamespace}.servicebus.windows.net</c>.</param>
         <param name="eventHubName">The name of the specific Event Hub to associate the processor with.</param>
-        <param name="credential">The Azure managed identity credential to use for authorization.  Access controls may be specified by the Event Hubs namespace or the requested Event Hub, depending on Azure configuration.</param>
+        <param name="credential">The Azure identity credential to use for authorization.  Access controls may be specified by the Event Hubs namespace or the requested Event Hub, depending on Azure configuration.</param>
         <param name="clientOptions">The set of options to use for this processor.</param>
         <summary>
                Initializes a new instance of the <see cref="T:Azure.Messaging.EventHubs.EventProcessorClient" /> class.
              </summary>
+        <remarks>
+               The container associated with the <paramref name="checkpointStore" /> is expected to exist; the <see cref="T:Azure.Messaging.EventHubs.EventProcessorClient" />
+               does not assume the ability to manage the storage account and is safe to run without permission to manage the storage account.
+             </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ClaimOwnershipAsync">
+      <MemberSignature Language="C#" Value="protected override System.Threading.Tasks.Task&lt;System.Collections.Generic.IEnumerable&lt;Azure.Messaging.EventHubs.Primitives.EventProcessorPartitionOwnership&gt;&gt; ClaimOwnershipAsync (System.Collections.Generic.IEnumerable&lt;Azure.Messaging.EventHubs.Primitives.EventProcessorPartitionOwnership&gt; desiredOwnership, System.Threading.CancellationToken cancellationToken);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.Threading.Tasks.Task`1&lt;class System.Collections.Generic.IEnumerable`1&lt;class Azure.Messaging.EventHubs.Primitives.EventProcessorPartitionOwnership&gt;&gt; ClaimOwnershipAsync(class System.Collections.Generic.IEnumerable`1&lt;class Azure.Messaging.EventHubs.Primitives.EventProcessorPartitionOwnership&gt; desiredOwnership, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Messaging.EventHubs.EventProcessorClient.ClaimOwnershipAsync(System.Collections.Generic.IEnumerable{Azure.Messaging.EventHubs.Primitives.EventProcessorPartitionOwnership},System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Function ClaimOwnershipAsync (desiredOwnership As IEnumerable(Of EventProcessorPartitionOwnership), cancellationToken As CancellationToken) As Task(Of IEnumerable(Of EventProcessorPartitionOwnership))" />
+      <MemberSignature Language="F#" Value="override this.ClaimOwnershipAsync : seq&lt;Azure.Messaging.EventHubs.Primitives.EventProcessorPartitionOwnership&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;seq&lt;Azure.Messaging.EventHubs.Primitives.EventProcessorPartitionOwnership&gt;&gt;" Usage="eventProcessorClient.ClaimOwnershipAsync (desiredOwnership, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Messaging.EventHubs.Processor</AssemblyName>
+        <AssemblyVersion>5.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;System.Collections.Generic.IEnumerable&lt;Azure.Messaging.EventHubs.Primitives.EventProcessorPartitionOwnership&gt;&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="desiredOwnership" Type="System.Collections.Generic.IEnumerable&lt;Azure.Messaging.EventHubs.Primitives.EventProcessorPartitionOwnership&gt;" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="1" FrameworkAlternate="azure-dotnet-preview" />
+      </Parameters>
+      <Docs>
+        <param name="desiredOwnership">The set of partition ownership desired by the event processor instance; this is the set of partitions that it will attempt to request responsibility for processing.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> instance to signal the request to cancel the processing.  This is most likely to occur when the processor is shutting down.</param>
+        <summary>
+               Attempts to claim ownership of the specified partitions for processing.  This method is used by
+               load balancing to allow event processor instances to distribute the responsibility for processing
+               partitions for a given Event Hub and consumer group pairing amongst the active event processors.
+             </summary>
+        <returns>The set of ownership records for the partitions that were successfully claimed; this is expected to be the <paramref name="desiredOwnership" /> or a subset of those partitions.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -214,6 +272,7 @@
       <AssemblyInfo>
         <AssemblyName>Azure.Messaging.EventHubs.Processor</AssemblyName>
         <AssemblyVersion>5.0.1.0</AssemblyVersion>
+        <AssemblyVersion>5.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -227,6 +286,29 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
+    <Member MemberName="CreateConnection">
+      <MemberSignature Language="C#" Value="protected override Azure.Messaging.EventHubs.EventHubConnection CreateConnection ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class Azure.Messaging.EventHubs.EventHubConnection CreateConnection() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Messaging.EventHubs.EventProcessorClient.CreateConnection" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Function CreateConnection () As EventHubConnection" />
+      <MemberSignature Language="F#" Value="override this.CreateConnection : unit -&gt; Azure.Messaging.EventHubs.EventHubConnection" Usage="eventProcessorClient.CreateConnection " />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Messaging.EventHubs.Processor</AssemblyName>
+        <AssemblyVersion>5.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Messaging.EventHubs.EventHubConnection</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+               Creates an <see cref="T:Azure.Messaging.EventHubs.EventHubConnection" /> to use for communicating with the Event Hubs service.
+             </summary>
+        <returns>The requested <see cref="T:Azure.Messaging.EventHubs.EventHubConnection" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="Equals">
       <MemberSignature Language="C#" Value="public override bool Equals (object obj);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed" />
@@ -237,6 +319,7 @@
       <AssemblyInfo>
         <AssemblyName>Azure.Messaging.EventHubs.Processor</AssemblyName>
         <AssemblyVersion>5.0.1.0</AssemblyVersion>
+        <AssemblyVersion>5.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -269,6 +352,7 @@
       <AssemblyInfo>
         <AssemblyName>Azure.Messaging.EventHubs.Processor</AssemblyName>
         <AssemblyVersion>5.0.1.0</AssemblyVersion>
+        <AssemblyVersion>5.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -292,6 +376,7 @@
       <AssemblyInfo>
         <AssemblyName>Azure.Messaging.EventHubs.Processor</AssemblyName>
         <AssemblyVersion>5.0.1.0</AssemblyVersion>
+        <AssemblyVersion>5.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -315,6 +400,7 @@
       <AssemblyInfo>
         <AssemblyName>Azure.Messaging.EventHubs.Processor</AssemblyName>
         <AssemblyVersion>5.0.1.0</AssemblyVersion>
+        <AssemblyVersion>5.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -343,6 +429,7 @@
       <AssemblyInfo>
         <AssemblyName>Azure.Messaging.EventHubs.Processor</AssemblyName>
         <AssemblyVersion>5.0.1.0</AssemblyVersion>
+        <AssemblyVersion>5.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -365,6 +452,7 @@
       <AssemblyInfo>
         <AssemblyName>Azure.Messaging.EventHubs.Processor</AssemblyName>
         <AssemblyVersion>5.0.1.0</AssemblyVersion>
+        <AssemblyVersion>5.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -377,6 +465,229 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
+    <Member MemberName="ListCheckpointsAsync">
+      <MemberSignature Language="C#" Value="protected override System.Threading.Tasks.Task&lt;System.Collections.Generic.IEnumerable&lt;Azure.Messaging.EventHubs.Primitives.EventProcessorCheckpoint&gt;&gt; ListCheckpointsAsync (System.Threading.CancellationToken cancellationToken);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.Threading.Tasks.Task`1&lt;class System.Collections.Generic.IEnumerable`1&lt;class Azure.Messaging.EventHubs.Primitives.EventProcessorCheckpoint&gt;&gt; ListCheckpointsAsync(valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Messaging.EventHubs.EventProcessorClient.ListCheckpointsAsync(System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Function ListCheckpointsAsync (cancellationToken As CancellationToken) As Task(Of IEnumerable(Of EventProcessorCheckpoint))" />
+      <MemberSignature Language="F#" Value="override this.ListCheckpointsAsync : System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;seq&lt;Azure.Messaging.EventHubs.Primitives.EventProcessorCheckpoint&gt;&gt;" Usage="eventProcessorClient.ListCheckpointsAsync cancellationToken" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Messaging.EventHubs.Processor</AssemblyName>
+        <AssemblyVersion>5.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;System.Collections.Generic.IEnumerable&lt;Azure.Messaging.EventHubs.Primitives.EventProcessorCheckpoint&gt;&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+      </Parameters>
+      <Docs>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> instance to signal the request to cancel the processing.  This is most likely to occur when the processor is shutting down.</param>
+        <summary>
+               Produces a list of the available checkpoints for the Event Hub and consumer group associated with the
+               event processor instance, so that processing for a given set of partitions can be properly initialized.
+             </summary>
+        <returns>The set of checkpoints for the processor to take into account when initializing partitions.</returns>
+        <remarks>
+               Should a partition not have a corresponding checkpoint, the <see cref="P:Azure.Messaging.EventHubs.Primitives.EventProcessorOptions.DefaultStartingPosition" /> will
+               be used to initialize the partition for processing.
+            
+               In the event that a custom starting point is desired for a single partition, or each partition should start at a unique place,
+               it is recommended that this method express that intent by returning checkpoints for those partitions with the desired custom
+               starting location set.
+             </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ListOwnershipAsync">
+      <MemberSignature Language="C#" Value="protected override System.Threading.Tasks.Task&lt;System.Collections.Generic.IEnumerable&lt;Azure.Messaging.EventHubs.Primitives.EventProcessorPartitionOwnership&gt;&gt; ListOwnershipAsync (System.Threading.CancellationToken cancellationToken);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.Threading.Tasks.Task`1&lt;class System.Collections.Generic.IEnumerable`1&lt;class Azure.Messaging.EventHubs.Primitives.EventProcessorPartitionOwnership&gt;&gt; ListOwnershipAsync(valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Messaging.EventHubs.EventProcessorClient.ListOwnershipAsync(System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Function ListOwnershipAsync (cancellationToken As CancellationToken) As Task(Of IEnumerable(Of EventProcessorPartitionOwnership))" />
+      <MemberSignature Language="F#" Value="override this.ListOwnershipAsync : System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;seq&lt;Azure.Messaging.EventHubs.Primitives.EventProcessorPartitionOwnership&gt;&gt;" Usage="eventProcessorClient.ListOwnershipAsync cancellationToken" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Messaging.EventHubs.Processor</AssemblyName>
+        <AssemblyVersion>5.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;System.Collections.Generic.IEnumerable&lt;Azure.Messaging.EventHubs.Primitives.EventProcessorPartitionOwnership&gt;&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+      </Parameters>
+      <Docs>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> instance to signal the request to cancel the processing.  This is most likely to occur when the processor is shutting down.</param>
+        <summary>
+               Produces a list of the ownership assignments for partitions between each of the cooperating event processor
+               instances for a given Event Hub and consumer group pairing.  This method is used when load balancing to allow
+               the processor to discover other active collaborators and to make decisions about how to best balance work
+               between them.
+             </summary>
+        <returns>The set of ownership records to take into account when making load balancing decisions.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnInitializingPartitionAsync">
+      <MemberSignature Language="C#" Value="protected override System.Threading.Tasks.Task OnInitializingPartitionAsync (Azure.Messaging.EventHubs.Primitives.EventProcessorPartition partition, System.Threading.CancellationToken cancellationToken);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.Threading.Tasks.Task OnInitializingPartitionAsync(class Azure.Messaging.EventHubs.Primitives.EventProcessorPartition partition, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Messaging.EventHubs.EventProcessorClient.OnInitializingPartitionAsync(Azure.Messaging.EventHubs.Primitives.EventProcessorPartition,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Function OnInitializingPartitionAsync (partition As EventProcessorPartition, cancellationToken As CancellationToken) As Task" />
+      <MemberSignature Language="F#" Value="override this.OnInitializingPartitionAsync : Azure.Messaging.EventHubs.Primitives.EventProcessorPartition * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task" Usage="eventProcessorClient.OnInitializingPartitionAsync (partition, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Messaging.EventHubs.Processor</AssemblyName>
+        <AssemblyVersion>5.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="partition" Type="Azure.Messaging.EventHubs.Primitives.EventProcessorPartition" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="1" FrameworkAlternate="azure-dotnet-preview" />
+      </Parameters>
+      <Docs>
+        <param name="partition">The context of the partition being initialized.  Only the well-known members of the <see cref="T:Azure.Messaging.EventHubs.Primitives.EventProcessorPartition" /> will be populated.  If a custom context is being used, the implementor of this method is responsible for initializing custom members.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> instance to signal the request to cancel the initialization.  This is most likely to occur if the partition is claimed by another event processor instance or the processor is shutting down.</param>
+        <summary>
+               Performs the tasks to initialize a partition, and its associated context, for event processing.
+             </summary>
+        <returns>To be added.</returns>
+        <remarks>
+               It is not recommended that the state of the processor be managed directly from within this method; requesting to start or stop the processor may result in
+               a deadlock scenario, especially if using the synchronous form of the call.
+             </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnPartitionProcessingStoppedAsync">
+      <MemberSignature Language="C#" Value="protected override System.Threading.Tasks.Task OnPartitionProcessingStoppedAsync (Azure.Messaging.EventHubs.Primitives.EventProcessorPartition partition, Azure.Messaging.EventHubs.Processor.ProcessingStoppedReason reason, System.Threading.CancellationToken cancellationToken);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.Threading.Tasks.Task OnPartitionProcessingStoppedAsync(class Azure.Messaging.EventHubs.Primitives.EventProcessorPartition partition, valuetype Azure.Messaging.EventHubs.Processor.ProcessingStoppedReason reason, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Messaging.EventHubs.EventProcessorClient.OnPartitionProcessingStoppedAsync(Azure.Messaging.EventHubs.Primitives.EventProcessorPartition,Azure.Messaging.EventHubs.Processor.ProcessingStoppedReason,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Function OnPartitionProcessingStoppedAsync (partition As EventProcessorPartition, reason As ProcessingStoppedReason, cancellationToken As CancellationToken) As Task" />
+      <MemberSignature Language="F#" Value="override this.OnPartitionProcessingStoppedAsync : Azure.Messaging.EventHubs.Primitives.EventProcessorPartition * Azure.Messaging.EventHubs.Processor.ProcessingStoppedReason * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task" Usage="eventProcessorClient.OnPartitionProcessingStoppedAsync (partition, reason, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Messaging.EventHubs.Processor</AssemblyName>
+        <AssemblyVersion>5.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="partition" Type="Azure.Messaging.EventHubs.Primitives.EventProcessorPartition" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="reason" Type="Azure.Messaging.EventHubs.Processor.ProcessingStoppedReason" Index="1" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="2" FrameworkAlternate="azure-dotnet-preview" />
+      </Parameters>
+      <Docs>
+        <param name="partition">The context of the partition for which processing is being stopped.</param>
+        <param name="reason">The reason that processing is being stopped for the partition.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> instance to signal the request to cancel the processing.  This is not expected to signal under normal circumstances and will only occur if the processor encounters an unrecoverable error.</param>
+        <summary>
+               Performs the tasks needed when processing for a partition is being stopped.  This commonly occurs when the partition
+               is claimed by another event processor instance or when the current event processor instance is shutting down.
+             </summary>
+        <returns>To be added.</returns>
+        <remarks>
+               It is not recommended that the state of the processor be managed directly from within this method; requesting to start or stop the processor may result in
+               a deadlock scenario, especially if using the synchronous form of the call.
+             </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnProcessingErrorAsync">
+      <MemberSignature Language="C#" Value="protected override System.Threading.Tasks.Task OnProcessingErrorAsync (Exception exception, Azure.Messaging.EventHubs.Primitives.EventProcessorPartition partition, string operationDescription, System.Threading.CancellationToken cancellationToken);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.Threading.Tasks.Task OnProcessingErrorAsync(class System.Exception exception, class Azure.Messaging.EventHubs.Primitives.EventProcessorPartition partition, string operationDescription, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Messaging.EventHubs.EventProcessorClient.OnProcessingErrorAsync(System.Exception,Azure.Messaging.EventHubs.Primitives.EventProcessorPartition,System.String,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Function OnProcessingErrorAsync (exception As Exception, partition As EventProcessorPartition, operationDescription As String, cancellationToken As CancellationToken) As Task" />
+      <MemberSignature Language="F#" Value="override this.OnProcessingErrorAsync : Exception * Azure.Messaging.EventHubs.Primitives.EventProcessorPartition * string * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task" Usage="eventProcessorClient.OnProcessingErrorAsync (exception, partition, operationDescription, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Messaging.EventHubs.Processor</AssemblyName>
+        <AssemblyVersion>5.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="exception" Type="System.Exception" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="partition" Type="Azure.Messaging.EventHubs.Primitives.EventProcessorPartition" Index="1" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="operationDescription" Type="System.String" Index="2" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="3" FrameworkAlternate="azure-dotnet-preview" />
+      </Parameters>
+      <Docs>
+        <param name="exception">The exception that occurred during operation of the event processor.</param>
+        <param name="partition">The context of the partition associated with the error, if any; otherwise, <c>null</c>.  This may only be initialized for members of <see cref="T:Azure.Messaging.EventHubs.Primitives.EventProcessorPartition" />, depending on the point at which the error occurred.</param>
+        <param name="operationDescription">A short textual description of the operation during which the exception occurred; intended to be informational only.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> instance to signal the request to cancel the processing.  This is most likely to occur when the processor is shutting down.</param>
+        <summary>
+               Performs the tasks needed when an unexpected exception occurs within the operation of the
+               event processor infrastructure.
+             </summary>
+        <returns>To be added.</returns>
+        <remarks>
+               This error handler is invoked when there is an exception observed within the event processor itself; it is not invoked for exceptions in
+               code that has been implemented to process events or other overrides and extension points that are not critical to the processor's operation.
+               The event processor will make every effort to recover from exceptions and continue processing.  Should an exception that cannot be recovered
+               from be encountered, the processor will attempt to forfeit ownership of all partitions that it was processing so that work may be redistributed.
+            
+               The exceptions surfaced to this method may be fatal or non-fatal; because the processor may not be able to accurately predict whether an
+               exception was fatal or whether its state was corrupted, this method has responsibility for making the determination as to whether processing
+               should be terminated or restarted.  The method may do so by calling Stop on the processor instance and then, if desired, calling Start on the processor.
+            
+               It is recommended that, for production scenarios, the decision be made by considering observations made by this error handler, the method invoked
+               when initializing processing for a partition, and the method invoked when processing for a partition is stopped.  Many developers will also include
+               data from their monitoring platforms in this decision as well.
+            
+               As with event processing, should an exception occur in the code for the error handler, the event processor will allow it to bubble and will not attempt to handle
+               it in any way.  Developers are strongly encouraged to take exception scenarios into account and guard against them using try/catch blocks and other means as appropriate.
+             </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnProcessingEventBatchAsync">
+      <MemberSignature Language="C#" Value="protected override System.Threading.Tasks.Task OnProcessingEventBatchAsync (System.Collections.Generic.IEnumerable&lt;Azure.Messaging.EventHubs.EventData&gt; events, Azure.Messaging.EventHubs.Primitives.EventProcessorPartition partition, System.Threading.CancellationToken cancellationToken);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.Threading.Tasks.Task OnProcessingEventBatchAsync(class System.Collections.Generic.IEnumerable`1&lt;class Azure.Messaging.EventHubs.EventData&gt; events, class Azure.Messaging.EventHubs.Primitives.EventProcessorPartition partition, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Messaging.EventHubs.EventProcessorClient.OnProcessingEventBatchAsync(System.Collections.Generic.IEnumerable{Azure.Messaging.EventHubs.EventData},Azure.Messaging.EventHubs.Primitives.EventProcessorPartition,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Function OnProcessingEventBatchAsync (events As IEnumerable(Of EventData), partition As EventProcessorPartition, cancellationToken As CancellationToken) As Task" />
+      <MemberSignature Language="F#" Value="override this.OnProcessingEventBatchAsync : seq&lt;Azure.Messaging.EventHubs.EventData&gt; * Azure.Messaging.EventHubs.Primitives.EventProcessorPartition * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task" Usage="eventProcessorClient.OnProcessingEventBatchAsync (events, partition, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Messaging.EventHubs.Processor</AssemblyName>
+        <AssemblyVersion>5.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="events" Type="System.Collections.Generic.IEnumerable&lt;Azure.Messaging.EventHubs.EventData&gt;" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="partition" Type="Azure.Messaging.EventHubs.Primitives.EventProcessorPartition" Index="1" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="2" FrameworkAlternate="azure-dotnet-preview" />
+      </Parameters>
+      <Docs>
+        <param name="events">The batch of events to be processed.</param>
+        <param name="partition">The context of the partition from which the events were read.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> instance to signal the request to cancel the processing.  This is most likely to occur when the processor is shutting down.</param>
+        <summary>
+               Performs the tasks needed to process a batch of events for a given partition as they are read from the Event Hubs service.
+             </summary>
+        <returns>To be added.</returns>
+        <remarks>
+          <para>The number of events in the <paramref name="events" /> batch may vary.  The batch will contain a number of events between zero and batch size that was
+               requested when the processor was created, depending on the availability of events in the partition within the requested <see cref="P:Azure.Messaging.EventHubs.Primitives.EventProcessorOptions.MaximumWaitTime" />
+               interval.
+            
+               If there are enough events available in the Event Hub partition to fill a batch of the requested size, the processor will populate the batch and dispatch it to this method
+               immediately.  If there were not a sufficient number of events available in the partition to populate a full batch, the event processor will continue reading from the partition
+               to reach the requested batch size until the <see cref="P:Azure.Messaging.EventHubs.Primitives.EventProcessorOptions.MaximumWaitTime" /> has elapsed, at which point it will return a batch containing whatever events were
+               available by the end of that period.
+            
+               If a <see cref="P:Azure.Messaging.EventHubs.Primitives.EventProcessorOptions.MaximumWaitTime" /> was not requested, indicated by setting the option to <c>null</c>, the event processor will continue reading from the Event Hub
+               partition until a full batch of the requested size could be populated and will not dispatch any partial batches to this method.</para>
+          <para>Should an exception occur within the code for this method, the event processor will allow it to bubble and will not surface to the error handler or attempt to handle
+               it in any way.  Developers are strongly encouraged to take exception scenarios into account and guard against them using try/catch blocks and other means as appropriate.</para>
+          <para>It is not recommended that the state of the processor be managed directly from within this method; requesting to start or stop the processor may result in
+               a deadlock scenario, especially if using the synchronous form of the call.</para>
+        </remarks>
+      </Docs>
+    </Member>
     <Member MemberName="PartitionClosingAsync">
       <MemberSignature Language="C#" Value="public event Func&lt;Azure.Messaging.EventHubs.Processor.PartitionClosingEventArgs,System.Threading.Tasks.Task&gt; PartitionClosingAsync;" />
       <MemberSignature Language="ILAsm" Value=".event class System.Func`2&lt;class Azure.Messaging.EventHubs.Processor.PartitionClosingEventArgs, class System.Threading.Tasks.Task&gt; PartitionClosingAsync" />
@@ -387,6 +698,7 @@
       <AssemblyInfo>
         <AssemblyName>Azure.Messaging.EventHubs.Processor</AssemblyName>
         <AssemblyVersion>5.0.1.0</AssemblyVersion>
+        <AssemblyVersion>5.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Func&lt;Azure.Messaging.EventHubs.Processor.PartitionClosingEventArgs,System.Threading.Tasks.Task&gt;</ReturnType>
@@ -408,6 +720,7 @@
       <AssemblyInfo>
         <AssemblyName>Azure.Messaging.EventHubs.Processor</AssemblyName>
         <AssemblyVersion>5.0.1.0</AssemblyVersion>
+        <AssemblyVersion>5.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Func&lt;Azure.Messaging.EventHubs.Processor.PartitionInitializingEventArgs,System.Threading.Tasks.Task&gt;</ReturnType>
@@ -429,6 +742,7 @@
       <AssemblyInfo>
         <AssemblyName>Azure.Messaging.EventHubs.Processor</AssemblyName>
         <AssemblyVersion>5.0.1.0</AssemblyVersion>
+        <AssemblyVersion>5.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Func&lt;Azure.Messaging.EventHubs.Processor.ProcessErrorEventArgs,System.Threading.Tasks.Task&gt;</ReturnType>
@@ -451,6 +765,7 @@
       <AssemblyInfo>
         <AssemblyName>Azure.Messaging.EventHubs.Processor</AssemblyName>
         <AssemblyVersion>5.0.1.0</AssemblyVersion>
+        <AssemblyVersion>5.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Func&lt;Azure.Messaging.EventHubs.Processor.ProcessEventArgs,System.Threading.Tasks.Task&gt;</ReturnType>
@@ -464,15 +779,20 @@
       </Docs>
     </Member>
     <Member MemberName="StartProcessing">
-      <MemberSignature Language="C#" Value="public virtual void StartProcessing (System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void StartProcessing(valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual void StartProcessing (System.Threading.CancellationToken cancellationToken = default);" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void StartProcessing(valuetype System.Threading.CancellationToken cancellationToken) cil managed" FrameworkAlternate="azure-dotnet" />
       <MemberSignature Language="DocId" Value="M:Azure.Messaging.EventHubs.EventProcessorClient.StartProcessing(System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Sub StartProcessing (Optional cancellationToken As CancellationToken = null)" />
-      <MemberSignature Language="F#" Value="abstract member StartProcessing : System.Threading.CancellationToken -&gt; unit&#xA;override this.StartProcessing : System.Threading.CancellationToken -&gt; unit" Usage="eventProcessorClient.StartProcessing cancellationToken" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Sub StartProcessing (Optional cancellationToken As CancellationToken = null)" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="F#" Value="abstract member StartProcessing : System.Threading.CancellationToken -&gt; unit&#xA;override this.StartProcessing : System.Threading.CancellationToken -&gt; unit" Usage="eventProcessorClient.StartProcessing cancellationToken" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="C#" Value="public override void StartProcessing (System.Threading.CancellationToken cancellationToken = default);" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void StartProcessing(valuetype System.Threading.CancellationToken cancellationToken) cil managed" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub StartProcessing (Optional cancellationToken As CancellationToken = null)" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="F#" Value="override this.StartProcessing : System.Threading.CancellationToken -&gt; unit" Usage="eventProcessorClient.StartProcessing cancellationToken" FrameworkAlternate="azure-dotnet-preview" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Messaging.EventHubs.Processor</AssemblyName>
         <AssemblyVersion>5.0.1.0</AssemblyVersion>
+        <AssemblyVersion>5.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -492,15 +812,20 @@
       </Docs>
     </Member>
     <Member MemberName="StartProcessingAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task StartProcessingAsync (System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task StartProcessingAsync(valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task StartProcessingAsync (System.Threading.CancellationToken cancellationToken = default);" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task StartProcessingAsync(valuetype System.Threading.CancellationToken cancellationToken) cil managed" FrameworkAlternate="azure-dotnet" />
       <MemberSignature Language="DocId" Value="M:Azure.Messaging.EventHubs.EventProcessorClient.StartProcessingAsync(System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function StartProcessingAsync (Optional cancellationToken As CancellationToken = null) As Task" />
-      <MemberSignature Language="F#" Value="abstract member StartProcessingAsync : System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&#xA;override this.StartProcessingAsync : System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task" Usage="eventProcessorClient.StartProcessingAsync cancellationToken" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function StartProcessingAsync (Optional cancellationToken As CancellationToken = null) As Task" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="F#" Value="abstract member StartProcessingAsync : System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&#xA;override this.StartProcessingAsync : System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task" Usage="eventProcessorClient.StartProcessingAsync cancellationToken" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="C#" Value="public override System.Threading.Tasks.Task StartProcessingAsync (System.Threading.CancellationToken cancellationToken = default);" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Threading.Tasks.Task StartProcessingAsync(valuetype System.Threading.CancellationToken cancellationToken) cil managed" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function StartProcessingAsync (Optional cancellationToken As CancellationToken = null) As Task" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="F#" Value="override this.StartProcessingAsync : System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task" Usage="eventProcessorClient.StartProcessingAsync cancellationToken" FrameworkAlternate="azure-dotnet-preview" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Messaging.EventHubs.Processor</AssemblyName>
         <AssemblyVersion>5.0.1.0</AssemblyVersion>
+        <AssemblyVersion>5.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -521,15 +846,20 @@
       </Docs>
     </Member>
     <Member MemberName="StopProcessing">
-      <MemberSignature Language="C#" Value="public virtual void StopProcessing (System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void StopProcessing(valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual void StopProcessing (System.Threading.CancellationToken cancellationToken = default);" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void StopProcessing(valuetype System.Threading.CancellationToken cancellationToken) cil managed" FrameworkAlternate="azure-dotnet" />
       <MemberSignature Language="DocId" Value="M:Azure.Messaging.EventHubs.EventProcessorClient.StopProcessing(System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Sub StopProcessing (Optional cancellationToken As CancellationToken = null)" />
-      <MemberSignature Language="F#" Value="abstract member StopProcessing : System.Threading.CancellationToken -&gt; unit&#xA;override this.StopProcessing : System.Threading.CancellationToken -&gt; unit" Usage="eventProcessorClient.StopProcessing cancellationToken" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Sub StopProcessing (Optional cancellationToken As CancellationToken = null)" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="F#" Value="abstract member StopProcessing : System.Threading.CancellationToken -&gt; unit&#xA;override this.StopProcessing : System.Threading.CancellationToken -&gt; unit" Usage="eventProcessorClient.StopProcessing cancellationToken" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="C#" Value="public override void StopProcessing (System.Threading.CancellationToken cancellationToken = default);" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void StopProcessing(valuetype System.Threading.CancellationToken cancellationToken) cil managed" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub StopProcessing (Optional cancellationToken As CancellationToken = null)" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="F#" Value="override this.StopProcessing : System.Threading.CancellationToken -&gt; unit" Usage="eventProcessorClient.StopProcessing cancellationToken" FrameworkAlternate="azure-dotnet-preview" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Messaging.EventHubs.Processor</AssemblyName>
         <AssemblyVersion>5.0.1.0</AssemblyVersion>
+        <AssemblyVersion>5.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -547,15 +877,20 @@
       </Docs>
     </Member>
     <Member MemberName="StopProcessingAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task StopProcessingAsync (System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task StopProcessingAsync(valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task StopProcessingAsync (System.Threading.CancellationToken cancellationToken = default);" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task StopProcessingAsync(valuetype System.Threading.CancellationToken cancellationToken) cil managed" FrameworkAlternate="azure-dotnet" />
       <MemberSignature Language="DocId" Value="M:Azure.Messaging.EventHubs.EventProcessorClient.StopProcessingAsync(System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function StopProcessingAsync (Optional cancellationToken As CancellationToken = null) As Task" />
-      <MemberSignature Language="F#" Value="abstract member StopProcessingAsync : System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&#xA;override this.StopProcessingAsync : System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task" Usage="eventProcessorClient.StopProcessingAsync cancellationToken" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function StopProcessingAsync (Optional cancellationToken As CancellationToken = null) As Task" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="F#" Value="abstract member StopProcessingAsync : System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&#xA;override this.StopProcessingAsync : System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task" Usage="eventProcessorClient.StopProcessingAsync cancellationToken" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="C#" Value="public override System.Threading.Tasks.Task StopProcessingAsync (System.Threading.CancellationToken cancellationToken = default);" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Threading.Tasks.Task StopProcessingAsync(valuetype System.Threading.CancellationToken cancellationToken) cil managed" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function StopProcessingAsync (Optional cancellationToken As CancellationToken = null) As Task" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="F#" Value="override this.StopProcessingAsync : System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task" Usage="eventProcessorClient.StopProcessingAsync cancellationToken" FrameworkAlternate="azure-dotnet-preview" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Messaging.EventHubs.Processor</AssemblyName>
         <AssemblyVersion>5.0.1.0</AssemblyVersion>
+        <AssemblyVersion>5.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -583,6 +918,7 @@
       <AssemblyInfo>
         <AssemblyName>Azure.Messaging.EventHubs.Processor</AssemblyName>
         <AssemblyVersion>5.0.1.0</AssemblyVersion>
+        <AssemblyVersion>5.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
