@@ -12,7 +12,7 @@ ms.technology: azure
 ms.service: key-vault
 ---
 
-# Azure Key Vault Secrets for .NET Readme - Version 4.0.2
+# Azure Key Vault secret client library for .NET - Version 4.0.3
 Azure Key Vault is a cloud service that provides a secure storage of secrets, such as passwords and database connection strings.
 
 The secret client library allows you to securely store and control the access to tokens, passwords, API keys, and other secrets. This library offers operations to create, retrieve, update, delete, purge, backup, restore, and list the secrets and its versions.
@@ -319,25 +319,32 @@ Several Key Vault Secrets client library samples are available to you in this Gi
 * For Keys client library see [Keys client library][keys_client_library].
 * For Certificates client library see [Certificates client library][certificates_client_library].
 
+## Contributing
+This project welcomes contributions and suggestions. Most contributions require you to agree to a Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us the rights to use your contribution. For details, visit https://cla.microsoft.com.
+
+When you submit a pull request, a CLA-bot will automatically determine whether you need to provide a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions provided by the bot. You will only need to do this once across all repos using our CLA.
+
+This project has adopted the [Microsoft Open Source Code of Conduct][code_of_conduct]. For more information see the Code of Conduct FAQ or contact opencode@microsoft.com with any additional questions or comments.
 
 <!-- LINKS -->
 [API_reference]: https://docs.microsoft.com/dotnet/api/azure.security.keyvault.secrets
 [azure_cli]: https://docs.microsoft.com/cli/azure
 [azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/identity/Azure.Identity
 [azure_sub]: https://azure.microsoft.com/free/
-[backup_and_restore_sample]: samples/Sample2_BackupAndRestore.md
+[backup_and_restore_sample]: https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/keyvault/Azure.Security.KeyVault.Secrets/samples/Sample2_BackupAndRestore.md
 [certificates_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/keyvault/Azure.Security.KeyVault.Certificates
-[get_secrets_sample]: samples/Sample3_GetSecrets.md
-[hello_world_sample]: samples/Sample1_HelloWorld.md
+[code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
+[get_secrets_sample]: https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/keyvault/Azure.Security.KeyVault.Secrets/samples/Sample3_GetSecrets.md
+[hello_world_sample]: https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/keyvault/Azure.Security.KeyVault.Secrets/samples/Sample1_HelloWorld.md
 [keys_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/keyvault/Azure.Security.KeyVault.Keys
 [keyvault_docs]: https://docs.microsoft.com/azure/key-vault/
 [keyvault_rest]: https://docs.microsoft.com/rest/api/keyvault/
 [nuget]: https://www.nuget.org/
-[secret_client_class]: src/SecretClient.cs
+[secret_client_class]: https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/keyvault/Azure.Security.KeyVault.Secrets/src/SecretClient.cs
 [secret_client_nuget_package]: https://www.nuget.org/packages/Azure.Security.KeyVault.Secrets/
 [secret_client_samples]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/keyvault/Azure.Security.KeyVault.Secrets/samples
 [secret_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/keyvault/Azure.Security.KeyVault.Secrets/src
 [soft_delete]: https://docs.microsoft.com/azure/key-vault/key-vault-ovw-soft-delete
-[DefaultAzureCredential]: ../../identity/Azure.Identity/README.md
+[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/identity/Azure.Identity/README.md
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fkeyvault%2FAzure.Security.KeyVault.Secrets%2FREADME.png)

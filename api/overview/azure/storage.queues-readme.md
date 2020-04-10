@@ -12,7 +12,7 @@ ms.technology: azure
 ms.service: storage
 ---
 
-# Azure Storage Queues for .NET Readme - Version 12.2.0
+# Azure Storage Queues client library for .NET - Version 12.2.0
 
 > Server Version: 2019-07-07 and 2019-02-02
 
@@ -169,9 +169,23 @@ catch (RequestFailedException ex)
 
 Get started with our [Queue samples][samples]:
 
-1. [Hello World](samples/Sample01a_HelloWorld.cs): Enqueue, Dequeue, Peek, and Update queue messages (or [asynchronously](samples/Sample01b_HelloWorldAsync.cs))
-2. [Auth](samples/Sample02_Auth.cs): Authenticate with connection strings, shared keys, shared access signatures, and Azure Active Directory.
+1. [Hello World](https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/storage/Azure.Storage.Queues/samples/Sample01a_HelloWorld.cs): Enqueue, Dequeue, Peek, and Update queue messages (or [asynchronously](https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/storage/Azure.Storage.Queues/samples/Sample01b_HelloWorldAsync.cs))
+2. [Auth](https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/storage/Azure.Storage.Queues/samples/Sample02_Auth.cs): Authenticate with connection strings, shared keys, shared access signatures, and Azure Active Directory.
 
+## Contributing
+
+See the [Storage CONTRIBUTING.md][storage_contrib] for details on building,
+testing, and contributing to this library.
+
+This project welcomes contributions and suggestions.  Most contributions require
+you to agree to a Contributor License Agreement (CLA) declaring that you have
+the right to, and actually do, grant us the rights to use your contribution. For
+details, visit [cla.microsoft.com][cla].
+
+This project has adopted the [Microsoft Open Source Code of Conduct][coc].
+For more information see the [Code of Conduct FAQ][coc_faq]
+or contact [opencode@microsoft.com][coc_contact] with any
+additional questions or comments.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fstorage%2FAzure.Storage.Queues%2FREADME.png)
 
@@ -193,4 +207,9 @@ Get started with our [Queue samples][samples]:
 [storage_ad_sample]: samples/Sample02c_Auth_ActiveDirectory.cs
 [RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/core/Azure.Core/src/RequestFailedException.cs
 [error_codes]: https://docs.microsoft.com/rest/api/storageservices/queue-service-error-codes
-[samples]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/storage/Azure.Storage.Queues/samples
+[samples]: https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/storage/Azure.Storage.Queues/samples
+[storage_contrib]: https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/storage/CONTRIBUTING.md
+[cla]: https://cla.microsoft.com
+[coc]: https://opensource.microsoft.com/codeofconduct/
+[coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
+[coc_contact]: mailto:opencode@microsoft.com

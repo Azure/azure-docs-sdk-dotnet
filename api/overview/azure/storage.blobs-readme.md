@@ -12,7 +12,8 @@ ms.technology: azure
 ms.service: storage
 ---
 
-# Azure Storage Blobs for .NET Readme - Version 12.4.0
+
+# Azure Storage Blobs client library for .NET - Version 12.4.1
 
 > Server Version: 2019-07-07 and 2019-02-02
 
@@ -63,7 +64,7 @@ Blob storage offers three types of resources:
 - A _container_ in the storage account used via `BlobContainerClient`
 - A _blob_ in a container used via `BlobClient`
 
-Learn more about options for authentication _(including Connection Strings, Shared Key, Shared Key Signatures, Active Directory, and anonymous public access)_ [in our samples.](samples/Sample02_Auth.cs)
+Learn more about options for authentication _(including Connection Strings, Shared Key, Shared Key Signatures, Active Directory, and anonymous public access)_ [in our samples.](https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/storage/Azure.Storage.Blobs/samples/Sample02_Auth.cs)
 
 ## Examples
 
@@ -186,9 +187,23 @@ catch (RequestFailedException ex)
 
 Get started with our [Blob samples][samples]:
 
-1. [Hello World](samples/Sample01a_HelloWorld.cs): Upload, download, and list blobs (or [asynchronously](samples/Sample01b_HelloWorldAsync.cs))
-2. [Auth](samples/Sample02_Auth.cs): Authenticate with connection strings, public access, shared keys, shared access signatures, and Azure Active Directory.
+1. [Hello World](https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/storage/Azure.Storage.Blobs/samples/Sample01a_HelloWorld.cs): Upload, download, and list blobs (or [asynchronously](https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/storage/Azure.Storage.Blobs/samples/Sample01b_HelloWorldAsync.cs))
+2. [Auth](https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/storage/Azure.Storage.Blobs/samples/Sample02_Auth.cs): Authenticate with connection strings, public access, shared keys, shared access signatures, and Azure Active Directory.
 
+## Contributing
+
+See the [Storage CONTRIBUTING.md][storage_contrib] for details on building,
+testing, and contributing to this library.
+
+This project welcomes contributions and suggestions.  Most contributions require
+you to agree to a Contributor License Agreement (CLA) declaring that you have
+the right to, and actually do, grant us the rights to use your contribution. For
+details, visit [cla.microsoft.com][cla].
+
+This project has adopted the [Microsoft Open Source Code of Conduct][coc].
+For more information see the [Code of Conduct FAQ][coc_faq]
+or contact [opencode@microsoft.com][coc_contact] with any
+additional questions or comments.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fstorage%2FAzure.Storage.Blobs%2FREADME.png)
 
@@ -207,7 +222,12 @@ Get started with our [Blob samples][samples]:
 [azure_sub]: https://azure.microsoft.com/free/
 [identity]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/identity/Azure.Identity/README.md
 [storage_ad]: https://docs.microsoft.com/azure/storage/common/storage-auth-aad
-[storage_ad_sample]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/storage/Azure.Storage.Blobs/samples/Sample02c_Auth_ActiveDirectory.cs
+[storage_ad_sample]: samples/Sample02c_Auth_ActiveDirectory.cs
 [RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/core/Azure.Core/src/RequestFailedException.cs
 [error_codes]: https://docs.microsoft.com/rest/api/storageservices/blob-service-error-codes
-[samples]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/storage/Azure.Storage.Blobs/samples
+[samples]: https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/storage/Azure.Storage.Blobs/samples
+[storage_contrib]: https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/storage/CONTRIBUTING.md
+[cla]: https://cla.microsoft.com
+[coc]: https://opensource.microsoft.com/codeofconduct/
+[coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
+[coc_contact]: mailto:opencode@microsoft.com
