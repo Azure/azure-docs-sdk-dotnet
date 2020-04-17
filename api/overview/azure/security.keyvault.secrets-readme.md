@@ -1,18 +1,17 @@
 ---
-title: .NET Azure Key Vault Secrets Readme
-description: 
-keywords: Azure, .NET, SDK, API, Key Vault, Secrets
+title: Azure Key Vault secret client library for .NET
+keywords: Azure, .NET, SDK, API, keyvault, Azure.Security.KeyVault.Secrets
 author: maggiepint
 ms.author: magpint
-manager: twolley
-ms.date: 03/12/2020
+ms.date: 04/16/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.service: key-vault
+ms.devlang: .NET
+ms.service: keyvault
 ---
+ # Azure Key Vault secret client library for .NET - Version 4.0.3 
 
-# Azure Key Vault secret client library for .NET - Version 4.0.3
 Azure Key Vault is a cloud service that provides a secure storage of secrets, such as passwords and database connection strings.
 
 The secret client library allows you to securely store and control the access to tokens, passwords, API keys, and other secrets. This library offers operations to create, retrieve, update, delete, purge, backup, restore, and list the secrets and its versions.

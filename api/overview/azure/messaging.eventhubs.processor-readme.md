@@ -1,18 +1,17 @@
 ---
-title: .NET Azure Event Hubs Processor Readme
-description: 
-keywords: Azure, .NET, SDK, API, Event Hubs
+title: Azure Event Hubs Event Processor client library for .NET
+keywords: Azure, .NET, SDK, API, eventhub, Azure.Messaging.EventHubs.Processor
 author: maggiepint
 ms.author: magpint
-manager: twolley
-ms.date: 03/12/2020
+ms.date: 04/16/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.service: eventhubs
+ms.devlang: .NET
+ms.service: eventhub
 ---
+ # Azure Event Hubs Event Processor client library for .NET - Version 5.0.1 
 
-# Azure Event Hubs Event Processor client library for .NET - Version 5.0.1
 
 Azure Event Hubs is a highly scalable publish-subscribe service that can ingest millions of events per second and stream them to multiple consumers. This lets you process and analyze the massive amounts of data produced by your connected devices and applications. Once Event Hubs has collected the data, you can retrieve, transform and store it by using any real-time analytics provider or with batching/storage adapters.  If you would like to know more about Azure Event Hubs, you may wish to review: [What is Event Hubs](https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-about)?
 
@@ -46,7 +45,8 @@ To quickly create the needed resources in Azure and to receive connection string
 
 ### Install the package
 
-Install the Azure Event Hubs Event Processor client library for .NET using [NuGet](https://www.nuget.org/):
+Install the Azure Event Hubs Event Processor client library for .NET - Version 5.0.1 
+ using [NuGet](https://www.nuget.org/):
 
 ```PowerShell
 dotnet add package Azure.Messaging.EventHubs.Processor

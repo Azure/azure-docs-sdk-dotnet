@@ -1,19 +1,17 @@
 ---
-title: Azure Files for .NET Readme
-description: 
-keywords: Azure, .NET, SDK, API, Storage, Queue
+title: Azure Storage File Shares client library for .NET
+keywords: Azure, .NET, SDK, API, storage, Azure.Storage.Files.Shares
 author: maggiepint
 ms.author: magpint
-manager: twolley
-ms.date: 03/12/2020
+ms.date: 04/16/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
+ms.devlang: .NET
 ms.service: storage
 ---
+ # Azure Storage File Shares client library for .NET - Version 12.2.0 
 
-
-# Azure Storage File Shares client library for .NET - Version 12.2.0
 
 > Server Version: 2019-07-07
 
@@ -30,7 +28,8 @@ being used.
 
 ### Install the package
 
-Install the Azure Storage File Shares client library for .NET with [NuGet][nuget]:
+Install the Azure Storage File Shares client library for .NET - Version 12.2.0 
+ with [NuGet][nuget]:
 
 ```Powershell
 dotnet add package Azure.Storage.Files.Shares

@@ -1,19 +1,17 @@
 ---
-title: .NET Azure Storage Blob Batch Readme
-description: 
-keywords: Azure, .NET, SDK, API, Storage, Blob
+title: Azure Storage Blobs Batch client library for .NET
+keywords: Azure, .NET, SDK, API, storage, Azure.Storage.Blobs.Batch
 author: maggiepint
 ms.author: magpint
-manager: twolley
-ms.date: 03/12/2020
+ms.date: 04/16/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
+ms.devlang: .NET
 ms.service: storage
 ---
+ # Azure Storage Blobs Batch client library for .NET - Version 12.2.1 
 
-
-# Azure Storage Blobs Batch client library for .NET - Version 12.2.0
 
 > Server Version: 2019-07-07 and 2019-02-02
 
@@ -27,7 +25,8 @@ library allows you to batch multiple Azure Blob Storage operations in a single r
 
 ### Install the package
 
-Install the Azure Storage Blobs Batch client library for .NET with [NuGet][nuget]:
+Install the Azure Storage Blobs Batch client library for .NET - Version 12.2.1 
+ with [NuGet][nuget]:
 
 ```Powershell
 dotnet add package Azure.Storage.Blobs.Batch

@@ -1,18 +1,17 @@
 ---
-title: .NET Azure Key Vault Certificates Readme
-description: 
-keywords: Azure, .NET, SDK, API, Key Vault, Certificates
+title: Azure Key Vault Certificate client library for .NET
+keywords: Azure, .NET, SDK, API, keyvault, Azure.Security.KeyVault.Certificates
 author: maggiepint
 ms.author: magpint
-manager: twolley
-ms.date: 03/12/2020
+ms.date: 04/16/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.service: key-vault
+ms.devlang: .NET
+ms.service: keyvault
 ---
+ # Azure Key Vault Certificate client library for .NET - Version 4.0.2 
 
-# Azure Key Vault Certificate client library for .NET - Version 4.0.2
 Azure Key Vault is a cloud service that provides secure storage and automated management of certificates used throughout a cloud application. Multiple certificate, and multiple versions of the same certificate, can be kept in the Key Vault. Each certificate in the vault has a policy associated with it which controls the issuance and lifetime of the certificate, along with actions to be taken as certificates near expiry.
 
 The Azure Key Vault Certificate client library enables programmatically managing certificates, offering methods to create, update, list, and delete certificates, policies, issuers, and contacts. The library also supports managing pending certificate operations and management of deleted certificates.
