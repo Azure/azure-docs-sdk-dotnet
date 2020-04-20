@@ -1,18 +1,17 @@
 ---
-title: .NET Azure Storage Queues Readme
-description: 
-keywords: Azure, .NET, SDK, API, Storage, Queue
+title: Azure Storage Queues client library for .NET
+keywords: Azure, .NET, SDK, API, storage, Azure.Storage.Queues
 author: maggiepint
 ms.author: magpint
-manager: twolley
-ms.date: 02/21/2020
+ms.date: 04/16/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
+ms.devlang: .NET
 ms.service: storage
 ---
+ # Azure Storage Queues client library for .NET - Version 12.3.0 
 
-# Azure Storage Queues client library for .NET - Version 12.2.0
 
 > Server Version: 2019-07-07 and 2019-02-02
 
@@ -28,7 +27,8 @@ a storage account.
 
 ### Install the package
 
-Install the Azure Storage Queues client library for .NET with [NuGet][nuget]:
+Install the Azure Storage Queues client library for .NET - Version 12.3.0 
+ with [NuGet][nuget]:
 
 ```Powershell
 dotnet add package Azure.Storage.Queues

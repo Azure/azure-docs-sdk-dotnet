@@ -1,20 +1,17 @@
 ---
-title: Azure Storage Common for .NET Readme
-description: 
-keywords: Azure, .NET, SDK, API, Storage
+title: Azure Storage Common client library for .NET
+keywords: Azure, .NET, SDK, API, storage, Azure.Storage.Common
 author: maggiepint
 ms.author: magpint
-manager: twolley
-ms.date: 03/12/2020
+ms.date: 04/16/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
+ms.devlang: .NET
 ms.service: storage
 ---
+ # Azure Storage Common client library for .NET - Version 12.4.0 
 
-
-
-# Azure Storage Common client library for .NET - Version 12.4.0
 
 > Server Version: 2019-07-07 and 2019-02-02
 

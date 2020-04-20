@@ -1,18 +1,17 @@
 ---
-title: .NET Azure Storage Queues Readme
-description: 
-keywords: Azure, .NET, SDK, API, Storage, Queue
+title: Azure Storage Files Data Lake client library for .NET
+keywords: Azure, .NET, SDK, API, storage, Azure.Storage.Files.DataLake
 author: maggiepint
 ms.author: magpint
-manager: twolley
-ms.date: 02/21/2020
+ms.date: 04/16/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
+ms.devlang: .NET
 ms.service: storage
 ---
+ # Azure Storage Files Data Lake client library for .NET - Version 12.1.0 
 
-# Azure Storage Files Data Lake client library for .NET - Version 12.1.0
 
 > Server Version: 2019-07-07 and 2019-02-02
 
@@ -27,7 +26,8 @@ while making it faster to get up and running with batch, streaming, and interact
 
 ### Install the package
 
-Install the Azure Storage Files Data Lake client library for .NET with [NuGet][nuget]:
+Install the Azure Storage Files Data Lake client library for .NET - Version 12.1.0 
+ with [NuGet][nuget]:
 
 ```Powershell
 dotnet add package Azure.Storage.Files.DataLake --version 12.0.0-preview.9

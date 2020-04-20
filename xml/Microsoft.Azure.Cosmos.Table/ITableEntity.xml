@@ -8,6 +8,7 @@
     <AssemblyName>Microsoft.Azure.Cosmos.Table</AssemblyName>
     <AssemblyVersion>1.0.5.0</AssemblyVersion>
     <AssemblyVersion>1.0.6.0</AssemblyVersion>
+    <AssemblyVersion>1.0.7.0</AssemblyVersion>
   </AssemblyInfo>
   <AssemblyInfo>
     <AssemblyName>Microsoft.Azure.Cosmos.Table.Client</AssemblyName>
@@ -15,8 +16,22 @@
   </AssemblyInfo>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>
+            An interface required for table entity types. The <see cref="T:Microsoft.Azure.Cosmos.Table.ITableEntity" /> interface declares getter and setter methods for the mandatory entity properties, and <see cref="M:Microsoft.Azure.Cosmos.Table.ITableEntity.ReadEntity(System.Collections.Generic.IDictionary{System.String,Microsoft.Azure.Cosmos.Table.EntityProperty},Microsoft.Azure.Cosmos.Table.OperationContext)" /> 
+            and <see cref="M:Microsoft.Azure.Cosmos.Table.ITableEntity.WriteEntity(Microsoft.Azure.Cosmos.Table.OperationContext)" /> methods for serialization and de-serialization of all entity properties using a property dictionary. Create classes implementing <see cref="T:Microsoft.Azure.Cosmos.Table.ITableEntity" /> to customize property 
+            storage, retrieval, serialization and de-serialization, and to provide additional custom logic for a table entity.
+            </summary>
+    <remarks>
+      <para>The storage client library includes two implementations of <see cref="T:Microsoft.Azure.Cosmos.Table.ITableEntity" /> that provide for simple property access and serialization:</para>
+      <para>
+        <see cref="T:Microsoft.Azure.Cosmos.Table.DynamicTableEntity" /> implements <see cref="T:Microsoft.Azure.Cosmos.Table.ITableEntity" /> and provides a simple property dictionary to store and retrieve properties. Use a <see cref="T:Microsoft.Azure.Cosmos.Table.DynamicTableEntity" /> for simple access 
+            to entity properties when only a subset of properties are returned (for example, by a select clause in a query), or for scenarios where your query can return multiple entity types 
+            with different properties. You can also use this type to perform bulk table updates of heterogeneous entities without losing property information.</para>
+      <para>
+        <see cref="T:Microsoft.Azure.Cosmos.Table.TableEntity" /> is an implementation of <see cref="T:Microsoft.Azure.Cosmos.Table.ITableEntity" /> that uses reflection-based serialization and de-serialization behavior in its <see cref="M:Microsoft.Azure.Cosmos.Table.TableEntity.ReadEntity(System.Collections.Generic.IDictionary{System.String,Microsoft.Azure.Cosmos.Table.EntityProperty},Microsoft.Azure.Cosmos.Table.OperationContext)" /> and <see cref="M:Microsoft.Azure.Cosmos.Table.TableEntity.WriteEntity(Microsoft.Azure.Cosmos.Table.OperationContext)" /> methods. 
+            <see cref="T:Microsoft.Azure.Cosmos.Table.TableEntity" />-derived classes with methods that follow a convention for types and naming are serialized and deserialized automatically. <see cref="T:Microsoft.Azure.Cosmos.Table.TableEntity" />-derived classes must also provide a get-able and set-able public
+            property of a type that is supported by the Microsoft Azure Table service.</para>
+    </remarks>
   </Docs>
   <Members>
     <Member MemberName="ETag">
@@ -30,6 +45,7 @@
         <AssemblyName>Microsoft.Azure.Cosmos.Table</AssemblyName>
         <AssemblyVersion>1.0.5.0</AssemblyVersion>
         <AssemblyVersion>1.0.6.0</AssemblyVersion>
+        <AssemblyVersion>1.0.7.0</AssemblyVersion>
       </AssemblyInfo>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Table.Client</AssemblyName>
@@ -39,8 +55,12 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>
+            Gets or sets the entity's current ETag.  Set this value to '*'
+            in order to blindly overwrite an entity as part of an update
+            operation.
+            </summary>
+        <value>The entity's timestamp.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -55,6 +75,7 @@
         <AssemblyName>Microsoft.Azure.Cosmos.Table</AssemblyName>
         <AssemblyVersion>1.0.5.0</AssemblyVersion>
         <AssemblyVersion>1.0.6.0</AssemblyVersion>
+        <AssemblyVersion>1.0.7.0</AssemblyVersion>
       </AssemblyInfo>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Table.Client</AssemblyName>
@@ -64,8 +85,10 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>
+            Gets or sets the entity's partition key.
+            </summary>
+        <value>The entity's partition key.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -80,6 +103,7 @@
         <AssemblyName>Microsoft.Azure.Cosmos.Table</AssemblyName>
         <AssemblyVersion>1.0.5.0</AssemblyVersion>
         <AssemblyVersion>1.0.6.0</AssemblyVersion>
+        <AssemblyVersion>1.0.7.0</AssemblyVersion>
       </AssemblyInfo>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Table.Client</AssemblyName>
@@ -93,9 +117,11 @@
         <Parameter Name="operationContext" Type="Microsoft.Azure.Cosmos.Table.OperationContext" />
       </Parameters>
       <Docs>
-        <param name="properties">To be added.</param>
-        <param name="operationContext">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="properties">The dictionary of string property names to <see cref="T:Microsoft.Azure.Cosmos.Table.EntityProperty" /> data values to deserialize and store in this table entity instance.</param>
+        <param name="operationContext">An <see cref="T:Microsoft.Azure.Cosmos.Table.OperationContext" /> object that represents the context for the current operation.</param>
+        <summary>
+            Populates the entity's properties from the <see cref="T:Microsoft.Azure.Cosmos.Table.EntityProperty" /> data values in the <paramref name="properties" /> dictionary. 
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -110,6 +136,7 @@
         <AssemblyName>Microsoft.Azure.Cosmos.Table</AssemblyName>
         <AssemblyVersion>1.0.5.0</AssemblyVersion>
         <AssemblyVersion>1.0.6.0</AssemblyVersion>
+        <AssemblyVersion>1.0.7.0</AssemblyVersion>
       </AssemblyInfo>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Table.Client</AssemblyName>
@@ -119,8 +146,10 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>
+            Gets or sets the entity's row key.
+            </summary>
+        <value>The entity's row key.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -135,6 +164,7 @@
         <AssemblyName>Microsoft.Azure.Cosmos.Table</AssemblyName>
         <AssemblyVersion>1.0.5.0</AssemblyVersion>
         <AssemblyVersion>1.0.6.0</AssemblyVersion>
+        <AssemblyVersion>1.0.7.0</AssemblyVersion>
       </AssemblyInfo>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Table.Client</AssemblyName>
@@ -144,8 +174,10 @@
         <ReturnType>System.DateTimeOffset</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>
+            Gets or sets the entity's timestamp.
+            </summary>
+        <value>The entity's timestamp. The property is populated by the Microsoft Azure Table Service.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -160,6 +192,7 @@
         <AssemblyName>Microsoft.Azure.Cosmos.Table</AssemblyName>
         <AssemblyVersion>1.0.5.0</AssemblyVersion>
         <AssemblyVersion>1.0.6.0</AssemblyVersion>
+        <AssemblyVersion>1.0.7.0</AssemblyVersion>
       </AssemblyInfo>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Table.Client</AssemblyName>
@@ -172,9 +205,11 @@
         <Parameter Name="operationContext" Type="Microsoft.Azure.Cosmos.Table.OperationContext" />
       </Parameters>
       <Docs>
-        <param name="operationContext">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="operationContext">An <see cref="T:Microsoft.Azure.Cosmos.Table.OperationContext" /> object that represents the context for the current operation.</param>
+        <summary>
+            Serializes the <see cref="T:System.Collections.Generic.IDictionary`2" /> of property names mapped to <see cref="T:Microsoft.Azure.Cosmos.Table.EntityProperty" /> data values from the entity instance.
+            </summary>
+        <returns>An <see cref="T:System.Collections.Generic.IDictionary`2" /> object of property names to <see cref="T:Microsoft.Azure.Cosmos.Table.EntityProperty" /> data typed values created by serializing this table entity instance.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
