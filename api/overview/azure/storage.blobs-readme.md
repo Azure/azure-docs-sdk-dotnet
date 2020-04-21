@@ -1,19 +1,17 @@
 ---
-title: .NET Azure Storage Blobs Readme
-description: 
-keywords: Azure, .NET, SDK, API, Storage, Queue
+title: Azure Storage Blobs client library for .NET
+keywords: Azure, .NET, SDK, API, storage, Azure.Storage.Blobs
 author: maggiepint
 ms.author: magpint
-manager: twolley
-ms.date: 03/12/2020
+ms.date: 04/16/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
+ms.devlang: .NET
 ms.service: storage
 ---
+ # Azure Storage Blobs client library for .NET - Version 12.4.1 
 
-
-# Azure Storage Blobs client library for .NET - Version 12.4.1
 
 > Server Version: 2019-07-07 and 2019-02-02
 
@@ -28,7 +26,8 @@ definition, such as text or binary data.
 
 ### Install the package
 
-Install the Azure Storage Blobs client library for .NET with [NuGet][nuget]:
+Install the Azure Storage Blobs client library for .NET - Version 12.4.1 
+ with [NuGet][nuget]:
 
 ```Powershell
 dotnet add package Azure.Storage.Blobs

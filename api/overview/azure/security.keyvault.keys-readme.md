@@ -1,18 +1,17 @@
 ---
-title: .NET Azure Key Vault Keys Readme
-description: 
-keywords: Azure, .NET, SDK, API, Key Vault, Keys
+title: Azure Key Vault key client library for .NET
+keywords: Azure, .NET, SDK, API, keyvault, Azure.Security.KeyVault.Keys
 author: maggiepint
 ms.author: magpint
-manager: twolley
-ms.date: 03/12/2020
+ms.date: 04/16/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.service: key-vault
+ms.devlang: .NET
+ms.service: keyvault
 ---
+ # Azure Key Vault key client library for .NET - Version 4.0.3 
 
-# Azure Key Vault key client library for .NET - Version 4.0.3
 Azure Key Vault is a cloud service that provides secure storage of keys for encrypting your data. Multiple keys, and multiple versions of the same key, can be kept in the Key Vault. Cryptographic keys in Key Vault are represented as [JSON Web Key (JWK)][JWK] objects.
 
 The Azure Key Vault keys library client supports RSA keys and Elliptic Curve (EC) keys, each with corresponding support in hardware security modules (HSM). It offers operations to create, retrieve, update, delete, purge, backup, restore, and list the keys and its versions.
