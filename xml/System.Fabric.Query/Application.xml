@@ -86,12 +86,53 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <para>Gets the parameters of the application, which is a collection of key and corresponding values.</para>
+          <para>Gets the list of <see cref="T:System.Fabric.Description.ApplicationParameter" />'s of the application that have been overridden by the user at the time of application-creation or through application upgrades. Note, this parameter list does not include
+             the parameters that still have default values from the application manifest. To find out the parameters of the application that still have default values from the manifest, one could use the ApplicationParameters returned by the <see cref="M:System.Fabric.FabricClient.QueryClient.GetApplicationListAsync(System.Uri)">GetApplication</see> query and
+             the DefaultParameters returned by the <see cref="M:System.Fabric.FabricClient.ApplicationManagementClient.UpgradeApplicationAsync(System.Fabric.Description.ApplicationUpgradeDescription)">GetApplicationType</see> query; the parameters that still have default values from the manifest can be found by excluding all parameters in the ApplicationParameters list from the DefaultParameters list.</para>
         </summary>
         <value>
-          <para>The parameters of the application.</para>
+          <para>The overridden parameters of the application.</para>
         </value>
         <remarks>To be added.</remarks>
+        <example>
+          <para> Following example shows how to get the overridden parameters and the paramters that still have default values from the application manifest.</para>
+          <code language="c#">
+                // Custom comparer for ApplicationParameter class to compare if two application parameters have the same name.
+                class ApplicationParameterNameComparer : IEqualityComparer&lt;ApplicationParameter&gt;
+                {
+                    // Here we consider two ApplicationParameters are equal if they have the same name.
+                    // In general though, two application parameters should be considered equal only if their names and their values are equal.
+                    public bool Equals(ApplicationParameter x, ApplicationParameter y)
+                    {
+                        return x.Name.Equals(y.Name);
+                    }
+            
+                    public int GetHashCode(ApplicationParameter applicationParameter)
+                    {
+                        return applicationParameter.Name.GetHashCode();
+                    }
+                }
+                 
+                using (var fabricClient = new FabricClient(clientConnectionString))
+                {
+                    ApplicationList applicationList = await fabricClient.QueryManager.GetApplicationListAsync(applicationUri);
+            
+                    Application application = applicationList.First();
+            
+                    // If no parameters have been overridden during application creation or through application upgrade, then overridenParameters would be empty.
+                    ApplicationParameterList overridenParameters = application.ApplicationParameters;
+            
+                    ApplicationTypeList applicationTypeList = await fabricClient.QueryManager.GetApplicationTypeListAsync(application.ApplicationTypeName);
+            
+                    ApplicationType applicationType = applicationTypeList.First();
+            
+                    ApplicationParameterList parametersFromApplicationManifest = applicationType.DefaultParameters;
+            
+                    // If no parameters have been overridden during application creation or through application upgrade, then parametersStillHavingDefaultValues would be equal to parametersFromApplicationManifest.
+                    IEnumerable&lt;ApplicationParameter&gt; parametersStillHavingDefaultValues = parametersFromApplicationManifest.Except(overridenParameters, new ApplicationParameterNameComparer());
+                }
+             </code>
+        </example>
       </Docs>
     </Member>
     <Member MemberName="ApplicationStatus">
