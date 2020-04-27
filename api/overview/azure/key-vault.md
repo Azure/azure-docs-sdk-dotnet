@@ -8,7 +8,7 @@ ms.service: key-vault
 
 # Azure Key Vault libraries for .NET
 
-Azure Key Vault helps safeguard cryptographic keys and secrets used by cloud applications and services.  Read more at [What is Key Vault?](/azure/key-vault/key-vault-whatis,) then learn how to use the SDK at [Get started with the Azure Key Vault client library for .NET (SDK v4)](/azure/key-vault/quick-create-net).
+The Azure Key Vault libraries for .NET offer a convenient interface for making calls to Azure Key Vault. For more information about Azure Key Vault, see [Introduction to Azure Azure Key Vault](https://docs.microsoft.com/en-us/azure/key-vault/general/overview).
 
 ## Libraries for data access
 
