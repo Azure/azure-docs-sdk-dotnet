@@ -8,7 +8,7 @@ ms.service: key-vault
 
 # Azure Key Vault libraries for .NET
 
-The Azure Key Vault libraries for .NET offer a convenient interface for making calls to Azure Key Vault. For more information about Azure Key Vault, see [Introduction to Azure Key Vault](https://docs.microsoft.com/en-us/azure/key-vault/general/overview).
+The Azure Key Vault libraries for .NET offer a convenient interface for making calls to Azure Key Vault. For more information about Azure Key Vault, see [Introduction to Azure Key Vault](https://docs.microsoft.com/azure/key-vault/general/overview).
 
 ## Libraries for data access
 
@@ -24,10 +24,9 @@ Use the following version 4.x libraries to work with certificates, keys, and sec
 
 | Library | Reference | Package | Source |
 |----------------------------------------|-------------------------------------------------------------|-----------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
-|    Azure.Security.KeyVault.Certificates    |      [Reference](https://docs.microsoft.com/en-us/dotnet/api/azure.security.keyvault.certificates)       |    [Nuget](https://www.nuget.org/packages/Azure.Security.KeyVault.Certificates/)    |    [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/keyvault/Azure.Security.KeyVault.Certificates)    |
-|    Azure.Security.KeyVault.Keys    |     [Reference](https://docs.microsoft.com/en-us/dotnet/api/azure.security.keyvault.keys)    |    [Nuget](https://www.nuget.org/packages/Azure.Security.KeyVault.Keys/)      |     [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/keyvault/Azure.Security.KeyVault.Keys)|
-|    Azure.Security.KeyVault.Secrets    |    [Reference](https://docs.microsoft.com/en-us/dotnet/api/azure.security.keyvault.secrets)    |    [Nuget](https://www.nuget.org/packages/Azure.Security.KeyVault.Secrets/)    |    [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/keyvault/Azure.Security.KeyVault.Secrets)    |
-|    Azure.Security.KeyVault.Shared    |         |        |    [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/keyvault/Azure.Security.KeyVault.Shared)    |
+|    Azure.Security.KeyVault.Certificates    |      [Reference](https://docs.microsoft.com/dotnet/api/azure.security.keyvault.certificates)       |    [Nuget](https://www.nuget.org/packages/Azure.Security.KeyVault.Certificates/)    |    [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/keyvault/Azure.Security.KeyVault.Certificates)    |
+|    Azure.Security.KeyVault.Keys    |     [Reference](https://docs.microsoft.com/dotnet/api/azure.security.keyvault.keys)    |    [Nuget](https://www.nuget.org/packages/Azure.Security.KeyVault.Keys/)      |     [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/keyvault/Azure.Security.KeyVault.Keys)|
+|    Azure.Security.KeyVault.Secrets    |    [Reference](https://docs.microsoft.com/dotnet/api/azure.security.keyvault.secrets)    |    [Nuget](https://www.nuget.org/packages/Azure.Security.KeyVault.Secrets/)    |    [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/keyvault/Azure.Security.KeyVault.Secrets)    |
 
 ### Version 3.x
 
@@ -37,11 +36,11 @@ Use the following version 3.x libraries to work with certificates, keys, and sec
 
 | Library | Reference | Package | Source |
 |--------------------------------------|---------------------------------------------------------------|-------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
-|    Microsoft.Azure.KeyVault.Core    |    [Reference](https://docs.microsoft.com/en-us/dotnet/api/microsoft.azure.keyvault.core)    |    [Nuget](https://www.nuget.org/packages/Microsoft.Azure.KeyVault.Core)    |    [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/keyvault/Microsoft.Azure.KeyVault.Core)    |
-|    Microsoft.Azure.KeyVault.Cryptography    |    [Reference](https://docs.microsoft.com/en-us/dotnet/api/microsoft.azure.keyvault.cryptography)    |    [Nuget](https://www.nuget.org/packages/Microsoft.Azure.KeyVault.Cryptography)    |    [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/keyvault/Microsoft.Azure.KeyVault.Cryptography)    |
+|    Microsoft.Azure.KeyVault.Core    |    [Reference](https://docs.microsoft.com/dotnet/api/microsoft.azure.keyvault.core)    |    [Nuget](https://www.nuget.org/packages/Microsoft.Azure.KeyVault.Core)    |    [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/keyvault/Microsoft.Azure.KeyVault.Core)    |
+|    Microsoft.Azure.KeyVault.Cryptography    |    [Reference](https://docs.microsoft.com/dotnet/api/microsoft.azure.keyvault.cryptography)    |    [Nuget](https://www.nuget.org/packages/Microsoft.Azure.KeyVault.Cryptography)    |    [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/keyvault/Microsoft.Azure.KeyVault.Cryptography)    |
 |    Microsoft.Azure.KeyVault.Extensions    |      |    [Nuget](https://www.nuget.org/packages/Microsoft.Azure.KeyVault.Extensions)    |    [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/keyvault/Microsoft.Azure.KeyVault.Extensions)    |
-|    Microsoft.Azure.KeyVault.WebKey    |    [Reference](https://docs.microsoft.com/en-us/dotnet/api/microsoft.azure.keyvault.webkey)    |    [Nuget](https://www.nuget.org/packages/Microsoft.Azure.KeyVault.WebKey)    |    [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/keyvault/Microsoft.Azure.KeyVault.WebKey)    |
-|    Microsoft.Azure.KeyVault    |    [Reference](https://docs.microsoft.com/en-us/dotnet/api/microsoft.azure.keyvault)    |    [Nuget](https://www.nuget.org/packages/Microsoft.Azure.KeyVault)    |    [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/keyvault/Microsoft.Azure.KeyVault)    |
+|    Microsoft.Azure.KeyVault.WebKey    |    [Reference](https://docs.microsoft.com/dotnet/api/microsoft.azure.keyvault.webkey)    |    [Nuget](https://www.nuget.org/packages/Microsoft.Azure.KeyVault.WebKey)    |    [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/keyvault/Microsoft.Azure.KeyVault.WebKey)    |
+|    Microsoft.Azure.KeyVault    |    [Reference](https://docs.microsoft.com/dotnet/api/microsoft.azure.keyvault)    |    [Nuget](https://www.nuget.org/packages/Microsoft.Azure.KeyVault)    |    [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/keyvault/Microsoft.Azure.KeyVault)    |
 
 ## Libraries for resource management
 
@@ -49,4 +48,4 @@ Use the following library to work with the Azure Key Vault resource provider:
 
 |    Library    |    Reference    |    Package    |    Source    |
 |------------------------------------------|-------------------------------------------------------------------|-----------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
-|    Microsoft.Azure.Management.KeyVault    |    [Reference](https://docs.microsoft.com/en-us/dotnet/api/microsoft.azure.management.keyvault)    |    [Nuget](https://www.nuget.org/packages/Microsoft.Azure.Management.KeyVault/)    |    [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/keyvault/Microsoft.Azure.Management.KeyVault)    |
+|    Microsoft.Azure.Management.KeyVault    |    [Reference](https://docs.microsoft.com/dotnet/api/microsoft.azure.management.keyvault)    |    [Nuget](https://www.nuget.org/packages/Microsoft.Azure.Management.KeyVault/)    |    [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/keyvault/Microsoft.Azure.Management.KeyVault)    |
