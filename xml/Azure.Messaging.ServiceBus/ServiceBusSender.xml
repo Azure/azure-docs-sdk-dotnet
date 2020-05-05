@@ -19,7 +19,7 @@
   <Docs>
     <summary>
                A client responsible for sending <see cref="T:Azure.Messaging.ServiceBus.ServiceBusMessage" /> to a specific Service Bus entity
-               (Queue or Topic). It is constructed by calling <see cref="M:Azure.Messaging.ServiceBus.ServiceBusClient.CreateSender(System.String)" />.
+               (Queue or Topic). It can be used for both session and non-session entities. It is constructed by calling <see cref="M:Azure.Messaging.ServiceBus.ServiceBusClient.CreateSender(System.String)" />.
              </summary>
     <remarks>To be added.</remarks>
   </Docs>
@@ -90,12 +90,13 @@
       <Docs>
         <param name="cancellationToken">An optional <see cref="T:System.Threading.CancellationToken" /> instance to signal the request to cancel the operation.</param>
         <summary>
-               Creates a size-constraint batch to which <see cref="T:Azure.Messaging.ServiceBus.ServiceBusMessage" /> may be added using a try-based pattern.  If a message would
-               exceed the maximum allowable size of the batch, the batch will not allow adding the message and signal that scenario using its
-               return value.
+               Creates a size-constraint batch to which <see cref="T:Azure.Messaging.ServiceBus.ServiceBusMessage" /> may be added using
+               a <see cref="M:Azure.Messaging.ServiceBus.ServiceBusMessageBatch.TryAdd(Azure.Messaging.ServiceBus.ServiceBusMessage)" />. If a message would exceed the maximum
+               allowable size of the batch, the batch will not allow adding the message and signal that
+               scenario using it return value.
             
-               Because messages that would violate the size constraint cannot be added, publishing a batch will not trigger an exception when
-               attempting to send the messages to the Queue/Topic.
+               Because messages that would violate the size constraint cannot be added, publishing a batch
+               will not trigger an exception when attempting to send the messages to the Queue/Topic.
              </summary>
         <returns>An <see cref="T:Azure.Messaging.ServiceBus.ServiceBusMessageBatch" /> with the default batch options.</returns>
         <remarks>To be added.</remarks>
@@ -156,8 +157,7 @@
       <Parameters />
       <Docs>
         <summary>
-               Performs the task needed to clean up resources used by the <see cref="T:Azure.Messaging.ServiceBus.ServiceBusSender" />,
-               including ensuring that the client itself has been closed.
+               Performs the task needed to clean up resources used by the <see cref="T:Azure.Messaging.ServiceBus.ServiceBusSender" />.
              </summary>
         <returns>A task to be resolved on when the operation has completed.</returns>
         <remarks>To be added.</remarks>
@@ -351,12 +351,12 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="SendBatchAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task SendBatchAsync (Azure.Messaging.ServiceBus.ServiceBusMessageBatch messageBatch, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task SendBatchAsync(class Azure.Messaging.ServiceBus.ServiceBusMessageBatch messageBatch, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Messaging.ServiceBus.ServiceBusSender.SendBatchAsync(Azure.Messaging.ServiceBus.ServiceBusMessageBatch,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function SendBatchAsync (messageBatch As ServiceBusMessageBatch, Optional cancellationToken As CancellationToken = null) As Task" />
-      <MemberSignature Language="F#" Value="abstract member SendBatchAsync : Azure.Messaging.ServiceBus.ServiceBusMessageBatch * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&#xA;override this.SendBatchAsync : Azure.Messaging.ServiceBus.ServiceBusMessageBatch * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task" Usage="serviceBusSender.SendBatchAsync (messageBatch, cancellationToken)" />
+    <Member MemberName="SendAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task SendAsync (Azure.Messaging.ServiceBus.ServiceBusMessageBatch messageBatch, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task SendAsync(class Azure.Messaging.ServiceBus.ServiceBusMessageBatch messageBatch, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Messaging.ServiceBus.ServiceBusSender.SendAsync(Azure.Messaging.ServiceBus.ServiceBusMessageBatch,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function SendAsync (messageBatch As ServiceBusMessageBatch, Optional cancellationToken As CancellationToken = null) As Task" />
+      <MemberSignature Language="F#" Value="abstract member SendAsync : Azure.Messaging.ServiceBus.ServiceBusMessageBatch * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&#xA;override this.SendAsync : Azure.Messaging.ServiceBus.ServiceBusMessageBatch * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task" Usage="serviceBusSender.SendAsync (messageBatch, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Messaging.ServiceBus</AssemblyName>
@@ -370,11 +370,43 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="messageBatch">The set of messages to send. A batch may be created using <see cref="M:Azure.Messaging.ServiceBus.ServiceBusSender.CreateBatchAsync(System.Threading.CancellationToken)" />.</param>
+        <param name="messageBatch">The batch of messages to send. A batch may be created using <see cref="M:Azure.Messaging.ServiceBus.ServiceBusSender.CreateBatchAsync(System.Threading.CancellationToken)" />.</param>
         <param name="cancellationToken">An optional <see cref="T:System.Threading.CancellationToken" /> instance to signal the request to cancel the operation.</param>
         <summary>
-               Sends a set of messages to the associated Service Bus entity using a batched approach.  If the size of messages exceed the
-               maximum size of a single batch, an exception will be triggered and the send will fail.
+               Sends a <see cref="T:Azure.Messaging.ServiceBus.ServiceBusMessageBatch" />
+               containing a set of <see cref="T:Azure.Messaging.ServiceBus.ServiceBusMessage" /> to
+               the associated Service Bus entity.
+             </summary>
+        <returns>A task to be resolved on when the operation has completed.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SendAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task SendAsync (System.Collections.Generic.IEnumerable&lt;Azure.Messaging.ServiceBus.ServiceBusMessage&gt; messages, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task SendAsync(class System.Collections.Generic.IEnumerable`1&lt;class Azure.Messaging.ServiceBus.ServiceBusMessage&gt; messages, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Messaging.ServiceBus.ServiceBusSender.SendAsync(System.Collections.Generic.IEnumerable{Azure.Messaging.ServiceBus.ServiceBusMessage},System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function SendAsync (messages As IEnumerable(Of ServiceBusMessage), Optional cancellationToken As CancellationToken = null) As Task" />
+      <MemberSignature Language="F#" Value="abstract member SendAsync : seq&lt;Azure.Messaging.ServiceBus.ServiceBusMessage&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&#xA;override this.SendAsync : seq&lt;Azure.Messaging.ServiceBus.ServiceBusMessage&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task" Usage="serviceBusSender.SendAsync (messages, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Messaging.ServiceBus</AssemblyName>
+        <AssemblyVersion>7.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="messages" Type="System.Collections.Generic.IEnumerable&lt;Azure.Messaging.ServiceBus.ServiceBusMessage&gt;" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="messages">The set of messages to send.</param>
+        <param name="cancellationToken">An optional <see cref="T:System.Threading.CancellationToken" /> instance to signal the request to cancel the operation.</param>
+        <summary>
+               Sends a set of messages to the associated Service Bus entity using a batched approach.
+               If the size of the messages exceed the maximum size of a single batch,
+               an exception will be triggered and the send will fail. In order to ensure that the messages
+               being sent will fit in a batch, use <see cref="M:Azure.Messaging.ServiceBus.ServiceBusSender.SendAsync(Azure.Messaging.ServiceBus.ServiceBusMessageBatch,System.Threading.CancellationToken)" /> instead.
              </summary>
         <returns>A task to be resolved on when the operation has completed.</returns>
         <remarks>To be added.</remarks>
@@ -405,6 +437,28 @@
                Converts the instance to string representation.
              </summary>
         <returns>A <see cref="T:System.String" /> that represents this instance.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ViaEntityPath">
+      <MemberSignature Language="C#" Value="public string ViaEntityPath { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ViaEntityPath" />
+      <MemberSignature Language="DocId" Value="P:Azure.Messaging.ServiceBus.ServiceBusSender.ViaEntityPath" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ViaEntityPath As String" />
+      <MemberSignature Language="F#" Value="member this.ViaEntityPath : string" Usage="Azure.Messaging.ServiceBus.ServiceBusSender.ViaEntityPath" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Messaging.ServiceBus</AssemblyName>
+        <AssemblyVersion>7.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            In the case of a via-sender, the message is sent to <see cref="P:Azure.Messaging.ServiceBus.ServiceBusSender.EntityPath" /> via <see cref="P:Azure.Messaging.ServiceBus.ServiceBusSender.ViaEntityPath" />; null otherwise.
+            </summary>
+        <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
