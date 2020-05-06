@@ -14,10 +14,9 @@
   <Interfaces />
   <Docs>
     <summary>
-            A <see cref="T:Azure.Messaging.ServiceBus.ServiceBusSessionProcessor" /> is responsible for processing
-            <see cref="T:Azure.Messaging.ServiceBus.ServiceBusReceivedMessage" /> from a specific entity using event handlers.
-            It is constructed by calling
-             <see cref="M:Azure.Messaging.ServiceBus.ServiceBusClient.CreateSessionProcessor(System.String,Azure.Messaging.ServiceBus.ServiceBusProcessorOptions,System.String,System.Threading.CancellationToken)" />.
+            The <see cref="T:Azure.Messaging.ServiceBus.ServiceBusSessionProcessor" /> provides an abstraction around a set of <see cref="T:Azure.Messaging.ServiceBus.ServiceBusSessionReceiver" /> that
+            allows using an event based model for processing received <see cref="T:Azure.Messaging.ServiceBus.ServiceBusReceivedMessage" />.
+            It is constructed by calling <see cref="M:Azure.Messaging.ServiceBus.ServiceBusClient.CreateSessionProcessor(System.String,Azure.Messaging.ServiceBus.ServiceBusProcessorOptions,System.String[])" />.
             The event handler is specified with the <see cref="E:Azure.Messaging.ServiceBus.ServiceBusSessionProcessor.ProcessMessageAsync" />
             property. The error handler is specified with the <see cref="E:Azure.Messaging.ServiceBus.ServiceBusSessionProcessor.ProcessErrorAsync" /> property.
             To start processing after the handlers have been specified, call <see cref="M:Azure.Messaging.ServiceBus.ServiceBusSessionProcessor.StartProcessingAsync(System.Threading.CancellationToken)" />.
@@ -350,6 +349,50 @@
             The <see cref="P:Azure.Messaging.ServiceBus.ServiceBusSessionProcessor.ReceiveMode" /> used to specify how messages are received. Defaults to PeekLock mode.
             </summary>
         <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SessionClosingAsync">
+      <MemberSignature Language="C#" Value="public event Func&lt;Azure.Messaging.ServiceBus.ProcessSessionEventArgs,System.Threading.Tasks.Task&gt; SessionClosingAsync;" />
+      <MemberSignature Language="ILAsm" Value=".event class System.Func`2&lt;class Azure.Messaging.ServiceBus.ProcessSessionEventArgs, class System.Threading.Tasks.Task&gt; SessionClosingAsync" />
+      <MemberSignature Language="DocId" Value="E:Azure.Messaging.ServiceBus.ServiceBusSessionProcessor.SessionClosingAsync" />
+      <MemberSignature Language="VB.NET" Value="Public Custom Event SessionClosingAsync As Func(Of ProcessSessionEventArgs, Task) " />
+      <MemberSignature Language="F#" Value="member this.SessionClosingAsync : Func&lt;Azure.Messaging.ServiceBus.ProcessSessionEventArgs, System.Threading.Tasks.Task&gt; " Usage="member this.SessionClosingAsync : System.Func&lt;Azure.Messaging.ServiceBus.ProcessSessionEventArgs, System.Threading.Tasks.Task&gt; " />
+      <MemberType>Event</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Messaging.ServiceBus</AssemblyName>
+        <AssemblyVersion>7.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Func&lt;Azure.Messaging.ServiceBus.ProcessSessionEventArgs,System.Threading.Tasks.Task&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Optional event that can be set to be notified when a session is about to be closed for processing.
+            This means that the most recent ReceiveAsync call timed out so there are currently no messages
+            available to be received for the session.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SessionInitializingAsync">
+      <MemberSignature Language="C#" Value="public event Func&lt;Azure.Messaging.ServiceBus.ProcessSessionEventArgs,System.Threading.Tasks.Task&gt; SessionInitializingAsync;" />
+      <MemberSignature Language="ILAsm" Value=".event class System.Func`2&lt;class Azure.Messaging.ServiceBus.ProcessSessionEventArgs, class System.Threading.Tasks.Task&gt; SessionInitializingAsync" />
+      <MemberSignature Language="DocId" Value="E:Azure.Messaging.ServiceBus.ServiceBusSessionProcessor.SessionInitializingAsync" />
+      <MemberSignature Language="VB.NET" Value="Public Custom Event SessionInitializingAsync As Func(Of ProcessSessionEventArgs, Task) " />
+      <MemberSignature Language="F#" Value="member this.SessionInitializingAsync : Func&lt;Azure.Messaging.ServiceBus.ProcessSessionEventArgs, System.Threading.Tasks.Task&gt; " Usage="member this.SessionInitializingAsync : System.Func&lt;Azure.Messaging.ServiceBus.ProcessSessionEventArgs, System.Threading.Tasks.Task&gt; " />
+      <MemberType>Event</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Messaging.ServiceBus</AssemblyName>
+        <AssemblyVersion>7.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Func&lt;Azure.Messaging.ServiceBus.ProcessSessionEventArgs,System.Threading.Tasks.Task&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Optional event that can be set to be notified when a new session is about to be processed.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
