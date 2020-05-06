@@ -12,15 +12,15 @@ The Azure Key Vault libraries for .NET offer a convenient interface for making c
 
 ## Libraries for data access
 
-The latest version of the Azure Key Vault library is version 4.x. Microsoft recommends using version 4.x for new applications.
+The latest version of the Azure Key Vault library is version 4.x.x. Microsoft recommends using version 4.x.x for new applications.
 
-If you cannot update existing applications to version 4.x, then Microsoft recommends using version 3.x.
+If you cannot update existing applications to version 4.x.x, then Microsoft recommends using version 3.x.x.
 
-### Version 4.x
+### Version 4.x.x
 
-The version 4.x libraries for .NET are part of the Azure SDK for .NET. The source code for the Key Vault libraries for .NET is available on [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/keyvault).
+The version 4.x.x libraries for .NET are part of the Azure SDK for .NET. The source code for the Key Vault libraries for .NET is available on [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/keyvault).
 
-Use the following version 4.x libraries to work with certificates, keys, and secrets:
+Use the following version 4.x.x libraries to work with certificates, keys, and secrets:
 
 | Library | Reference | Package | Source |
 |----------------------------------------|-------------------------------------------------------------|-----------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
@@ -28,11 +28,11 @@ Use the following version 4.x libraries to work with certificates, keys, and sec
 |    Azure.Security.KeyVault.Keys    |     [Reference](https://docs.microsoft.com/dotnet/api/azure.security.keyvault.keys)    |    [Nuget](https://www.nuget.org/packages/Azure.Security.KeyVault.Keys/)      |     [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/keyvault/Azure.Security.KeyVault.Keys)|
 |    Azure.Security.KeyVault.Secrets    |    [Reference](https://docs.microsoft.com/dotnet/api/azure.security.keyvault.secrets)    |    [Nuget](https://www.nuget.org/packages/Azure.Security.KeyVault.Secrets/)    |    [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/keyvault/Azure.Security.KeyVault.Secrets)    |
 
-### Version 3.x
+### Version 3.x.x
 
 The source code for the Azure Key Vault libraries for .NET is available on [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/keyvault).
 
-Use the following version 3.x libraries to work with certificates, keys, and secrets:
+Use the following version 3.x.x libraries to work with certificates, keys, and secrets:
 
 | Library | Reference | Package | Source |
 |--------------------------------------|---------------------------------------------------------------|-------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
