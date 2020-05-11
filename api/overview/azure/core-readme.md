@@ -3,14 +3,15 @@ title: Azure Core shared client library for .NET
 keywords: Azure, .NET, SDK, API, core, Azure.Core
 author: maggiepint
 ms.author: magpint
-ms.date: 04/16/2020
+ms.date: 05/10/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: .NET
 ms.service: core
 ---
- # Azure Core shared client library for .NET - Version 1.2.0 
+
+# Azure Core shared client library for .NET - Version 1.2.1 
 
 
 Azure.Core provides shared primitives, abstractions, and helpers for modern .NET Azure SDK client libraries. 
@@ -52,7 +53,7 @@ Azure SDK client libraries typically expose one or more _service client_ types t
 are the main starting points for calling corresponding Azure services. 
 You can easily find these client types as their names end with the word _Client_. 
 For example, ```BlockBlobClient``` can be used to call blob storage service, 
-and ```KeyClient``` can be used to access KeyVault service cryptographic keys. 
+and ```KeyClient``` can be used to access Key Vault service cryptographic keys. 
 
 These client types can be instantiated by calling a simple constructor, 
 or its overload that takes various configuration options. 
@@ -79,7 +80,7 @@ SecretClientOptions options = new SecretClientOptions()
 SecretClient client = new SecretClient(new Uri("http://example.com"), new DefaultAzureCredential(), options);
 ```
 
-More on client configuration in [client configuration samples](https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/core/Azure.Core/samples/Configuration.md)
+More on client configuration in [client configuration samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.2.1/sdk/core/Azure.Core/samples/Configuration.md)
 
 ### Accessing HTTP Response Details Using ```Response<T>```
 _Service clients_ have methods that can be used to call Azure services. 
@@ -112,7 +113,7 @@ foreach (HttpHeader header in http.Headers)
 }
 ```
 
-More on response types in [response samples](https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/core/Azure.Core/samples/Response.md)
+More on response types in [response samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.2.1/sdk/core/Azure.Core/samples/Response.md)
 
 ### Setting up console logging
 
@@ -123,7 +124,7 @@ To create an Azure SDK log listener that outputs messages to console use `AzureE
 using AzureEventSourceListener listener = AzureEventSourceListener.CreateConsoleLogger();
 ```
 
-More on logging in [diagnostics samples](https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/core/Azure.Core/samples/Diagnostics.md)
+More on logging in [diagnostics samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.2.1/sdk/core/Azure.Core/samples/Diagnostics.md)
 
 ### Reporting Errors ```RequestFailedException```
 
@@ -132,7 +133,7 @@ When a service call fails `Azure.RequestFailedException` would get thrown. The e
 ```C# Snippet:RequestFailedException
 try
 {
-    KeyVaultSecret properties = client.GetSecret("NonexistentSecret");
+    KeyVaultSecret secret = client.GetSecret("NonexistentSecret");
 }
 // handle exception with status code 404
 catch (RequestFailedException e) when (e.Status == 404)
@@ -142,7 +143,7 @@ catch (RequestFailedException e) when (e.Status == 404)
 }
 ```
 
-More on handling responses in [response samples](https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/core/Azure.Core/samples/Response.md)
+More on handling responses in [response samples](samples/Response.md)
 
 ### Consuming Service Methods Returning ```AsyncPageable<T>```
 
@@ -151,15 +152,15 @@ You can iterate over `AsyncPageable` directly or in pages.
 
 ```C# Snippet:AsyncPageable
 // call a service method, which returns AsyncPageable<T>
-AsyncPageable<SecretProperties> response = client.GetPropertiesOfSecretsAsync();
+AsyncPageable<SecretProperties> allSecretProperties = client.GetPropertiesOfSecretsAsync();
 
-await foreach (SecretProperties secretProperties in response)
+await foreach (SecretProperties secretProperties in allSecretProperties)
 {
     Console.WriteLine(secretProperties.Name);
 }
 ```
 
-More on paged responses in [response samples](https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/core/Azure.Core/samples/Response.md)
+More on paged responses in [response samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.2.1/sdk/core/Azure.Core/samples/Response.md)
 
 ### Consuming Long-Running Operations Using ```Operation<T>```
 
@@ -172,7 +173,7 @@ The `WaitForCompletionAsync` method is an easy way to wait for operation complet
 SecretClient client = new SecretClient(new Uri("http://example.com"), new DefaultAzureCredential());
 
 // Start the operation
-DeleteSecretOperation operation = client.StartDeleteSecret("SecretName");
+DeleteSecretOperation operation = await client.StartDeleteSecretAsync("SecretName");
 
 Response<DeletedSecret> response = await operation.WaitForCompletionAsync();
 DeletedSecret value = response.Value;
@@ -181,7 +182,7 @@ Console.WriteLine(value.Name);
 Console.WriteLine(value.ScheduledPurgeDate);
 ```
 
-More on long-running operations in [long-running operation samples](https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/core/Azure.Core/samples/LongRunningOperations.md)
+More on long-running operations in [long-running operation samples](samples/LongRunningOperations.md)
 
 ### Mocking
 One of the most important cross-cutting features of our new client libraries using Azure.Core is that they are designed for mocking.
@@ -214,11 +215,11 @@ SecretClient client = mock.Object;
 KeyVaultSecret secret = client.GetSecret("Name");
 ```
 
-More on mocking in [mocking samples](https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/core/Azure.Core/samples/Mocking.md)
+More on mocking in [mocking samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.2.1/sdk/core/Azure.Core/samples/Mocking.md)
 
 ## Troubleshooting
 
-Three main ways of troubleshooting failures are [inspecting exceptions](https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/core/Azure.Core/samples/Response.md#handling-exceptions), enabling [logging](https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/core/Azure.Core/samples/Diagnostics.md#Logging), and [distributed tracing](Diagnostics.md#Distributed-tracing)
+Three main ways of troubleshooting failures are [inspecting exceptions](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.2.1/sdk/core/Azure.Core/samples/Response.md#handling-exceptions), enabling [logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.2.1/sdk/core/Azure.Core/samples/Diagnostics.md#Logging), and [distributed tracing](samples/Diagnostics.md#Distributed-tracing)
 
 ## Next steps
 
@@ -238,3 +239,4 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [package]: https://www.nuget.org/packages/Azure.Core/
 [docs]: https://docs.microsoft.com/en-us/dotnet/api/overview/azure/core/client
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/faq/
+
