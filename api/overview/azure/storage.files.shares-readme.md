@@ -1,16 +1,16 @@
 ---
 title: Azure Storage File Shares client library for .NET
-keywords: Azure, .NET, SDK, API, storage, Azure.Storage.Files.Shares
+keywords: Azure, .NET, SDK, API, storage Azure.Storage.Files.Shares
 author: maggiepint
 ms.author: magpint
-ms.date: 04/16/2020
+ms.date: 05/10/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: .NET
 ms.service: storage
 ---
- # Azure Storage File Shares client library for .NET - Version 12.2.0 
+# Azure Storage File Shares client library for .NET - Version 12.2.1 
 
 
 > Server Version: 2019-07-07
@@ -28,7 +28,7 @@ being used.
 
 ### Install the package
 
-Install the Azure Storage File Shares client library for .NET - Version 12.2.0 
+Install the Azure Storage File Shares client library for .NET - Version 12.2.1 
  with [NuGet][nuget]:
 
 ```Powershell
@@ -210,8 +210,8 @@ catch (RequestFailedException ex)
 
 Get started with our [File samples][samples]:
 
-1. [Hello World](https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/storage/Azure.Storage.Files.Shares/samples/Sample01a_HelloWorld.cs): Upload files, download files, and traverse shares (or [asynchronously](https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/storage/Azure.Storage.Files.Shares/samples/Sample01b_HelloWorldAsync.cs))
-2. [Auth](https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/storage/Azure.Storage.Files.Shares/samples/Sample02_Auth.cs): Authenticate with connection strings, shared keys, and shared access signatures.
+1. [Hello World](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Files.Shares_12.2.1/sdk/storage/Azure.Storage.Files.Shares/samples/Sample01a_HelloWorld.cs): Upload files, download files, and traverse shares (or [asynchronously](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Files.Shares_12.2.1/sdk/storage/Azure.Storage.Files.Shares/samples/Sample01b_HelloWorldAsync.cs))
+2. [Auth](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Files.Shares_12.2.1/sdk/storage/Azure.Storage.Files.Shares/samples/Sample02_Auth.cs): Authenticate with connection strings, shared keys, and shared access signatures.
 
 ## Contributing
 
@@ -245,9 +245,10 @@ additional questions or comments.
 [azure_sub]: https://azure.microsoft.com/free/
 [RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/core/Azure.Core/src/RequestFailedException.cs
 [error_codes]: https://docs.microsoft.com/rest/api/storageservices/file-service-error-codes
-[samples]: https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/storage/Azure.Storage.Files.Shares/samples
-[storage_contrib]: https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/storage/CONTRIBUTING.md
+[samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Files.Shares_12.2.1/sdk/storage/Azure.Storage.Files.Shares/samples/
+[storage_contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Files.Shares_12.2.1/sdk/storage/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [coc_contact]: mailto:opencode@microsoft.com
+
