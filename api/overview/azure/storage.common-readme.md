@@ -1,16 +1,17 @@
 ---
 title: Azure Storage Common client library for .NET
-keywords: Azure, .NET, SDK, API, storage, Azure.Storage.Common
+keywords: Azure, .net, SDK, API, Azure.Storage.Common, Azure.Storage.Common
 author: maggiepint
 ms.author: magpint
-ms.date: 05/10/2020
+ms.date: 06/02/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.devlang: .NET
-ms.service: storage
+ms.devlang: .net
+ms.service: Azure.Storage.Common
 ---
-# Azure Storage Common client library for .NET - Version 12.4.1 
+
+# Azure Storage Common client library for .NET - Version 12.4.2 
 
 
 > Server Version: 2019-07-07 and 2019-02-02
@@ -105,11 +106,11 @@ additional questions or comments.
 [queues_examples]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/storage/Azure.Storage.Queues/README.md#Examples
 [RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/core/Azure.Core/src/RequestFailedException.cs
 [error_codes]: https://docs.microsoft.com/rest/api/storageservices/common-rest-api-error-codes
-[samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Common_12.4.1/sdk/storage/Azure.Storage.Common/samples/
+[samples]: samples/
 [blobs_samples]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/storage/Azure.Storage.Blobs/README.md#next-steps
 [files_samples]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/storage/Azure.Storage.Files.Shares/README.md#next-steps
 [queues_samples]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/storage/Azure.Storage.Queues/README.md#next-steps
-[storage_contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Common_12.4.1/sdk/storage/CONTRIBUTING.md
+[storage_contrib]: ../CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
