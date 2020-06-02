@@ -1,16 +1,17 @@
 ---
 title: Azure Storage Blobs client library for .NET
-keywords: Azure, .NET, SDK, API, storage, Azure.Storage.Blobs
+keywords: Azure, .net, SDK, API, Azure.Storage.Blobs, Azure.Storage.Blobs
 author: maggiepint
 ms.author: magpint
-ms.date: 05/10/2020
+ms.date: 06/02/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.devlang: .NET
-ms.service: storage
+ms.devlang: .net
+ms.service: Azure.Storage.Blobs
 ---
-# Azure Storage Blobs client library for .NET - Version 12.4.2 
+
+# Azure Storage Blobs client library for .NET - Version 12.4.3 
 
 
 > Server Version: 2019-07-07 and 2019-02-02
@@ -26,7 +27,7 @@ definition, such as text or binary data.
 
 ### Install the package
 
-Install the Azure Storage Blobs client library for .NET - Version 12.4.2 
+Install the Azure Storage Blobs client library for .NET - Version 12.4.3 
  with [NuGet][nuget]:
 
 ```Powershell
@@ -63,7 +64,7 @@ Blob storage offers three types of resources:
 - A _container_ in the storage account used via `BlobContainerClient`
 - A _blob_ in a container used via `BlobClient`
 
-Learn more about options for authentication _(including Connection Strings, Shared Key, Shared Key Signatures, Active Directory, and anonymous public access)_ [in our samples.](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Blobs_12.4.2/sdk/storage/Azure.Storage.Blobs/samples/Sample02_Auth.cs)
+Learn more about options for authentication _(including Connection Strings, Shared Key, Shared Key Signatures, Active Directory, and anonymous public access)_ [in our samples.](samples/Sample02_Auth.cs)
 
 ## Examples
 
@@ -221,11 +222,11 @@ additional questions or comments.
 [azure_sub]: https://azure.microsoft.com/free/
 [identity]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/identity/Azure.Identity/README.md
 [storage_ad]: https://docs.microsoft.com/azure/storage/common/storage-auth-aad
-[storage_ad_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Blobs_12.4.2/sdk/storage/Azure.Storage.Blobs/samples/Sample02c_Auth_ActiveDirectory.cs
+[storage_ad_sample]: samples/Sample02c_Auth_ActiveDirectory.cs
 [RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/core/Azure.Core/src/RequestFailedException.cs
 [error_codes]: https://docs.microsoft.com/rest/api/storageservices/blob-service-error-codes
-[samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Blobs_12.4.2/sdk/storage/Azure.Storage.Blobs/samples/
-[storage_contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Blobs_12.4.2/sdk/storage/CONTRIBUTING.md
+[samples]: samples/
+[storage_contrib]: ../CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
