@@ -1,0 +1,79 @@
+<Type Name="QueryChargeHelper" FullName="Azure.DigitalTwins.Core.Queries.QueryChargeHelper">
+  <TypeSignature Language="C#" Value="public static class QueryChargeHelper" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract sealed beforefieldinit QueryChargeHelper extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Azure.DigitalTwins.Core.Queries.QueryChargeHelper" />
+  <TypeSignature Language="VB.NET" Value="Public Class QueryChargeHelper" />
+  <TypeSignature Language="F#" Value="type QueryChargeHelper = class" />
+  <AssemblyInfo>
+    <AssemblyName>Azure.DigitalTwins.Core</AssemblyName>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>
+            A helper class for working with the query APIs for digital twins.
+            </summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="TryGetQueryCharge">
+      <MemberSignature Language="C#" Value="public static bool TryGetQueryCharge (Azure.Page&lt;string&gt; page, out float queryCharge);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool TryGetQueryCharge(class Azure.Page`1&lt;string&gt; page, [out] float32&amp; queryCharge) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.DigitalTwins.Core.Queries.QueryChargeHelper.TryGetQueryCharge(Azure.Page{System.String},System.Single@)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function TryGetQueryCharge (page As Page(Of String), ByRef queryCharge As Single) As Boolean" />
+      <MemberSignature Language="F#" Value="static member TryGetQueryCharge : Azure.Page&lt;string&gt; * single -&gt; bool" Usage="Azure.DigitalTwins.Core.Queries.QueryChargeHelper.TryGetQueryCharge (page, queryCharge)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.DigitalTwins.Core</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="page" Type="Azure.Page&lt;System.String&gt;" />
+        <Parameter Name="queryCharge" Type="System.Single" RefType="out" />
+      </Parameters>
+      <Docs>
+        <param name="page">The page that contains the query-charge header.</param>
+        <param name="queryCharge">The query charge extracted from the header.</param>
+        <summary>
+             Extract the query-charge field from a page header.
+             </summary>
+        <returns>True if the header contains a query-charge field, otherwise false.</returns>
+        <remarks>To be added.</remarks>
+        <code snippet="Snippet:DigitalTwinsSampleQueryTwinsWithQueryCharge">
+             // This code snippet demonstrates how you could extract the query charges incurred when calling
+             // the query API. It iterates over the response pages first to access to the query-charge header,
+             // and then the digital twin results within each page.
+            
+             AsyncPageable&lt;string&gt; asyncPageableResponseWithCharge = client.QueryAsync("SELECT * FROM digitaltwins");
+             int pageNum = 0;
+            
+             // The "await" keyword here is required as a call is made when fetching a new page.
+             await foreach (Page&lt;string&gt; page in asyncPageableResponseWithCharge.AsPages())
+             {
+                 Console.WriteLine($"Page {++pageNum} results:");
+            
+                 // Extract the query-charge header from the page
+                 if (QueryChargeHelper.TryGetQueryCharge(page, out float queryCharge))
+                 {
+                     Console.WriteLine($"Query charge was: {queryCharge}");
+                 }
+            
+                 // Iterate over the twin instances.
+                 // The "await" keyword is not required here as the paged response is local.
+                 foreach (string response in page.Values)
+                 {
+                     BasicDigitalTwin twin = JsonSerializer.Deserialize&lt;BasicDigitalTwin&gt;(response);
+                     Console.WriteLine($"Found digital twin: {twin.Id}");
+                 }
+             }
+             </code>
+      </Docs>
+    </Member>
+  </Members>
+</Type>
