@@ -202,21 +202,20 @@
              </exception>
         <example>
           <code snippet="Snippet:DigitalTwinsSampleCreateCustomTwin">
-             string customDtId = await GetUniqueTwinIdAsync(SamplesConstants.TemporaryTwinPrefix, client);
-             var customDigitalTwin = new CustomDigitalTwin
+             var customTwin = new CustomDigitalTwin
              {
                  Id = customDtId,
                  Metadata = new CustomDigitalTwinMetadata { ModelId = modelId },
                  Prop1 = "Prop1 val",
-                 Prop2 = "Prop2 val",
+                 Prop2 = 987,
                  Component1 = new Component1
                  {
                      Metadata = new Component1Metadata { ModelId = componentModelId },
                      ComponentProp1 = "Component prop1 val",
-                     ComponentProp2 = "Component prop2 val",
+                     ComponentProp2 = 123,
                  }
              };
-             string dt2Payload = JsonSerializer.Serialize(customDigitalTwin);
+             string dt2Payload = JsonSerializer.Serialize(customTwin);
             
              Response&lt;string&gt; createCustomDtResponse = await client.CreateDigitalTwinAsync(customDtId, dt2Payload);
              Console.WriteLine($"Created digital twin {customDtId} with response {createCustomDtResponse.GetRawResponse().Status}.");
@@ -468,12 +467,26 @@
              </exception>
         <example>
           <code snippet="Snippet:DigitalTwinsSampleCreateRelationship">
-             string serializedRelationship = JsonSerializer.Serialize(relationship);
+             // From loaded relationships, get the source Id and Id from each one,
+             // and create it with full relationship payload
+             foreach (BasicRelationship relationship in relationships)
+             {
+                 try
+                 {
+                     string serializedRelationship = JsonSerializer.Serialize(relationship);
             
-             await client.CreateRelationshipAsync(
-                 relationship.SourceId,
-                 relationship.Id,
-                 serializedRelationship);
+                     await client.CreateRelationshipAsync(
+                         relationship.SourceId,
+                         relationship.Id,
+                         serializedRelationship);
+            
+                     Console.WriteLine($"Linked twin {relationship.SourceId} to twin {relationship.TargetId} as '{relationship.Name}'");
+                 }
+                 catch (RequestFailedException ex) when (ex.Status == (int)HttpStatusCode.Conflict)
+                 {
+                     Console.WriteLine($"Relationship {relationship.Id} already exists: {ex.Message}");
+                 }
+             }
              </code>
         </example>
       </Docs>
@@ -539,33 +552,32 @@
         <param name="modelId">The Id of the model to decommission.</param>
         <param name="cancellationToken">The cancellation token.</param>
         <summary>
-             Decommissions a model asynchronously. After the task completes, the result will be set to <see cref="T:Azure.Response" />.
-             </summary>
+            Decommissions a model asynchronously. After the task completes, the result will be set to <see cref="T:Azure.Response" />.
+            </summary>
         <returns>The http response.</returns>
         <remarks>
-             When a model is decomissioned, new digital twins will no longer be able to be defined by this model.
-             However, existing digital twins may continue to use this model.
-             Once a model is decomissioned, it may not be recommissioned.
-             </remarks>
+            When a model is decomissioned, new digital twins will no longer be able to be defined by this model.
+            However, existing digital twins may continue to use this model.
+            Once a model is decomissioned, it may not be recommissioned.
+            </remarks>
         <exception cref="T:Azure.RequestFailedException">
-             The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
-             </exception>
+            The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
+            </exception>
         <exception cref="T:System.ArgumentNullException">
-             The exception is thrown when <paramref name="modelId" /> is <c>null</c>.
-             </exception>
+            The exception is thrown when <paramref name="modelId" /> is <c>null</c>.
+            </exception>
         <example>
           <code snippet="Snippet:DigitalTwinsSampleDecommisionModel">
-             try
-             {
-                 await client.DecommissionModelAsync(sampleModelId);
-            
-                 Console.WriteLine($"Successfully decommissioned model {sampleModelId}");
-             }
-             catch (Exception ex)
-             {
-                 FatalError($"Failed to decommision model {sampleModelId} due to:\n{ex}");
-             }
-             </code>
+            try
+            {
+                await client.DecommissionModelAsync(sampleModelId);
+                Console.WriteLine($"Successfully decommissioned model {sampleModelId}");
+            }
+            catch (RequestFailedException ex)
+            {
+                FatalError($"Failed to decommision model {sampleModelId} due to:\n{ex}");
+            }
+            </code>
         </example>
       </Docs>
     </Member>
@@ -1060,9 +1072,12 @@
              if (getCustomDtResponse.GetRawResponse().Status == (int)HttpStatusCode.OK)
              {
                  CustomDigitalTwin customDt = JsonSerializer.Deserialize&lt;CustomDigitalTwin&gt;(getCustomDtResponse.Value);
-                 Console.WriteLine($"Retrieved and deserialized digital twin {customDt.Id} with ETag {customDt.ETag} " +
-                     $"and Prop1 '{customDt.Prop1}', Prop2 '{customDt.Prop2}', " +
-                     $"ComponentProp1 '{customDt.Component1.ComponentProp1}, ComponentProp2 '{customDt.Component1.ComponentProp2}'");
+                 Console.WriteLine($"Retrieved and deserialized digital twin {customDt.Id}:\n\t" +
+                     $"ETag: {customDt.ETag}\n\t" +
+                     $"Prop1: {customDt.Prop1}\n\t" +
+                     $"Prop2: {customDt.Prop2}\n\t" +
+                     $"ComponentProp1: {customDt.Component1.ComponentProp1}\n\t" +
+                     $"ComponentProp2: {customDt.Component1.ComponentProp2}");
              }
              </code></example>
       </Docs>
