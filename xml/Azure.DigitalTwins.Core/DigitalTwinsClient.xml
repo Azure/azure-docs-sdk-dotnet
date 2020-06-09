@@ -58,17 +58,15 @@
         <summary>
              Creates a new instance of the <see cref="T:Azure.DigitalTwins.Core.DigitalTwinsClient" /> class.
              </summary>
-        <remarks>To be added.</remarks>
+        <remarks>
+             For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+             </remarks>
         <altmember cref="M:Azure.DigitalTwins.Core.DigitalTwinsClient.#ctor(System.Uri,Azure.Core.TokenCredential)" />
         <example>
           <code snippet="Snippet:DigitalTwinsSampleCreateServiceClientWithClientSecret">
-             // By using the ClientSecretCredential, a specified application Id can login using a
-             // client secret.
-             var tokenCredential = new ClientSecretCredential(
-                 tenantId,
-                 clientId,
-                 clientSecret,
-                 new TokenCredentialOptions { AuthorityHost = KnownAuthorityHosts.AzureCloud });
+             // DefaultAzureCredential supports different authentication mechanisms and determines the appropriate credential type based of the environment it is executing in.
+             // It attempts to use multiple credential types in an order until it finds a working credential.
+             var tokenCredential = new DefaultAzureCredential();
             
              var client = new DigitalTwinsClient(
                  new Uri(adtEndpoint),
@@ -98,14 +96,19 @@
         <param name="credential">The <see cref="T:Azure.Core.TokenCredential" /> implementation which will be used to request for the authentication token.</param>
         <param name="options">Options that allow configuration of requests sent to the digital twins service.</param>
         <summary>
-             Creates a new instance of the <see cref="T:Azure.DigitalTwins.Core.DigitalTwinsClient" /> class, with options.
-             </summary>
+            Creates a new instance of the <see cref="T:Azure.DigitalTwins.Core.DigitalTwinsClient" /> class, with options.
+            </summary>
         <remarks>
-             The options parameter provides an opportunity to override default behavior, including specifying API version,
-             overriding <see href="https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/core/Azure.Core/samples/Pipeline.md">transport</see>,
-             enabling <see href="https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/core/Azure.Core/samples/Diagnostics.md">diagnostics</see>,
-             and controlling <see href="https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/core/Azure.Core/samples/Configuration.md">retry strategy</see>.
-             </remarks>
+          <para>
+            The options parameter provides an opportunity to override default behavior, including specifying API version,
+            overriding <see href="https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/core/Azure.Core/samples/Pipeline.md">transport</see>,
+            enabling <see href="https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/core/Azure.Core/samples/Diagnostics.md">diagnostics</see>,
+            and controlling <see href="https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/core/Azure.Core/samples/Configuration.md">retry strategy</see>.
+            </para>
+          <para>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </para>
+        </remarks>
         <example>
           <code snippet="Snippet:DigitalTwinsSampleCreateServiceClientInteractiveLogin">
              // This illustrates how to specify client options, in this case, by providing an
@@ -157,7 +160,9 @@
             Creates a digital twin synchronously. After the task completes, the result will be set to <see cref="T:Azure.Response`1" />.
             </summary>
         <returns>The created application/json digital twin and the http response.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </remarks>
         <exception cref="T:Azure.RequestFailedException">
           <exception cref="T:System.ArgumentNullException">
             The exception is thrown when <paramref name="digitalTwinId" /> or <paramref name="digitalTwin" /> is <c>null</c>.
@@ -193,7 +198,9 @@
              Creates a digital twin asynchronously. After the task completes, the result will be set to <see cref="T:Azure.Response`1" />.
              </summary>
         <returns>The created application/json digital twin and the http response.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+             For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+             </remarks>
         <exception cref="T:Azure.RequestFailedException">
              The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
              </exception>
@@ -202,21 +209,19 @@
              </exception>
         <example>
           <code snippet="Snippet:DigitalTwinsSampleCreateCustomTwin">
-             string customDtId = await GetUniqueTwinIdAsync(SamplesConstants.TemporaryTwinPrefix, client);
-             var customDigitalTwin = new CustomDigitalTwin
+             var customTwin = new CustomDigitalTwin
              {
                  Id = customDtId,
-                 Metadata = new CustomDigitalTwinMetadata { ModelId = modelId },
+                 Metadata = { ModelId = modelId },
                  Prop1 = "Prop1 val",
-                 Prop2 = "Prop2 val",
+                 Prop2 = 987,
                  Component1 = new Component1
                  {
-                     Metadata = new Component1Metadata { ModelId = componentModelId },
                      ComponentProp1 = "Component prop1 val",
-                     ComponentProp2 = "Component prop2 val",
+                     ComponentProp2 = 123,
                  }
              };
-             string dt2Payload = JsonSerializer.Serialize(customDigitalTwin);
+             string dt2Payload = JsonSerializer.Serialize(customTwin);
             
              Response&lt;string&gt; createCustomDtResponse = await client.CreateDigitalTwinAsync(customDtId, dt2Payload);
              Console.WriteLine($"Created digital twin {customDtId} with response {createCustomDtResponse.GetRawResponse().Status}.");
@@ -251,7 +256,9 @@
             Creates an event route synchronously. After the task completes, the result will be set to <see cref="T:Azure.Response" />.
             </summary>
         <returns>The http response.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </remarks>
         <altmember cref="M:Azure.DigitalTwins.Core.DigitalTwinsClient.CreateEventRouteAsync(System.String,Azure.DigitalTwins.Core.Models.EventRoute,System.Threading.CancellationToken)" />
         <exception cref="T:Azure.RequestFailedException">
             The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
@@ -288,7 +295,9 @@
              Creates an event route asynchronously. After the task completes, the result will be set to <see cref="T:Azure.Response" />.
              </summary>
         <returns>The http response.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+             For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+             </remarks>
         <exception cref="T:Azure.RequestFailedException">
              The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
              </exception>
@@ -334,11 +343,16 @@
             </summary>
         <returns>The created models and the http response.</returns>
         <remarks>
+          <para>
             Bulk model creation is useful when several models have references to each other.
             It simplifies creation for the client because otherwise the models would have to be created in a very specific order.
             The service evaluates all models to ensure all references are satisfied, and then accepts or rejects the set.
             So using this method, model creation is transactional.
-            </remarks>
+            </para>
+          <para>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </para>
+        </remarks>
         <altmember cref="M:Azure.DigitalTwins.Core.DigitalTwinsClient.CreateModelsAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)" />
         <exception cref="T:Azure.RequestFailedException">
             The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
@@ -371,11 +385,16 @@
             </summary>
         <returns>The created models and the http response.</returns>
         <remarks>
+          <para>
             Bulk model creation is useful when several models have references to each other.
             It simplifies creation for the client because otherwise the models would have to be created in a very specific order.
             The service evaluates all models to ensure all references are satisfied, and then accepts or rejects the set.
             So using this method, model creation is transactional.
-            </remarks>
+            </para>
+          <para>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </para>
+        </remarks>
         <exception cref="T:Azure.RequestFailedException">
             The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
             </exception>
@@ -417,7 +436,12 @@
             </summary>
         <returns>The http response.</returns>
         <remarks>
-          <para>Relationships are a one-way link from a source digital twin to another, as described at creation time of the assigned model of the digital twin.</para>
+          <para>
+            Relationships are a one-way link from a source digital twin to another, as described at creation time of the assigned model of the digital twin.
+            </para>
+          <para>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </para>
         </remarks>
         <altmember cref="M:Azure.DigitalTwins.Core.DigitalTwinsClient.CreateRelationshipAsync(System.String,System.String,System.String,System.Threading.CancellationToken)" />
         <exception cref="T:Azure.RequestFailedException">
@@ -458,7 +482,12 @@
              </summary>
         <returns>The http response.</returns>
         <remarks>
-          <para>Relationships are a one-way link from a source digital twin to another, as described at creation time of the assigned model of the digital twin.</para>
+          <para>
+             Relationships are a one-way link from a source digital twin to another, as described at creation time of the assigned model of the digital twin.
+             </para>
+          <para>
+             For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+             </para>
         </remarks>
         <exception cref="T:Azure.RequestFailedException">
              The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
@@ -468,12 +497,26 @@
              </exception>
         <example>
           <code snippet="Snippet:DigitalTwinsSampleCreateRelationship">
-             string serializedRelationship = JsonSerializer.Serialize(relationship);
+             // From loaded relationships, get the source Id and Id from each one,
+             // and create it with full relationship payload
+             foreach (BasicRelationship relationship in relationships)
+             {
+                 try
+                 {
+                     string serializedRelationship = JsonSerializer.Serialize(relationship);
             
-             await client.CreateRelationshipAsync(
-                 relationship.SourceId,
-                 relationship.Id,
-                 serializedRelationship);
+                     await client.CreateRelationshipAsync(
+                         relationship.SourceId,
+                         relationship.Id,
+                         serializedRelationship);
+            
+                     Console.WriteLine($"Linked twin {relationship.SourceId} to twin {relationship.TargetId} as '{relationship.Name}'");
+                 }
+                 catch (RequestFailedException ex) when (ex.Status == (int)HttpStatusCode.Conflict)
+                 {
+                     Console.WriteLine($"Relationship {relationship.Id} already exists: {ex.Message}");
+                 }
+             }
              </code>
         </example>
       </Docs>
@@ -504,10 +547,15 @@
             </summary>
         <returns>The http response.</returns>
         <remarks>
+          <para>
             When a model is decomissioned, new digital twins will no longer be able to be defined by this model.
             However, existing digital twins may continue to use this model.
             Once a model is decomissioned, it may not be recommissioned.
-            </remarks>
+            </para>
+          <para>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </para>
+        </remarks>
         <altmember cref="M:Azure.DigitalTwins.Core.DigitalTwinsClient.DecommissionModelAsync(System.String,System.Threading.CancellationToken)" />
         <exception cref="T:Azure.RequestFailedException">
             The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
@@ -539,33 +587,37 @@
         <param name="modelId">The Id of the model to decommission.</param>
         <param name="cancellationToken">The cancellation token.</param>
         <summary>
-             Decommissions a model asynchronously. After the task completes, the result will be set to <see cref="T:Azure.Response" />.
-             </summary>
+            Decommissions a model asynchronously. After the task completes, the result will be set to <see cref="T:Azure.Response" />.
+            </summary>
         <returns>The http response.</returns>
         <remarks>
-             When a model is decomissioned, new digital twins will no longer be able to be defined by this model.
-             However, existing digital twins may continue to use this model.
-             Once a model is decomissioned, it may not be recommissioned.
-             </remarks>
+          <para>
+            When a model is decomissioned, new digital twins will no longer be able to be defined by this model.
+            However, existing digital twins may continue to use this model.
+            Once a model is decomissioned, it may not be recommissioned.
+            </para>
+          <para>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </para>
+        </remarks>
         <exception cref="T:Azure.RequestFailedException">
-             The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
-             </exception>
+            The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
+            </exception>
         <exception cref="T:System.ArgumentNullException">
-             The exception is thrown when <paramref name="modelId" /> is <c>null</c>.
-             </exception>
+            The exception is thrown when <paramref name="modelId" /> is <c>null</c>.
+            </exception>
         <example>
           <code snippet="Snippet:DigitalTwinsSampleDecommisionModel">
-             try
-             {
-                 await client.DecommissionModelAsync(sampleModelId);
-            
-                 Console.WriteLine($"Successfully decommissioned model {sampleModelId}");
-             }
-             catch (Exception ex)
-             {
-                 FatalError($"Failed to decommision model {sampleModelId} due to:\n{ex}");
-             }
-             </code>
+            try
+            {
+                await client.DecommissionModelAsync(sampleModelId);
+                Console.WriteLine($"Successfully decommissioned model {sampleModelId}");
+            }
+            catch (RequestFailedException ex)
+            {
+                FatalError($"Failed to decommision model {sampleModelId} due to:\n{ex}");
+            }
+            </code>
         </example>
       </Docs>
     </Member>
@@ -597,8 +649,13 @@
             </summary>
         <returns>The http response.</returns>
         <remarks>
+          <para>
             To delete a digital twin, any relationships referencing it must be deleted first.
-            </remarks>
+            </para>
+          <para>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </para>
+        </remarks>
         <exception cref="T:Azure.RequestFailedException">
             The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
             </exception>
@@ -634,6 +691,9 @@
             Deletes a digital twin asynchronously. After the task completes, the result will be set to <see cref="T:Azure.Response" />.
             </summary>
         <returns>The http response.</returns>
+        <remarks>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </remarks>
         <remarks>
             To delete a digital twin, any relationships referencing it must be deleted first.
             </remarks>
@@ -675,7 +735,9 @@
             Deletes an event route synchronously. After the task completes, the result will be set to <see cref="T:Azure.Response" />.
             </summary>
         <returns>The http response.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </remarks>
         <altmember cref="M:Azure.DigitalTwins.Core.DigitalTwinsClient.DeleteEventRouteAsync(System.String,System.Threading.CancellationToken)" />
         <exception cref="T:Azure.RequestFailedException">
             The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
@@ -710,7 +772,9 @@
             Deletes an event route asynchronously. After the task completes, the result will be set to <see cref="T:Azure.Response" />.
             </summary>
         <returns>The http response.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </remarks>
         <exception cref="T:Azure.RequestFailedException">
             The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
             </exception>
@@ -750,13 +814,18 @@
             </summary>
         <returns>The http response.</returns>
         <remarks>
+          <para>
             A model can only be deleted if no other models reference it.
             Status codes:
             204 (No Content): Success.
             400 (Bad Request): The request is invalid.
             404 (Not Found): There is no model with the provided id.
             409 (Conflict): There are dependencies on the model that prevent it from being deleted.
-            </remarks>
+            </para>
+          <para>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </para>
+        </remarks>
         <altmember cref="M:Azure.DigitalTwins.Core.DigitalTwinsClient.DeleteModelAsync(System.String,System.Threading.CancellationToken)" />
         <exception cref="T:Azure.RequestFailedException">
             The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
@@ -792,13 +861,18 @@
              </summary>
         <returns>The http response.</returns>
         <remarks>
+          <para>
              A model can only be deleted if no other models reference it.
              Status codes:
              204 (No Content): Success.
              400 (Bad Request): The request is invalid.
              404 (Not Found): There is no model with the provided id.
              409 (Conflict): There are dependencies on the model that prevent it from being deleted.
-             </remarks>
+             </para>
+          <para>
+             For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+             </para>
+        </remarks>
         <exception cref="T:Azure.RequestFailedException">
              The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
              </exception>
@@ -850,7 +924,9 @@
             Deletes a relationship on a digital twin synchronously. After the task completes, the result will be set to <see cref="T:Azure.Response" />.
             </summary>
         <returns>The http response.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </remarks>
         <altmember cref="M:Azure.DigitalTwins.Core.DigitalTwinsClient.DeleteRelationshipAsync(System.String,System.String,Azure.DigitalTwins.Core.RequestOptions,System.Threading.CancellationToken)" />
         <exception cref="T:Azure.RequestFailedException">
             The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
@@ -889,7 +965,9 @@
             Deletes a relationship on a digital twin asynchronously. After the task completes, the result will be set to <see cref="T:Azure.Response" />.
             </summary>
         <returns>The http response.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </remarks>
         <exception cref="T:Azure.RequestFailedException">
           <exception cref="T:System.ArgumentNullException">
             The exception is thrown when <paramref name="digitalTwinId" /> or <paramref name="relationshipId" /> is <c>null</c>.
@@ -925,7 +1003,9 @@
             Gets a component on a digital twin synchronously. After the task completes, the result will be set to <see cref="T:Azure.Response`1" />.
             </summary>
         <returns>Json string representation of the component corresponding to the provided componentPath and the HTTP response.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </remarks>
         <altmember cref="M:Azure.DigitalTwins.Core.DigitalTwinsClient.GetComponentAsync(System.String,System.String,System.Threading.CancellationToken)" />
         <exception cref="T:Azure.RequestFailedException">
             The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
@@ -962,7 +1042,9 @@
              Gets a component on a digital twin asynchronously. After the task completes, the result will be set to <see cref="T:Azure.Response`1" />.
              </summary>
         <returns>Json string representation of the component corresponding to the provided componentPath and the HTTP response.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+             For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+             </remarks>
         <exception cref="T:Azure.RequestFailedException">
              The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
              </exception>
@@ -1004,10 +1086,15 @@
             </summary>
         <returns>The application/json digital twin and the http response.</returns>
         <remarks>
+          <para>
             The returned application/json string can always be deserialized into an instance of <see cref="T:Azure.DigitalTwins.Core.Serialization.BasicDigitalTwin" />.
             It may also be deserialized into custom digital twin types that extend the <see cref="T:Azure.DigitalTwins.Core.Serialization.BasicDigitalTwin" /> with additional
             strongly typed properties provided that you know the definition of the retrieved digital twin prior to deserialization.
-            </remarks>
+            </para>
+          <para>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </para>
+        </remarks>
         <exception cref="T:Azure.RequestFailedException">
             The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
             </exception>
@@ -1042,10 +1129,15 @@
              </summary>
         <returns>The application/json digital twin and the http response.</returns>
         <remarks>
+          <para>
              The returned application/json string can always be deserialized into an instance of <see cref="T:Azure.DigitalTwins.Core.Serialization.BasicDigitalTwin" />.
              It may also be deserialized into custom digital twin types that extend the <see cref="T:Azure.DigitalTwins.Core.Serialization.BasicDigitalTwin" /> with additional
              strongly typed properties provided that you know the definition of the retrieved digital twin prior to deserialization.
-             </remarks>
+             </para>
+          <para>
+             For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+             </para>
+        </remarks>
         <exception cref="T:Azure.RequestFailedException">
              The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
              </exception>
@@ -1060,9 +1152,12 @@
              if (getCustomDtResponse.GetRawResponse().Status == (int)HttpStatusCode.OK)
              {
                  CustomDigitalTwin customDt = JsonSerializer.Deserialize&lt;CustomDigitalTwin&gt;(getCustomDtResponse.Value);
-                 Console.WriteLine($"Retrieved and deserialized digital twin {customDt.Id} with ETag {customDt.ETag} " +
-                     $"and Prop1 '{customDt.Prop1}', Prop2 '{customDt.Prop2}', " +
-                     $"ComponentProp1 '{customDt.Component1.ComponentProp1}, ComponentProp2 '{customDt.Component1.ComponentProp2}'");
+                 Console.WriteLine($"Retrieved and deserialized digital twin {customDt.Id}:\n\t" +
+                     $"ETag: {customDt.ETag}\n\t" +
+                     $"Prop1: {customDt.Prop1}\n\t" +
+                     $"Prop2: {customDt.Prop2}\n\t" +
+                     $"ComponentProp1: {customDt.Component1.ComponentProp1}\n\t" +
+                     $"ComponentProp2: {customDt.Component1.ComponentProp2}");
              }
              </code></example>
       </Docs>
@@ -1092,7 +1187,9 @@
             Gets an event route by Id synchronously. After the task completes, the result will be set to <see cref="T:Azure.Response`1" />.
             </summary>
         <returns>The application/json event routes and the http response.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </remarks>
         <altmember cref="M:Azure.DigitalTwins.Core.DigitalTwinsClient.GetEventRouteAsync(System.String,System.Threading.CancellationToken)" />
         <exception cref="T:Azure.RequestFailedException">
             The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
@@ -1127,7 +1224,9 @@
             Gets an event route by Id asynchronously. After the task completes, the result will be set to <see cref="T:Azure.Response`1" />.
             </summary>
         <returns>The application/json event routes and the http response.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </remarks>
         <exception cref="T:Azure.RequestFailedException">
             The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
             </exception>
@@ -1161,7 +1260,9 @@
             Lists the event routes in a digital twins instance by iterating through a collection synchronously <see cref="T:Azure.Pageable`1" />.
             </summary>
         <returns>A pageable set of application/json event routes and the http response.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </remarks>
         <altmember cref="M:Azure.DigitalTwins.Core.DigitalTwinsClient.GetEventRoutesAsync(Azure.DigitalTwins.Core.Models.EventRoutesListOptions,System.Threading.CancellationToken)" />
         <exception cref="T:Azure.RequestFailedException">
             The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
@@ -1193,7 +1294,9 @@
             Lists the event routes in a digital twins instance by iterating through a collection asynchronously <see cref="T:Azure.AsyncPageable`1" />.
             </summary>
         <returns>A pageable set of application/json event routes and the http response.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </remarks>
         <exception cref="T:Azure.RequestFailedException">
             The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
             </exception>
@@ -1233,7 +1336,9 @@
             Gets all the relationships referencing a digital twin as a target by iterating through a collection synchronously <see cref="T:Azure.Pageable`1" />.
             </summary>
         <returns>The pageable list of application/json relationships directed towards the specified digital twin and the http response.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </remarks>
         <altmember cref="M:Azure.DigitalTwins.Core.DigitalTwinsClient.GetIncomingRelationshipsAsync(System.String,System.Threading.CancellationToken)" />
         <exception cref="T:Azure.RequestFailedException">
             The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
@@ -1268,7 +1373,9 @@
             Gets all the relationships referencing a digital twin as a target by iterating through a collection asynchronously <see cref="T:Azure.AsyncPageable`1" />.
             </summary>
         <returns>The pageable list of application/json relationships directed towards the specified digital twin and the http response.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </remarks>
         <exception cref="T:Azure.RequestFailedException">
             The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
             </exception>
@@ -1307,7 +1414,9 @@
             Gets a model, including the model metadata and the model definition synchronously. After the task completes, the result will be set to <see cref="T:Azure.Response`1" />.
             </summary>
         <returns>The application/json model and the http response.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </remarks>
         <altmember cref="M:Azure.DigitalTwins.Core.DigitalTwinsClient.GetModelAsync(System.String,System.Threading.CancellationToken)" />
         <exception cref="T:Azure.RequestFailedException">
             The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
@@ -1342,7 +1451,9 @@
             Gets a model, including the model metadata and the model definition asynchronously. After the task completes, the result will be set to <see cref="T:Azure.Response`1" />.
             </summary>
         <returns>The application/json model and the http response.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </remarks>
         <exception cref="T:Azure.RequestFailedException">
             The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
             </exception>
@@ -1385,7 +1496,9 @@
             Gets the list of models by iterating through a collection synchronously <see cref="T:Azure.Pageable`1" />.
             </summary>
         <returns>A pageable set of application/json models and the http response.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </remarks>
         <altmember cref="M:Azure.DigitalTwins.Core.DigitalTwinsClient.GetModelsAsync(System.Collections.Generic.IEnumerable{System.String},System.Boolean,Azure.DigitalTwins.Core.Models.GetModelsOptions,System.Threading.CancellationToken)" />
         <exception cref="T:Azure.RequestFailedException">
             The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
@@ -1421,7 +1534,9 @@
             Gets the list of models by iterating through a collection asynchronously <see cref="T:Azure.AsyncPageable`1" />.
             </summary>
         <returns>A pageable set of application/json models and the http response.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </remarks>
         <exception cref="T:Azure.RequestFailedException">
             The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
             </exception>
@@ -1463,7 +1578,9 @@
             Gets a relationship on a digital twin synchronously. After the task completes, the result will be set to <see cref="T:Azure.Response`1" />.
             </summary>
         <returns>The application/json relationship corresponding to the provided relationshipId and the http response.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </remarks>
         <altmember cref="M:Azure.DigitalTwins.Core.DigitalTwinsClient.GetRelationshipAsync(System.String,System.String,System.Threading.CancellationToken)" />
         <exception cref="T:Azure.RequestFailedException">
             The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
@@ -1500,7 +1617,9 @@
             Gets a relationship on a digital twin asynchronously. After the task completes, the result will be set to <see cref="T:Azure.Response`1" />.
             </summary>
         <returns>The application/json relationship corresponding to the provided relationshipId and the http response.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </remarks>
         <exception cref="T:Azure.RequestFailedException">
             The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
             </exception>
@@ -1536,7 +1655,9 @@
             Gets all the relationships on a digital twin by iterating through a collection synchronously <see cref="T:Azure.Pageable`1" />.
             </summary>
         <returns>The pageable list of application/json relationships belonging to the specified digital twin and the http response.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </remarks>
         <altmember cref="M:Azure.DigitalTwins.Core.DigitalTwinsClient.GetRelationshipsAsync(System.String,System.String,System.Threading.CancellationToken)" />
         <exception cref="T:Azure.RequestFailedException">
             The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
@@ -1573,7 +1694,9 @@
             Gets all the relationships on a digital twin by iterating through a collection asynchronously <see cref="T:Azure.AsyncPageable`1" />.
             </summary>
         <returns>The pageable list of application/json relationships belonging to the specified digital twin and the http response.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </remarks>
         <exception cref="T:Azure.RequestFailedException">
             The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
             </exception>
@@ -1620,7 +1743,9 @@
             These event routes need to be set before publishing a telemetry message, in order for the telemetry message to be consumed.
             </summary>
         <returns>The http response.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </remarks>
         <altmember cref="M:Azure.DigitalTwins.Core.DigitalTwinsClient.PublishComponentTelemetryAsync(System.String,System.String,System.String,Azure.DigitalTwins.Core.Models.TelemetryOptions,System.Threading.CancellationToken)" />
         <exception cref="T:Azure.RequestFailedException">
             The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
@@ -1663,7 +1788,9 @@
             These event routes need to be set before publishing a telemetry message, in order for the telemetry message to be consumed.
             </summary>
         <returns>The http response.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </remarks>
         <exception cref="T:Azure.RequestFailedException">
             The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
             </exception>
@@ -1717,7 +1844,9 @@
             These event routes need to be set before publishing a telemetry message, in order for the telemetry message to be consumed.
             </summary>
         <returns>The http response.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </remarks>
         <altmember cref="M:Azure.DigitalTwins.Core.DigitalTwinsClient.PublishTelemetryAsync(System.String,System.String,Azure.DigitalTwins.Core.Models.TelemetryOptions,System.Threading.CancellationToken)" />
         <exception cref="T:Azure.RequestFailedException">
             The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
@@ -1758,7 +1887,9 @@
             These event routes need to be set before publishing a telemetry message, in order for the telemetry message to be consumed.
             </summary>
         <returns>The http response.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </remarks>
         <exception cref="T:Azure.RequestFailedException">
             The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
             </exception>
@@ -1799,7 +1930,9 @@
             Queries for digital twins by iterating through a collection synchronously <see cref="T:Azure.Pageable`1" />.
             </summary>
         <returns>The pageable list of query results.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </remarks>
         <altmember cref="M:Azure.DigitalTwins.Core.DigitalTwinsClient.QueryAsync(System.String,System.Threading.CancellationToken)" />
         <exception cref="T:Azure.RequestFailedException">
             The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
@@ -1834,7 +1967,9 @@
              Queries for digital twins by iterating through a collection asynchronously <see cref="T:Azure.AsyncPageable`1" />.
              </summary>
         <returns>The pageable list of query results.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+             For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+             </remarks>
         <exception cref="T:Azure.RequestFailedException">
              The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
              </exception>
@@ -1887,7 +2022,9 @@
             Updates properties of a component on a digital twin synchronously. After the task completes, the result will be set to <see cref="T:Azure.Response`1" />.
             </summary>
         <returns>The HTTP response.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </remarks>
         <altmember cref="M:Azure.DigitalTwins.Core.DigitalTwinsClient.UpdateComponentAsync(System.String,System.String,System.String,Azure.DigitalTwins.Core.RequestOptions,System.Threading.CancellationToken)" />
         <exception cref="T:Azure.RequestFailedException">
           <exception cref="T:System.ArgumentNullException">
@@ -1928,7 +2065,9 @@
              Updates properties of a component on a digital twin asynchronously. After the task completes, the result will be set to <see cref="T:Azure.Response`1" />.
              </summary>
         <returns>The HTTP response.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+             For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+             </remarks>
         <exception cref="T:Azure.RequestFailedException">
              The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
              </exception>
@@ -1978,7 +2117,9 @@
             Updates a digital twin synchronously. After the task completes, the result will be set to <see cref="T:Azure.Response`1" />.
             </summary>
         <returns>The http response.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </remarks>
         <altmember cref="M:Azure.DigitalTwins.Core.DigitalTwinsClient.UpdateDigitalTwinAsync(System.String,System.String,Azure.DigitalTwins.Core.RequestOptions,System.Threading.CancellationToken)" />
         <exception cref="T:Azure.RequestFailedException">
             The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
@@ -2017,7 +2158,9 @@
             Updates a digital twin asynchronously. After the task completes, the result will be set to <see cref="T:Azure.Response`1" />.
             </summary>
         <returns>The http response.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </remarks>
         <exception cref="T:Azure.RequestFailedException">
             The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
             </exception>
@@ -2057,7 +2200,9 @@
             Updates the properties of a relationship on a digital twin synchronously. After the task completes, the result will be set to <see cref="T:Azure.Response" />.
             </summary>
         <returns>The http response.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </remarks>
         <altmember cref="M:Azure.DigitalTwins.Core.DigitalTwinsClient.UpdateRelationshipAsync(System.String,System.String,System.String,Azure.DigitalTwins.Core.RequestOptions,System.Threading.CancellationToken)" />
         <exception cref="T:Azure.RequestFailedException">
             The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
@@ -2098,7 +2243,9 @@
             Updates the properties of a relationship on a digital twin asynchronously. After the task completes, the result will be set to <see cref="T:Azure.Response" />.
             </summary>
         <returns>The http response.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+            </remarks>
         <exception cref="T:Azure.RequestFailedException">
             The exception that captures the errors from the service. Check the <see cref="P:Azure.RequestFailedException.ErrorCode" /> and <see cref="P:Azure.RequestFailedException.Status" /> properties for more details.
             </exception>

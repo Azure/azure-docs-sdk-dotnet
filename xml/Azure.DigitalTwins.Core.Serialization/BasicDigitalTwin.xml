@@ -1,44 +1,57 @@
 <Type Name="BasicDigitalTwin" FullName="Azure.DigitalTwins.Core.Serialization.BasicDigitalTwin">
-  <TypeSignature Language="C#" Value="public class BasicDigitalTwin : Azure.DigitalTwins.Core.Serialization.ModelProperties" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit BasicDigitalTwin extends Azure.DigitalTwins.Core.Serialization.ModelProperties" />
+  <TypeSignature Language="C#" Value="public class BasicDigitalTwin" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit BasicDigitalTwin extends System.Object" />
   <TypeSignature Language="DocId" Value="T:Azure.DigitalTwins.Core.Serialization.BasicDigitalTwin" />
-  <TypeSignature Language="VB.NET" Value="Public Class BasicDigitalTwin&#xA;Inherits ModelProperties" />
-  <TypeSignature Language="F#" Value="type BasicDigitalTwin = class&#xA;    inherit ModelProperties" />
+  <TypeSignature Language="VB.NET" Value="Public Class BasicDigitalTwin" />
+  <TypeSignature Language="F#" Value="type BasicDigitalTwin = class" />
   <AssemblyInfo>
     <AssemblyName>Azure.DigitalTwins.Core</AssemblyName>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
-    <BaseTypeName>Azure.DigitalTwins.Core.Serialization.ModelProperties</BaseTypeName>
+    <BaseTypeName>System.Object</BaseTypeName>
   </Base>
   <Interfaces />
   <Docs>
     <summary>
              An optional, helper class for deserializing a digital twin.
              </summary>
-    <remarks>To be added.</remarks>
+    <remarks>
+             For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+             </remarks>
     <example>
              Here's an example of  how to use the BasicDigitalTwin helper class to serialize and create a digital twin.
             
              <code snippet="Snippet:DigitalTwinsSampleCreateBasicTwin">
              // Create digital twin with component payload using the BasicDigitalTwin serialization helper
             
-             var basicDigitalTwin = new BasicDigitalTwin
+             var basicTwin = new BasicDigitalTwin
              {
-                 Id = basicDtId
+                 Id = basicDtId,
+                 // model Id of digital twin
+                 Metadata = { ModelId = modelId },
+                 CustomProperties =
+                 {
+                     // digital twin properties
+                     { "Prop1", "Value1" },
+                     { "Prop2", 987 },
+                     // component
+                     {
+                         "Component1",
+                         new ModelProperties
+                         {
+                             // component properties
+                             CustomProperties =
+                             {
+                                 { "ComponentProp1", "Component value 1" },
+                                 { "ComponentProp2", 123 },
+                             },
+                         }
+                     },
+                 },
              };
-             basicDigitalTwin.Metadata.ModelId = modelId;
-             basicDigitalTwin.CustomProperties.Add("Prop1", "Value1");
-             basicDigitalTwin.CustomProperties.Add("Prop2", "Value2");
             
-             var componentMetadata = new ModelProperties();
-             componentMetadata.Metadata.ModelId = componentModelId;
-             componentMetadata.CustomProperties.Add("ComponentProp1", "ComponentValue1");
-             componentMetadata.CustomProperties.Add("ComponentProp2", "ComponentValue2");
-            
-             basicDigitalTwin.CustomProperties.Add("Component1", componentMetadata);
-            
-             string basicDtPayload = JsonSerializer.Serialize(basicDigitalTwin);
+             string basicDtPayload = JsonSerializer.Serialize(basicTwin);
             
              Response&lt;string&gt; createBasicDtResponse = await client.CreateDigitalTwinAsync(basicDtId, basicDtPayload);
              Console.WriteLine($"Created digital twin {basicDtId} with response {createBasicDtResponse.GetRawResponse().Status}.");
@@ -54,11 +67,14 @@
             
                  // Must cast Component1 as a JsonElement and get its raw text in order to deserialize it as a dictionary
                  string component1RawText = ((JsonElement)basicDt.CustomProperties["Component1"]).GetRawText();
-                 var component1 = JsonSerializer.Deserialize&lt;IDictionary&lt;string, object&gt;&gt;(component1RawText);
+                 IDictionary&lt;string, object&gt; component1 = JsonSerializer.Deserialize&lt;IDictionary&lt;string, object&gt;&gt;(component1RawText);
             
-                 Console.WriteLine($"Retrieved and deserialized digital twin {basicDt.Id}  with ETag {basicDt.ETag} " +
-                     $"and Prop1 '{basicDt.CustomProperties["Prop1"]}', Prop2 '{basicDt.CustomProperties["Prop2"]}', " +
-                     $"ComponentProp1 '{component1["ComponentProp1"]}', ComponentProp2 '{component1["ComponentProp2"]}'");
+                 Console.WriteLine($"Retrieved and deserialized digital twin {basicDt.Id}:\n\t" +
+                     $"ETag: {basicDt.ETag}\n\t" +
+                     $"Prop1: {basicDt.CustomProperties["Prop1"]}\n\t" +
+                     $"Prop2: {basicDt.CustomProperties["Prop2"]}\n\t" +
+                     $"ComponentProp1: {component1["ComponentProp1"]}\n\t" +
+                     $"ComponentProp2: {component1["ComponentProp2"]}");
              }
              </code></example>
   </Docs>
@@ -76,6 +92,33 @@
       <Parameters />
       <Docs>
         <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CustomProperties">
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.IDictionary&lt;string,object&gt; CustomProperties { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.IDictionary`2&lt;string, object&gt; CustomProperties" />
+      <MemberSignature Language="DocId" Value="P:Azure.DigitalTwins.Core.Serialization.BasicDigitalTwin.CustomProperties" />
+      <MemberSignature Language="VB.NET" Value="Public Property CustomProperties As IDictionary(Of String, Object)" />
+      <MemberSignature Language="F#" Value="member this.CustomProperties : System.Collections.Generic.IDictionary&lt;string, obj&gt; with get, set" Usage="Azure.DigitalTwins.Core.Serialization.BasicDigitalTwin.CustomProperties" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.DigitalTwins.Core</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Text.Json.Serialization.JsonExtensionData</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.IDictionary&lt;System.String,System.Object&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Additional properties of the digital twin. This field will contain any properties of the digital twin that are not already defined by the other strong types of this class.
+            </summary>
+        <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -128,6 +171,33 @@
       <Docs>
         <summary>
             The unique Id of the digital twin in a digital twins instance. This field is present on every digital twin.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Metadata">
+      <MemberSignature Language="C#" Value="public Azure.DigitalTwins.Core.Serialization.DigitalTwinMetadata Metadata { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Azure.DigitalTwins.Core.Serialization.DigitalTwinMetadata Metadata" />
+      <MemberSignature Language="DocId" Value="P:Azure.DigitalTwins.Core.Serialization.BasicDigitalTwin.Metadata" />
+      <MemberSignature Language="VB.NET" Value="Public Property Metadata As DigitalTwinMetadata" />
+      <MemberSignature Language="F#" Value="member this.Metadata : Azure.DigitalTwins.Core.Serialization.DigitalTwinMetadata with get, set" Usage="Azure.DigitalTwins.Core.Serialization.BasicDigitalTwin.Metadata" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.DigitalTwins.Core</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Text.Json.Serialization.JsonPropertyName("$metadata")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Azure.DigitalTwins.Core.Serialization.DigitalTwinMetadata</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Information about the model a digital twin conforms to. This field is present on every digital twin.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
