@@ -1,6 +1,6 @@
 ---
 title: Azure Storage File Shares client library for .NET
-keywords: Azure, .net, SDK, API, Azure.Storage.Files.Shares, Azure.Storage.Files.Shares
+keywords: Azure, .net, SDK, API, storage, Azure.Storage.Files.Shares
 author: maggiepint
 ms.author: magpint
 ms.date: 06/02/2020
@@ -8,11 +8,10 @@ ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: .net
-ms.service: Azure.Storage.Files.Shares
+ms.service: storage
 ---
 
-# Azure Storage File Shares client library for .NET - Version 12.2.2 
-
+# Azure Storage File Shares client library for .NET - Version 12.2.3
 
 > Server Version: 2019-07-07
 
@@ -29,8 +28,7 @@ being used.
 
 ### Install the package
 
-Install the Azure Storage File Shares client library for .NET - Version 12.2.2 
- with [NuGet][nuget]:
+Install the Azure Storage File Shares client library for .NET with [NuGet][nuget]:
 
 ```Powershell
 dotnet add package Azure.Storage.Files.Shares
@@ -211,8 +209,8 @@ catch (RequestFailedException ex)
 
 Get started with our [File samples][samples]:
 
-1. [Hello World](samples/Sample01a_HelloWorld.cs): Upload files, download files, and traverse shares (or [asynchronously](samples/Sample01b_HelloWorldAsync.cs))
-2. [Auth](samples/Sample02_Auth.cs): Authenticate with connection strings, shared keys, and shared access signatures.
+1. [Hello World](https://github.com/azure/azure-sdk-for-net/tree/Azure.Storage.Files.Shares_12.2.3/sdk/storage/Azure.Storage.Files.Shares/samples/Sample01a_HelloWorld.cs): Upload files, download files, and traverse shares (or [asynchronously](https://github.com/azure/azure-sdk-for-net/tree/Azure.Storage.Files.Shares_12.2.3/sdk/storage/Azure.Storage.Files.Shares/samples/Sample01b_HelloWorldAsync.cs))
+2. [Auth](https://github.com/azure/azure-sdk-for-net/tree/Azure.Storage.Files.Shares_12.2.3/sdk/storage/Azure.Storage.Files.Shares/samples/Sample02_Auth.cs): Authenticate with connection strings, shared keys, and shared access signatures.
 
 ## Contributing
 
@@ -246,10 +244,9 @@ additional questions or comments.
 [azure_sub]: https://azure.microsoft.com/free/
 [RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/core/Azure.Core/src/RequestFailedException.cs
 [error_codes]: https://docs.microsoft.com/rest/api/storageservices/file-service-error-codes
-[samples]: samples/
-[storage_contrib]: ../CONTRIBUTING.md
+[samples]: https://github.com/azure/azure-sdk-for-net/tree/Azure.Storage.Files.Shares_12.2.3/sdk/storage/Azure.Storage.Files.Shares/samples
+[storage_contrib]: https://github.com/azure/azure-sdk-for-net/tree/Azure.Storage.Files.Shares_12.2.3/sdk/storage/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [coc_contact]: mailto:opencode@microsoft.com
-

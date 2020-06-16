@@ -1,5 +1,18 @@
+---
+title: Azure Storage Blob Key Store for Microsoft.AspNetCore.DataProtection
+keywords: Azure, .NET, SDK, API, extensions, Azure.Extensions.AspNetCore.DataProtection.Blobs
+author: maggiepint
+ms.author: magpint
+ms.date: 06/10/2020
+ms.topic: article
+ms.prod: azure
+ms.technology: azure
+ms.devlang: .NET
+ms.service: extensions
+---
 
-# Azure Storage Blob Key Store for Microsoft.AspNetCore.DataProtection
+
+# Azure Storage Blob Key Store for Microsoft.AspNetCore.DataProtection - Version 1.0.0
 
 The `Azure.Extensions.AspNetCore.DataProtection.Blobs` package allows storing ASP.NET Core DataProtection keys in Azure Blob Storage. Keys can be shared across several instances of a web app. Apps can share authentication cookies or CSRF protection across multiple servers.
 

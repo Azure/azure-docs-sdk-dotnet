@@ -1,5 +1,18 @@
+---
+title: Azure Key Vault Secrets configuration provider for Microsoft.Extensions.Configuration 
+keywords: Azure, .NET, SDK, API, extensions, Azure.Extensions.AspNetCore.Configuration.Secrets
+author: maggiepint
+ms.author: magpint
+ms.date: 06/10/2020
+ms.topic: article
+ms.prod: azure
+ms.technology: azure
+ms.devlang: .NET
+ms.service: extensions
+---
 
-# Azure Key Vault Secrets configuration provider for Microsoft.Extensions.Configuration
+
+# Azure Key Vault Secrets configuration provider for Microsoft.Extensions.Configuration - Version 1.0.0
 
 The `Azure.Extensions.AspNetCore.Configuration.Secrets` package allows storing configuration values using Azure Key Vault Secrets.
 

@@ -1,6 +1,6 @@
 ---
 title: Azure Cognitive Services Form Recognizer client library for .NET
-keywords: Azure, .net, SDK, API, Azure.AI.FormRecognizer, 
+keywords: Azure, .net, SDK, API, Azure.AI.FormRecognizer, formrecognizer
 author: maggiepint
 ms.author: magpint
 ms.date: 06/10/2020
@@ -8,7 +8,7 @@ ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: .net
-ms.service: 
+ms.service: formrecognizer
 ---
 
 # Azure Cognitive Services Form Recognizer client library for .NET - Version 1.0.0-preview.3 

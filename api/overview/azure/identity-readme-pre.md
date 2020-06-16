@@ -1,6 +1,6 @@
 ---
 title: Azure Identity client library for .NET
-keywords: Azure, .net, SDK, API, Azure.Identity, Azure.Identity
+keywords: Azure, .net, SDK, API, identity, Azure.Identity
 author: maggiepint
 ms.author: magpint
 ms.date: 06/10/2020
@@ -8,7 +8,7 @@ ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: .net
-ms.service: Azure.Identity
+ms.service: identity
 ---
 
 # Azure Identity client library for .NET - Version 1.2.0-preview.4 

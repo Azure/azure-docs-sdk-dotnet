@@ -1,6 +1,6 @@
 ---
 title: Azure Service Bus client library for .NET
-keywords: Azure, .net, SDK, API, Azure.Messaging.ServiceBus, Azure.Messaging.ServiceBus
+keywords: Azure, .net, SDK, API, servicebus, Azure.Messaging.ServiceBus
 author: maggiepint
 ms.author: magpint
 ms.date: 06/08/2020
@@ -8,7 +8,7 @@ ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: .net
-ms.service: Azure.Messaging.ServiceBus
+ms.service: servicebus
 ---
 
 # Azure Service Bus client library for .NET - Version 7.0.0-preview.3 

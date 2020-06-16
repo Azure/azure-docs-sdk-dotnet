@@ -1,6 +1,6 @@
 ---
 title: Azure Core shared client library for .NET
-keywords: Azure, .net, SDK, API, Azure.Core, Azure.Core
+keywords: Azure, .net, SDK, API, core, Azure.Core
 author: maggiepint
 ms.author: magpint
 ms.date: 06/04/2020
@@ -8,7 +8,7 @@ ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: .net
-ms.service: Azure.Core
+ms.service: core
 ---
 
 # Azure Core shared client library for .NET - Version 1.2.2 

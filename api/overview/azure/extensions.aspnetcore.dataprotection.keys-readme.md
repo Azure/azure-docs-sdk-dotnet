@@ -1,5 +1,18 @@
+---
+title: Azure Key Vault Key Encryptor for Microsoft.AspNetCore.DataProtection
+keywords: Azure, .NET, SDK, API, extensions, Azure.Extensions.AspNetCore.DataProtection.Keys
+author: maggiepint
+ms.author: magpint
+ms.date: 06/10/2020
+ms.topic: article
+ms.prod: azure
+ms.technology: azure
+ms.devlang: .NET
+ms.service: extensions
+---
 
-# Azure Key Vault Key Encryptor for Microsoft.AspNetCore.DataProtection
+
+# Azure Key Vault Key Encryptor for Microsoft.AspNetCore.DataProtection - Version 1.0.0
 
 The `Azure.Extensions.AspNetCore.DataProtection.Keys` package allows protecting keys at rest using Azure Key Vault Key Encryption/Wrapping feature.
 
