@@ -1,17 +1,17 @@
 ---
 title: Azure Cognitive Search client library for .NET
-keywords: Azure, .NET, SDK, API, search, Azure.Search.Documents
+keywords: Azure, .net, SDK, API, Azure.Search.Documents, search
 author: maggiepint
 ms.author: magpint
-ms.date: 04/16/2020
+ms.date: 06/09/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.devlang: .NET
+ms.devlang: .net
 ms.service: search
 ---
 
-# Azure Cognitive Search client library for .NET - Version 1.0.0-preview.2 
+# Azure Cognitive Search client library for .NET - Version 1.0.0-preview.4 
 
 
 [Azure Cognitive Search](https://docs.microsoft.com/azure/search/) is a
@@ -52,19 +52,19 @@ Use the **Azure.Search.Documents client library** to:
 
 ### Install the package
 
-Install the Azure Cognitive Search client library for .NET - Version 1.0.0-preview.2 
+Install the Azure Cognitive Search client library for .NET - Version 1.0.0-preview.4 
  with [NuGet][nuget]:
 
 ```Powershell
-dotnet add package Azure.Search.Documents --version 1.0.0-preview.2
+dotnet add package Azure.Search.Documents --version 1.0.0-preview.4
 ```
 
 ### Prerequisites
 
 You need an [Azure subscription][azure_sub] and a
-[Search Service][create_search_service_docs] to use this package.
+[search service][create_search_service_docs] to use this package.
 
-To create a new Search Service, you can use the [Azure Portal][create_search_service_docs],
+To create a new search service, you can use the [Azure portal][create_search_service_docs],
 [Azure PowerShell][create_search_service_ps], or the [Azure CLI][create_search_service_cli].
 Here's an example using the Azure CLI to create a free instance for getting started:
 
@@ -80,7 +80,7 @@ See [choosing a pricing tier](https://docs.microsoft.com/azure/search/search-sku
 All requests to a search service need an api-key that was generated specifically
 for your service. [The api-key is the sole mechanism for authenticating access to
 your search service endpoint.](https://docs.microsoft.com/azure/search/search-security-api-keys)  You can obtain your api-key from the
-[Azure Portal](https://portal.azure.com/) or via the Azure CLI:
+[Azure portal](https://portal.azure.com/) or via the Azure CLI:
 
 ```Powershell
 az search admin-key show --service-name <mysearch> --resource-group <mysearch-rg>
@@ -104,7 +104,7 @@ string key = Environment.GetEnvironmentVariable("SEARCH_API_KEY");
 
 // Create a client
 AzureKeyCredential credential = new AzureKeyCredential(key);
-SearchServiceClient client = new SearchServiceClient(endpoint, credential);
+SearchIndexClient client = new SearchIndexClient(endpoint, credential);
 ```
 
 ### Send your first search query
@@ -121,13 +121,13 @@ string serviceName = "azs-playground";
 string indexName = "nycjobs";
 string apiKey = "252044BE3886FE4A8E3BAA4F595114BB";
 
-// Create a SearchIndexClient to send queries
+// Create a SearchClient to send queries
 Uri serviceEndpoint = new Uri($"https://{serviceName}.search.windows.net/");
 AzureKeyCredential credential = new AzureKeyCredential(apiKey);
-SearchIndexClient client = new SearchIndexClient(serviceEndpoint, indexName, credential);
+SearchClient client = new SearchClient(serviceEndpoint, indexName, credential);
 
 // Let's get the top 5 jobs related to Microsoft
-SearchResults<SearchDocument> response = client.Search("Microsoft", new SearchOptions { Size = 5 });
+SearchResults<SearchDocument> response = client.Search<SearchDocument>("Microsoft", new SearchOptions { Size = 5 });
 foreach (SearchResult<SearchDocument> result in response.GetResults())
 {
     // Print out the title and job description (we'll see below how to
@@ -143,13 +143,13 @@ You can paste that into a new console app,
 
 ## Key concepts
 
-An **Azure Cognitive Search service** contains one or more **indexes** that
-provide persistent storage of searchable data in the form of JSON **documents**.
-_(If you're brand new to Search, you can make a very rough analogy between
-indexes and database tables.)_  The **Azure.Search.Documents client library**
-exposes operations on these resources through two main client types:
+An Azure Cognitive Search service contains one or more indexes that provide
+persistent storage of searchable data in the form of JSON documents.  _(If
+you're brand new to search, you can make a very rough analogy between
+indexes and database tables.)_  The Azure.Search.Documents client library
+exposes operations on these resources through two main client types.
 
-- `SearchIndexClient` helps with
+- `SearchClient` helps with:
    - [Searching](https://docs.microsoft.com/en-us/azure/search/search-lucene-query-architecture)
      your indexed documents using
      [rich queries](https://docs.microsoft.com/azure/search/search-query-overview)
@@ -178,7 +178,7 @@ exploring online resources.  A good rule of thumb is to check for the namespace
 ## Examples
 
 The following examples all use a simple [Hotel data set](https://docs.microsoft.com/samples/azure-samples/azure-search-sample-data/azure-search-sample-data/)
-that you can [import into your own index from the Azure Portal.](https://docs.microsoft.com/azure/search/search-get-started-portal#step-1---start-the-import-data-wizard-and-create-a-data-source)
+that you can [import into your own index from the Azure portal.](https://docs.microsoft.com/azure/search/search-get-started-portal#step-1---start-the-import-data-wizard-and-create-a-data-source)
 These are just a few of the basics - please [check out our Samples][samples] for
 much more.
 
@@ -189,9 +189,10 @@ Let's start by importing our namespaces.
 ```C# Snippet:Azure_Search_Tests_Samples_Readme_Namespace
 using Azure;
 using Azure.Search.Documents;
+using Azure.Search.Documents.Indexes;
 ```
 
-We'll then create a `SearchIndexClient` to access our hotels search index.
+We'll then create a `SearchClient` to access our hotels search index.
 
 ```C# Snippet:Azure_Search_Tests_Samples_Readme_Client
 // Get the service endpoint and API key from the environment
@@ -201,10 +202,10 @@ string indexName = "hotels";
 
 // Create a client
 AzureKeyCredential credential = new AzureKeyCredential(key);
-SearchIndexClient client = new SearchIndexClient(endpoint, indexName, credential);
+SearchClient client = new SearchClient(endpoint, indexName, credential);
 ```
 
-There are three ways to interact with the data returned from a search query.
+There are two ways to interact with the data returned from a search query.
 Let's explore them with a search for a "luxury" hotel.
 
 #### Use `SearchDocument` like a dictionary
@@ -213,27 +214,12 @@ Let's explore them with a search for a "luxury" hotel.
 provide your own.  Here we perform the search, enumerate over the results, and
 extract data using `SearchDocument`'s dictionary indexer.
 ```C# Snippet:Azure_Search_Tests_Samples_Readme_Dict
-SearchResults<SearchDocument> response = client.Search("luxury");
+SearchResults<SearchDocument> response = client.Search<SearchDocument>("luxury");
 foreach (SearchResult<SearchDocument> result in response.GetResults())
 {
     SearchDocument doc = result.Document;
     string id = (string)doc["hotelId"];
     string name = (string)doc["hotelName"];
-    Console.WriteLine("{id}: {name}");
-}
-```
-
-#### Use `SearchDocument` with [C#'s `dynamic` keyword](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/types/using-type-dynamic)
-
-This starts out the same, but the use of `dynamic` makes the code a little
-easier to read.
-```C# Snippet:Azure_Search_Tests_Samples_Readme_Dynamic
-SearchResults<SearchDocument> response = client.Search("luxury");
-foreach (SearchResult<SearchDocument> result in response.GetResults())
-{
-    dynamic doc = result.Document;
-    string id = doc.hotelId;
-    string name = doc.hotelName;
     Console.WriteLine("{id}: {name}");
 }
 ```
@@ -281,7 +267,52 @@ SearchOptions options = new SearchOptions
 };
 SearchResults<Hotel> response = client.Search<Hotel>("luxury", options);
 // ...
-``` 
+```
+
+### Creating an index
+
+You can use the `SearchServiceClient` to create a search index. Fields can be
+defined using convenient `SimpleField`, `SearchableField`, or `ComplexField`
+classes. Indexes can also define suggesters, lexical analyzers, and more.
+
+```C# Snippet:Azure_Search_Tests_Samples_Readme_CreateIndex
+Uri endpoint = new Uri(Environment.GetEnvironmentVariable("SEARCH_ENDPOINT"));
+string key = Environment.GetEnvironmentVariable("SEARCH_API_KEY");
+
+// Create a service client
+AzureKeyCredential credential = new AzureKeyCredential(key);
+SearchIndexClient client = new SearchIndexClient(endpoint, credential);
+
+// Create the index
+SearchIndex index = new SearchIndex("hotels")
+{
+    Fields =
+    {
+        new SimpleField("hotelId", SearchFieldDataType.String) { IsKey = true, IsFilterable = true, IsSortable = true },
+        new SearchableField("hotelName") { IsFilterable = true, IsSortable = true },
+        new SearchableField("description") { AnalyzerName = LexicalAnalyzerName.EnLucene },
+        new SearchableField("tags", collection: true) { IsFilterable = true, IsFacetable = true },
+        new ComplexField("address")
+        {
+            Fields =
+            {
+                new SearchableField("streetAddress"),
+                new SearchableField("city") { IsFilterable = true, IsSortable = true, IsFacetable = true },
+                new SearchableField("stateProvince") { IsFilterable = true, IsSortable = true, IsFacetable = true },
+                new SearchableField("country") { IsFilterable = true, IsSortable = true, IsFacetable = true },
+                new SearchableField("postalCode") { IsFilterable = true, IsSortable = true, IsFacetable = true }
+            }
+        }
+    },
+    Suggesters =
+    {
+        // Suggest query terms from both the hotelName and description fields.
+        new SearchSuggester("sg", "hotelName", "description")
+    }
+};
+
+client.CreateIndex(index);
+```
 
 ### Adding documents to your index
 
@@ -299,7 +330,7 @@ IndexDocumentsOptions options = new IndexDocumentsOptions { ThrowOnAnyError = tr
 client.IndexDocuments(batch, options);
 ```
 
-The request will succeed even if any of the individual actions fails and
+The request will succeed even if any of the individual actions fail and
 return an `IndexDocumentsResult` for inspection.  There's also a `ThrowOnAnyError`
 option if you only care about success or failure of the whole batch.
 
@@ -378,9 +409,10 @@ additional questions or comments.
 [azure_sub]: https://azure.microsoft.com/free/
 [RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/core/Azure.Core/src/RequestFailedException.cs
 [status_codes]: https://docs.microsoft.com/rest/api/searchservice/http-status-codes
-[samples]: https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/search/Azure.Search.Documents/samples
-[search_contrib]: https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/search/CONTRIBUTING.md
+[samples]: samples/
+[search_contrib]: ../CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [coc_contact]: mailto:opencode@microsoft.com
+
