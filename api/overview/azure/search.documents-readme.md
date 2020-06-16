@@ -10,7 +10,8 @@ ms.technology: azure
 ms.devlang: .NET
 ms.service: search
 ---
- # Azure Cognitive Search client library for .NET - Version 1.0.0-preview.2 
+
+# Azure Cognitive Search client library for .NET - Version 1.0.0-preview.2 
 
 
 [Azure Cognitive Search](https://docs.microsoft.com/azure/search/) is a

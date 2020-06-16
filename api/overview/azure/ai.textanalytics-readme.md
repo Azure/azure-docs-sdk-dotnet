@@ -1,16 +1,17 @@
 ---
 title: Azure Cognitive Services Text Analytics client library for .NET
-keywords: Azure, .NET, SDK, API, textanalytics, Azure.AI.TextAnalytics
+keywords: Azure, .net, SDK, API, textanalytics, Azure.AI.TextAnalytics, 
 author: maggiepint
 ms.author: magpint
-ms.date: 04/16/2020
+ms.date: 06/09/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.devlang: .NET
+ms.devlang: .net
 ms.service: textanalytics
 ---
- # Azure Cognitive Services Text Analytics client library for .NET - Version 1.0.0-preview.4 
+
+# Azure Cognitive Services Text Analytics client library for .NET - Version 1.0.0 
 
 Azure Cognitive Services Text Analytics is a cloud service that provides advanced natural language processing over raw text, and includes the following main functions: 
 * Language Detection
@@ -27,8 +28,9 @@ Azure Cognitive Services Text Analytics is a cloud service that provides advance
 Install the Azure Text Analytics client library for .NET with [NuGet][nuget]:
 
 ```PowerShell
-dotnet add package Azure.AI.TextAnalytics --version 1.0.0-preview.4
+dotnet add package Azure.AI.TextAnalytics
 ```
+**Note:** This package version targets Azure Text Analytics service API version v3.0.
 
 ### Prerequisites
 * An [Azure subscription][azure_sub].
@@ -46,13 +48,13 @@ You can create either resource using:
 Below is an example of how you can create a Text Analytics resource using the CLI:
 
 ```PowerShell
-# Create a new resource group to hold the text analytics resource -
+# Create a new resource group to hold the Text Analytics resource -
 # if using an existing resource group, skip this step
 az group create --name <your-resource-name> --location <location>
 ```
 
 ```PowerShell
-# Create text analytics
+# Create Text Analytics
 az cognitiveservices account create \
     --name <your-resource-name> \
     --resource-group <your-resource-group-name> \
@@ -129,7 +131,7 @@ Return values, such as `AnalyzeSentimentResult`, is the result of a Text Analyti
 A Return value collection, such as `AnalyzeSentimentResultCollection`, is a collection of operation results, where each corresponds to one of the documents provided in the input batch.  A document and its result will have the same index in the input and result collections. The return value also contains a `HasError` property that allows to identify if an operation executed was succesful or unsuccesful for the given document. It may optionally include information about the document batch and how it was processed.
 
 ## Examples
-The following section provides several code snippets using the `client` [created above](#create-textanalyticsclient), and covers the main functions of Text Analytics.
+The following section provides several code snippets using the `client` [created above](#create-textanalyticsclient-with-azure-active-directory-credential), and covers the main functions of Text Analytics.
 
 ### Sync examples
 * [Detect Language](#detect-language)
@@ -150,7 +152,7 @@ string document = "Este documento está en español.";
 
 DetectedLanguage language = client.DetectLanguage(document);
 
-Console.WriteLine($"Detected language {language.Name} with confidence {language.Score}.");
+Console.WriteLine($"Detected language {language.Name} with confidence score {language.ConfidenceScore}.");
 ```
 For samples on using the production recommended option `DetectLanguageBatch` see [here][detect_language_sample].
 
@@ -179,7 +181,7 @@ Run a model to identify a collection of significant phrases found in the passed-
 ```C# Snippet:ExtractKeyPhrases
 string document = "My cat might need to see a veterinarian.";
 
-IReadOnlyCollection<string> keyPhrases = client.ExtractKeyPhrases(document).Value;
+KeyPhraseCollection keyPhrases = client.ExtractKeyPhrases(document);
 
 Console.WriteLine($"Extracted {keyPhrases.Count} key phrases:");
 foreach (string keyPhrase in keyPhrases)
@@ -197,7 +199,7 @@ Run a predictive model to identify a collection of named entities in the passed-
 ```C# Snippet:RecognizeEntities
 string document = "Microsoft was founded by Bill Gates and Paul Allen.";
 
-IReadOnlyCollection<CategorizedEntity> entities = client.RecognizeEntities(document).Value;
+CategorizedEntityCollection entities = client.RecognizeEntities(document);
 
 Console.WriteLine($"Recognized {entities.Count} entities:");
 foreach (CategorizedEntity entity in entities)
@@ -215,7 +217,7 @@ Run a predictive model to identify a collection of entities found in the passed-
 ```C# Snippet:RecognizeLinkedEntities
 string document = "Microsoft was founded by Bill Gates and Paul Allen.";
 
-IReadOnlyCollection<LinkedEntity> linkedEntities = client.RecognizeLinkedEntities(document).Value;
+LinkedEntityCollection linkedEntities = client.RecognizeLinkedEntities(document);
 
 Console.WriteLine($"Extracted {linkedEntities.Count} linked entit{(linkedEntities.Count > 1 ? "ies" : "y")}:");
 foreach (LinkedEntity linkedEntity in linkedEntities)
@@ -239,7 +241,7 @@ string document = "Este documento está en español.";
 
 DetectedLanguage language = await client.DetectLanguageAsync(document);
 
-Console.WriteLine($"Detected language {language.Name} with confidence {language.Score}.");
+Console.WriteLine($"Detected language {language.Name} with confidence score {language.ConfidenceScore}.");
 ```
 
 ### Recognize Entities Asynchronously
@@ -248,10 +250,10 @@ Run a predictive model to identify a collection of named entities in the passed-
 ```C# Snippet:RecognizeEntitiesAsync
 string document = "Microsoft was founded by Bill Gates and Paul Allen.";
 
-Response<IReadOnlyCollection<CategorizedEntity>> entities = await client.RecognizeEntitiesAsync(document);
+CategorizedEntityCollection entities = await client.RecognizeEntitiesAsync(document);
 
-Console.WriteLine($"Recognized {entities.Value.Count} entities:");
-foreach (CategorizedEntity entity in entities.Value)
+Console.WriteLine($"Recognized {entities.Count} entities:");
+foreach (CategorizedEntity entity in entities)
 {
     Console.WriteLine($"Text: {entity.Text}, Category: {entity.Category}, SubCategory: {entity.SubCategory}, Confidence score: {entity.ConfidenceScore}");
 }
@@ -332,12 +334,12 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 
 
 <!-- LINKS -->
-[textanalytics_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/textanalytics/Azure.AI.TextAnalytics/src
+[textanalytics_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/textanalytics/Azure.AI.TextAnalytics/src
 [textanalytics_docs]: https://docs.microsoft.com/azure/cognitive-services/Text-Analytics/
 [textanalytics_refdocs]: https://aka.ms/azsdk-net-textanalytics-ref-docs
 [textanalytics_nuget_package]: https://www.nuget.org/packages/Azure.AI.TextAnalytics
-[textanalytics_samples]: https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/textanalytics/Azure.AI.TextAnalytics/tests/samples
-[textanalytics_rest_api]: https://westus.dev.cognitive.microsoft.com/docs/services/TextAnalytics-v3-0-Preview-1/operations/Languages
+[textanalytics_samples]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/textanalytics/Azure.AI.TextAnalytics/samples/README.md
+[textanalytics_rest_api]: https://westus.dev.cognitive.microsoft.com/docs/services/TextAnalytics-v3-0/operations/Languages
 [cognitive_resource_portal]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account
 [cognitive_resource_cli]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account-cli
 
@@ -347,23 +349,23 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [named_entity_recognition]: https://docs.microsoft.com/azure/cognitive-services/Text-Analytics/how-tos/text-analytics-how-to-entity-linking
 [named_entities_categories]: https://docs.microsoft.com/azure/cognitive-services/Text-Analytics/named-entity-types
 
-[textanalytics_client_class]: https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/textanalytics/Azure.AI.TextAnalytics/src/TextAnalyticsClient.cs
-[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/identity/Azure.Identity
+[textanalytics_client_class]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/textanalytics/Azure.AI.TextAnalytics/src/TextAnalyticsClient.cs
+[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/identity/Azure.Identity
 [cognitive_auth]: https://docs.microsoft.com/azure/cognitive-services/authentication
 [register_aad_app]: https://docs.microsoft.com/azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
 [aad_grant_access]: https://docs.microsoft.com/azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
 [custom_subdomain]: https://docs.microsoft.com/azure/cognitive-services/authentication#create-a-resource-with-a-custom-subdomain
-[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/identity/Azure.Identity/README.md
-[logging]: https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/core/Azure.Core/samples/Diagnostics.md
+[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/identity/Azure.Identity/README.md
+[logging]: https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/core/Azure.Core/samples/Diagnostics.md
 [data_limits]: https://docs.microsoft.com/azure/cognitive-services/text-analytics/overview#data-limits
-[contributing]: https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/CONTRIBUTING.md
+[contributing]: https://github.com/Azure/azure-sdk-for-net/blob/master/CONTRIBUTING.md
 
-[detect_language_sample]: https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample1_DetectLanguage.md
-[analyze_sentiment_sample]: https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample2_AnalyzeSentiment.md
-[extract_key_phrases_sample]: https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample3_ExtractKeyPhrases.md
-[recognize_entities_sample]: https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample4_RecognizeEntities.md
-[recognize_linked_entities_sample]: https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample6_RecognizeLinkedEntities.md
-[mock_client_sample]: https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample_MockClient.md
+[detect_language_sample]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample1_DetectLanguage.md
+[analyze_sentiment_sample]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample2_AnalyzeSentiment.md
+[extract_key_phrases_sample]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample3_ExtractKeyPhrases.md
+[recognize_entities_sample]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample4_RecognizeEntities.md
+[recognize_linked_entities_sample]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample6_RecognizeLinkedEntities.md
+[mock_client_sample]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample_MockClient.md
 
 [azure_cli]: https://docs.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
@@ -375,3 +377,4 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [coc_contact]: mailto:opencode@microsoft.com
+
