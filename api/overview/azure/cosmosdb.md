@@ -79,7 +79,7 @@ using (CosmosClient cosmosClient = new CosmosClient("endpoint", "primaryKey"))
 
 ## Samples
 
-* [ASP.NET Core MVC app using Azure Cosmos DB's SQL API](hhttps://github.com/Azure-Samples/cosmos-dotnet-core-todo-app)
+* [ASP.NET Core MVC app using Azure Cosmos DB's SQL API](https://github.com/Azure-Samples/cosmos-dotnet-core-todo-app)
 
 * [.NET Core Console app using Azure Cosmos DB's SQL API](https://github.com/Azure-Samples/cosmos-dotnet-core-getting-started)
 
