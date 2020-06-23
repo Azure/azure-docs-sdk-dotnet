@@ -1,82 +1,49 @@
 ---
-title: Azure Search libraries for .NET
-description: Reference for Azure Search libraries for .NET
-ms.date: 10/19/2017
+title: Azure Cognitive Search libraries for .NET
+description: Reference for Azure Cognitive Search libraries for .NET
+ms.date: 06/31/2020
 ms.topic: reference
 ms.service: search
 ---
 
-# Azure Search libraries for .NET
+# Azure Cognitive Search libraries for .NET
 
 ## Overview
 
-[Azure Search](https://docs.microsoft.com/azure/search/search-what-is-azure-search) is a fully managed cloud search service that provides a rich search experience over data in web, mobile, and enterprise applications.
+[Azure Cognitive Search](https://docs.microsoft.com/azure/search/search-what-is-azure-search) is a fully managed cloud search service that provides a rich search experience over content in web, mobile, and enterprise applications. The client library is used to access and execute indexing and search operations on a search service, index, documents, and other objects.
 
-## Client library
+## Libraries for data access
 
-Use the Azure Search client library to access and execute indexing and search operations on a search service, index, documents, or other object. For a step-by-step introduction, see [How to use Azure Search from a .NET application](https://docs.microsoft.com/azure/search/search-howto-dotnet-sdk).
+The `Azure.Search.Documents` client library (v1) is a new offering for .NET developers who want to use search technology in their applications. This version supersedes the `Microsoft.Azure.Search` client library (v10) with full functional parity.
 
-Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Search) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
+The APIs are similar but not identical. When reviewing code samples and content, be sure to check for the namespace (`using Azure.Search.Documents;`) to confirm which client ibrary is in use.
 
-#### Visual Studio Package Manager
+### Version 1.x
 
-```powershell
-Install-Package Microsoft.Azure.Search
-```
+Use the following version 1.0 of the **Azure.Search** libraries to work with Azure Cognitive Search objects. Moving forward, all new features and enhancements will roll out in this client library.
 
-```dotnetcli
-dotnet add package Microsoft.Azure.Search
-```
+|    Library    |    Reference    |    Package    |    Source    |
+|---------------|-----------------|----------------|-------------|
+| Azure.Search.Documents | [Reference](/dotnet/api/azure.search.documents) | [NuGet](https://www.nuget.org/packages/Azure.Search.Documents/) | [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/search/Azure.Search.Documents) |
 
-### Code Example
+### Version 10.x (legacy)
 
-```csharp
-/* Include these 'using' directives:
-   using Microsoft.Azure.Search;
-   using Microsoft.Azure.Search.Models;
-*/
+Use the following version 10.x of the **Microsoft.Azure.Search** libraries to work with Azure Cognitive Search objects. With the exception of bug fixes, no further updates are planned for this library.
 
-// A service endpoint and an api-key are required on a connection.
-// Set them in a config file (not shown) and then connect to the client.
-IConfigurationBuilder builder = new ConfigurationBuilder().AddJsonFile("appsettings.json");
-IConfigurationRoot configuration = builder.Build();
-
-SearchServiceClient serviceClient = CreateSearchServiceClient(configuration);
-
-// Create an index named hotels
-ISearchIndexClient indexClient = serviceClient.Indexes.GetClient("hotels");
-
-```
-
-> [!div class="nextstepaction"]
-> [Explore the client APIs](/dotnet/api/overview/azure/search/client)
+|    Library    |    Reference    |    Package    |    Source    |
+|---------------|-----------------|----------------|-------------|
+| Microsoft.Azure.Search | [Reference](/dotnet/api/microsoft.azure.search) | [NuGet](https://www.nuget.org/packages/Microsoft.Azure.Search/) | [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/search/Microsoft.Azure.Search) |
+| Microsoft.Azure.Search.Common | [Reference](/dotnet/api/microsoft.azure.search.common) |   |  |
+| Microsoft.Azure.Search.Models | [Reference](/dotnet/api/microsoft.azure.search.models) |   |  |
+| Microsoft.Azure.Search.Models.Internal | [Reference](/dotnet/api/microsoft.azure.search.models.internal) | |  |
+| Microsoft.Azure.Search.Serialization | [Reference](/dotnet/api/microsoft.azure.search.serialization) |   |  |
+| Microsoft.Azure.Search.Serialization.internal | [Reference](/dotnet/api/microsoft.azure.search.serialization.internal) |   |  |
 
 
-## Management library
+## Libraries for resource management
 
 Use the Azure Search management library to provision a service, manage api-keys, and adjust resources. Service management has a dependency on Azure Resource Manager for subscriber and tenant identification. Typically, authentication and application registration with Azure Active Directory is also necessary to support the workflow. For an introduction to Azure Search service provisioning, see [How to use the Management REST API](https://docs.microsoft.com/rest/api/searchmanagement/search-howto-management-rest-api).
 
-Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Management.Search) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
-
-#### Visual Studio Package Manager
-
-```powershell
-Install-Package Microsoft.Azure.Management.Search
-```
-
-```dotnetcli
-dotnet add package Microsoft.Azure.Management.Search
-```
-
-> [!div class="nextstepaction"]
-> [Explore the management APIs](/dotnet/api/overview/azure/search/management)
-
-## Samples
-
- + [Azure Samples / search-dotnet-getting-started](https://github.com/Azure-Samples/search-dotnet-getting-started)
- + [Azure Samples / search-dotnet-management-api](https://github.com/Azure-Samples/search-dotnet-management-api)
-
-Find more search samples in the [Azure samples repository](https://github.com/Azure-Samples/) on Github.
-
-[PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
-[DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
+|    Library    |    Reference    |    Package    |    Source    |
+|---------------|-----------------|----------------|-------------|
+| Microsoft.Azure.Management.Search | [Reference](/dotnet/api/overview/azure/search/management) | [NuGet](https://www.nuget.org/packages/Microsoft.Azure.Management.Search) | [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/search/Microsoft.Azure.Management.Search)
