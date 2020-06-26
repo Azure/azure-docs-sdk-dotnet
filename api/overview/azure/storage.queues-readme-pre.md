@@ -1,6 +1,6 @@
 ---
 title: Azure Storage Queues client library for .NET
-keywords: Azure, .net, SDK, API, Azure.Storage.Queues, 
+keywords: Azure, .net, SDK, API, Azure.Storage.Queues, storage
 author: maggiepint
 ms.author: magpint
 ms.date: 06/19/2020
@@ -8,7 +8,7 @@ ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: .net
-ms.service: 
+ms.service: storage
 ---
 
 # Azure Storage Queues client library for .NET - Version 12.4.0-preview.4 

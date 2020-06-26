@@ -1,6 +1,6 @@
 ---
 title: Azure Storage Blobs client library for .NET
-keywords: Azure, .net, SDK, API, Azure.Storage.Blobs, 
+keywords: Azure, .net, SDK, API, Azure.Storage.Blobs, storage
 author: maggiepint
 ms.author: magpint
 ms.date: 06/19/2020
@@ -8,7 +8,7 @@ ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: .net
-ms.service: 
+ms.service: storage
 ---
 
 # Azure Storage Blobs client library for .NET - Version 12.5.0-preview.4 
