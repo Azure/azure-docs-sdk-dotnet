@@ -15,6 +15,7 @@
     <AssemblyVersion>3.9.0.0</AssemblyVersion>
     <AssemblyVersion>3.9.1.0</AssemblyVersion>
     <AssemblyVersion>3.10.1.0</AssemblyVersion>
+    <AssemblyVersion>3.11.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -44,6 +45,7 @@
         <AssemblyVersion>3.9.0.0</AssemblyVersion>
         <AssemblyVersion>3.9.1.0</AssemblyVersion>
         <AssemblyVersion>3.10.1.0</AssemblyVersion>
+        <AssemblyVersion>3.11.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -69,6 +71,7 @@
         <AssemblyVersion>3.9.0.0</AssemblyVersion>
         <AssemblyVersion>3.9.1.0</AssemblyVersion>
         <AssemblyVersion>3.10.1.0</AssemblyVersion>
+        <AssemblyVersion>3.11.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.ResponseMessage&gt;</ReturnType>
@@ -108,6 +111,7 @@
         <AssemblyVersion>3.9.0.0</AssemblyVersion>
         <AssemblyVersion>3.9.1.0</AssemblyVersion>
         <AssemblyVersion>3.10.1.0</AssemblyVersion>
+        <AssemblyVersion>3.11.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.FeedIterator&lt;T&gt;</ReturnType>
@@ -132,13 +136,15 @@
         <remarks>To be added.</remarks>
         <example>
           <code language="c#"><![CDATA[
-            FeedIterator<ConflictProperties> feedIterator = conflicts.GetConflictQueryIterator();
-            while (feedIterator.HasMoreResults)
+            using (FeedIterator<ConflictProperties> feedIterator = conflicts.GetConflictQueryIterator())
             {
-                FeedResponse<ConflictProperties> response = await feedIterator.ReadNextAsync();
-                foreach (var conflict in response)
+                while (feedIterator.HasMoreResults)
                 {
-                    Console.WriteLine(conflict);
+                    FeedResponse<ConflictProperties> response = await feedIterator.ReadNextAsync();
+                    foreach (var conflict in response)
+                    {
+                        Console.WriteLine(conflict);
+                    }
                 }
             }
             ]]></code>
@@ -163,6 +169,7 @@
         <AssemblyVersion>3.9.0.0</AssemblyVersion>
         <AssemblyVersion>3.9.1.0</AssemblyVersion>
         <AssemblyVersion>3.10.1.0</AssemblyVersion>
+        <AssemblyVersion>3.11.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.FeedIterator&lt;T&gt;</ReturnType>
@@ -187,13 +194,15 @@
         <remarks>To be added.</remarks>
         <example>
           <code language="c#"><![CDATA[
-            FeedIterator<ConflictProperties> conflictIterator = conflicts.GetConflictQueryIterator();
-            while (feedIterator.HasMoreResults)
+            using (FeedIterator<ConflictProperties> conflictIterator = conflicts.GetConflictQueryIterator())
             {
-                FeedResponse<ConflictProperties> response = await feedIterator.ReadNextAsync();
-                foreach (var conflict in response)
+                while (feedIterator.HasMoreResults)
                 {
-                    Console.WriteLine(conflict);
+                    FeedResponse<ConflictProperties> response = await feedIterator.ReadNextAsync();
+                    foreach (var conflict in response)
+                    {
+                        Console.WriteLine(conflict);
+                    }
                 }
             }
             ]]></code>
@@ -218,6 +227,7 @@
         <AssemblyVersion>3.9.0.0</AssemblyVersion>
         <AssemblyVersion>3.9.1.0</AssemblyVersion>
         <AssemblyVersion>3.10.1.0</AssemblyVersion>
+        <AssemblyVersion>3.11.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.FeedIterator</ReturnType>
@@ -241,17 +251,19 @@
             <code language="c#"><![CDATA[
             QueryDefinition queryDefinition = new QueryDefinition("select * From c where c._rid = @rid")
                           .WithParameter("@rid", "TheRidValue");
-            FeedIterator feedIterator = this.CosmosClient.GetConflictQueryStreamIterator(
-                queryDefinition);
-            while (feedIterator.HasMoreResults)
+            using (FeedIterator feedIterator = this.CosmosClient.GetConflictQueryStreamIterator(
+                queryDefinition))
             {
-                // Stream iterator returns a response with status for errors
-                using(ResponseMessage response = await feedIterator.ReadNextAsync())
+                while (feedIterator.HasMoreResults)
                 {
-                    // Handle failure scenario. 
-                    if(!response.IsSuccessStatusCode)
+                    // Stream iterator returns a response with status for errors
+                    using(ResponseMessage response = await feedIterator.ReadNextAsync())
                     {
-                        // Log the response.Diagnostics and handle the error
+                        // Handle failure scenario. 
+                        if(!response.IsSuccessStatusCode)
+                        {
+                            // Log the response.Diagnostics and handle the error
+                        }
                     }
                 }
             }
@@ -276,6 +288,7 @@
         <AssemblyVersion>3.9.0.0</AssemblyVersion>
         <AssemblyVersion>3.9.1.0</AssemblyVersion>
         <AssemblyVersion>3.10.1.0</AssemblyVersion>
+        <AssemblyVersion>3.11.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.FeedIterator</ReturnType>
@@ -297,17 +310,19 @@
         <example>
             Example on how to fully drain the query results.
             <code language="c#"><![CDATA[
-            FeedIterator feedIterator = this.CosmosClient.GetConflictQueryStreamIterator(
-                "select * From c where c._rid = \"TheRidValue\"");
-            while (feedIterator.HasMoreResults)
+            using (FeedIterator feedIterator = this.CosmosClient.GetConflictQueryStreamIterator(
+                "select * From c where c._rid = \"TheRidValue\""))
             {
-                // Stream iterator returns a response with status for errors
-                using(ResponseMessage response = await feedIterator.ReadNextAsync())
+                while (feedIterator.HasMoreResults)
                 {
-                    // Handle failure scenario. 
-                    if(!response.IsSuccessStatusCode)
+                    // Stream iterator returns a response with status for errors
+                    using(ResponseMessage response = await feedIterator.ReadNextAsync())
                     {
-                        // Log the response.Diagnostics and handle the error
+                        // Handle failure scenario. 
+                        if(!response.IsSuccessStatusCode)
+                        {
+                            // Log the response.Diagnostics and handle the error
+                        }
                     }
                 }
             }
@@ -332,6 +347,7 @@
         <AssemblyVersion>3.9.0.0</AssemblyVersion>
         <AssemblyVersion>3.9.1.0</AssemblyVersion>
         <AssemblyVersion>3.10.1.0</AssemblyVersion>
+        <AssemblyVersion>3.11.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>T</ReturnType>
@@ -353,13 +369,15 @@
         <altmember cref="T:Microsoft.Azure.Cosmos.ConflictProperties" />
         <example>
           <code language="c#"><![CDATA[
-            FeedIterator<ConflictProperties> conflictIterator = conflicts.GetConflictQueryIterator();
-            while (conflictIterator.HasMoreResults)
+            using (FeedIterator<ConflictProperties> conflictIterator = conflicts.GetConflictQueryIterator())
             {
-                foreach(ConflictProperties item in await conflictIterator.ReadNextAsync())
+                while (conflictIterator.HasMoreResults)
                 {
-                    MyClass intendedChanges = conflicts.ReadConflictContent<MyClass>(item);
-                    ItemResponse<MyClass> currentState = await conflicts.ReadCurrentAsync<MyClass>(intendedChanges.MyPartitionKey, item);
+                    foreach(ConflictProperties item in await conflictIterator.ReadNextAsync())
+                    {
+                        MyClass intendedChanges = conflicts.ReadConflictContent<MyClass>(item);
+                        ItemResponse<MyClass> currentState = await conflicts.ReadCurrentAsync<MyClass>(intendedChanges.MyPartitionKey, item);
+                    }
                 }
             }
             ]]></code>
@@ -384,6 +402,7 @@
         <AssemblyVersion>3.9.0.0</AssemblyVersion>
         <AssemblyVersion>3.9.1.0</AssemblyVersion>
         <AssemblyVersion>3.10.1.0</AssemblyVersion>
+        <AssemblyVersion>3.11.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.ItemResponse&lt;T&gt;&gt;</ReturnType>
@@ -409,13 +428,15 @@
         <altmember cref="T:Microsoft.Azure.Cosmos.ConflictProperties" />
         <example>
           <code language="c#"><![CDATA[
-            FeedIterator<ConflictProperties> conflictIterator = conflicts.GetConflictQueryIterator();
-            while (conflictIterator.HasMoreResults)
+            using (FeedIterator<ConflictProperties> conflictIterator = conflicts.GetConflictQueryIterator())
             {
-                foreach(ConflictProperties item in await conflictIterator.ReadNextAsync())
+                while (conflictIterator.HasMoreResults)
                 {
-                    MyClass intendedChanges = conflicts.ReadConflictContent<MyClass>(item);
-                    ItemResponse<MyClass> currentState = await conflicts.ReadCurrentAsync<MyClass>(intendedChanges.MyPartitionKey, item);
+                    foreach(ConflictProperties item in await conflictIterator.ReadNextAsync())
+                    {
+                        MyClass intendedChanges = conflicts.ReadConflictContent<MyClass>(item);
+                        ItemResponse<MyClass> currentState = await conflicts.ReadCurrentAsync<MyClass>(intendedChanges.MyPartitionKey, item);
+                    }
                 }
             }
             ]]></code>
