@@ -1,17 +1,17 @@
 ---
 title: Azure Storage Blobs client library for .NET
-keywords: Azure, .net, SDK, API, Azure.Storage.Blobs, Azure.Storage.Blobs
+keywords: Azure, .net, SDK, API, Azure.Storage.Blobs, storage
 author: maggiepint
 ms.author: magpint
-ms.date: 06/08/2020
+ms.date: 06/19/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: .net
-ms.service: Azure.Storage.Blobs
+ms.service: storage
 ---
 
-# Azure Storage Blobs client library for .NET - Version 12.5.0-preview.1 
+# Azure Storage Blobs client library for .NET - Version 12.5.0-preview.4 
 
 
 > Server Version: 2019-07-07 and 2019-02-02
@@ -27,7 +27,7 @@ definition, such as text or binary data.
 
 ### Install the package
 
-Install the Azure Storage Blobs client library for .NET - Version 12.5.0-preview.1 
+Install the Azure Storage Blobs client library for .NET - Version 12.5.0-preview.4 
  with [NuGet][nuget]:
 
 ```Powershell
