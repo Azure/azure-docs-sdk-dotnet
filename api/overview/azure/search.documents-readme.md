@@ -440,8 +440,8 @@ additional questions or comments.
 [azure_sub]: https://azure.microsoft.com/free/
 [RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/core/Azure.Core/src/RequestFailedException.cs
 [status_codes]: https://docs.microsoft.com/rest/api/searchservice/http-status-codes
-[samples]: samples/
-[search_contrib]: ../CONTRIBUTING.md
+[samples]: https://github.com/azure/azure-sdk-for-net/tree/Azure.Search.Documents_11.0.0/sdk/search/Azure.Search.Documents/samples
+[search_contrib]: https://github.com/azure/azure-sdk-for-net/tree/Azure.Search.Documents_11.0.0/sdk/search/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/

@@ -177,7 +177,7 @@ catch (AggregateException)
 
 ## Next steps
 
-Check out our [sync](../Azure.Storage.Blobs.Batch/samples/Sample03a_Batching.cs) and [async](../Azure.Storage.Blobs.Batch/samples/Sample03b_BatchingAsync.cs) samples for more.
+Check out our [sync](https://github.com/azure/azure-sdk-for-net/tree/Azure.Storage.Blobs.Batch_12.3.0-preview.1/sdk/storage/Azure.Storage.Blobs.Batch/samples/Sample03a_Batching.cs) and [async](https://github.com/azure/azure-sdk-for-net/tree/Azure.Storage.Blobs.Batch_12.3.0-preview.1/sdk/storage/Azure.Storage.Blobs.Batch/samples/Sample03b_BatchingAsync.cs) samples for more.
 
 ## Contributing
 
@@ -212,7 +212,7 @@ additional questions or comments.
 [identity]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/identity/Azure.Identity/README.md
 [RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/core/Azure.Core/src/RequestFailedException.cs
 [error_codes]: https://docs.microsoft.com/rest/api/storageservices/blob-service-error-codes
-[storage_contrib]: ../CONTRIBUTING.md
+[storage_contrib]: https://github.com/azure/azure-sdk-for-net/tree/Azure.Storage.Blobs.Batch_12.3.0-preview.1/sdk/storage/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/

@@ -26,7 +26,7 @@ Use the client library for Azure Service Bus to:
 
 - Implement complex workflows: message sessions support scenarios that require message ordering or message deferral.
 
-[Source code](.) | [Package (NuGet)](https://www.nuget.org/packages/Azure.Messaging.ServiceBus/) | [API reference documentation](https://azure.github.io/azure-sdk-for-net/servicebus.html) | [Product documentation](https://docs.microsoft.com/en-us/azure/service-bus/)
+[Source code](https://github.com/azure/azure-sdk-for-net/tree/Azure.Messaging.ServiceBus_7.0.0-preview.4/sdk/servicebus/Azure.Messaging.ServiceBus) | [Package (NuGet)](https://www.nuget.org/packages/Azure.Messaging.ServiceBus/) | [API reference documentation](https://azure.github.io/azure-sdk-for-net/servicebus.html) | [Product documentation](https://docs.microsoft.com/en-us/azure/service-bus/)
 
 ## Getting started
 
@@ -111,7 +111,7 @@ For more concepts and deeper discussion, see: [Service Bus Advanced Features](ht
 * [Using the processor](#using-the-processor)
 * [Authenticating with Azure.Identity](#authenticating-with-azureidentity)
 * [Working with sessions](#working-with-sessions)
-* [More samples](./samples/README.md)
+* [More samples](https://github.com/azure/azure-sdk-for-net/tree/Azure.Messaging.ServiceBus_7.0.0-preview.4/sdk/servicebus/Azure.Messaging.ServiceBus/samples/README.md)
 
 ### Send and receive a message
 
@@ -335,8 +335,8 @@ ServiceBusClient client = new ServiceBusClient(fullyQualifiedNamespace, new Defa
 
 [Sessions](https://docs.microsoft.com/en-us/azure/service-bus-messaging/message-sessions) provide a mechanism for grouping related messages. In order to use sessions, you need to be working with a session-enabled entity.
 
-- [Sending and receiving session messages](./samples/Sample03_SendReceiveSessions.md)
-- [Using the session processor](./samples/Sample05_SessionProcessor.md)
+- [Sending and receiving session messages](https://github.com/azure/azure-sdk-for-net/tree/Azure.Messaging.ServiceBus_7.0.0-preview.4/sdk/servicebus/Azure.Messaging.ServiceBus/samples/Sample03_SendReceiveSessions.md)
+- [Using the session processor](https://github.com/azure/azure-sdk-for-net/tree/Azure.Messaging.ServiceBus_7.0.0-preview.4/sdk/servicebus/Azure.Messaging.ServiceBus/samples/Sample05_SessionProcessor.md)
 
 ## Troubleshooting
 
@@ -376,7 +376,7 @@ deeper into the requests you're making against the service.
 
 ## Next steps
 
-Beyond the introductory scenarios discussed, the Azure Service Bus client library offers support for additional scenarios to help take advantage of the full feature set of the Azure Service Bus service. In order to help explore some of these scenarios, the Service Bus client library offers a project of samples to serve as an illustration for common scenarios. Please see the [samples README](./samples/README.md) for details.
+Beyond the introductory scenarios discussed, the Azure Service Bus client library offers support for additional scenarios to help take advantage of the full feature set of the Azure Service Bus service. In order to help explore some of these scenarios, the Service Bus client library offers a project of samples to serve as an illustration for common scenarios. Please see the [samples README](https://github.com/azure/azure-sdk-for-net/tree/Azure.Messaging.ServiceBus_7.0.0-preview.4/sdk/servicebus/Azure.Messaging.ServiceBus/samples/README.md) for details.
 
 ## Contributing  
 
@@ -386,7 +386,7 @@ When you submit a pull request, a CLA-bot will automatically determine whether y
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
-Please see our [contributing guide](./CONTRIBUTING.md) for more information.
+Please see our [contributing guide](https://github.com/azure/azure-sdk-for-net/tree/Azure.Messaging.ServiceBus_7.0.0-preview.4/sdk/servicebus/Azure.Messaging.ServiceBus/CONTRIBUTING.md) for more information.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fservicebus%2FAzure.Messaging.ServiceBus%2FREADME.png)
 

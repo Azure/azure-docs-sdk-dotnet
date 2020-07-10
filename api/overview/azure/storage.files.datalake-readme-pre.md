@@ -225,8 +225,8 @@ helpful [`ErrorCode`s][error_codes].  Many of these errors are recoverable.
 
 Get started with our [DataLake samples][samples]:
 
-1. [Hello World](samples/Sample01a_HelloWorld.cs): Append, Read, and List DataLake Files (or [asynchronously](samples/Sample01b_HelloWorldAsync.cs))
-2. [Auth](samples/Sample02_Auth.cs): Authenticate with public access, shared keys, shared access signatures, and Azure Active Directory.
+1. [Hello World](https://github.com/azure/azure-sdk-for-net/tree/Azure.Storage.Files.DataLake_12.3.0-preview.1/sdk/storage/Azure.Storage.Files.DataLake/samples/Sample01a_HelloWorld.cs): Append, Read, and List DataLake Files (or [asynchronously](https://github.com/azure/azure-sdk-for-net/tree/Azure.Storage.Files.DataLake_12.3.0-preview.1/sdk/storage/Azure.Storage.Files.DataLake/samples/Sample01b_HelloWorldAsync.cs))
+2. [Auth](https://github.com/azure/azure-sdk-for-net/tree/Azure.Storage.Files.DataLake_12.3.0-preview.1/sdk/storage/Azure.Storage.Files.DataLake/samples/Sample02_Auth.cs): Authenticate with public access, shared keys, shared access signatures, and Azure Active Directory.
 
 ## Contributing
 
@@ -261,10 +261,10 @@ additional questions or comments.
 [identity]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/identity/Azure.Identity/README.md
 [RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/core/Azure.Core/src/RequestFailedException.cs
 [error_codes]: https://docs.microsoft.com/en-us/rest/api/storageservices/blob-service-error-codes
-[storage_contrib]: ../CONTRIBUTING.md
+[storage_contrib]: https://github.com/azure/azure-sdk-for-net/tree/Azure.Storage.Files.DataLake_12.3.0-preview.1/sdk/storage/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [coc_contact]: mailto:opencode@microsoft.com
-[samples]: samples
+[samples]: https://github.com/azure/azure-sdk-for-net/tree/Azure.Storage.Files.DataLake_12.3.0-preview.1/sdk/storage/Azure.Storage.Files.DataLake/samples
 

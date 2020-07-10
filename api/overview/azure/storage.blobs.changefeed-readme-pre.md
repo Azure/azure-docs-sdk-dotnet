@@ -124,7 +124,7 @@ helpful [`ErrorCode`s][error_codes].  Many of these errors are recoverable.
 
 Get started with our [Change Feed samples][samples]:
 
-1. [Hello World](samples/Sample01a_HelloWorld.cs): Get changes that have occured in your storage account (or [asynchronously](samples/Sample01b_HelloWorldAsync.cs))
+1. [Hello World](https://github.com/azure/azure-sdk-for-net/tree/Azure.Storage.Blobs.ChangeFeed_12.0.0-preview.1/sdk/storage/Azure.Storage.Blobs.ChangeFeed/samples/Sample01a_HelloWorld.cs): Get changes that have occured in your storage account (or [asynchronously](https://github.com/azure/azure-sdk-for-net/tree/Azure.Storage.Blobs.ChangeFeed_12.0.0-preview.1/sdk/storage/Azure.Storage.Blobs.ChangeFeed/samples/Sample01b_HelloWorldAsync.cs))
 2. [Auth](samples/Sample02_Auth.cs): Authenticate with connection strings, public access, shared keys, shared access signatures, and Azure Active Directory.
 
 
@@ -154,8 +154,8 @@ additional questions or comments.
 [authenticating_with_blobs]: https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/storage/Azure.Storage.Blobs/samples/Sample02_Auth.cs
 [RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/core/Azure.Core/src/RequestFailedException.cs
 [error_codes]: https://docs.microsoft.com/rest/api/storageservices/blob-service-error-codes
-[samples]: samples/
-[storage_contrib]: ../CONTRIBUTING.md
+[samples]: https://github.com/azure/azure-sdk-for-net/tree/Azure.Storage.Blobs.ChangeFeed_12.0.0-preview.1/sdk/storage/Azure.Storage.Blobs.ChangeFeed/samples
+[storage_contrib]: https://github.com/azure/azure-sdk-for-net/tree/Azure.Storage.Blobs.ChangeFeed_12.0.0-preview.1/sdk/storage/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
