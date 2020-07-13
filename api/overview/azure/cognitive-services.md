@@ -12,13 +12,6 @@ Azure Cognitive Services are APIs, SDKs, and services available to help develope
 
 ## Vision
 
-#### [Latest](#tab/latest)
-
-|Package  |Reference  |Package Manager  |Source  |
-|---------|---------|---------|---------|
-|Form Recognizer | [Reference]() | [NuGet]()        | [GitHub]()       |
-
-
 #### [Legacy](#tab/legacy)
 
 |Package  |Reference  |Package Manager  |Source  |
@@ -29,16 +22,15 @@ Azure Cognitive Services are APIs, SDKs, and services available to help develope
 |Form Recognizer | [Reference]() | [NuGet]()        | [GitHub]()       |
 |Ink Recognizer  | [Reference]() | [NuGet]()        | [GitHub]()        |
 
----
-
-## Language
-
 #### [Latest](#tab/latest)
 
 |Package  |Reference  |Package Manager  |Source  |
 |---------|---------|---------|---------|
-|Text Analytics | [Reference]() | [NuGet]()        | [GitHub]()       |
+|Form Recognizer | [Reference]() | [NuGet]()        | [GitHub]()       |
 
+---
+
+## Language
 
 #### [Legacy](#tab/legacy)
 
@@ -49,6 +41,14 @@ Azure Cognitive Services are APIs, SDKs, and services available to help develope
 |Text Analytics         | [Reference]() | [NuGet]()  | [GitHub]()        |
 |Translator             | [Reference]() | [NuGet]()  | [GitHub]()        |
 |Ink Recognizer         | [Reference]() | [NuGet]()  | [GitHub]()        |
+
+#### [Latest](#tab/latest)
+
+|Package  |Reference  |Package Manager  |Source  |
+|---------|---------|---------|---------|
+|Text Analytics | [Reference]() | [NuGet]()        | [GitHub]()       |
+
+---
 
 ## Speech
 
