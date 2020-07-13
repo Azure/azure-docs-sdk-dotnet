@@ -78,4 +78,4 @@ Once you are signed in with your Microsoft Account, you can access [My subscript
 
 ## Next steps
 
-* [Blah](cognitive-services-apis-create-account.md)
+* [Blah]()
