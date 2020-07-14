@@ -70,12 +70,40 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="CreateBatchAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.ValueTask&lt;Azure.Messaging.ServiceBus.ServiceBusMessageBatch&gt; CreateBatchAsync (System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance valuetype System.Threading.Tasks.ValueTask`1&lt;class Azure.Messaging.ServiceBus.ServiceBusMessageBatch&gt; CreateBatchAsync(valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Messaging.ServiceBus.ServiceBusSender.CreateBatchAsync(System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateBatchAsync (Optional cancellationToken As CancellationToken = null) As ValueTask(Of ServiceBusMessageBatch)" />
-      <MemberSignature Language="F#" Value="abstract member CreateBatchAsync : System.Threading.CancellationToken -&gt; System.Threading.Tasks.ValueTask&lt;Azure.Messaging.ServiceBus.ServiceBusMessageBatch&gt;&#xA;override this.CreateBatchAsync : System.Threading.CancellationToken -&gt; System.Threading.Tasks.ValueTask&lt;Azure.Messaging.ServiceBus.ServiceBusMessageBatch&gt;" Usage="serviceBusSender.CreateBatchAsync cancellationToken" />
+    <Member MemberName="CancelScheduledMessagesAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task CancelScheduledMessagesAsync (System.Collections.Generic.IEnumerable&lt;long&gt; sequenceNumbers, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task CancelScheduledMessagesAsync(class System.Collections.Generic.IEnumerable`1&lt;int64&gt; sequenceNumbers, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Messaging.ServiceBus.ServiceBusSender.CancelScheduledMessagesAsync(System.Collections.Generic.IEnumerable{System.Int64},System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function CancelScheduledMessagesAsync (sequenceNumbers As IEnumerable(Of Long), Optional cancellationToken As CancellationToken = null) As Task" />
+      <MemberSignature Language="F#" Value="abstract member CancelScheduledMessagesAsync : seq&lt;int64&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&#xA;override this.CancelScheduledMessagesAsync : seq&lt;int64&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task" Usage="serviceBusSender.CancelScheduledMessagesAsync (sequenceNumbers, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Messaging.ServiceBus</AssemblyName>
+        <AssemblyVersion>7.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sequenceNumbers" Type="System.Collections.Generic.IEnumerable&lt;System.Int64&gt;" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="sequenceNumbers">The set of <see cref="P:Azure.Messaging.ServiceBus.ServiceBusReceivedMessage.SequenceNumber" /> of the messages to be cancelled.</param>
+        <param name="cancellationToken">An optional <see cref="T:System.Threading.CancellationToken" /> instance to signal the request to cancel the operation.</param>
+        <summary>
+            Cancels a set of messages that were scheduled.
+            </summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateMessageBatchAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.ValueTask&lt;Azure.Messaging.ServiceBus.ServiceBusMessageBatch&gt; CreateMessageBatchAsync (System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance valuetype System.Threading.Tasks.ValueTask`1&lt;class Azure.Messaging.ServiceBus.ServiceBusMessageBatch&gt; CreateMessageBatchAsync(valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Messaging.ServiceBus.ServiceBusSender.CreateMessageBatchAsync(System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateMessageBatchAsync (Optional cancellationToken As CancellationToken = null) As ValueTask(Of ServiceBusMessageBatch)" />
+      <MemberSignature Language="F#" Value="abstract member CreateMessageBatchAsync : System.Threading.CancellationToken -&gt; System.Threading.Tasks.ValueTask&lt;Azure.Messaging.ServiceBus.ServiceBusMessageBatch&gt;&#xA;override this.CreateMessageBatchAsync : System.Threading.CancellationToken -&gt; System.Threading.Tasks.ValueTask&lt;Azure.Messaging.ServiceBus.ServiceBusMessageBatch&gt;" Usage="serviceBusSender.CreateMessageBatchAsync cancellationToken" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Messaging.ServiceBus</AssemblyName>
@@ -91,7 +119,7 @@
         <param name="cancellationToken">An optional <see cref="T:System.Threading.CancellationToken" /> instance to signal the request to cancel the operation.</param>
         <summary>
                Creates a size-constraint batch to which <see cref="T:Azure.Messaging.ServiceBus.ServiceBusMessage" /> may be added using
-               a <see cref="M:Azure.Messaging.ServiceBus.ServiceBusMessageBatch.TryAdd(Azure.Messaging.ServiceBus.ServiceBusMessage)" />. If a message would exceed the maximum
+               a <see cref="M:Azure.Messaging.ServiceBus.ServiceBusMessageBatch.TryAddMessage(Azure.Messaging.ServiceBus.ServiceBusMessage)" />. If a message would exceed the maximum
                allowable size of the batch, the batch will not allow adding the message and signal that
                scenario using it return value.
             
@@ -100,15 +128,15 @@
              </summary>
         <returns>An <see cref="T:Azure.Messaging.ServiceBus.ServiceBusMessageBatch" /> with the default batch options.</returns>
         <remarks>To be added.</remarks>
-        <altmember cref="M:Azure.Messaging.ServiceBus.ServiceBusSender.CreateBatchAsync(Azure.Messaging.ServiceBus.CreateBatchOptions,System.Threading.CancellationToken)" />
+        <altmember cref="M:Azure.Messaging.ServiceBus.ServiceBusSender.CreateMessageBatchAsync(Azure.Messaging.ServiceBus.CreateMessageBatchOptions,System.Threading.CancellationToken)" />
       </Docs>
     </Member>
-    <Member MemberName="CreateBatchAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.ValueTask&lt;Azure.Messaging.ServiceBus.ServiceBusMessageBatch&gt; CreateBatchAsync (Azure.Messaging.ServiceBus.CreateBatchOptions options, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance valuetype System.Threading.Tasks.ValueTask`1&lt;class Azure.Messaging.ServiceBus.ServiceBusMessageBatch&gt; CreateBatchAsync(class Azure.Messaging.ServiceBus.CreateBatchOptions options, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Messaging.ServiceBus.ServiceBusSender.CreateBatchAsync(Azure.Messaging.ServiceBus.CreateBatchOptions,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateBatchAsync (options As CreateBatchOptions, Optional cancellationToken As CancellationToken = null) As ValueTask(Of ServiceBusMessageBatch)" />
-      <MemberSignature Language="F#" Value="abstract member CreateBatchAsync : Azure.Messaging.ServiceBus.CreateBatchOptions * System.Threading.CancellationToken -&gt; System.Threading.Tasks.ValueTask&lt;Azure.Messaging.ServiceBus.ServiceBusMessageBatch&gt;&#xA;override this.CreateBatchAsync : Azure.Messaging.ServiceBus.CreateBatchOptions * System.Threading.CancellationToken -&gt; System.Threading.Tasks.ValueTask&lt;Azure.Messaging.ServiceBus.ServiceBusMessageBatch&gt;" Usage="serviceBusSender.CreateBatchAsync (options, cancellationToken)" />
+    <Member MemberName="CreateMessageBatchAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.ValueTask&lt;Azure.Messaging.ServiceBus.ServiceBusMessageBatch&gt; CreateMessageBatchAsync (Azure.Messaging.ServiceBus.CreateMessageBatchOptions options, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance valuetype System.Threading.Tasks.ValueTask`1&lt;class Azure.Messaging.ServiceBus.ServiceBusMessageBatch&gt; CreateMessageBatchAsync(class Azure.Messaging.ServiceBus.CreateMessageBatchOptions options, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Messaging.ServiceBus.ServiceBusSender.CreateMessageBatchAsync(Azure.Messaging.ServiceBus.CreateMessageBatchOptions,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateMessageBatchAsync (options As CreateMessageBatchOptions, Optional cancellationToken As CancellationToken = null) As ValueTask(Of ServiceBusMessageBatch)" />
+      <MemberSignature Language="F#" Value="abstract member CreateMessageBatchAsync : Azure.Messaging.ServiceBus.CreateMessageBatchOptions * System.Threading.CancellationToken -&gt; System.Threading.Tasks.ValueTask&lt;Azure.Messaging.ServiceBus.ServiceBusMessageBatch&gt;&#xA;override this.CreateMessageBatchAsync : Azure.Messaging.ServiceBus.CreateMessageBatchOptions * System.Threading.CancellationToken -&gt; System.Threading.Tasks.ValueTask&lt;Azure.Messaging.ServiceBus.ServiceBusMessageBatch&gt;" Usage="serviceBusSender.CreateMessageBatchAsync (options, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Messaging.ServiceBus</AssemblyName>
@@ -118,7 +146,7 @@
         <ReturnType>System.Threading.Tasks.ValueTask&lt;Azure.Messaging.ServiceBus.ServiceBusMessageBatch&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="options" Type="Azure.Messaging.ServiceBus.CreateBatchOptions" />
+        <Parameter Name="options" Type="Azure.Messaging.ServiceBus.CreateMessageBatchOptions" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
@@ -134,7 +162,7 @@
              </summary>
         <returns>An <see cref="T:Azure.Messaging.ServiceBus.ServiceBusMessageBatch" /> with the requested <paramref name="options" />.</returns>
         <remarks>To be added.</remarks>
-        <altmember cref="M:Azure.Messaging.ServiceBus.ServiceBusSender.CreateBatchAsync(Azure.Messaging.ServiceBus.CreateBatchOptions,System.Threading.CancellationToken)" />
+        <altmember cref="M:Azure.Messaging.ServiceBus.ServiceBusSender.CreateMessageBatchAsync(Azure.Messaging.ServiceBus.CreateMessageBatchOptions,System.Threading.CancellationToken)" />
       </Docs>
     </Member>
     <Member MemberName="DisposeAsync">
@@ -313,22 +341,60 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="message">The message to schedule.</param>
+        <param name="message">The <see cref="T:Azure.Messaging.ServiceBus.ServiceBusMessage" /> to schedule.</param>
         <param name="scheduledEnqueueTime">The UTC time at which the message should be available for processing</param>
         <param name="cancellationToken">An optional <see cref="T:System.Threading.CancellationToken" /> instance to signal the request to cancel the operation.</param>
         <summary>
              Schedules a message to appear on Service Bus at a later time.
              </summary>
         <returns>The sequence number of the message that was scheduled.</returns>
-        <remarks>Although the message will not be available to be received until the scheduledEnqueueTime, it can still be peeked before that time.</remarks>
+        <remarks>Although the message will not be available to be received until the scheduledEnqueueTime, it can still be peeked before that time.
+             Messages can also be scheduled by setting <see cref="P:Azure.Messaging.ServiceBus.ServiceBusMessage.ScheduledEnqueueTime" /> and
+             using <see cref="M:Azure.Messaging.ServiceBus.ServiceBusSender.SendMessageAsync(Azure.Messaging.ServiceBus.ServiceBusMessage,System.Threading.CancellationToken)" />,
+             <see cref="M:Azure.Messaging.ServiceBus.ServiceBusSender.SendMessagesAsync(System.Collections.Generic.IEnumerable{Azure.Messaging.ServiceBus.ServiceBusMessage},System.Threading.CancellationToken)" />, or
+             <see cref="M:Azure.Messaging.ServiceBus.ServiceBusSender.SendMessagesAsync(Azure.Messaging.ServiceBus.ServiceBusMessageBatch,System.Threading.CancellationToken)" />.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="SendAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task SendAsync (Azure.Messaging.ServiceBus.ServiceBusMessage message, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task SendAsync(class Azure.Messaging.ServiceBus.ServiceBusMessage message, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Messaging.ServiceBus.ServiceBusSender.SendAsync(Azure.Messaging.ServiceBus.ServiceBusMessage,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function SendAsync (message As ServiceBusMessage, Optional cancellationToken As CancellationToken = null) As Task" />
-      <MemberSignature Language="F#" Value="abstract member SendAsync : Azure.Messaging.ServiceBus.ServiceBusMessage * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&#xA;override this.SendAsync : Azure.Messaging.ServiceBus.ServiceBusMessage * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task" Usage="serviceBusSender.SendAsync (message, cancellationToken)" />
+    <Member MemberName="ScheduleMessagesAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;long[]&gt; ScheduleMessagesAsync (System.Collections.Generic.IEnumerable&lt;Azure.Messaging.ServiceBus.ServiceBusMessage&gt; messages, DateTimeOffset scheduledEnqueueTime, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;int64[]&gt; ScheduleMessagesAsync(class System.Collections.Generic.IEnumerable`1&lt;class Azure.Messaging.ServiceBus.ServiceBusMessage&gt; messages, valuetype System.DateTimeOffset scheduledEnqueueTime, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Messaging.ServiceBus.ServiceBusSender.ScheduleMessagesAsync(System.Collections.Generic.IEnumerable{Azure.Messaging.ServiceBus.ServiceBusMessage},System.DateTimeOffset,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function ScheduleMessagesAsync (messages As IEnumerable(Of ServiceBusMessage), scheduledEnqueueTime As DateTimeOffset, Optional cancellationToken As CancellationToken = null) As Task(Of Long())" />
+      <MemberSignature Language="F#" Value="abstract member ScheduleMessagesAsync : seq&lt;Azure.Messaging.ServiceBus.ServiceBusMessage&gt; * DateTimeOffset * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;int64[]&gt;&#xA;override this.ScheduleMessagesAsync : seq&lt;Azure.Messaging.ServiceBus.ServiceBusMessage&gt; * DateTimeOffset * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;int64[]&gt;" Usage="serviceBusSender.ScheduleMessagesAsync (messages, scheduledEnqueueTime, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Messaging.ServiceBus</AssemblyName>
+        <AssemblyVersion>7.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;System.Int64[]&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="messages" Type="System.Collections.Generic.IEnumerable&lt;Azure.Messaging.ServiceBus.ServiceBusMessage&gt;" />
+        <Parameter Name="scheduledEnqueueTime" Type="System.DateTimeOffset" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="messages">The set of messages to schedule.</param>
+        <param name="scheduledEnqueueTime">The UTC time at which the message should be available for processing</param>
+        <param name="cancellationToken">An optional <see cref="T:System.Threading.CancellationToken" /> instance to signal the request to cancel the operation.</param>
+        <summary>
+             Schedules a set of messages to appear on Service Bus at a later time.
+             </summary>
+        <returns>The sequence number of the message that was scheduled.</returns>
+        <remarks>Although the message will not be available to be received until the scheduledEnqueueTime, it can still be peeked before that time.
+             Messages can also be scheduled by setting <see cref="P:Azure.Messaging.ServiceBus.ServiceBusMessage.ScheduledEnqueueTime" /> and
+             using <see cref="M:Azure.Messaging.ServiceBus.ServiceBusSender.SendMessageAsync(Azure.Messaging.ServiceBus.ServiceBusMessage,System.Threading.CancellationToken)" />,
+             <see cref="M:Azure.Messaging.ServiceBus.ServiceBusSender.SendMessagesAsync(System.Collections.Generic.IEnumerable{Azure.Messaging.ServiceBus.ServiceBusMessage},System.Threading.CancellationToken)" />, or
+             <see cref="M:Azure.Messaging.ServiceBus.ServiceBusSender.SendMessagesAsync(Azure.Messaging.ServiceBus.ServiceBusMessageBatch,System.Threading.CancellationToken)" />.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SendMessageAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task SendMessageAsync (Azure.Messaging.ServiceBus.ServiceBusMessage message, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task SendMessageAsync(class Azure.Messaging.ServiceBus.ServiceBusMessage message, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Messaging.ServiceBus.ServiceBusSender.SendMessageAsync(Azure.Messaging.ServiceBus.ServiceBusMessage,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function SendMessageAsync (message As ServiceBusMessage, Optional cancellationToken As CancellationToken = null) As Task" />
+      <MemberSignature Language="F#" Value="abstract member SendMessageAsync : Azure.Messaging.ServiceBus.ServiceBusMessage * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&#xA;override this.SendMessageAsync : Azure.Messaging.ServiceBus.ServiceBusMessage * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task" Usage="serviceBusSender.SendMessageAsync (message, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Messaging.ServiceBus</AssemblyName>
@@ -342,7 +408,7 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="message">A messsage to send.</param>
+        <param name="message" />
         <param name="cancellationToken">An optional <see cref="T:System.Threading.CancellationToken" /> instance to signal the request to cancel the operation.</param>
         <summary>
                Sends a message to the associated entity of Service Bus.
@@ -351,12 +417,12 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="SendAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task SendAsync (Azure.Messaging.ServiceBus.ServiceBusMessageBatch messageBatch, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task SendAsync(class Azure.Messaging.ServiceBus.ServiceBusMessageBatch messageBatch, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Messaging.ServiceBus.ServiceBusSender.SendAsync(Azure.Messaging.ServiceBus.ServiceBusMessageBatch,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function SendAsync (messageBatch As ServiceBusMessageBatch, Optional cancellationToken As CancellationToken = null) As Task" />
-      <MemberSignature Language="F#" Value="abstract member SendAsync : Azure.Messaging.ServiceBus.ServiceBusMessageBatch * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&#xA;override this.SendAsync : Azure.Messaging.ServiceBus.ServiceBusMessageBatch * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task" Usage="serviceBusSender.SendAsync (messageBatch, cancellationToken)" />
+    <Member MemberName="SendMessagesAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task SendMessagesAsync (Azure.Messaging.ServiceBus.ServiceBusMessageBatch messageBatch, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task SendMessagesAsync(class Azure.Messaging.ServiceBus.ServiceBusMessageBatch messageBatch, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Messaging.ServiceBus.ServiceBusSender.SendMessagesAsync(Azure.Messaging.ServiceBus.ServiceBusMessageBatch,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function SendMessagesAsync (messageBatch As ServiceBusMessageBatch, Optional cancellationToken As CancellationToken = null) As Task" />
+      <MemberSignature Language="F#" Value="abstract member SendMessagesAsync : Azure.Messaging.ServiceBus.ServiceBusMessageBatch * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&#xA;override this.SendMessagesAsync : Azure.Messaging.ServiceBus.ServiceBusMessageBatch * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task" Usage="serviceBusSender.SendMessagesAsync (messageBatch, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Messaging.ServiceBus</AssemblyName>
@@ -370,7 +436,7 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="messageBatch">The batch of messages to send. A batch may be created using <see cref="M:Azure.Messaging.ServiceBus.ServiceBusSender.CreateBatchAsync(System.Threading.CancellationToken)" />.</param>
+        <param name="messageBatch">The batch of messages to send. A batch may be created using <see cref="M:Azure.Messaging.ServiceBus.ServiceBusSender.CreateMessageBatchAsync(System.Threading.CancellationToken)" />.</param>
         <param name="cancellationToken">An optional <see cref="T:System.Threading.CancellationToken" /> instance to signal the request to cancel the operation.</param>
         <summary>
                Sends a <see cref="T:Azure.Messaging.ServiceBus.ServiceBusMessageBatch" />
@@ -381,12 +447,12 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="SendAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task SendAsync (System.Collections.Generic.IEnumerable&lt;Azure.Messaging.ServiceBus.ServiceBusMessage&gt; messages, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task SendAsync(class System.Collections.Generic.IEnumerable`1&lt;class Azure.Messaging.ServiceBus.ServiceBusMessage&gt; messages, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Messaging.ServiceBus.ServiceBusSender.SendAsync(System.Collections.Generic.IEnumerable{Azure.Messaging.ServiceBus.ServiceBusMessage},System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function SendAsync (messages As IEnumerable(Of ServiceBusMessage), Optional cancellationToken As CancellationToken = null) As Task" />
-      <MemberSignature Language="F#" Value="abstract member SendAsync : seq&lt;Azure.Messaging.ServiceBus.ServiceBusMessage&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&#xA;override this.SendAsync : seq&lt;Azure.Messaging.ServiceBus.ServiceBusMessage&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task" Usage="serviceBusSender.SendAsync (messages, cancellationToken)" />
+    <Member MemberName="SendMessagesAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task SendMessagesAsync (System.Collections.Generic.IEnumerable&lt;Azure.Messaging.ServiceBus.ServiceBusMessage&gt; messages, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task SendMessagesAsync(class System.Collections.Generic.IEnumerable`1&lt;class Azure.Messaging.ServiceBus.ServiceBusMessage&gt; messages, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Messaging.ServiceBus.ServiceBusSender.SendMessagesAsync(System.Collections.Generic.IEnumerable{Azure.Messaging.ServiceBus.ServiceBusMessage},System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function SendMessagesAsync (messages As IEnumerable(Of ServiceBusMessage), Optional cancellationToken As CancellationToken = null) As Task" />
+      <MemberSignature Language="F#" Value="abstract member SendMessagesAsync : seq&lt;Azure.Messaging.ServiceBus.ServiceBusMessage&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&#xA;override this.SendMessagesAsync : seq&lt;Azure.Messaging.ServiceBus.ServiceBusMessage&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task" Usage="serviceBusSender.SendMessagesAsync (messages, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Messaging.ServiceBus</AssemblyName>
@@ -406,7 +472,7 @@
                Sends a set of messages to the associated Service Bus entity using a batched approach.
                If the size of the messages exceed the maximum size of a single batch,
                an exception will be triggered and the send will fail. In order to ensure that the messages
-               being sent will fit in a batch, use <see cref="M:Azure.Messaging.ServiceBus.ServiceBusSender.SendAsync(Azure.Messaging.ServiceBus.ServiceBusMessageBatch,System.Threading.CancellationToken)" /> instead.
+               being sent will fit in a batch, use <see cref="M:Azure.Messaging.ServiceBus.ServiceBusSender.SendMessagesAsync(Azure.Messaging.ServiceBus.ServiceBusMessageBatch,System.Threading.CancellationToken)" /> instead.
              </summary>
         <returns>A task to be resolved on when the operation has completed.</returns>
         <remarks>To be added.</remarks>
