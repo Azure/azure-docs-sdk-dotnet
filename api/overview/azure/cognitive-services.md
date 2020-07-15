@@ -1,7 +1,7 @@
 ---
 title: Azure Cognitive Services libraries for .NET
 description: Reference for Azure Cognitive Services libraries for .NET
-ms.date: 07/13/2020
+ms.date: 07/15/2020
 ms.topic: reference
 ms.service: cognitive-services
 ---
@@ -12,7 +12,7 @@ Azure Cognitive Services are APIs, SDKs, and services available to help develope
 
 ## Vision
 
-#### [Legacy](#tab/legacy)
+#### [Latest](#tab/latest)
 
 |Package  |Reference  |Package Manager  |Source  |
 |---------|---------|---------|---------|
@@ -22,7 +22,7 @@ Azure Cognitive Services are APIs, SDKs, and services available to help develope
 |Form Recognizer | [Reference]() | [NuGet]()        | [GitHub]()       |
 |Ink Recognizer  | [Reference]() | [NuGet]()        | [GitHub]()        |
 
-#### [Latest](#tab/latest)
+#### [Legacy](#tab/legacy)
 
 |Package  |Reference  |Package Manager  |Source  |
 |---------|---------|---------|---------|
@@ -32,7 +32,7 @@ Azure Cognitive Services are APIs, SDKs, and services available to help develope
 
 ## Language
 
-#### [Legacy](#tab/legacy)
+#### [Latest](#tab/latest)
 
 |Package  |Reference  |Package Manager  |Source  |
 |---------|---------|---------|---------|
@@ -42,7 +42,7 @@ Azure Cognitive Services are APIs, SDKs, and services available to help develope
 |Translator             | [Reference]() | [NuGet]()  | [GitHub]()        |
 |Ink Recognizer         | [Reference]() | [NuGet]()  | [GitHub]()        |
 
-#### [Latest](#tab/latest)
+#### [Legacy](#tab/legacy)
 
 |Package  |Reference  |Package Manager  |Source  |
 |---------|---------|---------|---------|
@@ -70,12 +70,13 @@ Azure Cognitive Services are APIs, SDKs, and services available to help develope
 |---------|---------|---------|---------|
 |Management   | [Reference]()        |  [NuGet]()        | [GitHub]() |
 
+<!---
 ## Install the libraries
 
 Once you are signed in with your Microsoft Account, you can access [My subscriptions](https://www.microsoft.com/cognitive-services/subscriptions "My subscriptions") to show the products you are using, the quota remaining, and the ability to add additional products to your subscription.
 
 ## Samples
-
+--->
 ## Next steps
 
 * [Blah]()
