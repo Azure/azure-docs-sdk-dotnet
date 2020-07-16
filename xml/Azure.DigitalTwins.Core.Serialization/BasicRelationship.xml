@@ -14,12 +14,46 @@
   <Interfaces />
   <Docs>
     <summary>
-            Although relationships have a user-defined schema, these properties should exist on every instance. This is
-            useful to use as a base class to ensure your custom relationships have the necessary properties.
-            </summary>
+             Although relationships have a user-defined schema, these properties should exist on every instance. This is
+             useful to use as a base class to ensure your custom relationships have the necessary properties.
+             </summary>
     <remarks>
-            For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
-            </remarks>
+             For more samples, see <see href="https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</see>.
+             </remarks>
+    <example>
+             Here's an example of how to use the BasicRelationship helper class to serialize and create a relationship from a building digital twin to a floor digital twin.
+            
+             <code snippet="Snippet:DigitalTwinsSampleCreateBasicRelationship">
+             var buildingFloorRelationshipPayload = new BasicRelationship
+             {
+                 Id = "buildingFloorRelationshipId",
+                 SourceId = "buildingTwinId",
+                 TargetId = "floorTwinId",
+                 Name = "contains",
+                 CustomProperties =
+                 {
+                     { "Prop1", "Prop1 value" },
+                     { "Prop2", 6 }
+                 }
+             };
+            
+             string serializedRelationship = JsonSerializer.Serialize(buildingFloorRelationshipPayload);
+             await client.CreateRelationshipAsync("buildingTwinId", "buildingFloorRelationshipId", serializedRelationship);
+             Console.WriteLine($"Created a digital twin relationship 'buildingFloorRelationshipId' from twin 'buildingTwinId' to twin 'floorTwinId'.");
+             </code>
+            
+             Here's an example of how to use the BasicRelationship helper class to get and deserialize a relationship.
+            
+             <code snippet="Snippet:DigitalTwinsSampleGetBasicRelationship">
+             Response&lt;string&gt; getBasicRelationshipResponse = await client.GetRelationshipAsync("buildingTwinId", "buildingFloorRelationshipId");
+             if (getBasicRelationshipResponse.GetRawResponse().Status == (int)HttpStatusCode.OK)
+             {
+                 BasicRelationship basicRelationship = JsonSerializer.Deserialize&lt;BasicRelationship&gt;(getBasicRelationshipResponse.Value);
+                 Console.WriteLine($"Retrieved relationship '{basicRelationship.Id}' from twin {basicRelationship.SourceId}.\n\t" +
+                     $"Prop1: {basicRelationship.CustomProperties["Prop1"]}\n\t" +
+                     $"Prop2: {basicRelationship.CustomProperties["Prop2"]}");
+             }
+             </code></example>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
