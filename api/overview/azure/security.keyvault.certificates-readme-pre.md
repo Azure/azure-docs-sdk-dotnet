@@ -10,8 +10,8 @@ ms.technology: azure
 ms.devlang: .NET
 ms.service: keyvault
 ---
- 
-# Azure Key Vault Certificate client library for .NET - Version 4.0.2 
+
+# Azure Key Vault Certificate client library for .NET - Version 4.1.0-preview.1 
 
 Azure Key Vault is a cloud service that provides secure storage and automated management of certificates used throughout a cloud application. Multiple certificate, and multiple versions of the same certificate, can be kept in the Key Vault. Each certificate in the vault has a policy associated with it which controls the issuance and lifetime of the certificate, along with actions to be taken as certificates near expiry.
 
@@ -321,15 +321,15 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [nuget]: https://www.nuget.org/
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_cli]: https://docs.microsoft.com/cli/azure
-[certificate_client_class]: https://github.com/Azure/azure-sdk-for-net/tree/159354fec78fe5ce7f7dc0985686c303c55ebe96/sdk/keyvault/Azure.Security.KeyVault.Certificates/src/CertificateClient.cs
+[certificate_client_class]: https://github.com/azure/azure-sdk-for-net/tree/Azure.Security.KeyVault.Certificates_4.1.0-preview.1/sdk/keyvault/Azure.Security.KeyVault.Certificates/src/CertificateClient.cs
 [soft_delete]: https://docs.microsoft.com/azure/key-vault/key-vault-ovw-soft-delete
 [azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/identity/Azure.Identity
 [keyvault_rest]: https://docs.microsoft.com/rest/api/keyvault/
 [secrets_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/keyvault/Azure.Security.KeyVault.Secrets
 [keys_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/keyvault/Azure.Security.KeyVault.Keys
-[hello_world_sample]: https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/keyvault/Azure.Security.KeyVault.Certificates/samples/Sample1_HelloWorld.md
-[get_cetificates_sample]: https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/keyvault/Azure.Security.KeyVault.Certificates/samples/Sample2_GetCertificates.md
+[hello_world_sample]: https://github.com/azure/azure-sdk-for-net/tree/Azure.Security.KeyVault.Certificates_4.1.0-preview.1/sdk/keyvault/Azure.Security.KeyVault.Certificates/samples/Sample1_HelloWorld.md
+[get_cetificates_sample]: https://github.com/azure/azure-sdk-for-net/tree/Azure.Security.KeyVault.Certificates_4.1.0-preview.1/sdk/keyvault/Azure.Security.KeyVault.Certificates/samples/Sample2_GetCertificates.md
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
-[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/identity/Azure.Identity/README.md
+[DefaultAzureCredential]: https://github.com/azure/azure-sdk-for-net/tree/Azure.Security.KeyVault.Certificates_4.1.0-preview.1/sdk/identity/Azure.Identity/README.md
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fkeyvault%2FAzure.Security.KeyVault.Certificates%2FREADME.png)
