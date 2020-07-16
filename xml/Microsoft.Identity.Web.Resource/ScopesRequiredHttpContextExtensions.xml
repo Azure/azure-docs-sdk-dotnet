@@ -11,6 +11,7 @@
     <AssemblyVersion>0.1.3.0</AssemblyVersion>
     <AssemblyVersion>0.1.4.0</AssemblyVersion>
     <AssemblyVersion>0.1.5.0</AssemblyVersion>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -38,6 +39,7 @@
         <AssemblyVersion>0.1.3.0</AssemblyVersion>
         <AssemblyVersion>0.1.4.0</AssemblyVersion>
         <AssemblyVersion>0.1.5.0</AssemblyVersion>
+        <AssemblyVersion>0.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -58,10 +60,13 @@
         <summary>
             When applied to an <see cref="T:Microsoft.AspNetCore.Http.HttpContext" />, verifies that the user authenticated in the
             web API has any of the accepted scopes.
+            If there is no authenticated user, the response is a 401 (Unauthenticated).
             If the authenticated user does not have any of these <paramref name="acceptedScopes" />, the
-            method throws an HTTP Unauthorized with the message telling which scopes are expected in the token.
+            method updates the HTTP response providing a status code 403 (Forbidden)
+            and writes to the response body a message telling which scopes are expected in the token.
             </summary>
-        <remarks>To be added.</remarks>
+        <remarks>When the scopes don't match, the response is a 403 (Forbidden),
+            because the user is authenticated (hence not 401), but not authorized.</remarks>
         <see cref="P:Microsoft.AspNetCore.Http.HttpResponse.StatusCode" />
         <see cref="F:System.Net.HttpStatusCode.Unauthorized" />
         <exception cref="T:System.Net.Http.HttpRequestException"> with a <see cref="P:Microsoft.AspNetCore.Http.HttpResponse.StatusCode" /> set to
