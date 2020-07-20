@@ -32,7 +32,7 @@ If you have existing search applications that call the v10 legacy libraries, be 
 
 ### Version 10 (legacy)
 
-Use **`Microsoft.Azure.Search`** libraries to maintain existing solutions. This version is fully supported, but with the exception of bug fixes, no further updates are planned for this library. For an introduction, see [How to use Microsoft.Azure.Search (v10)](https://docs.microsoft.com/azure/search/search-howto-dotnet-sdk).
+Use **`Microsoft.Azure.Search`** libraries to maintain existing solutions. This version is fully supported for now, but with the exception of security hot fixes, no further updates are planned for this library. For an introduction, see [How to use Microsoft.Azure.Search (v10)](https://docs.microsoft.com/azure/search/search-howto-dotnet-sdk).
 
 |    Library    |    Reference    |    Package    |    Source    |
 |---------------|-----------------|----------------|-------------|
