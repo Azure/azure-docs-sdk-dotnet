@@ -14,13 +14,13 @@ ms.service: search
 
 ## Libraries for data access
 
-The `Azure.Search.Documents` client library (v11) is a new offering for .NET developers who want to use search technology in their applications. This version is functionally equivalent to the previous **Microsoft.Azure.Search** client library (v10), but takes dependencies on **Azure.Core** and **System.Net.Json** to provide a standard approach for service configuration, authentication, document serialization, and other tasks.
+After an Azure Cognitive Search resource is created and configured, use data access libraries to create and consume search objects in client applications.
 
-This version has different clients, namespaces, and class names, so you will need to migrate existing code to use the new library. When reviewing code samples and content, be sure to check for the namespace (`using Azure.Search.Documents;` for version 11) to confirm which client library is demonstrated.
+### Version 11
 
-### Version 11.0
+The **`Azure.Search.Documents`** (v11) is a new client library  for .NET developers who want to use search technology in their applications. This version is functionally equivalent to the previous **`Microsoft.Azure.Search`** (v10) client library, but takes dependencies on **`Azure.Core`** and **`System.Text.Json`** to provide a standard approach for service configuration, authentication, document serialization, and other tasks.
 
-Use the following version 11.0 of the **Azure.Search** libraries to work with Azure Cognitive Search objects. Moving forward, all new features and enhancements will roll out in this client library.
+Use the **`Azure.Search`** libraries when creating new projects that use Azure Cognitive Search objects. Moving forward, all new features and enhancements will roll out in the **`Azure.Search.Documents`** client library.
 
 |    Library    |    Reference    |    Package    |    Source    |
 |---------------|-----------------|----------------|-------------|
@@ -28,9 +28,11 @@ Use the following version 11.0 of the **Azure.Search** libraries to work with Az
 
 There is only one package and one client library for this version.
 
-### Version 10.0 (legacy)
+If you have existing search applications that call the v10 legacy libraries, be aware that this version has different clients, namespaces, and class names. You will need to migrate existing code to use the new library. When reviewing code samples and content, be sure to check for the namespace (`using Azure.Search.Documents;`) to confirm whether the v11 client library is demonstrated.
 
-Use the following version 10.x of the **Microsoft.Azure.Search** libraries to maintain existing solutions. This version is fully supported, but With the exception of bug fixes, no further updates are planned for this library. For an introduction, see [How to use Microsoft.Azure.Search (v10)](https://docs.microsoft.com/azure/search/search-howto-dotnet-sdk).
+### Version 10 (legacy)
+
+Use **`Microsoft.Azure.Search`** (v10) libraries to maintain existing solutions. This version is fully supported, but with the exception of bug fixes, no further updates are planned for this library. For an introduction, see [How to use Microsoft.Azure.Search (v10)](https://docs.microsoft.com/azure/search/search-howto-dotnet-sdk).
 
 |    Library    |    Reference    |    Package    |    Source    |
 |---------------|-----------------|----------------|-------------|
