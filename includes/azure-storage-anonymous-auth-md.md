@@ -1,1 +1,0 @@
-Blobs in a public container are available for anonymous access. For additional details, see [Manage anonymous read access to containers and blobs](https://azure.microsoft.com/documentation/articles/storage-manage-access-to-resources/).
