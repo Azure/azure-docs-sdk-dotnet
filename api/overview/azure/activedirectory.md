@@ -10,13 +10,13 @@ ms.service: active-directory
 
 ## Overview
 
-Sign in users and access protected web APIs with Azure Active Directory.
+Sign in users and access protected web APIs with Azure Active Directory (Azure AD).
 
 To get started developing applications with Azure Active Directory, see the [Microsoft identity platform](/azure/active-directory/develop/v2-overview).
 
 ## Client library
 
-Authenticate users and authorize access to web APIs using OpenID Connect and OAuth 2.0 with the Microsoft Authentication Library for .NET ([MSAL.NET](/azure/active-directory/develop/msal-net-initializing-client-applications)).
+Provide scoped access to web APIs protected by Azure AD using OpenID Connect and OAuth 2.0 with the Microsoft Authentication Library for .NET ([MSAL.NET](/azure/active-directory/develop/msal-net-initializing-client-applications)).
 
 Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Identity.Client) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
 
@@ -34,16 +34,16 @@ dotnet add package Microsoft.Identity.Client
 
 ### Code example
 
-Retrieve an access token for the Microsoft Graph API in a desktop application.
+Retrieve an access token for the Microsoft Graph API in a desktop application (public client).
 
 ```csharp
 /* Include this using directive:
 using Microsoft.Identity.Client;
 */
 
-private static string ClientId = "11111111-1111-1111-1111-111111111111"; // Application (client) ID
-private static string Tenant = "common";
-private static string Instance = "https://login.microsoftonline.com/";
+string ClientId = "11111111-1111-1111-1111-111111111111"; // Application (client) ID
+string Tenant = "common";
+string Instance = "https://login.microsoftonline.com/";
 
 string graphAPIEndpoint = "https://graph.microsoft.com/v1.0/me";
 string[] scopes = new string[] { "user.read" };
@@ -52,7 +52,7 @@ AuthenticationResult authResult = null;
 
 var app = PublicClientApplicationBuilder.Create(ClientId)
                 .WithAuthority($"{Instance}{Tenant}")
-                .WithDefaultRedirectUri()
+                .WithRedirectUri("http://localhost")
                 .Build();
 
 var accounts = await app.GetAccountsAsync();
