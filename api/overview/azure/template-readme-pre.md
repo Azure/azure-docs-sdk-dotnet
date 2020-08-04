@@ -1,13 +1,13 @@
 ---
 title: Azure Batch client library for Python
-keywords: Azure, .net, SDK, API, Azure.Template, 
+keywords: Azure, dotnet, SDK, API, Azure.Template, 
 author: maggiepint
 ms.author: magpint
-ms.date: 06/29/2020
+ms.date: 07/24/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.devlang: .net
+ms.devlang: dotnet
 ms.service: 
 ---
 
@@ -18,7 +18,7 @@ Use the guidelines in each section of this template to ensure consistency and re
 **Title**: The H1 of your README should be in the format: `# [Product Name] client library for [Language]`
 
 * All headings, including the H1, should use **sentence-style capitalization**. Refer to the [Microsoft Style Guide][style-guide-msft] and [Microsoft Cloud Style Guide][style-guide-cloud] for more information.
-* Example: `# Azure Batch client library for Python - Version 1.0.2-preview.15 
+* Example: `# Azure Batch client library for Python - Version 1.0.2-preview.17 
 `
 
 # Azure Template client library for .NET

@@ -3,7 +3,7 @@ title: Azure Storage Blobs Batch client library for .NET
 keywords: Azure, .net, SDK, API, Azure.Storage.Blobs.Batch, storage
 author: maggiepint
 ms.author: magpint
-ms.date: 07/03/2020
+ms.date: 07/28/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: .net
 ms.service: storage
 ---
 
-# Azure Storage Blobs Batch client library for .NET - Version 12.3.0-preview.1 
+# Azure Storage Blobs Batch client library for .NET - Version 12.3.0-preview.2 
 
 
 > Server Version: 2019-12-12, 2019-07-07, and 2019-02-02
@@ -26,7 +26,7 @@ library allows you to batch multiple Azure Blob Storage operations in a single r
 
 ### Install the package
 
-Install the Azure Storage Blobs Batch client library for .NET - Version 12.3.0-preview.1 
+Install the Azure Storage Blobs Batch client library for .NET - Version 12.3.0-preview.2 
  with [NuGet][nuget]:
 
 ```Powershell
@@ -177,7 +177,7 @@ catch (AggregateException)
 
 ## Next steps
 
-Check out our [sync](https://github.com/azure/azure-sdk-for-net/tree/Azure.Storage.Blobs.Batch_12.3.0-preview.1/sdk/storage/Azure.Storage.Blobs.Batch/samples/Sample03a_Batching.cs) and [async](https://github.com/azure/azure-sdk-for-net/tree/Azure.Storage.Blobs.Batch_12.3.0-preview.1/sdk/storage/Azure.Storage.Blobs.Batch/samples/Sample03b_BatchingAsync.cs) samples for more.
+Check out our [sync](https://github.com/Azure/azure-sdk-for-net/tree/81bb56a44cd68669e838c64581ac35e0a3093318/sdk/storage/Azure.Storage.Blobs.Batch/samples/Sample03a_Batching.cs) and [async](https://github.com/Azure/azure-sdk-for-net/tree/81bb56a44cd68669e838c64581ac35e0a3093318/sdk/storage/Azure.Storage.Blobs.Batch/samples/Sample03b_BatchingAsync.cs) samples for more.
 
 ## Contributing
 
@@ -212,7 +212,7 @@ additional questions or comments.
 [identity]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/identity/Azure.Identity/README.md
 [RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/core/Azure.Core/src/RequestFailedException.cs
 [error_codes]: https://docs.microsoft.com/rest/api/storageservices/blob-service-error-codes
-[storage_contrib]: https://github.com/azure/azure-sdk-for-net/tree/Azure.Storage.Blobs.Batch_12.3.0-preview.1/sdk/storage/CONTRIBUTING.md
+[storage_contrib]: https://github.com/Azure/azure-sdk-for-net/tree/81bb56a44cd68669e838c64581ac35e0a3093318/sdk/storage/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/

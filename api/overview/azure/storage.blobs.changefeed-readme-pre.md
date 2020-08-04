@@ -3,7 +3,7 @@ title: Azure Storage Blobs Change Feed client library for .NET
 keywords: Azure, .net, SDK, API, Azure.Storage.Blobs.ChangeFeed, 
 author: maggiepint
 ms.author: magpint
-ms.date: 07/03/2020
+ms.date: 07/28/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: .net
 ms.service: 
 ---
 
-# Azure Storage Blobs Change Feed client library for .NET - Version 12.0.0-preview.1 
+# Azure Storage Blobs Change Feed client library for .NET - Version 12.0.0-preview.2 
 
 
 > Server Version: 2019-12-12
@@ -22,12 +22,17 @@ guaranteed, durable, immutable, read-only log of these changes. Client applicati
 logs at any time. The change feed enables you to build efficient and scalable solutions that
 process change events that occur in your Blob Storage account at a low cost.
 
-[Source code][source] | [Product documentation][product_docs]
+[Source code][source] | [Package (NuGet)][package] | [Product documentation][product_docs]
 
 ## Getting started
 
 ### Install the package
-- TODO after we have released.
+
+Install the Azure Storage Blobs client library for .NET with [NuGet][nuget]:
+
+```Powershell
+dotnet add package Azure.Storage.Blobs.ChangeFeed
+```
 
 ### Prerequisites
 
@@ -89,27 +94,25 @@ await foreach (BlobChangeFeedEvent changeFeedEvent in changeFeedClient.GetChange
 }
 ```
 
-### Resume with cursor
+### Resume with continuationToken 
 ```C# Snippet:SampleSnippetsChangeFeed_ResumeWithCursor
-IAsyncEnumerator<Page<BlobChangeFeedEvent>> enumerator = changeFeedClient
-    .GetChangesAsync()
-    .AsPages(pageSizeHint: 10)
-    .GetAsyncEnumerator();
-
-await enumerator.MoveNextAsync();
-
-foreach (BlobChangeFeedEvent changeFeedEvent in enumerator.Current.Values)
+string continuationToken = null;
+await foreach (Page<BlobChangeFeedEvent> page in changeFeedClient.GetChangesAsync().AsPages(pageSizeHint: 10))
 {
-    changeFeedEvents.Add(changeFeedEvent);
+    foreach (BlobChangeFeedEvent changeFeedEvent in page.Values)
+    {
+        changeFeedEvents.Add(changeFeedEvent);
+    }
+
+    // Get the change feed continuation token.  The continuation token is not required to get each page of events,
+    // it is intended to be saved and used to resume iterating at a later date.
+    continuationToken = page.ContinuationToken;
+    break;
 }
 
-// get the change feed cursor.  The cursor is not required to get each page of events,
-// it is intended to be saved and used to resume iterating at a later date.
-string cursor = enumerator.Current.ContinuationToken;
-
-// Resume iterating from the pervious position with the cursor.
+// Resume iterating from the pervious position with the continuation token.
 await foreach (BlobChangeFeedEvent changeFeedEvent in changeFeedClient.GetChangesAsync(
-    continuationToken: cursor))
+    continuationToken: continuationToken))
 {
     changeFeedEvents.Add(changeFeedEvent);
 }
@@ -124,7 +127,7 @@ helpful [`ErrorCode`s][error_codes].  Many of these errors are recoverable.
 
 Get started with our [Change Feed samples][samples]:
 
-1. [Hello World](https://github.com/azure/azure-sdk-for-net/tree/Azure.Storage.Blobs.ChangeFeed_12.0.0-preview.1/sdk/storage/Azure.Storage.Blobs.ChangeFeed/samples/Sample01a_HelloWorld.cs): Get changes that have occured in your storage account (or [asynchronously](https://github.com/azure/azure-sdk-for-net/tree/Azure.Storage.Blobs.ChangeFeed_12.0.0-preview.1/sdk/storage/Azure.Storage.Blobs.ChangeFeed/samples/Sample01b_HelloWorldAsync.cs))
+1. [Hello World](https://github.com/Azure/azure-sdk-for-net/tree/81bb56a44cd68669e838c64581ac35e0a3093318/sdk/storage/Azure.Storage.Blobs.ChangeFeed/samples/Sample01a_HelloWorld.cs): Get changes that have occured in your storage account (or [asynchronously](https://github.com/Azure/azure-sdk-for-net/tree/81bb56a44cd68669e838c64581ac35e0a3093318/sdk/storage/Azure.Storage.Blobs.ChangeFeed/samples/Sample01b_HelloWorldAsync.cs))
 2. [Auth](samples/Sample02_Auth.cs): Authenticate with connection strings, public access, shared keys, shared access signatures, and Azure Active Directory.
 
 
@@ -145,8 +148,10 @@ additional questions or comments.
 
 <!-- LINKS -->
 [source]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/storage/Azure.Storage.Blobs/srcs
+[package]: https://www.nuget.org/packages/Azure.Storage.Blobs.ChangeFeed/
 [product_docs]: https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-change-feed
 [azure_sub]: https://azure.microsoft.com/free/
+[nuget]: https://www.nuget.org/
 [storage_account_docs]: https://docs.microsoft.com/azure/storage/common/storage-account-overview
 [storage_account_create_ps]: https://docs.microsoft.com/azure/storage/common/storage-quickstart-create-account?tabs=azure-powershell
 [storage_account_create_cli]: https://docs.microsoft.com/azure/storage/common/storage-quickstart-create-account?tabs=azure-cli
@@ -154,8 +159,8 @@ additional questions or comments.
 [authenticating_with_blobs]: https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/storage/Azure.Storage.Blobs/samples/Sample02_Auth.cs
 [RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/core/Azure.Core/src/RequestFailedException.cs
 [error_codes]: https://docs.microsoft.com/rest/api/storageservices/blob-service-error-codes
-[samples]: https://github.com/azure/azure-sdk-for-net/tree/Azure.Storage.Blobs.ChangeFeed_12.0.0-preview.1/sdk/storage/Azure.Storage.Blobs.ChangeFeed/samples
-[storage_contrib]: https://github.com/azure/azure-sdk-for-net/tree/Azure.Storage.Blobs.ChangeFeed_12.0.0-preview.1/sdk/storage/CONTRIBUTING.md
+[samples]: https://github.com/Azure/azure-sdk-for-net/tree/81bb56a44cd68669e838c64581ac35e0a3093318/sdk/storage/Azure.Storage.Blobs.ChangeFeed/samples
+[storage_contrib]: https://github.com/Azure/azure-sdk-for-net/tree/81bb56a44cd68669e838c64581ac35e0a3093318/sdk/storage/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
