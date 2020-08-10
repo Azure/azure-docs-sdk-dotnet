@@ -1,18 +1,17 @@
 ---
-title: Azure Key Vault Key Encryptor for Microsoft.AspNetCore.DataProtection
-keywords: Azure, .NET, SDK, API, extensions, Azure.Extensions.AspNetCore.DataProtection.Keys
+title: 
+keywords: Azure, .net, SDK, API, Azure.Extensions.AspNetCore.DataProtection.Keys, extensions
 author: maggiepint
 ms.author: magpint
-ms.date: 06/10/2020
+ms.date: 08/10/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.devlang: .NET
+ms.devlang: .net
 ms.service: extensions
 ---
 
-
-# Azure Key Vault Key Encryptor for Microsoft.AspNetCore.DataProtection - Version 1.0.0
+# Azure Key Vault Key Encryptor for Microsoft.AspNetCore.DataProtection
 
 The `Azure.Extensions.AspNetCore.DataProtection.Keys` package allows protecting keys at rest using Azure Key Vault Key Encryption/Wrapping feature.
 
@@ -23,7 +22,7 @@ The `Azure.Extensions.AspNetCore.DataProtection.Keys` package allows protecting 
 Install the package with [NuGet][nuget]:
 
 ```Powershell
-dotnet add package Azure.Extensions.AspNetCore.DataProtection.Keys -v 1.0.0-preview.2
+dotnet add package Azure.Extensions.AspNetCore.DataProtection.Keys
 ```
 
 ### Prerequisites
@@ -60,7 +59,7 @@ The [Azure Identity library][identity] provides easy Azure Active Directory supp
 
 ## Next steps
 
-Read more about [DataProtection in ASP.NET Core](aspnetcore_dataprotection_doc).
+Read more about [DataProtection in ASP.NET Core][aspnetcore_dataprotection_doc].
 
 ## Contributing
 
@@ -80,14 +79,15 @@ additional questions or comments.
 [source]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/extensions/Azure.Extensions.AspNetCore.DataProtection.Keys/src
 [package]: https://www.nuget.org/packages/Azure.Extensions.AspNetCore.DataProtection.Keys/
 [docs]: https://docs.microsoft.com/dotnet/api/Azure.Extensions.AspNetCore.DataProtection.Keys
-[nuget]: https://www.nuget.org/storage-quickstart-create-account?tabs=azure-powershell
+[nuget]: https://www.nuget.org/packages/Azure.Extensions.AspNetCore.DataProtection.Keys
+[keyvault_doc]: https://docs.microsoft.com/en-us/azure/key-vault/general/overview
 [keyvault_create_cli]: https://docs.microsoft.com/en-us/azure/key-vault/quick-create-cli#create-a-key-vault
 [keyvault_create_portal]: https://docs.microsoft.com/en-us/azure/key-vault/quick-create-portal#create-a-vault
 [keyvault_create_ps]: https://docs.microsoft.com/en-us/azure/key-vault/quick-create-powershell#create-a-key-vault
 [azure_cli]: https://docs.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
 [identity]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/identity/Azure.Identity/README.md
-[aspnetcore_dataprotection_doc]: https://docs.microsoft.com/en-us/aspnet/core/security/data-protection/using-data-protection
+[aspnetcore_dataprotection_doc]: https://docs.microsoft.com/en-us/aspnet/core/security/data-protection/introduction?view=aspnetcore-3.1
 [RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/core/Azure.Core/src/RequestFailedException.cs
 [error_codes]: https://docs.microsoft.com/rest/api/storageservices/blob-service-error-codes
 [samples]: samples/
