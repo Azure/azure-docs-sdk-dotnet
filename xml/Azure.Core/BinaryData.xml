@@ -14,29 +14,45 @@
   <Interfaces />
   <Docs>
     <summary>
-            Abstraction for a payload of binary data.
-            </summary>
+             A lightweight abstraction for a payload of bytes. This type integrates with <see cref="T:Azure.Core.Serialization.ObjectSerializer" />
+             to allow for serializing and deserializing payloads.
+            
+             The ownership model of the underlying bytes varies depending on how the instance is constructed:
+            
+             If created using the static factory method, <see cref="M:Azure.Core.BinaryData.FromMemory(System.ReadOnlyMemory{System.Byte})" />,
+             the passed in bytes will be wrapped, rather than copied. This is useful in scenarios where performance
+             is critical and/or ownership of the bytes is controlled completely by the consumer, thereby allowing the
+             enforcement of whatever ownership model is needed.
+            
+             If created using the <see cref="M:Azure.Core.BinaryData.#ctor(System.ReadOnlySpan{System.Byte})" /> constructor, <see cref="T:Azure.Core.BinaryData" /> will
+             maintain its own copy of the underlying bytes. This usage is geared more towards scenarios where the ownership
+             of the bytes might be ambiguous to users of the consuming code. By making a copy of the bytes, the payload is
+             guaranteed to be immutable.
+            
+             For all other constructors and static factory methods, BinaryData will assume ownership of the underlying bytes.
+             </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public BinaryData (ReadOnlyMemory&lt;byte&gt; data);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.ReadOnlyMemory`1&lt;unsigned int8&gt; data) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Core.BinaryData.#ctor(System.ReadOnlyMemory{System.Byte})" />
-      <MemberSignature Language="VB.NET" Value="Public Sub New (data As ReadOnlyMemory(Of Byte))" />
-      <MemberSignature Language="F#" Value="new Azure.Core.BinaryData : ReadOnlyMemory&lt;byte&gt; -&gt; Azure.Core.BinaryData" Usage="new Azure.Core.BinaryData data" />
+      <MemberSignature Language="C#" Value="public BinaryData (ReadOnlySpan&lt;byte&gt; data);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.ReadOnlySpan`1&lt;unsigned int8&gt; data) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Core.BinaryData.#ctor(System.ReadOnlySpan{System.Byte})" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (data As ReadOnlySpan(Of Byte))" />
+      <MemberSignature Language="F#" Value="new Azure.Core.BinaryData : ReadOnlySpan&lt;byte&gt; -&gt; Azure.Core.BinaryData" Usage="new Azure.Core.BinaryData data" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Core.Experimental</AssemblyName>
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="data" Type="System.ReadOnlyMemory&lt;System.Byte&gt;" />
+        <Parameter Name="data" Type="System.ReadOnlySpan&lt;System.Byte&gt;" />
       </Parameters>
       <Docs>
         <param name="data">Byte data.</param>
         <summary>
-            Creates a binary data instance from bytes.
+            Creates a binary data instance by making a copy
+            of the passed in bytes.
             </summary>
         <remarks>To be added.</remarks>
       </Docs>
@@ -58,47 +74,20 @@
       <Docs>
         <param name="data">The string data.</param>
         <summary>
-            Creates a binary data instance from a string
-            using UTF-8 encoding.
+            Creates a binary data instance from a string by converting
+            the string to bytes using UTF-8 encoding.
             </summary>
         <returns>A <see cref="T:Azure.Core.BinaryData" /> instance.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>The byte order mark is not included as part of the encoding process.</remarks>
       </Docs>
     </Member>
-    <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public BinaryData (string data, System.Text.Encoding encoding);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string data, class System.Text.Encoding encoding) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Core.BinaryData.#ctor(System.String,System.Text.Encoding)" />
-      <MemberSignature Language="VB.NET" Value="Public Sub New (data As String, encoding As Encoding)" />
-      <MemberSignature Language="F#" Value="new Azure.Core.BinaryData : string * System.Text.Encoding -&gt; Azure.Core.BinaryData" Usage="new Azure.Core.BinaryData (data, encoding)" />
-      <MemberType>Constructor</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Azure.Core.Experimental</AssemblyName>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <Parameters>
-        <Parameter Name="data" Type="System.String" />
-        <Parameter Name="encoding" Type="System.Text.Encoding" />
-      </Parameters>
-      <Docs>
-        <param name="data">The string data.</param>
-        <param name="encoding">The encoding to use when converting
-            the data to bytes.</param>
-        <summary>
-            Creates a binary data instance from a string
-            using the specified encoding.
-            </summary>
-        <returns>A <see cref="T:Azure.Core.BinaryData" /> instance.</returns>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="AsBytes">
-      <MemberSignature Language="C#" Value="public ReadOnlyMemory&lt;byte&gt; AsBytes ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance valuetype System.ReadOnlyMemory`1&lt;unsigned int8&gt; AsBytes() cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Core.BinaryData.AsBytes" />
-      <MemberSignature Language="VB.NET" Value="Public Function AsBytes () As ReadOnlyMemory(Of Byte)" />
-      <MemberSignature Language="F#" Value="member this.AsBytes : unit -&gt; ReadOnlyMemory&lt;byte&gt;" Usage="binaryData.AsBytes " />
-      <MemberType>Method</MemberType>
+    <Member MemberName="Bytes">
+      <MemberSignature Language="C#" Value="public ReadOnlyMemory&lt;byte&gt;? Bytes { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ReadOnlyMemory`1&lt;unsigned int8&gt; Bytes" />
+      <MemberSignature Language="DocId" Value="P:Azure.Core.BinaryData.Bytes" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Bytes As ReadOnlyMemory(Of Byte)" />
+      <MemberSignature Language="F#" Value="member this.Bytes : ReadOnlyMemory&lt;byte&gt;" Usage="Azure.Core.BinaryData.Bytes" />
+      <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Core.Experimental</AssemblyName>
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
@@ -106,21 +95,20 @@
       <ReturnValue>
         <ReturnType>System.ReadOnlyMemory&lt;System.Byte&gt;</ReturnType>
       </ReturnValue>
-      <Parameters />
       <Docs>
         <summary>
-            Converts the BinaryData to bytes.
+            The backing store for the <see cref="T:Azure.Core.BinaryData" /> instance.
             </summary>
-        <returns>The data as bytes.</returns>
+        <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Deserialize&lt;T&gt;">
-      <MemberSignature Language="C#" Value="public T Deserialize&lt;T&gt; (Azure.Core.ObjectSerializer serializer, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance !!T Deserialize&lt;T&gt;(class Azure.Core.ObjectSerializer serializer, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Core.BinaryData.Deserialize``1(Azure.Core.ObjectSerializer,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Function Deserialize(Of T) (serializer As ObjectSerializer, Optional cancellationToken As CancellationToken = Nothing) As T" />
-      <MemberSignature Language="F#" Value="member this.Deserialize : Azure.Core.ObjectSerializer * System.Threading.CancellationToken -&gt; 'T" Usage="binaryData.Deserialize (serializer, cancellationToken)" />
+      <MemberSignature Language="C#" Value="public T Deserialize&lt;T&gt; (System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance !!T Deserialize&lt;T&gt;(valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Core.BinaryData.Deserialize``1(System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Function Deserialize(Of T) (Optional cancellationToken As CancellationToken = Nothing) As T" />
+      <MemberSignature Language="F#" Value="member this.Deserialize : System.Threading.CancellationToken -&gt; 'T" Usage="binaryData.Deserialize cancellationToken" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Core.Experimental</AssemblyName>
@@ -133,7 +121,39 @@
         <TypeParameter Name="T" />
       </TypeParameters>
       <Parameters>
-        <Parameter Name="serializer" Type="Azure.Core.ObjectSerializer" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <typeparam name="T">The type that the data should be
+             converted to.</typeparam>
+        <param name="cancellationToken">The <see cref="T:System.Threading.CancellationToken" /> to use during deserialization.</param>
+        <summary>
+             Converts the BinaryData to the specified type using the
+             <see cref="T:Azure.Core.Serialization.JsonObjectSerializer" />.
+             </summary>
+        <returns>The data converted to the specified type.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Deserialize&lt;T&gt;">
+      <MemberSignature Language="C#" Value="public T Deserialize&lt;T&gt; (Azure.Core.Serialization.ObjectSerializer serializer, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance !!T Deserialize&lt;T&gt;(class Azure.Core.Serialization.ObjectSerializer serializer, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Core.BinaryData.Deserialize``1(Azure.Core.Serialization.ObjectSerializer,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Function Deserialize(Of T) (serializer As ObjectSerializer, Optional cancellationToken As CancellationToken = Nothing) As T" />
+      <MemberSignature Language="F#" Value="member this.Deserialize : Azure.Core.Serialization.ObjectSerializer * System.Threading.CancellationToken -&gt; 'T" Usage="binaryData.Deserialize (serializer, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Core.Experimental</AssemblyName>
+        <AssemblyVersion>0.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>T</ReturnType>
+      </ReturnValue>
+      <TypeParameters>
+        <TypeParameter Name="T" />
+      </TypeParameters>
+      <Parameters>
+        <Parameter Name="serializer" Type="Azure.Core.Serialization.ObjectSerializer" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
@@ -143,18 +163,19 @@
              when deserializing the data.</param>
         <param name="cancellationToken">The <see cref="T:System.Threading.CancellationToken" /> to use during deserialization.</param>
         <summary>
-             Converts the BinaryData to the specified type.
+             Converts the BinaryData to the specified type using
+             the provided <see cref="T:Azure.Core.Serialization.ObjectSerializer" />.
              </summary>
         <returns>The data converted to the specified type.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="DeserializeAsync&lt;T&gt;">
-      <MemberSignature Language="C#" Value="public System.Threading.Tasks.ValueTask&lt;T&gt;? DeserializeAsync&lt;T&gt; (Azure.Core.ObjectSerializer serializer, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance valuetype System.Threading.Tasks.ValueTask`1&lt;!!T&gt; DeserializeAsync&lt;T&gt;(class Azure.Core.ObjectSerializer serializer, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Core.BinaryData.DeserializeAsync``1(Azure.Core.ObjectSerializer,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Function DeserializeAsync(Of T) (serializer As ObjectSerializer, Optional cancellationToken As CancellationToken = Nothing) As ValueTask(Of T)" />
-      <MemberSignature Language="F#" Value="member this.DeserializeAsync : Azure.Core.ObjectSerializer * System.Threading.CancellationToken -&gt; System.Threading.Tasks.ValueTask&lt;'T&gt;" Usage="binaryData.DeserializeAsync (serializer, cancellationToken)" />
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.ValueTask&lt;T&gt;? DeserializeAsync&lt;T&gt; (System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance valuetype System.Threading.Tasks.ValueTask`1&lt;!!T&gt; DeserializeAsync&lt;T&gt;(valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Core.BinaryData.DeserializeAsync``1(System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Function DeserializeAsync(Of T) (Optional cancellationToken As CancellationToken = Nothing) As ValueTask(Of T)" />
+      <MemberSignature Language="F#" Value="member this.DeserializeAsync : System.Threading.CancellationToken -&gt; System.Threading.Tasks.ValueTask&lt;'T&gt;" Usage="binaryData.DeserializeAsync cancellationToken" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Core.Experimental</AssemblyName>
@@ -167,7 +188,41 @@
         <TypeParameter Name="T" />
       </TypeParameters>
       <Parameters>
-        <Parameter Name="serializer" Type="Azure.Core.ObjectSerializer" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <typeparam name="T">The type that the data should be
+             converted to.</typeparam>
+        <param name="cancellationToken">The <see cref="T:System.Threading.CancellationToken" /> to use during deserialization.</param>
+        <summary>
+             Converts the BinaryData to the specified type using the
+             <see cref="T:Azure.Core.Serialization.JsonObjectSerializer" />.
+             </summary>
+        <returns>The data cast to the specified type. If the cast cannot
+            be performed, an <see cref="T:System.InvalidCastException" /> will be
+            thrown.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DeserializeAsync&lt;T&gt;">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.ValueTask&lt;T&gt;? DeserializeAsync&lt;T&gt; (Azure.Core.Serialization.ObjectSerializer serializer, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance valuetype System.Threading.Tasks.ValueTask`1&lt;!!T&gt; DeserializeAsync&lt;T&gt;(class Azure.Core.Serialization.ObjectSerializer serializer, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Core.BinaryData.DeserializeAsync``1(Azure.Core.Serialization.ObjectSerializer,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Function DeserializeAsync(Of T) (serializer As ObjectSerializer, Optional cancellationToken As CancellationToken = Nothing) As ValueTask(Of T)" />
+      <MemberSignature Language="F#" Value="member this.DeserializeAsync : Azure.Core.Serialization.ObjectSerializer * System.Threading.CancellationToken -&gt; System.Threading.Tasks.ValueTask&lt;'T&gt;" Usage="binaryData.DeserializeAsync (serializer, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Core.Experimental</AssemblyName>
+        <AssemblyVersion>0.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.ValueTask&lt;T&gt;</ReturnType>
+      </ReturnValue>
+      <TypeParameters>
+        <TypeParameter Name="T" />
+      </TypeParameters>
+      <Parameters>
+        <Parameter Name="serializer" Type="Azure.Core.Serialization.ObjectSerializer" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
@@ -177,7 +232,8 @@
              when deserializing the data.</param>
         <param name="cancellationToken">The <see cref="T:System.Threading.CancellationToken" /> to use during deserialization.</param>
         <summary>
-             Converts the BinaryData to the specified type.
+             Converts the BinaryData to the specified type using the
+             provided <see cref="T:Azure.Core.Serialization.ObjectSerializer" />.
              </summary>
         <returns>The data cast to the specified type. If the cast cannot
             be performed, an <see cref="T:System.InvalidCastException" /> will be
@@ -209,19 +265,22 @@
         <Parameter Name="obj" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="obj">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="obj">The BinaryData to compare.</param>
+        <summary>
+            Two BinaryData objects are equal if the memory regions point to the same array and have the same length.
+            The method does not check to see if the contents are equal.
+            </summary>
+        <returns>true if the current instance and other are equal; otherwise, false.</returns>
         <remarks>To be added.</remarks>
         <inheritdoc />
       </Docs>
     </Member>
-    <Member MemberName="FromSerializable&lt;T&gt;">
-      <MemberSignature Language="C#" Value="public static Azure.Core.BinaryData FromSerializable&lt;T&gt; (T data, Azure.Core.ObjectSerializer serializer, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype Azure.Core.BinaryData FromSerializable&lt;T&gt;(!!T data, class Azure.Core.ObjectSerializer serializer, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Core.BinaryData.FromSerializable``1(``0,Azure.Core.ObjectSerializer,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Shared Function FromSerializable(Of T) (data As T, serializer As ObjectSerializer, Optional cancellationToken As CancellationToken = Nothing) As BinaryData" />
-      <MemberSignature Language="F#" Value="static member FromSerializable : 'T * Azure.Core.ObjectSerializer * System.Threading.CancellationToken -&gt; Azure.Core.BinaryData" Usage="Azure.Core.BinaryData.FromSerializable (data, serializer, cancellationToken)" />
+    <Member MemberName="FromMemory">
+      <MemberSignature Language="C#" Value="public static Azure.Core.BinaryData FromMemory (ReadOnlyMemory&lt;byte&gt; data);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype Azure.Core.BinaryData FromMemory(valuetype System.ReadOnlyMemory`1&lt;unsigned int8&gt; data) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Core.BinaryData.FromMemory(System.ReadOnlyMemory{System.Byte})" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function FromMemory (data As ReadOnlyMemory(Of Byte)) As BinaryData" />
+      <MemberSignature Language="F#" Value="static member FromMemory : ReadOnlyMemory&lt;byte&gt; -&gt; Azure.Core.BinaryData" Usage="Azure.Core.BinaryData.FromMemory data" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Core.Experimental</AssemblyName>
@@ -230,59 +289,14 @@
       <ReturnValue>
         <ReturnType>Azure.Core.BinaryData</ReturnType>
       </ReturnValue>
-      <TypeParameters>
-        <TypeParameter Name="T" />
-      </TypeParameters>
       <Parameters>
-        <Parameter Name="data" Type="T" />
-        <Parameter Name="serializer" Type="Azure.Core.ObjectSerializer" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+        <Parameter Name="data" Type="System.ReadOnlyMemory&lt;System.Byte&gt;" />
       </Parameters>
       <Docs>
-        <typeparam name="T">The type of the data.</typeparam>
-        <param name="data">The data to use.</param>
-        <param name="serializer">The serializer to serialize
-            the data.</param>
-        <param name="cancellationToken">The <see cref="T:System.Threading.CancellationToken" /> to use during serialization.</param>
+        <param name="data" />
         <summary>
-            Creates a BinaryData instance from the specified data using
-            the specified type.
-            </summary>
-        <returns>A <see cref="T:Azure.Core.BinaryData" /> instance.</returns>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="FromSerializableAsync&lt;T&gt;">
-      <MemberSignature Language="C#" Value="public static System.Threading.Tasks.Task&lt;Azure.Core.BinaryData&gt; FromSerializableAsync&lt;T&gt; (T data, Azure.Core.ObjectSerializer serializer, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Threading.Tasks.Task`1&lt;valuetype Azure.Core.BinaryData&gt; FromSerializableAsync&lt;T&gt;(!!T data, class Azure.Core.ObjectSerializer serializer, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Core.BinaryData.FromSerializableAsync``1(``0,Azure.Core.ObjectSerializer,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Shared Function FromSerializableAsync(Of T) (data As T, serializer As ObjectSerializer, Optional cancellationToken As CancellationToken = Nothing) As Task(Of BinaryData)" />
-      <MemberSignature Language="F#" Value="static member FromSerializableAsync : 'T * Azure.Core.ObjectSerializer * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Core.BinaryData&gt;" Usage="Azure.Core.BinaryData.FromSerializableAsync (data, serializer, cancellationToken)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Azure.Core.Experimental</AssemblyName>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Threading.Tasks.Task&lt;Azure.Core.BinaryData&gt;</ReturnType>
-      </ReturnValue>
-      <TypeParameters>
-        <TypeParameter Name="T" />
-      </TypeParameters>
-      <Parameters>
-        <Parameter Name="data" Type="T" />
-        <Parameter Name="serializer" Type="Azure.Core.ObjectSerializer" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
-      </Parameters>
-      <Docs>
-        <typeparam name="T">The type of the data.</typeparam>
-        <param name="data">The data to use.</param>
-        <param name="serializer">The serializer to serialize
-            the data.</param>
-        <param name="cancellationToken">The <see cref="T:System.Threading.CancellationToken" /> to use during serialization.</param>
-        <summary>
-            Creates a BinaryData instance from the specified data using
-            the specified type.
+            Creates a binary data instance by wrapping the passed in
+            <see cref="T:System.ReadOnlyMemory`1" />.
             </summary>
         <returns>A <see cref="T:Azure.Core.BinaryData" /> instance.</returns>
         <remarks>To be added.</remarks>
@@ -395,6 +409,144 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
+    <Member MemberName="Serialize&lt;T&gt;">
+      <MemberSignature Language="C#" Value="public static Azure.Core.BinaryData Serialize&lt;T&gt; (T data, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype Azure.Core.BinaryData Serialize&lt;T&gt;(!!T data, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Core.BinaryData.Serialize``1(``0,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function Serialize(Of T) (data As T, Optional cancellationToken As CancellationToken = Nothing) As BinaryData" />
+      <MemberSignature Language="F#" Value="static member Serialize : 'T * System.Threading.CancellationToken -&gt; Azure.Core.BinaryData" Usage="Azure.Core.BinaryData.Serialize (data, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Core.Experimental</AssemblyName>
+        <AssemblyVersion>0.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Core.BinaryData</ReturnType>
+      </ReturnValue>
+      <TypeParameters>
+        <TypeParameter Name="T" />
+      </TypeParameters>
+      <Parameters>
+        <Parameter Name="data" Type="T" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <typeparam name="T">The type of the data.</typeparam>
+        <param name="data">The data to use.</param>
+        <param name="cancellationToken">The <see cref="T:System.Threading.CancellationToken" /> to use during serialization.</param>
+        <summary>
+            Creates a BinaryData instance from the specified data using
+            the <see cref="T:Azure.Core.Serialization.JsonObjectSerializer" />.
+            </summary>
+        <returns>A <see cref="T:Azure.Core.BinaryData" /> instance.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Serialize&lt;T&gt;">
+      <MemberSignature Language="C#" Value="public static Azure.Core.BinaryData Serialize&lt;T&gt; (T data, Azure.Core.Serialization.ObjectSerializer serializer, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype Azure.Core.BinaryData Serialize&lt;T&gt;(!!T data, class Azure.Core.Serialization.ObjectSerializer serializer, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Core.BinaryData.Serialize``1(``0,Azure.Core.Serialization.ObjectSerializer,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function Serialize(Of T) (data As T, serializer As ObjectSerializer, Optional cancellationToken As CancellationToken = Nothing) As BinaryData" />
+      <MemberSignature Language="F#" Value="static member Serialize : 'T * Azure.Core.Serialization.ObjectSerializer * System.Threading.CancellationToken -&gt; Azure.Core.BinaryData" Usage="Azure.Core.BinaryData.Serialize (data, serializer, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Core.Experimental</AssemblyName>
+        <AssemblyVersion>0.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Core.BinaryData</ReturnType>
+      </ReturnValue>
+      <TypeParameters>
+        <TypeParameter Name="T" />
+      </TypeParameters>
+      <Parameters>
+        <Parameter Name="data" Type="T" />
+        <Parameter Name="serializer" Type="Azure.Core.Serialization.ObjectSerializer" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <typeparam name="T">The type of the data.</typeparam>
+        <param name="data">The data to use.</param>
+        <param name="serializer">The serializer to serialize
+            the data.</param>
+        <param name="cancellationToken">The <see cref="T:System.Threading.CancellationToken" /> to use during serialization.</param>
+        <summary>
+            Creates a BinaryData instance from the specified data using
+            the provided <see cref="T:Azure.Core.Serialization.ObjectSerializer" />.
+            </summary>
+        <returns>A <see cref="T:Azure.Core.BinaryData" /> instance.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SerializeAsync&lt;T&gt;">
+      <MemberSignature Language="C#" Value="public static System.Threading.Tasks.Task&lt;Azure.Core.BinaryData&gt; SerializeAsync&lt;T&gt; (T data, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Threading.Tasks.Task`1&lt;valuetype Azure.Core.BinaryData&gt; SerializeAsync&lt;T&gt;(!!T data, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Core.BinaryData.SerializeAsync``1(``0,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function SerializeAsync(Of T) (data As T, Optional cancellationToken As CancellationToken = Nothing) As Task(Of BinaryData)" />
+      <MemberSignature Language="F#" Value="static member SerializeAsync : 'T * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Core.BinaryData&gt;" Usage="Azure.Core.BinaryData.SerializeAsync (data, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Core.Experimental</AssemblyName>
+        <AssemblyVersion>0.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Azure.Core.BinaryData&gt;</ReturnType>
+      </ReturnValue>
+      <TypeParameters>
+        <TypeParameter Name="T" />
+      </TypeParameters>
+      <Parameters>
+        <Parameter Name="data" Type="T" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <typeparam name="T">The type of the data.</typeparam>
+        <param name="data">The data to use.</param>
+        <param name="cancellationToken">The <see cref="T:System.Threading.CancellationToken" /> to use during serialization.</param>
+        <summary>
+            Creates a BinaryData instance from the specified data
+            using the <see cref="T:Azure.Core.Serialization.JsonObjectSerializer" />.
+            </summary>
+        <returns>A <see cref="T:Azure.Core.BinaryData" /> instance.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SerializeAsync&lt;T&gt;">
+      <MemberSignature Language="C#" Value="public static System.Threading.Tasks.Task&lt;Azure.Core.BinaryData&gt; SerializeAsync&lt;T&gt; (T data, Azure.Core.Serialization.ObjectSerializer serializer, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Threading.Tasks.Task`1&lt;valuetype Azure.Core.BinaryData&gt; SerializeAsync&lt;T&gt;(!!T data, class Azure.Core.Serialization.ObjectSerializer serializer, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Core.BinaryData.SerializeAsync``1(``0,Azure.Core.Serialization.ObjectSerializer,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function SerializeAsync(Of T) (data As T, serializer As ObjectSerializer, Optional cancellationToken As CancellationToken = Nothing) As Task(Of BinaryData)" />
+      <MemberSignature Language="F#" Value="static member SerializeAsync : 'T * Azure.Core.Serialization.ObjectSerializer * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Core.BinaryData&gt;" Usage="Azure.Core.BinaryData.SerializeAsync (data, serializer, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Core.Experimental</AssemblyName>
+        <AssemblyVersion>0.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Azure.Core.BinaryData&gt;</ReturnType>
+      </ReturnValue>
+      <TypeParameters>
+        <TypeParameter Name="T" />
+      </TypeParameters>
+      <Parameters>
+        <Parameter Name="data" Type="T" />
+        <Parameter Name="serializer" Type="Azure.Core.Serialization.ObjectSerializer" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <typeparam name="T">The type of the data.</typeparam>
+        <param name="data">The data to use.</param>
+        <param name="serializer">The serializer to serialize
+            the data.</param>
+        <param name="cancellationToken">The <see cref="T:System.Threading.CancellationToken" /> to use during serialization.</param>
+        <summary>
+            Creates a BinaryData instance from the specified data using
+            the provided <see cref="T:Azure.Core.Serialization.ObjectSerializer" />.
+            </summary>
+        <returns>A <see cref="T:Azure.Core.BinaryData" /> instance.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="ToStream">
       <MemberSignature Language="C#" Value="public System.IO.Stream ToStream ();" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.IO.Stream ToStream() cil managed" />
@@ -436,34 +588,6 @@
       <Docs>
         <summary>
             Converts the BinaryData to a string using UTF-8.
-            </summary>
-        <returns>The string representation of the data.</returns>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="ToString">
-      <MemberSignature Language="C#" Value="public string ToString (System.Text.Encoding encoding);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance string ToString(class System.Text.Encoding encoding) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Core.BinaryData.ToString(System.Text.Encoding)" />
-      <MemberSignature Language="VB.NET" Value="Public Function ToString (encoding As Encoding) As String" />
-      <MemberSignature Language="F#" Value="override this.ToString : System.Text.Encoding -&gt; string" Usage="binaryData.ToString encoding" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Azure.Core.Experimental</AssemblyName>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.String</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="encoding" Type="System.Text.Encoding" />
-      </Parameters>
-      <Docs>
-        <param name="encoding">The encoding to use when decoding
-            the bytes.</param>
-        <summary>
-            Converts the BinaryData to a string using the specified
-            encoding.
             </summary>
         <returns>The string representation of the data.</returns>
         <remarks>To be added.</remarks>
