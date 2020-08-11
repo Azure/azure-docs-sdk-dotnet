@@ -16,6 +16,7 @@
     <AssemblyVersion>3.9.1.0</AssemblyVersion>
     <AssemblyVersion>3.10.1.0</AssemblyVersion>
     <AssemblyVersion>3.11.0.0</AssemblyVersion>
+    <AssemblyVersion>3.12.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -60,10 +61,22 @@
                  status = "ToBeDone"
              };
             
+             ToDoActivity test4 = new ToDoActivity()
+             {
+                 type = activityType,
+                 id = "running",
+                 status = "ToBeDone"
+             };
+            
+             List<PatchOperation> patchOperations = new List<PatchOperation>();
+             patchOperations.Add(PatchOperation.CreateReplaceOperation("/status", "InProgress");
+             patchOperations.Add(PatchOperation.CreateAddOperation("/progress", 50);
+             
              using (TransactionalBatchResponse batchResponse = await container.CreateTransactionalBatch(new Cosmos.PartitionKey(activityType))
                  .CreateItem<ToDoActivity>(test1)
                  .ReplaceItem<ToDoActivity>(test2.id, test2)
                  .UpsertItem<ToDoActivity>(test3)
+                 .PatchItem(test4.id, patchOperations)
                  .DeleteItem("reading")
                  .CreateItemStream(streamPayload1)
                  .ReplaceItemStream("eating", streamPayload2)
@@ -123,6 +136,7 @@
         <AssemblyVersion>3.9.1.0</AssemblyVersion>
         <AssemblyVersion>3.10.1.0</AssemblyVersion>
         <AssemblyVersion>3.11.0.0</AssemblyVersion>
+        <AssemblyVersion>3.12.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -149,6 +163,7 @@
         <AssemblyVersion>3.9.1.0</AssemblyVersion>
         <AssemblyVersion>3.10.1.0</AssemblyVersion>
         <AssemblyVersion>3.11.0.0</AssemblyVersion>
+        <AssemblyVersion>3.12.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.TransactionalBatch</ReturnType>
@@ -190,6 +205,7 @@
         <AssemblyVersion>3.9.1.0</AssemblyVersion>
         <AssemblyVersion>3.10.1.0</AssemblyVersion>
         <AssemblyVersion>3.11.0.0</AssemblyVersion>
+        <AssemblyVersion>3.12.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.TransactionalBatch</ReturnType>
@@ -230,6 +246,7 @@
         <AssemblyVersion>3.9.1.0</AssemblyVersion>
         <AssemblyVersion>3.10.1.0</AssemblyVersion>
         <AssemblyVersion>3.11.0.0</AssemblyVersion>
+        <AssemblyVersion>3.12.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.TransactionalBatch</ReturnType>
@@ -267,6 +284,7 @@
         <AssemblyVersion>3.9.1.0</AssemblyVersion>
         <AssemblyVersion>3.10.1.0</AssemblyVersion>
         <AssemblyVersion>3.11.0.0</AssemblyVersion>
+        <AssemblyVersion>3.12.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.TransactionalBatchResponse&gt;</ReturnType>
@@ -275,6 +293,52 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
+        <param name="cancellationToken">(Optional) Cancellation token representing request cancellation.</param>
+        <summary>
+            Executes the transactional batch at the Azure Cosmos service as an asynchronous operation.
+            </summary>
+        <returns>An awaitable response which contains details of execution of the transactional batch.
+            <para>
+            If the transactional batch executes successfully, the <see cref="P:Microsoft.Azure.Cosmos.TransactionalBatchResponse.StatusCode" /> on the response returned
+            will be set to <see cref="F:System.Net.HttpStatusCode.OK" />.
+            </para><para>
+            If an operation within the transactional batch fails during execution, no changes from the batch will be committed
+            and the status of the failing operation is made available in the <see cref="P:Microsoft.Azure.Cosmos.TransactionalBatchResponse.StatusCode" />.
+            To get more details about the operation that failed, the response can be enumerated - this returns <see cref="T:Microsoft.Azure.Cosmos.TransactionalBatchOperationResult" />
+            instances corresponding to each operation in the transactional batch in the order they were added into the transactional batch.
+            For a result corresponding to an operation within the transactional batch, the <see cref="P:Microsoft.Azure.Cosmos.TransactionalBatchOperationResult.StatusCode" /> indicates
+            the status of the operation - if the operation was not executed or it was aborted due to the failure of another operation within the transactional batch,
+            the value of this field will be HTTP 424 (Failed Dependency); for the operation that caused the batch to abort, the value of this field will indicate
+            the cause of failure as a HTTP status code.
+            </para><para>
+            The <see cref="P:Microsoft.Azure.Cosmos.TransactionalBatchResponse.StatusCode" /> on the response returned may also have values such as HTTP 5xx in case of server errors and HTTP 429 (Too Many Requests).
+            </para></returns>
+        <remarks>
+            This API only throws on client side exceptions. This is to increase performance and prevent the overhead of throwing exceptions.
+            Use <see cref="P:Microsoft.Azure.Cosmos.TransactionalBatchResponse.IsSuccessStatusCode" /> on the response returned to ensure that the transactional batch succeeded.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ExecuteAsync">
+      <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.TransactionalBatchResponse&gt; ExecuteAsync (Microsoft.Azure.Cosmos.TransactionalBatchRequestOptions requestOptions, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Azure.Cosmos.TransactionalBatchResponse&gt; ExecuteAsync(class Microsoft.Azure.Cosmos.TransactionalBatchRequestOptions requestOptions, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Cosmos.TransactionalBatch.ExecuteAsync(Microsoft.Azure.Cosmos.TransactionalBatchRequestOptions,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride Function ExecuteAsync (requestOptions As TransactionalBatchRequestOptions, Optional cancellationToken As CancellationToken = Nothing) As Task(Of TransactionalBatchResponse)" />
+      <MemberSignature Language="F#" Value="abstract member ExecuteAsync : Microsoft.Azure.Cosmos.TransactionalBatchRequestOptions * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.TransactionalBatchResponse&gt;" Usage="transactionalBatch.ExecuteAsync (requestOptions, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
+        <AssemblyVersion>3.12.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.TransactionalBatchResponse&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="requestOptions" Type="Microsoft.Azure.Cosmos.TransactionalBatchRequestOptions" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="requestOptions">Options that apply specifically to batch request.</param>
         <param name="cancellationToken">(Optional) Cancellation token representing request cancellation.</param>
         <summary>
             Executes the transactional batch at the Azure Cosmos service as an asynchronous operation.
@@ -320,6 +384,7 @@
         <AssemblyVersion>3.9.1.0</AssemblyVersion>
         <AssemblyVersion>3.10.1.0</AssemblyVersion>
         <AssemblyVersion>3.11.0.0</AssemblyVersion>
+        <AssemblyVersion>3.12.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.TransactionalBatch</ReturnType>
@@ -357,6 +422,7 @@
         <AssemblyVersion>3.9.1.0</AssemblyVersion>
         <AssemblyVersion>3.10.1.0</AssemblyVersion>
         <AssemblyVersion>3.11.0.0</AssemblyVersion>
+        <AssemblyVersion>3.12.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.TransactionalBatch</ReturnType>
@@ -400,6 +466,7 @@
         <AssemblyVersion>3.9.1.0</AssemblyVersion>
         <AssemblyVersion>3.10.1.0</AssemblyVersion>
         <AssemblyVersion>3.11.0.0</AssemblyVersion>
+        <AssemblyVersion>3.12.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.TransactionalBatch</ReturnType>
@@ -442,6 +509,7 @@
         <AssemblyVersion>3.9.1.0</AssemblyVersion>
         <AssemblyVersion>3.10.1.0</AssemblyVersion>
         <AssemblyVersion>3.11.0.0</AssemblyVersion>
+        <AssemblyVersion>3.12.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.TransactionalBatch</ReturnType>
@@ -483,6 +551,7 @@
         <AssemblyVersion>3.9.1.0</AssemblyVersion>
         <AssemblyVersion>3.10.1.0</AssemblyVersion>
         <AssemblyVersion>3.11.0.0</AssemblyVersion>
+        <AssemblyVersion>3.12.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.TransactionalBatch</ReturnType>
