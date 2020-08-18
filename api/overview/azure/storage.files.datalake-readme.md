@@ -27,7 +27,7 @@ while making it faster to get up and running with batch, streaming, and interact
 
 ### Install the package
 
-Install the Azure Storage Files Data Lake client library for .NET - Version 12.3.0 
+Install the Azure Storage Files Data Lake client library for .NET
  with [NuGet][nuget]:
 
 ```Powershell
@@ -267,4 +267,3 @@ additional questions or comments.
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [coc_contact]: mailto:opencode@microsoft.com
 [samples]: https://github.com/Azure/azure-sdk-for-net/tree/67fd67e506ff153ad30f82d51d1db70baeca64f9/sdk/storage/Azure.Storage.Files.DataLake/samples
-
