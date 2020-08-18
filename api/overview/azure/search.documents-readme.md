@@ -3,7 +3,7 @@ title: Azure Cognitive Search client library for .NET
 keywords: Azure, .net, SDK, API, Azure.Search.Documents, search
 author: maggiepint
 ms.author: magpint
-ms.date: 08/11/2020
+ms.date: 08/18/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: .net
 ms.service: search
 ---
 
-# Azure Cognitive Search client library for .NET - Version 11.1.0 
+# Azure Cognitive Search client library for .NET - Version 11.1.1 
 
 
 [Azure Cognitive Search](https://docs.microsoft.com/azure/search/) is a
@@ -54,7 +54,7 @@ Use the Azure.Search.Documents client library to:
 
 ### Install the package
 
-Install the Azure Cognitive Search client library for .NET - Version 11.1.0 
+Install the Azure Cognitive Search client library for .NET - Version 11.1.1 
  with [NuGet][nuget]:
 
 ```Powershell
@@ -460,7 +460,7 @@ additional questions or comments.
 [azure_sub]: https://azure.microsoft.com/free/
 [RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/core/Azure.Core/src/RequestFailedException.cs
 [status_codes]: https://docs.microsoft.com/rest/api/searchservice/http-status-codes
-[samples]: https://github.com/Azure/azure-sdk-for-net/tree/035ff22811a72bdd193a034270247a64f8421c61/sdk/search/Azure.Search.Documents/samples
+[samples]: https://github.com/Azure/azure-sdk-for-net/tree/2730744112bbd1a12afbc77cfc7193fa74e1afcf/sdk/search/Azure.Search.Documents/samples
 [search_contrib]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/search/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
