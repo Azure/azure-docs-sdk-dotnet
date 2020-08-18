@@ -145,12 +145,12 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="MaxConcurrentCalls">
-      <MemberSignature Language="C#" Value="public int MaxConcurrentCalls { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance int32 MaxConcurrentCalls" />
-      <MemberSignature Language="DocId" Value="P:Azure.Messaging.ServiceBus.ServiceBusSessionProcessorOptions.MaxConcurrentCalls" />
-      <MemberSignature Language="VB.NET" Value="Public Property MaxConcurrentCalls As Integer" />
-      <MemberSignature Language="F#" Value="member this.MaxConcurrentCalls : int with get, set" Usage="Azure.Messaging.ServiceBus.ServiceBusSessionProcessorOptions.MaxConcurrentCalls" />
+    <Member MemberName="MaxConcurrentCallsPerSession">
+      <MemberSignature Language="C#" Value="public int MaxConcurrentCallsPerSession { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 MaxConcurrentCallsPerSession" />
+      <MemberSignature Language="DocId" Value="P:Azure.Messaging.ServiceBus.ServiceBusSessionProcessorOptions.MaxConcurrentCallsPerSession" />
+      <MemberSignature Language="VB.NET" Value="Public Property MaxConcurrentCallsPerSession As Integer" />
+      <MemberSignature Language="F#" Value="member this.MaxConcurrentCallsPerSession : int with get, set" Usage="Azure.Messaging.ServiceBus.ServiceBusSessionProcessorOptions.MaxConcurrentCallsPerSession" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Messaging.ServiceBus</AssemblyName>
@@ -160,8 +160,31 @@
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the maximum number of concurrent calls to the callback the processor should initiate. The default value is 8.</summary>
-        <value>The maximum number of concurrent calls to the callback.</value>
+        <summary>Gets or sets the maximum number of calls to the callback the processor should initiate per session.
+            Thus the total number of callbacks will be equal to MaxConcurrentSessions * MaxConcurrentCallsPerSession.
+            The default value is 1.</summary>
+        <value>The maximum number of concurrent calls to the callback for each session that is being processed.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MaxConcurrentSessions">
+      <MemberSignature Language="C#" Value="public int MaxConcurrentSessions { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 MaxConcurrentSessions" />
+      <MemberSignature Language="DocId" Value="P:Azure.Messaging.ServiceBus.ServiceBusSessionProcessorOptions.MaxConcurrentSessions" />
+      <MemberSignature Language="VB.NET" Value="Public Property MaxConcurrentSessions As Integer" />
+      <MemberSignature Language="F#" Value="member this.MaxConcurrentSessions : int with get, set" Usage="Azure.Messaging.ServiceBus.ServiceBusSessionProcessorOptions.MaxConcurrentSessions" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Messaging.ServiceBus</AssemblyName>
+        <AssemblyVersion>7.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the maximum number of sessions that can be processed concurrently by the processor.
+            The default value is 8.</summary>
+        <value>The maximum number of concurrent sessions to process.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -181,7 +204,8 @@
       </ReturnValue>
       <Docs>
         <summary>
-              The maximum amount of time to wait for each Receive call using the processor's underlying receiver. If not specified, the <see cref="P:Azure.Messaging.ServiceBus.ServiceBusRetryOptions.TryTimeout" /> will be used.
+            The maximum amount of time to wait for each Receive call using the processor's underlying receiver.
+            If not specified, the <see cref="P:Azure.Messaging.ServiceBus.ServiceBusRetryOptions.TryTimeout" /> will be used.
             </summary>
         <value>To be added.</value>
         <remarks>When using a <see cref="T:Azure.Messaging.ServiceBus.ServiceBusSessionProcessor" />, if no message is returned for a call to Receive, a new session will be requested by the processor. Hence, if this value is set to be too low, it could cause new sessions to be requested more often than necessary.</remarks>

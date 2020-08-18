@@ -1,9 +1,9 @@
 ---
 title: Azure Storage Blobs client library for .NET
-keywords: Azure, .net, SDK, API, storage, Azure.Storage.Blobs
+keywords: Azure, .net, SDK, API, Azure.Storage.Blobs, storage
 author: maggiepint
 ms.author: magpint
-ms.date: 06/02/2020
+ms.date: 08/13/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,9 +11,10 @@ ms.devlang: .net
 ms.service: storage
 ---
 
-# Azure Storage Blobs client library for .NET - Version 12.4.4
+# Azure Storage Blobs client library for .NET - Version 12.5.0 
 
-> Server Version: 2019-07-07 and 2019-02-02
+
+> Server Version: 2019-12-12, 2019-07-07, and 2019-02-02
 
 Azure Blob storage is Microsoft's object storage solution for the cloud. Blob
 storage is optimized for storing massive amounts of unstructured data.
@@ -26,7 +27,8 @@ definition, such as text or binary data.
 
 ### Install the package
 
-Install the Azure Storage Blobs client library for .NET with [NuGet][nuget]:
+Install the Azure Storage Blobs client library for .NET - Version 12.5.0 
+ with [NuGet][nuget]:
 
 ```Powershell
 dotnet add package Azure.Storage.Blobs
@@ -62,7 +64,7 @@ Blob storage offers three types of resources:
 - A _container_ in the storage account used via `BlobContainerClient`
 - A _blob_ in a container used via `BlobClient`
 
-Learn more about options for authentication _(including Connection Strings, Shared Key, Shared Key Signatures, Active Directory, and anonymous public access)_ [in our samples.](https://github.com/azure/azure-sdk-for-net/tree/Azure.Storage.Blobs_12.4.4/sdk/storage/Azure.Storage.Blobs/samples/Sample02_Auth.cs)
+Learn more about options for authentication _(including Connection Strings, Shared Key, Shared Key Signatures, Active Directory, and anonymous public access)_ [in our samples.](https://github.com/Azure/azure-sdk-for-net/tree/67fd67e506ff153ad30f82d51d1db70baeca64f9/sdk/storage/Azure.Storage.Blobs/samples/Sample02_Auth.cs)
 
 ## Examples
 
@@ -185,8 +187,8 @@ catch (RequestFailedException ex)
 
 Get started with our [Blob samples][samples]:
 
-1. [Hello World](https://github.com/azure/azure-sdk-for-net/tree/Azure.Storage.Blobs_12.4.4/sdk/storage/Azure.Storage.Blobs/samples/Sample01a_HelloWorld.cs): Upload, download, and list blobs (or [asynchronously](https://github.com/azure/azure-sdk-for-net/tree/Azure.Storage.Blobs_12.4.4/sdk/storage/Azure.Storage.Blobs/samples/Sample01b_HelloWorldAsync.cs))
-2. [Auth](https://github.com/azure/azure-sdk-for-net/tree/Azure.Storage.Blobs_12.4.4/sdk/storage/Azure.Storage.Blobs/samples/Sample02_Auth.cs): Authenticate with connection strings, public access, shared keys, shared access signatures, and Azure Active Directory.
+1. [Hello World](https://github.com/Azure/azure-sdk-for-net/tree/67fd67e506ff153ad30f82d51d1db70baeca64f9/sdk/storage/Azure.Storage.Blobs/samples/Sample01a_HelloWorld.cs): Upload, download, and list blobs (or [asynchronously](https://github.com/Azure/azure-sdk-for-net/tree/67fd67e506ff153ad30f82d51d1db70baeca64f9/sdk/storage/Azure.Storage.Blobs/samples/Sample01b_HelloWorldAsync.cs))
+2. [Auth](https://github.com/Azure/azure-sdk-for-net/tree/67fd67e506ff153ad30f82d51d1db70baeca64f9/sdk/storage/Azure.Storage.Blobs/samples/Sample02_Auth.cs): Authenticate with connection strings, public access, shared keys, shared access signatures, and Azure Active Directory.
 
 ## Contributing
 
@@ -223,9 +225,10 @@ additional questions or comments.
 [storage_ad_sample]: samples/Sample02c_Auth_ActiveDirectory.cs
 [RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/core/Azure.Core/src/RequestFailedException.cs
 [error_codes]: https://docs.microsoft.com/rest/api/storageservices/blob-service-error-codes
-[samples]: https://github.com/azure/azure-sdk-for-net/tree/Azure.Storage.Blobs_12.4.4/sdk/storage/Azure.Storage.Blobs/samples
-[storage_contrib]: https://github.com/azure/azure-sdk-for-net/tree/Azure.Storage.Blobs_12.4.4/sdk/storage/CONTRIBUTING.md
+[samples]: https://github.com/Azure/azure-sdk-for-net/tree/67fd67e506ff153ad30f82d51d1db70baeca64f9/sdk/storage/Azure.Storage.Blobs/samples
+[storage_contrib]: https://github.com/Azure/azure-sdk-for-net/tree/67fd67e506ff153ad30f82d51d1db70baeca64f9/sdk/storage/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [coc_contact]: mailto:opencode@microsoft.com
+
