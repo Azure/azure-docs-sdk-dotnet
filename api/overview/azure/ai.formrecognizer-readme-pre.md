@@ -3,7 +3,7 @@ title: Azure Cognitive Services Form Recognizer client library for .NET
 keywords: Azure, .net, SDK, API, Azure.AI.FormRecognizer, formrecognizer
 author: maggiepint
 ms.author: magpint
-ms.date: 08/12/2020
+ms.date: 08/18/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: .net
 ms.service: formrecognizer
 ---
 
-# Azure Cognitive Services Form Recognizer client library for .NET - Version 3.0.0-preview.1 
+# Azure Cognitive Services Form Recognizer client library for .NET - Version 3.0.0-preview.2 
 
 Azure Cognitive Services Form Recognizer is a cloud service that uses machine learning to recognize form fields, text, and tables in form documents.  It includes the following capabilities:
 

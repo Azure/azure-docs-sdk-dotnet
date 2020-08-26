@@ -3,7 +3,7 @@ title: Azure Event Hubs Event Processor client library for .NET
 keywords: Azure, .net, SDK, API, Azure.Messaging.EventHubs.Processor, eventhubs
 author: maggiepint
 ms.author: magpint
-ms.date: 08/10/2020
+ms.date: 08/18/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: .net
 ms.service: eventhubs
 ---
 
-# Azure Event Hubs Event Processor client library for .NET - Version 5.2.0-preview.2 
+# Azure Event Hubs Event Processor client library for .NET - Version 5.2.0-preview.3 
 
 
 Azure Event Hubs is a highly scalable publish-subscribe service that can ingest millions of events per second and stream them to multiple consumers. This lets you process and analyze the massive amounts of data produced by your connected devices and applications. Once Event Hubs has collected the data, you can retrieve, transform and store it by using any real-time analytics provider or with batching/storage adapters.  If you would like to know more about Azure Event Hubs, you may wish to review: [What is Event Hubs](https://docs.microsoft.com/azure/event-hubs/event-hubs-about)?
@@ -24,7 +24,7 @@ The Event Processor client library is a companion to the Azure Event Hubs client
 
 - Managing checkpoints and state for processing in a durable manner using Azure Storage blobs as the underlying data store.
 
-[Source code](https://github.com/Azure/azure-sdk-for-net/tree/d52798c45f0b69b8a3adc77a67432c76ed9ce067/sdk/eventhub/Azure.Messaging.EventHubs.Processor) | [Package (NuGet)](https://www.nuget.org/packages/Azure.Messaging.EventHubs.Processor/) | [API reference documentation](https://aka.ms/azsdk-dotnet-eventhubs-processor-docs) | [Product documentation](https://docs.microsoft.com/azure/event-hubs/)
+[Source code](https://github.com/Azure/azure-sdk-for-net/tree/ec8caf6bdd3af676b842238a8e6bcbb4df76d998/sdk/eventhub/Azure.Messaging.EventHubs.Processor) | [Package (NuGet)](https://www.nuget.org/packages/Azure.Messaging.EventHubs.Processor/) | [API reference documentation](https://aka.ms/azsdk-dotnet-eventhubs-processor-docs) | [Product documentation](https://docs.microsoft.com/azure/event-hubs/)
 
 ## Getting started
 
@@ -48,7 +48,7 @@ To quickly create the needed resources in Azure and to receive connection string
 
 ### Install the package
 
-Install the Azure Event Hubs Event Processor client library for .NET - Version 5.2.0-preview.2 
+Install the Azure Event Hubs Event Processor client library for .NET - Version 5.2.0-preview.3 
  using [NuGet](https://www.nuget.org/):
 
 ```PowerShell
@@ -230,7 +230,7 @@ The Event Processor client makes every attempt to be resilient in the face of ex
 
 In order to allow developers the opportunity to inspect and react to exceptions that occur within the Event Processor client operations, they are surfaced via the `ProcessError` event.  The arguments for this event offer details about the exception and the context in which it was observed.  Developers may perform normal operations on the Event Processor client from within this event handler, such as stopping and/or restarting it in response to errors, but may not otherwise influence the processor's exception behavior.  
 
-For a basic example of implementing the error handler, please see the sample: [Manage the Event Processor when an error is encountered](https://github.com/Azure/azure-sdk-for-net/tree/d52798c45f0b69b8a3adc77a67432c76ed9ce067/sdk/eventhub/Azure.Messaging.EventHubs.Processor/samples/Sample07_RestartProcessingOnError.cs).
+For a basic example of implementing the error handler, please see the sample: [Manage the Event Processor when an error is encountered](https://github.com/Azure/azure-sdk-for-net/tree/ec8caf6bdd3af676b842238a8e6bcbb4df76d998/sdk/eventhub/Azure.Messaging.EventHubs.Processor/samples/Sample07_RestartProcessingOnError.cs).
 
 ### Exceptions in event handlers
 
@@ -244,7 +244,7 @@ For detailed information about exceptions that may occur, please refer to the Ev
 
 ## Next steps
 
-Beyond the scenarios discussed, the Azure Event Hubs Processor library offers support for additional scenarios to help take advantage of the full feature set of the `EventProcessorClient`.  In order to help explore some of these scenarios, the Event Hubs Processor client library offers a project of samples to serve as an illustration for common scenarios.  Please see the samples [README](https://github.com/Azure/azure-sdk-for-net/tree/d52798c45f0b69b8a3adc77a67432c76ed9ce067/sdk/eventhub/Azure.Messaging.EventHubs.Processor/samples/README.md) for details.
+Beyond the scenarios discussed, the Azure Event Hubs Processor library offers support for additional scenarios to help take advantage of the full feature set of the `EventProcessorClient`.  In order to help explore some of these scenarios, the Event Hubs Processor client library offers a project of samples to serve as an illustration for common scenarios.  Please see the samples [README](https://github.com/Azure/azure-sdk-for-net/tree/ec8caf6bdd3af676b842238a8e6bcbb4df76d998/sdk/eventhub/Azure.Messaging.EventHubs.Processor/samples/README.md) for details.
 
 ## Contributing  
 
@@ -254,7 +254,7 @@ When you submit a pull request, a CLA-bot will automatically determine whether y
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
-Please see our [contributing guide](https://github.com/Azure/azure-sdk-for-net/tree/d52798c45f0b69b8a3adc77a67432c76ed9ce067/sdk/eventhub/Azure.Messaging.EventHubs/CONTRIBUTING.md) for more information.
+Please see our [contributing guide](https://github.com/Azure/azure-sdk-for-net/tree/ec8caf6bdd3af676b842238a8e6bcbb4df76d998/sdk/eventhub/Azure.Messaging.EventHubs/CONTRIBUTING.md) for more information.
   
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Feventhub%2FAzure.Messaging.EventHubs.Processor%2FREADME.png)
 

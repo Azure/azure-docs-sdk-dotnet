@@ -1,9 +1,9 @@
 ---
 title: Azure Storage Files Data Lake client library for .NET
-keywords: Azure, .net, SDK, API, storage, Azure.Storage.Files.DataLake
+keywords: Azure, .net, SDK, API, Azure.Storage.Files.DataLake, storage
 author: maggiepint
 ms.author: magpint
-ms.date: 06/02/2020
+ms.date: 08/18/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,9 +11,10 @@ ms.devlang: .net
 ms.service: storage
 ---
 
-# Azure Storage Files Data Lake client library for .NET - Version 12.2.2
+# Azure Storage Files Data Lake client library for .NET - Version 12.3.1 
 
-> Server Version: 2019-07-07 and 2019-02-02
+
+> Server Version: 2019-12-12, 2019-07-07, and 2019-02-02
 
 Azure Data Lake includes all the capabilities required to make it easy for developers, data scientists, 
 and analysts to store data of any size, shape, and speed, and do all types of processing and analytics 
@@ -26,7 +27,8 @@ while making it faster to get up and running with batch, streaming, and interact
 
 ### Install the package
 
-Install the Azure Storage Files Data Lake client library for .NET with [NuGet][nuget]:
+Install the Azure Storage Files Data Lake client library for .NET - Version 12.3.1 
+ with [NuGet][nuget]:
 
 ```Powershell
 dotnet add package Azure.Storage.Files.DataLake --version 12.0.0-preview.9
@@ -70,7 +72,7 @@ Data Lake Storage Gen2 offers two types of resources:
 - The _filesystem_ used via 'DataLakeFileSystemClient'
 - The _path_ used via 'DataLakeFileClient' or 'DataLakeDirectoryClient'
 
-|ADLS Gen2                  | Blob       |
+|ADLS Gen2 	                | Blob       |
 | --------------------------| ---------- |
 |Filesystem                 | Container  | 
 |Path (File or Directory)   | Blob       |
@@ -223,8 +225,8 @@ helpful [`ErrorCode`s][error_codes].  Many of these errors are recoverable.
 
 Get started with our [DataLake samples][samples]:
 
-1. [Hello World](https://github.com/azure/azure-sdk-for-net/tree/Azure.Storage.Files.DataLake_12.2.2/sdk/storage/Azure.Storage.Files.DataLake/samples/Sample01a_HelloWorld.cs): Append, Read, and List DataLake Files (or [asynchronously](https://github.com/azure/azure-sdk-for-net/tree/Azure.Storage.Files.DataLake_12.2.2/sdk/storage/Azure.Storage.Files.DataLake/samples/Sample01b_HelloWorldAsync.cs))
-2. [Auth](https://github.com/azure/azure-sdk-for-net/tree/Azure.Storage.Files.DataLake_12.2.2/sdk/storage/Azure.Storage.Files.DataLake/samples/Sample02_Auth.cs): Authenticate with public access, shared keys, shared access signatures, and Azure Active Directory.
+1. [Hello World](https://github.com/Azure/azure-sdk-for-net/tree/c846999666842c52ff8bb1b5d94d9437d146ee55/sdk/storage/Azure.Storage.Files.DataLake/samples/Sample01a_HelloWorld.cs): Append, Read, and List DataLake Files (or [asynchronously](https://github.com/Azure/azure-sdk-for-net/tree/c846999666842c52ff8bb1b5d94d9437d146ee55/sdk/storage/Azure.Storage.Files.DataLake/samples/Sample01b_HelloWorldAsync.cs))
+2. [Auth](https://github.com/Azure/azure-sdk-for-net/tree/c846999666842c52ff8bb1b5d94d9437d146ee55/sdk/storage/Azure.Storage.Files.DataLake/samples/Sample02_Auth.cs): Authenticate with public access, shared keys, shared access signatures, and Azure Active Directory.
 
 ## Contributing
 
@@ -259,9 +261,10 @@ additional questions or comments.
 [identity]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/identity/Azure.Identity/README.md
 [RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/core/Azure.Core/src/RequestFailedException.cs
 [error_codes]: https://docs.microsoft.com/en-us/rest/api/storageservices/blob-service-error-codes
-[storage_contrib]: https://github.com/azure/azure-sdk-for-net/tree/Azure.Storage.Files.DataLake_12.2.2/sdk/storage/CONTRIBUTING.md
+[storage_contrib]: https://github.com/Azure/azure-sdk-for-net/tree/c846999666842c52ff8bb1b5d94d9437d146ee55/sdk/storage/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [coc_contact]: mailto:opencode@microsoft.com
-[samples]: https://github.com/azure/azure-sdk-for-net/tree/Azure.Storage.Files.DataLake_12.2.2/sdk/storage/Azure.Storage.Files.DataLake/samples
+[samples]: https://github.com/Azure/azure-sdk-for-net/tree/c846999666842c52ff8bb1b5d94d9437d146ee55/sdk/storage/Azure.Storage.Files.DataLake/samples
+
