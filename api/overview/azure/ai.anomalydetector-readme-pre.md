@@ -1,6 +1,6 @@
 ---
 title: Azure Cognitive Services Anomaly Detector client library for .NET
-keywords: Azure, .net, SDK, API, Azure.AI.AnomalyDetector, 
+keywords: Azure, .net, SDK, API, Azure.AI.AnomalyDetector, anomalydetector
 author: maggiepint
 ms.author: magpint
 ms.date: 09/03/2020
@@ -8,7 +8,7 @@ ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: .net
-ms.service: 
+ms.service: anomalydetector
 ---
 
 # Azure Cognitive Services Anomaly Detector client library for .NET - Version 3.0.0-preview.2 
@@ -49,7 +49,7 @@ az cognitiveservices account keys list --resource-group <your-resource-group-nam
 #### Create AnomalyDetectorClient with AzureKeyCredential
 Once you have the value for the API key, create an `AzureKeyCredential`.  With the endpoint and key credential, you can create the [`AnomalyDetectorClient`][anomaly_detector_client_class]:
 
-```
+```C#
 string endpoint = "<endpoint>";
 string apiKey = "<apiKey>";
 var credential = new AzureKeyCredential(apiKey);
@@ -70,7 +70,7 @@ You will also need to [register a new AAD application][register_aad_app] and [gr
 
 Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_CLIENT_SECRET.
 
-```
+```C#
 string endpoint = "<endpoint>";
 var client = new AnomalyDetectorClient(new Uri(endpoint), new DefaultAzureCredential());
 ```
