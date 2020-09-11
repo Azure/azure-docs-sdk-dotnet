@@ -17,6 +17,7 @@
     <AssemblyVersion>0.2.3.0</AssemblyVersion>
     <AssemblyVersion>0.3.0.0</AssemblyVersion>
     <AssemblyVersion>0.3.1.0</AssemblyVersion>
+    <AssemblyVersion>0.4.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Interfaces />
   <Docs>
@@ -37,6 +38,7 @@
         <AssemblyName>Microsoft.Identity.Web</AssemblyName>
         <AssemblyVersion>0.3.0.0</AssemblyVersion>
         <AssemblyVersion>0.3.1.0</AssemblyVersion>
+        <AssemblyVersion>0.4.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.String&gt;</ReturnType>
@@ -75,6 +77,7 @@
         <AssemblyVersion>0.2.3.0</AssemblyVersion>
         <AssemblyVersion>0.3.0.0</AssemblyVersion>
         <AssemblyVersion>0.3.1.0</AssemblyVersion>
+        <AssemblyVersion>0.4.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.String&gt;</ReturnType>
@@ -94,11 +97,48 @@
             user (in a web app), or the user for which the token was received (in a web API)
             cases where a given account is guest in other tenants, and you want to acquire tokens for a specific tenant, like where the user is a guest in.</param>
         <summary>
-            Typically used from an ASP.NET Core Web App or Web API controller, this method gets an access token
+            Typically used from an ASP.NET Core web app or web API controller, this method gets an access token
             for a downstream API on behalf of the user account which claims are provided in the <see cref="P:Microsoft.AspNetCore.Http.HttpContext.User" />
             member of the controller's <see cref="T:Microsoft.AspNetCore.Http.HttpContext" /> parameter.
             </summary>
         <returns>An access token to call on behalf of the user, the downstream API characterized by its scopes.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetAuthenticationResultForUserAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt;? GetAuthenticationResultForUserAsync (System.Collections.Generic.IEnumerable&lt;string&gt;? scopes, string tenantId = default, string userFlow = default, System.Security.Claims.ClaimsPrincipal user = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Identity.Client.AuthenticationResult&gt; GetAuthenticationResultForUserAsync(class System.Collections.Generic.IEnumerable`1&lt;string&gt; scopes, string tenantId, string userFlow, class System.Security.Claims.ClaimsPrincipal user) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Identity.Web.ITokenAcquisition.GetAuthenticationResultForUserAsync(System.Collections.Generic.IEnumerable{System.String},System.String,System.String,System.Security.Claims.ClaimsPrincipal)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetAuthenticationResultForUserAsync (scopes As IEnumerable(Of String), Optional tenantId As String = Nothing, Optional userFlow As String = Nothing, Optional user As ClaimsPrincipal = Nothing) As Task(Of AuthenticationResult)" />
+      <MemberSignature Language="F#" Value="abstract member GetAuthenticationResultForUserAsync : seq&lt;string&gt; * string * string * System.Security.Claims.ClaimsPrincipal -&gt; System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt;" Usage="iTokenAcquisition.GetAuthenticationResultForUserAsync (scopes, tenantId, userFlow, user)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Identity.Web</AssemblyName>
+        <AssemblyVersion>0.4.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Identity.Client.AuthenticationResult&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="scopes" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" />
+        <Parameter Name="tenantId" Type="System.String" />
+        <Parameter Name="userFlow" Type="System.String" />
+        <Parameter Name="user" Type="System.Security.Claims.ClaimsPrincipal" />
+      </Parameters>
+      <Docs>
+        <param name="scopes">Scopes to request for the downstream API to call.</param>
+        <param name="tenantId">Enables to override the tenant/account for the same identity. This is useful in the
+            cases where a given account is a guest in other tenants, and you want to acquire tokens for a specific tenant.</param>
+        <param name="userFlow">Azure AD B2C UserFlow to target.</param>
+        <param name="user">Optional claims principal representing the user. If not provided, will use the signed-in
+            user (in a web app), or the user for which the token was received (in a web API)
+            cases where a given account is a guest in other tenants, and you want to acquire tokens for a specific tenant, like where the user is a guest in.</param>
+        <summary>
+            Typically used from an ASP.NET Core web app or web API controller, this method gets an access token
+            for a downstream API on behalf of the user account which claims are provided in the <see cref="P:Microsoft.AspNetCore.Http.HttpContext.User" />
+            member of the controller's <see cref="T:Microsoft.AspNetCore.Http.HttpContext" /> parameter.
+            </summary>
+        <returns>An <see cref="T:Microsoft.Identity.Client.AuthenticationResult" /> to call on behalf of the user, the downstream API characterized by its scopes.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -114,6 +154,7 @@
         <AssemblyVersion>0.2.3.0</AssemblyVersion>
         <AssemblyVersion>0.3.0.0</AssemblyVersion>
         <AssemblyVersion>0.3.1.0</AssemblyVersion>
+        <AssemblyVersion>0.4.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -129,7 +170,7 @@
           <see cref="T:Microsoft.Identity.Client.MsalUiRequiredException" /> triggering the challenge.</param>
         <param name="httpResponse">The <see cref="T:Microsoft.AspNetCore.Http.HttpResponse" /> to update.</param>
         <summary>
-            Used in Web APIs (which therefore cannot have an interaction with the user).
+            Used in web APIs (which therefore cannot have an interaction with the user).
             Replies to the client through the HttpResponse by sending a 403 (forbidden) and populating wwwAuthenticateHeaders so that
             the client can trigger an interaction with the user so the user can consent to more scopes.
             </summary>
