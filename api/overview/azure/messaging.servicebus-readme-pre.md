@@ -3,7 +3,7 @@ title: Azure Service Bus client library for .NET
 keywords: Azure, .net, SDK, API, Azure.Messaging.ServiceBus, servicebus
 author: maggiepint
 ms.author: magpint
-ms.date: 08/11/2020
+ms.date: 09/11/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: .net
 ms.service: servicebus
 ---
 
-# Azure Service Bus client library for .NET - Version 7.0.0-preview.5 
+# Azure Service Bus client library for .NET - Version 7.0.0-preview.7 
 
 
 Azure Service Bus allows you to build applications that take advantage of asynchronous messaging patterns using a highly-reliable service to broker messages between producers and consumers. Azure Service Bus provides flexible, brokered messaging between client and server, along with structured first-in, first-out (FIFO) messaging, and publish/subscribe capabilities with complex routing. If you would like to know more about Azure Service Bus, you may wish to review: [What is Azure Service Bus?](https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-messaging-overview)
@@ -26,7 +26,7 @@ Use the client library for Azure Service Bus to:
 
 - Implement complex workflows: message sessions support scenarios that require message ordering or message deferral.
 
-[Source code](https://github.com/Azure/azure-sdk-for-net/tree/011ec14e9eae8b64131e546add8d0e8dc8476de9/sdk/servicebus/Azure.Messaging.ServiceBus) | [Package (NuGet)](https://www.nuget.org/packages/Azure.Messaging.ServiceBus/) | [API reference documentation](https://azure.github.io/azure-sdk-for-net/servicebus.html) | [Product documentation](https://docs.microsoft.com/en-us/azure/service-bus/)
+[Source code](https://github.com/Azure/azure-sdk-for-net/tree/b9d47be4959701e45cc4e90a0d8c796002319a08/sdk/servicebus/Azure.Messaging.ServiceBus) | [Package (NuGet)](https://www.nuget.org/packages/Azure.Messaging.ServiceBus/) | [API reference documentation](https://azure.github.io/azure-sdk-for-net/servicebus.html) | [Product documentation](https://docs.microsoft.com/en-us/azure/service-bus/)
 
 ## Getting started
 
@@ -48,7 +48,7 @@ To quickly create the needed Service Bus resources in Azure and to receive a con
 
 ### Install the package
 
-Install the Azure Service Bus client library for .NET - Version 7.0.0-preview.5 
+Install the Azure Service Bus client library for .NET - Version 7.0.0-preview.7 
  with [NuGet](https://www.nuget.org/):
 
 ```PowerShell
@@ -112,7 +112,7 @@ For more concepts and deeper discussion, see: [Service Bus Advanced Features](ht
 * [Using the processor](#using-the-processor)
 * [Authenticating with Azure.Identity](#authenticating-with-azureidentity)
 * [Working with sessions](#working-with-sessions)
-* [More samples](https://github.com/Azure/azure-sdk-for-net/tree/011ec14e9eae8b64131e546add8d0e8dc8476de9/sdk/servicebus/Azure.Messaging.ServiceBus/samples/README.md)
+* [More samples](https://github.com/Azure/azure-sdk-for-net/tree/b9d47be4959701e45cc4e90a0d8c796002319a08/sdk/servicebus/Azure.Messaging.ServiceBus/samples/README.md)
 
 ### Send and receive a message
 
@@ -234,7 +234,10 @@ ServiceBusReceivedMessage receivedMessage = await receiver.ReceiveMessageAsync()
 await receiver.DeadLetterMessageAsync(receivedMessage);
 
 // receive the dead lettered message with receiver scoped to the dead letter queue.
-ServiceBusReceiver dlqReceiver = client.CreateDeadLetterReceiver(queueName);
+ServiceBusReceiver dlqReceiver = client.CreateReceiver(queueName, new ServiceBusReceiverOptions
+{
+    SubQueue = SubQueue.DeadLetter
+});
 ServiceBusReceivedMessage dlqMessage = await dlqReceiver.ReceiveMessageAsync();
 ```
 
@@ -312,7 +315,7 @@ await processor.StopProcessingAsync();
 
 ### Authenticating with Azure.Identity
 
-The [Azure Identity library](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/identity/Azure.Identity/README.md) provides easy Azure Active Directory support for authentication.
+The [Azure Identity library](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Messaging.ServiceBus_7.0.0-preview.7/sdk/identity/Azure.Identity/README.md) provides easy Azure Active Directory support for authentication.
 
 ```C# Snippet:ServiceBusAuthAAD
 // Create a ServiceBusClient that will authenticate through Active Directory
@@ -324,8 +327,8 @@ ServiceBusClient client = new ServiceBusClient(fullyQualifiedNamespace, new Defa
 
 [Sessions](https://docs.microsoft.com/en-us/azure/service-bus-messaging/message-sessions) provide a mechanism for grouping related messages. In order to use sessions, you need to be working with a session-enabled entity.
 
-- [Sending and receiving session messages](https://github.com/Azure/azure-sdk-for-net/tree/011ec14e9eae8b64131e546add8d0e8dc8476de9/sdk/servicebus/Azure.Messaging.ServiceBus/samples/Sample03_SendReceiveSessions.md)
-- [Using the session processor](https://github.com/Azure/azure-sdk-for-net/tree/011ec14e9eae8b64131e546add8d0e8dc8476de9/sdk/servicebus/Azure.Messaging.ServiceBus/samples/Sample05_SessionProcessor.md)
+- [Sending and receiving session messages](https://github.com/Azure/azure-sdk-for-net/tree/b9d47be4959701e45cc4e90a0d8c796002319a08/sdk/servicebus/Azure.Messaging.ServiceBus/samples/Sample03_SendReceiveSessions.md)
+- [Using the session processor](https://github.com/Azure/azure-sdk-for-net/tree/b9d47be4959701e45cc4e90a0d8c796002319a08/sdk/servicebus/Azure.Messaging.ServiceBus/samples/Sample05_SessionProcessor.md)
 
 ## Troubleshooting
 
@@ -361,11 +364,11 @@ catch (ServiceBusException ex) when
 
 For detailed information about the failures represented by the `ServiceBusException` and other exceptions that may occur, please refer to [Service Bus messaging exceptions](https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-messaging-exceptions).
 
-You can also easily [enable console logging](https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/core/Azure.Core/samples/Diagnostics.md#logging) if you want to dig deeper into the requests you're making against the service.
+You can also easily [enable console logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.ServiceBus_7.0.0-preview.7/sdk/core/Azure.Core/samples/Diagnostics.md#logging) if you want to dig deeper into the requests you're making against the service.
 
 ## Next steps
 
-Beyond the introductory scenarios discussed, the Azure Service Bus client library offers support for additional scenarios to help take advantage of the full feature set of the Azure Service Bus service. In order to help explore some of these scenarios, the Service Bus client library offers a project of samples to serve as an illustration for common scenarios. Please see the [samples README](https://github.com/Azure/azure-sdk-for-net/tree/011ec14e9eae8b64131e546add8d0e8dc8476de9/sdk/servicebus/Azure.Messaging.ServiceBus/samples/README.md) for details.
+Beyond the introductory scenarios discussed, the Azure Service Bus client library offers support for additional scenarios to help take advantage of the full feature set of the Azure Service Bus service. In order to help explore some of these scenarios, the Service Bus client library offers a project of samples to serve as an illustration for common scenarios. Please see the [samples README](https://github.com/Azure/azure-sdk-for-net/tree/b9d47be4959701e45cc4e90a0d8c796002319a08/sdk/servicebus/Azure.Messaging.ServiceBus/samples/README.md) for details.
 
 ## Contributing
 
@@ -375,7 +378,7 @@ When you submit a pull request, a CLA-bot will automatically determine whether y
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
-Please see our [contributing guide](https://github.com/Azure/azure-sdk-for-net/tree/011ec14e9eae8b64131e546add8d0e8dc8476de9/sdk/servicebus/Azure.Messaging.ServiceBus/CONTRIBUTING.md) for more information.
+Please see our [contributing guide](https://github.com/Azure/azure-sdk-for-net/tree/b9d47be4959701e45cc4e90a0d8c796002319a08/sdk/servicebus/Azure.Messaging.ServiceBus/CONTRIBUTING.md) for more information.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fservicebus%2FAzure.Messaging.ServiceBus%2FREADME.png)
 
