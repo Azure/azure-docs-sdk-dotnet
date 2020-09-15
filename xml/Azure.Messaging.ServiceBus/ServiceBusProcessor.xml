@@ -1,9 +1,9 @@
 <Type Name="ServiceBusProcessor" FullName="Azure.Messaging.ServiceBus.ServiceBusProcessor">
-  <TypeSignature Language="C#" Value="public class ServiceBusProcessor" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit ServiceBusProcessor extends System.Object" />
+  <TypeSignature Language="C#" Value="public class ServiceBusProcessor : IAsyncDisposable" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit ServiceBusProcessor extends System.Object implements class System.IAsyncDisposable" />
   <TypeSignature Language="DocId" Value="T:Azure.Messaging.ServiceBus.ServiceBusProcessor" />
-  <TypeSignature Language="VB.NET" Value="Public Class ServiceBusProcessor" />
-  <TypeSignature Language="F#" Value="type ServiceBusProcessor = class" />
+  <TypeSignature Language="VB.NET" Value="Public Class ServiceBusProcessor&#xA;Implements IAsyncDisposable" />
+  <TypeSignature Language="F#" Value="type ServiceBusProcessor = class&#xA;    interface IAsyncDisposable" />
   <AssemblyInfo>
     <AssemblyName>Azure.Messaging.ServiceBus</AssemblyName>
     <AssemblyVersion>7.0.0.0</AssemblyVersion>
@@ -11,13 +11,17 @@
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
-  <Interfaces />
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.IAsyncDisposable</InterfaceName>
+    </Interface>
+  </Interfaces>
   <Docs>
     <summary>
-            The <see cref="T:Azure.Messaging.ServiceBus.ServiceBusProcessor" /> provides an abstraction around a set of <see cref="T:Azure.Messaging.ServiceBus.ServiceBusReceiver" /> that
-            allows using an event based model for processing received <see cref="T:Azure.Messaging.ServiceBus.ServiceBusReceivedMessage" />. It is constructed by calling
-            <see cref="M:Azure.Messaging.ServiceBus.ServiceBusClient.CreateProcessor(System.String,Azure.Messaging.ServiceBus.ServiceBusProcessorOptions)" />.
-            The event handler is specified with the <see cref="E:Azure.Messaging.ServiceBus.ServiceBusProcessor.ProcessMessageAsync" />
+            The <see cref="T:Azure.Messaging.ServiceBus.ServiceBusProcessor" /> provides an abstraction around a set of <see cref="T:Azure.Messaging.ServiceBus.ServiceBusReceiver" />
+            that allows using an event based model for processing received <see cref="T:Azure.Messaging.ServiceBus.ServiceBusReceivedMessage" />.
+            It is constructed by calling <see cref="M:Azure.Messaging.ServiceBus.ServiceBusClient.CreateProcessor(System.String,Azure.Messaging.ServiceBus.ServiceBusProcessorOptions)" />.
+            The message handler is specified with the <see cref="E:Azure.Messaging.ServiceBus.ServiceBusProcessor.ProcessMessageAsync" />
             property. The error handler is specified with the <see cref="E:Azure.Messaging.ServiceBus.ServiceBusProcessor.ProcessErrorAsync" /> property.
             To start processing after the handlers have been specified, call <see cref="M:Azure.Messaging.ServiceBus.ServiceBusProcessor.StartProcessingAsync(System.Threading.CancellationToken)" />.
             </summary>
@@ -57,10 +61,70 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets a value that indicates whether the <see cref="T:Azure.Messaging.ServiceBus.ServiceBusProcessor" /> should automatically
-             complete messages after the event handler has completed processing. If the event handler
-             triggers an exception, the message will not be automatically completed.</summary>
-        <value>true to complete the message processing automatically on successful execution of the operation; otherwise, false.</value>
+        <summary>
+             Gets a value that indicates whether the processor should automatically
+             complete messages after the message handler has completed processing. If the
+             message handler triggers an exception, the message will not be automatically
+             completed.
+             </summary>
+        <value>true to complete the message processing automatically on
+             successful execution of the operation; otherwise, false.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CloseAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task CloseAsync (Azure.Messaging.ServiceBus.LinkCloseMode closeMode = Azure.Messaging.ServiceBus.LinkCloseMode.Detach, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task CloseAsync(valuetype Azure.Messaging.ServiceBus.LinkCloseMode closeMode, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Messaging.ServiceBus.ServiceBusProcessor.CloseAsync(Azure.Messaging.ServiceBus.LinkCloseMode,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function CloseAsync (Optional closeMode As LinkCloseMode = Azure.Messaging.ServiceBus.LinkCloseMode.Detach, Optional cancellationToken As CancellationToken = Nothing) As Task" />
+      <MemberSignature Language="F#" Value="abstract member CloseAsync : Azure.Messaging.ServiceBus.LinkCloseMode * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&#xA;override this.CloseAsync : Azure.Messaging.ServiceBus.LinkCloseMode * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task" Usage="serviceBusProcessor.CloseAsync (closeMode, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Messaging.ServiceBus</AssemblyName>
+        <AssemblyVersion>7.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="closeMode" Type="Azure.Messaging.ServiceBus.LinkCloseMode" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="closeMode">The mode indicating what should happen to the link when closing.</param>
+        <param name="cancellationToken"> An optional<see cref="T:System.Threading.CancellationToken" /> instance to signal the
+            request to cancel the operation.</param>
+        <summary>
+              Performs the task needed to clean up resources used by the <see cref="T:Azure.Messaging.ServiceBus.ServiceBusProcessor" />.
+            </summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DisposeAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.ValueTask DisposeAsync ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance valuetype System.Threading.Tasks.ValueTask DisposeAsync() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Messaging.ServiceBus.ServiceBusProcessor.DisposeAsync" />
+      <MemberSignature Language="VB.NET" Value="Public Function DisposeAsync () As ValueTask" />
+      <MemberSignature Language="F#" Value="abstract member DisposeAsync : unit -&gt; System.Threading.Tasks.ValueTask&#xA;override this.DisposeAsync : unit -&gt; System.Threading.Tasks.ValueTask" Usage="serviceBusProcessor.DisposeAsync " />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:System.IAsyncDisposable.DisposeAsync</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Messaging.ServiceBus</AssemblyName>
+        <AssemblyVersion>7.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.ValueTask</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+              Performs the task needed to clean up resources used by the <see cref="T:Azure.Messaging.ServiceBus.ServiceBusProcessor" />.
+              This is equivalent to calling <see cref="M:Azure.Messaging.ServiceBus.ServiceBusProcessor.CloseAsync(Azure.Messaging.ServiceBus.LinkCloseMode,System.Threading.CancellationToken)" /> with the default <see cref="T:Azure.Messaging.ServiceBus.LinkCloseMode" />.
+            </summary>
+        <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -80,7 +144,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-            The path of the Service Bus entity that the processor is connected to, specific to the
+            Gets the path of the Service Bus entity that the processor is connected to, specific to the
             Service Bus namespace that contains it.
             </summary>
         <value>To be added.</value>
@@ -136,7 +200,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-            The fully qualified Service Bus namespace that the receiver is associated with.  This is likely
+            Gets the fully qualified Service Bus namespace that the receiver is associated with. This is likely
             to be similar to <c>{yournamespace}.servicebus.windows.net</c>.
             </summary>
         <value>To be added.</value>
@@ -172,6 +236,30 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
+    <Member MemberName="IsClosed">
+      <MemberSignature Language="C#" Value="public bool IsClosed { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsClosed" />
+      <MemberSignature Language="DocId" Value="P:Azure.Messaging.ServiceBus.ServiceBusProcessor.IsClosed" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsClosed As Boolean" />
+      <MemberSignature Language="F#" Value="member this.IsClosed : bool" Usage="Azure.Messaging.ServiceBus.ServiceBusProcessor.IsClosed" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Messaging.ServiceBus</AssemblyName>
+        <AssemblyVersion>7.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+               Indicates whether or not this <see cref="T:Azure.Messaging.ServiceBus.ServiceBusProcessor" /> has been closed.
+             </summary>
+        <value>
+          <c>true</c> if the processor is closed; otherwise, <c>false</c>.
+             </value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="IsProcessing">
       <MemberSignature Language="C#" Value="public bool IsProcessing { get; }" />
       <MemberSignature Language="ILAsm" Value=".property instance bool IsProcessing" />
@@ -188,10 +276,10 @@
       </ReturnValue>
       <Docs>
         <summary>
-             Indicates whether or not this <see cref="T:Azure.Messaging.ServiceBus.ServiceBusProcessor" /> is currently processing messages.
+             Gets whether or not this processor is currently processing messages.
              </summary>
         <value>
-          <c>true</c> if the client is processing messages; otherwise, <c>false</c>.
+          <c>true</c> if the processor is processing messages; otherwise, <c>false</c>.
              </value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -212,7 +300,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-             Gets or sets the maximum duration within which the lock will be renewed automatically. This
+             Gets the maximum duration within which the lock will be renewed automatically. This
              value should be greater than the longest message lock duration; for example, the LockDuration Property.
              </summary>
         <value>The maximum duration during which locks are automatically renewed.</value>
@@ -235,10 +323,10 @@
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the maximum number of concurrent calls to the
-             <see cref="E:Azure.Messaging.ServiceBus.ServiceBusProcessor.ProcessMessageAsync" /> event handler the processor should initiate.
+        <summary>Gets the maximum number of concurrent calls to the
+             <see cref="E:Azure.Messaging.ServiceBus.ServiceBusProcessor.ProcessMessageAsync" /> message handler the processor should initiate.
              </summary>
-        <value>The maximum number of concurrent calls to the event handler.</value>
+        <value>The maximum number of concurrent calls to the message handler.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -258,7 +346,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-            The maximum amount of time to wait for each Receive call using the processor's underlying receiver. If not specified, the <see cref="P:Azure.Messaging.ServiceBus.ServiceBusRetryOptions.TryTimeout" /> will be used.
+            Gets the maximum amount of time to wait for each Receive call using the processor's underlying receiver. If not specified, the <see cref="P:Azure.Messaging.ServiceBus.ServiceBusRetryOptions.TryTimeout" /> will be used.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -280,7 +368,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-            The number of messages that will be eagerly requested from Queues or Subscriptions
+            Gets the number of messages that will be eagerly requested from Queues or Subscriptions
             during processing. This is intended to help maximize throughput by allowing the
             processor to receive from a local cache rather than waiting on a service request.
             </summary>
@@ -304,9 +392,10 @@
       </ReturnValue>
       <Docs>
         <summary>
-             The event responsible for processing unhandled exceptions thrown while this processor is running.
-             Implementation is mandatory.
-             </summary>
+            The handler responsible for processing unhandled exceptions thrown while
+            this processor is running.
+            Implementation is mandatory.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -326,9 +415,10 @@
       </ReturnValue>
       <Docs>
         <summary>
-             The event responsible for processing messages received from the Queue or Subscription.
-             Implementation is mandatory.
-             </summary>
+            The handler responsible for processing messages received from the Queue
+            or Subscription.
+            Implementation is mandatory.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -348,7 +438,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-            The <see cref="P:Azure.Messaging.ServiceBus.ServiceBusProcessor.ReceiveMode" /> used to specify how messages are received. Defaults to PeekLock mode.
+            Gets the <see cref="P:Azure.Messaging.ServiceBus.ServiceBusProcessor.ReceiveMode" /> used to specify how messages are received. Defaults to PeekLock mode.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -372,10 +462,14 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> instance to signal the request to cancel the start operation.  This won't affect the <see cref="T:Azure.Messaging.ServiceBus.ServiceBusProcessor" /> once it starts running.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> instance to
+             signal the request to cancel the start operation.  This won't affect the
+             processor once it starts running.
+             </param>
         <summary>
-             Signals the <see cref="T:Azure.Messaging.ServiceBus.ServiceBusProcessor" /> to begin processing messages. Should this method be called while the processor
-             is running, no action is taken.
+             Signals the processor to begin processing messages. Should this method be
+             called while the processor is already running, an
+             <see cref="T:System.InvalidOperationException" /> is thrown.
              </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
@@ -399,10 +493,14 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> instance to signal the request to cancel the stop operation.  If the operation is successfully canceled, the <see cref="T:Azure.Messaging.ServiceBus.ServiceBusProcessor" /> will keep running.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> instance to
+             signal the request to cancel the stop operation. If the operation is successfully
+             canceled, the processor will keep running.</param>
         <summary>
-             Signals the <see cref="T:Azure.Messaging.ServiceBus.ServiceBusProcessor" /> to stop processing events. Should this method be called while the processor
-             is not running, no action is taken.
+             Signals the processor to stop processing messaging. Should this method be
+             called while the processor is not running, no action is taken. This method
+             will not close the underlying receivers, but will cause the receivers to stop
+             receiving. To close the underlying receivers, <see cref="M:Azure.Messaging.ServiceBus.ServiceBusProcessor.CloseAsync(Azure.Messaging.ServiceBus.LinkCloseMode,System.Threading.CancellationToken)" /> should be called.
              </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
