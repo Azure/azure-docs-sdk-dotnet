@@ -9,6 +9,7 @@
     <AssemblyVersion>5.0.1.0</AssemblyVersion>
     <AssemblyVersion>5.1.0.0</AssemblyVersion>
     <AssemblyVersion>5.2.0.0</AssemblyVersion>
+    <AssemblyVersion>5.3.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -33,6 +34,7 @@
         <AssemblyVersion>5.0.1.0</AssemblyVersion>
         <AssemblyVersion>5.1.0.0</AssemblyVersion>
         <AssemblyVersion>5.2.0.0</AssemblyVersion>
+        <AssemblyVersion>5.3.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -50,6 +52,7 @@
       <AssemblyInfo>
         <AssemblyName>Azure.Messaging.EventHubs</AssemblyName>
         <AssemblyVersion>5.2.0.0</AssemblyVersion>
+        <AssemblyVersion>5.3.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
@@ -92,6 +95,7 @@
         <AssemblyVersion>5.0.1.0</AssemblyVersion>
         <AssemblyVersion>5.1.0.0</AssemblyVersion>
         <AssemblyVersion>5.2.0.0</AssemblyVersion>
+        <AssemblyVersion>5.3.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -127,6 +131,7 @@
         <AssemblyVersion>5.0.1.0</AssemblyVersion>
         <AssemblyVersion>5.1.0.0</AssemblyVersion>
         <AssemblyVersion>5.2.0.0</AssemblyVersion>
+        <AssemblyVersion>5.3.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -158,6 +163,7 @@
         <AssemblyVersion>5.0.1.0</AssemblyVersion>
         <AssemblyVersion>5.1.0.0</AssemblyVersion>
         <AssemblyVersion>5.2.0.0</AssemblyVersion>
+        <AssemblyVersion>5.3.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Nullable&lt;System.TimeSpan&gt;</ReturnType>
@@ -189,6 +195,7 @@
         <AssemblyVersion>5.0.1.0</AssemblyVersion>
         <AssemblyVersion>5.1.0.0</AssemblyVersion>
         <AssemblyVersion>5.2.0.0</AssemblyVersion>
+        <AssemblyVersion>5.3.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Nullable&lt;System.Int64&gt;</ReturnType>
@@ -223,15 +230,16 @@
       <AssemblyInfo>
         <AssemblyName>Azure.Messaging.EventHubs</AssemblyName>
         <AssemblyVersion>5.2.0.0</AssemblyVersion>
+        <AssemblyVersion>5.3.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-               The number of events that will be eagerly requested from the Event Hubs service and staged locally without regard to
-               whether a reader is currently active, intended to help maximize throughput by buffering service operations rather than
-               readers needing to wait for service operations to complete.
+               The number of events that will be eagerly requested from the Event Hubs service and queued locally without regard to
+               whether a read operation is currently active, intended to help maximize throughput by allowing events to be read from
+               from a local cache rather than waiting on a service request.
              </summary>
         <value>
                The <see cref="P:Azure.Messaging.EventHubs.Consumer.ReadEventOptions.PrefetchCount" /> is a control that developers can use to help tune performance for the specific
@@ -254,6 +262,39 @@
              </remarks>
       </Docs>
     </Member>
+    <Member MemberName="PrefetchSizeInBytes">
+      <MemberSignature Language="C#" Value="public long? PrefetchSizeInBytes { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;int64&gt; PrefetchSizeInBytes" />
+      <MemberSignature Language="DocId" Value="P:Azure.Messaging.EventHubs.Consumer.ReadEventOptions.PrefetchSizeInBytes" />
+      <MemberSignature Language="VB.NET" Value="Public Property PrefetchSizeInBytes As Nullable(Of Long)" />
+      <MemberSignature Language="F#" Value="member this.PrefetchSizeInBytes : Nullable&lt;int64&gt; with get, set" Usage="Azure.Messaging.EventHubs.Consumer.ReadEventOptions.PrefetchSizeInBytes" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Messaging.EventHubs</AssemblyName>
+        <AssemblyVersion>5.3.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;System.Int64&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+               The desired number of bytes to attempt to eagerly request from the Event Hubs service and queued locally without regard to
+               whether a read operation is currently active, intended to help maximize throughput by allowing events to be read from
+               from a local cache rather than waiting on a service request.
+             </summary>
+        <value>
+          <para>When set to <c>null</c>, the option is considered disabled; otherwise, it will be considered enabled and take
+               precedence over any value specified for the <see cref="P:Azure.Messaging.EventHubs.Consumer.ReadEventOptions.PrefetchCount" />The <see cref="P:Azure.Messaging.EventHubs.Consumer.ReadEventOptions.PrefetchSizeInBytes" /> is an
+               advanced control that developers can use to help tune performance in some scenarios; it is recommended to prefer using
+               the <see cref="P:Azure.Messaging.EventHubs.Consumer.ReadEventOptions.PrefetchCount" /> over this option where possible for more accurate control and more predictable throughput.</para>
+          <para>This size should be considered a statement of intent rather than a guaranteed limit; the local cache may be larger or
+               smaller than the number of bytes specified, and will always contain at least one event when the <see cref="P:Azure.Messaging.EventHubs.Consumer.ReadEventOptions.PrefetchSizeInBytes" />
+               is specified.  A heuristic is used to predict the average event size to use for size calculations, which should be expected to fluctuate
+               as traffic passes through the system.  Consequently, the resulting resource use will fluctuate as well.</para>
+        </value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="ToString">
       <MemberSignature Language="C#" Value="public override string ToString ();" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string ToString() cil managed" />
@@ -266,6 +307,7 @@
         <AssemblyVersion>5.0.1.0</AssemblyVersion>
         <AssemblyVersion>5.1.0.0</AssemblyVersion>
         <AssemblyVersion>5.2.0.0</AssemblyVersion>
+        <AssemblyVersion>5.3.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -297,6 +339,7 @@
         <AssemblyVersion>5.0.1.0</AssemblyVersion>
         <AssemblyVersion>5.1.0.0</AssemblyVersion>
         <AssemblyVersion>5.2.0.0</AssemblyVersion>
+        <AssemblyVersion>5.3.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
