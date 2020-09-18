@@ -1,17 +1,17 @@
 ---
 title: Azure Synapse Analytics Access Control client library for .NET
-keywords: Azure, .net, SDK, API, Azure.Analytics.Synapse.AccessControl, 
+keywords: Azure, .net, SDK, API, Azure.Analytics.Synapse.AccessControl, synapse
 author: maggiepint
 ms.author: magpint
-ms.date: 06/10/2020
+ms.date: 09/01/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: .net
-ms.service: 
+ms.service: synapse
 ---
 
-# Azure Synapse Analytics Access Control client library for .NET - Version 1.0.0-preview.1 
+# Azure Synapse Analytics Access Control client library for .NET - Version 1.0.0-preview.2 
 
 
 This directory contains the open source subset of the .NET SDK. For documentation of the complete Azure SDK, please see the [Microsoft Azure .NET Developer Center](http://azure.microsoft.com/en-us/develop/net/).
@@ -27,7 +27,7 @@ The complete Microsoft Azure SDK can be downloaded from the [Microsoft Azure Dow
 For the best development experience, developers should use the official Microsoft NuGet packages for libraries. NuGet packages are regularly updated with new functionality and hotfixes.
 
 ### Install the package
-Install the Azure Synapse Analytics Access Control client library for .NET - Version 1.0.0-preview.1 
+Install the Azure Synapse Analytics Access Control client library for .NET - Version 1.0.0-preview.2 
  with [NuGet][nuget]:
 
 ```PowerShell
