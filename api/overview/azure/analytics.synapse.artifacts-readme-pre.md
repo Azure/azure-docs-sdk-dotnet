@@ -1,17 +1,17 @@
 ---
 title: Azure Synapse Analytics Artifacts client library for .NET
-keywords: Azure, .net, SDK, API, Azure.Analytics.Synapse.Artifacts, 
+keywords: Azure, .net, SDK, API, Azure.Analytics.Synapse.Artifacts, synapse
 author: maggiepint
 ms.author: magpint
-ms.date: 08/18/2020
+ms.date: 09/01/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: .net
-ms.service: 
+ms.service: synapse
 ---
 
-# Azure Synapse Analytics Artifacts client library for .NET - Version 1.0.0-preview.3 
+# Azure Synapse Analytics Artifacts client library for .NET - Version 1.0.0-preview.4 
 
 
 This directory contains the open source subset of the .NET SDK. For documentation of the complete Azure SDK, please see the [Microsoft Azure .NET Developer Center](http://azure.microsoft.com/en-us/develop/net/).
@@ -84,7 +84,8 @@ Notebook notebook = new Notebook(
     nbformatMinor: 2,
     new List<NotebookCell>()
 );
-var createdNotebook = notebookClient.StartCreateOrUpdateNotebook("MyNotebook", new NotebookResource(notebook));
+var operation = notebookClient.StartCreateOrUpdateNotebook("MyNotebook", new NotebookResource(notebook));
+NotebookResource notebookResource = operation.WaitForCompletionAsync().ConfigureAwait(true).GetAwaiter().GetResult();
 ```
 
 ### Retrieve a notebook
