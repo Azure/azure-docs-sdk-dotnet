@@ -3,7 +3,7 @@ title: Azure Storage Files Data Lake client library for .NET
 keywords: Azure, .net, SDK, API, Azure.Storage.Files.DataLake, storage
 author: maggiepint
 ms.author: magpint
-ms.date: 08/18/2020
+ms.date: 08/31/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: .net
 ms.service: storage
 ---
 
-# Azure Storage Files Data Lake client library for .NET - Version 12.3.1 
+# Azure Storage Files Data Lake client library for .NET - Version 12.4.0 
 
 
 > Server Version: 2019-12-12, 2019-07-07, and 2019-02-02
@@ -27,7 +27,7 @@ while making it faster to get up and running with batch, streaming, and interact
 
 ### Install the package
 
-Install the Azure Storage Files Data Lake client library for .NET - Version 12.3.1 
+Install the Azure Storage Files Data Lake client library for .NET - Version 12.4.0 
  with [NuGet][nuget]:
 
 ```Powershell
@@ -225,8 +225,8 @@ helpful [`ErrorCode`s][error_codes].  Many of these errors are recoverable.
 
 Get started with our [DataLake samples][samples]:
 
-1. [Hello World](https://github.com/Azure/azure-sdk-for-net/tree/c846999666842c52ff8bb1b5d94d9437d146ee55/sdk/storage/Azure.Storage.Files.DataLake/samples/Sample01a_HelloWorld.cs): Append, Read, and List DataLake Files (or [asynchronously](https://github.com/Azure/azure-sdk-for-net/tree/c846999666842c52ff8bb1b5d94d9437d146ee55/sdk/storage/Azure.Storage.Files.DataLake/samples/Sample01b_HelloWorldAsync.cs))
-2. [Auth](https://github.com/Azure/azure-sdk-for-net/tree/c846999666842c52ff8bb1b5d94d9437d146ee55/sdk/storage/Azure.Storage.Files.DataLake/samples/Sample02_Auth.cs): Authenticate with public access, shared keys, shared access signatures, and Azure Active Directory.
+1. [Hello World](https://github.com/Azure/azure-sdk-for-net/tree/49e6a8c584f6db5e75ee86f8b5a64d7729e62678/sdk/storage/Azure.Storage.Files.DataLake/samples/Sample01a_HelloWorld.cs): Append, Read, and List DataLake Files (or [asynchronously](https://github.com/Azure/azure-sdk-for-net/tree/49e6a8c584f6db5e75ee86f8b5a64d7729e62678/sdk/storage/Azure.Storage.Files.DataLake/samples/Sample01b_HelloWorldAsync.cs))
+2. [Auth](https://github.com/Azure/azure-sdk-for-net/tree/49e6a8c584f6db5e75ee86f8b5a64d7729e62678/sdk/storage/Azure.Storage.Files.DataLake/samples/Sample02_Auth.cs): Authenticate with public access, shared keys, shared access signatures, and Azure Active Directory.
 
 ## Contributing
 
@@ -261,10 +261,10 @@ additional questions or comments.
 [identity]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/identity/Azure.Identity/README.md
 [RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/core/Azure.Core/src/RequestFailedException.cs
 [error_codes]: https://docs.microsoft.com/en-us/rest/api/storageservices/blob-service-error-codes
-[storage_contrib]: https://github.com/Azure/azure-sdk-for-net/tree/c846999666842c52ff8bb1b5d94d9437d146ee55/sdk/storage/CONTRIBUTING.md
+[storage_contrib]: https://github.com/Azure/azure-sdk-for-net/tree/49e6a8c584f6db5e75ee86f8b5a64d7729e62678/sdk/storage/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [coc_contact]: mailto:opencode@microsoft.com
-[samples]: https://github.com/Azure/azure-sdk-for-net/tree/c846999666842c52ff8bb1b5d94d9437d146ee55/sdk/storage/Azure.Storage.Files.DataLake/samples
+[samples]: https://github.com/Azure/azure-sdk-for-net/tree/49e6a8c584f6db5e75ee86f8b5a64d7729e62678/sdk/storage/Azure.Storage.Files.DataLake/samples
 
