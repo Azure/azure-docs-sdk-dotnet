@@ -1,17 +1,17 @@
 ---
 title: Azure Synapse Spark client library for .NET
-keywords: Azure, .net, SDK, API, Azure.Analytics.Synapse.Spark, 
+keywords: Azure, .net, SDK, API, Azure.Analytics.Synapse.Spark, synapse
 author: maggiepint
 ms.author: magpint
-ms.date: 06/10/2020
+ms.date: 09/01/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: .net
-ms.service: 
+ms.service: synapse
 ---
 
-# Azure Synapse Spark client library for .NET - Version 1.0.0-preview.1 
+# Azure Synapse Spark client library for .NET - Version 1.0.0-preview.2 
 
 
 This directory contains the open source subset of the .NET SDK. For documentation of the complete Azure SDK, please see the [Microsoft Azure .NET Developer Center](http://azure.microsoft.com/en-us/develop/net/).
@@ -91,7 +91,7 @@ string file = string.Format("abfss://{0}@{1}.dfs.core.windows.net/samples/java/w
 SparkBatchJobOptions options = new SparkBatchJobOptions(name: name, file: file)
 {
     ClassName = "WordCount",
-    Arguments = new List<string>
+    Arguments =
     {
         string.Format("abfss://{0}@{1}.dfs.core.windows.net/samples/java/wordcount/shakespeare.txt", fileSystem, storageAccount),
         string.Format("abfss://{0}@{1}.dfs.core.windows.net/samples/java/wordcount/result/", fileSystem, storageAccount),
