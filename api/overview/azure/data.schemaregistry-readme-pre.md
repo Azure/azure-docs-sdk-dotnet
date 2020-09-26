@@ -1,17 +1,17 @@
 ---
 title: Azure Schema Registry client library for .NET
-keywords: Azure, .net, SDK, API, Azure.Data.SchemaRegistry, 
+keywords: Azure, .net, SDK, API, Azure.Data.SchemaRegistry, schemaregistry
 author: maggiepint
 ms.author: magpint
-ms.date: 09/09/2020
+ms.date: 09/23/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: .net
-ms.service: 
+ms.service: schemaregistry
 ---
 
-# Azure Schema Registry client library for .NET - Version 1.0.0-beta.1 
+# Azure Schema Registry client library for .NET - Version 1.0.0-beta.2 
 
 
 Azure Schema Registry is a schema repository service hosted by Azure Event Hubs, providing schema storage, versioning, and management. The registry is leveraged by serializers to reduce payload size while describing payload structure with schema identifiers rather than full schemas.
@@ -20,8 +20,7 @@ Azure Schema Registry is a schema repository service hosted by Azure Event Hubs,
 
 ### Install the package
 
-Install the Azure Schema Registry client library for .NET - Version 1.0.0-beta.1 
- with [NuGet][nuget]:
+Install the Azure Schema Registry client library for .NET with [NuGet][nuget]:
 
 ```bash
 dotnet add package Azure.Data.SchemaRegistry --version 1.0.0-beta.1
@@ -56,7 +55,7 @@ The simpliest way is to use the [Azure portal][azure_portal] and navigate to you
 
 Once you have the Azure resource credentials and the Event Hubs namespace hostname, you can create the [SchemaRegistryClient][schema_registry_client]. You'll also need the [Azure.Identity][azure_identity] package to create the credential.
 
-```C# Snippet:CreateSchemaRegistryClient
+```C# Snippet:SchemaRegistryCreateSchemaRegistryClient
 string endpoint = "<event_hubs_namespace_hostname>";
 var credentials = new ClientSecretCredential(
     "<tenant_id>",
@@ -92,7 +91,7 @@ The following shows examples of what is available through the SchemaRegistryClie
 
 Register a schema to be stored in the Azure Schema Registry.
 
-```C# Snippet:RegisterSchema
+```C# Snippet:SchemaRegistryRegisterSchema
 string schemaName = "<schema_name>";
 string groupName = "<schema_group_name>";
 SerializationType schemaType = SerializationType.Avro;
@@ -115,7 +114,7 @@ Response<SchemaProperties> schemaProperties = client.RegisterSchema(groupName, s
 
 Retrieve a previously registered schema ID from the Azure Schema Registry.
 
-```C# Snippet:RetrieveSchemaId
+```C# Snippet:SchemaRegistryRetrieveSchemaId
 string schemaName = "<schema_name>";
 string groupName = "<schema_group_name>";
 SerializationType schemaType = SerializationType.Avro;
@@ -139,7 +138,7 @@ string schemaId = schemaProperties.Value.Id;
 
 Retrieve a previously registered schema's content from the Azure Schema Registry.
 
-```C# Snippet:RetrieveSchema
+```C# Snippet:SchemaRegistryRetrieveSchema
 string schemaId = "<schema_id>";
 
 Response<SchemaProperties> schemaProperties = client.GetSchema(schemaId);
@@ -166,13 +165,13 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 
 <!-- LINKS -->
 [nuget]: https://www.nuget.org/
-[event_hubs_namespace]: https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-about
-[azure_powershell]: https://docs.microsoft.com/en-us/powershell/azure/
-[create_event_hubs_namespace]: https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-quickstart-powershell#create-an-event-hubs-namespace
-[quickstart_guide]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.0.0-beta.1/doc/mgmt_preview_quickstart.md
-[schema_registry_client]: https://github.com/Azure/azure-sdk-for-net/tree/8c509e0655eee4578207ef6f6fa227555f0eecc5/sdk/schemaregistry/Azure.Data.SchemaRegistry/src/SchemaRegistryClient.cs
+[event_hubs_namespace]: https://docs.microsoft.com/azure/event-hubs/event-hubs-about
+[azure_powershell]: https://docs.microsoft.com/powershell/azure/
+[create_event_hubs_namespace]: https://docs.microsoft.com/azure/event-hubs/event-hubs-quickstart-powershell#create-an-event-hubs-namespace
+[quickstart_guide]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.0.0-beta.2/doc/mgmt_preview_quickstart.md
+[schema_registry_client]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.0.0-beta.2/sdk/schemaregistry/Azure.Data.SchemaRegistry/src/SchemaRegistryClient.cs
 [azure_portal]: https://ms.portal.azure.com/
-[schema_properties]: https://github.com/Azure/azure-sdk-for-net/tree/8c509e0655eee4578207ef6f6fa227555f0eecc5/sdk/schemaregistry/Azure.Data.SchemaRegistry/src/SchemaProperties.cs
+[schema_properties]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.0.0-beta.2/sdk/schemaregistry/Azure.Data.SchemaRegistry/src/SchemaProperties.cs
 [azure_identity]: https://www.nuget.org/packages/Azure.Identity
 [cla]: https://cla.microsoft.com
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/

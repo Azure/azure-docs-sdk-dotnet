@@ -1,18 +1,17 @@
 ---
-title: Azure Compute Management client library for .NET
-keywords: Azure, .net, SDK, API, Azure.ResourceManager.Storage, 
+title: Azure Storage Management library for .NET
+keywords: Azure, .net, SDK, API, Azure.ResourceManager.Storage, storage
 author: maggiepint
 ms.author: magpint
-ms.date: 06/22/2020
+ms.date: 09/25/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: .net
-ms.service: 
+ms.service: storage
 ---
 
-# Azure Compute Management client library for .NET - Version 1.0.0-preview.1 
-
+# Azure Storage Management client library for .NET - Version 1.0.0-preview.2
 
 This package follows the [new Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html) which provide a number of core capabilities that are shared amongst all Azure SDKs, including the intuitive Azure Identity library, an HTTP Pipeline with custom policies, error-handling, distributed tracing, and much more.
 
@@ -23,7 +22,7 @@ This package follows the [new Azure SDK guidelines](https://azure.github.io/azur
 Install the Azure Storage management library for .NET with [NuGet](https://www.nuget.org/):
 
 ```PowerShell
-Install-Package Azure.ResourceManager.Storage -Version 1.0.0-preview.1
+Install-Package Azure.ResourceManager.Storage -Version 1.0.0-preview.2
 ```
 
 ### Prerequisites
@@ -86,7 +85,6 @@ more information see the Code of Conduct FAQ or contact
 
 <!-- LINKS -->
 [style-guide-msft]: https://docs.microsoft.com/style-guide/capitalization
-[style-guide-cloud]: https://worldready.cloudapp.net/Styleguide/Read?id=2696&topicid=25357
+[style-guide-cloud]: https://aka.ms/azsdk/cloud-style-guide
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Ftemplate%2FAzure.Template%2FREADME.png)
-

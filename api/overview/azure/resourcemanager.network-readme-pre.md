@@ -1,17 +1,17 @@
 ---
 title: Azure Network Management client library for .NET
-keywords: Azure, .net, SDK, API, Azure.ResourceManager.Network, 
+keywords: Azure, .net, SDK, API, Azure.ResourceManager.Network, network
 author: maggiepint
 ms.author: magpint
-ms.date: 06/22/2020
+ms.date: 09/24/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: .net
-ms.service: 
+ms.service: network
 ---
 
-# Azure Network Management client library for .NET - Version 1.0.0-preview.1 
+# Azure Network Management client library for .NET - Version 1.0.0-preview.2 
 
 
 This package follows the [new Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html) which provide a number of core capabilities that are shared amongst all Azure SDKs, including the intuitive Azure Identity library, an HTTP Pipeline with custom policies, error-handling, distributed tracing, and much more.
@@ -23,7 +23,7 @@ This package follows the [new Azure SDK guidelines](https://azure.github.io/azur
 Install the Azure Network management library for .NET with [NuGet](https://www.nuget.org/):
 
 ```PowerShell
-Install-Package Azure.ResourceManager.Network -Version 1.0.0-preview.1 
+Install-Package Azure.ResourceManager.Network -Version 1.0.0-preview.2 
 ```
 
 ### Prerequisites
@@ -32,7 +32,7 @@ Install-Package Azure.ResourceManager.Network -Version 1.0.0-preview.1
 
 ### Authenticate the Client
 
-To create an authenticated client and start interacting with Azure resources, please see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/master/doc/mgmt_preview_quickstart.md)
+To create an authenticated client and start interacting with Azure resources, please see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Network_1.0.0-preview.2/doc/mgmt_preview_quickstart.md)
 
 ## Key concepts
 
@@ -42,9 +42,9 @@ Key concepts of the Azure .NET SDK can be found [here](https://azure.github.io/a
 
 Documentation is available to help you learn how to use this package
 
-- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/master/doc/mgmt_preview_quickstart.md)
+- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Network_1.0.0-preview.2/doc/mgmt_preview_quickstart.md)
 - [API References](https://docs.microsoft.com/dotnet/api/?view=azure-dotnet)
-- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/identity/Azure.Identity/README.md)
+- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Network_1.0.0-preview.2/sdk/identity/Azure.Identity/README.md)
 
 ## Examples
 
@@ -86,7 +86,7 @@ more information see the Code of Conduct FAQ or contact
 
 <!-- LINKS -->
 [style-guide-msft]: https://docs.microsoft.com/style-guide/capitalization
-[style-guide-cloud]: https://worldready.cloudapp.net/Styleguide/Read?id=2696&topicid=25357
+[style-guide-cloud]: https://styleguides.azurewebsites.net/StyleGuide/Read?id=2696&topicid=25357
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Ftemplate%2FAzure.Template%2FREADME.png)
 
