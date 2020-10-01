@@ -3,7 +3,7 @@ title: Azure Storage Blobs Batch client library for .NET
 keywords: Azure, .net, SDK, API, Azure.Storage.Blobs.Batch, storage
 author: maggiepint
 ms.author: magpint
-ms.date: 07/28/2020
+ms.date: 10/01/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,10 +11,10 @@ ms.devlang: .net
 ms.service: storage
 ---
 
-# Azure Storage Blobs Batch client library for .NET - Version 12.3.0-preview.2 
+# Azure Storage Blobs Batch client library for .NET - Version 12.4.0-preview.1 
 
 
-> Server Version: 2019-12-12, 2019-07-07, and 2019-02-02
+> Server Version: 2020-02-10, 2019-12-12, 2019-07-07, and 2019-02-02
 
 Azure Blob storage is Microsoft's object storage solution for the cloud. Blob
 storage is optimized for storing massive amounts of unstructured data.  This
@@ -26,8 +26,7 @@ library allows you to batch multiple Azure Blob Storage operations in a single r
 
 ### Install the package
 
-Install the Azure Storage Blobs Batch client library for .NET - Version 12.3.0-preview.2 
- with [NuGet][nuget]:
+Install the Azure Storage Blobs Batch client library for .NET with [NuGet][nuget]:
 
 ```Powershell
 dotnet add package Azure.Storage.Blobs.Batch
@@ -177,7 +176,7 @@ catch (AggregateException)
 
 ## Next steps
 
-Check out our [sync](https://github.com/Azure/azure-sdk-for-net/tree/81bb56a44cd68669e838c64581ac35e0a3093318/sdk/storage/Azure.Storage.Blobs.Batch/samples/Sample03a_Batching.cs) and [async](https://github.com/Azure/azure-sdk-for-net/tree/81bb56a44cd68669e838c64581ac35e0a3093318/sdk/storage/Azure.Storage.Blobs.Batch/samples/Sample03b_BatchingAsync.cs) samples for more.
+Check out our [sync](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Blobs.Batch_12.4.0-preview.1/sdk/storage/Azure.Storage.Blobs.Batch/samples/Sample03a_Batching.cs) and [async](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Blobs.Batch_12.4.0-preview.1/sdk/storage/Azure.Storage.Blobs.Batch/samples/Sample03b_BatchingAsync.cs) samples for more.
 
 ## Contributing
 
@@ -197,7 +196,7 @@ additional questions or comments.
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fstorage%2FAzure.Storage.Blobs.Batch%2FREADME.png)
 
 <!-- LINKS -->
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/storage/Azure.Storage.Blobs.Batch/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Blobs.Batch_12.4.0-preview.1/sdk/storage/Azure.Storage.Blobs.Batch/src
 [package]: https://www.nuget.org/packages/Azure.Storage.Blobs.Batch/
 [docs]: https://azure.github.io/azure-sdk-for-net/storage.html
 [rest_docs]: https://docs.microsoft.com/rest/api/storageservices/blob-service-rest-api
@@ -209,10 +208,10 @@ additional questions or comments.
 [storage_account_create_portal]: https://docs.microsoft.com/azure/storage/common/storage-quickstart-create-account?tabs=azure-portal
 [azure_cli]: https://docs.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
-[identity]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/identity/Azure.Identity/README.md
-[RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/core/Azure.Core/src/RequestFailedException.cs
+[identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Blobs.Batch_12.4.0-preview.1/sdk/identity/Azure.Identity/README.md
+[RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Blobs.Batch_12.4.0-preview.1/sdk/core/Azure.Core/src/RequestFailedException.cs
 [error_codes]: https://docs.microsoft.com/rest/api/storageservices/blob-service-error-codes
-[storage_contrib]: https://github.com/Azure/azure-sdk-for-net/tree/81bb56a44cd68669e838c64581ac35e0a3093318/sdk/storage/CONTRIBUTING.md
+[storage_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Blobs.Batch_12.4.0-preview.1/sdk/storage/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
