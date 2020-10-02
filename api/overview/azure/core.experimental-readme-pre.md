@@ -3,7 +3,7 @@ title: Azure Core Experimental shared client library for .NET
 keywords: Azure, .net, SDK, API, Azure.Core.Experimental, 
 author: maggiepint
 ms.author: magpint
-ms.date: 09/04/2020
+ms.date: 10/01/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,14 +11,14 @@ ms.devlang: .net
 ms.service: 
 ---
 
-# Azure Core Experimental shared client library for .NET - Version 0.1.0-preview.5 
+# Azure Core Experimental shared client library for .NET - Version 0.1.0-preview.6 
 
 
 Azure.Core.Experimental contains types that are being evaluated and might eventually become part of Azure.Core, this library would always stay in a preview version and might allow breaking changes.
 
 ## Binary Data
 ### Overview
- The `BinaryData` type provides a lightweight abstraction for a payload of bytes. This type integrates with [ObjectSerializer](https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/core/Azure.Core/src/Serialization/ObjectSerializer.cs) to allow for serializing and deserializing payloads. It provides convenient helper methods to get out commonly used primitives, such as streams, strings, or bytes. The assumption when converting to and from string is that the encoding is UTF-8.
+ The `BinaryData` type provides a lightweight abstraction for a payload of bytes. This type integrates with [ObjectSerializer](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core.Experimental_0.1.0-preview.6/sdk/core/Azure.Core/src/Serialization/ObjectSerializer.cs) to allow for serializing and deserializing payloads. It provides convenient helper methods to get out commonly used primitives, such as streams, strings, or bytes. The assumption when converting to and from string is that the encoding is UTF-8.
  
  ### Data ownership
  The ownership model of the underlying bytes varies depending on how the instance is constructed:
