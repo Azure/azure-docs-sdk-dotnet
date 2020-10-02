@@ -1,18 +1,17 @@
 ---
-title: Azure Key Vault Secrets configuration provider for Microsoft.Extensions.Configuration 
-keywords: Azure, .NET, SDK, API, extensions, Azure.Extensions.AspNetCore.Configuration.Secrets
+title: 
+keywords: Azure, .net, SDK, API, Azure.Extensions.AspNetCore.Configuration.Secrets, extensions
 author: maggiepint
 ms.author: magpint
-ms.date: 06/10/2020
+ms.date: 10/02/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.devlang: .NET
+ms.devlang: .net
 ms.service: extensions
 ---
 
-
-# Azure Key Vault Secrets configuration provider for Microsoft.Extensions.Configuration - Version 1.0.0
+# Azure Key Vault Secrets configuration provider for Microsoft.Extensions.Configuration
 
 The `Azure.Extensions.AspNetCore.Configuration.Secrets` package allows storing configuration values using Azure Key Vault Secrets.
 
@@ -23,7 +22,7 @@ The `Azure.Extensions.AspNetCore.Configuration.Secrets` package allows storing c
 Install the package with [NuGet][nuget]:
 
 ```Powershell
-dotnet add package Azure.Extensions.AspNetCore.Configuration.Secrets -v 1.0.0-preview.2
+dotnet add package Azure.Extensions.AspNetCore.Configuration.Secrets
 ```
 
 ### Prerequisites
@@ -56,7 +55,7 @@ The [Azure Identity library][identity] provides easy Azure Active Directory supp
 
 ## Next steps
 
-Read more about [configuration in ASP.NET Core](aspnetcore_configuration_doc).
+Read more about [configuration in ASP.NET Core][aspnetcore_configuration_doc].
 
 ## Contributing
 
@@ -73,19 +72,20 @@ additional questions or comments.
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fextensions%2FAzure.Extensions.AspNetCore.Configuration.Secrets%2FREADME.png)
 
 <!-- LINKS -->
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/extensions/Azure.Extensions.AspNetCore.Configuration.Secrets/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Extensions.AspNetCore.Configuration.Secrets_1.0.1/sdk/extensions/Azure.Extensions.AspNetCore.Configuration.Secrets/src
 [package]: https://www.nuget.org/packages/Azure.Extensions.AspNetCore.Configuration.Secrets/
 [docs]: https://docs.microsoft.com/dotnet/api/Azure.Extensions.AspNetCore.Configuration.Secrets
-[nuget]: https://www.nuget.org/storage-quickstart-create-account?tabs=azure-powershell
-[keyvault_create_cli]: https://docs.microsoft.com/en-us/azure/key-vault/quick-create-cli#create-a-key-vault
-[keyvault_create_portal]: https://docs.microsoft.com/en-us/azure/key-vault/quick-create-portal#create-a-vault
-[keyvault_create_ps]: https://docs.microsoft.com/en-us/azure/key-vault/quick-create-powershell#create-a-key-vault
+[nuget]: https://www.nuget.org/packages/Azure.Extensions.AspNetCore.Configuration.Secrets
+[keyvault_create_cli]: https://docs.microsoft.com/azure/key-vault/quick-create-cli#create-a-key-vault
+[keyvault_create_portal]: https://docs.microsoft.com/azure/key-vault/quick-create-portal#create-a-vault
+[keyvault_create_ps]: https://docs.microsoft.com/azure/key-vault/quick-create-powershell#create-a-key-vault
 [azure_cli]: https://docs.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
-[identity]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/identity/Azure.Identity/README.md
-[aspnetcore_configuration_doc]: https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?view=aspnetcore-3.1
+[identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Extensions.AspNetCore.Configuration.Secrets_1.0.1/sdk/identity/Azure.Identity/README.md
+[aspnetcore_configuration_doc]: https://docs.microsoft.com/aspnet/core/fundamentals/configuration/?view=aspnetcore-3.1
 [error_codes]: https://docs.microsoft.com/rest/api/storageservices/blob-service-error-codes
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [coc_contact]: mailto:opencode@microsoft.com
+
