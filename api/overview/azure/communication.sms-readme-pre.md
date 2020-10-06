@@ -1,23 +1,24 @@
 ---
 title: Azure Communication SMS client library for .NET
-keywords: Azure, .net, SDK, API, Azure.Communication.Sms, 
+keywords: Azure, .net, SDK, API, Azure.Communication.Sms, communication
 author: maggiepint
 ms.author: magpint
-ms.date: 09/22/2020
+ms.date: 10/06/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: .net
-ms.service: 
+ms.service: communication
 ---
 
-# Azure Communication SMS client library for .NET - Version 1.0.0-beta.1 
+# Azure Communication SMS client library for .NET - Version 1.0.0-beta.2 
 
 > Server Version: 
 Chat client: 2020-07-20-preview1
 
 This package contains a C# SDK for Azure Communication Services for SMS and Telephony.
 
+[Source code][source] | [Package (NuGet)][package] | [Product documentation][product_docs]
 ## Getting started
 
 ### Install the package
@@ -28,7 +29,9 @@ dotnet add package Azure.Communication.Sms --version 1.0.0-beta.1
 ``` 
 
 ### Prerequisites
-You need an [Azure subscription][azure_sub] and a Communication Service resource to use this package.
+You need an [Azure subscription][azure_sub] and a [Communication Service Resource][communication_resource_docs] to use this package.
+
+To create a new Communication Service, you can use the [Azure Portal][communication_resource_create_portal] or the [.NET management client library][communication_resource_create_net].
 
 ### Key concepts
 `SmsClient` provides the functionality to send messages between phone numbers.
@@ -77,6 +80,7 @@ catch (RequestFailedException ex)
 ```
 
 ## Next steps
+[Read more about SMS in Azure Communication Services][nextsteps]
 
 ## Contributing
 This project welcomes contributions and suggestions. Most contributions require you to agree to a Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us the rights to use your contribution. For details, visit [cla.microsoft.com][cla].
@@ -90,5 +94,13 @@ This project has adopted the [Microsoft Open Source Code of Conduct][coc]. For m
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [coc_contact]: mailto:opencode@microsoft.com
+[communication_resource_docs]: https://docs.microsoft.com/azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp
+[communication_resource_create_portal]:  https://docs.microsoft.com/azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp
+[communication_resource_create_net]: https://docs.microsoft.com/azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-net
+[package]: https://www.nuget.org/packages/Azure.Communication.Sms
+[product_docs]: https://docs.microsoft.com/azure/communication-services/overview
+[nextsteps]:https://docs.microsoft.com/azure/communication-services/quickstarts/telephony-sms/send?pivots=programming-language-csharp
 [nuget]: https://www.nuget.org/
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Communication.Sms_1.0.0-beta.2/sdk/communication/Azure.Communication.Sms/src
+
 
