@@ -1,24 +1,26 @@
 ---
 title: Azure Communication Chat client library for .NET
-keywords: Azure, .net, SDK, API, Azure.Communication.Chat, 
+keywords: Azure, .net, SDK, API, Azure.Communication.Chat, communication
 author: maggiepint
 ms.author: magpint
-ms.date: 09/22/2020
+ms.date: 10/06/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: .net
-ms.service: 
+ms.service: communication
 ---
 
-# Azure Communication Chat client library for .NET - Version 1.0.0-beta.1 
+# Azure Communication Chat client library for .NET - Version 1.0.0-beta.2 
 
 
 > Server Version: 
 Chat client: 2020-09-21-preview2
 
 This package contains a C# SDK for Azure Communication Services for chat.
-<!--Read more about Azure Communication Services [here](https://review.docs.microsoft.com/en-us/azure/project-spool/overview?branch=pr-en-us-104477)-->
+
+[Source code][source] | [Package (NuGet)][package] | [Product documentation][product_docs]
+
 
 ## Getting started
 
@@ -30,12 +32,9 @@ dotnet add package Azure.Communication.Chat --version 1.0.0-beta.1
 ``` 
 
 ### Prerequisites
-You need an [Azure subscription][azure_sub] and a Communication Service resource to use this package.
-<!--[Communication Service Resource][communication_resource_docs]-->
+You need an [Azure subscription][azure_sub] and a [Communication Service Resource][communication_resource_docs] to use this package.
 
-<!--To create a new Communication Service, you can use the [Azure Portal][communication_resource_create_portal],
-[Azure PowerShell][communication_resource_create_ps], or the [Azure CLI][communication_resource_create_cli].-->
-
+To create a new Communication Service, you can use the [Azure Portal][communication_resource_create_portal] or the [.NET management client library][communication_resource_create_net].
 <!--
 Here's an example using the Azure CLI:
 
@@ -48,7 +47,7 @@ Here's an example using the Azure CLI:
 #### User Access Tokens
 
 User access tokens enable you to build client applications that directly authenticate to Azure Communication Services.
-<!-- For the generation of user access tokens, refer to [User Access Tokens][useraccesstokens]. -->
+For the generation of user access tokens, refer to [User Access Tokens][useraccesstokens].
 
 ### Using statements
 ```C# Snippet:Azure_Communication_Chat_Tests_E2E_UsingStatements
@@ -370,7 +369,7 @@ catch (RequestFailedException ex)
 ```
 
 ## Next steps
-<!-- * [Read more about Chat in Azure Communication Services][nextsteps] -->
+[Read more about Chat in Azure Communication Services][nextsteps]
 
 ## Contributing
 This project welcomes contributions and suggestions. Most contributions require you to agree to a Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us the rights to use your contribution. For details, visit [cla.microsoft.com][cla].
@@ -385,6 +384,12 @@ This project has adopted the [Microsoft Open Source Code of Conduct][coc]. For m
 [coc_contact]: mailto:opencode@microsoft.com
 [nuget]: https://www.nuget.org/
 [netstandars2mappings]:https://github.com/dotnet/standard/blob/master/docs/versions.md
-<!-- TODO: [useraccesstokens]:https://github.com/Azure/communication-preview/blob/master/docs/user-access-tokens.md -->
-<!-- [nextsteps]:https://review.docs.microsoft.com/en-us/azure/project-spool/quickstarts/chat/get-started?branch=pr-en-us-104477&pivots=programming-language-csharp -->
+[useraccesstokens]:https://docs.microsoft.com/azure/communication-services/quickstarts/access-tokens?pivots=programming-language-csharp
+[communication_resource_docs]: https://docs.microsoft.com/azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp
+[communication_resource_create_portal]:  https://docs.microsoft.com/azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp
+[communication_resource_create_net]: https://docs.microsoft.com/azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-net
+[nextsteps]:https://docs.microsoft.com/azure/communication-services/quickstarts/chat/get-started?pivots=programming-language-csharp
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Communication.Chat_1.0.0-beta.2/sdk/communication/Azure.Communication.Chat/src
+[product_docs]: https://docs.microsoft.com/azure/communication-services/overview
+[package]: https://www.nuget.org/packages/Azure.Communication.Chat
 
