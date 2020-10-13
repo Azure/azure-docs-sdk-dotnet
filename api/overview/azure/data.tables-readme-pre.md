@@ -1,17 +1,17 @@
 ---
 title: Azure Tables client library for .NET
-keywords: Azure, .net, SDK, API, Azure.Data.Tables, 
+keywords: Azure, .net, SDK, API, Azure.Data.Tables, tables
 author: maggiepint
 ms.author: magpint
-ms.date: 09/08/2020
+ms.date: 10/06/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: .net
-ms.service: 
+ms.service: tables
 ---
 
-# Azure Tables client library for .NET - Version 3.0.0-beta.1 
+# Azure Tables client library for .NET - Version 3.0.0-beta.2 
 
 
 Azure Table storage is a service that stores large amounts of structured NoSQL data in the cloud, providing 
@@ -32,8 +32,7 @@ The Azure Tables client library can seamlessly target either Azure Table storage
 ## Getting started
 
 ### Install the package
-Install the Azure Tables client library for .NET - Version 3.0.0-beta.1 
- with [NuGet][table_client_nuget_package]:
+Install the Azure Tables client library for .NET with [NuGet][table_client_nuget_package]:
 
 ```
 dotnet add package Azure.Data.Tables --version 3.0.0-beta.1
@@ -59,10 +58,14 @@ Create a Cosmos DB account `MyCosmosDBDatabaseAccount` in resource group `MyReso
 in the subscription `MySubscription` and a table named `MyTableName` in the account.
 
 ```
-az cosmosdb create --name MyCosmosDBDatabaseAccount --resource-group MyResourceGroup --subscription MySubscription
+az cosmosdb create --name MyCosmosDBDatabaseAccount --capabilities EnableTable --resource-group MyResourceGroup --subscription MySubscription
 
 az cosmosdb table create --name MyTableName --resource-group MyResourceGroup --account-name MyCosmosDBDatabaseAccount
 ```
+
+### Authenticate the Client
+
+Learn more about options for authentication _(including Connection Strings, Shared Key, and Shared Key Signatures)_ [in our samples.](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_3.0.0-beta.2/sdk/tables/Azure.Data.Tables/samples/Sample0Auth.md)
 
 ## Key concepts
 
@@ -78,9 +81,6 @@ Common uses of the Table service include:
 - Quickly querying data using a clustered index
 - Accessing data using the OData protocol and LINQ filter expressions
 
-### Authenticate the Client
-
-Learn more about options for authentication _(including Connection Strings, Shared Key, and Shared Key Signatures)_ [in our samples.](https://github.com/Azure/azure-sdk-for-net/tree/c9e4e3b6bd79e413a5eae97de4d5bdcdd28245db/sdk/tables/Azure.Data.Tables/samples/Sample0Auth.md)
 
 ## Examples
 - [Create the Table service client](#create-the-table-service-client)
@@ -200,6 +200,15 @@ foreach (TableEntity qEntity in queryResultsFilter)
 Console.WriteLine($"The query returned {queryResultsFilter.Count()} entities.");
 ```
 
+If you prefer LINQ style query expressions, we can query the table using that syntax as well.
+
+```C# Snippet:TablesSample4QueryEntitiesExpression
+// Use the <see cref="TableClient"> to query the table using a filter expression.
+
+double priceCutOff = 6.00;
+Pageable<OfficeSupplyEntity> queryResultsLINQ = tableClient.Query<OfficeSupplyEntity>(ent => ent.Price >= priceCutOff);
+```
+
 ### Delete table entities
 
 If we no longer need our new table entity, it can be deleted.
@@ -276,11 +285,10 @@ For more information see the [Code of Conduct FAQ][coc_faq] or contact
 [azure_cli]: https://docs.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
 [table_client_nuget_package]: https://www.nuget.org/packages?q=Azure.Data.Tables
-[table_client_samples]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_3.0.0-beta.1/sdk/tables/Azure.Data.Tables/samples
-[table_client_src]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_3.0.0-beta.1/sdk/tables/Azure.Data.Tables/src
-[api_reference]: https://docs.microsoft.com/azure/cosmos-db/table-introduction
-[logging]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_3.0.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md
-[contrib]: ./CONTRIBUTING.md
+[table_client_samples]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_3.0.0-beta.2/sdk/tables/Azure.Data.Tables/samples
+[table_client_src]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_3.0.0-beta.2/sdk/tables/Azure.Data.Tables/src
+[api_reference]: https://docs.microsoft.com/dotnet/api/overview/azure/data.tables-readme-pre?view=azure-dotnet-preview
+[logging]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_3.0.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
