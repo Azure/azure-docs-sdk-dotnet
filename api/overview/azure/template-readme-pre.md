@@ -1,27 +1,28 @@
 ---
 title: Azure Batch client library for Python
-keywords: Azure, dotnet, SDK, API, Azure.Template, 
+keywords: Azure, .net, SDK, API, Azure.Template, 
 author: maggiepint
 ms.author: magpint
-ms.date: 07/24/2020
+ms.date: 10/09/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.devlang: dotnet
+ms.devlang: .net
 ms.service: 
 ---
 
 # README.md template
 
-Use the guidelines in each section of this template to ensure consistency and readability of your README. The README resides in your package's GitHub repository at the root of its directory within the repo. It's also used as the package distribution page (NuGet, PyPi, npm, etc.) and as a Quickstart on docs.microsoft.com. See [README-EXAMPLE.md](README-EXAMPLE.md) for an example following this template.
+Use the guidelines in each section of this template to ensure consistency and readability of your README. The README resides in your package's GitHub repository at the root of its directory within the repo. It's also used as the package distribution page (NuGet, PyPi, npm, etc.) and as a Quickstart on docs.microsoft.com. See [Azure.Template/README.md](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.26/sdk/template/Azure.Template/README.md) for an example following this template.
 
 **Title**: The H1 of your README should be in the format: `# [Product Name] client library for [Language]`
 
 * All headings, including the H1, should use **sentence-style capitalization**. Refer to the [Microsoft Style Guide][style-guide-msft] and [Microsoft Cloud Style Guide][style-guide-cloud] for more information.
-* Example: `# Azure Batch client library for Python - Version 1.0.2-preview.17 
+* Example: `# Azure Batch client library for Python - Version 1.0.3-beta.26 
 `
 
-# Azure Template client library for .NET
+# Azure Template client library for .NET - Version 1.0.3-beta.26 
+
 
 **Introduction**: The introduction appears directly under the title (H1) of your README.
 
@@ -30,7 +31,7 @@ Use the guidelines in each section of this template to ensure consistency and re
 * Next, add a **bulleted list** of the **most common tasks** supported by the package or library, prefaced with "Use the client library for [Product Name] to:". Then, provide code snippets for these tasks in the [Examples](#examples) section later in the document. Keep the task list short but include those tasks most developers need to perform with your package.
 * Include this single line of links targeting your product's content at the bottom of the introduction, making any adjustments as necessary (for example, NuGet instead of PyPi):
 
-  [Source code](https://github.com/Azure/azure-sdk-for-python/tree/master/azure-batch) | [Package (PyPi)](https://pypi.org/project/azure-batch/) | [API reference documentation](https://docs.microsoft.com/python/api/overview/azure/batch?view=azure-python) | [Product documentation](https://docs.microsoft.com/azure/batch/)
+  [Source code](https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/batch/azure-batch) | [Package (PyPi)](https://pypi.org/project/azure-batch/) | [API reference documentation](https://docs.microsoft.com/python/api/overview/azure/batch?view=azure-python) | [Product documentation](https://docs.microsoft.com/azure/batch/)
 
 > TIP: Your README should be as **brief** as possible but **no more brief** than necessary to get a developer new to Azure, the service, or the package up and running quickly. Keep it brief, but include everything a developer needs to make their first API call successfully.
 
@@ -72,7 +73,7 @@ Each example in the *Examples* section starts with an H3 that describes the exam
 
 ### Create the thing
 
-Use the [create_thing](not-valid-link) method to create a Thing reference; this method does not make a network call. To persist the Thing in the service, call [Thing.save](not-valid-link).
+Use the `create_thing` method to create a Thing reference; this method does not make a network call. To persist the Thing in the service, call `Thing.save`.
 
 ```Python
 thing = client.create_thing(id, name)
@@ -81,7 +82,7 @@ thing.save()
 
 ### Get the thing
 
-The [get_thing](not-valid-link) method retrieves a Thing from the service. The `id` parameter is the unique ID of the Thing, not its "name" property.
+The `get_thing` method retrieves a Thing from the service. The `id` parameter is the unique ID of the Thing, not its "name" property.
 
 ```C# Snippet:GetSecret
 var client = new MiniSecretClient(new Uri(endpoint), new DefaultAzureCredential());
@@ -113,7 +114,7 @@ This is a template, but your SDK readme should include details on how to contrib
 
 <!-- LINKS -->
 [style-guide-msft]: https://docs.microsoft.com/style-guide/capitalization
-[style-guide-cloud]: https://worldready.cloudapp.net/Styleguide/Read?id=2696&topicid=25357
+[style-guide-cloud]: https://aka.ms/azsdk/cloud-style-guide
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Ftemplate%2FAzure.Template%2FREADME.png)
 

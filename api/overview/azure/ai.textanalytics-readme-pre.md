@@ -3,7 +3,7 @@ title: Azure Cognitive Services Text Analytics client library for .NET
 keywords: Azure, .net, SDK, API, Azure.AI.TextAnalytics, textanalytics
 author: maggiepint
 ms.author: magpint
-ms.date: 09/17/2020
+ms.date: 10/06/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: .net
 ms.service: textanalytics
 ---
 
-# Azure Cognitive Services Text Analytics client library for .NET - Version 5.1.0-beta.1 
+# Azure Cognitive Services Text Analytics client library for .NET - Version 5.1.0-beta.2 
 
 Azure Cognitive Services Text Analytics is a cloud service that provides advanced natural language processing over raw text, and includes the following main functions: 
 * Language Detection
@@ -208,7 +208,7 @@ CategorizedEntityCollection entities = client.RecognizeEntities(document);
 Console.WriteLine($"Recognized {entities.Count} entities:");
 foreach (CategorizedEntity entity in entities)
 {
-    Console.WriteLine($"Text: {entity.Text}, Offset (in UTF-16 code units): {entity.Offset}, Length (in UTF-16 code units): {entity.Length}");
+    Console.WriteLine($"Text: {entity.Text}, Offset (in UTF-16 code units): {entity.Offset}");
     Console.WriteLine($"Category: {entity.Category}, SubCategory: {entity.SubCategory}, Confidence score: {entity.ConfidenceScore}");
 }
 ```
@@ -257,7 +257,7 @@ foreach (LinkedEntity linkedEntity in linkedEntities)
     Console.WriteLine($"Name: {linkedEntity.Name}, Language: {linkedEntity.Language}, Data Source: {linkedEntity.DataSource}, Url: {linkedEntity.Url.ToString()}, Entity Id in Data Source: {linkedEntity.DataSourceEntityId}");
     foreach (LinkedEntityMatch match in linkedEntity.Matches)
     {
-        Console.WriteLine($"    Match Text: {match.Text}, Offset (in UTF-16 code units): {match.Offset}, Length (in UTF-16 code units): {match.Length}");
+        Console.WriteLine($"    Match Text: {match.Text}, Offset (in UTF-16 code units): {match.Offset}");
         Console.WriteLine($"    Confidence score: {match.ConfidenceScore}");
     }
 }
@@ -288,7 +288,7 @@ CategorizedEntityCollection entities = await client.RecognizeEntitiesAsync(docum
 Console.WriteLine($"Recognized {entities.Count} entities:");
 foreach (CategorizedEntity entity in entities)
 {
-    Console.WriteLine($"Text: {entity.Text}, Offset (in UTF-16 code units): {entity.Offset}, Length (in UTF-16 code units): {entity.Length}");
+    Console.WriteLine($"Text: {entity.Text}, Offset (in UTF-16 code units): {entity.Offset}");
     Console.WriteLine($"Category: {entity.Category}, SubCategory: {entity.SubCategory}, Confidence score: {entity.ConfidenceScore}");
 }
 ```
@@ -372,11 +372,11 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 
 
 <!-- LINKS -->
-[textanalytics_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.1/sdk/textanalytics/Azure.AI.TextAnalytics/src
+[textanalytics_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.2/sdk/textanalytics/Azure.AI.TextAnalytics/src
 [textanalytics_docs]: https://docs.microsoft.com/azure/cognitive-services/Text-Analytics/
 [textanalytics_refdocs]: https://aka.ms/azsdk-net-textanalytics-ref-docs
 [textanalytics_nuget_package]: https://www.nuget.org/packages/Azure.AI.TextAnalytics
-[textanalytics_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.1/sdk/textanalytics/Azure.AI.TextAnalytics/samples/README.md
+[textanalytics_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.2/sdk/textanalytics/Azure.AI.TextAnalytics/samples/README.md
 [textanalytics_rest_api]: https://westus.dev.cognitive.microsoft.com/docs/services/TextAnalytics-v3-0/operations/Languages
 [cognitive_resource_portal]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account
 [cognitive_resource_cli]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account-cli
@@ -388,25 +388,25 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [named_entities_categories]: https://docs.microsoft.com/azure/cognitive-services/Text-Analytics/named-entity-types
 [pii_entity_type]:https://docs.microsoft.com/azure/cognitive-services/text-analytics/named-entity-types?tabs=personal 
 
-[textanalytics_client_class]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.1/sdk/textanalytics/Azure.AI.TextAnalytics/src/TextAnalyticsClient.cs
-[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.1/sdk/identity/Azure.Identity
+[textanalytics_client_class]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.2/sdk/textanalytics/Azure.AI.TextAnalytics/src/TextAnalyticsClient.cs
+[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.2/sdk/identity/Azure.Identity
 [cognitive_auth]: https://docs.microsoft.com/azure/cognitive-services/authentication
 [register_aad_app]: https://docs.microsoft.com/azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
 [aad_grant_access]: https://docs.microsoft.com/azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
 [custom_subdomain]: https://docs.microsoft.com/azure/cognitive-services/authentication#create-a-resource-with-a-custom-subdomain
-[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.1/sdk/identity/Azure.Identity/README.md
-[logging]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md
+[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.2/sdk/identity/Azure.Identity/README.md
+[logging]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md
 [data_limits]: https://docs.microsoft.com/azure/cognitive-services/text-analytics/overview#data-limits
-[contributing]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.0-beta.1/CONTRIBUTING.md
+[contributing]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.0-beta.2/CONTRIBUTING.md
 
-[detect_language_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.1/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample1_DetectLanguage.md
-[analyze_sentiment_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.1/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample2_AnalyzeSentiment.md
-[analyze_sentiment_opinion_mining_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.1/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample2.1_AnalyzeSentimentWithOpinionMining.md
-[extract_key_phrases_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.1/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample3_ExtractKeyPhrases.md
-[recognize_entities_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.1/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample4_RecognizeEntities.md
-[recognize_pii_entities_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.1/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample5_RecognizePiiEntities.md
-[recognize_linked_entities_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.1/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample6_RecognizeLinkedEntities.md
-[mock_client_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.1/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample_MockClient.md
+[detect_language_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.2/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample1_DetectLanguage.md
+[analyze_sentiment_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.2/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample2_AnalyzeSentiment.md
+[analyze_sentiment_opinion_mining_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.2/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample2.1_AnalyzeSentimentWithOpinionMining.md
+[extract_key_phrases_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.2/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample3_ExtractKeyPhrases.md
+[recognize_entities_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.2/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample4_RecognizeEntities.md
+[recognize_pii_entities_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.2/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample5_RecognizePiiEntities.md
+[recognize_linked_entities_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.2/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample6_RecognizeLinkedEntities.md
+[mock_client_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.2/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample_MockClient.md
 
 [azure_cli]: https://docs.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/

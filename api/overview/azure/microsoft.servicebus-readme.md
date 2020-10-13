@@ -1,17 +1,17 @@
 ---
 title: Azure Service Bus client library for .NET
-keywords: Azure, .net, SDK, API, Microsoft.Azure.ServiceBus, 
+keywords: Azure, .net, SDK, API, Microsoft.Azure.ServiceBus, servicebus
 author: maggiepint
 ms.author: magpint
-ms.date: 08/06/2020
+ms.date: 09/11/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: .net
-ms.service: 
+ms.service: servicebus
 ---
 
-# Azure Service Bus client library for .NET - Version 4.1.4 
+# Azure Service Bus client library for .NET - Version 5.0.0 
 
 
 Azure Service Bus allows you to build applications that take advantage of asynchronous messaging patterns using a highly-reliable service to broker messages between producers and consumers. Azure Service Bus provides flexible, brokered messaging between client and server, along with structured first-in, first-out (FIFO) messaging, and publish/subscribe capabilities with complex routing.
@@ -28,7 +28,7 @@ Use the client library for Azure Service Bus to:
 
 - Implement complex workflows: message sessions support scenarios that require message ordering or message deferral.
 
-[Source code](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/servicebus) | [Package (NuGet)](https://www.nuget.org/packages/Microsoft.Azure.ServiceBus/) | [API reference documentation](https://docs.microsoft.com/en-us/dotnet/api/overview/azure/service-bus?view=azure-dotnet) | [Product documentation](https://docs.microsoft.com/en-us/azure/service-bus-messaging/)
+[Source code](https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.ServiceBus_5.0.0/sdk/servicebus) | [Package (NuGet)](https://www.nuget.org/packages/Microsoft.Azure.ServiceBus/) | [API reference documentation](https://docs.microsoft.com/en-us/dotnet/api/overview/azure/service-bus?view=azure-dotnet) | [Product documentation](https://docs.microsoft.com/en-us/azure/service-bus-messaging/)
 
 ## Getting started
 
@@ -58,7 +58,7 @@ For information on building the Azure Service bus client library, please see [Bu
 
 ## Running tests
 
-1. Deploy the Azure Resource Manager template located at [sdk/servicebus/Microsoft.Azure.ServiceBus/assets/azure-deploy-test-dependencies.json](https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/servicebus/Microsoft.Azure.ServiceBus/assets/azure-deploy-test-dependencies.json) by clicking the following button:
+1. Deploy the Azure Resource Manager template located at [sdk/servicebus/Microsoft.Azure.ServiceBus/assets/azure-deploy-test-dependencies.json](https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.ServiceBus_5.0.0/sdk/servicebus/Microsoft.Azure.ServiceBus/assets/azure-deploy-test-dependencies.json) by clicking the following button:
 
     <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-sdk-for-net%2Fmaster%2Fsdk%2Fservicebus%2FMicrosoft.Azure.ServiceBus%2Fassets%2Fazure-deploy-test-dependencies.json" target="_blank">
         <img src="http://azuredeploy.net/deploybutton.png"/>
