@@ -1,0 +1,2 @@
+# Azure Form Recognizer
+
