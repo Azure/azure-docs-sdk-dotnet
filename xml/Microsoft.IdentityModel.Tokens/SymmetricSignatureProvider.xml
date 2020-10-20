@@ -12,6 +12,7 @@
     <AssemblyVersion>6.6.0.0</AssemblyVersion>
     <AssemblyVersion>6.7.0.0</AssemblyVersion>
     <AssemblyVersion>6.7.1.0</AssemblyVersion>
+    <AssemblyVersion>6.8.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>Microsoft.IdentityModel.Tokens.SignatureProvider</BaseTypeName>
@@ -39,6 +40,7 @@
         <AssemblyVersion>6.6.0.0</AssemblyVersion>
         <AssemblyVersion>6.7.0.0</AssemblyVersion>
         <AssemblyVersion>6.7.1.0</AssemblyVersion>
+        <AssemblyVersion>6.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="key" Type="Microsoft.IdentityModel.Tokens.SecurityKey" />
@@ -71,6 +73,7 @@
         <AssemblyVersion>6.6.0.0</AssemblyVersion>
         <AssemblyVersion>6.7.0.0</AssemblyVersion>
         <AssemblyVersion>6.7.1.0</AssemblyVersion>
+        <AssemblyVersion>6.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="key" Type="Microsoft.IdentityModel.Tokens.SecurityKey" />
@@ -105,6 +108,7 @@
         <AssemblyVersion>6.6.0.0</AssemblyVersion>
         <AssemblyVersion>6.7.0.0</AssemblyVersion>
         <AssemblyVersion>6.7.1.0</AssemblyVersion>
+        <AssemblyVersion>6.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
@@ -131,6 +135,7 @@
         <AssemblyVersion>6.6.0.0</AssemblyVersion>
         <AssemblyVersion>6.7.0.0</AssemblyVersion>
         <AssemblyVersion>6.7.1.0</AssemblyVersion>
+        <AssemblyVersion>6.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -161,6 +166,7 @@
         <AssemblyVersion>6.6.0.0</AssemblyVersion>
         <AssemblyVersion>6.7.0.0</AssemblyVersion>
         <AssemblyVersion>6.7.1.0</AssemblyVersion>
+        <AssemblyVersion>6.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Byte[]</ReturnType>
@@ -172,7 +178,7 @@
         <param name="key">
           <see cref="T:Microsoft.IdentityModel.Tokens.SecurityKey" />that will be used to obtain the byte[].</param>
         <summary>
-            Called to obtain the byte[] needed to create a <see cref="P:Microsoft.IdentityModel.Tokens.SymmetricSignatureProvider.KeyedHashAlgorithm" /></summary>
+            Called to obtain the byte[] needed to create a <see cref="T:System.Security.Cryptography.KeyedHashAlgorithm" /></summary>
         <returns>
           <see cref="T:System.Byte" />[] that is used to populated the KeyedHashAlgorithm.</returns>
         <remarks>
@@ -197,6 +203,7 @@
         <AssemblyVersion>6.6.0.0</AssemblyVersion>
         <AssemblyVersion>6.7.0.0</AssemblyVersion>
         <AssemblyVersion>6.7.1.0</AssemblyVersion>
+        <AssemblyVersion>6.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Security.Cryptography.KeyedHashAlgorithm</ReturnType>
@@ -209,9 +216,13 @@
         <param name="algorithm">The hash algorithm to use to create the hash value.</param>
         <param name="keyBytes">The byte array of the key.</param>
         <summary>
-            Returns the <see cref="P:Microsoft.IdentityModel.Tokens.SymmetricSignatureProvider.KeyedHashAlgorithm" />.
+            Returns a <see cref="T:System.Security.Cryptography.KeyedHashAlgorithm" />.
+            This method is called just before a cryptographic operation.
+            This provides the opportunity to obtain the <see cref="T:System.Security.Cryptography.KeyedHashAlgorithm" /> from an object pool.
+            If this method is overridden, it is importont to override <see cref="M:Microsoft.IdentityModel.Tokens.SymmetricSignatureProvider.ReleaseKeyedHashAlgorithm(System.Security.Cryptography.KeyedHashAlgorithm)" />
+            if custom releasing of the <see cref="T:System.Security.Cryptography.KeyedHashAlgorithm" /> is desired.
             </summary>
-        <returns />
+        <returns>An instance of <see cref="T:System.Security.Cryptography.KeyedHashAlgorithm" /></returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -230,6 +241,7 @@
         <AssemblyVersion>6.6.0.0</AssemblyVersion>
         <AssemblyVersion>6.7.0.0</AssemblyVersion>
         <AssemblyVersion>6.7.1.0</AssemblyVersion>
+        <AssemblyVersion>6.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
@@ -241,6 +253,33 @@
         <value>To be added.</value>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">'value' is smaller than <see cref="F:Microsoft.IdentityModel.Tokens.SymmetricSignatureProvider.DefaultMinimumSymmetricKeySizeInBits" />.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="ReleaseKeyedHashAlgorithm">
+      <MemberSignature Language="C#" Value="protected virtual void ReleaseKeyedHashAlgorithm (System.Security.Cryptography.KeyedHashAlgorithm keyedHashAlgorithm);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void ReleaseKeyedHashAlgorithm(class System.Security.Cryptography.KeyedHashAlgorithm keyedHashAlgorithm) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.IdentityModel.Tokens.SymmetricSignatureProvider.ReleaseKeyedHashAlgorithm(System.Security.Cryptography.KeyedHashAlgorithm)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overridable Sub ReleaseKeyedHashAlgorithm (keyedHashAlgorithm As KeyedHashAlgorithm)" />
+      <MemberSignature Language="F#" Value="abstract member ReleaseKeyedHashAlgorithm : System.Security.Cryptography.KeyedHashAlgorithm -&gt; unit&#xA;override this.ReleaseKeyedHashAlgorithm : System.Security.Cryptography.KeyedHashAlgorithm -&gt; unit" Usage="symmetricSignatureProvider.ReleaseKeyedHashAlgorithm keyedHashAlgorithm" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.IdentityModel.Tokens</AssemblyName>
+        <AssemblyVersion>6.8.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="keyedHashAlgorithm" Type="System.Security.Cryptography.KeyedHashAlgorithm" />
+      </Parameters>
+      <Docs>
+        <param name="keyedHashAlgorithm">The <see cref="T:System.Security.Cryptography.KeyedHashAlgorithm" />" in use.</param>
+        <summary>
+            This method is called just after the cryptographic operation.
+            If <see cref="M:Microsoft.IdentityModel.Tokens.SymmetricSignatureProvider.GetKeyedHashAlgorithm(System.Byte[],System.String)" /> was overridden this method can be overridden for
+            any custom handling such as returning the <see cref="T:System.Security.Cryptography.KeyedHashAlgorithm" /> to an object pool.
+            </summary>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Sign">
@@ -258,6 +297,7 @@
         <AssemblyVersion>6.6.0.0</AssemblyVersion>
         <AssemblyVersion>6.7.0.0</AssemblyVersion>
         <AssemblyVersion>6.7.1.0</AssemblyVersion>
+        <AssemblyVersion>6.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Byte[]</ReturnType>
@@ -277,7 +317,7 @@
         <exception cref="T:System.ObjectDisposedException">
           <see cref="M:Microsoft.IdentityModel.Tokens.SymmetricSignatureProvider.Dispose(System.Boolean)" /> has been called.</exception>
         <exception cref="T:System.InvalidOperationException">
-          <see cref="P:Microsoft.IdentityModel.Tokens.SymmetricSignatureProvider.KeyedHashAlgorithm" /> is null. This can occur if a derived type deletes it or does not create it.</exception>
+          <see cref="T:System.Security.Cryptography.KeyedHashAlgorithm" /> is null. This can occur if a derived type deletes it or does not create it.</exception>
       </Docs>
     </Member>
     <Member MemberName="Verify">
@@ -295,6 +335,7 @@
         <AssemblyVersion>6.6.0.0</AssemblyVersion>
         <AssemblyVersion>6.7.0.0</AssemblyVersion>
         <AssemblyVersion>6.7.1.0</AssemblyVersion>
+        <AssemblyVersion>6.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -315,7 +356,7 @@
         <exception cref="T:System.ArgumentException">'signature.Length' == 0. </exception>
         <exception cref="T:System.ObjectDisposedException">
           <see cref="M:Microsoft.IdentityModel.Tokens.SymmetricSignatureProvider.Dispose(System.Boolean)" /> has been called.</exception>
-        <exception cref="T:System.InvalidOperationException">If the internal <see cref="P:Microsoft.IdentityModel.Tokens.SymmetricSignatureProvider.KeyedHashAlgorithm" /> is null. This can occur if a derived type deletes it or does not create it.</exception>
+        <exception cref="T:System.InvalidOperationException">If the internal <see cref="T:System.Security.Cryptography.KeyedHashAlgorithm" /> is null. This can occur if a derived type deletes it or does not create it.</exception>
       </Docs>
     </Member>
     <Member MemberName="Verify">
@@ -333,6 +374,7 @@
         <AssemblyVersion>6.6.0.0</AssemblyVersion>
         <AssemblyVersion>6.7.0.0</AssemblyVersion>
         <AssemblyVersion>6.7.1.0</AssemblyVersion>
+        <AssemblyVersion>6.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -355,7 +397,7 @@
         <exception cref="T:System.ArgumentException">'length &lt; 1'</exception>
         <exception cref="T:System.ObjectDisposedException">
           <see cref="M:Microsoft.IdentityModel.Tokens.SymmetricSignatureProvider.Dispose(System.Boolean)" /> has been called.</exception>
-        <exception cref="T:System.InvalidOperationException">If the internal <see cref="P:Microsoft.IdentityModel.Tokens.SymmetricSignatureProvider.KeyedHashAlgorithm" /> is null. This can occur if a derived type deletes it or does not create it.</exception>
+        <exception cref="T:System.InvalidOperationException">If the internal <see cref="T:System.Security.Cryptography.KeyedHashAlgorithm" /> is null. This can occur if a derived type deletes it or does not create it.</exception>
       </Docs>
     </Member>
   </Members>
