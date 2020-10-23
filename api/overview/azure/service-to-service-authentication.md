@@ -153,7 +153,7 @@ There are three primary methods of using a Service Principal to run your applica
 
 ### Use a certificate in local keystore to sign into Azure AD
 
-1. Create a service principal certificate using the Azure CLI [az ad sp create-for-rbac](https://docs.microsoft.com/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac) command.
+1. Create a service principal certificate using the Azure CLI [az ad sp create-for-rbac](https://docs.microsoft.com/cli/azure/ad/sp?#az-ad-sp-create-for-rbac) command.
 
     ```azurecli
     az ad sp create-for-rbac --create-cert
@@ -177,7 +177,7 @@ There are three primary methods of using a Service Principal to run your applica
 
 ### Use a shared secret credential to sign into Azure AD
 
-1. Create a service principal certificate with a password using the Azure CLI [az ad sp create-for-rbac](https://docs.microsoft.com/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac) command with the --sdk-auth parameter.
+1. Create a service principal certificate with a password using the Azure CLI [az ad sp create-for-rbac](https://docs.microsoft.com/cli/azure/ad/sp?#az-ad-sp-create-for-rbac) command with the --sdk-auth parameter.
 
     ```azurecli
     az ad sp create-for-rbac --sdk-auth
