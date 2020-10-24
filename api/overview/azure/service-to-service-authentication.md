@@ -26,8 +26,8 @@ Managing such credentials can be difficult. It's tempting to bundle credentials 
 
 The `Microsoft.Azure.Services.AppAuthentication` library manages authentication automatically, which in turn lets you focus on your solution, rather than your credentials. It supports local development with Microsoft Visual Studio, Azure CLI, or Azure AD Integrated Authentication. When deployed to an Azure resource that supports a managed identity, the library automatically uses [managed identities for Azure resources](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview). No code or configuration changes are required. The library also supports direct use of Azure AD [client credentials](https://docs.microsoft.com/azure/active-directory/develop/howto-authenticate-service-principal-powershell) when a managed identity isn't available, or when the developer's security context can't be determined during local development.
 
- [Source code](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/mgmtcommon/AppAuthentication) | [Package (nuget)](https://www.nuget.org/packages/Microsoft.Azure.Services.AppAuthentication/) | [Azure Active Directory documentation][https://docs.microsoft.com/en-us/azure/active-directory/]
-
+ [Source code](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/mgmtcommon/AppAuthentication) | [Package (nuget)](https://www.nuget.org/packages/Microsoft.Azure.Services.AppAuthentication/) | [Azure Active Directory documentation](https://docs.microsoft.com/en-us/azure/active-directory/)
+ 
 ## Prerequisites
 
 - [Visual Studio 2019](https://www.visualstudio.com/downloads/) or [Visual Studio 2017 v15.5](https://blogs.msdn.microsoft.com/visualstudio/2017/10/11/visual-studio-2017-version-15-5-preview/).
