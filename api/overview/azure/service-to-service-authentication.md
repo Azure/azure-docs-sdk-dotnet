@@ -13,7 +13,7 @@ ms.service: key-vault
 
 ---
 
-# Service-to-service authentication to Azure services using .NET
+# App Authentication client library for .NET - Version 1.6.0
 
 > [!NOTE]
 > **Microsoft.Azure.Services.AppAuthentication** is no longer recommended to use with new Azure SDK. 
@@ -25,6 +25,8 @@ To authenticate to Azure services with service principal, you need an Azure Acti
 Managing such credentials can be difficult. It's tempting to bundle credentials into an app by including them in source or configuration files. The `Microsoft.Azure.Services.AppAuthentication` for .NET library simplifies this problem. It uses the developer's credentials to authenticate during local development. When the solution is later deployed to Azure, the library automatically switches to application credentials. Using developer credentials during local development is more secure because you don't need to create Azure AD credentials or share credentials between developers.
 
 The `Microsoft.Azure.Services.AppAuthentication` library manages authentication automatically, which in turn lets you focus on your solution, rather than your credentials. It supports local development with Microsoft Visual Studio, Azure CLI, or Azure AD Integrated Authentication. When deployed to an Azure resource that supports a managed identity, the library automatically uses [managed identities for Azure resources](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview). No code or configuration changes are required. The library also supports direct use of Azure AD [client credentials](https://docs.microsoft.com/azure/active-directory/develop/howto-authenticate-service-principal-powershell) when a managed identity isn't available, or when the developer's security context can't be determined during local development.
+
+ [Source code](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/mgmtcommon/AppAuthentication) | [Package (nuget)](https://www.nuget.org/packages/Microsoft.Azure.Services.AppAuthentication/) | [Azure Active Directory documentation][https://docs.microsoft.com/en-us/azure/active-directory/]
 
 ## Prerequisites
 
