@@ -15,7 +15,7 @@ ms.service: identity
 > [!NOTE]
 > **Microsoft.Azure.Services.AppAuthentication** is no longer recommended to use with new Azure SDK. 
 > It is replaced with new **Azure Identity client library** available for .NET, Java, TypeScript and Python and should be used for all new development. 
-> More information about Azure Identity SDK for .NET can be found here: [Azure Identity client library for .NET](https://docs.microsoft.com/dotnet/api/overview/azure/identity-readme).
+> Information about how to migrate to `Azure Identity`can be found here: [AppAuthentication to Azure.Identity Migration Guidance](app-auth-migration.md).
 
 To authenticate to Azure services with service principal, you need an Azure Active Directory (Azure AD) credential, either a shared secret or a certificate.
 
