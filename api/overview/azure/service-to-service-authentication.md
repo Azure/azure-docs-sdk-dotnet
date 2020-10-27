@@ -7,7 +7,7 @@ ms.author: jalichwa
 ms.date: 10/27/2020
 ms.topic: article
 ms.devlang: .net
-ms.service: identity
+ms.prod: azure
 ---
 
 # App Authentication client library for .NET - Version 1.6.0
