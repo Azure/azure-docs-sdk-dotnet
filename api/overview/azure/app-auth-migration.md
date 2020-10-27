@@ -1,12 +1,11 @@
 ---
 title: App Authentication to Azure Identity Migration Guidance
+description: App Authentication to Azure Identity Migration Guidance
 keywords: Azure, .net, SDK, API, Azure.Identity, identity
 author: jlichwa
 ms.author: jalichwa
 ms.date: 10/27/2020
 ms.topic: article
-ms.prod: azure
-ms.technology: azure
 ms.devlang: .net
 ms.service: identity
 ---
@@ -16,7 +15,7 @@ ms.service: identity
 When the [Microsoft.Azure.Services.AppAuthentication](service-to-service-authentication.md) was first released in fall 2017, it was specifically designed to help mitigate the common and systemic issue of credentials in source code. It introduced a [new paradigm for app development](https://azure.microsoft.com/blog/the-green-team-solves-high-risk-systemic-security-issues-for-azure/) that allowed developers to write code once and let `AppAuthentication` client library determine how to authenticate based on the application environment - whether
 on a developer workstation using a developer's account or deployed in Azure using a managed service identity. Developers could completely avoid directly handling credentials, both simplifying development and improving security by preventing credentials from being accidentally disclosed in source code. Given its simplicity and security benefits,
 `AppAuthentication` has been well received by developers. The [NuGet](https://www.nuget.org/packages/Microsoft.Azure.Services.AppAuthentication) currently has over 27 million downloads and counting, and it is being used in other libraries and frameworks for Azure services, such as the [Azure Key Vault Configuration Provider in .NET
-Core](https://docs.microsoft.com/aspnet/core/security/key-vault-configuration?view=aspnetcore-3.1)
+Core](https://docs.microsoft.com/aspnet/core/security/key-vault-configuration?view=aspnetcore-3.1&preserve-view=true)
 and the [Microsoft.Azure.ServiceBus](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/servicebus/Microsoft.Azure.ServiceBus) SDK.
 
 Released in fall 2019, the new [Azure.Identity client library](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/identity/Azure.Identity) can be considered the spiritual successor to the `AppAuthentication` library. Azure.Identity has a major advantage over `AppAuthentication` with its broader availability in multiple languages that provide consistent design and similar usage across these languages, whereas `AppAuthentication` is only available for .NET. In addition to its support of multiple languages, one key design feature of Azure.Identity is its various implementations of the abstract TokenCredential class, of which [newer Azure client SDKs
@@ -42,7 +41,7 @@ If you are starting development of a new application, it is strongly recommended
 |Service principal client secret|RunAs=App;AppId=appId;TenantId=tenantId;<br>AppKey=secret|new EnvironmentCredential()**<br>new ClientSecretCredential(tenantId, appId, secret)|
 
 > [!NOTE]
-> `*` Authentication providers and order is different between [AzureServiceTokenProvider](https://github.com/Azure/azure-sdk-for-net/blob/7d23a9d912da40baeebee1125eb5ebefa78449a2/sdk/mgmtcommon/AppAuthentication/Azure.Services.AppAuthentication/AzureServiceTokenProvider.cs#L104) and [DefaultAzureCredential](https://docs.microsoft.com/en-us/dotnet/api/overview/azure/identity-readme#defaultazurecredential)<br>
+> `*` Authentication providers and order is different between [AzureServiceTokenProvider](https://github.com/Azure/azure-sdk-for-net/blob/7d23a9d912da40baeebee1125eb5ebefa78449a2/sdk/mgmtcommon/AppAuthentication/Azure.Services.AppAuthentication/AzureServiceTokenProvider.cs#L104) and [DefaultAzureCredential](https://docs.microsoft.com/dotnet/api/overview/azure/identity-readme#defaultazurecredential)<br>
 > `**` Need to set [environment variables](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/identity/Azure.Identity#environment-variables)
 
 While Azure.Identity supports most authentication scenarios and providers that AppAuthentication has, there are some scenarios and features that are currently not supported:

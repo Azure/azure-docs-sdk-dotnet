@@ -1,12 +1,11 @@
 ---
 title: App Authentication client library for .NET - Version 1.6.0
+description: App Authentication client library for .NET - Version 1.6.0
 keywords: Azure, .net, SDK, API, Azure.Identity, identity
 author: jlichwa
 ms.author: jalichwa
 ms.date: 10/27/2020
 ms.topic: article
-ms.prod: azure
-ms.technology: azure
 ms.devlang: .net
 ms.service: identity
 ---
