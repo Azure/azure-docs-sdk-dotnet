@@ -1,16 +1,15 @@
 ---
 title: App Authentication to Azure Identity Migration Guidance
-description: App Authentication to Azure Identity Migration Guidance
 keywords: Azure, .net, SDK, API, Azure.Identity, identity
 author: jlichwa
-
-ms.technology: azure
-ms.devlang: .net
-ms.prod: azure
 ms.author: jalichwa
 ms.date: 10/27/2020
 ms.topic: article
+ms.prod: azure
+ms.technology: azure
+ms.devlang: .net
 ms.service: identity
+---
 
 # AppAuthentication to Azure.Identity Migration Guidance
 
