@@ -44,11 +44,11 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Video (string label = default, TimeSpan? keyFrameInterval = default, Microsoft.Azure.Management.Media.Models.StretchMode? stretchMode = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string label, valuetype System.Nullable`1&lt;valuetype System.TimeSpan&gt; keyFrameInterval, valuetype System.Nullable`1&lt;valuetype Microsoft.Azure.Management.Media.Models.StretchMode&gt; stretchMode) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.Media.Models.Video.#ctor(System.String,System.Nullable{System.TimeSpan},System.Nullable{Microsoft.Azure.Management.Media.Models.StretchMode})" />
-      <MemberSignature Language="VB.NET" Value="Public Sub New (Optional label As String = Nothing, Optional keyFrameInterval As Nullable(Of TimeSpan) = Nothing, Optional stretchMode As Nullable(Of StretchMode) = Nothing)" />
-      <MemberSignature Language="F#" Value="new Microsoft.Azure.Management.Media.Models.Video : string * Nullable&lt;TimeSpan&gt; * Nullable&lt;Microsoft.Azure.Management.Media.Models.StretchMode&gt; -&gt; Microsoft.Azure.Management.Media.Models.Video" Usage="new Microsoft.Azure.Management.Media.Models.Video (label, keyFrameInterval, stretchMode)" />
+      <MemberSignature Language="C#" Value="public Video (string label = default, TimeSpan? keyFrameInterval = default, Microsoft.Azure.Management.Media.Models.StretchMode? stretchMode = default, Microsoft.Azure.Management.Media.Models.VideoSyncMode? syncMode = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string label, valuetype System.Nullable`1&lt;valuetype System.TimeSpan&gt; keyFrameInterval, valuetype System.Nullable`1&lt;valuetype Microsoft.Azure.Management.Media.Models.StretchMode&gt; stretchMode, valuetype System.Nullable`1&lt;valuetype Microsoft.Azure.Management.Media.Models.VideoSyncMode&gt; syncMode) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.Media.Models.Video.#ctor(System.String,System.Nullable{System.TimeSpan},System.Nullable{Microsoft.Azure.Management.Media.Models.StretchMode},System.Nullable{Microsoft.Azure.Management.Media.Models.VideoSyncMode})" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (Optional label As String = Nothing, Optional keyFrameInterval As Nullable(Of TimeSpan) = Nothing, Optional stretchMode As Nullable(Of StretchMode) = Nothing, Optional syncMode As Nullable(Of VideoSyncMode) = Nothing)" />
+      <MemberSignature Language="F#" Value="new Microsoft.Azure.Management.Media.Models.Video : string * Nullable&lt;TimeSpan&gt; * Nullable&lt;Microsoft.Azure.Management.Media.Models.StretchMode&gt; * Nullable&lt;Microsoft.Azure.Management.Media.Models.VideoSyncMode&gt; -&gt; Microsoft.Azure.Management.Media.Models.Video" Usage="new Microsoft.Azure.Management.Media.Models.Video (label, keyFrameInterval, stretchMode, syncMode)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Management.Media</AssemblyName>
@@ -58,18 +58,23 @@
         <Parameter Name="label" Type="System.String" />
         <Parameter Name="keyFrameInterval" Type="System.Nullable&lt;System.TimeSpan&gt;" />
         <Parameter Name="stretchMode" Type="System.Nullable&lt;Microsoft.Azure.Management.Media.Models.StretchMode&gt;" />
+        <Parameter Name="syncMode" Type="System.Nullable&lt;Microsoft.Azure.Management.Media.Models.VideoSyncMode&gt;" />
       </Parameters>
       <Docs>
         <param name="label">An optional label for the codec. The label can
             be used to control muxing behavior.</param>
-        <param name="keyFrameInterval">The distance between two key frames,
-            thereby defining a group of pictures (GOP). The value should be a
-            non-zero integer in the range [1, 30] seconds, specified in ISO
-            8601 format. The default is 2 seconds (PT2S).</param>
+        <param name="keyFrameInterval">The distance between two key frames.
+            The value should be non-zero in the range [0.5, 20] seconds,
+            specified in ISO 8601 format. The default is 2 seconds(PT2S). Note
+            that this setting is ignored if VideoSyncMode.Passthrough is set,
+            where the KeyFrameInterval value will follow the input source
+            setting.</param>
         <param name="stretchMode">The resizing mode - how the input video
             will be resized to fit the desired output resolution(s). Default is
             AutoSize. Possible values include: 'None', 'AutoSize',
             'AutoFit'</param>
+        <param name="syncMode">The Video Sync Mode. Possible values
+            include: 'Auto', 'Passthrough', 'Cfr', 'Vfr'</param>
         <summary>
             Initializes a new instance of the Video class.
             </summary>
@@ -98,10 +103,11 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Gets or sets the distance between two key frames, thereby defining
-            a group of pictures (GOP). The value should be a non-zero integer
-            in the range [1, 30] seconds, specified in ISO 8601 format. The
-            default is 2 seconds (PT2S).
+            Gets or sets the distance between two key frames. The value should
+            be non-zero in the range [0.5, 20] seconds, specified in ISO 8601
+            format. The default is 2 seconds(PT2S). Note that this setting is
+            ignored if VideoSyncMode.Passthrough is set, where the
+            KeyFrameInterval value will follow the input source setting.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -132,6 +138,35 @@
             Gets or sets the resizing mode - how the input video will be
             resized to fit the desired output resolution(s). Default is
             AutoSize. Possible values include: 'None', 'AutoSize', 'AutoFit'
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SyncMode">
+      <MemberSignature Language="C#" Value="public Microsoft.Azure.Management.Media.Models.VideoSyncMode? SyncMode { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;valuetype Microsoft.Azure.Management.Media.Models.VideoSyncMode&gt; SyncMode" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.Media.Models.Video.SyncMode" />
+      <MemberSignature Language="VB.NET" Value="Public Property SyncMode As Nullable(Of VideoSyncMode)" />
+      <MemberSignature Language="F#" Value="member this.SyncMode : Nullable&lt;Microsoft.Azure.Management.Media.Models.VideoSyncMode&gt; with get, set" Usage="Microsoft.Azure.Management.Media.Models.Video.SyncMode" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.Media</AssemblyName>
+        <AssemblyVersion>2.0.1.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName Language="C#">[Newtonsoft.Json.JsonProperty(PropertyName="syncMode")]</AttributeName>
+          <AttributeName Language="F#">[&lt;Newtonsoft.Json.JsonProperty(PropertyName="syncMode")&gt;]</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;Microsoft.Azure.Management.Media.Models.VideoSyncMode&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets the Video Sync Mode. Possible values include: 'Auto',
+            'Passthrough', 'Cfr', 'Vfr'
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
