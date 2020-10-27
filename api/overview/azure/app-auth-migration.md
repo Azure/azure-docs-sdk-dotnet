@@ -7,7 +7,7 @@ ms.author: jalichwa
 ms.date: 10/27/2020
 ms.topic: article
 ms.devlang: .net
-ms.service: identity
+ms.prod: azure
 ---
 
 # AppAuthentication to Azure.Identity Migration Guidance
