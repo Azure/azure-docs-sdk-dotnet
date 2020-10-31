@@ -19,12 +19,12 @@
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
-    <Member MemberName="TryGetQueryCharge">
-      <MemberSignature Language="C#" Value="public static bool TryGetQueryCharge (Azure.Page&lt;string&gt; page, out float queryCharge);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool TryGetQueryCharge(class Azure.Page`1&lt;string&gt; page, [out] float32&amp; queryCharge) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.DigitalTwins.Core.QueryChargeHelper.TryGetQueryCharge(Azure.Page{System.String},System.Single@)" />
-      <MemberSignature Language="VB.NET" Value="Public Shared Function TryGetQueryCharge (page As Page(Of String), ByRef queryCharge As Single) As Boolean" />
-      <MemberSignature Language="F#" Value="static member TryGetQueryCharge : Azure.Page&lt;string&gt; * single -&gt; bool" Usage="Azure.DigitalTwins.Core.QueryChargeHelper.TryGetQueryCharge (page, queryCharge)" />
+    <Member MemberName="TryGetQueryCharge&lt;T&gt;">
+      <MemberSignature Language="C#" Value="public static bool TryGetQueryCharge&lt;T&gt; (Azure.Page&lt;T&gt; page, out float queryCharge);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool TryGetQueryCharge&lt;T&gt;(class Azure.Page`1&lt;!!T&gt; page, [out] float32&amp; queryCharge) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.DigitalTwins.Core.QueryChargeHelper.TryGetQueryCharge``1(Azure.Page{``0},System.Single@)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function TryGetQueryCharge(Of T) (page As Page(Of T), ByRef queryCharge As Single) As Boolean" />
+      <MemberSignature Language="F#" Value="static member TryGetQueryCharge : Azure.Page&lt;'T&gt; * single -&gt; bool" Usage="Azure.DigitalTwins.Core.QueryChargeHelper.TryGetQueryCharge (page, queryCharge)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.DigitalTwins.Core</AssemblyName>
@@ -33,11 +33,15 @@
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
+      <TypeParameters>
+        <TypeParameter Name="T" />
+      </TypeParameters>
       <Parameters>
-        <Parameter Name="page" Type="Azure.Page&lt;System.String&gt;" />
+        <Parameter Name="page" Type="Azure.Page&lt;T&gt;" />
         <Parameter Name="queryCharge" Type="System.Single" RefType="out" />
       </Parameters>
       <Docs>
+        <typeparam name="T">To be added.</typeparam>
         <param name="page">The page that contains the query-charge header.</param>
         <param name="queryCharge">The query charge extracted from the header.</param>
         <summary>
@@ -52,11 +56,11 @@
              // the query API. It iterates over the response pages first to access to the query-charge header,
              // and then the digital twin results within each page.
             
-             AsyncPageable&lt;string&gt; asyncPageableResponseWithCharge = client.QueryAsync("SELECT * FROM digitaltwins");
+             AsyncPageable&lt;BasicDigitalTwin&gt; asyncPageableResponseWithCharge = client.QueryAsync&lt;BasicDigitalTwin&gt;("SELECT * FROM digitaltwins");
              int pageNum = 0;
             
              // The "await" keyword here is required as a call is made when fetching a new page.
-             await foreach (Page&lt;string&gt; page in asyncPageableResponseWithCharge.AsPages())
+             await foreach (Page&lt;BasicDigitalTwin&gt; page in asyncPageableResponseWithCharge.AsPages())
              {
                  Console.WriteLine($"Page {++pageNum} results:");
             
@@ -68,9 +72,8 @@
             
                  // Iterate over the twin instances.
                  // The "await" keyword is not required here as the paged response is local.
-                 foreach (string response in page.Values)
+                 foreach (BasicDigitalTwin twin in page.Values)
                  {
-                     BasicDigitalTwin twin = JsonSerializer.Deserialize&lt;BasicDigitalTwin&gt;(response);
                      Console.WriteLine($"Found digital twin '{twin.Id}'");
                  }
              }
