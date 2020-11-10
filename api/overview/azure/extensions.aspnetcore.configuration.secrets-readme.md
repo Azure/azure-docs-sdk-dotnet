@@ -3,7 +3,7 @@ title:
 keywords: Azure, .net, SDK, API, Azure.Extensions.AspNetCore.Configuration.Secrets, extensions
 author: maggiepint
 ms.author: magpint
-ms.date: 10/02/2020
+ms.date: 11/06/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -72,7 +72,7 @@ additional questions or comments.
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fextensions%2FAzure.Extensions.AspNetCore.Configuration.Secrets%2FREADME.png)
 
 <!-- LINKS -->
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Extensions.AspNetCore.Configuration.Secrets_1.0.1/sdk/extensions/Azure.Extensions.AspNetCore.Configuration.Secrets/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Extensions.AspNetCore.Configuration.Secrets_1.0.2/sdk/extensions/Azure.Extensions.AspNetCore.Configuration.Secrets/src
 [package]: https://www.nuget.org/packages/Azure.Extensions.AspNetCore.Configuration.Secrets/
 [docs]: https://docs.microsoft.com/dotnet/api/Azure.Extensions.AspNetCore.Configuration.Secrets
 [nuget]: https://www.nuget.org/packages/Azure.Extensions.AspNetCore.Configuration.Secrets
@@ -81,7 +81,7 @@ additional questions or comments.
 [keyvault_create_ps]: https://docs.microsoft.com/azure/key-vault/quick-create-powershell#create-a-key-vault
 [azure_cli]: https://docs.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
-[identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Extensions.AspNetCore.Configuration.Secrets_1.0.1/sdk/identity/Azure.Identity/README.md
+[identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Extensions.AspNetCore.Configuration.Secrets_1.0.2/sdk/identity/Azure.Identity/README.md
 [aspnetcore_configuration_doc]: https://docs.microsoft.com/aspnet/core/fundamentals/configuration/?view=aspnetcore-3.1
 [error_codes]: https://docs.microsoft.com/rest/api/storageservices/blob-service-error-codes
 [cla]: https://cla.microsoft.com
