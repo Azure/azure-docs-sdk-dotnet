@@ -116,6 +116,31 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
+    <Member MemberName="InitialBatchActionCount">
+      <MemberSignature Language="C#" Value="public int? InitialBatchActionCount { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;int32&gt; InitialBatchActionCount" />
+      <MemberSignature Language="DocId" Value="P:Azure.Search.Documents.SearchIndexingBufferedSenderOptions`1.InitialBatchActionCount" />
+      <MemberSignature Language="VB.NET" Value="Public Property InitialBatchActionCount As Nullable(Of Integer)" />
+      <MemberSignature Language="F#" Value="member this.InitialBatchActionCount : Nullable&lt;int&gt; with get, set" Usage="Azure.Search.Documents.SearchIndexingBufferedSenderOptions&lt;'T&gt;.InitialBatchActionCount" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Search.Documents</AssemblyName>
+        <AssemblyVersion>11.2.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;System.Int32&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets a value indicating the initial number of actions to
+            group into a batch when tuning the behavior of the sender.  The
+            default value will be 512 if unset.  The current service maximum is
+            32000.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="KeyFieldAccessor">
       <MemberSignature Language="C#" Value="public Func&lt;T,string&gt; KeyFieldAccessor { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance class System.Func`2&lt;!T, string&gt; KeyFieldAccessor" />
@@ -138,6 +163,85 @@
             will look for <see cref="P:Azure.Search.Documents.Indexes.SimpleFieldAttribute.IsKey" /> or call
             <see cref="M:Azure.Search.Documents.Indexes.SearchIndexClient.GetIndex(System.String,System.Threading.CancellationToken)" />
             to help automatically determine the key.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MaxRetries">
+      <MemberSignature Language="C#" Value="public int MaxRetries { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 MaxRetries" />
+      <MemberSignature Language="DocId" Value="P:Azure.Search.Documents.SearchIndexingBufferedSenderOptions`1.MaxRetries" />
+      <MemberSignature Language="VB.NET" Value="Public Property MaxRetries As Integer" />
+      <MemberSignature Language="F#" Value="member this.MaxRetries : int with get, set" Usage="Azure.Search.Documents.SearchIndexingBufferedSenderOptions&lt;'T&gt;.MaxRetries" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Search.Documents</AssemblyName>
+        <AssemblyVersion>11.2.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets the number of times to retry a failed document.  Note
+            that this is different than <see cref="P:Azure.Core.RetryOptions.MaxRetries" />
+            which will try to resend the same request.  This property is used
+            to control the number of attempts we will make to submit an indexing
+            action.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MaxRetryDelay">
+      <MemberSignature Language="C#" Value="public TimeSpan MaxRetryDelay { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.TimeSpan MaxRetryDelay" />
+      <MemberSignature Language="DocId" Value="P:Azure.Search.Documents.SearchIndexingBufferedSenderOptions`1.MaxRetryDelay" />
+      <MemberSignature Language="VB.NET" Value="Public Property MaxRetryDelay As TimeSpan" />
+      <MemberSignature Language="F#" Value="member this.MaxRetryDelay : TimeSpan with get, set" Usage="Azure.Search.Documents.SearchIndexingBufferedSenderOptions&lt;'T&gt;.MaxRetryDelay" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Search.Documents</AssemblyName>
+        <AssemblyVersion>11.2.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.TimeSpan</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            The maximum permissible delay between retry attempts.  Note that
+            this is different than <see cref="P:Azure.Core.RetryOptions.MaxDelay" />
+            which will only delay before resending the same request.  This
+            property is used to add delay between additional batch
+            submissions when our requests are being throttled by the service.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RetryDelay">
+      <MemberSignature Language="C#" Value="public TimeSpan RetryDelay { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.TimeSpan RetryDelay" />
+      <MemberSignature Language="DocId" Value="P:Azure.Search.Documents.SearchIndexingBufferedSenderOptions`1.RetryDelay" />
+      <MemberSignature Language="VB.NET" Value="Public Property RetryDelay As TimeSpan" />
+      <MemberSignature Language="F#" Value="member this.RetryDelay : TimeSpan with get, set" Usage="Azure.Search.Documents.SearchIndexingBufferedSenderOptions&lt;'T&gt;.RetryDelay" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Search.Documents</AssemblyName>
+        <AssemblyVersion>11.2.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.TimeSpan</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            The initial retry delay. The delay will increase exponentially with
+            subsequent retries and add random jitter.  Note that this is
+            different than <see cref="P:Azure.Core.RetryOptions.Delay" /> which
+            will only delay before resending the same request.  This property
+            is used to add delay between additional batch submissions when our
+            requests are being throttled by the service.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
