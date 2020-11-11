@@ -3,7 +3,7 @@ title: Azure Cognitive Search client library for .NET
 keywords: Azure, .net, SDK, API, Azure.Search.Documents, search
 author: maggiepint
 ms.author: magpint
-ms.date: 10/09/2020
+ms.date: 11/11/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: .net
 ms.service: search
 ---
 
-# Azure Cognitive Search client library for .NET - Version 11.2.0-beta.1 
+# Azure Cognitive Search client library for .NET - Version 11.2.0-beta.2 
 
 
 [Azure Cognitive Search](https://docs.microsoft.com/azure/search/) is a
@@ -418,7 +418,7 @@ catch (RequestFailedException ex) when (ex.Status == 404)
 }
 ```
 
-You can also easily [enable console logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.2.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md#logging) if you want to dig
+You can also easily [enable console logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.2.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md#logging) if you want to dig
 deeper into the requests you're making against the service.
 
 ## Next steps
@@ -445,7 +445,7 @@ additional questions or comments.
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fsearch%2FAzure.Search.Documents%2FREADME.png)
 
 <!-- LINKS -->
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Search.Documents_11.2.0-beta.1/sdk/search/Azure.Search.Documents/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Search.Documents_11.2.0-beta.2/sdk/search/Azure.Search.Documents/src
 [package]: https://www.nuget.org/packages/Azure.Search.Documents/
 [docs]: https://docs.microsoft.com/dotnet/api/Azure.Search.Documents
 [rest_docs]: https://docs.microsoft.com/rest/api/searchservice/
@@ -456,10 +456,10 @@ additional questions or comments.
 [create_search_service_cli]: https://docs.microsoft.com/cli/azure/search/service?view=azure-cli-latest#az-search-service-create
 [azure_cli]: https://docs.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
-[RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Search.Documents_11.2.0-beta.1/sdk/core/Azure.Core/src/RequestFailedException.cs
+[RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Search.Documents_11.2.0-beta.2/sdk/core/Azure.Core/src/RequestFailedException.cs
 [status_codes]: https://docs.microsoft.com/rest/api/searchservice/http-status-codes
-[samples]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.2.0-beta.1/sdk/search/Azure.Search.Documents/samples/
-[search_contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Search.Documents_11.2.0-beta.1/sdk/search/CONTRIBUTING.md
+[samples]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.2.0-beta.2/sdk/search/Azure.Search.Documents/samples/
+[search_contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Search.Documents_11.2.0-beta.2/sdk/search/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
