@@ -97,10 +97,10 @@
         <Parameter Name="entity" Type="T" />
       </Parameters>
       <Docs>
-        <typeparam name="T" />
-        <param name="entity" />
+        <typeparam name="T">A custom model type that implements <see cref="T:Azure.Data.Tables.ITableEntity" /> or an instance of <see cref="T:Azure.Data.Tables.TableEntity" />.</typeparam>
+        <param name="entity">The entity to add.</param>
         <summary>
-            Add an AddEntity requests to the batch.
+            Adds a Table Entity of type <typeparamref name="T" /> to the batch.
             </summary>
         <remarks>To be added.</remarks>
       </Docs>
@@ -125,20 +125,25 @@
         <Parameter Name="ifMatch" Type="Azure.ETag" />
       </Parameters>
       <Docs>
-        <param name="partitionKey" />
-        <param name="rowKey" />
-        <param name="ifMatch" />
+        <param name="partitionKey">The partition key of the entity to delete.</param>
+        <param name="rowKey">The row key of the entity to delete.</param>
+        <param name="ifMatch">
+            The If-Match value to be used for optimistic concurrency.
+            If <see cref="F:Azure.ETag.All" /> is specified, the operation will be executed unconditionally.
+            If the <see cref="P:Azure.Data.Tables.ITableEntity.ETag" /> value is specified, the operation will fail with a status of 412 (Precondition Failed) if the <see cref="T:Azure.ETag" /> value of the entity in the table does not match.
+            The default is to delete unconditionally.
+            </param>
         <summary>
             Add a DeleteEntity request to the batch.
             </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="SubmitBatch&lt;T&gt;">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Data.Tables.Models.TableBatchResponse&gt; SubmitBatch&lt;T&gt; (System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Data.Tables.Models.TableBatchResponse&gt; SubmitBatch&lt;T&gt;(valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Data.Tables.TableTransactionalBatch.SubmitBatch``1(System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function SubmitBatch(Of T) (Optional cancellationToken As CancellationToken = Nothing) As Response(Of TableBatchResponse)" />
+    <Member MemberName="SubmitBatch">
+      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Data.Tables.Models.TableBatchResponse&gt; SubmitBatch (System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Data.Tables.Models.TableBatchResponse&gt; SubmitBatch(valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Data.Tables.TableTransactionalBatch.SubmitBatch(System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function SubmitBatch (Optional cancellationToken As CancellationToken = Nothing) As Response(Of TableBatchResponse)" />
       <MemberSignature Language="F#" Value="abstract member SubmitBatch : System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Data.Tables.Models.TableBatchResponse&gt;&#xA;override this.SubmitBatch : System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Data.Tables.Models.TableBatchResponse&gt;" Usage="tableTransactionalBatch.SubmitBatch cancellationToken" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -148,20 +153,20 @@
       <ReturnValue>
         <ReturnType>Azure.Response&lt;Azure.Data.Tables.Models.TableBatchResponse&gt;</ReturnType>
       </ReturnValue>
-      <TypeParameters>
-        <TypeParameter Name="T" />
-      </TypeParameters>
       <Parameters>
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <typeparam name="T" />
-        <param name="cancellationToken">To be added.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> controlling the request lifetime.</param>
         <summary>
-            Placeholder for batch operations. This is just being used for testing.
+            Submits the batch transaction to the service for execution.
+            The sub-operations contained in the batch will either succeed or fail together as a transaction.
             </summary>
-        <returns />
+        <returns>
+          <see cref="T:Azure.Response`1" /> containing a <see cref="T:Azure.Data.Tables.Models.TableBatchResponse" />.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:Azure.RequestFailedException" />
+        <exception cref="T:System.InvalidOperationException" />
       </Docs>
     </Member>
     <Member MemberName="SubmitBatchAsync">
@@ -182,11 +187,44 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="cancellationToken" />
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> controlling the request lifetime.</param>
         <summary>
-            Placeholder for batch operations. This is just being used for testing.
+            Submits the batch transaction to the service for execution.
+            The sub-operations contained in the batch will either succeed or fail together as a transaction.
             </summary>
-        <returns />
+        <returns>
+          <see cref="T:Azure.Response`1" /> containing a <see cref="T:Azure.Data.Tables.Models.TableBatchResponse" />.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:Azure.RequestFailedException" />
+        <exception cref="T:System.InvalidOperationException" />
+      </Docs>
+    </Member>
+    <Member MemberName="TryGetFailedEntityFromException">
+      <MemberSignature Language="C#" Value="public bool TryGetFailedEntityFromException (Azure.RequestFailedException exception, out Azure.Data.Tables.ITableEntity failedEntity);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TryGetFailedEntityFromException(class Azure.RequestFailedException exception, [out] class Azure.Data.Tables.ITableEntity&amp; failedEntity) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Data.Tables.TableTransactionalBatch.TryGetFailedEntityFromException(Azure.RequestFailedException,Azure.Data.Tables.ITableEntity@)" />
+      <MemberSignature Language="VB.NET" Value="Public Function TryGetFailedEntityFromException (exception As RequestFailedException, ByRef failedEntity As ITableEntity) As Boolean" />
+      <MemberSignature Language="F#" Value="member this.TryGetFailedEntityFromException : Azure.RequestFailedException * ITableEntity -&gt; bool" Usage="tableTransactionalBatch.TryGetFailedEntityFromException (exception, failedEntity)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Data.Tables</AssemblyName>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="exception" Type="Azure.RequestFailedException" />
+        <Parameter Name="failedEntity" Type="Azure.Data.Tables.ITableEntity" RefType="out" />
+      </Parameters>
+      <Docs>
+        <param name="exception">The exception thrown from <see cref="M:Azure.Data.Tables.TableTransactionalBatch.SubmitBatch(System.Threading.CancellationToken)" /> or <see cref="M:Azure.Data.Tables.TableTransactionalBatch.SubmitBatchAsync(System.Threading.CancellationToken)" />.</param>
+        <param name="failedEntity">If the return value is <c>true</c>, contains the <see cref="T:Azure.Data.Tables.ITableEntity" /> that caused the batch operation to fail.</param>
+        <summary>
+            Tries to get the entity that caused the batch operation failure from the <see cref="T:Azure.RequestFailedException" />.
+            </summary>
+        <returns>
+          <c>true</c> if the failed entity was retrieved from the exception, else <c>false</c>.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -219,12 +257,58 @@
         <Parameter Name="mode" Type="Azure.Data.Tables.TableUpdateMode" />
       </Parameters>
       <Docs>
-        <typeparam name="T" />
-        <param name="entity">To be added.</param>
-        <param name="ifMatch">To be added.</param>
-        <param name="mode">To be added.</param>
+        <typeparam name="T">A custom model type that implements <see cref="T:Azure.Data.Tables.ITableEntity" /> or an instance of <see cref="T:Azure.Data.Tables.TableEntity" />.</typeparam>
+        <param name="entity">The entity to update.</param>
+        <param name="ifMatch">
+            The If-Match value to be used for optimistic concurrency.
+            If <see cref="F:Azure.ETag.All" /> is specified, the operation will be executed unconditionally.
+            If the <see cref="P:Azure.Data.Tables.ITableEntity.ETag" /> value is specified, the operation will fail with a status of 412 (Precondition Failed) if the <see cref="T:Azure.ETag" /> value of the entity in the table does not match.
+            </param>
+        <param name="mode">Determines the behavior of the Update operation.</param>
         <summary>
-            Add an UpdateEntity request to the batch.
+            Adds an UpdateEntity request to the batch which
+            updates the specified table entity of type <typeparamref name="T" />, if it exists.
+            If the <paramref name="mode" /> is <see cref="F:Azure.Data.Tables.TableUpdateMode.Replace" />, the entity will be replaced.
+            If the <paramref name="mode" /> is <see cref="F:Azure.Data.Tables.TableUpdateMode.Merge" />, the property values present in the <paramref name="entity" /> will be merged with the existing entity.
+            </summary>
+        <remarks>
+            See <see cref="T:Azure.Data.Tables.TableUpdateMode" /> for more information about the behavior of the <paramref name="mode" />.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UpsertEntity&lt;T&gt;">
+      <MemberSignature Language="C#" Value="public virtual void UpsertEntity&lt;T&gt; (T entity, Azure.Data.Tables.TableUpdateMode mode = Azure.Data.Tables.TableUpdateMode.Merge) where T : class, Azure.Data.Tables.ITableEntity, new();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void UpsertEntity&lt;class .ctor (class Azure.Data.Tables.ITableEntity) T&gt;(!!T entity, valuetype Azure.Data.Tables.TableUpdateMode mode) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Data.Tables.TableTransactionalBatch.UpsertEntity``1(``0,Azure.Data.Tables.TableUpdateMode)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Sub UpsertEntity(Of T As {Class, ITableEntity, New}) (entity As T, Optional mode As TableUpdateMode = Azure.Data.Tables.TableUpdateMode.Merge)" />
+      <MemberSignature Language="F#" Value="abstract member UpsertEntity : 'T * Azure.Data.Tables.TableUpdateMode -&gt; unit (requires 'T : null and 'T :&gt; Azure.Data.Tables.ITableEntity and 'T : (new : unit -&gt; 'T))&#xA;override this.UpsertEntity : 'T * Azure.Data.Tables.TableUpdateMode -&gt; unit (requires 'T : null and 'T :&gt; Azure.Data.Tables.ITableEntity and 'T : (new : unit -&gt; 'T))" Usage="tableTransactionalBatch.UpsertEntity (entity, mode)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Data.Tables</AssemblyName>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <TypeParameters>
+        <TypeParameter Name="T">
+          <Constraints>
+            <ParameterAttribute>DefaultConstructorConstraint</ParameterAttribute>
+            <ParameterAttribute>ReferenceTypeConstraint</ParameterAttribute>
+            <InterfaceName>Azure.Data.Tables.ITableEntity</InterfaceName>
+          </Constraints>
+        </TypeParameter>
+      </TypeParameters>
+      <Parameters>
+        <Parameter Name="entity" Type="T" />
+        <Parameter Name="mode" Type="Azure.Data.Tables.TableUpdateMode" />
+      </Parameters>
+      <Docs>
+        <typeparam name="T">A custom model type that implements <see cref="T:Azure.Data.Tables.ITableEntity" /> or an instance of <see cref="T:Azure.Data.Tables.TableEntity" />.</typeparam>
+        <param name="entity">The entity to upsert.</param>
+        <param name="mode">Determines the behavior of the update operation when the entity already exists in the table. See <see cref="T:Azure.Data.Tables.TableUpdateMode" /> for more details.</param>
+        <summary>
+            Replaces the specified table entity of type <typeparamref name="T" />, if it exists. Creates the entity if it does not exist.
             </summary>
         <remarks>To be added.</remarks>
       </Docs>

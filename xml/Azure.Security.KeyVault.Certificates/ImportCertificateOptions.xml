@@ -46,11 +46,15 @@
       </Parameters>
       <Docs>
         <param name="name">A name for the imported certificate.</param>
-        <param name="certificate">The PFX or ASCII PEM formatted value of the certificate containing both the X.509 certificates and the private key.</param>
+        <param name="certificate">The PFX or ASCII PEM-formatted value of the certificate containing both the X.509 certificates and the private key.</param>
         <summary>
             Initializes a new instance of the <see cref="T:Azure.Security.KeyVault.Certificates.ImportCertificateOptions" /> class.
             </summary>
-        <remarks>To be added.</remarks>
+        <remarks>
+            If importing an ASCII PEM-formatted certificate, you must also create a <see cref="T:Azure.Security.KeyVault.Certificates.CertificatePolicy" /> with <see cref="P:Azure.Security.KeyVault.Certificates.CertificatePolicy.ContentType" />
+            set to <see cref="P:Azure.Security.KeyVault.Certificates.CertificateContentType.Pem" />, and set the <see cref="P:Azure.Security.KeyVault.Certificates.ImportCertificateOptions.Policy" /> property. If the <see cref="P:Azure.Security.KeyVault.Certificates.ImportCertificateOptions.Policy" /> property or
+            <see cref="P:Azure.Security.KeyVault.Certificates.CertificatePolicy.ContentType" /> property is not set, <see cref="P:Azure.Security.KeyVault.Certificates.CertificateContentType.Pkcs12" /> is assumed and the import will fail.
+            </remarks>
         <exception cref="T:System.ArgumentException">
           <paramref name="name" /> is empty.</exception>
         <exception cref="T:System.ArgumentNullException">
@@ -78,7 +82,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Gets the PFX or PEM formatted value of the certificate containing both the X.509 certificates and the private key.
+            Gets the PFX or ASCII PEM-formatted value of the certificate containing both the X.509 certificates and the private key.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -186,10 +190,12 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Gets the policy which governs the lifecycle of the imported certificate and its properties when it is rotated.
+            Gets or sets the policy which governs the lifecycle of the imported certificate and its properties when it is rotated.
             </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            If setting the policy, <see cref="P:Azure.Security.KeyVault.Certificates.CertificatePolicy.ContentType" /> must be set to a valid <see cref="T:Azure.Security.KeyVault.Certificates.CertificateContentType" /> value.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="Tags">
