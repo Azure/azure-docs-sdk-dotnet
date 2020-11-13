@@ -3,7 +3,7 @@ title: Azure Event Grid client library for .NET
 keywords: Azure, .net, SDK, API, Azure.Messaging.EventGrid, eventgrid
 author: maggiepint
 ms.author: magpint
-ms.date: 10/07/2020
+ms.date: 11/10/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: .net
 ms.service: eventgrid
 ---
 
-# Azure Event Grid client library for .NET - Version 4.0.0-beta.3 
+# Azure Event Grid client library for .NET - Version 4.0.0-beta.4 
 
 
 Azure Event Grid allows you to easily build applications with event-based architectures. The Event Grid service fully manages all routing of events from any source, to any destination, for any application. Azure service events and custom events can be published directly to the service, where the events can then be filtered and sent to various recipients, such as built-in handlers or custom webhooks. To learn more about Azure Event Grid: [What is Event Grid?](https://docs.microsoft.com/azure/event-grid/overview)
@@ -21,7 +21,7 @@ Use the client library for Azure Event Grid to:
 - Consume events that have been delivered to event handlers
 - Generate SAS tokens to authenticate the client publishing events to Azure Event Grid topics
 
-  [Source code](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Messaging.EventGrid_4.0.0-beta.3/sdk/eventgrid/Azure.Messaging.EventGrid/src) | [Package (NuGet)](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.0.0-beta.3/sdk/eventgrid/Azure.Messaging.EventGrid/) | [API reference documentation](https://azure.github.io/azure-sdk-for-net/eventgrid.html) | [Product documentation](https://docs.microsoft.com/azure/event-grid/) | [Samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.0.0-beta.3/sdk/eventgrid/Azure.Messaging.EventGrid/samples)
+  [Source code](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Messaging.EventGrid_4.0.0-beta.4/sdk/eventgrid/Azure.Messaging.EventGrid/src) | [Package (NuGet)](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.0.0-beta.4/sdk/eventgrid/Azure.Messaging.EventGrid/) | [API reference documentation](https://azure.github.io/azure-sdk-for-net/eventgrid.html) | [Product documentation](https://docs.microsoft.com/azure/event-grid/) | [Samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.0.0-beta.4/sdk/eventgrid/Azure.Messaging.EventGrid/samples)
 
 ## Getting started
 
@@ -30,7 +30,7 @@ Use the client library for Azure Event Grid to:
 Install the client library from [NuGet](https://www.nuget.org/):
 
 ```PowerShell
-dotnet add package Azure.Messaging.EventGrid --version 4.0.0-beta.1
+dotnet add package Azure.Messaging.EventGrid --version 4.0.0-beta.4
 ```
 
 ### Prerequisites
@@ -225,7 +225,7 @@ foreach (EventGridEvent egEvent in egEvents)
             if (egEvent.EventType == "MyApp.Models.CustomEventType")
             {
                 // You can use BinaryData methods to deserialize the payload
-                TestPayload deserializedEventData = await unknownType.ToObjectAsync<TestPayload>();
+                TestPayload deserializedEventData = unknownType.ToObjectFromJson<TestPayload>();
                 Console.WriteLine(deserializedEventData.Name);
             }
             break;
@@ -243,11 +243,11 @@ foreach (EventGridEvent egEvent in egEvents)
 - An `InvalidOperationException` will be thrown during `GetData<T>()` if a custom serializer is passed into `GetData<T>()` with non-serialized event data (for example, if the event was created by the user and not created by parsing from JSON).
 
 ### Setting up console logging
-You can also easily [enable console logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.0.0-beta.3/sdk/core/Azure.Core/samples/Diagnostics.md#logging) if you want to dig deeper into the requests you're making against the service.
+You can also easily [enable console logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.0.0-beta.4/sdk/core/Azure.Core/samples/Diagnostics.md#logging) if you want to dig deeper into the requests you're making against the service.
 
 ## Next steps
 
-View more https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.0.0-beta.3/sdk/eventgrid/Azure.Messaging.EventGrid/samples here for common usages of the Event Grid client library: [Event Grid Samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.0.0-beta.3/sdk/eventgrid/Azure.Messaging.EventGrid/samples).
+View more https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.0.0-beta.4/sdk/eventgrid/Azure.Messaging.EventGrid/samples here for common usages of the Event Grid client library: [Event Grid Samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.0.0-beta.4/sdk/eventgrid/Azure.Messaging.EventGrid/samples).
 
 ## Contributing
 

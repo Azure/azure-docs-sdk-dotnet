@@ -1,6 +1,6 @@
 ---
-title: Azure Synapse Analytics Artifacts client library for .NET
-keywords: Azure, .net, SDK, API, Azure.Analytics.Synapse.Artifacts, synapse
+title: Azure Synapse Analytics Monitoring client library for .NET
+keywords: Azure, .net, SDK, API, Azure.Analytics.Synapse.Monitoring, 
 author: maggiepint
 ms.author: magpint
 ms.date: 11/12/2020
@@ -8,15 +8,15 @@ ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: .net
-ms.service: synapse
+ms.service: 
 ---
 
-# Azure Synapse Analytics Artifacts client library for .NET - Version 1.0.0-beta.1 
+# Azure Synapse Analytics Monitoring client library for .NET - Version 1.0.0-beta.1 
 
 
 This directory contains the open source subset of the .NET SDK. For documentation of the complete Azure SDK, please see the [Microsoft Azure .NET Developer Center](https://azure.microsoft.com/develop/net/).
 
-The Azure Synapse Analytics development client library enables programmatically managing artifacts, offering methods to create, update, list, and delete pipelines, datasets, data flows, notebooks, Spark job definitions, SQL scripts, linked services and triggers.
+Azure Synapse Analytics provides a rich monitoring experience within the Azure portal to surface insights regarding your data warehouse workload. The Azure Synapse Analytics monitoring client library enables programmatically monitoring your resources.
 
 Azure Synapse is a limitless analytics service that brings together enterprise data warehousing and Big Data analytics. It gives you the freedom to query data on your terms, using either serverless on-demand or provisioned resources—at scale. Azure Synapse brings these two worlds together with a unified experience to ingest, prepare, manage, and serve data for immediate BI and machine learning needs. 
 
@@ -27,10 +27,10 @@ The complete Microsoft Azure SDK can be downloaded from the [Microsoft Azure Dow
 For the best development experience, developers should use the official Microsoft NuGet packages for libraries. NuGet packages are regularly updated with new functionality and hotfixes.
 
 ### Install the package
-Install the Azure Synapse Analytics development client library for .NET with [NuGet][nuget]:
+Install the Azure Synapse Analytics monitoring client library for .NET with [NuGet][nuget]:
 
 ```PowerShell
-dotnet add package Azure.Analytics.Synapse.Artifacts --version 0.1.0-preview.2
+dotnet add package Azure.Analytics.Synapse.Monitoring --version 1.0.0-preview.1
 ```
 
 ### Prerequisites
@@ -51,7 +51,7 @@ az synapse workspace create \
 ```
 
 ### Authenticate the client
-In order to interact with the Azure Synapse Analytics service, you'll need to create an instance of the [ArtifactsClient][development_client_class] class. You need a **workspace endpoint**, which you may see as "Development endpoint" in the portal,
+In order to interact with the Azure Synapse Analytics service, you'll need to create an instance of the [MonitoringClient][monitoring_client_class] class. You need a **workspace endpoint**, which you may see as "Development endpoint" in the portal,
  and **client secret credentials (client id, client secret, tenant id)** to instantiate a client object.
 
 Client secret credential authentication is being used in this getting started section but you can find more ways to authenticate with [Azure identity][azure_identity]. To use the [DefaultAzureCredential][DefaultAzureCredential] provider shown below,
@@ -61,59 +61,32 @@ or other credential providers provided with the Azure SDK, you should install th
 Install-Package Azure.Identity
 ```
 
+## Key concepts
+
+### MonitoringClient
+With a `MonitoringClient` you can get list of Spark applications or SQL OD/DW query for the workspace.
+
 ## Examples
-The Azure.Analytics.Synapse.Artifacts package supports synchronous and asynchronous APIs. The following section covers some of the most common Azure Synapse Analytics development related tasks:
+The Azure.Analytics.Synapse.Monitoring package supports synchronous and asynchronous APIs. The following section covers some of the most common Azure Synapse Analytics monitoring related tasks:
 
-### Notebook examples
-* [Create a notebook](#create-a-notebook)
-* [Retrieve a notebook](#retrieve-a-notebook)
-* [List notebooks](#list-notebooks)
-* [Delete a notebook](#delete-a-notebook)
+### Monitoring examples
+* [Get list of Spark applications](#get-list-of-spark-applications)
+* [Get SQL query](#get-sql-query)
 
-### Create a notebook
+### Get list of Spark applications
 
-`CreateOrUpdateNotebook` creates a notebook.
+`GetSparkJobList` gets a list of spark applications for the workspace.
 
-```C# Snippet:CreateNotebook
-Notebook notebook = new Notebook(
-    new NotebookMetadata
-    {
-        LanguageInfo = new NotebookLanguageInfo(name: "Python")
-    },
-    nbformat: 4,
-    nbformatMinor: 2,
-    new List<NotebookCell>()
-);
-string notebookName = "MyNotebook";
-NotebookCreateOrUpdateNotebookOperation operation = notebookClient.StartCreateOrUpdateNotebook(notebookName, new NotebookResource(notebookName, notebook));
-NotebookResource notebookResource = operation.WaitForCompletionAsync().ConfigureAwait(true).GetAwaiter().GetResult();
+```C# Snippet:GetSparkJobList
+SparkJobListViewResponse sparkJobList = client.GetSparkJobList();
 ```
 
-### Retrieve a notebook
+### Get SQl query
 
-`GetNoteBook` retrieves a notebook.
+`GetSqlJobQueryString` gets the SQL OD/DW query
 
-```C# Snippet:RetrieveNotebook
-NotebookResource notebook = notebookClient.GetNotebook("MyNotebook");
-```
-
-### List notebooks
-`GetNotebooksByWorkspace` enumerates the notebooks in the Synapse workspace.
-
-```C# Snippet:ListNotebooks
-Pageable<NotebookResource> notebooks = notebookClient.GetNotebooksByWorkspace();
-foreach (NotebookResource notebook in notebooks)
-{
-    System.Console.WriteLine(notebook.Name);
-}
-```
-
-### Delete a notebook
-
-`DeleteNotebook` deletes a notebook.
-
-```C# Snippet:DeleteNotebook
-notebookClient.StartDeleteNotebook("MyNotebook");
+```C# Snippet:GetSqlJobQueryString
+SqlQueryStringDataModel sqlQuery = client.GetSqlJobQueryString();
 ```
 
 ## To build
@@ -123,11 +96,6 @@ For information on building the Azure Synapse client library, please see [Buildi
 ## Target frameworks
 
 For information about the target frameworks of the Azure Synapse client library, please refer to the [Target Frameworks](https://github.com/azure/azure-sdk-for-net#target-frameworks) of the Microsoft Azure SDK for .NET.  
-
-## Key concepts
-
-### NotebookControlClient
-With a notebook client you can create, update, list, and delete pipelines, datasets, data flows, notebooks, Spark job definitions, SQL scripts, linked services and triggers.
 
 ## Troubleshooting
 
