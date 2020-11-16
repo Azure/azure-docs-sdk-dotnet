@@ -1,14 +1,14 @@
 ---
 title: 
-keywords: Azure, .net, SDK, API, System.Memory.Data, 
+keywords: Azure, .net, SDK, API, System.Memory.Data, core
 author: maggiepint
 ms.author: magpint
-ms.date: 11/04/2020
+ms.date: 11/16/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: .net
-ms.service: 
+ms.service: core
 ---
 
 #  System.Memory.Data library for .NET
