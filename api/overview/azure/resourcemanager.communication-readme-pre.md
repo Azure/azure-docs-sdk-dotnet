@@ -3,7 +3,7 @@ title: Azure Communication Services management client library for .NET
 keywords: Azure, .net, SDK, API, Azure.ResourceManager.Communication, communication
 author: maggiepint
 ms.author: magpint
-ms.date: 10/06/2020
+ms.date: 11/16/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: .net
 ms.service: communication
 ---
 
-# Azure Communication Services management client library for .NET - Version 1.0.0-beta.2 
+# Azure Communication Services management client library for .NET - Version 1.0.0-beta.3 
 
 
 Azure Communication Services enable developers to securely bring human connected experiences to their own
@@ -36,7 +36,7 @@ Use the management library for Azure Communication Services to:
 Install the Azure Management SDK for .NET with [NuGet][nuget]:
 
 ```PowerShell
-dotnet add package Azure.ResourceManager.Communication --version 1.0.0-beta.1
+dotnet add package Azure.ResourceManager.Communication --version 1.0.0-beta.3
 ``` 
 
 ### Include the client library
@@ -66,7 +66,7 @@ You will need to have a resource group to put your Azure Communication Services 
 group, create one by using the [Azure
 portal](https://docs.microsoft.com/azure/azure-resource-manager/management/manage-resource-groups-portal)
 or the [ARM Management
-SDK](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Communication_1.0.0-beta.2/doc/mgmt_preview_quickstart.md).
+SDK](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Communication_1.0.0-beta.3/doc/mgmt_preview_quickstart.md).
 
 ### Authenticate the client
 
