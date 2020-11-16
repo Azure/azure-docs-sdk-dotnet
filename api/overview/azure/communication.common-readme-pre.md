@@ -3,7 +3,7 @@ title: Azure Communication Common client library for .NET
 keywords: Azure, .net, SDK, API, Azure.Communication.Common, communication
 author: maggiepint
 ms.author: magpint
-ms.date: 10/06/2020
+ms.date: 11/16/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: .net
 ms.service: communication
 ---
 
-# Azure Communication Common client library for .NET - Version 1.0.0-beta.2 
+# Azure Communication Common client library for .NET - Version 1.0.0-beta.3 
 
 
 This package contains common code for Azure Communication Service libraries.
@@ -23,7 +23,7 @@ This package contains common code for Azure Communication Service libraries.
 Install the Azure Communication Common client library for .NET with [NuGet][nuget].
 
 ```Powershell
-dotnet add package Azure.Communication.Common --version 1.0.0-beta.1
+dotnet add package Azure.Communication.Common --version 1.0.0-beta.3
 ```
 
 ### Prerequisites
@@ -105,7 +105,7 @@ This project has adopted the [Microsoft Open Source Code of Conduct][coc]. For m
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [coc_contact]: mailto:opencode@microsoft.com
 [azure_sub]: https://azure.microsoft.com/free/
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Communication.Common_1.0.0-beta.2/sdk/communication/Azure.Communication.Common/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Communication.Common_1.0.0-beta.3/sdk/communication/Azure.Communication.Common/src
 [package]: https://www.nuget.org/packages/Azure.Communication.Common/
 [product_docs]: https://docs.microsoft.com/azure/communication-services/overview
 [nuget]: https://www.nuget.org/
