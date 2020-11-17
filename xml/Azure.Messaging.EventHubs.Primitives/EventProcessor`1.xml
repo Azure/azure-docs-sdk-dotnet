@@ -30,7 +30,12 @@
                the same Event Hub and consumer group pairing to share work by using a common storage platform to communicate.  Fault
                tolerance is also built-in, allowing the processor to be resilient in the face of errors.
              </summary>
-    <remarks>To be added.</remarks>
+    <remarks>
+               The <see cref="T:Azure.Messaging.EventHubs.Primitives.EventProcessor`1" /> is safe to cache and use for the lifetime of an application, and that is best practice when the application
+               processes events regularly or semi-regularly.  The processor holds responsibility for efficient resource management, working to keep resource usage low during
+               periods of inactivity and manage health during periods of higher use.  Calling either the <see cref="M:Azure.Messaging.EventHubs.Primitives.EventProcessor`1.StopProcessingAsync(System.Threading.CancellationToken)" /> or <see cref="M:Azure.Messaging.EventHubs.Primitives.EventProcessor`1.StopProcessing(System.Threading.CancellationToken)" />
+               method when processing is complete or as the application is shutting down will ensure that network resources and other unmanaged objects are properly cleaned up.
+             </remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -783,7 +788,12 @@
                Signals the <see cref="T:Azure.Messaging.EventHubs.Primitives.EventProcessor`1" /> to stop processing events.  Should this method be called while the processor
                is not running, no action is taken.
              </summary>
-        <remarks>To be added.</remarks>
+        <remarks>
+               When stopping, the processor will update the ownership of partitions that it was responsible for processing and clean up network resources used for communication with
+               the Event Hubs service.  As a result, this method will perform network I/O and may need to wait for partition reads that were active to complete.
+            
+               <para>Due to service calls and network latency, an invocation of this method may take slightly longer than the specified <see cref="P:Azure.Messaging.EventHubs.Primitives.EventProcessorOptions.MaximumWaitTime" /> or
+               if the wait time was not configured, the duration of the <see cref="P:Azure.Messaging.EventHubs.EventHubsRetryOptions.TryTimeout" /> of the configured retry policy.</para></remarks>
       </Docs>
     </Member>
     <Member MemberName="StopProcessingAsync">
@@ -812,7 +822,12 @@
                is not running, no action is taken.
              </summary>
         <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+               When stopping, the processor will update the ownership of partitions that it was responsible for processing and clean up network resources used for communication with
+               the Event Hubs service.  As a result, this method will perform network I/O and may need to wait for partition reads that were active to complete.
+            
+               <para>Due to service calls and network latency, an invocation of this method may take slightly longer than the specified <see cref="P:Azure.Messaging.EventHubs.Primitives.EventProcessorOptions.MaximumWaitTime" /> or
+               if the wait time was not configured, the duration of the <see cref="P:Azure.Messaging.EventHubs.EventHubsRetryOptions.TryTimeout" /> of the configured retry policy.</para></remarks>
       </Docs>
     </Member>
     <Member MemberName="ToString">
