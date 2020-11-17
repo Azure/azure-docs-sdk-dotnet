@@ -328,6 +328,29 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
+    <Member MemberName="CanGenerateAccountSasUri">
+      <MemberSignature Language="C#" Value="public bool CanGenerateAccountSasUri { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool CanGenerateAccountSasUri" />
+      <MemberSignature Language="DocId" Value="P:Azure.Storage.Blobs.BlobServiceClient.CanGenerateAccountSasUri" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property CanGenerateAccountSasUri As Boolean" />
+      <MemberSignature Language="F#" Value="member this.CanGenerateAccountSasUri : bool" Usage="Azure.Storage.Blobs.BlobServiceClient.CanGenerateAccountSasUri" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Storage.Blobs</AssemblyName>
+        <AssemblyVersion>12.7.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Determines whether the client is able to generate a SAS.
+            If the client is authenticated with a <see cref="T:Azure.Storage.StorageSharedKeyCredential" />.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="CreateBlobContainer">
       <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Storage.Blobs.BlobContainerClient&gt; CreateBlobContainer (string blobContainerName, Azure.Storage.Blobs.Models.PublicAccessType publicAccessType = Azure.Storage.Blobs.Models.PublicAccessType.None, System.Collections.Generic.IDictionary&lt;string,string&gt; metadata = default, System.Threading.CancellationToken cancellationToken = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Storage.Blobs.BlobContainerClient&gt; CreateBlobContainer(string blobContainerName, valuetype Azure.Storage.Blobs.Models.PublicAccessType publicAccessType, class System.Collections.Generic.IDictionary`2&lt;string, string&gt; metadata, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
@@ -683,10 +706,11 @@
       </Parameters>
       <Docs>
         <param name="tagFilterSqlExpression">
-             The where parameter enables the caller to query blobs whose tags match a given expression.
-             The given expression must evaluate to true for a blob to be returned in the results.
-             The[OData - ABNF] filter syntax rule defines the formal grammar for the value of the where query parameter;
-             however, only a subset of the OData filter syntax is supported in the Blob service.
+             The where parameter finds blobs in the storage account whose tags match a given expression.
+             The expression must evaluate to true for a blob to be returned in the result set.
+             The storage service supports a subset of the ANSI SQL WHERE clause grammar for the value of the where=expression query parameter.
+             The following operators are supported: =, &gt;, &gt;=, &lt;, &lt;=, AND. and @container.
+             Example expression: "tagKey"='tagValue'.
              </param>
         <param name="cancellationToken">
              Optional <see cref="T:System.Threading.CancellationToken" /> to propagate
@@ -733,10 +757,11 @@
       </Parameters>
       <Docs>
         <param name="tagFilterSqlExpression">
-             The where parameter enables the caller to query blobs whose tags match a given expression.
-             The given expression must evaluate to true for a blob to be returned in the results.
-             The[OData - ABNF] filter syntax rule defines the formal grammar for the value of the where query parameter;
-             however, only a subset of the OData filter syntax is supported in the Blob service.
+             The where parameter finds blobs in the storage account whose tags match a given expression.
+             The expression must evaluate to true for a blob to be returned in the result set.
+             The storage service supports a subset of the ANSI SQL WHERE clause grammar for the value of the where=expression query parameter.
+             The following operators are supported: =, &gt;, &gt;=, &lt;, &lt;=, AND. and @container.
+             Example expression: "tagKey"='tagValue'.
              </param>
         <param name="cancellationToken">
              Optional <see cref="T:System.Threading.CancellationToken" /> to propagate
@@ -757,6 +782,102 @@
         <remarks>
              A <see cref="T:Azure.RequestFailedException" /> will be thrown if
              a failure occurs.
+             </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GenerateAccountSasUri">
+      <MemberSignature Language="C#" Value="public Uri GenerateAccountSasUri (Azure.Storage.Sas.AccountSasBuilder builder);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Uri GenerateAccountSasUri(class Azure.Storage.Sas.AccountSasBuilder builder) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Storage.Blobs.BlobServiceClient.GenerateAccountSasUri(Azure.Storage.Sas.AccountSasBuilder)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GenerateAccountSasUri (builder As AccountSasBuilder) As Uri" />
+      <MemberSignature Language="F#" Value="member this.GenerateAccountSasUri : Azure.Storage.Sas.AccountSasBuilder -&gt; Uri" Usage="blobServiceClient.GenerateAccountSasUri builder" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Storage.Blobs</AssemblyName>
+        <AssemblyVersion>12.7.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Uri</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="builder" Type="Azure.Storage.Sas.AccountSasBuilder" />
+      </Parameters>
+      <Docs>
+        <param name="builder">
+             Used to generate a Shared Access Signature (SAS).
+             </param>
+        <summary>
+             The <see cref="M:Azure.Storage.Blobs.BlobServiceClient.GenerateAccountSasUri(Azure.Storage.Sas.AccountSasBuilder)" /> returns a <see cref="P:Azure.Storage.Blobs.BlobServiceClient.Uri" /> that
+             generates a Blob Account Shared Access Signature (SAS) based on the
+             Client properties and builder passed. The SAS is signed by the
+             shared key credential of the client.
+            
+             To check if the client is able to sign a Service Sas see
+             <see cref="P:Azure.Storage.Blobs.BlobServiceClient.CanGenerateAccountSasUri" />.
+            
+             For more information, see
+             <see href="https://docs.microsoft.com/en-us/rest/api/storageservices/create-account-sas">
+             Constructing an Account SAS</see>.
+             </summary>
+        <returns>
+             A <see cref="P:Azure.Storage.Blobs.BlobServiceClient.Uri" /> containing the SAS Uri.
+             </returns>
+        <remarks>
+             A <see cref="T:System.Exception" /> will be thrown if a failure occurs.
+             </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GenerateAccountSasUri">
+      <MemberSignature Language="C#" Value="public Uri GenerateAccountSasUri (Azure.Storage.Sas.AccountSasPermissions permissions, DateTimeOffset expiresOn, Azure.Storage.Sas.AccountSasResourceTypes resourceTypes);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Uri GenerateAccountSasUri(valuetype Azure.Storage.Sas.AccountSasPermissions permissions, valuetype System.DateTimeOffset expiresOn, valuetype Azure.Storage.Sas.AccountSasResourceTypes resourceTypes) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Storage.Blobs.BlobServiceClient.GenerateAccountSasUri(Azure.Storage.Sas.AccountSasPermissions,System.DateTimeOffset,Azure.Storage.Sas.AccountSasResourceTypes)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GenerateAccountSasUri (permissions As AccountSasPermissions, expiresOn As DateTimeOffset, resourceTypes As AccountSasResourceTypes) As Uri" />
+      <MemberSignature Language="F#" Value="member this.GenerateAccountSasUri : Azure.Storage.Sas.AccountSasPermissions * DateTimeOffset * Azure.Storage.Sas.AccountSasResourceTypes -&gt; Uri" Usage="blobServiceClient.GenerateAccountSasUri (permissions, expiresOn, resourceTypes)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Storage.Blobs</AssemblyName>
+        <AssemblyVersion>12.7.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Uri</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="permissions" Type="Azure.Storage.Sas.AccountSasPermissions" />
+        <Parameter Name="expiresOn" Type="System.DateTimeOffset" />
+        <Parameter Name="resourceTypes" Type="Azure.Storage.Sas.AccountSasResourceTypes" />
+      </Parameters>
+      <Docs>
+        <param name="permissions">
+             Required. Specifies the list of permissions to be associated with the SAS.
+             See <see cref="T:Azure.Storage.Sas.AccountSasPermissions" />.
+             </param>
+        <param name="expiresOn">
+             Required. The time at which the shared access signature becomes invalid.
+             </param>
+        <param name="resourceTypes">
+             Specifies the resource types associated with the shared access signature.
+             The user is restricted to operations on the specified resources.
+             See <see cref="T:Azure.Storage.Sas.AccountSasResourceTypes" />.
+             </param>
+        <summary>
+             The <see cref="M:Azure.Storage.Blobs.BlobServiceClient.GenerateAccountSasUri(Azure.Storage.Sas.AccountSasPermissions,System.DateTimeOffset,Azure.Storage.Sas.AccountSasResourceTypes)" />
+             returns a <see cref="P:Azure.Storage.Blobs.BlobServiceClient.Uri" /> that generates a Blob Account
+             Shared Access Signature (SAS) based on the Client properties
+             and parameters passed. The SAS is signed by the
+             shared key credential of the client.
+            
+             To check if the client is able to sign a Service Sas see
+             <see cref="P:Azure.Storage.Blobs.BlobServiceClient.CanGenerateAccountSasUri" />.
+            
+             For more information, see
+             <see href="https://docs.microsoft.com/en-us/rest/api/storageservices/create-account-sas">
+             Constructing an Account SAS</see>.
+             </summary>
+        <returns>
+             A <see cref="P:Azure.Storage.Blobs.BlobServiceClient.Uri" /> containing the SAS Uri.
+             </returns>
+        <remarks>
+             A <see cref="T:System.Exception" /> will be thrown if a failure occurs.
              </remarks>
       </Docs>
     </Member>
@@ -1726,24 +1847,24 @@
       </Docs>
     </Member>
     <Member MemberName="UndeleteBlobContainer">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Storage.Blobs.BlobContainerClient&gt; UndeleteBlobContainer (string deletedContainerName, string deletedContainerVersion, string destinationContainerName = default, System.Threading.CancellationToken cancellationToken = default);" FrameworkAlternate="azure-dotnet-preview" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Storage.Blobs.BlobContainerClient&gt; UndeleteBlobContainer(string deletedContainerName, string deletedContainerVersion, string destinationContainerName, valuetype System.Threading.CancellationToken cancellationToken) cil managed" FrameworkAlternate="azure-dotnet-preview" />
-      <MemberSignature Language="DocId" Value="M:Azure.Storage.Blobs.BlobServiceClient.UndeleteBlobContainer(System.String,System.String,System.String,System.Threading.CancellationToken)" FrameworkAlternate="azure-dotnet-preview" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function UndeleteBlobContainer (deletedContainerName As String, deletedContainerVersion As String, Optional destinationContainerName As String = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Response(Of BlobContainerClient)" FrameworkAlternate="azure-dotnet-preview" />
-      <MemberSignature Language="F#" Value="abstract member UndeleteBlobContainer : string * string * string * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Storage.Blobs.BlobContainerClient&gt;&#xA;override this.UndeleteBlobContainer : string * string * string * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Storage.Blobs.BlobContainerClient&gt;" Usage="blobServiceClient.UndeleteBlobContainer (deletedContainerName, deletedContainerVersion, destinationContainerName, cancellationToken)" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Storage.Blobs.BlobContainerClient&gt; UndeleteBlobContainer (string deletedContainerName, string deletedContainerVersion, string destinationContainerName = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Storage.Blobs.BlobContainerClient&gt; UndeleteBlobContainer(string deletedContainerName, string deletedContainerVersion, string destinationContainerName, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Storage.Blobs.BlobServiceClient.UndeleteBlobContainer(System.String,System.String,System.String,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function UndeleteBlobContainer (deletedContainerName As String, deletedContainerVersion As String, Optional destinationContainerName As String = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Response(Of BlobContainerClient)" />
+      <MemberSignature Language="F#" Value="abstract member UndeleteBlobContainer : string * string * string * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Storage.Blobs.BlobContainerClient&gt;&#xA;override this.UndeleteBlobContainer : string * string * string * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Storage.Blobs.BlobContainerClient&gt;" Usage="blobServiceClient.UndeleteBlobContainer (deletedContainerName, deletedContainerVersion, destinationContainerName, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Storage.Blobs</AssemblyName>
         <AssemblyVersion>12.7.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType FrameworkAlternate="azure-dotnet-preview">Azure.Response&lt;Azure.Storage.Blobs.BlobContainerClient&gt;</ReturnType>
+        <ReturnType>Azure.Response&lt;Azure.Storage.Blobs.BlobContainerClient&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="deletedContainerName" Type="System.String" Index="0" FrameworkAlternate="azure-dotnet-preview" />
-        <Parameter Name="deletedContainerVersion" Type="System.String" Index="1" FrameworkAlternate="azure-dotnet-preview" />
-        <Parameter Name="destinationContainerName" Type="System.String" Index="2" FrameworkAlternate="azure-dotnet-preview" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="3" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="deletedContainerName" Type="System.String" />
+        <Parameter Name="deletedContainerVersion" Type="System.String" />
+        <Parameter Name="destinationContainerName" Type="System.String" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
         <param name="deletedContainerName">
@@ -1775,24 +1896,24 @@
       </Docs>
     </Member>
     <Member MemberName="UndeleteBlobContainerAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Blobs.BlobContainerClient&gt;&gt; UndeleteBlobContainerAsync (string deletedContainerName, string deletedContainerVersion, string destinationContainerName = default, System.Threading.CancellationToken cancellationToken = default);" FrameworkAlternate="azure-dotnet-preview" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Storage.Blobs.BlobContainerClient&gt;&gt; UndeleteBlobContainerAsync(string deletedContainerName, string deletedContainerVersion, string destinationContainerName, valuetype System.Threading.CancellationToken cancellationToken) cil managed" FrameworkAlternate="azure-dotnet-preview" />
-      <MemberSignature Language="DocId" Value="M:Azure.Storage.Blobs.BlobServiceClient.UndeleteBlobContainerAsync(System.String,System.String,System.String,System.Threading.CancellationToken)" FrameworkAlternate="azure-dotnet-preview" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function UndeleteBlobContainerAsync (deletedContainerName As String, deletedContainerVersion As String, Optional destinationContainerName As String = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of BlobContainerClient))" FrameworkAlternate="azure-dotnet-preview" />
-      <MemberSignature Language="F#" Value="abstract member UndeleteBlobContainerAsync : string * string * string * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Blobs.BlobContainerClient&gt;&gt;&#xA;override this.UndeleteBlobContainerAsync : string * string * string * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Blobs.BlobContainerClient&gt;&gt;" Usage="blobServiceClient.UndeleteBlobContainerAsync (deletedContainerName, deletedContainerVersion, destinationContainerName, cancellationToken)" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Blobs.BlobContainerClient&gt;&gt; UndeleteBlobContainerAsync (string deletedContainerName, string deletedContainerVersion, string destinationContainerName = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Storage.Blobs.BlobContainerClient&gt;&gt; UndeleteBlobContainerAsync(string deletedContainerName, string deletedContainerVersion, string destinationContainerName, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Storage.Blobs.BlobServiceClient.UndeleteBlobContainerAsync(System.String,System.String,System.String,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function UndeleteBlobContainerAsync (deletedContainerName As String, deletedContainerVersion As String, Optional destinationContainerName As String = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of BlobContainerClient))" />
+      <MemberSignature Language="F#" Value="abstract member UndeleteBlobContainerAsync : string * string * string * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Blobs.BlobContainerClient&gt;&gt;&#xA;override this.UndeleteBlobContainerAsync : string * string * string * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Blobs.BlobContainerClient&gt;&gt;" Usage="blobServiceClient.UndeleteBlobContainerAsync (deletedContainerName, deletedContainerVersion, destinationContainerName, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Storage.Blobs</AssemblyName>
         <AssemblyVersion>12.7.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType FrameworkAlternate="azure-dotnet-preview">System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Blobs.BlobContainerClient&gt;&gt;</ReturnType>
+        <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Blobs.BlobContainerClient&gt;&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="deletedContainerName" Type="System.String" Index="0" FrameworkAlternate="azure-dotnet-preview" />
-        <Parameter Name="deletedContainerVersion" Type="System.String" Index="1" FrameworkAlternate="azure-dotnet-preview" />
-        <Parameter Name="destinationContainerName" Type="System.String" Index="2" FrameworkAlternate="azure-dotnet-preview" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="3" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="deletedContainerName" Type="System.String" />
+        <Parameter Name="deletedContainerVersion" Type="System.String" />
+        <Parameter Name="destinationContainerName" Type="System.String" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
         <param name="deletedContainerName">
