@@ -1,20 +1,20 @@
 ---
 title: Azure Synapse Spark client library for .NET
-keywords: Azure, .net, SDK, API, Azure.Analytics.Synapse.Spark, synapse
+keywords: Azure, , SDK, API, Azure.Analytics.Synapse.Spark, synapse
 author: maggiepint
 ms.author: magpint
-ms.date: 09/01/2020
+ms.date: 11/23/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.devlang: .net
+ms.devlang: 
 ms.service: synapse
 ---
 
-# Azure Synapse Spark client library for .NET - Version 1.0.0-preview.2 
+# Azure Synapse Spark client library for .NET - Version 1.0.0-beta.1 
 
 
-This directory contains the open source subset of the .NET SDK. For documentation of the complete Azure SDK, please see the [Microsoft Azure .NET Developer Center](http://azure.microsoft.com/en-us/develop/net/).
+This directory contains the open source subset of the .NET SDK. For documentation of the complete Azure SDK, please see the [Microsoft Azure .NET Developer Center](https://azure.microsoft.com/develop/net/).
 
 Use the client library for Synapse to:
 
@@ -24,7 +24,7 @@ Azure Synapse is a limitless analytics service that brings together enterprise d
 
 ## Getting started
 
-The complete Microsoft Azure SDK can be downloaded from the [Microsoft Azure Downloads Page](http://azure.microsoft.com/en-us/downloads/?sdk=net) and ships with support for building deployment packages, integrating with tooling, rich command line tooling, and more.
+The complete Microsoft Azure SDK can be downloaded from the [Microsoft Azure Downloads Page](https://azure.microsoft.com/downloads/?sdk=net) and ships with support for building deployment packages, integrating with tooling, rich command line tooling, and more.
 
 For the best development experience, developers should use the official Microsoft NuGet packages for libraries. NuGet packages are regularly updated with new functionality and hotfixes.
 
