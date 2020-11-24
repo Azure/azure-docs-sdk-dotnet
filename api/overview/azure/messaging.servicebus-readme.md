@@ -7,7 +7,7 @@ ms.date: 11/24/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.devlang:  .NET
+ms.devlang: .NET
 ms.service: servicebus
 ---
 
