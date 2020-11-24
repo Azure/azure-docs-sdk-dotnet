@@ -29,6 +29,7 @@
     <AssemblyVersion>4.21.0.0</AssemblyVersion>
     <AssemblyVersion>4.21.1.0</AssemblyVersion>
     <AssemblyVersion>4.22.0.0</AssemblyVersion>
+    <AssemblyVersion>4.23.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>Microsoft.Identity.Client.AbstractClientAppBaseAcquireTokenParameterBuilder&lt;Microsoft.Identity.Client.AcquireTokenSilentParameterBuilder&gt;</BaseTypeName>
@@ -78,6 +79,7 @@
         <AssemblyVersion>4.21.0.0</AssemblyVersion>
         <AssemblyVersion>4.21.1.0</AssemblyVersion>
         <AssemblyVersion>4.22.0.0</AssemblyVersion>
+        <AssemblyVersion>4.23.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Identity.Client.AcquireTokenSilentParameterBuilder</ReturnType>
@@ -97,8 +99,43 @@
             the application token cache (forceRefresh=false)
             </summary>
         <returns>The builder to chain the .With methods</returns>
-        <remarks>Avoid un-necessarily setting <paramref name="forceRefresh" /> to <c>true</c> true in order to
+        <remarks>Avoid unnecessarily setting <paramref name="forceRefresh" /> to <c>true</c> true in order to
             avoid negatively affecting the performance of your application</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="WithProofOfPossession">
+      <MemberSignature Language="C#" Value="public Microsoft.Identity.Client.AcquireTokenSilentParameterBuilder WithProofOfPossession (Microsoft.Identity.Client.AppConfig.PoPAuthenticationConfiguration popAuthenticationConfiguration);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Identity.Client.AcquireTokenSilentParameterBuilder WithProofOfPossession(class Microsoft.Identity.Client.AppConfig.PoPAuthenticationConfiguration popAuthenticationConfiguration) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Identity.Client.AcquireTokenSilentParameterBuilder.WithProofOfPossession(Microsoft.Identity.Client.AppConfig.PoPAuthenticationConfiguration)" />
+      <MemberSignature Language="VB.NET" Value="Public Function WithProofOfPossession (popAuthenticationConfiguration As PoPAuthenticationConfiguration) As AcquireTokenSilentParameterBuilder" />
+      <MemberSignature Language="F#" Value="member this.WithProofOfPossession : Microsoft.Identity.Client.AppConfig.PoPAuthenticationConfiguration -&gt; Microsoft.Identity.Client.AcquireTokenSilentParameterBuilder" Usage="acquireTokenSilentParameterBuilder.WithProofOfPossession popAuthenticationConfiguration" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Identity.Client</AssemblyName>
+        <AssemblyVersion>4.23.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Identity.Client.AcquireTokenSilentParameterBuilder</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="popAuthenticationConfiguration" Type="Microsoft.Identity.Client.AppConfig.PoPAuthenticationConfiguration" />
+      </Parameters>
+      <Docs>
+        <param name="popAuthenticationConfiguration">Configuration properties used to construct a proof of possession request.</param>
+        <summary>
+             Modifies the token acquisition request so that the acquired token is a Proof of Possession token (PoP), rather than a Bearer token. 
+             PoP tokens are similar to Bearer tokens, but are bound to the HTTP request and to a cryptographic key, which MSAL can manage on Windows.
+             See https://aka.ms/msal-net-pop
+            </summary>
+        <returns>To be added.</returns>
+        <remarks>
+          <list type="bullet">
+            <item> An Authentication header is automatically added to the request</item>
+            <item> The PoP token is bound to the HTTP request, more specifically to the HTTP method (GET, POST, etc.) and to the Uri (path and query, but not query parameters). </item>
+            <item> MSAL creates, reads and stores a key in memory that will be cycled every 8 hours.</item>
+            <item>This is an experimental API. The method signature may change in the future without involving a major version upgrade.</item>
+          </list>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="WithSendX5C">
@@ -133,6 +170,7 @@
         <AssemblyVersion>4.21.0.0</AssemblyVersion>
         <AssemblyVersion>4.21.1.0</AssemblyVersion>
         <AssemblyVersion>4.22.0.0</AssemblyVersion>
+        <AssemblyVersion>4.23.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Identity.Client.AcquireTokenSilentParameterBuilder</ReturnType>
@@ -150,7 +188,7 @@
             this method will send the public certificate to Azure AD along with the token request,
             so that Azure AD can use it to validate the subject name based on a trusted issuer policy.
             This saves the application admin from the need to explicitly manage the certificate rollover
-            (either via portal or powershell/CLI operation). For details see https://aka.ms/msal-net-sni
+            (either via portal or PowerShell/CLI operation). For details see https://aka.ms/msal-net-sni
             </summary>
         <returns>The builder to chain the .With methods</returns>
         <remarks>To be added.</remarks>
