@@ -1,13 +1,13 @@
 ---
 title: Azure Service Bus client library for .NET
-keywords: Azure, , SDK, API, Azure.Messaging.ServiceBus, servicebus
+keywords: Azure, .NET, SDK, API, Azure.Messaging.ServiceBus, servicebus
 author: maggiepint
 ms.author: magpint
 ms.date: 11/24/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.devlang: 
+ms.devlang:  .NET
 ms.service: servicebus
 ---
 
@@ -422,4 +422,3 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 Please see our [contributing guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.ServiceBus_7.0.0/sdk/servicebus/Azure.Messaging.ServiceBus/CONTRIBUTING.md) for more information.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fservicebus%2FAzure.Messaging.ServiceBus%2FREADME.png)
-
