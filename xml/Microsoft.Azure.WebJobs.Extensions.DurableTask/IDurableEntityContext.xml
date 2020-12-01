@@ -16,6 +16,50 @@
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
+    <Member MemberName="BatchPosition">
+      <MemberSignature Language="C#" Value="public int BatchPosition { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 BatchPosition" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableEntityContext.BatchPosition" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property BatchPosition As Integer" />
+      <MemberSignature Language="F#" Value="member this.BatchPosition : int" Usage="Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableEntityContext.BatchPosition" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.WebJobs.Extensions.DurableTask</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            The position of the currently executing operation within the current batch of operations.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="BatchSize">
+      <MemberSignature Language="C#" Value="public int BatchSize { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 BatchSize" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableEntityContext.BatchSize" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property BatchSize As Integer" />
+      <MemberSignature Language="F#" Value="member this.BatchSize : int" Usage="Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableEntityContext.BatchSize" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.WebJobs.Extensions.DurableTask</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            The size of the current batch of operations.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="DeleteState">
       <MemberSignature Language="C#" Value="public void DeleteState ();" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void DeleteState() cil managed" />
@@ -36,6 +80,57 @@
             Deletes the state of this entity.
             </summary>
         <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DispatchAsync&lt;T&gt;">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task DispatchAsync&lt;T&gt; (params object[] constructorParameters) where T : class;" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task DispatchAsync&lt;class T&gt;(object[] constructorParameters) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableEntityContext.DispatchAsync``1(System.Object[])" />
+      <MemberSignature Language="VB.NET" Value="Public Function DispatchAsync(Of T As Class) (ParamArray constructorParameters As Object()) As Task" />
+      <MemberSignature Language="F#" Value="abstract member DispatchAsync : obj[] -&gt; System.Threading.Tasks.Task (requires 'T : null)" Usage="iDurableEntityContext.DispatchAsync constructorParameters" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.WebJobs.Extensions.DurableTask</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task</ReturnType>
+      </ReturnValue>
+      <TypeParameters>
+        <TypeParameter Name="T">
+          <Constraints>
+            <ParameterAttribute>ReferenceTypeConstraint</ParameterAttribute>
+          </Constraints>
+        </TypeParameter>
+      </TypeParameters>
+      <Parameters>
+        <Parameter Name="constructorParameters" Type="System.Object[]">
+          <Attributes>
+            <Attribute>
+              <AttributeName Language="C#">[System.ParamArray]</AttributeName>
+              <AttributeName Language="F#">[&lt;System.ParamArray&gt;]</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+      </Parameters>
+      <Docs>
+        <typeparam name="T">The class to use for entity instances.</typeparam>
+        <param name="constructorParameters">Parameters to feed to the entity constructor. Should be primarily used for
+            output bindings. Parameters must match the order in the constructor after ignoring parameters populated on
+            constructor via dependency injection.</param>
+        <summary>
+            Dynamically dispatches the incoming entity operation using reflection.
+            </summary>
+        <returns>A task that completes when the dispatched operation has finished.</returns>
+        <remarks>
+            If the entity's state is null, an object of type <typeparamref name="T" /> is created first. Then, reflection
+            is used to try to find a matching method. This match is based on the method name
+            (which is the operation name) and the argument list (which is the operation content, deserialized into
+            an object array).
+            </remarks>
+        <exception cref="T:System.Reflection.AmbiguousMatchException">If there is more than one method with the given operation name.</exception>
+        <exception cref="T:System.MissingMethodException">If there is no method with the given operation name.</exception>
+        <exception cref="T:System.InvalidOperationException">If the method has more than one argument.</exception>
       </Docs>
     </Member>
     <Member MemberName="EntityId">
