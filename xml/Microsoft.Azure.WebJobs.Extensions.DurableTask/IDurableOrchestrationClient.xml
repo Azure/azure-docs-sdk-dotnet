@@ -385,6 +385,36 @@
         <exception cref="T:System.InvalidOperationException">The orchestration instance with the provided instance id is not running.</exception>
       </Docs>
     </Member>
+    <Member MemberName="RestartAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;string&gt; RestartAsync (string instanceId, bool restartWithNewInstanceId = true);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;string&gt; RestartAsync(string instanceId, bool restartWithNewInstanceId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationClient.RestartAsync(System.String,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Function RestartAsync (instanceId As String, Optional restartWithNewInstanceId As Boolean = true) As Task(Of String)" />
+      <MemberSignature Language="F#" Value="abstract member RestartAsync : string * bool -&gt; System.Threading.Tasks.Task&lt;string&gt;" Usage="iDurableOrchestrationClient.RestartAsync (instanceId, restartWithNewInstanceId)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.WebJobs.Extensions.DurableTask</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;System.String&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="instanceId" Type="System.String" />
+        <Parameter Name="restartWithNewInstanceId" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="instanceId">InstanceId of a previously run orchestrator to restart.</param>
+        <param name="restartWithNewInstanceId">Optional parameter that configures if restarting an orchestration will use a new instanceId or if it will
+            reuse the old instanceId. Defauls to <c>true</c>.</param>
+        <summary>
+             Restarts an existing orchestrator with the original input.
+            </summary>
+        <returns>A task that completes when the orchestration is started. The task contains the instance id of the started
+            orchestratation instance.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="RewindAsync">
       <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task RewindAsync (string instanceId, string reason);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task RewindAsync(string instanceId, string reason) cil managed" />
@@ -598,11 +628,11 @@
       </Docs>
     </Member>
     <Member MemberName="WaitForCompletionOrCreateCheckStatusResponseAsync">
-      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.AspNetCore.Mvc.IActionResult&gt; WaitForCompletionOrCreateCheckStatusResponseAsync (Microsoft.AspNetCore.Http.HttpRequest request, string instanceId, TimeSpan? timeout = default, TimeSpan? retryInterval = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.AspNetCore.Mvc.IActionResult&gt; WaitForCompletionOrCreateCheckStatusResponseAsync(class Microsoft.AspNetCore.Http.HttpRequest request, string instanceId, valuetype System.Nullable`1&lt;valuetype System.TimeSpan&gt; timeout, valuetype System.Nullable`1&lt;valuetype System.TimeSpan&gt; retryInterval) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationClient.WaitForCompletionOrCreateCheckStatusResponseAsync(Microsoft.AspNetCore.Http.HttpRequest,System.String,System.Nullable{System.TimeSpan},System.Nullable{System.TimeSpan})" />
-      <MemberSignature Language="VB.NET" Value="Public Function WaitForCompletionOrCreateCheckStatusResponseAsync (request As HttpRequest, instanceId As String, Optional timeout As Nullable(Of TimeSpan) = Nothing, Optional retryInterval As Nullable(Of TimeSpan) = Nothing) As Task(Of IActionResult)" />
-      <MemberSignature Language="F#" Value="abstract member WaitForCompletionOrCreateCheckStatusResponseAsync : Microsoft.AspNetCore.Http.HttpRequest * string * Nullable&lt;TimeSpan&gt; * Nullable&lt;TimeSpan&gt; -&gt; System.Threading.Tasks.Task&lt;Microsoft.AspNetCore.Mvc.IActionResult&gt;" Usage="iDurableOrchestrationClient.WaitForCompletionOrCreateCheckStatusResponseAsync (request, instanceId, timeout, retryInterval)" />
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.AspNetCore.Mvc.IActionResult&gt; WaitForCompletionOrCreateCheckStatusResponseAsync (Microsoft.AspNetCore.Http.HttpRequest request, string instanceId, TimeSpan? timeout = default, TimeSpan? retryInterval = default, bool returnInternalServerErrorOnFailure = false);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.AspNetCore.Mvc.IActionResult&gt; WaitForCompletionOrCreateCheckStatusResponseAsync(class Microsoft.AspNetCore.Http.HttpRequest request, string instanceId, valuetype System.Nullable`1&lt;valuetype System.TimeSpan&gt; timeout, valuetype System.Nullable`1&lt;valuetype System.TimeSpan&gt; retryInterval, bool returnInternalServerErrorOnFailure) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationClient.WaitForCompletionOrCreateCheckStatusResponseAsync(Microsoft.AspNetCore.Http.HttpRequest,System.String,System.Nullable{System.TimeSpan},System.Nullable{System.TimeSpan},System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Function WaitForCompletionOrCreateCheckStatusResponseAsync (request As HttpRequest, instanceId As String, Optional timeout As Nullable(Of TimeSpan) = Nothing, Optional retryInterval As Nullable(Of TimeSpan) = Nothing, Optional returnInternalServerErrorOnFailure As Boolean = false) As Task(Of IActionResult)" />
+      <MemberSignature Language="F#" Value="abstract member WaitForCompletionOrCreateCheckStatusResponseAsync : Microsoft.AspNetCore.Http.HttpRequest * string * Nullable&lt;TimeSpan&gt; * Nullable&lt;TimeSpan&gt; * bool -&gt; System.Threading.Tasks.Task&lt;Microsoft.AspNetCore.Mvc.IActionResult&gt;" Usage="iDurableOrchestrationClient.WaitForCompletionOrCreateCheckStatusResponseAsync (request, instanceId, timeout, retryInterval, returnInternalServerErrorOnFailure)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.WebJobs.Extensions.DurableTask</AssemblyName>
@@ -616,12 +646,16 @@
         <Parameter Name="instanceId" Type="System.String" />
         <Parameter Name="timeout" Type="System.Nullable&lt;System.TimeSpan&gt;" />
         <Parameter Name="retryInterval" Type="System.Nullable&lt;System.TimeSpan&gt;" />
+        <Parameter Name="returnInternalServerErrorOnFailure" Type="System.Boolean" />
       </Parameters>
       <Docs>
         <param name="request">The HTTP request that triggered the current function.</param>
         <param name="instanceId">The unique ID of the instance to check.</param>
         <param name="timeout">Total allowed timeout for output from the durable function. The default value is 10 seconds.</param>
         <param name="retryInterval">The timeout between checks for output from the durable function. The default value is 1 second.</param>
+        <param name="returnInternalServerErrorOnFailure">Optional parameter that configures the http response code returned. Defaults to <c>false</c>.
+            If <c>true</c>, the returned http response code will be a 500 when the orchestrator is in a failed state, when <c>false</c> it will
+            return 200.</param>
         <summary>
             Creates an HTTP response which either contains a payload of management URLs for a non-completed instance
             or contains the payload containing the output of the completed orchestration.
@@ -636,11 +670,11 @@
       </Docs>
     </Member>
     <Member MemberName="WaitForCompletionOrCreateCheckStatusResponseAsync">
-      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;System.Net.Http.HttpResponseMessage&gt; WaitForCompletionOrCreateCheckStatusResponseAsync (System.Net.Http.HttpRequestMessage request, string instanceId, TimeSpan? timeout = default, TimeSpan? retryInterval = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class System.Net.Http.HttpResponseMessage&gt; WaitForCompletionOrCreateCheckStatusResponseAsync(class System.Net.Http.HttpRequestMessage request, string instanceId, valuetype System.Nullable`1&lt;valuetype System.TimeSpan&gt; timeout, valuetype System.Nullable`1&lt;valuetype System.TimeSpan&gt; retryInterval) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationClient.WaitForCompletionOrCreateCheckStatusResponseAsync(System.Net.Http.HttpRequestMessage,System.String,System.Nullable{System.TimeSpan},System.Nullable{System.TimeSpan})" />
-      <MemberSignature Language="VB.NET" Value="Public Function WaitForCompletionOrCreateCheckStatusResponseAsync (request As HttpRequestMessage, instanceId As String, Optional timeout As Nullable(Of TimeSpan) = Nothing, Optional retryInterval As Nullable(Of TimeSpan) = Nothing) As Task(Of HttpResponseMessage)" />
-      <MemberSignature Language="F#" Value="abstract member WaitForCompletionOrCreateCheckStatusResponseAsync : System.Net.Http.HttpRequestMessage * string * Nullable&lt;TimeSpan&gt; * Nullable&lt;TimeSpan&gt; -&gt; System.Threading.Tasks.Task&lt;System.Net.Http.HttpResponseMessage&gt;" Usage="iDurableOrchestrationClient.WaitForCompletionOrCreateCheckStatusResponseAsync (request, instanceId, timeout, retryInterval)" />
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;System.Net.Http.HttpResponseMessage&gt; WaitForCompletionOrCreateCheckStatusResponseAsync (System.Net.Http.HttpRequestMessage request, string instanceId, TimeSpan? timeout = default, TimeSpan? retryInterval = default, bool returnInternalServerErrorOnFailure = false);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class System.Net.Http.HttpResponseMessage&gt; WaitForCompletionOrCreateCheckStatusResponseAsync(class System.Net.Http.HttpRequestMessage request, string instanceId, valuetype System.Nullable`1&lt;valuetype System.TimeSpan&gt; timeout, valuetype System.Nullable`1&lt;valuetype System.TimeSpan&gt; retryInterval, bool returnInternalServerErrorOnFailure) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationClient.WaitForCompletionOrCreateCheckStatusResponseAsync(System.Net.Http.HttpRequestMessage,System.String,System.Nullable{System.TimeSpan},System.Nullable{System.TimeSpan},System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Function WaitForCompletionOrCreateCheckStatusResponseAsync (request As HttpRequestMessage, instanceId As String, Optional timeout As Nullable(Of TimeSpan) = Nothing, Optional retryInterval As Nullable(Of TimeSpan) = Nothing, Optional returnInternalServerErrorOnFailure As Boolean = false) As Task(Of HttpResponseMessage)" />
+      <MemberSignature Language="F#" Value="abstract member WaitForCompletionOrCreateCheckStatusResponseAsync : System.Net.Http.HttpRequestMessage * string * Nullable&lt;TimeSpan&gt; * Nullable&lt;TimeSpan&gt; * bool -&gt; System.Threading.Tasks.Task&lt;System.Net.Http.HttpResponseMessage&gt;" Usage="iDurableOrchestrationClient.WaitForCompletionOrCreateCheckStatusResponseAsync (request, instanceId, timeout, retryInterval, returnInternalServerErrorOnFailure)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.WebJobs.Extensions.DurableTask</AssemblyName>
@@ -654,12 +688,16 @@
         <Parameter Name="instanceId" Type="System.String" />
         <Parameter Name="timeout" Type="System.Nullable&lt;System.TimeSpan&gt;" />
         <Parameter Name="retryInterval" Type="System.Nullable&lt;System.TimeSpan&gt;" />
+        <Parameter Name="returnInternalServerErrorOnFailure" Type="System.Boolean" />
       </Parameters>
       <Docs>
         <param name="request">The HTTP request that triggered the current function.</param>
         <param name="instanceId">The unique ID of the instance to check.</param>
         <param name="timeout">Total allowed timeout for output from the durable function. The default value is 10 seconds.</param>
         <param name="retryInterval">The timeout between checks for output from the durable function. The default value is 1 second.</param>
+        <param name="returnInternalServerErrorOnFailure">Optional parameter that configures the http response code returned. Defaults to <c>false</c>.
+            If <c>true</c>, the returned http response code will be a 500 when the orchestrator is in a failed state, when <c>false</c> it will
+            return 200.</param>
         <summary>
             Creates an HTTP response which either contains a payload of management URLs for a non-completed instance
             or contains the payload containing the output of the completed orchestration.
