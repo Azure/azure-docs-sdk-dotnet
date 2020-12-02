@@ -1,13 +1,13 @@
 ---
 title: Azure Cognitive Services Form Recognizer client library for .NET
-keywords: Azure, , SDK, API, Azure.AI.FormRecognizer, formrecognizer
+keywords: Azure, .net, SDK, API, Azure.AI.FormRecognizer, formrecognizer
 author: maggiepint
 ms.author: magpint
 ms.date: 11/23/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.devlang: 
+ms.devlang: .net
 ms.service: formrecognizer
 ---
 
@@ -688,4 +688,3 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [coc_contact]: mailto:opencode@microsoft.com
-
