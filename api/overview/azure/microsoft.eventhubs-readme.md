@@ -8,7 +8,7 @@ ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: .net
-ms.service: eventhub
+ms.service: event-hubs
 ---
 
 # Azure Event Hubs client library for .NET - Version 4.3.1 
