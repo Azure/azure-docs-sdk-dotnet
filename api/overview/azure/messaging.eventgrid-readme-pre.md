@@ -8,7 +8,7 @@ ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: .net
-ms.service: eventgrid
+ms.service: event-grid
 ---
 
 # Azure Event Grid client library for .NET - Version 4.0.0-beta.4 
