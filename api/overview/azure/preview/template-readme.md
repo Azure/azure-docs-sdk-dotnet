@@ -1,17 +1,27 @@
 ---
 title: Azure Batch client library for Python
-keywords: Azure, dotnet, SDK, API, Azure.Security.Attestation, 
+keywords: Azure, .net, SDK, API, Azure.Template, 
 author: maggiepint
 ms.author: magpint
-ms.date: 12/08/2020
+ms.date: 10/22/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.devlang: dotnet
+ms.devlang: .net
 ms.service: 
 ---
 
-# Azure Attestation client library for .NET - Version 1.0.0-alpha.1 
+# README.md template
+
+Use the guidelines in each section of this template to ensure consistency and readability of your README. The README resides in your package's GitHub repository at the root of its directory within the repo. It's also used as the package distribution page (NuGet, PyPi, npm, etc.) and as a Quickstart on docs.microsoft.com. See [Azure.Template/README.md](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.49/sdk/template/Azure.Template/README.md) for an example following this template.
+
+**Title**: The H1 of your README should be in the format: `# [Product Name] client library for [Language]`
+
+* All headings, including the H1, should use **sentence-style capitalization**. Refer to the [Microsoft Style Guide][style-guide-msft] and [Microsoft Cloud Style Guide][style-guide-cloud] for more information.
+* Example: `# Azure Batch client library for Python - Version 1.0.3-beta.49 
+`
+
+# Azure Template client library for .NET - Version 1.0.3-beta.49 
 
 
 **Introduction**: The introduction appears directly under the title (H1) of your README.
@@ -46,17 +56,6 @@ If your library requires authentication for use, such as for Azure services, inc
 For example, include details on obtaining an account key and endpoint URI, setting environment variables for each, and initializing the client object.
 
 ## Key concepts
-### Isolated Mode and AAD Mode.
-Each Microsoft Azure Attestation service instance operates in either "AAD" mode or "Isolated" mode. When an MAA instance is operating in AAD mode, it means that the customer which created the attestation instance allows Azure Active Directory and Azure Role Based Access control policies to verify access to the attestation instance.  
-### *AttestationType*
-The Microsoft Azure Attestation service supports attesting different types of evidence depending on the environment.
-Currently, MAA supports the following Trusted Execution environments:
-* OpenEnclave - An Intel(tm) Processor running code in an SGX Enclave where the attestation evidence was collected using the OpenEnclave `oe_get_report` or `oe_get_evidence` API.
-* SgxEnclave - An Intel(tm) Processor running code in an SGX Enclave where the attestation evidence was collected using the Intel SGX SDK.
-* Tpm - A Virtualization Based Security environment where the Trusted Platform Module of the processor is used to provide the attestation evidence.
-
-### Attestation Policy
-Each Attestation Type has an associated attestation policy which can be used to perform 
 
 The *Key concepts* section should describe the functionality of the main classes. Point out the most important and useful classes in the package (with links to their reference pages) and explain how those classes work together. Feel free to use bulleted lists, tables, code blocks, or even diagrams for clarity.
 
@@ -81,28 +80,16 @@ thing = client.create_thing(id, name)
 thing.save()
 ```
 
-### Get an attestation policy for a specified attestation type.
+### Get the thing
 
-The `GetPolicy` method retrieves an attestation policy from the service. The `attestationType` parameter is the type of attestation to retrieve.
-```C# Snippet:GetPolicy
-var client = new AttestationAdministrationClient(new Uri(endpoint), new DefaultAzureCredential());
-var attestClient = new AttestationClient(new Uri(endpoint), new DefaultAzureCredential(),
-    new AttestationClientOptions(validationCallback: (attestationToken, signer) => true));
-var policyResult = await client.GetPolicyAsync(AttestationType.SgxEnclave);
-var result = policyResult.Value.AttestationPolicy;
-```
+The `get_thing` method retrieves a Thing from the service. The `id` parameter is the unique ID of the Thing, not its "name" property.
 
-### Set an attestation policy for a specified attestation type.
-```C# Snippet:SetPolicy
-string attestationPolicy = "version=1.0; authorizationrules{=> allow();}; issuancerules{};";
+```C# Snippet:GetSecret
+var client = new MiniSecretClient(new Uri(endpoint), new DefaultAzureCredential());
 
-var policyTokenSigner = TestEnvironment.PolicyCertificate0;
+SecretBundle secret = client.GetSecret("TestSecret");
 
-AttestationToken policySetToken = new SecuredAttestationToken(
-    new StoredAttestationPolicy { AttestationPolicy = Base64Url.EncodeString(attestationPolicy), },
-    policyTokenSigner);
-
-var setResult = client.SetPolicy(AttestationType.SgxEnclave, policySetToken);
+Console.WriteLine(secret.Value);
 ```Python
 things = client.list_things()
 ```
