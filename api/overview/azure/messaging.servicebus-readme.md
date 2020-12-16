@@ -1,5 +1,5 @@
 ---
-title: Azure Service Bus client library for .NET
+title: Azure Service Bus client library for .NET - v. 7.0.0
 description: Azure Service Bus client library for .NET - Version 7.0.0 
 keywords: Azure, .NET, SDK, API, Azure.Messaging.ServiceBus, servicebus
 author: maggiepint
@@ -43,7 +43,7 @@ Use the client library for Azure Service Bus to:
 
 To quickly create the needed Service Bus resources in Azure and to receive a connection string for them, you can deploy our sample template by clicking:
 
-[![](http://azuredeploy.net/deploybutton.png)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-sdk-for-net%2Fmaster%2Fsdk%2Fservicebus%2FAzure.Messaging.ServiceBus%2Fassets%2Fsamples-azure-deploy.json)
+[![Deploy sample template](http://azuredeploy.net/deploybutton.png)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-sdk-for-net%2Fmaster%2Fsdk%2Fservicebus%2FAzure.Messaging.ServiceBus%2Fassets%2Fsamples-azure-deploy.json)
 
 ### Install the package
 
