@@ -5,8 +5,6 @@ author: maggiepint
 ms.author: magpint
 ms.date: 11/10/2020
 ms.topic: article
-ms.prod: azure
-ms.technology: azure
 ms.devlang: .net
 ms.service: event-grid
 ---
