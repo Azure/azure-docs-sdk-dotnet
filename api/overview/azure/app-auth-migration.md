@@ -126,7 +126,7 @@ var tokenProvider = new AzureServiceTokenProvider();
 var accessToken = await tokenProvider.GetAccessTokenAsync(ResourceId);
 ```
 
-* Using **Azure.Identity` library
+* Using `Azure.Identity` library
 
 ```csharp
 var tokenCredential = new DefaultAzureCredential();
