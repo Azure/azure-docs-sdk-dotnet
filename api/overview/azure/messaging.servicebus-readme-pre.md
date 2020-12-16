@@ -8,7 +8,7 @@ ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: .net
-ms.service: servicebus
+ms.service: service-bus
 ---
 
 # Azure Service Bus client library for .NET - Version 7.0.0-preview.9 
