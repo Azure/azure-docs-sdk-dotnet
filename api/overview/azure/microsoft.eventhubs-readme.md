@@ -1,18 +1,16 @@
 ---
-title: Azure Event Hubs client library for .NET
+title: Azure Event Hubs client library for .NET - 4.3.1
+description: Azure Event Hubs client library for .NET - Version 4.3.1 
 keywords: Azure, .net, SDK, API, Microsoft.Azure.EventHubs, eventhub
 author: maggiepint
 ms.author: magpint
 ms.date: 10/29/2020
 ms.topic: article
-ms.prod: azure
-ms.technology: azure
 ms.devlang: .net
-ms.service: eventhub
+ms.service: event-hubs
 ---
 
 # Azure Event Hubs client library for .NET - Version 4.3.1 
-
 
 Azure Event Hubs is a highly scalable publish-subscribe service that can ingest millions of events per second and stream them into multiple applications. This lets you process and analyze the massive amounts of data produced by your connected devices and applications. Once Event Hubs has collected the data, you can retrieve, transform and store it by using any real-time analytics provider or with batching/storage adapters. 
 
@@ -39,13 +37,13 @@ Use the client library for Event Hubs to:
 
 - Receive events from one or more publishers, transform them to better meet the needs of your ecosystem, then publish the transformed events to a new stream for consumers to observe.
 
-[Source code](https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.EventHubs_4.3.1/sdk/eventhub/Microsoft.Azure.EventHubs) | [Package (NuGet)](https://www.nuget.org/packages/Microsoft.Azure.EventHubs/) | [API reference documentation](https://docs.microsoft.com/dotnet/api/overview/azure/event-hubs?view=azure-dotnet) | [Product documentation](https://docs.microsoft.com/azure/event-hubs/)
+[Source code](https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.EventHubs_4.3.1/sdk/eventhub/Microsoft.Azure.EventHubs) | [Package (NuGet)](https://www.nuget.org/packages/Microsoft.Azure.EventHubs/) | [API reference documentation](/dotnet/api/overview/azure/event-hubs) | [Product documentation](/azure/event-hubs/)
 
 ## Getting started
 
-The complete Microsoft Azure SDK can be downloaded from the [Microsoft Azure Downloads Page](https://azure.microsoft.com/downloads/?sdk=net) and ships with support for building deployment packages, integrating with tooling, rich command line tooling, and more.
+The complete Microsoft Azure SDK can be downloaded from the [Microsoft Azure Downloads Page](https://azure.microsoft.com/downloads/?sdk=net&preserve-view=true) and ships with support for building deployment packages, integrating with tooling, rich command line tooling, and more.
 
-If you are not already familiar with Azure Event Hubs, please review: [What is Event Hubs?](https://docs.microsoft.com/azure/event-hubs/event-hubs-about).
+If you are not already familiar with Azure Event Hubs, please review: [What is Event Hubs?](/azure/event-hubs/event-hubs-about).
 
 For the best development experience, developers should use the official Microsoft NuGet packages for libraries. NuGet packages are regularly updated with new functionality and hotfixes.
 
@@ -60,7 +58,7 @@ For the best development experience, developers should use the official Microsof
 Code samples for the Azure Event Hubs client library that detail how to get started and how to implement common scenarios can be found in the following locations:
 
 - [Azure Code Samples](https://azure.microsoft.com/resources/samples/?sort=0&service=event-hubs&platform=dotnet)
-- [Azure Event Hubs Documentation](https://docs.microsoft.com/azure/event-hubs/)
+- [Azure Event Hubs Documentation](/azure/event-hubs/)
 - [Azure Event Hubs Sample Repository](https://github.com/Azure/azure-event-hubs/tree/master/samples)
 - [Azure Event Hubs Notification Sample](https://github.com/Azure-Samples/event-hubs-dotnet-user-notifications)
 - [Azure Event Hubs Publishing Sample](https://github.com/Azure-Samples/event-hubs-dotnet-ingest)
@@ -128,9 +126,9 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 
 ## Additional documentation
 
-- [Azure Event Hubs General Documentation](https://docs.microsoft.com/azure/event-hubs/)
-- [Azure Event Hubs REST API Reference](https://docs.microsoft.com/rest/api/eventhub/)
-- [Azure Event Hubs SDK for .NET Documentation](https://docs.microsoft.com/dotnet/api/overview/azure/event-hubs?view=azure-dotnet)
+- [Azure Event Hubs General Documentation](/azure/event-hubs/)
+- [Azure Event Hubs REST API Reference](/rest/api/eventhub/)
+- [Azure Event Hubs SDK for .NET Documentation](/dotnet/api/overview/azure/event-hubs)
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Feventhub%2FMicrosoft.Azure.EventHubs%2FREADME.png)
 

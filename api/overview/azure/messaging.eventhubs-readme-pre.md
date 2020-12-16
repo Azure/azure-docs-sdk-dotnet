@@ -1,20 +1,19 @@
 ---
-title: Azure Event Hubs client library for .NET
+title: Azure Event Hubs client library for .NET - 5.3.0-beta.4 
+description: Azure Event Hubs client library for .NET - Version 5.3.0-beta.4 
 keywords: Azure, .net, SDK, API, Azure.Messaging.EventHubs, eventhubs
 author: maggiepint
 ms.author: magpint
 ms.date: 11/10/2020
 ms.topic: article
-ms.prod: azure
-ms.technology: azure
 ms.devlang: .net
-ms.service: eventhubs
+ms.service: event-hubs
 ---
 
 # Azure Event Hubs client library for .NET - Version 5.3.0-beta.4 
 
 
-Azure Event Hubs is a highly scalable publish-subscribe service that can ingest millions of events per second and stream them to multiple consumers. This lets you process and analyze the massive amounts of data produced by your connected devices and applications. Once Event Hubs has collected the data, you can retrieve, transform and store it by using any real-time analytics provider or with batching/storage adapters.  If you would like to know more about Azure Event Hubs, you may wish to review: [What is Event Hubs](https://docs.microsoft.com/azure/event-hubs/event-hubs-about)?
+Azure Event Hubs is a highly scalable publish-subscribe service that can ingest millions of events per second and stream them to multiple consumers. This lets you process and analyze the massive amounts of data produced by your connected devices and applications. Once Event Hubs has collected the data, you can retrieve, transform and store it by using any real-time analytics provider or with batching/storage adapters.  If you would like to know more about Azure Event Hubs, you may wish to review: [What is Event Hubs](/azure/event-hubs/event-hubs-about)?
 
 The Azure Event Hubs client library allows for publishing and consuming of Azure Event Hubs events and may be used to:
 
@@ -26,7 +25,7 @@ The Azure Event Hubs client library allows for publishing and consuming of Azure
 
 - Receive events from one or more publishers, transform them to better meet the needs of your ecosystem, then publish the transformed events to a new stream for consumers to observe.
 
-[Source code](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs_5.3.0-beta.4/sdk/eventhub/Azure.Messaging.EventHubs/src) | [Package (NuGet)](https://www.nuget.org/packages/Azure.Messaging.EventHubs/) | [API reference documentation](https://docs.microsoft.com/dotnet/api/azure.messaging.eventhubs?view=azure-dotnet)) | [Product documentation](https://docs.microsoft.com/azure/event-hubs/) | [Migration guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs_5.3.0-beta.4/sdk/eventhub/Azure.Messaging.EventHubs/MigrationGuide.md)
+[Source code](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs_5.3.0-beta.4/sdk/eventhub/Azure.Messaging.EventHubs/src) | [Package (NuGet)](https://www.nuget.org/packages/Azure.Messaging.EventHubs/) | [API reference documentation](https://docs.microsoft.com/dotnet/api/azure.messaging.eventhubs)) | [Product documentation](https://docs.microsoft.com/azure/event-hubs/) | [Migration guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs_5.3.0-beta.4/sdk/eventhub/Azure.Messaging.EventHubs/MigrationGuide.md)
 
 ## Getting started
 
@@ -46,7 +45,7 @@ The Azure Event Hubs client library allows for publishing and consuming of Azure
 
 To quickly create a basic set of Event Hubs resources in Azure and to receive a connection string for them, you can deploy our sample template by clicking:
 
-[![](http://azuredeploy.net/deploybutton.png)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-sdk-for-net%2Fmaster%2Fsdk%2Feventhub%2FAzure.Messaging.EventHubs%2Fassets%2Fsamples-azure-deploy.json)
+[![Deploy sample template](http://azuredeploy.net/deploybutton.png)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-sdk-for-net%2Fmaster%2Fsdk%2Feventhub%2FAzure.Messaging.EventHubs%2Fassets%2Fsamples-azure-deploy.json)
 
 ### Install the package
 
