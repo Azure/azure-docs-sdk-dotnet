@@ -3,7 +3,7 @@ title:
 keywords: Azure, dotnet, SDK, API, Azure.Extensions.AspNetCore.DataProtection.Blobs, extensions
 author: maggiepint
 ms.author: magpint
-ms.date: 12/16/2020
+ms.date: 12/17/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -91,7 +91,7 @@ additional questions or comments.
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fextensions%2FAzure.Extensions.AspNetCore.DataProtection.Blobs%2FREADME.png)
 
 <!-- LINKS -->
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Extensions.AspNetCore.DataProtection.Blobs_1.1.0/sdk/extensions/Azure.Extensions.AspNetCore.DataProtection.Blobs/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Extensions.AspNetCore.DataProtection.Blobs_1.2.0/sdk/extensions/Azure.Extensions.AspNetCore.DataProtection.Blobs/src
 [package]: https://www.nuget.org/packages/Azure.Extensions.AspNetCore.DataProtection.Blobs/
 [docs]: https://docs.microsoft.com/dotnet/api/Azure.Extensions.AspNetCore.DataProtection.Blobs
 [nuget]: https://www.nuget.org/packages/Azure.Extensions.AspNetCore.DataProtection.Blobs
@@ -102,7 +102,7 @@ additional questions or comments.
 [storage_container_docs]: https://docs.microsoft.com/azure/storage/blobs/storage-blobs-introduction#containers
 [azure_cli]: https://docs.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
-[identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Extensions.AspNetCore.DataProtection.Blobs_1.1.0/sdk/identity/Azure.Identity/README.md
+[identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Extensions.AspNetCore.DataProtection.Blobs_1.2.0/sdk/identity/Azure.Identity/README.md
 [aspnetcore_dataprotection_doc]: https://docs.microsoft.com/aspnet/core/security/data-protection/introduction
 [samples]: samples/
 [cla]: https://cla.microsoft.com
