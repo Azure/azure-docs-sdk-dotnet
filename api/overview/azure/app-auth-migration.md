@@ -23,7 +23,7 @@ accept](https://azure.github.io/azure-sdk/releases/latest/dotnet.html). These ne
 Azure SDK client class. This design gives using Azure.Identity an additional security benefit over using AppAuthentication and older SDKs that require specifying the access token because access tokens do not
 need to be directly handled by the application itself. This mitigates the additional risk of access tokens being accidentally disclosed through traces, logs, and other sources.
 
-If you are starting development of a new application, it is strongly recommended to use `Azure.Identity` and the new Azure client SDKs. If you have an existing application that uses AppAuthentication and want to use Azure.Identity, the preferred path is to update your application to use the new Azure client SDKs that support accepting TokenCredentials. Over time, as developers' usage of Azure.Identity grows and as developers continue to migrate existing applications to Azure.Identity, further investment in AppAuthentication will be reduced. Eventually, the library will eventually be deprecated. Using the `DefaultAzureCredential` in `Azure.Identity` will provide similar functionality to
+If you are starting development of a new application, it is strongly recommended to use `Azure.Identity` and the new Azure client SDKs. If you have an existing application that uses AppAuthentication and want to use Azure.Identity, the preferred path is to update your application to use the new Azure client SDKs that support accepting TokenCredentials. Over time, as developers' usage of Azure.Identity grows and as developers continue to migrate existing applications to Azure.Identity, further investment in AppAuthentication will be reduced. Eventually, the library will be deprecated. Using the `DefaultAzureCredential` in `Azure.Identity` will provide similar functionality to
 `AzureServiceTokenProvider` in `AppAuthentication`, where the authentication provider used will change based on the current environment. If you are using an `AppAuthentication` connection string for a specific authentication provider using `AppAuthentication`, please see the below table to see how to use the same authentication provider by creating the appropriate TokenCredential in Azure.Identity.
 
 
@@ -126,7 +126,7 @@ var tokenProvider = new AzureServiceTokenProvider();
 var accessToken = await tokenProvider.GetAccessTokenAsync(ResourceId);
 ```
 
-* Using **Azure.Identity` library
+* Using `Azure.Identity` library
 
 ```csharp
 var tokenCredential = new DefaultAzureCredential();
