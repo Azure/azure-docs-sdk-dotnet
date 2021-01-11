@@ -158,10 +158,11 @@ There are three primary methods of using a Service Principal to run your applica
     az ad sp create-for-rbac --create-cert
     ```
 
-    This command creates a .pem file (private key) that's stored in your home directory. Deploy this certificate to either the *LocalMachine* or *CurrentUser* store.
+    This command creates a .pem file (private key) that's stored in your home directory. Convert the .pem file to a PFX certificate using the command:
 
-    > [!Important]
-    > The CLI command generates a .pem file, but Windows only provides native support for PFX certificates. To generate a PFX certificate instead, use the PowerShell commands shown here: [Create service principal with self-signed certificate](https://docs.microsoft.com/azure/active-directory/develop/howto-authenticate-service-principal-powershell#create-service-principal-with-self-signed-certificate). These commands automatically deploy the certificate as well.
+    ```cmd
+    openssl pkcs12 -export -in test.pem -out test.pfx
+    ```
 
 1. Set an environment variable named **AzureServicesAuthConnectionString** to the following value:
 
