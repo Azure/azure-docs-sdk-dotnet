@@ -1,27 +1,27 @@
 ---
 title: Azure Batch client library for Python
-keywords: Azure, dotnet, SDK, API, Azure.Security.Attestation, 
+keywords: Azure, dotnet, SDK, API, Azure.Security.Attestation, microsoftazureattestation
 author: maggiepint
 ms.author: magpint
-ms.date: 12/08/2020
+ms.date: 01/20/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: 
+ms.service: microsoftazureattestation
 ---
 
 # README.md template
 
-Use the guidelines in each section of this template to ensure consistency and readability of your README. The README resides in your package's GitHub repository at the root of its directory within the repo. It's also used as the package distribution page (NuGet, PyPi, npm, etc.) and as a Quickstart on docs.microsoft.com. See [Azure.Template/README.md](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.Attestation_1.0.0-alpha.1/sdk/template/Azure.Template/README.md) for an example following this template.
+Use the guidelines in each section of this template to ensure consistency and readability of your README. The README resides in your package's GitHub repository at the root of its directory within the repo. It's also used as the package distribution page (NuGet, PyPi, npm, etc.) and as a Quickstart on docs.microsoft.com. See [Azure.Template/README.md](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.Attestation_1.0.0-beta.1/sdk/template/Azure.Template/README.md) for an example following this template.
 
 **Title**: The H1 of your README should be in the format: `# [Product Name] client library for [Language]`
 
 * All headings, including the H1, should use **sentence-style capitalization**. Refer to the [Microsoft Style Guide][style-guide-msft] and [Microsoft Cloud Style Guide][style-guide-cloud] for more information.
-* Example: `# Azure Batch client library for Python - Version 1.0.0-alpha.1 
+* Example: `# Azure Batch client library for Python - Version 1.0.0-beta.1 
 `
 
-# Azure Attestation client library for .NET - Version 1.0.0-alpha.1 
+# Azure Attestation client library for .NET - Version 1.0.0-beta.1 
 
 
 **Introduction**: The introduction appears directly under the title (H1) of your README.
@@ -104,12 +104,13 @@ var result = policyResult.Value.AttestationPolicy;
 
 ### Set an attestation policy for a specified attestation type.
 ```C# Snippet:SetPolicy
-string attestationPolicy = "version=1.0; authorizationrules{=> allow();}; issuancerules{};";
+string attestationPolicy = "version=1.0; authorizationrules{=> permit();}; issuancerules{};";
 
 var policyTokenSigner = TestEnvironment.PolicyCertificate0;
 
 AttestationToken policySetToken = new SecuredAttestationToken(
     new StoredAttestationPolicy { AttestationPolicy = Base64Url.EncodeString(attestationPolicy), },
+    TestEnvironment.PolicySigningKey0,
     policyTokenSigner);
 
 var setResult = client.SetPolicy(AttestationType.SgxEnclave, policySetToken);
