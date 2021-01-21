@@ -1,13 +1,13 @@
 ---
 title: 
-keywords: Azure, .net, SDK, API, Azure.Extensions.AspNetCore.DataProtection.Blobs, extensions
+keywords: Azure, dotnet, SDK, API, Azure.Extensions.AspNetCore.DataProtection.Blobs, extensions
 author: maggiepint
 ms.author: magpint
-ms.date: 08/10/2020
+ms.date: 12/17/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.devlang: .net
+ms.devlang: dotnet
 ms.service: extensions
 ---
 
@@ -91,7 +91,7 @@ additional questions or comments.
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fextensions%2FAzure.Extensions.AspNetCore.DataProtection.Blobs%2FREADME.png)
 
 <!-- LINKS -->
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/extensions/Azure.Extensions.AspNetCore.DataProtection.Blobs/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Extensions.AspNetCore.DataProtection.Blobs_1.2.0/sdk/extensions/Azure.Extensions.AspNetCore.DataProtection.Blobs/src
 [package]: https://www.nuget.org/packages/Azure.Extensions.AspNetCore.DataProtection.Blobs/
 [docs]: https://docs.microsoft.com/dotnet/api/Azure.Extensions.AspNetCore.DataProtection.Blobs
 [nuget]: https://www.nuget.org/packages/Azure.Extensions.AspNetCore.DataProtection.Blobs
@@ -99,11 +99,11 @@ additional questions or comments.
 [storage_account_create_ps]: https://docs.microsoft.com/azure/storage/common/storage-quickstart-create-account?tabs=azure-powershell
 [storage_account_create_cli]: https://docs.microsoft.com/azure/storage/common/storage-quickstart-create-account?tabs=azure-cli
 [storage_account_create_portal]: https://docs.microsoft.com/azure/storage/common/storage-quickstart-create-account?tabs=azure-portal
-[storage_container_docs]: https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction#containers
+[storage_container_docs]: https://docs.microsoft.com/azure/storage/blobs/storage-blobs-introduction#containers
 [azure_cli]: https://docs.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
-[identity]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/identity/Azure.Identity/README.md
-[aspnetcore_dataprotection_doc]: https://docs.microsoft.com/en-us/aspnet/core/security/data-protection/introduction
+[identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Extensions.AspNetCore.DataProtection.Blobs_1.2.0/sdk/identity/Azure.Identity/README.md
+[aspnetcore_dataprotection_doc]: https://docs.microsoft.com/aspnet/core/security/data-protection/introduction
 [samples]: samples/
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/

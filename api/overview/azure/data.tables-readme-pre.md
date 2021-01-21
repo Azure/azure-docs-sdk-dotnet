@@ -1,17 +1,17 @@
 ---
 title: Azure Tables client library for .NET
-keywords: Azure, .net, SDK, API, Azure.Data.Tables, tables
+keywords: Azure, dotnet, SDK, API, Azure.Data.Tables, tables
 author: maggiepint
 ms.author: magpint
-ms.date: 11/12/2020
+ms.date: 01/12/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.devlang: .net
+ms.devlang: dotnet
 ms.service: tables
 ---
 
-# Azure Tables client library for .NET - Version 3.0.0-beta.3 
+# Azure Tables client library for .NET - Version 3.0.0-beta.5 
 
 
 Azure Table storage is a service that stores large amounts of structured NoSQL data in the cloud, providing 
@@ -65,7 +65,7 @@ az cosmosdb table create --name MyTableName --resource-group MyResourceGroup --a
 
 ### Authenticate the Client
 
-Learn more about options for authentication _(including Connection Strings, Shared Key, and Shared Key Signatures)_ [in our samples.](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_3.0.0-beta.3/sdk/tables/Azure.Data.Tables/samples/Sample0Auth.md)
+Learn more about options for authentication _(including Connection Strings, Shared Key, and Shared Key Signatures)_ [in our samples.](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_3.0.0-beta.5/sdk/tables/Azure.Data.Tables/samples/Sample0Auth.md)
 
 ## Key concepts
 
@@ -285,10 +285,10 @@ For more information see the [Code of Conduct FAQ][coc_faq] or contact
 [azure_cli]: https://docs.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
 [table_client_nuget_package]: https://www.nuget.org/packages?q=Azure.Data.Tables
-[table_client_samples]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_3.0.0-beta.3/sdk/tables/Azure.Data.Tables/samples
-[table_client_src]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_3.0.0-beta.3/sdk/tables/Azure.Data.Tables/src
+[table_client_samples]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_3.0.0-beta.5/sdk/tables/Azure.Data.Tables/samples
+[table_client_src]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_3.0.0-beta.5/sdk/tables/Azure.Data.Tables/src
 [api_reference]: https://docs.microsoft.com/dotnet/api/overview/azure/data.tables-readme-pre?view=azure-dotnet-preview
-[logging]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_3.0.0-beta.3/sdk/core/Azure.Core/samples/Diagnostics.md
+[logging]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_3.0.0-beta.5/sdk/core/Azure.Core/samples/Diagnostics.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
