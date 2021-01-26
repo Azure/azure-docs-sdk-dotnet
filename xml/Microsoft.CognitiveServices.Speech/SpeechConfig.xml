@@ -14,6 +14,7 @@
     <AssemblyVersion>1.12.1.28</AssemblyVersion>
     <AssemblyVersion>1.13.0.28</AssemblyVersion>
     <AssemblyVersion>1.14.0.28</AssemblyVersion>
+    <AssemblyVersion>1.15.0.28</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -21,9 +22,18 @@
   <Interfaces />
   <Docs>
     <summary>
-            Speech configuration.
-            </summary>
-    <remarks>To be added.</remarks>
+             Information about your subscription, including your key and region, endpoint, host, or authorization token. 
+             </summary>
+    <remarks>
+             Calls to the Speech service require a **SpeechConfig** object.
+               
+             There are a few ways that you can initialize a SpeechConfig:
+             * Using <seealso cref="M:Microsoft.CognitiveServices.Speech.SpeechConfig.FromSubscription(System.String,System.String)" />: pass in a key and the associated region.
+             * Using <seealso cref="M:Microsoft.CognitiveServices.Speech.SpeechConfig.FromEndpoint(System.Uri,System.String)" />: pass in a Speech service endpoint. A key or authorization token is optional.
+             * Using <seealso cref="M:Microsoft.CognitiveServices.Speech.SpeechConfig.FromHost(System.Uri,System.String)" />: pass in a host address. A key or authorization token is optional.
+            
+             See also: [Get started with speech-to-text](/azure/cognitive-services/speech-service/get-started-speech-to-text)
+             </remarks>
   </Docs>
   <Members>
     <Member MemberName="AuthorizationToken">
@@ -43,22 +53,24 @@
         <AssemblyVersion>1.12.1.28</AssemblyVersion>
         <AssemblyVersion>1.13.0.28</AssemblyVersion>
         <AssemblyVersion>1.14.0.28</AssemblyVersion>
+        <AssemblyVersion>1.15.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            Gets/sets the authorization token.
-            Note: The caller needs to ensure that the authorization token is valid. Before the authorization token
-            expires, the caller needs to refresh it by calling this setter with a new valid token.
-            As configuration values are copied when creating a new recognizer, the new token value will not apply to recognizers that have already been created.
-            For recognizers that have been created before, you need to set authorization token of the corresponding recognizer
-            to refresh the token. Otherwise, the recognizers will encounter errors during recognition.
-            Changed in version 1.3.0.
+            Gets or sets the authorization token.
             </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            You must assure that the authorization token is valid. Before the authorization token
+            expires, you need to refresh it by calling this setter with a new valid token.
+            Configuration values are copied when creating a new recognizer, so the new token value will not apply to recognizers that have already been created.
+            For recognizers that have been created before, you need to set the authorization token of the corresponding recognizer
+            to refresh the token. Otherwise, the recognizers will trigger errors during recognition.
+            Changed in version 1.3.0.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="EnableAudioLogging">
@@ -78,6 +90,7 @@
         <AssemblyVersion>1.12.1.28</AssemblyVersion>
         <AssemblyVersion>1.13.0.28</AssemblyVersion>
         <AssemblyVersion>1.14.0.28</AssemblyVersion>
+        <AssemblyVersion>1.15.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -86,6 +99,7 @@
       <Docs>
         <summary>
             Enable audio logging in service.
+            Audio logging writes log information and diagnostics to a local file.
             Added in version 1.5.0.
             </summary>
         <remarks>To be added.</remarks>
@@ -108,6 +122,7 @@
         <AssemblyVersion>1.12.1.28</AssemblyVersion>
         <AssemblyVersion>1.13.0.28</AssemblyVersion>
         <AssemblyVersion>1.14.0.28</AssemblyVersion>
+        <AssemblyVersion>1.15.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -115,10 +130,14 @@
       <Parameters />
       <Docs>
         <summary>
-            Enable dictation. Only supported in speech continuous recognition.
+            Enable dictation.
             Added in version 1.5.0.
             </summary>
-        <remarks>To be added.</remarks>
+        <remarks>
+            With dictation enabled, word descriptions of sentence structures are understood. 
+            For example, ending a statement by saying "question mark" adds a question mark to the sentence when dictation is enabled.
+            Only supported for continuous recognition.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="EndpointId">
@@ -138,13 +157,14 @@
         <AssemblyVersion>1.12.1.28</AssemblyVersion>
         <AssemblyVersion>1.13.0.28</AssemblyVersion>
         <AssemblyVersion>1.14.0.28</AssemblyVersion>
+        <AssemblyVersion>1.15.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            Sets the endpoint ID of a customized speech model that is used for speech recognition.
+            Gets or sets the endpoint ID of a custom speech model to use for speech recognition, or a custom voice model for speech synthesis.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -167,6 +187,7 @@
         <AssemblyVersion>1.12.1.28</AssemblyVersion>
         <AssemblyVersion>1.13.0.28</AssemblyVersion>
         <AssemblyVersion>1.14.0.28</AssemblyVersion>
+        <AssemblyVersion>1.15.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.CognitiveServices.Speech.SpeechConfig</ReturnType>
@@ -177,17 +198,18 @@
       </Parameters>
       <Docs>
         <param name="authorizationToken">The authorization token.</param>
-        <param name="region">The region name (see the <a href="https://aka.ms/csspeech/region">region page</a>).</param>
+        <param name="region">Region identifier for the authorization token.</param>
         <summary>
             Creates an instance of the speech config with specified authorization token and region.
-            Note: The caller needs to ensure that the authorization token is valid. Before the authorization token
+            </summary>
+        <returns>A speech config instance.</returns>
+        <remarks>
+            The caller needs to ensure that the authorization token is valid. Before the authorization token
             expires, the caller needs to refresh it by calling this setter with a new valid token.
             As configuration values are copied when creating a new recognizer, the new token value will not apply to recognizers that have already been created.
             For recognizers that have been created before, you need to set authorization token of the corresponding recognizer
             to refresh the token. Otherwise, the recognizers will encounter errors during recognition.
-            </summary>
-        <returns>A speech config instance.</returns>
-        <remarks>To be added.</remarks>
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="FromEndpoint">
@@ -207,6 +229,7 @@
         <AssemblyVersion>1.12.1.28</AssemblyVersion>
         <AssemblyVersion>1.13.0.28</AssemblyVersion>
         <AssemblyVersion>1.14.0.28</AssemblyVersion>
+        <AssemblyVersion>1.15.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.CognitiveServices.Speech.SpeechConfig</ReturnType>
@@ -217,20 +240,22 @@
       <Docs>
         <param name="endpoint">The service endpoint to connect to.</param>
         <summary>
-            Creates an instance of the speech config with specified endpoint.
+            Creates an instance of the speech config with specified endpoint. Added in version 1.5.0.
+            </summary>
+        <returns>A speech config instance.</returns>
+        <remarks>
             This method is intended only for users who use a non-standard service endpoint or parameters.
-            Note: The query parameters specified in the endpoint URI are not changed, even if they are set by any other APIs.
+              
+            Notes:
+            * The query parameters specified in the endpoint URI are not changed, even if they are set by any other APIs.
             For example, if the recognition language is defined in URI as query parameter "language=de-DE", and the property SpeechRecognitionLanguage is set to "en-US",
             the language setting in URI takes precedence, and the effective language is "de-DE".
             Only the parameters that are not specified in the endpoint URI can be set by other APIs.
-            Note: If the endpoint requires a subscription key for authentication, use FromEndpoint(System.Uri, string) to pass
+            * If the endpoint requires a subscription key for authentication, use FromEndpoint(System.Uri, string) to pass
             the subscription key as parameter.
             To use an authorization token with FromEndpoint, use this method to create a SpeechConfig instance, and then
             set the AuthorizationToken property on the created SpeechConfig instance.
-            Note: Added in version 1.5.0.
-            </summary>
-        <returns>A speech config instance.</returns>
-        <remarks>To be added.</remarks>
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="FromEndpoint">
@@ -250,6 +275,7 @@
         <AssemblyVersion>1.12.1.28</AssemblyVersion>
         <AssemblyVersion>1.13.0.28</AssemblyVersion>
         <AssemblyVersion>1.14.0.28</AssemblyVersion>
+        <AssemblyVersion>1.15.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.CognitiveServices.Speech.SpeechConfig</ReturnType>
@@ -260,19 +286,19 @@
       </Parameters>
       <Docs>
         <param name="endpoint">The service endpoint to connect to.</param>
-        <param name="subscriptionKey">The subscription key.</param>
+        <param name="subscriptionKey">The subscription key. To create or find your key and region, see [Find keys and region](/azure/cognitive-services/speech-service/overview#find-keys-and-region).</param>
         <summary>
-            Creates an instance of the speech config with specified endpoint and subscription key.
-            This method is intended only for users who use a non-standard service endpoint or parameters.
-            Note: The query parameters specified in the endpoint URI are not changed, even if they are set by any other APIs.
-            For example, if the recognition language is defined in URI as query parameter "language=de-DE", and the property SpeechRecognitionLanguage is set to "en-US",
-            the language setting in URI takes precedence, and the effective language is "de-DE".
-            Only the parameters that are not specified in the endpoint URI can be set by other APIs.
-            Note: To use an authorization token with FromEndpoint, use FromEndpoint(System.Uri),
-            and then set the AuthorizationToken property on the created SpeechConfig instance.
+            Creates an instance of SpeechConfig with specified endpoint and subscription key.
+            This method is only used for a non-standard service endpoint or parameters.
             </summary>
         <returns>A speech config instance.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            * The query parameters specified in the endpoint URI are not changed, even if they are set by any other API call.
+              For example, if the recognition language is defined in the URI query parameter as "language=de-DE", and the property SpeechRecognitionLanguage is set to "en-US",
+              the language set in the URI takes precedence, and "de-DE" remains the expected language.
+              Since parameters included in the endpoint URI take priority, only parameters that are not specified in the endpoint URI can be set by other APIs.
+            * To use an authorization token with FromEndpoint, use FromEndpoint(System.Uri), and then set the AuthorizationToken property on the new SpeechConfig instance.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="FromHost">
@@ -292,6 +318,7 @@
         <AssemblyVersion>1.12.1.28</AssemblyVersion>
         <AssemblyVersion>1.13.0.28</AssemblyVersion>
         <AssemblyVersion>1.14.0.28</AssemblyVersion>
+        <AssemblyVersion>1.15.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.CognitiveServices.Speech.SpeechConfig</ReturnType>
@@ -304,16 +331,14 @@
         <summary>
             Creates an instance of the speech config with specified host.
             This method is intended only for users who use a non-default service host. Standard resource path will be assumed.
-            For services with a non-standard resource path or no path at all, use FromEndpoint instead.
-            Note: Query parameters are not allowed in the host URI and must be set by other APIs.
-            Note: If the host requires a subscription key for authentication, use FromHost(System.Uri, string) to pass
-            the subscription key as parameter.
-            To use an authorization token with FromHost, use this method to create a SpeechConfig instance, and then
-            set the AuthorizationToken property on the created SpeechConfig instance.
-            Note: Added in version 1.8.0.
+            For services with a non-standard resource path or no path at all, use FromEndpoint instead. Added in version 1.8.0.  
             </summary>
         <returns>A speech config instance.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            * Query parameters are not allowed in the host URI and must be set by other APIs.
+            * If the host requires a subscription key for authentication, use <seealso cref="M:Microsoft.CognitiveServices.Speech.SpeechConfig.FromHost(System.Uri,System.String)" /> to pass the subscription key as parameter. 
+            * To use an authorization token with FromHost, use this method to create a SpeechConfig instance, and then set the AuthorizationToken property on the created SpeechConfig instance.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="FromHost">
@@ -333,6 +358,7 @@
         <AssemblyVersion>1.12.1.28</AssemblyVersion>
         <AssemblyVersion>1.13.0.28</AssemblyVersion>
         <AssemblyVersion>1.14.0.28</AssemblyVersion>
+        <AssemblyVersion>1.15.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.CognitiveServices.Speech.SpeechConfig</ReturnType>
@@ -343,18 +369,17 @@
       </Parameters>
       <Docs>
         <param name="host">The service host to connect to. Format is "protocol://host:port" where ":port" is optional.</param>
-        <param name="subscriptionKey">The subscription key.</param>
+        <param name="subscriptionKey">The subscription key. To create or find your key and region, see [Find keys and region](/azure/cognitive-services/speech-service/overview#find-keys-and-region).</param>
         <summary>
-            Creates an instance of the speech config with specified host and subscription key.
+            Creates a SpeechConfig instance with a specific host and subscription key.
             This method is intended only for users who use a non-default service host. Standard resource path will be assumed.
-            For services with a non-standard resource path or no path at all, use FromEndpoint instead.
-            Note: Query parameters are not allowed in the host URI and must be set by other APIs.
-            Note: To use an authorization token with FromHost, use FromHost(System.Uri),
-            and then set the AuthorizationToken property on the created SpeechConfig instance.
-            Note: Added in version 1.8.0.
+            For services with a non-standard resource path or no path at all, use FromEndpoint instead. Added in version 1.8.0.  
             </summary>
         <returns>A speech config instance.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            * Query parameters are not allowed in the host URI and must be set by other APIs.
+            * To use an authorization token with FromHost, use FromHost(System.Uri), and then set the AuthorizationToken property on the created SpeechConfig instance.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="FromSubscription">
@@ -374,6 +399,7 @@
         <AssemblyVersion>1.12.1.28</AssemblyVersion>
         <AssemblyVersion>1.13.0.28</AssemblyVersion>
         <AssemblyVersion>1.14.0.28</AssemblyVersion>
+        <AssemblyVersion>1.15.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.CognitiveServices.Speech.SpeechConfig</ReturnType>
@@ -383,11 +409,13 @@
         <Parameter Name="region" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="subscriptionKey">The subscription key, can be empty if authorization token is specified later.</param>
-        <param name="region">The region name (see the <a href="https://aka.ms/csspeech/region">region page</a>).</param>
+        <param name="subscriptionKey">The subscription key. To create or find your key and region, see [Find keys and region](/azure/cognitive-services/speech-service/overview#find-keys-and-region).</param>
+        <param name="region">Region identifier for the subscription key.</param>
         <summary>
-            Creates an instance of speech configuration with specified subscription key and region.
-            </summary>
+             Creates an instance of speech configuration with specified subscription key and region.
+            
+             See also: [Get started with speech-to-text](/azure/cognitive-services/speech-service/get-started-speech-to-text?tabs=script%2Cwindowsinstall&amp;pivots=programming-language-csharp)
+             </summary>
         <returns>A speech config instance.</returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -409,6 +437,7 @@
         <AssemblyVersion>1.12.1.28</AssemblyVersion>
         <AssemblyVersion>1.13.0.28</AssemblyVersion>
         <AssemblyVersion>1.14.0.28</AssemblyVersion>
+        <AssemblyVersion>1.15.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -419,7 +448,7 @@
       <Docs>
         <param name="id">PropertyId of the property</param>
         <summary>
-            Gets the property by propertyId
+            Gets the value of a property specified by a value in the <seealso cref="T:Microsoft.CognitiveServices.Speech.PropertyId" /> enumeration.
             Added in version 1.3.0.
             </summary>
         <returns>Value of the property</returns>
@@ -443,6 +472,7 @@
         <AssemblyVersion>1.12.1.28</AssemblyVersion>
         <AssemblyVersion>1.13.0.28</AssemblyVersion>
         <AssemblyVersion>1.14.0.28</AssemblyVersion>
+        <AssemblyVersion>1.15.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -453,7 +483,7 @@
       <Docs>
         <param name="name">Name of the property</param>
         <summary>
-            Gets the property by name.
+            For internal use.
             </summary>
         <returns>Value of the property</returns>
         <remarks>To be added.</remarks>
@@ -476,6 +506,7 @@
         <AssemblyVersion>1.12.1.28</AssemblyVersion>
         <AssemblyVersion>1.13.0.28</AssemblyVersion>
         <AssemblyVersion>1.14.0.28</AssemblyVersion>
+        <AssemblyVersion>1.15.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.CognitiveServices.Speech.OutputFormat</ReturnType>
@@ -483,11 +514,14 @@
       <Docs>
         <summary>
             Gets/sets the speech recognition output format: simple or detailed.
-            Note: This output format is for speech recognition results, use <see cref="P:Microsoft.CognitiveServices.Speech.SpeechConfig.SpeechSynthesisOutputFormat" /> 
-            and <see cref="M:Microsoft.CognitiveServices.Speech.SpeechConfig.SetSpeechSynthesisOutputFormat(Microsoft.CognitiveServices.Speech.SpeechSynthesisOutputFormat)" /> to get/set synthesized audio output format.
             </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            This output format is for speech recognition results. Use <see cref="P:Microsoft.CognitiveServices.Speech.SpeechConfig.SpeechSynthesisOutputFormat" /> 
+            and <see cref="M:Microsoft.CognitiveServices.Speech.SpeechConfig.SetSpeechSynthesisOutputFormat(Microsoft.CognitiveServices.Speech.SpeechSynthesisOutputFormat)" /> to get/set synthesized audio output format.
+               
+            See also: [Customize audio format](/azure/cognitive-services/speech-service/get-started-text-to-speech#customize-audio-format)
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="Region">
@@ -507,6 +541,7 @@
         <AssemblyVersion>1.12.1.28</AssemblyVersion>
         <AssemblyVersion>1.13.0.28</AssemblyVersion>
         <AssemblyVersion>1.14.0.28</AssemblyVersion>
+        <AssemblyVersion>1.15.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -536,6 +571,7 @@
         <AssemblyVersion>1.12.1.28</AssemblyVersion>
         <AssemblyVersion>1.13.0.28</AssemblyVersion>
         <AssemblyVersion>1.14.0.28</AssemblyVersion>
+        <AssemblyVersion>1.15.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -543,7 +579,8 @@
       <Parameters />
       <Docs>
         <summary>
-            Includes word-level timestamps.
+            Include word-level timestamps. When audio logging is enabled, this method adds
+            time details about the start point and duration of each word to the log.
             Added in version 1.5.0.
             </summary>
         <remarks>To be added.</remarks>
@@ -566,6 +603,7 @@
         <AssemblyVersion>1.12.1.28</AssemblyVersion>
         <AssemblyVersion>1.13.0.28</AssemblyVersion>
         <AssemblyVersion>1.14.0.28</AssemblyVersion>
+        <AssemblyVersion>1.15.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -574,9 +612,9 @@
         <Parameter Name="profanity" Type="Microsoft.CognitiveServices.Speech.ProfanityOption" />
       </Parameters>
       <Docs>
-        <param name="profanity">The property option to set.</param>
+        <param name="profanity">The profanity option to set.</param>
         <summary>
-            Sets profanity option.
+            Sets profanity option. The profanity option can remove profane words, or replace their letters with stars.
             Added in version 1.5.0.
             </summary>
         <remarks>To be added.</remarks>
@@ -599,6 +637,7 @@
         <AssemblyVersion>1.12.1.28</AssemblyVersion>
         <AssemblyVersion>1.13.0.28</AssemblyVersion>
         <AssemblyVersion>1.14.0.28</AssemblyVersion>
+        <AssemblyVersion>1.15.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -609,9 +648,9 @@
       </Parameters>
       <Docs>
         <param name="id">PropertyId of the property</param>
-        <param name="value">Value of the property</param>
+        <param name="value">New value of the property</param>
         <summary>
-            Sets the property by propertyId
+            Sets the value of a property specified by a value in the <seealso cref="T:Microsoft.CognitiveServices.Speech.PropertyId" /> enumeration.
             Added in version 1.3.0.
             </summary>
         <remarks>To be added.</remarks>
@@ -634,6 +673,7 @@
         <AssemblyVersion>1.12.1.28</AssemblyVersion>
         <AssemblyVersion>1.13.0.28</AssemblyVersion>
         <AssemblyVersion>1.14.0.28</AssemblyVersion>
+        <AssemblyVersion>1.15.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -646,7 +686,7 @@
         <param name="name">Name of the property</param>
         <param name="value">Value of the property</param>
         <summary>
-            Sets the property by name.
+            For internal use.
             </summary>
         <remarks>To be added.</remarks>
       </Docs>
@@ -668,6 +708,7 @@
         <AssemblyVersion>1.12.1.28</AssemblyVersion>
         <AssemblyVersion>1.13.0.28</AssemblyVersion>
         <AssemblyVersion>1.14.0.28</AssemblyVersion>
+        <AssemblyVersion>1.15.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -680,7 +721,7 @@
         <param name="proxyHostName">The host name of the proxy server.</param>
         <param name="proxyPort">The port number of the proxy server.</param>
         <summary>
-            Sets proxy configuration.
+            Configures proxy.
             Added in version 1.3.0
             </summary>
         <remarks>To be added.</remarks>
@@ -703,6 +744,7 @@
         <AssemblyVersion>1.12.1.28</AssemblyVersion>
         <AssemblyVersion>1.13.0.28</AssemblyVersion>
         <AssemblyVersion>1.14.0.28</AssemblyVersion>
+        <AssemblyVersion>1.15.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -719,7 +761,7 @@
         <param name="proxyUserName">The user name of the proxy server.</param>
         <param name="proxyPassword">The password of the proxy server.</param>
         <summary>
-             Sets proxy configuration.
+             Configures proxy with username-password pair.
              Added in version 1.1.0
             
              Note: Proxy functionality is not available on macOS. This function will have no effect on this platform.
@@ -744,6 +786,7 @@
         <AssemblyVersion>1.12.1.28</AssemblyVersion>
         <AssemblyVersion>1.13.0.28</AssemblyVersion>
         <AssemblyVersion>1.14.0.28</AssemblyVersion>
+        <AssemblyVersion>1.15.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -758,8 +801,7 @@
         <param name="value">The property value.</param>
         <param name="channel">The channel used to pass the specified property to service.</param>
         <summary>
-            Sets a property value that will be passed to service using the specified channel.
-            Added in version 1.5.0.
+            For internal use. Enables preview of new service features.
             </summary>
         <remarks>To be added.</remarks>
       </Docs>
@@ -781,6 +823,7 @@
         <AssemblyVersion>1.12.1.28</AssemblyVersion>
         <AssemblyVersion>1.13.0.28</AssemblyVersion>
         <AssemblyVersion>1.14.0.28</AssemblyVersion>
+        <AssemblyVersion>1.15.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -794,7 +837,9 @@
             Sets the speech synthesis output format.
             Added in version 1.4.0
             </summary>
-        <remarks>To be added.</remarks>
+        <remarks>
+            See also: [Customize audio format](/azure/cognitive-services/speech-service/get-started-text-to-speech#customize-audio-format)
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="SpeechRecognitionLanguage">
@@ -814,16 +859,19 @@
         <AssemblyVersion>1.12.1.28</AssemblyVersion>
         <AssemblyVersion>1.13.0.28</AssemblyVersion>
         <AssemblyVersion>1.14.0.28</AssemblyVersion>
+        <AssemblyVersion>1.15.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            Specifies the name of spoken language to be recognized in BCP-47 format
+            Specifies the name of spoken language to be recognized, in BCP-47 format.
             </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            See BCP-47 locale values available to speech-to-text at [Speech-to-text](/azure/cognitive-services/speech-service/language-support#speech-to-text).
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="SpeechSynthesisLanguage">
@@ -843,13 +891,14 @@
         <AssemblyVersion>1.12.1.28</AssemblyVersion>
         <AssemblyVersion>1.13.0.28</AssemblyVersion>
         <AssemblyVersion>1.14.0.28</AssemblyVersion>
+        <AssemblyVersion>1.15.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            Gets/sets the speech synthesis language, e.g. en-US
+            Gets or sets the speech synthesis language, e.g. en-US.
             Added in version 1.4.0
             </summary>
         <value>To be added.</value>
@@ -873,15 +922,18 @@
         <AssemblyVersion>1.12.1.28</AssemblyVersion>
         <AssemblyVersion>1.13.0.28</AssemblyVersion>
         <AssemblyVersion>1.14.0.28</AssemblyVersion>
+        <AssemblyVersion>1.15.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            Gets the speech synthesis output format
-            Added in version 1.4.0
-            </summary>
+             Gets the output format of synthesized speech.
+             Added in version 1.4.0
+            
+             Example value: `riff-16khz-16bit-mono-pcm`
+             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -903,17 +955,20 @@
         <AssemblyVersion>1.12.1.28</AssemblyVersion>
         <AssemblyVersion>1.13.0.28</AssemblyVersion>
         <AssemblyVersion>1.14.0.28</AssemblyVersion>
+        <AssemblyVersion>1.15.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            Gets/sets the speech synthesis voice name
+            Gets or sets the speech synthesis voice.
             Added in version 1.4.0
             </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            See also: [Standard voices](/azure/cognitive-services/speech-service/language-support#text-to-speech)
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="SubscriptionKey">
@@ -933,6 +988,7 @@
         <AssemblyVersion>1.12.1.28</AssemblyVersion>
         <AssemblyVersion>1.13.0.28</AssemblyVersion>
         <AssemblyVersion>1.14.0.28</AssemblyVersion>
+        <AssemblyVersion>1.15.0.28</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
