@@ -1,27 +1,27 @@
 ---
 title: Azure Batch client library for Python
-keywords: Azure, .net, SDK, API, Azure.Template, 
+keywords: Azure, dotnet, SDK, API, Azure.Template, template
 author: maggiepint
 ms.author: magpint
-ms.date: 10/22/2020
+ms.date: 01/29/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.devlang: .net
-ms.service: 
+ms.devlang: dotnet
+ms.service: template
 ---
 
 # README.md template
 
-Use the guidelines in each section of this template to ensure consistency and readability of your README. The README resides in your package's GitHub repository at the root of its directory within the repo. It's also used as the package distribution page (NuGet, PyPi, npm, etc.) and as a Quickstart on docs.microsoft.com. See [Azure.Template/README.md](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.49/sdk/template/Azure.Template/README.md) for an example following this template.
+Use the guidelines in each section of this template to ensure consistency and readability of your README. The README resides in your package's GitHub repository at the root of its directory within the repo. It's also used as the package distribution page (NuGet, PyPi, npm, etc.) and as a Quickstart on docs.microsoft.com. See [Azure.Template/README.md](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.710043/sdk/template/Azure.Template/README.md) for an example following this template.
 
 **Title**: The H1 of your README should be in the format: `# [Product Name] client library for [Language]`
 
 * All headings, including the H1, should use **sentence-style capitalization**. Refer to the [Microsoft Style Guide][style-guide-msft] and [Microsoft Cloud Style Guide][style-guide-cloud] for more information.
-* Example: `# Azure Batch client library for Python - Version 1.0.3-beta.49 
+* Example: `# Azure Batch client library for Python - Version 1.0.3-beta.710043 
 `
 
-# Azure Template client library for .NET - Version 1.0.3-beta.49 
+# Azure Template client library for .NET - Version 1.0.3-beta.710043 
 
 
 **Introduction**: The introduction appears directly under the title (H1) of your README.
