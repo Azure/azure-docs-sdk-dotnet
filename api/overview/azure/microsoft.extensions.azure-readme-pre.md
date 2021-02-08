@@ -1,14 +1,14 @@
 ---
 title: 
-keywords: Azure, .net, SDK, API, Microsoft.Extensions.Azure, core
+keywords: Azure, dotnet, SDK, API, Microsoft.Extensions.Azure, extensions
 author: maggiepint
 ms.author: magpint
-ms.date: 11/06/2020
+ms.date: 02/08/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.devlang: .net
-ms.service: core
+ms.devlang: dotnet
+ms.service: extensions
 ---
 
 # Azure client library integration for ASP.NET Core
@@ -127,7 +127,7 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 
 
 <!-- LINKS -->
-[source_root]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Extensions.Azure_1.1.0-beta.1/sdk/extensions/Microsoft.Extensions.Azure/
+[source_root]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Extensions.Azure_1.1.0-beta.2/sdk/extensions/Microsoft.Extensions.Azure/
 [nuget]: https://www.nuget.org/
 [package]: https://www.nuget.org/packages/Microsoft.Extensions.Azure/
 [configuration]: https://docs.microsoft.com/aspnet/core/fundamentals/configuration/?view=aspnetcore-3.0
