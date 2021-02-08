@@ -1,7 +1,7 @@
 ---
 title: Azure Service Bus libraries for .NET
 description: Reference for Azure Service Bus libraries for .NET
-ms.date: 10/19/2017
+ms.date: 02/08/2021
 ms.topic: reference
 ms.service: service-bus-messaging
 ---
@@ -14,31 +14,44 @@ ms.service: service-bus-messaging
 
 ## Client library
 
-Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.ServiceBus) directly from the Visual Studio [Package Manager console][PackageManager].
+Install the [NuGet package](https://www.nuget.org/packages/Azure.Messaging.ServiceBus) directly from the Visual Studio [Package Manager console][PackageManager].
 
 #### Visual Studio Package Manager
 
 ```powershell
-Install-Package Microsoft.Azure.ServiceBus
+Install-Package Azure.Messaging.ServiceBus
 ```
 
 ### Code Example
 
-This example sends a message to a Service Bus queue.
+This example demonstrates how to send and receive messages using a Service Bus queue.
 
 ```csharp
-// using Microsoft.Azure.ServiceBus;
-// Microsoft.Azure.ServiceBus 2.0.0 (stable)
+// using Azure.Messaging.ServiceBus;
 
-byte[] messageBody = System.Text.Encoding.Unicode.GetBytes("Hello, world!");
-ServiceBusConnectionStringBuilder builder = new ServiceBusConnectionStringBuilder(connectionString);
-QueueClient client = new QueueClient(builder, ReceiveMode.PeekLock);
-client.SendAsync(new Message(messageBody));
+string connectionString = "<connection_string>";
+string queueName = "<queue_name>";
+
+// Because ServiceBusClient implements IAsyncDisposable, we'll create it 
+// with "await using" so that it is automatically disposed for us.
+await using var client = new ServiceBusClient(connectionString);
+
+// The sender is responsible for publishing messages to the queue.
+ServiceBusSender sender = client.CreateSender(queueName);
+ServiceBusMessage message = new ServiceBusMessage("Hello world!");
+
+await sender.SendMessageAsync(message);
+
+// The receiver is responsible for reading messages from the queue.
+ServiceBusReceiver receiver = client.CreateReceiver(queueName);
+ServiceBusReceivedMessage receivedMessage = await receiver.ReceiveMessageAsync();
+
+string body = receivedMessage.Body.ToString();
+Console.WriteLine(body);
 ```
 
 > [!div class="nextstepaction"]
-> [Explore the client APIs](/dotnet/api/overview/azure/servicebus/client)
-
+> [Explore the client APIs](/dotnet/api/azure.messaging.servicebus)
 
 ## Management library
 
@@ -80,11 +93,13 @@ using (ServiceBusManagementClient client = new ServiceBusManagementClient(creden
 
 ## Samples
 
-- [Service Bus Queue Basics - .Net](https://azure.microsoft.com/resources/samples/service-bus-dotnet-manage-queue-with-basic-features/)
-- [Service Bus Queue Advanced Features - .Net](https://azure.microsoft.com/resources/samples/service-bus-dotnet-manage-queue-with-advanced-features/)
-- [Service Bus Publish/Subscribe Basics - .Net](https://azure.microsoft.com/resources/samples/service-bus-dotnet-manage-publish-subscribe-with-basic-features/)
-- [Service Bus Publish/Subscribe Advanced Features - .Net](https://azure.microsoft.com/resources/samples/service-bus-dotnet-manage-publish-subscribe-with-advanced-features/)
-- [Service Bus with Claims-Based Authorization - .Net](https://azure.microsoft.com/resources/samples/service-bus-dotnet-manage-with-claims-based-authorization/)
+- [Sending and Receiving Messages](https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/servicebus/Azure.Messaging.ServiceBus/samples/Sample01_HelloWorld.md)
+- [Settling Messages](https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/servicebus/Azure.Messaging.ServiceBus/samples/Sample02_MessageSettlement.md)
+- [Sending and Receiving Session Messages](https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/servicebus/Azure.Messaging.ServiceBus/samples/Sample03_SendReceiveSessions.md)
+- [Using the Service Bus Processor to Receive Messages](https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/servicebus/Azure.Messaging.ServiceBus/samples/Sample04_Processor.md)
+- [Using the Service Bus Session Processor to Receive Messages](https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/servicebus/Azure.Messaging.ServiceBus/samples/Sample05_SessionProcessor.md)
+- [Working with Service Bus Transactions](https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/servicebus/Azure.Messaging.ServiceBus/samples/Sample06_Transactions.md)
+- [Basic Management Operations with the Service Bus Administration Client](https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/servicebus/Azure.Messaging.ServiceBus/samples/Sample07_CrudOperations.md)
 
 View the [complete list](https://azure.microsoft.com/resources/samples/?term=service+bus) of Azure Service Bus samples.
 
