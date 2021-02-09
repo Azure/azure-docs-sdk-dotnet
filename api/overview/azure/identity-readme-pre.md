@@ -1,17 +1,17 @@
 ---
 title: Azure Identity client library for .NET
-keywords: Azure, .net, SDK, API, Azure.Identity, identity
+keywords: Azure, dotnet, SDK, API, Azure.Identity, identity
 author: maggiepint
 ms.author: magpint
-ms.date: 10/16/2020
+ms.date: 01/30/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.devlang: .net
+ms.devlang: dotnet
 ms.service: identity
 ---
 
-# Azure Identity client library for .NET - Version 1.4.0-beta.1 
+# Azure Identity client library for .NET - Version 1.4.0-beta.2 
 
  The Azure Identity library provides Azure Active Directory token authentication support across the Azure SDK. It provides a set of TokenCredential implementations which can be used to construct Azure SDK clients which support AAD token authentication.  
  
@@ -75,14 +75,14 @@ A credential is a class which contains or can obtain the data needed for a servi
 
 The Azure Identity library focuses on OAuth authentication with Azure Active directory, and it offers a variety of credential classes capable of acquiring an AAD token to authenticate service requests. All of the credential classes in this library are implementations of the `TokenCredential` abstract class in [Azure.Core][azure_core_library], and any of them can be used to construct service clients capable of authenticating with a `TokenCredential`. 
 
-See [Credential Classes](#Credential-Classes) for a complete listing of available credential types.
+See [Credential Classes](#credential-classes) for a complete listing of available credential types.
 
 ### DefaultAzureCredential
 The `DefaultAzureCredential` is appropriate for most scenarios where the application is intended to ultimately be run in the Azure Cloud. This is because the `DefaultAzureCredential` combines credentials commonly used to authenticate when deployed, with credentials used to authenticate in a development environment. The `DefaultAzureCredential` will attempt to authenticate via the following mechanisms in order.
 
 ![DefaultAzureCredential authentication flow][default_azure_credential_authflow_image]
 
- - Environment - The `DefaultAzureCredential` will read account information specified via [environment variables](#Environment-Variables) and use it to authenticate.
+ - Environment - The `DefaultAzureCredential` will read account information specified via [environment variables](#environment-variables) and use it to authenticate.
  - Managed Identity - If the application is deployed to an Azure host with Managed Identity enabled, the `DefaultAzureCredential` will authenticate with that account.
  - Visual Studio - If the developer has authenticated via Visual Studio, the `DefaultAzureCredential` will authenticate with that account.
  - Visual Studio Code - If the developer has authenticated via the Visual Studio Code Azure Account plugin, the `DefaultAzureCredential` will authenticate with that account.
@@ -217,7 +217,7 @@ For more details on dealing with errors arising from failed requests to Azure Ac
 
 ### Logging
 
-The Azure Identity library provides the same [logging capabilities](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.4.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md#logging) as the rest of the Azure SDK.
+The Azure Identity library provides the same [logging capabilities](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.4.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md#logging) as the rest of the Azure SDK.
 
 The simplest way to see the logs to help debug authentication issues is to enable the console logging.
 
@@ -263,20 +263,20 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 <!-- LINKS -->
 [azure_cli]: https://docs.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.4.0-beta.1/sdk/identity/Azure.Identity/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.4.0-beta.2/sdk/identity/Azure.Identity/src
 [package]: https://www.nuget.org/packages/Azure.Identity
 [aad_doc]: https://docs.microsoft.com/azure/active-directory/
 [aad_err_doc]: https://docs.microsoft.com/azure/active-directory/develop/reference-aadsts-error-codes
-[certificates_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.4.0-beta.1/sdk/keyvault/Azure.Security.KeyVault.Certificates
+[certificates_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.4.0-beta.2/sdk/keyvault/Azure.Security.KeyVault.Certificates
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [code_of_conduct_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [nuget]: https://www.nuget.org/
-[keys_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.4.0-beta.1/sdk/keyvault/Azure.Security.KeyVault.Keys
-[secrets_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.4.0-beta.1/sdk/keyvault/Azure.Security.KeyVault.Secrets
-[blobs_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.4.0-beta.1/sdk/storage/Azure.Storage.Blobs
-[queues_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.4.0-beta.1/sdk/storage/Azure.Storage.Queues
-[eventhubs_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.4.0-beta.1/sdk/eventhub/Azure.Messaging.EventHubs
-[azure_core_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.4.0-beta.1/sdk/core/Azure.Core
+[keys_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.4.0-beta.2/sdk/keyvault/Azure.Security.KeyVault.Keys
+[secrets_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.4.0-beta.2/sdk/keyvault/Azure.Security.KeyVault.Secrets
+[blobs_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.4.0-beta.2/sdk/storage/Azure.Storage.Blobs
+[queues_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.4.0-beta.2/sdk/storage/Azure.Storage.Queues
+[eventhubs_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.4.0-beta.2/sdk/eventhub/Azure.Messaging.EventHubs
+[azure_core_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.4.0-beta.2/sdk/core/Azure.Core
 [identity_api_docs]: https://docs.microsoft.com/dotnet/api/azure.identity?view=azure-dotnet
 [vs_login_image]: https://raw.githubusercontent.com/Azure/azure-sdk-for-net/master/sdk/identity/Azure.Identity/images/VsLoginDialog.png
 [vs_code_login_image]: https://raw.githubusercontent.com/Azure/azure-sdk-for-net/master/sdk/identity/Azure.Identity/images/VsCodeLoginCommand.png
