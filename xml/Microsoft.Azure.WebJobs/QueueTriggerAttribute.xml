@@ -36,12 +36,23 @@
   </Attributes>
   <Docs>
     <summary>
-            Attribute used to bind a parameter to an Azure Queue message, causing the function to run when a
-            message is enqueued.
-            </summary>
+             Attribute used to bind a parameter to an Azure Queue message, causing the function to run when a
+             message is enqueued.
+             </summary>
     <remarks>
-            The method parameter type can be one of the following:
-            <list type="bullet"><item><description><see cref="T:Azure.Storage.Queues.Models.QueueMessage" /></description></item><item><description><see cref="T:System.String" /></description></item><item><description><see cref="T:byte[]" /></description></item><item><description>A user-defined type (serialized as JSON)</description></item></list></remarks>
+             The method parameter type can be one of the following:
+             <list type="bullet"><item><description><see cref="T:Azure.Storage.Queues.Models.QueueMessage" /></description></item><item><description><see cref="T:System.String" /></description></item><item><description><see cref="T:byte[]" /></description></item><item><description><see cref="T:System.BinaryData" /></description></item><item><description>A user-defined type (serialized as JSON)</description></item></list>
+            
+             By default messages received from the queue are expected to be Base64-encoded and are decoded before calling the function.
+             This behavior can be changed by setting <see cref="P:Microsoft.Azure.WebJobs.Host.QueuesOptions.MessageEncoding" />.
+             For example, to configure Azure Functions to perform no base64 encoding/decoding, specify the following in host.json.
+             <code>
+             "extensions": {
+               "queues": {
+                 "messageEncoding": "none"
+               }
+             }
+             </code></remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
