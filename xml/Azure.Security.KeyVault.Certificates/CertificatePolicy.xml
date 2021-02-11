@@ -25,6 +25,48 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public CertificatePolicy ();" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="DocId" Value="M:Azure.Security.KeyVault.Certificates.CertificatePolicy.#ctor" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Security.KeyVault.Certificates</AssemblyName>
+        <AssemblyVersion>4.2.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>
+             Initializes a new instance of the <see cref="T:Azure.Security.KeyVault.Certificates.CertificatePolicy" /> class to pass to
+             <see cref="M:Azure.Security.KeyVault.Certificates.CertificateClient.ImportCertificate(Azure.Security.KeyVault.Certificates.ImportCertificateOptions,System.Threading.CancellationToken)" /> or
+             <see cref="M:Azure.Security.KeyVault.Certificates.CertificateClient.ImportCertificateAsync(Azure.Security.KeyVault.Certificates.ImportCertificateOptions,System.Threading.CancellationToken)" />.
+             </summary>
+        <remarks>
+          <para>
+             Use this constructor if, for example, you want to import a PEM-encoded certificate. The <see cref="P:Azure.Security.KeyVault.Certificates.CertificatePolicy.IssuerName" /> will be
+             <see cref="F:Azure.Security.KeyVault.Certificates.WellKnownIssuerNames.Unknown" /> and the <see cref="P:Azure.Security.KeyVault.Certificates.CertificatePolicy.Subject" /> and <see cref="P:Azure.Security.KeyVault.Certificates.CertificatePolicy.SubjectAlternativeNames" /> will
+             be parsed from the imported certificate.
+             <code snippet="Snippet:CertificateClientLiveTests_VerifyImportCertificatePem">
+             byte[] certificateBytes = File.ReadAllBytes("certificate.pem");
+            
+             ImportCertificateOptions options = new ImportCertificateOptions(certificateName, certificateBytes)
+             {
+                 Policy = new CertificatePolicy
+                 {
+                     ContentType = CertificateContentType.Pem
+                 }
+             };
+             </code></para>
+          <para>
+             You must use one of the other constructors to pass an instance to
+             <see cref="M:Azure.Security.KeyVault.Certificates.CertificateClient.StartCreateCertificate(System.String,Azure.Security.KeyVault.Certificates.CertificatePolicy,System.Nullable{System.Boolean},System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken)" /> or
+             <see cref="M:Azure.Security.KeyVault.Certificates.CertificateClient.StartCreateCertificateAsync(System.String,Azure.Security.KeyVault.Certificates.CertificatePolicy,System.Nullable{System.Boolean},System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken)" />
+             because <see cref="P:Azure.Security.KeyVault.Certificates.CertificatePolicy.IssuerName" /> and one of <see cref="P:Azure.Security.KeyVault.Certificates.CertificatePolicy.Subject" /> or <see cref="P:Azure.Security.KeyVault.Certificates.CertificatePolicy.SubjectAlternativeNames" /> are required.
+             </para>
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public CertificatePolicy (string issuerName, Azure.Security.KeyVault.Certificates.SubjectAlternativeNames subjectAlternativeNames);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string issuerName, class Azure.Security.KeyVault.Certificates.SubjectAlternativeNames subjectAlternativeNames) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Security.KeyVault.Certificates.CertificatePolicy.#ctor(System.String,Azure.Security.KeyVault.Certificates.SubjectAlternativeNames)" />
@@ -258,8 +300,9 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Gets a new <see cref="T:Azure.Security.KeyVault.Certificates.CertificatePolicy" /> suitable for self-signed certificate requests.
-            You should change the <see cref="P:Azure.Security.KeyVault.Certificates.CertificatePolicy.Subject" /> before passing this policy to create a certificate.
+            Gets a new <see cref="T:Azure.Security.KeyVault.Certificates.CertificatePolicy" /> suitable for self-signed certificate requests
+            with the <see cref="P:Azure.Security.KeyVault.Certificates.CertificatePolicy.Subject" /> "CN=DefaultPolicy". To change the Subject, create a new instance
+            using one of the constructors.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>

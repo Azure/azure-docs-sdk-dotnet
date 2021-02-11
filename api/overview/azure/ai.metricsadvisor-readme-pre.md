@@ -1,17 +1,17 @@
 ---
 title: Azure Metrics Advisor client library for .NET
-keywords: Azure, .net, SDK, API, Azure.AI.MetricsAdvisor, metricsadvisor
+keywords: Azure, dotnet, SDK, API, Azure.AI.MetricsAdvisor, metricsadvisor
 author: maggiepint
 ms.author: magpint
-ms.date: 11/10/2020
+ms.date: 02/10/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.devlang: .net
+ms.devlang: dotnet
 ms.service: metricsadvisor
 ---
 
-# Azure Metrics Advisor client library for .NET - Version 1.0.0-beta.2 
+# Azure Metrics Advisor client library for .NET - Version 1.0.0-beta.3 
 
 
 Azure Cognitive Services Metrics Advisor is a cloud service that uses machine learning to monitor and detect anomalies in time series data. It includes the following capabilities:
@@ -30,7 +30,7 @@ Azure Cognitive Services Metrics Advisor is a cloud service that uses machine le
 Install the Azure Metrics Advisor client library for .NET with [NuGet][nuget]:
 
 ```PowerShell
-dotnet add package Azure.AI.MetricsAdvisor --version 1.0.0-beta.2
+dotnet add package Azure.AI.MetricsAdvisor --version 1.0.0-beta.3
 ```
 
 ### Prerequisites
@@ -69,7 +69,7 @@ For more information about creating the resource or how to get the location and 
 
 ### Authenticate the client
 
-In order to interact with the Metrics Advisor service, you'll need to create an instance of the [`MetricsAdvisorClient`][metrics_advisor_client_class] or the [`MetricsAdvisorAdministrationClient`][metrics_advisor_admin_client_class] classes. You will need an **endpoint**, a **subscription key** and an **API key** to instantiate a client object.
+In order to interact with the Metrics Advisor service, you'll need to create an instance of the [`MetricsAdvisorClient`][metrics_advisor_client_class] or the [`MetricsAdvisorAdministrationClient`][metrics_advisor_admin_client_class] classes. You will need an **endpoint**, a **subscription key**, and an **API key** to instantiate a client object.
 
 #### Get the Endpoint and the Subscription Key
 
@@ -107,6 +107,34 @@ string subscriptionKey = "<subscriptionKey>";
 string apiKey = "<apiKey>";
 var credential = new MetricsAdvisorKeyCredential(subscriptionKey, apiKey);
 var adminClient = new MetricsAdvisorAdministrationClient(new Uri(endpoint), credential);
+```
+
+#### Create a MetricsAdvisorClient or a MetricsAdvisorAdministrationClient with Azure Active Directory
+
+`MetricsAdvisorKeyCredential` authentication is used in the examples in this getting started guide, but you can also authenticate with Azure Active Directory using the [Azure Identity library][azure_identity].
+
+To use the [DefaultAzureCredential][DefaultAzureCredential] provider shown below, or other credential providers provided with the Azure SDK, please install the `Azure.Identity` package:
+
+```PowerShell
+Install-Package Azure.Identity
+```
+
+You will also need to [register a new AAD application][register_aad_app] and [grant access][aad_grant_access] to Metrics Advisor by assigning the `"Cognitive Services Metrics Advisor User"` role to your service principal. You may want to assign the `"Cognitive Services Metrics Advisor Administrator"` role instead if administrator privileges are required.
+
+Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_CLIENT_SECRET.
+
+Once you have the environment variables set, you can create a [`MetricsAdvisorClient`][metrics_advisor_client_class]:
+
+```C# Snippet:CreateMetricsAdvisorClientWithAad
+string endpoint = "<endpoint>";
+var client = new MetricsAdvisorClient(new Uri(endpoint), new DefaultAzureCredential());
+```
+
+Alternately, you can also create a [`MetricsAdvisorAdministrationClient`][metrics_advisor_admin_client_class] to perform administration operations:
+
+```C# Snippet:CreateMetricsAdvisorAdministrationClientWithAad
+string endpoint = "<endpoint>";
+var adminClient = new MetricsAdvisorAdministrationClient(new Uri(endpoint), new DefaultAzureCredential());
 ```
 
 ## Key concepts
@@ -153,6 +181,19 @@ An `AnomalyAlert`, or simply "alert", is triggered when a detected [anomaly](#da
 
 A `NotificationHook`, or simply "hook", is a means of subscribing to [alerts](#anomaly-alert) notifications. You can pass a hook to an `AnomalyAlertConfiguration` and start getting notifications for every alert it creates. See the sample [Create a hook for receiving anomaly alerts](#create-a-hook-for-receiving-anomaly-alerts) below for more information.
 
+### Thread safety
+We guarantee that all client instance methods are thread-safe and independent of each other ([guideline](https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-service-methods-thread-safety)). This ensures that the recommendation of reusing client instances is always safe, even across threads.
+
+### Additional concepts
+<!-- CLIENT COMMON BAR -->
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.MetricsAdvisor_1.0.0-beta.3/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.MetricsAdvisor_1.0.0-beta.3/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.MetricsAdvisor_1.0.0-beta.3/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.MetricsAdvisor_1.0.0-beta.3/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.MetricsAdvisor_1.0.0-beta.3/sdk/core/Azure.Core/README.md#mocking) |
+[Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
+<!-- CLIENT COMMON BAR -->
+
 ## Examples
 
 The following section provides several code snippets illustrating common patterns used in the Metrics Advisor .NET API. The snippets below make use of asynchronous service calls, but note that the Azure.AI.MetricsAdvisor package supports both synchronous and asynchronous APIs.
@@ -172,59 +213,47 @@ Metrics Advisor supports multiple types of data sources. In this sample we'll il
 string sqlServerConnectionString = "<connectionString>";
 string sqlServerQuery = "<query>";
 
-var dataFeedName = "Sample data feed";
-var dataFeedSource = new SqlServerDataFeedSource(sqlServerConnectionString, sqlServerQuery);
-var dataFeedGranularity = new DataFeedGranularity(DataFeedGranularityType.Daily);
+var dataFeed = new DataFeed();
 
-var dataFeedMetrics = new List<DataFeedMetric>()
+dataFeed.Name = "Sample data feed";
+dataFeed.DataSource = new SqlServerDataFeedSource(sqlServerConnectionString, sqlServerQuery);
+dataFeed.Granularity = new DataFeedGranularity(DataFeedGranularityType.Daily);
+
+dataFeed.Schema = new DataFeedSchema();
+dataFeed.Schema.MetricColumns.Add(new DataFeedMetric("cost"));
+dataFeed.Schema.MetricColumns.Add(new DataFeedMetric("revenue"));
+dataFeed.Schema.DimensionColumns.Add(new DataFeedDimension("category"));
+dataFeed.Schema.DimensionColumns.Add(new DataFeedDimension("city"));
+
+dataFeed.IngestionSettings = new DataFeedIngestionSettings()
 {
-    new DataFeedMetric("cost"),
-    new DataFeedMetric("revenue")
-};
-var dataFeedDimensions = new List<DataFeedDimension>()
-{
-    new DataFeedDimension("category"),
-    new DataFeedDimension("city")
-};
-var dataFeedSchema = new DataFeedSchema(dataFeedMetrics)
-{
-    DimensionColumns = dataFeedDimensions
+    IngestionStartTime = DateTimeOffset.Parse("2020-01-01T00:00:00Z")
 };
 
-var ingestionStartTime = DateTimeOffset.Parse("2020-01-01T00:00:00Z");
-var dataFeedIngestionSettings = new DataFeedIngestionSettings(ingestionStartTime);
+Response<DataFeed> response = await adminClient.CreateDataFeedAsync(dataFeed);
 
-var dataFeed = new DataFeed(dataFeedName, dataFeedSource, dataFeedGranularity, dataFeedSchema, dataFeedIngestionSettings);
+DataFeed createdDataFeed = response.Value;
 
-Response<string> response = await adminClient.CreateDataFeedAsync(dataFeed);
-
-string dataFeedId = response.Value;
-
-Console.WriteLine($"Data feed ID: {dataFeedId}");
-```
-
-Note that only the ID of the data feed is known at this point. You can perform another service call to `GetDataFeedAsync` or `GetDataFeed` to get more information, such as status, created time, the list of administrators, or the metric IDs.
-
-```C# Snippet:GetDataFeedAsync
-string dataFeedId = "<dataFeedId>";
-
-Response<DataFeed> response = await adminClient.GetDataFeedAsync(dataFeedId);
-
-DataFeed dataFeed = response.Value;
-
-Console.WriteLine($"Data feed status: {dataFeed.Status.Value}");
-Console.WriteLine($"Data feed created time: {dataFeed.CreatedTime.Value}");
+Console.WriteLine($"Data feed ID: {createdDataFeed.Id}");
+Console.WriteLine($"Data feed status: {createdDataFeed.Status.Value}");
+Console.WriteLine($"Data feed created time: {createdDataFeed.CreatedTime.Value}");
 
 Console.WriteLine($"Data feed administrators:");
-foreach (string admin in dataFeed.Administrators)
+foreach (string admin in createdDataFeed.Administrators)
 {
     Console.WriteLine($" - {admin}");
 }
 
 Console.WriteLine($"Metric IDs:");
-foreach (DataFeedMetric metric in dataFeed.Schema.MetricColumns)
+foreach (DataFeedMetric metric in createdDataFeed.Schema.MetricColumns)
 {
     Console.WriteLine($" - {metric.MetricName}: {metric.MetricId}");
+}
+
+Console.WriteLine($"Dimension columns:");
+foreach (DataFeedDimension dimension in createdDataFeed.Schema.DimensionColumns)
+{
+    Console.WriteLine($" - {dimension.DimensionName}");
 }
 ```
 
@@ -270,29 +299,31 @@ Create an [`AnomalyDetectionConfiguration`](#data-point-anomaly) to tell the ser
 string metricId = "<metricId>";
 string configurationName = "Sample anomaly detection configuration";
 
-var hardThresholdSuppressCondition = new SuppressCondition(1, 100);
-var hardThresholdCondition = new HardThresholdCondition(AnomalyDetectorDirection.Down, hardThresholdSuppressCondition)
+var detectionConfiguration = new AnomalyDetectionConfiguration()
+{
+    MetricId = metricId,
+    Name = configurationName,
+    WholeSeriesDetectionConditions = new MetricWholeSeriesDetectionCondition()
+};
+
+var detectCondition = detectionConfiguration.WholeSeriesDetectionConditions;
+
+var hardSuppress = new SuppressCondition(1, 100);
+detectCondition.HardThresholdCondition = new HardThresholdCondition(AnomalyDetectorDirection.Down, hardSuppress)
 {
     LowerBound = 5.0
 };
 
-var smartDetectionSuppressCondition = new SuppressCondition(4, 50);
-var smartDetectionCondition = new SmartDetectionCondition(10.0, AnomalyDetectorDirection.Up, smartDetectionSuppressCondition);
+var smartSuppress = new SuppressCondition(4, 50);
+detectCondition.SmartDetectionCondition = new SmartDetectionCondition(10.0, AnomalyDetectorDirection.Up, smartSuppress);
 
-var detectionCondition = new MetricWholeSeriesDetectionCondition()
-{
-    HardThresholdCondition = hardThresholdCondition,
-    SmartDetectionCondition = smartDetectionCondition,
-    CrossConditionsOperator = DetectionConditionsOperator.Or
-};
+detectCondition.CrossConditionsOperator = DetectionConditionsOperator.Or;
 
-var detectionConfiguration = new AnomalyDetectionConfiguration(metricId, configurationName, detectionCondition);
+Response<AnomalyDetectionConfiguration> response = await adminClient.CreateDetectionConfigurationAsync(detectionConfiguration);
 
-Response<string> response = await adminClient.CreateDetectionConfigurationAsync(detectionConfiguration);
+AnomalyDetectionConfiguration createdDetectionConfiguration = response.Value;
 
-string detectionConfigurationId = response.Value;
-
-Console.WriteLine($"Anomaly detection configuration ID: {detectionConfigurationId}");
+Console.WriteLine($"Anomaly detection configuration ID: {createdDetectionConfiguration.Id}");
 ```
 
 ### Create a hook for receiving anomaly alerts
@@ -301,19 +332,20 @@ Metrics Advisor supports the [`EmailNotificationHook`](#notification-hook) and t
 
 ```C# Snippet:CreateHookAsync
 string hookName = "Sample hook";
-var emailsToAlert = new List<string>()
+
+var emailHook = new EmailNotificationHook()
 {
-    "email1@sample.com",
-    "email2@sample.com"
+    Name = hookName
 };
 
-var emailHook = new EmailNotificationHook(hookName, emailsToAlert);
+emailHook.EmailsToAlert.Add("email1@sample.com");
+emailHook.EmailsToAlert.Add("email2@sample.com");
 
-Response<string> response = await adminClient.CreateHookAsync(emailHook);
+Response<NotificationHook> response = await adminClient.CreateHookAsync(emailHook);
 
-string hookId = response.Value;
+NotificationHook createdHook = response.Value;
 
-Console.WriteLine($"Hook ID: {hookId}");
+Console.WriteLine($"Hook ID: {createdHook.Id}");
 ```
 
 ### Create an anomaly alert configuration
@@ -325,21 +357,24 @@ string hookId = "<hookId>";
 string anomalyDetectionConfigurationId = "<anomalyDetectionConfigurationId>";
 
 string configurationName = "Sample anomaly alert configuration";
-var idsOfHooksToAlert = new List<string>() { hookId };
 
-var scope = MetricAnomalyAlertScope.GetScopeForWholeSeries();
-var metricAlertConfigurations = new List<MetricAnomalyAlertConfiguration>()
+AnomalyAlertConfiguration alertConfiguration = new AnomalyAlertConfiguration()
 {
-    new MetricAnomalyAlertConfiguration(anomalyDetectionConfigurationId, scope)
+    Name = configurationName
 };
 
-AnomalyAlertConfiguration alertConfiguration = new AnomalyAlertConfiguration(configurationName, idsOfHooksToAlert, metricAlertConfigurations);
+alertConfiguration.IdsOfHooksToAlert.Add(hookId);
 
-Response<string> response = await adminClient.CreateAlertConfigurationAsync(alertConfiguration);
+var scope = MetricAnomalyAlertScope.GetScopeForWholeSeries();
+var metricAlertConfiguration = new MetricAnomalyAlertConfiguration(anomalyDetectionConfigurationId, scope);
 
-string alertConfigurationId = response.Value;
+alertConfiguration.MetricAlertConfigurations.Add(metricAlertConfiguration);
 
-Console.WriteLine($"Alert configuration ID: {alertConfigurationId}");
+Response<AnomalyAlertConfiguration> response = await adminClient.CreateAlertConfigurationAsync(alertConfiguration);
+
+AnomalyAlertConfiguration createdAlertConfiguration = response.Value;
+
+Console.WriteLine($"Alert configuration ID: {createdAlertConfiguration.Id}");
 ```
 
 ### Query detected anomalies and triggered alerts
@@ -488,32 +523,35 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fmetricsadvisor%2FAzure.AI.MetricsAdvisor%2FREADME.png)
 
 <!-- LINKS -->
-[metricsadv_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0-beta.2/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/src
+[metricsadv_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0-beta.3/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/src
 [metricsadv_docs]: https://docs.microsoft.com/azure/cognitive-services/metrics-advisor
 [metricsadv_nuget_package]: https://www.nuget.org/packages/Azure.AI.MetricsAdvisor
 [metricsadv_refdocs]: https://aka.ms/azsdk/net/docs/ref/metricsadvisor
 [metricsadv_rest_api]: https://westus2.dev.cognitive.microsoft.com/docs/services/MetricsAdvisor
-[metricsadv_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0-beta.2/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/samples/README.md
+[metricsadv_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0-beta.3/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/samples/README.md
 [metricsadv_web_portal]: https://metricsadvisor.azurewebsites.net
 
-[metrics_advisor_admin_client_class]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.MetricsAdvisor_1.0.0-beta.2/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/src/MetricsAdvisorAdministrationClient.cs
-[metrics_advisor_client_class]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.MetricsAdvisor_1.0.0-beta.2/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/src/MetricsAdvisorClient.cs
+[metrics_advisor_admin_client_class]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.MetricsAdvisor_1.0.0-beta.3/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/src/MetricsAdvisorAdministrationClient.cs
+[metrics_advisor_client_class]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.MetricsAdvisor_1.0.0-beta.3/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/src/MetricsAdvisorClient.cs
 
-[metricsadv-sample1]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0-beta.2/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample01_DataFeedCrudOperations.cs
-[metricsadv-sample2]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0-beta.2/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample02_DataFeedIngestionOperations.cs
-[metricsadv-sample3]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0-beta.2/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample03_DetectionConfigurationCrudOperations.cs
-[metricsadv-sample4]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0-beta.2/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample04_HookCrudOperations.cs
-[metricsadv-sample5]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0-beta.2/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample05_AlertConfigurationCrudOperations.cs
-[metricsadv-sample6]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0-beta.2/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample06_QueryTriggeredAlerts.cs
-[metricsadv-sample7]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0-beta.2/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample07_QueryDetectedAnomalies.cs
-[metricsadv-sample8]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0-beta.2/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample08_QueryIncidentsAndRootCauses.cs
-[metricsadv-sample9]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0-beta.2/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample09_QueryTimeSeriesInformation.cs
-[metricsadv-sample10]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0-beta.2/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample10_FeedbackCrudOperations.cs
+[metricsadv-sample1]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0-beta.3/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample01_DataFeedCrudOperations.cs
+[metricsadv-sample2]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0-beta.3/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample02_DataFeedIngestionOperations.cs
+[metricsadv-sample3]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0-beta.3/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample03_DetectionConfigurationCrudOperations.cs
+[metricsadv-sample4]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0-beta.3/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample04_HookCrudOperations.cs
+[metricsadv-sample5]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0-beta.3/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample05_AlertConfigurationCrudOperations.cs
+[metricsadv-sample6]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0-beta.3/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample06_QueryTriggeredAlerts.cs
+[metricsadv-sample7]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0-beta.3/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample07_QueryDetectedAnomalies.cs
+[metricsadv-sample8]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0-beta.3/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample08_QueryIncidentsAndRootCauses.cs
+[metricsadv-sample9]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0-beta.3/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample09_QueryTimeSeriesInformation.cs
+[metricsadv-sample10]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0-beta.3/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample10_FeedbackCrudOperations.cs
 
+[aad_grant_access]: https://docs.microsoft.com/azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
 [cognitive_resource_cli]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account-cli
 [cognitive_resource_portal]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account
+[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0-beta.3/sdk/identity/Azure.Identity/README.md
+[register_aad_app]: https://docs.microsoft.com/azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
 
-[logging]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md
+[logging]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0-beta.3/sdk/core/Azure.Core/samples/Diagnostics.md
 
 [azure_cli]: https://docs.microsoft.com/cli/azure
 [azure_portal]: https://portal.azure.com

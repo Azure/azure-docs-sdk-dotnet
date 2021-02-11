@@ -18,27 +18,30 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public EventGridEvent (object data, string subject, string eventType, string dataVersion);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(object data, string subject, string eventType, string dataVersion) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Messaging.EventGrid.EventGridEvent.#ctor(System.Object,System.String,System.String,System.String)" />
-      <MemberSignature Language="VB.NET" Value="Public Sub New (data As Object, subject As String, eventType As String, dataVersion As String)" />
-      <MemberSignature Language="F#" Value="new Azure.Messaging.EventGrid.EventGridEvent : obj * string * string * string -&gt; Azure.Messaging.EventGrid.EventGridEvent" Usage="new Azure.Messaging.EventGrid.EventGridEvent (data, subject, eventType, dataVersion)" />
+      <MemberSignature Language="C#" Value="public EventGridEvent (string subject, string eventType, string dataVersion, object data, Type dataSerializationType = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string subject, string eventType, string dataVersion, object data, class System.Type dataSerializationType) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Messaging.EventGrid.EventGridEvent.#ctor(System.String,System.String,System.String,System.Object,System.Type)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (subject As String, eventType As String, dataVersion As String, data As Object, Optional dataSerializationType As Type = Nothing)" />
+      <MemberSignature Language="F#" Value="new Azure.Messaging.EventGrid.EventGridEvent : string * string * string * obj * Type -&gt; Azure.Messaging.EventGrid.EventGridEvent" Usage="new Azure.Messaging.EventGrid.EventGridEvent (subject, eventType, dataVersion, data, dataSerializationType)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Messaging.EventGrid</AssemblyName>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="data" Type="System.Object" />
         <Parameter Name="subject" Type="System.String" />
         <Parameter Name="eventType" Type="System.String" />
         <Parameter Name="dataVersion" Type="System.String" />
+        <Parameter Name="data" Type="System.Object" />
+        <Parameter Name="dataSerializationType" Type="System.Type" />
       </Parameters>
       <Docs>
         <param name="subject"> A resource path relative to the topic path. </param>
-        <param name="data"> Event data specific to the event type. </param>
         <param name="eventType"> The type of the event that occurred. For example, "Contoso.Items.ItemReceived". </param>
         <param name="dataVersion"> The schema version of the data object. </param>
+        <param name="data"> Event data specific to the event type. </param>
+        <param name="dataSerializationType">The type to use when serializing the data.
+            If not specified, <see cref="M:System.Object.GetType" /> will be used on <paramref name="data" />.</param>
         <summary> Initializes a new instance of <see cref="T:Azure.Messaging.EventGrid.EventGridEvent" />. </summary>
         <remarks>To be added.</remarks>
       </Docs>
@@ -58,7 +61,7 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary> The schema version of the data object. </summary>
+        <summary>Gets or sets the schema version of the data object.</summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -78,7 +81,7 @@
         <ReturnType>System.DateTimeOffset</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary> The time (in UTC) the event was generated. </summary>
+        <summary>Gets or sets the time (in UTC) the event was generated.</summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -98,24 +101,24 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary> The type of the event that occurred. </summary>
+        <summary>Gets or sets the type of the event that occurred.</summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetData">
-      <MemberSignature Language="C#" Value="public object GetData ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance object GetData() cil managed" />
+      <MemberSignature Language="C#" Value="public BinaryData GetData ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.BinaryData GetData() cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Messaging.EventGrid.EventGridEvent.GetData" />
-      <MemberSignature Language="VB.NET" Value="Public Function GetData () As Object" />
-      <MemberSignature Language="F#" Value="member this.GetData : unit -&gt; obj" Usage="eventGridEvent.GetData " />
+      <MemberSignature Language="VB.NET" Value="Public Function GetData () As BinaryData" />
+      <MemberSignature Language="F#" Value="member this.GetData : unit -&gt; BinaryData" Usage="eventGridEvent.GetData " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Messaging.EventGrid</AssemblyName>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>System.Object</ReturnType>
+        <ReturnType>System.BinaryData</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
@@ -155,75 +158,7 @@
         <typeparam name="T"> Type of event to deserialize to. </typeparam>
         <param name="cancellationToken"> The cancellation token to use during deserialization. </param>
         <summary>
-            Deserializes the event payload into a specified event type using the provided <see cref="T:Azure.Core.Serialization.JsonObjectSerializer" />.
-            </summary>
-        <returns> Deserialized payload of the event, cast to the specified type. </returns>
-        <remarks>To be added.</remarks>
-        <exception cref="T:System.InvalidOperationException"> Event was not created from EventGridEvent.Parse() method. </exception>
-        <exception cref="T:System.InvalidCastException"> Event payload cannot be cast to the specified event type. </exception>
-      </Docs>
-    </Member>
-    <Member MemberName="GetData&lt;T&gt;">
-      <MemberSignature Language="C#" Value="public T GetData&lt;T&gt; (Azure.Core.Serialization.ObjectSerializer serializer, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance !!T GetData&lt;T&gt;(class Azure.Core.Serialization.ObjectSerializer serializer, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Messaging.EventGrid.EventGridEvent.GetData``1(Azure.Core.Serialization.ObjectSerializer,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Function GetData(Of T) (serializer As ObjectSerializer, Optional cancellationToken As CancellationToken = Nothing) As T" />
-      <MemberSignature Language="F#" Value="member this.GetData : Azure.Core.Serialization.ObjectSerializer * System.Threading.CancellationToken -&gt; 'T" Usage="eventGridEvent.GetData (serializer, cancellationToken)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Azure.Messaging.EventGrid</AssemblyName>
-        <AssemblyVersion>4.0.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>T</ReturnType>
-      </ReturnValue>
-      <TypeParameters>
-        <TypeParameter Name="T" />
-      </TypeParameters>
-      <Parameters>
-        <Parameter Name="serializer" Type="Azure.Core.Serialization.ObjectSerializer" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
-      </Parameters>
-      <Docs>
-        <typeparam name="T"> Type of event to deserialize to. </typeparam>
-        <param name="serializer"> Custom serializer used to deserialize the payload. </param>
-        <param name="cancellationToken"> The cancellation token to use during deserialization. </param>
-        <summary>
-            Deserializes the event payload into a specified event type using the provided <see cref="T:Azure.Core.Serialization.ObjectSerializer" />.
-            </summary>
-        <returns> Deserialized payload of the event, cast to the specified type. </returns>
-        <remarks>To be added.</remarks>
-        <exception cref="T:System.InvalidOperationException"> Event was not created from EventGridEvent.Parse() method. </exception>
-        <exception cref="T:System.InvalidCastException"> Event payload cannot be cast to the specified event type. </exception>
-      </Docs>
-    </Member>
-    <Member MemberName="GetDataAsync&lt;T&gt;">
-      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;T&gt; GetDataAsync&lt;T&gt; (Azure.Core.Serialization.ObjectSerializer serializer, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task`1&lt;!!T&gt; GetDataAsync&lt;T&gt;(class Azure.Core.Serialization.ObjectSerializer serializer, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Messaging.EventGrid.EventGridEvent.GetDataAsync``1(Azure.Core.Serialization.ObjectSerializer,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Function GetDataAsync(Of T) (serializer As ObjectSerializer, Optional cancellationToken As CancellationToken = Nothing) As Task(Of T)" />
-      <MemberSignature Language="F#" Value="member this.GetDataAsync : Azure.Core.Serialization.ObjectSerializer * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;'T&gt;" Usage="eventGridEvent.GetDataAsync (serializer, cancellationToken)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Azure.Messaging.EventGrid</AssemblyName>
-        <AssemblyVersion>4.0.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Threading.Tasks.Task&lt;T&gt;</ReturnType>
-      </ReturnValue>
-      <TypeParameters>
-        <TypeParameter Name="T" />
-      </TypeParameters>
-      <Parameters>
-        <Parameter Name="serializer" Type="Azure.Core.Serialization.ObjectSerializer" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
-      </Parameters>
-      <Docs>
-        <typeparam name="T"> Type of event to deserialize to. </typeparam>
-        <param name="serializer"> Custom serializer used to deserialize the payload. </param>
-        <param name="cancellationToken"> The cancellation token to use during deserialization. </param>
-        <summary>
-            Deserializes the event payload into a specified event type using the provided <see cref="T:Azure.Core.Serialization.ObjectSerializer" />.
+            Deserializes the event payload into a specified event type using the default serializer, <see cref="T:Azure.Core.Serialization.JsonObjectSerializer" />.
             </summary>
         <returns> Deserialized payload of the event, cast to the specified type. </returns>
         <remarks>To be added.</remarks>
@@ -246,34 +181,8 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary> An unique identifier for the event. </summary>
+        <summary> Gets or sets a unique identifier for the event. </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="Parse">
-      <MemberSignature Language="C#" Value="public static Azure.Messaging.EventGrid.EventGridEvent[] Parse (BinaryData requestContent);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Azure.Messaging.EventGrid.EventGridEvent[] Parse(class System.BinaryData requestContent) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Messaging.EventGrid.EventGridEvent.Parse(System.BinaryData)" />
-      <MemberSignature Language="VB.NET" Value="Public Shared Function Parse (requestContent As BinaryData) As EventGridEvent()" />
-      <MemberSignature Language="F#" Value="static member Parse : BinaryData -&gt; Azure.Messaging.EventGrid.EventGridEvent[]" Usage="Azure.Messaging.EventGrid.EventGridEvent.Parse requestContent" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Azure.Messaging.EventGrid</AssemblyName>
-        <AssemblyVersion>4.0.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>Azure.Messaging.EventGrid.EventGridEvent[]</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="requestContent" Type="System.BinaryData" />
-      </Parameters>
-      <Docs>
-        <param name="requestContent"> The JSON-encoded representation of either a single event or an array or events, encoded in the EventGridEvent schema. </param>
-        <summary>
-            Given JSON-encoded events, parses the event envelope and returns an array of EventGridEvents.
-            </summary>
-        <returns> A list of <see cref="T:Azure.Messaging.EventGrid.EventGridEvent" />. </returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -295,7 +204,8 @@
         <Parameter Name="requestContent" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="requestContent"> The JSON-encoded representation of either a single event or an array or events, encoded in the EventGridEvent schema. </param>
+        <param name="requestContent"> The JSON-encoded representation of either a single event or an array or events,
+            encoded in the EventGridEvent schema. </param>
         <summary>
             Given JSON-encoded events, parses the event envelope and returns an array of EventGridEvents.
             </summary>
@@ -318,7 +228,7 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary> A resource path relative to the topic path. </summary>
+        <summary>Gets or sets a resource path relative to the topic path.</summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -338,8 +248,38 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary> The resource path of the event source. </summary>
+        <summary>Gets or sets the resource path of the event source.
+            This must be set when publishing the event to a domain, and must not be set when publishing the event to a topic.
+            </summary>
         <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TryGetSystemEventData">
+      <MemberSignature Language="C#" Value="public bool TryGetSystemEventData (out object eventData);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TryGetSystemEventData([out] object&amp; eventData) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Messaging.EventGrid.EventGridEvent.TryGetSystemEventData(System.Object@)" />
+      <MemberSignature Language="VB.NET" Value="Public Function TryGetSystemEventData (ByRef eventData As Object) As Boolean" />
+      <MemberSignature Language="F#" Value="member this.TryGetSystemEventData : obj -&gt; bool" Usage="eventGridEvent.TryGetSystemEventData eventData" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Messaging.EventGrid</AssemblyName>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="eventData" Type="System.Object" RefType="out" />
+      </Parameters>
+      <Docs>
+        <param name="eventData">If the event is a system event, this will be populated
+            with the deserialized system event. Otherwise, this will be null.</param>
+        <summary>
+            Gets whether or not the event is a System defined event and returns the deserialized
+            system event via out parameter.
+            </summary>
+        <returns> Whether or not the event is a system event.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
