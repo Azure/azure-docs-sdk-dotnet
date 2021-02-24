@@ -131,6 +131,6 @@ var accessToken = await tokenProvider.GetAccessTokenAsync(ResourceId);
 ```csharp
 var tokenCredential = new DefaultAzureCredential();
 var accessToken = await tokenCredential.GetTokenAsync(
-    new TokenRequestContext(scopes: new string[] { "your scope here" }) { }
+    new TokenRequestContext(scopes: new string[] { ResourceId + "./default" }) { }
 );
 ```
