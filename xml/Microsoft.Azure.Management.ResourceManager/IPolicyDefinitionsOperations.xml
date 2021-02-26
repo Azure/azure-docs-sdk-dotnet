@@ -410,7 +410,13 @@
         <returns>To be added.</returns>
         <remarks>
             This operation retrieves a list of all the built-in policy
-            definitions.
+            definitions that match the optional given $filter. If
+            $filter='policyType -eq {value}' is provided, the returned list
+            only includes all built-in policy definitions whose type match the
+            {value}. Possible policyType values are NotSpecified, BuiltIn,
+            Custom, and Static. If $filter='category -eq {value}' is provided,
+            the returned list only includes all built-in policy definitions
+            whose category match the {value}.
             </remarks>
         <exception cref="T:Microsoft.Rest.Azure.CloudException">
             Thrown when the operation returned an invalid status code
@@ -424,25 +430,43 @@
       </Docs>
     </Member>
     <Member MemberName="ListBuiltInWithHttpMessagesAsync">
-      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.ResourceManager.Models.PolicyDefinition&gt;&gt;&gt; ListBuiltInWithHttpMessagesAsync (System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = default, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.AzureOperationResponse`1&lt;class Microsoft.Rest.Azure.IPage`1&lt;class Microsoft.Azure.Management.ResourceManager.Models.PolicyDefinition&gt;&gt;&gt; ListBuiltInWithHttpMessagesAsync(class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.ResourceManager.IPolicyDefinitionsOperations.ListBuiltInWithHttpMessagesAsync(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Function ListBuiltInWithHttpMessagesAsync (Optional customHeaders As Dictionary(Of String, List(Of String)) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of IPage(Of PolicyDefinition)))" />
-      <MemberSignature Language="F#" Value="abstract member ListBuiltInWithHttpMessagesAsync : System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.ResourceManager.Models.PolicyDefinition&gt;&gt;&gt;" Usage="iPolicyDefinitionsOperations.ListBuiltInWithHttpMessagesAsync (customHeaders, cancellationToken)" />
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.ResourceManager.Models.PolicyDefinition&gt;&gt;&gt; ListBuiltInWithHttpMessagesAsync (string filter = default, int? top = default, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.AzureOperationResponse`1&lt;class Microsoft.Rest.Azure.IPage`1&lt;class Microsoft.Azure.Management.ResourceManager.Models.PolicyDefinition&gt;&gt;&gt; ListBuiltInWithHttpMessagesAsync(string filter, valuetype System.Nullable`1&lt;int32&gt; top, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.ResourceManager.IPolicyDefinitionsOperations.ListBuiltInWithHttpMessagesAsync(System.String,System.Nullable{System.Int32},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Function ListBuiltInWithHttpMessagesAsync (Optional filter As String = Nothing, Optional top As Nullable(Of Integer) = Nothing, Optional customHeaders As Dictionary(Of String, List(Of String)) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of IPage(Of PolicyDefinition)))" />
+      <MemberSignature Language="F#" Value="abstract member ListBuiltInWithHttpMessagesAsync : string * Nullable&lt;int&gt; * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.ResourceManager.Models.PolicyDefinition&gt;&gt;&gt;" Usage="iPolicyDefinitionsOperations.ListBuiltInWithHttpMessagesAsync (filter, top, customHeaders, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Management.ResourceManager</AssemblyName>
-        <AssemblyVersion>2.0.0.0</AssemblyVersion>
         <AssemblyVersion>3.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.ResourceManager.Models.PolicyDefinition&gt;&gt;&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
+        <Parameter Name="filter" Type="System.String" />
+        <Parameter Name="top" Type="System.Nullable&lt;System.Int32&gt;" />
         <Parameter Name="customHeaders" Type="System.Collections.Generic.Dictionary&lt;System.String,System.Collections.Generic.List&lt;System.String&gt;&gt;" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
+        <param name="filter">
+            The filter to apply on the operation. Valid values for $filter are:
+            'atExactScope()', 'policyType -eq {value}' or 'category eq
+            '{value}''. If $filter is not provided, no filtering is performed.
+            If $filter=atExactScope() is provided, the returned list only
+            includes all policy definitions that at the given scope. If
+            $filter='policyType -eq {value}' is provided, the returned list
+            only includes all policy definitions whose type match the {value}.
+            Possible policyType values are NotSpecified, BuiltIn, Custom, and
+            Static. If $filter='category -eq {value}' is provided, the returned
+            list only includes all policy definitions whose category match the
+            {value}.
+            </param>
+        <param name="top">
+            Maximum number of records to return. When the $top filter is not
+            provided, it will return 500 records.
+            </param>
         <param name="customHeaders">
             The headers that will be added to request.
             </param>
@@ -455,7 +479,13 @@
         <returns>To be added.</returns>
         <remarks>
             This operation retrieves a list of all the built-in policy
-            definitions.
+            definitions that match the optional given $filter. If
+            $filter='policyType -eq {value}' is provided, the returned list
+            only includes all built-in policy definitions whose type match the
+            {value}. Possible policyType values are NotSpecified, BuiltIn,
+            Custom, and Static. If $filter='category -eq {value}' is provided,
+            the returned list only includes all built-in policy definitions
+            whose category match the {value}.
             </remarks>
         <exception cref="T:Microsoft.Rest.Azure.CloudException">
             Thrown when the operation returned an invalid status code
@@ -504,7 +534,20 @@
         <returns>To be added.</returns>
         <remarks>
             This operation retrieves a list of all the policy definitions in a
-            given management group.
+            given management group that match the optional given $filter. Valid
+            values for $filter are: 'atExactScope()', 'policyType -eq {value}'
+            or 'category eq '{value}''. If $filter is not provided, the
+            unfiltered list includes all policy definitions associated with the
+            management group, including those that apply directly or from
+            management groups that contain the given management group. If
+            $filter=atExactScope() is provided, the returned list only includes
+            all policy definitions that at the given management group. If
+            $filter='policyType -eq {value}' is provided, the returned list
+            only includes all policy definitions whose type match the {value}.
+            Possible policyType values are NotSpecified, BuiltIn, Custom, and
+            Static. If $filter='category -eq {value}' is provided, the returned
+            list only includes all policy definitions whose category match the
+            {value}.
             </remarks>
         <exception cref="T:Microsoft.Rest.Azure.CloudException">
             Thrown when the operation returned an invalid status code
@@ -518,15 +561,14 @@
       </Docs>
     </Member>
     <Member MemberName="ListByManagementGroupWithHttpMessagesAsync">
-      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.ResourceManager.Models.PolicyDefinition&gt;&gt;&gt; ListByManagementGroupWithHttpMessagesAsync (string managementGroupId, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = default, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.AzureOperationResponse`1&lt;class Microsoft.Rest.Azure.IPage`1&lt;class Microsoft.Azure.Management.ResourceManager.Models.PolicyDefinition&gt;&gt;&gt; ListByManagementGroupWithHttpMessagesAsync(string managementGroupId, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.ResourceManager.IPolicyDefinitionsOperations.ListByManagementGroupWithHttpMessagesAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Function ListByManagementGroupWithHttpMessagesAsync (managementGroupId As String, Optional customHeaders As Dictionary(Of String, List(Of String)) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of IPage(Of PolicyDefinition)))" />
-      <MemberSignature Language="F#" Value="abstract member ListByManagementGroupWithHttpMessagesAsync : string * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.ResourceManager.Models.PolicyDefinition&gt;&gt;&gt;" Usage="iPolicyDefinitionsOperations.ListByManagementGroupWithHttpMessagesAsync (managementGroupId, customHeaders, cancellationToken)" />
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.ResourceManager.Models.PolicyDefinition&gt;&gt;&gt; ListByManagementGroupWithHttpMessagesAsync (string managementGroupId, string filter = default, int? top = default, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.AzureOperationResponse`1&lt;class Microsoft.Rest.Azure.IPage`1&lt;class Microsoft.Azure.Management.ResourceManager.Models.PolicyDefinition&gt;&gt;&gt; ListByManagementGroupWithHttpMessagesAsync(string managementGroupId, string filter, valuetype System.Nullable`1&lt;int32&gt; top, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.ResourceManager.IPolicyDefinitionsOperations.ListByManagementGroupWithHttpMessagesAsync(System.String,System.String,System.Nullable{System.Int32},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Function ListByManagementGroupWithHttpMessagesAsync (managementGroupId As String, Optional filter As String = Nothing, Optional top As Nullable(Of Integer) = Nothing, Optional customHeaders As Dictionary(Of String, List(Of String)) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of IPage(Of PolicyDefinition)))" />
+      <MemberSignature Language="F#" Value="abstract member ListByManagementGroupWithHttpMessagesAsync : string * string * Nullable&lt;int&gt; * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.ResourceManager.Models.PolicyDefinition&gt;&gt;&gt;" Usage="iPolicyDefinitionsOperations.ListByManagementGroupWithHttpMessagesAsync (managementGroupId, filter, top, customHeaders, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Management.ResourceManager</AssemblyName>
-        <AssemblyVersion>2.0.0.0</AssemblyVersion>
         <AssemblyVersion>3.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -534,12 +576,31 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="managementGroupId" Type="System.String" />
+        <Parameter Name="filter" Type="System.String" />
+        <Parameter Name="top" Type="System.Nullable&lt;System.Int32&gt;" />
         <Parameter Name="customHeaders" Type="System.Collections.Generic.Dictionary&lt;System.String,System.Collections.Generic.List&lt;System.String&gt;&gt;" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
         <param name="managementGroupId">
             The ID of the management group.
+            </param>
+        <param name="filter">
+            The filter to apply on the operation. Valid values for $filter are:
+            'atExactScope()', 'policyType -eq {value}' or 'category eq
+            '{value}''. If $filter is not provided, no filtering is performed.
+            If $filter=atExactScope() is provided, the returned list only
+            includes all policy definitions that at the given scope. If
+            $filter='policyType -eq {value}' is provided, the returned list
+            only includes all policy definitions whose type match the {value}.
+            Possible policyType values are NotSpecified, BuiltIn, Custom, and
+            Static. If $filter='category -eq {value}' is provided, the returned
+            list only includes all policy definitions whose category match the
+            {value}.
+            </param>
+        <param name="top">
+            Maximum number of records to return. When the $top filter is not
+            provided, it will return 500 records.
             </param>
         <param name="customHeaders">
             The headers that will be added to request.
@@ -553,7 +614,20 @@
         <returns>To be added.</returns>
         <remarks>
             This operation retrieves a list of all the policy definitions in a
-            given management group.
+            given management group that match the optional given $filter. Valid
+            values for $filter are: 'atExactScope()', 'policyType -eq {value}'
+            or 'category eq '{value}''. If $filter is not provided, the
+            unfiltered list includes all policy definitions associated with the
+            management group, including those that apply directly or from
+            management groups that contain the given management group. If
+            $filter=atExactScope() is provided, the returned list only includes
+            all policy definitions that at the given management group. If
+            $filter='policyType -eq {value}' is provided, the returned list
+            only includes all policy definitions whose type match the {value}.
+            Possible policyType values are NotSpecified, BuiltIn, Custom, and
+            Static. If $filter='category -eq {value}' is provided, the returned
+            list only includes all policy definitions whose category match the
+            {value}.
             </remarks>
         <exception cref="T:Microsoft.Rest.Azure.CloudException">
             Thrown when the operation returned an invalid status code
@@ -602,7 +676,20 @@
         <returns>To be added.</returns>
         <remarks>
             This operation retrieves a list of all the policy definitions in a
-            given subscription.
+            given subscription that match the optional given $filter. Valid
+            values for $filter are: 'atExactScope()', 'policyType -eq {value}'
+            or 'category eq '{value}''. If $filter is not provided, the
+            unfiltered list includes all policy definitions associated with the
+            subscription, including those that apply directly or from
+            management groups that contain the given subscription. If
+            $filter=atExactScope() is provided, the returned list only includes
+            all policy definitions that at the given subscription. If
+            $filter='policyType -eq {value}' is provided, the returned list
+            only includes all policy definitions whose type match the {value}.
+            Possible policyType values are NotSpecified, BuiltIn, Custom, and
+            Static. If $filter='category -eq {value}' is provided, the returned
+            list only includes all policy definitions whose category match the
+            {value}.
             </remarks>
         <exception cref="T:Microsoft.Rest.Azure.CloudException">
             Thrown when the operation returned an invalid status code
@@ -616,25 +703,43 @@
       </Docs>
     </Member>
     <Member MemberName="ListWithHttpMessagesAsync">
-      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.ResourceManager.Models.PolicyDefinition&gt;&gt;&gt; ListWithHttpMessagesAsync (System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = default, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.AzureOperationResponse`1&lt;class Microsoft.Rest.Azure.IPage`1&lt;class Microsoft.Azure.Management.ResourceManager.Models.PolicyDefinition&gt;&gt;&gt; ListWithHttpMessagesAsync(class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.ResourceManager.IPolicyDefinitionsOperations.ListWithHttpMessagesAsync(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Function ListWithHttpMessagesAsync (Optional customHeaders As Dictionary(Of String, List(Of String)) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of IPage(Of PolicyDefinition)))" />
-      <MemberSignature Language="F#" Value="abstract member ListWithHttpMessagesAsync : System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.ResourceManager.Models.PolicyDefinition&gt;&gt;&gt;" Usage="iPolicyDefinitionsOperations.ListWithHttpMessagesAsync (customHeaders, cancellationToken)" />
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.ResourceManager.Models.PolicyDefinition&gt;&gt;&gt; ListWithHttpMessagesAsync (string filter = default, int? top = default, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.AzureOperationResponse`1&lt;class Microsoft.Rest.Azure.IPage`1&lt;class Microsoft.Azure.Management.ResourceManager.Models.PolicyDefinition&gt;&gt;&gt; ListWithHttpMessagesAsync(string filter, valuetype System.Nullable`1&lt;int32&gt; top, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.ResourceManager.IPolicyDefinitionsOperations.ListWithHttpMessagesAsync(System.String,System.Nullable{System.Int32},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Function ListWithHttpMessagesAsync (Optional filter As String = Nothing, Optional top As Nullable(Of Integer) = Nothing, Optional customHeaders As Dictionary(Of String, List(Of String)) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of IPage(Of PolicyDefinition)))" />
+      <MemberSignature Language="F#" Value="abstract member ListWithHttpMessagesAsync : string * Nullable&lt;int&gt; * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.ResourceManager.Models.PolicyDefinition&gt;&gt;&gt;" Usage="iPolicyDefinitionsOperations.ListWithHttpMessagesAsync (filter, top, customHeaders, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Management.ResourceManager</AssemblyName>
-        <AssemblyVersion>2.0.0.0</AssemblyVersion>
         <AssemblyVersion>3.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.ResourceManager.Models.PolicyDefinition&gt;&gt;&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
+        <Parameter Name="filter" Type="System.String" />
+        <Parameter Name="top" Type="System.Nullable&lt;System.Int32&gt;" />
         <Parameter Name="customHeaders" Type="System.Collections.Generic.Dictionary&lt;System.String,System.Collections.Generic.List&lt;System.String&gt;&gt;" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
+        <param name="filter">
+            The filter to apply on the operation. Valid values for $filter are:
+            'atExactScope()', 'policyType -eq {value}' or 'category eq
+            '{value}''. If $filter is not provided, no filtering is performed.
+            If $filter=atExactScope() is provided, the returned list only
+            includes all policy definitions that at the given scope. If
+            $filter='policyType -eq {value}' is provided, the returned list
+            only includes all policy definitions whose type match the {value}.
+            Possible policyType values are NotSpecified, BuiltIn, Custom, and
+            Static. If $filter='category -eq {value}' is provided, the returned
+            list only includes all policy definitions whose category match the
+            {value}.
+            </param>
+        <param name="top">
+            Maximum number of records to return. When the $top filter is not
+            provided, it will return 500 records.
+            </param>
         <param name="customHeaders">
             The headers that will be added to request.
             </param>
@@ -647,7 +752,20 @@
         <returns>To be added.</returns>
         <remarks>
             This operation retrieves a list of all the policy definitions in a
-            given subscription.
+            given subscription that match the optional given $filter. Valid
+            values for $filter are: 'atExactScope()', 'policyType -eq {value}'
+            or 'category eq '{value}''. If $filter is not provided, the
+            unfiltered list includes all policy definitions associated with the
+            subscription, including those that apply directly or from
+            management groups that contain the given subscription. If
+            $filter=atExactScope() is provided, the returned list only includes
+            all policy definitions that at the given subscription. If
+            $filter='policyType -eq {value}' is provided, the returned list
+            only includes all policy definitions whose type match the {value}.
+            Possible policyType values are NotSpecified, BuiltIn, Custom, and
+            Static. If $filter='category -eq {value}' is provided, the returned
+            list only includes all policy definitions whose category match the
+            {value}.
             </remarks>
         <exception cref="T:Microsoft.Rest.Azure.CloudException">
             Thrown when the operation returned an invalid status code
