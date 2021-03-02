@@ -48,7 +48,11 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets whether the autocomplete option of the session handler is enabled.</summary>
+        <summary>Gets or sets whether the autocomplete option of the session handler is enabled.
+            If this value is true, if the handler returns without any failure, then the message is completed and will not show up in the session; if any 
+            exception is thrown from the handler, the message is abandoned and the DeliveryCount of this message will increase by one. 
+            If this value is false, if the handler returns without any failure, then user has to write the logic to explicitly complete the message, 
+            otherwise the message is not considered 'completed' and will reappear in the session.  </summary>
         <value>true if the autocomplete option of the session handler is enabled; otherwise, false.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -68,9 +72,10 @@
         <ReturnType>System.TimeSpan</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the time needed before the session renew its state.</summary>
+        <summary>Gets or sets the time needed before the session renew its state. If a session lock is going to expire,
+            this value is the duration for the session lock to be automatically renewed. </summary>
         <value>The time needed before the session renew its state.</value>
-        <remarks>To be added.</remarks>
+        <remarks>If this auto renewal fails, clients will receive an exception in the exception handler. </remarks>
       </Docs>
     </Member>
     <Member MemberName="ExceptionReceived">
@@ -107,9 +112,12 @@
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the maximum number of existing sessions.</summary>
+        <summary>Gets or sets the maximum number of existing sessions.Setting this value to be 
+            greater than the max number of active sessions in the service will not increase message throughput. </summary>
         <value>The maximum number of existing sessions.</value>
-        <remarks>To be added.</remarks>
+        <remarks>The session-pump (SDK) will accept MaxConcurrentSessions number of sessions in parallel and dispatch the messages. The messages 
+            within a session are delivered sequentially. If more than <see cref="P:Microsoft.ServiceBus.Messaging.SessionHandlerOptions.MaxConcurrentSessions" /> number of sessions are present in the 
+            entity, they will be accepted one-by-one after closing the existing sessions.</remarks>
       </Docs>
     </Member>
     <Member MemberName="MessageWaitTimeout">
@@ -127,9 +135,12 @@
         <ReturnType>System.TimeSpan</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the time needed before the message waiting expires.</summary>
+        <summary>Gets or sets the time needed before the message waiting expires.This is the time the session-pump waits before closing down the current 
+            session and switching to a different session. </summary>
         <value>The time needed before the message waiting expires.</value>
-        <remarks>To be added.</remarks>
+        <remarks>This value has an impact on the message throughput. If the value is very large, then every time the SDK waits for this duration 
+            before closing to make sure that all the messages have been received. If users are having a lot of sessions and fewer messages per session, 
+            try setting this to be a relative smaller value based on how frequent new messages arrive in the session. </remarks>
       </Docs>
     </Member>
   </Members>
