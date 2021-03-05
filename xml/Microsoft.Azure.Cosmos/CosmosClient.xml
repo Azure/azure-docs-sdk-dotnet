@@ -22,6 +22,7 @@
     <AssemblyVersion>3.15.0.0</AssemblyVersion>
     <AssemblyVersion>3.15.1.0</AssemblyVersion>
     <AssemblyVersion>3.16.0.0</AssemblyVersion>
+    <AssemblyVersion>3.17.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -130,6 +131,7 @@
         <AssemblyVersion>3.15.0.0</AssemblyVersion>
         <AssemblyVersion>3.15.1.0</AssemblyVersion>
         <AssemblyVersion>3.16.0.0</AssemblyVersion>
+        <AssemblyVersion>3.17.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -164,6 +166,7 @@
         <AssemblyVersion>3.15.0.0</AssemblyVersion>
         <AssemblyVersion>3.15.1.0</AssemblyVersion>
         <AssemblyVersion>3.16.0.0</AssemblyVersion>
+        <AssemblyVersion>3.17.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="connectionString" Type="System.String" />
@@ -229,6 +232,7 @@
         <AssemblyVersion>3.15.0.0</AssemblyVersion>
         <AssemblyVersion>3.15.1.0</AssemblyVersion>
         <AssemblyVersion>3.16.0.0</AssemblyVersion>
+        <AssemblyVersion>3.17.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="accountEndpoint" Type="System.String" />
@@ -296,6 +300,7 @@
         <AssemblyVersion>3.15.0.0</AssemblyVersion>
         <AssemblyVersion>3.15.1.0</AssemblyVersion>
         <AssemblyVersion>3.16.0.0</AssemblyVersion>
+        <AssemblyVersion>3.17.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.CosmosClientOptions</ReturnType>
@@ -306,6 +311,125 @@
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateAndInitializeAsync">
+      <MemberSignature Language="C#" Value="public static System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.CosmosClient&gt; CreateAndInitializeAsync (string connectionString, System.Collections.Generic.IReadOnlyList&lt;(string,string)&gt; containers, Microsoft.Azure.Cosmos.CosmosClientOptions cosmosClientOptions = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Threading.Tasks.Task`1&lt;class Microsoft.Azure.Cosmos.CosmosClient&gt; CreateAndInitializeAsync(string connectionString, class System.Collections.Generic.IReadOnlyList`1&lt;valuetype System.ValueTuple`2&lt;string, string&gt;&gt; containers, class Microsoft.Azure.Cosmos.CosmosClientOptions cosmosClientOptions, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Cosmos.CosmosClient.CreateAndInitializeAsync(System.String,System.Collections.Generic.IReadOnlyList{System.ValueTuple{System.String,System.String}},Microsoft.Azure.Cosmos.CosmosClientOptions,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function CreateAndInitializeAsync (connectionString As String, containers As IReadOnlyList(Of ValueTuple(Of String, String)), Optional cosmosClientOptions As CosmosClientOptions = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of CosmosClient)" />
+      <MemberSignature Language="F#" Value="static member CreateAndInitializeAsync : string * System.Collections.Generic.IReadOnlyList&lt;ValueTuple&lt;string, string&gt;&gt; * Microsoft.Azure.Cosmos.CosmosClientOptions * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.CosmosClient&gt;" Usage="Microsoft.Azure.Cosmos.CosmosClient.CreateAndInitializeAsync (connectionString, containers, cosmosClientOptions, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
+        <AssemblyVersion>3.17.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.CosmosClient&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="connectionString" Type="System.String" />
+        <Parameter Name="containers" Type="System.Collections.Generic.IReadOnlyList&lt;System.ValueTuple&lt;System.String,System.String&gt;&gt;">
+          <Attributes>
+            <Attribute>
+              <AttributeName Language="C#">[System.Runtime.CompilerServices.TupleElementNames(new System.String[] { "databaseId", "containerId" })]</AttributeName>
+              <AttributeName Language="F#">[&lt;System.Runtime.CompilerServices.TupleElementNames(new System.String[] { "databaseId", "containerId" })&gt;]</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+        <Parameter Name="cosmosClientOptions" Type="Microsoft.Azure.Cosmos.CosmosClientOptions" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="connectionString">The connection string to the cosmos account. ex: https://mycosmosaccount.documents.azure.com:443/;AccountKey=SuperSecretKey; </param>
+        <param name="containers">Containers to be initialized identified by it's database name and container name.</param>
+        <param name="cosmosClientOptions">(Optional) client options</param>
+        <param name="cancellationToken">(Optional) Cancellation Token</param>
+        <summary>
+            Creates a new CosmosClient with the account endpoint URI string and TokenCredential.
+            In addition to that it initializes the client with containers provided i.e The SDK warms up the caches and 
+            connections before the first call to the service is made. Use this to obtain lower latency while startup of your application.
+            CosmosClient is thread-safe. Its recommended to maintain a single instance of CosmosClient per lifetime 
+            of the application which enables efficient connection management and performance. Please refer to the
+            <see href="https://docs.microsoft.com/azure/cosmos-db/performance-tips">performance guide</see>.
+            </summary>
+        <returns>
+            A CosmosClient object.
+            </returns>
+        <remarks>To be added.</remarks>
+        <example>
+            The CosmosClient is created with the ConnectionString and 2 containers in the account are initialized
+            <code language="c#"><![CDATA[
+            using Microsoft.Azure.Cosmos;
+            List<(string, string)> containersToInitialize = new List<(string, string)>
+            { ("DatabaseName1", "ContainerName1"), ("DatabaseName2", "ContainerName2") };
+            
+            CosmosClient cosmosClient = await CosmosClient.CreateAndInitializeAsync("connection-string-from-portal",
+                                                                                    containersToInitialize)
+            
+            // Dispose cosmosClient at application exit
+            ]]></code></example>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateAndInitializeAsync">
+      <MemberSignature Language="C#" Value="public static System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.CosmosClient&gt; CreateAndInitializeAsync (string accountEndpoint, string authKeyOrResourceToken, System.Collections.Generic.IReadOnlyList&lt;(string,string)&gt; containers, Microsoft.Azure.Cosmos.CosmosClientOptions cosmosClientOptions = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Threading.Tasks.Task`1&lt;class Microsoft.Azure.Cosmos.CosmosClient&gt; CreateAndInitializeAsync(string accountEndpoint, string authKeyOrResourceToken, class System.Collections.Generic.IReadOnlyList`1&lt;valuetype System.ValueTuple`2&lt;string, string&gt;&gt; containers, class Microsoft.Azure.Cosmos.CosmosClientOptions cosmosClientOptions, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Cosmos.CosmosClient.CreateAndInitializeAsync(System.String,System.String,System.Collections.Generic.IReadOnlyList{System.ValueTuple{System.String,System.String}},Microsoft.Azure.Cosmos.CosmosClientOptions,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function CreateAndInitializeAsync (accountEndpoint As String, authKeyOrResourceToken As String, containers As IReadOnlyList(Of ValueTuple(Of String, String)), Optional cosmosClientOptions As CosmosClientOptions = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of CosmosClient)" />
+      <MemberSignature Language="F#" Value="static member CreateAndInitializeAsync : string * string * System.Collections.Generic.IReadOnlyList&lt;ValueTuple&lt;string, string&gt;&gt; * Microsoft.Azure.Cosmos.CosmosClientOptions * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.CosmosClient&gt;" Usage="Microsoft.Azure.Cosmos.CosmosClient.CreateAndInitializeAsync (accountEndpoint, authKeyOrResourceToken, containers, cosmosClientOptions, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
+        <AssemblyVersion>3.17.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.CosmosClient&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="accountEndpoint" Type="System.String" />
+        <Parameter Name="authKeyOrResourceToken" Type="System.String" />
+        <Parameter Name="containers" Type="System.Collections.Generic.IReadOnlyList&lt;System.ValueTuple&lt;System.String,System.String&gt;&gt;">
+          <Attributes>
+            <Attribute>
+              <AttributeName Language="C#">[System.Runtime.CompilerServices.TupleElementNames(new System.String[] { "databaseId", "containerId" })]</AttributeName>
+              <AttributeName Language="F#">[&lt;System.Runtime.CompilerServices.TupleElementNames(new System.String[] { "databaseId", "containerId" })&gt;]</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+        <Parameter Name="cosmosClientOptions" Type="Microsoft.Azure.Cosmos.CosmosClientOptions" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="accountEndpoint">The cosmos service endpoint to use</param>
+        <param name="authKeyOrResourceToken">The cosmos account key or resource token to use to create the client.</param>
+        <param name="containers">Containers to be initialized identified by it's database name and container name.</param>
+        <param name="cosmosClientOptions">(Optional) client options</param>
+        <param name="cancellationToken">(Optional) Cancellation Token</param>
+        <summary>
+            Creates a new CosmosClient with the account endpoint URI string and TokenCredential.
+            In addition to that it initializes the client with containers provided i.e The SDK warms up the caches and 
+            connections before the first call to the service is made. Use this to obtain lower latency while startup of your application.
+            CosmosClient is thread-safe. Its recommended to maintain a single instance of CosmosClient per lifetime 
+            of the application which enables efficient connection management and performance. Please refer to the
+            <see href="https://docs.microsoft.com/azure/cosmos-db/performance-tips">performance guide</see>.
+            </summary>
+        <returns>
+            A CosmosClient object.
+            </returns>
+        <remarks>To be added.</remarks>
+        <example>
+            The CosmosClient is created with the AccountEndpoint, AccountKey or ResourceToken and 2 containers in the account are initialized
+            <code language="c#"><![CDATA[
+            using Microsoft.Azure.Cosmos;
+            List<(string, string)> containersToInitialize = new List<(string, string)>
+            { ("DatabaseName1", "ContainerName1"), ("DatabaseName2", "ContainerName2") };
+            
+            CosmosClient cosmosClient = await CosmosClient.CreateAndInitializeAsync("account-endpoint-from-portal", 
+                                                                                    "account-key-from-portal",
+                                                                                    containersToInitialize)
+            
+            // Dispose cosmosClient at application exit
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="CreateDatabaseAsync">
@@ -327,6 +451,7 @@
         <AssemblyVersion>3.15.0.0</AssemblyVersion>
         <AssemblyVersion>3.15.1.0</AssemblyVersion>
         <AssemblyVersion>3.16.0.0</AssemblyVersion>
+        <AssemblyVersion>3.17.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.DatabaseResponse&gt;</ReturnType>
@@ -382,6 +507,7 @@
         <AssemblyVersion>3.15.0.0</AssemblyVersion>
         <AssemblyVersion>3.15.1.0</AssemblyVersion>
         <AssemblyVersion>3.16.0.0</AssemblyVersion>
+        <AssemblyVersion>3.17.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.DatabaseResponse&gt;</ReturnType>
@@ -433,6 +559,7 @@
         <AssemblyVersion>3.15.0.0</AssemblyVersion>
         <AssemblyVersion>3.15.1.0</AssemblyVersion>
         <AssemblyVersion>3.16.0.0</AssemblyVersion>
+        <AssemblyVersion>3.17.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.DatabaseResponse&gt;</ReturnType>
@@ -489,6 +616,7 @@
         <AssemblyVersion>3.15.0.0</AssemblyVersion>
         <AssemblyVersion>3.15.1.0</AssemblyVersion>
         <AssemblyVersion>3.16.0.0</AssemblyVersion>
+        <AssemblyVersion>3.17.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.DatabaseResponse&gt;</ReturnType>
@@ -561,6 +689,7 @@
         <AssemblyVersion>3.15.0.0</AssemblyVersion>
         <AssemblyVersion>3.15.1.0</AssemblyVersion>
         <AssemblyVersion>3.16.0.0</AssemblyVersion>
+        <AssemblyVersion>3.17.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.ResponseMessage&gt;</ReturnType>
@@ -621,6 +750,7 @@
         <AssemblyVersion>3.15.0.0</AssemblyVersion>
         <AssemblyVersion>3.15.1.0</AssemblyVersion>
         <AssemblyVersion>3.16.0.0</AssemblyVersion>
+        <AssemblyVersion>3.17.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -658,6 +788,7 @@
         <AssemblyVersion>3.15.0.0</AssemblyVersion>
         <AssemblyVersion>3.15.1.0</AssemblyVersion>
         <AssemblyVersion>3.16.0.0</AssemblyVersion>
+        <AssemblyVersion>3.17.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -698,6 +829,7 @@
         <AssemblyVersion>3.15.0.0</AssemblyVersion>
         <AssemblyVersion>3.15.1.0</AssemblyVersion>
         <AssemblyVersion>3.16.0.0</AssemblyVersion>
+        <AssemblyVersion>3.17.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Uri</ReturnType>
@@ -738,6 +870,7 @@
         <AssemblyVersion>3.15.0.0</AssemblyVersion>
         <AssemblyVersion>3.15.1.0</AssemblyVersion>
         <AssemblyVersion>3.16.0.0</AssemblyVersion>
+        <AssemblyVersion>3.17.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.Container</ReturnType>
@@ -786,6 +919,7 @@
         <AssemblyVersion>3.15.0.0</AssemblyVersion>
         <AssemblyVersion>3.15.1.0</AssemblyVersion>
         <AssemblyVersion>3.16.0.0</AssemblyVersion>
+        <AssemblyVersion>3.17.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.Database</ReturnType>
@@ -838,6 +972,7 @@
         <AssemblyVersion>3.15.0.0</AssemblyVersion>
         <AssemblyVersion>3.15.1.0</AssemblyVersion>
         <AssemblyVersion>3.16.0.0</AssemblyVersion>
+        <AssemblyVersion>3.17.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.FeedIterator&lt;T&gt;</ReturnType>
@@ -908,6 +1043,7 @@
         <AssemblyVersion>3.15.0.0</AssemblyVersion>
         <AssemblyVersion>3.15.1.0</AssemblyVersion>
         <AssemblyVersion>3.16.0.0</AssemblyVersion>
+        <AssemblyVersion>3.17.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.FeedIterator&lt;T&gt;</ReturnType>
@@ -977,6 +1113,7 @@
         <AssemblyVersion>3.15.0.0</AssemblyVersion>
         <AssemblyVersion>3.15.1.0</AssemblyVersion>
         <AssemblyVersion>3.16.0.0</AssemblyVersion>
+        <AssemblyVersion>3.17.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.FeedIterator</ReturnType>
@@ -1048,6 +1185,7 @@
         <AssemblyVersion>3.15.0.0</AssemblyVersion>
         <AssemblyVersion>3.15.1.0</AssemblyVersion>
         <AssemblyVersion>3.16.0.0</AssemblyVersion>
+        <AssemblyVersion>3.17.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.FeedIterator</ReturnType>
@@ -1117,6 +1255,7 @@
         <AssemblyVersion>3.15.0.0</AssemblyVersion>
         <AssemblyVersion>3.15.1.0</AssemblyVersion>
         <AssemblyVersion>3.16.0.0</AssemblyVersion>
+        <AssemblyVersion>3.17.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Cosmos.AccountProperties&gt;</ReturnType>
