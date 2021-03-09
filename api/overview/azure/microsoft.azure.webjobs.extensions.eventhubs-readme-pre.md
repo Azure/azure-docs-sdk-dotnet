@@ -3,7 +3,7 @@ title: Azure WebJobs Event Hubs client library for .NET
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebJobs.Extensions.EventHubs, webjobs
 author: maggiepint
 ms.author: magpint
-ms.date: 02/10/2021
+ms.date: 03/09/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: webjobs
 ---
 
-# Azure WebJobs Event Hubs client library for .NET - Version 5.0.0-beta.1 
+# Azure WebJobs Event Hubs client library for .NET - Version 5.0.0-beta.2 
 
 
 This extension provides functionality for accessing Azure Event Hubs from an Azure Function.
@@ -112,7 +112,6 @@ public static string Run([TimerTrigger("0 */5 * * * *")] TimerInfo myTimer)
 
 To send multiple events from a single Azure Function invocation you can apply the `EventHubAttribute` to the `IAsyncCollector<string>` or `IAsyncCollector<EventData>` parameter.
 
-
 ```C# Snippet:BindingToCollector
 [FunctionName("BindingToCollector")]
 public static async Task Run(
@@ -122,6 +121,39 @@ public static async Task Run(
     // IAsyncCollector allows sending multiple events in a single function invocation
     await collector.AddAsync(new EventData(new BinaryData($"Event 1 added at: {DateTime.Now}")));
     await collector.AddAsync(new EventData(new BinaryData($"Event 2 added at: {DateTime.Now}")));
+}
+```
+
+### Using binding to strongly-typed models
+
+To use strongly-typed model classes with the EventHub binding apply the `EventHubAttribute` to the model parameter.
+
+```C# Snippet:TriggerSingleModel
+[FunctionName("TriggerSingleModel")]
+public static void Run(
+    [EventHubTrigger("<event_hub_name>", Connection = "<connection_name>")] Dog dog,
+    ILogger logger)
+{
+    logger.LogInformation($"Who's a good dog? {dog.Name} is!");
+}
+```
+
+### Sending multiple events using EventHubProducerClient
+
+You can also bind to the `EventHubProducerClient` directly to have the most control over the event sending.
+
+```C# Snippet:BindingToProducerClient
+[FunctionName("BindingToProducerClient")]
+public static async Task Run(
+    [TimerTrigger("0 */5 * * * *")] TimerInfo myTimer,
+    [EventHub("<event_hub_name>", Connection = "<connection_name>")] EventHubProducerClient eventHubProducerClient)
+{
+    // IAsyncCollector allows sending multiple events in a single function invocation
+    await eventHubProducerClient.SendAsync(new[]
+    {
+        new EventData(new BinaryData($"Event 1 added at: {DateTime.Now}")),
+        new EventData(new BinaryData($"Event 2 added at: {DateTime.Now}"))
+    });
 }
 ```
 
@@ -183,12 +215,12 @@ additional questions or comments.
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fsearch%2FMicrosoft.Azure.WebJobs.Extensions.EventHubs%2FREADME.png)
 
 <!-- LINKS -->
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.EventHubs_5.0.0-beta.1/sdk/search/Microsoft.Azure.WebJobs.Extensions.EventHubs/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.EventHubs_5.0.0-beta.2/sdk/search/Microsoft.Azure.WebJobs.Extensions.EventHubs/src
 [package]: https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.EventHubs/
 [docs]: https://docs.microsoft.com/dotnet/api/Microsoft.Azure.WebJobs.Extensions.EventHubs
 [nuget]: https://www.nuget.org/
 
-[contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.EventHubs_5.0.0-beta.1/CONTRIBUTING.md
+[contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.EventHubs_5.0.0-beta.2/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
