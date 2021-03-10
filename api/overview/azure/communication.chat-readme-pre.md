@@ -3,7 +3,7 @@ title: Azure Communication Chat client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Communication.Chat, communication
 author: maggiepint
 ms.author: magpint
-ms.date: 02/10/2021
+ms.date: 03/10/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,12 +11,12 @@ ms.devlang: dotnet
 ms.service: communication
 ---
 
-# Azure Communication Chat client library for .NET - Version 1.0.0-beta.4 
+# Azure Communication Chat client library for .NET - Version 1.0.0-beta.5 
 
 
-> Server - Chat Api Version:  2020-11-01-preview3
+> Server - Chat Api Version:  2021-01-27-preview4
 
-> Client - Chat SDK Version:  1.0.0-beta.4
+> Client - Chat SDK Version:  1.0.0-beta.5
 
 This package contains a C# SDK for Azure Communication Services for chat.
 
@@ -29,7 +29,7 @@ This package contains a C# SDK for Azure Communication Services for chat.
 Install the Azure Communication Chat client library for .NET with [NuGet][nuget]:
 
 ```PowerShell
-dotnet add package Azure.Communication.Chat --version 1.0.0-beta.4
+dotnet add package Azure.Communication.Chat --version 1.0.0-beta.5
 ``` 
 
 ### Prerequisites
@@ -61,7 +61,7 @@ using Azure.Communication.Chat;
 This will allow you to create, get, or delete chat threads.
 ```C# Snippet:Azure_Communication_Chat_Tests_Samples_CreateChatClient
 ChatClient chatClient = new ChatClient(
-    new Uri(endpoint),
+    endpoint,
     new CommunicationTokenCredential(userToken));
 ```
 
@@ -136,7 +136,7 @@ chatThreadClient.AddParticipants(participants: new[] { new ChatParticipant(parti
 ```
 ### Remove a participant
 ```C# Snippet:Azure_Communication_Chat_Tests_Samples_RemoveParticipant_KeyConcepts
-chatThreadClient.RemoveParticipant(user: participantIdentifier);
+chatThreadClient.RemoveParticipant(identifier: participantIdentifier);
 ```
 ### Send a typing notification
 ```C# Snippet:Azure_Communication_Chat_Tests_Samples_SendTypingNotification_KeyConcepts
@@ -156,12 +156,12 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Chat_1.0.0-beta.4/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Chat_1.0.0-beta.4/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Chat_1.0.0-beta.4/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Chat_1.0.0-beta.4/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Chat_1.0.0-beta.4/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Chat_1.0.0-beta.4/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Chat_1.0.0-beta.5/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Chat_1.0.0-beta.5/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Chat_1.0.0-beta.5/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Chat_1.0.0-beta.5/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Chat_1.0.0-beta.5/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Chat_1.0.0-beta.5/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
@@ -189,11 +189,11 @@ Use `CreateChatThread` to create a chat thread client object.
 
 ```C# Snippet:Azure_Communication_Chat_Tests_Samples_CreateChatClient
 ChatClient chatClient = new ChatClient(
-    new Uri(endpoint),
+    endpoint,
     new CommunicationTokenCredential(userToken));
 ```
 ```C# Snippet:Azure_Communication_Chat_Tests_Samples_CreateThread
-var chatParticipant = new ChatParticipant(communicationIdentifier: kimberly)
+var chatParticipant = new ChatParticipant(identifier: kimberly)
 {
     DisplayName = "Kim"
 };
@@ -272,7 +272,7 @@ Use `GetMessages` to retrieve all messages for the chat thread.
 AsyncPageable<ChatMessage> allMessages = chatThreadClient.GetMessagesAsync();
 await foreach (ChatMessage message in allMessages)
 {
-    Console.WriteLine($"{message.Id}:{message.Content}");
+    Console.WriteLine($"{message.Id}:{message.Content.Message}");
 }
 ```
 ### Update a message
@@ -399,7 +399,7 @@ This project has adopted the [Microsoft Open Source Code of Conduct][coc]. For m
 [communication_resource_create_power_shell]: https://docs.microsoft.com/powershell/module/az.communication/new-azcommunicationservice
 [communication_resource_create_net]: https://docs.microsoft.com/azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-net
 [nextsteps]:https://docs.microsoft.com/azure/communication-services/quickstarts/chat/get-started?pivots=programming-language-csharp
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Communication.Chat_1.0.0-beta.4/sdk/communication/Azure.Communication.Chat/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Communication.Chat_1.0.0-beta.5/sdk/communication/Azure.Communication.Chat/src
 [product_docs]: https://docs.microsoft.com/azure/communication-services/overview
 [package]: https://www.nuget.org/packages/Azure.Communication.Chat
 
