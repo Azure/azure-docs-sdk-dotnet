@@ -3,7 +3,7 @@ title: Azure Cognitive Services Form Recognizer client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.FormRecognizer, formrecognizer
 author: maggiepint
 ms.author: magpint
-ms.date: 02/09/2021
+ms.date: 03/10/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: formrecognizer
 ---
 
-# Azure Cognitive Services Form Recognizer client library for .NET - Version 3.1.0-beta.2 
+# Azure Cognitive Services Form Recognizer client library for .NET - Version 3.1.0-beta.3 
 
 Azure Cognitive Services Form Recognizer is a cloud service that uses machine learning to recognize form fields, text, and tables in form documents.  It includes the following capabilities:
 
@@ -141,6 +141,19 @@ Please note that models can also be trained using a graphical user interface suc
 Because analyzing and training form documents takes time, these operations are implemented as [**long-running operations**][dotnet_lro_guidelines].  Long-running operations consist of an initial request sent to the service to start an operation, followed by polling the service at intervals to determine whether the operation has completed or failed, and if it has succeeded, to get the result.
 
 For long running operations in the Azure SDK, the client exposes a `Start<operation-name>` method that returns an `Operation<T>`.  You can use the extension method `WaitForCompletionAsync()` to wait for the operation to complete and obtain its result.  A sample code snippet is provided to illustrate using long-running operations [below](#recognize-content).
+
+### Thread safety
+We guarantee that all client instance methods are thread-safe and independent of each other ([guideline](https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-service-methods-thread-safety)). This ensures that the recommendation of reusing client instances is always safe, even across threads.
+
+### Additional concepts
+<!-- CLIENT COMMON BAR -->
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/core/Azure.Core/README.md#mocking) |
+[Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
+<!-- CLIENT COMMON BAR -->
 
 ## Examples
 The following section provides several code snippets illustrating common patterns used in the Form Recognizer .NET API. Most of the snippets below make use of asynchronous service calls, but keep in mind that the Azure.AI.FormRecognizer package supports both synchronous and asynchronous APIs.
@@ -682,22 +695,22 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 
 
 <!-- LINKS -->
-[formreco_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.2/sdk/formrecognizer/Azure.AI.FormRecognizer/src
+[formreco_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/src
 [formreco_docs]: https://docs.microsoft.com/azure/cognitive-services/form-recognizer/
 [formreco_refdocs]: https://aka.ms/azsdk/net/docs/ref/formrecognizer
 [formreco_nuget_package]: https://www.nuget.org/packages/Azure.AI.FormRecognizer
-[formreco_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.2/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/README.md
+[formreco_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/README.md
 [formreco_rest_api]: https://westus2.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2
 [cognitive_resource]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account
 
 
-[form_recognizer_client_class]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.2/sdk/formrecognizer/Azure.AI.FormRecognizer/src/FormRecognizerClient.cs
-[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.2/sdk/identity/Azure.Identity
+[form_recognizer_client_class]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/src/FormRecognizerClient.cs
+[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/identity/Azure.Identity
 [cognitive_auth]: https://docs.microsoft.com/azure/cognitive-services/authentication
 [register_aad_app]: https://docs.microsoft.com/azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
 [aad_grant_access]: https://docs.microsoft.com/azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
 [custom_subdomain]: https://docs.microsoft.com/azure/cognitive-services/authentication#create-a-resource-with-a-custom-subdomain
-[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.2/sdk/identity/Azure.Identity/README.md
+[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/identity/Azure.Identity/README.md
 [cognitive_resource_portal]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account
 [cognitive_resource_cli]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account-cli
 
@@ -708,17 +721,17 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [service_recognize_invoices_fields]: https://aka.ms/formrecognizer/invoicefields
 [dotnet_lro_guidelines]: https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning
 
-[logging]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md
+[logging]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/core/Azure.Core/samples/Diagnostics.md
 
-[recognize_content]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.2/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample1_RecognizeFormContent.md
-[recognize_custom_forms]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.2/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample2_RecognizeCustomForms.md
-[recognize_receipts]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.2/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample3_RecognizeReceipts.md
-[recognize_business_cards]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_3.1.0-beta.2/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample9_RecognizeBusinessCards.md
-[recognize_invoices]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_3.1.0-beta.2/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample10_RecognizeInvoices.md
-[train_a_model]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.2/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample5_TrainModel.md
-[manage_custom_models]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.2/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample6_ManageCustomModels.md
-[copy_custom_models]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.2/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample7_CopyCustomModel.md
-[composed_model]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.2/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample8_ModelCompose.md
+[recognize_content]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample1_RecognizeFormContent.md
+[recognize_custom_forms]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample2_RecognizeCustomForms.md
+[recognize_receipts]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample3_RecognizeReceipts.md
+[recognize_business_cards]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample9_RecognizeBusinessCards.md
+[recognize_invoices]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample10_RecognizeInvoices.md
+[train_a_model]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample5_TrainModel.md
+[manage_custom_models]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample6_ManageCustomModels.md
+[copy_custom_models]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample7_CopyCustomModel.md
+[composed_model]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample8_ModelCompose.md
 
 [azure_cli]: https://docs.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
