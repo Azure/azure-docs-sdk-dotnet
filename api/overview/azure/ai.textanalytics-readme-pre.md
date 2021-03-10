@@ -3,7 +3,7 @@ title: Azure Cognitive Services Text Analytics client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.TextAnalytics, textanalytics
 author: maggiepint
 ms.author: magpint
-ms.date: 02/10/2021
+ms.date: 03/09/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: textanalytics
 ---
 
-# Azure Cognitive Services Text Analytics client library for .NET - Version 5.1.0-beta.4 
+# Azure Cognitive Services Text Analytics client library for .NET - Version 5.1.0-beta.5 
 
 Azure Cognitive Services Text Analytics is a cloud service that provides advanced natural language processing over raw text, and includes the following main functions: 
 * Language Detection
@@ -21,7 +21,7 @@ Azure Cognitive Services Text Analytics is a cloud service that provides advance
 * Personally Identifiable Information (PII) Recognition
 * Linked Entity Recognition
 * Healthcare Recognition <sup>beta</sup>
-* Analyze Operation <sup>beta</sup>
+* Running multiple actions in one or more documents <sup>beta</sup>
 
 [Source code][textanalytics_client_src] | [Package (NuGet)][textanalytics_nuget_package] | [API reference documentation][textanalytics_refdocs] | [Product documentation][textanalytics_docs] | [Samples][textanalytics_samples]
 
@@ -142,11 +142,11 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.0-beta.4/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.0-beta.4/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.0-beta.4/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.0-beta.4/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.0-beta.4/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.0-beta.5/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.0-beta.5/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.0-beta.5/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.0-beta.5/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.0-beta.5/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
@@ -165,7 +165,7 @@ The following section provides several code snippets using the `client` [created
 * [Detect Language Asynchronously](#detect-language-asynchronously)
 * [Recognize Entities Asyncronously](#recognize-entities-asynchronously)
 * [Recognize Healthcare Entities Asyncronously](#recognize-healthcare-entities-asynchronously)
-* [Run Analyze Operation Asyncronously](#run-analyze-operation-asynchronously)
+* [Run multiple actions Asyncronously](#run-multiple-actions-asynchronously)
 
 ### Detect Language
 Run a Text Analytics predictive model to determine the language that the passed-in document or batch of documents are written in.
@@ -222,7 +222,7 @@ catch (RequestFailedException exception)
 ```
 For samples on using the production recommended option `AnalyzeSentimentBatch` see [here][analyze_sentiment_sample].
 
-To get more granular information about the opinions related to aspects of a product/service, also known as Aspect-based Sentiment Analysis in Natural Language Processing (NLP), see a sample on sentiment analysis with opinion mining [here][analyze_sentiment_opinion_mining_sample].
+To get more granular information about the opinions related to targets of a product/service, also known as Aspect-based Sentiment Analysis in Natural Language Processing (NLP), see a sample on sentiment analysis with opinion mining [here][analyze_sentiment_opinion_mining_sample].
 
 Please refer to the service documentation for a conceptual discussion of [sentiment analysis][sentiment_analysis].
 
@@ -440,10 +440,10 @@ catch (RequestFailedException exception)
 ### Recognize Healthcare Entities Asynchronously
 Text Analytics for health is a containerized service that extracts and labels relevant medical information from unstructured texts such as doctor's notes, discharge summaries, clinical documents, and electronic health records. For more information see [How to: Use Text Analytics for health][healthcare].
 
-```C# Snippet:TextAnalyticsSampleHealthcareBatchAsync
-    string document1 = @"RECORD #333582770390100 | MH | 85986313 | | 054351 | 2/14/2001 12:00:00 AM | CORONARY ARTERY DISEASE | Signed | DIS |
-                        Admission Date: 5/22/2001 Report Status: Signed Discharge Date: 4/24/2001 ADMISSION DIAGNOSIS: CORONARY ARTERY DISEASE.
-                        HISTORY OF PRESENT ILLNESS: The patient is a 54-year-old gentleman with a history of progressive angina over the past several months.
+```C# Snippet:Sample7_AnalyzeHealthcareEntitiesBatchConvenience
+    string document1 = @"RECORD #333582770390100 | MH | 85986313 | | 054351 | 2/14/2001 12:00:00 AM | CORONARY ARTERY DISEASE | Signed | DIS | \
+                        Admission Date: 5/22/2001 Report Status: Signed Discharge Date: 4/24/2001 ADMISSION DIAGNOSIS: CORONARY ARTERY DISEASE. \
+                        HISTORY OF PRESENT ILLNESS: The patient is a 54-year-old gentleman with a history of progressive angina over the past several months. \
                         The patient had a cardiac catheterization in July of this year revealing total occlusion of the RCA and 50% left main disease ,\
                         with a strong family history of coronary artery disease with a brother dying at the age of 52 from a myocardial infarction and \
                         another brother who is status post coronary artery bypass grafting. The patient had a stress echocardiogram done on July , 2001 , \
@@ -457,84 +457,153 @@ Text Analytics for health is a containerized service that extracts and labels re
     {
         document1,
         document2,
+        string.Empty
     };
+    var options = new AnalyzeHealthcareEntitiesOptions { };
 
-    AnalyzeHealthcareEntitiesOptions options = new AnalyzeHealthcareEntitiesOptions()
-    {
-        IncludeStatistics = true
-    };
-
-    AnalyzeHealthcareEntitiesOperation healthOperation = await client.StartAnalyzeHealthcareEntitiesAsync(batchInput, "en", options);
+    AnalyzeHealthcareEntitiesOperation healthOperation = client.StartAnalyzeHealthcareEntities(batchInput, "en", options);
 
     await healthOperation.WaitForCompletionAsync();
 
-    await foreach (AnalyzeHealthcareEntitiesResultCollection documentsInPage in healthOperation.Value)
+    Console.WriteLine($"AnalyzeHealthcareEntities operation was completed");
+
+    Console.WriteLine($"Created On   : {healthOperation.CreatedOn}");
+    Console.WriteLine($"Expires On   : {healthOperation.ExpiresOn}");
+    Console.WriteLine($"Status       : {healthOperation.Status}");
+    Console.WriteLine($"Last Modified: {healthOperation.LastModified}");
+
+    foreach (AnalyzeHealthcareEntitiesResultCollection documentsInPage in healthOperation.GetValues())
     {
-        Console.WriteLine($"Results of Azure Text Analytics \"Healthcare Async\" Model, version: \"{documentsInPage.ModelVersion}\"");
+        Console.WriteLine($"Results of Azure Text Analytics \"Healthcare\" Model, version: \"{documentsInPage.ModelVersion}\"");
         Console.WriteLine("");
 
         foreach (AnalyzeHealthcareEntitiesResult result in documentsInPage)
         {
-            Console.WriteLine($"    Recognized the following {result.Entities.Count} healthcare entities:");
-
-            foreach (HealthcareEntity entity in result.Entities)
+            if (result.HasError)
             {
-                Console.WriteLine($"    Entity: {entity.Text}");
-                Console.WriteLine($"    Category: {entity.Category}");
-                Console.WriteLine($"    Offset: {entity.Offset}");
-                Console.WriteLine($"    Length: {entity.Length}");
-                Console.WriteLine($"    Links:");
-
-                foreach (EntityDataSource entityDataSource in entity.DataSources)
-                {
-                    Console.WriteLine($"        Entity ID in Data Source: {entityDataSource.EntityId}");
-                    Console.WriteLine($"        DataSource: {entityDataSource.Name}");
-                }
+                Console.WriteLine("  Error!");
+                Console.WriteLine($"  Document error code: {result.Error.ErrorCode}.");
+                Console.WriteLine($"  Message: {result.Error.Message}");
             }
+            else
+            {
+                Console.WriteLine($"    Recognized the following {result.Entities.Count} healthcare entities:");
 
-            Console.WriteLine($"    Document statistics:");
-            Console.WriteLine($"        Character count (in Unicode graphemes): {result.Statistics.CharacterCount}");
-            Console.WriteLine($"        Transaction count: {result.Statistics.TransactionCount}");
-            Console.WriteLine("");
+                foreach (HealthcareEntity entity in result.Entities)
+                {
+                    Console.WriteLine($"    Entity: {entity.Text}");
+                    Console.WriteLine($"    Category: {entity.Category}");
+                    Console.WriteLine($"    Offset: {entity.Offset}");
+                    Console.WriteLine($"    Length: {entity.Length}");
+                    Console.WriteLine($"    NormalizedText: {entity.NormalizedText}");
+                    Console.WriteLine($"    Links:");
+
+                    foreach (EntityDataSource entityDataSource in entity.DataSources)
+                    {
+                        Console.WriteLine($"        Entity ID in Data Source: {entityDataSource.EntityId}");
+                        Console.WriteLine($"        DataSource: {entityDataSource.Name}");
+                    }
+
+                    if (entity.Assertion != null)
+                    {
+                        Console.WriteLine($"    Assertions:");
+
+                        if (entity.Assertion?.Association != null)
+                        {
+                            Console.WriteLine($"        Association: {entity.Assertion?.Association}");
+                        }
+
+                        if (entity.Assertion?.Certainty != null)
+                        {
+                            Console.WriteLine($"        Certainty: {entity.Assertion?.Certainty}");
+                        }
+                        if (entity.Assertion?.Conditionality != null)
+                        {
+                            Console.WriteLine($"        Conditionality: {entity.Assertion?.Conditionality}");
+                        }
+                    }
+
+                    Console.WriteLine($"    We found {result.EntityRelations.Count} relations in the current document:");
+                    Console.WriteLine("");
+
+                    foreach (HealthcareEntityRelation relations in result.EntityRelations)
+                    {
+                        Console.WriteLine($"        Relation: {relations.RelationType}");
+                        Console.WriteLine($"        For this relation there are {relations.Roles.Count} roles");
+
+                        foreach (HealthcareEntityRelationRole role in relations.Roles)
+                        {
+                            Console.WriteLine($"            Role Name: {role.Name}");
+
+                            Console.WriteLine($"            Associated Entity Text: {role.Entity.Text}");
+                            Console.WriteLine($"            Associated Entity Category: {role.Entity.Category}");
+
+                            Console.WriteLine("");
+                        }
+
+                        Console.WriteLine("");
+                    }
+                }
+                Console.WriteLine("");
+            }
         }
-        Console.WriteLine($"Request statistics:");
-        Console.WriteLine($"    Document Count: {documentsInPage.Statistics.DocumentCount}");
-        Console.WriteLine($"    Valid Document Count: {documentsInPage.Statistics.ValidDocumentCount}");
-        Console.WriteLine($"    Transaction Count: {documentsInPage.Statistics.TransactionCount}");
-        Console.WriteLine($"    Invalid Document Count: {documentsInPage.Statistics.InvalidDocumentCount}");
-        Console.WriteLine("");
     }
 }
 ```
 
-### Run Analyze Operation Asynchronously
-The Analyze functionality allows to choose which of the supported Text Analytics features to execute in the same set of documents. Currently the supported features are: entity recognition, key phrase extraction, and Personally Identifiable Information (PII) Recognition. For more information see [How to: Use Text Analytics for analyze operation][analyze_operation_howto].
+### Run multiple actions Asynchronously
+This functionality allows running multiple actions in one or more documents. Actions include entity recognition, linked entity recognition, key phrase extraction, and Personally Identifiable Information (PII) Recognition. For more information see [Using analyze][analyze_operation_howto].
 
-```C# Snippet:AnalyzeOperationBatchConvenience
-    string document = @"We went to Contoso Steakhouse located at midtown NYC last week for a dinner party, 
-                        and we adore the spot! They provide marvelous food and they have a great menu. The
-                        chief cook happens to be the owner (I think his name is John Doe) and he is super 
-                        nice, coming out of the kitchen and greeted us all. We enjoyed very much dining in 
-                        the place! The Sirloin steak I ordered was tender and juicy, and the place was impeccably
-                        clean. You can even pre-order from their online menu at www.contososteakhouse.com, 
-                        call 312-555-0176 or send email to order@contososteakhouse.com! The only complaint 
-                        I have is the food didn't come fast enough. Overall I highly recommend it!";
+```C# Snippet:AnalyzeOperationBatchConvenienceAsync
+    string documentA = @"We love this trail and make the trip every year. The views are breathtaking and well
+                        worth the hike! Yesterday was foggy though, so we missed the spectacular views.
+                        We tried again today and it was amazing. Everyone in my family liked the trail although
+                        it was too challenging for the less athletic among us.
+                        Not necessarily recommended for small children.
+                        A hotel close to the trail offers services for childcare in case you want that.";
 
-    var batchDocuments = new List<string> { document };
+    string documentB = @"Last week we stayed at Hotel Foo to celebrate our anniversary. The staff knew about
+                        our anniversary so they helped me organize a little surprise for my partner.
+                        The room was clean and with the decoration I requested. It was perfect!";
 
-    TextAnalyticsActions batchActions = new TextAnalyticsActions()
+    string documentC = @"That was the best day of my life! We went on a 4 day trip where we stayed at Hotel Foo.
+                        They had great amenities that included an indoor pool, a spa, and a bar.
+                        The spa offered couples massages which were really good. 
+                        The spa was clean and felt very peaceful. Overall the whole experience was great.
+                        We will definitely come back.";
+
+    var batchDocuments = new List<string>
+    {
+        documentA,
+        documentB,
+        documentC
+    };
+
+    TextAnalyticsActions actions = new TextAnalyticsActions()
     {
         ExtractKeyPhrasesOptions = new List<ExtractKeyPhrasesOptions>() { new ExtractKeyPhrasesOptions() },
         RecognizeEntitiesOptions = new List<RecognizeEntitiesOptions>() { new RecognizeEntitiesOptions() },
         RecognizePiiEntitiesOptions = new List<RecognizePiiEntitiesOptions>() { new RecognizePiiEntitiesOptions() },
+        RecognizeLinkedEntitiesOptions = new List<RecognizeLinkedEntitiesOptions>() { new RecognizeLinkedEntitiesOptions() },
         DisplayName = "AnalyzeOperationSample"
     };
 
-    AnalyzeBatchActionsOperation operation = client.StartAnalyzeBatchActions(batchDocuments, batchActions);
+    AnalyzeBatchActionsOperation operation = await client.StartAnalyzeBatchActionsAsync(batchDocuments, actions);
 
     await operation.WaitForCompletionAsync();
 
-    foreach (AnalyzeBatchActionsResult documentsInPage in operation.GetValues())
+    Console.WriteLine($"Status: {operation.Status}");
+    Console.WriteLine($"Created On: {operation.CreatedOn}");
+    Console.WriteLine($"Expires On: {operation.ExpiresOn}");
+    Console.WriteLine($"Last modified: {operation.LastModified}");
+    if (!string.IsNullOrEmpty(operation.DisplayName))
+        Console.WriteLine($"Display name: {operation.DisplayName}");
+    Console.WriteLine($"Total actions: {operation.TotalActions}");
+    Console.WriteLine($"  Succeeded actions: {operation.ActionsSucceeded}");
+    Console.WriteLine($"  Failed actions: {operation.ActionsFailed}");
+    Console.WriteLine($"  In progress actions: {operation.ActionsInProgress}");
+
+    await foreach (AnalyzeBatchActionsResult documentsInPage in operation.Value)
     {
         RecognizeEntitiesResultCollection entitiesResult = documentsInPage.RecognizeEntitiesActionsResults.FirstOrDefault().Result;
 
@@ -542,19 +611,22 @@ The Analyze functionality allows to choose which of the supported Text Analytics
 
         RecognizePiiEntitiesResultCollection piiResult = documentsInPage.RecognizePiiEntitiesActionsResults.FirstOrDefault().Result;
 
+        RecognizeLinkedEntitiesResultCollection linkedEntitiesResult = documentsInPage.RecognizeLinkedEntitiesActionsResults.FirstOrDefault().Result;
+
         Console.WriteLine("Recognized Entities");
 
         foreach (RecognizeEntitiesResult result in entitiesResult)
         {
-            Console.WriteLine($"    Recognized the following {result.Entities.Count} entities:");
+            Console.WriteLine($"  Recognized the following {result.Entities.Count} entities:");
 
             foreach (CategorizedEntity entity in result.Entities)
             {
-                Console.WriteLine($"    Entity: {entity.Text}");
-                Console.WriteLine($"    Category: {entity.Category}");
-                Console.WriteLine($"    Offset: {entity.Offset}");
-                Console.WriteLine($"    ConfidenceScore: {entity.ConfidenceScore}");
-                Console.WriteLine($"    SubCategory: {entity.SubCategory}");
+                Console.WriteLine($"  Entity: {entity.Text}");
+                Console.WriteLine($"  Category: {entity.Category}");
+                Console.WriteLine($"  Offset: {entity.Offset}");
+                Console.WriteLine($"  Length: {entity.Length}");
+                Console.WriteLine($"  ConfidenceScore: {entity.ConfidenceScore}");
+                Console.WriteLine($"  SubCategory: {entity.SubCategory}");
             }
             Console.WriteLine("");
         }
@@ -563,15 +635,16 @@ The Analyze functionality allows to choose which of the supported Text Analytics
 
         foreach (RecognizePiiEntitiesResult result in piiResult)
         {
-            Console.WriteLine($"    Recognized the following {result.Entities.Count} PII entities:");
+            Console.WriteLine($"  Recognized the following {result.Entities.Count} PII entities:");
 
             foreach (PiiEntity entity in result.Entities)
             {
-                Console.WriteLine($"    Entity: {entity.Text}");
-                Console.WriteLine($"    Category: {entity.Category}");
-                Console.WriteLine($"    Offset: {entity.Offset}");
-                Console.WriteLine($"    ConfidenceScore: {entity.ConfidenceScore}");
-                Console.WriteLine($"    SubCategory: {entity.SubCategory}");
+                Console.WriteLine($"  Entity: {entity.Text}");
+                Console.WriteLine($"  Category: {entity.Category}");
+                Console.WriteLine($"  Offset: {entity.Offset}");
+                Console.WriteLine($"  Length: {entity.Length}");
+                Console.WriteLine($"  ConfidenceScore: {entity.ConfidenceScore}");
+                Console.WriteLine($"  SubCategory: {entity.SubCategory}");
             }
             Console.WriteLine("");
         }
@@ -580,17 +653,50 @@ The Analyze functionality allows to choose which of the supported Text Analytics
 
         foreach (ExtractKeyPhrasesResult result in keyPhrasesResult)
         {
-            Console.WriteLine($"    Recognized the following {result.KeyPhrases.Count} Keyphrases:");
+            Console.WriteLine($"  Recognized the following {result.KeyPhrases.Count} Keyphrases:");
 
             foreach (string keyphrase in result.KeyPhrases)
             {
-                Console.WriteLine($"    {keyphrase}");
+                Console.WriteLine($"  {keyphrase}");
+            }
+            Console.WriteLine("");
+        }
+
+        Console.WriteLine("Recognized Linked Entities");
+
+        foreach (RecognizeLinkedEntitiesResult result in linkedEntitiesResult)
+        {
+            Console.WriteLine($"  Recognized the following {result.Entities.Count} linked entities:");
+
+            foreach (LinkedEntity entity in result.Entities)
+            {
+                Console.WriteLine($"  Entity: {entity.Name}");
+                Console.WriteLine($"  DataSource: {entity.DataSource}");
+                Console.WriteLine($"  DataSource EntityId: {entity.DataSourceEntityId}");
+                Console.WriteLine($"  Language: {entity.Language}");
+                Console.WriteLine($"  DataSource Url: {entity.Url}");
+
+                Console.WriteLine($"  Total Matches: {entity.Matches.Count()}");
+                foreach (LinkedEntityMatch match in entity.Matches)
+                {
+                    Console.WriteLine($"    Match Text: {match.Text}");
+                    Console.WriteLine($"    ConfidenceScore: {match.ConfidenceScore}");
+                    Console.WriteLine($"    Offset: {match.Offset}");
+                    Console.WriteLine($"    Length: {match.Length}");
+                }
+                Console.WriteLine("");
             }
             Console.WriteLine("");
         }
     }
 }
 ```
+
+### Known Issues
+- `StartAnalyzeHealthcareEntities` is in gated preview and can not be used with AAD credentials. For more information, see [the Text Analytics for Health documentation](https://docs.microsoft.com/azure/cognitive-services/text-analytics/how-tos/text-analytics-for-health?tabs=ner#request-access-to-the-public-preview).
+- The parameter `CategoriesFilter` in `RecognizePiiEntitiesOptions` is currently not working when used in `StartAnalyzeBatchActions`. [19237](https://github.com/Azure/azure-sdk-for-net/issues/19237).
+- `Statistics` for `AnalyzeBatchActionsResult` are not currently returned even if the user passes `IncludeStatistics  = true`. [19268](https://github.com/Azure/azure-sdk-for-net/issues/19268).
+- At time of this SDK release, the `ModelVersion` option to `StartAnalyzeHealthcareEntities` is ignored by the service. The service always processes the operation using the `latest` model.
 
 ## Troubleshooting
 
@@ -673,19 +779,19 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 
 
 <!-- LINKS -->
-[textanalytics_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.4/sdk/textanalytics/Azure.AI.TextAnalytics/src
+[textanalytics_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.5/sdk/textanalytics/Azure.AI.TextAnalytics/src
 [textanalytics_docs]: https://docs.microsoft.com/azure/cognitive-services/Text-Analytics/
 [textanalytics_refdocs]: https://aka.ms/azsdk-net-textanalytics-ref-docs
 [textanalytics_nuget_package]: https://www.nuget.org/packages/Azure.AI.TextAnalytics
-[textanalytics_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.4/sdk/textanalytics/Azure.AI.TextAnalytics/samples/README.md
+[textanalytics_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.5/sdk/textanalytics/Azure.AI.TextAnalytics/samples/README.md
 [textanalytics_rest_api]: https://westcentralus.dev.cognitive.microsoft.com/docs/services/TextAnalytics-v3-1-Preview-3/operations/Languages
 [cognitive_resource_portal]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account
 [cognitive_resource_cli]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account-cli
 [dotnet_lro_guidelines]: https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning
 
-[recognize_healthcare_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.4/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample_RecognizeHealthcareEntities.md
-[analyze_operation_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.4/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample_AnalyzeOperation.md
-[analyze_operation_howto]: https://docs.microsoft.com/azure/cognitive-services/text-analytics/how-tos/text-analytics-how-to-call-api?tabs=analyze
+[recognize_healthcare_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.5/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample_RecognizeHealthcareEntities.md
+[analyze_operation_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.5/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample_AnalyzeBatchActions.md
+[analyze_operation_howto]: https://docs.microsoft.com/azure/cognitive-services/text-analytics/how-tos/text-analytics-how-to-call-api?tabs=synchronous#using-the-api-asynchronously
 [healthcare]: https://docs.microsoft.com/azure/cognitive-services/text-analytics/how-tos/text-analytics-for-health?tabs=ner
 [language_detection]: https://docs.microsoft.com/azure/cognitive-services/Text-Analytics/how-tos/text-analytics-how-to-language-detection
 [sentiment_analysis]: https://docs.microsoft.com/azure/cognitive-services/Text-Analytics/how-tos/text-analytics-how-to-sentiment-analysis
@@ -694,25 +800,25 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [named_entities_categories]: https://docs.microsoft.com/azure/cognitive-services/Text-Analytics/named-entity-types
 [pii_entity_type]:https://docs.microsoft.com/azure/cognitive-services/text-analytics/named-entity-types?tabs=personal 
 
-[textanalytics_client_class]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.4/sdk/textanalytics/Azure.AI.TextAnalytics/src/TextAnalyticsClient.cs
-[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.4/sdk/identity/Azure.Identity
+[textanalytics_client_class]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.5/sdk/textanalytics/Azure.AI.TextAnalytics/src/TextAnalyticsClient.cs
+[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.5/sdk/identity/Azure.Identity
 [cognitive_auth]: https://docs.microsoft.com/azure/cognitive-services/authentication
 [register_aad_app]: https://docs.microsoft.com/azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
 [aad_grant_access]: https://docs.microsoft.com/azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
 [custom_subdomain]: https://docs.microsoft.com/azure/cognitive-services/authentication#create-a-resource-with-a-custom-subdomain
-[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.4/sdk/identity/Azure.Identity/README.md
-[logging]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.0-beta.4/sdk/core/Azure.Core/samples/Diagnostics.md
+[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.5/sdk/identity/Azure.Identity/README.md
+[logging]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.0-beta.5/sdk/core/Azure.Core/samples/Diagnostics.md
 [data_limits]: https://docs.microsoft.com/azure/cognitive-services/text-analytics/overview#data-limits
-[contributing]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.0-beta.4/CONTRIBUTING.md
+[contributing]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.0-beta.5/CONTRIBUTING.md
 
-[detect_language_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.4/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample1_DetectLanguage.md
-[analyze_sentiment_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.4/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample2_AnalyzeSentiment.md
-[analyze_sentiment_opinion_mining_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.4/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample2.1_AnalyzeSentimentWithOpinionMining.md
-[extract_key_phrases_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.4/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample3_ExtractKeyPhrases.md
-[recognize_entities_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.4/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample4_RecognizeEntities.md
-[recognize_pii_entities_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.4/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample5_RecognizePiiEntities.md
-[recognize_linked_entities_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.4/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample6_RecognizeLinkedEntities.md
-[mock_client_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.4/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample_MockClient.md
+[detect_language_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.5/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample1_DetectLanguage.md
+[analyze_sentiment_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.5/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample2_AnalyzeSentiment.md
+[analyze_sentiment_opinion_mining_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.5/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample2.1_AnalyzeSentimentWithOpinionMining.md
+[extract_key_phrases_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.5/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample3_ExtractKeyPhrases.md
+[recognize_entities_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.5/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample4_RecognizeEntities.md
+[recognize_pii_entities_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.5/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample5_RecognizePiiEntities.md
+[recognize_linked_entities_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.5/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample6_RecognizeLinkedEntities.md
+[mock_client_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.5/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample_MockClient.md
 
 [azure_cli]: https://docs.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/

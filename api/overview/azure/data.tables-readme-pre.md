@@ -3,7 +3,7 @@ title: Azure Tables client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Data.Tables, tables
 author: maggiepint
 ms.author: magpint
-ms.date: 01/12/2021
+ms.date: 03/09/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: tables
 ---
 
-# Azure Tables client library for .NET - Version 3.0.0-beta.5 
+# Azure Tables client library for .NET - Version 12.0.0-beta.6 
 
 
 Azure Table storage is a service that stores large amounts of structured NoSQL data in the cloud, providing 
@@ -35,7 +35,7 @@ The Azure Tables client library can seamlessly target either Azure Table storage
 Install the Azure Tables client library for .NET with [NuGet][table_client_nuget_package]:
 
 ```
-dotnet add package Azure.Data.Tables --version 3.0.0-beta.3
+dotnet add package Azure.Data.Tables --prerelease
 ```
 
 ### Prerequisites
@@ -65,7 +65,7 @@ az cosmosdb table create --name MyTableName --resource-group MyResourceGroup --a
 
 ### Authenticate the Client
 
-Learn more about options for authentication _(including Connection Strings, Shared Key, and Shared Key Signatures)_ [in our samples.](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_3.0.0-beta.5/sdk/tables/Azure.Data.Tables/samples/Sample0Auth.md)
+Learn more about options for authentication _(including Connection Strings, Shared Key, and Shared Key Signatures)_ [in our samples.](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.0.0-beta.6/sdk/tables/Azure.Data.Tables/samples/Sample0Auth.md)
 
 ## Key concepts
 
@@ -81,6 +81,19 @@ Common uses of the Table service include:
 - Quickly querying data using a clustered index
 - Accessing data using the OData protocol and LINQ filter expressions
 
+### Thread safety
+We guarantee that all client instance methods are thread-safe and independent of each other ([guideline](https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-service-methods-thread-safety)). This ensures that the recommendation of reusing client instances is always safe, even across threads.
+
+### Additional concepts
+<!-- CLIENT COMMON BAR -->
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.0.0-beta.6/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.0.0-beta.6/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.0.0-beta.6/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.0.0-beta.6/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.0.0-beta.6/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.0.0-beta.6/sdk/core/Azure.Core/README.md#mocking) |
+[Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
+<!-- CLIENT COMMON BAR -->
 
 ## Examples
 - [Create the Table service client](#create-the-table-service-client)
@@ -110,6 +123,7 @@ Next, we can create a new table.
 ```C# Snippet:TablesSample1CreateTable
 // Create a new table. The <see cref="TableItem" /> class stores properties of the created table.
 
+string tableName = "OfficeSupplies1p1";
 TableItem table = serviceClient.CreateTable(tableName);
 Console.WriteLine($"The created table's name is {table.TableName}.");
 ```
@@ -139,6 +153,7 @@ Individual tables can be deleted from the service.
 ```C# Snippet:TablesSample1DeleteTable
 // Deletes the table made previously.
 
+string tableName = "OfficeSupplies1p1";
 serviceClient.DeleteTable(tableName);
 ```
 
@@ -285,10 +300,10 @@ For more information see the [Code of Conduct FAQ][coc_faq] or contact
 [azure_cli]: https://docs.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
 [table_client_nuget_package]: https://www.nuget.org/packages?q=Azure.Data.Tables
-[table_client_samples]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_3.0.0-beta.5/sdk/tables/Azure.Data.Tables/samples
-[table_client_src]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_3.0.0-beta.5/sdk/tables/Azure.Data.Tables/src
+[table_client_samples]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.0.0-beta.6/sdk/tables/Azure.Data.Tables/samples
+[table_client_src]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.0.0-beta.6/sdk/tables/Azure.Data.Tables/src
 [api_reference]: https://docs.microsoft.com/dotnet/api/overview/azure/data.tables-readme-pre?view=azure-dotnet-preview
-[logging]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_3.0.0-beta.5/sdk/core/Azure.Core/samples/Diagnostics.md
+[logging]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.0.0-beta.6/sdk/core/Azure.Core/samples/Diagnostics.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
