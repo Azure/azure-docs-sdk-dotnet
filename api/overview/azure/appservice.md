@@ -1,7 +1,7 @@
 ---
 title: Azure App Service libraries for .NET
 description: Reference for Azure App Service libraries for .NET
-ms.date: 10/19/2017
+ms.date: 3/16/2021
 ms.topic: reference
 ms.service: app-service
 ---
@@ -53,9 +53,6 @@ IWebApp app1 = azure.WebApps
 > [Explore the Management APIs](/dotnet/api/overview/azure/appservice/management)
 
 ### Samples
-
-* [Manage your web apps with the .NET SDK for Azure](https://azure.microsoft.com/resources/samples/app-service-web-dotnet-manage/)
-* [ASP.NET sample for Azure App Service](https://azure.microsoft.com/resources/samples/app-service-web-dotnet-get-started/)
 
 View the [complete list](https://azure.microsoft.com/resources/samples/?platform=dotnet&term=app%20service) of Azure App Service samples.
 
