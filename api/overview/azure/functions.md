@@ -1,7 +1,7 @@
 ---
 title: Azure Functions libraries for .NET
 description: Reference for Azure Functions libraries for .NET
-ms.date: 10/15/2019
+ms.date: 03/15/2021
 ms.topic: reference
 ms.service: azure-functions
 ---
@@ -11,6 +11,38 @@ ms.service: azure-functions
 ## Overview
 
 [Azure Functions](/azure/azure-functions/functions-overview) is a solution for easily running small pieces of code, or _functions_, in Azure. Azure Functions supports a [serverless](https://azure.microsoft.com/solutions/serverless/) execution model.
+
+## .NET isolated process
+
+Azure Functions provides APIs that let you develop [.NET isolated process functions](/azure/azure-functions/dotnet-isolated-process-guide). These .NET functions run out-of-process in Azure Functions. Running out-of-process lets you decouple your function code from the Azure Functions runtime. It also provides a way for you to create and run functions that target the current .NET 5.0 release. 
+
+Functions that run on .NET 5.0 in an isolated process require a set of NuGet packages that are different from the packages that are required by .NET class library functions, which running in-process with the Functions runtime. The core .NET isolated runtime packages are the following:
+
++ [Microsoft.Azure.Functions.Worker](https://www.nuget.org/packages/Microsoft.Azure.Functions.Worker/)
++ [Microsoft.Azure.Functions.Worker.Sdk](https://www.nuget.org/packages/Microsoft.Azure.Functions.Worker.Sdk/)
+
+Because functions that run in a .NET isolated process use different binding types, they require a unique set of binding extension packages. You'll find these extension packages under [Microsoft.Azure.Functions.Worker.Extensions](https://www.nuget.org/packages?q=Microsoft.Azure.Functions.Worker.Extensions). 
+
+The Azure API reference documentation currently supports only [.NET isolated process functions](/dotnet/api/overview/azure/functions/runtime). 
+
+### Visual Studio package manager
+
+```powershell
+Install-Package Microsoft.Azure.Functions.Worker
+Install-Package Microsoft.Azure.Functions.Worker.Sdk
+```
+
+### .NET Core CLI
+
+```dotnetcli
+dotnet add package Microsoft.Azure.Functions.Worker
+dotnet add package Microsoft.Azure.Functions.Worker.Sdk
+```
+
+### Getting started
+
+> [!div class="nextstepaction"]
+> [Create .NET isolated process functions](/azure/azure-functions/dotnet-isolated-process-developer-howtos)
 
 ## Durable Functions extension
 
