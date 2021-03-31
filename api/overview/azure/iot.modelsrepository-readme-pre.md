@@ -1,9 +1,9 @@
 ---
 title: Azure IoT Models Repository client library for .NET
-keywords: Azure, dotnet, SDK, API, Azure.Iot.ModelsRepository, 
+keywords: Azure, dotnet, SDK, API, Azure.IoT.ModelsRepository, 
 author: maggiepint
 ms.author: magpint
-ms.date: 03/10/2021
+ms.date: 03/31/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: 
 ---
 
-# Azure IoT Models Repository client library for .NET - Version 1.0.0-preview.1 
+# Azure IoT Models Repository client library for .NET - Version 1.0.0-preview.2 
 
 
 This library provides functionality for interacting with the [Azure IoT Models Repository][modelsrepository_iot_endpoint]. It also aims to provide a consistent experience working with digital twin model repositories following Azure IoT conventions.
@@ -29,7 +29,7 @@ For the best development experience, developers should use the official Microsof
 Install the Azure IoT Models Repository client library for .NET with [NuGet][nuget]:
 
 ```PowerShell
-Install-Package Azure.Iot.ModelsRepository
+Install-Package Azure.IoT.ModelsRepository
 ```
 
 View the package details at nuget.org.
@@ -57,12 +57,12 @@ We guarantee that all client instance methods are thread-safe and independent of
 ### Additional concepts
 
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Iot.ModelsRepository_1.0.0-preview.1/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Iot.ModelsRepository_1.0.0-preview.1/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Iot.ModelsRepository_1.0.0-preview.1/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Iot.ModelsRepository_1.0.0-preview.1/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Iot.ModelsRepository_1.0.0-preview.1/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Iot.ModelsRepository_1.0.0-preview.1/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.IoT.ModelsRepository_1.0.0-preview.2/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.IoT.ModelsRepository_1.0.0-preview.2/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.IoT.ModelsRepository_1.0.0-preview.2/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.IoT.ModelsRepository_1.0.0-preview.2/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.IoT.ModelsRepository_1.0.0-preview.2/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.IoT.ModelsRepository_1.0.0-preview.2/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
@@ -94,14 +94,14 @@ For more information see the [Code of Conduct FAQ][code_of_conduct_faq] or conta
 <!-- LINKS -->
 [microsoft_sdk_download]: https://azure.microsoft.com/downloads/?sdk=net
 [azure_sdk_target_frameworks]: https://github.com/azure/azure-sdk-for-net#target-frameworks
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Iot.ModelsRepository_1.0.0-preview.1/sdk/modelsrepository/Azure.Iot.ModelsRepository/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.IoT.ModelsRepository_1.0.0-preview.2/sdk/modelsrepository/Azure.IoT.ModelsRepository/src
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [code_of_conduct_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [nuget]: https://www.nuget.org/
-[azure_core_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Iot.ModelsRepository_1.0.0-preview.1/sdk/core/Azure.Core
+[azure_core_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.IoT.ModelsRepository_1.0.0-preview.2/sdk/core/Azure.Core
 [modelsrepository_conventions]: https://github.com/Azure/iot-plugandplay-models-tools/wiki
 [modelsrepository_iot_endpoint]: https://devicemodels.azure.com/
-[modelsrepository_samples]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Iot.ModelsRepository_1.0.0-preview.1/sdk/modelsrepository/Azure.Iot.ModelsRepository/samples
+[modelsrepository_samples]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.IoT.ModelsRepository_1.0.0-preview.2/sdk/modelsrepository/Azure.IoT.ModelsRepository/samples
 [thread_safety_guideline]: https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-service-methods-thread-safety
 [json_ld_reference]: https://json-ld.org
 [dtdlv2_reference]: https://github.com/Azure/opendigitaltwins-dtdl/blob/master/DTDL/v2/dtdlv2.md
