@@ -3,7 +3,7 @@ title: Azure Cognitive Services Form Recognizer client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.FormRecognizer, formrecognizer
 author: maggiepint
 ms.author: magpint
-ms.date: 03/10/2021
+ms.date: 04/06/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: formrecognizer
 ---
 
-# Azure Cognitive Services Form Recognizer client library for .NET - Version 3.1.0-beta.3 
+# Azure Cognitive Services Form Recognizer client library for .NET - Version 3.1.0-beta.4 
 
 Azure Cognitive Services Form Recognizer is a cloud service that uses machine learning to recognize form fields, text, and tables in form documents.  It includes the following capabilities:
 
@@ -21,6 +21,7 @@ Azure Cognitive Services Form Recognizer is a cloud service that uses machine le
   - Receipts - Recognize and extract common fields from receipts, using a pre-trained receipt model.
   - Business Cards - Recognize and extract common fields from business cards, using a pre-trained business cards model.
   - Invoices - Recognize and extract common fields from invoices, using a pre-trained invoice model.
+  - Identity Documents - Recognize and extract common fields from identity documents like passports or driver's licenses, using a pre-trained ID documents model.
 
 [Source code][formreco_client_src] | [Package (NuGet)][formreco_nuget_package] | [API reference documentation][formreco_refdocs] | [Product documentation][formreco_docs] | [Samples][formreco_samples]
 
@@ -118,9 +119,11 @@ var client = new FormRecognizerClient(new Uri(endpoint), new DefaultAzureCredent
 - Recognizing form fields and content, using custom models trained to recognize your custom forms.  These values are returned in a collection of `RecognizedForm` objects. See example [Recognize Custom Forms](#recognize-custom-forms).
 - Recognizing form content, including tables, lines, words, and selection marks like radio buttons and check boxes without the need to train a model.  Form content is returned in a collection of `FormPage` objects. See example [Recognize Content](#recognize-content).
 - Recognizing common fields from the following form types using prebuilt models. These fields and meta-data are returned in a collection of `RecognizedForm` objects.
-  - Sales receipts. See example [Recognize Receipts](#recognize-receipts).
-  - Business cards. See example [Recognize Business Cards](#recognize-business-cards).
-  - Invoices. See example [Recognize Invoices](#recognize-invoices).
+Supported prebuilt models:
+  - Receipts
+  - Business cards
+  - Invoices
+  - ID Documents
 
 ### FormTrainingClient
 
@@ -147,11 +150,11 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_3.1.0-beta.4/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_3.1.0-beta.4/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_3.1.0-beta.4/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_3.1.0-beta.4/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_3.1.0-beta.4/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
@@ -161,9 +164,7 @@ The following section provides several code snippets illustrating common pattern
 ### Async examples
 * [Recognize Content](#recognize-content)
 * [Recognize Custom Forms](#recognize-custom-forms)
-* [Recognize Receipts](#recognize-receipts)
-* [Recognize Business Cards](#recognize-business-cards)
-* [Recognize Invoices](#recognize-invoices)
+* [Use Prebuilt Models](#use-prebuilt-models)
 * [Train a Model](#train-a-model)
 * [Manage Custom Models](#manage-custom-models)
 
@@ -262,8 +263,14 @@ foreach (RecognizedForm form in forms)
 ```
 For more information and samples see [here][recognize_custom_forms].
 
-### Recognize Receipts
-Recognize data from sales receipts using a prebuilt model. Receipt fields recognized by the service can be found [here][service_recognize_receipt_fields].
+### Use Prebuilt Models
+Extract fields from certain types of common forms using prebuilt models provided by the Form Recognizer service. Supported prebuilt models are:
+- Sales receipts. See fields found on a receipt [here][service_recognize_receipt_fields].
+- Business cards. See fields found on a business card [here][service_recognize_business_cards_fields].
+- Invoices. See fields found on an invoice [here][service_recognize_invoices_fields].
+- ID documents. See fields found on an ID document [here][service_recognize_id_documents_fields].
+
+For example, to extract fields from a sales receipt, use the prebuilt Receipt model provided by the `StartRecognizeReceiptsAsync` method:
 
 ```C# Snippet:FormRecognizerSampleRecognizeReceiptFileStream
 string receiptPath = "<receiptPath>";
@@ -347,128 +354,11 @@ foreach (RecognizedForm receipt in receipts)
     }
 }
 ```
-For more information and samples see [here][recognize_receipts].
-
-### Recognize Business Cards
-Recognize data from business cards using a prebuilt model. Business card fields recognized by the service can be found [here][service_recognize_business_cards_fields].
-
-```C# Snippet:FormRecognizerSampleRecognizeBusinessCardFileStream
-string businessCardsPath = "<businessCardsPath>";
-
-using var stream = new FileStream(businessCardsPath, FileMode.Open);
-var options = new RecognizeBusinessCardsOptions() { Locale = "en-US" };
-
-RecognizeBusinessCardsOperation operation = await client.StartRecognizeBusinessCardsAsync(stream, options);
-Response<RecognizedFormCollection> operationResponse = await operation.WaitForCompletionAsync();
-RecognizedFormCollection businessCards = operationResponse.Value;
-
-// To see the list of the supported fields returned by service and its corresponding types, consult:
-// https://aka.ms/formrecognizer/businesscardfields
-
-foreach (RecognizedForm businessCard in businessCards)
-{
-    if (businessCard.Fields.TryGetValue("ContactNames", out FormField contactNamesField))
-    {
-        if (contactNamesField.Value.ValueType == FieldValueType.List)
-        {
-            foreach (FormField contactNameField in contactNamesField.Value.AsList())
-            {
-                Console.WriteLine($"Contact Name: {contactNameField.ValueData.Text}");
-
-                if (contactNameField.Value.ValueType == FieldValueType.Dictionary)
-                {
-                    IReadOnlyDictionary<string, FormField> contactNameFields = contactNameField.Value.AsDictionary();
-
-                    if (contactNameFields.TryGetValue("FirstName", out FormField firstNameField))
-                    {
-                        if (firstNameField.Value.ValueType == FieldValueType.String)
-                        {
-                            string firstName = firstNameField.Value.AsString();
-
-                            Console.WriteLine($"  First Name: '{firstName}', with confidence {firstNameField.Confidence}");
-                        }
-                    }
-
-                    if (contactNameFields.TryGetValue("LastName", out FormField lastNameField))
-                    {
-                        if (lastNameField.Value.ValueType == FieldValueType.String)
-                        {
-                            string lastName = lastNameField.Value.AsString();
-
-                            Console.WriteLine($"  Last Name: '{lastName}', with confidence {lastNameField.Confidence}");
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    if (businessCard.Fields.TryGetValue("Emails", out FormField emailFields))
-    {
-        if (emailFields.Value.ValueType == FieldValueType.List)
-        {
-            foreach (FormField emailField in emailFields.Value.AsList())
-            {
-                if (emailField.Value.ValueType == FieldValueType.String)
-                {
-                    string email = emailField.Value.AsString();
-
-                    Console.WriteLine($"Email: '{email}', with confidence {emailField.Confidence}");
-                }
-            }
-        }
-    }
-}
-```
-For more information and samples see [here][recognize_business_cards].
-
-### Recognize Invoices
-Recognize data from invoices using a prebuilt model. Invoices fields recognized by the service can be found [here][service_recognize_invoices_fields].
-
-```C# Snippet:FormRecognizerSampleRecognizeInvoicesFileStream
-string invoicePath = "<invoicePath>";
-
-using var stream = new FileStream(invoicePath, FileMode.Open);
-var options = new RecognizeInvoicesOptions() { Locale = "en-US" };
-
-RecognizeInvoicesOperation operation = await client.StartRecognizeInvoicesAsync(stream, options);
-Response<RecognizedFormCollection> operationResponse = await operation.WaitForCompletionAsync();
-RecognizedFormCollection invoices = operationResponse.Value;
-
-// To see the list of the supported fields returned by service and its corresponding types, consult:
-// https://aka.ms/formrecognizer/invoicefields
-
-RecognizedForm invoice = invoices.Single();
-
-if (invoice.Fields.TryGetValue("VendorName", out FormField vendorNameField))
-{
-    if (vendorNameField.Value.ValueType == FieldValueType.String)
-    {
-        string vendorName = vendorNameField.Value.AsString();
-        Console.WriteLine($"Vendor Name: '{vendorName}', with confidence {vendorNameField.Confidence}");
-    }
-}
-
-if (invoice.Fields.TryGetValue("CustomerName", out FormField customerNameField))
-{
-    if (customerNameField.Value.ValueType == FieldValueType.String)
-    {
-        string customerName = customerNameField.Value.AsString();
-        Console.WriteLine($"Customer Name: '{customerName}', with confidence {customerNameField.Confidence}");
-    }
-}
-
-if (invoice.Fields.TryGetValue("InvoiceTotal", out FormField invoiceTotalField))
-{
-    if (invoiceTotalField.Value.ValueType == FieldValueType.Float)
-    {
-        float invoiceTotal = invoiceTotalField.Value.AsFloat();
-        Console.WriteLine($"Invoice Total: '{invoiceTotal}', with confidence {invoiceTotalField.Confidence}");
-    }
-}
-```
-For more information and samples see [here][recognize_invoices].
-
+For more information and samples using prebuilt models see:
+- [Receipts sample][recognize_receipts].
+- [Business Cards sample][recognize_business_cards].
+- [Invoices][recognize_invoices].
+- [ID Documents][recognize_id_documents].
 
 ### Train a Model
 Train a machine-learned model on your own form types. The resulting model will be able to recognize values from the types of forms it was trained on.
@@ -678,6 +568,7 @@ Samples showing how to use the Cognitive Services Form Recognizer library are av
 - [Recognize receipts][recognize_receipts]
 - [Recognize business cards][recognize_business_cards]
 - [Recognize invoices][recognize_invoices]
+- [Recognize ID documents][recognize_id_documents]
 - [Train a model][train_a_model]
 - [Manage custom models][manage_custom_models]
 - [Copy a custom model between Form Recognizer resources][copy_custom_models]
@@ -695,22 +586,22 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 
 
 <!-- LINKS -->
-[formreco_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/src
+[formreco_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.4/sdk/formrecognizer/Azure.AI.FormRecognizer/src
 [formreco_docs]: https://docs.microsoft.com/azure/cognitive-services/form-recognizer/
 [formreco_refdocs]: https://aka.ms/azsdk/net/docs/ref/formrecognizer
 [formreco_nuget_package]: https://www.nuget.org/packages/Azure.AI.FormRecognizer
-[formreco_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/README.md
+[formreco_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.4/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/README.md
 [formreco_rest_api]: https://westus2.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2
 [cognitive_resource]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account
 
 
-[form_recognizer_client_class]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/src/FormRecognizerClient.cs
-[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/identity/Azure.Identity
+[form_recognizer_client_class]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.4/sdk/formrecognizer/Azure.AI.FormRecognizer/src/FormRecognizerClient.cs
+[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.4/sdk/identity/Azure.Identity
 [cognitive_auth]: https://docs.microsoft.com/azure/cognitive-services/authentication
 [register_aad_app]: https://docs.microsoft.com/azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
 [aad_grant_access]: https://docs.microsoft.com/azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
 [custom_subdomain]: https://docs.microsoft.com/azure/cognitive-services/authentication#create-a-resource-with-a-custom-subdomain
-[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/identity/Azure.Identity/README.md
+[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.4/sdk/identity/Azure.Identity/README.md
 [cognitive_resource_portal]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account
 [cognitive_resource_cli]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account-cli
 
@@ -719,19 +610,21 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [service_recognize_receipt_fields]: https://aka.ms/formrecognizer/receiptfields
 [service_recognize_business_cards_fields]: https://aka.ms/formrecognizer/businesscardfields
 [service_recognize_invoices_fields]: https://aka.ms/formrecognizer/invoicefields
+[service_recognize_id_documents_fields]: https://aka.ms/formrecognizer/iddocumentfields
 [dotnet_lro_guidelines]: https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning
 
-[logging]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/core/Azure.Core/samples/Diagnostics.md
+[logging]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.4/sdk/core/Azure.Core/samples/Diagnostics.md
 
-[recognize_content]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample1_RecognizeFormContent.md
-[recognize_custom_forms]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample2_RecognizeCustomForms.md
-[recognize_receipts]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample3_RecognizeReceipts.md
-[recognize_business_cards]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample9_RecognizeBusinessCards.md
-[recognize_invoices]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample10_RecognizeInvoices.md
-[train_a_model]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample5_TrainModel.md
-[manage_custom_models]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample6_ManageCustomModels.md
-[copy_custom_models]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample7_CopyCustomModel.md
-[composed_model]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample8_ModelCompose.md
+[recognize_content]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.4/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample1_RecognizeFormContent.md
+[recognize_custom_forms]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.4/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample2_RecognizeCustomForms.md
+[recognize_receipts]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.4/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample3_RecognizeReceipts.md
+[recognize_business_cards]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_3.1.0-beta.4/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample9_RecognizeBusinessCards.md
+[recognize_invoices]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_3.1.0-beta.4/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample10_RecognizeInvoices.md
+[recognize_id_documents]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_3.1.0-beta.4/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample11_RecognizeIdDocuments.md
+[train_a_model]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.4/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample5_TrainModel.md
+[manage_custom_models]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.4/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample6_ManageCustomModels.md
+[copy_custom_models]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.4/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample7_CopyCustomModel.md
+[composed_model]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_3.1.0-beta.4/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample8_ModelCompose.md
 
 [azure_cli]: https://docs.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
