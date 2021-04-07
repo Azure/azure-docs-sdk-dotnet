@@ -1,17 +1,17 @@
 ---
 title: Azure Core AMQP shared client library for .NET
-keywords: Azure, .net, SDK, API, Azure.Core.Amqp, 
+keywords: Azure, dotnet, SDK, API, Azure.Core.Amqp, core
 author: maggiepint
 ms.author: magpint
-ms.date: 11/05/2020
+ms.date: 04/06/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.devlang: .net
-ms.service: 
+ms.devlang: dotnet
+ms.service: core
 ---
 
-# Azure Core AMQP shared client library for .NET - Version 1.0.0-beta.1 
+# Azure Core AMQP shared client library for .NET - Version 1.1.0-beta.1 
 
 
 Azure.Core.Amqp contains AMQP primitives. 
