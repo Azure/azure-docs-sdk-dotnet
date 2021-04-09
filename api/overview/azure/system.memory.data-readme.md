@@ -1,13 +1,13 @@
 ---
 title: 
-keywords: Azure, .net, SDK, API, System.Memory.Data, core
+keywords: Azure, dotnet, SDK, API, System.Memory.Data, core
 author: maggiepint
 ms.author: magpint
-ms.date: 11/16/2020
+ms.date: 04/08/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.devlang: .net
+ms.devlang: dotnet
 ms.service: core
 ---
 

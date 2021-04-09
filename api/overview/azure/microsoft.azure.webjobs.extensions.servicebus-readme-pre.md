@@ -3,7 +3,7 @@ title: Azure WebJobs Service Bus client library for .NET
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebJobs.Extensions.ServiceBus, webjobs
 author: maggiepint
 ms.author: magpint
-ms.date: 03/24/2021
+ms.date: 04/09/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: webjobs
 ---
 
-# Azure WebJobs Service Bus client library for .NET - Version 5.0.0-beta.1 
+# Azure WebJobs Service Bus client library for .NET - Version 5.0.0-beta.2 
 
 
 This extension provides functionality for accessing Azure Service Bus from an Azure Function.
@@ -54,6 +54,25 @@ For local development, use the `local.settings.json` file to store the connectio
 ```
 
 When deployed, use the [application settings](https://docs.microsoft.com/azure/azure-functions/functions-how-to-use-azure-function-app-settings) to set the connection string.
+
+#### Managed identity authentication
+
+If your environment has [managed identity](https://docs.microsoft.com/azure/app-service/overview-managed-identity?tabs=dotnet) enabled you can use it to authenticate the Service Bus extension.
+To use managed identity provide the `<connection_name>__fullyQualifiedNamespace` configuration setting.
+
+```json
+{
+  "Values": {
+    "<connection_name>__fullyQualifiedNamespace": "<service_bus_namespace>.servicebus.windows.net"
+  }
+}
+```
+
+Or in the case of deployed app set the same setting in [application settings](https://docs.microsoft.com/azure/azure-functions/functions-how-to-use-azure-function-app-settings):
+
+```
+<connection_name>__fullyQualifiedNamespace=<service_bus_namespace>.servicebus.windows.net
+```
 
 
 ## Key concepts
@@ -222,12 +241,12 @@ additional questions or comments.
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fservicebus%2FMicrosoft.Azure.WebJobs.Extensions.ServiceBus%2FREADME.png)
 
 <!-- LINKS -->
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.ServiceBus_5.0.0-beta.1/sdk/servicebus/Microsoft.Azure.WebJobs.Extensions.ServiceBus/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.ServiceBus_5.0.0-beta.2/sdk/servicebus/Microsoft.Azure.WebJobs.Extensions.ServiceBus/src
 [package]: https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.ServiceBus/
 [docs]: https://docs.microsoft.com/dotnet/api/Microsoft.Azure.WebJobs.Extensions.ServiceBus
 [nuget]: https://www.nuget.org/
 
-[contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.ServiceBus_5.0.0-beta.1/CONTRIBUTING.md
+[contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.ServiceBus_5.0.0-beta.2/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
