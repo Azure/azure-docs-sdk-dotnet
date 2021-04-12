@@ -30,6 +30,7 @@
     <AssemblyVersion>1.8.0.0</AssemblyVersion>
     <AssemblyVersion>1.8.1.0</AssemblyVersion>
     <AssemblyVersion>1.8.2.0</AssemblyVersion>
+    <AssemblyVersion>1.9.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -75,6 +76,7 @@
         <AssemblyVersion>1.8.0.0</AssemblyVersion>
         <AssemblyVersion>1.8.1.0</AssemblyVersion>
         <AssemblyVersion>1.8.2.0</AssemblyVersion>
+        <AssemblyVersion>1.9.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Security.Claims.ClaimsPrincipal</ReturnType>
@@ -98,13 +100,15 @@
           <code>
              private async Task GetChangedMessagesAsync(IEnumerable&lt;Notification&gt; notifications)
              {
+              HttpContext.User = ClaimsPrincipalExtension.FromTenantIdAndObjectId(subscription.TenantId,
+                                                                                  subscription.UserId);
               foreach (var notification in notifications)
               {
                SubscriptionStore subscription =
                        subscriptionStore.GetSubscriptionInfo(notification.SubscriptionId);
-              HttpContext.User = ClaimsPrincipalExtension.FromTenantIdAndObjectId(subscription.TenantId,
-                                                                                  subscription.UserId);
               string accessToken = await tokenAcquisition.GetAccessTokenForUserAsync(scopes);
+              ...}
+              }
              </code>
         </example>
       </Docs>
