@@ -2,9 +2,8 @@
 title: Azure Libraries for .NET 
 description: A listing of all of the .NET SDK for Azure libraries and NuGet packages.
 keywords: Azure .NET, SDK, Azure .NET API Reference, Azure .NET class library
-author: camsoper
-manager: douge
-ms.author: casoper
+author: scottaddie
+ms.author: scaddie
 ms.date: 03/06/2016
 ms.topic: managed-reference
 ms.prod: azure
