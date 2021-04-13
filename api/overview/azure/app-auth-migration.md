@@ -131,6 +131,8 @@ var accessToken = await tokenProvider.GetAccessTokenAsync(ResourceId);
 ```csharp
 var tokenCredential = new DefaultAzureCredential();
 var accessToken = await tokenCredential.GetTokenAsync(
-    new TokenRequestContext(scopes: new string[] { ResourceId + "./default" }) { }
+    new TokenRequestContext(scopes: new string[] { ResourceId + "/.default" }) { }
 );
 ```
+
+Note: More information on the `.default` scope can be found [here](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-permissions-and-consent#the-default-scope).
