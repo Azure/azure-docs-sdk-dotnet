@@ -1,17 +1,17 @@
 ---
 title: Azure Cognitive Services Anomaly Detector client library for .NET
-keywords: Azure, .net, SDK, API, Azure.AI.AnomalyDetector, anomalydetector
+keywords: Azure, dotnet, SDK, API, Azure.AI.AnomalyDetector, anomalydetector
 author: maggiepint
 ms.author: magpint
-ms.date: 09/03/2020
+ms.date: 04/16/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.devlang: .net
+ms.devlang: dotnet
 ms.service: anomalydetector
 ---
 
-# Azure Cognitive Services Anomaly Detector client library for .NET - Version 3.0.0-preview.2 
+# Azure Cognitive Services Anomaly Detector client library for .NET - Version 3.0.0-preview.3 
 
 
 Microsoft Azure Cognitive Services Anomaly Detector API enables you to monitor and detect abnormalities in your time series data with machine learning. 
@@ -24,7 +24,7 @@ Microsoft Azure Cognitive Services Anomaly Detector API enables you to monitor a
 Install the Azure Anomaly Detector client library for .NET with [NuGet][nuget]:
 
 ```PowerShell
-dotnet add package Azure.AI.AnomalyDetector --version 3.0.0-preview.2
+dotnet add package Azure.AI.AnomalyDetector --version 3.0.0-preview.3
 ```
 
 ### Prerequisites
@@ -49,7 +49,7 @@ az cognitiveservices account keys list --resource-group <your-resource-group-nam
 #### Create AnomalyDetectorClient with AzureKeyCredential
 Once you have the value for the API key, create an `AzureKeyCredential`.  With the endpoint and key credential, you can create the [`AnomalyDetectorClient`][anomaly_detector_client_class]:
 
-```C#
+```
 string endpoint = "<endpoint>";
 string apiKey = "<apiKey>";
 var credential = new AzureKeyCredential(apiKey);
@@ -70,10 +70,26 @@ You will also need to [register a new AAD application][register_aad_app] and [gr
 
 Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_CLIENT_SECRET.
 
-```C#
+```
 string endpoint = "<endpoint>";
 var client = new AnomalyDetectorClient(new Uri(endpoint), new DefaultAzureCredential());
 ```
+
+## Key concepts
+
+### Thread safety
+We guarantee that all client instance methods are thread-safe and independent of each other ([guideline](https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-service-methods-thread-safety)). This ensures that the recommendation of reusing client instances is always safe, even across threads.
+
+### Additional concepts
+<!-- CLIENT COMMON BAR -->
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.AnomalyDetector_3.0.0-preview.3/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.AnomalyDetector_3.0.0-preview.3/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.AnomalyDetector_3.0.0-preview.3/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.AnomalyDetector_3.0.0-preview.3/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.AnomalyDetector_3.0.0-preview.3/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.AnomalyDetector_3.0.0-preview.3/sdk/core/Azure.Core/README.md#mocking) |
+[Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
+<!-- CLIENT COMMON BAR -->
 
 ## Troubleshooting
 
@@ -98,20 +114,20 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 
 
 <!-- LINKS -->
-[anomalydetector_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/anomalydetector/Azure.AI.AnomalyDetector/src
-[anomalydetector_docs]: https://docs.microsoft.com/en-us/azure/cognitive-services/anomaly-detector/
+[anomalydetector_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.AnomalyDetector_3.0.0-preview.3/sdk/anomalydetector/Azure.AI.AnomalyDetector/src
+[anomalydetector_docs]: https://docs.microsoft.com/azure/cognitive-services/anomaly-detector/
 [anomalydetector_refdocs]: https://azure.github.io/azure-sdk-for-net/anomalydetector.html
 [anomalydetector_nuget_package]: https://www.nuget.org/packages/Azure.AI.AnomalyDetector
 
-[anomaly_detector_client_class]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/anomalydetector/Azure.AI.AnomalyDetector/src/AnomalyDetectorClient.cs
-[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/identity/Azure.Identity
+[anomaly_detector_client_class]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.AnomalyDetector_3.0.0-preview.3/sdk/anomalydetector/Azure.AI.AnomalyDetector/src/Generated/AnomalyDetectorClient.cs
+[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.AnomalyDetector_3.0.0-preview.3/sdk/identity/Azure.Identity
 [register_aad_app]: https://docs.microsoft.com/azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
 [aad_grant_access]: https://docs.microsoft.com/azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
 [custom_subdomain]: https://docs.microsoft.com/azure/cognitive-services/authentication#create-a-resource-with-a-custom-subdomain
-[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/identity/Azure.Identity/README.md
+[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.AnomalyDetector_3.0.0-preview.3/sdk/identity/Azure.Identity/README.md
 [cognitive_resource_cli]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account-cli
 
-[logging]: https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/core/Azure.Core/samples/Diagnostics.md
+[logging]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.AnomalyDetector_3.0.0-preview.3/sdk/core/Azure.Core/samples/Diagnostics.md
 
 
 [azure_cli]: https://docs.microsoft.com/cli/azure
