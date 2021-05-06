@@ -31,7 +31,7 @@ dotnet add package Microsoft.Azure.Management.RecoveryServices.Backup
 ```
 
 > [!div class="nextstepaction"]
-> [Explore the management APIs](/dotnet/api/overview/azure/recoveryservices/management)
+> [Explore the management APIs](/dotnet/api/overview/azure/recoveryservicesandbackup/management)
 
 ## Code Example
 
