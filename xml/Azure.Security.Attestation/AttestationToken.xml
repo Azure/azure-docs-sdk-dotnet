@@ -32,7 +32,77 @@
       <Parameters />
       <Docs>
         <summary>
-            Protected token for mocking.
+            Creates a new attestation token, used for mocking.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public AttestationToken (Azure.Security.Attestation.AttestationTokenSigningKey signingKey);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Azure.Security.Attestation.AttestationTokenSigningKey signingKey) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Security.Attestation.AttestationToken.#ctor(Azure.Security.Attestation.AttestationTokenSigningKey)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (signingKey As AttestationTokenSigningKey)" />
+      <MemberSignature Language="F#" Value="new Azure.Security.Attestation.AttestationToken : Azure.Security.Attestation.AttestationTokenSigningKey -&gt; Azure.Security.Attestation.AttestationToken" Usage="new Azure.Security.Attestation.AttestationToken signingKey" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Security.Attestation</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="signingKey" Type="Azure.Security.Attestation.AttestationTokenSigningKey" />
+      </Parameters>
+      <Docs>
+        <param name="signingKey">
+          <see cref="T:Azure.Security.Attestation.AttestationTokenSigningKey" /> which will be used to sign the generated token.</param>
+        <summary>
+            Creates a new unsecured attestation token with an empty body. Used for the <see cref="M:Azure.Security.Attestation.AttestationAdministrationClient.ResetPolicy(Azure.Security.Attestation.AttestationType,Azure.Security.Attestation.AttestationTokenSigningKey,System.Threading.CancellationToken)" /> API.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public AttestationToken (BinaryData body);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.BinaryData body) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Security.Attestation.AttestationToken.#ctor(System.BinaryData)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (body As BinaryData)" />
+      <MemberSignature Language="F#" Value="new Azure.Security.Attestation.AttestationToken : BinaryData -&gt; Azure.Security.Attestation.AttestationToken" Usage="new Azure.Security.Attestation.AttestationToken body" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Security.Attestation</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="body" Type="System.BinaryData" />
+      </Parameters>
+      <Docs>
+        <param name="body">Body of the token to be generated, serialized as a byte array.</param>
+        <summary>
+            Initializes a new instance of the <see cref="T:Azure.Security.Attestation.AttestationToken" /> class as an unsecured JSON Web Token, with <paramref name="body" /> as the body of the token.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public AttestationToken (BinaryData body, Azure.Security.Attestation.AttestationTokenSigningKey signingKey);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.BinaryData body, class Azure.Security.Attestation.AttestationTokenSigningKey signingKey) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Security.Attestation.AttestationToken.#ctor(System.BinaryData,Azure.Security.Attestation.AttestationTokenSigningKey)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (body As BinaryData, signingKey As AttestationTokenSigningKey)" />
+      <MemberSignature Language="F#" Value="new Azure.Security.Attestation.AttestationToken : BinaryData * Azure.Security.Attestation.AttestationTokenSigningKey -&gt; Azure.Security.Attestation.AttestationToken" Usage="new Azure.Security.Attestation.AttestationToken (body, signingKey)" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Security.Attestation</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="body" Type="System.BinaryData" />
+        <Parameter Name="signingKey" Type="Azure.Security.Attestation.AttestationTokenSigningKey" />
+      </Parameters>
+      <Docs>
+        <param name="body">The body of the generated token, serialized as a byte array.</param>
+        <param name="signingKey">
+          <see cref="T:Azure.Security.Attestation.AttestationTokenSigningKey" /> which will be used to sign the generated token.</param>
+        <summary>
+            Creates a new attestation token based on the supplied body signed with the specified signing key.
             </summary>
         <remarks>To be added.</remarks>
       </Docs>
@@ -78,7 +148,7 @@
         <summary>
              Returns the thumbprint of the X.509 certificate which was used to verify the attestation token.
             
-             Null until the <see cref="M:Azure.Security.Attestation.AttestationToken.ValidateToken(System.Collections.Generic.IReadOnlyList{Azure.Security.Attestation.AttestationSigner},System.Func{Azure.Security.Attestation.AttestationToken,Azure.Security.Attestation.AttestationSigner,System.Boolean})" /> method has been called.
+             Null until the <see cref="M:Azure.Security.Attestation.AttestationToken.ValidateToken(Azure.Security.Attestation.AttestationTokenValidationOptions,System.Collections.Generic.IReadOnlyList{Azure.Security.Attestation.AttestationSigner},System.Threading.CancellationToken)" /> method has been called.
              </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -122,25 +192,51 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Json Web TOken Header "Critical". See https://www.rfc-editor.org/rfc/rfc7515.html#section-4.1.11 for details.
+            JSON Web Token Header "Critical". <seealso href="https://www.rfc-editor.org/rfc/rfc7515.html#section-4.1.11">RFC 7515 section 4.1.11</seealso> for details.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
+    <Member MemberName="Deserialize">
+      <MemberSignature Language="C#" Value="public static Azure.Security.Attestation.AttestationToken Deserialize (string token);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Azure.Security.Attestation.AttestationToken Deserialize(string token) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Security.Attestation.AttestationToken.Deserialize(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function Deserialize (token As String) As AttestationToken" />
+      <MemberSignature Language="F#" Value="static member Deserialize : string -&gt; Azure.Security.Attestation.AttestationToken" Usage="Azure.Security.Attestation.AttestationToken.Deserialize token" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Security.Attestation</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Security.Attestation.AttestationToken</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="token" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="token">string JWT to Deserialize.</param>
+        <summary>
+            Creates a new instance of the <see cref="T:Azure.Security.Attestation.AttestationToken" /> class based on a specified JSON Web Token.
+            </summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="ExpirationTime">
-      <MemberSignature Language="C#" Value="public DateTimeOffset ExpirationTime { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.DateTimeOffset ExpirationTime" />
+      <MemberSignature Language="C#" Value="public DateTimeOffset? ExpirationTime { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;valuetype System.DateTimeOffset&gt; ExpirationTime" />
       <MemberSignature Language="DocId" Value="P:Azure.Security.Attestation.AttestationToken.ExpirationTime" />
-      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ExpirationTime As DateTimeOffset" />
-      <MemberSignature Language="F#" Value="member this.ExpirationTime : DateTimeOffset" Usage="Azure.Security.Attestation.AttestationToken.ExpirationTime" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ExpirationTime As Nullable(Of DateTimeOffset)" />
+      <MemberSignature Language="F#" Value="member this.ExpirationTime : Nullable&lt;DateTimeOffset&gt;" Usage="Azure.Security.Attestation.AttestationToken.ExpirationTime" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Security.Attestation</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>System.DateTimeOffset</ReturnType>
+        <ReturnType>System.Nullable&lt;System.DateTimeOffset&gt;</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
@@ -151,11 +247,11 @@
       </Docs>
     </Member>
     <Member MemberName="GetBody&lt;T&gt;">
-      <MemberSignature Language="C#" Value="public T GetBody&lt;T&gt; () where T : class;" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance !!T GetBody&lt;class T&gt;() cil managed" />
+      <MemberSignature Language="C#" Value="public virtual T GetBody&lt;T&gt; () where T : class;" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance !!T GetBody&lt;class T&gt;() cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Security.Attestation.AttestationToken.GetBody``1" />
-      <MemberSignature Language="VB.NET" Value="Public Function GetBody(Of T As Class) () As T" />
-      <MemberSignature Language="F#" Value="member this.GetBody : unit -&gt; 'T (requires 'T : null)" Usage="attestationToken.GetBody " />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetBody(Of T As Class) () As T" />
+      <MemberSignature Language="F#" Value="abstract member GetBody : unit -&gt; 'T (requires 'T : null)&#xA;override this.GetBody : unit -&gt; 'T (requires 'T : null)" Usage="attestationToken.GetBody " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Security.Attestation</AssemblyName>
@@ -177,27 +273,49 @@
         <summary>
             Retrieves the body of the AttestationToken as the specified type.
             </summary>
-        <returns />
+        <returns>Returns the body of the attestation token.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="IssuedAtTime">
-      <MemberSignature Language="C#" Value="public DateTimeOffset IssuedAtTime { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.DateTimeOffset IssuedAtTime" />
+      <MemberSignature Language="C#" Value="public DateTimeOffset? IssuedAtTime { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;valuetype System.DateTimeOffset&gt; IssuedAtTime" />
       <MemberSignature Language="DocId" Value="P:Azure.Security.Attestation.AttestationToken.IssuedAtTime" />
-      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IssuedAtTime As DateTimeOffset" />
-      <MemberSignature Language="F#" Value="member this.IssuedAtTime : DateTimeOffset" Usage="Azure.Security.Attestation.AttestationToken.IssuedAtTime" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IssuedAtTime As Nullable(Of DateTimeOffset)" />
+      <MemberSignature Language="F#" Value="member this.IssuedAtTime : Nullable&lt;DateTimeOffset&gt;" Usage="Azure.Security.Attestation.AttestationToken.IssuedAtTime" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Security.Attestation</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>System.DateTimeOffset</ReturnType>
+        <ReturnType>System.Nullable&lt;System.DateTimeOffset&gt;</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
             Time at which this token was issued.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Issuer">
+      <MemberSignature Language="C#" Value="public string Issuer { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Issuer" />
+      <MemberSignature Language="DocId" Value="P:Azure.Security.Attestation.AttestationToken.Issuer" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Issuer As String" />
+      <MemberSignature Language="F#" Value="member this.Issuer : string" Usage="Azure.Security.Attestation.AttestationToken.Issuer" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Security.Attestation</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Json Web Token Body Issuer. See https://www.rfc-editor.org/rfc/rfc7519.html#section-4.1.1 for details.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -248,18 +366,18 @@
       </Docs>
     </Member>
     <Member MemberName="NotBeforeTime">
-      <MemberSignature Language="C#" Value="public DateTimeOffset NotBeforeTime { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.DateTimeOffset NotBeforeTime" />
+      <MemberSignature Language="C#" Value="public DateTimeOffset? NotBeforeTime { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;valuetype System.DateTimeOffset&gt; NotBeforeTime" />
       <MemberSignature Language="DocId" Value="P:Azure.Security.Attestation.AttestationToken.NotBeforeTime" />
-      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property NotBeforeTime As DateTimeOffset" />
-      <MemberSignature Language="F#" Value="member this.NotBeforeTime : DateTimeOffset" Usage="Azure.Security.Attestation.AttestationToken.NotBeforeTime" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property NotBeforeTime As Nullable(Of DateTimeOffset)" />
+      <MemberSignature Language="F#" Value="member this.NotBeforeTime : Nullable&lt;DateTimeOffset&gt;" Usage="Azure.Security.Attestation.AttestationToken.NotBeforeTime" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Security.Attestation</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>System.DateTimeOffset</ReturnType>
+        <ReturnType>System.Nullable&lt;System.DateTimeOffset&gt;</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
@@ -269,13 +387,13 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="TokenBody">
-      <MemberSignature Language="C#" Value="public string TokenBody { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance string TokenBody" />
-      <MemberSignature Language="DocId" Value="P:Azure.Security.Attestation.AttestationToken.TokenBody" />
-      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property TokenBody As String" />
-      <MemberSignature Language="F#" Value="member this.TokenBody : string" Usage="Azure.Security.Attestation.AttestationToken.TokenBody" />
-      <MemberType>Property</MemberType>
+    <Member MemberName="Serialize">
+      <MemberSignature Language="C#" Value="public string Serialize ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance string Serialize() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Security.Attestation.AttestationToken.Serialize" />
+      <MemberSignature Language="VB.NET" Value="Public Function Serialize () As String" />
+      <MemberSignature Language="F#" Value="member this.Serialize : unit -&gt; string" Usage="attestationToken.Serialize " />
+      <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Security.Attestation</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
@@ -283,10 +401,35 @@
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
+      <Parameters />
       <Docs>
         <summary>
-            Represents the body of the token encoded as a string.
+            Serializes the attestation token to a JSON Web Token
             </summary>
+        <returns>The value of the AttestationToken as a JSON Web Token.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SigningCertificate">
+      <MemberSignature Language="C#" Value="public Azure.Security.Attestation.AttestationSigner SigningCertificate { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Azure.Security.Attestation.AttestationSigner SigningCertificate" />
+      <MemberSignature Language="DocId" Value="P:Azure.Security.Attestation.AttestationToken.SigningCertificate" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property SigningCertificate As AttestationSigner" />
+      <MemberSignature Language="F#" Value="member this.SigningCertificate : Azure.Security.Attestation.AttestationSigner" Usage="Azure.Security.Attestation.AttestationToken.SigningCertificate" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Security.Attestation</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Security.Attestation.AttestationSigner</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+             Returns the X.509 certificate which was used to verify the attestation token.
+            
+             Null until the <see cref="M:Azure.Security.Attestation.AttestationToken.ValidateToken(Azure.Security.Attestation.AttestationTokenValidationOptions,System.Collections.Generic.IReadOnlyList{Azure.Security.Attestation.AttestationSigner},System.Threading.CancellationToken)" /> method has been called.
+             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -308,28 +451,6 @@
       <Docs>
         <summary>
             Decoded body for the attestation token. See https://tools.ietf.org/html/rfc7515 for more details.
-            </summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="TokenHeader">
-      <MemberSignature Language="C#" Value="public string TokenHeader { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance string TokenHeader" />
-      <MemberSignature Language="DocId" Value="P:Azure.Security.Attestation.AttestationToken.TokenHeader" />
-      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property TokenHeader As String" />
-      <MemberSignature Language="F#" Value="member this.TokenHeader : string" Usage="Azure.Security.Attestation.AttestationToken.TokenHeader" />
-      <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Azure.Security.Attestation</AssemblyName>
-        <AssemblyVersion>1.0.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.String</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>
-            Represents the body of the token encoded as a string.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -379,28 +500,6 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="ToString">
-      <MemberSignature Language="C#" Value="public override string ToString ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string ToString() cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Security.Attestation.AttestationToken.ToString" />
-      <MemberSignature Language="VB.NET" Value="Public Overrides Function ToString () As String" />
-      <MemberSignature Language="F#" Value="override this.ToString : unit -&gt; string" Usage="attestationToken.ToString " />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Azure.Security.Attestation</AssemblyName>
-        <AssemblyVersion>1.0.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.String</ReturnType>
-      </ReturnValue>
-      <Parameters />
-      <Docs>
-        <summary>Returns a string that represents the current object.</summary>
-        <returns>A string that represents the current object.</returns>
-        <remarks>To be added.</remarks>
-        <inheritdoc />
-      </Docs>
-    </Member>
     <Member MemberName="Type">
       <MemberSignature Language="C#" Value="public string Type { get; }" />
       <MemberSignature Language="ILAsm" Value=".property instance string Type" />
@@ -426,11 +525,11 @@
       </Docs>
     </Member>
     <Member MemberName="ValidateToken">
-      <MemberSignature Language="C#" Value="public virtual bool ValidateToken (System.Collections.Generic.IReadOnlyList&lt;Azure.Security.Attestation.AttestationSigner&gt; attestationSigningCertificates, Func&lt;Azure.Security.Attestation.AttestationToken,Azure.Security.Attestation.AttestationSigner,bool&gt; validationCallback = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool ValidateToken(class System.Collections.Generic.IReadOnlyList`1&lt;class Azure.Security.Attestation.AttestationSigner&gt; attestationSigningCertificates, class System.Func`3&lt;class Azure.Security.Attestation.AttestationToken, class Azure.Security.Attestation.AttestationSigner, bool&gt; validationCallback) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Security.Attestation.AttestationToken.ValidateToken(System.Collections.Generic.IReadOnlyList{Azure.Security.Attestation.AttestationSigner},System.Func{Azure.Security.Attestation.AttestationToken,Azure.Security.Attestation.AttestationSigner,System.Boolean})" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function ValidateToken (attestationSigningCertificates As IReadOnlyList(Of AttestationSigner), Optional validationCallback As Func(Of AttestationToken, AttestationSigner, Boolean) = Nothing) As Boolean" />
-      <MemberSignature Language="F#" Value="abstract member ValidateToken : System.Collections.Generic.IReadOnlyList&lt;Azure.Security.Attestation.AttestationSigner&gt; * Func&lt;Azure.Security.Attestation.AttestationToken, Azure.Security.Attestation.AttestationSigner, bool&gt; -&gt; bool&#xA;override this.ValidateToken : System.Collections.Generic.IReadOnlyList&lt;Azure.Security.Attestation.AttestationSigner&gt; * Func&lt;Azure.Security.Attestation.AttestationToken, Azure.Security.Attestation.AttestationSigner, bool&gt; -&gt; bool" Usage="attestationToken.ValidateToken (attestationSigningCertificates, validationCallback)" />
+      <MemberSignature Language="C#" Value="public virtual bool ValidateToken (Azure.Security.Attestation.AttestationTokenValidationOptions options, System.Collections.Generic.IReadOnlyList&lt;Azure.Security.Attestation.AttestationSigner&gt; attestationSigningCertificates, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool ValidateToken(class Azure.Security.Attestation.AttestationTokenValidationOptions options, class System.Collections.Generic.IReadOnlyList`1&lt;class Azure.Security.Attestation.AttestationSigner&gt; attestationSigningCertificates, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Security.Attestation.AttestationToken.ValidateToken(Azure.Security.Attestation.AttestationTokenValidationOptions,System.Collections.Generic.IReadOnlyList{Azure.Security.Attestation.AttestationSigner},System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function ValidateToken (options As AttestationTokenValidationOptions, attestationSigningCertificates As IReadOnlyList(Of AttestationSigner), Optional cancellationToken As CancellationToken = Nothing) As Boolean" />
+      <MemberSignature Language="F#" Value="abstract member ValidateToken : Azure.Security.Attestation.AttestationTokenValidationOptions * System.Collections.Generic.IReadOnlyList&lt;Azure.Security.Attestation.AttestationSigner&gt; * System.Threading.CancellationToken -&gt; bool&#xA;override this.ValidateToken : Azure.Security.Attestation.AttestationTokenValidationOptions * System.Collections.Generic.IReadOnlyList&lt;Azure.Security.Attestation.AttestationSigner&gt; * System.Threading.CancellationToken -&gt; bool" Usage="attestationToken.ValidateToken (options, attestationSigningCertificates, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Security.Attestation</AssemblyName>
@@ -440,17 +539,61 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Parameters>
+        <Parameter Name="options" Type="Azure.Security.Attestation.AttestationTokenValidationOptions" />
         <Parameter Name="attestationSigningCertificates" Type="System.Collections.Generic.IReadOnlyList&lt;Azure.Security.Attestation.AttestationSigner&gt;" />
-        <Parameter Name="validationCallback" Type="System.Func&lt;Azure.Security.Attestation.AttestationToken,Azure.Security.Attestation.AttestationSigner,System.Boolean&gt;" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
+        <param name="options">Options used while validating the attestation token.</param>
         <param name="attestationSigningCertificates">Signing Certificates used to validate the token.</param>
-        <param name="validationCallback">User provided callback which allows the customer to validate the token.</param>
+        <param name="cancellationToken">Token used to cancel this operation if necessary.</param>
         <summary>
             Validate a JSON Web Token returned by the MAA.
+            <para />
+            If the caller provides a set of signers, than that set of signers will be used as the complete set of candidates for signing.
+            If the caller does not provide a set of signers, then the <see cref="M:Azure.Security.Attestation.AttestationToken.ValidateToken(Azure.Security.Attestation.AttestationTokenValidationOptions,System.Collections.Generic.IReadOnlyList{Azure.Security.Attestation.AttestationSigner},System.Threading.CancellationToken)" />
+            API will a set of callers derived from the contents of the attestation token.
             </summary>
-        <returns />
+        <returns>true if the token was valid, false otherwise.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">Thrown if the signing certificates provided are invalid.</exception>
+        <exception cref="T:System.Exception">Thrown if validation fails.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="ValidateTokenAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;bool&gt; ValidateTokenAsync (Azure.Security.Attestation.AttestationTokenValidationOptions options, System.Collections.Generic.IReadOnlyList&lt;Azure.Security.Attestation.AttestationSigner&gt; attestationSigningCertificates, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;bool&gt; ValidateTokenAsync(class Azure.Security.Attestation.AttestationTokenValidationOptions options, class System.Collections.Generic.IReadOnlyList`1&lt;class Azure.Security.Attestation.AttestationSigner&gt; attestationSigningCertificates, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Security.Attestation.AttestationToken.ValidateTokenAsync(Azure.Security.Attestation.AttestationTokenValidationOptions,System.Collections.Generic.IReadOnlyList{Azure.Security.Attestation.AttestationSigner},System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function ValidateTokenAsync (options As AttestationTokenValidationOptions, attestationSigningCertificates As IReadOnlyList(Of AttestationSigner), Optional cancellationToken As CancellationToken = Nothing) As Task(Of Boolean)" />
+      <MemberSignature Language="F#" Value="abstract member ValidateTokenAsync : Azure.Security.Attestation.AttestationTokenValidationOptions * System.Collections.Generic.IReadOnlyList&lt;Azure.Security.Attestation.AttestationSigner&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;bool&gt;&#xA;override this.ValidateTokenAsync : Azure.Security.Attestation.AttestationTokenValidationOptions * System.Collections.Generic.IReadOnlyList&lt;Azure.Security.Attestation.AttestationSigner&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;bool&gt;" Usage="attestationToken.ValidateTokenAsync (options, attestationSigningCertificates, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Security.Attestation</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;System.Boolean&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="options" Type="Azure.Security.Attestation.AttestationTokenValidationOptions" />
+        <Parameter Name="attestationSigningCertificates" Type="System.Collections.Generic.IReadOnlyList&lt;Azure.Security.Attestation.AttestationSigner&gt;" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="options">Options used while validating the attestation token.</param>
+        <param name="attestationSigningCertificates">Signing Certificates used to validate the token.</param>
+        <param name="cancellationToken">Token used to cancel this operation if necessary.</param>
+        <summary>
+            Validate a JSON Web Token returned by the MAA.
+            <para />
+            If the caller provides a set of signers, than that set of signers will be used as the complete set of candidates for signing.
+            If the caller does not provide a set of signers, then the <see cref="M:Azure.Security.Attestation.AttestationToken.ValidateTokenAsync(Azure.Security.Attestation.AttestationTokenValidationOptions,System.Collections.Generic.IReadOnlyList{Azure.Security.Attestation.AttestationSigner},System.Threading.CancellationToken)" />
+            API will a set of callers derived from the contents of the attestation token.
+            </summary>
+        <returns>true if the token was valid, false otherwise.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">Thrown if the signing certificates provided are invalid.</exception>
+        <exception cref="T:System.Exception">Thrown if validation fails.</exception>
       </Docs>
     </Member>
     <Member MemberName="X509CertificateChain">
@@ -469,7 +612,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-            An array of X.509Certificates which represent a certificate chain used to sign the token. See https://www.rfc-editor.org/rfc/rfc7515.html#section-4.1.6 for details.
+            An array of <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> which represent a certificate chain used to sign the token.  <seealso href="https://www.rfc-editor.org/rfc/rfc7515.html#section-4.1.6">RFC 7515 section 4.1.6</seealso> for details.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -491,7 +634,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-            The "thumbprint" of the certificate used to sign the request generated using the SHA256 algorithm. See https://www.rfc-editor.org/rfc/rfc7515.html#section-4.1.8 for details.
+            The "thumbprint" of the certificate used to sign the request generated using the SHA256 algorithm. <seealso href="https://www.rfc-editor.org/rfc/rfc7515.html#section-4.1.8">RFC 7515 section 4.1.8</seealso> for details.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -513,7 +656,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-            The "thumbprint" of the certificate used to sign the request. See https://www.rfc-editor.org/rfc/rfc7515.html#section-4.1.7 for details.
+            The "thumbprint" of the certificate used to sign the request. <seealso href="https://www.rfc-editor.org/rfc/rfc7515.html#section-4.1.7">RFC 7515 section 4.1.7</seealso> for details.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
