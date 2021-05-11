@@ -91,11 +91,9 @@ client.DataFactories.CreateOrUpdate(resourceGroupName,
 ```
 
 > [!div class="nextstepaction"]
-> [Explore the management APIs](/dotnet/api/overview/azure/datafactories/management)
+> [Explore the management APIs](/dotnet/api/overview/azure/datafactory/management)
 
 ## Samples
-
-* [MyDriving - An Azure IOT and Mobile Sample Application](https://azure.microsoft.com/resources/samples/mydriving/) that uses Data Factory to drive insights.
 
 Explore more [sample .NET code](https://azure.microsoft.com/resources/samples/?platform=dotnet) you can use in your apps.
 
