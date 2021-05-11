@@ -3,7 +3,7 @@ title: Azure Synapse Analytics Managed Private Endpoints client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Analytics.Synapse.ManagedPrivateEndpoints, synapseanalytics
 author: maggiepint
 ms.author: magpint
-ms.date: 02/10/2021
+ms.date: 05/11/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: synapseanalytics
 ---
 
-# Azure Synapse Analytics Managed Private Endpoints client library for .NET - Version 1.0.0-beta.2 
+# Azure Synapse Analytics Managed Private Endpoints client library for .NET - Version 1.0.0-beta.3 
 
 
 This directory contains the open source subset of the .NET SDK. For documentation of the complete Azure SDK, please see the [Microsoft Azure .NET Developer Center](https://azure.microsoft.com/develop/net/).
@@ -53,10 +53,10 @@ az synapse workspace create \
 ```
 
 ### Authenticate the client
-In order to interact with the Azure Synapse Analytics service, you'll need to create an instance of the [ManagedPrivateEndpointClient](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.ManagedPrivateEndpoints_1.0.0-beta.2/sdk/synapse/Azure.Analytics.Synapse.ManagedPrivateEndpoints/src/Customization/ManagedPrivateEndpointsClient.cs) class. You need a **workspace endpoint**, which you may see as "Development endpoint" in the portal,
+In order to interact with the Azure Synapse Analytics service, you'll need to create an instance of the [ManagedPrivateEndpointClient](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.ManagedPrivateEndpoints_1.0.0-beta.3/sdk/synapse/Azure.Analytics.Synapse.ManagedPrivateEndpoints/src/Generated/ManagedPrivateEndpointsClient.cs) class. You need a **workspace endpoint**, which you may see as "Development endpoint" in the portal,
  and **client secret credentials (client id, client secret, tenant id)** to instantiate a client object.
 
-Client secret credential authentication is being used in this getting started section but you can find more ways to authenticate with [Azure identity](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Analytics.Synapse.ManagedPrivateEndpoints_1.0.0-beta.2/sdk/identity/Azure.Identity). To use the [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Analytics.Synapse.ManagedPrivateEndpoints_1.0.0-beta.2/sdk/identity/Azure.Identity#defaultazurecredential) provider shown below,
+Client secret credential authentication is being used in this getting started section but you can find more ways to authenticate with [Azure identity](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Analytics.Synapse.ManagedPrivateEndpoints_1.0.0-beta.3/sdk/identity/Azure.Identity). To use the [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Analytics.Synapse.ManagedPrivateEndpoints_1.0.0-beta.3/sdk/identity/Azure.Identity#defaultazurecredential) provider shown below,
 or other credential providers provided with the Azure SDK, you should install the Azure.Identity package:
 
 ```PowerShell
@@ -73,12 +73,12 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.ManagedPrivateEndpoints_1.0.0-beta.2/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.ManagedPrivateEndpoints_1.0.0-beta.2/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.ManagedPrivateEndpoints_1.0.0-beta.2/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.ManagedPrivateEndpoints_1.0.0-beta.2/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.ManagedPrivateEndpoints_1.0.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.ManagedPrivateEndpoints_1.0.0-beta.2/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.ManagedPrivateEndpoints_1.0.0-beta.3/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.ManagedPrivateEndpoints_1.0.0-beta.3/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.ManagedPrivateEndpoints_1.0.0-beta.3/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.ManagedPrivateEndpoints_1.0.0-beta.3/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.ManagedPrivateEndpoints_1.0.0-beta.3/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.ManagedPrivateEndpoints_1.0.0-beta.3/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
