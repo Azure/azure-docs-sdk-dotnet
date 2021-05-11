@@ -1,17 +1,17 @@
 ---
 title: Azure Container Registry client library for .NET
-keywords: Azure, dotnet, SDK, API, Azure.Containers.ContainerRegistry, 
+keywords: Azure, dotnet, SDK, API, Azure.Containers.ContainerRegistry, containerregistry
 author: maggiepint
 ms.author: magpint
-ms.date: 04/08/2021
+ms.date: 05/11/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: 
+ms.service: containerregistry
 ---
 
-# Azure Container Registry client library for .NET - Version 1.0.0-beta.1 
+# Azure Container Registry client library for .NET - Version 1.0.0-beta.2 
 
 
 Azure Container Registry allows you to store and manage container images and artifacts in a private registry for all types of container deployments.
@@ -23,7 +23,7 @@ Use the client library for Azure Container Registry to:
 - Set read/write/delete properties on registry items
 - Delete images and artifacts, repositories and tags
 
-[Source code][source] | [Package (NuGet)]<!--[package]--> | [API reference documentation]<!--[docs]--> | [REST API documentation][rest_docs] | [Product documentation][product_docs]
+[Source code][source] | [Package (NuGet)][package] | [API reference documentation][docs] | [REST API documentation][rest_docs] | [Product documentation][product_docs]
 
 ## Getting started
 
@@ -73,12 +73,12 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Containers.ContainerRegistry_1.0.0-beta.1/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Containers.ContainerRegistry_1.0.0-beta.1/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Containers.ContainerRegistry_1.0.0-beta.1/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Containers.ContainerRegistry_1.0.0-beta.1/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Containers.ContainerRegistry_1.0.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Containers.ContainerRegistry_1.0.0-beta.1/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Containers.ContainerRegistry_1.0.0-beta.2/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Containers.ContainerRegistry_1.0.0-beta.2/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Containers.ContainerRegistry_1.0.0-beta.2/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Containers.ContainerRegistry_1.0.0-beta.2/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Containers.ContainerRegistry_1.0.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Containers.ContainerRegistry_1.0.0-beta.2/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
@@ -104,7 +104,7 @@ Uri endpoint = new Uri(Environment.GetEnvironmentVariable("REGISTRY_ENDPOINT"));
 ContainerRegistryClient client = new ContainerRegistryClient(endpoint, new DefaultAzureCredential());
 
 // Perform an operation
-Pageable<string> repositories = client.GetRepositories();
+Pageable<string> repositories = client.GetRepositoryNames();
 foreach (string repository in repositories)
 {
     Console.WriteLine(repository);
@@ -123,7 +123,7 @@ Uri endpoint = new Uri(Environment.GetEnvironmentVariable("REGISTRY_ENDPOINT"));
 ContainerRegistryClient client = new ContainerRegistryClient(endpoint, new DefaultAzureCredential());
 
 // Perform an operation
-AsyncPageable<string> repositories = client.GetRepositoriesAsync();
+AsyncPageable<string> repositories = client.GetRepositoryNamesAsync();
 await foreach (string repository in repositories)
 {
     Console.WriteLine(repository);
@@ -138,13 +138,14 @@ All container registry service operations will throw a
 ```C# Snippet:ContainerRegistry_Tests_Samples_HandleErrors
 Uri endpoint = new Uri(Environment.GetEnvironmentVariable("REGISTRY_ENDPOINT"));
 
-// Create an invalid ContainerRepositoryClient
+// Create a ContainerRepository class for an invalid repository
 string fakeRepositoryName = "doesnotexist";
-ContainerRepositoryClient client = new ContainerRepositoryClient(endpoint, fakeRepositoryName, new DefaultAzureCredential());
+ContainerRegistryClient client = new ContainerRegistryClient(endpoint, new DefaultAzureCredential());
+ContainerRepository repository = client.GetRepository(fakeRepositoryName);
 
 try
 {
-    client.GetProperties();
+    repository.GetProperties();
 }
 catch (RequestFailedException ex) when (ex.Status == 404)
 {
@@ -152,7 +153,7 @@ catch (RequestFailedException ex) when (ex.Status == 404)
 }
 ```
 
-You can also easily [enable console logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Containers.ContainerRegistry_1.0.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md#logging) if you want to dig
+You can also easily [enable console logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Containers.ContainerRegistry_1.0.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md#logging) if you want to dig
 deeper into the requests you're making against the service.
 
 ## Next steps
@@ -176,7 +177,7 @@ additional questions or comments.
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fcontainerregistry%2FAzure.Containers.ContainerRegistry%2FREADME.png)
 
 <!-- LINKS -->
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Containers.ContainerRegistry_1.0.0-beta.1/sdk/containerregistry/Azure.Containers.ContainerRegistry/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Containers.ContainerRegistry_1.0.0-beta.2/sdk/containerregistry/Azure.Containers.ContainerRegistry/src
 [package]: https://www.nuget.org/packages/Azure.Containers.ContainerRegistry/
 [docs]: https://docs.microsoft.com/dotnet/api/azure.containers.containerregistry
 [rest_docs]: https://docs.microsoft.com/rest/api/containerregistry/
@@ -189,9 +190,9 @@ additional questions or comments.
 [container_registry_concepts]: https://docs.microsoft.com/azure/container-registry/container-registry-concepts
 [azure_cli]: https://docs.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
-[identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Containers.ContainerRegistry_1.0.0-beta.1/sdk/identity/Azure.Identity/README.md
-[RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Containers.ContainerRegistry_1.0.0-beta.1/sdk/core/Azure.Core/src/RequestFailedException.cs
-[samples]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Containers.ContainerRegistry_1.0.0-beta.1/sdk/containerregistry/Azure.Containers.ContainerRegistry/samples/
+[identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Containers.ContainerRegistry_1.0.0-beta.2/sdk/identity/Azure.Identity/README.md
+[RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Containers.ContainerRegistry_1.0.0-beta.2/sdk/core/Azure.Core/src/RequestFailedException.cs
+[samples]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Containers.ContainerRegistry_1.0.0-beta.2/sdk/containerregistry/Azure.Containers.ContainerRegistry/samples/
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
