@@ -3,7 +3,7 @@ title: Azure Key Vault Certificate client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Security.KeyVault.Certificates, keyvault
 author: maggiepint
 ms.author: magpint
-ms.date: 03/10/2021
+ms.date: 05/12/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: keyvault
 ---
 
-# Azure Key Vault Certificate client library for .NET - Version 4.2.0-beta.5 
+# Azure Key Vault Certificate client library for .NET - Version 4.2.0-beta.6 
 
 Azure Key Vault is a cloud service that provides secure storage and automated management of certificates used throughout a cloud application. Multiple certificates, and multiple versions of the same certificate, can be kept in the Azure Key Vault. Each certificate in the vault has a policy associated with it which controls the issuance and lifetime of the certificate, along with actions to be taken as certificates near expiry.
 
@@ -109,12 +109,12 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Certificates_4.2.0-beta.5/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) | 
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Certificates_4.2.0-beta.5/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Certificates_4.2.0-beta.5/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Certificates_4.2.0-beta.5/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Certificates_4.2.0-beta.5/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Certificates_4.2.0-beta.5/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Certificates_4.2.0-beta.6/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) | 
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Certificates_4.2.0-beta.6/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Certificates_4.2.0-beta.6/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Certificates_4.2.0-beta.6/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Certificates_4.2.0-beta.6/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Certificates_4.2.0-beta.6/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
@@ -329,27 +329,27 @@ When you submit a pull request, a CLA-bot will automatically determine whether y
 This project has adopted the [Microsoft Open Source Code of Conduct][code_of_conduct]. For more information see the [Code of Conduct FAQ][coc_faq] or contact opencode@microsoft.com with any additional questions or comments.
 
 <!-- LINKS -->
-[certificate_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Security.KeyVault.Certificates_4.2.0-beta.5/sdk/keyvault/Azure.Security.KeyVault.Certificates/src
+[certificate_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Security.KeyVault.Certificates_4.2.0-beta.6/sdk/keyvault/Azure.Security.KeyVault.Certificates/src
 [certificate_client_nuget_package]: https://www.nuget.org/packages/Azure.Security.KeyVault.Certificates/
 [API_reference]: https://docs.microsoft.com/dotnet/api/azure.security.keyvault.certificates
 [keyvault_docs]: https://docs.microsoft.com/azure/key-vault/
-[certificate_client_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Security.KeyVault.Certificates_4.2.0-beta.5/sdk/keyvault/Azure.Security.KeyVault.Certificates/samples
+[certificate_client_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Security.KeyVault.Certificates_4.2.0-beta.6/sdk/keyvault/Azure.Security.KeyVault.Certificates/samples
 [nuget]: https://www.nuget.org/
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_cli]: https://docs.microsoft.com/cli/azure
-[certificate_client_class]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Certificates_4.2.0-beta.5/sdk/keyvault/Azure.Security.KeyVault.Certificates/src/CertificateClient.cs
+[certificate_client_class]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Certificates_4.2.0-beta.6/sdk/keyvault/Azure.Security.KeyVault.Certificates/src/CertificateClient.cs
 [soft_delete]: https://docs.microsoft.com/azure/key-vault/key-vault-ovw-soft-delete
-[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Security.KeyVault.Certificates_4.2.0-beta.5/sdk/identity/Azure.Identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Security.KeyVault.Certificates_4.2.0-beta.6/sdk/identity/Azure.Identity#defaultazurecredential
 [keyvault_rest]: https://docs.microsoft.com/rest/api/keyvault/
-[secrets_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Security.KeyVault.Certificates_4.2.0-beta.5/sdk/keyvault/Azure.Security.KeyVault.Secrets
-[keys_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Security.KeyVault.Certificates_4.2.0-beta.5/sdk/keyvault/Azure.Security.KeyVault.Keys
-[hello_world_sample]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Certificates_4.2.0-beta.5/sdk/keyvault/Azure.Security.KeyVault.Certificates/samples/Sample1_HelloWorld.md
-[get_cetificates_sample]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Certificates_4.2.0-beta.5/sdk/keyvault/Azure.Security.KeyVault.Certificates/samples/Sample2_GetCertificates.md
+[secrets_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Security.KeyVault.Certificates_4.2.0-beta.6/sdk/keyvault/Azure.Security.KeyVault.Secrets
+[keys_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Security.KeyVault.Certificates_4.2.0-beta.6/sdk/keyvault/Azure.Security.KeyVault.Keys
+[hello_world_sample]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Certificates_4.2.0-beta.6/sdk/keyvault/Azure.Security.KeyVault.Certificates/samples/Sample1_HelloWorld.md
+[get_cetificates_sample]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Certificates_4.2.0-beta.6/sdk/keyvault/Azure.Security.KeyVault.Certificates/samples/Sample2_GetCertificates.md
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
-[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Certificates_4.2.0-beta.5/sdk/identity/Azure.Identity/README.md
-[contributing]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Certificates_4.2.0-beta.5/sdk/keyvault/CONTRIBUTING.md
+[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Certificates_4.2.0-beta.6/sdk/identity/Azure.Identity/README.md
+[contributing]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Certificates_4.2.0-beta.6/sdk/keyvault/CONTRIBUTING.md
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
-[migration_guide]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Certificates_4.2.0-beta.5/sdk/keyvault/Azure.Security.KeyVault.Certificates/MigrationGuide.md
+[migration_guide]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Certificates_4.2.0-beta.6/sdk/keyvault/Azure.Security.KeyVault.Certificates/MigrationGuide.md
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fkeyvault%2FAzure.Security.KeyVault.Certificates%2FREADME.png)
 
