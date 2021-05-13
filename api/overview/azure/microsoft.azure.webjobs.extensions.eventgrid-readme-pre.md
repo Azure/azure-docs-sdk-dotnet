@@ -3,7 +3,7 @@ title: Azure WebJobs EventGrid client library for .NET
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebJobs.Extensions.EventGrid, webjobs
 author: maggiepint
 ms.author: magpint
-ms.date: 03/23/2021
+ms.date: 05/13/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: webjobs
 ---
 
-# Azure WebJobs EventGrid client library for .NET - Version 3.0.0-beta.1 
+# Azure WebJobs EventGrid client library for .NET - Version 3.0.0-beta.2 
 
 
 This extension provides functionality for receiving Event Grid webhook calls in Azure Functions, allowing you to easily write functions that respond to any event published to Event Grid.
@@ -57,12 +57,14 @@ Please follow the [tutorial](https://docs.microsoft.com/azure/azure-functions/fu
 
 ## Examples
 
-### Functions that uses Event Grid binding
+### Functions that uses Event Grid output binding
 
-```C# Snippet:EventGridBindingFunction
-public static class EventGridBindingFunction
+If you are using the EventGrid schema for your topic, you can output EventGridEvents.
+
+```C# Snippet:EventGridEventBindingFunction
+public static class EventGridEventBindingFunction
 {
-    [FunctionName("EventGridBindingFunction")]
+    [FunctionName("EventGridEventBindingFunction")]
     public static async Task<IActionResult> RunAsync(
         [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
         [EventGrid(TopicEndpointUri = "EventGridEndpoint", TopicKeySetting = "EventGridKey")] IAsyncCollector<EventGridEvent> eventCollector)
@@ -74,17 +76,50 @@ public static class EventGridBindingFunction
 }
 ```
 
-### Functions that uses Event Grid trigger
-
-```C# Snippet:EventGridTriggerFunction
-public static class EventGridTriggerFunction
+If you are using the CloudEvent schema for your topic, you can output CloudEvents.
+```C# Snippet:CloudEventBindingFunction
+public static class CloudEventBindingFunction
 {
-    [FunctionName("EventGridTriggerFunction")]
+    [FunctionName("CloudEventBindingFunction")]
+    public static async Task<IActionResult> RunAsync(
+        [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
+        [EventGrid(TopicEndpointUri = "EventGridEndpoint", TopicKeySetting = "EventGridKey")] IAsyncCollector<CloudEvent> eventCollector)
+    {
+        CloudEvent e = new CloudEvent("IncomingRequest", "IncomingRequest", await req.ReadAsStringAsync());
+        await eventCollector.AddAsync(e);
+        return new OkResult();
+    }
+}
+```
+
+You can also output a string or JObject and the extension will attempt to parse into the correct strongly typed event.
+
+### Functions that uses Event Grid trigger
+You can also create a function that will be executed whenever an event is delivered to your topic. Depending on the schema you have selected for your Azure Function event subscription, you can bind to either `EventGridEvent` or `CloudEvent`:
+
+```C# Snippet:EventGridEventTriggerFunction
+public static class EventGridEventTriggerFunction
+{
+    [FunctionName("EventGridEventTriggerFunction")]
     public static void Run(
         ILogger logger,
         [EventGridTrigger] EventGridEvent e)
     {
         logger.LogInformation("Event received {type} {subject}", e.EventType, e.Subject);
+    }
+}
+```
+
+And if your subscription is configured with the CloudEvent schema:
+```C# Snippet:CloudEventTriggerFunction
+public static class CloudEventTriggerFunction
+{
+    [FunctionName("CloudEventTriggerFunction")]
+    public static void Run(
+        ILogger logger,
+        [EventGridTrigger] CloudEvent e)
+    {
+        logger.LogInformation("Event received {type} {subject}", e.Type, e.Subject);
     }
 }
 ```
@@ -115,12 +150,12 @@ additional questions or comments.
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fsearch%2FMicrosoft.Azure.WebJobs.Extensions.EventGrid%2FREADME.png)
 
 <!-- LINKS -->
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.EventGrid_3.0.0-beta.1/sdk/search/Microsoft.Azure.WebJobs.Extensions.EventGrid/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.EventGrid_3.0.0-beta.2/sdk/search/Microsoft.Azure.WebJobs.Extensions.EventGrid/src
 [package]: https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.EventGrid/
 [docs]: https://docs.microsoft.com/dotnet/api/Microsoft.Azure.WebJobs.Extensions.EventGrid
 [nuget]: https://www.nuget.org/
 
-[contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.EventGrid_3.0.0-beta.1/CONTRIBUTING.md
+[contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.EventGrid_3.0.0-beta.2/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
