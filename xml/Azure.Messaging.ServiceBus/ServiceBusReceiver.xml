@@ -224,11 +224,12 @@
              </summary>
         <returns>To be added.</returns>
         <remarks>
-             A lock token can be found in <see cref="P:Azure.Messaging.ServiceBus.ServiceBusReceivedMessage.LockToken" />,
-             only when <see cref="P:Azure.Messaging.ServiceBus.ServiceBusReceiver.ReceiveMode" /> is set to <see cref="F:Azure.Messaging.ServiceBus.ServiceBusReceiveMode.PeekLock" />.
-             In order to receive a message from the dead-letter queue, you will need a new <see cref="T:Azure.Messaging.ServiceBus.ServiceBusReceiver" />, with the corresponding path.
-             You can use EntityNameHelper.FormatDeadLetterPath(string) to help with this.
-             This operation can only be performed on messages that were received by this receiver.
+             In order to receive a message from the dead-letter queue or transfer dead-letter queue,
+             set the <see cref="P:Azure.Messaging.ServiceBus.ServiceBusReceiverOptions.SubQueue" /> property to <see cref="F:Azure.Messaging.ServiceBus.SubQueue.DeadLetter" />
+             or <see cref="F:Azure.Messaging.ServiceBus.SubQueue.TransferDeadLetter" /> when calling
+             <see cref="M:Azure.Messaging.ServiceBus.ServiceBusClient.CreateReceiver(System.String,Azure.Messaging.ServiceBus.ServiceBusReceiverOptions)" /> or
+             <see cref="M:Azure.Messaging.ServiceBus.ServiceBusClient.CreateReceiver(System.String,System.String,Azure.Messaging.ServiceBus.ServiceBusReceiverOptions)" />.
+             This operation can only be performed when <see cref="P:Azure.Messaging.ServiceBus.ServiceBusReceiver.ReceiveMode" /> is set to <see cref="F:Azure.Messaging.ServiceBus.ServiceBusReceiveMode.PeekLock" />.
              </remarks>
         <exception cref="T:Azure.Messaging.ServiceBus.ServiceBusException">
                The lock for the session has expired or the message has already been completed. This only applies for session-enabled
@@ -264,8 +265,6 @@
         <summary> Indicates that the receiver wants to defer the processing for the message.</summary>
         <returns>A task to be resolved on when the operation has completed.</returns>
         <remarks>
-             A lock token can be found in <see cref="P:Azure.Messaging.ServiceBus.ServiceBusReceivedMessage.LockToken" />,
-             only when <see cref="P:Azure.Messaging.ServiceBus.ServiceBusReceiver.ReceiveMode" /> is set to <see cref="F:Azure.Messaging.ServiceBus.ServiceBusReceiveMode.PeekLock" />.
              In order to receive this message again in the future, you will need to save the
              <see cref="P:Azure.Messaging.ServiceBus.ServiceBusReceivedMessage.SequenceNumber" />
              and receive it using <see cref="M:Azure.Messaging.ServiceBus.ServiceBusReceiver.ReceiveDeferredMessageAsync(System.Int64,System.Threading.CancellationToken)" />.
@@ -301,7 +300,7 @@
       <Docs>
         <summary>
              Performs the task needed to clean up resources used by the <see cref="T:Azure.Messaging.ServiceBus.ServiceBusReceiver" />.
-             This is equivalent to calling <see cref="M:Azure.Messaging.ServiceBus.ServiceBusReceiver.CloseAsync(System.Threading.CancellationToken)" /> with the default <see cref="T:Azure.Messaging.ServiceBus.LinkCloseMode" />.
+             This is equivalent to calling <see cref="M:Azure.Messaging.ServiceBus.ServiceBusReceiver.CloseAsync(System.Threading.CancellationToken)" />.
              </summary>
         <returns>A task to be resolved on when the operation has completed.</returns>
         <remarks>To be added.</remarks>
@@ -568,8 +567,9 @@
         <returns>The deferred message identified by the specified sequence number. Returns null if no message is found.
              Throws if the message has not been deferred.</returns>
         <remarks>To be added.</remarks>
-        <altmember cref="M:Azure.Messaging.ServiceBus.ServiceBusReceiver.DeferMessageAsync(Azure.Messaging.ServiceBus.ServiceBusReceivedMessage,System.Collections.Generic.IDictionary{System.String,System.Object},System.Threading.CancellationToken)" />
         <altmember cref="M:Azure.Messaging.ServiceBus.ServiceBusReceiver.DeferMessageAsync(System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.Threading.CancellationToken)" />
+        <altmember cref="M:Azure.Messaging.ServiceBus.ServiceBusReceiver.DeferMessageAsync(Azure.Messaging.ServiceBus.ServiceBusReceivedMessage,System.Collections.Generic.IDictionary{System.String,System.Object},System.Threading.CancellationToken)" />
+        <altmember cref="M:Azure.Messaging.ServiceBus.ServiceBusReceiver.DeferMessageAsync(System.Guid,System.Collections.Generic.IDictionary{System.String,System.Object},System.Threading.CancellationToken)" />
       </Docs>
     </Member>
     <Member MemberName="ReceiveDeferredMessagesAsync">
@@ -600,8 +600,9 @@
         <returns>Messages identified by sequence number are returned. Returns null if no messages are found.
              Throws if the messages have not been deferred.</returns>
         <remarks>To be added.</remarks>
-        <altmember cref="M:Azure.Messaging.ServiceBus.ServiceBusReceiver.DeferMessageAsync(Azure.Messaging.ServiceBus.ServiceBusReceivedMessage,System.Collections.Generic.IDictionary{System.String,System.Object},System.Threading.CancellationToken)" />
         <altmember cref="M:Azure.Messaging.ServiceBus.ServiceBusReceiver.DeferMessageAsync(System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.Threading.CancellationToken)" />
+        <altmember cref="M:Azure.Messaging.ServiceBus.ServiceBusReceiver.DeferMessageAsync(Azure.Messaging.ServiceBus.ServiceBusReceivedMessage,System.Collections.Generic.IDictionary{System.String,System.Object},System.Threading.CancellationToken)" />
+        <altmember cref="M:Azure.Messaging.ServiceBus.ServiceBusReceiver.DeferMessageAsync(System.Guid,System.Collections.Generic.IDictionary{System.String,System.Object},System.Threading.CancellationToken)" />
         <exception cref="T:Azure.Messaging.ServiceBus.ServiceBusException">
                The specified sequence number does not correspond to a message that has been deferred.
                The <see cref="P:Azure.Messaging.ServiceBus.ServiceBusException.Reason" /> will be set to <see cref="F:Azure.Messaging.ServiceBus.ServiceBusFailureReason.MessageNotFound" /> in this case.
@@ -659,8 +660,8 @@
           <AttributeName Language="F#">[&lt;System.Runtime.CompilerServices.AsyncIteratorStateMachine(typeof(Azure.Messaging.ServiceBus.ServiceBusReceiver/&lt;ReceiveMessagesAsync&gt;d__38))&gt;]</AttributeName>
         </Attribute>
         <Attribute FrameworkAlternate="azure-dotnet-preview">
-          <AttributeName Language="C#">[System.Runtime.CompilerServices.AsyncIteratorStateMachine(typeof(Azure.Messaging.ServiceBus.ServiceBusReceiver/&lt;ReceiveMessagesAsync&gt;d__41))]</AttributeName>
-          <AttributeName Language="F#">[&lt;System.Runtime.CompilerServices.AsyncIteratorStateMachine(typeof(Azure.Messaging.ServiceBus.ServiceBusReceiver/&lt;ReceiveMessagesAsync&gt;d__41))&gt;]</AttributeName>
+          <AttributeName Language="C#">[System.Runtime.CompilerServices.AsyncIteratorStateMachine(typeof(Azure.Messaging.ServiceBus.ServiceBusReceiver/&lt;ReceiveMessagesAsync&gt;d__39))]</AttributeName>
+          <AttributeName Language="F#">[&lt;System.Runtime.CompilerServices.AsyncIteratorStateMachine(typeof(Azure.Messaging.ServiceBus.ServiceBusReceiver/&lt;ReceiveMessagesAsync&gt;d__39))&gt;]</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -812,30 +813,6 @@
              Converts the instance to string representation.
              </summary>
         <returns>A <see cref="T:System.String" /> that represents this instance.</returns>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="TransactionGroup">
-      <MemberSignature Language="C#" Value="public virtual string TransactionGroup { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance string TransactionGroup" />
-      <MemberSignature Language="DocId" Value="P:Azure.Messaging.ServiceBus.ServiceBusReceiver.TransactionGroup" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable ReadOnly Property TransactionGroup As String" />
-      <MemberSignature Language="F#" Value="member this.TransactionGroup : string" Usage="Azure.Messaging.ServiceBus.ServiceBusReceiver.TransactionGroup" />
-      <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Azure.Messaging.ServiceBus</AssemblyName>
-        <AssemblyVersion>7.2.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.String</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>
-            Gets the transaction group associated with the receiver. This is an
-            arbitrary string that is used to all senders, receivers, and processors that you
-            wish to use in a transaction that spans multiple different queues, topics, or subscriptions.
-            </summary>
-        <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
