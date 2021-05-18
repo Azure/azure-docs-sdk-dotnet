@@ -3,7 +3,7 @@ title: Azure WebJobs Event Hubs client library for .NET
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebJobs.Extensions.EventHubs, webjobs
 author: maggiepint
 ms.author: magpint
-ms.date: 04/06/2021
+ms.date: 05/18/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: webjobs
 ---
 
-# Azure WebJobs Event Hubs client library for .NET - Version 5.0.0-beta.4 
+# Azure WebJobs Event Hubs client library for .NET - Version 5.0.0-beta.5 
 
 
 This extension provides functionality for accessing Azure Event Hubs from an Azure Function.
@@ -50,7 +50,7 @@ For the local development use the `local.settings.json` file to store the connec
 {
   "Values": {
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
-    "<connection_name>": "Endpoint=sb://<event_hub_name>.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=Jya7Eh76HU92ibsxuk1ITN8CM8Bt76YLKf5ISjU3jZ8="
+    "<connection_name>": "Endpoint=sb://<event_hubs_namespace>.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=Jya7Eh76HU92ibsxuk1ITN8CM8Bt76YLKf5ISjU3jZ8="
   }
 }
 ```
@@ -59,14 +59,15 @@ When deployed use the [application settings](https://docs.microsoft.com/azure/az
 
 #### Managed identity authentication
 
-If your environment has [managed identity](https://docs.microsoft.com/azure/app-service/overview-managed-identity?tabs=dotnet) enabled you can use it to authenticate the Event Hubs extension.
-To use managed identity provide the `<connection_name>__fullyQualifiedNamespace` configuration setting.
+If your environment has [managed identity](https://docs.microsoft.com/azure/app-service/overview-managed-identity?tabs=dotnet) enabled you can use it to authenticate the Event Hubs extension.  Before doing so, you will need to ensure that permissions have been configured as described in the [Azure Functions developer guide]( https://docs.microsoft.com/azure/azure-functions/functions-reference#grant-permission-to-the-identity).
+
+To use managed identity provide the `<connection_name>__fullyQualifiedNamespace` configuration setting.  
 
 ```json
 {
   "Values": {
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
-    "<connection_name>__fullyQualifiedNamespace": "<event_hub_name>.servicebus.windows.net"
+    "<connection_name>__fullyQualifiedNamespace": "{event_hubs_namespace}.servicebus.windows.net"
   }
 }
 ```
@@ -74,7 +75,7 @@ To use managed identity provide the `<connection_name>__fullyQualifiedNamespace`
 Or in the case of deployed app set the same setting in [application settings](https://docs.microsoft.com/azure/azure-functions/functions-how-to-use-azure-function-app-settings):
 
 ```
-<connection_name>__fullyQualifiedNamespace=<event_hub_name>.servicebus.windows.net
+<connection_name>__fullyQualifiedNamespace={event_hubs_namespace}.servicebus.windows.net
 ```
 
 ## Key concepts
@@ -227,12 +228,12 @@ additional questions or comments.
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fsearch%2FMicrosoft.Azure.WebJobs.Extensions.EventHubs%2FREADME.png)
 
 <!-- LINKS -->
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.EventHubs_5.0.0-beta.4/sdk/search/Microsoft.Azure.WebJobs.Extensions.EventHubs/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.EventHubs_5.0.0-beta.5/sdk/search/Microsoft.Azure.WebJobs.Extensions.EventHubs/src
 [package]: https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.EventHubs/
 [docs]: https://docs.microsoft.com/dotnet/api/Microsoft.Azure.WebJobs.Extensions.EventHubs
 [nuget]: https://www.nuget.org/
 
-[contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.EventHubs_5.0.0-beta.4/CONTRIBUTING.md
+[contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.EventHubs_5.0.0-beta.5/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
