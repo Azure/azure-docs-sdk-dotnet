@@ -3,7 +3,7 @@ title: Azure Cognitive Services Text Analytics client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.TextAnalytics, textanalytics
 author: maggiepint
 ms.author: magpint
-ms.date: 04/06/2021
+ms.date: 05/18/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: textanalytics
 ---
 
-# Azure Cognitive Services Text Analytics client library for .NET - Version 5.1.0-beta.6 
+# Azure Cognitive Services Text Analytics client library for .NET - Version 5.1.0-beta.7 
 
 Azure Cognitive Services Text Analytics is a cloud service that provides advanced natural language processing over raw text, and includes the following main functions: 
 * Language Detection
@@ -142,11 +142,11 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.0-beta.6/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.0-beta.6/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.0-beta.6/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.0-beta.6/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.0-beta.6/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.0-beta.7/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.0-beta.7/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.0-beta.7/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.0-beta.7/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.0-beta.7/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
@@ -552,31 +552,22 @@ Text Analytics for health is a containerized service that extracts and labels re
 ```
 
 ### Run multiple actions Asynchronously
-This functionality allows running multiple actions in one or more documents. Actions include entity recognition, linked entity recognition, key phrase extraction, and Personally Identifiable Information (PII) Recognition. For more information see [Using analyze][analyze_operation_howto].
+This functionality allows running multiple actions in one or more documents. Actions include entity recognition, linked entity recognition, key phrase extraction, Personally Identifiable Information (PII) Recognition, and sentiment analysis. For more information see [Using analyze][analyze_operation_howto].
 
 ```C# Snippet:AnalyzeOperationBatchConvenienceAsync
     string documentA = @"We love this trail and make the trip every year. The views are breathtaking and well
                         worth the hike! Yesterday was foggy though, so we missed the spectacular views.
                         We tried again today and it was amazing. Everyone in my family liked the trail although
-                        it was too challenging for the less athletic among us.
-                        Not necessarily recommended for small children.
-                        A hotel close to the trail offers services for childcare in case you want that.";
+                        it was too challenging for the less athletic among us.";
 
     string documentB = @"Last week we stayed at Hotel Foo to celebrate our anniversary. The staff knew about
                         our anniversary so they helped me organize a little surprise for my partner.
                         The room was clean and with the decoration I requested. It was perfect!";
 
-    string documentC = @"That was the best day of my life! We went on a 4 day trip where we stayed at Hotel Foo.
-                        They had great amenities that included an indoor pool, a spa, and a bar.
-                        The spa offered couples massages which were really good. 
-                        The spa was clean and felt very peaceful. Overall the whole experience was great.
-                        We will definitely come back.";
-
     var batchDocuments = new List<string>
     {
         documentA,
-        documentB,
-        documentC
+        documentB
     };
 
     TextAnalyticsActions actions = new TextAnalyticsActions()
@@ -585,6 +576,7 @@ This functionality allows running multiple actions in one or more documents. Act
         RecognizeEntitiesOptions = new List<RecognizeEntitiesOptions>() { new RecognizeEntitiesOptions() },
         RecognizePiiEntitiesOptions = new List<RecognizePiiEntitiesOptions>() { new RecognizePiiEntitiesOptions() },
         RecognizeLinkedEntitiesOptions = new List<RecognizeLinkedEntitiesOptions>() { new RecognizeLinkedEntitiesOptions() },
+        AnalyzeSentimentOptions = new List<AnalyzeSentimentOptions>() { new AnalyzeSentimentOptions() },
         DisplayName = "AnalyzeOperationSample"
     };
 
@@ -605,88 +597,117 @@ This functionality allows running multiple actions in one or more documents. Act
 
     await foreach (AnalyzeBatchActionsResult documentsInPage in operation.Value)
     {
-        RecognizeEntitiesResultCollection entitiesResult = documentsInPage.RecognizeEntitiesActionsResults.FirstOrDefault().Result;
-
-        ExtractKeyPhrasesResultCollection keyPhrasesResult = documentsInPage.ExtractKeyPhrasesActionsResults.FirstOrDefault().Result;
-
-        RecognizePiiEntitiesResultCollection piiResult = documentsInPage.RecognizePiiEntitiesActionsResults.FirstOrDefault().Result;
-
-        RecognizeLinkedEntitiesResultCollection linkedEntitiesResult = documentsInPage.RecognizeLinkedEntitiesActionsResults.FirstOrDefault().Result;
+        IReadOnlyCollection<ExtractKeyPhrasesActionResult> keyPhrasesActionsResults = documentsInPage.ExtractKeyPhrasesActionsResults;
+        IReadOnlyCollection<RecognizeEntitiesActionResult> entitiesActionsResults = documentsInPage.RecognizeEntitiesActionsResults;
+        IReadOnlyCollection<RecognizePiiEntitiesActionResult> piiActionsResults = documentsInPage.RecognizePiiEntitiesActionsResults;
+        IReadOnlyCollection<RecognizeLinkedEntitiesActionResult> entityLinkingActionsResults = documentsInPage.RecognizeLinkedEntitiesActionsResults;
+        IReadOnlyCollection<AnalyzeSentimentActionResult> analyzeSentimentActionsResults = documentsInPage.AnalyzeSentimentActionsResults;
 
         Console.WriteLine("Recognized Entities");
-
-        foreach (RecognizeEntitiesResult result in entitiesResult)
+        int docNumber = 1;
+        foreach (RecognizeEntitiesActionResult entitiesActionResults in entitiesActionsResults)
         {
-            Console.WriteLine($"  Recognized the following {result.Entities.Count} entities:");
-
-            foreach (CategorizedEntity entity in result.Entities)
+            foreach (RecognizeEntitiesResult result in entitiesActionResults.Result)
             {
-                Console.WriteLine($"  Entity: {entity.Text}");
-                Console.WriteLine($"  Category: {entity.Category}");
-                Console.WriteLine($"  Offset: {entity.Offset}");
-                Console.WriteLine($"  Length: {entity.Length}");
-                Console.WriteLine($"  ConfidenceScore: {entity.ConfidenceScore}");
-                Console.WriteLine($"  SubCategory: {entity.SubCategory}");
-            }
-            Console.WriteLine("");
-        }
+                Console.WriteLine($" Document #{docNumber++}");
+                Console.WriteLine($"  Recognized the following {result.Entities.Count} entities:");
 
-        Console.WriteLine("Recognized PII Entities");
-
-        foreach (RecognizePiiEntitiesResult result in piiResult)
-        {
-            Console.WriteLine($"  Recognized the following {result.Entities.Count} PII entities:");
-
-            foreach (PiiEntity entity in result.Entities)
-            {
-                Console.WriteLine($"  Entity: {entity.Text}");
-                Console.WriteLine($"  Category: {entity.Category}");
-                Console.WriteLine($"  Offset: {entity.Offset}");
-                Console.WriteLine($"  Length: {entity.Length}");
-                Console.WriteLine($"  ConfidenceScore: {entity.ConfidenceScore}");
-                Console.WriteLine($"  SubCategory: {entity.SubCategory}");
-            }
-            Console.WriteLine("");
-        }
-
-        Console.WriteLine("Key Phrases");
-
-        foreach (ExtractKeyPhrasesResult result in keyPhrasesResult)
-        {
-            Console.WriteLine($"  Recognized the following {result.KeyPhrases.Count} Keyphrases:");
-
-            foreach (string keyphrase in result.KeyPhrases)
-            {
-                Console.WriteLine($"  {keyphrase}");
-            }
-            Console.WriteLine("");
-        }
-
-        Console.WriteLine("Recognized Linked Entities");
-
-        foreach (RecognizeLinkedEntitiesResult result in linkedEntitiesResult)
-        {
-            Console.WriteLine($"  Recognized the following {result.Entities.Count} linked entities:");
-
-            foreach (LinkedEntity entity in result.Entities)
-            {
-                Console.WriteLine($"  Entity: {entity.Name}");
-                Console.WriteLine($"  DataSource: {entity.DataSource}");
-                Console.WriteLine($"  DataSource EntityId: {entity.DataSourceEntityId}");
-                Console.WriteLine($"  Language: {entity.Language}");
-                Console.WriteLine($"  DataSource Url: {entity.Url}");
-
-                Console.WriteLine($"  Total Matches: {entity.Matches.Count()}");
-                foreach (LinkedEntityMatch match in entity.Matches)
+                foreach (CategorizedEntity entity in result.Entities)
                 {
-                    Console.WriteLine($"    Match Text: {match.Text}");
-                    Console.WriteLine($"    ConfidenceScore: {match.ConfidenceScore}");
-                    Console.WriteLine($"    Offset: {match.Offset}");
-                    Console.WriteLine($"    Length: {match.Length}");
+                    Console.WriteLine($"  Entity: {entity.Text}");
+                    Console.WriteLine($"  Category: {entity.Category}");
+                    Console.WriteLine($"  Offset: {entity.Offset}");
+                    Console.WriteLine($"  Length: {entity.Length}");
+                    Console.WriteLine($"  ConfidenceScore: {entity.ConfidenceScore}");
+                    Console.WriteLine($"  SubCategory: {entity.SubCategory}");
                 }
                 Console.WriteLine("");
             }
-            Console.WriteLine("");
+        }
+
+        Console.WriteLine("Recognized PII Entities");
+        docNumber = 1;
+        foreach (RecognizePiiEntitiesActionResult piiActionResults in piiActionsResults)
+        {
+            foreach (RecognizePiiEntitiesResult result in piiActionResults.Result)
+            {
+                Console.WriteLine($" Document #{docNumber++}");
+                Console.WriteLine($"  Recognized the following {result.Entities.Count} PII entities:");
+
+                foreach (PiiEntity entity in result.Entities)
+                {
+                    Console.WriteLine($"  Entity: {entity.Text}");
+                    Console.WriteLine($"  Category: {entity.Category}");
+                    Console.WriteLine($"  Offset: {entity.Offset}");
+                    Console.WriteLine($"  Length: {entity.Length}");
+                    Console.WriteLine($"  ConfidenceScore: {entity.ConfidenceScore}");
+                    Console.WriteLine($"  SubCategory: {entity.SubCategory}");
+                }
+                Console.WriteLine("");
+            }
+        }
+
+        Console.WriteLine("Key Phrases");
+        docNumber = 1;
+        foreach (ExtractKeyPhrasesActionResult keyPhrasesActionResult in keyPhrasesActionsResults)
+        {
+            foreach (ExtractKeyPhrasesResult result in keyPhrasesActionResult.Result)
+            {
+                Console.WriteLine($" Document #{docNumber++}");
+                Console.WriteLine($"  Recognized the following {result.KeyPhrases.Count} Keyphrases:");
+
+                foreach (string keyphrase in result.KeyPhrases)
+                {
+                    Console.WriteLine($"  {keyphrase}");
+                }
+                Console.WriteLine("");
+            }
+        }
+
+        Console.WriteLine("Recognized Linked Entities");
+        docNumber = 1;
+        foreach (RecognizeLinkedEntitiesActionResult linkedEntitiesActionResults in entityLinkingActionsResults)
+        {
+            foreach (RecognizeLinkedEntitiesResult result in linkedEntitiesActionResults.Result)
+            {
+                Console.WriteLine($" Document #{docNumber++}");
+                Console.WriteLine($"  Recognized the following {result.Entities.Count} linked entities:");
+
+                foreach (LinkedEntity entity in result.Entities)
+                {
+                    Console.WriteLine($"  Entity: {entity.Name}");
+                    Console.WriteLine($"  DataSource: {entity.DataSource}");
+                    Console.WriteLine($"  DataSource EntityId: {entity.DataSourceEntityId}");
+                    Console.WriteLine($"  Language: {entity.Language}");
+                    Console.WriteLine($"  DataSource Url: {entity.Url}");
+
+                    Console.WriteLine($"  Total Matches: {entity.Matches.Count()}");
+                    foreach (LinkedEntityMatch match in entity.Matches)
+                    {
+                        Console.WriteLine($"    Match Text: {match.Text}");
+                        Console.WriteLine($"    ConfidenceScore: {match.ConfidenceScore}");
+                        Console.WriteLine($"    Offset: {match.Offset}");
+                        Console.WriteLine($"    Length: {match.Length}");
+                    }
+                    Console.WriteLine("");
+                }
+                Console.WriteLine("");
+            }
+        }
+
+        Console.WriteLine("Analyze Sentiment");
+        docNumber = 1;
+        foreach (AnalyzeSentimentActionResult analyzeSentimentActionsResult in analyzeSentimentActionsResults)
+        {
+            foreach (AnalyzeSentimentResult result in analyzeSentimentActionsResult.Result)
+            {
+                Console.WriteLine($" Document #{docNumber++}");
+                Console.WriteLine($"  Sentiment is {result.DocumentSentiment.Sentiment}, with confidence scores: ");
+                Console.WriteLine($"    Positive confidence score: {result.DocumentSentiment.ConfidenceScores.Positive}.");
+                Console.WriteLine($"    Neutral confidence score: {result.DocumentSentiment.ConfidenceScores.Neutral}.");
+                Console.WriteLine($"    Negative confidence score: {result.DocumentSentiment.ConfidenceScores.Negative}.");
+                Console.WriteLine("");
+            }
         }
     }
 }
@@ -760,7 +781,7 @@ Samples are provided for each main functional area, and for each area, samples a
 - [Recognize PII Entities][recognize_pii_entities_sample]
 - [Recognize Linked Entities][recognize_linked_entities_sample]
 - [Recognize Healthcare Entities][recognize_healthcare_sample]
-- [Run Analyze Operation][analyze_operation_sample]
+- [Run multiple actions][analyze_operation_sample]
 
 ### Advanced samples
 - [Analyze Sentiment with Opinion Mining][analyze_sentiment_opinion_mining_sample]
@@ -779,18 +800,18 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 
 
 <!-- LINKS -->
-[textanalytics_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.6/sdk/textanalytics/Azure.AI.TextAnalytics/src
+[textanalytics_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.7/sdk/textanalytics/Azure.AI.TextAnalytics/src
 [textanalytics_docs]: https://docs.microsoft.com/azure/cognitive-services/Text-Analytics/
 [textanalytics_refdocs]: https://aka.ms/azsdk-net-textanalytics-ref-docs
 [textanalytics_nuget_package]: https://www.nuget.org/packages/Azure.AI.TextAnalytics
-[textanalytics_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.6/sdk/textanalytics/Azure.AI.TextAnalytics/samples/README.md
+[textanalytics_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.7/sdk/textanalytics/Azure.AI.TextAnalytics/samples/README.md
 [textanalytics_rest_api]: https://westcentralus.dev.cognitive.microsoft.com/docs/services/TextAnalytics-v3-1-Preview-3/operations/Languages
 [cognitive_resource_portal]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account
 [cognitive_resource_cli]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account-cli
 [dotnet_lro_guidelines]: https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning
 
-[recognize_healthcare_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.6/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample_RecognizeHealthcareEntities.md
-[analyze_operation_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.6/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample_AnalyzeBatchActions.md
+[recognize_healthcare_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.7/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample_RecognizeHealthcareEntities.md
+[analyze_operation_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.7/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample_AnalyzeBatchActions.md
 [analyze_operation_howto]: https://docs.microsoft.com/azure/cognitive-services/text-analytics/how-tos/text-analytics-how-to-call-api?tabs=synchronous#using-the-api-asynchronously
 [healthcare]: https://docs.microsoft.com/azure/cognitive-services/text-analytics/how-tos/text-analytics-for-health?tabs=ner
 [language_detection]: https://docs.microsoft.com/azure/cognitive-services/Text-Analytics/how-tos/text-analytics-how-to-language-detection
@@ -800,25 +821,25 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [named_entities_categories]: https://docs.microsoft.com/azure/cognitive-services/Text-Analytics/named-entity-types
 [pii_entity_type]:https://docs.microsoft.com/azure/cognitive-services/text-analytics/named-entity-types?tabs=personal 
 
-[textanalytics_client_class]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.6/sdk/textanalytics/Azure.AI.TextAnalytics/src/TextAnalyticsClient.cs
-[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.6/sdk/identity/Azure.Identity
+[textanalytics_client_class]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.7/sdk/textanalytics/Azure.AI.TextAnalytics/src/TextAnalyticsClient.cs
+[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.7/sdk/identity/Azure.Identity
 [cognitive_auth]: https://docs.microsoft.com/azure/cognitive-services/authentication
 [register_aad_app]: https://docs.microsoft.com/azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
 [aad_grant_access]: https://docs.microsoft.com/azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
 [custom_subdomain]: https://docs.microsoft.com/azure/cognitive-services/authentication#create-a-resource-with-a-custom-subdomain
-[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.6/sdk/identity/Azure.Identity/README.md
-[logging]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.0-beta.6/sdk/core/Azure.Core/samples/Diagnostics.md
+[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.7/sdk/identity/Azure.Identity/README.md
+[logging]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.0-beta.7/sdk/core/Azure.Core/samples/Diagnostics.md
 [data_limits]: https://docs.microsoft.com/azure/cognitive-services/text-analytics/overview#data-limits
-[contributing]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.0-beta.6/CONTRIBUTING.md
+[contributing]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.0-beta.7/CONTRIBUTING.md
 
-[detect_language_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.6/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample1_DetectLanguage.md
-[analyze_sentiment_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.6/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample2_AnalyzeSentiment.md
-[analyze_sentiment_opinion_mining_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.6/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample2.1_AnalyzeSentimentWithOpinionMining.md
-[extract_key_phrases_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.6/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample3_ExtractKeyPhrases.md
-[recognize_entities_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.6/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample4_RecognizeEntities.md
-[recognize_pii_entities_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.6/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample5_RecognizePiiEntities.md
-[recognize_linked_entities_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.6/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample6_RecognizeLinkedEntities.md
-[mock_client_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.6/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample_MockClient.md
+[detect_language_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.7/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample1_DetectLanguage.md
+[analyze_sentiment_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.7/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample2_AnalyzeSentiment.md
+[analyze_sentiment_opinion_mining_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.7/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample2.1_AnalyzeSentimentWithOpinionMining.md
+[extract_key_phrases_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.7/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample3_ExtractKeyPhrases.md
+[recognize_entities_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.7/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample4_RecognizeEntities.md
+[recognize_pii_entities_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.7/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample5_RecognizePiiEntities.md
+[recognize_linked_entities_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.7/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample6_RecognizeLinkedEntities.md
+[mock_client_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.0-beta.7/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample_MockClient.md
 
 [azure_cli]: https://docs.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
