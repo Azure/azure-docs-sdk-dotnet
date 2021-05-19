@@ -57,8 +57,17 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Gets or sets the number of queue messages to retrieve and process in parallel (per job method).
-            </summary>
+             Gets or sets the number of queue messages to retrieve from queue (per job method).
+             Must be in range within 1 and 32. The default is 16.
+            
+             <remarks>
+             Both the <see cref="P:Microsoft.Azure.WebJobs.Host.QueuesOptions.NewBatchThreshold" /> and <see cref="P:Microsoft.Azure.WebJobs.Host.QueuesOptions.BatchSize" /> settings control how many messages are being processed in parallel.
+             The job keeps requesting messages in batches of <see cref="P:Microsoft.Azure.WebJobs.Host.QueuesOptions.BatchSize" /> size until number of messages currently being processed
+             is above <see cref="P:Microsoft.Azure.WebJobs.Host.QueuesOptions.NewBatchThreshold" />. Then the job requests new batch of messages only if number of currently processed messages
+             drops at or below <see cref="P:Microsoft.Azure.WebJobs.Host.QueuesOptions.NewBatchThreshold" />.
+            
+             The maximum number of messages processed in parallel by the job is <see cref="P:Microsoft.Azure.WebJobs.Host.QueuesOptions.NewBatchThreshold" /> plus <see cref="P:Microsoft.Azure.WebJobs.Host.QueuesOptions.BatchSize" />.
+             </remarks></summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -183,8 +192,17 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Gets or sets the threshold at which a new batch of messages will be fetched.
-            </summary>
+             Gets or sets the threshold at which a new batch of messages will be fetched (per job method).
+             Must be zero or positive integer. If not set then it defaults to <code>BatchSize/2*processorCount</code>.
+            
+             <remarks>
+             Both the <see cref="P:Microsoft.Azure.WebJobs.Host.QueuesOptions.NewBatchThreshold" /> and <see cref="P:Microsoft.Azure.WebJobs.Host.QueuesOptions.BatchSize" /> settings control how many messages are being processed in parallel.
+             The job keeps requesting messages in batches of <see cref="P:Microsoft.Azure.WebJobs.Host.QueuesOptions.BatchSize" /> size until number of messages currently being processed
+             is above <see cref="P:Microsoft.Azure.WebJobs.Host.QueuesOptions.NewBatchThreshold" />. Then the job requests new batch of messages only if number of currently processed messages
+             drops at or below <see cref="P:Microsoft.Azure.WebJobs.Host.QueuesOptions.NewBatchThreshold" />.
+            
+             The maximum number of messages processed in parallel by the job is <see cref="P:Microsoft.Azure.WebJobs.Host.QueuesOptions.NewBatchThreshold" /> plus <see cref="P:Microsoft.Azure.WebJobs.Host.QueuesOptions.BatchSize" />.
+             </remarks></summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
