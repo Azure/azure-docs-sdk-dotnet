@@ -166,11 +166,12 @@
              </summary>
         <returns>To be added.</returns>
         <remarks>
-             A lock token can be found in <see cref="P:Azure.Messaging.ServiceBus.ServiceBusReceivedMessage.LockToken" />,
-             only when <see cref="P:Azure.Messaging.ServiceBus.ServiceBusReceiver.ReceiveMode" /> is set to <see cref="F:Azure.Messaging.ServiceBus.ServiceBusReceiveMode.PeekLock" />.
-             In order to receive a message from the dead-letter queue, you will need a new <see cref="T:Azure.Messaging.ServiceBus.ServiceBusReceiver" />, with the corresponding path.
-             You can use EntityNameHelper.FormatDeadLetterPath(string) to help with this.
-             This operation can only be performed on messages that were received by this receiver.
+             In order to receive a message from the dead-letter queue or transfer dead-letter queue,
+             set the <see cref="P:Azure.Messaging.ServiceBus.ServiceBusReceiverOptions.SubQueue" /> property to <see cref="F:Azure.Messaging.ServiceBus.SubQueue.DeadLetter" />
+             or <see cref="F:Azure.Messaging.ServiceBus.SubQueue.TransferDeadLetter" /> when calling
+             <see cref="M:Azure.Messaging.ServiceBus.ServiceBusClient.CreateReceiver(System.String,Azure.Messaging.ServiceBus.ServiceBusReceiverOptions)" /> or
+             <see cref="M:Azure.Messaging.ServiceBus.ServiceBusClient.CreateReceiver(System.String,System.String,Azure.Messaging.ServiceBus.ServiceBusReceiverOptions)" />.
+             This operation can only be performed when <see cref="P:Azure.Messaging.ServiceBus.ServiceBusReceiver.ReceiveMode" /> is set to <see cref="F:Azure.Messaging.ServiceBus.ServiceBusReceiveMode.PeekLock" />.
              </remarks>
         <exception cref="T:Azure.Messaging.ServiceBus.ServiceBusException">
                The lock for the session has expired or the message has already been completed. This only applies for session-enabled
@@ -205,8 +206,6 @@
         <summary> Indicates that the receiver wants to defer the processing for the message.</summary>
         <returns>A task to be resolved on when the operation has completed.</returns>
         <remarks>
-             A lock token can be found in <see cref="P:Azure.Messaging.ServiceBus.ServiceBusReceivedMessage.LockToken" />,
-             only when <see cref="P:Azure.Messaging.ServiceBus.ServiceBusReceiver.ReceiveMode" /> is set to <see cref="F:Azure.Messaging.ServiceBus.ServiceBusReceiveMode.PeekLock" />.
              In order to receive this message again in the future, you will need to save the
              <see cref="P:Azure.Messaging.ServiceBus.ServiceBusReceivedMessage.SequenceNumber" />
              and receive it using <see cref="M:Azure.Messaging.ServiceBus.ServiceBusReceiver.ReceiveDeferredMessageAsync(System.Int64,System.Threading.CancellationToken)" />.
