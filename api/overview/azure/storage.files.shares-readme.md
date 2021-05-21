@@ -3,7 +3,7 @@ title: Azure Storage File Shares client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Storage.Files.Shares, storage
 author: maggiepint
 ms.author: magpint
-ms.date: 01/12/2021
+ms.date: 05/20/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: storage
 ---
 
-# Azure Storage File Shares client library for .NET - Version 12.6.0 
+# Azure Storage File Shares client library for .NET - Version 12.6.2 
 
 
 > Server Version: 2020-04-08, 2020-02-10, 2019-12-12, 2019-07-07, and 2019-02-02
@@ -210,8 +210,8 @@ catch (RequestFailedException ex)
 
 Get started with our [File samples][samples]:
 
-1. [Hello World](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Files.Shares_12.6.0/sdk/storage/Azure.Storage.Files.Shares/samples/Sample01a_HelloWorld.cs): Upload files, download files, and traverse shares (or [asynchronously](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Files.Shares_12.6.0/sdk/storage/Azure.Storage.Files.Shares/samples/Sample01b_HelloWorldAsync.cs))
-2. [Auth](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Files.Shares_12.6.0/sdk/storage/Azure.Storage.Files.Shares/samples/Sample02_Auth.cs): Authenticate with connection strings, shared keys, and shared access signatures.
+1. [Hello World](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Files.Shares_12.6.2/sdk/storage/Azure.Storage.Files.Shares/samples/Sample01a_HelloWorld.cs): Upload files, download files, and traverse shares (or [asynchronously](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Files.Shares_12.6.2/sdk/storage/Azure.Storage.Files.Shares/samples/Sample01b_HelloWorldAsync.cs))
+2. [Auth](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Files.Shares_12.6.2/sdk/storage/Azure.Storage.Files.Shares/samples/Sample02_Auth.cs): Authenticate with connection strings, shared keys, and shared access signatures.
 
 ## Contributing
 
@@ -231,7 +231,7 @@ additional questions or comments.
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fstorage%2FAzure.Storage.Files.Shares%2FREADME.png)
 
 <!-- LINKS -->
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Files.Shares_12.6.0/sdk/storage/Azure.Storage.Files.Shares/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Files.Shares_12.6.2/sdk/storage/Azure.Storage.Files.Shares/src
 [package]: https://www.nuget.org/packages/Azure.Storage.Files.Shares/
 [docs]: https://docs.microsoft.com/dotnet/api/azure.storage.files.shares
 [rest_docs]: https://docs.microsoft.com/rest/api/storageservices/file-service-rest-api
@@ -243,10 +243,10 @@ additional questions or comments.
 [storage_account_create_portal]: https://docs.microsoft.com/azure/storage/common/storage-quickstart-create-account?tabs=azure-portal
 [azure_cli]: https://docs.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
-[RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Files.Shares_12.6.0/sdk/core/Azure.Core/src/RequestFailedException.cs
+[RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Files.Shares_12.6.2/sdk/core/Azure.Core/src/RequestFailedException.cs
 [error_codes]: https://docs.microsoft.com/rest/api/storageservices/file-service-error-codes
-[samples]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Files.Shares_12.6.0/sdk/storage/Azure.Storage.Files.Shares/samples/
-[storage_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Files.Shares_12.6.0/sdk/storage/CONTRIBUTING.md
+[samples]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Files.Shares_12.6.2/sdk/storage/Azure.Storage.Files.Shares/samples/
+[storage_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Files.Shares_12.6.2/sdk/storage/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
