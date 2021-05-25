@@ -3,7 +3,7 @@ title: Azure Communication SMS client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Communication.Sms, communication
 author: maggiepint
 ms.author: magpint
-ms.date: 03/29/2021
+ms.date: 05/25/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,10 +11,8 @@ ms.devlang: dotnet
 ms.service: communication
 ---
 
-# Azure Communication SMS client library for .NET - Version 1.0.0 
+# Azure Communication SMS client library for .NET - Version 1.0.1 
 
-> Server Version: 
-Sms client: 2021-03-29
 
 This package contains a C# SDK for Azure Communication Services for SMS and Telephony.
 
@@ -39,7 +37,6 @@ To create a new Communication Service, you can use the [Azure Portal][communicat
 ### Using statements
 ```C# Snippet:Azure_Communication_Sms_Tests_UsingStatements
 using System;
-using System.Collections.Generic;
 using Azure.Communication.Sms;
 ```
 
@@ -73,7 +70,7 @@ Console.WriteLine($"Sms id: {sendResult.MessageId}");
 ### Send a 1:N SMS Message
 To send a SMS message to a list of recipients, call the `Send` or `SendAsync` function from the `SmsClient` with a list of recipient's phone numbers.
 You may also add pass in an options object to specify whether the delivery report should be enabled and set custom tags.
-```C# Snippet:Azure_Communication_SmsClient_Send_GroupSmsWithOptions
+```C# Snippet:Azure_Communication_SmsClient_Send_GroupSmsWithOptionsAsync
 var response = await smsClient.SendAsync(
     from: "<from-phone-number>", // Your E.164 formatted from phone number used to send SMS
     to: new string[] { "<to-phone-number-1>", "<to-phone-number-2>" }, // E.164 formatted recipient phone numbers
@@ -148,5 +145,5 @@ This project has adopted the [Microsoft Open Source Code of Conduct][coc]. For m
 [product_docs]: https://docs.microsoft.com/azure/communication-services/overview
 [nextsteps]:https://docs.microsoft.com/azure/communication-services/quickstarts/telephony-sms/send?pivots=programming-language-csharp
 [nuget]: https://www.nuget.org/
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Communication.Sms_1.0.0/sdk/communication/Azure.Communication.Sms/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Communication.Sms_1.0.1/sdk/communication/Azure.Communication.Sms/src
 
