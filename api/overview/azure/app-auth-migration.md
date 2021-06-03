@@ -92,7 +92,7 @@ Console.WriteLine(secret.Value);
 ```csharp
 var tokenProvider = new AzureServiceTokenProvider();
 
-var accessToken = await tokenProvider.GetAccessTokenAsync(\"https://storageaccountname.queue.core.windows.net");
+var accessToken = await tokenProvider.GetAccessTokenAsync("https://storageaccountname.queue.core.windows.net");
 
 var tokenCredential = new StorageTokenCredential(accessToken);
 
@@ -120,7 +120,6 @@ queueClient.SendMessage("Azure.Storage.Queues");
 * Using `AppAuthentication` library
 
 ```csharp
-
 var tokenProvider = new AzureServiceTokenProvider();
 
 var accessToken = await tokenProvider.GetAccessTokenAsync(ResourceId);
