@@ -497,12 +497,12 @@
           <paramref name="alertConfigurationId" /> or <paramref name="alertId" /> is empty; or <paramref name="alertConfigurationId" /> is not a valid GUID.</exception>
       </Docs>
     </Member>
-    <Member MemberName="GetDimensionValues">
-      <MemberSignature Language="C#" Value="public virtual Azure.Pageable&lt;string&gt; GetDimensionValues (string metricId, string dimensionName, Azure.AI.MetricsAdvisor.GetDimensionValuesOptions options = default, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Pageable`1&lt;string&gt; GetDimensionValues(string metricId, string dimensionName, class Azure.AI.MetricsAdvisor.GetDimensionValuesOptions options, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.AI.MetricsAdvisor.MetricsAdvisorClient.GetDimensionValues(System.String,System.String,Azure.AI.MetricsAdvisor.GetDimensionValuesOptions,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetDimensionValues (metricId As String, dimensionName As String, Optional options As GetDimensionValuesOptions = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Pageable(Of String)" />
-      <MemberSignature Language="F#" Value="abstract member GetDimensionValues : string * string * Azure.AI.MetricsAdvisor.GetDimensionValuesOptions * System.Threading.CancellationToken -&gt; Azure.Pageable&lt;string&gt;&#xA;override this.GetDimensionValues : string * string * Azure.AI.MetricsAdvisor.GetDimensionValuesOptions * System.Threading.CancellationToken -&gt; Azure.Pageable&lt;string&gt;" Usage="metricsAdvisorClient.GetDimensionValues (metricId, dimensionName, options, cancellationToken)" />
+    <Member MemberName="GetAnomalyDimensionValues">
+      <MemberSignature Language="C#" Value="public virtual Azure.Pageable&lt;string&gt; GetAnomalyDimensionValues (string detectionConfigurationId, string dimensionName, Azure.AI.MetricsAdvisor.GetAnomalyDimensionValuesOptions options, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Pageable`1&lt;string&gt; GetAnomalyDimensionValues(string detectionConfigurationId, string dimensionName, class Azure.AI.MetricsAdvisor.GetAnomalyDimensionValuesOptions options, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.AI.MetricsAdvisor.MetricsAdvisorClient.GetAnomalyDimensionValues(System.String,System.String,Azure.AI.MetricsAdvisor.GetAnomalyDimensionValuesOptions,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetAnomalyDimensionValues (detectionConfigurationId As String, dimensionName As String, options As GetAnomalyDimensionValuesOptions, Optional cancellationToken As CancellationToken = Nothing) As Pageable(Of String)" />
+      <MemberSignature Language="F#" Value="abstract member GetAnomalyDimensionValues : string * string * Azure.AI.MetricsAdvisor.GetAnomalyDimensionValuesOptions * System.Threading.CancellationToken -&gt; Azure.Pageable&lt;string&gt;&#xA;override this.GetAnomalyDimensionValues : string * string * Azure.AI.MetricsAdvisor.GetAnomalyDimensionValuesOptions * System.Threading.CancellationToken -&gt; Azure.Pageable&lt;string&gt;" Usage="metricsAdvisorClient.GetAnomalyDimensionValues (detectionConfigurationId, dimensionName, options, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.AI.MetricsAdvisor</AssemblyName>
@@ -512,33 +512,34 @@
         <ReturnType>Azure.Pageable&lt;System.String&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="metricId" Type="System.String" />
+        <Parameter Name="detectionConfigurationId" Type="System.String" />
         <Parameter Name="dimensionName" Type="System.String" />
-        <Parameter Name="options" Type="Azure.AI.MetricsAdvisor.GetDimensionValuesOptions" />
+        <Parameter Name="options" Type="Azure.AI.MetricsAdvisor.GetAnomalyDimensionValuesOptions" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="metricId">The unique identifier of the <see cref="T:Azure.AI.MetricsAdvisor.Models.DataFeedMetric" />.</param>
-        <param name="dimensionName">The name of the <see cref="T:Azure.AI.MetricsAdvisor.Models.DataFeedDimension" />.</param>
-        <param name="options">An optional set of options used to configure the request's behavior.</param>
+        <param name="detectionConfigurationId">The unique identifier of the <see cref="T:Azure.AI.MetricsAdvisor.Models.MetricAnomalyAlertConfiguration" />.</param>
+        <param name="dimensionName">The name of the dimension.</param>
+        <param name="options">The set of options used to configure the request's behavior.</param>
         <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> controlling the request lifetime.</param>
         <summary>
-            Gets the possible values a <see cref="T:Azure.AI.MetricsAdvisor.Models.DataFeedDimension" /> can assume for a specified <see cref="T:Azure.AI.MetricsAdvisor.Models.DataFeedMetric" />.
+            Gets all the values a specified dimension has assumed for anomalous data points detected by a
+            <see cref="T:Azure.AI.MetricsAdvisor.Models.MetricAnomalyAlertConfiguration" />.
             </summary>
-        <returns>A <see cref="T:Azure.Pageable`1" /> containing the collection of values the specified <see cref="T:Azure.AI.MetricsAdvisor.Models.DataFeedDimension" /> can assume.</returns>
+        <returns>A <see cref="T:Azure.Pageable`1" /> containing the values the specified dimension assumed for anomalous data points. Items are unique.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="metricId" /> or <paramref name="dimensionName" /> is null.</exception>
+          <paramref name="detectionConfigurationId" />, <paramref name="dimensionName" />, or <paramref name="options" /> is null.</exception>
         <exception cref="T:System.ArgumentException">
-          <paramref name="metricId" /> or <paramref name="dimensionName" /> is empty; or <paramref name="metricId" /> is not a valid GUID.</exception>
+          <paramref name="detectionConfigurationId" /> or <paramref name="dimensionName" /> is empty; or <paramref name="detectionConfigurationId" /> is not a valid GUID.</exception>
       </Docs>
     </Member>
-    <Member MemberName="GetDimensionValuesAsync">
-      <MemberSignature Language="C#" Value="public virtual Azure.AsyncPageable&lt;string&gt; GetDimensionValuesAsync (string metricId, string dimensionName, Azure.AI.MetricsAdvisor.GetDimensionValuesOptions options = default, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.AsyncPageable`1&lt;string&gt; GetDimensionValuesAsync(string metricId, string dimensionName, class Azure.AI.MetricsAdvisor.GetDimensionValuesOptions options, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.AI.MetricsAdvisor.MetricsAdvisorClient.GetDimensionValuesAsync(System.String,System.String,Azure.AI.MetricsAdvisor.GetDimensionValuesOptions,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetDimensionValuesAsync (metricId As String, dimensionName As String, Optional options As GetDimensionValuesOptions = Nothing, Optional cancellationToken As CancellationToken = Nothing) As AsyncPageable(Of String)" />
-      <MemberSignature Language="F#" Value="abstract member GetDimensionValuesAsync : string * string * Azure.AI.MetricsAdvisor.GetDimensionValuesOptions * System.Threading.CancellationToken -&gt; Azure.AsyncPageable&lt;string&gt;&#xA;override this.GetDimensionValuesAsync : string * string * Azure.AI.MetricsAdvisor.GetDimensionValuesOptions * System.Threading.CancellationToken -&gt; Azure.AsyncPageable&lt;string&gt;" Usage="metricsAdvisorClient.GetDimensionValuesAsync (metricId, dimensionName, options, cancellationToken)" />
+    <Member MemberName="GetAnomalyDimensionValuesAsync">
+      <MemberSignature Language="C#" Value="public virtual Azure.AsyncPageable&lt;string&gt; GetAnomalyDimensionValuesAsync (string detectionConfigurationId, string dimensionName, Azure.AI.MetricsAdvisor.GetAnomalyDimensionValuesOptions options, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.AsyncPageable`1&lt;string&gt; GetAnomalyDimensionValuesAsync(string detectionConfigurationId, string dimensionName, class Azure.AI.MetricsAdvisor.GetAnomalyDimensionValuesOptions options, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.AI.MetricsAdvisor.MetricsAdvisorClient.GetAnomalyDimensionValuesAsync(System.String,System.String,Azure.AI.MetricsAdvisor.GetAnomalyDimensionValuesOptions,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetAnomalyDimensionValuesAsync (detectionConfigurationId As String, dimensionName As String, options As GetAnomalyDimensionValuesOptions, Optional cancellationToken As CancellationToken = Nothing) As AsyncPageable(Of String)" />
+      <MemberSignature Language="F#" Value="abstract member GetAnomalyDimensionValuesAsync : string * string * Azure.AI.MetricsAdvisor.GetAnomalyDimensionValuesOptions * System.Threading.CancellationToken -&gt; Azure.AsyncPageable&lt;string&gt;&#xA;override this.GetAnomalyDimensionValuesAsync : string * string * Azure.AI.MetricsAdvisor.GetAnomalyDimensionValuesOptions * System.Threading.CancellationToken -&gt; Azure.AsyncPageable&lt;string&gt;" Usage="metricsAdvisorClient.GetAnomalyDimensionValuesAsync (detectionConfigurationId, dimensionName, options, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.AI.MetricsAdvisor</AssemblyName>
@@ -548,25 +549,26 @@
         <ReturnType>Azure.AsyncPageable&lt;System.String&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="metricId" Type="System.String" />
+        <Parameter Name="detectionConfigurationId" Type="System.String" />
         <Parameter Name="dimensionName" Type="System.String" />
-        <Parameter Name="options" Type="Azure.AI.MetricsAdvisor.GetDimensionValuesOptions" />
+        <Parameter Name="options" Type="Azure.AI.MetricsAdvisor.GetAnomalyDimensionValuesOptions" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="metricId">The unique identifier of the <see cref="T:Azure.AI.MetricsAdvisor.Models.DataFeedMetric" />.</param>
-        <param name="dimensionName">The name of the <see cref="T:Azure.AI.MetricsAdvisor.Models.DataFeedDimension" />.</param>
-        <param name="options">An optional set of options used to configure the request's behavior.</param>
+        <param name="detectionConfigurationId">The unique identifier of the <see cref="T:Azure.AI.MetricsAdvisor.Models.MetricAnomalyAlertConfiguration" />.</param>
+        <param name="dimensionName">The name of the dimension.</param>
+        <param name="options">The set of options used to configure the request's behavior.</param>
         <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> controlling the request lifetime.</param>
         <summary>
-            Gets the possible values a <see cref="T:Azure.AI.MetricsAdvisor.Models.DataFeedDimension" /> can assume for a specified <see cref="T:Azure.AI.MetricsAdvisor.Models.DataFeedMetric" />.
+            Gets all the values a specified dimension has assumed for anomalous data points detected by a
+            <see cref="T:Azure.AI.MetricsAdvisor.Models.MetricAnomalyAlertConfiguration" />.
             </summary>
-        <returns>An <see cref="T:Azure.AsyncPageable`1" /> containing the collection of values the specified <see cref="T:Azure.AI.MetricsAdvisor.Models.DataFeedDimension" /> can assume.</returns>
+        <returns>An <see cref="T:Azure.AsyncPageable`1" /> containing the values the specified dimension assumed for anomalous data points. Items are unique.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="metricId" /> or <paramref name="dimensionName" /> is null.</exception>
+          <paramref name="detectionConfigurationId" />, <paramref name="dimensionName" />, or <paramref name="options" /> is null.</exception>
         <exception cref="T:System.ArgumentException">
-          <paramref name="metricId" /> or <paramref name="dimensionName" /> is empty; or <paramref name="metricId" /> is not a valid GUID.</exception>
+          <paramref name="detectionConfigurationId" /> or <paramref name="dimensionName" /> is empty; or <paramref name="detectionConfigurationId" /> is not a valid GUID.</exception>
       </Docs>
     </Member>
     <Member MemberName="GetFeedback">
@@ -907,6 +909,78 @@
           <paramref name="alertConfigurationId" /> or <paramref name="alertId" /> is empty; or <paramref name="alertConfigurationId" /> is not a valid GUID.</exception>
       </Docs>
     </Member>
+    <Member MemberName="GetMetricDimensionValues">
+      <MemberSignature Language="C#" Value="public virtual Azure.Pageable&lt;string&gt; GetMetricDimensionValues (string metricId, string dimensionName, Azure.AI.MetricsAdvisor.GetMetricDimensionValuesOptions options = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Pageable`1&lt;string&gt; GetMetricDimensionValues(string metricId, string dimensionName, class Azure.AI.MetricsAdvisor.GetMetricDimensionValuesOptions options, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.AI.MetricsAdvisor.MetricsAdvisorClient.GetMetricDimensionValues(System.String,System.String,Azure.AI.MetricsAdvisor.GetMetricDimensionValuesOptions,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetMetricDimensionValues (metricId As String, dimensionName As String, Optional options As GetMetricDimensionValuesOptions = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Pageable(Of String)" />
+      <MemberSignature Language="F#" Value="abstract member GetMetricDimensionValues : string * string * Azure.AI.MetricsAdvisor.GetMetricDimensionValuesOptions * System.Threading.CancellationToken -&gt; Azure.Pageable&lt;string&gt;&#xA;override this.GetMetricDimensionValues : string * string * Azure.AI.MetricsAdvisor.GetMetricDimensionValuesOptions * System.Threading.CancellationToken -&gt; Azure.Pageable&lt;string&gt;" Usage="metricsAdvisorClient.GetMetricDimensionValues (metricId, dimensionName, options, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.AI.MetricsAdvisor</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Pageable&lt;System.String&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="metricId" Type="System.String" />
+        <Parameter Name="dimensionName" Type="System.String" />
+        <Parameter Name="options" Type="Azure.AI.MetricsAdvisor.GetMetricDimensionValuesOptions" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="metricId">The unique identifier of the <see cref="T:Azure.AI.MetricsAdvisor.Models.DataFeedMetric" />.</param>
+        <param name="dimensionName">The name of the <see cref="T:Azure.AI.MetricsAdvisor.Models.DataFeedDimension" />.</param>
+        <param name="options">An optional set of options used to configure the request's behavior.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> controlling the request lifetime.</param>
+        <summary>
+            Gets the possible values a <see cref="T:Azure.AI.MetricsAdvisor.Models.DataFeedDimension" /> can assume for a specified <see cref="T:Azure.AI.MetricsAdvisor.Models.DataFeedMetric" />.
+            </summary>
+        <returns>A <see cref="T:Azure.Pageable`1" /> containing the collection of values the specified <see cref="T:Azure.AI.MetricsAdvisor.Models.DataFeedDimension" /> can assume.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="metricId" /> or <paramref name="dimensionName" /> is null.</exception>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="metricId" /> or <paramref name="dimensionName" /> is empty; or <paramref name="metricId" /> is not a valid GUID.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetMetricDimensionValuesAsync">
+      <MemberSignature Language="C#" Value="public virtual Azure.AsyncPageable&lt;string&gt; GetMetricDimensionValuesAsync (string metricId, string dimensionName, Azure.AI.MetricsAdvisor.GetMetricDimensionValuesOptions options = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.AsyncPageable`1&lt;string&gt; GetMetricDimensionValuesAsync(string metricId, string dimensionName, class Azure.AI.MetricsAdvisor.GetMetricDimensionValuesOptions options, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.AI.MetricsAdvisor.MetricsAdvisorClient.GetMetricDimensionValuesAsync(System.String,System.String,Azure.AI.MetricsAdvisor.GetMetricDimensionValuesOptions,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetMetricDimensionValuesAsync (metricId As String, dimensionName As String, Optional options As GetMetricDimensionValuesOptions = Nothing, Optional cancellationToken As CancellationToken = Nothing) As AsyncPageable(Of String)" />
+      <MemberSignature Language="F#" Value="abstract member GetMetricDimensionValuesAsync : string * string * Azure.AI.MetricsAdvisor.GetMetricDimensionValuesOptions * System.Threading.CancellationToken -&gt; Azure.AsyncPageable&lt;string&gt;&#xA;override this.GetMetricDimensionValuesAsync : string * string * Azure.AI.MetricsAdvisor.GetMetricDimensionValuesOptions * System.Threading.CancellationToken -&gt; Azure.AsyncPageable&lt;string&gt;" Usage="metricsAdvisorClient.GetMetricDimensionValuesAsync (metricId, dimensionName, options, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.AI.MetricsAdvisor</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.AsyncPageable&lt;System.String&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="metricId" Type="System.String" />
+        <Parameter Name="dimensionName" Type="System.String" />
+        <Parameter Name="options" Type="Azure.AI.MetricsAdvisor.GetMetricDimensionValuesOptions" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="metricId">The unique identifier of the <see cref="T:Azure.AI.MetricsAdvisor.Models.DataFeedMetric" />.</param>
+        <param name="dimensionName">The name of the <see cref="T:Azure.AI.MetricsAdvisor.Models.DataFeedDimension" />.</param>
+        <param name="options">An optional set of options used to configure the request's behavior.</param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> controlling the request lifetime.</param>
+        <summary>
+            Gets the possible values a <see cref="T:Azure.AI.MetricsAdvisor.Models.DataFeedDimension" /> can assume for a specified <see cref="T:Azure.AI.MetricsAdvisor.Models.DataFeedMetric" />.
+            </summary>
+        <returns>An <see cref="T:Azure.AsyncPageable`1" /> containing the collection of values the specified <see cref="T:Azure.AI.MetricsAdvisor.Models.DataFeedDimension" /> can assume.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="metricId" /> or <paramref name="dimensionName" /> is null.</exception>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="metricId" /> or <paramref name="dimensionName" /> is empty; or <paramref name="metricId" /> is not a valid GUID.</exception>
+      </Docs>
+    </Member>
     <Member MemberName="GetMetricEnrichedSeriesData">
       <MemberSignature Language="C#" Value="public virtual Azure.Pageable&lt;Azure.AI.MetricsAdvisor.Models.MetricEnrichedSeriesData&gt; GetMetricEnrichedSeriesData (System.Collections.Generic.IEnumerable&lt;Azure.AI.MetricsAdvisor.Models.DimensionKey&gt; seriesKeys, string detectionConfigurationId, DateTimeOffset startTime, DateTimeOffset endTime, System.Threading.CancellationToken cancellationToken = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Pageable`1&lt;class Azure.AI.MetricsAdvisor.Models.MetricEnrichedSeriesData&gt; GetMetricEnrichedSeriesData(class System.Collections.Generic.IEnumerable`1&lt;class Azure.AI.MetricsAdvisor.Models.DimensionKey&gt; seriesKeys, string detectionConfigurationId, valuetype System.DateTimeOffset startTime, valuetype System.DateTimeOffset endTime, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
@@ -1175,80 +1249,6 @@
           <paramref name="metricId" /> or <paramref name="options" /> is null.</exception>
         <exception cref="T:System.ArgumentException">
           <paramref name="metricId" /> is empty or not a valid GUID.</exception>
-      </Docs>
-    </Member>
-    <Member MemberName="GetValuesOfDimensionWithAnomalies">
-      <MemberSignature Language="C#" Value="public virtual Azure.Pageable&lt;string&gt; GetValuesOfDimensionWithAnomalies (string detectionConfigurationId, string dimensionName, Azure.AI.MetricsAdvisor.GetValuesOfDimensionWithAnomaliesOptions options, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Pageable`1&lt;string&gt; GetValuesOfDimensionWithAnomalies(string detectionConfigurationId, string dimensionName, class Azure.AI.MetricsAdvisor.GetValuesOfDimensionWithAnomaliesOptions options, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.AI.MetricsAdvisor.MetricsAdvisorClient.GetValuesOfDimensionWithAnomalies(System.String,System.String,Azure.AI.MetricsAdvisor.GetValuesOfDimensionWithAnomaliesOptions,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetValuesOfDimensionWithAnomalies (detectionConfigurationId As String, dimensionName As String, options As GetValuesOfDimensionWithAnomaliesOptions, Optional cancellationToken As CancellationToken = Nothing) As Pageable(Of String)" />
-      <MemberSignature Language="F#" Value="abstract member GetValuesOfDimensionWithAnomalies : string * string * Azure.AI.MetricsAdvisor.GetValuesOfDimensionWithAnomaliesOptions * System.Threading.CancellationToken -&gt; Azure.Pageable&lt;string&gt;&#xA;override this.GetValuesOfDimensionWithAnomalies : string * string * Azure.AI.MetricsAdvisor.GetValuesOfDimensionWithAnomaliesOptions * System.Threading.CancellationToken -&gt; Azure.Pageable&lt;string&gt;" Usage="metricsAdvisorClient.GetValuesOfDimensionWithAnomalies (detectionConfigurationId, dimensionName, options, cancellationToken)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Azure.AI.MetricsAdvisor</AssemblyName>
-        <AssemblyVersion>1.0.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>Azure.Pageable&lt;System.String&gt;</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="detectionConfigurationId" Type="System.String" />
-        <Parameter Name="dimensionName" Type="System.String" />
-        <Parameter Name="options" Type="Azure.AI.MetricsAdvisor.GetValuesOfDimensionWithAnomaliesOptions" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
-      </Parameters>
-      <Docs>
-        <param name="detectionConfigurationId">The unique identifier of the <see cref="T:Azure.AI.MetricsAdvisor.Models.MetricAnomalyAlertConfiguration" />.</param>
-        <param name="dimensionName">The name of the dimension.</param>
-        <param name="options">The set of options used to configure the request's behavior.</param>
-        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> controlling the request lifetime.</param>
-        <summary>
-            Gets all the values a specified dimension has assumed for anomalous data points detected by a
-            <see cref="T:Azure.AI.MetricsAdvisor.Models.MetricAnomalyAlertConfiguration" />.
-            </summary>
-        <returns>A <see cref="T:Azure.Pageable`1" /> containing the values the specified dimension assumed for anomalous data points. Items are unique.</returns>
-        <remarks>To be added.</remarks>
-        <exception cref="T:System.ArgumentNullException">
-          <paramref name="detectionConfigurationId" />, <paramref name="dimensionName" />, or <paramref name="options" /> is null.</exception>
-        <exception cref="T:System.ArgumentException">
-          <paramref name="detectionConfigurationId" /> or <paramref name="dimensionName" /> is empty; or <paramref name="detectionConfigurationId" /> is not a valid GUID.</exception>
-      </Docs>
-    </Member>
-    <Member MemberName="GetValuesOfDimensionWithAnomaliesAsync">
-      <MemberSignature Language="C#" Value="public virtual Azure.AsyncPageable&lt;string&gt; GetValuesOfDimensionWithAnomaliesAsync (string detectionConfigurationId, string dimensionName, Azure.AI.MetricsAdvisor.GetValuesOfDimensionWithAnomaliesOptions options, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.AsyncPageable`1&lt;string&gt; GetValuesOfDimensionWithAnomaliesAsync(string detectionConfigurationId, string dimensionName, class Azure.AI.MetricsAdvisor.GetValuesOfDimensionWithAnomaliesOptions options, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.AI.MetricsAdvisor.MetricsAdvisorClient.GetValuesOfDimensionWithAnomaliesAsync(System.String,System.String,Azure.AI.MetricsAdvisor.GetValuesOfDimensionWithAnomaliesOptions,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetValuesOfDimensionWithAnomaliesAsync (detectionConfigurationId As String, dimensionName As String, options As GetValuesOfDimensionWithAnomaliesOptions, Optional cancellationToken As CancellationToken = Nothing) As AsyncPageable(Of String)" />
-      <MemberSignature Language="F#" Value="abstract member GetValuesOfDimensionWithAnomaliesAsync : string * string * Azure.AI.MetricsAdvisor.GetValuesOfDimensionWithAnomaliesOptions * System.Threading.CancellationToken -&gt; Azure.AsyncPageable&lt;string&gt;&#xA;override this.GetValuesOfDimensionWithAnomaliesAsync : string * string * Azure.AI.MetricsAdvisor.GetValuesOfDimensionWithAnomaliesOptions * System.Threading.CancellationToken -&gt; Azure.AsyncPageable&lt;string&gt;" Usage="metricsAdvisorClient.GetValuesOfDimensionWithAnomaliesAsync (detectionConfigurationId, dimensionName, options, cancellationToken)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Azure.AI.MetricsAdvisor</AssemblyName>
-        <AssemblyVersion>1.0.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>Azure.AsyncPageable&lt;System.String&gt;</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="detectionConfigurationId" Type="System.String" />
-        <Parameter Name="dimensionName" Type="System.String" />
-        <Parameter Name="options" Type="Azure.AI.MetricsAdvisor.GetValuesOfDimensionWithAnomaliesOptions" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
-      </Parameters>
-      <Docs>
-        <param name="detectionConfigurationId">The unique identifier of the <see cref="T:Azure.AI.MetricsAdvisor.Models.MetricAnomalyAlertConfiguration" />.</param>
-        <param name="dimensionName">The name of the dimension.</param>
-        <param name="options">The set of options used to configure the request's behavior.</param>
-        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> controlling the request lifetime.</param>
-        <summary>
-            Gets all the values a specified dimension has assumed for anomalous data points detected by a
-            <see cref="T:Azure.AI.MetricsAdvisor.Models.MetricAnomalyAlertConfiguration" />.
-            </summary>
-        <returns>An <see cref="T:Azure.AsyncPageable`1" /> containing the values the specified dimension assumed for anomalous data points. Items are unique.</returns>
-        <remarks>To be added.</remarks>
-        <exception cref="T:System.ArgumentNullException">
-          <paramref name="detectionConfigurationId" />, <paramref name="dimensionName" />, or <paramref name="options" /> is null.</exception>
-        <exception cref="T:System.ArgumentException">
-          <paramref name="detectionConfigurationId" /> or <paramref name="dimensionName" /> is empty; or <paramref name="detectionConfigurationId" /> is not a valid GUID.</exception>
       </Docs>
     </Member>
   </Members>
