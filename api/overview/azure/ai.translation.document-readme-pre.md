@@ -1,17 +1,17 @@
 ---
 title: Azure Cognitive Services Document Translation client library for .NET
-keywords: Azure, dotnet, SDK, API, Azure.AI.Translation.Document, 
+keywords: Azure, dotnet, SDK, API, Azure.AI.Translation.Document, translator
 author: maggiepint
 ms.author: magpint
-ms.date: 04/06/2021
+ms.date: 06/08/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: 
+ms.service: translator
 ---
 
-# Azure Cognitive Services Document Translation client library for .NET - Version 1.0.0-beta.1 
+# Azure Cognitive Services Document Translation client library for .NET - Version 1.0.0-beta.2 
 
 
 Azure Cognitive Services Document Translation is a cloud service that translates documents to and from 90 languages and dialects while preserving document structure and data format. Use the client library for Document Translation to:
@@ -30,6 +30,8 @@ Install the Azure Document Translation client library for .NET with [NuGet][nuge
 ```PowerShell
 dotnet add package Azure.AI.Translation.Document --prerelease
 ```
+
+> Note: This version of the client library defaults to the `v1.0` version of the service.
 
 ### Prerequisites
 * An [Azure subscription][azure_sub].
@@ -67,7 +69,7 @@ az cognitiveservices account create \
 For more information about creating the resource or how to get the location information see [here][cognitive_resource_cli].
 
 ### Authenticate the client
-In order to interact with the Document Translation service, you'll need to create an instance of the [DocumentTranslationClient][documenttranslation_client_class] class. You will need an **endpoint**, and an **API key** to instantiate a client object.  For more information regarding authenticating with cognitive services, see [Authenticate requests to Azure Cognitive Services][cognitive_auth].
+In order to interact with the Document Translation service, you'll need to create an instance of the [DocumentTranslationClient][documenttranslation_client_class] class. You will need an **endpoint**, and either an **API key** or `TokenCredential` to instantiate a client object.  For more information regarding authenticating with cognitive services, see [Authenticate requests to Azure Cognitive Services][cognitive_auth].
 
 #### Looking up the endpoint
 For Document Translation you will need to use a [Custom Domain Endpoint][custom_domain_endpoint] using the name of you Translator resource.
@@ -93,6 +95,27 @@ string apiKey = "<apiKey>";
 var client = new DocumentTranslationClient(new Uri(endpoint), new AzureKeyCredential(apiKey));
 ```
 
+#### Create DocumentTranslationClient with Azure Active Directory Credential
+
+Client API key authentication is used in most of the examples in this getting started guide, but you can also authenticate with Azure Active Directory using the [Azure Identity library][azure_identity].  Note that regional endpoints do not support AAD authentication.
+
+Create a [custom subdomain][custom_subdomain] for your resource in order to use this type of authentication.  
+
+To use the [DefaultAzureCredential][DefaultAzureCredential] provider shown below, or other credential providers provided with the Azure SDK, please install the Azure.Identity package:
+
+```PowerShell
+Install-Package Azure.Identity
+```
+
+You will also need to [register a new AAD application][register_aad_app] and [grant access][aad_grant_access] to your Translator resource by assigning the `"Cognitive Services User"` role to your service principal.
+
+Set the values of the `client ID`, `tenant ID`, and `client secret` of the AAD application as environment variables: `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_CLIENT_SECRET`.
+
+```C# Snippet:CreateDocumentTranslationClientTokenCredential
+string endpoint = "<endpoint>";
+var client = new DocumentTranslationClient(new Uri(endpoint), new DefaultAzureCredential());
+```
+
 ## Key concepts
 
 ### DocumentTranslationClient
@@ -108,8 +131,8 @@ To start a translation operation you need to create one instance or a list of `D
 A single source URL to documents can be translated to many different languages:
 
 ```C# Snippet:DocumentTranslationSingleInput
-Uri sourceSasUri = <source SAS URI>;
-Uri frenchTargetSasUri = <french target SAS URI>;
+Uri sourceSasUri = new Uri("<source SAS URI>");
+Uri frenchTargetSasUri = new Uri("<french target SAS URI>");
 
 var input = new DocumentTranslationInput(sourceSasUri, frenchTargetSasUri, "fr");
 ```
@@ -117,10 +140,10 @@ var input = new DocumentTranslationInput(sourceSasUri, frenchTargetSasUri, "fr")
 Or multiple different sources can be provided each with their own targets.
 
 ```C# Snippet:DocumentTranslationMultipleInputs
-Uri source1SasUri = <source1 SAS URI>;
-Uri source2SasUri = <source2 SAS URI>;
-Uri frenchTargetSasUri = <french target SAS URI>;
-Uri spanishTargetSasUri = <spanish target SAS URI>;
+Uri arabicTargetSasUri = new Uri("<arabic target SAS URI>");
+Uri spanishTargetSasUri = new Uri("<spanish target SAS URI>");
+Uri source1SasUri = new Uri("<source1 SAS URI>");
+Uri source2SasUri = new Uri("<source2 SAS URI>");
 
 var inputs = new List<DocumentTranslationInput>
 {
@@ -130,7 +153,7 @@ var inputs = new List<DocumentTranslationInput>
         targets: new List<TranslationTarget>
         {
             new TranslationTarget(frenchTargetSasUri, "fr"),
-            new TranslationTarget(spanishTargetSasUri, "es")
+            new TranslationTarget(arabicTargetSasUri, "ar")
         }),
 };
 ```
@@ -149,11 +172,11 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Translation.Document_1.0.0-beta.1/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Translation.Document_1.0.0-beta.1/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Translation.Document_1.0.0-beta.1/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Translation.Document_1.0.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Translation.Document_1.0.0-beta.1/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Translation.Document_1.0.0-beta.2/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Translation.Document_1.0.0-beta.2/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Translation.Document_1.0.0-beta.2/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Translation.Document_1.0.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Translation.Document_1.0.0-beta.2/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
@@ -174,8 +197,8 @@ Note: our `DocumentTranslationClient` provides both synchronous and asynchronous
 Start a translation operation to translate documents in the source container and write the translated files to the target container. `DocumentTranslationOperation` allows you to poll the status of the translation operation and get the status of the individual documents.
 
 ```C# Snippet:StartTranslationAsync
-Uri sourceUri = <source SAS URI>;
-Uri targetUri = <target SAS URI>;
+Uri sourceUri = new Uri("<source SAS URI>");
+Uri targetUri = new Uri("<target SAS URI>");
 
 var input = new DocumentTranslationInput(sourceUri, targetUri, "es");
 
@@ -199,7 +222,7 @@ await foreach (DocumentStatusResult document in operation.Value)
     if (document.Status == TranslationStatus.Succeeded)
     {
         Console.WriteLine($"  Translated Document Uri: {document.TranslatedDocumentUri}");
-        Console.WriteLine($"  Translated to language: {document.TranslateTo}.");
+        Console.WriteLine($"  Translated to language: {document.TranslatedTo}.");
         Console.WriteLine($"  Document source Uri: {document.SourceDocumentUri}");
     }
     else
@@ -220,7 +243,7 @@ int docsCancelled = 0;
 int docsSucceeded = 0;
 int docsFailed = 0;
 
-await foreach (TranslationStatusResult translationStatus in client.GetTranslationsAsync())
+await foreach (TranslationStatusResult translationStatus in client.GetAllTranslationStatusesAsync())
 {
     if (!translationStatus.HasCompleted)
     {
@@ -246,12 +269,13 @@ Console.WriteLine($"Cancelled Documents: {docsCancelled}");
 Start a translation operation to translate documents in multiple source containers to multiple target containers in different languages. `DocumentTranslationOperation` allows you to poll the status of the translation operation and get the status of the individual documents.
 
 ```C# Snippet:MultipleInputsAsync
-Uri source1SasUriUri = <source1 SAS URI>;
-Uri source2SasUri = <source2 SAS URI>;
-Uri frenchTargetSasUri = <french target SAS URI>;
-Uri arabicTargetSasUri = <arabic target SAS URI>;
-Uri spanishTargetSasUri = <spanish target SAS URI>;
-Uri frenchGlossarySasUri = <french glossary SAS URI>;
+Uri source1SasUriUri = new Uri("<source1 SAS URI>");
+Uri source2SasUri = new Uri("<source2 SAS URI>");
+Uri frenchTargetSasUri = new Uri("<french target SAS URI>");
+Uri arabicTargetSasUri = new Uri("<arabic target SAS URI>");
+Uri spanishTargetSasUri = new Uri("<spanish target SAS URI>");
+Uri frenchGlossarySasUri = new Uri("<french glossary SAS URI>");
+
 var glossaryFormat = "TSV";
 
 var input1 = new DocumentTranslationInput(source1SasUriUri, frenchTargetSasUri, "fr", new TranslationGlossary(frenchGlossarySasUri, glossaryFormat));
@@ -277,7 +301,7 @@ await foreach (DocumentStatusResult document in operation.GetValuesAsync())
     if (document.Status == TranslationStatus.Succeeded)
     {
         Console.WriteLine($"  Translated Document Uri: {document.TranslatedDocumentUri}");
-        Console.WriteLine($"  Translated to language: {document.TranslateTo}.");
+        Console.WriteLine($"  Translated to language: {document.TranslatedTo}.");
         Console.WriteLine($"  Document source Uri: {document.SourceDocumentUri}");
     }
     else
@@ -293,8 +317,8 @@ await foreach (DocumentStatusResult document in operation.GetValuesAsync())
 Start a translation operation to translate documents in the source container and write the translated files to the target container. `DocumentTranslationOperation` allows you to poll the status of the translation operation and get the status of the individual documents.
 
 ```C# Snippet:StartTranslation
-Uri sourceUri = <source SAS URI>;
-Uri targetUri = <target SAS URI>;
+Uri sourceUri = new Uri("<source SAS URI>");
+Uri targetUri = new Uri("<target SAS URI>");
 
 var input = new DocumentTranslationInput(sourceUri, targetUri, "es");
 
@@ -336,7 +360,7 @@ foreach (DocumentStatusResult document in operation.GetValues())
     if (document.Status == TranslationStatus.Succeeded)
     {
         Console.WriteLine($"  Translated Document Uri: {document.TranslatedDocumentUri}");
-        Console.WriteLine($"  Translated to language: {document.TranslateTo}.");
+        Console.WriteLine($"  Translated to language: {document.TranslatedTo}.");
         Console.WriteLine($"  Document source Uri: {document.SourceDocumentUri}");
     }
     else
@@ -356,7 +380,7 @@ When you interact with the Cognitive Services Document Translation client librar
 For example, if you submit a request with an empty targets list, a `400` error is returned, indicating "Bad Request".
 
 ```C# Snippet:BadRequest
-var invalidInput = new DocumentTranslationInput(new TranslationSource(sourceSasUri, new List<TranslationTarget>());
+var invalidInput = new DocumentTranslationInput(new TranslationSource(new Uri(endpoint)), new List<TranslationTarget>());
 
 try
 {
@@ -411,6 +435,7 @@ Samples showing how to use the Cognitive Services Document Translation library a
 
 ### Advanced samples
 - [Multiple Inputs][multiple_Inputs_sample]
+- [Create Storage Containers and start translation][using_storage_sample]
 
 ## Contributing
 See the [CONTRIBUTING.md][contributing] for details on building, testing, and contributing to this library.
@@ -425,33 +450,29 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 
 
 <!-- LINKS -->
-[documenttranslation_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Translation.Document_1.0.0-beta.1/sdk/translation/Azure.AI.Translation.Document/src
-<!--TODO: remove /overview -->
+[documenttranslation_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Translation.Document_1.0.0-beta.2/sdk/translation/Azure.AI.Translation.Document/src
 [documenttranslation_docs]: https://docs.microsoft.com/azure/cognitive-services/translator/document-translation/overview
-<!-- TODO: Add correct link when available -->
-[documenttranslation_refdocs]: https://aka.ms/azsdk/net/translation/docs
-<!-- TODO: Add correct link when available -->
-[documenttranslation_nuget_package]: https://www.nuget.org/
-[documenttranslation_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Translation.Document_1.0.0-beta.1/sdk/translation/Azure.AI.Translation.Document/samples/README.md
-<!-- TODO: Add correct link when available -->
-[documenttranslation_rest_api]: https://github.com/Azure/azure-rest-api-specs/blob/master/specification/cognitiveservices/data-plane/TranslatorText/preview/v1.0-preview.1/TranslatorBatch.json
+[documenttranslation_refdocs]: https://aka.ms/azsdk/net/documenttranslation/docs
+[documenttranslation_nuget_package]: https://www.nuget.org/packages/Azure.AI.Translation.Document
+[documenttranslation_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Translation.Document_1.0.0-beta.2/sdk/translation/Azure.AI.Translation.Document/samples/README.md
+[documenttranslation_rest_api]: https://github.com/Azure/azure-rest-api-specs/blob/master/specification/cognitiveservices/data-plane/TranslatorText/stable/v1.0/TranslatorBatch.json
 [custom_domain_endpoint]: https://docs.microsoft.com/azure/cognitive-services/translator/document-translation/get-started-with-document-translation?tabs=csharp#what-is-the-custom-domain-endpoint
 [single_service]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account?tabs=singleservice%2Cwindows
 [azure_portal_create_DT_resource]: https://ms.portal.azure.com/#create/Microsoft.CognitiveServicesTextTranslation
 [cognitive_resource_cli]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account-cli
 [dotnet_lro_guidelines]: https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning
 
-[documenttranslation_client_class]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Translation.Document_1.0.0-beta.1/sdk/translation/Azure.AI.Translation.Document/src/DocumentTranslationClient.cs
+[documenttranslation_client_class]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Translation.Document_1.0.0-beta.2/sdk/translation/Azure.AI.Translation.Document/src/DocumentTranslationClient.cs
+[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Translation.Document_1.0.0-beta.2/sdk/identity/Azure.Identity/README.md
 [cognitive_auth]: https://docs.microsoft.com/azure/cognitive-services/authentication
-[logging]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Translation.Document_1.0.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md
-<!-- TODO: Add correct link when available -->
-[data_limits]: https://docs.microsoft.com/azure/cognitive-services/document-translation/overview
-[contributing]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Translation.Document_1.0.0-beta.1/CONTRIBUTING.md
+[logging]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Translation.Document_1.0.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md
+[contributing]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Translation.Document_1.0.0-beta.2/CONTRIBUTING.md
 
-[start_translation_sample]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Translation.Document_1.0.0-beta.1/sdk/translation/Azure.AI.Translation.Document/samples/Sample1_StartTranslation.md
-[documents_status_sample]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Translation.Document_1.0.0-beta.1/sdk/translation/Azure.AI.Translation.Document/samples/Sample2_PollIndividualDocuments.md
-[operations_history_sample]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Translation.Document_1.0.0-beta.1/sdk/translation/Azure.AI.Translation.Document/samples/Sample3_OperationsHistory.md
-[multiple_inputs_sample]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Translation.Document_1.0.0-beta.1/sdk/translation/Azure.AI.Translation.Document/samples/Sample4_MultipleInputs.md
+[start_translation_sample]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Translation.Document_1.0.0-beta.2/sdk/translation/Azure.AI.Translation.Document/samples/Sample1_StartTranslation.md
+[documents_status_sample]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Translation.Document_1.0.0-beta.2/sdk/translation/Azure.AI.Translation.Document/samples/Sample2_PollIndividualDocuments.md
+[operations_history_sample]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Translation.Document_1.0.0-beta.2/sdk/translation/Azure.AI.Translation.Document/samples/Sample3_OperationsHistory.md
+[multiple_inputs_sample]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Translation.Document_1.0.0-beta.2/sdk/translation/Azure.AI.Translation.Document/samples/Sample4_MultipleInputs.md
+[using_storage_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Translation.Document_1.0.0-beta.2/sdk/translation/Azure.AI.Translation.Document/tests/samples/Sample_StartTranslationWithAzureBlob.cs
 
 [azure_cli]: https://docs.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
