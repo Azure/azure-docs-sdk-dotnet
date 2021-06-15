@@ -3,7 +3,7 @@ title:
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.Messaging.EventGrid.CloudNativeCloudEvents, 
 author: maggiepint
 ms.author: magpint
-ms.date: 03/18/2021
+ms.date: 06/15/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -57,7 +57,7 @@ EventGridPublisherClient client = new EventGridPublisherClient(
 
 For information about general Event Grid concepts: [Concepts in Azure Event Grid](https://docs.microsoft.com/azure/event-grid/concepts).
 
-For detailed information about the Event Grid client library concepts: [Event Grid Client Library](https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.Messaging.EventGrid.CloudNativeCloudEvents_1.0.0-beta.1/sdk/eventgrid/Azure.Messaging.EventGrid#key-concepts)
+For detailed information about the Event Grid client library concepts: [Event Grid Client Library](https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.Messaging.EventGrid.CloudNativeCloudEvents_1.0.0-beta.2/sdk/eventgrid/Azure.Messaging.EventGrid#key-concepts)
 
 ## Examples
 
@@ -67,23 +67,22 @@ EventGridPublisherClient client = new EventGridPublisherClient(
         new AzureKeyCredential(TestEnvironment.CloudEventTopicKey));
 
 var cloudEvent =
-    new CloudEvent(
-        type: "record",
-        source: new Uri("http://www.contoso.com"))
-        {
-            Data = "data"
-        };
-
+    new CloudEvent 
+    {
+        Type = "record",
+        Source = new Uri("http://www.contoso.com"),
+        Data = "data"
+    };
 await client.SendCloudEventAsync(cloudEvent);
 ```
 
 ## Troubleshooting
 
-For troubleshooting information, see the [Event Grid Client Library documentation](https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.Messaging.EventGrid.CloudNativeCloudEvents_1.0.0-beta.1/sdk/eventgrid/Azure.Messaging.EventGrid#troubleshooting).
+For troubleshooting information, see the [Event Grid Client Library documentation](https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.Messaging.EventGrid.CloudNativeCloudEvents_1.0.0-beta.2/sdk/eventgrid/Azure.Messaging.EventGrid#troubleshooting).
 
 ## Next steps
 
-View more [samples](https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.Messaging.EventGrid.CloudNativeCloudEvents_1.0.0-beta.1/sdk/eventgrid/Microsoft.Azure.Messaging.EventGrid.CloudNativeCloudEvents/tests/Samples) here for common usages of the library.
+View more [samples](https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.Messaging.EventGrid.CloudNativeCloudEvents_1.0.0-beta.2/sdk/eventgrid/Microsoft.Azure.Messaging.EventGrid.CloudNativeCloudEvents/tests/Samples) here for common usages of the library.
 
 ## Contributing
 
@@ -97,3 +96,4 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct
 [code_of_conduct_faq]: https://opensource.microsoft.com/codeofconduct/faq/
+
