@@ -3,7 +3,7 @@ title: Azure Batch client library for Python
 keywords: Azure, dotnet, SDK, API, Azure.Template, template
 author: maggiepint
 ms.author: magpint
-ms.date: 06/18/2021
+ms.date: 06/21/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -18,10 +18,10 @@ Use the guidelines in each section of this template to ensure consistency and re
 **Title**: The H1 of your README should be in the format: `# [Product Name] client library for [Language]`
 
 * All headings, including the H1, should use **sentence-style capitalization**. Refer to the [Microsoft Style Guide][style-guide-msft] and [Microsoft Cloud Style Guide][style-guide-cloud] for more information.
-* Example: `# Azure Batch client library for Python - Version 1.0.3-beta.954366 
+* Example: `# Azure Batch client library for Python - Version 1.0.3-beta.957326 
 `
 
-# Azure Template client library for .NET - Version 1.0.3-beta.954366 
+# Azure Template client library for .NET - Version 1.0.3-beta.957326 
 
 
 **Introduction**: The introduction appears directly under the title (H1) of your README.
@@ -65,7 +65,7 @@ Include the *Thread safety* and *Additional concepts* sections below at the end 
 We guarantee that all client instance methods are thread-safe and independent of each other ([guideline](https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-service-methods-thread-safety)). This ensures that the recommendation of reusing client instances is always safe, even across threads.
 
 ### Additional concepts
-<!-- CLIENT COMMON BAR -->
+
 [Client options](https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
 [Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
 [Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
@@ -73,7 +73,7 @@ We guarantee that all client instance methods are thread-safe and independent of
 [Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/core/Azure.Core/samples/Diagnostics.md) |
 [Mocking](https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
-<!-- CLIENT COMMON BAR -->
+
 
 ## Examples
 
@@ -128,9 +128,7 @@ If the package or a related package supports it, include tips for logging or ena
 
 This is a template, but your SDK readme should include details on how to contribute code to the repo/package.
 
-<!-- LINKS -->
+
 [style-guide-msft]: https://docs.microsoft.com/style-guide/capitalization
 [style-guide-cloud]: https://aka.ms/azsdk/cloud-style-guide
-
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Ftemplate%2FAzure.Template%2FREADME.png)
 
