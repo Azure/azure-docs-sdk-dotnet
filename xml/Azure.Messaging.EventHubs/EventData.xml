@@ -71,6 +71,28 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public EventData (string eventBody);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string eventBody) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Messaging.EventHubs.EventData.#ctor(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (eventBody As String)" />
+      <MemberSignature Language="F#" Value="new Azure.Messaging.EventHubs.EventData : string -&gt; Azure.Messaging.EventHubs.EventData" Usage="new Azure.Messaging.EventHubs.EventData eventBody" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Messaging.EventHubs</AssemblyName>
+        <AssemblyVersion>5.5.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="eventBody" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="eventBody">The data to use as the body of the event.  This will be represented as a set UTF-8 encoded bytes.</param>
+        <summary>
+               Initializes a new instance of the <see cref="T:Azure.Messaging.EventHubs.EventData" /> class.
+             </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="protected EventData (BinaryData eventBody, System.Collections.Generic.IDictionary&lt;string,object&gt; properties = default, System.Collections.Generic.IReadOnlyDictionary&lt;string,object&gt; systemProperties = default, long sequenceNumber = -9223372036854775808, long offset = -9223372036854775808, DateTimeOffset enqueuedTime = default, string partitionKey = default);" />
       <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.BinaryData eventBody, class System.Collections.Generic.IDictionary`2&lt;string, object&gt; properties, class System.Collections.Generic.IReadOnlyDictionary`2&lt;string, object&gt; systemProperties, int64 sequenceNumber, int64 offset, valuetype System.DateTimeOffset enqueuedTime, string partitionKey) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Messaging.EventHubs.EventData.#ctor(System.BinaryData,System.Collections.Generic.IDictionary{System.String,System.Object},System.Collections.Generic.IReadOnlyDictionary{System.String,System.Object},System.Int64,System.Int64,System.DateTimeOffset,System.String)" />
@@ -237,8 +259,67 @@
                prefer the <see cref="P:Azure.Messaging.EventHubs.EventData.EventBody" /> where possible in order to take advantage of
                additional functionality and improved usability for common scenarios.
              </remarks>
-        <altmember cref="P:Azure.Messaging.EventHubs.EventData.EventBody" />
         <altmember cref="M:System.BinaryData.ToStream" />
+        <altmember cref="P:Azure.Messaging.EventHubs.EventData.EventBody" />
+      </Docs>
+    </Member>
+    <Member MemberName="ContentType">
+      <MemberSignature Language="C#" Value="public string ContentType { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ContentType" />
+      <MemberSignature Language="DocId" Value="P:Azure.Messaging.EventHubs.EventData.ContentType" />
+      <MemberSignature Language="VB.NET" Value="Public Property ContentType As String" />
+      <MemberSignature Language="F#" Value="member this.ContentType : string with get, set" Usage="Azure.Messaging.EventHubs.EventData.ContentType" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Messaging.EventHubs</AssemblyName>
+        <AssemblyVersion>5.5.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+               A MIME type describing the data contained in the <see cref="P:Azure.Messaging.EventHubs.EventData.EventBody" />,
+               intended to allow consumers to make informed decisions for inspecting and
+               processing the event.
+             </summary>
+        <value>
+               The MIME type of the <see cref="P:Azure.Messaging.EventHubs.EventData.EventBody" /> content; when unknown, it is
+               recommended that this value should not be set.  When the body is known to be
+               truly opaque binary data, it is recommended that "application/octet-stream" be
+               used.
+             </value>
+        <remarks>
+               The <see cref="P:Azure.Messaging.EventHubs.EventData.ContentType" /> is intended to allow coordination between event
+               producers and consumers.  It has no meaning to the Event Hubs service.
+             </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CorrelationId">
+      <MemberSignature Language="C#" Value="public string CorrelationId { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string CorrelationId" />
+      <MemberSignature Language="DocId" Value="P:Azure.Messaging.EventHubs.EventData.CorrelationId" />
+      <MemberSignature Language="VB.NET" Value="Public Property CorrelationId As String" />
+      <MemberSignature Language="F#" Value="member this.CorrelationId : string with get, set" Usage="Azure.Messaging.EventHubs.EventData.CorrelationId" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Messaging.EventHubs</AssemblyName>
+        <AssemblyVersion>5.5.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+               An application-defined value that represents the context to use for correlation across
+               one or more operations.  The identifier is a free-form value and may reflect a unique
+               identity or a shared data element with significance to the application.
+             </summary>
+        <value>To be added.</value>
+        <remarks>
+               The <see cref="P:Azure.Messaging.EventHubs.EventData.CorrelationId" /> is intended to enable tracing of data within an application,
+               such as an event's path from producer to consumer.  It has no meaning to the Event Hubs service.
+             </remarks>
       </Docs>
     </Member>
     <Member MemberName="EnqueuedTime">
@@ -326,12 +407,12 @@
              </summary>
         <value>To be added.</value>
         <remarks>
-          <para>If the means for deserializing the raw data is not apparent to consumers, a
+               If the means for deserializing the raw data is not apparent to consumers, a
                common technique is to make use of <see cref="P:Azure.Messaging.EventHubs.EventData.Properties" /> to associate serialization hints
-               as an aid to consumers who wish to deserialize the binary data.</para>
-        </remarks>
-        <altmember cref="T:System.BinaryData" />
+               as an aid to consumers who wish to deserialize the binary data.
+             </remarks>
         <altmember cref="P:Azure.Messaging.EventHubs.EventData.Properties" />
+        <altmember cref="T:System.BinaryData" />
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -363,6 +444,68 @@
              </summary>
         <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
         <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetRawAmqpMessage">
+      <MemberSignature Language="C#" Value="public Azure.Core.Amqp.AmqpAnnotatedMessage GetRawAmqpMessage ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Azure.Core.Amqp.AmqpAnnotatedMessage GetRawAmqpMessage() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Messaging.EventHubs.EventData.GetRawAmqpMessage" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetRawAmqpMessage () As AmqpAnnotatedMessage" />
+      <MemberSignature Language="F#" Value="member this.GetRawAmqpMessage : unit -&gt; Azure.Core.Amqp.AmqpAnnotatedMessage" Usage="eventData.GetRawAmqpMessage " />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Messaging.EventHubs</AssemblyName>
+        <AssemblyVersion>5.5.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Core.Amqp.AmqpAnnotatedMessage</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+               The event representation in the AMQP protocol format.  This allows access to protocol information
+               that is not relevant to Event Hubs and is not exposed by <see cref="T:Azure.Messaging.EventHubs.EventData" /> directly.  This
+               information can be helpful when exchanging data with other message brokers or clients that do not
+               use one of the Event Hubs SDKs.
+             </summary>
+        <returns>The event, as an <see cref="T:Azure.Core.Amqp.AmqpAnnotatedMessage" />.</returns>
+        <remarks>
+               Manipulating the raw AMQP message is an advanced operation recommended only for those with
+               knowledge of the AMQP protocol and have a need outside of the normal operation of Event Hubs,
+               such as inter-operating with another message broker.
+            
+               When making direct changes to the AMQP message, it is possible to cause issues with the Event
+               Hubs client library, such as invalidating the size calculations performed by the
+               <see cref="T:Azure.Messaging.EventHubs.Producer.EventDataBatch" /> resulting in a batch that cannot be successfully published.
+             </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MessageId">
+      <MemberSignature Language="C#" Value="public string MessageId { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string MessageId" />
+      <MemberSignature Language="DocId" Value="P:Azure.Messaging.EventHubs.EventData.MessageId" />
+      <MemberSignature Language="VB.NET" Value="Public Property MessageId As String" />
+      <MemberSignature Language="F#" Value="member this.MessageId : string with get, set" Usage="Azure.Messaging.EventHubs.EventData.MessageId" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Messaging.EventHubs</AssemblyName>
+        <AssemblyVersion>5.5.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+               An application-defined value that uniquely identifies the event.  The identifier is
+               a free-form value and can reflect a GUID or an identifier derived from the application
+               context.
+             </summary>
+        <value>To be added.</value>
+        <remarks>
+               The <see cref="P:Azure.Messaging.EventHubs.EventData.MessageId" /> is intended to allow coordination between event
+               producers and consumers.  It has no meaning to the Event Hubs service, and does
+               not influence how Event Hubs identifies the event.
+             </remarks>
       </Docs>
     </Member>
     <Member MemberName="Offset">
@@ -447,7 +590,7 @@
         <example>
           <code>
                  var eventData = new EventData(serializedTelemetryData);
-                 eventData.Properties["eventType"] = "com.microsoft.Azure.monitoring.EtlEvent";
+                 eventData.Properties["eventType"] = "com.microsoft.azure.monitoring.EtlEvent";
                </code>
         </example>
       </Docs>
