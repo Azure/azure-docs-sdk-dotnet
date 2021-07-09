@@ -14,7 +14,7 @@
   <Interfaces />
   <Docs>
     <summary>
-            Represents a batch that consists out of multiple log queries.
+            Represents a batch that consists of multiple log queries.
             </summary>
     <remarks>To be added.</remarks>
   </Docs>
@@ -63,9 +63,23 @@
         <param name="timeRange">The timespan over which to query data.</param>
         <param name="options">The <see cref="T:Azure.Monitor.Query.LogsQueryOptions" /> to configure the query.</param>
         <summary>
-            Adds the specified query to the batch. Results can be retrieved after the query is submitted via the <see cref="M:Azure.Monitor.Query.LogsQueryClient.QueryBatchAsync(Azure.Monitor.Query.LogsBatchQuery,System.Threading.CancellationToken)" /> call.
-            </summary>
-        <returns>The query identifier that has to be passed into <see cref="M:Azure.Monitor.Query.Models.LogsBatchQueryResult.GetResult(System.String)" /> to get the result.</returns>
+             Adds the specified query to the batch. Results can be retrieved after the query is submitted via the <see cref="M:Azure.Monitor.Query.LogsQueryClient.QueryBatchAsync(Azure.Monitor.Query.LogsBatchQuery,System.Threading.CancellationToken)" /> call.
+             <code snippet="Snippet:BatchQueryAddAndGet" language="csharp">
+             string countQueryId = batch.AddQuery(
+                 workspaceId,
+                 "AzureActivity | count",
+                 new DateTimeRange(TimeSpan.FromDays(1)));
+             string topQueryId = batch.AddQuery(
+                 workspaceId,
+                 "AzureActivity | summarize Count = count() by ResourceGroup | top 10 by Count",
+                 new DateTimeRange(TimeSpan.FromDays(1)));
+            
+             Response&lt;LogsBatchQueryResults&gt; response = await client.QueryBatchAsync(batch);
+            
+             var count = response.Value.GetResult&lt;int&gt;(countQueryId).Single();
+             var topEntries = response.Value.GetResult&lt;MyLogEntryModel&gt;(topQueryId);
+             </code></summary>
+        <returns>The query identifier that has to be passed into <see cref="M:Azure.Monitor.Query.Models.LogsBatchQueryResults.GetResult(System.String)" /> to get the result.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
