@@ -18,11 +18,11 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ChangeThresholdCondition (double changePercentage, int shiftPoint, bool isWithinRange, Azure.AI.MetricsAdvisor.Models.AnomalyDetectorDirection anomalyDetectorDirection, Azure.AI.MetricsAdvisor.Models.SuppressCondition suppressCondition);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(float64 changePercentage, int32 shiftPoint, bool isWithinRange, valuetype Azure.AI.MetricsAdvisor.Models.AnomalyDetectorDirection anomalyDetectorDirection, class Azure.AI.MetricsAdvisor.Models.SuppressCondition suppressCondition) cil managed" />
+      <MemberSignature Language="C#" Value="public ChangeThresholdCondition (double changePercentage, int shiftPoint, bool withinRange, Azure.AI.MetricsAdvisor.Models.AnomalyDetectorDirection anomalyDetectorDirection, Azure.AI.MetricsAdvisor.Models.SuppressCondition suppressCondition);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(float64 changePercentage, int32 shiftPoint, bool withinRange, valuetype Azure.AI.MetricsAdvisor.Models.AnomalyDetectorDirection anomalyDetectorDirection, class Azure.AI.MetricsAdvisor.Models.SuppressCondition suppressCondition) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.AI.MetricsAdvisor.Models.ChangeThresholdCondition.#ctor(System.Double,System.Int32,System.Boolean,Azure.AI.MetricsAdvisor.Models.AnomalyDetectorDirection,Azure.AI.MetricsAdvisor.Models.SuppressCondition)" />
-      <MemberSignature Language="VB.NET" Value="Public Sub New (changePercentage As Double, shiftPoint As Integer, isWithinRange As Boolean, anomalyDetectorDirection As AnomalyDetectorDirection, suppressCondition As SuppressCondition)" />
-      <MemberSignature Language="F#" Value="new Azure.AI.MetricsAdvisor.Models.ChangeThresholdCondition : double * int * bool * Azure.AI.MetricsAdvisor.Models.AnomalyDetectorDirection * Azure.AI.MetricsAdvisor.Models.SuppressCondition -&gt; Azure.AI.MetricsAdvisor.Models.ChangeThresholdCondition" Usage="new Azure.AI.MetricsAdvisor.Models.ChangeThresholdCondition (changePercentage, shiftPoint, isWithinRange, anomalyDetectorDirection, suppressCondition)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (changePercentage As Double, shiftPoint As Integer, withinRange As Boolean, anomalyDetectorDirection As AnomalyDetectorDirection, suppressCondition As SuppressCondition)" />
+      <MemberSignature Language="F#" Value="new Azure.AI.MetricsAdvisor.Models.ChangeThresholdCondition : double * int * bool * Azure.AI.MetricsAdvisor.Models.AnomalyDetectorDirection * Azure.AI.MetricsAdvisor.Models.SuppressCondition -&gt; Azure.AI.MetricsAdvisor.Models.ChangeThresholdCondition" Usage="new Azure.AI.MetricsAdvisor.Models.ChangeThresholdCondition (changePercentage, shiftPoint, withinRange, anomalyDetectorDirection, suppressCondition)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.AI.MetricsAdvisor</AssemblyName>
@@ -31,16 +31,23 @@
       <Parameters>
         <Parameter Name="changePercentage" Type="System.Double" />
         <Parameter Name="shiftPoint" Type="System.Int32" />
-        <Parameter Name="isWithinRange" Type="System.Boolean" />
+        <Parameter Name="withinRange" Type="System.Boolean" />
         <Parameter Name="anomalyDetectorDirection" Type="Azure.AI.MetricsAdvisor.Models.AnomalyDetectorDirection" />
         <Parameter Name="suppressCondition" Type="Azure.AI.MetricsAdvisor.Models.SuppressCondition" />
       </Parameters>
       <Docs>
-        <param name="changePercentage">Compared to the previous point, the current point is an anomaly if the percentage of change is more than this value. </param>
+        <param name="changePercentage">The percentage of change, compared to the previous point, that delimits the boundary for detecting anomalous points.</param>
         <param name="shiftPoint">When set to N, sets as reference the data point that's N positions before the current point. Value must be at least 1.</param>
-        <param name="isWithinRange">Sets whether to detect data within the range or outside the range.</param>
-        <param name="anomalyDetectorDirection">A point is considered an anomaly only when the deviation occurs in the specified direction.</param>
-        <param name="suppressCondition">The <see cref="T:Azure.AI.MetricsAdvisor.Models.SuppressCondition" /> to be applied to every unexpected data point.</param>
+        <param name="withinRange">
+            If <c>true</c>, points inside the <paramref name="changePercentage" /> boundary are considered anomalous (ideal for detecting flat lines and stable values).
+            If <c>false</c>, only points outside of the boundary can be considered anomalies (ideal for detecting fluctuations).
+            </param>
+        <param name="anomalyDetectorDirection">
+            Sets the boundaries that delimit the expected value range. When <paramref name="withinRange" /> is <c>true</c>, can only
+            be set to <see cref="P:Azure.AI.MetricsAdvisor.Models.AnomalyDetectorDirection.Both" />. Otherwise, can only be set to <see cref="P:Azure.AI.MetricsAdvisor.Models.AnomalyDetectorDirection.Up" />
+            or <see cref="P:Azure.AI.MetricsAdvisor.Models.AnomalyDetectorDirection.Down" />.
+            </param>
+        <param name="suppressCondition">The <see cref="T:Azure.AI.MetricsAdvisor.Models.SuppressCondition" /> to be applied to every anomalous data point.</param>
         <summary>
             Initializes a new instance of the <see cref="T:Azure.AI.MetricsAdvisor.Models.ChangeThresholdCondition" /> class.
             </summary>
@@ -65,7 +72,9 @@
       </ReturnValue>
       <Docs>
         <summary>
-            A point is considered an anomaly only when the deviation occurs in the specified direction.
+            Sets the boundaries that delimit the expected value range. When <see cref="P:Azure.AI.MetricsAdvisor.Models.ChangeThresholdCondition.WithinRange" /> is <c>true</c>, can only
+            be set to <see cref="P:Azure.AI.MetricsAdvisor.Models.AnomalyDetectorDirection.Both" />. Otherwise, can only be set to
+            <see cref="P:Azure.AI.MetricsAdvisor.Models.AnomalyDetectorDirection.Up" /> or <see cref="P:Azure.AI.MetricsAdvisor.Models.AnomalyDetectorDirection.Down" />.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -87,30 +96,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Compared to the previous point, the current point is an anomaly if the percentage of change is more than this value.
-            </summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="IsWithinRange">
-      <MemberSignature Language="C#" Value="public bool IsWithinRange { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool IsWithinRange" />
-      <MemberSignature Language="DocId" Value="P:Azure.AI.MetricsAdvisor.Models.ChangeThresholdCondition.IsWithinRange" />
-      <MemberSignature Language="VB.NET" Value="Public Property IsWithinRange As Boolean" />
-      <MemberSignature Language="F#" Value="member this.IsWithinRange : bool with get, set" Usage="Azure.AI.MetricsAdvisor.Models.ChangeThresholdCondition.IsWithinRange" />
-      <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Azure.AI.MetricsAdvisor</AssemblyName>
-        <AssemblyVersion>1.0.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Boolean</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>
-            Sets whether to detect data within the range or outside the range. If you want to detect fluctuations, select false.
-            If you want to detect flat lines in your data, select true.
+            The percentage of change, compared to the previous point, that delimits the boundary for detecting anomalous points.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -155,7 +141,32 @@
       </ReturnValue>
       <Docs>
         <summary>
-            The <see cref="T:Azure.AI.MetricsAdvisor.Models.SuppressCondition" /> to be applied to every unexpected data point.
+            The <see cref="T:Azure.AI.MetricsAdvisor.Models.SuppressCondition" /> to be applied to every anomalous data point.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="WithinRange">
+      <MemberSignature Language="C#" Value="public bool WithinRange { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool WithinRange" />
+      <MemberSignature Language="DocId" Value="P:Azure.AI.MetricsAdvisor.Models.ChangeThresholdCondition.WithinRange" />
+      <MemberSignature Language="VB.NET" Value="Public Property WithinRange As Boolean" />
+      <MemberSignature Language="F#" Value="member this.WithinRange : bool with get, set" Usage="Azure.AI.MetricsAdvisor.Models.ChangeThresholdCondition.WithinRange" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.AI.MetricsAdvisor</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            If <c>true</c>, points inside the <see cref="P:Azure.AI.MetricsAdvisor.Models.ChangeThresholdCondition.ChangePercentage" /> boundary are considered anomalous (ideal for detecting
+            flat lines and stable values). If <c>false</c>, only points outside of the boundary can be considered anomalies (ideal
+            for detecting fluctuations). See <see cref="P:Azure.AI.MetricsAdvisor.Models.ChangeThresholdCondition.AnomalyDetectorDirection" /> to check which boundaries are supported for each
+            case.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>

@@ -32,7 +32,12 @@
         <Parameter Name="direction" Type="Azure.AI.MetricsAdvisor.Models.BoundaryDirection" />
       </Parameters>
       <Docs>
-        <param name="direction">The direction of the specified boundaries. Depending on its value, <see cref="P:Azure.AI.MetricsAdvisor.Models.MetricBoundaryCondition.LowerBound" /> and/or <see cref="P:Azure.AI.MetricsAdvisor.Models.MetricBoundaryCondition.UpperBound" /> may be required.</param>
+        <param name="direction">
+            Sets the boundaries that delimit the expected value range of a <see cref="T:Azure.AI.MetricsAdvisor.Models.MetricBoundaryCondition" />. Data points out
+            of this range can be included in an alert. If <see cref="P:Azure.AI.MetricsAdvisor.Models.BoundaryDirection.Down" /> or
+            <see cref="P:Azure.AI.MetricsAdvisor.Models.BoundaryDirection.Both" />, <see cref="P:Azure.AI.MetricsAdvisor.Models.MetricBoundaryCondition.LowerBound" /> is required. If <see cref="P:Azure.AI.MetricsAdvisor.Models.BoundaryDirection.Up" /> or
+            <see cref="P:Azure.AI.MetricsAdvisor.Models.BoundaryDirection.Both" />, <see cref="P:Azure.AI.MetricsAdvisor.Models.MetricBoundaryCondition.UpperBound" /> is required.
+            </param>
         <summary>
             Initializes a new instance of the <see cref="T:Azure.AI.MetricsAdvisor.Models.MetricBoundaryCondition" /> class.
             </summary>
@@ -55,8 +60,11 @@
       </ReturnValue>
       <Docs>
         <summary>
-            If set, this <see cref="T:Azure.AI.MetricsAdvisor.Models.MetricBoundaryCondition" /> will make use of the value of another
-            metric, specified by this ID, when checking boundaries.
+            If set, this <see cref="T:Azure.AI.MetricsAdvisor.Models.MetricBoundaryCondition" /> will make use of the value of another metric, specified
+            by this ID, when checking boundaries. A data point of the companion metric with same dimensions and same
+            timestamp will be used instead and, if out of range, the current data point can be included in an alert.
+            You can set the property <see cref="P:Azure.AI.MetricsAdvisor.Models.MetricBoundaryCondition.ShouldAlertIfDataPointMissing" /> to tell the service what to do when
+            the data point in the companion metric is missing.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -78,8 +86,10 @@
       </ReturnValue>
       <Docs>
         <summary>
-            The direction of the specified boundaries. Depending on its value, <see cref="P:Azure.AI.MetricsAdvisor.Models.MetricBoundaryCondition.LowerBound" />
-            and/or <see cref="P:Azure.AI.MetricsAdvisor.Models.MetricBoundaryCondition.UpperBound" /> may be required.
+            Sets the boundaries that delimit the expected value range of a <see cref="T:Azure.AI.MetricsAdvisor.Models.MetricBoundaryCondition" />. Data points out
+            of this range can be included in an alert. If <see cref="P:Azure.AI.MetricsAdvisor.Models.BoundaryDirection.Down" /> or
+            <see cref="P:Azure.AI.MetricsAdvisor.Models.BoundaryDirection.Both" />, <see cref="P:Azure.AI.MetricsAdvisor.Models.MetricBoundaryCondition.LowerBound" /> is required. If <see cref="P:Azure.AI.MetricsAdvisor.Models.BoundaryDirection.Up" /> or
+            <see cref="P:Azure.AI.MetricsAdvisor.Models.BoundaryDirection.Both" />, <see cref="P:Azure.AI.MetricsAdvisor.Models.MetricBoundaryCondition.UpperBound" /> is required.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -101,9 +111,32 @@
       </ReturnValue>
       <Docs>
         <summary>
-            The minimum value a data point can assume to be able to trigger an alert. Must be set if
-            <see cref="P:Azure.AI.MetricsAdvisor.Models.MetricBoundaryCondition.Direction" /> is <see cref="P:Azure.AI.MetricsAdvisor.Models.AnomalyDetectorDirection.Down" /> or
-            <see cref="P:Azure.AI.MetricsAdvisor.Models.AnomalyDetectorDirection.Both" />.
+            The minimum value of the boundary where a data point is allowed to be. If below this value, the point can be
+            included in an alert. Must be set if <see cref="P:Azure.AI.MetricsAdvisor.Models.MetricBoundaryCondition.Direction" /> is <see cref="P:Azure.AI.MetricsAdvisor.Models.BoundaryDirection.Down" /> or
+            <see cref="P:Azure.AI.MetricsAdvisor.Models.BoundaryDirection.Both" />.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MeasureType">
+      <MemberSignature Language="C#" Value="public Azure.AI.MetricsAdvisor.Models.BoundaryMeasureType? MeasureType { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;valuetype Azure.AI.MetricsAdvisor.Models.BoundaryMeasureType&gt; MeasureType" />
+      <MemberSignature Language="DocId" Value="P:Azure.AI.MetricsAdvisor.Models.MetricBoundaryCondition.MeasureType" />
+      <MemberSignature Language="VB.NET" Value="Public Property MeasureType As Nullable(Of BoundaryMeasureType)" />
+      <MemberSignature Language="F#" Value="member this.MeasureType : Nullable&lt;Azure.AI.MetricsAdvisor.Models.BoundaryMeasureType&gt; with get, set" Usage="Azure.AI.MetricsAdvisor.Models.MetricBoundaryCondition.MeasureType" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.AI.MetricsAdvisor</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;Azure.AI.MetricsAdvisor.Models.BoundaryMeasureType&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Specifies which measure should be used when checking boundaries. Defaults to
+            <see cref="P:Azure.AI.MetricsAdvisor.Models.BoundaryMeasureType.Value" />.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -125,9 +158,10 @@
       </ReturnValue>
       <Docs>
         <summary>
-            This property must be set if <see cref="P:Azure.AI.MetricsAdvisor.Models.MetricBoundaryCondition.CompanionMetricId" /> is defined. If <c>true</c>,
-            an alert should be triggered if the targeted metric is missing for the current timestamp.
-            If <c>false</c>, no action is taken in this scenario.
+            This property can be used when <see cref="P:Azure.AI.MetricsAdvisor.Models.MetricBoundaryCondition.CompanionMetricId" /> is defined to tell the service what to do when
+            the data point in the companion metric is missing. If <c>true</c>, the current point can still be included in
+            an alert when the data point in the companion metric is missing. If <c>false</c>, the current point won't be
+            included. Defaults to <c>false</c>.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -149,9 +183,9 @@
       </ReturnValue>
       <Docs>
         <summary>
-            The maximum value a data point can assume to be able to trigger an alert. Must be set if
-            <see cref="P:Azure.AI.MetricsAdvisor.Models.MetricBoundaryCondition.Direction" /> is <see cref="P:Azure.AI.MetricsAdvisor.Models.AnomalyDetectorDirection.Up" /> or
-            <see cref="P:Azure.AI.MetricsAdvisor.Models.AnomalyDetectorDirection.Both" />.
+            The maximum value of the boundary where a data point is allowed to be. If above this value, the point can be
+            included in an alert. Must be set if <see cref="P:Azure.AI.MetricsAdvisor.Models.MetricBoundaryCondition.Direction" /> is <see cref="P:Azure.AI.MetricsAdvisor.Models.BoundaryDirection.Up" /> or
+            <see cref="P:Azure.AI.MetricsAdvisor.Models.BoundaryDirection.Both" />.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>

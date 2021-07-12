@@ -14,7 +14,13 @@
   <Interfaces />
   <Docs>
     <summary> The AnomalyDetectionConfiguration. </summary>
-    <remarks>To be added.</remarks>
+    <remarks>
+            In order to create an anomaly detection configuration, you must set up at least the properties <see cref="P:Azure.AI.MetricsAdvisor.Models.AnomalyDetectionConfiguration.Name" />,
+            <see cref="P:Azure.AI.MetricsAdvisor.Models.AnomalyDetectionConfiguration.MetricId" />, and <see cref="P:Azure.AI.MetricsAdvisor.Models.AnomalyDetectionConfiguration.WholeSeriesDetectionConditions" />, and pass this instance to the method
+            <see cref="M:Azure.AI.MetricsAdvisor.Administration.MetricsAdvisorAdministrationClient.CreateDetectionConfigurationAsync(Azure.AI.MetricsAdvisor.Models.AnomalyDetectionConfiguration,System.Threading.CancellationToken)" />. Note that a detection configuration
+            only detects anomalies, and is not responsible for triggering alerts. If you want alerts to be triggered, you need to
+            create an <see cref="T:Azure.AI.MetricsAdvisor.Models.AnomalyAlertConfiguration" />.
+            </remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -51,10 +57,12 @@
       </ReturnValue>
       <Docs>
         <summary>
-            A description about the <see cref="T:Azure.AI.MetricsAdvisor.Models.AnomalyDetectionConfiguration" />.
+            A description of this <see cref="T:Azure.AI.MetricsAdvisor.Models.AnomalyDetectionConfiguration" />. Defaults to an empty string.
             </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            If set to null during an update operation, this property is set to its default value.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="Id">
@@ -73,10 +81,13 @@
       </ReturnValue>
       <Docs>
         <summary>
-            The unique identifier of this <see cref="T:Azure.AI.MetricsAdvisor.Models.AnomalyDetectionConfiguration" />. Set by the service.
+            The unique identifier of this <see cref="T:Azure.AI.MetricsAdvisor.Models.AnomalyDetectionConfiguration" />.
             </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            If <c>null</c>, it means this instance has not been sent to the service to be created yet. This property
+            will be set by the service after creation.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="MetricId">
@@ -95,10 +106,13 @@
       </ReturnValue>
       <Docs>
         <summary>
-            The identifier of the metric to which this configuration applies.
+            The identifier of the <see cref="T:Azure.AI.MetricsAdvisor.Models.DataFeedMetric" /> to which this configuration applies.
             </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            After creating a <see cref="T:Azure.AI.MetricsAdvisor.Models.DataFeed" />, you can get the IDs of all of your metrics from the property
+            <see cref="P:Azure.AI.MetricsAdvisor.Models.DataFeed.MetricIds" />.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="Name">
@@ -118,6 +132,7 @@
       <Docs>
         <summary>
             A custom name for this <see cref="T:Azure.AI.MetricsAdvisor.Models.AnomalyDetectionConfiguration" /> to be displayed on the web portal.
+            Detection configuration names must be unique for the same metric.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -139,9 +154,8 @@
       </ReturnValue>
       <Docs>
         <summary>
-            The anomaly detection conditions to be applied to the time series associated with this configuration's
-            <see cref="P:Azure.AI.MetricsAdvisor.Models.AnomalyDetectionConfiguration.MetricId" />. These conditions overwrite the ones specified by <see cref="P:Azure.AI.MetricsAdvisor.Models.AnomalyDetectionConfiguration.WholeSeriesDetectionConditions" />
-            and <see cref="P:Azure.AI.MetricsAdvisor.Models.AnomalyDetectionConfiguration.SeriesGroupDetectionConditions" />.
+            The anomaly detection conditions to be applied to a time series. Note that these conditions overwrite the ones
+            specified by <see cref="P:Azure.AI.MetricsAdvisor.Models.AnomalyDetectionConfiguration.WholeSeriesDetectionConditions" /> and <see cref="P:Azure.AI.MetricsAdvisor.Models.AnomalyDetectionConfiguration.SeriesGroupDetectionConditions" />.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -165,8 +179,10 @@
       </ReturnValue>
       <Docs>
         <summary>
-            The anomaly detection conditions to be applied to the time series associated with this configuration's
-            <see cref="P:Azure.AI.MetricsAdvisor.Models.AnomalyDetectionConfiguration.MetricId" />. These conditions overwrite the ones specified by <see cref="P:Azure.AI.MetricsAdvisor.Models.AnomalyDetectionConfiguration.WholeSeriesDetectionConditions" />.
+            The anomaly detection conditions to be applied to groups of time series. Be aware that these are only
+            default conditions. They will only be applied to a new data point if the list <see cref="P:Azure.AI.MetricsAdvisor.Models.AnomalyDetectionConfiguration.SeriesDetectionConditions" />
+            does not specify conditions for the point's time series. Also, note that these conditions overwrite the ones
+            specified by <see cref="P:Azure.AI.MetricsAdvisor.Models.AnomalyDetectionConfiguration.WholeSeriesDetectionConditions" />.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -190,8 +206,9 @@
       </ReturnValue>
       <Docs>
         <summary>
-            The default anomaly detection conditions to be applied to all series associated with this configuration's
-            <see cref="P:Azure.AI.MetricsAdvisor.Models.AnomalyDetectionConfiguration.MetricId" />.
+            The default anomaly detection conditions to be applied to all time series. Be aware that these are only
+            default conditions. They will only be applied to a new data point if the lists <see cref="P:Azure.AI.MetricsAdvisor.Models.AnomalyDetectionConfiguration.SeriesDetectionConditions" />
+            and <see cref="P:Azure.AI.MetricsAdvisor.Models.AnomalyDetectionConfiguration.SeriesGroupDetectionConditions" /> do not specify conditions for the point's time series.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
