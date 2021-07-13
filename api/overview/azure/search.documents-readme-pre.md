@@ -3,7 +3,7 @@ title: Azure Cognitive Search client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Search.Documents, search
 author: maggiepint
 ms.author: magpint
-ms.date: 05/11/2021
+ms.date: 07/09/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: search
 ---
 
-# Azure Cognitive Search client library for .NET - Version 11.3.0-beta.2 
+# Azure Cognitive Search client library for .NET - Version 11.4.0-beta.1 
 
 
 [Azure Cognitive Search](https://docs.microsoft.com/azure/search/) is a
@@ -110,6 +110,47 @@ string key = Environment.GetEnvironmentVariable("SEARCH_API_KEY");
 AzureKeyCredential credential = new AzureKeyCredential(key);
 SearchClient client = new SearchClient(endpoint, indexName, credential);
 ```
+### ASP.NET Core
+To inject `SearchClient` as a dependency in an ASP.NET Core app, first install the package `Microsoft.Extensions.Azure`. Then register the client in the `Startup.ConfigureServices` method:
+
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddAzureClients(builder =>
+    {
+        builder.AddSearchClient(Configuration.GetSection("SearchClient"));
+    });
+  
+    services.AddControllers();
+}
+```
+To use the preceding code, add this to your configuration:
+
+```json
+{
+    "SearchClient": {
+      "endpoint": "https://<resource-name>.search.windows.net",
+      "indexname": "nycjobs"
+    }
+}
+```
+You'll also need to provide your resource key to authenticate the client, but you shouldn't be putting that information in the configuration. Instead, when in development, use [User-Secrets](https://docs.microsoft.com/aspnet/core/security/app-secrets?view=aspnetcore-5.0&tabs=windows#how-the-secret-manager-tool-works). Add the following to `secrets.json`:
+
+```json
+{
+    "SearchClient": {
+      "credential": { "key": "<you resource key>" }
+    }
+}
+```
+When running in production, it's preferable to use [environment variables](https://docs.microsoft.com/aspnet/core/security/app-secrets?view=aspnetcore-5.0&tabs=windows#environment-variables):
+
+```
+SEARCH__CREDENTIAL__KEY="..."
+```
+Or use other secure ways of storing secrets like [Azure Key Vault](https://docs.microsoft.com/aspnet/core/security/key-vault-configuration?view=aspnetcore-5.0).
+
+For more details about Dependency Injection in ASP.NET Core apps, see [Dependency injection with the Azure SDK for .NET](https://docs.microsoft.com/dotnet/azure/sdk/dependency-injection).
 
 ## Key concepts
 
@@ -150,19 +191,19 @@ exploring online resources.  A good rule of thumb is to check for the namespace
 We guarantee that all client instance methods are thread-safe and independent of each other ([guideline](https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-service-methods-thread-safety)). This ensures that the recommendation of reusing client instances is always safe, even across threads.
 
 ### Additional concepts
-<!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.3.0-beta.2/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.3.0-beta.2/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.3.0-beta.2/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.3.0-beta.2/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.3.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.3.0-beta.2/sdk/core/Azure.Core/README.md#mocking) |
+
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.4.0-beta.1/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.4.0-beta.1/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.4.0-beta.1/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.4.0-beta.1/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.4.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.4.0-beta.1/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
-<!-- CLIENT COMMON BAR -->
+
 
 ## Examples
 
-The following examples all use a simple [Hotel data set](https://docs.microsoft.com/samples/azure-samples/azure-search-sample-data/azure-search-sample-data/)
+The following examples all use a simple [Hotel data set](https://github.com/Azure-Samples/azure-search-sample-data)
 that you can [import into your own index from the Azure portal.](https://docs.microsoft.com/azure/search/search-get-started-portal#step-1---start-the-import-data-wizard-and-create-a-data-source)
 These are just a few of the basics - please [check out our Samples][samples] for
 much more.
@@ -398,7 +439,7 @@ catch (RequestFailedException ex) when (ex.Status == 404)
 }
 ```
 
-You can also easily [enable console logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.3.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md#logging) if you want to dig
+You can also easily [enable console logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.4.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md#logging) if you want to dig
 deeper into the requests you're making against the service.
 
 ## Next steps
@@ -422,10 +463,10 @@ For more information see the [Code of Conduct FAQ][coc_faq]
 or contact [opencode@microsoft.com][coc_contact] with any
 additional questions or comments.
 
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fsearch%2FAzure.Search.Documents%2FREADME.png)
 
-<!-- LINKS -->
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Search.Documents_11.3.0-beta.2/sdk/search/Azure.Search.Documents/src
+
+
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Search.Documents_11.4.0-beta.1/sdk/search/Azure.Search.Documents/src
 [package]: https://www.nuget.org/packages/Azure.Search.Documents/
 [docs]: https://docs.microsoft.com/dotnet/api/Azure.Search.Documents
 [rest_docs]: https://docs.microsoft.com/rest/api/searchservice/
@@ -435,11 +476,11 @@ additional questions or comments.
 [create_search_service_ps]: https://docs.microsoft.com/azure/search/search-manage-powershell#create-or-delete-a-service
 [create_search_service_cli]: https://docs.microsoft.com/cli/azure/search/service?view=azure-cli-latest#az-search-service-create
 [azure_cli]: https://docs.microsoft.com/cli/azure
-[azure_sub]: https://azure.microsoft.com/free/
-[RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Search.Documents_11.3.0-beta.2/sdk/core/Azure.Core/src/RequestFailedException.cs
+[azure_sub]: https://azure.microsoft.com/free/dotnet/
+[RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Search.Documents_11.4.0-beta.1/sdk/core/Azure.Core/src/RequestFailedException.cs
 [status_codes]: https://docs.microsoft.com/rest/api/searchservice/http-status-codes
-[samples]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.3.0-beta.2/sdk/search/Azure.Search.Documents/samples/
-[search_contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Search.Documents_11.3.0-beta.2/sdk/search/CONTRIBUTING.md
+[samples]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.4.0-beta.1/sdk/search/Azure.Search.Documents/samples/
+[search_contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Search.Documents_11.4.0-beta.1/sdk/search/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/

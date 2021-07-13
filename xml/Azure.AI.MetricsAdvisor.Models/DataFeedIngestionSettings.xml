@@ -14,23 +14,27 @@
   <Interfaces />
   <Docs>
     <summary>
-            Configures how a <see cref="T:Azure.AI.MetricsAdvisor.Models.DataFeed" /> behaves during data ingestion from its data source.
+            Configures how a <see cref="T:Azure.AI.MetricsAdvisor.Models.DataFeed" /> should ingest data from its <see cref="T:Azure.AI.MetricsAdvisor.Administration.DataFeedSource" />.
             </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public DataFeedIngestionSettings ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.AI.MetricsAdvisor.Models.DataFeedIngestionSettings.#ctor" />
-      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C#" Value="public DataFeedIngestionSettings (DateTimeOffset ingestionStartsOn);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.DateTimeOffset ingestionStartsOn) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.AI.MetricsAdvisor.Models.DataFeedIngestionSettings.#ctor(System.DateTimeOffset)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (ingestionStartsOn As DateTimeOffset)" />
+      <MemberSignature Language="F#" Value="new Azure.AI.MetricsAdvisor.Models.DataFeedIngestionSettings : DateTimeOffset -&gt; Azure.AI.MetricsAdvisor.Models.DataFeedIngestionSettings" Usage="new Azure.AI.MetricsAdvisor.Models.DataFeedIngestionSettings ingestionStartsOn" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.AI.MetricsAdvisor</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <Parameters />
+      <Parameters>
+        <Parameter Name="ingestionStartsOn" Type="System.DateTimeOffset" />
+      </Parameters>
       <Docs>
+        <param name="ingestionStartsOn">The starting point in time from which data will be ingested from the data source. Subsequent ingestions happen periodically according to the <see cref="P:Azure.AI.MetricsAdvisor.Models.DataFeed.Granularity" />.</param>
         <summary>
             Initializes a new instance of the <see cref="T:Azure.AI.MetricsAdvisor.Models.DataFeedIngestionSettings" /> class.
             </summary>
@@ -53,11 +57,13 @@
       </ReturnValue>
       <Docs>
         <summary>
-            If the specified data source supports limited concurrency, this can be set to specify the
-            maximum limit.
+            If the associated <see cref="T:Azure.AI.MetricsAdvisor.Administration.DataFeedSource" /> supports limited concurrency, this can be set to specify
+            the maximum limit. Defaults to -1 (limited concurrency not supported).
             </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            If set to null during an update operation, this property is set to its default value.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="IngestionRetryDelay">
@@ -77,11 +83,14 @@
       <Docs>
         <summary>
             The minimum delay between two consecutive retry attempts, in case data ingestion
-            fails. If not specified, the service's behavior depends on the data feed's granularity.
-            See the <see href="https://docs.microsoft.com/azure/cognitive-services/metrics-advisor/how-tos/onboard-your-data#avoid-loading-partial-data">documentation</see> for details.
+            fails. If not specified, defaults to -1 seconds, and the service's behavior depends
+            on the <see cref="P:Azure.AI.MetricsAdvisor.Models.DataFeed.Granularity" />. See the
+            <see href="https://aka.ms/metricsadvisor/ingestionoptions">documentation</see> for details.
             </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            If set to null during an update operation, this property is set to its default value.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="IngestionStartOffset">
@@ -102,30 +111,32 @@
         <summary>
             An offset to change the next expected data ingestion start times. It can be
             used to delay (if positive) or to advance (if negative) the ingestion start
-            time.
+            time. Defaults to <see cref="F:System.TimeSpan.Zero" />.
             </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            If set to null during an update operation, this property is set to its default value.
+            </remarks>
       </Docs>
     </Member>
-    <Member MemberName="IngestionStartTime">
-      <MemberSignature Language="C#" Value="public DateTimeOffset? IngestionStartTime { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;valuetype System.DateTimeOffset&gt; IngestionStartTime" />
-      <MemberSignature Language="DocId" Value="P:Azure.AI.MetricsAdvisor.Models.DataFeedIngestionSettings.IngestionStartTime" />
-      <MemberSignature Language="VB.NET" Value="Public Property IngestionStartTime As Nullable(Of DateTimeOffset)" />
-      <MemberSignature Language="F#" Value="member this.IngestionStartTime : Nullable&lt;DateTimeOffset&gt; with get, set" Usage="Azure.AI.MetricsAdvisor.Models.DataFeedIngestionSettings.IngestionStartTime" />
+    <Member MemberName="IngestionStartsOn">
+      <MemberSignature Language="C#" Value="public DateTimeOffset IngestionStartsOn { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.DateTimeOffset IngestionStartsOn" />
+      <MemberSignature Language="DocId" Value="P:Azure.AI.MetricsAdvisor.Models.DataFeedIngestionSettings.IngestionStartsOn" />
+      <MemberSignature Language="VB.NET" Value="Public Property IngestionStartsOn As DateTimeOffset" />
+      <MemberSignature Language="F#" Value="member this.IngestionStartsOn : DateTimeOffset with get, set" Usage="Azure.AI.MetricsAdvisor.Models.DataFeedIngestionSettings.IngestionStartsOn" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.AI.MetricsAdvisor</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>System.Nullable&lt;System.DateTimeOffset&gt;</ReturnType>
+        <ReturnType>System.DateTimeOffset</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
             The starting point in time from which data will be ingested from the data source. Subsequent
-            ingestions happen periodically according to the data feed's granularity.
+            ingestions happen periodically according to the <see cref="P:Azure.AI.MetricsAdvisor.Models.DataFeed.Granularity" />.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -148,9 +159,14 @@
       <Docs>
         <summary>
             Specifies the maximum amount of time in which to attempt a retry if ingestion fails.
+            If not specified, defaults to -1 seconds, and the service's behavior depends on the
+            <see cref="P:Azure.AI.MetricsAdvisor.Models.DataFeed.Granularity" />. See the
+            <see href="https://aka.ms/metricsadvisor/ingestionoptions">documentation</see> for details.
             </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            If set to null during an update operation, this property is set to its default value.
+            </remarks>
       </Docs>
     </Member>
   </Members>
