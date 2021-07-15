@@ -116,8 +116,5 @@ ISqlDatabase sqlDb = sqlServer.Databases.Define("DatabaseName").Create();
 
 ## Samples
 
-- [ADO.NET code examples](/dotnet/framework/data/adonet/ado-net-code-examples)
-- [Azure management libraries for .NET samples for SQL Database](/dotnet/azure/dotnet-sdk-azure-sql-database-samples)
-
-View the [complete list](https://azure.microsoft.com/resources/samples/?platform=dotnet&term=sql+database) of Azure SQL Database samples.
+View the [complete list](https://docs.microsoft.com/en-us/samples/browse/?expanded=azure&products=azure-sql-database%2Cazure-sql-managed-instance%2Cazure-sqlserver-vm%2Cazure-sql-virtual-machines%2Csql-server) of Azure SQL Database samples.
 
