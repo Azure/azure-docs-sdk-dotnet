@@ -38,7 +38,7 @@ dotnet add package Microsoft.Azure.Management.RecoveryServices.Backup
 The following code example uses the management library to trigger a backup.
 
 ```csharp
-RecoveryServicesBackupManagementClient client = new RecoveryServicesBackupManagementClient(credentials);
+RecoveryServicesBackupClient client = new RecoveryServicesBackupClient(credentials);
 TriggerBackupRequest triggerBackupRequest = new TriggerBackupRequest();
 BaseRecoveryServicesJobResponse resp =
     await client.Backups.TriggerBackupAsync(resourceGroupName, resourceName, null,
