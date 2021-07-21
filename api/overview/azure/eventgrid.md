@@ -1,116 +1,38 @@
 ---
 title: Azure Event Grid libraries for .NET
 description: Reference for Azure Event Grid libraries for .NET
-ms.date: 04/16/2018
+ms.date: 07/20/2021
 ms.topic: reference
 ms.service: event-grid
 ---
 
 # Azure Event Grid libraries for .NET
-
 Build event-driven applications that listen and react to events from Azure services and custom sources using simple HTTP-based event handling with Azure Event Grid.
 
-[Learn more](/azure/event-grid/overview) about Azure Event Grid and get started with the [Azure Blob storage event tutorial](/azure/storage/blobs/storage-blob-event-quickstart-powershell). 
+[Learn more](/azure/event-grid/overview) about Azure Event Grid and get started with the [Azure Blob storage event tutorial](/azure/event-grid/blob-event-quickstart-portal). 
 
 ## Client SDK
 
-Create events, authenticate, and post to topics using the Azure Event Grid Client SDK.
+Create events, authenticate, and post to topics using the Azure Event Grid client SDK.
 
-Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.EventGrid) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
+Install the [NuGet package](https://www.nuget.org/packages/Azure.Messaging.EventGrid/) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
 
 #### Visual Studio Package Manager
 
 ```powershell
-Install-Package Microsoft.Azure.EventGrid
+Install-Package Azure.Messaging.EventGrid
 ```
 
 #### .NET Core CLI
 
 ```dotnetcli
-dotnet add package Microsoft.Azure.EventGrid 
+dotnet add package Azure.Messaging.EventGrid
 ```
 
-### Publish events
+For an overview of the latest client SDK, samples, see the [Azure Event Grid client library for .NET](https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/eventgrid/Azure.Messaging.EventGrid) page. This page also has a link to the migration guide that helps you migrate applications that use the old .NET library (**Microsoft.Azure.EventGrid**) to use the latest one (**Azure.Messaging.EventGrid**).
 
-The following code authenticates with Azure and publishes a `List` of  `EventGridEvent` events of a custom type (in this example, `Contoso.Items.ItemsReceivedEvent` ) to a topic. The topic key and endpoint address used in the sample can be retrieved from Azure PowerShell:
+Under the **Client** section of the table of contents, you will also see documentation for the old [Microsoft.Azure.EventGrid](/dotnet/api/microsoft.azure.eventgrid) library. 
 
-```powershell
-$endpoint = (Get-AzureRmEventGridTopic -ResourceGroupName gridResourceGroup -Name <topic-name>).Endpoint
-$keys = Get-AzureRmEventGridTopicKey -ResourceGroupName gridResourceGroup -Name <topic-name>
-```
-
-```csharp
-string topicEndpoint = "https://<topic-name>.<region>-1.eventgrid.azure.net/api/events";
-string topicKey = "<topic-key>";
-string topicHostname = new Uri(topicEndpoint).Host;
-
-TopicCredentials topicCredentials = new TopicCredentials(topicKey);
-EventGridClient client = new EventGridClient(topicCredentials);
-
-client.PublishEventsAsync(topicHostname, GetEventsList()).GetAwaiter().GetResult();
-Console.Write("Published events to Event Grid.");
-
-static IList<EventGridEvent> GetEventsList()
-{
-    List<EventGridEvent> eventsList = new List<EventGridEvent>();
-    for (int i = 0; i < 1; i++)
-    {
-        eventsList.Add(new EventGridEvent()
-        {
-            Id = Guid.NewGuid().ToString(),
-            EventType = "Contoso.Items.ItemReceivedEvent",
-            Data = new ContosoItemReceivedEventData()
-            {
-                ItemUri = "ContosoSuperItemUri"
-            },
-
-            EventTime = DateTime.Now,
-            Subject = "Door1",
-            DataVersion = "2.0"
-        });
-    }
-    return eventsList;
-}
-```
-
-### Consume events
-
-This snippet consumes events, including a custom event `Contoso.Items.ItemsReceived` as well as events triggered from other Azure services, such as Blob Storage.
-
-```csharp
-string response = string.Empty;
-string requestContent = await req.Content.ReadAsStringAsync();
-
-EventGridSubscriber eventGridSubscriber = new EventGridSubscriber();
-
-// Optionally add one or more custom event type mappings
-eventGridSubscriber.AddOrUpdateCustomEventMapping("Contoso.Items.ItemReceived", typeof(ContosoItemReceivedEventData));
-
-var events = eventGridSubscriber.DeserializeEventGridEvents(requestContent);            
- 
-foreach (EventGridEvent receivedEvent in events)
-{
-    if (receivedEvent.Data is SubscriptionValidationEventData)
-    {
-        SubscriptionValidationEventData eventData = (SubscriptionValidationEventData)receivedEvent.Data;
-        log.Info($"Got SubscriptionValidation event data, validationCode: {eventData.ValidationCode},  validationUrl: {eventData.ValidationUrl}, topic: {eventGridEvent.Topic}");
-        // Handle subscription validation
-    }
-    else if (receivedEvent.Data is StorageBlobCreatedEventData)
-    {
-        StorageBlobCreatedEventData eventData = (StorageBlobCreatedEventData)receivedEvent.Data;
-        log.Info($"Got BlobCreated event data, blob URI {eventData.Url}");
-        // Handle StorageBlobCreatedEventData
-    }
-    else if (receivedEvent.Data is ContosoItemReceivedEventData)
-    {
-        ContosoItemReceivedEventData eventData = (ContosoItemReceivedEventData)receivedEvent.Data;
-    }
-}
-```
-
-> [!div class="nextstepaction"]
-> [Explore the publishing APIs](/dotnet/api/overview/azure/eventgrid/publish)
 
 ## Management SDK
 
@@ -138,5 +60,5 @@ dotnet add package Microsoft.Azure.Management.EventGrid
 
 - [Receive events using the Event Grid SDK](/azure/event-grid/receive-events)
 
-[PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
-[DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
+[PackageManager]: /nuget/tools/package-manager-console
+[DotNetCLI]: /dotnet/core/tools/dotnet-add-package
