@@ -31,7 +31,7 @@ dotnet add package Azure.Messaging.EventGrid
 
 For an overview of the latest client SDK, samples, see the [Azure Event Grid client library for .NET](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Messaging.EventGrid_4.5.0/sdk/eventgrid/Azure.Messaging.EventGrid) page. This page also has a link to the migration guide that helps you migrate applications that use the old .NET library (**Microsoft.Azure.EventGrid**) to use the latest one (**Azure.Messaging.EventGrid**).
 
-Under the **Client** section of the table of contents, you will also see documentation for the old [Microsoft.Azure.EventGrid](https://docs.microsoft.com/en-us/dotnet/api/microsoft.azure.eventgrid?view=azure-dotnet) library. 
+Under the **Client** section of the table of contents, you will also see documentation for the old [Microsoft.Azure.EventGrid](/dotnet/api/microsoft.azure.eventgrid) library. 
 
 
 ## Management SDK
@@ -60,5 +60,5 @@ dotnet add package Microsoft.Azure.Management.EventGrid
 
 - [Receive events using the Event Grid SDK](/azure/event-grid/receive-events)
 
-[PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
-[DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
+[PackageManager]: /nuget/tools/package-manager-console
+[DotNetCLI]: /dotnet/core/tools/dotnet-add-package
