@@ -4,7 +4,7 @@ keywords: Azure, dotnet, SDK, API, Azure.Storage.Files.DataLake, datalakestorage
 author: maggiepint
 ms.author: magpint
 ms.date: 06/09/2021
-ms.topic: article
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet

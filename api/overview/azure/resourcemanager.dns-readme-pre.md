@@ -4,7 +4,7 @@ keywords: Azure, .net, SDK, API, Azure.ResourceManager.Dns,
 author: maggiepint
 ms.author: magpint
 ms.date: 09/24/2020
-ms.topic: article
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: .net

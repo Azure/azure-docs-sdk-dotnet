@@ -4,7 +4,7 @@ keywords: Azure, dotnet, SDK, API, Azure.Media.Analytics.Edge,
 author: maggiepint
 ms.author: magpint
 ms.date: 01/13/2021
-ms.topic: article
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet

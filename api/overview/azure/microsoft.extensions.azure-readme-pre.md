@@ -4,7 +4,7 @@ keywords: Azure, dotnet, SDK, API, Microsoft.Extensions.Azure, extensions
 author: maggiepint
 ms.author: magpint
 ms.date: 05/11/2021
-ms.topic: article
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
