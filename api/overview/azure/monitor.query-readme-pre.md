@@ -4,7 +4,7 @@ keywords: Azure, dotnet, SDK, API, Azure.Monitor.Query, monitor
 author: maggiepint
 ms.author: magpint
 ms.date: 07/08/2021
-ms.topic: article
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet

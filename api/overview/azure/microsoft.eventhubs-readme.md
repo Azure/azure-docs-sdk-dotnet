@@ -5,7 +5,7 @@ keywords: Azure, .net, SDK, API, Microsoft.Azure.EventHubs, eventhub
 author: maggiepint
 ms.author: magpint
 ms.date: 10/29/2020
-ms.topic: article
+ms.topic: reference
 ms.devlang: .net
 ms.service: event-hubs
 ---
