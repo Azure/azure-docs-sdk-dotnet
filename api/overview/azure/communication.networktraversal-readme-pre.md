@@ -4,7 +4,7 @@ keywords: Azure, dotnet, SDK, API, Azure.Communication.NetworkTraversal,
 author: maggiepint
 ms.author: magpint
 ms.date: 07/14/2021
-ms.topic: article
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet

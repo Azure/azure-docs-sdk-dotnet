@@ -4,7 +4,7 @@ keywords: Azure, dotnet, SDK, API, Azure.Storage.Common, storage
 author: maggiepint
 ms.author: magpint
 ms.date: 04/02/2021
-ms.topic: article
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet

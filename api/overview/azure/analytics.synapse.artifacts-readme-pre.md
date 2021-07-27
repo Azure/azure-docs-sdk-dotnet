@@ -4,7 +4,7 @@ keywords: Azure, dotnet, SDK, API, Azure.Analytics.Synapse.Artifacts, synapseana
 author: maggiepint
 ms.author: magpint
 ms.date: 05/17/2021
-ms.topic: article
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
