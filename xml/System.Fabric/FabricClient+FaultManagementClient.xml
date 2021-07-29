@@ -19,6 +19,881 @@
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
+    <Member MemberName="MoveAuxiliaryAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt; MoveAuxiliaryAsync (System.Fabric.PartitionSelector partitionSelector);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task`1&lt;class System.Fabric.Result.MoveAuxiliaryResult&gt; MoveAuxiliaryAsync(class System.Fabric.PartitionSelector partitionSelector) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.FaultManagementClient.MoveAuxiliaryAsync(System.Fabric.PartitionSelector)" />
+      <MemberSignature Language="VB.NET" Value="Public Function MoveAuxiliaryAsync (partitionSelector As PartitionSelector) As Task(Of MoveAuxiliaryResult)" />
+      <MemberSignature Language="F#" Value="member this.MoveAuxiliaryAsync : System.Fabric.PartitionSelector -&gt; System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt;" Usage="faultManagementClient.MoveAuxiliaryAsync partitionSelector" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Fabric</AssemblyName>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="partitionSelector" Type="System.Fabric.PartitionSelector" />
+      </Parameters>
+      <Docs>
+        <param name="partitionSelector">Move Auxiliary will be called on this Selected Partition.
+            </param>
+        <summary>
+            Moves selected auxiliary replica from current node to new node in the cluster.
+            </summary>
+        <returns>A task with move auxiliary result</returns>
+        <remarks>
+            API uses the selected auxiliary replica inside partition selector structure
+            specified by current auxiliary node. This API overload randomly selects current auxiliary
+            node for random auxiliary replica of the selected partition and new auxiliary node for replica movement
+            This selected replica will be moved to new node location from current node location.
+            This API is safe i.e. it will not cause quorum or data loss by itself unless additional faults or failures happen at the same time.
+            </remarks>
+        <exception cref="T:System.TimeoutException">Retry is exhausted.</exception>
+        <exception cref="T:System.InvalidOperationException">Invalid operation
+            - If action called on stateless or non-persisted service.
+            - If no active auxiliary replica exists
+            - If not enough nodes available for action
+            </exception>
+        <exception cref="T:System.Fabric.FabricException">
+            FabricErrorCode.AlreadyPrimaryReplica - If Primary replica for selected partition already exists on new node
+            FabricErrorCode.AlreadySecondaryReplica - If Secondary replica for selected partition already exists on new node
+            FabricErrorCode.AlreadyAuxiliaryReplica - If active Auxiliary replica for selected partition already exists on new node
+            FabricErrorCode.InvalidReplicaStateForReplicaOperation - If the target replica is not an auxiliary
+            FabricErrorCode.ConstraintNotSatisfied - If the constraints for the new location of the replica would prohibit the move
+            </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="MoveAuxiliaryAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt; MoveAuxiliaryAsync (System.Fabric.PartitionSelector partitionSelector, bool ignoreConstraints);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task`1&lt;class System.Fabric.Result.MoveAuxiliaryResult&gt; MoveAuxiliaryAsync(class System.Fabric.PartitionSelector partitionSelector, bool ignoreConstraints) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.FaultManagementClient.MoveAuxiliaryAsync(System.Fabric.PartitionSelector,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Function MoveAuxiliaryAsync (partitionSelector As PartitionSelector, ignoreConstraints As Boolean) As Task(Of MoveAuxiliaryResult)" />
+      <MemberSignature Language="F#" Value="member this.MoveAuxiliaryAsync : System.Fabric.PartitionSelector * bool -&gt; System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt;" Usage="faultManagementClient.MoveAuxiliaryAsync (partitionSelector, ignoreConstraints)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Fabric</AssemblyName>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="partitionSelector" Type="System.Fabric.PartitionSelector" />
+        <Parameter Name="ignoreConstraints" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="partitionSelector">Move Auxiliary will be called on this Selected Partition. </param>
+        <param name="ignoreConstraints">Whether or not to ignore constraints when attempting to execute the move.</param>
+        <summary>
+            Moves selected auxiliary replica from current node to new node in the cluster.
+            </summary>
+        <returns>A task with move auxiliary result</returns>
+        <remarks>
+            API uses the selected auxiliary replica inside partition selector structure
+            specified by current auxiliary node. This API overload randomly selects current auxiliary
+            node for random auxiliary replica of the selected partition and new auxiliary node for replica movement
+            This selected replica will be moved to new node location from current node location.
+            This API is safe i.e. it will not cause quorum or data loss by itself unless additional faults or failures happen at the same time.
+            </remarks>
+        <exception cref="T:System.TimeoutException">Retry is exhausted.</exception>
+        <exception cref="T:System.InvalidOperationException">Invalid operation
+            - If action called on stateless or non-persisted service.
+            - If no active auxiliary replica exists
+            - If not enough nodes available for action
+            </exception>
+        <exception cref="T:System.Fabric.FabricException">
+            FabricErrorCode.AlreadyPrimaryReplica - If Primary replica for selected partition already exists on new node
+            FabricErrorCode.AlreadySecondaryReplica - If Secondary replica for selected partition already exists on new node
+            FabricErrorCode.AlreadyAuxiliaryReplica - If active Auxiliary replica for selected partition already exists on new node
+            FabricErrorCode.InvalidReplicaStateForReplicaOperation - If the target replica is not an auxiliary
+            FabricErrorCode.ConstraintNotSatisfied - If the constraints for the new location of the replica would prohibit the move
+            </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="MoveAuxiliaryAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt; MoveAuxiliaryAsync (System.Fabric.PartitionSelector partitionSelector, System.Threading.CancellationToken token);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task`1&lt;class System.Fabric.Result.MoveAuxiliaryResult&gt; MoveAuxiliaryAsync(class System.Fabric.PartitionSelector partitionSelector, valuetype System.Threading.CancellationToken token) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.FaultManagementClient.MoveAuxiliaryAsync(System.Fabric.PartitionSelector,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Function MoveAuxiliaryAsync (partitionSelector As PartitionSelector, token As CancellationToken) As Task(Of MoveAuxiliaryResult)" />
+      <MemberSignature Language="F#" Value="member this.MoveAuxiliaryAsync : System.Fabric.PartitionSelector * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt;" Usage="faultManagementClient.MoveAuxiliaryAsync (partitionSelector, token)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Fabric</AssemblyName>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="partitionSelector" Type="System.Fabric.PartitionSelector" />
+        <Parameter Name="token" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="partitionSelector">Move Auxiliary will be called on this Selected Partition.</param>
+        <param name="token">The cancellation token</param>
+        <summary>
+            Moves selected auxiliary replica from current node to new node in the cluster.
+            </summary>
+        <returns>A task with move auxiliary result</returns>
+        <remarks>
+            This API overload randomly selects current auxiliary
+            node for random auxiliary replica of the selected partition and new auxiliary node for replica movement
+            This selected replica will be moved to new node location from current node location.
+            This API is safe i.e. it will not cause quorum or data loss by itself unless additional faults or failures happen at the same time.
+            </remarks>
+        <exception cref="T:System.TimeoutException">Retry is exhausted.</exception>
+        <exception cref="T:System.InvalidOperationException">Invalid operation
+            - If action called on stateless or non-persisted service.
+            - If no active auxiliary replica exists
+            - If not enough nodes available for action
+            </exception>
+        <exception cref="T:System.Fabric.FabricException">
+            FabricErrorCode.AlreadyPrimaryReplica - If Primary replica for selected partition already exists on new node
+            FabricErrorCode.AlreadySecondaryReplica - If Secondary replica for selected partition already exists on new node
+            FabricErrorCode.AlreadyAuxiliaryReplica - If active Auxiliary replica for selected partition already exists on new node
+            FabricErrorCode.InvalidReplicaStateForReplicaOperation - If the replica being moved is not an auxiliary
+            FabricErrorCode.ConstraintNotSatisfied - If the constraints for the new location of the replica would prohibit the move
+            </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="MoveAuxiliaryAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt; MoveAuxiliaryAsync (string currentNodeName, System.Fabric.PartitionSelector partitionSelector);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task`1&lt;class System.Fabric.Result.MoveAuxiliaryResult&gt; MoveAuxiliaryAsync(string currentNodeName, class System.Fabric.PartitionSelector partitionSelector) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.FaultManagementClient.MoveAuxiliaryAsync(System.String,System.Fabric.PartitionSelector)" />
+      <MemberSignature Language="VB.NET" Value="Public Function MoveAuxiliaryAsync (currentNodeName As String, partitionSelector As PartitionSelector) As Task(Of MoveAuxiliaryResult)" />
+      <MemberSignature Language="F#" Value="member this.MoveAuxiliaryAsync : string * System.Fabric.PartitionSelector -&gt; System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt;" Usage="faultManagementClient.MoveAuxiliaryAsync (currentNodeName, partitionSelector)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Fabric</AssemblyName>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="currentNodeName" Type="System.String" />
+        <Parameter Name="partitionSelector" Type="System.Fabric.PartitionSelector" />
+      </Parameters>
+      <Docs>
+        <param name="currentNodeName">node name where selected replica for move is currently present</param>
+        <param name="partitionSelector">Move Auxiliary will be called on this Selected Partition.</param>
+        <summary>
+            Moves selected auxiliary replica from current node to new node in the cluster.
+            </summary>
+        <returns>A task with move auxiliary result</returns>
+        <remarks>API uses the selected auxiliary replica inside partition selector structure
+            specified by currentNodeName. This API overload randomly selects new
+            auxiliary node for replica movement
+            This selected replica will be moved to new node location from current node location.
+            This API is safe i.e. it will not cause quorum or data loss by itself unless additional faults or failures happen at the same time.
+            </remarks>
+        <exception cref="T:System.TimeoutException">Retry is exhausted.</exception>
+        <exception cref="T:System.InvalidOperationException">Invalid operation
+            - If action called on stateless or non-persisted service.
+            - If no active auxiliary replica exists
+            - If not enough nodes available for action
+            </exception>
+        <exception cref="T:System.Fabric.FabricException">
+            FabricErrorCode.AlreadyPrimaryReplica - If Primary replica for selected partition already exists on new node
+            FabricErrorCode.AlreadySecondaryReplica - If Secondary replica for selected partition already exists on new node
+            FabricErrorCode.AlreadyAuxiliaryReplica - If active Auxiliary replica for selected partition already exists on new node
+            FabricErrorCode.InvalidReplicaStateForReplicaOperation - If the target replica is not an auxiliary
+            FabricErrorCode.ConstraintNotSatisfied - If the constraints for the new location of the replica would prohibit the move
+            </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="MoveAuxiliaryAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt; MoveAuxiliaryAsync (System.Fabric.PartitionSelector partitionSelector, bool ignoreConstraints, System.Threading.CancellationToken token);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task`1&lt;class System.Fabric.Result.MoveAuxiliaryResult&gt; MoveAuxiliaryAsync(class System.Fabric.PartitionSelector partitionSelector, bool ignoreConstraints, valuetype System.Threading.CancellationToken token) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.FaultManagementClient.MoveAuxiliaryAsync(System.Fabric.PartitionSelector,System.Boolean,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Function MoveAuxiliaryAsync (partitionSelector As PartitionSelector, ignoreConstraints As Boolean, token As CancellationToken) As Task(Of MoveAuxiliaryResult)" />
+      <MemberSignature Language="F#" Value="member this.MoveAuxiliaryAsync : System.Fabric.PartitionSelector * bool * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt;" Usage="faultManagementClient.MoveAuxiliaryAsync (partitionSelector, ignoreConstraints, token)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Fabric</AssemblyName>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="partitionSelector" Type="System.Fabric.PartitionSelector" />
+        <Parameter Name="ignoreConstraints" Type="System.Boolean" />
+        <Parameter Name="token" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="partitionSelector">Move Auxiliary will be called on this Selected Partition.</param>
+        <param name="ignoreConstraints">Whether or not to ignore constraints when attempting to execute the move.</param>
+        <param name="token">The cancellation token</param>
+        <summary>
+            Moves selected auxiliary replica from current node to new node in the cluster.
+            </summary>
+        <returns>A task with move auxiliary result</returns>
+        <remarks>
+            This API overload randomly selects current auxiliary
+            node for random auxiliary replica of the selected partition and new auxiliary node for replica movement
+            This selected replica will be moved to new node location from current node location.
+            This API is safe i.e. it will not cause quorum or data loss by itself unless additional faults or failures happen at the same time.
+            </remarks>
+        <exception cref="T:System.TimeoutException">Retry is exhausted.</exception>
+        <exception cref="T:System.InvalidOperationException">Invalid operation
+            - If action called on stateless or non-persisted service.
+            - If no active auxiliary replica exists
+            - If not enough nodes available for action
+            </exception>
+        <exception cref="T:System.Fabric.FabricException">
+            FabricErrorCode.AlreadyPrimaryReplica - If Primary replica for selected partition already exists on new node
+            FabricErrorCode.AlreadySecondaryReplica - If Secondary replica for selected partition already exists on new node
+            FabricErrorCode.AlreadyAuxiliaryReplica - If active Auxiliary replica for selected partition already exists on new node
+            FabricErrorCode.InvalidReplicaStateForReplicaOperation - If the replica being moved is not an auxiliary
+            FabricErrorCode.ConstraintNotSatisfied - If the constraints for the new location of the replica would prohibit the move
+            </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="MoveAuxiliaryAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt; MoveAuxiliaryAsync (System.Fabric.PartitionSelector partitionSelector, TimeSpan operationTimeout, System.Threading.CancellationToken token);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task`1&lt;class System.Fabric.Result.MoveAuxiliaryResult&gt; MoveAuxiliaryAsync(class System.Fabric.PartitionSelector partitionSelector, valuetype System.TimeSpan operationTimeout, valuetype System.Threading.CancellationToken token) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.FaultManagementClient.MoveAuxiliaryAsync(System.Fabric.PartitionSelector,System.TimeSpan,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Function MoveAuxiliaryAsync (partitionSelector As PartitionSelector, operationTimeout As TimeSpan, token As CancellationToken) As Task(Of MoveAuxiliaryResult)" />
+      <MemberSignature Language="F#" Value="member this.MoveAuxiliaryAsync : System.Fabric.PartitionSelector * TimeSpan * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt;" Usage="faultManagementClient.MoveAuxiliaryAsync (partitionSelector, operationTimeout, token)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Fabric</AssemblyName>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="partitionSelector" Type="System.Fabric.PartitionSelector" />
+        <Parameter Name="operationTimeout" Type="System.TimeSpan" />
+        <Parameter Name="token" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="partitionSelector">Move Auxiliary will be called on this Selected Partition.</param>
+        <param name="operationTimeout">The timeout for this API call.</param>
+        <param name="token">The cancellation token</param>
+        <summary>
+            Moves selected auxiliary replica from current node to new node in the cluster.
+            </summary>
+        <returns>A task with move auxiliary result</returns>
+        <remarks>
+            API uses the randomly selected auxiliary replica for specified partition selector.
+            This API overload randomly selects new auxiliary node location for replica movement
+            This selected replica will be moved to new node location from current node location.
+            This API is safe i.e. it will not cause quorum or data loss by itself unless additional faults or failures happen at the same time.
+            </remarks>
+        <exception cref="T:System.TimeoutException">Retry is exhausted.</exception>
+        <exception cref="T:System.InvalidOperationException">Invalid operation
+            - If action called on stateless or non-persisted service.
+            - If no active auxiliary replica exists
+            - If not enough nodes available for action
+            </exception>
+        <exception cref="T:System.Fabric.FabricException">
+            FabricErrorCode.AlreadyPrimaryReplica - If Primary replica for selected partition already exists on new node
+            FabricErrorCode.AlreadySecondaryReplica - If Secondary replica for selected partition already exists on new node
+            FabricErrorCode.AlreadyAuxiliaryReplica - If active Auxiliary replica for selected partition already exists on new node
+            FabricErrorCode.InvalidReplicaStateForReplicaOperation - If the target replica is not an auxiliary
+            </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="MoveAuxiliaryAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt; MoveAuxiliaryAsync (string currentNodeName, System.Fabric.PartitionSelector partitionSelector, bool ignoreConstraints);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task`1&lt;class System.Fabric.Result.MoveAuxiliaryResult&gt; MoveAuxiliaryAsync(string currentNodeName, class System.Fabric.PartitionSelector partitionSelector, bool ignoreConstraints) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.FaultManagementClient.MoveAuxiliaryAsync(System.String,System.Fabric.PartitionSelector,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Function MoveAuxiliaryAsync (currentNodeName As String, partitionSelector As PartitionSelector, ignoreConstraints As Boolean) As Task(Of MoveAuxiliaryResult)" />
+      <MemberSignature Language="F#" Value="member this.MoveAuxiliaryAsync : string * System.Fabric.PartitionSelector * bool -&gt; System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt;" Usage="faultManagementClient.MoveAuxiliaryAsync (currentNodeName, partitionSelector, ignoreConstraints)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Fabric</AssemblyName>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="currentNodeName" Type="System.String" />
+        <Parameter Name="partitionSelector" Type="System.Fabric.PartitionSelector" />
+        <Parameter Name="ignoreConstraints" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="currentNodeName">node name where selected replica for move is currently present</param>
+        <param name="partitionSelector">Move Auxiliary will be called on this Selected Partition.</param>
+        <param name="ignoreConstraints">Whether or not to ignore constraints when attempting to execute the move.</param>
+        <summary>
+            Moves selected auxiliary replica from current node to new node in the cluster.
+            </summary>
+        <returns>A task with move auxiliary result</returns>
+        <remarks>API uses the selected auxiliary replica inside partition selector structure
+            specified by currentNodeName. This API overload randomly selects new
+            auxiliary node for replica movement
+            This selected replica will be moved to new node location from current node location.
+            This API is safe i.e. it will not cause quorum or data loss by itself unless additional faults or failures happen at the same time.
+            </remarks>
+        <exception cref="T:System.TimeoutException">Retry is exhausted.</exception>
+        <exception cref="T:System.InvalidOperationException">Invalid operation
+            - If action called on stateless or non-persisted service.
+            - If no active auxiliary replica exists
+            - If not enough nodes available for action
+            </exception>
+        <exception cref="T:System.Fabric.FabricException">
+            FabricErrorCode.AlreadyPrimaryReplica - If Primary replica for selected partition already exists on new node
+            FabricErrorCode.AlreadySecondaryReplica - If Secondary replica for selected partition already exists on new node
+            FabricErrorCode.AlreadyAuxiliaryReplica - If active Auxiliary replica for selected partition already exists on new node
+            FabricErrorCode.InvalidReplicaStateForReplicaOperation - If the replica being moved is not an auxiliary
+            FabricErrorCode.ConstraintNotSatisfied - If the constraints for the new location of the replica would prohibit the move
+            </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="MoveAuxiliaryAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt; MoveAuxiliaryAsync (string currentNodeName, System.Fabric.PartitionSelector partitionSelector, System.Threading.CancellationToken token);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task`1&lt;class System.Fabric.Result.MoveAuxiliaryResult&gt; MoveAuxiliaryAsync(string currentNodeName, class System.Fabric.PartitionSelector partitionSelector, valuetype System.Threading.CancellationToken token) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.FaultManagementClient.MoveAuxiliaryAsync(System.String,System.Fabric.PartitionSelector,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Function MoveAuxiliaryAsync (currentNodeName As String, partitionSelector As PartitionSelector, token As CancellationToken) As Task(Of MoveAuxiliaryResult)" />
+      <MemberSignature Language="F#" Value="member this.MoveAuxiliaryAsync : string * System.Fabric.PartitionSelector * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt;" Usage="faultManagementClient.MoveAuxiliaryAsync (currentNodeName, partitionSelector, token)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Fabric</AssemblyName>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="currentNodeName" Type="System.String" />
+        <Parameter Name="partitionSelector" Type="System.Fabric.PartitionSelector" />
+        <Parameter Name="token" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="currentNodeName">node name where selected replica for move is currently present</param>
+        <param name="partitionSelector">Move Auxiliary will be called on this Selected Partition.
+            </param>
+        <param name="token">The cancellation token</param>
+        <summary>
+            Moves selected auxiliary replica from current node to new node in the cluster.
+            </summary>
+        <returns>A task with move auxiliary result</returns>
+        <remarks>
+            API uses the selected auxiliary replica inside partition selector structure
+            specified by currentNodeName. This API overload randomly selects new
+            auxiliary node for replica movement
+            This selected replica will be moved to new node location from current node location.
+            This API is safe i.e. it will not cause quorum or data loss by itself unless additional faults or failures happen at the same time.
+            </remarks>
+        <exception cref="T:System.TimeoutException">Retry is exhausted.</exception>
+        <exception cref="T:System.InvalidOperationException">Invalid operation
+            - If action called on stateless or non-persisted service.
+            - If no active auxiliary replica exists
+            - If not enough nodes available for action
+            </exception>
+        <exception cref="T:System.Fabric.FabricException">
+            FabricErrorCode.AlreadyPrimaryReplica - If Primary replica for selected partition already exists on new node
+            FabricErrorCode.AlreadySecondaryReplica - If Secondary replica for selected partition already exists on new node
+            FabricErrorCode.AlreadyAuxiliaryReplica - If active Auxiliary replica for selected partition already exists on new node
+            FabricErrorCode.InvalidReplicaStateForReplicaOperation - If the target replica is not an auxiliary
+            FabricErrorCode.ConstraintNotSatisfied - If the constraints for the new location of the replica would prohibit the move
+            </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="MoveAuxiliaryAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt; MoveAuxiliaryAsync (string currentNodeName, string newNodeName, System.Fabric.PartitionSelector partitionSelector);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task`1&lt;class System.Fabric.Result.MoveAuxiliaryResult&gt; MoveAuxiliaryAsync(string currentNodeName, string newNodeName, class System.Fabric.PartitionSelector partitionSelector) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.FaultManagementClient.MoveAuxiliaryAsync(System.String,System.String,System.Fabric.PartitionSelector)" />
+      <MemberSignature Language="VB.NET" Value="Public Function MoveAuxiliaryAsync (currentNodeName As String, newNodeName As String, partitionSelector As PartitionSelector) As Task(Of MoveAuxiliaryResult)" />
+      <MemberSignature Language="F#" Value="member this.MoveAuxiliaryAsync : string * string * System.Fabric.PartitionSelector -&gt; System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt;" Usage="faultManagementClient.MoveAuxiliaryAsync (currentNodeName, newNodeName, partitionSelector)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Fabric</AssemblyName>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="currentNodeName" Type="System.String" />
+        <Parameter Name="newNodeName" Type="System.String" />
+        <Parameter Name="partitionSelector" Type="System.Fabric.PartitionSelector" />
+      </Parameters>
+      <Docs>
+        <param name="currentNodeName">node name where selected replica for move is currently present</param>
+        <param name="newNodeName">node name where selected replica to be moved</param>
+        <param name="partitionSelector">Move Auxiliary will be called on this Selected Partition.
+            </param>
+        <summary>
+            Moves selected auxiliary replica from current node to new node in the cluster.
+            </summary>
+        <returns>A task with move auxiliary result</returns>
+        <remarks>
+            API uses the selected auxiliary replica specified by currentNodeName and
+            moves it to new node location specified by newNodeName.
+            This API is safe i.e. it will not cause quorum or data loss by itself unless additional faults or failures happen at the same time.
+            </remarks>
+        <exception cref="T:System.TimeoutException">Retry is exhausted.</exception>
+        <exception cref="T:System.InvalidOperationException">Invalid operation
+            - If action called on stateless or non-persisted service.
+            - If no active auxiliary replica exists
+            - If not enough nodes available for action
+            </exception>
+        <exception cref="T:System.Fabric.FabricException">
+            FabricErrorCode.AlreadyPrimaryReplica - If Primary replica for selected partition already exists on new node
+            FabricErrorCode.AlreadySecondaryReplica - If Secondary replica for selected partition already exists on new node
+            FabricErrorCode.AlreadyAuxiliaryReplica - If active Auxiliary replica for selected partition already exists on new node
+            FabricErrorCode.InvalidReplicaStateForReplicaOperation - If the target replica is not an auxiliary
+            FabricErrorCode.ConstraintNotSatisfied - If the constraints for the new location of the replica would prohibit the move
+            </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="MoveAuxiliaryAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt; MoveAuxiliaryAsync (System.Fabric.PartitionSelector partitionSelector, bool ignoreConstraints, TimeSpan operationTimeout, System.Threading.CancellationToken token);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task`1&lt;class System.Fabric.Result.MoveAuxiliaryResult&gt; MoveAuxiliaryAsync(class System.Fabric.PartitionSelector partitionSelector, bool ignoreConstraints, valuetype System.TimeSpan operationTimeout, valuetype System.Threading.CancellationToken token) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.FaultManagementClient.MoveAuxiliaryAsync(System.Fabric.PartitionSelector,System.Boolean,System.TimeSpan,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Function MoveAuxiliaryAsync (partitionSelector As PartitionSelector, ignoreConstraints As Boolean, operationTimeout As TimeSpan, token As CancellationToken) As Task(Of MoveAuxiliaryResult)" />
+      <MemberSignature Language="F#" Value="member this.MoveAuxiliaryAsync : System.Fabric.PartitionSelector * bool * TimeSpan * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt;" Usage="faultManagementClient.MoveAuxiliaryAsync (partitionSelector, ignoreConstraints, operationTimeout, token)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Fabric</AssemblyName>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="partitionSelector" Type="System.Fabric.PartitionSelector" />
+        <Parameter Name="ignoreConstraints" Type="System.Boolean" />
+        <Parameter Name="operationTimeout" Type="System.TimeSpan" />
+        <Parameter Name="token" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="partitionSelector">Move Auxiliary will be called on this Selected Partition.</param>
+        <param name="ignoreConstraints">Whether or not to ignore constraints when attempting to execute the move.</param>
+        <param name="operationTimeout">The timeout for this API call.</param>
+        <param name="token">The cancellation token</param>
+        <summary>
+            Moves selected auxiliary replica from current node to new node in the cluster.
+            </summary>
+        <returns>A task with move auxiliary result</returns>
+        <remarks>
+            API uses the randomly selected auxiliary replica for specified partition selector.
+            This API overload randomly selects new auxiliary node location for replica movement
+            This selected replica will be moved to new node location from current node location.
+            This API is safe i.e. it will not cause quorum or data loss by itself unless additional faults or failures happen at the same time.
+            </remarks>
+        <exception cref="T:System.TimeoutException">Retry is exhausted.</exception>
+        <exception cref="T:System.InvalidOperationException">Invalid operation
+            - If action called on stateless or non-persisted service.
+            - If no active auxiliary replica exists
+            - If not enough nodes available for action
+            </exception>
+        <exception cref="T:System.Fabric.FabricException">
+            FabricErrorCode.AlreadyPrimaryReplica - If Primary replica for selected partition already exists on new node
+            FabricErrorCode.AlreadySecondaryReplica - If Secondary replica for selected partition already exists on new node
+            FabricErrorCode.AlreadyAuxiliaryReplica - If active Auxiliary replica for selected partition already exists on new node
+            FabricErrorCode.InvalidReplicaStateForReplicaOperation - If the target replica is not an auxiliary
+            </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="MoveAuxiliaryAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt; MoveAuxiliaryAsync (string currentNodeName, System.Fabric.PartitionSelector partitionSelector, bool ignoreConstraints, System.Threading.CancellationToken token);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task`1&lt;class System.Fabric.Result.MoveAuxiliaryResult&gt; MoveAuxiliaryAsync(string currentNodeName, class System.Fabric.PartitionSelector partitionSelector, bool ignoreConstraints, valuetype System.Threading.CancellationToken token) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.FaultManagementClient.MoveAuxiliaryAsync(System.String,System.Fabric.PartitionSelector,System.Boolean,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Function MoveAuxiliaryAsync (currentNodeName As String, partitionSelector As PartitionSelector, ignoreConstraints As Boolean, token As CancellationToken) As Task(Of MoveAuxiliaryResult)" />
+      <MemberSignature Language="F#" Value="member this.MoveAuxiliaryAsync : string * System.Fabric.PartitionSelector * bool * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt;" Usage="faultManagementClient.MoveAuxiliaryAsync (currentNodeName, partitionSelector, ignoreConstraints, token)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Fabric</AssemblyName>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="currentNodeName" Type="System.String" />
+        <Parameter Name="partitionSelector" Type="System.Fabric.PartitionSelector" />
+        <Parameter Name="ignoreConstraints" Type="System.Boolean" />
+        <Parameter Name="token" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="currentNodeName">node name where selected replica for move is currently present</param>
+        <param name="partitionSelector">Move Auxiliary will be called on this Selected Partition.</param>
+        <param name="ignoreConstraints">Whether or not to ignore constraints when attempting to execute the move.</param>
+        <param name="token">The cancellation token</param>
+        <summary>
+            Moves selected auxiliary replica from current node to new node in the cluster.
+            </summary>
+        <returns>A task with move auxiliary result</returns>
+        <remarks>
+            API uses the selected auxiliary replica inside partition selector structure
+            specified by currentNodeName. This API overload randomly selects new
+            auxiliary node for replica movement
+            This selected replica will be moved to new node location from current node location.
+            This API is safe i.e. it will not cause quorum or data loss by itself unless additional faults or failures happen at the same time.
+            </remarks>
+        <exception cref="T:System.TimeoutException">Retry is exhausted.</exception>
+        <exception cref="T:System.InvalidOperationException">Invalid operation
+            - If action called on stateless or non-persisted service.
+            - If no active auxiliary replica exists
+            - If not enough nodes available for action
+            </exception>
+        <exception cref="T:System.Fabric.FabricException">
+            FabricErrorCode.AlreadyPrimaryReplica - If Primary replica for selected partition already exists on new node
+            FabricErrorCode.AlreadySecondaryReplica - If Secondary replica for selected partition already exists on new node
+            FabricErrorCode.AlreadyAuxiliaryReplica - If active Auxiliary replica for selected partition already exists on new node
+            FabricErrorCode.InvalidReplicaStateForReplicaOperation - If the target replica is not an auxiliary
+            FabricErrorCode.ConstraintNotSatisfied - If the constraints for the new location of the replica would prohibit the move
+            </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="MoveAuxiliaryAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt; MoveAuxiliaryAsync (string currentNodeName, System.Fabric.PartitionSelector partitionSelector, TimeSpan operationTimeout, System.Threading.CancellationToken token);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task`1&lt;class System.Fabric.Result.MoveAuxiliaryResult&gt; MoveAuxiliaryAsync(string currentNodeName, class System.Fabric.PartitionSelector partitionSelector, valuetype System.TimeSpan operationTimeout, valuetype System.Threading.CancellationToken token) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.FaultManagementClient.MoveAuxiliaryAsync(System.String,System.Fabric.PartitionSelector,System.TimeSpan,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Function MoveAuxiliaryAsync (currentNodeName As String, partitionSelector As PartitionSelector, operationTimeout As TimeSpan, token As CancellationToken) As Task(Of MoveAuxiliaryResult)" />
+      <MemberSignature Language="F#" Value="member this.MoveAuxiliaryAsync : string * System.Fabric.PartitionSelector * TimeSpan * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt;" Usage="faultManagementClient.MoveAuxiliaryAsync (currentNodeName, partitionSelector, operationTimeout, token)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Fabric</AssemblyName>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="currentNodeName" Type="System.String" />
+        <Parameter Name="partitionSelector" Type="System.Fabric.PartitionSelector" />
+        <Parameter Name="operationTimeout" Type="System.TimeSpan" />
+        <Parameter Name="token" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="currentNodeName">node name where selected replica for move is currently present</param>
+        <param name="partitionSelector">Move Auxiliary will be called on this Selected Partition.</param>
+        <param name="operationTimeout">The timeout for this API call.</param>
+        <param name="token">The cancellation token</param>
+        <summary>
+            Moves selected auxiliary replica from current node to new node in the cluster.
+            </summary>
+        <returns>A task with move auxiliary result</returns>
+        <remarks>API uses the selected auxiliary replica specified by currentNodeName.
+            This selected replica will be moved to the randomly selected new node location.
+            This API is safe i.e. it will not cause quorum or data loss by itself unless additional faults or failures happen at the same time.
+            </remarks>
+        <exception cref="T:System.TimeoutException">Retry is exhausted.</exception>
+        <exception cref="T:System.InvalidOperationException">Invalid operation
+            - If action called on stateless or non-persisted service.
+            - If no active auxiliary replica exists
+            - If not enough nodes available for action
+            </exception>
+        <exception cref="T:System.Fabric.FabricException">
+            FabricErrorCode.AlreadyPrimaryReplica - If Primary replica for selected partition already exists on new node
+            FabricErrorCode.AlreadySecondaryReplica - If Secondary replica for selected partition already exists on new node
+            FabricErrorCode.AlreadyAuxiliaryReplica - If active Auxiliary replica for selected partition already exists on new node
+            FabricErrorCode.InvalidReplicaStateForReplicaOperation - If the target replica is not an auxiliary
+            FabricErrorCode.ConstraintNotSatisfied - If the constraints for the new location of the replica would prohibit the move
+            </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="MoveAuxiliaryAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt; MoveAuxiliaryAsync (string currentNodeName, string newNodeName, System.Fabric.PartitionSelector partitionSelector, bool ignoreConstraints);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task`1&lt;class System.Fabric.Result.MoveAuxiliaryResult&gt; MoveAuxiliaryAsync(string currentNodeName, string newNodeName, class System.Fabric.PartitionSelector partitionSelector, bool ignoreConstraints) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.FaultManagementClient.MoveAuxiliaryAsync(System.String,System.String,System.Fabric.PartitionSelector,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Function MoveAuxiliaryAsync (currentNodeName As String, newNodeName As String, partitionSelector As PartitionSelector, ignoreConstraints As Boolean) As Task(Of MoveAuxiliaryResult)" />
+      <MemberSignature Language="F#" Value="member this.MoveAuxiliaryAsync : string * string * System.Fabric.PartitionSelector * bool -&gt; System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt;" Usage="faultManagementClient.MoveAuxiliaryAsync (currentNodeName, newNodeName, partitionSelector, ignoreConstraints)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Fabric</AssemblyName>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="currentNodeName" Type="System.String" />
+        <Parameter Name="newNodeName" Type="System.String" />
+        <Parameter Name="partitionSelector" Type="System.Fabric.PartitionSelector" />
+        <Parameter Name="ignoreConstraints" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="currentNodeName">node name where selected replica for move is currently present</param>
+        <param name="newNodeName">node name where selected replica to be moved</param>
+        <param name="partitionSelector">Move Auxiliary will be called on this Selected Partition.</param>
+        <param name="ignoreConstraints">Whether or not to ignore constraints when attempting to execute the move.</param>
+        <summary>
+            Moves selected auxiliary replica from current node to new node in the cluster.
+            </summary>
+        <returns>A task with move auxiliary result</returns>
+        <remarks>
+            API uses the selected auxiliary replica specified by currentNodeName and
+            moves it to new node location specified by newNodeName.
+            This API is safe i.e. it will not cause quorum or data loss by itself unless additional faults or failures happen at the same time.
+            </remarks>
+        <exception cref="T:System.TimeoutException">Retry is exhausted.</exception>
+        <exception cref="T:System.InvalidOperationException">Invalid operation
+            - If action called on stateless or non-persisted service.
+            - If no active auxiliary replica exists
+            - If not enough nodes available for action
+            </exception>
+        <exception cref="T:System.Fabric.FabricException">
+            FabricErrorCode.AlreadyPrimaryReplica - If Primary replica for selected partition already exists on new node
+            FabricErrorCode.AlreadySecondaryReplica - If Secondary replica for selected partition already exists on new node
+            FabricErrorCode.AlreadyAuxiliaryReplica - If active Auxiliary replica for selected partition already exists on new node
+            FabricErrorCode.InvalidReplicaStateForReplicaOperation - If the target replica is not an auxiliary
+            FabricErrorCode.ConstraintNotSatisfied - If the constraints for the new location of the replica would prohibit the move
+            </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="MoveAuxiliaryAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt; MoveAuxiliaryAsync (string currentNodeName, string newNodeName, System.Fabric.PartitionSelector partitionSelector, System.Threading.CancellationToken token);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task`1&lt;class System.Fabric.Result.MoveAuxiliaryResult&gt; MoveAuxiliaryAsync(string currentNodeName, string newNodeName, class System.Fabric.PartitionSelector partitionSelector, valuetype System.Threading.CancellationToken token) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.FaultManagementClient.MoveAuxiliaryAsync(System.String,System.String,System.Fabric.PartitionSelector,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Function MoveAuxiliaryAsync (currentNodeName As String, newNodeName As String, partitionSelector As PartitionSelector, token As CancellationToken) As Task(Of MoveAuxiliaryResult)" />
+      <MemberSignature Language="F#" Value="member this.MoveAuxiliaryAsync : string * string * System.Fabric.PartitionSelector * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt;" Usage="faultManagementClient.MoveAuxiliaryAsync (currentNodeName, newNodeName, partitionSelector, token)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Fabric</AssemblyName>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="currentNodeName" Type="System.String" />
+        <Parameter Name="newNodeName" Type="System.String" />
+        <Parameter Name="partitionSelector" Type="System.Fabric.PartitionSelector" />
+        <Parameter Name="token" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="currentNodeName">node name where selected replica for move is currently present</param>
+        <param name="newNodeName">node name where selected replica to be moved</param>
+        <param name="partitionSelector">Move Auxiliary will be called on this Selected Partition.</param>
+        <param name="token">The cancellation token</param>
+        <summary>
+            Moves selected auxiliary replica from current node to new node in the cluster.
+            </summary>
+        <returns>A task with move auxiliary result</returns>
+        <remarks>
+            API uses the selected auxiliary replica specified by currentNodeName and
+            moves it to new node location specified by newNodeName.
+            This API is safe i.e. it will not cause quorum or data loss by itself unless additional faults or failures happen at the same time.
+            </remarks>
+        <exception cref="T:System.TimeoutException">Retry is exhausted.</exception>
+        <exception cref="T:System.InvalidOperationException">Invalid operation
+            - If action called on stateless or non-persisted service.
+            - If no active auxiliary replica exists
+            - If not enough nodes available for action
+            </exception>
+        <exception cref="T:System.Fabric.FabricException">
+            FabricErrorCode.AlreadyPrimaryReplica - If Primary replica for selected partition already exists on new node
+            FabricErrorCode.AlreadySecondaryReplica - If Secondary replica for selected partition already exists on new node
+            FabricErrorCode.AlreadyAuxiliaryReplica - If active Auxiliary replica for selected partition already exists on new node
+            FabricErrorCode.InvalidReplicaStateForReplicaOperation - If the target replica is not an auxiliary
+            FabricErrorCode.ConstraintNotSatisfied - If the constraints for the new location of the replica would prohibit the move
+            </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="MoveAuxiliaryAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt; MoveAuxiliaryAsync (string currentNodeName, System.Fabric.PartitionSelector partitionSelector, bool ignoreConstraints, TimeSpan operationTimeout, System.Threading.CancellationToken token);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task`1&lt;class System.Fabric.Result.MoveAuxiliaryResult&gt; MoveAuxiliaryAsync(string currentNodeName, class System.Fabric.PartitionSelector partitionSelector, bool ignoreConstraints, valuetype System.TimeSpan operationTimeout, valuetype System.Threading.CancellationToken token) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.FaultManagementClient.MoveAuxiliaryAsync(System.String,System.Fabric.PartitionSelector,System.Boolean,System.TimeSpan,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Function MoveAuxiliaryAsync (currentNodeName As String, partitionSelector As PartitionSelector, ignoreConstraints As Boolean, operationTimeout As TimeSpan, token As CancellationToken) As Task(Of MoveAuxiliaryResult)" />
+      <MemberSignature Language="F#" Value="member this.MoveAuxiliaryAsync : string * System.Fabric.PartitionSelector * bool * TimeSpan * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt;" Usage="faultManagementClient.MoveAuxiliaryAsync (currentNodeName, partitionSelector, ignoreConstraints, operationTimeout, token)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Fabric</AssemblyName>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="currentNodeName" Type="System.String" />
+        <Parameter Name="partitionSelector" Type="System.Fabric.PartitionSelector" />
+        <Parameter Name="ignoreConstraints" Type="System.Boolean" />
+        <Parameter Name="operationTimeout" Type="System.TimeSpan" />
+        <Parameter Name="token" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="currentNodeName">node name where selected replica for move is currently present</param>
+        <param name="partitionSelector">Move Auxiliary will be called on this Selected Partition.</param>
+        <param name="ignoreConstraints">Whether or not to ignore constraints when attempting to execute the move.</param>
+        <param name="operationTimeout">The timeout for this API call.</param>
+        <param name="token">The cancellation token</param>
+        <summary>
+            Moves selected auxiliary replica from current node to new node in the cluster.
+            </summary>
+        <returns>A task with move auxiliary result</returns>
+        <remarks>API uses the selected auxiliary replica specified by currentNodeName.
+            This selected replica will be moved to the randomly selected new node location.
+            This API is safe i.e. it will not cause quorum or data loss by itself unless additional faults or failures happen at the same time.
+            </remarks>
+        <exception cref="T:System.TimeoutException">Retry is exhausted.</exception>
+        <exception cref="T:System.InvalidOperationException">Invalid operation
+            - If action called on stateless or non-persisted service.
+            - If no active auxiliary replica exists
+            - If not enough nodes available for action
+            </exception>
+        <exception cref="T:System.Fabric.FabricException">
+            FabricErrorCode.AlreadyPrimaryReplica - If Primary replica for selected partition already exists on new node
+            FabricErrorCode.AlreadySecondaryReplica - If Secondary replica for selected partition already exists on new node
+            FabricErrorCode.AlreadyAuxiliaryReplica - If active Auxiliary replica for selected partition already exists on new node
+            FabricErrorCode.InvalidReplicaStateForReplicaOperation - If the target replica is not an auxiliary
+            FabricErrorCode.ConstraintNotSatisfied - If the constraints for the new location of the replica would prohibit the move
+            </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="MoveAuxiliaryAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt; MoveAuxiliaryAsync (string currentNodeName, string newNodeName, System.Fabric.PartitionSelector partitionSelector, bool ignoreConstraints, System.Threading.CancellationToken token);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task`1&lt;class System.Fabric.Result.MoveAuxiliaryResult&gt; MoveAuxiliaryAsync(string currentNodeName, string newNodeName, class System.Fabric.PartitionSelector partitionSelector, bool ignoreConstraints, valuetype System.Threading.CancellationToken token) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.FaultManagementClient.MoveAuxiliaryAsync(System.String,System.String,System.Fabric.PartitionSelector,System.Boolean,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Function MoveAuxiliaryAsync (currentNodeName As String, newNodeName As String, partitionSelector As PartitionSelector, ignoreConstraints As Boolean, token As CancellationToken) As Task(Of MoveAuxiliaryResult)" />
+      <MemberSignature Language="F#" Value="member this.MoveAuxiliaryAsync : string * string * System.Fabric.PartitionSelector * bool * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt;" Usage="faultManagementClient.MoveAuxiliaryAsync (currentNodeName, newNodeName, partitionSelector, ignoreConstraints, token)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Fabric</AssemblyName>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="currentNodeName" Type="System.String" />
+        <Parameter Name="newNodeName" Type="System.String" />
+        <Parameter Name="partitionSelector" Type="System.Fabric.PartitionSelector" />
+        <Parameter Name="ignoreConstraints" Type="System.Boolean" />
+        <Parameter Name="token" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="currentNodeName">node name where selected replica for move is currently present</param>
+        <param name="newNodeName">node name where selected replica to be moved</param>
+        <param name="partitionSelector">Move Auxiliary will be called on this Selected Partition.</param>
+        <param name="ignoreConstraints">Whether or not to ignore constraints when attempting to execute the move.</param>
+        <param name="token">The cancellation token</param>
+        <summary>
+            Moves selected auxiliary replica from current node to new node in the cluster.
+            </summary>
+        <returns>A task with move auxiliary result</returns>
+        <remarks>
+            API uses the selected auxiliary replica specified by currentNodeName and
+            moves it to new node location specified by newNodeName.
+            This API is safe i.e. it will not cause quorum or data loss by itself unless additional faults or failures happen at the same time.
+            </remarks>
+        <exception cref="T:System.TimeoutException">Retry is exhausted.</exception>
+        <exception cref="T:System.InvalidOperationException">Invalid operation
+            - If action called on stateless or non-persisted service.
+            - If no active auxiliary replica exists
+            - If not enough nodes available for action
+            </exception>
+        <exception cref="T:System.Fabric.FabricException">
+            FabricErrorCode.AlreadyPrimaryReplica - If Primary replica for selected partition already exists on new node
+            FabricErrorCode.AlreadySecondaryReplica - If Secondary replica for selected partition already exists on new node
+            FabricErrorCode.AlreadyAuxiliaryReplica - If active Auxiliary replica for selected partition already exists on new node
+            FabricErrorCode.InvalidReplicaStateForReplicaOperation - If the target replica is not an auxiliary
+            FabricErrorCode.ConstraintNotSatisfied - If the constraints for the new location of the replica would prohibit the move
+            </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="MoveAuxiliaryAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt; MoveAuxiliaryAsync (string currentNodeName, string newNodeName, System.Fabric.PartitionSelector partitionSelector, TimeSpan operationTimeout, System.Threading.CancellationToken token);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task`1&lt;class System.Fabric.Result.MoveAuxiliaryResult&gt; MoveAuxiliaryAsync(string currentNodeName, string newNodeName, class System.Fabric.PartitionSelector partitionSelector, valuetype System.TimeSpan operationTimeout, valuetype System.Threading.CancellationToken token) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.FaultManagementClient.MoveAuxiliaryAsync(System.String,System.String,System.Fabric.PartitionSelector,System.TimeSpan,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Function MoveAuxiliaryAsync (currentNodeName As String, newNodeName As String, partitionSelector As PartitionSelector, operationTimeout As TimeSpan, token As CancellationToken) As Task(Of MoveAuxiliaryResult)" />
+      <MemberSignature Language="F#" Value="member this.MoveAuxiliaryAsync : string * string * System.Fabric.PartitionSelector * TimeSpan * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt;" Usage="faultManagementClient.MoveAuxiliaryAsync (currentNodeName, newNodeName, partitionSelector, operationTimeout, token)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Fabric</AssemblyName>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="currentNodeName" Type="System.String" />
+        <Parameter Name="newNodeName" Type="System.String" />
+        <Parameter Name="partitionSelector" Type="System.Fabric.PartitionSelector" />
+        <Parameter Name="operationTimeout" Type="System.TimeSpan" />
+        <Parameter Name="token" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="currentNodeName">node name where selected replica for move is currently present</param>
+        <param name="newNodeName">node name where selected replica to be moved</param>
+        <param name="partitionSelector">Move Auxiliary will be called on this Selected Partition.</param>
+        <param name="operationTimeout">The timeout for this API call.</param>
+        <param name="token">The cancellation token</param>
+        <summary>
+            Moves selected auxiliary replica from current node to new node in the cluster.
+            </summary>
+        <returns>A task with move auxiliary result</returns>
+        <remarks>
+            API uses the selected auxiliary replica inside partition selector structure
+            specified by currentNodeName location. This selected replica will be moved to newNodeName location from current node location.
+            This API is safe i.e. it will not cause quorum or data loss by itself unless additional faults or failures happen at the same time.
+            </remarks>
+        <exception cref="T:System.TimeoutException">Retry is exhausted.</exception>
+        <exception cref="T:System.InvalidOperationException">Invalid operation
+            - If action called on stateless or non-persisted service.
+            - If no active auxiliary replica exists
+            - If not enough nodes available for action
+            </exception>
+        <exception cref="T:System.Fabric.FabricException">
+            FabricErrorCode.AlreadyPrimaryReplica - If Primary replica for selected partition already exists on new node
+            FabricErrorCode.AlreadySecondaryReplica - If Secondary replica for selected partition already exists on new node
+            FabricErrorCode.AlreadyAuxiliaryReplica - If active Auxiliary replica for selected partition already exists on new node
+            FabricErrorCode.InvalidReplicaStateForReplicaOperation - If the target replica is not an auxiliary
+            </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="MoveAuxiliaryAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt; MoveAuxiliaryAsync (string currentNodeName, string newNodeName, System.Fabric.PartitionSelector partitionSelector, bool ignoreConstraints, TimeSpan operationTimeout, System.Threading.CancellationToken token);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task`1&lt;class System.Fabric.Result.MoveAuxiliaryResult&gt; MoveAuxiliaryAsync(string currentNodeName, string newNodeName, class System.Fabric.PartitionSelector partitionSelector, bool ignoreConstraints, valuetype System.TimeSpan operationTimeout, valuetype System.Threading.CancellationToken token) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Fabric.FabricClient.FaultManagementClient.MoveAuxiliaryAsync(System.String,System.String,System.Fabric.PartitionSelector,System.Boolean,System.TimeSpan,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Function MoveAuxiliaryAsync (currentNodeName As String, newNodeName As String, partitionSelector As PartitionSelector, ignoreConstraints As Boolean, operationTimeout As TimeSpan, token As CancellationToken) As Task(Of MoveAuxiliaryResult)" />
+      <MemberSignature Language="F#" Value="member this.MoveAuxiliaryAsync : string * string * System.Fabric.PartitionSelector * bool * TimeSpan * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt;" Usage="faultManagementClient.MoveAuxiliaryAsync (currentNodeName, newNodeName, partitionSelector, ignoreConstraints, operationTimeout, token)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.Fabric</AssemblyName>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveAuxiliaryResult&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="currentNodeName" Type="System.String" />
+        <Parameter Name="newNodeName" Type="System.String" />
+        <Parameter Name="partitionSelector" Type="System.Fabric.PartitionSelector" />
+        <Parameter Name="ignoreConstraints" Type="System.Boolean" />
+        <Parameter Name="operationTimeout" Type="System.TimeSpan" />
+        <Parameter Name="token" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="currentNodeName">node name where selected replica for move is currently present</param>
+        <param name="newNodeName">node name where selected replica to be moved</param>
+        <param name="partitionSelector">Move Auxiliary will be called on this Selected Partition.</param>
+        <param name="ignoreConstraints">Whether or not to ignore constraints when attempting to execute the move.</param>
+        <param name="operationTimeout">The timeout for this API call.</param>
+        <param name="token">The cancellation token</param>
+        <summary>
+            Moves selected auxiliary replica from current node to new node in the cluster.
+            </summary>
+        <returns>A task with move auxiliary result</returns>
+        <remarks>
+            API uses the selected auxiliary replica inside partition selector structure
+            specified by currentNodeName location. This selected replica will be moved to newNodeName location from current node location.
+            This API is safe i.e. it will not cause quorum or data loss by itself unless additional faults or failures happen at the same time.
+            </remarks>
+        <exception cref="T:System.TimeoutException">Retry is exhausted.</exception>
+        <exception cref="T:System.InvalidOperationException">Invalid operation
+            - If action called on stateless or non-persisted service.
+            - If no active auxiliary replica exists
+            - If not enough nodes available for action
+            </exception>
+        <exception cref="T:System.Fabric.FabricException">
+            FabricErrorCode.AlreadyPrimaryReplica - If Primary replica for selected partition already exists on new node
+            FabricErrorCode.AlreadySecondaryReplica - If Secondary replica for selected partition already exists on new node
+            FabricErrorCode.AlreadyAuxiliaryReplica - If active Auxiliary replica for selected partition already exists on new node
+            FabricErrorCode.InvalidReplicaStateForReplicaOperation - If the target replica is not an auxiliary
+            </exception>
+      </Docs>
+    </Member>
     <Member MemberName="MoveInstanceAsync">
       <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;System.Fabric.Result.MoveInstanceResult&gt; MoveInstanceAsync (System.Fabric.PartitionSelector partitionSelector);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task`1&lt;class System.Fabric.Result.MoveInstanceResult&gt; MoveInstanceAsync(class System.Fabric.PartitionSelector partitionSelector) cil managed" />
