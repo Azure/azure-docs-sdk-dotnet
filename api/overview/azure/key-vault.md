@@ -141,7 +141,7 @@ Next you'll need to add the App Configuration connection string from the templat
 2. With a *.cs* file open the command palette and run `Debug: Start debugging` or press `F5` (default binding).
 3. If prompted, select ".NET Core" to create a launch configuration and start debugging.
 
-#### [.NET CLI](#tab/dotnet)
+#### [.NET](#tab/dotnet)
 
 1. In the project folder, run the following to add a variable named `ConnectionStrings:AppConfig` with the `value` of the `appConfigurationConnectionString` output variable:
 
@@ -154,6 +154,8 @@ Next you'll need to add the App Configuration connection string from the templat
    ```bash
    dotnet run
    ```
+
+---
 
 ### Deploying the sample
 
