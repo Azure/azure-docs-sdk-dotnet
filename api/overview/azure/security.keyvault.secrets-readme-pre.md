@@ -3,7 +3,7 @@ title: Azure Key Vault secret client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Security.KeyVault.Secrets, keyvault
 author: maggiepint
 ms.author: magpint
-ms.date: 05/12/2021
+ms.date: 08/11/2021
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: keyvault
 ---
 
-# Azure Key Vault secret client library for .NET - Version 4.2.0-beta.5 
+# Azure Key Vault secret client library for .NET - Version 4.3.0-beta.1 
 
 Azure Key Vault is a cloud service that provides a secure storage of secrets, such as passwords and database connection strings.
 
@@ -25,7 +25,7 @@ The Azure Key Vault secrets client library allows you to securely store and cont
 Install the Azure Key Vault secrets client library for .NET with [NuGet][nuget]:
 
 ```PowerShell
-dotnet add package Azure.Security.KeyVault.Secrets --version 4.2.0-beta.4
+dotnet add package Azure.Security.KeyVault.Secrets
 ```
 
 ### Prerequisites
@@ -80,6 +80,8 @@ Use the [Azure CLI][azure_cli] snippet below to create/get client secret credent
     > --secret-permissions:
     > Accepted values: backup, delete, get, list, purge, recover, restore, set
 
+    If you have enabled role-based access control (RBAC) for Key Vault instead, you can find roles like "Key Vault Secrets Officer" in our [RBAC guide][rbac_guide].
+
 * Use the above mentioned Azure Key Vault name to retrieve details of your Vault which also contains your Azure Key Vault URL:
     ```PowerShell
     az keyvault show --name <your-key-vault-name> 
@@ -112,15 +114,15 @@ Once you've initialized a `SecretClient`, you can interact with secrets in Azure
 We guarantee that all client instance methods are thread-safe and independent of each other ([guideline](https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-service-methods-thread-safety)). This ensures that the recommendation of reusing client instances is always safe, even across threads.
 
 ### Additional concepts
-<!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Secrets_4.2.0-beta.5/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) | 
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Secrets_4.2.0-beta.5/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Secrets_4.2.0-beta.5/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Secrets_4.2.0-beta.5/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Secrets_4.2.0-beta.5/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Secrets_4.2.0-beta.5/sdk/core/Azure.Core/README.md#mocking) |
+
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Secrets_4.3.0-beta.1/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) | 
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Secrets_4.3.0-beta.1/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Secrets_4.3.0-beta.1/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Secrets_4.3.0-beta.1/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Secrets_4.3.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Secrets_4.3.0-beta.1/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
-<!-- CLIENT COMMON BAR -->
+
 
 ## Examples
 The Azure.Security.KeyVault.Secrets package supports synchronous and asynchronous APIs.
@@ -342,29 +344,28 @@ When you submit a pull request, a CLA-bot will automatically determine whether y
 
 This project has adopted the [Microsoft Open Source Code of Conduct][code_of_conduct]. For more information see the [Code of Conduct FAQ][coc_faq] or contact opencode@microsoft.com with any additional questions or comments.
 
-<!-- LINKS -->
+
 [API_reference]: https://docs.microsoft.com/dotnet/api/azure.security.keyvault.secrets
 [azure_cli]: https://docs.microsoft.com/cli/azure
-[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Security.KeyVault.Secrets_4.2.0-beta.5/sdk/identity/Azure.Identity
-[azure_sub]: https://azure.microsoft.com/free/
-[backup_and_restore_sample]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Secrets_4.2.0-beta.5/sdk/keyvault/Azure.Security.KeyVault.Secrets/samples/Sample2_BackupAndRestore.md
-[certificates_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Security.KeyVault.Secrets_4.2.0-beta.5/sdk/keyvault/Azure.Security.KeyVault.Certificates
+[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Security.KeyVault.Secrets_4.3.0-beta.1/sdk/identity/Azure.Identity
+[azure_sub]: https://azure.microsoft.com/free/dotnet/
+[backup_and_restore_sample]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Secrets_4.3.0-beta.1/sdk/keyvault/Azure.Security.KeyVault.Secrets/samples/Sample2_BackupAndRestore.md
+[certificates_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Security.KeyVault.Secrets_4.3.0-beta.1/sdk/keyvault/Azure.Security.KeyVault.Certificates
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
-[get_secrets_sample]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Secrets_4.2.0-beta.5/sdk/keyvault/Azure.Security.KeyVault.Secrets/samples/Sample3_GetSecrets.md
-[hello_world_sample]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Secrets_4.2.0-beta.5/sdk/keyvault/Azure.Security.KeyVault.Secrets/samples/Sample1_HelloWorld.md
-[keys_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Security.KeyVault.Secrets_4.2.0-beta.5/sdk/keyvault/Azure.Security.KeyVault.Keys
+[get_secrets_sample]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Secrets_4.3.0-beta.1/sdk/keyvault/Azure.Security.KeyVault.Secrets/samples/Sample3_GetSecrets.md
+[hello_world_sample]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Secrets_4.3.0-beta.1/sdk/keyvault/Azure.Security.KeyVault.Secrets/samples/Sample1_HelloWorld.md
+[keys_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Security.KeyVault.Secrets_4.3.0-beta.1/sdk/keyvault/Azure.Security.KeyVault.Keys
 [keyvault_docs]: https://docs.microsoft.com/azure/key-vault/
 [keyvault_rest]: https://docs.microsoft.com/rest/api/keyvault/
 [nuget]: https://www.nuget.org/
-[secret_client_class]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Secrets_4.2.0-beta.5/sdk/keyvault/Azure.Security.KeyVault.Secrets/src/SecretClient.cs
+[secret_client_class]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Secrets_4.3.0-beta.1/sdk/keyvault/Azure.Security.KeyVault.Secrets/src/SecretClient.cs
 [secret_client_nuget_package]: https://www.nuget.org/packages/Azure.Security.KeyVault.Secrets/
-[secret_client_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Security.KeyVault.Secrets_4.2.0-beta.5/sdk/keyvault/Azure.Security.KeyVault.Secrets/samples
-[secret_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Security.KeyVault.Secrets_4.2.0-beta.5/sdk/keyvault/Azure.Security.KeyVault.Secrets/src
-[soft_delete]: https://docs.microsoft.com/azure/key-vault/key-vault-ovw-soft-delete
-[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Secrets_4.2.0-beta.5/sdk/identity/Azure.Identity/README.md#defaultazurecredential
-[contributing]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Secrets_4.2.0-beta.5/sdk/keyvault/CONTRIBUTING.md
+[secret_client_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Security.KeyVault.Secrets_4.3.0-beta.1/sdk/keyvault/Azure.Security.KeyVault.Secrets/samples
+[secret_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Security.KeyVault.Secrets_4.3.0-beta.1/sdk/keyvault/Azure.Security.KeyVault.Secrets/src
+[soft_delete]: https://docs.microsoft.com/azure/key-vault/general/soft-delete-overview
+[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Secrets_4.3.0-beta.1/sdk/identity/Azure.Identity/README.md#defaultazurecredential
+[contributing]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Secrets_4.3.0-beta.1/sdk/keyvault/CONTRIBUTING.md
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
-[migration_guide]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Secrets_4.2.0-beta.5/sdk/keyvault/Azure.Security.KeyVault.Secrets/MigrationGuide.md
-
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fkeyvault%2FAzure.Security.KeyVault.Secrets%2FREADME.png)
+[migration_guide]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Secrets_4.3.0-beta.1/sdk/keyvault/Azure.Security.KeyVault.Secrets/MigrationGuide.md
+[rbac_guide]: https://docs.microsoft.com/azure/key-vault/general/rbac-guide
 

@@ -3,7 +3,7 @@ title: Azure Metrics Advisor client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.MetricsAdvisor, metricsadvisor
 author: maggiepint
 ms.author: magpint
-ms.date: 07/09/2021
+ms.date: 08/10/2021
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: metricsadvisor
 ---
 
-# Azure Metrics Advisor client library for .NET - Version 1.0.0 
+# Azure Metrics Advisor client library for .NET - Version 1.1.0 
 
 
 Azure Cognitive Services Metrics Advisor is a cloud service that uses machine learning to monitor and detect anomalies in time series data. It includes the following capabilities:
@@ -203,14 +203,14 @@ A `NotificationHook`, or simply "hook", is a means of subscribing to [alert](#an
 We guarantee that all client instance methods are thread-safe and independent of each other ([guideline](https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-service-methods-thread-safety)). This ensures that the recommendation of reusing client instances is always safe, even across threads.
 
 ### Additional concepts
-<!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.MetricsAdvisor_1.0.0/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.MetricsAdvisor_1.0.0/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.MetricsAdvisor_1.0.0/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.MetricsAdvisor_1.0.0/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.MetricsAdvisor_1.0.0/sdk/core/Azure.Core/README.md#mocking) |
+
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.MetricsAdvisor_1.1.0/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.MetricsAdvisor_1.1.0/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.MetricsAdvisor_1.1.0/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.MetricsAdvisor_1.1.0/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.MetricsAdvisor_1.1.0/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
-<!-- CLIENT COMMON BAR -->
+
 
 ## Examples
 
@@ -578,42 +578,42 @@ When you submit a pull request, a CLA-bot will automatically determine whether y
 
 This project has adopted the [Microsoft Open Source Code of Conduct][code_of_conduct]. For more information see the [Code of Conduct FAQ][coc_faq] or contact [opencode@microsoft.com][coc_contact] with any additional questions or comments.
 
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fmetricsadvisor%2FAzure.AI.MetricsAdvisor%2FREADME.png)
 
-<!-- LINKS -->
-[metricsadv_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/src
+
+
+[metricsadv_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.1.0/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/src
 [metricsadv_docs]: https://docs.microsoft.com/azure/cognitive-services/metrics-advisor
 [metricsadv_nuget_package]: https://www.nuget.org/packages/Azure.AI.MetricsAdvisor
 [metricsadv_refdocs]: https://aka.ms/azsdk/net/docs/ref/metricsadvisor
 [metricsadv_rest_api]: https://westus2.dev.cognitive.microsoft.com/docs/services/MetricsAdvisor
-[metricsadv_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/samples/README.md
+[metricsadv_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.1.0/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/samples/README.md
 [metricsadv_web_portal]: https://metricsadvisor.azurewebsites.net
 
-[metrics_advisor_admin_client_class]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.MetricsAdvisor_1.0.0/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/src/MetricsAdvisorAdministrationClient.cs
-[metrics_advisor_client_class]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.MetricsAdvisor_1.0.0/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/src/MetricsAdvisorClient.cs
+[metrics_advisor_admin_client_class]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.MetricsAdvisor_1.1.0/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/src/MetricsAdvisorAdministrationClient.cs
+[metrics_advisor_client_class]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.MetricsAdvisor_1.1.0/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/src/MetricsAdvisorClient.cs
 
-[metricsadv-sample1]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample01_DataFeedCrudOperations.cs
-[metricsadv-sample2]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample02_CredentialEntityCrudOperations.cs
-[metricsadv-sample3]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample03_DataFeedIngestionOperations.cs
-[metricsadv-sample4]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample04_DetectionConfigurationCrudOperations.cs
-[metricsadv-sample5]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample05_HookCrudOperations.cs
-[metricsadv-sample6]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample06_AlertConfigurationCrudOperations.cs
-[metricsadv-sample7]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample07_QueryTriggeredAlerts.cs
-[metricsadv-sample8]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample08_QueryDetectedAnomalies.cs
-[metricsadv-sample9]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample09_QueryIncidentsAndRootCauses.cs
-[metricsadv-sample10]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample10_QueryTimeSeriesInformation.cs
-[metricsadv-sample11]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample11_FeedbackCrudOperations.cs
+[metricsadv-sample1]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.1.0/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample01_DataFeedCrudOperations.cs
+[metricsadv-sample2]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.1.0/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample02_CredentialEntityCrudOperations.cs
+[metricsadv-sample3]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.1.0/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample03_DataFeedIngestionOperations.cs
+[metricsadv-sample4]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.1.0/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample04_DetectionConfigurationCrudOperations.cs
+[metricsadv-sample5]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.1.0/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample05_HookCrudOperations.cs
+[metricsadv-sample6]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.1.0/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample06_AlertConfigurationCrudOperations.cs
+[metricsadv-sample7]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.1.0/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample07_QueryTriggeredAlerts.cs
+[metricsadv-sample8]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.1.0/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample08_QueryDetectedAnomalies.cs
+[metricsadv-sample9]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.1.0/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample09_QueryIncidentsAndRootCauses.cs
+[metricsadv-sample10]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.1.0/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample10_QueryTimeSeriesInformation.cs
+[metricsadv-sample11]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.1.0/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/tests/Samples/Sample11_FeedbackCrudOperations.cs
 
 [aad_grant_access]: https://docs.microsoft.com/azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
-[azure_identity]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.MetricsAdvisor_1.0.0/sdk/identity/Azure.Identity/README.md
+[azure_identity]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.MetricsAdvisor_1.1.0/sdk/identity/Azure.Identity/README.md
 [cognitive_resource_cli]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account-cli
 [cognitive_resource_portal]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account
-[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.MetricsAdvisor_1.0.0/sdk/identity/Azure.Identity/README.md#defaultazurecredential
+[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.MetricsAdvisor_1.1.0/sdk/identity/Azure.Identity/README.md#defaultazurecredential
 [register_aad_app]: https://docs.microsoft.com/azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
 
 [metricsadv_authentication]: https://aka.ms/metricsadvisor/authentication
 
-[logging]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.0.0/sdk/core/Azure.Core/samples/Diagnostics.md
+[logging]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.MetricsAdvisor_1.1.0/sdk/core/Azure.Core/samples/Diagnostics.md
 
 [azure_cli]: https://docs.microsoft.com/cli/azure
 [azure_portal]: https://portal.azure.com
