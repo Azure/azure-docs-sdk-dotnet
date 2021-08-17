@@ -3,7 +3,7 @@ title:
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.Batch, batch
 author: maggiepint
 ms.author: magpint
-ms.date: 07/31/2021
+ms.date: 08/11/2021
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
@@ -88,6 +88,4 @@ If running the tests against a test tenant, you also must set:
 
 13. `MABOM_BatchTRPExtraHeaders` to x-ms-version=2015-12-01;x-ms-client-tenant-id=microsoft.onmicrosoft.com
 14. `MABOM_BatchTRPCertificateThumbprint`: The thumbprint used to authenticate with the Batch Resource Provider.
-
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fbatch%2FMicrosoft.Azure.Batch%2FREADME.png)
 

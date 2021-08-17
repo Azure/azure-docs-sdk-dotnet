@@ -3,7 +3,7 @@ title: Azure Batch client library for Python
 keywords: Azure, dotnet, SDK, API, Azure.Template, template
 author: maggiepint
 ms.author: magpint
-ms.date: 07/30/2021
+ms.date: 08/16/2021
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
@@ -13,15 +13,15 @@ ms.service: template
 
 # README.md template
 
-Use the guidelines in each section of this template to ensure consistency and readability of your README. The README resides in your package's GitHub repository at the root of its directory within the repo. It's also used as the package distribution page (NuGet, PyPi, npm, etc.) and as a Quickstart on docs.microsoft.com. See [Azure.Template/README.md](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1019598/sdk/template/Azure.Template/README.md) for an example following this template.
+Use the guidelines in each section of this template to ensure consistency and readability of your README. The README resides in your package's GitHub repository at the root of its directory within the repo. It's also used as the package distribution page (NuGet, PyPi, npm, etc.) and as a Quickstart on docs.microsoft.com. See [Azure.Template/README.md](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1050443/sdk/template/Azure.Template/README.md) for an example following this template.
 
 **Title**: The H1 of your README should be in the format: `# [Product Name] client library for [Language]`
 
 * All headings, including the H1, should use **sentence-style capitalization**. Refer to the [Microsoft Style Guide][style-guide-msft] and [Microsoft Cloud Style Guide][style-guide-cloud] for more information.
-* Example: `# Azure Batch client library for Python - Version 1.0.3-beta.1019598 
+* Example: `# Azure Batch client library for Python - Version 1.0.3-beta.1050443 
 `
 
-# Azure Template client library for .NET - Version 1.0.3-beta.1019598 
+# Azure Template client library for .NET - Version 1.0.3-beta.1050443 
 
 
 **Introduction**: The introduction appears directly under the title (H1) of your README.
@@ -65,15 +65,15 @@ Include the *Thread safety* and *Additional concepts* sections below at the end 
 We guarantee that all client instance methods are thread-safe and independent of each other ([guideline](https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-service-methods-thread-safety)). This ensures that the recommendation of reusing client instances is always safe, even across threads.
 
 ### Additional concepts
-<!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1019598/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1019598/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1019598/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1019598/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1019598/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1019598/sdk/core/Azure.Core/README.md#mocking) |
+
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1050443/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1050443/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1050443/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1050443/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1050443/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1050443/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
-<!-- CLIENT COMMON BAR -->
+
 
 ## Examples
 
@@ -128,9 +128,7 @@ If the package or a related package supports it, include tips for logging or ena
 
 This is a template, but your SDK readme should include details on how to contribute code to the repo/package.
 
-<!-- LINKS -->
+
 [style-guide-msft]: https://docs.microsoft.com/style-guide/capitalization
 [style-guide-cloud]: https://aka.ms/azsdk/cloud-style-guide
-
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Ftemplate%2FAzure.Template%2FREADME.png)
 
