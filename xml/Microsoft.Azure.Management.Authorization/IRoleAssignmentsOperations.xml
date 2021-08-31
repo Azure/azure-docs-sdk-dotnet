@@ -17,11 +17,11 @@
   </Docs>
   <Members>
     <Member MemberName="CreateByIdWithHttpMessagesAsync">
-      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt; CreateByIdWithHttpMessagesAsync (string roleId, Microsoft.Azure.Management.Authorization.Models.RoleAssignmentCreateParameters parameters, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = default, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.AzureOperationResponse`1&lt;class Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt; CreateByIdWithHttpMessagesAsync(string roleId, class Microsoft.Azure.Management.Authorization.Models.RoleAssignmentCreateParameters parameters, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt; CreateByIdWithHttpMessagesAsync (string roleAssignmentId, Microsoft.Azure.Management.Authorization.Models.RoleAssignmentCreateParameters parameters, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.AzureOperationResponse`1&lt;class Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt; CreateByIdWithHttpMessagesAsync(string roleAssignmentId, class Microsoft.Azure.Management.Authorization.Models.RoleAssignmentCreateParameters parameters, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.Authorization.IRoleAssignmentsOperations.CreateByIdWithHttpMessagesAsync(System.String,Microsoft.Azure.Management.Authorization.Models.RoleAssignmentCreateParameters,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Function CreateByIdWithHttpMessagesAsync (roleId As String, parameters As RoleAssignmentCreateParameters, Optional customHeaders As Dictionary(Of String, List(Of String)) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of RoleAssignment))" />
-      <MemberSignature Language="F#" Value="abstract member CreateByIdWithHttpMessagesAsync : string * Microsoft.Azure.Management.Authorization.Models.RoleAssignmentCreateParameters * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;" Usage="iRoleAssignmentsOperations.CreateByIdWithHttpMessagesAsync (roleId, parameters, customHeaders, cancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Function CreateByIdWithHttpMessagesAsync (roleAssignmentId As String, parameters As RoleAssignmentCreateParameters, Optional customHeaders As Dictionary(Of String, List(Of String)) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of RoleAssignment))" />
+      <MemberSignature Language="F#" Value="abstract member CreateByIdWithHttpMessagesAsync : string * Microsoft.Azure.Management.Authorization.Models.RoleAssignmentCreateParameters * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;" Usage="iRoleAssignmentsOperations.CreateByIdWithHttpMessagesAsync (roleAssignmentId, parameters, customHeaders, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Management.Authorization</AssemblyName>
@@ -31,14 +31,18 @@
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="roleId" Type="System.String" />
+        <Parameter Name="roleAssignmentId" Type="System.String" />
         <Parameter Name="parameters" Type="Microsoft.Azure.Management.Authorization.Models.RoleAssignmentCreateParameters" />
         <Parameter Name="customHeaders" Type="System.Collections.Generic.Dictionary&lt;System.String,System.Collections.Generic.List&lt;System.String&gt;&gt;" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="roleId">
-            The ID of the role assignment to create.
+        <param name="roleAssignmentId">
+            The fully qualified ID of the role assignment including scope,
+            resource name, and resource type. Format:
+            /{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}.
+            Example:
+            /subscriptions/&lt;SUB_ID&gt;/resourcegroups/&lt;RESOURCE_GROUP&gt;/providers/Microsoft.Authorization/roleAssignments/&lt;ROLE_ASSIGNMENT_NAME&gt;
             </param>
         <param name="parameters">
             Parameters for the role assignment.
@@ -50,11 +54,14 @@
             The cancellation token.
             </param>
         <summary>
-            Creates a role assignment by ID.
+            Create or update a role assignment by ID.
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:Microsoft.Rest.Azure.CloudException">
+            Thrown when the operation returned an invalid status code
+            </exception>
+        <exception cref="T:Microsoft.Azure.Management.Authorization.Models.ErrorResponseException">
             Thrown when the operation returned an invalid status code
             </exception>
         <exception cref="T:Microsoft.Rest.SerializationException">
@@ -88,17 +95,15 @@
       </Parameters>
       <Docs>
         <param name="scope">
-            The scope of the role assignment to create. The scope can be any
-            REST resource instance. For example, use
-            '/subscriptions/{subscription-id}/' for a subscription,
-            '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}'
-            for a resource group, and
-            '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider}/{resource-type}/{resource-name}'
-            for a resource.
+            The scope of the operation or resource. Valid scopes are:
+            subscription (format: '/subscriptions/{subscriptionId}'), resource
+            group (format:
+            '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}',
+            or resource (format:
+            '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'
             </param>
         <param name="roleAssignmentName">
-            The name of the role assignment to create. It can be any valid
-            GUID.
+            The name of the role assignment. It can be any valid GUID.
             </param>
         <param name="parameters">
             Parameters for the role assignment.
@@ -110,11 +115,14 @@
             The cancellation token.
             </param>
         <summary>
-            Creates a role assignment.
+            Create or update a role assignment by scope and name.
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:Microsoft.Rest.Azure.CloudException">
+            Thrown when the operation returned an invalid status code
+            </exception>
+        <exception cref="T:Microsoft.Azure.Management.Authorization.Models.ErrorResponseException">
             Thrown when the operation returned an invalid status code
             </exception>
         <exception cref="T:Microsoft.Rest.SerializationException">
@@ -126,11 +134,11 @@
       </Docs>
     </Member>
     <Member MemberName="DeleteByIdWithHttpMessagesAsync">
-      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt; DeleteByIdWithHttpMessagesAsync (string roleId, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = default, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.AzureOperationResponse`1&lt;class Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt; DeleteByIdWithHttpMessagesAsync(string roleId, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.Authorization.IRoleAssignmentsOperations.DeleteByIdWithHttpMessagesAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Function DeleteByIdWithHttpMessagesAsync (roleId As String, Optional customHeaders As Dictionary(Of String, List(Of String)) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of RoleAssignment))" />
-      <MemberSignature Language="F#" Value="abstract member DeleteByIdWithHttpMessagesAsync : string * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;" Usage="iRoleAssignmentsOperations.DeleteByIdWithHttpMessagesAsync (roleId, customHeaders, cancellationToken)" />
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt; DeleteByIdWithHttpMessagesAsync (string roleAssignmentId, string tenantId = default, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.AzureOperationResponse`1&lt;class Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt; DeleteByIdWithHttpMessagesAsync(string roleAssignmentId, string tenantId, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.Authorization.IRoleAssignmentsOperations.DeleteByIdWithHttpMessagesAsync(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Function DeleteByIdWithHttpMessagesAsync (roleAssignmentId As String, Optional tenantId As String = Nothing, Optional customHeaders As Dictionary(Of String, List(Of String)) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of RoleAssignment))" />
+      <MemberSignature Language="F#" Value="abstract member DeleteByIdWithHttpMessagesAsync : string * string * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;" Usage="iRoleAssignmentsOperations.DeleteByIdWithHttpMessagesAsync (roleAssignmentId, tenantId, customHeaders, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Management.Authorization</AssemblyName>
@@ -140,13 +148,21 @@
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="roleId" Type="System.String" />
+        <Parameter Name="roleAssignmentId" Type="System.String" />
+        <Parameter Name="tenantId" Type="System.String" />
         <Parameter Name="customHeaders" Type="System.Collections.Generic.Dictionary&lt;System.String,System.Collections.Generic.List&lt;System.String&gt;&gt;" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="roleId">
-            The ID of the role assignment to delete.
+        <param name="roleAssignmentId">
+            The fully qualified ID of the role assignment including scope,
+            resource name, and resource type. Format:
+            /{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}.
+            Example:
+            /subscriptions/&lt;SUB_ID&gt;/resourcegroups/&lt;RESOURCE_GROUP&gt;/providers/Microsoft.Authorization/roleAssignments/&lt;ROLE_ASSIGNMENT_NAME&gt;
+            </param>
+        <param name="tenantId">
+            Tenant ID for cross-tenant request
             </param>
         <param name="customHeaders">
             The headers that will be added to request.
@@ -155,11 +171,11 @@
             The cancellation token.
             </param>
         <summary>
-            Deletes a role assignment.
+            Delete a role assignment by ID.
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
-        <exception cref="T:Microsoft.Rest.Azure.CloudException">
+        <exception cref="T:Microsoft.Azure.Management.Authorization.Models.ErrorResponseException">
             Thrown when the operation returned an invalid status code
             </exception>
         <exception cref="T:Microsoft.Rest.SerializationException">
@@ -171,11 +187,11 @@
       </Docs>
     </Member>
     <Member MemberName="DeleteWithHttpMessagesAsync">
-      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt; DeleteWithHttpMessagesAsync (string scope, string roleAssignmentName, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = default, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.AzureOperationResponse`1&lt;class Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt; DeleteWithHttpMessagesAsync(string scope, string roleAssignmentName, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.Authorization.IRoleAssignmentsOperations.DeleteWithHttpMessagesAsync(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Function DeleteWithHttpMessagesAsync (scope As String, roleAssignmentName As String, Optional customHeaders As Dictionary(Of String, List(Of String)) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of RoleAssignment))" />
-      <MemberSignature Language="F#" Value="abstract member DeleteWithHttpMessagesAsync : string * string * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;" Usage="iRoleAssignmentsOperations.DeleteWithHttpMessagesAsync (scope, roleAssignmentName, customHeaders, cancellationToken)" />
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt; DeleteWithHttpMessagesAsync (string scope, string roleAssignmentName, string tenantId = default, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.AzureOperationResponse`1&lt;class Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt; DeleteWithHttpMessagesAsync(string scope, string roleAssignmentName, string tenantId, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.Authorization.IRoleAssignmentsOperations.DeleteWithHttpMessagesAsync(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Function DeleteWithHttpMessagesAsync (scope As String, roleAssignmentName As String, Optional tenantId As String = Nothing, Optional customHeaders As Dictionary(Of String, List(Of String)) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of RoleAssignment))" />
+      <MemberSignature Language="F#" Value="abstract member DeleteWithHttpMessagesAsync : string * string * string * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;" Usage="iRoleAssignmentsOperations.DeleteWithHttpMessagesAsync (scope, roleAssignmentName, tenantId, customHeaders, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Management.Authorization</AssemblyName>
@@ -187,15 +203,24 @@
       <Parameters>
         <Parameter Name="scope" Type="System.String" />
         <Parameter Name="roleAssignmentName" Type="System.String" />
+        <Parameter Name="tenantId" Type="System.String" />
         <Parameter Name="customHeaders" Type="System.Collections.Generic.Dictionary&lt;System.String,System.Collections.Generic.List&lt;System.String&gt;&gt;" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
         <param name="scope">
-            The scope of the role assignment to delete.
+            The scope of the operation or resource. Valid scopes are:
+            subscription (format: '/subscriptions/{subscriptionId}'), resource
+            group (format:
+            '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}',
+            or resource (format:
+            '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'
             </param>
         <param name="roleAssignmentName">
-            The name of the role assignment to delete.
+            The name of the role assignment. It can be any valid GUID.
+            </param>
+        <param name="tenantId">
+            Tenant ID for cross-tenant request
             </param>
         <param name="customHeaders">
             The headers that will be added to request.
@@ -204,11 +229,11 @@
             The cancellation token.
             </param>
         <summary>
-            Deletes a role assignment.
+            Delete a role assignment by scope and name.
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
-        <exception cref="T:Microsoft.Rest.Azure.CloudException">
+        <exception cref="T:Microsoft.Azure.Management.Authorization.Models.ErrorResponseException">
             Thrown when the operation returned an invalid status code
             </exception>
         <exception cref="T:Microsoft.Rest.SerializationException">
@@ -220,11 +245,11 @@
       </Docs>
     </Member>
     <Member MemberName="GetByIdWithHttpMessagesAsync">
-      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt; GetByIdWithHttpMessagesAsync (string roleId, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = default, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.AzureOperationResponse`1&lt;class Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt; GetByIdWithHttpMessagesAsync(string roleId, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.Authorization.IRoleAssignmentsOperations.GetByIdWithHttpMessagesAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Function GetByIdWithHttpMessagesAsync (roleId As String, Optional customHeaders As Dictionary(Of String, List(Of String)) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of RoleAssignment))" />
-      <MemberSignature Language="F#" Value="abstract member GetByIdWithHttpMessagesAsync : string * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;" Usage="iRoleAssignmentsOperations.GetByIdWithHttpMessagesAsync (roleId, customHeaders, cancellationToken)" />
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt; GetByIdWithHttpMessagesAsync (string roleAssignmentId, string tenantId = default, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.AzureOperationResponse`1&lt;class Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt; GetByIdWithHttpMessagesAsync(string roleAssignmentId, string tenantId, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.Authorization.IRoleAssignmentsOperations.GetByIdWithHttpMessagesAsync(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetByIdWithHttpMessagesAsync (roleAssignmentId As String, Optional tenantId As String = Nothing, Optional customHeaders As Dictionary(Of String, List(Of String)) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of RoleAssignment))" />
+      <MemberSignature Language="F#" Value="abstract member GetByIdWithHttpMessagesAsync : string * string * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;" Usage="iRoleAssignmentsOperations.GetByIdWithHttpMessagesAsync (roleAssignmentId, tenantId, customHeaders, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Management.Authorization</AssemblyName>
@@ -234,13 +259,21 @@
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="roleId" Type="System.String" />
+        <Parameter Name="roleAssignmentId" Type="System.String" />
+        <Parameter Name="tenantId" Type="System.String" />
         <Parameter Name="customHeaders" Type="System.Collections.Generic.Dictionary&lt;System.String,System.Collections.Generic.List&lt;System.String&gt;&gt;" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="roleId">
-            The ID of the role assignment to get.
+        <param name="roleAssignmentId">
+            The fully qualified ID of the role assignment including scope,
+            resource name, and resource type. Format:
+            /{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}.
+            Example:
+            /subscriptions/&lt;SUB_ID&gt;/resourcegroups/&lt;RESOURCE_GROUP&gt;/providers/Microsoft.Authorization/roleAssignments/&lt;ROLE_ASSIGNMENT_NAME&gt;
+            </param>
+        <param name="tenantId">
+            Tenant ID for cross-tenant request
             </param>
         <param name="customHeaders">
             The headers that will be added to request.
@@ -249,11 +282,11 @@
             The cancellation token.
             </param>
         <summary>
-            Gets a role assignment by ID.
+            Get a role assignment by ID.
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
-        <exception cref="T:Microsoft.Rest.Azure.CloudException">
+        <exception cref="T:Microsoft.Azure.Management.Authorization.Models.ErrorResponseException">
             Thrown when the operation returned an invalid status code
             </exception>
         <exception cref="T:Microsoft.Rest.SerializationException">
@@ -265,11 +298,11 @@
       </Docs>
     </Member>
     <Member MemberName="GetWithHttpMessagesAsync">
-      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt; GetWithHttpMessagesAsync (string scope, string roleAssignmentName, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = default, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.AzureOperationResponse`1&lt;class Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt; GetWithHttpMessagesAsync(string scope, string roleAssignmentName, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.Authorization.IRoleAssignmentsOperations.GetWithHttpMessagesAsync(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Function GetWithHttpMessagesAsync (scope As String, roleAssignmentName As String, Optional customHeaders As Dictionary(Of String, List(Of String)) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of RoleAssignment))" />
-      <MemberSignature Language="F#" Value="abstract member GetWithHttpMessagesAsync : string * string * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;" Usage="iRoleAssignmentsOperations.GetWithHttpMessagesAsync (scope, roleAssignmentName, customHeaders, cancellationToken)" />
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt; GetWithHttpMessagesAsync (string scope, string roleAssignmentName, string tenantId = default, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.AzureOperationResponse`1&lt;class Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt; GetWithHttpMessagesAsync(string scope, string roleAssignmentName, string tenantId, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.Authorization.IRoleAssignmentsOperations.GetWithHttpMessagesAsync(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetWithHttpMessagesAsync (scope As String, roleAssignmentName As String, Optional tenantId As String = Nothing, Optional customHeaders As Dictionary(Of String, List(Of String)) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of RoleAssignment))" />
+      <MemberSignature Language="F#" Value="abstract member GetWithHttpMessagesAsync : string * string * string * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;" Usage="iRoleAssignmentsOperations.GetWithHttpMessagesAsync (scope, roleAssignmentName, tenantId, customHeaders, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Management.Authorization</AssemblyName>
@@ -281,15 +314,24 @@
       <Parameters>
         <Parameter Name="scope" Type="System.String" />
         <Parameter Name="roleAssignmentName" Type="System.String" />
+        <Parameter Name="tenantId" Type="System.String" />
         <Parameter Name="customHeaders" Type="System.Collections.Generic.Dictionary&lt;System.String,System.Collections.Generic.List&lt;System.String&gt;&gt;" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
         <param name="scope">
-            The scope of the role assignment.
+            The scope of the operation or resource. Valid scopes are:
+            subscription (format: '/subscriptions/{subscriptionId}'), resource
+            group (format:
+            '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}',
+            or resource (format:
+            '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'
             </param>
         <param name="roleAssignmentName">
-            The name of the role assignment to get.
+            The name of the role assignment. It can be any valid GUID.
+            </param>
+        <param name="tenantId">
+            Tenant ID for cross-tenant request
             </param>
         <param name="customHeaders">
             The headers that will be added to request.
@@ -298,11 +340,11 @@
             The cancellation token.
             </param>
         <summary>
-            Get the specified role assignment.
+            Get a role assignment by scope and name.
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
-        <exception cref="T:Microsoft.Rest.Azure.CloudException">
+        <exception cref="T:Microsoft.Azure.Management.Authorization.Models.ErrorResponseException">
             Thrown when the operation returned an invalid status code
             </exception>
         <exception cref="T:Microsoft.Rest.SerializationException">
@@ -343,11 +385,14 @@
             The cancellation token.
             </param>
         <summary>
-            Gets role assignments for a resource group.
+            List all role assignments that apply to a resource group.
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:Microsoft.Rest.Azure.CloudException">
+            Thrown when the operation returned an invalid status code
+            </exception>
+        <exception cref="T:Microsoft.Azure.Management.Authorization.Models.ErrorResponseException">
             Thrown when the operation returned an invalid status code
             </exception>
         <exception cref="T:Microsoft.Rest.SerializationException">
@@ -359,11 +404,11 @@
       </Docs>
     </Member>
     <Member MemberName="ListForResourceGroupWithHttpMessagesAsync">
-      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;&gt; ListForResourceGroupWithHttpMessagesAsync (string resourceGroupName, Microsoft.Rest.Azure.OData.ODataQuery&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignmentFilter&gt; odataQuery = default, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = default, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.AzureOperationResponse`1&lt;class Microsoft.Rest.Azure.IPage`1&lt;class Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;&gt; ListForResourceGroupWithHttpMessagesAsync(string resourceGroupName, class Microsoft.Rest.Azure.OData.ODataQuery`1&lt;class Microsoft.Azure.Management.Authorization.Models.RoleAssignmentFilter&gt; odataQuery, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.Authorization.IRoleAssignmentsOperations.ListForResourceGroupWithHttpMessagesAsync(System.String,Microsoft.Rest.Azure.OData.ODataQuery{Microsoft.Azure.Management.Authorization.Models.RoleAssignmentFilter},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Function ListForResourceGroupWithHttpMessagesAsync (resourceGroupName As String, Optional odataQuery As ODataQuery(Of RoleAssignmentFilter) = Nothing, Optional customHeaders As Dictionary(Of String, List(Of String)) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of IPage(Of RoleAssignment)))" />
-      <MemberSignature Language="F#" Value="abstract member ListForResourceGroupWithHttpMessagesAsync : string * Microsoft.Rest.Azure.OData.ODataQuery&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignmentFilter&gt; * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;&gt;" Usage="iRoleAssignmentsOperations.ListForResourceGroupWithHttpMessagesAsync (resourceGroupName, odataQuery, customHeaders, cancellationToken)" />
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;&gt; ListForResourceGroupWithHttpMessagesAsync (string resourceGroupName, Microsoft.Rest.Azure.OData.ODataQuery&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignmentFilter&gt; odataQuery = default, string tenantId = default, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.AzureOperationResponse`1&lt;class Microsoft.Rest.Azure.IPage`1&lt;class Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;&gt; ListForResourceGroupWithHttpMessagesAsync(string resourceGroupName, class Microsoft.Rest.Azure.OData.ODataQuery`1&lt;class Microsoft.Azure.Management.Authorization.Models.RoleAssignmentFilter&gt; odataQuery, string tenantId, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.Authorization.IRoleAssignmentsOperations.ListForResourceGroupWithHttpMessagesAsync(System.String,Microsoft.Rest.Azure.OData.ODataQuery{Microsoft.Azure.Management.Authorization.Models.RoleAssignmentFilter},System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Function ListForResourceGroupWithHttpMessagesAsync (resourceGroupName As String, Optional odataQuery As ODataQuery(Of RoleAssignmentFilter) = Nothing, Optional tenantId As String = Nothing, Optional customHeaders As Dictionary(Of String, List(Of String)) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of IPage(Of RoleAssignment)))" />
+      <MemberSignature Language="F#" Value="abstract member ListForResourceGroupWithHttpMessagesAsync : string * Microsoft.Rest.Azure.OData.ODataQuery&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignmentFilter&gt; * string * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;&gt;" Usage="iRoleAssignmentsOperations.ListForResourceGroupWithHttpMessagesAsync (resourceGroupName, odataQuery, tenantId, customHeaders, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Management.Authorization</AssemblyName>
@@ -375,15 +420,19 @@
       <Parameters>
         <Parameter Name="resourceGroupName" Type="System.String" />
         <Parameter Name="odataQuery" Type="Microsoft.Rest.Azure.OData.ODataQuery&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignmentFilter&gt;" />
+        <Parameter Name="tenantId" Type="System.String" />
         <Parameter Name="customHeaders" Type="System.Collections.Generic.Dictionary&lt;System.String,System.Collections.Generic.List&lt;System.String&gt;&gt;" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
         <param name="resourceGroupName">
-            The name of the resource group.
+            The name of the resource group. The name is case insensitive.
             </param>
         <param name="odataQuery">
             OData parameters to apply to the operation.
+            </param>
+        <param name="tenantId">
+            Tenant ID for cross-tenant request
             </param>
         <param name="customHeaders">
             The headers that will be added to request.
@@ -392,11 +441,11 @@
             The cancellation token.
             </param>
         <summary>
-            Gets role assignments for a resource group.
+            List all role assignments that apply to a resource group.
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
-        <exception cref="T:Microsoft.Rest.Azure.CloudException">
+        <exception cref="T:Microsoft.Azure.Management.Authorization.Models.ErrorResponseException">
             Thrown when the operation returned an invalid status code
             </exception>
         <exception cref="T:Microsoft.Rest.SerializationException">
@@ -437,11 +486,14 @@
             The cancellation token.
             </param>
         <summary>
-            Gets role assignments for a resource.
+            List all role assignments that apply to a resource.
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:Microsoft.Rest.Azure.CloudException">
+            Thrown when the operation returned an invalid status code
+            </exception>
+        <exception cref="T:Microsoft.Azure.Management.Authorization.Models.ErrorResponseException">
             Thrown when the operation returned an invalid status code
             </exception>
         <exception cref="T:Microsoft.Rest.SerializationException">
@@ -453,11 +505,11 @@
       </Docs>
     </Member>
     <Member MemberName="ListForResourceWithHttpMessagesAsync">
-      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;&gt; ListForResourceWithHttpMessagesAsync (string resourceGroupName, string resourceProviderNamespace, string parentResourcePath, string resourceType, string resourceName, Microsoft.Rest.Azure.OData.ODataQuery&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignmentFilter&gt; odataQuery = default, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = default, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.AzureOperationResponse`1&lt;class Microsoft.Rest.Azure.IPage`1&lt;class Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;&gt; ListForResourceWithHttpMessagesAsync(string resourceGroupName, string resourceProviderNamespace, string parentResourcePath, string resourceType, string resourceName, class Microsoft.Rest.Azure.OData.ODataQuery`1&lt;class Microsoft.Azure.Management.Authorization.Models.RoleAssignmentFilter&gt; odataQuery, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.Authorization.IRoleAssignmentsOperations.ListForResourceWithHttpMessagesAsync(System.String,System.String,System.String,System.String,System.String,Microsoft.Rest.Azure.OData.ODataQuery{Microsoft.Azure.Management.Authorization.Models.RoleAssignmentFilter},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Function ListForResourceWithHttpMessagesAsync (resourceGroupName As String, resourceProviderNamespace As String, parentResourcePath As String, resourceType As String, resourceName As String, Optional odataQuery As ODataQuery(Of RoleAssignmentFilter) = Nothing, Optional customHeaders As Dictionary(Of String, List(Of String)) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of IPage(Of RoleAssignment)))" />
-      <MemberSignature Language="F#" Value="abstract member ListForResourceWithHttpMessagesAsync : string * string * string * string * string * Microsoft.Rest.Azure.OData.ODataQuery&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignmentFilter&gt; * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;&gt;" Usage="iRoleAssignmentsOperations.ListForResourceWithHttpMessagesAsync (resourceGroupName, resourceProviderNamespace, parentResourcePath, resourceType, resourceName, odataQuery, customHeaders, cancellationToken)" />
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;&gt; ListForResourceWithHttpMessagesAsync (string resourceGroupName, string resourceProviderNamespace, string resourceType, string resourceName, Microsoft.Rest.Azure.OData.ODataQuery&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignmentFilter&gt; odataQuery = default, string tenantId = default, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.AzureOperationResponse`1&lt;class Microsoft.Rest.Azure.IPage`1&lt;class Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;&gt; ListForResourceWithHttpMessagesAsync(string resourceGroupName, string resourceProviderNamespace, string resourceType, string resourceName, class Microsoft.Rest.Azure.OData.ODataQuery`1&lt;class Microsoft.Azure.Management.Authorization.Models.RoleAssignmentFilter&gt; odataQuery, string tenantId, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.Authorization.IRoleAssignmentsOperations.ListForResourceWithHttpMessagesAsync(System.String,System.String,System.String,System.String,Microsoft.Rest.Azure.OData.ODataQuery{Microsoft.Azure.Management.Authorization.Models.RoleAssignmentFilter},System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Function ListForResourceWithHttpMessagesAsync (resourceGroupName As String, resourceProviderNamespace As String, resourceType As String, resourceName As String, Optional odataQuery As ODataQuery(Of RoleAssignmentFilter) = Nothing, Optional tenantId As String = Nothing, Optional customHeaders As Dictionary(Of String, List(Of String)) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of IPage(Of RoleAssignment)))" />
+      <MemberSignature Language="F#" Value="abstract member ListForResourceWithHttpMessagesAsync : string * string * string * string * Microsoft.Rest.Azure.OData.ODataQuery&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignmentFilter&gt; * string * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;&gt;" Usage="iRoleAssignmentsOperations.ListForResourceWithHttpMessagesAsync (resourceGroupName, resourceProviderNamespace, resourceType, resourceName, odataQuery, tenantId, customHeaders, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Management.Authorization</AssemblyName>
@@ -469,31 +521,32 @@
       <Parameters>
         <Parameter Name="resourceGroupName" Type="System.String" />
         <Parameter Name="resourceProviderNamespace" Type="System.String" />
-        <Parameter Name="parentResourcePath" Type="System.String" />
         <Parameter Name="resourceType" Type="System.String" />
         <Parameter Name="resourceName" Type="System.String" />
         <Parameter Name="odataQuery" Type="Microsoft.Rest.Azure.OData.ODataQuery&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignmentFilter&gt;" />
+        <Parameter Name="tenantId" Type="System.String" />
         <Parameter Name="customHeaders" Type="System.Collections.Generic.Dictionary&lt;System.String,System.Collections.Generic.List&lt;System.String&gt;&gt;" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
         <param name="resourceGroupName">
-            The name of the resource group.
+            The name of the resource group. The name is case insensitive.
             </param>
         <param name="resourceProviderNamespace">
             The namespace of the resource provider.
             </param>
-        <param name="parentResourcePath">
-            The parent resource identity.
-            </param>
         <param name="resourceType">
-            The resource type of the resource.
+            The resource type name. For example the type name of a web app is
+            'sites' (from Microsoft.Web/sites).
             </param>
         <param name="resourceName">
-            The name of the resource to get role assignments for.
+            The resource name.
             </param>
         <param name="odataQuery">
             OData parameters to apply to the operation.
+            </param>
+        <param name="tenantId">
+            Tenant ID for cross-tenant request
             </param>
         <param name="customHeaders">
             The headers that will be added to request.
@@ -502,11 +555,11 @@
             The cancellation token.
             </param>
         <summary>
-            Gets role assignments for a resource.
+            List all role assignments that apply to a resource.
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
-        <exception cref="T:Microsoft.Rest.Azure.CloudException">
+        <exception cref="T:Microsoft.Azure.Management.Authorization.Models.ErrorResponseException">
             Thrown when the operation returned an invalid status code
             </exception>
         <exception cref="T:Microsoft.Rest.SerializationException">
@@ -547,11 +600,14 @@
             The cancellation token.
             </param>
         <summary>
-            Gets role assignments for a scope.
+            List all role assignments that apply to a scope.
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:Microsoft.Rest.Azure.CloudException">
+            Thrown when the operation returned an invalid status code
+            </exception>
+        <exception cref="T:Microsoft.Azure.Management.Authorization.Models.ErrorResponseException">
             Thrown when the operation returned an invalid status code
             </exception>
         <exception cref="T:Microsoft.Rest.SerializationException">
@@ -563,11 +619,11 @@
       </Docs>
     </Member>
     <Member MemberName="ListForScopeWithHttpMessagesAsync">
-      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;&gt; ListForScopeWithHttpMessagesAsync (string scope, Microsoft.Rest.Azure.OData.ODataQuery&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignmentFilter&gt; odataQuery = default, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = default, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.AzureOperationResponse`1&lt;class Microsoft.Rest.Azure.IPage`1&lt;class Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;&gt; ListForScopeWithHttpMessagesAsync(string scope, class Microsoft.Rest.Azure.OData.ODataQuery`1&lt;class Microsoft.Azure.Management.Authorization.Models.RoleAssignmentFilter&gt; odataQuery, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.Authorization.IRoleAssignmentsOperations.ListForScopeWithHttpMessagesAsync(System.String,Microsoft.Rest.Azure.OData.ODataQuery{Microsoft.Azure.Management.Authorization.Models.RoleAssignmentFilter},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Function ListForScopeWithHttpMessagesAsync (scope As String, Optional odataQuery As ODataQuery(Of RoleAssignmentFilter) = Nothing, Optional customHeaders As Dictionary(Of String, List(Of String)) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of IPage(Of RoleAssignment)))" />
-      <MemberSignature Language="F#" Value="abstract member ListForScopeWithHttpMessagesAsync : string * Microsoft.Rest.Azure.OData.ODataQuery&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignmentFilter&gt; * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;&gt;" Usage="iRoleAssignmentsOperations.ListForScopeWithHttpMessagesAsync (scope, odataQuery, customHeaders, cancellationToken)" />
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;&gt; ListForScopeWithHttpMessagesAsync (string scope, Microsoft.Rest.Azure.OData.ODataQuery&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignmentFilter&gt; odataQuery = default, string tenantId = default, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.AzureOperationResponse`1&lt;class Microsoft.Rest.Azure.IPage`1&lt;class Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;&gt; ListForScopeWithHttpMessagesAsync(string scope, class Microsoft.Rest.Azure.OData.ODataQuery`1&lt;class Microsoft.Azure.Management.Authorization.Models.RoleAssignmentFilter&gt; odataQuery, string tenantId, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.Authorization.IRoleAssignmentsOperations.ListForScopeWithHttpMessagesAsync(System.String,Microsoft.Rest.Azure.OData.ODataQuery{Microsoft.Azure.Management.Authorization.Models.RoleAssignmentFilter},System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Function ListForScopeWithHttpMessagesAsync (scope As String, Optional odataQuery As ODataQuery(Of RoleAssignmentFilter) = Nothing, Optional tenantId As String = Nothing, Optional customHeaders As Dictionary(Of String, List(Of String)) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of IPage(Of RoleAssignment)))" />
+      <MemberSignature Language="F#" Value="abstract member ListForScopeWithHttpMessagesAsync : string * Microsoft.Rest.Azure.OData.ODataQuery&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignmentFilter&gt; * string * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;&gt;" Usage="iRoleAssignmentsOperations.ListForScopeWithHttpMessagesAsync (scope, odataQuery, tenantId, customHeaders, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Management.Authorization</AssemblyName>
@@ -579,15 +635,24 @@
       <Parameters>
         <Parameter Name="scope" Type="System.String" />
         <Parameter Name="odataQuery" Type="Microsoft.Rest.Azure.OData.ODataQuery&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignmentFilter&gt;" />
+        <Parameter Name="tenantId" Type="System.String" />
         <Parameter Name="customHeaders" Type="System.Collections.Generic.Dictionary&lt;System.String,System.Collections.Generic.List&lt;System.String&gt;&gt;" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
         <param name="scope">
-            The scope of the role assignments.
+            The scope of the operation or resource. Valid scopes are:
+            subscription (format: '/subscriptions/{subscriptionId}'), resource
+            group (format:
+            '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}',
+            or resource (format:
+            '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'
             </param>
         <param name="odataQuery">
             OData parameters to apply to the operation.
+            </param>
+        <param name="tenantId">
+            Tenant ID for cross-tenant request
             </param>
         <param name="customHeaders">
             The headers that will be added to request.
@@ -596,11 +661,11 @@
             The cancellation token.
             </param>
         <summary>
-            Gets role assignments for a scope.
+            List all role assignments that apply to a scope.
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
-        <exception cref="T:Microsoft.Rest.Azure.CloudException">
+        <exception cref="T:Microsoft.Azure.Management.Authorization.Models.ErrorResponseException">
             Thrown when the operation returned an invalid status code
             </exception>
         <exception cref="T:Microsoft.Rest.SerializationException">
@@ -611,12 +676,12 @@
             </exception>
       </Docs>
     </Member>
-    <Member MemberName="ListNextWithHttpMessagesAsync">
-      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;&gt; ListNextWithHttpMessagesAsync (string nextPageLink, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = default, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.AzureOperationResponse`1&lt;class Microsoft.Rest.Azure.IPage`1&lt;class Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;&gt; ListNextWithHttpMessagesAsync(string nextPageLink, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.Authorization.IRoleAssignmentsOperations.ListNextWithHttpMessagesAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Function ListNextWithHttpMessagesAsync (nextPageLink As String, Optional customHeaders As Dictionary(Of String, List(Of String)) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of IPage(Of RoleAssignment)))" />
-      <MemberSignature Language="F#" Value="abstract member ListNextWithHttpMessagesAsync : string * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;&gt;" Usage="iRoleAssignmentsOperations.ListNextWithHttpMessagesAsync (nextPageLink, customHeaders, cancellationToken)" />
+    <Member MemberName="ListForSubscriptionNextWithHttpMessagesAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;&gt; ListForSubscriptionNextWithHttpMessagesAsync (string nextPageLink, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.AzureOperationResponse`1&lt;class Microsoft.Rest.Azure.IPage`1&lt;class Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;&gt; ListForSubscriptionNextWithHttpMessagesAsync(string nextPageLink, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.Authorization.IRoleAssignmentsOperations.ListForSubscriptionNextWithHttpMessagesAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Function ListForSubscriptionNextWithHttpMessagesAsync (nextPageLink As String, Optional customHeaders As Dictionary(Of String, List(Of String)) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of IPage(Of RoleAssignment)))" />
+      <MemberSignature Language="F#" Value="abstract member ListForSubscriptionNextWithHttpMessagesAsync : string * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;&gt;" Usage="iRoleAssignmentsOperations.ListForSubscriptionNextWithHttpMessagesAsync (nextPageLink, customHeaders, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Management.Authorization</AssemblyName>
@@ -641,11 +706,11 @@
             The cancellation token.
             </param>
         <summary>
-            Gets all role assignments for the subscription.
+            List all role assignments that apply to a subscription.
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
-        <exception cref="T:Microsoft.Rest.Azure.CloudException">
+        <exception cref="T:Microsoft.Azure.Management.Authorization.Models.ErrorResponseException">
             Thrown when the operation returned an invalid status code
             </exception>
         <exception cref="T:Microsoft.Rest.SerializationException">
@@ -656,12 +721,12 @@
             </exception>
       </Docs>
     </Member>
-    <Member MemberName="ListWithHttpMessagesAsync">
-      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;&gt; ListWithHttpMessagesAsync (Microsoft.Rest.Azure.OData.ODataQuery&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignmentFilter&gt; odataQuery = default, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = default, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.AzureOperationResponse`1&lt;class Microsoft.Rest.Azure.IPage`1&lt;class Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;&gt; ListWithHttpMessagesAsync(class Microsoft.Rest.Azure.OData.ODataQuery`1&lt;class Microsoft.Azure.Management.Authorization.Models.RoleAssignmentFilter&gt; odataQuery, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.Authorization.IRoleAssignmentsOperations.ListWithHttpMessagesAsync(Microsoft.Rest.Azure.OData.ODataQuery{Microsoft.Azure.Management.Authorization.Models.RoleAssignmentFilter},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Function ListWithHttpMessagesAsync (Optional odataQuery As ODataQuery(Of RoleAssignmentFilter) = Nothing, Optional customHeaders As Dictionary(Of String, List(Of String)) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of IPage(Of RoleAssignment)))" />
-      <MemberSignature Language="F#" Value="abstract member ListWithHttpMessagesAsync : Microsoft.Rest.Azure.OData.ODataQuery&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignmentFilter&gt; * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;&gt;" Usage="iRoleAssignmentsOperations.ListWithHttpMessagesAsync (odataQuery, customHeaders, cancellationToken)" />
+    <Member MemberName="ListForSubscriptionWithHttpMessagesAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;&gt; ListForSubscriptionWithHttpMessagesAsync (Microsoft.Rest.Azure.OData.ODataQuery&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignmentFilter&gt; odataQuery = default, string tenantId = default, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.AzureOperationResponse`1&lt;class Microsoft.Rest.Azure.IPage`1&lt;class Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;&gt; ListForSubscriptionWithHttpMessagesAsync(class Microsoft.Rest.Azure.OData.ODataQuery`1&lt;class Microsoft.Azure.Management.Authorization.Models.RoleAssignmentFilter&gt; odataQuery, string tenantId, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.Authorization.IRoleAssignmentsOperations.ListForSubscriptionWithHttpMessagesAsync(Microsoft.Rest.Azure.OData.ODataQuery{Microsoft.Azure.Management.Authorization.Models.RoleAssignmentFilter},System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Function ListForSubscriptionWithHttpMessagesAsync (Optional odataQuery As ODataQuery(Of RoleAssignmentFilter) = Nothing, Optional tenantId As String = Nothing, Optional customHeaders As Dictionary(Of String, List(Of String)) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of IPage(Of RoleAssignment)))" />
+      <MemberSignature Language="F#" Value="abstract member ListForSubscriptionWithHttpMessagesAsync : Microsoft.Rest.Azure.OData.ODataQuery&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignmentFilter&gt; * string * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Rest.Azure.IPage&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignment&gt;&gt;&gt;" Usage="iRoleAssignmentsOperations.ListForSubscriptionWithHttpMessagesAsync (odataQuery, tenantId, customHeaders, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Management.Authorization</AssemblyName>
@@ -672,12 +737,16 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="odataQuery" Type="Microsoft.Rest.Azure.OData.ODataQuery&lt;Microsoft.Azure.Management.Authorization.Models.RoleAssignmentFilter&gt;" />
+        <Parameter Name="tenantId" Type="System.String" />
         <Parameter Name="customHeaders" Type="System.Collections.Generic.Dictionary&lt;System.String,System.Collections.Generic.List&lt;System.String&gt;&gt;" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
         <param name="odataQuery">
             OData parameters to apply to the operation.
+            </param>
+        <param name="tenantId">
+            Tenant ID for cross-tenant request
             </param>
         <param name="customHeaders">
             The headers that will be added to request.
@@ -686,11 +755,123 @@
             The cancellation token.
             </param>
         <summary>
-            Gets all role assignments for the subscription.
+            List all role assignments that apply to a subscription.
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
-        <exception cref="T:Microsoft.Rest.Azure.CloudException">
+        <exception cref="T:Microsoft.Azure.Management.Authorization.Models.ErrorResponseException">
+            Thrown when the operation returned an invalid status code
+            </exception>
+        <exception cref="T:Microsoft.Rest.SerializationException">
+            Thrown when unable to deserialize the response
+            </exception>
+        <exception cref="T:Microsoft.Rest.ValidationException">
+            Thrown when a required parameter is null
+            </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="ValidateByIdWithHttpMessagesAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Management.Authorization.Models.ValidationResponse&gt;&gt; ValidateByIdWithHttpMessagesAsync (string roleAssignmentId, Microsoft.Azure.Management.Authorization.Models.RoleAssignmentCreateParameters parameters, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.AzureOperationResponse`1&lt;class Microsoft.Azure.Management.Authorization.Models.ValidationResponse&gt;&gt; ValidateByIdWithHttpMessagesAsync(string roleAssignmentId, class Microsoft.Azure.Management.Authorization.Models.RoleAssignmentCreateParameters parameters, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.Authorization.IRoleAssignmentsOperations.ValidateByIdWithHttpMessagesAsync(System.String,Microsoft.Azure.Management.Authorization.Models.RoleAssignmentCreateParameters,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Function ValidateByIdWithHttpMessagesAsync (roleAssignmentId As String, parameters As RoleAssignmentCreateParameters, Optional customHeaders As Dictionary(Of String, List(Of String)) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of ValidationResponse))" />
+      <MemberSignature Language="F#" Value="abstract member ValidateByIdWithHttpMessagesAsync : string * Microsoft.Azure.Management.Authorization.Models.RoleAssignmentCreateParameters * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Management.Authorization.Models.ValidationResponse&gt;&gt;" Usage="iRoleAssignmentsOperations.ValidateByIdWithHttpMessagesAsync (roleAssignmentId, parameters, customHeaders, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.Authorization</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Management.Authorization.Models.ValidationResponse&gt;&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="roleAssignmentId" Type="System.String" />
+        <Parameter Name="parameters" Type="Microsoft.Azure.Management.Authorization.Models.RoleAssignmentCreateParameters" />
+        <Parameter Name="customHeaders" Type="System.Collections.Generic.Dictionary&lt;System.String,System.Collections.Generic.List&lt;System.String&gt;&gt;" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="roleAssignmentId">
+            The fully qualified ID of the role assignment including scope,
+            resource name, and resource type. Format:
+            /{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}.
+            Example:
+            /subscriptions/&lt;SUB_ID&gt;/resourcegroups/&lt;RESOURCE_GROUP&gt;/providers/Microsoft.Authorization/roleAssignments/&lt;ROLE_ASSIGNMENT_NAME&gt;
+            </param>
+        <param name="parameters">
+            Parameters for the role assignment.
+            </param>
+        <param name="customHeaders">
+            The headers that will be added to request.
+            </param>
+        <param name="cancellationToken">
+            The cancellation token.
+            </param>
+        <summary>
+            Validate a role assignment create or update operation by ID.
+            </summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:Microsoft.Azure.Management.Authorization.Models.ErrorResponseException">
+            Thrown when the operation returned an invalid status code
+            </exception>
+        <exception cref="T:Microsoft.Rest.SerializationException">
+            Thrown when unable to deserialize the response
+            </exception>
+        <exception cref="T:Microsoft.Rest.ValidationException">
+            Thrown when a required parameter is null
+            </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="ValidateWithHttpMessagesAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Management.Authorization.Models.ValidationResponse&gt;&gt; ValidateWithHttpMessagesAsync (string scope, string roleAssignmentName, Microsoft.Azure.Management.Authorization.Models.RoleAssignmentCreateParameters parameters, System.Collections.Generic.Dictionary&lt;string,System.Collections.Generic.List&lt;string&gt;&gt; customHeaders = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Rest.Azure.AzureOperationResponse`1&lt;class Microsoft.Azure.Management.Authorization.Models.ValidationResponse&gt;&gt; ValidateWithHttpMessagesAsync(string scope, string roleAssignmentName, class Microsoft.Azure.Management.Authorization.Models.RoleAssignmentCreateParameters parameters, class System.Collections.Generic.Dictionary`2&lt;string, class System.Collections.Generic.List`1&lt;string&gt;&gt; customHeaders, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.Authorization.IRoleAssignmentsOperations.ValidateWithHttpMessagesAsync(System.String,System.String,Microsoft.Azure.Management.Authorization.Models.RoleAssignmentCreateParameters,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Function ValidateWithHttpMessagesAsync (scope As String, roleAssignmentName As String, parameters As RoleAssignmentCreateParameters, Optional customHeaders As Dictionary(Of String, List(Of String)) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of AzureOperationResponse(Of ValidationResponse))" />
+      <MemberSignature Language="F#" Value="abstract member ValidateWithHttpMessagesAsync : string * string * Microsoft.Azure.Management.Authorization.Models.RoleAssignmentCreateParameters * System.Collections.Generic.Dictionary&lt;string, System.Collections.Generic.List&lt;string&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Management.Authorization.Models.ValidationResponse&gt;&gt;" Usage="iRoleAssignmentsOperations.ValidateWithHttpMessagesAsync (scope, roleAssignmentName, parameters, customHeaders, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.Authorization</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Rest.Azure.AzureOperationResponse&lt;Microsoft.Azure.Management.Authorization.Models.ValidationResponse&gt;&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="scope" Type="System.String" />
+        <Parameter Name="roleAssignmentName" Type="System.String" />
+        <Parameter Name="parameters" Type="Microsoft.Azure.Management.Authorization.Models.RoleAssignmentCreateParameters" />
+        <Parameter Name="customHeaders" Type="System.Collections.Generic.Dictionary&lt;System.String,System.Collections.Generic.List&lt;System.String&gt;&gt;" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="scope">
+            The scope of the operation or resource. Valid scopes are:
+            subscription (format: '/subscriptions/{subscriptionId}'), resource
+            group (format:
+            '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}',
+            or resource (format:
+            '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'
+            </param>
+        <param name="roleAssignmentName">
+            The name of the role assignment. It can be any valid GUID.
+            </param>
+        <param name="parameters">
+            Parameters for the role assignment.
+            </param>
+        <param name="customHeaders">
+            The headers that will be added to request.
+            </param>
+        <param name="cancellationToken">
+            The cancellation token.
+            </param>
+        <summary>
+            Validate a role assignment create or update operation by scope and
+            name.
+            </summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:Microsoft.Azure.Management.Authorization.Models.ErrorResponseException">
             Thrown when the operation returned an invalid status code
             </exception>
         <exception cref="T:Microsoft.Rest.SerializationException">
