@@ -3,7 +3,7 @@ title:
 keywords: Azure, dotnet, SDK, API, Microsoft.Extensions.Azure, extensions
 author: maggiepint
 ms.author: magpint
-ms.date: 06/09/2021
+ms.date: 09/02/2021
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
@@ -155,8 +155,8 @@ When you submit a pull request, a CLA-bot will automatically determine whether y
 This project has adopted the [Microsoft Open Source Code of Conduct][code_of_conduct]. For more information see the [Code of Conduct FAQ][code_of_conduct_faq] or contact opencode@microsoft.com with any additional questions or comments.
 
 
-<!-- LINKS -->
-[source_root]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Extensions.Azure_1.1.0/sdk/extensions/Microsoft.Extensions.Azure/src
+
+[source_root]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Extensions.Azure_1.1.1/sdk/extensions/Microsoft.Extensions.Azure/src
 [nuget]: https://www.nuget.org/
 [package]: https://www.nuget.org/packages/Microsoft.Extensions.Azure/
 [configuration]: https://docs.microsoft.com/aspnet/core/fundamentals/configuration/?view=aspnetcore-3.0
