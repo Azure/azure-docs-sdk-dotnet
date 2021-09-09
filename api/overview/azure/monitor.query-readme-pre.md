@@ -3,7 +3,7 @@ title: Azure Monitor Query client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Monitor.Query, monitor
 author: maggiepint
 ms.author: magpint
-ms.date: 08/10/2021
+ms.date: 09/08/2021
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: monitor
 ---
 
-# Azure Monitor Query client library for .NET - Version 1.0.0-beta.3 
+# Azure Monitor Query client library for .NET - Version 1.0.0-beta.4 
 
 
 The `Azure.Monitor.Query` package provides the ability to query the following Azure Monitor data sources:
@@ -56,12 +56,12 @@ All client instance methods are thread-safe and independent of each other ([guid
 ### Additional concepts
 
 
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.0.0-beta.3/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.0.0-beta.3/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.0.0-beta.3/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.0.0-beta.3/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.0.0-beta.3/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.0.0-beta.3/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.0.0-beta.4/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.0.0-beta.4/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.0.0-beta.4/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.0.0-beta.4/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.0.0-beta.4/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.0.0-beta.4/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 
 
@@ -88,7 +88,7 @@ Response<LogsQueryResult> response = await client.QueryAsync(
     "AzureActivity | top 10 by TimeGenerated",
     new DateTimeRange(TimeSpan.FromDays(1)));
 
-LogsQueryResultTable table = response.Value.Table;
+LogsTable table = response.Value.Table;
 
 foreach (var row in table.Rows)
 {
@@ -192,7 +192,7 @@ Response<LogsQueryResult> response = await client.QueryAsync(
     "AzureActivity | top 10 by TimeGenerated",
     new DateTimeRange(TimeSpan.FromDays(1)));
 
-LogsQueryResultTable table = response.Value.Table;
+LogsTable table = response.Value.Table;
 
 foreach (var column in table.Columns)
 {
@@ -292,7 +292,7 @@ foreach (var metric in results.Value.Metrics)
     {
         Console.WriteLine("Dimensions: " + string.Join(",", element.Metadata));
 
-        foreach (var metricValue in element.Data)
+        foreach (var metricValue in element.Values)
         {
             Console.WriteLine(metricValue);
         }
@@ -354,7 +354,7 @@ This project welcomes contributions and suggestions. Most contributions require 
 
 This project has adopted the [Microsoft Open Source Code of Conduct][coc]. For more information see the [Code of Conduct FAQ][coc_faq] or contact [opencode@microsoft.com][coc_contact] with any additional questions or comments.
 
-[query_client_src]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.0.0-beta.3/sdk/monitor/Azure.Monitor.Query/src
+[query_client_src]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.0.0-beta.4/sdk/monitor/Azure.Monitor.Query/src
 [query_client_nuget_package]: https://www.nuget.org/packages?q=Azure.Monitor.Query
 [monitor_rest_api]: https://docs.microsoft.com/rest/api/monitor/
 [azure_cli]: https://docs.microsoft.com/cli/azure
@@ -363,5 +363,5 @@ This project has adopted the [Microsoft Open Source Code of Conduct][coc]. For m
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [coc_contact]: mailto:opencode@microsoft.com
-[logging]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.0.0-beta.3/sdk/core/Azure.Core/samples/Diagnostics.md
+[logging]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.0.0-beta.4/sdk/core/Azure.Core/samples/Diagnostics.md
 
