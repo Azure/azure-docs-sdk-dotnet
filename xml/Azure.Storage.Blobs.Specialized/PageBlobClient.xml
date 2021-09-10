@@ -2218,10 +2218,10 @@
       </Docs>
     </Member>
     <Member MemberName="UploadPagesFromUri">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Storage.Blobs.Models.PageInfo&gt; UploadPagesFromUri (Uri sourceUri, Azure.HttpRange sourceRange, Azure.HttpRange range, Azure.Storage.Blobs.Models.PageBlobUploadPagesFromUriOptions options, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Storage.Blobs.Models.PageInfo&gt; UploadPagesFromUri (Uri sourceUri, Azure.HttpRange sourceRange, Azure.HttpRange range, Azure.Storage.Blobs.Models.PageBlobUploadPagesFromUriOptions options = default, System.Threading.CancellationToken cancellationToken = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Storage.Blobs.Models.PageInfo&gt; UploadPagesFromUri(class System.Uri sourceUri, valuetype Azure.HttpRange sourceRange, valuetype Azure.HttpRange range, class Azure.Storage.Blobs.Models.PageBlobUploadPagesFromUriOptions options, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Storage.Blobs.Specialized.PageBlobClient.UploadPagesFromUri(System.Uri,Azure.HttpRange,Azure.HttpRange,Azure.Storage.Blobs.Models.PageBlobUploadPagesFromUriOptions,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function UploadPagesFromUri (sourceUri As Uri, sourceRange As HttpRange, range As HttpRange, options As PageBlobUploadPagesFromUriOptions, Optional cancellationToken As CancellationToken = Nothing) As Response(Of PageInfo)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function UploadPagesFromUri (sourceUri As Uri, sourceRange As HttpRange, range As HttpRange, Optional options As PageBlobUploadPagesFromUriOptions = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Response(Of PageInfo)" />
       <MemberSignature Language="F#" Value="abstract member UploadPagesFromUri : Uri * Azure.HttpRange * Azure.HttpRange * Azure.Storage.Blobs.Models.PageBlobUploadPagesFromUriOptions * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Storage.Blobs.Models.PageInfo&gt;&#xA;override this.UploadPagesFromUri : Uri * Azure.HttpRange * Azure.HttpRange * Azure.Storage.Blobs.Models.PageBlobUploadPagesFromUriOptions * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Storage.Blobs.Models.PageInfo&gt;" Usage="pageBlobClient.UploadPagesFromUri (sourceUri, sourceRange, range, options, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -2232,28 +2232,63 @@
         <ReturnType>Azure.Response&lt;Azure.Storage.Blobs.Models.PageInfo&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="sourceUri" Type="System.Uri" Index="0" FrameworkAlternate="azure-dotnet-preview" />
-        <Parameter Name="sourceRange" Type="Azure.HttpRange" Index="1" FrameworkAlternate="azure-dotnet-preview" />
-        <Parameter Name="range" Type="Azure.HttpRange" Index="2" FrameworkAlternate="azure-dotnet-preview" />
-        <Parameter Name="options" Type="Azure.Storage.Blobs.Models.PageBlobUploadPagesFromUriOptions" Index="3" FrameworkAlternate="azure-dotnet-preview" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="4" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="sourceUri" Type="System.Uri" />
+        <Parameter Name="sourceRange" Type="Azure.HttpRange" />
+        <Parameter Name="range" Type="Azure.HttpRange" />
+        <Parameter Name="options" Type="Azure.Storage.Blobs.Models.PageBlobUploadPagesFromUriOptions" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="sourceUri">To be added.</param>
-        <param name="sourceRange">To be added.</param>
-        <param name="range">To be added.</param>
-        <param name="options">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="sourceUri">
+             Specifies the <see cref="T:System.Uri" /> of the source blob.  The value may
+             be a <see cref="T:System.Uri" /> of up to 2 KB in length that specifies a
+             blob.  The source blob must either be public or must be
+             authenticated via a shared access signature.  If the source blob
+             is public, no authentication is required to perform the operation.
+             </param>
+        <param name="sourceRange">
+             Optionally only upload the bytes of the blob in the
+             sourceUri in the specified range.
+             </param>
+        <param name="range">
+             Specifies the range to be written as a page. Both the start and
+             end of the range must be specified and can be up to 4MB in size.
+             Given that pages must be aligned with 512-byte boundaries, the
+             start of the range must be a modulus of 512 and the end of the
+             range must be a modulus of 512 – 1.  Examples of valid byte ranges
+             are 0-511, 512-1023, etc.
+             </param>
+        <param name="options">
+             Optional parameters.  <see cref="T:Azure.Storage.Blobs.Models.PageBlobUploadPagesFromUriOptions" />.
+             </param>
+        <param name="cancellationToken">
+             Optional <see cref="T:System.Threading.CancellationToken" /> to propagate
+             notifications that the operation should be cancelled.
+             </param>
+        <summary>
+             The <see cref="M:Azure.Storage.Blobs.Specialized.PageBlobClient.UploadPagesFromUri(System.Uri,Azure.HttpRange,Azure.HttpRange,Azure.Storage.Blobs.Models.PageBlobUploadPagesFromUriOptions,System.Threading.CancellationToken)" />
+             operation writes a range of pages to a page blob where the contents are read from
+             sourceUri.
+            
+             For more information, see
+             <see href="https://docs.microsoft.com/en-us/rest/api/storageservices/put-page-from-url">
+             Put Page From URL</see>.
+             </summary>
+        <returns>
+             A <see cref="T:Azure.Response`1" /> describing the
+             state of the updated pages.
+             </returns>
+        <remarks>
+             A <see cref="T:Azure.RequestFailedException" /> will be thrown if
+             a failure occurs.
+             </remarks>
       </Docs>
     </Member>
     <Member MemberName="UploadPagesFromUri">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Storage.Blobs.Models.PageInfo&gt; UploadPagesFromUri (Uri sourceUri, Azure.HttpRange sourceRange, Azure.HttpRange range, byte[] sourceContentHash = default, Azure.Storage.Blobs.Models.PageBlobRequestConditions conditions = default, Azure.Storage.Blobs.Models.PageBlobRequestConditions sourceConditions = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Storage.Blobs.Models.PageInfo&gt; UploadPagesFromUri (Uri sourceUri, Azure.HttpRange sourceRange, Azure.HttpRange range, byte[] sourceContentHash, Azure.Storage.Blobs.Models.PageBlobRequestConditions conditions, Azure.Storage.Blobs.Models.PageBlobRequestConditions sourceConditions, System.Threading.CancellationToken cancellationToken);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Storage.Blobs.Models.PageInfo&gt; UploadPagesFromUri(class System.Uri sourceUri, valuetype Azure.HttpRange sourceRange, valuetype Azure.HttpRange range, unsigned int8[] sourceContentHash, class Azure.Storage.Blobs.Models.PageBlobRequestConditions conditions, class Azure.Storage.Blobs.Models.PageBlobRequestConditions sourceConditions, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Storage.Blobs.Specialized.PageBlobClient.UploadPagesFromUri(System.Uri,Azure.HttpRange,Azure.HttpRange,System.Byte[],Azure.Storage.Blobs.Models.PageBlobRequestConditions,Azure.Storage.Blobs.Models.PageBlobRequestConditions,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function UploadPagesFromUri (sourceUri As Uri, sourceRange As HttpRange, range As HttpRange, Optional sourceContentHash As Byte() = Nothing, Optional conditions As PageBlobRequestConditions = Nothing, Optional sourceConditions As PageBlobRequestConditions = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Response(Of PageInfo)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function UploadPagesFromUri (sourceUri As Uri, sourceRange As HttpRange, range As HttpRange, sourceContentHash As Byte(), conditions As PageBlobRequestConditions, sourceConditions As PageBlobRequestConditions, cancellationToken As CancellationToken) As Response(Of PageInfo)" />
       <MemberSignature Language="F#" Value="abstract member UploadPagesFromUri : Uri * Azure.HttpRange * Azure.HttpRange * byte[] * Azure.Storage.Blobs.Models.PageBlobRequestConditions * Azure.Storage.Blobs.Models.PageBlobRequestConditions * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Storage.Blobs.Models.PageInfo&gt;&#xA;override this.UploadPagesFromUri : Uri * Azure.HttpRange * Azure.HttpRange * byte[] * Azure.Storage.Blobs.Models.PageBlobRequestConditions * Azure.Storage.Blobs.Models.PageBlobRequestConditions * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Storage.Blobs.Models.PageInfo&gt;" Usage="pageBlobClient.UploadPagesFromUri (sourceUri, sourceRange, range, sourceContentHash, conditions, sourceConditions, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -2267,7 +2302,7 @@
         <AssemblyVersion>12.10.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
-        <Attribute FrameworkAlternate="azure-dotnet-preview">
+        <Attribute>
           <AttributeName Language="C#">[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]</AttributeName>
           <AttributeName Language="F#">[&lt;System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)&gt;]</AttributeName>
         </Attribute>
@@ -2327,8 +2362,8 @@
              notifications that the operation should be cancelled.
              </param>
         <summary>
-             The <see cref="M:Azure.Storage.Blobs.Specialized.PageBlobClient.UploadPagesFromUri(System.Uri,Azure.HttpRange,Azure.HttpRange,System.Byte[],Azure.Storage.Blobs.Models.PageBlobRequestConditions,Azure.Storage.Blobs.Models.PageBlobRequestConditions,System.Threading.CancellationToken)" /> operation writes a range
-             of pages to a page blob where the contents are read from
+             The <see cref="M:Azure.Storage.Blobs.Specialized.PageBlobClient.UploadPagesFromUri(System.Uri,Azure.HttpRange,Azure.HttpRange,System.Byte[],Azure.Storage.Blobs.Models.PageBlobRequestConditions,Azure.Storage.Blobs.Models.PageBlobRequestConditions,System.Threading.CancellationToken)" />
+             operation writes a range of pages to a page blob where the contents are read from
              sourceUri.
             
              For more information, see
@@ -2346,10 +2381,10 @@
       </Docs>
     </Member>
     <Member MemberName="UploadPagesFromUriAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Blobs.Models.PageInfo&gt;&gt; UploadPagesFromUriAsync (Uri sourceUri, Azure.HttpRange sourceRange, Azure.HttpRange range, Azure.Storage.Blobs.Models.PageBlobUploadPagesFromUriOptions options, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Blobs.Models.PageInfo&gt;&gt; UploadPagesFromUriAsync (Uri sourceUri, Azure.HttpRange sourceRange, Azure.HttpRange range, Azure.Storage.Blobs.Models.PageBlobUploadPagesFromUriOptions options = default, System.Threading.CancellationToken cancellationToken = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Storage.Blobs.Models.PageInfo&gt;&gt; UploadPagesFromUriAsync(class System.Uri sourceUri, valuetype Azure.HttpRange sourceRange, valuetype Azure.HttpRange range, class Azure.Storage.Blobs.Models.PageBlobUploadPagesFromUriOptions options, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Storage.Blobs.Specialized.PageBlobClient.UploadPagesFromUriAsync(System.Uri,Azure.HttpRange,Azure.HttpRange,Azure.Storage.Blobs.Models.PageBlobUploadPagesFromUriOptions,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function UploadPagesFromUriAsync (sourceUri As Uri, sourceRange As HttpRange, range As HttpRange, options As PageBlobUploadPagesFromUriOptions, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of PageInfo))" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function UploadPagesFromUriAsync (sourceUri As Uri, sourceRange As HttpRange, range As HttpRange, Optional options As PageBlobUploadPagesFromUriOptions = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of PageInfo))" />
       <MemberSignature Language="F#" Value="abstract member UploadPagesFromUriAsync : Uri * Azure.HttpRange * Azure.HttpRange * Azure.Storage.Blobs.Models.PageBlobUploadPagesFromUriOptions * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Blobs.Models.PageInfo&gt;&gt;&#xA;override this.UploadPagesFromUriAsync : Uri * Azure.HttpRange * Azure.HttpRange * Azure.Storage.Blobs.Models.PageBlobUploadPagesFromUriOptions * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Blobs.Models.PageInfo&gt;&gt;" Usage="pageBlobClient.UploadPagesFromUriAsync (sourceUri, sourceRange, range, options, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -2360,28 +2395,63 @@
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Blobs.Models.PageInfo&gt;&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="sourceUri" Type="System.Uri" Index="0" FrameworkAlternate="azure-dotnet-preview" />
-        <Parameter Name="sourceRange" Type="Azure.HttpRange" Index="1" FrameworkAlternate="azure-dotnet-preview" />
-        <Parameter Name="range" Type="Azure.HttpRange" Index="2" FrameworkAlternate="azure-dotnet-preview" />
-        <Parameter Name="options" Type="Azure.Storage.Blobs.Models.PageBlobUploadPagesFromUriOptions" Index="3" FrameworkAlternate="azure-dotnet-preview" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="4" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="sourceUri" Type="System.Uri" />
+        <Parameter Name="sourceRange" Type="Azure.HttpRange" />
+        <Parameter Name="range" Type="Azure.HttpRange" />
+        <Parameter Name="options" Type="Azure.Storage.Blobs.Models.PageBlobUploadPagesFromUriOptions" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="sourceUri">To be added.</param>
-        <param name="sourceRange">To be added.</param>
-        <param name="range">To be added.</param>
-        <param name="options">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="sourceUri">
+             Specifies the <see cref="T:System.Uri" /> of the source blob.  The value may
+             be a <see cref="T:System.Uri" /> of up to 2 KB in length that specifies a
+             blob.  The source blob must either be public or must be
+             authenticated via a shared access signature.  If the source blob
+             is public, no authentication is required to perform the operation.
+             </param>
+        <param name="sourceRange">
+             Optionally only upload the bytes of the blob in the
+             sourceUri in the specified range.
+             </param>
+        <param name="range">
+             Specifies the range to be written as a page. Both the start and
+             end of the range must be specified and can be up to 4MB in size.
+             Given that pages must be aligned with 512-byte boundaries, the
+             start of the range must be a modulus of 512 and the end of the
+             range must be a modulus of 512 – 1.  Examples of valid byte ranges
+             are 0-511, 512-1023, etc.
+             </param>
+        <param name="options">
+             Optional parameters.  <see cref="T:Azure.Storage.Blobs.Models.PageBlobUploadPagesFromUriOptions" />.
+             </param>
+        <param name="cancellationToken">
+             Optional <see cref="T:System.Threading.CancellationToken" /> to propagate
+             notifications that the operation should be cancelled.
+             </param>
+        <summary>
+             The <see cref="M:Azure.Storage.Blobs.Specialized.PageBlobClient.UploadPagesFromUriAsync(System.Uri,Azure.HttpRange,Azure.HttpRange,Azure.Storage.Blobs.Models.PageBlobUploadPagesFromUriOptions,System.Threading.CancellationToken)" />
+             operation writes a range of pages to a page blob where the contents are read from
+             sourceUri.
+            
+             For more information, see
+             <see href="https://docs.microsoft.com/en-us/rest/api/storageservices/put-page-from-url">
+             Put Page From URL</see>.
+             </summary>
+        <returns>
+             A <see cref="T:Azure.Response`1" /> describing the
+             state of the updated pages.
+             </returns>
+        <remarks>
+             A <see cref="T:Azure.RequestFailedException" /> will be thrown if
+             a failure occurs.
+             </remarks>
       </Docs>
     </Member>
     <Member MemberName="UploadPagesFromUriAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Blobs.Models.PageInfo&gt;&gt; UploadPagesFromUriAsync (Uri sourceUri, Azure.HttpRange sourceRange, Azure.HttpRange range, byte[] sourceContentHash = default, Azure.Storage.Blobs.Models.PageBlobRequestConditions conditions = default, Azure.Storage.Blobs.Models.PageBlobRequestConditions sourceConditions = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Blobs.Models.PageInfo&gt;&gt; UploadPagesFromUriAsync (Uri sourceUri, Azure.HttpRange sourceRange, Azure.HttpRange range, byte[] sourceContentHash, Azure.Storage.Blobs.Models.PageBlobRequestConditions conditions, Azure.Storage.Blobs.Models.PageBlobRequestConditions sourceConditions, System.Threading.CancellationToken cancellationToken);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Storage.Blobs.Models.PageInfo&gt;&gt; UploadPagesFromUriAsync(class System.Uri sourceUri, valuetype Azure.HttpRange sourceRange, valuetype Azure.HttpRange range, unsigned int8[] sourceContentHash, class Azure.Storage.Blobs.Models.PageBlobRequestConditions conditions, class Azure.Storage.Blobs.Models.PageBlobRequestConditions sourceConditions, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Storage.Blobs.Specialized.PageBlobClient.UploadPagesFromUriAsync(System.Uri,Azure.HttpRange,Azure.HttpRange,System.Byte[],Azure.Storage.Blobs.Models.PageBlobRequestConditions,Azure.Storage.Blobs.Models.PageBlobRequestConditions,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function UploadPagesFromUriAsync (sourceUri As Uri, sourceRange As HttpRange, range As HttpRange, Optional sourceContentHash As Byte() = Nothing, Optional conditions As PageBlobRequestConditions = Nothing, Optional sourceConditions As PageBlobRequestConditions = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of PageInfo))" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function UploadPagesFromUriAsync (sourceUri As Uri, sourceRange As HttpRange, range As HttpRange, sourceContentHash As Byte(), conditions As PageBlobRequestConditions, sourceConditions As PageBlobRequestConditions, cancellationToken As CancellationToken) As Task(Of Response(Of PageInfo))" />
       <MemberSignature Language="F#" Value="abstract member UploadPagesFromUriAsync : Uri * Azure.HttpRange * Azure.HttpRange * byte[] * Azure.Storage.Blobs.Models.PageBlobRequestConditions * Azure.Storage.Blobs.Models.PageBlobRequestConditions * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Blobs.Models.PageInfo&gt;&gt;&#xA;override this.UploadPagesFromUriAsync : Uri * Azure.HttpRange * Azure.HttpRange * byte[] * Azure.Storage.Blobs.Models.PageBlobRequestConditions * Azure.Storage.Blobs.Models.PageBlobRequestConditions * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Blobs.Models.PageInfo&gt;&gt;" Usage="pageBlobClient.UploadPagesFromUriAsync (sourceUri, sourceRange, range, sourceContentHash, conditions, sourceConditions, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -2395,7 +2465,7 @@
         <AssemblyVersion>12.10.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
-        <Attribute FrameworkAlternate="azure-dotnet-preview">
+        <Attribute>
           <AttributeName Language="C#">[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]</AttributeName>
           <AttributeName Language="F#">[&lt;System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)&gt;]</AttributeName>
         </Attribute>
@@ -2455,8 +2525,8 @@
              notifications that the operation should be cancelled.
              </param>
         <summary>
-             The <see cref="M:Azure.Storage.Blobs.Specialized.PageBlobClient.UploadPagesFromUriAsync(System.Uri,Azure.HttpRange,Azure.HttpRange,System.Byte[],Azure.Storage.Blobs.Models.PageBlobRequestConditions,Azure.Storage.Blobs.Models.PageBlobRequestConditions,System.Threading.CancellationToken)" /> operation writes a range
-             of pages to a page blob where the contents are read from
+             The <see cref="M:Azure.Storage.Blobs.Specialized.PageBlobClient.UploadPagesFromUriAsync(System.Uri,Azure.HttpRange,Azure.HttpRange,System.Byte[],Azure.Storage.Blobs.Models.PageBlobRequestConditions,Azure.Storage.Blobs.Models.PageBlobRequestConditions,System.Threading.CancellationToken)" />
+             operation writes a range of pages to a page blob where the contents are read from
              sourceUri.
             
              For more information, see
