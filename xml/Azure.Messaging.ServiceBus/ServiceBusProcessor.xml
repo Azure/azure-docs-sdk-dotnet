@@ -64,9 +64,9 @@
         <AssemblyVersion>7.3.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="client" Type="Azure.Messaging.ServiceBus.ServiceBusClient" Index="0" FrameworkAlternate="azure-dotnet-preview" />
-        <Parameter Name="queueName" Type="System.String" Index="1" FrameworkAlternate="azure-dotnet-preview" />
-        <Parameter Name="options" Type="Azure.Messaging.ServiceBus.ServiceBusProcessorOptions" Index="2" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="client" Type="Azure.Messaging.ServiceBus.ServiceBusClient" />
+        <Parameter Name="queueName" Type="System.String" />
+        <Parameter Name="options" Type="Azure.Messaging.ServiceBus.ServiceBusProcessorOptions" />
       </Parameters>
       <Docs>
         <param name="client">The client instance to use for the processor.</param>
@@ -90,10 +90,10 @@
         <AssemblyVersion>7.3.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="client" Type="Azure.Messaging.ServiceBus.ServiceBusClient" Index="0" FrameworkAlternate="azure-dotnet-preview" />
-        <Parameter Name="topicName" Type="System.String" Index="1" FrameworkAlternate="azure-dotnet-preview" />
-        <Parameter Name="subscriptionName" Type="System.String" Index="2" FrameworkAlternate="azure-dotnet-preview" />
-        <Parameter Name="options" Type="Azure.Messaging.ServiceBus.ServiceBusProcessorOptions" Index="3" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="client" Type="Azure.Messaging.ServiceBus.ServiceBusClient" />
+        <Parameter Name="topicName" Type="System.String" />
+        <Parameter Name="subscriptionName" Type="System.String" />
+        <Parameter Name="options" Type="Azure.Messaging.ServiceBus.ServiceBusProcessorOptions" />
       </Parameters>
       <Docs>
         <param name="client">The client instance to use for the processor.</param>
@@ -132,7 +132,10 @@
              </summary>
         <value>true to complete the message processing automatically on
              successful execution of the operation; otherwise, false.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+             If the message handler triggers an exception and did not settle the message,
+             then the message will be automatically abandoned, irrespective of <see cref="P:Azure.Messaging.ServiceBus.ServiceBusProcessor.AutoCompleteMessages" />.
+             </remarks>
       </Docs>
     </Member>
     <Member MemberName="CloseAsync">
@@ -196,13 +199,11 @@
       </Docs>
     </Member>
     <Member MemberName="EntityPath">
-      <MemberSignature Language="C#" Value="public string EntityPath { get; }" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="C#" Value="public virtual string EntityPath { get; }" />
       <MemberSignature Language="ILAsm" Value=".property instance string EntityPath" />
       <MemberSignature Language="DocId" Value="P:Azure.Messaging.ServiceBus.ServiceBusProcessor.EntityPath" />
-      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property EntityPath As String" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable ReadOnly Property EntityPath As String" />
       <MemberSignature Language="F#" Value="member this.EntityPath : string" Usage="Azure.Messaging.ServiceBus.ServiceBusProcessor.EntityPath" />
-      <MemberSignature Language="C#" Value="public virtual string EntityPath { get; }" FrameworkAlternate="azure-dotnet-preview" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable ReadOnly Property EntityPath As String" FrameworkAlternate="azure-dotnet-preview" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Messaging.ServiceBus</AssemblyName>
@@ -531,7 +532,10 @@
             this processor is running.
             Implementation is mandatory.
             </summary>
-        <remarks>To be added.</remarks>
+        <remarks>
+            It is not recommended that the state of the processor be managed directly from within this handler; requesting to start or stop the processor may result in
+            a deadlock scenario.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="ProcessMessageAsync">
@@ -557,7 +561,10 @@
             or Subscription.
             Implementation is mandatory.
             </summary>
-        <remarks>To be added.</remarks>
+        <remarks>
+            It is not recommended that the state of the processor be managed directly from within this handler; requesting to start or stop the processor may result in
+            a deadlock scenario.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="ReceiveMode">
@@ -705,7 +712,7 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="maxConcurrentCalls" Type="System.Int32" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="maxConcurrentCalls" Type="System.Int32" />
       </Parameters>
       <Docs>
         <param name="maxConcurrentCalls">The new max concurrent calls value. This will be reflected in the <see cref="P:Azure.Messaging.ServiceBus.ServiceBusProcessor.MaxConcurrentCalls" />
