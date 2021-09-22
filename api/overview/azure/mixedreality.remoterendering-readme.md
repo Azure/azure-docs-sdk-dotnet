@@ -3,7 +3,7 @@ title: Azure Remote Rendering client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.MixedReality.RemoteRendering, mixedreality
 author: maggiepint
 ms.author: magpint
-ms.date: 05/26/2021
+ms.date: 09/17/2021
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: mixedreality
 ---
 
-# Azure Remote Rendering client library for .NET - Version 1.0.1 
+# Azure Remote Rendering client library for .NET - Version 1.1.0 
 
 
 Azure Remote Rendering (ARR) is a service that enables you to render high-quality, interactive 3D content in the cloud and stream it in real time to devices, such as the HoloLens 2.
@@ -52,7 +52,7 @@ Add a package reference:
 
 ### Prerequisites
 
-You will need an [Azure subscription](https://azure.microsoft.com/free/) and an [Azure Remote Rendering account](https://docs.microsoft.com/azure/remote-rendering/how-tos/create-an-account) to use this package.
+You will need an [Azure subscription](https://azure.microsoft.com/free/dotnet/) and an [Azure Remote Rendering account](https://docs.microsoft.com/azure/remote-rendering/how-tos/create-an-account) to use this package.
 
 ### Authenticate the client
 
@@ -142,7 +142,7 @@ RemoteRenderingClient client = new RemoteRenderingClient(remoteRenderingEndpoint
 #### Authenticating with a static access token
 
 You can pass a Mixed Reality access token as an `AccessToken` previously retrieved from the
-[Mixed Reality STS service](https://github.com/Azure/azure-sdk-for-net/tree/Azure.MixedReality.RemoteRendering_1.0.1/sdk/mixedreality/Azure.MixedReality.Authentication)
+[Mixed Reality STS service](https://github.com/Azure/azure-sdk-for-net/tree/Azure.MixedReality.RemoteRendering_1.1.0/sdk/mixedreality/Azure.MixedReality.Authentication)
 to be used with a Mixed Reality client library:
 
 ```csharp Snippet:CreateAClientWithStaticAccessToken
