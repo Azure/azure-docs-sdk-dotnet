@@ -1,17 +1,17 @@
 ---
 title: Azure Schema Registry client library for .NET
-keywords: Azure, dotnet, SDK, API, Azure.Data.SchemaRegistry, eventhubs
+keywords: Azure, dotnet, SDK, API, Azure.Data.SchemaRegistry, schemaregistry
 author: maggiepint
 ms.author: magpint
-ms.date: 08/17/2021
+ms.date: 10/06/2021
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: eventhubs
+ms.service: schemaregistry
 ---
 
-# Azure Schema Registry client library for .NET - Version 1.0.0-beta.3 
+# Azure Schema Registry client library for .NET - Version 1.0.0-beta.4 
 
 
 Azure Schema Registry is a schema repository service hosted by Azure Event Hubs, providing schema storage, versioning, and management. The registry is leveraged by serializers to reduce payload size while describing payload structure with schema identifiers rather than full schemas.
@@ -22,7 +22,7 @@ Azure Schema Registry is a schema repository service hosted by Azure Event Hubs,
 
 Install the Azure Schema Registry client library for .NET with [NuGet][nuget]:
 
-```bash
+```dotnetcli
 dotnet add package --prerelease Azure.Data.SchemaRegistry
 ```
 
@@ -58,8 +58,8 @@ Once you have the Azure resource credentials and the Event Hubs namespace hostna
 ```C# Snippet:SchemaRegistryCreateSchemaRegistryClient
 // Create a new SchemaRegistry client using the default credential from Azure.Identity using environment variables previously set,
 // including AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, and AZURE_TENANT_ID.
-// For more information on Azure.Identity usage, see: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.0.0-beta.3/sdk/identity/Azure.Identity/README.md
-var client = new SchemaRegistryClient(endpoint: endpoint, credential: new DefaultAzureCredential());
+// For more information on Azure.Identity usage, see: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.0.0-beta.4/sdk/identity/Azure.Identity/README.md
+var client = new SchemaRegistryClient(fullyQualifiedNamespace: fullyQualifiedNamespace, credential: new DefaultAzureCredential());
 ```
 
 ## Key concepts
@@ -70,7 +70,7 @@ A schema has 6 components:
 - Group Name: The name of the group of schemas in the Schema Registry instance.
 - Schema Name: The name of the schema.
 - Schema ID: The ID assigned by the Schema Registry instance for the schema.
-- Serialization Type: The format used for serialization of the schema. For example, Avro.
+- Schema Format: The format used for serialization of the schema. For example, Avro.
 - Schema Content: The string representation of the schema.
 - Schema Version: The version assigned to the schema in the Schema Registry instance.
 
@@ -80,15 +80,15 @@ These components play different roles. Some are used as input into the operation
 We guarantee that all client instance methods are thread-safe and independent of each other ([guideline](https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-service-methods-thread-safety)). This ensures that the recommendation of reusing client instances is always safe, even across threads.
 
 ### Additional concepts
-
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.0.0-beta.3/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.0.0-beta.3/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.0.0-beta.3/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.0.0-beta.3/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.0.0-beta.3/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.0.0-beta.3/sdk/core/Azure.Core/README.md#mocking) |
+<!-- CLIENT COMMON BAR -->
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.0.0-beta.4/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.0.0-beta.4/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.0.0-beta.4/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.0.0-beta.4/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.0.0-beta.4/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.0.0-beta.4/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
-
+<!-- CLIENT COMMON BAR -->
 
 ## Examples
 
@@ -100,13 +100,13 @@ The following shows examples of what is available through the `SchemaRegistryCli
 
 ### Register a schema
 
-Register a schema to be stored in the Azure Schema Registry. When registering a schema, the `SchemaProperties` will be cached in the `SchemaRegistryClient` instance, so that any subsequent calls to `GetSchemaId` and `GetSchema` corresponding to the same schema can use the cached value rather than going to the service.
+Register a schema to be stored in the Azure Schema Registry.
 
 ```C# Snippet:SchemaRegistryRegisterSchema
-string schemaName = "employeeSample";
-SerializationType schemaType = SerializationType.Avro;
+string name = "employeeSample";
+SchemaFormat format = SchemaFormat.Avro;
 // Example schema's content
-string schemaContent = @"
+string content = @"
 {
    ""type"" : ""record"",
     ""namespace"" : ""TestSchema"",
@@ -117,18 +117,18 @@ string schemaContent = @"
     ]
 }";
 
-Response<SchemaProperties> schemaProperties = client.RegisterSchema(groupName, schemaName, schemaType, schemaContent);
+Response<SchemaProperties> schemaProperties = client.RegisterSchema(groupName, name, content, format);
 ```
 
 ### Retrieve a schema ID
 
-Retrieve a previously registered schema ID from the Azure Schema Registry. When looking up the schema Id, the `SchemaProperties` will be cached in the `SchemaRegistryClient` instance, so that subsequent requests for this schema do not need to go the service.
+Retrieve a previously registered schema ID from the Azure Schema Registry.
 
 ```C# Snippet:SchemaRegistryRetrieveSchemaId
-string schemaName = "employeeSample";
-SerializationType schemaType = SerializationType.Avro;
+string name = "employeeSample";
+SchemaFormat format = SchemaFormat.Avro;
 // Example schema's content
-string schemaContent = @"
+string content = @"
 {
    ""type"" : ""record"",
     ""namespace"" : ""TestSchema"",
@@ -139,17 +139,17 @@ string schemaContent = @"
     ]
 }";
 
-SchemaProperties schemaProperties = client.GetSchemaId(groupName, schemaName, schemaType, schemaContent);
+SchemaProperties schemaProperties = client.GetSchemaProperties(groupName, name, content, format);
 string schemaId = schemaProperties.Id;
 ```
 
 ### Retrieve a schema
 
-Retrieve a previously registered schema's content from the Azure Schema Registry. When looking up the schema content by schema ID, the `SchemaProperties` will be cached in the `SchemaRegistryClient` instance so that subsequent requests for this schema ID do not need to go the service.
+Retrieve a previously registered schema's content from the Azure Schema Registry.
 
 ```C# Snippet:SchemaRegistryRetrieveSchema
-SchemaProperties schemaProperties = client.GetSchema(schemaId);
-string schemaContent = schemaProperties.Content;
+SchemaRegistrySchema schema = client.GetSchema(schemaId);
+string content = schema.Content;
 ```
 
 ## Troubleshooting
@@ -168,17 +168,17 @@ When you submit a pull request, a CLA-bot will automatically determine whether y
 
 This project has adopted the [Microsoft Open Source Code of Conduct][code_of_conduct]. For more information see the [Code of Conduct FAQ][code_of_conduct_faq] or contact [opencode@microsoft.com][email_opencode] with any additional questions or comments.
 
+![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Ftemplate%2FAzure.Template%2FREADME.png)
 
-
-
+<!-- LINKS -->
 [nuget]: https://www.nuget.org/
 [event_hubs_namespace]: https://docs.microsoft.com/azure/event-hubs/event-hubs-about
 [azure_powershell]: https://docs.microsoft.com/powershell/azure/
 [create_event_hubs_namespace]: https://docs.microsoft.com/azure/event-hubs/event-hubs-quickstart-powershell#create-an-event-hubs-namespace
-[quickstart_guide]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.0.0-beta.3/doc/mgmt_preview_quickstart.md
-[schema_registry_client]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.0.0-beta.3/sdk/schemaregistry/Azure.Data.SchemaRegistry/src/SchemaRegistryClient.cs
+[quickstart_guide]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.0.0-beta.4/doc/mgmt_preview_quickstart.md
+[schema_registry_client]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.0.0-beta.4/sdk/schemaregistry/Azure.Data.SchemaRegistry/src/SchemaRegistryClient.cs
 [azure_portal]: https://ms.portal.azure.com/
-[schema_properties]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.0.0-beta.3/sdk/schemaregistry/Azure.Data.SchemaRegistry/src/SchemaProperties.cs
+[schema_properties]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.0.0-beta.4/sdk/schemaregistry/Azure.Data.SchemaRegistry/src/SchemaProperties.cs
 [azure_identity]: https://www.nuget.org/packages/Azure.Identity
 [cla]: https://cla.microsoft.com
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
