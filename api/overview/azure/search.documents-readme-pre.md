@@ -3,7 +3,7 @@ title: Azure Cognitive Search client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Search.Documents, search
 author: maggiepint
 ms.author: magpint
-ms.date: 09/08/2021
+ms.date: 10/07/2021
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: search
 ---
 
-# Azure Cognitive Search client library for .NET - Version 11.4.0-beta.3 
+# Azure Cognitive Search client library for .NET - Version 11.4.0-beta.4 
 
 
 [Azure Cognitive Search](https://docs.microsoft.com/azure/search/) is a
@@ -48,7 +48,7 @@ Use the Azure.Search.Documents client library to:
 * Create and manage analyzers for advanced text analysis or multi-lingual content.
 * Optimize results through scoring profiles to factor in business logic or freshness.
 
-[Source code][source] | [Package (NuGet)][package] | [API reference documentation][docs] | [REST API documentation][rest_docs] | [Product documentation][product_docs]
+[Source code][source] | [Package (NuGet)][package] | [API reference documentation][docs] | [REST API documentation][rest_docs] | [Product documentation][product_docs] | [Samples][samples]
 
 ## Getting started
 
@@ -56,8 +56,8 @@ Use the Azure.Search.Documents client library to:
 
 Install the Azure Cognitive Search client library for .NET with [NuGet][nuget]:
 
-```Powershell
-dotnet add package Azure.Search.Documents --version 11.2.0-beta.1
+```dotnetcli
+dotnet add package Azure.Search.Documents
 ```
 
 ### Prerequisites
@@ -191,15 +191,15 @@ exploring online resources.  A good rule of thumb is to check for the namespace
 We guarantee that all client instance methods are thread-safe and independent of each other ([guideline](https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-service-methods-thread-safety)). This ensures that the recommendation of reusing client instances is always safe, even across threads.
 
 ### Additional concepts
-
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.4.0-beta.3/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.4.0-beta.3/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.4.0-beta.3/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.4.0-beta.3/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.4.0-beta.3/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.4.0-beta.3/sdk/core/Azure.Core/README.md#mocking) |
+<!-- CLIENT COMMON BAR -->
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.4.0-beta.4/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.4.0-beta.4/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.4.0-beta.4/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.4.0-beta.4/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.4.0-beta.4/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.4.0-beta.4/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
-
+<!-- CLIENT COMMON BAR -->
 
 ## Examples
 
@@ -439,7 +439,7 @@ catch (RequestFailedException ex) when (ex.Status == 404)
 }
 ```
 
-You can also easily [enable console logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.4.0-beta.3/sdk/core/Azure.Core/samples/Diagnostics.md#logging) if you want to dig
+You can also easily [enable console logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.4.0-beta.4/sdk/core/Azure.Core/samples/Diagnostics.md#logging) if you want to dig
 deeper into the requests you're making against the service.
 
 ## Next steps
@@ -463,10 +463,10 @@ For more information see the [Code of Conduct FAQ][coc_faq]
 or contact [opencode@microsoft.com][coc_contact] with any
 additional questions or comments.
 
+![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fsearch%2FAzure.Search.Documents%2FREADME.png)
 
-
-
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Search.Documents_11.4.0-beta.3/sdk/search/Azure.Search.Documents/src
+<!-- LINKS -->
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Search.Documents_11.4.0-beta.4/sdk/search/Azure.Search.Documents/src
 [package]: https://www.nuget.org/packages/Azure.Search.Documents/
 [docs]: https://docs.microsoft.com/dotnet/api/Azure.Search.Documents
 [rest_docs]: https://docs.microsoft.com/rest/api/searchservice/
@@ -477,10 +477,10 @@ additional questions or comments.
 [create_search_service_cli]: https://docs.microsoft.com/cli/azure/search/service?view=azure-cli-latest#az-search-service-create
 [azure_cli]: https://docs.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/dotnet/
-[RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Search.Documents_11.4.0-beta.3/sdk/core/Azure.Core/src/RequestFailedException.cs
+[RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Search.Documents_11.4.0-beta.4/sdk/core/Azure.Core/src/RequestFailedException.cs
 [status_codes]: https://docs.microsoft.com/rest/api/searchservice/http-status-codes
-[samples]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.4.0-beta.3/sdk/search/Azure.Search.Documents/samples/
-[search_contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Search.Documents_11.4.0-beta.3/sdk/search/CONTRIBUTING.md
+[samples]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.4.0-beta.4/sdk/search/Azure.Search.Documents/samples/
+[search_contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Search.Documents_11.4.0-beta.4/sdk/search/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
