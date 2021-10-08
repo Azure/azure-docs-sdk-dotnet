@@ -111,6 +111,28 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
+    <Member MemberName="Endpoint">
+      <MemberSignature Language="C#" Value="public Uri Endpoint { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Uri Endpoint" />
+      <MemberSignature Language="DocId" Value="P:Azure.Monitor.Query.MetricsQueryClient.Endpoint" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Endpoint As Uri" />
+      <MemberSignature Language="F#" Value="member this.Endpoint : Uri" Usage="Azure.Monitor.Query.MetricsQueryClient.Endpoint" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Monitor.Query</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Uri</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets the endpoint used by the client.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="GetMetricDefinitions">
       <MemberSignature Language="C#" Value="public virtual Azure.Pageable&lt;Azure.Monitor.Query.Models.MetricDefinition&gt; GetMetricDefinitions (string resourceId, string metricsNamespace, System.Threading.CancellationToken cancellationToken = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Pageable`1&lt;class Azure.Monitor.Query.Models.MetricDefinition&gt; GetMetricDefinitions(string resourceId, string metricsNamespace, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
@@ -251,10 +273,10 @@
         <ReturnType>Azure.Response&lt;Azure.Monitor.Query.Models.MetricsQueryResult&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="resourceId" Type="System.String" />
-        <Parameter Name="metrics" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" />
-        <Parameter Name="options" Type="Azure.Monitor.Query.MetricsQueryOptions" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+        <Parameter Name="resourceId" Type="System.String" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="metrics" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" Index="1" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="options" Type="Azure.Monitor.Query.MetricsQueryOptions" Index="2" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="3" FrameworkAlternate="azure-dotnet-preview" />
       </Parameters>
       <Docs>
         <param name="resourceId">The resource name.
@@ -309,10 +331,10 @@
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Monitor.Query.Models.MetricsQueryResult&gt;&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="resourceId" Type="System.String" />
-        <Parameter Name="metrics" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" />
-        <Parameter Name="options" Type="Azure.Monitor.Query.MetricsQueryOptions" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+        <Parameter Name="resourceId" Type="System.String" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="metrics" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" Index="1" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="options" Type="Azure.Monitor.Query.MetricsQueryOptions" Index="2" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="3" FrameworkAlternate="azure-dotnet-preview" />
       </Parameters>
       <Docs>
         <param name="resourceId">The resource name.
@@ -330,6 +352,122 @@
              var metricsClient = new MetricsQueryClient(new DefaultAzureCredential());
             
              Response&lt;MetricsQueryResult&gt; results = await metricsClient.QueryAsync(
+                 resourceId,
+                 new[] {"Microsoft.OperationalInsights/workspaces"}
+             );
+            
+             foreach (var metric in results.Value.Metrics)
+             {
+                 Console.WriteLine(metric.Name);
+                 foreach (var element in metric.TimeSeries)
+                 {
+                     Console.WriteLine("Dimensions: " + string.Join(",", element.Metadata));
+            
+                     foreach (var metricValue in element.Values)
+                     {
+                         Console.WriteLine(metricValue);
+                     }
+                 }
+             }
+             </code></summary>
+        <returns>The <see cref="T:Azure.Monitor.Query.Models.MetricsQueryResult" /> instance with query results.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="QueryResource">
+      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Monitor.Query.Models.MetricsQueryResult&gt; QueryResource (string resourceId, System.Collections.Generic.IEnumerable&lt;string&gt; metrics, Azure.Monitor.Query.MetricsQueryOptions options = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Monitor.Query.Models.MetricsQueryResult&gt; QueryResource(string resourceId, class System.Collections.Generic.IEnumerable`1&lt;string&gt; metrics, class Azure.Monitor.Query.MetricsQueryOptions options, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Monitor.Query.MetricsQueryClient.QueryResource(System.String,System.Collections.Generic.IEnumerable{System.String},Azure.Monitor.Query.MetricsQueryOptions,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function QueryResource (resourceId As String, metrics As IEnumerable(Of String), Optional options As MetricsQueryOptions = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Response(Of MetricsQueryResult)" />
+      <MemberSignature Language="F#" Value="abstract member QueryResource : string * seq&lt;string&gt; * Azure.Monitor.Query.MetricsQueryOptions * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Monitor.Query.Models.MetricsQueryResult&gt;&#xA;override this.QueryResource : string * seq&lt;string&gt; * Azure.Monitor.Query.MetricsQueryOptions * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Monitor.Query.Models.MetricsQueryResult&gt;" Usage="metricsQueryClient.QueryResource (resourceId, metrics, options, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Monitor.Query</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Response&lt;Azure.Monitor.Query.Models.MetricsQueryResult&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="resourceId" Type="System.String" Index="0" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="metrics" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" Index="1" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="options" Type="Azure.Monitor.Query.MetricsQueryOptions" Index="2" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="3" FrameworkAlternate="azure-dotnet" />
+      </Parameters>
+      <Docs>
+        <param name="resourceId">The resource name.
+             For example:
+             <c>/subscriptions/&lt;subscription_id&gt;/resourceGroups/&lt;resource_group_name&gt;/providers/&lt;resource_provider&gt;/&lt;resource&gt;</c>,<br /><c>/subscriptions/faa080af-c1d8-40ad-9cce-e1a450ca5b57/resourceGroups/resource-group/providers/Microsoft.Storage/storageAccounts/mystorage</c>,<br /><c>/subscriptions/faa080af-c1d8-40ad-9cce-e1a450ca5b57/resourceGroups/resource-group/providers/Microsoft.Compute/virtualMachines/myvm</c><br /></param>
+        <param name="metrics">The list of metrics to query.</param>
+        <param name="options">The additional request options.</param>
+        <param name="cancellationToken">The <see cref="T:System.Threading.CancellationToken" /> to use.</param>
+        <summary>
+             Queries metrics for a resource.
+             <code snippet="Snippet:QueryMetrics" language="csharp">
+             string resourceId =
+                 "/subscriptions/&lt;subscription_id&gt;/resourceGroups/&lt;resource_group_name&gt;/providers/&lt;resource_provider&gt;/&lt;resource&gt;";
+            
+             var metricsClient = new MetricsQueryClient(new DefaultAzureCredential());
+            
+             Response&lt;MetricsQueryResult&gt; results = await metricsClient.QueryResourceAsync(
+                 resourceId,
+                 new[] {"Microsoft.OperationalInsights/workspaces"}
+             );
+            
+             foreach (var metric in results.Value.Metrics)
+             {
+                 Console.WriteLine(metric.Name);
+                 foreach (var element in metric.TimeSeries)
+                 {
+                     Console.WriteLine("Dimensions: " + string.Join(",", element.Metadata));
+            
+                     foreach (var metricValue in element.Values)
+                     {
+                         Console.WriteLine(metricValue);
+                     }
+                 }
+             }
+             </code></summary>
+        <returns>The <see cref="T:Azure.Monitor.Query.Models.MetricsQueryResult" /> instance containing the query results.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="QueryResourceAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Monitor.Query.Models.MetricsQueryResult&gt;&gt; QueryResourceAsync (string resourceId, System.Collections.Generic.IEnumerable&lt;string&gt; metrics, Azure.Monitor.Query.MetricsQueryOptions options = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Monitor.Query.Models.MetricsQueryResult&gt;&gt; QueryResourceAsync(string resourceId, class System.Collections.Generic.IEnumerable`1&lt;string&gt; metrics, class Azure.Monitor.Query.MetricsQueryOptions options, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Monitor.Query.MetricsQueryClient.QueryResourceAsync(System.String,System.Collections.Generic.IEnumerable{System.String},Azure.Monitor.Query.MetricsQueryOptions,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function QueryResourceAsync (resourceId As String, metrics As IEnumerable(Of String), Optional options As MetricsQueryOptions = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of MetricsQueryResult))" />
+      <MemberSignature Language="F#" Value="abstract member QueryResourceAsync : string * seq&lt;string&gt; * Azure.Monitor.Query.MetricsQueryOptions * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Monitor.Query.Models.MetricsQueryResult&gt;&gt;&#xA;override this.QueryResourceAsync : string * seq&lt;string&gt; * Azure.Monitor.Query.MetricsQueryOptions * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Monitor.Query.Models.MetricsQueryResult&gt;&gt;" Usage="metricsQueryClient.QueryResourceAsync (resourceId, metrics, options, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Monitor.Query</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Monitor.Query.Models.MetricsQueryResult&gt;&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="resourceId" Type="System.String" Index="0" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="metrics" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" Index="1" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="options" Type="Azure.Monitor.Query.MetricsQueryOptions" Index="2" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="3" FrameworkAlternate="azure-dotnet" />
+      </Parameters>
+      <Docs>
+        <param name="resourceId">The resource name.
+             For example:
+             <c>/subscriptions/&lt;subscription_id&gt;/resourceGroups/&lt;resource_group_name&gt;/providers/&lt;resource_provider&gt;/&lt;resource&gt;</c>,<br /><c>/subscriptions/faa080af-c1d8-40ad-9cce-e1a450ca5b57/resourceGroups/resource-group/providers/Microsoft.Storage/storageAccounts/mystorage</c>,<br /><c>/subscriptions/faa080af-c1d8-40ad-9cce-e1a450ca5b57/resourceGroups/resource-group/providers/Microsoft.Compute/virtualMachines/myvm</c><br /></param>
+        <param name="metrics">The list of metrics to query.</param>
+        <param name="options">The additional request options.</param>
+        <param name="cancellationToken">The <see cref="T:System.Threading.CancellationToken" /> to use.</param>
+        <summary>
+             Queries metrics for a resource.
+             <code snippet="Snippet:QueryMetrics" language="csharp">
+             string resourceId =
+                 "/subscriptions/&lt;subscription_id&gt;/resourceGroups/&lt;resource_group_name&gt;/providers/&lt;resource_provider&gt;/&lt;resource&gt;";
+            
+             var metricsClient = new MetricsQueryClient(new DefaultAzureCredential());
+            
+             Response&lt;MetricsQueryResult&gt; results = await metricsClient.QueryResourceAsync(
                  resourceId,
                  new[] {"Microsoft.OperationalInsights/workspaces"}
              );
