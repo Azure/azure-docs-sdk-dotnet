@@ -37,12 +37,12 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="AddQuery">
-      <MemberSignature Language="C#" Value="public virtual string AddQuery (string workspaceId, string query, Azure.Core.DateTimeRange timeRange, Azure.Monitor.Query.LogsQueryOptions options = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance string AddQuery(string workspaceId, string query, valuetype Azure.Core.DateTimeRange timeRange, class Azure.Monitor.Query.LogsQueryOptions options) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Monitor.Query.LogsBatchQuery.AddQuery(System.String,System.String,Azure.Core.DateTimeRange,Azure.Monitor.Query.LogsQueryOptions)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function AddQuery (workspaceId As String, query As String, timeRange As DateTimeRange, Optional options As LogsQueryOptions = Nothing) As String" />
-      <MemberSignature Language="F#" Value="abstract member AddQuery : string * string * Azure.Core.DateTimeRange * Azure.Monitor.Query.LogsQueryOptions -&gt; string&#xA;override this.AddQuery : string * string * Azure.Core.DateTimeRange * Azure.Monitor.Query.LogsQueryOptions -&gt; string" Usage="logsBatchQuery.AddQuery (workspaceId, query, timeRange, options)" />
+    <Member MemberName="AddWorkspaceQuery">
+      <MemberSignature Language="C#" Value="public virtual string AddWorkspaceQuery (string workspaceId, string query, Azure.Monitor.Query.QueryTimeRange timeRange, Azure.Monitor.Query.LogsQueryOptions options = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance string AddWorkspaceQuery(string workspaceId, string query, valuetype Azure.Monitor.Query.QueryTimeRange timeRange, class Azure.Monitor.Query.LogsQueryOptions options) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Monitor.Query.LogsBatchQuery.AddWorkspaceQuery(System.String,System.String,Azure.Monitor.Query.QueryTimeRange,Azure.Monitor.Query.LogsQueryOptions)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function AddWorkspaceQuery (workspaceId As String, query As String, timeRange As QueryTimeRange, Optional options As LogsQueryOptions = Nothing) As String" />
+      <MemberSignature Language="F#" Value="abstract member AddWorkspaceQuery : string * string * Azure.Monitor.Query.QueryTimeRange * Azure.Monitor.Query.LogsQueryOptions -&gt; string&#xA;override this.AddWorkspaceQuery : string * string * Azure.Monitor.Query.QueryTimeRange * Azure.Monitor.Query.LogsQueryOptions -&gt; string" Usage="logsBatchQuery.AddWorkspaceQuery (workspaceId, query, timeRange, options)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Monitor.Query</AssemblyName>
@@ -54,7 +54,7 @@
       <Parameters>
         <Parameter Name="workspaceId" Type="System.String" />
         <Parameter Name="query" Type="System.String" />
-        <Parameter Name="timeRange" Type="Azure.Core.DateTimeRange" />
+        <Parameter Name="timeRange" Type="Azure.Monitor.Query.QueryTimeRange" />
         <Parameter Name="options" Type="Azure.Monitor.Query.LogsQueryOptions" />
       </Parameters>
       <Docs>
@@ -64,22 +64,22 @@
         <param name="options">The <see cref="T:Azure.Monitor.Query.LogsQueryOptions" /> to configure the query.</param>
         <summary>
              Adds the specified query to the batch. Results can be retrieved after the query is submitted via the <see cref="M:Azure.Monitor.Query.LogsQueryClient.QueryBatchAsync(Azure.Monitor.Query.LogsBatchQuery,System.Threading.CancellationToken)" /> call.
-             <code snippet="Snippet:BatchQueryAddAndGet" language="csharp">
-             string countQueryId = batch.AddQuery(
+             <example snippet="Snippet:BatchQueryAddAndGet"><code language="csharp">
+             string countQueryId = batch.AddWorkspaceQuery(
                  workspaceId,
                  "AzureActivity | count",
-                 new DateTimeRange(TimeSpan.FromDays(1)));
-             string topQueryId = batch.AddQuery(
+                 new QueryTimeRange(TimeSpan.FromDays(1)));
+             string topQueryId = batch.AddWorkspaceQuery(
                  workspaceId,
                  "AzureActivity | summarize Count = count() by ResourceGroup | top 10 by Count",
-                 new DateTimeRange(TimeSpan.FromDays(1)));
+                 new QueryTimeRange(TimeSpan.FromDays(1)));
             
-             Response&lt;LogsBatchQueryResults&gt; response = await client.QueryBatchAsync(batch);
+             Response&lt;LogsBatchQueryResultCollection&gt; response = await client.QueryBatchAsync(batch);
             
              var count = response.Value.GetResult&lt;int&gt;(countQueryId).Single();
              var topEntries = response.Value.GetResult&lt;MyLogEntryModel&gt;(topQueryId);
-             </code></summary>
-        <returns>The query identifier that has to be passed into <see cref="M:Azure.Monitor.Query.Models.LogsBatchQueryResults.GetResult(System.String)" /> to get the result.</returns>
+             </code></example></summary>
+        <returns>The query identifier that has to be passed into <see cref="M:Azure.Monitor.Query.Models.LogsBatchQueryResultCollection.GetResult(System.String)" /> to get the result.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
