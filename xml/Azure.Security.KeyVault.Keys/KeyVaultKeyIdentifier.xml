@@ -45,9 +45,13 @@
         <summary>
             Creates a new instance of the <see cref="T:Azure.Security.KeyVault.Keys.KeyVaultKeyIdentifier" /> class.
             </summary>
-        <remarks>To be added.</remarks>
+        <remarks>
+            Successfully parsing the given <see cref="T:System.Uri" /> does not guarantee that the <paramref name="id" /> is a valid Key Vault or Managed HSM key identifier:
+            only that it contains the necessary number of path parts that look like a Key Vault key identifier. If the <see cref="P:Azure.Security.KeyVault.Keys.KeyVaultKeyIdentifier.VaultUri" /> references
+            a valid Key Vault or Managed HSM, the service will return an error if the <see cref="P:Azure.Security.KeyVault.Keys.KeyVaultKeyIdentifier.Name" /> and <see cref="P:Azure.Security.KeyVault.Keys.KeyVaultKeyIdentifier.Version" /> do not specify a valid key.
+            </remarks>
         <exception cref="T:System.ArgumentException">
-          <paramref name="id" /> is not a valid Key Vault key ID.</exception>
+          <paramref name="id" /> is not a valid Key Vault or Managed HSM key ID.</exception>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="id" /> is null.</exception>
       </Docs>
@@ -215,6 +219,38 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
+    <Member MemberName="TryCreate">
+      <MemberSignature Language="C#" Value="public static bool TryCreate (Uri id, out Azure.Security.KeyVault.Keys.KeyVaultKeyIdentifier identifier);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool TryCreate(class System.Uri id, [out] valuetype Azure.Security.KeyVault.Keys.KeyVaultKeyIdentifier&amp; identifier) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Security.KeyVault.Keys.KeyVaultKeyIdentifier.TryCreate(System.Uri,Azure.Security.KeyVault.Keys.KeyVaultKeyIdentifier@)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function TryCreate (id As Uri, ByRef identifier As KeyVaultKeyIdentifier) As Boolean" />
+      <MemberSignature Language="F#" Value="static member TryCreate : Uri * KeyVaultKeyIdentifier -&gt; bool" Usage="Azure.Security.KeyVault.Keys.KeyVaultKeyIdentifier.TryCreate (id, identifier)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Security.KeyVault.Keys</AssemblyName>
+        <AssemblyVersion>4.3.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="id" Type="System.Uri" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="identifier" Type="Azure.Security.KeyVault.Keys.KeyVaultKeyIdentifier" RefType="out" Index="1" FrameworkAlternate="azure-dotnet-preview" />
+      </Parameters>
+      <Docs>
+        <param name="id">A <see cref="T:System.Uri" /> to a Key Vault or Managed HSM key with or without a version.</param>
+        <param name="identifier">A <see cref="T:Azure.Security.KeyVault.Keys.KeyVaultKeyIdentifier" /> from the given <paramref name="id" /> if valid; otherwise, an empty structure if invalid.</param>
+        <summary>
+            Tries to create a new instance of the <see cref="T:Azure.Security.KeyVault.Keys.KeyVaultKeyIdentifier" /> from the given <paramref name="id" />.
+            </summary>
+        <returns>True if the <see cref="T:System.Uri" /> contains a <see cref="P:Azure.Security.KeyVault.Keys.KeyVaultKeyIdentifier.VaultUri" />, <see cref="P:Azure.Security.KeyVault.Keys.KeyVaultKeyIdentifier.Name" />, and optional <see cref="P:Azure.Security.KeyVault.Keys.KeyVaultKeyIdentifier.Version" />; otherwise, false.</returns>
+        <remarks>
+            Successfully parsing the given <see cref="T:System.Uri" /> does not guarantee that the <paramref name="id" /> is a valid Key Vault or Managed HSM key identifier:
+            only that it contains the necessary number of path parts that look like a Key Vault key identifier. If the <see cref="P:Azure.Security.KeyVault.Keys.KeyVaultKeyIdentifier.VaultUri" /> references
+            a valid Key Vault or Managed HSM, the service will return an error if the <see cref="P:Azure.Security.KeyVault.Keys.KeyVaultKeyIdentifier.Name" /> and <see cref="P:Azure.Security.KeyVault.Keys.KeyVaultKeyIdentifier.Version" /> do not specify a valid key.
+            </remarks>
+      </Docs>
+    </Member>
     <Member MemberName="VaultUri">
       <MemberSignature Language="C#" Value="public Uri VaultUri { get; }" />
       <MemberSignature Language="ILAsm" Value=".property instance class System.Uri VaultUri" />
@@ -232,7 +268,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Gets the <see cref="T:System.Uri" /> of the Key Vault.
+            Gets the <see cref="T:System.Uri" /> of the Key Vault or Managed HSM.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>

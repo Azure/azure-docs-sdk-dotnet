@@ -34,11 +34,11 @@
       </Docs>
     </Member>
     <Member MemberName="Create">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response Create (Azure.Core.RequestContent requestBody, Azure.RequestOptions requestOptions = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response Create(class Azure.Core.RequestContent requestBody, class Azure.RequestOptions requestOptions) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response Create (Azure.Core.RequestContent content, Azure.RequestOptions options = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response Create(class Azure.Core.RequestContent content, class Azure.RequestOptions options) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Analytics.Purview.Catalog.PurviewRelationships.Create(Azure.Core.RequestContent,Azure.RequestOptions)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function Create (requestBody As RequestContent, Optional requestOptions As RequestOptions = Nothing) As Response" />
-      <MemberSignature Language="F#" Value="abstract member Create : Azure.Core.RequestContent * Azure.RequestOptions -&gt; Azure.Response&#xA;override this.Create : Azure.Core.RequestContent * Azure.RequestOptions -&gt; Azure.Response" Usage="purviewRelationships.Create (requestBody, requestOptions)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function Create (content As RequestContent, Optional options As RequestOptions = Nothing) As Response" />
+      <MemberSignature Language="F#" Value="abstract member Create : Azure.Core.RequestContent * Azure.RequestOptions -&gt; Azure.Response&#xA;override this.Create : Azure.Core.RequestContent * Azure.RequestOptions -&gt; Azure.Response" Usage="purviewRelationships.Create (content, options)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Analytics.Purview.Catalog</AssemblyName>
@@ -48,27 +48,78 @@
         <ReturnType>Azure.Response</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="requestBody" Type="Azure.Core.RequestContent" />
-        <Parameter Name="requestOptions" Type="Azure.RequestOptions" />
+        <Parameter Name="content" Type="Azure.Core.RequestContent" />
+        <Parameter Name="options" Type="Azure.RequestOptions" />
       </Parameters>
       <Docs>
-        <param name="requestBody"> The request body. </param>
-        <param name="requestOptions"> The request options. </param>
+        <param name="content"> The content to send as the body of the request. </param>
+        <param name="options"> The request options. </param>
         <summary> Create a new relationship between entities. </summary>
         <returns>To be added.</returns>
         <remarks>
             Schema for <c>Request Body</c>:
-            <list type="table"><listeader><term>Name</term><term>Type</term><term>Required</term><term>Description</term></listeader><item><term>attributes</term><term>Dictionary&lt;string, AnyObject&gt;</term><term /><term> The attributes of the struct. </term></item><item><term>typeName</term><term>string</term><term /><term> The name of the type. </term></item><item><term>lastModifiedTS</term><term>string</term><term /><term> ETag for concurrency control. </term></item><item><term>createTime</term><term>number</term><term /><term> The created time of the record. </term></item><item><term>createdBy</term><term>string</term><term /><term> The user who created the record. </term></item><item><term>end1</term><term>AtlasObjectId</term><term /><term> Reference to an object-instance of an Atlas type - like entity. </term></item><item><term>end2</term><term>AtlasObjectId</term><term /><term> Reference to an object-instance of an Atlas type - like entity. </term></item><item><term>guid</term><term>string</term><term /><term> The GUID of the relationship. </term></item><item><term>homeId</term><term>string</term><term /><term> The home ID of the relationship. </term></item><item><term>label</term><term>string</term><term /><term> The label of the relationship. </term></item><item><term>provenanceType</term><term>number</term><term /><term> Used to record the provenance of an instance of an entity or relationship. </term></item><item><term>status</term><term>"ACTIVE" | "DELETED"</term><term /><term> The enum of relationship status. </term></item><item><term>updateTime</term><term>number</term><term /><term> The update time of the record. </term></item><item><term>updatedBy</term><term>string</term><term /><term> The user who updated the record. </term></item><item><term>version</term><term>number</term><term /><term> The version of the relationship. </term></item></list>
-            Schema for <c>AtlasObjectId</c>:
-            <list type="table"><listeader><term>Name</term><term>Type</term><term>Required</term><term>Description</term></listeader><item><term>guid</term><term>string</term><term /><term> The GUID of the object. </term></item><item><term>typeName</term><term>string</term><term /><term> The name of the type. </term></item><item><term>uniqueAttributes</term><term>Dictionary&lt;string, AnyObject&gt;</term><term /><term> The unique attributes of the object. </term></item></list></remarks>
+            <code>{
+              attributes: Dictionary&lt;string, AnyObject&gt;,
+              typeName: string,
+              lastModifiedTS: string,
+              createTime: number,
+              createdBy: string,
+              end1: {
+                guid: string,
+                typeName: string,
+                uniqueAttributes: Dictionary&lt;string, AnyObject&gt;
+              },
+              end2: AtlasObjectId,
+              guid: string,
+              homeId: string,
+              label: string,
+              provenanceType: number,
+              status: "ACTIVE" | "DELETED",
+              updateTime: number,
+              updatedBy: string,
+              version: number
+            }
+            </code>
+            Schema for <c>Response Body</c>:
+            <code>{
+              attributes: Dictionary&lt;string, AnyObject&gt;,
+              typeName: string,
+              lastModifiedTS: string,
+              createTime: number,
+              createdBy: string,
+              end1: {
+                guid: string,
+                typeName: string,
+                uniqueAttributes: Dictionary&lt;string, AnyObject&gt;
+              },
+              end2: AtlasObjectId,
+              guid: string,
+              homeId: string,
+              label: string,
+              provenanceType: number,
+              status: "ACTIVE" | "DELETED",
+              updateTime: number,
+              updatedBy: string,
+              version: number
+            }
+            </code>
+            Schema for <c>Response Error</c>:
+            <code>{
+              requestId: string,
+              errorCode: string,
+              errorMessage: string
+            }
+            </code></remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="content" /> is null. </exception>
       </Docs>
     </Member>
     <Member MemberName="CreateAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; CreateAsync (Azure.Core.RequestContent requestBody, Azure.RequestOptions requestOptions = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; CreateAsync(class Azure.Core.RequestContent requestBody, class Azure.RequestOptions requestOptions) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; CreateAsync (Azure.Core.RequestContent content, Azure.RequestOptions options = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; CreateAsync(class Azure.Core.RequestContent content, class Azure.RequestOptions options) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Analytics.Purview.Catalog.PurviewRelationships.CreateAsync(Azure.Core.RequestContent,Azure.RequestOptions)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateAsync (requestBody As RequestContent, Optional requestOptions As RequestOptions = Nothing) As Task(Of Response)" />
-      <MemberSignature Language="F#" Value="abstract member CreateAsync : Azure.Core.RequestContent * Azure.RequestOptions -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.CreateAsync : Azure.Core.RequestContent * Azure.RequestOptions -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="purviewRelationships.CreateAsync (requestBody, requestOptions)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateAsync (content As RequestContent, Optional options As RequestOptions = Nothing) As Task(Of Response)" />
+      <MemberSignature Language="F#" Value="abstract member CreateAsync : Azure.Core.RequestContent * Azure.RequestOptions -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.CreateAsync : Azure.Core.RequestContent * Azure.RequestOptions -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="purviewRelationships.CreateAsync (content, options)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Analytics.Purview.Catalog</AssemblyName>
@@ -78,27 +129,78 @@
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="requestBody" Type="Azure.Core.RequestContent" />
-        <Parameter Name="requestOptions" Type="Azure.RequestOptions" />
+        <Parameter Name="content" Type="Azure.Core.RequestContent" />
+        <Parameter Name="options" Type="Azure.RequestOptions" />
       </Parameters>
       <Docs>
-        <param name="requestBody"> The request body. </param>
-        <param name="requestOptions"> The request options. </param>
+        <param name="content"> The content to send as the body of the request. </param>
+        <param name="options"> The request options. </param>
         <summary> Create a new relationship between entities. </summary>
         <returns>To be added.</returns>
         <remarks>
             Schema for <c>Request Body</c>:
-            <list type="table"><listeader><term>Name</term><term>Type</term><term>Required</term><term>Description</term></listeader><item><term>attributes</term><term>Dictionary&lt;string, AnyObject&gt;</term><term /><term> The attributes of the struct. </term></item><item><term>typeName</term><term>string</term><term /><term> The name of the type. </term></item><item><term>lastModifiedTS</term><term>string</term><term /><term> ETag for concurrency control. </term></item><item><term>createTime</term><term>number</term><term /><term> The created time of the record. </term></item><item><term>createdBy</term><term>string</term><term /><term> The user who created the record. </term></item><item><term>end1</term><term>AtlasObjectId</term><term /><term> Reference to an object-instance of an Atlas type - like entity. </term></item><item><term>end2</term><term>AtlasObjectId</term><term /><term> Reference to an object-instance of an Atlas type - like entity. </term></item><item><term>guid</term><term>string</term><term /><term> The GUID of the relationship. </term></item><item><term>homeId</term><term>string</term><term /><term> The home ID of the relationship. </term></item><item><term>label</term><term>string</term><term /><term> The label of the relationship. </term></item><item><term>provenanceType</term><term>number</term><term /><term> Used to record the provenance of an instance of an entity or relationship. </term></item><item><term>status</term><term>"ACTIVE" | "DELETED"</term><term /><term> The enum of relationship status. </term></item><item><term>updateTime</term><term>number</term><term /><term> The update time of the record. </term></item><item><term>updatedBy</term><term>string</term><term /><term> The user who updated the record. </term></item><item><term>version</term><term>number</term><term /><term> The version of the relationship. </term></item></list>
-            Schema for <c>AtlasObjectId</c>:
-            <list type="table"><listeader><term>Name</term><term>Type</term><term>Required</term><term>Description</term></listeader><item><term>guid</term><term>string</term><term /><term> The GUID of the object. </term></item><item><term>typeName</term><term>string</term><term /><term> The name of the type. </term></item><item><term>uniqueAttributes</term><term>Dictionary&lt;string, AnyObject&gt;</term><term /><term> The unique attributes of the object. </term></item></list></remarks>
+            <code>{
+              attributes: Dictionary&lt;string, AnyObject&gt;,
+              typeName: string,
+              lastModifiedTS: string,
+              createTime: number,
+              createdBy: string,
+              end1: {
+                guid: string,
+                typeName: string,
+                uniqueAttributes: Dictionary&lt;string, AnyObject&gt;
+              },
+              end2: AtlasObjectId,
+              guid: string,
+              homeId: string,
+              label: string,
+              provenanceType: number,
+              status: "ACTIVE" | "DELETED",
+              updateTime: number,
+              updatedBy: string,
+              version: number
+            }
+            </code>
+            Schema for <c>Response Body</c>:
+            <code>{
+              attributes: Dictionary&lt;string, AnyObject&gt;,
+              typeName: string,
+              lastModifiedTS: string,
+              createTime: number,
+              createdBy: string,
+              end1: {
+                guid: string,
+                typeName: string,
+                uniqueAttributes: Dictionary&lt;string, AnyObject&gt;
+              },
+              end2: AtlasObjectId,
+              guid: string,
+              homeId: string,
+              label: string,
+              provenanceType: number,
+              status: "ACTIVE" | "DELETED",
+              updateTime: number,
+              updatedBy: string,
+              version: number
+            }
+            </code>
+            Schema for <c>Response Error</c>:
+            <code>{
+              requestId: string,
+              errorCode: string,
+              errorMessage: string
+            }
+            </code></remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="content" /> is null. </exception>
       </Docs>
     </Member>
     <Member MemberName="Delete">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response Delete (string guid, Azure.RequestOptions requestOptions = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response Delete(string guid, class Azure.RequestOptions requestOptions) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response Delete (string guid, Azure.RequestOptions options = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response Delete(string guid, class Azure.RequestOptions options) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Analytics.Purview.Catalog.PurviewRelationships.Delete(System.String,Azure.RequestOptions)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function Delete (guid As String, Optional requestOptions As RequestOptions = Nothing) As Response" />
-      <MemberSignature Language="F#" Value="abstract member Delete : string * Azure.RequestOptions -&gt; Azure.Response&#xA;override this.Delete : string * Azure.RequestOptions -&gt; Azure.Response" Usage="purviewRelationships.Delete (guid, requestOptions)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function Delete (guid As String, Optional options As RequestOptions = Nothing) As Response" />
+      <MemberSignature Language="F#" Value="abstract member Delete : string * Azure.RequestOptions -&gt; Azure.Response&#xA;override this.Delete : string * Azure.RequestOptions -&gt; Azure.Response" Usage="purviewRelationships.Delete (guid, options)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Analytics.Purview.Catalog</AssemblyName>
@@ -109,22 +211,31 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="guid" Type="System.String" />
-        <Parameter Name="requestOptions" Type="Azure.RequestOptions" />
+        <Parameter Name="options" Type="Azure.RequestOptions" />
       </Parameters>
       <Docs>
         <param name="guid"> The globally unique identifier of the relationship. </param>
-        <param name="requestOptions"> The request options. </param>
+        <param name="options"> The request options. </param>
         <summary> Delete a relationship between entities by its GUID. </summary>
         <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            Schema for <c>Response Error</c>:
+            <code>{
+              requestId: string,
+              errorCode: string,
+              errorMessage: string
+            }
+            </code></remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="guid" /> is null. </exception>
       </Docs>
     </Member>
     <Member MemberName="DeleteAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; DeleteAsync (string guid, Azure.RequestOptions requestOptions = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; DeleteAsync(string guid, class Azure.RequestOptions requestOptions) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; DeleteAsync (string guid, Azure.RequestOptions options = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; DeleteAsync(string guid, class Azure.RequestOptions options) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Analytics.Purview.Catalog.PurviewRelationships.DeleteAsync(System.String,Azure.RequestOptions)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function DeleteAsync (guid As String, Optional requestOptions As RequestOptions = Nothing) As Task(Of Response)" />
-      <MemberSignature Language="F#" Value="abstract member DeleteAsync : string * Azure.RequestOptions -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.DeleteAsync : string * Azure.RequestOptions -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="purviewRelationships.DeleteAsync (guid, requestOptions)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function DeleteAsync (guid As String, Optional options As RequestOptions = Nothing) As Task(Of Response)" />
+      <MemberSignature Language="F#" Value="abstract member DeleteAsync : string * Azure.RequestOptions -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.DeleteAsync : string * Azure.RequestOptions -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="purviewRelationships.DeleteAsync (guid, options)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Analytics.Purview.Catalog</AssemblyName>
@@ -135,22 +246,31 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="guid" Type="System.String" />
-        <Parameter Name="requestOptions" Type="Azure.RequestOptions" />
+        <Parameter Name="options" Type="Azure.RequestOptions" />
       </Parameters>
       <Docs>
         <param name="guid"> The globally unique identifier of the relationship. </param>
-        <param name="requestOptions"> The request options. </param>
+        <param name="options"> The request options. </param>
         <summary> Delete a relationship between entities by its GUID. </summary>
         <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            Schema for <c>Response Error</c>:
+            <code>{
+              requestId: string,
+              errorCode: string,
+              errorMessage: string
+            }
+            </code></remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="guid" /> is null. </exception>
       </Docs>
     </Member>
     <Member MemberName="Get">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response Get (string guid, bool? extendedInfo = default, Azure.RequestOptions requestOptions = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response Get(string guid, valuetype System.Nullable`1&lt;bool&gt; extendedInfo, class Azure.RequestOptions requestOptions) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Analytics.Purview.Catalog.PurviewRelationships.Get(System.String,System.Nullable{System.Boolean},Azure.RequestOptions)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function Get (guid As String, Optional extendedInfo As Nullable(Of Boolean) = Nothing, Optional requestOptions As RequestOptions = Nothing) As Response" />
-      <MemberSignature Language="F#" Value="abstract member Get : string * Nullable&lt;bool&gt; * Azure.RequestOptions -&gt; Azure.Response&#xA;override this.Get : string * Nullable&lt;bool&gt; * Azure.RequestOptions -&gt; Azure.Response" Usage="purviewRelationships.Get (guid, extendedInfo, requestOptions)" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response Get (string guid, Azure.RequestOptions options, bool? extendedInfo = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response Get(string guid, class Azure.RequestOptions options, valuetype System.Nullable`1&lt;bool&gt; extendedInfo) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Analytics.Purview.Catalog.PurviewRelationships.Get(System.String,Azure.RequestOptions,System.Nullable{System.Boolean})" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function Get (guid As String, options As RequestOptions, Optional extendedInfo As Nullable(Of Boolean) = Nothing) As Response" />
+      <MemberSignature Language="F#" Value="abstract member Get : string * Azure.RequestOptions * Nullable&lt;bool&gt; -&gt; Azure.Response&#xA;override this.Get : string * Azure.RequestOptions * Nullable&lt;bool&gt; -&gt; Azure.Response" Usage="purviewRelationships.Get (guid, options, extendedInfo)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Analytics.Purview.Catalog</AssemblyName>
@@ -161,24 +281,59 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="guid" Type="System.String" />
+        <Parameter Name="options" Type="Azure.RequestOptions" />
         <Parameter Name="extendedInfo" Type="System.Nullable&lt;System.Boolean&gt;" />
-        <Parameter Name="requestOptions" Type="Azure.RequestOptions" />
       </Parameters>
       <Docs>
         <param name="guid"> The globally unique identifier of the relationship. </param>
+        <param name="options"> The request options. </param>
         <param name="extendedInfo"> Limits whether includes extended information. </param>
-        <param name="requestOptions"> The request options. </param>
         <summary> Get relationship information between entities by its GUID. </summary>
         <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            Schema for <c>Response Body</c>:
+            <code>{
+              referredEntities: Dictionary&lt;string, AtlasEntityHeader&gt;,
+              relationship: {
+                attributes: Dictionary&lt;string, AnyObject&gt;,
+                typeName: string,
+                lastModifiedTS: string,
+                createTime: number,
+                createdBy: string,
+                end1: {
+                  guid: string,
+                  typeName: string,
+                  uniqueAttributes: Dictionary&lt;string, AnyObject&gt;
+                },
+                end2: AtlasObjectId,
+                guid: string,
+                homeId: string,
+                label: string,
+                provenanceType: number,
+                status: "ACTIVE" | "DELETED",
+                updateTime: number,
+                updatedBy: string,
+                version: number
+              }
+            }
+            </code>
+            Schema for <c>Response Error</c>:
+            <code>{
+              requestId: string,
+              errorCode: string,
+              errorMessage: string
+            }
+            </code></remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="guid" /> is null. </exception>
       </Docs>
     </Member>
     <Member MemberName="GetAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; GetAsync (string guid, bool? extendedInfo = default, Azure.RequestOptions requestOptions = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; GetAsync(string guid, valuetype System.Nullable`1&lt;bool&gt; extendedInfo, class Azure.RequestOptions requestOptions) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Analytics.Purview.Catalog.PurviewRelationships.GetAsync(System.String,System.Nullable{System.Boolean},Azure.RequestOptions)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetAsync (guid As String, Optional extendedInfo As Nullable(Of Boolean) = Nothing, Optional requestOptions As RequestOptions = Nothing) As Task(Of Response)" />
-      <MemberSignature Language="F#" Value="abstract member GetAsync : string * Nullable&lt;bool&gt; * Azure.RequestOptions -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.GetAsync : string * Nullable&lt;bool&gt; * Azure.RequestOptions -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="purviewRelationships.GetAsync (guid, extendedInfo, requestOptions)" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; GetAsync (string guid, Azure.RequestOptions options, bool? extendedInfo = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; GetAsync(string guid, class Azure.RequestOptions options, valuetype System.Nullable`1&lt;bool&gt; extendedInfo) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Analytics.Purview.Catalog.PurviewRelationships.GetAsync(System.String,Azure.RequestOptions,System.Nullable{System.Boolean})" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetAsync (guid As String, options As RequestOptions, Optional extendedInfo As Nullable(Of Boolean) = Nothing) As Task(Of Response)" />
+      <MemberSignature Language="F#" Value="abstract member GetAsync : string * Azure.RequestOptions * Nullable&lt;bool&gt; -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.GetAsync : string * Azure.RequestOptions * Nullable&lt;bool&gt; -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="purviewRelationships.GetAsync (guid, options, extendedInfo)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Analytics.Purview.Catalog</AssemblyName>
@@ -189,16 +344,51 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="guid" Type="System.String" />
+        <Parameter Name="options" Type="Azure.RequestOptions" />
         <Parameter Name="extendedInfo" Type="System.Nullable&lt;System.Boolean&gt;" />
-        <Parameter Name="requestOptions" Type="Azure.RequestOptions" />
       </Parameters>
       <Docs>
         <param name="guid"> The globally unique identifier of the relationship. </param>
+        <param name="options"> The request options. </param>
         <param name="extendedInfo"> Limits whether includes extended information. </param>
-        <param name="requestOptions"> The request options. </param>
         <summary> Get relationship information between entities by its GUID. </summary>
         <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            Schema for <c>Response Body</c>:
+            <code>{
+              referredEntities: Dictionary&lt;string, AtlasEntityHeader&gt;,
+              relationship: {
+                attributes: Dictionary&lt;string, AnyObject&gt;,
+                typeName: string,
+                lastModifiedTS: string,
+                createTime: number,
+                createdBy: string,
+                end1: {
+                  guid: string,
+                  typeName: string,
+                  uniqueAttributes: Dictionary&lt;string, AnyObject&gt;
+                },
+                end2: AtlasObjectId,
+                guid: string,
+                homeId: string,
+                label: string,
+                provenanceType: number,
+                status: "ACTIVE" | "DELETED",
+                updateTime: number,
+                updatedBy: string,
+                version: number
+              }
+            }
+            </code>
+            Schema for <c>Response Error</c>:
+            <code>{
+              requestId: string,
+              errorCode: string,
+              errorMessage: string
+            }
+            </code></remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="guid" /> is null. </exception>
       </Docs>
     </Member>
     <Member MemberName="Pipeline">
@@ -222,11 +412,11 @@
       </Docs>
     </Member>
     <Member MemberName="Update">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response Update (Azure.Core.RequestContent requestBody, Azure.RequestOptions requestOptions = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response Update(class Azure.Core.RequestContent requestBody, class Azure.RequestOptions requestOptions) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response Update (Azure.Core.RequestContent content, Azure.RequestOptions options = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response Update(class Azure.Core.RequestContent content, class Azure.RequestOptions options) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Analytics.Purview.Catalog.PurviewRelationships.Update(Azure.Core.RequestContent,Azure.RequestOptions)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function Update (requestBody As RequestContent, Optional requestOptions As RequestOptions = Nothing) As Response" />
-      <MemberSignature Language="F#" Value="abstract member Update : Azure.Core.RequestContent * Azure.RequestOptions -&gt; Azure.Response&#xA;override this.Update : Azure.Core.RequestContent * Azure.RequestOptions -&gt; Azure.Response" Usage="purviewRelationships.Update (requestBody, requestOptions)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function Update (content As RequestContent, Optional options As RequestOptions = Nothing) As Response" />
+      <MemberSignature Language="F#" Value="abstract member Update : Azure.Core.RequestContent * Azure.RequestOptions -&gt; Azure.Response&#xA;override this.Update : Azure.Core.RequestContent * Azure.RequestOptions -&gt; Azure.Response" Usage="purviewRelationships.Update (content, options)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Analytics.Purview.Catalog</AssemblyName>
@@ -236,27 +426,78 @@
         <ReturnType>Azure.Response</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="requestBody" Type="Azure.Core.RequestContent" />
-        <Parameter Name="requestOptions" Type="Azure.RequestOptions" />
+        <Parameter Name="content" Type="Azure.Core.RequestContent" />
+        <Parameter Name="options" Type="Azure.RequestOptions" />
       </Parameters>
       <Docs>
-        <param name="requestBody"> The request body. </param>
-        <param name="requestOptions"> The request options. </param>
+        <param name="content"> The content to send as the body of the request. </param>
+        <param name="options"> The request options. </param>
         <summary> Update an existing relationship between entities. </summary>
         <returns>To be added.</returns>
         <remarks>
             Schema for <c>Request Body</c>:
-            <list type="table"><listeader><term>Name</term><term>Type</term><term>Required</term><term>Description</term></listeader><item><term>attributes</term><term>Dictionary&lt;string, AnyObject&gt;</term><term /><term> The attributes of the struct. </term></item><item><term>typeName</term><term>string</term><term /><term> The name of the type. </term></item><item><term>lastModifiedTS</term><term>string</term><term /><term> ETag for concurrency control. </term></item><item><term>createTime</term><term>number</term><term /><term> The created time of the record. </term></item><item><term>createdBy</term><term>string</term><term /><term> The user who created the record. </term></item><item><term>end1</term><term>AtlasObjectId</term><term /><term> Reference to an object-instance of an Atlas type - like entity. </term></item><item><term>end2</term><term>AtlasObjectId</term><term /><term> Reference to an object-instance of an Atlas type - like entity. </term></item><item><term>guid</term><term>string</term><term /><term> The GUID of the relationship. </term></item><item><term>homeId</term><term>string</term><term /><term> The home ID of the relationship. </term></item><item><term>label</term><term>string</term><term /><term> The label of the relationship. </term></item><item><term>provenanceType</term><term>number</term><term /><term> Used to record the provenance of an instance of an entity or relationship. </term></item><item><term>status</term><term>"ACTIVE" | "DELETED"</term><term /><term> The enum of relationship status. </term></item><item><term>updateTime</term><term>number</term><term /><term> The update time of the record. </term></item><item><term>updatedBy</term><term>string</term><term /><term> The user who updated the record. </term></item><item><term>version</term><term>number</term><term /><term> The version of the relationship. </term></item></list>
-            Schema for <c>AtlasObjectId</c>:
-            <list type="table"><listeader><term>Name</term><term>Type</term><term>Required</term><term>Description</term></listeader><item><term>guid</term><term>string</term><term /><term> The GUID of the object. </term></item><item><term>typeName</term><term>string</term><term /><term> The name of the type. </term></item><item><term>uniqueAttributes</term><term>Dictionary&lt;string, AnyObject&gt;</term><term /><term> The unique attributes of the object. </term></item></list></remarks>
+            <code>{
+              attributes: Dictionary&lt;string, AnyObject&gt;,
+              typeName: string,
+              lastModifiedTS: string,
+              createTime: number,
+              createdBy: string,
+              end1: {
+                guid: string,
+                typeName: string,
+                uniqueAttributes: Dictionary&lt;string, AnyObject&gt;
+              },
+              end2: AtlasObjectId,
+              guid: string,
+              homeId: string,
+              label: string,
+              provenanceType: number,
+              status: "ACTIVE" | "DELETED",
+              updateTime: number,
+              updatedBy: string,
+              version: number
+            }
+            </code>
+            Schema for <c>Response Body</c>:
+            <code>{
+              attributes: Dictionary&lt;string, AnyObject&gt;,
+              typeName: string,
+              lastModifiedTS: string,
+              createTime: number,
+              createdBy: string,
+              end1: {
+                guid: string,
+                typeName: string,
+                uniqueAttributes: Dictionary&lt;string, AnyObject&gt;
+              },
+              end2: AtlasObjectId,
+              guid: string,
+              homeId: string,
+              label: string,
+              provenanceType: number,
+              status: "ACTIVE" | "DELETED",
+              updateTime: number,
+              updatedBy: string,
+              version: number
+            }
+            </code>
+            Schema for <c>Response Error</c>:
+            <code>{
+              requestId: string,
+              errorCode: string,
+              errorMessage: string
+            }
+            </code></remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="content" /> is null. </exception>
       </Docs>
     </Member>
     <Member MemberName="UpdateAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; UpdateAsync (Azure.Core.RequestContent requestBody, Azure.RequestOptions requestOptions = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; UpdateAsync(class Azure.Core.RequestContent requestBody, class Azure.RequestOptions requestOptions) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; UpdateAsync (Azure.Core.RequestContent content, Azure.RequestOptions options = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; UpdateAsync(class Azure.Core.RequestContent content, class Azure.RequestOptions options) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Analytics.Purview.Catalog.PurviewRelationships.UpdateAsync(Azure.Core.RequestContent,Azure.RequestOptions)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function UpdateAsync (requestBody As RequestContent, Optional requestOptions As RequestOptions = Nothing) As Task(Of Response)" />
-      <MemberSignature Language="F#" Value="abstract member UpdateAsync : Azure.Core.RequestContent * Azure.RequestOptions -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.UpdateAsync : Azure.Core.RequestContent * Azure.RequestOptions -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="purviewRelationships.UpdateAsync (requestBody, requestOptions)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function UpdateAsync (content As RequestContent, Optional options As RequestOptions = Nothing) As Task(Of Response)" />
+      <MemberSignature Language="F#" Value="abstract member UpdateAsync : Azure.Core.RequestContent * Azure.RequestOptions -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.UpdateAsync : Azure.Core.RequestContent * Azure.RequestOptions -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="purviewRelationships.UpdateAsync (content, options)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Analytics.Purview.Catalog</AssemblyName>
@@ -266,19 +507,70 @@
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="requestBody" Type="Azure.Core.RequestContent" />
-        <Parameter Name="requestOptions" Type="Azure.RequestOptions" />
+        <Parameter Name="content" Type="Azure.Core.RequestContent" />
+        <Parameter Name="options" Type="Azure.RequestOptions" />
       </Parameters>
       <Docs>
-        <param name="requestBody"> The request body. </param>
-        <param name="requestOptions"> The request options. </param>
+        <param name="content"> The content to send as the body of the request. </param>
+        <param name="options"> The request options. </param>
         <summary> Update an existing relationship between entities. </summary>
         <returns>To be added.</returns>
         <remarks>
             Schema for <c>Request Body</c>:
-            <list type="table"><listeader><term>Name</term><term>Type</term><term>Required</term><term>Description</term></listeader><item><term>attributes</term><term>Dictionary&lt;string, AnyObject&gt;</term><term /><term> The attributes of the struct. </term></item><item><term>typeName</term><term>string</term><term /><term> The name of the type. </term></item><item><term>lastModifiedTS</term><term>string</term><term /><term> ETag for concurrency control. </term></item><item><term>createTime</term><term>number</term><term /><term> The created time of the record. </term></item><item><term>createdBy</term><term>string</term><term /><term> The user who created the record. </term></item><item><term>end1</term><term>AtlasObjectId</term><term /><term> Reference to an object-instance of an Atlas type - like entity. </term></item><item><term>end2</term><term>AtlasObjectId</term><term /><term> Reference to an object-instance of an Atlas type - like entity. </term></item><item><term>guid</term><term>string</term><term /><term> The GUID of the relationship. </term></item><item><term>homeId</term><term>string</term><term /><term> The home ID of the relationship. </term></item><item><term>label</term><term>string</term><term /><term> The label of the relationship. </term></item><item><term>provenanceType</term><term>number</term><term /><term> Used to record the provenance of an instance of an entity or relationship. </term></item><item><term>status</term><term>"ACTIVE" | "DELETED"</term><term /><term> The enum of relationship status. </term></item><item><term>updateTime</term><term>number</term><term /><term> The update time of the record. </term></item><item><term>updatedBy</term><term>string</term><term /><term> The user who updated the record. </term></item><item><term>version</term><term>number</term><term /><term> The version of the relationship. </term></item></list>
-            Schema for <c>AtlasObjectId</c>:
-            <list type="table"><listeader><term>Name</term><term>Type</term><term>Required</term><term>Description</term></listeader><item><term>guid</term><term>string</term><term /><term> The GUID of the object. </term></item><item><term>typeName</term><term>string</term><term /><term> The name of the type. </term></item><item><term>uniqueAttributes</term><term>Dictionary&lt;string, AnyObject&gt;</term><term /><term> The unique attributes of the object. </term></item></list></remarks>
+            <code>{
+              attributes: Dictionary&lt;string, AnyObject&gt;,
+              typeName: string,
+              lastModifiedTS: string,
+              createTime: number,
+              createdBy: string,
+              end1: {
+                guid: string,
+                typeName: string,
+                uniqueAttributes: Dictionary&lt;string, AnyObject&gt;
+              },
+              end2: AtlasObjectId,
+              guid: string,
+              homeId: string,
+              label: string,
+              provenanceType: number,
+              status: "ACTIVE" | "DELETED",
+              updateTime: number,
+              updatedBy: string,
+              version: number
+            }
+            </code>
+            Schema for <c>Response Body</c>:
+            <code>{
+              attributes: Dictionary&lt;string, AnyObject&gt;,
+              typeName: string,
+              lastModifiedTS: string,
+              createTime: number,
+              createdBy: string,
+              end1: {
+                guid: string,
+                typeName: string,
+                uniqueAttributes: Dictionary&lt;string, AnyObject&gt;
+              },
+              end2: AtlasObjectId,
+              guid: string,
+              homeId: string,
+              label: string,
+              provenanceType: number,
+              status: "ACTIVE" | "DELETED",
+              updateTime: number,
+              updatedBy: string,
+              version: number
+            }
+            </code>
+            Schema for <c>Response Error</c>:
+            <code>{
+              requestId: string,
+              errorCode: string,
+              errorMessage: string
+            }
+            </code></remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="content" /> is null. </exception>
       </Docs>
     </Member>
   </Members>
