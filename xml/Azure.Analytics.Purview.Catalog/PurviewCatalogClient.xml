@@ -50,19 +50,21 @@
         <Parameter Name="options" Type="Azure.Analytics.Purview.Catalog.PurviewCatalogClientOptions" />
       </Parameters>
       <Docs>
-        <param name="endpoint"> The catalog endpoint of your Purview account. Example: https://{accountName}.catalog.purview.azure.com. </param>
+        <param name="endpoint"> The catalog endpoint of your Purview account. Example: https://{accountName}.purview.azure.com. </param>
         <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         <param name="options"> The options for configuring the client. </param>
         <summary> Initializes a new instance of PurviewCatalogClient. </summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="endpoint" /> or <paramref name="credential" /> is null. </exception>
       </Docs>
     </Member>
     <Member MemberName="AutoComplete">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response AutoComplete (Azure.Core.RequestContent requestBody, Azure.RequestOptions requestOptions = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response AutoComplete(class Azure.Core.RequestContent requestBody, class Azure.RequestOptions requestOptions) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response AutoComplete (Azure.Core.RequestContent content, Azure.RequestOptions options = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response AutoComplete(class Azure.Core.RequestContent content, class Azure.RequestOptions options) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Analytics.Purview.Catalog.PurviewCatalogClient.AutoComplete(Azure.Core.RequestContent,Azure.RequestOptions)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function AutoComplete (requestBody As RequestContent, Optional requestOptions As RequestOptions = Nothing) As Response" />
-      <MemberSignature Language="F#" Value="abstract member AutoComplete : Azure.Core.RequestContent * Azure.RequestOptions -&gt; Azure.Response&#xA;override this.AutoComplete : Azure.Core.RequestContent * Azure.RequestOptions -&gt; Azure.Response" Usage="purviewCatalogClient.AutoComplete (requestBody, requestOptions)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function AutoComplete (content As RequestContent, Optional options As RequestOptions = Nothing) As Response" />
+      <MemberSignature Language="F#" Value="abstract member AutoComplete : Azure.Core.RequestContent * Azure.RequestOptions -&gt; Azure.Response&#xA;override this.AutoComplete : Azure.Core.RequestContent * Azure.RequestOptions -&gt; Azure.Response" Usage="purviewCatalogClient.AutoComplete (content, options)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Analytics.Purview.Catalog</AssemblyName>
@@ -72,25 +74,44 @@
         <ReturnType>Azure.Response</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="requestBody" Type="Azure.Core.RequestContent" />
-        <Parameter Name="requestOptions" Type="Azure.RequestOptions" />
+        <Parameter Name="content" Type="Azure.Core.RequestContent" />
+        <Parameter Name="options" Type="Azure.RequestOptions" />
       </Parameters>
       <Docs>
-        <param name="requestBody"> The request body. </param>
-        <param name="requestOptions"> The request options. </param>
+        <param name="content"> The content to send as the body of the request. </param>
+        <param name="options"> The request options. </param>
         <summary> Get auto complete options. </summary>
         <returns>To be added.</returns>
         <remarks>
             Schema for <c>Request Body</c>:
-            <list type="table"><listeader><term>Name</term><term>Type</term><term>Required</term><term>Description</term></listeader><item><term>keywords</term><term>string</term><term /><term> The keywords applied to all fields that support autocomplete operation. It must be at least 1 character, and no more than 100 characters. </term></item><item><term>limit</term><term>number</term><term /><term> The number of autocomplete results we hope to return. The default value is 50. The value must be a number between 1 and 100. </term></item><item><term>filter</term><term>AnyObject</term><term /><term> The filter for the autocomplete request. </term></item></list></remarks>
+            <code>{
+              keywords: string,
+              limit: number,
+              filter: AnyObject
+            }
+            </code>
+            Schema for <c>Response Body</c>:
+            <code>{
+              value: [AutoCompleteResultValue]
+            }
+            </code>
+            Schema for <c>Response Error</c>:
+            <code>{
+              requestId: string,
+              errorCode: string,
+              errorMessage: string
+            }
+            </code></remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="content" /> is null. </exception>
       </Docs>
     </Member>
     <Member MemberName="AutoCompleteAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; AutoCompleteAsync (Azure.Core.RequestContent requestBody, Azure.RequestOptions requestOptions = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; AutoCompleteAsync(class Azure.Core.RequestContent requestBody, class Azure.RequestOptions requestOptions) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; AutoCompleteAsync (Azure.Core.RequestContent content, Azure.RequestOptions options = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; AutoCompleteAsync(class Azure.Core.RequestContent content, class Azure.RequestOptions options) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Analytics.Purview.Catalog.PurviewCatalogClient.AutoCompleteAsync(Azure.Core.RequestContent,Azure.RequestOptions)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function AutoCompleteAsync (requestBody As RequestContent, Optional requestOptions As RequestOptions = Nothing) As Task(Of Response)" />
-      <MemberSignature Language="F#" Value="abstract member AutoCompleteAsync : Azure.Core.RequestContent * Azure.RequestOptions -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.AutoCompleteAsync : Azure.Core.RequestContent * Azure.RequestOptions -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="purviewCatalogClient.AutoCompleteAsync (requestBody, requestOptions)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function AutoCompleteAsync (content As RequestContent, Optional options As RequestOptions = Nothing) As Task(Of Response)" />
+      <MemberSignature Language="F#" Value="abstract member AutoCompleteAsync : Azure.Core.RequestContent * Azure.RequestOptions -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.AutoCompleteAsync : Azure.Core.RequestContent * Azure.RequestOptions -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="purviewCatalogClient.AutoCompleteAsync (content, options)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Analytics.Purview.Catalog</AssemblyName>
@@ -100,17 +121,156 @@
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="requestBody" Type="Azure.Core.RequestContent" />
-        <Parameter Name="requestOptions" Type="Azure.RequestOptions" />
+        <Parameter Name="content" Type="Azure.Core.RequestContent" />
+        <Parameter Name="options" Type="Azure.RequestOptions" />
       </Parameters>
       <Docs>
-        <param name="requestBody"> The request body. </param>
-        <param name="requestOptions"> The request options. </param>
+        <param name="content"> The content to send as the body of the request. </param>
+        <param name="options"> The request options. </param>
         <summary> Get auto complete options. </summary>
         <returns>To be added.</returns>
         <remarks>
             Schema for <c>Request Body</c>:
-            <list type="table"><listeader><term>Name</term><term>Type</term><term>Required</term><term>Description</term></listeader><item><term>keywords</term><term>string</term><term /><term> The keywords applied to all fields that support autocomplete operation. It must be at least 1 character, and no more than 100 characters. </term></item><item><term>limit</term><term>number</term><term /><term> The number of autocomplete results we hope to return. The default value is 50. The value must be a number between 1 and 100. </term></item><item><term>filter</term><term>AnyObject</term><term /><term> The filter for the autocomplete request. </term></item></list></remarks>
+            <code>{
+              keywords: string,
+              limit: number,
+              filter: AnyObject
+            }
+            </code>
+            Schema for <c>Response Body</c>:
+            <code>{
+              value: [AutoCompleteResultValue]
+            }
+            </code>
+            Schema for <c>Response Error</c>:
+            <code>{
+              requestId: string,
+              errorCode: string,
+              errorMessage: string
+            }
+            </code></remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="content" /> is null. </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Browse">
+      <MemberSignature Language="C#" Value="public virtual Azure.Response Browse (Azure.Core.RequestContent content, Azure.RequestOptions options = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response Browse(class Azure.Core.RequestContent content, class Azure.RequestOptions options) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Analytics.Purview.Catalog.PurviewCatalogClient.Browse(Azure.Core.RequestContent,Azure.RequestOptions)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function Browse (content As RequestContent, Optional options As RequestOptions = Nothing) As Response" />
+      <MemberSignature Language="F#" Value="abstract member Browse : Azure.Core.RequestContent * Azure.RequestOptions -&gt; Azure.Response&#xA;override this.Browse : Azure.Core.RequestContent * Azure.RequestOptions -&gt; Azure.Response" Usage="purviewCatalogClient.Browse (content, options)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Analytics.Purview.Catalog</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Response</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="content" Type="Azure.Core.RequestContent" />
+        <Parameter Name="options" Type="Azure.RequestOptions" />
+      </Parameters>
+      <Docs>
+        <param name="content"> The content to send as the body of the request. </param>
+        <param name="options"> The request options. </param>
+        <summary> Browse entities by path or entity type. </summary>
+        <returns>To be added.</returns>
+        <remarks>
+            Schema for <c>Request Body</c>:
+            <code>{
+              entityType: string,
+              path: string,
+              limit: number,
+              offset: number
+            }
+            </code>
+            Schema for <c>Response Body</c>:
+            <code>{
+              @search.count: number,
+              value: [BrowseResultValue]
+            }
+            </code>
+            Schema for <c>Response Error</c>:
+            <code>{
+              requestId: string,
+              errorCode: string,
+              errorMessage: string
+            }
+            </code></remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="content" /> is null. </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="BrowseAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; BrowseAsync (Azure.Core.RequestContent content, Azure.RequestOptions options = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; BrowseAsync(class Azure.Core.RequestContent content, class Azure.RequestOptions options) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Analytics.Purview.Catalog.PurviewCatalogClient.BrowseAsync(Azure.Core.RequestContent,Azure.RequestOptions)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function BrowseAsync (content As RequestContent, Optional options As RequestOptions = Nothing) As Task(Of Response)" />
+      <MemberSignature Language="F#" Value="abstract member BrowseAsync : Azure.Core.RequestContent * Azure.RequestOptions -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.BrowseAsync : Azure.Core.RequestContent * Azure.RequestOptions -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="purviewCatalogClient.BrowseAsync (content, options)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Analytics.Purview.Catalog</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="content" Type="Azure.Core.RequestContent" />
+        <Parameter Name="options" Type="Azure.RequestOptions" />
+      </Parameters>
+      <Docs>
+        <param name="content"> The content to send as the body of the request. </param>
+        <param name="options"> The request options. </param>
+        <summary> Browse entities by path or entity type. </summary>
+        <returns>To be added.</returns>
+        <remarks>
+            Schema for <c>Request Body</c>:
+            <code>{
+              entityType: string,
+              path: string,
+              limit: number,
+              offset: number
+            }
+            </code>
+            Schema for <c>Response Body</c>:
+            <code>{
+              @search.count: number,
+              value: [BrowseResultValue]
+            }
+            </code>
+            Schema for <c>Response Error</c>:
+            <code>{
+              requestId: string,
+              errorCode: string,
+              errorMessage: string
+            }
+            </code></remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="content" /> is null. </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Collections">
+      <MemberSignature Language="C#" Value="public Azure.Analytics.Purview.Catalog.PurviewCollections Collections { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Azure.Analytics.Purview.Catalog.PurviewCollections Collections" />
+      <MemberSignature Language="DocId" Value="P:Azure.Analytics.Purview.Catalog.PurviewCatalogClient.Collections" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Collections As PurviewCollections" />
+      <MemberSignature Language="F#" Value="member this.Collections : Azure.Analytics.Purview.Catalog.PurviewCollections" Usage="Azure.Analytics.Purview.Catalog.PurviewCatalogClient.Collections" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Analytics.Purview.Catalog</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Analytics.Purview.Catalog.PurviewCollections</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Provides access to operations which interact with collections in the catalog.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Entities">
@@ -132,78 +292,6 @@
             Provides access to operations which interact with entities in the catalog.
             </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="GetLineageGraph">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response GetLineageGraph (string guid, string direction, int? depth = default, int? width = default, bool? includeParent = default, bool? getDerivedLineage = default, Azure.RequestOptions requestOptions = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response GetLineageGraph(string guid, string direction, valuetype System.Nullable`1&lt;int32&gt; depth, valuetype System.Nullable`1&lt;int32&gt; width, valuetype System.Nullable`1&lt;bool&gt; includeParent, valuetype System.Nullable`1&lt;bool&gt; getDerivedLineage, class Azure.RequestOptions requestOptions) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Analytics.Purview.Catalog.PurviewCatalogClient.GetLineageGraph(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.Boolean},Azure.RequestOptions)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetLineageGraph (guid As String, direction As String, Optional depth As Nullable(Of Integer) = Nothing, Optional width As Nullable(Of Integer) = Nothing, Optional includeParent As Nullable(Of Boolean) = Nothing, Optional getDerivedLineage As Nullable(Of Boolean) = Nothing, Optional requestOptions As RequestOptions = Nothing) As Response" />
-      <MemberSignature Language="F#" Value="abstract member GetLineageGraph : string * string * Nullable&lt;int&gt; * Nullable&lt;int&gt; * Nullable&lt;bool&gt; * Nullable&lt;bool&gt; * Azure.RequestOptions -&gt; Azure.Response&#xA;override this.GetLineageGraph : string * string * Nullable&lt;int&gt; * Nullable&lt;int&gt; * Nullable&lt;bool&gt; * Nullable&lt;bool&gt; * Azure.RequestOptions -&gt; Azure.Response" Usage="purviewCatalogClient.GetLineageGraph (guid, direction, depth, width, includeParent, getDerivedLineage, requestOptions)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Azure.Analytics.Purview.Catalog</AssemblyName>
-        <AssemblyVersion>1.0.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>Azure.Response</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="guid" Type="System.String" />
-        <Parameter Name="direction" Type="System.String" />
-        <Parameter Name="depth" Type="System.Nullable&lt;System.Int32&gt;" />
-        <Parameter Name="width" Type="System.Nullable&lt;System.Int32&gt;" />
-        <Parameter Name="includeParent" Type="System.Nullable&lt;System.Boolean&gt;" />
-        <Parameter Name="getDerivedLineage" Type="System.Nullable&lt;System.Boolean&gt;" />
-        <Parameter Name="requestOptions" Type="Azure.RequestOptions" />
-      </Parameters>
-      <Docs>
-        <param name="guid"> The globally unique identifier of the entity. </param>
-        <param name="direction"> The direction of the lineage, which could be INPUT, OUTPUT or BOTH. </param>
-        <param name="depth"> The number of hops for lineage. </param>
-        <param name="width"> The number of max expanding width in lineage. </param>
-        <param name="includeParent"> True to include the parent chain in the response. </param>
-        <param name="getDerivedLineage"> True to include derived lineage in the response. </param>
-        <param name="requestOptions"> The request options. </param>
-        <summary> Get lineage info of the entity specified by GUID. </summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="GetLineageGraphAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; GetLineageGraphAsync (string guid, string direction, int? depth = default, int? width = default, bool? includeParent = default, bool? getDerivedLineage = default, Azure.RequestOptions requestOptions = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; GetLineageGraphAsync(string guid, string direction, valuetype System.Nullable`1&lt;int32&gt; depth, valuetype System.Nullable`1&lt;int32&gt; width, valuetype System.Nullable`1&lt;bool&gt; includeParent, valuetype System.Nullable`1&lt;bool&gt; getDerivedLineage, class Azure.RequestOptions requestOptions) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Analytics.Purview.Catalog.PurviewCatalogClient.GetLineageGraphAsync(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.Boolean},Azure.RequestOptions)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetLineageGraphAsync (guid As String, direction As String, Optional depth As Nullable(Of Integer) = Nothing, Optional width As Nullable(Of Integer) = Nothing, Optional includeParent As Nullable(Of Boolean) = Nothing, Optional getDerivedLineage As Nullable(Of Boolean) = Nothing, Optional requestOptions As RequestOptions = Nothing) As Task(Of Response)" />
-      <MemberSignature Language="F#" Value="abstract member GetLineageGraphAsync : string * string * Nullable&lt;int&gt; * Nullable&lt;int&gt; * Nullable&lt;bool&gt; * Nullable&lt;bool&gt; * Azure.RequestOptions -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.GetLineageGraphAsync : string * string * Nullable&lt;int&gt; * Nullable&lt;int&gt; * Nullable&lt;bool&gt; * Nullable&lt;bool&gt; * Azure.RequestOptions -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="purviewCatalogClient.GetLineageGraphAsync (guid, direction, depth, width, includeParent, getDerivedLineage, requestOptions)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Azure.Analytics.Purview.Catalog</AssemblyName>
-        <AssemblyVersion>1.0.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&gt;</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="guid" Type="System.String" />
-        <Parameter Name="direction" Type="System.String" />
-        <Parameter Name="depth" Type="System.Nullable&lt;System.Int32&gt;" />
-        <Parameter Name="width" Type="System.Nullable&lt;System.Int32&gt;" />
-        <Parameter Name="includeParent" Type="System.Nullable&lt;System.Boolean&gt;" />
-        <Parameter Name="getDerivedLineage" Type="System.Nullable&lt;System.Boolean&gt;" />
-        <Parameter Name="requestOptions" Type="Azure.RequestOptions" />
-      </Parameters>
-      <Docs>
-        <param name="guid"> The globally unique identifier of the entity. </param>
-        <param name="direction"> The direction of the lineage, which could be INPUT, OUTPUT or BOTH. </param>
-        <param name="depth"> The number of hops for lineage. </param>
-        <param name="width"> The number of max expanding width in lineage. </param>
-        <param name="includeParent"> True to include the parent chain in the response. </param>
-        <param name="getDerivedLineage"> True to include derived lineage in the response. </param>
-        <param name="requestOptions"> The request options. </param>
-        <summary> Get lineage info of the entity specified by GUID. </summary>
-        <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -229,71 +317,25 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="NextPageLineage">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response NextPageLineage (string guid, string direction, bool? getDerivedLineage = default, int? offset = default, int? limit = default, Azure.RequestOptions requestOptions = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response NextPageLineage(string guid, string direction, valuetype System.Nullable`1&lt;bool&gt; getDerivedLineage, valuetype System.Nullable`1&lt;int32&gt; offset, valuetype System.Nullable`1&lt;int32&gt; limit, class Azure.RequestOptions requestOptions) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Analytics.Purview.Catalog.PurviewCatalogClient.NextPageLineage(System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},Azure.RequestOptions)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function NextPageLineage (guid As String, direction As String, Optional getDerivedLineage As Nullable(Of Boolean) = Nothing, Optional offset As Nullable(Of Integer) = Nothing, Optional limit As Nullable(Of Integer) = Nothing, Optional requestOptions As RequestOptions = Nothing) As Response" />
-      <MemberSignature Language="F#" Value="abstract member NextPageLineage : string * string * Nullable&lt;bool&gt; * Nullable&lt;int&gt; * Nullable&lt;int&gt; * Azure.RequestOptions -&gt; Azure.Response&#xA;override this.NextPageLineage : string * string * Nullable&lt;bool&gt; * Nullable&lt;int&gt; * Nullable&lt;int&gt; * Azure.RequestOptions -&gt; Azure.Response" Usage="purviewCatalogClient.NextPageLineage (guid, direction, getDerivedLineage, offset, limit, requestOptions)" />
-      <MemberType>Method</MemberType>
+    <Member MemberName="Lineages">
+      <MemberSignature Language="C#" Value="public Azure.Analytics.Purview.Catalog.PurviewLineages Lineages { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Azure.Analytics.Purview.Catalog.PurviewLineages Lineages" />
+      <MemberSignature Language="DocId" Value="P:Azure.Analytics.Purview.Catalog.PurviewCatalogClient.Lineages" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Lineages As PurviewLineages" />
+      <MemberSignature Language="F#" Value="member this.Lineages : Azure.Analytics.Purview.Catalog.PurviewLineages" Usage="Azure.Analytics.Purview.Catalog.PurviewCatalogClient.Lineages" />
+      <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Analytics.Purview.Catalog</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>Azure.Response</ReturnType>
+        <ReturnType>Azure.Analytics.Purview.Catalog.PurviewLineages</ReturnType>
       </ReturnValue>
-      <Parameters>
-        <Parameter Name="guid" Type="System.String" />
-        <Parameter Name="direction" Type="System.String" />
-        <Parameter Name="getDerivedLineage" Type="System.Nullable&lt;System.Boolean&gt;" />
-        <Parameter Name="offset" Type="System.Nullable&lt;System.Int32&gt;" />
-        <Parameter Name="limit" Type="System.Nullable&lt;System.Int32&gt;" />
-        <Parameter Name="requestOptions" Type="Azure.RequestOptions" />
-      </Parameters>
       <Docs>
-        <param name="guid"> The globally unique identifier of the entity. </param>
-        <param name="direction"> The direction of the lineage, which could be INPUT, OUTPUT or BOTH. </param>
-        <param name="getDerivedLineage"> True to include derived lineage in the response. </param>
-        <param name="offset"> The offset for pagination purpose. </param>
-        <param name="limit"> The page size - by default there is no paging. </param>
-        <param name="requestOptions"> The request options. </param>
-        <summary> Return immediate next page lineage info about entity with pagination. </summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="NextPageLineageAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; NextPageLineageAsync (string guid, string direction, bool? getDerivedLineage = default, int? offset = default, int? limit = default, Azure.RequestOptions requestOptions = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; NextPageLineageAsync(string guid, string direction, valuetype System.Nullable`1&lt;bool&gt; getDerivedLineage, valuetype System.Nullable`1&lt;int32&gt; offset, valuetype System.Nullable`1&lt;int32&gt; limit, class Azure.RequestOptions requestOptions) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Analytics.Purview.Catalog.PurviewCatalogClient.NextPageLineageAsync(System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},Azure.RequestOptions)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function NextPageLineageAsync (guid As String, direction As String, Optional getDerivedLineage As Nullable(Of Boolean) = Nothing, Optional offset As Nullable(Of Integer) = Nothing, Optional limit As Nullable(Of Integer) = Nothing, Optional requestOptions As RequestOptions = Nothing) As Task(Of Response)" />
-      <MemberSignature Language="F#" Value="abstract member NextPageLineageAsync : string * string * Nullable&lt;bool&gt; * Nullable&lt;int&gt; * Nullable&lt;int&gt; * Azure.RequestOptions -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.NextPageLineageAsync : string * string * Nullable&lt;bool&gt; * Nullable&lt;int&gt; * Nullable&lt;int&gt; * Azure.RequestOptions -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="purviewCatalogClient.NextPageLineageAsync (guid, direction, getDerivedLineage, offset, limit, requestOptions)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Azure.Analytics.Purview.Catalog</AssemblyName>
-        <AssemblyVersion>1.0.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&gt;</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="guid" Type="System.String" />
-        <Parameter Name="direction" Type="System.String" />
-        <Parameter Name="getDerivedLineage" Type="System.Nullable&lt;System.Boolean&gt;" />
-        <Parameter Name="offset" Type="System.Nullable&lt;System.Int32&gt;" />
-        <Parameter Name="limit" Type="System.Nullable&lt;System.Int32&gt;" />
-        <Parameter Name="requestOptions" Type="Azure.RequestOptions" />
-      </Parameters>
-      <Docs>
-        <param name="guid"> The globally unique identifier of the entity. </param>
-        <param name="direction"> The direction of the lineage, which could be INPUT, OUTPUT or BOTH. </param>
-        <param name="getDerivedLineage"> True to include derived lineage in the response. </param>
-        <param name="offset"> The offset for pagination purpose. </param>
-        <param name="limit"> The page size - by default there is no paging. </param>
-        <param name="requestOptions"> The request options. </param>
-        <summary> Return immediate next page lineage info about entity with pagination. </summary>
-        <returns>To be added.</returns>
+        <summary>
+            Provides access to operations which interact with lineages in the catalog.
+            </summary>
+        <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -340,11 +382,11 @@
       </Docs>
     </Member>
     <Member MemberName="Search">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response Search (Azure.Core.RequestContent requestBody, Azure.RequestOptions requestOptions = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response Search(class Azure.Core.RequestContent requestBody, class Azure.RequestOptions requestOptions) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response Search (Azure.Core.RequestContent content, Azure.RequestOptions options = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response Search(class Azure.Core.RequestContent content, class Azure.RequestOptions options) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Analytics.Purview.Catalog.PurviewCatalogClient.Search(Azure.Core.RequestContent,Azure.RequestOptions)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function Search (requestBody As RequestContent, Optional requestOptions As RequestOptions = Nothing) As Response" />
-      <MemberSignature Language="F#" Value="abstract member Search : Azure.Core.RequestContent * Azure.RequestOptions -&gt; Azure.Response&#xA;override this.Search : Azure.Core.RequestContent * Azure.RequestOptions -&gt; Azure.Response" Usage="purviewCatalogClient.Search (requestBody, requestOptions)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function Search (content As RequestContent, Optional options As RequestOptions = Nothing) As Response" />
+      <MemberSignature Language="F#" Value="abstract member Search : Azure.Core.RequestContent * Azure.RequestOptions -&gt; Azure.Response&#xA;override this.Search : Azure.Core.RequestContent * Azure.RequestOptions -&gt; Azure.Response" Usage="purviewCatalogClient.Search (content, options)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Analytics.Purview.Catalog</AssemblyName>
@@ -354,29 +396,71 @@
         <ReturnType>Azure.Response</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="requestBody" Type="Azure.Core.RequestContent" />
-        <Parameter Name="requestOptions" Type="Azure.RequestOptions" />
+        <Parameter Name="content" Type="Azure.Core.RequestContent" />
+        <Parameter Name="options" Type="Azure.RequestOptions" />
       </Parameters>
       <Docs>
-        <param name="requestBody"> The request body. </param>
-        <param name="requestOptions"> The request options. </param>
+        <param name="content"> The content to send as the body of the request. </param>
+        <param name="options"> The request options. </param>
         <summary> Gets data using search. </summary>
         <returns>To be added.</returns>
         <remarks>
             Schema for <c>Request Body</c>:
-            <list type="table"><listeader><term>Name</term><term>Type</term><term>Required</term><term>Description</term></listeader><item><term>keywords</term><term>string</term><term /><term> The keywords applied to all searchable fields. </term></item><item><term>offset</term><term>number</term><term /><term> The offset. The default value is 0. </term></item><item><term>limit</term><term>number</term><term /><term> The limit of the number of the search result. default value is 50; maximum value is 1000. </term></item><item><term>filter</term><term>AnyObject</term><term /><term> The filter for the search. See examples for the usage of supported filters. </term></item><item><term>facets</term><term>SearchFacetItem[]</term><term /><term /></item><item><term>taxonomySetting</term><term>SearchRequestTaxonomySetting</term><term /><term /></item></list>
-            Schema for <c>SearchRequestTaxonomySetting</c>:
-            <list type="table"><listeader><term>Name</term><term>Type</term><term>Required</term><term>Description</term></listeader><item><term>assetTypes</term><term>string[]</term><term /><term /></item><item><term>facet</term><term>SearchFacetItem</term><term /><term> The content of a search facet result item. </term></item></list>
-            Schema for <c>SearchFacetItem</c>:
-            <list type="table"><listeader><term>Name</term><term>Type</term><term>Required</term><term>Description</term></listeader><item><term>count</term><term>number</term><term /><term> The count of the facet item. </term></item><item><term>facet</term><term>string</term><term /><term> The name of the facet item. </term></item><item><term>sort</term><term>AnyObject</term><term /><term> Any object. </term></item></list></remarks>
+            <code>{
+              keywords: string,
+              offset: number,
+              limit: number,
+              filter: AnyObject,
+              facets: [
+                {
+                  count: number,
+                  facet: string,
+                  sort: AnyObject
+                }
+              ],
+              taxonomySetting: {
+                assetTypes: [string],
+                facet: SearchFacetItem
+              }
+            }
+            </code>
+            Schema for <c>Response Body</c>:
+            <code>{
+              @search.count: number,
+              @search.facets: {
+                assetType: [
+                  {
+                    count: number,
+                    value: string
+                  }
+                ],
+                classification: [SearchFacetItemValue],
+                classificationCategory: [SearchFacetItemValue],
+                contactId: [SearchFacetItemValue],
+                fileExtension: [SearchFacetItemValue],
+                label: [SearchFacetItemValue],
+                term: [SearchFacetItemValue]
+              },
+              value: [SearchResultValue]
+            }
+            </code>
+            Schema for <c>Response Error</c>:
+            <code>{
+              requestId: string,
+              errorCode: string,
+              errorMessage: string
+            }
+            </code></remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="content" /> is null. </exception>
       </Docs>
     </Member>
     <Member MemberName="SearchAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; SearchAsync (Azure.Core.RequestContent requestBody, Azure.RequestOptions requestOptions = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; SearchAsync(class Azure.Core.RequestContent requestBody, class Azure.RequestOptions requestOptions) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; SearchAsync (Azure.Core.RequestContent content, Azure.RequestOptions options = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; SearchAsync(class Azure.Core.RequestContent content, class Azure.RequestOptions options) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Analytics.Purview.Catalog.PurviewCatalogClient.SearchAsync(Azure.Core.RequestContent,Azure.RequestOptions)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function SearchAsync (requestBody As RequestContent, Optional requestOptions As RequestOptions = Nothing) As Task(Of Response)" />
-      <MemberSignature Language="F#" Value="abstract member SearchAsync : Azure.Core.RequestContent * Azure.RequestOptions -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.SearchAsync : Azure.Core.RequestContent * Azure.RequestOptions -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="purviewCatalogClient.SearchAsync (requestBody, requestOptions)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function SearchAsync (content As RequestContent, Optional options As RequestOptions = Nothing) As Task(Of Response)" />
+      <MemberSignature Language="F#" Value="abstract member SearchAsync : Azure.Core.RequestContent * Azure.RequestOptions -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.SearchAsync : Azure.Core.RequestContent * Azure.RequestOptions -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="purviewCatalogClient.SearchAsync (content, options)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Analytics.Purview.Catalog</AssemblyName>
@@ -386,29 +470,71 @@
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="requestBody" Type="Azure.Core.RequestContent" />
-        <Parameter Name="requestOptions" Type="Azure.RequestOptions" />
+        <Parameter Name="content" Type="Azure.Core.RequestContent" />
+        <Parameter Name="options" Type="Azure.RequestOptions" />
       </Parameters>
       <Docs>
-        <param name="requestBody"> The request body. </param>
-        <param name="requestOptions"> The request options. </param>
+        <param name="content"> The content to send as the body of the request. </param>
+        <param name="options"> The request options. </param>
         <summary> Gets data using search. </summary>
         <returns>To be added.</returns>
         <remarks>
             Schema for <c>Request Body</c>:
-            <list type="table"><listeader><term>Name</term><term>Type</term><term>Required</term><term>Description</term></listeader><item><term>keywords</term><term>string</term><term /><term> The keywords applied to all searchable fields. </term></item><item><term>offset</term><term>number</term><term /><term> The offset. The default value is 0. </term></item><item><term>limit</term><term>number</term><term /><term> The limit of the number of the search result. default value is 50; maximum value is 1000. </term></item><item><term>filter</term><term>AnyObject</term><term /><term> The filter for the search. See examples for the usage of supported filters. </term></item><item><term>facets</term><term>SearchFacetItem[]</term><term /><term /></item><item><term>taxonomySetting</term><term>SearchRequestTaxonomySetting</term><term /><term /></item></list>
-            Schema for <c>SearchRequestTaxonomySetting</c>:
-            <list type="table"><listeader><term>Name</term><term>Type</term><term>Required</term><term>Description</term></listeader><item><term>assetTypes</term><term>string[]</term><term /><term /></item><item><term>facet</term><term>SearchFacetItem</term><term /><term> The content of a search facet result item. </term></item></list>
-            Schema for <c>SearchFacetItem</c>:
-            <list type="table"><listeader><term>Name</term><term>Type</term><term>Required</term><term>Description</term></listeader><item><term>count</term><term>number</term><term /><term> The count of the facet item. </term></item><item><term>facet</term><term>string</term><term /><term> The name of the facet item. </term></item><item><term>sort</term><term>AnyObject</term><term /><term> Any object. </term></item></list></remarks>
+            <code>{
+              keywords: string,
+              offset: number,
+              limit: number,
+              filter: AnyObject,
+              facets: [
+                {
+                  count: number,
+                  facet: string,
+                  sort: AnyObject
+                }
+              ],
+              taxonomySetting: {
+                assetTypes: [string],
+                facet: SearchFacetItem
+              }
+            }
+            </code>
+            Schema for <c>Response Body</c>:
+            <code>{
+              @search.count: number,
+              @search.facets: {
+                assetType: [
+                  {
+                    count: number,
+                    value: string
+                  }
+                ],
+                classification: [SearchFacetItemValue],
+                classificationCategory: [SearchFacetItemValue],
+                contactId: [SearchFacetItemValue],
+                fileExtension: [SearchFacetItemValue],
+                label: [SearchFacetItemValue],
+                term: [SearchFacetItemValue]
+              },
+              value: [SearchResultValue]
+            }
+            </code>
+            Schema for <c>Response Error</c>:
+            <code>{
+              requestId: string,
+              errorCode: string,
+              errorMessage: string
+            }
+            </code></remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="content" /> is null. </exception>
       </Docs>
     </Member>
     <Member MemberName="Suggest">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response Suggest (Azure.Core.RequestContent requestBody, Azure.RequestOptions requestOptions = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response Suggest(class Azure.Core.RequestContent requestBody, class Azure.RequestOptions requestOptions) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response Suggest (Azure.Core.RequestContent content, Azure.RequestOptions options = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response Suggest(class Azure.Core.RequestContent content, class Azure.RequestOptions options) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Analytics.Purview.Catalog.PurviewCatalogClient.Suggest(Azure.Core.RequestContent,Azure.RequestOptions)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function Suggest (requestBody As RequestContent, Optional requestOptions As RequestOptions = Nothing) As Response" />
-      <MemberSignature Language="F#" Value="abstract member Suggest : Azure.Core.RequestContent * Azure.RequestOptions -&gt; Azure.Response&#xA;override this.Suggest : Azure.Core.RequestContent * Azure.RequestOptions -&gt; Azure.Response" Usage="purviewCatalogClient.Suggest (requestBody, requestOptions)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function Suggest (content As RequestContent, Optional options As RequestOptions = Nothing) As Response" />
+      <MemberSignature Language="F#" Value="abstract member Suggest : Azure.Core.RequestContent * Azure.RequestOptions -&gt; Azure.Response&#xA;override this.Suggest : Azure.Core.RequestContent * Azure.RequestOptions -&gt; Azure.Response" Usage="purviewCatalogClient.Suggest (content, options)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Analytics.Purview.Catalog</AssemblyName>
@@ -418,25 +544,44 @@
         <ReturnType>Azure.Response</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="requestBody" Type="Azure.Core.RequestContent" />
-        <Parameter Name="requestOptions" Type="Azure.RequestOptions" />
+        <Parameter Name="content" Type="Azure.Core.RequestContent" />
+        <Parameter Name="options" Type="Azure.RequestOptions" />
       </Parameters>
       <Docs>
-        <param name="requestBody"> The request body. </param>
-        <param name="requestOptions"> The request options. </param>
+        <param name="content"> The content to send as the body of the request. </param>
+        <param name="options"> The request options. </param>
         <summary> Get search suggestions by query criteria. </summary>
         <returns>To be added.</returns>
         <remarks>
             Schema for <c>Request Body</c>:
-            <list type="table"><listeader><term>Name</term><term>Type</term><term>Required</term><term>Description</term></listeader><item><term>keywords</term><term>string</term><term /><term> The keywords applied to all fields that support suggest operation. It must be at least 1 character, and no more than 100 characters. In the index schema we defined a default suggester which lists all the supported fields and specifies a search mode. </term></item><item><term>limit</term><term>number</term><term /><term> The number of suggestions we hope to return. The default value is 5. The value must be a number between 1 and 100. </term></item><item><term>filter</term><term>AnyObject</term><term /><term> The filter for the search. </term></item></list></remarks>
+            <code>{
+              keywords: string,
+              limit: number,
+              filter: AnyObject
+            }
+            </code>
+            Schema for <c>Response Body</c>:
+            <code>{
+              value: [SuggestResultValue]
+            }
+            </code>
+            Schema for <c>Response Error</c>:
+            <code>{
+              requestId: string,
+              errorCode: string,
+              errorMessage: string
+            }
+            </code></remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="content" /> is null. </exception>
       </Docs>
     </Member>
     <Member MemberName="SuggestAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; SuggestAsync (Azure.Core.RequestContent requestBody, Azure.RequestOptions requestOptions = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; SuggestAsync(class Azure.Core.RequestContent requestBody, class Azure.RequestOptions requestOptions) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; SuggestAsync (Azure.Core.RequestContent content, Azure.RequestOptions options = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; SuggestAsync(class Azure.Core.RequestContent content, class Azure.RequestOptions options) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Analytics.Purview.Catalog.PurviewCatalogClient.SuggestAsync(Azure.Core.RequestContent,Azure.RequestOptions)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function SuggestAsync (requestBody As RequestContent, Optional requestOptions As RequestOptions = Nothing) As Task(Of Response)" />
-      <MemberSignature Language="F#" Value="abstract member SuggestAsync : Azure.Core.RequestContent * Azure.RequestOptions -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.SuggestAsync : Azure.Core.RequestContent * Azure.RequestOptions -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="purviewCatalogClient.SuggestAsync (requestBody, requestOptions)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function SuggestAsync (content As RequestContent, Optional options As RequestOptions = Nothing) As Task(Of Response)" />
+      <MemberSignature Language="F#" Value="abstract member SuggestAsync : Azure.Core.RequestContent * Azure.RequestOptions -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.SuggestAsync : Azure.Core.RequestContent * Azure.RequestOptions -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="purviewCatalogClient.SuggestAsync (content, options)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Analytics.Purview.Catalog</AssemblyName>
@@ -446,17 +591,36 @@
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="requestBody" Type="Azure.Core.RequestContent" />
-        <Parameter Name="requestOptions" Type="Azure.RequestOptions" />
+        <Parameter Name="content" Type="Azure.Core.RequestContent" />
+        <Parameter Name="options" Type="Azure.RequestOptions" />
       </Parameters>
       <Docs>
-        <param name="requestBody"> The request body. </param>
-        <param name="requestOptions"> The request options. </param>
+        <param name="content"> The content to send as the body of the request. </param>
+        <param name="options"> The request options. </param>
         <summary> Get search suggestions by query criteria. </summary>
         <returns>To be added.</returns>
         <remarks>
             Schema for <c>Request Body</c>:
-            <list type="table"><listeader><term>Name</term><term>Type</term><term>Required</term><term>Description</term></listeader><item><term>keywords</term><term>string</term><term /><term> The keywords applied to all fields that support suggest operation. It must be at least 1 character, and no more than 100 characters. In the index schema we defined a default suggester which lists all the supported fields and specifies a search mode. </term></item><item><term>limit</term><term>number</term><term /><term> The number of suggestions we hope to return. The default value is 5. The value must be a number between 1 and 100. </term></item><item><term>filter</term><term>AnyObject</term><term /><term> The filter for the search. </term></item></list></remarks>
+            <code>{
+              keywords: string,
+              limit: number,
+              filter: AnyObject
+            }
+            </code>
+            Schema for <c>Response Body</c>:
+            <code>{
+              value: [SuggestResultValue]
+            }
+            </code>
+            Schema for <c>Response Error</c>:
+            <code>{
+              requestId: string,
+              errorCode: string,
+              errorMessage: string
+            }
+            </code></remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="content" /> is null. </exception>
       </Docs>
     </Member>
     <Member MemberName="Types">
