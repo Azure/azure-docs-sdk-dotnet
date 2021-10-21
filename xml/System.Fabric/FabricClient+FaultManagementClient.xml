@@ -1749,6 +1749,9 @@
             This overload uses random node selected from current node list, where primary replica does
             not exist at the time of API call for moving primary replica.
             This API is safe i.e. it will not cause quorum or data loss by itself unless additional faults or failures happen at the same time.
+            Starting with Service Fabric 7.1, **Move-ServiceFabricPrimaryReplica** takes aligned affinity into consideration. If the primary to be moved is a part of an aligned affinity relationship,
+            then all  replicas in that relationship will be moved together. If the primary replicas of such services are are not completely able to move within specified timeout, an exception will be 
+            thrown (FabricErrorCode.AsyncOperationNotComplete) indicating the services are temporarily in a torn aligned affinity state. To remediate, issue the operation again.
             </remarks>
         <exception cref="T:System.TimeoutException">Retry is exhausted.</exception>
         <exception cref="T:System.InvalidOperationException">Invalid operation
@@ -1759,6 +1762,7 @@
             FabricErrorCode.NotReady - If Primary replica is not ready for movement
             FabricErrorCode.AlreadyPrimaryReplica - If Primary replica for selected partition already exist on new node
             FabricErrorCode.ConstraintNotSatisfied - If the constraints for the new location of the replica would prohibit the move
+            FabricErrorCode.AsyncOperationNotComplete - Services are temporarily in a torn aligned affinity state
             </exception>
       </Docs>
     </Member>
@@ -1792,6 +1796,9 @@
             This overload uses random node selected from current node list, where primary replica does
             not exist at the time of API call for moving primary replica.
             This API is safe i.e. it will not cause quorum or data loss by itself unless additional faults or failures happen at the same time.
+            Starting with Service Fabric 7.1, **Move-ServiceFabricPrimaryReplica** takes aligned affinity into consideration. If the primary to be moved is a part of an aligned affinity relationship,
+            then all  replicas in that relationship will be moved together. If the primary replicas of such services are are not completely able to move within specified timeout, an exception will be 
+            thrown (FabricErrorCode.AsyncOperationNotComplete) indicating the services are temporarily in a torn aligned affinity state. To remediate, issue the operation again.
             </remarks>
         <exception cref="T:System.TimeoutException">Retry is exhausted.</exception>
         <exception cref="T:System.InvalidOperationException">Invalid operation
@@ -1802,6 +1809,7 @@
             FabricErrorCode.NotReady - If Primary replica is not ready for movement
             FabricErrorCode.AlreadyPrimaryReplica - If Primary replica for selected partition already exist on new node
             FabricErrorCode.ConstraintNotSatisfied - If the constraints for the new location of the replica would prohibit the move
+            FabricErrorCode.AsyncOperationNotComplete - Services are temporarily in a torn aligned affinity state
             </exception>
       </Docs>
     </Member>
@@ -1834,6 +1842,9 @@
             This overload uses random node selected from current node list, where primary replica does
             not exist at the time of API call for moving primary replica.
             This API is safe i.e. it will not cause quorum or data loss by itself unless additional faults or failures happen at the same time.
+            Starting with Service Fabric 7.1, **Move-ServiceFabricPrimaryReplica** takes aligned affinity into consideration. If the primary to be moved is a part of an aligned affinity relationship,
+            then all  replicas in that relationship will be moved together. If the primary replicas of such services are are not completely able to move within specified timeout, an exception will be 
+            thrown (FabricErrorCode.AsyncOperationNotComplete) indicating the services are temporarily in a torn aligned affinity state. To remediate, issue the operation again.
             </remarks>
         <exception cref="T:System.TimeoutException">Retry is exhausted.</exception>
         <exception cref="T:System.InvalidOperationException">Invalid operation
@@ -1844,6 +1855,7 @@
             FabricErrorCode.NotReady - If Primary replica is not ready for movement
             FabricErrorCode.AlreadyPrimaryReplica - If Primary replica for selected partition already exist on new node
             FabricErrorCode.ConstraintNotSatisfied - If the constraints for the new location of the replica would prohibit the move
+            FabricErrorCode.AsyncOperationNotComplete - Services are temporarily in a torn aligned affinity state
             </exception>
       </Docs>
     </Member>
@@ -1875,6 +1887,9 @@
         <remarks>
             API uses the primary replica of the selected partition to move to new node location specified by nodeName.
             This API is safe i.e. it will not cause quorum or data loss by itself unless additional faults or failures happen at the same time.
+            Starting with Service Fabric 7.1, **Move-ServiceFabricPrimaryReplica** takes aligned affinity into consideration. If the primary to be moved is a part of an aligned affinity relationship,
+            then all  replicas in that relationship will be moved together. If the primary replicas of such services are are not completely able to move within specified timeout, an exception will be 
+            thrown (FabricErrorCode.AsyncOperationNotComplete) indicating the services are temporarily in a torn aligned affinity state. To remediate, issue the operation again.
             </remarks>
         <exception cref="T:System.TimeoutException">Retry is exhausted.</exception>
         <exception cref="T:System.InvalidOperationException">Invalid operation
@@ -1885,6 +1900,7 @@
             FabricErrorCode.NotReady - If Primary replica is not ready for movement
             FabricErrorCode.AlreadyPrimaryReplica - If Primary replica for selected partition already exist on new node
             FabricErrorCode.ConstraintNotSatisfied - If the constraints for the new location of the replica would prohibit the move
+            FabricErrorCode.AsyncOperationNotComplete - Services are temporarily in a torn aligned affinity state
             </exception>
       </Docs>
     </Member>
@@ -1919,6 +1935,9 @@
             This overload uses random node selected from current node list, where primary replica does
             not exist at the time of API call for moving primary replica.
             This API is safe i.e. it will not cause quorum or data loss by itself unless additional faults or failures happen at the same time.
+            Starting with Service Fabric 7.1, **Move-ServiceFabricPrimaryReplica** takes aligned affinity into consideration. If the primary to be moved is a part of an aligned affinity relationship,
+            then all  replicas in that relationship will be moved together. If the primary replicas of such services are are not completely able to move within specified timeout, an exception will be 
+            thrown (FabricErrorCode.AsyncOperationNotComplete) indicating the services are temporarily in a torn aligned affinity state. To remediate, issue the operation again.
             </remarks>
         <exception cref="T:System.TimeoutException">Retry is exhausted.</exception>
         <exception cref="T:System.InvalidOperationException">Invalid operation
@@ -1929,6 +1948,7 @@
             FabricErrorCode.NotReady - If Primary replica is not ready for movement
             FabricErrorCode.AlreadyPrimaryReplica - If Primary replica for selected partition already exist on new node
             FabricErrorCode.ConstraintNotSatisfied - If the constraints for the new location of the replica would prohibit the move
+            FabricErrorCode.AsyncOperationNotComplete - Services are temporarily in a torn aligned affinity state
             </exception>
       </Docs>
     </Member>
@@ -1956,24 +1976,29 @@
         <param name="operationTimeout">The timeout for this API call.</param>
         <param name="token">The cancellation token</param>
         <summary>
-            Moves selected primary replica to new node in the cluster.
-            </summary>
+             Moves selected primary replica to new node in the cluster.
+             </summary>
         <returns>A task with move primary result</returns>
         <remarks>
-            API uses the primary replica of the selected partition to move to new node location.
-            This overload uses random node selected from current node list, where primary replica does
-            not exist at the time of API call for moving primary replica.
-            This API is safe i.e. it will not cause quorum or data loss by itself unless additional faults or failures happen at the same time.</remarks>
+             API uses the primary replica of the selected partition to move to new node location.
+             This overload uses random node selected from current node list, where primary replica does
+             not exist at the time of API call for moving primary replica.
+             This API is safe i.e. it will not cause quorum or data loss by itself unless additional faults or failures happen at the same time.
+             Starting with Service Fabric 7.1, **Move-ServiceFabricPrimaryReplica** takes aligned affinity into consideration. If the primary to be moved is a part of an aligned affinity relationship,
+             then all  replicas in that relationship will be moved together. If the primary replicas of such services are are not completely able to move within specified timeout, an exception will be 
+             thrown (FabricErrorCode.AsyncOperationNotComplete) indicating the services are temporarily in a torn aligned affinity state. To remediate, issue the operation again.
+            </remarks>
         <exception cref="T:System.TimeoutException">Retry is exhausted.</exception>
         <exception cref="T:System.InvalidOperationException">Invalid operation
-            - If action called on stateless service.
-            - If not enough nodes available for action
-            </exception>
+             - If action called on stateless service.
+             - If not enough nodes available for action
+             </exception>
         <exception cref="T:System.Fabric.FabricException">
-            FabricErrorCode.NotReady - If Primary replica is not ready for movement
-            FabricErrorCode.AlreadyPrimaryReplica - If Primary replica for selected partition already exist on new node
-            FabricErrorCode.ConstraintNotSatisfied - If the constraints for the new location of the replica would prohibit the move
-            </exception>
+             FabricErrorCode.NotReady - If Primary replica is not ready for movement
+             FabricErrorCode.AlreadyPrimaryReplica - If Primary replica for selected partition already exist on new node
+             FabricErrorCode.ConstraintNotSatisfied - If the constraints for the new location of the replica would prohibit the move
+             FabricErrorCode.AsyncOperationNotComplete - Services are temporarily in a torn aligned affinity state
+             </exception>
       </Docs>
     </Member>
     <Member MemberName="MovePrimaryAsync">
@@ -2006,6 +2031,9 @@
         <remarks>
              API uses the primary replica of the selected partition to move to new node location specified by nodeName.
              This API is safe i.e. it will not cause quorum or data loss by itself unless additional faults or failures happen at the same time.
+             Starting with Service Fabric 7.1, **Move-ServiceFabricPrimaryReplica** takes aligned affinity into consideration. If the primary to be moved is a part of an aligned affinity relationship,
+             then all  replicas in that relationship will be moved together. If the primary replicas of such services are are not completely able to move within specified timeout, an exception will be 
+             thrown (FabricErrorCode.AsyncOperationNotComplete) indicating the services are temporarily in a torn aligned affinity state. To remediate, issue the operation again.
              </remarks>
         <exception cref="T:System.TimeoutException">Retry is exhausted.</exception>
         <exception cref="T:System.InvalidOperationException">Invalid operation
@@ -2016,6 +2044,7 @@
              FabricErrorCode.NotReady - If Primary replica is not ready for movement
              FabricErrorCode.AlreadyPrimaryReplica - If Primary replica for selected partition already exist on new node
              FabricErrorCode.ConstraintNotSatisfied - If the constraints for the new location of the replica would prohibit the move
+             FabricErrorCode.AsyncOperationNotComplete - Services are temporarily in a torn aligned affinity state
              </exception>
       </Docs>
     </Member>
@@ -2049,6 +2078,9 @@
         <remarks>
              API uses the primary replica of the selected partition to move to new node location specified by nodeName.
              This API is safe i.e. it will not cause quorum or data loss by itself unless additional faults or failures happen at the same time.
+             Starting with Service Fabric 7.1, **Move-ServiceFabricPrimaryReplica** takes aligned affinity into consideration. If the primary to be moved is a part of an aligned affinity relationship,
+             then all  replicas in that relationship will be moved together. If the primary replicas of such services are are not completely able to move within specified timeout, an exception will be 
+             thrown (FabricErrorCode.AsyncOperationNotComplete) indicating the services are temporarily in a torn aligned affinity state. To remediate, issue the operation again.
              </remarks>
         <exception cref="T:System.TimeoutException">Retry is exhausted.</exception>
         <exception cref="T:System.InvalidOperationException">Invalid operation
@@ -2059,6 +2091,7 @@
              FabricErrorCode.NotReady - If Primary replica is not ready for movement
              FabricErrorCode.AlreadyPrimaryReplica - If Primary replica for selected partition already exist on new node
              FabricErrorCode.ConstraintNotSatisfied - If the constraints for the new location of the replica would prohibit the move
+             FabricErrorCode.AsyncOperationNotComplete - Services are temporarily in a torn aligned affinity state
              </exception>
       </Docs>
     </Member>
@@ -2088,24 +2121,29 @@
         <param name="operationTimeout">The timeout for this API call.</param>
         <param name="token">The cancellation token</param>
         <summary>
-            Moves selected primary replica to new node in the cluster.
-            </summary>
+             Moves selected primary replica to new node in the cluster.
+             </summary>
         <returns>A task with move primary result</returns>
         <remarks>
-            API uses the primary replica of the selected partition to move to new node location.
-            This overload uses random node selected from current node list, where primary replica does
-            not exist at the time of API call for moving primary replica.
-            This API is safe i.e. it will not cause quorum or data loss by itself unless additional faults or failures happen at the same time.</remarks>
+             API uses the primary replica of the selected partition to move to new node location.
+             This overload uses random node selected from current node list, where primary replica does
+             not exist at the time of API call for moving primary replica.
+             This API is safe i.e. it will not cause quorum or data loss by itself unless additional faults or failures happen at the same time.
+             Starting with Service Fabric 7.1, **Move-ServiceFabricPrimaryReplica** takes aligned affinity into consideration. If the primary to be moved is a part of an aligned affinity relationship,
+             then all  replicas in that relationship will be moved together. If the primary replicas of such services are are not completely able to move within specified timeout, an exception will be 
+             thrown (FabricErrorCode.AsyncOperationNotComplete) indicating the services are temporarily in a torn aligned affinity state. To remediate, issue the operation again.
+            </remarks>
         <exception cref="T:System.TimeoutException">Retry is exhausted.</exception>
         <exception cref="T:System.InvalidOperationException">Invalid operation
-            - If action called on stateless service.
-            - If not enough nodes available for action
-            </exception>
+             - If action called on stateless service.
+             - If not enough nodes available for action
+             </exception>
         <exception cref="T:System.Fabric.FabricException">
-            FabricErrorCode.NotReady - If Primary replica is not ready for movement
-            FabricErrorCode.AlreadyPrimaryReplica - If Primary replica for selected partition already exist on new node
-            FabricErrorCode.ConstraintNotSatisfied - If the constraints for the new location of the replica would prohibit the move
-            </exception>
+             FabricErrorCode.NotReady - If Primary replica is not ready for movement
+             FabricErrorCode.AlreadyPrimaryReplica - If Primary replica for selected partition already exist on new node
+             FabricErrorCode.ConstraintNotSatisfied - If the constraints for the new location of the replica would prohibit the move
+             FabricErrorCode.AsyncOperationNotComplete - Services are temporarily in a torn aligned affinity state
+             </exception>
       </Docs>
     </Member>
     <Member MemberName="MovePrimaryAsync">
@@ -2140,6 +2178,9 @@
         <remarks>
              API uses the primary replica of the selected partition to move to new node location specified by nodeName.
              This API is safe i.e. it will not cause quorum or data loss by itself unless additional faults or failures happen at the same time.
+             Starting with Service Fabric 7.1, **Move-ServiceFabricPrimaryReplica** takes aligned affinity into consideration. If the primary to be moved is a part of an aligned affinity relationship,
+             then all  replicas in that relationship will be moved together. If the primary replicas of such services are are not completely able to move within specified timeout, an exception will be 
+             thrown (FabricErrorCode.AsyncOperationNotComplete) indicating the services are temporarily in a torn aligned affinity state. To remediate, issue the operation again.
              </remarks>
         <exception cref="T:System.TimeoutException">Retry is exhausted.</exception>
         <exception cref="T:System.InvalidOperationException">Invalid operation
@@ -2150,6 +2191,7 @@
              FabricErrorCode.NotReady - If Primary replica is not ready for movement
              FabricErrorCode.AlreadyPrimaryReplica - If Primary replica for selected partition already exist on new node
              FabricErrorCode.ConstraintNotSatisfied - If the constraints for the new location of the replica would prohibit the move
+             FabricErrorCode.AsyncOperationNotComplete - Services are temporarily in a torn aligned affinity state
              </exception>
       </Docs>
     </Member>
@@ -2187,6 +2229,9 @@
         <remarks>
             API uses the primary replica of the selected partition to move to new node location specified by nodeName.
             This API is safe i.e. it will not cause quorum or data loss by itself unless additional faults or failures happen at the same time.
+            Starting with Service Fabric 7.1, **Move-ServiceFabricPrimaryReplica** takes aligned affinity into consideration. If the primary to be moved is a part of an aligned affinity relationship,
+            then all  replicas in that relationship will be moved together. If the primary replicas of such services are are not completely able to move within specified timeout, an exception will be 
+            thrown (FabricErrorCode.AsyncOperationNotComplete) indicating the services are temporarily in a torn aligned affinity state. To remediate, issue the operation again.
             </remarks>
         <exception cref="T:System.TimeoutException">Retry is exhausted.</exception>
         <exception cref="T:System.InvalidOperationException">Invalid operation
@@ -2197,6 +2242,7 @@
             FabricErrorCode.NotReady - If Primary replica is not ready for movement
             FabricErrorCode.AlreadyPrimaryReplica - If Primary replica for selected partition already exist on new node
             FabricErrorCode.ConstraintNotSatisfied - If the constraints for the new location of the replica would prohibit the move
+            FabricErrorCode.AsyncOperationNotComplete - Services are temporarily in a torn aligned affinity state
             </exception>
       </Docs>
     </Member>
@@ -2236,6 +2282,9 @@
         <remarks>
             API uses the primary replica of the selected partition to move to new node location specified by nodeName.
             This API is safe i.e. it will not cause quorum or data loss by itself unless additional faults or failures happen at the same time.
+            Starting with Service Fabric 7.1, **Move-ServiceFabricPrimaryReplica** takes aligned affinity into consideration. If the primary to be moved is a part of an aligned affinity relationship,
+            then all  replicas in that relationship will be moved together. If the primary replicas of such services are are not completely able to move within specified timeout, an exception will be 
+            thrown (FabricErrorCode.AsyncOperationNotComplete) indicating the services are temporarily in a torn aligned affinity state. To remediate, issue the operation again.
             </remarks>
         <exception cref="T:System.TimeoutException">Retry is exhausted.</exception>
         <exception cref="T:System.InvalidOperationException">Invalid operation
@@ -2246,6 +2295,7 @@
             FabricErrorCode.NotReady - If Primary replica is not ready for movement
             FabricErrorCode.AlreadyPrimaryReplica - If Primary replica for selected partition already exist on new node
             FabricErrorCode.ConstraintNotSatisfied - If the constraints for the new location of the replica would prohibit the move
+            FabricErrorCode.AsyncOperationNotComplete - Services are temporarily in a torn aligned affinity state
             </exception>
       </Docs>
     </Member>
