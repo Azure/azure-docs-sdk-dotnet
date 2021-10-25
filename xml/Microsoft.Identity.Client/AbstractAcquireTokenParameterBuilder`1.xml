@@ -138,7 +138,7 @@
       <Docs>
         <param name="cancellationToken">Cancellation token. See <see cref="T:System.Threading.CancellationToken" /></param>
         <summary>
-            Executes the Token request asynchronously, with a possibility of cancelling the
+            Executes the Token request asynchronously, with a possibility of canceling the
             asynchronous method.
             </summary>
         <returns>Authentication result containing a token for the requested scopes and parameters
@@ -219,7 +219,7 @@
             Adds a known Authority corresponding to an ADFS server. See https://aka.ms/msal-net-adfs.
             </summary>
         <returns>The builder to chain the .With methods.</returns>
-        <remarks>MSAL.NET will only support ADFS 2019 or later.</remarks>
+        <remarks>MSAL.NET supports ADFS 2019 or later.</remarks>
       </Docs>
     </Member>
     <Member MemberName="WithAuthority">
@@ -778,6 +778,38 @@
             </summary>
         <returns>The builder to chain the .With methods.</returns>
         <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="WithTenantId">
+      <MemberSignature Language="C#" Value="public T WithTenantId (string tenantId);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance !T WithTenantId(string tenantId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Identity.Client.AbstractAcquireTokenParameterBuilder`1.WithTenantId(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function WithTenantId (tenantId As String) As T" />
+      <MemberSignature Language="F#" Value="member this.WithTenantId : string -&gt; 'T" Usage="abstractAcquireTokenParameterBuilder.WithTenantId tenantId" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Identity.Client</AssemblyName>
+        <AssemblyVersion>4.37.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>T</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="tenantId" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="tenantId">The tenant ID, which can be either in GUID format or a domain name. Also known as the Directory ID.</param>
+        <summary>
+            Overrides the tenant ID specified in the authority at the application level. This operation preserves the authority host (environment).
+            
+            If an authority was not specified at the application level, the default used is https://login.microsoftonline.com/common.
+            </summary>
+        <returns>The builder to chain the .With methods.</returns>
+        <remarks>
+            The tenant should be more restrictive than the one configured at the application level, e.g. don't use "common".
+            Does not affect authority validation, which is specified at the application level.</remarks>
+        <exception cref="T:System.ArgumentNullException">Thrown if tenantId is null or an empty string</exception>
+        <exception cref="T:Microsoft.Identity.Client.MsalClientException">Thrown if the application was configured with an authority that is not AAD specific (e.g. ADFS or B2C).</exception>
       </Docs>
     </Member>
   </Members>
