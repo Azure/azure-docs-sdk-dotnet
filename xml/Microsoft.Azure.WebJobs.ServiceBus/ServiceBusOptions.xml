@@ -88,29 +88,6 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="ExceptionHandler">
-      <MemberSignature Language="C#" Value="public Func&lt;Azure.Messaging.ServiceBus.ProcessErrorEventArgs,System.Threading.Tasks.Task&gt; ExceptionHandler { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Func`2&lt;class Azure.Messaging.ServiceBus.ProcessErrorEventArgs, class System.Threading.Tasks.Task&gt; ExceptionHandler" />
-      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.WebJobs.ServiceBus.ServiceBusOptions.ExceptionHandler" />
-      <MemberSignature Language="VB.NET" Value="Public Property ExceptionHandler As Func(Of ProcessErrorEventArgs, Task)" />
-      <MemberSignature Language="F#" Value="member this.ExceptionHandler : Func&lt;Azure.Messaging.ServiceBus.ProcessErrorEventArgs, System.Threading.Tasks.Task&gt; with get, set" Usage="Microsoft.Azure.WebJobs.ServiceBus.ServiceBusOptions.ExceptionHandler" />
-      <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.Azure.WebJobs.Extensions.ServiceBus</AssemblyName>
-        <AssemblyVersion>5.0.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Func&lt;Azure.Messaging.ServiceBus.ProcessErrorEventArgs,System.Threading.Tasks.Task&gt;</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>
-            Gets or sets an optional exception handler that will be invoked if an exception occurs while attempting to process
-            a message. This does not apply for functions that receive a batch of messages.
-            </summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
     <Member MemberName="JsonSerializerSettings">
       <MemberSignature Language="C#" Value="public Newtonsoft.Json.JsonSerializerSettings JsonSerializerSettings { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance class Newtonsoft.Json.JsonSerializerSettings JsonSerializerSettings" />
@@ -172,9 +149,11 @@
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the maximum number of concurrent calls to a function. Note each call
-            would be passing a different message. This does not apply for functions that receive a batch of messages.
-            The default is 16 times the return value of <see cref="M:Microsoft.Azure.WebJobs.ServiceBus.Utility.GetProcessorCount" />.
+        <summary>
+            Gets or sets the maximum number of messages that can be processed concurrently by a function.
+            This setting does not apply for functions that receive a batch of messages. The default is 16 times
+            the return value of <see cref="M:Microsoft.Azure.WebJobs.ServiceBus.Utility.GetProcessorCount" />. When <see cref="P:Microsoft.Azure.WebJobs.Host.Scale.ConcurrencyOptions.DynamicConcurrencyEnabled" />
+            is true, this value will be ignored, and concurrency will be increased/decreased dynamically.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -198,6 +177,8 @@
         <summary>
             Gets or sets the maximum number of sessions that can be processed concurrently by a function.
             The default value is 8. This does not apply for functions that receive a batch of messages.
+            When <see cref="P:Microsoft.Azure.WebJobs.Host.Scale.ConcurrencyOptions.DynamicConcurrencyEnabled" /> is true, this value will be ignored,
+            and concurrency will be increased/decreased dynamically.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
