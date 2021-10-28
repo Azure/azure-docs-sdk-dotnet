@@ -3,7 +3,7 @@ title: Azure ResourceManager client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager, azureresourcemanager
 author: maggiepint
 ms.author: magpint
-ms.date: 09/28/2021
+ms.date: 10/28/2021
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: azureresourcemanager
 ---
 
-# Azure ResourceManager client library for .NET - Version 1.0.0-beta.4 
+# Azure ResourceManager client library for .NET - Version 1.0.0-beta.5 
 
 
 This package follows the [new Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html), which provide core capabilities that are shared amongst all Azure SDKs, including:
@@ -37,7 +37,7 @@ Set up a way to authenticate to Azure with Azure Identity.
 Some options are:
 - Through the [Azure CLI Login](https://docs.microsoft.com/cli/azure/authenticate-azure-cli).
 - Via [Visual Studio](https://docs.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet#authenticating-via-visual-studio).
-- Setting [Environment Variables](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/resourcemanager/Azure.ResourceManager/docs/AuthUsingEnvironmentVariables.md).
+- Setting [Environment Variables](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager_1.0.0-beta.5/sdk/resourcemanager/Azure.ResourceManager/docs/AuthUsingEnvironmentVariables.md).
 
 More information and different authentication approaches using Azure Identity can be found in [this document](https://docs.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet).
 
@@ -74,10 +74,11 @@ This represents a full resource client object which contains a **Data** property
 It also has access to all of the operations on that resource without needing to pass in scope parameters such as subscription ID or resource name.  This makes it very convenient to directly execute operations on the result of list calls
 since everything is returned as a full resource client now.
 
-```csharp
+```C#
 ArmClient armClient = new ArmClient(new DefaultAzureCredential());
 string rgName = "myResourceGroup";
-ResourceGroup rg = await armClient.DefaultSubscription.GetResourceGroups().GetAsync(rgName);
+Subscription subscription = await armClient.GetDefaultSubscriptionAsync();
+ResourceGroup rg = await subscription.GetResourceGroups().GetAsync(rgName);
 await foreach (VirtualMachine vm in rg.GetVirtualMachines().GetAllAsync())
 {
     //previously we would have to take the resourceGroupName and the vmName from the vm object
@@ -90,12 +91,12 @@ await foreach (VirtualMachine vm in rg.GetVirtualMachines().GetAllAsync())
 
 This represents the model that makes up a given resource. Typically, this is the response data from a service call such as HTTP GET and provides details about the underlying resource. Previously, this was represented by a **Model** class.
 
-### **[Resource]Container.cs**
+### **[Resource]Collection.cs**
 
 This represents the operations you can perform on a collection of resources belonging to a specific parent resource.
 This object provides most of the logical collection operations.
 
-| Collection Behavior | Container Method |
+| Collection Behavior | Collection Method |
 |-|-|
 | Iterate/List | GetAll() |
 | Index | Get(string name) |
@@ -108,21 +109,22 @@ For most things, the parent will be a **ResourceGroup**. However, each parent / 
 ## Putting it all together
 Imagine that our company requires all virtual machines to be tagged with the owner. We're tasked with writing a program to add the tag to any missing virtual machines in a given resource group.
 
- ```csharp
+ ```C#
 // First we construct our armClient
 var armClient = new ArmClient(new DefaultAzureCredential());
 
 // Next we get a resource group object
 // ResourceGroup is a [Resource] object from above
-ResourceGroup resourceGroup = await armClient.DefaultSubscription.GetResourceGroups().GetAsync("myRgName");
+Subscription subscription = await armClient.GetDefaultSubscriptionAsync();
+ResourceGroup resourceGroup = await subscription.GetResourceGroups().GetAsync("myRgName");
 
-// Next we get the container for the virtual machines
-// vmContainer is a [Resource]Container object from above
-VirtualMachineContainer vmContainer = resourceGroup.GetVirtualMachines();
+// Next we get the collection for the virtual machines
+// vmCollection is a [Resource]Collection object from above
+VirtualMachineCollection vmCollection = resourceGroup.GetVirtualMachines();
 
-// Next we loop over all vms in the container
+// Next we loop over all vms in the collection
 // Each vm is a [Resource] object from above
-await foreach(VirtualMachine vm in vmContainer.GetAllAsync())
+await foreach(VirtualMachine vm in vmCollection)
 {
     // We access the [Resource]Data properties from vm.Data
     if(!vm.Data.Tags.ContainsKey("owner"))
@@ -167,7 +169,7 @@ Console.WriteLine($"Subnet: {id.Name}");
 Performing operations on resources that already exist is a common use case when using the management client libraries. In this scenario you usually have the identifier of the resource you want to work on as a string. Although the new object hierarchy is great for provisioning and working within the scope of a given parent, it is not the most efficient when it comes to this specific scenario.  
 
 Here is an example how you to access an `AvailabilitySet` object and manage it directly with its id: 
-```csharp
+```C#
 using Azure.Identity;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
@@ -194,7 +196,7 @@ This approach required a lot of code and 3 API calls to Azure. The same can be d
 
 So, the previous example would end up looking like this:
 
-```csharp
+```C#
 string resourceId = "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/resourceGroups/workshop2021-rg/providers/Microsoft.Compute/availabilitySets/ws2021availSet";
 // We construct a new armClient to work with
 ArmClient armClient = new ArmClient(new DefaultAzureCredential());
@@ -210,7 +212,7 @@ Console.WriteLine(availabilitySet.Data.Name);
 
 ## Check if a [Resource] exists
 
-If you are not sure if a resource you want to get exists, or you just want to check if it exists, you can use `GetIfExists()` or `CheckIfExists()` methods, which can be invoked from any [Resource]Container class.
+If you are not sure if a resource you want to get exists, or you just want to check if it exists, you can use `GetIfExists()` or `CheckIfExists()` methods, which can be invoked from any [Resource]Collection class.
 
 `GetIfExists()` and `GetIfExistsAsync()` return a `Response<T>` where T is null if the specified resource does not exist. On the other hand, `CheckIfExists()` and `CheckIfExistsAsync()` return `Response<bool>` where the bool will be false if the specified resource does not exist.  Both of these methods still give you access to the underlying raw response.
 
@@ -218,7 +220,7 @@ Before these methods were introduced you would need to catch the `RequestFailedE
 
 ```C# Snippet:Readme_OldCheckIfExistsRG
 ArmClient armClient = new ArmClient(new DefaultAzureCredential());
-Subscription subscription = armClient.DefaultSubscription;
+Subscription subscription = await armClient.GetDefaultSubscriptionAsync();
 string rgName = "myRgName";
 
 try
@@ -236,7 +238,7 @@ Now with these convenience methods we can simply do the following.
 
 ```C# Snippet:Readme_CheckIfExistssRG
 ArmClient armClient = new ArmClient(new DefaultAzureCredential());
-Subscription subscription = armClient.DefaultSubscription;
+Subscription subscription = await armClient.GetDefaultSubscriptionAsync();
 string rgName = "myRgName";
 
 bool exists = await subscription.GetResourceGroups().CheckIfExistsAsync(rgName);
@@ -259,7 +261,7 @@ Another way to do this is by using `GetIfExists()` which will avoid the race con
 
 ```C# Snippet:Readme_TryGetRG
 ArmClient armClient = new ArmClient(new DefaultAzureCredential());
-Subscription subscription = armClient.DefaultSubscription;
+Subscription subscription = await armClient.GetDefaultSubscriptionAsync();
 string rgName = "myRgName";
 
 ResourceGroup myRG = await subscription.GetResourceGroups().GetIfExistsAsync(rgName);
@@ -280,15 +282,15 @@ else
 ```C# Snippet:Managing_Resource_Groups_CreateAResourceGroup
 // First, initialize the ArmClient and get the default subscription
 ArmClient armClient = new ArmClient(new DefaultAzureCredential());
-// Now we get a ResourceGroup container for that subscription
-Subscription subscription = armClient.DefaultSubscription;
-ResourceGroupContainer rgContainer = subscription.GetResourceGroups();
+// Now we get a ResourceGroup collection for that subscription
+Subscription subscription = await armClient.GetDefaultSubscriptionAsync();
+ResourceGroupCollection rgCollection = subscription.GetResourceGroups();
 
-// With the container, we can create a new resource group with an specific name
+// With the collection, we can create a new resource group with an specific name
 string rgName = "myRgName";
 Location location = Location.WestUS2;
 ResourceGroupData rgData = new ResourceGroupData(location);
-ResourceGroupCreateOrUpdateOperation operation = await rgContainer.CreateOrUpdateAsync(rgName, rgData);
+ResourceGroupCreateOrUpdateOperation operation = await rgCollection.CreateOrUpdateAsync(rgName, rgData);
 ResourceGroup resourceGroup = operation.Value;
 ```
 
@@ -296,11 +298,11 @@ ResourceGroup resourceGroup = operation.Value;
 ```C# Snippet:Managing_Resource_Groups_ListAllResourceGroup
 // First, initialize the ArmClient and get the default subscription
 ArmClient armClient = new ArmClient(new DefaultAzureCredential());
-Subscription subscription = armClient.DefaultSubscription;
-// Now we get a ResourceGroup container for that subscription
-ResourceGroupContainer rgContainer = subscription.GetResourceGroups();
-// With GetAllAsync(), we can get a list of the resources in the container
-await foreach (ResourceGroup rg in rgContainer.GetAllAsync())
+Subscription subscription = await armClient.GetDefaultSubscriptionAsync();
+// Now we get a ResourceGroup collection for that subscription
+ResourceGroupCollection rgCollection = subscription.GetResourceGroups();
+// With GetAllAsync(), we can get a list of the resources in the collection
+await foreach (ResourceGroup rg in rgCollection.GetAllAsync())
 {
     Console.WriteLine(rg.Data.Name);
 }
@@ -310,7 +312,7 @@ await foreach (ResourceGroup rg in rgContainer.GetAllAsync())
 ```C# Snippet:Managing_Resource_Groups_UpdateAResourceGroup
 // Note: Resource group named 'myRgName' should exist for this example to work.
 ArmClient armClient = new ArmClient(new DefaultAzureCredential());
-Subscription subscription = armClient.DefaultSubscription;
+Subscription subscription = await armClient.GetDefaultSubscriptionAsync();
 string rgName = "myRgName";
 ResourceGroup resourceGroup = await subscription.GetResourceGroups().GetAsync(rgName);
 resourceGroup = await resourceGroup.AddTagAsync("key", "value");
@@ -319,13 +321,13 @@ resourceGroup = await resourceGroup.AddTagAsync("key", "value");
 ### Delete a resource group
 ```C# Snippet:Managing_Resource_Groups_DeleteResourceGroup
 ArmClient armClient = new ArmClient(new DefaultAzureCredential());
-Subscription subscription = armClient.DefaultSubscription;
+Subscription subscription = await armClient.GetDefaultSubscriptionAsync();
 string rgName = "myRgName";
 ResourceGroup resourceGroup = await subscription.GetResourceGroups().GetAsync(rgName);
 await resourceGroup.DeleteAsync();
 ```
 
-For more detailed examples, take a look at [samples](https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/resourcemanager/Azure.ResourceManager/samples) we have available.
+For more detailed examples, take a look at [samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.ResourceManager_1.0.0-beta.5/sdk/resourcemanager/Azure.ResourceManager/samples) we have available.
 
 ## Troubleshooting
 
@@ -338,19 +340,19 @@ For more detailed examples, take a look at [samples](https://github.com/Azure/az
 ## Next steps
 ### More sample code
 
-- [Managing Resource Groups](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/resourcemanager/Azure.ResourceManager/samples/Sample2_ManagingResourceGroups.md)
-- [Creating a Virtual Network](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/resourcemanager/Azure.ResourceManager/samples/Sample3_CreatingAVirtualNetwork.md)
+- [Managing Resource Groups](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager_1.0.0-beta.5/sdk/resourcemanager/Azure.ResourceManager/samples/Sample2_ManagingResourceGroups.md)
+- [Creating a Virtual Network](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager_1.0.0-beta.5/sdk/resourcemanager/Azure.ResourceManager/samples/Sample3_CreatingAVirtualNetwork.md)
 - [.NET Management Library Code Samples](https://docs.microsoft.com/samples/browse/?branch=master&languages=csharp&term=managing%20using%20Azure%20.NET%20SDK)
 
 ### Additional Documentation
-If you are migrating from the old SDK to this preview, check out this [Migration guide](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/resourcemanager/Azure.ResourceManager/docs/MigrationGuide.md).
+If you are migrating from the old SDK to this preview, check out this [Migration guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager_1.0.0-beta.5/sdk/resourcemanager/Azure.ResourceManager/docs/MigrationGuide.md).
 
 For more information on Azure SDK, please refer to [this website](https://azure.github.io/azure-sdk/).
 
 ## Contributing
 
 For details on contributing to this repository, see the [contributing
-guide](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md).
+guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager_1.0.0-beta.5/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md).
 
 This project welcomes contributions and suggestions. Most contributions
 require you to agree to a Contributor License Agreement (CLA) declaring
