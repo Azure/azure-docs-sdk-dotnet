@@ -3,7 +3,7 @@ title: Azure Compute Management client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.Compute, compute
 author: maggiepint
 ms.author: magpint
-ms.date: 09/14/2021
+ms.date: 10/29/2021
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: compute
 ---
 
-# Azure Compute Management client library for .NET - Version 1.0.0-beta.2 
+# Azure Compute Management client library for .NET - Version 1.0.0-beta.3 
 
 
 This package follows the [new Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html),which provide core capabilities that are shared amongst all Azure SDKs, including:
@@ -28,7 +28,7 @@ This package follows the [new Azure SDK guidelines](https://azure.github.io/azur
 Install the Azure Compute management library for .NET with [NuGet](https://www.nuget.org/):
 
 ```PowerShell
-Install-Package Azure.ResourceManager.Compute -Version 1.0.0-beta.1
+Install-Package Azure.ResourceManager.Compute -Version 1.0.0-beta.3
 ```
 
 ### Prerequisites
@@ -37,7 +37,7 @@ Set up a way to authenticate to Azure with Azure Identity.
 Some options are:
 - Through the [Azure CLI Login](https://docs.microsoft.com/cli/azure/authenticate-azure-cli).
 - Via [Visual Studio](https://docs.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet#authenticating-via-visual-studio).
-- Setting [Environment Variables](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.0.0-beta.2/sdk/resourcemanager/Azure.ResourceManager/docs/AuthUsingEnvironmentVariables.md).
+- Setting [Environment Variables](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.0.0-beta.3/sdk/resourcemanager/Azure.ResourceManager/docs/AuthUsingEnvironmentVariables.md).
 
 More information and different authentication approaches using Azure Identity can be found in [this document](https://docs.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet).
 
@@ -60,7 +60,7 @@ Additional documentation for the `Azure.Identity.DefaultAzureCredential` class c
 
 ## Key concepts
 
-Key concepts of the Azure .NET SDK can be found [here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.0.0-beta.2/sdk/resourcemanager/Azure.ResourceManager/README.md#key-concepts)
+Key concepts of the Azure .NET SDK can be found [here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.0.0-beta.3/sdk/resourcemanager/Azure.ResourceManager/README.md#key-concepts)
 
 ## Examples
 
@@ -68,22 +68,22 @@ Key concepts of the Azure .NET SDK can be found [here](https://github.com/Azure/
 
 Before creating an availability set, we need to have a resource group.
 
-```C# Snippet:Readme_GetResourceGroupContainer
+```C# Snippet:Readme_GetResourceGroupCollection
 ArmClient armClient = new ArmClient(new DefaultAzureCredential());
-Subscription subscription = armClient.DefaultSubscription;
-ResourceGroupContainer rgContainer = subscription.GetResourceGroups();
-// With the container, we can create a new resource group with an specific name
+Subscription subscription = await armClient.GetDefaultSubscriptionAsync();
+ResourceGroupCollection rgCollection = subscription.GetResourceGroups();
+// With the collection, we can create a new resource group with an specific name
 string rgName = "myRgName";
 Location location = Location.WestUS2;
-ResourceGroupCreateOrUpdateOperation lro = await rgContainer.CreateOrUpdateAsync(rgName, new ResourceGroupData(location));
+ResourceGroupCreateOrUpdateOperation lro = await rgCollection.CreateOrUpdateAsync(rgName, new ResourceGroupData(location));
 ResourceGroup resourceGroup = lro.Value;
 ```
 
 ```C# Snippet:Managing_Availability_Set_CreateAnAvailabilitySet
-AvailabilitySetContainer availabilitySetContainer = resourceGroup.GetAvailabilitySets();
+AvailabilitySetCollection availabilitySetCollection = resourceGroup.GetAvailabilitySets();
 string availabilitySetName = "myAvailabilitySet";
 AvailabilitySetData input = new AvailabilitySetData(location);
-AvailabilitySetCreateOrUpdateOperation lro = await availabilitySetContainer.CreateOrUpdateAsync(availabilitySetName, input);
+AvailabilitySetCreateOrUpdateOperation lro = await availabilitySetCollection.CreateOrUpdateAsync(availabilitySetName, input);
 AvailabilitySet availabilitySet = lro.Value;
 ```
 
@@ -92,16 +92,16 @@ AvailabilitySet availabilitySet = lro.Value;
 ```C# Snippet:Managing_Availability_Set_GetAllAvailabilitySets
 // First, initialize the ArmClient and get the default subscription
 ArmClient armClient = new ArmClient(new DefaultAzureCredential());
-// Now we get a ResourceGroup container for that subscription
-Subscription subscription = armClient.DefaultSubscription;
-ResourceGroupContainer rgContainer = subscription.GetResourceGroups();
+// Now we get a ResourceGroup collection for that subscription
+Subscription subscription = await armClient.GetDefaultSubscriptionAsync();
+ResourceGroupCollection rgCollection = subscription.GetResourceGroups();
 
 string rgName = "myRgName";
-ResourceGroup resourceGroup = await rgContainer.GetAsync(rgName);
-// First, we get the availability set container from the resource group
-AvailabilitySetContainer availabilitySetContainer = resourceGroup.GetAvailabilitySets();
-// With GetAllAsync(), we can get a list of the availability sets in the container
-AsyncPageable<AvailabilitySet> response = availabilitySetContainer.GetAllAsync();
+ResourceGroup resourceGroup = await rgCollection.GetAsync(rgName);
+// First, we get the availability set collection from the resource group
+AvailabilitySetCollection availabilitySetCollection = resourceGroup.GetAvailabilitySets();
+// With GetAllAsync(), we can get a list of the availability sets in the collection
+AsyncPageable<AvailabilitySet> response = availabilitySetCollection.GetAllAsync();
 await foreach (AvailabilitySet availabilitySet in response)
 {
     Console.WriteLine(availabilitySet.Data.Name);
@@ -113,16 +113,16 @@ await foreach (AvailabilitySet availabilitySet in response)
 ```C# Snippet:Managing_Availability_Set_UpdateAnAvailabilitySet
 // First, initialize the ArmClient and get the default subscription
 ArmClient armClient = new ArmClient(new DefaultAzureCredential());
-// Now we get a ResourceGroup container for that subscription
-Subscription subscription = armClient.DefaultSubscription;
-ResourceGroupContainer rgContainer = subscription.GetResourceGroups();
+// Now we get a ResourceGroup collection for that subscription
+Subscription subscription = await armClient.GetDefaultSubscriptionAsync();
+ResourceGroupCollection rgCollection = subscription.GetResourceGroups();
 
-// With the container, we can create a new resource group with an specific name
+// With the collection, we can create a new resource group with an specific name
 string rgName = "myRgName";
-ResourceGroup resourceGroup = await rgContainer.GetAsync(rgName);
-AvailabilitySetContainer availabilitySetContainer = resourceGroup.GetAvailabilitySets();
+ResourceGroup resourceGroup = await rgCollection.GetAsync(rgName);
+AvailabilitySetCollection availabilitySetCollection = resourceGroup.GetAvailabilitySets();
 string availabilitySetName = "myAvailabilitySet";
-AvailabilitySet availabilitySet = await availabilitySetContainer.GetAsync(availabilitySetName);
+AvailabilitySet availabilitySet = await availabilitySetCollection.GetAsync(availabilitySetName);
 // availabilitySet is an AvailabilitySet instance created above
 AvailabilitySetUpdate update = new AvailabilitySetUpdate()
 {
@@ -136,16 +136,16 @@ AvailabilitySet updatedAvailabilitySet = await availabilitySet.UpdateAsync(updat
 ```C# Snippet:Managing_Availability_Set_DeleteAnAvailabilitySet
 // First, initialize the ArmClient and get the default subscription
 ArmClient armClient = new ArmClient(new DefaultAzureCredential());
-// Now we get a ResourceGroup container for that subscription
-Subscription subscription = armClient.DefaultSubscription;
-ResourceGroupContainer rgContainer = subscription.GetResourceGroups();
+// Now we get a ResourceGroup collection for that subscription
+Subscription subscription = await armClient.GetDefaultSubscriptionAsync();
+ResourceGroupCollection rgCollection = subscription.GetResourceGroups();
 
-// With the container, we can create a new resource group with an specific name
+// With the collection, we can create a new resource group with an specific name
 string rgName = "myRgName";
-ResourceGroup resourceGroup = await rgContainer.GetAsync(rgName);
-AvailabilitySetContainer availabilitySetContainer = resourceGroup.GetAvailabilitySets();
+ResourceGroup resourceGroup = await rgCollection.GetAsync(rgName);
+AvailabilitySetCollection availabilitySetCollection = resourceGroup.GetAvailabilitySets();
 string availabilitySetName = "myAvailabilitySet";
-AvailabilitySet availabilitySet = await availabilitySetContainer.GetAsync(availabilitySetName);
+AvailabilitySet availabilitySet = await availabilitySetCollection.GetAsync(availabilitySetName);
 // delete the availability set
 await availabilitySet.DeleteAsync();
 ```
@@ -156,11 +156,11 @@ If you just want to verify if the availability set exists, you can use the funct
 
 ```C# Snippet:Managing_Availability_Set_CheckIfExistsForAvailabilitySet
 ArmClient armClient = new ArmClient(new DefaultAzureCredential());
-Subscription subscription = armClient.DefaultSubscription;
-ResourceGroupContainer rgContainer = subscription.GetResourceGroups();
+Subscription subscription = await armClient.GetDefaultSubscriptionAsync();
+ResourceGroupCollection rgCollection = subscription.GetResourceGroups();
 
 string rgName = "myRgName";
-ResourceGroup resourceGroup = await rgContainer.GetAsync(rgName);
+ResourceGroup resourceGroup = await rgCollection.GetAsync(rgName);
 string availabilitySetName = "myAvailabilitySet";
 bool exists = await resourceGroup.GetAvailabilitySets().CheckIfExistsAsync(availabilitySetName);
 
@@ -179,15 +179,15 @@ If you want to first check if the availability set exists, and if it does, you w
 ```C# Snippet:Managing_Availability_Set_GetIfExistsForAvailabilitySet
 // First, initialize the ArmClient and get the default subscription
 ArmClient armClient = new ArmClient(new DefaultAzureCredential());
-// Now we get a ResourceGroup container for that subscription
-Subscription subscription = armClient.DefaultSubscription;
-ResourceGroupContainer rgContainer = subscription.GetResourceGroups();
+// Now we get a ResourceGroup collection for that subscription
+Subscription subscription = await armClient.GetDefaultSubscriptionAsync();
+ResourceGroupCollection rgCollection = subscription.GetResourceGroups();
 
 string rgName = "myRgName";
-ResourceGroup resourceGroup = await rgContainer.GetAsync(rgName);
-AvailabilitySetContainer availabilitySetContainer = resourceGroup.GetAvailabilitySets();
+ResourceGroup resourceGroup = await rgCollection.GetAsync(rgName);
+AvailabilitySetCollection availabilitySetCollection = resourceGroup.GetAvailabilitySets();
 string availabilitySetName = "myAvailabilitySet";
-AvailabilitySet availabilitySet = await availabilitySetContainer.GetIfExistsAsync(availabilitySetName);
+AvailabilitySet availabilitySet = await availabilitySetCollection.GetIfExistsAsync(availabilitySetName);
 
 if (availabilitySet == null)
 {
@@ -203,20 +203,20 @@ if (availabilitySet == null)
 ```C# Snippet:Managing_Availability_Set_AddTagAvailabilitySet
 // First, initialize the ArmClient and get the default subscription
 ArmClient armClient = new ArmClient(new DefaultAzureCredential());
-// Now we get a ResourceGroup container for that subscription
-Subscription subscription = armClient.DefaultSubscription;
-ResourceGroupContainer rgContainer = subscription.GetResourceGroups();
+// Now we get a ResourceGroup collection for that subscription
+Subscription subscription = await armClient.GetDefaultSubscriptionAsync();
+ResourceGroupCollection rgCollection = subscription.GetResourceGroups();
 
 string rgName = "myRgName";
-ResourceGroup resourceGroup = await rgContainer.GetAsync(rgName);
-AvailabilitySetContainer availabilitySetContainer = resourceGroup.GetAvailabilitySets();
+ResourceGroup resourceGroup = await rgCollection.GetAsync(rgName);
+AvailabilitySetCollection availabilitySetCollection = resourceGroup.GetAvailabilitySets();
 string availabilitySetName = "myAvailabilitySet";
-AvailabilitySet availabilitySet = await availabilitySetContainer.GetAsync(availabilitySetName);
+AvailabilitySet availabilitySet = await availabilitySetCollection.GetAsync(availabilitySetName);
 // add a tag on this availabilitySet
 AvailabilitySet updatedAvailabilitySet = await availabilitySet.AddTagAsync("key", "value");
 ```
 
-For more detailed examples, take a look at [samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.ResourceManager.Compute_1.0.0-beta.2/sdk/compute/Azure.ResourceManager.Compute/samples) we have available.
+For more detailed examples, take a look at [samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.ResourceManager.Compute_1.0.0-beta.3/sdk/compute/Azure.ResourceManager.Compute/samples) we have available.
 
 ## Troubleshooting
 
@@ -230,8 +230,8 @@ For more detailed examples, take a look at [samples](https://github.com/Azure/az
 
 ### More sample code
 
-- [Managing Disks](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.0.0-beta.2/sdk/compute/Azure.ResourceManager.Compute/samples/Sample1_ManagingDisks.md)
-- [Managing Virtual Machines](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.0.0-beta.2/sdk/compute/Azure.ResourceManager.Compute/samples/Sample2_ManagingVirtualMachines.md)
+- [Managing Disks](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.0.0-beta.3/sdk/compute/Azure.ResourceManager.Compute/samples/Sample1_ManagingDisks.md)
+- [Managing Virtual Machines](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.0.0-beta.3/sdk/compute/Azure.ResourceManager.Compute/samples/Sample2_ManagingVirtualMachines.md)
 
 ### Additional Documentation
 
@@ -239,7 +239,7 @@ For more information on Azure SDK, please refer to [this website](https://azure.
 
 ## Contributing
 
-For details on contributing to this repository, see the [contributing guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.0.0-beta.2/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md).
+For details on contributing to this repository, see the [contributing guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.0.0-beta.3/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md).
 
 This project welcomes contributions and suggestions. Most contributions
 require you to agree to a Contributor License Agreement (CLA) declaring
