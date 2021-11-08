@@ -1,8 +1,8 @@
 ---
 title: Azure Event Hubs Management client library for .NET
 keywords: Azure, .net, SDK, API, Azure.ResourceManager.EventHubs, 
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 06/22/2020
 ms.topic: reference
 ms.prod: azure

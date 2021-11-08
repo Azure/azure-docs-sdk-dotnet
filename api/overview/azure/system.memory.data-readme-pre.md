@@ -1,8 +1,8 @@
 ---
 title: 
 keywords: Azure, .net, SDK, API, System.Memory.Data, 
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 11/04/2020
 ms.topic: reference
 ms.prod: azure

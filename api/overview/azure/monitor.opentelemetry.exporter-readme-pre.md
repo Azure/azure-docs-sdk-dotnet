@@ -1,8 +1,8 @@
 ---
 title: Azure Monitor Exporter client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Monitor.OpenTelemetry.Exporter, monitor
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 10/05/2021
 ms.topic: reference
 ms.prod: azure

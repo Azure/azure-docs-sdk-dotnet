@@ -1,8 +1,8 @@
 ---
 title: Azure Synapse Analytics Access Control client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Analytics.Synapse.AccessControl, synapseanalytics
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 08/13/2021
 ms.topic: reference
 ms.prod: azure

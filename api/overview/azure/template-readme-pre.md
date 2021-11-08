@@ -1,8 +1,8 @@
 ---
 title: Azure Batch client library for Python
 keywords: Azure, dotnet, SDK, API, Azure.Template, template
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 09/28/2021
 ms.topic: reference
 ms.prod: azure

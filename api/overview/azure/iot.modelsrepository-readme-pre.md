@@ -1,8 +1,8 @@
 ---
 title: Azure IoT Models Repository client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.IoT.ModelsRepository, modelsrepository
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 11/04/2021
 ms.topic: reference
 ms.prod: azure

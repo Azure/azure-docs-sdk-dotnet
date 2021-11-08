@@ -1,8 +1,8 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.Messaging.EventGrid.CloudNativeCloudEvents, 
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 06/15/2021
 ms.topic: reference
 ms.prod: azure
