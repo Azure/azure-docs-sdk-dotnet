@@ -1,8 +1,8 @@
 ---
 title: Azure Communication SMS client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Communication.Sms, communication
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 05/25/2021
 ms.topic: reference
 ms.prod: azure

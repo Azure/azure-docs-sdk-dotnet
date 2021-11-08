@@ -1,8 +1,8 @@
 ---
 title: Azure WebJobs Storage Blobs client library for .NET
 keywords: Azure, .net, SDK, API, Microsoft.Azure.WebJobs.Extensions.Storage.Blobs, 
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 11/11/2020
 ms.topic: reference
 ms.prod: azure

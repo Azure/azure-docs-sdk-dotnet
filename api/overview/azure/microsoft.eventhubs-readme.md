@@ -2,8 +2,8 @@
 title: Azure Event Hubs client library for .NET - 4.3.1
 description: Azure Event Hubs client library for .NET - Version 4.3.1 
 keywords: Azure, .net, SDK, API, Microsoft.Azure.EventHubs, eventhub
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 10/29/2020
 ms.topic: reference
 ms.devlang: .net

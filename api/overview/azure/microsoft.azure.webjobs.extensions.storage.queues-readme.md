@@ -1,8 +1,8 @@
 ---
 title: Azure WebJobs Storage Queues client library for .NET
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebJobs.Extensions.Storage.Queues, storage
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 10/26/2021
 ms.topic: reference
 ms.prod: azure

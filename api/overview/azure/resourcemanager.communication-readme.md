@@ -1,8 +1,8 @@
 ---
 title: Azure Communication Services management client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.Communication, communication
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 04/05/2021
 ms.topic: reference
 ms.prod: azure

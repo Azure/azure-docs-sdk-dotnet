@@ -1,8 +1,8 @@
 ---
 title: Azure Synapse Analytics Monitoring client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Analytics.Synapse.Monitoring, synapseanalytics
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 05/11/2021
 ms.topic: reference
 ms.prod: azure

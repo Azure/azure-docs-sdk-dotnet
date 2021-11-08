@@ -1,8 +1,8 @@
 ---
 title: Azure Service Bus client library for .NET
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.ServiceBus, servicebus
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 01/13/2021
 ms.topic: reference
 ms.prod: azure
