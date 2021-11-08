@@ -7,6 +7,7 @@
   <AssemblyInfo>
     <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
     <AssemblyVersion>5.1.3.0</AssemblyVersion>
+    <AssemblyVersion>5.2.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Interfaces>
     <Interface>
@@ -14,8 +15,33 @@
     </Interface>
   </Interfaces>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>
+             Describes a Session client. A session client can be used to accept session objects which can be used to interact with all messages with the same sessionId.
+             </summary>
+    <remarks>
+             You can accept any session or a given session (identified by <see cref="P:Microsoft.Azure.ServiceBus.IMessageSession.SessionId" /> using a session client.
+             Once you accept a session, you can use it as a <see cref="T:Microsoft.Azure.ServiceBus.Core.MessageReceiver" /> which receives only messages having the same session id.
+             See <see cref="T:Microsoft.Azure.ServiceBus.IMessageSession" /> for usage of session object.
+             <example>
+             To create a new SessionClient
+             <code>
+             ISessionClient sessionClient = new SessionClient(
+                 namespaceConnectionString,
+                 queueName,
+                 ReceiveMode.PeekLock);
+             </code>
+            
+             To receive a session object for a given sessionId
+             <code>
+             IMessageSession session = await sessionClient.AcceptMessageSessionAsync(sessionId);
+             </code>
+            
+             To receive any session
+             <code>
+             IMessageSession session = await sessionClient.AcceptMessageSessionAsync();
+             </code></example></remarks>
+    <altmember cref="T:Microsoft.Azure.ServiceBus.IMessageSession" />
+    <altmember cref="T:Microsoft.Azure.ServiceBus.SessionClient" />
   </Docs>
   <Members>
     <Member MemberName="AcceptMessageSessionAsync">
@@ -28,15 +54,19 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.ServiceBus.IMessageSession&gt;</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets a session object of any <see cref="P:Microsoft.Azure.ServiceBus.IMessageSession.SessionId" /> that can be used to receive messages for that sessionId.
+            </summary>
         <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>All plugins registered on <see cref="T:Microsoft.Azure.ServiceBus.SessionClient" /> will be applied to each <see cref="T:Microsoft.Azure.ServiceBus.MessageSession" /> that is accepted.
+            Individual sessions can further register additional plugins.</remarks>
       </Docs>
     </Member>
     <Member MemberName="AcceptMessageSessionAsync">
@@ -49,6 +79,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.ServiceBus.IMessageSession&gt;</ReturnType>
@@ -57,10 +88,13 @@
         <Parameter Name="sessionId" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="sessionId">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="sessionId">The sessionId present in all its messages.</param>
+        <summary>
+            Gets a particular session object identified by <paramref name="sessionId" /> that can be used to receive messages for that sessionId.
+            </summary>
         <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>All plugins registered on <see cref="T:Microsoft.Azure.ServiceBus.SessionClient" /> will be applied to each <see cref="T:Microsoft.Azure.ServiceBus.MessageSession" /> that is accepted.
+            Individual sessions can further register additional plugins.</remarks>
       </Docs>
     </Member>
     <Member MemberName="AcceptMessageSessionAsync">
@@ -73,6 +107,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.ServiceBus.IMessageSession&gt;</ReturnType>
@@ -81,10 +116,13 @@
         <Parameter Name="operationTimeout" Type="System.TimeSpan" />
       </Parameters>
       <Docs>
-        <param name="operationTimeout">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="operationTimeout">Amount of time for which the call should wait for to fetch the next session.</param>
+        <summary>
+            Gets a session object of any <see cref="P:Microsoft.Azure.ServiceBus.IMessageSession.SessionId" /> that can be used to receive messages for that sessionId.
+            </summary>
         <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>All plugins registered on <see cref="T:Microsoft.Azure.ServiceBus.SessionClient" /> will be applied to each <see cref="T:Microsoft.Azure.ServiceBus.MessageSession" /> that is accepted.
+            Individual sessions can further register additional plugins.</remarks>
       </Docs>
     </Member>
     <Member MemberName="AcceptMessageSessionAsync">
@@ -97,6 +135,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.ServiceBus.IMessageSession&gt;</ReturnType>
@@ -106,11 +145,14 @@
         <Parameter Name="operationTimeout" Type="System.TimeSpan" />
       </Parameters>
       <Docs>
-        <param name="sessionId">To be added.</param>
-        <param name="operationTimeout">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="sessionId">The sessionId present in all its messages.</param>
+        <param name="operationTimeout">Amount of time for which the call should wait for to fetch the next session.</param>
+        <summary>
+            Gets a particular session object identified by <paramref name="sessionId" /> that can be used to receive messages for that sessionId.
+            </summary>
         <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>All plugins registered on <see cref="T:Microsoft.Azure.ServiceBus.SessionClient" /> will be applied to each <see cref="T:Microsoft.Azure.ServiceBus.MessageSession" /> that is accepted.
+            Individual sessions can further register additional plugins.</remarks>
       </Docs>
     </Member>
     <Member MemberName="EntityPath">
@@ -123,12 +165,15 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the path of the entity. This is either the name of the queue, or the full path of the subscription.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>

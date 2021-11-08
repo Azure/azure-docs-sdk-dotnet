@@ -7,6 +7,7 @@
   <AssemblyInfo>
     <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
     <AssemblyVersion>5.1.3.0</AssemblyVersion>
+    <AssemblyVersion>5.2.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -27,6 +28,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Diagnostics.Activity</ReturnType>
@@ -38,9 +40,54 @@
       <Docs>
         <param name="message">To be added.</param>
         <param name="activityName">To be added.</param>
-        <summary>To be added.</summary>
+        <summary>
+            Creates <see cref="T:System.Diagnostics.Activity" /> based on the tracing context stored in the <see cref="T:Microsoft.Azure.ServiceBus.Message" /><param name="activityName">Optional Activity name</param><returns>New <see cref="T:System.Diagnostics.Activity" /> with tracing context</returns></summary>
         <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            Tracing context is used to correlate telemetry between producer and consumer and 
+            represented by 'Diagnostic-Id' and 'Correlation-Context' properties in <see cref="P:Microsoft.Azure.ServiceBus.Message.UserProperties" />.
+            
+            .NET SDK automatically injects context when sending message to the ServiceBus (if diagnostics is enabled by tracing system).
+            
+            <para>
+            'Diagnostic-Id' uniquely identifies operation that enqueued message
+            </para><para>
+            'Correlation-Context' is comma separated list of sting key value pairs represeting optional context for the operation.
+            </para>
+            
+            If there is no tracing context in the message, this method returns <see cref="T:System.Diagnostics.Activity" /> without parent.
+            
+            Returned <see cref="T:System.Diagnostics.Activity" /> needs to be started before it can be used (see example below)
+            </remarks>
+        <example>
+          <code>
+            async Task ProcessAsync()
+            {
+               var message = await messageReceiver.ReceiveAsync();
+               var activity = message.ExtractActivity();
+               activity.Start();
+               Logger.LogInformation($"Message received, Id = {Activity.Current.Id}")
+               try 
+               {
+                  // process message
+               }
+               catch (Exception ex)
+               {
+                    Logger.LogError($"Exception {ex}, Id = {Activity.Current.Id}")
+               }
+               finally 
+               {
+                    activity.Stop();
+                    // Activity is stopped, we no longer have it in Activity.Current, let's user activity now
+                    Logger.LogInformation($"Message processed, Id = {activity.Id}, Duration = {activity.Duration}")
+               }
+            }
+            </code>
+            
+            Note that every log is stamped with <see cref="P:System.Diagnostics.Activity.Current" />.Id, that could be used within 
+            any nested method call (sync or async) - <see cref="P:System.Diagnostics.Activity.Current" /> is an ambient context that flows with async method calls.
+            
+            </example>
       </Docs>
     </Member>
   </Members>
