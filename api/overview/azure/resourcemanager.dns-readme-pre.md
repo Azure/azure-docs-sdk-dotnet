@@ -1,8 +1,8 @@
 ---
 title: Azure dns Management client library for .NET
 keywords: Azure, .net, SDK, API, Azure.ResourceManager.Dns, 
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 09/24/2020
 ms.topic: reference
 ms.prod: azure

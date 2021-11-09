@@ -1,8 +1,8 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.Batch, batch
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 08/11/2021
 ms.topic: reference
 ms.prod: azure

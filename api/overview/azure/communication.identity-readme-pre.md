@@ -1,8 +1,8 @@
 ---
 title: Azure Communication Identity client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Communication.Identity, communication
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 10/29/2021
 ms.topic: reference
 ms.prod: azure

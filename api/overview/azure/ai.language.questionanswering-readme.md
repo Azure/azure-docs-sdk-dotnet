@@ -1,8 +1,8 @@
 ---
 title: Azure Cognitive Language Services Question Answering client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.Language.QuestionAnswering, cognitivelanguage
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 11/03/2021
 ms.topic: reference
 ms.prod: azure

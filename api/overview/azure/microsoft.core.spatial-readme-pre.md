@@ -1,8 +1,8 @@
 ---
 title: 
 keywords: Azure, .net, SDK, API, Microsoft.Azure.Core.Spatial, 
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 10/09/2020
 ms.topic: reference
 ms.prod: azure

@@ -1,8 +1,8 @@
 ---
 title: Azure IoT Time Series Insights client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.IoT.TimeSeriesInsights, 
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 05/27/2021
 ms.topic: reference
 ms.prod: azure

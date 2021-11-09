@@ -1,8 +1,8 @@
 ---
 title: Azure Purview Scanning client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Analytics.Purview.Scanning, purview
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 10/15/2021
 ms.topic: reference
 ms.prod: azure

@@ -3,7 +3,7 @@ title: Azure Cognitive Services Form Recognizer client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.FormRecognizer, formrecognizer
 author: maggiepint
 ms.author: magpint
-ms.date: 10/07/2021
+ms.date: 11/09/2021
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: formrecognizer
 ---
 
-# Azure Cognitive Services Form Recognizer client library for .NET - Version 4.0.0-beta.1 
+# Azure Cognitive Services Form Recognizer client library for .NET - Version 4.0.0-beta.2 
 
 
 Azure Cognitive Services Form Recognizer is a cloud service that uses machine learning to analyze text and structured data from your documents. It includes the following main features:
@@ -38,7 +38,7 @@ This table shows the relationship between SDK versions and supported API version
 
 |SDK version|Supported API version of service
 |-|-
-|4.0.0-beta.1 | 2.0, 2.1, 2021-09-30-preview
+|4.0.0-beta.X | 2.0, 2.1, 2021-09-30-preview
 |3.1.X        | 2.0, 2.1
 |3.0.X        | 2.0
 
@@ -190,11 +190,11 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_4.0.0-beta.1/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_4.0.0-beta.1/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_4.0.0-beta.1/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_4.0.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_4.0.0-beta.1/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_4.0.0-beta.2/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_4.0.0-beta.2/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_4.0.0-beta.2/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_4.0.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_4.0.0-beta.2/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
@@ -753,27 +753,27 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 
 
 <!-- LINKS -->
-[formreco_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.1/sdk/formrecognizer/Azure.AI.FormRecognizer/src
+[formreco_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.2/sdk/formrecognizer/Azure.AI.FormRecognizer/src
 [formreco_docs]: https://docs.microsoft.com/azure/cognitive-services/form-recognizer/
 [formreco_refdocs]: https://aka.ms/azsdk/net/docs/ref/formrecognizer
 [formreco_nuget_package]: https://www.nuget.org/packages/Azure.AI.FormRecognizer
-[formreco_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.1/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/README.md
-[formrecov3_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.1/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/V3.1/README.md
-[formreco_changelog]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_4.0.0-beta.1/sdk/formrecognizer/Azure.AI.FormRecognizer/CHANGELOG.md
+[formreco_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.2/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/README.md
+[formrecov3_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.2/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/V3.1/README.md
+[formreco_changelog]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_4.0.0-beta.2/sdk/formrecognizer/Azure.AI.FormRecognizer/CHANGELOG.md
 [formreco_rest_api]: https://aka.ms/azsdk/formrecognizer/restapi
 [formreco_models]: https://aka.ms/azsdk/formrecognizer/models
 [formreco_errors]: https://aka.ms/azsdk/formrecognizer/errors
 [formreco_build_model]: https://aka.ms/azsdk/formrecognizer/buildmodel
-[migration_guide]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.1/sdk/formrecognizer/Azure.AI.FormRecognizer/MigrationGuide.md
+[migration_guide]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.2/sdk/formrecognizer/Azure.AI.FormRecognizer/MigrationGuide.md
 [cognitive_resource]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account
 
 
-[doc_analysis_client_class]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.1/sdk/formrecognizer/Azure.AI.FormRecognizer/src/DocumentAnalysisClient.cs
-[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.1/sdk/identity/Azure.Identity
+[doc_analysis_client_class]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.2/sdk/formrecognizer/Azure.AI.FormRecognizer/src/DocumentAnalysisClient.cs
+[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.2/sdk/identity/Azure.Identity
 [register_aad_app]: https://docs.microsoft.com/azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
 [aad_grant_access]: https://docs.microsoft.com/azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
 [custom_subdomain]: https://docs.microsoft.com/azure/cognitive-services/authentication#create-a-resource-with-a-custom-subdomain
-[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.1/sdk/identity/Azure.Identity/README.md
+[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.2/sdk/identity/Azure.Identity/README.md
 [cognitive_resource_portal]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account
 [cognitive_resource_cli]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account-cli
 [regional_endpoints]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-custom-subdomains#is-there-a-list-of-regional-endpoints
@@ -788,17 +788,17 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [receipt_fields]: https://aka.ms/azsdk/formrecognizer/receiptfieldschema
 [dotnet_lro_guidelines]: https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning
 
-[logging]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md
+[logging]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md
 
-[extract_layout]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.1/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_ExtractLayout.md
-[analyze_prebuilt_document]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.1/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_AnalyzePrebuiltDocument.md
-[analyze_custom]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.1/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_AnalyzeWithCustomModel.md
-[analyze_prebuilt]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.1/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_AnalyzeWithPrebuiltModel.md
-[build_a_custom_model]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.1/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_BuildCustomModel.md
-[manage_models]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.1/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_ManageModels.md
-[copy_custom_models]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.1/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_CopyCustomModel.md
-[composed_model]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.1/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_ModelCompose.md
-[get_and_list]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.1/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_GetAndListOperations.md
+[extract_layout]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.2/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_ExtractLayout.md
+[analyze_prebuilt_document]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.2/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_AnalyzePrebuiltDocument.md
+[analyze_custom]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.2/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_AnalyzeWithCustomModel.md
+[analyze_prebuilt]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.2/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_AnalyzeWithPrebuiltModel.md
+[build_a_custom_model]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.2/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_BuildCustomModel.md
+[manage_models]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.2/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_ManageModels.md
+[copy_custom_models]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.2/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_CopyCustomModel.md
+[composed_model]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.2/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_ModelCompose.md
+[get_and_list]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.2/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_GetAndListOperations.md
 
 [azure_cli]: https://docs.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/dotnet/
