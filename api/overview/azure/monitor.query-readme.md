@@ -1,9 +1,9 @@
 ---
 title: Azure Monitor Query client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Monitor.Query, monitor
-author: ramya-rao-a
-ms.author: ramyar
-ms.date: 10/07/2021
+author: maggiepint
+ms.author: magpint
+ms.date: 11/10/2021
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: monitor
 ---
 
-# Azure Monitor Query client library for .NET - Version 1.0.0 
+# Azure Monitor Query client library for .NET - Version 1.0.1 
 
 
 The Azure Monitor Query client library is used to execute read-only queries against [Azure Monitor][azure_monitor_overview]'s two data platforms:
@@ -84,12 +84,12 @@ All client instance methods are thread-safe and independent of each other ([guid
 ### Additional concepts
 
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.0.0/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.0.0/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.0.0/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.0.0/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.0.0/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.0.0/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.0.1/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.0.1/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.0.1/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.0.1/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.0.1/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.0.1/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
@@ -435,12 +435,12 @@ This project has adopted the [Microsoft Open Source Code of Conduct][coc]. For m
 [azure_monitor_create_using_portal]: https://docs.microsoft.com/azure/azure-monitor/logs/quick-create-workspace
 [azure_monitor_overview]: https://docs.microsoft.com/azure/azure-monitor/overview
 [azure_subscription]: https://azure.microsoft.com/free/dotnet/
-[changelog]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.0.0/sdk/monitor/Azure.Monitor.Query/CHANGELOG.md
+[changelog]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.0.1/sdk/monitor/Azure.Monitor.Query/CHANGELOG.md
 [kusto_query_language]: https://docs.microsoft.com/azure/data-explorer/kusto/query/
-[logging]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.0.0/sdk/core/Azure.Core/samples/Diagnostics.md
+[logging]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.0.1/sdk/core/Azure.Core/samples/Diagnostics.md
 [monitor_rest_api]: https://docs.microsoft.com/rest/api/monitor/
 [package]: https://www.nuget.org/packages/Azure.Monitor.Query
-[source]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.0.0/sdk/monitor/Azure.Monitor.Query/src
+[source]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.0.1/sdk/monitor/Azure.Monitor.Query/src
 
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
