@@ -1,0 +1,90 @@
+<Type Name="ILongRunningWebApi" FullName="Microsoft.Identity.Client.ILongRunningWebApi">
+  <TypeSignature Language="C#" Value="public interface ILongRunningWebApi" />
+  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract ILongRunningWebApi" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Identity.Client.ILongRunningWebApi" />
+  <TypeSignature Language="VB.NET" Value="Public Interface ILongRunningWebApi" />
+  <TypeSignature Language="F#" Value="type ILongRunningWebApi = interface" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Identity.Client</AssemblyName>
+    <AssemblyVersion>4.38.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces />
+  <Docs>
+    <summary>
+            Methods for long running processes in web APIs
+            </summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="AcquireTokenInLongRunningProcess">
+      <MemberSignature Language="C#" Value="public Microsoft.Identity.Client.AcquireTokenOnBehalfOfParameterBuilder AcquireTokenInLongRunningProcess (System.Collections.Generic.IEnumerable&lt;string&gt; scopes, string longRunningProcessSessionKey);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Identity.Client.AcquireTokenOnBehalfOfParameterBuilder AcquireTokenInLongRunningProcess(class System.Collections.Generic.IEnumerable`1&lt;string&gt; scopes, string longRunningProcessSessionKey) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Identity.Client.ILongRunningWebApi.AcquireTokenInLongRunningProcess(System.Collections.Generic.IEnumerable{System.String},System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function AcquireTokenInLongRunningProcess (scopes As IEnumerable(Of String), longRunningProcessSessionKey As String) As AcquireTokenOnBehalfOfParameterBuilder" />
+      <MemberSignature Language="F#" Value="abstract member AcquireTokenInLongRunningProcess : seq&lt;string&gt; * string -&gt; Microsoft.Identity.Client.AcquireTokenOnBehalfOfParameterBuilder" Usage="iLongRunningWebApi.AcquireTokenInLongRunningProcess (scopes, longRunningProcessSessionKey)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Identity.Client</AssemblyName>
+        <AssemblyVersion>4.38.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Identity.Client.AcquireTokenOnBehalfOfParameterBuilder</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="scopes" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" />
+        <Parameter Name="longRunningProcessSessionKey" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="scopes">Scopes requested to access a protected API</param>
+        <param name="longRunningProcessSessionKey">Key by which to look up the token in the cache</param>
+        <summary>
+            Retrieves an access token from the cache using the provided cache key that can be used to
+            access another downstream protected web API on behalf of a user using the OAuth 2.0 On-Behalf-Of flow.
+            See https://aka.ms/msal-net-long-running-obo .
+            </summary>
+        <returns>A builder enabling you to add optional parameters before executing the token request</returns>
+        <remarks>
+            This method is intended to be used in the long running processes inside of web APIs.
+            </remarks>
+        <exception cref="T:Microsoft.Identity.Client.MsalClientException"> is thrown if the token cache does not contain a token
+            with an OBO cache key that matches the <paramref name="longRunningProcessSessionKey" />.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="InitiateLongRunningProcessInWebApi">
+      <MemberSignature Language="C#" Value="public Microsoft.Identity.Client.AcquireTokenOnBehalfOfParameterBuilder InitiateLongRunningProcessInWebApi (System.Collections.Generic.IEnumerable&lt;string&gt; scopes, string userToken, ref string longRunningProcessSessionKey);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Identity.Client.AcquireTokenOnBehalfOfParameterBuilder InitiateLongRunningProcessInWebApi(class System.Collections.Generic.IEnumerable`1&lt;string&gt; scopes, string userToken, string&amp; longRunningProcessSessionKey) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Identity.Client.ILongRunningWebApi.InitiateLongRunningProcessInWebApi(System.Collections.Generic.IEnumerable{System.String},System.String,System.String@)" />
+      <MemberSignature Language="VB.NET" Value="Public Function InitiateLongRunningProcessInWebApi (scopes As IEnumerable(Of String), userToken As String, ByRef longRunningProcessSessionKey As String) As AcquireTokenOnBehalfOfParameterBuilder" />
+      <MemberSignature Language="F#" Value="abstract member InitiateLongRunningProcessInWebApi : seq&lt;string&gt; * string * string -&gt; Microsoft.Identity.Client.AcquireTokenOnBehalfOfParameterBuilder" Usage="iLongRunningWebApi.InitiateLongRunningProcessInWebApi (scopes, userToken, longRunningProcessSessionKey)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Identity.Client</AssemblyName>
+        <AssemblyVersion>4.38.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Identity.Client.AcquireTokenOnBehalfOfParameterBuilder</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="scopes" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" />
+        <Parameter Name="userToken" Type="System.String" />
+        <Parameter Name="longRunningProcessSessionKey" Type="System.String" RefType="ref" />
+      </Parameters>
+      <Docs>
+        <param name="scopes">Scopes requested to access a protected API</param>
+        <param name="userToken">A JSON Web Token which was used to call the web API and contains the credential information
+            about the user on behalf of whom to get a token.</param>
+        <param name="longRunningProcessSessionKey">Key by which to look up the token in the cache.
+            If null, it will be set to the assertion hash by default.</param>
+        <summary>
+            Acquires an access token for this web API from the authority configured in the application,
+            in order to access another downstream protected web API on behalf of a user using the OAuth 2.0 On-Behalf-Of flow.
+            See https://aka.ms/msal-net-long-running-obo .
+            This confidential client application was itself called with a token which will be provided in the
+            <paramref name="userToken">userToken</paramref> parameter.
+            </summary>
+        <returns>A builder enabling you to add optional parameters before executing the token request</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>
