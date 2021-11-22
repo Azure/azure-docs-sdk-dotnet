@@ -357,7 +357,7 @@ For more information see the [Code of Conduct FAQ][coc_faq] or contact
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq
 [cla]: https://cla.microsoft.com
 [coc_contact]: mailto:opencode@microsoft.com
-[logging]: https://docs.microsoft.com/en-us/dotnet/azure/sdk/logging
+[logging]: https://docs.microsoft.com/dotnet/azure/sdk/logging
 [default_cred_ref]: https://docs.microsoft.com/en-us/dotnet/api/azure.identity.defaultazurecredential
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fconfidentialledger%2FAzure.Template%2FREADME.png)
 
