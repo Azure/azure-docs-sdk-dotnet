@@ -1,30 +1,30 @@
 ---
 title: Azure Communication Network Traversal client library for .NET
-keywords: Azure, dotnet, SDK, API, Azure.Communication.NetworkTraversal, 
-author: ramya-rao-a
-ms.author: ramyar
-ms.date: 07/14/2021
+keywords: Azure, dotnet, SDK, API, Azure.Communication.NetworkTraversal, communication
+author: maggiepint
+ms.author: magpint
+ms.date: 11/18/2021
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: 
+ms.service: communication
 ---
 
-# Azure Communication Network Traversal client library for .NET - Version 1.0.0-beta.2 
+# Azure Communication Network Traversal client library for .NET - Version 1.0.0-beta.3 
 
 
 Azure Communication Network Traversal enables high bandwidth, low latency connections between peers for real-time communication scenarios and data transfer scenarios by providing access to low-level STUN and TURN services.
 
-[Source code][source]  | [Product documentation][product_docs] 
+[Source code][source] <!--| [Package (NuGet)][package]--> | [Product documentation][product_docs] <!--| [Samples][source_samples]-->
 ## Getting started
 
 ### Install the package
 
 Install the Azure Communication Network Traversal client library for .NET with [NuGet][nuget]:
 
-```Powershell
-dotnet add package Azure.Communication.NetworkTraversal --version 1.0.0-beta.1
+```dotnetcli
+dotnet add package Azure.Communication.NetworkTraversal --version 1.0.0-beta.3
 ```
 
 ### Prerequisites
@@ -67,22 +67,22 @@ var client = new CommunicationRelayClient(endpoint, tokenCredential);
 We guarantee that all client instance methods are thread-safe and independent of each other ([guideline](https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-service-methods-thread-safety)). This ensures that the recommendation of reusing client instances is always safe, even across threads.
 
 ### Additional concepts
-
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.NetworkTraversal_1.0.0-beta.2/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.NetworkTraversal_1.0.0-beta.2/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.NetworkTraversal_1.0.0-beta.2/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.NetworkTraversal_1.0.0-beta.2/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.NetworkTraversal_1.0.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.NetworkTraversal_1.0.0-beta.2/sdk/core/Azure.Core/README.md#mocking) |
+<!-- CLIENT COMMON BAR -->
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.NetworkTraversal_1.0.0-beta.3/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.NetworkTraversal_1.0.0-beta.3/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.NetworkTraversal_1.0.0-beta.3/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.NetworkTraversal_1.0.0-beta.3/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.NetworkTraversal_1.0.0-beta.3/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.NetworkTraversal_1.0.0-beta.3/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
-
+<!-- CLIENT COMMON BAR -->
 
 ## Examples
 
 ## Getting a Relay Configuration for a user
 
 ```C# Snippet:GetRelayConfigurationAsync
-Response<CommunicationRelayConfiguration> relayConfiguration = await client.GetRelayConfigurationAsync(user);
+Response<CommunicationRelayConfiguration> relayConfiguration = await client.GetRelayConfigurationAsync();
 DateTimeOffset turnTokenExpiresOn = relayConfiguration.Value.ExpiresOn;
 IReadOnlyList<CommunicationIceServer> iceServers = relayConfiguration.Value.IceServers;
 Console.WriteLine($"Expires On: {turnTokenExpiresOn}");
@@ -94,6 +94,26 @@ foreach (CommunicationIceServer iceServer in iceServers)
     }
     Console.WriteLine($"ICE Server Username: {iceServer.Username}");
     Console.WriteLine($"ICE Server Credential: {iceServer.Credential}");
+    Console.WriteLine($"ICE Server RouteType: {iceServer.RouteType}");
+}
+```
+
+## Getting a Relay Configuration for a user with a specified routeType
+
+```C# Snippet:GetRelayConfigurationAsyncWithNearestRouteType
+Response<CommunicationRelayConfiguration> relayConfiguration = await client.GetRelayConfigurationAsync(new GetRelayConfigurationOptions { CommunicationUser = user, RouteType = RouteType.Nearest });
+DateTimeOffset turnTokenExpiresOn = relayConfiguration.Value.ExpiresOn;
+IReadOnlyList<CommunicationIceServer> iceServers = relayConfiguration.Value.IceServers;
+Console.WriteLine($"Expires On: {turnTokenExpiresOn}");
+foreach (CommunicationIceServer iceServer in iceServers)
+{
+    foreach (string url in iceServer.Urls)
+    {
+        Console.WriteLine($"ICE Server Url: {url}");
+    }
+    Console.WriteLine($"ICE Server Username: {iceServer.Username}");
+    Console.WriteLine($"ICE Server Credential: {iceServer.Credential}");
+    Console.WriteLine($"ICE Server Route Type: {iceServer.RouteType}");
 }
 ```
 
@@ -111,17 +131,17 @@ This project welcomes contributions and suggestions. Most contributions require 
 
 This project has adopted the [Microsoft Open Source Code of Conduct][coc]. For more information see the [Code of Conduct FAQ][coc_faq] or contact [opencode@microsoft.com][coc_contact] with any additional questions or comments.
 
-
+<!-- LINKS -->
 
 [azure_sub]: https://azure.microsoft.com/free/dotnet/
 [azure_portal]: https://portal.azure.com
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Communication.NetworkTraversal_1.0.0-beta.2/sdk/communication/Azure.Communication.NetworkTraversal/src
-
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Communication.NetworkTraversal_1.0.0-beta.3/sdk/communication/Azure.Communication.NetworkTraversal/src
+<!--[source_samples]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.NetworkTraversal_1.0.0-beta.3/sdk/communication/Azure.Communication.NetworkTraversal/samples-->
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [coc_contact]: mailto:opencode@microsoft.com
-
+<!--[package]: https://www.nuget.org/packages/Azure.Communication.NetworkTraversal-->
 [product_docs]: https://docs.microsoft.com/azure/communication-services/overview
 [nuget]: https://www.nuget.org/
 [communication_resource_docs]: https://docs.microsoft.com/azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp
