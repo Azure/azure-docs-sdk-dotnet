@@ -336,7 +336,7 @@ You may also read more about Microsoft Research's open-source Confidential [Cons
 This project welcomes contributions and suggestions.  Most contributions require
 you to agree to a Contributor License Agreement (CLA) declaring that you have
 the right to, and actually do, grant us the rights to use your contribution. For
-details, visit [cla.microsoft.com][cla].
+details, visit [cla][cla].
 
 This project has adopted the [Microsoft Open Source Code of Conduct][coc].
 For more information see the [Code of Conduct FAQ][coc_faq] or contact
@@ -353,7 +353,11 @@ For more information see the [Code of Conduct FAQ][coc_faq] or contact
 [azure_sub]: https://azure.microsoft.com/free
 [ccf]: https://github.com/Microsoft/CCF
 [azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.ConfidentialLedger_1.0.0-beta.1/sdk/identity/Azure.Identity
-[code_of_conduct]: https://opensource.microsoft.com/codeofconduct
-[code_of_conduct_faq]: https://opensource.microsoft.com/codeofconduct/faq
+[coc]: https://opensource.microsoft.com/codeofconduct
+[coc_faq]: https://opensource.microsoft.com/codeofconduct/faq
+[cla]: https://cla.microsoft.com
+[coc_contact]: mailto:opencode@microsoft.com
+[logging]: https://docs.microsoft.com/dotnet/azure/sdk/logging
+[default_cred_ref]: https://docs.microsoft.com/en-us/dotnet/api/azure.identity.defaultazurecredential
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fconfidentialledger%2FAzure.Template%2FREADME.png)
 
