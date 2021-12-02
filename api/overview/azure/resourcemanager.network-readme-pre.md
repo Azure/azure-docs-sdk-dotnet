@@ -1,9 +1,9 @@
 ---
 title: Azure Network Management client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.Network, virtualnetwork
-author: ramya-rao-a
-ms.author: ramyar
-ms.date: 10/29/2021
+author: aznetsuppgithub
+ms.author: aznetsuppgithub
+ms.date: 12/02/2021
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: virtualnetwork
 ---
 
-# Azure Network Management client library for .NET - Version 1.0.0-beta.3 
+# Azure Network Management client library for .NET - Version 1.0.0-beta.4 
 
 
 This package follows the [new Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html) which provide a number of core capabilities that are shared amongst all Azure SDKs, including:
@@ -28,7 +28,7 @@ This package follows the [new Azure SDK guidelines](https://azure.github.io/azur
 Install the Azure Network management library for .NET with [NuGet](https://www.nuget.org/):
 
 ```PowerShell
-Install-Package Azure.ResourceManager.Network -Version 1.0.0-beta.3
+Install-Package Azure.ResourceManager.Network -Version 1.0.0-beta.4
 ```
 
 ### Prerequisites
@@ -39,7 +39,7 @@ Some options are:
 
 - Through the [Azure CLI Login](https://docs.microsoft.com/cli/azure/authenticate-azure-cli).
 - Via [Visual Studio](https://docs.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet#authenticating-via-visual-studio).
-- Setting [Environment Variables](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Network_1.0.0-beta.3/sdk/resourcemanager/Azure.ResourceManager/docs/AuthUsingEnvironmentVariables.md).
+- Setting [Environment Variables](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Network_1.0.0-beta.4/sdk/resourcemanager/Azure.ResourceManager/docs/AuthUsingEnvironmentVariables.md).
 
 More information and different authentication approaches using Azure Identity can be found in [this document](https://docs.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet).
 
@@ -67,9 +67,9 @@ Key concepts of the Azure .NET SDK can be found [here](https://azure.github.io/a
 
 Documentation is available to help you learn how to use this package
 
-- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Network_1.0.0-beta.3/doc/mgmt_preview_quickstart.md)
+- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Network_1.0.0-beta.4/doc/mgmt_preview_quickstart.md)
 - [API References](https://docs.microsoft.com/dotnet/api/?view=azure-dotnet)
-- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Network_1.0.0-beta.3/sdk/identity/Azure.Identity/README.md)
+- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Network_1.0.0-beta.4/sdk/identity/Azure.Identity/README.md)
 
 ## Examples
 
