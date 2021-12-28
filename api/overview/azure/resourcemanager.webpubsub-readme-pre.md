@@ -1,17 +1,16 @@
 ---
 title: Azure WebPubSub Management client library for .NET
-keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.WebPubSub, webpubsub
+keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.WebPubSub, azure.resourcemanager.webpubsub
 author: vicancy
 ms.author: vicancy
-ms.date: 12/02/2021
+ms.date: 12/28/2021
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: webpubsub
+ms.service: azure.resourcemanager.webpubsub
 ---
-
-# Azure WebPubSub Management client library for .NET - Version 1.0.0-beta.1 
+# Azure WebPubSub Management client library for .NET - Version 1.0.0-beta.2 
 
 
 This package follows the [new Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html) which provide a number of core capabilities that are shared amongst all Azure SDKs, including the intuitive Azure Identity library, an HTTP Pipeline with custom policies, error-handling, distributed tracing, and much more.
@@ -23,7 +22,7 @@ This package follows the [new Azure SDK guidelines](https://azure.github.io/azur
 Install the Azure WebPubSub management library for .NET with [NuGet](https://www.nuget.org/):
 
 ```dotnetcli
-dotnet add package Azure.ResourceManager.WebPubSub --version 1.0.0-beta.1
+dotnet add package Azure.ResourceManager.WebPubSub --version 1.0.0-beta.2
 ```
 
 ### Prerequisites
@@ -32,19 +31,19 @@ dotnet add package Azure.ResourceManager.WebPubSub --version 1.0.0-beta.1
 
 ### Authenticate the Client
 
-To create an authenticated client and start interacting with Azure resources, please see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.WebPubSub_1.0.0-beta.1/doc/mgmt_preview_quickstart.md)
+To create an authenticated client and start interacting with Azure resources, please see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.WebPubSub_1.0.0-beta.2/doc/mgmt_preview_quickstart.md)
 
 ## Key concepts
 
-Key concepts of the Azure .NET SDK can be found [here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.WebPubSub_1.0.0-beta.1/sdk/resourcemanager/Azure.ResourceManager/README.md#key-concepts)
+Key concepts of the Azure .NET SDK can be found [here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.WebPubSub_1.0.0-beta.2/sdk/resourcemanager/Azure.ResourceManager/README.md#key-concepts)
 
 ## Documentation
 
 Documentation is available to help you learn how to use this package
 
-- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.WebPubSub_1.0.0-beta.1/doc/mgmt_preview_quickstart.md)
+- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.WebPubSub_1.0.0-beta.2/doc/mgmt_preview_quickstart.md)
 - [API References](https://docs.microsoft.com/dotnet/api/?view=azure-dotnet)
-- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.WebPubSub_1.0.0-beta.1/sdk/identity/Azure.Identity/README.md)
+- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.WebPubSub_1.0.0-beta.2/sdk/identity/Azure.Identity/README.md)
 
 ## Examples
 
