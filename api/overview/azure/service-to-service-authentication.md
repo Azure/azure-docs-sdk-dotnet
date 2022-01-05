@@ -51,7 +51,7 @@ For .NET applications, the simplest way to work with a managed identity is throu
     // Request an access token for SqlConnection
     sqlConnection = new SqlConnection(YourConnectionString)) 
     { 
-        sqlConnection.AccessToken = azureServiceTokenProvider.GetAccessTokenAsync("https://database.windows.net"); 
+        sqlConnection.AccessToken = await azureServiceTokenProvider.GetAccessTokenAsync("https://database.windows.net"); 
         sqlConnection.Open(); 
     } 
     ```
