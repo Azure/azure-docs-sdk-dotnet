@@ -3,14 +3,14 @@ title: Azure Web PubSub service middleware client library for .NET
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebPubSub.AspNetCore, webpubsub
 author: vicancy
 ms.author: vicancy
-ms.date: 12/09/2021
+ms.date: 01/07/2022
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
 ms.service: webpubsub
 ---
-# Azure Web PubSub service middleware client library for .NET - Version 1.0.0-beta.2 
+# Azure Web PubSub service middleware client library for .NET - Version 1.0.0-beta.3 
 
 
 [Azure Web PubSub Service](https://aka.ms/awps/doc) is a service that enables you to build real-time messaging web applications using WebSockets and the publish-subscribe pattern. Any platform supporting WebSocket APIs can connect to the service easily, e.g. web pages, mobile applications, edge devices, etc. The service manages the WebSocket connections for you and allows up to 100K **concurrent** connections. It provides powerful APIs for you to manage these clients and deliver real-time messages.
@@ -23,7 +23,7 @@ This library can be used to do the following actions. Details about the terms us
 - Add validation options for upstream request
 - API to add user defined functionality to handle different upstream events
 
-[Source code](https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.WebPubSub.AspNetCore_1.0.0-beta.2/sdk/webpubsub/Microsoft.Azure.WebPubSub.AspNetCore/src) |
+[Source code](https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.WebPubSub.AspNetCore_1.0.0-beta.3/sdk/webpubsub/Microsoft.Azure.WebPubSub.AspNetCore/src) |
 Package |
 [API reference documentation](https://aka.ms/awps/sdk/csharp) |
 [Product documentation](https://aka.ms/awps/doc) |
@@ -51,6 +51,7 @@ In order to interact with the service, you'll need to create an instance of the 
 ### Create a `WebPubSubServiceClient`
 
 ```C# Snippet:WebPubSubAuthenticate
+// Create a WebPubSubServiceClient that will authenticate using a key credential.
 var serviceClient = new WebPubSubServiceClient(new Uri(endpoint), "some_hub", new AzureKeyCredential(key));
 ```
 
@@ -63,7 +64,7 @@ For information about general Web PubSub concepts [Concepts in Azure Web PubSub]
 `WebPubSubHub` is an abstract class to let users implement the subscribed Web PubSub service events. After user register the [event handler](https://docs.microsoft.com/azure/azure-web-pubsub/howto-develop-eventhandler) in service side, these events will be forwarded from service to server. And `WebPubSubHub` provides 4 methods mapping to the service events to enable users deal with these events, for example, client management, validations or working with `Azure.Messaging.WebPubSub` to broadcast the messages. See samples below for details.
 
 > NOTE
-> 
+>
 > Among the 4 methods, `OnConnectAsync()` and `OnMessageReceivedAsync()` are blocking events that service will respect server returns. Besides the mapped correct response, server can throw exceptions whenever the request is against the server side logic. And `UnauthorizedAccessException` will be converted to `401Unauthorized` and rest will be converted to `500InternalServerError` along with exception message to return service. Then service will drop current client connection.
 
 ## Examples
@@ -80,7 +81,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-### Map `WebPubSubHub` to endpoint routing.
+### Map `WebPubSubHub` to endpoint routing
 
 The path should match the value configured in the Azure Web PubSub service `EventHandler`. For example, if placeholder is using like `/api/{event}`, then the path set in code should be `/api/{event}` as well.
 
@@ -110,7 +111,8 @@ public override ValueTask<ConnectEventResponse> OnConnectAsync(ConnectEventReque
 ## Troubleshooting
 
 ### Setting up console logging
-You can also easily [enable console logging](https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.WebPubSub.AspNetCore_1.0.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md#logging) if you want to dig deeper into the requests you're making against the service.
+
+You can also easily [enable console logging](https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.WebPubSub.AspNetCore_1.0.0-beta.3/sdk/core/Azure.Core/samples/Diagnostics.md#logging) if you want to dig deeper into the requests you're making against the service.
 
 ## Next steps
 
@@ -134,5 +136,5 @@ For more information see the [Code of Conduct FAQ](https://opensource.microsoft.
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Ftemplate%2FAzure.Template%2FREADME.png)
 
 [azure_sub]: https://azure.microsoft.com/free/dotnet/
-[sample_ref]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebPubSub.AspNetCore_1.0.0-beta.2/sdk/webpubsub/Microsoft.Azure.WebPubSub.AspNetCore/tests/Samples/
+[sample_ref]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebPubSub.AspNetCore_1.0.0-beta.3/sdk/webpubsub/Microsoft.Azure.WebPubSub.AspNetCore/tests/Samples/
 
