@@ -1,22 +1,17 @@
 ---
 title: Azure Communication Phone Numbers client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Communication.PhoneNumbers, communication
-author: ramya-rao-a
-ms.author: ramyar
-ms.date: 03/29/2021
+author: RoyHerrod
+ms.author: RoyHerrod
+ms.date: 01/20/2022
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
 ms.service: communication
 ---
+# Azure Communication Phone Numbers client library for .NET - Version 1.1.0-beta.1 
 
-# Azure Communication Phone Numbers client library for .NET - Version 1.0.0-beta.6 
-
-
-> Server Version:
-
-> Phone number client: 2020-07-20-preview1
 
 Azure Communication Phone Numbers is managing phone numbers for Azure Communication Services.
 
@@ -28,8 +23,8 @@ Azure Communication Phone Numbers is managing phone numbers for Azure Communicat
 
 Install the Azure Communication Phone Numbers client library for .NET with [NuGet][nuget]:
 
-```Powershell
-dotnet add package Azure.Communication.PhoneNumbers --version 1.0.0-beta.6
+```dotnetcli
+dotnet add package Azure.Communication.PhoneNumbers --version 1.0.0
 ```
 
 ### Prerequisites
@@ -86,12 +81,12 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.PhoneNumbers_1.0.0-beta.6/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.PhoneNumbers_1.0.0-beta.6/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.PhoneNumbers_1.0.0-beta.6/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.PhoneNumbers_1.0.0-beta.6/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.PhoneNumbers_1.0.0-beta.6/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.PhoneNumbers_1.0.0-beta.6/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.PhoneNumbers_1.1.0-beta.1/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.PhoneNumbers_1.1.0-beta.1/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.PhoneNumbers_1.1.0-beta.1/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.PhoneNumbers_1.1.0-beta.1/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.PhoneNumbers_1.1.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.PhoneNumbers_1.1.0-beta.1/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
@@ -149,7 +144,7 @@ If you no longer need a phone number you can release it.
 
 ```C# Snippet:ReleasePhoneNumbersAsync
 var purchasedPhoneNumber = "<purchased_phone_number>";
-var releaseOperation = client.StartReleasePhoneNumber(purchasedPhoneNumber);
+var releaseOperation = await client.StartReleasePhoneNumberAsync(purchasedPhoneNumber);
 await releaseOperation.WaitForCompletionResponseAsync();
 ```
 
@@ -157,7 +152,7 @@ await releaseOperation.WaitForCompletionResponseAsync();
 
 ## Next steps
 
-[Read more about Communication user access tokens][user_access_token]
+[Read more about managing phone numbers][phone_numbers]
 
 ## Contributing
 
@@ -167,15 +162,16 @@ This project has adopted the [Microsoft Open Source Code of Conduct][coc]. For m
 
 <!-- LINKS -->
 
-[azure_sub]: https://azure.microsoft.com/free/
+[azure_sub]: https://azure.microsoft.com/free/dotnet/
 [azure_portal]: https://portal.azure.com
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Communication.PhoneNumbers_1.0.0-beta.6/sdk/communication/Azure.Communication.PhoneNumbers/src
-[source_samples]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.PhoneNumbers_1.0.0-beta.6/sdk/communication/Azure.Communication.PhoneNumbers/samples
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Communication.PhoneNumbers_1.1.0-beta.1/sdk/communication/Azure.Communication.PhoneNumbers/src
+[source_samples]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.PhoneNumbers_1.1.0-beta.1/sdk/communication/Azure.Communication.PhoneNumbers/samples
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [coc_contact]: mailto:opencode@microsoft.com
 <!--[package]: https://www.nuget.org/packages/Azure.Communication.PhoneNumbers-->
+[phone_numbers]: https://docs.microsoft.com/azure/communication-services/quickstarts/telephony/get-phone-number?pivots=platform-azp
 [product_docs]: https://docs.microsoft.com/azure/communication-services/overview
 [nuget]: https://www.nuget.org/
 [communication_resource_docs]: https://docs.microsoft.com/azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp
