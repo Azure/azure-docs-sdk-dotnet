@@ -14,7 +14,7 @@ ms.service: tables
 # Azure Tables client library for .NET - Version 12.2.0-beta.1 
 
 > [!IMPORTANT]
-> The Azure Tables client library for .NET is now generally available (GA) and fully supported for production use. More details on the GA release can be found in the [GA documentation](data.tables-readme.md)
+> The Azure Tables client library for .NET is now generally available (GA) and fully supported for production use. **The GA library should be used instead of this preview version to ensure you are using the most secure and performant version of the library.** More details on the GA release can be found in the [GA documentation](data.tables-readme.md)
 
 Azure Table storage is a service that stores large amounts of structured NoSQL data in the cloud, providing 
 a key/attribute store with a schema-less design.
