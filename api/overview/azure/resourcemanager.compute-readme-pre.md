@@ -3,14 +3,14 @@ title: Azure Compute Management client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.Compute, compute
 author: bilaakpan-ms
 ms.author: bilaakpan-ms
-ms.date: 12/28/2021
+ms.date: 01/29/2022
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
 ms.service: compute
 ---
-# Azure Compute Management client library for .NET - Version 1.0.0-beta.5 
+# Azure Compute Management client library for .NET - Version 1.0.0-beta.6 
 
 
 This package follows the [new Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html),which provide core capabilities that are shared amongst all Azure SDKs, including:
@@ -27,7 +27,7 @@ This package follows the [new Azure SDK guidelines](https://azure.github.io/azur
 Install the Azure Compute management library for .NET with [NuGet](https://www.nuget.org/):
 
 ```PowerShell
-Install-Package Azure.ResourceManager.Compute -Version 1.0.0-beta.5
+Install-Package Azure.ResourceManager.Compute -Version 1.0.0-beta.6
 ```
 
 ### Prerequisites
@@ -36,7 +36,7 @@ Set up a way to authenticate to Azure with Azure Identity.
 Some options are:
 - Through the [Azure CLI Login](https://docs.microsoft.com/cli/azure/authenticate-azure-cli).
 - Via [Visual Studio](https://docs.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet#authenticating-via-visual-studio).
-- Setting [Environment Variables](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.0.0-beta.5/sdk/resourcemanager/Azure.ResourceManager/docs/AuthUsingEnvironmentVariables.md).
+- Setting [Environment Variables](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.0.0-beta.6/sdk/resourcemanager/Azure.ResourceManager/docs/AuthUsingEnvironmentVariables.md).
 
 More information and different authentication approaches using Azure Identity can be found in [this document](https://docs.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet).
 
@@ -49,6 +49,7 @@ To authenticate to Azure and create an `ArmClient`, do the following:
 ```C# Snippet:Readme_AuthClient
 using Azure.Identity;
 using Azure.ResourceManager;
+using Azure.Core;
 
 // Code omitted for brevity
 
@@ -59,7 +60,7 @@ Additional documentation for the `Azure.Identity.DefaultAzureCredential` class c
 
 ## Key concepts
 
-Key concepts of the Azure .NET SDK can be found [here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.0.0-beta.5/sdk/resourcemanager/Azure.ResourceManager/README.md#key-concepts)
+Key concepts of the Azure .NET SDK can be found [here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.0.0-beta.6/sdk/resourcemanager/Azure.ResourceManager/README.md#key-concepts)
 
 ## Examples
 
@@ -73,8 +74,8 @@ Subscription subscription = await armClient.GetDefaultSubscriptionAsync();
 ResourceGroupCollection rgCollection = subscription.GetResourceGroups();
 // With the collection, we can create a new resource group with an specific name
 string rgName = "myRgName";
-Location location = Location.WestUS2;
-ResourceGroupCreateOrUpdateOperation lro = await rgCollection.CreateOrUpdateAsync(rgName, new ResourceGroupData(location));
+AzureLocation location = AzureLocation.WestUS2;
+ResourceGroupCreateOrUpdateOperation lro = await rgCollection.CreateOrUpdateAsync(true, rgName, new ResourceGroupData(location));
 ResourceGroup resourceGroup = lro.Value;
 ```
 
@@ -82,7 +83,7 @@ ResourceGroup resourceGroup = lro.Value;
 AvailabilitySetCollection availabilitySetCollection = resourceGroup.GetAvailabilitySets();
 string availabilitySetName = "myAvailabilitySet";
 AvailabilitySetData input = new AvailabilitySetData(location);
-AvailabilitySetCreateOrUpdateOperation lro = await availabilitySetCollection.CreateOrUpdateAsync(availabilitySetName, input);
+AvailabilitySetCreateOrUpdateOperation lro = await availabilitySetCollection.CreateOrUpdateAsync(true, availabilitySetName, input);
 AvailabilitySet availabilitySet = lro.Value;
 ```
 
@@ -146,7 +147,7 @@ AvailabilitySetCollection availabilitySetCollection = resourceGroup.GetAvailabil
 string availabilitySetName = "myAvailabilitySet";
 AvailabilitySet availabilitySet = await availabilitySetCollection.GetAsync(availabilitySetName);
 // delete the availability set
-await availabilitySet.DeleteAsync();
+await availabilitySet.DeleteAsync(true);
 ```
 
 ### Check if availability set exists
@@ -215,7 +216,7 @@ AvailabilitySet availabilitySet = await availabilitySetCollection.GetAsync(avail
 AvailabilitySet updatedAvailabilitySet = await availabilitySet.AddTagAsync("key", "value");
 ```
 
-For more detailed examples, take a look at [samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.ResourceManager.Compute_1.0.0-beta.5/sdk/compute/Azure.ResourceManager.Compute/samples) we have available.
+For more detailed examples, take a look at [samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.ResourceManager.Compute_1.0.0-beta.6/sdk/compute/Azure.ResourceManager.Compute/samples) we have available.
 
 ## Troubleshooting
 
@@ -229,8 +230,8 @@ For more detailed examples, take a look at [samples](https://github.com/Azure/az
 
 ### More sample code
 
-- [Managing Disks](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.0.0-beta.5/sdk/compute/Azure.ResourceManager.Compute/samples/Sample1_ManagingDisks.md)
-- [Managing Virtual Machines](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.0.0-beta.5/sdk/compute/Azure.ResourceManager.Compute/samples/Sample2_ManagingVirtualMachines.md)
+- [Managing Disks](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.0.0-beta.6/sdk/compute/Azure.ResourceManager.Compute/samples/Sample1_ManagingDisks.md)
+- [Managing Virtual Machines](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.0.0-beta.6/sdk/compute/Azure.ResourceManager.Compute/samples/Sample2_ManagingVirtualMachines.md)
 
 ### Additional Documentation
 
@@ -238,7 +239,7 @@ For more information on Azure SDK, please refer to [this website](https://azure.
 
 ## Contributing
 
-For details on contributing to this repository, see the [contributing guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.0.0-beta.5/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md).
+For details on contributing to this repository, see the [contributing guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.0.0-beta.6/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md).
 
 This project welcomes contributions and suggestions. Most contributions
 require you to agree to a Contributor License Agreement (CLA) declaring
