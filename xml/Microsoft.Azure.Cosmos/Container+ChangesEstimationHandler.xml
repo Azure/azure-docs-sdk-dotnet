@@ -15,6 +15,7 @@
     <AssemblyVersion>3.22.0.0</AssemblyVersion>
     <AssemblyVersion>3.22.1.0</AssemblyVersion>
     <AssemblyVersion>3.23.0.0</AssemblyVersion>
+    <AssemblyVersion>3.24.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Delegate</BaseTypeName>
@@ -27,12 +28,15 @@
     <ReturnType>System.Threading.Tasks.Task</ReturnType>
   </ReturnValue>
   <Docs>
-    <param name="estimatedPendingChanges">An estimation in number of items.</param>
+    <param name="estimatedPendingChanges">An estimation in number of transactions.</param>
     <param name="cancellationToken">A cancellation token representing the current cancellation status of the <see cref="T:Microsoft.Azure.Cosmos.ChangeFeedProcessor" /> instance.</param>
     <summary>
             Delegate to receive the estimation of pending changes to be read by the associated <see cref="T:Microsoft.Azure.Cosmos.ChangeFeedProcessor" /> instance.
             </summary>
     <returns>A <see cref="T:System.Threading.Tasks.Task" /> representing the asynchronous operation that is going to be done with the estimation.</returns>
-    <remarks>To be added.</remarks>
+    <remarks>
+            The estimation over the Change Feed identifies volumes of transactions. If operations in the container are performed through stored procedures, transactional batch or bulk, a group of operations may share the same <see href="https://docs.microsoft.com/azure/cosmos-db/stored-procedures-triggers-udfs#transactions">transaction scope</see> and represented by a single transaction. 
+            In those cases, the estimation might not exactly represent number of items, but it is still valid to understand if the pending volume is increasing, decreasing, or on a steady state.
+            </remarks>
   </Docs>
 </Type>
