@@ -1,17 +1,16 @@
 ---
 title: Azure Cognitive Language Services Conversations client library for .NET
-keywords: Azure, dotnet, SDK, API, Azure.AI.Language.Conversations, cognitivelanguage
-author: ramya-rao-a
-ms.author: ramyar
-ms.date: 11/04/2021
+keywords: Azure, dotnet, SDK, API, Azure.AI.Language.Conversations, cognitivelanguageunderstanding
+author: heaths
+ms.author: heaths
+ms.date: 02/08/2022
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: cognitivelanguage
+ms.service: cognitivelanguageunderstanding
 ---
-
-# Azure Cognitive Language Services Conversations client library for .NET - Version 1.0.0-beta.1 
+# Azure Cognitive Language Services Conversations client library for .NET - Version 1.0.0-beta.2 
 
 
 Azure Conversations - the new version of Language Understanding (LUIS) - is a cloud-based conversational AI service that applies custom machine-learning intelligence to a user's conversational, natural language text to predict overall meaning; and pulls out relevant, detailed information. The service utilizes state-of-the-art technology to create and utilize natively multilingual models, which means that users would be able to train their models in one language but predict in others.
@@ -73,12 +72,12 @@ We guarantee that all client instance methods are thread-safe and independent of
 ### Additional concepts
 
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.Conversations_1.0.0-beta.1/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.Conversations_1.0.0-beta.1/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.Conversations_1.0.0-beta.1/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.Conversations_1.0.0-beta.1/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.Conversations_1.0.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.Conversations_1.0.0-beta.1/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.Conversations_1.0.0-beta.2/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.Conversations_1.0.0-beta.2/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.Conversations_1.0.0-beta.2/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.Conversations_1.0.0-beta.2/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.Conversations_1.0.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.Conversations_1.0.0-beta.2/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
@@ -86,17 +85,18 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 The Azure.AI.Language.Conversations client library provides both synchronous and asynchronous APIs.
 
-The following examples show common scenarios using the `client` [created above](#Create a ConversationAnalysisClient).
+The following examples show common scenarios using the `client` [created above](#create-a-conversationanalysisclient).
 
 ### Analyze a conversation
 
-To analyze a conversation, we can then call the `client.AnalyzeConversation()` method which takes the project name, deployment name, and query as parameters.
+To analyze a conversation, we can then call the `client.AnalyzeConversation()` method which takes a Conversations project and an utterance as parameters.
 
 ```C# Snippet:ConversationAnalysis_AnalyzeConversation
+ConversationsProject conversationsProject = new ConversationsProject("Menu", "production");
+
 Response<AnalyzeConversationResult> response = client.AnalyzeConversation(
-    "Menu",
-    "production",
-    "We'll have 2 plates of seared salmon nigiri.");
+    "We'll have 2 plates of seared salmon nigiri.",
+    conversationsProject);
 
 Console.WriteLine($"Top intent: {response.Value.Prediction.TopIntent}");
 ```
@@ -104,11 +104,17 @@ Console.WriteLine($"Top intent: {response.Value.Prediction.TopIntent}");
 The specified parameters can also be used to initialize a `ConversationAnalysisOptions` instance. You can then call `AnalyzeConversation()` using the options object as a parameter as shown below.
 
 ```C# Snippet:ConversationAnalysis_AnalyzeConversationWithOptions
-AnalyzeConversationOptions options = new AnalyzeConversationOptions(
-    "Menu",
-    "production",
-    "We'll have 2 plates of seared salmon nigiri.");
-Response<AnalyzeConversationResult> response = client.AnalyzeConversation(options);
+ConversationsProject conversationsProject = new ConversationsProject("Menu", "production");
+AnalyzeConversationOptions options = new AnalyzeConversationOptions()
+{
+    IsLoggingEnabled = true,
+    Verbose = true,
+};
+
+Response<AnalyzeConversationResult> response = client.AnalyzeConversation(
+    "We'll have 2 plates of seared salmon nigiri.",
+    conversationsProject,
+    options);
 
 Console.WriteLine($"Top intent: {response.Value.Prediction.TopIntent}");
 ```
@@ -118,14 +124,15 @@ Console.WriteLine($"Top intent: {response.Value.Prediction.TopIntent}");
 The language property in the `ConversationAnalysisOptions` can be used to specify the language of the conversation.
 
 ```C# Snippet:ConversationAnalysis_AnalyzeConversationWithLanguage
-AnalyzeConversationOptions options = new AnalyzeConversationOptions(
-    "Menu",
-    "production", 
-    "Tendremos 2 platos de nigiri de salmón braseado.")
+ConversationsProject conversationsProject = new ConversationsProject("Menu", "production");
+AnalyzeConversationOptions options = new AnalyzeConversationOptions()
 {
     Language = "es"
 };
-Response<AnalyzeConversationResult> response = client.AnalyzeConversation(options);
+Response<AnalyzeConversationResult> response = client.AnalyzeConversation(
+    "Tendremos 2 platos de nigiri de salmón braseado.",
+    conversationsProject,
+    options);
 
 Console.WriteLine($"Top intent: {response.Value.Prediction.TopIntent}");
 ```
@@ -136,17 +143,17 @@ Other optional properties can be set such as verbosity and whether service loggi
 
 ### General
 
-When you interact with the Cognitive Language Services Conversations client library using the .NET SDK, errors returned by the service correspond to the same HTTP status codes returned for [REST API][conversationanalysis_rest_docs] requests.
+When you interact with the Cognitive Language Services Conversations client library using the .NET SDK, errors returned by the service correspond to the same HTTP status codes returned for REST API requests.
 
-For example, if you submit a query to a non-existant project, a `400` error is returned indicating "Bad Request".
+For example, if you submit a utterance to a non-existant project, a `400` error is returned indicating "Bad Request".
 
 ```C# Snippet:ConversationAnalysisClient_BadRequest
 try
 {
+    ConversationsProject conversationsProject = new ConversationsProject("invalid-project", "production");
     Response<AnalyzeConversationResult> response = client.AnalyzeConversation(
-        "invalid-project",
-        "production",
-        "We'll have 2 plates of seared salmon nigiri.");
+        "We'll have 2 plates of seared salmon nigiri.",
+        conversationsProject);
 }
 catch (RequestFailedException ex)
 {
@@ -221,21 +228,16 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [cognitive_auth]: https://docs.microsoft.com/azure/cognitive-services/authentication/
-[contributing]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.Conversations_1.0.0-beta.1/CONTRIBUTING.md
-[core_logging]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.Conversations_1.0.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md
+[contributing]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.Conversations_1.0.0-beta.2/CONTRIBUTING.md
+[core_logging]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.Conversations_1.0.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md
 [nuget]: https://www.nuget.org/
 
-[conversationanalysis_client_class]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.Conversations_1.0.0-beta.1/sdk/cognitivelanguage/Azure.AI.Language.Conversations/src/ConversationAnalysisClient.cs
-[conversationanalysis_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Language.Conversations_1.0.0-beta.1/sdk/cognitivelanguage/Azure.AI.Language.Conversations/src/
-[conversationanalysis_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Language.Conversations_1.0.0-beta.1/sdk/cognitivelanguage/Azure.AI.Language.Conversations/samples/
-
-<!--Update once nuget is released-->
-[conversationanalysis_nuget_package]: https://nuget.org/packages
-
-<!--Will be updated once service documentation is public-->
-[conversationanalysis_docs]: https://docs.microsoft.com/azure/cognitive-services/qnamaker/
-[conversationanalysis_docs_demos]: https://azure.microsoft.com/services/cognitive-services/qna-maker/#demo
-[conversationanalysis_docs_features]: https://azure.microsoft.com/services/cognitive-services/qna-maker/#features
-[conversationanalysis_refdocs]: https://docs.microsoft.com/dotnet/api/Azure.AI.Language.QuestionAnswering/
-[conversationanalysis_rest_docs]: https://docs.microsoft.com/rest/api/cognitiveservices-qnamaker/
+[conversationanalysis_client_class]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.Conversations_1.0.0-beta.2/sdk/cognitivelanguage/Azure.AI.Language.Conversations/src/ConversationAnalysisClient.cs
+[conversationanalysis_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Language.Conversations_1.0.0-beta.2/sdk/cognitivelanguage/Azure.AI.Language.Conversations/src/
+[conversationanalysis_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Language.Conversations_1.0.0-beta.2/sdk/cognitivelanguage/Azure.AI.Language.Conversations/samples/
+[conversationanalysis_nuget_package]: https://www.nuget.org/packages/Azure.AI.Language.Conversations/1.0.0-beta.1
+[conversationanalysis_docs]: https://docs.microsoft.com/azure/cognitive-services/language-service/conversational-language-understanding/overview
+[conversationanalysis_docs_demos]: https://docs.microsoft.com/azure/cognitive-services/language-service/conversational-language-understanding/quickstart
+[conversationanalysis_docs_features]: https://docs.microsoft.com/azure/cognitive-services/language-service/conversational-language-understanding/overview
+[conversationanalysis_refdocs]: https://review.docs.microsoft.com/dotnet/api/azure.ai.language.conversations
 
