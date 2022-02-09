@@ -1,17 +1,16 @@
 ---
 title: Azure Cognitive Language Services Question Answering client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.Language.QuestionAnswering, cognitivelanguage
-author: ramya-rao-a
-ms.author: ramyar
-ms.date: 10/05/2021
+author: heaths
+ms.author: heaths
+ms.date: 02/08/2022
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
 ms.service: cognitivelanguage
 ---
-
-# Azure Cognitive Language Services Question Answering client library for .NET - Version 1.0.0-beta.2 
+# Azure Cognitive Language Services Question Answering client library for .NET - Version 1.1.0-beta.1 
 
 
 The Question Answering service is a cloud-based API service that lets you create a conversational question-and-answer layer over your existing data. Use it to build a knowledge base by extracting questions and answers from your semi-structured content, including FAQ, manuals, and documents. Answer users’ questions with the best answers from the QnAs in your knowledge base—automatically. Your knowledge base gets smarter, too, as it continually learns from user behavior.
@@ -37,7 +36,7 @@ dotnet add package Azure.AI.Language.QuestionAnswering --prerelease
 
 ### Authenticate the client
 
-In order to interact with the Question Answering service, you'll need to create an instance of the [`QuestionAnsweringClient`][questionanswering_client_class] class. You will need an **endpoint**, and an **API key** to instantiate a client object. For more information regarding authenticating with Cognitive Services, see [Authenticate requests to Azure Cognitive Services][cognitive_auth].
+In order to interact with the Question Answering service, you'll need to either create an instance of the [`QuestionAnsweringClient`][questionanswering_client_class] class for querying existing projects or an instance of the [`QuestionAnsweringProjectsClient`][questionansweringprojects_client_class] for managing projects within your resource. You will need an **endpoint**, and an **API key** to instantiate a client object. For more information regarding authenticating with Cognitive Services, see [Authenticate requests to Azure Cognitive Services][cognitive_auth].
 
 #### Get an API key
 
@@ -54,10 +53,21 @@ az cognitiveservices account keys list --resource-group <resource-group-name> --
 Once you've determined your **endpoint** and **API key** you can instantiate a `QuestionAnsweringClient`:
 
 ```C# Snippet:QuestionAnsweringClient_Create
-Uri endpoint = new Uri("https://myaccount.api.cognitive.microsoft.com");
-AzureKeyCredential credential = new AzureKeyCredential("{api-key}");
+Uri endpoint = new Uri("{LanguageEndpoint}");
+AzureKeyCredential credential = new AzureKeyCredential("{ApiKey}");
 
 QuestionAnsweringClient client = new QuestionAnsweringClient(endpoint, credential);
+```
+
+#### Create a QuestionAnsweringProjectsClient
+
+With your **endpoint** and **API key**, you can instantiate a `QuestionAnsweringProjectsClient`:
+
+```C# Snippet:QuestionAnsweringProjectsClient_Create
+Uri endpoint = new Uri("{LanguageEndpoint}");
+AzureKeyCredential credential = new AzureKeyCredential("{ApiKey}");
+
+QuestionAnsweringProjectsClient client = new QuestionAnsweringProjectsClient(endpoint, credential);
 ```
 
 ## Key concepts
@@ -66,6 +76,10 @@ QuestionAnsweringClient client = new QuestionAnsweringClient(endpoint, credentia
 
 The [`QuestionAnsweringClient`][questionanswering_client_class] is the primary interface for asking questions using a knowledge base with your own information, or text input using pre-trained models. It provides both synchronous and asynchronous APIs to ask questions.
 
+### QuestionAnsweringProjectsClient
+
+The [`QuestionAnsweringProjectsClient`][questionansweringprojects_client_class] provides an interface for managing Question Answering projects. Examples of the available operations include creating and deploying projects, updating your knowledge sources, and updating question and answer pairs. It provides both synchronous and asynchronous APIs.
+
 ### Thread safety
 
 We guarantee that all client instance methods are thread-safe and independent of each other ([guideline](https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-service-methods-thread-safety)). This ensures that the recommendation of reusing client instances is always safe, even across threads.
@@ -73,34 +87,36 @@ We guarantee that all client instance methods are thread-safe and independent of
 ### Additional concepts
 
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.QuestionAnswering_1.0.0-beta.2/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.QuestionAnswering_1.0.0-beta.2/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.QuestionAnswering_1.0.0-beta.2/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.QuestionAnswering_1.0.0-beta.2/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.QuestionAnswering_1.0.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.QuestionAnswering_1.0.0-beta.2/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.QuestionAnswering_1.1.0-beta.1/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.QuestionAnswering_1.1.0-beta.1/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.QuestionAnswering_1.1.0-beta.1/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.QuestionAnswering_1.1.0-beta.1/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.QuestionAnswering_1.1.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.QuestionAnswering_1.1.0-beta.1/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
-## Examples
+## Examples 
+
+### QuestionAnsweringClient
 
 The Azure.AI.Language.QuestionAnswering client library provides both synchronous and asynchronous APIs.
 
 The following examples show common scenarios using the `client` [created above](#create-a-questionansweringclient).
 
-### Ask a question
+#### Ask a question
 
 The only input required to a ask a question using an existing knowledge base is just the question itself:
 
-```C# Snippet:QuestionAnsweringClient_QueryKnowledgeBase
-string projectName = "FAQ";
-string deploymentName = "prod";
-QueryKnowledgeBaseOptions options = new QueryKnowledgeBaseOptions(projectName, deploymentName, "How long should my Surface battery last?");
-Response<KnowledgeBaseAnswers> response = client.QueryKnowledgeBase(options);
+```C# Snippet:QuestionAnsweringClient_GetAnswers
+string projectName = "{ProjectName}";
+string deploymentName = "{DeploymentName}";
+QuestionAnsweringProject project = new QuestionAnsweringProject(projectName, deploymentName);
+Response<AnswersResult> response = client.GetAnswers("How long should my Surface battery last?", project);
 
 foreach (KnowledgeBaseAnswer answer in response.Value.Answers)
 {
-    Console.WriteLine($"({answer.ConfidenceScore:P2}) {answer.Answer}");
+    Console.WriteLine($"({answer.Confidence:P2}) {answer.Answer}");
     Console.WriteLine($"Source: {answer.Source}");
     Console.WriteLine();
 }
@@ -108,27 +124,114 @@ foreach (KnowledgeBaseAnswer answer in response.Value.Answers)
 
 You can set additional properties on `QuestionAnsweringClientOptions` to limit the number of answers, specify a minimum confidence score, and more.
 
-### Ask a follow-up question
+#### Ask a follow-up question
 
 If your knowledge base is configured for [chit-chat][questionanswering_docs_chat], you can ask a follow-up question provided the previous question-answering ID and, optionally, the exact question the user asked:
 
 ```C# Snippet:QuestionAnsweringClient_Chat
-string projectName = "FAQ";
-string deploymentName = "prod";
+string projectName = "{ProjectName}";
+string deploymentName = "{DeploymentName}";
 // Answers are ordered by their ConfidenceScore so assume the user choose the first answer below:
 KnowledgeBaseAnswer previousAnswer = answers.Answers.First();
-QueryKnowledgeBaseOptions options = new QueryKnowledgeBaseOptions(projectName, deploymentName, "How long should charging take?")
+QuestionAnsweringProject project = new QuestionAnsweringProject(projectName, deploymentName);
+AnswersOptions options = new AnswersOptions
 {
-    Context = new KnowledgeBaseAnswerRequestContext(previousAnswer.Id.Value)
+    AnswerContext = new KnowledgeBaseAnswerContext(previousAnswer.QnaId.Value)
 };
 
-Response<KnowledgeBaseAnswers> response = client.QueryKnowledgeBase(options);
+Response<AnswersResult> response = client.GetAnswers("How long should charging take?", project, options);
 
 foreach (KnowledgeBaseAnswer answer in response.Value.Answers)
 {
-    Console.WriteLine($"({answer.ConfidenceScore:P2}) {answer.Answer}");
+    Console.WriteLine($"({answer.Confidence:P2}) {answer.Answer}");
     Console.WriteLine($"Source: {answer.Source}");
     Console.WriteLine();
+}
+```
+
+### QuestionAnsweringProjectsClient
+
+The following examples show common scenarios using the `QuestionAnsweringProjectsClient` instance [created in this section](#create-a-questionansweringprojectsclient).
+
+#### Create a new project
+
+To create a new project, you must specify the project's name and a create a `RequestContent` instance with the parameters needed to set up the project.
+
+```C# Snippet:QuestionAnsweringProjectsClient_CreateProject
+// Set project name and request content parameters
+string newProjectName = "{ProjectName}";
+RequestContent creationRequestContent = RequestContent.Create(
+    new {
+        description = "This is the description for a test project",
+        language = "en",
+        multilingualResource = false,
+        settings = new {
+            defaultAnswer = "No answer found for your question."
+            }
+        }
+    );
+
+Response creationResponse = client.CreateProject(newProjectName, creationRequestContent);
+
+// Projects can be retrieved as follows
+Pageable<BinaryData> projects = client.GetProjects();
+
+Console.WriteLine("Projects: ");
+foreach (BinaryData project in projects)
+{
+    Console.WriteLine(project);
+}
+```
+
+#### Deploy your project
+
+Your projects can be deployed using the `DeployProjectAsync` or the synchronous `DeployProject`. All you need to specify is the project's name and the deployment name that you wish to use. Please note that the service will not allow you to deploy empty projects.
+
+```C# Snippet:QuestionAnsweringProjectsClient_DeployProject
+// Set deployment name and start operation
+string newDeploymentName = "{DeploymentName}";
+Operation<BinaryData> deploymentOperation = client.DeployProject(waitForCompletion: true, newProjectName, newDeploymentName);
+
+// Deployments can be retrieved as follows
+Pageable<BinaryData> deployments = client.GetDeployments(newProjectName);
+Console.WriteLine("Deployments: ");
+foreach (BinaryData deployment in deployments)
+{
+    Console.WriteLine(deployment);
+}
+```
+
+#### Add a knowledge source
+
+One way to add content to your project is to add a knowledge source. The following example shows how you can set up a `RequestContent` instance to add a new knowledge source of the type "url".
+
+```C# Snippet:QuestionAnsweringProjectsClient_UpdateSources
+// Set request content parameters for updating our new project's sources
+string sourceUri = "{KnowledgeSourceUri}";
+RequestContent updateSourcesRequestContent = RequestContent.Create(
+    new[] {
+        new {
+                op = "add",
+                value = new
+                {
+                    displayName = "MicrosoftFAQ",
+                    source = sourceUri,
+                    sourceUri = sourceUri,
+                    sourceKind = "url",
+                    contentStructureKind = "unstructured",
+                    refresh = false
+                }
+            }
+    });
+
+Operation<BinaryData> updateSourcesOperation = client.UpdateSources(waitForCompletion: true, newProjectName, updateSourcesRequestContent);
+
+// Knowledge Sources can be retrieved as follows
+Pageable<BinaryData> sources = client.GetSources(newProjectName);
+Console.WriteLine("Sources: ");
+foreach (BinaryData source in sources)
+{
+    Console.WriteLine(source);
 }
 ```
 
@@ -143,7 +246,8 @@ For example, if you submit a question to a non-existant knowledge base, a `400` 
 ```C# Snippet:QuestionAnsweringClient_BadRequest
 try
 {
-    Response<KnowledgeBaseAnswers> response = client.QueryKnowledgeBase("invalid-knowledgebase", "test", "Does this knowledge base exist?");
+    QuestionAnsweringProject project = new QuestionAnsweringProject("invalid-knowledgebase", "test");
+    Response<AnswersResult> response = client.GetAnswers("Does this knowledge base exist?", project);
 }
 catch (RequestFailedException ex)
 {
@@ -212,11 +316,11 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [cognitive_auth]: https://docs.microsoft.com/azure/cognitive-services/authentication/
-[contributing]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.QuestionAnswering_1.0.0-beta.2/CONTRIBUTING.md
-[core_logging]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.QuestionAnswering_1.0.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md
+[contributing]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.QuestionAnswering_1.1.0-beta.1/CONTRIBUTING.md
+[core_logging]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.QuestionAnswering_1.1.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md
 [nuget]: https://www.nuget.org/
-[questionanswering_client_class]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.QuestionAnswering_1.0.0-beta.2/sdk/cognitivelanguage/Azure.AI.Language.QuestionAnswering/src/QuestionAnsweringClient.cs
-[questionanswering_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Language.QuestionAnswering_1.0.0-beta.2/sdk/cognitivelanguage/Azure.AI.Language.QuestionAnswering/src/
+[questionanswering_client_class]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.QuestionAnswering_1.1.0-beta.1/sdk/cognitivelanguage/Azure.AI.Language.QuestionAnswering/src/QuestionAnsweringClient.cs
+[questionanswering_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Language.QuestionAnswering_1.1.0-beta.1/sdk/cognitivelanguage/Azure.AI.Language.QuestionAnswering/src/
 [questionanswering_docs]: https://docs.microsoft.com/azure/cognitive-services/qnamaker/
 [questionanswering_docs_chat]: https://docs.microsoft.com/azure/cognitive-services/qnamaker/how-to/chit-chat-knowledge-base
 [questionanswering_docs_demos]: https://azure.microsoft.com/services/cognitive-services/qna-maker/#demo
@@ -224,8 +328,9 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [questionanswering_nuget_package]: https://nuget.org/packages/Azure.AI.Language.QuestionAnswering/
 [questionanswering_refdocs]: https://docs.microsoft.com/dotnet/api/Azure.AI.Language.QuestionAnswering/
 [questionanswering_rest_docs]: https://docs.microsoft.com/rest/api/cognitiveservices-qnamaker/
-[questionanswering_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Language.QuestionAnswering_1.0.0-beta.2/sdk/cognitivelanguage/Azure.AI.Language.QuestionAnswering/samples/README.md
-[migration_guide]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.QuestionAnswering_1.0.0-beta.2/sdk/cognitivelanguage/Azure.AI.Language.QuestionAnswering/MigrationGuide.md
+[questionanswering_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Language.QuestionAnswering_1.1.0-beta.1/sdk/cognitivelanguage/Azure.AI.Language.QuestionAnswering/samples/README.md
+[migration_guide]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.QuestionAnswering_1.1.0-beta.1/sdk/cognitivelanguage/Azure.AI.Language.QuestionAnswering/MigrationGuide.md
+[questionansweringprojects_client_class]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.QuestionAnswering_1.1.0-beta.1/sdk/cognitivelanguage/Azure.AI.Language.QuestionAnswering/src/Generated/QuestionAnsweringProjectsClient.cs
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fcognitivelanguage%2FAzure.AI.Language.QuestionAnswering%2FREADME.png)
 
