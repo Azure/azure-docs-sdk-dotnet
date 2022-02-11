@@ -17,7 +17,7 @@ Create and manage Azure Edge Hardware Center orders.
 
 Install the [NuGet package](https://www.nuget.org/packages/Azure.ResourceManager.EdgeOrder) directly from the Visual Studio [Package Manager console](https://docs.microsoft.com/nuget/tools/package-manager-console) or with the [.NET Core CLI](https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package).
 
-#### Visual Studio Package Manager
+**Visual Studio Package Manager**
 
 ```powershell
 Install-Package Azure.ResourceManager.EdgeOrder -Version 1.0.0-beta.1
