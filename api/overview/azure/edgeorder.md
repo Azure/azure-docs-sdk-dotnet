@@ -9,7 +9,7 @@ ms.service: edgeorder
 
 ## Overview
 
-[Azure Edge Hardware Center](https://docs.microsoft.com/en-us/azure/azure-edge-hardware-center/) is an Azure service that lets you order a variety of first party Azure hardware and discover third party hardware offered by our partners. Edge Hardware Center lets you see and track all your order related information at one place.
+[Azure Edge Hardware Center](https://docs.microsoft.com/azure/azure-edge-hardware-center/) is an Azure service that lets you order a variety of first party Azure hardware and discover third party hardware offered by our partners. Edge Hardware Center lets you see and track all your order related information at one place.
 
 ## Management APIs
 
