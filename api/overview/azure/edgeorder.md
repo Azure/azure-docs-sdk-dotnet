@@ -29,7 +29,7 @@ Install-Package Azure.ResourceManager.EdgeOrder -Version 1.0.0-beta.1
 dotnet add package Azure.ResourceManager.EdgeOrder --prerelease
 ```
 
-### Code Example
+### Code example
 
 The following example gets an order item.
 
