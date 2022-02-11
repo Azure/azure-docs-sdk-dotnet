@@ -26,7 +26,7 @@ Install-Package Azure.ResourceManager.EdgeOrder -Version 1.0.0-beta.1
 #### .NET Core CLI
 
 ```dotnetcli
-dotnet add package Azure.ResourceManager.EdgeOrder --version 1.0.0-beta.1
+dotnet add package Azure.ResourceManager.EdgeOrder --prerelease
 ```
 
 ### Code Example
