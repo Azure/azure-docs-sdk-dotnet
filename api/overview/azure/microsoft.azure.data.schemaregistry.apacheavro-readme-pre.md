@@ -1,16 +1,16 @@
 ---
 title: Azure Schema Registry Apache Avro client library for .NET
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.Data.SchemaRegistry.ApacheAvro, schemaregistry
-author: arerlend
-ms.author: arerlend
-ms.date: 01/14/2022
+author: jsquire
+ms.author: jsquire
+ms.date: 02/10/2022
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
 ms.service: schemaregistry
 ---
-# Azure Schema Registry Apache Avro client library for .NET - Version 1.0.0-beta.5 
+# Azure Schema Registry Apache Avro client library for .NET - Version 1.0.0-beta.6 
 
 
 Azure Schema Registry is a schema repository service hosted by Azure Event Hubs, providing schema storage, versioning, and management. This package provides an Avro encoder capable of encoding and decoding payloads containing Schema Registry schema identifiers and Avro-encoded data.
@@ -57,7 +57,7 @@ Once you have the Azure resource credentials and the Event Hubs namespace hostna
 ```C# Snippet:SchemaRegistryAvroCreateSchemaRegistryClient
 // Create a new SchemaRegistry client using the default credential from Azure.Identity using environment variables previously set,
 // including AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, and AZURE_TENANT_ID.
-// For more information on Azure.Identity usage, see: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.Data.SchemaRegistry.ApacheAvro_1.0.0-beta.5/sdk/identity/Azure.Identity/README.md
+// For more information on Azure.Identity usage, see: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.Data.SchemaRegistry.ApacheAvro_1.0.0-beta.6/sdk/identity/Azure.Identity/README.md
 var schemaRegistryClient = new SchemaRegistryClient(fullyQualifiedNamespace: fullyQualifiedNamespace, credential: new DefaultAzureCredential());
 ```
 
@@ -93,10 +93,10 @@ Details on generating a class using the Apache Avro library can be found in the 
 
 In order to encode an `EventData` instance with Avro information, you can do the following:
 ```C# Snippet:SchemaRegistryAvroEncodeEventData
-var encoder = new SchemaRegistryAvroEncoder(client, groupName, new SchemaRegistryAvroObjectEncoderOptions { AutoRegisterSchemas = true });
+var encoder = new SchemaRegistryAvroEncoder(client, groupName, new SchemaRegistryAvroEncoderOptions { AutoRegisterSchemas = true });
 
 var employee = new Employee { Age = 42, Name = "Caketown" };
-EventData eventData = await encoder.EncodeMessageDataAsync<EventData>(employee);
+EventData eventData = (EventData) await encoder.EncodeMessageDataAsync(employee, messageType: typeof(EventData));
 
 // the schema Id will be included as a parameter of the content type
 Console.WriteLine(eventData.ContentType);
@@ -107,11 +107,41 @@ Console.WriteLine(eventData.EventBody);
 
 To decode an `EventData` event that you are consuming:
 ```C# Snippet:SchemaRegistryAvroDecodeEventData
-Employee deserialized = (Employee)await encoder.DecodeMessageDataAsync(eventData, typeof(Employee));
+Employee deserialized = (Employee) await encoder.DecodeMessageDataAsync(eventData, typeof(Employee));
 Console.WriteLine(deserialized.Age);
 Console.WriteLine(deserialized.Name);
 ```
 
+You can also use generic methods to encode and decode the data. This may be more convenient if you are not building a library on top of the Avro encoder, as you won't have to worry about the virality of generics:
+```C# Snippet:SchemaRegistryAvroEncodeEventDataGenerics
+var encoder = new SchemaRegistryAvroEncoder(client, groupName, new SchemaRegistryAvroEncoderOptions { AutoRegisterSchemas = true });
+
+var employee = new Employee { Age = 42, Name = "Caketown" };
+EventData eventData = await encoder.EncodeMessageDataAsync<EventData, Employee>(employee);
+
+// the schema Id will be included as a parameter of the content type
+Console.WriteLine(eventData.ContentType);
+
+// the serialized Avro data will be stored in the EventBody
+Console.WriteLine(eventData.EventBody);
+```
+
+Similarly, to decode:
+```C# Snippet:SchemaRegistryAvroDecodeEventDataGenerics
+Employee deserialized = (Employee) await encoder.DecodeMessageDataAsync<Employee>(eventData);
+Console.WriteLine(deserialized.Age);
+Console.WriteLine(deserialized.Name);
+```
+
+### Encode and decode data using `MessageWithMetadata` directly
+
+It is also possible to encode and decode using `MessageWithMetadata`. Use this option if you are not integrating with any of the messaging libraries that work with `MessageWithMetadata`.
+```C# Snippet:SchemaRegistryAvroEncodeDecodeMessageWithMetadata
+var encoder = new SchemaRegistryAvroEncoder(client, groupName, new SchemaRegistryAvroEncoderOptions { AutoRegisterSchemas = true });
+MessageWithMetadata messageData = await encoder.EncodeMessageDataAsync<MessageWithMetadata, Employee>(employee);
+
+Employee decodedEmployee = await encoder.DecodeMessageDataAsync<Employee>(messageData);
+```
 
 ## Troubleshooting
 
@@ -136,8 +166,8 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [event_hubs_namespace]: https://docs.microsoft.com/azure/event-hubs/event-hubs-about
 [azure_powershell]: https://docs.microsoft.com/powershell/azure/
 [create_event_hubs_namespace]: https://docs.microsoft.com/azure/event-hubs/event-hubs-quickstart-powershell#create-an-event-hubs-namespace
-[quickstart_guide]: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.Data.SchemaRegistry.ApacheAvro_1.0.0-beta.5/doc/mgmt_preview_quickstart.md
-[schema_registry_client]: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.Data.SchemaRegistry.ApacheAvro_1.0.0-beta.5/sdk/schemaregistry/Azure.Data.SchemaRegistry/src/SchemaRegistryClient.cs
+[quickstart_guide]: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.Data.SchemaRegistry.ApacheAvro_1.0.0-beta.6/doc/mgmt_preview_quickstart.md
+[schema_registry_client]: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.Data.SchemaRegistry.ApacheAvro_1.0.0-beta.6/sdk/schemaregistry/Azure.Data.SchemaRegistry/src/SchemaRegistryClient.cs
 [azure_portal]: https://ms.portal.azure.com/
 [schema_properties]: src/SchemaProperties.cs
 [azure_identity]: https://www.nuget.org/packages/Azure.Identity
@@ -145,8 +175,8 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [code_of_conduct_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [email_opencode]: mailto:opencode@microsoft.com
-[schema_registry_avro_encoder]: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.Data.SchemaRegistry.ApacheAvro_1.0.0-beta.5/sdk/schemaregistry/Microsoft.Azure.Data.SchemaRegistry.ApacheAvro/src/SchemaRegistryAvroEncoder.cs
-[employee]: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.Data.SchemaRegistry.ApacheAvro_1.0.0-beta.5/sdk/schemaregistry/Microsoft.Azure.Data.SchemaRegistry.ApacheAvro/tests/Models/Employee.cs
+[schema_registry_avro_encoder]: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.Data.SchemaRegistry.ApacheAvro_1.0.0-beta.6/sdk/schemaregistry/Microsoft.Azure.Data.SchemaRegistry.ApacheAvro/src/SchemaRegistryAvroEncoder.cs
+[employee]: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.Data.SchemaRegistry.ApacheAvro_1.0.0-beta.6/sdk/schemaregistry/Microsoft.Azure.Data.SchemaRegistry.ApacheAvro/tests/Models/Employee.cs
 [avro_csharp_documentation]: https://avro.apache.org/docs/current/api/csharp/html/index.html
 [apache_avro_library]: https://www.nuget.org/packages/Apache.Avro/
 [generic_record]: https://avro.apache.org/docs/current/api/csharp/html/classAvro_1_1Generic_1_1GenericRecord.html
