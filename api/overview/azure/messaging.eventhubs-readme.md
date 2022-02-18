@@ -11,6 +11,8 @@ ms.devlang: dotnet
 ms.service: eventhubs
 ---
 
+#  Azure Event Hubs client library for .NET (H1)
+
 ::: moniker range="azure-dotnet-preview"
 ## Azure Event Hubs client library for .NET - Preview 
 ::: moniker-end
