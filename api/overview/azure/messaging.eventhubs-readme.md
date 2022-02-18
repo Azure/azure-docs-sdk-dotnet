@@ -12,15 +12,15 @@ ms.service: eventhubs
 ---
 
 ::: moniker range="azure-dotnet-preview"
-# Azure Event Hubs client library for .NET - Preview 
+## Azure Event Hubs client library for .NET - Preview 
 ::: moniker-end
 
 ::: moniker range="azure-dotnet"
-# Azure Event Hubs client library for .NET - Version 5.6.2 
+## Azure Event Hubs client library for .NET - Version 5.6.2 
 ::: moniker-end
 
 ::: moniker range="azure-dotnet-legacy"
-# Azure Event Hubs client library for .NET - Legacy
+## Azure Event Hubs client library for .NET - Legacy
 ::: moniker-end
 
 
