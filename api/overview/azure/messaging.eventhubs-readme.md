@@ -9,7 +9,6 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
 ms.service: eventhubs
-monikerRange: azure-dotnet || azure-dotnet-preview || azure-dotnet-legacy
 ---
 
 #  Azure Event Hubs client library for .NET (H1)
