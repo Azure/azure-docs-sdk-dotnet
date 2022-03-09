@@ -3,14 +3,14 @@ title: Azure Event Grid client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Messaging.EventGrid, eventgrid
 author: Kishp01
 ms.author: kishp
-ms.date: 02/09/2022
+ms.date: 03/09/2022
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
 ms.service: eventgrid
 ---
-# Azure Event Grid client library for .NET - Version 4.8.2 
+# Azure Event Grid client library for .NET - Version 4.9.0 
 
 
 Azure Event Grid allows you to easily build applications with event-based architectures. The Event Grid service fully manages all routing of events from any source, to any destination, for any application. Azure service events and custom events can be published directly to the service, where the events can then be filtered and sent to various recipients, such as built-in handlers or custom webhooks. To learn more about Azure Event Grid: [What is Event Grid?](https://docs.microsoft.com/azure/event-grid/overview)
@@ -20,7 +20,7 @@ Use the client library for Azure Event Grid to:
 - Consume events that have been delivered to event handlers
 - Generate SAS tokens to authenticate the client publishing events to Azure Event Grid topics
 
-  [Source code](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Messaging.EventGrid_4.8.2/sdk/eventgrid/Azure.Messaging.EventGrid/src) | [Package (NuGet)](https://www.nuget.org/packages/Azure.Messaging.EventGrid/) | [API reference documentation](https://docs.microsoft.com/dotnet/api/azure.messaging.eventgrid) | [Product documentation](https://docs.microsoft.com/azure/event-grid/) | [Samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.8.2/sdk/eventgrid/Azure.Messaging.EventGrid/samples) | [Migration guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.8.2/sdk/eventgrid/Azure.Messaging.EventGrid/MigrationGuide.md)
+  [Source code](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Messaging.EventGrid_4.9.0/sdk/eventgrid/Azure.Messaging.EventGrid/src) | [Package (NuGet)](https://www.nuget.org/packages/Azure.Messaging.EventGrid/) | [API reference documentation](https://docs.microsoft.com/dotnet/api/azure.messaging.eventgrid) | [Product documentation](https://docs.microsoft.com/azure/event-grid/) | [Samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.9.0/sdk/eventgrid/Azure.Messaging.EventGrid/samples) | [Migration guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.9.0/sdk/eventgrid/Azure.Messaging.EventGrid/MigrationGuide.md)
 
 ## Getting started
 
@@ -83,7 +83,7 @@ EventGridPublisherClient client = new EventGridPublisherClient(
 
 #### Authenticate using Azure Active Directory
 
-Azure Event Grid provides integration with Azure Active Directory (Azure AD) for identity-based authentication of requests. With Azure AD, you can use role-based access control (RBAC) to grant access to your Azure Event Grid resources to users, groups, or applications. The [Azure Identity library](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Messaging.EventGrid_4.8.2/sdk/identity/Azure.Identity/README.md) provides easy Azure Active Directory support for authentication.
+Azure Event Grid provides integration with Azure Active Directory (Azure AD) for identity-based authentication of requests. With Azure AD, you can use role-based access control (RBAC) to grant access to your Azure Event Grid resources to users, groups, or applications. The [Azure Identity library](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Messaging.EventGrid_4.9.0/sdk/identity/Azure.Identity/README.md) provides easy Azure Active Directory support for authentication.
 
 To send events to a topic or domain using Azure Active Directory, the authenticated identity should have the "EventGrid Data Sender" role assigned.
 
@@ -121,12 +121,12 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.8.2/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.8.2/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.8.2/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.8.2/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.8.2/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.8.2/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.9.0/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.9.0/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.9.0/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.9.0/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.9.0/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.9.0/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
@@ -365,17 +365,17 @@ foreach (EventGridEvent egEvent in egEvents)
 - If `Parse` is called on data that contains multiple events, an `ArgumentException` is thrown. `ParseMany` should be used here instead.
 
 ### Setting up console logging
-You can also easily [enable console logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.8.2/sdk/core/Azure.Core/samples/Diagnostics.md#logging) if you want to dig deeper into the requests you're making against the service.
+You can also easily [enable console logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.9.0/sdk/core/Azure.Core/samples/Diagnostics.md#logging) if you want to dig deeper into the requests you're making against the service.
 
 ### Distributed Tracing
-The Event Grid library supports distributing tracing out of the box. In order to adhere to the CloudEvents specification's [guidance](https://github.com/cloudevents/spec/blob/v1.0.1/extensions/distributed-tracing.md) on distributing tracing, the library will set the `traceparent` and `tracestate` on the `ExtensionAttributes` of a `CloudEvent` when distributed tracing is enabled. To learn more about how to enable distributed tracing in your application, take a look at the Azure SDK [distributed tracing documentation](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.8.2/sdk/core/Azure.Core/samples/Diagnostics.md#Distributed-tracing).
+The Event Grid library supports distributing tracing out of the box. In order to adhere to the CloudEvents specification's [guidance](https://github.com/cloudevents/spec/blob/v1.0.1/extensions/distributed-tracing.md) on distributing tracing, the library will set the `traceparent` and `tracestate` on the `ExtensionAttributes` of a `CloudEvent` when distributed tracing is enabled. To learn more about how to enable distributed tracing in your application, take a look at the Azure SDK [distributed tracing documentation](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.9.0/sdk/core/Azure.Core/samples/Diagnostics.md#Distributed-tracing).
 
 ### Event Grid on Kubernetes
 This library has been tested and validated on Kubernetes using Azure Arc.
 
 ## Next steps
 
-View more https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.8.2/sdk/eventgrid/Azure.Messaging.EventGrid/samples here for common usages of the Event Grid client library: [Event Grid Samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.8.2/sdk/eventgrid/Azure.Messaging.EventGrid/samples).
+View more https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.9.0/sdk/eventgrid/Azure.Messaging.EventGrid/samples here for common usages of the Event Grid client library: [Event Grid Samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.9.0/sdk/eventgrid/Azure.Messaging.EventGrid/samples).
 
 ## Contributing
 
