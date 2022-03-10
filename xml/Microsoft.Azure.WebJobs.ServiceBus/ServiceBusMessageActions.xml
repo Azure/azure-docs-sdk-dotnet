@@ -9,6 +9,7 @@
     <AssemblyVersion>5.0.0.0</AssemblyVersion>
     <AssemblyVersion>5.1.0.0</AssemblyVersion>
     <AssemblyVersion>5.2.0.0</AssemblyVersion>
+    <AssemblyVersion>5.3.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -30,6 +31,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.WebJobs.Extensions.ServiceBus</AssemblyName>
         <AssemblyVersion>5.2.0.0</AssemblyVersion>
+        <AssemblyVersion>5.3.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -54,6 +56,7 @@
         <AssemblyVersion>5.0.0.0</AssemblyVersion>
         <AssemblyVersion>5.1.0.0</AssemblyVersion>
         <AssemblyVersion>5.2.0.0</AssemblyVersion>
+        <AssemblyVersion>5.3.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -95,6 +98,7 @@
         <AssemblyVersion>5.0.0.0</AssemblyVersion>
         <AssemblyVersion>5.1.0.0</AssemblyVersion>
         <AssemblyVersion>5.2.0.0</AssemblyVersion>
+        <AssemblyVersion>5.3.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -133,6 +137,7 @@
         <AssemblyVersion>5.0.0.0</AssemblyVersion>
         <AssemblyVersion>5.1.0.0</AssemblyVersion>
         <AssemblyVersion>5.2.0.0</AssemblyVersion>
+        <AssemblyVersion>5.3.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -177,6 +182,7 @@
         <AssemblyVersion>5.0.0.0</AssemblyVersion>
         <AssemblyVersion>5.1.0.0</AssemblyVersion>
         <AssemblyVersion>5.2.0.0</AssemblyVersion>
+        <AssemblyVersion>5.3.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -223,6 +229,7 @@
         <AssemblyVersion>5.0.0.0</AssemblyVersion>
         <AssemblyVersion>5.1.0.0</AssemblyVersion>
         <AssemblyVersion>5.2.0.0</AssemblyVersion>
+        <AssemblyVersion>5.3.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -249,6 +256,43 @@
                The lock for the session has expired or the message has already been completed. This only applies for session-enabled
                entities.
                The <see cref="P:Azure.Messaging.ServiceBus.ServiceBusException.Reason" /> will be set to <see cref="F:Azure.Messaging.ServiceBus.ServiceBusFailureReason.SessionLockLost" /> in this case.
+             </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="RenewMessageLockAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task RenewMessageLockAsync (Azure.Messaging.ServiceBus.ServiceBusReceivedMessage message, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task RenewMessageLockAsync(class Azure.Messaging.ServiceBus.ServiceBusReceivedMessage message, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.WebJobs.ServiceBus.ServiceBusMessageActions.RenewMessageLockAsync(Azure.Messaging.ServiceBus.ServiceBusReceivedMessage,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function RenewMessageLockAsync (message As ServiceBusReceivedMessage, Optional cancellationToken As CancellationToken = Nothing) As Task" />
+      <MemberSignature Language="F#" Value="abstract member RenewMessageLockAsync : Azure.Messaging.ServiceBus.ServiceBusReceivedMessage * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&#xA;override this.RenewMessageLockAsync : Azure.Messaging.ServiceBus.ServiceBusReceivedMessage * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task" Usage="serviceBusMessageActions.RenewMessageLockAsync (message, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.WebJobs.Extensions.ServiceBus</AssemblyName>
+        <AssemblyVersion>5.3.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="message" Type="Azure.Messaging.ServiceBus.ServiceBusReceivedMessage" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="message">The <see cref="T:Azure.Messaging.ServiceBus.ServiceBusReceivedMessage" /> to renew the lock for.</param>
+        <param name="cancellationToken">An optional <see cref="T:System.Threading.CancellationToken" /> instance to signal the request to cancel the operation.</param>
+        <summary>
+             Renews the lock on the message. The lock will be renewed based on the setting specified on the queue.
+             </summary>
+        <returns>To be added.</returns>
+        <remarks>
+             When a message is received in <see cref="F:Azure.Messaging.ServiceBus.ServiceBusReceiveMode.PeekLock" /> mode, the message is locked on the server for this
+             receiver instance for a duration as specified during the Queue/Subscription creation (LockDuration).
+             If processing of the message requires longer than this duration, the lock needs to be renewed.
+             For each renewal, it resets the time the message is locked by the LockDuration set on the Entity.
+             </remarks>
+        <exception cref="T:Azure.Messaging.ServiceBus.ServiceBusException">
+               The lock for the message has expired or the message has already been completed.
+               The <see cref="P:Azure.Messaging.ServiceBus.ServiceBusException.Reason" /> will be set to <see cref="F:Azure.Messaging.ServiceBus.ServiceBusFailureReason.MessageLockLost" /> in this case.
              </exception>
       </Docs>
     </Member>
