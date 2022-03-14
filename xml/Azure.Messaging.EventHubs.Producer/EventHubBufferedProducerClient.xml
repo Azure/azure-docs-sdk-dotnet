@@ -960,6 +960,9 @@
                It is safe to attempt resending the events by calling <see cref="M:Azure.Messaging.EventHubs.Producer.EventHubBufferedProducerClient.EnqueueEventAsync(Azure.Messaging.EventHubs.EventData,System.Threading.CancellationToken)" /> or <see cref="M:Azure.Messaging.EventHubs.Producer.EventHubBufferedProducerClient.EnqueueEventAsync(Azure.Messaging.EventHubs.EventData,Azure.Messaging.EventHubs.Producer.EnqueueEventOptions,System.Threading.CancellationToken)" /> from within
                this handler.  It is important to note that doing so will place them at the end of the buffer; the original order will not be maintained.
             
+               This handler will be awaited after failure to publish the batch; the publishing operation is not considered complete until the
+               handler call returns.  It is advised that no long-running operations be performed in the handler to avoid negatively impacting throughput.
+            
                It is not recommended to invoke <see cref="M:Azure.Messaging.EventHubs.Producer.EventHubBufferedProducerClient.CloseAsync(System.Boolean,System.Threading.CancellationToken)" /> or <see cref="M:Azure.Messaging.EventHubs.Producer.EventHubBufferedProducerClient.DisposeAsync" /> from this handler; doing so may result
                in a deadlock scenario if those calls are awaited.
              </summary>
@@ -998,9 +1001,12 @@
       <Docs>
         <summary>
                Invoked after each batch of events has been successfully published to the Event Hub, this handler is optional
-               and is intended to provide notifications for interested listeners.  If this producer was not configured with
-               <see cref="P:Azure.Messaging.EventHubs.Producer.EventHubBufferedProducerClientOptions.MaximumConcurrentSends" /> and <see cref="P:Azure.Messaging.EventHubs.Producer.EventHubBufferedProducerClientOptions.MaximumConcurrentSendsPerPartition" />
-               both set to 1, the handler will be invoked concurrently.
+               and is intended to provide notifications for interested listeners.  If this producer was configured with
+               <see cref="P:Azure.Messaging.EventHubs.Producer.EventHubBufferedProducerClientOptions.MaximumConcurrentSends" /> or <see cref="P:Azure.Messaging.EventHubs.Producer.EventHubBufferedProducerClientOptions.MaximumConcurrentSendsPerPartition" />
+               set greater than 1, the handler will be invoked concurrently.
+            
+               This handler will be awaited after publishing the batch; the publishing operation will not be considered complete until the handler
+               call returns.  It is advised that no long-running operations be performed in the handler to avoid negatively impacting throughput.
             
                It is not recommended to invoke <see cref="M:Azure.Messaging.EventHubs.Producer.EventHubBufferedProducerClient.CloseAsync(System.Boolean,System.Threading.CancellationToken)" /> or <see cref="M:Azure.Messaging.EventHubs.Producer.EventHubBufferedProducerClient.DisposeAsync" /> from this handler; doing so may result
                in a deadlock scenario if those calls are awaited.
