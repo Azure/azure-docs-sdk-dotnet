@@ -2,15 +2,15 @@
 title: Azure WebJobs Tables client library for .NET
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebJobs.Extensions.Tables, tables
 author: christothes
-ms.author: christothes
-ms.date: 01/14/2022
+ms.author: chriss
+ms.date: 03/10/2022
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
 ms.service: tables
 ---
-# Azure WebJobs Tables client library for .NET - Version 1.0.0-beta.1 
+# Azure WebJobs Tables client library for .NET - Version 1.0.0-beta.2 
 
 
 This extension provides functionality for accessing Azure Tables in Azure Functions.
@@ -110,7 +110,7 @@ Please follow the [input binding tutorial](https://docs.microsoft.com/azure/azur
 
 Tables extensions provides only bindings. Bindings by themselves can't trigger a function. It can only read or write entries to the table.
 
-In the following example we use [HTTP trigger][https://docs.microsoft.com/azure/azure-functions/functions-bindings-http-webhook-trigger?tabs=csharp] to invoke the function.
+In the following example we use [HTTP trigger](https://docs.microsoft.com/azure/azure-functions/functions-bindings-http-webhook-trigger?tabs=csharp) to invoke the function.
 
 ### Binding to a single entity
 
@@ -178,7 +178,7 @@ public class OutputSingle
         [HttpTrigger(AuthorizationLevel.Anonymous, "GET")] HttpRequest request,
         [Table("MyTable")] out TableEntity entity)
     {
-        entity = new TableEntity("<PartitionKey>", "<PartitionKey>")
+        entity = new TableEntity("<PartitionKey>", "<RowKey>")
         {
             ["Text"] = "Hello"
         };
@@ -278,7 +278,7 @@ public class BindTableClient
         [HttpTrigger(AuthorizationLevel.Anonymous, "POST")] HttpRequest request,
         [Table("MyTable")] TableClient client)
     {
-        await client.AddEntityAsync(new TableEntity("<PartitionKey>", "<PartitionKey>")
+        await client.AddEntityAsync(new TableEntity("<PartitionKey>", "<RowKey>")
         {
             ["Text"] = request.GetEncodedPathAndQuery()
         });
@@ -323,14 +323,14 @@ additional questions or comments.
 [cosmos_tables_create_cli]: https://docs.microsoft.com/azure/cosmos-db/scripts/cli/table/create
 [cosmos_tables_create_portal]: https://docs.microsoft.com/azure/cosmos-db/table/how-to-create-container
 
-[identity_dac]: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.WebJobs.Extensions.Tables_1.0.0-beta.1/sdk/identity/Azure.Identity/README.md#defaultazurecredential
+[identity_dac]: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.WebJobs.Extensions.Tables_1.0.0-beta.2/sdk/identity/Azure.Identity/README.md#defaultazurecredential
 
 [appsettings_portal]: https://docs.microsoft.com/azure/azure-functions/functions-how-to-use-azure-function-app-settings?tabs=portal
 [local_settings_json]: https://docs.microsoft.com/azure/azure-functions/functions-host-json#override-hostjson-values
 
 [azure_sub]: https://azure.microsoft.com/free/dotnet/
-[RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.Tables_1.0.0-beta.1/sdk/core/Azure.Core/src/RequestFailedException.cs
-[contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.WebJobs.Extensions.Tables_1.0.0-beta.1/CONTRIBUTING.md
+[RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.Tables_1.0.0-beta.2/sdk/core/Azure.Core/src/RequestFailedException.cs
+[contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.WebJobs.Extensions.Tables_1.0.0-beta.2/CONTRIBUTING.md
 
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/

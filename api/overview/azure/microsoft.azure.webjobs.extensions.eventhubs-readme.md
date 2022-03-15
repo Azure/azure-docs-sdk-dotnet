@@ -1,17 +1,16 @@
 ---
 title: Azure WebJobs Event Hubs client library for .NET
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebJobs.Extensions.EventHubs, webjobs
-author: ramya-rao-a
-ms.author: ramyar
-ms.date: 10/26/2021
+author: JoshLove-msft
+ms.author: jolov
+ms.date: 03/09/2022
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
 ms.service: webjobs
 ---
-
-# Azure WebJobs Event Hubs client library for .NET - Version 5.0.0 
+# Azure WebJobs Event Hubs client library for .NET - Version 5.0.1 
 
 
 This extension provides functionality for accessing Azure Event Hubs from an Azure Function.
@@ -23,7 +22,7 @@ This extension provides functionality for accessing Azure Event Hubs from an Azu
 Install the Event Hubs extension with [NuGet](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.EventHubs):
 
 ```dotnetcli
-dotnet add package Microsoft.Azure.WebJobs.Extensions.EventHubs --version 5.0.0-beta.1
+dotnet add package Microsoft.Azure.WebJobs.Extensions.EventHubs
 ```
 
 ### Prerequisites
@@ -228,12 +227,12 @@ additional questions or comments.
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fsearch%2FMicrosoft.Azure.WebJobs.Extensions.EventHubs%2FREADME.png)
 
 <!-- LINKS -->
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.EventHubs_5.0.0/sdk/search/Microsoft.Azure.WebJobs.Extensions.EventHubs/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.EventHubs_5.0.1/sdk/search/Microsoft.Azure.WebJobs.Extensions.EventHubs/src
 [package]: https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.EventHubs/
 [docs]: https://docs.microsoft.com/dotnet/api/Microsoft.Azure.WebJobs.Extensions.EventHubs
 [nuget]: https://www.nuget.org/
 
-[contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.EventHubs_5.0.0/CONTRIBUTING.md
+[contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.EventHubs_5.0.1/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/

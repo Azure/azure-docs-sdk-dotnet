@@ -8,6 +8,7 @@
     <AssemblyName>Microsoft.Azure.Management.Kusto</AssemblyName>
     <AssemblyVersion>8.0.0.0</AssemblyVersion>
     <AssemblyVersion>9.0.0.0</AssemblyVersion>
+    <AssemblyVersion>10.0.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>Microsoft.Azure.Management.Kusto.Models.ProxyResource</BaseTypeName>
@@ -36,6 +37,7 @@
         <AssemblyName>Microsoft.Azure.Management.Kusto</AssemblyName>
         <AssemblyVersion>8.0.0.0</AssemblyVersion>
         <AssemblyVersion>9.0.0.0</AssemblyVersion>
+        <AssemblyVersion>10.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -46,23 +48,23 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Script (string scriptUrl, string scriptUrlSasToken, string id = default, string name = default, string type = default, string forceUpdateTag = default, bool? continueOnErrors = default, string provisioningState = default, Microsoft.Azure.Management.Kusto.Models.SystemData systemData = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string scriptUrl, string scriptUrlSasToken, string id, string name, string type, string forceUpdateTag, valuetype System.Nullable`1&lt;bool&gt; continueOnErrors, string provisioningState, class Microsoft.Azure.Management.Kusto.Models.SystemData systemData) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.Kusto.Models.Script.#ctor(System.String,System.String,System.String,System.String,System.String,System.String,System.Nullable{System.Boolean},System.String,Microsoft.Azure.Management.Kusto.Models.SystemData)" />
-      <MemberSignature Language="VB.NET" Value="Public Sub New (scriptUrl As String, scriptUrlSasToken As String, Optional id As String = Nothing, Optional name As String = Nothing, Optional type As String = Nothing, Optional forceUpdateTag As String = Nothing, Optional continueOnErrors As Nullable(Of Boolean) = Nothing, Optional provisioningState As String = Nothing, Optional systemData As SystemData = Nothing)" />
-      <MemberSignature Language="F#" Value="new Microsoft.Azure.Management.Kusto.Models.Script : string * string * string * string * string * string * Nullable&lt;bool&gt; * string * Microsoft.Azure.Management.Kusto.Models.SystemData -&gt; Microsoft.Azure.Management.Kusto.Models.Script" Usage="new Microsoft.Azure.Management.Kusto.Models.Script (scriptUrl, scriptUrlSasToken, id, name, type, forceUpdateTag, continueOnErrors, provisioningState, systemData)" />
+      <MemberSignature Language="C#" Value="public Script (string id = default, string name = default, string type = default, string scriptUrl = default, string scriptUrlSasToken = default, string scriptContent = default, string forceUpdateTag = default, bool? continueOnErrors = default, string provisioningState = default, Microsoft.Azure.Management.Kusto.Models.SystemData systemData = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string id, string name, string type, string scriptUrl, string scriptUrlSasToken, string scriptContent, string forceUpdateTag, valuetype System.Nullable`1&lt;bool&gt; continueOnErrors, string provisioningState, class Microsoft.Azure.Management.Kusto.Models.SystemData systemData) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.Kusto.Models.Script.#ctor(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Nullable{System.Boolean},System.String,Microsoft.Azure.Management.Kusto.Models.SystemData)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (Optional id As String = Nothing, Optional name As String = Nothing, Optional type As String = Nothing, Optional scriptUrl As String = Nothing, Optional scriptUrlSasToken As String = Nothing, Optional scriptContent As String = Nothing, Optional forceUpdateTag As String = Nothing, Optional continueOnErrors As Nullable(Of Boolean) = Nothing, Optional provisioningState As String = Nothing, Optional systemData As SystemData = Nothing)" />
+      <MemberSignature Language="F#" Value="new Microsoft.Azure.Management.Kusto.Models.Script : string * string * string * string * string * string * string * Nullable&lt;bool&gt; * string * Microsoft.Azure.Management.Kusto.Models.SystemData -&gt; Microsoft.Azure.Management.Kusto.Models.Script" Usage="new Microsoft.Azure.Management.Kusto.Models.Script (id, name, type, scriptUrl, scriptUrlSasToken, scriptContent, forceUpdateTag, continueOnErrors, provisioningState, systemData)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Management.Kusto</AssemblyName>
-        <AssemblyVersion>8.0.0.0</AssemblyVersion>
-        <AssemblyVersion>9.0.0.0</AssemblyVersion>
+        <AssemblyVersion>10.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="scriptUrl" Type="System.String" />
-        <Parameter Name="scriptUrlSasToken" Type="System.String" />
         <Parameter Name="id" Type="System.String" />
         <Parameter Name="name" Type="System.String" />
         <Parameter Name="type" Type="System.String" />
+        <Parameter Name="scriptUrl" Type="System.String" />
+        <Parameter Name="scriptUrlSasToken" Type="System.String" />
+        <Parameter Name="scriptContent" Type="System.String" />
         <Parameter Name="forceUpdateTag" Type="System.String" />
         <Parameter Name="continueOnErrors" Type="System.Nullable&lt;System.Boolean&gt;" />
         <Parameter Name="provisioningState" Type="System.String" />
@@ -70,15 +72,21 @@
       </Parameters>
       <Docs>
         <param name="systemData">To be added.</param>
-        <param name="scriptUrl">The url to the KQL script blob
-            file.</param>
-        <param name="scriptUrlSasToken">The SaS token.</param>
         <param name="id">Fully qualified resource ID for the resource. Ex -
             /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}</param>
         <param name="name">The name of the resource</param>
         <param name="type">The type of the resource. E.g.
             "Microsoft.Compute/virtualMachines" or
             "Microsoft.Storage/storageAccounts"</param>
+        <param name="scriptUrl">The url to the KQL script blob file. Must
+            not be used together with scriptContent property</param>
+        <param name="scriptUrlSasToken">The SaS token that provide read
+            access to the file which contain the script. Must be provided when
+            using scriptUrl property.</param>
+        <param name="scriptContent">The script content. This property
+            should be used when the script is provide inline and not through
+            file in a SA. Must not be used together with scriptUrl and
+            scriptUrlSasToken properties.</param>
         <param name="forceUpdateTag">A unique string. If changed the script
             will be applied again.</param>
         <param name="continueOnErrors">Flag that indicates whether to
@@ -103,6 +111,7 @@
         <AssemblyName>Microsoft.Azure.Management.Kusto</AssemblyName>
         <AssemblyVersion>8.0.0.0</AssemblyVersion>
         <AssemblyVersion>9.0.0.0</AssemblyVersion>
+        <AssemblyVersion>10.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -133,6 +142,7 @@
         <AssemblyName>Microsoft.Azure.Management.Kusto</AssemblyName>
         <AssemblyVersion>8.0.0.0</AssemblyVersion>
         <AssemblyVersion>9.0.0.0</AssemblyVersion>
+        <AssemblyVersion>10.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -163,6 +173,7 @@
         <AssemblyName>Microsoft.Azure.Management.Kusto</AssemblyName>
         <AssemblyVersion>8.0.0.0</AssemblyVersion>
         <AssemblyVersion>9.0.0.0</AssemblyVersion>
+        <AssemblyVersion>10.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -183,6 +194,36 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
+    <Member MemberName="ScriptContent">
+      <MemberSignature Language="C#" Value="public string ScriptContent { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ScriptContent" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Management.Kusto.Models.Script.ScriptContent" />
+      <MemberSignature Language="VB.NET" Value="Public Property ScriptContent As String" />
+      <MemberSignature Language="F#" Value="member this.ScriptContent : string with get, set" Usage="Microsoft.Azure.Management.Kusto.Models.Script.ScriptContent" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Management.Kusto</AssemblyName>
+        <AssemblyVersion>10.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName Language="C#">[Newtonsoft.Json.JsonProperty(PropertyName="properties.scriptContent")]</AttributeName>
+          <AttributeName Language="F#">[&lt;Newtonsoft.Json.JsonProperty(PropertyName="properties.scriptContent")&gt;]</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets the script content. This property should be used when
+            the script is provide inline and not through file in a SA. Must not
+            be used together with scriptUrl and scriptUrlSasToken properties.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="ScriptUrl">
       <MemberSignature Language="C#" Value="public string ScriptUrl { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance string ScriptUrl" />
@@ -194,6 +235,7 @@
         <AssemblyName>Microsoft.Azure.Management.Kusto</AssemblyName>
         <AssemblyVersion>8.0.0.0</AssemblyVersion>
         <AssemblyVersion>9.0.0.0</AssemblyVersion>
+        <AssemblyVersion>10.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -206,7 +248,8 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Gets or sets the url to the KQL script blob file.
+            Gets or sets the url to the KQL script blob file. Must not be used
+            together with scriptContent property
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -223,6 +266,7 @@
         <AssemblyName>Microsoft.Azure.Management.Kusto</AssemblyName>
         <AssemblyVersion>8.0.0.0</AssemblyVersion>
         <AssemblyVersion>9.0.0.0</AssemblyVersion>
+        <AssemblyVersion>10.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -235,7 +279,9 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Gets or sets the SaS token.
+            Gets or sets the SaS token that provide read access to the file
+            which contain the script. Must be provided when using scriptUrl
+            property.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -252,6 +298,7 @@
         <AssemblyName>Microsoft.Azure.Management.Kusto</AssemblyName>
         <AssemblyVersion>8.0.0.0</AssemblyVersion>
         <AssemblyVersion>9.0.0.0</AssemblyVersion>
+        <AssemblyVersion>10.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -266,32 +313,6 @@
         <summary />
         <value>To be added.</value>
         <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="Validate">
-      <MemberSignature Language="C#" Value="public virtual void Validate ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Validate() cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Management.Kusto.Models.Script.Validate" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Sub Validate ()" />
-      <MemberSignature Language="F#" Value="abstract member Validate : unit -&gt; unit&#xA;override this.Validate : unit -&gt; unit" Usage="script.Validate " />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.Azure.Management.Kusto</AssemblyName>
-        <AssemblyVersion>8.0.0.0</AssemblyVersion>
-        <AssemblyVersion>9.0.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Void</ReturnType>
-      </ReturnValue>
-      <Parameters />
-      <Docs>
-        <summary>
-            Validate the object.
-            </summary>
-        <remarks>To be added.</remarks>
-        <exception cref="T:Microsoft.Rest.ValidationException">
-            Thrown if validation fails
-            </exception>
       </Docs>
     </Member>
   </Members>
