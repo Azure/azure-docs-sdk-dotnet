@@ -23,7 +23,7 @@ Azure Communication Network Traversal enables high bandwidth, low latency connec
 Install the Azure Communication Network Traversal client library for .NET with [NuGet][nuget]:
 
 ```dotnetcli
-dotnet add package Azure.Communication.NetworkTraversal --version 1.0.0-beta.3
+dotnet add package Azure.Communication.NetworkTraversal --version 1.1.0-beta.1
 ```
 
 ### Prerequisites
@@ -115,14 +115,6 @@ foreach (CommunicationIceServer iceServer in iceServers)
     Console.WriteLine($"ICE Server Route Type: {iceServer.RouteType}");
 }
 ```
-
-## Troubleshooting
-
-> TODO
-
-## Next steps
-
-> TODO
 
 ## Contributing
 

@@ -1,17 +1,16 @@
 ---
 title: Azure Purview Catalog client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Analytics.Purview.Catalog, purview
-author: ramya-rao-a
-ms.author: ramyar
-ms.date: 10/16/2021
+author: AlexGhiondea
+ms.author: alexghi
+ms.date: 03/22/2022
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
 ms.service: purview
 ---
-
-# Azure Purview Catalog client library for .NET - Version 1.0.0-beta.2 
+# Azure Purview Catalog client library for .NET - Version 1.0.0-beta.3 
 
 
 Azure Purview Catalog is a fully managed cloud service whose users can discover the data sources they need and understand the data sources they find. At the same time, Data Catalog helps organizations get more value from their existing investments.
@@ -48,7 +47,7 @@ Once you have chosen and configured your credential, you can create instances of
 
 ```C#
 var credential = new DefaultAzureCredential();
-var client = new PurviewCatalogClient(new Url("https://<my-account-name>.catalog.purview.azure.com"), credential);
+var client = new PurviewCatalogClient(new Uri("https://<my-account-name>.purview.azure.com"), credential);
 ```
 
 ## Key concepts
@@ -63,12 +62,12 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Purview.Catalog_1.0.0-beta.2/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Purview.Catalog_1.0.0-beta.2/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Purview.Catalog_1.0.0-beta.2/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Purview.Catalog_1.0.0-beta.2/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Purview.Catalog_1.0.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Purview.Catalog_1.0.0-beta.2/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Purview.Catalog_1.0.0-beta.3/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Purview.Catalog_1.0.0-beta.3/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Purview.Catalog_1.0.0-beta.3/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Purview.Catalog_1.0.0-beta.3/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Purview.Catalog_1.0.0-beta.3/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Purview.Catalog_1.0.0-beta.3/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
@@ -80,7 +79,7 @@ The following section shows you how to initialize and authenticate your client, 
 
 ```C#
 var credential = new DefaultAzureCredential();
-var client = new PurviewCatalogClient(new Uri("https://<my-account-name>.catalog.purview.azure.com"), credential);
+var client = new PurviewCatalogClient(new Uri("https://<my-account-name>.purview.azure.com"), credential);
 
 var response = await client.Types.GetAllTypeDefinitionsAsync();
 var responseDocument = JsonDocument.Parse(response.Content);
@@ -115,21 +114,21 @@ When you submit a pull request, a CLA-bot will automatically determine whether y
 This project has adopted the [Microsoft Open Source Code of Conduct][code_of_conduct]. For more information see the [Code of Conduct FAQ][coc_faq] or contact [opencode@microsoft.com][coc_contact] with any additional questions or comments.
 
 <!-- LINKS -->
-[source_code]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Analytics.Purview.Catalog_1.0.0-beta.2/sdk/purview/Azure.Analytics.Purview.Catalog/src
+[source_code]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Analytics.Purview.Catalog_1.0.0-beta.3/sdk/purview/Azure.Analytics.Purview.Catalog/src
 [client_nuget_package]: https://www.nuget.org/packages?q=Azure.Analytics.Purview.Catalog
 [catalog_service_documentation]: https://azure.microsoft.com/services/purview/
 [catalog_product_documentation]: https://docs.microsoft.com/azure/purview/
-[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Analytics.Purview.Catalog_1.0.0-beta.2/sdk/identity/Azure.Identity
+[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Analytics.Purview.Catalog_1.0.0-beta.3/sdk/identity/Azure.Identity
 [protocol_client_quickstart]: https://aka.ms/azsdk/net/protocol/quickstart
 [default_cred_ref]: https://docs.microsoft.com/dotnet/api/azure.identity.defaultazurecredential?view=azure-dotnet
 [azure_subscription]: https://azure.microsoft.com/free/dotnet/
 [purview_resource]: https://docs.microsoft.com/azure/purview/create-catalog-portal
-[azure_core_diagnostics]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Purview.Catalog_1.0.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md
+[azure_core_diagnostics]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Purview.Catalog_1.0.0-beta.3/sdk/core/Azure.Core/samples/Diagnostics.md
 [cla]: https://cla.microsoft.com
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [coc_contact]: mailto:opencode@microsoft.com
-[contributing]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Purview.Catalog_1.0.0-beta.2/CONTRIBUTING.md
+[contributing]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Purview.Catalog_1.0.0-beta.3/CONTRIBUTING.md
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fpurview%2FAzure.Analytics.Purview.Catalog%2FREADME.png)
 
