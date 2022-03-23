@@ -1,17 +1,16 @@
 ---
 title: Azure Personalizer client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.Personalizer, personalizer
-author: ramya-rao-a
-ms.author: ramyar
-ms.date: 10/07/2021
+author: orenmichaely
+ms.author: ormichae
+ms.date: 03/23/2022
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
 ms.service: personalizer
 ---
-
-# Azure Personalizer client library for .NET - Version 2.0.0-beta.1 
+# Azure Personalizer client library for .NET - Version 2.0.0-beta.2 
 
 
 [Azure Personalizer](https://docs.microsoft.com/azure/cognitive-services/personalizer/)
@@ -30,9 +29,9 @@ dotnet add package Azure.AI.Personalizer --version 2.0.0-beta.1
 ## Key concepts
 Functionality is exposed through several client libraries:
 
-- Azure.AI.Personalizer is built on top of [Azure.Core](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Personalizer_2.0.0-beta.1/sdk/core/Azure.Core/README.md) and the [Azure SDK Design Guidelines for .NET](https://azure.github.io/azure-sdk/dotnet_introduction.html).
+- Azure.AI.Personalizer is built on top of [Azure.Core](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Personalizer_2.0.0-beta.2/sdk/core/Azure.Core/README.md) and the [Azure SDK Design Guidelines for .NET](https://azure.github.io/azure-sdk/dotnet_introduction.html).
 
-- [Microsoft.Azure.Personalizer](https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Personalizer_2.0.0-beta.1/sdk/cognitiveservices/Personalizer) is the previous .NET client library for Personalizer.
+- [Microsoft.Azure.Personalizer](https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Personalizer_2.0.0-beta.2/sdk/cognitiveservices/Personalizer) is the previous .NET client library for Personalizer.
 
 ## Contributing
 
@@ -53,7 +52,7 @@ additional questions or comments.
 
 <!-- LINKS -->
 [nuget]: https://www.nuget.org/
-[search_contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Personalizer_2.0.0-beta.1/sdk/search/CONTRIBUTING.md
+[search_contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Personalizer_2.0.0-beta.2/sdk/search/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
