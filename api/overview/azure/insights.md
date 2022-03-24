@@ -38,7 +38,7 @@ client.TrackEvent("MyCustomEvent");
 ```
 
 > [!div class="nextstepaction"]
-> [Explore the client APIs](/dotnet/api/overview/azure/insights/client)
+> [Explore the client APIs](/dotnet/api/overview/azure/applicationinsights/client)
 
 
 
