@@ -1,6 +1,6 @@
 <Type Name="ResourceLinkCollection" FullName="Azure.ResourceManager.Resources.ResourceLinkCollection">
-  <TypeSignature Language="C#" Value="public class ResourceLinkCollection : Azure.ResourceManager.Core.ArmCollection" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit ResourceLinkCollection extends Azure.ResourceManager.Core.ArmCollection" />
+  <TypeSignature Language="C#" Value="public class ResourceLinkCollection : Azure.ResourceManager.ArmCollection" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit ResourceLinkCollection extends Azure.ResourceManager.ArmCollection" />
   <TypeSignature Language="DocId" Value="T:Azure.ResourceManager.Resources.ResourceLinkCollection" />
   <TypeSignature Language="VB.NET" Value="Public Class ResourceLinkCollection&#xA;Inherits ArmCollection" />
   <TypeSignature Language="F#" Value="type ResourceLinkCollection = class&#xA;    inherit ArmCollection" />
@@ -9,11 +9,15 @@
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
-    <BaseTypeName>Azure.ResourceManager.Core.ArmCollection</BaseTypeName>
+    <BaseTypeName>Azure.ResourceManager.ArmCollection</BaseTypeName>
   </Base>
   <Interfaces />
   <Docs>
-    <summary> A class representing collection of ResourceLink and their operations over its parent. </summary>
+    <summary>
+            A class representing a collection of <see cref="T:Azure.ResourceManager.Resources.ResourceLinkResource" /> and their operations.
+            Each <see cref="T:Azure.ResourceManager.Resources.ResourceLinkResource" /> in the collection will belong to the same instance of <see cref="T:Azure.ResourceManager.Resources.TenantResource" />.
+            To get a <see cref="T:Azure.ResourceManager.Resources.ResourceLinkCollection" /> instance call the GetResourceLinks method from an instance of <see cref="T:Azure.ResourceManager.Resources.TenantResource" />.
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -34,75 +38,79 @@
       </Docs>
     </Member>
     <Member MemberName="CreateOrUpdate">
-      <MemberSignature Language="C#" Value="public virtual Azure.ResourceManager.Resources.Models.ResourceLinkCreateOrUpdateOperation CreateOrUpdate (bool waitForCompletion, Azure.Core.ResourceIdentifier linkId, Azure.ResourceManager.Resources.ResourceLinkData parameters, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.ResourceManager.Resources.Models.ResourceLinkCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, class Azure.Core.ResourceIdentifier linkId, class Azure.ResourceManager.Resources.ResourceLinkData parameters, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.ResourceManager.Resources.ResourceLinkCollection.CreateOrUpdate(System.Boolean,Azure.Core.ResourceIdentifier,Azure.ResourceManager.Resources.ResourceLinkData,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateOrUpdate (waitForCompletion As Boolean, linkId As ResourceIdentifier, parameters As ResourceLinkData, Optional cancellationToken As CancellationToken = Nothing) As ResourceLinkCreateOrUpdateOperation" />
-      <MemberSignature Language="F#" Value="abstract member CreateOrUpdate : bool * Azure.Core.ResourceIdentifier * Azure.ResourceManager.Resources.ResourceLinkData * System.Threading.CancellationToken -&gt; Azure.ResourceManager.Resources.Models.ResourceLinkCreateOrUpdateOperation&#xA;override this.CreateOrUpdate : bool * Azure.Core.ResourceIdentifier * Azure.ResourceManager.Resources.ResourceLinkData * System.Threading.CancellationToken -&gt; Azure.ResourceManager.Resources.Models.ResourceLinkCreateOrUpdateOperation" Usage="resourceLinkCollection.CreateOrUpdate (waitForCompletion, linkId, parameters, cancellationToken)" />
+      <MemberSignature Language="C#" Value="public virtual Azure.ResourceManager.ArmOperation&lt;Azure.ResourceManager.Resources.ResourceLinkResource&gt; CreateOrUpdate (Azure.WaitUntil waitUntil, Azure.ResourceManager.Resources.ResourceLinkData data, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.ResourceManager.ArmOperation`1&lt;class Azure.ResourceManager.Resources.ResourceLinkResource&gt; CreateOrUpdate(valuetype Azure.WaitUntil waitUntil, class Azure.ResourceManager.Resources.ResourceLinkData data, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.ResourceManager.Resources.ResourceLinkCollection.CreateOrUpdate(Azure.WaitUntil,Azure.ResourceManager.Resources.ResourceLinkData,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateOrUpdate (waitUntil As WaitUntil, data As ResourceLinkData, Optional cancellationToken As CancellationToken = Nothing) As ArmOperation(Of ResourceLinkResource)" />
+      <MemberSignature Language="F#" Value="abstract member CreateOrUpdate : Azure.WaitUntil * Azure.ResourceManager.Resources.ResourceLinkData * System.Threading.CancellationToken -&gt; Azure.ResourceManager.ArmOperation&lt;Azure.ResourceManager.Resources.ResourceLinkResource&gt;&#xA;override this.CreateOrUpdate : Azure.WaitUntil * Azure.ResourceManager.Resources.ResourceLinkData * System.Threading.CancellationToken -&gt; Azure.ResourceManager.ArmOperation&lt;Azure.ResourceManager.Resources.ResourceLinkResource&gt;" Usage="resourceLinkCollection.CreateOrUpdate (waitUntil, data, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.ResourceManager</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>Azure.ResourceManager.Resources.Models.ResourceLinkCreateOrUpdateOperation</ReturnType>
+        <ReturnType>Azure.ResourceManager.ArmOperation&lt;Azure.ResourceManager.Resources.ResourceLinkResource&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="waitForCompletion" Type="System.Boolean" />
-        <Parameter Name="linkId" Type="Azure.Core.ResourceIdentifier" />
-        <Parameter Name="parameters" Type="Azure.ResourceManager.Resources.ResourceLinkData" />
+        <Parameter Name="waitUntil" Type="Azure.WaitUntil" />
+        <Parameter Name="data" Type="Azure.ResourceManager.Resources.ResourceLinkData" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
-        <param name="linkId"> The fully qualified ID of the resource link. Use the format, /subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/{provider-namespace}/{resource-type}/{resource-name}/Microsoft.Resources/links/{link-name}. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink. </param>
-        <param name="parameters"> Parameters for creating or updating a resource link. </param>
+        <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        <param name="data"> Parameters for creating or updating a resource link. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
-        <summary> Creates or updates a resource link between the specified resources. </summary>
+        <summary>
+            Creates or updates a resource link between the specified resources.
+            Request Path: /{linkId}
+            Operation Id: ResourceLinks_CreateOrUpdate
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="linkId" /> or <paramref name="parameters" /> is null. </exception>
+          <paramref name="data" /> is null. </exception>
       </Docs>
     </Member>
     <Member MemberName="CreateOrUpdateAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.ResourceManager.Resources.Models.ResourceLinkCreateOrUpdateOperation&gt; CreateOrUpdateAsync (bool waitForCompletion, Azure.Core.ResourceIdentifier linkId, Azure.ResourceManager.Resources.ResourceLinkData parameters, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.ResourceManager.Resources.Models.ResourceLinkCreateOrUpdateOperation&gt; CreateOrUpdateAsync(bool waitForCompletion, class Azure.Core.ResourceIdentifier linkId, class Azure.ResourceManager.Resources.ResourceLinkData parameters, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.ResourceManager.Resources.ResourceLinkCollection.CreateOrUpdateAsync(System.Boolean,Azure.Core.ResourceIdentifier,Azure.ResourceManager.Resources.ResourceLinkData,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateOrUpdateAsync (waitForCompletion As Boolean, linkId As ResourceIdentifier, parameters As ResourceLinkData, Optional cancellationToken As CancellationToken = Nothing) As Task(Of ResourceLinkCreateOrUpdateOperation)" />
-      <MemberSignature Language="F#" Value="abstract member CreateOrUpdateAsync : bool * Azure.Core.ResourceIdentifier * Azure.ResourceManager.Resources.ResourceLinkData * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.ResourceManager.Resources.Models.ResourceLinkCreateOrUpdateOperation&gt;&#xA;override this.CreateOrUpdateAsync : bool * Azure.Core.ResourceIdentifier * Azure.ResourceManager.Resources.ResourceLinkData * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.ResourceManager.Resources.Models.ResourceLinkCreateOrUpdateOperation&gt;" Usage="resourceLinkCollection.CreateOrUpdateAsync (waitForCompletion, linkId, parameters, cancellationToken)" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.ResourceManager.ArmOperation&lt;Azure.ResourceManager.Resources.ResourceLinkResource&gt;&gt; CreateOrUpdateAsync (Azure.WaitUntil waitUntil, Azure.ResourceManager.Resources.ResourceLinkData data, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.ResourceManager.ArmOperation`1&lt;class Azure.ResourceManager.Resources.ResourceLinkResource&gt;&gt; CreateOrUpdateAsync(valuetype Azure.WaitUntil waitUntil, class Azure.ResourceManager.Resources.ResourceLinkData data, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.ResourceManager.Resources.ResourceLinkCollection.CreateOrUpdateAsync(Azure.WaitUntil,Azure.ResourceManager.Resources.ResourceLinkData,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateOrUpdateAsync (waitUntil As WaitUntil, data As ResourceLinkData, Optional cancellationToken As CancellationToken = Nothing) As Task(Of ArmOperation(Of ResourceLinkResource))" />
+      <MemberSignature Language="F#" Value="abstract member CreateOrUpdateAsync : Azure.WaitUntil * Azure.ResourceManager.Resources.ResourceLinkData * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.ResourceManager.ArmOperation&lt;Azure.ResourceManager.Resources.ResourceLinkResource&gt;&gt;&#xA;override this.CreateOrUpdateAsync : Azure.WaitUntil * Azure.ResourceManager.Resources.ResourceLinkData * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.ResourceManager.ArmOperation&lt;Azure.ResourceManager.Resources.ResourceLinkResource&gt;&gt;" Usage="resourceLinkCollection.CreateOrUpdateAsync (waitUntil, data, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.ResourceManager</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>System.Threading.Tasks.Task&lt;Azure.ResourceManager.Resources.Models.ResourceLinkCreateOrUpdateOperation&gt;</ReturnType>
+        <ReturnType>System.Threading.Tasks.Task&lt;Azure.ResourceManager.ArmOperation&lt;Azure.ResourceManager.Resources.ResourceLinkResource&gt;&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="waitForCompletion" Type="System.Boolean" />
-        <Parameter Name="linkId" Type="Azure.Core.ResourceIdentifier" />
-        <Parameter Name="parameters" Type="Azure.ResourceManager.Resources.ResourceLinkData" />
+        <Parameter Name="waitUntil" Type="Azure.WaitUntil" />
+        <Parameter Name="data" Type="Azure.ResourceManager.Resources.ResourceLinkData" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
-        <param name="linkId"> The fully qualified ID of the resource link. Use the format, /subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/{provider-namespace}/{resource-type}/{resource-name}/Microsoft.Resources/links/{link-name}. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink. </param>
-        <param name="parameters"> Parameters for creating or updating a resource link. </param>
+        <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        <param name="data"> Parameters for creating or updating a resource link. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
-        <summary> Creates or updates a resource link between the specified resources. </summary>
+        <summary>
+            Creates or updates a resource link between the specified resources.
+            Request Path: /{linkId}
+            Operation Id: ResourceLinks_CreateOrUpdate
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="linkId" /> or <paramref name="parameters" /> is null. </exception>
+          <paramref name="data" /> is null. </exception>
       </Docs>
     </Member>
     <Member MemberName="Exists">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;bool&gt; Exists (Azure.Core.ResourceIdentifier linkId, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;bool&gt; Exists(class Azure.Core.ResourceIdentifier linkId, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.ResourceManager.Resources.ResourceLinkCollection.Exists(Azure.Core.ResourceIdentifier,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function Exists (linkId As ResourceIdentifier, Optional cancellationToken As CancellationToken = Nothing) As Response(Of Boolean)" />
-      <MemberSignature Language="F#" Value="abstract member Exists : Azure.Core.ResourceIdentifier * System.Threading.CancellationToken -&gt; Azure.Response&lt;bool&gt;&#xA;override this.Exists : Azure.Core.ResourceIdentifier * System.Threading.CancellationToken -&gt; Azure.Response&lt;bool&gt;" Usage="resourceLinkCollection.Exists (linkId, cancellationToken)" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;bool&gt; Exists (System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;bool&gt; Exists(valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.ResourceManager.Resources.ResourceLinkCollection.Exists(System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function Exists (Optional cancellationToken As CancellationToken = Nothing) As Response(Of Boolean)" />
+      <MemberSignature Language="F#" Value="abstract member Exists : System.Threading.CancellationToken -&gt; Azure.Response&lt;bool&gt;&#xA;override this.Exists : System.Threading.CancellationToken -&gt; Azure.Response&lt;bool&gt;" Usage="resourceLinkCollection.Exists cancellationToken" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.ResourceManager</AssemblyName>
@@ -112,25 +120,25 @@
         <ReturnType>Azure.Response&lt;System.Boolean&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="linkId" Type="Azure.Core.ResourceIdentifier" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="linkId"> The fully qualified Id of the resource link. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
-        <summary> Tries to get details for this resource from the service. </summary>
+        <summary>
+            Checks to see if the resource exists in azure.
+            Request Path: /{linkId}
+            Operation Id: ResourceLinks_Get
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
-        <exception cref="T:System.ArgumentNullException">
-          <paramref name="linkId" /> is null. </exception>
       </Docs>
     </Member>
     <Member MemberName="ExistsAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;bool&gt;&gt; ExistsAsync (Azure.Core.ResourceIdentifier linkId, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;bool&gt;&gt; ExistsAsync(class Azure.Core.ResourceIdentifier linkId, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.ResourceManager.Resources.ResourceLinkCollection.ExistsAsync(Azure.Core.ResourceIdentifier,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function ExistsAsync (linkId As ResourceIdentifier, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of Boolean))" />
-      <MemberSignature Language="F#" Value="abstract member ExistsAsync : Azure.Core.ResourceIdentifier * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;bool&gt;&gt;&#xA;override this.ExistsAsync : Azure.Core.ResourceIdentifier * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;bool&gt;&gt;" Usage="resourceLinkCollection.ExistsAsync (linkId, cancellationToken)" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;bool&gt;&gt; ExistsAsync (System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;bool&gt;&gt; ExistsAsync(valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.ResourceManager.Resources.ResourceLinkCollection.ExistsAsync(System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function ExistsAsync (Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of Boolean))" />
+      <MemberSignature Language="F#" Value="abstract member ExistsAsync : System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;bool&gt;&gt;&#xA;override this.ExistsAsync : System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;bool&gt;&gt;" Usage="resourceLinkCollection.ExistsAsync cancellationToken" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.ResourceManager</AssemblyName>
@@ -140,185 +148,129 @@
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&lt;System.Boolean&gt;&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="linkId" Type="Azure.Core.ResourceIdentifier" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="linkId"> The fully qualified Id of the resource link. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
-        <summary> Tries to get details for this resource from the service. </summary>
+        <summary>
+            Checks to see if the resource exists in azure.
+            Request Path: /{linkId}
+            Operation Id: ResourceLinks_Get
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
-        <exception cref="T:System.ArgumentNullException">
-          <paramref name="linkId" /> is null. </exception>
       </Docs>
     </Member>
     <Member MemberName="Get">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.ResourceManager.Resources.ResourceLink&gt; Get (Azure.Core.ResourceIdentifier linkId, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.ResourceManager.Resources.ResourceLink&gt; Get(class Azure.Core.ResourceIdentifier linkId, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.ResourceManager.Resources.ResourceLinkCollection.Get(Azure.Core.ResourceIdentifier,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function Get (linkId As ResourceIdentifier, Optional cancellationToken As CancellationToken = Nothing) As Response(Of ResourceLink)" />
-      <MemberSignature Language="F#" Value="abstract member Get : Azure.Core.ResourceIdentifier * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.ResourceManager.Resources.ResourceLink&gt;&#xA;override this.Get : Azure.Core.ResourceIdentifier * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.ResourceManager.Resources.ResourceLink&gt;" Usage="resourceLinkCollection.Get (linkId, cancellationToken)" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.ResourceManager.Resources.ResourceLinkResource&gt; Get (System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.ResourceManager.Resources.ResourceLinkResource&gt; Get(valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.ResourceManager.Resources.ResourceLinkCollection.Get(System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function Get (Optional cancellationToken As CancellationToken = Nothing) As Response(Of ResourceLinkResource)" />
+      <MemberSignature Language="F#" Value="abstract member Get : System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.ResourceManager.Resources.ResourceLinkResource&gt;&#xA;override this.Get : System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.ResourceManager.Resources.ResourceLinkResource&gt;" Usage="resourceLinkCollection.Get cancellationToken" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.ResourceManager</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>Azure.Response&lt;Azure.ResourceManager.Resources.ResourceLink&gt;</ReturnType>
+        <ReturnType>Azure.Response&lt;Azure.ResourceManager.Resources.ResourceLinkResource&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="linkId" Type="Azure.Core.ResourceIdentifier" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="linkId"> The fully qualified Id of the resource link. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
-        <summary> Gets a resource link with the specified ID. </summary>
+        <summary>
+            Gets a resource link with the specified ID.
+            Request Path: /{linkId}
+            Operation Id: ResourceLinks_Get
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
-        <exception cref="T:System.ArgumentNullException">
-          <paramref name="linkId" /> is null. </exception>
       </Docs>
     </Member>
     <Member MemberName="GetAll">
-      <MemberSignature Language="C#" Value="public virtual Azure.Pageable&lt;Azure.ResourceManager.Resources.ResourceLink&gt; GetAll (string scope, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Pageable`1&lt;class Azure.ResourceManager.Resources.ResourceLink&gt; GetAll(string scope, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.ResourceManager.Resources.ResourceLinkCollection.GetAll(System.String,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetAll (scope As String, Optional cancellationToken As CancellationToken = Nothing) As Pageable(Of ResourceLink)" />
-      <MemberSignature Language="F#" Value="abstract member GetAll : string * System.Threading.CancellationToken -&gt; Azure.Pageable&lt;Azure.ResourceManager.Resources.ResourceLink&gt;&#xA;override this.GetAll : string * System.Threading.CancellationToken -&gt; Azure.Pageable&lt;Azure.ResourceManager.Resources.ResourceLink&gt;" Usage="resourceLinkCollection.GetAll (scope, cancellationToken)" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Pageable&lt;Azure.ResourceManager.Resources.ResourceLinkResource&gt; GetAll (System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Pageable`1&lt;class Azure.ResourceManager.Resources.ResourceLinkResource&gt; GetAll(valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.ResourceManager.Resources.ResourceLinkCollection.GetAll(System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetAll (Optional cancellationToken As CancellationToken = Nothing) As Pageable(Of ResourceLinkResource)" />
+      <MemberSignature Language="F#" Value="abstract member GetAll : System.Threading.CancellationToken -&gt; Azure.Pageable&lt;Azure.ResourceManager.Resources.ResourceLinkResource&gt;&#xA;override this.GetAll : System.Threading.CancellationToken -&gt; Azure.Pageable&lt;Azure.ResourceManager.Resources.ResourceLinkResource&gt;" Usage="resourceLinkCollection.GetAll cancellationToken" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.ResourceManager</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>Azure.Pageable&lt;Azure.ResourceManager.Resources.ResourceLink&gt;</ReturnType>
+        <ReturnType>Azure.Pageable&lt;Azure.ResourceManager.Resources.ResourceLinkResource&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="scope" Type="System.String" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
-        <summary> Gets a list of resource links at and below the specified source scope. </summary>
-        <returns> A collection of <see cref="T:Azure.ResourceManager.Resources.ResourceLink" /> that may take multiple service requests to iterate over. </returns>
+        <summary>
+            Gets a list of resource links at and below the specified source scope.
+            Request Path: /{scope}/providers/Microsoft.Resources/links
+            Operation Id: ResourceLinks_ListAtSourceScope
+            </summary>
+        <returns> A collection of <see cref="T:Azure.ResourceManager.Resources.ResourceLinkResource" /> that may take multiple service requests to iterate over. </returns>
         <remarks>To be added.</remarks>
-        <exception cref="T:System.ArgumentNullException">
-          <paramref name="scope" /> is null. </exception>
       </Docs>
     </Member>
     <Member MemberName="GetAllAsync">
-      <MemberSignature Language="C#" Value="public virtual Azure.AsyncPageable&lt;Azure.ResourceManager.Resources.ResourceLink&gt; GetAllAsync (string scope, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.AsyncPageable`1&lt;class Azure.ResourceManager.Resources.ResourceLink&gt; GetAllAsync(string scope, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.ResourceManager.Resources.ResourceLinkCollection.GetAllAsync(System.String,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetAllAsync (scope As String, Optional cancellationToken As CancellationToken = Nothing) As AsyncPageable(Of ResourceLink)" />
-      <MemberSignature Language="F#" Value="abstract member GetAllAsync : string * System.Threading.CancellationToken -&gt; Azure.AsyncPageable&lt;Azure.ResourceManager.Resources.ResourceLink&gt;&#xA;override this.GetAllAsync : string * System.Threading.CancellationToken -&gt; Azure.AsyncPageable&lt;Azure.ResourceManager.Resources.ResourceLink&gt;" Usage="resourceLinkCollection.GetAllAsync (scope, cancellationToken)" />
+      <MemberSignature Language="C#" Value="public virtual Azure.AsyncPageable&lt;Azure.ResourceManager.Resources.ResourceLinkResource&gt; GetAllAsync (System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.AsyncPageable`1&lt;class Azure.ResourceManager.Resources.ResourceLinkResource&gt; GetAllAsync(valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.ResourceManager.Resources.ResourceLinkCollection.GetAllAsync(System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetAllAsync (Optional cancellationToken As CancellationToken = Nothing) As AsyncPageable(Of ResourceLinkResource)" />
+      <MemberSignature Language="F#" Value="abstract member GetAllAsync : System.Threading.CancellationToken -&gt; Azure.AsyncPageable&lt;Azure.ResourceManager.Resources.ResourceLinkResource&gt;&#xA;override this.GetAllAsync : System.Threading.CancellationToken -&gt; Azure.AsyncPageable&lt;Azure.ResourceManager.Resources.ResourceLinkResource&gt;" Usage="resourceLinkCollection.GetAllAsync cancellationToken" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.ResourceManager</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>Azure.AsyncPageable&lt;Azure.ResourceManager.Resources.ResourceLink&gt;</ReturnType>
+        <ReturnType>Azure.AsyncPageable&lt;Azure.ResourceManager.Resources.ResourceLinkResource&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="scope" Type="System.String" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
-        <summary> Gets a list of resource links at and below the specified source scope. </summary>
-        <returns> An async collection of <see cref="T:Azure.ResourceManager.Resources.ResourceLink" /> that may take multiple service requests to iterate over. </returns>
+        <summary>
+            Gets a list of resource links at and below the specified source scope.
+            Request Path: /{scope}/providers/Microsoft.Resources/links
+            Operation Id: ResourceLinks_ListAtSourceScope
+            </summary>
+        <returns> An async collection of <see cref="T:Azure.ResourceManager.Resources.ResourceLinkResource" /> that may take multiple service requests to iterate over. </returns>
         <remarks>To be added.</remarks>
-        <exception cref="T:System.ArgumentNullException">
-          <paramref name="scope" /> is null. </exception>
       </Docs>
     </Member>
     <Member MemberName="GetAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.ResourceManager.Resources.ResourceLink&gt;&gt; GetAsync (Azure.Core.ResourceIdentifier linkId, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.ResourceManager.Resources.ResourceLink&gt;&gt; GetAsync(class Azure.Core.ResourceIdentifier linkId, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.ResourceManager.Resources.ResourceLinkCollection.GetAsync(Azure.Core.ResourceIdentifier,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetAsync (linkId As ResourceIdentifier, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of ResourceLink))" />
-      <MemberSignature Language="F#" Value="abstract member GetAsync : Azure.Core.ResourceIdentifier * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.ResourceManager.Resources.ResourceLink&gt;&gt;&#xA;override this.GetAsync : Azure.Core.ResourceIdentifier * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.ResourceManager.Resources.ResourceLink&gt;&gt;" Usage="resourceLinkCollection.GetAsync (linkId, cancellationToken)" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.ResourceManager.Resources.ResourceLinkResource&gt;&gt; GetAsync (System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.ResourceManager.Resources.ResourceLinkResource&gt;&gt; GetAsync(valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.ResourceManager.Resources.ResourceLinkCollection.GetAsync(System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetAsync (Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of ResourceLinkResource))" />
+      <MemberSignature Language="F#" Value="abstract member GetAsync : System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.ResourceManager.Resources.ResourceLinkResource&gt;&gt;&#xA;override this.GetAsync : System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.ResourceManager.Resources.ResourceLinkResource&gt;&gt;" Usage="resourceLinkCollection.GetAsync cancellationToken" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.ResourceManager</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.ResourceManager.Resources.ResourceLink&gt;&gt;</ReturnType>
+        <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.ResourceManager.Resources.ResourceLinkResource&gt;&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="linkId" Type="Azure.Core.ResourceIdentifier" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="linkId"> The fully qualified Id of the resource link. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
-        <summary> Gets a resource link with the specified ID. </summary>
+        <summary>
+            Gets a resource link with the specified ID.
+            Request Path: /{linkId}
+            Operation Id: ResourceLinks_Get
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
-        <exception cref="T:System.ArgumentNullException">
-          <paramref name="linkId" /> is null. </exception>
-      </Docs>
-    </Member>
-    <Member MemberName="GetIfExists">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.ResourceManager.Resources.ResourceLink&gt; GetIfExists (Azure.Core.ResourceIdentifier linkId, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.ResourceManager.Resources.ResourceLink&gt; GetIfExists(class Azure.Core.ResourceIdentifier linkId, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.ResourceManager.Resources.ResourceLinkCollection.GetIfExists(Azure.Core.ResourceIdentifier,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetIfExists (linkId As ResourceIdentifier, Optional cancellationToken As CancellationToken = Nothing) As Response(Of ResourceLink)" />
-      <MemberSignature Language="F#" Value="abstract member GetIfExists : Azure.Core.ResourceIdentifier * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.ResourceManager.Resources.ResourceLink&gt;&#xA;override this.GetIfExists : Azure.Core.ResourceIdentifier * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.ResourceManager.Resources.ResourceLink&gt;" Usage="resourceLinkCollection.GetIfExists (linkId, cancellationToken)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Azure.ResourceManager</AssemblyName>
-        <AssemblyVersion>1.0.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>Azure.Response&lt;Azure.ResourceManager.Resources.ResourceLink&gt;</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="linkId" Type="Azure.Core.ResourceIdentifier" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
-      </Parameters>
-      <Docs>
-        <param name="linkId"> The fully qualified Id of the resource link. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink. </param>
-        <param name="cancellationToken"> The cancellation token to use. </param>
-        <summary> Tries to get details for this resource from the service. </summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
-        <exception cref="T:System.ArgumentNullException">
-          <paramref name="linkId" /> is null. </exception>
-      </Docs>
-    </Member>
-    <Member MemberName="GetIfExistsAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.ResourceManager.Resources.ResourceLink&gt;&gt; GetIfExistsAsync (Azure.Core.ResourceIdentifier linkId, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.ResourceManager.Resources.ResourceLink&gt;&gt; GetIfExistsAsync(class Azure.Core.ResourceIdentifier linkId, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.ResourceManager.Resources.ResourceLinkCollection.GetIfExistsAsync(Azure.Core.ResourceIdentifier,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetIfExistsAsync (linkId As ResourceIdentifier, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of ResourceLink))" />
-      <MemberSignature Language="F#" Value="abstract member GetIfExistsAsync : Azure.Core.ResourceIdentifier * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.ResourceManager.Resources.ResourceLink&gt;&gt;&#xA;override this.GetIfExistsAsync : Azure.Core.ResourceIdentifier * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.ResourceManager.Resources.ResourceLink&gt;&gt;" Usage="resourceLinkCollection.GetIfExistsAsync (linkId, cancellationToken)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Azure.ResourceManager</AssemblyName>
-        <AssemblyVersion>1.0.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.ResourceManager.Resources.ResourceLink&gt;&gt;</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="linkId" Type="Azure.Core.ResourceIdentifier" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
-      </Parameters>
-      <Docs>
-        <param name="linkId"> The fully qualified Id of the resource link. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink. </param>
-        <param name="cancellationToken"> The cancellation token to use. </param>
-        <summary> Tries to get details for this resource from the service. </summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
-        <exception cref="T:System.ArgumentNullException">
-          <paramref name="linkId" /> is null. </exception>
       </Docs>
     </Member>
   </Members>

@@ -2,15 +2,15 @@
 title: Azure Storage Management client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.Storage, storage
 author: tg-msft
-ms.author: tg-msft
-ms.date: 01/30/2022
+ms.author: teglaza
+ms.date: 03/31/2022
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
 ms.service: storage
 ---
-# Azure Storage Management client library for .NET - Version 1.0.0-beta.6 
+# Azure Storage Management client library for .NET - Version 1.0.0-beta.7 
 
 
 This package follows the [new Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html) which provide a number of core capabilities that are shared amongst all Azure SDKs, including the intuitive Azure Identity library, an HTTP Pipeline with custom policies, error-handling, distributed tracing, and much more.
@@ -22,7 +22,7 @@ This package follows the [new Azure SDK guidelines](https://azure.github.io/azur
 Install the Azure Storage management library for .NET with [NuGet](https://www.nuget.org/):
 
 ```PowerShell
-Install-Package Azure.ResourceManager.Storage -Version 1.0.0-beta.6
+Install-Package Azure.ResourceManager.Storage -Version 1.0.0-beta.7
 ```
 
 ### Prerequisites
@@ -31,7 +31,7 @@ Set up a way to authenticate to Azure with Azure Identity.
 Some options are:
 - Through the [Azure CLI Login](https://docs.microsoft.com/cli/azure/authenticate-azure-cli).
 - Via [Visual Studio](https://docs.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet#authenticating-via-visual-studio).
-- Setting [Environment Variables](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Storage_1.0.0-beta.6/sdk/resourcemanager/Azure.ResourceManager/docs/AuthUsingEnvironmentVariables.md).
+- Setting [Environment Variables](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Storage_1.0.0-beta.7/sdk/resourcemanager/Azure.ResourceManager/docs/AuthUsingEnvironmentVariables.md).
 
 More information and different authentication approaches using Azure Identity can be found in [this document](https://docs.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet).
 
@@ -52,7 +52,7 @@ Additional documentation for the `Azure.Identity.DefaultAzureCredential` class c
 
 ## Key concepts
 
-Key concepts of the Azure .NET SDK can be found [here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Storage_1.0.0-beta.6/sdk/resourcemanager/Azure.ResourceManager/README.md#key-concepts)
+Key concepts of the Azure .NET SDK can be found [here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Storage_1.0.0-beta.7/sdk/resourcemanager/Azure.ResourceManager/README.md#key-concepts)
 
 ## Examples
 
@@ -62,36 +62,36 @@ Before creating a storage account, we need to have a resource group.
 
 ```C# Snippet:Managing_StorageAccounts_DefaultSubscription
 ArmClient armClient = new ArmClient(new DefaultAzureCredential());
-Subscription subscription = await armClient.GetDefaultSubscriptionAsync();
+SubscriptionResource subscription = await armClient.GetDefaultSubscriptionAsync();
 ```
 ```C# Snippet:Managing_StorageAccounts_GetResourceGroupCollection
 string rgName = "myRgName";
 AzureLocation location = AzureLocation.WestUS2;
-ResourceGroupCreateOrUpdateOperation operation= await subscription.GetResourceGroups().CreateOrUpdateAsync(true, rgName, new ResourceGroupData(location));
-ResourceGroup resourceGroup = operation.Value;
+ArmOperation<ResourceGroupResource> operation = await subscription.GetResourceGroups().CreateOrUpdateAsync(WaitUntil.Completed, rgName, new ResourceGroupData(location));
+ResourceGroupResource resourceGroup = operation.Value;
 ```
 
 Then we can create a storage account inside this resource group.
 
 ```C# Snippet:Managing_StorageAccounts_CreateStorageAccount
 //first we need to define the StorageAccountCreateParameters
-Sku sku = new Sku(SkuName.StandardGRS);
-Kind kind = Kind.Storage;
+StorageSku sku = new StorageSku(StorageSkuName.StandardGRS);
+StorageKind kind = StorageKind.Storage;
 string location = "westus2";
 StorageAccountCreateParameters parameters = new StorageAccountCreateParameters(sku, kind, location);
 //now we can create a storage account with defined account name and parameters
 StorageAccountCollection accountCollection = resourceGroup.GetStorageAccounts();
 string accountName = "myAccount";
-StorageAccountCreateOrUpdateOperation accountCreateOperation = await accountCollection.CreateOrUpdateAsync(true, accountName, parameters);
-StorageAccount storageAccount = accountCreateOperation.Value;
+ArmOperation<StorageAccountResource> accountCreateOperation = await accountCollection.CreateOrUpdateAsync(WaitUntil.Completed, accountName, parameters);
+StorageAccountResource storageAccount = accountCreateOperation.Value;
 ```
 
 ### Get all storage accounts in a resource group
 
 ```C# Snippet:Managing_StorageAccounts_ListStorageAccounts
 StorageAccountCollection accountCollection = resourceGroup.GetStorageAccounts();
-AsyncPageable<StorageAccount> response = accountCollection.GetAllAsync();
-await foreach (StorageAccount storageAccount in response)
+AsyncPageable<StorageAccountResource> response = accountCollection.GetAllAsync();
+await foreach (StorageAccountResource storageAccount in response)
 {
     Console.WriteLine(storageAccount.Id.Name);
 }
@@ -101,44 +101,28 @@ await foreach (StorageAccount storageAccount in response)
 
 ```C# Snippet:Managing_StorageAccounts_GetStorageAccount
 StorageAccountCollection accountCollection = resourceGroup.GetStorageAccounts();
-StorageAccount storageAccount = await accountCollection.GetAsync("myAccount");
+StorageAccountResource storageAccount = await accountCollection.GetAsync("myAccount");
 Console.WriteLine(storageAccount.Id.Name);
-```
-
-### Try to get a storage account if it exists
-
-
-```C# Snippet:Managing_StorageAccounts_GetStorageAccountIfExists
-StorageAccountCollection accountCollection = resourceGroup.GetStorageAccounts();
-StorageAccount storageAccount = await accountCollection.GetIfExistsAsync("foo");
-if (storageAccount != null)
-{
-    Console.WriteLine(storageAccount.Id.Name);
-}
-if (await accountCollection.ExistsAsync("bar"))
-{
-    Console.WriteLine("storage account 'bar' exists");
-}
 ```
 
 ### Delete a storage account
 
 ```C# Snippet:Managing_StorageAccounts_DeleteStorageAccount
 StorageAccountCollection accountCollection = resourceGroup.GetStorageAccounts();
-StorageAccount storageAccount = await accountCollection.GetAsync("myAccount");
-await storageAccount.DeleteAsync(true);
+StorageAccountResource storageAccount = await accountCollection.GetAsync("myAccount");
+await storageAccount.DeleteAsync(WaitUntil.Completed);
 ```
 
 ### Add a tag to the storage account
 
 ```C# Snippet:Managing_StorageAccounts_AddTagStorageAccount
 StorageAccountCollection accountCollection = resourceGroup.GetStorageAccounts();
-StorageAccount storageAccount = await accountCollection.GetAsync("myAccount");
+StorageAccountResource storageAccount = await accountCollection.GetAsync("myAccount");
 // add a tag on this storage account
 await storageAccount.AddTagAsync("key", "value");
 ```
 
-For more detailed examples, take a look at [samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.ResourceManager.Storage_1.0.0-beta.6/sdk/storage/Azure.ResourceManager.Storage/samples) we have available.
+For more detailed examples, take a look at [samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.ResourceManager.Storage_1.0.0-beta.7/sdk/storage/Azure.ResourceManager.Storage/samples) we have available.
 
 ## Troubleshooting
 
@@ -153,8 +137,8 @@ For more detailed examples, take a look at [samples](https://github.com/Azure/az
 
 ### More sample code
 
-- [Managing Blob Containers](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Storage_1.0.0-beta.6/sdk/storage/Azure.ResourceManager.Storage/samples/Sample1_ManagingBlobContainers.md)
-- [Managing File Shares](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Storage_1.0.0-beta.6/sdk/storage/Azure.ResourceManager.Storage/samples/Sample2_ManagingFileShares.md)
+- [Managing Blob Containers](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Storage_1.0.0-beta.7/sdk/storage/Azure.ResourceManager.Storage/samples/Sample1_ManagingBlobContainers.md)
+- [Managing File Shares](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Storage_1.0.0-beta.7/sdk/storage/Azure.ResourceManager.Storage/samples/Sample2_ManagingFileShares.md)
 
 ### Additional Documentation
 
