@@ -3,14 +3,14 @@ title: Azure Core shared client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Core, core
 author: JoshLove-msft
 ms.author: jolov
-ms.date: 03/22/2022
+ms.date: 04/05/2022
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
 ms.service: core
 ---
-# Azure Core shared client library for .NET - Version 1.23.0 
+# Azure Core shared client library for .NET - Version 1.24.0 
 
 
 Azure.Core provides shared primitives, abstractions, and helpers for modern .NET Azure SDK client libraries. 
@@ -48,12 +48,12 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.23.0/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.23.0/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.23.0/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.23.0/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.23.0/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.23.0/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.24.0/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.24.0/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.24.0/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.24.0/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.24.0/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.24.0/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
@@ -93,7 +93,7 @@ SecretClientOptions options = new SecretClientOptions()
 SecretClient client = new SecretClient(new Uri("http://example.com"), new DefaultAzureCredential(), options);
 ```
 
-More on client configuration in [client configuration samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.23.0/sdk/core/Azure.Core/samples/Configuration.md)
+More on client configuration in [client configuration samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.24.0/sdk/core/Azure.Core/samples/Configuration.md)
 
 ### Accessing HTTP Response Details Using ```Response<T>```
 _Service clients_ have methods that can be used to call Azure services. 
@@ -126,7 +126,7 @@ foreach (HttpHeader header in http.Headers)
 }
 ```
 
-More on response types in [response samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.23.0/sdk/core/Azure.Core/samples/Response.md)
+More on response types in [response samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.24.0/sdk/core/Azure.Core/samples/Response.md)
 
 ### Setting up console logging
 
@@ -137,7 +137,7 @@ To create an Azure SDK log listener that outputs messages to console use `AzureE
 using AzureEventSourceListener listener = AzureEventSourceListener.CreateConsoleLogger();
 ```
 
-More on logging in [diagnostics samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.23.0/sdk/core/Azure.Core/samples/Diagnostics.md)
+More on logging in [diagnostics samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.24.0/sdk/core/Azure.Core/samples/Diagnostics.md)
 
 ### Reporting Errors ```RequestFailedException```
 
@@ -156,7 +156,7 @@ catch (RequestFailedException e) when (e.Status == 404)
 }
 ```
 
-More on handling responses in [response samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.23.0/sdk/core/Azure.Core/samples/Response.md)
+More on handling responses in [response samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.24.0/sdk/core/Azure.Core/samples/Response.md)
 
 ### Consuming Service Methods Returning ```AsyncPageable<T>```
 
@@ -194,7 +194,7 @@ Console.WriteLine(value.Name);
 Console.WriteLine(value.ScheduledPurgeDate);
 ```
 
-More on long-running operations in [long-running operation samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.23.0/sdk/core/Azure.Core/samples/LongRunningOperations.md)
+More on long-running operations in [long-running operation samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.24.0/sdk/core/Azure.Core/samples/LongRunningOperations.md)
 
 ### Mocking
 One of the most important cross-cutting features of our new client libraries using Azure.Core is that they are designed for mocking.
@@ -227,7 +227,7 @@ SecretClient client = mock.Object;
 KeyVaultSecret secret = client.GetSecret("Name");
 ```
 
-More on mocking in [mocking samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.23.0/sdk/core/Azure.Core/samples/Mocking.md)
+More on mocking in [mocking samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.24.0/sdk/core/Azure.Core/samples/Mocking.md)
 
 ## Distributed tracing with Application Insights
 
@@ -237,11 +237,11 @@ If your application already uses ApplicationInsights, automatic collection of Az
 
 To setup ApplicationInsights tracking for your application follow the [Start Monitoring Application](https://docs.microsoft.com/azure/azure-monitor/learn/dotnetcore-quick-start) guide.
 
-More on diagnostics in [diagnostics samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.23.0/sdk/core/Azure.Core/samples/Diagnostics.md).
+More on diagnostics in [diagnostics samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.24.0/sdk/core/Azure.Core/samples/Diagnostics.md).
 
 ## Troubleshooting
 
-Three main ways of troubleshooting failures are [inspecting exceptions](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.23.0/sdk/core/Azure.Core/samples/Response.md#handling-exceptions), enabling [logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.23.0/sdk/core/Azure.Core/samples/Diagnostics.md#Logging), and [distributed tracing](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.23.0/sdk/core/Azure.Core/samples/Diagnostics.md#Distributed-tracing)
+Three main ways of troubleshooting failures are [inspecting exceptions](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.24.0/sdk/core/Azure.Core/samples/Response.md#handling-exceptions), enabling [logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.24.0/sdk/core/Azure.Core/samples/Diagnostics.md#Logging), and [distributed tracing](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.24.0/sdk/core/Azure.Core/samples/Diagnostics.md#Distributed-tracing)
 
 ## Next steps
 
@@ -257,7 +257,7 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fcore%2FAzure.Core%2FREADME.png)
 
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Core_1.23.0/sdk/core/Azure.Core/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Core_1.24.0/sdk/core/Azure.Core/src
 [package]: https://www.nuget.org/packages/Azure.Core/
 [docs]: https://azure.github.io/azure-sdk-for-net/core.html
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct
