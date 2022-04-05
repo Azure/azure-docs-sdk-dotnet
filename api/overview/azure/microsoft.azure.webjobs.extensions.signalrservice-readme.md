@@ -37,7 +37,6 @@ dotnet add package Microsoft.Azure.WebJobs.Extensions.SignalRService
 
     After the instance is deployed, open it in the portal and locate its Settings page. Change the Service Mode setting to *Serverless*.
 
-    [SignalR Service mode setting]
 
 ### Authenticate the client
 
