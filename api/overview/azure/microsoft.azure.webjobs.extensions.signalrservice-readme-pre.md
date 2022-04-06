@@ -37,7 +37,6 @@ dotnet add package Microsoft.Azure.WebJobs.Extensions.SignalRService
 
     After the instance is deployed, open it in the portal and locate its Settings page. Change the Service Mode setting to *Serverless*.
 
-    [SignalR Service mode setting]
 ### Authenticate the client
 
 In order for SignalR Service client to access SignalR resource, it will need to understand how to authenticate with it. The easiest means for doing so is to use a connection string which can be found in the [Azure Portal](https://portal.azure.com/) or by using the [Azure CLI](https://docs.microsoft.com/cli/azure) / [Azure PowerShell](https://docs.microsoft.com/powershell/azure/) snippet below.
