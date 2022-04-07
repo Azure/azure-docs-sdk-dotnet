@@ -85,7 +85,7 @@ IRedisCache redisCache1 = azure.RedisCaches.Define("RedisCacheName")
 ```
 
 > [!div class="nextstepaction"]
-> [Explore the management APIs](/dotnet/api/overview/azure/rediscache/management)
+> [Explore the management APIs](/dotnet/api/overview/azure/azurecacheforredis/management)
 
 
 ## Samples
