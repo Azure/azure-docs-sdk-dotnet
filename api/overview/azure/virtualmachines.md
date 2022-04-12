@@ -61,7 +61,7 @@ IVirtualMachine windowsVM = azure.VirtualMachines.Define("MyVirtualMachine")
 
 ### Samples
 
-* [Create and manage virtual machines](/dotnet/azure/dotnet-sdk-azure-virtual-machine-samples)
+
 * [Deploy an SSH-enabled VM with a Template with .NET](https://azure.microsoft.com/resources/samples/resource-manager-dotnet-template-deployment/)
 
 View the [complete list](https://azure.microsoft.com/resources/samples/?platform=dotnet&term=VM) of virtual machine samples.

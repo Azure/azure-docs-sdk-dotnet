@@ -1,17 +1,16 @@
 ---
 title: Azure Event Grid client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Messaging.EventGrid, eventgrid
-author: ramya-rao-a
-ms.author: ramyar
-ms.date: 02/09/2021
+author: Kishp01
+ms.author: kishp
+ms.date: 04/08/2022
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
 ms.service: eventgrid
 ---
-
-# Azure Event Grid client library for .NET - Version 4.0.0-beta.5 
+# Azure Event Grid client library for .NET - Version 4.11.0-beta.1 
 
 
 Azure Event Grid allows you to easily build applications with event-based architectures. The Event Grid service fully manages all routing of events from any source, to any destination, for any application. Azure service events and custom events can be published directly to the service, where the events can then be filtered and sent to various recipients, such as built-in handlers or custom webhooks. To learn more about Azure Event Grid: [What is Event Grid?](https://docs.microsoft.com/azure/event-grid/overview)
@@ -21,7 +20,7 @@ Use the client library for Azure Event Grid to:
 - Consume events that have been delivered to event handlers
 - Generate SAS tokens to authenticate the client publishing events to Azure Event Grid topics
 
-  [Source code](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Messaging.EventGrid_4.0.0-beta.5/sdk/eventgrid/Azure.Messaging.EventGrid/src) | [Package (NuGet)](https://www.nuget.org/packages/Azure.Messaging.EventGrid/) | [API reference documentation](https://azure.github.io/azure-sdk-for-net/eventgrid.html) | [Product documentation](https://docs.microsoft.com/azure/event-grid/) | [Samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.0.0-beta.5/sdk/eventgrid/Azure.Messaging.EventGrid/samples)
+  [Source code](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Messaging.EventGrid_4.11.0-beta.1/sdk/eventgrid/Azure.Messaging.EventGrid/src) | [Package (NuGet)](https://www.nuget.org/packages/Azure.Messaging.EventGrid/) | [API reference documentation](https://docs.microsoft.com/dotnet/api/azure.messaging.eventgrid) | [Product documentation](https://docs.microsoft.com/azure/event-grid/) | [Samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.11.0-beta.1/sdk/eventgrid/Azure.Messaging.EventGrid/samples) | [Migration guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.11.0-beta.1/sdk/eventgrid/Azure.Messaging.EventGrid/MigrationGuide.md)
 
 ## Getting started
 
@@ -29,13 +28,13 @@ Use the client library for Azure Event Grid to:
 
 Install the client library from [NuGet](https://www.nuget.org/):
 
-```PowerShell
-dotnet add package Azure.Messaging.EventGrid --version 4.0.0-beta.4
+```dotnetcli
+dotnet add package Azure.Messaging.EventGrid
 ```
 
 ### Prerequisites
 
-You must have an [Azure subscription](https://azure.microsoft.com/free/) and an Azure resource group with a custom Event Grid topic or domain. Follow this [step-by-step tutorial](https://docs.microsoft.com/azure/event-grid/custom-event-quickstart-portal) to register the Event Grid resource provider and create Event Grid topics using the [Azure portal](https://portal.azure.com/). There is a [similar tutorial](https://docs.microsoft.com/azure/event-grid/custom-event-quickstart) using [Azure CLI](https://docs.microsoft.com/cli/azure).
+You must have an [Azure subscription](https://azure.microsoft.com/free/dotnet/) and an Azure resource group with a custom Event Grid topic or domain. Follow this [step-by-step tutorial](https://docs.microsoft.com/azure/event-grid/custom-event-quickstart-portal) to register the Event Grid resource provider and create Event Grid topics using the [Azure portal](https://portal.azure.com/). There is a [similar tutorial](https://docs.microsoft.com/azure/event-grid/custom-event-quickstart) using [Azure CLI](https://docs.microsoft.com/cli/azure).
 
 ### Authenticate the Client
 
@@ -52,7 +51,7 @@ The access key can also be found through the [portal](https://docs.microsoft.com
 az eventgrid topic key list --name <your-resource-name> --resource-group <your-resource-group-name> --query "key1"
 ```
 
-#### Creating and Authenticating `EventGridPublisherClient`
+#### Authenticate using Topic Access Key
 
 Once you have your access key and topic endpoint, you can create the publisher client as follows:
 ```C#
@@ -60,19 +59,39 @@ EventGridPublisherClient client = new EventGridPublisherClient(
     new Uri("<endpoint>"),
     new AzureKeyCredential("<access-key>"));
 ```
-You can also create a **Shared Access Signature** to authenticate the client using the same access key. The signature can be generated using the endpoint, access key, and the time at which the signature becomes invalid for authentication. Create the client using the `EventGridSharedAccessSignatureCredential` type:
-```C#
-string sasToken = EventGridPublisherClient.BuildSharedAccessSignature(
-    new Uri("<endpoint>"),
-    DateTimeOffset.UtcNow.AddMinutes(60),
-    new AzureKeyCredential("<access-key>"));
 
+#### Authenticate using Shared Access Signature
+
+Event Grid also supports authenticating with a shared access signature which allows for providing access to a resource that expires by a certain time without sharing your access key.
+Generally, the workflow would be that one application would generate the SAS string and hand off the string to another application that would consume the string.
+Generate the SAS:
+```C# Snippet:GenerateSas
+var builder = new EventGridSasBuilder(new Uri(topicEndpoint), DateTimeOffset.Now.AddHours(1));
+var keyCredential = new AzureKeyCredential(topicAccessKey);
+string sasToken = builder.GenerateSas(keyCredential);
+```
+
+Here is how it would be used from the consumer's perspective:
+```C# Snippet:AuthenticateWithSas
+var sasCredential = new AzureSasCredential(sasToken);
 EventGridPublisherClient client = new EventGridPublisherClient(
-    new Uri("<endpoint>"),
-    new EventGridSharedAccessSignatureCredential(sasToken));
+    new Uri(topicEndpoint),
+    sasCredential);
 ```
 
 `EventGridPublisherClient` also accepts a set of configuring options through `EventGridPublisherClientOptions`. For example, you can specify a custom serializer that will be used to serialize the event data to JSON.
+
+#### Authenticate using Azure Active Directory
+
+Azure Event Grid provides integration with Azure Active Directory (Azure AD) for identity-based authentication of requests. With Azure AD, you can use role-based access control (RBAC) to grant access to your Azure Event Grid resources to users, groups, or applications. The [Azure Identity library](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Messaging.EventGrid_4.11.0-beta.1/sdk/identity/Azure.Identity/README.md) provides easy Azure Active Directory support for authentication.
+
+To send events to a topic or domain using Azure Active Directory, the authenticated identity should have the "EventGrid Data Sender" role assigned.
+
+```C# Snippet:EventGridAAD
+EventGridPublisherClient client = new EventGridPublisherClient(
+    new Uri(topicEndpoint),
+    new DefaultAzureCredential());
+```
 
 ## Key concepts
 
@@ -97,6 +116,20 @@ Events delivered to consumers by Event Grid are *delivered as JSON*. Depending o
 - Parse events from JSON into individual events. Based on the event schema (Event Grid or CloudEvents), you can now access basic information about the event on the envelope (properties that are present for all events, like event time and type).
 - Deserialize the event data. Given an `EventGridEvent` or `CloudEvent`, the user can attempt to access the event payload, or data, by deserializing to a specific type. You can supply a custom serializer at this point to correctly decode the data.
 
+### Thread safety
+We guarantee that all client instance methods are thread-safe and independent of each other ([guideline](https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-service-methods-thread-safety)). This ensures that the recommendation of reusing client instances is always safe, even across threads.
+
+### Additional concepts
+<!-- CLIENT COMMON BAR -->
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.11.0-beta.1/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.11.0-beta.1/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.11.0-beta.1/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.11.0-beta.1/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.11.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.11.0-beta.1/sdk/core/Azure.Core/README.md#mocking) |
+[Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
+<!-- CLIENT COMMON BAR -->
+
 ## Examples
 * [Publish Event Grid events to an Event Grid Topic](#publish-event-grid-events-to-an-event-grid-topic)
 * [Publish CloudEvents to an Event Grid Topic](#publish-cloudevents-to-an-event-grid-topic)
@@ -104,16 +137,45 @@ Events delivered to consumers by Event Grid are *delivered as JSON*. Depending o
 * [Receiving and Deserializing Events](#receiving-and-deserializing-events)
 
 ### Publish Event Grid events to an Event Grid Topic
-Publishing events to Event Grid is performed using the `EventGridPublisherClient`. Use the provided `SendEvents`/`SendEventsAsync` method to publish events to the topic.
-```C# Snippet:SendEGEventsToTopic
+Publishing events to Event Grid is performed using the `EventGridPublisherClient`. Use the provided `SendEvent`/`SendEventAsync` method to publish a single event to the topic.
+```C# Snippet:SendSingleEGEventToTopic
 // Add EventGridEvents to a list to publish to the topic
-List<EventGridEvent> eventsList = new List<EventGridEvent>
-{
+EventGridEvent egEvent =
     new EventGridEvent(
         "ExampleEventSubject",
         "Example.EventType",
         "1.0",
-        "This is the event data")
+        "This is the event data");
+
+// Send the event
+await client.SendEventAsync(egEvent);
+```
+
+To publish a batch of events, use the `SendEvents`/`SendEventsAsync` method.
+```C# Snippet:SendEGEventsToTopic
+// Example of a custom ObjectSerializer used to serialize the event payload to JSON
+var myCustomDataSerializer = new JsonObjectSerializer(
+    new JsonSerializerOptions()
+    {
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+    });
+
+// Add EventGridEvents to a list to publish to the topic
+List<EventGridEvent> eventsList = new List<EventGridEvent>
+{
+    // EventGridEvent with custom model serialized to JSON
+    new EventGridEvent(
+        "ExampleEventSubject",
+        "Example.EventType",
+        "1.0",
+        new CustomModel() { A = 5, B = true }),
+
+    // EventGridEvent with custom model serialized to JSON using a custom serializer
+    new EventGridEvent(
+        "ExampleEventSubject",
+        "Example.EventType",
+        "1.0",
+        myCustomDataSerializer.Serialize(new CustomModel() { A = 5, B = true })),
 };
 
 // Send the events
@@ -122,21 +184,35 @@ await client.SendEventsAsync(eventsList);
 ### Publish CloudEvents to an Event Grid Topic
 Publishing events to Event Grid is performed using the `EventGridPublisherClient`. Use the provided `SendEvents`/`SendEventsAsync` method to publish events to the topic.
 ```C# Snippet:SendCloudEventsToTopic
+// Example of a custom ObjectSerializer used to serialize the event payload to JSON
+var myCustomDataSerializer = new JsonObjectSerializer(
+    new JsonSerializerOptions()
+    {
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+    });
+
 // Add CloudEvents to a list to publish to the topic
 List<CloudEvent> eventsList = new List<CloudEvent>
 {
-    // CloudEvent with populated data
+    // CloudEvent with custom model serialized to JSON
     new CloudEvent(
         "/cloudevents/example/source",
         "Example.EventType",
-        "This is the event data"),
+        new CustomModel() { A = 5, B = true }),
+
+    // CloudEvent with custom model serialized to JSON using a custom serializer
+    new CloudEvent(
+        "/cloudevents/example/source",
+        "Example.EventType",
+        myCustomDataSerializer.Serialize(new CustomModel() { A = 5, B = true }),
+        "application/json"),
 
     // CloudEvents also supports sending binary-valued data
     new CloudEvent(
         "/cloudevents/example/binarydata",
         "Example.EventType",
-        Encoding.UTF8.GetBytes("This is binary data"),
-        "example/binary")};
+        new BinaryData(Encoding.UTF8.GetBytes("This is treated as binary data")),
+        "application/octet-stream")};
 
 // Send the events
 await client.SendEventsAsync(eventsList);
@@ -165,29 +241,48 @@ List<EventGridEvent> eventsList = new List<EventGridEvent>
 await client.SendEventsAsync(eventsList);
 ```
 
+For sending CloudEvents, the CloudEvent source is used as the domain topic:
+```C# Snippet:SendCloudEventsToDomain
+List<CloudEvent> eventsList = new List<CloudEvent>();
+
+for (int i = 0; i < 10; i++)
+{
+    CloudEvent cloudEvent = new CloudEvent(
+        // the source is mapped to the domain topic
+        $"Subject-{i}",
+        "Microsoft.MockPublisher.TestEvent",
+        "hello")
+    {
+        Id = $"event-{i}",
+        Time = DateTimeOffset.Now
+    };
+    eventsList.Add(cloudEvent);
+}
+
+await client.SendEventsAsync(eventsList);
+```
+
 ### Receiving and Deserializing Events
 There are several different Azure services that act as [event handlers](https://docs.microsoft.com/azure/event-grid/event-handlers).
 
 Note: if using Webhooks for event delivery of the *Event Grid schema*, Event Grid requires you to prove ownership of your Webhook endpoint before it starts delivering events to that endpoint. At the time of event subscription creation, Event Grid sends a subscription validation event to your endpoint, as seen below. Learn more about completing the handshake here: [Webhook event delivery](https://docs.microsoft.com/azure/event-grid/webhook-event-delivery). For the *CloudEvents schema*, the service validates the connection using the HTTP options method. Learn more here: [CloudEvents validation](https://github.com/cloudevents/spec/blob/v1.0/http-webhook.md#4-abuse-protection).
 
-Once events are delivered to the event handler, parse the JSON payload into list of events.
+Once events are delivered to the event handler, we can deserialize the JSON payload into a list of events.
 
 Using `EventGridEvent`:
 ```C# Snippet:EGEventParseJson
-// Parse the JSON payload into a list of events using EventGridEvent.Parse
-EventGridEvent[] egEvents = EventGridEvent.Parse(jsonPayloadSampleOne);
+// Parse the JSON payload into a list of events
+EventGridEvent[] egEvents = EventGridEvent.ParseMany(BinaryData.FromStream(httpContent));
 ```
 
 Using `CloudEvent`:
 ```C# Snippet:CloudEventParseJson
-// Parse the JSON payload into a list of events using CloudEvent.Parse
-CloudEvent[] cloudEvents = CloudEvent.Parse(jsonPayloadSampleTwo);
+var bytes = await httpContent.ReadAsByteArrayAsync();
+// Parse the JSON payload into a list of events
+CloudEvent[] cloudEvents = CloudEvent.ParseMany(new BinaryData(bytes));
 ```
-From here, one can access the event data by deserializing to a specific type using `GetData<T>()`. Calling `GetData()` will either return the event data wrapped in `BinaryData`, which represents the serialized JSON event data as bytes.
-
-Using `GetData<T>()`:
-
-Below is an example calling `GetData<T>()` for CloudEvents. In order to deserialize to the correct type, the `EventType` property (`Type` for CloudEvents) helps distinguish between different events. Custom event data should be deserialized using the generic method `GetData<T>()`. There is also an overload for `GetData<T>()` that accepts a custom `ObjectSerializer` to deserialize the event data.
+#### Deserializing event data
+From here, one can access the event data by deserializing to a specific type by calling `ToObjectFromJson<T>()` on the `Data` property. In order to deserialize to the correct type, the `EventType` property (`Type` for CloudEvents) helps distinguish between different events. Custom event data should be deserialized using the generic method `ToObjectFromJson<T>()`. There is also an extension method `ToObject<T>()` that accepts a custom `ObjectSerializer` to deserialize the event data.
 
 ```C# Snippet:DeserializePayloadUsingGenericGetData
 foreach (CloudEvent cloudEvent in cloudEvents)
@@ -195,18 +290,18 @@ foreach (CloudEvent cloudEvent in cloudEvents)
     switch (cloudEvent.Type)
     {
         case "Contoso.Items.ItemReceived":
-            // By default, GetData uses JsonObjectSerializer to deserialize the payload
-            ContosoItemReceivedEventData itemReceived = cloudEvent.GetData<ContosoItemReceivedEventData>();
+            // By default, ToObjectFromJson<T> uses System.Text.Json to deserialize the payload
+            ContosoItemReceivedEventData itemReceived = cloudEvent.Data.ToObjectFromJson<ContosoItemReceivedEventData>();
             Console.WriteLine(itemReceived.ItemSku);
             break;
         case "MyApp.Models.CustomEventType":
             // One can also specify a custom ObjectSerializer as needed to deserialize the payload correctly
-            TestPayload testPayload = cloudEvent.GetData().ToObject<TestPayload>(myCustomSerializer);
+            TestPayload testPayload = cloudEvent.Data.ToObject<TestPayload>(myCustomSerializer);
             Console.WriteLine(testPayload.Name);
             break;
         case SystemEventNames.StorageBlobDeleted:
-            // Example for deserializing system events using GetData<T>
-            StorageBlobDeletedEventData blobDeleted = cloudEvent.GetData<StorageBlobDeletedEventData>();
+            // Example for deserializing system events using ToObjectFromJson<T>
+            StorageBlobDeletedEventData blobDeleted = cloudEvent.Data.ToObjectFromJson<StorageBlobDeletedEventData>();
             Console.WriteLine(blobDeleted.BlobType);
             break;
     }
@@ -215,14 +310,14 @@ foreach (CloudEvent cloudEvent in cloudEvents)
 
 Using `TryGetSystemEventData()`:
 
-If expecting mostly system events, it may be cleaner to switch on `TryGetSystemEventData()` and use pattern matching to act on the individual events. If an event is not a system event, the method will return false and the out parameter will be null. 
+If expecting mostly system events, it may be cleaner to switch on `TryGetSystemEventData()` and use pattern matching to act on the individual events. If an event is not a system event, the method will return false and the out parameter will be null.
 
-*As a caveat, if you are using a custom event type with an EventType value that later gets added as a system event by the service and SDK, the return value of `TryGetSystemEventData` would change from `false` to `true`. This could come up if you are pre-emptively creating your own custom events for events that are already being sent by the service, but have not yet been added to the SDK. In this case, it is better to use the generic `GetData<T>` method so that your code flow doesn't change automatically after upgrading (of course, you may still want to modify your code to consume the newly released system event model as opposed to your custom model).*
+*As a caveat, if you are using a custom event type with an EventType value that later gets added as a system event by the service and SDK, the return value of `TryGetSystemEventData` would change from `false` to `true`. This could come up if you are pre-emptively creating your own custom events for events that are already being sent by the service, but have not yet been added to the SDK. In this case, it is better to use the generic `ToObjectFromJson<T>` method on the `Data` property so that your code flow doesn't change automatically after upgrading (of course, you may still want to modify your code to consume the newly released system event model as opposed to your custom model).*
 
 ```C# Snippet:DeserializePayloadUsingAsSystemEventData
 foreach (EventGridEvent egEvent in egEvents)
 {
-    // If the event is a system event, TryGetSystemEventData() will return the deserialized system event
+    // If the event is a system event, TryGetSystemEventData will return the deserialized system event
     if (egEvent.TryGetSystemEventData(out object systemEvent))
     {
         switch (systemEvent)
@@ -236,8 +331,8 @@ foreach (EventGridEvent egEvent in egEvents)
             // Handle any other system event type
             default:
                 Console.WriteLine(egEvent.EventType);
-                // we can get the raw Json for the event using GetData()
-                Console.WriteLine(egEvent.GetData().ToString());
+                // we can get the raw Json for the event using Data
+                Console.WriteLine(egEvent.Data.ToString());
                 break;
         }
     }
@@ -246,13 +341,13 @@ foreach (EventGridEvent egEvent in egEvents)
         switch (egEvent.EventType)
         {
             case "MyApp.Models.CustomEventType":
-                TestPayload deserializedEventData = egEvent.GetData<TestPayload>();
+                TestPayload deserializedEventData = egEvent.Data.ToObjectFromJson<TestPayload>();
                 Console.WriteLine(deserializedEventData.Name);
                 break;
             // Handle any other custom event type
             default:
                 Console.Write(egEvent.EventType);
-                Console.WriteLine(egEvent.GetData().ToString());
+                Console.WriteLine(egEvent.Data.ToString());
                 break;
         }
     }
@@ -265,18 +360,22 @@ foreach (EventGridEvent egEvent in egEvents)
 `SendEvents()` returns an HTTP response code from the service. A `RequestFailedException` is thrown as a service response for any unsuccessful requests. The exception contains information about what response code was returned from the service.
 
 ### Deserializing Event Data
-- If the event data is not valid JSON, a `JsonException` will be thrown during `Parse`.
-- An `InvalidOperationException` will be thrown during `GetData<T>()` if a custom serializer is passed into `GetData<T>()` with non-serialized event data (for example, if the event was created by the user and not created by parsing from JSON).
+- If the event data is not valid JSON, a `JsonException` will be thrown when calling `Parse` or `ParseMany`.
+- If the event schema does not correspond to the type being deserialized to (e.g. calling `CloudEvent.Parse` on an EventGridSchema event), an `ArgumentException` is thrown.
+- If `Parse` is called on data that contains multiple events, an `ArgumentException` is thrown. `ParseMany` should be used here instead.
 
 ### Setting up console logging
-You can also easily [enable console logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.0.0-beta.5/sdk/core/Azure.Core/samples/Diagnostics.md#logging) if you want to dig deeper into the requests you're making against the service.
+You can also easily [enable console logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.11.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md#logging) if you want to dig deeper into the requests you're making against the service.
 
 ### Distributed Tracing
-The Event Grid library supports distributing tracing out of the box. In order to adhere to the CloudEvents specification's [guidance](https://github.com/cloudevents/spec/blob/master/extensions/distributed-tracing.md) on distributing tracing, the library will set the `traceparent` and `tracestate` on the [ExtensionAttributes](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.0.0-beta.5/sdk/eventgrid/Azure.Messaging.EventGrid/src/Customization/CloudEvent.cs#L126) of a `CloudEvent` when distributed tracing is enabled. To learn more about how to enable distributed tracing in your application, take a look at the Azure SDK [distributed tracing documentation](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.0.0-beta.5/sdk/core/Azure.Core/samples/Diagnostics.md#Distributed-tracing).
+The Event Grid library supports distributing tracing out of the box. In order to adhere to the CloudEvents specification's [guidance](https://github.com/cloudevents/spec/blob/v1.0.1/extensions/distributed-tracing.md) on distributing tracing, the library will set the `traceparent` and `tracestate` on the `ExtensionAttributes` of a `CloudEvent` when distributed tracing is enabled. To learn more about how to enable distributed tracing in your application, take a look at the Azure SDK [distributed tracing documentation](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.11.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md#Distributed-tracing).
+
+### Event Grid on Kubernetes
+This library has been tested and validated on Kubernetes using Azure Arc.
 
 ## Next steps
 
-View more https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.0.0-beta.5/sdk/eventgrid/Azure.Messaging.EventGrid/samples here for common usages of the Event Grid client library: [Event Grid Samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.0.0-beta.5/sdk/eventgrid/Azure.Messaging.EventGrid/samples).
+View more https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.11.0-beta.1/sdk/eventgrid/Azure.Messaging.EventGrid/samples here for common usages of the Event Grid client library: [Event Grid Samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid_4.11.0-beta.1/sdk/eventgrid/Azure.Messaging.EventGrid/samples).
 
 ## Contributing
 
