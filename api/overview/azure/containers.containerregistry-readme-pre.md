@@ -1,17 +1,16 @@
 ---
 title: Azure Container Registry client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Containers.ContainerRegistry, containerregistry
-author: maggiepint
-ms.author: magpint
-ms.date: 11/18/2021
+author: Mohit-Chakraborty
+ms.author: mohitc
+ms.date: 04/06/2022
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
 ms.service: containerregistry
 ---
-
-# Azure Container Registry client library for .NET - Version 1.0.0-beta.5 
+# Azure Container Registry client library for .NET - Version 1.1.0-beta.4 
 
 
 Azure Container Registry allows you to store and manage container images and artifacts in a private registry for all types of container deployments.
@@ -53,7 +52,7 @@ az acr create --name myregistry --resource-group myresourcegroup --location west
 
 For your application to connect to your registry, you'll need to create a `ContainerRegistryClient` that can authenticate with it.  The [Azure Identity library][identity] makes it easy to add Azure Active Directory support for authenticating Azure SDK clients with their corresponding Azure services.  
 
-When you're developing and debugging your application locally, you can use your own user to authenticate with your registry.  One way to accomplish this is to [authenticate your user with the Azure CLI](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Containers.ContainerRegistry_1.0.0-beta.5/sdk/identity/Azure.Identity#authenticating-via-the-azure-cli) and run your application from this environment.  If your application is using a client that has been constructed to authenticate with `DefaultAzureCredential`, it will correctly authenticate with the registry at the specified endpoint.  
+When you're developing and debugging your application locally, you can use your own user to authenticate with your registry.  One way to accomplish this is to [authenticate your user with the Azure CLI](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Containers.ContainerRegistry_1.1.0-beta.4/sdk/identity/Azure.Identity#authenticating-via-the-azure-cli) and run your application from this environment.  If your application is using a client that has been constructed to authenticate with `DefaultAzureCredential`, it will correctly authenticate with the registry at the specified endpoint.  
 
 ```C#
 // Create a ContainerRegistryClient that will authenticate to your registry through Azure Active Directory
@@ -81,12 +80,12 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Containers.ContainerRegistry_1.0.0-beta.5/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Containers.ContainerRegistry_1.0.0-beta.5/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Containers.ContainerRegistry_1.0.0-beta.5/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Containers.ContainerRegistry_1.0.0-beta.5/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Containers.ContainerRegistry_1.0.0-beta.5/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Containers.ContainerRegistry_1.0.0-beta.5/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Containers.ContainerRegistry_1.1.0-beta.4/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Containers.ContainerRegistry_1.1.0-beta.4/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Containers.ContainerRegistry_1.1.0-beta.4/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Containers.ContainerRegistry_1.1.0-beta.4/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Containers.ContainerRegistry_1.1.0-beta.4/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Containers.ContainerRegistry_1.1.0-beta.4/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
@@ -152,7 +151,7 @@ ContainerRegistryClient client = new ContainerRegistryClient(endpoint, new Conta
 RegistryArtifact image = client.GetArtifact("library/hello-world", "latest");
 
 // List the set of tags on the hello_world image tagged as "latest"
-Pageable<ArtifactTagProperties> tags = image.GetTagPropertiesCollection();
+Pageable<ArtifactTagProperties> tags = image.GetAllTagProperties();
 
 // Iterate through the image's tags, listing the tagged alias for the image
 Console.WriteLine($"{image.FullyQualifiedReference} has the following aliases:");
@@ -208,7 +207,7 @@ foreach (string repositoryName in repositoryNames)
 
     // Obtain the images ordered from newest to oldest
     Pageable<ArtifactManifestProperties> imageManifests =
-        repository.GetManifestPropertiesCollection(orderBy: ArtifactManifestOrderBy.LastUpdatedOnDescending);
+        repository.GetAllManifestProperties(manifestOrder: ArtifactManifestOrder.LastUpdatedOnDescending);
 
     // Delete images older than the first three.
     foreach (ArtifactManifestProperties imageManifest in imageManifests.Skip(3))
@@ -265,7 +264,7 @@ ContainerRegistryClient client = new ContainerRegistryClient(endpoint, new Conta
 RegistryArtifact image = client.GetArtifact("library/hello-world", "latest");
 
 // List the set of tags on the hello_world image tagged as "latest"
-AsyncPageable<ArtifactTagProperties> tags = image.GetTagPropertiesCollectionAsync();
+AsyncPageable<ArtifactTagProperties> tags = image.GetAllTagPropertiesAsync();
 
 // Iterate through the image's tags, listing the tagged alias for the image
 Console.WriteLine($"{image.FullyQualifiedReference} has the following aliases:");
@@ -321,7 +320,7 @@ await foreach (string repositoryName in repositoryNames)
 
     // Obtain the images ordered from newest to oldest
     AsyncPageable<ArtifactManifestProperties> imageManifests =
-        repository.GetManifestPropertiesCollectionAsync(orderBy: ArtifactManifestOrderBy.LastUpdatedOnDescending);
+        repository.GetAllManifestPropertiesAsync(manifestOrder: ArtifactManifestOrder.LastUpdatedOnDescending);
 
     // Delete images older than the first three.
     await foreach (ArtifactManifestProperties imageManifest in imageManifests.Skip(3))
@@ -388,7 +387,7 @@ catch (RequestFailedException ex) when (ex.Status == 404)
 }
 ```
 
-You can also easily [enable console logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Containers.ContainerRegistry_1.0.0-beta.5/sdk/core/Azure.Core/samples/Diagnostics.md#logging) if you want to dig
+You can also easily [enable console logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Containers.ContainerRegistry_1.1.0-beta.4/sdk/core/Azure.Core/samples/Diagnostics.md#logging) if you want to dig
 deeper into the requests you're making against the service.
 
 ## Next steps
@@ -412,7 +411,7 @@ additional questions or comments.
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fcontainerregistry%2FAzure.Containers.ContainerRegistry%2FREADME.png)
 
 <!-- LINKS -->
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Containers.ContainerRegistry_1.0.0-beta.5/sdk/containerregistry/Azure.Containers.ContainerRegistry/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Containers.ContainerRegistry_1.1.0-beta.4/sdk/containerregistry/Azure.Containers.ContainerRegistry/src
 [package]: https://www.nuget.org/packages/Azure.Containers.ContainerRegistry/
 [docs]: https://docs.microsoft.com/dotnet/api/azure.containers.containerregistry
 [rest_docs]: https://docs.microsoft.com/rest/api/containerregistry/
@@ -425,9 +424,9 @@ additional questions or comments.
 [container_registry_concepts]: https://docs.microsoft.com/azure/container-registry/container-registry-concepts
 [azure_cli]: https://docs.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/dotnet/
-[identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Containers.ContainerRegistry_1.0.0-beta.5/sdk/identity/Azure.Identity/README.md
-[RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Containers.ContainerRegistry_1.0.0-beta.5/sdk/core/Azure.Core/src/RequestFailedException.cs
-[samples]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Containers.ContainerRegistry_1.0.0-beta.5/sdk/containerregistry/Azure.Containers.ContainerRegistry/samples/
+[identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Containers.ContainerRegistry_1.1.0-beta.4/sdk/identity/Azure.Identity/README.md
+[RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Containers.ContainerRegistry_1.1.0-beta.4/sdk/core/Azure.Core/src/RequestFailedException.cs
+[samples]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Containers.ContainerRegistry_1.1.0-beta.4/sdk/containerregistry/Azure.Containers.ContainerRegistry/samples/
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/

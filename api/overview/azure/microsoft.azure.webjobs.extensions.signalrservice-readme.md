@@ -1,16 +1,16 @@
 ---
 title: Azure WebJobs SignalR Service client library for .NET
-keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebJobs.Extensions.SignalRService, webjobs
-author: AlexGhiondea
-ms.author: alexghi
-ms.date: 02/22/2022
+keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebJobs.Extensions.SignalRService, signalr
+author: sffamily
+ms.author: zhshang
+ms.date: 04/07/2022
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: webjobs
+ms.service: signalr
 ---
-# Azure WebJobs SignalR Service client library for .NET - Version 1.7.0 
+# Azure WebJobs SignalR Service client library for .NET - Version 1.8.0 
 
 
 This extension provides functionality for accessing [Azure SignalR Service](https://aka.ms/signalr_service) from an Azure Function.
@@ -33,11 +33,10 @@ dotnet add package Microsoft.Azure.WebJobs.Extensions.SignalRService
 
     To quickly create the needed SignalR resource in Azure and to receive a connection string for them, you can deploy our sample template by clicking:
 
-    [![Deploy to Azure](https://azuredeploy.net/deploybutton.png)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3a%2f%2fraw.githubusercontent.com%2fAzure%2fazure-quickstart-templates%2fmaster%2fquickstarts%2fmicrosoft.signalrservice%2fsignalr%2fazuredeploy.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3a%2f%2fraw.githubusercontent.com%2fAzure%2fazure-quickstart-templates%2fmaster%2fquickstarts%2fmicrosoft.signalrservice%2fsignalr%2fazuredeploy.json)
 
     After the instance is deployed, open it in the portal and locate its Settings page. Change the Service Mode setting to *Serverless*.
 
-    ![SignalR Service mode setting](images/signalr-service-mode.png)
 
 ### Authenticate the client
 
@@ -102,7 +101,7 @@ Please follow the [Azure SignalR trigger](https://docs.microsoft.com/azure/azure
 - Negotiate for a SignalR client.
 - Manage group like add/remove a single user/connection in a group.
 - Send messages to a single user/connection, to a group, to all users/connections.
-- Use multiple Azure SignalR Service instances for resiliency and disaster recovery in Azure Functions. See details in [Multiple Azure SignalR Service Instances Support in Azure Functions](https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.WebJobs.Extensions.SignalRService_1.7.0/sdk/signalr/Microsoft.Azure.WebJobs.Extensions.SignalRService/docs/sharding.md).
+- Use multiple Azure SignalR Service instances for resiliency and disaster recovery in Azure Functions. See details in [Multiple Azure SignalR Service Instances Support in Azure Functions](https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.WebJobs.Extensions.SignalRService_1.8.0/sdk/signalr/Microsoft.Azure.WebJobs.Extensions.SignalRService/docs/sharding.md).
 
 ## Examples
 
@@ -245,7 +244,7 @@ additional questions or comments.
 <!-- LINKS -->
 [nuget]: https://www.nuget.org/
 
-[contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.SignalRService_1.7.0/CONTRIBUTING.md
+[contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.SignalRService_1.8.0/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
