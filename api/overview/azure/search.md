@@ -3,7 +3,7 @@ title: Azure Cognitive Search libraries for .NET
 description: Reference for Azure Cognitive Search libraries for .NET
 ms.date: 07/20/2020
 ms.topic: reference
-ms.service: search
+ms.service: cognitive-search
 ---
 
 # Azure Cognitive Search libraries for .NET

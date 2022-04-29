@@ -3,7 +3,7 @@ title: Azure Application Insights libraries for .NET
 description: Reference for Azure Application Insights libraries for .NET
 ms.date: 10/19/2017
 ms.topic: reference
-ms.service: application-insights
+ms.subservice: application-insights
 ---
 
 # Azure Application Insights libraries for .NET

@@ -8,7 +8,7 @@ ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: functions
+ms.service: azure-functions
 ---
 
 # Azure WebJobs Storage Blobs client library for .NET - Version 5.0.0-beta.5 
