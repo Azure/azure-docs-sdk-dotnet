@@ -1,18 +1,16 @@
 ---
-title: Azure Video Analyzer Edge client library for .NET
+title: 
 keywords: Azure, dotnet, SDK, API, Azure.Media.VideoAnalyzer.Edge, videoanalyzer
-author: ramya-rao-a
-ms.author: ramyar
-ms.date: 10/27/2021
+author: giakas
+ms.author: giakas
+ms.date: 04/30/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: videoanalyzer
 ---
+# Deprecated. Azure Video Analyzer Edge client library for .NET
 
-# Azure Video Analyzer Edge client library for .NET - Version 1.0.0-beta.5 
-
+Deprecated. We’re retiring the Azure Video Analyzer preview service, you're advised to transition your applications off of Video Analyzer by 01 December 2022. This SDK is not longer maintained.
 
 Azure Video Analyzer is an [Azure Applied AI Service][applied-ai-service] that provides a platform for you to build intelligent video applications that can span both edge and cloud infrastructures. The platform offers the capability to capture, record, and analyze live video along with publishing the results, video and video analytics, to Azure services at the edge or in the cloud. It is designed to be an extensible platform, enabling you to connect different video inferencing edge modules such as Cognitive services modules, or custom inferencing modules that have been trained with your own data using either open-source machine learning or [Azure Machine Learning][machine-learning].
 
@@ -89,12 +87,12 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 <!-- CLIENT COMMON BAR -->
 
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Media.VideoAnalyzer.Edge_1.0.0-beta.5/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Media.VideoAnalyzer.Edge_1.0.0-beta.5/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Media.VideoAnalyzer.Edge_1.0.0-beta.5/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Media.VideoAnalyzer.Edge_1.0.0-beta.5/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Media.VideoAnalyzer.Edge_1.0.0-beta.5/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Media.VideoAnalyzer.Edge_1.0.0-beta.5/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Media.VideoAnalyzer.Edge_1.0.0-beta.6/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Media.VideoAnalyzer.Edge_1.0.0-beta.6/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Media.VideoAnalyzer.Edge_1.0.0-beta.6/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Media.VideoAnalyzer.Edge_1.0.0-beta.6/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Media.VideoAnalyzer.Edge_1.0.0-beta.6/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Media.VideoAnalyzer.Edge_1.0.0-beta.6/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 
 <!-- CLIENT COMMON BAR -->
@@ -225,18 +223,18 @@ additional questions or comments.
 
 <!-- LINKS -->
 
-[azure_cli]: https://docs.microsoft.com/cli/azure
+[azure_cli]: /cli/azure
 [azure_sub]: https://azure.microsoft.com/free/dotnet/
 [cla]: https://cla.microsoft.com
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [coc_contact]: mailto:opencode@microsoft.com
 [package]: https://aka.ms/ava/sdk/client/net
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Media.VideoAnalyzer.Edge_1.0.0-beta.5/sdk/videoanalyzer/Azure.Media.VideoAnalyzer.Edge/src
-[samples]: https://github.com/Azure-Samples/live-video-analytics-iot-edge-csharp
-[doc_direct_methods]: https://docs.microsoft.com/azure/azure-video-analyzer/video-analyzer-docs/direct-methods
-[doc_pipelines]: https://docs.microsoft.com/azure/azure-video-analyzer/video-analyzer-docs/pipeline
-[doc_product]: https://docs.microsoft.com/azure/azure-video-analyzer/video-analyzer-docs/
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Media.VideoAnalyzer.Edge_1.0.0-beta.6/sdk/videoanalyzer/Azure.Media.VideoAnalyzer.Edge/src
+[samples]: https://go.microsoft.com/fwlink/?linkid=2162276
+[doc_direct_methods]: /azure/azure-video-analyzer/video-analyzer-docs/direct-methods
+[doc_pipelines]: /azure/azure-video-analyzer/video-analyzer-docs/pipeline
+[doc_product]: /azure/azure-video-analyzer/video-analyzer-docs/
 [iot-device-sdk]: https://www.nuget.org/packages/Microsoft.Azure.Devices.Client/
 [iot-hub-sdk]: https://www.nuget.org/packages/Microsoft.Azure.Devices/
 [github-page-issues]: https://github.com/Azure/azure-sdk-for-net/issues
