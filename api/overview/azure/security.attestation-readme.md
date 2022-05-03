@@ -24,7 +24,7 @@ Azure Attestation receives evidence from compute entities, turns them into a set
 
 > NOTE: This is a preview SDK for the Microsoft Azure Attestation service. It provides all the essential functionality to access the Azure Attestation service, it should be considered 'as-is" and is subject to changes in the future which may break compatibility with previous versions.
 
-  [Source code](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Security.Attestation_1.0.0/sdk/attestation/Azure.Security.Attestation) | [Package (NuGet)](https://www.nuget.org/packages/Azure.Security.Attestation) | [API reference documentation][API_reference] | [Product documentation](https://docs.microsoft.com/azure/attestation/)
+  [Source code](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Security.Attestation_1.0.0/sdk/attestation/Azure.Security.Attestation) | [Package (NuGet)](https://www.nuget.org/packages/Azure.Security.Attestation) | [API reference documentation][API_reference] | [Product documentation](/azure/attestation/)
 
 ## Getting started
 
@@ -135,7 +135,7 @@ The [`AttestationResponse`][attestation_response] object contains two main prope
 
 Each attestation service instance has a policy applied to it which defines additional criteria which the customer has defined.
 
-For more information on attestation policies, see [Attestation Policy](https://docs.microsoft.com/azure/attestation/author-sign-policy)
+For more information on attestation policies, see [Attestation Policy](/azure/attestation/author-sign-policy)
 
 ### Policy Management certificate management
 
@@ -163,7 +163,7 @@ RuntimeData refers to data which is presented to the Intel SGX Quote generation 
 
 InitTime data refers to data which is used to configure the SGX enclave being attested.
 
-> Note that InitTime data is not supported on Azure [DCsv2-Series](https://docs.microsoft.com/azure/virtual-machines/dcv2-series) virtual machines.
+> Note that InitTime data is not supported on Azure [DCsv2-Series](/azure/virtual-machines/dcv2-series) virtual machines.
 
 ### Thread safety
 
@@ -330,11 +330,11 @@ catch (RequestFailedException ex)
     }
 ```
 
-Additional troubleshooting information for the MAA service can be found [here](https://docs.microsoft.com/azure/attestation/troubleshoot-guide)
+Additional troubleshooting information for the MAA service can be found [here](/azure/attestation/troubleshoot-guide)
 
 ## Next steps
 
-For more information about the Microsoft Azure Attestation service, please see our [documentation page](https://docs.microsoft.com/azure/attestation/).
+For more information about the Microsoft Azure Attestation service, please see our [documentation page](/azure/attestation/).
 
 ## Contributing
 

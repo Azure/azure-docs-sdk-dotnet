@@ -62,5 +62,5 @@ dotnet add package Microsoft.Azure.Management.NotificationHubs
 
 - [Getting Started with Windows Universal](/windows/uwp/get-started/)
 
-[PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
-[DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
+[PackageManager]: /nuget/tools/package-manager-console
+[DotNetCLI]: /dotnet/core/tools/dotnet-add-package
