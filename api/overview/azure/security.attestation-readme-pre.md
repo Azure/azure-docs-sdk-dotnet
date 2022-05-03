@@ -277,9 +277,9 @@ See [CONTRIBUTING.md][contributing] for details on building, testing, and contri
 [attestation_response]: https://docs.microsoft.com/dotnet/api/azure.security.attestation.attestationresponse-1
 [attestation_response_token]: https://docs.microsoft.com/dotnet/api/azure.security.attestation.attestationresponse-1.token
 [attestation_response_value]: https://docs.microsoft.com/dotnet/api/azure.security.attestation.attestationresponse-1.value
-[attestation_policy_result]: https://docs.microsoft.com/dotnet/api/azure.security.attestation.models.policyresult
-[attestation_policy_result_signer]: https://docs.microsoft.com/dotnet/api/azure.security.attestation.models.policyresult.policysigner
-[attestation_policy_result_token_hash]: https://docs.microsoft.com/dotnet/api/azure.security.attestation.models.policyresult.policytokenhash
+[attestation_policy_result]: /dotnet/api/azure.security.attestation
+[attestation_policy_result_signer]: /dotnet/api/azure.security.attestation
+[attestation_policy_result_token_hash]: /dotnet/api/azure.security.attestation
 [azure_cli]: https://docs.microsoft.com/cli/azure
 [azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Security.Attestation_1.0.0-beta.2/sdk/identity/Azure.Identity
 [azure_sub]: https://azure.microsoft.com/free/

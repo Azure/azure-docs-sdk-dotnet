@@ -213,11 +213,11 @@ additional questions or comments.
 
 [package]: TODO://link-to-published-package
 [source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Media.Analytics.Edge_1.0.0-beta.1/sdk/mediaservices
-[samples]: https://github.com/Azure-Samples/live-video-analytics-iot-edge-csharp
+[samples]: https://github.com/Azure-Samples/video-analyzer-iot-edge-csharp
 
 [doc_direct_methods]: https://docs.microsoft.com/azure/media-services/live-video-analytics-edge/direct-methods
 [doc_media_graph]: https://docs.microsoft.com/azure/media-services/live-video-analytics-edge/media-graph-concept#media-graph-topologies-and-instances
-[doc_product]: https://docs.microsoft.com/azure/media-services/live-video-analytics-edge/
+[doc_product]: /azure/azure-video-analyzer/video-analyzer-docs/overview
 
 [iot-device-sdk]: https://www.nuget.org/packages/Microsoft.Azure.Devices.Client/
 [iot-hub-sdk]: https://www.nuget.org/packages/Microsoft.Azure.Devices/

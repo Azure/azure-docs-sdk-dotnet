@@ -59,7 +59,7 @@ using (PowerBIClient client = new PowerBIClient(new Uri(apiUrl), tokenCredential
 ```
 
 > [!div class="nextstepaction"]
-> [Explore the client APIs](https://powerbi.microsoft.com/documentation/powerbi-developer-rest-api-reference/)
+> [Explore the client APIs](/rest/api/power-bi/)
 
 ## Samples
 
