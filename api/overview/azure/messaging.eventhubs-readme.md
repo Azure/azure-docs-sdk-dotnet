@@ -11,7 +11,19 @@ ms.devlang: dotnet
 ms.service: eventhubs
 ---
 
-# Azure Event Hubs client library for .NET - Version 5.6.2 
+#  Azure Event Hubs client library for .NET (H1)
+
+::: moniker range="azure-dotnet-preview"
+ Azure Event Hubs client library for .NET - Preview 
+::: moniker-end
+
+::: moniker range="azure-dotnet"
+ Azure Event Hubs client library for .NET - Version 5.6.2 
+::: moniker-end
+
+::: moniker range="azure-dotnet-legacy"
+Azure Event Hubs client library for .NET - Legacy
+::: moniker-end
 
 
 Azure Event Hubs is a highly scalable publish-subscribe service that can ingest millions of events per second and stream them to multiple consumers. This lets you process and analyze the massive amounts of data produced by your connected devices and applications. Once Event Hubs has collected the data, you can retrieve, transform, and store it by using any real-time analytics provider or with batching/storage adapters.  If you would like to know more about Azure Event Hubs, you may wish to review: [What is Event Hubs](https://docs.microsoft.com/azure/event-hubs/event-hubs-about).
