@@ -1,23 +1,18 @@
 ---
 title: Azure Tables client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Data.Tables, tables
-author: ramya-rao-a
-ms.author: ramyar
-ms.date: 08/10/2021
+author: christothes
+ms.author: chriss
+ms.date: 05/10/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: tables
 ---
+# Azure Tables client library for .NET - Version 12.6.0-beta.1 
 
-# Azure Tables client library for .NET - Version 12.2.0-beta.1 
-
-> [!IMPORTANT]
-> The Azure Tables client library for .NET is now generally available (GA) and fully supported for production use. **The GA library should be used instead of this preview version to ensure you are using the most secure and performant version of the library.** More details on the GA release can be found in the [GA documentation](data.tables-readme.md)
 
 Azure Table storage is a service that stores large amounts of structured NoSQL data in the cloud, providing 
-a key/attribute store with a schema-less design.
+a key/attribute store with a schema-less design. 
 
 Azure Cosmos DB provides a Table API for applications that are written for Azure Table storage that need premium capabilities like:
 
@@ -29,15 +24,15 @@ Azure Cosmos DB provides a Table API for applications that are written for Azure
 
 The Azure Tables client library can seamlessly target either Azure Table storage or Azure Cosmos DB table service endpoints with no code changes.
 
-[Source code][table_client_src] | [Package (NuGet)][table_client_nuget_package] | [API reference documentation][api_reference] | [Samples][table_client_samples]
+[Source code][table_client_src] | [Package (NuGet)][table_client_nuget_package] | [API reference documentation][api_reference] | [Samples][table_client_samples] | [Change Log][table_change_log]
 
 ## Getting started
 
 ### Install the package
 Install the Azure Tables client library for .NET with [NuGet][table_client_nuget_package]:
 
-```
-dotnet add package Azure.Data.Tables --prerelease
+```dotnetcli
+dotnet add package Azure.Data.Tables
 ```
 
 ### Prerequisites
@@ -67,7 +62,7 @@ az cosmosdb table create --name MyTableName --resource-group MyResourceGroup --a
 
 ### Authenticate the Client
 
-Learn more about options for authentication _(including Connection Strings, Shared Key, Shared Key Signatures, and TokenCredentials)_ [in our samples.](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.2.0-beta.1/sdk/tables/Azure.Data.Tables/samples/Sample0Auth.md)
+Learn more about options for authentication _(including Connection Strings, Shared Key, Shared Key Signatures, and TokenCredentials)_ [in our samples.](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.6.0-beta.1/sdk/tables/Azure.Data.Tables/samples/Sample0Auth.md)
 
 ## Key concepts
 
@@ -87,15 +82,15 @@ Common uses of the Table service include:
 We guarantee that all client instance methods are thread-safe and independent of each other ([guideline](https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-service-methods-thread-safety)). This ensures that the recommendation of reusing client instances is always safe, even across threads.
 
 ### Additional concepts
-
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.2.0-beta.1/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.2.0-beta.1/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.2.0-beta.1/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.2.0-beta.1/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.2.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.2.0-beta.1/sdk/core/Azure.Core/README.md#mocking) |
+<!-- CLIENT COMMON BAR -->
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.6.0-beta.1/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.6.0-beta.1/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.6.0-beta.1/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.6.0-beta.1/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.6.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.6.0-beta.1/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
-
+<!-- CLIENT COMMON BAR -->
 
 ## Examples
 - [Create the Table service client](#create-the-table-service-client)
@@ -288,17 +283,20 @@ This project has adopted the [Microsoft Open Source Code of Conduct][coc].
 For more information see the [Code of Conduct FAQ][coc_faq] or contact 
 [opencode@microsoft.com][coc_contact] with any additional questions or comments.
 
-
-[tables_rest]: https://docs.microsoft.com/rest/api/storageservices/table-service-rest-api
-[azure_cli]: https://docs.microsoft.com/cli/azure
+<!-- LINKS -->
+[tables_rest]: /rest/api/storageservices/table-service-rest-api
+[azure_cli]: /cli/azure
 [azure_sub]: https://azure.microsoft.com/free/dotnet/
 [table_client_nuget_package]: https://www.nuget.org/packages?q=Azure.Data.Tables
-[table_client_samples]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.2.0-beta.1/sdk/tables/Azure.Data.Tables/samples
-[table_client_src]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.2.0-beta.1/sdk/tables/Azure.Data.Tables/src
-[api_reference]: https://docs.microsoft.com/dotnet/api/overview/azure/data.tables-readme-pre?view=azure-dotnet-preview
-[logging]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.2.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md
+[table_client_samples]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.6.0-beta.1/sdk/tables/Azure.Data.Tables/samples
+[table_client_src]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.6.0-beta.1/sdk/tables/Azure.Data.Tables/src
+[table_change_log]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.6.0-beta.1/sdk/tables/Azure.Data.Tables/CHANGELOG.md
+[api_reference]: /dotnet/api/overview/azure/data.tables-readme-pre?view=azure-dotnet-preview
+[logging]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.6.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [coc_contact]: mailto:opencode@microsoft.com
+
+![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Ftables%2FAzure.Data.Tables%2FREADME.png)
 
