@@ -19,6 +19,8 @@
     <AssemblyVersion>3.25.0.0</AssemblyVersion>
     <AssemblyVersion>3.26.0.0</AssemblyVersion>
     <AssemblyVersion>3.26.1.0</AssemblyVersion>
+    <AssemblyVersion>3.26.2.0</AssemblyVersion>
+    <AssemblyVersion>3.27.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -52,6 +54,8 @@
         <AssemblyVersion>3.25.0.0</AssemblyVersion>
         <AssemblyVersion>3.26.0.0</AssemblyVersion>
         <AssemblyVersion>3.26.1.0</AssemblyVersion>
+        <AssemblyVersion>3.26.2.0</AssemblyVersion>
+        <AssemblyVersion>3.27.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -81,6 +85,8 @@
         <AssemblyVersion>3.25.0.0</AssemblyVersion>
         <AssemblyVersion>3.26.0.0</AssemblyVersion>
         <AssemblyVersion>3.26.1.0</AssemblyVersion>
+        <AssemblyVersion>3.26.2.0</AssemblyVersion>
+        <AssemblyVersion>3.27.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.TimeSpan</ReturnType>
@@ -117,6 +123,8 @@
         <AssemblyVersion>3.25.0.0</AssemblyVersion>
         <AssemblyVersion>3.26.0.0</AssemblyVersion>
         <AssemblyVersion>3.26.1.0</AssemblyVersion>
+        <AssemblyVersion>3.26.2.0</AssemblyVersion>
+        <AssemblyVersion>3.27.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Collections.Generic.IReadOnlyList&lt;System.ValueTuple&lt;System.String,System.Uri&gt;&gt;</ReturnType>
@@ -158,6 +166,8 @@
         <AssemblyVersion>3.25.0.0</AssemblyVersion>
         <AssemblyVersion>3.26.0.0</AssemblyVersion>
         <AssemblyVersion>3.26.1.0</AssemblyVersion>
+        <AssemblyVersion>3.26.2.0</AssemblyVersion>
+        <AssemblyVersion>3.27.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -168,7 +178,30 @@
             Gets the string field <see cref="T:Microsoft.Azure.Cosmos.CosmosDiagnostics" /> instance in the Azure CosmosDB database service.
             </summary>
         <returns>The string field <see cref="T:Microsoft.Azure.Cosmos.CosmosDiagnostics" /> instance in the Azure CosmosDB database service.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+          <see cref="T:Microsoft.Azure.Cosmos.CosmosDiagnostics" /> implements lazy materialization and is only materialized when <see cref="M:Microsoft.Azure.Cosmos.CosmosDiagnostics.ToString" /> is called.
+            </remarks>
+        <example>
+            Do not eagerly materialize the diagnostics until the moment of consumption to avoid unnecessary allocations, let the ToString be called only when needed.
+            You can capture diagnostics conditionally, based on latency or errors:
+            <code language="c#"><![CDATA[
+            try
+            {
+                ItemResponse<Book> response = await container.CreateItemAsync<Book>(item: testItem);
+                if (response.Diagnostics.GetClientElapsedTime() > ConfigurableSlowRequestTimeSpan)
+                {
+                    // Log the diagnostics and add any additional info necessary to correlate to other logs 
+                    logger.LogInformation("Operation took longer than expected, Diagnostics: {Diagnostics}");
+                }
+            }
+            catch (CosmosException cosmosException)
+            {
+                // Log the full exception including the stack trace 
+                logger.LogError(cosmosException);
+                // The Diagnostics can be logged separately if required.
+                logger.LogError("Cosmos DB call failed with {StatusCode}, {SubStatusCode}, Diagnostics: {Diagnostics}", cosmosException.StatusCode, cosmosException.SubStatusCode, cosmosException.Diagnostics);
+            }
+            ]]></code></example>
       </Docs>
     </Member>
   </Members>
