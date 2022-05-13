@@ -50,9 +50,17 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>
+            Gets or sets the name of the Azure Storage connection information used to manage the underlying Azure Storage resources.
+            </summary>
+        <value>
+            The name of a connection-related key that exists in the app's application settings. The value may refer to
+            a connection string or the section detailing additional connection metadata.
+            </value>
+        <remarks>
+            The value may refer to either a connection string or the configuration section containing connection metadata.
+            The default behavior is to use the standard <c>AzureWebJobsStorage</c> connection for all storage usage.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="ConnectionStringName">
@@ -251,9 +259,25 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>
+            Gets or sets the name of the Azure Storage connection information to use for the
+            durable tracking store (History and Instances tables).
+            </summary>
+        <value>
+            The name of a connection-related key that exists in the app's application settings. The value may refer to
+            a connection string or the section detailing additional connection metadata.
+            </value>
+        <remarks>
+          <para>
+            If not specified, the <see cref="P:Microsoft.Azure.WebJobs.Extensions.DurableTask.AzureStorageOptions.ConnectionName" /> connection string is used for the durable tracking store.
+            </para>
+          <para>
+            This property is primarily useful when deploying multiple apps that need to share the same
+            tracking infrastructure. For example, when deploying two versions of an app side by side, using
+            the same tracking store allows both versions to save history into the same table, which allows
+            clients to query for instance status across all versions.
+            </para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="TrackingStoreConnectionStringName">
@@ -316,7 +340,7 @@
             </summary>
         <value>The prefix to use when naming the generated Azure tables.</value>
         <remarks>
-            This property is only used when <see cref="P:Microsoft.Azure.WebJobs.Extensions.DurableTask.AzureStorageOptions.TrackingStoreConnectionStringName" /> is specified.
+            This property is only used when <see cref="P:Microsoft.Azure.WebJobs.Extensions.DurableTask.AzureStorageOptions.TrackingStoreConnectionName" /> is specified.
             If no prefix is specified, the default prefix value is "DurableTask".
             </remarks>
       </Docs>
