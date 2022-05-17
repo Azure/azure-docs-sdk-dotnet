@@ -1,16 +1,14 @@
 ---
 title: Azure WebJobs Service Bus client library for .NET
-keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebJobs.Extensions.ServiceBus, webjobs
+keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebJobs.Extensions.ServiceBus, servicebus
 author: JoshLove-msft
 ms.author: jolov
-ms.date: 03/09/2022
+ms.date: 05/17/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
-ms.service: webjobs
+ms.service: servicebus
 ---
-# Azure WebJobs Service Bus client library for .NET - Version 5.3.0 
+# Azure WebJobs Service Bus client library for .NET - Version 5.5.0 
 
 
 This extension provides functionality for accessing Azure Service Bus from an Azure Function.
@@ -33,12 +31,12 @@ dotnet add package Microsoft.Azure.WebJobs.Extensions.ServiceBus
 
 To quickly create the needed Service Bus resources in Azure and to receive a connection string for them, you can deploy our sample template by clicking:
 
-[![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-sdk-for-net%2Fmaster%2Fsdk%2Fservicebus%2FAzure.Messaging.ServiceBus%2Fassets%2Fsamples-azure-deploy.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-sdk-for-net%2Fmaster%2Fsdk%2Fservicebus%2FAzure.Messaging.ServiceBus%2Fassets%2Fsamples-azure-deploy.json)
 
 
 ### Authenticate the Client
 
-For the Service Bus client library to interact with a queue or topic, it will need to understand how to connect and authorize with it.  The easiest means for doing so is to use a connection string, which is created automatically when creating a Service Bus namespace.  If you aren't familiar with shared access policies in Azure, you may wish to follow the step-by-step guide to [get a Service Bus connection string](https://docs.microsoft.com/azure/service-bus-messaging/service-bus-quickstart-topics-subscriptions-portal#get-the-connection-string).
+For the Service Bus client library to interact with a queue or topic, it will need to understand how to connect and authorize with it.  The easiest means for doing so is to use a connection string, which is created automatically when creating a Service Bus namespace.  If you aren't familiar with shared access policies in Azure, you may wish to follow the step-by-step guide to [get a Service Bus connection string](/azure/service-bus-messaging/service-bus-quickstart-topics-subscriptions-portal#get-the-connection-string).
 
 The `Connection` property of `ServiceBusAttribute` and `ServiceBusTriggerAttribute` is used to specify the configuration property that stores the connection string. If not specified, the property `AzureWebJobsServiceBus` is expected to contain the connection string.
 
@@ -52,11 +50,11 @@ For local development, use the `local.settings.json` file to store the connectio
 }
 ```
 
-When deployed, use the [application settings](https://docs.microsoft.com/azure/azure-functions/functions-how-to-use-azure-function-app-settings) to set the connection string.
+When deployed, use the [application settings](/azure/azure-functions/functions-how-to-use-azure-function-app-settings) to set the connection string.
 
 #### Managed identity authentication
 
-If your environment has [managed identity](https://docs.microsoft.com/azure/app-service/overview-managed-identity?tabs=dotnet) enabled you can use it to authenticate the Service Bus extension.
+If your environment has [managed identity](/azure/app-service/overview-managed-identity?tabs=dotnet) enabled you can use it to authenticate the Service Bus extension.
 To use managed identity provide the `<connection_name>__fullyQualifiedNamespace` configuration setting.
 
 ```json
@@ -67,7 +65,7 @@ To use managed identity provide the `<connection_name>__fullyQualifiedNamespace`
 }
 ```
 
-Or in the case of deployed app set the same setting in [application settings](https://docs.microsoft.com/azure/azure-functions/functions-how-to-use-azure-function-app-settings):
+Or in the case of deployed app set the same setting in [application settings](/azure/azure-functions/functions-how-to-use-azure-function-app-settings):
 
 ```
 <connection_name>__fullyQualifiedNamespace=<service_bus_namespace>.servicebus.windows.net
@@ -80,13 +78,13 @@ Or in the case of deployed app set the same setting in [application settings](ht
 
 The Service Bus Trigger allows a function to be executed when a message is sent to a Service Bus queue or topic.
 
-Please follow the [Azure Service Bus trigger tutorial](https://docs.microsoft.com/azure/azure-functions/functions-bindings-service-bus-trigger?tabs=csharp) to learn more about Service Bus triggers.
+Please follow the [Azure Service Bus trigger tutorial](/azure/azure-functions/functions-bindings-service-bus-trigger?tabs=csharp) to learn more about Service Bus triggers.
 
 ### Service Bus Output Binding
 
 The Service Bus Output Binding allows a function to send Service Bus messages.
 
-Please follow the [Azure Service Bus output binding](https://docs.microsoft.com/azure/azure-functions/functions-bindings-service-bus-output?tabs=csharp) to learn more about Service Bus bindings.
+Please follow the [Azure Service Bus output binding](/azure/azure-functions/functions-bindings-service-bus-output?tabs=csharp) to learn more about Service Bus bindings.
 
 ## Examples
 
@@ -214,6 +212,61 @@ public static async Task Run(
 }
 ```
 
+### Session triggers
+
+To receive messages from a session enabled queue or topic, you can set the `IsSessionsEnabled`
+property on the `ServiceBusTrigger` attribute. When working with sessions, you can bind to the `SessionMessageActions` to get access to the message settlement methods in addition to session-specific functionality.
+
+```C# Snippet:ServiceBusBindingToSessionMessageActions
+[FunctionName("BindingToSessionMessageActions")]
+public static async Task Run(
+    [ServiceBusTrigger("<queue_name>", Connection = "<connection_name>", IsSessionsEnabled = true)]
+    ServiceBusReceivedMessage[] messages,
+    ServiceBusSessionMessageActions sessionActions)
+{
+    foreach (ServiceBusReceivedMessage message in messages)
+    {
+        if (message.MessageId == "1")
+        {
+            await sessionActions.DeadLetterMessageAsync(message);
+        }
+        else
+        {
+            await sessionActions.CompleteMessageAsync(message);
+        }
+    }
+
+    // We can also perform session-specific operations using the actions, such as setting state that is specific to this session.
+    await sessionActions.SetSessionStateAsync(new BinaryData("<session state>"));
+}
+```
+
+### Binding to ReceiveActions
+
+It's possible to receive additional messages from within your function invocation. This may be useful if you need more control over how many messages to process within a function invocation based on some characteristics of the initial message delivered to your function via the binding parameter. Any additional messages that you receive will be subject to the same `AutoCompleteMessages` configuration as the initial message delivered to your function.
+
+```C# Snippet:ServiceBusBindingToReceiveActions
+[FunctionName("BindingToReceiveActions")]
+public static async Task Run(
+    [ServiceBusTrigger("<queue_name>", Connection = "<connection_name>", IsSessionsEnabled = true)]
+    ServiceBusReceivedMessage message,
+    ServiceBusMessageActions messageActions,
+    ServiceBusReceiveActions receiveActions)
+{
+    if (message.MessageId == "1")
+    {
+        await messageActions.DeadLetterMessageAsync(message);
+    }
+    else
+    {
+        await messageActions.CompleteMessageAsync(message);
+
+        // attempt to receive additional messages in this session
+        await receiveActions.ReceiveMessagesAsync(maxMessages: 10);
+    }
+}
+```
+
 ### Binding to ServiceBusClient
 
 There may be times when you want to bind to the same `ServiceBusClient` that the trigger is using. This can be useful if you need to dynamically create a sender based on the message that is received.
@@ -232,11 +285,13 @@ public static async Task Run(
 
 ## Troubleshooting
 
-Please refer to [Monitor Azure Functions](https://docs.microsoft.com/azure/azure-functions/functions-monitoring) for troubleshooting guidance.
+If your function triggers an unhandled exception and you haven't already settled the message, the extension will attempt to abandon the message so that it becomes available for receiving again immediately.
+
+Please refer to [Monitor Azure Functions](/azure/azure-functions/functions-monitoring) for more troubleshooting guidance.
 
 ## Next steps
 
-Read the [introduction to Azure Functions](https://docs.microsoft.com/azure/azure-functions/functions-overview) or [creating an Azure Function guide](https://docs.microsoft.com/azure/azure-functions/functions-create-first-azure-function).
+Read the [introduction to Azure Functions](/azure/azure-functions/functions-overview) or [creating an Azure Function guide](/azure/azure-functions/functions-create-first-azure-function).
 
 ## Contributing
 
@@ -256,12 +311,12 @@ additional questions or comments.
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fservicebus%2FMicrosoft.Azure.WebJobs.Extensions.ServiceBus%2FREADME.png)
 
 <!-- LINKS -->
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.ServiceBus_5.3.0/sdk/servicebus/Microsoft.Azure.WebJobs.Extensions.ServiceBus/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.ServiceBus_5.5.0/sdk/servicebus/Microsoft.Azure.WebJobs.Extensions.ServiceBus/src
 [package]: https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.ServiceBus/
-[docs]: https://docs.microsoft.com/dotnet/api/Microsoft.Azure.WebJobs.Extensions.ServiceBus
+[docs]: /dotnet/api/Microsoft.Azure.WebJobs.Extensions.ServiceBus
 [nuget]: https://www.nuget.org/
 
-[contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.ServiceBus_5.3.0/CONTRIBUTING.md
+[contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.ServiceBus_5.5.0/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
