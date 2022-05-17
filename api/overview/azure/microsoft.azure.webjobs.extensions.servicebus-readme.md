@@ -3,12 +3,12 @@ title: Azure WebJobs Service Bus client library for .NET
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebJobs.Extensions.ServiceBus, servicebus
 author: JoshLove-msft
 ms.author: jolov
-ms.date: 05/11/2022
+ms.date: 05/17/2022
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: servicebus
 ---
-# Azure WebJobs Service Bus client library for .NET - Version 5.4.0 
+# Azure WebJobs Service Bus client library for .NET - Version 5.5.0 
 
 
 This extension provides functionality for accessing Azure Service Bus from an Azure Function.
@@ -285,7 +285,9 @@ public static async Task Run(
 
 ## Troubleshooting
 
-Please refer to [Monitor Azure Functions](/azure/azure-functions/functions-monitoring) for troubleshooting guidance.
+If your function triggers an unhandled exception and you haven't already settled the message, the extension will attempt to abandon the message so that it becomes available for receiving again immediately.
+
+Please refer to [Monitor Azure Functions](/azure/azure-functions/functions-monitoring) for more troubleshooting guidance.
 
 ## Next steps
 
@@ -309,12 +311,12 @@ additional questions or comments.
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fservicebus%2FMicrosoft.Azure.WebJobs.Extensions.ServiceBus%2FREADME.png)
 
 <!-- LINKS -->
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.ServiceBus_5.4.0/sdk/servicebus/Microsoft.Azure.WebJobs.Extensions.ServiceBus/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.ServiceBus_5.5.0/sdk/servicebus/Microsoft.Azure.WebJobs.Extensions.ServiceBus/src
 [package]: https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.ServiceBus/
 [docs]: /dotnet/api/Microsoft.Azure.WebJobs.Extensions.ServiceBus
 [nuget]: https://www.nuget.org/
 
-[contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.ServiceBus_5.4.0/CONTRIBUTING.md
+[contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.ServiceBus_5.5.0/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
