@@ -3,7 +3,7 @@ title:
 keywords: Azure, dotnet, SDK, API, Azure.Media.VideoAnalyzer.Edge, videoanalyzer
 author: giakas
 ms.author: giakas
-ms.date: 04/30/2022
+ms.date: 05/24/2022
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: videoanalyzer
@@ -87,12 +87,12 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 <!-- CLIENT COMMON BAR -->
 
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Media.VideoAnalyzer.Edge_1.0.0-beta.6/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Media.VideoAnalyzer.Edge_1.0.0-beta.6/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Media.VideoAnalyzer.Edge_1.0.0-beta.6/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Media.VideoAnalyzer.Edge_1.0.0-beta.6/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Media.VideoAnalyzer.Edge_1.0.0-beta.6/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Media.VideoAnalyzer.Edge_1.0.0-beta.6/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 
 <!-- CLIENT COMMON BAR -->
@@ -230,7 +230,7 @@ additional questions or comments.
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [coc_contact]: mailto:opencode@microsoft.com
 [package]: https://aka.ms/ava/sdk/client/net
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Media.VideoAnalyzer.Edge_1.0.0-beta.6/sdk/videoanalyzer/Azure.Media.VideoAnalyzer.Edge/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/videoanalyzer/Azure.Media.VideoAnalyzer.Edge/src
 [samples]: https://go.microsoft.com/fwlink/?linkid=2162276
 [doc_direct_methods]: /azure/azure-video-analyzer/video-analyzer-docs/direct-methods
 [doc_pipelines]: /azure/azure-video-analyzer/video-analyzer-docs/pipeline
