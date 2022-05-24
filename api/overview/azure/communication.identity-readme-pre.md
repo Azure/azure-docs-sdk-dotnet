@@ -1,17 +1,14 @@
 ---
 title: Azure Communication Identity client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Communication.Identity, communication
-author: ramya-rao-a
-ms.author: ramyar
-ms.date: 10/29/2021
+author: acsdevx-msft
+ms.author: acsdevx-msft
+ms.date: 05/24/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: communication
 ---
-
-# Azure Communication Identity client library for .NET - Version 1.1.0-beta.1 
+# Azure Communication Identity client library for .NET - Version 1.1.0-alpha.20220524.3 
 
 
 Azure Communication Identity is managing tokens for Azure Communication Services.
@@ -25,7 +22,7 @@ Azure Communication Identity is managing tokens for Azure Communication Services
 Install the Azure Communication Identity client library for .NET with [NuGet][nuget]:
 
 ```dotnetcli
-dotnet add package Azure.Communication.Identity --version 1.0.0
+dotnet add package Azure.Communication.Identity
 ```
 
 ### Prerequisites
@@ -77,12 +74,12 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Identity_1.1.0-beta.1/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Identity_1.1.0-beta.1/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Identity_1.1.0-beta.1/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Identity_1.1.0-beta.1/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Identity_1.1.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Identity_1.1.0-beta.1/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
@@ -170,18 +167,18 @@ This project has adopted the [Microsoft Open Source Code of Conduct][coc]. For m
 
 [azure_sub]: https://azure.microsoft.com/free/dotnet/
 [azure_portal]: https://portal.azure.com
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Communication.Identity_1.1.0-beta.1/sdk/communication/Azure.Communication.Identity/src
-[source_samples]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Identity_1.1.0-beta.1/sdk/communication/Azure.Communication.Identity/samples
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/communication/Azure.Communication.Identity/src
+[source_samples]: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/communication/Azure.Communication.Identity/samples
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [coc_contact]: mailto:opencode@microsoft.com
 <!--[package]: https://www.nuget.org/packages/Azure.Communication.Identity-->
-[product_docs]: https://docs.microsoft.com/azure/communication-services/overview
+[product_docs]: /azure/communication-services/overview
 [nuget]: https://www.nuget.org/
-[user_access_token]: https://docs.microsoft.com/azure/communication-services/quickstarts/access-tokens?pivots=programming-language-csharp
-[communication_resource_docs]: https://docs.microsoft.com/azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp
-[communication_resource_create_portal]: https://docs.microsoft.com/azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp
-[communication_resource_create_power_shell]: https://docs.microsoft.com/powershell/module/az.communication/new-azcommunicationservice
-[communication_resource_create_net]: https://docs.microsoft.com/azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-net
+[user_access_token]: /azure/communication-services/quickstarts/access-tokens?pivots=programming-language-csharp
+[communication_resource_docs]: /azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp
+[communication_resource_create_portal]: /azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp
+[communication_resource_create_power_shell]: /powershell/module/az.communication/new-azcommunicationservice
+[communication_resource_create_net]: /azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-net
 

@@ -1,17 +1,14 @@
 ---
 title: Azure Communication CallingServer client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Communication.CallingServer, communication
-author: ramya-rao-a
-ms.author: ramyar
-ms.date: 10/05/2021
+author: acsdevx-msft
+ms.author: acsdevx-msft
+ms.date: 05/24/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: communication
 ---
-
-# Azure Communication CallingServer client library for .NET - Version 1.0.0-beta.3 
+# Azure Communication CallingServer client library for .NET - Version 1.0.0-alpha.20220524.3 
 
 
 This package contains a C# SDK for Azure Communication Services for Calling.
@@ -23,7 +20,7 @@ This package contains a C# SDK for Azure Communication Services for Calling.
 Install the Azure Communication CallingServer client library for .NET with [NuGet][nuget]:
 
 ```dotnetcli
-dotnet add package Azure.Communication.CallingServer --version 1.0.0-beta.3
+dotnet add package Azure.Communication.CallingServer --prerelease
 ``` 
 
 ### Prerequisites
@@ -95,11 +92,11 @@ This project has adopted the [Microsoft Open Source Code of Conduct][coc]. For m
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [coc_contact]: mailto:opencode@microsoft.com
-[communication_resource_docs]: https://docs.microsoft.com/azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp
-[communication_resource_create_portal]:  https://docs.microsoft.com/azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp
-[communication_resource_create_power_shell]: https://docs.microsoft.com/powershell/module/az.communication/new-azcommunicationservice
-[communication_resource_create_net]: https://docs.microsoft.com/azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-net
-[product_docs]: https://docs.microsoft.com/azure/communication-services/overview
+[communication_resource_docs]: /azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp
+[communication_resource_create_portal]:  /azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp
+[communication_resource_create_power_shell]: /powershell/module/az.communication/new-azcommunicationservice
+[communication_resource_create_net]: /azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-net
+[product_docs]: /azure/communication-services/overview
 [nuget]: https://www.nuget.org/
 [source]: https://github.com/Azure/azure-sdk-for-net/tree/a20e269162fa88a43e5ba0e5bb28f2e76c74a484/sdk/communication/Azure.Communication.CallingServer/src
 

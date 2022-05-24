@@ -1,17 +1,14 @@
 ---
 title: Azure Communication Chat client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Communication.Chat, communication
-author: ramya-rao-a
-ms.author: ramyar
-ms.date: 07/26/2021
+author: acsdevx-msft
+ms.author: acsdevx-msft
+ms.date: 05/24/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: communication
 ---
-
-# Azure Communication Chat client library for .NET - Version 1.1.0-beta.1 
+# Azure Communication Chat client library for .NET - Version 1.2.0-alpha.20220524.3 
 
 
 This package contains a C# SDK for Azure Communication Services for chat.
@@ -24,8 +21,8 @@ This package contains a C# SDK for Azure Communication Services for chat.
 ### Install the package
 Install the Azure Communication Chat client library for .NET with [NuGet][nuget]:
 
-```PowerShell
-dotnet add package Azure.Communication.Chat --version 1.0.1
+```dotnetcli
+dotnet add package Azure.Communication.Chat 
 ``` 
 
 ### Prerequisites
@@ -152,12 +149,12 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Chat_1.1.0-beta.1/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Chat_1.1.0-beta.1/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Chat_1.1.0-beta.1/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Chat_1.1.0-beta.1/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Chat_1.1.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Chat_1.1.0-beta.1/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
@@ -390,13 +387,13 @@ This project has adopted the [Microsoft Open Source Code of Conduct][coc]. For m
 [coc_contact]: mailto:opencode@microsoft.com
 [nuget]: https://www.nuget.org/
 [netstandars2mappings]:https://github.com/dotnet/standard/blob/master/docs/versions.md
-[useraccesstokens]:https://docs.microsoft.com/azure/communication-services/quickstarts/access-tokens?pivots=programming-language-csharp
-[communication_resource_docs]: https://docs.microsoft.com/azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp
-[communication_resource_create_portal]:  https://docs.microsoft.com/azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp
-[communication_resource_create_power_shell]: https://docs.microsoft.com/powershell/module/az.communication/new-azcommunicationservice
-[communication_resource_create_net]: https://docs.microsoft.com/azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-net
-[nextsteps]:https://docs.microsoft.com/azure/communication-services/quickstarts/chat/get-started?pivots=programming-language-csharp
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Communication.Chat_1.1.0-beta.1/sdk/communication/Azure.Communication.Chat/src
-[product_docs]: https://docs.microsoft.com/azure/communication-services/overview
+[useraccesstokens]:/azure/communication-services/quickstarts/access-tokens?pivots=programming-language-csharp
+[communication_resource_docs]: /azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp
+[communication_resource_create_portal]:  /azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp
+[communication_resource_create_power_shell]: /powershell/module/az.communication/new-azcommunicationservice
+[communication_resource_create_net]: /azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-net
+[nextsteps]:/azure/communication-services/quickstarts/chat/get-started?pivots=programming-language-csharp
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/communication/Azure.Communication.Chat/src
+[product_docs]: /azure/communication-services/overview
 [package]: https://www.nuget.org/packages/Azure.Communication.Chat
 
