@@ -3,14 +3,12 @@ title: Azure Cognitive Services Form Recognizer client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.FormRecognizer, formrecognizer
 author: kinelski
 ms.author: camaiaor
-ms.date: 02/11/2022
+ms.date: 05/24/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: formrecognizer
 ---
-# Azure Cognitive Services Form Recognizer client library for .NET - Version 4.0.0-beta.3 
+# Azure Cognitive Services Form Recognizer client library for .NET - Version 4.0.0-alpha.20220523.2 
 
 
 Azure Cognitive Services Form Recognizer is a cloud service that uses machine learning to analyze text and structured data from your documents. It includes the following main features:
@@ -132,8 +130,8 @@ var client = new DocumentAnalysisClient(new Uri(endpoint), credential);
 
 To use the [DefaultAzureCredential][DefaultAzureCredential] provider shown below, or other credential providers provided with the Azure SDK, please install the `Azure.Identity` package:
 
-```PowerShell
-Install-Package Azure.Identity
+```dotnetcli
+dotnet add package Azure.Identity
 ```
 
 You will also need to [register a new AAD application][register_aad_app] and [grant access][aad_grant_access] to Form Recognizer by assigning the `"Cognitive Services User"` role to your service principal.
@@ -192,11 +190,11 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_4.0.0-beta.3/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_4.0.0-beta.3/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_4.0.0-beta.3/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_4.0.0-beta.3/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_4.0.0-beta.3/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
@@ -221,7 +219,7 @@ The following section provides several code snippets illustrating common pattern
 Extract text, selection marks, text styles, and table structures, along with their bounding region coordinates from documents.
 
 ```C# Snippet:FormRecognizerExtractLayoutFromUriAsync
-string fileUri = "<fileUri>";
+Uri fileUri = new Uri("<fileUri>");
 
 AnalyzeDocumentOperation operation = await client.StartAnalyzeDocumentFromUriAsync("prebuilt-layout", fileUri);
 
@@ -297,7 +295,7 @@ For more information and samples see [here][extract_layout].
 Analyze key-value pairs, entities, tables, and selection marks from documents using the general prebuilt document model.
 
 ```C# Snippet:FormRecognizerAnalyzePrebuiltDocumentFromUriAsync
-string fileUri = "<fileUri>";
+Uri fileUri = new Uri("<fileUri>");
 
 AnalyzeDocumentOperation operation = await client.StartAnalyzeDocumentFromUriAsync("prebuilt-document", fileUri);
 
@@ -401,7 +399,7 @@ For more information and samples see [here][analyze_prebuilt_document].
 Analyze textual elements, such as page words and lines, styles, and text language information from documents using the prebuilt read model.
 
 ```C# Snippet:FormRecognizerAnalyzePrebuiltReadFromUriAsync
-string fileUri = "<fileUri>";
+Uri fileUri = new Uri("<fileUri>");
 
 AnalyzeDocumentOperation operation = await client.StartAnalyzeDocumentFromUriAsync("prebuilt-read", fileUri);
 
@@ -578,11 +576,14 @@ Build a custom model on your own document type. The resulting model can be used 
 
 ```C# Snippet:FormRecognizerSampleBuildModel
 // For this sample, you can use the training documents found in the `trainingFiles` folder.
-// Upload the forms to your storage container and then generate a container SAS URL.
-// For instructions to set up forms for training in an Azure Storage Blob Container, please see:
-// https://aka.ms/azsdk/formrecognizer/buildtrainingset
+// Upload the documents to your storage container and then generate a container SAS URL. Note
+// that a container URI without SAS is accepted only when the container is public or has a
+// managed identity configured.
+//
+// For instructions to set up documents for training in an Azure Blob Storage Container, please see:
+// https://aka.ms/azsdk/formrecognizer/buildcustommodel
 
-Uri trainingFileUri = <trainingFileUri>;
+Uri trainingFileUri = new Uri("<trainingFileUri>");
 var client = new DocumentModelAdministrationClient(new Uri(endpoint), new AzureKeyCredential(apiKey));
 
 // We are selecting the Template build mode in this sample. For more information about the available
@@ -615,7 +616,7 @@ Analyze text, field values, selection marks, and table data from custom document
 
 ```C# Snippet:FormRecognizerAnalyzeWithCustomModelFromUriAsync
 string modelId = "<modelId>";
-string fileUri = "<fileUri>";
+Uri fileUri = new Uri("<fileUri>");
 
 AnalyzeDocumentOperation operation = await client.StartAnalyzeDocumentFromUriAsync(modelId, fileUri);
 
@@ -652,8 +653,8 @@ var client = new DocumentModelAdministrationClient(new Uri(endpoint), new AzureK
 
 // Check number of custom models in the FormRecognizer account, and the maximum number of models that can be stored.
 AccountProperties accountProperties = await client.GetAccountPropertiesAsync();
-Console.WriteLine($"Account has {accountProperties.Count} models.");
-Console.WriteLine($"It can have at most {accountProperties.Limit} models.");
+Console.WriteLine($"Account has {accountProperties.DocumentModelCount} models.");
+Console.WriteLine($"It can have at most {accountProperties.DocumentModelLimit} models.");
 
 // List the first ten or fewer models currently stored in the account.
 AsyncPageable<DocumentModelInfo> models = client.GetModelsAsync();
@@ -671,7 +672,7 @@ await foreach (DocumentModelInfo modelInfo in models)
 }
 
 // Create a new model to store in the account
-Uri trainingFileUri = <trainingFileUri>;
+Uri trainingFileUri = new Uri("<trainingFileUri>");
 BuildModelOperation operation = await client.StartBuildModelAsync(trainingFileUri, DocumentBuildMode.Template);
 Response<DocumentModel> operationResponse = await operation.WaitForCompletionAsync();
 DocumentModel model = operationResponse.Value;
@@ -700,8 +701,8 @@ var client = new DocumentModelAdministrationClient(new Uri(endpoint), new AzureK
 
 // Check number of custom models in the FormRecognizer account, and the maximum number of models that can be stored.
 AccountProperties accountProperties = client.GetAccountProperties();
-Console.WriteLine($"Account has {accountProperties.Count} models.");
-Console.WriteLine($"It can have at most {accountProperties.Limit} models.");
+Console.WriteLine($"Account has {accountProperties.DocumentModelCount} models.");
+Console.WriteLine($"It can have at most {accountProperties.DocumentModelLimit} models.");
 
 // List the first ten or fewer models currently stored in the account.
 Pageable<DocumentModelInfo> models = client.GetModels();
@@ -717,7 +718,7 @@ foreach (DocumentModelInfo modelInfo in models.Take(10))
 
 // Create a new model to store in the account
 
-Uri trainingFileUri = <trainingFileUri>;
+Uri trainingFileUri = new Uri("<trainingFileUri>");
 BuildModelOperation operation = client.StartBuildModel(trainingFileUri, DocumentBuildMode.Template);
 Response<DocumentModel> operationResponse = await operation.WaitForCompletionAsync();
 DocumentModel model = operationResponse.Value;
@@ -818,32 +819,32 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 
 
 <!-- LINKS -->
-[formreco_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/src
-[formreco_docs]: https://docs.microsoft.com/azure/cognitive-services/form-recognizer/
+[formreco_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/formrecognizer/Azure.AI.FormRecognizer/src
+[formreco_docs]: /azure/cognitive-services/form-recognizer/
 [formreco_refdocs]: https://aka.ms/azsdk/net/docs/ref/formrecognizer
 [formreco_nuget_package]: https://www.nuget.org/packages/Azure.AI.FormRecognizer
-[formreco_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/README.md
-[formrecov3_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/V3.1/README.md
-[formreco_changelog]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_4.0.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/CHANGELOG.md
+[formreco_samples]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/README.md
+[formrecov3_samples]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/V3.1/README.md
+[formreco_changelog]: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/formrecognizer/Azure.AI.FormRecognizer/CHANGELOG.md
 [formreco_rest_api]: https://aka.ms/azsdk/formrecognizer/restapi
 [formreco_models]: https://aka.ms/azsdk/formrecognizer/models
 [formreco_errors]: https://aka.ms/azsdk/formrecognizer/errors
 [formreco_build_model]: https://aka.ms/azsdk/formrecognizer/buildmodel
-[migration_guide]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/MigrationGuide.md
-[cognitive_resource]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account
+[migration_guide]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/formrecognizer/Azure.AI.FormRecognizer/MigrationGuide.md
+[cognitive_resource]: /azure/cognitive-services/cognitive-services-apis-create-account
 
 
-[doc_analysis_client_class]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/src/DocumentAnalysisClient.cs
-[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.3/sdk/identity/Azure.Identity
-[register_aad_app]: https://docs.microsoft.com/azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
-[aad_grant_access]: https://docs.microsoft.com/azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
-[custom_subdomain]: https://docs.microsoft.com/azure/cognitive-services/authentication#create-a-resource-with-a-custom-subdomain
-[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.3/sdk/identity/Azure.Identity/README.md
-[cognitive_resource_portal]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account
-[cognitive_resource_cli]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account-cli
-[regional_endpoints]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-custom-subdomains#is-there-a-list-of-regional-endpoints
-[azure_cli_endpoint_lookup]: https://docs.microsoft.com/cli/azure/cognitiveservices/account?view=azure-cli-latest#az-cognitiveservices-account-show
-[azure_portal_get_endpoint]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account?tabs=multiservice%2Cwindows#get-the-keys-for-your-resource
+[doc_analysis_client_class]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/formrecognizer/Azure.AI.FormRecognizer/src/DocumentAnalysisClient.cs
+[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/identity/Azure.Identity
+[register_aad_app]: /azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
+[aad_grant_access]: /azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
+[custom_subdomain]: /azure/cognitive-services/authentication#create-a-resource-with-a-custom-subdomain
+[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/identity/Azure.Identity/README.md
+[cognitive_resource_portal]: /azure/cognitive-services/cognitive-services-apis-create-account
+[cognitive_resource_cli]: /azure/cognitive-services/cognitive-services-apis-create-account-cli
+[regional_endpoints]: /azure/cognitive-services/cognitive-services-custom-subdomains#is-there-a-list-of-regional-endpoints
+[azure_cli_endpoint_lookup]: /cli/azure/cognitiveservices/account?view=azure-cli-latest#az-cognitiveservices-account-show
+[azure_portal_get_endpoint]: /azure/cognitive-services/cognitive-services-apis-create-account?tabs=multiservice%2Cwindows#get-the-keys-for-your-resource
 
 
 [labeling_tool]: https://aka.ms/azsdk/formrecognizer/labelingtool
@@ -854,20 +855,20 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [w2_fields]: https://aka.ms/azsdk/formrecognizer/taxusw2fieldschema
 [dotnet_lro_guidelines]: https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning
 
-[logging]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.3/sdk/core/Azure.Core/samples/Diagnostics.md
+[logging]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/core/Azure.Core/samples/Diagnostics.md
 
-[extract_layout]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_ExtractLayout.md
-[analyze_prebuilt_document]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_AnalyzePrebuiltDocument.md
-[analyze_prebuilt_read]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_AnalyzePrebuiltRead.md
-[analyze_custom]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_AnalyzeWithCustomModel.md
-[analyze_prebuilt]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_AnalyzeWithPrebuiltModel.md
-[build_a_custom_model]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_BuildCustomModel.md
-[manage_models]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_ManageModels.md
-[copy_custom_models]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_CopyCustomModel.md
-[composed_model]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_ModelCompose.md
-[get_and_list]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.3/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_GetAndListOperations.md
+[extract_layout]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_ExtractLayout.md
+[analyze_prebuilt_document]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_AnalyzePrebuiltDocument.md
+[analyze_prebuilt_read]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_AnalyzePrebuiltRead.md
+[analyze_custom]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_AnalyzeWithCustomModel.md
+[analyze_prebuilt]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_AnalyzeWithPrebuiltModel.md
+[build_a_custom_model]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_BuildCustomModel.md
+[manage_models]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_ManageModels.md
+[copy_custom_models]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_CopyCustomModel.md
+[composed_model]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_ModelCompose.md
+[get_and_list]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_GetAndListOperations.md
 
-[azure_cli]: https://docs.microsoft.com/cli/azure
+[azure_cli]: /cli/azure
 [azure_sub]: https://azure.microsoft.com/free/dotnet/
 [nuget]: https://www.nuget.org/
 [azure_portal]: https://portal.azure.com
