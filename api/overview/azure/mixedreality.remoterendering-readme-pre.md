@@ -1,17 +1,14 @@
 ---
 title: Azure Remote Rendering client library for .NET
-keywords: Azure, dotnet, SDK, API, Azure.MixedReality.RemoteRendering, mixedreality
+keywords: Azure, dotnet, SDK, API, Azure.MixedReality.RemoteRendering, remoterendering
 author: ramya-rao-a
 ms.author: ramyar
-ms.date: 02/24/2021
+ms.date: 05/24/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
-ms.service: mixedreality
+ms.service: remoterendering
 ---
-
-# Azure Remote Rendering client library for .NET - Version 1.0.0-beta.3 
+# Azure Remote Rendering client library for .NET - Version 1.2.0-alpha.20220524.1 
 
 
 Azure Remote Rendering (ARR) is a service that enables you to render high-quality, interactive 3D content in the cloud and stream it in real time to devices, such as the HoloLens 2.
@@ -21,38 +18,30 @@ the lifetime of remote rendering sessions.
 
 > NOTE: Once a session is running, a client application will connect to it using one of the "runtime SDKs".
 > These SDKs are designed to best support the needs of an interactive application doing 3d rendering.
-> They are available in ([.net](https://docs.microsoft.com/dotnet/api/microsoft.azure.remoterendering)
-> or ([C++](https://docs.microsoft.com/cpp/api/remote-rendering/)).
+> They are available in ([.net](/dotnet/api/microsoft.azure.remoterendering)
+> or ([C++](/cpp/api/remote-rendering/)).
 
-[Product documentation](https://docs.microsoft.com/azure/remote-rendering/)
+[Product documentation](/azure/remote-rendering/)
 
 ## Getting started
 
 ### Install the package
 
-Install the Azure Mixed Reality ARR client library for .NET using one of the following methods.
-
-From Visual Studio Package Manager:
-
-```powershell
-Install-Package Azure.MixedReality.RemoteRendering -AllowPrereleaseVersions
-```
-
-From .NET CLI
+Install the Azure Mixed Reality ARR client library for .NET with [NuGet](https://www.nuget.org/):
 
 ```dotnetcli
-dotnet add package Azure.MixedReality.RemoteRendering --version 1.0.0-beta.3
+dotnet add package Azure.MixedReality.RemoteRendering
 ```
 
 Add a package reference:
 
 ```xml
-<PackageReference Include="Azure.MixedReality.RemoteRendering" Version="1.0.0-beta.3" />
+<PackageReference Include="Azure.MixedReality.RemoteRendering" Version="1.0.0" />
 ```
 
 ### Prerequisites
 
-You will need an [Azure subscription](https://azure.microsoft.com/free/) and an [Azure Remote Rendering account](https://docs.microsoft.com/azure/remote-rendering/how-tos/create-an-account) to use this package.
+You will need an [Azure subscription](https://azure.microsoft.com/free/dotnet/) and an [Azure Remote Rendering account](/azure/remote-rendering/how-tos/create-an-account) to use this package.
 
 ### Authenticate the client
 
@@ -71,7 +60,7 @@ There are several different forms of authentication:
     method for production applications because it allows you to avoid embedding the credentials for access to Azure Spatial
     Anchors in your client application.
 
-See [here](https://docs.microsoft.com/azure/remote-rendering/how-tos/authentication) for detailed instructions and information.
+See [here](/azure/remote-rendering/how-tos/authentication) for detailed instructions and information.
 
 In all the following examples, the client is constructed with a `remoteRenderingEndpoint` Uri object.
 The available endpoints correspond to regions, and the choice of endpoint determines the region in which the service performs its work.
@@ -142,7 +131,7 @@ RemoteRenderingClient client = new RemoteRenderingClient(remoteRenderingEndpoint
 #### Authenticating with a static access token
 
 You can pass a Mixed Reality access token as an `AccessToken` previously retrieved from the
-[Mixed Reality STS service](https://github.com/Azure/azure-sdk-for-net/tree/Azure.MixedReality.RemoteRendering_1.0.0-beta.3/sdk/mixedreality/Azure.MixedReality.Authentication)
+[Mixed Reality STS service](https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/mixedreality/Azure.MixedReality.Authentication)
 to be used with a Mixed Reality client library:
 
 ```csharp Snippet:CreateAClientWithStaticAccessToken
@@ -330,7 +319,7 @@ The following code will stop a running session with given id.
 
 ## Troubleshooting
 
-For general troubleshooting advice concerning Azure Remote Rendering, see [the Troubleshoot page](https://docs.microsoft.com/azure/remote-rendering/resources/troubleshoot) for remote rendering at docs.microsoft.com.
+For general troubleshooting advice concerning Azure Remote Rendering, see [the Troubleshoot page](/azure/remote-rendering/resources/troubleshoot) for remote rendering at docs.microsoft.com.
 
 The client methods will throw exceptions if the request cannot be made.
 However, in the case of both conversions and sessions, the requests can succeed but the requested operation may not be successful.
@@ -347,10 +336,10 @@ RemoteRenderingServiceError with details.
 
 ## Next steps
 
-- Read the [Product documentation](https://docs.microsoft.com/azure/remote-rendering/)
+- Read the [Product documentation](/azure/remote-rendering/)
 - Learn about the runtime SDKs:
-  - .NET: https://docs.microsoft.com/dotnet/api/microsoft.azure.remoterendering
-  - C++: https://docs.microsoft.com/cpp/api/remote-rendering/
+  - .NET: /dotnet/api/microsoft.azure.remoterendering
+  - C++: /cpp/api/remote-rendering/
 
 ## Contributing
 
