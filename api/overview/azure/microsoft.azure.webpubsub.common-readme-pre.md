@@ -1,17 +1,14 @@
 ---
 title: Azure Web PubSub Event Handler events data model client library for .NET
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebPubSub.Common, webpubsub
-author: ramya-rao-a
-ms.author: ramyar
-ms.date: 10/28/2021
+author: vicancy
+ms.author: lianwei
+ms.date: 05/24/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: webpubsub
 ---
-
-# Azure Web PubSub Event Handler events data model client library for .NET - Version 1.0.0-beta.1 
+# Azure Web PubSub Event Handler events data model client library for .NET - Version 1.2.0-alpha.20220524.1 
 
 
 This library defines the class to process with Azure Web PubSub service upstream requests.
@@ -57,7 +54,7 @@ Check Microsoft.Azure.WebPubSub.AspNetCore for E2E using examples.
 
 ## Troubleshooting
 
-You can also easily [enable console logging](https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.WebPubSub.Common_1.0.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md#logging) if you want to dig deeper into the requests you're making against the service.
+You can also easily [enable console logging](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md#logging) if you want to dig deeper into the requests you're making against the service.
 
 ## Next steps
 
@@ -76,4 +73,4 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Feventgrid%2FMicrosoft.Azure.Messaging.EventGrid.CloudNativeCloudEvents%2FREADME.png)
 
 [azure_sub]: https://azure.microsoft.com/free/dotnet/
-[samples_ref]: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.WebPubSub.Common_1.0.0-beta.1/sdk/webpubsub/Azure.Messaging.WebPubSub/tests/Samples/
+[samples_ref]: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/webpubsub/Azure.Messaging.WebPubSub/tests/Samples/

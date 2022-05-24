@@ -2,15 +2,13 @@
 title: Azure Web PubSub service middleware client library for .NET
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebPubSub.AspNetCore, webpubsub
 author: vicancy
-ms.author: vicancy
-ms.date: 01/07/2022
+ms.author: lianwei
+ms.date: 05/24/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: webpubsub
 ---
-# Azure Web PubSub service middleware client library for .NET - Version 1.0.0-beta.3 
+# Azure Web PubSub service middleware client library for .NET - Version 1.0.0-alpha.20220524.1 
 
 
 [Azure Web PubSub Service](https://aka.ms/awps/doc) is a service that enables you to build real-time messaging web applications using WebSockets and the publish-subscribe pattern. Any platform supporting WebSocket APIs can connect to the service easily, e.g. web pages, mobile applications, edge devices, etc. The service manages the WebSocket connections for you and allows up to 100K **concurrent** connections. It provides powerful APIs for you to manage these clients and deliver real-time messages.
@@ -19,12 +17,12 @@ Any scenario that requires real-time publish-subscribe messaging between server 
 
 This library can be used to do the following actions. Details about the terms used here are described in [Key concepts](#key-concepts) section.
 
-- Parse upstream request under CloudNative CloudEvents
+- Parse upstream requests under CloudNative CloudEvents
 - Add validation options for upstream request
 - API to add user defined functionality to handle different upstream events
 
-[Source code](https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.WebPubSub.AspNetCore_1.0.0-beta.3/sdk/webpubsub/Microsoft.Azure.WebPubSub.AspNetCore/src) |
-Package |
+[Source code](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/webpubsub/Microsoft.Azure.WebPubSub.AspNetCore/src) |
+[Package][package_ref] |
 [API reference documentation](https://aka.ms/awps/sdk/csharp) |
 [Product documentation](https://aka.ms/awps/doc) |
 [Samples][sample_ref] |
@@ -33,7 +31,7 @@ Package |
 
 ### Install the package
 
-Install the client library from [NuGet](https://www.nuget.org/):
+Install the client library from [NuGet][package_ref]
 
 ```PowerShell
 dotnet add package Microsoft.Azure.WebPubSub.AspNetCore --prerelease
@@ -46,22 +44,39 @@ dotnet add package Microsoft.Azure.WebPubSub.AspNetCore --prerelease
 
 ### Authenticate the client
 
-In order to interact with the service, you'll need to create an instance of the WebPubSubServiceClient class. To make this possible, you'll need the connection string or a key, which you can access in the Azure portal.
+In order to interact with the service, you'll need to provide the Web PubSub service with a valid credential. To make this possible, you'll need the connection string or a key, which you can access in the Azure portal. Besides, if you want to invoke service REST API, you can call `AddWebPubSubServiceClient<THub>()` where `THub` is user implemented [`WebPubSubHub`](#webpubsubhub) listening to important events.
 
-### Create a `WebPubSubServiceClient`
+### Configure Web PubSub service options
 
-```C# Snippet:WebPubSubAuthenticate
-// Create a WebPubSubServiceClient that will authenticate using a key credential.
-var serviceClient = new WebPubSubServiceClient(new Uri(endpoint), "some_hub", new AzureKeyCredential(key));
+```C# Snippet:WebPubSubDependencyInjection
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddWebPubSub(o =>
+    {
+        o.ServiceEndpoint = new("<connection-string>");
+    }).AddWebPubSubServiceClient<SampleHub>();
+}
+```
+
+### Map `WebPubSubHub` to endpoint routing
+
+```C# Snippet:WebPubSubMapHub
+public void Configure(IApplicationBuilder app)
+{
+    app.UseEndpoints(endpoint =>
+    {
+        endpoint.MapWebPubSubHub<SampleHub>("/eventhandler");
+    });
+}
 ```
 
 ## Key concepts
 
-For information about general Web PubSub concepts [Concepts in Azure Web PubSub](https://docs.microsoft.com/azure/azure-web-pubsub/key-concepts)
+For information about general Web PubSub concepts [Concepts in Azure Web PubSub](/azure/azure-web-pubsub/key-concepts)
 
 ### `WebPubSubHub`
 
-`WebPubSubHub` is an abstract class to let users implement the subscribed Web PubSub service events. After user register the [event handler](https://docs.microsoft.com/azure/azure-web-pubsub/howto-develop-eventhandler) in service side, these events will be forwarded from service to server. And `WebPubSubHub` provides 4 methods mapping to the service events to enable users deal with these events, for example, client management, validations or working with `Azure.Messaging.WebPubSub` to broadcast the messages. See samples below for details.
+`WebPubSubHub` is an abstract class to let users implement the subscribed Web PubSub service events. After user register the [event handler](/azure/azure-web-pubsub/howto-develop-eventhandler) in service side, these events will be forwarded from service to server. And `WebPubSubHub` provides 4 methods mapping to the service events to enable users deal with these events, for example, client management, validations or working with `Azure.Messaging.WebPubSub` to broadcast the messages. See samples below for details.
 
 > NOTE
 >
@@ -69,42 +84,27 @@ For information about general Web PubSub concepts [Concepts in Azure Web PubSub]
 
 ## Examples
 
-### Add Web PubSub service with options
+### Handle upstream `Connect` event
 
-```C#
-public void ConfigureServices(IServiceCollection services)
+```C# Snippet:WebPubSubHubMethods
+private sealed class SampleHub : WebPubSubHub
 {
-    services.AddWebPubSub(o =>
+    internal WebPubSubServiceClient<SampleHub> _serviceClient;
+
+    // Need to ensure service client is injected by call `AddServiceHub<SampleHub>` in ConfigureServices.
+    public SampleHub(WebPubSubServiceClient<SampleHub> serviceClient)
     {
-        o.ValidationOptions.Add("<connection-string>");
-    });
-}
-```
+        _serviceClient = serviceClient;
+    }
 
-### Map `WebPubSubHub` to endpoint routing
-
-The path should match the value configured in the Azure Web PubSub service `EventHandler`. For example, if placeholder is using like `/api/{event}`, then the path set in code should be `/api/{event}` as well.
-
-```C#
-public void Configure(IApplicationBuilder app)
-{
-    app.UseEndpoints(endpoint =>
+    public override ValueTask<ConnectEventResponse> OnConnectAsync(ConnectEventRequest request, CancellationToken cancellationToken)
     {
-        endpoint.MapWebPubSubHub<SampleHub>("/eventhander");
-    });
-}
-```
-
-### Handle Upstream event
-
-```C#
-public override ValueTask<ConnectEventResponse> OnConnectAsync(ConnectEventRequest request, CancellationToken cancellationToken)
-{
-    var response = new ConnectEventResponse
-    {
-        UserId = request.ConnectionContext.UserId
-    };
-    return new ValueTask<ConnectEventResponse>(response);
+        var response = new ConnectEventResponse
+        {
+            UserId = request.ConnectionContext.UserId
+        };
+        return new ValueTask<ConnectEventResponse>(response);
+    }
 }
 ```
 
@@ -112,13 +112,11 @@ public override ValueTask<ConnectEventResponse> OnConnectAsync(ConnectEventReque
 
 ### Setting up console logging
 
-You can also easily [enable console logging](https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.WebPubSub.AspNetCore_1.0.0-beta.3/sdk/core/Azure.Core/samples/Diagnostics.md#logging) if you want to dig deeper into the requests you're making against the service.
+You can also easily [enable console logging](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md#logging) if you want to dig deeper into the requests you're making against the service.
 
 ## Next steps
 
-Please take a look at the
-[samples][samples_ref]
-directory for detailed examples on how to use this library.
+Please take a look at the [Samples][sample_ref] directory for detailed examples on how to use this library.
 
 ## Contributing
 
@@ -136,5 +134,5 @@ For more information see the [Code of Conduct FAQ](https://opensource.microsoft.
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Ftemplate%2FAzure.Template%2FREADME.png)
 
 [azure_sub]: https://azure.microsoft.com/free/dotnet/
-[sample_ref]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebPubSub.AspNetCore_1.0.0-beta.3/sdk/webpubsub/Microsoft.Azure.WebPubSub.AspNetCore/tests/Samples/
-
+[sample_ref]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/webpubsub/Microsoft.Azure.WebPubSub.AspNetCore/tests/Samples/
+[package_ref]: https://www.nuget.org/packages/Microsoft.Azure.WebPubSub.AspNetCore/
