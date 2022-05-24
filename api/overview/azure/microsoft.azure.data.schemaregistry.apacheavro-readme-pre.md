@@ -3,14 +3,12 @@ title: Azure Schema Registry Apache Avro client library for .NET
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.Data.SchemaRegistry.ApacheAvro, schemaregistry
 author: jsquire
 ms.author: jsquire
-ms.date: 04/06/2022
+ms.date: 05/24/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: schemaregistry
 ---
-# Azure Schema Registry Apache Avro client library for .NET - Version 1.0.0-beta.8 
+# Azure Schema Registry Apache Avro client library for .NET - Version 1.1.0-alpha.20220524.1 
 
 
 Azure Schema Registry is a schema repository service hosted by Azure Event Hubs, providing schema storage, versioning, and management. This package provides an Avro serializer capable of serializing and deserializing payloads containing Schema Registry schema identifiers and Avro-serialized data.
@@ -22,7 +20,7 @@ Azure Schema Registry is a schema repository service hosted by Azure Event Hubs,
 Install the Azure Schema Registry Apache Avro library for .NET with [NuGet][nuget]:
 
 ```dotnetcli
-dotnet add package Microsoft.Azure.Data.SchemaRegistry.ApacheAvro --version 1.0.0-beta.1
+dotnet add package Microsoft.Azure.Data.SchemaRegistry.ApacheAvro
 ```
 
 ### Prerequisites
@@ -57,7 +55,7 @@ Once you have the Azure resource credentials and the Event Hubs namespace hostna
 ```C# Snippet:SchemaRegistryAvroCreateSchemaRegistryClient
 // Create a new SchemaRegistry client using the default credential from Azure.Identity using environment variables previously set,
 // including AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, and AZURE_TENANT_ID.
-// For more information on Azure.Identity usage, see: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.Data.SchemaRegistry.ApacheAvro_1.0.0-beta.8/sdk/identity/Azure.Identity/README.md
+// For more information on Azure.Identity usage, see: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/identity/Azure.Identity/README.md
 var schemaRegistryClient = new SchemaRegistryClient(fullyQualifiedNamespace: fullyQualifiedNamespace, credential: new DefaultAzureCredential());
 ```
 
@@ -102,13 +100,26 @@ Console.WriteLine(eventData.ContentType);
 
 // the serialized Avro data will be stored in the EventBody
 Console.WriteLine(eventData.EventBody);
+
+// construct a publisher and publish the events to our event hub
+var fullyQualifiedNamespace = "<< FULLY-QUALIFIED EVENT HUBS NAMESPACE (like something.servicebus.windows.net) >>";
+var eventHubName = "<< NAME OF THE EVENT HUB >>";
+var credential = new DefaultAzureCredential();
+await using var producer = new EventHubProducerClient(fullyQualifiedNamespace, eventHubName, credential);
+await producer.SendAsync(new EventData[] { eventData });
 ```
 
 To deserialize an `EventData` event that you are consuming:
 ```C# Snippet:SchemaRegistryAvroDecodeEventData
-Employee deserialized = (Employee) await serializer.DeserializeAsync(eventData, typeof(Employee));
-Console.WriteLine(deserialized.Age);
-Console.WriteLine(deserialized.Name);
+// construct a consumer and consume the event from our event hub
+await using var consumer = new EventHubConsumerClient(EventHubConsumerClient.DefaultConsumerGroupName, fullyQualifiedNamespace, eventHubName, credential);
+await foreach (PartitionEvent receivedEvent in consumer.ReadEventsAsync())
+{
+    Employee deserialized = (Employee) await serializer.DeserializeAsync(eventData, typeof(Employee));
+    Console.WriteLine(deserialized.Age);
+    Console.WriteLine(deserialized.Name);
+    break;
+}
 ```
 
 You can also use generic methods to serialize and deserialize the data. This may be more convenient if you are not building a library on top of the Avro serializer, as you won't have to worry about the virality of generics:
@@ -144,30 +155,7 @@ Employee deserializedEmployee = await serializer.DeserializeAsync<Employee>(cont
 
 ## Troubleshooting
 
-If you encounter errors when communicating with the Schema Registry service, these errors will be thrown as a [RequestFailedException][request_failed_exception]. The serializer will only communicate with the service the first time it encounters a schema (when serializing) or a schema ID (when deserializing). Any errors related to serialization to Avro, or deserialization from Avro, will be thrown as a `AvroSerializationException`. The `InnerException` property will contain the underlying exception that was thrown from the Apache Avro library. When deserializing, the `SerializedSchemaId` property will contain the schema ID corresponding to the serialized data. Using our `Employee` schema example, if we add an `Employee_V2` model that adds a new required field, this would not be compatible with `Employee`. If the data we are attempting to deserialize may contain a schema that would not be compatible with our `Employee_V2` model, then we might write code like the following:
-
-```C# Snippet:SchemaRegistryAvroException
-try
-{
-    Employee_V2 employeeV2 = await serializer.DeserializeAsync<Employee_V2>(content);
-}
-catch (SchemaRegistryAvroException exception)
-{
-    // When this exception occurs when deserializing, the exception message will contain the schema ID that was used to
-    // serialize the data.
-    Console.WriteLine(exception);
-
-    // We might also want to look up the specific schema from Schema Registry so that we can log the schema definition
-    if (exception.SchemaId != null)
-    {
-        SchemaRegistrySchema schema = await client.GetSchemaAsync(exception.SchemaId);
-        Console.WriteLine(schema.Definition);
-    }
-}
-```
-
-In general, any invalid Avro schemas would probably be caught during testing, but such schemas will also result in a `AvroSerializationException` being thrown when attempting to serialize using an invalid writer schema, or deserialize when using an invalid reader schema.
-
+If you encounter errors when communicating with the Schema Registry service, these errors will be thrown as a [RequestFailedException][request_failed_exception]. The serializer will only communicate with the service the first time it encounters a schema (when serializing) or a schema ID (when deserializing). Any errors related to invalid Content-Types will be thrown as a `FormatException`. Errors related to invalid schemas will be thrown as an `Exception`, and the `InnerException` property will contain the underlying exception that was thrown from the Apache Avro library. This type of error would typically be caught during testing and should not be handled in code. Any errors related to incompatible schemas will be thrown as an `Exception` with the `InnerException` property set to the underlying exception from the Apache Avro library.
 
 ## Next steps
 
@@ -185,11 +173,11 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 
 <!-- LINKS -->
 [nuget]: https://www.nuget.org/
-[event_hubs_namespace]: https://docs.microsoft.com/azure/event-hubs/event-hubs-about
-[azure_powershell]: https://docs.microsoft.com/powershell/azure/
-[create_event_hubs_namespace]: https://docs.microsoft.com/azure/event-hubs/event-hubs-quickstart-powershell#create-an-event-hubs-namespace
-[quickstart_guide]: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.Data.SchemaRegistry.ApacheAvro_1.0.0-beta.8/doc/mgmt_preview_quickstart.md
-[schema_registry_client]: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.Data.SchemaRegistry.ApacheAvro_1.0.0-beta.8/sdk/schemaregistry/Azure.Data.SchemaRegistry/src/SchemaRegistryClient.cs
+[event_hubs_namespace]: /azure/event-hubs/event-hubs-about
+[azure_powershell]: /powershell/azure/
+[create_event_hubs_namespace]: /azure/event-hubs/event-hubs-quickstart-powershell#create-an-event-hubs-namespace
+[quickstart_guide]: https://github.com/Azure/azure-sdk-for-net/blob/main/doc/mgmt_preview_quickstart.md
+[schema_registry_client]: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/schemaregistry/Azure.Data.SchemaRegistry/src/SchemaRegistryClient.cs
 [azure_portal]: https://ms.portal.azure.com/
 [schema_properties]: src/SchemaProperties.cs
 [azure_identity]: https://www.nuget.org/packages/Azure.Identity
@@ -197,13 +185,13 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [code_of_conduct_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [email_opencode]: mailto:opencode@microsoft.com
-[schema_registry_avro_serializer]: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.Data.SchemaRegistry.ApacheAvro_1.0.0-beta.8/sdk/schemaregistry/Microsoft.Azure.Data.SchemaRegistry.ApacheAvro/src/SchemaRegistryAvroSerializer.cs
-[employee]: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.Data.SchemaRegistry.ApacheAvro_1.0.0-beta.8/sdk/schemaregistry/Microsoft.Azure.Data.SchemaRegistry.ApacheAvro/tests/Models/Employee.cs
+[schema_registry_avro_serializer]: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/schemaregistry/Microsoft.Azure.Data.SchemaRegistry.ApacheAvro/src/SchemaRegistryAvroSerializer.cs
+[employee]: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/schemaregistry/Microsoft.Azure.Data.SchemaRegistry.ApacheAvro/tests/Models/Employee.cs
 [avro_csharp_documentation]: https://avro.apache.org/docs/current/api/csharp/html/index.html
 [apache_avro_library]: https://www.nuget.org/packages/Apache.Avro/
 [generic_record]: https://avro.apache.org/docs/current/api/csharp/html/classAvro_1_1Generic_1_1GenericRecord.html
 [specific_record]: https://avro.apache.org/docs/current/api/csharp/html/interfaceAvro_1_1Specific_1_1ISpecificRecord.html
 [azure_sub]: https://azure.microsoft.com/free/dotnet/
 [azure_schema_registry]: https://aka.ms/schemaregistry
-[request_failed_exception]: https://docs.microsoft.com/dotnet/api/azure.requestfailedexception?view=azure-dotnet
+[request_failed_exception]: /dotnet/api/azure.requestfailedexception?view=azure-dotnet
 
