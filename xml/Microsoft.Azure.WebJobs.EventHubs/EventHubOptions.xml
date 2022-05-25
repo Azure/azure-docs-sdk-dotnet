@@ -165,11 +165,11 @@
         <summary>
                The desired amount of time to allow between load balancing verification attempts.
              </summary>
-        <value>If not specified, a load balancing interval of 10 seconds will be assumed.</value>
+        <value>If not specified, a load balancing interval of 30 seconds will be assumed.</value>
         <remarks>
                Because load balancing holds less priority than processing events, this interval
                should be considered the minimum time that will elapse between verification attempts; operations
-               with higher priority may cause a minor delay longer than this interval for load balancing.
+               with higher priority may cause a delay longer than this interval for load balancing.
              </remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">Occurs when the requested interval is negative.</exception>
       </Docs>
@@ -192,7 +192,8 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Gets or sets the maximum number of events delivered in a batch. Default 10.
+            Gets or sets the maximum number of events delivered in a batch. This setting applies only to functions that
+            receive multiple events. Default 10.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -249,8 +250,13 @@
                instance before the ownership is considered stale and the partition becomes eligible to be
                requested by another event processor that wishes to assume responsibility for processing it.
              </summary>
-        <value>If not specified, an ownership interval of 30 seconds will be assumed.</value>
-        <remarks>To be added.</remarks>
+        <value>If not specified, an ownership interval of 2 minutes will be assumed.</value>
+        <remarks>
+               As a general guideline, it is advised that this value be greater than the configured
+               <see cref="P:Azure.Messaging.EventHubs.Primitives.EventProcessorOptions.LoadBalancingUpdateInterval" /> by at least a factor of two. It is recommended that
+               this be a factor of three or more, unless there are application scenarios that require more
+               aggressive ownership expiration.
+             </remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">Occurs when the requested interval is negative.</exception>
       </Docs>
     </Member>
