@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: extensions
 ---
 
-# Azure client library integration for ASP.NET Core
+# Azure client library integration for ASP.NET Core (Preview)
 
 Microsoft.Extensions.Azure.Core provides shared primitives to integrate Azure clients with ASP.NET Core [dependency injection][dependency_injection] and [configuration][configuration] systems.
 
