@@ -11,7 +11,7 @@ ms.devlang: .net
 ms.service: 
 ---
 
-# System.Text.Json support for Microsoft.Spatial library for .NET
+# System.Text.Json support for Microsoft.Spatial library for .NET (Preview)
 
 The [Microsoft.Spatial package][microsoft_spatial_package] contains classes and methods that support geographic operations. This library contains converters dependent on System.Text.Json for use with Microsoft.Spatial when using the Azure SDK for .NET.
 
