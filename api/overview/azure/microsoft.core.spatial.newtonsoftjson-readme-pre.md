@@ -11,7 +11,7 @@ ms.devlang: .net
 ms.service: 
 ---
 
-# Newtonsoft.Json support for Microsoft.Spatial library for .NET
+# Newtonsoft.Json support for Microsoft.Azure.Core.Spatial library for .NET
 
 The [Microsoft.Spatial package][microsoft_spatial_package] contains classes and methods that support geographic and geometric operations. This library contains converters dependent on the [Newtonsoft.Json package][newtonsoft_json_package] for use with Microsoft.Spatial when using the Azure SDK for .NET.
 

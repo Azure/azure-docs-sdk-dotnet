@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: 
 ---
 
-# CloudNative CloudEvent support for Azure.Messaging.EventGrid library for .NET
+# CloudNative CloudEvent support for Azure.Messaging.EventGrid library for .NET (Preview)
 
 This library can be used to enable publishing CloudNative CloudEvents using the Azure Event Grid library.
 
