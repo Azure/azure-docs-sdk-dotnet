@@ -3,14 +3,12 @@ title: Azure Compute Management client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.Compute, compute
 author: bilaakpan-ms
 ms.author: saakpan
-ms.date: 04/08/2022
+ms.date: 06/14/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: compute
 ---
-# Azure Compute Management client library for .NET - Version 1.0.0-beta.8 
+# Azure Compute Management client library for .NET - Version 1.0.0-beta.9 
 
 
 This package follows the [new Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html),which provide core capabilities that are shared amongst all Azure SDKs, including:
@@ -26,19 +24,19 @@ This package follows the [new Azure SDK guidelines](https://azure.github.io/azur
 
 Install the Azure Compute management library for .NET with [NuGet](https://www.nuget.org/):
 
-```PowerShell
-Install-Package Azure.ResourceManager.Compute -Version 1.0.0-beta.7
+```dotnetcli
+dotnet add package Azure.ResourceManager.Compute --prerelease
 ```
 
 ### Prerequisites
 Set up a way to authenticate to Azure with Azure Identity.
 
 Some options are:
-- Through the [Azure CLI Login](https://docs.microsoft.com/cli/azure/authenticate-azure-cli).
-- Via [Visual Studio](https://docs.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet#authenticating-via-visual-studio).
-- Setting [Environment Variables](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.0.0-beta.8/sdk/resourcemanager/Azure.ResourceManager/docs/AuthUsingEnvironmentVariables.md).
+- Through the [Azure CLI Login](/cli/azure/authenticate-azure-cli).
+- Via [Visual Studio](/dotnet/api/overview/azure/identity-readme?view=azure-dotnet#authenticating-via-visual-studio).
+- Setting [Environment Variables](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.0.0-beta.9/sdk/resourcemanager/Azure.ResourceManager/docs/AuthUsingEnvironmentVariables.md).
 
-More information and different authentication approaches using Azure Identity can be found in [this document](https://docs.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet).
+More information and different authentication approaches using Azure Identity can be found in [this document](/dotnet/api/overview/azure/identity-readme?view=azure-dotnet).
 
 ### Authenticate the Client
 
@@ -56,11 +54,11 @@ using Azure.ResourceManager;
 ArmClient armClient = new ArmClient(new DefaultAzureCredential());
 ```
 
-Additional documentation for the `Azure.Identity.DefaultAzureCredential` class can be found in [this document](https://docs.microsoft.com/dotnet/api/azure.identity.defaultazurecredential).
+Additional documentation for the `Azure.Identity.DefaultAzureCredential` class can be found in [this document](/dotnet/api/azure.identity.defaultazurecredential).
 
 ## Key concepts
 
-Key concepts of the Azure .NET SDK can be found [here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.0.0-beta.8/sdk/resourcemanager/Azure.ResourceManager/README.md#key-concepts)
+Key concepts of the Azure .NET SDK can be found [here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.0.0-beta.9/sdk/resourcemanager/Azure.ResourceManager/README.md#key-concepts)
 
 ## Examples
 
@@ -192,7 +190,7 @@ AvailabilitySetResource availabilitySet = await availabilitySetCollection.GetAsy
 AvailabilitySetResource updatedAvailabilitySet = await availabilitySet.AddTagAsync("key", "value");
 ```
 
-For more detailed examples, take a look at [samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.ResourceManager.Compute_1.0.0-beta.8/sdk/compute/Azure.ResourceManager.Compute/samples) we have available.
+For more detailed examples, take a look at [samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.ResourceManager.Compute_1.0.0-beta.9/sdk/compute/Azure.ResourceManager.Compute/samples) we have available.
 
 ## Troubleshooting
 
@@ -200,14 +198,14 @@ For more detailed examples, take a look at [samples](https://github.com/Azure/az
 -   If you need help, check [previous
     questions](https://stackoverflow.com/questions/tagged/azure+.net)
     or ask new ones on StackOverflow using azure and .NET tags.
--   If having trouble with authentication, go to [DefaultAzureCredential documentation](https://docs.microsoft.com/dotnet/api/azure.identity.defaultazurecredential?view=azure-dotnet)
+-   If having trouble with authentication, go to [DefaultAzureCredential documentation](/dotnet/api/azure.identity.defaultazurecredential?view=azure-dotnet)
 
 ## Next steps
 
 ### More sample code
 
-- [Managing Disks](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.0.0-beta.8/sdk/compute/Azure.ResourceManager.Compute/samples/Sample1_ManagingDisks.md)
-- [Managing Virtual Machines](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.0.0-beta.8/sdk/compute/Azure.ResourceManager.Compute/samples/Sample2_ManagingVirtualMachines.md)
+- [Managing Disks](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.0.0-beta.9/sdk/compute/Azure.ResourceManager.Compute/samples/Sample1_ManagingDisks.md)
+- [Managing Virtual Machines](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.0.0-beta.9/sdk/compute/Azure.ResourceManager.Compute/samples/Sample2_ManagingVirtualMachines.md)
 
 ### Additional Documentation
 
@@ -234,7 +232,7 @@ more information see the [Code of Conduct FAQ][coc_faq] or contact
 <opencode@microsoft.com> with any additional questions or comments.
 
 <!-- LINKS -->
-[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.0.0-beta.8/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
+[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.0.0-beta.9/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 
