@@ -12,6 +12,7 @@
     <AssemblyVersion>3.27.0.0</AssemblyVersion>
     <AssemblyVersion>3.27.1.0</AssemblyVersion>
     <AssemblyVersion>3.27.2.0</AssemblyVersion>
+    <AssemblyVersion>3.28.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -20,8 +21,38 @@
   <Docs>
     <summary>
       <see cref="T:Microsoft.Azure.Cosmos.ClientEncryptionPolicy" /> fluent definition.
+            The <see cref="T:Microsoft.Azure.Cosmos.ClientEncryptionPolicy" /> should be initialized with
+            policyFormatVersion 2 and "Deterministic" encryption type, if "id" property or properties which are part of partition key need to be encrypted.
+            All partition key property values included as part of <see cref="T:Microsoft.Azure.Cosmos.ClientEncryptionIncludedPath" /> have to be JSON strings.
             </summary>
     <remarks>To be added.</remarks>
+    <example>
+            This example shows how to create a <see cref="T:Microsoft.Azure.Cosmos.ClientEncryptionPolicy" /> using <see cref="T:Microsoft.Azure.Cosmos.Fluent.ClientEncryptionPolicyDefinition" />.
+            <code language="c#"><![CDATA[
+            ClientEncryptionIncludedPath path1 = new ClientEncryptionIncludedPath()
+            {
+                Path = partitionKeyPath,
+                ClientEncryptionKeyId = "key1",
+                EncryptionAlgorithm = "AEAD_AES_256_CBC_HMAC_SHA256",
+                EncryptionType = "Deterministic"
+            };
+            
+            ClientEncryptionIncludedPath path2 = new ClientEncryptionIncludedPath()
+            {
+                Path = "/id",
+                ClientEncryptionKeyId = "key2",
+                EncryptionAlgorithm = "AEAD_AES_256_CBC_HMAC_SHA256",
+                EncryptionType = "Deterministic"
+            };
+            
+            ContainerResponse containerResponse = await this.database.DefineContainer(containerName, partitionKeyPath)
+               .WithClientEncryptionPolicy(policyFormatVersion:2)
+               .WithIncludedPath(path1)
+               .WithIncludedPath(path2)
+               .Attach()
+               .CreateAsync()
+            };
+            ]]></code></example>
   </Docs>
   <Members>
     <Member MemberName="Attach">
@@ -39,6 +70,7 @@
         <AssemblyVersion>3.27.0.0</AssemblyVersion>
         <AssemblyVersion>3.27.1.0</AssemblyVersion>
         <AssemblyVersion>3.27.2.0</AssemblyVersion>
+        <AssemblyVersion>3.28.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.Fluent.ContainerBuilder</ReturnType>
@@ -67,6 +99,7 @@
         <AssemblyVersion>3.27.0.0</AssemblyVersion>
         <AssemblyVersion>3.27.1.0</AssemblyVersion>
         <AssemblyVersion>3.27.2.0</AssemblyVersion>
+        <AssemblyVersion>3.28.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.Fluent.ClientEncryptionPolicyDefinition</ReturnType>

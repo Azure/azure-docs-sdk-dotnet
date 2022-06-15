@@ -12,6 +12,7 @@
     <AssemblyVersion>3.27.0.0</AssemblyVersion>
     <AssemblyVersion>3.27.1.0</AssemblyVersion>
     <AssemblyVersion>3.27.2.0</AssemblyVersion>
+    <AssemblyVersion>3.28.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -19,9 +20,39 @@
   <Interfaces />
   <Docs>
     <summary>
-            Client encryption policy.
+            The <see cref="T:Microsoft.Azure.Cosmos.ClientEncryptionPolicy" /> should be initialized with
+            policyFormatVersion 2 and "Deterministic" encryption type, if "id" property or properties which are part of partition key need to be encrypted.
+            All partition key property values have to be JSON strings.
             </summary>
     <remarks>To be added.</remarks>
+    <example>
+            This example shows how to create a <see cref="T:Microsoft.Azure.Cosmos.ClientEncryptionPolicy" />.
+            <code language="c#"><![CDATA[
+            Collection<ClientEncryptionIncludedPath> paths = new Collection<ClientEncryptionIncludedPath>()
+            {
+               new ClientEncryptionIncludedPath()
+               {
+                   Path = partitionKeyPath,
+                   ClientEncryptionKeyId = "key1",
+                   EncryptionAlgorithm = "AEAD_AES_256_CBC_HMAC_SHA256",
+                   EncryptionType = "Deterministic"
+               },
+               new ClientEncryptionIncludedPath()
+               {
+                   Path = "/id",
+                   ClientEncryptionKeyId = "key2",
+                   EncryptionAlgorithm = "AEAD_AES_256_CBC_HMAC_SHA256",
+                   EncryptionType = "Deterministic"
+               },
+            };
+            
+            ContainerProperties setting = new ContainerProperties()
+            {
+               Id = containerName,
+               PartitionKeyPath = partitionKeyPath,
+               ClientEncryptionPolicy = new ClientEncryptionPolicy(includedPaths:paths, policyFormatVersion:2)
+            };
+            ]]></code></example>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -39,6 +70,7 @@
         <AssemblyVersion>3.27.0.0</AssemblyVersion>
         <AssemblyVersion>3.27.1.0</AssemblyVersion>
         <AssemblyVersion>3.27.2.0</AssemblyVersion>
+        <AssemblyVersion>3.28.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="includedPaths" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Cosmos.ClientEncryptionIncludedPath&gt;" />
@@ -47,6 +79,33 @@
         <param name="includedPaths">List of paths to include in the policy definition.</param>
         <summary>
             Initializes a new instance of the <see cref="T:Microsoft.Azure.Cosmos.ClientEncryptionPolicy" /> class.
+            The <see cref="P:Microsoft.Azure.Cosmos.ClientEncryptionPolicy.PolicyFormatVersion" /> will be set to 1.
+            Note: If you need to include partition key or id field paths as part of <see cref="T:Microsoft.Azure.Cosmos.ClientEncryptionPolicy" />, please set <see cref="P:Microsoft.Azure.Cosmos.ClientEncryptionPolicy.PolicyFormatVersion" /> to 2.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public ClientEncryptionPolicy (System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Cosmos.ClientEncryptionIncludedPath&gt; includedPaths, int policyFormatVersion);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Collections.Generic.IEnumerable`1&lt;class Microsoft.Azure.Cosmos.ClientEncryptionIncludedPath&gt; includedPaths, int32 policyFormatVersion) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Cosmos.ClientEncryptionPolicy.#ctor(System.Collections.Generic.IEnumerable{Microsoft.Azure.Cosmos.ClientEncryptionIncludedPath},System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (includedPaths As IEnumerable(Of ClientEncryptionIncludedPath), policyFormatVersion As Integer)" />
+      <MemberSignature Language="F#" Value="new Microsoft.Azure.Cosmos.ClientEncryptionPolicy : seq&lt;Microsoft.Azure.Cosmos.ClientEncryptionIncludedPath&gt; * int -&gt; Microsoft.Azure.Cosmos.ClientEncryptionPolicy" Usage="new Microsoft.Azure.Cosmos.ClientEncryptionPolicy (includedPaths, policyFormatVersion)" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
+        <AssemblyVersion>3.28.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="includedPaths" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.Azure.Cosmos.ClientEncryptionIncludedPath&gt;" />
+        <Parameter Name="policyFormatVersion" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="includedPaths">List of paths to include in the policy definition.</param>
+        <param name="policyFormatVersion"> Version of the client encryption policy definition. Current supported versions are 1 and 2.</param>
+        <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.Cosmos.ClientEncryptionPolicy" /> class.
+            Note: If you need to include partition key or id field paths as part of <see cref="T:Microsoft.Azure.Cosmos.ClientEncryptionPolicy" />, please set <see cref="P:Microsoft.Azure.Cosmos.ClientEncryptionPolicy.PolicyFormatVersion" /> to 2.
             </summary>
         <remarks>To be added.</remarks>
       </Docs>
@@ -66,6 +125,7 @@
         <AssemblyVersion>3.27.0.0</AssemblyVersion>
         <AssemblyVersion>3.27.1.0</AssemblyVersion>
         <AssemblyVersion>3.27.2.0</AssemblyVersion>
+        <AssemblyVersion>3.28.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -78,7 +138,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Paths of the item that need encryption along with path-specific settings.
+            Paths of the item that need encryption along with path-specific settings. 
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -99,6 +159,7 @@
         <AssemblyVersion>3.27.0.0</AssemblyVersion>
         <AssemblyVersion>3.27.1.0</AssemblyVersion>
         <AssemblyVersion>3.27.2.0</AssemblyVersion>
+        <AssemblyVersion>3.28.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
