@@ -1,17 +1,16 @@
 ---
 title: Azure App Configuration Management client library for .NET
-keywords: Azure, .net, SDK, API, Azure.ResourceManager.AppConfiguration, 
-author: maggiepint
-ms.author: magpint
-ms.date: 06/22/2020
-ms.topic: article
+keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.AppConfiguration, appconfiguration
+author: AlexanderSher
+ms.author: alsher
+ms.date: 04/08/2022
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
-ms.devlang: .net
-ms.service: 
+ms.devlang: dotnet
+ms.service: appconfiguration
 ---
-
-# Azure App Configuration Management client library for .NET - Version 1.0.0-preview.1 
+# Azure App Configuration Management client library for .NET - Version 1.0.0-beta.4 
 
 
 This package follows the [new Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html) which provide a number of core capabilities that are shared amongst all Azure SDKs, including the intuitive Azure Identity library, an HTTP Pipeline with custom policies, error-handling, distributed tracing, and much more.
@@ -23,16 +22,16 @@ This package follows the [new Azure SDK guidelines](https://azure.github.io/azur
 Install the Azure App Configuration management library for .NET with [NuGet](https://www.nuget.org/):
 
 ```PowerShell
-Install-Package Azure.ResourceManager.AppConfiguration -Version 1.0.0-preview.1 
+Install-Package Azure.ResourceManager.AppConfiguration -Version 1.0.0-beta.3
 ```
 
 ### Prerequisites
 
-* You must have an [Azure subscription](https://azure.microsoft.com/free/)
+* You must have an [Azure subscription](https://azure.microsoft.com/free/dotnet/)
 
 ### Authenticate the Client
 
-To create an authenticated client and start interacting with Azure resources, please see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/master/doc/mgmt_preview_quickstart.md)
+To create an authenticated client and start interacting with Azure resources, please see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.AppConfiguration_1.0.0-beta.4/doc/mgmt_preview_quickstart.md)
 
 ## Key concepts
 
@@ -42,9 +41,9 @@ Key concepts of the Azure .NET SDK can be found [here](https://azure.github.io/a
 
 Documentation is available to help you learn how to use this package
 
-- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/master/doc/mgmt_preview_quickstart.md)
+- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.AppConfiguration_1.0.0-beta.4/doc/mgmt_preview_quickstart.md)
 - [API References](https://docs.microsoft.com/dotnet/api/?view=azure-dotnet)
-- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/identity/Azure.Identity/README.md)
+- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.AppConfiguration_1.0.0-beta.4/sdk/identity/Azure.Identity/README.md)
 
 ## Examples
 
@@ -66,8 +65,8 @@ For more information on Azure SDK, please refer to [this website](https://azure.
 
 ## Contributing
 
-For details on contributing to this repository, see the contributing
-guide.
+For details on contributing to this repository, see the [contributing
+guide][cg].
 
 This project welcomes contributions and suggestions. Most contributions
 require you to agree to a Contributor License Agreement (CLA) declaring
@@ -80,13 +79,12 @@ whether you need to provide a CLA and decorate the PR appropriately
 bot. You will only need to do this once across all repositories using
 our CLA.
 
-This project has adopted the Microsoft Open Source Code of Conduct. For
-more information see the Code of Conduct FAQ or contact
+This project has adopted the [Microsoft Open Source Code of Conduct][coc]. For
+more information see the [Code of Conduct FAQ][coc_faq] or contact
 <opencode@microsoft.com> with any additional questions or comments.
 
 <!-- LINKS -->
-[style-guide-msft]: https://docs.microsoft.com/style-guide/capitalization
-[style-guide-cloud]: https://worldready.cloudapp.net/Styleguide/Read?id=2696&topicid=25357
-
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Ftemplate%2FAzure.Template%2FREADME.png)
+[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.AppConfiguration_1.0.0-beta.4/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
+[coc]: https://opensource.microsoft.com/codeofconduct/
+[coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 

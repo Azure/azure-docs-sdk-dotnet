@@ -9,6 +9,10 @@
     <AssemblyVersion>5.4.0.0</AssemblyVersion>
     <AssemblyVersion>5.4.1.0</AssemblyVersion>
     <AssemblyVersion>5.5.0.0</AssemblyVersion>
+    <AssemblyVersion>5.6.0.0</AssemblyVersion>
+    <AssemblyVersion>5.6.1.0</AssemblyVersion>
+    <AssemblyVersion>5.6.2.0</AssemblyVersion>
+    <AssemblyVersion>5.7.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -21,16 +25,41 @@
   <Docs>
     <summary>
                A client responsible for publishing <see cref="T:Azure.Messaging.EventHubs.EventData" /> to a specific Event Hub,
-               grouped together in batches.  Depending on the options specified when sending, events data
-               may be automatically routed to an available partition or sent to a specifically requested partition.
+               grouped together in batches.  Depending on the options specified when sending, events may
+               be automatically assigned an available partition or may request a specific partition.
+            
+               The <see cref="T:Azure.Messaging.EventHubs.Producer.EventHubProducerClient" /> publishes immediately, ensuring a deterministic
+               outcome for each send operation, though requires that callers own the responsibility of
+               building and managing batches.
+            
+               In scenarios where it is not important to have events published immediately and where
+               maximizing partition availability is not a requirement, it is recommended to consider
+               using the <see cref="T:Azure.Messaging.EventHubs.Producer.EventHubBufferedProducerClient" />, which takes responsibility for
+               building and managing batches to reduce the complexity of doing so in application code.
              </summary>
     <remarks>
-      <para>
-                 Allowing automatic routing of partitions is recommended when:
-                 <para>- The sending of events needs to be highly available.</para><para>- The event data should be evenly distributed among all available partitions.</para></para>
-      <para>
-                 If no partition is specified, the following rules are used for automatically selecting one:
-                 <para>1) Distribute the events equally amongst all available partitions using a round-robin approach.</para><para>2) If a partition becomes unavailable, the Event Hubs service will automatically detect it and forward the message to another available partition.</para></para>
+      <list type="bullet">
+        <listheader>
+          <description>Allowing partition assignment is recommended when:</description>
+        </listheader>
+        <item>
+          <description>The sending of events needs to be highly available.</description>
+        </item>
+        <item>
+          <description>The event data should be evenly distributed among all available partitions.</description>
+        </item>
+      </list>
+      <list type="number">
+        <listheader>
+          <description>If no partition is specified, the following rules are used for automatically selecting one:</description>
+        </listheader>
+        <item>
+          <description>Distribute the events equally amongst all available partitions using a round-robin approach.</description>
+        </item>
+        <item>
+          <description>If a partition becomes unavailable, the Event Hubs service will automatically detect it and forward the message to another available partition.</description>
+        </item>
+      </list>
       <para>
                  The <see cref="T:Azure.Messaging.EventHubs.Producer.EventHubProducerClient" /> is safe to cache and use for the lifetime of an application, and that is best practice when the application
                  publishes events regularly or semi-regularly.  The producer holds responsibility for efficient resource management, working to keep resource usage low during
@@ -38,6 +67,7 @@
                  method as the application is shutting down will ensure that network resources and other unmanaged objects are properly cleaned up.
                </para>
     </remarks>
+    <altmember cref="T:Azure.Messaging.EventHubs.Producer.EventHubBufferedProducerClient" />
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -51,6 +81,10 @@
         <AssemblyVersion>5.4.0.0</AssemblyVersion>
         <AssemblyVersion>5.4.1.0</AssemblyVersion>
         <AssemblyVersion>5.5.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.1.0</AssemblyVersion>
+        <AssemblyVersion>5.6.2.0</AssemblyVersion>
+        <AssemblyVersion>5.7.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -72,6 +106,10 @@
         <AssemblyVersion>5.4.0.0</AssemblyVersion>
         <AssemblyVersion>5.4.1.0</AssemblyVersion>
         <AssemblyVersion>5.5.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.1.0</AssemblyVersion>
+        <AssemblyVersion>5.6.2.0</AssemblyVersion>
+        <AssemblyVersion>5.7.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="connectionString" Type="System.String" />
@@ -103,6 +141,10 @@
         <AssemblyVersion>5.4.0.0</AssemblyVersion>
         <AssemblyVersion>5.4.1.0</AssemblyVersion>
         <AssemblyVersion>5.5.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.1.0</AssemblyVersion>
+        <AssemblyVersion>5.6.2.0</AssemblyVersion>
+        <AssemblyVersion>5.7.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="connection" Type="Azure.Messaging.EventHubs.EventHubConnection" />
@@ -129,6 +171,10 @@
         <AssemblyVersion>5.4.0.0</AssemblyVersion>
         <AssemblyVersion>5.4.1.0</AssemblyVersion>
         <AssemblyVersion>5.5.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.1.0</AssemblyVersion>
+        <AssemblyVersion>5.6.2.0</AssemblyVersion>
+        <AssemblyVersion>5.7.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="connectionString" Type="System.String" />
@@ -162,6 +208,10 @@
         <AssemblyVersion>5.4.0.0</AssemblyVersion>
         <AssemblyVersion>5.4.1.0</AssemblyVersion>
         <AssemblyVersion>5.5.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.1.0</AssemblyVersion>
+        <AssemblyVersion>5.6.2.0</AssemblyVersion>
+        <AssemblyVersion>5.7.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="connectionString" Type="System.String" />
@@ -192,6 +242,10 @@
         <AssemblyVersion>5.4.0.0</AssemblyVersion>
         <AssemblyVersion>5.4.1.0</AssemblyVersion>
         <AssemblyVersion>5.5.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.1.0</AssemblyVersion>
+        <AssemblyVersion>5.6.2.0</AssemblyVersion>
+        <AssemblyVersion>5.7.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="connectionString" Type="System.String" />
@@ -224,6 +278,10 @@
         <AssemblyVersion>5.4.0.0</AssemblyVersion>
         <AssemblyVersion>5.4.1.0</AssemblyVersion>
         <AssemblyVersion>5.5.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.1.0</AssemblyVersion>
+        <AssemblyVersion>5.6.2.0</AssemblyVersion>
+        <AssemblyVersion>5.7.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="fullyQualifiedNamespace" Type="System.String" />
@@ -254,6 +312,10 @@
         <AssemblyVersion>5.4.0.0</AssemblyVersion>
         <AssemblyVersion>5.4.1.0</AssemblyVersion>
         <AssemblyVersion>5.5.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.1.0</AssemblyVersion>
+        <AssemblyVersion>5.6.2.0</AssemblyVersion>
+        <AssemblyVersion>5.7.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="fullyQualifiedNamespace" Type="System.String" />
@@ -284,6 +346,10 @@
         <AssemblyVersion>5.4.0.0</AssemblyVersion>
         <AssemblyVersion>5.4.1.0</AssemblyVersion>
         <AssemblyVersion>5.5.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.1.0</AssemblyVersion>
+        <AssemblyVersion>5.6.2.0</AssemblyVersion>
+        <AssemblyVersion>5.7.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="fullyQualifiedNamespace" Type="System.String" />
@@ -314,6 +380,10 @@
         <AssemblyVersion>5.4.0.0</AssemblyVersion>
         <AssemblyVersion>5.4.1.0</AssemblyVersion>
         <AssemblyVersion>5.5.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.1.0</AssemblyVersion>
+        <AssemblyVersion>5.6.2.0</AssemblyVersion>
+        <AssemblyVersion>5.7.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -342,6 +412,10 @@
         <AssemblyVersion>5.4.0.0</AssemblyVersion>
         <AssemblyVersion>5.4.1.0</AssemblyVersion>
         <AssemblyVersion>5.5.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.1.0</AssemblyVersion>
+        <AssemblyVersion>5.6.2.0</AssemblyVersion>
+        <AssemblyVersion>5.7.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.ValueTask&lt;Azure.Messaging.EventHubs.Producer.EventDataBatch&gt;</ReturnType>
@@ -361,8 +435,8 @@
              </summary>
         <returns>An <see cref="T:Azure.Messaging.EventHubs.Producer.EventDataBatch" /> with the default batch options.</returns>
         <remarks>To be added.</remarks>
-        <altmember cref="M:Azure.Messaging.EventHubs.Producer.EventHubProducerClient.CreateBatchAsync(Azure.Messaging.EventHubs.Producer.CreateBatchOptions,System.Threading.CancellationToken)" />
         <altmember cref="M:Azure.Messaging.EventHubs.Producer.EventHubProducerClient.SendAsync(Azure.Messaging.EventHubs.Producer.EventDataBatch,System.Threading.CancellationToken)" />
+        <altmember cref="M:Azure.Messaging.EventHubs.Producer.EventHubProducerClient.CreateBatchAsync(Azure.Messaging.EventHubs.Producer.CreateBatchOptions,System.Threading.CancellationToken)" />
       </Docs>
     </Member>
     <Member MemberName="CreateBatchAsync">
@@ -377,6 +451,10 @@
         <AssemblyVersion>5.4.0.0</AssemblyVersion>
         <AssemblyVersion>5.4.1.0</AssemblyVersion>
         <AssemblyVersion>5.5.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.1.0</AssemblyVersion>
+        <AssemblyVersion>5.6.2.0</AssemblyVersion>
+        <AssemblyVersion>5.7.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.ValueTask&lt;Azure.Messaging.EventHubs.Producer.EventDataBatch&gt;</ReturnType>
@@ -398,8 +476,9 @@
              </summary>
         <returns>An <see cref="T:Azure.Messaging.EventHubs.Producer.EventDataBatch" /> with the requested <paramref name="options" />.</returns>
         <remarks>To be added.</remarks>
-        <altmember cref="M:Azure.Messaging.EventHubs.Producer.EventHubProducerClient.SendAsync(Azure.Messaging.EventHubs.Producer.EventDataBatch,System.Threading.CancellationToken)" />
         <altmember cref="M:Azure.Messaging.EventHubs.Producer.EventHubProducerClient.CreateBatchAsync(System.Threading.CancellationToken)" />
+        <exception cref="T:System.InvalidOperationException">Occurs when both a partition identifier and partition key have been specified in the <paramref name="options" />.</exception>
+        <altmember cref="M:Azure.Messaging.EventHubs.Producer.EventHubProducerClient.SendAsync(Azure.Messaging.EventHubs.Producer.EventDataBatch,System.Threading.CancellationToken)" />
       </Docs>
     </Member>
     <Member MemberName="DisposeAsync">
@@ -417,6 +496,10 @@
         <AssemblyVersion>5.4.0.0</AssemblyVersion>
         <AssemblyVersion>5.4.1.0</AssemblyVersion>
         <AssemblyVersion>5.5.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.1.0</AssemblyVersion>
+        <AssemblyVersion>5.6.2.0</AssemblyVersion>
+        <AssemblyVersion>5.7.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.ValueTask</ReturnType>
@@ -443,6 +526,10 @@
         <AssemblyVersion>5.4.0.0</AssemblyVersion>
         <AssemblyVersion>5.4.1.0</AssemblyVersion>
         <AssemblyVersion>5.5.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.1.0</AssemblyVersion>
+        <AssemblyVersion>5.6.2.0</AssemblyVersion>
+        <AssemblyVersion>5.7.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -478,6 +565,10 @@
         <AssemblyVersion>5.4.0.0</AssemblyVersion>
         <AssemblyVersion>5.4.1.0</AssemblyVersion>
         <AssemblyVersion>5.5.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.1.0</AssemblyVersion>
+        <AssemblyVersion>5.6.2.0</AssemblyVersion>
+        <AssemblyVersion>5.7.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -503,6 +594,10 @@
         <AssemblyVersion>5.4.0.0</AssemblyVersion>
         <AssemblyVersion>5.4.1.0</AssemblyVersion>
         <AssemblyVersion>5.5.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.1.0</AssemblyVersion>
+        <AssemblyVersion>5.6.2.0</AssemblyVersion>
+        <AssemblyVersion>5.7.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -528,6 +623,10 @@
         <AssemblyVersion>5.4.0.0</AssemblyVersion>
         <AssemblyVersion>5.4.1.0</AssemblyVersion>
         <AssemblyVersion>5.5.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.1.0</AssemblyVersion>
+        <AssemblyVersion>5.6.2.0</AssemblyVersion>
+        <AssemblyVersion>5.7.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Messaging.EventHubs.EventHubProperties&gt;</ReturnType>
@@ -557,6 +656,10 @@
         <AssemblyVersion>5.4.0.0</AssemblyVersion>
         <AssemblyVersion>5.4.1.0</AssemblyVersion>
         <AssemblyVersion>5.5.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.1.0</AssemblyVersion>
+        <AssemblyVersion>5.6.2.0</AssemblyVersion>
+        <AssemblyVersion>5.7.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -588,6 +691,10 @@
         <AssemblyVersion>5.4.0.0</AssemblyVersion>
         <AssemblyVersion>5.4.1.0</AssemblyVersion>
         <AssemblyVersion>5.5.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.1.0</AssemblyVersion>
+        <AssemblyVersion>5.6.2.0</AssemblyVersion>
+        <AssemblyVersion>5.7.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.String[]&gt;</ReturnType>
@@ -620,6 +727,10 @@
         <AssemblyVersion>5.4.0.0</AssemblyVersion>
         <AssemblyVersion>5.4.1.0</AssemblyVersion>
         <AssemblyVersion>5.5.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.1.0</AssemblyVersion>
+        <AssemblyVersion>5.6.2.0</AssemblyVersion>
+        <AssemblyVersion>5.7.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Messaging.EventHubs.PartitionProperties&gt;</ReturnType>
@@ -640,22 +751,29 @@
       </Docs>
     </Member>
     <Member MemberName="GetPartitionPublishingPropertiesAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Messaging.EventHubs.Producer.PartitionPublishingProperties&gt; GetPartitionPublishingPropertiesAsync (string partitionId, System.Threading.CancellationToken cancellationToken = default);" FrameworkAlternate="azure-dotnet-preview" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Messaging.EventHubs.Producer.PartitionPublishingProperties&gt; GetPartitionPublishingPropertiesAsync(string partitionId, valuetype System.Threading.CancellationToken cancellationToken) cil managed" FrameworkAlternate="azure-dotnet-preview" />
-      <MemberSignature Language="DocId" Value="M:Azure.Messaging.EventHubs.Producer.EventHubProducerClient.GetPartitionPublishingPropertiesAsync(System.String,System.Threading.CancellationToken)" FrameworkAlternate="azure-dotnet-preview" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetPartitionPublishingPropertiesAsync (partitionId As String, Optional cancellationToken As CancellationToken = Nothing) As Task(Of PartitionPublishingProperties)" FrameworkAlternate="azure-dotnet-preview" />
-      <MemberSignature Language="F#" Value="abstract member GetPartitionPublishingPropertiesAsync : string * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Messaging.EventHubs.Producer.PartitionPublishingProperties&gt;&#xA;override this.GetPartitionPublishingPropertiesAsync : string * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Messaging.EventHubs.Producer.PartitionPublishingProperties&gt;" Usage="eventHubProducerClient.GetPartitionPublishingPropertiesAsync (partitionId, cancellationToken)" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="C#" Value="protected internal virtual System.Threading.Tasks.Task&lt;Azure.Messaging.EventHubs.Producer.PartitionPublishingProperties&gt; GetPartitionPublishingPropertiesAsync (string partitionId, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Messaging.EventHubs.Producer.PartitionPublishingProperties&gt; GetPartitionPublishingPropertiesAsync(string partitionId, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Messaging.EventHubs.Producer.EventHubProducerClient.GetPartitionPublishingPropertiesAsync(System.String,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Protected Friend Overridable Function GetPartitionPublishingPropertiesAsync (partitionId As String, Optional cancellationToken As CancellationToken = Nothing) As Task(Of PartitionPublishingProperties)" />
+      <MemberSignature Language="F#" Value="abstract member GetPartitionPublishingPropertiesAsync : string * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Messaging.EventHubs.Producer.PartitionPublishingProperties&gt;&#xA;override this.GetPartitionPublishingPropertiesAsync : string * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Messaging.EventHubs.Producer.PartitionPublishingProperties&gt;" Usage="eventHubProducerClient.GetPartitionPublishingPropertiesAsync (partitionId, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Messaging.EventHubs</AssemblyName>
         <AssemblyVersion>5.4.0.0</AssemblyVersion>
+        <AssemblyVersion>5.7.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName Language="C#">[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]</AttributeName>
+          <AttributeName Language="F#">[&lt;System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)&gt;]</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
-        <ReturnType FrameworkAlternate="azure-dotnet-preview">System.Threading.Tasks.Task&lt;Azure.Messaging.EventHubs.Producer.PartitionPublishingProperties&gt;</ReturnType>
+        <ReturnType>System.Threading.Tasks.Task&lt;Azure.Messaging.EventHubs.Producer.PartitionPublishingProperties&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="partitionId" Type="System.String" Index="0" FrameworkAlternate="azure-dotnet-preview" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="1" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="partitionId" Type="System.String" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
         <param name="partitionId">The unique identifier of a partition associated with the Event Hub.</param>
@@ -671,6 +789,31 @@
              </remarks>
       </Docs>
     </Member>
+    <Member MemberName="Identifier">
+      <MemberSignature Language="C#" Value="public string Identifier { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Identifier" />
+      <MemberSignature Language="DocId" Value="P:Azure.Messaging.EventHubs.Producer.EventHubProducerClient.Identifier" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Identifier As String" />
+      <MemberSignature Language="F#" Value="member this.Identifier : string" Usage="Azure.Messaging.EventHubs.Producer.EventHubProducerClient.Identifier" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Messaging.EventHubs</AssemblyName>
+        <AssemblyVersion>5.6.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.1.0</AssemblyVersion>
+        <AssemblyVersion>5.6.2.0</AssemblyVersion>
+        <AssemblyVersion>5.7.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+               A unique name used to identify this producer.
+             </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="IsClosed">
       <MemberSignature Language="C#" Value="public bool IsClosed { get; protected set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance bool IsClosed" />
@@ -683,6 +826,10 @@
         <AssemblyVersion>5.4.0.0</AssemblyVersion>
         <AssemblyVersion>5.4.1.0</AssemblyVersion>
         <AssemblyVersion>5.5.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.1.0</AssemblyVersion>
+        <AssemblyVersion>5.6.2.0</AssemblyVersion>
+        <AssemblyVersion>5.7.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -709,6 +856,10 @@
         <AssemblyVersion>5.4.0.0</AssemblyVersion>
         <AssemblyVersion>5.4.1.0</AssemblyVersion>
         <AssemblyVersion>5.5.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.1.0</AssemblyVersion>
+        <AssemblyVersion>5.6.2.0</AssemblyVersion>
+        <AssemblyVersion>5.7.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -731,6 +882,7 @@
                When published, the result is atomic; either all events that belong to the batch were successful or all
                have failed.  Partial success is not possible.
              </remarks>
+        <exception cref="T:System.InvalidOperationException">Occurs when both a partition identifier and partition key have been specified by the batch.</exception>
         <altmember cref="M:Azure.Messaging.EventHubs.Producer.EventHubProducerClient.CreateBatchAsync(System.Threading.CancellationToken)" />
       </Docs>
     </Member>
@@ -746,6 +898,10 @@
         <AssemblyVersion>5.4.0.0</AssemblyVersion>
         <AssemblyVersion>5.4.1.0</AssemblyVersion>
         <AssemblyVersion>5.5.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.1.0</AssemblyVersion>
+        <AssemblyVersion>5.6.2.0</AssemblyVersion>
+        <AssemblyVersion>5.7.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -766,19 +922,20 @@
              </summary>
         <returns>
                A task to be resolved on when the operation has completed; if no exception is thrown when awaited, the
-               Event Hubs service has acknowledge receipt and assumed responsibility for delivery of the set of events.
+               Event Hubs service has acknowledged receipt and assumed responsibility for delivery of the set of events to
+               its partition.
              </returns>
         <remarks>
                When published, the result is atomic; either all events that belong to the set were successful or all
                have failed.  Partial success is not possible.
              </remarks>
+        <altmember cref="M:Azure.Messaging.EventHubs.Producer.EventHubProducerClient.SendAsync(System.Collections.Generic.IEnumerable{Azure.Messaging.EventHubs.EventData},Azure.Messaging.EventHubs.Producer.SendEventOptions,System.Threading.CancellationToken)" />
         <altmember cref="M:Azure.Messaging.EventHubs.Producer.EventHubProducerClient.SendAsync(Azure.Messaging.EventHubs.Producer.EventDataBatch,System.Threading.CancellationToken)" />
-        <altmember cref="M:Azure.Messaging.EventHubs.Producer.EventHubProducerClient.CreateBatchAsync(System.Threading.CancellationToken)" />
         <exception cref="T:Azure.Messaging.EventHubs.EventHubsException">
                Occurs when the set of events exceeds the maximum size allowed in a single batch, as determined by the Event Hubs service.  The <see cref="P:Azure.Messaging.EventHubs.EventHubsException.Reason" /> will be set to
                <see cref="F:Azure.Messaging.EventHubs.EventHubsException.FailureReason.MessageSizeExceeded" /> in this case.
              </exception>
-        <altmember cref="M:Azure.Messaging.EventHubs.Producer.EventHubProducerClient.SendAsync(System.Collections.Generic.IEnumerable{Azure.Messaging.EventHubs.EventData},Azure.Messaging.EventHubs.Producer.SendEventOptions,System.Threading.CancellationToken)" />
+        <altmember cref="M:Azure.Messaging.EventHubs.Producer.EventHubProducerClient.CreateBatchAsync(System.Threading.CancellationToken)" />
       </Docs>
     </Member>
     <Member MemberName="SendAsync">
@@ -793,6 +950,10 @@
         <AssemblyVersion>5.4.0.0</AssemblyVersion>
         <AssemblyVersion>5.4.1.0</AssemblyVersion>
         <AssemblyVersion>5.5.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.1.0</AssemblyVersion>
+        <AssemblyVersion>5.6.2.0</AssemblyVersion>
+        <AssemblyVersion>5.7.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -815,19 +976,21 @@
              </summary>
         <returns>
                A task to be resolved on when the operation has completed; if no exception is thrown when awaited, the
-               Event Hubs service has acknowledge receipt and assumed responsibility for delivery of the set of events.
+               Event Hubs service has acknowledged receipt and assumed responsibility for delivery of the set of events to
+               its partition.
              </returns>
         <remarks>
                When published, the result is atomic; either all events that belong to the set were successful or all
                have failed.  Partial success is not possible.
              </remarks>
+        <altmember cref="M:Azure.Messaging.EventHubs.Producer.EventHubProducerClient.SendAsync(System.Collections.Generic.IEnumerable{Azure.Messaging.EventHubs.EventData},System.Threading.CancellationToken)" />
         <altmember cref="M:Azure.Messaging.EventHubs.Producer.EventHubProducerClient.SendAsync(Azure.Messaging.EventHubs.Producer.EventDataBatch,System.Threading.CancellationToken)" />
-        <altmember cref="M:Azure.Messaging.EventHubs.Producer.EventHubProducerClient.CreateBatchAsync(Azure.Messaging.EventHubs.Producer.CreateBatchOptions,System.Threading.CancellationToken)" />
+        <exception cref="T:System.InvalidOperationException">Occurs when both a partition identifier and partition key have been specified in the <paramref name="options" />.</exception>
         <exception cref="T:Azure.Messaging.EventHubs.EventHubsException">
                Occurs when the set of events exceeds the maximum size allowed in a single batch, as determined by the Event Hubs service.  The <see cref="P:Azure.Messaging.EventHubs.EventHubsException.Reason" /> will be set to
                <see cref="F:Azure.Messaging.EventHubs.EventHubsException.FailureReason.MessageSizeExceeded" /> in this case.
              </exception>
-        <altmember cref="M:Azure.Messaging.EventHubs.Producer.EventHubProducerClient.SendAsync(System.Collections.Generic.IEnumerable{Azure.Messaging.EventHubs.EventData},System.Threading.CancellationToken)" />
+        <altmember cref="M:Azure.Messaging.EventHubs.Producer.EventHubProducerClient.CreateBatchAsync(Azure.Messaging.EventHubs.Producer.CreateBatchOptions,System.Threading.CancellationToken)" />
       </Docs>
     </Member>
     <Member MemberName="ToString">
@@ -842,6 +1005,10 @@
         <AssemblyVersion>5.4.0.0</AssemblyVersion>
         <AssemblyVersion>5.4.1.0</AssemblyVersion>
         <AssemblyVersion>5.5.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.0.0</AssemblyVersion>
+        <AssemblyVersion>5.6.1.0</AssemblyVersion>
+        <AssemblyVersion>5.6.2.0</AssemblyVersion>
+        <AssemblyVersion>5.7.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>

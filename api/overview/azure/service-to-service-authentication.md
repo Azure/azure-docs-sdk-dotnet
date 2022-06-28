@@ -5,7 +5,7 @@ keywords: Azure, .net, SDK, API, Azure.Identity, identity
 author: jlichwa
 ms.author: jalichwa
 ms.date: 10/27/2020
-ms.topic: article
+ms.topic: reference
 ms.devlang: .net
 ms.prod: azure
 ---
@@ -51,7 +51,7 @@ For .NET applications, the simplest way to work with a managed identity is throu
     // Request an access token for SqlConnection
     sqlConnection = new SqlConnection(YourConnectionString)) 
     { 
-        sqlConnection.AccessToken = azureServiceTokenProvider.GetAccessTokenAsync("https://database.windows.net"); 
+        sqlConnection.AccessToken = await azureServiceTokenProvider.GetAccessTokenAsync("https://database.windows.net"); 
         sqlConnection.Open(); 
     } 
     ```

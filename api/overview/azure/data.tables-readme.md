@@ -1,17 +1,14 @@
 ---
 title: Azure Tables client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Data.Tables, tables
-author: maggiepint
-ms.author: magpint
-ms.date: 06/10/2021
-ms.topic: article
-ms.prod: azure
-ms.technology: azure
+author: christothes
+ms.author: chriss
+ms.date: 06/08/2022
+ms.topic: reference
 ms.devlang: dotnet
 ms.service: tables
 ---
-
-# Azure Tables client library for .NET - Version 12.0.1 
+# Azure Tables client library for .NET - Version 12.6.0 
 
 
 Azure Table storage is a service that stores large amounts of structured NoSQL data in the cloud, providing 
@@ -27,15 +24,15 @@ Azure Cosmos DB provides a Table API for applications that are written for Azure
 
 The Azure Tables client library can seamlessly target either Azure Table storage or Azure Cosmos DB table service endpoints with no code changes.
 
-[Source code][table_client_src] | [Package (NuGet)][table_client_nuget_package] | [API reference documentation][api_reference] | [Samples][table_client_samples]
+[Source code][table_client_src] | [Package (NuGet)][table_client_nuget_package] | [API reference documentation][api_reference] | [Samples][table_client_samples] | [Change Log][table_change_log]
 
 ## Getting started
 
 ### Install the package
 Install the Azure Tables client library for .NET with [NuGet][table_client_nuget_package]:
 
-```
-dotnet add package Azure.Data.Tables --prerelease
+```dotnetcli
+dotnet add package Azure.Data.Tables
 ```
 
 ### Prerequisites
@@ -65,7 +62,7 @@ az cosmosdb table create --name MyTableName --resource-group MyResourceGroup --a
 
 ### Authenticate the Client
 
-Learn more about options for authentication _(including Connection Strings, Shared Key, and Shared Key Signatures)_ [in our samples.](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.0.1/sdk/tables/Azure.Data.Tables/samples/Sample0Auth.md)
+Learn more about options for authentication _(including Connection Strings, Shared Key, Shared Key Signatures, and TokenCredentials)_ [in our samples.](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.6.0/sdk/tables/Azure.Data.Tables/samples/Sample0Auth.md)
 
 ## Key concepts
 
@@ -86,12 +83,12 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.0.1/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.0.1/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.0.1/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.0.1/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.0.1/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.0.1/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.6.0/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.6.0/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.6.0/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.6.0/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.6.0/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.6.0/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
@@ -110,7 +107,7 @@ We guarantee that all client instance methods are thread-safe and independent of
 First, we need to construct a `TableServiceClient`.
 
 ```C# Snippet:TablesSample1CreateClient
-// Construct a new <see cref="TableServiceClient" /> using a <see cref="TableSharedKeyCredential" />.
+// Construct a new "TableServiceClient using a TableSharedKeyCredential.
 
 var serviceClient = new TableServiceClient(
     new Uri(storageUri),
@@ -121,9 +118,9 @@ var serviceClient = new TableServiceClient(
 Next, we can create a new table.
 
 ```C# Snippet:TablesSample1CreateTable
-// Create a new table. The <see cref="TableItem" /> class stores properties of the created table.
+// Create a new table. The TableItem class stores properties of the created table.
 string tableName = "OfficeSupplies1p1";
-TableItem table = serviceClient.CreateTable(tableName);
+TableItem table = serviceClient.CreateTableIfNotExists(tableName);
 Console.WriteLine($"The created table's name is {table.Name}.");
 ```
 
@@ -161,7 +158,6 @@ To interact with table entities, we must first construct a `TableClient`.
 
 ```C# Snippet:TablesSample2CreateTableWithTableClient
 // Construct a new <see cref="TableClient" /> using a <see cref="TableSharedKeyCredential" />.
-
 var tableClient = new TableClient(
     new Uri(storageUri),
     tableName,
@@ -177,7 +173,6 @@ Let's define a new `TableEntity` so that we can add it to the table.
 
 ```C# Snippet:TablesSample2CreateDictionaryEntity
 // Make a dictionary entity by defining a <see cref="TableEntity">.
-
 var entity = new TableEntity(partitionKey, rowKey)
 {
     { "Product", "Marker Set" },
@@ -192,7 +187,6 @@ Using the `TableClient` we can now add our new entity to the table.
 
 ```C# Snippet:TablesSample2AddEntity
 // Add the newly created entity.
-
 tableClient.AddEntity(entity);
 ```
 
@@ -204,7 +198,6 @@ To inspect the set of existing table entities, we can query the table using an O
 Pageable<TableEntity> queryResultsFilter = tableClient.Query<TableEntity>(filter: $"PartitionKey eq '{partitionKey}'");
 
 // Iterate the <see cref="Pageable"> to access all queried entities.
-
 foreach (TableEntity qEntity in queryResultsFilter)
 {
     Console.WriteLine($"{qEntity.GetString("Product")}: {qEntity.GetDouble("Price")}");
@@ -216,8 +209,6 @@ Console.WriteLine($"The query returned {queryResultsFilter.Count()} entities.");
 If you prefer LINQ style query expressions, we can query the table using that syntax as well.
 
 ```C# Snippet:TablesSample4QueryEntitiesExpression
-// Use the <see cref="TableClient"> to query the table using a filter expression.
-
 double priceCutOff = 6.00;
 Pageable<OfficeSupplyEntity> queryResultsLINQ = tableClient.Query<OfficeSupplyEntity>(ent => ent.Price >= priceCutOff);
 ```
@@ -228,7 +219,6 @@ If we no longer need our new table entity, it can be deleted.
 
 ```C# Snippet:TablesSample2DeleteEntity
 // Delete the entity given the partition and row key.
-
 tableClient.DeleteEntity(partitionKey, rowKey);
 ```
 
@@ -294,14 +284,15 @@ For more information see the [Code of Conduct FAQ][coc_faq] or contact
 [opencode@microsoft.com][coc_contact] with any additional questions or comments.
 
 <!-- LINKS -->
-[tables_rest]: https://docs.microsoft.com/rest/api/storageservices/table-service-rest-api
-[azure_cli]: https://docs.microsoft.com/cli/azure
-[azure_sub]: https://azure.microsoft.com/free/
+[tables_rest]: /rest/api/storageservices/table-service-rest-api
+[azure_cli]: /cli/azure
+[azure_sub]: https://azure.microsoft.com/free/dotnet/
 [table_client_nuget_package]: https://www.nuget.org/packages?q=Azure.Data.Tables
-[table_client_samples]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.0.1/sdk/tables/Azure.Data.Tables/samples
-[table_client_src]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.0.1/sdk/tables/Azure.Data.Tables/src
-[api_reference]: https://docs.microsoft.com/dotnet/api/overview/azure/data.tables-readme-pre?view=azure-dotnet-preview
-[logging]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.0.1/sdk/core/Azure.Core/samples/Diagnostics.md
+[table_client_samples]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.6.0/sdk/tables/Azure.Data.Tables/samples
+[table_client_src]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.6.0/sdk/tables/Azure.Data.Tables/src
+[table_change_log]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.6.0/sdk/tables/Azure.Data.Tables/CHANGELOG.md
+[api_reference]: /dotnet/api/overview/azure/data.tables-readme-pre?view=azure-dotnet-preview
+[logging]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.Tables_12.6.0/sdk/core/Azure.Core/samples/Diagnostics.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/

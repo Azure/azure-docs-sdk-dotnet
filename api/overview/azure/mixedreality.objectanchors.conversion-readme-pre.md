@@ -1,22 +1,19 @@
 ---
 title: Azure Object Anchors client library for .NET
-keywords: Azure, dotnet, SDK, API, Azure.MixedReality.ObjectAnchors.Conversion, mixedreality
-author: maggiepint
-ms.author: magpint
-ms.date: 05/11/2021
-ms.topic: article
-ms.prod: azure
-ms.technology: azure
+keywords: Azure, dotnet, SDK, API, Azure.MixedReality.ObjectAnchors.Conversion, objectanchors
+author: AlexGhiondea
+ms.author: AlexGhiondea
+ms.date: 05/11/2022
+ms.topic: reference
 ms.devlang: dotnet
-ms.service: mixedreality
+ms.service: objectanchors
 ---
-
-# Azure Object Anchors client library for .NET - Version 0.2.0-beta.1 
+# Azure Object Anchors client library for .NET - Version 0.3.0-beta.3 
 
 
 Azure Object Anchors enables an application to detect an object in the physical world using a 3D model and estimate its 6-DoF pose. This package supports the conversion of an existing 3D asset into a form that can be used by the Object Anchors runtime to detect physical objects.
 
-[Source code](https://github.com/Azure/azure-sdk-for-net/tree/Azure.MixedReality.ObjectAnchors.Conversion_0.2.0-beta.1/sdk/objectanchors/Azure.MixedReality.ObjectAnchors.Conversion) | NuGet
+[Source code](https://github.com/Azure/azure-sdk-for-net/tree/Azure.MixedReality.ObjectAnchors.Conversion_0.3.0-beta.3/sdk/objectanchors/Azure.MixedReality.ObjectAnchors.Conversion/src) | [Package (NuGet)](https://www.nuget.org/packages/Azure.MixedReality.ObjectAnchors.Conversion/)
 
 - [Azure Object Anchors client library for .NET](#azure-object-anchors-client-library-for-net)
   - [Getting started](#getting-started)
@@ -37,18 +34,10 @@ Azure Object Anchors enables an application to detect an object in the physical 
 
 ### Install the package
 
-Install the Azure Object Anchors client library for .NET using one of the following methods.
-
-From Visual Studio Package Manager:
-
-```powershell
-Install-Package Azure.MixedReality.ObjectAnchors.Conversion
-```
-
-From .NET CLI
+Install the Azure Object Anchors client library for .NET with [NuGet](https://www.nuget.org/):
 
 ```dotnetcli
-dotnet add package Azure.MixedReality.ObjectAnchors.Conversion
+dotnet add package Azure.MixedReality.ObjectAnchors.Conversion --prerelease
 ```
 
 Add a package reference:
@@ -59,7 +48,7 @@ Add a package reference:
 
 ### Prerequisites
 
-- You must have an [Azure subscription](https://azure.microsoft.com/free/).
+- You must have an [Azure subscription](https://azure.microsoft.com/free/dotnet/).
 - You must have an [Azure Object Anchors](https://review.docs.microsoft.com/azure/object-anchors/) account.
 
 ### Authenticate the client
@@ -76,7 +65,7 @@ Mixed Reality services support a few different forms of authentication:
   - Otherwise, we recommend that you obtain Azure AD tokens from a web service that supports your app. We recommend this
     method for production applications because it allows you to avoid embedding the credentials for access to the Object Anchors asset conversion service in your client application.
 
-See [here](https://docs.microsoft.com/azure/spatial-anchors/concepts/authentication) for detailed instructions and information.
+See [here](/azure/spatial-anchors/concepts/authentication) for detailed instructions and information.
 
 ## Key concepts
 
@@ -99,7 +88,7 @@ ObjectAnchorsConversionClient client = new ObjectAnchorsConversionClient(account
 
 AssetUploadUriResult uploadUriResult = await client.GetAssetUploadUriAsync();
 
-Uri uploadedInputAssetUri = uploadUriResult.UploadUri
+Uri uploadedInputAssetUri = uploadUriResult.UploadUri;
 
 BlobClient blobClient = new BlobClient(uploadedInputAssetUri);
 
@@ -144,8 +133,8 @@ using (FileStream file = File.OpenWrite(localFileDownloadPath))
 
 ## Troubleshooting
 
-- See [Error Handling](https://github.com/Azure/azure-sdk-for-net/blob/Azure.MixedReality.ObjectAnchors.Conversion_0.2.0-beta.1/sdk/identity/Azure.Identity/README.md#error-handling) for Azure.Identity.
-- See [Logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.MixedReality.ObjectAnchors.Conversion_0.2.0-beta.1/sdk/identity/Azure.Identity/README.md#logging) for Azure.Identity.
+- See [Error Handling](https://github.com/Azure/azure-sdk-for-net/blob/Azure.MixedReality.ObjectAnchors.Conversion_0.3.0-beta.3/sdk/identity/Azure.Identity/README.md#error-handling) for Azure.Identity.
+- See [Logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.MixedReality.ObjectAnchors.Conversion_0.3.0-beta.3/sdk/identity/Azure.Identity/README.md#logging) for Azure.Identity.
 
 ## Next steps
 

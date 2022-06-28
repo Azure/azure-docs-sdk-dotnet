@@ -1,10 +1,10 @@
 ---
 title: 
 keywords: Azure, .net, SDK, API, Microsoft.Azure.Batch, batch
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 09/29/2020
-ms.topic: article
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: .net
@@ -14,7 +14,7 @@ ms.service: batch
 # License notes
 The Azure Batch C# client is now under the MIT license. Prior to March 10 2017 it was under the Apache 2.0 license.
 
-# Azure Batch SDK developer guide
+## Azure Batch SDK developer guide
 `Microsoft.Azure.Batch.sln` is your one stop shop for all things related to the Azure Batch C# client library. This solution file contains all of the projects affiliated with the Azure Batch client (including testing and tooling).
 
 ## Changing the Azure Batch client

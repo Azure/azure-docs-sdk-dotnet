@@ -1,10 +1,10 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.Core.Spatial.NewtonsoftJson, core
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 01/08/2021
-ms.topic: article
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet

@@ -1,10 +1,10 @@
 ---
 title: Azure Core AMQP shared client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Core.Amqp, core
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 04/06/2021
-ms.topic: article
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet

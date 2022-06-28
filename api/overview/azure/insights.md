@@ -38,13 +38,13 @@ client.TrackEvent("MyCustomEvent");
 ```
 
 > [!div class="nextstepaction"]
-> [Explore the client APIs](/dotnet/api/overview/azure/insights/client)
+> [Explore the client APIs](/dotnet/api/overview/azure/applicationinsights/client)
 
 
 
 ## Samples
 
-- [Application Insights Analytics with OpenSchema](https://azure.microsoft.com/resources/samples/guidance-appinsights-openschema/)
+- [Application Insights Analytics with OpenSchema](https://github.com/Azure-Samples/guidance-appinsights-openschema)
 
 View the [complete list](https://azure.microsoft.com/resources/samples/?service=application-insights&platform=dotnet) of Azure Application Insights samples.
 

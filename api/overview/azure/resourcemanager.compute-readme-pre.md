@@ -1,20 +1,22 @@
 ---
 title: Azure Compute Management client library for .NET
-keywords: Azure, .net, SDK, API, Azure.ResourceManager.Compute, 
-author: maggiepint
-ms.author: magpint
-ms.date: 06/22/2020
-ms.topic: article
-ms.prod: azure
-ms.technology: azure
-ms.devlang: .net
-ms.service: 
+keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.Compute, compute
+author: bilaakpan-ms
+ms.author: saakpan
+ms.date: 06/14/2022
+ms.topic: reference
+ms.devlang: dotnet
+ms.service: compute
 ---
+# Azure Compute Management client library for .NET - Version 1.0.0-beta.9 
 
-# Azure Compute Management client library for .NET - Version 1.0.0-preview.1 
 
+This package follows the [new Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html),which provide core capabilities that are shared amongst all Azure SDKs, including:
 
-This package follows the [new Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html) which provide a number of core capabilities that are shared amongst all Azure SDKs, including the intuitive Azure Identity library, an HTTP Pipeline with custom policies, error-handling, distributed tracing, and much more.
+- The intuitive Azure Identity library.
+- An HTTP pipeline with custom policies.
+- Error handling.
+- Distributed tracing.
 
 ## Getting started 
 
@@ -22,52 +24,197 @@ This package follows the [new Azure SDK guidelines](https://azure.github.io/azur
 
 Install the Azure Compute management library for .NET with [NuGet](https://www.nuget.org/):
 
-```PowerShell
-Install-Package Azure.ResourceManager.Compute -Version 1.0.0-preview.1 
+```dotnetcli
+dotnet add package Azure.ResourceManager.Compute --prerelease
 ```
 
 ### Prerequisites
+Set up a way to authenticate to Azure with Azure Identity.
 
-* You must have an [Azure subscription](https://azure.microsoft.com/free/)
+Some options are:
+- Through the [Azure CLI Login](/cli/azure/authenticate-azure-cli).
+- Via [Visual Studio](/dotnet/api/overview/azure/identity-readme?view=azure-dotnet#authenticating-via-visual-studio).
+- Setting [Environment Variables](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.0.0-beta.9/sdk/resourcemanager/Azure.ResourceManager/docs/AuthUsingEnvironmentVariables.md).
+
+More information and different authentication approaches using Azure Identity can be found in [this document](/dotnet/api/overview/azure/identity-readme?view=azure-dotnet).
 
 ### Authenticate the Client
 
-To create an authenticated client and start interacting with Azure resources, please see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/master/doc/mgmt_preview_quickstart.md)
+The default option to create an authenticated client is to use `DefaultAzureCredential`. Since all management APIs go through the same endpoint, in order to interact with resources, only one top-level `ArmClient` has to be created.
+
+To authenticate to Azure and create an `ArmClient`, do the following:
+
+```C# Snippet:Readme_AuthClient
+using Azure.Core;
+using Azure.Identity;
+using Azure.ResourceManager;
+
+// Code omitted for brevity
+
+ArmClient armClient = new ArmClient(new DefaultAzureCredential());
+```
+
+Additional documentation for the `Azure.Identity.DefaultAzureCredential` class can be found in [this document](/dotnet/api/azure.identity.defaultazurecredential).
 
 ## Key concepts
 
-Key concepts of the Azure .NET SDK can be found [here](https://azure.github.io/azure-sdk/dotnet_introduction.html)
-
-## Documentation
-
-Documentation is available to help you learn how to use this package
-
-- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/master/doc/mgmt_preview_quickstart.md)
-- [API References](https://docs.microsoft.com/dotnet/api/?view=azure-dotnet)
-- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/identity/Azure.Identity/README.md)
+Key concepts of the Azure .NET SDK can be found [here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.0.0-beta.9/sdk/resourcemanager/Azure.ResourceManager/README.md#key-concepts)
 
 ## Examples
 
-Code samples for using the management library for .NET can be found in the following locations
-- [.NET Management Library Code Samples](https://docs.microsoft.com/samples/browse/?branch=master&languages=csharp&term=managing%20using%20Azure%20.NET%20SDK)
+### Create an availability set
+
+Before creating an availability set, we need to have a resource group.
+
+```C# Snippet:Readme_GetResourceGroupCollection
+ArmClient armClient = new ArmClient(new DefaultAzureCredential());
+SubscriptionResource subscription = await armClient.GetDefaultSubscriptionAsync();
+ResourceGroupCollection rgCollection = subscription.GetResourceGroups();
+// With the collection, we can create a new resource group with an specific name
+string rgName = "myRgName";
+AzureLocation location = AzureLocation.WestUS2;
+ArmOperation<ResourceGroupResource> lro = await rgCollection.CreateOrUpdateAsync(WaitUntil.Completed, rgName, new ResourceGroupData(location));
+ResourceGroupResource resourceGroup = lro.Value;
+```
+
+```C# Snippet:Managing_Availability_Set_CreateAnAvailabilitySet
+AvailabilitySetCollection availabilitySetCollection = resourceGroup.GetAvailabilitySets();
+string availabilitySetName = "myAvailabilitySet";
+AvailabilitySetData input = new AvailabilitySetData(location);
+ArmOperation<AvailabilitySetResource> lro = await availabilitySetCollection.CreateOrUpdateAsync(WaitUntil.Completed, availabilitySetName, input);
+AvailabilitySetResource availabilitySet = lro.Value;
+```
+
+### Get all availability set in a resource group
+
+```C# Snippet:Managing_Availability_Set_GetAllAvailabilitySets
+// First, initialize the ArmClient and get the default subscription
+ArmClient armClient = new ArmClient(new DefaultAzureCredential());
+// Now we get a ResourceGroupResource collection for that subscription
+SubscriptionResource subscription = await armClient.GetDefaultSubscriptionAsync();
+ResourceGroupCollection rgCollection = subscription.GetResourceGroups();
+
+string rgName = "myRgName";
+ResourceGroupResource resourceGroup = await rgCollection.GetAsync(rgName);
+// First, we get the availability set collection from the resource group
+AvailabilitySetCollection availabilitySetCollection = resourceGroup.GetAvailabilitySets();
+// With GetAllAsync(), we can get a list of the availability sets in the collection
+AsyncPageable<AvailabilitySetResource> response = availabilitySetCollection.GetAllAsync();
+await foreach (AvailabilitySetResource availabilitySet in response)
+{
+    Console.WriteLine(availabilitySet.Data.Name);
+}
+```
+
+### Update an availability set
+
+```C# Snippet:Managing_Availability_Set_UpdateAnAvailabilitySet
+// First, initialize the ArmClient and get the default subscription
+ArmClient armClient = new ArmClient(new DefaultAzureCredential());
+// Now we get a ResourceGroupResource collection for that subscription
+SubscriptionResource subscription = await armClient.GetDefaultSubscriptionAsync();
+ResourceGroupCollection rgCollection = subscription.GetResourceGroups();
+
+// With the collection, we can create a new resource group with an specific name
+string rgName = "myRgName";
+ResourceGroupResource resourceGroup = await rgCollection.GetAsync(rgName);
+AvailabilitySetCollection availabilitySetCollection = resourceGroup.GetAvailabilitySets();
+string availabilitySetName = "myAvailabilitySet";
+AvailabilitySetResource availabilitySet = await availabilitySetCollection.GetAsync(availabilitySetName);
+// availabilitySet is an AvailabilitySetResource instance created above
+AvailabilitySetPatch update = new AvailabilitySetPatch()
+{
+    PlatformFaultDomainCount = 3
+};
+AvailabilitySetResource updatedAvailabilitySet = await availabilitySet.UpdateAsync(update);
+```
+
+### Delete an availability set
+
+```C# Snippet:Managing_Availability_Set_DeleteAnAvailabilitySet
+// First, initialize the ArmClient and get the default subscription
+ArmClient armClient = new ArmClient(new DefaultAzureCredential());
+// Now we get a ResourceGroupResource collection for that subscription
+SubscriptionResource subscription = await armClient.GetDefaultSubscriptionAsync();
+ResourceGroupCollection rgCollection = subscription.GetResourceGroups();
+
+// With the collection, we can create a new resource group with an specific name
+string rgName = "myRgName";
+ResourceGroupResource resourceGroup = await rgCollection.GetAsync(rgName);
+AvailabilitySetCollection availabilitySetCollection = resourceGroup.GetAvailabilitySets();
+string availabilitySetName = "myAvailabilitySet";
+AvailabilitySetResource availabilitySet = await availabilitySetCollection.GetAsync(availabilitySetName);
+// delete the availability set
+await availabilitySet.DeleteAsync(WaitUntil.Completed);
+```
+
+### Check if availability set exists
+
+If you just want to verify if the availability set exists, you can use the function `CheckIfExists`.
+
+```C# Snippet:Managing_Availability_Set_CheckIfExistsForAvailabilitySet
+ArmClient armClient = new ArmClient(new DefaultAzureCredential());
+SubscriptionResource subscription = await armClient.GetDefaultSubscriptionAsync();
+ResourceGroupCollection rgCollection = subscription.GetResourceGroups();
+
+string rgName = "myRgName";
+ResourceGroupResource resourceGroup = await rgCollection.GetAsync(rgName);
+string availabilitySetName = "myAvailabilitySet";
+bool exists = await resourceGroup.GetAvailabilitySets().ExistsAsync(availabilitySetName);
+
+if (exists)
+{
+    Console.WriteLine($"Availability Set {availabilitySetName} exists.");
+}
+else
+{
+    Console.WriteLine($"Availability Set {availabilitySetName} does not exist.");
+}
+```
+
+### Add a tag to an availability set
+
+```C# Snippet:Managing_Availability_Set_AddTagAvailabilitySet
+// First, initialize the ArmClient and get the default subscription
+ArmClient armClient = new ArmClient(new DefaultAzureCredential());
+// Now we get a ResourceGroupResource collection for that subscription
+SubscriptionResource subscription = await armClient.GetDefaultSubscriptionAsync();
+ResourceGroupCollection rgCollection = subscription.GetResourceGroups();
+
+string rgName = "myRgName";
+ResourceGroupResource resourceGroup = await rgCollection.GetAsync(rgName);
+AvailabilitySetCollection availabilitySetCollection = resourceGroup.GetAvailabilitySets();
+string availabilitySetName = "myAvailabilitySet";
+AvailabilitySetResource availabilitySet = await availabilitySetCollection.GetAsync(availabilitySetName);
+// add a tag on this availabilitySet
+AvailabilitySetResource updatedAvailabilitySet = await availabilitySet.AddTagAsync("key", "value");
+```
+
+For more detailed examples, take a look at [samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.ResourceManager.Compute_1.0.0-beta.9/sdk/compute/Azure.ResourceManager.Compute/samples) we have available.
 
 ## Troubleshooting
 
--   File an issue via [Github
-    Issues](https://github.com/Azure/azure-sdk-for-net/issues)
--   Check [previous
+-   If you find a bug or have a suggestion, file an issue via [GitHub issues](https://github.com/Azure/azure-sdk-for-net/issues) and make sure you add the "Preview" label to the issue.
+-   If you need help, check [previous
     questions](https://stackoverflow.com/questions/tagged/azure+.net)
-    or ask new ones on Stack Overflow using azure and .net tags.
-
+    or ask new ones on StackOverflow using azure and .NET tags.
+-   If having trouble with authentication, go to [DefaultAzureCredential documentation](/dotnet/api/azure.identity.defaultazurecredential?view=azure-dotnet)
 
 ## Next steps
 
-For more information on Azure SDK, please refer to [this website](https://azure.github.io/azure-sdk/)
+### More sample code
+
+- [Managing Disks](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.0.0-beta.9/sdk/compute/Azure.ResourceManager.Compute/samples/Sample1_ManagingDisks.md)
+- [Managing Virtual Machines](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.0.0-beta.9/sdk/compute/Azure.ResourceManager.Compute/samples/Sample2_ManagingVirtualMachines.md)
+
+### Additional Documentation
+
+For more information on Azure SDK, please refer to [this website](https://azure.github.io/azure-sdk/).
 
 ## Contributing
 
-For details on contributing to this repository, see the contributing
-guide.
+For details on contributing to this repository, see the [contributing
+guide][cg].
 
 This project welcomes contributions and suggestions. Most contributions
 require you to agree to a Contributor License Agreement (CLA) declaring
@@ -80,13 +227,12 @@ whether you need to provide a CLA and decorate the PR appropriately
 bot. You will only need to do this once across all repositories using
 our CLA.
 
-This project has adopted the Microsoft Open Source Code of Conduct. For
-more information see the Code of Conduct FAQ or contact
+This project has adopted the [Microsoft Open Source Code of Conduct][coc]. For
+more information see the [Code of Conduct FAQ][coc_faq] or contact
 <opencode@microsoft.com> with any additional questions or comments.
 
 <!-- LINKS -->
-[style-guide-msft]: https://docs.microsoft.com/style-guide/capitalization
-[style-guide-cloud]: https://worldready.cloudapp.net/Styleguide/Read?id=2696&topicid=25357
-
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Ftemplate%2FAzure.Template%2FREADME.png)
+[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.0.0-beta.9/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
+[coc]: https://opensource.microsoft.com/codeofconduct/
+[coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 

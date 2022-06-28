@@ -7,6 +7,7 @@
   <AssemblyInfo>
     <AssemblyName>Azure.AI.MetricsAdvisor</AssemblyName>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -14,11 +15,12 @@
   <Interfaces />
   <Docs>
     <summary>
-            Defines how a <see cref="T:Azure.AI.MetricsAdvisor.Models.DataFeed" /> structures the data ingested from the data source in terms
-            of metrics and dimensions. This schema defines how many time series are generated for anomaly
-            detection.
+            Specifies which values, such as metrics and dimensions, will be ingested from the <see cref="T:Azure.AI.MetricsAdvisor.Administration.DataFeedSource" />.
             </summary>
-    <remarks>To be added.</remarks>
+    <remarks>
+            At least one metric must be added to <see cref="P:Azure.AI.MetricsAdvisor.Models.DataFeedSchema.MetricColumns" /> when creating a <see cref="T:Azure.AI.MetricsAdvisor.Models.DataFeed" />,
+            otherwise the creation operation will fail. Other properties are optional.
+            </remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -30,6 +32,7 @@
       <AssemblyInfo>
         <AssemblyName>Azure.AI.MetricsAdvisor</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -49,18 +52,20 @@
       <AssemblyInfo>
         <AssemblyName>Azure.AI.MetricsAdvisor</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Collections.Generic.IList&lt;Azure.AI.MetricsAdvisor.Models.DataFeedDimension&gt;</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            The dimensions ingested from the data source. Given a metric, for each set of
-            values this set of dimensions can assume, one time series is generated and
-            monitored in search of anomalies.
+            The dimensions ingested from the data source. Given a metric, for each set of values these dimensions can
+            assume, one time series is generated in the service and monitored in search of anomalies.
             </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            Once the data feed containing this schema is created, this property cannot be changed anymore.
+            </remarks>
         <exception cref="T:System.ArgumentNullException">
           <see cref="P:Azure.AI.MetricsAdvisor.Models.DataFeedSchema.DimensionColumns" /> is null.</exception>
       </Docs>
@@ -75,17 +80,22 @@
       <AssemblyInfo>
         <AssemblyName>Azure.AI.MetricsAdvisor</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Collections.Generic.IList&lt;Azure.AI.MetricsAdvisor.Models.DataFeedMetric&gt;</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            The metrics ingested from the data source. The values of these metrics are
-            monitored in search of anomalies. Cannot be empty.
+            The metrics used to monitor and assess the status of specific business processes. The service will monitor
+            how these values vary over time in search of any anomalous behavior.
             </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            At least one metric must be added to this property when creating a <see cref="T:Azure.AI.MetricsAdvisor.Models.DataFeed" />, otherwise the
+            creation operation will fail. Once the data feed containing this schema is created, this property cannot
+            be changed anymore.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="TimestampColumn">
@@ -98,17 +108,21 @@
       <AssemblyInfo>
         <AssemblyName>Azure.AI.MetricsAdvisor</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            The name of the data source's column with date or string values to be used as timestamp.
-            If not specified, the time when a data point is ingested will be used instead.
+            The name of column of the <see cref="T:Azure.AI.MetricsAdvisor.Administration.DataFeedSource" /> with date or string values to be used as timestamp.
+            If not specified, the value of this property defaults to an empty string, and the start time of each data
+            ingestion will be used instead.
             </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            If set to null during an update operation, this property is set to its default value.
+            </remarks>
       </Docs>
     </Member>
   </Members>

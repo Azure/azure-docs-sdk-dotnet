@@ -1,17 +1,17 @@
 ---
 title: 
 keywords: Azure, .net, SDK, API, System.Memory.Data, 
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 11/04/2020
-ms.topic: article
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: .net
 ms.service: 
 ---
 
-#  System.Memory.Data library for .NET
+#  System.Memory.Data library for .NET (Preview) 
 
 ## Binary Data
  The `BinaryData` type provides a lightweight abstraction for a payload of bytes. It provides convenient helper methods to get out commonly used primitives, such as streams, strings, or bytes. The assumption when converting to and from string is that the encoding is UTF-8.

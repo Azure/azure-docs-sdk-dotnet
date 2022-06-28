@@ -7,6 +7,7 @@
   <AssemblyInfo>
     <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
     <AssemblyVersion>5.1.3.0</AssemblyVersion>
+    <AssemblyVersion>5.2.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>Microsoft.Azure.ServiceBus.ClientEntity</BaseTypeName>
@@ -23,8 +24,30 @@
     </Interface>
   </Interfaces>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>
+             The MessageReceiver can be used to receive messages from Queues and Subscriptions and acknowledge them.
+             </summary>
+    <remarks>
+             The MessageReceiver provides advanced functionality that is not found in the
+             <see cref="T:Microsoft.Azure.ServiceBus.QueueClient" /> or <see cref="T:Microsoft.Azure.ServiceBus.SubscriptionClient" />. For instance,
+             <see cref="M:Microsoft.Azure.ServiceBus.Core.MessageReceiver.ReceiveAsync" />, which allows you to receive messages on demand, but also requires
+             you to manually renew locks using <see cref="M:Microsoft.Azure.ServiceBus.Core.MessageReceiver.RenewLockAsync(Microsoft.Azure.ServiceBus.Message)" />.
+             It uses AMQP protocol to communicate with service.
+             </remarks>
+    <example>
+             Create a new MessageReceiver to receive a message from a Subscription
+             <code>
+             IMessageReceiver messageReceiver = new MessageReceiver(
+                 namespaceConnectionString,
+                 EntityNameHelper.FormatSubscriptionPath(topicName, subscriptionName),
+                 ReceiveMode.PeekLock);
+             </code>
+            
+             Receive a message from the Subscription.
+             <code>
+             var message = await messageReceiver.ReceiveAsync();
+             await messageReceiver.CompleteAsync(message.SystemProperties.LockToken);
+             </code></example>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -37,6 +60,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="connectionStringBuilder" Type="Microsoft.Azure.ServiceBus.ServiceBusConnectionStringBuilder" />
@@ -45,12 +69,15 @@
         <Parameter Name="prefetchCount" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="connectionStringBuilder">To be added.</param>
-        <param name="receiveMode">To be added.</param>
-        <param name="retryPolicy">To be added.</param>
-        <param name="prefetchCount">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="connectionStringBuilder">The <see cref="T:Microsoft.Azure.ServiceBus.ServiceBusConnectionStringBuilder" /> having entity level connection details.</param>
+        <param name="receiveMode">The <see cref="T:Microsoft.Azure.ServiceBus.ReceiveMode" /> used to specify how messages are received. Defaults to PeekLock mode.</param>
+        <param name="retryPolicy">The <see cref="T:Microsoft.Azure.ServiceBus.RetryPolicy" /> that will be used when communicating with Service Bus. Defaults to <see cref="P:Microsoft.Azure.ServiceBus.RetryPolicy.Default" />.</param>
+        <param name="prefetchCount">The <see cref="P:Microsoft.Azure.ServiceBus.Core.MessageReceiver.PrefetchCount" /> that specifies the upper limit of messages this receiver
+            will actively receive regardless of whether a receive operation is pending. Defaults to 0.</param>
+        <summary>
+            Creates a new MessageReceiver from a <see cref="T:Microsoft.Azure.ServiceBus.ServiceBusConnectionStringBuilder" />.
+            </summary>
+        <remarks>Creates a new connection to the entity, which is opened during the first operation.</remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -63,6 +90,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="serviceBusConnection" Type="Microsoft.Azure.ServiceBus.ServiceBusConnection" />
@@ -72,12 +100,15 @@
         <Parameter Name="prefetchCount" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="serviceBusConnection">To be added.</param>
-        <param name="entityPath">To be added.</param>
-        <param name="receiveMode">To be added.</param>
-        <param name="retryPolicy">To be added.</param>
-        <param name="prefetchCount">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="serviceBusConnection">Connection object to the service bus namespace.</param>
+        <param name="entityPath">The path of the entity for this receiver. For Queues this will be the name, but for Subscriptions this will be the path.
+            You can use <see cref="M:Microsoft.Azure.ServiceBus.EntityNameHelper.FormatSubscriptionPath(System.String,System.String)" />, to help create this path.</param>
+        <param name="receiveMode">The <see cref="T:Microsoft.Azure.ServiceBus.ReceiveMode" /> used to specify how messages are received. Defaults to PeekLock mode.</param>
+        <param name="retryPolicy">The <see cref="T:Microsoft.Azure.ServiceBus.RetryPolicy" /> that will be used when communicating with Service Bus. Defaults to <see cref="P:Microsoft.Azure.ServiceBus.RetryPolicy.Default" /></param>
+        <param name="prefetchCount">The <see cref="P:Microsoft.Azure.ServiceBus.Core.MessageReceiver.PrefetchCount" /> that specifies the upper limit of messages this receiver
+            will actively receive regardless of whether a receive operation is pending. Defaults to 0.</param>
+        <summary>
+            Creates a new AMQP MessageReceiver on a given <see cref="P:Microsoft.Azure.ServiceBus.Core.MessageReceiver.ServiceBusConnection" /></summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -91,6 +122,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="connectionString" Type="System.String" />
@@ -100,13 +132,17 @@
         <Parameter Name="prefetchCount" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="connectionString">To be added.</param>
-        <param name="entityPath">To be added.</param>
-        <param name="receiveMode">To be added.</param>
-        <param name="retryPolicy">To be added.</param>
-        <param name="prefetchCount">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="connectionString">Namespace connection string used to communicate with Service Bus. Must not contain Entity details.</param>
+        <param name="entityPath">The path of the entity for this receiver. For Queues this will be the name, but for Subscriptions this will be the path.
+            You can use <see cref="M:Microsoft.Azure.ServiceBus.EntityNameHelper.FormatSubscriptionPath(System.String,System.String)" />, to help create this path.</param>
+        <param name="receiveMode">The <see cref="T:Microsoft.Azure.ServiceBus.ReceiveMode" /> used to specify how messages are received. Defaults to PeekLock mode.</param>
+        <param name="retryPolicy">The <see cref="T:Microsoft.Azure.ServiceBus.RetryPolicy" /> that will be used when communicating with Service Bus. Defaults to <see cref="P:Microsoft.Azure.ServiceBus.RetryPolicy.Default" /></param>
+        <param name="prefetchCount">The <see cref="P:Microsoft.Azure.ServiceBus.Core.MessageReceiver.PrefetchCount" /> that specifies the upper limit of messages this receiver
+            will actively receive regardless of whether a receive operation is pending. Defaults to 0.</param>
+        <summary>
+            Creates a new MessageReceiver from a specified connection string and entity path.
+            </summary>
+        <remarks>Creates a new connection to the entity, which is opened during the first operation.</remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -119,6 +155,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="endpoint" Type="System.String" />
@@ -130,15 +167,18 @@
         <Parameter Name="prefetchCount" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="endpoint">To be added.</param>
-        <param name="entityPath">To be added.</param>
-        <param name="tokenProvider">To be added.</param>
-        <param name="transportType">To be added.</param>
-        <param name="receiveMode">To be added.</param>
-        <param name="retryPolicy">To be added.</param>
-        <param name="prefetchCount">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="endpoint">Fully qualified domain name for Service Bus. Most likely, {yournamespace}.servicebus.windows.net</param>
+        <param name="entityPath">Queue path.</param>
+        <param name="tokenProvider">Token provider which will generate security tokens for authorization.</param>
+        <param name="transportType">Transport type.</param>
+        <param name="receiveMode">Mode of receive of messages. Defaults to <see cref="P:Microsoft.Azure.ServiceBus.Core.MessageReceiver.ReceiveMode" />.PeekLock.</param>
+        <param name="retryPolicy">Retry policy for queue operations. Defaults to <see cref="P:Microsoft.Azure.ServiceBus.RetryPolicy.Default" /></param>
+        <param name="prefetchCount">The <see cref="P:Microsoft.Azure.ServiceBus.Core.MessageReceiver.PrefetchCount" /> that specifies the upper limit of messages this receiver
+            will actively receive regardless of whether a receive operation is pending. Defaults to 0.</param>
+        <summary>
+            Creates a new MessageReceiver from a specified endpoint, entity path, and token provider.
+            </summary>
+        <remarks>Creates a new connection to the entity, which is opened during the first operation.</remarks>
       </Docs>
     </Member>
     <Member MemberName="AbandonAsync">
@@ -154,6 +194,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -163,11 +204,17 @@
         <Parameter Name="propertiesToModify" Type="System.Collections.Generic.IDictionary&lt;System.String,System.Object&gt;" />
       </Parameters>
       <Docs>
-        <param name="lockToken">To be added.</param>
-        <param name="propertiesToModify">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="lockToken">The lock token of the corresponding message to abandon.</param>
+        <param name="propertiesToModify">The properties of the message to modify while abandoning the message.</param>
+        <summary>
+            Abandons a <see cref="T:Microsoft.Azure.ServiceBus.Message" /> using a lock token. This will make the message available again for processing.
+            </summary>
         <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>A lock token can be found in <see cref="P:Microsoft.Azure.ServiceBus.Message.SystemPropertiesCollection.LockToken" />,
+            only when <see cref="P:Microsoft.Azure.ServiceBus.Core.MessageReceiver.ReceiveMode" /> is set to <see cref="F:Microsoft.Azure.ServiceBus.ReceiveMode.PeekLock" />.
+            Abandoning a message will increase the delivery count on the message.
+            This operation can only be performed on messages that were received by this receiver.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="CompleteAsync">
@@ -183,6 +230,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -191,10 +239,16 @@
         <Parameter Name="lockTokens" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" />
       </Parameters>
       <Docs>
-        <param name="lockTokens">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="lockTokens">An <see cref="T:System.Collections.Generic.IEnumerable`1" /> containing the lock tokens of the corresponding messages to complete.</param>
+        <summary>
+            Completes a series of <see cref="T:Microsoft.Azure.ServiceBus.Message" /> using a list of lock tokens. This will delete the message from the service.
+            </summary>
         <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            A lock token can be found in <see cref="P:Microsoft.Azure.ServiceBus.Message.SystemPropertiesCollection.LockToken" />,
+            only when <see cref="P:Microsoft.Azure.ServiceBus.Core.MessageReceiver.ReceiveMode" /> is set to <see cref="F:Microsoft.Azure.ServiceBus.ReceiveMode.PeekLock" />.
+            This operation can only be performed on messages that were received by this receiver.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="CompleteAsync">
@@ -210,6 +264,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -218,10 +273,16 @@
         <Parameter Name="lockToken" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="lockToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="lockToken">The lock token of the corresponding message to complete.</param>
+        <summary>
+            Completes a <see cref="T:Microsoft.Azure.ServiceBus.Message" /> using its lock token. This will delete the message from the service.
+            </summary>
         <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            A lock token can be found in <see cref="P:Microsoft.Azure.ServiceBus.Message.SystemPropertiesCollection.LockToken" />,
+            only when <see cref="P:Microsoft.Azure.ServiceBus.Core.MessageReceiver.ReceiveMode" /> is set to <see cref="F:Microsoft.Azure.ServiceBus.ReceiveMode.PeekLock" />.
+            This operation can only be performed on messages that were received by this receiver.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="DeadLetterAsync">
@@ -237,6 +298,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -246,11 +308,19 @@
         <Parameter Name="propertiesToModify" Type="System.Collections.Generic.IDictionary&lt;System.String,System.Object&gt;" />
       </Parameters>
       <Docs>
-        <param name="lockToken">To be added.</param>
-        <param name="propertiesToModify">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="lockToken">The lock token of the corresponding message to deadletter.</param>
+        <param name="propertiesToModify">The properties of the message to modify while moving to sub-queue.</param>
+        <summary>
+            Moves a message to the deadletter sub-queue.
+            </summary>
         <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            A lock token can be found in <see cref="P:Microsoft.Azure.ServiceBus.Message.SystemPropertiesCollection.LockToken" />,
+            only when <see cref="P:Microsoft.Azure.ServiceBus.Core.MessageReceiver.ReceiveMode" /> is set to <see cref="F:Microsoft.Azure.ServiceBus.ReceiveMode.PeekLock" />.
+            In order to receive a message from the deadletter queue, you will need a new <see cref="T:Microsoft.Azure.ServiceBus.Core.IMessageReceiver" />, with the corresponding path.
+            You can use <see cref="M:Microsoft.Azure.ServiceBus.EntityNameHelper.FormatDeadLetterPath(System.String)" /> to help with this.
+            This operation can only be performed on messages that were received by this receiver.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="DeadLetterAsync">
@@ -266,6 +336,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -276,12 +347,20 @@
         <Parameter Name="deadLetterErrorDescription" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="lockToken">To be added.</param>
-        <param name="deadLetterReason">To be added.</param>
-        <param name="deadLetterErrorDescription">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="lockToken">The lock token of the corresponding message to deadletter.</param>
+        <param name="deadLetterReason">The reason for deadlettering the message.</param>
+        <param name="deadLetterErrorDescription">The error description for deadlettering the message.</param>
+        <summary>
+            Moves a message to the deadletter sub-queue.
+            </summary>
         <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            A lock token can be found in <see cref="P:Microsoft.Azure.ServiceBus.Message.SystemPropertiesCollection.LockToken" />,
+            only when <see cref="P:Microsoft.Azure.ServiceBus.Core.MessageReceiver.ReceiveMode" /> is set to <see cref="F:Microsoft.Azure.ServiceBus.ReceiveMode.PeekLock" />.
+            In order to receive a message from the deadletter queue, you will need a new <see cref="T:Microsoft.Azure.ServiceBus.Core.IMessageReceiver" />, with the corresponding path.
+            You can use <see cref="M:Microsoft.Azure.ServiceBus.EntityNameHelper.FormatDeadLetterPath(System.String)" /> to help with this.
+            This operation can only be performed on messages that were received by this receiver.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="DeferAsync">
@@ -297,6 +376,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -306,11 +386,18 @@
         <Parameter Name="propertiesToModify" Type="System.Collections.Generic.IDictionary&lt;System.String,System.Object&gt;" />
       </Parameters>
       <Docs>
-        <param name="lockToken">To be added.</param>
-        <param name="propertiesToModify">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="lockToken">The lock token of the <see cref="T:Microsoft.Azure.ServiceBus.Message" />.</param>
+        <param name="propertiesToModify">The properties of the message to modify while deferring the message.</param>
+        <summary>Indicates that the receiver wants to defer the processing for the message.</summary>
         <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            A lock token can be found in <see cref="P:Microsoft.Azure.ServiceBus.Message.SystemPropertiesCollection.LockToken" />,
+            only when <see cref="P:Microsoft.Azure.ServiceBus.Core.MessageReceiver.ReceiveMode" /> is set to <see cref="F:Microsoft.Azure.ServiceBus.ReceiveMode.PeekLock" />.
+            In order to receive this message again in the future, you will need to save the <see cref="P:Microsoft.Azure.ServiceBus.Message.SystemPropertiesCollection.SequenceNumber" />
+            and receive it using <see cref="M:Microsoft.Azure.ServiceBus.Core.MessageReceiver.ReceiveDeferredMessageAsync(System.Int64)" />.
+            Deferring messages does not impact message's expiration, meaning that deferred messages can still expire.
+            This operation can only be performed on messages that were received by this receiver.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="LastPeekedSequenceNumber">
@@ -323,14 +410,16 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Int64</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Gets the sequence number of the last peeked message.</summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
+        <altmember cref="M:Microsoft.Azure.ServiceBus.Core.MessageReceiver.PeekAsync" />
       </Docs>
     </Member>
     <Member MemberName="OnAbandonAsync">
@@ -343,6 +432,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -369,6 +459,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -390,6 +481,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -414,6 +506,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -444,6 +537,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -470,6 +564,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -481,7 +576,7 @@
       <Docs>
         <param name="registerHandlerOptions">To be added.</param>
         <param name="callback">To be added.</param>
-        <summary>To be added.</summary>
+        <summary />
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -495,6 +590,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Collections.Generic.IList&lt;Microsoft.Azure.ServiceBus.Message&gt;&gt;</ReturnType>
@@ -521,6 +617,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Collections.Generic.IList&lt;Microsoft.Azure.ServiceBus.Message&gt;&gt;</ReturnType>
@@ -547,6 +644,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Collections.Generic.IList&lt;Microsoft.Azure.ServiceBus.Message&gt;&gt;</ReturnType>
@@ -571,6 +669,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.DateTime&gt;</ReturnType>
@@ -598,12 +697,15 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.TimeSpan</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Duration after which individual operations will timeout.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -621,12 +723,13 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>The path of the entity for this receiver. For Queues this will be the name, but for Subscriptions this will be the path.</summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -644,15 +747,23 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.ServiceBus.Message&gt;</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>
+            Fetches the next active message without changing the state of the receiver or the message source.
+            </summary>
+        <returns>The <see cref="T:Microsoft.Azure.ServiceBus.Message" /> that represents the next message to be read. Returns null when nothing to peek.</returns>
+        <remarks>
+            The first call to <see cref="M:Microsoft.Azure.ServiceBus.Core.MessageReceiver.PeekAsync" /> fetches the first active message for this receiver. Each subsequent call
+            fetches the subsequent message in the entity.
+            Unlike a received message, peeked message will not have lock token associated with it, and hence it cannot be Completed/Abandoned/Deferred/Deadlettered/Renewed.
+            Also, unlike <see cref="M:Microsoft.Azure.ServiceBus.Core.MessageReceiver.ReceiveAsync" />, this method will fetch even Deferred messages (but not Deadlettered message)
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="PeekAsync">
@@ -668,6 +779,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Collections.Generic.IList&lt;Microsoft.Azure.ServiceBus.Message&gt;&gt;</ReturnType>
@@ -677,9 +789,16 @@
       </Parameters>
       <Docs>
         <param name="maxMessageCount">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>
+            Fetches the next batch of active messages without changing the state of the receiver or the message source.
+            </summary>
+        <returns>List of <see cref="T:Microsoft.Azure.ServiceBus.Message" /> that represents the next message to be read. Returns null when nothing to peek.</returns>
+        <remarks>
+            The first call to <see cref="M:Microsoft.Azure.ServiceBus.Core.MessageReceiver.PeekAsync" /> fetches the first active message for this receiver. Each subsequent call
+            fetches the subsequent message in the entity.
+            Unlike a received message, peeked message will not have lock token associated with it, and hence it cannot be Completed/Abandoned/Deferred/Deadlettered/Renewed.
+            Also, unlike <see cref="M:Microsoft.Azure.ServiceBus.Core.MessageReceiver.ReceiveAsync" />, this method will fetch even Deferred messages (but not Deadlettered message)
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="PeekBySequenceNumberAsync">
@@ -695,6 +814,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.ServiceBus.Message&gt;</ReturnType>
@@ -703,9 +823,11 @@
         <Parameter Name="fromSequenceNumber" Type="System.Int64" />
       </Parameters>
       <Docs>
-        <param name="fromSequenceNumber">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="fromSequenceNumber">The sequence number from where to read the message.</param>
+        <summary>
+            Asynchronously reads the next message without changing the state of the receiver or the message source.
+            </summary>
+        <returns>The asynchronous operation that returns the <see cref="T:Microsoft.Azure.ServiceBus.Message" /> that represents the next message to be read.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -722,6 +844,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Collections.Generic.IList&lt;Microsoft.Azure.ServiceBus.Message&gt;&gt;</ReturnType>
@@ -731,10 +854,10 @@
         <Parameter Name="messageCount" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="fromSequenceNumber">To be added.</param>
-        <param name="messageCount">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="fromSequenceNumber">The starting point from which to browse a batch of messages.</param>
+        <param name="messageCount">The number of messages to retrieve.</param>
+        <summary>Peeks a batch of messages.</summary>
+        <returns>A batch of messages peeked.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -751,14 +874,33 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Prefetch speeds up the message flow by aiming to have a message readily available for local retrieval when and before the application asks for one using Receive.
+            Setting a non-zero value prefetches PrefetchCount number of messages.
+            Setting the value to zero turns prefetch off.
+            Defaults to 0.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+          <para>
+            When Prefetch is enabled, the receiver will quietly acquire more messages, up to the PrefetchCount limit, than what the application
+            immediately asks for. A single initial Receive/ReceiveAsync call will therefore acquire a message for immediate consumption
+            that will be returned as soon as available, and the client will proceed to acquire further messages to fill the prefetch buffer in the background.
+            </para>
+          <para>
+            While messages are available in the prefetch buffer, any subsequent ReceiveAsync calls will be immediately satisfied from the buffer, and the buffer is
+            replenished in the background as space becomes available.If there are no messages available for delivery, the receive operation will drain the
+            buffer and then wait or block as expected.
+            </para>
+          <para>Prefetch also works equivalently with the <see cref="M:Microsoft.Azure.ServiceBus.Core.MessageReceiver.RegisterMessageHandler(System.Func{Microsoft.Azure.ServiceBus.Message,System.Threading.CancellationToken,System.Threading.Tasks.Task},System.Func{Microsoft.Azure.ServiceBus.ExceptionReceivedEventArgs,System.Threading.Tasks.Task})" /> APIs.</para>
+          <para>Updates to this value take effect on the next receive call to the service.</para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="ReceiveAsync">
@@ -774,15 +916,18 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.ServiceBus.Message&gt;</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>
+            Receive a message from the entity defined by <see cref="P:Microsoft.Azure.ServiceBus.Core.MessageReceiver.Path" /> using <see cref="P:Microsoft.Azure.ServiceBus.Core.MessageReceiver.ReceiveMode" /> mode.
+            </summary>
+        <returns>The message received. Returns null if no message is found.</returns>
+        <remarks>Operation will time out after duration of <see cref="P:Microsoft.Azure.ServiceBus.ClientEntity.OperationTimeout" /></remarks>
       </Docs>
     </Member>
     <Member MemberName="ReceiveAsync">
@@ -798,6 +943,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Collections.Generic.IList&lt;Microsoft.Azure.ServiceBus.Message&gt;&gt;</ReturnType>
@@ -806,10 +952,12 @@
         <Parameter Name="maxMessageCount" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="maxMessageCount">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="maxMessageCount">The maximum number of messages that will be received.</param>
+        <summary>
+            Receives a maximum of <paramref name="maxMessageCount" /> messages from the entity defined by <see cref="P:Microsoft.Azure.ServiceBus.Core.MessageReceiver.Path" /> using <see cref="P:Microsoft.Azure.ServiceBus.Core.MessageReceiver.ReceiveMode" /> mode.
+            </summary>
+        <returns>List of messages received. Returns null if no message is found.</returns>
+        <remarks>Receiving less than <paramref name="maxMessageCount" /> messages is not an indication of empty entity.</remarks>
       </Docs>
     </Member>
     <Member MemberName="ReceiveAsync">
@@ -825,6 +973,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.ServiceBus.Message&gt;</ReturnType>
@@ -833,10 +982,16 @@
         <Parameter Name="operationTimeout" Type="System.TimeSpan" />
       </Parameters>
       <Docs>
-        <param name="operationTimeout">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="operationTimeout">The time span the client waits for receiving a message before it times out.</param>
+        <summary>
+            Receive a message from the entity defined by <see cref="P:Microsoft.Azure.ServiceBus.Core.MessageReceiver.Path" /> using <see cref="P:Microsoft.Azure.ServiceBus.Core.MessageReceiver.ReceiveMode" /> mode.
+            </summary>
+        <returns>The message received. Returns null if no message is found.</returns>
+        <remarks>
+            The parameter <paramref name="operationTimeout" /> includes the time taken by the receiver to establish a connection
+            (either during the first receive or when connection needs to be re-established). If establishing the connection
+            times out, this will throw <see cref="T:Microsoft.Azure.ServiceBus.ServiceBusTimeoutException" />.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="ReceiveAsync">
@@ -852,6 +1007,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Collections.Generic.IList&lt;Microsoft.Azure.ServiceBus.Message&gt;&gt;</ReturnType>
@@ -861,11 +1017,17 @@
         <Parameter Name="operationTimeout" Type="System.TimeSpan" />
       </Parameters>
       <Docs>
-        <param name="maxMessageCount">To be added.</param>
-        <param name="operationTimeout">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="maxMessageCount">The maximum number of messages that will be received.</param>
+        <param name="operationTimeout">The time span the client waits for receiving a message before it times out.</param>
+        <summary>
+            Receives a maximum of <paramref name="maxMessageCount" /> messages from the entity defined by <see cref="P:Microsoft.Azure.ServiceBus.Core.MessageReceiver.Path" /> using <see cref="P:Microsoft.Azure.ServiceBus.Core.MessageReceiver.ReceiveMode" /> mode.
+            </summary>
+        <returns>List of messages received. Returns null if no message is found.</returns>
+        <remarks>Receiving less than <paramref name="maxMessageCount" /> messages is not an indication of empty entity.
+            The parameter <paramref name="operationTimeout" /> includes the time taken by the receiver to establish a connection
+            (either during the first receive or when connection needs to be re-established). If establishing the connection
+            times out, this will throw <see cref="T:Microsoft.Azure.ServiceBus.ServiceBusTimeoutException" />.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="ReceiveDeferredMessageAsync">
@@ -881,6 +1043,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Collections.Generic.IList&lt;Microsoft.Azure.ServiceBus.Message&gt;&gt;</ReturnType>
@@ -889,10 +1052,14 @@
         <Parameter Name="sequenceNumbers" Type="System.Collections.Generic.IEnumerable&lt;System.Int64&gt;" />
       </Parameters>
       <Docs>
-        <param name="sequenceNumbers">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="sequenceNumbers">An <see cref="T:System.Collections.Generic.IEnumerable`1" /> containing the sequence numbers to receive.</param>
+        <summary>
+            Receives a <see cref="T:System.Collections.Generic.IList`1" /> of deferred messages identified by <paramref name="sequenceNumbers" />.
+            </summary>
+        <returns>Messages identified by sequence number are returned. Returns null if no messages are found.
+            Throws if the messages have not been deferred.</returns>
         <remarks>To be added.</remarks>
+        <altmember cref="M:Microsoft.Azure.ServiceBus.Core.MessageReceiver.DeferAsync(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})" />
       </Docs>
     </Member>
     <Member MemberName="ReceiveDeferredMessageAsync">
@@ -908,6 +1075,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.ServiceBus.Message&gt;</ReturnType>
@@ -916,10 +1084,14 @@
         <Parameter Name="sequenceNumber" Type="System.Int64" />
       </Parameters>
       <Docs>
-        <param name="sequenceNumber">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="sequenceNumber">The sequence number of the message that will be received.</param>
+        <summary>
+            Receives a specific deferred message identified by <paramref name="sequenceNumber" />.
+            </summary>
+        <returns>Message identified by sequence number <paramref name="sequenceNumber" />. Returns null if no such message is found.
+            Throws if the message has not been deferred.</returns>
         <remarks>To be added.</remarks>
+        <altmember cref="M:Microsoft.Azure.ServiceBus.Core.MessageReceiver.DeferAsync(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})" />
       </Docs>
     </Member>
     <Member MemberName="ReceiveMode">
@@ -932,12 +1104,15 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.ServiceBus.ReceiveMode</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the <see cref="T:Microsoft.Azure.ServiceBus.ReceiveMode" /> of the current receiver.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -955,12 +1130,15 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Collections.Generic.IList&lt;Microsoft.Azure.ServiceBus.Core.ServiceBusPlugin&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets a list of currently registered plugins.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -978,6 +1156,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -987,10 +1166,13 @@
         <Parameter Name="messageHandlerOptions" Type="Microsoft.Azure.ServiceBus.MessageHandlerOptions" />
       </Parameters>
       <Docs>
-        <param name="handler">To be added.</param>
-        <param name="messageHandlerOptions">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="handler">A <see cref="T:System.Func`3" /> that processes messages.</param>
+        <param name="messageHandlerOptions">The <see cref="T:Microsoft.Azure.ServiceBus.MessageHandlerOptions" /> options used to configure the settings of the pump.</param>
+        <summary>
+            Receive messages continuously from the entity. Registers a message handler and begins a new thread to receive messages.
+            This handler(<see cref="T:System.Func`3" />) is awaited on every time a new message is received by the receiver.
+            </summary>
+        <remarks>Enable prefetch to speed up the receive rate.</remarks>
       </Docs>
     </Member>
     <Member MemberName="RegisterMessageHandler">
@@ -1006,6 +1188,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1015,9 +1198,12 @@
         <Parameter Name="exceptionReceivedHandler" Type="System.Func&lt;Microsoft.Azure.ServiceBus.ExceptionReceivedEventArgs,System.Threading.Tasks.Task&gt;" />
       </Parameters>
       <Docs>
-        <param name="handler">To be added.</param>
-        <param name="exceptionReceivedHandler">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="handler">A <see cref="T:System.Func`3" /> that processes messages.</param>
+        <param name="exceptionReceivedHandler">A <see cref="T:System.Func`2" /> that is used to notify exceptions.</param>
+        <summary>
+            Receive messages continuously from the entity. Registers a message handler and begins a new thread to receive messages.
+            This handler(<see cref="T:System.Func`3" />) is awaited on every time a new message is received by the receiver.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -1034,6 +1220,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1043,7 +1230,9 @@
       </Parameters>
       <Docs>
         <param name="serviceBusPlugin">To be added.</param>
-        <summary>To be added.</summary>
+        <summary>
+            Registers a <see cref="T:Microsoft.Azure.ServiceBus.Core.ServiceBusPlugin" /> to be used with this receiver.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -1060,6 +1249,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -1069,9 +1259,16 @@
       </Parameters>
       <Docs>
         <param name="message">To be added.</param>
-        <summary>To be added.</summary>
+        <summary>
+            Renews the lock on the message specified by the lock token. The lock will be renewed based on the setting specified on the queue.
+            </summary>
         <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            When a message is received in <see cref="F:Microsoft.Azure.ServiceBus.ReceiveMode.PeekLock" /> mode, the message is locked on the server for this
+            receiver instance for a duration as specified during the Queue/Subscription creation (LockDuration).
+            If processing of the message requires longer than this duration, the lock needs to be renewed.
+            For each renewal, it resets the time the message is locked by the LockDuration set on the Entity.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="RenewLockAsync">
@@ -1087,6 +1284,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.DateTime&gt;</ReturnType>
@@ -1095,10 +1293,17 @@
         <Parameter Name="lockToken" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="lockToken">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="lockToken">Lock token associated with the message.</param>
+        <summary>
+            Renews the lock on the message. The lock will be renewed based on the setting specified on the queue.
+            <returns>New lock token expiry date and time in UTC format.</returns></summary>
         <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            When a message is received in <see cref="F:Microsoft.Azure.ServiceBus.ReceiveMode.PeekLock" /> mode, the message is locked on the server for this
+            receiver instance for a duration as specified during the Queue/Subscription creation (LockDuration).
+            If processing of the message requires longer than this duration, the lock needs to be renewed.
+            For each renewal, it resets the time the message is locked by the LockDuration set on the Entity.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="ServiceBusConnection">
@@ -1114,12 +1319,15 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.ServiceBus.ServiceBusConnection</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Connection object to the service bus namespace.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -1137,6 +1345,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -1145,8 +1354,12 @@
         <Parameter Name="inflightMessageHandlerTasksWaitTimeout" Type="System.TimeSpan" />
       </Parameters>
       <Docs>
-        <param name="inflightMessageHandlerTasksWaitTimeout">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="inflightMessageHandlerTasksWaitTimeout"> is the maximum waitTimeout for inflight message handling tasks.</param>
+        <summary>
+            Unregister message handler from the receiver if there is an active message handler registered. This operation waits for the completion
+            of inflight receive and message handling operations to finish and unregisters future receives on the message handler which previously 
+            registered. 
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -1164,6 +1377,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1172,8 +1386,10 @@
         <Parameter Name="serviceBusPluginName" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="serviceBusPluginName">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="serviceBusPluginName">The <see cref="P:Microsoft.Azure.ServiceBus.Core.ServiceBusPlugin.Name" /> of the plugin to be unregistered.</param>
+        <summary>
+            Unregisters a <see cref="T:Microsoft.Azure.ServiceBus.Core.ServiceBusPlugin" />.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>

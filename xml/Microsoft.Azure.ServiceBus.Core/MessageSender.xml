@@ -7,6 +7,7 @@
   <AssemblyInfo>
     <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
     <AssemblyVersion>5.1.3.0</AssemblyVersion>
+    <AssemblyVersion>5.2.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>Microsoft.Azure.ServiceBus.ClientEntity</BaseTypeName>
@@ -23,8 +24,23 @@
     </Interface>
   </Interfaces>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>
+             The MessageSender can be used to send messages to Queues or Topics.
+             </summary>
+    <remarks>This uses AMQP protocol to communicate with service.</remarks>
+    <example>
+             Create a new MessageSender to send to a Queue
+             <code>
+             IMessageSender messageSender = new MessageSender(
+                 namespaceConnectionString,
+                 queueName)
+             </code>
+            
+             Send message
+             <code>
+             byte[] data = GetData();
+             await messageSender.SendAsync(data);
+             </code></example>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -37,16 +53,19 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="connectionStringBuilder" Type="Microsoft.Azure.ServiceBus.ServiceBusConnectionStringBuilder" />
         <Parameter Name="retryPolicy" Type="Microsoft.Azure.ServiceBus.RetryPolicy" />
       </Parameters>
       <Docs>
-        <param name="connectionStringBuilder">To be added.</param>
-        <param name="retryPolicy">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="connectionStringBuilder">The <see cref="T:Microsoft.Azure.ServiceBus.ServiceBusConnectionStringBuilder" /> having entity level connection details.</param>
+        <param name="retryPolicy">The <see cref="T:Microsoft.Azure.ServiceBus.RetryPolicy" /> that will be used when communicating with Service Bus. Defaults to <see cref="P:Microsoft.Azure.ServiceBus.RetryPolicy.Default" /></param>
+        <summary>
+            Creates a new AMQP MessageSender.
+            </summary>
+        <remarks>Creates a new connection to the entity, which is opened during the first operation.</remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -59,6 +78,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="serviceBusConnection" Type="Microsoft.Azure.ServiceBus.ServiceBusConnection" />
@@ -66,10 +86,11 @@
         <Parameter Name="retryPolicy" Type="Microsoft.Azure.ServiceBus.RetryPolicy" />
       </Parameters>
       <Docs>
-        <param name="serviceBusConnection">To be added.</param>
-        <param name="entityPath">To be added.</param>
-        <param name="retryPolicy">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="serviceBusConnection">Connection object to the service bus namespace.</param>
+        <param name="entityPath">The path of the entity this sender should connect to.</param>
+        <param name="retryPolicy">The <see cref="T:Microsoft.Azure.ServiceBus.RetryPolicy" /> that will be used when communicating with Service Bus. Defaults to <see cref="P:Microsoft.Azure.ServiceBus.RetryPolicy.Default" /></param>
+        <summary>
+            Creates a new AMQP MessageSender on a given <see cref="P:Microsoft.Azure.ServiceBus.Core.MessageSender.ServiceBusConnection" /></summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -83,6 +104,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="connectionString" Type="System.String" />
@@ -90,11 +112,13 @@
         <Parameter Name="retryPolicy" Type="Microsoft.Azure.ServiceBus.RetryPolicy" />
       </Parameters>
       <Docs>
-        <param name="connectionString">To be added.</param>
-        <param name="entityPath">To be added.</param>
-        <param name="retryPolicy">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="connectionString">Namespace connection string used to communicate with Service Bus. Must not contain Entity details.</param>
+        <param name="entityPath">The path of the entity this sender should connect to.</param>
+        <param name="retryPolicy">The <see cref="T:Microsoft.Azure.ServiceBus.RetryPolicy" /> that will be used when communicating with Service Bus. Defaults to <see cref="P:Microsoft.Azure.ServiceBus.RetryPolicy.Default" /></param>
+        <summary>
+            Creates a new AMQP MessageSender.
+            </summary>
+        <remarks>Creates a new connection to the entity, which is opened during the first operation.</remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -107,6 +131,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="serviceBusConnection" Type="Microsoft.Azure.ServiceBus.ServiceBusConnection" />
@@ -115,12 +140,19 @@
         <Parameter Name="retryPolicy" Type="Microsoft.Azure.ServiceBus.RetryPolicy" />
       </Parameters>
       <Docs>
-        <param name="serviceBusConnection">To be added.</param>
-        <param name="entityPath">To be added.</param>
-        <param name="viaEntityPath">To be added.</param>
-        <param name="retryPolicy">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="serviceBusConnection">Connection object to the service bus namespace.</param>
+        <param name="entityPath">The final destination of the message.</param>
+        <param name="viaEntityPath">The first destination of the message.</param>
+        <param name="retryPolicy">The <see cref="T:Microsoft.Azure.ServiceBus.RetryPolicy" /> that will be used when communicating with Service Bus. Defaults to <see cref="P:Microsoft.Azure.ServiceBus.RetryPolicy.Default" /></param>
+        <summary>
+            Creates a ViaMessageSender. This can be used to send messages to a destination entity via another another entity.
+            </summary>
+        <remarks>
+            This is mainly to be used when sending messages in a transaction.
+            When messages need to be sent across entities in a single transaction, this can be used to ensure
+            all the messages land initially in the same entity/partition for local transactions, and then
+            let service bus handle transferring the message to the actual destination.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -133,6 +165,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="endpoint" Type="System.String" />
@@ -142,13 +175,15 @@
         <Parameter Name="retryPolicy" Type="Microsoft.Azure.ServiceBus.RetryPolicy" />
       </Parameters>
       <Docs>
-        <param name="endpoint">To be added.</param>
-        <param name="entityPath">To be added.</param>
-        <param name="tokenProvider">To be added.</param>
-        <param name="transportType">To be added.</param>
-        <param name="retryPolicy">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="endpoint">Fully qualified domain name for Service Bus. Most likely, {yournamespace}.servicebus.windows.net</param>
+        <param name="entityPath">Queue path.</param>
+        <param name="tokenProvider">Token provider which will generate security tokens for authorization.</param>
+        <param name="transportType">Transport type.</param>
+        <param name="retryPolicy">Retry policy for queue operations. Defaults to <see cref="P:Microsoft.Azure.ServiceBus.RetryPolicy.Default" /></param>
+        <summary>
+            Creates a new MessageSender
+            </summary>
+        <remarks>Creates a new connection to the entity, which is opened during the first operation.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CancelScheduledMessageAsync">
@@ -164,6 +199,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -172,8 +208,10 @@
         <Parameter Name="sequenceNumber" Type="System.Int64" />
       </Parameters>
       <Docs>
-        <param name="sequenceNumber">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="sequenceNumber">The <see cref="P:Microsoft.Azure.ServiceBus.Message.SystemPropertiesCollection.SequenceNumber" /> of the message to be cancelled.</param>
+        <summary>
+            Cancels a message that was scheduled.
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -188,13 +226,14 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Closes the connection.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -212,12 +251,15 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.TimeSpan</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Duration after which individual operations will timeout.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -235,12 +277,16 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the entity path of the MessageSender. 
+            In the case of a via-sender, this returns the path of the via entity.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -258,14 +304,18 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Collections.Generic.IList&lt;Microsoft.Azure.ServiceBus.Core.ServiceBusPlugin&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets a list of currently registered plugins for this sender.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
+        <altmember cref="M:Microsoft.Azure.ServiceBus.Core.MessageSender.RegisterPlugin(Microsoft.Azure.ServiceBus.Core.ServiceBusPlugin)" />
       </Docs>
     </Member>
     <Member MemberName="RegisterPlugin">
@@ -281,6 +331,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -289,8 +340,10 @@
         <Parameter Name="serviceBusPlugin" Type="Microsoft.Azure.ServiceBus.Core.ServiceBusPlugin" />
       </Parameters>
       <Docs>
-        <param name="serviceBusPlugin">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="serviceBusPlugin">The <see cref="T:Microsoft.Azure.ServiceBus.Core.ServiceBusPlugin" /> to register.</param>
+        <summary>
+            Registers a <see cref="T:Microsoft.Azure.ServiceBus.Core.ServiceBusPlugin" /> to be used with this sender.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -307,6 +360,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Int64&gt;</ReturnType>
@@ -316,10 +370,12 @@
         <Parameter Name="scheduleEnqueueTimeUtc" Type="System.DateTimeOffset" />
       </Parameters>
       <Docs>
-        <param name="message">To be added.</param>
-        <param name="scheduleEnqueueTimeUtc">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="message">The <see cref="T:Microsoft.Azure.ServiceBus.Message" /> that needs to be scheduled.</param>
+        <param name="scheduleEnqueueTimeUtc">The UTC time at which the message should be available for processing</param>
+        <summary>
+            Schedules a message to appear on Service Bus at a later time.
+            </summary>
+        <returns>The sequence number of the message that was scheduled.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -336,6 +392,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -345,7 +402,9 @@
       </Parameters>
       <Docs>
         <param name="message">To be added.</param>
-        <summary>To be added.</summary>
+        <summary>
+            Sends a message to the entity as described by <see cref="P:Microsoft.Azure.ServiceBus.Core.MessageSender.Path" />.
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -363,6 +422,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -372,7 +432,10 @@
       </Parameters>
       <Docs>
         <param name="messageList">To be added.</param>
-        <summary>To be added.</summary>
+        <summary>
+            Sends a list of messages to the entity as described by <see cref="P:Microsoft.Azure.ServiceBus.Core.MessageSender.Path" />.
+            When called on partitioned entities, messages meant for different partitions cannot be batched together.
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -390,12 +453,15 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.ServiceBus.ServiceBusConnection</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Connection object to the service bus namespace.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -410,12 +476,15 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            In the case of a via-sender, gets the final destination path of the messages; null otherwise.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -433,6 +502,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -441,8 +511,10 @@
         <Parameter Name="serviceBusPluginName" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="serviceBusPluginName">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="serviceBusPluginName">The name <see cref="P:Microsoft.Azure.ServiceBus.Core.ServiceBusPlugin.Name" /> to be unregistered</param>
+        <summary>
+            Unregisters a <see cref="T:Microsoft.Azure.ServiceBus.Core.ServiceBusPlugin" />.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -456,12 +528,15 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.ServiceBus</AssemblyName>
         <AssemblyVersion>5.1.3.0</AssemblyVersion>
+        <AssemblyVersion>5.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            In the case of a via-sender, the message is sent to <see cref="P:Microsoft.Azure.ServiceBus.Core.MessageSender.TransferDestinationPath" /> via <see cref="P:Microsoft.Azure.ServiceBus.Core.MessageSender.ViaEntityPath" />; null otherwise.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
