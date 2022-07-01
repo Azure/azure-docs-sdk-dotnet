@@ -162,30 +162,30 @@ string receiptJson = new StreamReader(receiptResponse.ContentStream).ReadToEnd()
 Console.WriteLine(receiptJson);
 ```
 
-#### Sub-ledgers
+#### Collections
 
-While most use cases will involve one ledger, we provide the sub-ledger feature in case different logical groups of data need to be stored in the same Confidential Ledger.
+While most use cases will involve one ledger, we provide the collections in case different logical groups of data need to be stored in the same Confidential Ledger.
 
-```C# Snippet:SubLedger
+```C# Snippet:Collection
 ledgerClient.PostLedgerEntry(
     RequestContent.Create(
-        new { contents = "Hello from Chris!", subLedgerId = "Chris' messages" }));
+        new { contents = "Hello from Chris!", collectionId = "Chris' messages" }));
 
 ledgerClient.PostLedgerEntry(
     RequestContent.Create(
-        new { contents = "Hello from Allison!", subLedgerId = "Allison's messages" }));
+        new { contents = "Hello from Allison!", collectionId = "Allison's messages" }));
 ```
 
-When no sub-ledger id is specified on method calls, the Confidential Ledger service will assume a constant, service-determined sub-ledger id.
+When no collectionId is specified on method calls, the Confidential Ledger service will assume a constant, service-determined collectionId.
 
-```C# Snippet:NoSubLedgerId
+```C# Snippet:NoCollectionId
 Response postResponse = ledgerClient.PostLedgerEntry(
     RequestContent.Create(
         new { contents = "Hello world!" }));
 postResponse.Headers.TryGetValue(ConfidentialLedgerConstants.Headers.TransactionId, out string transactionId);
-string subLedgerId = JsonDocument.Parse(postResponse.Content)
+string collectionId = JsonDocument.Parse(postResponse.Content)
     .RootElement
-    .GetProperty("subLedgerId")
+    .GetProperty("collectionId")
     .GetString();
 
 // Wait for the entry to be available.
@@ -201,8 +201,8 @@ while (status == "Pending")
 
 Console.WriteLine($"Transaction status: {status}");
 
-// Provide both the transactionId and subLedgerId.
-Response getBySubledgerResponse = ledgerClient.GetLedgerEntry(transactionId, subLedgerId);
+// Provide both the transactionId and collectionId.
+Response getByCollectionResponse = ledgerClient.GetLedgerEntry(transactionId, collectionId);
 
 // Try until the entry is available.
 bool loaded = false;
@@ -210,7 +210,7 @@ JsonElement element = default;
 string contents = null;
 while (!loaded)
 {
-    loaded = JsonDocument.Parse(getBySubledgerResponse.Content)
+    loaded = JsonDocument.Parse(getByCollectionResponse.Content)
         .RootElement
         .TryGetProperty("entry", out element);
     if (loaded)
@@ -219,37 +219,37 @@ while (!loaded)
     }
     else
     {
-        getBySubledgerResponse = ledgerClient.GetLedgerEntry(transactionId, subLedgerId);
+        getByCollectionResponse = ledgerClient.GetLedgerEntry(transactionId, collectionId);
     }
 }
 
 Console.WriteLine(contents); // "Hello world!"
 
 // Now just provide the transactionId.
-getBySubledgerResponse = ledgerClient.GetLedgerEntry(transactionId);
+getByCollectionResponse = ledgerClient.GetLedgerEntry(transactionId);
 
-string subLedgerId2 = JsonDocument.Parse(getBySubledgerResponse.Content)
+string collectionId2 = JsonDocument.Parse(getByCollectionResponse.Content)
     .RootElement
     .GetProperty("entry")
-    .GetProperty("subLedgerId")
+    .GetProperty("collectionId")
     .GetString();
 
-Console.WriteLine($"{subLedgerId} == {subLedgerId2}");
+Console.WriteLine($"{collectionId} == {collectionId2}");
 ```
 
-Ledger entries are retrieved from sub-ledgers. When a transaction id is specified, the returned value is the value contained in the specified sub-ledger at the point in time identified by the transaction id. If no transaction id is specified, the latest available value is returned.
+Ledger entries are retrieved from collections. When a transaction id is specified, the returned value is the value contained in the specified collection at the point in time identified by the transaction id. If no transaction id is specified, the latest available value is returned.
 
 ```C# Snippet:GetEnteryWithNoTransactionId
 Response firstPostResponse = ledgerClient.PostLedgerEntry(
     RequestContent.Create(new { contents = "Hello world 0" }));
 ledgerClient.PostLedgerEntry(
     RequestContent.Create(new { contents = "Hello world 1" }));
-Response subLedgerPostResponse = ledgerClient.PostLedgerEntry(
-    RequestContent.Create(new { contents = "Hello world sub-ledger 0" }),
-    "my sub-ledger");
+Response collectionPostResponse = ledgerClient.PostLedgerEntry(
+    RequestContent.Create(new { contents = "Hello world collection 0" }),
+    "my collection");
 ledgerClient.PostLedgerEntry(
-    RequestContent.Create(new { contents = "Hello world sub-ledger 1" }),
-    "my sub-ledger");
+    RequestContent.Create(new { contents = "Hello world collection 1" }),
+    "my collection");
 
 firstPostResponse.Headers.TryGetValue(ConfidentialLedgerConstants.Headers.TransactionId, out string transactionId);
 
@@ -264,7 +264,7 @@ while (status == "Pending")
         .GetString();
 }
 
-// The ledger entry written at the transactionId in firstResponse is retrieved from the default sub-ledger.
+// The ledger entry written at the transactionId in firstResponse is retrieved from the default collection.
 Response getResponse = ledgerClient.GetLedgerEntry(transactionId);
 
 // Try until the entry is available.
@@ -282,7 +282,7 @@ while (!loaded)
     }
     else
     {
-        getResponse = ledgerClient.GetLedgerEntry(transactionId, subLedgerId);
+        getResponse = ledgerClient.GetLedgerEntry(transactionId, collectionId);
     }
 }
 
@@ -294,13 +294,13 @@ string firstEntryContents = JsonDocument.Parse(getResponse.Content)
 
 Console.WriteLine(firstEntryContents); // "Hello world 0"
 
-// This will return the latest entry available in the default sub-ledger.
+// This will return the latest entry available in the default collection.
 getResponse = ledgerClient.GetCurrentLedgerEntry();
 
 // Try until the entry is available.
 loaded = false;
 element = default;
-string latestDefaultSubLedger = null;
+string latestDefaultCollection = null;
 while (!loaded)
 {
     loaded = JsonDocument.Parse(getResponse.Content)
@@ -308,7 +308,7 @@ while (!loaded)
         .TryGetProperty("contents", out element);
     if (loaded)
     {
-        latestDefaultSubLedger = element.GetString();
+        latestDefaultCollection = element.GetString();
     }
     else
     {
@@ -316,27 +316,27 @@ while (!loaded)
     }
 }
 
-Console.WriteLine($"The latest ledger entry from the default sub-ledger is {latestDefaultSubLedger}"); //"Hello world 1"
+Console.WriteLine($"The latest ledger entry from the default collection is {latestDefaultCollection}"); //"Hello world 1"
 
-// The ledger entry written at subLedgerTransactionId is retrieved from the sub-ledger 'sub-ledger'.
-subLedgerPostResponse.Headers.TryGetValue(ConfidentialLedgerConstants.TransactionIdHeaderName, out string subLedgerTransactionId);
+// The ledger entry written at collectionTransactionId is retrieved from the collection 'collection'.
+collectionPostResponse.Headers.TryGetValue(ConfidentialLedgerConstants.TransactionIdHeaderName, out string collectionTransactionId);
 
 // Wait for the entry to be committed
 status = "Pending";
 while (status == "Pending")
 {
-    statusResponse = ledgerClient.GetTransactionStatus(subLedgerTransactionId);
+    statusResponse = ledgerClient.GetTransactionStatus(collectionTransactionId);
     status = JsonDocument.Parse(statusResponse.Content)
         .RootElement
         .GetProperty("state")
         .GetString();
 }
 
-getResponse = ledgerClient.GetLedgerEntry(subLedgerTransactionId, "my sub-ledger");
+getResponse = ledgerClient.GetLedgerEntry(collectionTransactionId, "my collection");
 // Try until the entry is available.
 loaded = false;
 element = default;
-string subLedgerEntry = null;
+string collectionEntry = null;
 while (!loaded)
 {
     loaded = JsonDocument.Parse(getResponse.Content)
@@ -344,32 +344,32 @@ while (!loaded)
         .TryGetProperty("entry", out element);
     if (loaded)
     {
-        subLedgerEntry = element.GetProperty("contents").GetString();
+        collectionEntry = element.GetProperty("contents").GetString();
     }
     else
     {
-        getResponse = ledgerClient.GetLedgerEntry(subLedgerTransactionId, "my sub-ledger");
+        getResponse = ledgerClient.GetLedgerEntry(collectionTransactionId, "my collection");
     }
 }
 
-Console.WriteLine(subLedgerEntry); // "Hello world sub-ledger 0"
+Console.WriteLine(collectionEntry); // "Hello world collection 0"
 
-// This will return the latest entry available in the sub-ledger.
-getResponse = ledgerClient.GetCurrentLedgerEntry("my sub-ledger");
-string latestSubLedger = JsonDocument.Parse(getResponse.Content)
+// This will return the latest entry available in the collection.
+getResponse = ledgerClient.GetCurrentLedgerEntry("my collection");
+string latestCollection = JsonDocument.Parse(getResponse.Content)
     .RootElement
     .GetProperty("contents")
     .GetString();
 
-Console.WriteLine($"The latest ledger entry from the sub-ledger is {latestSubLedger}"); // "Hello world sub-ledger 1"
+Console.WriteLine($"The latest ledger entry from the collection is {latestCollection}"); // "Hello world collection 1"
 ```
 
 ##### Ranged queries
 
-Ledger entries in a sub-ledger may be retrieved over a range of transaction ids.
+Ledger entries in a collection may be retrieved over a range of transaction ids.
 
 ```C# Snippet:RangedQuery
-ledgerClient.GetLedgerEntries(fromTransactionId: "2.1", toTransactionId: subLedgerTransactionId);
+ledgerClient.GetLedgerEntries(fromTransactionId: "2.1", toTransactionId: collectionTransactionId);
 ```
 
 ### User management
