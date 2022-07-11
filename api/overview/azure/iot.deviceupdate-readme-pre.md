@@ -1,21 +1,19 @@
 ---
 title: Azure Device Update for IoT Hub client library for .NET
-keywords: Azure, dotnet, SDK, API, Azure.IoT.DeviceUpdate, iotdeviceupdate
+keywords: Azure, dotnet, SDK, API, Azure.IoT.DeviceUpdate, deviceupdate
 author: dpokluda
 ms.author: dpokluda
-ms.date: 01/26/2022
+ms.date: 07/11/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
-ms.service: iotdeviceupdate
+ms.service: deviceupdate
 ---
-# Azure Device Update for IoT Hub client library for .NET - Version 1.0.0-beta.3 
+# Azure Device Update for IoT Hub client library for .NET - Version 1.0.0-beta.4 
 
 
 The library provides access to the Device Update for IoT Hub service that enables customers to publish updates for their IoT devices to the cloud, and then deploy these updates to their devices (approve updates to groups of devices managed and provisioned in IoT Hub). 
 
-  [Source code](https://github.com/Azure/azure-sdk-for-net/tree/Azure.IoT.DeviceUpdate_1.0.0-beta.3/sdk/deviceupdate/Azure.IoT.DeviceUpdate/src) | [Package](https://www.nuget.org) | [Product documentation](https://docs.microsoft.com/azure/iot-hub-device-update/understand-device-update)
+  [Source code](https://github.com/Azure/azure-sdk-for-net/tree/Azure.IoT.DeviceUpdate_1.0.0-beta.4/sdk/deviceupdate/Azure.IoT.DeviceUpdate/src) | [Package](https://www.nuget.org) | [Product documentation](/azure/iot-hub-device-update/understand-device-update)
 
 
 ## Getting started
@@ -35,12 +33,12 @@ For the best development experience, developers should use the official Microsof
 Install the Device Update for IoT Hub client library for .NET with [NuGet](https://www.nuget.org/ ):
 
 ```dotnetcli
-dotnet add package Azure.IoT.DeviceUpdate
+dotnet add package Azure.IoT.DeviceUpdate --prerelease
 ```
 
 ### Authenticate the Client
 
-In order to interact with the Device Update for IoT Hub service, you will need to create an instance of a [TokenCredential class](https://docs.microsoft.com/dotnet/api/azure.core.tokencredential?view=azure-dotnet) and pass it to the constructor of your UpdateClient, DeviceClient and DeploymentClient class.
+In order to interact with the Device Update for IoT Hub service, you will need to create an instance of a [TokenCredential class](/dotnet/api/azure.core.tokencredential?view=azure-dotnet) and pass it to the constructor of your DeviceUpdateClient and DeviceManagementClient class.
 
 ## Key concepts
 
@@ -52,13 +50,13 @@ You can learn more about Device Update for IoT Hub by visiting [Device Update fo
 
 ## Examples
 
-You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.IoT.DeviceUpdate_1.0.0-beta.3/sdk/deviceupdate/Azure.IoT.DeviceUpdate/samples).
+You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.IoT.DeviceUpdate_1.0.0-beta.4/sdk/deviceupdate/Azure.IoT.DeviceUpdate/samples).
 
 ## Troubleshooting
 
 All Device Update for IoT Hub service operations will throw a RequestFailedException on failure with helpful ErrorCodes.
 
-For example, if you use the `GetUpdateAsync` operation and the model you are looking for doesn't exist, you can catch that specific [HttpStatusCode](https://docs.microsoft.com/dotnet/api/system.net.httpstatuscode?view=netcore-3.1) to decide the operation that follows in that case.
+For example, if you use the `GetUpdateAsync` operation and the model you are looking for doesn't exist, you can catch that specific [HttpStatusCode](/dotnet/api/system.net.httpstatuscode?view=netcore-3.1) to decide the operation that follows in that case.
 
 ```csharp
 try
@@ -75,11 +73,11 @@ catch (RequestFailedException ex) when (ex.Status == (int)HttpStatusCode.NotFoun
 
 ## Next steps
 
-Get started with our [Device Update for IoT Hub samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.IoT.DeviceUpdate_1.0.0-beta.3/sdk/deviceupdate/Azure.IoT.DeviceUpdate/samples)
+Get started with our [Device Update for IoT Hub samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.IoT.DeviceUpdate_1.0.0-beta.4/sdk/deviceupdate/Azure.IoT.DeviceUpdate/samples)
 
 ## Contributing
 
-This project welcomes contributions and suggestions. Most contributions require you to agree to a Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us the rights to use your contribution. For details, visit <https://cla.microsoft.com.>
+This project welcomes contributions and suggestions. Most contributions require you to agree to a Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us the rights to use your contribution. For details, visit [Contributor License Agreement](https://cla.microsoft.com).
 
 When you submit a pull request, a CLA-bot will automatically determine whether you need to provide a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions provided by the bot. You will only need to do this once across all repos using our CLA.
 
