@@ -212,7 +212,9 @@
         <param name="cancellationToken"> An optional<see cref="T:System.Threading.CancellationToken" /> instance to signal the
             request to cancel the operation.</param>
         <summary>
-              Performs the task needed to clean up resources used by the <see cref="T:Azure.Messaging.ServiceBus.ServiceBusProcessor" />.
+            Performs the task needed to clean up resources used by the <see cref="T:Azure.Messaging.ServiceBus.ServiceBusProcessor" />. Any in-flight message handlers will
+            be awaited. Once all message handling has completed, the underlying links will be closed. After this point, the method will return.
+            This is equivalent to calling <see cref="M:Azure.Messaging.ServiceBus.ServiceBusProcessor.DisposeAsync" />.
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
@@ -249,8 +251,9 @@
       <Parameters />
       <Docs>
         <summary>
-              Performs the task needed to clean up resources used by the <see cref="T:Azure.Messaging.ServiceBus.ServiceBusProcessor" />.
-              This is equivalent to calling <see cref="M:Azure.Messaging.ServiceBus.ServiceBusProcessor.CloseAsync(System.Threading.CancellationToken)" />.
+            Performs the task needed to clean up resources used by the <see cref="T:Azure.Messaging.ServiceBus.ServiceBusProcessor" />. Any in-flight message handlers will
+            be awaited. Once all message handling has completed, the underlying links will be closed. After this point, the method will return.
+            This is equivalent to calling <see cref="M:Azure.Messaging.ServiceBus.ServiceBusProcessor.CloseAsync(System.Threading.CancellationToken)" />.
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
@@ -857,7 +860,11 @@
              Signals the processor to stop processing messaging. Should this method be
              called while the processor is not running, no action is taken. This method
              will not close the underlying receivers, but will cause the receivers to stop
-             receiving. To close the underlying receivers, <see cref="M:Azure.Messaging.ServiceBus.ServiceBusProcessor.CloseAsync(System.Threading.CancellationToken)" /> should be called.
+             receiving. Any in-flight message handlers will be awaited, and this method will not return
+             until all in-flight message handlers have returned. To close the underlying receivers, <see cref="M:Azure.Messaging.ServiceBus.ServiceBusProcessor.CloseAsync(System.Threading.CancellationToken)" />
+             should be called. If <see cref="M:Azure.Messaging.ServiceBus.ServiceBusProcessor.CloseAsync(System.Threading.CancellationToken)" /> is called, the processor cannot be restarted.
+             If you wish to resume processing at some point after calling this method, you can call
+             <see cref="M:Azure.Messaging.ServiceBus.ServiceBusProcessor.StartProcessingAsync(System.Threading.CancellationToken)" />.
              </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
