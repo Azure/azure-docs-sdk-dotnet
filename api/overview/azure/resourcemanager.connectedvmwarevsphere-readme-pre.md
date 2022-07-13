@@ -1,16 +1,14 @@
 ---
 title: Azure ConnectedVMwarevSphere Management client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.ConnectedVMwarevSphere, connectedvmwarevsphere
-author: AlexGhiondea
-ms.author: alexghi
-ms.date: 04/08/2022
+author: pallavit
+ms.author: pallavit
+ms.date: 07/13/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: connectedvmwarevsphere
 ---
-# Azure ConnectedVMwarevSphere Management client library for .NET - Version 1.0.0-beta.4 
+# Azure ConnectedVMwarevSphere Management client library for .NET - Version 1.0.0-beta.5 
 
 
 This package follows the [new Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html) which provide a number of core capabilities that are shared amongst all Azure SDKs, including the intuitive Azure Identity library, an HTTP Pipeline with custom policies, error-handling, distributed tracing, and much more.
@@ -21,8 +19,8 @@ This package follows the [new Azure SDK guidelines](https://azure.github.io/azur
 
 Install the Azure ConnectedVMwarevSphere management library for .NET with [NuGet](https://www.nuget.org/):
 
-```PowerShell
-Install-Package Azure.ResourceManager.ConnectedVMwarevSphere -Version 1.0.0-beta.3
+```dotnetcli
+dotnet add package Azure.ResourceManager.ConnectedVMwarevSphere --prerelease
 ```
 
 ### Prerequisites
@@ -31,7 +29,7 @@ Install-Package Azure.ResourceManager.ConnectedVMwarevSphere -Version 1.0.0-beta
 
 ### Authenticate the Client
 
-To create an authenticated client and start interacting with Azure resources, please see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.ConnectedVMwarevSphere_1.0.0-beta.4/doc/mgmt_preview_quickstart.md)
+To create an authenticated client and start interacting with Azure resources, please see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.ConnectedVMwarevSphere_1.0.0-beta.5/doc/mgmt_preview_quickstart.md)
 
 ## Key concepts
 
@@ -41,14 +39,14 @@ Key concepts of the Azure .NET SDK can be found [here](https://azure.github.io/a
 
 Documentation is available to help you learn how to use this package
 
-- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.ConnectedVMwarevSphere_1.0.0-beta.4/doc/mgmt_preview_quickstart.md)
-- [API References](https://docs.microsoft.com/dotnet/api/?view=azure-dotnet)
-- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.ConnectedVMwarevSphere_1.0.0-beta.4/sdk/identity/Azure.Identity/README.md)
+- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.ConnectedVMwarevSphere_1.0.0-beta.5/doc/mgmt_preview_quickstart.md)
+- [API References](/dotnet/api/?view=azure-dotnet)
+- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.ConnectedVMwarevSphere_1.0.0-beta.5/sdk/identity/Azure.Identity/README.md)
 
 ## Examples
 
 Code samples for using the management library for .NET can be found in the following locations
-- [.NET Management Library Code Samples](https://docs.microsoft.com/samples/browse/?branch=master&languages=csharp&term=managing%20using%20Azure%20.NET%20SDK)
+- [.NET Management Library Code Samples](/samples/browse/?branch=master&languages=csharp&term=managing%20using%20Azure%20.NET%20SDK)
 
 ## Troubleshooting
 
@@ -84,7 +82,7 @@ more information see the [Code of Conduct FAQ][coc_faq] or contact
 <opencode@microsoft.com> with any additional questions or comments.
 
 <!-- LINKS -->
-[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.ConnectedVMwarevSphere_1.0.0-beta.4/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
+[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.ConnectedVMwarevSphere_1.0.0-beta.5/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 
