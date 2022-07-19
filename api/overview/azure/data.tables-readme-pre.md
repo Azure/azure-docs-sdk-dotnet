@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: tables
 ---
-# Azure Tables client library for .NET - Version 12.6.0-beta.1 
+# Azure Tables client library for .NET - version 12.6.0-beta.1 
 
 
 Azure Table storage is a service that stores large amounts of structured NoSQL data in the cloud, providing 

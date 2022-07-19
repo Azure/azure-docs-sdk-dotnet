@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: dotnet
 ms.service: eventgrid
 ---
-# Azure WebJobs EventGrid client library for .NET - Version 3.2.0 
+# Azure WebJobs EventGrid client library for .NET - version 3.2.0 
 
 
 This extension provides functionality for receiving Event Grid webhook calls in Azure Functions, allowing you to easily write functions that respond to any event published to Event Grid.

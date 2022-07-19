@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: purview
 ---
-# Azure Purview Catalog client library for .NET - Version 1.0.0-beta.4 
+# Azure Purview Catalog client library for .NET - version 1.0.0-beta.4 
 
 
 Azure Purview Catalog is a fully managed cloud service whose users can discover the data sources they need and understand the data sources they find. At the same time, Data Catalog helps organizations get more value from their existing investments.

@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: functions
 ---
 
-# Azure WebJobs Storage Queues client library for .NET - Version 5.0.0-beta.5 
+# Azure WebJobs Storage Queues client library for .NET - version 5.0.0-beta.5 
 
 
 This extension provides functionality for accessing Azure Storage Queues in Azure Functions.

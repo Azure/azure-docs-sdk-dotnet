@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: appconfiguration
 ---
 
-# Azure App Configuration client library for .NET - Version 1.2.0-beta.1 
+# Azure App Configuration client library for .NET - version 1.2.0-beta.1 
 
 
 Azure App Configuration is a managed service that helps developers centralize their application and feature settings simply and securely.

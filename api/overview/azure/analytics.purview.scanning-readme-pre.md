@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: purview
 ---
 
-# Azure Purview Scanning client library for .NET - Version 1.0.0-beta.2 
+# Azure Purview Scanning client library for .NET - version 1.0.0-beta.2 
 
 
 Azure Purview Scanning is a fully managed cloud service whose users can scan your data into your data estate (also known as your **catalog**). Scanning is a process by which the catalog connects directly to a data source on a user-specified schedule.

@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: dotnet
 ms.service: tables
 ---
-# Azure WebJobs Tables client library for .NET - Version 1.0.0 
+# Azure WebJobs Tables client library for .NET - version 1.0.0 
 
 
 This extension provides functionality for accessing Azure Tables in Azure Functions.

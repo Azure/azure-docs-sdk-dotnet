@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: deviceupdate
 ---
-# Azure Device Update for IoT Hub client library for .NET - Version 1.0.0-beta.4 
+# Azure Device Update for IoT Hub client library for .NET - version 1.0.0-beta.4 
 
 
 The library provides access to the Device Update for IoT Hub service that enables customers to publish updates for their IoT devices to the cloud, and then deploy these updates to their devices (approve updates to groups of devices managed and provisioned in IoT Hub). 

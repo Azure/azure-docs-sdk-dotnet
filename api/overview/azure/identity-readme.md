@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: dotnet
 ms.service: identity
 ---
-# Azure Identity client library for .NET - Version 1.6.0 
+# Azure Identity client library for .NET - version 1.6.0 
 
  The Azure Identity library provides Azure Active Directory token authentication support across the Azure SDK. It provides a set of TokenCredential implementations which can be used to construct Azure SDK clients which support AAD token authentication.  
 

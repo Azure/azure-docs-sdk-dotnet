@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: mixedreality
 ---
 
-# Azure Mixed Reality Authentication client library for .NET - Version 1.0.0-beta.2 
+# Azure Mixed Reality Authentication client library for .NET - version 1.0.0-beta.2 
 
 
 Mixed Reality services, like Azure Spatial Anchors, Azure Remote Rendering, and others, use the Mixed Reality security

@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: datalakestorage(gen2)
 ---
 
-# Azure Storage Files Data Lake client library for .NET - Version 12.6.1 
+# Azure Storage Files Data Lake client library for .NET - version 12.6.1 
 
 
 > Server Version: 2020-04-08, 2020-02-10, 2019-12-12, 2019-07-07, and 2019-02-02

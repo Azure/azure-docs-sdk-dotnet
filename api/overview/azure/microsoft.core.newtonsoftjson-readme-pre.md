@@ -11,7 +11,7 @@ ms.devlang: .net
 ms.service: 
 ---
 
-# Newtonsoft.Json implementation for Azure Core Experimental shared client library for .NET - Version 1.0.0-preview.1 
+# Newtonsoft.Json implementation for Azure Core Experimental shared client library for .NET - version 1.0.0-preview.1 
 
 
 Azure.Core.Experimental contains types that are being evaluated and might eventually become part of Azure.Core.

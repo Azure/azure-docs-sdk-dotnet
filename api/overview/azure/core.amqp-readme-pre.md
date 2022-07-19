@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: core
 ---
 
-# Azure Core AMQP shared client library for .NET - Version 1.1.0-beta.1 
+# Azure Core AMQP shared client library for .NET - version 1.1.0-beta.1 
 
 
 Azure.Core.Amqp contains AMQP primitives. 

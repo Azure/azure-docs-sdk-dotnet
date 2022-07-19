@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: cognitivelanguage
 ---
-# Azure Cognitive Language Services Conversations client library for .NET - Version 1.1.0-beta.1 
+# Azure Cognitive Language Services Conversations client library for .NET - version 1.1.0-beta.1 
 
 
 Conversational Language Understanding - aka CLU for short - is a cloud-based conversational AI service which provides many language understanding capabilities like:

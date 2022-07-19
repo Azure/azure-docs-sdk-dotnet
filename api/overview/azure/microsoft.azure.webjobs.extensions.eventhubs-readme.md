@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: eventhub
 ---
-# Azure WebJobs Event Hubs client library for .NET - Version 5.1.1 
+# Azure WebJobs Event Hubs client library for .NET - version 5.1.1 
 
 
 This extension provides functionality for accessing Azure Event Hubs from an Azure Function.

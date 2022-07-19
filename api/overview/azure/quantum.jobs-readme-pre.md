@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: dotnet
 ms.service: quantum
 ---
-# Azure Quantum Jobs client library for .NET - Version 1.0.0-beta.3 
+# Azure Quantum Jobs client library for .NET - version 1.0.0-beta.3 
 
 
 Azure Quantum is a Microsoft Azure service that you can use to run quantum computing programs or solve optimization problems in the cloud.  Using the Azure Quantum tools and SDKs, you can create quantum programs and run them against different quantum simulators and machines.  You can use the Azure.Quantum.Jobs client library to:

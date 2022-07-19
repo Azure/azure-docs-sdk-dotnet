@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: communication
 ---
 
-# Azure Communication Chat client library for .NET - Version 1.1.0 
+# Azure Communication Chat client library for .NET - version 1.1.0 
 
 
 This package contains a C# SDK for Azure Communication Services for chat.

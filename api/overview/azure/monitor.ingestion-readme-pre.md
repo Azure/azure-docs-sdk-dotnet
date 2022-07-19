@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: monitor
 ---
-# Azure Monitor Ingestion client library for .NET - Version 1.0.0-beta.1 
+# Azure Monitor Ingestion client library for .NET - version 1.0.0-beta.1 
 
 
 The Azure Monitor Ingestion client library is used to send custom logs to [Azure Monitor][azure_monitor_overview].

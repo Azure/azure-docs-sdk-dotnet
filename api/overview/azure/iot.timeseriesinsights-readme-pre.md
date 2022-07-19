@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: 
 ---
 
-# Azure IoT Time Series Insights client library for .NET - Version 1.0.0-beta.1 
+# Azure IoT Time Series Insights client library for .NET - version 1.0.0-beta.1 
 
 
 This library provides access to the Azure Time Series Insights service.

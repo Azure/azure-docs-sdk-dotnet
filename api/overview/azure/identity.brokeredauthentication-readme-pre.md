@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: dotnet
 ms.service: identity
 ---
-# Azure Identity Brokered Authentication client library for .NET - Version 1.0.0-beta.2 
+# Azure Identity Brokered Authentication client library for .NET - version 1.0.0-beta.2 
 
  The library extends the Azure.Identity library to provide authentication broker support. It includes the necessary dependencies, and provides the `InteractiveBrowserCredentialBrokerOptions` class. This options class can be used to create an `InteractiveBrowserCredential` capable of using the system authentication broker in lieu of the system browser when available.  
 

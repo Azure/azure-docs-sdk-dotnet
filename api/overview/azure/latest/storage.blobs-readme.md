@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: storage
 ---
 
-# Azure Storage Blobs client library for .NET - Version 12.8.3 
+# Azure Storage Blobs client library for .NET - version 12.8.3 
 
 > Server Version: 2020-04-8, 2020-02-10, 2019-12-12, 2019-07-07, and 2019-02-02
 

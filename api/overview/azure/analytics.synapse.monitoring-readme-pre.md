@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: synapseanalytics
 ---
 
-# Azure Synapse Analytics Monitoring client library for .NET - Version 1.0.0-beta.3 
+# Azure Synapse Analytics Monitoring client library for .NET - version 1.0.0-beta.3 
 
 
 This directory contains the open source subset of the .NET SDK. For documentation of the complete Azure SDK, please see the [Microsoft Azure .NET Developer Center](https://azure.microsoft.com/develop/net/).

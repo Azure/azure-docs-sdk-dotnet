@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: storage
 ---
 
-# Azure Storage Common client library for .NET - Version 12.7.2 
+# Azure Storage Common client library for .NET - version 12.7.2 
 
 
 > Server Version: 2020-04-08, 2020-02-10, 2019-12-12, 2019-07-07, and 2020-02-02
