@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: digitaltwins
 ---
-# Azure IoT Digital Twins client library for .NET - Version 1.4.0 
+# Azure IoT Digital Twins client library for .NET - version 1.4.0 
 
 
 This library provides access to the Azure Digital Twins service for managing twins, models, relationships, etc.

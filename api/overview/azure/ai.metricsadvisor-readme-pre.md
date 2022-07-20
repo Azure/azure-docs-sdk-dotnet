@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: metricsadvisor
 ---
 
-# Azure Metrics Advisor client library for .NET - Version 1.0.0-beta.4 
+# Azure Metrics Advisor client library for .NET - version 1.0.0-beta.4 
 
 
 Azure Cognitive Services Metrics Advisor is a cloud service that uses machine learning to monitor and detect anomalies in time series data. It includes the following capabilities:

@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: monitor
 ---
 
-# Azure Monitor Query client library for .NET - Version 1.0.0-beta.4 
+# Azure Monitor Query client library for .NET - version 1.0.0-beta.4 
 
 
 The `Azure.Monitor.Query` package provides the ability to query the following Azure Monitor data sources:

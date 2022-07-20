@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: network
 ---
-# Azure Network Management client library for .NET - Version 1.0.0 
+# Azure Network Management client library for .NET - version 1.0.0 
 
 
 This package follows the [new Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html) which provide a number of core capabilities that are shared amongst all Azure SDKs, including:

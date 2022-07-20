@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: webjobs
 ---
 
-# Azure WebJobs Service Bus client library for .NET - Version 5.0.0-beta.6 
+# Azure WebJobs Service Bus client library for .NET - version 5.0.0-beta.6 
 
 
 This extension provides functionality for accessing Azure Service Bus from an Azure Function.

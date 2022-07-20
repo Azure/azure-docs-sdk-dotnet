@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: monitor
 ---
 
-# Azure Monitor Exporter client library for .NET - Version 1.0.0-beta.3 
+# Azure Monitor Exporter client library for .NET - version 1.0.0-beta.3 
 
 
 

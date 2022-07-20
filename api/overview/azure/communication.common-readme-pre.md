@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: communication
 ---
 
-# Azure Communication Common client library for .NET - Version 1.0.0-beta.5 
+# Azure Communication Common client library for .NET - version 1.0.0-beta.5 
 
 
 This package contains common code for Azure Communication Service libraries.

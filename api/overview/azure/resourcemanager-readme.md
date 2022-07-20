@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: resourcemanager
 ---
-# Azure ResourceManager client library for .NET - Version 1.2.0 
+# Azure ResourceManager client library for .NET - version 1.2.0 
 
 
 This package follows the [new Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html), which provide core capabilities that are shared amongst all Azure SDKs, including:

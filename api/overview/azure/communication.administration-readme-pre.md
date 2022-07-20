@@ -11,7 +11,7 @@ ms.devlang: .net
 ms.service: communication
 ---
 
-# Azure Communication Administration client library for .NET - Version 1.0.0-beta.3 
+# Azure Communication Administration client library for .NET - version 1.0.0-beta.3 
 
 
 > Server Version:

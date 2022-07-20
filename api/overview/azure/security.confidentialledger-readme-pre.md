@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: confidentialledger
 ---
-# Azure Confidential Ledger client library for .NET - Version 1.0.0-beta.3 
+# Azure Confidential Ledger client library for .NET - version 1.0.0-beta.3 
 
 
 Azure Confidential Ledger provides a service for logging to an immutable, tamper-proof ledger. As part of the [Azure Confidential Computing][azure_confidential_computing]

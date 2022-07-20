@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: dotnet
 ms.service: webpubsub
 ---
-# Azure WebJobs Web PubSub client library for .NET - Version 1.2.0 
+# Azure WebJobs Web PubSub client library for .NET - version 1.2.0 
 
 
 This extension provides functionality for receiving Web PubSub webhook calls in Azure Functions, allowing you to easily write functions that respond to any event published to Web PubSub.

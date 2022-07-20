@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: dotnet
 ms.service: schemaregistry
 ---
-# Azure Schema Registry Apache Avro client library for .NET - Version 1.0.0-beta.8 
+# Azure Schema Registry Apache Avro client library for .NET - version 1.0.0-beta.8 
 
 
 Azure Schema Registry is a schema repository service hosted by Azure Event Hubs, providing schema storage, versioning, and management. This package provides an Avro serializer capable of serializing and deserializing payloads containing Schema Registry schema identifiers and Avro-serialized data.

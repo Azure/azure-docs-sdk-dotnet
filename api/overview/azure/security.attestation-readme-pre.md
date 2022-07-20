@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: attestation
 ---
 
-# Azure Attestation client library for .NET - Version 1.0.0-beta.2 
+# Azure Attestation client library for .NET - version 1.0.0-beta.2 
 
 
 The Microsoft Azure Attestation (MAA) service is a unified solution for remotely verifying the trustworthiness of a platform and integrity of the binaries running inside it. The service supports attestation of the platforms backed by Trusted Platform Modules (TPMs) alongside the ability to attest to the state of Trusted Execution Environments (TEEs) such as Intel® Software Guard Extensions (SGX) enclaves and Virtualization-based Security (VBS) enclaves.

@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: storage
 ---
-# Azure Storage Blobs Change Feed client library for .NET - Version 12.0.0-preview.27 
+# Azure Storage Blobs Change Feed client library for .NET - version 12.0.0-preview.27 
 
 
 > Server Version: 2021-02-12, 2020-12-06, 2020-10-02, 2020-08-04, 2020-06-12 2020-04-08, 2020-02-10, and 2019-12-12

@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: communication
 ---
-# Azure Communication Email client library for .NET - Version 1.0.0-beta.1 
+# Azure Communication Email client library for .NET - version 1.0.0-beta.1 
 
 
 This package contains a C# SDK for Azure Communication Services for Email.

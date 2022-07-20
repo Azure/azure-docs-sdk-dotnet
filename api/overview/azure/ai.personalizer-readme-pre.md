@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: dotnet
 ms.service: personalizer
 ---
-# Azure Personalizer client library for .NET - Version 2.0.0-beta.2 
+# Azure Personalizer client library for .NET - version 2.0.0-beta.2 
 
 
 [Azure Personalizer](https://docs.microsoft.com/azure/cognitive-services/personalizer/)

@@ -1,6 +1,6 @@
 ---
-title: App Authentication client library for .NET - Version 1.6.0
-description: App Authentication client library for .NET - Version 1.6.0
+title: App Authentication client library for .NET - version 1.6.0
+description: App Authentication client library for .NET - version 1.6.0
 keywords: Azure, .net, SDK, API, Azure.Identity, identity
 author: jlichwa
 ms.author: jalichwa
@@ -10,7 +10,7 @@ ms.devlang: .net
 ms.prod: azure
 ---
 
-# App Authentication client library for .NET - Version 1.6.0
+# App Authentication client library for .NET - version 1.6.0
 
 > [!NOTE]
 > **Microsoft.Azure.Services.AppAuthentication** is no longer recommended to use with new Azure SDK. 

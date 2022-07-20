@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: dotnet
 ms.service: iot
 ---
-# Azure IoT Digital Twins client library for .NET - Version 1.4.0-beta.1 
+# Azure IoT Digital Twins client library for .NET - version 1.4.0-beta.1 
 
 
 This library provides access to the Azure Digital Twins service for managing twins, models, relationships, etc.

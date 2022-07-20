@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: objectanchors
 ---
-# Azure Object Anchors client library for .NET - Version 0.3.0-beta.3 
+# Azure Object Anchors client library for .NET - version 0.3.0-beta.3 
 
 
 Azure Object Anchors enables an application to detect an object in the physical world using a 3D model and estimate its 6-DoF pose. This package supports the conversion of an existing 3D asset into a form that can be used by the Object Anchors runtime to detect physical objects.

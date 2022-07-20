@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: textanalytics
 ---
 
-# Azure Cognitive Services Text Analytics client library for .NET - Version 5.2.0-beta.3
+# Azure Cognitive Services Text Analytics client library for .NET - version 5.2.0-beta.3
 
 Azure Cognitive Services Text Analytics is one of the three services that are part of the Azure Cognitive Service for Language. This client library includes the following main features:
 

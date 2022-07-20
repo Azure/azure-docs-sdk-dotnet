@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: communication
 ---
 
-# Azure Communication Services management client library for .NET - Version 1.0.0 
+# Azure Communication Services management client library for .NET - version 1.0.0 
 
 
 Azure Communication Services enable developers to securely bring human connected experiences to their own

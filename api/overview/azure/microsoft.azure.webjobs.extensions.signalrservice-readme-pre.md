@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: dotnet
 ms.service: webjobs
 ---
-# Azure WebJobs SignalR Service client library for .NET - Version 1.7.0-beta.2 
+# Azure WebJobs SignalR Service client library for .NET - version 1.7.0-beta.2 
 
 
 This extension provides functionality for accessing [Azure SignalR Service](https://aka.ms/signalr_service) from an Azure Function.

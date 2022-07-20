@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: dotnet
 ms.service: keyvault
 ---
-# Azure Key Vault key client library for .NET - Version 4.3.0-beta.7 
+# Azure Key Vault key client library for .NET - version 4.3.0-beta.7 
 
 Azure Key Vault is a cloud service that provides secure storage of keys for encrypting your data. 
 Multiple keys, and multiple versions of the same key, can be kept in the Azure Key Vault. 

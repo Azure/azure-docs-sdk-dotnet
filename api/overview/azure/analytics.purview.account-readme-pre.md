@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: 
 ---
 
-# Azure Purview Account client library for .NET - Version 1.0.0-beta.1 
+# Azure Purview Account client library for .NET - version 1.0.0-beta.1 
 
 
 Azure Purview Account is a fully managed cloud service.
