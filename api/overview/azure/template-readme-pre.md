@@ -3,12 +3,12 @@ title: Azure Template client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Template, template
 author: chidozieononiwu
 ms.author: chononiw
-ms.date: 07/07/2022
+ms.date: 07/28/2022
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: template
 ---
-# Azure Template client library for .NET - version 1.0.3-beta.1692146 
+# Azure Template client library for .NET - version 1.0.3-beta.1739991 
 
 
 Azure Template is a managed service that helps developers get secret simply and securely.
@@ -19,7 +19,7 @@ Use the client library for to:
 
 [Source code][source_root] | [Package (NuGet)][package] | [API reference documentation][reference_docs] | [Product documentation][azconfig_docs] | [Samples][source_samples]
 
-  [Source code](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1692146/sdk/template/Azure.Template/src) | [Package (NuGet)](https://www.nuget.org/packages) | [API reference documentation](https://azure.github.io/azure-sdk-for-net) | [Product documentation](/azure)
+  [Source code](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1739991/sdk/template/Azure.Template/src) | [Package (NuGet)](https://www.nuget.org/packages) | [API reference documentation](https://azure.github.io/azure-sdk-for-net) | [Product documentation](/azure)
 
 ## Getting started
 
@@ -59,18 +59,18 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1692146/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1692146/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1692146/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1692146/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1692146/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1692146/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1739991/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1739991/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1739991/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1739991/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1739991/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1739991/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
 ## Examples
 
-You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Template_1.0.3-beta.1692146/sdk/template/Azure.Template/samples).
+You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Template_1.0.3-beta.1739991/sdk/template/Azure.Template/samples).
 
 ### Get secret
 
