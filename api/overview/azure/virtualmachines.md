@@ -20,15 +20,46 @@ Create, configure, and scale out Windows and Linux virtual machines in Azure fro
 
 Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Management.Compute.Fluent) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
 
+> [!NOTE]
+> Microsoft is deprecating the Azure SDK which do not conform to our current [Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html), you may notice we have new SDK sample and old SDK sample in this page, we strongly recommend that you start with the new SDK to remain supported and take advantage of the new capabilities and critical security updates. 
+
 #### Visual Studio Package Manager
 
+# [New SDK](#tab/newsdk)
+
 ```powershell
+Install-Package Azure.Core
+Install-Package Azure.ResourceManager
+Install-Package Azure.ResourceManager.Resources
+Install-Package Azure.ResourceManager.Compute
+Install-Package Azure.ResourceManager.Network
+```
+
+# [Old SDK](#tab/oldsdk)
+
+```powershell
+Install-Package Microsoft.Azure.Management.Fluent;
+Install-Package Microsoft.Azure.Management.ResourceManager.Fluent
 Install-Package Microsoft.Azure.Management.Compute.Fluent
 ```
 
 #### .NET Core CLI
 
+# [New SDK](#tab/newsdk)
+
 ```dotnetcli
+dotnet add package Azure.Core
+dotnet add package Azure.ResourceManager
+dotnet add package Azure.ResourceManager.Resources
+dotnet add package Azure.ResourceManager.Compute
+dotnet add package Azure.ResourceManager.Network
+```
+
+# [Old SDK](#tab/oldsdk)
+
+```dotnetcli
+dotnet add package Microsoft.Azure.Management.Fluent;
+dotnet add package Microsoft.Azure.Management.ResourceManager.Fluent
 dotnet add package Microsoft.Azure.Management.Compute.Fluent
 ```
 
@@ -36,13 +67,131 @@ dotnet add package Microsoft.Azure.Management.Compute.Fluent
 
 Create a Windows VM.
 
+# [New SDK](#tab/newsdk)
+
+```csharp
+/* Include these "using" directives...
+using Azure;
+using Azure.Core;
+using Azure.Identity;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Compute;
+using Azure.ResourceManager.Compute.Models;
+using Azure.ResourceManager.Network;
+using Azure.ResourceManager.Network.Models;
+using Azure.ResourceManager.Resources;
+*/
+
+string resourceGroupName = "testResourceGroup";
+string publicIpName = "testIP";
+string virtualNetworkName = "testVN";
+string networkInterfaceName = "testNic";
+string vmName = "testVM";
+string computeName = "computeName";
+string admin = "admin";
+string pwd = "pwd";
+
+ArmClient client = new ArmClient(new DefaultAzureCredential());
+ResourceGroupResource resourceGroup = client.GetDefaultSubscription().GetResourceGroup(resourceGroupName);
+VirtualMachineCollection vms=resourceGroup.GetVirtualMachines();
+NetworkInterfaceCollection nics=resourceGroup.GetNetworkInterfaces();
+VirtualNetworkCollection vns=resourceGroup.GetVirtualNetworks();
+PublicIPAddressCollection publicIps=resourceGroup.GetPublicIPAddresses();
+
+PublicIPAddressResource ipResource = publicIps.CreateOrUpdate(WaitUntil.Completed, publicIpName, new PublicIPAddressData()
+{
+    PublicIPAddressVersion=NetworkIPVersion.IPv4,
+    PublicIPAllocationMethod=NetworkIPAllocationMethod.Dynamic,
+    Location=AzureLocation.WestUS
+}).Value;
+
+VirtualNetworkResource vnetResrouce = vns.CreateOrUpdate(WaitUntil.Completed, virtualNetworkName, new VirtualNetworkData()
+{
+    Location=AzureLocation.WestUS,
+    Subnets=
+    {
+        new SubnetData()
+        {
+            Name="testSubNet",
+            AddressPrefix = "10.0.0.0/24"
+        }
+    },
+    AddressPrefixes=
+    {
+        "10.0.0.0/16"
+    },
+}).Value;
+
+NetworkInterfaceResource nicResource = nics.CreateOrUpdate(WaitUntil.Completed, networkInterfaceName, new NetworkInterfaceData()
+{
+    Location=AzureLocation.WestUS,
+    IPConfigurations={
+        new NetworkInterfaceIPConfigurationData()
+        {
+            Name = "Primary",
+            Primary = true,
+            Subnet = new SubnetData() { Id = vnetResrouce?.Data.Subnets.First().Id },
+            PrivateIPAllocationMethod = NetworkIPAllocationMethod.Dynamic,
+            PublicIPAddress = new PublicIPAddressData() { Id = ipResource?.Data.Id }
+        }
+    }
+}).Value;
+
+VirtualMachineResource vmResource = vms.CreateOrUpdate(WaitUntil.Completed, vmName, new VirtualMachineData(AzureLocation.WestUS)
+{
+    HardwareProfile=new VirtualMachineHardwareProfile()
+    {
+        VmSize=VirtualMachineSizeType.BasicA0
+    },
+    OSProfile=new VirtualMachineOSProfile()
+    {
+        ComputerName=computeName,
+        AdminUsername=admin,
+        AdminPassword=pwd,
+        LinuxConfiguration=new Azure.ResourceManager.Compute.Models.LinuxConfiguration() { DisablePasswordAuthentication=false, ProvisionVmAgent=true }
+    },
+    StorageProfile=new VirtualMachineStorageProfile()
+    {
+        OSDisk= new VirtualMachineOSDisk(DiskCreateOptionType.FromImage),
+        ImageReference=new ImageReference()
+        {
+            Offer="UbuntuServer",
+            Publisher="Canonical",
+            Sku="18.04-LTS",
+            Version="latest"
+        }
+
+    },
+    NetworkProfile=new VirtualMachineNetworkProfile()
+    {
+        NetworkInterfaces=
+        {
+            new VirtualMachineNetworkInterfaceReference()
+            {
+                Id=nicResource.Id
+            }
+        }
+    },
+}).Value;
+```
+
+# [Old SDK](#tab/oldsdk)
+
 ```csharp
 /* Include these "using" directives...
 using Microsoft.Azure.Management.Compute.Fluent;
 using Microsoft.Azure.Management.Compute.Fluent.Models;
+using Microsoft.Azure.Management.Fluent;
+using Microsoft.Azure.Management.ResourceManager.Fluent;
 using Microsoft.Azure.Management.ResourceManager.Fluent.Core;
 */
 
+AzureCredentials cred = SdkContext.AzureCredentialsFactory.FromServicePrincipal(
+    {client id}, 
+    {client secret value}, 
+    {tenant id}, 
+    environment: AzureEnvironment.AzureGlobalCloud);
+IAzure azure = Azure.Authenticate(cred).WithDefaultSubscription();
 IVirtualMachine windowsVM = azure.VirtualMachines.Define("MyVirtualMachine")
     .WithRegion(Region.USEast)
     .WithNewResourceGroup("MyResourceGroup")
@@ -55,6 +204,7 @@ IVirtualMachine windowsVM = azure.VirtualMachines.Define("MyVirtualMachine")
     .WithSize(VirtualMachineSizeTypes.StandardD3V2)
     .Create();
 ```
+
 
 > [!div class="nextstepaction"]
 > [Explore the management APIs](https://docs.microsoft.com/dotnet/api/overview/azure/virtualmachines/management?view=azure-dotnet)
