@@ -43,6 +43,8 @@ Install-Package Microsoft.Azure.Management.ResourceManager.Fluent
 Install-Package Microsoft.Azure.Management.Compute.Fluent
 ```
 
+---
+
 #### .NET Core CLI
 
 # [New SDK](#tab/newsdkcliinstall)
@@ -62,6 +64,7 @@ dotnet add package Microsoft.Azure.Management.Fluent;
 dotnet add package Microsoft.Azure.Management.ResourceManager.Fluent
 dotnet add package Microsoft.Azure.Management.Compute.Fluent
 ```
+---
 
 ### Code Example
 
