@@ -25,7 +25,7 @@ Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Manag
 
 #### Visual Studio Package Manager
 
-# [New SDK](#tab/newsdk)
+# [New SDK](#tab/newsdkpsinstall)
 
 ```powershell
 Install-Package Azure.Core
@@ -35,7 +35,7 @@ Install-Package Azure.ResourceManager.Compute
 Install-Package Azure.ResourceManager.Network
 ```
 
-# [Old SDK](#tab/oldsdk)
+# [Old SDK](#tab/oldsdkpsinstall)
 
 ```powershell
 Install-Package Microsoft.Azure.Management.Fluent;
@@ -45,7 +45,7 @@ Install-Package Microsoft.Azure.Management.Compute.Fluent
 
 #### .NET Core CLI
 
-# [New SDK](#tab/newsdk)
+# [New SDK](#tab/newsdkcliinstall)
 
 ```dotnetcli
 dotnet add package Azure.Core
@@ -55,7 +55,7 @@ dotnet add package Azure.ResourceManager.Compute
 dotnet add package Azure.ResourceManager.Network
 ```
 
-# [Old SDK](#tab/oldsdk)
+# [Old SDK](#tab/oldsdkcliinstall)
 
 ```dotnetcli
 dotnet add package Microsoft.Azure.Management.Fluent;
@@ -67,7 +67,7 @@ dotnet add package Microsoft.Azure.Management.Compute.Fluent
 
 Create a Windows VM.
 
-# [New SDK](#tab/newsdk)
+# [New SDK](#tab/newsdksample)
 
 ```csharp
 /* Include these "using" directives...
@@ -175,7 +175,7 @@ VirtualMachineResource vmResource = vms.CreateOrUpdate(WaitUntil.Completed, vmNa
 }).Value;
 ```
 
-# [Old SDK](#tab/oldsdk)
+# [Old SDK](#tab/oldsdksample)
 
 ```csharp
 /* Include these "using" directives...
