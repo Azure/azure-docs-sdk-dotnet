@@ -101,17 +101,23 @@ NetworkInterfaceCollection nics=resourceGroup.GetNetworkInterfaces();
 VirtualNetworkCollection vns=resourceGroup.GetVirtualNetworks();
 PublicIPAddressCollection publicIps=resourceGroup.GetPublicIPAddresses();
 
-PublicIPAddressResource ipResource = publicIps.CreateOrUpdate(WaitUntil.Completed, publicIpName, new PublicIPAddressData()
-{
-    PublicIPAddressVersion=NetworkIPVersion.IPv4,
-    PublicIPAllocationMethod=NetworkIPAllocationMethod.Dynamic,
-    Location=AzureLocation.WestUS
-}).Value;
+PublicIPAddressResource ipResource = publicIps.CreateOrUpdate(
+    WaitUntil.Completed,
+    publicIpName,
+    new PublicIPAddressData()
+    {
+        PublicIPAddressVersion=NetworkIPVersion.IPv4,
+        PublicIPAllocationMethod=NetworkIPAllocationMethod.Dynamic,
+        Location=AzureLocation.WestUS
+    }).Value;
 
-VirtualNetworkResource vnetResrouce = vns.CreateOrUpdate(WaitUntil.Completed, virtualNetworkName, new VirtualNetworkData()
-{
-    Location=AzureLocation.WestUS,
-    Subnets=
+VirtualNetworkResource vnetResrouce = vns.CreateOrUpdate(
+    WaitUntil.Completed,
+    virtualNetworkName,
+    new VirtualNetworkData()
+    {
+        Location=AzureLocation.WestUS,
+        Subnets=
     {
         new SubnetData()
         {
@@ -119,63 +125,69 @@ VirtualNetworkResource vnetResrouce = vns.CreateOrUpdate(WaitUntil.Completed, vi
             AddressPrefix = "10.0.0.0/24"
         }
     },
-    AddressPrefixes=
+        AddressPrefixes=
     {
         "10.0.0.0/16"
     },
-}).Value;
+    }).Value;
 
-NetworkInterfaceResource nicResource = nics.CreateOrUpdate(WaitUntil.Completed, networkInterfaceName, new NetworkInterfaceData()
-{
-    Location=AzureLocation.WestUS,
-    IPConfigurations={
+NetworkInterfaceResource nicResource = nics.CreateOrUpdate(
+    WaitUntil.Completed,
+    networkInterfaceName,
+    new NetworkInterfaceData()
+    {
+        Location=AzureLocation.WestUS,
+        IPConfigurations={
         new NetworkInterfaceIPConfigurationData()
         {
-            Name = "Primary",
+                Name = "Primary",
             Primary = true,
             Subnet = new SubnetData() { Id = vnetResrouce?.Data.Subnets.First().Id },
             PrivateIPAllocationMethod = NetworkIPAllocationMethod.Dynamic,
             PublicIPAddress = new PublicIPAddressData() { Id = ipResource?.Data.Id }
         }
     }
-}).Value;
+    }).Value;
 
-VirtualMachineResource vmResource = vms.CreateOrUpdate(WaitUntil.Completed, vmName, new VirtualMachineData(AzureLocation.WestUS)
-{
-    HardwareProfile=new VirtualMachineHardwareProfile()
+VirtualMachineResource vmResource = vms.CreateOrUpdate(
+    WaitUntil.Completed,
+    vmName,
+    new VirtualMachineData(AzureLocation.WestUS)
     {
-        VmSize=VirtualMachineSizeType.BasicA0
-    },
-    OSProfile=new VirtualMachineOSProfile()
-    {
-        ComputerName=computeName,
-        AdminUsername=admin,
-        AdminPassword=pwd,
-        LinuxConfiguration=new Azure.ResourceManager.Compute.Models.LinuxConfiguration() { DisablePasswordAuthentication=false, ProvisionVmAgent=true }
-    },
-    StorageProfile=new VirtualMachineStorageProfile()
-    {
-        OSDisk= new VirtualMachineOSDisk(DiskCreateOptionType.FromImage),
-        ImageReference=new ImageReference()
+        HardwareProfile=new VirtualMachineHardwareProfile()
         {
-            Offer="UbuntuServer",
-            Publisher="Canonical",
-            Sku="18.04-LTS",
-            Version="latest"
-        }
+            VmSize=VirtualMachineSizeType.BasicA0
+        },
+        OSProfile=new VirtualMachineOSProfile()
+        {
+            ComputerName=computeName,
+            AdminUsername=admin,
+            AdminPassword=pwd,
+            LinuxConfiguration=new LinuxConfiguration() { DisablePasswordAuthentication=false, ProvisionVmAgent=true }
+        },
+        StorageProfile=new VirtualMachineStorageProfile()
+        {
+            OSDisk= new VirtualMachineOSDisk(DiskCreateOptionType.FromImage),
+            ImageReference=new ImageReference()
+            {
+                Offer="UbuntuServer",
+                Publisher="Canonical",
+                Sku="18.04-LTS",
+                Version="latest"
+            }
 
-    },
-    NetworkProfile=new VirtualMachineNetworkProfile()
-    {
-        NetworkInterfaces=
+        },
+        NetworkProfile=new VirtualMachineNetworkProfile()
+        {
+            NetworkInterfaces=
         {
             new VirtualMachineNetworkInterfaceReference()
             {
                 Id=nicResource.Id
             }
         }
-    },
-}).Value;
+        },
+    }).Value;
 ```
 
 # [Old SDK](#tab/oldsdksample)
