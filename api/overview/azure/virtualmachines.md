@@ -18,12 +18,12 @@ To get started with Azure virtual machines, see [Create a Linux virtual machine 
 
 Create, configure, and scale out Windows and Linux virtual machines in Azure from your code with the management API.
 
-Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Management.Compute.Fluent) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
+Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Management.Compute.Fluent) directly from the Visual Studio [Package Manager Console][PackageManager] or with the [.NET CLI][DotNetCLI].
 
 > [!NOTE]
-> Microsoft is deprecating the Azure SDK which do not conform to our current [Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html), you may notice we have new SDK sample and old SDK sample in this page, we strongly recommend that you start with the new SDK to remain supported and take advantage of the new capabilities and critical security updates. 
+> Microsoft is deprecating the Azure SDK client libraries which don't adhere to the [latest Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html). You'll notice the new and old library code samples on this page. We strongly recommend you start with the new library to remain supported and to take advantage of the new capabilities and critical security updates. 
 
-#### Visual Studio Package Manager
+#### Visual Studio Package Manager Console
 
 # [New SDK](#tab/newsdkpsinstall)
 
@@ -38,14 +38,14 @@ Install-Package Azure.ResourceManager.Network
 # [Old SDK](#tab/oldsdkpsinstall)
 
 ```powershell
-Install-Package Microsoft.Azure.Management.Fluent;
+Install-Package Microsoft.Azure.Management.Fluent
 Install-Package Microsoft.Azure.Management.ResourceManager.Fluent
 Install-Package Microsoft.Azure.Management.Compute.Fluent
 ```
 
 ---
 
-#### .NET Core CLI
+#### .NET CLI
 
 # [New SDK](#tab/newsdkcliinstall)
 
@@ -60,7 +60,7 @@ dotnet add package Azure.ResourceManager.Network
 # [Old SDK](#tab/oldsdkcliinstall)
 
 ```dotnetcli
-dotnet add package Microsoft.Azure.Management.Fluent;
+dotnet add package Microsoft.Azure.Management.Fluent
 dotnet add package Microsoft.Azure.Management.ResourceManager.Fluent
 dotnet add package Microsoft.Azure.Management.Compute.Fluent
 ```
@@ -94,21 +94,21 @@ string computeName = "computeName";
 string admin = "admin";
 string pwd = "pwd";
 
-ArmClient client = new ArmClient(new DefaultAzureCredential());
+var client = new ArmClient(new DefaultAzureCredential());
 ResourceGroupResource resourceGroup = client.GetDefaultSubscription().GetResourceGroup(resourceGroupName);
-VirtualMachineCollection vms=resourceGroup.GetVirtualMachines();
-NetworkInterfaceCollection nics=resourceGroup.GetNetworkInterfaces();
-VirtualNetworkCollection vns=resourceGroup.GetVirtualNetworks();
-PublicIPAddressCollection publicIps=resourceGroup.GetPublicIPAddresses();
+VirtualMachineCollection vms = resourceGroup.GetVirtualMachines();
+NetworkInterfaceCollection nics = resourceGroup.GetNetworkInterfaces();
+VirtualNetworkCollection vns = resourceGroup.GetVirtualNetworks();
+PublicIPAddressCollection publicIps = resourceGroup.GetPublicIPAddresses();
 
 PublicIPAddressResource ipResource = publicIps.CreateOrUpdate(
     WaitUntil.Completed,
     publicIpName,
     new PublicIPAddressData()
     {
-        PublicIPAddressVersion=NetworkIPVersion.IPv4,
-        PublicIPAllocationMethod=NetworkIPAllocationMethod.Dynamic,
-        Location=AzureLocation.WestUS
+        PublicIPAddressVersion = NetworkIPVersion.IPv4,
+        PublicIPAllocationMethod = NetworkIPAllocationMethod.Dynamic,
+        Location = AzureLocation.WestUS
     }).Value;
 
 VirtualNetworkResource vnetResrouce = vns.CreateOrUpdate(
@@ -117,18 +117,18 @@ VirtualNetworkResource vnetResrouce = vns.CreateOrUpdate(
     new VirtualNetworkData()
     {
         Location=AzureLocation.WestUS,
-        Subnets=
+        Subnets =
     {
         new SubnetData()
         {
-            Name="testSubNet",
+            Name = "testSubNet",
             AddressPrefix = "10.0.0.0/24"
         }
     },
-        AddressPrefixes=
-    {
-        "10.0.0.0/16"
-    },
+        AddressPrefixes =
+        {
+            "10.0.0.0/16"
+        },
     }).Value;
 
 NetworkInterfaceResource nicResource = nics.CreateOrUpdate(
@@ -136,11 +136,11 @@ NetworkInterfaceResource nicResource = nics.CreateOrUpdate(
     networkInterfaceName,
     new NetworkInterfaceData()
     {
-        Location=AzureLocation.WestUS,
-        IPConfigurations={
+        Location = AzureLocation.WestUS,
+        IPConfigurations = {
         new NetworkInterfaceIPConfigurationData()
         {
-                Name = "Primary",
+            Name = "Primary",
             Primary = true,
             Subnet = new SubnetData() { Id = vnetResrouce?.Data.Subnets.First().Id },
             PrivateIPAllocationMethod = NetworkIPAllocationMethod.Dynamic,
@@ -154,38 +154,42 @@ VirtualMachineResource vmResource = vms.CreateOrUpdate(
     vmName,
     new VirtualMachineData(AzureLocation.WestUS)
     {
-        HardwareProfile=new VirtualMachineHardwareProfile()
+        HardwareProfile = new VirtualMachineHardwareProfile()
         {
-            VmSize=VirtualMachineSizeType.BasicA0
+            VmSize = VirtualMachineSizeType.BasicA0
         },
-        OSProfile=new VirtualMachineOSProfile()
+        OSProfile = new VirtualMachineOSProfile()
         {
-            ComputerName=computeName,
-            AdminUsername=admin,
-            AdminPassword=pwd,
-            LinuxConfiguration=new LinuxConfiguration() { DisablePasswordAuthentication=false, ProvisionVmAgent=true }
+            ComputerName = computeName,
+            AdminUsername = admin,
+            AdminPassword = pwd,
+            LinuxConfiguration = new LinuxConfiguration() 
+            { 
+                DisablePasswordAuthentication = false, 
+                ProvisionVmAgent = true 
+            }
         },
-        StorageProfile=new VirtualMachineStorageProfile()
+        StorageProfile = new VirtualMachineStorageProfile()
         {
-            OSDisk= new VirtualMachineOSDisk(DiskCreateOptionType.FromImage),
-            ImageReference=new ImageReference()
+            OSDisk = new VirtualMachineOSDisk(DiskCreateOptionType.FromImage),
+            ImageReference = new ImageReference()
             {
-                Offer="UbuntuServer",
-                Publisher="Canonical",
-                Sku="18.04-LTS",
-                Version="latest"
+                Offer = "UbuntuServer",
+                Publisher = "Canonical",
+                Sku = "18.04-LTS",
+                Version = "latest"
             }
 
         },
-        NetworkProfile=new VirtualMachineNetworkProfile()
+        NetworkProfile = new VirtualMachineNetworkProfile()
         {
-            NetworkInterfaces=
-        {
-            new VirtualMachineNetworkInterfaceReference()
+            NetworkInterfaces =
             {
-                Id=nicResource.Id
+                new VirtualMachineNetworkInterfaceReference()
+                {
+                    Id = nicResource.Id
+                }
             }
-        }
         },
     }).Value;
 ```
