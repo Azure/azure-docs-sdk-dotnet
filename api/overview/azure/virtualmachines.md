@@ -116,7 +116,7 @@ VirtualNetworkResource vnetResrouce = vns.CreateOrUpdate(
     virtualNetworkName,
     new VirtualNetworkData()
     {
-        Location=AzureLocation.WestUS,
+        Location = AzureLocation.WestUS,
         Subnets =
     {
         new SubnetData()
