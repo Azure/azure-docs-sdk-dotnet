@@ -118,13 +118,13 @@ VirtualNetworkResource vnetResrouce = vns.CreateOrUpdate(
     {
         Location = AzureLocation.WestUS,
         Subnets =
-    {
-        new SubnetData()
         {
-            Name = "testSubNet",
-            AddressPrefix = "10.0.0.0/24"
-        }
-    },
+            new SubnetData()
+            {
+                Name = "testSubNet",
+                AddressPrefix = "10.0.0.0/24"
+            }
+        },
         AddressPrefixes =
         {
             "10.0.0.0/16"
