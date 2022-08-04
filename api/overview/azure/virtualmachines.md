@@ -138,15 +138,15 @@ NetworkInterfaceResource nicResource = nics.CreateOrUpdate(
     {
         Location = AzureLocation.WestUS,
         IPConfigurations = {
-        new NetworkInterfaceIPConfigurationData()
-        {
-            Name = "Primary",
-            Primary = true,
-            Subnet = new SubnetData() { Id = vnetResrouce?.Data.Subnets.First().Id },
-            PrivateIPAllocationMethod = NetworkIPAllocationMethod.Dynamic,
-            PublicIPAddress = new PublicIPAddressData() { Id = ipResource?.Data.Id }
+            new NetworkInterfaceIPConfigurationData()
+            {
+                Name = "Primary",
+                Primary = true,
+                Subnet = new SubnetData() { Id = vnetResrouce?.Data.Subnets.First().Id },
+                PrivateIPAllocationMethod = NetworkIPAllocationMethod.Dynamic,
+                PublicIPAddress = new PublicIPAddressData() { Id = ipResource?.Data.Id }
+            }
         }
-    }
     }).Value;
 
 VirtualMachineResource vmResource = vms.CreateOrUpdate(
