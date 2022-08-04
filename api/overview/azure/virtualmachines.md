@@ -179,7 +179,6 @@ VirtualMachineResource vmResource = vms.CreateOrUpdate(
                 Sku = "18.04-LTS",
                 Version = "latest"
             }
-
         },
         NetworkProfile = new VirtualMachineNetworkProfile()
         {
