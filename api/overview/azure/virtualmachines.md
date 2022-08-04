@@ -137,7 +137,8 @@ NetworkInterfaceResource nicResource = nics.CreateOrUpdate(
     new NetworkInterfaceData()
     {
         Location = AzureLocation.WestUS,
-        IPConfigurations = {
+        IPConfigurations =
+        {
             new NetworkInterfaceIPConfigurationData()
             {
                 Name = "Primary",
