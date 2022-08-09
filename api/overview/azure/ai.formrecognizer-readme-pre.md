@@ -3,12 +3,12 @@ title: Azure Cognitive Services Form Recognizer client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.FormRecognizer, formrecognizer
 author: kinelski
 ms.author: camaiaor
-ms.date: 06/08/2022
+ms.date: 08/09/2022
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: formrecognizer
 ---
-# Azure Cognitive Services Form Recognizer client library for .NET - version 4.0.0-beta.4 
+# Azure Cognitive Services Form Recognizer client library for .NET - version 4.0.0-beta.5 
 
 
 Azure Cognitive Services Form Recognizer is a cloud service that uses machine learning to analyze text and structured data from your documents. It includes the following main features:
@@ -36,7 +36,7 @@ This table shows the relationship between SDK versions and supported API version
 
 |SDK version|Supported API version of service
 |-|-
-|4.0.0-beta.4 | 2.0, 2.1, 2022-06-30-preview
+|4.0.0-beta.5 | 2.0, 2.1, 2022-06-30-preview
 |3.1.X        | 2.0, 2.1
 |3.0.X        | 2.0
 
@@ -147,7 +147,7 @@ var client = new DocumentAnalysisClient(new Uri(endpoint), new DefaultAzureCrede
 
 ### DocumentAnalysisClient
 
-`DocumentAnalysisClient` provides operations for analyzing input documents using prebuilt and custom models through the `StartAnalyzeDocument` and `StartAnalyzeDocumentFromUri` APIs. Use the `modelId` parameter to select the type of model for analysis.
+`DocumentAnalysisClient` provides operations for analyzing input documents using prebuilt and custom models through the `AnalyzeDocument` and `AnalyzeDocumentFromUri` APIs. Use the `modelId` parameter to select the type of model for analysis.
 
 Sample code snippets are provided to illustrate using a DocumentAnalysisClient [here](#examples).
 More information about analyzing documents, including supported features, locales, and document types can be found in the [service documentation][formreco_models].
@@ -157,7 +157,7 @@ More information about analyzing documents, including supported features, locale
 `DocumentModelAdministrationClient` provides operations for:
 
 - Building custom models to analyze specific fields you specify by labeling your custom documents. A `DocumentModel` is returned indicating the document type(s) the model can analyze, the fields it can analyze for each document type, as well as the estimated confidence for each field. See the [service documentation][formreco_build_model] for a more detailed explanation.
-- Creating a composed model from a collection of existing models.
+- Compose a model from a collection of existing models.
 - Managing models created in your account.
 - Listing document model operations or getting a specific model operation created within the last 24 hours.
 - Copying a custom model from one Form Recognizer resource to another.
@@ -170,18 +170,18 @@ Please note that models can also be built using a graphical user interface such 
 
 Because analyzing documents and building models take time, these operations are implemented as [**long-running operations**][dotnet_lro_guidelines].  Long-running operations consist of an initial request sent to the service to start an operation, followed by polling the service at intervals to determine whether the operation has completed or failed, and if it has succeeded, to get the result.
 
-For long running operations in the Azure SDK, the client exposes a `Start<operation-name>` method that returns an `Operation<T>`.  You can use the extension method `WaitForCompletionAsync()` to wait for the operation to complete and obtain its result.  A sample code snippet is provided to illustrate using long-running operations [below](#extract-layout).
+For long running operations in the Azure SDK, the client exposes a method that returns an `Operation<T>` object. You can set its parameter `waitUntil` to `WaitUntil.Completed` to wait for the operation to complete and obtain its result; or set it to `WaitUntil.Started` if you just want to start the operation and consume the result later. A sample code snippet is provided to illustrate using long-running operations [below](#extract-layout).
 
 ### Thread safety
 We guarantee that all client instance methods are thread-safe and independent of each other ([guideline](https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-service-methods-thread-safety)). This ensures that the recommendation of reusing client instances is always safe, even across threads.
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_4.0.0-beta.4/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_4.0.0-beta.4/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_4.0.0-beta.4/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_4.0.0-beta.4/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_4.0.0-beta.4/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_4.0.0-beta.5/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_4.0.0-beta.5/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_4.0.0-beta.5/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_4.0.0-beta.5/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_4.0.0-beta.5/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
@@ -208,10 +208,7 @@ Extract text, selection marks, table structures, styles, and paragraphs, along w
 ```C# Snippet:FormRecognizerExtractLayoutFromUriAsync
 Uri fileUri = new Uri("<fileUri>");
 
-AnalyzeDocumentOperation operation = await client.StartAnalyzeDocumentFromUriAsync("prebuilt-layout", fileUri);
-
-await operation.WaitForCompletionAsync();
-
+AnalyzeDocumentOperation operation = await client.AnalyzeDocumentFromUriAsync(WaitUntil.Completed, "prebuilt-layout", fileUri);
 AnalyzeResult result = operation.Value;
 
 foreach (DocumentPage page in result.Pages)
@@ -226,7 +223,7 @@ foreach (DocumentPage page in result.Pages)
 
         Console.WriteLine($"    Its bounding polygon (points ordered clockwise):");
 
-        for (int j = 0; j < line.BoundingPolygon.Points.Length; j++)
+        for (int j = 0; j < line.BoundingPolygon.Length; j++)
         {
             Console.WriteLine($"      Point {j} => X: {line.BoundingPolygon[j].X}, Y: {line.BoundingPolygon[j].Y}");
         }
@@ -239,7 +236,7 @@ foreach (DocumentPage page in result.Pages)
         Console.WriteLine($"  Selection Mark {i} is {selectionMark.State}.");
         Console.WriteLine($"    Its bounding polygon (points ordered clockwise):");
 
-        for (int j = 0; j < selectionMark.BoundingPolygon.Points.Length; j++)
+        for (int j = 0; j < selectionMark.BoundingPolygon.Length; j++)
         {
             Console.WriteLine($"      Point {j} => X: {selectionMark.BoundingPolygon[j].X}, Y: {selectionMark.BoundingPolygon[j].Y}");
         }
@@ -298,10 +295,7 @@ Analyze text, selection marks, table structures, styles, paragraphs, and key-val
 ```C# Snippet:FormRecognizerAnalyzePrebuiltDocumentFromUriAsync
 Uri fileUri = new Uri("<fileUri>");
 
-AnalyzeDocumentOperation operation = await client.StartAnalyzeDocumentFromUriAsync("prebuilt-document", fileUri);
-
-await operation.WaitForCompletionAsync();
-
+AnalyzeDocumentOperation operation = await client.AnalyzeDocumentFromUriAsync(WaitUntil.Completed, "prebuilt-document", fileUri);
 AnalyzeResult result = operation.Value;
 
 Console.WriteLine("Detected key-value pairs:");
@@ -330,7 +324,7 @@ foreach (DocumentPage page in result.Pages)
 
         Console.WriteLine($"    Its bounding polygon (points ordered clockwise):");
 
-        for (int j = 0; j < line.BoundingPolygon.Points.Length; j++)
+        for (int j = 0; j < line.BoundingPolygon.Length; j++)
         {
             Console.WriteLine($"      Point {j} => X: {line.BoundingPolygon[j].X}, Y: {line.BoundingPolygon[j].Y}");
         }
@@ -343,7 +337,7 @@ foreach (DocumentPage page in result.Pages)
         Console.WriteLine($"  Selection Mark {i} is {selectionMark.State}.");
         Console.WriteLine($"    Its bounding polygon (points ordered clockwise):");
 
-        for (int j = 0; j < selectionMark.BoundingPolygon.Points.Length; j++)
+        for (int j = 0; j < selectionMark.BoundingPolygon.Length; j++)
         {
             Console.WriteLine($"      Point {j} => X: {selectionMark.BoundingPolygon[j].X}, Y: {selectionMark.BoundingPolygon[j].Y}");
         }
@@ -390,10 +384,7 @@ Analyze textual elements, such as page words and lines, styles, paragraphs, and 
 ```C# Snippet:FormRecognizerAnalyzePrebuiltReadFromUriAsync
 Uri fileUri = new Uri("<fileUri>");
 
-AnalyzeDocumentOperation operation = await client.StartAnalyzeDocumentFromUriAsync("prebuilt-read", fileUri);
-
-await operation.WaitForCompletionAsync();
-
+AnalyzeDocumentOperation operation = await client.AnalyzeDocumentFromUriAsync(WaitUntil.Completed, "prebuilt-read", fileUri);
 AnalyzeResult result = operation.Value;
 
 Console.WriteLine("Detected languages:");
@@ -415,7 +406,7 @@ foreach (DocumentPage page in result.Pages)
 
         Console.WriteLine($"    Its bounding polygon (points ordered clockwise):");
 
-        for (int j = 0; j < line.BoundingPolygon.Points.Length; j++)
+        for (int j = 0; j < line.BoundingPolygon.Length; j++)
         {
             Console.WriteLine($"      Point {j} => X: {line.BoundingPolygon[j].X}, Y: {line.BoundingPolygon[j].Y}");
         }
@@ -446,17 +437,14 @@ For more information and samples see [here][analyze_prebuilt_read].
 ### Use Prebuilt Models
 Analyze data from certain types of common documents using prebuilt models provided by the Form Recognizer service.
 
-For example, to analyze fields from an invoice, use the prebuilt Invoice model provided by passing the `prebuilt-invoice` model ID into the `StartAnalyzeDocumentAsync` method:
+For example, to analyze fields from an invoice, use the prebuilt Invoice model provided by passing the `prebuilt-invoice` model ID into the `AnalyzeDocumentAsync` method:
 
 ```C# Snippet:FormRecognizerAnalyzeWithPrebuiltModelFromFileAsync
 string filePath = "<filePath>";
 
 using var stream = new FileStream(filePath, FileMode.Open);
 
-AnalyzeDocumentOperation operation = await client.StartAnalyzeDocumentAsync("prebuilt-invoice", stream);
-
-await operation.WaitForCompletionAsync();
-
+AnalyzeDocumentOperation operation = await client.AnalyzeDocumentAsync(WaitUntil.Completed, "prebuilt-invoice", stream);
 AnalyzeResult result = operation.Value;
 
 // To see the list of all the supported fields returned by service and its corresponding types for the
@@ -575,9 +563,8 @@ var client = new DocumentModelAdministrationClient(new Uri(endpoint), new AzureK
 // build modes and their differences, please see:
 // https://aka.ms/azsdk/formrecognizer/buildmode
 
-BuildModelOperation operation = await client.StartBuildModelAsync(trainingFileUri, DocumentBuildMode.Template);
-Response<DocumentModel> operationResponse = await operation.WaitForCompletionAsync();
-DocumentModel model = operationResponse.Value;
+BuildModelOperation operation = await client.BuildModelAsync(WaitUntil.Completed, trainingFileUri, DocumentBuildMode.Template);
+DocumentModelDetails model = operation.Value;
 
 Console.WriteLine($"  Model Id: {model.ModelId}");
 if (string.IsNullOrEmpty(model.Description))
@@ -603,10 +590,7 @@ Analyze text, field values, selection marks, and table structures, styles, and p
 string modelId = "<modelId>";
 Uri fileUri = new Uri("<fileUri>");
 
-AnalyzeDocumentOperation operation = await client.StartAnalyzeDocumentFromUriAsync(modelId, fileUri);
-
-await operation.WaitForCompletionAsync();
-
+AnalyzeDocumentOperation operation = await client.AnalyzeDocumentFromUriAsync(WaitUntil.Completed, modelId, fileUri);
 AnalyzeResult result = operation.Value;
 
 Console.WriteLine($"Document was analyzed with model with ID: {result.ModelId}");
@@ -637,33 +621,32 @@ Manage the models stored in your account.
 var client = new DocumentModelAdministrationClient(new Uri(endpoint), new AzureKeyCredential(apiKey));
 
 // Check number of custom models in the FormRecognizer account, and the maximum number of models that can be stored.
-AccountProperties accountProperties = await client.GetAccountPropertiesAsync();
-Console.WriteLine($"Account has {accountProperties.DocumentModelCount} models.");
-Console.WriteLine($"It can have at most {accountProperties.DocumentModelLimit} models.");
+ResourceDetails resourceDetails = await client.GetResourceDetailsAsync();
+Console.WriteLine($"Resource has {resourceDetails.DocumentModelCount} models.");
+Console.WriteLine($"It can have at most {resourceDetails.DocumentModelLimit} models.");
 
 // List the first ten or fewer models currently stored in the account.
-AsyncPageable<DocumentModelInfo> models = client.GetModelsAsync();
+AsyncPageable<DocumentModelSummary> models = client.GetModelsAsync();
 
 int count = 0;
-await foreach (DocumentModelInfo modelInfo in models)
+await foreach (DocumentModelSummary modelSummary in models)
 {
-    Console.WriteLine($"Custom Model Info:");
-    Console.WriteLine($"  Model Id: {modelInfo.ModelId}");
-    if (string.IsNullOrEmpty(modelInfo.Description))
-        Console.WriteLine($"  Model description: {modelInfo.Description}");
-    Console.WriteLine($"  Created on: {modelInfo.CreatedOn}");
+    Console.WriteLine($"Custom Model Summary:");
+    Console.WriteLine($"  Model Id: {modelSummary.ModelId}");
+    if (string.IsNullOrEmpty(modelSummary.Description))
+        Console.WriteLine($"  Model description: {modelSummary.Description}");
+    Console.WriteLine($"  Created on: {modelSummary.CreatedOn}");
     if (++count == 10)
         break;
 }
 
 // Create a new model to store in the account
 Uri trainingFileUri = new Uri("<trainingFileUri>");
-BuildModelOperation operation = await client.StartBuildModelAsync(trainingFileUri, DocumentBuildMode.Template);
-Response<DocumentModel> operationResponse = await operation.WaitForCompletionAsync();
-DocumentModel model = operationResponse.Value;
+BuildModelOperation operation = await client.BuildModelAsync(WaitUntil.Completed, trainingFileUri, DocumentBuildMode.Template);
+DocumentModelDetails model = operation.Value;
 
 // Get the model that was just created
-DocumentModel newCreatedModel = await client.GetModelAsync(model.ModelId);
+DocumentModelDetails newCreatedModel = await client.GetModelAsync(model.ModelId);
 
 Console.WriteLine($"Custom Model with Id {newCreatedModel.ModelId} has the following information:");
 
@@ -685,31 +668,30 @@ Manage the models stored in your account with a synchronous API. Note that we ar
 var client = new DocumentModelAdministrationClient(new Uri(endpoint), new AzureKeyCredential(apiKey));
 
 // Check number of custom models in the FormRecognizer account, and the maximum number of models that can be stored.
-AccountProperties accountProperties = client.GetAccountProperties();
-Console.WriteLine($"Account has {accountProperties.DocumentModelCount} models.");
-Console.WriteLine($"It can have at most {accountProperties.DocumentModelLimit} models.");
+ResourceDetails resourceDetails = client.GetResourceDetails();
+Console.WriteLine($"Resource has {resourceDetails.DocumentModelCount} models.");
+Console.WriteLine($"It can have at most {resourceDetails.DocumentModelLimit} models.");
 
 // List the first ten or fewer models currently stored in the account.
-Pageable<DocumentModelInfo> models = client.GetModels();
+Pageable<DocumentModelSummary> models = client.GetModels();
 
-foreach (DocumentModelInfo modelInfo in models.Take(10))
+foreach (DocumentModelSummary modelSummary in models.Take(10))
 {
-    Console.WriteLine($"Custom Model Info:");
-    Console.WriteLine($"  Model Id: {modelInfo.ModelId}");
-    if (string.IsNullOrEmpty(modelInfo.Description))
-        Console.WriteLine($"  Model description: {modelInfo.Description}");
-    Console.WriteLine($"  Created on: {modelInfo.CreatedOn}");
+    Console.WriteLine($"Custom Model Summary:");
+    Console.WriteLine($"  Model Id: {modelSummary.ModelId}");
+    if (string.IsNullOrEmpty(modelSummary.Description))
+        Console.WriteLine($"  Model description: {modelSummary.Description}");
+    Console.WriteLine($"  Created on: {modelSummary.CreatedOn}");
 }
 
 // Create a new model to store in the account
 
 Uri trainingFileUri = new Uri("<trainingFileUri>");
-BuildModelOperation operation = client.StartBuildModel(trainingFileUri, DocumentBuildMode.Template);
-Response<DocumentModel> operationResponse = await operation.WaitForCompletionAsync();
-DocumentModel model = operationResponse.Value;
+BuildModelOperation operation = client.BuildModel(WaitUntil.Completed, trainingFileUri, DocumentBuildMode.Template);
+DocumentModelDetails model = operation.Value;
 
 // Get the model that was just created
-DocumentModel newCreatedModel = client.GetModel(model.ModelId);
+DocumentModelDetails newCreatedModel = client.GetModel(model.ModelId);
 
 Console.WriteLine($"Custom Model with Id {newCreatedModel.ModelId} has the following information:");
 
@@ -732,8 +714,7 @@ For example, if you submit a receipt image with an invalid `Uri`, a `400` error 
 ```C# Snippet:DocumentAnalysisBadRequest
 try
 {
-    AnalyzeDocumentOperation operation = await client.StartAnalyzeDocumentFromUriAsync("prebuilt-receipt", new Uri("http://invalid.uri"));
-    await operation.WaitForCompletionAsync();
+    AnalyzeDocumentOperation operation = await client.AnalyzeDocumentFromUriAsync(WaitUntil.Completed, "prebuilt-receipt", new Uri("http://invalid.uri"));
 }
 catch (RequestFailedException e)
 {
@@ -787,7 +768,7 @@ Samples showing how to use the Cognitive Services Form Recognizer library are av
 - [Build a custom model][build_a_custom_model]
 - [Manage models][manage_models]
 - [Get and List document model operations][get_and_list]
-- [Create a composed model][composed_model]
+- [Compose a model][compose_model]
 - [Copy a custom model between Form Recognizer resources][copy_custom_models]
 
 > Note that these samples use SDK `V4.0.0-beta.X`. For lower versions of the SDK, please see [Form Recognizer Samples for V3.1.X][formrecov3_samples].
@@ -804,27 +785,27 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 
 
 <!-- LINKS -->
-[formreco_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.4/sdk/formrecognizer/Azure.AI.FormRecognizer/src
+[formreco_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.5/sdk/formrecognizer/Azure.AI.FormRecognizer/src
 [formreco_docs]: /azure/cognitive-services/form-recognizer/
 [formreco_refdocs]: https://aka.ms/azsdk/net/docs/ref/formrecognizer
 [formreco_nuget_package]: https://www.nuget.org/packages/Azure.AI.FormRecognizer
-[formreco_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.4/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/README.md
-[formrecov3_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.4/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/V3.1/README.md
-[formreco_changelog]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_4.0.0-beta.4/sdk/formrecognizer/Azure.AI.FormRecognizer/CHANGELOG.md
+[formreco_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.5/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/README.md
+[formrecov3_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.5/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/V3.1/README.md
+[formreco_changelog]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.FormRecognizer_4.0.0-beta.5/sdk/formrecognizer/Azure.AI.FormRecognizer/CHANGELOG.md
 [formreco_rest_api]: https://aka.ms/azsdk/formrecognizer/restapi
 [formreco_models]: https://aka.ms/azsdk/formrecognizer/models
 [formreco_errors]: https://aka.ms/azsdk/formrecognizer/errors
 [formreco_build_model]: https://aka.ms/azsdk/formrecognizer/buildmodel
-[migration_guide]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.4/sdk/formrecognizer/Azure.AI.FormRecognizer/MigrationGuide.md
+[migration_guide]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.5/sdk/formrecognizer/Azure.AI.FormRecognizer/MigrationGuide.md
 [cognitive_resource]: /azure/cognitive-services/cognitive-services-apis-create-account
 
 
-[doc_analysis_client_class]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.4/sdk/formrecognizer/Azure.AI.FormRecognizer/src/DocumentAnalysisClient.cs
-[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.4/sdk/identity/Azure.Identity
+[doc_analysis_client_class]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.5/sdk/formrecognizer/Azure.AI.FormRecognizer/src/DocumentAnalysisClient.cs
+[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.5/sdk/identity/Azure.Identity
 [register_aad_app]: /azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
 [aad_grant_access]: /azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
 [custom_subdomain]: /azure/cognitive-services/authentication#create-a-resource-with-a-custom-subdomain
-[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.4/sdk/identity/Azure.Identity/README.md
+[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.5/sdk/identity/Azure.Identity/README.md
 [cognitive_resource_portal]: /azure/cognitive-services/cognitive-services-apis-create-account
 [cognitive_resource_cli]: /azure/cognitive-services/cognitive-services-apis-create-account-cli
 [regional_endpoints]: /azure/cognitive-services/cognitive-services-custom-subdomains#is-there-a-list-of-regional-endpoints
@@ -835,18 +816,18 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [labeling_tool]: https://aka.ms/azsdk/formrecognizer/labelingtool
 [dotnet_lro_guidelines]: https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning
 
-[logging]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.4/sdk/core/Azure.Core/samples/Diagnostics.md
+[logging]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.5/sdk/core/Azure.Core/samples/Diagnostics.md
 
-[extract_layout]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.4/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_ExtractLayout.md
-[analyze_prebuilt_document]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.4/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_AnalyzePrebuiltDocument.md
-[analyze_prebuilt_read]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.4/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_AnalyzePrebuiltRead.md
-[analyze_custom]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.4/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_AnalyzeWithCustomModel.md
-[analyze_prebuilt]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.4/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_AnalyzeWithPrebuiltModel.md
-[build_a_custom_model]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.4/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_BuildCustomModel.md
-[manage_models]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.4/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_ManageModels.md
-[copy_custom_models]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.4/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_CopyCustomModel.md
-[composed_model]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.4/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_ModelCompose.md
-[get_and_list]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.4/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_GetAndListOperations.md
+[extract_layout]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.5/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_ExtractLayout.md
+[analyze_prebuilt_document]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.5/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_AnalyzePrebuiltDocument.md
+[analyze_prebuilt_read]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.5/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_AnalyzePrebuiltRead.md
+[analyze_custom]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.5/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_AnalyzeWithCustomModel.md
+[analyze_prebuilt]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.5/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_AnalyzeWithPrebuiltModel.md
+[build_a_custom_model]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.5/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_BuildCustomModel.md
+[manage_models]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.5/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_ManageModels.md
+[copy_custom_models]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.5/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_CopyCustomModel.md
+[compose_model]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.5/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_ModelCompose.md
+[get_and_list]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.FormRecognizer_4.0.0-beta.5/sdk/formrecognizer/Azure.AI.FormRecognizer/samples/Sample_GetAndListOperations.md
 
 [azure_cli]: /cli/azure
 [azure_sub]: https://azure.microsoft.com/free/dotnet/
