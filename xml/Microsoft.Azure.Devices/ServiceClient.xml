@@ -26,10 +26,17 @@
   </Interfaces>
   <Docs>
     <summary>
-            Contains methods that services can use to send messages to devices
+            Contains methods that services can use to send messages to devices.
             </summary>
     <remarks>
-            For more information, see <see href="https://github.com/Azure/azure-iot-sdk-csharp#iot-hub-service-sdk" /></remarks>
+            For more information, see <see href="https://github.com/Azure/azure-iot-sdk-csharp#iot-hub-service-sdk" />.
+            <para>
+            This client creates lifetime long instances of <see cref="T:System.Net.Http.HttpClient" /> that are tied to the URI of the
+            IoT hub specified, configure any proxy settings, and connection lease timeout.
+            For that reason, the instances are not static and an application using this client
+            should create and save it for all use. Repeated creation may cause
+            <see href="https://docs.microsoft.com/azure/architecture/antipatterns/improper-instantiation/">socket exhaustion</see>.
+            </para></remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -238,11 +245,11 @@
         <Parameter Name="options" Type="Microsoft.Azure.Devices.ServiceClientOptions" />
       </Parameters>
       <Docs>
-        <param name="connectionString">Connection string for the IoT Hub.</param>
+        <param name="connectionString">Connection string for the IoT hub.</param>
         <param name="transportType">The <see cref="T:Microsoft.Azure.Devices.TransportType" /> used (Amqp or Amqp_WebSocket_Only).</param>
         <param name="options">The <see cref="T:Microsoft.Azure.Devices.ServiceClientOptions" /> that allow configuration of the service client instance during initialization.</param>
         <summary>
-            Create an instance of ServiceClient from the specified IoT Hub connection string using specified Transport Type.
+            Create an instance of ServiceClient from the specified IoT hub connection string using specified Transport Type.
             </summary>
         <returns>An instance of ServiceClient.</returns>
         <remarks>To be added.</remarks>
@@ -277,12 +284,12 @@
         <Parameter Name="options" Type="Microsoft.Azure.Devices.ServiceClientOptions" />
       </Parameters>
       <Docs>
-        <param name="connectionString">Connection string for the IoT Hub.</param>
+        <param name="connectionString">Connection string for the IoT hub.</param>
         <param name="transportType">The <see cref="T:Microsoft.Azure.Devices.TransportType" /> used (Amqp or Amqp_WebSocket_Only).</param>
         <param name="transportSettings">Specifies the AMQP and HTTP proxy settings for Service Client.</param>
         <param name="options">The <see cref="T:Microsoft.Azure.Devices.ServiceClientOptions" /> that allow configuration of the service client instance during initialization.</param>
         <summary>
-            Create an instance of ServiceClient from the specified IoT Hub connection string using specified Transport Type and transport settings.
+            Create an instance of ServiceClient from the specified IoT hub connection string using specified Transport Type and transport settings.
             </summary>
         <returns>An instance of ServiceClient.</returns>
         <remarks>To be added.</remarks>
@@ -379,7 +386,7 @@
       <Parameters />
       <Docs>
         <summary>
-            Get the <see cref="T:Microsoft.Azure.Devices.FeedbackReceiver`1" /> which can deliver acknowledgments for messages sent to a device/module from IoT Hub.
+            Get the <see cref="T:Microsoft.Azure.Devices.FeedbackReceiver`1" /> which can deliver acknowledgments for messages sent to a device/module from IoT hub.
             This call is made over AMQP.
             For more information see <see href="https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-messages-c2d#message-feedback" />.
             </summary>
@@ -448,9 +455,9 @@
       <Docs>
         <param name="cancellationToken">A cancellation token to cancel the operation.</param>
         <summary>
-            Gets service statistics for the IoT Hub. This call is made over HTTP.
+            Gets service statistics for the IoT hub. This call is made over HTTP.
             </summary>
-        <returns>The service statistics that can be retrieved from IoT Hub, eg. the number of devices connected to the hub.</returns>
+        <returns>The service statistics that can be retrieved from IoT hub, eg. the number of devices connected to the hub.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -487,9 +494,11 @@
         <param name="cancellationToken">A cancellation token to cancel the operation.</param>
         <summary>
             Interactively invokes a method on a device.
+            Additional 15s is added to the timeout in cloudToDeviceMethod to account for time taken to wire a request
             </summary>
         <returns>The <see cref="T:Microsoft.Azure.Devices.CloudToDeviceMethodResult" />.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">When <paramref name="cloudToDeviceMethod" /> is null.</exception>
       </Docs>
     </Member>
     <Member MemberName="InvokeDeviceMethodAsync">
@@ -530,6 +539,7 @@
             </summary>
         <returns>The <see cref="T:Microsoft.Azure.Devices.CloudToDeviceMethodResult" />.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">When <paramref name="cloudToDeviceMethod" /> is null.</exception>
       </Docs>
     </Member>
     <Member MemberName="OpenAsync">
