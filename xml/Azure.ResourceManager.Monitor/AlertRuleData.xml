@@ -18,11 +18,11 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public AlertRuleData (Azure.Core.AzureLocation location, string namePropertiesName, bool isEnabled, Azure.ResourceManager.Monitor.Models.RuleCondition condition);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype Azure.Core.AzureLocation location, string namePropertiesName, bool isEnabled, class Azure.ResourceManager.Monitor.Models.RuleCondition condition) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.ResourceManager.Monitor.AlertRuleData.#ctor(Azure.Core.AzureLocation,System.String,System.Boolean,Azure.ResourceManager.Monitor.Models.RuleCondition)" />
-      <MemberSignature Language="VB.NET" Value="Public Sub New (location As AzureLocation, namePropertiesName As String, isEnabled As Boolean, condition As RuleCondition)" />
-      <MemberSignature Language="F#" Value="new Azure.ResourceManager.Monitor.AlertRuleData : Azure.Core.AzureLocation * string * bool * Azure.ResourceManager.Monitor.Models.RuleCondition -&gt; Azure.ResourceManager.Monitor.AlertRuleData" Usage="new Azure.ResourceManager.Monitor.AlertRuleData (location, namePropertiesName, isEnabled, condition)" />
+      <MemberSignature Language="C#" Value="public AlertRuleData (Azure.Core.AzureLocation location, string alertRuleName, bool isEnabled, Azure.ResourceManager.Monitor.Models.AlertRuleCondition condition);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype Azure.Core.AzureLocation location, string alertRuleName, bool isEnabled, class Azure.ResourceManager.Monitor.Models.AlertRuleCondition condition) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.ResourceManager.Monitor.AlertRuleData.#ctor(Azure.Core.AzureLocation,System.String,System.Boolean,Azure.ResourceManager.Monitor.Models.AlertRuleCondition)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (location As AzureLocation, alertRuleName As String, isEnabled As Boolean, condition As AlertRuleCondition)" />
+      <MemberSignature Language="F#" Value="new Azure.ResourceManager.Monitor.AlertRuleData : Azure.Core.AzureLocation * string * bool * Azure.ResourceManager.Monitor.Models.AlertRuleCondition -&gt; Azure.ResourceManager.Monitor.AlertRuleData" Usage="new Azure.ResourceManager.Monitor.AlertRuleData (location, alertRuleName, isEnabled, condition)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.ResourceManager.Monitor</AssemblyName>
@@ -30,57 +30,113 @@
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="location" Type="Azure.Core.AzureLocation" />
-        <Parameter Name="namePropertiesName" Type="System.String" />
+        <Parameter Name="alertRuleName" Type="System.String" />
         <Parameter Name="isEnabled" Type="System.Boolean" />
-        <Parameter Name="condition" Type="Azure.ResourceManager.Monitor.Models.RuleCondition" />
+        <Parameter Name="condition" Type="Azure.ResourceManager.Monitor.Models.AlertRuleCondition" />
       </Parameters>
       <Docs>
         <param name="location"> The location. </param>
-        <param name="namePropertiesName"> the name of the alert rule. </param>
+        <param name="alertRuleName"> the name of the alert rule. </param>
         <param name="isEnabled"> the flag that indicates whether the alert rule is enabled. </param>
-        <param name="condition"> the condition that results in the alert rule being activated. </param>
+        <param name="condition">
+            the condition that results in the alert rule being activated.
+            Please note <see cref="T:Azure.ResourceManager.Monitor.Models.AlertRuleCondition" /> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+            The available derived classes include <see cref="T:Azure.ResourceManager.Monitor.Models.LocationThresholdRuleCondition" />, <see cref="T:Azure.ResourceManager.Monitor.Models.ManagementEventRuleCondition" /> and <see cref="T:Azure.ResourceManager.Monitor.Models.ThresholdRuleCondition" />.
+            </param>
         <summary> Initializes a new instance of AlertRuleData. </summary>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="namePropertiesName" /> or <paramref name="condition" /> is null. </exception>
+          <paramref name="alertRuleName" /> or <paramref name="condition" /> is null. </exception>
       </Docs>
     </Member>
-    <Member MemberName="Actions">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.IList&lt;Azure.ResourceManager.Monitor.Models.RuleAction&gt; Actions { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.IList`1&lt;class Azure.ResourceManager.Monitor.Models.RuleAction&gt; Actions" />
-      <MemberSignature Language="DocId" Value="P:Azure.ResourceManager.Monitor.AlertRuleData.Actions" />
-      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Actions As IList(Of RuleAction)" />
-      <MemberSignature Language="F#" Value="member this.Actions : System.Collections.Generic.IList&lt;Azure.ResourceManager.Monitor.Models.RuleAction&gt;" Usage="Azure.ResourceManager.Monitor.AlertRuleData.Actions" />
+    <Member MemberName="Action">
+      <MemberSignature Language="C#" Value="public Azure.ResourceManager.Monitor.Models.AlertRuleAction Action { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Azure.ResourceManager.Monitor.Models.AlertRuleAction Action" />
+      <MemberSignature Language="DocId" Value="P:Azure.ResourceManager.Monitor.AlertRuleData.Action" />
+      <MemberSignature Language="VB.NET" Value="Public Property Action As AlertRuleAction" />
+      <MemberSignature Language="F#" Value="member this.Action : Azure.ResourceManager.Monitor.Models.AlertRuleAction with get, set" Usage="Azure.ResourceManager.Monitor.AlertRuleData.Action" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.ResourceManager.Monitor</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>System.Collections.Generic.IList&lt;Azure.ResourceManager.Monitor.Models.RuleAction&gt;</ReturnType>
+        <ReturnType>Azure.ResourceManager.Monitor.Models.AlertRuleAction</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary> the array of actions that are performed when the alert rule becomes active, and when an alert condition is resolved. </summary>
+        <summary>
+            action that is performed when the alert rule becomes active, and when an alert condition is resolved.
+            Please note <see cref="T:Azure.ResourceManager.Monitor.Models.AlertRuleAction" /> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+            The available derived classes include <see cref="T:Azure.ResourceManager.Monitor.Models.RuleEmailAction" /> and <see cref="T:Azure.ResourceManager.Monitor.Models.RuleWebhookAction" />.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Actions">
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.IList&lt;Azure.ResourceManager.Monitor.Models.AlertRuleAction&gt; Actions { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.IList`1&lt;class Azure.ResourceManager.Monitor.Models.AlertRuleAction&gt; Actions" />
+      <MemberSignature Language="DocId" Value="P:Azure.ResourceManager.Monitor.AlertRuleData.Actions" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Actions As IList(Of AlertRuleAction)" />
+      <MemberSignature Language="F#" Value="member this.Actions : System.Collections.Generic.IList&lt;Azure.ResourceManager.Monitor.Models.AlertRuleAction&gt;" Usage="Azure.ResourceManager.Monitor.AlertRuleData.Actions" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.ResourceManager.Monitor</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.IList&lt;Azure.ResourceManager.Monitor.Models.AlertRuleAction&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            the array of actions that are performed when the alert rule becomes active, and when an alert condition is resolved.
+            Please note <see cref="T:Azure.ResourceManager.Monitor.Models.AlertRuleAction" /> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+            The available derived classes include <see cref="T:Azure.ResourceManager.Monitor.Models.RuleEmailAction" /> and <see cref="T:Azure.ResourceManager.Monitor.Models.RuleWebhookAction" />.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AlertRuleName">
+      <MemberSignature Language="C#" Value="public string AlertRuleName { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string AlertRuleName" />
+      <MemberSignature Language="DocId" Value="P:Azure.ResourceManager.Monitor.AlertRuleData.AlertRuleName" />
+      <MemberSignature Language="VB.NET" Value="Public Property AlertRuleName As String" />
+      <MemberSignature Language="F#" Value="member this.AlertRuleName : string with get, set" Usage="Azure.ResourceManager.Monitor.AlertRuleData.AlertRuleName" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.ResourceManager.Monitor</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary> the name of the alert rule. </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Condition">
-      <MemberSignature Language="C#" Value="public Azure.ResourceManager.Monitor.Models.RuleCondition Condition { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class Azure.ResourceManager.Monitor.Models.RuleCondition Condition" />
+      <MemberSignature Language="C#" Value="public Azure.ResourceManager.Monitor.Models.AlertRuleCondition Condition { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Azure.ResourceManager.Monitor.Models.AlertRuleCondition Condition" />
       <MemberSignature Language="DocId" Value="P:Azure.ResourceManager.Monitor.AlertRuleData.Condition" />
-      <MemberSignature Language="VB.NET" Value="Public Property Condition As RuleCondition" />
-      <MemberSignature Language="F#" Value="member this.Condition : Azure.ResourceManager.Monitor.Models.RuleCondition with get, set" Usage="Azure.ResourceManager.Monitor.AlertRuleData.Condition" />
+      <MemberSignature Language="VB.NET" Value="Public Property Condition As AlertRuleCondition" />
+      <MemberSignature Language="F#" Value="member this.Condition : Azure.ResourceManager.Monitor.Models.AlertRuleCondition with get, set" Usage="Azure.ResourceManager.Monitor.AlertRuleData.Condition" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.ResourceManager.Monitor</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>Azure.ResourceManager.Monitor.Models.RuleCondition</ReturnType>
+        <ReturnType>Azure.ResourceManager.Monitor.Models.AlertRuleCondition</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary> the condition that results in the alert rule being activated. </summary>
+        <summary>
+            the condition that results in the alert rule being activated.
+            Please note <see cref="T:Azure.ResourceManager.Monitor.Models.AlertRuleCondition" /> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+            The available derived classes include <see cref="T:Azure.ResourceManager.Monitor.Models.LocationThresholdRuleCondition" />, <see cref="T:Azure.ResourceManager.Monitor.Models.ManagementEventRuleCondition" /> and <see cref="T:Azure.ResourceManager.Monitor.Models.ThresholdRuleCondition" />.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -141,26 +197,6 @@
       </ReturnValue>
       <Docs>
         <summary> Last time the rule was updated in ISO8601 format. </summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="NamePropertiesName">
-      <MemberSignature Language="C#" Value="public string NamePropertiesName { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance string NamePropertiesName" />
-      <MemberSignature Language="DocId" Value="P:Azure.ResourceManager.Monitor.AlertRuleData.NamePropertiesName" />
-      <MemberSignature Language="VB.NET" Value="Public Property NamePropertiesName As String" />
-      <MemberSignature Language="F#" Value="member this.NamePropertiesName : string with get, set" Usage="Azure.ResourceManager.Monitor.AlertRuleData.NamePropertiesName" />
-      <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Azure.ResourceManager.Monitor</AssemblyName>
-        <AssemblyVersion>1.0.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.String</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary> the name of the alert rule. </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
