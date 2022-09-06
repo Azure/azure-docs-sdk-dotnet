@@ -1,20 +1,17 @@
 ---
 title: Azure Cognitive Search client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Search.Documents, search
-author: ramya-rao-a
-ms.author: ramyar
-ms.date: 06/10/2021
+author: ShivangiReja
+ms.author: shreja
+ms.date: 09/06/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: search
 ---
+# Azure Cognitive Search client library for .NET - version 11.4.0 
 
-# Azure Cognitive Search client library for .NET - version 11.3.0 
 
-
-[Azure Cognitive Search](https://docs.microsoft.com/azure/search/) is a
+[Azure Cognitive Search](/azure/search/) is a
 search-as-a-service cloud solution that gives developers APIs and tools
 for adding a rich search experience over private, heterogeneous content
 in web, mobile, and enterprise applications.
@@ -48,7 +45,7 @@ Use the Azure.Search.Documents client library to:
 * Create and manage analyzers for advanced text analysis or multi-lingual content.
 * Optimize results through scoring profiles to factor in business logic or freshness.
 
-[Source code][source] | [Package (NuGet)][package] | [API reference documentation][docs] | [REST API documentation][rest_docs] | [Product documentation][product_docs]
+[Source code][source] | [Package (NuGet)][package] | [API reference documentation][docs] | [REST API documentation][rest_docs] | [Product documentation][product_docs] | [Samples][samples]
 
 ## Getting started
 
@@ -56,8 +53,8 @@ Use the Azure.Search.Documents client library to:
 
 Install the Azure Cognitive Search client library for .NET with [NuGet][nuget]:
 
-```Powershell
-dotnet add package Azure.Search.Documents --version 11.2.0-beta.1
+```dotnetcli
+dotnet add package Azure.Search.Documents
 ```
 
 ### Prerequisites
@@ -73,14 +70,14 @@ Here's an example using the Azure CLI to create a free instance for getting star
 az search service create --name <mysearch> --resource-group <mysearch-rg> --sku free --location westus
 ```
 
-See [choosing a pricing tier](https://docs.microsoft.com/azure/search/search-sku-tier)
+See [choosing a pricing tier](/azure/search/search-sku-tier)
  for more information about available options.
 
 ### Authenticate the client
 
 All requests to a search service need an api-key that was generated specifically
 for your service. [The api-key is the sole mechanism for authenticating access to
-your search service endpoint.](https://docs.microsoft.com/azure/search/search-security-api-keys)
+your search service endpoint.](/azure/search/search-security-api-keys)
 You can obtain your api-key from the
 [Azure portal](https://portal.azure.com/) or via the Azure CLI:
 
@@ -110,6 +107,47 @@ string key = Environment.GetEnvironmentVariable("SEARCH_API_KEY");
 AzureKeyCredential credential = new AzureKeyCredential(key);
 SearchClient client = new SearchClient(endpoint, indexName, credential);
 ```
+### ASP.NET Core
+To inject `SearchClient` as a dependency in an ASP.NET Core app, first install the package `Microsoft.Extensions.Azure`. Then register the client in the `Startup.ConfigureServices` method:
+
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddAzureClients(builder =>
+    {
+        builder.AddSearchClient(Configuration.GetSection("SearchClient"));
+    });
+  
+    services.AddControllers();
+}
+```
+To use the preceding code, add this to your configuration:
+
+```json
+{
+    "SearchClient": {
+      "endpoint": "https://<resource-name>.search.windows.net",
+      "indexname": "nycjobs"
+    }
+}
+```
+You'll also need to provide your resource key to authenticate the client, but you shouldn't be putting that information in the configuration. Instead, when in development, use [User-Secrets](/aspnet/core/security/app-secrets?view=aspnetcore-5.0&tabs=windows#how-the-secret-manager-tool-works). Add the following to `secrets.json`:
+
+```json
+{
+    "SearchClient": {
+      "credential": { "key": "<you resource key>" }
+    }
+}
+```
+When running in production, it's preferable to use [environment variables](/aspnet/core/security/app-secrets?view=aspnetcore-5.0&tabs=windows#environment-variables):
+
+```
+SEARCH__CREDENTIAL__KEY="..."
+```
+Or use other secure ways of storing secrets like [Azure Key Vault](/aspnet/core/security/key-vault-configuration?view=aspnetcore-5.0).
+
+For more details about Dependency Injection in ASP.NET Core apps, see [Dependency injection with the Azure SDK for .NET](/dotnet/azure/sdk/dependency-injection).
 
 ## Key concepts
 
@@ -120,24 +158,24 @@ indexes and database tables.)_  The Azure.Search.Documents client library
 exposes operations on these resources through three main client types.
 
 * `SearchClient` helps with:
-  * [Searching](https://docs.microsoft.com/azure/search/search-lucene-query-architecture)
+  * [Searching](/azure/search/search-lucene-query-architecture)
     your indexed documents using
-    [rich queries](https://docs.microsoft.com/azure/search/search-query-overview)
-    and [powerful data shaping](https://docs.microsoft.com/azure/search/search-filters)
-  * [Autocompleting](https://docs.microsoft.com/rest/api/searchservice/autocomplete)
+    [rich queries](/azure/search/search-query-overview)
+    and [powerful data shaping](/azure/search/search-filters)
+  * [Autocompleting](/rest/api/searchservice/autocomplete)
     partially typed search terms based on documents in the index
-  * [Suggesting](https://docs.microsoft.com/rest/api/searchservice/suggestions)
+  * [Suggesting](/rest/api/searchservice/suggestions)
     the most likely matching text in documents as a user types
-  * [Adding, Updating or Deleting Documents](https://docs.microsoft.com/rest/api/searchservice/addupdate-or-delete-documents)
+  * [Adding, Updating or Deleting Documents](/rest/api/searchservice/addupdate-or-delete-documents)
     documents from an index
 
 * `SearchIndexClient` allows you to:
-  * [Create, delete, update, or configure a search index](https://docs.microsoft.com/rest/api/searchservice/index-operations)
-  * [Declare custom synonym maps to expand or rewrite queries](https://docs.microsoft.com/rest/api/searchservice/synonym-map-operations)
+  * [Create, delete, update, or configure a search index](/rest/api/searchservice/index-operations)
+  * [Declare custom synonym maps to expand or rewrite queries](/rest/api/searchservice/synonym-map-operations)
 
 * `SearchIndexerClient` allows you to:
-  * [Create indexers to automatically crawl data sources](https://docs.microsoft.com/rest/api/searchservice/indexer-operations)
-  * [Define AI powered Skillsets to transform and enrich your data](https://docs.microsoft.com/rest/api/searchservice/skillset-operations)
+  * [Create indexers to automatically crawl data sources](/rest/api/searchservice/indexer-operations)
+  * [Define AI powered Skillsets to transform and enrich your data](/rest/api/searchservice/skillset-operations)
 
 _The `Azure.Search.Documents` client library (v11) is a brand new offering for
 .NET developers who want to use search technology in their applications.  There
@@ -151,18 +189,19 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.3.0/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.3.0/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.3.0/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.3.0/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.3.0/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.3.0/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.4.0/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.4.0/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.4.0/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.4.0/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.4.0/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.4.0/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
 ## Examples
 
-The following examples all use a simple [Hotel data set](https://github.com/Azure-Samples/azure-search-sample-data) that you can [import into your own index from the Azure portal.](https://docs.microsoft.com/azure/search/search-get-started-portal#step-1---start-the-import-data-wizard-and-create-a-data-source)
+The following examples all use a simple [Hotel data set](https://github.com/Azure-Samples/azure-search-sample-data)
+that you can [import into your own index from the Azure portal.](/azure/search/search-get-started-portal#step-1---start-the-import-data-wizard-and-create-a-data-source)
 These are just a few of the basics - please [check out our Samples][samples] for
 much more.
 
@@ -174,6 +213,10 @@ much more.
 * [Adding documents to your index](#adding-documents-to-your-index)
 * [Retrieving a specific document from your index](#retrieving-a-specific-document-from-your-index)
 * [Async APIs](#async-apis)
+
+### Advanced authentication
+ 
+- [Create a client that can authenticate in a national cloud](#authenticate-in-a-national-cloud)
 
 ### Querying
 
@@ -203,7 +246,7 @@ Let's explore them with a search for a "luxury" hotel.
 
 #### Use C# types for search results
 
-We can decorate our own C# types with [attributes from `System.Text.Json`](https://docs.microsoft.com/dotnet/standard/serialization/system-text-json-how-to):
+We can decorate our own C# types with [attributes from `System.Text.Json`](/dotnet/standard/serialization/system-text-json-how-to):
 
 ```C# Snippet:Azure_Search_Tests_Samples_Readme_StaticType
 public class Hotel
@@ -335,7 +378,7 @@ client.CreateIndex(index);
 
 You can `Upload`, `Merge`, `MergeOrUpload`, and `Delete` multiple documents from
 an index in a single batched request.  There are
-[a few special rules for merging](https://docs.microsoft.com/rest/api/searchservice/addupdate-or-delete-documents#document-actions)
+[a few special rules for merging](/rest/api/searchservice/addupdate-or-delete-documents#document-actions)
 to be aware of.
 
 ```C# Snippet:Azure_Search_Tests_Samples_Readme_Index
@@ -378,6 +421,29 @@ await foreach (SearchResult<Hotel> result in response.GetResultsAsync())
 }
 ```
 
+### Authenticate in a National Cloud
+
+To authenticate in a [National Cloud](/azure/active-directory/develop/authentication-national-cloud), you will need to make the following additions to your client configuration:
+
+- Set the `AuthorityHost` in the credential options or via the `AZURE_AUTHORITY_HOST` environment variable
+- Set the `Audience` in `SearchClientOptions`
+
+```C#
+// Create a SearchClient that will authenticate through AAD in the China national cloud
+string indexName = "nycjobs";
+Uri endpoint = new Uri(Environment.GetEnvironmentVariable("SEARCH_ENDPOINT"));
+SearchClient client = new SearchClient(endpoint, indexName,
+    new DefaultAzureCredential(
+        new DefaultAzureCredentialOptions()
+        {
+            AuthorityHost = AzureAuthorityHosts.AzureChina
+        }),
+    new SearchClientOptions()
+    {
+        Audience = SearchAudience.AzureChina
+    });
+```
+
 ## Troubleshooting
 
 Any Azure.Search.Documents operation that fails will throw a
@@ -397,14 +463,16 @@ catch (RequestFailedException ex) when (ex.Status == 404)
 }
 ```
 
-You can also easily [enable console logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.3.0/sdk/core/Azure.Core/samples/Diagnostics.md#logging) if you want to dig
+You can also easily [enable console logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.4.0/sdk/core/Azure.Core/samples/Diagnostics.md#logging) if you want to dig
 deeper into the requests you're making against the service.
+
+See our [troubleshooting guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.4.0/sdk/search/Azure.Search.Documents/TROUBLESHOOTING.md) for details on how to diagnose various failure scenarios.
 
 ## Next steps
 
 * Go further with Azure.Search.Documents and our [samples][samples]
 * Watch a [demo or deep dive video](https://azure.microsoft.com/resources/videos/index/?services=search)
-* Read more about the [Azure Cognitive Search service](https://docs.microsoft.com/azure/search/search-what-is-azure-search)
+* Read more about the [Azure Cognitive Search service](/azure/search/search-what-is-azure-search)
 
 ## Contributing
 
@@ -424,21 +492,21 @@ additional questions or comments.
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fsearch%2FAzure.Search.Documents%2FREADME.png)
 
 <!-- LINKS -->
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Search.Documents_11.3.0/sdk/search/Azure.Search.Documents/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Search.Documents_11.4.0/sdk/search/Azure.Search.Documents/src
 [package]: https://www.nuget.org/packages/Azure.Search.Documents/
-[docs]: https://docs.microsoft.com/dotnet/api/Azure.Search.Documents
-[rest_docs]: https://docs.microsoft.com/rest/api/searchservice/
-[product_docs]: https://docs.microsoft.com/azure/search/
+[docs]: /dotnet/api/Azure.Search.Documents
+[rest_docs]: /rest/api/searchservice/
+[product_docs]: /azure/search/
 [nuget]: https://www.nuget.org/
-[create_search_service_docs]: https://docs.microsoft.com/azure/search/search-create-service-portal
-[create_search_service_ps]: https://docs.microsoft.com/azure/search/search-manage-powershell#create-or-delete-a-service
-[create_search_service_cli]: https://docs.microsoft.com/cli/azure/search/service?view=azure-cli-latest#az-search-service-create
-[azure_cli]: https://docs.microsoft.com/cli/azure
-[azure_sub]: https://azure.microsoft.com/free/
-[RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Search.Documents_11.3.0/sdk/core/Azure.Core/src/RequestFailedException.cs
-[status_codes]: https://docs.microsoft.com/rest/api/searchservice/http-status-codes
-[samples]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.3.0/sdk/search/Azure.Search.Documents/samples/
-[search_contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Search.Documents_11.3.0/sdk/search/CONTRIBUTING.md
+[create_search_service_docs]: /azure/search/search-create-service-portal
+[create_search_service_ps]: /azure/search/search-manage-powershell#create-or-delete-a-service
+[create_search_service_cli]: /cli/azure/search/service?view=azure-cli-latest#az-search-service-create
+[azure_cli]: /cli/azure
+[azure_sub]: https://azure.microsoft.com/free/dotnet/
+[RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Search.Documents_11.4.0/sdk/core/Azure.Core/src/RequestFailedException.cs
+[status_codes]: /rest/api/searchservice/http-status-codes
+[samples]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Search.Documents_11.4.0/sdk/search/Azure.Search.Documents/samples/
+[search_contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Search.Documents_11.4.0/sdk/search/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
