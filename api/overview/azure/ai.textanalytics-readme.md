@@ -1,65 +1,71 @@
 ---
 title: Azure Cognitive Services Text Analytics client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.TextAnalytics, textanalytics
-author: maggiepint
-ms.author: magpint
-ms.date: 11/19/2021
-ms.topic: article
-ms.prod: azure
-ms.technology: azure
+author: kinelski
+ms.author: camaiaor
+ms.date: 09/09/2022
+ms.topic: reference
 ms.devlang: dotnet
 ms.service: textanalytics
 ---
+# Azure Cognitive Services Text Analytics client library for .NET - version 5.2.0 
 
-# Azure Cognitive Services Text Analytics client library for .NET - version 5.1.1 
 
-Azure Cognitive Services Text Analytics is a cloud service that provides advanced natural language processing over raw text, and includes the following main functions: 
-* Language Detection
-* Sentiment Analysis
-* Key Phrase Extraction
-* Named Entity Recognition
-* Personally Identifiable Information (PII) Recognition
-* Linked Entity Recognition
-* Healthcare Recognition
-* Running multiple actions in one or more documents
+Azure Cognitive Services Text Analytics is one of the three services that are part of the Azure Cognitive Service for Language. This client library includes the following main features:
 
-[Source code][textanalytics_client_src] | [Package (NuGet)][textanalytics_nuget_package] | [API reference documentation][textanalytics_refdocs] | [Product documentation][textanalytics_docs] | [Samples][textanalytics_samples]
+* Extract Information: Use Natural Language Understanding (NLU) to extract information from unstructured text. For example:
+  * Key Phrase Extraction
+  * Entity Recognition (Named, Linked, and Personally Identifiable Information (PII) entities)
+  * Healthcare Entities Recognition
+  * Extractive Text Summarization
+  * Custom Named Entities Recognition
+* Classify Text: Use NLU to detect the language, analyze sentiment, or classify the text you have
+  * Language Detection
+  * Sentiment Analysis
+  * Custom Text Classification
+
+[Source code][textanalytics_client_src] | [Package (NuGet)][textanalytics_nuget_package] | [API reference documentation][textanalytics_refdocs] | [Product documentation][language_service_docs] | [Samples][textanalytics_samples]
 
 ## Getting started
 
 ### Install the package
+
 Install the Azure Text Analytics client library for .NET with [NuGet][nuget]:
 
-```PowerShell
+```dotnetcli
 dotnet add package Azure.AI.TextAnalytics
 ```
-> Note: This version of the client library defaults to the `v3.1` version of the service.
 
 This table shows the relationship between SDK versions and supported API versions of the service:
 
+> Note that `5.2.0-beta.3` is the first version of the client library that targets the Azure Cognitive Service for Language APIs which includes the existing text analysis and natural language processing features found in the Text Analytics client library. In addition, the service API has changed from semantic to date-based versioning. This version of the client library defaults to the latest supported API version, which currently is `2022-04-01-preview`.
+
 |SDK version|Supported API version of service
-|-|- |
-|5.1.X  | 3.0, 3.1 (default)
-|5.0.0  | 3.0
-|1.0.X  | 3.0
+|-----------|--------------------------------|
+|5.2.0      | 3.0, 3.1, 2022-05-01 (default)
+|5.1.X      | 3.0, 3.1 (default)
+|5.0.0      | 3.0
+|1.0.X      | 3.0
 
 ### Prerequisites
+
 * An [Azure subscription][azure_sub].
-* An existing Cognitive Services or Text Analytics resource.
+* An existing Cognitive Services or Language service resource.
 
-#### Create a Cognitive Services or Text Analytics resource
-Text Analytics supports both [multi-service and single-service access][cognitive_resource_portal]. Create a Cognitive Services resource if you plan to access multiple cognitive services under a single endpoint/key. For Text Analytics access only, create a Text Analytics resource.
+#### Create a Cognitive Services or Language service resource
 
-You can create either resource using: 
+The Language service supports both [multi-service and single-service access][cognitive_resource_portal]. Create a Cognitive Services resource if you plan to access multiple cognitive services under a single endpoint/key. For Language service access only, create a Language service resource.
+
+You can create either resource using:
 
 **Option 1:** [Azure Portal][cognitive_resource_portal].
 
-**Option 2:** [Azure CLI][cognitive_resource_cli]. 
+**Option 2:** [Azure CLI][cognitive_resource_cli].
 
-Below is an example of how you can create a Text Analytics resource using the CLI:
+Below is an example of how you can create a Language service resource using the CLI:
 
 ```PowerShell
-# Create a new resource group to hold the Text Analytics resource -
+# Create a new resource group to hold the Language service resource -
 # if using an existing resource group, skip this step
 az group create --name <your-resource-name> --location <location>
 ```
@@ -74,21 +80,25 @@ az cognitiveservices account create \
     --location <location> \
     --yes
 ```
+
 For more information about creating the resource or how to get the location and sku information see [here][cognitive_resource_cli].
 
 ### Authenticate the client
-In order to interact with the Text Analytics service, you'll need to create an instance of the [TextAnalyticsClient][textanalytics_client_class] class. You will need an **endpoint**, and either an **API key** or ``TokenCredential`` to instantiate a client object.  For more information regarding authenticating with cognitive services, see [Authenticate requests to Azure Cognitive Services][cognitive_auth].
+
+Interaction with the service using the client library begins with creating an instance of the [TextAnalyticsClient][textanalytics_client_class] class. You will need an **endpoint**, and either an **API key** or ``TokenCredential`` to instantiate a client object.  For more information regarding authenticating with cognitive services, see [Authenticate requests to Azure Cognitive Services][cognitive_auth].
 
 #### Get API Key
-You can get the `endpoint` and `API key` from the Cognitive Services resource or Text Analytics resource information in the [Azure Portal][azure_portal].
 
-Alternatively, use the [Azure CLI][azure_cli] snippet below to get the API key from the Text Analytics resource.
+You can get the `endpoint` and `API key` from the Cognitive Services resource or Language service resource information in the [Azure Portal][azure_portal].
+
+Alternatively, use the [Azure CLI][azure_cli] snippet below to get the API key from the Language service resource.
 
 ```PowerShell
 az cognitiveservices account keys list --resource-group <your-resource-group-name> --name <your-resource-name>
 ```
 
 #### Create TextAnalyticsClient with API Key Credential
+
 Once you have the value for the API key, create an `AzureKeyCredential`. This will allow you to
 update the API key without creating a new client.
 
@@ -102,16 +112,16 @@ var client = new TextAnalyticsClient(new Uri(endpoint), new AzureKeyCredential(a
 
 #### Create TextAnalyticsClient with Azure Active Directory Credential
 
-Client API key authentication is used in most of the examples in this getting started guide, but you can also authenticate with Azure Active Directory using the [Azure Identity library][azure_identity].  Note that regional endpoints do not support AAD authentication. Create a [custom subdomain][custom_subdomain] for your resource in order to use this type of authentication.  
+Client API key authentication is used in most of the examples in this getting started guide, but you can also authenticate with Azure Active Directory using the [Azure Identity library][azure_identity].  Note that regional endpoints do not support AAD authentication. Create a [custom subdomain][custom_subdomain] for your resource in order to use this type of authentication.
 
 To use the [DefaultAzureCredential][DefaultAzureCredential] provider shown below,
 or other credential providers provided with the Azure SDK, please install the Azure.Identity package:
 
-```PowerShell
-Install-Package Azure.Identity
+```dotnetcli
+dotnet add package Azure.Identity
 ```
 
-You will also need to [register a new AAD application][register_aad_app] and [grant access][aad_grant_access] to Text Analytics by assigning the `"Cognitive Services User"` role to your service principal.
+You will also need to [register a new AAD application][register_aad_app] and [grant access][aad_grant_access] to the Language service by assigning the `"Cognitive Services User"` role to your service principal.
 
 Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_CLIENT_SECRET.
 
@@ -123,61 +133,71 @@ var client = new TextAnalyticsClient(new Uri(endpoint), new DefaultAzureCredenti
 ## Key concepts
 
 ### TextAnalyticsClient
-A `TextAnalyticsClient` is the primary interface for developers using the Text Analytics client library.  It provides both synchronous and asynchronous operations to access a specific use of Text Analytics, such as language detection or key phrase extraction. 
+
+A `TextAnalyticsClient` is the primary interface for developers using the Text Analytics client library.  It provides both synchronous and asynchronous operations to access a specific use of text analysis, such as language detection or key phrase extraction.
 
 ### Input
-A **document**, is a single unit of input to be analyzed by the predictive models in the Text Analytics service.  Operations on `TextAnalyticsClient` may take a single document or a collection of documents to be analyzed as a batch.
+
+A **document**, is a single unit of input to be analyzed by the predictive models in the Language service. Operations on `TextAnalyticsClient` may take a single document or a collection of documents to be analyzed as a batch.
 For document length limits, maximum batch size, and supported text encoding see [here][data_limits].
 
 ### Operation on multiple documents
+
 For each supported operation, `TextAnalyticsClient` provides a method that accepts a batch of documents as strings, or a batch of either `TextDocumentInput` or `DetectLanguageInput` objects. This methods allow callers to give each document a unique ID, indicate that the documents in the batch are written in different languages, or provide a country hint about the language of the document.
 
 **Note:** It is recommended to use the batch methods when working on production environments as they allow you to send one request with multiple documents. This is more performant than sending a request per each document.
 
 ### Return value
+
 Return values, such as `AnalyzeSentimentResult`, is the result of a Text Analytics operation, containing a prediction or predictions about a single document.  An operation's return value also may optionally include information about the document and how it was processed.
 
 ### Return value Collection
-A Return value collection, such as `AnalyzeSentimentResultCollection`, is a collection of operation results, where each corresponds to one of the documents provided in the input batch.  A document and its result will have the same index in the input and result collections. The return value also contains a `HasError` property that allows to identify if an operation executed was succesful or unsuccesful for the given document. It may optionally include information about the document batch and how it was processed.
+
+A Return value collection, such as `AnalyzeSentimentResultCollection`, is a collection of operation results, where each corresponds to one of the documents provided in the input batch.  A document and its result will have the same index in the input and result collections. The return value also contains a `HasError` property that allows to identify if an operation executed was successful or unsuccessful for the given document. It may optionally include information about the document batch and how it was processed.
 
 ### Long-Running Operations
 
-For large documents which take a long time to execute, these operations are implemented as [**long-running operations**][dotnet_lro_guidelines].  Long-running operations consist of an initial request sent to the service to start an operation, followed by polling the service at intervals to determine whether the operation has completed or failed, and if it has succeeded, to get the result.
+For large documents which take a long time to execute, these operations are implemented as [**long-running operations**][dotnet_lro]. Long-running operations consist of an initial request sent to the service to start an operation, followed by polling the service at intervals to determine whether the operation has completed or failed, and if it has succeeded, to get the result.
 
-For long running operations in the Azure SDK, the client exposes a `Start<operation-name>` method that returns an `Operation<T>` or a `PageableOperation<T>`.  You can use the extension method `WaitForCompletionAsync()` to wait for the operation to complete and obtain its result.  A sample code snippet is provided to illustrate using long-running operations [below](#recognize-healthcare-entities-asynchronously).
+For long running operations in the Azure SDK, the client exposes a `Start<operation-name>` method that returns an `Operation<T>` or a `PageableOperation<T>`.  You can use the extension method `WaitForCompletionAsync()` to wait for the operation to complete and obtain its result.  A sample code snippet is provided to illustrate using long-running operations [below](#run-multiple-actions-asynchronously).
 
 ### Thread safety
+
 We guarantee that all client instance methods are thread-safe and independent of each other ([guideline](https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-service-methods-thread-safety)). This ensures that the recommendation of reusing client instances is always safe, even across threads.
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.1/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.1/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.1/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.1/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.1/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.2.0/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.2.0/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.2.0/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.2.0/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.2.0/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
 ## Examples
-The following section provides several code snippets using the `client` [created above](#create-textanalyticsclient-with-azure-active-directory-credential), and covers the main functions of Text Analytics. Although most of the snippets below make use of synchronous service calls, keep in mind that the Azure.AI.TextAnalytics package supports both synchronous and asynchronous APIs.
+
+The following section provides several code snippets using the `client` [created above](#create-textanalyticsclient-with-azure-active-directory-credential), and covers the main features present in this client library. Although most of the snippets below make use of synchronous service calls, keep in mind that the `Azure.AI.TextAnalytics` package supports both synchronous and asynchronous APIs.
 
 ### Sync examples
+
 * [Detect Language](#detect-language)
 * [Analyze Sentiment](#analyze-sentiment)
 * [Extract Key Phrases](#extract-key-phrases)
-* [Recognize Entities](#recognize-entities)
+* [Recognize Named Entities](#recognize-named-entities)
 * [Recognize PII Entities](#recognize-pii-entities)
 * [Recognize Linked Entities](#recognize-linked-entities)
 
 ### Async examples
+
 * [Detect Language Asynchronously](#detect-language-asynchronously)
-* [Recognize Entities Asynchronously](#recognize-entities-asynchronously)
+* [Recognize Named Entities Asynchronously](#recognize-named-entities-asynchronously)
 * [Analyze Healthcare Entities Asynchronously](#analyze-healthcare-entities-asynchronously)
 * [Run multiple actions Asynchronously](#run-multiple-actions-asynchronously)
 
 ### Detect Language
-Run a Text Analytics predictive model to determine the language that the passed-in document or batch of documents are written in.
+
+Run a predictive model to determine the language that the passed-in document or batch of documents are written in.
 
 ```C# Snippet:DetectLanguage
 string document = @"Este documento está escrito en un idioma diferente al Inglés. Tiene como objetivo demostrar
@@ -200,12 +220,14 @@ catch (RequestFailedException exception)
     Console.WriteLine($"Message: {exception.Message}");
 }
 ```
+
 For samples on using the production recommended option `DetectLanguageBatch` see [here][detect_language_sample].
 
 Please refer to the service documentation for a conceptual discussion of [language detection][language_detection].
 
 ### Analyze Sentiment
-Run a Text Analytics predictive model to identify the positive, negative, neutral or mixed sentiment contained in the passed-in document or batch of documents.
+
+Run a predictive model to determine the positive, negative, neutral or mixed sentiment contained in the passed-in document or batch of documents.
 
 ```C# Snippet:AnalyzeSentiment
 string document = @"I had the best day of my life. I decided to go sky-diving and it
@@ -229,6 +251,7 @@ catch (RequestFailedException exception)
     Console.WriteLine($"Message: {exception.Message}");
 }
 ```
+
 For samples on using the production recommended option `AnalyzeSentimentBatch` see [here][analyze_sentiment_sample].
 
 To get more granular information about the opinions related to targets of a product/service, also known as Aspect-based Sentiment Analysis in Natural Language Processing (NLP), see a sample on sentiment analysis with opinion mining [here][analyze_sentiment_opinion_mining_sample].
@@ -236,10 +259,11 @@ To get more granular information about the opinions related to targets of a prod
 Please refer to the service documentation for a conceptual discussion of [sentiment analysis][sentiment_analysis].
 
 ### Extract Key Phrases
+
 Run a model to identify a collection of significant phrases found in the passed-in document or batch of documents.
 
 ```C# Snippet:ExtractKeyPhrases
-string document = @"My cat might need to see a veterinarian. It has been sneezing more than normal, and although my 
+string document = @"My cat might need to see a veterinarian. It has been sneezing more than normal, and although my
                     little sister thinks it is funny, I am worried it has the cold that I got last week.
                     We are going to call tomorrow and try to schedule an appointment for this week. Hopefully it
                     will be covered by the cat's insurance.
@@ -262,11 +286,13 @@ catch (RequestFailedException exception)
     Console.WriteLine($"Message: {exception.Message}");
 }
 ```
+
 For samples on using the production recommended option `ExtractKeyPhrasesBatch` see [here][extract_key_phrases_sample].
 
 Please refer to the service documentation for a conceptual discussion of [key phrase extraction][key_phrase_extraction].
 
-### Recognize Entities
+### Recognize Named Entities
+
 Run a predictive model to identify a collection of named entities in the passed-in document or batch of documents and categorize those entities into categories such as person, location, or organization.  For more information on available categories, see [Text Analytics Named Entity Categories][named_entities_categories].
 
 ```C# Snippet:RecognizeEntities
@@ -301,11 +327,13 @@ catch (RequestFailedException exception)
     Console.WriteLine($"Message: {exception.Message}");
 }
 ```
+
 For samples on using the production recommended option `RecognizeEntitiesBatch` see [here][recognize_entities_sample].
 
 Please refer to the service documentation for a conceptual discussion of [named entity recognition][named_entity_recognition].
 
 ### Recognize PII Entities
+
 Run a predictive model to identify a collection of entities containing Personally Identifiable Information found in the passed-in document or batch of documents, and categorize those entities into categories such as US social security number, drivers license number, or credit card number.
 
 ```C# Snippet:RecognizePiiEntities
@@ -340,9 +368,10 @@ catch (RequestFailedException exception)
 
 For samples on using the production recommended option `RecognizePiiEntitiesBatch` see [here][recognize_pii_entities_sample].
 
-Please refer to the service documentation for supported [PII entity types][pii_entity_type].
+Please refer to the service documentation for supported [PII entity types][pii_entity].
 
 ### Recognize Linked Entities
+
 Run a predictive model to identify a collection of entities found in the passed-in document or batch of documents, and include information linking the entities to their corresponding entries in a well-known knowledge base.
 
 ```C# Snippet:RecognizeLinkedEntities
@@ -381,12 +410,14 @@ catch (RequestFailedException exception)
     Console.WriteLine($"Message: {exception.Message}");
 }
 ```
+
 For samples on using the production recommended option `RecognizeLinkedEntitiesBatch` see [here][recognize_linked_entities_sample].
 
-Please refer to the service documentation for a conceptual discussion of [entity linking][named_entity_recognition].
+Please refer to the service documentation for a conceptual discussion of [entity linking][entity_linking].
 
 ### Detect Language Asynchronously
-Run a Text Analytics predictive model to determine the language that the passed-in document or batch of documents are written in.
+
+Run a predictive model to determine the language that the passed-in document or batch of documents are written in.
 
 ```C# Snippet:DetectLanguageAsync
 string document = @"Este documento está escrito en un idioma diferente al Inglés. Tiene como objetivo demostrar
@@ -410,7 +441,8 @@ catch (RequestFailedException exception)
 }
 ```
 
-### Recognize Entities Asynchronously
+### Recognize Named Entities Asynchronously
+
 Run a predictive model to identify a collection of named entities in the passed-in document or batch of documents and categorize those entities into categories such as person, location, or organization.  For more information on available categories, see [Text Analytics Named Entity Categories][named_entities_categories].
 
 ```C# Snippet:RecognizeEntitiesAsync
@@ -447,6 +479,7 @@ catch (RequestFailedException exception)
 ```
 
 ### Analyze Healthcare Entities Asynchronously
+
 Text Analytics for health is a containerized service that extracts and labels relevant medical information from unstructured texts such as doctor's notes, discharge summaries, clinical documents, and electronic health records. For more information see [How to: Use Text Analytics for health][healthcare].
 
 ```C# Snippet:TextAnalyticsAnalyzeHealthcareEntitiesConvenienceAsyncAll
@@ -483,7 +516,7 @@ Console.WriteLine($"Last Modified: {healthOperation.LastModified}");
 // view operation results
 await foreach (AnalyzeHealthcareEntitiesResultCollection documentsInPage in healthOperation.Value)
 {
-    Console.WriteLine($"Results of Azure Text Analytics \"Healthcare Async\" Model, version: \"{documentsInPage.ModelVersion}\"");
+    Console.WriteLine($"Results of \"Healthcare Async\" Model, version: \"{documentsInPage.ModelVersion}\"");
     Console.WriteLine("");
 
     foreach (AnalyzeHealthcareEntitiesResult entitiesInDoc in documentsInPage)
@@ -563,7 +596,18 @@ await foreach (AnalyzeHealthcareEntitiesResultCollection documentsInPage in heal
 ```
 
 ### Run multiple actions Asynchronously
-This functionality allows running multiple actions in one or more documents. Actions include entity recognition, linked entity recognition, key phrase extraction, Personally Identifiable Information (PII) Recognition, and sentiment analysis. For more information see [Using analyze][analyze_operation_howto].
+
+This functionality allows running multiple actions in one or more documents. Actions include:
+
+* Named Entities Recognition
+* PII Entities Recognition
+* Linked Entity Recognition
+* Key Phrase Extraction
+* Sentiment Analysis
+* Healthcare Entities Recognition (see sample [here][analyze_healthcare_sample])
+* Custom Named Entities Recognition (see sample [here][recognize_custom_entities_sample])
+* Custom Single Label Classification (see sample [here][single_category_classify_sample])
+* Custom Multi Label Classification (see sample [here][multi_category_classify_sample])
 
 ```C# Snippet:AnalyzeOperationConvenienceAsync
     string documentA = @"We love this trail and make the trip every year. The views are breathtaking and well
@@ -585,9 +629,6 @@ This functionality allows running multiple actions in one or more documents. Act
     {
         ExtractKeyPhrasesActions = new List<ExtractKeyPhrasesAction>() { new ExtractKeyPhrasesAction() },
         RecognizeEntitiesActions = new List<RecognizeEntitiesAction>() { new RecognizeEntitiesAction() },
-        RecognizePiiEntitiesActions = new List<RecognizePiiEntitiesAction>() { new RecognizePiiEntitiesAction() },
-        RecognizeLinkedEntitiesActions = new List<RecognizeLinkedEntitiesAction>() { new RecognizeLinkedEntitiesAction() },
-        AnalyzeSentimentActions = new List<AnalyzeSentimentAction>() { new AnalyzeSentimentAction() },
         DisplayName = "AnalyzeOperationSample"
     };
 
@@ -610,42 +651,18 @@ This functionality allows running multiple actions in one or more documents. Act
     {
         IReadOnlyCollection<ExtractKeyPhrasesActionResult> keyPhrasesResults = documentsInPage.ExtractKeyPhrasesResults;
         IReadOnlyCollection<RecognizeEntitiesActionResult> entitiesResults = documentsInPage.RecognizeEntitiesResults;
-        IReadOnlyCollection<RecognizePiiEntitiesActionResult> piiResults = documentsInPage.RecognizePiiEntitiesResults;
-        IReadOnlyCollection<RecognizeLinkedEntitiesActionResult> entityLinkingResults = documentsInPage.RecognizeLinkedEntitiesResults;
-        IReadOnlyCollection<AnalyzeSentimentActionResult> analyzeSentimentResults = documentsInPage.AnalyzeSentimentResults;
 
         Console.WriteLine("Recognized Entities");
         int docNumber = 1;
         foreach (RecognizeEntitiesActionResult entitiesActionResults in entitiesResults)
         {
+            Console.WriteLine($" Action name: {entitiesActionResults.ActionName}");
             foreach (RecognizeEntitiesResult documentResults in entitiesActionResults.DocumentsResults)
             {
                 Console.WriteLine($" Document #{docNumber++}");
                 Console.WriteLine($"  Recognized the following {documentResults.Entities.Count} entities:");
 
                 foreach (CategorizedEntity entity in documentResults.Entities)
-                {
-                    Console.WriteLine($"  Entity: {entity.Text}");
-                    Console.WriteLine($"  Category: {entity.Category}");
-                    Console.WriteLine($"  Offset: {entity.Offset}");
-                    Console.WriteLine($"  Length: {entity.Length}");
-                    Console.WriteLine($"  ConfidenceScore: {entity.ConfidenceScore}");
-                    Console.WriteLine($"  SubCategory: {entity.SubCategory}");
-                }
-                Console.WriteLine("");
-            }
-        }
-
-        Console.WriteLine("Recognized PII Entities");
-        docNumber = 1;
-        foreach (RecognizePiiEntitiesActionResult piiActionResults in piiResults)
-        {
-            foreach (RecognizePiiEntitiesResult documentResults in piiActionResults.DocumentsResults)
-            {
-                Console.WriteLine($" Document #{docNumber++}");
-                Console.WriteLine($"  Recognized the following {documentResults.Entities.Count} PII entities:");
-
-                foreach (PiiEntity entity in documentResults.Entities)
                 {
                     Console.WriteLine($"  Entity: {entity.Text}");
                     Console.WriteLine($"  Category: {entity.Category}");
@@ -674,52 +691,6 @@ This functionality allows running multiple actions in one or more documents. Act
                 Console.WriteLine("");
             }
         }
-
-        Console.WriteLine("Recognized Linked Entities");
-        docNumber = 1;
-        foreach (RecognizeLinkedEntitiesActionResult linkedEntitiesActionResults in entityLinkingResults)
-        {
-            foreach (RecognizeLinkedEntitiesResult documentResults in linkedEntitiesActionResults.DocumentsResults)
-            {
-                Console.WriteLine($" Document #{docNumber++}");
-                Console.WriteLine($"  Recognized the following {documentResults.Entities.Count} linked entities:");
-
-                foreach (LinkedEntity entity in documentResults.Entities)
-                {
-                    Console.WriteLine($"  Entity: {entity.Name}");
-                    Console.WriteLine($"  DataSource: {entity.DataSource}");
-                    Console.WriteLine($"  DataSource EntityId: {entity.DataSourceEntityId}");
-                    Console.WriteLine($"  Language: {entity.Language}");
-                    Console.WriteLine($"  DataSource Url: {entity.Url}");
-
-                    Console.WriteLine($"  Total Matches: {entity.Matches.Count()}");
-                    foreach (LinkedEntityMatch match in entity.Matches)
-                    {
-                        Console.WriteLine($"    Match Text: {match.Text}");
-                        Console.WriteLine($"    ConfidenceScore: {match.ConfidenceScore}");
-                        Console.WriteLine($"    Offset: {match.Offset}");
-                        Console.WriteLine($"    Length: {match.Length}");
-                    }
-                    Console.WriteLine("");
-                }
-                Console.WriteLine("");
-            }
-        }
-
-        Console.WriteLine("Analyze Sentiment");
-        docNumber = 1;
-        foreach (AnalyzeSentimentActionResult analyzeSentimentActionsResult in analyzeSentimentResults)
-        {
-            foreach (AnalyzeSentimentResult documentResults in analyzeSentimentActionsResult.DocumentsResults)
-            {
-                Console.WriteLine($" Document #{docNumber++}");
-                Console.WriteLine($"  Sentiment is {documentResults.DocumentSentiment.Sentiment}, with confidence scores: ");
-                Console.WriteLine($"    Positive confidence score: {documentResults.DocumentSentiment.ConfidenceScores.Positive}.");
-                Console.WriteLine($"    Neutral confidence score: {documentResults.DocumentSentiment.ConfidenceScores.Neutral}.");
-                Console.WriteLine($"    Negative confidence score: {documentResults.DocumentSentiment.ConfidenceScores.Negative}.");
-                Console.WriteLine("");
-            }
-        }
     }
 }
 ```
@@ -727,7 +698,8 @@ This functionality allows running multiple actions in one or more documents. Act
 ## Troubleshooting
 
 ### General
-When you interact with the Cognitive Services Text Analytics client library using the .NET SDK, errors returned by the service correspond to the same HTTP status codes returned for [REST API][textanalytics_rest_api] requests.
+
+When you interact with the Cognitive Services for Language using the .NET Text Analytics SDK, errors returned by the Language service correspond to the same HTTP status codes returned for REST API requests.
 
 For example, if you submit a batch of text document inputs containing duplicate document ids, a `400` error is returned, indicating "Bad Request".
 
@@ -744,7 +716,7 @@ catch (RequestFailedException e)
 
 You will notice that additional information is logged, like the client request ID of the operation.
 
-```
+```text
 Message:
     Azure.RequestFailedException:
     Status: 400 (Bad Request)
@@ -764,10 +736,11 @@ Headers:
 ```
 
 ### Setting up console logging
+
 The simplest way to see the logs is to enable the console logging.
 To create an Azure SDK log listener that outputs messages to console use AzureEventSourceListener.CreateConsoleLogger method.
 
-```
+```C#
 // Setup a listener to monitor logged events.
 using AzureEventSourceListener listener = AzureEventSourceListener.CreateConsoleLogger();
 ```
@@ -776,23 +749,28 @@ To learn more about other logging mechanisms see [here][logging].
 
 ## Next steps
 
-Samples showing how to use the Cognitive Services Text Analytics library are available in this GitHub repository.
+Samples showing how to use this client library are available in this GitHub repository.
 Samples are provided for each main functional area, and for each area, samples are provided for analyzing a single document, and a collection of documents in both sync and async mode.
 
-- [Detect Language][detect_language_sample]
-- [Analyze Sentiment][analyze_sentiment_sample]
-- [Extract Key Phrases][extract_key_phrases_sample]
-- [Recognize Entities][recognize_entities_sample]
-- [Recognize PII Entities][recognize_pii_entities_sample]
-- [Recognize Linked Entities][recognize_linked_entities_sample]
-- [Recognize Healthcare Entities][analyze_healthcare_sample]
-- [Run multiple actions][analyze_operation_sample]
+* [Detect Language][detect_language_sample]
+* [Analyze Sentiment][analyze_sentiment_sample]
+* [Extract Key Phrases][extract_key_phrases_sample]
+* [Recognize Named Entities][recognize_entities_sample]
+* [Recognize PII Entities][recognize_pii_entities_sample]
+* [Recognize Linked Entities][recognize_linked_entities_sample]
+* [Recognize Healthcare Entities][analyze_healthcare_sample]
+* [Custom Named Entities Recognition][recognize_custom_entities_sample]
+* [Custom Single Label Classification][single_category_classify_sample]
+* [Custom Multi Label Classification][multi_category_classify_sample]
 
 ### Advanced samples
-- [Analyze Sentiment with Opinion Mining][analyze_sentiment_opinion_mining_sample]
-- [Create a mock client][mock_client_sample] for testing using the [Moq][moq] library.
+
+* [Analyze Sentiment with Opinion Mining][analyze_sentiment_opinion_mining_sample]
+* [Run multiple actions][analyze_operation_sample]
+* [Create a mock client][mock_client_sample] for testing using the [Moq][moq] library.
 
 ## Contributing
+
 See the [CONTRIBUTING.md][contributing] for details on building, testing, and contributing to this library.
 
 This project welcomes contributions and suggestions. Most contributions require you to agree to a Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us the rights to use your contribution. For details, visit [cla.microsoft.com][cla].
@@ -803,50 +781,51 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Ftextanalytics%2FAzure.AI.TextAnalytics%2FREADME.png)
 
-
 <!-- LINKS -->
-[textanalytics_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.1/sdk/textanalytics/Azure.AI.TextAnalytics/src
-[textanalytics_docs]: https://docs.microsoft.com/azure/cognitive-services/Text-Analytics/
+[textanalytics_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.2.0/sdk/textanalytics/Azure.AI.TextAnalytics/src
+[language_service_docs]: /azure/cognitive-services/language-service/
 [textanalytics_refdocs]: https://aka.ms/azsdk-net-textanalytics-ref-docs
 [textanalytics_nuget_package]: https://www.nuget.org/packages/Azure.AI.TextAnalytics
-[textanalytics_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.1/sdk/textanalytics/Azure.AI.TextAnalytics/samples/README.md
-[textanalytics_rest_api]: https://westcentralus.dev.cognitive.microsoft.com/docs/services/TextAnalytics-v3-1/operations/Languages
-[cognitive_resource_portal]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account
-[cognitive_resource_cli]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account-cli
-[dotnet_lro_guidelines]: https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning
+[textanalytics_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.2.0/sdk/textanalytics/Azure.AI.TextAnalytics/samples/README.md
+[cognitive_resource_portal]: /azure/cognitive-services/cognitive-services-apis-create-account
+[cognitive_resource_cli]: /azure/cognitive-services/cognitive-services-apis-create-account-cli
+[dotnet_lro]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.2.0/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt
 
-[analyze_healthcare_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.1/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample7_AnalyzeHealthcareEntities.md
-[analyze_operation_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.1/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample_AnalyzeActions.md
-[analyze_operation_howto]: https://docs.microsoft.com/azure/cognitive-services/text-analytics/how-tos/text-analytics-how-to-call-api?tabs=synchronous#using-the-api-asynchronously
-[healthcare]: https://docs.microsoft.com/azure/cognitive-services/text-analytics/how-tos/text-analytics-for-health?tabs=ner
-[language_detection]: https://docs.microsoft.com/azure/cognitive-services/Text-Analytics/how-tos/text-analytics-how-to-language-detection
-[sentiment_analysis]: https://docs.microsoft.com/azure/cognitive-services/Text-Analytics/how-tos/text-analytics-how-to-sentiment-analysis
-[key_phrase_extraction]: https://docs.microsoft.com/azure/cognitive-services/Text-Analytics/how-tos/text-analytics-how-to-keyword-extraction
-[named_entity_recognition]: https://docs.microsoft.com/azure/cognitive-services/Text-Analytics/how-tos/text-analytics-how-to-entity-linking
-[named_entities_categories]: https://docs.microsoft.com/azure/cognitive-services/Text-Analytics/named-entity-types
-[pii_entity_type]:https://docs.microsoft.com/azure/cognitive-services/text-analytics/named-entity-types?tabs=personal 
+[analyze_healthcare_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.2.0/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample7_AnalyzeHealthcareEntities.md
+[analyze_operation_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.2.0/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample_AnalyzeActions.md
+[healthcare]: /azure/cognitive-services/language-service/text-analytics-for-health/overview?tabs=ner
+[language_detection]: /azure/cognitive-services/language-service/language-detection/overview
+[sentiment_analysis]: /azure/cognitive-services/language-service/sentiment-opinion-mining/overview
+[key_phrase_extraction]: /azure/cognitive-services/language-service/key-phrase-extraction/overview
+[named_entity_recognition]: /azure/cognitive-services/language-service/named-entity-recognition/overview
+[entity_linking]: /azure/cognitive-services/language-service/entity-linking/overview
+[named_entities_categories]: /azure/cognitive-services/language-service/named-entity-recognition/concepts/named-entity-categories
+[pii_entity]:/azure/cognitive-services/language-service/personally-identifiable-information/overview
 
-[textanalytics_client_class]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.1/sdk/textanalytics/Azure.AI.TextAnalytics/src/TextAnalyticsClient.cs
-[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.1/sdk/identity/Azure.Identity
-[cognitive_auth]: https://docs.microsoft.com/azure/cognitive-services/authentication
-[register_aad_app]: https://docs.microsoft.com/azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
-[aad_grant_access]: https://docs.microsoft.com/azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
-[custom_subdomain]: https://docs.microsoft.com/azure/cognitive-services/authentication#create-a-resource-with-a-custom-subdomain
-[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.1/sdk/identity/Azure.Identity/README.md
-[logging]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.1/sdk/core/Azure.Core/samples/Diagnostics.md
-[data_limits]: https://docs.microsoft.com/azure/cognitive-services/text-analytics/concepts/data-limits?tabs=version-3
-[contributing]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.1.1/CONTRIBUTING.md
+[textanalytics_client_class]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.2.0/sdk/textanalytics/Azure.AI.TextAnalytics/src/TextAnalyticsClient.cs
+[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.2.0/sdk/identity/Azure.Identity
+[cognitive_auth]: /azure/cognitive-services/authentication
+[register_aad_app]: /azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
+[aad_grant_access]: /azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
+[custom_subdomain]: /azure/cognitive-services/authentication#create-a-resource-with-a-custom-subdomain
+[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.2.0/sdk/identity/Azure.Identity/README.md#defaultazurecredential
+[logging]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.2.0/sdk/core/Azure.Core/samples/Diagnostics.md
+[data_limits]: https://aka.ms/azsdk/textanalytics/data-limits
+[contributing]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.TextAnalytics_5.2.0/CONTRIBUTING.md
 
-[detect_language_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.1/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample1_DetectLanguage.md
-[analyze_sentiment_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.1/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample2_AnalyzeSentiment.md
-[analyze_sentiment_opinion_mining_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.1/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample2.1_AnalyzeSentimentWithOpinionMining.md
-[extract_key_phrases_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.1/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample3_ExtractKeyPhrases.md
-[recognize_entities_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.1/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample4_RecognizeEntities.md
-[recognize_pii_entities_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.1/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample5_RecognizePiiEntities.md
-[recognize_linked_entities_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.1/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample6_RecognizeLinkedEntities.md
-[mock_client_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.1.1/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample_MockClient.md
+[detect_language_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.2.0/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample1_DetectLanguage.md
+[analyze_sentiment_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.2.0/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample2_AnalyzeSentiment.md
+[analyze_sentiment_opinion_mining_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.2.0/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample2.1_AnalyzeSentimentWithOpinionMining.md
+[extract_key_phrases_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.2.0/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample3_ExtractKeyPhrases.md
+[recognize_entities_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.2.0/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample4_RecognizeEntities.md
+[recognize_pii_entities_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.2.0/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample5_RecognizePiiEntities.md
+[recognize_linked_entities_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.2.0/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample6_RecognizeLinkedEntities.md
+[mock_client_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.2.0/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample_MockClient.md
+[recognize_custom_entities_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.2.0/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample8_RecognizeCustomEntities.md
+[single_category_classify_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.2.0/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample9_SingleLabelClassify.md
+[multi_category_classify_sample]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.2.0/sdk/textanalytics/Azure.AI.TextAnalytics/samples/Sample10_MultiLabelClassify.md
 
-[azure_cli]: https://docs.microsoft.com/cli/azure
+[azure_cli]: /cli/azure
 [azure_sub]: https://azure.microsoft.com/free/dotnet/
 [nuget]: https://www.nuget.org/
 [azure_portal]: https://portal.azure.com
