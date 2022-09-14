@@ -3,14 +3,12 @@ title: Azure Synapse Analytics Artifacts client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Analytics.Synapse.Artifacts, synapse
 author: wonner
 ms.author: wanyang
-ms.date: 04/21/2022
+ms.date: 09/14/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: synapse
 ---
-# Azure Synapse Analytics Artifacts client library for .NET - version 1.0.0-preview.15 
+# Azure Synapse Analytics Artifacts client library for .NET - version 1.0.0-preview.16 
 
 
 This directory contains the open source subset of the .NET SDK. For documentation of the complete Azure SDK, please see the [Microsoft Azure .NET Developer Center](https://azure.microsoft.com/develop/net/).
@@ -36,7 +34,7 @@ dotnet add package Azure.Analytics.Synapse.Artifacts --prerelease
 ### Prerequisites
 
 - **Azure Subscription:** To use Azure services, including Azure Synapse, you'll need a subscription. If you do not have an existing Azure account, you may sign up for a [free trial](https://azure.microsoft.com/free/dotnet/) or use your [Visual Studio Subscription](https://visualstudio.microsoft.com/subscriptions/) benefits when you [create an account](https://account.windowsazure.com/Home/Index).
-- An existing Azure Synapse workspace. If you need to create an Azure Synapse workspace, you can use the [Azure Portal](https://portal.azure.com/) or [Azure CLI](https://docs.microsoft.com/cli/azure).
+- An existing Azure Synapse workspace. If you need to create an Azure Synapse workspace, you can use the [Azure Portal](https://portal.azure.com/) or [Azure CLI](/cli/azure).
 
 If you use the Azure CLI, the command looks like below:
 
@@ -55,26 +53,26 @@ az synapse workspace create \
 
 In order to interact with part of the Azure Synapse Analytics service, you'll need to create an instance of the respective client class:
 
-- [BigDataPoolsClient](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.15/sdk/synapse/Azure.Analytics.Synapse.Artifacts/src/Generated/BigDataPoolsClient.cs)
-- [DataFlowClient](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.15/sdk/synapse/Azure.Analytics.Synapse.Artifacts/src/Generated/DataFlowClient.cs)
-- [DataFlowDebugSessionClient](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.15/sdk/synapse/Azure.Analytics.Synapse.Artifacts/src/Generated/DataFlowDebugSessionClient.cs)
-- [DatasetClient](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.15/sdk/synapse/Azure.Analytics.Synapse.Artifacts/src/Generated/DatasetClient.cs)
-- [IntegrationRuntimesClient](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.15/sdk/synapse/Azure.Analytics.Synapse.Artifacts/src/Generated/IntegrationRuntimesClient.cs)
-- [LinkedServiceClient](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.15/sdk/synapse/Azure.Analytics.Synapse.Artifacts/src/Generated/LinkedServiceClient.cs)
-- [NotebookClient](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.15/sdk/synapse/Azure.Analytics.Synapse.Artifacts/src/Generated/NotebookClient.cs)
-- [PipelineClient](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.15/sdk/synapse/Azure.Analytics.Synapse.Artifacts/src/Generated/PipelineClient.cs)
-- [PipelineRunClient](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.15/sdk/synapse/Azure.Analytics.Synapse.Artifacts/src/Generated/PipelineRunClient.cs)
-- [SparkJobDefinitionClient](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.15/sdk/synapse/Azure.Analytics.Synapse.Artifacts/src/Generated/SparkJobDefinitionClient.cs)
-- [SqlPoolsClient](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.15/sdk/synapse/Azure.Analytics.Synapse.Artifacts/src/Generated/SqlPoolsClient.cs)
-- [SqlScriptClient](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.15/sdk/synapse/Azure.Analytics.Synapse.Artifacts/src/Generated/SqlScriptClient.cs)
-- [TriggerClient](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.15/sdk/synapse/Azure.Analytics.Synapse.Artifacts/src/Generated/TriggerClient.cs)
-- [TriggerRunClient](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.15/sdk/synapse/Azure.Analytics.Synapse.Artifacts/src/Generated/TriggerRunClient.cs)
-- [WorkspaceClient](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.15/sdk/synapse/Azure.Analytics.Synapse.Artifacts/src/Generated/WorkspaceClient.cs)
-- [WorkspaceGitRepoManagementClient](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.15/sdk/synapse/Azure.Analytics.Synapse.Artifacts/src/Generated/WorkspaceGitRepoManagementClient.cs)
+- [BigDataPoolsClient](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.16/sdk/synapse/Azure.Analytics.Synapse.Artifacts/src/Generated/BigDataPoolsClient.cs)
+- [DataFlowClient](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.16/sdk/synapse/Azure.Analytics.Synapse.Artifacts/src/Generated/DataFlowClient.cs)
+- [DataFlowDebugSessionClient](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.16/sdk/synapse/Azure.Analytics.Synapse.Artifacts/src/Generated/DataFlowDebugSessionClient.cs)
+- [DatasetClient](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.16/sdk/synapse/Azure.Analytics.Synapse.Artifacts/src/Generated/DatasetClient.cs)
+- [IntegrationRuntimesClient](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.16/sdk/synapse/Azure.Analytics.Synapse.Artifacts/src/Generated/IntegrationRuntimesClient.cs)
+- [LinkedServiceClient](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.16/sdk/synapse/Azure.Analytics.Synapse.Artifacts/src/Generated/LinkedServiceClient.cs)
+- [NotebookClient](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.16/sdk/synapse/Azure.Analytics.Synapse.Artifacts/src/Generated/NotebookClient.cs)
+- [PipelineClient](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.16/sdk/synapse/Azure.Analytics.Synapse.Artifacts/src/Generated/PipelineClient.cs)
+- [PipelineRunClient](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.16/sdk/synapse/Azure.Analytics.Synapse.Artifacts/src/Generated/PipelineRunClient.cs)
+- [SparkJobDefinitionClient](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.16/sdk/synapse/Azure.Analytics.Synapse.Artifacts/src/Generated/SparkJobDefinitionClient.cs)
+- [SqlPoolsClient](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.16/sdk/synapse/Azure.Analytics.Synapse.Artifacts/src/Generated/SqlPoolsClient.cs)
+- [SqlScriptClient](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.16/sdk/synapse/Azure.Analytics.Synapse.Artifacts/src/Generated/SqlScriptClient.cs)
+- [TriggerClient](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.16/sdk/synapse/Azure.Analytics.Synapse.Artifacts/src/Generated/TriggerClient.cs)
+- [TriggerRunClient](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.16/sdk/synapse/Azure.Analytics.Synapse.Artifacts/src/Generated/TriggerRunClient.cs)
+- [WorkspaceClient](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.16/sdk/synapse/Azure.Analytics.Synapse.Artifacts/src/Generated/WorkspaceClient.cs)
+- [WorkspaceGitRepoManagementClient](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.16/sdk/synapse/Azure.Analytics.Synapse.Artifacts/src/Generated/WorkspaceGitRepoManagementClient.cs)
 
 You need a **workspace endpoint**, which you may see as "Development endpoint" in the portal, and **client secret credentials (client id, client secret, tenant id)** to instantiate a client object.
 
-Client secret credential authentication is being used in this getting started section but you can find more ways to authenticate with [Azure identity](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.15/sdk/identity/Azure.Identity). To use the [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.15/sdk/identity/Azure.Identity#defaultazurecredential) provider shown below,
+Client secret credential authentication is being used in this getting started section but you can find more ways to authenticate with [Azure identity](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.16/sdk/identity/Azure.Identity). To use the [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.16/sdk/identity/Azure.Identity#defaultazurecredential) provider shown below,
 or other credential providers provided with the Azure SDK, you should install the Azure.Identity package:
 
 ```dotnetcli
@@ -153,12 +151,12 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 <!-- CLIENT COMMON BAR -->
 
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.15/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.15/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.15/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.15/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.15/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.15/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.16/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.16/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.16/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.16/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.16/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Synapse.Artifacts_1.0.0-preview.16/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 
 <!-- CLIENT COMMON BAR -->
