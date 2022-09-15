@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: communication
 ---
 
-# Azure Communication SMS client library for .NET - Version 1.0.0-beta.4 
+# Azure Communication SMS client library for .NET - version 1.0.0-beta.4 
 
 > Server Version: 
 Sms client: 2021-03-07

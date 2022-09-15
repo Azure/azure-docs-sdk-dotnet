@@ -1,6 +1,6 @@
 ---
 title: Azure Event Hubs client library for .NET - 4.3.1
-description: Azure Event Hubs client library for .NET - Version 4.3.1 
+description: Azure Event Hubs client library for .NET - version 4.3.1 
 keywords: Azure, .net, SDK, API, Microsoft.Azure.EventHubs, eventhub
 author: ramya-rao-a
 ms.author: ramyar
@@ -10,7 +10,7 @@ ms.devlang: .net
 ms.service: event-hubs
 ---
 
-# Azure Event Hubs client library for .NET - Version 4.3.1 
+# Azure Event Hubs client library for .NET - version 4.3.1 
 
 Azure Event Hubs is a highly scalable publish-subscribe service that can ingest millions of events per second and stream them into multiple applications. This lets you process and analyze the massive amounts of data produced by your connected devices and applications. Once Event Hubs has collected the data, you can retrieve, transform and store it by using any real-time analytics provider or with batching/storage adapters. 
 

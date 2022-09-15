@@ -11,7 +11,7 @@ ms.devlang: .net
 ms.service: 
 ---
 
-# Azure Monitor Exporter client library for .NET - Version 1.0.0-beta.1 
+# Azure Monitor Exporter client library for .NET - version 1.0.0-beta.1 
 
 
 The [OpenTelemetry .NET](https://github.com/open-telemetry/opentelemetry-dotnet) exporters which send [telemetry data](https://docs.microsoft.com/azure/azure-monitor/app/data-model) to [Azure Monitor](https://docs.microsoft.com/azure/azure-monitor/app/app-insights-overview) following the [OpenTelemetry Specification](https://github.com/open-telemetry/opentelemetry-specification).

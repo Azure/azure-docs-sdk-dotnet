@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: translation
 ---
-# Azure Cognitive Services Document Translation client library for .NET - Version 1.0.0 
+# Azure Cognitive Services Document Translation client library for .NET - version 1.0.0 
 
 
 Azure Cognitive Services Document Translation is a cloud service that translates documents to and from 90 languages and dialects while preserving document structure and data format. Use the client library for Document Translation to:

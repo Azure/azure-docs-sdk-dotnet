@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: 
 ---
 
-# Azure FarmBeats client library for .NET - Version 1.0.0-beta.1 
+# Azure FarmBeats client library for .NET - version 1.0.0-beta.1 
 
 
 FarmBeats is a B2B PaaS offering from Microsoft that makes it easy for AgriFood companies to build intelligent digital agriculture solutions on Azure. FarmBeats allows users to acquire, aggregate, and process agricultural data from various sources (farm equipment, weather, satellite) without the need to invest in deep data engineering resources.  Customers can build SaaS solutions on top of FarmBeats and leverage first class support for model building to generate insights at scale.

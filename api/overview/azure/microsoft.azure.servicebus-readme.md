@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: servicebus
 ---
 
-# Azure Service Bus client library for .NET - Version 5.2.0 
+# Azure Service Bus client library for .NET - version 5.2.0 
 
 
 > Please be aware that a newer package, [Azure.Messaging.ServiceBus](https://www.nuget.org/packages/Azure.Messaging.ServiceBus) is available as of November 2020. While this package will continue to receive critical bug fixes, we strongly encourage upgrading for new development. Please see the [migration guide](https://aka.ms/azsdk/net/migrate/sb) for more details.

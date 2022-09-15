@@ -18,6 +18,8 @@
     <AssemblyVersion>7.8.0.0</AssemblyVersion>
     <AssemblyVersion>7.8.1.0</AssemblyVersion>
     <AssemblyVersion>7.9.0.0</AssemblyVersion>
+    <AssemblyVersion>7.10.0.0</AssemblyVersion>
+    <AssemblyVersion>7.11.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -36,7 +38,14 @@
             property. The error handler is specified with the <see cref="E:Azure.Messaging.ServiceBus.ServiceBusProcessor.ProcessErrorAsync" /> property.
             To start processing after the handlers have been specified, call <see cref="M:Azure.Messaging.ServiceBus.ServiceBusProcessor.StartProcessingAsync(System.Threading.CancellationToken)" />.
             </summary>
-    <remarks>To be added.</remarks>
+    <remarks>
+            The <see cref="T:Azure.Messaging.ServiceBus.ServiceBusProcessor" /> is safe to cache and use for the lifetime of an application
+            or until the <see cref="T:Azure.Messaging.ServiceBus.ServiceBusClient" /> that it was created by is disposed. Caching the processor
+            is recommended when the application is processing messages regularly.  The sender is responsible for
+            ensuring efficient network, CPU, and memory use. Calling <see cref="M:Azure.Messaging.ServiceBus.ServiceBusProcessor.DisposeAsync" /> on the
+            associated <see cref="T:Azure.Messaging.ServiceBus.ServiceBusClient" /> as the application is shutting down will ensure that
+            network resources and other unmanaged objects used by the processor are properly cleaned up.
+            </remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -59,6 +68,8 @@
         <AssemblyVersion>7.8.0.0</AssemblyVersion>
         <AssemblyVersion>7.8.1.0</AssemblyVersion>
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
+        <AssemblyVersion>7.10.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -86,6 +97,8 @@
         <AssemblyVersion>7.8.0.0</AssemblyVersion>
         <AssemblyVersion>7.8.1.0</AssemblyVersion>
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
+        <AssemblyVersion>7.10.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="client" Type="Azure.Messaging.ServiceBus.ServiceBusClient" />
@@ -120,6 +133,8 @@
         <AssemblyVersion>7.8.0.0</AssemblyVersion>
         <AssemblyVersion>7.8.1.0</AssemblyVersion>
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
+        <AssemblyVersion>7.10.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="client" Type="Azure.Messaging.ServiceBus.ServiceBusClient" />
@@ -159,6 +174,8 @@
         <AssemblyVersion>7.8.0.0</AssemblyVersion>
         <AssemblyVersion>7.8.1.0</AssemblyVersion>
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
+        <AssemblyVersion>7.10.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -201,6 +218,8 @@
         <AssemblyVersion>7.8.0.0</AssemblyVersion>
         <AssemblyVersion>7.8.1.0</AssemblyVersion>
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
+        <AssemblyVersion>7.10.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -212,7 +231,9 @@
         <param name="cancellationToken"> An optional<see cref="T:System.Threading.CancellationToken" /> instance to signal the
             request to cancel the operation.</param>
         <summary>
-              Performs the task needed to clean up resources used by the <see cref="T:Azure.Messaging.ServiceBus.ServiceBusProcessor" />.
+            Performs the task needed to clean up resources used by the <see cref="T:Azure.Messaging.ServiceBus.ServiceBusProcessor" />. Any in-flight message handlers will
+            be awaited. Once all message handling has completed, the underlying links will be closed. After this point, the method will return.
+            This is equivalent to calling <see cref="M:Azure.Messaging.ServiceBus.ServiceBusProcessor.DisposeAsync" />.
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
@@ -242,6 +263,8 @@
         <AssemblyVersion>7.8.0.0</AssemblyVersion>
         <AssemblyVersion>7.8.1.0</AssemblyVersion>
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
+        <AssemblyVersion>7.10.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.ValueTask</ReturnType>
@@ -249,8 +272,9 @@
       <Parameters />
       <Docs>
         <summary>
-              Performs the task needed to clean up resources used by the <see cref="T:Azure.Messaging.ServiceBus.ServiceBusProcessor" />.
-              This is equivalent to calling <see cref="M:Azure.Messaging.ServiceBus.ServiceBusProcessor.CloseAsync(System.Threading.CancellationToken)" />.
+            Performs the task needed to clean up resources used by the <see cref="T:Azure.Messaging.ServiceBus.ServiceBusProcessor" />. Any in-flight message handlers will
+            be awaited. Once all message handling has completed, the underlying links will be closed. After this point, the method will return.
+            This is equivalent to calling <see cref="M:Azure.Messaging.ServiceBus.ServiceBusProcessor.CloseAsync(System.Threading.CancellationToken)" />.
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
@@ -277,6 +301,8 @@
         <AssemblyVersion>7.8.0.0</AssemblyVersion>
         <AssemblyVersion>7.8.1.0</AssemblyVersion>
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
+        <AssemblyVersion>7.10.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -311,6 +337,8 @@
         <AssemblyVersion>7.8.0.0</AssemblyVersion>
         <AssemblyVersion>7.8.1.0</AssemblyVersion>
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
+        <AssemblyVersion>7.10.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -355,6 +383,8 @@
         <AssemblyVersion>7.8.0.0</AssemblyVersion>
         <AssemblyVersion>7.8.1.0</AssemblyVersion>
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
+        <AssemblyVersion>7.10.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -389,6 +419,8 @@
         <AssemblyVersion>7.8.0.0</AssemblyVersion>
         <AssemblyVersion>7.8.1.0</AssemblyVersion>
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
+        <AssemblyVersion>7.10.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -405,6 +437,29 @@
              Returns a hash code for this instance.
              </summary>
         <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Identifier">
+      <MemberSignature Language="C#" Value="public virtual string Identifier { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Identifier" />
+      <MemberSignature Language="DocId" Value="P:Azure.Messaging.ServiceBus.ServiceBusProcessor.Identifier" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable ReadOnly Property Identifier As String" />
+      <MemberSignature Language="F#" Value="member this.Identifier : string" Usage="Azure.Messaging.ServiceBus.ServiceBusProcessor.Identifier" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Messaging.ServiceBus</AssemblyName>
+        <AssemblyVersion>7.10.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets the ID used to identify this processor. This can be used to correlate logs and exceptions.
+            </summary>
+        <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -429,6 +484,8 @@
         <AssemblyVersion>7.8.0.0</AssemblyVersion>
         <AssemblyVersion>7.8.1.0</AssemblyVersion>
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
+        <AssemblyVersion>7.10.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -464,6 +521,8 @@
         <AssemblyVersion>7.8.0.0</AssemblyVersion>
         <AssemblyVersion>7.8.1.0</AssemblyVersion>
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
+        <AssemblyVersion>7.10.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -499,6 +558,8 @@
         <AssemblyVersion>7.8.0.0</AssemblyVersion>
         <AssemblyVersion>7.8.1.0</AssemblyVersion>
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
+        <AssemblyVersion>7.10.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.TimeSpan</ReturnType>
@@ -537,6 +598,8 @@
         <AssemblyVersion>7.8.0.0</AssemblyVersion>
         <AssemblyVersion>7.8.1.0</AssemblyVersion>
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
+        <AssemblyVersion>7.10.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
@@ -572,6 +635,8 @@
         <AssemblyVersion>7.8.0.0</AssemblyVersion>
         <AssemblyVersion>7.8.1.0</AssemblyVersion>
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
+        <AssemblyVersion>7.10.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -609,6 +674,8 @@
         <AssemblyVersion>7.8.0.0</AssemblyVersion>
         <AssemblyVersion>7.8.1.0</AssemblyVersion>
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
+        <AssemblyVersion>7.10.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -647,6 +714,8 @@
         <AssemblyVersion>7.8.0.0</AssemblyVersion>
         <AssemblyVersion>7.8.1.0</AssemblyVersion>
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
+        <AssemblyVersion>7.10.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
@@ -685,6 +754,8 @@
         <AssemblyVersion>7.8.0.0</AssemblyVersion>
         <AssemblyVersion>7.8.1.0</AssemblyVersion>
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
+        <AssemblyVersion>7.10.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Func&lt;Azure.Messaging.ServiceBus.ProcessErrorEventArgs,System.Threading.Tasks.Task&gt;</ReturnType>
@@ -722,6 +793,8 @@
         <AssemblyVersion>7.8.0.0</AssemblyVersion>
         <AssemblyVersion>7.8.1.0</AssemblyVersion>
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
+        <AssemblyVersion>7.10.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Func&lt;Azure.Messaging.ServiceBus.ProcessMessageEventArgs,System.Threading.Tasks.Task&gt;</ReturnType>
@@ -759,6 +832,8 @@
         <AssemblyVersion>7.8.0.0</AssemblyVersion>
         <AssemblyVersion>7.8.1.0</AssemblyVersion>
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
+        <AssemblyVersion>7.10.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Messaging.ServiceBus.ServiceBusReceiveMode</ReturnType>
@@ -795,6 +870,8 @@
         <AssemblyVersion>7.8.0.0</AssemblyVersion>
         <AssemblyVersion>7.8.1.0</AssemblyVersion>
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
+        <AssemblyVersion>7.10.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -842,6 +919,8 @@
         <AssemblyVersion>7.8.0.0</AssemblyVersion>
         <AssemblyVersion>7.8.1.0</AssemblyVersion>
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
+        <AssemblyVersion>7.10.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -857,7 +936,11 @@
              Signals the processor to stop processing messaging. Should this method be
              called while the processor is not running, no action is taken. This method
              will not close the underlying receivers, but will cause the receivers to stop
-             receiving. To close the underlying receivers, <see cref="M:Azure.Messaging.ServiceBus.ServiceBusProcessor.CloseAsync(System.Threading.CancellationToken)" /> should be called.
+             receiving. Any in-flight message handlers will be awaited, and this method will not return
+             until all in-flight message handlers have returned. To close the underlying receivers, <see cref="M:Azure.Messaging.ServiceBus.ServiceBusProcessor.CloseAsync(System.Threading.CancellationToken)" />
+             should be called. If <see cref="M:Azure.Messaging.ServiceBus.ServiceBusProcessor.CloseAsync(System.Threading.CancellationToken)" /> is called, the processor cannot be restarted.
+             If you wish to resume processing at some point after calling this method, you can call
+             <see cref="M:Azure.Messaging.ServiceBus.ServiceBusProcessor.StartProcessingAsync(System.Threading.CancellationToken)" />.
              </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
@@ -884,6 +967,8 @@
         <AssemblyVersion>7.8.0.0</AssemblyVersion>
         <AssemblyVersion>7.8.1.0</AssemblyVersion>
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
+        <AssemblyVersion>7.10.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -921,6 +1006,8 @@
         <AssemblyVersion>7.8.0.0</AssemblyVersion>
         <AssemblyVersion>7.8.1.0</AssemblyVersion>
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
+        <AssemblyVersion>7.10.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>

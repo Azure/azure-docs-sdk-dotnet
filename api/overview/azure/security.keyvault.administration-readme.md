@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: dotnet
 ms.service: keyvault
 ---
-# Azure KeyVault Administration client library for .NET - Version 4.1.0 
+# Azure KeyVault Administration client library for .NET - version 4.1.0 
 
 
 Azure Key Vault Managed HSM is a fully-managed, highly-available, single-tenant, standards-compliant cloud service that enables you to safeguard

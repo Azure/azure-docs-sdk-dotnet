@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: communication
 ---
 
-# Azure Communication Phone Numbers client library for .NET - Version 1.0.1 
+# Azure Communication Phone Numbers client library for .NET - version 1.0.1 
 
 
 Azure Communication Phone Numbers is managing phone numbers for Azure Communication Services.

@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: webjobs
 ---
 
-# Azure WebJobs Event Hubs client library for .NET - Version 5.0.0-beta.7 
+# Azure WebJobs Event Hubs client library for .NET - version 5.0.0-beta.7 
 
 
 This extension provides functionality for accessing Azure Event Hubs from an Azure Function.

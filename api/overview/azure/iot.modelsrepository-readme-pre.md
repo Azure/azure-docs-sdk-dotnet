@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: modelsrepository
 ---
 
-# Azure IoT Models Repository client library for .NET - Version 1.0.0-preview.5 
+# Azure IoT Models Repository client library for .NET - version 1.0.0-preview.5 
 
 
 This library provides functionality for interacting with the [Azure IoT Models Repository][modelsrepository_iot_endpoint]. It also aims to provide a consistent experience working with digital twin model repositories following Azure IoT conventions.

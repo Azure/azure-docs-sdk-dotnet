@@ -11,7 +11,7 @@ ms.devlang: dotnet
 ms.service: eventhubs
 ---
 
-# Azure Event Hubs client library for .NET - Version 4.3.2 
+# Azure Event Hubs client library for .NET - version 4.3.2 
 
 
 > Please note, a newer package [Azure.Messaging.EventHubs](https://www.nuget.org/packages/Azure.Messaging.EventHubs) for [Azure Event Hubs](https://azure.microsoft.com/services/event-hubs/) is available as of February 2020. While this package will continue to receive critical bug fixes, we strongly encourage you to upgrade. Read the [migration guide](https://aka.ms/azsdk/net/migrate/eh) for more details.

@@ -10,11 +10,11 @@ ms.service: storage
 
 The Azure Storage client libraries for .NET offer a convenient interface for making calls to Azure Storage. For more information about Azure Storage, see [Introduction to Azure Storage](/azure/storage/common/storage-introduction).
 
-## Libraries for data access
-
 The latest version of the Azure Storage client library is version 12.x. Microsoft recommends using version 12.x for new applications.
 
 If you cannot update existing applications to version 12.x, then Microsoft recommends using version 11.x.
+
+## Libraries for data access
 
 ### Version 12.x
 
@@ -46,7 +46,17 @@ Use the following version 11.x libraries to work with blobs, files, and queues:
 
 ## Libraries for resource management
 
-Use the following library to work with the Azure Storage resource provider:
+### Version 12.x
+
+Use the following version 12.x library to work with the Azure Storage resource provider:
+
+|    Library    |    Reference    |    Package    |    Source    |
+|------------------------------------------|-------------------------------------------------------------------|-----------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
+|    Azure.ResourceManager.Storage    |    [Reference](/dotnet/api/azure.resourcemanager.storage)    |    [NuGet](https://www.nuget.org/packages/Azure.ResourceManager.Storage/)    |    [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/storage/Azure.ResourceManager.Storage)    |
+
+### Version 11.x
+
+Use the following version 11.x library to work with the Azure Storage resource provider:
 
 |    Library    |    Reference    |    Package    |    Source    |
 |------------------------------------------|-------------------------------------------------------------------|-----------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|

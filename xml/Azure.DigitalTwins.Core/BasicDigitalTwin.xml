@@ -14,6 +14,12 @@
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
   <Interfaces />
+  <Attributes>
+    <Attribute FrameworkAlternate="azure-dotnet">
+      <AttributeName Language="C#">[System.Text.Json.Serialization.JsonConverter(typeof(Azure.DigitalTwins.Core.BasicDigitalTwinJsonConverter))]</AttributeName>
+      <AttributeName Language="F#">[&lt;System.Text.Json.Serialization.JsonConverter(typeof(Azure.DigitalTwins.Core.BasicDigitalTwinJsonConverter))&gt;]</AttributeName>
+    </Attribute>
+  </Attributes>
   <Docs>
     <summary>
              An optional, helper class for deserializing a digital twin.
@@ -35,7 +41,21 @@
              {
                  Id = basicDtId,
                  // model Id of digital twin
-                 Metadata = { ModelId = modelId },
+                 Metadata =
+                 {
+                     ModelId = modelId,
+                     PropertyMetadata = new Dictionary&lt;string, DigitalTwinPropertyMetadata&gt;
+                     {
+                         {
+                             "Prop2",
+                             new DigitalTwinPropertyMetadata
+                             {
+                                 // must always be serialized as ISO 8601
+                                 SourceTime = DateTimeOffset.UtcNow,
+                             }
+                         }
+                     },
+                 },
                  Contents =
                  {
                      // digital twin properties
@@ -46,6 +66,18 @@
                          "Component1",
                          new BasicDigitalTwinComponent
                          {
+                             // writeable component metadata
+                             Metadata =  new Dictionary&lt;string, DigitalTwinPropertyMetadata&gt;
+                             {
+                                 {
+                                     "ComponentProp2",
+                                     new DigitalTwinPropertyMetadata
+                                     {
+                                         // must always be serialized as ISO 8601
+                                         SourceTime = DateTimeOffset.UtcNow,
+                                     }
+                                 }
+                             },
                              // component properties
                              Contents =
                              {
@@ -74,10 +106,12 @@
              Console.WriteLine($"Retrieved and deserialized digital twin {basicDt.Id}:\n\t" +
                  $"ETag: {basicDt.ETag}\n\t" +
                  $"ModelId: {basicDt.Metadata.ModelId}\n\t" +
-                 $"Prop1: {basicDt.Contents["Prop1"]} and last updated on {basicDt.Metadata.PropertyMetadata["Prop1"].LastUpdatedOn}\n\t" +
-                 $"Prop2: {basicDt.Contents["Prop2"]} and last updated on {basicDt.Metadata.PropertyMetadata["Prop2"].LastUpdatedOn}\n\t" +
-                 $"Component1.Prop1: {component1.Contents["ComponentProp1"]} and  last updated on: {component1.Metadata["ComponentProp1"].LastUpdatedOn}\n\t" +
-                 $"Component1.Prop2: {component1.Contents["ComponentProp2"]} and last updated on: {component1.Metadata["ComponentProp2"].LastUpdatedOn}");
+                 $"LastUpdatedOn: {basicDt.LastUpdatedOn}\n\t" +
+                 $"Prop1: {basicDt.Contents["Prop1"]}, last updated on {basicDt.Metadata.PropertyMetadata["Prop1"].LastUpdatedOn}\n\t" +
+                 $"Prop2: {basicDt.Contents["Prop2"]}, last updated on {basicDt.Metadata.PropertyMetadata["Prop2"].LastUpdatedOn} and sourced at {basicDt.Metadata.PropertyMetadata["Prop2"].SourceTime}\n\t" +
+                 $"Component1.LastUpdatedOn: {component1.LastUpdatedOn}\n\t" +
+                 $"Component1.Prop1: {component1.Contents["ComponentProp1"]}, last updated on: {component1.Metadata["ComponentProp1"].LastUpdatedOn}\n\t" +
+                 $"Component1.Prop2: {component1.Contents["ComponentProp2"]}, last updated on: {component1.Metadata["ComponentProp2"].LastUpdatedOn} and sourced at: {component1.Metadata["ComponentProp2"].SourceTime}");
              </code></example>
   </Docs>
   <Members>
@@ -141,10 +175,12 @@
              Console.WriteLine($"Retrieved and deserialized digital twin {basicDt.Id}:\n\t" +
                  $"ETag: {basicDt.ETag}\n\t" +
                  $"ModelId: {basicDt.Metadata.ModelId}\n\t" +
-                 $"Prop1: {basicDt.Contents["Prop1"]} and last updated on {basicDt.Metadata.PropertyMetadata["Prop1"].LastUpdatedOn}\n\t" +
-                 $"Prop2: {basicDt.Contents["Prop2"]} and last updated on {basicDt.Metadata.PropertyMetadata["Prop2"].LastUpdatedOn}\n\t" +
-                 $"Component1.Prop1: {component1.Contents["ComponentProp1"]} and  last updated on: {component1.Metadata["ComponentProp1"].LastUpdatedOn}\n\t" +
-                 $"Component1.Prop2: {component1.Contents["ComponentProp2"]} and last updated on: {component1.Metadata["ComponentProp2"].LastUpdatedOn}");
+                 $"LastUpdatedOn: {basicDt.LastUpdatedOn}\n\t" +
+                 $"Prop1: {basicDt.Contents["Prop1"]}, last updated on {basicDt.Metadata.PropertyMetadata["Prop1"].LastUpdatedOn}\n\t" +
+                 $"Prop2: {basicDt.Contents["Prop2"]}, last updated on {basicDt.Metadata.PropertyMetadata["Prop2"].LastUpdatedOn} and sourced at {basicDt.Metadata.PropertyMetadata["Prop2"].SourceTime}\n\t" +
+                 $"Component1.LastUpdatedOn: {component1.LastUpdatedOn}\n\t" +
+                 $"Component1.Prop1: {component1.Contents["ComponentProp1"]}, last updated on: {component1.Metadata["ComponentProp1"].LastUpdatedOn}\n\t" +
+                 $"Component1.Prop2: {component1.Contents["ComponentProp2"]}, last updated on: {component1.Metadata["ComponentProp2"].LastUpdatedOn} and sourced at: {component1.Metadata["ComponentProp2"].SourceTime}");
              </code>
         </example>
       </Docs>
@@ -208,6 +244,34 @@
       <Docs>
         <summary>
             The unique Id of the digital twin in a digital twins instance. This field is present on every digital twin.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="LastUpdatedOn">
+      <MemberSignature Language="C#" Value="public DateTimeOffset? LastUpdatedOn { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;valuetype System.DateTimeOffset&gt; LastUpdatedOn" />
+      <MemberSignature Language="DocId" Value="P:Azure.DigitalTwins.Core.BasicDigitalTwin.LastUpdatedOn" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property LastUpdatedOn As Nullable(Of DateTimeOffset)" />
+      <MemberSignature Language="F#" Value="member this.LastUpdatedOn : Nullable&lt;DateTimeOffset&gt;" Usage="Azure.DigitalTwins.Core.BasicDigitalTwin.LastUpdatedOn" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.DigitalTwins.Core</AssemblyName>
+        <AssemblyVersion>1.4.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="azure-dotnet">
+          <AttributeName Language="C#">[System.Text.Json.Serialization.JsonPropertyName("$lastUpdateTime")]</AttributeName>
+          <AttributeName Language="F#">[&lt;System.Text.Json.Serialization.JsonPropertyName("$lastUpdateTime")&gt;]</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;System.DateTimeOffset&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            The date and time the twin was last updated.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>

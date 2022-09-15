@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: dotnet
 ms.service: monitor
 ---
-# Azure Monitor Query client library for .NET - Version 1.1.0 
+# Azure Monitor Query client library for .NET - version 1.1.0 
 
 
 The Azure Monitor Query client library is used to execute read-only queries against [Azure Monitor][azure_monitor_overview]'s two data platforms:
