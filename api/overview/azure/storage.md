@@ -1,7 +1,7 @@
 ---
 title: Azure Storage client libraries for .NET
 description: The Azure Storage client libraries for .NET offer a convenient interface for making calls to Azure Storage.
-ms.date: 01/29/2020
+ms.date: 09/19/2022
 ms.topic: reference
 ms.service: storage
 ---
@@ -10,17 +10,17 @@ ms.service: storage
 
 The Azure Storage client libraries for .NET offer a convenient interface for making calls to Azure Storage. For more information about Azure Storage, see [Introduction to Azure Storage](/azure/storage/common/storage-introduction).
 
-The latest version of the Azure Storage client library is version 12.x. Microsoft recommends using version 12.x for new applications.
-
-If you cannot update existing applications to version 12.x, then Microsoft recommends using version 11.x.
-
 ## Libraries for data access
 
-### Version 12.x
+The latest version of the Azure Storage client library for data access is version 12.x.x. Microsoft recommends using version 12.x.x for new applications.
 
-The version 12.x client libraries for .NET are part of the Azure SDK for .NET. The source code for the Azure Storage client libraries for .NET is available on [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/storage).
+If you cannot update existing applications to version 12.x.x, then Microsoft recommends using version 11.x.x.
 
-Use the following version 12.x libraries to work with blobs, files, and queues:
+### Version 12.x.x
+
+The version 12.x.x client libraries for .NET are part of the Azure SDK for .NET. The source code for the Azure Storage client libraries for .NET is available on [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/storage).
+
+Use the following version 12.x.x libraries to work with blobs, files, and queues:
 
 | Library | Reference | Package | Source |
 |----------------------------------------|-------------------------------------------------------------|-----------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
@@ -31,11 +31,11 @@ Use the following version 12.x libraries to work with blobs, files, and queues:
 |    Azure.Storage.Files.Shares    |    [Reference](/dotnet/api/azure.storage.files.shares)    |    [NuGet](https://www.nuget.org/packages/Azure.Storage.Files.Shares/)    |    [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/storage/Azure.Storage.Files.Shares)    |
 |    Azure.Storage.Queues    |    [Reference](/dotnet/api/azure.storage.queues)    |    [NuGet](https://www.nuget.org/packages/Azure.Storage.Queues/)    |    [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/storage/Azure.Storage.Queues)    |
 
-### Version 11.x
+### Version 11.x.x
 
 The source code for the Azure Storage client libraries for .NET is available on [GitHub](https://github.com/Azure/azure-storage-net).
 
-Use the following version 11.x libraries to work with blobs, files, and queues:
+Use the following version 11.x.x libraries to work with blobs, files, and queues:
 
 | Library | Reference | Package | Source |
 |--------------------------------------|---------------------------------------------------------------|-------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
@@ -46,17 +46,21 @@ Use the following version 11.x libraries to work with blobs, files, and queues:
 
 ## Libraries for resource management
 
-### Version 12.x
+The latest version of the Azure Storage client library for resource management is version 1.x.x. Microsoft recommends using version 1.x.x for new applications.
 
-Use the following version 12.x library to work with the Azure Storage resource provider:
+If you cannot update existing applications to version 1.x.x, then Microsoft recommends using version 25.x.x.
+
+### Version 1.x.x
+
+Use the following version 1.x.x library to work with the Azure Storage resource provider:
 
 |    Library    |    Reference    |    Package    |    Source    |
 |------------------------------------------|-------------------------------------------------------------------|-----------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
 |    Azure.ResourceManager.Storage    |    [Reference](/dotnet/api/azure.resourcemanager.storage)    |    [NuGet](https://www.nuget.org/packages/Azure.ResourceManager.Storage/)    |    [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/storage/Azure.ResourceManager.Storage)    |
 
-### Version 11.x
+### Version 25.x.x
 
-Use the following version 11.x library to work with the Azure Storage resource provider:
+Use the following version 25.x.x library to work with the Azure Storage resource provider:
 
 |    Library    |    Reference    |    Package    |    Source    |
 |------------------------------------------|-------------------------------------------------------------------|-----------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
