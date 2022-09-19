@@ -1,20 +1,17 @@
 ---
 title: Azure Storage Common client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Storage.Common, storage
-author: ramya-rao-a
-ms.author: ramyar
-ms.date: 04/02/2021
+author: seanmcc-msft
+ms.author: seanmcc
+ms.date: 07/08/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: storage
 ---
+# Azure Storage Common client library for .NET - version 12.12.0 
 
-# Azure Storage Common client library for .NET - version 12.7.2 
 
-
-> Server Version: 2020-04-08, 2020-02-10, 2019-12-12, 2019-07-07, and 2020-02-02
+> Server Version: 2021-02-12, 2020-12-06, 2020-10-02, 2020-08-04, 2020-06-12, 2020-04-08, 2020-02-10, 2019-12-12, 2019-07-07, and 2020-02-02
 
 Azure Storage is a Microsoft-managed service providing cloud storage that is
 highly available, secure, durable, scalable, and redundant. Azure Storage
@@ -33,7 +30,7 @@ Azure Storage client libraries.
 Install the Azure Storage client library for .NET you'd like to use with
 [NuGet][nuget] and the `Azure.Storage.Common` client library will be included:
 
-```Powershell
+```dotnetcli
 dotnet add package Azure.Storage.Blobs
 dotnet add package Azure.Storage.Queues
 dotnet add package Azure.Storage.Files.Shares
@@ -56,6 +53,20 @@ az storage account create --name MyStorageAccount --resource-group MyResourceGro
 
 The Azure Storage Common client library contains shared infrastructure like
 [authentication credentials][auth_credentials] and [RequestFailedException][RequestFailedException].
+
+### Thread safety
+We guarantee that all client instance methods are thread-safe and independent of each other ([guideline](https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-service-methods-thread-safety)). This ensures that the recommendation of reusing client instances is always safe, even across threads.
+
+### Additional concepts
+<!-- CLIENT COMMON BAR -->
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Common_12.12.0/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Common_12.12.0/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Common_12.12.0/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Common_12.12.0/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Common_12.12.0/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Common_12.12.0/sdk/core/Azure.Core/README.md#mocking) |
+[Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
+<!-- CLIENT COMMON BAR -->
 
 ## Examples
 
@@ -88,29 +99,29 @@ additional questions or comments.
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fstorage%2FAzure.Storage.Common%2FREADME.png)
 
 <!-- LINKS -->
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Common_12.7.2/sdk/storage/Azure.Storage.Common/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Common_12.12.0/sdk/storage/Azure.Storage.Common/src
 [package]: https://www.nuget.org/packages/Azure.Storage.Common/
-[docs]: https://docs.microsoft.com/dotnet/api/azure.storage
-[rest_docs]: https://docs.microsoft.com/rest/api/storageservices/
-[product_docs]: https://docs.microsoft.com/azure/storage/
+[docs]: /dotnet/api/azure.storage
+[rest_docs]: /rest/api/storageservices/
+[product_docs]: /azure/storage/
 [nuget]: https://www.nuget.org/
-[storage_account_docs]: https://docs.microsoft.com/azure/storage/common/storage-account-overview
-[storage_account_create_ps]: https://docs.microsoft.com/azure/storage/common/storage-quickstart-create-account?tabs=azure-powershell
-[storage_account_create_cli]: https://docs.microsoft.com/azure/storage/common/storage-quickstart-create-account?tabs=azure-cli
-[storage_account_create_portal]: https://docs.microsoft.com/azure/storage/common/storage-quickstart-create-account?tabs=azure-portal
-[azure_cli]: https://docs.microsoft.com/cli/azure
-[azure_sub]: https://azure.microsoft.com/free/
-[auth_credentials]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Common_12.7.2/sdk/storage/Azure.Storage.Common/src/StorageSharedKeyCredential.cs
-[blobs_examples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Common_12.7.2/sdk/storage/Azure.Storage.Blobs/README.md#Examples
-[files_examples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Common_12.7.2/sdk/storage/Azure.Storage.Files.Shares/README.md#Examples
-[queues_examples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Common_12.7.2/sdk/storage/Azure.Storage.Queues/README.md#Examples
-[RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Common_12.7.2/sdk/core/Azure.Core/src/RequestFailedException.cs
-[error_codes]: https://docs.microsoft.com/rest/api/storageservices/common-rest-api-error-codes
-[samples]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Common_12.7.2/sdk/storage/Azure.Storage.Common/samples/
-[blobs_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Common_12.7.2/sdk/storage/Azure.Storage.Blobs/README.md#next-steps
-[files_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Common_12.7.2/sdk/storage/Azure.Storage.Files.Shares/README.md#next-steps
-[queues_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Common_12.7.2/sdk/storage/Azure.Storage.Queues/README.md#next-steps
-[storage_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Common_12.7.2/sdk/storage/CONTRIBUTING.md
+[storage_account_docs]: /azure/storage/common/storage-account-overview
+[storage_account_create_ps]: /azure/storage/common/storage-quickstart-create-account?tabs=azure-powershell
+[storage_account_create_cli]: /azure/storage/common/storage-quickstart-create-account?tabs=azure-cli
+[storage_account_create_portal]: /azure/storage/common/storage-quickstart-create-account?tabs=azure-portal
+[azure_cli]: /cli/azure
+[azure_sub]: https://azure.microsoft.com/free/dotnet/
+[auth_credentials]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Common_12.12.0/sdk/storage/Azure.Storage.Common/src/StorageSharedKeyCredential.cs
+[blobs_examples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Common_12.12.0/sdk/storage/Azure.Storage.Blobs/README.md#Examples
+[files_examples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Common_12.12.0/sdk/storage/Azure.Storage.Files.Shares/README.md#Examples
+[queues_examples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Common_12.12.0/sdk/storage/Azure.Storage.Queues/README.md#Examples
+[RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Common_12.12.0/sdk/core/Azure.Core/src/RequestFailedException.cs
+[error_codes]: /rest/api/storageservices/common-rest-api-error-codes
+[samples]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Common_12.12.0/sdk/storage/Azure.Storage.Common/samples/
+[blobs_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Common_12.12.0/sdk/storage/Azure.Storage.Blobs/README.md#next-steps
+[files_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Common_12.12.0/sdk/storage/Azure.Storage.Files.Shares/README.md#next-steps
+[queues_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Common_12.12.0/sdk/storage/Azure.Storage.Queues/README.md#next-steps
+[storage_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Common_12.12.0/sdk/storage/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
