@@ -1,14 +1,14 @@
 ---
-title: Azure Redis Management client library for .NET
-keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.Redis, redis
+title: Azure Managed Network Management client library for .NET
+keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.ManagedNetwork, managednetwork
 author: pallavit
 ms.author: pallavit
-ms.date: 09/27/2022
+ms.date: 09/23/2022
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: redis
+ms.service: managednetwork
 ---
-# Azure Redis Management client library for .NET - version 1.0.1 
+# Azure Managed Network Management client library for .NET - version 1.0.0-beta.1 
 
 
 This package follows the [new Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html) which provide a number of core capabilities that are shared amongst all Azure SDKs, including the intuitive Azure Identity library, an HTTP Pipeline with custom policies, error-handling, distributed tracing, and much more.
@@ -17,10 +17,10 @@ This package follows the [new Azure SDK guidelines](https://azure.github.io/azur
 
 ### Install the package
 
-Install the Azure Redis management library for .NET with [NuGet](https://www.nuget.org/):
+Install the Azure Managed Network management library for .NET with [NuGet](https://www.nuget.org/):
 
 ```dotnetcli
-dotnet add package Azure.ResourceManager.Redis
+dotnet add package Azure.ResourceManager.ManagedNetwork --prerelease
 ```
 
 ### Prerequisites
@@ -29,7 +29,7 @@ dotnet add package Azure.ResourceManager.Redis
 
 ### Authenticate the Client
 
-To create an authenticated client and start interacting with Azure resources, please see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Redis_1.0.1/doc/dev/mgmt_quickstart.md)
+To create an authenticated client and start interacting with Azure resources, please see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.ManagedNetwork_1.0.0-beta.1/doc/dev/mgmt_quickstart.md)
 
 ## Key concepts
 
@@ -39,9 +39,9 @@ Key concepts of the Azure .NET SDK can be found [here](https://azure.github.io/a
 
 Documentation is available to help you learn how to use this package
 
-- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Redis_1.0.1/doc/dev/mgmt_quickstart.md)
+- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.ManagedNetwork_1.0.0-beta.1/doc/dev/mgmt_quickstart.md)
 - [API References](/dotnet/api/?view=azure-dotnet)
-- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Redis_1.0.1/sdk/identity/Azure.Identity/README.md)
+- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.ManagedNetwork_1.0.0-beta.1/sdk/identity/Azure.Identity/README.md)
 
 ## Examples
 
@@ -82,6 +82,6 @@ more information see the [Code of Conduct FAQ][coc_faq] or contact
 <opencode@microsoft.com> with any additional questions or comments.
 
 <!-- LINKS -->
-[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Redis_1.0.1/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
+[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.ManagedNetwork_1.0.0-beta.1/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
