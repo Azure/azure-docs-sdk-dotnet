@@ -3,12 +3,20 @@ title: Azure Template client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Template, template
 author: hallipr
 ms.author: pahallis
+<<<<<<< HEAD
 ms.date: 09/29/2022
+=======
+ms.date: 10/04/2022
+>>>>>>> ed01275316a5dfe38680afb67a0ca5c3fee648c8
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: template
 ---
+<<<<<<< HEAD
 # Azure Template client library for .NET - version 1.0.3-beta.1886094 
+=======
+# Azure Template client library for .NET - version 1.0.3-beta.1895077 
+>>>>>>> ed01275316a5dfe38680afb67a0ca5c3fee648c8
 
 
 Azure Template is a managed service that helps developers get secret simply and securely.
@@ -19,7 +27,11 @@ Use the client library for to:
 
 [Source code][source_root] | [Package (NuGet)][package] | [API reference documentation][reference_docs] | [Product documentation][azconfig_docs] | [Samples][source_samples]
 
+<<<<<<< HEAD
   [Source code](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1886094/sdk/template/Azure.Template/src) | [Package (NuGet)](https://www.nuget.org/packages) | [API reference documentation](https://azure.github.io/azure-sdk-for-net) | [Product documentation](/azure)
+=======
+  [Source code](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1895077/sdk/template/Azure.Template/src) | [Package (NuGet)](https://www.nuget.org/packages) | [API reference documentation](https://azure.github.io/azure-sdk-for-net) | [Product documentation](/azure)
+>>>>>>> ed01275316a5dfe38680afb67a0ca5c3fee648c8
 
 ## Getting started
 
@@ -59,18 +71,31 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
+<<<<<<< HEAD
 [Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1886094/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
 [Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1886094/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
 [Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1886094/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
 [Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1886094/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
 [Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1886094/sdk/core/Azure.Core/samples/Diagnostics.md) |
 [Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1886094/sdk/core/Azure.Core/README.md#mocking) |
+=======
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1895077/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1895077/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1895077/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1895077/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1895077/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.1895077/sdk/core/Azure.Core/README.md#mocking) |
+>>>>>>> ed01275316a5dfe38680afb67a0ca5c3fee648c8
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
 ## Examples
 
+<<<<<<< HEAD
 You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Template_1.0.3-beta.1886094/sdk/template/Azure.Template/samples).
+=======
+You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Template_1.0.3-beta.1895077/sdk/template/Azure.Template/samples).
+>>>>>>> ed01275316a5dfe38680afb67a0ca5c3fee648c8
 
 ### Get secret
 
