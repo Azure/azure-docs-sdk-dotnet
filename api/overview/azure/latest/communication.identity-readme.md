@@ -3,12 +3,12 @@ title: Azure Communication Identity client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Communication.Identity, communication
 author: acsdevx-msft
 ms.author: acsdevx-msft
-ms.date: 07/19/2022
+ms.date: 10/11/2022
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: communication
 ---
-# Azure Communication Identity client library for .NET - version 1.1.0 
+# Azure Communication Identity client library for .NET - version 1.2.0 
 
 
 Azure Communication Identity is managing tokens for Azure Communication Services.
@@ -74,12 +74,12 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Identity_1.1.0/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Identity_1.1.0/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Identity_1.1.0/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Identity_1.1.0/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Identity_1.1.0/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Identity_1.1.0/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Identity_1.2.0/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Identity_1.2.0/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Identity_1.2.0/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Identity_1.2.0/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Identity_1.2.0/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Identity_1.2.0/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
@@ -103,9 +103,30 @@ Console.WriteLine($"Token: {token}");
 Console.WriteLine($"Expires On: {expiresOn}");
 ```
 
+It's also possible to create a Communication Identity access token by customizing the expiration time. Validity period of the token must be within [1,24] hours range. If not provided, the default value of 24 hours will be used.
+
+```C# Snippet:CreateCommunicationTokenAsyncWithCustomExpiration
+TimeSpan tokenExpiresIn = TimeSpan.FromHours(1);
+Response<AccessToken> tokenResponse = await client.GetTokenAsync(user, scopes: new[] { CommunicationTokenScope.Chat }, tokenExpiresIn);
+string token = tokenResponse.Value.Token;
+DateTimeOffset expiresOn = tokenResponse.Value.ExpiresOn;
+Console.WriteLine($"Token: {token}");
+Console.WriteLine($"Expires On: {expiresOn}");
+```
+
 ### Creating a user and a token in the same request
 ```C# Snippet:CreateCommunicationUserAndToken
 Response<CommunicationUserIdentifierAndToken> response = await client.CreateUserAndTokenAsync(scopes: new[] { CommunicationTokenScope.Chat });
+var (user, token) = response.Value;
+Console.WriteLine($"User id: {user.Id}");
+Console.WriteLine($"Token: {token.Token}");
+```
+
+It's also possible to create a Communication Identity access token by customizing the expiration time. Validity period of the token must be within [1,24] hours range. If not provided, the default value of 24 hours will be used.
+
+```C# Snippet:CreateCommunicationUserAndTokenWithCustomExpirationAsync
+TimeSpan tokenExpiresIn = TimeSpan.FromHours(1);
+Response<CommunicationUserIdentifierAndToken> response = await client.CreateUserAndTokenAsync(scopes: new[] { CommunicationTokenScope.Chat }, tokenExpiresIn);
 var (user, token) = response.Value;
 Console.WriteLine($"User id: {user.Id}");
 Console.WriteLine($"Token: {token.Token}");
@@ -173,8 +194,8 @@ This project has adopted the [Microsoft Open Source Code of Conduct][coc]. For m
 
 [azure_sub]: https://azure.microsoft.com/free/dotnet/
 [azure_portal]: https://portal.azure.com
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Communication.Identity_1.1.0/sdk/communication/Azure.Communication.Identity/src
-[source_samples]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Identity_1.1.0/sdk/communication/Azure.Communication.Identity/samples
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Communication.Identity_1.2.0/sdk/communication/Azure.Communication.Identity/src
+[source_samples]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.Identity_1.2.0/sdk/communication/Azure.Communication.Identity/samples
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
