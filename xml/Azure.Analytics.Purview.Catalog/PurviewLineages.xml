@@ -13,7 +13,7 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary> The PurviewLineages service client. </summary>
+    <summary> The PurviewLineages sub-client. </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -31,6 +31,296 @@
       <Docs>
         <summary> Initializes a new instance of PurviewLineages for mocking. </summary>
         <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetLineageByUniqueAttribute">
+      <MemberSignature Language="C#" Value="public virtual Azure.Response GetLineageByUniqueAttribute (string typeName, string direction, int? depth = default, int? width = default, bool? includeParent = default, bool? getDerivedLineage = default, Azure.RequestContext context = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response GetLineageByUniqueAttribute(string typeName, string direction, valuetype System.Nullable`1&lt;int32&gt; depth, valuetype System.Nullable`1&lt;int32&gt; width, valuetype System.Nullable`1&lt;bool&gt; includeParent, valuetype System.Nullable`1&lt;bool&gt; getDerivedLineage, class Azure.RequestContext context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Analytics.Purview.Catalog.PurviewLineages.GetLineageByUniqueAttribute(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.Boolean},Azure.RequestContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetLineageByUniqueAttribute (typeName As String, direction As String, Optional depth As Nullable(Of Integer) = Nothing, Optional width As Nullable(Of Integer) = Nothing, Optional includeParent As Nullable(Of Boolean) = Nothing, Optional getDerivedLineage As Nullable(Of Boolean) = Nothing, Optional context As RequestContext = Nothing) As Response" />
+      <MemberSignature Language="F#" Value="abstract member GetLineageByUniqueAttribute : string * string * Nullable&lt;int&gt; * Nullable&lt;int&gt; * Nullable&lt;bool&gt; * Nullable&lt;bool&gt; * Azure.RequestContext -&gt; Azure.Response&#xA;override this.GetLineageByUniqueAttribute : string * string * Nullable&lt;int&gt; * Nullable&lt;int&gt; * Nullable&lt;bool&gt; * Nullable&lt;bool&gt; * Azure.RequestContext -&gt; Azure.Response" Usage="purviewLineages.GetLineageByUniqueAttribute (typeName, direction, depth, width, includeParent, getDerivedLineage, context)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Analytics.Purview.Catalog</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Response</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="typeName" Type="System.String" />
+        <Parameter Name="direction" Type="System.String" />
+        <Parameter Name="depth" Type="System.Nullable&lt;System.Int32&gt;" />
+        <Parameter Name="width" Type="System.Nullable&lt;System.Int32&gt;" />
+        <Parameter Name="includeParent" Type="System.Nullable&lt;System.Boolean&gt;" />
+        <Parameter Name="getDerivedLineage" Type="System.Nullable&lt;System.Boolean&gt;" />
+        <Parameter Name="context" Type="Azure.RequestContext" />
+      </Parameters>
+      <Docs>
+        <param name="typeName"> The name of the type. </param>
+        <param name="direction"> The direction of the lineage, which could be INPUT, OUTPUT or BOTH. Allowed values: "BOTH" | "INPUT" | "OUTPUT". </param>
+        <param name="depth"> The number of hops for lineage. </param>
+        <param name="width"> The number of max expanding width in lineage. </param>
+        <param name="includeParent"> True to include the parent chain in the response. </param>
+        <param name="getDerivedLineage"> True to include derived lineage in the response. </param>
+        <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        <summary>
+            Returns lineage info about entity.
+            
+            In addition to the typeName path parameter, attribute key-value pair(s) can be provided in the following format
+            
+            attr:[attrName]=[attrValue]
+            
+            NOTE: The attrName and attrValue should be unique across entities, eg. qualifiedName
+            </summary>
+        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <remarks>
+            Below is the JSON schema for the response payload.
+            
+            Response Body:
+            
+            Schema for <c>AtlasLineageInfo</c>:
+            <code>{
+              baseEntityGuid: string, # Optional. The GUID of the base entity.
+              guidEntityMap: Dictionary&lt;string, AtlasEntityHeader&gt;, # Optional. The GUID entity map.
+              widthCounts: Dictionary&lt;string, Dictionary&lt;string, AnyObject&gt;&gt;, # Optional. The entity count in specific direction.
+              lineageDepth: number, # Optional. The depth of lineage.
+              lineageWidth: number, # Optional. The width of lineage.
+              includeParent: boolean, # Optional. True to return the parent of the base entity.
+              childrenCount: number, # Optional. The number of children node.
+              lineageDirection: "INPUT" | "OUTPUT" | "BOTH", # Optional. The enum of lineage direction.
+              parentRelations: [
+                {
+                  childEntityId: string, # Optional. The GUID of child entity.
+                  relationshipId: string, # Optional. The GUID of relationship.
+                  parentEntityId: string, # Optional. The GUID of parent entity.
+                }
+              ], # Optional. An array of parentRelations relations.
+              relations: [
+                {
+                  fromEntityId: string, # Optional. The GUID of from-entity.
+                  relationshipId: string, # Optional. The GUID of relationship.
+                  toEntityId: string, # Optional. The GUID of to-entity.
+                }
+              ], # Optional. An array of lineage relations.
+            }
+            </code></remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="typeName" /> or <paramref name="direction" /> is null. </exception>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="typeName" /> is an empty string, and was expected to be non-empty. </exception>
+        <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
+        <example>
+            This sample shows how to call GetLineageByUniqueAttribute with required parameters and parse the result.
+            <code><![CDATA[
+            var credential = new DefaultAzureCredential();
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PurviewCatalogClient(endpoint, credential).GetPurviewLineagesClient();
+            
+            Response response = client.GetLineageByUniqueAttribute("<typeName>", "<direction>");
+            
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+            ]]></code>
+            This sample shows how to call GetLineageByUniqueAttribute with all parameters, and how to parse the result.
+            <code><![CDATA[
+            var credential = new DefaultAzureCredential();
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PurviewCatalogClient(endpoint, credential).GetPurviewLineagesClient();
+            
+            Response response = client.GetLineageByUniqueAttribute("<typeName>", "<direction>", 1234, 1234, true, true);
+            
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("baseEntityGuid").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classificationNames")[0].ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("entityGuid").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("entityStatus").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("removePropagationsOnEntityDelete").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("validityPeriods")[0].GetProperty("endTime").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("validityPeriods")[0].GetProperty("startTime").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("validityPeriods")[0].GetProperty("timeZone").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("source").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("sourceDetails").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("attributes").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("typeName").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("lastModifiedTS").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("displayText").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("guid").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("isIncomplete").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("labels")[0].ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meaningNames")[0].ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("confidence").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("createdBy").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("description").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("displayText").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("expression").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("relationGuid").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("source").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("status").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("steward").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("termGuid").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("status").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("attributes").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("typeName").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("lastModifiedTS").ToString());
+            Console.WriteLine(result.GetProperty("widthCounts").GetProperty("<test>").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("lineageDepth").ToString());
+            Console.WriteLine(result.GetProperty("lineageWidth").ToString());
+            Console.WriteLine(result.GetProperty("includeParent").ToString());
+            Console.WriteLine(result.GetProperty("childrenCount").ToString());
+            Console.WriteLine(result.GetProperty("lineageDirection").ToString());
+            Console.WriteLine(result.GetProperty("parentRelations")[0].GetProperty("childEntityId").ToString());
+            Console.WriteLine(result.GetProperty("parentRelations")[0].GetProperty("relationshipId").ToString());
+            Console.WriteLine(result.GetProperty("parentRelations")[0].GetProperty("parentEntityId").ToString());
+            Console.WriteLine(result.GetProperty("relations")[0].GetProperty("fromEntityId").ToString());
+            Console.WriteLine(result.GetProperty("relations")[0].GetProperty("relationshipId").ToString());
+            Console.WriteLine(result.GetProperty("relations")[0].GetProperty("toEntityId").ToString());
+            ]]></code></example>
+      </Docs>
+    </Member>
+    <Member MemberName="GetLineageByUniqueAttributeAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; GetLineageByUniqueAttributeAsync (string typeName, string direction, int? depth = default, int? width = default, bool? includeParent = default, bool? getDerivedLineage = default, Azure.RequestContext context = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; GetLineageByUniqueAttributeAsync(string typeName, string direction, valuetype System.Nullable`1&lt;int32&gt; depth, valuetype System.Nullable`1&lt;int32&gt; width, valuetype System.Nullable`1&lt;bool&gt; includeParent, valuetype System.Nullable`1&lt;bool&gt; getDerivedLineage, class Azure.RequestContext context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Analytics.Purview.Catalog.PurviewLineages.GetLineageByUniqueAttributeAsync(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.Boolean},Azure.RequestContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetLineageByUniqueAttributeAsync (typeName As String, direction As String, Optional depth As Nullable(Of Integer) = Nothing, Optional width As Nullable(Of Integer) = Nothing, Optional includeParent As Nullable(Of Boolean) = Nothing, Optional getDerivedLineage As Nullable(Of Boolean) = Nothing, Optional context As RequestContext = Nothing) As Task(Of Response)" />
+      <MemberSignature Language="F#" Value="abstract member GetLineageByUniqueAttributeAsync : string * string * Nullable&lt;int&gt; * Nullable&lt;int&gt; * Nullable&lt;bool&gt; * Nullable&lt;bool&gt; * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.GetLineageByUniqueAttributeAsync : string * string * Nullable&lt;int&gt; * Nullable&lt;int&gt; * Nullable&lt;bool&gt; * Nullable&lt;bool&gt; * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="purviewLineages.GetLineageByUniqueAttributeAsync (typeName, direction, depth, width, includeParent, getDerivedLineage, context)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Analytics.Purview.Catalog</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="typeName" Type="System.String" />
+        <Parameter Name="direction" Type="System.String" />
+        <Parameter Name="depth" Type="System.Nullable&lt;System.Int32&gt;" />
+        <Parameter Name="width" Type="System.Nullable&lt;System.Int32&gt;" />
+        <Parameter Name="includeParent" Type="System.Nullable&lt;System.Boolean&gt;" />
+        <Parameter Name="getDerivedLineage" Type="System.Nullable&lt;System.Boolean&gt;" />
+        <Parameter Name="context" Type="Azure.RequestContext" />
+      </Parameters>
+      <Docs>
+        <param name="typeName"> The name of the type. </param>
+        <param name="direction"> The direction of the lineage, which could be INPUT, OUTPUT or BOTH. Allowed values: "BOTH" | "INPUT" | "OUTPUT". </param>
+        <param name="depth"> The number of hops for lineage. </param>
+        <param name="width"> The number of max expanding width in lineage. </param>
+        <param name="includeParent"> True to include the parent chain in the response. </param>
+        <param name="getDerivedLineage"> True to include derived lineage in the response. </param>
+        <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        <summary>
+            Returns lineage info about entity.
+            
+            In addition to the typeName path parameter, attribute key-value pair(s) can be provided in the following format
+            
+            attr:[attrName]=[attrValue]
+            
+            NOTE: The attrName and attrValue should be unique across entities, eg. qualifiedName
+            </summary>
+        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <remarks>
+            Below is the JSON schema for the response payload.
+            
+            Response Body:
+            
+            Schema for <c>AtlasLineageInfo</c>:
+            <code>{
+              baseEntityGuid: string, # Optional. The GUID of the base entity.
+              guidEntityMap: Dictionary&lt;string, AtlasEntityHeader&gt;, # Optional. The GUID entity map.
+              widthCounts: Dictionary&lt;string, Dictionary&lt;string, AnyObject&gt;&gt;, # Optional. The entity count in specific direction.
+              lineageDepth: number, # Optional. The depth of lineage.
+              lineageWidth: number, # Optional. The width of lineage.
+              includeParent: boolean, # Optional. True to return the parent of the base entity.
+              childrenCount: number, # Optional. The number of children node.
+              lineageDirection: "INPUT" | "OUTPUT" | "BOTH", # Optional. The enum of lineage direction.
+              parentRelations: [
+                {
+                  childEntityId: string, # Optional. The GUID of child entity.
+                  relationshipId: string, # Optional. The GUID of relationship.
+                  parentEntityId: string, # Optional. The GUID of parent entity.
+                }
+              ], # Optional. An array of parentRelations relations.
+              relations: [
+                {
+                  fromEntityId: string, # Optional. The GUID of from-entity.
+                  relationshipId: string, # Optional. The GUID of relationship.
+                  toEntityId: string, # Optional. The GUID of to-entity.
+                }
+              ], # Optional. An array of lineage relations.
+            }
+            </code></remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="typeName" /> or <paramref name="direction" /> is null. </exception>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="typeName" /> is an empty string, and was expected to be non-empty. </exception>
+        <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
+        <example>
+            This sample shows how to call GetLineageByUniqueAttributeAsync with required parameters and parse the result.
+            <code><![CDATA[
+            var credential = new DefaultAzureCredential();
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PurviewCatalogClient(endpoint, credential).GetPurviewLineagesClient();
+            
+            Response response = await client.GetLineageByUniqueAttributeAsync("<typeName>", "<direction>");
+            
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+            ]]></code>
+            This sample shows how to call GetLineageByUniqueAttributeAsync with all parameters, and how to parse the result.
+            <code><![CDATA[
+            var credential = new DefaultAzureCredential();
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PurviewCatalogClient(endpoint, credential).GetPurviewLineagesClient();
+            
+            Response response = await client.GetLineageByUniqueAttributeAsync("<typeName>", "<direction>", 1234, 1234, true, true);
+            
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("baseEntityGuid").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classificationNames")[0].ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("entityGuid").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("entityStatus").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("removePropagationsOnEntityDelete").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("validityPeriods")[0].GetProperty("endTime").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("validityPeriods")[0].GetProperty("startTime").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("validityPeriods")[0].GetProperty("timeZone").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("source").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("sourceDetails").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("attributes").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("typeName").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("lastModifiedTS").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("displayText").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("guid").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("isIncomplete").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("labels")[0].ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meaningNames")[0].ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("confidence").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("createdBy").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("description").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("displayText").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("expression").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("relationGuid").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("source").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("status").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("steward").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("termGuid").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("status").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("attributes").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("typeName").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("lastModifiedTS").ToString());
+            Console.WriteLine(result.GetProperty("widthCounts").GetProperty("<test>").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("lineageDepth").ToString());
+            Console.WriteLine(result.GetProperty("lineageWidth").ToString());
+            Console.WriteLine(result.GetProperty("includeParent").ToString());
+            Console.WriteLine(result.GetProperty("childrenCount").ToString());
+            Console.WriteLine(result.GetProperty("lineageDirection").ToString());
+            Console.WriteLine(result.GetProperty("parentRelations")[0].GetProperty("childEntityId").ToString());
+            Console.WriteLine(result.GetProperty("parentRelations")[0].GetProperty("relationshipId").ToString());
+            Console.WriteLine(result.GetProperty("parentRelations")[0].GetProperty("parentEntityId").ToString());
+            Console.WriteLine(result.GetProperty("relations")[0].GetProperty("fromEntityId").ToString());
+            Console.WriteLine(result.GetProperty("relations")[0].GetProperty("relationshipId").ToString());
+            Console.WriteLine(result.GetProperty("relations")[0].GetProperty("toEntityId").ToString());
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="GetLineageGraph">
@@ -63,47 +353,111 @@
         <param name="width"> The number of max expanding width in lineage. </param>
         <param name="includeParent"> True to include the parent chain in the response. </param>
         <param name="getDerivedLineage"> True to include derived lineage in the response. </param>
-        <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         <summary> Get lineage info of the entity specified by GUID. </summary>
-        <returns>To be added.</returns>
+        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         <remarks>
-            Schema for <c>Response Body</c>:
+            Below is the JSON schema for the response payload.
+            
+            Response Body:
+            
+            Schema for <c>AtlasLineageInfo</c>:
             <code>{
-              baseEntityGuid: string,
-              guidEntityMap: Dictionary&lt;string, AtlasEntityHeader&gt;,
-              widthCounts: Dictionary&lt;string, Dictionary&lt;string, AnyObject&gt;&gt;,
-              lineageDepth: number,
-              lineageWidth: number,
-              includeParent: boolean,
-              childrenCount: number,
-              lineageDirection: "INPUT" | "OUTPUT" | "BOTH",
+              baseEntityGuid: string, # Optional. The GUID of the base entity.
+              guidEntityMap: Dictionary&lt;string, AtlasEntityHeader&gt;, # Optional. The GUID entity map.
+              widthCounts: Dictionary&lt;string, Dictionary&lt;string, AnyObject&gt;&gt;, # Optional. The entity count in specific direction.
+              lineageDepth: number, # Optional. The depth of lineage.
+              lineageWidth: number, # Optional. The width of lineage.
+              includeParent: boolean, # Optional. True to return the parent of the base entity.
+              childrenCount: number, # Optional. The number of children node.
+              lineageDirection: "INPUT" | "OUTPUT" | "BOTH", # Optional. The enum of lineage direction.
               parentRelations: [
                 {
-                  childEntityId: string,
-                  relationshipId: string,
-                  parentEntityId: string
+                  childEntityId: string, # Optional. The GUID of child entity.
+                  relationshipId: string, # Optional. The GUID of relationship.
+                  parentEntityId: string, # Optional. The GUID of parent entity.
                 }
-              ],
+              ], # Optional. An array of parentRelations relations.
               relations: [
                 {
-                  fromEntityId: string,
-                  relationshipId: string,
-                  toEntityId: string
+                  fromEntityId: string, # Optional. The GUID of from-entity.
+                  relationshipId: string, # Optional. The GUID of relationship.
+                  toEntityId: string, # Optional. The GUID of to-entity.
                 }
-              ]
-            }
-            </code>
-            Schema for <c>Response Error</c>:
-            <code>{
-              requestId: string,
-              errorCode: string,
-              errorMessage: string
+              ], # Optional. An array of lineage relations.
             }
             </code></remarks>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="guid" /> or <paramref name="direction" /> is null. </exception>
         <exception cref="T:System.ArgumentException">
           <paramref name="guid" /> is an empty string, and was expected to be non-empty. </exception>
+        <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
+        <example>
+            This sample shows how to call GetLineageGraph with required parameters and parse the result.
+            <code><![CDATA[
+            var credential = new DefaultAzureCredential();
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PurviewCatalogClient(endpoint, credential).GetPurviewLineagesClient();
+            
+            Response response = client.GetLineageGraph("<guid>", "<direction>");
+            
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+            ]]></code>
+            This sample shows how to call GetLineageGraph with all parameters, and how to parse the result.
+            <code><![CDATA[
+            var credential = new DefaultAzureCredential();
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PurviewCatalogClient(endpoint, credential).GetPurviewLineagesClient();
+            
+            Response response = client.GetLineageGraph("<guid>", "<direction>", 1234, 1234, true, true);
+            
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("baseEntityGuid").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classificationNames")[0].ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("entityGuid").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("entityStatus").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("removePropagationsOnEntityDelete").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("validityPeriods")[0].GetProperty("endTime").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("validityPeriods")[0].GetProperty("startTime").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("validityPeriods")[0].GetProperty("timeZone").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("source").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("sourceDetails").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("attributes").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("typeName").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("lastModifiedTS").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("displayText").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("guid").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("isIncomplete").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("labels")[0].ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meaningNames")[0].ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("confidence").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("createdBy").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("description").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("displayText").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("expression").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("relationGuid").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("source").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("status").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("steward").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("termGuid").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("status").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("attributes").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("typeName").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("lastModifiedTS").ToString());
+            Console.WriteLine(result.GetProperty("widthCounts").GetProperty("<test>").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("lineageDepth").ToString());
+            Console.WriteLine(result.GetProperty("lineageWidth").ToString());
+            Console.WriteLine(result.GetProperty("includeParent").ToString());
+            Console.WriteLine(result.GetProperty("childrenCount").ToString());
+            Console.WriteLine(result.GetProperty("lineageDirection").ToString());
+            Console.WriteLine(result.GetProperty("parentRelations")[0].GetProperty("childEntityId").ToString());
+            Console.WriteLine(result.GetProperty("parentRelations")[0].GetProperty("relationshipId").ToString());
+            Console.WriteLine(result.GetProperty("parentRelations")[0].GetProperty("parentEntityId").ToString());
+            Console.WriteLine(result.GetProperty("relations")[0].GetProperty("fromEntityId").ToString());
+            Console.WriteLine(result.GetProperty("relations")[0].GetProperty("relationshipId").ToString());
+            Console.WriteLine(result.GetProperty("relations")[0].GetProperty("toEntityId").ToString());
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="GetLineageGraphAsync">
@@ -136,47 +490,111 @@
         <param name="width"> The number of max expanding width in lineage. </param>
         <param name="includeParent"> True to include the parent chain in the response. </param>
         <param name="getDerivedLineage"> True to include derived lineage in the response. </param>
-        <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         <summary> Get lineage info of the entity specified by GUID. </summary>
-        <returns>To be added.</returns>
+        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         <remarks>
-            Schema for <c>Response Body</c>:
+            Below is the JSON schema for the response payload.
+            
+            Response Body:
+            
+            Schema for <c>AtlasLineageInfo</c>:
             <code>{
-              baseEntityGuid: string,
-              guidEntityMap: Dictionary&lt;string, AtlasEntityHeader&gt;,
-              widthCounts: Dictionary&lt;string, Dictionary&lt;string, AnyObject&gt;&gt;,
-              lineageDepth: number,
-              lineageWidth: number,
-              includeParent: boolean,
-              childrenCount: number,
-              lineageDirection: "INPUT" | "OUTPUT" | "BOTH",
+              baseEntityGuid: string, # Optional. The GUID of the base entity.
+              guidEntityMap: Dictionary&lt;string, AtlasEntityHeader&gt;, # Optional. The GUID entity map.
+              widthCounts: Dictionary&lt;string, Dictionary&lt;string, AnyObject&gt;&gt;, # Optional. The entity count in specific direction.
+              lineageDepth: number, # Optional. The depth of lineage.
+              lineageWidth: number, # Optional. The width of lineage.
+              includeParent: boolean, # Optional. True to return the parent of the base entity.
+              childrenCount: number, # Optional. The number of children node.
+              lineageDirection: "INPUT" | "OUTPUT" | "BOTH", # Optional. The enum of lineage direction.
               parentRelations: [
                 {
-                  childEntityId: string,
-                  relationshipId: string,
-                  parentEntityId: string
+                  childEntityId: string, # Optional. The GUID of child entity.
+                  relationshipId: string, # Optional. The GUID of relationship.
+                  parentEntityId: string, # Optional. The GUID of parent entity.
                 }
-              ],
+              ], # Optional. An array of parentRelations relations.
               relations: [
                 {
-                  fromEntityId: string,
-                  relationshipId: string,
-                  toEntityId: string
+                  fromEntityId: string, # Optional. The GUID of from-entity.
+                  relationshipId: string, # Optional. The GUID of relationship.
+                  toEntityId: string, # Optional. The GUID of to-entity.
                 }
-              ]
-            }
-            </code>
-            Schema for <c>Response Error</c>:
-            <code>{
-              requestId: string,
-              errorCode: string,
-              errorMessage: string
+              ], # Optional. An array of lineage relations.
             }
             </code></remarks>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="guid" /> or <paramref name="direction" /> is null. </exception>
         <exception cref="T:System.ArgumentException">
           <paramref name="guid" /> is an empty string, and was expected to be non-empty. </exception>
+        <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
+        <example>
+            This sample shows how to call GetLineageGraphAsync with required parameters and parse the result.
+            <code><![CDATA[
+            var credential = new DefaultAzureCredential();
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PurviewCatalogClient(endpoint, credential).GetPurviewLineagesClient();
+            
+            Response response = await client.GetLineageGraphAsync("<guid>", "<direction>");
+            
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+            ]]></code>
+            This sample shows how to call GetLineageGraphAsync with all parameters, and how to parse the result.
+            <code><![CDATA[
+            var credential = new DefaultAzureCredential();
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PurviewCatalogClient(endpoint, credential).GetPurviewLineagesClient();
+            
+            Response response = await client.GetLineageGraphAsync("<guid>", "<direction>", 1234, 1234, true, true);
+            
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("baseEntityGuid").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classificationNames")[0].ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("entityGuid").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("entityStatus").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("removePropagationsOnEntityDelete").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("validityPeriods")[0].GetProperty("endTime").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("validityPeriods")[0].GetProperty("startTime").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("validityPeriods")[0].GetProperty("timeZone").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("source").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("sourceDetails").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("attributes").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("typeName").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("lastModifiedTS").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("displayText").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("guid").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("isIncomplete").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("labels")[0].ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meaningNames")[0].ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("confidence").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("createdBy").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("description").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("displayText").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("expression").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("relationGuid").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("source").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("status").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("steward").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("termGuid").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("status").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("attributes").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("typeName").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("lastModifiedTS").ToString());
+            Console.WriteLine(result.GetProperty("widthCounts").GetProperty("<test>").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("lineageDepth").ToString());
+            Console.WriteLine(result.GetProperty("lineageWidth").ToString());
+            Console.WriteLine(result.GetProperty("includeParent").ToString());
+            Console.WriteLine(result.GetProperty("childrenCount").ToString());
+            Console.WriteLine(result.GetProperty("lineageDirection").ToString());
+            Console.WriteLine(result.GetProperty("parentRelations")[0].GetProperty("childEntityId").ToString());
+            Console.WriteLine(result.GetProperty("parentRelations")[0].GetProperty("relationshipId").ToString());
+            Console.WriteLine(result.GetProperty("parentRelations")[0].GetProperty("parentEntityId").ToString());
+            Console.WriteLine(result.GetProperty("relations")[0].GetProperty("fromEntityId").ToString());
+            Console.WriteLine(result.GetProperty("relations")[0].GetProperty("relationshipId").ToString());
+            Console.WriteLine(result.GetProperty("relations")[0].GetProperty("toEntityId").ToString());
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="NextPageLineage">
@@ -207,47 +625,111 @@
         <param name="getDerivedLineage"> True to include derived lineage in the response. </param>
         <param name="offset"> The offset for pagination purpose. </param>
         <param name="limit"> The page size - by default there is no paging. </param>
-        <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         <summary> Return immediate next page lineage info about entity with pagination. </summary>
-        <returns>To be added.</returns>
+        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         <remarks>
-            Schema for <c>Response Body</c>:
+            Below is the JSON schema for the response payload.
+            
+            Response Body:
+            
+            Schema for <c>AtlasLineageInfo</c>:
             <code>{
-              baseEntityGuid: string,
-              guidEntityMap: Dictionary&lt;string, AtlasEntityHeader&gt;,
-              widthCounts: Dictionary&lt;string, Dictionary&lt;string, AnyObject&gt;&gt;,
-              lineageDepth: number,
-              lineageWidth: number,
-              includeParent: boolean,
-              childrenCount: number,
-              lineageDirection: "INPUT" | "OUTPUT" | "BOTH",
+              baseEntityGuid: string, # Optional. The GUID of the base entity.
+              guidEntityMap: Dictionary&lt;string, AtlasEntityHeader&gt;, # Optional. The GUID entity map.
+              widthCounts: Dictionary&lt;string, Dictionary&lt;string, AnyObject&gt;&gt;, # Optional. The entity count in specific direction.
+              lineageDepth: number, # Optional. The depth of lineage.
+              lineageWidth: number, # Optional. The width of lineage.
+              includeParent: boolean, # Optional. True to return the parent of the base entity.
+              childrenCount: number, # Optional. The number of children node.
+              lineageDirection: "INPUT" | "OUTPUT" | "BOTH", # Optional. The enum of lineage direction.
               parentRelations: [
                 {
-                  childEntityId: string,
-                  relationshipId: string,
-                  parentEntityId: string
+                  childEntityId: string, # Optional. The GUID of child entity.
+                  relationshipId: string, # Optional. The GUID of relationship.
+                  parentEntityId: string, # Optional. The GUID of parent entity.
                 }
-              ],
+              ], # Optional. An array of parentRelations relations.
               relations: [
                 {
-                  fromEntityId: string,
-                  relationshipId: string,
-                  toEntityId: string
+                  fromEntityId: string, # Optional. The GUID of from-entity.
+                  relationshipId: string, # Optional. The GUID of relationship.
+                  toEntityId: string, # Optional. The GUID of to-entity.
                 }
-              ]
-            }
-            </code>
-            Schema for <c>Response Error</c>:
-            <code>{
-              requestId: string,
-              errorCode: string,
-              errorMessage: string
+              ], # Optional. An array of lineage relations.
             }
             </code></remarks>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="guid" /> or <paramref name="direction" /> is null. </exception>
         <exception cref="T:System.ArgumentException">
           <paramref name="guid" /> is an empty string, and was expected to be non-empty. </exception>
+        <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
+        <example>
+            This sample shows how to call NextPageLineage with required parameters and parse the result.
+            <code><![CDATA[
+            var credential = new DefaultAzureCredential();
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PurviewCatalogClient(endpoint, credential).GetPurviewLineagesClient();
+            
+            Response response = client.NextPageLineage("<guid>", "<direction>");
+            
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+            ]]></code>
+            This sample shows how to call NextPageLineage with all parameters, and how to parse the result.
+            <code><![CDATA[
+            var credential = new DefaultAzureCredential();
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PurviewCatalogClient(endpoint, credential).GetPurviewLineagesClient();
+            
+            Response response = client.NextPageLineage("<guid>", "<direction>", true, 1234, 1234);
+            
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("baseEntityGuid").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classificationNames")[0].ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("entityGuid").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("entityStatus").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("removePropagationsOnEntityDelete").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("validityPeriods")[0].GetProperty("endTime").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("validityPeriods")[0].GetProperty("startTime").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("validityPeriods")[0].GetProperty("timeZone").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("source").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("sourceDetails").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("attributes").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("typeName").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("lastModifiedTS").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("displayText").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("guid").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("isIncomplete").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("labels")[0].ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meaningNames")[0].ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("confidence").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("createdBy").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("description").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("displayText").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("expression").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("relationGuid").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("source").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("status").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("steward").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("termGuid").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("status").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("attributes").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("typeName").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("lastModifiedTS").ToString());
+            Console.WriteLine(result.GetProperty("widthCounts").GetProperty("<test>").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("lineageDepth").ToString());
+            Console.WriteLine(result.GetProperty("lineageWidth").ToString());
+            Console.WriteLine(result.GetProperty("includeParent").ToString());
+            Console.WriteLine(result.GetProperty("childrenCount").ToString());
+            Console.WriteLine(result.GetProperty("lineageDirection").ToString());
+            Console.WriteLine(result.GetProperty("parentRelations")[0].GetProperty("childEntityId").ToString());
+            Console.WriteLine(result.GetProperty("parentRelations")[0].GetProperty("relationshipId").ToString());
+            Console.WriteLine(result.GetProperty("parentRelations")[0].GetProperty("parentEntityId").ToString());
+            Console.WriteLine(result.GetProperty("relations")[0].GetProperty("fromEntityId").ToString());
+            Console.WriteLine(result.GetProperty("relations")[0].GetProperty("relationshipId").ToString());
+            Console.WriteLine(result.GetProperty("relations")[0].GetProperty("toEntityId").ToString());
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="NextPageLineageAsync">
@@ -278,47 +760,111 @@
         <param name="getDerivedLineage"> True to include derived lineage in the response. </param>
         <param name="offset"> The offset for pagination purpose. </param>
         <param name="limit"> The page size - by default there is no paging. </param>
-        <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         <summary> Return immediate next page lineage info about entity with pagination. </summary>
-        <returns>To be added.</returns>
+        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         <remarks>
-            Schema for <c>Response Body</c>:
+            Below is the JSON schema for the response payload.
+            
+            Response Body:
+            
+            Schema for <c>AtlasLineageInfo</c>:
             <code>{
-              baseEntityGuid: string,
-              guidEntityMap: Dictionary&lt;string, AtlasEntityHeader&gt;,
-              widthCounts: Dictionary&lt;string, Dictionary&lt;string, AnyObject&gt;&gt;,
-              lineageDepth: number,
-              lineageWidth: number,
-              includeParent: boolean,
-              childrenCount: number,
-              lineageDirection: "INPUT" | "OUTPUT" | "BOTH",
+              baseEntityGuid: string, # Optional. The GUID of the base entity.
+              guidEntityMap: Dictionary&lt;string, AtlasEntityHeader&gt;, # Optional. The GUID entity map.
+              widthCounts: Dictionary&lt;string, Dictionary&lt;string, AnyObject&gt;&gt;, # Optional. The entity count in specific direction.
+              lineageDepth: number, # Optional. The depth of lineage.
+              lineageWidth: number, # Optional. The width of lineage.
+              includeParent: boolean, # Optional. True to return the parent of the base entity.
+              childrenCount: number, # Optional. The number of children node.
+              lineageDirection: "INPUT" | "OUTPUT" | "BOTH", # Optional. The enum of lineage direction.
               parentRelations: [
                 {
-                  childEntityId: string,
-                  relationshipId: string,
-                  parentEntityId: string
+                  childEntityId: string, # Optional. The GUID of child entity.
+                  relationshipId: string, # Optional. The GUID of relationship.
+                  parentEntityId: string, # Optional. The GUID of parent entity.
                 }
-              ],
+              ], # Optional. An array of parentRelations relations.
               relations: [
                 {
-                  fromEntityId: string,
-                  relationshipId: string,
-                  toEntityId: string
+                  fromEntityId: string, # Optional. The GUID of from-entity.
+                  relationshipId: string, # Optional. The GUID of relationship.
+                  toEntityId: string, # Optional. The GUID of to-entity.
                 }
-              ]
-            }
-            </code>
-            Schema for <c>Response Error</c>:
-            <code>{
-              requestId: string,
-              errorCode: string,
-              errorMessage: string
+              ], # Optional. An array of lineage relations.
             }
             </code></remarks>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="guid" /> or <paramref name="direction" /> is null. </exception>
         <exception cref="T:System.ArgumentException">
           <paramref name="guid" /> is an empty string, and was expected to be non-empty. </exception>
+        <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
+        <example>
+            This sample shows how to call NextPageLineageAsync with required parameters and parse the result.
+            <code><![CDATA[
+            var credential = new DefaultAzureCredential();
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PurviewCatalogClient(endpoint, credential).GetPurviewLineagesClient();
+            
+            Response response = await client.NextPageLineageAsync("<guid>", "<direction>");
+            
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+            ]]></code>
+            This sample shows how to call NextPageLineageAsync with all parameters, and how to parse the result.
+            <code><![CDATA[
+            var credential = new DefaultAzureCredential();
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new PurviewCatalogClient(endpoint, credential).GetPurviewLineagesClient();
+            
+            Response response = await client.NextPageLineageAsync("<guid>", "<direction>", true, 1234, 1234);
+            
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("baseEntityGuid").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classificationNames")[0].ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("entityGuid").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("entityStatus").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("removePropagationsOnEntityDelete").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("validityPeriods")[0].GetProperty("endTime").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("validityPeriods")[0].GetProperty("startTime").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("validityPeriods")[0].GetProperty("timeZone").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("source").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("sourceDetails").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("attributes").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("typeName").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("classifications")[0].GetProperty("lastModifiedTS").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("displayText").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("guid").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("isIncomplete").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("labels")[0].ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meaningNames")[0].ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("confidence").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("createdBy").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("description").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("displayText").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("expression").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("relationGuid").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("source").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("status").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("steward").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("meanings")[0].GetProperty("termGuid").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("status").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("attributes").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("typeName").ToString());
+            Console.WriteLine(result.GetProperty("guidEntityMap").GetProperty("<test>").GetProperty("lastModifiedTS").ToString());
+            Console.WriteLine(result.GetProperty("widthCounts").GetProperty("<test>").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("lineageDepth").ToString());
+            Console.WriteLine(result.GetProperty("lineageWidth").ToString());
+            Console.WriteLine(result.GetProperty("includeParent").ToString());
+            Console.WriteLine(result.GetProperty("childrenCount").ToString());
+            Console.WriteLine(result.GetProperty("lineageDirection").ToString());
+            Console.WriteLine(result.GetProperty("parentRelations")[0].GetProperty("childEntityId").ToString());
+            Console.WriteLine(result.GetProperty("parentRelations")[0].GetProperty("relationshipId").ToString());
+            Console.WriteLine(result.GetProperty("parentRelations")[0].GetProperty("parentEntityId").ToString());
+            Console.WriteLine(result.GetProperty("relations")[0].GetProperty("fromEntityId").ToString());
+            Console.WriteLine(result.GetProperty("relations")[0].GetProperty("relationshipId").ToString());
+            Console.WriteLine(result.GetProperty("relations")[0].GetProperty("toEntityId").ToString());
+            ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="Pipeline">
