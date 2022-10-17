@@ -1,9 +1,13 @@
 <Type Name="Query" FullName="Microsoft.Azure.Devices.Provisioning.Service.Query">
-  <TypeSignature Language="C#" Value="public class Query : IDisposable" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit Query extends System.Object implements class System.IDisposable" />
+  <TypeSignature Language="C#" Value="public class Query : IDisposable" FrameworkAlternate="azure-dotnet" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit Query extends System.Object implements class System.IDisposable" FrameworkAlternate="azure-dotnet" />
   <TypeSignature Language="DocId" Value="T:Microsoft.Azure.Devices.Provisioning.Service.Query" />
-  <TypeSignature Language="VB.NET" Value="Public Class Query&#xA;Implements IDisposable" />
-  <TypeSignature Language="F#" Value="type Query = class&#xA;    interface IDisposable" />
+  <TypeSignature Language="VB.NET" Value="Public Class Query&#xA;Implements IDisposable" FrameworkAlternate="azure-dotnet" />
+  <TypeSignature Language="F#" Value="type Query = class&#xA;    interface IDisposable" FrameworkAlternate="azure-dotnet" />
+  <TypeSignature Language="C#" Value="public class Query" FrameworkAlternate="azure-dotnet-preview" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit Query extends System.Object" FrameworkAlternate="azure-dotnet-preview" />
+  <TypeSignature Language="VB.NET" Value="Public Class Query" FrameworkAlternate="azure-dotnet-preview" />
+  <TypeSignature Language="F#" Value="type Query = class" FrameworkAlternate="azure-dotnet-preview" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.Azure.Devices.Provisioning.Service</AssemblyName>
     <AssemblyVersion>1.16.3.0</AssemblyVersion>
@@ -15,12 +19,13 @@
     <AssemblyVersion>1.18.2.0</AssemblyVersion>
     <AssemblyVersion>1.19.0.0</AssemblyVersion>
     <AssemblyVersion>1.19.1.0</AssemblyVersion>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
   <Interfaces>
-    <Interface>
+    <Interface FrameworkAlternate="azure-dotnet">
       <InterfaceName>System.IDisposable</InterfaceName>
     </Interface>
   </Interfaces>
@@ -30,23 +35,23 @@
              </summary>
     <remarks>
              The <see cref="T:Microsoft.Azure.Devices.Provisioning.Service.Query" /> iterator is the result of the query factory for
-             <list type="bullet"><item><description><see cref="M:Microsoft.Azure.Devices.Provisioning.Service.ProvisioningServiceClient.CreateIndividualEnrollmentQuery(Microsoft.Azure.Devices.Provisioning.Service.QuerySpecification,System.Int32)">IndividualEnrollment</see></description></item><item><description><see cref="M:Microsoft.Azure.Devices.Provisioning.Service.ProvisioningServiceClient.CreateEnrollmentGroupQuery(Microsoft.Azure.Devices.Provisioning.Service.QuerySpecification,System.Int32)">EnrollmentGroup</see></description></item><item><description><see cref="M:Microsoft.Azure.Devices.Provisioning.Service.ProvisioningServiceClient.CreateEnrollmentGroupRegistrationStateQuery(Microsoft.Azure.Devices.Provisioning.Service.QuerySpecification,System.String,System.Int32)">RegistrationStatus</see></description></item></list>
+             <list type="bullet"><item><description><see cref="M:Microsoft.Azure.Devices.Provisioning.Service.IndividualEnrollmentsClient.CreateQuery(System.String,System.Int32,System.Threading.CancellationToken)">IndividualEnrollment</see></description></item><item><description><see cref="M:Microsoft.Azure.Devices.Provisioning.Service.EnrollmentGroupsClient.CreateQuery(System.String,System.Int32,System.Threading.CancellationToken)">EnrollmentGroup</see></description></item><item><description><see cref="M:Microsoft.Azure.Devices.Provisioning.Service.DeviceRegistrationStatesClient.CreateEnrollmentGroupQuery(System.String,System.String,System.Int32,System.Threading.CancellationToken)">RegistrationStatus</see></description></item></list>
              On all cases, the <see cref="T:Microsoft.Azure.Devices.Provisioning.Service.QuerySpecification" /> contains a SQL query that must follow the
                  Query Language for the Device Provisioning Service.
             
-             Optionally, an <c>Integer</c> with the <b>page size</b>, can determine the maximum number of the items in the
-                 <see cref="T:Microsoft.Azure.Devices.Provisioning.Service.QueryResult" /> returned by the <see cref="M:Microsoft.Azure.Devices.Provisioning.Service.Query.NextAsync" />. It must be any positive integer, and if it 
+             Optionally, an Integer with the page size, can determine the maximum number of the items in the
+                 <see cref="T:Microsoft.Azure.Devices.Provisioning.Service.QueryResult" /> returned by the <see cref="M:Microsoft.Azure.Devices.Provisioning.Service.Query.NextAsync" />. It must be any positive integer, and if it
                  contains 0, the Device Provisioning Service will ignore it and use a standard page size.
             
              You can use this Object as a standard iterator, just using the <c>HasNext</c> and <c>NextAsync</c> in a
-                 <c>while</c> loop, up to the point where the <c>HasNext</c> contains <c>false</c>. But, keep 
-                 in mind that the <see cref="T:Microsoft.Azure.Devices.Provisioning.Service.QueryResult" /> can contain a empty list, even if the <c>HasNext</c> contained 
-                 <c>true</c>. For example, image that you have 10 IndividualEnrollment in the Device Provisioning Service 
-                 and you created new query with the <c>PageSize</c> equals 5. In the first iteration, <c>HasNext</c> 
-                 will contains <c>true</c>, and the first <c>NextAsync</c> will return a <c>QueryResult</c> with 
-                 5 items. After, your code will check the <c>HasNext</c>, which will contains <c>true</c> again. Now, 
-                 before you get the next page, somebody deletes all the IndividualEnrollment. What happened, when you call the 
-                 <c>NextAsync</c>, it will return a valid <c>QueryResult</c>, but the <see cref="P:Microsoft.Azure.Devices.Provisioning.Service.QueryResult.Items" /> 
+                 <c>while</c> loop, up to the point where the <c>HasNext</c> contains false. But, keep
+                 in mind that the <see cref="T:Microsoft.Azure.Devices.Provisioning.Service.QueryResult" /> can contain a empty list, even if the <c>HasNext</c> contained
+                 <c>true</c>. For example, image that you have 10 IndividualEnrollment in the Device Provisioning Service
+                 and you created new query with the <c>PageSize</c> equals 5. In the first iteration, <c>HasNext</c>
+                 will contains <c>true</c>, and the first <c>NextAsync</c> will return a <c>QueryResult</c> with
+                 5 items. After, your code will check the <c>HasNext</c>, which will contains true again. Now,
+                 before you get the next page, somebody deletes all the IndividualEnrollment. What happened, when you call the
+                 <c>NextAsync</c>, it will return a valid <c>QueryResult</c>, but the <see cref="P:Microsoft.Azure.Devices.Provisioning.Service.QueryResult.Items" />
                  will contain an empty list.
             
              Besides the <c>Items</c>, the <c>QueryResult</c> contains the <see cref="P:Microsoft.Azure.Devices.Provisioning.Service.QueryResult.ContinuationToken" />.
@@ -74,13 +79,14 @@
         <AssemblyVersion>1.18.2.0</AssemblyVersion>
         <AssemblyVersion>1.19.0.0</AssemblyVersion>
         <AssemblyVersion>1.19.1.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            Getter and setter for the ContinuationToken.
+            The token to retrieve the next page.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -142,7 +148,7 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="disposing" Type="System.Boolean" />
+        <Parameter Name="disposing" Type="System.Boolean" Index="0" FrameworkAlternate="azure-dotnet" />
       </Parameters>
       <Docs>
         <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
@@ -170,6 +176,7 @@
         <AssemblyVersion>1.18.2.0</AssemblyVersion>
         <AssemblyVersion>1.19.0.0</AssemblyVersion>
         <AssemblyVersion>1.19.1.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -177,15 +184,15 @@
       <Parameters />
       <Docs>
         <summary>
-            Getter for has next
+            Getter for has next.
             </summary>
         <returns>To be added.</returns>
         <remarks>
-            Contains <c>true</c> if the query is not finished in the Device Provisioning Service, and another
-                iteration with <see cref="M:Microsoft.Azure.Devices.Provisioning.Service.Query.NextAsync" /> may return more items. Call <see cref="M:Microsoft.Azure.Devices.Provisioning.Service.Query.NextAsync" /> after 
-                a <c>true</c><c>HasNext</c> will result in a <see cref="T:Microsoft.Azure.Devices.Provisioning.Service.QueryResult" /> that can or 
-                cannot contains elements. But call <see cref="M:Microsoft.Azure.Devices.Provisioning.Service.Query.NextAsync" /> after a <c>false</c><c>HasNext</c> 
-                will result in a exception.
+            Contains true if the query is not finished in the Device Provisioning Service, and another
+            iteration with <see cref="M:Microsoft.Azure.Devices.Provisioning.Service.Query.NextAsync" /> may return more items. Call <see cref="M:Microsoft.Azure.Devices.Provisioning.Service.Query.NextAsync" /> after
+            a true <c>HasNext</c> will result in a <see cref="T:Microsoft.Azure.Devices.Provisioning.Service.QueryResult" /> that can or
+            cannot contains elements. But call <see cref="M:Microsoft.Azure.Devices.Provisioning.Service.Query.NextAsync" /> after a false <c>HasNext</c>
+            will result in a exception.
             </remarks>
       </Docs>
     </Member>
@@ -207,6 +214,7 @@
         <AssemblyVersion>1.18.2.0</AssemblyVersion>
         <AssemblyVersion>1.19.0.0</AssemblyVersion>
         <AssemblyVersion>1.19.1.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Devices.Provisioning.Service.QueryResult&gt;</ReturnType>
@@ -218,7 +226,7 @@
             </summary>
         <returns>The <see cref="T:Microsoft.Azure.Devices.Provisioning.Service.QueryResult" /> with the next page of items for the query.</returns>
         <remarks>To be added.</remarks>
-        <exception cref="T:System.IndexOutOfRangeException">if the query does no have more pages to return.</exception>
+        <exception cref="T:System.IndexOutOfRangeException">If the query does no have more pages to return.</exception>
       </Docs>
     </Member>
     <Member MemberName="NextAsync">
@@ -239,6 +247,7 @@
         <AssemblyVersion>1.18.2.0</AssemblyVersion>
         <AssemblyVersion>1.19.0.0</AssemblyVersion>
         <AssemblyVersion>1.19.1.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.Azure.Devices.Provisioning.Service.QueryResult&gt;</ReturnType>
@@ -247,13 +256,13 @@
         <Parameter Name="continuationToken" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="continuationToken">the <c>String</c> with the previous continuationToken. It cannot be <c>null</c> or empty.</param>
+        <param name="continuationToken">the string with the previous continuationToken. It cannot be null or empty.</param>
         <summary>
             Return the next page of result for the query using a new continuationToken.
             </summary>
         <returns>The <see cref="T:Microsoft.Azure.Devices.Provisioning.Service.QueryResult" /> with the next page of items for the query.</returns>
         <remarks>To be added.</remarks>
-        <exception cref="T:System.IndexOutOfRangeException">if the query does no have more pages to return.</exception>
+        <exception cref="T:System.IndexOutOfRangeException">If the query does no have more pages to return.</exception>
       </Docs>
     </Member>
     <Member MemberName="PageSize">
@@ -274,13 +283,14 @@
         <AssemblyVersion>1.18.2.0</AssemblyVersion>
         <AssemblyVersion>1.19.0.0</AssemblyVersion>
         <AssemblyVersion>1.19.1.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            Getter and setter for PageSize.
+            The number of items in the current page.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>

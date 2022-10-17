@@ -1,9 +1,11 @@
 <Type Name="IndividualEnrollment" FullName="Microsoft.Azure.Devices.Provisioning.Service.IndividualEnrollment">
-  <TypeSignature Language="C#" Value="public class IndividualEnrollment : Microsoft.Azure.Devices.Shared.IETagHolder" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit IndividualEnrollment extends System.Object implements class Microsoft.Azure.Devices.Shared.IETagHolder" />
+  <TypeSignature Language="C#" Value="public class IndividualEnrollment : Microsoft.Azure.Devices.Shared.IETagHolder" FrameworkAlternate="azure-dotnet" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit IndividualEnrollment extends System.Object implements class Microsoft.Azure.Devices.Shared.IETagHolder" FrameworkAlternate="azure-dotnet" />
   <TypeSignature Language="DocId" Value="T:Microsoft.Azure.Devices.Provisioning.Service.IndividualEnrollment" />
   <TypeSignature Language="VB.NET" Value="Public Class IndividualEnrollment&#xA;Implements IETagHolder" />
   <TypeSignature Language="F#" Value="type IndividualEnrollment = class&#xA;    interface IETagHolder" />
+  <TypeSignature Language="C#" Value="public class IndividualEnrollment : Microsoft.Azure.Devices.Provisioning.Service.IETagHolder" FrameworkAlternate="azure-dotnet-preview" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit IndividualEnrollment extends System.Object implements class Microsoft.Azure.Devices.Provisioning.Service.IETagHolder" FrameworkAlternate="azure-dotnet-preview" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.Azure.Devices.Provisioning.Service</AssemblyName>
     <AssemblyVersion>1.16.3.0</AssemblyVersion>
@@ -15,30 +17,36 @@
     <AssemblyVersion>1.18.2.0</AssemblyVersion>
     <AssemblyVersion>1.19.0.0</AssemblyVersion>
     <AssemblyVersion>1.19.1.0</AssemblyVersion>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
   <Interfaces>
-    <Interface>
+    <Interface FrameworkAlternate="azure-dotnet">
       <InterfaceName>Microsoft.Azure.Devices.Shared.IETagHolder</InterfaceName>
+    </Interface>
+    <Interface FrameworkAlternate="azure-dotnet-preview">
+      <InterfaceName>Microsoft.Azure.Devices.Provisioning.Service.IETagHolder</InterfaceName>
     </Interface>
   </Interfaces>
   <Docs>
     <summary>
              Representation of a single Device Provisioning Service enrollment and their accessors with a JSON serializer
-                 and deserializer.
+             and deserializer.
              </summary>
     <remarks>
              This object is used to send and receive individualEnrollment information to and from the provisioning service.
             
              To create or update an Enrollment on the provisioning service you should fill this object and call the
-             public API <see cref="M:Microsoft.Azure.Devices.Provisioning.Service.ProvisioningServiceClient.CreateOrUpdateIndividualEnrollmentAsync(Microsoft.Azure.Devices.Provisioning.Service.IndividualEnrollment)" />.
+             public API <see cref="M:Microsoft.Azure.Devices.Provisioning.Service.IndividualEnrollmentsClient.CreateOrUpdateAsync(Microsoft.Azure.Devices.Provisioning.Service.IndividualEnrollment,System.Threading.CancellationToken)" />.
             
-             The minimum information required by the provisioning service is the <code>RegistrationId</code> and the
-             <code>Attestation</code>.
+             The minimum information required by the provisioning service is the RegistrationId and the
+             Attestation.
             
-             A new device can be provisioned by three attestation mechanisms, Trust Platform Module (see <see cref="T:Microsoft.Azure.Devices.Provisioning.Service.TpmAttestation" />), X509 (see <see cref="T:Microsoft.Azure.Devices.Provisioning.Service.X509Attestation" />) or Symmetric Key (see <see cref="T:Microsoft.Azure.Devices.Provisioning.Service.SymmetricKeyAttestation" />). The definition of each one you
+             A new device can be provisioned by three attestation mechanisms, X509
+             (<see cref="T:Microsoft.Azure.Devices.Provisioning.Service.X509Attestation" />), Symmetric Key (see <see cref="T:Microsoft.Azure.Devices.Provisioning.Service.SymmetricKeyAttestation" />,
+             and TPM (<see cref="T:Microsoft.Azure.Devices.Provisioning.Service.TpmAttestation" />). The definition of each one you
              should use depending on the physical authentication hardware that the device contains.
             
              The content of this class will be serialized in a JSON format and sent as a body of the rest API to the
@@ -100,23 +108,24 @@
         <AssemblyVersion>1.18.2.0</AssemblyVersion>
         <AssemblyVersion>1.19.0.0</AssemblyVersion>
         <AssemblyVersion>1.19.1.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="registrationId" Type="System.String" />
         <Parameter Name="attestation" Type="Microsoft.Azure.Devices.Provisioning.Service.Attestation" />
       </Parameters>
       <Docs>
-        <param name="registrationId">the <code>string</code> that uniquely identify this enrollment in the provisioning
-                 service. It cannot be <code>null</code> or empty.</param>
-        <param name="attestation">the <see cref="P:Microsoft.Azure.Devices.Provisioning.Service.IndividualEnrollment.Attestation" /> object with the attestation mechanism. It cannot be <code>null</code>.</param>
+        <param name="registrationId">The string that uniquely identify this enrollment in the provisioning
+             service. It cannot be null or empty.</param>
+        <param name="attestation">The <see cref="P:Microsoft.Azure.Devices.Provisioning.Service.IndividualEnrollment.Attestation" /> object with the attestation mechanism.</param>
         <summary>
-             Creates a new instance of <code>IndividualEnrollment</code>.
+             Creates a new instance of IndividualEnrollment.
              </summary>
         <remarks>
              This constructor creates an instance of the IndividualEnrollment object with the minimum set of
              information required by the provisioning service. A valid individualEnrollment must contain the
              registrationId, which uniquely identify this enrollment, and the attestation mechanism, which can
-             be TPM, X509, or Symmetric key.
+             be X509, or Symmetric key.
             
              Other parameters can be added by calling the setters on this object.
              </remarks>
@@ -133,7 +142,8 @@
                 }
              }
              </code></example>
-        <exception cref="T:System.ArgumentNullException">if one of the provided parameters is not correct</exception>
+        <exception cref="T:System.ArgumentNullException">If the provided <paramref name="registrationId" /> is null.</exception>
+        <exception cref="T:System.ArgumentException">If the provided <paramref name="registrationId" /> is empty or white space.</exception>
       </Docs>
     </Member>
     <Member MemberName="AllocationPolicy">
@@ -154,6 +164,7 @@
         <AssemblyVersion>1.18.2.0</AssemblyVersion>
         <AssemblyVersion>1.19.0.0</AssemblyVersion>
         <AssemblyVersion>1.19.1.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -190,6 +201,7 @@
         <AssemblyVersion>1.18.2.0</AssemblyVersion>
         <AssemblyVersion>1.19.0.0</AssemblyVersion>
         <AssemblyVersion>1.19.1.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -202,18 +214,21 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Attestation
+            Attestation.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Capabilities">
-      <MemberSignature Language="C#" Value="public Microsoft.Azure.Devices.Shared.DeviceCapabilities Capabilities { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Azure.Devices.Shared.DeviceCapabilities Capabilities" />
+      <MemberSignature Language="C#" Value="public Microsoft.Azure.Devices.Shared.DeviceCapabilities Capabilities { get; set; }" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Azure.Devices.Shared.DeviceCapabilities Capabilities" FrameworkAlternate="azure-dotnet" />
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Devices.Provisioning.Service.IndividualEnrollment.Capabilities" />
       <MemberSignature Language="VB.NET" Value="Public Property Capabilities As DeviceCapabilities" />
-      <MemberSignature Language="F#" Value="member this.Capabilities : Microsoft.Azure.Devices.Shared.DeviceCapabilities with get, set" Usage="Microsoft.Azure.Devices.Provisioning.Service.IndividualEnrollment.Capabilities" />
+      <MemberSignature Language="F#" Value="member this.Capabilities : Microsoft.Azure.Devices.Shared.DeviceCapabilities with get, set" Usage="Microsoft.Azure.Devices.Provisioning.Service.IndividualEnrollment.Capabilities" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="C#" Value="public Microsoft.Azure.Devices.Provisioning.Service.DeviceCapabilities Capabilities { get; set; }" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Azure.Devices.Provisioning.Service.DeviceCapabilities Capabilities" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="F#" Value="member this.Capabilities : Microsoft.Azure.Devices.Provisioning.Service.DeviceCapabilities with get, set" Usage="Microsoft.Azure.Devices.Provisioning.Service.IndividualEnrollment.Capabilities" FrameworkAlternate="azure-dotnet-preview" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Devices.Provisioning.Service</AssemblyName>
@@ -226,6 +241,7 @@
         <AssemblyVersion>1.18.2.0</AssemblyVersion>
         <AssemblyVersion>1.19.0.0</AssemblyVersion>
         <AssemblyVersion>1.19.1.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -234,11 +250,12 @@
         </Attribute>
       </Attributes>
       <ReturnValue>
-        <ReturnType>Microsoft.Azure.Devices.Shared.DeviceCapabilities</ReturnType>
+        <ReturnType FrameworkAlternate="azure-dotnet">Microsoft.Azure.Devices.Shared.DeviceCapabilities</ReturnType>
+        <ReturnType FrameworkAlternate="azure-dotnet-preview">Microsoft.Azure.Devices.Provisioning.Service.DeviceCapabilities</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            Capabilities of the device
+            Capabilities of the device.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -262,6 +279,7 @@
         <AssemblyVersion>1.18.2.0</AssemblyVersion>
         <AssemblyVersion>1.19.0.0</AssemblyVersion>
         <AssemblyVersion>1.19.1.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -298,6 +316,7 @@
         <AssemblyVersion>1.18.2.0</AssemblyVersion>
         <AssemblyVersion>1.19.0.0</AssemblyVersion>
         <AssemblyVersion>1.19.1.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -334,6 +353,7 @@
         <AssemblyVersion>1.18.2.0</AssemblyVersion>
         <AssemblyVersion>1.19.0.0</AssemblyVersion>
         <AssemblyVersion>1.19.1.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -346,7 +366,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Desired IoT Hub device Id (optional).
+            Desired IoT hub device Id (optional).
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -360,7 +380,8 @@
       <MemberSignature Language="F#" Value="member this.ETag : string with get, set" Usage="Microsoft.Azure.Devices.Provisioning.Service.IndividualEnrollment.ETag" />
       <MemberType>Property</MemberType>
       <Implements>
-        <InterfaceMember>P:Microsoft.Azure.Devices.Shared.IETagHolder.ETag</InterfaceMember>
+        <InterfaceMember FrameworkAlternate="azure-dotnet">P:Microsoft.Azure.Devices.Shared.IETagHolder.ETag</InterfaceMember>
+        <InterfaceMember FrameworkAlternate="azure-dotnet-preview">P:Microsoft.Azure.Devices.Provisioning.Service.IETagHolder.ETag</InterfaceMember>
       </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Devices.Provisioning.Service</AssemblyName>
@@ -373,6 +394,7 @@
         <AssemblyVersion>1.18.2.0</AssemblyVersion>
         <AssemblyVersion>1.19.0.0</AssemblyVersion>
         <AssemblyVersion>1.19.1.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -385,7 +407,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Enrollment's ETag
+            Enrollment's ETag.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -409,6 +431,7 @@
         <AssemblyVersion>1.18.2.0</AssemblyVersion>
         <AssemblyVersion>1.19.0.0</AssemblyVersion>
         <AssemblyVersion>1.19.1.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -445,6 +468,7 @@
         <AssemblyVersion>1.18.2.0</AssemblyVersion>
         <AssemblyVersion>1.19.0.0</AssemblyVersion>
         <AssemblyVersion>1.19.1.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -457,18 +481,22 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Desired IotHub to assign the device to
+            Desired IoT hub to assign the device to.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="IotHubs">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.ICollection&lt;string&gt; IotHubs { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.ICollection`1&lt;string&gt; IotHubs" />
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.ICollection&lt;string&gt; IotHubs { get; set; }" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.ICollection`1&lt;string&gt; IotHubs" FrameworkAlternate="azure-dotnet" />
       <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Devices.Provisioning.Service.IndividualEnrollment.IotHubs" />
-      <MemberSignature Language="VB.NET" Value="Public Property IotHubs As ICollection(Of String)" />
-      <MemberSignature Language="F#" Value="member this.IotHubs : System.Collections.Generic.ICollection&lt;string&gt; with get, set" Usage="Microsoft.Azure.Devices.Provisioning.Service.IndividualEnrollment.IotHubs" />
+      <MemberSignature Language="VB.NET" Value="Public Property IotHubs As ICollection(Of String)" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="F#" Value="member this.IotHubs : System.Collections.Generic.ICollection&lt;string&gt; with get, set" Usage="Microsoft.Azure.Devices.Provisioning.Service.IndividualEnrollment.IotHubs" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.IList&lt;string&gt; IotHubs { get; set; }" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.IList`1&lt;string&gt; IotHubs" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="VB.NET" Value="Public Property IotHubs As IList(Of String)" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="F#" Value="member this.IotHubs : System.Collections.Generic.IList&lt;string&gt; with get, set" Usage="Microsoft.Azure.Devices.Provisioning.Service.IndividualEnrollment.IotHubs" FrameworkAlternate="azure-dotnet-preview" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Devices.Provisioning.Service</AssemblyName>
@@ -481,6 +509,7 @@
         <AssemblyVersion>1.18.2.0</AssemblyVersion>
         <AssemblyVersion>1.19.0.0</AssemblyVersion>
         <AssemblyVersion>1.19.1.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -489,11 +518,12 @@
         </Attribute>
       </Attributes>
       <ReturnValue>
-        <ReturnType>System.Collections.Generic.ICollection&lt;System.String&gt;</ReturnType>
+        <ReturnType FrameworkAlternate="azure-dotnet">System.Collections.Generic.ICollection&lt;System.String&gt;</ReturnType>
+        <ReturnType FrameworkAlternate="azure-dotnet-preview">System.Collections.Generic.IList&lt;System.String&gt;</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            The list of names of IoT hubs the device in this resource can be allocated to. Must be a subset of tenant level list of IoT hubs
+            The list of names of IoT hubs the device in this resource can be allocated to. Must be a subset of tenant level list of IoT hubs.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -517,6 +547,7 @@
         <AssemblyVersion>1.18.2.0</AssemblyVersion>
         <AssemblyVersion>1.19.0.0</AssemblyVersion>
         <AssemblyVersion>1.19.1.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -553,6 +584,7 @@
         <AssemblyVersion>1.18.2.0</AssemblyVersion>
         <AssemblyVersion>1.19.0.0</AssemblyVersion>
         <AssemblyVersion>1.19.1.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -593,6 +625,7 @@
         <AssemblyVersion>1.18.2.0</AssemblyVersion>
         <AssemblyVersion>1.19.0.0</AssemblyVersion>
         <AssemblyVersion>1.19.1.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -612,6 +645,7 @@
             A valid registration Id shall be alphanumeric, lowercase, and may contain hyphens. Max characters 128.
             </remarks>
         <exception cref="T:System.ArgumentException">if the provided string does not fit the registration Id requirements</exception>
+        <exception cref="T:System.InvalidOperationException">If the provided string does not fit the registration Id requirements</exception>
       </Docs>
     </Member>
     <Member MemberName="RegistrationState">
@@ -632,6 +666,7 @@
         <AssemblyVersion>1.18.2.0</AssemblyVersion>
         <AssemblyVersion>1.19.0.0</AssemblyVersion>
         <AssemblyVersion>1.19.1.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -668,6 +703,7 @@
         <AssemblyVersion>1.18.2.0</AssemblyVersion>
         <AssemblyVersion>1.19.0.0</AssemblyVersion>
         <AssemblyVersion>1.19.1.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -683,6 +719,35 @@
             The behavior when a device is re-provisioned to an IoT hub.
             </summary>
         <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ShouldSerializeIotHubs">
+      <MemberSignature Language="C#" Value="public bool ShouldSerializeIotHubs ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool ShouldSerializeIotHubs() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Devices.Provisioning.Service.IndividualEnrollment.ShouldSerializeIotHubs" />
+      <MemberSignature Language="VB.NET" Value="Public Function ShouldSerializeIotHubs () As Boolean" />
+      <MemberSignature Language="F#" Value="member this.ShouldSerializeIotHubs : unit -&gt; bool" Usage="individualEnrollment.ShouldSerializeIotHubs " />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Devices.Provisioning.Service</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="azure-dotnet-preview">
+          <AttributeName Language="C#">[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]</AttributeName>
+          <AttributeName Language="F#">[&lt;System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)&gt;]</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+            For use in serialization.
+            </summary>
+        <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -704,6 +769,7 @@
         <AssemblyVersion>1.18.2.0</AssemblyVersion>
         <AssemblyVersion>1.19.0.0</AssemblyVersion>
         <AssemblyVersion>1.19.1.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -713,7 +779,7 @@
         <summary>
             Convert this object in a pretty print format.
             </summary>
-        <returns>The <code>string</code> with the content of this class in a pretty print format.</returns>
+        <returns>The string with the content of this class in a pretty print format.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>

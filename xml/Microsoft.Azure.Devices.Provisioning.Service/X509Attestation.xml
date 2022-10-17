@@ -15,6 +15,7 @@
     <AssemblyVersion>1.18.2.0</AssemblyVersion>
     <AssemblyVersion>1.19.0.0</AssemblyVersion>
     <AssemblyVersion>1.19.1.0</AssemblyVersion>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>Microsoft.Azure.Devices.Provisioning.Service.Attestation</BaseTypeName>
@@ -31,23 +32,23 @@
             
              An X509 attestation can contains one of the 3 types of certificate:
             
-             <list type="bullet"><item><description><b>Client or Alias certificate:</b>
-                     Called on this class as clientCertificates, this certificate can authenticate a single device.</description></item><item><description><b>Signing or Root certificate:</b>
+             <list type="bullet"><item><description>Client or Alias certificate:
+                     Called on this class as clientCertificates, this certificate can authenticate a single device.</description></item><item><description>Signing or Root certificate:
                        Called on this class as rootCertificates, this certificate can create multiple Client certificates
-                       to authenticate multiple devices.</description></item><item><description><b>CA Reference:</b>
+                       to authenticate multiple devices.</description></item><item><description>CA Reference:
                        Called on this class as X509CAReferences, this is a CA reference for a rootCertificate that can
                        creates multiple Client certificates to authenticate multiple devices.</description></item></list>
             
-             The provisioning service allows user to create <see cref="T:Microsoft.Azure.Devices.Provisioning.Service.IndividualEnrollment" /> and <see cref="T:Microsoft.Azure.Devices.Provisioning.Service.EnrollmentGroup" />. 
-                 For all operations over <see cref="T:Microsoft.Azure.Devices.Provisioning.Service.IndividualEnrollment" /> with <b>X509</b>, user must provide a 
-                 <b>clientCertificates</b>, and for operations over <see cref="T:Microsoft.Azure.Devices.Provisioning.Service.EnrollmentGroup" />, user must provide a 
-                 <b>rootCertificates</b> or a <b>X509CAReferences</b>.
+             The provisioning service allows user to create <see cref="T:Microsoft.Azure.Devices.Provisioning.Service.IndividualEnrollment" /> and <see cref="T:Microsoft.Azure.Devices.Provisioning.Service.EnrollmentGroup" />.
+                 For all operations over <see cref="T:Microsoft.Azure.Devices.Provisioning.Service.IndividualEnrollment" /> with X509, user must provide a
+                 clientCertificates, and for operations over <see cref="T:Microsoft.Azure.Devices.Provisioning.Service.EnrollmentGroup" />, user must provide a
+                 rootCertificates or a X509CAReferences.
             
              For each of this types of certificates, user can provide 2 Certificates, a primary and a secondary. Only the
                  primary is mandatory, the secondary is optional.
             
              The provisioning service will process the provided certificates, but will never return it back. Instead of
-                 it, <see cref="M:Microsoft.Azure.Devices.Provisioning.Service.X509Attestation.GetPrimaryX509CertificateInfo" /> and <see cref="M:Microsoft.Azure.Devices.Provisioning.Service.X509Attestation.GetSecondaryX509CertificateInfo" /> 
+                 it, <see cref="M:Microsoft.Azure.Devices.Provisioning.Service.X509Attestation.GetPrimaryX509CertificateInfo" /> and <see cref="M:Microsoft.Azure.Devices.Provisioning.Service.X509Attestation.GetSecondaryX509CertificateInfo" />
                  will return the certificate information for the certificates.
              </remarks>
   </Docs>
@@ -70,6 +71,7 @@
         <AssemblyVersion>1.18.2.0</AssemblyVersion>
         <AssemblyVersion>1.19.0.0</AssemblyVersion>
         <AssemblyVersion>1.19.1.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -106,6 +108,7 @@
         <AssemblyVersion>1.18.2.0</AssemblyVersion>
         <AssemblyVersion>1.19.0.0</AssemblyVersion>
         <AssemblyVersion>1.19.1.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Devices.Provisioning.Service.X509Attestation</ReturnType>
@@ -114,7 +117,7 @@
         <Parameter Name="primary" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="primary">the <code>string</code> with the primary certificate. It cannot be <code>null</code> or empty.</param>
+        <param name="primary">The string with the primary certificate. It cannot be null or empty.</param>
         <summary>
             Factory with CAReferences with primary CA references.
             </summary>
@@ -122,7 +125,9 @@
         <remarks>
             Creates a new instance of the X509Attestation with the primary CA reference.
             </remarks>
-        <exception cref="T:System.ArgumentException">if the provide primary certificate is invalid.</exception>
+        <exception cref="T:System.ArgumentNullException">If the provided <paramref name="primary" /> string is null.</exception>
+        <exception cref="T:System.ArgumentException">If the provided <paramref name="primary" /> string is empty or white space.</exception>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">If the provided <paramref name="primary" /> certificate is invalid.</exception>
       </Docs>
     </Member>
     <Member MemberName="CreateFromCAReferences">
@@ -143,6 +148,7 @@
         <AssemblyVersion>1.18.2.0</AssemblyVersion>
         <AssemblyVersion>1.19.0.0</AssemblyVersion>
         <AssemblyVersion>1.19.1.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Devices.Provisioning.Service.X509Attestation</ReturnType>
@@ -152,8 +158,8 @@
         <Parameter Name="secondary" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="primary">the <code>string</code> with the primary certificate. It cannot be <code>null</code> or empty.</param>
-        <param name="secondary">the <code>string</code> with the secondary certificate. It can be <code>null</code> or empty (ignored).</param>
+        <param name="primary">The string with the primary certificate. It cannot be null or empty.</param>
+        <param name="secondary">The string with the secondary certificate. It can be null or empty (ignored).</param>
         <summary>
             Factory with CAReferences with primary and secondary CA references.
             </summary>
@@ -161,7 +167,9 @@
         <remarks>
             Creates a new instance of the X509Attestation with the primary and secondary CA reference.
             </remarks>
-        <exception cref="T:System.ArgumentException">if the provide primary certificate is invalid.</exception>
+        <exception cref="T:System.ArgumentNullException">If the provided <paramref name="primary" /> string is null.</exception>
+        <exception cref="T:System.ArgumentException">If the provided <paramref name="primary" /> string is empty or white space.</exception>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">If the one of the provided <paramref name="primary" /> or <paramref name="secondary" /> certificate is invalid.</exception>
       </Docs>
     </Member>
     <Member MemberName="CreateFromClientCertificates">
@@ -182,6 +190,7 @@
         <AssemblyVersion>1.18.2.0</AssemblyVersion>
         <AssemblyVersion>1.19.0.0</AssemblyVersion>
         <AssemblyVersion>1.19.1.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Devices.Provisioning.Service.X509Attestation</ReturnType>
@@ -190,7 +199,7 @@
         <Parameter Name="primary" Type="System.Security.Cryptography.X509Certificates.X509Certificate2" />
       </Parameters>
       <Docs>
-        <param name="primary">the <code>X509Certificate2</code> with the primary certificate. It cannot be <code>null</code>.</param>
+        <param name="primary">The X509Certificate2 with the primary certificate. It cannot be null.</param>
         <summary>
             Factory from ClientCertificates with primary certificate.
             </summary>
@@ -199,7 +208,8 @@
             Creates a new instance of the X509Attestation with the primary certificate in X509Certificate2 object.
             </remarks>
         <exception cref="T:System.ArgumentException">if the primary certificate is <code>null</code>.</exception>
-        <exception cref="T:System.Security.Cryptography.CryptographicException">if the one of the provided certificate is invalid.</exception>
+        <exception cref="T:System.ArgumentNullException">If the <paramref name="primary" /> is null.</exception>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">If the provided <paramref name="primary" /> certificate is invalid.</exception>
       </Docs>
     </Member>
     <Member MemberName="CreateFromClientCertificates">
@@ -220,6 +230,7 @@
         <AssemblyVersion>1.18.2.0</AssemblyVersion>
         <AssemblyVersion>1.19.0.0</AssemblyVersion>
         <AssemblyVersion>1.19.1.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Devices.Provisioning.Service.X509Attestation</ReturnType>
@@ -228,7 +239,7 @@
         <Parameter Name="primary" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="primary">the <code>string</code> with the primary certificate. It cannot be <code>null</code> or empty.</param>
+        <param name="primary">The string with the primary certificate. It cannot be null or empty.</param>
         <summary>
             Factory from ClientCertificates with primary certificate.
             </summary>
@@ -236,8 +247,9 @@
         <remarks>
             Creates a new instance of the X509Attestation with the primary certificate in a Base64 string.
             </remarks>
-        <exception cref="T:System.ArgumentException">if the primary certificate is <code>null</code> or empty.</exception>
-        <exception cref="T:System.Security.Cryptography.CryptographicException">if the one of the provided certificate is invalid.</exception>
+        <exception cref="T:System.ArgumentNullException">If the provided <paramref name="primary" /> string is null.</exception>
+        <exception cref="T:System.ArgumentException">If the provided <paramref name="primary" /> string is empty or white space.</exception>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">If the provided <paramref name="primary" /> certificate is invalid.</exception>
       </Docs>
     </Member>
     <Member MemberName="CreateFromClientCertificates">
@@ -258,6 +270,7 @@
         <AssemblyVersion>1.18.2.0</AssemblyVersion>
         <AssemblyVersion>1.19.0.0</AssemblyVersion>
         <AssemblyVersion>1.19.1.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Devices.Provisioning.Service.X509Attestation</ReturnType>
@@ -267,8 +280,8 @@
         <Parameter Name="secondary" Type="System.Security.Cryptography.X509Certificates.X509Certificate2" />
       </Parameters>
       <Docs>
-        <param name="primary">the <code>X509Certificate2</code> with the primary certificate. It cannot be <code>null</code>.</param>
-        <param name="secondary">the <code>X509Certificate2</code> with the secondary certificate. It can be <code>null</code> (ignored).</param>
+        <param name="primary">The X509Certificate2 with the primary certificate. It cannot be null.</param>
+        <param name="secondary">The X509Certificate2 with the secondary certificate. It can be null (ignored).</param>
         <summary>
             Factory from ClientCertificates with primary and secondary certificates.
             </summary>
@@ -277,7 +290,8 @@
             Creates a new instance of the X509Attestation with the primary and secondary certificates in X509Certificate2 objects.
             </remarks>
         <exception cref="T:System.ArgumentException">if the primary certificate is <code>null</code>.</exception>
-        <exception cref="T:System.Security.Cryptography.CryptographicException">if the one of the provided certificate is invalid.</exception>
+        <exception cref="T:System.ArgumentNullException">If the <paramref name="primary" /> is null.</exception>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">If the one of the provided <paramref name="primary" /> or <paramref name="secondary" /> certificate is invalid.</exception>
       </Docs>
     </Member>
     <Member MemberName="CreateFromClientCertificates">
@@ -298,6 +312,7 @@
         <AssemblyVersion>1.18.2.0</AssemblyVersion>
         <AssemblyVersion>1.19.0.0</AssemblyVersion>
         <AssemblyVersion>1.19.1.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Devices.Provisioning.Service.X509Attestation</ReturnType>
@@ -307,8 +322,8 @@
         <Parameter Name="secondary" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="primary">the <code>string</code> with the primary certificate. It cannot be <code>null</code> or empty.</param>
-        <param name="secondary">the <code>string</code> with the secondary certificate. It can be <code>null</code> or empty (ignored).</param>
+        <param name="primary">The string with the primary certificate. It cannot be null or empty.</param>
+        <param name="secondary">The string with the secondary certificate. It can be null or empty (ignored).</param>
         <summary>
             Factory from ClientCertificates with primary and secondary certificates.
             </summary>
@@ -316,8 +331,9 @@
         <remarks>
             Creates a new instance of the X509Attestation with the primary and secondary certificates in a Base64 string.
             </remarks>
-        <exception cref="T:System.ArgumentException">if the primary certificate is <code>null</code> or empty.</exception>
-        <exception cref="T:System.Security.Cryptography.CryptographicException">if the one of the provided certificate is invalid.</exception>
+        <exception cref="T:System.ArgumentNullException">If the provided <paramref name="primary" /> string is null.</exception>
+        <exception cref="T:System.ArgumentException">If the provided <paramref name="primary" /> string is empty or white space.</exception>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">If the one of the provided <paramref name="primary" /> or <paramref name="primary" /> certificate is invalid.</exception>
       </Docs>
     </Member>
     <Member MemberName="CreateFromRootCertificates">
@@ -338,6 +354,7 @@
         <AssemblyVersion>1.18.2.0</AssemblyVersion>
         <AssemblyVersion>1.19.0.0</AssemblyVersion>
         <AssemblyVersion>1.19.1.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Devices.Provisioning.Service.X509Attestation</ReturnType>
@@ -346,7 +363,7 @@
         <Parameter Name="primary" Type="System.Security.Cryptography.X509Certificates.X509Certificate2" />
       </Parameters>
       <Docs>
-        <param name="primary">the <code>X509Certificate2</code> with the primary certificate. It cannot be <code>null</code>.</param>
+        <param name="primary">The X509Certificate2 with the primary certificate. It cannot be null.</param>
         <summary>
             Factory from RootCertificates with primary certificate.
             </summary>
@@ -355,7 +372,8 @@
             Creates a new instance of the X509Attestation with the primary certificate in X509Certificate2 objects.
             </remarks>
         <exception cref="T:System.ArgumentException">if the primary certificate is <code>null</code>.</exception>
-        <exception cref="T:System.Security.Cryptography.CryptographicException">if the one of the provided certificate is invalid.</exception>
+        <exception cref="T:System.ArgumentNullException">If the <paramref name="primary" /> is null.</exception>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">If the provided <paramref name="primary" /> certificate is invalid.</exception>
       </Docs>
     </Member>
     <Member MemberName="CreateFromRootCertificates">
@@ -376,6 +394,7 @@
         <AssemblyVersion>1.18.2.0</AssemblyVersion>
         <AssemblyVersion>1.19.0.0</AssemblyVersion>
         <AssemblyVersion>1.19.1.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Devices.Provisioning.Service.X509Attestation</ReturnType>
@@ -384,7 +403,7 @@
         <Parameter Name="primary" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="primary">the <code>string</code> with the primary certificate. It cannot be <code>null</code> or empty.</param>
+        <param name="primary">The string with the primary certificate. It cannot be null or empty.</param>
         <summary>
             Factory from RootCertificates with primary certificate.
             </summary>
@@ -392,8 +411,9 @@
         <remarks>
             Creates a new instance of the X509Attestation with the primary certificate in Base64 string.
             </remarks>
-        <exception cref="T:System.ArgumentException">if the primary certificate is <code>null</code> or empty.</exception>
-        <exception cref="T:System.Security.Cryptography.CryptographicException">if the one of the provided certificate is invalid.</exception>
+        <exception cref="T:System.ArgumentNullException">If the provided <paramref name="primary" /> string is null.</exception>
+        <exception cref="T:System.ArgumentException">If the provided <paramref name="primary" /> string is empty or white space.</exception>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">If the provided <paramref name="primary" /> certificate is invalid.</exception>
       </Docs>
     </Member>
     <Member MemberName="CreateFromRootCertificates">
@@ -414,6 +434,7 @@
         <AssemblyVersion>1.18.2.0</AssemblyVersion>
         <AssemblyVersion>1.19.0.0</AssemblyVersion>
         <AssemblyVersion>1.19.1.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Devices.Provisioning.Service.X509Attestation</ReturnType>
@@ -423,8 +444,8 @@
         <Parameter Name="secondary" Type="System.Security.Cryptography.X509Certificates.X509Certificate2" />
       </Parameters>
       <Docs>
-        <param name="primary">the <code>X509Certificate2</code> with the primary certificate. It cannot be <code>null</code>.</param>
-        <param name="secondary">the <code>X509Certificate2</code> with the secondary certificate. It can be <code>null</code> (ignored).</param>
+        <param name="primary">The X509Certificate2 with the primary certificate. It cannot be null.</param>
+        <param name="secondary">The X509Certificate2 with the secondary certificate. It can be null (ignored).</param>
         <summary>
             Factory from RootCertificates with primary and secondary certificates.
             </summary>
@@ -433,7 +454,8 @@
             Creates a new instance of the X509Attestation with the primary and secondary certificates in X509Certificate2 objects.
             </remarks>
         <exception cref="T:System.ArgumentException">if the primary certificate is <code>null</code>.</exception>
-        <exception cref="T:System.Security.Cryptography.CryptographicException">if the one of the provided certificate is invalid.</exception>
+        <exception cref="T:System.ArgumentNullException">If the <paramref name="primary" /> is null.</exception>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">If the one of the provided <paramref name="primary" /> or <paramref name="secondary" /> certificate is invalid.</exception>
       </Docs>
     </Member>
     <Member MemberName="CreateFromRootCertificates">
@@ -454,6 +476,7 @@
         <AssemblyVersion>1.18.2.0</AssemblyVersion>
         <AssemblyVersion>1.19.0.0</AssemblyVersion>
         <AssemblyVersion>1.19.1.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Devices.Provisioning.Service.X509Attestation</ReturnType>
@@ -463,8 +486,8 @@
         <Parameter Name="secondary" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="primary">the <code>string</code> with the primary certificate. It cannot be <code>null</code> or empty.</param>
-        <param name="secondary">the <code>string</code> with the secondary certificate. It can be <code>null</code> or empty (ignored).</param>
+        <param name="primary">The string with the primary certificate. It cannot be null or empty.</param>
+        <param name="secondary">The string with the secondary certificate. It can be null or empty (ignored).</param>
         <summary>
             Factory from RootCertificates with primary and secondary certificates.
             </summary>
@@ -472,8 +495,9 @@
         <remarks>
             Creates a new instance of the X509Attestation with the primary and secondary certificates in Base64 string.
             </remarks>
-        <exception cref="T:System.ArgumentException">if the primary certificate is <code>null</code> or empty.</exception>
-        <exception cref="T:System.Security.Cryptography.CryptographicException">if the one of the provided certificate is invalid.</exception>
+        <exception cref="T:System.ArgumentNullException">If the provided <paramref name="primary" /> string is null.</exception>
+        <exception cref="T:System.ArgumentException">If the provided <paramref name="primary" /> string is empty or white space.</exception>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">If the one of the provided <paramref name="primary" /> certificate is invalid.</exception>
       </Docs>
     </Member>
     <Member MemberName="GetPrimaryX509CertificateInfo">
@@ -494,6 +518,7 @@
         <AssemblyVersion>1.18.2.0</AssemblyVersion>
         <AssemblyVersion>1.19.0.0</AssemblyVersion>
         <AssemblyVersion>1.19.1.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Devices.Provisioning.Service.X509CertificateInfo</ReturnType>
@@ -503,11 +528,12 @@
         <summary>
             Getter for the primary X509 certificate info.
             </summary>
-        <returns>The <see cref="T:Microsoft.Azure.Devices.Provisioning.Service.X509CertificateInfo" /> with the returned certificate information. it can be <code>null</code>.</returns>
+        <returns>The <see cref="T:Microsoft.Azure.Devices.Provisioning.Service.X509CertificateInfo" /> with the returned certificate information. it can be null.</returns>
         <remarks>
             This method is a getter for the information returned from the provisioning service for the provided
                 primary certificate.
             </remarks>
+        <exception cref="T:System.InvalidOperationException">If no valid certificate information was provided on initialization.</exception>
       </Docs>
     </Member>
     <Member MemberName="GetSecondaryX509CertificateInfo">
@@ -528,6 +554,7 @@
         <AssemblyVersion>1.18.2.0</AssemblyVersion>
         <AssemblyVersion>1.19.0.0</AssemblyVersion>
         <AssemblyVersion>1.19.1.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Devices.Provisioning.Service.X509CertificateInfo</ReturnType>
@@ -537,10 +564,10 @@
         <summary>
             Getter for the secondary X509 certificate info.
             </summary>
-        <returns>The <see cref="T:Microsoft.Azure.Devices.Provisioning.Service.X509CertificateInfo" /> with the returned certificate information. it can be <code>null</code>.</returns>
+        <returns>The <see cref="T:Microsoft.Azure.Devices.Provisioning.Service.X509CertificateInfo" /> with the returned certificate information. it can be null.</returns>
         <remarks>
             This method is a getter for the information returned from the provisioning service for the provided
-                secondary certificate.
+            secondary certificate.
             </remarks>
       </Docs>
     </Member>
