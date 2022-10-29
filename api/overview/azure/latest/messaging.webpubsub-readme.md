@@ -1,17 +1,14 @@
 ---
 title: Azure Web PubSub service client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Messaging.WebPubSub, webpubsub
-author: maggiepint
-ms.author: magpint
-ms.date: 11/12/2021
+author: vicancy
+ms.author: lianwei
+ms.date: 10/29/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: webpubsub
 ---
-
-# Azure Web PubSub service client library for .NET - version 1.0.0 
+# Azure Web PubSub service client library for .NET - version 1.1.0 
 
 
 [Azure Web PubSub Service](https://aka.ms/awps/doc) is an Azure-managed service that helps developers easily build web applications with real-time features and publish-subscribe pattern. Any scenario that requires real-time publish-subscribe messaging between server and clients or among clients can use Azure Web PubSub service. Traditional real-time features that often require polling from server or submitting HTTP requests can also use Azure Web PubSub service.
@@ -21,15 +18,16 @@ You can use this library in your app server side to manage the WebSocket client 
 ![overflow](https://user-images.githubusercontent.com/668244/140014067-25a00959-04dc-47e8-ac25-6957bd0a71ce.png)
 
 Use this library to:
-- Send messages to hubs and groups. 
+
+- Send messages to hubs and groups.
 - Send messages to particular users and connections.
 - Organize users and connections into groups.
 - Close connections
 - Grant, revoke, and check permissions for an existing connection
 
 Details about the terms used here are described in [Key concepts](#key-concepts) section.
- 
-[Source code](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.WebPubSub_1.0.0/sdk/webpubsub/Azure.Messaging.WebPubSub/src) |
+
+[Source code](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.WebPubSub_1.1.0/sdk/webpubsub/Azure.Messaging.WebPubSub/src) |
 [Package](https://www.nuget.org/packages/Azure.Messaging.WebPubSub) |
 [API reference documentation](https://aka.ms/awps/sdk/csharp) |
 [Product documentation](https://aka.ms/awps/doc) |
@@ -42,7 +40,7 @@ Details about the terms used here are described in [Key concepts](#key-concepts)
 Install the client library from [NuGet](https://www.nuget.org/):
 
 ```dotnetcli
-dotnet add package Azure.Messaging.WebPubSub --prerelease
+dotnet add package Azure.Messaging.WebPubSub
 ```
 
 ### Prerequisites
@@ -55,6 +53,7 @@ dotnet add package Azure.Messaging.WebPubSub --prerelease
 In order to interact with the service, you'll need to create an instance of the `WebPubSubServiceClient` class. To make this possible, you'll need the connection string or a key, which you can access in the Azure portal.
 
 ```C# Snippet:WebPubSubAuthenticate
+// Create a WebPubSubServiceClient that will authenticate using a key credential.
 var serviceClient = new WebPubSubServiceClient(new Uri(endpoint), "some_hub", new AzureKeyCredential(key));
 ```
 
@@ -85,7 +84,7 @@ When a client is connected, it can send messages to the upstream application, or
 ### Broadcast a text message to all clients
 
 ```C# Snippet:WebPubSubHelloWorld
-var serviceClient = new WebPubSubServiceClient(new Uri(endpoint), "some_hub", new AzureKeyCredential(key));
+var serviceClient = new WebPubSubServiceClient(connectionString, "some_hub");
 
 serviceClient.SendToAll("Hello World!");
 ```
@@ -93,7 +92,7 @@ serviceClient.SendToAll("Hello World!");
 ### Broadcast a JSON message to all clients
 
 ```C# Snippet:WebPubSubSendJson
-var serviceClient = new WebPubSubServiceClient(new Uri(endpoint), "some_hub", new AzureKeyCredential(key));
+var serviceClient = new WebPubSubServiceClient(connectionString, "some_hub");
 
 serviceClient.SendToAll(RequestContent.Create(
         new
@@ -107,7 +106,7 @@ serviceClient.SendToAll(RequestContent.Create(
 ### Broadcast a binary message to all clients
 
 ```C# Snippet:WebPubSubSendBinary
-var serviceClient = new WebPubSubServiceClient(new Uri(endpoint), "some_hub", new AzureKeyCredential(key));
+var serviceClient = new WebPubSubServiceClient(connectionString, "some_hub");
 
 Stream stream = BinaryData.FromString("Hello World!").ToStream();
 serviceClient.SendToAll(RequestContent.Create(stream), ContentType.ApplicationOctetStream);
@@ -116,13 +115,14 @@ serviceClient.SendToAll(RequestContent.Create(stream), ContentType.ApplicationOc
 ## Troubleshooting
 
 ### Setting up console logging
-You can also easily [enable console logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.WebPubSub_1.0.0/sdk/core/Azure.Core/samples/Diagnostics.md#logging) if you want to dig deeper into the requests you're making against the service.
+
+You can also easily [enable console logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.WebPubSub_1.1.0/sdk/core/Azure.Core/samples/Diagnostics.md#logging) if you want to dig deeper into the requests you're making against the service.
 
 ## Next steps
 
 Please take a look at the
 [samples][samples_ref]
-directory for detailed examples on how to use this library. 
+directory for detailed examples on how to use this library.
 
 You can also find [more samples here][awps_sample].
 
@@ -142,6 +142,6 @@ For more information see the [Code of Conduct FAQ](https://opensource.microsoft.
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Ftemplate%2FAzure.Template%2FREADME.png)
 
 [azure_sub]: https://azure.microsoft.com/free/dotnet/
-[samples_ref]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.WebPubSub_1.0.0/sdk/webpubsub/Azure.Messaging.WebPubSub/tests/Samples/
+[samples_ref]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.WebPubSub_1.1.0/sdk/webpubsub/Azure.Messaging.WebPubSub/tests/Samples/
 [awps_sample]: https://github.com/Azure/azure-webpubsub/tree/main/samples/csharp
 
