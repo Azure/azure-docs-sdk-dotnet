@@ -2,16 +2,17 @@
 title: 
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.Batch, batch
 author: paterasMSFT
-ms.author: paterasMSFT
-ms.date: 01/14/2022
+ms.author: mipatera
+ms.date: 11/01/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: batch
 ---
+# License notes
 
-# Azure Batch SDK developer guide
+The Azure Batch C# client is now under the MIT license. Prior to March 10 2017 it was under the Apache 2.0 license.
+
+## Azure Batch SDK developer guide
 
 `Microsoft.Azure.Batch.sln` is your one stop shop for all things related to the Azure Batch C# client library. This solution file contains all of the projects affiliated with the Azure Batch client (including testing and tooling).
 
@@ -87,6 +88,3 @@ If running the tests against a test tenant, you also must set:
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fbatch%2FMicrosoft.Azure.Batch%2FREADME.png)
 
-## License notes
-
-The Azure Batch C# client is now under the MIT license. Prior to March 10 2017 it was under the Apache 2.0 license.
