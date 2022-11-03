@@ -3,17 +3,17 @@ title: Azure Object Anchors client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.MixedReality.ObjectAnchors.Conversion, objectanchors
 author: pallavit
 ms.author: pallavit
-ms.date: 09/13/2022
+ms.date: 11/03/2022
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: objectanchors
 ---
-# Azure Object Anchors client library for .NET - version 0.3.0-beta.5 
+# Azure Object Anchors client library for .NET - version 0.3.0-beta.6 
 
 
 Azure Object Anchors enables an application to detect an object in the physical world using a 3D model and estimate its 6-DoF pose. This package supports the conversion of an existing 3D asset into a form that can be used by the Object Anchors runtime to detect physical objects.
 
-[Source code](https://github.com/Azure/azure-sdk-for-net/tree/Azure.MixedReality.ObjectAnchors.Conversion_0.3.0-beta.5/sdk/objectanchors/Azure.MixedReality.ObjectAnchors.Conversion/src) | [Package (NuGet)](https://www.nuget.org/packages/Azure.MixedReality.ObjectAnchors.Conversion/)
+[Source code](https://github.com/Azure/azure-sdk-for-net/tree/Azure.MixedReality.ObjectAnchors.Conversion_0.3.0-beta.6/sdk/objectanchors/Azure.MixedReality.ObjectAnchors.Conversion/src) | [Package (NuGet)](https://www.nuget.org/packages/Azure.MixedReality.ObjectAnchors.Conversion/)
 
 - [Azure Object Anchors client library for .NET](#azure-object-anchors-client-library-for-net)
   - [Getting started](#getting-started)
@@ -103,6 +103,10 @@ using (FileStream fs = File.OpenRead(localFilePath))
 ```csharp
 AssetConversionOptions assetConversionOptions = new AssetConversionOptions(uploadedInputAssetUri, AssetFileType.FromFilePath(localFilePath), assetGravity, scale);
 
+// Or you can pass in an optional parameter DisableDetectScaleUnits if you are converting a FBX, specifying whether or not you want to disable automatic detection of the embedded scale units. 
+// The detection is enabled by default.
+AssetConversionOptions assetConversionOptions = new AssetConversionOptions(uploadedInputAssetUri, AssetFileType.FromFilePath(localFilePath), assetGravity, scale, disableDetectScaleUnits: true);
+
 AssetConversionOperation operation = await client.StartAssetConversionAsync(assetConversionOptions);
 
 Guid jobId = new Guid(operation.Id);
@@ -133,8 +137,8 @@ using (FileStream file = File.OpenWrite(localFileDownloadPath))
 
 ## Troubleshooting
 
-- See [Error Handling](https://github.com/Azure/azure-sdk-for-net/blob/Azure.MixedReality.ObjectAnchors.Conversion_0.3.0-beta.5/sdk/identity/Azure.Identity/README.md#error-handling) for Azure.Identity.
-- See [Logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.MixedReality.ObjectAnchors.Conversion_0.3.0-beta.5/sdk/identity/Azure.Identity/README.md#logging) for Azure.Identity.
+- See [Error Handling](https://github.com/Azure/azure-sdk-for-net/blob/Azure.MixedReality.ObjectAnchors.Conversion_0.3.0-beta.6/sdk/identity/Azure.Identity/README.md#error-handling) for Azure.Identity.
+- See [Logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.MixedReality.ObjectAnchors.Conversion_0.3.0-beta.6/sdk/identity/Azure.Identity/README.md#logging) for Azure.Identity.
 
 ## Next steps
 
