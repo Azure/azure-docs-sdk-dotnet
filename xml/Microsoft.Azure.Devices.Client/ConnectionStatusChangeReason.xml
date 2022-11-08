@@ -20,13 +20,14 @@
     <AssemblyVersion>1.41.0.0</AssemblyVersion>
     <AssemblyVersion>1.41.1.0</AssemblyVersion>
     <AssemblyVersion>1.41.2.0</AssemblyVersion>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Enum</BaseTypeName>
   </Base>
   <Docs>
     <summary>
-            Connection status change reason supported by the client.
+            The reason for a connection status change from a connection change event.
             </summary>
     <remarks>To be added.</remarks>
   </Docs>
@@ -66,6 +67,30 @@
             <para>This is returned with a connection status of <see cref="F:Microsoft.Azure.Devices.Client.ConnectionStatus.Disconnected" />.</para></summary>
       </Docs>
     </Member>
+    <Member MemberName="BadCredential">
+      <MemberSignature Language="C#" Value="BadCredential" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Microsoft.Azure.Devices.Client.ConnectionStatusChangeReason BadCredential = int32(4)" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Azure.Devices.Client.ConnectionStatusChangeReason.BadCredential" />
+      <MemberSignature Language="VB.NET" Value="BadCredential" />
+      <MemberSignature Language="F#" Value="BadCredential = 4" Usage="Microsoft.Azure.Devices.Client.ConnectionStatusChangeReason.BadCredential" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Devices.Client</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Azure.Devices.Client.ConnectionStatusChangeReason</ReturnType>
+      </ReturnValue>
+      <MemberValue>4</MemberValue>
+      <Docs>
+        <summary>
+            Incorrect credentials were supplied to the client instance.
+            </summary>
+        <remarks>
+            The supplied credentials need to be updated, or a secondary shared access key might be used.
+            </remarks>
+      </Docs>
+    </Member>
     <Member MemberName="Client_Close">
       <MemberSignature Language="C#" Value="Client_Close" />
       <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Microsoft.Azure.Devices.Client.ConnectionStatusChangeReason Client_Close = int32(7)" />
@@ -100,6 +125,30 @@
             If you want to perform more operations on the device client, one should call <see cref="M:Microsoft.Azure.Devices.Client.DeviceClient.Dispose" />
             and then re-initialize the client.
             <para>This is returned with a connection status of <see cref="F:Microsoft.Azure.Devices.Client.ConnectionStatus.Disabled" /></para></summary>
+      </Docs>
+    </Member>
+    <Member MemberName="ClientClosed">
+      <MemberSignature Language="C#" Value="ClientClosed" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Microsoft.Azure.Devices.Client.ConnectionStatusChangeReason ClientClosed = int32(0)" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Azure.Devices.Client.ConnectionStatusChangeReason.ClientClosed" />
+      <MemberSignature Language="VB.NET" Value="ClientClosed" />
+      <MemberSignature Language="F#" Value="ClientClosed = 0" Usage="Microsoft.Azure.Devices.Client.ConnectionStatusChangeReason.ClientClosed" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Devices.Client</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Azure.Devices.Client.ConnectionStatusChangeReason</ReturnType>
+      </ReturnValue>
+      <MemberValue>0</MemberValue>
+      <Docs>
+        <summary>
+            The client has not been opened or has been closed gracefully.
+            </summary>
+        <remarks>
+            To perform more operations on the client, call <see cref="M:System.IDisposable.Dispose" /> and then re-initialize the client.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="Communication_Error">
@@ -143,6 +192,37 @@
             and then re-initialize the client.</para></summary>
       </Docs>
     </Member>
+    <Member MemberName="CommunicationError">
+      <MemberSignature Language="C#" Value="CommunicationError" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Microsoft.Azure.Devices.Client.ConnectionStatusChangeReason CommunicationError = int32(2)" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Azure.Devices.Client.ConnectionStatusChangeReason.CommunicationError" />
+      <MemberSignature Language="VB.NET" Value="CommunicationError" />
+      <MemberSignature Language="F#" Value="CommunicationError = 2" Usage="Microsoft.Azure.Devices.Client.ConnectionStatusChangeReason.CommunicationError" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Devices.Client</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Azure.Devices.Client.ConnectionStatusChangeReason</ReturnType>
+      </ReturnValue>
+      <MemberValue>2</MemberValue>
+      <Docs>
+        <summary>
+            When a device encounters a connection error, subsequent operations on the client will fail until conneciton
+            has been re-established.
+            </summary>
+        <remarks>
+            If the connection status is <see cref="F:Microsoft.Azure.Devices.Client.ConnectionStatus.DisconnectedRetrying" />, the client will try to reopen
+            the connection. Do NOT close or open the client instance.
+            Once the client successfully reports <see cref="F:Microsoft.Azure.Devices.Client.ConnectionStatus.Connected" />,
+            operations on the client may resume.
+            <para>
+            If the connection status is <see cref="F:Microsoft.Azure.Devices.Client.ConnectionStatus.Disconnected" />, a non-retryable error occurred.
+            To perform more operations on the client, call <see cref="M:System.IDisposable.Dispose" /> and then re-initialize the client.
+            </para></remarks>
+      </Docs>
+    </Member>
     <Member MemberName="Connection_Ok">
       <MemberSignature Language="C#" Value="Connection_Ok" />
       <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Microsoft.Azure.Devices.Client.ConnectionStatusChangeReason Connection_Ok = int32(0)" />
@@ -175,6 +255,27 @@
         <summary>
             The client is connected, and ready to be used.
             <para>This is returned with a connection status of <see cref="F:Microsoft.Azure.Devices.Client.ConnectionStatus.Connected" />.</para></summary>
+      </Docs>
+    </Member>
+    <Member MemberName="ConnectionOk">
+      <MemberSignature Language="C#" Value="ConnectionOk" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Microsoft.Azure.Devices.Client.ConnectionStatusChangeReason ConnectionOk = int32(1)" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Azure.Devices.Client.ConnectionStatusChangeReason.ConnectionOk" />
+      <MemberSignature Language="VB.NET" Value="ConnectionOk" />
+      <MemberSignature Language="F#" Value="ConnectionOk = 1" Usage="Microsoft.Azure.Devices.Client.ConnectionStatusChangeReason.ConnectionOk" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Devices.Client</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Azure.Devices.Client.ConnectionStatusChangeReason</ReturnType>
+      </ReturnValue>
+      <MemberValue>1</MemberValue>
+      <Docs>
+        <summary>
+            The client is connected and ready to perform device operations.
+            </summary>
       </Docs>
     </Member>
     <Member MemberName="Device_Disabled">
@@ -210,6 +311,30 @@
             The device/ module has been deleted or marked as disabled (on your IoT hub instance).
             Fix the device/ module status in Azure before attempting to create the associated client instance.
             <para>This is returned with a connection status of <see cref="F:Microsoft.Azure.Devices.Client.ConnectionStatus.Disconnected" />.</para></summary>
+      </Docs>
+    </Member>
+    <Member MemberName="DeviceDisabled">
+      <MemberSignature Language="C#" Value="DeviceDisabled" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Microsoft.Azure.Devices.Client.ConnectionStatusChangeReason DeviceDisabled = int32(5)" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Azure.Devices.Client.ConnectionStatusChangeReason.DeviceDisabled" />
+      <MemberSignature Language="VB.NET" Value="DeviceDisabled" />
+      <MemberSignature Language="F#" Value="DeviceDisabled = 5" Usage="Microsoft.Azure.Devices.Client.ConnectionStatusChangeReason.DeviceDisabled" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Devices.Client</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Azure.Devices.Client.ConnectionStatusChangeReason</ReturnType>
+      </ReturnValue>
+      <MemberValue>5</MemberValue>
+      <Docs>
+        <summary>
+            The device/module has been deleted or marked as disabled in the IoT hub instance.
+            </summary>
+        <remarks>
+            Manually intervention may be required to enable or add device/module to IoT hub.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="Expired_SAS_Token">
@@ -315,6 +440,30 @@
             could be re-established. If you want to perform more operations on the device client, one should call
             <see cref="M:Microsoft.Azure.Devices.Client.DeviceClient.Dispose" /> and then re-initialize the client.
             <para>This is returned with a connection status of <see cref="F:Microsoft.Azure.Devices.Client.ConnectionStatus.Disconnected" />.</para></summary>
+      </Docs>
+    </Member>
+    <Member MemberName="RetryExpired">
+      <MemberSignature Language="C#" Value="RetryExpired" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Microsoft.Azure.Devices.Client.ConnectionStatusChangeReason RetryExpired = int32(3)" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Azure.Devices.Client.ConnectionStatusChangeReason.RetryExpired" />
+      <MemberSignature Language="VB.NET" Value="RetryExpired" />
+      <MemberSignature Language="F#" Value="RetryExpired = 3" Usage="Microsoft.Azure.Devices.Client.ConnectionStatusChangeReason.RetryExpired" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Devices.Client</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Azure.Devices.Client.ConnectionStatusChangeReason</ReturnType>
+      </ReturnValue>
+      <MemberValue>3</MemberValue>
+      <Docs>
+        <summary>
+            The client was disconnected due to a transient exception and the retry policy expired.
+            </summary>
+        <remarks>
+            To perform more operations on the client, call <see cref="M:System.IDisposable.Dispose" /> and then re-initialize the client.
+            </remarks>
       </Docs>
     </Member>
   </Members>
