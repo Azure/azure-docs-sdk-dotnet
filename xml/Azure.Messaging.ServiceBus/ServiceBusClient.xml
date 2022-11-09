@@ -20,6 +20,7 @@
     <AssemblyVersion>7.9.0.0</AssemblyVersion>
     <AssemblyVersion>7.10.0.0</AssemblyVersion>
     <AssemblyVersion>7.11.0.0</AssemblyVersion>
+    <AssemblyVersion>7.11.1.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -68,6 +69,7 @@
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
         <AssemblyVersion>7.10.0.0</AssemblyVersion>
         <AssemblyVersion>7.11.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.1.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -100,6 +102,7 @@
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
         <AssemblyVersion>7.10.0.0</AssemblyVersion>
         <AssemblyVersion>7.11.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.1.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="connectionString" Type="System.String" />
@@ -144,6 +147,7 @@
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
         <AssemblyVersion>7.10.0.0</AssemblyVersion>
         <AssemblyVersion>7.11.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.1.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="fullyQualifiedNamespace" Type="System.String" />
@@ -182,6 +186,7 @@
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
         <AssemblyVersion>7.10.0.0</AssemblyVersion>
         <AssemblyVersion>7.11.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.1.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="connectionString" Type="System.String" />
@@ -228,6 +233,7 @@
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
         <AssemblyVersion>7.10.0.0</AssemblyVersion>
         <AssemblyVersion>7.11.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.1.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="fullyQualifiedNamespace" Type="System.String" />
@@ -267,6 +273,7 @@
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
         <AssemblyVersion>7.10.0.0</AssemblyVersion>
         <AssemblyVersion>7.11.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.1.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="fullyQualifiedNamespace" Type="System.String" />
@@ -307,6 +314,7 @@
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
         <AssemblyVersion>7.10.0.0</AssemblyVersion>
         <AssemblyVersion>7.11.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.1.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="fullyQualifiedNamespace" Type="System.String" />
@@ -347,6 +355,7 @@
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
         <AssemblyVersion>7.10.0.0</AssemblyVersion>
         <AssemblyVersion>7.11.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Messaging.ServiceBus.ServiceBusSessionReceiver&gt;</ReturnType>
@@ -363,15 +372,18 @@
         <param name="cancellationToken">An optional <see cref="T:System.Threading.CancellationToken" /> instance to signal the request to cancel the operation.</param>
         <summary>
              Creates a <see cref="T:Azure.Messaging.ServiceBus.ServiceBusSessionReceiver" /> instance that can be used for receiving
-             and settling messages from a specific session-enabled queue. It uses <see cref="T:Azure.Messaging.ServiceBus.ServiceBusReceiveMode" /> to specify
-             how messages are received. Defaults to PeekLock mode. The <see cref="T:Azure.Messaging.ServiceBus.ServiceBusReceiveMode" /> is set in <see cref="T:Azure.Messaging.ServiceBus.ServiceBusReceiverOptions" />.
+             and settling messages from a session-enabled queue by accepting the next unlocked session that contains Active messages. If there
+             are no unlocked sessions with Active messages, then the call will timeout after the configured <see cref="P:Azure.Messaging.ServiceBus.ServiceBusRetryOptions.TryTimeout" /> value and throw
+             a <see cref="T:Azure.Messaging.ServiceBus.ServiceBusException" /> with <see cref="P:Azure.Messaging.ServiceBus.ServiceBusException.Reason" /> set to <see cref="F:Azure.Messaging.ServiceBus.ServiceBusFailureReason.ServiceTimeout" />.
+             The <see cref="T:Azure.Messaging.ServiceBus.ServiceBusReceiveMode" /> can be specified in the <see cref="T:Azure.Messaging.ServiceBus.ServiceBusReceiverOptions" /> to configure how messages are received.
+             The default value is <see cref="F:Azure.Messaging.ServiceBus.ServiceBusReceiveMode.PeekLock" />.
              </summary>
         <returns>A <see cref="T:Azure.Messaging.ServiceBus.ServiceBusSessionReceiver" /> scoped to the specified queue and a specific session.</returns>
         <remarks>Because this is establishing a session lock, this method performs a service call. If there are no available messages in the queue,
              this will throw a <see cref="T:Azure.Messaging.ServiceBus.ServiceBusException" /> with <see cref="P:Azure.Messaging.ServiceBus.ServiceBusException.Reason" /> of <see cref="F:Azure.Messaging.ServiceBus.ServiceBusFailureReason.ServiceTimeout" />.
              </remarks>
         <exception cref="T:Azure.Messaging.ServiceBus.ServiceBusException">
-               There are no unlocked sessions in the entity. This can occur if the entity has no messages, or if all of the messages
+               There are no unlocked sessions in the entity. This can occur if the entity has no Active messages, or if all of the messages
                belong to sessions that are locked by other receivers.
                The <see cref="P:Azure.Messaging.ServiceBus.ServiceBusException.Reason" /> will be set to <see cref="F:Azure.Messaging.ServiceBus.ServiceBusFailureReason.ServiceTimeout" /> in this case.
              </exception>
@@ -400,6 +412,7 @@
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
         <AssemblyVersion>7.10.0.0</AssemblyVersion>
         <AssemblyVersion>7.11.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Messaging.ServiceBus.ServiceBusSessionReceiver&gt;</ReturnType>
@@ -418,8 +431,11 @@
         <param name="cancellationToken">An optional <see cref="T:System.Threading.CancellationToken" /> instance to signal the request to cancel the operation.</param>
         <summary>
              Creates a <see cref="T:Azure.Messaging.ServiceBus.ServiceBusSessionReceiver" /> instance that can be used for receiving
-             and settling messages from a specific session-enabled subscription. It uses <see cref="T:Azure.Messaging.ServiceBus.ServiceBusReceiveMode" /> to specify
-             how messages are received. Defaults to PeekLock mode. The <see cref="T:Azure.Messaging.ServiceBus.ServiceBusReceiveMode" /> is set in <see cref="T:Azure.Messaging.ServiceBus.ServiceBusReceiverOptions" />.
+             and settling messages from a session-enabled subscription by accepting the next unlocked session that contains Active messages. If there
+             are no unlocked sessions with Active messages, then the call will timeout after the configured <see cref="P:Azure.Messaging.ServiceBus.ServiceBusRetryOptions.TryTimeout" /> value and throw
+             a <see cref="T:Azure.Messaging.ServiceBus.ServiceBusException" /> with <see cref="P:Azure.Messaging.ServiceBus.ServiceBusException.Reason" /> set to <see cref="F:Azure.Messaging.ServiceBus.ServiceBusFailureReason.ServiceTimeout" />.
+             The <see cref="T:Azure.Messaging.ServiceBus.ServiceBusReceiveMode" /> can be specified in the <see cref="T:Azure.Messaging.ServiceBus.ServiceBusReceiverOptions" /> to configure how messages are received.
+             The default value is <see cref="F:Azure.Messaging.ServiceBus.ServiceBusReceiveMode.PeekLock" />.
              </summary>
         <returns>A <see cref="T:Azure.Messaging.ServiceBus.ServiceBusSessionReceiver" /> scoped to the specified queue and a specific session.</returns>
         <remarks>Because this is establishing a session lock, this method performs a service call. If there are no available messages in the queue,
@@ -455,6 +471,7 @@
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
         <AssemblyVersion>7.10.0.0</AssemblyVersion>
         <AssemblyVersion>7.11.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Messaging.ServiceBus.ServiceBusSessionReceiver&gt;</ReturnType>
@@ -473,8 +490,9 @@
         <param name="cancellationToken">An optional <see cref="T:System.Threading.CancellationToken" /> instance to signal the request to cancel the operation.</param>
         <summary>
              Creates a <see cref="T:Azure.Messaging.ServiceBus.ServiceBusSessionReceiver" /> instance that can be used for receiving
-             and settling messages from a specific session-enabled queue. It uses <see cref="T:Azure.Messaging.ServiceBus.ServiceBusReceiveMode" /> to specify
-             how messages are received. Defaults to PeekLock mode. The <see cref="T:Azure.Messaging.ServiceBus.ServiceBusReceiveMode" /> is set in <see cref="T:Azure.Messaging.ServiceBus.ServiceBusReceiverOptions" />.
+             and settling messages from a session-enabled queue by accepting a specific session. The <see cref="T:Azure.Messaging.ServiceBus.ServiceBusReceiveMode" /> can be specified in
+             the <see cref="T:Azure.Messaging.ServiceBus.ServiceBusReceiverOptions" /> to configure how messages are received.
+             The default value is <see cref="F:Azure.Messaging.ServiceBus.ServiceBusReceiveMode.PeekLock" />.
              </summary>
         <returns>A <see cref="T:Azure.Messaging.ServiceBus.ServiceBusSessionReceiver" /> scoped to the specified queue and a specific session.</returns>
         <remarks>Because this is establishing a session lock, this method performs a service call. If the
@@ -510,6 +528,7 @@
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
         <AssemblyVersion>7.10.0.0</AssemblyVersion>
         <AssemblyVersion>7.11.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Messaging.ServiceBus.ServiceBusSessionReceiver&gt;</ReturnType>
@@ -530,8 +549,9 @@
         <param name="cancellationToken">An optional <see cref="T:System.Threading.CancellationToken" /> instance to signal the request to cancel the operation.</param>
         <summary>
              Creates a <see cref="T:Azure.Messaging.ServiceBus.ServiceBusSessionReceiver" /> instance that can be used for receiving
-             and settling messages from a specific session-enabled subscription. It uses <see cref="T:Azure.Messaging.ServiceBus.ServiceBusReceiveMode" /> to specify
-             how messages are received. Defaults to PeekLock mode. The <see cref="T:Azure.Messaging.ServiceBus.ServiceBusReceiveMode" /> is set in <see cref="T:Azure.Messaging.ServiceBus.ServiceBusReceiverOptions" />.
+             and settling messages from a session-enabled subscription by accepting a specific session. The <see cref="T:Azure.Messaging.ServiceBus.ServiceBusReceiveMode" /> can be specified in
+             the <see cref="T:Azure.Messaging.ServiceBus.ServiceBusReceiverOptions" /> to configure how messages are received.
+             The default value is <see cref="F:Azure.Messaging.ServiceBus.ServiceBusReceiveMode.PeekLock" />.
              </summary>
         <returns>A <see cref="T:Azure.Messaging.ServiceBus.ServiceBusSessionReceiver" /> scoped to the specified queue and a specific session.</returns>
         <remarks>Because this is establishing a session lock, this method performs a service call. If the
@@ -567,6 +587,7 @@
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
         <AssemblyVersion>7.10.0.0</AssemblyVersion>
         <AssemblyVersion>7.11.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Messaging.ServiceBus.ServiceBusProcessor</ReturnType>
@@ -614,6 +635,7 @@
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
         <AssemblyVersion>7.10.0.0</AssemblyVersion>
         <AssemblyVersion>7.11.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Messaging.ServiceBus.ServiceBusProcessor</ReturnType>
@@ -662,6 +684,7 @@
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
         <AssemblyVersion>7.10.0.0</AssemblyVersion>
         <AssemblyVersion>7.11.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Messaging.ServiceBus.ServiceBusProcessor</ReturnType>
@@ -711,6 +734,7 @@
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
         <AssemblyVersion>7.10.0.0</AssemblyVersion>
         <AssemblyVersion>7.11.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Messaging.ServiceBus.ServiceBusProcessor</ReturnType>
@@ -757,6 +781,7 @@
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
         <AssemblyVersion>7.10.0.0</AssemblyVersion>
         <AssemblyVersion>7.11.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Messaging.ServiceBus.ServiceBusReceiver</ReturnType>
@@ -803,6 +828,7 @@
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
         <AssemblyVersion>7.10.0.0</AssemblyVersion>
         <AssemblyVersion>7.11.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Messaging.ServiceBus.ServiceBusReceiver</ReturnType>
@@ -851,6 +877,7 @@
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
         <AssemblyVersion>7.10.0.0</AssemblyVersion>
         <AssemblyVersion>7.11.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Messaging.ServiceBus.ServiceBusReceiver</ReturnType>
@@ -901,6 +928,7 @@
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
         <AssemblyVersion>7.10.0.0</AssemblyVersion>
         <AssemblyVersion>7.11.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Messaging.ServiceBus.ServiceBusReceiver</ReturnType>
@@ -942,6 +970,7 @@
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
         <AssemblyVersion>7.10.0.0</AssemblyVersion>
         <AssemblyVersion>7.11.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Messaging.ServiceBus.ServiceBusRuleManager</ReturnType>
@@ -984,6 +1013,7 @@
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
         <AssemblyVersion>7.10.0.0</AssemblyVersion>
         <AssemblyVersion>7.11.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Messaging.ServiceBus.ServiceBusSender</ReturnType>
@@ -1017,6 +1047,7 @@
         <AssemblyName>Azure.Messaging.ServiceBus</AssemblyName>
         <AssemblyVersion>7.10.0.0</AssemblyVersion>
         <AssemblyVersion>7.11.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Messaging.ServiceBus.ServiceBusSender</ReturnType>
@@ -1065,6 +1096,7 @@
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
         <AssemblyVersion>7.10.0.0</AssemblyVersion>
         <AssemblyVersion>7.11.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Messaging.ServiceBus.ServiceBusSessionProcessor</ReturnType>
@@ -1109,6 +1141,7 @@
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
         <AssemblyVersion>7.10.0.0</AssemblyVersion>
         <AssemblyVersion>7.11.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Messaging.ServiceBus.ServiceBusSessionProcessor</ReturnType>
@@ -1158,6 +1191,7 @@
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
         <AssemblyVersion>7.10.0.0</AssemblyVersion>
         <AssemblyVersion>7.11.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.ValueTask</ReturnType>
@@ -1195,6 +1229,7 @@
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
         <AssemblyVersion>7.10.0.0</AssemblyVersion>
         <AssemblyVersion>7.11.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -1244,6 +1279,7 @@
         <AssemblyName>Azure.Messaging.ServiceBus</AssemblyName>
         <AssemblyVersion>7.10.0.0</AssemblyVersion>
         <AssemblyVersion>7.11.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -1279,6 +1315,7 @@
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
         <AssemblyVersion>7.10.0.0</AssemblyVersion>
         <AssemblyVersion>7.11.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -1316,6 +1353,7 @@
         <AssemblyVersion>7.9.0.0</AssemblyVersion>
         <AssemblyVersion>7.10.0.0</AssemblyVersion>
         <AssemblyVersion>7.11.0.0</AssemblyVersion>
+        <AssemblyVersion>7.11.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Messaging.ServiceBus.ServiceBusTransportType</ReturnType>
