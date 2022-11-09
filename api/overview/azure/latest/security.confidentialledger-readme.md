@@ -3,12 +3,12 @@ title: Azure confidential ledger client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Security.ConfidentialLedger, confidentialledger
 author: christothes
 ms.author: chriss
-ms.date: 07/18/2022
+ms.date: 11/09/2022
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: confidentialledger
 ---
-# Azure confidential ledger client library for .NET - version 1.0.0 
+# Azure confidential ledger client library for .NET - version 1.1.0 
 
 
 Azure confidential ledger provides a service for logging to an immutable, tamper-proof ledger. As part of the [Azure Confidential Computing][azure_confidential_computing]
@@ -137,30 +137,28 @@ Response postResponse = ledgerClient.PostLedgerEntry(
 waitUntil: WaitUntil.Completed,
     RequestContent.Create(
         new { contents = "Hello world!" }));
+
+string content = postOperation.GetRawResponse().Content.ToString();
 string transactionId = postOperation.Id;
-string collectionId = "collection:0";
+string collectionId = "subledger:0";
 
-// Provide both the transactionId and collectionId.
-Response getByCollectionResponse = ledgerClient.GetLedgerEntry(transactionId, collectionId);
-
-// Try until the entry is available.
+// Try fetching the ledger entry until it is "loaded".
+Response getByCollectionResponse = default;
+JsonElement rootElement = default;
 bool loaded = false;
-JsonElement element = default;
-string contents = null;
+
 while (!loaded)
 {
-    loaded = JsonDocument.Parse(getByCollectionResponse.Content)
-        .RootElement
-        .TryGetProperty("entry", out element);
-    if (loaded)
-    {
-        contents = element.GetProperty("contents").GetString();
-    }
-    else
-    {
-        getByCollectionResponse = ledgerClient.GetLedgerEntry(transactionId, collectionId);
-    }
+    // Provide both the transactionId and collectionId.
+    getByCollectionResponse = ledgerClient.GetLedgerEntry(transactionId, collectionId);
+    rootElement = JsonDocument.Parse(getByCollectionResponse.Content).RootElement;
+    loaded = rootElement.GetProperty("state").GetString() != "Loading";
 }
+
+string contents = rootElement
+    .GetProperty("entry")
+    .GetProperty("contents")
+    .GetString();
 
 Console.WriteLine(contents); // "Hello world!"
 
@@ -211,7 +209,7 @@ Response getResponse = ledgerClient.GetLedgerEntry(transactionId);
 
 // Try until the entry is available.
 loaded = false;
-element = default;
+JsonElement element = default;
 contents = null;
 while (!loaded)
 {
@@ -352,12 +350,12 @@ We guarantee that all client instance methods are thread-safe and independent of
 ### Additional concepts
 
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.ConfidentialLedger_1.0.0/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.ConfidentialLedger_1.0.0/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.ConfidentialLedger_1.0.0/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.ConfidentialLedger_1.0.0/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.ConfidentialLedger_1.0.0/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.ConfidentialLedger_1.0.0/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.ConfidentialLedger_1.1.0/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.ConfidentialLedger_1.1.0/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.ConfidentialLedger_1.1.0/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.ConfidentialLedger_1.1.0/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.ConfidentialLedger_1.1.0/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.ConfidentialLedger_1.1.0/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
@@ -400,17 +398,17 @@ For more information see the [Code of Conduct FAQ][coc_faq] or contact
 <!-- LINKS -->
 [style-guide-msft]: /style-guide/capitalization
 [style-guide-cloud]: https://aka.ms/azsdk/cloud-style-guide
-[client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Security.ConfidentialLedger_1.0.0/sdk/confidentialledger/Azure.Security.ConfidentialLedger
+[client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Security.ConfidentialLedger_1.1.0/sdk/confidentialledger/Azure.Security.ConfidentialLedger
 [client_nuget_package]: https://www.nuget.org/packages?q=Azure.Security.ConfidentialLedger
 [azure_cli]: /cli/azure
 [azure_cloud_shell]: https://shell.azure.com/bash
 [azure_confidential_computing]: https://azure.microsoft.com/solutions/confidential-compute
-[client_construction_sample]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.ConfidentialLedger_1.0.0/sdk/confidentialledger/Azure.Security.ConfidentialLedger/tests/samples/CertificateServiceSample.md
+[client_construction_sample]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.ConfidentialLedger_1.1.0/sdk/confidentialledger/Azure.Security.ConfidentialLedger/tests/samples/CertificateServiceSample.md
 [azure_sub]: https://azure.microsoft.com/free/dotnet/
 [ccf]: https://github.com/Microsoft/CCF
-[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Security.ConfidentialLedger_1.0.0/sdk/identity/Azure.Identity
-[default_cred_ref]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.ConfidentialLedger_1.0.0/sdk/identity/Azure.Identity/README.md#defaultazurecredential
-[logging]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.ConfidentialLedger_1.0.0/sdk/core/Azure.Core/samples/Diagnostics.md
+[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Security.ConfidentialLedger_1.1.0/sdk/identity/Azure.Identity
+[default_cred_ref]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.ConfidentialLedger_1.1.0/sdk/identity/Azure.Identity/README.md#defaultazurecredential
+[logging]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.ConfidentialLedger_1.1.0/sdk/core/Azure.Core/samples/Diagnostics.md
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq
 [cla]: https://cla.microsoft.com
