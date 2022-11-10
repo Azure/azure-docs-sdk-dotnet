@@ -3,12 +3,12 @@ title: Azure WebJobs Service Bus client library for .NET
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebJobs.Extensions.ServiceBus, servicebus
 author: JoshLove-msft
 ms.author: jolov
-ms.date: 10/11/2022
+ms.date: 11/10/2022
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: servicebus
 ---
-# Azure WebJobs Service Bus client library for .NET - version 5.8.0 
+# Azure WebJobs Service Bus client library for .NET - version 5.8.1 
 
 
 This extension provides functionality for accessing Azure Service Bus from an Azure Function.
@@ -25,7 +25,7 @@ dotnet add package Microsoft.Azure.WebJobs.Extensions.ServiceBus
 
 ### Prerequisites
 
-- **Azure Subscription:**  To use Azure services, including Azure Service Bus, you'll need a subscription.  If you do not have an existing Azure account, you may sign up for a [free trial](https://azure.microsoft.com/free/dotnet/) or use your [Visual Studio Subscription](https://visualstudio.microsoft.com/subscriptions/) benefits when you [create an account](https://account.windowsazure.com/Home/Index).
+- **Azure Subscription:**  To use Azure services, including Azure Service Bus, you'll need a subscription.  If you do not have an existing Azure account, you may sign up for a [free trial](https://azure.microsoft.com/free/dotnet/) or use your [Visual Studio Subscription](https://visualstudio.microsoft.com/subscriptions/) benefits when you [create an account](https://azure.microsoft.com/account).
 
 - **Service Bus namespace:** To interact with Azure Service Bus, you'll also need to have a namespace available. If you are not familiar with creating Azure resources, you may wish to follow the step-by-step guide for creating a Service Bus namespace using the Azure portal. There, you can also find detailed instructions for using the Azure CLI, Azure PowerShell, or Azure Resource Manager (ARM) templates to create a Service bus entity.
 
@@ -314,12 +314,12 @@ additional questions or comments.
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fservicebus%2FMicrosoft.Azure.WebJobs.Extensions.ServiceBus%2FREADME.png)
 
 <!-- LINKS -->
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.ServiceBus_5.8.0/sdk/servicebus/Microsoft.Azure.WebJobs.Extensions.ServiceBus/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.ServiceBus_5.8.1/sdk/servicebus/Microsoft.Azure.WebJobs.Extensions.ServiceBus/src
 [package]: https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.ServiceBus/
 [docs]: /dotnet/api/Microsoft.Azure.WebJobs.Extensions.ServiceBus
 [nuget]: https://www.nuget.org/
 
-[contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.ServiceBus_5.8.0/CONTRIBUTING.md
+[contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.ServiceBus_5.8.1/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
