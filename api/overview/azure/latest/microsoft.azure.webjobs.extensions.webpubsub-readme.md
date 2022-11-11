@@ -3,23 +3,21 @@ title: Azure WebJobs Web PubSub client library for .NET
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebJobs.Extensions.WebPubSub, webpubsub
 author: vicancy
 ms.author: lianwei
-ms.date: 03/10/2022
+ms.date: 11/11/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: webpubsub
 ---
-# Azure WebJobs Web PubSub client library for .NET - version 1.2.0 
+# Azure WebJobs Web PubSub client library for .NET - version 1.3.0 
 
 
 This extension provides functionality for receiving Web PubSub webhook calls in Azure Functions, allowing you to easily write functions that respond to any event published to Web PubSub.
 
-[Source code](https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.WebJobs.Extensions.WebPubSub_1.2.0/sdk/webpubsub/Microsoft.Azure.WebJobs.Extensions.WebPubSub/src) |
+[Source code](https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.WebJobs.Extensions.WebPubSub_1.3.0/sdk/webpubsub/Microsoft.Azure.WebJobs.Extensions.WebPubSub/src) |
 [Package](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.WebPubSub) |
-[API reference documentation](https://azure.github.io/azure-webpubsub/references/functions-bindings) |
+[API reference documentation](/dotnet/api/microsoft.azure.webjobs.extensions.webpubsub) |
 [Product documentation](https://aka.ms/awps/doc) |
-[Samples](https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.WebPubSub_1.2.0/sdk/webpubsub/Microsoft.Azure.WebJobs.Extensions.WebPubSub/samples)
+[Samples](https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.WebPubSub_1.3.0/sdk/webpubsub/Microsoft.Azure.WebJobs.Extensions.WebPubSub/samples)
 
 ## Getting started
 
@@ -33,7 +31,7 @@ dotnet add package Microsoft.Azure.WebJobs.Extensions.WebPubSub
 
 ### Prerequisites
 
-You must have an [Azure subscription](https://azure.microsoft.com/free/dotnet/) and an Azure resource group with a Web PubSub resource. Follow this [step-by-step tutorial](https://docs.microsoft.com/azure/azure-web-pubsub/howto-develop-create-instance) to create an Azure Web PubSub instance.
+You must have an [Azure subscription](https://azure.microsoft.com/free/dotnet/) and an Azure resource group with a Web PubSub resource. Follow this [step-by-step tutorial](/azure/azure-web-pubsub/howto-develop-create-instance) to create an Azure Web PubSub instance.
 
 ### Authenticate the client
 
@@ -41,7 +39,7 @@ In order to let the extension work with Azure Web PubSub service, you will need 
 
 You can find the **Keys** for you Azure Web PubSub service in the [Azure Portal](https://portal.azure.com/).
 
-The `AzureWebJobsStorage` connection string is used to preserve the processing checkpoint information as required refer to [Storage considerations](https://docs.microsoft.com/azure/azure-functions/storage-considerations#storage-account-requirements)
+The `AzureWebJobsStorage` connection string is used to preserve the processing checkpoint information as required refer to [Storage considerations](/azure/azure-functions/storage-considerations#storage-account-requirements)
 
 For the local development use the `local.settings.json` file to store the connection string, `<connection-string>` can be set to `WebPubSubConnectionString` as default supported in the extension, or you can set customized names by mapping it with `Connection = <connection-string>` in function binding attributes:
 
@@ -53,7 +51,7 @@ For the local development use the `local.settings.json` file to store the connec
   }
 }
 ```
-When deployed use the [application settings](https://docs.microsoft.com/azure/azure-functions/functions-how-to-use-azure-function-app-settings) to set the connection string.
+When deployed use the [application settings](/azure/azure-functions/functions-how-to-use-azure-function-app-settings) to set the connection string.
 
 ## Key concepts
 
@@ -138,11 +136,11 @@ public static class WebPubSubTriggerReturnValueFunction
 
 ## Troubleshooting
 
-Please refer to [Monitor Azure Functions](https://docs.microsoft.com/azure/azure-functions/functions-monitoring) for troubleshooting guidance.
+Please refer to [Monitor Azure Functions](/azure/azure-functions/functions-monitoring) for troubleshooting guidance.
 
 ## Next steps
 
-Read the [introduction to Azure Function](https://docs.microsoft.com/azure/azure-functions/functions-overview) or [creating an Azure Function guide](https://docs.microsoft.com/azure/azure-functions/functions-create-first-azure-function).
+Read the [introduction to Azure Function](/azure/azure-functions/functions-overview) or [creating an Azure Function guide](/azure/azure-functions/functions-create-first-azure-function).
 
 ## Contributing
 
@@ -162,12 +160,12 @@ additional questions or comments.
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fsearch%2FMicrosoft.Azure.WebJobs.Extensions.WebPubSub%2FREADME.png)
 
 <!-- LINKS -->
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.WebPubSub_1.2.0/sdk/search/Microsoft.Azure.WebJobs.Extensions.WebPubSub/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.WebPubSub_1.3.0/sdk/search/Microsoft.Azure.WebJobs.Extensions.WebPubSub/src
 [package]: https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.WebPubSub/
-[docs]: https://docs.microsoft.com/dotnet/api/Microsoft.Azure.WebJobs.Extensions.WebPubSub
+[docs]: /dotnet/api/Microsoft.Azure.WebJobs.Extensions.WebPubSub
 [nuget]: https://www.nuget.org/
 
-[contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.WebPubSub_1.2.0/CONTRIBUTING.md
+[contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.WebPubSub_1.3.0/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
