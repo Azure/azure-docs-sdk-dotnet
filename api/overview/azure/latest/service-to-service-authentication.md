@@ -240,8 +240,8 @@ To control the process, use a connection string passed to the `AzureServiceToken
 
 | Connection string option | Scenario | Comments|
 |:--------------------------------|:------------------------|:----------------------------|
-| `RunAs=Developer; DeveloperTool=AzureCli` | Local development | `AzureServiceTokenProvider` uses AzureCli to get token. |
-| `RunAs=Developer; DeveloperTool=VisualStudio` | Local development | `AzureServiceTokenProvider` uses Visual Studio to get token. |
+| `RunAs=Developer;DeveloperTool=AzureCli` | Local development | `AzureServiceTokenProvider` uses AzureCli to get token. |
+| `RunAs=Developer;DeveloperTool=VisualStudio` | Local development | `AzureServiceTokenProvider` uses Visual Studio to get token. |
 | `RunAs=CurrentUser` | Local development | Not supported in .NET Core. `AzureServiceTokenProvider` uses Azure AD Integrated Authentication to get token. |
 | `RunAs=App` | [Managed identities for Azure resources](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/) | `AzureServiceTokenProvider` uses a managed identity to get token. |
 | `RunAs=App;AppId={ClientId of user-assigned identity}` | [User-assigned identity for Azure resources](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview#managed-identity-types) | `AzureServiceTokenProvider` uses a user-assigned identity to get token. |
