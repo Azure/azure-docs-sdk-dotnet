@@ -1,0 +1,3 @@
+| Reference | Package | Source |
+|---|---|---|
+|Resource Management - Managed Service Identity|[Azure.ResourceManager.ManagedServiceIdentities](https://www.nuget.org/packages/Azure.ResourceManager.ManagedServiceIdentities)|[Github](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/managedserviceidentity/Azure.ResourceManager.ManagedServiceIdentities)|

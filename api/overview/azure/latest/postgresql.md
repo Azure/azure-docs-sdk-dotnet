@@ -1,11 +1,14 @@
 ---
-title: Azure Database for PostgreSQL libraries for .NET
-description: Reference documentation for the .NET client libraries for Azure Database for PostgreSQL
-ms.date: 10/19/2017
+title: Azure PostgreSql SDK for .NET
+description: Reference for Azure PostgreSql SDK for .NET
+author: pallavit
+ms.author: pallavit
+ms.data: 11/21/2022
 ms.topic: reference
+ms.devlang: dotnet
 ms.service: postgresql
+ms.date: 10/19/2017
 ---
-
 # Azure Database for PostgreSQL libraries for .NET
 
 ## Overview

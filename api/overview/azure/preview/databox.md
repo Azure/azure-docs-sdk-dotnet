@@ -1,9 +1,13 @@
 ---
-title: Azure Data Box libraries for .NET
-description: Reference for Azure Data Box libraries for .NET
-ms.date: 06/29/2021
+title: Azure DataBox SDK for .NET
+description: Reference for Azure DataBox SDK for .NET
+author: pallavit
+ms.author: pallavit
+ms.data: 11/21/2022
 ms.topic: reference
+ms.devlang: dotnet
 ms.service: databox
+ms.date: 06/29/2021
 ---
 # Azure Data Box APIs for .NET
 

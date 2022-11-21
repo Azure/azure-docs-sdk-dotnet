@@ -1,11 +1,14 @@
 ---
-title: Azure Media Services libraries for .NET
-description: Reference for Azure Media Services libraries for .NET
-ms.date: 10/19/2017
+title: Azure Media Services SDK for .NET
+description: Reference for Azure Media Services SDK for .NET
+author: pallavit
+ms.author: pallavit
+ms.data: 11/21/2022
 ms.topic: reference
-ms.service: media-services
+ms.devlang: dotnet
+ms.service: mediaservices
+ms.date: 10/19/2017
 ---
-
 # Azure Media Services libraries for .NET
 
 ## Overview

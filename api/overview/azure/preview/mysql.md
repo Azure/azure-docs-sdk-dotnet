@@ -1,11 +1,14 @@
 ---
-title: Azure Database for MySQL libraries for .NET
-description: Reference documentation for the .NET client libraries for Azure Database for MySQL
-ms.date: 10/19/2017
+title: Azure MySql SDK for .NET
+description: Reference for Azure MySql SDK for .NET
+author: pallavit
+ms.author: pallavit
+ms.data: 11/21/2022
 ms.topic: reference
+ms.devlang: dotnet
 ms.service: mysql
+ms.date: 10/19/2017
 ---
-
 # Azure Database for MySQL libraries for .NET
 
 ## Overview

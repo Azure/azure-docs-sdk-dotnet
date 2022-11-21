@@ -1,0 +1,3 @@
+| Reference | Package | Source |
+|---|---|---|
+|Resource Management - Support|[Azure.ResourceManager.Support](https://www.nuget.org/packages/Azure.ResourceManager.Support)|[Github](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/support/Azure.ResourceManager.Support)|

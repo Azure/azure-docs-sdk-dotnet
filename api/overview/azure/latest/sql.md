@@ -1,11 +1,14 @@
 ---
-title: Azure SQL Database APIs for .NET
-description: Reference for Azure SQL Database libraries for .NET
-ms.date: 10/19/2017
+title: Azure SQL SDK for .NET
+description: Reference for Azure SQL SDK for .NET
+author: pallavit
+ms.author: pallavit
+ms.data: 11/21/2022
 ms.topic: reference
-ms.service: sql-database
+ms.devlang: dotnet
+ms.service: sql
+ms.date: 10/19/2017
 ---
-
 # Azure SQL Database APIs for .NET
 
 ## Overview
@@ -117,4 +120,3 @@ ISqlDatabase sqlDb = sqlServer.Databases.Define("DatabaseName").Create();
 ## Samples
 
 View the [complete list](https://docs.microsoft.com/en-us/samples/browse/?expanded=azure&products=azure-sql-database%2Cazure-sql-managed-instance%2Cazure-sqlserver-vm%2Cazure-sql-virtual-machines%2Csql-server) of Azure SQL Database samples.
-

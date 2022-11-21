@@ -1,11 +1,14 @@
 ---
-title: Azure DNS libraries for .NET
-description: Reference for Azure DNS libraries for .NET
-ms.date: 10/19/2017
+title: Azure DNS SDK for .NET
+description: Reference for Azure DNS SDK for .NET
+author: dnssuppgithub
+ms.author: dnssuppgithub
+ms.data: 11/21/2022
 ms.topic: reference
+ms.devlang: dotnet
 ms.service: dns
+ms.date: 10/19/2017
 ---
-
 # Azure DNS libraries for .NET
 
 Use the Microsoft Azure DNS libraries for .NET to create and modify DNS zones and records hosted within Azure. Zones and records are managed as Azure Resources. Learn more by reading the [Azure DNS overview](/azure/dns/dns-overview).

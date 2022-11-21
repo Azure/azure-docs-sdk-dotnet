@@ -1,11 +1,14 @@
 ---
 title: Azure HDInsight SDK for .NET
 description: Reference for Azure HDInsight SDK for .NET
-ms.date: 04/10/2019
+author: aim-for-better
+ms.author: zhezhou
+ms.data: 11/21/2022
 ms.topic: reference
+ms.devlang: dotnet
 ms.service: hdinsight
+ms.date: 04/10/2019
 ---
-
 # Azure HDInsight SDK for .NET
 
 Azure HDInsight offers management and job SDKs for .NET that provide classes for managing your HDInsight cluster and submitting and monitoring Hadoop jobs.

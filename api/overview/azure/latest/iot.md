@@ -1,11 +1,14 @@
 ---
-title: Azure IoT libraries for .NET
-description: Reference for Azure IoT libraries for .NET
-ms.date: 10/19/2017
+title: Azure IoT SDK for .NET
+description: Reference for Azure IoT SDK for .NET
+author: drwill-ms
+ms.author: drwill
+ms.data: 11/21/2022
 ms.topic: reference
-ms.service: iot-hub
+ms.devlang: dotnet
+ms.service: iot
+ms.date: 10/19/2017
 ---
-
 # Azure IoT libraries for .NET
 
 ## Overview

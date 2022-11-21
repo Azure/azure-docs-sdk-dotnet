@@ -1,11 +1,14 @@
 ---
-title: Azure Service Bus libraries for .NET
-description: Reference for Azure Service Bus libraries for .NET
-ms.date: 02/08/2021
+title: Azure Service Bus SDK for .NET
+description: Reference for Azure Service Bus SDK for .NET
+author: pallavit
+ms.author: pallavit
+ms.data: 11/21/2022
 ms.topic: reference
-ms.service: service-bus-messaging
+ms.devlang: dotnet
+ms.service: servicebus
+ms.date: 02/08/2021
 ---
-
 # Azure Service Bus libraries for .NET
 
 ## Overview

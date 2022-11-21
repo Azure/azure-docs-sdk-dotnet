@@ -1,11 +1,14 @@
 ---
-title: Azure Automation libraries for .NET
-description: Reference for Azure Automation libraries for .NET
-ms.date: 10/19/2017
+title: Azure Automation SDK for .NET
+description: Reference for Azure Automation SDK for .NET
+author: pallavit
+ms.author: pallavit
+ms.data: 11/21/2022
 ms.topic: reference
+ms.devlang: dotnet
 ms.service: automation
+ms.date: 10/19/2017
 ---
-
 # Azure Automation libraries for .NET
 
 ## Overview

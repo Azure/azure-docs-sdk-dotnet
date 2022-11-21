@@ -1,9 +1,13 @@
 ---
-title: Azure Service Fabric libraries for .NET
-description: Reference for Azure Service Fabric libraries for .NET
-ms.date: 10/19/2017
+title: Azure Service Fabric SDK for .NET
+description: Reference for Azure Service Fabric SDK for .NET
+author: pallavit
+ms.author: pallavit
+ms.data: 11/21/2022
 ms.topic: reference
-ms.service: service-fabric
+ms.devlang: dotnet
+ms.service: servicefabric
+ms.date: 10/19/2017
 ---
 # Azure Service Fabric libraries for .NET
 

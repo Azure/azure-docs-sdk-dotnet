@@ -1,11 +1,14 @@
 ---
-title: Azure Key Vault libraries for .NET
-description: The Azure Key Vault libraries for .NET offer a convenient interface for making calls to Azure Key Vault.
-ms.date: 03/04/2020
+title: Azure Key Vault SDK for .NET
+description: Reference for Azure Key Vault SDK for .NET
+author: pallavit
+ms.author: pallavit
+ms.data: 11/21/2022
 ms.topic: reference
-ms.service: key-vault
+ms.devlang: dotnet
+ms.service: keyvault
+ms.date: 03/04/2020
 ---
-
 # Azure Key Vault libraries for .NET
 
 The Azure Key Vault libraries for .NET offer a convenient interface for making calls to Azure Key Vault. For more information about Azure Key Vault, see [Introduction to Azure Key Vault](https://docs.microsoft.com/azure/key-vault/general/overview).

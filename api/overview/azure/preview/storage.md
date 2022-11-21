@@ -1,11 +1,14 @@
 ---
-title: Azure Storage client libraries for .NET
-description: The Azure Storage client libraries for .NET offer a convenient interface for making calls to Azure Storage.
-ms.date: 09/19/2022
+title: Azure Storage SDK for .NET
+description: Reference for Azure Storage SDK for .NET
+author: seanmcc-msft
+ms.author: seanmcc
+ms.data: 11/21/2022
 ms.topic: reference
+ms.devlang: dotnet
 ms.service: storage
+ms.date: 09/19/2022
 ---
-
 # Azure Storage client libraries for .NET
 
 The Azure Storage client libraries for .NET offer a convenient interface for making calls to Azure Storage. For more information about Azure Storage, see [Introduction to Azure Storage](/azure/storage/common/storage-introduction).

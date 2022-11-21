@@ -1,9 +1,13 @@
 ---
-title: Azure Billing libraries for .NET
-description: Reference for Azure Billing libraries for .NET
-ms.date: 10/19/2017
+title: Azure Billing SDK for .NET
+description: Reference for Azure Billing SDK for .NET
+author: pallavit
+ms.author: pallavit
+ms.data: 11/21/2022
 ms.topic: reference
+ms.devlang: dotnet
 ms.service: billing
+ms.date: 10/19/2017
 ---
 # Azure Billing libraries for .NET
 

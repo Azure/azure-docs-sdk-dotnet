@@ -1,0 +1,3 @@
+| Reference | Package | Source |
+|---|---|---|
+|Visual Search|[Microsoft.Azure.CognitiveServices.Search.VisualSearch](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.Search.VisualSearch)|[Github](https://github.com/Azure/azure-sdk-for-net)|

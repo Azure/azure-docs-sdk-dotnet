@@ -1,11 +1,14 @@
 ---
-title: Azure Batch libraries for .NET
-description: Reference for Azure Batch libraries for .NET
-ms.date: 10/19/2017
+title: Azure Batch SDK for .NET
+description: Reference for Azure Batch SDK for .NET
+author: paterasMSFT
+ms.author: mipatera
+ms.data: 11/21/2022
 ms.topic: reference
+ms.devlang: dotnet
 ms.service: batch
+ms.date: 10/19/2017
 ---
-
 # Azure Batch libraries for .NET
 
 Azure Batch is a platform service for running large-scale parallel and high-performance computing (HPC) applications efficiently in the cloud. Azure Batch schedules compute-intensive work to run on a managed collection of virtual machines, and can automatically scale compute resources to meet the needs of your jobs.

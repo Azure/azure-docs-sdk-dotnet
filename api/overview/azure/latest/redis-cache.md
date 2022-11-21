@@ -1,11 +1,14 @@
 ---
-title: Azure Cache for Redis libraries for .NET
-description: Reference for Azure Cache for Redis libraries for .NET
-ms.date: 10/19/2017
+title: Azure Redis Cache SDK for .NET
+description: Reference for Azure Redis Cache SDK for .NET
+author: pallavit
+ms.author: pallavit
+ms.data: 11/21/2022
 ms.topic: reference
-ms.service: cache
+ms.devlang: dotnet
+ms.service: rediscache
+ms.date: 10/19/2017
 ---
-
 # Azure Cache for Redis libraries for .NET
 
 ## Overview

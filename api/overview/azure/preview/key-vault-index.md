@@ -1,0 +1,8 @@
+| Reference | Package | Source |
+|---|---|---|
+|Key Vault - Administration|[Azure.Security.KeyVault.Administration](https://www.nuget.org/packages/Azure.Security.KeyVault.Administration)|[Github](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/keyvault/Azure.Security.KeyVault.Administration)|
+|Key Vault - Certificates|[Azure.Security.KeyVault.Certificates](https://www.nuget.org/packages/Azure.Security.KeyVault.Certificates)|[Github](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/keyvault/Azure.Security.KeyVault.Certificates)|
+|Key Vault - Keys|[Azure.Security.KeyVault.Keys](https://www.nuget.org/packages/Azure.Security.KeyVault.Keys)|[Github](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/keyvault/Azure.Security.KeyVault.Keys)|
+|Key Vault - Secrets|[Azure.Security.KeyVault.Secrets](https://www.nuget.org/packages/Azure.Security.KeyVault.Secrets)|[Github](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/keyvault/Azure.Security.KeyVault.Secrets)|
+|Resource Management - Key Vault|[Azure.ResourceManager.KeyVault](https://www.nuget.org/packages/Azure.ResourceManager.KeyVault)|[Github](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/keyvault/Azure.ResourceManager.KeyVault)|
+|Management - Key Vault|[Microsoft.Azure.Management.KeyVault](https://www.nuget.org/packages/Microsoft.Azure.Management.KeyVault)|[Github](https://github.com/Azure/azure-sdk-for-net)|

@@ -1,11 +1,14 @@
 ---
-title: Azure Notification Hubs libraries for .NET
-description: Reference for Azure Notification Hubs libraries for .NET
-ms.date: 10/19/2017
+title: Azure Notification Hubs SDK for .NET
+description: Reference for Azure Notification Hubs SDK for .NET
+author: pallavit
+ms.author: pallavit
+ms.data: 11/21/2022
 ms.topic: reference
-ms.service: notification-hubs
+ms.devlang: dotnet
+ms.service: notificationhubs
+ms.date: 10/19/2017
 ---
-
 # Azure Notification Hubs libraries for .NET
 
 Azure Notification Hubs provide an easy-to-use, multi-platform, scaled-out push engine. With a single cross-platform API call, you can easily send targeted and personalized push notifications to any mobile platform from any cloud or on-premises backend.

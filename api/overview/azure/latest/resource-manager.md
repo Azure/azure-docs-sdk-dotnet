@@ -1,11 +1,14 @@
 ---
-title: Azure Resource Manager libraries for .NET
-description: Reference for Azure Resource Manager libraries for .NET
-ms.date: 10/19/2017
+title: Azure Resource Manager SDK for .NET
+description: Reference for Azure Resource Manager SDK for .NET
+author: pallavit
+ms.author: pallavit
+ms.data: 11/21/2022
 ms.topic: reference
-ms.service: multiple
+ms.devlang: dotnet
+ms.service: resourcemanager
+ms.date: 10/19/2017
 ---
-
 # Azure Resource Manager libraries for .NET
 
 ## Overview

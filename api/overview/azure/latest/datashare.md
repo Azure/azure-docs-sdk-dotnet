@@ -1,13 +1,14 @@
 ---
-title: Azure Data Share libraries for .NET
-description: Reference for Azure Data Share libraries for .NET
-author: zachcmadsen
-ms.author: t-zamads
-ms.date: 07/19/2019
+title: Azure DataShare SDK for .NET
+description: Reference for Azure DataShare SDK for .NET
+author: pallavit
+ms.author: pallavit
+ms.data: 11/21/2022
 ms.topic: reference
-ms.service: data-share
+ms.devlang: dotnet
+ms.service: datashare
+ms.date: 07/19/2019
 ---
-
 # Azure Data Share libraries for .NET
 
 ## Overview

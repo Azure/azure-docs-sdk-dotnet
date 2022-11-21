@@ -1,11 +1,14 @@
 ---
-title: Azure Mixed Reality Resource Management libraries for .NET
-description: Reference for Azure Mixed Reality Resource Management Libraries for .NET
-ms.date: 10/09/2019
+title: Azure Mixed Reality SDK for .NET
+description: Reference for Azure Mixed Reality SDK for .NET
+author: pallavit
+ms.author: pallavit
+ms.data: 11/21/2022
 ms.topic: reference
-ms.service: mixed-reality
+ms.devlang: dotnet
+ms.service: mixedreality
+ms.date: 10/09/2019
 ---
-
 # Azure Mixed Reality Resource Management Libraries for .NET
 
 ## Overview

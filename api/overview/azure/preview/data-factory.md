@@ -1,11 +1,14 @@
 ---
-title: Azure Data Factory libraries for .NET
-description: Reference for Azure Data Factory libraries for .NET
-ms.date: 10/19/2017
+title: Azure Data Factory SDK for .NET
+description: Reference for Azure Data Factory SDK for .NET
+author: pallavit
+ms.author: pallavit
+ms.data: 11/21/2022
 ms.topic: reference
-ms.service: data-factory
+ms.devlang: dotnet
+ms.service: datafactory
+ms.date: 10/19/2017
 ---
-
 # Azure Data Factory libraries for .NET
 
 ## Overview
