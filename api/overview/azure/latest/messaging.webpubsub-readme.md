@@ -3,12 +3,12 @@ title: Azure Web PubSub service client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Messaging.WebPubSub, webpubsub
 author: vicancy
 ms.author: lianwei
-ms.date: 11/07/2022
+ms.date: 11/21/2022
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: webpubsub
 ---
-# Azure Web PubSub service client library for .NET - version 1.2.0 
+# Azure Web PubSub service client library for .NET - version 1.3.0 
 
 
 [Azure Web PubSub Service](https://aka.ms/awps/doc) is an Azure-managed service that helps developers easily build web applications with real-time features and publish-subscribe pattern. Any scenario that requires real-time publish-subscribe messaging between server and clients or among clients can use Azure Web PubSub service. Traditional real-time features that often require polling from server or submitting HTTP requests can also use Azure Web PubSub service.
@@ -27,7 +27,7 @@ Use this library to:
 
 Details about the terms used here are described in [Key concepts](#key-concepts) section.
 
-[Source code](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.WebPubSub_1.2.0/sdk/webpubsub/Azure.Messaging.WebPubSub/src) |
+[Source code](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.WebPubSub_1.3.0/sdk/webpubsub/Azure.Messaging.WebPubSub/src) |
 [Package](https://www.nuget.org/packages/Azure.Messaging.WebPubSub) |
 [API reference documentation](https://aka.ms/awps/sdk/csharp) |
 [Product documentation](https://aka.ms/awps/doc) |
@@ -81,7 +81,19 @@ When a client is connected, it can send messages to the upstream application, or
 
 ## Examples
 
-### Broadcast a text message to all clients
+### Generate the full URI containing access token for the connection to use when connects the Azure Web PubSub
+
+```C# Snippet:GetClientAccessUri
+// Generate client access URI for userA
+serviceClient.GetClientAccessUri(userId: "userA");
+// Generate client access URI with initial permissions
+serviceClient.GetClientAccessUri(roles: new string[] { "webpubsub.joinLeaveGroup.group1", "webpubsub.sendToGroup.group1" });
+// Generate client access URI with initial groups to join when the connection connects
+serviceClient.GetClientAccessUri(groups: new string[] { "group1", "group2" });
+```
+
+### Send messages to the connections
+#### Broadcast a text message to all clients
 
 ```C# Snippet:WebPubSubHelloWorld
 var serviceClient = new WebPubSubServiceClient(connectionString, "some_hub");
@@ -89,7 +101,7 @@ var serviceClient = new WebPubSubServiceClient(connectionString, "some_hub");
 serviceClient.SendToAll("Hello World!");
 ```
 
-### Broadcast a JSON message to all clients
+#### Broadcast a JSON message to all clients
 
 ```C# Snippet:WebPubSubSendJson
 var serviceClient = new WebPubSubServiceClient(connectionString, "some_hub");
@@ -103,7 +115,7 @@ serviceClient.SendToAll(RequestContent.Create(
         ContentType.ApplicationJson);
 ```
 
-### Broadcast a binary message to all clients
+#### Broadcast a binary message to all clients
 
 ```C# Snippet:WebPubSubSendBinary
 var serviceClient = new WebPubSubServiceClient(connectionString, "some_hub");
@@ -112,11 +124,59 @@ Stream stream = BinaryData.FromString("Hello World!").ToStream();
 serviceClient.SendToAll(RequestContent.Create(stream), ContentType.ApplicationOctetStream);
 ```
 
+#### Broadcast messages to clients using filter
+Azure Web PubSub supports OData filter syntax to filter out the connections to send messages to.
+
+Details about `filter` syntax please see [OData filter syntax for Azure Web PubSub](https://aka.ms/awps/filter-syntax).
+
+```C# Snippet:WebPubSubSendWithFilter
+var serviceClient = new WebPubSubServiceClient(connectionString, "some_hub");
+
+// Use filter to send text message to anonymous connections
+serviceClient.SendToAll(
+        RequestContent.Create("Hello World!"),
+        ContentType.TextPlain,
+        filter: ClientConnectionFilter.Create($"userId eq {null}"));
+
+// Use filter to send JSON message to connections in groupA but not in groupB
+var group1 = "GroupA";
+var group2 = "GroupB";
+serviceClient.SendToAll(RequestContent.Create(
+        new
+        {
+            Foo = "Hello World!",
+            Bar = 42
+        }),
+        ContentType.ApplicationJson,
+        filter: ClientConnectionFilter.Create($"{group1} in groups and not({group2} in groups)"));
+```
+
+### Connection management
+
+#### Add connections for some user to some group:
+```C# Snippet:WebPubSubAddUserToGroup
+client.AddUserToGroup("some_group", "some_user");
+
+// Avoid sending messages to users who do not exist.
+if (client.UserExists("some_user").Value)
+{
+    client.SendToUser("some_user", "Hi, I am glad you exist!");
+}
+
+client.RemoveUserFromGroup("some_group", "some_user");
+```
+
+#### Remove connection from all groups
+```C# Snippet:WebPubSubRemoveConnectionFromAllGroups
+var client = new WebPubSubServiceClient(connectionString, "some_hub");
+client.RemoveConnectionFromAllGroups("some_connection");
+```
+
 ## Troubleshooting
 
 ### Setting up console logging
 
-You can also easily [enable console logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.WebPubSub_1.2.0/sdk/core/Azure.Core/samples/Diagnostics.md#logging) if you want to dig deeper into the requests you're making against the service.
+You can also easily [enable console logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.WebPubSub_1.3.0/sdk/core/Azure.Core/samples/Diagnostics.md#logging) if you want to dig deeper into the requests you're making against the service.
 
 ## Next steps
 
@@ -142,6 +202,6 @@ For more information see the [Code of Conduct FAQ](https://opensource.microsoft.
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Ftemplate%2FAzure.Template%2FREADME.png)
 
 [azure_sub]: https://azure.microsoft.com/free/dotnet/
-[samples_ref]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.WebPubSub_1.2.0/sdk/webpubsub/Azure.Messaging.WebPubSub/tests/Samples/
+[samples_ref]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.WebPubSub_1.3.0/sdk/webpubsub/Azure.Messaging.WebPubSub/tests/Samples/
 [awps_sample]: https://github.com/Azure/azure-webpubsub/tree/main/samples/csharp
 
