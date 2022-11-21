@@ -56,7 +56,7 @@ fabricClient.ApplicationManager.CreateApplicationAsync(appDesc).Wait();
 ```
 
 > [!div class="nextstepaction"]
-> [Explore the client APIs](/dotnet/api/overview/azure/servicefabric/client)
+> [Explore the client APIs](/dotnet/api/system.fabric.fabricclient)
 
 This example uses the Service Fabric **runtime** and **common** APIs from within a hosted application to update a [Reliable Collection](/azure/service-fabric/service-fabric-reliable-services-reliable-collections) at runtime.
 
