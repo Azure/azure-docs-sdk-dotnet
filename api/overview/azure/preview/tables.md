@@ -1,9 +1,9 @@
 ---
-title: Azure Tables SDK for .NET
-description: Reference for Azure Tables SDK for .NET
+title: Azure tables SDK for .NET
+description: Reference for Azure tables SDK for .NET
 author: christothes
 ms.author: chriss
-ms.data: 11/21/2022
+ms.data: 11/22/2022
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: tables
