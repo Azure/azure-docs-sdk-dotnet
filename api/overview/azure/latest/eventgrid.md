@@ -3,7 +3,7 @@ title: Azure eventgrid SDK for .NET
 description: Reference for Azure eventgrid SDK for .NET
 author: Kishp01
 ms.author: kishp
-ms.data: 11/22/2022
+ms.data: 11/23/2022
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: eventgrid

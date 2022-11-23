@@ -3,7 +3,7 @@ title: Azure Resource Graph SDK for .NET
 description: Reference for Azure Resource Graph SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 11/22/2022
+ms.data: 11/23/2022
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: resourcegraph
