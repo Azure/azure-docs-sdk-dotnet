@@ -3,7 +3,7 @@ title: Azure PowerBI Dedicated SDK for .NET
 description: Reference for Azure PowerBI Dedicated SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 11/23/2022
+ms.data: 11/24/2022
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: powerbidedicated
