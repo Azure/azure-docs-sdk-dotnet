@@ -3,7 +3,7 @@ title: Azure ConfidentialLedger SDK for .NET
 description: Reference for Azure ConfidentialLedger SDK for .NET
 author: christothes
 ms.author: chriss
-ms.data: 11/28/2022
+ms.data: 11/29/2022
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: confidentialledger
