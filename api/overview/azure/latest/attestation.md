@@ -3,7 +3,7 @@ title: Azure Attestation SDK for .NET
 description: Reference for Azure Attestation SDK for .NET
 author: anilba06
 ms.author: anilba
-ms.data: 11/29/2022
+ms.data: 11/30/2022
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: attestation
