@@ -1,9 +1,9 @@
 ---
-title: Azure Cdn SDK for .NET
-description: Reference for Azure Cdn SDK for .NET
+title: Azure CDN SDK for .NET
+description: Reference for Azure CDN SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 11/30/2022
+ms.data: 12/01/2022
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: cdn
