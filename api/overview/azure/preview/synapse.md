@@ -3,7 +3,7 @@ title: Azure Synapse SDK for .NET
 description: Reference for Azure Synapse SDK for .NET
 author: wonner
 ms.author: wanyang
-ms.data: 12/02/2022
+ms.data: 12/05/2022
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: synapse

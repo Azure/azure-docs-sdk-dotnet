@@ -3,7 +3,7 @@ title: Azure IoT Plug and Play SDK for .NET
 description: Reference for Azure IoT Plug and Play SDK for .NET
 author: drwill-ms
 ms.author: drwill
-ms.data: 12/02/2022
+ms.data: 12/05/2022
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: iotplugandplay
