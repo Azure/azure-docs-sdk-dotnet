@@ -3,7 +3,7 @@ title: Azure Monitor SDK for .NET
 description: Reference for Azure Monitor SDK for .NET
 author: SameergMS
 ms.author: sameerg
-ms.data: 12/05/2022
+ms.data: 12/06/2022
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: monitor

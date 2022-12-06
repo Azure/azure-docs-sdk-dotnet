@@ -3,7 +3,7 @@ title: Azure Data Explorer SDK for .NET
 description: Reference for Azure Data Explorer SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 12/05/2022
+ms.data: 12/06/2022
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: dataexplorer
