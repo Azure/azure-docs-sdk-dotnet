@@ -1,9 +1,9 @@
 ---
-title: Azure Storsimple SDK for .NET
-description: Reference for Azure Storsimple SDK for .NET
+title: Azure StorSimple SDK for .NET
+description: Reference for Azure StorSimple SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 12/06/2022
+ms.data: 12/07/2022
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: storsimple

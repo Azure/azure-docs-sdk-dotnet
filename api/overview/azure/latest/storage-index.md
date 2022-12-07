@@ -5,7 +5,6 @@
 |[Storage - Common](storage.common-readme.md)|[Azure.Storage.Common](https://www.nuget.org/packages/Azure.Storage.Common)|[Github](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/storage/Azure.Storage.Common)|
 |[Storage - Files Shares](storage.files.shares-readme.md)|[Azure.Storage.Files.Shares](https://www.nuget.org/packages/Azure.Storage.Files.Shares)|[Github](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/storage/Azure.Storage.Files.Shares)|
 |[Storage - Queues](storage.queues-readme.md)|[Azure.Storage.Queues](https://www.nuget.org/packages/Azure.Storage.Queues)|[Github](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/storage/Azure.Storage.Queues)|
-|Key Vault - Core|[Microsoft.Azure.KeyVault.Core](https://www.nuget.org/packages/Microsoft.Azure.KeyVault.Core)|[Github](https://github.com/Azure/azure-sdk-for-net)|
 |Storage - Blobs|[Microsoft.Azure.Storage.Blob](https://www.nuget.org/packages/Microsoft.Azure.Storage.Blob)|[Github](https://github.com/Azure/azure-sdk-for-net)|
 |Storage - Data Movement|[Microsoft.Azure.Storage.DataMovement](https://www.nuget.org/packages/Microsoft.Azure.Storage.DataMovement)|[Github](https://github.com/Azure/azure-sdk-for-net)|
 |Storage - Files Shares|[Microsoft.Azure.Storage.File](https://www.nuget.org/packages/Microsoft.Azure.Storage.File)|[Github](https://github.com/Azure/azure-sdk-for-net)|
