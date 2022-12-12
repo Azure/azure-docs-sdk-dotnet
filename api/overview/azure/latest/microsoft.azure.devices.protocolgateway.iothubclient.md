@@ -3,7 +3,7 @@ title: Azure Microsoft.Azure.Devices.ProtocolGateway.IotHubClient SDK for .NET
 description: Reference for Azure Microsoft.Azure.Devices.ProtocolGateway.IotHubClient SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 12/09/2022
+ms.data: 12/12/2022
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: microsoft.azure.devices.protocolgateway.iothubclient
