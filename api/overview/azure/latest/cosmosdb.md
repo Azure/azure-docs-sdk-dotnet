@@ -49,7 +49,7 @@ using (CosmosClient cosmosClient = new CosmosClient("endpoint", "primaryKey"))
 ```
 
 > [!div class="nextstepaction"]
-> [Explore the client APIs](/dotnet/api/overview/azure/cosmosdb/client)
+> [Explore the client APIs](/dotnet/api/overview/azure/cosmosdb/documentdb)
 
 ## Samples
 
