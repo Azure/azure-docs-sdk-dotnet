@@ -3,7 +3,7 @@ title: Azure Healthcare APIs SDK for .NET
 description: Reference for Azure Healthcare APIs SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 12/14/2022
+ms.data: 12/15/2022
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: healthcareapis
