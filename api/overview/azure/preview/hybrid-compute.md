@@ -3,7 +3,7 @@ title: Azure Hybrid Compute SDK for .NET
 description: Reference for Azure Hybrid Compute SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 12/15/2022
+ms.data: 12/16/2022
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: hybridcompute
