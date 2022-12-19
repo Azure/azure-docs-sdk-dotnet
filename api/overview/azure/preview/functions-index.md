@@ -1,7 +1,3 @@
 | Reference | Package | Source |
 |---|---|---|
 |Functions extension for Authentication Events|[Microsoft.Azure.WebJobs.Extensions.AuthenticationEvents](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.AuthenticationEvents)|[Github](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/entra/Microsoft.Azure.WebJobs.Extensions.AuthenticationEvents)|
-|Functions extension for Event Grid|[Microsoft.Azure.WebJobs.Extensions.EventGrid](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.EventGrid)|[Github](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/eventgrid/Microsoft.Azure.WebJobs.Extensions.EventGrid)|
-|Functions extension for SignalR Service|[Microsoft.Azure.WebJobs.Extensions.SignalRService](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.SignalRService)|[Github](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/signalr/Microsoft.Azure.WebJobs.Extensions.SignalRService)|
-|Functions extension for Azure Tables|[Microsoft.Azure.WebJobs.Extensions.Tables](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.Tables)|[Github](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/tables/Microsoft.Azure.WebJobs.Extensions.Tables)|
-|Functions extension for Web PubSub|[Microsoft.Azure.WebJobs.Extensions.WebPubSub](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.WebPubSub)|[Github](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/webpubsub/Microsoft.Azure.WebJobs.Extensions.WebPubSub)|
