@@ -38,6 +38,7 @@
     <AssemblyVersion>4.47.2.0</AssemblyVersion>
     <AssemblyVersion>4.48.0.0</AssemblyVersion>
     <AssemblyVersion>4.48.1.0</AssemblyVersion>
+    <AssemblyVersion>4.49.1.0</AssemblyVersion>
   </AssemblyInfo>
   <Interfaces />
   <Docs>
@@ -91,6 +92,7 @@
         <AssemblyVersion>4.47.2.0</AssemblyVersion>
         <AssemblyVersion>4.48.0.0</AssemblyVersion>
         <AssemblyVersion>4.48.1.0</AssemblyVersion>
+        <AssemblyVersion>4.49.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -101,13 +103,19 @@
       <Docs>
         <param name="adalV3State">Byte stream representation of the cache</param>
         <summary>
-            Deserializes the token cache to the ADAL.NET 3.x cache format.
-            If you need to maintain SSO between an application using ADAL 3.x and this application using MSAL 3.x or later,
-            you might also want to serialize and deserialize with <see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.SerializeAdalV3" />/<see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.DeserializeAdalV3(System.Byte[])" />,
-            otherwise just use <see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.SerializeMsalV3" />/<see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.DeserializeMsalV3(System.Byte[],System.Boolean)" />.
+            Deserializes a part of the token cache - the refresh tokens - to the ADAL.NET 3.x cache format.         
+            This API should only be used to maintain SSO between an application using ADAL 3.x and this application using MSAL 3.x or later.
+            Use <see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.SerializeAdalV3" />/<see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.DeserializeAdalV3(System.Byte[])" /> in addition to <see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.SerializeMsalV3" />/<see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.DeserializeMsalV3(System.Byte[],System.Boolean)" />.
+            
+            See https://aka.ms/adal-to-msal-net/cache for details on how to use this advanced API correctly.
             </summary>
         <remarks>
-          <see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.SerializeMsalV3" />/<see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.DeserializeMsalV3(System.Byte[],System.Boolean)" /> is compatible with other MSAL libraries such as MSAL for Python and MSAL for Java.
+            Do not use <see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.SerializeAdalV3" />/<see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.DeserializeAdalV3(System.Byte[])" /> without also using <see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.SerializeMsalV3" />/<see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.DeserializeMsalV3(System.Byte[],System.Boolean)" />, 
+            because only refresh tokens are exported in this format. Your applications will not cache access token and id tokens, 
+            and will instead need to get them from the identity provider (AAD), which will eventually throttle you.
+            Later versions of ADAL (4.x and 5.x) use the same cache format as MSAL.
+            Only <see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.SerializeMsalV3" />/<see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.DeserializeMsalV3(System.Byte[],System.Boolean)" /> is compatible with other MSAL libraries such as MSAL for Python and MSAL for Java.
+            ADAL to MSAL cache interop is only available for public client scenarios and for web site scenario. 
             </remarks>
       </Docs>
     </Member>
@@ -152,6 +160,7 @@
         <AssemblyVersion>4.47.2.0</AssemblyVersion>
         <AssemblyVersion>4.48.0.0</AssemblyVersion>
         <AssemblyVersion>4.48.1.0</AssemblyVersion>
+        <AssemblyVersion>4.49.1.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -223,6 +232,7 @@
         <AssemblyVersion>4.47.2.0</AssemblyVersion>
         <AssemblyVersion>4.48.0.0</AssemblyVersion>
         <AssemblyVersion>4.48.1.0</AssemblyVersion>
+        <AssemblyVersion>4.49.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -291,6 +301,7 @@
         <AssemblyVersion>4.47.2.0</AssemblyVersion>
         <AssemblyVersion>4.48.0.0</AssemblyVersion>
         <AssemblyVersion>4.48.1.0</AssemblyVersion>
+        <AssemblyVersion>4.49.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Byte[]</ReturnType>
@@ -298,15 +309,21 @@
       <Parameters />
       <Docs>
         <summary>
-            Serializes the token cache to the ADAL.NET 3.x cache format.
-            If you need to maintain SSO between an application using ADAL 3.x and this application using MSAL 3.x or later,
-            you might also want to serialize and deserialize with <see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.SerializeAdalV3" />/<see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.DeserializeAdalV3(System.Byte[])" />,
-            otherwise just use <see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.SerializeMsalV3" />/<see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.DeserializeMsalV3(System.Byte[],System.Boolean)" />.
-            </summary>
+             Serializes a part of the token cache - the refresh tokens - to the ADAL.NET 3.x cache format. 
+             If you need to maintain SSO between an application using ADAL 3.x and this application using MSAL 3.x or later,
+             use <see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.SerializeAdalV3" />/<see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.DeserializeAdalV3(System.Byte[])" /> in adition to <see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.SerializeMsalV3" />/<see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.DeserializeMsalV3(System.Byte[],System.Boolean)" />.
+            
+             See https://aka.ms/adal-to-msal-net/cache for details on how to use this advanced API correctly.
+             </summary>
         <returns>Byte stream representation of the cache</returns>
         <remarks>
-          <see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.SerializeMsalV3" />/<see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.DeserializeMsalV3(System.Byte[],System.Boolean)" /> is compatible with other MSAL libraries such as MSAL for Python and MSAL for Java.
-            </remarks>
+             Do not use <see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.SerializeAdalV3" />/<see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.DeserializeAdalV3(System.Byte[])" /> without also using <see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.SerializeMsalV3" />/<see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.DeserializeMsalV3(System.Byte[],System.Boolean)" />, 
+             because only refresh tokens are exported in this format. Your applications will not cache access token and id tokens, 
+             and will instead need to get them from the identity provider (AAD), which will eventually throttle you.
+             Later versions of ADAL (4.x and 5.x) use the same cache format as MSAL.
+             Only <see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.SerializeMsalV3" />/<see cref="M:Microsoft.Identity.Client.ITokenCacheSerializer.DeserializeMsalV3(System.Byte[],System.Boolean)" /> is compatible with other MSAL libraries such as MSAL for Python and MSAL for Java.
+             ADAL to MSAL cache interop is only available for public client scenarios and for web site scenario. 
+             </remarks>
       </Docs>
     </Member>
     <Member MemberName="SerializeMsalV2">
@@ -350,6 +367,7 @@
         <AssemblyVersion>4.47.2.0</AssemblyVersion>
         <AssemblyVersion>4.48.0.0</AssemblyVersion>
         <AssemblyVersion>4.48.1.0</AssemblyVersion>
+        <AssemblyVersion>4.49.1.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -419,6 +437,7 @@
         <AssemblyVersion>4.47.2.0</AssemblyVersion>
         <AssemblyVersion>4.48.0.0</AssemblyVersion>
         <AssemblyVersion>4.48.1.0</AssemblyVersion>
+        <AssemblyVersion>4.49.1.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Byte[]</ReturnType>
