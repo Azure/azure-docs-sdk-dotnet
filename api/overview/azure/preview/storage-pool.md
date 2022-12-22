@@ -3,7 +3,7 @@ title: Azure Storage Pool SDK for .NET
 description: Reference for Azure Storage Pool SDK for .NET
 author: seanmcc-msft
 ms.author: seanmcc
-ms.data: 12/21/2022
+ms.data: 12/22/2022
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: storagepool
