@@ -3,7 +3,7 @@ title: Azure Dns Resolver SDK for .NET
 description: Reference for Azure Dns Resolver SDK for .NET
 author: dnssuppgithub
 ms.author: dnssuppgithub
-ms.data: 12/26/2022
+ms.data: 12/27/2022
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: dnsresolver
