@@ -1,9 +1,9 @@
 ---
-title: Azure PostgreSQL SDK for .NET
-description: Reference for Azure PostgreSQL SDK for .NET
+title: Azure PostgreSql SDK for .NET
+description: Reference for Azure PostgreSql SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 01/03/2023
+ms.data: 01/04/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: postgresql
