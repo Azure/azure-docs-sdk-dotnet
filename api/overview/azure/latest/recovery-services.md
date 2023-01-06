@@ -1,11 +1,14 @@
 ---
-title: Azure Recovery Services and Backup libraries for .NET
-description: Reference for Azure Recovery Services and Backup libraries for .NET
-ms.date: 10/19/2017
+title: Azure Recovery Services SDK for .NET
+description: Reference for Azure Recovery Services SDK for .NET
+author: pallavit
+ms.author: pallavit
+ms.data: 01/06/2023
 ms.topic: reference
-ms.service: backup
+ms.devlang: dotnet
+ms.service: recoveryservices
+ms.date: 10/19/2017
 ---
-
 # Azure Recovery Services and Backup libraries for .NET
 
 ## Overview

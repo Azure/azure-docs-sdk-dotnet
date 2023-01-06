@@ -3,7 +3,7 @@ title: Azure Search SDK for .NET
 description: Reference for Azure Search SDK for .NET
 author: ShivangiReja
 ms.author: shreja
-ms.data: 01/05/2023
+ms.data: 01/06/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: search

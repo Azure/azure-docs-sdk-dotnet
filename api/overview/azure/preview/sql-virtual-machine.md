@@ -1,9 +1,9 @@
 ---
-title: Azure Sql Virtual Machine SDK for .NET
-description: Reference for Azure Sql Virtual Machine SDK for .NET
+title: Azure SQL Virtual Machine SDK for .NET
+description: Reference for Azure SQL Virtual Machine SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 01/05/2023
+ms.data: 01/06/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: sqlvirtualmachine

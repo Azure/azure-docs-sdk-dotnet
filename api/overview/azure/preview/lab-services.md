@@ -3,7 +3,7 @@ title: Azure Lab Services SDK for .NET
 description: Reference for Azure Lab Services SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 01/05/2023
+ms.data: 01/06/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: labservices

@@ -10,4 +10,4 @@
 |Key Vault - WebKey|[Microsoft.Azure.KeyVault.WebKey](https://www.nuget.org/packages/Microsoft.Azure.KeyVault.WebKey)|[Github](https://github.com/Azure/azure-sdk-for-net)|
 |[Resource Management - Key Vault](resourcemanager.keyvault-readme.md)|[Azure.ResourceManager.KeyVault](https://www.nuget.org/packages/Azure.ResourceManager.KeyVault)|[Github](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/keyvault/Azure.ResourceManager.KeyVault)|
 |Management - Key Vault|[Microsoft.Azure.Management.KeyVault](https://www.nuget.org/packages/Microsoft.Azure.Management.KeyVault)|[Github](https://github.com/Azure/azure-sdk-for-net)|
-|Management - Key Vault  Fluent|[Microsoft.Azure.Management.KeyVault.Fluent](https://www.nuget.org/packages/Microsoft.Azure.Management.KeyVault.Fluent)|[Github](https://github.com/Azure/azure-sdk-for-net)|
+|Management - Key Vault Fluent|[Microsoft.Azure.Management.KeyVault.Fluent](https://www.nuget.org/packages/Microsoft.Azure.Management.KeyVault.Fluent)|[Github](https://github.com/Azure/azure-sdk-for-net)|
