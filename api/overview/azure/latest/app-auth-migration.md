@@ -12,18 +12,18 @@ ms.prod: azure
 
 # AppAuthentication to Azure.Identity Migration Guidance
 
-When the [Microsoft.Azure.Services.AppAuthentication](service-to-service-authentication.md) was first released in fall 2017, it was specifically designed to help mitigate the common and systemic issue of credentials in source code. It introduced a [new paradigm for app development](https://azure.microsoft.com/blog/the-green-team-solves-high-risk-systemic-security-issues-for-azure/) that allowed developers to write code once and let `AppAuthentication` client library determine how to authenticate based on the application environment - whether
+When the [Microsoft.Azure.Services.AppAuthentication library](service-to-service-authentication.md) was first released in fall 2017, it was specifically designed to help mitigate the common and systemic issue of credentials in source code. It introduced a [new paradigm for app development](https://azure.microsoft.com/blog/the-green-team-solves-high-risk-systemic-security-issues-for-azure/) that allowed developers to write code once and let `AppAuthentication` client library determine how to authenticate based on the application environment - whether
 on a developer workstation using a developer's account or deployed in Azure using a managed service identity. Developers could completely avoid directly handling credentials, both simplifying development and improving security by preventing credentials from being accidentally disclosed in source code. Given its simplicity and security benefits,
-`AppAuthentication` has been well received by developers. The [NuGet](https://www.nuget.org/packages/Microsoft.Azure.Services.AppAuthentication) currently has over 27 million downloads and counting, and it is being used in other libraries and frameworks for Azure services, such as the [Azure Key Vault Configuration Provider in .NET
+`AppAuthentication` was well received by developers. The [NuGet](https://www.nuget.org/packages/Microsoft.Azure.Services.AppAuthentication) received over 160 million downloads, and it was used in other libraries and frameworks for Azure services, such as the [Azure Key Vault Configuration Provider in .NET
 Core](https://docs.microsoft.com/aspnet/core/security/key-vault-configuration?view=aspnetcore-3.1&preserve-view=true)
 and the [Microsoft.Azure.ServiceBus](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/servicebus/Microsoft.Azure.ServiceBus) SDK.
 
-Released in fall 2019, the new [Azure.Identity client library](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/identity/Azure.Identity) can be considered the spiritual successor to the `AppAuthentication` library. Azure.Identity has a major advantage over `AppAuthentication` with its broader availability in multiple languages that provide consistent design and similar usage across these languages, whereas `AppAuthentication` is only available for .NET. In addition to its support of multiple languages, one key design feature of Azure.Identity is its various implementations of the abstract TokenCredential class, of which [newer Azure client SDKs
+Released in fall 2019, the [Azure.Identity client library](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/identity/Azure.Identity) is the spiritual successor to the `AppAuthentication` library. Azure.Identity has a major advantage over `AppAuthentication` with its broader availability in multiple languages that provide consistent design and similar usage across these languages, whereas `AppAuthentication` was only available for .NET. In addition to its support of multiple languages, one key design feature of Azure.Identity is its various implementations of the abstract TokenCredential class, of which [newer Azure client SDKs
 accept](https://azure.github.io/azure-sdk/releases/latest/dotnet.html). These newer Azure SDKs are easily distinguished by package names and namespaces that start with "Azure", i.e. "Azure.Identity", "Azure.Storage.Blobs". To authenticate, the desired type of TokenCredential object is instantiated and simply passed directly to the
 Azure SDK client class. This design gives using Azure.Identity an additional security benefit over using AppAuthentication and older SDKs that require specifying the access token because access tokens do not
 need to be directly handled by the application itself. This mitigates the additional risk of access tokens being accidentally disclosed through traces, logs, and other sources.
 
-If you are starting development of a new application, it is strongly recommended to use `Azure.Identity` and the new Azure client SDKs. If you have an existing application that uses AppAuthentication and want to use Azure.Identity, the preferred path is to update your application to use the new Azure client SDKs that support accepting TokenCredentials. Over time, as developers' usage of Azure.Identity grows and as developers continue to migrate existing applications to Azure.Identity, further investment in AppAuthentication will be reduced. Eventually, the library will be deprecated. Using the `DefaultAzureCredential` in `Azure.Identity` will provide similar functionality to
+If you are starting development of a new application, it is strongly recommended to use `Azure.Identity` and the new Azure client SDKs. If you have an existing application that uses AppAuthentication and want to use Azure.Identity, the preferred path is to update your application to use the new Azure client SDKs that support accepting TokenCredentials. AppAuthentication is now considered deprecated and there will be no further investment in its development. Using the `DefaultAzureCredential` in `Azure.Identity` will provide similar functionality to
 `AzureServiceTokenProvider` in `AppAuthentication`, where the authentication provider used will change based on the current environment. If you are using an `AppAuthentication` connection string for a specific authentication provider using `AppAuthentication`, please see the below table to see how to use the same authentication provider by creating the appropriate TokenCredential in Azure.Identity.
 
 
@@ -51,7 +51,7 @@ While Azure.Identity supports most authentication scenarios and providers that A
 -   System.Data.SqlClient.SqlAuthenticationProvider implementation
     (SqlAppAuthenticationProvider)
 
-    -   For Microsoft.Data.SqlClient, see [Active Directory Default authentication](https://learn.microsoft.com/sql/connect/ado-net/sql/azure-active-directory-authentication#using-active-directory-default-authentication). This authentication mode provides similar functionality where DefaultAzureCredential is used to obtain access token for authentication to SQL instance
+    -   For Microsoft.Data.SqlClient, see [Active Directory Default authentication](https://learn.microsoft.com/sql/connect/ado-net/sql/azure-active-directory-authentication#using-active-directory-default-authentication). This authentication mode provides similar functionality where DefaultAzureCredential is used to obtain access token for authentication to SQL instances.
 
 -   Directly use certificates in cert store as client credential (using subject name or thumbprint identifier)
 
@@ -59,7 +59,7 @@ While Azure.Identity supports most authentication scenarios and providers that A
 
 -   Change authentication provider with environment config (i.e. connection strings in AppAuthentication)
 
-    -   Limited support in Azure.Identity with DefaultAzureCredential and EnvironmentCredential, see [environment variables](https://learn.microsoft.com/dotnet/api/overview/azure/identity-readme#environment-variables)
+    -   Limited support in Azure.Identity with DefaultAzureCredential and EnvironmentCredential, see [environment variables](https://learn.microsoft.comdotnet/api/overview/azure/identity-readme#environment-variables)
 
 -   Determine auth provider and identity used for environment-based authentication (i.e. AzureServiceTokenProvider.PrincipalUsed property)
 
@@ -130,4 +130,5 @@ var accessToken = await tokenCredential.GetTokenAsync(
 );
 ```
 
-Note: More information on the `.default` scope can be found [here](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-permissions-and-consent#the-default-scope).
+> [!NOTE]
+More information on the `.default` scope can be found [here](https://learn.microsoft.com/azure/active-directory/develop/scopes-oidc#the-default-scope).
