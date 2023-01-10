@@ -29,7 +29,7 @@ If you are starting development of a new application, it is strongly recommended
 
 |Auth Provider|AppAuthentication<br>Connection String|Azure.Identity<br>TokenCredential|
 |---------|---------|---------|
-|Default / environment-based | Default - no connection string used | new DefaultAzureCredential()*|
+|(Default) environment-based | Default - no connection string used | new DefaultAzureCredential()*|
 |Azure CLI| RunAs=Developer;<br>DeveloperTool=AzureCli|new AzureCliCredential()|
 |Visual Studio|RunAs=Developer; DeveloperTool=VisualStudio|new VisualStudioCredential()|
 |Windows Integrated Authentication|RunAs=CurrentUser| No support|
@@ -42,7 +42,7 @@ If you are starting development of a new application, it is strongly recommended
 
 > [!NOTE]
 > `*` Authentication providers and order is different between [AzureServiceTokenProvider](https://github.com/Azure/azure-sdk-for-net/blob/7d23a9d912da40baeebee1125eb5ebefa78449a2/sdk/mgmtcommon/AppAuthentication/Azure.Services.AppAuthentication/AzureServiceTokenProvider.cs#L104) and [DefaultAzureCredential](https://docs.microsoft.com/dotnet/api/overview/azure/identity-readme#defaultazurecredential)<br>
-> `**` Need to set [environment variables](https://learn.microsoft.com/en-us/dotnet/api/overview/azure/identity-readme#environment-variables)
+> `**` Need to set [environment variables](https://learn.microsoft.com/dotnet/api/overview/azure/identity-readme#environment-variables)
 
 While Azure.Identity supports most authentication scenarios and providers that AppAuthentication has, there are some scenarios and features that are currently not supported:
 
@@ -51,7 +51,7 @@ While Azure.Identity supports most authentication scenarios and providers that A
 -   System.Data.SqlClient.SqlAuthenticationProvider implementation
     (SqlAppAuthenticationProvider)
 
-    -   For Microsoft.Data.SqlClient, see [Active Directory Default authentication](https://learn.microsoft.com/en-us/sql/connect/ado-net/sql/azure-active-directory-authentication#using-active-directory-default-authentication). This authentication mode provides similar functionality where DefaultAzureCredential is used to obtain access token for authentication to SQL instance
+    -   For Microsoft.Data.SqlClient, see [Active Directory Default authentication](https://learn.microsoft.com/sql/connect/ado-net/sql/azure-active-directory-authentication#using-active-directory-default-authentication). This authentication mode provides similar functionality where DefaultAzureCredential is used to obtain access token for authentication to SQL instance
 
 -   Directly use certificates in cert store as client credential (using subject name or thumbprint identifier)
 
@@ -59,11 +59,11 @@ While Azure.Identity supports most authentication scenarios and providers that A
 
 -   Change authentication provider with environment config (i.e. connection strings in AppAuthentication)
 
-    -   Limited support in Azure.Identity with DefaultAzureCredential and EnvironmentCredential, see [environment variables](https://learn.microsoft.com/en-us/dotnet/api/overview/azure/identity-readme#environment-variables)
+    -   Limited support in Azure.Identity with DefaultAzureCredential and EnvironmentCredential, see [environment variables](https://learn.microsoft.com/dotnet/api/overview/azure/identity-readme#environment-variables)
 
 -   Determine auth provider and identity used for environment-based authentication (i.e. AzureServiceTokenProvider.PrincipalUsed property)
 
-    - Can determine auth provider used with DefaultAzureCredential in Azure.Identity using [AzureEventSourceListener](https://learn.microsoft.com/en-us/dotnet/api/azure.core.diagnostics.azureeventsourcelistener)
+    - Can determine auth provider used with DefaultAzureCredential in Azure.Identity using [AzureEventSourceListener](https://learn.microsoft.com/dotnet/api/azure.core.diagnostics.azureeventsourcelistener)
 
 Below are some examples of migrating from an older Azure client SDK using AppAuthentication to the newer version of the Azure client SDK using Azure.Identity. The code using Azure.Identity is more often than not going to be much more straightforward and simple than the AppAuthentication code
 
