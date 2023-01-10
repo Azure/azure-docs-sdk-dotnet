@@ -131,4 +131,4 @@ var accessToken = await tokenCredential.GetTokenAsync(
 ```
 
 > [!NOTE]
-More information on the `.default` scope can be found [here](https://learn.microsoft.com/azure/active-directory/develop/scopes-oidc#the-default-scope).
+> More information on the `.default` scope can be found [here](https://learn.microsoft.com/azure/active-directory/develop/scopes-oidc#the-default-scope).
