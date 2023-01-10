@@ -59,7 +59,7 @@ While Azure.Identity supports most authentication scenarios and providers that A
 
 -   Change authentication provider with environment config (i.e. connection strings in AppAuthentication)
 
-    -   Limited support in Azure.Identity with DefaultAzureCredential and EnvironmentCredential, see [environment variables](https://learn.microsoft.com/en-us/dotnet/api/overview/azure/identity-readme#environment-variables)
+    -   Limited support in Azure.Identity with DefaultAzureCredential and EnvironmentCredential, see [environment variables](https://learn.microsoft.com/dotnet/api/overview/azure/identity-readme#environment-variables)
 
 -   Determine auth provider and identity used for environment-based authentication (i.e. AzureServiceTokenProvider.PrincipalUsed property)
 
