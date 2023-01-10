@@ -63,7 +63,7 @@ While Azure.Identity supports most authentication scenarios and providers that A
 
 -   Determine auth provider and identity used for environment-based authentication (i.e. AzureServiceTokenProvider.PrincipalUsed property)
 
-    - Can determine auth provider used with DefaultAzureCredential in Azure.Identity using [AzureEventSourceListener](https://learn.microsoft.com/en-us/dotnet/api/azure.core.diagnostics.azureeventsourcelistener)
+    - Can determine auth provider used with DefaultAzureCredential in Azure.Identity using [AzureEventSourceListener](https://learn.microsoft.com/dotnet/api/azure.core.diagnostics.azureeventsourcelistener)
 
 Below are some examples of migrating from an older Azure client SDK using AppAuthentication to the newer version of the Azure client SDK using Azure.Identity. The code using Azure.Identity is more often than not going to be much more straightforward and simple than the AppAuthentication code
 
