@@ -29,7 +29,7 @@ If you are starting development of a new application, it is strongly recommended
 
 |Auth Provider|AppAuthentication<br>Connection String|Azure.Identity<br>TokenCredential|
 |---------|---------|---------|
-|Default - environment-based | Default - no connection string used | new DefaultAzureCredential()*|
+|Default / environment-based | Default - no connection string used | new DefaultAzureCredential()*|
 |Azure CLI| RunAs=Developer;<br>DeveloperTool=AzureCli|new AzureCliCredential()|
 |Visual Studio|RunAs=Developer; DeveloperTool=VisualStudio|new VisualStudioCredential()|
 |Windows Integrated Authentication|RunAs=CurrentUser| No support|
@@ -42,7 +42,7 @@ If you are starting development of a new application, it is strongly recommended
 
 > [!NOTE]
 > `*` Authentication providers and order is different between [AzureServiceTokenProvider](https://github.com/Azure/azure-sdk-for-net/blob/7d23a9d912da40baeebee1125eb5ebefa78449a2/sdk/mgmtcommon/AppAuthentication/Azure.Services.AppAuthentication/AzureServiceTokenProvider.cs#L104) and [DefaultAzureCredential](https://docs.microsoft.com/dotnet/api/overview/azure/identity-readme#defaultazurecredential)<br>
-> `**` Need to set [environment variables](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/identity/Azure.Identity#environment-variables)
+> `**` Need to set [environment variables](https://learn.microsoft.com/en-us/dotnet/api/overview/azure/identity-readme#environment-variables)
 
 While Azure.Identity supports most authentication scenarios and providers that AppAuthentication has, there are some scenarios and features that are currently not supported:
 
@@ -51,35 +51,38 @@ While Azure.Identity supports most authentication scenarios and providers that A
 -   System.Data.SqlClient.SqlAuthenticationProvider implementation
     (SqlAppAuthenticationProvider)
 
+    -   For Microsoft.Data.SqlClient, see [Active Directory Default authentication](https://learn.microsoft.com/en-us/sql/connect/ado-net/sql/azure-active-directory-authentication#using-active-directory-default-authentication). This authentication mode provides similar functionality where DefaultAzureCredential is used to obtain access token for authentication to SQL instance
+
 -   Directly use certificates in cert store as client credential (using subject name or thumbprint identifier)
 
 -   Directly use certificates in Key Vault as client credential (using Key Vault certificate secret identifier)
 
 -   Change authentication provider with environment config (i.e. connection strings in AppAuthentication)
 
-    -   Limited support in Azure.Identity with EnvironmentCredential
+    -   Limited support in Azure.Identity with DefaultAzureCredential and EnvironmentCredential, see [environment variables](https://learn.microsoft.com/en-us/dotnet/api/overview/azure/identity-readme#environment-variables)
 
 -   Determine auth provider and identity used for environment-based authentication (i.e. AzureServiceTokenProvider.PrincipalUsed property)
+
+    - Can determine auth provider used with DefaultAzureCredential in Azure.Identity using [AzureEventSourceListener](https://learn.microsoft.com/en-us/dotnet/api/azure.core.diagnostics.azureeventsourcelistener)
 
 Below are some examples of migrating from an older Azure client SDK using AppAuthentication to the newer version of the Azure client SDK using Azure.Identity. The code using Azure.Identity is more often than not going to be much more straightforward and simple than the AppAuthentication code
 
 **Microsoft.Azure.KeyVault to Azure.Security.KeyVault:**
 
 * Using `AppAuthentication` library
+
 ```csharp
 AzureServiceTokenProvider tokenProvider = new AzureServiceTokenProvider();
-
 var client = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(tokenProvider.KeyVaultTokenCallback));
-
 var secretBundle = await client.GetSecretAsync("https://keyvaultname.vault.azure.net/secrets/secretname");
 
 Console.WriteLine(secretBundle.Value);
 ```
 
 * Using `Azure.Identity` library
+
 ```csharp
 var client = new SecretClient(new Uri("https://keyvaultname.vault.azure.net"), new DefaultAzureCredential());
-
 var secret = client.GetSecret("secretName").Value;
 
 Console.WriteLine(secret.Value);
@@ -91,37 +94,30 @@ Console.WriteLine(secret.Value);
 
 ```csharp
 var tokenProvider = new AzureServiceTokenProvider();
-
 var accessToken = await tokenProvider.GetAccessTokenAsync("https://storageaccountname.queue.core.windows.net");
 
 var tokenCredential = new StorageTokenCredential(accessToken);
-
 var storageCredentials = new StorageCredentials(tokenCredential);
 
 var uri = new StorageUri(new Uri("https://storageaccountname.queue.core.windows.net"));
-
 var client = new CloudQueueClient(uri, storageCredentials);
 
 var queue = client.GetQueueReference("queuename");
-
 queue.AddMessage(new CloudQueueMessage("Microsoft.Azure.Storage.Queues"));
 ```
 
 * Using `Azure.Identity` library
 ```csharp
-QueueClient queueClient = new QueueClient(new Uri("https://storageaccountname.queue.core.windows.net/queuename"),new DefaultAzureCredential());
-
+QueueClient queueClient = new QueueClient(new Uri("https://storageaccountname.queue.core.windows.net/queuename"), new DefaultAzureCredential());
 queueClient.SendMessage("Azure.Storage.Queues");
 ```
 
-
-**Access token retrival**
+**Access token retrieval**
 
 * Using `AppAuthentication` library
 
 ```csharp
 var tokenProvider = new AzureServiceTokenProvider();
-
 var accessToken = await tokenProvider.GetAccessTokenAsync(ResourceId);
 ```
 
