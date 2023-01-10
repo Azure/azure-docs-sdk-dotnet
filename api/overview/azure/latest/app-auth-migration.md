@@ -42,7 +42,7 @@ If you are starting development of a new application, it is strongly recommended
 
 > [!NOTE]
 > `*` Authentication providers and order is different between [AzureServiceTokenProvider](https://github.com/Azure/azure-sdk-for-net/blob/7d23a9d912da40baeebee1125eb5ebefa78449a2/sdk/mgmtcommon/AppAuthentication/Azure.Services.AppAuthentication/AzureServiceTokenProvider.cs#L104) and [DefaultAzureCredential](https://docs.microsoft.com/dotnet/api/overview/azure/identity-readme#defaultazurecredential)<br>
-> `**` Need to set [environment variables](https://learn.microsoft.com/en-us/dotnet/api/overview/azure/identity-readme#environment-variables)
+> `**` Need to set [environment variables](https://learn.microsoft.com/dotnet/api/overview/azure/identity-readme#environment-variables)
 
 While Azure.Identity supports most authentication scenarios and providers that AppAuthentication has, there are some scenarios and features that are currently not supported:
 
