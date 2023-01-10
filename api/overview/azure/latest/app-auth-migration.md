@@ -29,7 +29,7 @@ If you are starting development of a new application, it is strongly recommended
 
 |Auth Provider|AppAuthentication<br>Connection String|Azure.Identity<br>TokenCredential|
 |---------|---------|---------|
-|Default / environment-based | Default - no connection string used | new DefaultAzureCredential()*|
+|(Default) environment-based | Default - no connection string used | new DefaultAzureCredential()*|
 |Azure CLI| RunAs=Developer;<br>DeveloperTool=AzureCli|new AzureCliCredential()|
 |Visual Studio|RunAs=Developer; DeveloperTool=VisualStudio|new VisualStudioCredential()|
 |Windows Integrated Authentication|RunAs=CurrentUser| No support|
