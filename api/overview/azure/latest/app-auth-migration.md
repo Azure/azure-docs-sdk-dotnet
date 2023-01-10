@@ -51,7 +51,7 @@ While Azure.Identity supports most authentication scenarios and providers that A
 -   System.Data.SqlClient.SqlAuthenticationProvider implementation
     (SqlAppAuthenticationProvider)
 
-    -   For Microsoft.Data.SqlClient, see [Active Directory Default authentication](https://learn.microsoft.com/en-us/sql/connect/ado-net/sql/azure-active-directory-authentication#using-active-directory-default-authentication). This authentication mode provides similar functionality where DefaultAzureCredential is used to obtain access token for authentication to SQL instance
+    -   For Microsoft.Data.SqlClient, see [Active Directory Default authentication](https://learn.microsoft.com/sql/connect/ado-net/sql/azure-active-directory-authentication#using-active-directory-default-authentication). This authentication mode provides similar functionality where DefaultAzureCredential is used to obtain access token for authentication to SQL instance
 
 -   Directly use certificates in cert store as client credential (using subject name or thumbprint identifier)
 
