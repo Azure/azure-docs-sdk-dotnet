@@ -3,14 +3,12 @@ title: Azure WebJobs SignalR Service client library for .NET
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebJobs.Extensions.SignalRService, signalr
 author: sffamily
 ms.author: zhshang
-ms.date: 04/07/2022
+ms.date: 01/12/2023
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: signalr
 ---
-# Azure WebJobs SignalR Service client library for .NET - version 1.8.0 
+# Azure WebJobs SignalR Service client library for .NET - version 1.9.0 
 
 
 This extension provides functionality for accessing [Azure SignalR Service](https://aka.ms/signalr_service) from an Azure Function.
@@ -33,14 +31,15 @@ dotnet add package Microsoft.Azure.WebJobs.Extensions.SignalRService
 
     To quickly create the needed SignalR resource in Azure and to receive a connection string for them, you can deploy our sample template by clicking:
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3a%2f%2fraw.githubusercontent.com%2fAzure%2fazure-quickstart-templates%2fmaster%2fquickstarts%2fmicrosoft.signalrservice%2fsignalr%2fazuredeploy.json)
+    [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3a%2f%2fraw.githubusercontent.com%2fAzure%2fazure-quickstart-templates%2fmaster%2fquickstarts%2fmicrosoft.signalrservice%2fsignalr%2fazuredeploy.json)
 
     After the instance is deployed, open it in the portal and locate its Settings page. Change the Service Mode setting to *Serverless*.
 
+    ![SignalR Service mode setting](images/signalr-service-mode.png)
 
 ### Authenticate the client
 
-In order for SignalR Service client to access SignalR resource, it will need to understand how to authenticate with it. The easiest means for doing so is to use a connection string which can be found in the [Azure Portal](https://portal.azure.com/) or by using the [Azure CLI](https://docs.microsoft.com/cli/azure) / [Azure PowerShell](https://docs.microsoft.com/powershell/azure/) snippet below.
+In order for SignalR Service client to access SignalR resource, it will need to understand how to authenticate with it. The easiest means for doing so is to use a connection string which can be found in the [Azure Portal](https://portal.azure.com/) or by using the [Azure CLI](/cli/azure) / [Azure PowerShell](/powershell/azure/) snippet below.
 
 Azure CLI snippet:
 ```bash
@@ -64,7 +63,7 @@ For local development, use the `local.settings.json` file to store the connectio
 }
 ```
 
-When deployed, use the [application settings](https://docs.microsoft.com/azure/azure-functions/functions-how-to-use-azure-function-app-settings) to set the connection string.
+When deployed, use the [application settings](/azure/azure-functions/functions-how-to-use-azure-function-app-settings) to set the connection string.
 
 <!--TODO#### Identity-based Will reference a ms doc link once it is ready-->
 
@@ -75,13 +74,13 @@ SignalR **Service** client
 : It means this library. It provides *SignalR server* functionalities in a serverless style.
 
 SignalR client
-: An opposite concept of *SignalR server*. See [ASP.NET Core SignalR clients](https://docs.microsoft.com/aspnet/core/signalr/client-features) for more information.
+: An opposite concept of *SignalR server*. See [ASP.NET Core SignalR clients](/aspnet/core/signalr/client-features) for more information.
 
 ### SignalR connection info input binding
 
 `SignalRConnectionInfo` input binding makes it easy to generate the token required for SignalR clients to initiate a connection to Azure SignalR Service.
 
-Please follow the [Azure SignalR Connection Info input binding tutorial](https://docs.microsoft.com/azure/azure-functions/functions-bindings-signalr-service-input?tabs=csharp) to learn more about SignalR Connection Info input binding.
+Please follow the [Azure SignalR Connection Info input binding tutorial](/azure/azure-functions/functions-bindings-signalr-service-input?tabs=csharp) to learn more about SignalR Connection Info input binding.
 
 ### SignalR output binding
 
@@ -89,19 +88,19 @@ Please follow the [Azure SignalR Connection Info input binding tutorial](https:/
 * send messages to all connections, to a connection, to a user, to a group.
 * add/remove connections/users in a group.
 
-Please follow the [Azure SignalR output binding](https://docs.microsoft.com/azure/azure-functions/functions-bindings-signalr-service-output?tabs=csharp) to learn more about SignalR output binding.
+Please follow the [Azure SignalR output binding](/azure/azure-functions/functions-bindings-signalr-service-output?tabs=csharp) to learn more about SignalR output binding.
 
 ### SignalR trigger
 
 The SignalR trigger allows a function to be executed when a message is sent to Azure SignalR Service.
 
-Please follow the [Azure SignalR trigger](https://docs.microsoft.com/azure/azure-functions/functions-bindings-signalr-service-trigger?tabs=csharp) to learn more about SignalR trigger.
+Please follow the [Azure SignalR trigger](/azure/azure-functions/functions-bindings-signalr-service-trigger?tabs=csharp) to learn more about SignalR trigger.
 
 ## Supported scenarios
 - Negotiate for a SignalR client.
 - Manage group like add/remove a single user/connection in a group.
 - Send messages to a single user/connection, to a group, to all users/connections.
-- Use multiple Azure SignalR Service instances for resiliency and disaster recovery in Azure Functions. See details in [Multiple Azure SignalR Service Instances Support in Azure Functions](https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.WebJobs.Extensions.SignalRService_1.8.0/sdk/signalr/Microsoft.Azure.WebJobs.Extensions.SignalRService/docs/sharding.md).
+- Use multiple Azure SignalR Service instances for resiliency and disaster recovery in Azure Functions. See details in [Multiple Azure SignalR Service Instances Support in Azure Functions](https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.WebJobs.Extensions.SignalRService_1.9.0/sdk/signalr/Microsoft.Azure.WebJobs.Extensions.SignalRService/docs/sharding.md).
 
 ## Examples
 
@@ -217,12 +216,12 @@ public static void Run([SignalRTrigger("SignalRTest", "messages", "SendMessage")
 
 ## Troubleshooting
 
-* Please refer to [Monitor Azure Functions](https://docs.microsoft.com/azure/azure-functions/functions-monitoring) for function troubleshooting guidance.
-* [Troubleshooting guide for Azure SignalR Service](https://docs.microsoft.com/azure/azure-signalr/signalr-howto-troubleshoot-guide)
+* Please refer to [Monitor Azure Functions](/azure/azure-functions/functions-monitoring) for function troubleshooting guidance.
+* [Troubleshooting guide for Azure SignalR Service](/azure/azure-signalr/signalr-howto-troubleshoot-guide)
 
 ## Next steps
 
-Read the [introduction to Azure Functions](https://docs.microsoft.com/azure/azure-functions/functions-overview) or [creating an Azure Function guide](https://docs.microsoft.com/azure/azure-functions/functions-create-first-azure-function)
+Read the [introduction to Azure Functions](/azure/azure-functions/functions-overview) or [creating an Azure Function guide](/azure/azure-functions/functions-create-first-azure-function)
 
 ## Contributing
 
@@ -244,7 +243,7 @@ additional questions or comments.
 <!-- LINKS -->
 [nuget]: https://www.nuget.org/
 
-[contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.SignalRService_1.8.0/CONTRIBUTING.md
+[contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.SignalRService_1.9.0/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
