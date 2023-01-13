@@ -3,7 +3,7 @@ title: Azure Storage Sync SDK for .NET
 description: Reference for Azure Storage Sync SDK for .NET
 author: seanmcc-msft
 ms.author: seanmcc
-ms.data: 01/11/2023
+ms.data: 01/12/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: storagesync

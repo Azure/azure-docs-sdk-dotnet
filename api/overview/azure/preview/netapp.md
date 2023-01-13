@@ -3,7 +3,7 @@ title: Azure NetApp SDK for .NET
 description: Reference for Azure NetApp SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 01/11/2023
+ms.data: 01/12/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: netapp

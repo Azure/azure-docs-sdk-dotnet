@@ -3,7 +3,7 @@ title: Azure IoT Hub Device Provisioning SDK for .NET
 description: Reference for Azure IoT Hub Device Provisioning SDK for .NET
 author: drwill-ms
 ms.author: drwill
-ms.data: 01/11/2023
+ms.data: 01/12/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: iothubdeviceprovisioning
