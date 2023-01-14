@@ -3,7 +3,7 @@ title: Azure Cosmos DB SDK for .NET
 description: Reference for Azure Cosmos DB SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 01/12/2023
+ms.data: 01/13/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: cosmosdb

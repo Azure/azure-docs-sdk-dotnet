@@ -3,7 +3,7 @@ title: Azure Microsoft.Azure.Devices.ProtocolGateway.Providers.CloudStorage SDK 
 description: Reference for Azure Microsoft.Azure.Devices.ProtocolGateway.Providers.CloudStorage SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 01/12/2023
+ms.data: 01/13/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: microsoft.azure.devices.protocolgateway.providers.cloudstorage
