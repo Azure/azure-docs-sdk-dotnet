@@ -8,6 +8,6 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: machinelearning
 ---
-# Azure Machine Learning SDK for .NET - preview
-## Packages - preview
+# Azure Machine Learning SDK for .NET - latest
+## Packages - latest
 [!INCLUDE [packages](machine-learning-index.md)]
