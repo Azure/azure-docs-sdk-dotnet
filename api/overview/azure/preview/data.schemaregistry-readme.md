@@ -1,17 +1,14 @@
 ---
 title: Azure Schema Registry client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Data.SchemaRegistry, schemaregistry
-author: ramya-rao-a
-ms.author: ramyar
-ms.date: 10/06/2021
+author: jsquire
+ms.author: jsquire
+ms.date: 01/17/2023
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: schemaregistry
 ---
-
-# Azure Schema Registry client library for .NET - version 1.0.0-beta.4 
+# Azure Schema Registry client library for .NET - version 1.4.0-beta.1 
 
 
 Azure Schema Registry is a schema repository service hosted by Azure Event Hubs, providing schema storage, versioning, and management. The registry is leveraged by serializers to reduce payload size while describing payload structure with schema identifiers rather than full schemas.
@@ -23,7 +20,7 @@ Azure Schema Registry is a schema repository service hosted by Azure Event Hubs,
 Install the Azure Schema Registry client library for .NET with [NuGet][nuget]:
 
 ```dotnetcli
-dotnet add package --prerelease Azure.Data.SchemaRegistry
+dotnet add package Azure.Data.SchemaRegistry
 ```
 
 ### Prerequisites
@@ -58,7 +55,7 @@ Once you have the Azure resource credentials and the Event Hubs namespace hostna
 ```C# Snippet:SchemaRegistryCreateSchemaRegistryClient
 // Create a new SchemaRegistry client using the default credential from Azure.Identity using environment variables previously set,
 // including AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, and AZURE_TENANT_ID.
-// For more information on Azure.Identity usage, see: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.0.0-beta.4/sdk/identity/Azure.Identity/README.md
+// For more information on Azure.Identity usage, see: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.4.0-beta.1/sdk/identity/Azure.Identity/README.md
 var client = new SchemaRegistryClient(fullyQualifiedNamespace: fullyQualifiedNamespace, credential: new DefaultAzureCredential());
 ```
 
@@ -81,12 +78,12 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.0.0-beta.4/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.0.0-beta.4/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.0.0-beta.4/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.0.0-beta.4/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.0.0-beta.4/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.0.0-beta.4/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.4.0-beta.1/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.4.0-beta.1/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.4.0-beta.1/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.4.0-beta.1/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.4.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.4.0-beta.1/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
@@ -105,8 +102,8 @@ Register a schema to be stored in the Azure Schema Registry.
 ```C# Snippet:SchemaRegistryRegisterSchema
 string name = "employeeSample";
 SchemaFormat format = SchemaFormat.Avro;
-// Example schema's content
-string content = @"
+// Example schema's definition
+string definition = @"
 {
    ""type"" : ""record"",
     ""namespace"" : ""TestSchema"",
@@ -117,7 +114,7 @@ string content = @"
     ]
 }";
 
-Response<SchemaProperties> schemaProperties = client.RegisterSchema(groupName, name, content, format);
+Response<SchemaProperties> schemaProperties = client.RegisterSchema(groupName, name, definition, format);
 ```
 
 ### Retrieve a schema ID
@@ -145,11 +142,16 @@ string schemaId = schemaProperties.Id;
 
 ### Retrieve a schema
 
-Retrieve a previously registered schema's content from the Azure Schema Registry.
+Retrieve a previously registered schema's content from the Azure Schema Registry with either a schema ID or the group name, schema name, and version.
 
 ```C# Snippet:SchemaRegistryRetrieveSchema
 SchemaRegistrySchema schema = client.GetSchema(schemaId);
-string content = schema.Content;
+string definition = schema.Definition;
+```
+
+```C# Snippet:SchemaRegistryRetrieveSchemaVersion
+SchemaRegistrySchema schema = client.GetSchema(groupName, name, version);
+string definition = schema.Definition;
 ```
 
 ## Troubleshooting
@@ -172,13 +174,13 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 
 <!-- LINKS -->
 [nuget]: https://www.nuget.org/
-[event_hubs_namespace]: https://docs.microsoft.com/azure/event-hubs/event-hubs-about
-[azure_powershell]: https://docs.microsoft.com/powershell/azure/
-[create_event_hubs_namespace]: https://docs.microsoft.com/azure/event-hubs/event-hubs-quickstart-powershell#create-an-event-hubs-namespace
-[quickstart_guide]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.0.0-beta.4/doc/mgmt_preview_quickstart.md
-[schema_registry_client]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.0.0-beta.4/sdk/schemaregistry/Azure.Data.SchemaRegistry/src/SchemaRegistryClient.cs
+[event_hubs_namespace]: /azure/event-hubs/event-hubs-about
+[azure_powershell]: /powershell/azure/
+[create_event_hubs_namespace]: /azure/event-hubs/event-hubs-quickstart-powershell#create-an-event-hubs-namespace
+[quickstart_guide]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.4.0-beta.1/doc/dev/mgmt_quickstart.md
+[schema_registry_client]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.4.0-beta.1/sdk/schemaregistry/Azure.Data.SchemaRegistry/src/SchemaRegistryClient.cs
 [azure_portal]: https://ms.portal.azure.com/
-[schema_properties]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.0.0-beta.4/sdk/schemaregistry/Azure.Data.SchemaRegistry/src/SchemaProperties.cs
+[schema_properties]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Data.SchemaRegistry_1.4.0-beta.1/sdk/schemaregistry/Azure.Data.SchemaRegistry/src/SchemaProperties.cs
 [azure_identity]: https://www.nuget.org/packages/Azure.Identity
 [cla]: https://cla.microsoft.com
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
