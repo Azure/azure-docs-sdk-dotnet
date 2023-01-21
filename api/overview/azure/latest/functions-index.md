@@ -1,8 +1,5 @@
 | Reference | Package | Source |
 |---|---|---|
-|Functions extension for Durable Task Framework|[Microsoft.Azure.WebJobs.Extensions.DurableTask](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.DurableTask)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
-|Functions extension for Blob Storage|[Microsoft.Azure.WebJobs.Extensions.Storage.Blobs](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.Storage.Blobs)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/storage/Microsoft.Azure.WebJobs.Extensions.Storage.Blobs)|
-|Functions extension for Storage Queues|[Microsoft.Azure.WebJobs.Extensions.Storage.Queues](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.Storage.Queues)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/storage/Microsoft.Azure.WebJobs.Extensions.Storage.Queues)|
 |WebJobs Extensions - Event Grid|[Microsoft.Azure.WebJobs.Extensions.EventGrid](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.EventGrid)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/eventgrid/Microsoft.Azure.WebJobs.Extensions.EventGrid)|
 |WebJobs Extensions - Event Hubs|[Microsoft.Azure.WebJobs.Extensions.EventHubs](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.EventHubs)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/eventhub/Microsoft.Azure.WebJobs.Extensions.EventHubs)|
 |WebJobs Extensions - Service Bus|[Microsoft.Azure.WebJobs.Extensions.ServiceBus](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.ServiceBus)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/servicebus/Microsoft.Azure.WebJobs.Extensions.ServiceBus)|

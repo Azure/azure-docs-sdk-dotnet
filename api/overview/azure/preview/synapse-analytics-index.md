@@ -5,5 +5,3 @@
 |[Synapse - Managed Private Endpoints](analytics.synapse.managedprivateendpoints-readme.md)|[Azure.Analytics.Synapse.ManagedPrivateEndpoints](https://www.nuget.org/packages/Azure.Analytics.Synapse.ManagedPrivateEndpoints)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |[Synapse - Monitoring](analytics.synapse.monitoring-readme.md)|[Azure.Analytics.Synapse.Monitoring](https://www.nuget.org/packages/Azure.Analytics.Synapse.Monitoring)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |[Synapse - Spark](analytics.synapse.spark-readme.md)|[Azure.Analytics.Synapse.Spark](https://www.nuget.org/packages/Azure.Analytics.Synapse.Spark)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/synapse/Azure.Analytics.Synapse.Spark)|
-|Synapse Analytics|[Microsoft.Azure.Synapse](https://www.nuget.org/packages/Microsoft.Azure.Synapse)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
-|Management - Synapse Analytics|[Microsoft.Azure.Management.Synapse](https://www.nuget.org/packages/Microsoft.Azure.Management.Synapse)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
