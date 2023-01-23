@@ -7,4 +7,6 @@
 |[Data Lake Storage (Gen 2)](storage.files.datalake-readme.md)|[Azure.Storage.Files.DataLake](https://www.nuget.org/packages/Azure.Storage.Files.DataLake)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/storage/Azure.Storage.Files.DataLake)|
 |[File Shares](storage.files.shares-readme.md)|[Azure.Storage.Files.Shares](https://www.nuget.org/packages/Azure.Storage.Files.Shares)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/storage/Azure.Storage.Files.Shares)|
 |[Queues](storage.queues-readme.md)|[Azure.Storage.Queues](https://www.nuget.org/packages/Azure.Storage.Queues)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/storage/Azure.Storage.Queues)|
+|WindowsAzure Storage - Preview|[WindowsAzure.Storage-Preview](https://www.nuget.org/packages/WindowsAzure.Storage-Preview)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
+|WindowsAzure Storage - Table Preview|[WindowsAzure.Storage.Table-Preview](https://www.nuget.org/packages/WindowsAzure.Storage.Table-Preview)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |[Resource Management - Storage](resourcemanager.storage-readme.md)|[Azure.ResourceManager.Storage](https://www.nuget.org/packages/Azure.ResourceManager.Storage)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/storage/Azure.ResourceManager.Storage)|

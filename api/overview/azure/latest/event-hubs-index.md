@@ -6,3 +6,4 @@
 |Event Hubs - Event Processor|[Microsoft.Azure.EventHubs.Processor](https://www.nuget.org/packages/Microsoft.Azure.EventHubs.Processor)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |[Resource Management - Event Hubs](resourcemanager.eventhubs-readme.md)|[Azure.ResourceManager.EventHubs](https://www.nuget.org/packages/Azure.ResourceManager.EventHubs)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/eventhub/Azure.ResourceManager.EventHubs)|
 |Management - Event Hubs|[Microsoft.Azure.Management.EventHub](https://www.nuget.org/packages/Microsoft.Azure.Management.EventHub)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
+|Management - Event Hubs Fluent|[Microsoft.Azure.Management.EventHub.Fluent](https://www.nuget.org/packages/Microsoft.Azure.Management.EventHub.Fluent)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|

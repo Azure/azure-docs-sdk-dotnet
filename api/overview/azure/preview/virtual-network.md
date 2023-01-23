@@ -1,11 +1,14 @@
 ---
-title: Azure Virtual Network libraries for .NET
-description: Reference for Azure Virtual Network libraries for .NET
-ms.date: 10/19/2017
+title: Azure Virtual Network SDK for .NET
+description: Reference for Azure Virtual Network SDK for .NET
+author: pallavit
+ms.author: pallavit
+ms.data: 01/23/2023
 ms.topic: reference
-ms.service: virtual-network
+ms.devlang: dotnet
+ms.service: virtualnetwork
+ms.date: 10/19/2017
 ---
-
 # Azure Virtual Network libraries for .NET
 
 ## Overview
@@ -84,5 +87,4 @@ Explore more [.NET sample code](https://azure.microsoft.com/resources/samples/?p
 
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console 
-[DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package 
-
+[DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
