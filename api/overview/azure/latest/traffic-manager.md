@@ -19,7 +19,7 @@ Learn more about [Azure Traffic Manager](/azure/traffic-manager/traffic-manager-
 
 ## Management library
 
-Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Management.TrafficManager.Fluent) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI]. This package is deprecated. The suggested alternative is [Azure.ResourceManager.TrafficManager](https://www.nuget.org/packages/Azure.ResourceManager.TrafficManager/). For more information refer [this](https://learn.microsoft.com/dotnet/api/overview/azure/resourcemanager.trafficmanager-readme?view=azure-dotnet) article.
+Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Management.TrafficManager.Fluent) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET CLI][DotNetCLI]. This package is deprecated and no longer recommended for use.  The suggested alternative is [Azure.ResourceManager.TrafficManager](https://www.nuget.org/packages/Azure.ResourceManager.TrafficManager/). For more information, refer to [this](https://learn.microsoft.com/dotnet/api/overview/azure/resourcemanager.trafficmanager-readme?view=azure-dotnet) article.
 
 #### Visual Studio Package Manager
 
