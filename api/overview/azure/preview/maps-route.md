@@ -3,7 +3,7 @@ title: Azure Maps Route SDK for .NET
 description: Reference for Azure Maps Route SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 01/25/2023
+ms.data: 01/26/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: mapsroute
