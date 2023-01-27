@@ -2,8 +2,8 @@
 title: Azure IoT SDK for .NET
 description: Reference for Azure IoT SDK for .NET
 author: drwill-ms
-ms.author: drwill
-ms.data: 01/26/2023
+ms.author: drwill-ms
+ms.data: 01/27/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: iot
