@@ -2,8 +2,8 @@
 title: Azure Personalizer SDK for .NET
 description: Reference for Azure Personalizer SDK for .NET
 author: orenmichaely
-ms.author: orenmichaely
-ms.data: 01/27/2023
+ms.author: ormichae
+ms.data: 01/30/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: personalizer

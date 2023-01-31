@@ -2,8 +2,8 @@
 title: Azure IoT Central SDK for .NET
 description: Reference for Azure IoT Central SDK for .NET
 author: drwill-ms
-ms.author: drwill-ms
-ms.data: 01/27/2023
+ms.author: drwill
+ms.data: 01/30/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: iotcentral

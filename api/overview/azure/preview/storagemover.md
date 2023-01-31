@@ -2,8 +2,8 @@
 title: Azure Storagemover SDK for .NET
 description: Reference for Azure Storagemover SDK for .NET
 author: seanmcc-msft
-ms.author: seanmcc-msft
-ms.data: 01/27/2023
+ms.author: seanmcc
+ms.data: 01/30/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: storagemover
