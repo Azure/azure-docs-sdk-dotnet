@@ -3,7 +3,7 @@ title: Azure Batch AI SDK for .NET
 description: Reference for Azure Batch AI SDK for .NET
 author: paterasMSFT
 ms.author: mipatera
-ms.data: 01/30/2023
+ms.data: 01/31/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: batchai
