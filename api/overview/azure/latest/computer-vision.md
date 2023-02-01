@@ -3,7 +3,7 @@ title: Azure Computer Vision SDK for .NET
 description: Reference for Azure Computer Vision SDK for .NET
 author: bilaakpan-ms
 ms.author: saakpan
-ms.data: 01/31/2023
+ms.data: 02/01/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: computervision
