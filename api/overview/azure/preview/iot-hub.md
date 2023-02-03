@@ -3,7 +3,7 @@ title: Azure IoT Hub SDK for .NET
 description: Reference for Azure IoT Hub SDK for .NET
 author: drwill-ms
 ms.author: drwill
-ms.data: 02/02/2023
+ms.data: 02/03/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: iothub
