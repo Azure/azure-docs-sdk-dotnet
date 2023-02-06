@@ -3,30 +3,30 @@ title: Azure Web PubSub client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Messaging.WebPubSub.Client, webpubsub
 author: vicancy
 ms.author: lianwei
-ms.date: 01/11/2023
+ms.date: 02/06/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: webpubsub
 ---
-# Azure Web PubSub client library for .NET - version 1.0.0-beta.1 
+# Azure Web PubSub client library for .NET - version 1.0.0-beta.2 
 
 
-[Azure Web PubSub Service](https://aka.ms/awps/doc) is an Azure-managed service that helps developers easily build web applications with real-time features and publish-subscribe patterns. Any scenario that requires real-time publish-subscribe messaging between server and clients or among clients can use Azure Web PubSub service. Traditional real-time features that often require polling from the server or submitting HTTP requests can also use Azure Web PubSub service.
+[Web PubSub](https://aka.ms/awps/doc) is an Azure-managed service that helps developers easily build web applications with real-time features and publish-subscribe patterns. Any scenario that requires real-time publish-subscribe messaging between server and clients or among clients can use Web PubSub. Traditional real-time features that often require polling from the server or submitting HTTP requests can also use Web PubSub.
 
 You can use this library on your client side to manage the WebSocket client connections, as shown in the below diagram:
 
-![overflow](./samples/media/overview.png)
+![overflow](https://user-images.githubusercontent.com/7847428/215704912-b8a45d17-1f6f-4d26-ba0a-811452de10e1.png)
 
 Use this library to:
 
 - Send messages to groups
-- Send event to event handlers
+- Send events to the [server](https://learn.microsoft.com/azure/azure-web-pubsub/concept-service-internals#terms)
 - Join and leave groups
 - Listen messages from groups and servers
 
 Details about the terms used here are described in [Key concepts](#key-concepts) section.
 
-[Source code](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.WebPubSub.Client_1.0.0-beta.1/sdk/webpubsub/Azure.Messaging.WebPubSub.Client/src) |
+[Source code](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.WebPubSub.Client_1.0.0-beta.2/sdk/webpubsub/Azure.Messaging.WebPubSub.Client/src) |
 [API reference documentation](https://aka.ms/awps/sdk/csharp) |
 [Product documentation](https://aka.ms/awps/doc) |
 
@@ -43,7 +43,7 @@ dotnet add package Azure.Messaging.WebPubSub.Client --prerelease
 ### Prerequisites
 
 - An [Azure subscription][azure_sub].
-- An existing Azure Web PubSub service instance. [Create Azure Web PubSub service instance](https://learn.microsoft.com/azure/azure-web-pubsub/howto-develop-create-instance)
+- An existing Web PubSub instance. [Create Web PubSub instance](https://learn.microsoft.com/azure/azure-web-pubsub/howto-develop-create-instance)
 
 ### Authenticate the client
 
@@ -53,7 +53,7 @@ A Client uses a Client Access URL to connect and authenticate with the service. 
 
 As a quick start, you can go to the Portal and copy the **Client Access URL** from **Key** blade.
 
-![get_client_url](https://learn.microsoft.com/azure/azure-web-pubsub/media/howto-websocket-connect/generate-client-url.png)
+![get_client_url](https://camo.githubusercontent.com/77f1e3e39a5deef7ced866eea73684ecf844f9809dc25111006436a379f8238a/68747470733a2f2f6c6561726e2e6d6963726f736f66742e636f6d2f617a7572652f617a7572652d7765622d7075627375622f6d656469612f686f77746f2d776562736f636b65742d636f6e6e6563742f67656e65726174652d636c69656e742d75726c2e706e67)
 
 As shown in the diagram, the client will be granted permission of sending messages to the specific group and joining the specific group. Learn more about client permission, see [permissions](https://learn.microsoft.com/azure/azure-web-pubsub/reference-json-reliable-webpubsub-subprotocol#permissions)
 
@@ -88,13 +88,13 @@ Features to differentiate `WebPubSubClient` and `WebPubSubServiceClient`.
 |Nuget Package Name|Azure.Messaging.WebPubSub.Client |Azure.Messaging.WebPubSub|
 |Features|Usually used on client side. Publish messages and subscribe to messages.|Usually used on server side. Generate Client Access Uri and manage clients|
 
-Find more details in [Azure.Messaging.WebPubSub](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Messaging.WebPubSub.Client_1.0.0-beta.1/sdk/webpubsub/Azure.Messaging.WebPubSub)
+Find more details in [Azure.Messaging.WebPubSub](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Messaging.WebPubSub.Client_1.0.0-beta.2/sdk/webpubsub/Azure.Messaging.WebPubSub)
 
 ## Key concepts
 
 ### Connection
 
-A connection, also known as a client connection, represents an individual WebSocket connection connected to the Web PubSub service. When successfully connected, the Web PubSub service assigns the connection a unique connection ID. Each `WebPubSubClient` creates its own exclusive connection.
+A connection, also known as a client connection, represents an individual WebSocket connection connected to the Web PubSub. When successfully connected, the Web PubSub assigns the connection a unique connection ID. Each `WebPubSubClient` creates its own exclusive connection.
 
 ### Recovery
 
@@ -106,7 +106,7 @@ Reconnection happens when the client connection drops and fails to recover. Reco
 
 ### Hub
 
-A hub is a logical concept representing a collection of client connections. Usually, you use one hub for one purpose: for example, a chat hub, or a notification hub. When a client connection is created, it connects to a hub, and during its lifetime, it is bound to that hub. Different applications can share one Azure Web PubSub service by using different hub names.
+A hub is a logical concept representing a collection of client connections. Usually, you use one hub for one purpose: for example, a chat hub, or a notification hub. When a client connection is created, it connects to a hub, and during its lifetime, it is bound to that hub. Different applications can share one Web PubSub by using different hub names.
 
 ### Group
 
@@ -227,7 +227,7 @@ catch (SendMessageFailedException ex)
 
 ### Setting up console logging
 
-You can also [enable console logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.WebPubSub.Client_1.0.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md#logging) if you want to dig deeper into the requests you're making against the service.
+You can also [enable console logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.WebPubSub.Client_1.0.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md#logging) if you want to dig deeper into the requests you're making against the service.
 
 ## Next steps
 
