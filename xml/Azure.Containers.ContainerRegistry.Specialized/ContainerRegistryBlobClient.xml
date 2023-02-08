@@ -286,7 +286,11 @@
         <param name="digest">The digest of the blob to download.</param>
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary>
-            Download a blob that is part of an artifact.
+            Download an artifact blob.
+            This API is a prefered way to fetch blobs that can fit into memory.
+            The content is provided as <see cref="T:System.BinaryData" /> that provides a lightweight abstraction for a payload of bytes.
+            It provides convenient helper methods to get out commonly used primitives, such as streams, strings, or bytes.
+            To download a blob that does not fit in memory, please use the <see cref="M:Azure.Containers.ContainerRegistry.Specialized.ContainerRegistryBlobClient.DownloadBlobTo(System.String,System.IO.Stream,System.Threading.CancellationToken)" /> method instead.
             </summary>
         <returns />
         <remarks>To be added.</remarks>
@@ -314,18 +318,83 @@
         <param name="digest">The digest of the blob to download.</param>
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary>
-            Download a blob that is part of an artifact.
+            Download an artifact blob.
+            This API is a prefered way to fetch blobs that can fit into memory.
+            The content is provided as <see cref="T:System.BinaryData" /> that provides a lightweight abstraction for a payload of bytes.
+            It provides convenient helper methods to get out commonly used primitives, such as streams, strings, or bytes.
+            To download a blob that does not fit in memory, please use the <see cref="M:Azure.Containers.ContainerRegistry.Specialized.ContainerRegistryBlobClient.DownloadBlobToAsync(System.String,System.IO.Stream,System.Threading.CancellationToken)" /> method instead.
             </summary>
         <returns />
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
+    <Member MemberName="DownloadBlobTo">
+      <MemberSignature Language="C#" Value="public virtual Azure.Response DownloadBlobTo (string digest, System.IO.Stream destination, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response DownloadBlobTo(string digest, class System.IO.Stream destination, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Containers.ContainerRegistry.Specialized.ContainerRegistryBlobClient.DownloadBlobTo(System.String,System.IO.Stream,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function DownloadBlobTo (digest As String, destination As Stream, Optional cancellationToken As CancellationToken = Nothing) As Response" />
+      <MemberSignature Language="F#" Value="abstract member DownloadBlobTo : string * System.IO.Stream * System.Threading.CancellationToken -&gt; Azure.Response&#xA;override this.DownloadBlobTo : string * System.IO.Stream * System.Threading.CancellationToken -&gt; Azure.Response" Usage="containerRegistryBlobClient.DownloadBlobTo (digest, destination, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Containers.ContainerRegistry</AssemblyName>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Response</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="digest" Type="System.String" />
+        <Parameter Name="destination" Type="System.IO.Stream" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="digest">The digest of the blob to download.</param>
+        <param name="destination">Destination for the downloaded blob.</param>
+        <param name="cancellationToken"> The cancellation token to use. </param>
+        <summary>
+            Download a blob to a passed-in destination stream.
+            </summary>
+        <returns>The raw response corresponding to the final GET blob chunk request.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DownloadBlobToAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; DownloadBlobToAsync (string digest, System.IO.Stream destination, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; DownloadBlobToAsync(string digest, class System.IO.Stream destination, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Containers.ContainerRegistry.Specialized.ContainerRegistryBlobClient.DownloadBlobToAsync(System.String,System.IO.Stream,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function DownloadBlobToAsync (digest As String, destination As Stream, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response)" />
+      <MemberSignature Language="F#" Value="abstract member DownloadBlobToAsync : string * System.IO.Stream * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.DownloadBlobToAsync : string * System.IO.Stream * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="containerRegistryBlobClient.DownloadBlobToAsync (digest, destination, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Containers.ContainerRegistry</AssemblyName>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="digest" Type="System.String" />
+        <Parameter Name="destination" Type="System.IO.Stream" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="digest">The digest of the blob to download.</param>
+        <param name="destination">Destination for the downloaded blob.</param>
+        <param name="cancellationToken"> The cancellation token to use.</param>
+        <summary>
+            Download a blob to a passed-in destination stream.  This approach will download the blob
+            to the destination stream in sequential chunks of bytes.
+            </summary>
+        <returns>The raw response corresponding to the final GET blob chunk request.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="DownloadManifest">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Containers.ContainerRegistry.Specialized.DownloadManifestResult&gt; DownloadManifest (Azure.Containers.ContainerRegistry.Specialized.DownloadManifestOptions options, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Containers.ContainerRegistry.Specialized.DownloadManifestResult&gt; DownloadManifest(class Azure.Containers.ContainerRegistry.Specialized.DownloadManifestOptions options, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Containers.ContainerRegistry.Specialized.ContainerRegistryBlobClient.DownloadManifest(Azure.Containers.ContainerRegistry.Specialized.DownloadManifestOptions,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function DownloadManifest (options As DownloadManifestOptions, Optional cancellationToken As CancellationToken = Nothing) As Response(Of DownloadManifestResult)" />
-      <MemberSignature Language="F#" Value="abstract member DownloadManifest : Azure.Containers.ContainerRegistry.Specialized.DownloadManifestOptions * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Containers.ContainerRegistry.Specialized.DownloadManifestResult&gt;&#xA;override this.DownloadManifest : Azure.Containers.ContainerRegistry.Specialized.DownloadManifestOptions * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Containers.ContainerRegistry.Specialized.DownloadManifestResult&gt;" Usage="containerRegistryBlobClient.DownloadManifest (options, cancellationToken)" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Containers.ContainerRegistry.Specialized.DownloadManifestResult&gt; DownloadManifest (string tagOrDigest, Azure.Containers.ContainerRegistry.Specialized.ManifestMediaType? mediaType = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Containers.ContainerRegistry.Specialized.DownloadManifestResult&gt; DownloadManifest(string tagOrDigest, valuetype System.Nullable`1&lt;valuetype Azure.Containers.ContainerRegistry.Specialized.ManifestMediaType&gt; mediaType, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Containers.ContainerRegistry.Specialized.ContainerRegistryBlobClient.DownloadManifest(System.String,System.Nullable{Azure.Containers.ContainerRegistry.Specialized.ManifestMediaType},System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function DownloadManifest (tagOrDigest As String, Optional mediaType As Nullable(Of ManifestMediaType) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Response(Of DownloadManifestResult)" />
+      <MemberSignature Language="F#" Value="abstract member DownloadManifest : string * Nullable&lt;Azure.Containers.ContainerRegistry.Specialized.ManifestMediaType&gt; * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Containers.ContainerRegistry.Specialized.DownloadManifestResult&gt;&#xA;override this.DownloadManifest : string * Nullable&lt;Azure.Containers.ContainerRegistry.Specialized.ManifestMediaType&gt; * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Containers.ContainerRegistry.Specialized.DownloadManifestResult&gt;" Usage="containerRegistryBlobClient.DownloadManifest (tagOrDigest, mediaType, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Containers.ContainerRegistry</AssemblyName>
@@ -335,11 +404,13 @@
         <ReturnType>Azure.Response&lt;Azure.Containers.ContainerRegistry.Specialized.DownloadManifestResult&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="options" Type="Azure.Containers.ContainerRegistry.Specialized.DownloadManifestOptions" />
+        <Parameter Name="tagOrDigest" Type="System.String" />
+        <Parameter Name="mediaType" Type="System.Nullable&lt;Azure.Containers.ContainerRegistry.Specialized.ManifestMediaType&gt;" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="options">Options for the operation.</param>
+        <param name="tagOrDigest">The tag or digest of the manifest to download.</param>
+        <param name="mediaType">The media type of the manifest to download.  If not specified, all media types will be requested.</param>
         <param name="cancellationToken">The cancellation token to use.</param>
         <summary>
             Downloads the manifest for an OCI artifact.
@@ -349,11 +420,11 @@
       </Docs>
     </Member>
     <Member MemberName="DownloadManifestAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Containers.ContainerRegistry.Specialized.DownloadManifestResult&gt;&gt; DownloadManifestAsync (Azure.Containers.ContainerRegistry.Specialized.DownloadManifestOptions options, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Containers.ContainerRegistry.Specialized.DownloadManifestResult&gt;&gt; DownloadManifestAsync(class Azure.Containers.ContainerRegistry.Specialized.DownloadManifestOptions options, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Containers.ContainerRegistry.Specialized.ContainerRegistryBlobClient.DownloadManifestAsync(Azure.Containers.ContainerRegistry.Specialized.DownloadManifestOptions,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function DownloadManifestAsync (options As DownloadManifestOptions, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of DownloadManifestResult))" />
-      <MemberSignature Language="F#" Value="abstract member DownloadManifestAsync : Azure.Containers.ContainerRegistry.Specialized.DownloadManifestOptions * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Containers.ContainerRegistry.Specialized.DownloadManifestResult&gt;&gt;&#xA;override this.DownloadManifestAsync : Azure.Containers.ContainerRegistry.Specialized.DownloadManifestOptions * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Containers.ContainerRegistry.Specialized.DownloadManifestResult&gt;&gt;" Usage="containerRegistryBlobClient.DownloadManifestAsync (options, cancellationToken)" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Containers.ContainerRegistry.Specialized.DownloadManifestResult&gt;&gt; DownloadManifestAsync (string tagOrDigest, Azure.Containers.ContainerRegistry.Specialized.ManifestMediaType? mediaType = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Containers.ContainerRegistry.Specialized.DownloadManifestResult&gt;&gt; DownloadManifestAsync(string tagOrDigest, valuetype System.Nullable`1&lt;valuetype Azure.Containers.ContainerRegistry.Specialized.ManifestMediaType&gt; mediaType, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Containers.ContainerRegistry.Specialized.ContainerRegistryBlobClient.DownloadManifestAsync(System.String,System.Nullable{Azure.Containers.ContainerRegistry.Specialized.ManifestMediaType},System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function DownloadManifestAsync (tagOrDigest As String, Optional mediaType As Nullable(Of ManifestMediaType) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of DownloadManifestResult))" />
+      <MemberSignature Language="F#" Value="abstract member DownloadManifestAsync : string * Nullable&lt;Azure.Containers.ContainerRegistry.Specialized.ManifestMediaType&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Containers.ContainerRegistry.Specialized.DownloadManifestResult&gt;&gt;&#xA;override this.DownloadManifestAsync : string * Nullable&lt;Azure.Containers.ContainerRegistry.Specialized.ManifestMediaType&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Containers.ContainerRegistry.Specialized.DownloadManifestResult&gt;&gt;" Usage="containerRegistryBlobClient.DownloadManifestAsync (tagOrDigest, mediaType, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Containers.ContainerRegistry</AssemblyName>
@@ -363,11 +434,13 @@
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Containers.ContainerRegistry.Specialized.DownloadManifestResult&gt;&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="options" Type="Azure.Containers.ContainerRegistry.Specialized.DownloadManifestOptions" />
+        <Parameter Name="tagOrDigest" Type="System.String" />
+        <Parameter Name="mediaType" Type="System.Nullable&lt;Azure.Containers.ContainerRegistry.Specialized.ManifestMediaType&gt;" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="options">Options for the download operation.</param>
+        <param name="tagOrDigest">The tag or digest of the manifest to download.</param>
+        <param name="mediaType">The media type of the manifest to download.  If not specified, all media types will be requested.</param>
         <param name="cancellationToken">The cancellation token to use.</param>
         <summary>
             Downloads the manifest for an OCI artifact.
@@ -503,11 +576,11 @@
       </Docs>
     </Member>
     <Member MemberName="UploadManifest">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Containers.ContainerRegistry.Specialized.UploadManifestResult&gt; UploadManifest (Azure.Containers.ContainerRegistry.Specialized.OciManifest manifest, Azure.Containers.ContainerRegistry.Specialized.UploadManifestOptions options = default, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Containers.ContainerRegistry.Specialized.UploadManifestResult&gt; UploadManifest(class Azure.Containers.ContainerRegistry.Specialized.OciManifest manifest, class Azure.Containers.ContainerRegistry.Specialized.UploadManifestOptions options, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Containers.ContainerRegistry.Specialized.ContainerRegistryBlobClient.UploadManifest(Azure.Containers.ContainerRegistry.Specialized.OciManifest,Azure.Containers.ContainerRegistry.Specialized.UploadManifestOptions,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function UploadManifest (manifest As OciManifest, Optional options As UploadManifestOptions = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Response(Of UploadManifestResult)" />
-      <MemberSignature Language="F#" Value="abstract member UploadManifest : Azure.Containers.ContainerRegistry.Specialized.OciManifest * Azure.Containers.ContainerRegistry.Specialized.UploadManifestOptions * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Containers.ContainerRegistry.Specialized.UploadManifestResult&gt;&#xA;override this.UploadManifest : Azure.Containers.ContainerRegistry.Specialized.OciManifest * Azure.Containers.ContainerRegistry.Specialized.UploadManifestOptions * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Containers.ContainerRegistry.Specialized.UploadManifestResult&gt;" Usage="containerRegistryBlobClient.UploadManifest (manifest, options, cancellationToken)" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Containers.ContainerRegistry.Specialized.UploadManifestResult&gt; UploadManifest (Azure.Containers.ContainerRegistry.Specialized.OciManifest manifest, string tag = default, Azure.Containers.ContainerRegistry.Specialized.ManifestMediaType? mediaType = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Containers.ContainerRegistry.Specialized.UploadManifestResult&gt; UploadManifest(class Azure.Containers.ContainerRegistry.Specialized.OciManifest manifest, string tag, valuetype System.Nullable`1&lt;valuetype Azure.Containers.ContainerRegistry.Specialized.ManifestMediaType&gt; mediaType, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Containers.ContainerRegistry.Specialized.ContainerRegistryBlobClient.UploadManifest(Azure.Containers.ContainerRegistry.Specialized.OciManifest,System.String,System.Nullable{Azure.Containers.ContainerRegistry.Specialized.ManifestMediaType},System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function UploadManifest (manifest As OciManifest, Optional tag As String = Nothing, Optional mediaType As Nullable(Of ManifestMediaType) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Response(Of UploadManifestResult)" />
+      <MemberSignature Language="F#" Value="abstract member UploadManifest : Azure.Containers.ContainerRegistry.Specialized.OciManifest * string * Nullable&lt;Azure.Containers.ContainerRegistry.Specialized.ManifestMediaType&gt; * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Containers.ContainerRegistry.Specialized.UploadManifestResult&gt;&#xA;override this.UploadManifest : Azure.Containers.ContainerRegistry.Specialized.OciManifest * string * Nullable&lt;Azure.Containers.ContainerRegistry.Specialized.ManifestMediaType&gt; * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Containers.ContainerRegistry.Specialized.UploadManifestResult&gt;" Usage="containerRegistryBlobClient.UploadManifest (manifest, tag, mediaType, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Containers.ContainerRegistry</AssemblyName>
@@ -518,26 +591,29 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="manifest" Type="Azure.Containers.ContainerRegistry.Specialized.OciManifest" />
-        <Parameter Name="options" Type="Azure.Containers.ContainerRegistry.Specialized.UploadManifestOptions" />
+        <Parameter Name="tag" Type="System.String" />
+        <Parameter Name="mediaType" Type="System.Nullable&lt;Azure.Containers.ContainerRegistry.Specialized.ManifestMediaType&gt;" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
         <param name="manifest">The manifest to upload.</param>
-        <param name="options">Options for configuring the upload operation.</param>
+        <param name="tag">A optional tag to assign to the artifact this manifest represents.</param>
+        <param name="mediaType">The media type of the manifest.  If not specified, this value will be set to
+            a default value of "application/vnd.oci.image.manifest.v1+json".</param>
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary>
-            Uploads a manifest for an OCI Artifact.
+            Uploads an artifact manifest.
             </summary>
         <returns />
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="UploadManifest">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Containers.ContainerRegistry.Specialized.UploadManifestResult&gt; UploadManifest (System.IO.Stream manifestStream, Azure.Containers.ContainerRegistry.Specialized.UploadManifestOptions options = default, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Containers.ContainerRegistry.Specialized.UploadManifestResult&gt; UploadManifest(class System.IO.Stream manifestStream, class Azure.Containers.ContainerRegistry.Specialized.UploadManifestOptions options, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Containers.ContainerRegistry.Specialized.ContainerRegistryBlobClient.UploadManifest(System.IO.Stream,Azure.Containers.ContainerRegistry.Specialized.UploadManifestOptions,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function UploadManifest (manifestStream As Stream, Optional options As UploadManifestOptions = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Response(Of UploadManifestResult)" />
-      <MemberSignature Language="F#" Value="abstract member UploadManifest : System.IO.Stream * Azure.Containers.ContainerRegistry.Specialized.UploadManifestOptions * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Containers.ContainerRegistry.Specialized.UploadManifestResult&gt;&#xA;override this.UploadManifest : System.IO.Stream * Azure.Containers.ContainerRegistry.Specialized.UploadManifestOptions * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Containers.ContainerRegistry.Specialized.UploadManifestResult&gt;" Usage="containerRegistryBlobClient.UploadManifest (manifestStream, options, cancellationToken)" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Containers.ContainerRegistry.Specialized.UploadManifestResult&gt; UploadManifest (System.IO.Stream manifestStream, string tag = default, Azure.Containers.ContainerRegistry.Specialized.ManifestMediaType? mediaType = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Containers.ContainerRegistry.Specialized.UploadManifestResult&gt; UploadManifest(class System.IO.Stream manifestStream, string tag, valuetype System.Nullable`1&lt;valuetype Azure.Containers.ContainerRegistry.Specialized.ManifestMediaType&gt; mediaType, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Containers.ContainerRegistry.Specialized.ContainerRegistryBlobClient.UploadManifest(System.IO.Stream,System.String,System.Nullable{Azure.Containers.ContainerRegistry.Specialized.ManifestMediaType},System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function UploadManifest (manifestStream As Stream, Optional tag As String = Nothing, Optional mediaType As Nullable(Of ManifestMediaType) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Response(Of UploadManifestResult)" />
+      <MemberSignature Language="F#" Value="abstract member UploadManifest : System.IO.Stream * string * Nullable&lt;Azure.Containers.ContainerRegistry.Specialized.ManifestMediaType&gt; * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Containers.ContainerRegistry.Specialized.UploadManifestResult&gt;&#xA;override this.UploadManifest : System.IO.Stream * string * Nullable&lt;Azure.Containers.ContainerRegistry.Specialized.ManifestMediaType&gt; * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Containers.ContainerRegistry.Specialized.UploadManifestResult&gt;" Usage="containerRegistryBlobClient.UploadManifest (manifestStream, tag, mediaType, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Containers.ContainerRegistry</AssemblyName>
@@ -548,26 +624,29 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="manifestStream" Type="System.IO.Stream" />
-        <Parameter Name="options" Type="Azure.Containers.ContainerRegistry.Specialized.UploadManifestOptions" />
+        <Parameter Name="tag" Type="System.String" />
+        <Parameter Name="mediaType" Type="System.Nullable&lt;Azure.Containers.ContainerRegistry.Specialized.ManifestMediaType&gt;" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
         <param name="manifestStream">The <see cref="T:System.IO.Stream" /> manifest to upload.</param>
-        <param name="options">Options for configuring the upload operation.</param>
+        <param name="tag">A optional tag to assign to the artifact this manifest represents.</param>
+        <param name="mediaType">The media type of the manifest.  If not specified, this value will be set to
+            a default value of "application/vnd.oci.image.manifest.v1+json".</param>
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary>
-            Uploads a manifest for an OCI Artifact.
+            Uploads an artifact manifest.
             </summary>
         <returns />
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="UploadManifestAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Containers.ContainerRegistry.Specialized.UploadManifestResult&gt;&gt; UploadManifestAsync (Azure.Containers.ContainerRegistry.Specialized.OciManifest manifest, Azure.Containers.ContainerRegistry.Specialized.UploadManifestOptions options = default, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Containers.ContainerRegistry.Specialized.UploadManifestResult&gt;&gt; UploadManifestAsync(class Azure.Containers.ContainerRegistry.Specialized.OciManifest manifest, class Azure.Containers.ContainerRegistry.Specialized.UploadManifestOptions options, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Containers.ContainerRegistry.Specialized.ContainerRegistryBlobClient.UploadManifestAsync(Azure.Containers.ContainerRegistry.Specialized.OciManifest,Azure.Containers.ContainerRegistry.Specialized.UploadManifestOptions,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function UploadManifestAsync (manifest As OciManifest, Optional options As UploadManifestOptions = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of UploadManifestResult))" />
-      <MemberSignature Language="F#" Value="abstract member UploadManifestAsync : Azure.Containers.ContainerRegistry.Specialized.OciManifest * Azure.Containers.ContainerRegistry.Specialized.UploadManifestOptions * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Containers.ContainerRegistry.Specialized.UploadManifestResult&gt;&gt;&#xA;override this.UploadManifestAsync : Azure.Containers.ContainerRegistry.Specialized.OciManifest * Azure.Containers.ContainerRegistry.Specialized.UploadManifestOptions * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Containers.ContainerRegistry.Specialized.UploadManifestResult&gt;&gt;" Usage="containerRegistryBlobClient.UploadManifestAsync (manifest, options, cancellationToken)" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Containers.ContainerRegistry.Specialized.UploadManifestResult&gt;&gt; UploadManifestAsync (Azure.Containers.ContainerRegistry.Specialized.OciManifest manifest, string tag = default, Azure.Containers.ContainerRegistry.Specialized.ManifestMediaType? mediaType = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Containers.ContainerRegistry.Specialized.UploadManifestResult&gt;&gt; UploadManifestAsync(class Azure.Containers.ContainerRegistry.Specialized.OciManifest manifest, string tag, valuetype System.Nullable`1&lt;valuetype Azure.Containers.ContainerRegistry.Specialized.ManifestMediaType&gt; mediaType, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Containers.ContainerRegistry.Specialized.ContainerRegistryBlobClient.UploadManifestAsync(Azure.Containers.ContainerRegistry.Specialized.OciManifest,System.String,System.Nullable{Azure.Containers.ContainerRegistry.Specialized.ManifestMediaType},System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function UploadManifestAsync (manifest As OciManifest, Optional tag As String = Nothing, Optional mediaType As Nullable(Of ManifestMediaType) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of UploadManifestResult))" />
+      <MemberSignature Language="F#" Value="abstract member UploadManifestAsync : Azure.Containers.ContainerRegistry.Specialized.OciManifest * string * Nullable&lt;Azure.Containers.ContainerRegistry.Specialized.ManifestMediaType&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Containers.ContainerRegistry.Specialized.UploadManifestResult&gt;&gt;&#xA;override this.UploadManifestAsync : Azure.Containers.ContainerRegistry.Specialized.OciManifest * string * Nullable&lt;Azure.Containers.ContainerRegistry.Specialized.ManifestMediaType&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Containers.ContainerRegistry.Specialized.UploadManifestResult&gt;&gt;" Usage="containerRegistryBlobClient.UploadManifestAsync (manifest, tag, mediaType, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Containers.ContainerRegistry</AssemblyName>
@@ -578,26 +657,29 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="manifest" Type="Azure.Containers.ContainerRegistry.Specialized.OciManifest" />
-        <Parameter Name="options" Type="Azure.Containers.ContainerRegistry.Specialized.UploadManifestOptions" />
+        <Parameter Name="tag" Type="System.String" />
+        <Parameter Name="mediaType" Type="System.Nullable&lt;Azure.Containers.ContainerRegistry.Specialized.ManifestMediaType&gt;" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
         <param name="manifest">The manifest to upload.</param>
-        <param name="options">Options for configuring the upload operation.</param>
+        <param name="tag">A optional tag to assign to the artifact this manifest represents.</param>
+        <param name="mediaType">The media type of the manifest.  If not specified, this value will be set to
+            a default value of "application/vnd.oci.image.manifest.v1+json".</param>
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary>
-            Upload a manifest for an OCI Artifact.
+            Uploads an artifact manifest.
             </summary>
         <returns />
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="UploadManifestAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Containers.ContainerRegistry.Specialized.UploadManifestResult&gt;&gt; UploadManifestAsync (System.IO.Stream manifestStream, Azure.Containers.ContainerRegistry.Specialized.UploadManifestOptions options = default, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Containers.ContainerRegistry.Specialized.UploadManifestResult&gt;&gt; UploadManifestAsync(class System.IO.Stream manifestStream, class Azure.Containers.ContainerRegistry.Specialized.UploadManifestOptions options, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Containers.ContainerRegistry.Specialized.ContainerRegistryBlobClient.UploadManifestAsync(System.IO.Stream,Azure.Containers.ContainerRegistry.Specialized.UploadManifestOptions,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function UploadManifestAsync (manifestStream As Stream, Optional options As UploadManifestOptions = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of UploadManifestResult))" />
-      <MemberSignature Language="F#" Value="abstract member UploadManifestAsync : System.IO.Stream * Azure.Containers.ContainerRegistry.Specialized.UploadManifestOptions * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Containers.ContainerRegistry.Specialized.UploadManifestResult&gt;&gt;&#xA;override this.UploadManifestAsync : System.IO.Stream * Azure.Containers.ContainerRegistry.Specialized.UploadManifestOptions * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Containers.ContainerRegistry.Specialized.UploadManifestResult&gt;&gt;" Usage="containerRegistryBlobClient.UploadManifestAsync (manifestStream, options, cancellationToken)" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Containers.ContainerRegistry.Specialized.UploadManifestResult&gt;&gt; UploadManifestAsync (System.IO.Stream manifestStream, string tag = default, Azure.Containers.ContainerRegistry.Specialized.ManifestMediaType? mediaType = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Containers.ContainerRegistry.Specialized.UploadManifestResult&gt;&gt; UploadManifestAsync(class System.IO.Stream manifestStream, string tag, valuetype System.Nullable`1&lt;valuetype Azure.Containers.ContainerRegistry.Specialized.ManifestMediaType&gt; mediaType, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Containers.ContainerRegistry.Specialized.ContainerRegistryBlobClient.UploadManifestAsync(System.IO.Stream,System.String,System.Nullable{Azure.Containers.ContainerRegistry.Specialized.ManifestMediaType},System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function UploadManifestAsync (manifestStream As Stream, Optional tag As String = Nothing, Optional mediaType As Nullable(Of ManifestMediaType) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of UploadManifestResult))" />
+      <MemberSignature Language="F#" Value="abstract member UploadManifestAsync : System.IO.Stream * string * Nullable&lt;Azure.Containers.ContainerRegistry.Specialized.ManifestMediaType&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Containers.ContainerRegistry.Specialized.UploadManifestResult&gt;&gt;&#xA;override this.UploadManifestAsync : System.IO.Stream * string * Nullable&lt;Azure.Containers.ContainerRegistry.Specialized.ManifestMediaType&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Containers.ContainerRegistry.Specialized.UploadManifestResult&gt;&gt;" Usage="containerRegistryBlobClient.UploadManifestAsync (manifestStream, tag, mediaType, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Containers.ContainerRegistry</AssemblyName>
@@ -608,15 +690,18 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="manifestStream" Type="System.IO.Stream" />
-        <Parameter Name="options" Type="Azure.Containers.ContainerRegistry.Specialized.UploadManifestOptions" />
+        <Parameter Name="tag" Type="System.String" />
+        <Parameter Name="mediaType" Type="System.Nullable&lt;Azure.Containers.ContainerRegistry.Specialized.ManifestMediaType&gt;" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
         <param name="manifestStream">The <see cref="T:System.IO.Stream" /> manifest to upload.</param>
-        <param name="options">Options for configuring the upload operation.</param>
+        <param name="tag">A optional tag to assign to the artifact this manifest represents.</param>
+        <param name="mediaType">The media type of the manifest.  If not specified, this value will be set to
+            a default value of "application/vnd.oci.image.manifest.v1+json".</param>
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary>
-            Uploads a manifest for an OCI artifact.
+            Uploads an artifact manifest.
             </summary>
         <returns />
         <remarks>To be added.</remarks>
