@@ -1,17 +1,14 @@
 ---
 title: Azure WebJobs Storage Queues client library for .NET
-keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebJobs.Extensions.Storage.Queues, functions
-author: ramya-rao-a
-ms.author: ramyar
-ms.date: 07/09/2021
+keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebJobs.Extensions.Storage.Queues, storage
+author: seanmcc-msft
+ms.author: seanmcc
+ms.date: 02/08/2023
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
-ms.service: functions
+ms.service: storage
 ---
-
-# Azure WebJobs Storage Queues client library for .NET - version 5.0.0-beta.5 
+# Azure WebJobs Storage Queues client library for .NET - version 5.1.0-beta.1 
 
 
 This extension provides functionality for accessing Azure Storage Queues in Azure Functions.
@@ -22,7 +19,7 @@ This extension provides functionality for accessing Azure Storage Queues in Azur
 
 Install the Storage Queues extension with [NuGet][nuget]:
 
-```Powershell
+```dotnetcli
 dotnet add package Azure.WebJobs.Extensions.Storage.Queues
 ```
 
@@ -41,13 +38,13 @@ az storage account create --name <your-resource-name> --resource-group <your-res
 
 ### Authenticate the client
 
-In order for the extension to access Queues, you will need the connection string which can be found in the [Azure Portal](https://portal.azure.com/) or by using the [Azure CLI](https://docs.microsoft.com/cli/azure) snippet below.
+In order for the extension to access Queues, you will need the connection string which can be found in the [Azure Portal](https://portal.azure.com/) or by using the [Azure CLI](/cli/azure) snippet below.
 
 ```bash
 az storage account show-connection-string -g <your-resource-group-name> -n <your-resource-name>
 ```
 
-The connection string can be supplied through [AzureWebJobsStorage app setting](https://docs.microsoft.com/azure/azure-functions/functions-app-settings).
+The connection string can be supplied through [AzureWebJobsStorage app setting](/azure/azure-functions/functions-app-settings).
 
 ## Key concepts
 
@@ -55,13 +52,13 @@ The connection string can be supplied through [AzureWebJobsStorage app setting](
 
 The queue storage trigger runs a function as messages are added to Azure Queue storage.
 
-Please follow the [tutorial](https://docs.microsoft.com/azure/azure-functions/functions-bindings-storage-queue-trigger?tabs=csharp) to learn about how to listen to queues in Azure Functions.
+Please follow the [tutorial](/azure/azure-functions/functions-bindings-storage-queue-trigger?tabs=csharp) to learn about how to listen to queues in Azure Functions.
 
 ### Using Queue binding
 
 Azure Functions can create new Azure Queue storage messages by setting up an output binding.
 
-Please follow the [binding tutorial](https://docs.microsoft.com/azure/azure-functions/functions-bindings-storage-queue-output?tabs=csharp) to learn about using this extension for producing messages into queues in Azure Functions.
+Please follow the [binding tutorial](/azure/azure-functions/functions-bindings-storage-queue-output?tabs=csharp) to learn about using this extension for producing messages into queues in Azure Functions.
 
 ## Examples
 
@@ -275,15 +272,15 @@ public static class Function_BindingToQueueClient
 
 ### Configuring the extension
 
-Please refer to [sample functions app](https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.Storage.Queues_5.0.0-beta.5/sdk/storage/Microsoft.Azure.WebJobs.Extensions.Storage.Queues/samples/functionapp).
+Please refer to [sample functions app](https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.Storage.Queues_5.1.0-beta.1/sdk/storage/Microsoft.Azure.WebJobs.Extensions.Storage.Queues/samples/functionapp).
 
 ## Troubleshooting
 
-Please refer to [Monitor Azure Functions](https://docs.microsoft.com/azure/azure-functions/functions-monitoring) for troubleshooting guidance.
+Please refer to [Monitor Azure Functions](/azure/azure-functions/functions-monitoring) for troubleshooting guidance.
 
 ## Next steps
 
-Read the [introduction to Azure Function](https://docs.microsoft.com/azure/azure-functions/functions-overview) or [creating an Azure Function guide](https://docs.microsoft.com/azure/azure-functions/functions-create-first-azure-function).
+Read the [introduction to Azure Function](/azure/azure-functions/functions-overview) or [creating an Azure Function guide](/azure/azure-functions/functions-create-first-azure-function).
 
 ## Contributing
 
@@ -304,13 +301,13 @@ additional questions or comments.
 
 <!-- LINKS -->
 [nuget]: https://www.nuget.org/
-[storage_account_docs]: https://docs.microsoft.com/azure/storage/common/storage-account-overview
-[storage_account_create_ps]: https://docs.microsoft.com/azure/storage/common/storage-quickstart-create-account?tabs=azure-powershell
-[storage_account_create_cli]: https://docs.microsoft.com/azure/storage/common/storage-quickstart-create-account?tabs=azure-cli
-[storage_account_create_portal]: https://docs.microsoft.com/azure/storage/common/storage-quickstart-create-account?tabs=azure-portal
-[azure_sub]: https://azure.microsoft.com/free/
-[RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.Storage.Queues_5.0.0-beta.5/sdk/core/Azure.Core/src/RequestFailedException.cs
-[storage_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.WebJobs.Extensions.Storage.Queues_5.0.0-beta.5/sdk/storage/CONTRIBUTING.md
+[storage_account_docs]: /azure/storage/common/storage-account-overview
+[storage_account_create_ps]: /azure/storage/common/storage-quickstart-create-account?tabs=azure-powershell
+[storage_account_create_cli]: /azure/storage/common/storage-quickstart-create-account?tabs=azure-cli
+[storage_account_create_portal]: /azure/storage/common/storage-quickstart-create-account?tabs=azure-portal
+[azure_sub]: https://azure.microsoft.com/free/dotnet/
+[RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.Storage.Queues_5.1.0-beta.1/sdk/core/Azure.Core/src/RequestFailedException.cs
+[storage_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.WebJobs.Extensions.Storage.Queues_5.1.0-beta.1/sdk/storage/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
