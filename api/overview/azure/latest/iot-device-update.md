@@ -3,7 +3,7 @@ title: Azure IoT Device Update SDK for .NET
 description: Reference for Azure IoT Device Update SDK for .NET
 author: drwill-ms
 ms.author: drwill
-ms.data: 02/06/2023
+ms.data: 02/07/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: iotdeviceupdate

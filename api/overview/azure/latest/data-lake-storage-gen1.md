@@ -3,7 +3,7 @@ title: Azure Data Lake Storage Gen1 SDK for .NET
 description: Reference for Azure Data Lake Storage Gen1 SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 02/06/2023
+ms.data: 02/07/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: datalakestoragegen1
