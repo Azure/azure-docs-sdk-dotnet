@@ -1,14 +1,14 @@
 ---
 title: Azure DevCenter client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Developer.DevCenter, devcenter
-author: pallavit
-ms.author: pallavit
-ms.date: 11/10/2022
+author: sebrenna
+ms.author: sebrenna
+ms.date: 02/09/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: devcenter
 ---
-# Azure DevCenter client library for .NET - version 1.0.0-beta.1 
+# Azure DevCenter client library for .NET - version 1.0.0-beta.2 
 
 
 The DevCenter client library provides access to manage resources for Microsoft Dev Box and Azure Deployment Environments. This SDK enables managing developer machines and environments in Azure.
@@ -17,7 +17,7 @@ Use the client library for Azure DevCenter to:
 > Create, access, manage, and delete [Dev Box](https://learn.microsoft.com/azure/dev-box) resources
 > Create, deploy, manage, and delete [Environment](https://learn.microsoft.com/azure/deployment-environments) resources
 
-  [Source code](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Developer.DevCenter_1.0.0-beta.1/sdk/devcenter/Azure.Developer.DevCenter/src) | [Package (NuGet)](https://www.nuget.org/packages/) | [API reference documentation](https://azure.github.io/azure-sdk-for-net) | [Product documentation](/azure)
+  [Source code](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Developer.DevCenter_1.0.0-beta.2/sdk/devcenter/Azure.Developer.DevCenter/src) | [Package (NuGet)](https://www.nuget.org/packages/) | [API reference documentation](https://azure.github.io/azure-sdk-for-net) | [Product documentation](/azure)
 
 ## Getting started
 
@@ -48,12 +48,8 @@ You will also need to register a new AAD application, or run locally or in an en
 If using an application, set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_CLIENT_SECRET.
 
 ```
-string tenantId = "<tenant-id>";
-string devCenterName = "<dev-center-name>";
-var client = new DevCenterClient(
-                tenantId,
-                devCenterName,
-                new DefaultAzureCredential());
+Uri endpoint = new Uri("<dev-center-uri>");
+var client = new DevCenterClient(endpoint, new DefaultAzureCredential());
 ```
 
 ## Key concepts
@@ -70,23 +66,23 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Developer.DevCenter_1.0.0-beta.1/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Developer.DevCenter_1.0.0-beta.1/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Developer.DevCenter_1.0.0-beta.1/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Developer.DevCenter_1.0.0-beta.1/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Developer.DevCenter_1.0.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Developer.DevCenter_1.0.0-beta.1/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Developer.DevCenter_1.0.0-beta.2/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Developer.DevCenter_1.0.0-beta.2/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Developer.DevCenter_1.0.0-beta.2/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Developer.DevCenter_1.0.0-beta.2/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Developer.DevCenter_1.0.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Developer.DevCenter_1.0.0-beta.2/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
 ## Examples
 
-You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Developer.DevCenter_1.0.0-beta.1/sdk/devcenter/Azure.Developer.DevCenter/samples).
+You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Developer.DevCenter_1.0.0-beta.2/sdk/devcenter/Azure.Developer.DevCenter/samples).
 
 ### Build a client and get projects
 ```C# Snippet:Azure_DevCenter_GetProjects_Scenario
 var credential = new DefaultAzureCredential();
-var devCenterClient = new DevCenterClient(tenantId, devCenterName, credential);
+var devCenterClient = new DevCenterClient(endpoint, credential);
 string targetProjectName = null;
 await foreach (BinaryData data in devCenterClient.GetProjectsAsync(filter: null, maxCount: 1))
 {
@@ -97,7 +93,7 @@ await foreach (BinaryData data in devCenterClient.GetProjectsAsync(filter: null,
 
 ### List available Dev Box Pools
 ```C# Snippet:Azure_DevCenter_GetPools_Scenario
-var devBoxesClient = new DevBoxesClient(tenantId, devCenterName, targetProjectName, credential);
+var devBoxesClient = new DevBoxesClient(endpoint, targetProjectName, credential);
 string targetPoolName = null;
 await foreach (BinaryData data in devBoxesClient.GetPoolsAsync(filter: null, maxCount: 1))
 {
@@ -136,7 +132,7 @@ Console.WriteLine($"Completed dev box deletion.");
 ### Get Catalog Items
 
 ```C# Snippet:Azure_DevCenter_GetCatalogItems_Scenario
-var environmentsClient = new EnvironmentsClient(tenantId, devCenterName, projectName, credential);
+var environmentsClient = new EnvironmentsClient(endpoint, projectName, credential);
 string catalogItemName = null;
 await foreach (BinaryData data in environmentsClient.GetCatalogItemsAsync(maxCount: 1))
 {
@@ -199,7 +195,7 @@ When you submit a pull request, a CLA-bot will automatically determine whether y
 This project has adopted the [Microsoft Open Source Code of Conduct][code_of_conduct]. For more information see the [Code of Conduct FAQ][code_of_conduct_faq] or contact [opencode@microsoft.com][email_opencode] with any additional questions or comments.
 
 <!-- LINKS -->
-[azdevcenter_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Developer.DevCenter_1.0.0-beta.1/sdk/devcenter/CONTRIBUTING.md
+[azdevcenter_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Developer.DevCenter_1.0.0-beta.2/sdk/devcenter/CONTRIBUTING.md
 [style-guide-msft]: /style-guide/capitalization
 [style-guide-cloud]: https://aka.ms/azsdk/cloud-style-guide
 [cla]: https://cla.microsoft.com
