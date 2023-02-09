@@ -1,6 +1,7 @@
 | Reference | Package | Source |
 |---|---|---|
 |Functions extension for Authentication Events|[Microsoft.Azure.WebJobs.Extensions.AuthenticationEvents](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.AuthenticationEvents)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/entra/Microsoft.Azure.WebJobs.Extensions.AuthenticationEvents)|
+|Microsoft.Azure.Functions.Worker|[Microsoft.Azure.Functions.Worker](https://www.nuget.org/packages/Microsoft.Azure.Functions.Worker)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |Jobs|[Microsoft.Azure.Jobs](https://www.nuget.org/packages/Microsoft.Azure.Jobs)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |Jobs - Core|[Microsoft.Azure.Jobs.Core](https://www.nuget.org/packages/Microsoft.Azure.Jobs.Core)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |Jobs - Service Bus|[Microsoft.Azure.Jobs.ServiceBus](https://www.nuget.org/packages/Microsoft.Azure.Jobs.ServiceBus)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|

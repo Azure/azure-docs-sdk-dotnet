@@ -1,6 +1,9 @@
 | Reference | Package | Source |
 |---|---|---|
+|Microsoft.Azure.Functions.Worker.Core|[Microsoft.Azure.Functions.Worker.Core](https://www.nuget.org/packages/Microsoft.Azure.Functions.Worker.Core)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |Functions extension for Durable Task Framework - isolated worker|[Microsoft.Azure.Functions.Worker.Extensions.DurableTask](https://www.nuget.org/packages/Microsoft.Azure.Functions.Worker.Extensions.DurableTask)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
+|Microsoft.Azure.Functions.Worker.Grpc|[Microsoft.Azure.Functions.Worker.Grpc](https://www.nuget.org/packages/Microsoft.Azure.Functions.Worker.Grpc)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
+|Microsoft.Azure.Functions.Worker|[Microsoft.Azure.Functions.Worker](https://www.nuget.org/packages/Microsoft.Azure.Functions.Worker)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |Functions extension for Durable Task Framework|[Microsoft.Azure.WebJobs.Extensions.DurableTask](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.DurableTask)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |Functions extension for Blob Storage|[Microsoft.Azure.WebJobs.Extensions.Storage.Blobs](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.Storage.Blobs)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/storage/Microsoft.Azure.WebJobs.Extensions.Storage.Blobs)|
 |Functions extension for Storage Queues|[Microsoft.Azure.WebJobs.Extensions.Storage.Queues](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.Storage.Queues)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/storage/Microsoft.Azure.WebJobs.Extensions.Storage.Queues)|
