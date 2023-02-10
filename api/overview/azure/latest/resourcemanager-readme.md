@@ -3,7 +3,7 @@ title:
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager, resourcemanager
 author: pallavit
 ms.author: pallavit
-ms.date: 11/11/2022
+ms.date: 02/10/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: resourcemanager
@@ -41,7 +41,7 @@ dotnet add package Azure.ResourceManager
   Some options are:
     - Through the [Azure CLI sign in](/cli/azure/authenticate-azure-cli).
     - Via [Visual Studio](/dotnet/api/overview/azure/identity-readme?view=azure-dotnet#authenticating-via-visual-studio).
-    - Setting [Environment Variables](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager_1.3.2/sdk/resourcemanager/Azure.ResourceManager/docs/AuthUsingEnvironmentVariables.md).
+    - Setting [Environment Variables](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager_1.4.0/sdk/resourcemanager/Azure.ResourceManager/docs/AuthUsingEnvironmentVariables.md).
 
     More information and different authentication approaches using Azure Identity can be found in [this document](/dotnet/api/overview/azure/identity-readme?view=azure-dotnet).
 
@@ -155,10 +155,10 @@ Console.WriteLine($"Vnet: {id.Parent.Name}");
 Console.WriteLine($"Subnet: {id.Name}");
 ```
 
-## Managing Existing Resources by Resouce Identifier
+## Managing Existing Resources by Resource Identifier
 Performing operations on resources that already exist is a common use case when using the management client libraries. In this scenario, you usually have the identifier of the resource you want to work on as a string. Although the new object hierarchy is great for provisioning, and working within the scope of a given parent, it isn't the most efficient when it comes to this specific scenario.  
 
-Here's an example how you can access an `AvailabilitySet` object and manage it directly with its id: 
+Here's an example how you can access an `AvailabilitySet` object and manage it directly with its ID: 
 ```C# Snippet:Readme_ManageAvailabilitySetOld
 ResourceIdentifier id = new ResourceIdentifier("/subscriptions/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/resourceGroups/workshop2021-rg/providers/Microsoft.Compute/availabilitySets/ws2021availSet");
 // We construct a new client to work with
@@ -317,7 +317,7 @@ ResourceGroupResource resourceGroup = await resourceGroups.GetAsync(resourceGrou
 await resourceGroup.DeleteAsync(WaitUntil.Completed);
 ```
 
-For more detailed examples, take a look at [samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.ResourceManager_1.3.2/sdk/resourcemanager/Azure.ResourceManager/samples) we have available.
+For more detailed examples, take a look at [samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.ResourceManager_1.4.0/sdk/resourcemanager/Azure.ResourceManager/samples) we have available.
 
 ## Azure Resource Manager Tests
 
@@ -344,13 +344,13 @@ To run test with code coverage and auto generate an html report with just a sing
 ## Next steps
 ### More sample code
 
-- [Managing Resource Groups](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager_1.3.2/sdk/resourcemanager/Azure.ResourceManager/samples/Sample2_ManagingResourceGroups.md)
-- [Creating a Virtual Network](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager_1.3.2/sdk/resourcemanager/Azure.ResourceManager/samples/Sample3_CreatingAVirtualNetwork.md)
+- [Managing Resource Groups](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager_1.4.0/sdk/resourcemanager/Azure.ResourceManager/samples/Sample2_ManagingResourceGroups.md)
+- [Creating a Virtual Network](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager_1.4.0/sdk/resourcemanager/Azure.ResourceManager/samples/Sample3_CreatingAVirtualNetwork.md)
 - [.NET Management Library Code Samples](/samples/browse/?branch=master&languages=csharp&term=managing%20using%20Azure%20.NET%20SDK)
 
 ### Other Documentation
 
-If you're migrating from the old SDK, check out this [Migration guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager_1.3.2/sdk/resourcemanager/Azure.ResourceManager/docs/MigrationGuide.md).
+If you're migrating from the old SDK, check out this [Migration guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager_1.4.0/sdk/resourcemanager/Azure.ResourceManager/docs/MigrationGuide.md).
 
 For more information about Microsoft Azure SDK, see [this website](https://azure.github.io/azure-sdk/).
 
@@ -375,6 +375,6 @@ more information, see the [Code of Conduct FAQ][coc_faq] or contact
 <opencode@microsoft.com> with any other questions or comments.
 
 <!-- LINKS -->
-[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager_1.3.2/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
+[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager_1.4.0/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
