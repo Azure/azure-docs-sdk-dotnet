@@ -3,12 +3,12 @@ title:
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.OperationalInsights, operationalinsights
 author: pallavit
 ms.author: pallavit
-ms.date: 11/29/2022
+ms.date: 02/13/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: operationalinsights
 ---
-# Microsoft Azure Operational Insights Management client library for .NET
+# Microsoft Azure Operational Insights management client library for .NET
 
 Microsoft Azure Operational Insights is an analysis service designed to provide IT administrators with deep insight into their on-premises and cloud environments. It helps you interact with real-time and historical computer data for rapid development of custom insights, while providing Microsoft- and community-developed patterns for data analysis.
 
@@ -32,23 +32,23 @@ dotnet add package Azure.ResourceManager.OperationalInsights
 
 ### Prerequisites
 
-* You must have an [Microsoft Azure subscription](https://azure.microsoft.com/free/dotnet/)
+* You must have an [Microsoft Azure subscription](https://azure.microsoft.com/free/dotnet/).
 
 ### Authenticate the Client
 
-To create an authenticated client and start interacting with Microsoft Azure resources, please see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.OperationalInsights_1.0.0/doc/dev/mgmt_quickstart.md)
+To create an authenticated client and start interacting with Microsoft Azure resources, see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.OperationalInsights_1.1.0/doc/dev/mgmt_quickstart.md).
 
 ## Key concepts
 
-Key concepts of the Microsoft Azure SDK for .NET can be found [here](https://azure.github.io/azure-sdk/dotnet_introduction.html)
+Key concepts of the Microsoft Azure SDK for .NET can be found [here](https://azure.github.io/azure-sdk/dotnet_introduction.html).
 
 ## Documentation
 
 Documentation is available to help you learn how to use this package:
 
-- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.OperationalInsights_1.0.0/doc/dev/mgmt_quickstart.md).
+- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.OperationalInsights_1.1.0/doc/dev/mgmt_quickstart.md).
 - [API References](/dotnet/api/?view=azure-dotnet).
-- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.OperationalInsights_1.0.0/sdk/identity/Azure.Identity/README.md).
+- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.OperationalInsights_1.1.0/sdk/identity/Azure.Identity/README.md).
 
 ## Examples
 
@@ -85,7 +85,6 @@ more information, see the [Code of Conduct FAQ][coc_faq] or contact
 <opencode@microsoft.com> with any other questions or comments.
 
 <!-- LINKS -->
-[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.OperationalInsights_1.0.0/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
+[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.OperationalInsights_1.1.0/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
-
