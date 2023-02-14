@@ -1,32 +1,38 @@
 ---
-title: Azure Communication Services Management client library for .NET
+title: 
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.Communication, communication
-author: acsdevx-msft
-ms.author: acsdevx-msft
-ms.date: 07/21/2022
+author: fengzhou-msft
+ms.author: fenzhou
+ms.date: 02/14/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: communication
 ---
-# Azure Communication Services Management client library for .NET - version 1.1.0-beta.5 
+# Microsoft Azure Communication Services management client library for .NET
 
+Microsoft Azure Communication Services are cloud-based services help you integrate communication into your applications. You can add communication to your applications without being an expert in underlying technologies such as media encoding or telephony. 
+Microsoft Azure Communication Services supports various communication formats:
 
-This package follows the [new Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html) which provide a number of core capabilities that are shared amongst all Azure SDKs, including the intuitive Azure Identity library, an HTTP Pipeline with custom policies, error-handling, distributed tracing, and much more.
+- Voice and Video Calling
+- Rich Text Chat
+- SMS
+- Email
 
-Azure Communication Services enable developers to securely bring human connected experiences to their own
-applications and websites. This includes voice, video, calling and chat capabilities.
+This library supports managing Microsoft Azure Communication Services resources.
 
-Use the management library for Azure Communication Services to:
+This library follows the [new Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html), and provides many core capabilities:
 
-- Create or update a resource
-- Get the keys for that resource
-- Delete a resource
+    - Support MSAL.NET, Azure.Identity is out of box for supporting MSAL.NET.
+    - Support [OpenTelemetry](https://opentelemetry.io/) for distributed tracing.
+    - HTTP pipeline with custom policies.
+    - Better error-handling.
+    - Support uniform telemetry across all languages.
 
 ## Getting started
 
 ### Install the package
 
-Install the Azure Communication management library for .NET with [NuGet](https://www.nuget.org/):
+Install the Microsoft Azure Communication management library for .NET with [NuGet](https://www.nuget.org/):
 
 ```dotnetcli
 dotnet add package Azure.ResourceManager.Communication
@@ -34,44 +40,37 @@ dotnet add package Azure.ResourceManager.Communication
 
 ### Prerequisites
 
-* You must have an [Azure subscription](https://azure.microsoft.com/free/dotnet/)
+* You must have an [Microsoft Azure subscription](https://azure.microsoft.com/free/dotnet/).
 
 ### Authenticate the Client
 
-To create an authenticated client and start interacting with Azure resources, please see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Communication_1.1.0-beta.5/doc/dev/mgmt_quickstart.md)
+To create an authenticated client and start interacting with Microsoft Azure resources, see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Communication_1.1.0-beta.6/doc/dev/mgmt_quickstart.md).
 
 ## Key concepts
 
-Key concepts of the Azure .NET SDK can be found [here](https://azure.github.io/azure-sdk/dotnet_introduction.html)
+Key concepts of the Microsoft Azure SDK for .NET can be found [here](https://azure.github.io/azure-sdk/dotnet_introduction.html).
 
 ## Documentation
 
-Documentation is available to help you learn how to use this package
+Documentation is available to help you learn how to use this package:
 
-- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Communication_1.1.0-beta.5/doc/dev/mgmt_quickstart.md)
-- [API References](/dotnet/api/?view=azure-dotnet)
-- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Communication_1.1.0-beta.5/sdk/identity/Azure.Identity/README.md)
+- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Communication_1.1.0-beta.6/doc/dev/mgmt_quickstart.md).
+- [API References](/dotnet/api/?view=azure-dotnet).
+- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Communication_1.1.0-beta.6/sdk/identity/Azure.Identity/README.md).
 
 ## Examples
 
 Code samples for using the management library for .NET can be found in the following locations
-- [.NET Management Library Code Samples](/samples/browse/?branch=master&languages=csharp&term=managing%20using%20Azure%20.NET%20SDK)
+- [.NET Management Library Code Samples](https://aka.ms/azuresdk-net-mgmt-samples)
 
 ## Troubleshooting
 
--   File an issue via [Github Issues](https://github.com/Azure/azure-sdk-for-net/issues)
--   Check [previous questions](https://stackoverflow.com/questions/tagged/azure+.net) or ask new ones on Stack Overflow using azure and .net tags.
-
+-   File an issue via [GitHub Issues](https://github.com/Azure/azure-sdk-for-net/issues).
+-   Check [previous questions](https://stackoverflow.com/questions/tagged/azure+.net) or ask new ones on Stack Overflow using Azure and .NET tags.
 
 ## Next steps
 
-### More sample code
-
-- [Managing Communication Service](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Communication_1.1.0-beta.5/sdk/communication/Azure.ResourceManager.Communication/samples/Sample1_ManagingCommunicationService.md)
-
-### Additional Documentation
-
-For more information on Azure SDK, please refer to [this website](https://azure.github.io/azure-sdk/).
+For more information about Microsoft Azure SDK, see [this website](https://azure.github.io/azure-sdk/).
 
 ## Contributing
 
@@ -85,16 +84,15 @@ your contribution. For details, visit <https://cla.microsoft.com>.
 
 When you submit a pull request, a CLA-bot will automatically determine
 whether you need to provide a CLA and decorate the PR appropriately
-(e.g., label, comment). Simply follow the instructions provided by the
-bot. You will only need to do this once across all repositories using
-our CLA.
+(for example, label, comment). Follow the instructions provided by the
+bot. You'll only need to do this action once across all repositories
+using our CLA.
 
 This project has adopted the [Microsoft Open Source Code of Conduct][coc]. For
-more information see the [Code of Conduct FAQ][coc_faq] or contact
-<opencode@microsoft.com> with any additional questions or comments.
+more information, see the [Code of Conduct FAQ][coc_faq] or contact
+<opencode@microsoft.com> with any other questions or comments.
 
 <!-- LINKS -->
-[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Communication_1.1.0-beta.5/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
+[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Communication_1.1.0-beta.6/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
-
