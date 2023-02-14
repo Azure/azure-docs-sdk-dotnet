@@ -1,5 +1,6 @@
 | Reference | Package | Source |
 |---|---|---|
+|Service Bus Event Processor Host|[Microsoft.Azure.ServiceBus.EventProcessorHost](https://www.nuget.org/packages/Microsoft.Azure.ServiceBus.EventProcessorHost)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |[Service Bus](messaging.servicebus-readme.md)|[Azure.Messaging.ServiceBus](https://www.nuget.org/packages/Azure.Messaging.ServiceBus)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/servicebus/Azure.Messaging.ServiceBus)|
 |[Service Bus](microsoft.servicebus-readme.md)|[Microsoft.Azure.ServiceBus](https://www.nuget.org/packages/Microsoft.Azure.ServiceBus)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/servicebus/Microsoft.Azure.ServiceBus)|
 |Service Bus|[WindowsAzure.ServiceBus](https://www.nuget.org/packages/WindowsAzure.ServiceBus)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|

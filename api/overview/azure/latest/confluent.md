@@ -3,7 +3,7 @@ title: Azure Confluent SDK for .NET
 description: Reference for Azure Confluent SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 02/13/2023
+ms.data: 02/14/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: confluent

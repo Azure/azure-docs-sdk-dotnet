@@ -1,6 +1,7 @@
 | Reference | Package | Source |
 |---|---|---|
-|[IoT Device Update](iot.deviceupdate-readme.md)|[Azure.IoT.DeviceUpdate](https://www.nuget.org/packages/Azure.IoT.DeviceUpdate)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/deviceupdate/Azure.IoT.DeviceUpdate)|
+|[Digital Twins - Core](digitaltwins.core-readme.md)|[Azure.DigitalTwins.Core](https://www.nuget.org/packages/Azure.DigitalTwins.Core)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/digitaltwins/Azure.DigitalTwins.Core)|
+|[Device Update](iot.deviceupdate-readme.md)|[Azure.IoT.DeviceUpdate](https://www.nuget.org/packages/Azure.IoT.DeviceUpdate)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/deviceupdate/Azure.IoT.DeviceUpdate)|
 |Microsoft.Azure.Devices|[Microsoft.Azure.Devices](https://www.nuget.org/packages/Microsoft.Azure.Devices)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |IoT Plug and Play - Devices Client|[Microsoft.Azure.Devices.Client](https://www.nuget.org/packages/Microsoft.Azure.Devices.Client)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |Microsoft.Azure.Devices.Client.PCL|[Microsoft.Azure.Devices.Client.PCL](https://www.nuget.org/packages/Microsoft.Azure.Devices.Client.PCL)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
@@ -15,8 +16,10 @@
 |Microsoft.Azure.Devices.Provisioning.Transport.Mqtt|[Microsoft.Azure.Devices.Provisioning.Transport.Mqtt](https://www.nuget.org/packages/Microsoft.Azure.Devices.Provisioning.Transport.Mqtt)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |Microsoft.Azure.Devices.Shared|[Microsoft.Azure.Devices.Shared](https://www.nuget.org/packages/Microsoft.Azure.Devices.Shared)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |[Resource Management - Device Provisioning Services](resourcemanager.deviceprovisioningservices-readme.md)|[Azure.ResourceManager.DeviceProvisioningServices](https://www.nuget.org/packages/Azure.ResourceManager.DeviceProvisioningServices)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/deviceprovisioningservices/Azure.ResourceManager.DeviceProvisioningServices)|
+|[Resource Management - Digital Twins](resourcemanager.digitaltwins-readme.md)|[Azure.ResourceManager.DigitalTwins](https://www.nuget.org/packages/Azure.ResourceManager.DigitalTwins)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/digitaltwins/Azure.ResourceManager.DigitalTwins)|
 |[Resource Management - IoT Central](resourcemanager.iotcentral-readme.md)|[Azure.ResourceManager.IotCentral](https://www.nuget.org/packages/Azure.ResourceManager.IotCentral)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/iotcentral/Azure.ResourceManager.IotCentral)|
 |[Resource Management - IoT Hub](resourcemanager.iothub-readme.md)|[Azure.ResourceManager.IotHub](https://www.nuget.org/packages/Azure.ResourceManager.IotHub)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/iothub/Azure.ResourceManager.IotHub)|
 |Management - Device Provisioning Services|[Microsoft.Azure.Management.DeviceProvisioningServices](https://www.nuget.org/packages/Microsoft.Azure.Management.DeviceProvisioningServices)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
+|Management - Digital Twins|[Microsoft.Azure.Management.DigitalTwins](https://www.nuget.org/packages/Microsoft.Azure.Management.DigitalTwins)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |Management - IoT Central|[Microsoft.Azure.Management.IotCentral](https://www.nuget.org/packages/Microsoft.Azure.Management.IotCentral)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |Management - IoT Hub|[Microsoft.Azure.Management.IotHub](https://www.nuget.org/packages/Microsoft.Azure.Management.IotHub)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|

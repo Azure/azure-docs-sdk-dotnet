@@ -1,6 +1,5 @@
 | Reference | Package | Source |
 |---|---|---|
-|Functions extension for Authentication Events|[Microsoft.Azure.WebJobs.Extensions.AuthenticationEvents](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.AuthenticationEvents)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/entra/Microsoft.Azure.WebJobs.Extensions.AuthenticationEvents)|
 |Microsoft.Azure.Functions.Worker|[Microsoft.Azure.Functions.Worker](https://www.nuget.org/packages/Microsoft.Azure.Functions.Worker)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |Jobs|[Microsoft.Azure.Jobs](https://www.nuget.org/packages/Microsoft.Azure.Jobs)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |Jobs - Core|[Microsoft.Azure.Jobs.Core](https://www.nuget.org/packages/Microsoft.Azure.Jobs.Core)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
@@ -13,6 +12,7 @@
 |WebJobs - Script Extensibility|[Microsoft.Azure.WebJobs.Script.Extensibility](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Script.Extensibility)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |WebJobs - Script Web Host|[Microsoft.Azure.WebJobs.Script.WebHost](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Script.WebHost)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |WebJobs - Service Bus|[Microsoft.Azure.WebJobs.ServiceBus](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.ServiceBus)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
+|Functions extension for Authentication Events|[Microsoft.Azure.WebJobs.Extensions.AuthenticationEvents](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.AuthenticationEvents)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/entra/Microsoft.Azure.WebJobs.Extensions.AuthenticationEvents)|
 |WebJobs Extensions - Event Grid|[Microsoft.Azure.WebJobs.Extensions.EventGrid](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.EventGrid)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/eventgrid/Microsoft.Azure.WebJobs.Extensions.EventGrid)|
 |WebJobs Extensions - SignalR Service|[Microsoft.Azure.WebJobs.Extensions.SignalRService](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.SignalRService)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/signalr/Microsoft.Azure.WebJobs.Extensions.SignalRService)|
 |[WebJobs Extensions - Storage](microsoft.webjobs.extensions.storage-readme.md)|[Microsoft.Azure.WebJobs.Extensions.Storage](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.Storage)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/storage/Microsoft.Azure.WebJobs.Extensions.Storage)|
