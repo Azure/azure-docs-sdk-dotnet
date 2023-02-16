@@ -3,7 +3,7 @@ title: Azure Customer Insights SDK for .NET
 description: Reference for Azure Customer Insights SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 02/15/2023
+ms.data: 02/16/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: customerinsights
