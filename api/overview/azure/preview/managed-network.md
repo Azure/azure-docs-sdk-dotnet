@@ -3,7 +3,7 @@ title: Azure Managed Network SDK for .NET
 description: Reference for Azure Managed Network SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 02/17/2023
+ms.data: 02/20/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: managednetwork
