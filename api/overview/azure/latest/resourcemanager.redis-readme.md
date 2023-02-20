@@ -3,7 +3,7 @@ title:
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.Redis, redis
 author: pallavit
 ms.author: pallavit
-ms.date: 11/10/2022
+ms.date: 02/20/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: redis
@@ -22,7 +22,6 @@ This library follows the [new Azure SDK guidelines](https://azure.github.io/azur
     - Better error-handling.
     - Support uniform telemetry across all languages.
 
-
 ## Getting started 
 
 ### Install the package
@@ -39,19 +38,19 @@ dotnet add package Azure.ResourceManager.Redis
 
 ### Authenticate the Client
 
-To create an authenticated client and start interacting with Microsoft Azure resources, see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Redis_1.1.0/doc/dev/mgmt_quickstart.md).
+To create an authenticated client and start interacting with Microsoft Azure resources, see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Redis_1.1.1/doc/dev/mgmt_quickstart.md).
 
 ## Key concepts
 
-Key concepts of the Microsoft Azure SDK for .NET can be found [here](https://azure.github.io/azure-sdk/dotnet_introduction.html)
+Key concepts of the Microsoft Azure SDK for .NET can be found [here](https://azure.github.io/azure-sdk/dotnet_introduction.html).
 
 ## Documentation
 
 Documentation is available to help you learn how to use this package:
 
-- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Redis_1.1.0/doc/dev/mgmt_quickstart.md).
+- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Redis_1.1.1/doc/dev/mgmt_quickstart.md).
 - [API References](/dotnet/api/?view=azure-dotnet).
-- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Redis_1.1.0/sdk/identity/Azure.Identity/README.md).
+- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Redis_1.1.1/sdk/identity/Azure.Identity/README.md).
 
 ## Examples
 
@@ -88,6 +87,6 @@ more information, see the [Code of Conduct FAQ][coc_faq] or contact
 <opencode@microsoft.com> with any other questions or comments.
 
 <!-- LINKS -->
-[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Redis_1.1.0/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
+[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Redis_1.1.1/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
