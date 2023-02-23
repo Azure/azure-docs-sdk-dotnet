@@ -3,7 +3,7 @@ title: Azure Recovery Services SDK for .NET
 description: Reference for Azure Recovery Services SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 02/22/2023
+ms.data: 02/23/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: recoveryservices
