@@ -1,14 +1,14 @@
 ---
 title: Azure WebJobs Event Hubs client library for .NET
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebJobs.Extensions.EventHubs, eventhub
-author: JoshLove-msft
-ms.author: jolov
-ms.date: 08/10/2022
+author: serkantkaraca
+ms.author: serkar
+ms.date: 02/23/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: eventhub
 ---
-# Azure WebJobs Event Hubs client library for .NET - version 5.1.2 
+# Azure WebJobs Event Hubs client library for .NET - version 5.2.0 
 
 
 This extension provides functionality for accessing Azure Event Hubs from an Azure Function.
@@ -25,7 +25,7 @@ dotnet add package Microsoft.Azure.WebJobs.Extensions.EventHubs
 
 ### Prerequisites
 
-- **Azure Subscription:**  To use Azure services, including Azure Event Hubs, you'll need a subscription.  If you do not have an existing Azure account, you may sign up for a [free trial](https://azure.microsoft.com/free/dotnet/) or use your [Visual Studio Subscription](https://visualstudio.microsoft.com/subscriptions/) benefits when you [create an account](https://account.windowsazure.com/Home/Index).
+- **Azure Subscription:**  To use Azure services, including Azure Event Hubs, you'll need a subscription.  If you do not have an existing Azure account, you may sign up for a [free trial](https://azure.microsoft.com/free/dotnet/) or use your [Visual Studio Subscription](https://visualstudio.microsoft.com/subscriptions/) benefits when you [create an account](https://azure.microsoft.com/account).
 
 - **Event Hubs namespace with an Event Hub:** To interact with Azure Event Hubs, you'll also need to have a namespace and Event Hub available.  If you are not familiar with creating Azure resources, you may wish to follow the step-by-step guide for [creating an Event Hub using the Azure portal](/azure/event-hubs/event-hubs-create).  There, you can also find detailed instructions for using the Azure CLI, Azure PowerShell, or Azure Resource Manager (ARM) templates to create an Event Hub.
 
@@ -58,7 +58,7 @@ When deployed use the [application settings](/azure/azure-functions/functions-ho
 
 If your environment has [managed identity](/azure/app-service/overview-managed-identity?tabs=dotnet) enabled you can use it to authenticate the Event Hubs extension.  Before doing so, you will need to ensure that permissions have been configured as described in the [Azure Functions developer guide]( /azure/azure-functions/functions-reference#grant-permission-to-the-identity).
 
-To use managed identity provide the `<connection_name>__fullyQualifiedNamespace` configuration setting.  
+To use managed identity provide the `<connection_name>__fullyQualifiedNamespace` configuration setting.
 
 ```json
 {
@@ -97,7 +97,7 @@ The following types are supported for trigger and output bindings:
 - `string` - value would be encoded using UTF8 encoding
 - `BinaryData`
 - `byte[]`
-- Custom model types will be JSON-serialized using Newtonsoft.Json 
+- Custom model types will be JSON-serialized using Newtonsoft.Json
 - `IAsyncCollector<T>` of any of the above types for batch triggers
 - `EventHubProducerClient` for output bindings
 
@@ -105,7 +105,7 @@ The following types are supported for trigger and output bindings:
 
 ### Sending individual event
 
-You can send individual events to an Event Hub by applying the `EventHubAttribute` the function return value. The return value can be of `string` or `EventData` type.
+You can send individual events to an Event Hub by applying the `EventHubAttribute` the function return value. The return value can be of `string` or `EventData` type.  A partition keys may not be specified when using a return value; to do so, you'll need to bind to the `IAsyncCollector<EventData>`, as shown in [Sending multiple events](#sending-multiple-events).
 
 ```C# Snippet:BindingToReturnValue
 [FunctionName("BindingToReturnValue")]
@@ -120,7 +120,7 @@ public static string Run([TimerTrigger("0 */5 * * * *")] TimerInfo myTimer)
 
 ### Sending multiple events
 
-To send multiple events from a single Azure Function invocation you can apply the `EventHubAttribute` to the `IAsyncCollector<string>` or `IAsyncCollector<EventData>` parameter.
+To send multiple events from a single Azure Function invocation you can apply the `EventHubAttribute` to the `IAsyncCollector<string>` or `IAsyncCollector<EventData>` parameter.  Partition keys may only be used when binding to `IAsyncCollector<EventData>`.
 
 ```C# Snippet:BindingToCollector
 [FunctionName("BindingToCollector")]
@@ -128,9 +128,14 @@ public static async Task Run(
     [TimerTrigger("0 */5 * * * *")] TimerInfo myTimer,
     [EventHub("<event_hub_name>", Connection = "<connection_name>")] IAsyncCollector<EventData> collector)
 {
-    // IAsyncCollector allows sending multiple events in a single function invocation
-    await collector.AddAsync(new EventData(new BinaryData($"Event 1 added at: {DateTime.Now}")));
-    await collector.AddAsync(new EventData(new BinaryData($"Event 2 added at: {DateTime.Now}")));
+    // When no partition key is used, partitions will be assigned per-batch via round-robin.
+    await collector.AddAsync(new EventData($"Event 1 added at: {DateTime.Now}"));
+    await collector.AddAsync(new EventData($"Event 2 added at: {DateTime.Now}"));
+
+    // Using a partition key will help group events together; events with the same key
+    // will always be assigned to the same partition.
+    await collector.AddAsync(new EventData($"Event 3 added at: {DateTime.Now}"), "sample-key");
+    await collector.AddAsync(new EventData($"Event 4 added at: {DateTime.Now}"), "sample-key");
 }
 ```
 
@@ -161,8 +166,8 @@ public static async Task Run(
     // IAsyncCollector allows sending multiple events in a single function invocation
     await eventHubProducerClient.SendAsync(new[]
     {
-        new EventData(new BinaryData($"Event 1 added at: {DateTime.Now}")),
-        new EventData(new BinaryData($"Event 2 added at: {DateTime.Now}"))
+        new EventData($"Event 1 added at: {DateTime.Now}"),
+        new EventData($"Event 2 added at: {DateTime.Now}")
     });
 }
 ```
@@ -225,12 +230,12 @@ additional questions or comments.
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fsearch%2FMicrosoft.Azure.WebJobs.Extensions.EventHubs%2FREADME.png)
 
 <!-- LINKS -->
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.EventHubs_5.1.2/sdk/search/Microsoft.Azure.WebJobs.Extensions.EventHubs/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.EventHubs_5.2.0/sdk/search/Microsoft.Azure.WebJobs.Extensions.EventHubs/src
 [package]: https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.EventHubs/
 [docs]: /dotnet/api/Microsoft.Azure.WebJobs.Extensions.EventHubs
 [nuget]: https://www.nuget.org/
 
-[contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.EventHubs_5.1.2/CONTRIBUTING.md
+[contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.EventHubs_5.2.0/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
