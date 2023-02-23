@@ -1,17 +1,14 @@
 ---
 title: Azure FarmBeats client library for .NET
-keywords: Azure, dotnet, SDK, API, Azure.Verticals.AgriFood.Farming, 
-author: ramya-rao-a
-ms.author: ramyar
-ms.date: 05/27/2021
+keywords: Azure, dotnet, SDK, API, Azure.Verticals.AgriFood.Farming, agrifood
+author: pallavit
+ms.author: pallavit
+ms.date: 02/23/2023
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
-ms.service: 
+ms.service: agrifood
 ---
-
-# Azure FarmBeats client library for .NET - version 1.0.0-beta.1 
+# Azure FarmBeats client library for .NET - version 1.0.0-beta.2 
 
 
 FarmBeats is a B2B PaaS offering from Microsoft that makes it easy for AgriFood companies to build intelligent digital agriculture solutions on Azure. FarmBeats allows users to acquire, aggregate, and process agricultural data from various sources (farm equipment, weather, satellite) without the need to invest in deep data engineering resources.  Customers can build SaaS solutions on top of FarmBeats and leverage first class support for model building to generate insights at scale.
@@ -26,7 +23,7 @@ FarmBeats is a B2B PaaS offering from Microsoft that makes it easy for AgriFood 
 
 Install the Azure FarmBeats client library for .NET with [NuGet][client_nuget_package]:
 
-```
+```dotnetcli
 dotnet add package Azure.Verticals.AgriFood.Farming --prerelease
 ```
 
@@ -47,7 +44,7 @@ Once you have chosen and configured your credential, you can create instances of
 
 ```C#
 var credential = new DefaultAzureCredential();
-var client = new FarmClient(new Url("https://<my-account-name>.farmbeats.azure.net"), credential);
+var client = new FarmClient(new Uri("https://<my-account-name>.farmbeats.azure.net"), credential);
 ```
 
 ## Key concepts
@@ -79,12 +76,12 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Verticals.AgriFood.Farming_1.0.0-beta.1/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Verticals.AgriFood.Farming_1.0.0-beta.1/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Verticals.AgriFood.Farming_1.0.0-beta.1/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Verticals.AgriFood.Farming_1.0.0-beta.1/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Verticals.AgriFood.Farming_1.0.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Verticals.AgriFood.Farming_1.0.0-beta.1/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Verticals.AgriFood.Farming_1.0.0-beta.2/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Verticals.AgriFood.Farming_1.0.0-beta.2/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Verticals.AgriFood.Farming_1.0.0-beta.2/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Verticals.AgriFood.Farming_1.0.0-beta.2/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Verticals.AgriFood.Farming_1.0.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Verticals.AgriFood.Farming_1.0.0-beta.2/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
@@ -99,7 +96,7 @@ var credential = new DefaultAzureCredential();
 var client = new FamersClient(new Uri("https://<my-account-name>.farmbeats.azure.net"), credential);
 
 var response = await client.ListAsync();
-var responseDocument = JsonDocument.Parse(response.Content);
+using var responseDocument = JsonDocument.Parse(response.Content);
 Console.WriteLine(responseDocument.RootElement.GetProperty("value"));
 ```
 
@@ -135,14 +132,14 @@ When you submit a pull request, a CLA-bot will automatically determine whether y
 This project has adopted the [Microsoft Open Source Code of Conduct][code_of_conduct]. For more information see the [Code of Conduct FAQ][coc_faq] or contact [opencode@microsoft.com][coc_contact] with any additional questions or comments.
 
 <!-- LINKS -->
-[source_code]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Verticals.AgriFood.Farming_1.0.0-beta.1/sdk/farmbeats/Azure.Verticals.AgriFood.Farming
+[source_code]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Verticals.AgriFood.Farming_1.0.0-beta.2/sdk/agrifood/Azure.Verticals.AgriFood.Farming
 [client_nuget_package]: https://www.nuget.org/packages?q=Azure.Verticals.AgriFood.Farming
 [product_documentation]: https://aka.ms/FarmBeatsProductDocumentationPaaS
-[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Verticals.AgriFood.Farming_1.0.0-beta.1/sdk/identity/Azure.Identity
+[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Verticals.AgriFood.Farming_1.0.0-beta.2/sdk/identity/Azure.Identity
 [protocol_client_quickstart]: https://aka.ms/azsdk/net/protocol/quickstart
-[default_cred_ref]: https://docs.microsoft.com/dotnet/api/azure.identity.defaultazurecredential?view=azure-dotnet
-[azure_subscription]: https://azure.microsoft.com/free/
-[azure_core_diagnostics]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Verticals.AgriFood.Farming_1.0.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md
+[default_cred_ref]: /dotnet/api/azure.identity.defaultazurecredential?view=azure-dotnet
+[azure_subscription]: https://azure.microsoft.com/free/dotnet/
+[azure_core_diagnostics]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Verticals.AgriFood.Farming_1.0.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md
 [scenes]: https://aka.ms/FarmBeatsSatellitePaaSDocumentation
 [farm_operations_docs]: https://aka.ms/FarmBeatsFarmOperationsDocumentation
 [farm_hierarchy]: https://aka.ms/FarmBeatsFarmHierarchyDocs
@@ -152,4 +149,5 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [coc_contact]: mailto:opencode@microsoft.com
 
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Ffarmbeats%2FAzure.Verticals.AgriFood.Farming%2FREADME.png)
+![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fagrifood%2FAzure.Verticals.AgriFood.Farming%2FREADME.png)
+
