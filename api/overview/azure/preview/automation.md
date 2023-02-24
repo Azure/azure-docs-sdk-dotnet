@@ -3,7 +3,7 @@ title: Azure Automation SDK for .NET
 description: Reference for Azure Automation SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 02/23/2023
+ms.data: 02/24/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: automation

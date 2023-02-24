@@ -3,7 +3,7 @@ title: Azure Scheduler SDK for .NET
 description: Reference for Azure Scheduler SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 02/23/2023
+ms.data: 02/24/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: scheduler
