@@ -3,16 +3,16 @@ title:
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.Dns, dns
 author: dnssuppgithub
 ms.author: dnssuppgithub
-ms.date: 12/05/2022
+ms.date: 02/28/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: dns
 ---
-# Microsoft Azure DNS management client library for .NET
+# Microsoft Azure Dns management client library for .NET
 
-Microsoft Azure DNS is a hosting service for DNS domains that provides name resolution by using Microsoft Azure infrastructure. By hosting your domains in Microsoft Azure, you can manage your DNS records by using the same credentials, APIs, tools, and billing as your other Azure services.
+Microsoft Azure Dns is a hosting service for Dns domains that provides name resolution by using Microsoft Azure infrastructure. By hosting your domains in Microsoft Azure, you can manage your Dns records by using the same credentials, APIs, tools, and billing as your other Azure services.
 
-This library supports managing Microsoft Azure DNS resources.
+This library supports managing Microsoft Azure Dns resources.
 
 This library follows the [new Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html), and provides many core capabilities:
 
@@ -38,19 +38,19 @@ dotnet add package Azure.ResourceManager.Dns
 
 ### Authenticate the Client
 
-To create an authenticated client and start interacting with Microsoft Azure resources, see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Dns_1.0.0/doc/dev/mgmt_quickstart.md).
+To create an authenticated client and start interacting with Microsoft Azure resources, see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Dns_1.0.1/doc/dev/mgmt_quickstart.md).
 
 ## Key concepts
 
-Key concepts of the Microsoft Azure SDK for .NET can be found [here](https://azure.github.io/azure-sdk/dotnet_introduction.html)
+Key concepts of the Microsoft Azure SDK for .NET can be found [here](https://azure.github.io/azure-sdk/dotnet_introduction.html).
 
 ## Documentation
 
 Documentation is available to help you learn how to use this package:
 
-- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Dns_1.0.0/doc/dev/mgmt_quickstart.md).
+- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Dns_1.0.1/doc/dev/mgmt_quickstart.md).
 - [API References](/dotnet/api/?view=azure-dotnet).
-- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Dns_1.0.0/sdk/identity/Azure.Identity/README.md).
+- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Dns_1.0.1/sdk/identity/Azure.Identity/README.md).
 
 ## Examples
 
@@ -144,7 +144,7 @@ more information, see the [Code of Conduct FAQ][coc_faq] or contact
 <opencode@microsoft.com> with any other questions or comments.
 
 <!-- LINKS -->
-[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Dns_1.0.0/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
+[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Dns_1.0.1/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 
