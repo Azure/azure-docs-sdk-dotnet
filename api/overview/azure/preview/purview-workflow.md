@@ -3,7 +3,7 @@ title: Azure Purview Workflow SDK for .NET
 description: Reference for Azure Purview Workflow SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 03/02/2023
+ms.data: 03/03/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: purviewworkflow
