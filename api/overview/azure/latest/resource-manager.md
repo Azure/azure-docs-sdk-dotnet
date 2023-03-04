@@ -19,16 +19,16 @@ Azure Resource Manager enables you to work with the resources in your solution a
 
 The Azure Resource Manager library for .NET enables you to create, update, delete, and list resources and resource groups.
 
-Install the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Management.ResourceManager.Fluent) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
+Install the [NuGet package](https://www.nuget.org/packages/Azure.ResourceManager/) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
 
 #### Visual Studio Package Manager
 
 ```powershell
-Install-Package Microsoft.Azure.Management.ResourceManager.Fluent
+Install-Package Azure.ResourceManager
 ```
 
 ```dotnetcli
-dotnet add package Microsoft.Azure.Management.ResourceManager.Fluent
+dotnet add package Azure.ResourceManager
 ```
 
 ### Example
@@ -36,15 +36,19 @@ dotnet add package Microsoft.Azure.Management.ResourceManager.Fluent
 This example creates a new resource group.
 
 ```csharp
-/* Include these "using" directives.
-using Microsoft.Azure.Management.ResourceManager.Fluent;
-using Microsoft.Azure.Management.ResourceManager.Fluent.Core;
-*/
+// First, initialize the ArmClient and get the default subscription
+ArmClient client = new ArmClient(new DefaultAzureCredential());
 
-IResourceGroup resourceGroup = azure.ResourceGroups
-    .Define("ResourceGroupName")
-    .WithRegion(Region.USWest)
-    .Create();
+// Now we get a ResourceGroupResource collection for that subscription
+SubscriptionResource subscription = await client.GetDefaultSubscriptionAsync();
+ResourceGroupCollection resourceGroups = subscription.GetResourceGroups();
+
+// With the collection, we can create a new resource group with an specific name
+string resourceGroupName = "myRgName";
+AzureLocation location = AzureLocation.WestUS2;
+ResourceGroupData resourceGroupData = new ResourceGroupData(location);
+ArmOperation<ResourceGroupResource> operation = await resourceGroups.CreateOrUpdateAsync(WaitUntil.Completed, resourceGroupName, resourceGroupData);
+ResourceGroupResource resourceGroup = operation.Value;
 ```
 
 > [!div class="nextstepaction"]
