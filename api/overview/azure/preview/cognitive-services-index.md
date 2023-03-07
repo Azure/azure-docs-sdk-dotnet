@@ -1,7 +1,5 @@
 | Reference | Package | Source |
 |---|---|---|
-|Vision Core|[Azure.AI.Vision.Core](https://www.nuget.org/packages/Azure.AI.Vision.Core)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
-|Image Analysis|[Azure.AI.Vision.ImageAnalysis](https://www.nuget.org/packages/Azure.AI.Vision.ImageAnalysis)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |[Anomaly Detector](ai.anomalydetector-readme.md)|[Azure.AI.AnomalyDetector](https://www.nuget.org/packages/Azure.AI.AnomalyDetector)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/anomalydetector/Azure.AI.AnomalyDetector)|
 |[Form Recognizer](ai.formrecognizer-readme.md)|[Azure.AI.FormRecognizer](https://www.nuget.org/packages/Azure.AI.FormRecognizer)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/formrecognizer/Azure.AI.FormRecognizer)|
 |[Conversational Language Understanding](ai.language.conversations-readme.md)|[Azure.AI.Language.Conversations](https://www.nuget.org/packages/Azure.AI.Language.Conversations)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/cognitivelanguage/Azure.AI.Language.Conversations)|
@@ -10,6 +8,8 @@
 |[Personalizer](ai.personalizer-readme.md)|[Azure.AI.Personalizer](https://www.nuget.org/packages/Azure.AI.Personalizer)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/personalizer/Azure.AI.Personalizer)|
 |[Text Analytics](ai.textanalytics-readme.md)|[Azure.AI.TextAnalytics](https://www.nuget.org/packages/Azure.AI.TextAnalytics)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/textanalytics/Azure.AI.TextAnalytics)|
 |[Document Translation](ai.translation.document-readme.md)|[Azure.AI.Translation.Document](https://www.nuget.org/packages/Azure.AI.Translation.Document)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/translation/Azure.AI.Translation.Document)|
+|Vision Core|[Azure.AI.Vision.Core](https://www.nuget.org/packages/Azure.AI.Vision.Core)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
+|Image Analysis|[Azure.AI.Vision.ImageAnalysis](https://www.nuget.org/packages/Azure.AI.Vision.ImageAnalysis)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |Form Recognizer|[Microsoft.Azure.CognitiveServices.FormRecognizer](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.FormRecognizer)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |Question Answering|[Microsoft.Azure.CognitiveServices.Knowledge.QnAMaker](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.Knowledge.QnAMaker)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |LUIS Authoring|[Microsoft.Azure.CognitiveServices.Language.LUIS.Authoring](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.Language.LUIS.Authoring)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/cognitiveservices/Language.LUIS.Authoring)|
