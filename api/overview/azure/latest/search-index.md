@@ -7,3 +7,4 @@
 |Search - Service|[Microsoft.Azure.Search.Service](https://www.nuget.org/packages/Microsoft.Azure.Search.Service)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |[Resource Management - Cognitive Search](resourcemanager.search-readme.md)|[Azure.ResourceManager.Search](https://www.nuget.org/packages/Azure.ResourceManager.Search)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/search/Azure.ResourceManager.Search)|
 |Management - Cognitive Search|[Microsoft.Azure.Management.Search](https://www.nuget.org/packages/Microsoft.Azure.Management.Search)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
+|Management - Cognitive Search Fluent|[Microsoft.Azure.Management.Search.Fluent](https://www.nuget.org/packages/Microsoft.Azure.Management.Search.Fluent)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
