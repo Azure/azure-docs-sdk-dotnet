@@ -8,7 +8,7 @@ ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: cdn
+ms.service: azure-cdn
 ---
 # Azure Cdn Management client library for .NET - version 1.0.0-beta.5 
 
