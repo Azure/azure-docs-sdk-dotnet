@@ -6,7 +6,7 @@ ms.author: pallavit
 ms.data: 03/07/2023
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: functions
+ms.service: azure-functions
 ms.date: 10/15/2019
 ---
 # Azure Functions libraries for .NET
