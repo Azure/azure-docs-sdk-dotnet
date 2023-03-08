@@ -18,6 +18,7 @@
     <AssemblyVersion>5.7.3.0</AssemblyVersion>
     <AssemblyVersion>5.7.4.0</AssemblyVersion>
     <AssemblyVersion>5.7.5.0</AssemblyVersion>
+    <AssemblyVersion>5.8.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>Azure.Messaging.EventHubs.Primitives.EventProcessor&lt;Azure.Messaging.EventHubs.Primitives.EventProcessorPartition&gt;</BaseTypeName>
@@ -34,6 +35,10 @@
                allowing the processor to be resilient in the face of errors.
              </summary>
     <remarks>
+               To enable coordination for sharing of partitions between <see cref="T:Azure.Messaging.EventHubs.EventProcessorClient" /> instances, they will assert exclusive read access to partitions
+               for the consumer group.  No other readers should be active in the consumer group other than processors intending to collaborate.  Non-exclusive readers will
+               be denied access; exclusive readers, including processors using a different storage locations, will interfere with the processor's operation and performance.
+            
                The <see cref="T:Azure.Messaging.EventHubs.EventProcessorClient" /> is safe to cache and use for the lifetime of an application, and that is best practice when the application
                processes events regularly or semi-regularly.  The processor is responsible for ensuring efficient network, CPU, and memory use.  Calling either
                <see cref="M:Azure.Messaging.EventHubs.EventProcessorClient.StopProcessingAsync(System.Threading.CancellationToken)" /> or <see cref="M:Azure.Messaging.EventHubs.EventProcessorClient.StopProcessing(System.Threading.CancellationToken)" /> when processing is complete or as the application is shutting down will ensure
@@ -61,6 +66,7 @@
         <AssemblyVersion>5.7.3.0</AssemblyVersion>
         <AssemblyVersion>5.7.4.0</AssemblyVersion>
         <AssemblyVersion>5.7.5.0</AssemblyVersion>
+        <AssemblyVersion>5.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -91,6 +97,7 @@
         <AssemblyVersion>5.7.3.0</AssemblyVersion>
         <AssemblyVersion>5.7.4.0</AssemblyVersion>
         <AssemblyVersion>5.7.5.0</AssemblyVersion>
+        <AssemblyVersion>5.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="checkpointStore" Type="Azure.Storage.Blobs.BlobContainerClient" />
@@ -98,8 +105,8 @@
         <Parameter Name="connectionString" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="checkpointStore">The client responsible for persisting checkpoints and processor state to durable storage. The associated container is expected to exist.</param>
-        <param name="consumerGroup">The name of the consumer group this processor is associated with.  Events are read in the context of this group.</param>
+        <param name="checkpointStore">The client responsible for persisting checkpoints and processor state to durable storage.  Processor instances sharing this storage will attempt to coordinate and share work.  The associated container is expected to exist.</param>
+        <param name="consumerGroup">The name of the consumer group this processor is associated with.  The processor will assert exclusive read access to partitions for this group.</param>
         <param name="connectionString">The connection string to use for connecting to the Event Hubs namespace; it is expected that the Event Hub name and the shared key properties are contained in this connection string.</param>
         <summary>
                Initializes a new instance of the <see cref="T:Azure.Messaging.EventHubs.EventProcessorClient" /> class.
@@ -137,6 +144,7 @@
         <AssemblyVersion>5.7.3.0</AssemblyVersion>
         <AssemblyVersion>5.7.4.0</AssemblyVersion>
         <AssemblyVersion>5.7.5.0</AssemblyVersion>
+        <AssemblyVersion>5.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="checkpointStore" Type="Azure.Storage.Blobs.BlobContainerClient" />
@@ -145,8 +153,8 @@
         <Parameter Name="clientOptions" Type="Azure.Messaging.EventHubs.EventProcessorClientOptions" />
       </Parameters>
       <Docs>
-        <param name="checkpointStore">The client responsible for persisting checkpoints and processor state to durable storage. The associated container is expected to exist.</param>
-        <param name="consumerGroup">The name of the consumer group this processor is associated with.  Events are read in the context of this group.</param>
+        <param name="checkpointStore">The client responsible for persisting checkpoints and processor state to durable storage.  Processor instances sharing this storage will attempt to coordinate and share work.  The associated container is expected to exist.</param>
+        <param name="consumerGroup">The name of the consumer group this processor is associated with.  The processor will assert exclusive read access to partitions for this group.</param>
         <param name="connectionString">The connection string to use for connecting to the Event Hubs namespace; it is expected that the Event Hub name and the shared key properties are contained in this connection string.</param>
         <param name="clientOptions">The set of options to use for this processor.</param>
         <summary>
@@ -185,6 +193,7 @@
         <AssemblyVersion>5.7.3.0</AssemblyVersion>
         <AssemblyVersion>5.7.4.0</AssemblyVersion>
         <AssemblyVersion>5.7.5.0</AssemblyVersion>
+        <AssemblyVersion>5.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="checkpointStore" Type="Azure.Storage.Blobs.BlobContainerClient" />
@@ -193,8 +202,8 @@
         <Parameter Name="eventHubName" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="checkpointStore">The client responsible for persisting checkpoints and processor state to durable storage. The associated container is expected to exist.</param>
-        <param name="consumerGroup">The name of the consumer group this processor is associated with.  Events are read in the context of this group.</param>
+        <param name="checkpointStore">The client responsible for persisting checkpoints and processor state to durable storage.  Processor instances sharing this storage will attempt to coordinate and share work.  The associated container is expected to exist.</param>
+        <param name="consumerGroup">The name of the consumer group this processor is associated with.  The processor will assert exclusive read access to partitions for this group.</param>
         <param name="connectionString">The connection string to use for connecting to the Event Hubs namespace; it is expected that the shared key properties are contained in this connection string, but not the Event Hub name.</param>
         <param name="eventHubName">The name of the specific Event Hub to associate the processor with.</param>
         <summary>
@@ -230,6 +239,7 @@
         <AssemblyVersion>5.7.3.0</AssemblyVersion>
         <AssemblyVersion>5.7.4.0</AssemblyVersion>
         <AssemblyVersion>5.7.5.0</AssemblyVersion>
+        <AssemblyVersion>5.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="checkpointStore" Type="Azure.Storage.Blobs.BlobContainerClient" />
@@ -239,8 +249,8 @@
         <Parameter Name="clientOptions" Type="Azure.Messaging.EventHubs.EventProcessorClientOptions" />
       </Parameters>
       <Docs>
-        <param name="checkpointStore">The client responsible for persisting checkpoints and processor state to durable storage. The associated container is expected to exist.</param>
-        <param name="consumerGroup">The name of the consumer group this processor is associated with.  Events are read in the context of this group.</param>
+        <param name="checkpointStore">The client responsible for persisting checkpoints and processor state to durable storage.  Processor instances sharing this storage will attempt to coordinate and share work.  The associated container is expected to exist.</param>
+        <param name="consumerGroup">The name of the consumer group this processor is associated with.  The processor will assert exclusive read access to partitions for this group.</param>
         <param name="connectionString">The connection string to use for connecting to the Event Hubs namespace; it is expected that the shared key properties are contained in this connection string, but not the Event Hub name.</param>
         <param name="eventHubName">The name of the specific Event Hub to associate the processor with.</param>
         <param name="clientOptions">The set of options to use for this processor.</param>
@@ -277,6 +287,7 @@
         <AssemblyVersion>5.7.3.0</AssemblyVersion>
         <AssemblyVersion>5.7.4.0</AssemblyVersion>
         <AssemblyVersion>5.7.5.0</AssemblyVersion>
+        <AssemblyVersion>5.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="checkpointStore" Type="Azure.Storage.Blobs.BlobContainerClient" />
@@ -287,8 +298,8 @@
         <Parameter Name="clientOptions" Type="Azure.Messaging.EventHubs.EventProcessorClientOptions" />
       </Parameters>
       <Docs>
-        <param name="checkpointStore">The client responsible for persisting checkpoints and processor state to durable storage. The associated container is expected to exist.</param>
-        <param name="consumerGroup">The name of the consumer group this processor is associated with.  Events are read in the context of this group.</param>
+        <param name="checkpointStore">The client responsible for persisting checkpoints and processor state to durable storage.  Processor instances sharing this storage will attempt to coordinate and share work.  The associated container is expected to exist.</param>
+        <param name="consumerGroup">The name of the consumer group this processor is associated with.  The processor will assert exclusive read access to partitions for this group.</param>
         <param name="fullyQualifiedNamespace">The fully qualified Event Hubs namespace to connect to.  This is likely to be similar to <c>{yournamespace}.servicebus.windows.net</c>.</param>
         <param name="eventHubName">The name of the specific Event Hub to associate the processor with.</param>
         <param name="credential">The shared access key credential to use for authorization.  Access controls may be specified by the Event Hubs namespace or the requested Event Hub, depending on Azure configuration.</param>
@@ -323,6 +334,7 @@
         <AssemblyVersion>5.7.3.0</AssemblyVersion>
         <AssemblyVersion>5.7.4.0</AssemblyVersion>
         <AssemblyVersion>5.7.5.0</AssemblyVersion>
+        <AssemblyVersion>5.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="checkpointStore" Type="Azure.Storage.Blobs.BlobContainerClient" />
@@ -333,8 +345,8 @@
         <Parameter Name="clientOptions" Type="Azure.Messaging.EventHubs.EventProcessorClientOptions" />
       </Parameters>
       <Docs>
-        <param name="checkpointStore">The client responsible for persisting checkpoints and processor state to durable storage. The associated container is expected to exist.</param>
-        <param name="consumerGroup">The name of the consumer group this processor is associated with.  Events are read in the context of this group.</param>
+        <param name="checkpointStore">The client responsible for persisting checkpoints and processor state to durable storage.  Processor instances sharing this storage will attempt to coordinate and share work.  The associated container is expected to exist.</param>
+        <param name="consumerGroup">The name of the consumer group this processor is associated with.  The processor will assert exclusive read access to partitions for this group.</param>
         <param name="fullyQualifiedNamespace">The fully qualified Event Hubs namespace to connect to.  This is likely to be similar to <c>{yournamespace}.servicebus.windows.net</c>.</param>
         <param name="eventHubName">The name of the specific Event Hub to associate the processor with.</param>
         <param name="credential">The shared access signature credential to use for authorization.  Access controls may be specified by the Event Hubs namespace or the requested Event Hub, depending on Azure configuration.</param>
@@ -369,6 +381,7 @@
         <AssemblyVersion>5.7.3.0</AssemblyVersion>
         <AssemblyVersion>5.7.4.0</AssemblyVersion>
         <AssemblyVersion>5.7.5.0</AssemblyVersion>
+        <AssemblyVersion>5.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="checkpointStore" Type="Azure.Storage.Blobs.BlobContainerClient" />
@@ -379,8 +392,8 @@
         <Parameter Name="clientOptions" Type="Azure.Messaging.EventHubs.EventProcessorClientOptions" />
       </Parameters>
       <Docs>
-        <param name="checkpointStore">The client responsible for persisting checkpoints and processor state to durable storage. The associated container is expected to exist.</param>
-        <param name="consumerGroup">The name of the consumer group this processor is associated with.  Events are read in the context of this group.</param>
+        <param name="checkpointStore">The client responsible for persisting checkpoints and processor state to durable storage.  Processor instances sharing this storage will attempt to coordinate and share work.  The associated container is expected to exist.</param>
+        <param name="consumerGroup">The name of the consumer group this processor is associated with.  The processor will assert exclusive read access to partitions for this group.</param>
         <param name="fullyQualifiedNamespace">The fully qualified Event Hubs namespace to connect to.  This is likely to be similar to <c>{yournamespace}.servicebus.windows.net</c>.</param>
         <param name="eventHubName">The name of the specific Event Hub to associate the processor with.</param>
         <param name="credential">The Azure identity credential to use for authorization.  Access controls may be specified by the Event Hubs namespace or the requested Event Hub, depending on Azure configuration.</param>
@@ -415,6 +428,7 @@
         <AssemblyVersion>5.7.3.0</AssemblyVersion>
         <AssemblyVersion>5.7.4.0</AssemblyVersion>
         <AssemblyVersion>5.7.5.0</AssemblyVersion>
+        <AssemblyVersion>5.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Collections.Generic.IEnumerable&lt;Azure.Messaging.EventHubs.Primitives.EventProcessorPartitionOwnership&gt;&gt;</ReturnType>
@@ -456,6 +470,7 @@
         <AssemblyVersion>5.7.3.0</AssemblyVersion>
         <AssemblyVersion>5.7.4.0</AssemblyVersion>
         <AssemblyVersion>5.7.5.0</AssemblyVersion>
+        <AssemblyVersion>5.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -490,6 +505,7 @@
         <AssemblyVersion>5.7.3.0</AssemblyVersion>
         <AssemblyVersion>5.7.4.0</AssemblyVersion>
         <AssemblyVersion>5.7.5.0</AssemblyVersion>
+        <AssemblyVersion>5.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Messaging.EventHubs.EventHubConnection</ReturnType>
@@ -524,6 +540,7 @@
         <AssemblyVersion>5.7.3.0</AssemblyVersion>
         <AssemblyVersion>5.7.4.0</AssemblyVersion>
         <AssemblyVersion>5.7.5.0</AssemblyVersion>
+        <AssemblyVersion>5.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -568,6 +585,7 @@
         <AssemblyVersion>5.7.3.0</AssemblyVersion>
         <AssemblyVersion>5.7.4.0</AssemblyVersion>
         <AssemblyVersion>5.7.5.0</AssemblyVersion>
+        <AssemblyVersion>5.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -602,6 +620,7 @@
         <AssemblyVersion>5.7.3.0</AssemblyVersion>
         <AssemblyVersion>5.7.4.0</AssemblyVersion>
         <AssemblyVersion>5.7.5.0</AssemblyVersion>
+        <AssemblyVersion>5.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -636,6 +655,7 @@
         <AssemblyVersion>5.7.3.0</AssemblyVersion>
         <AssemblyVersion>5.7.4.0</AssemblyVersion>
         <AssemblyVersion>5.7.5.0</AssemblyVersion>
+        <AssemblyVersion>5.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Messaging.EventHubs.Primitives.EventProcessorCheckpoint&gt;</ReturnType>
@@ -680,6 +700,7 @@
         <AssemblyVersion>5.7.3.0</AssemblyVersion>
         <AssemblyVersion>5.7.4.0</AssemblyVersion>
         <AssemblyVersion>5.7.5.0</AssemblyVersion>
+        <AssemblyVersion>5.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -720,6 +741,7 @@
         <AssemblyVersion>5.7.3.0</AssemblyVersion>
         <AssemblyVersion>5.7.4.0</AssemblyVersion>
         <AssemblyVersion>5.7.5.0</AssemblyVersion>
+        <AssemblyVersion>5.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -753,6 +775,7 @@
         <AssemblyVersion>5.7.3.0</AssemblyVersion>
         <AssemblyVersion>5.7.4.0</AssemblyVersion>
         <AssemblyVersion>5.7.5.0</AssemblyVersion>
+        <AssemblyVersion>5.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -786,6 +809,7 @@
         <AssemblyVersion>5.7.3.0</AssemblyVersion>
         <AssemblyVersion>5.7.4.0</AssemblyVersion>
         <AssemblyVersion>5.7.5.0</AssemblyVersion>
+        <AssemblyVersion>5.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Collections.Generic.IEnumerable&lt;Azure.Messaging.EventHubs.Primitives.EventProcessorPartitionOwnership&gt;&gt;</ReturnType>
@@ -826,6 +850,7 @@
         <AssemblyVersion>5.7.3.0</AssemblyVersion>
         <AssemblyVersion>5.7.4.0</AssemblyVersion>
         <AssemblyVersion>5.7.5.0</AssemblyVersion>
+        <AssemblyVersion>5.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -868,6 +893,7 @@
         <AssemblyVersion>5.7.3.0</AssemblyVersion>
         <AssemblyVersion>5.7.4.0</AssemblyVersion>
         <AssemblyVersion>5.7.5.0</AssemblyVersion>
+        <AssemblyVersion>5.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -913,6 +939,7 @@
         <AssemblyVersion>5.7.3.0</AssemblyVersion>
         <AssemblyVersion>5.7.4.0</AssemblyVersion>
         <AssemblyVersion>5.7.5.0</AssemblyVersion>
+        <AssemblyVersion>5.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -973,6 +1000,7 @@
         <AssemblyVersion>5.7.3.0</AssemblyVersion>
         <AssemblyVersion>5.7.4.0</AssemblyVersion>
         <AssemblyVersion>5.7.5.0</AssemblyVersion>
+        <AssemblyVersion>5.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -1030,6 +1058,7 @@
         <AssemblyVersion>5.7.3.0</AssemblyVersion>
         <AssemblyVersion>5.7.4.0</AssemblyVersion>
         <AssemblyVersion>5.7.5.0</AssemblyVersion>
+        <AssemblyVersion>5.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Func&lt;Azure.Messaging.EventHubs.Processor.PartitionClosingEventArgs,System.Threading.Tasks.Task&gt;</ReturnType>
@@ -1071,6 +1100,7 @@
         <AssemblyVersion>5.7.3.0</AssemblyVersion>
         <AssemblyVersion>5.7.4.0</AssemblyVersion>
         <AssemblyVersion>5.7.5.0</AssemblyVersion>
+        <AssemblyVersion>5.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Func&lt;Azure.Messaging.EventHubs.Processor.PartitionInitializingEventArgs,System.Threading.Tasks.Task&gt;</ReturnType>
@@ -1114,6 +1144,7 @@
         <AssemblyVersion>5.7.3.0</AssemblyVersion>
         <AssemblyVersion>5.7.4.0</AssemblyVersion>
         <AssemblyVersion>5.7.5.0</AssemblyVersion>
+        <AssemblyVersion>5.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Func&lt;Azure.Messaging.EventHubs.Processor.ProcessErrorEventArgs,System.Threading.Tasks.Task&gt;</ReturnType>
@@ -1167,6 +1198,7 @@
         <AssemblyVersion>5.7.3.0</AssemblyVersion>
         <AssemblyVersion>5.7.4.0</AssemblyVersion>
         <AssemblyVersion>5.7.5.0</AssemblyVersion>
+        <AssemblyVersion>5.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Func&lt;Azure.Messaging.EventHubs.Processor.ProcessEventArgs,System.Threading.Tasks.Task&gt;</ReturnType>
@@ -1214,6 +1246,7 @@
         <AssemblyVersion>5.7.3.0</AssemblyVersion>
         <AssemblyVersion>5.7.4.0</AssemblyVersion>
         <AssemblyVersion>5.7.5.0</AssemblyVersion>
+        <AssemblyVersion>5.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1259,6 +1292,7 @@
         <AssemblyVersion>5.7.3.0</AssemblyVersion>
         <AssemblyVersion>5.7.4.0</AssemblyVersion>
         <AssemblyVersion>5.7.5.0</AssemblyVersion>
+        <AssemblyVersion>5.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -1305,6 +1339,7 @@
         <AssemblyVersion>5.7.3.0</AssemblyVersion>
         <AssemblyVersion>5.7.4.0</AssemblyVersion>
         <AssemblyVersion>5.7.5.0</AssemblyVersion>
+        <AssemblyVersion>5.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1347,6 +1382,7 @@
         <AssemblyVersion>5.7.3.0</AssemblyVersion>
         <AssemblyVersion>5.7.4.0</AssemblyVersion>
         <AssemblyVersion>5.7.5.0</AssemblyVersion>
+        <AssemblyVersion>5.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -1390,6 +1426,7 @@
         <AssemblyVersion>5.7.3.0</AssemblyVersion>
         <AssemblyVersion>5.7.4.0</AssemblyVersion>
         <AssemblyVersion>5.7.5.0</AssemblyVersion>
+        <AssemblyVersion>5.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -1424,6 +1461,7 @@
         <AssemblyVersion>5.7.3.0</AssemblyVersion>
         <AssemblyVersion>5.7.4.0</AssemblyVersion>
         <AssemblyVersion>5.7.5.0</AssemblyVersion>
+        <AssemblyVersion>5.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -1461,6 +1499,7 @@
         <AssemblyVersion>5.7.3.0</AssemblyVersion>
         <AssemblyVersion>5.7.4.0</AssemblyVersion>
         <AssemblyVersion>5.7.5.0</AssemblyVersion>
+        <AssemblyVersion>5.8.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
