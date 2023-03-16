@@ -5,10 +5,9 @@ author: jsquire
 ms.author: jsquire
 ms.date: 04/06/2022
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: extensions
+ms.service: key-vault
 ---
 # Azure Key Vault Secrets configuration provider for Microsoft.Extensions.Configuration
 

@@ -6,7 +6,7 @@ ms.author: chriss
 ms.date: 03/13/2023
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: tables
+ms.service: app-service
 ---
 # Azure WebJobs Tables client library for .NET - version 1.1.0 
 

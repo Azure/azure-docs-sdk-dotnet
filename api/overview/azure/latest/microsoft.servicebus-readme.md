@@ -5,10 +5,9 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 01/13/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: servicebus
+ms.service: service-bus
 ---
 
 # Azure Service Bus client library for .NET - version 5.1.1 

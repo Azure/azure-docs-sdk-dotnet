@@ -6,7 +6,7 @@ author: rloutlaw
 ms.author: routlaw
 ms.date: 04/14/2021
 ms.topic: managed-reference
-ms.prod: azure
+ms.service: azure
 ms.technology: azure
 ms.devlang: dotnet
 ms.assetid: 46ad4ac6-bc51-45c9-b6dd-394ed0af5424

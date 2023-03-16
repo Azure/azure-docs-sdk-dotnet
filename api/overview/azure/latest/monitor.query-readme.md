@@ -5,10 +5,9 @@ author: nisha-bhatia
 ms.author: nisha-bhatia
 ms.date: 01/25/2022
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: monitor
+ms.service: azure-monitor
 ---
 # Azure Monitor Query client library for .NET - version 1.1.0 
 

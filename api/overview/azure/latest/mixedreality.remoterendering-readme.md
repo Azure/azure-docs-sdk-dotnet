@@ -5,10 +5,9 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 09/17/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: mixedreality
+ms.service: azure
 ---
 
 # Azure Remote Rendering client library for .NET - version 1.1.0 

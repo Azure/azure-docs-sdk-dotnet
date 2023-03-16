@@ -6,7 +6,7 @@ ms.author: heaths
 ms.date: 03/14/2023
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: keyvault
+ms.service: key-vault
 ---
 # Azure KeyVault Administration client library for .NET - version 4.3.0 
 

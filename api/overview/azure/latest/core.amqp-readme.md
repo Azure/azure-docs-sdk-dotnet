@@ -6,8 +6,9 @@ ms.author: jolov
 ms.date: 03/03/2023
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: core
+ms.service: azure
 ---
+
 # Azure Core AMQP shared client library for .NET - version 1.3.0 
 
 

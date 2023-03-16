@@ -5,10 +5,9 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 09/07/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: eventgrid
+ms.service: event-grid
 ---
 
 # CloudNative CloudEvent support for Azure.Messaging.EventGrid library for .NET

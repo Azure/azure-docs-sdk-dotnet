@@ -5,10 +5,9 @@ author: Mohit-Chakraborty
 ms.author: Mohit-Chakraborty
 ms.date: 01/14/2022
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: containerregistry
+ms.service: container-registry
 ---
 # Azure Container Registry client library for .NET - version 1.0.0 
 

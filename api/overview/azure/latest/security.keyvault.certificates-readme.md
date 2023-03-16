@@ -6,7 +6,7 @@ ms.author: heaths
 ms.date: 03/14/2023
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: keyvault
+ms.service: key-vault
 ---
 # Azure Key Vault Certificate client library for .NET - version 4.5.0 
 
