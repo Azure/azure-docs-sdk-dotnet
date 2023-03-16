@@ -8,6 +8,7 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: azure-load-testing
 ---
+
 # Azure Load Testing client library for .NET - version 1.0.1 
 
 Azure Load Testing provides client library in .NET to the user by which they can interact natively with Azure Load Testing service. Azure Load Testing is a fully managed load-testing service that enables you to generate high-scale load. The service simulates traffic for your applications, regardless of where they're hosted. Developers, testers, and quality assurance (QA) engineers can use it to optimize application performance, scalability, or capacity.
@@ -34,8 +35,10 @@ Install the client library for .NET with [NuGet](https://www.nuget.org/ ):
 dotnet add package Azure.Developer.LoadTesting
 ```
 
-### Prerequisites
+### Prerequisitesssss
+
 You must have an [Azure subscription](https://azure.microsoft.com/free/dotnet/) and [Azure Load Test Service Resource](https://learn.microsoft.com/azure/load-testing/). In order to take advantage of the C# 8.0 syntax, it is recommended that you compile using the [.NET Core SDK](https://dotnet.microsoft.com/download) 3.0 or higher with a [language version](/dotnet/csharp/language-reference/configure-language-version#override-a-default) of `latest`.  It is also possible to compile with the .NET Core SDK 2.1.x using a language version of `preview`.
+
 
 
 ### Authenticate the client
@@ -104,8 +107,10 @@ In the above example, `eus` represents the Azure region `East US`.
 You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Developer.LoadTesting_1.0.1/sdk/loadtestservice/Azure.Developer.LoadTesting/samples).
 
 
+
 ## Troubleshooting
 More about it is coming soon...
+
 
 
 ### Thread safety
@@ -131,19 +136,26 @@ This is a template, but your SDK readme should include details on how to contrib
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
-<!-- LINKS -->
-<!-- LINKS -->
-<!-- [source_code]: https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/loadtesting/azure-developer-loadtesting/src -->
-<!-- [sample_code]: https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/loadtesting/azure-developer-loadtesting/src/samples -->
 [style-guide-msft]: /style-guide/capitalization
+
 [style-guide-cloud]: https://aka.ms/azsdk/cloud-style-guide
+
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
+
 [authenticate_with_token]: https://learn.microsoft.com/aspnet/core/security/authentication/identity
+
 [azure_identity_credentials]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Developer.LoadTesting_1.0.1/sdk/identity/Azure.Identity#credentials
+
 [azure_identity_nuget]: https://www.nuget.org/packages/Azure.Identity/1.7.0
+
 [client_secret_credential]: https://learn.microsoft.com/dotnet/api/azure.identity.clientsecretcredential
+
 [nuget]: https://www.nuget.org/
+
 [azure_sub]: https://azure.microsoft.com/free/
+
 [api_reference_doc]: /rest/api/loadtesting/
+
 [product_documentation]: https://azure.microsoft.com/services/load-testing/
+
 
