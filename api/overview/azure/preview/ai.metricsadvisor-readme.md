@@ -5,10 +5,10 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 06/08/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: metricsadvisor
+ms.service: cognitive-services
+ms.subservice: metrics-advisor
 ---
 
 # Azure Metrics Advisor client library for .NET - version 1.0.0-beta.4 

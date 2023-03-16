@@ -5,10 +5,9 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 09/09/2020
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: .net
-ms.service: 
+ms.service: azure
 ---
 
 # Azure Schema Registry Apache Avro client library for .NET - version 1.0.0-beta.1 

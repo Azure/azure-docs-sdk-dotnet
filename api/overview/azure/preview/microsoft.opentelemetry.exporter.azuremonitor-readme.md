@@ -5,10 +5,9 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 11/10/2020
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: .net
-ms.service: 
+ms.service: azure-monitor
 ---
 
 # Azure Monitor Exporter client library for .NET - version 1.0.0-beta.1 

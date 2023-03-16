@@ -5,10 +5,9 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 05/27/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: 
+ms.service: time-series-insights
 ---
 
 # Azure IoT Time Series Insights client library for .NET - version 1.0.0-beta.1 

@@ -5,10 +5,9 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 10/11/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: webjobs
+ms.service: event-grid
 ---
 
 # Azure WebJobs EventGrid client library for .NET - version 3.0.0-beta.4 

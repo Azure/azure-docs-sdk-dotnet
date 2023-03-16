@@ -5,10 +5,9 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 08/13/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: synapseanalytics
+ms.service: synapse-analytics
 ---
 
 # Azure Synapse Analytics Access Control client library for .NET - version 1.0.0-preview.5 

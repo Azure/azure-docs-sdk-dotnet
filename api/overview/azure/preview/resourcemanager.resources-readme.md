@@ -5,10 +5,9 @@ author: AlexGhiondea
 ms.author: alexghi
 ms.date: 03/31/2022
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: resources
+ms.service: azure-resource-manager
 ---
 # Azure Resources Management client library for .NET - version 1.0.0-beta.7 
 

@@ -5,10 +5,9 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 07/26/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: communication
+ms.service: azure-communication-services
 ---
 
 # Azure Communication Chat client library for .NET - version 1.1.0-beta.1 

@@ -5,10 +5,9 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 09/08/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: webjobs
+ms.service: service-bus
 ---
 
 # Azure WebJobs Service Bus client library for .NET - version 5.0.0-beta.6 

@@ -5,10 +5,9 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 10/28/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: webpubsub
+ms.service: azure-web-pubsub
 ---
 
 # Azure Web PubSub Event Handler events data model client library for .NET - version 1.0.0-beta.1 

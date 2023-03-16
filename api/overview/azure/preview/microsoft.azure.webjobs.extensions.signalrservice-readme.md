@@ -5,10 +5,9 @@ author: AlexGhiondea
 ms.author: alexghi
 ms.date: 02/14/2022
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: webjobs
+ms.service: signalr
 ---
 # Azure WebJobs SignalR Service client library for .NET - version 1.7.0-beta.2 
 

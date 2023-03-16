@@ -5,10 +5,9 @@ author: Kishp01
 ms.author: kishp
 ms.date: 05/10/2022
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: eventgrid
+ms.service: event-grid
 ---
 # Azure Event Grid client library for .NET - version 4.11.0-beta.2 
 

@@ -5,10 +5,9 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 11/04/2020
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: .net
-ms.service: 
+ms.service: azure
 ---
 
 #  System.Memory.Data library for .NET (Preview) 

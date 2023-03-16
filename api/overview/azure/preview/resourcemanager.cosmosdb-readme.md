@@ -5,10 +5,9 @@ author: Wmengmsft
 ms.author: wmeng
 ms.date: 04/08/2022
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: cosmosdb
+ms.service: cosmos-db
 ---
 # Azure CosmosDB Management client library for .NET - version 1.0.0-beta.5 
 

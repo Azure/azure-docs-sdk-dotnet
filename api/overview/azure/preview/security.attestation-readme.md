@@ -5,7 +5,6 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 04/05/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
 ms.service: attestation

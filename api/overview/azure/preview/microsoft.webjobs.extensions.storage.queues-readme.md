@@ -5,10 +5,10 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 11/11/2020
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: .net
-ms.service: 
+ms.service: storage
+ms.subservice: queues
 ---
 
 # Azure WebJobs Storage Queues client library for .NET - version 5.0.0-beta.1 

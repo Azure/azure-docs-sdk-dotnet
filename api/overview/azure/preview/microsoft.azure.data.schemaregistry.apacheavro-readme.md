@@ -5,10 +5,9 @@ author: jsquire
 ms.author: jsquire
 ms.date: 04/06/2022
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: schemaregistry
+ms.service: azure
 ---
 # Azure Schema Registry Apache Avro client library for .NET - version 1.0.0-beta.8 
 

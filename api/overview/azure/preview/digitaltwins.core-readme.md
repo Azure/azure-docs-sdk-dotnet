@@ -5,10 +5,9 @@ author: johngallardo
 ms.author: jgalla
 ms.date: 03/25/2022
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: iot
+ms.service: digital-twins
 ---
 # Azure IoT Digital Twins client library for .NET - version 1.4.0-beta.1 
 

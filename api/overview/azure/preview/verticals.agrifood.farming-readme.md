@@ -6,7 +6,7 @@ ms.author: pallavit
 ms.date: 02/23/2023
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: agrifood
+ms.service: azure-farmbeats
 ---
 # Azure FarmBeats client library for .NET - version 1.0.0-beta.2 
 

@@ -5,10 +5,10 @@ author: maggiepint
 ms.author: magpint
 ms.date: 11/10/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: translator
+ms.service: cognitive-services
+ms.subservice: translator-text
 ---
 
 # Azure Cognitive Services Document Translation client library for .NET - version 1.0.0-beta.6 

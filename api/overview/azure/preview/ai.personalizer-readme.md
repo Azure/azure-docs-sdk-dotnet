@@ -5,10 +5,10 @@ author: orenmichaely
 ms.author: ormichae
 ms.date: 03/23/2022
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: personalizer
+ms.service: cognitive-services
+ms.subservice: personalizer
 ---
 # Azure Personalizer client library for .NET - version 2.0.0-beta.2 
 

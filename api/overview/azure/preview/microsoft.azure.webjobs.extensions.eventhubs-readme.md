@@ -5,10 +5,9 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 07/09/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: webjobs
+ms.service: event-hubs
 ---
 
 # Azure WebJobs Event Hubs client library for .NET - version 5.0.0-beta.7 

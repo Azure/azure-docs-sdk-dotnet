@@ -5,10 +5,9 @@ author: serkantkaraca
 ms.author: serkar
 ms.date: 04/05/2022
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: eventhub
+ms.service: event-hubs
 ---
 # Azure Event Hubs Event Processor client library for .NET - version 5.7.0-beta.5 
 

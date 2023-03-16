@@ -5,10 +5,9 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 09/08/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: monitor
+ms.service: azure-monitor
 ---
 
 # Azure Monitor Query client library for .NET - version 1.0.0-beta.4 

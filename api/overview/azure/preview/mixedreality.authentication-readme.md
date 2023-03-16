@@ -5,10 +5,9 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 02/16/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: dotnet
-ms.service: mixedreality
+ms.service: azure
 ---
 
 # Azure Mixed Reality Authentication client library for .NET - version 1.0.0-beta.2 

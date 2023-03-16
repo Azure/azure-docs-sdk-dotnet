@@ -5,10 +5,9 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 10/09/2020
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: .net
-ms.service: 
+ms.service: azure
 ---
 
 # Newtonsoft.Json support for Microsoft.Azure.Core.Spatial library for .NET
