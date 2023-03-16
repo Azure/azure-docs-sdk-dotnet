@@ -3,7 +3,7 @@ title: Azure Communication Phone Numbers client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Communication.PhoneNumbers, communication
 description: Purchase Numbers for direct offer or direct routing. Configure number calling capabilities. Configure direct routing in order to connect customer-provided telephony infrastructure to Azure Communication Resources
 author: ramya-rao-a
-ms.author: ramyar
+ms.author: nostojic
 ms.date: 03/16/2023
 ms.topic: reference
 ms.prod: azure
