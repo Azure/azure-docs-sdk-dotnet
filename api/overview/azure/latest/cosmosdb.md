@@ -1,7 +1,7 @@
 ---
 title: Azure Cosmos DB libraries for .NET
 description: Reference for Azure Cosmos DB libraries for .NET
-ms.date: 03/05/2021
+ms.date: 03/16/2023
 ms.topic: reference
 ms.service: cosmos-db
 ---
@@ -49,7 +49,7 @@ using (CosmosClient cosmosClient = new CosmosClient("endpoint", "primaryKey"))
 ```
 
 > [!div class="nextstepaction"]
-> [Explore the client APIs](/dotnet/api/overview/azure/cosmosdb/documentdb)
+> [Explore the client APIs](/dotnet/api/overview/azure/cosmosdb)
 
 ## Samples
 
