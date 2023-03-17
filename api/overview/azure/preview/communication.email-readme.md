@@ -3,12 +3,12 @@ title: Azure Communication Email client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Communication.Email, communication
 author: acsdevx-msft
 ms.author: acsdevx-msft
-ms.date: 03/07/2023
+ms.date: 03/16/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: communication
 ---
-# Azure Communication Email client library for .NET - version 1.0.0-beta.2 
+# Azure Communication Email client library for .NET - version 1.0.0-beta.4 
 
 
 This package contains a C# SDK for Azure Communication Services for Email.
@@ -202,7 +202,7 @@ var filePath = "<path to your file>";
 var attachmentName = "<name of your attachment>";
 var contentType = MediaTypeNames.Text.Plain;
 
-string content = new BinaryData(File.ReadAllBytes(filePath));
+var content = new BinaryData(System.IO.File.ReadAllBytes(filePath));
 var emailAttachment = new EmailAttachment(attachmentName, contentType, content);
 
 emailMessage.Attachments.Add(emailAttachment);
@@ -242,6 +242,6 @@ This project has adopted the [Microsoft Open Source Code of Conduct][coc]. For m
 [product_docs]: https://aka.ms/acsemail/overview
 [nextsteps]:https://aka.ms/acsemail/qs-sendmail?pivots=programming-language-csharp
 [nuget]: https://www.nuget.org/
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Communication.Email_1.0.0-beta.2/sdk/communication/Azure.Communication.Email/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Communication.Email_1.0.0-beta.4/sdk/communication/Azure.Communication.Email/src
 [domain_overview]: https://aka.ms/acsemail/domainsoverview
 
