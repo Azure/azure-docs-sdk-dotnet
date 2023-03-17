@@ -3,7 +3,7 @@ title: Azure Data Box SDK for .NET
 description: Reference for Azure Data Box SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 03/16/2023
+ms.data: 03/17/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: databox
