@@ -9,6 +9,7 @@ ms.devlang: dotnet
 ms.service: azure-functions
 ms.date: 10/15/2019
 ---
+
 # Azure Functions libraries for .NET
 
 ## Overview
