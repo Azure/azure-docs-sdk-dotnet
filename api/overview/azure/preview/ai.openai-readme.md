@@ -1,26 +1,40 @@
 ---
 title: Azure OpenAI client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.OpenAI, openai
-author: pallavit
-ms.author: pallavit
-ms.date: 02/23/2023
+author: jpalvarezl
+ms.author: josealvar
+ms.date: 03/22/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: openai
 ---
-# Azure OpenAI client library for .NET - version 1.0.0-beta.4 
+# Azure OpenAI client library for .NET - version 1.0.0-beta.5 
 
 
-Azure OpenAI is a managed service that allows developers to deploy, tune, and generate content from OpenAI models on Azure resouces.
+The Azure OpenAI client library for .NET is an adaptation of OpenAI's REST APIs that provides an idiomatic interface
+and rich integration with the rest of the Azure SDK ecosystem. It can connect to Azure OpenAI resources *or* to the
+non-Azure OpenAI inference endpoint, making it a great choice for even non-Azure OpenAI development.
 
 Use the client library for Azure OpenAI to:
 
 * [Create a completion for text][msdocs_openai_completion]
 * [Create a text embedding for comparisons][msdocs_openai_embedding]
 
-  [Source code](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.4/sdk/openai/Azure.AI.OpenAI/src) | [Package (NuGet)](https://www.nuget.org/packages/Azure.AI.OpenAI) | [API reference documentation](https://learn.microsoft.com/azure/cognitive-services/openai/reference) | [Product documentation](https://learn.microsoft.com/azure/cognitive-services/openai/) | [Samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.4/sdk/openai/Azure.AI.OpenAI/tests/Samples)
+Azure OpenAI is a managed service that allows developers to deploy, tune, and generate content from OpenAI models on Azure resources.
+
+  [Source code](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.5/sdk/openai/Azure.AI.OpenAI/src) | [Package (NuGet)](https://www.nuget.org/packages/Azure.AI.OpenAI) | [API reference documentation](https://learn.microsoft.com/azure/cognitive-services/openai/reference) | [Product documentation](https://learn.microsoft.com/azure/cognitive-services/openai/) | [Samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.5/sdk/openai/Azure.AI.OpenAI/tests/Samples)
 
 ## Getting started
+
+### Prerequisites
+
+If you'd like to use an Azure OpenAI resource, you must have an [Azure subscription](https://azure.microsoft.com/free/dotnet/)
+and [Azure OpenAI access](https://learn.microsoft.com/azure/cognitive-services/openai/overview#how-do-i-get-access-to-azure-openai).
+This will allow you to create an Azure OpenAI resource and get both a connection URL as well as API keys. For more
+information, see [Quickstart: Get started generating text using Azure OpenAI Service](https://learn.microsoft.com/azure/cognitive-services/openai/quickstart).
+
+If you'd like to use the Azure OpenAI .NET client library to connect to non-Azure OpenAI, you'll need an API key
+from a developer account at https://platform.openai.com/.
 
 ### Install the package
 
@@ -30,30 +44,23 @@ Install the client library for .NET with [NuGet](https://www.nuget.org/ ):
 dotnet add package Azure.AI.OpenAI --prerelease
 ```
 
-### Prerequisites
-
-You must have an [Azure subscription](https://azure.microsoft.com/free/dotnet/) and [OpenAI access](https://learn.microsoft.com/azure/cognitive-services/openai/overview#how-do-i-get-access-to-azure-openai).
-
 ### Authenticate the client
 
-In order to interact with the Azure OpenAI service, you'll need to create an instance of the [OpenAIClient][openai_client_class] class. To make this possible, you'll need the endpoint URI for your Azure OpenAI resource and an API key to access that resource.
+In order to interact with Azure OpenAI or OpenAI, you'll need to create an instance of the [OpenAIClient][openai_client_class]
+class. To configure a client for use with Azure OpenAI, provide a valid endpoint URI to an Azure OpenAI resource
+along with a corresponding key credential, token credential, or Azure identity credential that's authorized to use the
+Azure OpenAI resource. To instead configure the client to connect to OpenAI's service, provide an API key from OpenAI's
+developer portal.
 
-#### Get credentials
-
-You can obtain the endpoint string and subscription key from the Azure OpenAI Portal.
-
-#### Create OpenAIClient
-
-Once you have the value of the endpoint string and subscription key, you can create the OpenAIClient:
-
-```C# Snippet:CreateOpenAIClient
-// Replace with your Azure OpenAI key
-string key = "YOUR_AZURE_OPENAI_KEY";
-string endpoint = "https://myaccount.openai.azure.com/";
-OpenAIClient client = new OpenAIClient(new Uri(endpoint), new AzureKeyCredential(key));
+```C# Snippet:MakeClientWithAzureOrNonAzureOpenAI
+OpenAIClient client = useAzureOpenAI
+    ? new OpenAIClient(
+        new Uri("https://your-azure-openai-resource.com/"),
+        new AzureKeyCredential("your-azure-openai-resource-api-key"))
+    : new OpenAIClient("your-api-key-from-platform.openai.com");
 ```
 
-#### Create OpenAIClient with Azure Active Directory Credential
+#### Create OpenAIClient with an Azure Active Directory Credential
 
 Client subscription key authentication is used in most of the examples in this getting started guide, but you can also authenticate with Azure Active Directory using the [Azure Identity library][azure_identity]. To use the [DefaultAzureCredential][azure_identity_dac] provider shown below,
 or other credential providers provided with the Azure SDK, please install the Azure.Identity package:
@@ -64,28 +71,28 @@ dotnet add package Azure.Identity
 
 ```C# Snippet:CreateOpenAIClientTokenCredential
 string endpoint = "https://myaccount.openai.azure.com/";
-OpenAIClient client = new OpenAIClient(new Uri(endpoint), new DefaultAzureCredential());
+var client = new OpenAIClient(new Uri(endpoint), new DefaultAzureCredential());
 ```
 
 ## Key concepts
 
 The main concept to understand is [Completions][azure_openai_completions_docs]. Briefly explained, completions provides its functionality in the form of a text prompt, which by using a specific [model](https://learn.microsoft.com/azure/cognitive-services/openai/concepts/models), will then attempt to match the context and patterns, providing an output text. The following code snippet provides a rough overview (more details can be found in the `GenerateChatbotResponsesWithToken` sample code):
 
-```C#
-OpenAIClient client = new OpenAIClient(new Uri(endpoint), new DefaultAzureCredential());
+```C# Snippet:UseAzureOrNonAzureOpenAI
+OpenAIClient client = useAzureOpenAI
+    ? new OpenAIClient(
+        new Uri("https://your-azure-openai-resource.com/"),
+        new AzureKeyCredential("your-azure-openai-resource-api-key"))
+    : new OpenAIClient("your-api-key-from-platform.openai.com");
 
-CompletionsOptions completionsOptions = new CompletionsOptions()
+Response<Completions> response = await client.GetCompletionsAsync(
+    "text-davinci-003", // assumes a matching model deployment or model name
+    "Hello, world!");
+
+foreach (Choice choice in response.Value.Choices)
 {
-    Prompt =
-    {
-        "What is Azure OpenAI?",
-    }
-};
-completionsOptions.Prompt.Add(prompt);
-
-Response<Completions> completionsResponse = client.GetCompletions("myModelDeployment", completionsOptions);
-string completion = completionsResponse.Value.Choices[0].Text;
-Console.WriteLine($"Chatbot: {completion}");
+    Console.WriteLine(choice.Text);
+}
 ```
 
 ### Thread safety
@@ -94,18 +101,18 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.4/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.4/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.4/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.4/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.4/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.4/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.5/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.5/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.5/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.5/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.5/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.5/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
 ## Examples
 
-You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.OpenAI_1.0.0-beta.4/sdk/openai/Azure.AI.OpenAI/tests/Samples).
+You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.OpenAI_1.0.0-beta.5/sdk/openai/Azure.AI.OpenAI/tests/Samples).
 
 ### Generate Chatbot Response
 
@@ -113,12 +120,13 @@ The `GenerateChatbotResponse` method authenticates using a DefaultAzureCredentia
 
 ```C# Snippet:GenerateChatbotResponse
 string endpoint = "https://myaccount.openai.azure.com/";
-OpenAIClient client = new OpenAIClient(new Uri(endpoint), new DefaultAzureCredential());
+var client = new OpenAIClient(new Uri(endpoint), new DefaultAzureCredential());
 
+string deploymentName = "text-davinci-003";
 string prompt = "What is Azure OpenAI?";
 Console.Write($"Input: {prompt}");
 
-Response<Completions> completionsResponse = client.GetCompletions("myDeploymentId", prompt);
+Response<Completions> completionsResponse = client.GetCompletions(deploymentName, prompt);
 string completion = completionsResponse.Value.Choices[0].Text;
 Console.WriteLine($"Chatbot: {completion}");
 ```
@@ -131,7 +139,7 @@ The `GenerateMultipleChatbotResponsesWithSubscriptionKey` method gives an exampl
 // Replace with your Azure OpenAI key
 string key = "YOUR_AZURE_OPENAI_KEY";
 string endpoint = "https://myaccount.openai.azure.com/";
-OpenAIClient client = new OpenAIClient(new Uri(endpoint), new AzureKeyCredential(key));
+var client = new OpenAIClient(new Uri(endpoint), new AzureKeyCredential(key));
 
 List<string> examplePrompts = new(){
     "How are you today?",
@@ -141,13 +149,15 @@ List<string> examplePrompts = new(){
     "Describe in single words only the good things that come into your mind about your mother.",
 };
 
+string deploymentName = "text-davinci-003";
+
 foreach (string prompt in examplePrompts)
 {
     Console.Write($"Input: {prompt}");
     CompletionsOptions completionsOptions = new CompletionsOptions();
-    completionsOptions.Prompt.Add(prompt);
+    completionsOptions.Prompts.Add(prompt);
 
-    Response<Completions> completionsResponse = client.GetCompletions("myModelDeployment", completionsOptions);
+    Response<Completions> completionsResponse = client.GetCompletions(deploymentName, completionsOptions);
     string completion = completionsResponse.Value.Choices[0].Text;
     Console.WriteLine($"Chatbot: {completion}");
 }
@@ -159,7 +169,7 @@ The `SummarizeText` method generates a summarization of the given input prompt.
 
 ```C# Snippet:SummarizeText
 string endpoint = "https://myaccount.openai.azure.com/";
-OpenAIClient client = new OpenAIClient(new Uri(endpoint), new DefaultAzureCredential());
+var client = new OpenAIClient(new Uri(endpoint), new DefaultAzureCredential());
 
 string textToSummarize = @"
     Two independent experiments reported their results this morning at CERN, Europe's high-energy physics laboratory near Geneva in Switzerland. Both show convincing evidence of a new boson particle weighing around 125 gigaelectronvolts, which so far fits predictions of the Higgs previously made by theoretical physicists.
@@ -179,13 +189,49 @@ string summarizationPrompt = @$"
 ";
 
 Console.Write($"Input: {summarizationPrompt}");
-CompletionsOptions completionsOptions = new CompletionsOptions();
-completionsOptions.Prompt.Add(summarizationPrompt);
+var completionsOptions = new CompletionsOptions()
+{
+    Prompts = { summarizationPrompt },
+};
 
-Response<Completions> completionsResponse = client.GetCompletions("myModelDeployment", completionsOptions);
+string deploymentName = "text-davinci-003";
+
+Response<Completions> completionsResponse = client.GetCompletions(deploymentName, completionsOptions);
 string completion = completionsResponse.Value.Choices[0].Text;
 Console.WriteLine($"Summarization: {completion}");
 ```
+
+### Stream Chat Messages with non-Azure OpenAI
+
+```C# Snippet:StreamChatMessages
+string nonAzureOpenAIApiKey = "your-api-key-from-platform.openai.com";
+var client = new OpenAIClient(nonAzureOpenAIApiKey, new OpenAIClientOptions());
+var chatCompletionsOptions = new ChatCompletionsOptions()
+{
+    Messages =
+    {
+        new ChatMessage(ChatRole.System, "You are a helpful assistant. You will talk like a pirate."),
+        new ChatMessage(ChatRole.User, "Can you help me?"),
+        new ChatMessage(ChatRole.Assistant, "Arrrr! Of course, me hearty! What can I do for ye?"),
+        new ChatMessage(ChatRole.User, "What's the best way to train a parrot?"),
+    }
+};
+
+Response<StreamingChatCompletions> response = await client.GetChatCompletionsStreamingAsync(
+    deploymentOrModelName: "gpt-3.5-turbo",
+    chatCompletionsOptions);
+using StreamingChatCompletions streamingChatCompletions = response.Value;
+
+await foreach (StreamingChatChoice choice in streamingChatCompletions.GetChoicesStreaming())
+{
+    await foreach (ChatMessage message in choice.GetMessageStreaming())
+    {
+        Console.Write(message.Content);
+    }
+    Console.WriteLine();
+}
+```
+
 ## Troubleshooting
 
 When you interact with Azure OpenAI using the .NET SDK, errors returned by the service correspond to the same HTTP status codes returned for [REST API][openai_rest] requests.
@@ -215,11 +261,11 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [msdocs_openai_embedding]: https://learn.microsoft.com/azure/cognitive-services/openai/concepts/understand-embeddings
 [style-guide-msft]: /style-guide/capitalization
 [style-guide-cloud]: https://aka.ms/azsdk/cloud-style-guide
-[openai_client_class]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.4/sdk/openai/Azure.AI.OpenAI/src/Generated/OpenAIClient.cs
+[openai_client_class]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.5/sdk/openai/Azure.AI.OpenAI/src/Generated/OpenAIClient.cs
 [openai_rest]: https://learn.microsoft.com/azure/cognitive-services/openai/reference
 [azure_openai_completions_docs]: https://learn.microsoft.com/azure/cognitive-services/openai/how-to/completions
 [azure_openai_embeddgings_docs]: https://learn.microsoft.com/azure/cognitive-services/openai/concepts/understand-embeddings
-[openai_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.4/CONTRIBUTING.md
+[openai_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.5/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [code_of_conduct_faq]: https://opensource.microsoft.com/codeofconduct/faq/
