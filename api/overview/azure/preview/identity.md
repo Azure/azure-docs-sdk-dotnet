@@ -3,7 +3,7 @@ title: Azure Identity SDK for .NET
 description: Reference for Azure Identity SDK for .NET
 author: schaabs
 ms.author: sschaab
-ms.data: 03/13/2023
+ms.data: 03/28/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: identity
