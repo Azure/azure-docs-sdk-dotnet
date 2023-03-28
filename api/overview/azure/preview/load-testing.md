@@ -6,7 +6,7 @@ ms.author: pallavit
 ms.data: 03/28/2023
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: azure-load-testing
+ms.service: loadtesting
 ---
 # Azure Load Testing SDK for .NET - preview
 ## Packages - preview
