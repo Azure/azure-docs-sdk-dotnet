@@ -21,6 +21,7 @@
     <AssemblyVersion>12.14.1.0</AssemblyVersion>
     <AssemblyVersion>12.15.0.0</AssemblyVersion>
     <AssemblyVersion>12.15.1.0</AssemblyVersion>
+    <AssemblyVersion>12.16.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -57,6 +58,7 @@
         <AssemblyVersion>12.14.1.0</AssemblyVersion>
         <AssemblyVersion>12.15.0.0</AssemblyVersion>
         <AssemblyVersion>12.15.1.0</AssemblyVersion>
+        <AssemblyVersion>12.16.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -91,6 +93,7 @@
         <AssemblyVersion>12.14.1.0</AssemblyVersion>
         <AssemblyVersion>12.15.0.0</AssemblyVersion>
         <AssemblyVersion>12.15.1.0</AssemblyVersion>
+        <AssemblyVersion>12.16.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="client" Type="Azure.Storage.Blobs.BlobContainerClient" />
@@ -135,6 +138,7 @@
         <AssemblyVersion>12.14.1.0</AssemblyVersion>
         <AssemblyVersion>12.15.0.0</AssemblyVersion>
         <AssemblyVersion>12.15.1.0</AssemblyVersion>
+        <AssemblyVersion>12.16.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="client" Type="Azure.Storage.Blobs.Specialized.BlobBaseClient" />
@@ -152,6 +156,64 @@
             Initializes a new instance of the <see cref="T:Azure.Storage.Blobs.Specialized.BlobLeaseClient" />  class.
             </summary>
         <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Acquire">
+      <MemberSignature Language="C#" Value="public virtual Azure.Response Acquire (TimeSpan duration, Azure.RequestConditions conditions, Azure.RequestContext context);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response Acquire(valuetype System.TimeSpan duration, class Azure.RequestConditions conditions, class Azure.RequestContext context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Storage.Blobs.Specialized.BlobLeaseClient.Acquire(System.TimeSpan,Azure.RequestConditions,Azure.RequestContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function Acquire (duration As TimeSpan, conditions As RequestConditions, context As RequestContext) As Response" />
+      <MemberSignature Language="F#" Value="abstract member Acquire : TimeSpan * Azure.RequestConditions * Azure.RequestContext -&gt; Azure.Response&#xA;override this.Acquire : TimeSpan * Azure.RequestConditions * Azure.RequestContext -&gt; Azure.Response" Usage="blobLeaseClient.Acquire (duration, conditions, context)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Storage.Blobs</AssemblyName>
+        <AssemblyVersion>12.16.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Response</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="duration" Type="System.TimeSpan" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="conditions" Type="Azure.RequestConditions" Index="1" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="context" Type="Azure.RequestContext" Index="2" FrameworkAlternate="azure-dotnet-preview" />
+      </Parameters>
+      <Docs>
+        <param name="duration">
+             Specifies the duration of the lease, in seconds, or specify
+             <see cref="F:Azure.Storage.Blobs.Specialized.BlobLeaseClient.InfiniteLeaseDuration" /> for a lease that never expires.
+             A non-infinite lease can be between 15 and 60 seconds.
+             A lease duration cannot be changed using <see cref="M:Azure.Storage.Blobs.Specialized.BlobLeaseClient.RenewAsync(Azure.RequestConditions,System.Threading.CancellationToken)" />
+             or <see cref="M:Azure.Storage.Blobs.Specialized.BlobLeaseClient.ChangeAsync(System.String,Azure.RequestConditions,System.Threading.CancellationToken)" />.
+             </param>
+        <param name="conditions">
+             Optional <see cref="T:Azure.Storage.Blobs.Models.BlobLeaseRequestConditions" /> to add
+             conditions on acquiring a lease.
+             </param>
+        <param name="context">
+             Optional <see cref="T:Azure.RequestContext" /> for the operation.
+             </param>
+        <summary>
+             The <see cref="M:Azure.Storage.Blobs.Specialized.BlobLeaseClient.Acquire(System.TimeSpan,Azure.RequestConditions,Azure.RequestContext)" />
+             operation acquires a lease on the blob or container. The lease
+             <paramref name="duration" /> must be between 15 to 60 seconds, or
+             infinite (-1).
+            
+             If the container does not have an active lease, the Blob service
+             creates a lease on the blob or container and returns it.  If the
+             container has an active lease, you can only request a new lease
+             using the active lease ID as <see cref="P:Azure.Storage.Blobs.Specialized.BlobLeaseClient.LeaseId" />, but you can
+             specify a new <paramref name="duration" />.
+            
+             For more information, see <see href="https://docs.microsoft.com/rest/api/storageservices/lease-container">
+             Lease Container</see>.
+             </summary>
+        <returns>
+             A <see cref="T:Azure.Response" /> as returned by the Storage service.
+             </returns>
+        <remarks>
+             A <see cref="T:Azure.RequestFailedException" /> will be thrown if
+             a failure occurs.
+             </remarks>
       </Docs>
     </Member>
     <Member MemberName="Acquire">
@@ -178,6 +240,7 @@
         <AssemblyVersion>12.14.1.0</AssemblyVersion>
         <AssemblyVersion>12.15.0.0</AssemblyVersion>
         <AssemblyVersion>12.15.1.0</AssemblyVersion>
+        <AssemblyVersion>12.16.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Response&lt;Azure.Storage.Blobs.Models.BlobLease&gt;</ReturnType>
@@ -204,9 +267,10 @@
              notifications that the operation should be cancelled.
              </param>
         <summary>
-             The <see cref="M:Azure.Storage.Blobs.Specialized.BlobLeaseClient.Acquire(System.TimeSpan,Azure.RequestConditions,System.Threading.CancellationToken)" /> operation acquires a lease on
-             the blob or container.  The lease <paramref name="duration" /> must
-             be between 15 to 60 seconds, or infinite (-1).
+             The <see cref="M:Azure.Storage.Blobs.Specialized.BlobLeaseClient.Acquire(System.TimeSpan,Azure.RequestConditions,System.Threading.CancellationToken)" />
+             operation acquires a lease on the blob or container. The lease
+             <paramref name="duration" /> must be between 15 to 60 seconds, or
+             infinite (-1).
             
              If the container does not have an active lease, the Blob service
              creates a lease on the blob or container and returns it.  If the
@@ -219,6 +283,65 @@
              </summary>
         <returns>
              A <see cref="T:Azure.Response`1" /> describing the lease.
+             </returns>
+        <remarks>
+             A <see cref="T:Azure.RequestFailedException" /> will be thrown if
+             a failure occurs.
+             </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AcquireAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; AcquireAsync (TimeSpan duration, Azure.RequestConditions conditions, Azure.RequestContext context);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; AcquireAsync(valuetype System.TimeSpan duration, class Azure.RequestConditions conditions, class Azure.RequestContext context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Storage.Blobs.Specialized.BlobLeaseClient.AcquireAsync(System.TimeSpan,Azure.RequestConditions,Azure.RequestContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function AcquireAsync (duration As TimeSpan, conditions As RequestConditions, context As RequestContext) As Task(Of Response)" />
+      <MemberSignature Language="F#" Value="abstract member AcquireAsync : TimeSpan * Azure.RequestConditions * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.AcquireAsync : TimeSpan * Azure.RequestConditions * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="blobLeaseClient.AcquireAsync (duration, conditions, context)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Storage.Blobs</AssemblyName>
+        <AssemblyVersion>12.16.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="duration" Type="System.TimeSpan" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="conditions" Type="Azure.RequestConditions" Index="1" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="context" Type="Azure.RequestContext" Index="2" FrameworkAlternate="azure-dotnet-preview" />
+      </Parameters>
+      <Docs>
+        <param name="duration">
+             Specifies the duration of the lease, in seconds, or specify
+             <see cref="F:Azure.Storage.Blobs.Specialized.BlobLeaseClient.InfiniteLeaseDuration" /> for a lease that never expires.
+             A non-infinite lease can be between 15 and 60 seconds.
+             A lease duration cannot be changed using <see cref="M:Azure.Storage.Blobs.Specialized.BlobLeaseClient.RenewAsync(Azure.RequestConditions,System.Threading.CancellationToken)" />
+             or <see cref="M:Azure.Storage.Blobs.Specialized.BlobLeaseClient.ChangeAsync(System.String,Azure.RequestConditions,System.Threading.CancellationToken)" />.
+             </param>
+        <param name="conditions">
+             Optional <see cref="T:Azure.Storage.Blobs.Models.BlobLeaseRequestConditions" /> to add
+             conditions on acquiring a lease.
+             </param>
+        <param name="context">
+             Optional <see cref="T:Azure.RequestContext" /> for the operation.
+             </param>
+        <summary>
+             The <see cref="M:Azure.Storage.Blobs.Specialized.BlobLeaseClient.AcquireAsync(System.TimeSpan,Azure.RequestConditions,Azure.RequestContext)" />
+             operation acquires a lease on the blob or container. The lease
+             <paramref name="duration" /> must be between 15 to 60 seconds, or
+             infinite (-1).
+            
+             If the container does not have an active lease, the Blob service
+             creates a lease on the blob or container and returns it.  If the
+             container has an active lease, you can only request a new lease
+             using the active lease ID as <see cref="P:Azure.Storage.Blobs.Specialized.BlobLeaseClient.LeaseId" />, but you can
+             specify a new <paramref name="duration" />.
+            
+             For more information, see
+             <see href="https://docs.microsoft.com/rest/api/storageservices/lease-container">
+             Lease Container</see>.
+             </summary>
+        <returns>
+             A <see cref="T:Azure.Response" /> as returned by the Storage service.
              </returns>
         <remarks>
              A <see cref="T:Azure.RequestFailedException" /> will be thrown if
@@ -250,6 +373,7 @@
         <AssemblyVersion>12.14.1.0</AssemblyVersion>
         <AssemblyVersion>12.15.0.0</AssemblyVersion>
         <AssemblyVersion>12.15.1.0</AssemblyVersion>
+        <AssemblyVersion>12.16.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Blobs.Models.BlobLease&gt;&gt;</ReturnType>
@@ -276,9 +400,10 @@
              notifications that the operation should be cancelled.
              </param>
         <summary>
-             The <see cref="M:Azure.Storage.Blobs.Specialized.BlobLeaseClient.Acquire(System.TimeSpan,Azure.RequestConditions,System.Threading.CancellationToken)" /> operation acquires a lease on
-             the blob or container.  The lease <paramref name="duration" /> must
-             be between 15 to 60 seconds, or infinite (-1).
+             The <see cref="M:Azure.Storage.Blobs.Specialized.BlobLeaseClient.AcquireAsync(System.TimeSpan,Azure.RequestConditions,System.Threading.CancellationToken)" />
+             operation acquires a lease on the blob or container. The lease
+             <paramref name="duration" /> must be between 15 to 60 seconds, or
+             infinite (-1).
             
              If the container does not have an active lease, the Blob service
              creates a lease on the blob or container and returns it.  If the
@@ -323,6 +448,7 @@
         <AssemblyVersion>12.14.1.0</AssemblyVersion>
         <AssemblyVersion>12.15.0.0</AssemblyVersion>
         <AssemblyVersion>12.15.1.0</AssemblyVersion>
+        <AssemblyVersion>12.16.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Storage.Blobs.Specialized.BlobBaseClient</ReturnType>
@@ -359,6 +485,7 @@
         <AssemblyVersion>12.14.1.0</AssemblyVersion>
         <AssemblyVersion>12.15.0.0</AssemblyVersion>
         <AssemblyVersion>12.15.1.0</AssemblyVersion>
+        <AssemblyVersion>12.16.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Storage.Blobs.BlobContainerClient</ReturnType>
@@ -395,6 +522,7 @@
         <AssemblyVersion>12.14.1.0</AssemblyVersion>
         <AssemblyVersion>12.15.0.0</AssemblyVersion>
         <AssemblyVersion>12.15.1.0</AssemblyVersion>
+        <AssemblyVersion>12.16.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Response&lt;Azure.Storage.Blobs.Models.BlobLease&gt;</ReturnType>
@@ -479,6 +607,7 @@
         <AssemblyVersion>12.14.1.0</AssemblyVersion>
         <AssemblyVersion>12.15.0.0</AssemblyVersion>
         <AssemblyVersion>12.15.1.0</AssemblyVersion>
+        <AssemblyVersion>12.16.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Blobs.Models.BlobLease&gt;&gt;</ReturnType>
@@ -563,6 +692,7 @@
         <AssemblyVersion>12.14.1.0</AssemblyVersion>
         <AssemblyVersion>12.15.0.0</AssemblyVersion>
         <AssemblyVersion>12.15.1.0</AssemblyVersion>
+        <AssemblyVersion>12.16.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Response&lt;Azure.Storage.Blobs.Models.BlobLease&gt;</ReturnType>
@@ -628,6 +758,7 @@
         <AssemblyVersion>12.14.1.0</AssemblyVersion>
         <AssemblyVersion>12.15.0.0</AssemblyVersion>
         <AssemblyVersion>12.15.1.0</AssemblyVersion>
+        <AssemblyVersion>12.16.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Blobs.Models.BlobLease&gt;&gt;</ReturnType>
@@ -693,6 +824,7 @@
         <AssemblyVersion>12.14.1.0</AssemblyVersion>
         <AssemblyVersion>12.15.0.0</AssemblyVersion>
         <AssemblyVersion>12.15.1.0</AssemblyVersion>
+        <AssemblyVersion>12.16.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.TimeSpan</ReturnType>
@@ -728,6 +860,7 @@
         <AssemblyVersion>12.14.1.0</AssemblyVersion>
         <AssemblyVersion>12.15.0.0</AssemblyVersion>
         <AssemblyVersion>12.15.1.0</AssemblyVersion>
+        <AssemblyVersion>12.16.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -764,6 +897,7 @@
         <AssemblyVersion>12.14.1.0</AssemblyVersion>
         <AssemblyVersion>12.15.0.0</AssemblyVersion>
         <AssemblyVersion>12.15.1.0</AssemblyVersion>
+        <AssemblyVersion>12.16.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Response&lt;Azure.Storage.Blobs.Models.ReleasedObjectInfo&gt;</ReturnType>
@@ -828,6 +962,7 @@
         <AssemblyVersion>12.14.1.0</AssemblyVersion>
         <AssemblyVersion>12.15.0.0</AssemblyVersion>
         <AssemblyVersion>12.15.1.0</AssemblyVersion>
+        <AssemblyVersion>12.16.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Blobs.Models.ReleasedObjectInfo&gt;&gt;</ReturnType>
@@ -892,6 +1027,7 @@
         <AssemblyVersion>12.14.1.0</AssemblyVersion>
         <AssemblyVersion>12.15.0.0</AssemblyVersion>
         <AssemblyVersion>12.15.1.0</AssemblyVersion>
+        <AssemblyVersion>12.16.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -966,6 +1102,7 @@
         <AssemblyVersion>12.14.1.0</AssemblyVersion>
         <AssemblyVersion>12.15.0.0</AssemblyVersion>
         <AssemblyVersion>12.15.1.0</AssemblyVersion>
+        <AssemblyVersion>12.16.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Response&lt;Azure.Storage.Blobs.Models.BlobLease&gt;</ReturnType>
@@ -1030,6 +1167,7 @@
         <AssemblyVersion>12.14.1.0</AssemblyVersion>
         <AssemblyVersion>12.15.0.0</AssemblyVersion>
         <AssemblyVersion>12.15.1.0</AssemblyVersion>
+        <AssemblyVersion>12.16.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Storage.Blobs.Models.BlobLease&gt;&gt;</ReturnType>
@@ -1094,6 +1232,7 @@
         <AssemblyVersion>12.14.1.0</AssemblyVersion>
         <AssemblyVersion>12.15.0.0</AssemblyVersion>
         <AssemblyVersion>12.15.1.0</AssemblyVersion>
+        <AssemblyVersion>12.16.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Uri</ReturnType>
