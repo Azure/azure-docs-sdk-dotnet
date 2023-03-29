@@ -3,7 +3,7 @@ title: Azure Container Apps SDK for .NET
 description: Reference for Azure Container Apps SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 03/28/2023
+ms.data: 03/29/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: containerapps
