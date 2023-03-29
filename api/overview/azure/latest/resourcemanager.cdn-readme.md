@@ -6,7 +6,7 @@ ms.author: pallavit
 ms.date: 02/14/2023
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: cdn
+ms.service: azure-cdn
 ---
 # Microsoft Azure Cdn management client library for .NET
 
