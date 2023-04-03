@@ -60,10 +60,10 @@
         <Parameter Name="client" Type="Azure.Communication.Email.EmailClient" />
       </Parameters>
       <Docs>
+        <param name="id">The ID of this operation.</param>
         <param name="client">
             The client used to check for completion.
             </param>
-        <param name="id">The ID of this operation.</param>
         <summary>
             Initializes a new <see cref="T:Azure.Communication.Email.EmailSendOperation" /> instance
             </summary>
@@ -184,15 +184,13 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="cancellationToken">
-            Optional <see cref="T:System.Threading.CancellationToken" /> to propagate
-            notifications that the operation should be cancelled.
-            </param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> controlling the request lifetime.</param>
         <summary>
             Check for the latest status of the email send operation.
             </summary>
-        <returns>The <see cref="T:Azure.Response" /> with the status update.</returns>
+        <returns>The HTTP response received from the server.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:Azure.RequestFailedException">Thrown if there's been any issues during the connection, or if the operation has completed with failures.</exception>
       </Docs>
     </Member>
     <Member MemberName="UpdateStatusAsync">
@@ -213,15 +211,13 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="cancellationToken">
-            Optional <see cref="T:System.Threading.CancellationToken" /> to propagate
-            notifications that the operation should be cancelled.
-            </param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> controlling the request lifetime.</param>
         <summary>
             Check for the latest status of the email send operation.
             </summary>
-        <returns>The <see cref="T:Azure.Response" /> with the status update.</returns>
+        <returns>The HTTP response received from the server.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:Azure.RequestFailedException">Thrown if there's been any issues during the connection, or if the operation has completed with failures.</exception>
       </Docs>
     </Member>
     <Member MemberName="Value">
@@ -244,6 +240,69 @@
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="WaitForCompletion">
+      <MemberSignature Language="C#" Value="public override Azure.Response&lt;Azure.Communication.Email.EmailSendResult&gt; WaitForCompletion (System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class Azure.Response`1&lt;class Azure.Communication.Email.EmailSendResult&gt; WaitForCompletion(valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Communication.Email.EmailSendOperation.WaitForCompletion(System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function WaitForCompletion (Optional cancellationToken As CancellationToken = Nothing) As Response(Of EmailSendResult)" />
+      <MemberSignature Language="F#" Value="override this.WaitForCompletion : System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Communication.Email.EmailSendResult&gt;" Usage="emailSendOperation.WaitForCompletion cancellationToken" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Communication.Email</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Response&lt;Azure.Communication.Email.EmailSendResult&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="0" FrameworkAlternate="azure-dotnet" />
+      </Parameters>
+      <Docs>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> used for the periodical service calls.</param>
+        <summary>
+            Periodically calls the server till the long-running operation completes.
+            </summary>
+        <returns>The last HTTP response received from the server.</returns>
+        <remarks>
+            This method will periodically call UpdateStatusAsync till HasCompleted is true, then return the final result of the operation.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="WaitForCompletion">
+      <MemberSignature Language="C#" Value="public override Azure.Response&lt;Azure.Communication.Email.EmailSendResult&gt; WaitForCompletion (TimeSpan suggestedPollingInterval, System.Threading.CancellationToken cancellationToken);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class Azure.Response`1&lt;class Azure.Communication.Email.EmailSendResult&gt; WaitForCompletion(valuetype System.TimeSpan suggestedPollingInterval, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Communication.Email.EmailSendOperation.WaitForCompletion(System.TimeSpan,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function WaitForCompletion (suggestedPollingInterval As TimeSpan, cancellationToken As CancellationToken) As Response(Of EmailSendResult)" />
+      <MemberSignature Language="F#" Value="override this.WaitForCompletion : TimeSpan * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Communication.Email.EmailSendResult&gt;" Usage="emailSendOperation.WaitForCompletion (suggestedPollingInterval, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Communication.Email</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Response&lt;Azure.Communication.Email.EmailSendResult&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="suggestedPollingInterval" Type="System.TimeSpan" Index="0" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="1" FrameworkAlternate="azure-dotnet" />
+      </Parameters>
+      <Docs>
+        <param name="suggestedPollingInterval">
+            The interval between status requests to the server.
+            The interval can change based on information returned from the server.
+            For example, the server might communicate to the client that there is not reason to poll for status change sooner than some time.
+            In that case, it uses the larger of the values between this value and the one returned from the server.
+            </param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> used for the periodical service calls.</param>
+        <summary>
+            Periodically calls the server till the long-running operation completes.
+            </summary>
+        <returns>The last HTTP response received from the server.</returns>
+        <remarks>
+            This method will periodically call UpdateStatus till HasCompleted is true, then return the final result of the operation.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="WaitForCompletionAsync">
@@ -275,11 +334,15 @@
       </Docs>
     </Member>
     <Member MemberName="WaitForCompletionAsync">
-      <MemberSignature Language="C#" Value="public override System.Threading.Tasks.ValueTask&lt;Azure.Response&lt;Azure.Communication.Email.EmailSendResult&gt;&gt; WaitForCompletionAsync (TimeSpan pollingInterval, System.Threading.CancellationToken cancellationToken);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance valuetype System.Threading.Tasks.ValueTask`1&lt;class Azure.Response`1&lt;class Azure.Communication.Email.EmailSendResult&gt;&gt; WaitForCompletionAsync(valuetype System.TimeSpan pollingInterval, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="C#" Value="public override System.Threading.Tasks.ValueTask&lt;Azure.Response&lt;Azure.Communication.Email.EmailSendResult&gt;&gt; WaitForCompletionAsync (TimeSpan suggestedPollingInterval, System.Threading.CancellationToken cancellationToken);" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance valuetype System.Threading.Tasks.ValueTask`1&lt;class Azure.Response`1&lt;class Azure.Communication.Email.EmailSendResult&gt;&gt; WaitForCompletionAsync(valuetype System.TimeSpan suggestedPollingInterval, valuetype System.Threading.CancellationToken cancellationToken) cil managed" FrameworkAlternate="azure-dotnet" />
       <MemberSignature Language="DocId" Value="M:Azure.Communication.Email.EmailSendOperation.WaitForCompletionAsync(System.TimeSpan,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overrides Function WaitForCompletionAsync (pollingInterval As TimeSpan, cancellationToken As CancellationToken) As ValueTask(Of Response(Of EmailSendResult))" />
-      <MemberSignature Language="F#" Value="override this.WaitForCompletionAsync : TimeSpan * System.Threading.CancellationToken -&gt; System.Threading.Tasks.ValueTask&lt;Azure.Response&lt;Azure.Communication.Email.EmailSendResult&gt;&gt;" Usage="emailSendOperation.WaitForCompletionAsync (pollingInterval, cancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function WaitForCompletionAsync (suggestedPollingInterval As TimeSpan, cancellationToken As CancellationToken) As ValueTask(Of Response(Of EmailSendResult))" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="F#" Value="override this.WaitForCompletionAsync : TimeSpan * System.Threading.CancellationToken -&gt; System.Threading.Tasks.ValueTask&lt;Azure.Response&lt;Azure.Communication.Email.EmailSendResult&gt;&gt;" Usage="emailSendOperation.WaitForCompletionAsync (suggestedPollingInterval, cancellationToken)" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="C#" Value="public override System.Threading.Tasks.ValueTask&lt;Azure.Response&lt;Azure.Communication.Email.EmailSendResult&gt;&gt; WaitForCompletionAsync (TimeSpan pollingInterval, System.Threading.CancellationToken cancellationToken);" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance valuetype System.Threading.Tasks.ValueTask`1&lt;class Azure.Response`1&lt;class Azure.Communication.Email.EmailSendResult&gt;&gt; WaitForCompletionAsync(valuetype System.TimeSpan pollingInterval, valuetype System.Threading.CancellationToken cancellationToken) cil managed" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function WaitForCompletionAsync (pollingInterval As TimeSpan, cancellationToken As CancellationToken) As ValueTask(Of Response(Of EmailSendResult))" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="F#" Value="override this.WaitForCompletionAsync : TimeSpan * System.Threading.CancellationToken -&gt; System.Threading.Tasks.ValueTask&lt;Azure.Response&lt;Azure.Communication.Email.EmailSendResult&gt;&gt;" Usage="emailSendOperation.WaitForCompletionAsync (pollingInterval, cancellationToken)" FrameworkAlternate="azure-dotnet-preview" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Communication.Email</AssemblyName>
@@ -289,10 +352,17 @@
         <ReturnType>System.Threading.Tasks.ValueTask&lt;Azure.Response&lt;Azure.Communication.Email.EmailSendResult&gt;&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="pollingInterval" Type="System.TimeSpan" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+        <Parameter Name="suggestedPollingInterval" Type="System.TimeSpan" Index="0" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="pollingInterval" Type="System.TimeSpan" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="1" />
       </Parameters>
       <Docs>
+        <param name="suggestedPollingInterval">
+            The interval between status requests to the server.
+            The interval can change based on information returned from the server.
+            For example, the server might communicate to the client that there is not reason to poll for status change sooner than some time.
+            In that case, it uses the larger of the values between this value and the one returned from the server.
+            </param>
         <param name="pollingInterval">
             The interval between status requests to the server.
             The interval can change based on information returned from the server.
