@@ -3,7 +3,7 @@ title: Azure Unknown Service SDK for .NET
 description: Reference for Azure Unknown Service SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 04/03/2023
+ms.data: 04/04/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: unknownservice
