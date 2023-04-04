@@ -4,6 +4,7 @@ description: Reference for Azure Mobile libraries for .NET
 ms.date: 10/19/2017
 ms.topic: reference
 ms.service: app-service
+ms.subservice: mobile-apps
 ---
 
 # Azure Mobile libraries for .NET
