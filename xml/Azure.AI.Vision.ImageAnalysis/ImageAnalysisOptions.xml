@@ -7,14 +7,20 @@
   <AssemblyInfo>
     <AssemblyName>Azure-AI-Vision-ImageAnalyzer-CSharp</AssemblyName>
     <AssemblyVersion>0.9.0.26</AssemblyVersion>
+    <AssemblyVersion>0.10.0.26</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>
+            Represents the configuration options that control the function of the ImageAnalyzer
+            </summary>
+    <remarks>
+            ImageAnalysisOptions must specify at least one ImageAnalysisFeature before the ImageAnalyzer is
+            used to analyze an image. There is no default selection for the features.
+            </remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -26,11 +32,18 @@
       <AssemblyInfo>
         <AssemblyName>Azure-AI-Vision-ImageAnalyzer-CSharp</AssemblyName>
         <AssemblyVersion>0.9.0.26</AssemblyVersion>
+        <AssemblyVersion>0.10.0.26</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>
+            Creates a new instance of ImageAnalysisOptions
+            </summary>
+        <remarks>
+            Configuration properties on this instance should be set prior to using this instance during the creation
+            of an ImageAnalyzer.
+            The only mandatory property to be set is `Features`. All others are optional.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="CroppingAspectRatios">
@@ -43,14 +56,25 @@
       <AssemblyInfo>
         <AssemblyName>Azure-AI-Vision-ImageAnalyzer-CSharp</AssemblyName>
         <AssemblyVersion>0.9.0.26</AssemblyVersion>
+        <AssemblyVersion>0.10.0.26</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Collections.Generic.IReadOnlyList&lt;System.Double&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the list of aspect ratios that crop suggestions should attempt to fit (also known as smart crops)
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            An aspect ratio is calculated by dividing the target crop width by the height.
+            Supported values are from 0.75 to 1.8 (inclusive).
+            Setting this property is only relevant when the ImageAnalysisFeature.CropSuggestions option
+            was selected as part of the ImageAnalysisOptions.Features.
+            If you do not set CroppingAspectRatios, and ImageAnalysisFeature.CropSuggestions was selected,
+            the service will return one crop suggestion with an aspect ratio it sees fit between
+            0.5 and 2.0 (inclusive).
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="Features">
@@ -63,14 +87,27 @@
       <AssemblyInfo>
         <AssemblyName>Azure-AI-Vision-ImageAnalyzer-CSharp</AssemblyName>
         <AssemblyVersion>0.9.0.26</AssemblyVersion>
+        <AssemblyVersion>0.10.0.26</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.AI.Vision.ImageAnalysis.ImageAnalysisFeature</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets one or more visual features to extract from the image
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            Features are specified as a bit-masked enum, with multiple selections made by using the bitwise 'or'
+            operator (e.g. `Features = ImageAnalysisFeature.Caption | ImageAnalysisFeature.Tags`).
+            If you are using the default (standard) model, at least one ImageAnalysisFeature must be
+            specified before the ImageAnalyzer is used to analyze an image. There is no default selection
+            for the features.
+            Avoiding the specification of features that will not be used may improve the speed, cost, and/or other
+            dimensions of Image Analysis requests.
+            If you are using a custom-trained model (see ModelName), you do not need to specify features, as they are
+            implied from the model.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="GenderNeutralCaption">
@@ -83,14 +120,22 @@
       <AssemblyInfo>
         <AssemblyName>Azure-AI-Vision-ImageAnalyzer-CSharp</AssemblyName>
         <AssemblyVersion>0.9.0.26</AssemblyVersion>
+        <AssemblyVersion>0.10.0.26</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the gender neutrality of the Image Analysis caption result.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            If \"true\", caption will not have gendered terms.
+            If \"true\", the words \"Man/Woman\" will be replaced by \"Person\", and \"Boy/Girl\" will be replaced by \"Child\".
+            If not set, defaults to \"false\."
+            Only relevant if ImageAnalysisFeature.Caption is included in the Features property.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="Language">
@@ -103,14 +148,22 @@
       <AssemblyInfo>
         <AssemblyName>Azure-AI-Vision-ImageAnalyzer-CSharp</AssemblyName>
         <AssemblyVersion>0.9.0.26</AssemblyVersion>
+        <AssemblyVersion>0.10.0.26</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the language that Image Analysis should use in the results.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            This language should be provided as an ISO 639-1 code, e.g. "en" for English or "fr" for French.
+            If this value is not set, the default value is "en" for English.
+            See https://aka.ms/cv-languages for a list of supported language codes and which
+            visual features are supported for each language.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="ModelName">
@@ -123,14 +176,22 @@
       <AssemblyInfo>
         <AssemblyName>Azure-AI-Vision-ImageAnalyzer-CSharp</AssemblyName>
         <AssemblyVersion>0.9.0.26</AssemblyVersion>
+        <AssemblyVersion>0.10.0.26</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the name of the custom-trained model that the Image Analysis Service
+            should use.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            If this option is not set, the default (standard) model will be used.
+            A ModelName that is an empty string indicates that no customization is done
+            and the standard model is used.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="ModelVersion">
@@ -143,14 +204,23 @@
       <AssemblyInfo>
         <AssemblyName>Azure-AI-Vision-ImageAnalyzer-CSharp</AssemblyName>
         <AssemblyVersion>0.9.0.26</AssemblyVersion>
+        <AssemblyVersion>0.10.0.26</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the model version that Image Analysis Service should use.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            Unless otherwise specified, a default of "latest" will be used.
+            "latest" is the only value currently supported by the service.
+            In future service updates, supported model versions will be "latest" or
+            in the form "YYYY-MM-DD" or "YYYY-MM-DD-preview",
+            where YYYY, MM, DD are year, month, and day respectively.
+            </remarks>
       </Docs>
     </Member>
   </Members>

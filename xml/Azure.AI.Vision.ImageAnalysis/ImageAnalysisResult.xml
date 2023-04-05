@@ -7,14 +7,29 @@
   <AssemblyInfo>
     <AssemblyName>Azure-AI-Vision-ImageAnalyzer-CSharp</AssemblyName>
     <AssemblyVersion>0.9.0.26</AssemblyVersion>
+    <AssemblyVersion>0.10.0.26</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>
+            Represents the outcome of an Image Analysis operation.
+            </summary>
+    <remarks>
+            Always start by checking the value of Reason property to determine if the analysis
+            operation was successful or not.
+            When an analysis operation is successful, applicable properties in this object
+            will be populated based on the selected features (ImageAnalysisOptions.Features)
+            or custom-trained model (ImageAnalysisOptions.ModelName).
+            These results are parsed from the service JSON response.
+            Other properties will be null.
+            Call ImageAnalysisResultDetails.FromResult to get access to additional
+            information about the result, such as the raw JSON response.
+            When analysis operation failed, call ImageAnalysisErrorDetails.FromResult
+            to get access to additional information about the error.
+            </remarks>
   </Docs>
   <Members>
     <Member MemberName="Caption">
@@ -27,14 +42,20 @@
       <AssemblyInfo>
         <AssemblyName>Azure-AI-Vision-ImageAnalyzer-CSharp</AssemblyName>
         <AssemblyVersion>0.9.0.26</AssemblyVersion>
+        <AssemblyVersion>0.10.0.26</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.AI.Vision.ImageAnalysis.ContentCaption</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets a generated phrase that describes the content of the analyzed image.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            This property will only be populated if ImageAnalysisFeature.Caption was included
+            while setting ImageAnalysisOptions.Features.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="CropSuggestions">
@@ -47,14 +68,28 @@
       <AssemblyInfo>
         <AssemblyName>Azure-AI-Vision-ImageAnalyzer-CSharp</AssemblyName>
         <AssemblyVersion>0.9.0.26</AssemblyVersion>
+        <AssemblyVersion>0.10.0.26</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.AI.Vision.ImageAnalysis.CropSuggestions</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+             Gets a collection of suggested image crop operations of the analyzed 
+             image at the desired aspect ratios (if provided).
+             </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+             Also knows as SmartCrops. These cropping suggestions preserve as much content 
+             as possible while achieving the specified aspect ratios (if provided).
+            
+             This property will only be populated if ImageAnalysisFeature.CropSuggestions was included
+             while setting ImageAnalysisOptions.Features.
+            
+             Optionally, specify one or more desired cropping aspect ratios by setting
+             ImageAnalysisOptions.CroppingAspectRatios. If CroppingAspectRatios is not set, the Service will
+             return one crop suggestion with an aspect ratio it sees fit.
+             </remarks>
       </Docs>
     </Member>
     <Member MemberName="CustomObjects">
@@ -67,14 +102,21 @@
       <AssemblyInfo>
         <AssemblyName>Azure-AI-Vision-ImageAnalyzer-CSharp</AssemblyName>
         <AssemblyVersion>0.9.0.26</AssemblyVersion>
+        <AssemblyVersion>0.10.0.26</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.AI.Vision.ImageAnalysis.DetectedObjects</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets a collection of object detections from the analyzed image, using
+            the provided custom-trained model.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            This property may be populated if ImageAnalysisOptions.ModelName was set
+            to the name of a custom-trained model.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="CustomTags">
@@ -87,14 +129,47 @@
       <AssemblyInfo>
         <AssemblyName>Azure-AI-Vision-ImageAnalyzer-CSharp</AssemblyName>
         <AssemblyVersion>0.9.0.26</AssemblyVersion>
+        <AssemblyVersion>0.10.0.26</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.AI.Vision.ImageAnalysis.ContentTags</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets a list of content tag detections from the analyzed image, using
+            the provided custom-trained model.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            This property may be populated if ImageAnalysisOptions.ModelName was set
+            to the name of a custom-trained model.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DenseCaptions">
+      <MemberSignature Language="C#" Value="public Azure.AI.Vision.ImageAnalysis.DenseCaptions DenseCaptions { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Azure.AI.Vision.ImageAnalysis.DenseCaptions DenseCaptions" />
+      <MemberSignature Language="DocId" Value="P:Azure.AI.Vision.ImageAnalysis.ImageAnalysisResult.DenseCaptions" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property DenseCaptions As DenseCaptions" />
+      <MemberSignature Language="F#" Value="member this.DenseCaptions : Azure.AI.Vision.ImageAnalysis.DenseCaptions" Usage="Azure.AI.Vision.ImageAnalysis.ImageAnalysisResult.DenseCaptions" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure-AI-Vision-ImageAnalyzer-CSharp</AssemblyName>
+        <AssemblyVersion>0.10.0.26</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.AI.Vision.ImageAnalysis.DenseCaptions</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets up to 10 generated phrases, the first describing the content of the whole image,
+            and the others describing the content of different regions of the image.
+            </summary>
+        <value>To be added.</value>
+        <remarks>
+            This property will only be populated if ImageAnalysisFeature.DenseCaptions was included
+            while setting ImageAnalysisOptions.Features.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="ImageHeight">
@@ -107,14 +182,19 @@
       <AssemblyInfo>
         <AssemblyName>Azure-AI-Vision-ImageAnalyzer-CSharp</AssemblyName>
         <AssemblyVersion>0.9.0.26</AssemblyVersion>
+        <AssemblyVersion>0.10.0.26</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Nullable&lt;System.Int32&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the height, in pixels, of the analyzed image.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            Only populated if the image was analyzed successfully
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="ImageWidth">
@@ -127,14 +207,19 @@
       <AssemblyInfo>
         <AssemblyName>Azure-AI-Vision-ImageAnalyzer-CSharp</AssemblyName>
         <AssemblyVersion>0.9.0.26</AssemblyVersion>
+        <AssemblyVersion>0.10.0.26</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Nullable&lt;System.Int32&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the width, in pixels, of the analyzed image.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            Only populated if the image was analyzed successfully
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="ModelVersion">
@@ -147,12 +232,15 @@
       <AssemblyInfo>
         <AssemblyName>Azure-AI-Vision-ImageAnalyzer-CSharp</AssemblyName>
         <AssemblyVersion>0.9.0.26</AssemblyVersion>
+        <AssemblyVersion>0.10.0.26</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the model version used by the Image Analysis Service to create this result.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -167,14 +255,20 @@
       <AssemblyInfo>
         <AssemblyName>Azure-AI-Vision-ImageAnalyzer-CSharp</AssemblyName>
         <AssemblyVersion>0.9.0.26</AssemblyVersion>
+        <AssemblyVersion>0.10.0.26</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.AI.Vision.ImageAnalysis.DetectedObjects</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets a collection of object detections from the analyzed image.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            This property will only be populated if ImageAnalysisFeature.Objects was included
+            while setting ImageAnalysisOptions.Features.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="People">
@@ -187,14 +281,20 @@
       <AssemblyInfo>
         <AssemblyName>Azure-AI-Vision-ImageAnalyzer-CSharp</AssemblyName>
         <AssemblyVersion>0.9.0.26</AssemblyVersion>
+        <AssemblyVersion>0.10.0.26</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.AI.Vision.ImageAnalysis.DetectedPeople</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets a collection of detected people from the analyzed image.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            This property will only be populated if ImageAnalysisFeature.People was included
+            while setting ImageAnalysisOptions.Features.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="Reason">
@@ -207,12 +307,15 @@
       <AssemblyInfo>
         <AssemblyName>Azure-AI-Vision-ImageAnalyzer-CSharp</AssemblyName>
         <AssemblyVersion>0.9.0.26</AssemblyVersion>
+        <AssemblyVersion>0.10.0.26</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.AI.Vision.ImageAnalysis.ImageAnalysisResultReason</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets a value indicating why this result was generated.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -227,14 +330,20 @@
       <AssemblyInfo>
         <AssemblyName>Azure-AI-Vision-ImageAnalyzer-CSharp</AssemblyName>
         <AssemblyVersion>0.9.0.26</AssemblyVersion>
+        <AssemblyVersion>0.10.0.26</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.AI.Vision.ImageAnalysis.ContentTags</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets a list of content tag detections from the analyzed image.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            This property will only be populated if ImageAnalysisFeature.Tags was included
+            while setting ImageAnalysisOptions.Features.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="Text">
@@ -247,14 +356,20 @@
       <AssemblyInfo>
         <AssemblyName>Azure-AI-Vision-ImageAnalyzer-CSharp</AssemblyName>
         <AssemblyVersion>0.9.0.26</AssemblyVersion>
+        <AssemblyVersion>0.10.0.26</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.AI.Vision.ImageAnalysis.DetectedText</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets a collection of extracted text lines and words from the analyzed image.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            This property will only be populated if ImageAnalysisFeature.Text was included
+            while setting ImageAnalysisOptions.Features.
+            </remarks>
       </Docs>
     </Member>
   </Members>
