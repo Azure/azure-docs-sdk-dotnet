@@ -3,13 +3,12 @@ title: Azure Functions SDK for .NET
 description: Reference for Azure Functions SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 03/07/2023
+ms.data: 04/05/2023
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: azure-functions
+ms.service: functions
 ms.date: 10/15/2019
 ---
-
 # Azure Functions libraries for .NET
 
 ## Overview

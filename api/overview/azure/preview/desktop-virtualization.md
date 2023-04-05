@@ -3,7 +3,7 @@ title: Azure Desktop Virtualization SDK for .NET
 description: Reference for Azure Desktop Virtualization SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 03/28/2023
+ms.data: 04/05/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: desktopvirtualization

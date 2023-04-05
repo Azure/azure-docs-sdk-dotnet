@@ -1,7 +1,6 @@
 | Reference | Package | Source |
 |---|---|---|
 |[IoT Models Repository](iot.modelsrepository-readme.md)|[Azure.IoT.ModelsRepository](https://www.nuget.org/packages/Azure.IoT.ModelsRepository)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/modelsrepository/Azure.IoT.ModelsRepository)|
-|Resource Management - Device Update|[Microsoft.Azure.Management.DeviceUpdate](https://www.nuget.org/packages/Microsoft.Azure.Management.DeviceUpdate)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |[Digital Twins - Core](digitaltwins.core-readme.md)|[Azure.DigitalTwins.Core](https://www.nuget.org/packages/Azure.DigitalTwins.Core)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/digitaltwins/Azure.DigitalTwins.Core)|
 |[Device Update](iot.deviceupdate-readme.md)|[Azure.IoT.DeviceUpdate](https://www.nuget.org/packages/Azure.IoT.DeviceUpdate)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/deviceupdate/Azure.IoT.DeviceUpdate)|
 |Microsoft.Azure.Devices|[Microsoft.Azure.Devices](https://www.nuget.org/packages/Microsoft.Azure.Devices)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
@@ -18,3 +17,4 @@
 |[Resource Management - Digital Twins](resourcemanager.digitaltwins-readme.md)|[Azure.ResourceManager.DigitalTwins](https://www.nuget.org/packages/Azure.ResourceManager.DigitalTwins)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/digitaltwins/Azure.ResourceManager.DigitalTwins)|
 |[Resource Management - IoT Central](resourcemanager.iotcentral-readme.md)|[Azure.ResourceManager.IotCentral](https://www.nuget.org/packages/Azure.ResourceManager.IotCentral)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/iotcentral/Azure.ResourceManager.IotCentral)|
 |[Resource Management - IoT Hub](resourcemanager.iothub-readme.md)|[Azure.ResourceManager.IotHub](https://www.nuget.org/packages/Azure.ResourceManager.IotHub)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/iothub/Azure.ResourceManager.IotHub)|
+|Resource Management - Device Update|[Microsoft.Azure.Management.DeviceUpdate](https://www.nuget.org/packages/Microsoft.Azure.Management.DeviceUpdate)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
