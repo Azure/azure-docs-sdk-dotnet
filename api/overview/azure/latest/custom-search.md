@@ -3,7 +3,7 @@ title: Azure Custom Search SDK for .NET
 description: Reference for Azure Custom Search SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 04/06/2023
+ms.data: 04/07/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: customsearch
