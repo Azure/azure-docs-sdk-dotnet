@@ -3,12 +3,12 @@ title: Azure WebJobs Event Hubs client library for .NET
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebJobs.Extensions.EventHubs, eventhub
 author: serkantkaraca
 ms.author: serkar
-ms.date: 02/23/2023
+ms.date: 04/11/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: eventhub
 ---
-# Azure WebJobs Event Hubs client library for .NET - version 5.2.0 
+# Azure WebJobs Event Hubs client library for .NET - version 5.3.0 
 
 
 This extension provides functionality for accessing Azure Event Hubs from an Azure Function.
@@ -54,11 +54,11 @@ For the local development use the `local.settings.json` file to store the connec
 
 When deployed use the [application settings](/azure/azure-functions/functions-how-to-use-azure-function-app-settings) to set the connection string.
 
-#### Managed identity authentication
+#### Identity-based authentication
 
 If your environment has [managed identity](/azure/app-service/overview-managed-identity?tabs=dotnet) enabled you can use it to authenticate the Event Hubs extension.  Before doing so, you will need to ensure that permissions have been configured as described in the [Azure Functions developer guide]( /azure/azure-functions/functions-reference#grant-permission-to-the-identity).
 
-To use managed identity provide the `<connection_name>__fullyQualifiedNamespace` configuration setting.
+To use identity-based authentication provide the `<connection_name>__fullyQualifiedNamespace` configuration setting.
 
 ```json
 {
@@ -74,6 +74,8 @@ Or in the case of deployed app set the same setting in [application settings](/a
 ```
 <connection_name>__fullyQualifiedNamespace={event_hubs_namespace}.servicebus.windows.net
 ```
+
+More details about configuring an identity-based connection can be found [here](https://learn.microsoft.com/azure/azure-functions/functions-reference?tabs=blob#configure-an-identity-based-connection).
 
 ## Key concepts
 
@@ -230,12 +232,12 @@ additional questions or comments.
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fsearch%2FMicrosoft.Azure.WebJobs.Extensions.EventHubs%2FREADME.png)
 
 <!-- LINKS -->
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.EventHubs_5.2.0/sdk/search/Microsoft.Azure.WebJobs.Extensions.EventHubs/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.EventHubs_5.3.0/sdk/search/Microsoft.Azure.WebJobs.Extensions.EventHubs/src
 [package]: https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.EventHubs/
 [docs]: /dotnet/api/Microsoft.Azure.WebJobs.Extensions.EventHubs
 [nuget]: https://www.nuget.org/
 
-[contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.EventHubs_5.2.0/CONTRIBUTING.md
+[contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.EventHubs_5.3.0/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
