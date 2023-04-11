@@ -3,28 +3,28 @@ title: Azure Core Expressions DataFactory shared client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Core.Expressions.DataFactory, core
 author: JoshLove-msft
 ms.author: jolov
-ms.date: 12/08/2022
+ms.date: 04/11/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: core
 ---
-# Azure Core Expressions DataFactory shared client library for .NET - version 1.0.0-beta.1 
+# Azure Core Expressions DataFactory shared client library for .NET - version 1.0.0-beta.2 
 
 
-Azure.Core.Expressions.DataFactory provides shared classes that represent [Expression](https://learn.microsoft.com/azure/data-factory/control-flow-expression-language-functions#expressions). 
+Azure.Core.Expressions.DataFactory provides classes that represent [Expressions](https://learn.microsoft.com/azure/data-factory/control-flow-expression-language-functions#expressions). 
 
 ## Getting started
 
-Typically, you will not need to install Azure.Core.Expressions.DataFActory; 
+Typically, you will not need to install Azure.Core.Expressions.DataFactory; 
 it will be installed for you when you install one of the client libraries using it. 
 In case you want to install it explicitly (to implement your own client library, for example), 
 you can find the NuGet package.
 
 ## Key concepts
 
-In the datafactory API many of the properties have the ability to either be a constant value or an expression which will be evaluated at runtime.
-The structure of an expression is different than a constant value for example the [FolderPath](https://github.com/Azure/azure-rest-api-specs/blob/main/specification/datafactory/resource-manager/Microsoft.DataFactory/stable/2018-06-01/entityTypes/Dataset.json#L1353)
-property of an AzureBlobDataset can either be a "string (or Expression with resultType string)".
+In the datafactory API many of the properties have the ability to either be a constant value, an expression which will be evaluated at runtime, a secure string, or a reference to a key vault secret.
+The structure of the JSON payload is different depending on which of these concepts the value maps to. As an example, the [FolderPath](https://github.com/Azure/azure-rest-api-specs/blob/main/specification/datafactory/resource-manager/Microsoft.DataFactory/stable/2018-06-01/entityTypes/Dataset.json#L1353)
+property of an AzureBlobDataset can either be a "string (or Expression with resultType string)". Implicit in this definition is the fact that it can also be a secure string or a key vault secret reference. This is true for any property that can be expressed as a string or an expression with a result type of string.
 
 ### Json representation
 
@@ -45,30 +45,65 @@ property of an AzureBlobDataset can either be a "string (or Expression with resu
 
 In this example when the pipeline is run in the first case the folder is always `foo/bar`, but in the second case the service will append the time the pipeline kicked off to the folder name.
 
-### DataFactoryExpressoin<T>
+#### Secure String
 
-The `DataFactoryExpression<T>` class allows us to model the literal value expected by this property using strongly typed practices.
+```json
+"folderpath": {
+  "type": "SecureString",
+  "value": "some/secret/path"
+}
+```
+
+When a secure string is used, the value is return masked with '*' characters when the resource is retrieved from the service.
+
+#### Key Vault Secret Reference
+
+```json
+"folderpath": {
+  "type": "AzureKeyVaultSecretReference",
+  "value": "@Microsoft.KeyVault(SecretUri=https://myvault.vault.azure.net/secrets/mysecret/)"
+}
+```
+
+A Key Vault Reference can be used to specify a Key Vault where the value of the property is stored. 
+
+
+### DataFactoryElement<T>
+
+The `DataFactoryElement<T>` class allows us to model the literal value expected by this property using strongly typed practices.
 If the expression should evaluate to an `int` then a literal value that is assigned to the same property must also be an int.
 
 With the FolderPath example above we could set the property using either case below.
 
 #### Literal
 
-```c#
-  azureBlobDataset.FolderPath = "foo/bar";
+```C# Snippet:DataFactoryElementLiteral
+blobDataSet.FolderPath = "foo/bar";
 ```
 
-#### Expresion
+#### Expression
 
-```c#
-  azureBlobDataset.FolderPath = DataFactoryExpression<string>.FromExpression("foo/bar-@{pipeline().TriggerTime}");
+```C# Snippet:DataFactoryElementFromExpression
+blobDataSet.FolderPath = DataFactoryElement<string>.FromExpression("foo/bar-@{pipeline().TriggerTime}");
 ```
 
-In each case the library will be able to serialize and deserialize both scenarios appropriately allowing you to seemlessly use either according to your applications needs.
+#### Secure String
+
+```C# Snippet:DataFactoryElementSecureString
+blobDataSet.FolderPath = DataFactoryElement<string>.FromMaskedString("some/secret/path");
+```
+
+#### Key Vault Secret Reference
+
+```C# Snippet:DataFactoryElementKeyVaultSecretReference
+blobDataSet.FolderPath = DataFactoryElement<string>.FromKeyVaultSecretReference("@Microsoft.KeyVault(SecretUri=https://myvault.vault.azure.net/secrets/mysecret/)");
+```
+
+In each case the library will be able to serialize and deserialize all scenarios appropriately allowing you to seamlessly use either according to your application's needs.
 
 ## Troubleshooting
 
-Three main ways of troubleshooting failures are [inspecting exceptions](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core.Expressions.DataFactory_1.0.0-beta.1/sdk/core/Azure.Core/samples/Response.md#handling-exceptions), enabling [logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core.Expressions.DataFactory_1.0.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md#Logging), and [distributed tracing](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core.Expressions.DataFactory_1.0.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md#Distributed-tracing)
+Three main ways of troubleshooting failures are [inspecting exceptions](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core.Expressions.DataFactory_1.0.0-beta.2/sdk/core/Azure.Core/samples/Response.md#handling-exceptions), enabling [logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core.Expressions.DataFactory_1.0.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md#Logging), and [distributed tracing](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core.Expressions.DataFactory_1.0.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md#Distributed-tracing)
 
 ## Next steps
 
@@ -84,7 +119,7 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fcore%2FAzure.Core%2FREADME.png)
 
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Core.Expressions.DataFactory_1.0.0-beta.1/sdk/core/Azure.Core/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Core.Expressions.DataFactory_1.0.0-beta.2/sdk/core/Azure.Core/src
 [package]: https://www.nuget.org/packages/Azure.Core/
 [docs]: /dotnet/api/azure.core
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct
