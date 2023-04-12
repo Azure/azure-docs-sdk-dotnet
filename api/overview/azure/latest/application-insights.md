@@ -7,6 +7,7 @@ ms.data: 04/11/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: azure-monitor
+ms.subservice: application-insights
 ---
 # Azure Application Insights SDK for .NET - latest
 ## Packages - latest
