@@ -3,7 +3,7 @@ title: Azure Graphservices SDK for .NET
 description: Reference for Azure Graphservices SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 04/12/2023
+ms.data: 04/13/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: graphservices
