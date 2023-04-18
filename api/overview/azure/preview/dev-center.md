@@ -3,7 +3,7 @@ title: Azure Dev Center SDK for .NET
 description: Reference for Azure Dev Center SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 04/17/2023
+ms.data: 04/18/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: devcenter
