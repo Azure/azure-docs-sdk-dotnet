@@ -35,5 +35,5 @@ dotnet add package Microsoft.Azure.Relay
 
 Explore more [sample .NET code](https://azure.microsoft.com/resources/samples/?platform=dotnet) you can use in your apps.
 
-[PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
-[DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
+[PackageManager]: /nuget/tools/package-manager-console
+[DotNetCLI]: /dotnet/core/tools/dotnet-add-package
