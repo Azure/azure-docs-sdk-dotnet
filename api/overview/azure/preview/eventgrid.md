@@ -6,7 +6,7 @@ ms.author: kishp
 ms.data: 12/15/2022
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: eventgrid
+ms.service: event-grid
 ms.date: 07/20/2021
 ---
 # Azure Event Grid libraries for .NET
