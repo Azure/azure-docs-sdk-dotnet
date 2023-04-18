@@ -29,7 +29,7 @@ dotnet add package Microsoft.Azure.Relay
 ```
 
 > [!div class="nextstepaction"]
-> [Explore the client APIs](/dotnet/api/overview/azure/relay/client)
+> [Explore the client APIs](/dotnet/api/overview/azure/relay/relay)
 
 ## Samples
 
