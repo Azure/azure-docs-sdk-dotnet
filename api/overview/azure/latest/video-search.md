@@ -3,7 +3,7 @@ title: Azure Video Search SDK for .NET
 description: Reference for Azure Video Search SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 04/21/2023
+ms.data: 04/24/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: videosearch
