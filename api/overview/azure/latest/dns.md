@@ -3,7 +3,7 @@ title: Azure DNS SDK for .NET
 description: Reference for Azure DNS SDK for .NET
 author: dnssuppgithub
 ms.author: dnssuppgithub
-ms.data: 04/26/2023
+ms.data: 04/27/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: dns
