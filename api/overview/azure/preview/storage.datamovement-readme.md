@@ -3,12 +3,12 @@ title: Azure Storage Data Movement Common client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Storage.DataMovement, storage
 author: seanmcc-msft
 ms.author: seanmcc
-ms.date: 12/16/2022
+ms.date: 04/27/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: storage
 ---
-# Azure Storage Data Movement Common client library for .NET - version 12.0.0-beta.1 
+# Azure Storage Data Movement Common client library for .NET - version 12.0.0-beta.2 
 
 
 > Server Version: 2021-02-12, 2020-12-06, 2020-10-02, 2020-08-04, 2020-06-12, 2020-04-08, 2020-02-10, 2019-12-12, 2019-07-07, and 2020-02-02
@@ -59,7 +59,7 @@ TransferManager transferManager = new TransferManager(new TransferManagerOptions
 ```C# Snippet:CreateTransferManagerWithOptions
 // Create BlobTransferManager with event handler in Options bag
 TransferManagerOptions transferManagerOptions = new TransferManagerOptions();
-ContainerTransferOptions options = new ContainerTransferOptions()
+TransferOptions options = new TransferOptions()
 {
     MaximumTransferChunkSize = 4 * Constants.MB,
     CreateMode = StorageResourceCreateMode.Overwrite,
@@ -77,18 +77,63 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.DataMovement_12.0.0-beta.1/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.DataMovement_12.0.0-beta.1/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.DataMovement_12.0.0-beta.1/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.DataMovement_12.0.0-beta.1/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.DataMovement_12.0.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.DataMovement_12.0.0-beta.1/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.DataMovement_12.0.0-beta.2/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.DataMovement_12.0.0-beta.2/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.DataMovement_12.0.0-beta.2/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.DataMovement_12.0.0-beta.2/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.DataMovement_12.0.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.DataMovement_12.0.0-beta.2/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
 ## Examples
 
 Please see the examples for [Blobs DataMovement][blobs_examples].
+
+Pause a transfer using the TransferManager using the respective DataTransfer object
+```C# Snippet:TransferManagerTryPause_Async
+DataTransfer dataTransfer = await transferManager.StartTransferAsync(
+    sourceResource: sourceResource,
+    destinationResource: destinationResource);
+
+// Pause from the Transfer Manager using the DataTransfer object
+bool pauseResult = await transferManager.TryPauseTransferAsync(dataTransfer);
+```
+
+Pause a transfer using the TransferManager using the respective transfer ID
+```C# Snippet:TransferManagerTryPauseId_Async
+DataTransfer dataTransfer = await transferManager.StartTransferAsync(
+    sourceResource: sourceResource,
+    destinationResource: destinationResource);
+string transferId = dataTransfer.Id;
+
+// Pause from the Transfer Manager using the Transfer Id
+bool pauseResult = await transferManager.TryPauseTransferAsync(transferId);
+```
+
+Pause a transfer using the respective DataTransfer
+```C# Snippet:DataTransferTryPause_Async
+DataTransfer dataTransfer = await transferManager.StartTransferAsync(
+    sourceResource: sourceResource,
+    destinationResource: destinationResource);
+
+// Pause from the DataTransfer object
+bool pauseResult = await dataTransfer.TryPauseAsync();
+```
+
+Resume a transfer
+```C# Snippet:TransferManagerResume_Async
+// Resume from checkpoint id
+TransferOptions optionsWithResumeTransferId = new TransferOptions()
+{
+    ResumeFromCheckpointId = dataTransfer.Id
+};
+
+DataTransfer resumedTransfer = await transferManager.StartTransferAsync(
+    sourceResource: sourceResource,
+    destinationResource: destinationResource,
+    transferOptions: optionsWithResumeTransferId);
+```
 
 ## Troubleshooting
 
@@ -117,7 +162,7 @@ additional questions or comments.
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fstorage%2FAzure.Storage.Common%2FREADME.png)
 
 <!-- LINKS -->
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.DataMovement_12.0.0-beta.1/sdk/storage/Azure.Storage.DataMovement/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.DataMovement_12.0.0-beta.2/sdk/storage/Azure.Storage.DataMovement/src
 [docs]: /dotnet/api/azure.storage
 [rest_docs]: /rest/api/storageservices/
 [product_docs]: /azure/storage/
@@ -128,12 +173,12 @@ additional questions or comments.
 [storage_account_create_portal]: /azure/storage/common/storage-quickstart-create-account?tabs=azure-portal
 [azure_cli]: /cli/azure
 [azure_sub]: https://azure.microsoft.com/free/dotnet/
-[auth_credentials]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.DataMovement_12.0.0-beta.1/sdk/storage/Azure.Storage.Common/src/StorageSharedKeyCredential.cs
-[blobs_examples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.DataMovement_12.0.0-beta.1/sdk/storage/Azure.Storage.DataMovement.Blobs#examples
-[RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.DataMovement_12.0.0-beta.1/sdk/core/Azure.Core/src/RequestFailedException.cs
+[auth_credentials]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.DataMovement_12.0.0-beta.2/sdk/storage/Azure.Storage.Common/src/StorageSharedKeyCredential.cs
+[blobs_examples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.DataMovement_12.0.0-beta.2/sdk/storage/Azure.Storage.DataMovement.Blobs#examples
+[RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.DataMovement_12.0.0-beta.2/sdk/core/Azure.Core/src/RequestFailedException.cs
 [error_codes]: /rest/api/storageservices/common-rest-api-error-codes
-[samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.DataMovement_12.0.0-beta.1/sdk/storage/Azure.Storage.DataMovement.Blobs/samples
-[storage_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.DataMovement_12.0.0-beta.1/sdk/storage/CONTRIBUTING.md
+[samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.DataMovement_12.0.0-beta.2/sdk/storage/Azure.Storage.DataMovement.Blobs/samples
+[storage_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.DataMovement_12.0.0-beta.2/sdk/storage/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
