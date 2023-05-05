@@ -8,6 +8,6 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: qumulo
 ---
-# Azure Qumulo SDK for .NET - preview
-## Packages - preview
+# Azure Qumulo SDK for .NET - latest
+## Packages - latest
 [!INCLUDE [packages](qumulo-index.md)]
