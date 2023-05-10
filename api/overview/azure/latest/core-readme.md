@@ -3,29 +3,29 @@ title: Azure Core shared client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Core, core
 author: JoshLove-msft
 ms.author: jolov
-ms.date: 04/10/2023
+ms.date: 05/10/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: core
 ---
-# Azure Core shared client library for .NET - version 1.31.0 
+# Azure Core shared client library for .NET - version 1.32.0 
 
 
-Azure.Core provides shared primitives, abstractions, and helpers for modern .NET Azure SDK client libraries. 
-These libraries follow the [Azure SDK Design Guidelines for .NET](https://azure.github.io/azure-sdk/dotnet_introduction.html) 
-and can be easily identified by package and namespaces names starting with 'Azure', e.g. ```Azure.Storage.Blobs```. 
-A more complete list of client libraries using Azure.Core can be found [here](https://github.com/Azure/azure-sdk-for-net#core-services). 
+Azure.Core provides shared primitives, abstractions, and helpers for modern .NET Azure SDK client libraries.
+These libraries follow the [Azure SDK Design Guidelines for .NET](https://azure.github.io/azure-sdk/dotnet_introduction.html)
+and can be easily identified by package and namespaces names starting with 'Azure', e.g. `Azure.Storage.Blobs`.
+A more complete list of client libraries using Azure.Core can be found [here](https://github.com/Azure/azure-sdk-for-net#core-services).
 
-Azure.Core allows client libraries to expose common functionality in a consistent fashion, 
+Azure.Core allows client libraries to expose common functionality in a consistent fashion,
 so that once you learn how to use these APIs in one client library, you will know how to use them in other client libraries.
 
 [Source code][source] | [Package (NuGet)][package] | [API reference documentation][docs]
 
 ## Getting started
 
-Typically, you will not need to install Azure.Core; 
-it will be installed for you when you install one of the client libraries using it. 
-In case you want to install it explicitly (to implement your own client library, for example), 
+Typically, you will not need to install Azure.Core;
+it will be installed for you when you install one of the client libraries using it.
+In case you want to install it explicitly (to implement your own client library, for example),
 you can find the NuGet package [here](https://www.nuget.org/packages/Azure.Core).
 
 ## Key concepts
@@ -35,43 +35,45 @@ The main shared concepts of Azure.Core (and so Azure SDK libraries using Azure.C
 - Configuring service clients, e.g. configuring retries, logging (`ClientOptions`).
 - Accessing HTTP response details (`Response`, `Response<T>`).
 - Calling long-running operations (`Operation<T>`).
-- Paging and asynchronous streams (```AsyncPageable<T>```).
+- Paging and asynchronous streams (`AsyncPageable<T>`).
 - Exceptions for reporting errors from service requests in a consistent fashion. (`RequestFailedException`).
-- Customizing request (`RequestContext`).
+- Customizing requests (`RequestContext`).
 - Abstractions for representing Azure SDK credentials. (`TokenCredentials`).
 
 Below, you will find sections explaining these shared concepts in more detail.
 
 ### Thread safety
+
 We guarantee that all client instance methods are thread-safe and independent of each other ([guideline](https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-service-methods-thread-safety)). This ensures that the recommendation of reusing client instances is always safe, even across threads.
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.31.0/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.31.0/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.31.0/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.31.0/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.31.0/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.31.0/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.32.0/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.32.0/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.32.0/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.32.0/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.32.0/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.32.0/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
 ## Examples
 
-**NOTE:** Samples in this file apply only to packages that follow [Azure SDK Design Guidelines](https://azure.github.io/azure-sdk/dotnet_introduction.html). Names of such packages usually start with `Azure`. 
+**NOTE:** Samples in this file apply only to packages that follow [Azure SDK Design Guidelines](https://azure.github.io/azure-sdk/dotnet_introduction.html). Names of such packages usually start with `Azure`.
 
-### Configuring Service Clients Using ```ClientOptions```
-Azure SDK client libraries typically expose one or more _service client_ types that 
-are the main starting points for calling corresponding Azure services. 
-You can easily find these client types as their names end with the word _Client_. 
-For example, ```BlockBlobClient``` can be used to call blob storage service, 
-and ```KeyClient``` can be used to access Key Vault service cryptographic keys. 
+### Configuring Service Clients Using `ClientOptions`
 
-These client types can be instantiated by calling a simple constructor, 
-or its overload that takes various configuration options. 
-These options are passed as a parameter that extends ```ClientOptions``` class exposed by Azure.Core.
-Various service specific options are usually added to its subclasses, but a set of SDK-wide options are 
-available directly on ```ClientOptions```.
+Azure SDK client libraries typically expose one or more _service client_ types that
+are the main starting points for calling corresponding Azure services.
+You can easily find these client types as their names end with the word _Client_.
+For example, `BlockBlobClient` can be used to call blob storage service,
+and `KeyClient` can be used to access Key Vault service cryptographic keys.
+
+These client types can be instantiated by calling a simple constructor,
+or its overload that takes various configuration options.
+These options are passed as a parameter that extends `ClientOptions` class exposed by Azure.Core.
+Various service specific options are usually added to its subclasses, but a set of SDK-wide options are
+available directly on `ClientOptions`.
 
 ```C# Snippet:ConfigurationHelloWorld
 SecretClientOptions options = new SecretClientOptions()
@@ -92,13 +94,13 @@ SecretClientOptions options = new SecretClientOptions()
 SecretClient client = new SecretClient(new Uri("http://example.com"), new DefaultAzureCredential(), options);
 ```
 
-More on client configuration in [client configuration samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.31.0/sdk/core/Azure.Core/samples/Configuration.md)
+More on client configuration in [client configuration samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.32.0/sdk/core/Azure.Core/samples/Configuration.md).
 
-### Accessing HTTP Response Details Using ```Response<T>```
+### Accessing HTTP Response Details Using `Response<T>`
 
 _Service clients_ have methods that can be used to call Azure services. We refer to these client methods _service methods_.
-_Service methods_ return a shared Azure.Core type ```Response<T>``` (in rare cases its non-generic sibling, a raw ```Response```).
-This type provides access to both the deserialized result of the service call, 
+_Service methods_ return a shared Azure.Core type `Response<T>` (in rare cases its non-generic sibling, a raw `Response`).
+This type provides access to both the deserialized result of the service call,
 and to the details of the HTTP response returned from the server.
 
 ```C# Snippet:ResponseTHelloWorld
@@ -125,7 +127,7 @@ foreach (HttpHeader header in http.Headers)
 }
 ```
 
-More on response types in [response samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.31.0/sdk/core/Azure.Core/samples/Response.md)
+More on response types in [response samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.32.0/sdk/core/Azure.Core/samples/Response.md).
 
 ### Setting up console logging
 
@@ -136,9 +138,9 @@ To create an Azure SDK log listener that outputs messages to console use `AzureE
 using AzureEventSourceListener listener = AzureEventSourceListener.CreateConsoleLogger();
 ```
 
-More on logging in [diagnostics samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.31.0/sdk/core/Azure.Core/samples/Diagnostics.md)
+More on logging in [diagnostics samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.32.0/sdk/core/Azure.Core/samples/Diagnostics.md).
 
-### Reporting Errors ```RequestFailedException```
+### Reporting Errors `RequestFailedException`
 
 When a service call fails `Azure.RequestFailedException` would get thrown. The exception type provides a Status property with an HTTP status code and an ErrorCode property with a service-specific error code.
 
@@ -155,9 +157,9 @@ catch (RequestFailedException e) when (e.Status == 404)
 }
 ```
 
-More on handling responses in [response samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.31.0/sdk/core/Azure.Core/samples/Response.md)
+More on handling responses in [response samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.32.0/sdk/core/Azure.Core/samples/Response.md).
 
-### Consuming Service Methods Returning ```AsyncPageable<T>```
+### Consuming Service Methods Returning `AsyncPageable<T>`
 
 If a service call returns multiple values in pages, it would return `Pageable<T>/AsyncPageable<T>` as a result. You can iterate over `AsyncPageable` directly or in pages.
 
@@ -173,7 +175,7 @@ await foreach (SecretProperties secretProperties in allSecretProperties)
 
 For more information on paged responses, see [Pagination with the Azure SDK for .NET](/dotnet/azure/sdk/pagination).
 
-### Consuming Long-Running Operations Using ```Operation<T>```
+### Consuming Long-Running Operations Using `Operation<T>`
 
 Some operations take long time to complete and require polling for their status. Methods starting long-running operations return `*Operation<T>` types.
 
@@ -193,9 +195,9 @@ Console.WriteLine(value.Name);
 Console.WriteLine(value.ScheduledPurgeDate);
 ```
 
-More on long-running operations in [long-running operation samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.31.0/sdk/core/Azure.Core/samples/LongRunningOperations.md)
+More on long-running operations in [long-running operation samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.32.0/sdk/core/Azure.Core/samples/LongRunningOperations.md).
 
-### Customzing Request Using `RequestContext`
+### Customizing Requests Using `RequestContext`
 
 Besides general configuration of _service clients_ through `ClientOptions`, it is possible to customize the requests sent by _service clients_
 using protocol methods or convenience APIs that expose `RequestContext` as a parameter.
@@ -207,9 +209,10 @@ context.AddClassifier(404, isError: false);
 Response response = await client.GetPetAsync("pet1", context);
 ```
 
-More on request customization in [RequestContext samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.31.0/sdk/core/Azure.Core/samples/RequestContext.md)
+More on request customization in [RequestContext samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.32.0/sdk/core/Azure.Core/samples/RequestContext.md).
 
 ### Mocking
+
 One of the most important cross-cutting features of our new client libraries using Azure.Core is that they are designed for mocking.
 Mocking is enabled by:
 
@@ -240,7 +243,7 @@ SecretClient client = mock.Object;
 KeyVaultSecret secret = client.GetSecret("Name");
 ```
 
-More on mocking in [mocking samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.31.0/sdk/core/Azure.Core/samples/Mocking.md)
+More on mocking in [mocking samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.32.0/sdk/core/Azure.Core/samples/Mocking.md).
 
 ## Distributed tracing with Application Insights
 
@@ -250,11 +253,11 @@ If your application already uses ApplicationInsights, automatic collection of Az
 
 To setup ApplicationInsights tracking for your application follow the [Start Monitoring Application](/azure/azure-monitor/learn/dotnetcore-quick-start) guide.
 
-More on diagnostics in [diagnostics samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.31.0/sdk/core/Azure.Core/samples/Diagnostics.md).
+More on diagnostics in [diagnostics samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.32.0/sdk/core/Azure.Core/samples/Diagnostics.md).
 
 ## Troubleshooting
 
-Three main ways of troubleshooting failures are [inspecting exceptions](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.31.0/sdk/core/Azure.Core/samples/Response.md#handling-exceptions), enabling [logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.31.0/sdk/core/Azure.Core/samples/Diagnostics.md#Logging), and [distributed tracing](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.31.0/sdk/core/Azure.Core/samples/Diagnostics.md#Distributed-tracing)
+Three main ways of troubleshooting failures are [inspecting exceptions](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.32.0/sdk/core/Azure.Core/samples/Response.md#handling-exceptions), enabling [logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.32.0/sdk/core/Azure.Core/samples/Diagnostics.md#Logging), and [distributed tracing](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.32.0/sdk/core/Azure.Core/samples/Diagnostics.md#Distributed-tracing)
 
 ## Next steps
 
@@ -270,7 +273,7 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fcore%2FAzure.Core%2FREADME.png)
 
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Core_1.31.0/sdk/core/Azure.Core/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Core_1.32.0/sdk/core/Azure.Core/src
 [package]: https://www.nuget.org/packages/Azure.Core/
 [docs]: /dotnet/api/azure.core
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct
