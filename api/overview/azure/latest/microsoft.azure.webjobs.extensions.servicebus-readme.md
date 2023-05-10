@@ -3,12 +3,12 @@ title: Azure WebJobs Service Bus client library for .NET
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebJobs.Extensions.ServiceBus, servicebus
 author: JoshLove-msft
 ms.author: jolov
-ms.date: 02/23/2023
+ms.date: 05/10/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: servicebus
 ---
-# Azure WebJobs Service Bus client library for .NET - version 5.9.0 
+# Azure WebJobs Service Bus client library for .NET - version 5.10.0 
 
 
 This extension provides functionality for accessing Azure Service Bus from an Azure Function.
@@ -52,14 +52,15 @@ For local development, use the `local.settings.json` file to store the connectio
 
 When deployed, use the [application settings](/azure/azure-functions/functions-how-to-use-azure-function-app-settings) to set the connection string.
 
-#### Managed identity authentication
+#### Identity-based authentication
 
-If your environment has [managed identity](/azure/app-service/overview-managed-identity?tabs=dotnet) enabled you can use it to authenticate the Service Bus extension.
-To use managed identity provide the `<connection_name>__fullyQualifiedNamespace` configuration setting.
+If your environment has [managed identity](/azure/app-service/overview-managed-identity?tabs=dotnet) enabled you can use it to authenticate the Service Bus extension. Before doing so, you will need to ensure that permissions have been configured as described in the [Azure Functions developer guide](/azure/azure-functions/functions-reference#grant-permission-to-the-identity).
+To use identity-based authentication provide the `<connection_name>__fullyQualifiedNamespace` configuration setting.
 
 ```json
 {
   "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
     "<connection_name>__fullyQualifiedNamespace": "<service_bus_namespace>.servicebus.windows.net"
   }
 }
@@ -71,6 +72,7 @@ Or in the case of deployed app set the same setting in [application settings](/a
 <connection_name>__fullyQualifiedNamespace=<service_bus_namespace>.servicebus.windows.net
 ```
 
+More details about configuring an identity-based connection can be found [here](https://learn.microsoft.com/azure/azure-functions/functions-reference?tabs=blob#configure-an-identity-based-connection).
 
 ## Key concepts
 
@@ -314,12 +316,12 @@ additional questions or comments.
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fservicebus%2FMicrosoft.Azure.WebJobs.Extensions.ServiceBus%2FREADME.png)
 
 <!-- LINKS -->
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.ServiceBus_5.9.0/sdk/servicebus/Microsoft.Azure.WebJobs.Extensions.ServiceBus/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.ServiceBus_5.10.0/sdk/servicebus/Microsoft.Azure.WebJobs.Extensions.ServiceBus/src
 [package]: https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.ServiceBus/
 [docs]: /dotnet/api/Microsoft.Azure.WebJobs.Extensions.ServiceBus
 [nuget]: https://www.nuget.org/
 
-[contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.ServiceBus_5.9.0/CONTRIBUTING.md
+[contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.ServiceBus_5.10.0/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
