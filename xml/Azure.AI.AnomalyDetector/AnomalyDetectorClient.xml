@@ -50,7 +50,7 @@
       </Parameters>
       <Docs>
         <param name="endpoint">
-            Supported Cognitive Services endpoints (protocol and hostname, for example:
+            Supported Azure Cognitive Services endpoints (protocol and host name, such as
             https://westus2.api.cognitive.microsoft.com).
             </param>
         <param name="credential"> A credential used to authenticate to an Azure Service. </param>
@@ -78,7 +78,7 @@
       </Parameters>
       <Docs>
         <param name="endpoint">
-            Supported Cognitive Services endpoints (protocol and hostname, for example:
+            Supported Azure Cognitive Services endpoints (protocol and host name, such as
             https://westus2.api.cognitive.microsoft.com).
             </param>
         <param name="credential"> A credential used to authenticate to an Azure Service. </param>
@@ -110,7 +110,11 @@
       <Docs>
         <param name="modelId"> Model identifier. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Delete Multivariate Model. </summary>
+        <summary>
+            [Protocol Method] Delete Multivariate Model
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
         <returns> The response returned from the service. </returns>
         <remarks>
 Delete an existing multivariate model according to the modelId
@@ -127,7 +131,7 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AnomalyDetectorClient(endpoint, credential);
 
-Response response = client.DeleteMultivariateModel("<modelId>");
+Response response = client.DeleteMultivariateModel("<modelId>", new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code></example>
       </Docs>
@@ -153,7 +157,11 @@ Console.WriteLine(response.Status);
       <Docs>
         <param name="modelId"> Model identifier. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Delete Multivariate Model. </summary>
+        <summary>
+            [Protocol Method] Delete Multivariate Model
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
         <returns> The response returned from the service. </returns>
         <remarks>
 Delete an existing multivariate model according to the modelId
@@ -170,7 +178,7 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AnomalyDetectorClient(endpoint, credential);
 
-Response response = await client.DeleteMultivariateModelAsync("<modelId>");
+Response response = await client.DeleteMultivariateModelAsync("<modelId>", new RequestContext());
 Console.WriteLine(response.Status);
 ]]></code></example>
       </Docs>
@@ -201,17 +209,27 @@ Console.WriteLine(response.Status);
         <summary> Detect Multivariate Anomaly. </summary>
         <returns>To be added.</returns>
         <remarks>
-            Submit multivariate anomaly detection task with the modelId of trained model
-            and inference data, the input schema should be the same with the training
-            request. The request will complete asynchronously and return a resultId to
-            query the detection result.The request should be a source link to indicate an
-            externally accessible Azure storage Uri, either pointed to an Azure blob
-            storage folder, or pointed to a CSV file in Azure blob storage.
+            Submit a multivariate anomaly detection task with the modelId value of a trained model
+            and inference data. The input schema should be the same with the training
+            request. The request will finish asynchronously and return a resultId value to
+            query the detection result. The request should be a source link to indicate an
+            externally accessible Azure Storage URI that either points to an Azure Blob
+            Storage folder or points to a CSV file in Azure Blob Storage.
             </remarks>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="modelId" /> or <paramref name="options" /> is null. </exception>
         <exception cref="T:System.ArgumentException">
           <paramref name="modelId" /> is an empty string, and was expected to be non-empty. </exception>
+        <example>
+This sample shows how to call DetectMultivariateBatchAnomaly with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new AnomalyDetectorClient(endpoint, credential);
+
+var options = new MultivariateBatchDetectionOptions("<dataSource>", 1234, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow);
+var result = client.DetectMultivariateBatchAnomaly("<modelId>", options);
+]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="DetectMultivariateBatchAnomaly">
@@ -235,10 +253,16 @@ Console.WriteLine(response.Status);
       </Parameters>
       <Docs>
         <param name="modelId"> Model identifier. </param>
-        <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        <param name="content"> The content to send as the body of the request. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Detect Multivariate Anomaly. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Detect Multivariate Anomaly
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item><item><description>
+            Please try the simpler <see cref="M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.DetectMultivariateBatchAnomaly(System.String,Azure.AI.AnomalyDetector.MultivariateBatchDetectionOptions,System.Threading.CancellationToken)" /> convenience overload with strongly typed models first.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Submit multivariate anomaly detection task with the modelId of trained model
 and inference data, the input schema should be the same with the training
@@ -309,7 +333,7 @@ var data = new {
     endTime = "2022-05-10T14:57:31.2311892-04:00",
 };
 
-Response response = client.DetectMultivariateBatchAnomaly("<modelId>", RequestContent.Create(data));
+Response response = client.DetectMultivariateBatchAnomaly("<modelId>", RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -363,17 +387,27 @@ Console.WriteLine(result.GetProperty("results")[0].GetProperty("errors")[0].GetP
         <summary> Detect Multivariate Anomaly. </summary>
         <returns>To be added.</returns>
         <remarks>
-            Submit multivariate anomaly detection task with the modelId of trained model
-            and inference data, the input schema should be the same with the training
-            request. The request will complete asynchronously and return a resultId to
-            query the detection result.The request should be a source link to indicate an
-            externally accessible Azure storage Uri, either pointed to an Azure blob
-            storage folder, or pointed to a CSV file in Azure blob storage.
+            Submit a multivariate anomaly detection task with the modelId value of a trained model
+            and inference data. The input schema should be the same with the training
+            request. The request will finish asynchronously and return a resultId value to
+            query the detection result. The request should be a source link to indicate an
+            externally accessible Azure Storage URI that either points to an Azure Blob
+            Storage folder or points to a CSV file in Azure Blob Storage.
             </remarks>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="modelId" /> or <paramref name="options" /> is null. </exception>
         <exception cref="T:System.ArgumentException">
           <paramref name="modelId" /> is an empty string, and was expected to be non-empty. </exception>
+        <example>
+This sample shows how to call DetectMultivariateBatchAnomalyAsync with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new AnomalyDetectorClient(endpoint, credential);
+
+var options = new MultivariateBatchDetectionOptions("<dataSource>", 1234, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow);
+var result = await client.DetectMultivariateBatchAnomalyAsync("<modelId>", options);
+]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="DetectMultivariateBatchAnomalyAsync">
@@ -397,10 +431,16 @@ Console.WriteLine(result.GetProperty("results")[0].GetProperty("errors")[0].GetP
       </Parameters>
       <Docs>
         <param name="modelId"> Model identifier. </param>
-        <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        <param name="content"> The content to send as the body of the request. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Detect Multivariate Anomaly. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Detect Multivariate Anomaly
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item><item><description>
+            Please try the simpler <see cref="M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.DetectMultivariateBatchAnomalyAsync(System.String,Azure.AI.AnomalyDetector.MultivariateBatchDetectionOptions,System.Threading.CancellationToken)" /> convenience overload with strongly typed models first.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Submit multivariate anomaly detection task with the modelId of trained model
 and inference data, the input schema should be the same with the training
@@ -471,7 +511,7 @@ var data = new {
     endTime = "2022-05-10T14:57:31.2311892-04:00",
 };
 
-Response response = await client.DetectMultivariateBatchAnomalyAsync("<modelId>", RequestContent.Create(data));
+Response response = await client.DetectMultivariateBatchAnomalyAsync("<modelId>", RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -520,20 +560,42 @@ Console.WriteLine(result.GetProperty("results")[0].GetProperty("errors")[0].GetP
       </Parameters>
       <Docs>
         <param name="modelId"> Model identifier. </param>
-        <param name="options"> Request of last detection. </param>
+        <param name="options"> Request of the last detection. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary> Detect anomalies in the last point of the request body. </summary>
         <returns>To be added.</returns>
         <remarks>
-            Submit multivariate anomaly detection task with the modelId of trained model
-            and inference data, and the inference data should be put into request body in a
-            JSON format. The request will complete synchronously and return the detection
+            Submit a multivariate anomaly detection task with the modelId value of a trained model
+            and inference data. The inference data should be put into the request body in
+            JSON format. The request will finish synchronously and return the detection
             immediately in the response body.
             </remarks>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="modelId" /> or <paramref name="options" /> is null. </exception>
         <exception cref="T:System.ArgumentException">
           <paramref name="modelId" /> is an empty string, and was expected to be non-empty. </exception>
+        <example>
+This sample shows how to call DetectMultivariateLastAnomaly with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new AnomalyDetectorClient(endpoint, credential);
+
+var options = new MultivariateLastDetectionOptions(new VariableValues[] 
+{
+    new VariableValues("<variable>", new string[] 
+{
+        "<null>"
+    }, new float[] 
+{
+        3.14f
+    })
+})
+{
+    TopContributorCount = 1234,
+};
+var result = client.DetectMultivariateLastAnomaly("<modelId>", options);
+]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="DetectMultivariateLastAnomaly">
@@ -557,10 +619,16 @@ Console.WriteLine(result.GetProperty("results")[0].GetProperty("errors")[0].GetP
       </Parameters>
       <Docs>
         <param name="modelId"> Model identifier. </param>
-        <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        <param name="content"> The content to send as the body of the request. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Detect anomalies in the last point of the request body. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Detect anomalies in the last point of the request body
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item><item><description>
+            Please try the simpler <see cref="M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.DetectMultivariateLastAnomaly(System.String,Azure.AI.AnomalyDetector.MultivariateLastDetectionOptions,System.Threading.CancellationToken)" /> convenience overload with strongly typed models first.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Submit multivariate anomaly detection task with the modelId of trained model
 and inference data, and the inference data should be put into request body in a
@@ -606,7 +674,32 @@ Schema for <c>MultivariateLastDetectionResult</c>:
           <paramref name="modelId" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call DetectMultivariateLastAnomaly with required parameters and request content and parse the result.
+This sample shows how to call DetectMultivariateLastAnomaly with required parameters and request content, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new AnomalyDetectorClient(endpoint, credential);
+
+var data = new {
+    variables = new[] {
+        new {
+            variable = "<variable>",
+            timestamps = new[] {
+                "<String>"
+            },
+            values = new[] {
+                123.45f
+            },
+        }
+    },
+};
+
+Response response = client.DetectMultivariateLastAnomaly("<modelId>", RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call DetectMultivariateLastAnomaly with all parameters and request content, and how to parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -627,7 +720,7 @@ var data = new {
     topContributorCount = 1234,
 };
 
-Response response = client.DetectMultivariateLastAnomaly("<modelId>", RequestContent.Create(data));
+Response response = client.DetectMultivariateLastAnomaly("<modelId>", RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("variableStates")[0].GetProperty("variable").ToString());
@@ -668,20 +761,42 @@ Console.WriteLine(result.GetProperty("results")[0].GetProperty("errors")[0].GetP
       </Parameters>
       <Docs>
         <param name="modelId"> Model identifier. </param>
-        <param name="options"> Request of last detection. </param>
+        <param name="options"> Request of the last detection. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary> Detect anomalies in the last point of the request body. </summary>
         <returns>To be added.</returns>
         <remarks>
-            Submit multivariate anomaly detection task with the modelId of trained model
-            and inference data, and the inference data should be put into request body in a
-            JSON format. The request will complete synchronously and return the detection
+            Submit a multivariate anomaly detection task with the modelId value of a trained model
+            and inference data. The inference data should be put into the request body in
+            JSON format. The request will finish synchronously and return the detection
             immediately in the response body.
             </remarks>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="modelId" /> or <paramref name="options" /> is null. </exception>
         <exception cref="T:System.ArgumentException">
           <paramref name="modelId" /> is an empty string, and was expected to be non-empty. </exception>
+        <example>
+This sample shows how to call DetectMultivariateLastAnomalyAsync with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new AnomalyDetectorClient(endpoint, credential);
+
+var options = new MultivariateLastDetectionOptions(new VariableValues[] 
+{
+    new VariableValues("<variable>", new string[] 
+{
+        "<null>"
+    }, new float[] 
+{
+        3.14f
+    })
+})
+{
+    TopContributorCount = 1234,
+};
+var result = await client.DetectMultivariateLastAnomalyAsync("<modelId>", options);
+]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="DetectMultivariateLastAnomalyAsync">
@@ -705,10 +820,16 @@ Console.WriteLine(result.GetProperty("results")[0].GetProperty("errors")[0].GetP
       </Parameters>
       <Docs>
         <param name="modelId"> Model identifier. </param>
-        <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        <param name="content"> The content to send as the body of the request. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Detect anomalies in the last point of the request body. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Detect anomalies in the last point of the request body
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item><item><description>
+            Please try the simpler <see cref="M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.DetectMultivariateLastAnomalyAsync(System.String,Azure.AI.AnomalyDetector.MultivariateLastDetectionOptions,System.Threading.CancellationToken)" /> convenience overload with strongly typed models first.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Submit multivariate anomaly detection task with the modelId of trained model
 and inference data, and the inference data should be put into request body in a
@@ -754,7 +875,32 @@ Schema for <c>MultivariateLastDetectionResult</c>:
           <paramref name="modelId" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call DetectMultivariateLastAnomalyAsync with required parameters and request content and parse the result.
+This sample shows how to call DetectMultivariateLastAnomalyAsync with required parameters and request content, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new AnomalyDetectorClient(endpoint, credential);
+
+var data = new {
+    variables = new[] {
+        new {
+            variable = "<variable>",
+            timestamps = new[] {
+                "<String>"
+            },
+            values = new[] {
+                123.45f
+            },
+        }
+    },
+};
+
+Response response = await client.DetectMultivariateLastAnomalyAsync("<modelId>", RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call DetectMultivariateLastAnomalyAsync with all parameters and request content, and how to parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -775,7 +921,7 @@ var data = new {
     topContributorCount = 1234,
 };
 
-Response response = await client.DetectMultivariateLastAnomalyAsync("<modelId>", RequestContent.Create(data));
+Response response = await client.DetectMultivariateLastAnomalyAsync("<modelId>", RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("variableStates")[0].GetProperty("variable").ToString());
@@ -818,9 +964,31 @@ Console.WriteLine(result.GetProperty("results")[0].GetProperty("errors")[0].GetP
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary> Detect change point for the entire series. </summary>
         <returns>To be added.</returns>
-        <remarks> Evaluate change point score of every series point. </remarks>
+        <remarks> Evaluate the change point score of every series point. </remarks>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="options" /> is null. </exception>
+        <example>
+This sample shows how to call DetectUnivariateChangePoint with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new AnomalyDetectorClient(endpoint, credential);
+
+var options = new UnivariateChangePointDetectionOptions(new TimeSeriesPoint[] 
+{
+    new TimeSeriesPoint(3.14f)
+{
+        Timestamp = DateTimeOffset.UtcNow,
+    }
+}, TimeGranularity.Yearly)
+{
+    CustomInterval = 1234,
+    Period = 1234,
+    StableTrendWindow = 1234,
+    Threshold = 3.14f,
+};
+var result = client.DetectUnivariateChangePoint(options);
+]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="DetectUnivariateChangePoint">
@@ -842,10 +1010,16 @@ Console.WriteLine(result.GetProperty("results")[0].GetProperty("errors")[0].GetP
         <Parameter Name="context" Type="Azure.RequestContext" />
       </Parameters>
       <Docs>
-        <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        <param name="content"> The content to send as the body of the request. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Detect change point for the entire series. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Detect change point for the entire series
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item><item><description>
+            Please try the simpler <see cref="M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.DetectUnivariateChangePoint(Azure.AI.AnomalyDetector.UnivariateChangePointDetectionOptions,System.Threading.CancellationToken)" /> convenience overload with strongly typed models first.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Evaluate change point score of every series point
 
@@ -922,7 +1096,7 @@ var data = new {
     threshold = 123.45f,
 };
 
-Response response = client.DetectUnivariateChangePoint(RequestContent.Create(data));
+Response response = client.DetectUnivariateChangePoint(RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("period").ToString());
@@ -954,9 +1128,31 @@ Console.WriteLine(result.GetProperty("confidenceScores")[0].ToString());
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary> Detect change point for the entire series. </summary>
         <returns>To be added.</returns>
-        <remarks> Evaluate change point score of every series point. </remarks>
+        <remarks> Evaluate the change point score of every series point. </remarks>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="options" /> is null. </exception>
+        <example>
+This sample shows how to call DetectUnivariateChangePointAsync with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new AnomalyDetectorClient(endpoint, credential);
+
+var options = new UnivariateChangePointDetectionOptions(new TimeSeriesPoint[] 
+{
+    new TimeSeriesPoint(3.14f)
+{
+        Timestamp = DateTimeOffset.UtcNow,
+    }
+}, TimeGranularity.Yearly)
+{
+    CustomInterval = 1234,
+    Period = 1234,
+    StableTrendWindow = 1234,
+    Threshold = 3.14f,
+};
+var result = await client.DetectUnivariateChangePointAsync(options);
+]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="DetectUnivariateChangePointAsync">
@@ -978,10 +1174,16 @@ Console.WriteLine(result.GetProperty("confidenceScores")[0].ToString());
         <Parameter Name="context" Type="Azure.RequestContext" />
       </Parameters>
       <Docs>
-        <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        <param name="content"> The content to send as the body of the request. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Detect change point for the entire series. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Detect change point for the entire series
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item><item><description>
+            Please try the simpler <see cref="M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.DetectUnivariateChangePointAsync(Azure.AI.AnomalyDetector.UnivariateChangePointDetectionOptions,System.Threading.CancellationToken)" /> convenience overload with strongly typed models first.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Evaluate change point score of every series point
 
@@ -1058,7 +1260,7 @@ var data = new {
     threshold = 123.45f,
 };
 
-Response response = await client.DetectUnivariateChangePointAsync(RequestContent.Create(data));
+Response response = await client.DetectUnivariateChangePointAsync(RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("period").ToString());
@@ -1091,13 +1293,38 @@ Console.WriteLine(result.GetProperty("confidenceScores")[0].ToString());
         <summary> Detect anomalies for the entire series in batch. </summary>
         <returns>To be added.</returns>
         <remarks>
-            This operation generates a model with an entire series, each point is detected
+            This operation generates a model with an entire series. Each point is detected
             with the same model. With this method, points before and after a certain point
-            are used to determine whether it is an anomaly. The entire detection can give
+            are used to determine whether it's an anomaly. The entire detection can give the
             user an overall status of the time series.
             </remarks>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="options" /> is null. </exception>
+        <example>
+This sample shows how to call DetectUnivariateEntireSeries with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new AnomalyDetectorClient(endpoint, credential);
+
+var options = new UnivariateDetectionOptions(new TimeSeriesPoint[] 
+{
+    new TimeSeriesPoint(3.14f)
+{
+        Timestamp = DateTimeOffset.UtcNow,
+    }
+})
+{
+    Granularity = TimeGranularity.Yearly,
+    CustomInterval = 1234,
+    Period = 1234,
+    MaxAnomalyRatio = 3.14f,
+    Sensitivity = 1234,
+    ImputeMode = ImputeMode.Auto,
+    ImputeFixedValue = 3.14f,
+};
+var result = client.DetectUnivariateEntireSeries(options);
+]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="DetectUnivariateEntireSeries">
@@ -1119,10 +1346,16 @@ Console.WriteLine(result.GetProperty("confidenceScores")[0].ToString());
         <Parameter Name="context" Type="Azure.RequestContext" />
       </Parameters>
       <Docs>
-        <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        <param name="content"> The content to send as the body of the request. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Detect anomalies for the entire series in batch. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Detect anomalies for the entire series in batch.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item><item><description>
+            Please try the simpler <see cref="M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.DetectUnivariateEntireSeries(Azure.AI.AnomalyDetector.UnivariateDetectionOptions,System.Threading.CancellationToken)" /> convenience overload with strongly typed models first.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 This operation generates a model with an entire series, each point is detected
 with the same model. With this method, points before and after a certain point
@@ -1216,7 +1449,7 @@ var data = new {
     imputeFixedValue = 123.45f,
 };
 
-Response response = client.DetectUnivariateEntireSeries(RequestContent.Create(data));
+Response response = client.DetectUnivariateEntireSeries(RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("period").ToString());
@@ -1254,13 +1487,38 @@ Console.WriteLine(result.GetProperty("severity")[0].ToString());
         <summary> Detect anomalies for the entire series in batch. </summary>
         <returns>To be added.</returns>
         <remarks>
-            This operation generates a model with an entire series, each point is detected
+            This operation generates a model with an entire series. Each point is detected
             with the same model. With this method, points before and after a certain point
-            are used to determine whether it is an anomaly. The entire detection can give
+            are used to determine whether it's an anomaly. The entire detection can give the
             user an overall status of the time series.
             </remarks>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="options" /> is null. </exception>
+        <example>
+This sample shows how to call DetectUnivariateEntireSeriesAsync with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new AnomalyDetectorClient(endpoint, credential);
+
+var options = new UnivariateDetectionOptions(new TimeSeriesPoint[] 
+{
+    new TimeSeriesPoint(3.14f)
+{
+        Timestamp = DateTimeOffset.UtcNow,
+    }
+})
+{
+    Granularity = TimeGranularity.Yearly,
+    CustomInterval = 1234,
+    Period = 1234,
+    MaxAnomalyRatio = 3.14f,
+    Sensitivity = 1234,
+    ImputeMode = ImputeMode.Auto,
+    ImputeFixedValue = 3.14f,
+};
+var result = await client.DetectUnivariateEntireSeriesAsync(options);
+]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="DetectUnivariateEntireSeriesAsync">
@@ -1282,10 +1540,16 @@ Console.WriteLine(result.GetProperty("severity")[0].ToString());
         <Parameter Name="context" Type="Azure.RequestContext" />
       </Parameters>
       <Docs>
-        <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        <param name="content"> The content to send as the body of the request. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Detect anomalies for the entire series in batch. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Detect anomalies for the entire series in batch.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item><item><description>
+            Please try the simpler <see cref="M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.DetectUnivariateEntireSeriesAsync(Azure.AI.AnomalyDetector.UnivariateDetectionOptions,System.Threading.CancellationToken)" /> convenience overload with strongly typed models first.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 This operation generates a model with an entire series, each point is detected
 with the same model. With this method, points before and after a certain point
@@ -1379,7 +1643,7 @@ var data = new {
     imputeFixedValue = 123.45f,
 };
 
-Response response = await client.DetectUnivariateEntireSeriesAsync(RequestContent.Create(data));
+Response response = await client.DetectUnivariateEntireSeriesAsync(RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("period").ToString());
@@ -1417,11 +1681,36 @@ Console.WriteLine(result.GetProperty("severity")[0].ToString());
         <summary> Detect anomaly status of the latest point in time series. </summary>
         <returns>To be added.</returns>
         <remarks>
-            This operation generates a model using the points that you sent into the API,
+            This operation generates a model by using the points that you sent in to the API
             and based on all data to determine whether the last point is anomalous.
             </remarks>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="options" /> is null. </exception>
+        <example>
+This sample shows how to call DetectUnivariateLastPoint with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new AnomalyDetectorClient(endpoint, credential);
+
+var options = new UnivariateDetectionOptions(new TimeSeriesPoint[] 
+{
+    new TimeSeriesPoint(3.14f)
+{
+        Timestamp = DateTimeOffset.UtcNow,
+    }
+})
+{
+    Granularity = TimeGranularity.Yearly,
+    CustomInterval = 1234,
+    Period = 1234,
+    MaxAnomalyRatio = 3.14f,
+    Sensitivity = 1234,
+    ImputeMode = ImputeMode.Auto,
+    ImputeFixedValue = 3.14f,
+};
+var result = client.DetectUnivariateLastPoint(options);
+]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="DetectUnivariateLastPoint">
@@ -1443,10 +1732,16 @@ Console.WriteLine(result.GetProperty("severity")[0].ToString());
         <Parameter Name="context" Type="Azure.RequestContext" />
       </Parameters>
       <Docs>
-        <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        <param name="content"> The content to send as the body of the request. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Detect anomaly status of the latest point in time series. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Detect anomaly status of the latest point in time series.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item><item><description>
+            Please try the simpler <see cref="M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.DetectUnivariateLastPoint(Azure.AI.AnomalyDetector.UnivariateDetectionOptions,System.Threading.CancellationToken)" /> convenience overload with strongly typed models first.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 This operation generates a model using the points that you sent into the API,
 and based on all data to determine whether the last point is anomalous.
@@ -1540,7 +1835,7 @@ var data = new {
     imputeFixedValue = 123.45f,
 };
 
-Response response = client.DetectUnivariateLastPoint(RequestContent.Create(data));
+Response response = client.DetectUnivariateLastPoint(RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("period").ToString());
@@ -1579,11 +1874,36 @@ Console.WriteLine(result.GetProperty("severity").ToString());
         <summary> Detect anomaly status of the latest point in time series. </summary>
         <returns>To be added.</returns>
         <remarks>
-            This operation generates a model using the points that you sent into the API,
+            This operation generates a model by using the points that you sent in to the API
             and based on all data to determine whether the last point is anomalous.
             </remarks>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="options" /> is null. </exception>
+        <example>
+This sample shows how to call DetectUnivariateLastPointAsync with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new AnomalyDetectorClient(endpoint, credential);
+
+var options = new UnivariateDetectionOptions(new TimeSeriesPoint[] 
+{
+    new TimeSeriesPoint(3.14f)
+{
+        Timestamp = DateTimeOffset.UtcNow,
+    }
+})
+{
+    Granularity = TimeGranularity.Yearly,
+    CustomInterval = 1234,
+    Period = 1234,
+    MaxAnomalyRatio = 3.14f,
+    Sensitivity = 1234,
+    ImputeMode = ImputeMode.Auto,
+    ImputeFixedValue = 3.14f,
+};
+var result = await client.DetectUnivariateLastPointAsync(options);
+]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="DetectUnivariateLastPointAsync">
@@ -1605,10 +1925,16 @@ Console.WriteLine(result.GetProperty("severity").ToString());
         <Parameter Name="context" Type="Azure.RequestContext" />
       </Parameters>
       <Docs>
-        <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        <param name="content"> The content to send as the body of the request. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Detect anomaly status of the latest point in time series. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Detect anomaly status of the latest point in time series.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item><item><description>
+            Please try the simpler <see cref="M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.DetectUnivariateLastPointAsync(Azure.AI.AnomalyDetector.UnivariateDetectionOptions,System.Threading.CancellationToken)" /> convenience overload with strongly typed models first.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 This operation generates a model using the points that you sent into the API,
 and based on all data to determine whether the last point is anomalous.
@@ -1702,7 +2028,7 @@ var data = new {
     imputeFixedValue = 123.45f,
 };
 
-Response response = await client.DetectUnivariateLastPointAsync(RequestContent.Create(data));
+Response response = await client.DetectUnivariateLastPointAsync(RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("period").ToString());
@@ -1718,10 +2044,10 @@ Console.WriteLine(result.GetProperty("severity").ToString());
       </Docs>
     </Member>
     <Member MemberName="GetMultivariateBatchDetectionResult">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response GetMultivariateBatchDetectionResult (string resultId, Azure.RequestContext context = default);" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response GetMultivariateBatchDetectionResult (string resultId, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response GetMultivariateBatchDetectionResult(string resultId, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.GetMultivariateBatchDetectionResult(System.String,Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetMultivariateBatchDetectionResult (resultId As String, Optional context As RequestContext = Nothing) As Response" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetMultivariateBatchDetectionResult (resultId As String, context As RequestContext) As Response" />
       <MemberSignature Language="F#" Value="abstract member GetMultivariateBatchDetectionResult : string * Azure.RequestContext -&gt; Azure.Response&#xA;override this.GetMultivariateBatchDetectionResult : string * Azure.RequestContext -&gt; Azure.Response" Usage="anomalyDetectorClient.GetMultivariateBatchDetectionResult (resultId, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -1738,8 +2064,14 @@ Console.WriteLine(result.GetProperty("severity").ToString());
       <Docs>
         <param name="resultId"> ID of a batch detection result. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Get Multivariate Anomaly Detection Result. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Get Multivariate Anomaly Detection Result
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item><item><description>
+            Please try the simpler <see cref="M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.GetMultivariateBatchDetectionResult(System.String,System.Threading.CancellationToken)" /> convenience overload with strongly typed models first.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 For asynchronous inference, get multivariate anomaly detection result based on
 resultId returned by the BatchDetectAnomaly api.
@@ -1788,7 +2120,7 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AnomalyDetectorClient(endpoint, credential);
 
-Response response = client.GetMultivariateBatchDetectionResult("<resultId>");
+Response response = client.GetMultivariateBatchDetectionResult("<resultId>", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -1816,11 +2148,53 @@ Console.WriteLine(result.GetProperty("results")[0].GetProperty("errors")[0].GetP
 ]]></code></example>
       </Docs>
     </Member>
+    <Member MemberName="GetMultivariateBatchDetectionResult">
+      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.AI.AnomalyDetector.MultivariateDetectionResult&gt; GetMultivariateBatchDetectionResult (string resultId, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.AI.AnomalyDetector.MultivariateDetectionResult&gt; GetMultivariateBatchDetectionResult(string resultId, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.GetMultivariateBatchDetectionResult(System.String,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetMultivariateBatchDetectionResult (resultId As String, Optional cancellationToken As CancellationToken = Nothing) As Response(Of MultivariateDetectionResult)" />
+      <MemberSignature Language="F#" Value="abstract member GetMultivariateBatchDetectionResult : string * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.AI.AnomalyDetector.MultivariateDetectionResult&gt;&#xA;override this.GetMultivariateBatchDetectionResult : string * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.AI.AnomalyDetector.MultivariateDetectionResult&gt;" Usage="anomalyDetectorClient.GetMultivariateBatchDetectionResult (resultId, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.AI.AnomalyDetector</AssemblyName>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Response&lt;Azure.AI.AnomalyDetector.MultivariateDetectionResult&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="resultId" Type="System.String" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="resultId"> ID of a batch detection result. </param>
+        <param name="cancellationToken"> The cancellation token to use. </param>
+        <summary> Get Multivariate Anomaly Detection Result. </summary>
+        <returns>To be added.</returns>
+        <remarks>
+            For asynchronous inference, get a multivariate anomaly detection result based on the
+            resultId value that the BatchDetectAnomaly API returns.
+            </remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="resultId" /> is null. </exception>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="resultId" /> is an empty string, and was expected to be non-empty. </exception>
+        <example>
+This sample shows how to call GetMultivariateBatchDetectionResult with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new AnomalyDetectorClient(endpoint, credential);
+
+var result = client.GetMultivariateBatchDetectionResult("<resultId>");
+]]></code></example>
+      </Docs>
+    </Member>
     <Member MemberName="GetMultivariateBatchDetectionResultAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; GetMultivariateBatchDetectionResultAsync (string resultId, Azure.RequestContext context = default);" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; GetMultivariateBatchDetectionResultAsync (string resultId, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; GetMultivariateBatchDetectionResultAsync(string resultId, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.GetMultivariateBatchDetectionResultAsync(System.String,Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetMultivariateBatchDetectionResultAsync (resultId As String, Optional context As RequestContext = Nothing) As Task(Of Response)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetMultivariateBatchDetectionResultAsync (resultId As String, context As RequestContext) As Task(Of Response)" />
       <MemberSignature Language="F#" Value="abstract member GetMultivariateBatchDetectionResultAsync : string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.GetMultivariateBatchDetectionResultAsync : string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="anomalyDetectorClient.GetMultivariateBatchDetectionResultAsync (resultId, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -1837,8 +2211,14 @@ Console.WriteLine(result.GetProperty("results")[0].GetProperty("errors")[0].GetP
       <Docs>
         <param name="resultId"> ID of a batch detection result. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Get Multivariate Anomaly Detection Result. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Get Multivariate Anomaly Detection Result
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item><item><description>
+            Please try the simpler <see cref="M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.GetMultivariateBatchDetectionResultAsync(System.String,System.Threading.CancellationToken)" /> convenience overload with strongly typed models first.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 For asynchronous inference, get multivariate anomaly detection result based on
 resultId returned by the BatchDetectAnomaly api.
@@ -1887,7 +2267,7 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AnomalyDetectorClient(endpoint, credential);
 
-Response response = await client.GetMultivariateBatchDetectionResultAsync("<resultId>");
+Response response = await client.GetMultivariateBatchDetectionResultAsync("<resultId>", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -1915,45 +2295,12 @@ Console.WriteLine(result.GetProperty("results")[0].GetProperty("errors")[0].GetP
 ]]></code></example>
       </Docs>
     </Member>
-    <Member MemberName="GetMultivariateBatchDetectionResultValue">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.AI.AnomalyDetector.MultivariateDetectionResult&gt; GetMultivariateBatchDetectionResultValue (string resultId, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.AI.AnomalyDetector.MultivariateDetectionResult&gt; GetMultivariateBatchDetectionResultValue(string resultId, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.GetMultivariateBatchDetectionResultValue(System.String,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetMultivariateBatchDetectionResultValue (resultId As String, Optional cancellationToken As CancellationToken = Nothing) As Response(Of MultivariateDetectionResult)" />
-      <MemberSignature Language="F#" Value="abstract member GetMultivariateBatchDetectionResultValue : string * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.AI.AnomalyDetector.MultivariateDetectionResult&gt;&#xA;override this.GetMultivariateBatchDetectionResultValue : string * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.AI.AnomalyDetector.MultivariateDetectionResult&gt;" Usage="anomalyDetectorClient.GetMultivariateBatchDetectionResultValue (resultId, cancellationToken)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Azure.AI.AnomalyDetector</AssemblyName>
-        <AssemblyVersion>3.0.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>Azure.Response&lt;Azure.AI.AnomalyDetector.MultivariateDetectionResult&gt;</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="resultId" Type="System.String" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
-      </Parameters>
-      <Docs>
-        <param name="resultId"> ID of a batch detection result. </param>
-        <param name="cancellationToken"> The cancellation token to use. </param>
-        <summary> Get Multivariate Anomaly Detection Result. </summary>
-        <returns>To be added.</returns>
-        <remarks>
-            For asynchronous inference, get multivariate anomaly detection result based on
-            resultId returned by the BatchDetectAnomaly api.
-            </remarks>
-        <exception cref="T:System.ArgumentNullException">
-          <paramref name="resultId" /> is null. </exception>
-        <exception cref="T:System.ArgumentException">
-          <paramref name="resultId" /> is an empty string, and was expected to be non-empty. </exception>
-      </Docs>
-    </Member>
-    <Member MemberName="GetMultivariateBatchDetectionResultValueAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.AI.AnomalyDetector.MultivariateDetectionResult&gt;&gt; GetMultivariateBatchDetectionResultValueAsync (string resultId, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.AI.AnomalyDetector.MultivariateDetectionResult&gt;&gt; GetMultivariateBatchDetectionResultValueAsync(string resultId, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.GetMultivariateBatchDetectionResultValueAsync(System.String,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetMultivariateBatchDetectionResultValueAsync (resultId As String, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of MultivariateDetectionResult))" />
-      <MemberSignature Language="F#" Value="abstract member GetMultivariateBatchDetectionResultValueAsync : string * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.AI.AnomalyDetector.MultivariateDetectionResult&gt;&gt;&#xA;override this.GetMultivariateBatchDetectionResultValueAsync : string * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.AI.AnomalyDetector.MultivariateDetectionResult&gt;&gt;" Usage="anomalyDetectorClient.GetMultivariateBatchDetectionResultValueAsync (resultId, cancellationToken)" />
+    <Member MemberName="GetMultivariateBatchDetectionResultAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.AI.AnomalyDetector.MultivariateDetectionResult&gt;&gt; GetMultivariateBatchDetectionResultAsync (string resultId, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.AI.AnomalyDetector.MultivariateDetectionResult&gt;&gt; GetMultivariateBatchDetectionResultAsync(string resultId, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.GetMultivariateBatchDetectionResultAsync(System.String,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetMultivariateBatchDetectionResultAsync (resultId As String, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of MultivariateDetectionResult))" />
+      <MemberSignature Language="F#" Value="abstract member GetMultivariateBatchDetectionResultAsync : string * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.AI.AnomalyDetector.MultivariateDetectionResult&gt;&gt;&#xA;override this.GetMultivariateBatchDetectionResultAsync : string * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.AI.AnomalyDetector.MultivariateDetectionResult&gt;&gt;" Usage="anomalyDetectorClient.GetMultivariateBatchDetectionResultAsync (resultId, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.AI.AnomalyDetector</AssemblyName>
@@ -1972,20 +2319,29 @@ Console.WriteLine(result.GetProperty("results")[0].GetProperty("errors")[0].GetP
         <summary> Get Multivariate Anomaly Detection Result. </summary>
         <returns>To be added.</returns>
         <remarks>
-            For asynchronous inference, get multivariate anomaly detection result based on
-            resultId returned by the BatchDetectAnomaly api.
+            For asynchronous inference, get a multivariate anomaly detection result based on the
+            resultId value that the BatchDetectAnomaly API returns.
             </remarks>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="resultId" /> is null. </exception>
         <exception cref="T:System.ArgumentException">
           <paramref name="resultId" /> is an empty string, and was expected to be non-empty. </exception>
+        <example>
+This sample shows how to call GetMultivariateBatchDetectionResultAsync with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new AnomalyDetectorClient(endpoint, credential);
+
+var result = await client.GetMultivariateBatchDetectionResultAsync("<resultId>");
+]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="GetMultivariateModel">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response GetMultivariateModel (string modelId, Azure.RequestContext context = default);" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response GetMultivariateModel (string modelId, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response GetMultivariateModel(string modelId, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.GetMultivariateModel(System.String,Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetMultivariateModel (modelId As String, Optional context As RequestContext = Nothing) As Response" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetMultivariateModel (modelId As String, context As RequestContext) As Response" />
       <MemberSignature Language="F#" Value="abstract member GetMultivariateModel : string * Azure.RequestContext -&gt; Azure.Response&#xA;override this.GetMultivariateModel : string * Azure.RequestContext -&gt; Azure.Response" Usage="anomalyDetectorClient.GetMultivariateModel (modelId, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -2002,8 +2358,14 @@ Console.WriteLine(result.GetProperty("results")[0].GetProperty("errors")[0].GetP
       <Docs>
         <param name="modelId"> Model identifier. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Get Multivariate Model. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Get Multivariate Model
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item><item><description>
+            Please try the simpler <see cref="M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.GetMultivariateModel(System.String,System.Threading.CancellationToken)" /> convenience overload with strongly typed models first.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Get detailed information of multivariate model, including the training status
 and variables used in the model.
@@ -2060,7 +2422,7 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AnomalyDetectorClient(endpoint, credential);
 
-Response response = client.GetMultivariateModel("<modelId>");
+Response response = client.GetMultivariateModel("<modelId>", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("modelId").ToString());
@@ -2090,11 +2452,53 @@ Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo")
 ]]></code></example>
       </Docs>
     </Member>
+    <Member MemberName="GetMultivariateModel">
+      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.AI.AnomalyDetector.AnomalyDetectionModel&gt; GetMultivariateModel (string modelId, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.AI.AnomalyDetector.AnomalyDetectionModel&gt; GetMultivariateModel(string modelId, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.GetMultivariateModel(System.String,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetMultivariateModel (modelId As String, Optional cancellationToken As CancellationToken = Nothing) As Response(Of AnomalyDetectionModel)" />
+      <MemberSignature Language="F#" Value="abstract member GetMultivariateModel : string * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.AI.AnomalyDetector.AnomalyDetectionModel&gt;&#xA;override this.GetMultivariateModel : string * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.AI.AnomalyDetector.AnomalyDetectionModel&gt;" Usage="anomalyDetectorClient.GetMultivariateModel (modelId, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.AI.AnomalyDetector</AssemblyName>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Response&lt;Azure.AI.AnomalyDetector.AnomalyDetectionModel&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="modelId" Type="System.String" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="modelId"> Model identifier. </param>
+        <param name="cancellationToken"> The cancellation token to use. </param>
+        <summary> Get Multivariate Model. </summary>
+        <returns>To be added.</returns>
+        <remarks>
+            Get detailed information about the multivariate model, including the training status
+            and variables used in the model.
+            </remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="modelId" /> is null. </exception>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="modelId" /> is an empty string, and was expected to be non-empty. </exception>
+        <example>
+This sample shows how to call GetMultivariateModel with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new AnomalyDetectorClient(endpoint, credential);
+
+var result = client.GetMultivariateModel("<modelId>");
+]]></code></example>
+      </Docs>
+    </Member>
     <Member MemberName="GetMultivariateModelAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; GetMultivariateModelAsync (string modelId, Azure.RequestContext context = default);" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; GetMultivariateModelAsync (string modelId, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; GetMultivariateModelAsync(string modelId, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.GetMultivariateModelAsync(System.String,Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetMultivariateModelAsync (modelId As String, Optional context As RequestContext = Nothing) As Task(Of Response)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetMultivariateModelAsync (modelId As String, context As RequestContext) As Task(Of Response)" />
       <MemberSignature Language="F#" Value="abstract member GetMultivariateModelAsync : string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.GetMultivariateModelAsync : string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="anomalyDetectorClient.GetMultivariateModelAsync (modelId, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -2111,8 +2515,14 @@ Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo")
       <Docs>
         <param name="modelId"> Model identifier. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Get Multivariate Model. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Get Multivariate Model
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item><item><description>
+            Please try the simpler <see cref="M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.GetMultivariateModelAsync(System.String,System.Threading.CancellationToken)" /> convenience overload with strongly typed models first.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Get detailed information of multivariate model, including the training status
 and variables used in the model.
@@ -2169,7 +2579,7 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AnomalyDetectorClient(endpoint, credential);
 
-Response response = await client.GetMultivariateModelAsync("<modelId>");
+Response response = await client.GetMultivariateModelAsync("<modelId>", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("modelId").ToString());
@@ -2199,11 +2609,53 @@ Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo")
 ]]></code></example>
       </Docs>
     </Member>
+    <Member MemberName="GetMultivariateModelAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.AI.AnomalyDetector.AnomalyDetectionModel&gt;&gt; GetMultivariateModelAsync (string modelId, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.AI.AnomalyDetector.AnomalyDetectionModel&gt;&gt; GetMultivariateModelAsync(string modelId, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.GetMultivariateModelAsync(System.String,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetMultivariateModelAsync (modelId As String, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of AnomalyDetectionModel))" />
+      <MemberSignature Language="F#" Value="abstract member GetMultivariateModelAsync : string * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.AI.AnomalyDetector.AnomalyDetectionModel&gt;&gt;&#xA;override this.GetMultivariateModelAsync : string * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.AI.AnomalyDetector.AnomalyDetectionModel&gt;&gt;" Usage="anomalyDetectorClient.GetMultivariateModelAsync (modelId, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.AI.AnomalyDetector</AssemblyName>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.AI.AnomalyDetector.AnomalyDetectionModel&gt;&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="modelId" Type="System.String" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="modelId"> Model identifier. </param>
+        <param name="cancellationToken"> The cancellation token to use. </param>
+        <summary> Get Multivariate Model. </summary>
+        <returns>To be added.</returns>
+        <remarks>
+            Get detailed information about the multivariate model, including the training status
+            and variables used in the model.
+            </remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="modelId" /> is null. </exception>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="modelId" /> is an empty string, and was expected to be non-empty. </exception>
+        <example>
+This sample shows how to call GetMultivariateModelAsync with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new AnomalyDetectorClient(endpoint, credential);
+
+var result = await client.GetMultivariateModelAsync("<modelId>");
+]]></code></example>
+      </Docs>
+    </Member>
     <Member MemberName="GetMultivariateModels">
-      <MemberSignature Language="C#" Value="public virtual Azure.Pageable&lt;BinaryData&gt; GetMultivariateModels (int? skip = default, int? maxCount = default, Azure.RequestContext context = default);" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Pageable&lt;BinaryData&gt; GetMultivariateModels (int? skip, int? maxCount, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Pageable`1&lt;class System.BinaryData&gt; GetMultivariateModels(valuetype System.Nullable`1&lt;int32&gt; skip, valuetype System.Nullable`1&lt;int32&gt; maxCount, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.GetMultivariateModels(System.Nullable{System.Int32},System.Nullable{System.Int32},Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetMultivariateModels (Optional skip As Nullable(Of Integer) = Nothing, Optional maxCount As Nullable(Of Integer) = Nothing, Optional context As RequestContext = Nothing) As Pageable(Of BinaryData)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetMultivariateModels (skip As Nullable(Of Integer), maxCount As Nullable(Of Integer), context As RequestContext) As Pageable(Of BinaryData)" />
       <MemberSignature Language="F#" Value="abstract member GetMultivariateModels : Nullable&lt;int&gt; * Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.Pageable&lt;BinaryData&gt;&#xA;override this.GetMultivariateModels : Nullable&lt;int&gt; * Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.Pageable&lt;BinaryData&gt;" Usage="anomalyDetectorClient.GetMultivariateModels (skip, maxCount, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -2219,10 +2671,16 @@ Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo")
         <Parameter Name="context" Type="Azure.RequestContext" />
       </Parameters>
       <Docs>
-        <param name="skip"> Skip indicates how many models will be skipped. </param>
-        <param name="maxCount"> Top indicates how many models will be fetched. </param>
+        <param name="skip"> The number of result items to skip. </param>
+        <param name="maxCount"> The number of result items to return. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> List Multivariate Models. </summary>
+        <summary>
+            [Protocol Method] List Multivariate Models
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item><item><description>
+            Please try the simpler <see cref="M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.GetMultivariateModels(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)" /> convenience overload with strongly typed models first.
+            </description></item></list></summary>
         <returns> The <see cref="T:Azure.Pageable`1" /> from the service containing a list of <see cref="T:System.BinaryData" /> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         <remarks>
 List models of a resource.
@@ -2264,29 +2722,15 @@ Schema for <c>Array</c>:
 </code></remarks>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call GetMultivariateModels and parse the result.
+This sample shows how to call GetMultivariateModels with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AnomalyDetectorClient(endpoint, credential);
 
-foreach (var data in client.GetMultivariateModels())
+foreach (var item in client.GetMultivariateModels(1234, 1234, new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("modelId").ToString());
-    Console.WriteLine(result.GetProperty("createdTime").ToString());
-    Console.WriteLine(result.GetProperty("lastUpdatedTime").ToString());
-}
-]]></code>
-This sample shows how to call GetMultivariateModels with all parameters, and how to parse the result.
-<code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AnomalyDetectorClient(endpoint, credential);
-
-foreach (var data in client.GetMultivariateModels(1234, 1234))
-{
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("modelId").ToString());
     Console.WriteLine(result.GetProperty("createdTime").ToString());
     Console.WriteLine(result.GetProperty("lastUpdatedTime").ToString());
@@ -2315,11 +2759,50 @@ foreach (var data in client.GetMultivariateModels(1234, 1234))
 ]]></code></example>
       </Docs>
     </Member>
+    <Member MemberName="GetMultivariateModels">
+      <MemberSignature Language="C#" Value="public virtual Azure.Pageable&lt;Azure.AI.AnomalyDetector.AnomalyDetectionModel&gt; GetMultivariateModels (int? skip = default, int? maxCount = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Pageable`1&lt;class Azure.AI.AnomalyDetector.AnomalyDetectionModel&gt; GetMultivariateModels(valuetype System.Nullable`1&lt;int32&gt; skip, valuetype System.Nullable`1&lt;int32&gt; maxCount, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.GetMultivariateModels(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetMultivariateModels (Optional skip As Nullable(Of Integer) = Nothing, Optional maxCount As Nullable(Of Integer) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Pageable(Of AnomalyDetectionModel)" />
+      <MemberSignature Language="F#" Value="abstract member GetMultivariateModels : Nullable&lt;int&gt; * Nullable&lt;int&gt; * System.Threading.CancellationToken -&gt; Azure.Pageable&lt;Azure.AI.AnomalyDetector.AnomalyDetectionModel&gt;&#xA;override this.GetMultivariateModels : Nullable&lt;int&gt; * Nullable&lt;int&gt; * System.Threading.CancellationToken -&gt; Azure.Pageable&lt;Azure.AI.AnomalyDetector.AnomalyDetectionModel&gt;" Usage="anomalyDetectorClient.GetMultivariateModels (skip, maxCount, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.AI.AnomalyDetector</AssemblyName>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Pageable&lt;Azure.AI.AnomalyDetector.AnomalyDetectionModel&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="skip" Type="System.Nullable&lt;System.Int32&gt;" />
+        <Parameter Name="maxCount" Type="System.Nullable&lt;System.Int32&gt;" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="skip"> The number of result items to skip. </param>
+        <param name="maxCount"> The number of result items to return. </param>
+        <param name="cancellationToken"> The cancellation token to use. </param>
+        <summary> List Multivariate Models. </summary>
+        <returns>To be added.</returns>
+        <remarks> List models of a resource. </remarks>
+        <example>
+This sample shows how to call GetMultivariateModels with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new AnomalyDetectorClient(endpoint, credential);
+
+foreach (var item in client.GetMultivariateModels(1234, 1234))
+{
+}
+]]></code></example>
+      </Docs>
+    </Member>
     <Member MemberName="GetMultivariateModelsAsync">
-      <MemberSignature Language="C#" Value="public virtual Azure.AsyncPageable&lt;BinaryData&gt; GetMultivariateModelsAsync (int? skip = default, int? maxCount = default, Azure.RequestContext context = default);" />
+      <MemberSignature Language="C#" Value="public virtual Azure.AsyncPageable&lt;BinaryData&gt; GetMultivariateModelsAsync (int? skip, int? maxCount, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.AsyncPageable`1&lt;class System.BinaryData&gt; GetMultivariateModelsAsync(valuetype System.Nullable`1&lt;int32&gt; skip, valuetype System.Nullable`1&lt;int32&gt; maxCount, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.GetMultivariateModelsAsync(System.Nullable{System.Int32},System.Nullable{System.Int32},Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetMultivariateModelsAsync (Optional skip As Nullable(Of Integer) = Nothing, Optional maxCount As Nullable(Of Integer) = Nothing, Optional context As RequestContext = Nothing) As AsyncPageable(Of BinaryData)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetMultivariateModelsAsync (skip As Nullable(Of Integer), maxCount As Nullable(Of Integer), context As RequestContext) As AsyncPageable(Of BinaryData)" />
       <MemberSignature Language="F#" Value="abstract member GetMultivariateModelsAsync : Nullable&lt;int&gt; * Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.AsyncPageable&lt;BinaryData&gt;&#xA;override this.GetMultivariateModelsAsync : Nullable&lt;int&gt; * Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.AsyncPageable&lt;BinaryData&gt;" Usage="anomalyDetectorClient.GetMultivariateModelsAsync (skip, maxCount, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -2335,10 +2818,16 @@ foreach (var data in client.GetMultivariateModels(1234, 1234))
         <Parameter Name="context" Type="Azure.RequestContext" />
       </Parameters>
       <Docs>
-        <param name="skip"> Skip indicates how many models will be skipped. </param>
-        <param name="maxCount"> Top indicates how many models will be fetched. </param>
+        <param name="skip"> The number of result items to skip. </param>
+        <param name="maxCount"> The number of result items to return. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> List Multivariate Models. </summary>
+        <summary>
+            [Protocol Method] List Multivariate Models
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item><item><description>
+            Please try the simpler <see cref="M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.GetMultivariateModelsAsync(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)" /> convenience overload with strongly typed models first.
+            </description></item></list></summary>
         <returns> The <see cref="T:Azure.AsyncPageable`1" /> from the service containing a list of <see cref="T:System.BinaryData" /> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         <remarks>
 List models of a resource.
@@ -2380,29 +2869,15 @@ Schema for <c>Array</c>:
 </code></remarks>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call GetMultivariateModelsAsync and parse the result.
+This sample shows how to call GetMultivariateModelsAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AnomalyDetectorClient(endpoint, credential);
 
-await foreach (var data in client.GetMultivariateModelsAsync())
+await foreach (var item in client.GetMultivariateModelsAsync(1234, 1234, new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("modelId").ToString());
-    Console.WriteLine(result.GetProperty("createdTime").ToString());
-    Console.WriteLine(result.GetProperty("lastUpdatedTime").ToString());
-}
-]]></code>
-This sample shows how to call GetMultivariateModelsAsync with all parameters, and how to parse the result.
-<code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AnomalyDetectorClient(endpoint, credential);
-
-await foreach (var data in client.GetMultivariateModelsAsync(1234, 1234))
-{
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("modelId").ToString());
     Console.WriteLine(result.GetProperty("createdTime").ToString());
     Console.WriteLine(result.GetProperty("lastUpdatedTime").ToString());
@@ -2431,106 +2906,12 @@ await foreach (var data in client.GetMultivariateModelsAsync(1234, 1234))
 ]]></code></example>
       </Docs>
     </Member>
-    <Member MemberName="GetMultivariateModelValue">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.AI.AnomalyDetector.AnomalyDetectionModel&gt; GetMultivariateModelValue (string modelId, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.AI.AnomalyDetector.AnomalyDetectionModel&gt; GetMultivariateModelValue(string modelId, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.GetMultivariateModelValue(System.String,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetMultivariateModelValue (modelId As String, Optional cancellationToken As CancellationToken = Nothing) As Response(Of AnomalyDetectionModel)" />
-      <MemberSignature Language="F#" Value="abstract member GetMultivariateModelValue : string * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.AI.AnomalyDetector.AnomalyDetectionModel&gt;&#xA;override this.GetMultivariateModelValue : string * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.AI.AnomalyDetector.AnomalyDetectionModel&gt;" Usage="anomalyDetectorClient.GetMultivariateModelValue (modelId, cancellationToken)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Azure.AI.AnomalyDetector</AssemblyName>
-        <AssemblyVersion>3.0.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>Azure.Response&lt;Azure.AI.AnomalyDetector.AnomalyDetectionModel&gt;</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="modelId" Type="System.String" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
-      </Parameters>
-      <Docs>
-        <param name="modelId"> Model identifier. </param>
-        <param name="cancellationToken"> The cancellation token to use. </param>
-        <summary> Get Multivariate Model. </summary>
-        <returns>To be added.</returns>
-        <remarks>
-            Get detailed information of multivariate model, including the training status
-            and variables used in the model.
-            </remarks>
-        <exception cref="T:System.ArgumentNullException">
-          <paramref name="modelId" /> is null. </exception>
-        <exception cref="T:System.ArgumentException">
-          <paramref name="modelId" /> is an empty string, and was expected to be non-empty. </exception>
-      </Docs>
-    </Member>
-    <Member MemberName="GetMultivariateModelValueAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.AI.AnomalyDetector.AnomalyDetectionModel&gt;&gt; GetMultivariateModelValueAsync (string modelId, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.AI.AnomalyDetector.AnomalyDetectionModel&gt;&gt; GetMultivariateModelValueAsync(string modelId, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.GetMultivariateModelValueAsync(System.String,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetMultivariateModelValueAsync (modelId As String, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of AnomalyDetectionModel))" />
-      <MemberSignature Language="F#" Value="abstract member GetMultivariateModelValueAsync : string * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.AI.AnomalyDetector.AnomalyDetectionModel&gt;&gt;&#xA;override this.GetMultivariateModelValueAsync : string * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.AI.AnomalyDetector.AnomalyDetectionModel&gt;&gt;" Usage="anomalyDetectorClient.GetMultivariateModelValueAsync (modelId, cancellationToken)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Azure.AI.AnomalyDetector</AssemblyName>
-        <AssemblyVersion>3.0.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.AI.AnomalyDetector.AnomalyDetectionModel&gt;&gt;</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="modelId" Type="System.String" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
-      </Parameters>
-      <Docs>
-        <param name="modelId"> Model identifier. </param>
-        <param name="cancellationToken"> The cancellation token to use. </param>
-        <summary> Get Multivariate Model. </summary>
-        <returns>To be added.</returns>
-        <remarks>
-            Get detailed information of multivariate model, including the training status
-            and variables used in the model.
-            </remarks>
-        <exception cref="T:System.ArgumentNullException">
-          <paramref name="modelId" /> is null. </exception>
-        <exception cref="T:System.ArgumentException">
-          <paramref name="modelId" /> is an empty string, and was expected to be non-empty. </exception>
-      </Docs>
-    </Member>
-    <Member MemberName="GetMultivariateModelValues">
-      <MemberSignature Language="C#" Value="public virtual Azure.Pageable&lt;Azure.AI.AnomalyDetector.AnomalyDetectionModel&gt; GetMultivariateModelValues (int? skip = default, int? maxCount = default, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Pageable`1&lt;class Azure.AI.AnomalyDetector.AnomalyDetectionModel&gt; GetMultivariateModelValues(valuetype System.Nullable`1&lt;int32&gt; skip, valuetype System.Nullable`1&lt;int32&gt; maxCount, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.GetMultivariateModelValues(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetMultivariateModelValues (Optional skip As Nullable(Of Integer) = Nothing, Optional maxCount As Nullable(Of Integer) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Pageable(Of AnomalyDetectionModel)" />
-      <MemberSignature Language="F#" Value="abstract member GetMultivariateModelValues : Nullable&lt;int&gt; * Nullable&lt;int&gt; * System.Threading.CancellationToken -&gt; Azure.Pageable&lt;Azure.AI.AnomalyDetector.AnomalyDetectionModel&gt;&#xA;override this.GetMultivariateModelValues : Nullable&lt;int&gt; * Nullable&lt;int&gt; * System.Threading.CancellationToken -&gt; Azure.Pageable&lt;Azure.AI.AnomalyDetector.AnomalyDetectionModel&gt;" Usage="anomalyDetectorClient.GetMultivariateModelValues (skip, maxCount, cancellationToken)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Azure.AI.AnomalyDetector</AssemblyName>
-        <AssemblyVersion>3.0.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>Azure.Pageable&lt;Azure.AI.AnomalyDetector.AnomalyDetectionModel&gt;</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="skip" Type="System.Nullable&lt;System.Int32&gt;" />
-        <Parameter Name="maxCount" Type="System.Nullable&lt;System.Int32&gt;" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
-      </Parameters>
-      <Docs>
-        <param name="skip"> Skip indicates how many models will be skipped. </param>
-        <param name="maxCount"> Top indicates how many models will be fetched. </param>
-        <param name="cancellationToken"> The cancellation token to use. </param>
-        <summary> List Multivariate Models. </summary>
-        <returns>To be added.</returns>
-        <remarks> List models of a resource. </remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="GetMultivariateModelValuesAsync">
-      <MemberSignature Language="C#" Value="public virtual Azure.AsyncPageable&lt;Azure.AI.AnomalyDetector.AnomalyDetectionModel&gt; GetMultivariateModelValuesAsync (int? skip = default, int? maxCount = default, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.AsyncPageable`1&lt;class Azure.AI.AnomalyDetector.AnomalyDetectionModel&gt; GetMultivariateModelValuesAsync(valuetype System.Nullable`1&lt;int32&gt; skip, valuetype System.Nullable`1&lt;int32&gt; maxCount, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.GetMultivariateModelValuesAsync(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetMultivariateModelValuesAsync (Optional skip As Nullable(Of Integer) = Nothing, Optional maxCount As Nullable(Of Integer) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As AsyncPageable(Of AnomalyDetectionModel)" />
-      <MemberSignature Language="F#" Value="abstract member GetMultivariateModelValuesAsync : Nullable&lt;int&gt; * Nullable&lt;int&gt; * System.Threading.CancellationToken -&gt; Azure.AsyncPageable&lt;Azure.AI.AnomalyDetector.AnomalyDetectionModel&gt;&#xA;override this.GetMultivariateModelValuesAsync : Nullable&lt;int&gt; * Nullable&lt;int&gt; * System.Threading.CancellationToken -&gt; Azure.AsyncPageable&lt;Azure.AI.AnomalyDetector.AnomalyDetectionModel&gt;" Usage="anomalyDetectorClient.GetMultivariateModelValuesAsync (skip, maxCount, cancellationToken)" />
+    <Member MemberName="GetMultivariateModelsAsync">
+      <MemberSignature Language="C#" Value="public virtual Azure.AsyncPageable&lt;Azure.AI.AnomalyDetector.AnomalyDetectionModel&gt; GetMultivariateModelsAsync (int? skip = default, int? maxCount = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.AsyncPageable`1&lt;class Azure.AI.AnomalyDetector.AnomalyDetectionModel&gt; GetMultivariateModelsAsync(valuetype System.Nullable`1&lt;int32&gt; skip, valuetype System.Nullable`1&lt;int32&gt; maxCount, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.GetMultivariateModelsAsync(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetMultivariateModelsAsync (Optional skip As Nullable(Of Integer) = Nothing, Optional maxCount As Nullable(Of Integer) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As AsyncPageable(Of AnomalyDetectionModel)" />
+      <MemberSignature Language="F#" Value="abstract member GetMultivariateModelsAsync : Nullable&lt;int&gt; * Nullable&lt;int&gt; * System.Threading.CancellationToken -&gt; Azure.AsyncPageable&lt;Azure.AI.AnomalyDetector.AnomalyDetectionModel&gt;&#xA;override this.GetMultivariateModelsAsync : Nullable&lt;int&gt; * Nullable&lt;int&gt; * System.Threading.CancellationToken -&gt; Azure.AsyncPageable&lt;Azure.AI.AnomalyDetector.AnomalyDetectionModel&gt;" Usage="anomalyDetectorClient.GetMultivariateModelsAsync (skip, maxCount, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.AI.AnomalyDetector</AssemblyName>
@@ -2545,12 +2926,23 @@ await foreach (var data in client.GetMultivariateModelsAsync(1234, 1234))
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="skip"> Skip indicates how many models will be skipped. </param>
-        <param name="maxCount"> Top indicates how many models will be fetched. </param>
+        <param name="skip"> The number of result items to skip. </param>
+        <param name="maxCount"> The number of result items to return. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary> List Multivariate Models. </summary>
         <returns>To be added.</returns>
         <remarks> List models of a resource. </remarks>
+        <example>
+This sample shows how to call GetMultivariateModelsAsync with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new AnomalyDetectorClient(endpoint, credential);
+
+await foreach (var item in client.GetMultivariateModelsAsync(1234, 1234))
+{
+}
+]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="Pipeline">
@@ -2598,15 +2990,35 @@ await foreach (var data in client.GetMultivariateModelsAsync(1234, 1234))
         <returns>To be added.</returns>
         <remarks>
             Create and train a multivariate anomaly detection model. The request must
-            include a source parameter to indicate an externally accessible Azure blob
-            storage URI.There are two types of data input: An URI pointed to an Azure blob
-            storage folder which contains multiple CSV files, and each CSV file contains
-            two columns, timestamp and variable. Another type of input is an URI pointed to
-            a CSV file in Azure blob storage, which contains all the variables and a
-            timestamp column.
+            include a source parameter to indicate an Azure Blob
+            Storage URI that's accessible to the service. There are two types of data input. The Blob Storage URI can point to an Azure Blob
+            Storage folder that contains multiple CSV files, where each CSV file has
+            two columns, time stamp and variable. Or the Blob Storage URI can point to a single blob that contains a CSV file that has all the variables and a
+            time stamp column.
             </remarks>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="modelInfo" /> is null. </exception>
+        <example>
+This sample shows how to call TrainMultivariateModel with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new AnomalyDetectorClient(endpoint, credential);
+
+var modelInfo = new ModelInfo("<dataSource>", DateTimeOffset.UtcNow, DateTimeOffset.UtcNow)
+{
+    DataSchema = DataSchema.OneTable,
+    DisplayName = "<DisplayName>",
+    SlidingWindow = 1234,
+    AlignPolicy = new AlignPolicy()
+{
+        AlignMode = AlignMode.Inner,
+        FillNAMethod = FillNAMethod.Previous,
+        PaddingValue = 3.14f,
+    },
+};
+var result = client.TrainMultivariateModel(modelInfo);
+]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="TrainMultivariateModel">
@@ -2628,10 +3040,16 @@ await foreach (var data in client.GetMultivariateModelsAsync(1234, 1234))
         <Parameter Name="context" Type="Azure.RequestContext" />
       </Parameters>
       <Docs>
-        <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        <param name="content"> The content to send as the body of the request. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Train a Multivariate Anomaly Detection Model. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Train a Multivariate Anomaly Detection Model
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item><item><description>
+            Please try the simpler <see cref="M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.TrainMultivariateModel(Azure.AI.AnomalyDetector.ModelInfo,System.Threading.CancellationToken)" /> convenience overload with strongly typed models first.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Create and train a multivariate anomaly detection model. The request must
 include a source parameter to indicate an externally accessible Azure blob
@@ -2756,35 +3174,9 @@ var data = new {
         fillNAMethod = "Previous",
         paddingValue = 123.45f,
     },
-    status = "CREATED",
-    diagnosticsInfo = new {
-        modelState = new {
-            epochIds = new[] {
-                1234
-            },
-            trainLosses = new[] {
-                123.45f
-            },
-            validationLosses = new[] {
-                123.45f
-            },
-            latenciesInSeconds = new[] {
-                123.45f
-            },
-        },
-        variableStates = new[] {
-            new {
-                variable = "<variable>",
-                filledNARatio = 123.45f,
-                effectiveCount = 1234,
-                firstTimestamp = "2022-05-10T14:57:31.2311892-04:00",
-                lastTimestamp = "2022-05-10T14:57:31.2311892-04:00",
-            }
-        },
-    },
 };
 
-Response response = client.TrainMultivariateModel(RequestContent.Create(data));
+Response response = client.TrainMultivariateModel(RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("modelId").ToString());
@@ -2839,15 +3231,35 @@ Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo")
         <returns>To be added.</returns>
         <remarks>
             Create and train a multivariate anomaly detection model. The request must
-            include a source parameter to indicate an externally accessible Azure blob
-            storage URI.There are two types of data input: An URI pointed to an Azure blob
-            storage folder which contains multiple CSV files, and each CSV file contains
-            two columns, timestamp and variable. Another type of input is an URI pointed to
-            a CSV file in Azure blob storage, which contains all the variables and a
-            timestamp column.
+            include a source parameter to indicate an Azure Blob
+            Storage URI that's accessible to the service. There are two types of data input. The Blob Storage URI can point to an Azure Blob
+            Storage folder that contains multiple CSV files, where each CSV file has
+            two columns, time stamp and variable. Or the Blob Storage URI can point to a single blob that contains a CSV file that has all the variables and a
+            time stamp column.
             </remarks>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="modelInfo" /> is null. </exception>
+        <example>
+This sample shows how to call TrainMultivariateModelAsync with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new AnomalyDetectorClient(endpoint, credential);
+
+var modelInfo = new ModelInfo("<dataSource>", DateTimeOffset.UtcNow, DateTimeOffset.UtcNow)
+{
+    DataSchema = DataSchema.OneTable,
+    DisplayName = "<DisplayName>",
+    SlidingWindow = 1234,
+    AlignPolicy = new AlignPolicy()
+{
+        AlignMode = AlignMode.Inner,
+        FillNAMethod = FillNAMethod.Previous,
+        PaddingValue = 3.14f,
+    },
+};
+var result = await client.TrainMultivariateModelAsync(modelInfo);
+]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="TrainMultivariateModelAsync">
@@ -2869,10 +3281,16 @@ Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo")
         <Parameter Name="context" Type="Azure.RequestContext" />
       </Parameters>
       <Docs>
-        <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        <param name="content"> The content to send as the body of the request. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Train a Multivariate Anomaly Detection Model. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Train a Multivariate Anomaly Detection Model
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item><item><description>
+            Please try the simpler <see cref="M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.TrainMultivariateModelAsync(Azure.AI.AnomalyDetector.ModelInfo,System.Threading.CancellationToken)" /> convenience overload with strongly typed models first.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Create and train a multivariate anomaly detection model. The request must
 include a source parameter to indicate an externally accessible Azure blob
@@ -2997,35 +3415,9 @@ var data = new {
         fillNAMethod = "Previous",
         paddingValue = 123.45f,
     },
-    status = "CREATED",
-    diagnosticsInfo = new {
-        modelState = new {
-            epochIds = new[] {
-                1234
-            },
-            trainLosses = new[] {
-                123.45f
-            },
-            validationLosses = new[] {
-                123.45f
-            },
-            latenciesInSeconds = new[] {
-                123.45f
-            },
-        },
-        variableStates = new[] {
-            new {
-                variable = "<variable>",
-                filledNARatio = 123.45f,
-                effectiveCount = 1234,
-                firstTimestamp = "2022-05-10T14:57:31.2311892-04:00",
-                lastTimestamp = "2022-05-10T14:57:31.2311892-04:00",
-            }
-        },
-    },
 };
 
-Response response = await client.TrainMultivariateModelAsync(RequestContent.Create(data));
+Response response = await client.TrainMultivariateModelAsync(RequestContent.Create(data), new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("modelId").ToString());
