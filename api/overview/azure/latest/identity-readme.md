@@ -2,13 +2,13 @@
 title: Azure Identity client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Identity, identity
 author: schaabs
-ms.author: schaabs
-ms.date: 02/08/2023
+ms.author: sschaab
+ms.date: 05/11/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: identity
 ---
-# Azure Identity client library for .NET - version 1.8.2 
+# Azure Identity client library for .NET - version 1.9.0 
 
 
 The Azure Identity library provides [Azure Active Directory (Azure AD)](https://learn.microsoft.com/azure/active-directory/fundamentals/active-directory-whatis) token authentication support across the Azure SDK. It provides a set of [`TokenCredential`](https://learn.microsoft.com/dotnet/api/azure.core.tokencredential?view=azure-dotnet) implementations which can be used to construct Azure SDK clients which support Azure AD token authentication.
@@ -26,6 +26,7 @@ dotnet add package Azure.Identity
 ```
 
 ### Prerequisites
+
 * An [Azure subscription][azure_sub].
 * The [Azure CLI][azure_cli] can also be useful for authenticating in a development environment, creating accounts, and managing account roles.
 
@@ -59,6 +60,14 @@ For systems without a default web browser, the `az login` command will use the d
 
 ![Azure CLI Account Device Code Sign In][azure_cli_login_device_code_image]
 
+#### Authenticate via the Azure Developer CLI
+
+Developers coding outside of an IDE can also use the [Azure Developer CLI][azure_developer_cli] to authenticate. Applications using the `DefaultAzureCredential` or the `AzureDeveloperCliCredential` can then use this account to authenticate calls in their application when running locally.
+
+To authenticate with the [Azure Developer CLI][azure_developer_cli], users can run the command `azd auth login`. For users running on a system with a default web browser, the Azure Developer CLI will launch the browser to authenticate the user.
+
+For systems without a default web browser, the `azd auth login --use-device-code` command will use the device code authentication flow.
+
 #### Authenticate via Azure PowerShell
 
 Developers coding outside of an IDE can also use [Azure PowerShell][azure_powerShell] to authenticate. Applications using the `DefaultAzureCredential` or the `AzurePowerShellCredential` can then use this account to authenticate calls in their application when running locally.
@@ -68,6 +77,7 @@ To authenticate with [Azure PowerShell][azure_powerShell], users can run the com
 For systems without a default web browser, the `Connect-AzAccount` command will use the device code authentication flow. The user can also force Azure PowerShell to use the device code flow rather than launching a browser by specifying the `UseDeviceAuthentication` argument.
 
 ## Key concepts
+
 ### Credentials
 
 A credential is a class which contains or can obtain the data needed for a service client to authenticate requests. Service clients across the Azure SDK accept credentials when they're constructed. Service clients use those credentials to authenticate requests to the service.
@@ -77,6 +87,7 @@ The Azure Identity library focuses on OAuth authentication with Azure AD, and it
 See [Credential Classes](#credential-classes) for a complete listing of available credential types.
 
 ### DefaultAzureCredential
+
 The `DefaultAzureCredential` is appropriate for most scenarios where the application is intended to ultimately be run in Azure. This is because the `DefaultAzureCredential` combines credentials commonly used to authenticate when deployed, with credentials used to authenticate in a development environment.
 
 > Note: `DefaultAzureCredential` is intended to simplify getting started with the SDK by handling common scenarios with reasonable default behaviors. Developers who want more control or whose scenario isn't served by the default settings should use other credential types.
@@ -86,12 +97,14 @@ The `DefaultAzureCredential` attempts to authenticate via the following mechanis
 ![DefaultAzureCredential authentication flow][default_azure_credential_authflow_image]
 
 1. **Environment** - The `DefaultAzureCredential` will read account information specified via [environment variables](#environment-variables) and use it to authenticate.
-2. **Managed Identity** - If the application is deployed to an Azure host with Managed Identity enabled, the `DefaultAzureCredential` will authenticate with that account.
-3. **Visual Studio** - If the developer has authenticated via Visual Studio, the `DefaultAzureCredential` will authenticate with that account.
-4. **Visual Studio Code** - Currently excluded by default as SDK authentication via Visual Studio Code is broken due to issue [#27263](https://github.com/Azure/azure-sdk-for-net/issues/27263). The `VisualStudioCodeCredential` will be re-enabled in the `DefaultAzureCredential` flow once a fix is in place. Issue [#30525](https://github.com/Azure/azure-sdk-for-net/issues/30525) tracks this. In the meantime Visual Studio Code users can authenticate their development environment using the [Azure CLI](https://learn.microsoft.com/cli/azure/).
-5. **Azure CLI** - If the developer has authenticated an account via the Azure CLI `az login` command, the `DefaultAzureCredential` will authenticate with that account.
-6. **Azure PowerShell** - If the developer has authenticated an account via the Azure PowerShell `Connect-AzAccount` command, the `DefaultAzureCredential` will authenticate with that account.
-7. **Interactive browser** - If enabled, the `DefaultAzureCredential` will interactively authenticate the developer via the current system's default browser. By default, this credential type is disabled.
+1. **Workload Identity** - If the application is deployed to an Azure host with Workload Identity enabled, the `DefaultAzureCredential` will authenticate with that account.
+1. **Managed Identity** - If the application is deployed to an Azure host with Managed Identity enabled, the `DefaultAzureCredential` will authenticate with that account.
+1. **Azure Developer CLI** - If the developer has authenticated via the Azure Developer CLI `azd auth login` command, the `DefaultAzureCredential` will authenticate with that account.
+1. **Visual Studio** - If the developer has authenticated via Visual Studio, the `DefaultAzureCredential` will authenticate with that account.
+1. **Visual Studio Code** - Currently excluded by default as SDK authentication via Visual Studio Code is broken due to issue [#27263](https://github.com/Azure/azure-sdk-for-net/issues/27263). The `VisualStudioCodeCredential` will be re-enabled in the `DefaultAzureCredential` flow once a fix is in place. Issue [#30525](https://github.com/Azure/azure-sdk-for-net/issues/30525) tracks this. In the meantime Visual Studio Code users can authenticate their development environment using the [Azure CLI](https://learn.microsoft.com/cli/azure/).
+1. **Azure CLI** - If the developer has authenticated an account via the Azure CLI `az login` command, the `DefaultAzureCredential` will authenticate with that account.
+1. **Azure PowerShell** - If the developer has authenticated an account via the Azure PowerShell `Connect-AzAccount` command, the `DefaultAzureCredential` will authenticate with that account.
+1. **Interactive browser** - If enabled, the `DefaultAzureCredential` will interactively authenticate the developer via the current system's default browser. By default, this credential type is disabled.
 
 ## Examples
 
@@ -116,6 +129,7 @@ var eventHubClient = new EventHubProducerClient("myeventhub.eventhubs.windows.ne
 ```
 
 ### Specify a user-assigned managed identity with `DefaultAzureCredential`
+
 Many Azure hosts allow the assignment of a user-assigned managed identity. This example demonstrates configuring the `DefaultAzureCredential` to authenticate a user-assigned identity when deployed to an Azure host. It then authenticates a `BlobClient` from the [Azure.Storage.Blobs][blobs_client_library] client library with credential.
 
 ```C# Snippet:UserAssignedManagedIdentity
@@ -130,6 +144,7 @@ var blobClient = new BlobClient(new Uri("https://myaccount.blob.core.windows.net
 In addition to configuring the `ManagedIdentityClientId` via code, it can also be set using the `AZURE_CLIENT_ID` environment variable. These two approaches are equivalent when using the `DefaultAzureCredential`.
 
 ### Define a custom authentication flow with `ChainedTokenCredential`
+
 While the `DefaultAzureCredential` is generally the quickest way to get started developing applications for Azure, more advanced users may want to customize the credentials considered when authenticating. The `ChainedTokenCredential` enables users to combine multiple credential instances to define a customized chain of credentials. This example demonstrates creating a `ChainedTokenCredential` which will attempt to authenticate using managed identity, and fall back to authenticating via the Azure CLI if managed identity is unavailable in the current environment. The credential is then used to authenticate an `EventHubProducerClient` from the [Azure.Messaging.EventHubs][eventhubs_client_library] client library.
 
 ```C# Snippet:CustomChainedTokenCredential
@@ -214,6 +229,7 @@ Not all credentials require this configuration. Credentials which authenticate t
 |Credential | Usage | Reference
 |-|-|-
 |[`AzureCliCredential`][ref_AzureCliCredential]|Authenticates in a development environment with the Azure CLI. | [Azure CLI authentication](https://learn.microsoft.com/cli/azure/authenticate-azure-cli)
+|`AzureDeveloperCliCredential`|Authenticates in a development environment with the Azure Developer CLI. | [Azure Developer CLI Reference](https://learn.microsoft.com/azure/developer/azure-developer-cli/reference)
 |[`AzurePowerShellCredential`][ref_AzurePowerShellCredential]|Authenticates in a development environment with the Azure PowerShell. | [Azure PowerShell authentication](https://learn.microsoft.com/powershell/azure/authenticate-azureps)
 |[`VisualStudioCredential`][ref_VisualStudioCredential]|Authenticates in a development environment with Visual Studio. | [Visual Studio configuration](https://learn.microsoft.com/dotnet/azure/configure-visual-studio)
 |[`VisualStudioCodeCredential`][ref_VisualStudioCodeCredential]| Authenticates as the user signed in to the Visual Studio Code Azure Account extension. | [VS Code Azure Account extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.azure-account)
@@ -250,9 +266,17 @@ Not all credentials require this configuration. Credentials which authenticate t
 Configuration is attempted in the above order. For example, if values for a
 client secret and certificate are both present, the client secret will be used.
 
+## Token Caching
+Token caching is a feature provided by the Azure Identity library that allows apps to:
+- Cache tokens.
+- Improve resilience and performance.
+- Reduce the number of requests made to Azure Active Directory (Azure AD) to obtain access tokens.
+
+The Azure Identity library offers both in-memory and persistent disk caching. For more details, see the [token caching documentation](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.9.0/sdk/identity/Azure.Identity/samples/TokenCache.md)
+
 ## Troubleshooting
 
-See the [troubleshooting guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.8.2/sdk/identity/Azure.Identity/TROUBLESHOOTING.md) for details on how to diagnose various failure scenarios.
+See the [troubleshooting guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.9.0/sdk/identity/Azure.Identity/TROUBLESHOOTING.md) for details on how to diagnose various failure scenarios.
 
 ### Error handling
 Errors arising from authentication can be raised on any service client method which makes a request to the service. This is because the first time the token is requested from the credential is on the first call to the service, and any subsequent calls might need to refresh the token. In order to distinguish these failures from failures in the service client Azure Identity classes raise the `AuthenticationFailedException` with details to the source of the error in the exception message as well as possibly the error message. Depending on the application these errors may or may not be recoverable.
@@ -278,7 +302,7 @@ For more information on dealing with errors arising from failed requests to Azur
 
 ### Logging
 
-The Azure Identity library provides the same [logging capabilities](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.8.2/sdk/core/Azure.Core/samples/Diagnostics.md#logging) as the rest of the Azure SDK.
+The Azure Identity library provides the same [logging capabilities](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.9.0/sdk/core/Azure.Core/samples/Diagnostics.md#logging) as the rest of the Azure SDK.
 
 The simplest way to see the logs to help debug authentication issues is to enable the console logging.
 
@@ -323,10 +347,10 @@ We guarantee that all credential instance methods are thread-safe and independen
 This ensures that the recommendation of reusing credential instances is always safe, even across threads.
 
 ### Additional concepts
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.8.2/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.8.2/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.8.2/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.8.2/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.9.0/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.9.0/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.9.0/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.9.0/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 
 ## Next steps
@@ -351,22 +375,23 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 
 <!-- LINKS -->
 [azure_cli]: https://learn.microsoft.com/cli/azure
+[azure_developer_cli]:https://aka.ms/azure-dev
 [azure_powerShell]: https://learn.microsoft.com/powershell/azure
 [azure_sub]: https://azure.microsoft.com/free/dotnet/
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.8.2/sdk/identity/Azure.Identity/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.9.0/sdk/identity/Azure.Identity/src
 [package]: https://www.nuget.org/packages/Azure.Identity
 [aad_doc]: https://learn.microsoft.com/azure/active-directory/
 [aad_err_doc]: https://learn.microsoft.com/azure/active-directory/develop/reference-aadsts-error-codes
-[certificates_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.8.2/sdk/keyvault/Azure.Security.KeyVault.Certificates
+[certificates_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.9.0/sdk/keyvault/Azure.Security.KeyVault.Certificates
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [code_of_conduct_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [nuget]: https://www.nuget.org/
-[keys_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.8.2/sdk/keyvault/Azure.Security.KeyVault.Keys
-[secrets_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.8.2/sdk/keyvault/Azure.Security.KeyVault.Secrets
-[blobs_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.8.2/sdk/storage/Azure.Storage.Blobs
-[queues_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.8.2/sdk/storage/Azure.Storage.Queues
-[eventhubs_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.8.2/sdk/eventhub/Azure.Messaging.EventHubs
-[azure_core_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.8.2/sdk/core/Azure.Core
+[keys_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.9.0/sdk/keyvault/Azure.Security.KeyVault.Keys
+[secrets_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.9.0/sdk/keyvault/Azure.Security.KeyVault.Secrets
+[blobs_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.9.0/sdk/storage/Azure.Storage.Blobs
+[queues_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.9.0/sdk/storage/Azure.Storage.Queues
+[eventhubs_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.9.0/sdk/eventhub/Azure.Messaging.EventHubs
+[azure_core_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.9.0/sdk/core/Azure.Core
 [identity_api_docs]: https://learn.microsoft.com/dotnet/api/azure.identity?view=azure-dotnet
 [vs_login_image]: https://raw.githubusercontent.com/Azure/azure-sdk-for-net/main/sdk/identity/Azure.Identity/images/VsLoginDialog.png
 [azure_cli_login_image]: https://raw.githubusercontent.com/Azure/azure-sdk-for-net/main/sdk/identity/Azure.Identity/images/AzureCliLogin.png
