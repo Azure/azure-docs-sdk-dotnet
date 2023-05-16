@@ -3,7 +3,7 @@ title: Azure SignalR SDK for .NET
 description: Reference for Azure SignalR SDK for .NET
 author: sffamily
 ms.author: zhshang
-ms.data: 05/15/2023
+ms.data: 05/16/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: signalr
