@@ -8,6 +8,6 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: voiceservices
 ---
-# Azure Voice Services SDK for .NET - preview
-## Packages - preview
+# Azure Voice Services SDK for .NET - latest
+## Packages - latest
 [!INCLUDE [packages](voice-services-index.md)]
