@@ -6,7 +6,7 @@ ms.author: sameerg
 ms.data: 05/19/2023
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: azure-monitor
+ms.service: monitor
 ---
 # Azure Monitor SDK for .NET - latest
 ## Packages - latest
