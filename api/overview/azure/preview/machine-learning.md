@@ -3,7 +3,7 @@ title: Azure Machine Learning SDK for .NET
 description: Reference for Azure Machine Learning SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 05/22/2023
+ms.data: 05/23/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: machinelearning
