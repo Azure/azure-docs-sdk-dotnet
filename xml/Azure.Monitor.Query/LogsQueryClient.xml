@@ -340,11 +340,11 @@
         <ReturnType>Azure.Response&lt;Azure.Monitor.Query.Models.LogsQueryResult&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="resourceId" Type="Azure.Core.ResourceIdentifier" Index="0" FrameworkAlternate="azure-dotnet-preview" />
-        <Parameter Name="query" Type="System.String" Index="1" FrameworkAlternate="azure-dotnet-preview" />
-        <Parameter Name="timeRange" Type="Azure.Monitor.Query.QueryTimeRange" Index="2" FrameworkAlternate="azure-dotnet-preview" />
-        <Parameter Name="options" Type="Azure.Monitor.Query.LogsQueryOptions" Index="3" FrameworkAlternate="azure-dotnet-preview" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="4" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="resourceId" Type="Azure.Core.ResourceIdentifier" />
+        <Parameter Name="query" Type="System.String" />
+        <Parameter Name="timeRange" Type="Azure.Monitor.Query.QueryTimeRange" />
+        <Parameter Name="options" Type="Azure.Monitor.Query.LogsQueryOptions" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
         <param name="resourceId"> The resourceId where the query should be executed. </param>
@@ -357,18 +357,17 @@
              <example snippet="Snippet:QueryResource"><code language="csharp">
              var client = new LogsQueryClient(new DefaultAzureCredential());
             
-             var results = await client.QueryResourceAsync(new ResourceIdentifier(TestEnvironment.StorageAccountId),
-                 "search *",
-                 new QueryTimeRange(TimeSpan.FromDays(5)));
+             string resourceId = "/subscriptions/&lt;subscription_id&gt;/resourceGroups/&lt;resource_group_name&gt;/providers/&lt;resource_provider&gt;/&lt;resource&gt;";
+             string tableName = "&lt;table_name&gt;";
+             Response&lt;LogsQueryResult&gt; results = await client.QueryResourceAsync(
+                 new ResourceIdentifier(resourceId),
+                 $"{tableName} | distinct * | project TimeGenerated",
+                 new QueryTimeRange(TimeSpan.FromDays(7)));
             
-             var resultTable = results.Value.Table;
-            
-             foreach (LogsTableRow rows in resultTable.Rows)
+             LogsTable resultTable = results.Value.Table;
+             foreach (LogsTableRow row in resultTable.Rows)
              {
-                 foreach (var row in rows)
-                 {
-                     Console.WriteLine(row);
-                 }
+                 Console.WriteLine($"{row["OperationName"]} {row["ResourceGroup"]}");
              }
             
              foreach (LogsTableColumn columns in resultTable.Columns)
@@ -398,11 +397,11 @@
         <TypeParameter Name="T" />
       </TypeParameters>
       <Parameters>
-        <Parameter Name="resourceId" Type="Azure.Core.ResourceIdentifier" Index="0" FrameworkAlternate="azure-dotnet-preview" />
-        <Parameter Name="query" Type="System.String" Index="1" FrameworkAlternate="azure-dotnet-preview" />
-        <Parameter Name="timeRange" Type="Azure.Monitor.Query.QueryTimeRange" Index="2" FrameworkAlternate="azure-dotnet-preview" />
-        <Parameter Name="options" Type="Azure.Monitor.Query.LogsQueryOptions" Index="3" FrameworkAlternate="azure-dotnet-preview" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="4" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="resourceId" Type="Azure.Core.ResourceIdentifier" />
+        <Parameter Name="query" Type="System.String" />
+        <Parameter Name="timeRange" Type="Azure.Monitor.Query.QueryTimeRange" />
+        <Parameter Name="options" Type="Azure.Monitor.Query.LogsQueryOptions" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
         <typeparam name="T">To be added.</typeparam>
@@ -416,18 +415,17 @@
              <example snippet="Snippet:QueryResource"><code language="csharp">
              var client = new LogsQueryClient(new DefaultAzureCredential());
             
-             var results = await client.QueryResourceAsync(new ResourceIdentifier(TestEnvironment.StorageAccountId),
-                 "search *",
-                 new QueryTimeRange(TimeSpan.FromDays(5)));
+             string resourceId = "/subscriptions/&lt;subscription_id&gt;/resourceGroups/&lt;resource_group_name&gt;/providers/&lt;resource_provider&gt;/&lt;resource&gt;";
+             string tableName = "&lt;table_name&gt;";
+             Response&lt;LogsQueryResult&gt; results = await client.QueryResourceAsync(
+                 new ResourceIdentifier(resourceId),
+                 $"{tableName} | distinct * | project TimeGenerated",
+                 new QueryTimeRange(TimeSpan.FromDays(7)));
             
-             var resultTable = results.Value.Table;
-            
-             foreach (LogsTableRow rows in resultTable.Rows)
+             LogsTable resultTable = results.Value.Table;
+             foreach (LogsTableRow row in resultTable.Rows)
              {
-                 foreach (var row in rows)
-                 {
-                     Console.WriteLine(row);
-                 }
+                 Console.WriteLine($"{row["OperationName"]} {row["ResourceGroup"]}");
              }
             
              foreach (LogsTableColumn columns in resultTable.Columns)
@@ -454,11 +452,11 @@
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Monitor.Query.Models.LogsQueryResult&gt;&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="resourceId" Type="Azure.Core.ResourceIdentifier" Index="0" FrameworkAlternate="azure-dotnet-preview" />
-        <Parameter Name="query" Type="System.String" Index="1" FrameworkAlternate="azure-dotnet-preview" />
-        <Parameter Name="timeRange" Type="Azure.Monitor.Query.QueryTimeRange" Index="2" FrameworkAlternate="azure-dotnet-preview" />
-        <Parameter Name="options" Type="Azure.Monitor.Query.LogsQueryOptions" Index="3" FrameworkAlternate="azure-dotnet-preview" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="4" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="resourceId" Type="Azure.Core.ResourceIdentifier" />
+        <Parameter Name="query" Type="System.String" />
+        <Parameter Name="timeRange" Type="Azure.Monitor.Query.QueryTimeRange" />
+        <Parameter Name="options" Type="Azure.Monitor.Query.LogsQueryOptions" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
         <param name="resourceId"> The resourceId where the query should be executed. </param>
@@ -471,18 +469,17 @@
              <example snippet="Snippet:QueryResource"><code language="csharp">
              var client = new LogsQueryClient(new DefaultAzureCredential());
             
-             var results = await client.QueryResourceAsync(new ResourceIdentifier(TestEnvironment.StorageAccountId),
-                 "search *",
-                 new QueryTimeRange(TimeSpan.FromDays(5)));
+             string resourceId = "/subscriptions/&lt;subscription_id&gt;/resourceGroups/&lt;resource_group_name&gt;/providers/&lt;resource_provider&gt;/&lt;resource&gt;";
+             string tableName = "&lt;table_name&gt;";
+             Response&lt;LogsQueryResult&gt; results = await client.QueryResourceAsync(
+                 new ResourceIdentifier(resourceId),
+                 $"{tableName} | distinct * | project TimeGenerated",
+                 new QueryTimeRange(TimeSpan.FromDays(7)));
             
-             var resultTable = results.Value.Table;
-            
-             foreach (LogsTableRow rows in resultTable.Rows)
+             LogsTable resultTable = results.Value.Table;
+             foreach (LogsTableRow row in resultTable.Rows)
              {
-                 foreach (var row in rows)
-                 {
-                     Console.WriteLine(row);
-                 }
+                 Console.WriteLine($"{row["OperationName"]} {row["ResourceGroup"]}");
              }
             
              foreach (LogsTableColumn columns in resultTable.Columns)
@@ -512,11 +509,11 @@
         <TypeParameter Name="T" />
       </TypeParameters>
       <Parameters>
-        <Parameter Name="resourceId" Type="Azure.Core.ResourceIdentifier" Index="0" FrameworkAlternate="azure-dotnet-preview" />
-        <Parameter Name="query" Type="System.String" Index="1" FrameworkAlternate="azure-dotnet-preview" />
-        <Parameter Name="timeRange" Type="Azure.Monitor.Query.QueryTimeRange" Index="2" FrameworkAlternate="azure-dotnet-preview" />
-        <Parameter Name="options" Type="Azure.Monitor.Query.LogsQueryOptions" Index="3" FrameworkAlternate="azure-dotnet-preview" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="4" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="resourceId" Type="Azure.Core.ResourceIdentifier" />
+        <Parameter Name="query" Type="System.String" />
+        <Parameter Name="timeRange" Type="Azure.Monitor.Query.QueryTimeRange" />
+        <Parameter Name="options" Type="Azure.Monitor.Query.LogsQueryOptions" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
         <typeparam name="T">To be added.</typeparam>
@@ -530,18 +527,17 @@
              <example snippet="Snippet:QueryResource"><code language="csharp">
              var client = new LogsQueryClient(new DefaultAzureCredential());
             
-             var results = await client.QueryResourceAsync(new ResourceIdentifier(TestEnvironment.StorageAccountId),
-                 "search *",
-                 new QueryTimeRange(TimeSpan.FromDays(5)));
+             string resourceId = "/subscriptions/&lt;subscription_id&gt;/resourceGroups/&lt;resource_group_name&gt;/providers/&lt;resource_provider&gt;/&lt;resource&gt;";
+             string tableName = "&lt;table_name&gt;";
+             Response&lt;LogsQueryResult&gt; results = await client.QueryResourceAsync(
+                 new ResourceIdentifier(resourceId),
+                 $"{tableName} | distinct * | project TimeGenerated",
+                 new QueryTimeRange(TimeSpan.FromDays(7)));
             
-             var resultTable = results.Value.Table;
-            
-             foreach (LogsTableRow rows in resultTable.Rows)
+             LogsTable resultTable = results.Value.Table;
+             foreach (LogsTableRow row in resultTable.Rows)
              {
-                 foreach (var row in rows)
-                 {
-                     Console.WriteLine(row);
-                 }
+                 Console.WriteLine($"{row["OperationName"]} {row["ResourceGroup"]}");
              }
             
              foreach (LogsTableColumn columns in resultTable.Columns)
