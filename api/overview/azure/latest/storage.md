@@ -73,7 +73,7 @@ Use the following version 25.x.x library to work with the Azure Storage resource
 
 This section details known issues for the Azure Storage client libraries for .NET.
 
-### `InvalidHeaderValue` error message
+### InvalidHeaderValue error message
 
 In rare scenarios, applications that have upgraded to a beta version of the SDK can receive an `InvalidHeaderValue` error message. This issue can occur when using any of the Storage libraries. The error message looks similar to the following sample:
 
