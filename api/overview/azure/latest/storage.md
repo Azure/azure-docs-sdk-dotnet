@@ -75,7 +75,7 @@ This section details known issues for the Azure Storage client libraries for .NE
 
 ### `InvalidHeaderValue` error message
 
-In rare scenarios, applications that have upgraded to a beta version of the SDK can receive an `InvalidHeaderValue` error message. This issue can occur in any of the Storage libraries. The error message looks similar to the following sample:
+In rare scenarios, applications that have upgraded to a beta version of the SDK can receive an `InvalidHeaderValue` error message. This issue can occur when using any of the Storage libraries. The error message looks similar to the following sample:
 
 ```console
 HTTP/1.1 400 The value for one of the HTTP headers is not in the correct format.
