@@ -3,7 +3,7 @@ title: Azure Chaos SDK for .NET
 description: Reference for Azure Chaos SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 05/24/2023
+ms.data: 05/25/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: chaos
