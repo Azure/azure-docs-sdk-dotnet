@@ -1,26 +1,35 @@
 ---
-title: Azure Automanage Management client library for .NET
+title: 
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.Automanage, automanage
 author: pallavit
 ms.author: pallavit
-ms.date: 09/14/2022
+ms.date: 05/29/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: automanage
 ---
-# Azure Automanage Management client library for .NET - version 1.0.0-beta.1 
+# Microsoft Azure Automanage management client library for .NET
 
+The Microsoft Azure Automanage offers a unified solution to simplify IT management. With point-and-click simplicity, automate operations and apply consistent best practices across the entire lifecycle of Windows Server and Linux servers in Azure or in hybrid environments enabled by Azure Arc.
 
-This package follows the [new Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html) which provide a number of core capabilities that are shared amongst all Azure SDKs, including the intuitive Azure Identity library, an HTTP Pipeline with custom policies, error-handling, distributed tracing, and much more.
+This library supports managing Microsoft Azure Automanage resources.
+
+This library follows the [new Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html), and provides many core capabilities:
+
+    - Support MSAL.NET, Azure.Identity is out of box for supporting MSAL.NET.
+    - Support [OpenTelemetry](https://opentelemetry.io/) for distributed tracing.
+    - HTTP pipeline with custom policies.
+    - Better error-handling.
+    - Support uniform telemetry across all languages.
 
 ## Getting started 
 
 ### Install the package
 
-Install the Azure Automanage management library for .NET with [NuGet](https://www.nuget.org/):
+Install the Microsoft Azure Automanage management library for .NET with [NuGet](https://www.nuget.org/):
 
 ```dotnetcli
-dotnet add package Azure.ResourceManager.Automanage --prerelease
+dotnet add package Azure.ResourceManager.Automanage
 ```
 
 ### Prerequisites
@@ -29,19 +38,19 @@ dotnet add package Azure.ResourceManager.Automanage --prerelease
 
 ### Authenticate the Client
 
-To create an authenticated client and start interacting with Azure resources, please see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Automanage_1.0.0-beta.1/doc/dev/mgmt_quickstart.md)
+To create an authenticated client and start interacting with Azure resources, please see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Automanage_1.1.0-beta.1/doc/dev/mgmt_quickstart.md)
 
 ## Key concepts
 
-Key concepts of the Azure .NET SDK can be found [here](https://azure.github.io/azure-sdk/dotnet_introduction.html)
+Key concepts of the Azure .NET SDK can be found [here](https://azure.github.io/azure-sdk/dotnet_introduction.html).
 
 ## Documentation
 
 Documentation is available to help you learn how to use this package
 
-- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Automanage_1.0.0-beta.1/doc/dev/mgmt_quickstart.md)
+- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Automanage_1.1.0-beta.1/doc/dev/mgmt_quickstart.md)
 - [API References](/dotnet/api/?view=azure-dotnet)
-- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Automanage_1.0.0-beta.1/sdk/identity/Azure.Identity/README.md)
+- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Automanage_1.1.0-beta.1/sdk/identity/Azure.Identity/README.md)
 
 ## Examples
 
@@ -82,6 +91,7 @@ more information see the [Code of Conduct FAQ][coc_faq] or contact
 <opencode@microsoft.com> with any additional questions or comments.
 
 <!-- LINKS -->
-[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Automanage_1.0.0-beta.1/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
+[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Automanage_1.1.0-beta.1/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
+
