@@ -45,7 +45,7 @@ AdlsClient client = AdlsClient.CreateClient(_adlsAccountName, adlCreds);
 ```
 
 > [!div class="nextstepaction"]
-> [Explore the client APIs](/dotnet/api/overview/azure/datalakestore/client)
+> [Explore the client APIs](/dotnet/api/microsoft.azure.datalake.store.adlsclient)
 
 
 ## Management library
