@@ -6,7 +6,7 @@ ms.author: pallavit
 ms.date: 02/16/2023
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: devtestlabs
+ms.service: devtest-lab
 ---
 # Microsoft Azure DevTest Labs management client library for .NET
 
