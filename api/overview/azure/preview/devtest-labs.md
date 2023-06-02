@@ -6,7 +6,7 @@ ms.author: pallavit
 ms.data: 06/01/2023
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: devtestlabs
+ms.service: devtest-lab
 ---
 # Azure DevTest Labs SDK for .NET - preview
 ## Packages - preview
