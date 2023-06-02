@@ -3,7 +3,7 @@ title: Azure Networkcloud SDK for .NET
 description: Reference for Azure Networkcloud SDK for .NET
 author: aznetsuppgithub
 ms.author: aznetsuppgithub
-ms.data: 06/01/2023
+ms.data: 06/02/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: networkcloud

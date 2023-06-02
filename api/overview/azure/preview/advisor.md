@@ -3,7 +3,7 @@ title: Azure Advisor SDK for .NET
 description: Reference for Azure Advisor SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 06/01/2023
+ms.data: 06/02/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: advisor
