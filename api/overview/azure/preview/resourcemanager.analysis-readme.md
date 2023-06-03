@@ -3,12 +3,12 @@ title:
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.Analysis, analysisservices
 author: pallavit
 ms.author: pallavit
-ms.date: 12/05/2022
+ms.date: 05/26/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: analysisservices
 ---
-# Microsoft Azure Analysis Services Management client library for .NET
+# Microsoft Azure Analysis Services management client library for .NET
 
 Microsoft Azure Analysis Services is a fully managed platform as a service (PaaS) that provides enterprise-grade data models in the cloud. Use advanced mashup and modeling features to combine data from multiple data sources, define metrics, and secure your data in a single, trusted tabular semantic data model. The data model provides an easier and faster way for users to perform ad hoc data analysis using tools like Power BI and Excel.
 
@@ -29,7 +29,7 @@ This library follows the [new Azure SDK guidelines](https://azure.github.io/azur
 Install the Microsoft Azure Analysis Services management library for .NET with [NuGet](https://www.nuget.org/):
 
 ```dotnetcli
-dotnet add package Azure.ResourceManager.AnalysisServices --prerelease
+dotnet add package Azure.ResourceManager.AnalysisServices
 ```
 
 ### Prerequisites
@@ -38,29 +38,29 @@ dotnet add package Azure.ResourceManager.AnalysisServices --prerelease
 
 ### Authenticate the Client
 
-To create an authenticated client and start interacting with Microsoft Azure resources, see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Analysis_1.0.0-beta.1/doc/dev/mgmt_quickstart.md).
+To create an authenticated client and start interacting with Microsoft Azure resources, see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Analysis_1.1.0-beta.1/doc/dev/mgmt_quickstart.md).
 
 ## Key concepts
 
-Key concepts of the Microsoft Azure SDK for .NET can be found [here](https://azure.github.io/azure-sdk/dotnet_introduction.html)
+Key concepts of the Microsoft Azure SDK for .NET can be found [here](https://azure.github.io/azure-sdk/dotnet_introduction.html).
 
 ## Documentation
 
 Documentation is available to help you learn how to use this package:
 
--[Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Analysis_1.0.0-beta.1/doc/dev/mgmt_quickstart.md).
--[API References](/dotnet/api/?view=azure-dotnet).
--[Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Analysis_1.0.0-beta.1/sdk/identity/Azure.Identity/README.md).
+- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Analysis_1.1.0-beta.1/doc/dev/mgmt_quickstart.md).
+- [API References](/dotnet/api/?view=azure-dotnet).
+- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Analysis_1.1.0-beta.1/sdk/identity/Azure.Identity/README.md).
 
 ## Examples
 
 Code samples for using the management library for .NET can be found in the following locations
--[.NET Management Library Code Samples](https://aka.ms/azuresdk-net-mgmt-samples)
+- [.NET Management Library Code Samples](https://aka.ms/azuresdk-net-mgmt-samples)
 
 ## Troubleshooting
 
--File an issue via [GitHub Issues](https://github.com/Azure/azure-sdk-for-net/issues).
--Check [previous questions](https://stackoverflow.com/questions/tagged/azure+.net) or ask new ones on Stack Overflow using Azure and .NET tags.
+-   File an issue via [GitHub Issues](https://github.com/Azure/azure-sdk-for-net/issues).
+-   Check [previous questions](https://stackoverflow.com/questions/tagged/azure+.net) or ask new ones on Stack Overflow using Azure and .NET tags.
 
 ## Next steps
 
@@ -87,7 +87,6 @@ more information, see the [Code of Conduct FAQ][coc_faq] or contact
 <opencode@microsoft.com> with any other questions or comments.
 
 <!-- LINKS -->
-[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Analysis_1.0.0-beta.1/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
+[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Analysis_1.1.0-beta.1/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
-

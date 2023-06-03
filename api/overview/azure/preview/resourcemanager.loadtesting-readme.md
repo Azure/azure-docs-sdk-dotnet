@@ -2,8 +2,8 @@
 title: 
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.LoadTesting, loadtestservice
 author: abranj1219
-ms.author: abranj
-ms.date: 01/06/2023
+ms.author: abranj1219
+ms.date: 05/31/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: loadtestservice
@@ -29,7 +29,7 @@ This library follows the [new Azure SDK guidelines](https://azure.github.io/azur
 Install the Microsoft Azure Load Testing management library for .NET with [NuGet](https://www.nuget.org/):
 
 ```dotnetcli
-dotnet add package Azure.ResourceManager.LoadTesting --prerelease
+dotnet add package Azure.ResourceManager.LoadTesting
 ```
 
 ### Prerequisites
@@ -38,7 +38,7 @@ dotnet add package Azure.ResourceManager.LoadTesting --prerelease
 
 ### Authenticate the Client
 
-To create an authenticated client and start interacting with Microsoft Azure resources, see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.LoadTesting_1.0.0-beta.2/doc/dev/mgmt_quickstart.md).
+To create an authenticated client and start interacting with Microsoft Azure resources, see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.LoadTesting_1.1.0-beta.1/doc/dev/mgmt_quickstart.md).
 
 ## Key concepts
 
@@ -48,9 +48,9 @@ Key concepts of the Microsoft Azure SDK for .NET can be found [here](https://azu
 
 Documentation is available to help you learn how to use this package:
 
-- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.LoadTesting_1.0.0-beta.2/doc/dev/mgmt_quickstart.md).
+- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.LoadTesting_1.1.0-beta.1/doc/dev/mgmt_quickstart.md).
 - [API References](/dotnet/api/?view=azure-dotnet).
-- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.LoadTesting_1.0.0-beta.2/sdk/identity/Azure.Identity/README.md).
+- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.LoadTesting_1.1.0-beta.1/sdk/identity/Azure.Identity/README.md).
 
 ## Examples
 
@@ -93,10 +93,10 @@ inputPayload.Identity = new ManagedServiceIdentity(ManagedServiceIdentityType.Sy
 inputPayload.Identity.UserAssignedIdentities.Add(identityId, new UserAssignedIdentity());
 
 // CMK encryption properties
-inputPayload.Encryption = new CustomerManagedKeyEncryptionProperties();
+inputPayload.Encryption = new LoadTestingCmkEncryptionProperties();
 inputPayload.Encryption.KeyUri = new Uri("https://sample-kv.vault.azure.net/keys/cmkkey/2d1ccd5c50234ea2a0858fe148b69cde");
-inputPayload.Encryption.Identity = new CustomerManagedKeyIdentity();
-inputPayload.Encryption.Identity.IdentityType = CustomerManagedKeyIdentityType.UserAssigned;
+inputPayload.Encryption.Identity = new LoadTestingCmkIdentity();
+inputPayload.Encryption.Identity.IdentityType = LoadTestingCmkIdentityType.UserAssigned;
 inputPayload.Encryption.Identity.ResourceId = identityId;
 
 ArmOperation<LoadTestingResource> loadTestingLro = await loadTestingCollection.CreateOrUpdateAsync(WaitUntil.Completed, loadTestResourceName, inputPayload);
@@ -126,10 +126,12 @@ LoadTestingResource resource = loadTestingResponse.Value;
 
 ResourceIdentifier identityId = new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/sample-rg/providers/microsoft.managedidentity/userassignedidentities/identity1");
 LoadTestingResourcePatch resourcePatchPayload = new LoadTestingResourcePatch {
-    Encryption = new CustomerManagedKeyEncryptionProperties {
-        Identity = new CustomerManagedKeyIdentity {
+    Encryption = new LoadTestingCmkEncryptionProperties
+    {
+        Identity = new LoadTestingCmkIdentity
+        {
             // make sure that system-assigned managed identity is enabled on this resource and the identity has been granted required permissions to access the key.
-            IdentityType = CustomerManagedKeyIdentityType.SystemAssigned,
+            IdentityType = LoadTestingCmkIdentityType.SystemAssigned,
             ResourceId = null
         },
         KeyUri = new Uri("https://sample-kv.vault.azure.net/keys/cmkkey/2d1ccd5c50234ea2a0858fe148b69cde")
@@ -257,7 +259,7 @@ more information, see the [Code of Conduct FAQ][coc_faq] or contact
 <opencode@microsoft.com> with any other questions or comments.
 
 <!-- LINKS -->
-[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.LoadTesting_1.0.0-beta.2/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
+[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.LoadTesting_1.1.0-beta.1/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 
