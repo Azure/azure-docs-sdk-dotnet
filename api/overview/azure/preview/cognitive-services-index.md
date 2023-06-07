@@ -1,6 +1,7 @@
 | Reference | Package | Source |
 |---|---|---|
 |[Anomaly Detector](ai.anomalydetector-readme.md)|[Azure.AI.AnomalyDetector](https://www.nuget.org/packages/Azure.AI.AnomalyDetector)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/anomalydetector/Azure.AI.AnomalyDetector)|
+|[Content Safety](ai.contentsafety-readme.md)|[Azure.AI.ContentSafety](https://www.nuget.org/packages/Azure.AI.ContentSafety)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/contentsafety/Azure.AI.ContentSafety)|
 |[Form Recognizer](ai.formrecognizer-readme.md)|[Azure.AI.FormRecognizer](https://www.nuget.org/packages/Azure.AI.FormRecognizer)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/formrecognizer/Azure.AI.FormRecognizer)|
 |[Conversational Language Understanding](ai.language.conversations-readme.md)|[Azure.AI.Language.Conversations](https://www.nuget.org/packages/Azure.AI.Language.Conversations)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/cognitivelanguage/Azure.AI.Language.Conversations)|
 |[Question Answering](ai.language.questionanswering-readme.md)|[Azure.AI.Language.QuestionAnswering](https://www.nuget.org/packages/Azure.AI.Language.QuestionAnswering)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/cognitivelanguage/Azure.AI.Language.QuestionAnswering)|
