@@ -1,12 +1,13 @@
 ---
-title: 
+title: DevTest Labs management client library for .NET
+description: Learn how to use the management client library for .NET to create labs in Azure DevTest Labs.
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.DevTestLabs, devtestlabs
 author: pallavit
 ms.author: pallavit
 ms.date: 05/31/2023
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: devtestlabs
+ms.service: devtest-lab
 ---
 # Microsoft Azure DevTest Labs management client library for .NET
 
@@ -16,11 +17,11 @@ This library supports managing Microsoft Azure DevTest Labs resources.
 
 This library follows the [new Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html), and provides many core capabilities:
 
-    - Support MSAL.NET, Azure.Identity is out of box for supporting MSAL.NET.
-    - Support [OpenTelemetry](https://opentelemetry.io/) for distributed tracing.
-    - HTTP pipeline with custom policies.
-    - Better error-handling.
-    - Support uniform telemetry across all languages.
+- Support MSAL.NET, Azure.Identity is out of box for supporting MSAL.NET.
+- Support [OpenTelemetry](https://opentelemetry.io/) for distributed tracing.
+- HTTP pipeline with custom policies.
+- Better error-handling.
+- Support uniform telemetry across all languages.
 
 ## Getting started 
 

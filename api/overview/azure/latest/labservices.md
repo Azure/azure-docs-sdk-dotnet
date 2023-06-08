@@ -6,7 +6,7 @@ ms.author: pallavit
 ms.data: 12/16/2022
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: labservices
+ms.service: lab-services
 ---
 # Azure LabServices SDK for .NET - latest
 ## Packages - latest
