@@ -3,7 +3,7 @@ title: Azure Communication SDK for .NET
 description: Reference for Azure Communication SDK for .NET
 author: acsdevx-msft
 ms.author: acsdevx-msft
-ms.data: 06/08/2023
+ms.data: 06/09/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: communication
