@@ -1,6 +1,6 @@
 | Reference | Package | Source |
 |---|---|---|
-|[Azure.Storage.DataMovement.Blobs](storage.datamovement.blobs-readme.md)|[Azure.Storage.DataMovement.Blobs](https://www.nuget.org/packages/Azure.Storage.DataMovement.Blobs)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/storage/Azure.Storage.DataMovement.Blobs)|
+|[Data Movement - Blobs](storage.datamovement.blobs-readme.md)|[Azure.Storage.DataMovement.Blobs](https://www.nuget.org/packages/Azure.Storage.DataMovement.Blobs)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/storage/Azure.Storage.DataMovement.Blobs)|
 |[Storage - Blobs](storage.blobs-readme.md)|[Azure.Storage.Blobs](https://www.nuget.org/packages/Azure.Storage.Blobs)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/storage/Azure.Storage.Blobs)|
 |[Storage - Blobs Batch](storage.blobs.batch-readme.md)|[Azure.Storage.Blobs.Batch](https://www.nuget.org/packages/Azure.Storage.Blobs.Batch)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/storage/Azure.Storage.Blobs.Batch)|
 |[Storage - Blobs ChangeFeed](storage.blobs.changefeed-readme.md)|[Azure.Storage.Blobs.ChangeFeed](https://www.nuget.org/packages/Azure.Storage.Blobs.ChangeFeed)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/storage/Azure.Storage.Blobs.ChangeFeed)|
