@@ -3,7 +3,7 @@ title: Azure Cognitive Services SDK for .NET
 description: Reference for Azure Cognitive Services SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 06/12/2023
+ms.data: 06/13/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: cognitiveservices
