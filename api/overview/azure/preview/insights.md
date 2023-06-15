@@ -1,7 +1,7 @@
 ---
 title: Azure Application Insights libraries for .NET
 description: Reference for Azure Application Insights libraries for .NET
-ms.date: 10/19/2017
+ms.date: 06/15/2023
 ms.topic: reference
 ms.service: application-insights
 ---
@@ -38,7 +38,7 @@ client.TrackEvent("MyCustomEvent");
 ```
 
 > [!div class="nextstepaction"]
-> [Explore the client APIs](/dotnet/api/overview/azure/applicationinsights/client)
+> [Explore the client APIs](/dotnet/api/microsoft.applicationinsights)
 
 
 
@@ -48,5 +48,5 @@ client.TrackEvent("MyCustomEvent");
 
 View the [complete list](https://azure.microsoft.com/resources/samples/?service=application-insights&platform=dotnet) of Azure Application Insights samples.
 
-[PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
-[DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
+[PackageManager]: https://learn.microsoft.com/nuget/tools/package-manager-console
+[DotNetCLI]: https://learn.microsoft.com/dotnet/core/tools/dotnet-add-package
