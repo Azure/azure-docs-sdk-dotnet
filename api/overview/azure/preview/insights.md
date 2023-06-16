@@ -16,7 +16,7 @@ Application Insights is an extensible monitoring & diagnostics service for web d
 
 The Application Insights client SDK for .NET allows you to log event, aggregated data, exceptions, dependency, and metrics to Azure for future analysis.
 
-Install the [NuGet package](https://www.nuget.org/packages/Microsoft.ApplicationInsights ) directly from the Visual Studio [Package Manager console][PackageManager] or with the [.NET Core CLI][DotNetCLI].
+Install the [NuGet package](https://www.nuget.org/packages/Microsoft.ApplicationInsights) directly from the Visual Studio [Package Manager Console](/nuget/tools/package-manager-console) or with the [.NET CLI](/dotnet/core/tools/dotnet-add-package).
 
 #### Visual Studio Package Manager
 
@@ -47,6 +47,3 @@ client.TrackEvent("MyCustomEvent");
 - [Application Insights Analytics with OpenSchema](https://github.com/Azure-Samples/guidance-appinsights-openschema)
 
 View the [complete list](https://azure.microsoft.com/resources/samples/?service=application-insights&platform=dotnet) of Azure Application Insights samples.
-
-[PackageManager]: https://learn.microsoft.com/nuget/tools/package-manager-console
-[DotNetCLI]: https://learn.microsoft.com/dotnet/core/tools/dotnet-add-package
