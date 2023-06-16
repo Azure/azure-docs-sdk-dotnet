@@ -16,7 +16,6 @@
 |Computer Vision|[Microsoft.Azure.CognitiveServices.Vision.ComputerVision](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.Vision.ComputerVision)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |Custom Vision Prediction|[Microsoft.Azure.CognitiveServices.Vision.CustomVision.Prediction](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.Vision.CustomVision.Prediction)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |Custom Vision Training|[Microsoft.Azure.CognitiveServices.Vision.CustomVision.Training](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.Vision.CustomVision.Training)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
-|Face|[Microsoft.Azure.CognitiveServices.Vision.Face](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.Vision.Face)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |Speech|[Microsoft.CognitiveServices.Speech](https://www.nuget.org/packages/Microsoft.CognitiveServices.Speech)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |Speech Remote Conversation|[Microsoft.CognitiveServices.Speech.Remoteconversation](https://www.nuget.org/packages/Microsoft.CognitiveServices.Speech.Remoteconversation)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |Speech Xamarin iOS|[Microsoft.CognitiveServices.Speech.Xamarin.iOS](https://www.nuget.org/packages/Microsoft.CognitiveServices.Speech.Xamarin.iOS)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|

@@ -1,5 +1,6 @@
 | Reference | Package | Source |
 |---|---|---|
+|[Communication Call Automation](communication.callautomation-readme.md)|[Azure.Communication.CallAutomation](https://www.nuget.org/packages/Azure.Communication.CallAutomation)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/communication/Azure.Communication.CallAutomation)|
 |[Communication Chat](communication.chat-readme.md)|[Azure.Communication.Chat](https://www.nuget.org/packages/Azure.Communication.Chat)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/communication/Azure.Communication.Chat)|
 |[Communication Common](communication.common-readme.md)|[Azure.Communication.Common](https://www.nuget.org/packages/Azure.Communication.Common)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/communication/Azure.Communication.Common)|
 |[Communication Email](communication.email-readme.md)|[Azure.Communication.Email](https://www.nuget.org/packages/Azure.Communication.Email)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/communication/Azure.Communication.Email)|
