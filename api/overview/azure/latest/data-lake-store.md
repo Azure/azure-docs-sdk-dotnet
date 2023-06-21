@@ -1,11 +1,14 @@
 ---
-title: Azure Data Lake Store libraries for .NET
-description: Reference for Azure Data Lake Store libraries for .NET
-ms.date: 10/19/2017
+title: Azure Data Lake Store SDK for .NET
+description: Reference for Azure Data Lake Store SDK for .NET
+author: pallavit
+ms.author: pallavit
+ms.data: 06/21/2023
 ms.topic: reference
-ms.service: data-lake-store
+ms.devlang: dotnet
+ms.service: datalakestore
+ms.date: 10/19/2017
 ---
-
 # Azure Data Lake Store libraries for .NET
 
 ## Overview
