@@ -3,12 +3,12 @@ title: Azure Core Expressions DataFactory shared client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Core.Expressions.DataFactory, core
 author: JoshLove-msft
 ms.author: jolov
-ms.date: 04/11/2023
+ms.date: 06/28/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: core
 ---
-# Azure Core Expressions DataFactory shared client library for .NET - version 1.0.0-beta.2 
+# Azure Core Expressions DataFactory shared client library for .NET - version 1.0.0-beta.3 
 
 
 Azure.Core.Expressions.DataFactory provides classes that represent [Expressions](https://learn.microsoft.com/azure/data-factory/control-flow-expression-language-functions#expressions). 
@@ -87,23 +87,26 @@ blobDataSet.FolderPath = "foo/bar";
 blobDataSet.FolderPath = DataFactoryElement<string>.FromExpression("foo/bar-@{pipeline().TriggerTime}");
 ```
 
-#### Secure String
+#### Secret String
 
-```C# Snippet:DataFactoryElementSecureString
-blobDataSet.FolderPath = DataFactoryElement<string>.FromMaskedString("some/secret/path");
+```C# Snippet:DataFactoryElementSecretString
+blobDataSet.FolderPath = DataFactoryElement<string>.FromSecretString("some/secret/path");
 ```
 
 #### Key Vault Secret Reference
 
 ```C# Snippet:DataFactoryElementKeyVaultSecretReference
-blobDataSet.FolderPath = DataFactoryElement<string>.FromKeyVaultSecretReference("@Microsoft.KeyVault(SecretUri=https://myvault.vault.azure.net/secrets/mysecret/)");
+var store = new DataFactoryLinkedServiceReference(DataFactoryLinkedServiceReferenceType.LinkedServiceReference,
+    "referenceName");
+var keyVaultReference = new DataFactoryKeyVaultSecretReference(store, "secretName");
+blobDataSet.FolderPath = DataFactoryElement<string>.FromKeyVaultSecretReference(keyVaultReference);
 ```
 
 In each case the library will be able to serialize and deserialize all scenarios appropriately allowing you to seamlessly use either according to your application's needs.
 
 ## Troubleshooting
 
-Three main ways of troubleshooting failures are [inspecting exceptions](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core.Expressions.DataFactory_1.0.0-beta.2/sdk/core/Azure.Core/samples/Response.md#handling-exceptions), enabling [logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core.Expressions.DataFactory_1.0.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md#Logging), and [distributed tracing](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core.Expressions.DataFactory_1.0.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md#Distributed-tracing)
+Three main ways of troubleshooting failures are [inspecting exceptions](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core.Expressions.DataFactory_1.0.0-beta.3/sdk/core/Azure.Core/samples/Response.md#handling-exceptions), enabling [logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core.Expressions.DataFactory_1.0.0-beta.3/sdk/core/Azure.Core/samples/Diagnostics.md#Logging), and [distributed tracing](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core.Expressions.DataFactory_1.0.0-beta.3/sdk/core/Azure.Core/samples/Diagnostics.md#Distributed-tracing)
 
 ## Next steps
 
@@ -119,7 +122,7 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fcore%2FAzure.Core%2FREADME.png)
 
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Core.Expressions.DataFactory_1.0.0-beta.2/sdk/core/Azure.Core/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Core.Expressions.DataFactory_1.0.0-beta.3/sdk/core/Azure.Core/src
 [package]: https://www.nuget.org/packages/Azure.Core/
 [docs]: /dotnet/api/azure.core
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct
