@@ -8,6 +8,6 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: costmanagement
 ---
-# Azure Costmanagement SDK for .NET - preview
-## Packages - preview
+# Azure Costmanagement SDK for .NET - latest
+## Packages - latest
 [!INCLUDE [packages](costmanagement-index.md)]
