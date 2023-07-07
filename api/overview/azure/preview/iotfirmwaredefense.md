@@ -3,7 +3,7 @@ title: Azure IotFirmwareDefense SDK for .NET
 description: Reference for Azure IotFirmwareDefense SDK for .NET
 author: ethanann-ms
 ms.author: ethanann
-ms.data: 07/04/2023
+ms.data: 07/07/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: iotfirmwaredefense
