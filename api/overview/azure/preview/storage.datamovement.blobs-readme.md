@@ -3,12 +3,12 @@ title: Azure Storage Data Movement Blobs client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Storage.DataMovement.Blobs, storage
 author: seanmcc-msft
 ms.author: seanmcc
-ms.date: 04/27/2023
+ms.date: 07/11/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: storage
 ---
-# Azure Storage Data Movement Blobs client library for .NET - version 12.0.0-beta.2 
+# Azure Storage Data Movement Blobs client library for .NET - version 12.0.0-beta.3 
 
 
 > Server Version: 2020-04-08, 2020-02-10, 2019-12-12, 2019-07-07, and 2020-02-02
@@ -52,7 +52,7 @@ az storage account create --name MyStorageAccount --resource-group MyResourceGro
 ```
 
 ### Authenticate the client
-The Azure.Storage.DataMovement.Blobs library uses clients from the Azure.Storage.Blobs package to communicate with the Azure Blob Storage service. For more information see the Azure.Storage.Blobs [authentication documentation](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.DataMovement.Blobs_12.0.0-beta.2/sdk/storage/Azure.Storage.Blobs#authenticate-the-client). 
+The Azure.Storage.DataMovement.Blobs library uses clients from the Azure.Storage.Blobs package to communicate with the Azure Blob Storage service. For more information see the Azure.Storage.Blobs [authentication documentation](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.DataMovement.Blobs_12.0.0-beta.3/sdk/storage/Azure.Storage.Blobs#authenticate-the-client). 
 
 ## Key concepts
 
@@ -64,12 +64,12 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.DataMovement.Blobs_12.0.0-beta.2/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.DataMovement.Blobs_12.0.0-beta.2/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.DataMovement.Blobs_12.0.0-beta.2/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.DataMovement.Blobs_12.0.0-beta.2/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.DataMovement.Blobs_12.0.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.DataMovement.Blobs_12.0.0-beta.2/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.DataMovement.Blobs_12.0.0-beta.3/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.DataMovement.Blobs_12.0.0-beta.3/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.DataMovement.Blobs_12.0.0-beta.3/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.DataMovement.Blobs_12.0.0-beta.3/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.DataMovement.Blobs_12.0.0-beta.3/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.DataMovement.Blobs_12.0.0-beta.3/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
@@ -102,7 +102,10 @@ Upload a local directory to a virtual directory in the container specifying more
 ```C# Snippet:ExtensionMethodSimpleUploadWithOptions
 BlobContainerClientTransferOptions options = new BlobContainerClientTransferOptions
 {
-    BlobDirectoryPrefix = blobDirectoryPrefix,
+    BlobContainerOptions = new BlobStorageResourceContainerOptions
+    {
+        DirectoryPrefix = blobDirectoryPrefix
+    },
     TransferOptions = new TransferOptions()
     {
         CreateMode = StorageResourceCreateMode.Overwrite,
@@ -132,7 +135,10 @@ Download from the container specifying more advanced options
 ```C# Snippet:ExtensionMethodSimpleDownloadContainerDirectoryWithOptions
 BlobContainerClientTransferOptions options = new BlobContainerClientTransferOptions
 {
-    BlobDirectoryPrefix = blobDirectoryPrefix,
+    BlobContainerOptions = new BlobStorageResourceContainerOptions
+    {
+        DirectoryPrefix = blobDirectoryPrefix
+    },
     TransferOptions = new TransferOptions()
     {
         CreateMode = StorageResourceCreateMode.Overwrite,
@@ -180,7 +186,9 @@ Start Directory Upload
 // Create simple transfer directory upload job which uploads the directory and the contents of that directory
 DataTransfer dataTransfer = await transferManager.StartTransferAsync(
     sourceResource: new LocalDirectoryStorageResourceContainer(sourcePath),
-    destinationResource: new BlobDirectoryStorageResourceContainer(container, "sample-directory2"),
+    destinationResource: new BlobStorageResourceContainer(
+        container,
+        new BlobStorageResourceContainerOptions() { DirectoryPrefix = "sample-directory2" }),
     transferOptions: options);
 ```
 
@@ -250,7 +258,7 @@ additional questions or comments.
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fstorage%2FAzure.Storage.Common%2FREADME.png)
 
 <!-- LINKS -->
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.DataMovement.Blobs_12.0.0-beta.2/sdk/storage/Azure.Storage.Common/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.DataMovement.Blobs_12.0.0-beta.3/sdk/storage/Azure.Storage.Common/src
 [package]: https://www.nuget.org/packages/Azure.Storage.Common/
 [docs]: /dotnet/api/azure.storage
 [rest_docs]: /rest/api/storageservices/
@@ -262,10 +270,10 @@ additional questions or comments.
 [storage_account_create_portal]: /azure/storage/common/storage-quickstart-create-account?tabs=azure-portal
 [azure_cli]: /cli/azure
 [azure_sub]: https://azure.microsoft.com/free/dotnet/
-[RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.DataMovement.Blobs_12.0.0-beta.2/sdk/core/Azure.Core/src/RequestFailedException.cs
+[RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.DataMovement.Blobs_12.0.0-beta.3/sdk/core/Azure.Core/src/RequestFailedException.cs
 [error_codes]: /rest/api/storageservices/common-rest-api-error-codes
-[samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.DataMovement.Blobs_12.0.0-beta.2/sdk/storage/Azure.Storage.DataMovement.Blobs/samples
-[storage_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.DataMovement.Blobs_12.0.0-beta.2/sdk/storage/CONTRIBUTING.md
+[samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.DataMovement.Blobs_12.0.0-beta.3/sdk/storage/Azure.Storage.DataMovement.Blobs/samples
+[storage_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.DataMovement.Blobs_12.0.0-beta.3/sdk/storage/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
