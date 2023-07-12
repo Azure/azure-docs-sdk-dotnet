@@ -3,7 +3,7 @@ title: Azure Quantum SDK for .NET
 description: Reference for Azure Quantum SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 07/11/2023
+ms.data: 07/12/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: quantum
