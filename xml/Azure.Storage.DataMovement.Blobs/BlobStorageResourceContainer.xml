@@ -14,9 +14,7 @@
   <Interfaces />
   <Docs>
     <summary>
-            The Storage Resource class for the Blob Client. Directories are not supported
-            as blobs only support a flat namespace structure. See <see cref="T:Azure.Storage.DataMovement.Blobs.BlobDirectoryStorageResourceContainer" />
-            for directory support.
+            The Storage Resource class for the Blob Client. Supports blob prefix directories as well as the root container.
             </summary>
     <remarks>To be added.</remarks>
   </Docs>
@@ -49,46 +47,46 @@
       </Docs>
     </Member>
     <Member MemberName="CanProduceUri">
-      <MemberSignature Language="C#" Value="public override Azure.Storage.DataMovement.ProduceUriType CanProduceUri { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype Azure.Storage.DataMovement.ProduceUriType CanProduceUri" />
+      <MemberSignature Language="C#" Value="public override bool CanProduceUri { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool CanProduceUri" />
       <MemberSignature Language="DocId" Value="P:Azure.Storage.DataMovement.Blobs.BlobStorageResourceContainer.CanProduceUri" />
-      <MemberSignature Language="VB.NET" Value="Public Overrides ReadOnly Property CanProduceUri As ProduceUriType" />
-      <MemberSignature Language="F#" Value="member this.CanProduceUri : Azure.Storage.DataMovement.ProduceUriType" Usage="Azure.Storage.DataMovement.Blobs.BlobStorageResourceContainer.CanProduceUri" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides ReadOnly Property CanProduceUri As Boolean" />
+      <MemberSignature Language="F#" Value="member this.CanProduceUri : bool" Usage="Azure.Storage.DataMovement.Blobs.BlobStorageResourceContainer.CanProduceUri" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Storage.DataMovement.Blobs</AssemblyName>
         <AssemblyVersion>12.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>Azure.Storage.DataMovement.ProduceUriType</ReturnType>
+        <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            Defines whether the storage resource type can produce a URL.
+            Defines whether the storage resource type can produce a web URL.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetChildStorageResource">
-      <MemberSignature Language="C#" Value="public override Azure.Storage.DataMovement.StorageResource GetChildStorageResource (string path);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class Azure.Storage.DataMovement.StorageResource GetChildStorageResource(string path) cil managed" />
+      <MemberSignature Language="C#" Value="public override Azure.Storage.DataMovement.StorageResourceSingle GetChildStorageResource (string path);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class Azure.Storage.DataMovement.StorageResourceSingle GetChildStorageResource(string path) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Storage.DataMovement.Blobs.BlobStorageResourceContainer.GetChildStorageResource(System.String)" />
-      <MemberSignature Language="VB.NET" Value="Public Overrides Function GetChildStorageResource (path As String) As StorageResource" />
-      <MemberSignature Language="F#" Value="override this.GetChildStorageResource : string -&gt; Azure.Storage.DataMovement.StorageResource" Usage="blobStorageResourceContainer.GetChildStorageResource path" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function GetChildStorageResource (path As String) As StorageResourceSingle" />
+      <MemberSignature Language="F#" Value="override this.GetChildStorageResource : string -&gt; Azure.Storage.DataMovement.StorageResourceSingle" Usage="blobStorageResourceContainer.GetChildStorageResource path" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Storage.DataMovement.Blobs</AssemblyName>
         <AssemblyVersion>12.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>Azure.Storage.DataMovement.StorageResource</ReturnType>
+        <ReturnType>Azure.Storage.DataMovement.StorageResourceSingle</ReturnType>
       </ReturnValue>
       <Parameters>
         <Parameter Name="path" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="path">The path to the storage resource.</param>
+        <param name="path">The path to the storage resource, relative to the directory prefix if any.</param>
         <summary>
             Retrieves a single blob resource based on this respective resource.
             </summary>
@@ -96,35 +94,12 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="GetParentStorageResourceContainer">
-      <MemberSignature Language="C#" Value="public override Azure.Storage.DataMovement.StorageResourceContainer GetParentStorageResourceContainer ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class Azure.Storage.DataMovement.StorageResourceContainer GetParentStorageResourceContainer() cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Storage.DataMovement.Blobs.BlobStorageResourceContainer.GetParentStorageResourceContainer" />
-      <MemberSignature Language="VB.NET" Value="Public Overrides Function GetParentStorageResourceContainer () As StorageResourceContainer" />
-      <MemberSignature Language="F#" Value="override this.GetParentStorageResourceContainer : unit -&gt; Azure.Storage.DataMovement.StorageResourceContainer" Usage="blobStorageResourceContainer.GetParentStorageResourceContainer " />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Azure.Storage.DataMovement.Blobs</AssemblyName>
-        <AssemblyVersion>12.0.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>Azure.Storage.DataMovement.StorageResourceContainer</ReturnType>
-      </ReturnValue>
-      <Parameters />
-      <Docs>
-        <summary>
-            Will throw an NotSupported exception because Blob container is considered the root level.
-            </summary>
-        <returns />
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
     <Member MemberName="GetStorageResourcesAsync">
-      <MemberSignature Language="C#" Value="public override System.Collections.Generic.IAsyncEnumerable&lt;Azure.Storage.DataMovement.StorageResourceBase&gt; GetStorageResourcesAsync (System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Collections.Generic.IAsyncEnumerable`1&lt;class Azure.Storage.DataMovement.StorageResourceBase&gt; GetStorageResourcesAsync(valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="C#" Value="public override System.Collections.Generic.IAsyncEnumerable&lt;Azure.Storage.DataMovement.StorageResource&gt; GetStorageResourcesAsync (System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Collections.Generic.IAsyncEnumerable`1&lt;class Azure.Storage.DataMovement.StorageResource&gt; GetStorageResourcesAsync(valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Storage.DataMovement.Blobs.BlobStorageResourceContainer.GetStorageResourcesAsync(System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overrides Function GetStorageResourcesAsync (Optional cancellationToken As CancellationToken = Nothing) As IAsyncEnumerable(Of StorageResourceBase)" />
-      <MemberSignature Language="F#" Value="override this.GetStorageResourcesAsync : System.Threading.CancellationToken -&gt; System.Collections.Generic.IAsyncEnumerable&lt;Azure.Storage.DataMovement.StorageResourceBase&gt;" Usage="blobStorageResourceContainer.GetStorageResourcesAsync cancellationToken" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function GetStorageResourcesAsync (Optional cancellationToken As CancellationToken = Nothing) As IAsyncEnumerable(Of StorageResource)" />
+      <MemberSignature Language="F#" Value="override this.GetStorageResourcesAsync : System.Threading.CancellationToken -&gt; System.Collections.Generic.IAsyncEnumerable&lt;Azure.Storage.DataMovement.StorageResource&gt;" Usage="blobStorageResourceContainer.GetStorageResourcesAsync cancellationToken" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Storage.DataMovement.Blobs</AssemblyName>
@@ -132,12 +107,12 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName Language="C#">[System.Runtime.CompilerServices.AsyncIteratorStateMachine(typeof(Azure.Storage.DataMovement.Blobs.BlobStorageResourceContainer+&lt;GetStorageResourcesAsync&gt;d__12))]</AttributeName>
-          <AttributeName Language="F#">[&lt;System.Runtime.CompilerServices.AsyncIteratorStateMachine(typeof(Azure.Storage.DataMovement.Blobs.BlobStorageResourceContainer+&lt;GetStorageResourcesAsync&gt;d__12))&gt;]</AttributeName>
+          <AttributeName Language="C#">[System.Runtime.CompilerServices.AsyncIteratorStateMachine(typeof(Azure.Storage.DataMovement.Blobs.BlobStorageResourceContainer+&lt;GetStorageResourcesAsync&gt;d__15))]</AttributeName>
+          <AttributeName Language="F#">[&lt;System.Runtime.CompilerServices.AsyncIteratorStateMachine(typeof(Azure.Storage.DataMovement.Blobs.BlobStorageResourceContainer+&lt;GetStorageResourcesAsync&gt;d__15))&gt;]</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
-        <ReturnType>System.Collections.Generic.IAsyncEnumerable&lt;Azure.Storage.DataMovement.StorageResourceBase&gt;</ReturnType>
+        <ReturnType>System.Collections.Generic.IAsyncEnumerable&lt;Azure.Storage.DataMovement.StorageResource&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken">
@@ -177,6 +152,7 @@
       <Docs>
         <summary>
             Gets the path of the storage resource.
+            Return empty string since we are using the root of the container.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
