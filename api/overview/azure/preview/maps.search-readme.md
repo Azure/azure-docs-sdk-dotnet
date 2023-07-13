@@ -3,17 +3,17 @@ title: Azure Maps Search client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Maps.Search, maps
 author: pallavit
 ms.author: pallavit
-ms.date: 11/11/2022
+ms.date: 07/13/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: maps
 ---
-# Azure Maps Search client library for .NET - version 1.0.0-beta.3 
+# Azure Maps Search client library for .NET - version 1.0.0-beta.4 
 
 
 Azure Maps Search is a library that can query for locations, points of interests or search within a geometric area.
 
-[Source code](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Maps.Search_1.0.0-beta.3/sdk/maps/Azure.Maps.Search/src) | [API reference documentation](/rest/api/maps/) | [REST API reference documentation](/rest/api/maps/search) | [Product documentation](/azure/azure-maps/)
+[Source code](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Maps.Search_1.0.0-beta.4/sdk/maps/Azure.Maps.Search/src) | [API reference documentation](/rest/api/maps/) | [REST API reference documentation](/rest/api/maps/search) | [Product documentation](/azure/azure-maps/)
 
 ## Getting started
 
@@ -65,6 +65,66 @@ string clientId = "<My Map Account Client Id>";
 MapsSearchClient client = new MapsSearchClient(credential, clientId);
 ```
 
+#### Shared Access Signature (SAS) Authentication
+
+Shared access signature (SAS) tokens are authentication tokens created using the JSON Web token (JWT) format and are cryptographically signed to prove authentication for an application to the Azure Maps REST API.
+
+Before integrating SAS token authentication, we need to install `Azure.ResourceManager` and `Azure.ResourceManager.Maps` (version `1.1.0-beta.2` or higher):
+
+```powershell
+dotnet add package Azure.ResourceManager
+dotnet add package Azure.ResourceManager.Maps --prerelease
+```
+
+In the code, we need to import the following lines for both Azure Maps SDK and ResourceManager:
+
+```C# Snippet:SearchImportNamespaces
+using Azure.Core.GeoJson;
+using Azure.Maps.Search;
+using Azure.Maps.Search.Models;
+```
+
+```C# Snippet:SearchSasAuthImportNamespaces
+using Azure.Core;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Maps;
+using Azure.ResourceManager.Maps.Models;
+```
+
+And then we can get SAS token via [List Sas](https://learn.microsoft.com/rest/api/maps-management/accounts/list-sas?tabs=HTTP) API and assign it to `MapsSearchClient`. In the follow code sample, we fetch a specific maps account resource, and create a SAS token for 1 day expiry time when the code is executed.
+
+```C# Snippet:InstantiateSearchClientViaSas
+// Get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
+TokenCredential cred = new DefaultAzureCredential();
+// Authenticate your client
+ArmClient armClient = new ArmClient(cred);
+
+string subscriptionId = "MyMapsSubscriptionId";
+string resourceGroupName = "MyMapsResourceGroupName";
+string accountName = "MyMapsAccountName";
+
+// Get maps account resource
+ResourceIdentifier mapsAccountResourceId = MapsAccountResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, accountName);
+MapsAccountResource mapsAccount = armClient.GetMapsAccountResource(mapsAccountResourceId);
+
+// Assign SAS token information
+// Every time you want to SAS token, update the principal ID, max rate, start and expiry time
+string principalId = "MyManagedIdentityObjectId";
+int maxRatePerSecond = 500;
+
+// Set start and expiry time for the SAS token in round-trip date/time format
+DateTime now = DateTime.Now;
+string start = now.ToString("O");
+string expiry = now.AddDays(1).ToString("O");
+
+MapsAccountSasContent sasContent = new MapsAccountSasContent(MapsSigningKey.PrimaryKey, principalId, maxRatePerSecond, start, expiry);
+Response<MapsAccountSasToken> sas = mapsAccount.GetSas(sasContent);
+
+// Create a SearchClient that will authenticate via SAS token
+AzureSasCredential sasCredential = new AzureSasCredential(sas.Value.AccountSasToken);
+MapsSearchClient client = new MapsSearchClient(sasCredential);
+```
+
 ## Key concepts
 
 `MapsSearchClient` is designed to:
@@ -73,7 +133,7 @@ MapsSearchClient client = new MapsSearchClient(credential, clientId);
 * Communicate with Azure Maps endpoint to request the geometry data such as a city or country outline for a set of entities
 * Communicate with Azure Maps endpoint to perform a free form search inside a single geometry or many of them
 
-Learn more by viewing our [samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Maps.Search_1.0.0-beta.3/sdk/maps/Azure.Maps.Search/tests/Samples)
+Learn more by viewing our [samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Maps.Search_1.0.0-beta.4/sdk/maps/Azure.Maps.Search/tests/Samples)
 
 ### Thread safety
 
@@ -81,18 +141,18 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Search_1.0.0-beta.3/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Search_1.0.0-beta.3/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Search_1.0.0-beta.3/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Search_1.0.0-beta.3/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Search_1.0.0-beta.3/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Search_1.0.0-beta.3/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Search_1.0.0-beta.4/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Search_1.0.0-beta.4/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Search_1.0.0-beta.4/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Search_1.0.0-beta.4/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Search_1.0.0-beta.4/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Search_1.0.0-beta.4/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
 ## Examples
 
-You can familiarize yourself with different APIs using our [samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Maps.Search_1.0.0-beta.3/sdk/maps/Azure.Maps.Search/tests/Samples).
+You can familiarize yourself with different APIs using our [samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Maps.Search_1.0.0-beta.4/sdk/maps/Azure.Maps.Search/tests/Samples).
 
 ### Example Get Polygons
 
@@ -216,11 +276,11 @@ For example, if you try to search with invalid coordinates, a error is returned,
 
 ## Next steps
 
-* [More samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Maps.Search_1.0.0-beta.3/sdk/maps/Azure.Maps.Search/samples)
+* [More samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Maps.Search_1.0.0-beta.4/sdk/maps/Azure.Maps.Search/samples)
 
 ## Contributing
 
-See the [CONTRIBUTING.md](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Search_1.0.0-beta.3/CONTRIBUTING.md) for details on building, testing, and contributing to this library.
+See the [CONTRIBUTING.md](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Search_1.0.0-beta.4/CONTRIBUTING.md) for details on building, testing, and contributing to this library.
 
 This project welcomes contributions and suggestions. Most contributions require you to agree to a Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us the rights to use your contribution. For details, visit <cla.microsoft.com>.
 
