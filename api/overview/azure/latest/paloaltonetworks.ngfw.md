@@ -8,6 +8,6 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: paloaltonetworks.ngfw
 ---
-# Azure Paloaltonetworks.Ngfw SDK for .NET - preview
-## Packages - preview
+# Azure Paloaltonetworks.Ngfw SDK for .NET - latest
+## Packages - latest
 [!INCLUDE [packages](paloaltonetworks.ngfw-index.md)]
