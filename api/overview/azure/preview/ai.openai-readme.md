@@ -3,12 +3,12 @@ title: Azure OpenAI client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.OpenAI, openai
 author: jpalvarezl
 ms.author: josealvar
-ms.date: 03/22/2023
+ms.date: 07/19/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: openai
 ---
-# Azure OpenAI client library for .NET - version 1.0.0-beta.5 
+# Azure OpenAI client library for .NET - version 1.0.0-beta.6 
 
 
 The Azure OpenAI client library for .NET is an adaptation of OpenAI's REST APIs that provides an idiomatic interface
@@ -22,7 +22,7 @@ Use the client library for Azure OpenAI to:
 
 Azure OpenAI is a managed service that allows developers to deploy, tune, and generate content from OpenAI models on Azure resources.
 
-  [Source code](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.5/sdk/openai/Azure.AI.OpenAI/src) | [Package (NuGet)](https://www.nuget.org/packages/Azure.AI.OpenAI) | [API reference documentation](https://learn.microsoft.com/azure/cognitive-services/openai/reference) | [Product documentation](https://learn.microsoft.com/azure/cognitive-services/openai/) | [Samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.5/sdk/openai/Azure.AI.OpenAI/tests/Samples)
+  [Source code](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.6/sdk/openai/Azure.AI.OpenAI/src) | [Package (NuGet)](https://www.nuget.org/packages/Azure.AI.OpenAI) | [API reference documentation](https://learn.microsoft.com/azure/cognitive-services/openai/reference) | [Product documentation](https://learn.microsoft.com/azure/cognitive-services/openai/) | [Samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.6/sdk/openai/Azure.AI.OpenAI/tests/Samples)
 
 ## Getting started
 
@@ -101,18 +101,18 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.5/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.5/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.5/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.5/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.5/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.5/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.6/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.6/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.6/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.6/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.6/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.6/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
 ## Examples
 
-You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.OpenAI_1.0.0-beta.5/sdk/openai/Azure.AI.OpenAI/tests/Samples).
+You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.OpenAI_1.0.0-beta.6/sdk/openai/Azure.AI.OpenAI/tests/Samples).
 
 ### Generate Chatbot Response
 
@@ -232,6 +232,129 @@ await foreach (StreamingChatChoice choice in streamingChatCompletions.GetChoices
 }
 ```
 
+### Use Chat Functions
+
+Chat Functions allow a caller of Chat Completions to define capabilities that the model can use to extend its
+functionality into external tools and data sources.
+
+You can read more about Chat Functions on OpenAI's blog: https://openai.com/blog/function-calling-and-other-api-updates
+
+**NOTE**: Chat Functions require model versions beginning with gpt-4 and gpt-3.5-turbo's `-0613` labels. They are not
+available with older versions of the models.
+
+To use Chat Functions, you first define the function you'd like the model to be able to use when appropriate. Using
+the example from the linked blog post, above:
+
+```C# Snippet:ChatFunctions:DefineFunction
+var getWeatherFuntionDefinition = new FunctionDefinition()
+{
+    Name = "get_current_weather",
+    Description = "Get the current weather in a given location",
+    Parameters = BinaryData.FromObjectAsJson(
+    new
+    {
+        Type = "object",
+        Properties = new
+        {
+            Location = new
+            {
+                Type = "string",
+                Description = "The city and state, e.g. San Francisco, CA",
+            },
+            Unit = new
+            {
+                Type = "string",
+                Enum = new[] { "celsius", "fahrenheit" },
+            }
+        },
+        Required = new[] { "location" },
+    },
+    new JsonSerializerOptions() {  PropertyNamingPolicy = JsonNamingPolicy.CamelCase }),
+};
+```
+
+With the function defined, it can then be used in a Chat Completions request via its options. Function data is
+handled across multiple calls that build up data for subsequent stateless requests, so we maintain a list of chat
+messages as a form of conversation history.
+
+```C# Snippet:ChatFunctions:RequestWithFunctions
+var conversationMessages = new List<ChatMessage>()
+{
+    new(ChatRole.User, "What is the weather like in Boston?"),
+};
+
+var chatCompletionsOptions = new ChatCompletionsOptions();
+foreach (ChatMessage chatMessage in conversationMessages)
+{
+    chatCompletionsOptions.Messages.Add(chatMessage);
+}
+chatCompletionsOptions.Functions.Add(getWeatherFuntionDefinition);
+
+Response<ChatCompletions> response = await client.GetChatCompletionsAsync(
+    "gpt-35-turbo-0613",
+    chatCompletionsOptions);
+```
+
+If the model determines that it should call a Chat Function, a finish reason of 'FunctionCall' will be populated on
+the choice and details will be present in the response message's `FunctionCall` property. Usually, the name of the
+function call will be one that was provided and the arguments will be a populated JSON document matching the schema
+included in the `FunctionDefinition` used; it is **not guaranteed** that this data is valid or even properly formatted,
+however, so validation and error checking should always accompany function call processing.
+
+To resolve the function call and continue the user-facing interaction, process the argument payload as needed and then
+serialize appropriate response data into a new message with `ChatRole.Function`. Then make a new request with all of
+the messages so far -- the initial `User` message, the first response's `FunctionCall` message, and the resolving
+`Function` message generated in reply to the function call -- so the model can use the data to better formulate a chat
+completions response.
+
+Note that the function call response you provide does not need to follow any schema provided in the initial call. The
+model will infer usage of the response data based on inferred context of names and fields.
+
+```C# Snippet:ChatFunctions:HandleFunctionCall
+ChatChoice responseChoice = response.Value.Choices[0];
+if (responseChoice.FinishReason == CompletionsFinishReason.FunctionCall)
+{
+    // Include the FunctionCall message in the conversation history
+    conversationMessages.Add(responseChoice.Message);
+
+    if (responseChoice.Message.FunctionCall.Name == "get_current_weather")
+    {
+        // Validate and process the JSON arguments for the function call
+        string unvalidatedArguments = responseChoice.Message.FunctionCall.Arguments;
+        var functionResultData = (object)null; // GetYourFunctionResultData(unvalidatedArguments);
+        // Here, replacing with an example as if returned from GetYourFunctionResultData
+        functionResultData = new
+        {
+            Temperature = 31,
+            Unit = "celsius",
+        };
+        // Serialize the result data from the function into a new chat message with the 'Function' role,
+        // then add it to the messages after the first User message and initial response FunctionCall
+        var functionResponseMessage = new ChatMessage(
+            ChatRole.Function,
+            JsonSerializer.Serialize(
+                functionResultData,
+                new JsonSerializerOptions() {  PropertyNamingPolicy = JsonNamingPolicy.CamelCase }));
+        conversationMessages.Add(functionResponseMessage);
+        // Now make a new request using all three messages in conversationMessages
+    }
+}
+```
+
+### Generate images with DALL-E image generation models
+
+```C# Snippet:GenerateImages
+Response<ImageGenerations> imageGenerations = await client.GetImageGenerationsAsync(
+    new ImageGenerationOptions()
+    {
+        Prompt = "a happy monkey eating a banana, in watercolor",
+        Size = ImageSize.Size256x256,
+    });
+
+// Image Generations responses provide URLs you can use to retrieve requested images
+Uri imageUri = imageGenerations.Value.Data[0].Url;
+```
+
 ## Troubleshooting
 
 When you interact with Azure OpenAI using the .NET SDK, errors returned by the service correspond to the same HTTP status codes returned for [REST API][openai_rest] requests.
@@ -261,11 +384,11 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [msdocs_openai_embedding]: https://learn.microsoft.com/azure/cognitive-services/openai/concepts/understand-embeddings
 [style-guide-msft]: /style-guide/capitalization
 [style-guide-cloud]: https://aka.ms/azsdk/cloud-style-guide
-[openai_client_class]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.5/sdk/openai/Azure.AI.OpenAI/src/Generated/OpenAIClient.cs
+[openai_client_class]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.6/sdk/openai/Azure.AI.OpenAI/src/Generated/OpenAIClient.cs
 [openai_rest]: https://learn.microsoft.com/azure/cognitive-services/openai/reference
 [azure_openai_completions_docs]: https://learn.microsoft.com/azure/cognitive-services/openai/how-to/completions
 [azure_openai_embeddgings_docs]: https://learn.microsoft.com/azure/cognitive-services/openai/concepts/understand-embeddings
-[openai_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.5/CONTRIBUTING.md
+[openai_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.6/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [code_of_conduct_faq]: https://opensource.microsoft.com/codeofconduct/faq/
