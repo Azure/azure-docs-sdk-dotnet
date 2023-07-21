@@ -9,20 +9,13 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: cognitive-search
 ---
-# Microsoft Azure Cognitive Search management client library for .NET
+# Azure.ResourceManager.Search client library for .NET
 
-This library provides resource management APIs for Azure Cognitive Search. Use this library for the following control plane tasks:
-
-* Create, update, or delete a search service.
-* Increase or reduce capacity (partitions and replicas)
-* Create and manage API keys for read-write and read-only access.
-* Create and manage private endpoints for inbound access, and create and managed shared private for outbound access.
+This library provides resource management APIs for Azure Cognitive Search. Use this library to create, configure, and manage a search service. `Azure.ResourceManager.Search` replaces the previous management libraries (`Microsoft.Azure.Management.Search`), which are now deprecated.
 
 This library follows the [new Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html). 
 
-`Azure.ResourceManager.Search` replaces the previous management libraries (`Microsoft.Azure.Management.Search`), which are now deprecated.
-
-For descriptions of all Cognitive Search client libraries in this SDK, see the [Azure Cognitive Search libraries for .NET](/dotnet/api/overview/azure/search).
+For descriptions of all Azure Cognitive Search client libraries in this SDK, see the [Azure Cognitive Search libraries for .NET](/dotnet/api/overview/azure/search).
 
 ## Getting started
 
@@ -47,11 +40,11 @@ Control plane operations are authenticated using Azure Active Directory. To crea
 ## Key concepts
 
 * Key concepts of the Microsoft Azure SDK for .NET can be found [here](https://azure.github.io/azure-sdk/dotnet_introduction.html).
-* Key concepts for Cognitive Search can be found in the [Azure Cognitive Search documentation](https://learn.microsoft.com/azure/search/).
+* Key concepts for Cognitive Search can be found in the [Azure Cognitive Search documentation](/azure/search/).
 
 ## Documentation
 
-Documentation is available to help you learn how to use this package:
+Azure SDK documentation is available to help you learn how to use this package:
 
 * [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Search_1.1.0/doc/dev/mgmt_quickstart.md).
 * [API References](/dotnet/api/).
@@ -82,10 +75,10 @@ require you to agree to a Contributor License Agreement (CLA) declaring
 that you have the right to, and actually do, grant us the rights to use
 your contribution. For details, visit <https://cla.microsoft.com>.
 
-When you submit a pull request, a CLA-bot will automatically determine
+When you submit a pull request, a CLA-bot automatically determines
 whether you need to provide a CLA and decorate the PR appropriately
 (for example, label, comment). Follow the instructions provided by the
-bot. You'll only need to do this action once across all repositories
+bot. You only need to do this action once across all repositories
 using our CLA.
 
 This project has adopted the [Microsoft Open Source Code of Conduct][coc]. For
