@@ -1,5 +1,6 @@
 ---
-title: 
+title: Azure.ResourceManager.Search overview
+description: API reference for Azure.ResourceManager.Search, a client library for managing an Azure Cognitive Search resource using the Azure SDK for .NET.
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.Search, cognitive-search
 author: ShivangiReja
 ms.author: shreja
@@ -21,7 +22,7 @@ This library follows the [new Azure SDK guidelines](https://azure.github.io/azur
 
 `Azure.ResourceManager.Search` replaces the previous management libraries (`Microsoft.Azure.Management.Search`), which are now deprecated.
 
-For descriptions of all Cognitive Search client libraries in this SDK, see the [Azure Cognitive Search libraries for .NET](/dotnet/api/overview/azure/search?view=azure-dotnet).
+For descriptions of all Cognitive Search client libraries in this SDK, see the [Azure Cognitive Search libraries for .NET](/dotnet/api/overview/azure/search).
 
 ## Getting started
 
@@ -53,7 +54,7 @@ Control plane operations are authenticated using Azure Active Directory. To crea
 Documentation is available to help you learn how to use this package:
 
 * [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Search_1.1.0/doc/dev/mgmt_quickstart.md).
-* [API References](/dotnet/api/?view=azure-dotnet).
+* [API References](/dotnet/api/).
 * [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Search_1.1.0/sdk/identity/Azure.Identity/README.md).
 
 ## Examples
