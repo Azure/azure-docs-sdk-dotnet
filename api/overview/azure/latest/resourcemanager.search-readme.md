@@ -3,26 +3,27 @@ title:
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.Search, cognitive-search
 author: ShivangiReja
 ms.author: shreja
-ms.date: 03/21/2023
+ms.date: 07/21/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: cognitive-search
 ---
 # Microsoft Azure Cognitive Search management client library for .NET
 
-The Microsoft Azure Cognitive Search is the only cloud search service with built-in AI capabilities that enrich all types of information to help you identify and explore relevant content at scale.
+This library provides resource management APIs for Azure Cognitive Search. Use this library for the following control plane tasks:
 
-This library supports managing Microsoft Azure Cognitive Search resources.
+* Create, update, or delete a search service.
+* Increase or reduce capacity (partitions and replicas)
+* Create and manage API keys for read-write and read-only access.
+* Create and manage private endpoints for inbound access, and create and managed shared private for outbound access.
 
-This library follows the [new Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html), and provides many core capabilities:
+This library follows the [new Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html). 
 
-    - Support MSAL.NET, Azure.Identity is out of box for supporting MSAL.NET.
-    - Support [OpenTelemetry](https://opentelemetry.io/) for distributed tracing.
-    - HTTP pipeline with custom policies.
-    - Better error-handling.
-    - Support uniform telemetry across all languages.
+`Azure.ResourceManager.Search` replaces the previous management libraries (`Microsoft.Azure.Management.Search`), which are now deprecated.
 
-## Getting started 
+For descriptions of all Cognitive Search client libraries in this SDK, see the [Azure Cognitive Search libraries for .NET](/dotnet/api/overview/azure/search?view=azure-dotnet).
+
+## Getting started
 
 ### Install the package
 
@@ -36,31 +37,35 @@ dotnet add package Azure.ResourceManager.Search
 
 * You must have an [Microsoft Azure subscription](https://azure.microsoft.com/free/dotnet/).
 
-### Authenticate the Client
+* You must be an **Owner** or **Contributor** on the subscription to call these APIs.
 
-To create an authenticated client and start interacting with Microsoft Azure resources, see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Search_1.1.0/doc/dev/mgmt_quickstart.md).
+### Authenticate the client
+
+Control plane operations are authenticated using Azure Active Directory. To create an authenticated client and start interacting with Microsoft Azure resources, see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Search_1.1.0/doc/dev/mgmt_quickstart.md).
 
 ## Key concepts
 
-Key concepts of the Microsoft Azure SDK for .NET can be found [here](https://azure.github.io/azure-sdk/dotnet_introduction.html).
+* Key concepts of the Microsoft Azure SDK for .NET can be found [here](https://azure.github.io/azure-sdk/dotnet_introduction.html).
+* Key concepts for Cognitive Search can be found in the [Azure Cognitive Search documentation](https://learn.microsoft.com/azure/search/).
 
 ## Documentation
 
 Documentation is available to help you learn how to use this package:
 
-- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Search_1.1.0/doc/dev/mgmt_quickstart.md).
-- [API References](/dotnet/api/?view=azure-dotnet).
-- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Search_1.1.0/sdk/identity/Azure.Identity/README.md).
+* [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Search_1.1.0/doc/dev/mgmt_quickstart.md).
+* [API References](/dotnet/api/?view=azure-dotnet).
+* [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Search_1.1.0/sdk/identity/Azure.Identity/README.md).
 
 ## Examples
 
-Code samples for using the management library for .NET can be found in the following locations
-- [.NET Management Library Code Samples](https://aka.ms/azuresdk-net-mgmt-samples)
+Code samples for using the management library for .NET can be found in the following locations:
+
+* [.NET Management Library Code Samples](https://aka.ms/azuresdk-net-mgmt-samples)
 
 ## Troubleshooting
 
--   File an issue via [GitHub Issues](https://github.com/Azure/azure-sdk-for-net/issues).
--   Check [previous questions](https://stackoverflow.com/questions/tagged/azure+.net) or ask new ones on Stack Overflow using Azure and .NET tags.
+* File an issue via [GitHub Issues](https://github.com/Azure/azure-sdk-for-net/issues).
+* Check [previous questions](https://stackoverflow.com/questions/tagged/azure+.net) or ask new ones on Stack Overflow using Azure and .NET tags.
 
 ## Next steps
 
