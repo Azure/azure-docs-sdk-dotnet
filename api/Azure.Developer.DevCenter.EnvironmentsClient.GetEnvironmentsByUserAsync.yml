@@ -1,0 +1,166 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="Azure.AsyncPageable`1?alt=Azure.AsyncPageable&text=AsyncPageable" data-throw-if-not-resolved="True"/>&lt;<xref href="System.BinaryData?alt=System.BinaryData&text=BinaryData" data-throw-if-not-resolved="True"/>&gt;
+    description: The <xref data-throw-if-not-resolved="true" uid="Azure.AsyncPageable`1"></xref> from the service containing a list of <xref data-throw-if-not-resolved="true" uid="System.BinaryData"></xref> objects. Details of the body schema for each item in the collection are in the Remarks section below.
+  parameters:
+  - namesWithMoniker:
+    - value: userId
+    description: The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: maxCount
+    description: "The maximum number of resources to return from the operation. Example: 'top=10'."
+    type: <xref href="System.Nullable`1?alt=System.Nullable&text=Nullable" data-throw-if-not-resolved="True"/>&lt;<xref href="System.Int32?alt=System.Int32&text=Int32" data-throw-if-not-resolved="True"/>&gt;
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">userId</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: <code data-dev-comment-type="paramref">userId</code> is an empty string, and was expected to be non-empty.
+    type: <xref href="System.ArgumentException" data-throw-if-not-resolved="True"/>
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.Developer.DevCenter.EnvironmentsClient.GetEnvironmentsByUserAsync(System.String,System.Nullable{System.Int32},Azure.RequestContext)
+  commentId: M:Azure.Developer.DevCenter.EnvironmentsClient.GetEnvironmentsByUserAsync(System.String,System.Nullable{System.Int32},Azure.RequestContext)
+  name: GetEnvironmentsByUserAsync(String, Nullable<Int32>, RequestContext)
+  fullName: Azure.Developer.DevCenter.EnvironmentsClient.GetEnvironmentsByUserAsync(String, Nullable<Int32>, RequestContext)
+  nameWithType: EnvironmentsClient.GetEnvironmentsByUserAsync(String, Nullable<Int32>, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual Azure.AsyncPageable<BinaryData> GetEnvironmentsByUserAsync (string userId = "me", int? maxCount = default, Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member GetEnvironmentsByUserAsync : string * Nullable<int> * Azure.RequestContext -> Azure.AsyncPageable<BinaryData>
+
+        override this.GetEnvironmentsByUserAsync : string * Nullable<int> * Azure.RequestContext -> Azure.AsyncPageable<BinaryData>
+  - lang: vb
+    values:
+    - value: Public Overridable Function GetEnvironmentsByUserAsync (Optional userId As String = "me", Optional maxCount As Nullable(Of Integer) = Nothing, Optional context As RequestContext = Nothing) As AsyncPageable(Of BinaryData)
+  monikers:
+  - azure-dotnet-preview
+  summary: Lists the environments for a project and user.
+  remarks: >-
+    <p>Below is the JSON schema for one item in the pageable response.</p><p>Response Body:</p><p>Schema for <code data-dev-comment-type="c">EnvironmentListResultValue</code>: 
+
+
+    ```
+
+    {
+      name: string, # Optional. Environment name.
+      environmentType: string, # Required. Environment type.
+      user: string, # Optional. The AAD object id of the owner of this Environment.
+      provisioningState: string, # Optional. The provisioning state of the environment.
+      resourceGroupId: string, # Optional. The identifier of the resource group containing the environment's resources.
+      description: string, # Optional. Description of the Environment.
+      catalogName: string, # Optional. Name of the catalog.
+      catalogItemName: string, # Optional. Name of the catalog item.
+      parameters: AnyObject, # Optional. Parameters object for the deploy action
+      scheduledTasks: Dictionary<string, ScheduledTask>, # Optional. Set of supported scheduled tasks to help manage cost.
+      tags: Dictionary<string, string>, # Optional. Key value pairs that will be applied to resources deployed in this environment as tags.
+    }
+
+    ```
+
+    </p>
+  examples: >-
+    This sample shows how to call GetEnvironmentsByUserAsync and parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
+
+
+    await foreach (var data in client.GetEnvironmentsByUserAsync())
+
+    {
+        JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        Console.WriteLine(result.GetProperty("environmentType").ToString());
+        Console.WriteLine(result.ToString());
+    }
+
+    ```
+
+    This sample shows how to call GetEnvironmentsByUserAsync with all parameters, and how to parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
+
+
+    await foreach (var data in client.GetEnvironmentsByUserAsync(<me>, 1234))
+
+    {
+        JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        Console.WriteLine(result.GetProperty("name").ToString());
+        Console.WriteLine(result.GetProperty("environmentType").ToString());
+        Console.WriteLine(result.GetProperty("user").ToString());
+        Console.WriteLine(result.GetProperty("provisioningState").ToString());
+        Console.WriteLine(result.GetProperty("resourceGroupId").ToString());
+        Console.WriteLine(result.GetProperty("description").ToString());
+        Console.WriteLine(result.GetProperty("catalogName").ToString());
+        Console.WriteLine(result.GetProperty("catalogItemName").ToString());
+        Console.WriteLine(result.GetProperty("parameters").ToString());
+        Console.WriteLine(result.GetProperty("scheduledTasks").GetProperty("<test>").GetProperty("type").ToString());
+        Console.WriteLine(result.GetProperty("scheduledTasks").GetProperty("<test>").GetProperty("enabled").ToString());
+        Console.WriteLine(result.GetProperty("scheduledTasks").GetProperty("<test>").GetProperty("startTime").ToString());
+        Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
+    }
+
+    ```
+  metadata: {}
+uid: Azure.Developer.DevCenter.EnvironmentsClient.GetEnvironmentsByUserAsync*
+commentId: Overload:Azure.Developer.DevCenter.EnvironmentsClient.GetEnvironmentsByUserAsync
+namespace: Azure.Developer.DevCenter
+name: GetEnvironmentsByUserAsync
+fullName: Azure.Developer.DevCenter.EnvironmentsClient.GetEnvironmentsByUserAsync
+nameWithType: EnvironmentsClient.GetEnvironmentsByUserAsync
+assembliesWithMoniker:
+- value: Azure.Developer.DevCenter.dll
+packagesWithMoniker:
+- value: Azure.Developer.DevCenter v1.0.0-beta.2
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.Developer.DevCenter.EnvironmentsClient.GetEnvironmentsByUserAsync
+  api_location:
+  - Azure.Developer.DevCenter.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.Developer.DevCenter.EnvironmentsClient.GetEnvironmentsByUserAsync
+  - Azure::Developer::DevCenter::EnvironmentsClient::GetEnvironmentsByUserAsync
+  - GetEnvironmentsByUserAsync
+  - EnvironmentsClient.GetEnvironmentsByUserAsync
+  - EnvironmentsClient::GetEnvironmentsByUserAsync
+  helpviewer_keywords:
+  - EnvironmentsClient.GetEnvironmentsByUserAsync method [.NET]
+  - GetEnvironmentsByUserAsync method [.NET], class EnvironmentsClient
+  - EnvironmentsClient.GetEnvironmentsByUserAsync(String, Nullable<Int32>, RequestContext) method [.NET]
+  - GetEnvironmentsByUserAsync(String, Nullable<Int32>, RequestContext) method [.NET], class EnvironmentsClient
+  monikers:
+  - azure-dotnet-preview

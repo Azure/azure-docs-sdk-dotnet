@@ -8,8 +8,8 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: search
 ---
-# Azure Cognitive Search client library for .NET - version 11.4.0 
 
+# Azure.Cognitive.Search client library for .NET
 
 [Azure Cognitive Search](/azure/search/) is a
 search-as-a-service cloud solution that gives developers APIs and tools

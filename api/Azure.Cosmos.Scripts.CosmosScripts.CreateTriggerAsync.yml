@@ -1,0 +1,125 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="System.Threading.Tasks.Task`1?alt=System.Threading.Tasks.Task&text=Task" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.Response`1?alt=Azure.Response&text=Response" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.Cosmos.Scripts.TriggerProperties?alt=Azure.Cosmos.Scripts.TriggerProperties&text=TriggerProperties" data-throw-if-not-resolved="True"/>&gt;&gt;
+    description: A task object representing the service response for the asynchronous operation.
+  parameters:
+  - namesWithMoniker:
+    - value: triggerProperties
+    description: The <xref data-throw-if-not-resolved="true" uid="Azure.Cosmos.Scripts.TriggerProperties"></xref> object.
+    type: <xref href="Azure.Cosmos.Scripts.TriggerProperties?alt=Azure.Cosmos.Scripts.TriggerProperties&text=TriggerProperties" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: requestOptions
+    description: (Optional) The options for the stored procedure request <xref data-throw-if-not-resolved="true" uid="Azure.Cosmos.RequestOptions"></xref>
+    type: <xref href="Azure.Cosmos.RequestOptions?alt=Azure.Cosmos.RequestOptions&text=RequestOptions" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: cancellationToken
+    description: (Optional) <xref data-throw-if-not-resolved="true" uid="System.Threading.CancellationToken"></xref> representing request cancellation.
+    type: <xref href="System.Threading.CancellationToken?alt=System.Threading.CancellationToken&text=CancellationToken" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: If <code data-dev-comment-type="paramref">triggerProperties</code> is not set.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: Represents a consolidation of failures that occurred during async processing. Look within InnerExceptions to find the actual exception(s)
+    type: <xref href="System.AggregateException" data-throw-if-not-resolved="True"/>
+  - description: >-
+      This exception can encapsulate many different types of errors. To determine the specific error always look at the StatusCode property. Some common codes you may get when creating a Document are:
+                   <table><thead><tr><th>StatusCode</th><th>Reason for exception</th></tr></thead><tbody><tr><td>400</td><td>BadRequest - This means something was wrong with the request supplied. It is likely that an Id was not supplied for the new trigger or that the Body was malformed.</td></tr><tr><td>403</td><td>Forbidden - You have reached your quota of triggers for the collection supplied. Contact support to have this quota increased.</td></tr><tr><td>409</td><td>Conflict - This means a <xref data-throw-if-not-resolved="true" uid="Azure.Cosmos.Scripts.TriggerProperties"></xref> with an id matching the id you supplied already existed.</td></tr><tr><td>413</td><td>RequestEntityTooLarge - This means the body of the <xref data-throw-if-not-resolved="true" uid="Azure.Cosmos.Scripts.TriggerProperties"></xref> you tried to create was too large.</td></tr></tbody></table>
+    type: <xref href="Azure.Cosmos.CosmosException?alt=Azure.Cosmos.CosmosException&text=CosmosException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.Cosmos.Scripts.CosmosScripts.CreateTriggerAsync(Azure.Cosmos.Scripts.TriggerProperties,Azure.Cosmos.RequestOptions,System.Threading.CancellationToken)
+  commentId: M:Azure.Cosmos.Scripts.CosmosScripts.CreateTriggerAsync(Azure.Cosmos.Scripts.TriggerProperties,Azure.Cosmos.RequestOptions,System.Threading.CancellationToken)
+  name: CreateTriggerAsync(TriggerProperties, RequestOptions, CancellationToken)
+  fullName: Azure.Cosmos.Scripts.CosmosScripts.CreateTriggerAsync(TriggerProperties, RequestOptions, CancellationToken)
+  nameWithType: CosmosScripts.CreateTriggerAsync(TriggerProperties, RequestOptions, CancellationToken)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public abstract System.Threading.Tasks.Task<Azure.Response<Azure.Cosmos.Scripts.TriggerProperties>> CreateTriggerAsync (Azure.Cosmos.Scripts.TriggerProperties triggerProperties, Azure.Cosmos.RequestOptions requestOptions = default, System.Threading.CancellationToken cancellationToken = default);
+  - lang: fsharp
+    values:
+    - value: 'abstract member CreateTriggerAsync : Azure.Cosmos.Scripts.TriggerProperties * Azure.Cosmos.RequestOptions * System.Threading.CancellationToken -> System.Threading.Tasks.Task<Azure.Response<Azure.Cosmos.Scripts.TriggerProperties>>'
+  - lang: vb
+    values:
+    - value: Public MustOverride Function CreateTriggerAsync (triggerProperties As TriggerProperties, Optional requestOptions As RequestOptions = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of TriggerProperties))
+  monikers:
+  - azure-dotnet-preview
+  summary: Creates a trigger as an asynchronous operation in the Azure Cosmos DB service.
+  examples: >2-
+     This creates a trigger then uses the trigger in a create item.
+
+    ```csharp
+
+    CosmosScripts scripts = this.container.Scripts;
+
+    Response<TriggerProperties> triggerResponse = await scripts.CreateTriggerAsync(
+        new TriggerProperties
+        {
+            Id = "addTax",
+            Body = @"function AddTax() {
+                var item = getContext().getRequest().getBody();
+
+                // calculate the tax.
+                item.tax = item.cost * .15;
+
+                // Update the request -- this is what is going to be inserted.
+                getContext().getRequest().setBody(item);
+            }",
+            TriggerOperation = TriggerOperation.All,
+            TriggerType = TriggerType.Pre
+        });
+
+    ItemRequestOptions options = new ItemRequestOptions()
+
+    {
+        PreTriggers = new List<string>() { triggerResponse.Id },
+    };
+
+
+    // Create a new item with trigger set in the request options
+
+    ItemResponse<dynamic> createdItem = await this.container.Items.CreateItemAsync<dynamic>(item.status, item, options);
+
+    double itemTax = createdItem.Resource.tax;
+
+    ```
+  metadata: {}
+uid: Azure.Cosmos.Scripts.CosmosScripts.CreateTriggerAsync*
+commentId: Overload:Azure.Cosmos.Scripts.CosmosScripts.CreateTriggerAsync
+namespace: Azure.Cosmos.Scripts
+name: CreateTriggerAsync
+fullName: Azure.Cosmos.Scripts.CosmosScripts.CreateTriggerAsync
+nameWithType: CosmosScripts.CreateTriggerAsync
+assembliesWithMoniker:
+- value: Azure.Cosmos.dll
+packagesWithMoniker:
+- value: Azure.Cosmos v4.0.0-preview3
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.Cosmos.Scripts.CosmosScripts.CreateTriggerAsync
+  api_location:
+  - Azure.Cosmos.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.Cosmos.Scripts.CosmosScripts.CreateTriggerAsync
+  - Azure::Cosmos::Scripts::CosmosScripts::CreateTriggerAsync
+  - CreateTriggerAsync
+  - CosmosScripts.CreateTriggerAsync
+  - CosmosScripts::CreateTriggerAsync
+  helpviewer_keywords:
+  - CosmosScripts.CreateTriggerAsync method [.NET]
+  - CreateTriggerAsync method [.NET], class CosmosScripts
+  - CosmosScripts.CreateTriggerAsync(TriggerProperties, RequestOptions, CancellationToken) method [.NET]
+  - CreateTriggerAsync(TriggerProperties, RequestOptions, CancellationToken) method [.NET], class CosmosScripts
+  monikers:
+  - azure-dotnet-preview

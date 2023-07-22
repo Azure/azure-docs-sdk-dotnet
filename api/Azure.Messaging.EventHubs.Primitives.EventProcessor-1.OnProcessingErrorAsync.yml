@@ -1,0 +1,94 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="System.Threading.Tasks.Task?alt=System.Threading.Tasks.Task&text=Task" data-throw-if-not-resolved="True"/>
+  parameters:
+  - namesWithMoniker:
+    - value: exception
+    description: The exception that occurred during operation of the event processor.
+    type: <xref href="System.Exception?alt=System.Exception&text=Exception" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: partition
+    description: The context of the partition associated with the error, if any; otherwise, <code data-dev-comment-type="c">null</code>.  This may only be initialized for members of <xref data-throw-if-not-resolved="true" uid="Azure.Messaging.EventHubs.Primitives.EventProcessorPartition"></xref>, depending on the point at which the error occurred.
+    type: TPartition
+  - namesWithMoniker:
+    - value: operationDescription
+    description: A short textual description of the operation during which the exception occurred; intended to be informational only.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: cancellationToken
+    description: A <xref data-throw-if-not-resolved="true" uid="System.Threading.CancellationToken"></xref> instance to signal the request to cancel the processing.  This is most likely to occur when the processor is shutting down.
+    type: <xref href="System.Threading.CancellationToken?alt=System.Threading.CancellationToken&text=CancellationToken" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.Messaging.EventHubs.Primitives.EventProcessor`1.OnProcessingErrorAsync(System.Exception,`0,System.String,System.Threading.CancellationToken)
+  commentId: M:Azure.Messaging.EventHubs.Primitives.EventProcessor`1.OnProcessingErrorAsync(System.Exception,`0,System.String,System.Threading.CancellationToken)
+  name: OnProcessingErrorAsync(Exception, TPartition, String, CancellationToken)
+  fullName: Azure.Messaging.EventHubs.Primitives.EventProcessor<TPartition>.OnProcessingErrorAsync(Exception, TPartition, String, CancellationToken)
+  nameWithType: EventProcessor<TPartition>.OnProcessingErrorAsync(Exception, TPartition, String, CancellationToken)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: protected abstract System.Threading.Tasks.Task OnProcessingErrorAsync (Exception exception, TPartition partition, string operationDescription, System.Threading.CancellationToken cancellationToken);
+  - lang: fsharp
+    values:
+    - value: "abstract member OnProcessingErrorAsync : Exception * 'Partition * string * System.Threading.CancellationToken -> System.Threading.Tasks.Task"
+  - lang: vb
+    values:
+    - value: Protected MustOverride Function OnProcessingErrorAsync (exception As Exception, partition As TPartition, operationDescription As String, cancellationToken As CancellationToken) As Task
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview
+  summary: >-
+    Performs the tasks needed when an unexpected exception occurs within the operation of the
+
+    event processor infrastructure.
+  remarks: <p>This error handler is invoked when there is an exception observed within the event processor itself; it is not invoked for exceptions in code that has been implemented to process events or other overrides and extension points that are not critical to the processor's operation. The event processor will make every effort to recover from exceptions and continue processing.  Should an exception that cannot be recovered from be encountered, the processor will attempt to forfeit ownership of all partitions that it was processing so that work may be redistributed.</p><p>The exceptions surfaced to this method may be fatal or non-fatal; because the processor may not be able to accurately predict whether an exception was fatal or whether its state was corrupted, this method has responsibility for making the determination as to whether processing should be terminated or restarted.  If desired, this can be done safely by calling <xref data-throw-if-not-resolved="true" uid="Azure.Messaging.EventHubs.Primitives.EventProcessor`1.StopProcessingAsync(System.Threading.CancellationToken)"></xref> and/or <xref data-throw-if-not-resolved="true" uid="Azure.Messaging.EventHubs.Primitives.EventProcessor`1.StartProcessingAsync(System.Threading.CancellationToken)"></xref>.</p><p>It is recommended that, for production scenarios, the decision be made by considering observations made by this error handler, the method invoked when initializing processing for a partition, and the method invoked when processing for a partition is stopped.  Many developers will also include data from their monitoring platforms in this decision as well.</p><p>As with event processing, should an exception occur in the code for the error handler, the event processor will allow it to bubble and will not attempt to handle it in any way.  Developers are strongly encouraged to take exception scenarios into account and guard against them using try/catch blocks and other means as appropriate.</p><p>This method will be invoked concurrently and is not awaited by the processor, as each error is independent.  No time limit is imposed on an invocation; it is safe for implementations to perform long-running operations and retries as needed.</p>
+  metadata: {}
+uid: Azure.Messaging.EventHubs.Primitives.EventProcessor`1.OnProcessingErrorAsync*
+commentId: Overload:Azure.Messaging.EventHubs.Primitives.EventProcessor`1.OnProcessingErrorAsync
+namespace: Azure.Messaging.EventHubs.Primitives
+name: OnProcessingErrorAsync
+fullName: Azure.Messaging.EventHubs.Primitives.EventProcessor<TPartition>.OnProcessingErrorAsync
+nameWithType: EventProcessor<TPartition>.OnProcessingErrorAsync
+assembliesWithMoniker:
+- value: Azure.Messaging.EventHubs.dll
+packagesWithMoniker:
+- value: Azure.Messaging.EventHubs v5.9.2
+  monikers:
+  - azure-dotnet
+- value: Azure.Messaging.EventHubs v5.7.0-beta.5
+  monikers:
+  - azure-dotnet-preview
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.Messaging.EventHubs.Primitives.EventProcessor`1.OnProcessingErrorAsync
+  api_location:
+  - Azure.Messaging.EventHubs.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.Messaging.EventHubs.Primitives.EventProcessor`1.OnProcessingErrorAsync
+  - Azure::Messaging::EventHubs::Primitives::EventProcessor`1::OnProcessingErrorAsync
+  - Azure.Messaging.EventHubs.Primitives.EventProcessor.OnProcessingErrorAsync
+  - OnProcessingErrorAsync
+  - EventProcessor`1.OnProcessingErrorAsync
+  - EventProcessor`1::OnProcessingErrorAsync
+  helpviewer_keywords:
+  - EventProcessor<TPartition>.OnProcessingErrorAsync method [.NET]
+  - OnProcessingErrorAsync method [.NET], class EventProcessor<TPartition>
+  - EventProcessor<TPartition>.OnProcessingErrorAsync(Exception, TPartition, String, CancellationToken) method [.NET]
+  - OnProcessingErrorAsync(Exception, TPartition, String, CancellationToken) method [.NET], class EventProcessor<TPartition>
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview

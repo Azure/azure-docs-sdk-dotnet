@@ -1,0 +1,169 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="Azure.AsyncPageable`1?alt=Azure.AsyncPageable&text=AsyncPageable" data-throw-if-not-resolved="True"/>&lt;<xref href="System.BinaryData?alt=System.BinaryData&text=BinaryData" data-throw-if-not-resolved="True"/>&gt;
+    description: The <xref data-throw-if-not-resolved="true" uid="Azure.AsyncPageable`1"></xref> from the service containing a list of <xref data-throw-if-not-resolved="true" uid="System.BinaryData"></xref> objects. Details of the body schema for each item in the collection are in the Remarks section below.
+  parameters:
+  - namesWithMoniker:
+    - value: groupId
+    description: Group identifier.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: deviceClassId
+    description: Device class identifier.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: deploymentId
+    description: Deployment identifier.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: filter
+    description: Restricts the set of deployment device states returned. You can filter on deviceId and moduleId and/or deviceState.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">groupId</code>, <code data-dev-comment-type="paramref">deviceClassId</code> or <code data-dev-comment-type="paramref">deploymentId</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: <code data-dev-comment-type="paramref">groupId</code>, <code data-dev-comment-type="paramref">deviceClassId</code> or <code data-dev-comment-type="paramref">deploymentId</code> is an empty string, and was expected to be non-empty.
+    type: <xref href="System.ArgumentException" data-throw-if-not-resolved="True"/>
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.IoT.DeviceUpdate.DeviceManagementClient.GetDeviceStatesForDeviceClassSubgroupDeploymentsAsync(System.String,System.String,System.String,System.String,Azure.RequestContext)
+  commentId: M:Azure.IoT.DeviceUpdate.DeviceManagementClient.GetDeviceStatesForDeviceClassSubgroupDeploymentsAsync(System.String,System.String,System.String,System.String,Azure.RequestContext)
+  name: GetDeviceStatesForDeviceClassSubgroupDeploymentsAsync(String, String, String, String, RequestContext)
+  fullName: Azure.IoT.DeviceUpdate.DeviceManagementClient.GetDeviceStatesForDeviceClassSubgroupDeploymentsAsync(String, String, String, String, RequestContext)
+  nameWithType: DeviceManagementClient.GetDeviceStatesForDeviceClassSubgroupDeploymentsAsync(String, String, String, String, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual Azure.AsyncPageable<BinaryData> GetDeviceStatesForDeviceClassSubgroupDeploymentsAsync (string groupId, string deviceClassId, string deploymentId, string filter = default, Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member GetDeviceStatesForDeviceClassSubgroupDeploymentsAsync : string * string * string * string * Azure.RequestContext -> Azure.AsyncPageable<BinaryData>
+
+        override this.GetDeviceStatesForDeviceClassSubgroupDeploymentsAsync : string * string * string * string * Azure.RequestContext -> Azure.AsyncPageable<BinaryData>
+  - lang: vb
+    values:
+    - value: Public Overridable Function GetDeviceStatesForDeviceClassSubgroupDeploymentsAsync (groupId As String, deviceClassId As String, deploymentId As String, Optional filter As String = Nothing, Optional context As RequestContext = Nothing) As AsyncPageable(Of BinaryData)
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview
+  summary: Gets a list of devices in a deployment along with their state. Useful for getting a list of failed devices.
+  remarks: >-
+    <p>Below is the JSON schema for one item in the pageable response.</p><p>Response Body:</p><p>Schema for <code data-dev-comment-type="c">DeploymentDeviceStatesListValue</code>: 
+
+
+    ```
+
+    {
+                  deviceId: string, # Required. Device identity.
+                  moduleId: string, # Optional. Device module identity.
+                  retryCount: number, # Required. The number of times this deployment has been retried on this device.
+                  movedOnToNewDeployment: boolean, # Required. Boolean flag indicating whether this device is in a newer deployment and can no longer retry this deployment.
+                  deviceState: "Succeeded" | "InProgress" | "Canceled" | "Failed", # Required. Deployment device state.
+                }
+    ```
+
+    </p>
+  examples: >-
+    This sample shows how to call GetDeviceStatesForDeviceClassSubgroupDeploymentsAsync with required parameters and parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new DeviceManagementClient(endpoint, "<instanceId>", credential);
+
+
+    await foreach (var data in client.GetDeviceStatesForDeviceClassSubgroupDeploymentsAsync("<groupId>", "<deviceClassId>", "<deploymentId>"))
+
+    {
+        JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        Console.WriteLine(result.GetProperty("deviceId").ToString());
+        Console.WriteLine(result.GetProperty("retryCount").ToString());
+        Console.WriteLine(result.GetProperty("movedOnToNewDeployment").ToString());
+        Console.WriteLine(result.GetProperty("deviceState").ToString());
+    }
+
+    ```
+
+    This sample shows how to call GetDeviceStatesForDeviceClassSubgroupDeploymentsAsync with all parameters, and how to parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new DeviceManagementClient(endpoint, "<instanceId>", credential);
+
+
+    await foreach (var data in client.GetDeviceStatesForDeviceClassSubgroupDeploymentsAsync("<groupId>", "<deviceClassId>", "<deploymentId>", "<filter>"))
+
+    {
+        JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        Console.WriteLine(result.GetProperty("deviceId").ToString());
+        Console.WriteLine(result.GetProperty("moduleId").ToString());
+        Console.WriteLine(result.GetProperty("retryCount").ToString());
+        Console.WriteLine(result.GetProperty("movedOnToNewDeployment").ToString());
+        Console.WriteLine(result.GetProperty("deviceState").ToString());
+    }
+
+    ```
+  metadata: {}
+uid: Azure.IoT.DeviceUpdate.DeviceManagementClient.GetDeviceStatesForDeviceClassSubgroupDeploymentsAsync*
+commentId: Overload:Azure.IoT.DeviceUpdate.DeviceManagementClient.GetDeviceStatesForDeviceClassSubgroupDeploymentsAsync
+namespace: Azure.IoT.DeviceUpdate
+name: GetDeviceStatesForDeviceClassSubgroupDeploymentsAsync
+fullName: Azure.IoT.DeviceUpdate.DeviceManagementClient.GetDeviceStatesForDeviceClassSubgroupDeploymentsAsync
+nameWithType: DeviceManagementClient.GetDeviceStatesForDeviceClassSubgroupDeploymentsAsync
+assembliesWithMoniker:
+- value: Azure.IoT.DeviceUpdate.dll
+packagesWithMoniker:
+- value: Azure.IoT.DeviceUpdate v1.0.0
+  monikers:
+  - azure-dotnet
+- value: Azure.IoT.DeviceUpdate v1.0.0-beta.4
+  monikers:
+  - azure-dotnet-preview
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.IoT.DeviceUpdate.DeviceManagementClient.GetDeviceStatesForDeviceClassSubgroupDeploymentsAsync
+  api_location:
+  - Azure.IoT.DeviceUpdate.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.IoT.DeviceUpdate.DeviceManagementClient.GetDeviceStatesForDeviceClassSubgroupDeploymentsAsync
+  - Azure::IoT::DeviceUpdate::DeviceManagementClient::GetDeviceStatesForDeviceClassSubgroupDeploymentsAsync
+  - GetDeviceStatesForDeviceClassSubgroupDeploymentsAsync
+  - DeviceManagementClient.GetDeviceStatesForDeviceClassSubgroupDeploymentsAsync
+  - DeviceManagementClient::GetDeviceStatesForDeviceClassSubgroupDeploymentsAsync
+  helpviewer_keywords:
+  - DeviceManagementClient.GetDeviceStatesForDeviceClassSubgroupDeploymentsAsync method [.NET]
+  - GetDeviceStatesForDeviceClassSubgroupDeploymentsAsync method [.NET], class DeviceManagementClient
+  - DeviceManagementClient.GetDeviceStatesForDeviceClassSubgroupDeploymentsAsync(String, String, String, String, RequestContext) method [.NET]
+  - GetDeviceStatesForDeviceClassSubgroupDeploymentsAsync(String, String, String, String, RequestContext) method [.NET], class DeviceManagementClient
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview

@@ -1,0 +1,160 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="System.Threading.Tasks.Task`1?alt=System.Threading.Tasks.Task&text=Task" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.Response?alt=Azure.Response&text=Response" data-throw-if-not-resolved="True"/>&gt;
+    description: The response returned from the service. Details of the response body schema are in the Remarks section below.
+  parameters:
+  - namesWithMoniker:
+    - value: workflowRunId
+    description: The workflow run id.
+    type: <xref href="System.Guid?alt=System.Guid&text=Guid" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.GetWorkflowRunAsync(System.Guid,Azure.RequestContext)
+  commentId: M:Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.GetWorkflowRunAsync(System.Guid,Azure.RequestContext)
+  name: GetWorkflowRunAsync(Guid, RequestContext)
+  fullName: Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.GetWorkflowRunAsync(Guid, RequestContext)
+  nameWithType: PurviewWorkflowServiceClient.GetWorkflowRunAsync(Guid, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual System.Threading.Tasks.Task<Azure.Response> GetWorkflowRunAsync (Guid workflowRunId, Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member GetWorkflowRunAsync : Guid * Azure.RequestContext -> System.Threading.Tasks.Task<Azure.Response>
+
+        override this.GetWorkflowRunAsync : Guid * Azure.RequestContext -> System.Threading.Tasks.Task<Azure.Response>
+  - lang: vb
+    values:
+    - value: Public Overridable Function GetWorkflowRunAsync (workflowRunId As Guid, Optional context As RequestContext = Nothing) As Task(Of Response)
+  monikers:
+  - azure-dotnet-preview
+  summary: Get a workflow run.
+  remarks: >-
+    <p>Below is the JSON schema for the response payload.</p><p>Response Body:</p><p>Schema for <code data-dev-comment-type="c">WorkflowRun</code>: 
+
+
+    ```
+
+    {
+      id: Guid, # Optional. The workflow run id.
+      workflowId: Guid, # Optional. The workflow id.
+      startTime: string (ISO 8601 Format), # Optional. Workflow run start time.
+      requestor: Guid, # Optional. The person who submitted the user request.
+      userRequestId: Guid, # Optional. The user request id.
+      runPayload: {
+        type: "CreateTerm" | "UpdateTerm" | "DeleteTerm" | "ImportTerms" | "UpdateAsset" | "GrantDataAccess", # Required. The workflow run payload type.
+        targetValue: string, # Required. The target value which need involve workflow to update.
+        payload: AnyObject, # Required. The payload of each operation which user want to submit.
+      }, # Optional. The input of a workflow run. Align with operation in user request. 
+      status: "NotStarted" | "InProgress" | "Failed" | "Completed" | "Canceling" | "CancellationFailed" | "Canceled", # Optional. The status.
+      endTime: string (ISO 8601 Format), # Optional. The time of workflow run completed.
+      cancelTime: string (ISO 8601 Format), # Optional. The time of workflow run be canceled.
+      cancelComment: string, # Optional. The comment when cancel a workflow run.
+      actionDag: AnyObject, # Required. The action DAG(Directed Acyclic Graph), it defines actual flow.
+      detail: {
+        runInput: AnyObject, # Required. Built-in variables starts with @runInput. Its properties are determined by trigger type at workflow run time. 
+        actions: AnyObject, # Required. Any object
+      }, # Required. It refers to the "detail" property of a workflow run object, which contains run context and runtime information of actions.
+    }
+
+    ```
+
+    </p>
+  examples: >-
+    This sample shows how to call GetWorkflowRunAsync with required parameters and parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new PurviewWorkflowServiceClient(endpoint, credential);
+
+
+    Response response = await client.GetWorkflowRunAsync(Guid.NewGuid());
+
+
+    JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+
+    Console.WriteLine(result.GetProperty("id").ToString());
+
+    Console.WriteLine(result.GetProperty("workflowId").ToString());
+
+    Console.WriteLine(result.GetProperty("startTime").ToString());
+
+    Console.WriteLine(result.GetProperty("requestor").ToString());
+
+    Console.WriteLine(result.GetProperty("userRequestId").ToString());
+
+    Console.WriteLine(result.GetProperty("runPayload").GetProperty("type").ToString());
+
+    Console.WriteLine(result.GetProperty("runPayload").GetProperty("targetValue").ToString());
+
+    Console.WriteLine(result.GetProperty("runPayload").GetProperty("payload").ToString());
+
+    Console.WriteLine(result.GetProperty("status").ToString());
+
+    Console.WriteLine(result.GetProperty("endTime").ToString());
+
+    Console.WriteLine(result.GetProperty("cancelTime").ToString());
+
+    Console.WriteLine(result.GetProperty("cancelComment").ToString());
+
+    Console.WriteLine(result.GetProperty("actionDag").ToString());
+
+    Console.WriteLine(result.GetProperty("detail").GetProperty("runInput").ToString());
+
+    Console.WriteLine(result.GetProperty("detail").GetProperty("actions").ToString());
+
+    ```
+  metadata: {}
+uid: Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.GetWorkflowRunAsync*
+commentId: Overload:Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.GetWorkflowRunAsync
+namespace: Azure.Analytics.Purview.Workflows
+name: GetWorkflowRunAsync
+fullName: Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.GetWorkflowRunAsync
+nameWithType: PurviewWorkflowServiceClient.GetWorkflowRunAsync
+assembliesWithMoniker:
+- value: Azure.Analytics.Purview.Workflows.dll
+packagesWithMoniker:
+- value: Azure.Analytics.Purview.Workflows v1.0.0-beta.1
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.GetWorkflowRunAsync
+  api_location:
+  - Azure.Analytics.Purview.Workflows.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.GetWorkflowRunAsync
+  - Azure::Analytics::Purview::Workflows::PurviewWorkflowServiceClient::GetWorkflowRunAsync
+  - GetWorkflowRunAsync
+  - PurviewWorkflowServiceClient.GetWorkflowRunAsync
+  - PurviewWorkflowServiceClient::GetWorkflowRunAsync
+  helpviewer_keywords:
+  - PurviewWorkflowServiceClient.GetWorkflowRunAsync method [.NET]
+  - GetWorkflowRunAsync method [.NET], class PurviewWorkflowServiceClient
+  - PurviewWorkflowServiceClient.GetWorkflowRunAsync(Guid, RequestContext) method [.NET]
+  - GetWorkflowRunAsync(Guid, RequestContext) method [.NET], class PurviewWorkflowServiceClient
+  monikers:
+  - azure-dotnet-preview

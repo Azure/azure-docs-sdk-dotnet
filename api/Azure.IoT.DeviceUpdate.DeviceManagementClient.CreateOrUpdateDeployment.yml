@@ -1,0 +1,301 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="Azure.Response?alt=Azure.Response&text=Response" data-throw-if-not-resolved="True"/>
+    description: The response returned from the service. Details of the response body schema are in the Remarks section below.
+  parameters:
+  - namesWithMoniker:
+    - value: groupId
+    description: Group identifier.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: deploymentId
+    description: Deployment identifier.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: content
+    description: The content to send as the body of the request. Details of the request body schema are in the Remarks section below.
+    type: <xref href="Azure.Core.RequestContent?alt=Azure.Core.RequestContent&text=RequestContent" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">groupId</code>, <code data-dev-comment-type="paramref">deploymentId</code> or <code data-dev-comment-type="paramref">content</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: <code data-dev-comment-type="paramref">groupId</code> or <code data-dev-comment-type="paramref">deploymentId</code> is an empty string, and was expected to be non-empty.
+    type: <xref href="System.ArgumentException" data-throw-if-not-resolved="True"/>
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.IoT.DeviceUpdate.DeviceManagementClient.CreateOrUpdateDeployment(System.String,System.String,Azure.Core.RequestContent,Azure.RequestContext)
+  commentId: M:Azure.IoT.DeviceUpdate.DeviceManagementClient.CreateOrUpdateDeployment(System.String,System.String,Azure.Core.RequestContent,Azure.RequestContext)
+  name: CreateOrUpdateDeployment(String, String, RequestContent, RequestContext)
+  fullName: Azure.IoT.DeviceUpdate.DeviceManagementClient.CreateOrUpdateDeployment(String, String, RequestContent, RequestContext)
+  nameWithType: DeviceManagementClient.CreateOrUpdateDeployment(String, String, RequestContent, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual Azure.Response CreateOrUpdateDeployment (string groupId, string deploymentId, Azure.Core.RequestContent content, Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member CreateOrUpdateDeployment : string * string * Azure.Core.RequestContent * Azure.RequestContext -> Azure.Response
+
+        override this.CreateOrUpdateDeployment : string * string * Azure.Core.RequestContent * Azure.RequestContext -> Azure.Response
+  - lang: vb
+    values:
+    - value: Public Overridable Function CreateOrUpdateDeployment (groupId As String, deploymentId As String, content As RequestContent, Optional context As RequestContext = Nothing) As Response
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview
+  summary: Creates or updates a deployment.
+  remarks: >-
+    <p>Below is the JSON schema for the request and response payloads.</p><p>Request Body:</p><p>Schema for <code data-dev-comment-type="c">Deployment</code>: 
+
+
+    ```
+
+    {
+                  deploymentId: string, # Required. The caller-provided deployment identifier. This cannot be longer than 73 characters, must be all lower-case, and cannot contain '&', '^', '[', ']', '{', '}', '|', '<', '>', forward slash, backslash, or double quote. The Updates view in the Azure Portal IoT Hub resource generates a GUID for deploymentId when you create a deployment.
+                  startDateTime: string (ISO 8601 Format), # Required. The deployment start datetime.
+                  update: {
+                    updateId: {
+                      provider: string, # Required. Update provider.
+                      name: string, # Required. Update name.
+                      version: string, # Required. Update version.
+                    }, # Required. Update identifier.
+                    description: string, # Optional. Update description.
+                    friendlyName: string, # Optional. Friendly update name.
+                  }, # Required. Update information for the update in the deployment.
+                  groupId: string, # Required. The group identity for the devices the deployment is intended to update.
+                  deviceClassSubgroups: [string], # Optional. The device class subgroups the deployment is compatible with and subgroup deployments have been created for. This is not provided by the caller during CreateOrUpdateDeployment but is automatically determined by Device Update
+                  isCanceled: boolean, # Optional. Boolean flag indicating whether the deployment was canceled.
+                  isRetried: boolean, # Optional. Boolean flag indicating whether the deployment has been retried.
+                  rollbackPolicy: {
+                    update: UpdateInfo, # Required. Update to rollback to.
+                    failure: {
+                      devicesFailedPercentage: number, # Required. Percentage of devices that failed.
+                      devicesFailedCount: number, # Required. Number of devices that failed.
+                    }, # Required. Failure conditions to initiate rollback policy.
+                  }, # Optional. The rollback policy for the deployment.
+                  isCloudInitiatedRollback: boolean, # Optional. Boolean flag indicating whether the deployment is a rollback deployment.
+                }
+    ```
+
+    </p><p>Response Body:</p><p>Schema for <code data-dev-comment-type="c">Deployment</code>: 
+
+
+    ```
+
+    {
+                  deploymentId: string, # Required. The caller-provided deployment identifier. This cannot be longer than 73 characters, must be all lower-case, and cannot contain '&', '^', '[', ']', '{', '}', '|', '<', '>', forward slash, backslash, or double quote. The Updates view in the Azure Portal IoT Hub resource generates a GUID for deploymentId when you create a deployment.
+                  startDateTime: string (ISO 8601 Format), # Required. The deployment start datetime.
+                  update: {
+                    updateId: {
+                      provider: string, # Required. Update provider.
+                      name: string, # Required. Update name.
+                      version: string, # Required. Update version.
+                    }, # Required. Update identifier.
+                    description: string, # Optional. Update description.
+                    friendlyName: string, # Optional. Friendly update name.
+                  }, # Required. Update information for the update in the deployment.
+                  groupId: string, # Required. The group identity for the devices the deployment is intended to update.
+                  deviceClassSubgroups: [string], # Optional. The device class subgroups the deployment is compatible with and subgroup deployments have been created for. This is not provided by the caller during CreateOrUpdateDeployment but is automatically determined by Device Update
+                  isCanceled: boolean, # Optional. Boolean flag indicating whether the deployment was canceled.
+                  isRetried: boolean, # Optional. Boolean flag indicating whether the deployment has been retried.
+                  rollbackPolicy: {
+                    update: UpdateInfo, # Required. Update to rollback to.
+                    failure: {
+                      devicesFailedPercentage: number, # Required. Percentage of devices that failed.
+                      devicesFailedCount: number, # Required. Number of devices that failed.
+                    }, # Required. Failure conditions to initiate rollback policy.
+                  }, # Optional. The rollback policy for the deployment.
+                  isCloudInitiatedRollback: boolean, # Optional. Boolean flag indicating whether the deployment is a rollback deployment.
+                }
+    ```
+
+    </p>
+  examples: >-
+    This sample shows how to call CreateOrUpdateDeployment with required parameters and request content, and how to parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new DeviceManagementClient(endpoint, "<instanceId>", credential);
+
+
+    var data = new {
+        deploymentId = "<deploymentId>",
+        startDateTime = "2022-05-10T18:57:31.2311892Z",
+        update = new {
+            updateId = new {
+                provider = "<provider>",
+                name = "<name>",
+                version = "<version>",
+            },
+        },
+        groupId = "<groupId>",
+    };
+
+
+    Response response = client.CreateOrUpdateDeployment("<groupId>", "<deploymentId>", RequestContent.Create(data));
+
+
+    JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+
+    Console.WriteLine(result.GetProperty("deploymentId").ToString());
+
+    Console.WriteLine(result.GetProperty("startDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("update").GetProperty("updateId").GetProperty("provider").ToString());
+
+    Console.WriteLine(result.GetProperty("update").GetProperty("updateId").GetProperty("name").ToString());
+
+    Console.WriteLine(result.GetProperty("update").GetProperty("updateId").GetProperty("version").ToString());
+
+    Console.WriteLine(result.GetProperty("groupId").ToString());
+
+    ```
+
+    This sample shows how to call CreateOrUpdateDeployment with all parameters and request content, and how to parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new DeviceManagementClient(endpoint, "<instanceId>", credential);
+
+
+    var data = new {
+        deploymentId = "<deploymentId>",
+        startDateTime = "2022-05-10T18:57:31.2311892Z",
+        update = new {
+            updateId = new {
+                provider = "<provider>",
+                name = "<name>",
+                version = "<version>",
+            },
+        },
+        groupId = "<groupId>",
+        deviceClassSubgroups = new[] {
+            "<String>"
+        },
+        isCanceled = true,
+        isRetried = true,
+        rollbackPolicy = new {
+            update = new {
+                updateId = new {
+                    provider = "<provider>",
+                    name = "<name>",
+                    version = "<version>",
+                },
+            },
+            failure = new {
+                devicesFailedPercentage = 1234,
+                devicesFailedCount = 1234,
+            },
+        },
+        isCloudInitiatedRollback = true,
+    };
+
+
+    Response response = client.CreateOrUpdateDeployment("<groupId>", "<deploymentId>", RequestContent.Create(data));
+
+
+    JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+
+    Console.WriteLine(result.GetProperty("deploymentId").ToString());
+
+    Console.WriteLine(result.GetProperty("startDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("update").GetProperty("updateId").GetProperty("provider").ToString());
+
+    Console.WriteLine(result.GetProperty("update").GetProperty("updateId").GetProperty("name").ToString());
+
+    Console.WriteLine(result.GetProperty("update").GetProperty("updateId").GetProperty("version").ToString());
+
+    Console.WriteLine(result.GetProperty("update").GetProperty("description").ToString());
+
+    Console.WriteLine(result.GetProperty("update").GetProperty("friendlyName").ToString());
+
+    Console.WriteLine(result.GetProperty("groupId").ToString());
+
+    Console.WriteLine(result.GetProperty("deviceClassSubgroups")[0].ToString());
+
+    Console.WriteLine(result.GetProperty("isCanceled").ToString());
+
+    Console.WriteLine(result.GetProperty("isRetried").ToString());
+
+    Console.WriteLine(result.GetProperty("rollbackPolicy").GetProperty("update").GetProperty("updateId").GetProperty("provider").ToString());
+
+    Console.WriteLine(result.GetProperty("rollbackPolicy").GetProperty("update").GetProperty("updateId").GetProperty("name").ToString());
+
+    Console.WriteLine(result.GetProperty("rollbackPolicy").GetProperty("update").GetProperty("updateId").GetProperty("version").ToString());
+
+    Console.WriteLine(result.GetProperty("rollbackPolicy").GetProperty("update").GetProperty("description").ToString());
+
+    Console.WriteLine(result.GetProperty("rollbackPolicy").GetProperty("update").GetProperty("friendlyName").ToString());
+
+    Console.WriteLine(result.GetProperty("rollbackPolicy").GetProperty("failure").GetProperty("devicesFailedPercentage").ToString());
+
+    Console.WriteLine(result.GetProperty("rollbackPolicy").GetProperty("failure").GetProperty("devicesFailedCount").ToString());
+
+    Console.WriteLine(result.GetProperty("isCloudInitiatedRollback").ToString());
+
+    ```
+  metadata: {}
+uid: Azure.IoT.DeviceUpdate.DeviceManagementClient.CreateOrUpdateDeployment*
+commentId: Overload:Azure.IoT.DeviceUpdate.DeviceManagementClient.CreateOrUpdateDeployment
+namespace: Azure.IoT.DeviceUpdate
+name: CreateOrUpdateDeployment
+fullName: Azure.IoT.DeviceUpdate.DeviceManagementClient.CreateOrUpdateDeployment
+nameWithType: DeviceManagementClient.CreateOrUpdateDeployment
+assembliesWithMoniker:
+- value: Azure.IoT.DeviceUpdate.dll
+packagesWithMoniker:
+- value: Azure.IoT.DeviceUpdate v1.0.0
+  monikers:
+  - azure-dotnet
+- value: Azure.IoT.DeviceUpdate v1.0.0-beta.4
+  monikers:
+  - azure-dotnet-preview
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.IoT.DeviceUpdate.DeviceManagementClient.CreateOrUpdateDeployment
+  api_location:
+  - Azure.IoT.DeviceUpdate.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.IoT.DeviceUpdate.DeviceManagementClient.CreateOrUpdateDeployment
+  - Azure::IoT::DeviceUpdate::DeviceManagementClient::CreateOrUpdateDeployment
+  - CreateOrUpdateDeployment
+  - DeviceManagementClient.CreateOrUpdateDeployment
+  - DeviceManagementClient::CreateOrUpdateDeployment
+  helpviewer_keywords:
+  - DeviceManagementClient.CreateOrUpdateDeployment method [.NET]
+  - CreateOrUpdateDeployment method [.NET], class DeviceManagementClient
+  - DeviceManagementClient.CreateOrUpdateDeployment(String, String, RequestContent, RequestContext) method [.NET]
+  - CreateOrUpdateDeployment(String, String, RequestContent, RequestContext) method [.NET], class DeviceManagementClient
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview

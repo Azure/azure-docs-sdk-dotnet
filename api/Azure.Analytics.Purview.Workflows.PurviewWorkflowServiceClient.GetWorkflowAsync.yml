@@ -1,0 +1,154 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="System.Threading.Tasks.Task`1?alt=System.Threading.Tasks.Task&text=Task" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.Response?alt=Azure.Response&text=Response" data-throw-if-not-resolved="True"/>&gt;
+    description: The response returned from the service. Details of the response body schema are in the Remarks section below.
+  parameters:
+  - namesWithMoniker:
+    - value: workflowId
+    description: The workflow id.
+    type: <xref href="System.Guid?alt=System.Guid&text=Guid" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.GetWorkflowAsync(System.Guid,Azure.RequestContext)
+  commentId: M:Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.GetWorkflowAsync(System.Guid,Azure.RequestContext)
+  name: GetWorkflowAsync(Guid, RequestContext)
+  fullName: Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.GetWorkflowAsync(Guid, RequestContext)
+  nameWithType: PurviewWorkflowServiceClient.GetWorkflowAsync(Guid, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual System.Threading.Tasks.Task<Azure.Response> GetWorkflowAsync (Guid workflowId, Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member GetWorkflowAsync : Guid * Azure.RequestContext -> System.Threading.Tasks.Task<Azure.Response>
+
+        override this.GetWorkflowAsync : Guid * Azure.RequestContext -> System.Threading.Tasks.Task<Azure.Response>
+  - lang: vb
+    values:
+    - value: Public Overridable Function GetWorkflowAsync (workflowId As Guid, Optional context As RequestContext = Nothing) As Task(Of Response)
+  monikers:
+  - azure-dotnet-preview
+  summary: Get a specific workflow.
+  remarks: >-
+    <p>Below is the JSON schema for the response payload.</p><p>Response Body:</p><p>Schema for <code data-dev-comment-type="c">Workflow</code>: 
+
+
+    ```
+
+    {
+      actionDag: AnyObject, # Required. The action DAG(Directed Acyclic Graph), it defines steps to be executed in a workflow run and their order.
+      id: Guid, # Required. The id of workflow.
+      triggers: [
+        {
+          type: "when_term_creation_is_requested" | "when_term_deletion_is_requested" | "when_term_update_is_requested" | "when_terms_import_is_requested" | "when_data_access_grant_is_requested" | "when_asset_update_is_requested", # Required.
+          underGlossaryHierarchy: string, # Optional. Glossary term hierarchy path.
+          underCollection: string, # Optional. The collection name.
+          underGlossary: string, # Optional. The glossary guid.
+        }
+      ], # Required. It describes under what condition a workflow will run.  
+      createdTime: string (ISO 8601 Format), # Optional. The created time of workflow.
+      createdBy: string, # Optional. The person who created the workflow.
+      lastUpdateTime: string (ISO 8601 Format), # Optional. The last update time.
+      updatedBy: string, # Optional. The person who updated the workflow.
+      name: string, # Required. The name of a workflow.
+      isEnabled: boolean, # Required. Whether the workflow is enabled or not.
+      description: string, # Required. Description of a workflow.
+    }
+
+    ```
+
+    </p>
+  examples: >-
+    This sample shows how to call GetWorkflowAsync with required parameters and parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new PurviewWorkflowServiceClient(endpoint, credential);
+
+
+    Response response = await client.GetWorkflowAsync(Guid.NewGuid());
+
+
+    JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+
+    Console.WriteLine(result.GetProperty("actionDag").ToString());
+
+    Console.WriteLine(result.GetProperty("id").ToString());
+
+    Console.WriteLine(result.GetProperty("triggers")[0].GetProperty("type").ToString());
+
+    Console.WriteLine(result.GetProperty("triggers")[0].GetProperty("underGlossaryHierarchy").ToString());
+
+    Console.WriteLine(result.GetProperty("triggers")[0].GetProperty("underCollection").ToString());
+
+    Console.WriteLine(result.GetProperty("triggers")[0].GetProperty("underGlossary").ToString());
+
+    Console.WriteLine(result.GetProperty("createdTime").ToString());
+
+    Console.WriteLine(result.GetProperty("createdBy").ToString());
+
+    Console.WriteLine(result.GetProperty("lastUpdateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("updatedBy").ToString());
+
+    Console.WriteLine(result.GetProperty("name").ToString());
+
+    Console.WriteLine(result.GetProperty("isEnabled").ToString());
+
+    Console.WriteLine(result.GetProperty("description").ToString());
+
+    ```
+  metadata: {}
+uid: Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.GetWorkflowAsync*
+commentId: Overload:Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.GetWorkflowAsync
+namespace: Azure.Analytics.Purview.Workflows
+name: GetWorkflowAsync
+fullName: Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.GetWorkflowAsync
+nameWithType: PurviewWorkflowServiceClient.GetWorkflowAsync
+assembliesWithMoniker:
+- value: Azure.Analytics.Purview.Workflows.dll
+packagesWithMoniker:
+- value: Azure.Analytics.Purview.Workflows v1.0.0-beta.1
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.GetWorkflowAsync
+  api_location:
+  - Azure.Analytics.Purview.Workflows.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.GetWorkflowAsync
+  - Azure::Analytics::Purview::Workflows::PurviewWorkflowServiceClient::GetWorkflowAsync
+  - GetWorkflowAsync
+  - PurviewWorkflowServiceClient.GetWorkflowAsync
+  - PurviewWorkflowServiceClient::GetWorkflowAsync
+  helpviewer_keywords:
+  - PurviewWorkflowServiceClient.GetWorkflowAsync method [.NET]
+  - GetWorkflowAsync method [.NET], class PurviewWorkflowServiceClient
+  - PurviewWorkflowServiceClient.GetWorkflowAsync(Guid, RequestContext) method [.NET]
+  - GetWorkflowAsync(Guid, RequestContext) method [.NET], class PurviewWorkflowServiceClient
+  monikers:
+  - azure-dotnet-preview

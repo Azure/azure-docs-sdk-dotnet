@@ -1,0 +1,214 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="Azure.Pageable`1?alt=Azure.Pageable&text=Pageable" data-throw-if-not-resolved="True"/>&lt;<xref href="System.BinaryData?alt=System.BinaryData&text=BinaryData" data-throw-if-not-resolved="True"/>&gt;
+    description: The <xref data-throw-if-not-resolved="true" uid="Azure.Pageable`1"></xref> from the service containing a list of <xref data-throw-if-not-resolved="true" uid="System.BinaryData"></xref> objects. Details of the body schema for each item in the collection are in the Remarks section below.
+  parameters:
+  - namesWithMoniker:
+    - value: groupId
+    description: Group identifier.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">groupId</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: <code data-dev-comment-type="paramref">groupId</code> is an empty string, and was expected to be non-empty.
+    type: <xref href="System.ArgumentException" data-throw-if-not-resolved="True"/>
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.IoT.DeviceUpdate.DeviceManagementClient.GetBestUpdatesForGroups(System.String,Azure.RequestContext)
+  commentId: M:Azure.IoT.DeviceUpdate.DeviceManagementClient.GetBestUpdatesForGroups(System.String,Azure.RequestContext)
+  name: GetBestUpdatesForGroups(String, RequestContext)
+  fullName: Azure.IoT.DeviceUpdate.DeviceManagementClient.GetBestUpdatesForGroups(String, RequestContext)
+  nameWithType: DeviceManagementClient.GetBestUpdatesForGroups(String, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual Azure.Pageable<BinaryData> GetBestUpdatesForGroups (string groupId, Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member GetBestUpdatesForGroups : string * Azure.RequestContext -> Azure.Pageable<BinaryData>
+
+        override this.GetBestUpdatesForGroups : string * Azure.RequestContext -> Azure.Pageable<BinaryData>
+  - lang: vb
+    values:
+    - value: Public Overridable Function GetBestUpdatesForGroups (groupId As String, Optional context As RequestContext = Nothing) As Pageable(Of BinaryData)
+  monikers:
+  - azure-dotnet
+  summary: Get the best available updates for a device group and a count of how many devices need each update.
+  remarks: >-
+    <p>Below is the JSON schema for one item in the pageable response.</p><p>Response Body:</p><p>Schema for <code data-dev-comment-type="c">DeviceClassSubgroupUpdatableDevicesListValue</code>: 
+
+
+    ```
+
+    {
+                  groupId: string, # Required. The group Id
+                  deviceClassId: string, # Required. The device class subgroup's device class Id
+                  update: {
+                    updateId: {
+                      provider: string, # Required. Update provider.
+                      name: string, # Required. Update name.
+                      version: string, # Required. Update version.
+                    }, # Required. Update identifier.
+                    description: string, # Optional. Update description.
+                    friendlyName: string, # Optional. Friendly update name.
+                  }, # Required. Update information.
+                  deviceCount: number, # Required. Total number of devices for which the update is applicable.
+                }
+    ```
+
+    </p>
+  examples: >-
+    This sample shows how to call GetBestUpdatesForGroups with required parameters and parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new DeviceManagementClient(endpoint, "<instanceId>", credential);
+
+
+    foreach (var data in client.GetBestUpdatesForGroups("<groupId>"))
+
+    {
+        JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        Console.WriteLine(result.GetProperty("groupId").ToString());
+        Console.WriteLine(result.GetProperty("deviceClassId").ToString());
+        Console.WriteLine(result.GetProperty("update").GetProperty("updateId").GetProperty("provider").ToString());
+        Console.WriteLine(result.GetProperty("update").GetProperty("updateId").GetProperty("name").ToString());
+        Console.WriteLine(result.GetProperty("update").GetProperty("updateId").GetProperty("version").ToString());
+        Console.WriteLine(result.GetProperty("update").GetProperty("description").ToString());
+        Console.WriteLine(result.GetProperty("update").GetProperty("friendlyName").ToString());
+        Console.WriteLine(result.GetProperty("deviceCount").ToString());
+    }
+
+    ```
+  metadata: {}
+- returnsWithMoniker:
+    type:
+    - value: <xref href="Azure.Pageable`1?alt=Azure.Pageable&text=Pageable" data-throw-if-not-resolved="True"/>&lt;<xref href="System.BinaryData?alt=System.BinaryData&text=BinaryData" data-throw-if-not-resolved="True"/>&gt;
+    description: The <xref data-throw-if-not-resolved="true" uid="Azure.Pageable`1"></xref> from the service containing a list of <xref data-throw-if-not-resolved="true" uid="System.BinaryData"></xref> objects. Details of the body schema for each item in the collection are in the Remarks section below.
+  parameters:
+  - namesWithMoniker:
+    - value: groupId
+    description: Group identity.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: filter
+    description: Restricts the set of bestUpdates returned. You can filter on update Provider, Name and Version property. This filter is deprecated and should not be used.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">groupId</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: <code data-dev-comment-type="paramref">groupId</code> is an empty string, and was expected to be non-empty.
+    type: <xref href="System.ArgumentException" data-throw-if-not-resolved="True"/>
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.IoT.DeviceUpdate.DeviceManagementClient.GetBestUpdatesForGroups(System.String,System.String,Azure.RequestContext)
+  commentId: M:Azure.IoT.DeviceUpdate.DeviceManagementClient.GetBestUpdatesForGroups(System.String,System.String,Azure.RequestContext)
+  name: GetBestUpdatesForGroups(String, String, RequestContext)
+  fullName: Azure.IoT.DeviceUpdate.DeviceManagementClient.GetBestUpdatesForGroups(String, String, RequestContext)
+  nameWithType: DeviceManagementClient.GetBestUpdatesForGroups(String, String, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual Azure.Pageable<BinaryData> GetBestUpdatesForGroups (string groupId, string filter = default, Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member GetBestUpdatesForGroups : string * string * Azure.RequestContext -> Azure.Pageable<BinaryData>
+
+        override this.GetBestUpdatesForGroups : string * string * Azure.RequestContext -> Azure.Pageable<BinaryData>
+  - lang: vb
+    values:
+    - value: Public Overridable Function GetBestUpdatesForGroups (groupId As String, Optional filter As String = Nothing, Optional context As RequestContext = Nothing) As Pageable(Of BinaryData)
+  monikers:
+  - azure-dotnet-preview
+  summary: Get the best available updates for a device group and a count of how many devices need each update.
+  remarks: >-
+    <p>Below is the JSON schema for one item in the pageable response.</p><p>Response Body:</p><p>Schema for <code data-dev-comment-type="c">DeviceClassSubgroupUpdatableDevicesListValue</code>: 
+
+
+    ```
+
+    {
+                  groupId: string, # Required. The group Id
+                  deviceClassId: string, # Required. The device class subgroup's device class Id
+                  update: {
+                    updateId: {
+                      provider: string, # Required. Update provider.
+                      name: string, # Required. Update name.
+                      version: string, # Required. Update version.
+                    }, # Required. Update identifier.
+                    description: string, # Optional. Update description.
+                    friendlyName: string, # Optional. Friendly update name.
+                  }, # Required. Update information.
+                  deviceCount: number, # Required. Total number of devices for which the update is applicable.
+                }
+    ```
+
+    </p>
+  metadata: {}
+uid: Azure.IoT.DeviceUpdate.DeviceManagementClient.GetBestUpdatesForGroups*
+commentId: Overload:Azure.IoT.DeviceUpdate.DeviceManagementClient.GetBestUpdatesForGroups
+namespace: Azure.IoT.DeviceUpdate
+name: GetBestUpdatesForGroups
+fullName: Azure.IoT.DeviceUpdate.DeviceManagementClient.GetBestUpdatesForGroups
+nameWithType: DeviceManagementClient.GetBestUpdatesForGroups
+assembliesWithMoniker:
+- value: Azure.IoT.DeviceUpdate.dll
+packagesWithMoniker:
+- value: Azure.IoT.DeviceUpdate v1.0.0
+  monikers:
+  - azure-dotnet
+- value: Azure.IoT.DeviceUpdate v1.0.0-beta.4
+  monikers:
+  - azure-dotnet-preview
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.IoT.DeviceUpdate.DeviceManagementClient.GetBestUpdatesForGroups
+  api_location:
+  - Azure.IoT.DeviceUpdate.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.IoT.DeviceUpdate.DeviceManagementClient.GetBestUpdatesForGroups
+  - Azure::IoT::DeviceUpdate::DeviceManagementClient::GetBestUpdatesForGroups
+  - GetBestUpdatesForGroups
+  - DeviceManagementClient.GetBestUpdatesForGroups
+  - DeviceManagementClient::GetBestUpdatesForGroups
+  helpviewer_keywords:
+  - DeviceManagementClient.GetBestUpdatesForGroups method [.NET]
+  - GetBestUpdatesForGroups method [.NET], class DeviceManagementClient
+  - DeviceManagementClient.GetBestUpdatesForGroups(String, RequestContext) method [.NET]
+  - GetBestUpdatesForGroups(String, RequestContext) method [.NET], class DeviceManagementClient
+  - DeviceManagementClient.GetBestUpdatesForGroups(String, String, RequestContext) method [.NET]
+  - GetBestUpdatesForGroups(String, String, RequestContext) method [.NET], class DeviceManagementClient
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview

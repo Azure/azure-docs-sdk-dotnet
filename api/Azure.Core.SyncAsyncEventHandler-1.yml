@@ -1,0 +1,176 @@
+### YamlMime:NetDelegate
+typeParameters:
+- description: >-
+    Type of the event arguments deriving or equal to
+
+    <xref data-throw-if-not-resolved="true" uid="Azure.SyncAsyncEventArgs"></xref>.
+  name: T
+returnsWithMoniker:
+  type:
+  - value: <xref href="System.Threading.Tasks.Task?alt=System.Threading.Tasks.Task&text=Task" data-throw-if-not-resolved="True"/>
+  description: >-
+    A task that represents the handler.  You can return
+
+    <xref data-throw-if-not-resolved="true" uid="System.Threading.Tasks.Task.CompletedTask"></xref> if implementing a sync handler.
+
+    Please see the Remarks section for more details.
+parameters:
+- namesWithMoniker:
+  - value: e
+  description: >-
+    An <xref data-throw-if-not-resolved="true" uid="Azure.SyncAsyncEventArgs"></xref> instance that contains the event
+
+    data.
+  type: T
+inheritances:
+- <xref href="System.Delegate" data-throw-if-not-resolved="True"/>
+uid: Azure.Core.SyncAsyncEventHandler`1
+commentId: T:Azure.Core.SyncAsyncEventHandler`1
+namespace: Azure.Core
+name: SyncAsyncEventHandler<T>
+fullName: Azure.Core.SyncAsyncEventHandler<T>
+nameWithType: Azure.Core.SyncAsyncEventHandler<T>
+assembliesWithMoniker:
+- value: Azure.Core.dll
+packagesWithMoniker:
+- value: Azure.Core v1.34.0
+syntaxWithMoniker:
+- lang: csharp
+  values:
+  - value: 'public delegate System.Threading.Tasks.Task SyncAsyncEventHandler<T>(T e) where T : SyncAsyncEventArgs;'
+- lang: fsharp
+  values:
+  - value: type SyncAsyncEventHandler<'T (requires 'T :> SyncAsyncEventArgs)> = delegate of 'T -> Task
+- lang: vb
+  values:
+  - value: 'Public Delegate Function SyncAsyncEventHandler(Of T)(e As T) As Task '
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet
+summary: >-
+  Represents a method that can handle an event and execute either
+
+  synchronously or asynchronously.
+remarks: "<p>Most Azure client libraries for .NET offer both synchronous and asynchronous methods for calling Azure services.  You can distinguish the asynchronous methods by their Async suffix.  For example, BlobClient.Download and BlobClient.DownloadAsync make the same underlying REST call and only differ in whether they block.  We recommend using our async methods for new applications, but there are perfectly valid cases for using sync methods as well.  These dual method invocation semantics allow for flexibility, but require a little extra care when writing event handlers.</p><p>The SyncAsyncEventHandler is a delegate used by events in Azure client libraries to represent an event handler that can be invoked from either sync or async code paths.  It takes event arguments deriving from <xref data-throw-if-not-resolved=\"true\" uid=\"Azure.SyncAsyncEventArgs\"></xref> that contain important information for writing your event handler: <ul><li><xref data-throw-if-not-resolved=\"true\" uid=\"Azure.SyncAsyncEventArgs.CancellationToken\"></xref> is a cancellation token related to the original operation that raised the event.  It's important for your handler to pass this token along to any asynchronous or long-running synchronous operations that take a token so cancellation (via something like <code data-dev-comment-type=\"c\">new CancellationTokenSource(TimeSpan.FromSeconds(10)).Token</code>, for example) will correctly propagate. </li><li><xref data-throw-if-not-resolved=\"true\" uid=\"Azure.SyncAsyncEventArgs.IsRunningSynchronously\"></xref> is a flag indicating whether your handler was invoked synchronously or asynchronously.  If you're calling sync methods on your client, you should use sync methods to implement your event handler (you can return <xref data-throw-if-not-resolved=\"true\" uid=\"System.Threading.Tasks.Task.CompletedTask\"></xref>).  If you're calling async methods on your client, you should use async methods where possible to implement your event handler.  If you're not in control of how the client will be used or want to write safer code, you should check the <xref data-throw-if-not-resolved=\"true\" uid=\"Azure.SyncAsyncEventArgs.IsRunningSynchronously\"></xref> property and call either sync or async methods as directed. </li><li> Most events will customize the event data by deriving from <xref data-throw-if-not-resolved=\"true\" uid=\"Azure.SyncAsyncEventArgs\"></xref> and including details about what triggered the event or providing options to react.  Many times this will include a reference to the client that raised the event in case you need it for additional processing. </li></ul></p><p>When an event using SyncAsyncEventHandler is raised, the handlers will be executed sequentially to avoid introducing any unintended parallelism.  The event handlers will finish before returning control to the code path raising the event.  This means blocking for events raised synchronously and waiting for the returned <xref data-throw-if-not-resolved=\"true\" uid=\"System.Threading.Tasks.Task\"></xref> to complete for events raised asynchronously.</p><p>Any exceptions thrown from a handler will be wrapped in a single <xref data-throw-if-not-resolved=\"true\" uid=\"System.AggregateException\"></xref>.  If one handler throws an exception, it will not prevent other handlers from running.  This is also relevant for cancellation because all handlers are still raised if cancellation occurs.  You should both pass <xref data-throw-if-not-resolved=\"true\" uid=\"Azure.SyncAsyncEventArgs.CancellationToken\"></xref> to asynchronous or long-running synchronous operations and consider calling <xref data-throw-if-not-resolved=\"true\" uid=\"System.Threading.CancellationToken.ThrowIfCancellationRequested\"></xref> in compute heavy handlers.</p><p>A <a href=\"https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md#distributed-tracing\"> distributed tracing span</a> is wrapped around your handlers using the event name so you can see how long your handlers took to run, whether they made other calls to Azure services, and details about any exceptions that were thrown.</p><p>Executing asynchronous code from a sync code path is commonly referred to as sync-over-async because you're getting sync behavior but still invoking all the async machinery. See <a href=\"https://docs.microsoft.com/archive/blogs/vancem/diagnosing-net-core-threadpool-starvation-with-perfview-why-my-service-is-not-saturating-all-cores-or-seems-to-stall\"> Diagnosing.NET Core ThreadPool Starvation with PerfView</a> for a detailed explanation of how that can cause serious performance problems.  We recommend you use the <xref data-throw-if-not-resolved=\"true\" uid=\"Azure.SyncAsyncEventArgs.IsRunningSynchronously\"></xref> flag to avoid ThreadPool starvation.</p>"
+examples: >+
+  <p>
+         If you're using the synchronous, blocking methods of a client (i.e.,
+         methods without an Async suffix), they will raise events that require
+         handlers to execute synchronously as well.  Even though the signature
+         of your handler returns a <xref data-throw-if-not-resolved="true" uid="System.Threading.Tasks.Task"></xref>, you should write regular
+         sync code that blocks and return <xref data-throw-if-not-resolved="true" uid="System.Threading.Tasks.Task.CompletedTask"></xref> when
+         finished.
+
+  ```csharp
+
+  var client = new AlarmClient();
+
+  client.Ring += (SyncAsyncEventArgs e) =>
+
+  {
+      Console.WriteLine("Wake up!");
+      return Task.CompletedTask;
+  };
+
+
+  client.Snooze();
+
+  ```
+         If you need to call an async method from a synchronous event handler,
+         you have two options.  You can use <xref data-throw-if-not-resolved="true" uid="System.Threading.Tasks.Task.Run(System.Action)"></xref> to
+         queue a task for execution on the ThreadPool without waiting on it to
+         complete.  This "fire and forget" approach may not run before your
+         handler finishes executing.  Be sure to understand
+  <a href="https://docs.microsoft.com/dotnet/standard/parallel-programming/exception-handling-task-parallel-library">
+         exception handling in the Task Parallel Library</a> to avoid
+         unhandled exceptions tearing down your process.  If you absolutely need
+         the async method to execute before returning from your handler, you can
+         call <code data-dev-comment-type="c">myAsyncTask.GetAwaiter().GetResult()</code>.  Please be aware
+         this may cause ThreadPool starvation.  See the sync-over-async note in
+         Remarks for more details.
+  </p>
+
+  <p>
+         If you're using the asynchronous, non-blocking methods of a client
+         (i.e., methods with an Async suffix), they will raise events that
+         expect handlers to execute asynchronously.
+
+  ```csharp
+
+  var client = new AlarmClient();
+
+  client.Ring += async (SyncAsyncEventArgs e) =>
+
+  {
+      await Console.Out.WriteLineAsync("Wake up!");
+  };
+
+
+  await client.SnoozeAsync();
+
+  ```
+
+  </p>
+
+  <p>
+         The same event can be raised from both synchronous and asynchronous
+         code paths depending on whether you're calling sync or async methods
+         on a client.  If you write an async handler but raise it from a sync
+         method, the handler will be doing sync-over-async and may cause
+         ThreadPool starvation.  See the note in Remarks for more details.  You
+         should use the <xref data-throw-if-not-resolved="true" uid="Azure.SyncAsyncEventArgs.IsRunningSynchronously"></xref>
+         property to check how the event is being raised and implement your
+         handler accordingly.  Here's an example handler that's safe to invoke
+         from both sync and async code paths.
+
+  ```csharp
+
+  var client = new AlarmClient();
+
+  client.Ring += async (SyncAsyncEventArgs e) =>
+
+  {
+      if (e.IsRunningSynchronously)
+      {
+          Console.WriteLine("Wake up!");
+      }
+      else
+      {
+          await Console.Out.WriteLineAsync("Wake up!");
+      }
+  };
+
+
+  client.Snooze(); // sync call that blocks
+
+  await client.SnoozeAsync(); // async call that doesn't block
+
+  ```
+
+  </p>
+
+metadata:
+  api_name:
+  - Azure.Core.SyncAsyncEventHandler`1
+  - Azure.Core.SyncAsyncEventHandler`1..ctor
+  - Azure.Core.SyncAsyncEventHandler`1.Invoke
+  - Azure.Core.SyncAsyncEventHandler`1.BeginInvoke
+  - Azure.Core.SyncAsyncEventHandler`1.EndInvoke
+  api_location:
+  - Azure.Core.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.Core.SyncAsyncEventHandler`1
+  - Azure::Core::SyncAsyncEventHandler`1
+  - Azure.Core.SyncAsyncEventHandler
+  - SyncAsyncEventHandler`1
+  helpviewer_keywords:
+  - Azure.Core.SyncAsyncEventHandler<T> delegate [.NET]
+  monikers:
+  - azure-dotnet

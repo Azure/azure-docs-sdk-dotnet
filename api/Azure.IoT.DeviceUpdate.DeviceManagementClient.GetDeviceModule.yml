@@ -1,0 +1,215 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="Azure.Response?alt=Azure.Response&text=Response" data-throw-if-not-resolved="True"/>
+    description: The response returned from the service. Details of the response body schema are in the Remarks section below.
+  parameters:
+  - namesWithMoniker:
+    - value: deviceId
+    description: Device identifier in Azure IoT Hub.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: moduleId
+    description: Device module identifier in Azure IoT Hub.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">deviceId</code> or <code data-dev-comment-type="paramref">moduleId</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: <code data-dev-comment-type="paramref">deviceId</code> or <code data-dev-comment-type="paramref">moduleId</code> is an empty string, and was expected to be non-empty.
+    type: <xref href="System.ArgumentException" data-throw-if-not-resolved="True"/>
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.IoT.DeviceUpdate.DeviceManagementClient.GetDeviceModule(System.String,System.String,Azure.RequestContext)
+  commentId: M:Azure.IoT.DeviceUpdate.DeviceManagementClient.GetDeviceModule(System.String,System.String,Azure.RequestContext)
+  name: GetDeviceModule(String, String, RequestContext)
+  fullName: Azure.IoT.DeviceUpdate.DeviceManagementClient.GetDeviceModule(String, String, RequestContext)
+  nameWithType: DeviceManagementClient.GetDeviceModule(String, String, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual Azure.Response GetDeviceModule (string deviceId, string moduleId, Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member GetDeviceModule : string * string * Azure.RequestContext -> Azure.Response
+
+        override this.GetDeviceModule : string * string * Azure.RequestContext -> Azure.Response
+  - lang: vb
+    values:
+    - value: Public Overridable Function GetDeviceModule (deviceId As String, moduleId As String, Optional context As RequestContext = Nothing) As Response
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview
+  summary: Gets the device module properties and latest deployment status for a device module connected to Device Update for IoT Hub.
+  remarks: >-
+    <p>Below is the JSON schema for the response payload.</p><p>Response Body:</p><p>Schema for <code data-dev-comment-type="c">Device</code>: 
+
+
+    ```
+
+    {
+                  deviceId: string, # Required. Device identity.
+                  moduleId: string, # Optional. Device module identity.
+                  deviceClassId: string, # Required. Device class identity.
+                  groupId: string, # Optional. Device group identity.
+                  lastAttemptedUpdate: {
+                    updateId: {
+                      provider: string, # Required. Update provider.
+                      name: string, # Required. Update name.
+                      version: string, # Required. Update version.
+                    }, # Required. Update identifier.
+                    description: string, # Optional. Update description.
+                    friendlyName: string, # Optional. Friendly update name.
+                  }, # Optional. The update that device last attempted to install.
+                  deploymentStatus: "Succeeded" | "InProgress" | "Canceled" | "Failed", # Optional. State of the device in its last deployment.
+                  installedUpdate: UpdateInfo, # Optional. Currently installed update on device.
+                  onLatestUpdate: boolean, # Required. Boolean flag indicating whether the latest update (the best compatible update for the device's device class and group) is installed on the device
+                  lastDeploymentId: string, # Optional. The deployment identifier for the last deployment to the device
+                  lastInstallResult: {
+                    resultCode: number, # Required. Install result code.
+                    extendedResultCode: number, # Required. Install extended result code
+                    resultDetails: string, # Optional. A string containing further details about the install result
+                    stepResults: [
+                      {
+                        update: UpdateInfo, # Optional. The update that this step installs if it is of reference type.
+                        description: string, # Optional. Step description.
+                        resultCode: number, # Required. Install result code.
+                        extendedResultCode: number, # Required. Install extended result code
+                        resultDetails: string, # Optional. A string containing further details about the install result
+                      }
+                    ], # Optional. Array of step results
+                  }, # Optional. Last install result.
+                }
+    ```
+
+    </p>
+  examples: >-
+    This sample shows how to call GetDeviceModule with required parameters and parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new DeviceManagementClient(endpoint, "<instanceId>", credential);
+
+
+    Response response = client.GetDeviceModule("<deviceId>", "<moduleId>");
+
+
+    JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+
+    Console.WriteLine(result.GetProperty("deviceId").ToString());
+
+    Console.WriteLine(result.GetProperty("moduleId").ToString());
+
+    Console.WriteLine(result.GetProperty("deviceClassId").ToString());
+
+    Console.WriteLine(result.GetProperty("groupId").ToString());
+
+    Console.WriteLine(result.GetProperty("lastAttemptedUpdate").GetProperty("updateId").GetProperty("provider").ToString());
+
+    Console.WriteLine(result.GetProperty("lastAttemptedUpdate").GetProperty("updateId").GetProperty("name").ToString());
+
+    Console.WriteLine(result.GetProperty("lastAttemptedUpdate").GetProperty("updateId").GetProperty("version").ToString());
+
+    Console.WriteLine(result.GetProperty("lastAttemptedUpdate").GetProperty("description").ToString());
+
+    Console.WriteLine(result.GetProperty("lastAttemptedUpdate").GetProperty("friendlyName").ToString());
+
+    Console.WriteLine(result.GetProperty("deploymentStatus").ToString());
+
+    Console.WriteLine(result.GetProperty("installedUpdate").GetProperty("updateId").GetProperty("provider").ToString());
+
+    Console.WriteLine(result.GetProperty("installedUpdate").GetProperty("updateId").GetProperty("name").ToString());
+
+    Console.WriteLine(result.GetProperty("installedUpdate").GetProperty("updateId").GetProperty("version").ToString());
+
+    Console.WriteLine(result.GetProperty("installedUpdate").GetProperty("description").ToString());
+
+    Console.WriteLine(result.GetProperty("installedUpdate").GetProperty("friendlyName").ToString());
+
+    Console.WriteLine(result.GetProperty("onLatestUpdate").ToString());
+
+    Console.WriteLine(result.GetProperty("lastDeploymentId").ToString());
+
+    Console.WriteLine(result.GetProperty("lastInstallResult").GetProperty("resultCode").ToString());
+
+    Console.WriteLine(result.GetProperty("lastInstallResult").GetProperty("extendedResultCode").ToString());
+
+    Console.WriteLine(result.GetProperty("lastInstallResult").GetProperty("resultDetails").ToString());
+
+    Console.WriteLine(result.GetProperty("lastInstallResult").GetProperty("stepResults")[0].GetProperty("update").GetProperty("updateId").GetProperty("provider").ToString());
+
+    Console.WriteLine(result.GetProperty("lastInstallResult").GetProperty("stepResults")[0].GetProperty("update").GetProperty("updateId").GetProperty("name").ToString());
+
+    Console.WriteLine(result.GetProperty("lastInstallResult").GetProperty("stepResults")[0].GetProperty("update").GetProperty("updateId").GetProperty("version").ToString());
+
+    Console.WriteLine(result.GetProperty("lastInstallResult").GetProperty("stepResults")[0].GetProperty("update").GetProperty("description").ToString());
+
+    Console.WriteLine(result.GetProperty("lastInstallResult").GetProperty("stepResults")[0].GetProperty("update").GetProperty("friendlyName").ToString());
+
+    Console.WriteLine(result.GetProperty("lastInstallResult").GetProperty("stepResults")[0].GetProperty("description").ToString());
+
+    Console.WriteLine(result.GetProperty("lastInstallResult").GetProperty("stepResults")[0].GetProperty("resultCode").ToString());
+
+    Console.WriteLine(result.GetProperty("lastInstallResult").GetProperty("stepResults")[0].GetProperty("extendedResultCode").ToString());
+
+    Console.WriteLine(result.GetProperty("lastInstallResult").GetProperty("stepResults")[0].GetProperty("resultDetails").ToString());
+
+    ```
+  metadata: {}
+uid: Azure.IoT.DeviceUpdate.DeviceManagementClient.GetDeviceModule*
+commentId: Overload:Azure.IoT.DeviceUpdate.DeviceManagementClient.GetDeviceModule
+namespace: Azure.IoT.DeviceUpdate
+name: GetDeviceModule
+fullName: Azure.IoT.DeviceUpdate.DeviceManagementClient.GetDeviceModule
+nameWithType: DeviceManagementClient.GetDeviceModule
+assembliesWithMoniker:
+- value: Azure.IoT.DeviceUpdate.dll
+packagesWithMoniker:
+- value: Azure.IoT.DeviceUpdate v1.0.0
+  monikers:
+  - azure-dotnet
+- value: Azure.IoT.DeviceUpdate v1.0.0-beta.4
+  monikers:
+  - azure-dotnet-preview
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.IoT.DeviceUpdate.DeviceManagementClient.GetDeviceModule
+  api_location:
+  - Azure.IoT.DeviceUpdate.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.IoT.DeviceUpdate.DeviceManagementClient.GetDeviceModule
+  - Azure::IoT::DeviceUpdate::DeviceManagementClient::GetDeviceModule
+  - GetDeviceModule
+  - DeviceManagementClient.GetDeviceModule
+  - DeviceManagementClient::GetDeviceModule
+  helpviewer_keywords:
+  - DeviceManagementClient.GetDeviceModule method [.NET]
+  - GetDeviceModule method [.NET], class DeviceManagementClient
+  - DeviceManagementClient.GetDeviceModule(String, String, RequestContext) method [.NET]
+  - GetDeviceModule(String, String, RequestContext) method [.NET], class DeviceManagementClient
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview

@@ -1,0 +1,114 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="System.Threading.Tasks.Task`1?alt=System.Threading.Tasks.Task&text=Task" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.Response`1?alt=Azure.Response&text=Response" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.Cosmos.Scripts.UserDefinedFunctionProperties?alt=Azure.Cosmos.Scripts.UserDefinedFunctionProperties&text=UserDefinedFunctionProperties" data-throw-if-not-resolved="True"/>&gt;&gt;
+    description: A task object representing the service response for the asynchronous operation.
+  parameters:
+  - namesWithMoniker:
+    - value: userDefinedFunctionProperties
+    description: The <xref data-throw-if-not-resolved="true" uid="Azure.Cosmos.Scripts.UserDefinedFunctionProperties"></xref> object.
+    type: <xref href="Azure.Cosmos.Scripts.UserDefinedFunctionProperties?alt=Azure.Cosmos.Scripts.UserDefinedFunctionProperties&text=UserDefinedFunctionProperties" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: requestOptions
+    description: (Optional) The options for the user defined function request <xref data-throw-if-not-resolved="true" uid="Azure.Cosmos.RequestOptions"></xref>
+    type: <xref href="Azure.Cosmos.RequestOptions?alt=Azure.Cosmos.RequestOptions&text=RequestOptions" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: cancellationToken
+    description: (Optional) <xref data-throw-if-not-resolved="true" uid="System.Threading.CancellationToken"></xref> representing request cancellation.
+    type: <xref href="System.Threading.CancellationToken?alt=System.Threading.CancellationToken&text=CancellationToken" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: If <code data-dev-comment-type="paramref">userDefinedFunctionProperties</code> is not set.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: Represents a consolidation of failures that occurred during async processing. Look within InnerExceptions to find the actual exception(s)
+    type: <xref href="System.AggregateException" data-throw-if-not-resolved="True"/>
+  - description: >-
+      This exception can encapsulate many different types of errors. To determine the specific error always look at the StatusCode property. Some common codes you may get when creating a user defined function are:
+                   <table><thead><tr><th>StatusCode</th><th>Reason for exception</th></tr></thead><tbody><tr><td>400</td><td>BadRequest - This means something was wrong with the request supplied. It is likely that an Id was not supplied for the new user defined function or that the Body was malformed.</td></tr><tr><td>403</td><td>Forbidden - You have reached your quota of user defined functions for the collection supplied. Contact support to have this quota increased.</td></tr><tr><td>409</td><td>Conflict - This means a <xref data-throw-if-not-resolved="true" uid="Azure.Cosmos.Scripts.UserDefinedFunctionProperties"></xref> with an id matching the id you supplied already existed.</td></tr><tr><td>413</td><td>RequestEntityTooLarge - This means the body of the <xref data-throw-if-not-resolved="true" uid="Azure.Cosmos.Scripts.UserDefinedFunctionProperties"></xref> you tried to create was too large.</td></tr></tbody></table>
+    type: <xref href="Azure.Cosmos.CosmosException?alt=Azure.Cosmos.CosmosException&text=CosmosException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.Cosmos.Scripts.CosmosScripts.CreateUserDefinedFunctionAsync(Azure.Cosmos.Scripts.UserDefinedFunctionProperties,Azure.Cosmos.RequestOptions,System.Threading.CancellationToken)
+  commentId: M:Azure.Cosmos.Scripts.CosmosScripts.CreateUserDefinedFunctionAsync(Azure.Cosmos.Scripts.UserDefinedFunctionProperties,Azure.Cosmos.RequestOptions,System.Threading.CancellationToken)
+  name: CreateUserDefinedFunctionAsync(UserDefinedFunctionProperties, RequestOptions, CancellationToken)
+  fullName: Azure.Cosmos.Scripts.CosmosScripts.CreateUserDefinedFunctionAsync(UserDefinedFunctionProperties, RequestOptions, CancellationToken)
+  nameWithType: CosmosScripts.CreateUserDefinedFunctionAsync(UserDefinedFunctionProperties, RequestOptions, CancellationToken)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public abstract System.Threading.Tasks.Task<Azure.Response<Azure.Cosmos.Scripts.UserDefinedFunctionProperties>> CreateUserDefinedFunctionAsync (Azure.Cosmos.Scripts.UserDefinedFunctionProperties userDefinedFunctionProperties, Azure.Cosmos.RequestOptions requestOptions = default, System.Threading.CancellationToken cancellationToken = default);
+  - lang: fsharp
+    values:
+    - value: 'abstract member CreateUserDefinedFunctionAsync : Azure.Cosmos.Scripts.UserDefinedFunctionProperties * Azure.Cosmos.RequestOptions * System.Threading.CancellationToken -> System.Threading.Tasks.Task<Azure.Response<Azure.Cosmos.Scripts.UserDefinedFunctionProperties>>'
+  - lang: vb
+    values:
+    - value: Public MustOverride Function CreateUserDefinedFunctionAsync (userDefinedFunctionProperties As UserDefinedFunctionProperties, Optional requestOptions As RequestOptions = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of UserDefinedFunctionProperties))
+  monikers:
+  - azure-dotnet-preview
+  summary: Creates a user defined function as an asynchronous operation in the Azure Cosmos DB service.
+  examples: >2-
+     This creates a user defined function then uses the function in an item query.
+
+    ```csharp
+
+    CosmosScripts scripts = this.container.Scripts;
+
+    await scripts.UserDefinedFunctions.CreateUserDefinedFunctionAsync(
+        new UserDefinedFunctionProperties 
+        { 
+            Id = "calculateTax", 
+            Body = @"function(amt) { return amt * 0.05; }" 
+        });
+
+    QueryDefinition sqlQuery = new QueryDefinition(
+        "SELECT VALUE udf.calculateTax(t.cost) FROM toDoActivity t where t.cost > @expensive and t.status = @status")
+        .WithParameter("@expensive", 9000)
+        .WithParameter("@status", "Done");
+
+    await foreach (double tax in this.container.Items.GetItemsQueryIterator<double>(
+        sqlQueryDefinition: sqlQuery,
+        partitionKey: "Done"))
+    {
+        Console.WriteLine(tax);
+    }
+
+    ```
+  metadata: {}
+uid: Azure.Cosmos.Scripts.CosmosScripts.CreateUserDefinedFunctionAsync*
+commentId: Overload:Azure.Cosmos.Scripts.CosmosScripts.CreateUserDefinedFunctionAsync
+namespace: Azure.Cosmos.Scripts
+name: CreateUserDefinedFunctionAsync
+fullName: Azure.Cosmos.Scripts.CosmosScripts.CreateUserDefinedFunctionAsync
+nameWithType: CosmosScripts.CreateUserDefinedFunctionAsync
+assembliesWithMoniker:
+- value: Azure.Cosmos.dll
+packagesWithMoniker:
+- value: Azure.Cosmos v4.0.0-preview3
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.Cosmos.Scripts.CosmosScripts.CreateUserDefinedFunctionAsync
+  api_location:
+  - Azure.Cosmos.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.Cosmos.Scripts.CosmosScripts.CreateUserDefinedFunctionAsync
+  - Azure::Cosmos::Scripts::CosmosScripts::CreateUserDefinedFunctionAsync
+  - CreateUserDefinedFunctionAsync
+  - CosmosScripts.CreateUserDefinedFunctionAsync
+  - CosmosScripts::CreateUserDefinedFunctionAsync
+  helpviewer_keywords:
+  - CosmosScripts.CreateUserDefinedFunctionAsync method [.NET]
+  - CreateUserDefinedFunctionAsync method [.NET], class CosmosScripts
+  - CosmosScripts.CreateUserDefinedFunctionAsync(UserDefinedFunctionProperties, RequestOptions, CancellationToken) method [.NET]
+  - CreateUserDefinedFunctionAsync(UserDefinedFunctionProperties, RequestOptions, CancellationToken) method [.NET], class CosmosScripts
+  monikers:
+  - azure-dotnet-preview

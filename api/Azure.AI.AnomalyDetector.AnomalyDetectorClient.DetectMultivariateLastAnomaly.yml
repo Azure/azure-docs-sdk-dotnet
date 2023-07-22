@@ -1,0 +1,317 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="Azure.Response?alt=Azure.Response&text=Response" data-throw-if-not-resolved="True"/>
+    description: The response returned from the service.
+  parameters:
+  - namesWithMoniker:
+    - value: modelId
+    description: Model identifier.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: content
+    description: The content to send as the body of the request.
+    type: <xref href="Azure.Core.RequestContent?alt=Azure.Core.RequestContent&text=RequestContent" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">modelId</code> or <code data-dev-comment-type="paramref">content</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: <code data-dev-comment-type="paramref">modelId</code> is an empty string, and was expected to be non-empty.
+    type: <xref href="System.ArgumentException" data-throw-if-not-resolved="True"/>
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.AI.AnomalyDetector.AnomalyDetectorClient.DetectMultivariateLastAnomaly(System.String,Azure.Core.RequestContent,Azure.RequestContext)
+  commentId: M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.DetectMultivariateLastAnomaly(System.String,Azure.Core.RequestContent,Azure.RequestContext)
+  name: DetectMultivariateLastAnomaly(String, RequestContent, RequestContext)
+  fullName: Azure.AI.AnomalyDetector.AnomalyDetectorClient.DetectMultivariateLastAnomaly(String, RequestContent, RequestContext)
+  nameWithType: AnomalyDetectorClient.DetectMultivariateLastAnomaly(String, RequestContent, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual Azure.Response DetectMultivariateLastAnomaly (string modelId, Azure.Core.RequestContent content, Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member DetectMultivariateLastAnomaly : string * Azure.Core.RequestContent * Azure.RequestContext -> Azure.Response
+
+        override this.DetectMultivariateLastAnomaly : string * Azure.Core.RequestContent * Azure.RequestContext -> Azure.Response
+  - lang: vb
+    values:
+    - value: Public Overridable Function DetectMultivariateLastAnomaly (modelId As String, content As RequestContent, Optional context As RequestContext = Nothing) As Response
+  monikers:
+  - azure-dotnet-preview
+  summary: >-
+    [Protocol Method] Detect anomalies in the last point of the request body
+
+    <ul><li>
+
+    This <a href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</a> allows explicit creation of the request and processing of the response for advanced scenarios.
+
+    </li><li>
+
+    Please try the simpler <xref data-throw-if-not-resolved="true" uid="Azure.AI.AnomalyDetector.AnomalyDetectorClient.DetectMultivariateLastAnomaly(System.String,Azure.AI.AnomalyDetector.MultivariateLastDetectionOptions,System.Threading.CancellationToken)"></xref> convenience overload with strongly typed models first.
+
+    </li></ul>
+  remarks: >-
+    <p>Submit multivariate anomaly detection task with the modelId of trained model and inference data, and the inference data should be put into request body in a JSON format. The request will complete synchronously and return the detection immediately in the response body.</p><p>Below is the JSON schema for the request and response payloads.</p><p>Request Body:</p><p>Schema for <code data-dev-comment-type="c">MultivariateLastDetectionOptions</code>: 
+
+
+    ```
+
+    {
+      variables: [
+        {
+          variable: string, # Required.
+          timestamps: [string], # Required.
+          values: [number], # Required.
+        }
+      ], # Required.
+      topContributorCount: number, # Required.
+    }
+
+    ```
+
+    </p><p>Response Body:</p><p>Schema for <code data-dev-comment-type="c">MultivariateLastDetectionResult</code>: 
+
+
+    ```
+
+    {
+      variableStates: [
+        {
+          variable: string, # Optional.
+          filledNARatio: number, # Optional.
+          effectiveCount: number, # Optional.
+          firstTimestamp: string (date & time), # Optional.
+          lastTimestamp: string (date & time), # Optional.
+        }
+      ], # Optional.
+      results: [AnomalyState], # Optional.
+    }
+
+    ```
+
+    </p>
+  examples: >-
+    This sample shows how to call DetectMultivariateLastAnomaly with required parameters and request content, and how to parse the result.
+
+
+    ```
+
+    var credential = new AzureKeyCredential("<key>");
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new AnomalyDetectorClient(endpoint, credential);
+
+
+    var data = new {
+        variables = new[] {
+            new {
+                variable = "<variable>",
+                timestamps = new[] {
+                    "<String>"
+                },
+                values = new[] {
+                    123.45f
+                },
+            }
+        },
+    };
+
+
+    Response response = client.DetectMultivariateLastAnomaly("<modelId>", RequestContent.Create(data));
+
+
+    JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+
+    Console.WriteLine(result.ToString());
+
+    ```
+
+    This sample shows how to call DetectMultivariateLastAnomaly with all parameters and request content, and how to parse the result.
+
+
+    ```
+
+    var credential = new AzureKeyCredential("<key>");
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new AnomalyDetectorClient(endpoint, credential);
+
+
+    var data = new {
+        variables = new[] {
+            new {
+                variable = "<variable>",
+                timestamps = new[] {
+                    "<String>"
+                },
+                values = new[] {
+                    123.45f
+                },
+            }
+        },
+        topContributorCount = 1234,
+    };
+
+
+    Response response = client.DetectMultivariateLastAnomaly("<modelId>", RequestContent.Create(data), new RequestContext());
+
+
+    JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+
+    Console.WriteLine(result.GetProperty("variableStates")[0].GetProperty("variable").ToString());
+
+    Console.WriteLine(result.GetProperty("variableStates")[0].GetProperty("filledNARatio").ToString());
+
+    Console.WriteLine(result.GetProperty("variableStates")[0].GetProperty("effectiveCount").ToString());
+
+    Console.WriteLine(result.GetProperty("variableStates")[0].GetProperty("firstTimestamp").ToString());
+
+    Console.WriteLine(result.GetProperty("variableStates")[0].GetProperty("lastTimestamp").ToString());
+
+    Console.WriteLine(result.GetProperty("results")[0].GetProperty("timestamp").ToString());
+
+    Console.WriteLine(result.GetProperty("results")[0].GetProperty("value").GetProperty("isAnomaly").ToString());
+
+    Console.WriteLine(result.GetProperty("results")[0].GetProperty("value").GetProperty("severity").ToString());
+
+    Console.WriteLine(result.GetProperty("results")[0].GetProperty("value").GetProperty("score").ToString());
+
+    Console.WriteLine(result.GetProperty("results")[0].GetProperty("value").GetProperty("interpretation")[0].GetProperty("variable").ToString());
+
+    Console.WriteLine(result.GetProperty("results")[0].GetProperty("value").GetProperty("interpretation")[0].GetProperty("contributionScore").ToString());
+
+    Console.WriteLine(result.GetProperty("results")[0].GetProperty("value").GetProperty("interpretation")[0].GetProperty("correlationChanges").GetProperty("changedVariables")[0].ToString());
+
+    Console.WriteLine(result.GetProperty("results")[0].GetProperty("errors")[0].GetProperty("code").ToString());
+
+    Console.WriteLine(result.GetProperty("results")[0].GetProperty("errors")[0].GetProperty("message").ToString());
+
+    ```
+  metadata: {}
+- returnsWithMoniker:
+    type:
+    - value: <xref href="Azure.Response`1?alt=Azure.Response&text=Response" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.AI.AnomalyDetector.MultivariateLastDetectionResult?alt=Azure.AI.AnomalyDetector.MultivariateLastDetectionResult&text=MultivariateLastDetectionResult" data-throw-if-not-resolved="True"/>&gt;
+  parameters:
+  - namesWithMoniker:
+    - value: modelId
+    description: Model identifier.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: options
+    description: Request of the last detection.
+    type: <xref href="Azure.AI.AnomalyDetector.MultivariateLastDetectionOptions?alt=Azure.AI.AnomalyDetector.MultivariateLastDetectionOptions&text=MultivariateLastDetectionOptions" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: cancellationToken
+    description: The cancellation token to use.
+    type: <xref href="System.Threading.CancellationToken?alt=System.Threading.CancellationToken&text=CancellationToken" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">modelId</code> or <code data-dev-comment-type="paramref">options</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: <code data-dev-comment-type="paramref">modelId</code> is an empty string, and was expected to be non-empty.
+    type: <xref href="System.ArgumentException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.AI.AnomalyDetector.AnomalyDetectorClient.DetectMultivariateLastAnomaly(System.String,Azure.AI.AnomalyDetector.MultivariateLastDetectionOptions,System.Threading.CancellationToken)
+  commentId: M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.DetectMultivariateLastAnomaly(System.String,Azure.AI.AnomalyDetector.MultivariateLastDetectionOptions,System.Threading.CancellationToken)
+  name: DetectMultivariateLastAnomaly(String, MultivariateLastDetectionOptions, CancellationToken)
+  fullName: Azure.AI.AnomalyDetector.AnomalyDetectorClient.DetectMultivariateLastAnomaly(String, MultivariateLastDetectionOptions, CancellationToken)
+  nameWithType: AnomalyDetectorClient.DetectMultivariateLastAnomaly(String, MultivariateLastDetectionOptions, CancellationToken)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual Azure.Response<Azure.AI.AnomalyDetector.MultivariateLastDetectionResult> DetectMultivariateLastAnomaly (string modelId, Azure.AI.AnomalyDetector.MultivariateLastDetectionOptions options, System.Threading.CancellationToken cancellationToken = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member DetectMultivariateLastAnomaly : string * Azure.AI.AnomalyDetector.MultivariateLastDetectionOptions * System.Threading.CancellationToken -> Azure.Response<Azure.AI.AnomalyDetector.MultivariateLastDetectionResult>
+
+        override this.DetectMultivariateLastAnomaly : string * Azure.AI.AnomalyDetector.MultivariateLastDetectionOptions * System.Threading.CancellationToken -> Azure.Response<Azure.AI.AnomalyDetector.MultivariateLastDetectionResult>
+  - lang: vb
+    values:
+    - value: Public Overridable Function DetectMultivariateLastAnomaly (modelId As String, options As MultivariateLastDetectionOptions, Optional cancellationToken As CancellationToken = Nothing) As Response(Of MultivariateLastDetectionResult)
+  monikers:
+  - azure-dotnet-preview
+  summary: Detect anomalies in the last point of the request body.
+  remarks: <p>Submit a multivariate anomaly detection task with the modelId value of a trained model and inference data. The inference data should be put into the request body in JSON format. The request will finish synchronously and return the detection immediately in the response body.</p>
+  examples: >-
+    This sample shows how to call DetectMultivariateLastAnomaly with required parameters.
+
+
+    ```
+
+    var credential = new AzureKeyCredential("<key>");
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new AnomalyDetectorClient(endpoint, credential);
+
+
+    var options = new MultivariateLastDetectionOptions(new VariableValues[] 
+
+    {
+        new VariableValues("<variable>", new string[] 
+    {
+            "<null>"
+        }, new float[] 
+    {
+            3.14f
+        })
+    })
+
+    {
+        TopContributorCount = 1234,
+    };
+
+    var result = client.DetectMultivariateLastAnomaly("<modelId>", options);
+
+    ```
+  metadata: {}
+uid: Azure.AI.AnomalyDetector.AnomalyDetectorClient.DetectMultivariateLastAnomaly*
+commentId: Overload:Azure.AI.AnomalyDetector.AnomalyDetectorClient.DetectMultivariateLastAnomaly
+namespace: Azure.AI.AnomalyDetector
+name: DetectMultivariateLastAnomaly
+fullName: Azure.AI.AnomalyDetector.AnomalyDetectorClient.DetectMultivariateLastAnomaly
+nameWithType: AnomalyDetectorClient.DetectMultivariateLastAnomaly
+assembliesWithMoniker:
+- value: Azure.AI.AnomalyDetector.dll
+packagesWithMoniker:
+- value: Azure.AI.AnomalyDetector v3.0.0-preview.7
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.AI.AnomalyDetector.AnomalyDetectorClient.DetectMultivariateLastAnomaly
+  api_location:
+  - Azure.AI.AnomalyDetector.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.AI.AnomalyDetector.AnomalyDetectorClient.DetectMultivariateLastAnomaly
+  - Azure::AI::AnomalyDetector::AnomalyDetectorClient::DetectMultivariateLastAnomaly
+  - DetectMultivariateLastAnomaly
+  - AnomalyDetectorClient.DetectMultivariateLastAnomaly
+  - AnomalyDetectorClient::DetectMultivariateLastAnomaly
+  helpviewer_keywords:
+  - AnomalyDetectorClient.DetectMultivariateLastAnomaly method [.NET]
+  - DetectMultivariateLastAnomaly method [.NET], class AnomalyDetectorClient
+  - AnomalyDetectorClient.DetectMultivariateLastAnomaly(String, RequestContent, RequestContext) method [.NET]
+  - DetectMultivariateLastAnomaly(String, RequestContent, RequestContext) method [.NET], class AnomalyDetectorClient
+  - AnomalyDetectorClient.DetectMultivariateLastAnomaly(String, MultivariateLastDetectionOptions, CancellationToken) method [.NET]
+  - DetectMultivariateLastAnomaly(String, MultivariateLastDetectionOptions, CancellationToken) method [.NET], class AnomalyDetectorClient
+  monikers:
+  - azure-dotnet-preview

@@ -1,0 +1,126 @@
+### YamlMime:NetType
+type: class
+inheritancesWithMoniker:
+- values:
+  - <xref href="System.Object?alt=System.Object&text=Object" data-throw-if-not-resolved="True"/>
+constructors:
+- uid: Azure.Cosmos.DatabaseProperties.#ctor
+  monikers:
+  - azure-dotnet-preview
+- uid: Azure.Cosmos.DatabaseProperties.#ctor(System.String)
+  monikers:
+  - azure-dotnet-preview
+properties:
+- uid: Azure.Cosmos.DatabaseProperties.ETag
+  monikers:
+  - azure-dotnet-preview
+- uid: Azure.Cosmos.DatabaseProperties.Id
+  monikers:
+  - azure-dotnet-preview
+- uid: Azure.Cosmos.DatabaseProperties.LastModified
+  monikers:
+  - azure-dotnet-preview
+uid: Azure.Cosmos.DatabaseProperties
+commentId: T:Azure.Cosmos.DatabaseProperties
+namespace: Azure.Cosmos
+name: DatabaseProperties
+fullName: Azure.Cosmos.DatabaseProperties
+nameWithType: Azure.Cosmos.DatabaseProperties
+assembliesWithMoniker:
+- value: Azure.Cosmos.dll
+packagesWithMoniker:
+- value: Azure.Cosmos v4.0.0-preview3
+attributesWithMoniker:
+- value: System.Text.Json.Serialization.JsonConverterAttribute
+syntaxWithMoniker:
+- lang: csharp
+  values:
+  - value: >-
+      [System.Text.Json.Serialization.JsonConverter(typeof(Azure.Cosmos.TextJsonDatabasePropertiesConverter))]
+
+      public class DatabaseProperties
+- lang: fsharp
+  values:
+  - value: >-
+      [<System.Text.Json.Serialization.JsonConverter(typeof(Azure.Cosmos.TextJsonDatabasePropertiesConverter))>]
+
+      type DatabaseProperties = class
+- lang: vb
+  values:
+  - value: Public Class DatabaseProperties
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet-preview
+seeAlso: >+
+  - <xref:Azure.Cosmos.ContainerProperties>
+
+summary: Represents a database in the Azure Cosmos DB account.
+remarks: <p>Each Azure Cosmos DB database account can have zero or more databases. A database in Azure Cosmos DB is a logical container for document collections and users. Refer to <see>http://azure.microsoft.com/documentation/articles/documentdb-resources/#databases</see> for more details on databases.</p>
+examples: >-
+  The example below creates a new Database with an Id property of 'MyDatabase'.
+
+
+  ```csharp
+
+  using (DocumentClient client = new DocumentClient(new Uri("service endpoint"), "auth key"))
+
+  {
+      Database db = await client.CreateDatabaseAsync(new Database { Id = "MyDatabase" });
+  }
+
+  ```
+
+
+  The example below creates a collection within this database with OfferThroughput set to 10000.
+
+
+  ```csharp
+
+  DocumentCollection coll = await client.CreateDocumentCollectionAsync(db.SelfLink,
+      new DocumentCollection { Id = "MyCollection" }, 
+      10000);
+  ```
+
+
+  The example below queries for a Database by Id to retrieve the SelfLink.
+
+
+  ```csharp
+
+  using Microsoft.Azure.Cosmos.Linq;
+
+  Database database = client.CreateDatabaseQuery().Where(d => d.Id == "MyDatabase").AsEnumerable().FirstOrDefault();
+
+  string databaseLink = database.SelfLink;
+
+  ```
+
+
+  The example below deletes the database using its SelfLink property.
+
+
+  ```csharp
+
+  await client.DeleteDatabaseAsync(db.SelfLink);
+
+  ```
+metadata:
+  api_name:
+  - Azure.Cosmos.DatabaseProperties
+  api_location:
+  - Azure.Cosmos.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.Cosmos.DatabaseProperties
+  - Azure::Cosmos::DatabaseProperties
+  - DatabaseProperties
+  helpviewer_keywords:
+  - Azure.Cosmos.DatabaseProperties class [.NET]
+  monikers:
+  - azure-dotnet-preview

@@ -1,0 +1,155 @@
+### YamlMime:NetMember
+type: method
+members:
+- typeParameters:
+  - description: The type to deserialize the relationship to.
+    name: T
+  returnsWithMoniker:
+    type:
+    - value: <xref href="System.Threading.Tasks.Task`1?alt=System.Threading.Tasks.Task&text=Task" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.Response`1?alt=Azure.Response&text=Response" data-throw-if-not-resolved="True"/>&lt;T&gt;&gt;
+  parameters:
+  - namesWithMoniker:
+    - value: digitalTwinId
+    description: The Id of the source digital twin.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: relationshipId
+    description: The Id of the relationship which is being created.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: relationship
+    description: The application/json relationship to be created.
+    type: T
+  - namesWithMoniker:
+    - value: ifNoneMatch
+    description: >-
+      If-None-Match header that makes the request method conditional on a
+
+      recipient cache or origin server either not having any current
+
+      representation of the target resource.  For more information about
+
+      this property, see <a href="https://tools.ietf.org/html/rfc7232#section-3.2">RFC 7232</a>.
+
+      Acceptable values are null or <code data-dev-comment-type="c">"*"</code>.  If ifNonMatch option is null
+
+      the service will replace the existing entity with the new entity.
+
+      If ifNoneMatch option is <code data-dev-comment-type="c">"*"</code> (or <xref data-throw-if-not-resolved="true" uid="Azure.ETag.All"></xref>) the
+
+      service will reject the request if the entity already exists.
+
+      An optional ETag to only make the request if the value does not
+
+      match on the service.
+    type: <xref href="System.Nullable`1?alt=System.Nullable&text=Nullable" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.ETag?alt=Azure.ETag&text=ETag" data-throw-if-not-resolved="True"/>&gt;
+  - namesWithMoniker:
+    - value: cancellationToken
+    description: The cancellation token.
+    type: <xref href="System.Threading.CancellationToken?alt=System.Threading.CancellationToken&text=CancellationToken" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: The exception that captures the errors from the service. Check the <xref data-throw-if-not-resolved="true" uid="Azure.RequestFailedException.ErrorCode"></xref> and <xref data-throw-if-not-resolved="true" uid="Azure.RequestFailedException.Status"></xref> properties for more details.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  - description: The exception is thrown when <code data-dev-comment-type="paramref">digitalTwinId</code> or <code data-dev-comment-type="paramref">relationshipId</code> is <code data-dev-comment-type="c">null</code>.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.DigitalTwins.Core.DigitalTwinsClient.CreateOrReplaceRelationshipAsync``1(System.String,System.String,``0,System.Nullable{Azure.ETag},System.Threading.CancellationToken)
+  commentId: M:Azure.DigitalTwins.Core.DigitalTwinsClient.CreateOrReplaceRelationshipAsync``1(System.String,System.String,``0,System.Nullable{Azure.ETag},System.Threading.CancellationToken)
+  name: CreateOrReplaceRelationshipAsync<T>(String, String, T, Nullable<ETag>, CancellationToken)
+  fullName: Azure.DigitalTwins.Core.DigitalTwinsClient.CreateOrReplaceRelationshipAsync<T>(String, String, T, Nullable<ETag>, CancellationToken)
+  nameWithType: DigitalTwinsClient.CreateOrReplaceRelationshipAsync<T>(String, String, T, Nullable<ETag>, CancellationToken)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual System.Threading.Tasks.Task<Azure.Response<T>> CreateOrReplaceRelationshipAsync<T> (string digitalTwinId, string relationshipId, T relationship, Azure.ETag? ifNoneMatch = default, System.Threading.CancellationToken cancellationToken = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member CreateOrReplaceRelationshipAsync : string * string * 'T * Nullable<Azure.ETag> * System.Threading.CancellationToken -> System.Threading.Tasks.Task<Azure.Response<'T>>
+
+        override this.CreateOrReplaceRelationshipAsync : string * string * 'T * Nullable<Azure.ETag> * System.Threading.CancellationToken -> System.Threading.Tasks.Task<Azure.Response<'T>>
+  - lang: vb
+    values:
+    - value: Public Overridable Function CreateOrReplaceRelationshipAsync(Of T) (digitalTwinId As String, relationshipId As String, relationship As T, Optional ifNoneMatch As Nullable(Of ETag) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of T))
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview
+  seeAlso: >+
+    - <xref:Azure.DigitalTwins.Core.DigitalTwinsClient.CreateOrReplaceRelationship%60%601(System.String%2cSystem.String%2c%60%600%2cSystem.Nullable%7bAzure.ETag%7d%2cSystem.Threading.CancellationToken)>
+
+  summary: >-
+    Creates a relationship on a digital twin asynchronously. If the provided relationship Id is already in use, this will attempt to replace the
+
+    existing relationship with the provided relationship.
+  remarks: <p>Relationships are a one-way link from a source digital twin to another, as described at creation time of the assigned model of the digital twin.</p><p>For more samples, see <a href="https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</a>.</p>
+  examples: >-
+    ```csharp
+
+    var floorBuildingRelationshipPayload = new CustomRelationship
+
+    {
+        Id = "floorBuildingRelationshipId",
+        SourceId = "floorTwinId",
+        TargetId = "buildingTwinId",
+        Name = "containedIn",
+        Prop1 = "Prop1 val",
+        Prop2 = 4
+    };
+
+
+    Response<CustomRelationship> createCustomRelationshipResponse = await client
+        .CreateOrReplaceRelationshipAsync<CustomRelationship>("floorTwinId", "floorBuildingRelationshipId", floorBuildingRelationshipPayload);
+    Console.WriteLine($"Created a digital twin relationship '{createCustomRelationshipResponse.Value.Id}' " +
+        $"from twin '{createCustomRelationshipResponse.Value.SourceId}' to twin '{createCustomRelationshipResponse.Value.TargetId}'.");
+    ```
+  metadata: {}
+uid: Azure.DigitalTwins.Core.DigitalTwinsClient.CreateOrReplaceRelationshipAsync*
+commentId: Overload:Azure.DigitalTwins.Core.DigitalTwinsClient.CreateOrReplaceRelationshipAsync
+namespace: Azure.DigitalTwins.Core
+name: CreateOrReplaceRelationshipAsync
+fullName: Azure.DigitalTwins.Core.DigitalTwinsClient.CreateOrReplaceRelationshipAsync
+nameWithType: DigitalTwinsClient.CreateOrReplaceRelationshipAsync
+assembliesWithMoniker:
+- value: Azure.DigitalTwins.Core.dll
+packagesWithMoniker:
+- value: Azure.DigitalTwins.Core v1.4.0
+  monikers:
+  - azure-dotnet
+- value: Azure.DigitalTwins.Core v1.4.0-beta.1
+  monikers:
+  - azure-dotnet-preview
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.DigitalTwins.Core.DigitalTwinsClient.CreateOrReplaceRelationshipAsync
+  api_location:
+  - Azure.DigitalTwins.Core.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.DigitalTwins.Core.DigitalTwinsClient.CreateOrReplaceRelationshipAsync
+  - Azure::DigitalTwins::Core::DigitalTwinsClient::CreateOrReplaceRelationshipAsync
+  - CreateOrReplaceRelationshipAsync
+  - DigitalTwinsClient.CreateOrReplaceRelationshipAsync
+  - DigitalTwinsClient::CreateOrReplaceRelationshipAsync
+  - Azure.DigitalTwins.Core.DigitalTwinsClient.CreateOrReplaceRelationshipAsync``1
+  - Azure::DigitalTwins::Core::DigitalTwinsClient::CreateOrReplaceRelationshipAsync``1
+  - CreateOrReplaceRelationshipAsync``1
+  - DigitalTwinsClient.CreateOrReplaceRelationshipAsync``1
+  - DigitalTwinsClient::CreateOrReplaceRelationshipAsync``1
+  helpviewer_keywords:
+  - DigitalTwinsClient.CreateOrReplaceRelationshipAsync method [.NET]
+  - CreateOrReplaceRelationshipAsync method [.NET], class DigitalTwinsClient
+  - DigitalTwinsClient.CreateOrReplaceRelationshipAsync<T>(String, String, T, Nullable<ETag>, CancellationToken) method [.NET]
+  - CreateOrReplaceRelationshipAsync<T>(String, String, T, Nullable<ETag>, CancellationToken) method [.NET], class DigitalTwinsClient
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview

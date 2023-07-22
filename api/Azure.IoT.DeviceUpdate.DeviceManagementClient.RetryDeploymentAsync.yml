@@ -1,0 +1,191 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="System.Threading.Tasks.Task`1?alt=System.Threading.Tasks.Task&text=Task" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.Response?alt=Azure.Response&text=Response" data-throw-if-not-resolved="True"/>&gt;
+    description: The response returned from the service. Details of the response body schema are in the Remarks section below.
+  parameters:
+  - namesWithMoniker:
+    - value: groupId
+    description: Group identifier.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: deviceClassId
+    description: Device class identifier.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: deploymentId
+    description: Deployment identifier.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">groupId</code>, <code data-dev-comment-type="paramref">deviceClassId</code> or <code data-dev-comment-type="paramref">deploymentId</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: <code data-dev-comment-type="paramref">groupId</code>, <code data-dev-comment-type="paramref">deviceClassId</code> or <code data-dev-comment-type="paramref">deploymentId</code> is an empty string, and was expected to be non-empty.
+    type: <xref href="System.ArgumentException" data-throw-if-not-resolved="True"/>
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.IoT.DeviceUpdate.DeviceManagementClient.RetryDeploymentAsync(System.String,System.String,System.String,Azure.RequestContext)
+  commentId: M:Azure.IoT.DeviceUpdate.DeviceManagementClient.RetryDeploymentAsync(System.String,System.String,System.String,Azure.RequestContext)
+  name: RetryDeploymentAsync(String, String, String, RequestContext)
+  fullName: Azure.IoT.DeviceUpdate.DeviceManagementClient.RetryDeploymentAsync(String, String, String, RequestContext)
+  nameWithType: DeviceManagementClient.RetryDeploymentAsync(String, String, String, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual System.Threading.Tasks.Task<Azure.Response> RetryDeploymentAsync (string groupId, string deviceClassId, string deploymentId, Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member RetryDeploymentAsync : string * string * string * Azure.RequestContext -> System.Threading.Tasks.Task<Azure.Response>
+
+        override this.RetryDeploymentAsync : string * string * string * Azure.RequestContext -> System.Threading.Tasks.Task<Azure.Response>
+  - lang: vb
+    values:
+    - value: Public Overridable Function RetryDeploymentAsync (groupId As String, deviceClassId As String, deploymentId As String, Optional context As RequestContext = Nothing) As Task(Of Response)
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview
+  summary: Retries a deployment with failed devices.
+  remarks: >-
+    <p>Below is the JSON schema for the response payload.</p><p>Response Body:</p><p>Schema for <code data-dev-comment-type="c">Deployment</code>: 
+
+
+    ```
+
+    {
+                  deploymentId: string, # Required. The caller-provided deployment identifier. This cannot be longer than 73 characters, must be all lower-case, and cannot contain '&', '^', '[', ']', '{', '}', '|', '<', '>', forward slash, backslash, or double quote. The Updates view in the Azure Portal IoT Hub resource generates a GUID for deploymentId when you create a deployment.
+                  startDateTime: string (ISO 8601 Format), # Required. The deployment start datetime.
+                  update: {
+                    updateId: {
+                      provider: string, # Required. Update provider.
+                      name: string, # Required. Update name.
+                      version: string, # Required. Update version.
+                    }, # Required. Update identifier.
+                    description: string, # Optional. Update description.
+                    friendlyName: string, # Optional. Friendly update name.
+                  }, # Required. Update information for the update in the deployment.
+                  groupId: string, # Required. The group identity for the devices the deployment is intended to update.
+                  deviceClassSubgroups: [string], # Optional. The device class subgroups the deployment is compatible with and subgroup deployments have been created for. This is not provided by the caller during CreateOrUpdateDeployment but is automatically determined by Device Update
+                  isCanceled: boolean, # Optional. Boolean flag indicating whether the deployment was canceled.
+                  isRetried: boolean, # Optional. Boolean flag indicating whether the deployment has been retried.
+                  rollbackPolicy: {
+                    update: UpdateInfo, # Required. Update to rollback to.
+                    failure: {
+                      devicesFailedPercentage: number, # Required. Percentage of devices that failed.
+                      devicesFailedCount: number, # Required. Number of devices that failed.
+                    }, # Required. Failure conditions to initiate rollback policy.
+                  }, # Optional. The rollback policy for the deployment.
+                  isCloudInitiatedRollback: boolean, # Optional. Boolean flag indicating whether the deployment is a rollback deployment.
+                }
+    ```
+
+    </p>
+  examples: >-
+    This sample shows how to call RetryDeploymentAsync with required parameters and parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new DeviceManagementClient(endpoint, "<instanceId>", credential);
+
+
+    Response response = await client.RetryDeploymentAsync("<groupId>", "<deviceClassId>", "<deploymentId>");
+
+
+    JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+
+    Console.WriteLine(result.GetProperty("deploymentId").ToString());
+
+    Console.WriteLine(result.GetProperty("startDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("update").GetProperty("updateId").GetProperty("provider").ToString());
+
+    Console.WriteLine(result.GetProperty("update").GetProperty("updateId").GetProperty("name").ToString());
+
+    Console.WriteLine(result.GetProperty("update").GetProperty("updateId").GetProperty("version").ToString());
+
+    Console.WriteLine(result.GetProperty("update").GetProperty("description").ToString());
+
+    Console.WriteLine(result.GetProperty("update").GetProperty("friendlyName").ToString());
+
+    Console.WriteLine(result.GetProperty("groupId").ToString());
+
+    Console.WriteLine(result.GetProperty("deviceClassSubgroups")[0].ToString());
+
+    Console.WriteLine(result.GetProperty("isCanceled").ToString());
+
+    Console.WriteLine(result.GetProperty("isRetried").ToString());
+
+    Console.WriteLine(result.GetProperty("rollbackPolicy").GetProperty("update").GetProperty("updateId").GetProperty("provider").ToString());
+
+    Console.WriteLine(result.GetProperty("rollbackPolicy").GetProperty("update").GetProperty("updateId").GetProperty("name").ToString());
+
+    Console.WriteLine(result.GetProperty("rollbackPolicy").GetProperty("update").GetProperty("updateId").GetProperty("version").ToString());
+
+    Console.WriteLine(result.GetProperty("rollbackPolicy").GetProperty("update").GetProperty("description").ToString());
+
+    Console.WriteLine(result.GetProperty("rollbackPolicy").GetProperty("update").GetProperty("friendlyName").ToString());
+
+    Console.WriteLine(result.GetProperty("rollbackPolicy").GetProperty("failure").GetProperty("devicesFailedPercentage").ToString());
+
+    Console.WriteLine(result.GetProperty("rollbackPolicy").GetProperty("failure").GetProperty("devicesFailedCount").ToString());
+
+    Console.WriteLine(result.GetProperty("isCloudInitiatedRollback").ToString());
+
+    ```
+  metadata: {}
+uid: Azure.IoT.DeviceUpdate.DeviceManagementClient.RetryDeploymentAsync*
+commentId: Overload:Azure.IoT.DeviceUpdate.DeviceManagementClient.RetryDeploymentAsync
+namespace: Azure.IoT.DeviceUpdate
+name: RetryDeploymentAsync
+fullName: Azure.IoT.DeviceUpdate.DeviceManagementClient.RetryDeploymentAsync
+nameWithType: DeviceManagementClient.RetryDeploymentAsync
+assembliesWithMoniker:
+- value: Azure.IoT.DeviceUpdate.dll
+packagesWithMoniker:
+- value: Azure.IoT.DeviceUpdate v1.0.0
+  monikers:
+  - azure-dotnet
+- value: Azure.IoT.DeviceUpdate v1.0.0-beta.4
+  monikers:
+  - azure-dotnet-preview
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.IoT.DeviceUpdate.DeviceManagementClient.RetryDeploymentAsync
+  api_location:
+  - Azure.IoT.DeviceUpdate.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.IoT.DeviceUpdate.DeviceManagementClient.RetryDeploymentAsync
+  - Azure::IoT::DeviceUpdate::DeviceManagementClient::RetryDeploymentAsync
+  - RetryDeploymentAsync
+  - DeviceManagementClient.RetryDeploymentAsync
+  - DeviceManagementClient::RetryDeploymentAsync
+  helpviewer_keywords:
+  - DeviceManagementClient.RetryDeploymentAsync method [.NET]
+  - RetryDeploymentAsync method [.NET], class DeviceManagementClient
+  - DeviceManagementClient.RetryDeploymentAsync(String, String, String, RequestContext) method [.NET]
+  - RetryDeploymentAsync(String, String, String, RequestContext) method [.NET], class DeviceManagementClient
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview

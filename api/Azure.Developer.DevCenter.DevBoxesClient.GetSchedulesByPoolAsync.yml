@@ -1,0 +1,155 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="Azure.AsyncPageable`1?alt=Azure.AsyncPageable&text=AsyncPageable" data-throw-if-not-resolved="True"/>&lt;<xref href="System.BinaryData?alt=System.BinaryData&text=BinaryData" data-throw-if-not-resolved="True"/>&gt;
+    description: The <xref data-throw-if-not-resolved="true" uid="Azure.AsyncPageable`1"></xref> from the service containing a list of <xref data-throw-if-not-resolved="true" uid="System.BinaryData"></xref> objects. Details of the body schema for each item in the collection are in the Remarks section below.
+  parameters:
+  - namesWithMoniker:
+    - value: poolName
+    description: The name of a pool of Dev Boxes.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: maxCount
+    description: "The maximum number of resources to return from the operation. Example: 'top=10'."
+    type: <xref href="System.Nullable`1?alt=System.Nullable&text=Nullable" data-throw-if-not-resolved="True"/>&lt;<xref href="System.Int32?alt=System.Int32&text=Int32" data-throw-if-not-resolved="True"/>&gt;
+  - namesWithMoniker:
+    - value: filter
+    description: An OData filter clause to apply to the operation.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">poolName</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: <code data-dev-comment-type="paramref">poolName</code> is an empty string, and was expected to be non-empty.
+    type: <xref href="System.ArgumentException" data-throw-if-not-resolved="True"/>
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.Developer.DevCenter.DevBoxesClient.GetSchedulesByPoolAsync(System.String,System.Nullable{System.Int32},System.String,Azure.RequestContext)
+  commentId: M:Azure.Developer.DevCenter.DevBoxesClient.GetSchedulesByPoolAsync(System.String,System.Nullable{System.Int32},System.String,Azure.RequestContext)
+  name: GetSchedulesByPoolAsync(String, Nullable<Int32>, String, RequestContext)
+  fullName: Azure.Developer.DevCenter.DevBoxesClient.GetSchedulesByPoolAsync(String, Nullable<Int32>, String, RequestContext)
+  nameWithType: DevBoxesClient.GetSchedulesByPoolAsync(String, Nullable<Int32>, String, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual Azure.AsyncPageable<BinaryData> GetSchedulesByPoolAsync (string poolName, int? maxCount = default, string filter = default, Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member GetSchedulesByPoolAsync : string * Nullable<int> * string * Azure.RequestContext -> Azure.AsyncPageable<BinaryData>
+
+        override this.GetSchedulesByPoolAsync : string * Nullable<int> * string * Azure.RequestContext -> Azure.AsyncPageable<BinaryData>
+  - lang: vb
+    values:
+    - value: Public Overridable Function GetSchedulesByPoolAsync (poolName As String, Optional maxCount As Nullable(Of Integer) = Nothing, Optional filter As String = Nothing, Optional context As RequestContext = Nothing) As AsyncPageable(Of BinaryData)
+  monikers:
+  - azure-dotnet-preview
+  summary: Lists available schedules for a pool.
+  remarks: >-
+    <p>Below is the JSON schema for one item in the pageable response.</p><p>Response Body:</p><p>Schema for <code data-dev-comment-type="c">ScheduleListResultValue</code>: 
+
+
+    ```
+
+    {
+      name: string, # Optional. Display name for the Schedule
+      type: "StopDevBox", # Optional. Supported type this scheduled task represents.
+      frequency: "Daily", # Optional. The frequency of this scheduled task.
+      time: string, # Optional. The target time to trigger the action. The format is HH:MM.
+      timeZone: string, # Optional. The IANA timezone id at which the schedule should execute.
+    }
+
+    ```
+
+    </p>
+  examples: >-
+    This sample shows how to call GetSchedulesByPoolAsync with required parameters and parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new DevBoxesClient(endpoint, "<projectName>", credential);
+
+
+    await foreach (var data in client.GetSchedulesByPoolAsync("<poolName>"))
+
+    {
+        JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        Console.WriteLine(result.ToString());
+    }
+
+    ```
+
+    This sample shows how to call GetSchedulesByPoolAsync with all parameters, and how to parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new DevBoxesClient(endpoint, "<projectName>", credential);
+
+
+    await foreach (var data in client.GetSchedulesByPoolAsync("<poolName>", 1234, "<filter>"))
+
+    {
+        JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        Console.WriteLine(result.GetProperty("name").ToString());
+        Console.WriteLine(result.GetProperty("type").ToString());
+        Console.WriteLine(result.GetProperty("frequency").ToString());
+        Console.WriteLine(result.GetProperty("time").ToString());
+        Console.WriteLine(result.GetProperty("timeZone").ToString());
+    }
+
+    ```
+  metadata: {}
+uid: Azure.Developer.DevCenter.DevBoxesClient.GetSchedulesByPoolAsync*
+commentId: Overload:Azure.Developer.DevCenter.DevBoxesClient.GetSchedulesByPoolAsync
+namespace: Azure.Developer.DevCenter
+name: GetSchedulesByPoolAsync
+fullName: Azure.Developer.DevCenter.DevBoxesClient.GetSchedulesByPoolAsync
+nameWithType: DevBoxesClient.GetSchedulesByPoolAsync
+assembliesWithMoniker:
+- value: Azure.Developer.DevCenter.dll
+packagesWithMoniker:
+- value: Azure.Developer.DevCenter v1.0.0-beta.2
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.Developer.DevCenter.DevBoxesClient.GetSchedulesByPoolAsync
+  api_location:
+  - Azure.Developer.DevCenter.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.Developer.DevCenter.DevBoxesClient.GetSchedulesByPoolAsync
+  - Azure::Developer::DevCenter::DevBoxesClient::GetSchedulesByPoolAsync
+  - GetSchedulesByPoolAsync
+  - DevBoxesClient.GetSchedulesByPoolAsync
+  - DevBoxesClient::GetSchedulesByPoolAsync
+  helpviewer_keywords:
+  - DevBoxesClient.GetSchedulesByPoolAsync method [.NET]
+  - GetSchedulesByPoolAsync method [.NET], class DevBoxesClient
+  - DevBoxesClient.GetSchedulesByPoolAsync(String, Nullable<Int32>, String, RequestContext) method [.NET]
+  - GetSchedulesByPoolAsync(String, Nullable<Int32>, String, RequestContext) method [.NET], class DevBoxesClient
+  monikers:
+  - azure-dotnet-preview

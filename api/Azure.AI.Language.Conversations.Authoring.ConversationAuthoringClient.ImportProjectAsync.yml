@@ -1,0 +1,292 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="System.Threading.Tasks.Task`1?alt=System.Threading.Tasks.Task&text=Task" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.Operation`1?alt=Azure.Operation&text=Operation" data-throw-if-not-resolved="True"/>&lt;<xref href="System.BinaryData?alt=System.BinaryData&text=BinaryData" data-throw-if-not-resolved="True"/>&gt;&gt;
+    description: The <xref data-throw-if-not-resolved="true" uid="Azure.Operation"></xref> representing an asynchronous operation on the service.
+  parameters:
+  - namesWithMoniker:
+    - value: waitUntil
+    description: <xref data-throw-if-not-resolved="true" uid="Azure.WaitUntil.Completed"></xref> if the method should wait to return until the long-running operation has completed on the service; <xref data-throw-if-not-resolved="true" uid="Azure.WaitUntil.Started"></xref> if it should return after starting the operation. For more information on long-running operations, please see <a href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</a>.
+    type: <xref href="Azure.WaitUntil?alt=Azure.WaitUntil&text=WaitUntil" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: projectName
+    description: The name of the project to use.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: content
+    description: The content to send as the body of the request.
+    type: <xref href="Azure.Core.RequestContent?alt=Azure.Core.RequestContent&text=RequestContent" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: exportedProjectFormat
+    description: 'The format of the exported project file to use. Allowed values: "Conversation" | "Luis".'
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">projectName</code> or <code data-dev-comment-type="paramref">content</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: <code data-dev-comment-type="paramref">projectName</code> is an empty string, and was expected to be non-empty.
+    type: <xref href="System.ArgumentException" data-throw-if-not-resolved="True"/>
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.AI.Language.Conversations.Authoring.ConversationAuthoringClient.ImportProjectAsync(Azure.WaitUntil,System.String,Azure.Core.RequestContent,System.String,Azure.RequestContext)
+  commentId: M:Azure.AI.Language.Conversations.Authoring.ConversationAuthoringClient.ImportProjectAsync(Azure.WaitUntil,System.String,Azure.Core.RequestContent,System.String,Azure.RequestContext)
+  name: ImportProjectAsync(WaitUntil, String, RequestContent, String, RequestContext)
+  fullName: Azure.AI.Language.Conversations.Authoring.ConversationAuthoringClient.ImportProjectAsync(WaitUntil, String, RequestContent, String, RequestContext)
+  nameWithType: ConversationAuthoringClient.ImportProjectAsync(WaitUntil, String, RequestContent, String, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual System.Threading.Tasks.Task<Azure.Operation<BinaryData>> ImportProjectAsync (Azure.WaitUntil waitUntil, string projectName, Azure.Core.RequestContent content, string exportedProjectFormat = default, Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member ImportProjectAsync : Azure.WaitUntil * string * Azure.Core.RequestContent * string * Azure.RequestContext -> System.Threading.Tasks.Task<Azure.Operation<BinaryData>>
+
+        override this.ImportProjectAsync : Azure.WaitUntil * string * Azure.Core.RequestContent * string * Azure.RequestContext -> System.Threading.Tasks.Task<Azure.Operation<BinaryData>>
+  - lang: vb
+    values:
+    - value: Public Overridable Function ImportProjectAsync (waitUntil As WaitUntil, projectName As String, content As RequestContent, Optional exportedProjectFormat As String = Nothing, Optional context As RequestContext = Nothing) As Task(Of Operation(Of BinaryData))
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview
+  summary: >-
+    [Protocol Method] Triggers a job to import a project. If a project with the same name already exists, the data of that project is replaced.
+
+    <ul><li>
+
+    This <a href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</a> allows explicit creation of the request and processing of the response for advanced scenarios.
+
+    </li></ul>
+  remarks: '<p>Additional information can be found in the service REST API documentation: https://learn.microsoft.com/rest/api/language/2023-04-01/conversational-analysis-authoring/import</p>'
+  examples: >-
+    This sample shows how to call ImportProjectAsync with required parameters and request content, and how to parse the result.
+
+
+    ```
+
+    var credential = new AzureKeyCredential("<key>");
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new ConversationAuthoringClient(endpoint, credential);
+
+
+    var data = new {
+        projectFileVersion = "<projectFileVersion>",
+        stringIndexType = "Utf16CodeUnit",
+        metadata = new {
+            projectKind = "Conversation",
+            projectName = "<projectName>",
+            language = "<language>",
+        },
+    };
+
+
+    var operation = await client.ImportProjectAsync(WaitUntil.Completed, "<projectName>", RequestContent.Create(data));
+
+
+    BinaryData responseData = operation.Value;
+
+    JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+
+    Console.WriteLine(result.GetProperty("jobId").ToString());
+
+    Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("lastUpdatedDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("status").ToString());
+
+    ```
+
+    This sample shows how to call ImportProjectAsync with all parameters and request content, and how to parse the result.
+
+
+    ```
+
+    var credential = new AzureKeyCredential("<key>");
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new ConversationAuthoringClient(endpoint, credential);
+
+
+    var data = new {
+        projectFileVersion = "<projectFileVersion>",
+        stringIndexType = "Utf16CodeUnit",
+        metadata = new {
+            projectKind = "Conversation",
+            settings = new {
+                confidenceThreshold = 123.45f,
+            },
+            projectName = "<projectName>",
+            multilingual = true,
+            description = "<description>",
+            language = "<language>",
+        },
+        assets = new {
+            intents = new[] {
+                new {
+                    category = "<category>",
+                }
+            },
+            entities = new[] {
+                new {
+                    category = "<category>",
+                    compositionSetting = "returnLongestOverlap",
+                    list = new {
+                        sublists = new[] {
+                            new {
+                                listKey = "<listKey>",
+                                synonyms = new[] {
+                                    new {
+                                        language = "<language>",
+                                        values = new[] {
+                                            "<String>"
+                                        },
+                                    }
+                                },
+                            }
+                        },
+                    },
+                    prebuilts = new[] {
+                        new {
+                            category = "<category>",
+                        }
+                    },
+                    regex = new {
+                        expressions = new[] {
+                            new {
+                                regexKey = "<regexKey>",
+                                language = "<language>",
+                                regexPattern = "<regexPattern>",
+                            }
+                        },
+                    },
+                    requiredComponents = new[] {
+                        "<String>"
+                    },
+                }
+            },
+            utterances = new[] {
+                new {
+                    entities = new[] {
+                        new {
+                            category = "<category>",
+                            offset = 1234,
+                            length = 1234,
+                        }
+                    },
+                    text = "<text>",
+                    language = "<language>",
+                    intent = "<intent>",
+                    dataset = "<dataset>",
+                }
+            },
+            projectKind = "Conversation",
+        },
+    };
+
+
+    var operation = await client.ImportProjectAsync(WaitUntil.Completed, "<projectName>", RequestContent.Create(data), "<exportedProjectFormat>");
+
+
+    BinaryData responseData = operation.Value;
+
+    JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+
+    Console.WriteLine(result.GetProperty("jobId").ToString());
+
+    Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("lastUpdatedDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("expirationDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("status").ToString());
+
+    Console.WriteLine(result.GetProperty("warnings")[0].GetProperty("code").ToString());
+
+    Console.WriteLine(result.GetProperty("warnings")[0].GetProperty("message").ToString());
+
+    Console.WriteLine(result.GetProperty("errors")[0].GetProperty("code").ToString());
+
+    Console.WriteLine(result.GetProperty("errors")[0].GetProperty("message").ToString());
+
+    Console.WriteLine(result.GetProperty("errors")[0].GetProperty("target").ToString());
+
+    Console.WriteLine(result.GetProperty("errors")[0].GetProperty("details")[0].GetProperty("code").ToString());
+
+    Console.WriteLine(result.GetProperty("errors")[0].GetProperty("details")[0].GetProperty("message").ToString());
+
+    Console.WriteLine(result.GetProperty("errors")[0].GetProperty("details")[0].GetProperty("target").ToString());
+
+    Console.WriteLine(result.GetProperty("errors")[0].GetProperty("details")[0].GetProperty("innererror").GetProperty("code").ToString());
+
+    Console.WriteLine(result.GetProperty("errors")[0].GetProperty("details")[0].GetProperty("innererror").GetProperty("message").ToString());
+
+    Console.WriteLine(result.GetProperty("errors")[0].GetProperty("details")[0].GetProperty("innererror").GetProperty("details").GetProperty("<test>").ToString());
+
+    Console.WriteLine(result.GetProperty("errors")[0].GetProperty("details")[0].GetProperty("innererror").GetProperty("target").ToString());
+
+    Console.WriteLine(result.GetProperty("errors")[0].GetProperty("innererror").GetProperty("code").ToString());
+
+    Console.WriteLine(result.GetProperty("errors")[0].GetProperty("innererror").GetProperty("message").ToString());
+
+    Console.WriteLine(result.GetProperty("errors")[0].GetProperty("innererror").GetProperty("details").GetProperty("<test>").ToString());
+
+    Console.WriteLine(result.GetProperty("errors")[0].GetProperty("innererror").GetProperty("target").ToString());
+
+    ```
+  metadata: {}
+uid: Azure.AI.Language.Conversations.Authoring.ConversationAuthoringClient.ImportProjectAsync*
+commentId: Overload:Azure.AI.Language.Conversations.Authoring.ConversationAuthoringClient.ImportProjectAsync
+namespace: Azure.AI.Language.Conversations.Authoring
+name: ImportProjectAsync
+fullName: Azure.AI.Language.Conversations.Authoring.ConversationAuthoringClient.ImportProjectAsync
+nameWithType: ConversationAuthoringClient.ImportProjectAsync
+assembliesWithMoniker:
+- value: Azure.AI.Language.Conversations.dll
+packagesWithMoniker:
+- value: Azure.AI.Language.Conversations v1.1.0
+  monikers:
+  - azure-dotnet
+- value: Azure.AI.Language.Conversations v1.1.0-beta.2
+  monikers:
+  - azure-dotnet-preview
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.AI.Language.Conversations.Authoring.ConversationAuthoringClient.ImportProjectAsync
+  api_location:
+  - Azure.AI.Language.Conversations.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.AI.Language.Conversations.Authoring.ConversationAuthoringClient.ImportProjectAsync
+  - Azure::AI::Language::Conversations::Authoring::ConversationAuthoringClient::ImportProjectAsync
+  - ImportProjectAsync
+  - ConversationAuthoringClient.ImportProjectAsync
+  - ConversationAuthoringClient::ImportProjectAsync
+  helpviewer_keywords:
+  - ConversationAuthoringClient.ImportProjectAsync method [.NET]
+  - ImportProjectAsync method [.NET], class ConversationAuthoringClient
+  - ConversationAuthoringClient.ImportProjectAsync(WaitUntil, String, RequestContent, String, RequestContext) method [.NET]
+  - ImportProjectAsync(WaitUntil, String, RequestContent, String, RequestContext) method [.NET], class ConversationAuthoringClient
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview

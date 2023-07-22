@@ -1,0 +1,213 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="System.Threading.Tasks.Task`1?alt=System.Threading.Tasks.Task&text=Task" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.Response?alt=Azure.Response&text=Response" data-throw-if-not-resolved="True"/>&gt;
+    description: The response returned from the service. Details of the response body schema are in the Remarks section below.
+  parameters:
+  - namesWithMoniker:
+    - value: logCollectionId
+    description: Log collection identifier.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: content
+    description: The content to send as the body of the request. Details of the request body schema are in the Remarks section below.
+    type: <xref href="Azure.Core.RequestContent?alt=Azure.Core.RequestContent&text=RequestContent" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">logCollectionId</code> or <code data-dev-comment-type="paramref">content</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: <code data-dev-comment-type="paramref">logCollectionId</code> is an empty string, and was expected to be non-empty.
+    type: <xref href="System.ArgumentException" data-throw-if-not-resolved="True"/>
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.IoT.DeviceUpdate.DeviceManagementClient.StartLogCollectionAsync(System.String,Azure.Core.RequestContent,Azure.RequestContext)
+  commentId: M:Azure.IoT.DeviceUpdate.DeviceManagementClient.StartLogCollectionAsync(System.String,Azure.Core.RequestContent,Azure.RequestContext)
+  name: StartLogCollectionAsync(String, RequestContent, RequestContext)
+  fullName: Azure.IoT.DeviceUpdate.DeviceManagementClient.StartLogCollectionAsync(String, RequestContent, RequestContext)
+  nameWithType: DeviceManagementClient.StartLogCollectionAsync(String, RequestContent, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual System.Threading.Tasks.Task<Azure.Response> StartLogCollectionAsync (string logCollectionId, Azure.Core.RequestContent content, Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member StartLogCollectionAsync : string * Azure.Core.RequestContent * Azure.RequestContext -> System.Threading.Tasks.Task<Azure.Response>
+
+        override this.StartLogCollectionAsync : string * Azure.Core.RequestContent * Azure.RequestContext -> System.Threading.Tasks.Task<Azure.Response>
+  - lang: vb
+    values:
+    - value: Public Overridable Function StartLogCollectionAsync (logCollectionId As String, content As RequestContent, Optional context As RequestContext = Nothing) As Task(Of Response)
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview
+  summary: Start the device diagnostics log collection on specified devices.
+  remarks: >-
+    <p>Below is the JSON schema for the request and response payloads.</p><p>Request Body:</p><p>Schema for <code data-dev-comment-type="c">LogCollection</code>: 
+
+
+    ```
+
+    {
+                  operationId: string, # Optional. The log collection id.
+                  deviceList: [
+                    {
+                      deviceId: string, # Required. Device Id
+                      moduleId: string, # Optional. Module Id
+                    }
+                  ], # Required. Array of Device Update agent ids
+                  description: string, # Optional. Description of the diagnostics operation.
+                  createdDateTime: string, # Optional. The timestamp when the operation was created.
+                  lastActionDateTime: string, # Optional. A timestamp for when the current state was entered.
+                  status: "NotStarted" | "Running" | "Succeeded" | "Failed", # Optional. Operation status.
+                }
+    ```
+
+    </p><p>Response Body:</p><p>Schema for <code data-dev-comment-type="c">LogCollection</code>: 
+
+
+    ```
+
+    {
+                  operationId: string, # Optional. The log collection id.
+                  deviceList: [
+                    {
+                      deviceId: string, # Required. Device Id
+                      moduleId: string, # Optional. Module Id
+                    }
+                  ], # Required. Array of Device Update agent ids
+                  description: string, # Optional. Description of the diagnostics operation.
+                  createdDateTime: string, # Optional. The timestamp when the operation was created.
+                  lastActionDateTime: string, # Optional. A timestamp for when the current state was entered.
+                  status: "NotStarted" | "Running" | "Succeeded" | "Failed", # Optional. Operation status.
+                }
+    ```
+
+    </p>
+  examples: >-
+    This sample shows how to call StartLogCollectionAsync with required parameters and request content, and how to parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new DeviceManagementClient(endpoint, "<instanceId>", credential);
+
+
+    var data = new {
+        deviceList = new[] {
+            new {
+                deviceId = "<deviceId>",
+            }
+        },
+    };
+
+
+    Response response = await client.StartLogCollectionAsync("<logCollectionId>", RequestContent.Create(data));
+
+
+    JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+
+    Console.WriteLine(result.GetProperty("deviceList")[0].GetProperty("deviceId").ToString());
+
+    ```
+
+    This sample shows how to call StartLogCollectionAsync with all parameters and request content, and how to parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new DeviceManagementClient(endpoint, "<instanceId>", credential);
+
+
+    var data = new {
+        operationId = "<operationId>",
+        deviceList = new[] {
+            new {
+                deviceId = "<deviceId>",
+                moduleId = "<moduleId>",
+            }
+        },
+        description = "<description>",
+    };
+
+
+    Response response = await client.StartLogCollectionAsync("<logCollectionId>", RequestContent.Create(data));
+
+
+    JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+
+    Console.WriteLine(result.GetProperty("operationId").ToString());
+
+    Console.WriteLine(result.GetProperty("deviceList")[0].GetProperty("deviceId").ToString());
+
+    Console.WriteLine(result.GetProperty("deviceList")[0].GetProperty("moduleId").ToString());
+
+    Console.WriteLine(result.GetProperty("description").ToString());
+
+    Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("lastActionDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("status").ToString());
+
+    ```
+  metadata: {}
+uid: Azure.IoT.DeviceUpdate.DeviceManagementClient.StartLogCollectionAsync*
+commentId: Overload:Azure.IoT.DeviceUpdate.DeviceManagementClient.StartLogCollectionAsync
+namespace: Azure.IoT.DeviceUpdate
+name: StartLogCollectionAsync
+fullName: Azure.IoT.DeviceUpdate.DeviceManagementClient.StartLogCollectionAsync
+nameWithType: DeviceManagementClient.StartLogCollectionAsync
+assembliesWithMoniker:
+- value: Azure.IoT.DeviceUpdate.dll
+packagesWithMoniker:
+- value: Azure.IoT.DeviceUpdate v1.0.0
+  monikers:
+  - azure-dotnet
+- value: Azure.IoT.DeviceUpdate v1.0.0-beta.4
+  monikers:
+  - azure-dotnet-preview
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.IoT.DeviceUpdate.DeviceManagementClient.StartLogCollectionAsync
+  api_location:
+  - Azure.IoT.DeviceUpdate.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.IoT.DeviceUpdate.DeviceManagementClient.StartLogCollectionAsync
+  - Azure::IoT::DeviceUpdate::DeviceManagementClient::StartLogCollectionAsync
+  - StartLogCollectionAsync
+  - DeviceManagementClient.StartLogCollectionAsync
+  - DeviceManagementClient::StartLogCollectionAsync
+  helpviewer_keywords:
+  - DeviceManagementClient.StartLogCollectionAsync method [.NET]
+  - StartLogCollectionAsync method [.NET], class DeviceManagementClient
+  - DeviceManagementClient.StartLogCollectionAsync(String, RequestContent, RequestContext) method [.NET]
+  - StartLogCollectionAsync(String, RequestContent, RequestContext) method [.NET], class DeviceManagementClient
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview

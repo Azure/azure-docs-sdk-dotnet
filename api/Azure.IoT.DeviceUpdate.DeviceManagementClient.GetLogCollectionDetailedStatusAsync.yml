@@ -1,0 +1,182 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="System.Threading.Tasks.Task`1?alt=System.Threading.Tasks.Task&text=Task" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.Response?alt=Azure.Response&text=Response" data-throw-if-not-resolved="True"/>&gt;
+    description: The response returned from the service. Details of the response body schema are in the Remarks section below.
+  parameters:
+  - namesWithMoniker:
+    - value: logCollectionId
+      monikers:
+      - azure-dotnet
+    - value: operationId
+      monikers:
+      - azure-dotnet-preview
+    description: Log collection identifier.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">logCollectionId</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: <code data-dev-comment-type="paramref">logCollectionId</code> is an empty string, and was expected to be non-empty.
+    type: <xref href="System.ArgumentException" data-throw-if-not-resolved="True"/>
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.IoT.DeviceUpdate.DeviceManagementClient.GetLogCollectionDetailedStatusAsync(System.String,Azure.RequestContext)
+  commentId: M:Azure.IoT.DeviceUpdate.DeviceManagementClient.GetLogCollectionDetailedStatusAsync(System.String,Azure.RequestContext)
+  name: GetLogCollectionDetailedStatusAsync(String, RequestContext)
+  fullName: Azure.IoT.DeviceUpdate.DeviceManagementClient.GetLogCollectionDetailedStatusAsync(String, RequestContext)
+  nameWithType: DeviceManagementClient.GetLogCollectionDetailedStatusAsync(String, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual System.Threading.Tasks.Task<Azure.Response> GetLogCollectionDetailedStatusAsync (string logCollectionId, Azure.RequestContext context = default);
+      monikers:
+      - azure-dotnet
+    - value: public virtual System.Threading.Tasks.Task<Azure.Response> GetLogCollectionDetailedStatusAsync (string operationId, Azure.RequestContext context = default);
+      monikers:
+      - azure-dotnet-preview
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member GetLogCollectionDetailedStatusAsync : string * Azure.RequestContext -> System.Threading.Tasks.Task<Azure.Response>
+
+        override this.GetLogCollectionDetailedStatusAsync : string * Azure.RequestContext -> System.Threading.Tasks.Task<Azure.Response>
+      monikers:
+      - azure-dotnet
+    - value: >-
+        abstract member GetLogCollectionDetailedStatusAsync : string * Azure.RequestContext -> System.Threading.Tasks.Task<Azure.Response>
+
+        override this.GetLogCollectionDetailedStatusAsync : string * Azure.RequestContext -> System.Threading.Tasks.Task<Azure.Response>
+      monikers:
+      - azure-dotnet-preview
+  - lang: vb
+    values:
+    - value: Public Overridable Function GetLogCollectionDetailedStatusAsync (logCollectionId As String, Optional context As RequestContext = Nothing) As Task(Of Response)
+      monikers:
+      - azure-dotnet
+    - value: Public Overridable Function GetLogCollectionDetailedStatusAsync (operationId As String, Optional context As RequestContext = Nothing) As Task(Of Response)
+      monikers:
+      - azure-dotnet-preview
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview
+  summary: Get log collection with detailed status.
+  remarks: >-
+    <p>Below is the JSON schema for the response payload.</p><p>Response Body:</p><p>Schema for <code data-dev-comment-type="c">LogCollectionOperationDetailedStatus</code>: 
+
+
+    ```
+
+    {
+                  operationId: string, # Optional. The device diagnostics operation id.
+                  createdDateTime: string, # Optional. The timestamp when the operation was created.
+                  lastActionDateTime: string, # Optional. A timestamp for when the current state was entered.
+                  status: "NotStarted" | "Running" | "Succeeded" | "Failed", # Optional. Operation status.
+                  deviceStatus: [
+                    {
+                      deviceId: string, # Required. Device id
+                      moduleId: string, # Optional. Module id.
+                      status: "NotStarted" | "Running" | "Succeeded" | "Failed", # Required. Log upload status
+                      resultCode: string, # Optional. Log upload result code
+                      extendedResultCode: string, # Optional. Log upload extended result code
+                      logLocation: string, # Optional. Log upload location
+                    }
+                  ], # Optional. Status of the devices in the operation
+                  description: string, # Optional. Device diagnostics operation description.
+                }
+    ```
+
+    </p>
+  examples: >-
+    This sample shows how to call GetLogCollectionDetailedStatusAsync with required parameters and parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new DeviceManagementClient(endpoint, "<instanceId>", credential);
+
+
+    Response response = await client.GetLogCollectionDetailedStatusAsync("<logCollectionId>");
+
+
+    JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+
+    Console.WriteLine(result.GetProperty("operationId").ToString());
+
+    Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("lastActionDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("status").ToString());
+
+    Console.WriteLine(result.GetProperty("deviceStatus")[0].GetProperty("deviceId").ToString());
+
+    Console.WriteLine(result.GetProperty("deviceStatus")[0].GetProperty("moduleId").ToString());
+
+    Console.WriteLine(result.GetProperty("deviceStatus")[0].GetProperty("status").ToString());
+
+    Console.WriteLine(result.GetProperty("deviceStatus")[0].GetProperty("resultCode").ToString());
+
+    Console.WriteLine(result.GetProperty("deviceStatus")[0].GetProperty("extendedResultCode").ToString());
+
+    Console.WriteLine(result.GetProperty("deviceStatus")[0].GetProperty("logLocation").ToString());
+
+    Console.WriteLine(result.GetProperty("description").ToString());
+
+    ```
+  metadata: {}
+uid: Azure.IoT.DeviceUpdate.DeviceManagementClient.GetLogCollectionDetailedStatusAsync*
+commentId: Overload:Azure.IoT.DeviceUpdate.DeviceManagementClient.GetLogCollectionDetailedStatusAsync
+namespace: Azure.IoT.DeviceUpdate
+name: GetLogCollectionDetailedStatusAsync
+fullName: Azure.IoT.DeviceUpdate.DeviceManagementClient.GetLogCollectionDetailedStatusAsync
+nameWithType: DeviceManagementClient.GetLogCollectionDetailedStatusAsync
+assembliesWithMoniker:
+- value: Azure.IoT.DeviceUpdate.dll
+packagesWithMoniker:
+- value: Azure.IoT.DeviceUpdate v1.0.0
+  monikers:
+  - azure-dotnet
+- value: Azure.IoT.DeviceUpdate v1.0.0-beta.4
+  monikers:
+  - azure-dotnet-preview
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.IoT.DeviceUpdate.DeviceManagementClient.GetLogCollectionDetailedStatusAsync
+  api_location:
+  - Azure.IoT.DeviceUpdate.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.IoT.DeviceUpdate.DeviceManagementClient.GetLogCollectionDetailedStatusAsync
+  - Azure::IoT::DeviceUpdate::DeviceManagementClient::GetLogCollectionDetailedStatusAsync
+  - GetLogCollectionDetailedStatusAsync
+  - DeviceManagementClient.GetLogCollectionDetailedStatusAsync
+  - DeviceManagementClient::GetLogCollectionDetailedStatusAsync
+  helpviewer_keywords:
+  - DeviceManagementClient.GetLogCollectionDetailedStatusAsync method [.NET]
+  - GetLogCollectionDetailedStatusAsync method [.NET], class DeviceManagementClient
+  - DeviceManagementClient.GetLogCollectionDetailedStatusAsync(String, RequestContext) method [.NET]
+  - GetLogCollectionDetailedStatusAsync(String, RequestContext) method [.NET], class DeviceManagementClient
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview

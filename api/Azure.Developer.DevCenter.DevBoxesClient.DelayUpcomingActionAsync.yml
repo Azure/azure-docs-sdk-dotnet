@@ -1,0 +1,166 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="System.Threading.Tasks.Task`1?alt=System.Threading.Tasks.Task&text=Task" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.Response?alt=Azure.Response&text=Response" data-throw-if-not-resolved="True"/>&gt;
+    description: The response returned from the service. Details of the response body schema are in the Remarks section below.
+  parameters:
+  - namesWithMoniker:
+    - value: devBoxName
+    description: The name of a Dev Box.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: upcomingActionId
+    description: The upcoming action id.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: delayUntil
+    description: The delayed action time (UTC).
+    type: <xref href="System.DateTimeOffset?alt=System.DateTimeOffset&text=DateTimeOffset" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: userId
+    description: The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">devBoxName</code>, <code data-dev-comment-type="paramref">upcomingActionId</code> or <code data-dev-comment-type="paramref">userId</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: <code data-dev-comment-type="paramref">devBoxName</code>, <code data-dev-comment-type="paramref">upcomingActionId</code> or <code data-dev-comment-type="paramref">userId</code> is an empty string, and was expected to be non-empty.
+    type: <xref href="System.ArgumentException" data-throw-if-not-resolved="True"/>
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.Developer.DevCenter.DevBoxesClient.DelayUpcomingActionAsync(System.String,System.String,System.DateTimeOffset,System.String,Azure.RequestContext)
+  commentId: M:Azure.Developer.DevCenter.DevBoxesClient.DelayUpcomingActionAsync(System.String,System.String,System.DateTimeOffset,System.String,Azure.RequestContext)
+  name: DelayUpcomingActionAsync(String, String, DateTimeOffset, String, RequestContext)
+  fullName: Azure.Developer.DevCenter.DevBoxesClient.DelayUpcomingActionAsync(String, String, DateTimeOffset, String, RequestContext)
+  nameWithType: DevBoxesClient.DelayUpcomingActionAsync(String, String, DateTimeOffset, String, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual System.Threading.Tasks.Task<Azure.Response> DelayUpcomingActionAsync (string devBoxName, string upcomingActionId, DateTimeOffset delayUntil, string userId = "me", Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member DelayUpcomingActionAsync : string * string * DateTimeOffset * string * Azure.RequestContext -> System.Threading.Tasks.Task<Azure.Response>
+
+        override this.DelayUpcomingActionAsync : string * string * DateTimeOffset * string * Azure.RequestContext -> System.Threading.Tasks.Task<Azure.Response>
+  - lang: vb
+    values:
+    - value: Public Overridable Function DelayUpcomingActionAsync (devBoxName As String, upcomingActionId As String, delayUntil As DateTimeOffset, Optional userId As String = "me", Optional context As RequestContext = Nothing) As Task(Of Response)
+  monikers:
+  - azure-dotnet-preview
+  summary: Delays an Upcoming Action.
+  remarks: >-
+    <p>Below is the JSON schema for the response payload.</p><p>Response Body:</p><p>Schema for <code data-dev-comment-type="c">UpcomingAction</code>: 
+
+
+    ```
+
+    {
+      id: string, # Optional. Uniquely identifies the action.
+      actionType: "Stop", # Optional. The action that will be taken.
+      reason: "Schedule", # Optional. The reason for this action.
+      scheduledTime: string (ISO 8601 Format), # Optional. The target time the action will be triggered (UTC).
+      originalScheduledTime: string (ISO 8601 Format), # Optional. The original scheduled time for the action (UTC).
+      sourceId: string, # Optional. The id of the resource which triggered this action
+    }
+
+    ```
+
+    </p>
+  examples: >-
+    This sample shows how to call DelayUpcomingActionAsync with required parameters and parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new DevBoxesClient(endpoint, "<projectName>", credential);
+
+
+    Response response = await client.DelayUpcomingActionAsync("<devBoxName>", "<upcomingActionId>", DateTimeOffset.UtcNow);
+
+
+    JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+
+    Console.WriteLine(result.ToString());
+
+    ```
+
+    This sample shows how to call DelayUpcomingActionAsync with all parameters, and how to parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new DevBoxesClient(endpoint, "<projectName>", credential);
+
+
+    Response response = await client.DelayUpcomingActionAsync("<devBoxName>", "<upcomingActionId>", DateTimeOffset.UtcNow, <me>);
+
+
+    JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+
+    Console.WriteLine(result.GetProperty("id").ToString());
+
+    Console.WriteLine(result.GetProperty("actionType").ToString());
+
+    Console.WriteLine(result.GetProperty("reason").ToString());
+
+    Console.WriteLine(result.GetProperty("scheduledTime").ToString());
+
+    Console.WriteLine(result.GetProperty("originalScheduledTime").ToString());
+
+    Console.WriteLine(result.GetProperty("sourceId").ToString());
+
+    ```
+  metadata: {}
+uid: Azure.Developer.DevCenter.DevBoxesClient.DelayUpcomingActionAsync*
+commentId: Overload:Azure.Developer.DevCenter.DevBoxesClient.DelayUpcomingActionAsync
+namespace: Azure.Developer.DevCenter
+name: DelayUpcomingActionAsync
+fullName: Azure.Developer.DevCenter.DevBoxesClient.DelayUpcomingActionAsync
+nameWithType: DevBoxesClient.DelayUpcomingActionAsync
+assembliesWithMoniker:
+- value: Azure.Developer.DevCenter.dll
+packagesWithMoniker:
+- value: Azure.Developer.DevCenter v1.0.0-beta.2
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.Developer.DevCenter.DevBoxesClient.DelayUpcomingActionAsync
+  api_location:
+  - Azure.Developer.DevCenter.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.Developer.DevCenter.DevBoxesClient.DelayUpcomingActionAsync
+  - Azure::Developer::DevCenter::DevBoxesClient::DelayUpcomingActionAsync
+  - DelayUpcomingActionAsync
+  - DevBoxesClient.DelayUpcomingActionAsync
+  - DevBoxesClient::DelayUpcomingActionAsync
+  helpviewer_keywords:
+  - DevBoxesClient.DelayUpcomingActionAsync method [.NET]
+  - DelayUpcomingActionAsync method [.NET], class DevBoxesClient
+  - DevBoxesClient.DelayUpcomingActionAsync(String, String, DateTimeOffset, String, RequestContext) method [.NET]
+  - DelayUpcomingActionAsync(String, String, DateTimeOffset, String, RequestContext) method [.NET], class DevBoxesClient
+  monikers:
+  - azure-dotnet-preview

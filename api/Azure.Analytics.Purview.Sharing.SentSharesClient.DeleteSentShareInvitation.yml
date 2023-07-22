@@ -1,0 +1,156 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="Azure.Operation`1?alt=Azure.Operation&text=Operation" data-throw-if-not-resolved="True"/>&lt;<xref href="System.BinaryData?alt=System.BinaryData&text=BinaryData" data-throw-if-not-resolved="True"/>&gt;
+    description: The <xref data-throw-if-not-resolved="true" uid="Azure.Operation"></xref> representing an asynchronous operation on the service.
+  parameters:
+  - namesWithMoniker:
+    - value: waitUntil
+    description: <xref data-throw-if-not-resolved="true" uid="Azure.WaitUntil.Completed"></xref> if the method should wait to return until the long-running operation has completed on the service; <xref data-throw-if-not-resolved="true" uid="Azure.WaitUntil.Started"></xref> if it should return after starting the operation. For more information on long-running operations, please see <a href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</a>.
+    type: <xref href="Azure.WaitUntil?alt=Azure.WaitUntil&text=WaitUntil" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: sentShareId
+    description: Id of the sent share.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: sentShareInvitationId
+    description: Id of the sent share invitation.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">sentShareId</code> or <code data-dev-comment-type="paramref">sentShareInvitationId</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: <code data-dev-comment-type="paramref">sentShareId</code> or <code data-dev-comment-type="paramref">sentShareInvitationId</code> is an empty string, and was expected to be non-empty.
+    type: <xref href="System.ArgumentException" data-throw-if-not-resolved="True"/>
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.Analytics.Purview.Sharing.SentSharesClient.DeleteSentShareInvitation(Azure.WaitUntil,System.String,System.String,Azure.RequestContext)
+  commentId: M:Azure.Analytics.Purview.Sharing.SentSharesClient.DeleteSentShareInvitation(Azure.WaitUntil,System.String,System.String,Azure.RequestContext)
+  name: DeleteSentShareInvitation(WaitUntil, String, String, RequestContext)
+  fullName: Azure.Analytics.Purview.Sharing.SentSharesClient.DeleteSentShareInvitation(WaitUntil, String, String, RequestContext)
+  nameWithType: SentSharesClient.DeleteSentShareInvitation(WaitUntil, String, String, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual Azure.Operation<BinaryData> DeleteSentShareInvitation (Azure.WaitUntil waitUntil, string sentShareId, string sentShareInvitationId, Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member DeleteSentShareInvitation : Azure.WaitUntil * string * string * Azure.RequestContext -> Azure.Operation<BinaryData>
+
+        override this.DeleteSentShareInvitation : Azure.WaitUntil * string * string * Azure.RequestContext -> Azure.Operation<BinaryData>
+  - lang: vb
+    values:
+    - value: Public Overridable Function DeleteSentShareInvitation (waitUntil As WaitUntil, sentShareId As String, sentShareInvitationId As String, Optional context As RequestContext = Nothing) As Operation(Of BinaryData)
+  monikers:
+  - azure-dotnet-preview
+  summary: >-
+    [Protocol Method] Delete Invitation in a share.
+
+    <ul><li>
+
+    This <a href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</a> allows explicit creation of the request and processing of the response for advanced scenarios.
+
+    </li></ul>
+  remarks: >-
+    <p>Delete a sent share invitation</p><p>Below is the JSON schema for the response payload.</p><p>Response Body:</p><p>Schema for <code data-dev-comment-type="c">OperationResponse</code>: 
+
+
+    ```
+
+    {
+      endTime: string (ISO 8601 Format), # Optional. End time of the long running operation. Represented in the standard date-time format as defined by [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339)
+      error: {
+        code: string, # Required. Code of the error
+        details: [PurviewShareErrorInfo], # Optional. Nested details of the error model
+        message: string, # Required. Message of the error
+        target: string, # Optional. Target of the error
+      }, # Optional. The purview share error body model.
+      id: string, # Optional. Job id of the long running operation
+      startTime: string (ISO 8601 Format), # Optional. Start time of the long running operation. Represented in the standard date-time format as defined by [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339)
+      status: "Running" | "TransientFailure" | "Succeeded" | "Failed" | "NotStarted", # Required. States for long running operations.
+    }
+
+    ```
+
+    </p>
+  examples: >-
+    This sample shows how to call DeleteSentShareInvitation with required parameters and parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new SentSharesClient(endpoint, credential);
+
+
+    var operation = client.DeleteSentShareInvitation(WaitUntil.Completed, "<sentShareId>", "<sentShareInvitationId>");
+
+
+    BinaryData responseData = operation.Value;
+
+    JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+
+    Console.WriteLine(result.GetProperty("endTime").ToString());
+
+    Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+
+    Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+
+    Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+
+    Console.WriteLine(result.GetProperty("id").ToString());
+
+    Console.WriteLine(result.GetProperty("startTime").ToString());
+
+    Console.WriteLine(result.GetProperty("status").ToString());
+
+    ```
+  metadata: {}
+uid: Azure.Analytics.Purview.Sharing.SentSharesClient.DeleteSentShareInvitation*
+commentId: Overload:Azure.Analytics.Purview.Sharing.SentSharesClient.DeleteSentShareInvitation
+namespace: Azure.Analytics.Purview.Sharing
+name: DeleteSentShareInvitation
+fullName: Azure.Analytics.Purview.Sharing.SentSharesClient.DeleteSentShareInvitation
+nameWithType: SentSharesClient.DeleteSentShareInvitation
+assembliesWithMoniker:
+- value: Azure.Analytics.Purview.Sharing.dll
+packagesWithMoniker:
+- value: Azure.Analytics.Purview.Sharing v1.0.0-beta.3
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.Analytics.Purview.Sharing.SentSharesClient.DeleteSentShareInvitation
+  api_location:
+  - Azure.Analytics.Purview.Sharing.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.Analytics.Purview.Sharing.SentSharesClient.DeleteSentShareInvitation
+  - Azure::Analytics::Purview::Sharing::SentSharesClient::DeleteSentShareInvitation
+  - DeleteSentShareInvitation
+  - SentSharesClient.DeleteSentShareInvitation
+  - SentSharesClient::DeleteSentShareInvitation
+  helpviewer_keywords:
+  - SentSharesClient.DeleteSentShareInvitation method [.NET]
+  - DeleteSentShareInvitation method [.NET], class SentSharesClient
+  - SentSharesClient.DeleteSentShareInvitation(WaitUntil, String, String, RequestContext) method [.NET]
+  - DeleteSentShareInvitation(WaitUntil, String, String, RequestContext) method [.NET], class SentSharesClient
+  monikers:
+  - azure-dotnet-preview

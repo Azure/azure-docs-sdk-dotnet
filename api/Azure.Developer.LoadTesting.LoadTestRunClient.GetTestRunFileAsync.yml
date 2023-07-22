@@ -1,0 +1,145 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="System.Threading.Tasks.Task`1?alt=System.Threading.Tasks.Task&text=Task" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.Response?alt=Azure.Response&text=Response" data-throw-if-not-resolved="True"/>&gt;
+    description: The response returned from the service. Details of the response body schema are in the Remarks section below.
+  parameters:
+  - namesWithMoniker:
+    - value: testRunId
+    description: Unique name for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: fileName
+    description: Test run file name with file extension.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">testRunId</code> or <code data-dev-comment-type="paramref">fileName</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: <code data-dev-comment-type="paramref">testRunId</code> or <code data-dev-comment-type="paramref">fileName</code> is an empty string, and was expected to be non-empty.
+    type: <xref href="System.ArgumentException" data-throw-if-not-resolved="True"/>
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.Developer.LoadTesting.LoadTestRunClient.GetTestRunFileAsync(System.String,System.String,Azure.RequestContext)
+  commentId: M:Azure.Developer.LoadTesting.LoadTestRunClient.GetTestRunFileAsync(System.String,System.String,Azure.RequestContext)
+  name: GetTestRunFileAsync(String, String, RequestContext)
+  fullName: Azure.Developer.LoadTesting.LoadTestRunClient.GetTestRunFileAsync(String, String, RequestContext)
+  nameWithType: LoadTestRunClient.GetTestRunFileAsync(String, String, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual System.Threading.Tasks.Task<Azure.Response> GetTestRunFileAsync (string testRunId, string fileName, Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member GetTestRunFileAsync : string * string * Azure.RequestContext -> System.Threading.Tasks.Task<Azure.Response>
+
+        override this.GetTestRunFileAsync : string * string * Azure.RequestContext -> System.Threading.Tasks.Task<Azure.Response>
+  - lang: vb
+    values:
+    - value: Public Overridable Function GetTestRunFileAsync (testRunId As String, fileName As String, Optional context As RequestContext = Nothing) As Task(Of Response)
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview
+  summary: Get test run file by file name.
+  remarks: >-
+    <p>Below is the JSON schema for the response payload.</p><p>Response Body:</p><p>Schema for <code data-dev-comment-type="c">FileInfo</code>: 
+
+
+    ```
+
+    {
+      url: string, # Optional. File URL.
+      fileName: string, # Optional. Name of the file.
+      fileType: "JMX_FILE" | "USER_PROPERTIES" | "ADDITIONAL_ARTIFACTS", # Optional. File type
+      expireDateTime: string (ISO 8601 Format), # Optional. Expiry time of the file (ISO 8601 literal format)
+      validationStatus: "NOT_VALIDATED" | "VALIDATION_SUCCESS" | "VALIDATION_FAILURE" | "VALIDATION_INITIATED" | "VALIDATION_NOT_REQUIRED", # Optional. Validation status of the file
+      validationFailureDetails: string, # Optional. Validation failure error details
+    }
+
+    ```
+
+    </p>
+  examples: >-
+    This sample shows how to call GetTestRunFileAsync with required parameters and parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new LoadTestRunClient(endpoint, credential);
+
+
+    Response response = await client.GetTestRunFileAsync("<testRunId>", "<fileName>");
+
+
+    JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+
+    Console.WriteLine(result.GetProperty("url").ToString());
+
+    Console.WriteLine(result.GetProperty("fileName").ToString());
+
+    Console.WriteLine(result.GetProperty("fileType").ToString());
+
+    Console.WriteLine(result.GetProperty("expireDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("validationStatus").ToString());
+
+    Console.WriteLine(result.GetProperty("validationFailureDetails").ToString());
+
+    ```
+  metadata: {}
+uid: Azure.Developer.LoadTesting.LoadTestRunClient.GetTestRunFileAsync*
+commentId: Overload:Azure.Developer.LoadTesting.LoadTestRunClient.GetTestRunFileAsync
+namespace: Azure.Developer.LoadTesting
+name: GetTestRunFileAsync
+fullName: Azure.Developer.LoadTesting.LoadTestRunClient.GetTestRunFileAsync
+nameWithType: LoadTestRunClient.GetTestRunFileAsync
+assembliesWithMoniker:
+- value: Azure.Developer.LoadTesting.dll
+packagesWithMoniker:
+- value: Azure.Developer.LoadTesting v1.0.1
+  monikers:
+  - azure-dotnet
+- value: Azure.Developer.LoadTesting v1.0.0-beta.2
+  monikers:
+  - azure-dotnet-preview
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.Developer.LoadTesting.LoadTestRunClient.GetTestRunFileAsync
+  api_location:
+  - Azure.Developer.LoadTesting.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.Developer.LoadTesting.LoadTestRunClient.GetTestRunFileAsync
+  - Azure::Developer::LoadTesting::LoadTestRunClient::GetTestRunFileAsync
+  - GetTestRunFileAsync
+  - LoadTestRunClient.GetTestRunFileAsync
+  - LoadTestRunClient::GetTestRunFileAsync
+  helpviewer_keywords:
+  - LoadTestRunClient.GetTestRunFileAsync method [.NET]
+  - GetTestRunFileAsync method [.NET], class LoadTestRunClient
+  - LoadTestRunClient.GetTestRunFileAsync(String, String, RequestContext) method [.NET]
+  - GetTestRunFileAsync(String, String, RequestContext) method [.NET], class LoadTestRunClient
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview

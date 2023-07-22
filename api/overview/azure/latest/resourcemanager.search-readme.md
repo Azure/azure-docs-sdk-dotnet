@@ -9,13 +9,14 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: cognitive-search
 ---
+
 # Azure.ResourceManager.Search client library for .NET
 
-This library provides resource management APIs for Azure Cognitive Search. Use this library to create, configure, and manage a search service. `Azure.ResourceManager.Search` replaces the previous management libraries (`Microsoft.Azure.Management.Search`), which are now deprecated.
+This library provides resource management APIs for Azure Cognitive Search. Use this library for control plane operations, such as creating, configuring, and managing a search service. 
 
-This library follows the [new Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html). 
+`Azure.ResourceManager.Search` replaces the previous management libraries for the (`Microsoft.Azure.Management.Search`) namespace, which are now deprecated. For descriptions of all Azure Cognitive Search client libraries in this SDK, see the [Azure Cognitive Search libraries for .NET](/dotnet/api/overview/azure/search).
 
-For descriptions of all Azure Cognitive Search client libraries in this SDK, see the [Azure Cognitive Search libraries for .NET](/dotnet/api/overview/azure/search).
+This library follows the [new Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html).
 
 ## Getting started
 

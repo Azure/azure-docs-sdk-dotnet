@@ -1,0 +1,229 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="System.Threading.Tasks.Task`1?alt=System.Threading.Tasks.Task&text=Task" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.Response`1?alt=Azure.Response&text=Response" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.Monitor.Query.Models.LogsQueryResult?alt=Azure.Monitor.Query.Models.LogsQueryResult&text=LogsQueryResult" data-throw-if-not-resolved="True"/>&gt;&gt;
+    description: The logs matching the query.
+  parameters:
+  - namesWithMoniker:
+    - value: resourceId
+    description: The resourceId where the query should be executed.
+    type: <xref href="Azure.Core.ResourceIdentifier?alt=Azure.Core.ResourceIdentifier&text=ResourceIdentifier" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: query
+    description: The Kusto query to fetch the logs.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: timeRange
+    description: The time period for which the logs should be looked up.
+    type: <xref href="Azure.Monitor.Query.QueryTimeRange?alt=Azure.Monitor.Query.QueryTimeRange&text=QueryTimeRange" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: options
+    description: The <xref data-throw-if-not-resolved="true" uid="Azure.Monitor.Query.LogsQueryOptions"></xref> to configure the query.
+    type: <xref href="Azure.Monitor.Query.LogsQueryOptions?alt=Azure.Monitor.Query.LogsQueryOptions&text=LogsQueryOptions" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: cancellationToken
+    description: The <xref data-throw-if-not-resolved="true" uid="System.Threading.CancellationToken"></xref> to use.
+    type: <xref href="System.Threading.CancellationToken?alt=System.Threading.CancellationToken&text=CancellationToken" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.Monitor.Query.LogsQueryClient.QueryResourceAsync(Azure.Core.ResourceIdentifier,System.String,Azure.Monitor.Query.QueryTimeRange,Azure.Monitor.Query.LogsQueryOptions,System.Threading.CancellationToken)
+  commentId: M:Azure.Monitor.Query.LogsQueryClient.QueryResourceAsync(Azure.Core.ResourceIdentifier,System.String,Azure.Monitor.Query.QueryTimeRange,Azure.Monitor.Query.LogsQueryOptions,System.Threading.CancellationToken)
+  name: QueryResourceAsync(ResourceIdentifier, String, QueryTimeRange, LogsQueryOptions, CancellationToken)
+  fullName: Azure.Monitor.Query.LogsQueryClient.QueryResourceAsync(ResourceIdentifier, String, QueryTimeRange, LogsQueryOptions, CancellationToken)
+  nameWithType: LogsQueryClient.QueryResourceAsync(ResourceIdentifier, String, QueryTimeRange, LogsQueryOptions, CancellationToken)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual System.Threading.Tasks.Task<Azure.Response<Azure.Monitor.Query.Models.LogsQueryResult>> QueryResourceAsync (Azure.Core.ResourceIdentifier resourceId, string query, Azure.Monitor.Query.QueryTimeRange timeRange, Azure.Monitor.Query.LogsQueryOptions options = default, System.Threading.CancellationToken cancellationToken = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member QueryResourceAsync : Azure.Core.ResourceIdentifier * string * Azure.Monitor.Query.QueryTimeRange * Azure.Monitor.Query.LogsQueryOptions * System.Threading.CancellationToken -> System.Threading.Tasks.Task<Azure.Response<Azure.Monitor.Query.Models.LogsQueryResult>>
+
+        override this.QueryResourceAsync : Azure.Core.ResourceIdentifier * string * Azure.Monitor.Query.QueryTimeRange * Azure.Monitor.Query.LogsQueryOptions * System.Threading.CancellationToken -> System.Threading.Tasks.Task<Azure.Response<Azure.Monitor.Query.Models.LogsQueryResult>>
+  - lang: vb
+    values:
+    - value: Public Overridable Function QueryResourceAsync (resourceId As ResourceIdentifier, query As String, timeRange As QueryTimeRange, Optional options As LogsQueryOptions = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of LogsQueryResult))
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview
+  summary: >-
+    Returns all the Azure Monitor logs matching the given query for an Azure resource.
+
+    <example snippet="Snippet:QueryResource">
+
+
+    ```csharp
+
+    var client = new LogsQueryClient(new DefaultAzureCredential());
+
+
+    string resourceId = "/subscriptions/<subscription_id>/resourceGroups/<resource_group_name>/providers/<resource_provider>/<resource>";
+
+    string tableName = "<table_name>";
+
+    Response<LogsQueryResult> results = await client.QueryResourceAsync(
+        new ResourceIdentifier(resourceId),
+        $"{tableName} | distinct * | project TimeGenerated",
+        new QueryTimeRange(TimeSpan.FromDays(7)));
+
+    LogsTable resultTable = results.Value.Table;
+
+    foreach (LogsTableRow row in resultTable.Rows)
+
+    {
+        Console.WriteLine($"{row["OperationName"]} {row["ResourceGroup"]}");
+    }
+
+
+    foreach (LogsTableColumn columns in resultTable.Columns)
+
+    {
+        Console.WriteLine("Name: " + columns.Name + " Type: " + columns.Type);
+    }
+
+    ```
+
+    </example>
+  metadata: {}
+- typeParameters:
+  - name: T
+  returnsWithMoniker:
+    type:
+    - value: <xref href="System.Threading.Tasks.Task`1?alt=System.Threading.Tasks.Task&text=Task" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.Response`1?alt=Azure.Response&text=Response" data-throw-if-not-resolved="True"/>&lt;<xref href="System.Collections.Generic.IReadOnlyList`1?alt=System.Collections.Generic.IReadOnlyList&text=IReadOnlyList" data-throw-if-not-resolved="True"/>&lt;T&gt;&gt;&gt;
+    description: The logs matching the query.
+  parameters:
+  - namesWithMoniker:
+    - value: resourceId
+    description: The resourceId where the query should be executed.
+    type: <xref href="Azure.Core.ResourceIdentifier?alt=Azure.Core.ResourceIdentifier&text=ResourceIdentifier" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: query
+    description: The Kusto query to fetch the logs.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: timeRange
+    description: The time period for which the logs should be looked up.
+    type: <xref href="Azure.Monitor.Query.QueryTimeRange?alt=Azure.Monitor.Query.QueryTimeRange&text=QueryTimeRange" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: options
+    description: The <xref data-throw-if-not-resolved="true" uid="Azure.Monitor.Query.LogsQueryOptions"></xref> to configure the query.
+    type: <xref href="Azure.Monitor.Query.LogsQueryOptions?alt=Azure.Monitor.Query.LogsQueryOptions&text=LogsQueryOptions" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: cancellationToken
+    description: The <xref data-throw-if-not-resolved="true" uid="System.Threading.CancellationToken"></xref> to use.
+    type: <xref href="System.Threading.CancellationToken?alt=System.Threading.CancellationToken&text=CancellationToken" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.Monitor.Query.LogsQueryClient.QueryResourceAsync``1(Azure.Core.ResourceIdentifier,System.String,Azure.Monitor.Query.QueryTimeRange,Azure.Monitor.Query.LogsQueryOptions,System.Threading.CancellationToken)
+  commentId: M:Azure.Monitor.Query.LogsQueryClient.QueryResourceAsync``1(Azure.Core.ResourceIdentifier,System.String,Azure.Monitor.Query.QueryTimeRange,Azure.Monitor.Query.LogsQueryOptions,System.Threading.CancellationToken)
+  name: QueryResourceAsync<T>(ResourceIdentifier, String, QueryTimeRange, LogsQueryOptions, CancellationToken)
+  fullName: Azure.Monitor.Query.LogsQueryClient.QueryResourceAsync<T>(ResourceIdentifier, String, QueryTimeRange, LogsQueryOptions, CancellationToken)
+  nameWithType: LogsQueryClient.QueryResourceAsync<T>(ResourceIdentifier, String, QueryTimeRange, LogsQueryOptions, CancellationToken)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual System.Threading.Tasks.Task<Azure.Response<System.Collections.Generic.IReadOnlyList<T>>> QueryResourceAsync<T> (Azure.Core.ResourceIdentifier resourceId, string query, Azure.Monitor.Query.QueryTimeRange timeRange, Azure.Monitor.Query.LogsQueryOptions options = default, System.Threading.CancellationToken cancellationToken = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member QueryResourceAsync : Azure.Core.ResourceIdentifier * string * Azure.Monitor.Query.QueryTimeRange * Azure.Monitor.Query.LogsQueryOptions * System.Threading.CancellationToken -> System.Threading.Tasks.Task<Azure.Response<System.Collections.Generic.IReadOnlyList<'T>>>
+
+        override this.QueryResourceAsync : Azure.Core.ResourceIdentifier * string * Azure.Monitor.Query.QueryTimeRange * Azure.Monitor.Query.LogsQueryOptions * System.Threading.CancellationToken -> System.Threading.Tasks.Task<Azure.Response<System.Collections.Generic.IReadOnlyList<'T>>>
+  - lang: vb
+    values:
+    - value: Public Overridable Function QueryResourceAsync(Of T) (resourceId As ResourceIdentifier, query As String, timeRange As QueryTimeRange, Optional options As LogsQueryOptions = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of IReadOnlyList(Of T)))
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview
+  summary: >-
+    Returns all the Azure Monitor logs matching the given query for an Azure resource.
+
+    <example snippet="Snippet:QueryResource">
+
+
+    ```csharp
+
+    var client = new LogsQueryClient(new DefaultAzureCredential());
+
+
+    string resourceId = "/subscriptions/<subscription_id>/resourceGroups/<resource_group_name>/providers/<resource_provider>/<resource>";
+
+    string tableName = "<table_name>";
+
+    Response<LogsQueryResult> results = await client.QueryResourceAsync(
+        new ResourceIdentifier(resourceId),
+        $"{tableName} | distinct * | project TimeGenerated",
+        new QueryTimeRange(TimeSpan.FromDays(7)));
+
+    LogsTable resultTable = results.Value.Table;
+
+    foreach (LogsTableRow row in resultTable.Rows)
+
+    {
+        Console.WriteLine($"{row["OperationName"]} {row["ResourceGroup"]}");
+    }
+
+
+    foreach (LogsTableColumn columns in resultTable.Columns)
+
+    {
+        Console.WriteLine("Name: " + columns.Name + " Type: " + columns.Type);
+    }
+
+    ```
+
+    </example>
+  metadata: {}
+uid: Azure.Monitor.Query.LogsQueryClient.QueryResourceAsync*
+commentId: Overload:Azure.Monitor.Query.LogsQueryClient.QueryResourceAsync
+namespace: Azure.Monitor.Query
+name: QueryResourceAsync
+fullName: Azure.Monitor.Query.LogsQueryClient.QueryResourceAsync
+nameWithType: LogsQueryClient.QueryResourceAsync
+assembliesWithMoniker:
+- value: Azure.Monitor.Query.dll
+packagesWithMoniker:
+- value: Azure.Monitor.Query v1.2.0
+  monikers:
+  - azure-dotnet
+- value: Azure.Monitor.Query v1.2.0-beta.1
+  monikers:
+  - azure-dotnet-preview
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.Monitor.Query.LogsQueryClient.QueryResourceAsync
+  api_location:
+  - Azure.Monitor.Query.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.Monitor.Query.LogsQueryClient.QueryResourceAsync
+  - Azure::Monitor::Query::LogsQueryClient::QueryResourceAsync
+  - QueryResourceAsync
+  - LogsQueryClient.QueryResourceAsync
+  - LogsQueryClient::QueryResourceAsync
+  - Azure.Monitor.Query.LogsQueryClient.QueryResourceAsync``1
+  - Azure::Monitor::Query::LogsQueryClient::QueryResourceAsync``1
+  - QueryResourceAsync``1
+  - LogsQueryClient.QueryResourceAsync``1
+  - LogsQueryClient::QueryResourceAsync``1
+  helpviewer_keywords:
+  - LogsQueryClient.QueryResourceAsync method [.NET]
+  - QueryResourceAsync method [.NET], class LogsQueryClient
+  - LogsQueryClient.QueryResourceAsync(ResourceIdentifier, String, QueryTimeRange, LogsQueryOptions, CancellationToken) method [.NET]
+  - QueryResourceAsync(ResourceIdentifier, String, QueryTimeRange, LogsQueryOptions, CancellationToken) method [.NET], class LogsQueryClient
+  - LogsQueryClient.QueryResourceAsync<T>(ResourceIdentifier, String, QueryTimeRange, LogsQueryOptions, CancellationToken) method [.NET]
+  - QueryResourceAsync<T>(ResourceIdentifier, String, QueryTimeRange, LogsQueryOptions, CancellationToken) method [.NET], class LogsQueryClient
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview

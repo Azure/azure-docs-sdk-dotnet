@@ -1,0 +1,159 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="System.Threading.Tasks.Task`1?alt=System.Threading.Tasks.Task&text=Task" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.Operation?alt=Azure.Operation&text=Operation" data-throw-if-not-resolved="True"/>&gt;
+    description: The <xref data-throw-if-not-resolved="true" uid="Azure.Operation"></xref> representing an asynchronous operation on the service.
+  parameters:
+  - namesWithMoniker:
+    - value: waitUntil
+    description: <xref data-throw-if-not-resolved="true" uid="Azure.WaitUntil.Completed"></xref> if the method should wait to return until the long-running operation has completed on the service; <xref data-throw-if-not-resolved="true" uid="Azure.WaitUntil.Started"></xref> if it should return after starting the operation. For more information on long-running operations, please see <a href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</a>.
+    type: <xref href="Azure.WaitUntil?alt=Azure.WaitUntil&text=WaitUntil" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: environmentName
+    description: The name of the environment.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: content
+    description: The content to send as the body of the request. Details of the request body schema are in the Remarks section below.
+    type: <xref href="Azure.Core.RequestContent?alt=Azure.Core.RequestContent&text=RequestContent" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: userId
+    description: The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">environmentName</code>, <code data-dev-comment-type="paramref">content</code> or <code data-dev-comment-type="paramref">userId</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: <code data-dev-comment-type="paramref">environmentName</code> or <code data-dev-comment-type="paramref">userId</code> is an empty string, and was expected to be non-empty.
+    type: <xref href="System.ArgumentException" data-throw-if-not-resolved="True"/>
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.Developer.DevCenter.EnvironmentsClient.DeployEnvironmentActionAsync(Azure.WaitUntil,System.String,Azure.Core.RequestContent,System.String,Azure.RequestContext)
+  commentId: M:Azure.Developer.DevCenter.EnvironmentsClient.DeployEnvironmentActionAsync(Azure.WaitUntil,System.String,Azure.Core.RequestContent,System.String,Azure.RequestContext)
+  name: DeployEnvironmentActionAsync(WaitUntil, String, RequestContent, String, RequestContext)
+  fullName: Azure.Developer.DevCenter.EnvironmentsClient.DeployEnvironmentActionAsync(WaitUntil, String, RequestContent, String, RequestContext)
+  nameWithType: EnvironmentsClient.DeployEnvironmentActionAsync(WaitUntil, String, RequestContent, String, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual System.Threading.Tasks.Task<Azure.Operation> DeployEnvironmentActionAsync (Azure.WaitUntil waitUntil, string environmentName, Azure.Core.RequestContent content, string userId = "me", Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member DeployEnvironmentActionAsync : Azure.WaitUntil * string * Azure.Core.RequestContent * string * Azure.RequestContext -> System.Threading.Tasks.Task<Azure.Operation>
+
+        override this.DeployEnvironmentActionAsync : Azure.WaitUntil * string * Azure.Core.RequestContent * string * Azure.RequestContext -> System.Threading.Tasks.Task<Azure.Operation>
+  - lang: vb
+    values:
+    - value: Public Overridable Function DeployEnvironmentActionAsync (waitUntil As WaitUntil, environmentName As String, content As RequestContent, Optional userId As String = "me", Optional context As RequestContext = Nothing) As Task(Of Operation)
+  monikers:
+  - azure-dotnet-preview
+  summary: Executes a deploy action.
+  remarks: >-
+    <p>Below is the JSON schema for the request payload.</p><p>Request Body:</p><p>Schema for <code data-dev-comment-type="c">ActionRequest</code>: 
+
+
+    ```
+
+    {
+      actionId: string, # Required. The Catalog Item action id to execute
+      parameters: AnyObject, # Optional. Parameters object for the Action
+    }
+
+    ```
+
+    </p>
+  examples: >-
+    This sample shows how to call DeployEnvironmentActionAsync with required parameters and request content.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
+
+
+    var data = new {
+        actionId = "<actionId>",
+    };
+
+
+    var operation = await client.DeployEnvironmentActionAsync(WaitUntil.Completed, "<environmentName>", RequestContent.Create(data));
+
+
+    Console.WriteLine(operation.GetRawResponse().Status)
+
+    ```
+
+    This sample shows how to call DeployEnvironmentActionAsync with all parameters and request content.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
+
+
+    var data = new {
+        actionId = "<actionId>",
+        parameters = new {},
+    };
+
+
+    var operation = await client.DeployEnvironmentActionAsync(WaitUntil.Completed, "<environmentName>", RequestContent.Create(data), <me>);
+
+
+    Console.WriteLine(operation.GetRawResponse().Status)
+
+    ```
+  metadata: {}
+uid: Azure.Developer.DevCenter.EnvironmentsClient.DeployEnvironmentActionAsync*
+commentId: Overload:Azure.Developer.DevCenter.EnvironmentsClient.DeployEnvironmentActionAsync
+namespace: Azure.Developer.DevCenter
+name: DeployEnvironmentActionAsync
+fullName: Azure.Developer.DevCenter.EnvironmentsClient.DeployEnvironmentActionAsync
+nameWithType: EnvironmentsClient.DeployEnvironmentActionAsync
+assembliesWithMoniker:
+- value: Azure.Developer.DevCenter.dll
+packagesWithMoniker:
+- value: Azure.Developer.DevCenter v1.0.0-beta.2
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.Developer.DevCenter.EnvironmentsClient.DeployEnvironmentActionAsync
+  api_location:
+  - Azure.Developer.DevCenter.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.Developer.DevCenter.EnvironmentsClient.DeployEnvironmentActionAsync
+  - Azure::Developer::DevCenter::EnvironmentsClient::DeployEnvironmentActionAsync
+  - DeployEnvironmentActionAsync
+  - EnvironmentsClient.DeployEnvironmentActionAsync
+  - EnvironmentsClient::DeployEnvironmentActionAsync
+  helpviewer_keywords:
+  - EnvironmentsClient.DeployEnvironmentActionAsync method [.NET]
+  - DeployEnvironmentActionAsync method [.NET], class EnvironmentsClient
+  - EnvironmentsClient.DeployEnvironmentActionAsync(WaitUntil, String, RequestContent, String, RequestContext) method [.NET]
+  - DeployEnvironmentActionAsync(WaitUntil, String, RequestContent, String, RequestContext) method [.NET], class EnvironmentsClient
+  monikers:
+  - azure-dotnet-preview

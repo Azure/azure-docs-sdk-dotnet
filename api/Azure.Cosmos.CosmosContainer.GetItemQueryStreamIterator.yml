@@ -1,0 +1,214 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="System.Collections.Generic.IAsyncEnumerable`1?alt=System.Collections.Generic.IAsyncEnumerable&text=IAsyncEnumerable" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.Response?alt=Azure.Response&text=Response" data-throw-if-not-resolved="True"/>&gt;
+    description: An iterator to go through the items.
+  parameters:
+  - namesWithMoniker:
+    - value: queryDefinition
+    description: The cosmos SQL query definition.
+    type: <xref href="Azure.Cosmos.QueryDefinition?alt=Azure.Cosmos.QueryDefinition&text=QueryDefinition" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: continuationToken
+    description: (Optional) The continuation token in the Azure Cosmos DB service.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: requestOptions
+    description: (Optional) The options for the item query request <xref data-throw-if-not-resolved="true" uid="Azure.Cosmos.QueryRequestOptions"></xref>
+    type: <xref href="Azure.Cosmos.QueryRequestOptions?alt=Azure.Cosmos.QueryRequestOptions&text=QueryRequestOptions" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: cancellationToken
+    description: (Optional) <xref data-throw-if-not-resolved="true" uid="System.Threading.CancellationToken"></xref> representing request cancellation.
+    type: <xref href="System.Threading.CancellationToken?alt=System.Threading.CancellationToken&text=CancellationToken" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.Cosmos.CosmosContainer.GetItemQueryStreamIterator(Azure.Cosmos.QueryDefinition,System.String,Azure.Cosmos.QueryRequestOptions,System.Threading.CancellationToken)
+  commentId: M:Azure.Cosmos.CosmosContainer.GetItemQueryStreamIterator(Azure.Cosmos.QueryDefinition,System.String,Azure.Cosmos.QueryRequestOptions,System.Threading.CancellationToken)
+  name: GetItemQueryStreamIterator(QueryDefinition, String, QueryRequestOptions, CancellationToken)
+  fullName: Azure.Cosmos.CosmosContainer.GetItemQueryStreamIterator(QueryDefinition, String, QueryRequestOptions, CancellationToken)
+  nameWithType: CosmosContainer.GetItemQueryStreamIterator(QueryDefinition, String, QueryRequestOptions, CancellationToken)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public abstract System.Collections.Generic.IAsyncEnumerable<Azure.Response> GetItemQueryStreamIterator (Azure.Cosmos.QueryDefinition queryDefinition, string continuationToken = default, Azure.Cosmos.QueryRequestOptions requestOptions = default, System.Threading.CancellationToken cancellationToken = default);
+  - lang: fsharp
+    values:
+    - value: 'abstract member GetItemQueryStreamIterator : Azure.Cosmos.QueryDefinition * string * Azure.Cosmos.QueryRequestOptions * System.Threading.CancellationToken -> System.Collections.Generic.IAsyncEnumerable<Azure.Response>'
+  - lang: vb
+    values:
+    - value: Public MustOverride Function GetItemQueryStreamIterator (queryDefinition As QueryDefinition, Optional continuationToken As String = Nothing, Optional requestOptions As QueryRequestOptions = Nothing, Optional cancellationToken As CancellationToken = Nothing) As IAsyncEnumerable(Of Response)
+  monikers:
+  - azure-dotnet-preview
+  summary: >-
+    This method creates a query for items under a container in an Azure Cosmos database using a SQL statement with parameterized values. It returns a FeedIterator.
+
+    For more information on preparing SQL statements with parameterized values, please see <xref data-throw-if-not-resolved="true" uid="Azure.Cosmos.QueryDefinition"></xref>.
+  remarks: Query as a stream only supports single partition queries
+  examples: >-
+    Create a query to get all the ToDoActivity that have a cost greater than 9000 for the specified partition
+
+
+    ```csharp
+
+    public class ToDoActivity{
+        public string id {get; set;}
+        public string status {get; set;}
+        public int cost {get; set;}
+    }
+
+
+    QueryDefinition queryDefinition = new QueryDefinition("select * from ToDos t where t.cost > @expensive")
+        .WithParameter("@expensive", 9000);
+    await foreach(Response response in this.Container.GetItemQueryStreamIterator(
+                                                    queryDefinition,
+                                                    null,
+                                                    new QueryRequestOptions() { PartitionKey = new PartitionKey("Error")}))
+        {
+            using (StreamReader sr = new StreamReader(response.Content))
+            using (JsonTextReader jtr = new JsonTextReader(sr))
+            {
+                JObject result = JObject.Load(jtr);
+            }
+        }
+    ```
+  metadata: {}
+- returnsWithMoniker:
+    type:
+    - value: <xref href="System.Collections.Generic.IAsyncEnumerable`1?alt=System.Collections.Generic.IAsyncEnumerable&text=IAsyncEnumerable" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.Response?alt=Azure.Response&text=Response" data-throw-if-not-resolved="True"/>&gt;
+    description: An iterator to go through the items.
+  parameters:
+  - namesWithMoniker:
+    - value: queryText
+    description: The cosmos SQL query text.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: continuationToken
+    description: (Optional) The continuation token in the Azure Cosmos DB service.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: requestOptions
+    description: (Optional) The options for the item query request <xref data-throw-if-not-resolved="true" uid="Azure.Cosmos.QueryRequestOptions"></xref>
+    type: <xref href="Azure.Cosmos.QueryRequestOptions?alt=Azure.Cosmos.QueryRequestOptions&text=QueryRequestOptions" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: cancellationToken
+    description: (Optional) <xref data-throw-if-not-resolved="true" uid="System.Threading.CancellationToken"></xref> representing request cancellation.
+    type: <xref href="System.Threading.CancellationToken?alt=System.Threading.CancellationToken&text=CancellationToken" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.Cosmos.CosmosContainer.GetItemQueryStreamIterator(System.String,System.String,Azure.Cosmos.QueryRequestOptions,System.Threading.CancellationToken)
+  commentId: M:Azure.Cosmos.CosmosContainer.GetItemQueryStreamIterator(System.String,System.String,Azure.Cosmos.QueryRequestOptions,System.Threading.CancellationToken)
+  name: GetItemQueryStreamIterator(String, String, QueryRequestOptions, CancellationToken)
+  fullName: Azure.Cosmos.CosmosContainer.GetItemQueryStreamIterator(String, String, QueryRequestOptions, CancellationToken)
+  nameWithType: CosmosContainer.GetItemQueryStreamIterator(String, String, QueryRequestOptions, CancellationToken)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public abstract System.Collections.Generic.IAsyncEnumerable<Azure.Response> GetItemQueryStreamIterator (string queryText = default, string continuationToken = default, Azure.Cosmos.QueryRequestOptions requestOptions = default, System.Threading.CancellationToken cancellationToken = default);
+  - lang: fsharp
+    values:
+    - value: 'abstract member GetItemQueryStreamIterator : string * string * Azure.Cosmos.QueryRequestOptions * System.Threading.CancellationToken -> System.Collections.Generic.IAsyncEnumerable<Azure.Response>'
+  - lang: vb
+    values:
+    - value: Public MustOverride Function GetItemQueryStreamIterator (Optional queryText As String = Nothing, Optional continuationToken As String = Nothing, Optional requestOptions As QueryRequestOptions = Nothing, Optional cancellationToken As CancellationToken = Nothing) As IAsyncEnumerable(Of Response)
+  monikers:
+  - azure-dotnet-preview
+  summary: >-
+    This method creates a query for items under a container in an Azure Cosmos database using a SQL statement with parameterized values. It returns a FeedIterator.
+
+    For more information on preparing SQL statements with parameterized values, please see <xref data-throw-if-not-resolved="true" uid="Azure.Cosmos.QueryDefinition"></xref>.
+  remarks: Query as a stream only supports single partition queries
+  examples: >-
+    1. Create a query to get all the ToDoActivity that have a cost greater than 9000 for the specified partition
+
+
+    ```csharp
+
+    public class ToDoActivity{
+        public string id {get; set;}
+        public string status {get; set;}
+        public int cost {get; set;}
+    }
+
+
+    await foreach(Response response in this.Container.GetItemQueryStreamIterator(
+        "select * from ToDos t where t.cost > 9000",
+        null,
+        new QueryRequestOptions() { PartitionKey = new PartitionKey("Error")}))
+    {
+            using (StreamReader sr = new StreamReader(response.Content))
+            using (JsonTextReader jtr = new JsonTextReader(sr))
+            {
+                JObject result = JObject.Load(jtr);
+            }
+    }
+
+
+    ```
+
+
+    2. Creates a FeedIterator to get all the ToDoActivity.
+
+
+    ```csharp
+
+    public class ToDoActivity{
+        public string id {get; set;}
+        public string status {get; set;}
+        public int cost {get; set;}
+    }
+
+
+    await foreach(Response response in this.Container.GetItemQueryStreamIterator(
+        null,
+        null,
+        new QueryRequestOptions() { PartitionKey = new PartitionKey("Error")}))
+    {
+            using (StreamReader sr = new StreamReader(response.Content))
+            using (JsonTextReader jtr = new JsonTextReader(sr))
+            {
+                JObject result = JObject.Load(jtr);
+            }
+    }
+
+    ```
+  metadata: {}
+uid: Azure.Cosmos.CosmosContainer.GetItemQueryStreamIterator*
+commentId: Overload:Azure.Cosmos.CosmosContainer.GetItemQueryStreamIterator
+namespace: Azure.Cosmos
+name: GetItemQueryStreamIterator
+fullName: Azure.Cosmos.CosmosContainer.GetItemQueryStreamIterator
+nameWithType: CosmosContainer.GetItemQueryStreamIterator
+assembliesWithMoniker:
+- value: Azure.Cosmos.dll
+packagesWithMoniker:
+- value: Azure.Cosmos v4.0.0-preview3
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.Cosmos.CosmosContainer.GetItemQueryStreamIterator
+  api_location:
+  - Azure.Cosmos.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.Cosmos.CosmosContainer.GetItemQueryStreamIterator
+  - Azure::Cosmos::CosmosContainer::GetItemQueryStreamIterator
+  - GetItemQueryStreamIterator
+  - CosmosContainer.GetItemQueryStreamIterator
+  - CosmosContainer::GetItemQueryStreamIterator
+  helpviewer_keywords:
+  - CosmosContainer.GetItemQueryStreamIterator method [.NET]
+  - GetItemQueryStreamIterator method [.NET], class CosmosContainer
+  - CosmosContainer.GetItemQueryStreamIterator(QueryDefinition, String, QueryRequestOptions, CancellationToken) method [.NET]
+  - GetItemQueryStreamIterator(QueryDefinition, String, QueryRequestOptions, CancellationToken) method [.NET], class CosmosContainer
+  - CosmosContainer.GetItemQueryStreamIterator(String, String, QueryRequestOptions, CancellationToken) method [.NET]
+  - GetItemQueryStreamIterator(String, String, QueryRequestOptions, CancellationToken) method [.NET], class CosmosContainer
+  monikers:
+  - azure-dotnet-preview

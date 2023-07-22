@@ -1,0 +1,306 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="System.Threading.Tasks.Task`1?alt=System.Threading.Tasks.Task&text=Task" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.Response?alt=Azure.Response&text=Response" data-throw-if-not-resolved="True"/>&gt;
+    description: The response returned from the service.
+  parameters:
+  - namesWithMoniker:
+    - value: content
+    description: The content to send as the body of the request.
+    type: <xref href="Azure.Core.RequestContent?alt=Azure.Core.RequestContent&text=RequestContent" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">content</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.AI.AnomalyDetector.AnomalyDetectorClient.DetectUnivariateEntireSeriesAsync(Azure.Core.RequestContent,Azure.RequestContext)
+  commentId: M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.DetectUnivariateEntireSeriesAsync(Azure.Core.RequestContent,Azure.RequestContext)
+  name: DetectUnivariateEntireSeriesAsync(RequestContent, RequestContext)
+  fullName: Azure.AI.AnomalyDetector.AnomalyDetectorClient.DetectUnivariateEntireSeriesAsync(RequestContent, RequestContext)
+  nameWithType: AnomalyDetectorClient.DetectUnivariateEntireSeriesAsync(RequestContent, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual System.Threading.Tasks.Task<Azure.Response> DetectUnivariateEntireSeriesAsync (Azure.Core.RequestContent content, Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member DetectUnivariateEntireSeriesAsync : Azure.Core.RequestContent * Azure.RequestContext -> System.Threading.Tasks.Task<Azure.Response>
+
+        override this.DetectUnivariateEntireSeriesAsync : Azure.Core.RequestContent * Azure.RequestContext -> System.Threading.Tasks.Task<Azure.Response>
+  - lang: vb
+    values:
+    - value: Public Overridable Function DetectUnivariateEntireSeriesAsync (content As RequestContent, Optional context As RequestContext = Nothing) As Task(Of Response)
+  monikers:
+  - azure-dotnet-preview
+  summary: >-
+    [Protocol Method] Detect anomalies for the entire series in batch.
+
+    <ul><li>
+
+    This <a href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</a> allows explicit creation of the request and processing of the response for advanced scenarios.
+
+    </li><li>
+
+    Please try the simpler <xref data-throw-if-not-resolved="true" uid="Azure.AI.AnomalyDetector.AnomalyDetectorClient.DetectUnivariateEntireSeriesAsync(Azure.AI.AnomalyDetector.UnivariateDetectionOptions,System.Threading.CancellationToken)"></xref> convenience overload with strongly typed models first.
+
+    </li></ul>
+  remarks: >-
+    <p>This operation generates a model with an entire series, each point is detected with the same model. With this method, points before and after a certain point are used to determine whether it is an anomaly. The entire detection can give user an overall status of the time series.</p><p>Below is the JSON schema for the request and response payloads.</p><p>Request Body:</p><p>Schema for <code data-dev-comment-type="c">UnivariateDetectionOptions</code>: 
+
+
+    ```
+
+    {
+      series: [
+        {
+          timestamp: string (date & time), # Optional.
+          value: number, # Required.
+        }
+      ], # Required.
+      granularity: "yearly" | "monthly" | "weekly" | "daily" | "hourly" | "minutely" | "secondly" | "microsecond" | "none", # Optional.
+      customInterval: number, # Optional.
+      period: number, # Optional.
+      maxAnomalyRatio: number, # Optional.
+      sensitivity: number, # Optional.
+      imputeMode: "auto" | "previous" | "linear" | "fixed" | "zero" | "notFill", # Optional.
+      imputeFixedValue: number, # Optional.
+    }
+
+    ```
+
+    </p><p>Response Body:</p><p>Schema for <code data-dev-comment-type="c">UnivariateEntireDetectionResult</code>: 
+
+
+    ```
+
+    {
+      period: number, # Required.
+      expectedValues: [number], # Required.
+      upperMargins: [number], # Required.
+      lowerMargins: [number], # Required.
+      isAnomaly: [boolean], # Required.
+      isNegativeAnomaly: [boolean], # Required.
+      isPositiveAnomaly: [boolean], # Required.
+      severity: [number], # Optional.
+    }
+
+    ```
+
+    </p>
+  examples: >-
+    This sample shows how to call DetectUnivariateEntireSeriesAsync with required request content, and how to parse the result.
+
+
+    ```
+
+    var credential = new AzureKeyCredential("<key>");
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new AnomalyDetectorClient(endpoint, credential);
+
+
+    var data = new {
+        series = new[] {
+            new {
+                value = 123.45f,
+            }
+        },
+    };
+
+
+    Response response = await client.DetectUnivariateEntireSeriesAsync(RequestContent.Create(data));
+
+
+    JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+
+    Console.WriteLine(result.GetProperty("period").ToString());
+
+    Console.WriteLine(result.GetProperty("expectedValues")[0].ToString());
+
+    Console.WriteLine(result.GetProperty("upperMargins")[0].ToString());
+
+    Console.WriteLine(result.GetProperty("lowerMargins")[0].ToString());
+
+    Console.WriteLine(result.GetProperty("isAnomaly")[0].ToString());
+
+    Console.WriteLine(result.GetProperty("isNegativeAnomaly")[0].ToString());
+
+    Console.WriteLine(result.GetProperty("isPositiveAnomaly")[0].ToString());
+
+    ```
+
+    This sample shows how to call DetectUnivariateEntireSeriesAsync with all request content, and how to parse the result.
+
+
+    ```
+
+    var credential = new AzureKeyCredential("<key>");
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new AnomalyDetectorClient(endpoint, credential);
+
+
+    var data = new {
+        series = new[] {
+            new {
+                timestamp = "2022-05-10T14:57:31.2311892-04:00",
+                value = 123.45f,
+            }
+        },
+        granularity = "yearly",
+        customInterval = 1234,
+        period = 1234,
+        maxAnomalyRatio = 123.45f,
+        sensitivity = 1234,
+        imputeMode = "auto",
+        imputeFixedValue = 123.45f,
+    };
+
+
+    Response response = await client.DetectUnivariateEntireSeriesAsync(RequestContent.Create(data), new RequestContext());
+
+
+    JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+
+    Console.WriteLine(result.GetProperty("period").ToString());
+
+    Console.WriteLine(result.GetProperty("expectedValues")[0].ToString());
+
+    Console.WriteLine(result.GetProperty("upperMargins")[0].ToString());
+
+    Console.WriteLine(result.GetProperty("lowerMargins")[0].ToString());
+
+    Console.WriteLine(result.GetProperty("isAnomaly")[0].ToString());
+
+    Console.WriteLine(result.GetProperty("isNegativeAnomaly")[0].ToString());
+
+    Console.WriteLine(result.GetProperty("isPositiveAnomaly")[0].ToString());
+
+    Console.WriteLine(result.GetProperty("severity")[0].ToString());
+
+    ```
+  metadata: {}
+- returnsWithMoniker:
+    type:
+    - value: <xref href="System.Threading.Tasks.Task`1?alt=System.Threading.Tasks.Task&text=Task" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.Response`1?alt=Azure.Response&text=Response" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.AI.AnomalyDetector.UnivariateEntireDetectionResult?alt=Azure.AI.AnomalyDetector.UnivariateEntireDetectionResult&text=UnivariateEntireDetectionResult" data-throw-if-not-resolved="True"/>&gt;&gt;
+  parameters:
+  - namesWithMoniker:
+    - value: options
+    description: Method of univariate anomaly detection.
+    type: <xref href="Azure.AI.AnomalyDetector.UnivariateDetectionOptions?alt=Azure.AI.AnomalyDetector.UnivariateDetectionOptions&text=UnivariateDetectionOptions" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: cancellationToken
+    description: The cancellation token to use.
+    type: <xref href="System.Threading.CancellationToken?alt=System.Threading.CancellationToken&text=CancellationToken" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">options</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.AI.AnomalyDetector.AnomalyDetectorClient.DetectUnivariateEntireSeriesAsync(Azure.AI.AnomalyDetector.UnivariateDetectionOptions,System.Threading.CancellationToken)
+  commentId: M:Azure.AI.AnomalyDetector.AnomalyDetectorClient.DetectUnivariateEntireSeriesAsync(Azure.AI.AnomalyDetector.UnivariateDetectionOptions,System.Threading.CancellationToken)
+  name: DetectUnivariateEntireSeriesAsync(UnivariateDetectionOptions, CancellationToken)
+  fullName: Azure.AI.AnomalyDetector.AnomalyDetectorClient.DetectUnivariateEntireSeriesAsync(UnivariateDetectionOptions, CancellationToken)
+  nameWithType: AnomalyDetectorClient.DetectUnivariateEntireSeriesAsync(UnivariateDetectionOptions, CancellationToken)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual System.Threading.Tasks.Task<Azure.Response<Azure.AI.AnomalyDetector.UnivariateEntireDetectionResult>> DetectUnivariateEntireSeriesAsync (Azure.AI.AnomalyDetector.UnivariateDetectionOptions options, System.Threading.CancellationToken cancellationToken = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member DetectUnivariateEntireSeriesAsync : Azure.AI.AnomalyDetector.UnivariateDetectionOptions * System.Threading.CancellationToken -> System.Threading.Tasks.Task<Azure.Response<Azure.AI.AnomalyDetector.UnivariateEntireDetectionResult>>
+
+        override this.DetectUnivariateEntireSeriesAsync : Azure.AI.AnomalyDetector.UnivariateDetectionOptions * System.Threading.CancellationToken -> System.Threading.Tasks.Task<Azure.Response<Azure.AI.AnomalyDetector.UnivariateEntireDetectionResult>>
+  - lang: vb
+    values:
+    - value: Public Overridable Function DetectUnivariateEntireSeriesAsync (options As UnivariateDetectionOptions, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of UnivariateEntireDetectionResult))
+  monikers:
+  - azure-dotnet-preview
+  summary: Detect anomalies for the entire series in batch.
+  remarks: <p>This operation generates a model with an entire series. Each point is detected with the same model. With this method, points before and after a certain point are used to determine whether it's an anomaly. The entire detection can give the user an overall status of the time series.</p>
+  examples: >-
+    This sample shows how to call DetectUnivariateEntireSeriesAsync with required parameters.
+
+
+    ```
+
+    var credential = new AzureKeyCredential("<key>");
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new AnomalyDetectorClient(endpoint, credential);
+
+
+    var options = new UnivariateDetectionOptions(new TimeSeriesPoint[] 
+
+    {
+        new TimeSeriesPoint(3.14f)
+    {
+            Timestamp = DateTimeOffset.UtcNow,
+        }
+    })
+
+    {
+        Granularity = TimeGranularity.Yearly,
+        CustomInterval = 1234,
+        Period = 1234,
+        MaxAnomalyRatio = 3.14f,
+        Sensitivity = 1234,
+        ImputeMode = ImputeMode.Auto,
+        ImputeFixedValue = 3.14f,
+    };
+
+    var result = await client.DetectUnivariateEntireSeriesAsync(options);
+
+    ```
+  metadata: {}
+uid: Azure.AI.AnomalyDetector.AnomalyDetectorClient.DetectUnivariateEntireSeriesAsync*
+commentId: Overload:Azure.AI.AnomalyDetector.AnomalyDetectorClient.DetectUnivariateEntireSeriesAsync
+namespace: Azure.AI.AnomalyDetector
+name: DetectUnivariateEntireSeriesAsync
+fullName: Azure.AI.AnomalyDetector.AnomalyDetectorClient.DetectUnivariateEntireSeriesAsync
+nameWithType: AnomalyDetectorClient.DetectUnivariateEntireSeriesAsync
+assembliesWithMoniker:
+- value: Azure.AI.AnomalyDetector.dll
+packagesWithMoniker:
+- value: Azure.AI.AnomalyDetector v3.0.0-preview.7
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.AI.AnomalyDetector.AnomalyDetectorClient.DetectUnivariateEntireSeriesAsync
+  api_location:
+  - Azure.AI.AnomalyDetector.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.AI.AnomalyDetector.AnomalyDetectorClient.DetectUnivariateEntireSeriesAsync
+  - Azure::AI::AnomalyDetector::AnomalyDetectorClient::DetectUnivariateEntireSeriesAsync
+  - DetectUnivariateEntireSeriesAsync
+  - AnomalyDetectorClient.DetectUnivariateEntireSeriesAsync
+  - AnomalyDetectorClient::DetectUnivariateEntireSeriesAsync
+  helpviewer_keywords:
+  - AnomalyDetectorClient.DetectUnivariateEntireSeriesAsync method [.NET]
+  - DetectUnivariateEntireSeriesAsync method [.NET], class AnomalyDetectorClient
+  - AnomalyDetectorClient.DetectUnivariateEntireSeriesAsync(RequestContent, RequestContext) method [.NET]
+  - DetectUnivariateEntireSeriesAsync(RequestContent, RequestContext) method [.NET], class AnomalyDetectorClient
+  - AnomalyDetectorClient.DetectUnivariateEntireSeriesAsync(UnivariateDetectionOptions, CancellationToken) method [.NET]
+  - DetectUnivariateEntireSeriesAsync(UnivariateDetectionOptions, CancellationToken) method [.NET], class AnomalyDetectorClient
+  monikers:
+  - azure-dotnet-preview

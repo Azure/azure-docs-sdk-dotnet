@@ -1,0 +1,245 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="Azure.Operation`1?alt=Azure.Operation&text=Operation" data-throw-if-not-resolved="True"/>&lt;<xref href="System.BinaryData?alt=System.BinaryData&text=BinaryData" data-throw-if-not-resolved="True"/>&gt;
+    description: The <xref data-throw-if-not-resolved="true" uid="Azure.Operation`1"></xref> from the service that will contain a <xref data-throw-if-not-resolved="true" uid="System.BinaryData"></xref> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below.
+  parameters:
+  - namesWithMoniker:
+    - value: waitUntil
+    description: <xref data-throw-if-not-resolved="true" uid="Azure.WaitUntil.Completed"></xref> if the method should wait to return until the long-running operation has completed on the service; <xref data-throw-if-not-resolved="true" uid="Azure.WaitUntil.Started"></xref> if it should return after starting the operation. For more information on long-running operations, please see <a href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</a>.
+    type: <xref href="Azure.WaitUntil?alt=Azure.WaitUntil&text=WaitUntil" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: sentShareName
+    description: The name of the sent share.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: assetName
+    description: The name of the asset.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: content
+    description: The content to send as the body of the request. Details of the request body schema are in the Remarks section below.
+    type: <xref href="Azure.Core.RequestContent?alt=Azure.Core.RequestContent&text=RequestContent" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">sentShareName</code>, <code data-dev-comment-type="paramref">assetName</code> or <code data-dev-comment-type="paramref">content</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: <code data-dev-comment-type="paramref">sentShareName</code> or <code data-dev-comment-type="paramref">assetName</code> is an empty string, and was expected to be non-empty.
+    type: <xref href="System.ArgumentException" data-throw-if-not-resolved="True"/>
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.Analytics.Purview.Share.AssetsClient.Create(Azure.WaitUntil,System.String,System.String,Azure.Core.RequestContent,Azure.RequestContext)
+  commentId: M:Azure.Analytics.Purview.Share.AssetsClient.Create(Azure.WaitUntil,System.String,System.String,Azure.Core.RequestContent,Azure.RequestContext)
+  name: Create(WaitUntil, String, String, RequestContent, RequestContext)
+  fullName: Azure.Analytics.Purview.Share.AssetsClient.Create(WaitUntil, String, String, RequestContent, RequestContext)
+  nameWithType: AssetsClient.Create(WaitUntil, String, String, RequestContent, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual Azure.Operation<BinaryData> Create (Azure.WaitUntil waitUntil, string sentShareName, string assetName, Azure.Core.RequestContent content, Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member Create : Azure.WaitUntil * string * string * Azure.Core.RequestContent * Azure.RequestContext -> Azure.Operation<BinaryData>
+
+        override this.Create : Azure.WaitUntil * string * string * Azure.Core.RequestContent * Azure.RequestContext -> Azure.Operation<BinaryData>
+  - lang: vb
+    values:
+    - value: Public Overridable Function Create (waitUntil As WaitUntil, sentShareName As String, assetName As String, content As RequestContent, Optional context As RequestContext = Nothing) As Operation(Of BinaryData)
+  monikers:
+  - azure-dotnet-preview
+  summary: Adds a new asset to an existing share.
+  remarks: >-
+    <p>Create an asset on a sent share</p><p>Below is the JSON schema for the request and response payloads.</p><p>Request Body:</p><p>This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this. <details><summary>AdlsGen2AccountAsset</summary>Schema for <code data-dev-comment-type="c">AdlsGen2AccountAsset</code>: 
+
+
+    ```
+
+    {
+                  kind: AdlsGen2Account, # Required. The types of asset.
+                  id: string, # Optional. The resource id of the resource.
+                  name: string, # Optional. Name of the resource.
+                  type: string, # Optional. Type of the resource.
+                  properties: {
+                    location: string, # Optional. Location of the adls gen2 storage account.
+                    paths: [
+                      {
+                        containerName: string, # Required. Gets or sets the container name.
+                        receiverPath: string, # Optional. Gets or sets the path on the receiver side where the asset is to be mapped.
+                        senderPath: string, # Optional. Gets or sets the path to file/folder within the container to be shared.
+                      }
+                    ], # Required. A list of adls gen2 storage account paths to be shared.
+                    provisioningState: "Unknown" | "Succeeded" | "Creating" | "Deleting" | "Moving" | "Failed" | "SoftDeleting" | "SoftDeleted" | "SourceMoved" | "SourceDeleted" | "TargetMoved" | "TargetDeleted", # Optional. Provisioning status of the resource
+                    receiverAssetName: string, # Required. Name of the asset for the receiver.
+                    storageAccountResourceId: string, # Required. Resource id of the adls gen2 storage account.
+                  }, # Required. Adls gen 2 account asset properties
+                }
+    ```
+
+     </details><details><summary>~+ 1 more JSON objects</summary><details><summary>BlobAccountAsset</summary>Schema for <code data-dev-comment-type="c">BlobAccountAsset</code>: 
+
+
+    ```
+
+    {
+                  kind: BlobAccount, # Required. The types of asset.
+                  id: string, # Optional. The resource id of the resource.
+                  name: string, # Optional. Name of the resource.
+                  type: string, # Optional. Type of the resource.
+                  properties: {
+                    location: string, # Optional. Location of the blob storage account.
+                    paths: [
+                      {
+                        containerName: string, # Required. Gets or sets the container name.
+                        receiverPath: string, # Optional. Gets or sets the path on the receiver side where the asset is to be mapped.
+                        senderPath: string, # Optional. Gets or sets the path to file/folder within the container to be shared.
+                      }
+                    ], # Required. A list of blob storage account paths to be shared.
+                    provisioningState: "Unknown" | "Succeeded" | "Creating" | "Deleting" | "Moving" | "Failed" | "SoftDeleting" | "SoftDeleted" | "SourceMoved" | "SourceDeleted" | "TargetMoved" | "TargetDeleted", # Optional. Provisioning status of the resource
+                    receiverAssetName: string, # Required. Name of the asset for the receiver.
+                    storageAccountResourceId: string, # Required. Resource id of the blob storage account.
+                  }, # Required. Blob storage account asset properties
+                }
+    ```
+
+     </details></details></p><p>Response Body:</p><p>This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this. <details><summary>AdlsGen2AccountAsset</summary>Schema for <code data-dev-comment-type="c">AdlsGen2AccountAsset</code>: 
+
+
+    ```
+
+    {
+                  kind: AdlsGen2Account, # Required. The types of asset.
+                  id: string, # Optional. The resource id of the resource.
+                  name: string, # Optional. Name of the resource.
+                  type: string, # Optional. Type of the resource.
+                  properties: {
+                    location: string, # Optional. Location of the adls gen2 storage account.
+                    paths: [
+                      {
+                        containerName: string, # Required. Gets or sets the container name.
+                        receiverPath: string, # Optional. Gets or sets the path on the receiver side where the asset is to be mapped.
+                        senderPath: string, # Optional. Gets or sets the path to file/folder within the container to be shared.
+                      }
+                    ], # Required. A list of adls gen2 storage account paths to be shared.
+                    provisioningState: "Unknown" | "Succeeded" | "Creating" | "Deleting" | "Moving" | "Failed" | "SoftDeleting" | "SoftDeleted" | "SourceMoved" | "SourceDeleted" | "TargetMoved" | "TargetDeleted", # Optional. Provisioning status of the resource
+                    receiverAssetName: string, # Required. Name of the asset for the receiver.
+                    storageAccountResourceId: string, # Required. Resource id of the adls gen2 storage account.
+                  }, # Required. Adls gen 2 account asset properties
+                }
+    ```
+
+     </details><details><summary>~+ 1 more JSON objects</summary><details><summary>BlobAccountAsset</summary>Schema for <code data-dev-comment-type="c">BlobAccountAsset</code>: 
+
+
+    ```
+
+    {
+                  kind: BlobAccount, # Required. The types of asset.
+                  id: string, # Optional. The resource id of the resource.
+                  name: string, # Optional. Name of the resource.
+                  type: string, # Optional. Type of the resource.
+                  properties: {
+                    location: string, # Optional. Location of the blob storage account.
+                    paths: [
+                      {
+                        containerName: string, # Required. Gets or sets the container name.
+                        receiverPath: string, # Optional. Gets or sets the path on the receiver side where the asset is to be mapped.
+                        senderPath: string, # Optional. Gets or sets the path to file/folder within the container to be shared.
+                      }
+                    ], # Required. A list of blob storage account paths to be shared.
+                    provisioningState: "Unknown" | "Succeeded" | "Creating" | "Deleting" | "Moving" | "Failed" | "SoftDeleting" | "SoftDeleted" | "SourceMoved" | "SourceDeleted" | "TargetMoved" | "TargetDeleted", # Optional. Provisioning status of the resource
+                    receiverAssetName: string, # Required. Name of the asset for the receiver.
+                    storageAccountResourceId: string, # Required. Resource id of the blob storage account.
+                  }, # Required. Blob storage account asset properties
+                }
+    ```
+
+     </details></details></p>
+  examples: >-
+    This sample shows how to call Create with required parameters and request content and parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var client = new AssetsClient("<https://my-service.azure.com>", credential);
+
+
+    var data = new {
+        kind = "AdlsGen2Account",
+        properties = new {
+            paths = new[] {
+                new {
+                    containerName = "<StorageAccountPathContainerName>",
+                    receiverPath = "<StorageAccountPathReceiverPath>",
+                    senderPath = "<StorageAccountPathSenderPath>",
+                }
+            },
+            receiverAssetName = "<AdlsGen2AccountAssetPropertiesReceiverAssetName>",
+            storageAccountResourceId = "<AdlsGen2AccountAssetPropertiesStorageAccountResourceId>",
+        },
+    };
+
+
+    var operation = client.Create(WaitUntil.Completed, "<sentShareName>", "<assetName>", RequestContent.Create(data));
+
+
+    BinaryData data = operation.WaitForCompletion();
+
+    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+
+    Console.WriteLine(result.GetProperty("id").ToString());
+
+    Console.WriteLine(result.GetProperty("name").ToString());
+
+    Console.WriteLine(result.GetProperty("type").ToString());
+
+    Console.WriteLine(result.GetProperty("kind").ToString());
+
+    ```
+  metadata: {}
+uid: Azure.Analytics.Purview.Share.AssetsClient.Create*
+commentId: Overload:Azure.Analytics.Purview.Share.AssetsClient.Create
+namespace: Azure.Analytics.Purview.Share
+name: Create
+fullName: Azure.Analytics.Purview.Share.AssetsClient.Create
+nameWithType: AssetsClient.Create
+assembliesWithMoniker:
+- value: Azure.Analytics.Purview.Share.dll
+packagesWithMoniker:
+- value: Azure.Analytics.Purview.Share v1.0.3-beta.20
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.Analytics.Purview.Share.AssetsClient.Create
+  api_location:
+  - Azure.Analytics.Purview.Share.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.Analytics.Purview.Share.AssetsClient.Create
+  - Azure::Analytics::Purview::Share::AssetsClient::Create
+  - Create
+  - AssetsClient.Create
+  - AssetsClient::Create
+  helpviewer_keywords:
+  - AssetsClient.Create method [.NET]
+  - Create method [.NET], class AssetsClient
+  - AssetsClient.Create(WaitUntil, String, String, RequestContent, RequestContext) method [.NET]
+  - Create(WaitUntil, String, String, RequestContent, RequestContext) method [.NET], class AssetsClient
+  monikers:
+  - azure-dotnet-preview

@@ -1,0 +1,210 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="Azure.AsyncPageable`1?alt=Azure.AsyncPageable&text=AsyncPageable" data-throw-if-not-resolved="True"/>&lt;<xref href="System.BinaryData?alt=System.BinaryData&text=BinaryData" data-throw-if-not-resolved="True"/>&gt;
+    description: The <xref data-throw-if-not-resolved="true" uid="Azure.AsyncPageable`1"></xref> from the service containing a list of <xref data-throw-if-not-resolved="true" uid="System.BinaryData"></xref> objects. Details of the body schema for each item in the collection are in the Remarks section below.
+  parameters:
+  - namesWithMoniker:
+    - value: catalogItemId
+    description: The unique id of the catalog item.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: maxCount
+    description: "The maximum number of resources to return from the operation. Example: 'top=10'."
+    type: <xref href="System.Nullable`1?alt=System.Nullable&text=Nullable" data-throw-if-not-resolved="True"/>&lt;<xref href="System.Int32?alt=System.Int32&text=Int32" data-throw-if-not-resolved="True"/>&gt;
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">catalogItemId</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: <code data-dev-comment-type="paramref">catalogItemId</code> is an empty string, and was expected to be non-empty.
+    type: <xref href="System.ArgumentException" data-throw-if-not-resolved="True"/>
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.Developer.DevCenter.EnvironmentsClient.GetCatalogItemVersionsAsync(System.String,System.Nullable{System.Int32},Azure.RequestContext)
+  commentId: M:Azure.Developer.DevCenter.EnvironmentsClient.GetCatalogItemVersionsAsync(System.String,System.Nullable{System.Int32},Azure.RequestContext)
+  name: GetCatalogItemVersionsAsync(String, Nullable<Int32>, RequestContext)
+  fullName: Azure.Developer.DevCenter.EnvironmentsClient.GetCatalogItemVersionsAsync(String, Nullable<Int32>, RequestContext)
+  nameWithType: EnvironmentsClient.GetCatalogItemVersionsAsync(String, Nullable<Int32>, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual Azure.AsyncPageable<BinaryData> GetCatalogItemVersionsAsync (string catalogItemId, int? maxCount = default, Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member GetCatalogItemVersionsAsync : string * Nullable<int> * Azure.RequestContext -> Azure.AsyncPageable<BinaryData>
+
+        override this.GetCatalogItemVersionsAsync : string * Nullable<int> * Azure.RequestContext -> Azure.AsyncPageable<BinaryData>
+  - lang: vb
+    values:
+    - value: Public Overridable Function GetCatalogItemVersionsAsync (catalogItemId As String, Optional maxCount As Nullable(Of Integer) = Nothing, Optional context As RequestContext = Nothing) As AsyncPageable(Of BinaryData)
+  monikers:
+  - azure-dotnet-preview
+  summary: List all versions of a catalog item from a project.
+  remarks: >-
+    <p>Below is the JSON schema for one item in the pageable response.</p><p>Response Body:</p><p>Schema for <code data-dev-comment-type="c">CatalogItemVersionListResultValue</code>: 
+
+
+    ```
+
+    {
+      catalogItemId: string, # Optional. Unique identifier of the catalog item.
+      catalogItemName: string, # Optional. Name of the catalog item.
+      catalogName: string, # Optional. Name of the catalog.
+      version: string, # Optional. The version of the catalog item.
+      summary: string, # Optional. A short summary of the catalog item.
+      description: string, # Optional. A long description of the catalog item.
+      templatePath: string, # Optional. Path to the catalog item entrypoint file.
+      parametersSchema: string, # Optional. JSON schema defining the parameters object passed to actions
+      parameters: [
+        {
+          id: string, # Optional. Unique ID of the parameter
+          name: string, # Optional. Display name of the parameter
+          description: string, # Optional. Description of the parameter
+          default: AnyObject, # Optional. Default value of the parameter
+          type: "array" | "boolean" | "integer" | "null" | "number" | "object" | "string", # Optional. A string of one of the basic JSON types (number, integer, null, array, object, boolean, string)
+          readOnly: boolean, # Optional. Whether or not this parameter is read-only.  If true, default should have a value.
+          required: boolean, # Optional. Whether or not this parameter is required
+          allowed: [AnyObject], # Optional. An array of allowed values
+        }
+      ], # Optional. Input parameters passed to actions
+      actions: [
+        {
+          id: string, # Optional. Unique identifier of the action
+          name: string, # Optional. Display name of the action
+          description: string, # Optional. Description of the action
+          parametersSchema: string, # Optional. JSON schema defining the parameters specific to the custom action
+          parameters: [CatalogItemParameter], # Optional. Input parameters passed to the action
+          type: "Custom" | "Deploy" | "Delete", # Optional. The action type.
+          typeName: string, # Optional. Name of the custom action type
+          runner: string, # Optional. The container image to use to execute the action
+        }
+      ], # Optional. Custom actions for the catalog item.
+      runner: string, # Optional. The default container image to use to execute actions
+      status: "Enabled" | "Disabled", # Optional. Defines whether the specific catalog item version can be used.
+      eligibleForLatestVersion: boolean, # Optional. Whether the version is eligible to be the latest version.
+    }
+
+    ```
+
+    </p>
+  examples: >-
+    This sample shows how to call GetCatalogItemVersionsAsync with required parameters and parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
+
+
+    await foreach (var data in client.GetCatalogItemVersionsAsync("<catalogItemId>"))
+
+    {
+        JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        Console.WriteLine(result.ToString());
+    }
+
+    ```
+
+    This sample shows how to call GetCatalogItemVersionsAsync with all parameters, and how to parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
+
+
+    await foreach (var data in client.GetCatalogItemVersionsAsync("<catalogItemId>", 1234))
+
+    {
+        JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        Console.WriteLine(result.GetProperty("catalogItemId").ToString());
+        Console.WriteLine(result.GetProperty("catalogItemName").ToString());
+        Console.WriteLine(result.GetProperty("catalogName").ToString());
+        Console.WriteLine(result.GetProperty("version").ToString());
+        Console.WriteLine(result.GetProperty("summary").ToString());
+        Console.WriteLine(result.GetProperty("description").ToString());
+        Console.WriteLine(result.GetProperty("templatePath").ToString());
+        Console.WriteLine(result.GetProperty("parametersSchema").ToString());
+        Console.WriteLine(result.GetProperty("parameters")[0].GetProperty("id").ToString());
+        Console.WriteLine(result.GetProperty("parameters")[0].GetProperty("name").ToString());
+        Console.WriteLine(result.GetProperty("parameters")[0].GetProperty("description").ToString());
+        Console.WriteLine(result.GetProperty("parameters")[0].GetProperty("default").ToString());
+        Console.WriteLine(result.GetProperty("parameters")[0].GetProperty("type").ToString());
+        Console.WriteLine(result.GetProperty("parameters")[0].GetProperty("readOnly").ToString());
+        Console.WriteLine(result.GetProperty("parameters")[0].GetProperty("required").ToString());
+        Console.WriteLine(result.GetProperty("parameters")[0].GetProperty("allowed")[0].ToString());
+        Console.WriteLine(result.GetProperty("actions")[0].GetProperty("id").ToString());
+        Console.WriteLine(result.GetProperty("actions")[0].GetProperty("name").ToString());
+        Console.WriteLine(result.GetProperty("actions")[0].GetProperty("description").ToString());
+        Console.WriteLine(result.GetProperty("actions")[0].GetProperty("parametersSchema").ToString());
+        Console.WriteLine(result.GetProperty("actions")[0].GetProperty("parameters")[0].GetProperty("id").ToString());
+        Console.WriteLine(result.GetProperty("actions")[0].GetProperty("parameters")[0].GetProperty("name").ToString());
+        Console.WriteLine(result.GetProperty("actions")[0].GetProperty("parameters")[0].GetProperty("description").ToString());
+        Console.WriteLine(result.GetProperty("actions")[0].GetProperty("parameters")[0].GetProperty("default").ToString());
+        Console.WriteLine(result.GetProperty("actions")[0].GetProperty("parameters")[0].GetProperty("type").ToString());
+        Console.WriteLine(result.GetProperty("actions")[0].GetProperty("parameters")[0].GetProperty("readOnly").ToString());
+        Console.WriteLine(result.GetProperty("actions")[0].GetProperty("parameters")[0].GetProperty("required").ToString());
+        Console.WriteLine(result.GetProperty("actions")[0].GetProperty("parameters")[0].GetProperty("allowed")[0].ToString());
+        Console.WriteLine(result.GetProperty("actions")[0].GetProperty("type").ToString());
+        Console.WriteLine(result.GetProperty("actions")[0].GetProperty("typeName").ToString());
+        Console.WriteLine(result.GetProperty("actions")[0].GetProperty("runner").ToString());
+        Console.WriteLine(result.GetProperty("runner").ToString());
+        Console.WriteLine(result.GetProperty("status").ToString());
+        Console.WriteLine(result.GetProperty("eligibleForLatestVersion").ToString());
+    }
+
+    ```
+  metadata: {}
+uid: Azure.Developer.DevCenter.EnvironmentsClient.GetCatalogItemVersionsAsync*
+commentId: Overload:Azure.Developer.DevCenter.EnvironmentsClient.GetCatalogItemVersionsAsync
+namespace: Azure.Developer.DevCenter
+name: GetCatalogItemVersionsAsync
+fullName: Azure.Developer.DevCenter.EnvironmentsClient.GetCatalogItemVersionsAsync
+nameWithType: EnvironmentsClient.GetCatalogItemVersionsAsync
+assembliesWithMoniker:
+- value: Azure.Developer.DevCenter.dll
+packagesWithMoniker:
+- value: Azure.Developer.DevCenter v1.0.0-beta.2
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.Developer.DevCenter.EnvironmentsClient.GetCatalogItemVersionsAsync
+  api_location:
+  - Azure.Developer.DevCenter.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.Developer.DevCenter.EnvironmentsClient.GetCatalogItemVersionsAsync
+  - Azure::Developer::DevCenter::EnvironmentsClient::GetCatalogItemVersionsAsync
+  - GetCatalogItemVersionsAsync
+  - EnvironmentsClient.GetCatalogItemVersionsAsync
+  - EnvironmentsClient::GetCatalogItemVersionsAsync
+  helpviewer_keywords:
+  - EnvironmentsClient.GetCatalogItemVersionsAsync method [.NET]
+  - GetCatalogItemVersionsAsync method [.NET], class EnvironmentsClient
+  - EnvironmentsClient.GetCatalogItemVersionsAsync(String, Nullable<Int32>, RequestContext) method [.NET]
+  - GetCatalogItemVersionsAsync(String, Nullable<Int32>, RequestContext) method [.NET], class EnvironmentsClient
+  monikers:
+  - azure-dotnet-preview

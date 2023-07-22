@@ -1,0 +1,175 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="Azure.Operation?alt=Azure.Operation&text=Operation" data-throw-if-not-resolved="True"/>
+    description: The <xref data-throw-if-not-resolved="true" uid="Azure.Operation"></xref> representing an asynchronous operation on the service.
+  parameters:
+  - namesWithMoniker:
+    - value: waitUntil
+    description: <xref data-throw-if-not-resolved="true" uid="Azure.WaitUntil.Completed"></xref> if the method should wait to return until the long-running operation has completed on the service; <xref data-throw-if-not-resolved="true" uid="Azure.WaitUntil.Started"></xref> if it should return after starting the operation. For more information on long-running operations, please see <a href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</a>.
+    type: <xref href="Azure.WaitUntil?alt=Azure.WaitUntil&text=WaitUntil" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: devBoxName
+    description: The name of a Dev Box.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: userId
+    description: The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">devBoxName</code> or <code data-dev-comment-type="paramref">userId</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: <code data-dev-comment-type="paramref">devBoxName</code> or <code data-dev-comment-type="paramref">userId</code> is an empty string, and was expected to be non-empty.
+    type: <xref href="System.ArgumentException" data-throw-if-not-resolved="True"/>
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.Developer.DevCenter.DevBoxesClient.DeleteDevBox(Azure.WaitUntil,System.String,System.String,Azure.RequestContext)
+  commentId: M:Azure.Developer.DevCenter.DevBoxesClient.DeleteDevBox(Azure.WaitUntil,System.String,System.String,Azure.RequestContext)
+  name: DeleteDevBox(WaitUntil, String, String, RequestContext)
+  fullName: Azure.Developer.DevCenter.DevBoxesClient.DeleteDevBox(WaitUntil, String, String, RequestContext)
+  nameWithType: DevBoxesClient.DeleteDevBox(WaitUntil, String, String, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual Azure.Operation DeleteDevBox (Azure.WaitUntil waitUntil, string devBoxName, string userId = "me", Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member DeleteDevBox : Azure.WaitUntil * string * string * Azure.RequestContext -> Azure.Operation
+
+        override this.DeleteDevBox : Azure.WaitUntil * string * string * Azure.RequestContext -> Azure.Operation
+  - lang: vb
+    values:
+    - value: Public Overridable Function DeleteDevBox (waitUntil As WaitUntil, devBoxName As String, Optional userId As String = "me", Optional context As RequestContext = Nothing) As Operation
+  monikers:
+  - azure-dotnet-preview
+  summary: Deletes a Dev Box.
+  remarks: >-
+    <p>Below is the JSON schema for the response payload.</p><p>Response Body:</p><p>Schema for <code data-dev-comment-type="c">DevBox</code>: 
+
+
+    ```
+
+    {
+      name: string, # Optional. Display name for the Dev Box
+      projectName: string, # Optional. Name of the project this Dev Box belongs to
+      poolName: string, # Required. The name of the Dev Box pool this machine belongs to.
+      provisioningState: string, # Optional. The current provisioning state of the Dev Box.
+      actionState: string, # Optional. The current action state of the Dev Box. This is state is based on previous action performed by user.
+      powerState: "Unknown" | "Deallocated" | "PoweredOff" | "Running" | "Hibernated", # Optional. The current power state of the Dev Box.
+      uniqueId: string, # Optional. A unique identifier for the Dev Box. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).
+      errorDetails: {
+        code: string, # Optional. The error code.
+        message: string, # Optional. The error message.
+      }, # Optional. Provisioning or action error details. Populated only for error states.
+      location: string, # Optional. Azure region where this Dev Box is located. This will be the same region as the Virtual Network it is attached to.
+      osType: "Windows", # Optional. The operating system type of this Dev Box.
+      user: string, # Optional. User identifier of the user this vm is assigned to.
+      hardwareProfile: {
+        skuName: string, # Optional. The name of the SKU
+        vCPUs: number, # Optional. The number of vCPUs available for the Dev Box.
+        memoryGB: number, # Optional. The amount of memory available for the Dev Box.
+      }, # Optional. Information about the Dev Box's hardware resources
+      storageProfile: {
+        osDisk: {
+          diskSizeGB: number, # Optional. The size of the OS Disk in gigabytes.
+        }, # Optional. Settings for the operating system disk.
+      }, # Optional. Storage settings for this Dev Box
+      imageReference: {
+        name: string, # Optional. The name of the image used.
+        version: string, # Optional. The version of the image.
+        operatingSystem: string, # Optional. The operating system of the image.
+        osBuildNumber: string, # Optional. The operating system build number of the image.
+        publishedDate: string (ISO 8601 Format), # Optional. The datetime that the backing image version was published.
+      }, # Optional. Information about the image used for this Dev Box
+      createdTime: string (ISO 8601 Format), # Optional. Creation time of this Dev Box
+      localAdministrator: "Enabled" | "Disabled", # Optional. Indicates whether the owner of the Dev Box is a local administrator.
+    }
+
+    ```
+
+    </p>
+  examples: >-
+    This sample shows how to call DeleteDevBox with required parameters.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new DevBoxesClient(endpoint, "<projectName>", credential);
+
+
+    var operation = client.DeleteDevBox(WaitUntil.Completed, "<devBoxName>");
+
+
+    Console.WriteLine(operation.GetRawResponse().Status)
+
+    ```
+
+    This sample shows how to call DeleteDevBox with all parameters.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new DevBoxesClient(endpoint, "<projectName>", credential);
+
+
+    var operation = client.DeleteDevBox(WaitUntil.Completed, "<devBoxName>", <me>);
+
+
+    Console.WriteLine(operation.GetRawResponse().Status)
+
+    ```
+  metadata: {}
+uid: Azure.Developer.DevCenter.DevBoxesClient.DeleteDevBox*
+commentId: Overload:Azure.Developer.DevCenter.DevBoxesClient.DeleteDevBox
+namespace: Azure.Developer.DevCenter
+name: DeleteDevBox
+fullName: Azure.Developer.DevCenter.DevBoxesClient.DeleteDevBox
+nameWithType: DevBoxesClient.DeleteDevBox
+assembliesWithMoniker:
+- value: Azure.Developer.DevCenter.dll
+packagesWithMoniker:
+- value: Azure.Developer.DevCenter v1.0.0-beta.2
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.Developer.DevCenter.DevBoxesClient.DeleteDevBox
+  api_location:
+  - Azure.Developer.DevCenter.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.Developer.DevCenter.DevBoxesClient.DeleteDevBox
+  - Azure::Developer::DevCenter::DevBoxesClient::DeleteDevBox
+  - DeleteDevBox
+  - DevBoxesClient.DeleteDevBox
+  - DevBoxesClient::DeleteDevBox
+  helpviewer_keywords:
+  - DevBoxesClient.DeleteDevBox method [.NET]
+  - DeleteDevBox method [.NET], class DevBoxesClient
+  - DevBoxesClient.DeleteDevBox(WaitUntil, String, String, RequestContext) method [.NET]
+  - DeleteDevBox(WaitUntil, String, String, RequestContext) method [.NET], class DevBoxesClient
+  monikers:
+  - azure-dotnet-preview
