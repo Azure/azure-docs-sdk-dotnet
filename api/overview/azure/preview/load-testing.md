@@ -3,10 +3,10 @@ title: Azure Load Testing SDK for .NET
 description: Reference for Azure Load Testing SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 07/24/2023
+ms.data: 07/25/2023
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: azure-load-testing
+ms.service: loadtesting
 ---
 # Azure Load Testing SDK for .NET - preview
 ## Packages - preview

@@ -8,6 +8,6 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: graphservices
 ---
-# Azure Graph Services SDK for .NET - preview
-## Packages - preview
+# Azure Graph Services SDK for .NET - latest
+## Packages - latest
 [!INCLUDE [packages](graph-services-index.md)]
