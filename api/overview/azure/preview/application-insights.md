@@ -3,7 +3,7 @@ title: Azure Application Insights SDK for .NET
 description: Reference for Azure Application Insights SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 07/26/2023
+ms.data: 07/27/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: azure-monitor
