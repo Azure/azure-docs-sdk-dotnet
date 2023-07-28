@@ -3,7 +3,7 @@ title: Azure Spring Cloud SDK for .NET
 description: Reference for Azure Spring Cloud SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 07/27/2023
+ms.data: 07/28/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: springcloud
