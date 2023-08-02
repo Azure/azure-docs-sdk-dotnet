@@ -3,12 +3,12 @@ title: Azure Communication Email client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Communication.Email, communication
 author: acsdevx-msft
 ms.author: acsdevx-msft
-ms.date: 03/16/2023
+ms.date: 08/02/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: communication
 ---
-# Azure Communication Email client library for .NET - version 1.0.0-beta.4 
+# Azure Communication Email client library for .NET - version 1.1.0-alpha.20230802.1 
 
 
 This package contains a C# SDK for Azure Communication Services for Email.
@@ -20,7 +20,7 @@ This package contains a C# SDK for Azure Communication Services for Email.
 Install the Azure Communication Email client library for .NET with [NuGet][nuget]:
 
 ```dotnetcli
-dotnet add package Azure.Communication.Email --prerelease
+dotnet add package Azure.Communication.Email
 ``` 
 
 ### Prerequisites
@@ -57,17 +57,25 @@ EmailClient emailClient = new EmailClient(new Uri(endpoint), tokenCredential);
 ### Send a simple email message with automatic polling for status
 To send an email message, call the simple overload of `Send` or `SendAsync` function from the `EmailClient`.
 ```C# Snippet:Azure_Communication_Email_Send_Simple_AutoPolling
-var emailSendOperation = emailClient.Send(
-    wait: WaitUntil.Completed,
-    from: "<Send email address>" // The email address of the domain registered with the Communication Services resource
-    to: "<recipient email address>"
-    subject: "This is the subject",
-    htmlContent: "<html><body>This is the html body</body></html>");
-Console.WriteLine($"Email Sent. Status = {emailSendOperation.Value.Status}");
+try
+{
+    var emailSendOperation = emailClient.Send(
+        wait: WaitUntil.Completed,
+        senderAddress: "<Send email address>" // The email address of the domain registered with the Communication Services resource
+        recipientAddress: "<recipient email address>"
+        subject: "This is the subject",
+        htmlContent: "<html><body>This is the html body</body></html>");
+    Console.WriteLine($"Email Sent. Status = {emailSendOperation.Value.Status}");
 
-/// Get the OperationId so that it can be used for tracking the message for troubleshooting
-string operationId = emailSendOperation.Id;
-Console.WriteLine($"Email operation id = {operationId}");
+    /// Get the OperationId so that it can be used for tracking the message for troubleshooting
+    string operationId = emailSendOperation.Id;
+    Console.WriteLine($"Email operation id = {operationId}");
+}
+catch ( RequestFailedException ex )
+{
+    /// OperationID is contained in the exception message and can be used for troubleshooting purposes
+    Console.WriteLine($"Email send operation failed with error code: {ex.ErrorCode}, message: {ex.Message}");
+}
 ```
 
 ### Send a simple email message with manual polling for status
@@ -76,26 +84,33 @@ To send an email message, call the simple overload of `Send` or `SendAsync` func
 /// Send the email message with WaitUntil.Started
 var emailSendOperation = await emailClient.SendAsync(
     wait: WaitUntil.Started,
-    from: "<Send email address>" // The email address of the domain registered with the Communication Services resource
-    to: "<recipient email address>"
+    senderAddress: "<Send email address>" // The email address of the domain registered with the Communication Services resource
+    recipientAddress: "<recipient email address>"
     subject: "This is the subject",
     htmlContent: "<html><body>This is the html body</body></html>");
 
 /// Call UpdateStatus on the email send operation to poll for the status
 /// manually.
-while (true)
+try
 {
-    await emailSendOperation.UpdateStatusAsync();
-    if (emailSendOperation.HasCompleted)
+    while (true)
     {
-        break;
+        await emailSendOperation.UpdateStatusAsync();
+        if (emailSendOperation.HasCompleted)
+        {
+            break;
+        }
+        await Task.Delay(100);
     }
-    await Task.Delay(100);
-}
 
-if (emailSendOperation.HasValue)
+    if (emailSendOperation.HasValue)
+    {
+        Console.WriteLine($"Email queued for delivery. Status = {emailSendOperation.Value.Status}");
+    }
+}
+catch (RequestFailedException ex)
 {
-    Console.WriteLine($"Email Sent. Status = {emailSendOperation.Value.Status}");
+    Console.WriteLine($"Email send failed with Code = {ex.ErrorCode} and Message = {ex.Message}");
 }
 
 /// Get the OperationId so that it can be used for tracking the message for troubleshooting
@@ -115,18 +130,26 @@ var emailContent = new EmailContent("This is the subject")
 
 // Create the EmailMessage
 var emailMessage = new EmailMessage(
-    fromAddress: "<Send email address>" // The email address of the domain registered with the Communication Services resource
-    toAddress: "<recipient email address>"
+    senderAddress: "<Send email address>" // The email address of the domain registered with the Communication Services resource
+    recipientAddress: "<recipient email address>"
     content: emailContent);
 
-var emailSendOperation = emailClient.Send(
-    wait: WaitUntil.Completed,
-    message: emailMessage);
-Console.WriteLine($"Email Sent. Status = {emailSendOperation.Value.Status}");
+try
+{
+    var emailSendOperation = emailClient.Send(
+        wait: WaitUntil.Completed,
+        message: emailMessage);
+    Console.WriteLine($"Email Sent. Status = {emailSendOperation.Value.Status}");
 
-/// Get the OperationId so that it can be used for tracking the message for troubleshooting
-string operationId = emailSendOperation.Id;
-Console.WriteLine($"Email operation id = {operationId}");
+    /// Get the OperationId so that it can be used for tracking the message for troubleshooting
+    string operationId = emailSendOperation.Id;
+    Console.WriteLine($"Email operation id = {operationId}");
+}
+catch ( RequestFailedException ex )
+{
+    /// OperationID is contained in the exception message and can be used for troubleshooting purposes
+    Console.WriteLine($"Email send operation failed with error code: {ex.ErrorCode}, message: {ex.Message}");
+}
 ```
 
 ### Send an email message to multiple recipients
@@ -181,12 +204,20 @@ var emailMessage = new EmailMessage(
     emailRecipients,
     emailContent);
 
-EmailSendOperation emailSendOperation = emailClient.Send(WaitUntil.Completed, emailMessage);
-Console.WriteLine($"Email Sent. Status = {emailSendOperation.Value.Status}");
+try
+{
+    EmailSendOperation emailSendOperation = emailClient.Send(WaitUntil.Completed, emailMessage);
+    Console.WriteLine($"Email Sent. Status = {emailSendOperation.Value.Status}");
 
-/// Get the OperationId so that it can be used for tracking the message for troubleshooting
-string operationId = emailSendOperation.Id;
-Console.WriteLine($"Email operation id = {operationId}");
+    /// Get the OperationId so that it can be used for tracking the message for troubleshooting
+    string operationId = emailSendOperation.Id;
+    Console.WriteLine($"Email operation id = {operationId}");
+}
+catch ( RequestFailedException ex )
+{
+    /// OperationID is contained in the exception message and can be used for troubleshooting purposes
+    Console.WriteLine($"Email send operation failed with error code: {ex.ErrorCode}, message: {ex.Message}");
+}
 ```
 
 ### Send email with attachments
@@ -194,8 +225,8 @@ Azure Communication Services support sending emails with attachments.
 ```C# Snippet:Azure_Communication_Email_Send_With_Attachments
 // Create the EmailMessage
 var emailMessage = new EmailMessage(
-    fromAddress: "<Send email address>" // The email address of the domain registered with the Communication Services resource
-    toAddress: "<recipient email address>"
+    senderAddress: "<Send email address>" // The email address of the domain registered with the Communication Services resource
+    recipientAddress: "<recipient email address>"
     content: emailContent);
 
 var filePath = "<path to your file>";
@@ -207,12 +238,20 @@ var emailAttachment = new EmailAttachment(attachmentName, contentType, content);
 
 emailMessage.Attachments.Add(emailAttachment);
 
-EmailSendOperation emailSendOperation = emailClient.Send(WaitUntil.Completed, emailMessage);
-Console.WriteLine($"Email Sent. Status = {emailSendOperation.Value.Status}");
+try
+{
+    EmailSendOperation emailSendOperation = emailClient.Send(WaitUntil.Completed, emailMessage);
+    Console.WriteLine($"Email Sent. Status = {emailSendOperation.Value.Status}");
 
-/// Get the OperationId so that it can be used for tracking the message for troubleshooting
-string operationId = emailSendOperation.Id;
-Console.WriteLine($"Email operation id = {operationId}");
+    /// Get the OperationId so that it can be used for tracking the message for troubleshooting
+    string operationId = emailSendOperation.Id;
+    Console.WriteLine($"Email operation id = {operationId}");
+}
+catch ( RequestFailedException ex )
+{
+    /// OperationID is contained in the exception message and can be used for troubleshooting purposes
+    Console.WriteLine($"Email send operation failed with error code: {ex.ErrorCode}, message: {ex.Message}");
+}
 ```
 
 ## Troubleshooting
@@ -242,6 +281,6 @@ This project has adopted the [Microsoft Open Source Code of Conduct][coc]. For m
 [product_docs]: https://aka.ms/acsemail/overview
 [nextsteps]:https://aka.ms/acsemail/qs-sendmail?pivots=programming-language-csharp
 [nuget]: https://www.nuget.org/
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Communication.Email_1.0.0-beta.4/sdk/communication/Azure.Communication.Email/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/communication/Azure.Communication.Email/src
 [domain_overview]: https://aka.ms/acsemail/domainsoverview
 
