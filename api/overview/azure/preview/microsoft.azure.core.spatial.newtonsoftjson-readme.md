@@ -1,17 +1,14 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.Core.Spatial.NewtonsoftJson, core
-author: ramya-rao-a
-ms.author: ramyar
-ms.date: 10/13/2021
+author: JoshLove-msft
+ms.author: jolov
+ms.date: 08/02/2023
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: core
 ---
-
-# Newtonsoft.Json support for Microsoft.Spatial library for .NET (Preview)
+# Newtonsoft.Json support for Microsoft.Spatial library for .NET
 
 The [Microsoft.Spatial package][microsoft_spatial_package] contains classes and methods that support geographic and geometric operations. This library contains converters dependent on the [Newtonsoft.Json package][newtonsoft_json_package] for use with Microsoft.Spatial when using the Azure SDK for .NET.
 
@@ -84,7 +81,7 @@ foreach (SearchResult<Mountain> result in results.Value.GetResults())
     Console.WriteLine("https://www.bing.com/maps?cp={0}~{1}&sp=point.{0}_{1}_{2}",
         mountain.Summit.Latitude,
         mountain.Summit.Longitude,
-        Uri.EscapeUriString(mountain.Name));
+        Uri.EscapeDataString(mountain.Name));
 }
 ```
 
@@ -105,7 +102,7 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fcore%2FMicrosoft.Azure.Core.NewtonsoftJson%2FREADME.png)
 
 [azure_search_documents_package]: https://www.nuget.org/packages/Azure.Search.Documents/
-[azure_search_documents_readme]: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.Core.Spatial.NewtonsoftJson_1.1.0-beta.1/sdk/search/Azure.Search.Documents/README.md
+[azure_search_documents_readme]: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/search/Azure.Search.Documents/README.md
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct
 [code_of_conduct_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [JsonSerializerSettings]: https://www.newtonsoft.com/json/help/html/T_Newtonsoft_Json_JsonSerializerSettings.htm
