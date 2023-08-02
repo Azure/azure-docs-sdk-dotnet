@@ -3,12 +3,12 @@ title: Azure DevCenter client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Developer.DevCenter, devcenter
 author: sebrenna
 ms.author: sebrenna
-ms.date: 02/09/2023
+ms.date: 08/02/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: devcenter
 ---
-# Azure DevCenter client library for .NET - version 1.0.0-beta.2 
+# Azure DevCenter client library for .NET - version 1.0.0-alpha.20230802.1 
 
 
 The DevCenter client library provides access to manage resources for Microsoft Dev Box and Azure Deployment Environments. This SDK enables managing developer machines and environments in Azure.
@@ -17,7 +17,7 @@ Use the client library for Azure DevCenter to:
 > Create, access, manage, and delete [Dev Box](https://learn.microsoft.com/azure/dev-box) resources
 > Create, deploy, manage, and delete [Environment](https://learn.microsoft.com/azure/deployment-environments) resources
 
-  [Source code](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Developer.DevCenter_1.0.0-beta.2/sdk/devcenter/Azure.Developer.DevCenter/src) | [Package (NuGet)](https://www.nuget.org/packages/) | [API reference documentation](https://azure.github.io/azure-sdk-for-net) | [Product documentation](/azure)
+  [Source code](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/devcenter/Azure.Developer.DevCenter/src) | [Package (NuGet)](https://www.nuget.org/packages/) | [API reference documentation](https://azure.github.io/azure-sdk-for-net) | [Product documentation](/azure)
 
 ## Getting started
 
@@ -33,7 +33,7 @@ dotnet add package Azure.Developer.DevCenter --prerelease
 
 You must have an [Azure subscription](https://azure.microsoft.com/free/dotnet/). In order to take advantage of the C# 8.0 syntax, it is recommended that you compile using the [.NET Core SDK](https://dotnet.microsoft.com/download) 3.0 or higher with a [language version](/dotnet/csharp/language-reference/configure-language-version#override-a-default) of `latest`.  It is also possible to compile with the .NET Core SDK 2.1.x using a language version of `preview`.
 
-You must have [configured](https://learn.microsoft.com/azure/dev-box/quickstart-configure-dev-box-service) a DevCenter, Project, Network Connection, Dev Box Definition, and Pool before you can create Dev Boxes 
+You must have [configured](https://learn.microsoft.com/azure/dev-box/quickstart-configure-dev-box-service) a DevCenter, Project, Network Connection, Dev Box Definition, and Pool before you can create Dev Boxes
 
 You must have configured a DevCenter, Project, Catalog, and Environment Type before you can create Environments
 
@@ -66,25 +66,25 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Developer.DevCenter_1.0.0-beta.2/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Developer.DevCenter_1.0.0-beta.2/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Developer.DevCenter_1.0.0-beta.2/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Developer.DevCenter_1.0.0-beta.2/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Developer.DevCenter_1.0.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Developer.DevCenter_1.0.0-beta.2/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://learn.microsoft.com/dotnet/azure/sdk/unit-testing-mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
 ## Examples
 
-You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Developer.DevCenter_1.0.0-beta.2/sdk/devcenter/Azure.Developer.DevCenter/samples).
+You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/devcenter/Azure.Developer.DevCenter/samples).
 
 ### Build a client and get projects
 ```C# Snippet:Azure_DevCenter_GetProjects_Scenario
 var credential = new DefaultAzureCredential();
 var devCenterClient = new DevCenterClient(endpoint, credential);
 string targetProjectName = null;
-await foreach (BinaryData data in devCenterClient.GetProjectsAsync(filter: null, maxCount: 1))
+await foreach (BinaryData data in devCenterClient.GetProjectsAsync(filter: null, maxCount: 1, context: new()))
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     targetProjectName = result.GetProperty("name").ToString();
@@ -95,7 +95,7 @@ await foreach (BinaryData data in devCenterClient.GetProjectsAsync(filter: null,
 ```C# Snippet:Azure_DevCenter_GetPools_Scenario
 var devBoxesClient = new DevBoxesClient(endpoint, targetProjectName, credential);
 string targetPoolName = null;
-await foreach (BinaryData data in devBoxesClient.GetPoolsAsync(filter: null, maxCount: 1))
+await foreach (BinaryData data in devBoxesClient.GetPoolsAsync(filter: null, maxCount: 1, context: new()))
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     targetPoolName = result.GetProperty("name").ToString();
@@ -109,7 +109,7 @@ var content = new
     poolName = targetPoolName,
 };
 
-Operation<BinaryData> devBoxCreateOperation = await devBoxesClient.CreateDevBoxAsync(WaitUntil.Completed, "MyDevBox", RequestContent.Create(content));
+Operation<BinaryData> devBoxCreateOperation = await devBoxesClient.CreateDevBoxAsync(WaitUntil.Completed, "me", "MyDevBox", RequestContent.Create(content));
 BinaryData devBoxData = await devBoxCreateOperation.WaitForCompletionAsync();
 JsonElement devBox = JsonDocument.Parse(devBoxData.ToStream()).RootElement;
 Console.WriteLine($"Completed provisioning for dev box with status {devBox.GetProperty("provisioningState")}.");
@@ -117,14 +117,14 @@ Console.WriteLine($"Completed provisioning for dev box with status {devBox.GetPr
 
 ### Connect to your Dev Box
 ```C# Snippet:Azure_DevCenter_ConnectToDevBox_Scenario
-Response remoteConnectionResponse = await devBoxesClient.GetRemoteConnectionAsync("MyDevBox");
+Response remoteConnectionResponse = await devBoxesClient.GetRemoteConnectionAsync("me", "MyDevBox", new());
 JsonElement remoteConnectionData = JsonDocument.Parse(remoteConnectionResponse.ContentStream).RootElement;
 Console.WriteLine($"Connect using web URL {remoteConnectionData.GetProperty("webUrl")}.");
 ```
 
 ### Delete the Dev Box
 ```C# Snippet:Azure_DevCenter_DeleteDevBox_Scenario
-Operation devBoxDeleteOperation = await devBoxesClient.DeleteDevBoxAsync(WaitUntil.Completed, "MyDevBox");
+Operation devBoxDeleteOperation = await devBoxesClient.DeleteDevBoxAsync(WaitUntil.Completed, "me", "MyDevBox");
 await devBoxDeleteOperation.WaitForCompletionResponseAsync();
 Console.WriteLine($"Completed dev box deletion.");
 ```
@@ -134,7 +134,7 @@ Console.WriteLine($"Completed dev box deletion.");
 ```C# Snippet:Azure_DevCenter_GetCatalogItems_Scenario
 var environmentsClient = new EnvironmentsClient(endpoint, projectName, credential);
 string catalogItemName = null;
-await foreach (BinaryData data in environmentsClient.GetCatalogItemsAsync(maxCount: 1))
+await foreach (BinaryData data in environmentsClient.GetCatalogItemsAsync(maxCount: 1, context: new()))
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     catalogItemName = result.GetProperty("name").ToString();
@@ -145,7 +145,7 @@ await foreach (BinaryData data in environmentsClient.GetCatalogItemsAsync(maxCou
 
 ```C# Snippet:Azure_DevCenter_GetEnvironmentTypes_Scenario
 string environmentTypeName = null;
-await foreach (BinaryData data in environmentsClient.GetEnvironmentTypesAsync(maxCount: 1))
+await foreach (BinaryData data in environmentsClient.GetEnvironmentTypesAsync(maxCount: 1, context: new()))
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     environmentTypeName = result.GetProperty("name").ToString();
@@ -162,7 +162,7 @@ var content = new
 };
 
 // Deploy the environment
-Operation<BinaryData> environmentCreateOperation = await environmentsClient.CreateOrUpdateEnvironmentAsync(WaitUntil.Completed, "DevEnvironment", RequestContent.Create(content));
+Operation<BinaryData> environmentCreateOperation = await environmentsClient.CreateOrUpdateEnvironmentAsync(WaitUntil.Completed, "me", "DevEnvironment", RequestContent.Create(content));
 BinaryData environmentData = await environmentCreateOperation.WaitForCompletionAsync();
 JsonElement environment = JsonDocument.Parse(environmentData.ToStream()).RootElement;
 Console.WriteLine($"Completed provisioning for environment with status {environment.GetProperty("provisioningState")}.");
@@ -195,7 +195,7 @@ When you submit a pull request, a CLA-bot will automatically determine whether y
 This project has adopted the [Microsoft Open Source Code of Conduct][code_of_conduct]. For more information see the [Code of Conduct FAQ][code_of_conduct_faq] or contact [opencode@microsoft.com][email_opencode] with any additional questions or comments.
 
 <!-- LINKS -->
-[azdevcenter_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Developer.DevCenter_1.0.0-beta.2/sdk/devcenter/CONTRIBUTING.md
+[azdevcenter_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/devcenter/CONTRIBUTING.md
 [style-guide-msft]: /style-guide/capitalization
 [style-guide-cloud]: https://aka.ms/azsdk/cloud-style-guide
 [cla]: https://cla.microsoft.com
