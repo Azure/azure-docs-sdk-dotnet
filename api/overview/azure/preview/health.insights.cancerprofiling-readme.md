@@ -1,17 +1,17 @@
 ---
 title: Azure Cognitive Services Health Insights Cancer Profiling client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Health.Insights.CancerProfiling, healthinsights
-author: pallavit
-ms.author: pallavit
-ms.date: 04/04/2023
+author: asaflevi-ms
+ms.author: asaflevi
+ms.date: 08/02/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: healthinsights
 ---
-# Azure Cognitive Services Health Insights Cancer Profiling client library for .NET - version 1.0.0-beta.1 
+# Azure Cognitive Services Health Insights Cancer Profiling client library for .NET - version 1.0.0-alpha.20230802.1 
 
 
-[Health Insights](https://review.learn.microsoft.com/azure/azure-health-insights/?branch=release-azure-health-insights) is an Azure Applied AI Service built with the Azure Cognitive Services Framework, that leverages multiple Cognitive Services, Healthcare API services and other Azure resources.
+[Health Insights][health_insights] is an Azure Applied AI Service built with the Azure Cognitive Services Framework, that leverages multiple Cognitive Services, Healthcare API services and other Azure resources.
 
 The [Cancer Profiling model][cancer_profiling_docs] receives clinical records of oncology patients and outputs cancer staging, such as clinical stage TNM categories and pathologic stage TNM categories as well as tumor site, histology.
 
@@ -156,21 +156,21 @@ When you submit a pull request, a CLA-bot will automatically determine whether y
 This project has adopted the [Microsoft Open Source Code of Conduct][code_of_conduct]. For more information see the [Code of Conduct FAQ][coc_faq] or contact [opencode@microsoft.com][coc_contact] with any additional questions or comments.
 
 <!-- LINKS -->
-[cancer_profiling_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Health.Insights.CancerProfiling_1.0.0-beta.1/sdk/healthinsights/Azure.Health.Insights.CancerProfiling/src/
-[cancer_profiling_client_nuget_package]: https://www.nuget.org/packages/
-[cancer_profiling_api_documentation]: https://review.learn.microsoft.com/rest/api/cognitiveservices/healthinsights/onco-phenotype?branch=healthin202303
-[cancer_profiling_client_class]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Health.Insights.CancerProfiling_1.0.0-beta.1/sdk/healthinsights/Azure.Health.Insights.CancerProfiling/src/Generated/CancerProfilingClient.cs
-[samples_location]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Health.Insights.CancerProfiling_1.0.0-beta.1/sdk/healthinsights/Azure.Health.Insights.CancerProfiling/samples
-[logging]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Health.Insights.CancerProfiling_1.0.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md
+[health_insights]: https://learn.microsoft.com/azure/azure-health-insights/overview
+[cancer_profiling_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/healthinsights/Azure.Health.Insights.CancerProfiling/src/
+[cancer_profiling_client_nuget_package]: https://www.nuget.org/packages/Azure.Health.Insights.CancerProfiling/
+[cancer_profiling_api_documentation]: https://learn.microsoft.com/rest/api/cognitiveservices/healthinsights/onco-phenotype
+[cancer_profiling_client_class]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/healthinsights/Azure.Health.Insights.CancerProfiling/src/Generated/CancerProfilingClient.cs
+[samples_location]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/healthinsights/Azure.Health.Insights.CancerProfiling/samples
+[logging]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/core/Azure.Core/samples/Diagnostics.md
 [azure_cli]: /cli/azure
-[azure_sub
-]: https://azure.microsoft.com/free/dotnet/
+[azure_sub]: https://azure.microsoft.com/free/dotnet/
 [nuget]: https://www.nuget.org/
 [azure_portal]: https://ms.portal.azure.com/#create/Microsoft.CognitiveServicesHealthInsights
 [cla]: https://cla.microsoft.com
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [coc_contact]: mailto:opencode@microsoft.com
-[cancer_profiling_docs]: https://review.learn.microsoft.com/azure/cognitive-services/health-decision-support/oncophenotype/overview?branch=main
-[product_docs]:https://review.learn.microsoft.com/azure/cognitive-services/health-decision-support/oncophenotype/?branch=main
+[cancer_profiling_docs]: https://learn.microsoft.com/azure/azure-health-insights/oncophenotype/overview
+[product_docs]:https://learn.microsoft.com/azure/azure-health-insights/oncophenotype/
 
