@@ -3,12 +3,12 @@ title: Azure AI Content Safety client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.ContentSafety, contentsafety
 author: bowgong
 ms.author: bowgong
-ms.date: 06/06/2023
+ms.date: 08/02/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: contentsafety
 ---
-# Azure AI Content Safety client library for .NET - version 1.0.0-beta.1 
+# Azure AI Content Safety client library for .NET - version 1.0.0-alpha.20230801.1 
 
 
 [Azure AI Content Safety][contentsafety_overview] detects harmful user-generated and AI-generated content in applications and services. Content Safety includes several APIs that allow you to detect material that is harmful:
@@ -17,7 +17,7 @@ ms.service: contentsafety
 * Image Analysis API: Scans images for sexual content, violence, hate, and self harm with multi-severity levels.
 * Text Blocklist Management APIs: The default AI classifiers are sufficient for most content safety needs; however, you might need to screen for terms that are specific to your use case. You can create blocklists of terms to use with the Text API.
 
-[Source code](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.ContentSafety_1.0.0-beta.1/sdk/contentsafety/Azure.AI.ContentSafety) | [Package (NuGet)](https://www.nuget.org/packages/Azure.AI.ContentSafety) | [API reference documentation](https://azure.github.io/azure-sdk-for-net) | [Product documentation](https://learn.microsoft.com/azure/cognitive-services/content-safety/)
+[Source code](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/contentsafety/Azure.AI.ContentSafety) | [Package (NuGet)](https://www.nuget.org/packages/Azure.AI.ContentSafety) | [API reference documentation](https://azure.github.io/azure-sdk-for-net) | [Product documentation](https://learn.microsoft.com/azure/cognitive-services/content-safety/)
 
 ## Getting started
 
@@ -111,12 +111,12 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.ContentSafety_1.0.0-beta.1/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.ContentSafety_1.0.0-beta.1/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.ContentSafety_1.0.0-beta.1/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.ContentSafety_1.0.0-beta.1/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.ContentSafety_1.0.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.ContentSafety_1.0.0-beta.1/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://learn.microsoft.com/dotnet/azure/sdk/unit-testing-mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
@@ -128,15 +128,14 @@ The following section provides several code snippets covering some of the most c
 * [Analyze image](#analyze-image)
 * [Manage text blocklist](#manage-text-blocklist)
 
-Please refer to [sample data](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.ContentSafety_1.0.0-beta.1/sdk/contentsafety/Azure.AI.ContentSafety/tests/Samples/sample_data) for the data used here. For more samples, please refer to [Samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.ContentSafety_1.0.0-beta.1/sdk/contentsafety/Azure.AI.ContentSafety/tests/Samples).
+Please refer to [sample data](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/contentsafety/Azure.AI.ContentSafety/tests/Samples/sample_data) for the data used here. For more samples, please refer to [Samples](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/contentsafety/Azure.AI.ContentSafety/tests/Samples).
 
 ### Analyze text
 
 #### Analyze text without blocklists
 
 ```C# Snippet:Azure_AI_ContentSafety_AnalyzeText
-string datapath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Samples", "sample_data", "text.txt");
-string text = File.ReadAllText(datapath);
+string text = "You are an idiot";
 
 var request = new AnalyzeTextOptions(text);
 
@@ -388,7 +387,7 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [azure_portal]: https://ms.portal.azure.com/
 [azure_cli_endpoint_lookup]: /cli/azure/cognitiveservices/account?view=azure-cli-latest#az-cognitiveservices-account-show
 [azure_cli_key_lookup]: /cli/azure/cognitiveservices/account/keys?view=azure-cli-latest#az-cognitiveservices-account-keys-list
-[logging]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.ContentSafety_1.0.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md
+[logging]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/core/Azure.Core/samples/Diagnostics.md
 
 [cla]: https://cla.microsoft.com
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
