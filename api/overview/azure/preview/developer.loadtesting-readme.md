@@ -1,18 +1,18 @@
 ---
 title: Azure Load Testing client library for .NET
-keywords: Azure, dotnet, SDK, API, Azure.Developer.LoadTesting, azure-load-testing
+keywords: Azure, dotnet, SDK, API, Azure.Developer.LoadTesting, load-testing
 author: abranj1219
-ms.author: abranj
-ms.date: 01/21/2023
+ms.author: abranj1219
+ms.date: 08/02/2023
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: azure-load-testing
+ms.service: load-testing
 ---
-# Azure Load Testing client library for .NET - version 1.0.0-beta.2 
+# Azure Load Testing client library for .NET - version 1.1.0-alpha.20230801.1 
 
 Azure Load Testing provides client library in .NET to the user by which they can interact natively with Azure Load Testing service. Azure Load Testing is a fully managed load-testing service that enables you to generate high-scale load. The service simulates traffic for your applications, regardless of where they're hosted. Developers, testers, and quality assurance (QA) engineers can use it to optimize application performance, scalability, or capacity.
 
-  [Source code](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Developer.LoadTesting_1.0.0-beta.2/sdk/loadtestservice/Azure.Developer.LoadTesting/src) | [Package (NuGet)](https://www.nuget.org/packages?q=Azure.Developer.Loadtesting) | [API reference documentation](https://azure.github.io/azure-sdk-for-net) | [Product documentation](https://learn.microsoft.com/azure/load-testing/)
+  [Source code](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/loadtestservice/Azure.Developer.LoadTesting/src) | [Package (NuGet)](https://www.nuget.org/packages?q=Azure.Developer.Loadtesting) | [API reference documentation](https://azure.github.io/azure-sdk-for-net) | [Product documentation](https://learn.microsoft.com/azure/load-testing/)
 
 
 ## Documentation
@@ -31,7 +31,7 @@ Various documentation is available to help you get started
 Install the client library for .NET with [NuGet](https://www.nuget.org/ ):
 
 ```dotnetcli
-dotnet add package Azure.Developer.LoadTesting --prerelease
+dotnet add package Azure.Developer.LoadTesting
 ```
 
 ### Prerequisites
@@ -101,7 +101,7 @@ The data-plane endpoint is obtained from Control Plane APIs.
 In the above example, `eus` represents the Azure region `East US`.
 ## Examples
 
-You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Developer.LoadTesting_1.0.0-beta.2/sdk/loadtestservice/Azure.Developer.LoadTesting/samples).
+You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/loadtestservice/Azure.Developer.LoadTesting/samples).
 
 
 ## Troubleshooting
@@ -114,7 +114,7 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ## Next steps
 
-Get started with our [samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Developer.LoadTesting_1.0.0-beta.2/sdk/loadtestservice/Azure.Developer.LoadTesting/samples).
+Get started with our [samples](https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/loadtestservice/Azure.Developer.LoadTesting/samples).
 
 ## Contributing
 
@@ -122,12 +122,12 @@ This is a template, but your SDK readme should include details on how to contrib
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Developer.LoadTesting_1.0.0-beta.2/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Developer.LoadTesting_1.0.0-beta.2/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Developer.LoadTesting_1.0.0-beta.2/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Developer.LoadTesting_1.0.0-beta.2/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Developer.LoadTesting_1.0.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Developer.LoadTesting_1.0.0-beta.2/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://learn.microsoft.com/dotnet/azure/sdk/unit-testing-mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
@@ -139,7 +139,7 @@ This is a template, but your SDK readme should include details on how to contrib
 [style-guide-cloud]: https://aka.ms/azsdk/cloud-style-guide
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [authenticate_with_token]: https://learn.microsoft.com/aspnet/core/security/authentication/identity
-[azure_identity_credentials]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Developer.LoadTesting_1.0.0-beta.2/sdk/identity/Azure.Identity#credentials
+[azure_identity_credentials]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/identity/Azure.Identity#credentials
 [azure_identity_nuget]: https://www.nuget.org/packages/Azure.Identity/1.7.0
 [client_secret_credential]: https://learn.microsoft.com/dotnet/api/azure.identity.clientsecretcredential
 [nuget]: https://www.nuget.org/
