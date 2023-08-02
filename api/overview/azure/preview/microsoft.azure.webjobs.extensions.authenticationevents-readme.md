@@ -3,7 +3,7 @@ title:
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebJobs.Extensions.AuthenticationEvents, entra
 author: pallavit
 ms.author: pallavit
-ms.date: 02/17/2023
+ms.date: 08/02/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: entra
@@ -222,19 +222,15 @@ To Test Token Augmentation, please do the following.
         "@odata.type": "microsoft.graph.onTokenIssuanceStartResponseData",
         "actions": [
             {
-                "@odata.type": "ProvideClaimsForToken",
-                "claims": [
-                    {
-                        "DateOfBirth": "01/01/2000"
-                    },
-                    {
-                        "CustomRoles": [
+                "@odata.type": "microsoft.graph.provideClaimsForToken",
+                "claims": {
+                    "DateOfBirth": "01/01/2000",
+                    "CustomRoles": [
                             "Writer",
                             "Editor"
                         ]
                     }
-                ]
-            }
+             }
         ]
     }
 }
@@ -281,6 +277,7 @@ more information see the [Code of Conduct FAQ][coc_faq] or contact
 <opencode@microsoft.com> with any additional questions or comments.
 
 <!-- LINKS -->
-[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.WebJobs.Extensions.AuthenticationEvents_1.0.0-beta.3/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
+[cg]: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
+
