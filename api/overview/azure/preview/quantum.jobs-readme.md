@@ -1,23 +1,21 @@
 ---
 title: Azure Quantum Jobs client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Quantum.Jobs, quantum
-author: xfield
-ms.author: xfield
-ms.date: 01/19/2022
+author: pallavit
+ms.author: pallavit
+ms.date: 08/02/2023
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: quantum
 ---
-# Azure Quantum Jobs client library for .NET - version 1.0.0-beta.3 
+# Azure Quantum Jobs client library for .NET - version 1.0.0-alpha.20230802.1 
 
 
 Azure Quantum is a Microsoft Azure service that you can use to run quantum computing programs or solve optimization problems in the cloud.  Using the Azure Quantum tools and SDKs, you can create quantum programs and run them against different quantum simulators and machines.  You can use the Azure.Quantum.Jobs client library to:
 - Create, enumerate, and cancel quantum jobs
 - Enumerate provider status and quotas
 
-  [Source code][source] | [API reference documentation](https://docs.microsoft.com/qsharp/api/) | [Product documentation](https://docs.microsoft.com/azure/quantum/)
+  [Source code][source] | [API reference documentation](/qsharp/api/) | [Product documentation](/azure/quantum/)
 
 ## Getting started
 
@@ -28,20 +26,20 @@ This section should include everything a developer needs to do to install and cr
 Install the Azure Quantum Jobs client library for .NET with [NuGet](https://www.nuget.org/):
 
 ```dotnetcli
-dotnet add package Azure.Quantum.Jobs --prerelease -v 1.0.0-beta.1
+dotnet add package Azure.Quantum.Jobs --prerelease
 ```
 
 ### Prerequisites
 
 Include a section after the install command that details any requirements that must be satisfied before a developer can [authenticate](#authenticate-the-client) and test all of the snippets in the [Examples](#examples) section. For example, for Cosmos DB:
 
-> You must have an [Azure subscription](https://azure.microsoft.com/free/dotnet/), [Cosmos DB account](https://docs.microsoft.com/azure/cosmos-db/account-overview) (SQL API), and [Python 3.6+](https://www.python.org/downloads/) to use this package.
+> You must have an [Azure subscription](https://azure.microsoft.com/free/dotnet/), [Cosmos DB account](/azure/cosmos-db/account-overview) (SQL API), and [Python 3.6+](https://www.python.org/downloads/) to use this package.
 
 ### Authenticate the client
 
-To authenticate with the service, the workspace will use [DefaultAzureCredential](https://docs.microsoft.com/dotnet/api/azure.identity.defaultazurecredential?view=azure-dotnet) internally. This will try different authentication mechanisms based on the environment (e.g. Environment Variables, ManagedIdentity, CachedTokens) and finally it will fallback to [InteractiveBrowserCredential](https://docs.microsoft.com/dotnet/api/azure.identity.interactivebrowsercredential?view=azure-dotnet).
+To authenticate with the service, the workspace will use [DefaultAzureCredential](/dotnet/api/azure.identity.defaultazurecredential?view=azure-dotnet) internally. This will try different authentication mechanisms based on the environment (e.g. Environment Variables, ManagedIdentity, CachedTokens) and finally it will fallback to [InteractiveBrowserCredential](/dotnet/api/azure.identity.interactivebrowsercredential?view=azure-dotnet).
 
-Workspace will also allow the user to override the above behavior by passing their own [TokenCredential](https://docs.microsoft.com/dotnet/api/azure.core.tokencredential?view=azure-dotnet).
+Workspace will also allow the user to override the above behavior by passing their own [TokenCredential](/dotnet/api/azure.core.tokencredential?view=azure-dotnet).
 
 `TokenCredential` is the default Authentication mechanism used by Azure SDKs.
 
@@ -60,12 +58,12 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Quantum.Jobs_1.0.0-beta.3/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Quantum.Jobs_1.0.0-beta.3/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Quantum.Jobs_1.0.0-beta.3/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Quantum.Jobs_1.0.0-beta.3/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Quantum.Jobs_1.0.0-beta.3/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Quantum.Jobs_1.0.0-beta.3/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://learn.microsoft.com/dotnet/azure/sdk/unit-testing-mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
@@ -81,11 +79,11 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 Create an instance of the QuantumJobClient by passing in these parameters:
 - [Subscription][subscriptions] - looks like XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX and can be found in your list of subscriptions on azure
-- [Resource Group][resource-groups] - a container that holds related resources for an Azure solution 
+- [Resource Group][resource-groups] - a container that holds related resources for an Azure solution
 - [Workspace][workspaces] - a collection of assets associated with running quantum or optimization applications
-- [Location][location] - choose the best data center by geographical region 
-- [StorageContainerName][blob-storage] - your blob storage 
-- [Credential][credentials] - used to authenticate 
+- [Location][location] - choose the best data center by geographical region
+- [StorageContainerName][blob-storage] - your blob storage
+- [Credential][credentials] - used to authenticate
 
 ```C# Snippet:Azure_Quantum_Jobs_CreateClient
 // Create a QuantumJobClient
@@ -120,7 +118,7 @@ var containerUri = (quantumJobClient.GetStorageSasUri(
 
 Using the SAS URI, upload the compressed json input data to the blob client.
 Note that we need to compress the json input data before uploading it to the blob storage.
-This contains the parameters to be used with [Quantum Inspired Optimizations](https://docs.microsoft.com/azure/quantum/optimization-overview-introduction)
+This contains the parameters to be used with [Quantum Inspired Optimizations](/azure/quantum/optimization-overview-introduction)
 
 ```C# Snippet:Azure_Quantum_Jobs_UploadInputData
 string problemFilePath = "./problem.json";
@@ -224,7 +222,7 @@ All Quantum Jobs service operations will throw a RequestFailedException on failu
 
 ## Next steps
 
-*  Visit our [Product documentation](https://docs.microsoft.com/azure/quantum/) to learn more about Azure Quantum.
+*  Visit our [Product documentation](/azure/quantum/) to learn more about Azure Quantum.
 ## Contributing
 
 See the [CONTRIBUTING.md][contributing] for details on building,
@@ -244,15 +242,15 @@ additional questions or comments.
 <!-- LINKS -->
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Quantum.Jobs_1.0.0-beta.3/sdk/quantum/Azure.Quantum.Jobs/src
-[resource-groups]: https://docs.microsoft.com/azure/azure-resource-manager/management/manage-resource-groups-portal
-[workspaces]: https://docs.microsoft.com/azure/quantum/how-to-create-quantum-workspaces-with-the-azure-portal
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/quantum/Azure.Quantum.Jobs/src
+[resource-groups]: /azure/azure-resource-manager/management/manage-resource-groups-portal
+[workspaces]: /azure/quantum/how-to-create-quantum-workspaces-with-the-azure-portal
 [location]: https://azure.microsoft.com/global-infrastructure/services/?products=quantum
-[blob-storage]: https://docs.microsoft.com/azure/storage/blobs/storage-blobs-introduction
-[contributing]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Quantum.Jobs_1.0.0-beta.3/CONTRIBUTING.md
+[blob-storage]: /azure/storage/blobs/storage-blobs-introduction
+[contributing]: https://github.com/Azure/azure-sdk-for-net/tree/main/CONTRIBUTING.md
 [subscriptions]: https://ms.portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade
-[credentials]: https://docs.microsoft.com/dotnet/api/overview/azure/identity-readme#credentials
-[style-guide-msft]: https://docs.microsoft.com/style-guide/capitalization
+[credentials]: /dotnet/api/overview/azure/identity-readme#credentials
+[style-guide-msft]: /style-guide/capitalization
 [style-guide-cloud]: https://aka.ms/azsdk/cloud-style-guide
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fquantum%2FAzure.Quantum.Jobs%2FREADME.png)
