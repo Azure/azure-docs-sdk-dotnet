@@ -3,12 +3,12 @@ title: Azure KeyVault Administration client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Security.KeyVault.Administration, keyvault
 author: heaths
 ms.author: heaths
-ms.date: 11/09/2022
+ms.date: 08/02/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: keyvault
 ---
-# Azure KeyVault Administration client library for .NET - version 4.3.0-beta.1 
+# Azure KeyVault Administration client library for .NET - version 4.4.0-alpha.20230802.1 
 
 
 Azure Key Vault Managed HSM is a fully-managed, highly-available, single-tenant, standards-compliant cloud service that enables you to safeguard
@@ -69,14 +69,14 @@ Only the designated administrators that were assigned during the create command 
 
 To activate your HSM you need:
 
-* Minimum 3 RSA key-pairs (maximum 10)
-* Specify minimum number of keys required to decrypt the security domain (quorum)
+* A minimum of 3 RSA key-pairs (maximum 10)
+* Specify the minimum number of keys required to decrypt the security domain (quorum)
 
 To activate the HSM you send at least 3 (maximum 10) RSA public keys to the HSM. The HSM encrypts the security domain with these keys and sends it back.
 Once this security domain is successfully downloaded, your HSM is ready to use.
 You also need to specify quorum, which is the minimum number of private keys required to decrypt the security domain.
 
-The example below shows how to use openssl to generate 3 self signed certificate.
+The example below shows how to use openssl to generate 3 self-signed certificates.
 
 ```PowerShell
 openssl req -newkey rsa:2048 -nodes -keyout cert_0.key -x509 -days 365 -out cert_0.cer
@@ -85,7 +85,7 @@ openssl req -newkey rsa:2048 -nodes -keyout cert_2.key -x509 -days 365 -out cert
 ```
 
 Use the `az keyvault security-domain download` command to download the security domain and activate your managed HSM.
-The example below, uses 3 RSA key pairs (only public keys are needed for this command) and sets the quorum to 2.
+The example below uses 3 RSA key pairs (only public keys are needed for this command) and sets the quorum to 2.
 
 ```PowerShell
 az keyvault security-domain download --hsm-name <your-managed-hsm-name> --sd-wrapping-keys ./certs/cert_0.cer ./certs/cert_1.cer ./certs/cert_2.cer --sd-quorum 2 --security-domain-file ContosoMHSM-SD.json
@@ -106,7 +106,7 @@ Please read [best practices][best_practices] for properly securing your managed 
 
 #### Create KeyVaultAccessControlClient
 
-Instantiate a `DefaultAzureCredential` to pass to the [KeyVaultAccessControlClient][rbac_client].
+Instantiate a `DefaultAzureCredential` to pass to the `KeyVaultAccessControlClient`.
 The same instance of a token credential can be used with multiple clients if they will be authenticating with the same identity.
 
 ```C# Snippet:HelloCreateKeyVaultAccessControlClient
@@ -115,7 +115,7 @@ KeyVaultAccessControlClient client = new KeyVaultAccessControlClient(new Uri(man
 
 #### Create KeyVaultBackupClient
 
-Instantiate a `DefaultAzureCredential` to pass to the [KeyVaultBackupClient][backup_client].
+Instantiate a `DefaultAzureCredential` to pass to the `KeyVaultBackupClient`.
 The same instance of a token credential can be used with multiple clients if they will be authenticating with the same identity.
 
 ```C# Snippet:HelloCreateKeyVaultBackupClient
@@ -124,7 +124,7 @@ KeyVaultBackupClient client = new KeyVaultBackupClient(new Uri(managedHsmUrl), n
 
 #### Create KeyVaultSettingClient
 
-Instantiate a `DefaultAzureCredential` to pass to the [KeyVaultSettingsClient][settings_client].
+Instantiate a `DefaultAzureCredential` to pass to the `KeyVaultSettingsClient`.
 The same instance of a token credential can be used with multiple clients if they will be authenticating with the same identity.
 
 ```C# Snippet:KeyVaultSettingsClient_Create
@@ -166,12 +166,12 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Administration_4.3.0-beta.1/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Administration_4.3.0-beta.1/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Administration_4.3.0-beta.1/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Administration_4.3.0-beta.1/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Administration_4.3.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Administration_4.3.0-beta.1/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://learn.microsoft.com/dotnet/azure/sdk/unit-testing-mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
@@ -184,35 +184,35 @@ The following section provides several code snippets using the `client` created 
 ### Sync examples
 
 * Access control
-  * [Listing All Role Definitions](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Administration_4.3.0-beta.1/sdk/keyvault/Azure.Security.KeyVault.Administration/samples/Sample1_RbacHelloWorldSync.md#listing-all-role-definitions)
-  * [Listing All Role Assignments](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Administration_4.3.0-beta.1/sdk/keyvault/Azure.Security.KeyVault.Administration/samples/Sample1_RbacHelloWorldSync.md#listing-all-role-assignments)
-  * [Creating a Role Assignment](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Administration_4.3.0-beta.1/sdk/keyvault/Azure.Security.KeyVault.Administration/samples/Sample1_RbacHelloWorldSync.md#creating-a-role-assignment)
-  * [Getting a Role Assignment](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Administration_4.3.0-beta.1/sdk/keyvault/Azure.Security.KeyVault.Administration/samples/Sample1_RbacHelloWorldSync.md#getting-a-role-assignment)
-  * [Deleting a Role Assignment](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Administration_4.3.0-beta.1/sdk/keyvault/Azure.Security.KeyVault.Administration/samples/Sample1_RbacHelloWorldSync.md#deleting-a-role-assignment)
+  * [Listing All Role Definitions](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/keyvault/Azure.Security.KeyVault.Administration/samples/Sample1_RbacHelloWorldSync.md#listing-all-role-definitions)
+  * [Listing All Role Assignments](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/keyvault/Azure.Security.KeyVault.Administration/samples/Sample1_RbacHelloWorldSync.md#listing-all-role-assignments)
+  * [Creating a Role Assignment](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/keyvault/Azure.Security.KeyVault.Administration/samples/Sample1_RbacHelloWorldSync.md#creating-a-role-assignment)
+  * [Getting a Role Assignment](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/keyvault/Azure.Security.KeyVault.Administration/samples/Sample1_RbacHelloWorldSync.md#getting-a-role-assignment)
+  * [Deleting a Role Assignment](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/keyvault/Azure.Security.KeyVault.Administration/samples/Sample1_RbacHelloWorldSync.md#deleting-a-role-assignment)
 * Backup and restore
-  * [Performing a full key backup](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Administration_4.3.0-beta.1/sdk/keyvault/Azure.Security.KeyVault.Administration/samples/Sample1_BackupHelloWorldSync.md#performing-a-full-key-backup)
-  * [Performing a full key restore](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Administration_4.3.0-beta.1/sdk/keyvault/Azure.Security.KeyVault.Administration/samples/Sample1_BackupHelloWorldSync.md#performing-a-full-key-restore)
+  * [Performing a full key backup](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/keyvault/Azure.Security.KeyVault.Administration/samples/Sample1_BackupHelloWorldSync.md#performing-a-full-key-backup)
+  * [Performing a full key restore](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/keyvault/Azure.Security.KeyVault.Administration/samples/Sample1_BackupHelloWorldSync.md#performing-a-full-key-restore)
 
 ### Async examples
 
 * Access control
-  * [Listing All Role Definitions](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Administration_4.3.0-beta.1/sdk/keyvault/Azure.Security.KeyVault.Administration/samples/Sample1_RbacHelloWorldAsync.md#listing-all-role-definitions)
-  * [Listing All Role Assignments](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Administration_4.3.0-beta.1/sdk/keyvault/Azure.Security.KeyVault.Administration/samples/Sample1_RbacHelloWorldAsync.md#listing-all-role-assignments)
-  * [Creating a Role Assignment](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Administration_4.3.0-beta.1/sdk/keyvault/Azure.Security.KeyVault.Administration/samples/Sample1_RbacHelloWorldAsync.md#creating-a-role-assignment)
-  * [Getting a Role Assignment](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Administration_4.3.0-beta.1/sdk/keyvault/Azure.Security.KeyVault.Administration/samples/Sample1_RbacHelloWorldAsync.md#getting-a-role-assignment)
-  * [Deleting a Role Assignment](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Administration_4.3.0-beta.1/sdk/keyvault/Azure.Security.KeyVault.Administration/samples/Sample1_RbacHelloWorldAsync.md#deleting-a-role-assignment)
+  * [Listing All Role Definitions](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/keyvault/Azure.Security.KeyVault.Administration/samples/Sample1_RbacHelloWorldAsync.md#listing-all-role-definitions)
+  * [Listing All Role Assignments](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/keyvault/Azure.Security.KeyVault.Administration/samples/Sample1_RbacHelloWorldAsync.md#listing-all-role-assignments)
+  * [Creating a Role Assignment](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/keyvault/Azure.Security.KeyVault.Administration/samples/Sample1_RbacHelloWorldAsync.md#creating-a-role-assignment)
+  * [Getting a Role Assignment](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/keyvault/Azure.Security.KeyVault.Administration/samples/Sample1_RbacHelloWorldAsync.md#getting-a-role-assignment)
+  * [Deleting a Role Assignment](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/keyvault/Azure.Security.KeyVault.Administration/samples/Sample1_RbacHelloWorldAsync.md#deleting-a-role-assignment)
 * Backup and restore
-  * [Performing a full key backup](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Administration_4.3.0-beta.1/sdk/keyvault/Azure.Security.KeyVault.Administration/samples/Sample1_BackupHelloWorldAsync.md#performing-a-full-key-backup)
-  * [Performing a full key restore](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Administration_4.3.0-beta.1/sdk/keyvault/Azure.Security.KeyVault.Administration/samples/Sample1_BackupHelloWorldAsync.md#performing-a-full-key-restore)
+  * [Performing a full key backup](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/keyvault/Azure.Security.KeyVault.Administration/samples/Sample1_BackupHelloWorldAsync.md#performing-a-full-key-backup)
+  * [Performing a full key restore](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/keyvault/Azure.Security.KeyVault.Administration/samples/Sample1_BackupHelloWorldAsync.md#performing-a-full-key-restore)
 
 ## Troubleshooting
 
-See our [troubleshooting guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Administration_4.3.0-beta.1/sdk/keyvault/Azure.Security.KeyVault.Administration/TROUBLESHOOTING.md)
+See our [troubleshooting guide](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/keyvault/Azure.Security.KeyVault.Administration/TROUBLESHOOTING.md)
 for details on how to diagnose various failure scenarios.
 
 ### General
 
-When you interact with the Azure Key Vault administration library using the .NET SDK, errors returned by the service correspond to the same HTTP status codes returned for [REST API][keyvault_rest] requests.
+When you interact with the Azure Key Vault Administration library using the .NET SDK, errors returned by the service correspond to the same HTTP status codes returned for [REST API][keyvault_rest] requests.
 
 For example, if you try to retrieve a role assignment that doesn't exist in your Azure Key Vault, a `404` error is returned, indicating "Not Found".
 
@@ -244,7 +244,7 @@ Content-Type: application/json
 ### Setting up console logging
 
 The simplest way to see the logs is to enable the console logging.
-To create an Azure SDK log listener that outputs messages to console use AzureEventSourceListener.CreateConsoleLogger method.
+To create an Azure SDK log listener that outputs messages to console, use the `AzureEventSourceListener.CreateConsoleLogger` method.
 
 ```c#
 // Setup a listener to monitor logged events.
@@ -274,22 +274,19 @@ additional questions or comments.
 [access_policy]: https://learn.microsoft.com/azure/key-vault/general/assign-access-policy
 [rbac_guide]: https://learn.microsoft.com/azure/key-vault/general/rbac-guide
 [azure_cli]: https://learn.microsoft.com/cli/azure
-[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Security.KeyVault.Administration_4.3.0-beta.1/sdk/identity/Azure.Identity
+[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/identity/Azure.Identity
 [azure_sub]: https://azure.microsoft.com/free/dotnet/
 [best_practices]: https://learn.microsoft.com/azure/key-vault/managed-hsm/best-practices
 [built_in_roles]: https://learn.microsoft.com/azure/key-vault/managed-hsm/built-in-roles
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
-[rbac_client]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Administration_4.3.0-beta.1/sdk/keyvault/Azure.Security.KeyVault.Administration/src/KeyVaultAccessControlClient.cs
-[backup_client]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Administration_4.3.0-beta.1/sdk/keyvault/Azure.Security.KeyVault.Administration/src/KeyVaultBackupClient.cs
-[settings_client]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Administration_4.3.0-beta.1/sdk/keyvault/Azure.Security.KeyVault.Administration/src/KeyVaultSettingsClient.cs
 [managedhsm_docs]: https://learn.microsoft.com/azure/key-vault/managed-hsm/
 [keyvault_rest]: https://learn.microsoft.com/rest/api/keyvault/
 [admin_client_nuget_package]: https://www.nuget.org/packages?q=Azure.Security.KeyVault.Administration
-[admin_client_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Security.KeyVault.Administration_4.3.0-beta.1/sdk/keyvault/Azure.Security.KeyVault.Administration/samples
-[admin_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Security.KeyVault.Administration_4.3.0-beta.1/sdk/keyvault/Azure.Security.KeyVault.Administration/src
+[admin_client_samples]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/keyvault/Azure.Security.KeyVault.Administration/samples
+[admin_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/keyvault/Azure.Security.KeyVault.Administration/src
 [nuget]: https://www.nuget.org/
-[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Administration_4.3.0-beta.1/sdk/identity/Azure.Identity/README.md#defaultazurecredential
-[logging]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Security.KeyVault.Administration_4.3.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md
+[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/identity/Azure.Identity/README.md#defaultazurecredential
+[logging]: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Ftables%2FAzure.Data.Tables%2FREADME.png)
