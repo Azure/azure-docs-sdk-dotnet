@@ -21,7 +21,7 @@
     <Assembly Name="StartupServicesModel" Version="8.0.0.0" />
     <Assembly Name="System.Fabric" Version="8.0.0.0" />
     <Assembly Name="System.Fabric.Management.ServiceModel" Version="8.0.0.0" />
-    <Assembly Name="System.Fabric.Strings" Version="8.0.0.0" />
+    <Assembly Name="system.fabric.strings" Version="8.0.0.0" />
   </Assemblies>
   <Namespace Name="Microsoft.Azure.Devices.Client">
     <Type Name="Microsoft.Azure.Devices.Client.AmqpConnectionPoolSettings" Id="T:Microsoft.Azure.Devices.Client.AmqpConnectionPoolSettings">
@@ -9100,7 +9100,6 @@
       <Member Id="M:System.Fabric.IImageStoreProgressHandler.GetUpdateInterval" />
       <Member Id="M:System.Fabric.IImageStoreProgressHandler.UpdateProgress(System.Int64,System.Int64,System.Fabric.ProgressUnitType)" />
     </Type>
-    <Type Name="System.Fabric.IMemoryManagedOperationData" Id="T:System.Fabric.IMemoryManagedOperationData" />
     <Type Name="System.Fabric.Int64RangePartitionInformation" Id="T:System.Fabric.Int64RangePartitionInformation">
       <Member Id="P:System.Fabric.Int64RangePartitionInformation.HighKey" />
       <Member Id="P:System.Fabric.Int64RangePartitionInformation.LowKey" />
@@ -9121,9 +9120,6 @@
     </Type>
     <Type Name="System.Fabric.IOperationStream2" Id="T:System.Fabric.IOperationStream2">
       <Member Id="M:System.Fabric.IOperationStream2.ReportFault(System.Fabric.FaultType)" />
-    </Type>
-    <Type Name="System.Fabric.IOperationStream3" Id="T:System.Fabric.IOperationStream3">
-      <Member Id="M:System.Fabric.IOperationStream3.GetMemoryManagedOperationAsync(System.Threading.CancellationToken)" />
     </Type>
     <Type Name="System.Fabric.IPrimaryReplicator" Id="T:System.Fabric.IPrimaryReplicator">
       <Member Id="M:System.Fabric.IPrimaryReplicator.BuildReplicaAsync(System.Fabric.ReplicaInformation,System.Threading.CancellationToken)" />
@@ -9362,15 +9358,6 @@
       <Member Id="F:System.Fabric.ManagedIdentityKind.None" />
       <Member Id="F:System.Fabric.ManagedIdentityKind.Service" />
     </Type>
-    <Type Name="System.Fabric.MemoryOwner" Id="T:System.Fabric.MemoryOwner">
-      <Member Id="F:System.Fabric.MemoryOwner.ValidLength" />
-      <Member Id="M:System.Fabric.MemoryOwner.#ctor(System.ArraySegment{System.Byte})" />
-      <Member Id="M:System.Fabric.MemoryOwner.#ctor(System.Buffers.IMemoryOwner{System.Byte},System.Int32)" />
-      <Member Id="M:System.Fabric.MemoryOwner.#ctor(System.Byte[],System.Int32)" />
-      <Member Id="M:System.Fabric.MemoryOwner.Dispose" />
-      <Member Id="M:System.Fabric.MemoryOwner.Dispose(System.Boolean)" />
-      <Member Id="P:System.Fabric.MemoryOwner.Memory" />
-    </Type>
     <Type Name="System.Fabric.MoveCost" Id="T:System.Fabric.MoveCost">
       <Member Id="F:System.Fabric.MoveCost.High" />
       <Member Id="F:System.Fabric.MoveCost.Low" />
@@ -9495,9 +9482,6 @@
       <Member Id="M:System.Fabric.OperationData.#ctor(System.Byte[])" />
       <Member Id="M:System.Fabric.OperationData.#ctor(System.Collections.Generic.IEnumerable{System.ArraySegment{System.Byte}})" />
       <Member Id="M:System.Fabric.OperationData.#ctor(System.Collections.Generic.IEnumerable{System.Byte[]})" />
-      <Member Id="M:System.Fabric.OperationData.AsMemoryManagedOperationData" />
-      <Member Id="M:System.Fabric.OperationData.CreateMemoryManagedOperationData(System.Collections.Generic.IEnumerable{System.Fabric.MemoryOwner})" />
-      <Member Id="M:System.Fabric.OperationData.CreateMemoryManagedOperationData(System.Fabric.MemoryOwner)" />
     </Type>
     <Type Name="System.Fabric.OperationType" Id="T:System.Fabric.OperationType">
       <Member Id="F:System.Fabric.OperationType.AtomicGroupOperation" />
@@ -12052,6 +12036,12 @@
       <Member Id="M:System.Fabric.ImageStore.ImageStoreUtility.TryExtractApplicationPackage(System.String,System.Fabric.IImageStoreProgressHandler)" />
     </Type>
   </Namespace>
+  <Namespace Name="System.Fabric.Interop">
+    <Type Name="System.Fabric.Interop.EventDataDescriptor" Id="T:System.Fabric.Interop.EventDataDescriptor">
+      <Member Id="F:System.Fabric.Interop.EventDataDescriptor.DataPointer" />
+      <Member Id="F:System.Fabric.Interop.EventDataDescriptor.Size" />
+    </Type>
+  </Namespace>
   <Namespace Name="System.Fabric.Management.ServiceModel">
     <Type Name="System.Fabric.Management.ServiceModel.AppInstanceDefinitionType" Id="T:System.Fabric.Management.ServiceModel.AppInstanceDefinitionType">
       <Member Id="M:System.Fabric.Management.ServiceModel.AppInstanceDefinitionType.#ctor" />
@@ -12099,6 +12089,7 @@
     </Type>
     <Type Name="System.Fabric.Management.ServiceModel.ApplicationManifestType" Id="T:System.Fabric.Management.ServiceModel.ApplicationManifestType">
       <Member Id="M:System.Fabric.Management.ServiceModel.ApplicationManifestType.#ctor" />
+      <Member Id="M:System.Fabric.Management.ServiceModel.ApplicationManifestType.Validate" />
       <Member Id="P:System.Fabric.Management.ServiceModel.ApplicationManifestType.AnyAttr" />
       <Member Id="P:System.Fabric.Management.ServiceModel.ApplicationManifestType.ApplicationTypeName" />
       <Member Id="P:System.Fabric.Management.ServiceModel.ApplicationManifestType.ApplicationTypeVersion" />
@@ -12782,6 +12773,9 @@
       <Member Id="F:System.Fabric.Management.ServiceModel.InternalEndpointTypeProtocol.https" />
       <Member Id="F:System.Fabric.Management.ServiceModel.InternalEndpointTypeProtocol.tcp" />
     </Type>
+    <Type Name="System.Fabric.Management.ServiceModel.IXmlValidator" Id="T:System.Fabric.Management.ServiceModel.IXmlValidator">
+      <Member Id="M:System.Fabric.Management.ServiceModel.IXmlValidator.Validate" />
+    </Type>
     <Type Name="System.Fabric.Management.ServiceModel.KeyValuePairType" Id="T:System.Fabric.Management.ServiceModel.KeyValuePairType">
       <Member Id="M:System.Fabric.Management.ServiceModel.KeyValuePairType.#ctor" />
       <Member Id="P:System.Fabric.Management.ServiceModel.KeyValuePairType.Name" />
@@ -13181,6 +13175,7 @@
     </Type>
     <Type Name="System.Fabric.Management.ServiceModel.ServiceManifestType" Id="T:System.Fabric.Management.ServiceModel.ServiceManifestType">
       <Member Id="M:System.Fabric.Management.ServiceModel.ServiceManifestType.#ctor" />
+      <Member Id="M:System.Fabric.Management.ServiceModel.ServiceManifestType.Validate" />
       <Member Id="P:System.Fabric.Management.ServiceModel.ServiceManifestType.AnyAttr" />
       <Member Id="P:System.Fabric.Management.ServiceModel.ServiceManifestType.CodePackage" />
       <Member Id="P:System.Fabric.Management.ServiceModel.ServiceManifestType.ConfigPackage" />

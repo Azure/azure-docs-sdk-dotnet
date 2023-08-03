@@ -34,10 +34,10 @@
       </Docs>
     </Member>
     <Member MemberName="CreateCascadeDeleteJob">
-      <MemberSignature Language="C#" Value="public virtual Azure.Operation&lt;BinaryData&gt; CreateCascadeDeleteJob (Azure.WaitUntil waitUntil, string jobId, string partyId, string modelId, string resourceType, string resourceId, string insightId, Azure.RequestContext context = default);" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Operation&lt;BinaryData&gt; CreateCascadeDeleteJob (Azure.WaitUntil waitUntil, string jobId, string partyId, string modelId, string resourceType, string resourceId, string insightId, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Operation`1&lt;class System.BinaryData&gt; CreateCascadeDeleteJob(valuetype Azure.WaitUntil waitUntil, string jobId, string partyId, string modelId, string resourceType, string resourceId, string insightId, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Verticals.AgriFood.Farming.Insights.CreateCascadeDeleteJob(Azure.WaitUntil,System.String,System.String,System.String,System.String,System.String,System.String,Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateCascadeDeleteJob (waitUntil As WaitUntil, jobId As String, partyId As String, modelId As String, resourceType As String, resourceId As String, insightId As String, Optional context As RequestContext = Nothing) As Operation(Of BinaryData)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateCascadeDeleteJob (waitUntil As WaitUntil, jobId As String, partyId As String, modelId As String, resourceType As String, resourceId As String, insightId As String, context As RequestContext) As Operation(Of BinaryData)" />
       <MemberSignature Language="F#" Value="abstract member CreateCascadeDeleteJob : Azure.WaitUntil * string * string * string * string * string * string * Azure.RequestContext -&gt; Azure.Operation&lt;BinaryData&gt;&#xA;override this.CreateCascadeDeleteJob : Azure.WaitUntil * string * string * string * string * string * string * Azure.RequestContext -&gt; Azure.Operation&lt;BinaryData&gt;" Usage="insights.CreateCascadeDeleteJob (waitUntil, jobId, partyId, modelId, resourceType, resourceId, insightId, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -67,8 +67,12 @@
         <param name="resourceId"> Id of the associated resource. </param>
         <param name="insightId"> Insight id. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Create a cascade delete job for insights specified partyId/modelId/resourceType/resourceId. </summary>
-        <returns> The <see cref="T:Azure.Operation`1" /> from the service that will contain a <see cref="T:System.BinaryData" /> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Create a cascade delete job for insights specified partyId/modelId/resourceType/resourceId.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The <see cref="T:Azure.Operation" /> representing an asynchronous operation on the service. </returns>
         <remarks>
 Below is the JSON schema for the response payload.
 
@@ -100,12 +104,12 @@ Possible values: 'Waiting', 'Running', 'Succeeded', 'Failed', 'Cancelled'.
 This sample shows how to call CreateCascadeDeleteJob with required parameters and parse the result.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
-var client = new FarmBeatsClient(credential).GetInsightsClient(<2022-11-01-preview>);
+var client = new FarmBeatsClient(credential).GetInsightsClient("2022-11-01-preview");
 
-var operation = client.CreateCascadeDeleteJob(WaitUntil.Completed, "<jobId>", "<partyId>", "<modelId>", "<resourceType>", "<resourceId>", "<insightId>");
+var operation = client.CreateCascadeDeleteJob(WaitUntil.Completed, "<jobId>", "<partyId>", "<modelId>", "<resourceType>", "<resourceId>", "<insightId>", new RequestContext());
 
-BinaryData data = operation.Value;
-JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+BinaryData responseData = operation.Value;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("partyId").ToString());
 Console.WriteLine(result.GetProperty("resourceId").ToString());
 Console.WriteLine(result.GetProperty("resourceType").ToString());
@@ -122,10 +126,10 @@ Console.WriteLine(result.GetProperty("endTime").ToString());
       </Docs>
     </Member>
     <Member MemberName="CreateCascadeDeleteJobAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Operation&lt;BinaryData&gt;&gt; CreateCascadeDeleteJobAsync (Azure.WaitUntil waitUntil, string jobId, string partyId, string modelId, string resourceType, string resourceId, string insightId, Azure.RequestContext context = default);" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Operation&lt;BinaryData&gt;&gt; CreateCascadeDeleteJobAsync (Azure.WaitUntil waitUntil, string jobId, string partyId, string modelId, string resourceType, string resourceId, string insightId, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Operation`1&lt;class System.BinaryData&gt;&gt; CreateCascadeDeleteJobAsync(valuetype Azure.WaitUntil waitUntil, string jobId, string partyId, string modelId, string resourceType, string resourceId, string insightId, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Verticals.AgriFood.Farming.Insights.CreateCascadeDeleteJobAsync(Azure.WaitUntil,System.String,System.String,System.String,System.String,System.String,System.String,Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateCascadeDeleteJobAsync (waitUntil As WaitUntil, jobId As String, partyId As String, modelId As String, resourceType As String, resourceId As String, insightId As String, Optional context As RequestContext = Nothing) As Task(Of Operation(Of BinaryData))" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateCascadeDeleteJobAsync (waitUntil As WaitUntil, jobId As String, partyId As String, modelId As String, resourceType As String, resourceId As String, insightId As String, context As RequestContext) As Task(Of Operation(Of BinaryData))" />
       <MemberSignature Language="F#" Value="abstract member CreateCascadeDeleteJobAsync : Azure.WaitUntil * string * string * string * string * string * string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Operation&lt;BinaryData&gt;&gt;&#xA;override this.CreateCascadeDeleteJobAsync : Azure.WaitUntil * string * string * string * string * string * string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Operation&lt;BinaryData&gt;&gt;" Usage="insights.CreateCascadeDeleteJobAsync (waitUntil, jobId, partyId, modelId, resourceType, resourceId, insightId, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -155,8 +159,12 @@ Console.WriteLine(result.GetProperty("endTime").ToString());
         <param name="resourceId"> Id of the associated resource. </param>
         <param name="insightId"> Insight id. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Create a cascade delete job for insights specified partyId/modelId/resourceType/resourceId. </summary>
-        <returns> The <see cref="T:Azure.Operation`1" /> from the service that will contain a <see cref="T:System.BinaryData" /> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Create a cascade delete job for insights specified partyId/modelId/resourceType/resourceId.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The <see cref="T:Azure.Operation" /> representing an asynchronous operation on the service. </returns>
         <remarks>
 Below is the JSON schema for the response payload.
 
@@ -188,12 +196,12 @@ Possible values: 'Waiting', 'Running', 'Succeeded', 'Failed', 'Cancelled'.
 This sample shows how to call CreateCascadeDeleteJobAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
-var client = new FarmBeatsClient(credential).GetInsightsClient(<2022-11-01-preview>);
+var client = new FarmBeatsClient(credential).GetInsightsClient("2022-11-01-preview");
 
-var operation = await client.CreateCascadeDeleteJobAsync(WaitUntil.Completed, "<jobId>", "<partyId>", "<modelId>", "<resourceType>", "<resourceId>", "<insightId>");
+var operation = await client.CreateCascadeDeleteJobAsync(WaitUntil.Completed, "<jobId>", "<partyId>", "<modelId>", "<resourceType>", "<resourceId>", "<insightId>", new RequestContext());
 
-BinaryData data = operation.Value;
-JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+BinaryData responseData = operation.Value;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("partyId").ToString());
 Console.WriteLine(result.GetProperty("resourceId").ToString());
 Console.WriteLine(result.GetProperty("resourceType").ToString());
@@ -241,10 +249,14 @@ Console.WriteLine(result.GetProperty("endTime").ToString());
         <param name="resourceType"> Resource type associated with the record. </param>
         <param name="resourceId"> Id of the associated resource. </param>
         <param name="insightId"> Id of the insight resource. </param>
-        <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        <param name="content"> The content to send as the body of the request. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Creates or updates insight entity. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Creates or updates insight entity.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Below is the JSON schema for the request and response payloads.
 
@@ -316,7 +328,7 @@ only string, numeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.
 This sample shows how to call CreateOrUpdate with required parameters and parse the result.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
-var client = new FarmBeatsClient(credential).GetInsightsClient(<2022-11-01-preview>);
+var client = new FarmBeatsClient(credential).GetInsightsClient("2022-11-01-preview");
 
 var data = new {};
 
@@ -328,7 +340,7 @@ Console.WriteLine(result.ToString());
 This sample shows how to call CreateOrUpdate with all parameters and request content, and how to parse the result.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
-var client = new FarmBeatsClient(credential).GetInsightsClient(<2022-11-01-preview>);
+var client = new FarmBeatsClient(credential).GetInsightsClient("2022-11-01-preview");
 
 var data = new {
     modelVersion = "<modelVersion>",
@@ -406,10 +418,14 @@ Console.WriteLine(result.GetProperty("properties").GetProperty("<test>").ToStrin
         <param name="resourceType"> Resource type associated with the record. </param>
         <param name="resourceId"> Id of the associated resource. </param>
         <param name="insightId"> Id of the insight resource. </param>
-        <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        <param name="content"> The content to send as the body of the request. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Creates or updates insight entity. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Creates or updates insight entity.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Below is the JSON schema for the request and response payloads.
 
@@ -481,7 +497,7 @@ only string, numeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.
 This sample shows how to call CreateOrUpdateAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
-var client = new FarmBeatsClient(credential).GetInsightsClient(<2022-11-01-preview>);
+var client = new FarmBeatsClient(credential).GetInsightsClient("2022-11-01-preview");
 
 var data = new {};
 
@@ -493,7 +509,7 @@ Console.WriteLine(result.ToString());
 This sample shows how to call CreateOrUpdateAsync with all parameters and request content, and how to parse the result.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
-var client = new FarmBeatsClient(credential).GetInsightsClient(<2022-11-01-preview>);
+var client = new FarmBeatsClient(credential).GetInsightsClient("2022-11-01-preview");
 
 var data = new {
     modelVersion = "<modelVersion>",
@@ -571,7 +587,11 @@ Console.WriteLine(result.GetProperty("properties").GetProperty("<test>").ToStrin
         <param name="resourceId"> Id of the associated resource. </param>
         <param name="insightId"> Id of the insight resource. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Deletes a specified insight resource. </summary>
+        <summary>
+            [Protocol Method] Deletes a specified insight resource.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
         <returns> The response returned from the service. </returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
@@ -583,7 +603,7 @@ Console.WriteLine(result.GetProperty("properties").GetProperty("<test>").ToStrin
 This sample shows how to call Delete with required parameters.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
-var client = new FarmBeatsClient(credential).GetInsightsClient(<2022-11-01-preview>);
+var client = new FarmBeatsClient(credential).GetInsightsClient("2022-11-01-preview");
 
 Response response = client.Delete("<partyId>", "<modelId>", "<resourceType>", "<resourceId>", "<insightId>");
 Console.WriteLine(response.Status);
@@ -622,7 +642,11 @@ Console.WriteLine(response.Status);
         <param name="resourceId"> Id of the associated resource. </param>
         <param name="insightId"> Id of the insight resource. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Deletes a specified insight resource. </summary>
+        <summary>
+            [Protocol Method] Deletes a specified insight resource.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
         <returns> The response returned from the service. </returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
@@ -634,7 +658,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call DeleteAsync with required parameters.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
-var client = new FarmBeatsClient(credential).GetInsightsClient(<2022-11-01-preview>);
+var client = new FarmBeatsClient(credential).GetInsightsClient("2022-11-01-preview");
 
 Response response = await client.DeleteAsync("<partyId>", "<modelId>", "<resourceType>", "<resourceId>", "<insightId>");
 Console.WriteLine(response.Status);
@@ -642,10 +666,10 @@ Console.WriteLine(response.Status);
       </Docs>
     </Member>
     <Member MemberName="GetCascadeDeleteJobDetails">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response GetCascadeDeleteJobDetails (string jobId, Azure.RequestContext context = default);" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response GetCascadeDeleteJobDetails (string jobId, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response GetCascadeDeleteJobDetails(string jobId, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Verticals.AgriFood.Farming.Insights.GetCascadeDeleteJobDetails(System.String,Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetCascadeDeleteJobDetails (jobId As String, Optional context As RequestContext = Nothing) As Response" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetCascadeDeleteJobDetails (jobId As String, context As RequestContext) As Response" />
       <MemberSignature Language="F#" Value="abstract member GetCascadeDeleteJobDetails : string * Azure.RequestContext -&gt; Azure.Response&#xA;override this.GetCascadeDeleteJobDetails : string * Azure.RequestContext -&gt; Azure.Response" Usage="insights.GetCascadeDeleteJobDetails (jobId, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -662,8 +686,12 @@ Console.WriteLine(response.Status);
       <Docs>
         <param name="jobId"> Id of the job. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Get a cascade delete job for specified insight. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Get a cascade delete job for specified insight.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Below is the JSON schema for the response payload.
 
@@ -695,9 +723,9 @@ Possible values: 'Waiting', 'Running', 'Succeeded', 'Failed', 'Cancelled'.
 This sample shows how to call GetCascadeDeleteJobDetails with required parameters and parse the result.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
-var client = new FarmBeatsClient(credential).GetInsightsClient(<2022-11-01-preview>);
+var client = new FarmBeatsClient(credential).GetInsightsClient("2022-11-01-preview");
 
-Response response = client.GetCascadeDeleteJobDetails("<jobId>");
+Response response = client.GetCascadeDeleteJobDetails("<jobId>", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("partyId").ToString());
@@ -716,10 +744,10 @@ Console.WriteLine(result.GetProperty("endTime").ToString());
       </Docs>
     </Member>
     <Member MemberName="GetCascadeDeleteJobDetailsAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; GetCascadeDeleteJobDetailsAsync (string jobId, Azure.RequestContext context = default);" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; GetCascadeDeleteJobDetailsAsync (string jobId, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; GetCascadeDeleteJobDetailsAsync(string jobId, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Verticals.AgriFood.Farming.Insights.GetCascadeDeleteJobDetailsAsync(System.String,Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetCascadeDeleteJobDetailsAsync (jobId As String, Optional context As RequestContext = Nothing) As Task(Of Response)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetCascadeDeleteJobDetailsAsync (jobId As String, context As RequestContext) As Task(Of Response)" />
       <MemberSignature Language="F#" Value="abstract member GetCascadeDeleteJobDetailsAsync : string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.GetCascadeDeleteJobDetailsAsync : string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="insights.GetCascadeDeleteJobDetailsAsync (jobId, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -736,8 +764,12 @@ Console.WriteLine(result.GetProperty("endTime").ToString());
       <Docs>
         <param name="jobId"> Id of the job. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Get a cascade delete job for specified insight. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Get a cascade delete job for specified insight.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Below is the JSON schema for the response payload.
 
@@ -769,9 +801,9 @@ Possible values: 'Waiting', 'Running', 'Succeeded', 'Failed', 'Cancelled'.
 This sample shows how to call GetCascadeDeleteJobDetailsAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
-var client = new FarmBeatsClient(credential).GetInsightsClient(<2022-11-01-preview>);
+var client = new FarmBeatsClient(credential).GetInsightsClient("2022-11-01-preview");
 
-Response response = await client.GetCascadeDeleteJobDetailsAsync("<jobId>");
+Response response = await client.GetCascadeDeleteJobDetailsAsync("<jobId>", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("partyId").ToString());
@@ -790,10 +822,10 @@ Console.WriteLine(result.GetProperty("endTime").ToString());
       </Docs>
     </Member>
     <Member MemberName="GetInsight">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response GetInsight (string partyId, string modelId, string resourceType, string resourceId, string insightId, Azure.RequestContext context = default);" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response GetInsight (string partyId, string modelId, string resourceType, string resourceId, string insightId, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response GetInsight(string partyId, string modelId, string resourceType, string resourceId, string insightId, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Verticals.AgriFood.Farming.Insights.GetInsight(System.String,System.String,System.String,System.String,System.String,Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetInsight (partyId As String, modelId As String, resourceType As String, resourceId As String, insightId As String, Optional context As RequestContext = Nothing) As Response" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetInsight (partyId As String, modelId As String, resourceType As String, resourceId As String, insightId As String, context As RequestContext) As Response" />
       <MemberSignature Language="F#" Value="abstract member GetInsight : string * string * string * string * string * Azure.RequestContext -&gt; Azure.Response&#xA;override this.GetInsight : string * string * string * string * string * Azure.RequestContext -&gt; Azure.Response" Usage="insights.GetInsight (partyId, modelId, resourceType, resourceId, insightId, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -821,8 +853,12 @@ Console.WriteLine(result.GetProperty("endTime").ToString());
         <param name="resourceId"> Id of the associated resource. </param>
         <param name="insightId"> Id of the insight resource. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Gets a specified insight resource under a particular party. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Gets a specified insight resource under a particular party.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Below is the JSON schema for the response payload.
 
@@ -864,9 +900,9 @@ only string, numeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.
 This sample shows how to call GetInsight with required parameters and parse the result.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
-var client = new FarmBeatsClient(credential).GetInsightsClient(<2022-11-01-preview>);
+var client = new FarmBeatsClient(credential).GetInsightsClient("2022-11-01-preview");
 
-Response response = client.GetInsight("<partyId>", "<modelId>", "<resourceType>", "<resourceId>", "<insightId>");
+Response response = client.GetInsight("<partyId>", "<modelId>", "<resourceType>", "<resourceId>", "<insightId>", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("partyId").ToString());
@@ -893,10 +929,10 @@ Console.WriteLine(result.GetProperty("properties").GetProperty("<test>").ToStrin
       </Docs>
     </Member>
     <Member MemberName="GetInsightAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; GetInsightAsync (string partyId, string modelId, string resourceType, string resourceId, string insightId, Azure.RequestContext context = default);" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; GetInsightAsync (string partyId, string modelId, string resourceType, string resourceId, string insightId, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; GetInsightAsync(string partyId, string modelId, string resourceType, string resourceId, string insightId, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Verticals.AgriFood.Farming.Insights.GetInsightAsync(System.String,System.String,System.String,System.String,System.String,Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetInsightAsync (partyId As String, modelId As String, resourceType As String, resourceId As String, insightId As String, Optional context As RequestContext = Nothing) As Task(Of Response)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetInsightAsync (partyId As String, modelId As String, resourceType As String, resourceId As String, insightId As String, context As RequestContext) As Task(Of Response)" />
       <MemberSignature Language="F#" Value="abstract member GetInsightAsync : string * string * string * string * string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.GetInsightAsync : string * string * string * string * string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="insights.GetInsightAsync (partyId, modelId, resourceType, resourceId, insightId, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -924,8 +960,12 @@ Console.WriteLine(result.GetProperty("properties").GetProperty("<test>").ToStrin
         <param name="resourceId"> Id of the associated resource. </param>
         <param name="insightId"> Id of the insight resource. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Gets a specified insight resource under a particular party. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Gets a specified insight resource under a particular party.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Below is the JSON schema for the response payload.
 
@@ -967,9 +1007,9 @@ only string, numeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.
 This sample shows how to call GetInsightAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
-var client = new FarmBeatsClient(credential).GetInsightsClient(<2022-11-01-preview>);
+var client = new FarmBeatsClient(credential).GetInsightsClient("2022-11-01-preview");
 
-Response response = await client.GetInsightAsync("<partyId>", "<modelId>", "<resourceType>", "<resourceId>", "<insightId>");
+Response response = await client.GetInsightAsync("<partyId>", "<modelId>", "<resourceType>", "<resourceId>", "<insightId>", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("partyId").ToString());
@@ -996,10 +1036,10 @@ Console.WriteLine(result.GetProperty("properties").GetProperty("<test>").ToStrin
       </Docs>
     </Member>
     <Member MemberName="GetInsightsByPartyIdModelIdAndResource">
-      <MemberSignature Language="C#" Value="public virtual Azure.Pageable&lt;BinaryData&gt; GetInsightsByPartyIdModelIdAndResource (string partyId, string modelId, string resourceType, string resourceId, DateTimeOffset? minInsightStartDateTime = default, DateTimeOffset? maxInsightStartDateTime = default, DateTimeOffset? minInsightEndDateTime = default, DateTimeOffset? maxInsightEndDateTime = default, System.Collections.Generic.IEnumerable&lt;string&gt; measurementFilters = default, System.Collections.Generic.IEnumerable&lt;string&gt; ids = default, System.Collections.Generic.IEnumerable&lt;string&gt; names = default, System.Collections.Generic.IEnumerable&lt;string&gt; propertyFilters = default, System.Collections.Generic.IEnumerable&lt;string&gt; statuses = default, DateTimeOffset? minCreatedDateTime = default, DateTimeOffset? maxCreatedDateTime = default, DateTimeOffset? minLastModifiedDateTime = default, DateTimeOffset? maxLastModifiedDateTime = default, int? maxPageSize = default, string skipToken = default, Azure.RequestContext context = default);" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Pageable&lt;BinaryData&gt; GetInsightsByPartyIdModelIdAndResource (string partyId, string modelId, string resourceType, string resourceId, DateTimeOffset? minInsightStartDateTime, DateTimeOffset? maxInsightStartDateTime, DateTimeOffset? minInsightEndDateTime, DateTimeOffset? maxInsightEndDateTime, System.Collections.Generic.IEnumerable&lt;string&gt; measurementFilters, System.Collections.Generic.IEnumerable&lt;string&gt; ids, System.Collections.Generic.IEnumerable&lt;string&gt; names, System.Collections.Generic.IEnumerable&lt;string&gt; propertyFilters, System.Collections.Generic.IEnumerable&lt;string&gt; statuses, DateTimeOffset? minCreatedDateTime, DateTimeOffset? maxCreatedDateTime, DateTimeOffset? minLastModifiedDateTime, DateTimeOffset? maxLastModifiedDateTime, int? maxPageSize, string skipToken, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Pageable`1&lt;class System.BinaryData&gt; GetInsightsByPartyIdModelIdAndResource(string partyId, string modelId, string resourceType, string resourceId, valuetype System.Nullable`1&lt;valuetype System.DateTimeOffset&gt; minInsightStartDateTime, valuetype System.Nullable`1&lt;valuetype System.DateTimeOffset&gt; maxInsightStartDateTime, valuetype System.Nullable`1&lt;valuetype System.DateTimeOffset&gt; minInsightEndDateTime, valuetype System.Nullable`1&lt;valuetype System.DateTimeOffset&gt; maxInsightEndDateTime, class System.Collections.Generic.IEnumerable`1&lt;string&gt; measurementFilters, class System.Collections.Generic.IEnumerable`1&lt;string&gt; ids, class System.Collections.Generic.IEnumerable`1&lt;string&gt; names, class System.Collections.Generic.IEnumerable`1&lt;string&gt; propertyFilters, class System.Collections.Generic.IEnumerable`1&lt;string&gt; statuses, valuetype System.Nullable`1&lt;valuetype System.DateTimeOffset&gt; minCreatedDateTime, valuetype System.Nullable`1&lt;valuetype System.DateTimeOffset&gt; maxCreatedDateTime, valuetype System.Nullable`1&lt;valuetype System.DateTimeOffset&gt; minLastModifiedDateTime, valuetype System.Nullable`1&lt;valuetype System.DateTimeOffset&gt; maxLastModifiedDateTime, valuetype System.Nullable`1&lt;int32&gt; maxPageSize, string skipToken, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Verticals.AgriFood.Farming.Insights.GetInsightsByPartyIdModelIdAndResource(System.String,System.String,System.String,System.String,System.Nullable{System.DateTimeOffset},System.Nullable{System.DateTimeOffset},System.Nullable{System.DateTimeOffset},System.Nullable{System.DateTimeOffset},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTimeOffset},System.Nullable{System.DateTimeOffset},System.Nullable{System.DateTimeOffset},System.Nullable{System.DateTimeOffset},System.Nullable{System.Int32},System.String,Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetInsightsByPartyIdModelIdAndResource (partyId As String, modelId As String, resourceType As String, resourceId As String, Optional minInsightStartDateTime As Nullable(Of DateTimeOffset) = Nothing, Optional maxInsightStartDateTime As Nullable(Of DateTimeOffset) = Nothing, Optional minInsightEndDateTime As Nullable(Of DateTimeOffset) = Nothing, Optional maxInsightEndDateTime As Nullable(Of DateTimeOffset) = Nothing, Optional measurementFilters As IEnumerable(Of String) = Nothing, Optional ids As IEnumerable(Of String) = Nothing, Optional names As IEnumerable(Of String) = Nothing, Optional propertyFilters As IEnumerable(Of String) = Nothing, Optional statuses As IEnumerable(Of String) = Nothing, Optional minCreatedDateTime As Nullable(Of DateTimeOffset) = Nothing, Optional maxCreatedDateTime As Nullable(Of DateTimeOffset) = Nothing, Optional minLastModifiedDateTime As Nullable(Of DateTimeOffset) = Nothing, Optional maxLastModifiedDateTime As Nullable(Of DateTimeOffset) = Nothing, Optional maxPageSize As Nullable(Of Integer) = Nothing, Optional skipToken As String = Nothing, Optional context As RequestContext = Nothing) As Pageable(Of BinaryData)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetInsightsByPartyIdModelIdAndResource (partyId As String, modelId As String, resourceType As String, resourceId As String, minInsightStartDateTime As Nullable(Of DateTimeOffset), maxInsightStartDateTime As Nullable(Of DateTimeOffset), minInsightEndDateTime As Nullable(Of DateTimeOffset), maxInsightEndDateTime As Nullable(Of DateTimeOffset), measurementFilters As IEnumerable(Of String), ids As IEnumerable(Of String), names As IEnumerable(Of String), propertyFilters As IEnumerable(Of String), statuses As IEnumerable(Of String), minCreatedDateTime As Nullable(Of DateTimeOffset), maxCreatedDateTime As Nullable(Of DateTimeOffset), minLastModifiedDateTime As Nullable(Of DateTimeOffset), maxLastModifiedDateTime As Nullable(Of DateTimeOffset), maxPageSize As Nullable(Of Integer), skipToken As String, context As RequestContext) As Pageable(Of BinaryData)" />
       <MemberSignature Language="F#" Value="abstract member GetInsightsByPartyIdModelIdAndResource : string * string * string * string * Nullable&lt;DateTimeOffset&gt; * Nullable&lt;DateTimeOffset&gt; * Nullable&lt;DateTimeOffset&gt; * Nullable&lt;DateTimeOffset&gt; * seq&lt;string&gt; * seq&lt;string&gt; * seq&lt;string&gt; * seq&lt;string&gt; * seq&lt;string&gt; * Nullable&lt;DateTimeOffset&gt; * Nullable&lt;DateTimeOffset&gt; * Nullable&lt;DateTimeOffset&gt; * Nullable&lt;DateTimeOffset&gt; * Nullable&lt;int&gt; * string * Azure.RequestContext -&gt; Azure.Pageable&lt;BinaryData&gt;&#xA;override this.GetInsightsByPartyIdModelIdAndResource : string * string * string * string * Nullable&lt;DateTimeOffset&gt; * Nullable&lt;DateTimeOffset&gt; * Nullable&lt;DateTimeOffset&gt; * Nullable&lt;DateTimeOffset&gt; * seq&lt;string&gt; * seq&lt;string&gt; * seq&lt;string&gt; * seq&lt;string&gt; * seq&lt;string&gt; * Nullable&lt;DateTimeOffset&gt; * Nullable&lt;DateTimeOffset&gt; * Nullable&lt;DateTimeOffset&gt; * Nullable&lt;DateTimeOffset&gt; * Nullable&lt;int&gt; * string * Azure.RequestContext -&gt; Azure.Pageable&lt;BinaryData&gt;" Usage="insights.GetInsightsByPartyIdModelIdAndResource (partyId, modelId, resourceType, resourceId, minInsightStartDateTime, maxInsightStartDateTime, minInsightEndDateTime, maxInsightEndDateTime, measurementFilters, ids, names, propertyFilters, statuses, minCreatedDateTime, maxCreatedDateTime, minLastModifiedDateTime, maxLastModifiedDateTime, maxPageSize, skipToken, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -1062,7 +1102,11 @@ Console.WriteLine(result.GetProperty("properties").GetProperty("<test>").ToStrin
             </param>
         <param name="skipToken"> Skip token for getting next set of results. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Returns a paginated list of insight resources. </summary>
+        <summary>
+            [Protocol Method] Returns a paginated list of insight resources.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
         <returns> The <see cref="T:Azure.Pageable`1" /> from the service containing a list of <see cref="T:System.BinaryData" /> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         <remarks>
 Below is the JSON schema for one item in the pageable response.
@@ -1105,22 +1149,11 @@ only string, numeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.
 This sample shows how to call GetInsightsByPartyIdModelIdAndResource with required parameters and parse the result.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
-var client = new FarmBeatsClient(credential).GetInsightsClient(<2022-11-01-preview>);
+var client = new FarmBeatsClient(credential).GetInsightsClient("2022-11-01-preview");
 
-foreach (var data in client.GetInsightsByPartyIdModelIdAndResource("<partyId>", "<modelId>", "<resourceType>", "<resourceId>"))
+foreach (var item in client.GetInsightsByPartyIdModelIdAndResource("<partyId>", "<modelId>", "<resourceType>", "<resourceId>", DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new String[]{"<measurementFilters>"}, new String[]{"<ids>"}, new String[]{"<names>"}, new String[]{"<propertyFilters>"}, new String[]{"<statuses>"}, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, 1234, "<skipToken>", new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-    Console.WriteLine(result.ToString());
-}
-]]></code>
-This sample shows how to call GetInsightsByPartyIdModelIdAndResource with all parameters, and how to parse the result.
-<code><![CDATA[
-var credential = new DefaultAzureCredential();
-var client = new FarmBeatsClient(credential).GetInsightsClient(<2022-11-01-preview>);
-
-foreach (var data in client.GetInsightsByPartyIdModelIdAndResource("<partyId>", "<modelId>", "<resourceType>", "<resourceId>", DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new String[]{"<measurementFilters>"}, new String[]{"<ids>"}, new String[]{"<names>"}, new String[]{"<propertyFilters>"}, new String[]{"<statuses>"}, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, 1234, "<skipToken>"))
-{
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("partyId").ToString());
     Console.WriteLine(result.GetProperty("modelId").ToString());
     Console.WriteLine(result.GetProperty("resourceType").ToString());
@@ -1146,10 +1179,10 @@ foreach (var data in client.GetInsightsByPartyIdModelIdAndResource("<partyId>", 
       </Docs>
     </Member>
     <Member MemberName="GetInsightsByPartyIdModelIdAndResourceAsync">
-      <MemberSignature Language="C#" Value="public virtual Azure.AsyncPageable&lt;BinaryData&gt; GetInsightsByPartyIdModelIdAndResourceAsync (string partyId, string modelId, string resourceType, string resourceId, DateTimeOffset? minInsightStartDateTime = default, DateTimeOffset? maxInsightStartDateTime = default, DateTimeOffset? minInsightEndDateTime = default, DateTimeOffset? maxInsightEndDateTime = default, System.Collections.Generic.IEnumerable&lt;string&gt; measurementFilters = default, System.Collections.Generic.IEnumerable&lt;string&gt; ids = default, System.Collections.Generic.IEnumerable&lt;string&gt; names = default, System.Collections.Generic.IEnumerable&lt;string&gt; propertyFilters = default, System.Collections.Generic.IEnumerable&lt;string&gt; statuses = default, DateTimeOffset? minCreatedDateTime = default, DateTimeOffset? maxCreatedDateTime = default, DateTimeOffset? minLastModifiedDateTime = default, DateTimeOffset? maxLastModifiedDateTime = default, int? maxPageSize = default, string skipToken = default, Azure.RequestContext context = default);" />
+      <MemberSignature Language="C#" Value="public virtual Azure.AsyncPageable&lt;BinaryData&gt; GetInsightsByPartyIdModelIdAndResourceAsync (string partyId, string modelId, string resourceType, string resourceId, DateTimeOffset? minInsightStartDateTime, DateTimeOffset? maxInsightStartDateTime, DateTimeOffset? minInsightEndDateTime, DateTimeOffset? maxInsightEndDateTime, System.Collections.Generic.IEnumerable&lt;string&gt; measurementFilters, System.Collections.Generic.IEnumerable&lt;string&gt; ids, System.Collections.Generic.IEnumerable&lt;string&gt; names, System.Collections.Generic.IEnumerable&lt;string&gt; propertyFilters, System.Collections.Generic.IEnumerable&lt;string&gt; statuses, DateTimeOffset? minCreatedDateTime, DateTimeOffset? maxCreatedDateTime, DateTimeOffset? minLastModifiedDateTime, DateTimeOffset? maxLastModifiedDateTime, int? maxPageSize, string skipToken, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.AsyncPageable`1&lt;class System.BinaryData&gt; GetInsightsByPartyIdModelIdAndResourceAsync(string partyId, string modelId, string resourceType, string resourceId, valuetype System.Nullable`1&lt;valuetype System.DateTimeOffset&gt; minInsightStartDateTime, valuetype System.Nullable`1&lt;valuetype System.DateTimeOffset&gt; maxInsightStartDateTime, valuetype System.Nullable`1&lt;valuetype System.DateTimeOffset&gt; minInsightEndDateTime, valuetype System.Nullable`1&lt;valuetype System.DateTimeOffset&gt; maxInsightEndDateTime, class System.Collections.Generic.IEnumerable`1&lt;string&gt; measurementFilters, class System.Collections.Generic.IEnumerable`1&lt;string&gt; ids, class System.Collections.Generic.IEnumerable`1&lt;string&gt; names, class System.Collections.Generic.IEnumerable`1&lt;string&gt; propertyFilters, class System.Collections.Generic.IEnumerable`1&lt;string&gt; statuses, valuetype System.Nullable`1&lt;valuetype System.DateTimeOffset&gt; minCreatedDateTime, valuetype System.Nullable`1&lt;valuetype System.DateTimeOffset&gt; maxCreatedDateTime, valuetype System.Nullable`1&lt;valuetype System.DateTimeOffset&gt; minLastModifiedDateTime, valuetype System.Nullable`1&lt;valuetype System.DateTimeOffset&gt; maxLastModifiedDateTime, valuetype System.Nullable`1&lt;int32&gt; maxPageSize, string skipToken, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Verticals.AgriFood.Farming.Insights.GetInsightsByPartyIdModelIdAndResourceAsync(System.String,System.String,System.String,System.String,System.Nullable{System.DateTimeOffset},System.Nullable{System.DateTimeOffset},System.Nullable{System.DateTimeOffset},System.Nullable{System.DateTimeOffset},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTimeOffset},System.Nullable{System.DateTimeOffset},System.Nullable{System.DateTimeOffset},System.Nullable{System.DateTimeOffset},System.Nullable{System.Int32},System.String,Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetInsightsByPartyIdModelIdAndResourceAsync (partyId As String, modelId As String, resourceType As String, resourceId As String, Optional minInsightStartDateTime As Nullable(Of DateTimeOffset) = Nothing, Optional maxInsightStartDateTime As Nullable(Of DateTimeOffset) = Nothing, Optional minInsightEndDateTime As Nullable(Of DateTimeOffset) = Nothing, Optional maxInsightEndDateTime As Nullable(Of DateTimeOffset) = Nothing, Optional measurementFilters As IEnumerable(Of String) = Nothing, Optional ids As IEnumerable(Of String) = Nothing, Optional names As IEnumerable(Of String) = Nothing, Optional propertyFilters As IEnumerable(Of String) = Nothing, Optional statuses As IEnumerable(Of String) = Nothing, Optional minCreatedDateTime As Nullable(Of DateTimeOffset) = Nothing, Optional maxCreatedDateTime As Nullable(Of DateTimeOffset) = Nothing, Optional minLastModifiedDateTime As Nullable(Of DateTimeOffset) = Nothing, Optional maxLastModifiedDateTime As Nullable(Of DateTimeOffset) = Nothing, Optional maxPageSize As Nullable(Of Integer) = Nothing, Optional skipToken As String = Nothing, Optional context As RequestContext = Nothing) As AsyncPageable(Of BinaryData)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetInsightsByPartyIdModelIdAndResourceAsync (partyId As String, modelId As String, resourceType As String, resourceId As String, minInsightStartDateTime As Nullable(Of DateTimeOffset), maxInsightStartDateTime As Nullable(Of DateTimeOffset), minInsightEndDateTime As Nullable(Of DateTimeOffset), maxInsightEndDateTime As Nullable(Of DateTimeOffset), measurementFilters As IEnumerable(Of String), ids As IEnumerable(Of String), names As IEnumerable(Of String), propertyFilters As IEnumerable(Of String), statuses As IEnumerable(Of String), minCreatedDateTime As Nullable(Of DateTimeOffset), maxCreatedDateTime As Nullable(Of DateTimeOffset), minLastModifiedDateTime As Nullable(Of DateTimeOffset), maxLastModifiedDateTime As Nullable(Of DateTimeOffset), maxPageSize As Nullable(Of Integer), skipToken As String, context As RequestContext) As AsyncPageable(Of BinaryData)" />
       <MemberSignature Language="F#" Value="abstract member GetInsightsByPartyIdModelIdAndResourceAsync : string * string * string * string * Nullable&lt;DateTimeOffset&gt; * Nullable&lt;DateTimeOffset&gt; * Nullable&lt;DateTimeOffset&gt; * Nullable&lt;DateTimeOffset&gt; * seq&lt;string&gt; * seq&lt;string&gt; * seq&lt;string&gt; * seq&lt;string&gt; * seq&lt;string&gt; * Nullable&lt;DateTimeOffset&gt; * Nullable&lt;DateTimeOffset&gt; * Nullable&lt;DateTimeOffset&gt; * Nullable&lt;DateTimeOffset&gt; * Nullable&lt;int&gt; * string * Azure.RequestContext -&gt; Azure.AsyncPageable&lt;BinaryData&gt;&#xA;override this.GetInsightsByPartyIdModelIdAndResourceAsync : string * string * string * string * Nullable&lt;DateTimeOffset&gt; * Nullable&lt;DateTimeOffset&gt; * Nullable&lt;DateTimeOffset&gt; * Nullable&lt;DateTimeOffset&gt; * seq&lt;string&gt; * seq&lt;string&gt; * seq&lt;string&gt; * seq&lt;string&gt; * seq&lt;string&gt; * Nullable&lt;DateTimeOffset&gt; * Nullable&lt;DateTimeOffset&gt; * Nullable&lt;DateTimeOffset&gt; * Nullable&lt;DateTimeOffset&gt; * Nullable&lt;int&gt; * string * Azure.RequestContext -&gt; Azure.AsyncPageable&lt;BinaryData&gt;" Usage="insights.GetInsightsByPartyIdModelIdAndResourceAsync (partyId, modelId, resourceType, resourceId, minInsightStartDateTime, maxInsightStartDateTime, minInsightEndDateTime, maxInsightEndDateTime, measurementFilters, ids, names, propertyFilters, statuses, minCreatedDateTime, maxCreatedDateTime, minLastModifiedDateTime, maxLastModifiedDateTime, maxPageSize, skipToken, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -1212,7 +1245,11 @@ foreach (var data in client.GetInsightsByPartyIdModelIdAndResource("<partyId>", 
             </param>
         <param name="skipToken"> Skip token for getting next set of results. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Returns a paginated list of insight resources. </summary>
+        <summary>
+            [Protocol Method] Returns a paginated list of insight resources.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
         <returns> The <see cref="T:Azure.AsyncPageable`1" /> from the service containing a list of <see cref="T:System.BinaryData" /> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         <remarks>
 Below is the JSON schema for one item in the pageable response.
@@ -1255,22 +1292,11 @@ only string, numeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.
 This sample shows how to call GetInsightsByPartyIdModelIdAndResourceAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
-var client = new FarmBeatsClient(credential).GetInsightsClient(<2022-11-01-preview>);
+var client = new FarmBeatsClient(credential).GetInsightsClient("2022-11-01-preview");
 
-await foreach (var data in client.GetInsightsByPartyIdModelIdAndResourceAsync("<partyId>", "<modelId>", "<resourceType>", "<resourceId>"))
+await foreach (var item in client.GetInsightsByPartyIdModelIdAndResourceAsync("<partyId>", "<modelId>", "<resourceType>", "<resourceId>", DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new String[]{"<measurementFilters>"}, new String[]{"<ids>"}, new String[]{"<names>"}, new String[]{"<propertyFilters>"}, new String[]{"<statuses>"}, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, 1234, "<skipToken>", new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-    Console.WriteLine(result.ToString());
-}
-]]></code>
-This sample shows how to call GetInsightsByPartyIdModelIdAndResourceAsync with all parameters, and how to parse the result.
-<code><![CDATA[
-var credential = new DefaultAzureCredential();
-var client = new FarmBeatsClient(credential).GetInsightsClient(<2022-11-01-preview>);
-
-await foreach (var data in client.GetInsightsByPartyIdModelIdAndResourceAsync("<partyId>", "<modelId>", "<resourceType>", "<resourceId>", DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new String[]{"<measurementFilters>"}, new String[]{"<ids>"}, new String[]{"<names>"}, new String[]{"<propertyFilters>"}, new String[]{"<statuses>"}, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, 1234, "<skipToken>"))
-{
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("partyId").ToString());
     Console.WriteLine(result.GetProperty("modelId").ToString());
     Console.WriteLine(result.GetProperty("resourceType").ToString());

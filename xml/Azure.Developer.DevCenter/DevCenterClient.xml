@@ -84,10 +84,10 @@
       </Docs>
     </Member>
     <Member MemberName="GetAllDevBoxes">
-      <MemberSignature Language="C#" Value="public virtual Azure.Pageable&lt;BinaryData&gt; GetAllDevBoxes (string filter = default, int? maxCount = default, Azure.RequestContext context = default);" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Pageable&lt;BinaryData&gt; GetAllDevBoxes (string filter, int? maxCount, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Pageable`1&lt;class System.BinaryData&gt; GetAllDevBoxes(string filter, valuetype System.Nullable`1&lt;int32&gt; maxCount, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.DevCenterClient.GetAllDevBoxes(System.String,System.Nullable{System.Int32},Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetAllDevBoxes (Optional filter As String = Nothing, Optional maxCount As Nullable(Of Integer) = Nothing, Optional context As RequestContext = Nothing) As Pageable(Of BinaryData)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetAllDevBoxes (filter As String, maxCount As Nullable(Of Integer), context As RequestContext) As Pageable(Of BinaryData)" />
       <MemberSignature Language="F#" Value="abstract member GetAllDevBoxes : string * Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.Pageable&lt;BinaryData&gt;&#xA;override this.GetAllDevBoxes : string * Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.Pageable&lt;BinaryData&gt;" Usage="devCenterClient.GetAllDevBoxes (filter, maxCount, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -106,7 +106,11 @@
         <param name="filter"> An OData filter clause to apply to the operation. </param>
         <param name="maxCount"> The maximum number of resources to return from the operation. Example: 'top=10'. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Lists Dev Boxes that the caller has access to in the DevCenter. </summary>
+        <summary>
+            [Protocol Method] Lists Dev Boxes that the caller has access to in the DevCenter.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
         <returns> The <see cref="T:Azure.Pageable`1" /> from the service containing a list of <see cref="T:System.BinaryData" /> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         <remarks>
 Below is the JSON schema for one item in the pageable response.
@@ -153,27 +157,15 @@ Schema for <c>DevBoxListResultValue</c>:
 </code></remarks>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call GetAllDevBoxes and parse the result.
+This sample shows how to call GetAllDevBoxes with required parameters and parse the result.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new DevCenterClient(endpoint, credential);
 
-foreach (var data in client.GetAllDevBoxes())
+foreach (var item in client.GetAllDevBoxes("<filter>", 1234, new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("poolName").ToString());
-}
-]]></code>
-This sample shows how to call GetAllDevBoxes with all parameters, and how to parse the result.
-<code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new DevCenterClient(endpoint, credential);
-
-foreach (var data in client.GetAllDevBoxes("<filter>", 1234))
-{
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("name").ToString());
     Console.WriteLine(result.GetProperty("projectName").ToString());
     Console.WriteLine(result.GetProperty("poolName").ToString());
@@ -203,10 +195,10 @@ foreach (var data in client.GetAllDevBoxes("<filter>", 1234))
       </Docs>
     </Member>
     <Member MemberName="GetAllDevBoxesAsync">
-      <MemberSignature Language="C#" Value="public virtual Azure.AsyncPageable&lt;BinaryData&gt; GetAllDevBoxesAsync (string filter = default, int? maxCount = default, Azure.RequestContext context = default);" />
+      <MemberSignature Language="C#" Value="public virtual Azure.AsyncPageable&lt;BinaryData&gt; GetAllDevBoxesAsync (string filter, int? maxCount, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.AsyncPageable`1&lt;class System.BinaryData&gt; GetAllDevBoxesAsync(string filter, valuetype System.Nullable`1&lt;int32&gt; maxCount, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.DevCenterClient.GetAllDevBoxesAsync(System.String,System.Nullable{System.Int32},Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetAllDevBoxesAsync (Optional filter As String = Nothing, Optional maxCount As Nullable(Of Integer) = Nothing, Optional context As RequestContext = Nothing) As AsyncPageable(Of BinaryData)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetAllDevBoxesAsync (filter As String, maxCount As Nullable(Of Integer), context As RequestContext) As AsyncPageable(Of BinaryData)" />
       <MemberSignature Language="F#" Value="abstract member GetAllDevBoxesAsync : string * Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.AsyncPageable&lt;BinaryData&gt;&#xA;override this.GetAllDevBoxesAsync : string * Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.AsyncPageable&lt;BinaryData&gt;" Usage="devCenterClient.GetAllDevBoxesAsync (filter, maxCount, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -225,7 +217,11 @@ foreach (var data in client.GetAllDevBoxes("<filter>", 1234))
         <param name="filter"> An OData filter clause to apply to the operation. </param>
         <param name="maxCount"> The maximum number of resources to return from the operation. Example: 'top=10'. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Lists Dev Boxes that the caller has access to in the DevCenter. </summary>
+        <summary>
+            [Protocol Method] Lists Dev Boxes that the caller has access to in the DevCenter.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
         <returns> The <see cref="T:Azure.AsyncPageable`1" /> from the service containing a list of <see cref="T:System.BinaryData" /> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         <remarks>
 Below is the JSON schema for one item in the pageable response.
@@ -272,27 +268,15 @@ Schema for <c>DevBoxListResultValue</c>:
 </code></remarks>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call GetAllDevBoxesAsync and parse the result.
+This sample shows how to call GetAllDevBoxesAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new DevCenterClient(endpoint, credential);
 
-await foreach (var data in client.GetAllDevBoxesAsync())
+await foreach (var item in client.GetAllDevBoxesAsync("<filter>", 1234, new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("poolName").ToString());
-}
-]]></code>
-This sample shows how to call GetAllDevBoxesAsync with all parameters, and how to parse the result.
-<code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new DevCenterClient(endpoint, credential);
-
-await foreach (var data in client.GetAllDevBoxesAsync("<filter>", 1234))
-{
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("name").ToString());
     Console.WriteLine(result.GetProperty("projectName").ToString());
     Console.WriteLine(result.GetProperty("poolName").ToString());
@@ -322,10 +306,10 @@ await foreach (var data in client.GetAllDevBoxesAsync("<filter>", 1234))
       </Docs>
     </Member>
     <Member MemberName="GetAllDevBoxesByUser">
-      <MemberSignature Language="C#" Value="public virtual Azure.Pageable&lt;BinaryData&gt; GetAllDevBoxesByUser (string userId = &quot;me&quot;, string filter = default, int? maxCount = default, Azure.RequestContext context = default);" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Pageable&lt;BinaryData&gt; GetAllDevBoxesByUser (string userId, string filter, int? maxCount, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Pageable`1&lt;class System.BinaryData&gt; GetAllDevBoxesByUser(string userId, string filter, valuetype System.Nullable`1&lt;int32&gt; maxCount, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.DevCenterClient.GetAllDevBoxesByUser(System.String,System.String,System.Nullable{System.Int32},Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetAllDevBoxesByUser (Optional userId As String = &quot;me&quot;, Optional filter As String = Nothing, Optional maxCount As Nullable(Of Integer) = Nothing, Optional context As RequestContext = Nothing) As Pageable(Of BinaryData)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetAllDevBoxesByUser (userId As String, filter As String, maxCount As Nullable(Of Integer), context As RequestContext) As Pageable(Of BinaryData)" />
       <MemberSignature Language="F#" Value="abstract member GetAllDevBoxesByUser : string * string * Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.Pageable&lt;BinaryData&gt;&#xA;override this.GetAllDevBoxesByUser : string * string * Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.Pageable&lt;BinaryData&gt;" Usage="devCenterClient.GetAllDevBoxesByUser (userId, filter, maxCount, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -342,11 +326,15 @@ await foreach (var data in client.GetAllDevBoxesAsync("<filter>", 1234))
         <Parameter Name="context" Type="Azure.RequestContext" />
       </Parameters>
       <Docs>
-        <param name="userId"> The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. </param>
+        <param name="userId"> The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. The default value is "me". </param>
         <param name="filter"> An OData filter clause to apply to the operation. </param>
         <param name="maxCount"> The maximum number of resources to return from the operation. Example: 'top=10'. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Lists Dev Boxes in the Dev Center for a particular user. </summary>
+        <summary>
+            [Protocol Method] Lists Dev Boxes in the Dev Center for a particular user.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
         <returns> The <see cref="T:Azure.Pageable`1" /> from the service containing a list of <see cref="T:System.BinaryData" /> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         <remarks>
 Below is the JSON schema for one item in the pageable response.
@@ -397,27 +385,15 @@ Schema for <c>DevBoxListResultValue</c>:
           <paramref name="userId" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call GetAllDevBoxesByUser and parse the result.
+This sample shows how to call GetAllDevBoxesByUser with required parameters and parse the result.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new DevCenterClient(endpoint, credential);
 
-foreach (var data in client.GetAllDevBoxesByUser())
+foreach (var item in client.GetAllDevBoxesByUser("<userId>", "<filter>", 1234, new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("poolName").ToString());
-}
-]]></code>
-This sample shows how to call GetAllDevBoxesByUser with all parameters, and how to parse the result.
-<code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new DevCenterClient(endpoint, credential);
-
-foreach (var data in client.GetAllDevBoxesByUser(<me>, "<filter>", 1234))
-{
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("name").ToString());
     Console.WriteLine(result.GetProperty("projectName").ToString());
     Console.WriteLine(result.GetProperty("poolName").ToString());
@@ -447,10 +423,10 @@ foreach (var data in client.GetAllDevBoxesByUser(<me>, "<filter>", 1234))
       </Docs>
     </Member>
     <Member MemberName="GetAllDevBoxesByUserAsync">
-      <MemberSignature Language="C#" Value="public virtual Azure.AsyncPageable&lt;BinaryData&gt; GetAllDevBoxesByUserAsync (string userId = &quot;me&quot;, string filter = default, int? maxCount = default, Azure.RequestContext context = default);" />
+      <MemberSignature Language="C#" Value="public virtual Azure.AsyncPageable&lt;BinaryData&gt; GetAllDevBoxesByUserAsync (string userId, string filter, int? maxCount, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.AsyncPageable`1&lt;class System.BinaryData&gt; GetAllDevBoxesByUserAsync(string userId, string filter, valuetype System.Nullable`1&lt;int32&gt; maxCount, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.DevCenterClient.GetAllDevBoxesByUserAsync(System.String,System.String,System.Nullable{System.Int32},Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetAllDevBoxesByUserAsync (Optional userId As String = &quot;me&quot;, Optional filter As String = Nothing, Optional maxCount As Nullable(Of Integer) = Nothing, Optional context As RequestContext = Nothing) As AsyncPageable(Of BinaryData)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetAllDevBoxesByUserAsync (userId As String, filter As String, maxCount As Nullable(Of Integer), context As RequestContext) As AsyncPageable(Of BinaryData)" />
       <MemberSignature Language="F#" Value="abstract member GetAllDevBoxesByUserAsync : string * string * Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.AsyncPageable&lt;BinaryData&gt;&#xA;override this.GetAllDevBoxesByUserAsync : string * string * Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.AsyncPageable&lt;BinaryData&gt;" Usage="devCenterClient.GetAllDevBoxesByUserAsync (userId, filter, maxCount, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -467,11 +443,15 @@ foreach (var data in client.GetAllDevBoxesByUser(<me>, "<filter>", 1234))
         <Parameter Name="context" Type="Azure.RequestContext" />
       </Parameters>
       <Docs>
-        <param name="userId"> The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. </param>
+        <param name="userId"> The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. The default value is "me". </param>
         <param name="filter"> An OData filter clause to apply to the operation. </param>
         <param name="maxCount"> The maximum number of resources to return from the operation. Example: 'top=10'. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Lists Dev Boxes in the Dev Center for a particular user. </summary>
+        <summary>
+            [Protocol Method] Lists Dev Boxes in the Dev Center for a particular user.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
         <returns> The <see cref="T:Azure.AsyncPageable`1" /> from the service containing a list of <see cref="T:System.BinaryData" /> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         <remarks>
 Below is the JSON schema for one item in the pageable response.
@@ -522,27 +502,15 @@ Schema for <c>DevBoxListResultValue</c>:
           <paramref name="userId" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call GetAllDevBoxesByUserAsync and parse the result.
+This sample shows how to call GetAllDevBoxesByUserAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new DevCenterClient(endpoint, credential);
 
-await foreach (var data in client.GetAllDevBoxesByUserAsync())
+await foreach (var item in client.GetAllDevBoxesByUserAsync("<userId>", "<filter>", 1234, new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("poolName").ToString());
-}
-]]></code>
-This sample shows how to call GetAllDevBoxesByUserAsync with all parameters, and how to parse the result.
-<code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new DevCenterClient(endpoint, credential);
-
-await foreach (var data in client.GetAllDevBoxesByUserAsync(<me>, "<filter>", 1234))
-{
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("name").ToString());
     Console.WriteLine(result.GetProperty("projectName").ToString());
     Console.WriteLine(result.GetProperty("poolName").ToString());
@@ -572,10 +540,10 @@ await foreach (var data in client.GetAllDevBoxesByUserAsync(<me>, "<filter>", 12
       </Docs>
     </Member>
     <Member MemberName="GetProject">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response GetProject (string projectName, Azure.RequestContext context = default);" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response GetProject (string projectName, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response GetProject(string projectName, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.DevCenterClient.GetProject(System.String,Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetProject (projectName As String, Optional context As RequestContext = Nothing) As Response" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetProject (projectName As String, context As RequestContext) As Response" />
       <MemberSignature Language="F#" Value="abstract member GetProject : string * Azure.RequestContext -&gt; Azure.Response&#xA;override this.GetProject : string * Azure.RequestContext -&gt; Azure.Response" Usage="devCenterClient.GetProject (projectName, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -592,8 +560,12 @@ await foreach (var data in client.GetAllDevBoxesByUserAsync(<me>, "<filter>", 12
       <Docs>
         <param name="projectName"> The DevCenter Project upon which to execute operations. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Gets a project. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Gets a project.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Below is the JSON schema for the response payload.
 
@@ -617,7 +589,7 @@ var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new DevCenterClient(endpoint, credential);
 
-Response response = client.GetProject("<projectName>");
+Response response = client.GetProject("<projectName>", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -626,10 +598,10 @@ Console.WriteLine(result.GetProperty("description").ToString());
       </Docs>
     </Member>
     <Member MemberName="GetProjectAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; GetProjectAsync (string projectName, Azure.RequestContext context = default);" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; GetProjectAsync (string projectName, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; GetProjectAsync(string projectName, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.DevCenterClient.GetProjectAsync(System.String,Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetProjectAsync (projectName As String, Optional context As RequestContext = Nothing) As Task(Of Response)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetProjectAsync (projectName As String, context As RequestContext) As Task(Of Response)" />
       <MemberSignature Language="F#" Value="abstract member GetProjectAsync : string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.GetProjectAsync : string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="devCenterClient.GetProjectAsync (projectName, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -646,8 +618,12 @@ Console.WriteLine(result.GetProperty("description").ToString());
       <Docs>
         <param name="projectName"> The DevCenter Project upon which to execute operations. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Gets a project. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Gets a project.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Below is the JSON schema for the response payload.
 
@@ -671,7 +647,7 @@ var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new DevCenterClient(endpoint, credential);
 
-Response response = await client.GetProjectAsync("<projectName>");
+Response response = await client.GetProjectAsync("<projectName>", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -680,10 +656,10 @@ Console.WriteLine(result.GetProperty("description").ToString());
       </Docs>
     </Member>
     <Member MemberName="GetProjects">
-      <MemberSignature Language="C#" Value="public virtual Azure.Pageable&lt;BinaryData&gt; GetProjects (string filter = default, int? maxCount = default, Azure.RequestContext context = default);" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Pageable&lt;BinaryData&gt; GetProjects (string filter, int? maxCount, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Pageable`1&lt;class System.BinaryData&gt; GetProjects(string filter, valuetype System.Nullable`1&lt;int32&gt; maxCount, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.DevCenterClient.GetProjects(System.String,System.Nullable{System.Int32},Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetProjects (Optional filter As String = Nothing, Optional maxCount As Nullable(Of Integer) = Nothing, Optional context As RequestContext = Nothing) As Pageable(Of BinaryData)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetProjects (filter As String, maxCount As Nullable(Of Integer), context As RequestContext) As Pageable(Of BinaryData)" />
       <MemberSignature Language="F#" Value="abstract member GetProjects : string * Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.Pageable&lt;BinaryData&gt;&#xA;override this.GetProjects : string * Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.Pageable&lt;BinaryData&gt;" Usage="devCenterClient.GetProjects (filter, maxCount, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -702,7 +678,11 @@ Console.WriteLine(result.GetProperty("description").ToString());
         <param name="filter"> An OData filter clause to apply to the operation. </param>
         <param name="maxCount"> The maximum number of resources to return from the operation. Example: 'top=10'. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Lists all projects. </summary>
+        <summary>
+            [Protocol Method] Lists all projects.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
         <returns> The <see cref="T:Azure.Pageable`1" /> from the service containing a list of <see cref="T:System.BinaryData" /> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         <remarks>
 Below is the JSON schema for one item in the pageable response.
@@ -717,27 +697,15 @@ Schema for <c>ProjectListResultValue</c>:
 </code></remarks>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call GetProjects and parse the result.
+This sample shows how to call GetProjects with required parameters and parse the result.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new DevCenterClient(endpoint, credential);
 
-foreach (var data in client.GetProjects())
+foreach (var item in client.GetProjects("<filter>", 1234, new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-    Console.WriteLine(result.ToString());
-}
-]]></code>
-This sample shows how to call GetProjects with all parameters, and how to parse the result.
-<code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new DevCenterClient(endpoint, credential);
-
-foreach (var data in client.GetProjects("<filter>", 1234))
-{
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("name").ToString());
     Console.WriteLine(result.GetProperty("description").ToString());
 }
@@ -745,10 +713,10 @@ foreach (var data in client.GetProjects("<filter>", 1234))
       </Docs>
     </Member>
     <Member MemberName="GetProjectsAsync">
-      <MemberSignature Language="C#" Value="public virtual Azure.AsyncPageable&lt;BinaryData&gt; GetProjectsAsync (string filter = default, int? maxCount = default, Azure.RequestContext context = default);" />
+      <MemberSignature Language="C#" Value="public virtual Azure.AsyncPageable&lt;BinaryData&gt; GetProjectsAsync (string filter, int? maxCount, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.AsyncPageable`1&lt;class System.BinaryData&gt; GetProjectsAsync(string filter, valuetype System.Nullable`1&lt;int32&gt; maxCount, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.DevCenterClient.GetProjectsAsync(System.String,System.Nullable{System.Int32},Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetProjectsAsync (Optional filter As String = Nothing, Optional maxCount As Nullable(Of Integer) = Nothing, Optional context As RequestContext = Nothing) As AsyncPageable(Of BinaryData)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetProjectsAsync (filter As String, maxCount As Nullable(Of Integer), context As RequestContext) As AsyncPageable(Of BinaryData)" />
       <MemberSignature Language="F#" Value="abstract member GetProjectsAsync : string * Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.AsyncPageable&lt;BinaryData&gt;&#xA;override this.GetProjectsAsync : string * Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.AsyncPageable&lt;BinaryData&gt;" Usage="devCenterClient.GetProjectsAsync (filter, maxCount, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -767,7 +735,11 @@ foreach (var data in client.GetProjects("<filter>", 1234))
         <param name="filter"> An OData filter clause to apply to the operation. </param>
         <param name="maxCount"> The maximum number of resources to return from the operation. Example: 'top=10'. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Lists all projects. </summary>
+        <summary>
+            [Protocol Method] Lists all projects.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
         <returns> The <see cref="T:Azure.AsyncPageable`1" /> from the service containing a list of <see cref="T:System.BinaryData" /> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         <remarks>
 Below is the JSON schema for one item in the pageable response.
@@ -782,27 +754,15 @@ Schema for <c>ProjectListResultValue</c>:
 </code></remarks>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call GetProjectsAsync and parse the result.
+This sample shows how to call GetProjectsAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new DevCenterClient(endpoint, credential);
 
-await foreach (var data in client.GetProjectsAsync())
+await foreach (var item in client.GetProjectsAsync("<filter>", 1234, new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-    Console.WriteLine(result.ToString());
-}
-]]></code>
-This sample shows how to call GetProjectsAsync with all parameters, and how to parse the result.
-<code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new DevCenterClient(endpoint, credential);
-
-await foreach (var data in client.GetProjectsAsync("<filter>", 1234))
-{
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("name").ToString());
     Console.WriteLine(result.GetProperty("description").ToString());
 }

@@ -92,11 +92,11 @@
       </Docs>
     </Member>
     <Member MemberName="CreateOrUpdateEnvironment">
-      <MemberSignature Language="C#" Value="public virtual Azure.Operation&lt;BinaryData&gt; CreateOrUpdateEnvironment (Azure.WaitUntil waitUntil, string environmentName, Azure.Core.RequestContent content, string userId = &quot;me&quot;, Azure.RequestContext context = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Operation`1&lt;class System.BinaryData&gt; CreateOrUpdateEnvironment(valuetype Azure.WaitUntil waitUntil, string environmentName, class Azure.Core.RequestContent content, string userId, class Azure.RequestContext context) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.EnvironmentsClient.CreateOrUpdateEnvironment(Azure.WaitUntil,System.String,Azure.Core.RequestContent,System.String,Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateOrUpdateEnvironment (waitUntil As WaitUntil, environmentName As String, content As RequestContent, Optional userId As String = &quot;me&quot;, Optional context As RequestContext = Nothing) As Operation(Of BinaryData)" />
-      <MemberSignature Language="F#" Value="abstract member CreateOrUpdateEnvironment : Azure.WaitUntil * string * Azure.Core.RequestContent * string * Azure.RequestContext -&gt; Azure.Operation&lt;BinaryData&gt;&#xA;override this.CreateOrUpdateEnvironment : Azure.WaitUntil * string * Azure.Core.RequestContent * string * Azure.RequestContext -&gt; Azure.Operation&lt;BinaryData&gt;" Usage="environmentsClient.CreateOrUpdateEnvironment (waitUntil, environmentName, content, userId, context)" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Operation&lt;BinaryData&gt; CreateOrUpdateEnvironment (Azure.WaitUntil waitUntil, string userId, string environmentName, Azure.Core.RequestContent content, Azure.RequestContext context = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Operation`1&lt;class System.BinaryData&gt; CreateOrUpdateEnvironment(valuetype Azure.WaitUntil waitUntil, string userId, string environmentName, class Azure.Core.RequestContent content, class Azure.RequestContext context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.EnvironmentsClient.CreateOrUpdateEnvironment(Azure.WaitUntil,System.String,System.String,Azure.Core.RequestContent,Azure.RequestContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateOrUpdateEnvironment (waitUntil As WaitUntil, userId As String, environmentName As String, content As RequestContent, Optional context As RequestContext = Nothing) As Operation(Of BinaryData)" />
+      <MemberSignature Language="F#" Value="abstract member CreateOrUpdateEnvironment : Azure.WaitUntil * string * string * Azure.Core.RequestContent * Azure.RequestContext -&gt; Azure.Operation&lt;BinaryData&gt;&#xA;override this.CreateOrUpdateEnvironment : Azure.WaitUntil * string * string * Azure.Core.RequestContent * Azure.RequestContext -&gt; Azure.Operation&lt;BinaryData&gt;" Usage="environmentsClient.CreateOrUpdateEnvironment (waitUntil, userId, environmentName, content, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.DevCenter</AssemblyName>
@@ -107,62 +107,29 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="waitUntil" Type="Azure.WaitUntil" />
+        <Parameter Name="userId" Type="System.String" />
         <Parameter Name="environmentName" Type="System.String" />
         <Parameter Name="content" Type="Azure.Core.RequestContent" />
-        <Parameter Name="userId" Type="System.String" />
         <Parameter Name="context" Type="Azure.RequestContext" />
       </Parameters>
       <Docs>
         <param name="waitUntil">
           <see cref="F:Azure.WaitUntil.Completed" /> if the method should wait to return until the long-running operation has completed on the service; <see cref="F:Azure.WaitUntil.Started" /> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        <param name="userId"> The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. The default value is "me". </param>
         <param name="environmentName"> The name of the environment. </param>
-        <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
-        <param name="userId"> The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. </param>
+        <param name="content"> The content to send as the body of the request. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Creates or updates an environment. </summary>
-        <returns> The <see cref="T:Azure.Operation`1" /> from the service that will contain a <see cref="T:System.BinaryData" /> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        <remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>Environment</c>:
-<code>{
-  name: string, # Optional. Environment name.
-  environmentType: string, # Required. Environment type.
-  user: string, # Optional. The AAD object id of the owner of this Environment.
-  provisioningState: string, # Optional. The provisioning state of the environment.
-  resourceGroupId: string, # Optional. The identifier of the resource group containing the environment's resources.
-  description: string, # Optional. Description of the Environment.
-  catalogName: string, # Optional. Name of the catalog.
-  catalogItemName: string, # Optional. Name of the catalog item.
-  parameters: AnyObject, # Optional. Parameters object for the deploy action
-  scheduledTasks: Dictionary&lt;string, ScheduledTask&gt;, # Optional. Set of supported scheduled tasks to help manage cost.
-  tags: Dictionary&lt;string, string&gt;, # Optional. Key value pairs that will be applied to resources deployed in this environment as tags.
-}
-</code>
-
-Response Body:
-
-Schema for <c>Environment</c>:
-<code>{
-  name: string, # Optional. Environment name.
-  environmentType: string, # Required. Environment type.
-  user: string, # Optional. The AAD object id of the owner of this Environment.
-  provisioningState: string, # Optional. The provisioning state of the environment.
-  resourceGroupId: string, # Optional. The identifier of the resource group containing the environment's resources.
-  description: string, # Optional. Description of the Environment.
-  catalogName: string, # Optional. Name of the catalog.
-  catalogItemName: string, # Optional. Name of the catalog item.
-  parameters: AnyObject, # Optional. Parameters object for the deploy action
-  scheduledTasks: Dictionary&lt;string, ScheduledTask&gt;, # Optional. Set of supported scheduled tasks to help manage cost.
-  tags: Dictionary&lt;string, string&gt;, # Optional. Key value pairs that will be applied to resources deployed in this environment as tags.
-}
-</code></remarks>
+        <summary>
+            [Protocol Method] Creates or updates an environment.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The <see cref="T:Azure.Operation" /> representing an asynchronous operation on the service. </returns>
+        <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="environmentName" />, <paramref name="content" /> or <paramref name="userId" /> is null. </exception>
+          <paramref name="userId" />, <paramref name="environmentName" /> or <paramref name="content" /> is null. </exception>
         <exception cref="T:System.ArgumentException">
-          <paramref name="environmentName" /> or <paramref name="userId" /> is an empty string, and was expected to be non-empty. </exception>
+          <paramref name="userId" /> or <paramref name="environmentName" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
 This sample shows how to call CreateOrUpdateEnvironment with required parameters and request content, and how to parse the result.
@@ -175,10 +142,10 @@ var data = new {
     environmentType = "<environmentType>",
 };
 
-var operation = client.CreateOrUpdateEnvironment(WaitUntil.Completed, "<environmentName>", RequestContent.Create(data));
+var operation = client.CreateOrUpdateEnvironment(WaitUntil.Completed, "<userId>", "<environmentName>", RequestContent.Create(data));
 
-BinaryData data = operation.Value;
-JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+BinaryData responseData = operation.Value;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("environmentType").ToString());
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -207,10 +174,10 @@ var data = new {
     },
 };
 
-var operation = client.CreateOrUpdateEnvironment(WaitUntil.Completed, "<environmentName>", RequestContent.Create(data), <me>);
+var operation = client.CreateOrUpdateEnvironment(WaitUntil.Completed, "<userId>", "<environmentName>", RequestContent.Create(data));
 
-BinaryData data = operation.Value;
-JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+BinaryData responseData = operation.Value;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("environmentType").ToString());
 Console.WriteLine(result.GetProperty("user").ToString());
@@ -228,11 +195,11 @@ Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
       </Docs>
     </Member>
     <Member MemberName="CreateOrUpdateEnvironmentAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Operation&lt;BinaryData&gt;&gt; CreateOrUpdateEnvironmentAsync (Azure.WaitUntil waitUntil, string environmentName, Azure.Core.RequestContent content, string userId = &quot;me&quot;, Azure.RequestContext context = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Operation`1&lt;class System.BinaryData&gt;&gt; CreateOrUpdateEnvironmentAsync(valuetype Azure.WaitUntil waitUntil, string environmentName, class Azure.Core.RequestContent content, string userId, class Azure.RequestContext context) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.EnvironmentsClient.CreateOrUpdateEnvironmentAsync(Azure.WaitUntil,System.String,Azure.Core.RequestContent,System.String,Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateOrUpdateEnvironmentAsync (waitUntil As WaitUntil, environmentName As String, content As RequestContent, Optional userId As String = &quot;me&quot;, Optional context As RequestContext = Nothing) As Task(Of Operation(Of BinaryData))" />
-      <MemberSignature Language="F#" Value="abstract member CreateOrUpdateEnvironmentAsync : Azure.WaitUntil * string * Azure.Core.RequestContent * string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Operation&lt;BinaryData&gt;&gt;&#xA;override this.CreateOrUpdateEnvironmentAsync : Azure.WaitUntil * string * Azure.Core.RequestContent * string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Operation&lt;BinaryData&gt;&gt;" Usage="environmentsClient.CreateOrUpdateEnvironmentAsync (waitUntil, environmentName, content, userId, context)" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Operation&lt;BinaryData&gt;&gt; CreateOrUpdateEnvironmentAsync (Azure.WaitUntil waitUntil, string userId, string environmentName, Azure.Core.RequestContent content, Azure.RequestContext context = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Operation`1&lt;class System.BinaryData&gt;&gt; CreateOrUpdateEnvironmentAsync(valuetype Azure.WaitUntil waitUntil, string userId, string environmentName, class Azure.Core.RequestContent content, class Azure.RequestContext context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.EnvironmentsClient.CreateOrUpdateEnvironmentAsync(Azure.WaitUntil,System.String,System.String,Azure.Core.RequestContent,Azure.RequestContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateOrUpdateEnvironmentAsync (waitUntil As WaitUntil, userId As String, environmentName As String, content As RequestContent, Optional context As RequestContext = Nothing) As Task(Of Operation(Of BinaryData))" />
+      <MemberSignature Language="F#" Value="abstract member CreateOrUpdateEnvironmentAsync : Azure.WaitUntil * string * string * Azure.Core.RequestContent * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Operation&lt;BinaryData&gt;&gt;&#xA;override this.CreateOrUpdateEnvironmentAsync : Azure.WaitUntil * string * string * Azure.Core.RequestContent * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Operation&lt;BinaryData&gt;&gt;" Usage="environmentsClient.CreateOrUpdateEnvironmentAsync (waitUntil, userId, environmentName, content, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.DevCenter</AssemblyName>
@@ -243,62 +210,29 @@ Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
       </ReturnValue>
       <Parameters>
         <Parameter Name="waitUntil" Type="Azure.WaitUntil" />
+        <Parameter Name="userId" Type="System.String" />
         <Parameter Name="environmentName" Type="System.String" />
         <Parameter Name="content" Type="Azure.Core.RequestContent" />
-        <Parameter Name="userId" Type="System.String" />
         <Parameter Name="context" Type="Azure.RequestContext" />
       </Parameters>
       <Docs>
         <param name="waitUntil">
           <see cref="F:Azure.WaitUntil.Completed" /> if the method should wait to return until the long-running operation has completed on the service; <see cref="F:Azure.WaitUntil.Started" /> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        <param name="userId"> The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. The default value is "me". </param>
         <param name="environmentName"> The name of the environment. </param>
-        <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
-        <param name="userId"> The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. </param>
+        <param name="content"> The content to send as the body of the request. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Creates or updates an environment. </summary>
-        <returns> The <see cref="T:Azure.Operation`1" /> from the service that will contain a <see cref="T:System.BinaryData" /> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        <remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>Environment</c>:
-<code>{
-  name: string, # Optional. Environment name.
-  environmentType: string, # Required. Environment type.
-  user: string, # Optional. The AAD object id of the owner of this Environment.
-  provisioningState: string, # Optional. The provisioning state of the environment.
-  resourceGroupId: string, # Optional. The identifier of the resource group containing the environment's resources.
-  description: string, # Optional. Description of the Environment.
-  catalogName: string, # Optional. Name of the catalog.
-  catalogItemName: string, # Optional. Name of the catalog item.
-  parameters: AnyObject, # Optional. Parameters object for the deploy action
-  scheduledTasks: Dictionary&lt;string, ScheduledTask&gt;, # Optional. Set of supported scheduled tasks to help manage cost.
-  tags: Dictionary&lt;string, string&gt;, # Optional. Key value pairs that will be applied to resources deployed in this environment as tags.
-}
-</code>
-
-Response Body:
-
-Schema for <c>Environment</c>:
-<code>{
-  name: string, # Optional. Environment name.
-  environmentType: string, # Required. Environment type.
-  user: string, # Optional. The AAD object id of the owner of this Environment.
-  provisioningState: string, # Optional. The provisioning state of the environment.
-  resourceGroupId: string, # Optional. The identifier of the resource group containing the environment's resources.
-  description: string, # Optional. Description of the Environment.
-  catalogName: string, # Optional. Name of the catalog.
-  catalogItemName: string, # Optional. Name of the catalog item.
-  parameters: AnyObject, # Optional. Parameters object for the deploy action
-  scheduledTasks: Dictionary&lt;string, ScheduledTask&gt;, # Optional. Set of supported scheduled tasks to help manage cost.
-  tags: Dictionary&lt;string, string&gt;, # Optional. Key value pairs that will be applied to resources deployed in this environment as tags.
-}
-</code></remarks>
+        <summary>
+            [Protocol Method] Creates or updates an environment.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The <see cref="T:Azure.Operation" /> representing an asynchronous operation on the service. </returns>
+        <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="environmentName" />, <paramref name="content" /> or <paramref name="userId" /> is null. </exception>
+          <paramref name="userId" />, <paramref name="environmentName" /> or <paramref name="content" /> is null. </exception>
         <exception cref="T:System.ArgumentException">
-          <paramref name="environmentName" /> or <paramref name="userId" /> is an empty string, and was expected to be non-empty. </exception>
+          <paramref name="userId" /> or <paramref name="environmentName" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
 This sample shows how to call CreateOrUpdateEnvironmentAsync with required parameters and request content, and how to parse the result.
@@ -311,10 +245,10 @@ var data = new {
     environmentType = "<environmentType>",
 };
 
-var operation = await client.CreateOrUpdateEnvironmentAsync(WaitUntil.Completed, "<environmentName>", RequestContent.Create(data));
+var operation = await client.CreateOrUpdateEnvironmentAsync(WaitUntil.Completed, "<userId>", "<environmentName>", RequestContent.Create(data));
 
-BinaryData data = operation.Value;
-JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+BinaryData responseData = operation.Value;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("environmentType").ToString());
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -343,10 +277,10 @@ var data = new {
     },
 };
 
-var operation = await client.CreateOrUpdateEnvironmentAsync(WaitUntil.Completed, "<environmentName>", RequestContent.Create(data), <me>);
+var operation = await client.CreateOrUpdateEnvironmentAsync(WaitUntil.Completed, "<userId>", "<environmentName>", RequestContent.Create(data));
 
-BinaryData data = operation.Value;
-JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+BinaryData responseData = operation.Value;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("environmentType").ToString());
 Console.WriteLine(result.GetProperty("user").ToString());
@@ -364,11 +298,11 @@ Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
       </Docs>
     </Member>
     <Member MemberName="CustomEnvironmentAction">
-      <MemberSignature Language="C#" Value="public virtual Azure.Operation CustomEnvironmentAction (Azure.WaitUntil waitUntil, string environmentName, Azure.Core.RequestContent content, string userId = &quot;me&quot;, Azure.RequestContext context = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Operation CustomEnvironmentAction(valuetype Azure.WaitUntil waitUntil, string environmentName, class Azure.Core.RequestContent content, string userId, class Azure.RequestContext context) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.EnvironmentsClient.CustomEnvironmentAction(Azure.WaitUntil,System.String,Azure.Core.RequestContent,System.String,Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function CustomEnvironmentAction (waitUntil As WaitUntil, environmentName As String, content As RequestContent, Optional userId As String = &quot;me&quot;, Optional context As RequestContext = Nothing) As Operation" />
-      <MemberSignature Language="F#" Value="abstract member CustomEnvironmentAction : Azure.WaitUntil * string * Azure.Core.RequestContent * string * Azure.RequestContext -&gt; Azure.Operation&#xA;override this.CustomEnvironmentAction : Azure.WaitUntil * string * Azure.Core.RequestContent * string * Azure.RequestContext -&gt; Azure.Operation" Usage="environmentsClient.CustomEnvironmentAction (waitUntil, environmentName, content, userId, context)" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Operation CustomEnvironmentAction (Azure.WaitUntil waitUntil, string userId, string environmentName, Azure.Core.RequestContent content, Azure.RequestContext context = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Operation CustomEnvironmentAction(valuetype Azure.WaitUntil waitUntil, string userId, string environmentName, class Azure.Core.RequestContent content, class Azure.RequestContext context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.EnvironmentsClient.CustomEnvironmentAction(Azure.WaitUntil,System.String,System.String,Azure.Core.RequestContent,Azure.RequestContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function CustomEnvironmentAction (waitUntil As WaitUntil, userId As String, environmentName As String, content As RequestContent, Optional context As RequestContext = Nothing) As Operation" />
+      <MemberSignature Language="F#" Value="abstract member CustomEnvironmentAction : Azure.WaitUntil * string * string * Azure.Core.RequestContent * Azure.RequestContext -&gt; Azure.Operation&#xA;override this.CustomEnvironmentAction : Azure.WaitUntil * string * string * Azure.Core.RequestContent * Azure.RequestContext -&gt; Azure.Operation" Usage="environmentsClient.CustomEnvironmentAction (waitUntil, userId, environmentName, content, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.DevCenter</AssemblyName>
@@ -379,35 +313,29 @@ Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
       </ReturnValue>
       <Parameters>
         <Parameter Name="waitUntil" Type="Azure.WaitUntil" />
+        <Parameter Name="userId" Type="System.String" />
         <Parameter Name="environmentName" Type="System.String" />
         <Parameter Name="content" Type="Azure.Core.RequestContent" />
-        <Parameter Name="userId" Type="System.String" />
         <Parameter Name="context" Type="Azure.RequestContext" />
       </Parameters>
       <Docs>
         <param name="waitUntil">
           <see cref="F:Azure.WaitUntil.Completed" /> if the method should wait to return until the long-running operation has completed on the service; <see cref="F:Azure.WaitUntil.Started" /> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        <param name="userId"> The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. The default value is "me". </param>
         <param name="environmentName"> The name of the environment. </param>
-        <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
-        <param name="userId"> The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. </param>
+        <param name="content"> The content to send as the body of the request. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Executes a custom action. </summary>
+        <summary>
+            [Protocol Method] Executes a custom action
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
         <returns> The <see cref="T:Azure.Operation" /> representing an asynchronous operation on the service. </returns>
-        <remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>ActionRequest</c>:
-<code>{
-  actionId: string, # Required. The Catalog Item action id to execute
-  parameters: AnyObject, # Optional. Parameters object for the Action
-}
-</code></remarks>
+        <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="environmentName" />, <paramref name="content" /> or <paramref name="userId" /> is null. </exception>
+          <paramref name="userId" />, <paramref name="environmentName" /> or <paramref name="content" /> is null. </exception>
         <exception cref="T:System.ArgumentException">
-          <paramref name="environmentName" /> or <paramref name="userId" /> is an empty string, and was expected to be non-empty. </exception>
+          <paramref name="userId" /> or <paramref name="environmentName" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
 This sample shows how to call CustomEnvironmentAction with required parameters and request content.
@@ -420,9 +348,9 @@ var data = new {
     actionId = "<actionId>",
 };
 
-var operation = client.CustomEnvironmentAction(WaitUntil.Completed, "<environmentName>", RequestContent.Create(data));
+var operation = client.CustomEnvironmentAction(WaitUntil.Completed, "<userId>", "<environmentName>", RequestContent.Create(data));
 
-Console.WriteLine(operation.GetRawResponse().Status)
+Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code>
 This sample shows how to call CustomEnvironmentAction with all parameters and request content.
 <code><![CDATA[
@@ -435,18 +363,18 @@ var data = new {
     parameters = new {},
 };
 
-var operation = client.CustomEnvironmentAction(WaitUntil.Completed, "<environmentName>", RequestContent.Create(data), <me>);
+var operation = client.CustomEnvironmentAction(WaitUntil.Completed, "<userId>", "<environmentName>", RequestContent.Create(data));
 
-Console.WriteLine(operation.GetRawResponse().Status)
+Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="CustomEnvironmentActionAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Operation&gt; CustomEnvironmentActionAsync (Azure.WaitUntil waitUntil, string environmentName, Azure.Core.RequestContent content, string userId = &quot;me&quot;, Azure.RequestContext context = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Operation&gt; CustomEnvironmentActionAsync(valuetype Azure.WaitUntil waitUntil, string environmentName, class Azure.Core.RequestContent content, string userId, class Azure.RequestContext context) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.EnvironmentsClient.CustomEnvironmentActionAsync(Azure.WaitUntil,System.String,Azure.Core.RequestContent,System.String,Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function CustomEnvironmentActionAsync (waitUntil As WaitUntil, environmentName As String, content As RequestContent, Optional userId As String = &quot;me&quot;, Optional context As RequestContext = Nothing) As Task(Of Operation)" />
-      <MemberSignature Language="F#" Value="abstract member CustomEnvironmentActionAsync : Azure.WaitUntil * string * Azure.Core.RequestContent * string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Operation&gt;&#xA;override this.CustomEnvironmentActionAsync : Azure.WaitUntil * string * Azure.Core.RequestContent * string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Operation&gt;" Usage="environmentsClient.CustomEnvironmentActionAsync (waitUntil, environmentName, content, userId, context)" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Operation&gt; CustomEnvironmentActionAsync (Azure.WaitUntil waitUntil, string userId, string environmentName, Azure.Core.RequestContent content, Azure.RequestContext context = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Operation&gt; CustomEnvironmentActionAsync(valuetype Azure.WaitUntil waitUntil, string userId, string environmentName, class Azure.Core.RequestContent content, class Azure.RequestContext context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.EnvironmentsClient.CustomEnvironmentActionAsync(Azure.WaitUntil,System.String,System.String,Azure.Core.RequestContent,Azure.RequestContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function CustomEnvironmentActionAsync (waitUntil As WaitUntil, userId As String, environmentName As String, content As RequestContent, Optional context As RequestContext = Nothing) As Task(Of Operation)" />
+      <MemberSignature Language="F#" Value="abstract member CustomEnvironmentActionAsync : Azure.WaitUntil * string * string * Azure.Core.RequestContent * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Operation&gt;&#xA;override this.CustomEnvironmentActionAsync : Azure.WaitUntil * string * string * Azure.Core.RequestContent * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Operation&gt;" Usage="environmentsClient.CustomEnvironmentActionAsync (waitUntil, userId, environmentName, content, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.DevCenter</AssemblyName>
@@ -457,35 +385,29 @@ Console.WriteLine(operation.GetRawResponse().Status)
       </ReturnValue>
       <Parameters>
         <Parameter Name="waitUntil" Type="Azure.WaitUntil" />
+        <Parameter Name="userId" Type="System.String" />
         <Parameter Name="environmentName" Type="System.String" />
         <Parameter Name="content" Type="Azure.Core.RequestContent" />
-        <Parameter Name="userId" Type="System.String" />
         <Parameter Name="context" Type="Azure.RequestContext" />
       </Parameters>
       <Docs>
         <param name="waitUntil">
           <see cref="F:Azure.WaitUntil.Completed" /> if the method should wait to return until the long-running operation has completed on the service; <see cref="F:Azure.WaitUntil.Started" /> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        <param name="userId"> The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. The default value is "me". </param>
         <param name="environmentName"> The name of the environment. </param>
-        <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
-        <param name="userId"> The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. </param>
+        <param name="content"> The content to send as the body of the request. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Executes a custom action. </summary>
+        <summary>
+            [Protocol Method] Executes a custom action
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
         <returns> The <see cref="T:Azure.Operation" /> representing an asynchronous operation on the service. </returns>
-        <remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>ActionRequest</c>:
-<code>{
-  actionId: string, # Required. The Catalog Item action id to execute
-  parameters: AnyObject, # Optional. Parameters object for the Action
-}
-</code></remarks>
+        <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="environmentName" />, <paramref name="content" /> or <paramref name="userId" /> is null. </exception>
+          <paramref name="userId" />, <paramref name="environmentName" /> or <paramref name="content" /> is null. </exception>
         <exception cref="T:System.ArgumentException">
-          <paramref name="environmentName" /> or <paramref name="userId" /> is an empty string, and was expected to be non-empty. </exception>
+          <paramref name="userId" /> or <paramref name="environmentName" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
 This sample shows how to call CustomEnvironmentActionAsync with required parameters and request content.
@@ -498,9 +420,9 @@ var data = new {
     actionId = "<actionId>",
 };
 
-var operation = await client.CustomEnvironmentActionAsync(WaitUntil.Completed, "<environmentName>", RequestContent.Create(data));
+var operation = await client.CustomEnvironmentActionAsync(WaitUntil.Completed, "<userId>", "<environmentName>", RequestContent.Create(data));
 
-Console.WriteLine(operation.GetRawResponse().Status)
+Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code>
 This sample shows how to call CustomEnvironmentActionAsync with all parameters and request content.
 <code><![CDATA[
@@ -513,18 +435,18 @@ var data = new {
     parameters = new {},
 };
 
-var operation = await client.CustomEnvironmentActionAsync(WaitUntil.Completed, "<environmentName>", RequestContent.Create(data), <me>);
+var operation = await client.CustomEnvironmentActionAsync(WaitUntil.Completed, "<userId>", "<environmentName>", RequestContent.Create(data));
 
-Console.WriteLine(operation.GetRawResponse().Status)
+Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="DeleteEnvironment">
-      <MemberSignature Language="C#" Value="public virtual Azure.Operation DeleteEnvironment (Azure.WaitUntil waitUntil, string environmentName, string userId = &quot;me&quot;, Azure.RequestContext context = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Operation DeleteEnvironment(valuetype Azure.WaitUntil waitUntil, string environmentName, string userId, class Azure.RequestContext context) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Operation DeleteEnvironment (Azure.WaitUntil waitUntil, string userId, string environmentName, Azure.RequestContext context = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Operation DeleteEnvironment(valuetype Azure.WaitUntil waitUntil, string userId, string environmentName, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.EnvironmentsClient.DeleteEnvironment(Azure.WaitUntil,System.String,System.String,Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function DeleteEnvironment (waitUntil As WaitUntil, environmentName As String, Optional userId As String = &quot;me&quot;, Optional context As RequestContext = Nothing) As Operation" />
-      <MemberSignature Language="F#" Value="abstract member DeleteEnvironment : Azure.WaitUntil * string * string * Azure.RequestContext -&gt; Azure.Operation&#xA;override this.DeleteEnvironment : Azure.WaitUntil * string * string * Azure.RequestContext -&gt; Azure.Operation" Usage="environmentsClient.DeleteEnvironment (waitUntil, environmentName, userId, context)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function DeleteEnvironment (waitUntil As WaitUntil, userId As String, environmentName As String, Optional context As RequestContext = Nothing) As Operation" />
+      <MemberSignature Language="F#" Value="abstract member DeleteEnvironment : Azure.WaitUntil * string * string * Azure.RequestContext -&gt; Azure.Operation&#xA;override this.DeleteEnvironment : Azure.WaitUntil * string * string * Azure.RequestContext -&gt; Azure.Operation" Usage="environmentsClient.DeleteEnvironment (waitUntil, userId, environmentName, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.DevCenter</AssemblyName>
@@ -535,23 +457,27 @@ Console.WriteLine(operation.GetRawResponse().Status)
       </ReturnValue>
       <Parameters>
         <Parameter Name="waitUntil" Type="Azure.WaitUntil" />
-        <Parameter Name="environmentName" Type="System.String" />
         <Parameter Name="userId" Type="System.String" />
+        <Parameter Name="environmentName" Type="System.String" />
         <Parameter Name="context" Type="Azure.RequestContext" />
       </Parameters>
       <Docs>
         <param name="waitUntil">
           <see cref="F:Azure.WaitUntil.Completed" /> if the method should wait to return until the long-running operation has completed on the service; <see cref="F:Azure.WaitUntil.Started" /> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        <param name="userId"> The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. The default value is "me". </param>
         <param name="environmentName"> The name of the environment. </param>
-        <param name="userId"> The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Deletes an environment and all its associated resources. </summary>
+        <summary>
+            [Protocol Method] Deletes an environment and all its associated resources
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
         <returns> The <see cref="T:Azure.Operation" /> representing an asynchronous operation on the service. </returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="environmentName" /> or <paramref name="userId" /> is null. </exception>
+          <paramref name="userId" /> or <paramref name="environmentName" /> is null. </exception>
         <exception cref="T:System.ArgumentException">
-          <paramref name="environmentName" /> or <paramref name="userId" /> is an empty string, and was expected to be non-empty. </exception>
+          <paramref name="userId" /> or <paramref name="environmentName" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
 This sample shows how to call DeleteEnvironment with required parameters.
@@ -560,28 +486,18 @@ var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
 
-var operation = client.DeleteEnvironment(WaitUntil.Completed, "<environmentName>");
+var operation = client.DeleteEnvironment(WaitUntil.Completed, "<userId>", "<environmentName>");
 
-Console.WriteLine(operation.GetRawResponse().Status)
-]]></code>
-This sample shows how to call DeleteEnvironment with all parameters.
-<code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
-
-var operation = client.DeleteEnvironment(WaitUntil.Completed, "<environmentName>", <me>);
-
-Console.WriteLine(operation.GetRawResponse().Status)
+Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="DeleteEnvironmentAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Operation&gt; DeleteEnvironmentAsync (Azure.WaitUntil waitUntil, string environmentName, string userId = &quot;me&quot;, Azure.RequestContext context = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Operation&gt; DeleteEnvironmentAsync(valuetype Azure.WaitUntil waitUntil, string environmentName, string userId, class Azure.RequestContext context) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Operation&gt; DeleteEnvironmentAsync (Azure.WaitUntil waitUntil, string userId, string environmentName, Azure.RequestContext context = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Operation&gt; DeleteEnvironmentAsync(valuetype Azure.WaitUntil waitUntil, string userId, string environmentName, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.EnvironmentsClient.DeleteEnvironmentAsync(Azure.WaitUntil,System.String,System.String,Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function DeleteEnvironmentAsync (waitUntil As WaitUntil, environmentName As String, Optional userId As String = &quot;me&quot;, Optional context As RequestContext = Nothing) As Task(Of Operation)" />
-      <MemberSignature Language="F#" Value="abstract member DeleteEnvironmentAsync : Azure.WaitUntil * string * string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Operation&gt;&#xA;override this.DeleteEnvironmentAsync : Azure.WaitUntil * string * string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Operation&gt;" Usage="environmentsClient.DeleteEnvironmentAsync (waitUntil, environmentName, userId, context)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function DeleteEnvironmentAsync (waitUntil As WaitUntil, userId As String, environmentName As String, Optional context As RequestContext = Nothing) As Task(Of Operation)" />
+      <MemberSignature Language="F#" Value="abstract member DeleteEnvironmentAsync : Azure.WaitUntil * string * string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Operation&gt;&#xA;override this.DeleteEnvironmentAsync : Azure.WaitUntil * string * string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Operation&gt;" Usage="environmentsClient.DeleteEnvironmentAsync (waitUntil, userId, environmentName, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.DevCenter</AssemblyName>
@@ -592,23 +508,27 @@ Console.WriteLine(operation.GetRawResponse().Status)
       </ReturnValue>
       <Parameters>
         <Parameter Name="waitUntil" Type="Azure.WaitUntil" />
-        <Parameter Name="environmentName" Type="System.String" />
         <Parameter Name="userId" Type="System.String" />
+        <Parameter Name="environmentName" Type="System.String" />
         <Parameter Name="context" Type="Azure.RequestContext" />
       </Parameters>
       <Docs>
         <param name="waitUntil">
           <see cref="F:Azure.WaitUntil.Completed" /> if the method should wait to return until the long-running operation has completed on the service; <see cref="F:Azure.WaitUntil.Started" /> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        <param name="userId"> The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. The default value is "me". </param>
         <param name="environmentName"> The name of the environment. </param>
-        <param name="userId"> The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Deletes an environment and all its associated resources. </summary>
+        <summary>
+            [Protocol Method] Deletes an environment and all its associated resources
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
         <returns> The <see cref="T:Azure.Operation" /> representing an asynchronous operation on the service. </returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="environmentName" /> or <paramref name="userId" /> is null. </exception>
+          <paramref name="userId" /> or <paramref name="environmentName" /> is null. </exception>
         <exception cref="T:System.ArgumentException">
-          <paramref name="environmentName" /> or <paramref name="userId" /> is an empty string, and was expected to be non-empty. </exception>
+          <paramref name="userId" /> or <paramref name="environmentName" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
 This sample shows how to call DeleteEnvironmentAsync with required parameters.
@@ -617,28 +537,18 @@ var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
 
-var operation = await client.DeleteEnvironmentAsync(WaitUntil.Completed, "<environmentName>");
+var operation = await client.DeleteEnvironmentAsync(WaitUntil.Completed, "<userId>", "<environmentName>");
 
-Console.WriteLine(operation.GetRawResponse().Status)
-]]></code>
-This sample shows how to call DeleteEnvironmentAsync with all parameters.
-<code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
-
-var operation = await client.DeleteEnvironmentAsync(WaitUntil.Completed, "<environmentName>", <me>);
-
-Console.WriteLine(operation.GetRawResponse().Status)
+Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="DeployEnvironmentAction">
-      <MemberSignature Language="C#" Value="public virtual Azure.Operation DeployEnvironmentAction (Azure.WaitUntil waitUntil, string environmentName, Azure.Core.RequestContent content, string userId = &quot;me&quot;, Azure.RequestContext context = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Operation DeployEnvironmentAction(valuetype Azure.WaitUntil waitUntil, string environmentName, class Azure.Core.RequestContent content, string userId, class Azure.RequestContext context) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.EnvironmentsClient.DeployEnvironmentAction(Azure.WaitUntil,System.String,Azure.Core.RequestContent,System.String,Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function DeployEnvironmentAction (waitUntil As WaitUntil, environmentName As String, content As RequestContent, Optional userId As String = &quot;me&quot;, Optional context As RequestContext = Nothing) As Operation" />
-      <MemberSignature Language="F#" Value="abstract member DeployEnvironmentAction : Azure.WaitUntil * string * Azure.Core.RequestContent * string * Azure.RequestContext -&gt; Azure.Operation&#xA;override this.DeployEnvironmentAction : Azure.WaitUntil * string * Azure.Core.RequestContent * string * Azure.RequestContext -&gt; Azure.Operation" Usage="environmentsClient.DeployEnvironmentAction (waitUntil, environmentName, content, userId, context)" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Operation DeployEnvironmentAction (Azure.WaitUntil waitUntil, string userId, string environmentName, Azure.Core.RequestContent content, Azure.RequestContext context = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Operation DeployEnvironmentAction(valuetype Azure.WaitUntil waitUntil, string userId, string environmentName, class Azure.Core.RequestContent content, class Azure.RequestContext context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.EnvironmentsClient.DeployEnvironmentAction(Azure.WaitUntil,System.String,System.String,Azure.Core.RequestContent,Azure.RequestContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function DeployEnvironmentAction (waitUntil As WaitUntil, userId As String, environmentName As String, content As RequestContent, Optional context As RequestContext = Nothing) As Operation" />
+      <MemberSignature Language="F#" Value="abstract member DeployEnvironmentAction : Azure.WaitUntil * string * string * Azure.Core.RequestContent * Azure.RequestContext -&gt; Azure.Operation&#xA;override this.DeployEnvironmentAction : Azure.WaitUntil * string * string * Azure.Core.RequestContent * Azure.RequestContext -&gt; Azure.Operation" Usage="environmentsClient.DeployEnvironmentAction (waitUntil, userId, environmentName, content, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.DevCenter</AssemblyName>
@@ -649,35 +559,29 @@ Console.WriteLine(operation.GetRawResponse().Status)
       </ReturnValue>
       <Parameters>
         <Parameter Name="waitUntil" Type="Azure.WaitUntil" />
+        <Parameter Name="userId" Type="System.String" />
         <Parameter Name="environmentName" Type="System.String" />
         <Parameter Name="content" Type="Azure.Core.RequestContent" />
-        <Parameter Name="userId" Type="System.String" />
         <Parameter Name="context" Type="Azure.RequestContext" />
       </Parameters>
       <Docs>
         <param name="waitUntil">
           <see cref="F:Azure.WaitUntil.Completed" /> if the method should wait to return until the long-running operation has completed on the service; <see cref="F:Azure.WaitUntil.Started" /> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        <param name="userId"> The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. The default value is "me". </param>
         <param name="environmentName"> The name of the environment. </param>
-        <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
-        <param name="userId"> The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. </param>
+        <param name="content"> The content to send as the body of the request. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Executes a deploy action. </summary>
+        <summary>
+            [Protocol Method] Executes a deploy action
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
         <returns> The <see cref="T:Azure.Operation" /> representing an asynchronous operation on the service. </returns>
-        <remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>ActionRequest</c>:
-<code>{
-  actionId: string, # Required. The Catalog Item action id to execute
-  parameters: AnyObject, # Optional. Parameters object for the Action
-}
-</code></remarks>
+        <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="environmentName" />, <paramref name="content" /> or <paramref name="userId" /> is null. </exception>
+          <paramref name="userId" />, <paramref name="environmentName" /> or <paramref name="content" /> is null. </exception>
         <exception cref="T:System.ArgumentException">
-          <paramref name="environmentName" /> or <paramref name="userId" /> is an empty string, and was expected to be non-empty. </exception>
+          <paramref name="userId" /> or <paramref name="environmentName" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
 This sample shows how to call DeployEnvironmentAction with required parameters and request content.
@@ -690,9 +594,9 @@ var data = new {
     actionId = "<actionId>",
 };
 
-var operation = client.DeployEnvironmentAction(WaitUntil.Completed, "<environmentName>", RequestContent.Create(data));
+var operation = client.DeployEnvironmentAction(WaitUntil.Completed, "<userId>", "<environmentName>", RequestContent.Create(data));
 
-Console.WriteLine(operation.GetRawResponse().Status)
+Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code>
 This sample shows how to call DeployEnvironmentAction with all parameters and request content.
 <code><![CDATA[
@@ -705,18 +609,18 @@ var data = new {
     parameters = new {},
 };
 
-var operation = client.DeployEnvironmentAction(WaitUntil.Completed, "<environmentName>", RequestContent.Create(data), <me>);
+var operation = client.DeployEnvironmentAction(WaitUntil.Completed, "<userId>", "<environmentName>", RequestContent.Create(data));
 
-Console.WriteLine(operation.GetRawResponse().Status)
+Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="DeployEnvironmentActionAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Operation&gt; DeployEnvironmentActionAsync (Azure.WaitUntil waitUntil, string environmentName, Azure.Core.RequestContent content, string userId = &quot;me&quot;, Azure.RequestContext context = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Operation&gt; DeployEnvironmentActionAsync(valuetype Azure.WaitUntil waitUntil, string environmentName, class Azure.Core.RequestContent content, string userId, class Azure.RequestContext context) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.EnvironmentsClient.DeployEnvironmentActionAsync(Azure.WaitUntil,System.String,Azure.Core.RequestContent,System.String,Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function DeployEnvironmentActionAsync (waitUntil As WaitUntil, environmentName As String, content As RequestContent, Optional userId As String = &quot;me&quot;, Optional context As RequestContext = Nothing) As Task(Of Operation)" />
-      <MemberSignature Language="F#" Value="abstract member DeployEnvironmentActionAsync : Azure.WaitUntil * string * Azure.Core.RequestContent * string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Operation&gt;&#xA;override this.DeployEnvironmentActionAsync : Azure.WaitUntil * string * Azure.Core.RequestContent * string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Operation&gt;" Usage="environmentsClient.DeployEnvironmentActionAsync (waitUntil, environmentName, content, userId, context)" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Operation&gt; DeployEnvironmentActionAsync (Azure.WaitUntil waitUntil, string userId, string environmentName, Azure.Core.RequestContent content, Azure.RequestContext context = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Operation&gt; DeployEnvironmentActionAsync(valuetype Azure.WaitUntil waitUntil, string userId, string environmentName, class Azure.Core.RequestContent content, class Azure.RequestContext context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.EnvironmentsClient.DeployEnvironmentActionAsync(Azure.WaitUntil,System.String,System.String,Azure.Core.RequestContent,Azure.RequestContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function DeployEnvironmentActionAsync (waitUntil As WaitUntil, userId As String, environmentName As String, content As RequestContent, Optional context As RequestContext = Nothing) As Task(Of Operation)" />
+      <MemberSignature Language="F#" Value="abstract member DeployEnvironmentActionAsync : Azure.WaitUntil * string * string * Azure.Core.RequestContent * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Operation&gt;&#xA;override this.DeployEnvironmentActionAsync : Azure.WaitUntil * string * string * Azure.Core.RequestContent * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Operation&gt;" Usage="environmentsClient.DeployEnvironmentActionAsync (waitUntil, userId, environmentName, content, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.DevCenter</AssemblyName>
@@ -727,35 +631,29 @@ Console.WriteLine(operation.GetRawResponse().Status)
       </ReturnValue>
       <Parameters>
         <Parameter Name="waitUntil" Type="Azure.WaitUntil" />
+        <Parameter Name="userId" Type="System.String" />
         <Parameter Name="environmentName" Type="System.String" />
         <Parameter Name="content" Type="Azure.Core.RequestContent" />
-        <Parameter Name="userId" Type="System.String" />
         <Parameter Name="context" Type="Azure.RequestContext" />
       </Parameters>
       <Docs>
         <param name="waitUntil">
           <see cref="F:Azure.WaitUntil.Completed" /> if the method should wait to return until the long-running operation has completed on the service; <see cref="F:Azure.WaitUntil.Started" /> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        <param name="userId"> The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. The default value is "me". </param>
         <param name="environmentName"> The name of the environment. </param>
-        <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
-        <param name="userId"> The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. </param>
+        <param name="content"> The content to send as the body of the request. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Executes a deploy action. </summary>
+        <summary>
+            [Protocol Method] Executes a deploy action
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
         <returns> The <see cref="T:Azure.Operation" /> representing an asynchronous operation on the service. </returns>
-        <remarks>
-Below is the JSON schema for the request payload.
-
-Request Body:
-
-Schema for <c>ActionRequest</c>:
-<code>{
-  actionId: string, # Required. The Catalog Item action id to execute
-  parameters: AnyObject, # Optional. Parameters object for the Action
-}
-</code></remarks>
+        <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="environmentName" />, <paramref name="content" /> or <paramref name="userId" /> is null. </exception>
+          <paramref name="userId" />, <paramref name="environmentName" /> or <paramref name="content" /> is null. </exception>
         <exception cref="T:System.ArgumentException">
-          <paramref name="environmentName" /> or <paramref name="userId" /> is an empty string, and was expected to be non-empty. </exception>
+          <paramref name="userId" /> or <paramref name="environmentName" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
 This sample shows how to call DeployEnvironmentActionAsync with required parameters and request content.
@@ -768,9 +666,9 @@ var data = new {
     actionId = "<actionId>",
 };
 
-var operation = await client.DeployEnvironmentActionAsync(WaitUntil.Completed, "<environmentName>", RequestContent.Create(data));
+var operation = await client.DeployEnvironmentActionAsync(WaitUntil.Completed, "<userId>", "<environmentName>", RequestContent.Create(data));
 
-Console.WriteLine(operation.GetRawResponse().Status)
+Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code>
 This sample shows how to call DeployEnvironmentActionAsync with all parameters and request content.
 <code><![CDATA[
@@ -783,17 +681,17 @@ var data = new {
     parameters = new {},
 };
 
-var operation = await client.DeployEnvironmentActionAsync(WaitUntil.Completed, "<environmentName>", RequestContent.Create(data), <me>);
+var operation = await client.DeployEnvironmentActionAsync(WaitUntil.Completed, "<userId>", "<environmentName>", RequestContent.Create(data));
 
-Console.WriteLine(operation.GetRawResponse().Status)
+Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="GetCatalogItem">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response GetCatalogItem (string catalogItemId, Azure.RequestContext context = default);" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response GetCatalogItem (string catalogItemId, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response GetCatalogItem(string catalogItemId, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.EnvironmentsClient.GetCatalogItem(System.String,Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetCatalogItem (catalogItemId As String, Optional context As RequestContext = Nothing) As Response" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetCatalogItem (catalogItemId As String, context As RequestContext) As Response" />
       <MemberSignature Language="F#" Value="abstract member GetCatalogItem : string * Azure.RequestContext -&gt; Azure.Response&#xA;override this.GetCatalogItem : string * Azure.RequestContext -&gt; Azure.Response" Usage="environmentsClient.GetCatalogItem (catalogItemId, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -810,8 +708,12 @@ Console.WriteLine(operation.GetRawResponse().Status)
       <Docs>
         <param name="catalogItemId"> The unique id of the catalog item. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Get a catalog item from a project. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Get a catalog item from a project.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Below is the JSON schema for the response payload.
 
@@ -836,7 +738,7 @@ var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
 
-Response response = client.GetCatalogItem("<catalogItemId>");
+Response response = client.GetCatalogItem("<catalogItemId>", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -846,10 +748,10 @@ Console.WriteLine(result.GetProperty("catalogName").ToString());
       </Docs>
     </Member>
     <Member MemberName="GetCatalogItemAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; GetCatalogItemAsync (string catalogItemId, Azure.RequestContext context = default);" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; GetCatalogItemAsync (string catalogItemId, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; GetCatalogItemAsync(string catalogItemId, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.EnvironmentsClient.GetCatalogItemAsync(System.String,Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetCatalogItemAsync (catalogItemId As String, Optional context As RequestContext = Nothing) As Task(Of Response)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetCatalogItemAsync (catalogItemId As String, context As RequestContext) As Task(Of Response)" />
       <MemberSignature Language="F#" Value="abstract member GetCatalogItemAsync : string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.GetCatalogItemAsync : string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="environmentsClient.GetCatalogItemAsync (catalogItemId, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -866,8 +768,12 @@ Console.WriteLine(result.GetProperty("catalogName").ToString());
       <Docs>
         <param name="catalogItemId"> The unique id of the catalog item. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Get a catalog item from a project. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Get a catalog item from a project.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Below is the JSON schema for the response payload.
 
@@ -892,7 +798,7 @@ var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
 
-Response response = await client.GetCatalogItemAsync("<catalogItemId>");
+Response response = await client.GetCatalogItemAsync("<catalogItemId>", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -902,10 +808,10 @@ Console.WriteLine(result.GetProperty("catalogName").ToString());
       </Docs>
     </Member>
     <Member MemberName="GetCatalogItems">
-      <MemberSignature Language="C#" Value="public virtual Azure.Pageable&lt;BinaryData&gt; GetCatalogItems (int? maxCount = default, Azure.RequestContext context = default);" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Pageable&lt;BinaryData&gt; GetCatalogItems (int? maxCount, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Pageable`1&lt;class System.BinaryData&gt; GetCatalogItems(valuetype System.Nullable`1&lt;int32&gt; maxCount, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.EnvironmentsClient.GetCatalogItems(System.Nullable{System.Int32},Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetCatalogItems (Optional maxCount As Nullable(Of Integer) = Nothing, Optional context As RequestContext = Nothing) As Pageable(Of BinaryData)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetCatalogItems (maxCount As Nullable(Of Integer), context As RequestContext) As Pageable(Of BinaryData)" />
       <MemberSignature Language="F#" Value="abstract member GetCatalogItems : Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.Pageable&lt;BinaryData&gt;&#xA;override this.GetCatalogItems : Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.Pageable&lt;BinaryData&gt;" Usage="environmentsClient.GetCatalogItems (maxCount, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -922,7 +828,11 @@ Console.WriteLine(result.GetProperty("catalogName").ToString());
       <Docs>
         <param name="maxCount"> The maximum number of resources to return from the operation. Example: 'top=10'. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Lists latest version of all catalog items available for a project. </summary>
+        <summary>
+            [Protocol Method] Lists latest version of all catalog items available for a project.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
         <returns> The <see cref="T:Azure.Pageable`1" /> from the service containing a list of <see cref="T:System.BinaryData" /> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         <remarks>
 Below is the JSON schema for one item in the pageable response.
@@ -938,27 +848,15 @@ Schema for <c>CatalogItemListResultValue</c>:
 </code></remarks>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call GetCatalogItems and parse the result.
+This sample shows how to call GetCatalogItems with required parameters and parse the result.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
 
-foreach (var data in client.GetCatalogItems())
+foreach (var item in client.GetCatalogItems(1234, new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-    Console.WriteLine(result.ToString());
-}
-]]></code>
-This sample shows how to call GetCatalogItems with all parameters, and how to parse the result.
-<code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
-
-foreach (var data in client.GetCatalogItems(1234))
-{
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("id").ToString());
     Console.WriteLine(result.GetProperty("name").ToString());
     Console.WriteLine(result.GetProperty("catalogName").ToString());
@@ -967,10 +865,10 @@ foreach (var data in client.GetCatalogItems(1234))
       </Docs>
     </Member>
     <Member MemberName="GetCatalogItemsAsync">
-      <MemberSignature Language="C#" Value="public virtual Azure.AsyncPageable&lt;BinaryData&gt; GetCatalogItemsAsync (int? maxCount = default, Azure.RequestContext context = default);" />
+      <MemberSignature Language="C#" Value="public virtual Azure.AsyncPageable&lt;BinaryData&gt; GetCatalogItemsAsync (int? maxCount, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.AsyncPageable`1&lt;class System.BinaryData&gt; GetCatalogItemsAsync(valuetype System.Nullable`1&lt;int32&gt; maxCount, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.EnvironmentsClient.GetCatalogItemsAsync(System.Nullable{System.Int32},Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetCatalogItemsAsync (Optional maxCount As Nullable(Of Integer) = Nothing, Optional context As RequestContext = Nothing) As AsyncPageable(Of BinaryData)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetCatalogItemsAsync (maxCount As Nullable(Of Integer), context As RequestContext) As AsyncPageable(Of BinaryData)" />
       <MemberSignature Language="F#" Value="abstract member GetCatalogItemsAsync : Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.AsyncPageable&lt;BinaryData&gt;&#xA;override this.GetCatalogItemsAsync : Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.AsyncPageable&lt;BinaryData&gt;" Usage="environmentsClient.GetCatalogItemsAsync (maxCount, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -987,7 +885,11 @@ foreach (var data in client.GetCatalogItems(1234))
       <Docs>
         <param name="maxCount"> The maximum number of resources to return from the operation. Example: 'top=10'. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Lists latest version of all catalog items available for a project. </summary>
+        <summary>
+            [Protocol Method] Lists latest version of all catalog items available for a project.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
         <returns> The <see cref="T:Azure.AsyncPageable`1" /> from the service containing a list of <see cref="T:System.BinaryData" /> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         <remarks>
 Below is the JSON schema for one item in the pageable response.
@@ -1003,27 +905,15 @@ Schema for <c>CatalogItemListResultValue</c>:
 </code></remarks>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call GetCatalogItemsAsync and parse the result.
+This sample shows how to call GetCatalogItemsAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
 
-await foreach (var data in client.GetCatalogItemsAsync())
+await foreach (var item in client.GetCatalogItemsAsync(1234, new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-    Console.WriteLine(result.ToString());
-}
-]]></code>
-This sample shows how to call GetCatalogItemsAsync with all parameters, and how to parse the result.
-<code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
-
-await foreach (var data in client.GetCatalogItemsAsync(1234))
-{
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("id").ToString());
     Console.WriteLine(result.GetProperty("name").ToString());
     Console.WriteLine(result.GetProperty("catalogName").ToString());
@@ -1032,10 +922,10 @@ await foreach (var data in client.GetCatalogItemsAsync(1234))
       </Docs>
     </Member>
     <Member MemberName="GetCatalogItemVersion">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response GetCatalogItemVersion (string catalogItemId, string version, Azure.RequestContext context = default);" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response GetCatalogItemVersion (string catalogItemId, string version, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response GetCatalogItemVersion(string catalogItemId, string version, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.EnvironmentsClient.GetCatalogItemVersion(System.String,System.String,Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetCatalogItemVersion (catalogItemId As String, version As String, Optional context As RequestContext = Nothing) As Response" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetCatalogItemVersion (catalogItemId As String, version As String, context As RequestContext) As Response" />
       <MemberSignature Language="F#" Value="abstract member GetCatalogItemVersion : string * string * Azure.RequestContext -&gt; Azure.Response&#xA;override this.GetCatalogItemVersion : string * string * Azure.RequestContext -&gt; Azure.Response" Usage="environmentsClient.GetCatalogItemVersion (catalogItemId, version, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -1054,8 +944,12 @@ await foreach (var data in client.GetCatalogItemsAsync(1234))
         <param name="catalogItemId"> The unique id of the catalog item. </param>
         <param name="version"> The version of the catalog item. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Get a specific catalog item version from a project. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Get a specific catalog item version from a project.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Below is the JSON schema for the response payload.
 
@@ -1112,7 +1006,7 @@ var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
 
-Response response = client.GetCatalogItemVersion("<catalogItemId>", "<version>");
+Response response = client.GetCatalogItemVersion("<catalogItemId>", "<version>", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("catalogItemId").ToString());
@@ -1153,10 +1047,10 @@ Console.WriteLine(result.GetProperty("eligibleForLatestVersion").ToString());
       </Docs>
     </Member>
     <Member MemberName="GetCatalogItemVersionAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; GetCatalogItemVersionAsync (string catalogItemId, string version, Azure.RequestContext context = default);" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; GetCatalogItemVersionAsync (string catalogItemId, string version, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; GetCatalogItemVersionAsync(string catalogItemId, string version, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.EnvironmentsClient.GetCatalogItemVersionAsync(System.String,System.String,Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetCatalogItemVersionAsync (catalogItemId As String, version As String, Optional context As RequestContext = Nothing) As Task(Of Response)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetCatalogItemVersionAsync (catalogItemId As String, version As String, context As RequestContext) As Task(Of Response)" />
       <MemberSignature Language="F#" Value="abstract member GetCatalogItemVersionAsync : string * string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.GetCatalogItemVersionAsync : string * string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="environmentsClient.GetCatalogItemVersionAsync (catalogItemId, version, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -1175,8 +1069,12 @@ Console.WriteLine(result.GetProperty("eligibleForLatestVersion").ToString());
         <param name="catalogItemId"> The unique id of the catalog item. </param>
         <param name="version"> The version of the catalog item. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Get a specific catalog item version from a project. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Get a specific catalog item version from a project.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Below is the JSON schema for the response payload.
 
@@ -1233,7 +1131,7 @@ var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
 
-Response response = await client.GetCatalogItemVersionAsync("<catalogItemId>", "<version>");
+Response response = await client.GetCatalogItemVersionAsync("<catalogItemId>", "<version>", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("catalogItemId").ToString());
@@ -1274,10 +1172,10 @@ Console.WriteLine(result.GetProperty("eligibleForLatestVersion").ToString());
       </Docs>
     </Member>
     <Member MemberName="GetCatalogItemVersions">
-      <MemberSignature Language="C#" Value="public virtual Azure.Pageable&lt;BinaryData&gt; GetCatalogItemVersions (string catalogItemId, int? maxCount = default, Azure.RequestContext context = default);" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Pageable&lt;BinaryData&gt; GetCatalogItemVersions (string catalogItemId, int? maxCount, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Pageable`1&lt;class System.BinaryData&gt; GetCatalogItemVersions(string catalogItemId, valuetype System.Nullable`1&lt;int32&gt; maxCount, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.EnvironmentsClient.GetCatalogItemVersions(System.String,System.Nullable{System.Int32},Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetCatalogItemVersions (catalogItemId As String, Optional maxCount As Nullable(Of Integer) = Nothing, Optional context As RequestContext = Nothing) As Pageable(Of BinaryData)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetCatalogItemVersions (catalogItemId As String, maxCount As Nullable(Of Integer), context As RequestContext) As Pageable(Of BinaryData)" />
       <MemberSignature Language="F#" Value="abstract member GetCatalogItemVersions : string * Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.Pageable&lt;BinaryData&gt;&#xA;override this.GetCatalogItemVersions : string * Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.Pageable&lt;BinaryData&gt;" Usage="environmentsClient.GetCatalogItemVersions (catalogItemId, maxCount, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -1296,7 +1194,11 @@ Console.WriteLine(result.GetProperty("eligibleForLatestVersion").ToString());
         <param name="catalogItemId"> The unique id of the catalog item. </param>
         <param name="maxCount"> The maximum number of resources to return from the operation. Example: 'top=10'. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> List all versions of a catalog item from a project. </summary>
+        <summary>
+            [Protocol Method] List all versions of a catalog item from a project.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
         <returns> The <see cref="T:Azure.Pageable`1" /> from the service containing a list of <see cref="T:System.BinaryData" /> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         <remarks>
 Below is the JSON schema for one item in the pageable response.
@@ -1354,21 +1256,9 @@ var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
 
-foreach (var data in client.GetCatalogItemVersions("<catalogItemId>"))
+foreach (var item in client.GetCatalogItemVersions("<catalogItemId>", 1234, new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-    Console.WriteLine(result.ToString());
-}
-]]></code>
-This sample shows how to call GetCatalogItemVersions with all parameters, and how to parse the result.
-<code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
-
-foreach (var data in client.GetCatalogItemVersions("<catalogItemId>", 1234))
-{
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("catalogItemId").ToString());
     Console.WriteLine(result.GetProperty("catalogItemName").ToString());
     Console.WriteLine(result.GetProperty("catalogName").ToString());
@@ -1408,10 +1298,10 @@ foreach (var data in client.GetCatalogItemVersions("<catalogItemId>", 1234))
       </Docs>
     </Member>
     <Member MemberName="GetCatalogItemVersionsAsync">
-      <MemberSignature Language="C#" Value="public virtual Azure.AsyncPageable&lt;BinaryData&gt; GetCatalogItemVersionsAsync (string catalogItemId, int? maxCount = default, Azure.RequestContext context = default);" />
+      <MemberSignature Language="C#" Value="public virtual Azure.AsyncPageable&lt;BinaryData&gt; GetCatalogItemVersionsAsync (string catalogItemId, int? maxCount, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.AsyncPageable`1&lt;class System.BinaryData&gt; GetCatalogItemVersionsAsync(string catalogItemId, valuetype System.Nullable`1&lt;int32&gt; maxCount, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.EnvironmentsClient.GetCatalogItemVersionsAsync(System.String,System.Nullable{System.Int32},Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetCatalogItemVersionsAsync (catalogItemId As String, Optional maxCount As Nullable(Of Integer) = Nothing, Optional context As RequestContext = Nothing) As AsyncPageable(Of BinaryData)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetCatalogItemVersionsAsync (catalogItemId As String, maxCount As Nullable(Of Integer), context As RequestContext) As AsyncPageable(Of BinaryData)" />
       <MemberSignature Language="F#" Value="abstract member GetCatalogItemVersionsAsync : string * Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.AsyncPageable&lt;BinaryData&gt;&#xA;override this.GetCatalogItemVersionsAsync : string * Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.AsyncPageable&lt;BinaryData&gt;" Usage="environmentsClient.GetCatalogItemVersionsAsync (catalogItemId, maxCount, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -1430,7 +1320,11 @@ foreach (var data in client.GetCatalogItemVersions("<catalogItemId>", 1234))
         <param name="catalogItemId"> The unique id of the catalog item. </param>
         <param name="maxCount"> The maximum number of resources to return from the operation. Example: 'top=10'. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> List all versions of a catalog item from a project. </summary>
+        <summary>
+            [Protocol Method] List all versions of a catalog item from a project.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
         <returns> The <see cref="T:Azure.AsyncPageable`1" /> from the service containing a list of <see cref="T:System.BinaryData" /> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         <remarks>
 Below is the JSON schema for one item in the pageable response.
@@ -1488,21 +1382,9 @@ var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
 
-await foreach (var data in client.GetCatalogItemVersionsAsync("<catalogItemId>"))
+await foreach (var item in client.GetCatalogItemVersionsAsync("<catalogItemId>", 1234, new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-    Console.WriteLine(result.ToString());
-}
-]]></code>
-This sample shows how to call GetCatalogItemVersionsAsync with all parameters, and how to parse the result.
-<code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
-
-await foreach (var data in client.GetCatalogItemVersionsAsync("<catalogItemId>", 1234))
-{
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("catalogItemId").ToString());
     Console.WriteLine(result.GetProperty("catalogItemName").ToString());
     Console.WriteLine(result.GetProperty("catalogName").ToString());
@@ -1542,11 +1424,11 @@ await foreach (var data in client.GetCatalogItemVersionsAsync("<catalogItemId>",
       </Docs>
     </Member>
     <Member MemberName="GetEnvironmentByUser">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response GetEnvironmentByUser (string environmentName, string userId = &quot;me&quot;, Azure.RequestContext context = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response GetEnvironmentByUser(string environmentName, string userId, class Azure.RequestContext context) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response GetEnvironmentByUser (string userId, string environmentName, Azure.RequestContext context);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response GetEnvironmentByUser(string userId, string environmentName, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.EnvironmentsClient.GetEnvironmentByUser(System.String,System.String,Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetEnvironmentByUser (environmentName As String, Optional userId As String = &quot;me&quot;, Optional context As RequestContext = Nothing) As Response" />
-      <MemberSignature Language="F#" Value="abstract member GetEnvironmentByUser : string * string * Azure.RequestContext -&gt; Azure.Response&#xA;override this.GetEnvironmentByUser : string * string * Azure.RequestContext -&gt; Azure.Response" Usage="environmentsClient.GetEnvironmentByUser (environmentName, userId, context)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetEnvironmentByUser (userId As String, environmentName As String, context As RequestContext) As Response" />
+      <MemberSignature Language="F#" Value="abstract member GetEnvironmentByUser : string * string * Azure.RequestContext -&gt; Azure.Response&#xA;override this.GetEnvironmentByUser : string * string * Azure.RequestContext -&gt; Azure.Response" Usage="environmentsClient.GetEnvironmentByUser (userId, environmentName, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.DevCenter</AssemblyName>
@@ -1556,16 +1438,20 @@ await foreach (var data in client.GetCatalogItemVersionsAsync("<catalogItemId>",
         <ReturnType>Azure.Response</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="environmentName" Type="System.String" />
         <Parameter Name="userId" Type="System.String" />
+        <Parameter Name="environmentName" Type="System.String" />
         <Parameter Name="context" Type="Azure.RequestContext" />
       </Parameters>
       <Docs>
+        <param name="userId"> The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. The default value is "me". </param>
         <param name="environmentName"> The name of the environment. </param>
-        <param name="userId"> The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Gets an environment. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Gets an environment
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Below is the JSON schema for the response payload.
 
@@ -1587,9 +1473,9 @@ Schema for <c>Environment</c>:
 }
 </code></remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="environmentName" /> or <paramref name="userId" /> is null. </exception>
+          <paramref name="userId" /> or <paramref name="environmentName" /> is null. </exception>
         <exception cref="T:System.ArgumentException">
-          <paramref name="environmentName" /> or <paramref name="userId" /> is an empty string, and was expected to be non-empty. </exception>
+          <paramref name="userId" /> or <paramref name="environmentName" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
 This sample shows how to call GetEnvironmentByUser with required parameters and parse the result.
@@ -1598,19 +1484,7 @@ var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
 
-Response response = client.GetEnvironmentByUser("<environmentName>");
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("environmentType").ToString());
-Console.WriteLine(result.ToString());
-]]></code>
-This sample shows how to call GetEnvironmentByUser with all parameters, and how to parse the result.
-<code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
-
-Response response = client.GetEnvironmentByUser("<environmentName>", <me>);
+Response response = client.GetEnvironmentByUser("<userId>", "<environmentName>", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -1630,11 +1504,11 @@ Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
       </Docs>
     </Member>
     <Member MemberName="GetEnvironmentByUserAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; GetEnvironmentByUserAsync (string environmentName, string userId = &quot;me&quot;, Azure.RequestContext context = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; GetEnvironmentByUserAsync(string environmentName, string userId, class Azure.RequestContext context) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; GetEnvironmentByUserAsync (string userId, string environmentName, Azure.RequestContext context);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; GetEnvironmentByUserAsync(string userId, string environmentName, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.EnvironmentsClient.GetEnvironmentByUserAsync(System.String,System.String,Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetEnvironmentByUserAsync (environmentName As String, Optional userId As String = &quot;me&quot;, Optional context As RequestContext = Nothing) As Task(Of Response)" />
-      <MemberSignature Language="F#" Value="abstract member GetEnvironmentByUserAsync : string * string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.GetEnvironmentByUserAsync : string * string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="environmentsClient.GetEnvironmentByUserAsync (environmentName, userId, context)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetEnvironmentByUserAsync (userId As String, environmentName As String, context As RequestContext) As Task(Of Response)" />
+      <MemberSignature Language="F#" Value="abstract member GetEnvironmentByUserAsync : string * string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.GetEnvironmentByUserAsync : string * string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="environmentsClient.GetEnvironmentByUserAsync (userId, environmentName, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.DevCenter</AssemblyName>
@@ -1644,16 +1518,20 @@ Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="environmentName" Type="System.String" />
         <Parameter Name="userId" Type="System.String" />
+        <Parameter Name="environmentName" Type="System.String" />
         <Parameter Name="context" Type="Azure.RequestContext" />
       </Parameters>
       <Docs>
+        <param name="userId"> The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. The default value is "me". </param>
         <param name="environmentName"> The name of the environment. </param>
-        <param name="userId"> The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Gets an environment. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Gets an environment
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Below is the JSON schema for the response payload.
 
@@ -1675,9 +1553,9 @@ Schema for <c>Environment</c>:
 }
 </code></remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="environmentName" /> or <paramref name="userId" /> is null. </exception>
+          <paramref name="userId" /> or <paramref name="environmentName" /> is null. </exception>
         <exception cref="T:System.ArgumentException">
-          <paramref name="environmentName" /> or <paramref name="userId" /> is an empty string, and was expected to be non-empty. </exception>
+          <paramref name="userId" /> or <paramref name="environmentName" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
 This sample shows how to call GetEnvironmentByUserAsync with required parameters and parse the result.
@@ -1686,19 +1564,7 @@ var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
 
-Response response = await client.GetEnvironmentByUserAsync("<environmentName>");
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("environmentType").ToString());
-Console.WriteLine(result.ToString());
-]]></code>
-This sample shows how to call GetEnvironmentByUserAsync with all parameters, and how to parse the result.
-<code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
-
-Response response = await client.GetEnvironmentByUserAsync("<environmentName>", <me>);
+Response response = await client.GetEnvironmentByUserAsync("<userId>", "<environmentName>", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -1718,10 +1584,10 @@ Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
       </Docs>
     </Member>
     <Member MemberName="GetEnvironments">
-      <MemberSignature Language="C#" Value="public virtual Azure.Pageable&lt;BinaryData&gt; GetEnvironments (int? maxCount = default, Azure.RequestContext context = default);" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Pageable&lt;BinaryData&gt; GetEnvironments (int? maxCount, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Pageable`1&lt;class System.BinaryData&gt; GetEnvironments(valuetype System.Nullable`1&lt;int32&gt; maxCount, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.EnvironmentsClient.GetEnvironments(System.Nullable{System.Int32},Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetEnvironments (Optional maxCount As Nullable(Of Integer) = Nothing, Optional context As RequestContext = Nothing) As Pageable(Of BinaryData)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetEnvironments (maxCount As Nullable(Of Integer), context As RequestContext) As Pageable(Of BinaryData)" />
       <MemberSignature Language="F#" Value="abstract member GetEnvironments : Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.Pageable&lt;BinaryData&gt;&#xA;override this.GetEnvironments : Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.Pageable&lt;BinaryData&gt;" Usage="environmentsClient.GetEnvironments (maxCount, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -1738,7 +1604,11 @@ Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
       <Docs>
         <param name="maxCount"> The maximum number of resources to return from the operation. Example: 'top=10'. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Lists the environments for a project. </summary>
+        <summary>
+            [Protocol Method] Lists the environments for a project.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
         <returns> The <see cref="T:Azure.Pageable`1" /> from the service containing a list of <see cref="T:System.BinaryData" /> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         <remarks>
 Below is the JSON schema for one item in the pageable response.
@@ -1762,28 +1632,15 @@ Schema for <c>EnvironmentListResultValue</c>:
 </code></remarks>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call GetEnvironments and parse the result.
+This sample shows how to call GetEnvironments with required parameters and parse the result.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
 
-foreach (var data in client.GetEnvironments())
+foreach (var item in client.GetEnvironments(1234, new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("environmentType").ToString());
-    Console.WriteLine(result.ToString());
-}
-]]></code>
-This sample shows how to call GetEnvironments with all parameters, and how to parse the result.
-<code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
-
-foreach (var data in client.GetEnvironments(1234))
-{
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("name").ToString());
     Console.WriteLine(result.GetProperty("environmentType").ToString());
     Console.WriteLine(result.GetProperty("user").ToString());
@@ -1802,10 +1659,10 @@ foreach (var data in client.GetEnvironments(1234))
       </Docs>
     </Member>
     <Member MemberName="GetEnvironmentsAsync">
-      <MemberSignature Language="C#" Value="public virtual Azure.AsyncPageable&lt;BinaryData&gt; GetEnvironmentsAsync (int? maxCount = default, Azure.RequestContext context = default);" />
+      <MemberSignature Language="C#" Value="public virtual Azure.AsyncPageable&lt;BinaryData&gt; GetEnvironmentsAsync (int? maxCount, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.AsyncPageable`1&lt;class System.BinaryData&gt; GetEnvironmentsAsync(valuetype System.Nullable`1&lt;int32&gt; maxCount, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.EnvironmentsClient.GetEnvironmentsAsync(System.Nullable{System.Int32},Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetEnvironmentsAsync (Optional maxCount As Nullable(Of Integer) = Nothing, Optional context As RequestContext = Nothing) As AsyncPageable(Of BinaryData)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetEnvironmentsAsync (maxCount As Nullable(Of Integer), context As RequestContext) As AsyncPageable(Of BinaryData)" />
       <MemberSignature Language="F#" Value="abstract member GetEnvironmentsAsync : Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.AsyncPageable&lt;BinaryData&gt;&#xA;override this.GetEnvironmentsAsync : Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.AsyncPageable&lt;BinaryData&gt;" Usage="environmentsClient.GetEnvironmentsAsync (maxCount, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -1822,7 +1679,11 @@ foreach (var data in client.GetEnvironments(1234))
       <Docs>
         <param name="maxCount"> The maximum number of resources to return from the operation. Example: 'top=10'. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Lists the environments for a project. </summary>
+        <summary>
+            [Protocol Method] Lists the environments for a project.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
         <returns> The <see cref="T:Azure.AsyncPageable`1" /> from the service containing a list of <see cref="T:System.BinaryData" /> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         <remarks>
 Below is the JSON schema for one item in the pageable response.
@@ -1846,28 +1707,15 @@ Schema for <c>EnvironmentListResultValue</c>:
 </code></remarks>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call GetEnvironmentsAsync and parse the result.
+This sample shows how to call GetEnvironmentsAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
 
-await foreach (var data in client.GetEnvironmentsAsync())
+await foreach (var item in client.GetEnvironmentsAsync(1234, new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("environmentType").ToString());
-    Console.WriteLine(result.ToString());
-}
-]]></code>
-This sample shows how to call GetEnvironmentsAsync with all parameters, and how to parse the result.
-<code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
-
-await foreach (var data in client.GetEnvironmentsAsync(1234))
-{
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("name").ToString());
     Console.WriteLine(result.GetProperty("environmentType").ToString());
     Console.WriteLine(result.GetProperty("user").ToString());
@@ -1886,10 +1734,10 @@ await foreach (var data in client.GetEnvironmentsAsync(1234))
       </Docs>
     </Member>
     <Member MemberName="GetEnvironmentsByUser">
-      <MemberSignature Language="C#" Value="public virtual Azure.Pageable&lt;BinaryData&gt; GetEnvironmentsByUser (string userId = &quot;me&quot;, int? maxCount = default, Azure.RequestContext context = default);" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Pageable&lt;BinaryData&gt; GetEnvironmentsByUser (string userId, int? maxCount, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Pageable`1&lt;class System.BinaryData&gt; GetEnvironmentsByUser(string userId, valuetype System.Nullable`1&lt;int32&gt; maxCount, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.EnvironmentsClient.GetEnvironmentsByUser(System.String,System.Nullable{System.Int32},Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetEnvironmentsByUser (Optional userId As String = &quot;me&quot;, Optional maxCount As Nullable(Of Integer) = Nothing, Optional context As RequestContext = Nothing) As Pageable(Of BinaryData)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetEnvironmentsByUser (userId As String, maxCount As Nullable(Of Integer), context As RequestContext) As Pageable(Of BinaryData)" />
       <MemberSignature Language="F#" Value="abstract member GetEnvironmentsByUser : string * Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.Pageable&lt;BinaryData&gt;&#xA;override this.GetEnvironmentsByUser : string * Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.Pageable&lt;BinaryData&gt;" Usage="environmentsClient.GetEnvironmentsByUser (userId, maxCount, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -1905,10 +1753,14 @@ await foreach (var data in client.GetEnvironmentsAsync(1234))
         <Parameter Name="context" Type="Azure.RequestContext" />
       </Parameters>
       <Docs>
-        <param name="userId"> The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. </param>
+        <param name="userId"> The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. The default value is "me". </param>
         <param name="maxCount"> The maximum number of resources to return from the operation. Example: 'top=10'. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Lists the environments for a project and user. </summary>
+        <summary>
+            [Protocol Method] Lists the environments for a project and user.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
         <returns> The <see cref="T:Azure.Pageable`1" /> from the service containing a list of <see cref="T:System.BinaryData" /> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         <remarks>
 Below is the JSON schema for one item in the pageable response.
@@ -1936,28 +1788,15 @@ Schema for <c>EnvironmentListResultValue</c>:
           <paramref name="userId" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call GetEnvironmentsByUser and parse the result.
+This sample shows how to call GetEnvironmentsByUser with required parameters and parse the result.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
 
-foreach (var data in client.GetEnvironmentsByUser())
+foreach (var item in client.GetEnvironmentsByUser("<userId>", 1234, new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("environmentType").ToString());
-    Console.WriteLine(result.ToString());
-}
-]]></code>
-This sample shows how to call GetEnvironmentsByUser with all parameters, and how to parse the result.
-<code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
-
-foreach (var data in client.GetEnvironmentsByUser(<me>, 1234))
-{
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("name").ToString());
     Console.WriteLine(result.GetProperty("environmentType").ToString());
     Console.WriteLine(result.GetProperty("user").ToString());
@@ -1976,10 +1815,10 @@ foreach (var data in client.GetEnvironmentsByUser(<me>, 1234))
       </Docs>
     </Member>
     <Member MemberName="GetEnvironmentsByUserAsync">
-      <MemberSignature Language="C#" Value="public virtual Azure.AsyncPageable&lt;BinaryData&gt; GetEnvironmentsByUserAsync (string userId = &quot;me&quot;, int? maxCount = default, Azure.RequestContext context = default);" />
+      <MemberSignature Language="C#" Value="public virtual Azure.AsyncPageable&lt;BinaryData&gt; GetEnvironmentsByUserAsync (string userId, int? maxCount, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.AsyncPageable`1&lt;class System.BinaryData&gt; GetEnvironmentsByUserAsync(string userId, valuetype System.Nullable`1&lt;int32&gt; maxCount, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.EnvironmentsClient.GetEnvironmentsByUserAsync(System.String,System.Nullable{System.Int32},Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetEnvironmentsByUserAsync (Optional userId As String = &quot;me&quot;, Optional maxCount As Nullable(Of Integer) = Nothing, Optional context As RequestContext = Nothing) As AsyncPageable(Of BinaryData)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetEnvironmentsByUserAsync (userId As String, maxCount As Nullable(Of Integer), context As RequestContext) As AsyncPageable(Of BinaryData)" />
       <MemberSignature Language="F#" Value="abstract member GetEnvironmentsByUserAsync : string * Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.AsyncPageable&lt;BinaryData&gt;&#xA;override this.GetEnvironmentsByUserAsync : string * Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.AsyncPageable&lt;BinaryData&gt;" Usage="environmentsClient.GetEnvironmentsByUserAsync (userId, maxCount, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -1995,10 +1834,14 @@ foreach (var data in client.GetEnvironmentsByUser(<me>, 1234))
         <Parameter Name="context" Type="Azure.RequestContext" />
       </Parameters>
       <Docs>
-        <param name="userId"> The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. </param>
+        <param name="userId"> The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. The default value is "me". </param>
         <param name="maxCount"> The maximum number of resources to return from the operation. Example: 'top=10'. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Lists the environments for a project and user. </summary>
+        <summary>
+            [Protocol Method] Lists the environments for a project and user.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
         <returns> The <see cref="T:Azure.AsyncPageable`1" /> from the service containing a list of <see cref="T:System.BinaryData" /> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         <remarks>
 Below is the JSON schema for one item in the pageable response.
@@ -2026,28 +1869,15 @@ Schema for <c>EnvironmentListResultValue</c>:
           <paramref name="userId" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call GetEnvironmentsByUserAsync and parse the result.
+This sample shows how to call GetEnvironmentsByUserAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
 
-await foreach (var data in client.GetEnvironmentsByUserAsync())
+await foreach (var item in client.GetEnvironmentsByUserAsync("<userId>", 1234, new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("environmentType").ToString());
-    Console.WriteLine(result.ToString());
-}
-]]></code>
-This sample shows how to call GetEnvironmentsByUserAsync with all parameters, and how to parse the result.
-<code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
-
-await foreach (var data in client.GetEnvironmentsByUserAsync(<me>, 1234))
-{
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("name").ToString());
     Console.WriteLine(result.GetProperty("environmentType").ToString());
     Console.WriteLine(result.GetProperty("user").ToString());
@@ -2066,10 +1896,10 @@ await foreach (var data in client.GetEnvironmentsByUserAsync(<me>, 1234))
       </Docs>
     </Member>
     <Member MemberName="GetEnvironmentTypes">
-      <MemberSignature Language="C#" Value="public virtual Azure.Pageable&lt;BinaryData&gt; GetEnvironmentTypes (int? maxCount = default, Azure.RequestContext context = default);" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Pageable&lt;BinaryData&gt; GetEnvironmentTypes (int? maxCount, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Pageable`1&lt;class System.BinaryData&gt; GetEnvironmentTypes(valuetype System.Nullable`1&lt;int32&gt; maxCount, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.EnvironmentsClient.GetEnvironmentTypes(System.Nullable{System.Int32},Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetEnvironmentTypes (Optional maxCount As Nullable(Of Integer) = Nothing, Optional context As RequestContext = Nothing) As Pageable(Of BinaryData)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetEnvironmentTypes (maxCount As Nullable(Of Integer), context As RequestContext) As Pageable(Of BinaryData)" />
       <MemberSignature Language="F#" Value="abstract member GetEnvironmentTypes : Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.Pageable&lt;BinaryData&gt;&#xA;override this.GetEnvironmentTypes : Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.Pageable&lt;BinaryData&gt;" Usage="environmentsClient.GetEnvironmentTypes (maxCount, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -2086,7 +1916,11 @@ await foreach (var data in client.GetEnvironmentsByUserAsync(<me>, 1234))
       <Docs>
         <param name="maxCount"> The maximum number of resources to return from the operation. Example: 'top=10'. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Lists all environment types configured for a project. </summary>
+        <summary>
+            [Protocol Method] Lists all environment types configured for a project.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
         <returns> The <see cref="T:Azure.Pageable`1" /> from the service containing a list of <see cref="T:System.BinaryData" /> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         <remarks>
 Below is the JSON schema for one item in the pageable response.
@@ -2102,27 +1936,15 @@ Schema for <c>EnvironmentTypeListResultValue</c>:
 </code></remarks>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call GetEnvironmentTypes and parse the result.
+This sample shows how to call GetEnvironmentTypes with required parameters and parse the result.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
 
-foreach (var data in client.GetEnvironmentTypes())
+foreach (var item in client.GetEnvironmentTypes(1234, new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-    Console.WriteLine(result.ToString());
-}
-]]></code>
-This sample shows how to call GetEnvironmentTypes with all parameters, and how to parse the result.
-<code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
-
-foreach (var data in client.GetEnvironmentTypes(1234))
-{
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("name").ToString());
     Console.WriteLine(result.GetProperty("deploymentTargetId").ToString());
     Console.WriteLine(result.GetProperty("status").ToString());
@@ -2131,10 +1953,10 @@ foreach (var data in client.GetEnvironmentTypes(1234))
       </Docs>
     </Member>
     <Member MemberName="GetEnvironmentTypesAsync">
-      <MemberSignature Language="C#" Value="public virtual Azure.AsyncPageable&lt;BinaryData&gt; GetEnvironmentTypesAsync (int? maxCount = default, Azure.RequestContext context = default);" />
+      <MemberSignature Language="C#" Value="public virtual Azure.AsyncPageable&lt;BinaryData&gt; GetEnvironmentTypesAsync (int? maxCount, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.AsyncPageable`1&lt;class System.BinaryData&gt; GetEnvironmentTypesAsync(valuetype System.Nullable`1&lt;int32&gt; maxCount, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.EnvironmentsClient.GetEnvironmentTypesAsync(System.Nullable{System.Int32},Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetEnvironmentTypesAsync (Optional maxCount As Nullable(Of Integer) = Nothing, Optional context As RequestContext = Nothing) As AsyncPageable(Of BinaryData)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetEnvironmentTypesAsync (maxCount As Nullable(Of Integer), context As RequestContext) As AsyncPageable(Of BinaryData)" />
       <MemberSignature Language="F#" Value="abstract member GetEnvironmentTypesAsync : Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.AsyncPageable&lt;BinaryData&gt;&#xA;override this.GetEnvironmentTypesAsync : Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.AsyncPageable&lt;BinaryData&gt;" Usage="environmentsClient.GetEnvironmentTypesAsync (maxCount, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -2151,7 +1973,11 @@ foreach (var data in client.GetEnvironmentTypes(1234))
       <Docs>
         <param name="maxCount"> The maximum number of resources to return from the operation. Example: 'top=10'. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Lists all environment types configured for a project. </summary>
+        <summary>
+            [Protocol Method] Lists all environment types configured for a project.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
         <returns> The <see cref="T:Azure.AsyncPageable`1" /> from the service containing a list of <see cref="T:System.BinaryData" /> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         <remarks>
 Below is the JSON schema for one item in the pageable response.
@@ -2167,27 +1993,15 @@ Schema for <c>EnvironmentTypeListResultValue</c>:
 </code></remarks>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call GetEnvironmentTypesAsync and parse the result.
+This sample shows how to call GetEnvironmentTypesAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
 
-await foreach (var data in client.GetEnvironmentTypesAsync())
+await foreach (var item in client.GetEnvironmentTypesAsync(1234, new RequestContext()))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-    Console.WriteLine(result.ToString());
-}
-]]></code>
-This sample shows how to call GetEnvironmentTypesAsync with all parameters, and how to parse the result.
-<code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
-
-await foreach (var data in client.GetEnvironmentTypesAsync(1234))
-{
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("name").ToString());
     Console.WriteLine(result.GetProperty("deploymentTargetId").ToString());
     Console.WriteLine(result.GetProperty("status").ToString());
@@ -2216,11 +2030,11 @@ await foreach (var data in client.GetEnvironmentTypesAsync(1234))
       </Docs>
     </Member>
     <Member MemberName="UpdateEnvironment">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response UpdateEnvironment (string environmentName, Azure.Core.RequestContent content, string userId = &quot;me&quot;, Azure.RequestContext context = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response UpdateEnvironment(string environmentName, class Azure.Core.RequestContent content, string userId, class Azure.RequestContext context) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.EnvironmentsClient.UpdateEnvironment(System.String,Azure.Core.RequestContent,System.String,Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function UpdateEnvironment (environmentName As String, content As RequestContent, Optional userId As String = &quot;me&quot;, Optional context As RequestContext = Nothing) As Response" />
-      <MemberSignature Language="F#" Value="abstract member UpdateEnvironment : string * Azure.Core.RequestContent * string * Azure.RequestContext -&gt; Azure.Response&#xA;override this.UpdateEnvironment : string * Azure.Core.RequestContent * string * Azure.RequestContext -&gt; Azure.Response" Usage="environmentsClient.UpdateEnvironment (environmentName, content, userId, context)" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response UpdateEnvironment (string userId, string environmentName, Azure.Core.RequestContent content, Azure.RequestContext context = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response UpdateEnvironment(string userId, string environmentName, class Azure.Core.RequestContent content, class Azure.RequestContext context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.EnvironmentsClient.UpdateEnvironment(System.String,System.String,Azure.Core.RequestContent,Azure.RequestContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function UpdateEnvironment (userId As String, environmentName As String, content As RequestContent, Optional context As RequestContext = Nothing) As Response" />
+      <MemberSignature Language="F#" Value="abstract member UpdateEnvironment : string * string * Azure.Core.RequestContent * Azure.RequestContext -&gt; Azure.Response&#xA;override this.UpdateEnvironment : string * string * Azure.Core.RequestContent * Azure.RequestContext -&gt; Azure.Response" Usage="environmentsClient.UpdateEnvironment (userId, environmentName, content, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.DevCenter</AssemblyName>
@@ -2230,60 +2044,27 @@ await foreach (var data in client.GetEnvironmentTypesAsync(1234))
         <ReturnType>Azure.Response</ReturnType>
       </ReturnValue>
       <Parameters>
+        <Parameter Name="userId" Type="System.String" />
         <Parameter Name="environmentName" Type="System.String" />
         <Parameter Name="content" Type="Azure.Core.RequestContent" />
-        <Parameter Name="userId" Type="System.String" />
         <Parameter Name="context" Type="Azure.RequestContext" />
       </Parameters>
       <Docs>
+        <param name="userId"> The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. The default value is "me". </param>
         <param name="environmentName"> The name of the environment. </param>
-        <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
-        <param name="userId"> The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. </param>
+        <param name="content"> The content to send as the body of the request. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Partially updates an environment. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        <remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-<details><summary>Environment</summary>Schema for <c>Environment</c>:
-<code>{
-  name: string, # Optional. Environment name.
-  environmentType: string, # Required. Environment type.
-  user: string, # Optional. The AAD object id of the owner of this Environment.
-  provisioningState: string, # Optional. The provisioning state of the environment.
-  resourceGroupId: string, # Optional. The identifier of the resource group containing the environment's resources.
-  description: string, # Optional. Description of the Environment.
-  catalogName: string, # Optional. Name of the catalog.
-  catalogItemName: string, # Optional. Name of the catalog item.
-  parameters: AnyObject, # Optional. Parameters object for the deploy action
-  scheduledTasks: Dictionary&lt;string, ScheduledTask&gt;, # Optional. Set of supported scheduled tasks to help manage cost.
-  tags: Dictionary&lt;string, string&gt;, # Optional. Key value pairs that will be applied to resources deployed in this environment as tags.
-}
-</code></details>
-
-Response Body:
-
-Schema for <c>Environment</c>:
-<code>{
-  name: string, # Optional. Environment name.
-  environmentType: string, # Required. Environment type.
-  user: string, # Optional. The AAD object id of the owner of this Environment.
-  provisioningState: string, # Optional. The provisioning state of the environment.
-  resourceGroupId: string, # Optional. The identifier of the resource group containing the environment's resources.
-  description: string, # Optional. Description of the Environment.
-  catalogName: string, # Optional. Name of the catalog.
-  catalogItemName: string, # Optional. Name of the catalog item.
-  parameters: AnyObject, # Optional. Parameters object for the deploy action
-  scheduledTasks: Dictionary&lt;string, ScheduledTask&gt;, # Optional. Set of supported scheduled tasks to help manage cost.
-  tags: Dictionary&lt;string, string&gt;, # Optional. Key value pairs that will be applied to resources deployed in this environment as tags.
-}
-</code></remarks>
+        <summary>
+            [Protocol Method] Partially updates an environment
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
+        <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="environmentName" />, <paramref name="content" /> or <paramref name="userId" /> is null. </exception>
+          <paramref name="userId" />, <paramref name="environmentName" /> or <paramref name="content" /> is null. </exception>
         <exception cref="T:System.ArgumentException">
-          <paramref name="environmentName" /> or <paramref name="userId" /> is an empty string, and was expected to be non-empty. </exception>
+          <paramref name="userId" /> or <paramref name="environmentName" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
 This sample shows how to call UpdateEnvironment with required parameters and request content, and how to parse the result.
@@ -2296,7 +2077,7 @@ var data = new {
     environmentType = "<environmentType>",
 };
 
-Response response = client.UpdateEnvironment("<environmentName>", RequestContent.Create(data));
+Response response = client.UpdateEnvironment("<userId>", "<environmentName>", RequestContent.Create(data));
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("environmentType").ToString());
@@ -2327,7 +2108,7 @@ var data = new {
     },
 };
 
-Response response = client.UpdateEnvironment("<environmentName>", RequestContent.Create(data), <me>);
+Response response = client.UpdateEnvironment("<userId>", "<environmentName>", RequestContent.Create(data));
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -2347,11 +2128,11 @@ Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
       </Docs>
     </Member>
     <Member MemberName="UpdateEnvironmentAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; UpdateEnvironmentAsync (string environmentName, Azure.Core.RequestContent content, string userId = &quot;me&quot;, Azure.RequestContext context = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; UpdateEnvironmentAsync(string environmentName, class Azure.Core.RequestContent content, string userId, class Azure.RequestContext context) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.EnvironmentsClient.UpdateEnvironmentAsync(System.String,Azure.Core.RequestContent,System.String,Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function UpdateEnvironmentAsync (environmentName As String, content As RequestContent, Optional userId As String = &quot;me&quot;, Optional context As RequestContext = Nothing) As Task(Of Response)" />
-      <MemberSignature Language="F#" Value="abstract member UpdateEnvironmentAsync : string * Azure.Core.RequestContent * string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.UpdateEnvironmentAsync : string * Azure.Core.RequestContent * string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="environmentsClient.UpdateEnvironmentAsync (environmentName, content, userId, context)" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; UpdateEnvironmentAsync (string userId, string environmentName, Azure.Core.RequestContent content, Azure.RequestContext context = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; UpdateEnvironmentAsync(string userId, string environmentName, class Azure.Core.RequestContent content, class Azure.RequestContext context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Developer.DevCenter.EnvironmentsClient.UpdateEnvironmentAsync(System.String,System.String,Azure.Core.RequestContent,Azure.RequestContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function UpdateEnvironmentAsync (userId As String, environmentName As String, content As RequestContent, Optional context As RequestContext = Nothing) As Task(Of Response)" />
+      <MemberSignature Language="F#" Value="abstract member UpdateEnvironmentAsync : string * string * Azure.Core.RequestContent * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.UpdateEnvironmentAsync : string * string * Azure.Core.RequestContent * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="environmentsClient.UpdateEnvironmentAsync (userId, environmentName, content, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.DevCenter</AssemblyName>
@@ -2361,60 +2142,27 @@ Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
+        <Parameter Name="userId" Type="System.String" />
         <Parameter Name="environmentName" Type="System.String" />
         <Parameter Name="content" Type="Azure.Core.RequestContent" />
-        <Parameter Name="userId" Type="System.String" />
         <Parameter Name="context" Type="Azure.RequestContext" />
       </Parameters>
       <Docs>
+        <param name="userId"> The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. The default value is "me". </param>
         <param name="environmentName"> The name of the environment. </param>
-        <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
-        <param name="userId"> The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. </param>
+        <param name="content"> The content to send as the body of the request. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Partially updates an environment. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        <remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-<details><summary>Environment</summary>Schema for <c>Environment</c>:
-<code>{
-  name: string, # Optional. Environment name.
-  environmentType: string, # Required. Environment type.
-  user: string, # Optional. The AAD object id of the owner of this Environment.
-  provisioningState: string, # Optional. The provisioning state of the environment.
-  resourceGroupId: string, # Optional. The identifier of the resource group containing the environment's resources.
-  description: string, # Optional. Description of the Environment.
-  catalogName: string, # Optional. Name of the catalog.
-  catalogItemName: string, # Optional. Name of the catalog item.
-  parameters: AnyObject, # Optional. Parameters object for the deploy action
-  scheduledTasks: Dictionary&lt;string, ScheduledTask&gt;, # Optional. Set of supported scheduled tasks to help manage cost.
-  tags: Dictionary&lt;string, string&gt;, # Optional. Key value pairs that will be applied to resources deployed in this environment as tags.
-}
-</code></details>
-
-Response Body:
-
-Schema for <c>Environment</c>:
-<code>{
-  name: string, # Optional. Environment name.
-  environmentType: string, # Required. Environment type.
-  user: string, # Optional. The AAD object id of the owner of this Environment.
-  provisioningState: string, # Optional. The provisioning state of the environment.
-  resourceGroupId: string, # Optional. The identifier of the resource group containing the environment's resources.
-  description: string, # Optional. Description of the Environment.
-  catalogName: string, # Optional. Name of the catalog.
-  catalogItemName: string, # Optional. Name of the catalog item.
-  parameters: AnyObject, # Optional. Parameters object for the deploy action
-  scheduledTasks: Dictionary&lt;string, ScheduledTask&gt;, # Optional. Set of supported scheduled tasks to help manage cost.
-  tags: Dictionary&lt;string, string&gt;, # Optional. Key value pairs that will be applied to resources deployed in this environment as tags.
-}
-</code></remarks>
+        <summary>
+            [Protocol Method] Partially updates an environment
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
+        <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="environmentName" />, <paramref name="content" /> or <paramref name="userId" /> is null. </exception>
+          <paramref name="userId" />, <paramref name="environmentName" /> or <paramref name="content" /> is null. </exception>
         <exception cref="T:System.ArgumentException">
-          <paramref name="environmentName" /> or <paramref name="userId" /> is an empty string, and was expected to be non-empty. </exception>
+          <paramref name="userId" /> or <paramref name="environmentName" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
 This sample shows how to call UpdateEnvironmentAsync with required parameters and request content, and how to parse the result.
@@ -2427,7 +2175,7 @@ var data = new {
     environmentType = "<environmentType>",
 };
 
-Response response = await client.UpdateEnvironmentAsync("<environmentName>", RequestContent.Create(data));
+Response response = await client.UpdateEnvironmentAsync("<userId>", "<environmentName>", RequestContent.Create(data));
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("environmentType").ToString());
@@ -2458,7 +2206,7 @@ var data = new {
     },
 };
 
-Response response = await client.UpdateEnvironmentAsync("<environmentName>", RequestContent.Create(data), <me>);
+Response response = await client.UpdateEnvironmentAsync("<userId>", "<environmentName>", RequestContent.Create(data));
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
