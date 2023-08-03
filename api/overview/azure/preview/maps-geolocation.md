@@ -3,7 +3,7 @@ title: Azure Maps Geolocation SDK for .NET
 description: Reference for Azure Maps Geolocation SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 08/01/2023
+ms.data: 08/03/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: mapsgeolocation
