@@ -52,7 +52,7 @@ ResourceGroupResource resourceGroup = operation.Value;
 ```
 
 > [!div class="nextstepaction"]
-> [Explore the management APIs](/dotnet/api/overview/azure/resources/management)
+> [Explore the management APIs](/dotnet/api/overview/azure/resourcemanager-readme)
 
 
 ## Samples
