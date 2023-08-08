@@ -3,7 +3,7 @@ title:
 keywords: Azure, dotnet, SDK, API, Microsoft.Extensions.Azure, extensions
 author: jsquire
 ms.author: jsquire
-ms.date: 03/11/2023
+ms.date: 08/08/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: extensions
@@ -153,7 +153,7 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 
 
 <!-- LINKS -->
-[source_root]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Extensions.Azure_1.6.3/sdk/extensions/Microsoft.Extensions.Azure/src
+[source_root]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Extensions.Azure_1.7.0/sdk/extensions/Microsoft.Extensions.Azure/src
 [nuget]: https://www.nuget.org/
 [package]: https://www.nuget.org/packages/Microsoft.Extensions.Azure/
 [configuration]: /aspnet/core/fundamentals/configuration/?view=aspnetcore-3.0
