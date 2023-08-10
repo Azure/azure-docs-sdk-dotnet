@@ -3,7 +3,7 @@ title: Azure Resource Manager SDK for .NET
 description: Reference for Azure Resource Manager SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 08/03/2023
+ms.data: 08/09/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: resourcemanager
@@ -52,7 +52,7 @@ ResourceGroupResource resourceGroup = operation.Value;
 ```
 
 > [!div class="nextstepaction"]
-> [Explore the management APIs](/dotnet/api/overview/azure/resources/management)
+> [Explore the management APIs](/dotnet/api/overview/azure/resourcemanager-readme)
 
 
 ## Samples

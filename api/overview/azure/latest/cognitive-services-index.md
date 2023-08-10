@@ -6,7 +6,7 @@
 |[Text Analytics](ai.textanalytics-readme.md)|[Azure.AI.TextAnalytics](https://www.nuget.org/packages/Azure.AI.TextAnalytics)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/textanalytics/Azure.AI.TextAnalytics)|
 |[Document Translation](ai.translation.document-readme.md)|[Azure.AI.Translation.Document](https://www.nuget.org/packages/Azure.AI.Translation.Document)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/translation/Azure.AI.Translation.Document)|
 |Anomaly Detector|[Microsoft.Azure.CognitiveServices.AnomalyDetector](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.AnomalyDetector)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
-|Content Moderator|[Microsoft.Azure.CognitiveServices.ContentModerator](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.ContentModerator)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
+|Content Safety|[Microsoft.Azure.CognitiveServices.ContentModerator](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.ContentModerator)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |Question Answering|[Microsoft.Azure.CognitiveServices.Knowledge.QnAMaker](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.Knowledge.QnAMaker)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |LUIS Authoring|[Microsoft.Azure.CognitiveServices.Language.LUIS.Authoring](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.Language.LUIS.Authoring)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |LUIS Runtime|[Microsoft.Azure.CognitiveServices.Language.LUIS.Runtime](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.Language.LUIS.Runtime)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
