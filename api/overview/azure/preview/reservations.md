@@ -3,7 +3,7 @@ title: Azure Reservations SDK for .NET
 description: Reference for Azure Reservations SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 08/14/2023
+ms.data: 08/15/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: reservations
