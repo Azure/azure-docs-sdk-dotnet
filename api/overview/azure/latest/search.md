@@ -3,10 +3,10 @@ title: Azure Search SDK for .NET
 description: Reference for Azure Search SDK for .NET
 author: ShivangiReja
 ms.author: shreja
-ms.data: 08/15/2023
+ms.data: 08/16/2023
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: cognitive-search
+ms.service: search
 ms.date: 07/20/2020
 ---
 # Azure Cognitive Search libraries for .NET
