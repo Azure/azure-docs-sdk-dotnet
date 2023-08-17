@@ -3,7 +3,7 @@ title: Azure ExpressRoute SDK for .NET
 description: Reference for Azure ExpressRoute SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 08/16/2023
+ms.data: 08/17/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: expressroute
