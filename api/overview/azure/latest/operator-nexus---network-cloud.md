@@ -8,6 +8,6 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: operatornexus-networkcloud
 ---
-# Azure Operator Nexus - Network Cloud SDK for .NET - preview
-## Packages - preview
+# Azure Operator Nexus - Network Cloud SDK for .NET - latest
+## Packages - latest
 [!INCLUDE [packages](operator-nexus---network-cloud-index.md)]
