@@ -1,6 +1,6 @@
 ---
-title: Azure API Management SDK for .NET
-description: Reference for Azure API Management SDK for .NET
+title: Azure Api Management SDK for .NET
+description: Reference for Azure Api Management SDK for .NET
 author: pallavit
 ms.author: pallavit
 ms.data: 08/23/2023
