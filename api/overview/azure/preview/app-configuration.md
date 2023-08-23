@@ -3,10 +3,10 @@ title: Azure App Configuration SDK for .NET
 description: Reference for Azure App Configuration SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 08/22/2023
+ms.data: 08/23/2023
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: azure-app-configuration
+ms.service: appconfiguration
 ---
 # Azure App Configuration SDK for .NET - preview
 ## Packages - preview
