@@ -3,7 +3,7 @@ title: Azure Network SDK for .NET
 description: Reference for Azure Network SDK for .NET
 author: aznetsuppgithub
 ms.author: aznetsuppgithub
-ms.data: 08/24/2023
+ms.data: 08/25/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: network
