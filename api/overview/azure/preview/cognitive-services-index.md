@@ -10,7 +10,7 @@
 |[Text Analytics](ai.textanalytics-readme.md)|[Azure.AI.TextAnalytics](https://www.nuget.org/packages/Azure.AI.TextAnalytics)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/textanalytics/Azure.AI.TextAnalytics)|
 |[Document Translation](ai.translation.document-readme.md)|[Azure.AI.Translation.Document](https://www.nuget.org/packages/Azure.AI.Translation.Document)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/translation/Azure.AI.Translation.Document)|
 |[Text Translation](ai.translation.text-readme.md)|[Azure.AI.Translation.Text](https://www.nuget.org/packages/Azure.AI.Translation.Text)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/translation/Azure.AI.Translation.Text)|
-|Vision Core|[Azure.AI.Vision.Core](https://www.nuget.org/packages/Azure.AI.Vision.Core)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
+|Vision Common|[Azure.AI.Vision.Common](https://www.nuget.org/packages/Azure.AI.Vision.Common)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |Image Analysis|[Azure.AI.Vision.ImageAnalysis](https://www.nuget.org/packages/Azure.AI.Vision.ImageAnalysis)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |Form Recognizer|[Microsoft.Azure.CognitiveServices.FormRecognizer](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.FormRecognizer)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |Question Answering|[Microsoft.Azure.CognitiveServices.Knowledge.QnAMaker](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.Knowledge.QnAMaker)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
