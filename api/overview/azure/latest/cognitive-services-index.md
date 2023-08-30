@@ -7,7 +7,6 @@
 |[Document Translation](ai.translation.document-readme.md)|[Azure.AI.Translation.Document](https://www.nuget.org/packages/Azure.AI.Translation.Document)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/translation/Azure.AI.Translation.Document)|
 |Anomaly Detector|[Microsoft.Azure.CognitiveServices.AnomalyDetector](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.AnomalyDetector)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |Content Safety|[Microsoft.Azure.CognitiveServices.ContentModerator](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.ContentModerator)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
-|Question Answering|[Microsoft.Azure.CognitiveServices.Knowledge.QnAMaker](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.Knowledge.QnAMaker)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |LUIS Authoring|[Microsoft.Azure.CognitiveServices.Language.LUIS.Authoring](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.Language.LUIS.Authoring)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |LUIS Runtime|[Microsoft.Azure.CognitiveServices.Language.LUIS.Runtime](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.Language.LUIS.Runtime)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |Spell Check|[Microsoft.Azure.CognitiveServices.Language.SpellCheck](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.Language.SpellCheck)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
@@ -20,4 +19,3 @@
 |Speech Remote Conversation|[Microsoft.CognitiveServices.Speech.Remoteconversation](https://www.nuget.org/packages/Microsoft.CognitiveServices.Speech.Remoteconversation)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |Speech Xamarin iOS|[Microsoft.CognitiveServices.Speech.Xamarin.iOS](https://www.nuget.org/packages/Microsoft.CognitiveServices.Speech.Xamarin.iOS)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
 |[Resource Management - Cognitive Services](resourcemanager.cognitiveservices-readme.md)|[Azure.ResourceManager.CognitiveServices](https://www.nuget.org/packages/Azure.ResourceManager.CognitiveServices)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/cognitiveservices/Azure.ResourceManager.CognitiveServices)|
-|Management - Cognitive Services|[Microsoft.Azure.Management.CognitiveServices](https://www.nuget.org/packages/Microsoft.Azure.Management.CognitiveServices)|[GitHub](https://github.com/Azure/azure-sdk-for-net)|
