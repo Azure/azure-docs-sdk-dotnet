@@ -3,7 +3,7 @@ title: Azure Batch SDK for .NET
 description: Reference for Azure Batch SDK for .NET
 author: jingjlii
 ms.author: jingjli
-ms.data: 09/01/2023
+ms.data: 09/04/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: batch

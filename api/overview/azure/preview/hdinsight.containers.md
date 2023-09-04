@@ -3,7 +3,7 @@ title: Azure Hdinsight.Containers SDK for .NET
 description: Reference for Azure Hdinsight.Containers SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 09/01/2023
+ms.data: 09/04/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: hdinsight.containers
