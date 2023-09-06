@@ -3,12 +3,12 @@ title: Azure Communication JobRouter client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Communication.JobRouter, communication
 author: acsdevx-msft
 ms.author: acsdevx-msft
-ms.date: 07/27/2023
+ms.date: 09/06/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: communication
 ---
-# Azure Communication JobRouter client library for .NET - version 1.0.0-beta.1 
+# Azure Communication JobRouter client library for .NET - version 1.0.0-beta.2 
 
 
 This package contains a C# SDK for Azure Communication Services for JobRouter.
@@ -283,12 +283,12 @@ This project has adopted the [Microsoft Open Source Code of Conduct][coc]. For m
 [communication_resource_create_power_shell]: /powershell/module/az.communication/new-azcommunicationservice
 [communication_resource_create_net]: /azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-net
 [nextsteps]:/azure/communication-services/concepts/router/concepts
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Communication.JobRouter_1.0.0-beta.1/sdk/communication/Azure.Communication.JobRouter/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Communication.JobRouter_1.0.0-beta.2/sdk/communication/Azure.Communication.JobRouter/src
 [product_docs]: /azure/communication-services/overview
 [classification_concepts]: /azure/communication-services/concepts/router/classification-concepts
 [subscribe_events]: /azure/communication-services/how-tos/router-sdk/subscribe-events
 [offer_issued_event_schema]: /azure/communication-services/how-tos/router-sdk/subscribe-events#microsoftcommunicationrouterworkerofferissued
-[deserialize_event_grid_event_data]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Communication.JobRouter_1.0.0-beta.1/sdk/eventgrid/Azure.Messaging.EventGrid#receiving-and-deserializing-events
+[deserialize_event_grid_event_data]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Communication.JobRouter_1.0.0-beta.2/sdk/eventgrid/Azure.Messaging.EventGrid#receiving-and-deserializing-events
 [event_grid_event_handlers]: /azure/event-grid/event-handlers
 [webhook_event_grid_event_delivery]: /azure/event-grid/webhook-event-delivery
 [nuget_link]: https://www.nuget.org
