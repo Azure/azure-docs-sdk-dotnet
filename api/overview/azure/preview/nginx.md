@@ -3,7 +3,7 @@ title: Azure Nginx SDK for .NET
 description: Reference for Azure Nginx SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 09/12/2023
+ms.data: 09/14/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: nginx

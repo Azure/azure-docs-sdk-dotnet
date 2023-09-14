@@ -3,7 +3,7 @@ title: Azure Compute SDK for .NET
 description: Reference for Azure Compute SDK for .NET
 author: bilaakpan-ms
 ms.author: saakpan
-ms.data: 09/12/2023
+ms.data: 09/14/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: compute

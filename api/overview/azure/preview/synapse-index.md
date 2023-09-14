@@ -7,4 +7,3 @@
 |[Synapse - Spark](analytics.synapse.spark-readme.md)|[Azure.Analytics.Synapse.Spark](https://www.nuget.org/packages/Azure.Analytics.Synapse.Spark)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/synapse/Azure.Analytics.Synapse.Spark)|
 |Synapse Analytics|[Microsoft.Azure.Synapse](https://www.nuget.org/packages/Microsoft.Azure.Synapse)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/)|
 |[Resource Management - Synapse](resourcemanager.synapse-readme.md)|[Azure.ResourceManager.Synapse](https://www.nuget.org/packages/Azure.ResourceManager.Synapse)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/synapse/Azure.ResourceManager.Synapse)|
-|Management - Synapse|[Microsoft.Azure.Management.Synapse](https://www.nuget.org/packages/Microsoft.Azure.Management.Synapse)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/)|
