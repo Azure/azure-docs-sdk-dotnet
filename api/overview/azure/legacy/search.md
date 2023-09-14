@@ -6,7 +6,7 @@ ms.author: shreja
 ms.data: 09/14/2023
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: cognitive-search
+ms.service: search
 ---
 # Azure Search SDK for .NET - legacy
 ## Packages - legacy
