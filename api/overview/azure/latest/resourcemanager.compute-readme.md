@@ -3,7 +3,7 @@ title:
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.Compute, compute
 author: bilaakpan-ms
 ms.author: saakpan
-ms.date: 02/15/2023
+ms.date: 09/15/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: compute
@@ -42,13 +42,12 @@ The default option to create an authenticated client is to use `DefaultAzureCred
 
 To authenticate to Azure and create an `ArmClient`, do the following code:
 
-```C# Snippet:Readme_AuthClient
+```C# Snippet:Readme_AuthClient_Namespaces
 using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
-
-// Code omitted for brevity
-
+```
+```C# Snippet:Readme_AuthClient
 ArmClient armClient = new ArmClient(new DefaultAzureCredential());
 ```
 
@@ -56,7 +55,7 @@ More documentation for the `Azure.Identity.DefaultAzureCredential` class can be 
 
 ## Key concepts
 
-Key concepts of the Azure .NET SDK can be found [here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.1.0/sdk/resourcemanager/Azure.ResourceManager/README.md#key-concepts)
+Key concepts of the Azure .NET SDK can be found [here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.2.0/sdk/resourcemanager/Azure.ResourceManager/README.md#key-concepts)
 
 ## Examples
 
@@ -188,7 +187,7 @@ AvailabilitySetResource availabilitySet = await availabilitySetCollection.GetAsy
 AvailabilitySetResource updatedAvailabilitySet = await availabilitySet.AddTagAsync("key", "value");
 ```
 
-For more detailed examples, take a look at [samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.ResourceManager.Compute_1.1.0/sdk/compute/Azure.ResourceManager.Compute/samples) we have available.
+For more detailed examples, take a look at [samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.ResourceManager.Compute_1.2.0/sdk/compute/Azure.ResourceManager.Compute/samples) we have available.
 
 ## Troubleshooting
 
@@ -199,8 +198,8 @@ For more detailed examples, take a look at [samples](https://github.com/Azure/az
 
 ### More sample code
 
-- [Managing Disks](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.1.0/sdk/compute/Azure.ResourceManager.Compute/samples/Sample1_ManagingDisks.md)
-- [Managing Virtual Machines](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.1.0/sdk/compute/Azure.ResourceManager.Compute/samples/Sample2_ManagingVirtualMachines.md)
+- [Managing Disks](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.2.0/sdk/compute/Azure.ResourceManager.Compute/samples/Sample1_ManagingDisks.md)
+- [Managing Virtual Machines](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.2.0/sdk/compute/Azure.ResourceManager.Compute/samples/Sample2_ManagingVirtualMachines.md)
 
 ### More Documentation
 
@@ -227,7 +226,7 @@ more information, see the [Code of Conduct FAQ][coc_faq] or contact
 <opencode@microsoft.com> with any other questions or comments.
 
 <!-- LINKS -->
-[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.1.0/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
+[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Compute_1.2.0/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 
