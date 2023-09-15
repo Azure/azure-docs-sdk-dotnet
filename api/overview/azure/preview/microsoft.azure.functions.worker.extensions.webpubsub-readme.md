@@ -3,12 +3,12 @@ title: Azure Web PubSub extension of isolated-process Azure Functions client lib
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.Functions.Worker.Extensions.WebPubSub, webpubsub
 author: vicancy
 ms.author: lianwei
-ms.date: 05/04/2023
+ms.date: 09/15/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: webpubsub
 ---
-# Azure Web PubSub extension of isolated-process Azure Functions client library for .NET - version 1.5.0-beta.1 
+# Azure Web PubSub extension of isolated-process Azure Functions client library for .NET - version 1.7.0-beta.1 
 
 
 This extension defines the binding types and triggers in the .NET isolated worker process for Azure Functions, allowing you to write functions that respond to any event published to Web PubSub.
@@ -166,10 +166,10 @@ additional questions or comments.
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fsearch%2FMicrosoft.Azure.Functions.Worker.Extensions.WebPubSub%2FREADME.png)
 
 <!-- LINKS -->
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.Functions.Worker.Extensions.WebPubSub_1.5.0-beta.1/sdk/webpubsub/Microsoft.Azure.Functions.Worker.Extensions.WebPubSub/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.Functions.Worker.Extensions.WebPubSub_1.7.0-beta.1/sdk/webpubsub/Microsoft.Azure.Functions.Worker.Extensions.WebPubSub/src
 <!-- [package] TODO: add after initial release -->
 <!-- [api_docs] TODO: add after initial release -->
-[samples]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.Functions.Worker.Extensions.WebPubSub_1.5.0-beta.1/sdk/webpubsub/Microsoft.Azure.Functions.Worker.Extensions.WebPubSub/samples
+[samples]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.Functions.Worker.Extensions.WebPubSub_1.7.0-beta.1/sdk/webpubsub/Microsoft.Azure.Functions.Worker.Extensions.WebPubSub/samples
 [nuget]: https://www.nuget.org/
 [free_subs]: https://azure.microsoft.com/free/dotnet/
 [portal]: https://portal.azure.com/
@@ -180,7 +180,7 @@ additional questions or comments.
 [func_intro]: https://learn.microsoft.com/azure/azure-functions/functions-overview
 [create]: https://learn.microsoft.com/azure/azure-functions/functions-overview
 
-[contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.Functions.Worker.Extensions.WebPubSub_1.5.0-beta.1/CONTRIBUTING.md
+[contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.Functions.Worker.Extensions.WebPubSub_1.7.0-beta.1/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
