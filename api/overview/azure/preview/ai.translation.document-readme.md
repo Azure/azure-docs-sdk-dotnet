@@ -433,7 +433,7 @@ To create an Azure SDK log listener that outputs messages to console use AzureEv
 
 ```
 // Setup a listener to monitor logged events.
-using AzureEventSourceListener listener = AzureEventSourceListener.CreateConsoleLogger();
+using AzureEventSourceListener listener = AzureEventSourceListener.CreateConsoleLogger(level: EventLevel.Informational);
 ```
 
 To learn more about other logging mechanisms see [here][logging].

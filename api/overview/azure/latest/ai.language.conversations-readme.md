@@ -515,7 +515,7 @@ The simplest way to see the logs is to enable console logging. To create an Azur
 
 ```C#
 // Setup a listener to monitor logged events.
-using AzureEventSourceListener listener = AzureEventSourceListener.CreateConsoleLogger();
+using AzureEventSourceListener listener = AzureEventSourceListener.CreateConsoleLogger(level: EventLevel.Informational);
 ```
 
 To learn more about other logging mechanisms see [here][core_logging].

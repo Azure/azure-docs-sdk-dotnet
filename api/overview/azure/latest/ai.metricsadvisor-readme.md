@@ -549,7 +549,7 @@ To create an Azure SDK log listener that outputs messages to the console use the
 
 ```C#
 // Set up a listener to monitor logged events.
-using AzureEventSourceListener listener = AzureEventSourceListener.CreateConsoleLogger();
+using AzureEventSourceListener listener = AzureEventSourceListener.CreateConsoleLogger(level: EventLevel.Informational);
 ```
 
 To learn more about other logging mechanisms see [Diagnostics Samples][logging].

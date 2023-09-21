@@ -363,10 +363,26 @@ To create an Azure SDK log listener that outputs messages to console use the Azu
 
 ```C#
 // Setup a listener to monitor logged events.
-using AzureEventSourceListener listener = AzureEventSourceListener.CreateConsoleLogger();
+using AzureEventSourceListener listener = AzureEventSourceListener.CreateConsoleLogger(level: EventLevel.Informational);
 ```
 
 To learn more about other logging mechanisms see [Diagnostics Samples][logging].
+
+#### Loggging request and response content
+
+To log the content of requests and responses set `IsLoggingContentEnabled` to true when creating the client. 
+
+```
+ContentSafetyClientOptions options = new () 
+{ 
+    Diagnostics = 
+    { 
+        IsLoggingContentEnabled = true 
+    }
+};
+
+ContentSafetyClient client = new(endpoint, credential, options);
+```
 
 ## Next steps
 

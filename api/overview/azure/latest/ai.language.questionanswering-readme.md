@@ -326,10 +326,26 @@ The simplest way to see the logs is to enable console logging. To create an Azur
 
 ```C#
 // Setup a listener to monitor logged events.
-using AzureEventSourceListener listener = AzureEventSourceListener.CreateConsoleLogger();
+using AzureEventSourceListener listener = AzureEventSourceListener.CreateConsoleLogger(level: EventLevel.Informational);
 ```
 
 To learn more about other logging mechanisms see [here][core_logging].
+
+#### Loggging request and response content
+
+To log the content of requests and responses set `IsLoggingContentEnabled` to true when creating the client. 
+
+```
+QuestionAnsweringClientOptions options = new() 
+{ 
+    Diagnostics = 
+    { 
+        IsLoggingContentEnabled = true 
+    }
+};
+
+QuestionAnsweringClient client = new(endpoint, credential, options);
+```
 
 ## Next steps
 
