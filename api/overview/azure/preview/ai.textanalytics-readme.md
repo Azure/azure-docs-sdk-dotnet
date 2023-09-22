@@ -753,12 +753,11 @@ using AzureEventSourceListener listener = AzureEventSourceListener.CreateConsole
 
 To learn more about other logging mechanisms see [here][logging].
 
-#### Loggging request and response content
+#### Logging request and response content
 
-To log the content of requests and responses set `IsLoggingContentEnabled` to true when creating the client. 
+To log the content of requests and responses set `IsLoggingContentEnabled` to true when creating the client and set the log level to verbose.
 
-
-```
+```C#
 TextAnalyticsClientOptions options = new() 
 { 
     Diagnostics = 
@@ -768,6 +767,8 @@ TextAnalyticsClientOptions options = new()
 };
 
 TextAnalyticsClient client = new(endpoint, credential, options);
+
+using AzureEventSourceListener listener = AzureEventSourceListener.CreateTraceLogger(level: EventLevel.Verbose);
 ```
 
 ## Next steps
@@ -870,4 +871,3 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [coc_contact]: mailto:opencode@microsoft.com
-

@@ -368,12 +368,12 @@ using AzureEventSourceListener listener = AzureEventSourceListener.CreateConsole
 
 To learn more about other logging mechanisms see [Diagnostics Samples][logging].
 
-#### Loggging request and response content
+#### Logging request and response content
 
-To log the content of requests and responses set `IsLoggingContentEnabled` to true when creating the client. 
+To log the content of requests and responses set `IsLoggingContentEnabled` to true when creating the client and set the log level to verbose.
 
-```
-ContentSafetyClientOptions options = new () 
+```C#
+ContentSafetyClientOptions options = new() 
 { 
     Diagnostics = 
     { 
@@ -382,6 +382,8 @@ ContentSafetyClientOptions options = new ()
 };
 
 ContentSafetyClient client = new(endpoint, credential, options);
+
+using AzureEventSourceListener listener = AzureEventSourceListener.CreateTraceLogger(level: EventLevel.Verbose);
 ```
 
 ## Next steps
