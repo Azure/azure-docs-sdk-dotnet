@@ -1,0 +1,320 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="Azure.Response?alt=Azure.Response&text=Response" data-throw-if-not-resolved="True"/>
+    description: The response returned from the service.
+  parameters:
+  - namesWithMoniker:
+    - value: content
+    description: The content to send as the body of the request.
+    type: <xref href="Azure.Core.RequestContent?alt=Azure.Core.RequestContent&text=RequestContent" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">content</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.AI.Language.Conversations.ConversationAnalysisClient.AnalyzeConversation(Azure.Core.RequestContent,Azure.RequestContext)
+  commentId: M:Azure.AI.Language.Conversations.ConversationAnalysisClient.AnalyzeConversation(Azure.Core.RequestContent,Azure.RequestContext)
+  name: AnalyzeConversation(RequestContent, RequestContext)
+  fullName: Azure.AI.Language.Conversations.ConversationAnalysisClient.AnalyzeConversation(RequestContent, RequestContext)
+  nameWithType: ConversationAnalysisClient.AnalyzeConversation(RequestContent, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual Azure.Response AnalyzeConversation (Azure.Core.RequestContent content, Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member AnalyzeConversation : Azure.Core.RequestContent * Azure.RequestContext -> Azure.Response
+
+        override this.AnalyzeConversation : Azure.Core.RequestContent * Azure.RequestContext -> Azure.Response
+  - lang: vb
+    values:
+    - value: Public Overridable Function AnalyzeConversation (content As RequestContent, Optional context As RequestContext = Nothing) As Response
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview
+  summary: >-
+    [Protocol Method] Analyzes the input conversation utterance.
+
+    <ul><li>
+
+    This <a href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</a> allows explicit creation of the request and processing of the response for advanced scenarios.
+
+    </li></ul>
+  remarks: '<p>Additional information can be found in the service REST API documentation: https://learn.microsoft.com/rest/api/language/2023-04-01/conversation-analysis-runtime/analyze-conversation</p>'
+  examples: >-
+    This sample shows how to call AnalyzeConversation with required request content, and how to parse the result.
+
+
+    ```
+
+    var credential = new AzureKeyCredential("<key>");
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new ConversationAnalysisClient(endpoint, credential);
+
+
+    var data = new {
+        analysisInput = new {
+            conversationItem = new {
+                text = "<text>",
+                id = "<id>",
+                participantId = "<participantId>",
+            },
+        },
+        parameters = new {
+            projectName = "<projectName>",
+            deploymentName = "<deploymentName>",
+        },
+        kind = "Conversation",
+    };
+
+
+    Response response = client.AnalyzeConversation(RequestContent.Create(data));
+
+
+    JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+
+    Console.WriteLine(result.GetProperty("kind").ToString());
+
+    ```
+
+    This sample shows how to call AnalyzeConversation with all request content, and how to parse the result.
+
+
+    ```
+
+    var credential = new AzureKeyCredential("<key>");
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new ConversationAnalysisClient(endpoint, credential);
+
+
+    var data = new {
+        analysisInput = new {
+            conversationItem = new {
+                text = "<text>",
+                id = "<id>",
+                participantId = "<participantId>",
+                language = "<language>",
+                modality = "transcript",
+                role = "agent",
+            },
+        },
+        parameters = new {
+            projectName = "<projectName>",
+            deploymentName = "<deploymentName>",
+            verbose = true,
+            isLoggingEnabled = true,
+            stringIndexType = "Utf16CodeUnit",
+            directTarget = "<directTarget>",
+            targetProjectParameters = new {
+                key = new {
+                    query = "<query>",
+                    callingOptions = new {
+                        verbose = true,
+                        log = true,
+                        show_all_intents = true,
+                        timezoneOffset = 123.45f,
+                        spellCheck = true,
+                        bing_spell_check_subscription_key = "<bing-spell-check-subscription-key>",
+                    },
+                    targetProjectKind = "Luis",
+                    apiVersion = "<apiVersion>",
+                },
+            },
+        },
+        kind = "Conversation",
+    };
+
+
+    Response response = client.AnalyzeConversation(RequestContent.Create(data));
+
+
+    JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+
+    Console.WriteLine(result.GetProperty("kind").ToString());
+
+    ```
+  metadata: {}
+- returnsWithMoniker:
+    type:
+    - value: <xref href="Azure.Operation`1?alt=Azure.Operation&text=Operation" data-throw-if-not-resolved="True"/>&lt;<xref href="System.BinaryData?alt=System.BinaryData&text=BinaryData" data-throw-if-not-resolved="True"/>&gt;
+    description: The <xref data-throw-if-not-resolved="true" uid="Azure.Operation`1"></xref> from the service that will contain a <xref data-throw-if-not-resolved="true" uid="System.BinaryData"></xref> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below.
+  parameters:
+  - namesWithMoniker:
+    - value: waitUntil
+    description: <xref data-throw-if-not-resolved="true" uid="Azure.WaitUntil.Completed"></xref> if the method should wait to return until the long-running operation has completed on the service; <xref data-throw-if-not-resolved="true" uid="Azure.WaitUntil.Started"></xref> if it should return after starting the operation. For more information on long-running operations, please see <a href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</a>.
+    type: <xref href="Azure.WaitUntil?alt=Azure.WaitUntil&text=WaitUntil" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: content
+    description: The content to send as the body of the request. Details of the request body schema are in the Remarks section below.
+    type: <xref href="Azure.Core.RequestContent?alt=Azure.Core.RequestContent&text=RequestContent" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">content</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.AI.Language.Conversations.ConversationAnalysisClient.AnalyzeConversation(Azure.WaitUntil,Azure.Core.RequestContent,Azure.RequestContext)
+  commentId: M:Azure.AI.Language.Conversations.ConversationAnalysisClient.AnalyzeConversation(Azure.WaitUntil,Azure.Core.RequestContent,Azure.RequestContext)
+  name: AnalyzeConversation(WaitUntil, RequestContent, RequestContext)
+  fullName: Azure.AI.Language.Conversations.ConversationAnalysisClient.AnalyzeConversation(WaitUntil, RequestContent, RequestContext)
+  nameWithType: ConversationAnalysisClient.AnalyzeConversation(WaitUntil, RequestContent, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual Azure.Operation<BinaryData> AnalyzeConversation (Azure.WaitUntil waitUntil, Azure.Core.RequestContent content, Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member AnalyzeConversation : Azure.WaitUntil * Azure.Core.RequestContent * Azure.RequestContext -> Azure.Operation<BinaryData>
+
+        override this.AnalyzeConversation : Azure.WaitUntil * Azure.Core.RequestContent * Azure.RequestContext -> Azure.Operation<BinaryData>
+  - lang: vb
+    values:
+    - value: Public Overridable Function AnalyzeConversation (waitUntil As WaitUntil, content As RequestContent, Optional context As RequestContext = Nothing) As Operation(Of BinaryData)
+  monikers:
+  - azure-dotnet-preview
+  summary: Submit a collection of conversations for analysis. Specify one or more unique tasks to be executed.
+  remarks: >-
+    <p>Below is the JSON schema for the request and response payloads.</p><p>Request Body:</p><p>Schema for <code data-dev-comment-type="c">AnalyzeConversationJobsInput</code>: 
+
+
+    ```
+
+    {
+                   displayName: string, # Optional. Optional display name for the analysis job.
+                   analysisInput: {
+                     conversations: [
+                       {
+                         id: string, # Required. Unique identifier for the conversation.
+                         language: string, # Required. The language of the conversation item in BCP-47 format.
+                         modality: "transcript" | "text", # Required. Enumeration of supported conversational modalities.
+                         domain: "finance" | "healthcare" | "generic", # Optional. Enumeration of supported conversational domains.
+                       }
+                     ], # Required.
+                   }, # Required.
+                   tasks: [
+                     {
+                       taskName: string, # Optional.
+                       kind: "ConversationalPIITask" | "ConversationalSummarizationTask", # Required. Enumeration of supported analysis tasks on a collection of conversations.
+                     }
+                   ], # Required. The set of tasks to execute on the input conversation.
+                 }
+    ```
+
+    </p><p>Response Body:</p><p>Schema for <code data-dev-comment-type="c">AnalyzeConversationJobState</code>: 
+
+
+    ```
+
+    {
+                   displayName: string, # Optional.
+                   createdDateTime: string (ISO 8601 Format), # Required.
+                   expirationDateTime: string (ISO 8601 Format), # Optional.
+                   jobId: string, # Required.
+                   lastUpdatedDateTime: string (ISO 8601 Format), # Required.
+                   status: "notStarted" | "running" | "succeeded" | "partiallyCompleted" | "failed" | "cancelled" | "cancelling", # Required.
+                   errors: [
+                     {
+                       code: "InvalidRequest" | "InvalidArgument" | "Unauthorized" | "Forbidden" | "NotFound" | "ProjectNotFound" | "OperationNotFound" | "AzureCognitiveSearchNotFound" | "AzureCognitiveSearchIndexNotFound" | "TooManyRequests" | "AzureCognitiveSearchThrottling" | "AzureCognitiveSearchIndexLimitReached" | "InternalServerError" | "ServiceUnavailable" | "Timeout" | "QuotaExceeded" | "Conflict" | "Warning", # Required. One of a server-defined set of error codes.
+                       message: string, # Required. A human-readable representation of the error.
+                       target: string, # Optional. The target of the error.
+                       details: [Error], # Optional. An array of details about specific errors that led to this reported error.
+                       innererror: {
+                         code: "InvalidRequest" | "InvalidParameterValue" | "KnowledgeBaseNotFound" | "AzureCognitiveSearchNotFound" | "AzureCognitiveSearchThrottling" | "ExtractionFailure" | "InvalidRequestBodyFormat" | "EmptyRequest" | "MissingInputDocuments" | "InvalidDocument" | "ModelVersionIncorrect" | "InvalidDocumentBatch" | "UnsupportedLanguageCode" | "InvalidCountryHint", # Required. One of a server-defined set of error codes.
+                         message: string, # Required. Error message.
+                         details: Dictionary<string, string>, # Optional. Error details.
+                         target: string, # Optional. Error target.
+                         innererror: InnerErrorModel, # Optional. An object containing more specific information than the current object about the error.
+                       }, # Optional. An object containing more specific information than the current object about the error.
+                     }
+                   ], # Optional.
+                   nextLink: string, # Optional.
+                   tasks: {
+                     completed: number, # Required. Count of tasks completed successfully.
+                     failed: number, # Required. Count of tasks that failed.
+                     inProgress: number, # Required. Count of tasks in progress currently.
+                     total: number, # Required. Total count of tasks submitted as part of the job.
+                     items: [
+                       {
+                         lastUpdateDateTime: string (ISO 8601 Format), # Required. The last updated time in UTC for the task.
+                         status: "notStarted" | "running" | "succeeded" | "failed" | "cancelled" | "cancelling", # Required. The status of the task at the mentioned last update time.
+                         taskName: string, # Optional.
+                         kind: "ConversationalPIIResults" | "ConversationalSummarizationResults", # Required. Enumeration of supported Conversation Analysis task results.
+                       }
+                     ], # Optional. List of results from tasks (if available).
+                   }, # Required.
+                   statistics: {
+                     transactionsCount: number, # Required. Number of transactions for the request.
+                     conversationsCount: number, # Required. Number of conversations submitted in the request.
+                     validConversationsCount: number, # Required. Number of conversations documents. This excludes empty, over-size limit or non-supported languages documents.
+                     erroneousConversationsCount: number, # Required. Number of invalid documents. This includes empty, over-size limit or non-supported languages documents.
+                   }, # Optional. if showStats=true was specified in the request this field will contain information about the request payload.
+                 }
+    ```
+
+    </p>
+  metadata: {}
+uid: Azure.AI.Language.Conversations.ConversationAnalysisClient.AnalyzeConversation*
+commentId: Overload:Azure.AI.Language.Conversations.ConversationAnalysisClient.AnalyzeConversation
+namespace: Azure.AI.Language.Conversations
+name: AnalyzeConversation
+fullName: Azure.AI.Language.Conversations.ConversationAnalysisClient.AnalyzeConversation
+nameWithType: ConversationAnalysisClient.AnalyzeConversation
+assembliesWithMoniker:
+- value: Azure.AI.Language.Conversations.dll
+packagesWithMoniker:
+- value: Azure.AI.Language.Conversations v1.1.0
+  monikers:
+  - azure-dotnet
+- value: Azure.AI.Language.Conversations v1.1.0-beta.2
+  monikers:
+  - azure-dotnet-preview
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.AI.Language.Conversations.ConversationAnalysisClient.AnalyzeConversation
+  api_location:
+  - Azure.AI.Language.Conversations.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.AI.Language.Conversations.ConversationAnalysisClient.AnalyzeConversation
+  - Azure::AI::Language::Conversations::ConversationAnalysisClient::AnalyzeConversation
+  - AnalyzeConversation
+  - ConversationAnalysisClient.AnalyzeConversation
+  - ConversationAnalysisClient::AnalyzeConversation
+  helpviewer_keywords:
+  - ConversationAnalysisClient.AnalyzeConversation method [.NET]
+  - AnalyzeConversation method [.NET], class ConversationAnalysisClient
+  - ConversationAnalysisClient.AnalyzeConversation(RequestContent, RequestContext) method [.NET]
+  - AnalyzeConversation(RequestContent, RequestContext) method [.NET], class ConversationAnalysisClient
+  - ConversationAnalysisClient.AnalyzeConversation(WaitUntil, RequestContent, RequestContext) method [.NET]
+  - AnalyzeConversation(WaitUntil, RequestContent, RequestContext) method [.NET], class ConversationAnalysisClient
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview

@@ -1,0 +1,179 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="Azure.AsyncPageable`1?alt=Azure.AsyncPageable&text=AsyncPageable" data-throw-if-not-resolved="True"/>&lt;<xref href="System.BinaryData?alt=System.BinaryData&text=BinaryData" data-throw-if-not-resolved="True"/>&gt;
+    description: The <xref data-throw-if-not-resolved="true" uid="Azure.AsyncPageable`1"></xref> from the service containing a list of <xref data-throw-if-not-resolved="true" uid="System.BinaryData"></xref> objects. Details of the body schema for each item in the collection are in the Remarks section below.
+  parameters:
+  - namesWithMoniker:
+    - value: timeWindow
+    description: 'Time window of filtering items. Allowed values: "1d" | "7d" | "30d" | "90d".'
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: orderby
+    description: 'The key word which used to sort the results. Allowed values: "status desc" | "status asc" | "requestor desc" | "requestor asc" | "startTime desc" | "startTime asc" | "createdTime desc" | "createdTime asc".'
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: runStatuses
+    description: Filter workflow runs by workflow run status.
+    type: <xref href="System.Collections.Generic.IEnumerable`1?alt=System.Collections.Generic.IEnumerable&text=IEnumerable" data-throw-if-not-resolved="True"/>&lt;<xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>&gt;
+  - namesWithMoniker:
+    - value: workflowIds
+    description: Filter items by workflow id list.
+    type: <xref href="System.Collections.Generic.IEnumerable`1?alt=System.Collections.Generic.IEnumerable&text=IEnumerable" data-throw-if-not-resolved="True"/>&lt;<xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>&gt;
+  - namesWithMoniker:
+    - value: maxpagesize
+    description: The maximum page size to get the items at one time.
+    type: <xref href="System.Nullable`1?alt=System.Nullable&text=Nullable" data-throw-if-not-resolved="True"/>&lt;<xref href="System.Int32?alt=System.Int32&text=Int32" data-throw-if-not-resolved="True"/>&gt;
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.GetWorkflowRunsAsync(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},Azure.RequestContext)
+  commentId: M:Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.GetWorkflowRunsAsync(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},Azure.RequestContext)
+  name: GetWorkflowRunsAsync(String, String, IEnumerable<String>, IEnumerable<String>, Nullable<Int32>, RequestContext)
+  fullName: Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.GetWorkflowRunsAsync(String, String, IEnumerable<String>, IEnumerable<String>, Nullable<Int32>, RequestContext)
+  nameWithType: PurviewWorkflowServiceClient.GetWorkflowRunsAsync(String, String, IEnumerable<String>, IEnumerable<String>, Nullable<Int32>, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual Azure.AsyncPageable<BinaryData> GetWorkflowRunsAsync (string timeWindow = default, string orderby = default, System.Collections.Generic.IEnumerable<string> runStatuses = default, System.Collections.Generic.IEnumerable<string> workflowIds = default, int? maxpagesize = default, Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member GetWorkflowRunsAsync : string * string * seq<string> * seq<string> * Nullable<int> * Azure.RequestContext -> Azure.AsyncPageable<BinaryData>
+
+        override this.GetWorkflowRunsAsync : string * string * seq<string> * seq<string> * Nullable<int> * Azure.RequestContext -> Azure.AsyncPageable<BinaryData>
+  - lang: vb
+    values:
+    - value: Public Overridable Function GetWorkflowRunsAsync (Optional timeWindow As String = Nothing, Optional orderby As String = Nothing, Optional runStatuses As IEnumerable(Of String) = Nothing, Optional workflowIds As IEnumerable(Of String) = Nothing, Optional maxpagesize As Nullable(Of Integer) = Nothing, Optional context As RequestContext = Nothing) As AsyncPageable(Of BinaryData)
+  monikers:
+  - azure-dotnet-preview
+  summary: List workflow runs.
+  remarks: >-
+    <p>Below is the JSON schema for one item in the pageable response.</p><p>Response Body:</p><p>Schema for <code data-dev-comment-type="c">WorkflowRunListValue</code>: 
+
+
+    ```
+
+    {
+      id: Guid, # Required. The workflow run id.
+      workflowId: Guid, # Required. The workflow id.
+      startTime: string (ISO 8601 Format), # Required. Workflow run start time.
+      requestor: Guid, # Required. The person who submitted the user request.
+      userRequestId: Guid, # Optional. The user request id.
+      runPayload: {
+        type: "CreateTerm" | "UpdateTerm" | "DeleteTerm" | "ImportTerms" | "UpdateAsset" | "GrantDataAccess", # Required. The workflow run payload type.
+        targetValue: string, # Required. The target value which need involve workflow to update.
+      }, # Required. The input of a workflow run. Align with operation in user request. 
+      status: "NotStarted" | "InProgress" | "Failed" | "Completed" | "Canceling" | "CancellationFailed" | "Canceled", # Required. The status.
+      endTime: string (ISO 8601 Format), # Optional. The time of workflow run completed.
+      cancelTime: string (ISO 8601 Format), # Optional. The time of workflow run be canceled.
+      cancelComment: string, # Optional. The comment when cancel a workflow run.
+    }
+
+    ```
+
+    </p>
+  examples: >-
+    This sample shows how to call GetWorkflowRunsAsync and parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new PurviewWorkflowServiceClient(endpoint, credential);
+
+
+    await foreach (var data in client.GetWorkflowRunsAsync())
+
+    {
+        JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        Console.WriteLine(result.GetProperty("id").ToString());
+        Console.WriteLine(result.GetProperty("workflowId").ToString());
+        Console.WriteLine(result.GetProperty("startTime").ToString());
+        Console.WriteLine(result.GetProperty("requestor").ToString());
+        Console.WriteLine(result.GetProperty("runPayload").GetProperty("type").ToString());
+        Console.WriteLine(result.GetProperty("runPayload").GetProperty("targetValue").ToString());
+        Console.WriteLine(result.GetProperty("status").ToString());
+    }
+
+    ```
+
+    This sample shows how to call GetWorkflowRunsAsync with all parameters, and how to parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new PurviewWorkflowServiceClient(endpoint, credential);
+
+
+    await foreach (var data in client.GetWorkflowRunsAsync("<timeWindow>", "<orderby>", new String[]{"<runStatuses>"}, new String[]{"<workflowIds>"}, 1234))
+
+    {
+        JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        Console.WriteLine(result.GetProperty("id").ToString());
+        Console.WriteLine(result.GetProperty("workflowId").ToString());
+        Console.WriteLine(result.GetProperty("startTime").ToString());
+        Console.WriteLine(result.GetProperty("requestor").ToString());
+        Console.WriteLine(result.GetProperty("userRequestId").ToString());
+        Console.WriteLine(result.GetProperty("runPayload").GetProperty("type").ToString());
+        Console.WriteLine(result.GetProperty("runPayload").GetProperty("targetValue").ToString());
+        Console.WriteLine(result.GetProperty("status").ToString());
+        Console.WriteLine(result.GetProperty("endTime").ToString());
+        Console.WriteLine(result.GetProperty("cancelTime").ToString());
+        Console.WriteLine(result.GetProperty("cancelComment").ToString());
+    }
+
+    ```
+  metadata: {}
+uid: Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.GetWorkflowRunsAsync*
+commentId: Overload:Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.GetWorkflowRunsAsync
+namespace: Azure.Analytics.Purview.Workflows
+name: GetWorkflowRunsAsync
+fullName: Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.GetWorkflowRunsAsync
+nameWithType: PurviewWorkflowServiceClient.GetWorkflowRunsAsync
+assembliesWithMoniker:
+- value: Azure.Analytics.Purview.Workflows.dll
+packagesWithMoniker:
+- value: Azure.Analytics.Purview.Workflows v1.0.0-beta.1
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.GetWorkflowRunsAsync
+  api_location:
+  - Azure.Analytics.Purview.Workflows.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.GetWorkflowRunsAsync
+  - Azure::Analytics::Purview::Workflows::PurviewWorkflowServiceClient::GetWorkflowRunsAsync
+  - GetWorkflowRunsAsync
+  - PurviewWorkflowServiceClient.GetWorkflowRunsAsync
+  - PurviewWorkflowServiceClient::GetWorkflowRunsAsync
+  helpviewer_keywords:
+  - PurviewWorkflowServiceClient.GetWorkflowRunsAsync method [.NET]
+  - GetWorkflowRunsAsync method [.NET], class PurviewWorkflowServiceClient
+  - PurviewWorkflowServiceClient.GetWorkflowRunsAsync(String, String, IEnumerable<String>, IEnumerable<String>, Nullable<Int32>, RequestContext) method [.NET]
+  - GetWorkflowRunsAsync(String, String, IEnumerable<String>, IEnumerable<String>, Nullable<Int32>, RequestContext) method [.NET], class PurviewWorkflowServiceClient
+  monikers:
+  - azure-dotnet-preview

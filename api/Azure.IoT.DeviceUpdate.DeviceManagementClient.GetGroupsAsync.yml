@@ -1,0 +1,158 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="Azure.AsyncPageable`1?alt=Azure.AsyncPageable&text=AsyncPageable" data-throw-if-not-resolved="True"/>&lt;<xref href="System.BinaryData?alt=System.BinaryData&text=BinaryData" data-throw-if-not-resolved="True"/>&gt;
+    description: The <xref data-throw-if-not-resolved="true" uid="Azure.AsyncPageable`1"></xref> from the service containing a list of <xref data-throw-if-not-resolved="true" uid="System.BinaryData"></xref> objects. Details of the body schema for each item in the collection are in the Remarks section below.
+  parameters:
+  - namesWithMoniker:
+    - value: orderBy
+    description: Orders the set of groups returned. You can order by groupId, deviceCount, createdDate, subgroupsWithNewUpdatesAvailableCount, subgroupsWithUpdatesInProgressCount, or subgroupsOnLatestUpdateCount.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.IoT.DeviceUpdate.DeviceManagementClient.GetGroupsAsync(System.String,Azure.RequestContext)
+  commentId: M:Azure.IoT.DeviceUpdate.DeviceManagementClient.GetGroupsAsync(System.String,Azure.RequestContext)
+  name: GetGroupsAsync(String, RequestContext)
+  fullName: Azure.IoT.DeviceUpdate.DeviceManagementClient.GetGroupsAsync(String, RequestContext)
+  nameWithType: DeviceManagementClient.GetGroupsAsync(String, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual Azure.AsyncPageable<BinaryData> GetGroupsAsync (string orderBy = default, Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member GetGroupsAsync : string * Azure.RequestContext -> Azure.AsyncPageable<BinaryData>
+
+        override this.GetGroupsAsync : string * Azure.RequestContext -> Azure.AsyncPageable<BinaryData>
+  - lang: vb
+    values:
+    - value: Public Overridable Function GetGroupsAsync (Optional orderBy As String = Nothing, Optional context As RequestContext = Nothing) As AsyncPageable(Of BinaryData)
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview
+  summary: Gets a list of all device groups.  The $default group will always be returned first.
+  remarks: >-
+    <p>Below is the JSON schema for one item in the pageable response.</p><p>Response Body:</p><p>Schema for <code data-dev-comment-type="c">GroupsListValue</code>: 
+
+
+    ```
+
+    {
+                  groupId: string, # Required. Group identity. This is created from the value of the ADUGroup tag in the Iot Hub's device/module twin or $default for devices with no tag.
+                  groupType: "IoTHubTag" | "DefaultNoTag", # Required. Group type.
+                  createdDateTime: string, # Required. Date and time when the update was created.
+                  deviceCount: number, # Optional. The number of devices in the group.
+                  subgroupsWithNewUpdatesAvailableCount: number, # Optional. The count of subgroups with new updates available.
+                  subgroupsWithUpdatesInProgressCount: number, # Optional. The count of subgroups with updates in progress.
+                  subgroupsWithOnLatestUpdateCount: number, # Optional. The count of subgroups with devices on the latest update.
+                  deployments: [string], # Optional. The active deployment Ids for the group
+                }
+    ```
+
+    </p>
+  examples: >-
+    This sample shows how to call GetGroupsAsync and parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new DeviceManagementClient(endpoint, "<instanceId>", credential);
+
+
+    await foreach (var data in client.GetGroupsAsync())
+
+    {
+        JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        Console.WriteLine(result.GetProperty("groupId").ToString());
+        Console.WriteLine(result.GetProperty("groupType").ToString());
+        Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+    }
+
+    ```
+
+    This sample shows how to call GetGroupsAsync with all parameters, and how to parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new DeviceManagementClient(endpoint, "<instanceId>", credential);
+
+
+    await foreach (var data in client.GetGroupsAsync("<orderBy>"))
+
+    {
+        JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        Console.WriteLine(result.GetProperty("groupId").ToString());
+        Console.WriteLine(result.GetProperty("groupType").ToString());
+        Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+        Console.WriteLine(result.GetProperty("deviceCount").ToString());
+        Console.WriteLine(result.GetProperty("subgroupsWithNewUpdatesAvailableCount").ToString());
+        Console.WriteLine(result.GetProperty("subgroupsWithUpdatesInProgressCount").ToString());
+        Console.WriteLine(result.GetProperty("subgroupsWithOnLatestUpdateCount").ToString());
+        Console.WriteLine(result.GetProperty("deployments")[0].ToString());
+    }
+
+    ```
+  metadata: {}
+uid: Azure.IoT.DeviceUpdate.DeviceManagementClient.GetGroupsAsync*
+commentId: Overload:Azure.IoT.DeviceUpdate.DeviceManagementClient.GetGroupsAsync
+namespace: Azure.IoT.DeviceUpdate
+name: GetGroupsAsync
+fullName: Azure.IoT.DeviceUpdate.DeviceManagementClient.GetGroupsAsync
+nameWithType: DeviceManagementClient.GetGroupsAsync
+assembliesWithMoniker:
+- value: Azure.IoT.DeviceUpdate.dll
+packagesWithMoniker:
+- value: Azure.IoT.DeviceUpdate v1.0.0
+  monikers:
+  - azure-dotnet
+- value: Azure.IoT.DeviceUpdate v1.0.0-beta.4
+  monikers:
+  - azure-dotnet-preview
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.IoT.DeviceUpdate.DeviceManagementClient.GetGroupsAsync
+  api_location:
+  - Azure.IoT.DeviceUpdate.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.IoT.DeviceUpdate.DeviceManagementClient.GetGroupsAsync
+  - Azure::IoT::DeviceUpdate::DeviceManagementClient::GetGroupsAsync
+  - GetGroupsAsync
+  - DeviceManagementClient.GetGroupsAsync
+  - DeviceManagementClient::GetGroupsAsync
+  helpviewer_keywords:
+  - DeviceManagementClient.GetGroupsAsync method [.NET]
+  - GetGroupsAsync method [.NET], class DeviceManagementClient
+  - DeviceManagementClient.GetGroupsAsync(String, RequestContext) method [.NET]
+  - GetGroupsAsync(String, RequestContext) method [.NET], class DeviceManagementClient
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview

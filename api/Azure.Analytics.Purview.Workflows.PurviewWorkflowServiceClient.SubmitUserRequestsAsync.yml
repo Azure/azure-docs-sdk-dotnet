@@ -1,0 +1,205 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="System.Threading.Tasks.Task`1?alt=System.Threading.Tasks.Task&text=Task" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.Response?alt=Azure.Response&text=Response" data-throw-if-not-resolved="True"/>&gt;
+    description: The response returned from the service. Details of the response body schema are in the Remarks section below.
+  parameters:
+  - namesWithMoniker:
+    - value: content
+    description: The content to send as the body of the request. Details of the request body schema are in the Remarks section below.
+    type: <xref href="Azure.Core.RequestContent?alt=Azure.Core.RequestContent&text=RequestContent" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">content</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.SubmitUserRequestsAsync(Azure.Core.RequestContent,Azure.RequestContext)
+  commentId: M:Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.SubmitUserRequestsAsync(Azure.Core.RequestContent,Azure.RequestContext)
+  name: SubmitUserRequestsAsync(RequestContent, RequestContext)
+  fullName: Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.SubmitUserRequestsAsync(RequestContent, RequestContext)
+  nameWithType: PurviewWorkflowServiceClient.SubmitUserRequestsAsync(RequestContent, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual System.Threading.Tasks.Task<Azure.Response> SubmitUserRequestsAsync (Azure.Core.RequestContent content, Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member SubmitUserRequestsAsync : Azure.Core.RequestContent * Azure.RequestContext -> System.Threading.Tasks.Task<Azure.Response>
+
+        override this.SubmitUserRequestsAsync : Azure.Core.RequestContent * Azure.RequestContext -> System.Threading.Tasks.Task<Azure.Response>
+  - lang: vb
+    values:
+    - value: Public Overridable Function SubmitUserRequestsAsync (content As RequestContent, Optional context As RequestContext = Nothing) As Task(Of Response)
+  monikers:
+  - azure-dotnet-preview
+  summary: Submit a user request for requestor, a user  request describes user ask to do operation(s) on Purview. If any workflow's trigger matches with an operation in request, a run of the workflow is created.
+  remarks: >-
+    <p>Below is the JSON schema for the request and response payloads.</p><p>Request Body:</p><p>Schema for <code data-dev-comment-type="c">UserRequestPayload</code>: 
+
+
+    ```
+
+    {
+      operations: [
+        {
+          type: "CreateTerm" | "UpdateTerm" | "DeleteTerm" | "ImportTerms" | "UpdateAsset" | "GrantDataAccess", # Required. The operation type.
+          payload: AnyObject, # Required. The payload of each operation which user want to submit.
+        }
+      ], # Required. The list of operations user want to submit, each operation matches one Purview API call and will do the operation directly.
+      comment: string, # Optional. The comment when submit a user request.
+    }
+
+    ```
+
+    </p><p>Response Body:</p><p>Schema for <code data-dev-comment-type="c">UserRequestResponse</code>: 
+
+
+    ```
+
+    {
+      requestId: Guid, # Required. The user request id.
+      requestor: Guid, # Required. The person who submitted the user request.
+      operations: [
+        {
+          type: "CreateTerm" | "UpdateTerm" | "DeleteTerm" | "ImportTerms" | "UpdateAsset" | "GrantDataAccess", # Required. The operation type.
+          payload: AnyObject, # Required. The payload of each operation which user want to submit.
+          workflowRunIds: [Guid], # Optional.
+        }
+      ], # Required. The list of operations user want to submit, each operation matches one Purview API call and will do the operation directly.
+      comment: string, # Optional. The comment when submit a user request.
+      status: "NotStarted" | "InProgress" | "Failed" | "Completed" | "Canceling" | "CancellationFailed" | "Canceled", # Required. The status.
+    }
+
+    ```
+
+    </p>
+  examples: >-
+    This sample shows how to call SubmitUserRequestsAsync with required request content, and how to parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new PurviewWorkflowServiceClient(endpoint, credential);
+
+
+    var data = new {
+        operations = new[] {
+            new {
+                type = "CreateTerm",
+                payload = new {},
+            }
+        },
+    };
+
+
+    Response response = await client.SubmitUserRequestsAsync(RequestContent.Create(data));
+
+
+    JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+
+    Console.WriteLine(result.GetProperty("requestId").ToString());
+
+    Console.WriteLine(result.GetProperty("requestor").ToString());
+
+    Console.WriteLine(result.GetProperty("operations")[0].GetProperty("type").ToString());
+
+    Console.WriteLine(result.GetProperty("operations")[0].GetProperty("payload").ToString());
+
+    Console.WriteLine(result.GetProperty("status").ToString());
+
+    ```
+
+    This sample shows how to call SubmitUserRequestsAsync with all request content, and how to parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new PurviewWorkflowServiceClient(endpoint, credential);
+
+
+    var data = new {
+        operations = new[] {
+            new {
+                type = "CreateTerm",
+                payload = new {},
+            }
+        },
+        comment = "<comment>",
+    };
+
+
+    Response response = await client.SubmitUserRequestsAsync(RequestContent.Create(data));
+
+
+    JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+
+    Console.WriteLine(result.GetProperty("requestId").ToString());
+
+    Console.WriteLine(result.GetProperty("requestor").ToString());
+
+    Console.WriteLine(result.GetProperty("operations")[0].GetProperty("type").ToString());
+
+    Console.WriteLine(result.GetProperty("operations")[0].GetProperty("payload").ToString());
+
+    Console.WriteLine(result.GetProperty("operations")[0].GetProperty("workflowRunIds")[0].ToString());
+
+    Console.WriteLine(result.GetProperty("comment").ToString());
+
+    Console.WriteLine(result.GetProperty("status").ToString());
+
+    ```
+  metadata: {}
+uid: Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.SubmitUserRequestsAsync*
+commentId: Overload:Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.SubmitUserRequestsAsync
+namespace: Azure.Analytics.Purview.Workflows
+name: SubmitUserRequestsAsync
+fullName: Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.SubmitUserRequestsAsync
+nameWithType: PurviewWorkflowServiceClient.SubmitUserRequestsAsync
+assembliesWithMoniker:
+- value: Azure.Analytics.Purview.Workflows.dll
+packagesWithMoniker:
+- value: Azure.Analytics.Purview.Workflows v1.0.0-beta.1
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.SubmitUserRequestsAsync
+  api_location:
+  - Azure.Analytics.Purview.Workflows.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.SubmitUserRequestsAsync
+  - Azure::Analytics::Purview::Workflows::PurviewWorkflowServiceClient::SubmitUserRequestsAsync
+  - SubmitUserRequestsAsync
+  - PurviewWorkflowServiceClient.SubmitUserRequestsAsync
+  - PurviewWorkflowServiceClient::SubmitUserRequestsAsync
+  helpviewer_keywords:
+  - PurviewWorkflowServiceClient.SubmitUserRequestsAsync method [.NET]
+  - SubmitUserRequestsAsync method [.NET], class PurviewWorkflowServiceClient
+  - PurviewWorkflowServiceClient.SubmitUserRequestsAsync(RequestContent, RequestContext) method [.NET]
+  - SubmitUserRequestsAsync(RequestContent, RequestContext) method [.NET], class PurviewWorkflowServiceClient
+  monikers:
+  - azure-dotnet-preview

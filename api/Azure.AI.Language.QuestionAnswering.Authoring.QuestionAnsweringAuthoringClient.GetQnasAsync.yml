@@ -1,0 +1,198 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="Azure.AsyncPageable`1?alt=Azure.AsyncPageable&text=AsyncPageable" data-throw-if-not-resolved="True"/>&lt;<xref href="System.BinaryData?alt=System.BinaryData&text=BinaryData" data-throw-if-not-resolved="True"/>&gt;
+    description: The <xref data-throw-if-not-resolved="true" uid="Azure.AsyncPageable`1"></xref> from the service containing a list of <xref data-throw-if-not-resolved="true" uid="System.BinaryData"></xref> objects. Details of the body schema for each item in the collection are in the Remarks section below.
+  parameters:
+  - namesWithMoniker:
+    - value: projectName
+    description: The name of the project to use.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: source
+    description: Source of the QnA.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">projectName</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: <code data-dev-comment-type="paramref">projectName</code> is an empty string, and was expected to be non-empty.
+    type: <xref href="System.ArgumentException" data-throw-if-not-resolved="True"/>
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.AI.Language.QuestionAnswering.Authoring.QuestionAnsweringAuthoringClient.GetQnasAsync(System.String,System.String,Azure.RequestContext)
+  commentId: M:Azure.AI.Language.QuestionAnswering.Authoring.QuestionAnsweringAuthoringClient.GetQnasAsync(System.String,System.String,Azure.RequestContext)
+  name: GetQnasAsync(String, String, RequestContext)
+  fullName: Azure.AI.Language.QuestionAnswering.Authoring.QuestionAnsweringAuthoringClient.GetQnasAsync(String, String, RequestContext)
+  nameWithType: QuestionAnsweringAuthoringClient.GetQnasAsync(String, String, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual Azure.AsyncPageable<BinaryData> GetQnasAsync (string projectName, string source = default, Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member GetQnasAsync : string * string * Azure.RequestContext -> Azure.AsyncPageable<BinaryData>
+
+        override this.GetQnasAsync : string * string * Azure.RequestContext -> Azure.AsyncPageable<BinaryData>
+  - lang: vb
+    values:
+    - value: Public Overridable Function GetQnasAsync (projectName As String, Optional source As String = Nothing, Optional context As RequestContext = Nothing) As AsyncPageable(Of BinaryData)
+  monikers:
+  - azure-dotnet
+  summary: Gets all the QnAs of a project.
+  remarks: >-
+    <p>Below is the JSON schema for one item in the pageable response. Additional information can be found in the service REST API documentation: https://learn.microsoft.com/rest/api/cognitiveservices/questionanswering/question-answering-projects/get-qnas</p><p>Response Body:</p><p>Schema for <code data-dev-comment-type="c">QnaAsset</code>: 
+
+
+    ```
+
+    {
+                  id: number, # Optional. Unique ID for the QnA.
+                  answer: string, # Optional. Answer text.
+                  source: string, # Optional. Source from which QnA was indexed e.g. https://docs.microsoft.com/en-us/azure/cognitive-services/QnAMaker/FAQs .
+                  questions: [string], # Optional. List of questions associated with the answer.
+                  metadata: Dictionary<string, string>, # Optional. Metadata associated with the answer, useful to categorize or filter question answers.
+                  dialog: {
+                    isContextOnly: boolean, # Optional. To mark if a prompt is relevant only with a previous question or not. If true, do not include this QnA as answer for queries without context; otherwise, ignores context and includes this QnA in answers.
+                    prompts: [
+                      {
+                        displayOrder: number, # Optional. Index of the prompt. It is used for ordering of the prompts.
+                        qnaId: number, # Optional. ID of the QnA corresponding to the prompt.
+                        qna: {
+                          id: number, # Optional. Unique ID for the QnA.
+                          answer: string, # Optional. Answer text.
+                          source: string, # Optional. Source from which QnA was indexed e.g. https://docs.microsoft.com/en-us/azure/cognitive-services/QnAMaker/FAQs .
+                          questions: [string], # Optional. List of questions associated with the answer.
+                          metadata: Dictionary<string, string>, # Optional. Metadata associated with the answer, useful to categorize or filter question answers.
+                          dialog: QnaDialog, # Optional. Context of a QnA.
+                          activeLearningSuggestions: [
+                            {
+                              clusterHead: string, # Optional. Question chosen as the head of suggested questions cluster by Active Learning clustering algorithm.
+                              suggestedQuestions: [
+                                {
+                                  question: string, # Optional. Question suggested by the Active Learning feature.
+                                  userSuggestedCount: number, # Optional. The number of times the question was suggested explicitly by the user.
+                                  autoSuggestedCount: number, # Optional. The number of times the question was suggested automatically by the Active Learning algorithm.
+                                }
+                              ], # Optional. List of all suggested questions for the QnA.
+                            }
+                          ], # Optional. List of Active Learning suggestions for the QnA.
+                        }, # Optional. QnA record. Either QnAId or QnA record needs to be present in a Prompt.
+                        displayText: string, # Optional. Text displayed to represent a follow up question prompt.
+                      }
+                    ], # Optional. List of prompts associated with the answer.
+                  }, # Optional. Context of a QnA.
+                  activeLearningSuggestions: [SuggestedQuestionsCluster], # Optional. List of Active Learning suggestions for the QnA.
+                }
+    ```
+
+    </p>
+  examples: >-
+    This sample shows how to call GetQnasAsync with required parameters and parse the result.
+
+
+    ```
+
+    var credential = new AzureKeyCredential("<key>");
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new QuestionAnsweringAuthoringClient(endpoint, credential);
+
+
+    await foreach (var data in client.GetQnasAsync("<projectName>"))
+
+    {
+        JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        Console.WriteLine(result.ToString());
+    }
+
+    ```
+
+    This sample shows how to call GetQnasAsync with all parameters, and how to parse the result.
+
+
+    ```
+
+    var credential = new AzureKeyCredential("<key>");
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new QuestionAnsweringAuthoringClient(endpoint, credential);
+
+
+    await foreach (var data in client.GetQnasAsync("<projectName>", "<source>"))
+
+    {
+        JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        Console.WriteLine(result.GetProperty("id").ToString());
+        Console.WriteLine(result.GetProperty("answer").ToString());
+        Console.WriteLine(result.GetProperty("source").ToString());
+        Console.WriteLine(result.GetProperty("questions")[0].ToString());
+        Console.WriteLine(result.GetProperty("metadata").GetProperty("<test>").ToString());
+        Console.WriteLine(result.GetProperty("dialog").GetProperty("isContextOnly").ToString());
+        Console.WriteLine(result.GetProperty("dialog").GetProperty("prompts")[0].GetProperty("displayOrder").ToString());
+        Console.WriteLine(result.GetProperty("dialog").GetProperty("prompts")[0].GetProperty("qnaId").ToString());
+        Console.WriteLine(result.GetProperty("dialog").GetProperty("prompts")[0].GetProperty("qna").GetProperty("id").ToString());
+        Console.WriteLine(result.GetProperty("dialog").GetProperty("prompts")[0].GetProperty("qna").GetProperty("answer").ToString());
+        Console.WriteLine(result.GetProperty("dialog").GetProperty("prompts")[0].GetProperty("qna").GetProperty("source").ToString());
+        Console.WriteLine(result.GetProperty("dialog").GetProperty("prompts")[0].GetProperty("qna").GetProperty("questions")[0].ToString());
+        Console.WriteLine(result.GetProperty("dialog").GetProperty("prompts")[0].GetProperty("qna").GetProperty("metadata").GetProperty("<test>").ToString());
+        Console.WriteLine(result.GetProperty("dialog").GetProperty("prompts")[0].GetProperty("qna").GetProperty("activeLearningSuggestions")[0].GetProperty("clusterHead").ToString());
+        Console.WriteLine(result.GetProperty("dialog").GetProperty("prompts")[0].GetProperty("qna").GetProperty("activeLearningSuggestions")[0].GetProperty("suggestedQuestions")[0].GetProperty("question").ToString());
+        Console.WriteLine(result.GetProperty("dialog").GetProperty("prompts")[0].GetProperty("qna").GetProperty("activeLearningSuggestions")[0].GetProperty("suggestedQuestions")[0].GetProperty("userSuggestedCount").ToString());
+        Console.WriteLine(result.GetProperty("dialog").GetProperty("prompts")[0].GetProperty("qna").GetProperty("activeLearningSuggestions")[0].GetProperty("suggestedQuestions")[0].GetProperty("autoSuggestedCount").ToString());
+        Console.WriteLine(result.GetProperty("dialog").GetProperty("prompts")[0].GetProperty("displayText").ToString());
+        Console.WriteLine(result.GetProperty("activeLearningSuggestions")[0].GetProperty("clusterHead").ToString());
+        Console.WriteLine(result.GetProperty("activeLearningSuggestions")[0].GetProperty("suggestedQuestions")[0].GetProperty("question").ToString());
+        Console.WriteLine(result.GetProperty("activeLearningSuggestions")[0].GetProperty("suggestedQuestions")[0].GetProperty("userSuggestedCount").ToString());
+        Console.WriteLine(result.GetProperty("activeLearningSuggestions")[0].GetProperty("suggestedQuestions")[0].GetProperty("autoSuggestedCount").ToString());
+    }
+
+    ```
+  metadata: {}
+uid: Azure.AI.Language.QuestionAnswering.Authoring.QuestionAnsweringAuthoringClient.GetQnasAsync*
+commentId: Overload:Azure.AI.Language.QuestionAnswering.Authoring.QuestionAnsweringAuthoringClient.GetQnasAsync
+namespace: Azure.AI.Language.QuestionAnswering.Authoring
+name: GetQnasAsync
+fullName: Azure.AI.Language.QuestionAnswering.Authoring.QuestionAnsweringAuthoringClient.GetQnasAsync
+nameWithType: QuestionAnsweringAuthoringClient.GetQnasAsync
+assembliesWithMoniker:
+- value: Azure.AI.Language.QuestionAnswering.dll
+packagesWithMoniker:
+- value: Azure.AI.Language.QuestionAnswering v1.1.0
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet
+metadata:
+  api_name:
+  - Azure.AI.Language.QuestionAnswering.Authoring.QuestionAnsweringAuthoringClient.GetQnasAsync
+  api_location:
+  - Azure.AI.Language.QuestionAnswering.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.AI.Language.QuestionAnswering.Authoring.QuestionAnsweringAuthoringClient.GetQnasAsync
+  - Azure::AI::Language::QuestionAnswering::Authoring::QuestionAnsweringAuthoringClient::GetQnasAsync
+  - GetQnasAsync
+  - QuestionAnsweringAuthoringClient.GetQnasAsync
+  - QuestionAnsweringAuthoringClient::GetQnasAsync
+  helpviewer_keywords:
+  - QuestionAnsweringAuthoringClient.GetQnasAsync method [.NET]
+  - GetQnasAsync method [.NET], class QuestionAnsweringAuthoringClient
+  - QuestionAnsweringAuthoringClient.GetQnasAsync(String, String, RequestContext) method [.NET]
+  - GetQnasAsync(String, String, RequestContext) method [.NET], class QuestionAnsweringAuthoringClient
+  monikers:
+  - azure-dotnet

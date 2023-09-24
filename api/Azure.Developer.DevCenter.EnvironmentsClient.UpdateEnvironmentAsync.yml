@@ -1,0 +1,229 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="System.Threading.Tasks.Task`1?alt=System.Threading.Tasks.Task&text=Task" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.Response?alt=Azure.Response&text=Response" data-throw-if-not-resolved="True"/>&gt;
+    description: The response returned from the service. Details of the response body schema are in the Remarks section below.
+  parameters:
+  - namesWithMoniker:
+    - value: environmentName
+    description: The name of the environment.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: content
+    description: The content to send as the body of the request. Details of the request body schema are in the Remarks section below.
+    type: <xref href="Azure.Core.RequestContent?alt=Azure.Core.RequestContent&text=RequestContent" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: userId
+    description: The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">environmentName</code>, <code data-dev-comment-type="paramref">content</code> or <code data-dev-comment-type="paramref">userId</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: <code data-dev-comment-type="paramref">environmentName</code> or <code data-dev-comment-type="paramref">userId</code> is an empty string, and was expected to be non-empty.
+    type: <xref href="System.ArgumentException" data-throw-if-not-resolved="True"/>
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.Developer.DevCenter.EnvironmentsClient.UpdateEnvironmentAsync(System.String,Azure.Core.RequestContent,System.String,Azure.RequestContext)
+  commentId: M:Azure.Developer.DevCenter.EnvironmentsClient.UpdateEnvironmentAsync(System.String,Azure.Core.RequestContent,System.String,Azure.RequestContext)
+  name: UpdateEnvironmentAsync(String, RequestContent, String, RequestContext)
+  fullName: Azure.Developer.DevCenter.EnvironmentsClient.UpdateEnvironmentAsync(String, RequestContent, String, RequestContext)
+  nameWithType: EnvironmentsClient.UpdateEnvironmentAsync(String, RequestContent, String, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual System.Threading.Tasks.Task<Azure.Response> UpdateEnvironmentAsync (string environmentName, Azure.Core.RequestContent content, string userId = "me", Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member UpdateEnvironmentAsync : string * Azure.Core.RequestContent * string * Azure.RequestContext -> System.Threading.Tasks.Task<Azure.Response>
+
+        override this.UpdateEnvironmentAsync : string * Azure.Core.RequestContent * string * Azure.RequestContext -> System.Threading.Tasks.Task<Azure.Response>
+  - lang: vb
+    values:
+    - value: Public Overridable Function UpdateEnvironmentAsync (environmentName As String, content As RequestContent, Optional userId As String = "me", Optional context As RequestContext = Nothing) As Task(Of Response)
+  monikers:
+  - azure-dotnet-preview
+  summary: Partially updates an environment.
+  remarks: >-
+    <p>Below is the JSON schema for the request and response payloads.</p><p>Request Body:</p><p><details><summary>Environment</summary>Schema for <code data-dev-comment-type="c">Environment</code>: 
+
+
+    ```
+
+    {
+      name: string, # Optional. Environment name.
+      environmentType: string, # Required. Environment type.
+      user: string, # Optional. The AAD object id of the owner of this Environment.
+      provisioningState: string, # Optional. The provisioning state of the environment.
+      resourceGroupId: string, # Optional. The identifier of the resource group containing the environment's resources.
+      description: string, # Optional. Description of the Environment.
+      catalogName: string, # Optional. Name of the catalog.
+      catalogItemName: string, # Optional. Name of the catalog item.
+      parameters: AnyObject, # Optional. Parameters object for the deploy action
+      scheduledTasks: Dictionary<string, ScheduledTask>, # Optional. Set of supported scheduled tasks to help manage cost.
+      tags: Dictionary<string, string>, # Optional. Key value pairs that will be applied to resources deployed in this environment as tags.
+    }
+
+    ```
+
+     </details></p><p>Response Body:</p><p>Schema for <code data-dev-comment-type="c">Environment</code>: 
+
+
+    ```
+
+    {
+      name: string, # Optional. Environment name.
+      environmentType: string, # Required. Environment type.
+      user: string, # Optional. The AAD object id of the owner of this Environment.
+      provisioningState: string, # Optional. The provisioning state of the environment.
+      resourceGroupId: string, # Optional. The identifier of the resource group containing the environment's resources.
+      description: string, # Optional. Description of the Environment.
+      catalogName: string, # Optional. Name of the catalog.
+      catalogItemName: string, # Optional. Name of the catalog item.
+      parameters: AnyObject, # Optional. Parameters object for the deploy action
+      scheduledTasks: Dictionary<string, ScheduledTask>, # Optional. Set of supported scheduled tasks to help manage cost.
+      tags: Dictionary<string, string>, # Optional. Key value pairs that will be applied to resources deployed in this environment as tags.
+    }
+
+    ```
+
+    </p>
+  examples: >-
+    This sample shows how to call UpdateEnvironmentAsync with required parameters and request content, and how to parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
+
+
+    var data = new {
+        environmentType = "<environmentType>",
+    };
+
+
+    Response response = await client.UpdateEnvironmentAsync("<environmentName>", RequestContent.Create(data));
+
+
+    JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+
+    Console.WriteLine(result.GetProperty("environmentType").ToString());
+
+    Console.WriteLine(result.ToString());
+
+    ```
+
+    This sample shows how to call UpdateEnvironmentAsync with all parameters and request content, and how to parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new EnvironmentsClient(endpoint, "<projectName>", credential);
+
+
+    var data = new {
+        environmentType = "<environmentType>",
+        user = "<user>",
+        description = "<description>",
+        catalogName = "<catalogName>",
+        catalogItemName = "<catalogItemName>",
+        parameters = new {},
+        scheduledTasks = new {
+            key = new {
+                type = "AutoExpire",
+                enabled = "Enabled",
+                startTime = "2022-05-10T18:57:31.2311892Z",
+            },
+        },
+        tags = new {
+            key = "<String>",
+        },
+    };
+
+
+    Response response = await client.UpdateEnvironmentAsync("<environmentName>", RequestContent.Create(data), <me>);
+
+
+    JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+
+    Console.WriteLine(result.GetProperty("name").ToString());
+
+    Console.WriteLine(result.GetProperty("environmentType").ToString());
+
+    Console.WriteLine(result.GetProperty("user").ToString());
+
+    Console.WriteLine(result.GetProperty("provisioningState").ToString());
+
+    Console.WriteLine(result.GetProperty("resourceGroupId").ToString());
+
+    Console.WriteLine(result.GetProperty("description").ToString());
+
+    Console.WriteLine(result.GetProperty("catalogName").ToString());
+
+    Console.WriteLine(result.GetProperty("catalogItemName").ToString());
+
+    Console.WriteLine(result.GetProperty("parameters").ToString());
+
+    Console.WriteLine(result.GetProperty("scheduledTasks").GetProperty("<test>").GetProperty("type").ToString());
+
+    Console.WriteLine(result.GetProperty("scheduledTasks").GetProperty("<test>").GetProperty("enabled").ToString());
+
+    Console.WriteLine(result.GetProperty("scheduledTasks").GetProperty("<test>").GetProperty("startTime").ToString());
+
+    Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
+
+    ```
+  metadata: {}
+uid: Azure.Developer.DevCenter.EnvironmentsClient.UpdateEnvironmentAsync*
+commentId: Overload:Azure.Developer.DevCenter.EnvironmentsClient.UpdateEnvironmentAsync
+namespace: Azure.Developer.DevCenter
+name: UpdateEnvironmentAsync
+fullName: Azure.Developer.DevCenter.EnvironmentsClient.UpdateEnvironmentAsync
+nameWithType: EnvironmentsClient.UpdateEnvironmentAsync
+assembliesWithMoniker:
+- value: Azure.Developer.DevCenter.dll
+packagesWithMoniker:
+- value: Azure.Developer.DevCenter v1.0.0-beta.2
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.Developer.DevCenter.EnvironmentsClient.UpdateEnvironmentAsync
+  api_location:
+  - Azure.Developer.DevCenter.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.Developer.DevCenter.EnvironmentsClient.UpdateEnvironmentAsync
+  - Azure::Developer::DevCenter::EnvironmentsClient::UpdateEnvironmentAsync
+  - UpdateEnvironmentAsync
+  - EnvironmentsClient.UpdateEnvironmentAsync
+  - EnvironmentsClient::UpdateEnvironmentAsync
+  helpviewer_keywords:
+  - EnvironmentsClient.UpdateEnvironmentAsync method [.NET]
+  - UpdateEnvironmentAsync method [.NET], class EnvironmentsClient
+  - EnvironmentsClient.UpdateEnvironmentAsync(String, RequestContent, String, RequestContext) method [.NET]
+  - UpdateEnvironmentAsync(String, RequestContent, String, RequestContext) method [.NET], class EnvironmentsClient
+  monikers:
+  - azure-dotnet-preview

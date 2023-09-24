@@ -1,0 +1,212 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="Azure.Response?alt=Azure.Response&text=Response" data-throw-if-not-resolved="True"/>
+    description: The response returned from the service. Details of the response body schema are in the Remarks section below.
+  parameters:
+  - namesWithMoniker:
+    - value: operationId
+    description: Operation identifier.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: ifNoneMatch
+    description: Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value.
+    type: <xref href="System.Nullable`1?alt=System.Nullable&text=Nullable" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.ETag?alt=Azure.ETag&text=ETag" data-throw-if-not-resolved="True"/>&gt;
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">operationId</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: <code data-dev-comment-type="paramref">operationId</code> is an empty string, and was expected to be non-empty.
+    type: <xref href="System.ArgumentException" data-throw-if-not-resolved="True"/>
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.IoT.DeviceUpdate.DeviceUpdateClient.GetOperationStatus(System.String,System.Nullable{Azure.ETag},Azure.RequestContext)
+  commentId: M:Azure.IoT.DeviceUpdate.DeviceUpdateClient.GetOperationStatus(System.String,System.Nullable{Azure.ETag},Azure.RequestContext)
+  name: GetOperationStatus(String, Nullable<ETag>, RequestContext)
+  fullName: Azure.IoT.DeviceUpdate.DeviceUpdateClient.GetOperationStatus(String, Nullable<ETag>, RequestContext)
+  nameWithType: DeviceUpdateClient.GetOperationStatus(String, Nullable<ETag>, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual Azure.Response GetOperationStatus (string operationId, Azure.ETag? ifNoneMatch = default, Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member GetOperationStatus : string * Nullable<Azure.ETag> * Azure.RequestContext -> Azure.Response
+
+        override this.GetOperationStatus : string * Nullable<Azure.ETag> * Azure.RequestContext -> Azure.Response
+  - lang: vb
+    values:
+    - value: Public Overridable Function GetOperationStatus (operationId As String, Optional ifNoneMatch As Nullable(Of ETag) = Nothing, Optional context As RequestContext = Nothing) As Response
+  monikers:
+  - azure-dotnet
+  summary: Retrieve operation status.
+  remarks: >-
+    <p>Below is the JSON schema for the response payload.</p><p>Response Body:</p><p>Schema for <code data-dev-comment-type="c">UpdateOperation</code>: 
+
+
+    ```
+
+    {
+                  operationId: string, # Required. Operation Id.
+                  status: "NotStarted" | "Running" | "Succeeded" | "Failed", # Required. Operation status.
+                  update: {
+                    updateId: {
+                      provider: string, # Required. Update provider.
+                      name: string, # Required. Update name.
+                      version: string, # Required. Update version.
+                    }, # Required. Update identifier.
+                    description: string, # Optional. Update description.
+                    friendlyName: string, # Optional. Friendly update name.
+                  }, # Optional. The update being imported or deleted. For import, this property will only be populated after import manifest is processed successfully.
+                  resourceLocation: string, # Optional. Location of the imported update when operation is successful.
+                  error: {
+                    code: string, # Required. Server defined error code.
+                    message: string, # Required. A human-readable representation of the error.
+                    target: string, # Optional. The target of the error.
+                    details: [Error], # Optional. An array of errors that led to the reported error.
+                    innererror: {
+                      code: string, # Required. A more specific error code than what was provided by the containing error.
+                      message: string, # Optional. A human-readable representation of the error.
+                      errorDetail: string, # Optional. The internal error or exception message.
+                      innerError: InnerError, # Optional. An object containing more specific information than the current object about the error.
+                    }, # Optional. An object containing more specific information than the current object about the error.
+                    occurredDateTime: string (ISO 8601 Format), # Optional. Date and time in UTC when the error occurred.
+                  }, # Optional. Operation error encountered, if any.
+                  traceId: string, # Optional. Operation correlation identity that can used by Microsoft Support for troubleshooting.
+                  lastActionDateTime: string (ISO 8601 Format), # Required. Date and time in UTC when the operation status was last updated.
+                  createdDateTime: string (ISO 8601 Format), # Required. Date and time in UTC when the operation was created.
+                  etag: string, # Optional. Operation ETag.
+                }
+    ```
+
+    </p>
+  examples: >-
+    This sample shows how to call GetOperationStatus with required parameters and parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new DeviceUpdateClient(endpoint, "<instanceId>", credential);
+
+
+    Response response = client.GetOperationStatus("<operationId>");
+
+
+    JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+
+    Console.WriteLine(result.GetProperty("operationId").ToString());
+
+    Console.WriteLine(result.GetProperty("status").ToString());
+
+    Console.WriteLine(result.GetProperty("lastActionDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+
+    ```
+
+    This sample shows how to call GetOperationStatus with all parameters, and how to parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new DeviceUpdateClient(endpoint, "<instanceId>", credential);
+
+
+    Response response = client.GetOperationStatus("<operationId>", null);
+
+
+    JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+
+    Console.WriteLine(result.GetProperty("operationId").ToString());
+
+    Console.WriteLine(result.GetProperty("status").ToString());
+
+    Console.WriteLine(result.GetProperty("update").GetProperty("updateId").GetProperty("provider").ToString());
+
+    Console.WriteLine(result.GetProperty("update").GetProperty("updateId").GetProperty("name").ToString());
+
+    Console.WriteLine(result.GetProperty("update").GetProperty("updateId").GetProperty("version").ToString());
+
+    Console.WriteLine(result.GetProperty("update").GetProperty("description").ToString());
+
+    Console.WriteLine(result.GetProperty("update").GetProperty("friendlyName").ToString());
+
+    Console.WriteLine(result.GetProperty("resourceLocation").ToString());
+
+    Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+
+    Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+
+    Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+
+    Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+
+    Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("message").ToString());
+
+    Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("errorDetail").ToString());
+
+    Console.WriteLine(result.GetProperty("error").GetProperty("occurredDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("traceId").ToString());
+
+    Console.WriteLine(result.GetProperty("lastActionDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("etag").ToString());
+
+    ```
+  metadata: {}
+uid: Azure.IoT.DeviceUpdate.DeviceUpdateClient.GetOperationStatus*
+commentId: Overload:Azure.IoT.DeviceUpdate.DeviceUpdateClient.GetOperationStatus
+namespace: Azure.IoT.DeviceUpdate
+name: GetOperationStatus
+fullName: Azure.IoT.DeviceUpdate.DeviceUpdateClient.GetOperationStatus
+nameWithType: DeviceUpdateClient.GetOperationStatus
+assembliesWithMoniker:
+- value: Azure.IoT.DeviceUpdate.dll
+packagesWithMoniker:
+- value: Azure.IoT.DeviceUpdate v1.0.0
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet
+metadata:
+  api_name:
+  - Azure.IoT.DeviceUpdate.DeviceUpdateClient.GetOperationStatus
+  api_location:
+  - Azure.IoT.DeviceUpdate.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.IoT.DeviceUpdate.DeviceUpdateClient.GetOperationStatus
+  - Azure::IoT::DeviceUpdate::DeviceUpdateClient::GetOperationStatus
+  - GetOperationStatus
+  - DeviceUpdateClient.GetOperationStatus
+  - DeviceUpdateClient::GetOperationStatus
+  helpviewer_keywords:
+  - DeviceUpdateClient.GetOperationStatus method [.NET]
+  - GetOperationStatus method [.NET], class DeviceUpdateClient
+  - DeviceUpdateClient.GetOperationStatus(String, Nullable<ETag>, RequestContext) method [.NET]
+  - GetOperationStatus(String, Nullable<ETag>, RequestContext) method [.NET], class DeviceUpdateClient
+  monikers:
+  - azure-dotnet

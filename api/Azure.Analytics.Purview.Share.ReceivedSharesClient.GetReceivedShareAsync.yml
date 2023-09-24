@@ -1,0 +1,145 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="System.Threading.Tasks.Task`1?alt=System.Threading.Tasks.Task&text=Task" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.Response?alt=Azure.Response&text=Response" data-throw-if-not-resolved="True"/>&gt;
+    description: The response returned from the service. Details of the response body schema are in the Remarks section below.
+  parameters:
+  - namesWithMoniker:
+    - value: receivedShareName
+    description: The name of the received share.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">receivedShareName</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: <code data-dev-comment-type="paramref">receivedShareName</code> is an empty string, and was expected to be non-empty.
+    type: <xref href="System.ArgumentException" data-throw-if-not-resolved="True"/>
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.Analytics.Purview.Share.ReceivedSharesClient.GetReceivedShareAsync(System.String,Azure.RequestContext)
+  commentId: M:Azure.Analytics.Purview.Share.ReceivedSharesClient.GetReceivedShareAsync(System.String,Azure.RequestContext)
+  name: GetReceivedShareAsync(String, RequestContext)
+  fullName: Azure.Analytics.Purview.Share.ReceivedSharesClient.GetReceivedShareAsync(String, RequestContext)
+  nameWithType: ReceivedSharesClient.GetReceivedShareAsync(String, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual System.Threading.Tasks.Task<Azure.Response> GetReceivedShareAsync (string receivedShareName, Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member GetReceivedShareAsync : string * Azure.RequestContext -> System.Threading.Tasks.Task<Azure.Response>
+
+        override this.GetReceivedShareAsync : string * Azure.RequestContext -> System.Threading.Tasks.Task<Azure.Response>
+  - lang: vb
+    values:
+    - value: Public Overridable Function GetReceivedShareAsync (receivedShareName As String, Optional context As RequestContext = Nothing) As Task(Of Response)
+  monikers:
+  - azure-dotnet-preview
+  summary: Get a received share by name.
+  remarks: >-
+    <p>Get a received share</p><p>Below is the JSON schema for the response payload.</p><p>Response Body:</p><p><details><summary>InPlaceReceivedShare</summary>Schema for <code data-dev-comment-type="c">InPlaceReceivedShare</code>: 
+
+
+    ```
+
+    {
+                  shareKind: InPlace, # Required. Defines the supported types for share.
+                  id: string, # Optional. The resource id of the resource.
+                  name: string, # Optional. Name of the resource.
+                  type: string, # Optional. Type of the resource.
+                  properties: {
+                    collection: {
+                      referenceName: string, # Required. Gets or sets the reference name.
+                      type: string, # Required. Gets or sets the reference type property.
+                    }, # Required. Reference to a Collection.
+                    createdAt: string (ISO 8601 Format), # Optional. Time at which the received share was created.
+                    expirationDate: string (ISO 8601 Format), # Optional. The expiration date of the received share.
+                    invitationId: string, # Required. The invitation id.
+                    provisioningState: "Unknown" | "Succeeded" | "Creating" | "Deleting" | "Moving" | "Failed" | "SoftDeleting" | "SoftDeleted" | "SourceMoved" | "SourceDeleted" | "TargetMoved" | "TargetDeleted", # Optional. Provisioning status of the resource
+                    receivedShareStatus: "Active" | "Reinstating" | "Revoked" | "Revoking" | "RevokeFailed" | "ReinstateFailed" | "SourceDeleted", # Optional. received share status
+                    receiverEmail: string, # Optional. Email of the user/receiver who received the sent share invitation
+                    receiverName: string, # Optional. Name of the user/receiver who received the sent share invitation
+                    receiverTenantName: string, # Optional. Tenant name of the user/receiver who received the sent share invitation
+                    senderEmail: string, # Optional. Email of the sender who created the sent share invitation
+                    senderName: string, # Optional. Name of the sender who created the sent share invitation
+                    senderTenantName: string, # Optional. Tenant name of the sender who created the sent share invitation
+                    sentShareDescription: string, # Optional. Share description.
+                    sentShareLocation: string, # Required. Sent share location.
+                    sharedAt: string (ISO 8601 Format), # Optional. Time at which the sent share was shared.
+                    shareName: string, # Optional. Name of the share
+                  }, # Required. Properties of in place received share.
+                }
+    ```
+
+     </details></p>
+  examples: >-
+    This sample shows how to call GetReceivedShareAsync with required parameters and parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var client = new ReceivedSharesClient("<https://my-service.azure.com>", credential);
+
+
+    Response response = await client.GetReceivedShareAsync("<receivedShareName>");
+
+
+    JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+
+    Console.WriteLine(result.GetProperty("id").ToString());
+
+    Console.WriteLine(result.GetProperty("name").ToString());
+
+    Console.WriteLine(result.GetProperty("type").ToString());
+
+    Console.WriteLine(result.GetProperty("shareKind").ToString());
+
+    ```
+  metadata: {}
+uid: Azure.Analytics.Purview.Share.ReceivedSharesClient.GetReceivedShareAsync*
+commentId: Overload:Azure.Analytics.Purview.Share.ReceivedSharesClient.GetReceivedShareAsync
+namespace: Azure.Analytics.Purview.Share
+name: GetReceivedShareAsync
+fullName: Azure.Analytics.Purview.Share.ReceivedSharesClient.GetReceivedShareAsync
+nameWithType: ReceivedSharesClient.GetReceivedShareAsync
+assembliesWithMoniker:
+- value: Azure.Analytics.Purview.Share.dll
+packagesWithMoniker:
+- value: Azure.Analytics.Purview.Share v1.0.3-beta.20
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.Analytics.Purview.Share.ReceivedSharesClient.GetReceivedShareAsync
+  api_location:
+  - Azure.Analytics.Purview.Share.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.Analytics.Purview.Share.ReceivedSharesClient.GetReceivedShareAsync
+  - Azure::Analytics::Purview::Share::ReceivedSharesClient::GetReceivedShareAsync
+  - GetReceivedShareAsync
+  - ReceivedSharesClient.GetReceivedShareAsync
+  - ReceivedSharesClient::GetReceivedShareAsync
+  helpviewer_keywords:
+  - ReceivedSharesClient.GetReceivedShareAsync method [.NET]
+  - GetReceivedShareAsync method [.NET], class ReceivedSharesClient
+  - ReceivedSharesClient.GetReceivedShareAsync(String, RequestContext) method [.NET]
+  - GetReceivedShareAsync(String, RequestContext) method [.NET], class ReceivedSharesClient
+  monikers:
+  - azure-dotnet-preview

@@ -1,0 +1,202 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="Azure.Response?alt=Azure.Response&text=Response" data-throw-if-not-resolved="True"/>
+    description: The response returned from the service. Details of the response body schema are in the Remarks section below.
+  parameters:
+  - namesWithMoniker:
+    - value: groupId
+    description: Group identifier.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: deploymentId
+    description: Deployment identifier.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">groupId</code> or <code data-dev-comment-type="paramref">deploymentId</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: <code data-dev-comment-type="paramref">groupId</code> or <code data-dev-comment-type="paramref">deploymentId</code> is an empty string, and was expected to be non-empty.
+    type: <xref href="System.ArgumentException" data-throw-if-not-resolved="True"/>
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.IoT.DeviceUpdate.DeviceManagementClient.GetDeploymentStatus(System.String,System.String,Azure.RequestContext)
+  commentId: M:Azure.IoT.DeviceUpdate.DeviceManagementClient.GetDeploymentStatus(System.String,System.String,Azure.RequestContext)
+  name: GetDeploymentStatus(String, String, RequestContext)
+  fullName: Azure.IoT.DeviceUpdate.DeviceManagementClient.GetDeploymentStatus(String, String, RequestContext)
+  nameWithType: DeviceManagementClient.GetDeploymentStatus(String, String, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual Azure.Response GetDeploymentStatus (string groupId, string deploymentId, Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member GetDeploymentStatus : string * string * Azure.RequestContext -> Azure.Response
+
+        override this.GetDeploymentStatus : string * string * Azure.RequestContext -> Azure.Response
+  - lang: vb
+    values:
+    - value: Public Overridable Function GetDeploymentStatus (groupId As String, deploymentId As String, Optional context As RequestContext = Nothing) As Response
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview
+  summary: Gets the status of a deployment including a breakdown of how many devices in the deployment are in progress, completed, or failed.
+  remarks: >-
+    <p>Below is the JSON schema for the response payload.</p><p>Response Body:</p><p>Schema for <code data-dev-comment-type="c">DeploymentStatus</code>: 
+
+
+    ```
+
+    {
+                  groupId: string, # Required. The group identity
+                  deploymentState: "Active" | "ActiveWithSubgroupFailures" | "Failed" | "Inactive" | "Canceled", # Required. The state of the deployment.
+                  error: {
+                    code: string, # Required. Server defined error code.
+                    message: string, # Required. A human-readable representation of the error.
+                    target: string, # Optional. The target of the error.
+                    details: [Error], # Optional. An array of errors that led to the reported error.
+                    innererror: {
+                      code: string, # Required. A more specific error code than what was provided by the containing error.
+                      message: string, # Optional. A human-readable representation of the error.
+                      errorDetail: string, # Optional. The internal error or exception message.
+                      innerError: InnerError, # Optional. An object containing more specific information than the current object about the error.
+                    }, # Optional. An object containing more specific information than the current object about the error.
+                    occurredDateTime: string (ISO 8601 Format), # Optional. Date and time in UTC when the error occurred.
+                  }, # Optional. The error details of the Failed state.  This is not present if the deployment state is not Failed.
+                  subgroupStatus: [
+                    {
+                      groupId: string, # Required. The group identity
+                      deviceClassId: string, # Required. The device class subgroup identity
+                      deploymentState: "Active" | "Failed" | "Inactive" | "Canceled", # Required. The state of the subgroup deployment.
+                      error: Error, # Optional. The error details of the Failed state.  This is not present if the deployment state is not Failed.
+                      totalDevices: number, # Optional. The total number of devices in the deployment.
+                      devicesInProgressCount: number, # Optional. The number of devices that are currently in deployment.
+                      devicesCompletedFailedCount: number, # Optional. The number of devices that have completed deployment with a failure.
+                      devicesCompletedSucceededCount: number, # Optional. The number of devices which have successfully completed deployment.
+                      devicesCanceledCount: number, # Optional. The number of devices which have had their deployment canceled.
+                    }
+                  ], # Required. The collection of device class subgroup status objects
+                }
+    ```
+
+    </p>
+  examples: >-
+    This sample shows how to call GetDeploymentStatus with required parameters and parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new DeviceManagementClient(endpoint, "<instanceId>", credential);
+
+
+    Response response = client.GetDeploymentStatus("<groupId>", "<deploymentId>");
+
+
+    JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+
+    Console.WriteLine(result.GetProperty("groupId").ToString());
+
+    Console.WriteLine(result.GetProperty("deploymentState").ToString());
+
+    Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+
+    Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+
+    Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+
+    Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+
+    Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("message").ToString());
+
+    Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("errorDetail").ToString());
+
+    Console.WriteLine(result.GetProperty("error").GetProperty("occurredDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("subgroupStatus")[0].GetProperty("groupId").ToString());
+
+    Console.WriteLine(result.GetProperty("subgroupStatus")[0].GetProperty("deviceClassId").ToString());
+
+    Console.WriteLine(result.GetProperty("subgroupStatus")[0].GetProperty("deploymentState").ToString());
+
+    Console.WriteLine(result.GetProperty("subgroupStatus")[0].GetProperty("error").GetProperty("code").ToString());
+
+    Console.WriteLine(result.GetProperty("subgroupStatus")[0].GetProperty("error").GetProperty("message").ToString());
+
+    Console.WriteLine(result.GetProperty("subgroupStatus")[0].GetProperty("error").GetProperty("target").ToString());
+
+    Console.WriteLine(result.GetProperty("subgroupStatus")[0].GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+
+    Console.WriteLine(result.GetProperty("subgroupStatus")[0].GetProperty("error").GetProperty("innererror").GetProperty("message").ToString());
+
+    Console.WriteLine(result.GetProperty("subgroupStatus")[0].GetProperty("error").GetProperty("innererror").GetProperty("errorDetail").ToString());
+
+    Console.WriteLine(result.GetProperty("subgroupStatus")[0].GetProperty("error").GetProperty("occurredDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("subgroupStatus")[0].GetProperty("totalDevices").ToString());
+
+    Console.WriteLine(result.GetProperty("subgroupStatus")[0].GetProperty("devicesInProgressCount").ToString());
+
+    Console.WriteLine(result.GetProperty("subgroupStatus")[0].GetProperty("devicesCompletedFailedCount").ToString());
+
+    Console.WriteLine(result.GetProperty("subgroupStatus")[0].GetProperty("devicesCompletedSucceededCount").ToString());
+
+    Console.WriteLine(result.GetProperty("subgroupStatus")[0].GetProperty("devicesCanceledCount").ToString());
+
+    ```
+  metadata: {}
+uid: Azure.IoT.DeviceUpdate.DeviceManagementClient.GetDeploymentStatus*
+commentId: Overload:Azure.IoT.DeviceUpdate.DeviceManagementClient.GetDeploymentStatus
+namespace: Azure.IoT.DeviceUpdate
+name: GetDeploymentStatus
+fullName: Azure.IoT.DeviceUpdate.DeviceManagementClient.GetDeploymentStatus
+nameWithType: DeviceManagementClient.GetDeploymentStatus
+assembliesWithMoniker:
+- value: Azure.IoT.DeviceUpdate.dll
+packagesWithMoniker:
+- value: Azure.IoT.DeviceUpdate v1.0.0
+  monikers:
+  - azure-dotnet
+- value: Azure.IoT.DeviceUpdate v1.0.0-beta.4
+  monikers:
+  - azure-dotnet-preview
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.IoT.DeviceUpdate.DeviceManagementClient.GetDeploymentStatus
+  api_location:
+  - Azure.IoT.DeviceUpdate.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.IoT.DeviceUpdate.DeviceManagementClient.GetDeploymentStatus
+  - Azure::IoT::DeviceUpdate::DeviceManagementClient::GetDeploymentStatus
+  - GetDeploymentStatus
+  - DeviceManagementClient.GetDeploymentStatus
+  - DeviceManagementClient::GetDeploymentStatus
+  helpviewer_keywords:
+  - DeviceManagementClient.GetDeploymentStatus method [.NET]
+  - GetDeploymentStatus method [.NET], class DeviceManagementClient
+  - DeviceManagementClient.GetDeploymentStatus(String, String, RequestContext) method [.NET]
+  - GetDeploymentStatus(String, String, RequestContext) method [.NET], class DeviceManagementClient
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview

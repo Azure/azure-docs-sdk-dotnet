@@ -1,0 +1,121 @@
+### YamlMime:NetMember
+type: method
+members:
+- typeParameters:
+  - name: T
+  returnsWithMoniker:
+    type:
+    - value: <xref href="System.Threading.Tasks.Task`1?alt=System.Threading.Tasks.Task&text=Task" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.Cosmos.ItemResponse`1?alt=Azure.Cosmos.ItemResponse&text=ItemResponse" data-throw-if-not-resolved="True"/>&lt;T&gt;&gt;
+    description: A <xref data-throw-if-not-resolved="true" uid="System.Threading.Tasks.Task"></xref> containing a <xref data-throw-if-not-resolved="true" uid="Azure.Response`1"></xref> which wraps the updated resource record.
+  parameters:
+  - namesWithMoniker:
+    - value: item
+    description: A JSON serializable object that must contain an id property. <xref data-throw-if-not-resolved="true" uid="Azure.Cosmos.Serialization.CosmosSerializer"></xref> to implement a custom serializer.
+    type: T
+  - namesWithMoniker:
+    - value: id
+    description: The cosmos item id, which is expected to match the value within T.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: partitionKey
+    description: Partition key for the item. If not specified will be populated by extracting from {T}
+    type: <xref href="System.Nullable`1?alt=System.Nullable&text=Nullable" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.Cosmos.PartitionKey?alt=Azure.Cosmos.PartitionKey&text=PartitionKey" data-throw-if-not-resolved="True"/>&gt;
+  - namesWithMoniker:
+    - value: requestOptions
+    description: (Optional) The options for the item request <xref data-throw-if-not-resolved="true" uid="Azure.Cosmos.ItemRequestOptions"></xref>
+    type: <xref href="Azure.Cosmos.ItemRequestOptions?alt=Azure.Cosmos.ItemRequestOptions&text=ItemRequestOptions" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: cancellationToken
+    description: (Optional) <xref data-throw-if-not-resolved="true" uid="System.Threading.CancellationToken"></xref> representing request cancellation.
+    type: <xref href="System.Threading.CancellationToken?alt=System.Threading.CancellationToken&text=CancellationToken" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: If either <code data-dev-comment-type="paramref">item</code> is not set.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: >-
+      This exception can encapsulate many different types of errors. To determine the specific error always look at the StatusCode property.
+
+      <table><thead><tr><th>StatusCode</th><th>Reason for exception</th></tr></thead><tbody><tr><td>400</td><td>BadRequest - This means something was wrong with the document supplied. </td></tr><tr><td>403</td><td>Forbidden - This likely means the collection in to which you were trying to create the document is full.</td></tr><tr><td>413</td><td>RequestEntityTooLarge - This means the item exceeds the current max entity size. Consult documentation for limits and quotas.</td></tr><tr><td>429</td><td>TooManyRequests - This means you have exceeded the number of request units per second.</td></tr></tbody></table>
+    type: <xref href="Azure.Cosmos.CosmosException?alt=Azure.Cosmos.CosmosException&text=CosmosException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.Cosmos.CosmosContainer.ReplaceItemAsync``1(``0,System.String,System.Nullable{Azure.Cosmos.PartitionKey},Azure.Cosmos.ItemRequestOptions,System.Threading.CancellationToken)
+  commentId: M:Azure.Cosmos.CosmosContainer.ReplaceItemAsync``1(``0,System.String,System.Nullable{Azure.Cosmos.PartitionKey},Azure.Cosmos.ItemRequestOptions,System.Threading.CancellationToken)
+  name: ReplaceItemAsync<T>(T, String, Nullable<PartitionKey>, ItemRequestOptions, CancellationToken)
+  fullName: Azure.Cosmos.CosmosContainer.ReplaceItemAsync<T>(T, String, Nullable<PartitionKey>, ItemRequestOptions, CancellationToken)
+  nameWithType: CosmosContainer.ReplaceItemAsync<T>(T, String, Nullable<PartitionKey>, ItemRequestOptions, CancellationToken)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public abstract System.Threading.Tasks.Task<Azure.Cosmos.ItemResponse<T>> ReplaceItemAsync<T> (T item, string id, Azure.Cosmos.PartitionKey? partitionKey = default, Azure.Cosmos.ItemRequestOptions requestOptions = default, System.Threading.CancellationToken cancellationToken = default);
+  - lang: fsharp
+    values:
+    - value: "abstract member ReplaceItemAsync : 'T * string * Nullable<Azure.Cosmos.PartitionKey> * Azure.Cosmos.ItemRequestOptions * System.Threading.CancellationToken -> System.Threading.Tasks.Task<Azure.Cosmos.ItemResponse<'T>>"
+  - lang: vb
+    values:
+    - value: Public MustOverride Function ReplaceItemAsync(Of T) (item As T, id As String, Optional partitionKey As Nullable(Of PartitionKey) = Nothing, Optional requestOptions As ItemRequestOptions = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of ItemResponse(Of T))
+  monikers:
+  - azure-dotnet-preview
+  summary: Replaces a item in the Azure Cosmos service as an asynchronous operation.
+  examples: >-
+    ```csharp
+
+    public class ToDoActivity{
+        public string id {get; set;}
+        public string status {get; set;}
+    }
+
+
+    ToDoActivity test = new ToDoActivity()
+
+    {
+       id = Guid.NewGuid().ToString(),
+       status = "InProgress"
+    };
+
+
+    ItemResponse<ToDoActivity> item = await this.container.ReplaceItemAsync<ToDoActivity>(test, test.id, new PartitionKey(test.status));
+
+    ```
+  metadata: {}
+uid: Azure.Cosmos.CosmosContainer.ReplaceItemAsync*
+commentId: Overload:Azure.Cosmos.CosmosContainer.ReplaceItemAsync
+namespace: Azure.Cosmos
+name: ReplaceItemAsync
+fullName: Azure.Cosmos.CosmosContainer.ReplaceItemAsync
+nameWithType: CosmosContainer.ReplaceItemAsync
+assembliesWithMoniker:
+- value: Azure.Cosmos.dll
+packagesWithMoniker:
+- value: Azure.Cosmos v4.0.0-preview3
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.Cosmos.CosmosContainer.ReplaceItemAsync
+  api_location:
+  - Azure.Cosmos.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.Cosmos.CosmosContainer.ReplaceItemAsync
+  - Azure::Cosmos::CosmosContainer::ReplaceItemAsync
+  - ReplaceItemAsync
+  - CosmosContainer.ReplaceItemAsync
+  - CosmosContainer::ReplaceItemAsync
+  - Azure.Cosmos.CosmosContainer.ReplaceItemAsync``1
+  - Azure::Cosmos::CosmosContainer::ReplaceItemAsync``1
+  - ReplaceItemAsync``1
+  - CosmosContainer.ReplaceItemAsync``1
+  - CosmosContainer::ReplaceItemAsync``1
+  helpviewer_keywords:
+  - CosmosContainer.ReplaceItemAsync method [.NET]
+  - ReplaceItemAsync method [.NET], class CosmosContainer
+  - CosmosContainer.ReplaceItemAsync<T>(T, String, Nullable<PartitionKey>, ItemRequestOptions, CancellationToken) method [.NET]
+  - ReplaceItemAsync<T>(T, String, Nullable<PartitionKey>, ItemRequestOptions, CancellationToken) method [.NET], class CosmosContainer
+  monikers:
+  - azure-dotnet-preview

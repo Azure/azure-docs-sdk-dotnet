@@ -1,0 +1,363 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="System.Threading.Tasks.Task`1?alt=System.Threading.Tasks.Task&text=Task" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.Operation`1?alt=Azure.Operation&text=Operation" data-throw-if-not-resolved="True"/>&lt;<xref href="System.BinaryData?alt=System.BinaryData&text=BinaryData" data-throw-if-not-resolved="True"/>&gt;&gt;
+    description: The <xref data-throw-if-not-resolved="true" uid="Azure.Operation`1"></xref> from the service that will contain a <xref data-throw-if-not-resolved="true" uid="System.BinaryData"></xref> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below.
+  parameters:
+  - namesWithMoniker:
+    - value: waitUntil
+    description: <xref data-throw-if-not-resolved="true" uid="Azure.WaitUntil.Completed"></xref> if the method should wait to return until the long-running operation has completed on the service; <xref data-throw-if-not-resolved="true" uid="Azure.WaitUntil.Started"></xref> if it should return after starting the operation. For more information on long-running operations, please see <a href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</a>.
+    type: <xref href="Azure.WaitUntil?alt=Azure.WaitUntil&text=WaitUntil" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: content
+    description: The content to send as the body of the request. Details of the request body schema are in the Remarks section below.
+    type: <xref href="Azure.Core.RequestContent?alt=Azure.Core.RequestContent&text=RequestContent" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: repeatabilityRequestId
+    description: An opaque, globally-unique, client-generated string identifier for the request.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: repeatabilityFirstSent
+    description: Specifies the date and time at which the request was first created.
+    type: <xref href="System.Nullable`1?alt=System.Nullable&text=Nullable" data-throw-if-not-resolved="True"/>&lt;<xref href="System.DateTimeOffset?alt=System.DateTimeOffset&text=DateTimeOffset" data-throw-if-not-resolved="True"/>&gt;
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">content</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.Health.Insights.CancerProfiling.CancerProfilingClient.InferCancerProfileAsync(Azure.WaitUntil,Azure.Core.RequestContent,System.String,System.Nullable{System.DateTimeOffset},Azure.RequestContext)
+  commentId: M:Azure.Health.Insights.CancerProfiling.CancerProfilingClient.InferCancerProfileAsync(Azure.WaitUntil,Azure.Core.RequestContent,System.String,System.Nullable{System.DateTimeOffset},Azure.RequestContext)
+  name: InferCancerProfileAsync(WaitUntil, RequestContent, String, Nullable<DateTimeOffset>, RequestContext)
+  fullName: Azure.Health.Insights.CancerProfiling.CancerProfilingClient.InferCancerProfileAsync(WaitUntil, RequestContent, String, Nullable<DateTimeOffset>, RequestContext)
+  nameWithType: CancerProfilingClient.InferCancerProfileAsync(WaitUntil, RequestContent, String, Nullable<DateTimeOffset>, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual System.Threading.Tasks.Task<Azure.Operation<BinaryData>> InferCancerProfileAsync (Azure.WaitUntil waitUntil, Azure.Core.RequestContent content, string repeatabilityRequestId = default, DateTimeOffset? repeatabilityFirstSent = default, Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member InferCancerProfileAsync : Azure.WaitUntil * Azure.Core.RequestContent * string * Nullable<DateTimeOffset> * Azure.RequestContext -> System.Threading.Tasks.Task<Azure.Operation<BinaryData>>
+
+        override this.InferCancerProfileAsync : Azure.WaitUntil * Azure.Core.RequestContent * string * Nullable<DateTimeOffset> * Azure.RequestContext -> System.Threading.Tasks.Task<Azure.Operation<BinaryData>>
+  - lang: vb
+    values:
+    - value: Public Overridable Function InferCancerProfileAsync (waitUntil As WaitUntil, content As RequestContent, Optional repeatabilityRequestId As String = Nothing, Optional repeatabilityFirstSent As Nullable(Of DateTimeOffset) = Nothing, Optional context As RequestContext = Nothing) As Task(Of Operation(Of BinaryData))
+  monikers:
+  - azure-dotnet-preview
+  summary: Create Onco Phenotype job.
+  remarks: >-
+    <p>Creates an Onco Phenotype job with the given request body.</p><p>Below is the JSON schema for the request and response payloads.</p><p>Request Body:</p><p>Schema for <code data-dev-comment-type="c">OncoPhenotypeData</code>: 
+
+
+    ```
+
+    {
+      patients: [
+        {
+          id: string, # Required. A given identifier for the patient. Has to be unique across all patients in a single request.
+          info: {
+            sex: "female" | "male" | "unspecified", # Optional. The patient's sex.
+            birthDate: string (date), # Optional. The patient's date of birth.
+            clinicalInfo: [ClinicalCodedElement], # Optional. Known clinical information for the patient, structured.
+          }, # Optional. Patient structured information, including demographics and known structured clinical information.
+          data: [PatientDocument], # Optional. Patient unstructured clinical data, given as documents.
+        }
+      ], # Required. The list of patients, including their clinical information and data.
+      configuration: {
+        verbose: boolean, # Optional. An indication whether the model should produce verbose output.
+        includeEvidence: boolean, # Optional. An indication whether the model's output should include evidence for the inferences.
+        inferenceTypes: ["tumorSite" | "histology" | "clinicalStageT" | "clinicalStageN" | "clinicalStageM" | "pathologicStageT" | "pathologicStageN" | "pathologicStageM"], # Optional. A list of inference types to be inferred for the current request.
+    This could be used if only part of the Onco Phenotype inferences are required.
+
+    If this list is omitted or empty, the model will return all the inference types.
+        checkForCancerCase: boolean, # Optional. An indication whether to perform a preliminary step on the patient's documents to determine whether they relate to a Cancer case.
+      }, # Optional. Configuration affecting the Onco Phenotype model's inference.
+    }
+
+    ```
+
+    </p><p>Response Body:</p><p>Schema for <code data-dev-comment-type="c">OncoPhenotypeResult</code>: 
+
+
+    ```
+
+    {
+      jobId: string, # Required. A processing job identifier.
+      createdDateTime: string (date & time), # Required. The date and time when the processing job was created.
+      expirationDateTime: string (date & time), # Required. The date and time when the processing job is set to expire.
+      lastUpdateDateTime: string (date & time), # Required. The date and time when the processing job was last updated.
+      status: "notStarted" | "running" | "succeeded" | "failed" | "partiallyCompleted", # Required. The status of the processing job.
+      errors: [
+        {
+          code: string, # Required. One of a server-defined set of error codes.
+          message: string, # Required. A human-readable representation of the error.
+          target: string, # Optional. The target of the error.
+          details: [Error], # Required. An array of details about specific errors that led to this reported error.
+          innererror: {
+            code: string, # Required. One of a server-defined set of error codes.
+            innererror: InnerError, # Optional. Inner error.
+          }, # Optional. An object containing more specific information than the current object about the error.
+        }
+      ], # Optional. An array of errors, if any errors occurred during the processing job.
+      results: {
+        patients: [OncoPhenotypePatientResult], # Required. Results for the patients given in the request.
+        modelVersion: string, # Required. The version of the model used for inference, expressed as the model date.
+      }, # Optional. The inference results for the Onco Phenotype request.
+    }
+
+    ```
+
+    </p>
+  examples: >-
+    This sample shows how to call InferCancerProfileAsync with required parameters and request content, and how to parse the result.
+
+
+    ```
+
+    var credential = new AzureKeyCredential("<key>");
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new CancerProfilingClient(endpoint, credential);
+
+
+    var data = new {
+        patients = new[] {
+            new {
+                id = "<id>",
+            }
+        },
+    };
+
+
+    var operation = await client.InferCancerProfileAsync(WaitUntil.Completed, RequestContent.Create(data));
+
+
+    BinaryData data = operation.Value;
+
+    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+
+    Console.WriteLine(result.GetProperty("jobId").ToString());
+
+    Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("expirationDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("lastUpdateDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("status").ToString());
+
+    ```
+
+    This sample shows how to call InferCancerProfileAsync with all parameters and request content, and how to parse the result.
+
+
+    ```
+
+    var credential = new AzureKeyCredential("<key>");
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new CancerProfilingClient(endpoint, credential);
+
+
+    var data = new {
+        patients = new[] {
+            new {
+                id = "<id>",
+                info = new {
+                    sex = "female",
+                    birthDate = "2022-05-10",
+                    clinicalInfo = new[] {
+                        new {
+                            system = "<system>",
+                            code = "<code>",
+                            name = "<name>",
+                            value = "<value>",
+                        }
+                    },
+                },
+                data = new[] {
+                    new {
+                        type = "note",
+                        clinicalType = "consultation",
+                        id = "<id>",
+                        language = "<language>",
+                        createdDateTime = "2022-05-10T14:57:31.2311892-04:00",
+                        content = new {
+                            sourceType = "inline",
+                            value = "<value>",
+                        },
+                    }
+                },
+            }
+        },
+        configuration = new {
+            verbose = true,
+            includeEvidence = true,
+            inferenceTypes = new[] {
+                "tumorSite"
+            },
+            checkForCancerCase = true,
+        },
+    };
+
+
+    var operation = await client.InferCancerProfileAsync(WaitUntil.Completed, RequestContent.Create(data), "<repeatabilityRequestId>", DateTimeOffset.UtcNow);
+
+
+    BinaryData data = operation.Value;
+
+    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+
+    Console.WriteLine(result.GetProperty("jobId").ToString());
+
+    Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("expirationDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("lastUpdateDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("status").ToString());
+
+    Console.WriteLine(result.GetProperty("errors")[0].GetProperty("code").ToString());
+
+    Console.WriteLine(result.GetProperty("errors")[0].GetProperty("message").ToString());
+
+    Console.WriteLine(result.GetProperty("errors")[0].GetProperty("target").ToString());
+
+    Console.WriteLine(result.GetProperty("errors")[0].GetProperty("innererror").GetProperty("code").ToString());
+
+    Console.WriteLine(result.GetProperty("results").GetProperty("patients")[0].GetProperty("id").ToString());
+
+    Console.WriteLine(result.GetProperty("results").GetProperty("patients")[0].GetProperty("inferences")[0].GetProperty("type").ToString());
+
+    Console.WriteLine(result.GetProperty("results").GetProperty("patients")[0].GetProperty("inferences")[0].GetProperty("value").ToString());
+
+    Console.WriteLine(result.GetProperty("results").GetProperty("patients")[0].GetProperty("inferences")[0].GetProperty("description").ToString());
+
+    Console.WriteLine(result.GetProperty("results").GetProperty("patients")[0].GetProperty("inferences")[0].GetProperty("confidenceScore").ToString());
+
+    Console.WriteLine(result.GetProperty("results").GetProperty("patients")[0].GetProperty("inferences")[0].GetProperty("evidence")[0].GetProperty("patientDataEvidence").GetProperty("id").ToString());
+
+    Console.WriteLine(result.GetProperty("results").GetProperty("patients")[0].GetProperty("inferences")[0].GetProperty("evidence")[0].GetProperty("patientDataEvidence").GetProperty("text").ToString());
+
+    Console.WriteLine(result.GetProperty("results").GetProperty("patients")[0].GetProperty("inferences")[0].GetProperty("evidence")[0].GetProperty("patientDataEvidence").GetProperty("offset").ToString());
+
+    Console.WriteLine(result.GetProperty("results").GetProperty("patients")[0].GetProperty("inferences")[0].GetProperty("evidence")[0].GetProperty("patientDataEvidence").GetProperty("length").ToString());
+
+    Console.WriteLine(result.GetProperty("results").GetProperty("patients")[0].GetProperty("inferences")[0].GetProperty("evidence")[0].GetProperty("patientInfoEvidence").GetProperty("system").ToString());
+
+    Console.WriteLine(result.GetProperty("results").GetProperty("patients")[0].GetProperty("inferences")[0].GetProperty("evidence")[0].GetProperty("patientInfoEvidence").GetProperty("code").ToString());
+
+    Console.WriteLine(result.GetProperty("results").GetProperty("patients")[0].GetProperty("inferences")[0].GetProperty("evidence")[0].GetProperty("patientInfoEvidence").GetProperty("name").ToString());
+
+    Console.WriteLine(result.GetProperty("results").GetProperty("patients")[0].GetProperty("inferences")[0].GetProperty("evidence")[0].GetProperty("patientInfoEvidence").GetProperty("value").ToString());
+
+    Console.WriteLine(result.GetProperty("results").GetProperty("patients")[0].GetProperty("inferences")[0].GetProperty("evidence")[0].GetProperty("importance").ToString());
+
+    Console.WriteLine(result.GetProperty("results").GetProperty("patients")[0].GetProperty("inferences")[0].GetProperty("caseId").ToString());
+
+    Console.WriteLine(result.GetProperty("results").GetProperty("modelVersion").ToString());
+
+    ```
+  metadata: {}
+- returnsWithMoniker:
+    type:
+    - value: <xref href="System.Threading.Tasks.Task`1?alt=System.Threading.Tasks.Task&text=Task" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.Operation`1?alt=Azure.Operation&text=Operation" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.Health.Insights.CancerProfiling.OncoPhenotypeResult?alt=Azure.Health.Insights.CancerProfiling.OncoPhenotypeResult&text=OncoPhenotypeResult" data-throw-if-not-resolved="True"/>&gt;&gt;
+  parameters:
+  - namesWithMoniker:
+    - value: waitUntil
+    description: <xref data-throw-if-not-resolved="true" uid="Azure.WaitUntil.Completed"></xref> if the method should wait to return until the long-running operation has completed on the service; <xref data-throw-if-not-resolved="true" uid="Azure.WaitUntil.Started"></xref> if it should return after starting the operation. For more information on long-running operations, please see <a href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</a>.
+    type: <xref href="Azure.WaitUntil?alt=Azure.WaitUntil&text=WaitUntil" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: oncoPhenotypeData
+    description: The body of the Onco Phenotype request.
+    type: <xref href="Azure.Health.Insights.CancerProfiling.OncoPhenotypeData?alt=Azure.Health.Insights.CancerProfiling.OncoPhenotypeData&text=OncoPhenotypeData" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: repeatabilityRequestId
+    description: An opaque, globally-unique, client-generated string identifier for the request.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: repeatabilityFirstSent
+    description: Specifies the date and time at which the request was first created.
+    type: <xref href="System.Nullable`1?alt=System.Nullable&text=Nullable" data-throw-if-not-resolved="True"/>&lt;<xref href="System.DateTimeOffset?alt=System.DateTimeOffset&text=DateTimeOffset" data-throw-if-not-resolved="True"/>&gt;
+  - namesWithMoniker:
+    - value: cancellationToken
+    description: The cancellation token to use.
+    type: <xref href="System.Threading.CancellationToken?alt=System.Threading.CancellationToken&text=CancellationToken" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">oncoPhenotypeData</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.Health.Insights.CancerProfiling.CancerProfilingClient.InferCancerProfileAsync(Azure.WaitUntil,Azure.Health.Insights.CancerProfiling.OncoPhenotypeData,System.String,System.Nullable{System.DateTimeOffset},System.Threading.CancellationToken)
+  commentId: M:Azure.Health.Insights.CancerProfiling.CancerProfilingClient.InferCancerProfileAsync(Azure.WaitUntil,Azure.Health.Insights.CancerProfiling.OncoPhenotypeData,System.String,System.Nullable{System.DateTimeOffset},System.Threading.CancellationToken)
+  name: InferCancerProfileAsync(WaitUntil, OncoPhenotypeData, String, Nullable<DateTimeOffset>, CancellationToken)
+  fullName: Azure.Health.Insights.CancerProfiling.CancerProfilingClient.InferCancerProfileAsync(WaitUntil, OncoPhenotypeData, String, Nullable<DateTimeOffset>, CancellationToken)
+  nameWithType: CancerProfilingClient.InferCancerProfileAsync(WaitUntil, OncoPhenotypeData, String, Nullable<DateTimeOffset>, CancellationToken)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual System.Threading.Tasks.Task<Azure.Operation<Azure.Health.Insights.CancerProfiling.OncoPhenotypeResult>> InferCancerProfileAsync (Azure.WaitUntil waitUntil, Azure.Health.Insights.CancerProfiling.OncoPhenotypeData oncoPhenotypeData, string repeatabilityRequestId = default, DateTimeOffset? repeatabilityFirstSent = default, System.Threading.CancellationToken cancellationToken = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member InferCancerProfileAsync : Azure.WaitUntil * Azure.Health.Insights.CancerProfiling.OncoPhenotypeData * string * Nullable<DateTimeOffset> * System.Threading.CancellationToken -> System.Threading.Tasks.Task<Azure.Operation<Azure.Health.Insights.CancerProfiling.OncoPhenotypeResult>>
+
+        override this.InferCancerProfileAsync : Azure.WaitUntil * Azure.Health.Insights.CancerProfiling.OncoPhenotypeData * string * Nullable<DateTimeOffset> * System.Threading.CancellationToken -> System.Threading.Tasks.Task<Azure.Operation<Azure.Health.Insights.CancerProfiling.OncoPhenotypeResult>>
+  - lang: vb
+    values:
+    - value: Public Overridable Function InferCancerProfileAsync (waitUntil As WaitUntil, oncoPhenotypeData As OncoPhenotypeData, Optional repeatabilityRequestId As String = Nothing, Optional repeatabilityFirstSent As Nullable(Of DateTimeOffset) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Operation(Of OncoPhenotypeResult))
+  monikers:
+  - azure-dotnet-preview
+  summary: Create Onco Phenotype job.
+  remarks: Creates an Onco Phenotype job with the given request body.
+  metadata: {}
+uid: Azure.Health.Insights.CancerProfiling.CancerProfilingClient.InferCancerProfileAsync*
+commentId: Overload:Azure.Health.Insights.CancerProfiling.CancerProfilingClient.InferCancerProfileAsync
+namespace: Azure.Health.Insights.CancerProfiling
+name: InferCancerProfileAsync
+fullName: Azure.Health.Insights.CancerProfiling.CancerProfilingClient.InferCancerProfileAsync
+nameWithType: CancerProfilingClient.InferCancerProfileAsync
+assembliesWithMoniker:
+- value: Azure.Health.Insights.CancerProfiling.dll
+packagesWithMoniker:
+- value: Azure.Health.Insights.CancerProfiling v1.0.0-beta.1
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.Health.Insights.CancerProfiling.CancerProfilingClient.InferCancerProfileAsync
+  api_location:
+  - Azure.Health.Insights.CancerProfiling.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.Health.Insights.CancerProfiling.CancerProfilingClient.InferCancerProfileAsync
+  - Azure::Health::Insights::CancerProfiling::CancerProfilingClient::InferCancerProfileAsync
+  - InferCancerProfileAsync
+  - CancerProfilingClient.InferCancerProfileAsync
+  - CancerProfilingClient::InferCancerProfileAsync
+  helpviewer_keywords:
+  - CancerProfilingClient.InferCancerProfileAsync method [.NET]
+  - InferCancerProfileAsync method [.NET], class CancerProfilingClient
+  - CancerProfilingClient.InferCancerProfileAsync(WaitUntil, RequestContent, String, Nullable<DateTimeOffset>, RequestContext) method [.NET]
+  - InferCancerProfileAsync(WaitUntil, RequestContent, String, Nullable<DateTimeOffset>, RequestContext) method [.NET], class CancerProfilingClient
+  - CancerProfilingClient.InferCancerProfileAsync(WaitUntil, OncoPhenotypeData, String, Nullable<DateTimeOffset>, CancellationToken) method [.NET]
+  - InferCancerProfileAsync(WaitUntil, OncoPhenotypeData, String, Nullable<DateTimeOffset>, CancellationToken) method [.NET], class CancerProfilingClient
+  monikers:
+  - azure-dotnet-preview

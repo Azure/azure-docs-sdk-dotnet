@@ -1,0 +1,139 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="System.Threading.Tasks.Task`1?alt=System.Threading.Tasks.Task&text=Task" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.Response?alt=Azure.Response&text=Response" data-throw-if-not-resolved="True"/>&gt;
+    description: The task object representing the service response for the asynchronous operation which would contain any response set in the stored procedure.
+  parameters:
+  - namesWithMoniker:
+    - value: storedProcedureId
+    description: The identifier of the Stored Procedure to execute.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: partitionKey
+    description: The partition key for the item. <xref data-throw-if-not-resolved="true" uid="Azure.Cosmos.PartitionKey"></xref>
+    type: <xref href="Azure.Cosmos.PartitionKey?alt=Azure.Cosmos.PartitionKey&text=PartitionKey" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: parameters
+    description: (Optional) An array of dynamic objects representing the parameters for the stored procedure.
+    type: <xref href="System.Object?alt=System.Object&text=Object" data-throw-if-not-resolved="True"/>[]
+  - namesWithMoniker:
+    - value: requestOptions
+    description: (Optional) The options for the stored procedure request <xref data-throw-if-not-resolved="true" uid="Azure.Cosmos.StoredProcedureRequestOptions"></xref>
+    type: <xref href="Azure.Cosmos.StoredProcedureRequestOptions?alt=Azure.Cosmos.StoredProcedureRequestOptions&text=StoredProcedureRequestOptions" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: cancellationToken
+    description: (Optional) <xref data-throw-if-not-resolved="true" uid="System.Threading.CancellationToken"></xref> representing request cancellation.
+    type: <xref href="System.Threading.CancellationToken?alt=System.Threading.CancellationToken&text=CancellationToken" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: If <code data-dev-comment-type="paramref">storedProcedureId</code> or <code data-dev-comment-type="paramref">partitionKey</code>  are not set.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.Cosmos.Scripts.CosmosScripts.ExecuteStoredProcedureStreamAsync(System.String,Azure.Cosmos.PartitionKey,System.Object[],Azure.Cosmos.StoredProcedureRequestOptions,System.Threading.CancellationToken)
+  commentId: M:Azure.Cosmos.Scripts.CosmosScripts.ExecuteStoredProcedureStreamAsync(System.String,Azure.Cosmos.PartitionKey,System.Object[],Azure.Cosmos.StoredProcedureRequestOptions,System.Threading.CancellationToken)
+  name: ExecuteStoredProcedureStreamAsync(String, PartitionKey, Object[], StoredProcedureRequestOptions, CancellationToken)
+  fullName: Azure.Cosmos.Scripts.CosmosScripts.ExecuteStoredProcedureStreamAsync(String, PartitionKey, Object[], StoredProcedureRequestOptions, CancellationToken)
+  nameWithType: CosmosScripts.ExecuteStoredProcedureStreamAsync(String, PartitionKey, Object[], StoredProcedureRequestOptions, CancellationToken)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public abstract System.Threading.Tasks.Task<Azure.Response> ExecuteStoredProcedureStreamAsync (string storedProcedureId, Azure.Cosmos.PartitionKey partitionKey, object[] parameters, Azure.Cosmos.StoredProcedureRequestOptions requestOptions = default, System.Threading.CancellationToken cancellationToken = default);
+  - lang: fsharp
+    values:
+    - value: 'abstract member ExecuteStoredProcedureStreamAsync : string * Azure.Cosmos.PartitionKey * obj[] * Azure.Cosmos.StoredProcedureRequestOptions * System.Threading.CancellationToken -> System.Threading.Tasks.Task<Azure.Response>'
+  - lang: vb
+    values:
+    - value: Public MustOverride Function ExecuteStoredProcedureStreamAsync (storedProcedureId As String, partitionKey As PartitionKey, parameters As Object(), Optional requestOptions As StoredProcedureRequestOptions = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response)
+  monikers:
+  - azure-dotnet-preview
+  summary: Executes a stored procedure against a container as an asynchronous operation in the Azure Cosmos service and obtains a Stream as response.
+  examples: >2-
+     This creates and executes a stored procedure that appends a string to the first item returned from the query.
+
+    ```csharp
+
+    string sprocBody = @"function simple(prefix, postfix)
+       {
+           var collection = getContext().getCollection();
+
+           // Query documents and take 1st item.
+           var isAccepted = collection.queryDocuments(
+           collection.getSelfLink(),
+           'SELECT * FROM root r',
+           function(err, feed, options) {
+               if (err)throw err;
+
+               // Check the feed and if it's empty, set the body to 'no docs found',
+               // Otherwise just take 1st element from the feed.
+               if (!feed || !feed.length) getContext().getResponse().setBody(""no docs found"");
+               else getContext().getResponse().setBody(prefix + JSON.stringify(feed[0]) + postfix);
+           });
+
+           if (!isAccepted) throw new Error(""The query wasn't accepted by the server. Try again/use continuation token between API and script."");
+       }";
+
+    CosmosScripts scripts = this.container.Scripts;
+
+    string sprocId = "appendString";
+
+    Response<StoredProcedureProperties> storedProcedureResponse = await scripts.CreateStoredProcedureAsync(
+            sprocId,
+            sprocBody);
+
+    // Execute the stored procedure
+
+    Response sprocResponse = await scripts.ExecuteStoredProcedureStreamAsync(
+                            sprocId,
+                            new PartitionKey(testPartitionId),
+                            new dynamic[] {"myPrefixString", "myPostfixString"});
+
+    using (StreamReader sr = new StreamReader(sprocResponse.ContentStream))
+
+    {
+        string stringResponse = await sr.ReadToEndAsync();
+        Console.WriteLine(stringResponse);
+     }
+
+    /// 
+
+    ```
+  metadata: {}
+uid: Azure.Cosmos.Scripts.CosmosScripts.ExecuteStoredProcedureStreamAsync*
+commentId: Overload:Azure.Cosmos.Scripts.CosmosScripts.ExecuteStoredProcedureStreamAsync
+namespace: Azure.Cosmos.Scripts
+name: ExecuteStoredProcedureStreamAsync
+fullName: Azure.Cosmos.Scripts.CosmosScripts.ExecuteStoredProcedureStreamAsync
+nameWithType: CosmosScripts.ExecuteStoredProcedureStreamAsync
+assembliesWithMoniker:
+- value: Azure.Cosmos.dll
+packagesWithMoniker:
+- value: Azure.Cosmos v4.0.0-preview3
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.Cosmos.Scripts.CosmosScripts.ExecuteStoredProcedureStreamAsync
+  api_location:
+  - Azure.Cosmos.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.Cosmos.Scripts.CosmosScripts.ExecuteStoredProcedureStreamAsync
+  - Azure::Cosmos::Scripts::CosmosScripts::ExecuteStoredProcedureStreamAsync
+  - ExecuteStoredProcedureStreamAsync
+  - CosmosScripts.ExecuteStoredProcedureStreamAsync
+  - CosmosScripts::ExecuteStoredProcedureStreamAsync
+  helpviewer_keywords:
+  - CosmosScripts.ExecuteStoredProcedureStreamAsync method [.NET]
+  - ExecuteStoredProcedureStreamAsync method [.NET], class CosmosScripts
+  - CosmosScripts.ExecuteStoredProcedureStreamAsync(String, PartitionKey, Object[], StoredProcedureRequestOptions, CancellationToken) method [.NET]
+  - ExecuteStoredProcedureStreamAsync(String, PartitionKey, Object[], StoredProcedureRequestOptions, CancellationToken) method [.NET], class CosmosScripts
+  monikers:
+  - azure-dotnet-preview

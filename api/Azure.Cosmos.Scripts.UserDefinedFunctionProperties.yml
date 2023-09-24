@@ -1,0 +1,98 @@
+### YamlMime:NetType
+type: class
+inheritancesWithMoniker:
+- values:
+  - <xref href="System.Object?alt=System.Object&text=Object" data-throw-if-not-resolved="True"/>
+constructors:
+- uid: Azure.Cosmos.Scripts.UserDefinedFunctionProperties.#ctor
+  monikers:
+  - azure-dotnet-preview
+properties:
+- uid: Azure.Cosmos.Scripts.UserDefinedFunctionProperties.Body
+  monikers:
+  - azure-dotnet-preview
+- uid: Azure.Cosmos.Scripts.UserDefinedFunctionProperties.ETag
+  monikers:
+  - azure-dotnet-preview
+- uid: Azure.Cosmos.Scripts.UserDefinedFunctionProperties.Id
+  monikers:
+  - azure-dotnet-preview
+uid: Azure.Cosmos.Scripts.UserDefinedFunctionProperties
+commentId: T:Azure.Cosmos.Scripts.UserDefinedFunctionProperties
+namespace: Azure.Cosmos.Scripts
+name: UserDefinedFunctionProperties
+fullName: Azure.Cosmos.Scripts.UserDefinedFunctionProperties
+nameWithType: Azure.Cosmos.Scripts.UserDefinedFunctionProperties
+assembliesWithMoniker:
+- value: Azure.Cosmos.dll
+packagesWithMoniker:
+- value: Azure.Cosmos v4.0.0-preview3
+attributesWithMoniker:
+- value: System.Text.Json.Serialization.JsonConverterAttribute
+syntaxWithMoniker:
+- lang: csharp
+  values:
+  - value: >-
+      [System.Text.Json.Serialization.JsonConverter(typeof(Azure.Cosmos.TextJsonUserDefinedFunctionPropertiesConverter))]
+
+      public class UserDefinedFunctionProperties
+- lang: fsharp
+  values:
+  - value: >-
+      [<System.Text.Json.Serialization.JsonConverter(typeof(Azure.Cosmos.TextJsonUserDefinedFunctionPropertiesConverter))>]
+
+      type UserDefinedFunctionProperties = class
+- lang: vb
+  values:
+  - value: Public Class UserDefinedFunctionProperties
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet-preview
+summary: Represents a user defined function in the Azure Cosmos service.
+remarks: <p>Azure Cosmos supports JavaScript user defined functions (UDFs) which are stored in the database and can be used inside queries. Refer to https://docs.microsoft.com/azure/cosmos-db/sql-api-sql-query#javascript-integration for how to use UDFs within queries. Refer to https://docs.microsoft.com/azure/cosmos-db/programming#udf for more details about implementing UDFs in JavaScript.</p>
+examples: >-
+  The following examples show how to register and use UDFs.
+
+
+  ```csharp
+
+  await this.container.UserDefinedFunctions.CreateUserDefinedFunctionAsync(
+      new UserDefinedFunctionProperties 
+      { 
+          Id = "calculateTax", 
+          Body = @"function(amt) { return amt * 0.05; }" 
+      });
+
+  QueryDefinition sqlQuery = new QueryDefinition(
+      "SELECT VALUE udf.calculateTax(t.cost) FROM toDoActivity t where t.cost > @expensive and t.status = @status")
+      .WithParameter("@expensive", 9000)
+      .WithParameter("@status", "Done");
+
+  await foreach(double tax = this.container.Items.GetItemsQueryIterator<double>(
+      sqlQueryDefinition: sqlQuery,
+      partitionKey: "Done")
+  {
+      Console.WriteLine(tax);
+  }
+
+  ```
+metadata:
+  api_name:
+  - Azure.Cosmos.Scripts.UserDefinedFunctionProperties
+  api_location:
+  - Azure.Cosmos.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.Cosmos.Scripts.UserDefinedFunctionProperties
+  - Azure::Cosmos::Scripts::UserDefinedFunctionProperties
+  - UserDefinedFunctionProperties
+  helpviewer_keywords:
+  - Azure.Cosmos.Scripts.UserDefinedFunctionProperties class [.NET]
+  monikers:
+  - azure-dotnet-preview

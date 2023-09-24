@@ -1,0 +1,197 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="System.Threading.Tasks.Task`1?alt=System.Threading.Tasks.Task&text=Task" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.Response?alt=Azure.Response&text=Response" data-throw-if-not-resolved="True"/>&gt;
+    description: The response returned from the service.
+  parameters:
+  - namesWithMoniker:
+    - value: sentShareId
+    description: Id of the sent share.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: sentShareInvitationId
+    description: Id of the sent share invitation.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: repeatabilityRequestId
+    description: If specified, the client directs that the request is repeatable; that is, that the client can make the request multiple times with the same Repeatability-Request-Id and get back an appropriate response without the server executing the request multiple times. The value of the Repeatability-Request-Id is an opaque string representing a client-generated, globally unique for all time, identifier for the request. It is recommended to use version 4 (random) UUIDs.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">sentShareId</code> or <code data-dev-comment-type="paramref">sentShareInvitationId</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: <code data-dev-comment-type="paramref">sentShareId</code> or <code data-dev-comment-type="paramref">sentShareInvitationId</code> is an empty string, and was expected to be non-empty.
+    type: <xref href="System.ArgumentException" data-throw-if-not-resolved="True"/>
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.Analytics.Purview.Sharing.SentSharesClient.NotifyUserSentShareInvitationAsync(System.String,System.String,System.String,Azure.RequestContext)
+  commentId: M:Azure.Analytics.Purview.Sharing.SentSharesClient.NotifyUserSentShareInvitationAsync(System.String,System.String,System.String,Azure.RequestContext)
+  name: NotifyUserSentShareInvitationAsync(String, String, String, RequestContext)
+  fullName: Azure.Analytics.Purview.Sharing.SentSharesClient.NotifyUserSentShareInvitationAsync(String, String, String, RequestContext)
+  nameWithType: SentSharesClient.NotifyUserSentShareInvitationAsync(String, String, String, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual System.Threading.Tasks.Task<Azure.Response> NotifyUserSentShareInvitationAsync (string sentShareId, string sentShareInvitationId, string repeatabilityRequestId = default, Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member NotifyUserSentShareInvitationAsync : string * string * string * Azure.RequestContext -> System.Threading.Tasks.Task<Azure.Response>
+
+        override this.NotifyUserSentShareInvitationAsync : string * string * string * Azure.RequestContext -> System.Threading.Tasks.Task<Azure.Response>
+  - lang: vb
+    values:
+    - value: Public Overridable Function NotifyUserSentShareInvitationAsync (sentShareId As String, sentShareInvitationId As String, Optional repeatabilityRequestId As String = Nothing, Optional context As RequestContext = Nothing) As Task(Of Response)
+  monikers:
+  - azure-dotnet-preview
+  summary: >-
+    [Protocol Method] Notifies the recipient of the sent share invitation.
+
+    <ul><li>
+
+    This <a href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</a> allows explicit creation of the request and processing of the response for advanced scenarios.
+
+    </li></ul>
+  remarks: >-
+    <p>Notifies the user recipient of the sent share invitation, does not apply to service invitations.</p><p>Below is the JSON schema for the response payload.</p><p>Response Body:</p><p>This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this. <details><summary>ServiceInvitation</summary>Schema for <code data-dev-comment-type="c">ServiceInvitation</code>: 
+
+
+    ```
+
+    {
+      properties: {
+        expirationDate: string (ISO 8601 Format), # Optional. The time at which the invitation will expire. Represented in the standard date-time format as defined by [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339)
+        senderEmail: string, # Optional. Email address of the sender.
+        senderName: string, # Optional. Name of the sender
+        senderTenantName: string, # Optional. Tenant name of the sender
+        sentAt: string (ISO 8601 Format), # Optional. Gets the time at which the invitation was sent. Represented in the standard date-time format as defined by [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339)
+        shareStatus: "Detached" | "Attached", # Optional. Share status.
+        state: "Unknown" | "Succeeded" | "Creating" | "Deleting" | "Moving" | "Failed", # Optional. State of the resource
+        targetActiveDirectoryId: Guid, # Required. The target azure active directory id the invitation is sent to.
+        targetObjectId: Guid, # Required. The target object id in the azure active directory the invitation is sent to.
+      }, # Required. Properties of the service invitation type.
+      invitationKind: Service, # Required. The types of invitations.
+      id: string, # Optional. The unique id of the resource.
+      type: string, # Optional. Type of the resource.
+    }
+
+    ```
+
+     </details><details><summary>~+ 1 more JSON objects</summary><details><summary>UserInvitation</summary>Schema for <code data-dev-comment-type="c">UserInvitation</code>: 
+
+
+    ```
+
+    {
+      properties: {
+        expirationDate: string (ISO 8601 Format), # Optional. The time at which the invitation will expire. Represented in the standard date-time format as defined by [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339)
+        notify: boolean, # Optional. Whether or not the recipient was notified via email.
+        senderEmail: string, # Optional. Email address of the sender.
+        senderName: string, # Optional. Name of the sender
+        senderTenantName: string, # Optional. Tenant name of the sender
+        sentAt: string (ISO 8601 Format), # Optional. Gets the time at which the invitation was sent. Represented in the standard date-time format as defined by [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339)
+        shareStatus: "Detached" | "Attached", # Optional. Share status.
+        state: "Unknown" | "Succeeded" | "Creating" | "Deleting" | "Moving" | "Failed", # Optional. State of the resource
+        targetEmail: string, # Required. The receiver email for the invitation is being sent.
+      }, # Required. Properties of the user invitation type.
+      invitationKind: User, # Required. The types of invitations.
+      id: string, # Optional. The unique id of the resource.
+      type: string, # Optional. Type of the resource.
+    }
+
+    ```
+
+     </details></details></p>
+  examples: >-
+    This sample shows how to call NotifyUserSentShareInvitationAsync with required parameters and parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new SentSharesClient(endpoint, credential);
+
+
+    Response response = await client.NotifyUserSentShareInvitationAsync("<sentShareId>", "<sentShareInvitationId>");
+
+
+    JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+
+    Console.WriteLine(result.GetProperty("invitationKind").ToString());
+
+    Console.WriteLine(result.ToString());
+
+    ```
+
+    This sample shows how to call NotifyUserSentShareInvitationAsync with all parameters, and how to parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new SentSharesClient(endpoint, credential);
+
+
+    Response response = await client.NotifyUserSentShareInvitationAsync("<sentShareId>", "<sentShareInvitationId>", "<repeatabilityRequestId>");
+
+
+    JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+
+    Console.WriteLine(result.GetProperty("invitationKind").ToString());
+
+    Console.WriteLine(result.GetProperty("id").ToString());
+
+    Console.WriteLine(result.GetProperty("type").ToString());
+
+    ```
+  metadata: {}
+uid: Azure.Analytics.Purview.Sharing.SentSharesClient.NotifyUserSentShareInvitationAsync*
+commentId: Overload:Azure.Analytics.Purview.Sharing.SentSharesClient.NotifyUserSentShareInvitationAsync
+namespace: Azure.Analytics.Purview.Sharing
+name: NotifyUserSentShareInvitationAsync
+fullName: Azure.Analytics.Purview.Sharing.SentSharesClient.NotifyUserSentShareInvitationAsync
+nameWithType: SentSharesClient.NotifyUserSentShareInvitationAsync
+assembliesWithMoniker:
+- value: Azure.Analytics.Purview.Sharing.dll
+packagesWithMoniker:
+- value: Azure.Analytics.Purview.Sharing v1.0.0-beta.3
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.Analytics.Purview.Sharing.SentSharesClient.NotifyUserSentShareInvitationAsync
+  api_location:
+  - Azure.Analytics.Purview.Sharing.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.Analytics.Purview.Sharing.SentSharesClient.NotifyUserSentShareInvitationAsync
+  - Azure::Analytics::Purview::Sharing::SentSharesClient::NotifyUserSentShareInvitationAsync
+  - NotifyUserSentShareInvitationAsync
+  - SentSharesClient.NotifyUserSentShareInvitationAsync
+  - SentSharesClient::NotifyUserSentShareInvitationAsync
+  helpviewer_keywords:
+  - SentSharesClient.NotifyUserSentShareInvitationAsync method [.NET]
+  - NotifyUserSentShareInvitationAsync method [.NET], class SentSharesClient
+  - SentSharesClient.NotifyUserSentShareInvitationAsync(String, String, String, RequestContext) method [.NET]
+  - NotifyUserSentShareInvitationAsync(String, String, String, RequestContext) method [.NET], class SentSharesClient
+  monikers:
+  - azure-dotnet-preview

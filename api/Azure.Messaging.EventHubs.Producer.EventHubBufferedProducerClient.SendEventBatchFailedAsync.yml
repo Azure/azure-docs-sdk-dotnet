@@ -1,0 +1,100 @@
+### YamlMime:NetMember
+type: event
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="System.Func`2?alt=System.Func&text=Func" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.Messaging.EventHubs.Producer.SendEventBatchFailedEventArgs?alt=Azure.Messaging.EventHubs.Producer.SendEventBatchFailedEventArgs&text=SendEventBatchFailedEventArgs" data-throw-if-not-resolved="True"/>,<xref href="System.Threading.Tasks.Task?alt=System.Threading.Tasks.Task&text=Task" data-throw-if-not-resolved="True"/>&gt;
+  exceptions:
+  - description: If an attempt is made to remove a handler that doesn't match the current handler registered.
+    type: <xref href="System.ArgumentException" data-throw-if-not-resolved="True"/>
+  - description: If an attempt is made to add a handler when one is currently registered.
+    type: <xref href="System.NotSupportedException" data-throw-if-not-resolved="True"/>
+  type: event
+  uid: Azure.Messaging.EventHubs.Producer.EventHubBufferedProducerClient.SendEventBatchFailedAsync
+  commentId: E:Azure.Messaging.EventHubs.Producer.EventHubBufferedProducerClient.SendEventBatchFailedAsync
+  name: SendEventBatchFailedAsync
+  fullName: Azure.Messaging.EventHubs.Producer.EventHubBufferedProducerClient.SendEventBatchFailedAsync
+  nameWithType: EventHubBufferedProducerClient.SendEventBatchFailedAsync
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public event Func<Azure.Messaging.EventHubs.Producer.SendEventBatchFailedEventArgs,System.Threading.Tasks.Task> SendEventBatchFailedAsync;
+  - lang: fsharp
+    values:
+    - value: 'member this.SendEventBatchFailedAsync : Func<Azure.Messaging.EventHubs.Producer.SendEventBatchFailedEventArgs, System.Threading.Tasks.Task> '
+  - lang: vb
+    values:
+    - value: 'Public Custom Event SendEventBatchFailedAsync As Func(Of SendEventBatchFailedEventArgs, Task) '
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview
+  seeAlso: >+
+    - <xref:Azure.Messaging.EventHubs.EventHubsRetryOptions>
+
+  summary: >-
+    Invoked for any batch of events that failed to be published to the Event Hub, this handler must be
+
+    provided before events may be enqueued.  If this producer was not configured with <xref data-throw-if-not-resolved="true" uid="Azure.Messaging.EventHubs.Producer.EventHubBufferedProducerClientOptions.MaximumConcurrentSends"></xref>
+
+    and <xref data-throw-if-not-resolved="true" uid="Azure.Messaging.EventHubs.Producer.EventHubBufferedProducerClientOptions.MaximumConcurrentSendsPerPartition"></xref> both set to 1, the handler will be invoked
+
+    concurrently.
+
+
+    It is safe to attempt resending the events by calling <xref data-throw-if-not-resolved="true" uid="Azure.Messaging.EventHubs.Producer.EventHubBufferedProducerClient.EnqueueEventAsync(Azure.Messaging.EventHubs.EventData,Azure.Messaging.EventHubs.Producer.EnqueueEventOptions,System.Threading.CancellationToken)"></xref> or
+
+    <xref data-throw-if-not-resolved="true" uid="Azure.Messaging.EventHubs.Producer.EventHubBufferedProducerClient.EnqueueEventsAsync(System.Collections.Generic.IEnumerable{Azure.Messaging.EventHubs.EventData},Azure.Messaging.EventHubs.Producer.EnqueueEventOptions,System.Threading.CancellationToken)"></xref> from within this handler.  It is important
+
+    to note that doing so will place them at the end of the buffer; the original order will not be maintained.
+
+
+    This handler will be awaited after failure to publish the batch; the publishing operation is not considered complete until the
+
+    handler call returns.  It is advised that no long-running operations be performed in the handler to avoid negatively impacting throughput.
+
+
+    It is not recommended to invoke <xref data-throw-if-not-resolved="true" uid="Azure.Messaging.EventHubs.Producer.EventHubBufferedProducerClient.CloseAsync(System.Boolean,System.Threading.CancellationToken)"></xref> or <xref data-throw-if-not-resolved="true" uid="Azure.Messaging.EventHubs.Producer.EventHubBufferedProducerClient.DisposeAsync"></xref> from this handler; doing so may result
+
+    in a deadlock scenario if those calls are awaited.
+  remarks: <p>Should a transient failure occur during publishing, this handler will not be invoked immediately; it is only invoked after applying the retry policy and all eligible retries have been exhausted.  Should publishing succeed during a retry attempt, this handler is not invoked.</p><p>Since applications do not have deterministic control over failed batches, it is recommended that the application set a generous number of retries and try timeout interval in the <xref data-throw-if-not-resolved="true" uid="Azure.Messaging.EventHubs.Producer.EventHubProducerClientOptions.RetryOptions"></xref>. Doing so will allow the <xref data-throw-if-not-resolved="true" uid="Azure.Messaging.EventHubs.Producer.EventHubBufferedProducerClient"></xref> a higher chance to recover from transient failures.  This is especially important when ensuring the order of events is needed.</p><p>It is not necessary to explicitly unregister this handler; it will be automatically unregistered when <xref data-throw-if-not-resolved="true" uid="Azure.Messaging.EventHubs.Producer.EventHubBufferedProducerClient.CloseAsync(System.Boolean,System.Threading.CancellationToken)"></xref> or <xref data-throw-if-not-resolved="true" uid="Azure.Messaging.EventHubs.Producer.EventHubBufferedProducerClient.DisposeAsync"></xref> is invoked.</p>
+  metadata: {}
+namespace: Azure.Messaging.EventHubs.Producer
+assembliesWithMoniker:
+- value: Azure.Messaging.EventHubs.dll
+packagesWithMoniker:
+- value: Azure.Messaging.EventHubs v5.9.2
+  monikers:
+  - azure-dotnet
+- value: Azure.Messaging.EventHubs v5.7.0-beta.5
+  monikers:
+  - azure-dotnet-preview
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.Messaging.EventHubs.Producer.EventHubBufferedProducerClient.SendEventBatchFailedAsync
+  - Azure.Messaging.EventHubs.Producer.EventHubBufferedProducerClient.add_SendEventBatchFailedAsync
+  - Azure.Messaging.EventHubs.Producer.EventHubBufferedProducerClient.remove_SendEventBatchFailedAsync
+  api_location:
+  - Azure.Messaging.EventHubs.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.Messaging.EventHubs.Producer.EventHubBufferedProducerClient.SendEventBatchFailedAsync
+  - Azure::Messaging::EventHubs::Producer::EventHubBufferedProducerClient::SendEventBatchFailedAsync
+  - SendEventBatchFailedAsync
+  - EventHubBufferedProducerClient.SendEventBatchFailedAsync
+  - EventHubBufferedProducerClient::SendEventBatchFailedAsync
+  helpviewer_keywords:
+  - EventHubBufferedProducerClient.SendEventBatchFailedAsync event [.NET]
+  - SendEventBatchFailedAsync event [.NET], class EventHubBufferedProducerClient
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview

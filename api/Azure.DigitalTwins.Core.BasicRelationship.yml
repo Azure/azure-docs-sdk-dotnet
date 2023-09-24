@@ -1,0 +1,138 @@
+### YamlMime:NetType
+type: class
+inheritancesWithMoniker:
+- values:
+  - <xref href="System.Object?alt=System.Object&text=Object" data-throw-if-not-resolved="True"/>
+constructors:
+- uid: Azure.DigitalTwins.Core.BasicRelationship.#ctor
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview
+properties:
+- uid: Azure.DigitalTwins.Core.BasicRelationship.ETag
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview
+- uid: Azure.DigitalTwins.Core.BasicRelationship.Id
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview
+- uid: Azure.DigitalTwins.Core.BasicRelationship.Name
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview
+- uid: Azure.DigitalTwins.Core.BasicRelationship.Properties
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview
+- uid: Azure.DigitalTwins.Core.BasicRelationship.SourceId
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview
+- uid: Azure.DigitalTwins.Core.BasicRelationship.TargetId
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview
+uid: Azure.DigitalTwins.Core.BasicRelationship
+commentId: T:Azure.DigitalTwins.Core.BasicRelationship
+namespace: Azure.DigitalTwins.Core
+name: BasicRelationship
+fullName: Azure.DigitalTwins.Core.BasicRelationship
+nameWithType: Azure.DigitalTwins.Core.BasicRelationship
+assembliesWithMoniker:
+- value: Azure.DigitalTwins.Core.dll
+packagesWithMoniker:
+- value: Azure.DigitalTwins.Core v1.4.0
+  monikers:
+  - azure-dotnet
+- value: Azure.DigitalTwins.Core v1.4.0-beta.1
+  monikers:
+  - azure-dotnet-preview
+syntaxWithMoniker:
+- lang: csharp
+  values:
+  - value: public class BasicRelationship
+- lang: fsharp
+  values:
+  - value: type BasicRelationship = class
+- lang: vb
+  values:
+  - value: Public Class BasicRelationship
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet
+- azure-dotnet-preview
+summary: >-
+  Although relationships have a user-defined schema, these properties should exist on every instance. This is
+
+  useful to use as a base class to ensure your custom relationships have the necessary properties.
+remarks: <p>This helper class will only work with <xref data-throw-if-not-resolved="true" uid="System.Text.Json"></xref>. When used with the <xref data-throw-if-not-resolved="true" uid="Azure.Core.Serialization.ObjectSerializer"></xref>, parameter to <xref data-throw-if-not-resolved="true" uid="Azure.DigitalTwins.Core.DigitalTwinsClientOptions"></xref> it will only work with the default (<xref data-throw-if-not-resolved="true" uid="Azure.Core.Serialization.JsonObjectSerializer"></xref>).</p><p>For more samples, see <a href="https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">our repo samples</a>.</p>
+examples: >-
+  Here's an example of how to use the BasicRelationship helper class to serialize and create a relationship from a building digital twin to a floor digital twin.
+
+
+
+  ```csharp
+
+  var buildingFloorRelationshipPayload = new BasicRelationship
+
+  {
+      Id = "buildingFloorRelationshipId",
+      SourceId = "buildingTwinId",
+      TargetId = "floorTwinId",
+      Name = "contains",
+      Properties =
+      {
+          { "Prop1", "Prop1 value" },
+          { "Prop2", 6 }
+      }
+  };
+
+
+  Response<BasicRelationship> createBuildingFloorRelationshipResponse = await client
+      .CreateOrReplaceRelationshipAsync<BasicRelationship>("buildingTwinId", "buildingFloorRelationshipId", buildingFloorRelationshipPayload);
+  Console.WriteLine($"Created a digital twin relationship '{createBuildingFloorRelationshipResponse.Value.Id}' " +
+      $"from twin '{createBuildingFloorRelationshipResponse.Value.SourceId}' to twin '{createBuildingFloorRelationshipResponse.Value.TargetId}'.");
+  ```
+
+
+  Here's an example of how to use the BasicRelationship helper class to get and deserialize a relationship.
+
+
+
+  ```csharp
+
+  Response<BasicRelationship> getBasicRelationshipResponse = await client.GetRelationshipAsync<BasicRelationship>(
+      "buildingTwinId",
+      "buildingFloorRelationshipId");
+  if (getBasicRelationshipResponse.GetRawResponse().Status == (int)HttpStatusCode.OK)
+
+  {
+      BasicRelationship basicRelationship = getBasicRelationshipResponse.Value;
+      Console.WriteLine($"Retrieved relationship '{basicRelationship.Id}' from twin {basicRelationship.SourceId}.\n\t" +
+          $"Prop1: {basicRelationship.Properties["Prop1"]}\n\t" +
+          $"Prop2: {basicRelationship.Properties["Prop2"]}");
+  }
+
+  ```
+metadata:
+  api_name:
+  - Azure.DigitalTwins.Core.BasicRelationship
+  api_location:
+  - Azure.DigitalTwins.Core.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.DigitalTwins.Core.BasicRelationship
+  - Azure::DigitalTwins::Core::BasicRelationship
+  - BasicRelationship
+  helpviewer_keywords:
+  - Azure.DigitalTwins.Core.BasicRelationship class [.NET]
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview

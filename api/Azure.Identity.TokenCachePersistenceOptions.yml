@@ -1,0 +1,135 @@
+### YamlMime:NetType
+type: class
+inheritancesWithMoniker:
+- values:
+  - <xref href="System.Object?alt=System.Object&text=Object" data-throw-if-not-resolved="True"/>
+derivedClassesWithMoniker:
+- value: Azure.Identity.UnsafeTokenCacheOptions
+constructors:
+- uid: Azure.Identity.TokenCachePersistenceOptions.#ctor
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview
+properties:
+- uid: Azure.Identity.TokenCachePersistenceOptions.Name
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview
+- uid: Azure.Identity.TokenCachePersistenceOptions.UnsafeAllowUnencryptedStorage
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview
+uid: Azure.Identity.TokenCachePersistenceOptions
+commentId: T:Azure.Identity.TokenCachePersistenceOptions
+namespace: Azure.Identity
+name: TokenCachePersistenceOptions
+fullName: Azure.Identity.TokenCachePersistenceOptions
+nameWithType: Azure.Identity.TokenCachePersistenceOptions
+assembliesWithMoniker:
+- value: Azure.Identity.dll
+packagesWithMoniker:
+- value: Azure.Identity v1.9.0
+  monikers:
+  - azure-dotnet
+- value: Azure.Identity v1.10.0-beta.1
+  monikers:
+  - azure-dotnet-preview
+syntaxWithMoniker:
+- lang: csharp
+  values:
+  - value: public class TokenCachePersistenceOptions
+- lang: fsharp
+  values:
+  - value: type TokenCachePersistenceOptions = class
+- lang: vb
+  values:
+  - value: Public Class TokenCachePersistenceOptions
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet
+- azure-dotnet-preview
+summary: Options controlling the storage of the token cache.
+examples: >-
+  <p>
+         This is an example showing how TokenCachePersistenceOptions and an AuthenticationRecord can be used together to enable silent authentication
+         across executions of a client application.
+  </p>
+
+
+  ```csharp
+
+  const string TOKEN_CACHE_NAME = "MyTokenCache";
+
+  InteractiveBrowserCredential credential;
+
+  AuthenticationRecord authRecord;
+
+
+  // Check if an AuthenticationRecord exists on disk.
+
+  // If it does not exist, get one and serialize it to disk.
+
+  // If it does exist, load it from disk and deserialize it.
+
+  if (!File.Exists(AUTH_RECORD_PATH))
+
+  {
+      // Construct a credential with TokenCachePersistenceOptions specified to ensure that the token cache is persisted to disk.
+      // We can also optionally specify a name for the cache to avoid having it cleared by other applications.
+      credential = new InteractiveBrowserCredential(
+          new InteractiveBrowserCredentialOptions { TokenCachePersistenceOptions = new TokenCachePersistenceOptions { Name = TOKEN_CACHE_NAME } });
+
+      // Call AuthenticateAsync to fetch a new AuthenticationRecord.
+      authRecord = await credential.AuthenticateAsync();
+
+      // Serialize the AuthenticationRecord to disk so that it can be re-used across executions of this initialization code.
+      using var authRecordStream = new FileStream(AUTH_RECORD_PATH, FileMode.Create, FileAccess.Write);
+      await authRecord.SerializeAsync(authRecordStream);
+  }
+
+  else
+
+  {
+      // Load the previously serialized AuthenticationRecord from disk and deserialize it.
+      using var authRecordStream = new FileStream(AUTH_RECORD_PATH, FileMode.Open, FileAccess.Read);
+      authRecord = await AuthenticationRecord.DeserializeAsync(authRecordStream);
+
+      // Construct a new client with our TokenCachePersistenceOptions with the addition of the AuthenticationRecord property.
+      // This tells the credential to use the same token cache in addition to which account to try and fetch from cache when GetToken is called.
+      credential = new InteractiveBrowserCredential(
+          new InteractiveBrowserCredentialOptions
+          {
+              TokenCachePersistenceOptions = new TokenCachePersistenceOptions { Name = TOKEN_CACHE_NAME },
+              AuthenticationRecord = authRecord
+          });
+  }
+
+
+  // Construct our client with the credential which is connected to the token cache
+
+  // with the capability of silent authentication for the account specified in the AuthenticationRecord.
+
+  var client = new SecretClient(new Uri("https://myvault.vault.azure.net/"), credential);
+
+  ```
+metadata:
+  api_name:
+  - Azure.Identity.TokenCachePersistenceOptions
+  api_location:
+  - Azure.Identity.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.Identity.TokenCachePersistenceOptions
+  - Azure::Identity::TokenCachePersistenceOptions
+  - TokenCachePersistenceOptions
+  helpviewer_keywords:
+  - Azure.Identity.TokenCachePersistenceOptions class [.NET]
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview

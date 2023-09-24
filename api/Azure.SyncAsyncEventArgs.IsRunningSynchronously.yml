@@ -1,0 +1,97 @@
+### YamlMime:NetMember
+type: property
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="System.Boolean?alt=System.Boolean&text=Boolean" data-throw-if-not-resolved="True"/>
+  type: property
+  uid: Azure.SyncAsyncEventArgs.IsRunningSynchronously
+  commentId: P:Azure.SyncAsyncEventArgs.IsRunningSynchronously
+  name: IsRunningSynchronously
+  fullName: Azure.SyncAsyncEventArgs.IsRunningSynchronously
+  nameWithType: SyncAsyncEventArgs.IsRunningSynchronously
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public bool IsRunningSynchronously { get; }
+  - lang: fsharp
+    values:
+    - value: 'member this.IsRunningSynchronously : bool'
+  - lang: vb
+    values:
+    - value: Public ReadOnly Property IsRunningSynchronously As Boolean
+  monikers:
+  - azure-dotnet
+  summary: >-
+    Gets a value indicating whether the event handler was invoked
+
+    synchronously or asynchronously.  Please see
+
+    <xref data-throw-if-not-resolved="true" uid="Azure.Core.SyncAsyncEventHandler`1"></xref> for more details.
+  remarks: >-
+    <p>The same <xref data-throw-if-not-resolved="true" uid="Azure.Core.SyncAsyncEventHandler`1"></xref> event can be raised from both synchronous and asynchronous code paths depending on whether you're calling sync or async methods on a client.  If you write an async handler but raise it from a sync method, the handler will be doing sync-over-async and may cause ThreadPool starvation.  See <a href="https://docs.microsoft.com/archive/blogs/vancem/diagnosing-net-core-threadpool-starvation-with-perfview-why-my-service-is-not-saturating-all-cores-or-seems-to-stall"> Diagnosing .NET Core ThreadPool Starvation with PerfView</a> for a detailed explanation of how that can cause ThreadPool starvation and serious performance problems.</p><p>You can use this <xref data-throw-if-not-resolved="true" uid="Azure.SyncAsyncEventArgs.IsRunningSynchronously"></xref> property to check how the event is being raised and implement your handler accordingly.  Here's an example handler that's safe to invoke from both sync and async code paths. 
+
+
+    ```csharp
+
+    var client = new AlarmClient();
+
+    client.Ring += async (SyncAsyncEventArgs e) =>
+
+    {
+        if (e.IsRunningSynchronously)
+        {
+            Console.WriteLine("Wake up!");
+        }
+        else
+        {
+            await Console.Out.WriteLineAsync("Wake up!");
+        }
+    };
+
+
+    client.Snooze(); // sync call that blocks
+
+    await client.SnoozeAsync(); // async call that doesn't block
+
+    ```
+
+    </p>
+  metadata: {}
+uid: Azure.SyncAsyncEventArgs.IsRunningSynchronously*
+commentId: Overload:Azure.SyncAsyncEventArgs.IsRunningSynchronously
+namespace: Azure
+name: IsRunningSynchronously
+fullName: Azure.SyncAsyncEventArgs.IsRunningSynchronously
+nameWithType: SyncAsyncEventArgs.IsRunningSynchronously
+assembliesWithMoniker:
+- value: Azure.Core.dll
+packagesWithMoniker:
+- value: Azure.Core v1.34.0
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet
+metadata:
+  api_name:
+  - Azure.SyncAsyncEventArgs.IsRunningSynchronously
+  - Azure.SyncAsyncEventArgs.get_IsRunningSynchronously
+  api_location:
+  - Azure.Core.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.SyncAsyncEventArgs.IsRunningSynchronously
+  - Azure::SyncAsyncEventArgs::IsRunningSynchronously
+  - IsRunningSynchronously
+  - SyncAsyncEventArgs.IsRunningSynchronously
+  - SyncAsyncEventArgs::IsRunningSynchronously
+  helpviewer_keywords:
+  - SyncAsyncEventArgs.IsRunningSynchronously property [.NET]
+  - IsRunningSynchronously property [.NET], class SyncAsyncEventArgs
+  monikers:
+  - azure-dotnet

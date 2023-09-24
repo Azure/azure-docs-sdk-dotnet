@@ -1,0 +1,133 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="System.Threading.Tasks.Task`1?alt=System.Threading.Tasks.Task&text=Task" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.Response`1?alt=Azure.Response&text=Response" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.Monitor.Query.Models.LogsBatchQueryResultCollection?alt=Azure.Monitor.Query.Models.LogsBatchQueryResultCollection&text=LogsBatchQueryResultCollection" data-throw-if-not-resolved="True"/>&gt;&gt;
+    description: The <xref data-throw-if-not-resolved="true" uid="Azure.Monitor.Query.Models.LogsBatchQueryResultCollection"></xref> that allows retrieving query results.
+  parameters:
+  - namesWithMoniker:
+    - value: batch
+    description: The batch of Kusto queries to send.
+    type: <xref href="Azure.Monitor.Query.LogsBatchQuery?alt=Azure.Monitor.Query.LogsBatchQuery&text=LogsBatchQuery" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: cancellationToken
+    description: The <xref data-throw-if-not-resolved="true" uid="System.Threading.CancellationToken"></xref> to use.
+    type: <xref href="System.Threading.CancellationToken?alt=System.Threading.CancellationToken&text=CancellationToken" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.Monitor.Query.LogsQueryClient.QueryBatchAsync(Azure.Monitor.Query.LogsBatchQuery,System.Threading.CancellationToken)
+  commentId: M:Azure.Monitor.Query.LogsQueryClient.QueryBatchAsync(Azure.Monitor.Query.LogsBatchQuery,System.Threading.CancellationToken)
+  name: QueryBatchAsync(LogsBatchQuery, CancellationToken)
+  fullName: Azure.Monitor.Query.LogsQueryClient.QueryBatchAsync(LogsBatchQuery, CancellationToken)
+  nameWithType: LogsQueryClient.QueryBatchAsync(LogsBatchQuery, CancellationToken)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual System.Threading.Tasks.Task<Azure.Response<Azure.Monitor.Query.Models.LogsBatchQueryResultCollection>> QueryBatchAsync (Azure.Monitor.Query.LogsBatchQuery batch, System.Threading.CancellationToken cancellationToken = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member QueryBatchAsync : Azure.Monitor.Query.LogsBatchQuery * System.Threading.CancellationToken -> System.Threading.Tasks.Task<Azure.Response<Azure.Monitor.Query.Models.LogsBatchQueryResultCollection>>
+
+        override this.QueryBatchAsync : Azure.Monitor.Query.LogsBatchQuery * System.Threading.CancellationToken -> System.Threading.Tasks.Task<Azure.Response<Azure.Monitor.Query.Models.LogsBatchQueryResultCollection>>
+  - lang: vb
+    values:
+    - value: Public Overridable Function QueryBatchAsync (batch As LogsBatchQuery, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of LogsBatchQueryResultCollection))
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview
+  summary: >-
+    Submits the batch query. Use the <xref data-throw-if-not-resolved="true" uid="Azure.Monitor.Query.LogsBatchQuery"></xref> to compose a batch query.
+
+    <example snippet="Snippet:BatchQuery">
+
+
+    ```csharp
+
+    string workspaceId = "<workspace_id>";
+
+
+    var client = new LogsQueryClient(new DefaultAzureCredential());
+
+
+    // Query TOP 10 resource groups by event count
+
+    // And total event count
+
+    var batch = new LogsBatchQuery();
+
+
+    string countQueryId = batch.AddWorkspaceQuery(
+        workspaceId,
+        "AzureActivity | count",
+        new QueryTimeRange(TimeSpan.FromDays(1)));
+    string topQueryId = batch.AddWorkspaceQuery(
+        workspaceId,
+        "AzureActivity | summarize Count = count() by ResourceGroup | top 10 by Count",
+        new QueryTimeRange(TimeSpan.FromDays(1)));
+
+    Response<LogsBatchQueryResultCollection> response = await client.QueryBatchAsync(batch);
+
+
+    var count = response.Value.GetResult<int>(countQueryId).Single();
+
+    var topEntries = response.Value.GetResult<MyLogEntryModel>(topQueryId);
+
+
+    Console.WriteLine($"AzureActivity has total {count} events");
+
+    foreach (var logEntryModel in topEntries)
+
+    {
+        Console.WriteLine($"{logEntryModel.ResourceGroup} had {logEntryModel.Count} events");
+    }
+
+    ```
+
+    </example>
+  metadata: {}
+uid: Azure.Monitor.Query.LogsQueryClient.QueryBatchAsync*
+commentId: Overload:Azure.Monitor.Query.LogsQueryClient.QueryBatchAsync
+namespace: Azure.Monitor.Query
+name: QueryBatchAsync
+fullName: Azure.Monitor.Query.LogsQueryClient.QueryBatchAsync
+nameWithType: LogsQueryClient.QueryBatchAsync
+assembliesWithMoniker:
+- value: Azure.Monitor.Query.dll
+packagesWithMoniker:
+- value: Azure.Monitor.Query v1.2.0
+  monikers:
+  - azure-dotnet
+- value: Azure.Monitor.Query v1.2.0-beta.1
+  monikers:
+  - azure-dotnet-preview
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.Monitor.Query.LogsQueryClient.QueryBatchAsync
+  api_location:
+  - Azure.Monitor.Query.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.Monitor.Query.LogsQueryClient.QueryBatchAsync
+  - Azure::Monitor::Query::LogsQueryClient::QueryBatchAsync
+  - QueryBatchAsync
+  - LogsQueryClient.QueryBatchAsync
+  - LogsQueryClient::QueryBatchAsync
+  helpviewer_keywords:
+  - LogsQueryClient.QueryBatchAsync method [.NET]
+  - QueryBatchAsync method [.NET], class LogsQueryClient
+  - LogsQueryClient.QueryBatchAsync(LogsBatchQuery, CancellationToken) method [.NET]
+  - QueryBatchAsync(LogsBatchQuery, CancellationToken) method [.NET], class LogsQueryClient
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview

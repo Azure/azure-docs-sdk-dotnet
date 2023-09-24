@@ -1,0 +1,246 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="Azure.Response?alt=Azure.Response&text=Response" data-throw-if-not-resolved="True"/>
+    description: The response returned from the service. Details of the response body schema are in the Remarks section below.
+  parameters:
+  - namesWithMoniker:
+    - value: provider
+    description: Update provider.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: name
+    description: Update name.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: version
+    description: Update version.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: ifNoneMatch
+    description: Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value.
+    type: <xref href="System.Nullable`1?alt=System.Nullable&text=Nullable" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.ETag?alt=Azure.ETag&text=ETag" data-throw-if-not-resolved="True"/>&gt;
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">provider</code>, <code data-dev-comment-type="paramref">name</code> or <code data-dev-comment-type="paramref">version</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: <code data-dev-comment-type="paramref">provider</code>, <code data-dev-comment-type="paramref">name</code> or <code data-dev-comment-type="paramref">version</code> is an empty string, and was expected to be non-empty.
+    type: <xref href="System.ArgumentException" data-throw-if-not-resolved="True"/>
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.IoT.DeviceUpdate.DeviceUpdateClient.GetUpdate(System.String,System.String,System.String,System.Nullable{Azure.ETag},Azure.RequestContext)
+  commentId: M:Azure.IoT.DeviceUpdate.DeviceUpdateClient.GetUpdate(System.String,System.String,System.String,System.Nullable{Azure.ETag},Azure.RequestContext)
+  name: GetUpdate(String, String, String, Nullable<ETag>, RequestContext)
+  fullName: Azure.IoT.DeviceUpdate.DeviceUpdateClient.GetUpdate(String, String, String, Nullable<ETag>, RequestContext)
+  nameWithType: DeviceUpdateClient.GetUpdate(String, String, String, Nullable<ETag>, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual Azure.Response GetUpdate (string provider, string name, string version, Azure.ETag? ifNoneMatch = default, Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member GetUpdate : string * string * string * Nullable<Azure.ETag> * Azure.RequestContext -> Azure.Response
+
+        override this.GetUpdate : string * string * string * Nullable<Azure.ETag> * Azure.RequestContext -> Azure.Response
+  - lang: vb
+    values:
+    - value: Public Overridable Function GetUpdate (provider As String, name As String, version As String, Optional ifNoneMatch As Nullable(Of ETag) = Nothing, Optional context As RequestContext = Nothing) As Response
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview
+  summary: Get a specific update version.
+  remarks: >-
+    <p>Below is the JSON schema for the response payload.</p><p>Response Body:</p><p>Schema for <code data-dev-comment-type="c">Update</code>: 
+
+
+    ```
+
+    {
+                  updateId: {
+                    provider: string, # Required. Update provider.
+                    name: string, # Required. Update name.
+                    version: string, # Required. Update version.
+                  }, # Required. Update identity.
+                  description: string, # Optional. Update description specified by creator.
+                  friendlyName: string, # Optional. Friendly update name specified by importer.
+                  isDeployable: boolean, # Optional. Whether the update can be deployed to a device on its own.
+                  updateType: string, # Optional. Update type. Deprecated in latest import manifest schema.
+                  installedCriteria: string, # Optional. String interpreted by Device Update client to determine if the update is installed on the device. Deprecated in latest import manifest schema.
+                  compatibility: [Dictionary<string, string>], # Required. List of update compatibility information.
+                  instructions: {
+                    steps: [
+                      {
+                        type: "Inline" | "Reference", # Optional. Step type.
+                        description: string, # Optional. Step description.
+                        handler: string, # Optional. Identity of handler that will execute this step. Required if step type is inline.
+                        handlerProperties: AnyObject, # Optional. Parameters to be passed to handler during execution.
+                        files: [string], # Optional. Collection of file names to be passed to handler during execution. Required if step type is inline.
+                        updateId: UpdateId, # Optional. Referenced child update identity.  Required if step type is reference.
+                      }
+                    ], # Required. Collection of installation steps.
+                  }, # Optional. Update install instructions.
+                  referencedBy: [UpdateId], # Optional. List of update identities that reference this update.
+                  scanResult: string, # Optional. Update aggregate scan result (calculated from payload file scan results).
+                  manifestVersion: string, # Required. Schema version of manifest used to import the update.
+                  importedDateTime: string (ISO 8601 Format), # Required. Date and time in UTC when the update was imported.
+                  createdDateTime: string (ISO 8601 Format), # Required. Date and time in UTC when the update was created.
+                  etag: string, # Optional. Update ETag.
+                }
+    ```
+
+    </p>
+  examples: >-
+    This sample shows how to call GetUpdate with required parameters and parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new DeviceUpdateClient(endpoint, "<instanceId>", credential);
+
+
+    Response response = client.GetUpdate("<provider>", "<name>", "<version>");
+
+
+    JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+
+    Console.WriteLine(result.GetProperty("updateId").GetProperty("provider").ToString());
+
+    Console.WriteLine(result.GetProperty("updateId").GetProperty("name").ToString());
+
+    Console.WriteLine(result.GetProperty("updateId").GetProperty("version").ToString());
+
+    Console.WriteLine(result.GetProperty("compatibility")[0].GetProperty("<test>").ToString());
+
+    Console.WriteLine(result.GetProperty("manifestVersion").ToString());
+
+    Console.WriteLine(result.GetProperty("importedDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+
+    ```
+
+    This sample shows how to call GetUpdate with all parameters, and how to parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new DeviceUpdateClient(endpoint, "<instanceId>", credential);
+
+
+    Response response = client.GetUpdate("<provider>", "<name>", "<version>", null);
+
+
+    JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+
+    Console.WriteLine(result.GetProperty("updateId").GetProperty("provider").ToString());
+
+    Console.WriteLine(result.GetProperty("updateId").GetProperty("name").ToString());
+
+    Console.WriteLine(result.GetProperty("updateId").GetProperty("version").ToString());
+
+    Console.WriteLine(result.GetProperty("description").ToString());
+
+    Console.WriteLine(result.GetProperty("friendlyName").ToString());
+
+    Console.WriteLine(result.GetProperty("isDeployable").ToString());
+
+    Console.WriteLine(result.GetProperty("updateType").ToString());
+
+    Console.WriteLine(result.GetProperty("installedCriteria").ToString());
+
+    Console.WriteLine(result.GetProperty("compatibility")[0].GetProperty("<test>").ToString());
+
+    Console.WriteLine(result.GetProperty("instructions").GetProperty("steps")[0].GetProperty("type").ToString());
+
+    Console.WriteLine(result.GetProperty("instructions").GetProperty("steps")[0].GetProperty("description").ToString());
+
+    Console.WriteLine(result.GetProperty("instructions").GetProperty("steps")[0].GetProperty("handler").ToString());
+
+    Console.WriteLine(result.GetProperty("instructions").GetProperty("steps")[0].GetProperty("handlerProperties").ToString());
+
+    Console.WriteLine(result.GetProperty("instructions").GetProperty("steps")[0].GetProperty("files")[0].ToString());
+
+    Console.WriteLine(result.GetProperty("instructions").GetProperty("steps")[0].GetProperty("updateId").GetProperty("provider").ToString());
+
+    Console.WriteLine(result.GetProperty("instructions").GetProperty("steps")[0].GetProperty("updateId").GetProperty("name").ToString());
+
+    Console.WriteLine(result.GetProperty("instructions").GetProperty("steps")[0].GetProperty("updateId").GetProperty("version").ToString());
+
+    Console.WriteLine(result.GetProperty("referencedBy")[0].GetProperty("provider").ToString());
+
+    Console.WriteLine(result.GetProperty("referencedBy")[0].GetProperty("name").ToString());
+
+    Console.WriteLine(result.GetProperty("referencedBy")[0].GetProperty("version").ToString());
+
+    Console.WriteLine(result.GetProperty("scanResult").ToString());
+
+    Console.WriteLine(result.GetProperty("manifestVersion").ToString());
+
+    Console.WriteLine(result.GetProperty("importedDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("etag").ToString());
+
+    ```
+  metadata: {}
+uid: Azure.IoT.DeviceUpdate.DeviceUpdateClient.GetUpdate*
+commentId: Overload:Azure.IoT.DeviceUpdate.DeviceUpdateClient.GetUpdate
+namespace: Azure.IoT.DeviceUpdate
+name: GetUpdate
+fullName: Azure.IoT.DeviceUpdate.DeviceUpdateClient.GetUpdate
+nameWithType: DeviceUpdateClient.GetUpdate
+assembliesWithMoniker:
+- value: Azure.IoT.DeviceUpdate.dll
+packagesWithMoniker:
+- value: Azure.IoT.DeviceUpdate v1.0.0
+  monikers:
+  - azure-dotnet
+- value: Azure.IoT.DeviceUpdate v1.0.0-beta.4
+  monikers:
+  - azure-dotnet-preview
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.IoT.DeviceUpdate.DeviceUpdateClient.GetUpdate
+  api_location:
+  - Azure.IoT.DeviceUpdate.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.IoT.DeviceUpdate.DeviceUpdateClient.GetUpdate
+  - Azure::IoT::DeviceUpdate::DeviceUpdateClient::GetUpdate
+  - GetUpdate
+  - DeviceUpdateClient.GetUpdate
+  - DeviceUpdateClient::GetUpdate
+  helpviewer_keywords:
+  - DeviceUpdateClient.GetUpdate method [.NET]
+  - GetUpdate method [.NET], class DeviceUpdateClient
+  - DeviceUpdateClient.GetUpdate(String, String, String, Nullable<ETag>, RequestContext) method [.NET]
+  - GetUpdate(String, String, String, Nullable<ETag>, RequestContext) method [.NET], class DeviceUpdateClient
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview

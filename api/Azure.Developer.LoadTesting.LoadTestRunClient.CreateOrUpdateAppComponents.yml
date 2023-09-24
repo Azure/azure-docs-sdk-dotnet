@@ -1,0 +1,185 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="Azure.Response?alt=Azure.Response&text=Response" data-throw-if-not-resolved="True"/>
+    description: The response returned from the service. Details of the response body schema are in the Remarks section below.
+  parameters:
+  - namesWithMoniker:
+    - value: testRunId
+    description: Unique name for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: content
+    description: The content to send as the body of the request. Details of the request body schema are in the Remarks section below.
+    type: <xref href="Azure.Core.RequestContent?alt=Azure.Core.RequestContent&text=RequestContent" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">testRunId</code> or <code data-dev-comment-type="paramref">content</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: <code data-dev-comment-type="paramref">testRunId</code> is an empty string, and was expected to be non-empty.
+    type: <xref href="System.ArgumentException" data-throw-if-not-resolved="True"/>
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.Developer.LoadTesting.LoadTestRunClient.CreateOrUpdateAppComponents(System.String,Azure.Core.RequestContent,Azure.RequestContext)
+  commentId: M:Azure.Developer.LoadTesting.LoadTestRunClient.CreateOrUpdateAppComponents(System.String,Azure.Core.RequestContent,Azure.RequestContext)
+  name: CreateOrUpdateAppComponents(String, RequestContent, RequestContext)
+  fullName: Azure.Developer.LoadTesting.LoadTestRunClient.CreateOrUpdateAppComponents(String, RequestContent, RequestContext)
+  nameWithType: LoadTestRunClient.CreateOrUpdateAppComponents(String, RequestContent, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual Azure.Response CreateOrUpdateAppComponents (string testRunId, Azure.Core.RequestContent content, Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member CreateOrUpdateAppComponents : string * Azure.Core.RequestContent * Azure.RequestContext -> Azure.Response
+
+        override this.CreateOrUpdateAppComponents : string * Azure.Core.RequestContent * Azure.RequestContext -> Azure.Response
+  - lang: vb
+    values:
+    - value: Public Overridable Function CreateOrUpdateAppComponents (testRunId As String, content As RequestContent, Optional context As RequestContext = Nothing) As Response
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview
+  summary: Associate an app component (collection of azure resources) to a test run.
+  remarks: >-
+    <p>Below is the JSON schema for the request and response payloads.</p><p>Request Body:</p><p>Schema for <code data-dev-comment-type="c">TestRunAppComponents</code>: 
+
+
+    ```
+
+    {
+      components: Dictionary<string, AppComponent>, # Required. Azure resource collection { resource id (fully qualified resource Id e.g subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}) : resource object } 
+      testRunId: string, # Optional. Test run identifier
+      createdDateTime: string (ISO 8601 Format), # Optional. The creation datetime(ISO 8601 literal format).
+      createdBy: string, # Optional. The user that created.
+      lastModifiedDateTime: string (ISO 8601 Format), # Optional. The last Modified datetime(ISO 8601 literal format).
+      lastModifiedBy: string, # Optional. The user that last modified.
+    }
+
+    ```
+
+    </p><p>Response Body:</p><p>Schema for <code data-dev-comment-type="c">TestRunAppComponents</code>: 
+
+
+    ```
+
+    {
+      components: Dictionary<string, AppComponent>, # Required. Azure resource collection { resource id (fully qualified resource Id e.g subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}) : resource object } 
+      testRunId: string, # Optional. Test run identifier
+      createdDateTime: string (ISO 8601 Format), # Optional. The creation datetime(ISO 8601 literal format).
+      createdBy: string, # Optional. The user that created.
+      lastModifiedDateTime: string (ISO 8601 Format), # Optional. The last Modified datetime(ISO 8601 literal format).
+      lastModifiedBy: string, # Optional. The user that last modified.
+    }
+
+    ```
+
+    </p>
+  examples: >-
+    This sample shows how to call CreateOrUpdateAppComponents with required parameters and request content and parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new LoadTestRunClient(endpoint, credential);
+
+
+    var data = new {
+        components = new {
+            key = new {
+                resourceName = "<resourceName>",
+                resourceType = "<resourceType>",
+                displayName = "<displayName>",
+                kind = "<kind>",
+            },
+        },
+    };
+
+
+    Response response = client.CreateOrUpdateAppComponents("<testRunId>", RequestContent.Create(data));
+
+
+    JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+
+    Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("resourceId").ToString());
+
+    Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("resourceName").ToString());
+
+    Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("resourceType").ToString());
+
+    Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("displayName").ToString());
+
+    Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("resourceGroup").ToString());
+
+    Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("subscriptionId").ToString());
+
+    Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("kind").ToString());
+
+    Console.WriteLine(result.GetProperty("testRunId").ToString());
+
+    Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("createdBy").ToString());
+
+    Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("lastModifiedBy").ToString());
+
+    ```
+  metadata: {}
+uid: Azure.Developer.LoadTesting.LoadTestRunClient.CreateOrUpdateAppComponents*
+commentId: Overload:Azure.Developer.LoadTesting.LoadTestRunClient.CreateOrUpdateAppComponents
+namespace: Azure.Developer.LoadTesting
+name: CreateOrUpdateAppComponents
+fullName: Azure.Developer.LoadTesting.LoadTestRunClient.CreateOrUpdateAppComponents
+nameWithType: LoadTestRunClient.CreateOrUpdateAppComponents
+assembliesWithMoniker:
+- value: Azure.Developer.LoadTesting.dll
+packagesWithMoniker:
+- value: Azure.Developer.LoadTesting v1.0.1
+  monikers:
+  - azure-dotnet
+- value: Azure.Developer.LoadTesting v1.0.0-beta.2
+  monikers:
+  - azure-dotnet-preview
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.Developer.LoadTesting.LoadTestRunClient.CreateOrUpdateAppComponents
+  api_location:
+  - Azure.Developer.LoadTesting.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.Developer.LoadTesting.LoadTestRunClient.CreateOrUpdateAppComponents
+  - Azure::Developer::LoadTesting::LoadTestRunClient::CreateOrUpdateAppComponents
+  - CreateOrUpdateAppComponents
+  - LoadTestRunClient.CreateOrUpdateAppComponents
+  - LoadTestRunClient::CreateOrUpdateAppComponents
+  helpviewer_keywords:
+  - LoadTestRunClient.CreateOrUpdateAppComponents method [.NET]
+  - CreateOrUpdateAppComponents method [.NET], class LoadTestRunClient
+  - LoadTestRunClient.CreateOrUpdateAppComponents(String, RequestContent, RequestContext) method [.NET]
+  - CreateOrUpdateAppComponents(String, RequestContent, RequestContext) method [.NET], class LoadTestRunClient
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview

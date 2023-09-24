@@ -1,0 +1,250 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="Azure.Operation`1?alt=Azure.Operation&text=Operation" data-throw-if-not-resolved="True"/>&lt;<xref href="System.BinaryData?alt=System.BinaryData&text=BinaryData" data-throw-if-not-resolved="True"/>&gt;
+    description: The <xref data-throw-if-not-resolved="true" uid="Azure.Operation"></xref> representing an asynchronous operation on the service.
+  parameters:
+  - namesWithMoniker:
+    - value: waitUntil
+    description: <xref data-throw-if-not-resolved="true" uid="Azure.WaitUntil.Completed"></xref> if the method should wait to return until the long-running operation has completed on the service; <xref data-throw-if-not-resolved="true" uid="Azure.WaitUntil.Started"></xref> if it should return after starting the operation. For more information on long-running operations, please see <a href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</a>.
+    type: <xref href="Azure.WaitUntil?alt=Azure.WaitUntil&text=WaitUntil" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: projectName
+    description: The name of the project to use.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: content
+    description: The content to send as the body of the request.
+    type: <xref href="Azure.Core.RequestContent?alt=Azure.Core.RequestContent&text=RequestContent" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">projectName</code> or <code data-dev-comment-type="paramref">content</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: <code data-dev-comment-type="paramref">projectName</code> is an empty string, and was expected to be non-empty.
+    type: <xref href="System.ArgumentException" data-throw-if-not-resolved="True"/>
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.AI.Language.Conversations.Authoring.ConversationAuthoringClient.Train(Azure.WaitUntil,System.String,Azure.Core.RequestContent,Azure.RequestContext)
+  commentId: M:Azure.AI.Language.Conversations.Authoring.ConversationAuthoringClient.Train(Azure.WaitUntil,System.String,Azure.Core.RequestContent,Azure.RequestContext)
+  name: Train(WaitUntil, String, RequestContent, RequestContext)
+  fullName: Azure.AI.Language.Conversations.Authoring.ConversationAuthoringClient.Train(WaitUntil, String, RequestContent, RequestContext)
+  nameWithType: ConversationAuthoringClient.Train(WaitUntil, String, RequestContent, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual Azure.Operation<BinaryData> Train (Azure.WaitUntil waitUntil, string projectName, Azure.Core.RequestContent content, Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member Train : Azure.WaitUntil * string * Azure.Core.RequestContent * Azure.RequestContext -> Azure.Operation<BinaryData>
+
+        override this.Train : Azure.WaitUntil * string * Azure.Core.RequestContent * Azure.RequestContext -> Azure.Operation<BinaryData>
+  - lang: vb
+    values:
+    - value: Public Overridable Function Train (waitUntil As WaitUntil, projectName As String, content As RequestContent, Optional context As RequestContext = Nothing) As Operation(Of BinaryData)
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview
+  summary: >-
+    [Protocol Method] Triggers a training job for a project.
+
+    <ul><li>
+
+    This <a href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</a> allows explicit creation of the request and processing of the response for advanced scenarios.
+
+    </li></ul>
+  remarks: '<p>Additional information can be found in the service REST API documentation: https://learn.microsoft.com/rest/api/language/2023-04-01/conversational-analysis-authoring/train</p>'
+  examples: >-
+    This sample shows how to call Train with required parameters and request content, and how to parse the result.
+
+
+    ```
+
+    var credential = new AzureKeyCredential("<key>");
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new ConversationAuthoringClient(endpoint, credential);
+
+
+    var data = new {
+        modelLabel = "<modelLabel>",
+        trainingMode = "advanced",
+    };
+
+
+    var operation = client.Train(WaitUntil.Completed, "<projectName>", RequestContent.Create(data));
+
+
+    BinaryData responseData = operation.Value;
+
+    JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+
+    Console.WriteLine(result.GetProperty("result").GetProperty("modelLabel").ToString());
+
+    Console.WriteLine(result.GetProperty("result").GetProperty("trainingConfigVersion").ToString());
+
+    Console.WriteLine(result.GetProperty("result").GetProperty("trainingStatus").GetProperty("percentComplete").ToString());
+
+    Console.WriteLine(result.GetProperty("result").GetProperty("trainingStatus").GetProperty("status").ToString());
+
+    Console.WriteLine(result.GetProperty("jobId").ToString());
+
+    Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("lastUpdatedDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("status").ToString());
+
+    ```
+
+    This sample shows how to call Train with all parameters and request content, and how to parse the result.
+
+
+    ```
+
+    var credential = new AzureKeyCredential("<key>");
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new ConversationAuthoringClient(endpoint, credential);
+
+
+    var data = new {
+        modelLabel = "<modelLabel>",
+        trainingConfigVersion = "<trainingConfigVersion>",
+        trainingMode = "advanced",
+        evaluationOptions = new {
+            kind = "percentage",
+            trainingSplitPercentage = 1234,
+            testingSplitPercentage = 1234,
+        },
+    };
+
+
+    var operation = client.Train(WaitUntil.Completed, "<projectName>", RequestContent.Create(data));
+
+
+    BinaryData responseData = operation.Value;
+
+    JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+
+    Console.WriteLine(result.GetProperty("result").GetProperty("modelLabel").ToString());
+
+    Console.WriteLine(result.GetProperty("result").GetProperty("trainingConfigVersion").ToString());
+
+    Console.WriteLine(result.GetProperty("result").GetProperty("trainingMode").ToString());
+
+    Console.WriteLine(result.GetProperty("result").GetProperty("trainingStatus").GetProperty("percentComplete").ToString());
+
+    Console.WriteLine(result.GetProperty("result").GetProperty("trainingStatus").GetProperty("startDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("result").GetProperty("trainingStatus").GetProperty("endDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("result").GetProperty("trainingStatus").GetProperty("status").ToString());
+
+    Console.WriteLine(result.GetProperty("result").GetProperty("evaluationStatus").GetProperty("percentComplete").ToString());
+
+    Console.WriteLine(result.GetProperty("result").GetProperty("evaluationStatus").GetProperty("startDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("result").GetProperty("evaluationStatus").GetProperty("endDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("result").GetProperty("evaluationStatus").GetProperty("status").ToString());
+
+    Console.WriteLine(result.GetProperty("result").GetProperty("estimatedEndDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("jobId").ToString());
+
+    Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("lastUpdatedDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("expirationDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("status").ToString());
+
+    Console.WriteLine(result.GetProperty("warnings")[0].GetProperty("code").ToString());
+
+    Console.WriteLine(result.GetProperty("warnings")[0].GetProperty("message").ToString());
+
+    Console.WriteLine(result.GetProperty("errors")[0].GetProperty("code").ToString());
+
+    Console.WriteLine(result.GetProperty("errors")[0].GetProperty("message").ToString());
+
+    Console.WriteLine(result.GetProperty("errors")[0].GetProperty("target").ToString());
+
+    Console.WriteLine(result.GetProperty("errors")[0].GetProperty("details")[0].GetProperty("code").ToString());
+
+    Console.WriteLine(result.GetProperty("errors")[0].GetProperty("details")[0].GetProperty("message").ToString());
+
+    Console.WriteLine(result.GetProperty("errors")[0].GetProperty("details")[0].GetProperty("target").ToString());
+
+    Console.WriteLine(result.GetProperty("errors")[0].GetProperty("details")[0].GetProperty("innererror").GetProperty("code").ToString());
+
+    Console.WriteLine(result.GetProperty("errors")[0].GetProperty("details")[0].GetProperty("innererror").GetProperty("message").ToString());
+
+    Console.WriteLine(result.GetProperty("errors")[0].GetProperty("details")[0].GetProperty("innererror").GetProperty("details").GetProperty("<test>").ToString());
+
+    Console.WriteLine(result.GetProperty("errors")[0].GetProperty("details")[0].GetProperty("innererror").GetProperty("target").ToString());
+
+    Console.WriteLine(result.GetProperty("errors")[0].GetProperty("innererror").GetProperty("code").ToString());
+
+    Console.WriteLine(result.GetProperty("errors")[0].GetProperty("innererror").GetProperty("message").ToString());
+
+    Console.WriteLine(result.GetProperty("errors")[0].GetProperty("innererror").GetProperty("details").GetProperty("<test>").ToString());
+
+    Console.WriteLine(result.GetProperty("errors")[0].GetProperty("innererror").GetProperty("target").ToString());
+
+    ```
+  metadata: {}
+uid: Azure.AI.Language.Conversations.Authoring.ConversationAuthoringClient.Train*
+commentId: Overload:Azure.AI.Language.Conversations.Authoring.ConversationAuthoringClient.Train
+namespace: Azure.AI.Language.Conversations.Authoring
+name: Train
+fullName: Azure.AI.Language.Conversations.Authoring.ConversationAuthoringClient.Train
+nameWithType: ConversationAuthoringClient.Train
+assembliesWithMoniker:
+- value: Azure.AI.Language.Conversations.dll
+packagesWithMoniker:
+- value: Azure.AI.Language.Conversations v1.1.0
+  monikers:
+  - azure-dotnet
+- value: Azure.AI.Language.Conversations v1.1.0-beta.2
+  monikers:
+  - azure-dotnet-preview
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.AI.Language.Conversations.Authoring.ConversationAuthoringClient.Train
+  api_location:
+  - Azure.AI.Language.Conversations.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.AI.Language.Conversations.Authoring.ConversationAuthoringClient.Train
+  - Azure::AI::Language::Conversations::Authoring::ConversationAuthoringClient::Train
+  - Train
+  - ConversationAuthoringClient.Train
+  - ConversationAuthoringClient::Train
+  helpviewer_keywords:
+  - ConversationAuthoringClient.Train method [.NET]
+  - Train method [.NET], class ConversationAuthoringClient
+  - ConversationAuthoringClient.Train(WaitUntil, String, RequestContent, RequestContext) method [.NET]
+  - Train(WaitUntil, String, RequestContent, RequestContext) method [.NET], class ConversationAuthoringClient
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview

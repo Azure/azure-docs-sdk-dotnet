@@ -1,0 +1,129 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="Azure.Pageable`1?alt=Azure.Pageable&text=Pageable" data-throw-if-not-resolved="True"/>&lt;<xref href="System.BinaryData?alt=System.BinaryData&text=BinaryData" data-throw-if-not-resolved="True"/>&gt;
+    description: The <xref data-throw-if-not-resolved="true" uid="Azure.Pageable`1"></xref> from the service containing a list of <xref data-throw-if-not-resolved="true" uid="System.BinaryData"></xref> objects. Details of the body schema for each item in the collection are in the Remarks section below.
+  parameters:
+  - namesWithMoniker:
+    - value: filter
+    description: Restricts the set of devices for which device health is returned. You can filter on status, device id and module id.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">filter</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.IoT.DeviceUpdate.DeviceManagementClient.GetHealthOfDevices(System.String,Azure.RequestContext)
+  commentId: M:Azure.IoT.DeviceUpdate.DeviceManagementClient.GetHealthOfDevices(System.String,Azure.RequestContext)
+  name: GetHealthOfDevices(String, RequestContext)
+  fullName: Azure.IoT.DeviceUpdate.DeviceManagementClient.GetHealthOfDevices(String, RequestContext)
+  nameWithType: DeviceManagementClient.GetHealthOfDevices(String, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual Azure.Pageable<BinaryData> GetHealthOfDevices (string filter, Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member GetHealthOfDevices : string * Azure.RequestContext -> Azure.Pageable<BinaryData>
+
+        override this.GetHealthOfDevices : string * Azure.RequestContext -> Azure.Pageable<BinaryData>
+  - lang: vb
+    values:
+    - value: Public Overridable Function GetHealthOfDevices (filter As String, Optional context As RequestContext = Nothing) As Pageable(Of BinaryData)
+  monikers:
+  - azure-dotnet
+  summary: Get list of device health.
+  remarks: >-
+    <p>Below is the JSON schema for one item in the pageable response.</p><p>Response Body:</p><p>Schema for <code data-dev-comment-type="c">DeviceHealthListValue</code>: 
+
+
+    ```
+
+    {
+                  deviceId: string, # Required. Device id
+                  moduleId: string, # Optional. Module id
+                  state: "healthy" | "unhealthy", # Required. Aggregate device health state
+                  digitalTwinModelId: string, # Optional. Digital twin model Id
+                  healthChecks: [
+                    {
+                      name: string, # Optional. Health check name
+                      result: "success" | "userError", # Optional. Health check result
+                    }
+                  ], # Required. Array of health checks and their results
+                }
+    ```
+
+    </p>
+  examples: >-
+    This sample shows how to call GetHealthOfDevices with required parameters and parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new DeviceManagementClient(endpoint, "<instanceId>", credential);
+
+
+    foreach (var data in client.GetHealthOfDevices("<filter>"))
+
+    {
+        JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        Console.WriteLine(result.GetProperty("deviceId").ToString());
+        Console.WriteLine(result.GetProperty("moduleId").ToString());
+        Console.WriteLine(result.GetProperty("state").ToString());
+        Console.WriteLine(result.GetProperty("digitalTwinModelId").ToString());
+        Console.WriteLine(result.GetProperty("healthChecks")[0].GetProperty("name").ToString());
+        Console.WriteLine(result.GetProperty("healthChecks")[0].GetProperty("result").ToString());
+    }
+
+    ```
+  metadata: {}
+uid: Azure.IoT.DeviceUpdate.DeviceManagementClient.GetHealthOfDevices*
+commentId: Overload:Azure.IoT.DeviceUpdate.DeviceManagementClient.GetHealthOfDevices
+namespace: Azure.IoT.DeviceUpdate
+name: GetHealthOfDevices
+fullName: Azure.IoT.DeviceUpdate.DeviceManagementClient.GetHealthOfDevices
+nameWithType: DeviceManagementClient.GetHealthOfDevices
+assembliesWithMoniker:
+- value: Azure.IoT.DeviceUpdate.dll
+packagesWithMoniker:
+- value: Azure.IoT.DeviceUpdate v1.0.0
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet
+metadata:
+  api_name:
+  - Azure.IoT.DeviceUpdate.DeviceManagementClient.GetHealthOfDevices
+  api_location:
+  - Azure.IoT.DeviceUpdate.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.IoT.DeviceUpdate.DeviceManagementClient.GetHealthOfDevices
+  - Azure::IoT::DeviceUpdate::DeviceManagementClient::GetHealthOfDevices
+  - GetHealthOfDevices
+  - DeviceManagementClient.GetHealthOfDevices
+  - DeviceManagementClient::GetHealthOfDevices
+  helpviewer_keywords:
+  - DeviceManagementClient.GetHealthOfDevices method [.NET]
+  - GetHealthOfDevices method [.NET], class DeviceManagementClient
+  - DeviceManagementClient.GetHealthOfDevices(String, RequestContext) method [.NET]
+  - GetHealthOfDevices(String, RequestContext) method [.NET], class DeviceManagementClient
+  monikers:
+  - azure-dotnet

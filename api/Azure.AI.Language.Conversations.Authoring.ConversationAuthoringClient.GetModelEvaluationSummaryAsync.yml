@@ -1,0 +1,189 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="System.Threading.Tasks.Task`1?alt=System.Threading.Tasks.Task&text=Task" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.Response?alt=Azure.Response&text=Response" data-throw-if-not-resolved="True"/>&gt;
+    description: The response returned from the service.
+  parameters:
+  - namesWithMoniker:
+    - value: projectName
+    description: The name of the project to use.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: trainedModelLabel
+    description: The trained model label.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">projectName</code> or <code data-dev-comment-type="paramref">trainedModelLabel</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: <code data-dev-comment-type="paramref">projectName</code> or <code data-dev-comment-type="paramref">trainedModelLabel</code> is an empty string, and was expected to be non-empty.
+    type: <xref href="System.ArgumentException" data-throw-if-not-resolved="True"/>
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.AI.Language.Conversations.Authoring.ConversationAuthoringClient.GetModelEvaluationSummaryAsync(System.String,System.String,Azure.RequestContext)
+  commentId: M:Azure.AI.Language.Conversations.Authoring.ConversationAuthoringClient.GetModelEvaluationSummaryAsync(System.String,System.String,Azure.RequestContext)
+  name: GetModelEvaluationSummaryAsync(String, String, RequestContext)
+  fullName: Azure.AI.Language.Conversations.Authoring.ConversationAuthoringClient.GetModelEvaluationSummaryAsync(String, String, RequestContext)
+  nameWithType: ConversationAuthoringClient.GetModelEvaluationSummaryAsync(String, String, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual System.Threading.Tasks.Task<Azure.Response> GetModelEvaluationSummaryAsync (string projectName, string trainedModelLabel, Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member GetModelEvaluationSummaryAsync : string * string * Azure.RequestContext -> System.Threading.Tasks.Task<Azure.Response>
+
+        override this.GetModelEvaluationSummaryAsync : string * string * Azure.RequestContext -> System.Threading.Tasks.Task<Azure.Response>
+  - lang: vb
+    values:
+    - value: Public Overridable Function GetModelEvaluationSummaryAsync (projectName As String, trainedModelLabel As String, Optional context As RequestContext = Nothing) As Task(Of Response)
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview
+  summary: >-
+    [Protocol Method] Gets the evaluation summary of a trained model. The summary includes high level performance measurements of the model e.g., F1, Precision, Recall, etc.
+
+    <ul><li>
+
+    This <a href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</a> allows explicit creation of the request and processing of the response for advanced scenarios.
+
+    </li></ul>
+  remarks: '<p>Additional information can be found in the service REST API documentation: https://learn.microsoft.com/rest/api/language/2023-04-01/conversational-analysis-authoring/get-model-evaluation-summary</p>'
+  examples: >-
+    This sample shows how to call GetModelEvaluationSummaryAsync with required parameters and parse the result.
+
+
+    ```
+
+    var credential = new AzureKeyCredential("<key>");
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new ConversationAuthoringClient(endpoint, credential);
+
+
+    Response response = await client.GetModelEvaluationSummaryAsync("<projectName>", "<trainedModelLabel>");
+
+
+    JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+
+    Console.WriteLine(result.GetProperty("entitiesEvaluation").GetProperty("confusionMatrix").GetProperty("<test>").GetProperty("<test>").GetProperty("normalizedValue").ToString());
+
+    Console.WriteLine(result.GetProperty("entitiesEvaluation").GetProperty("confusionMatrix").GetProperty("<test>").GetProperty("<test>").GetProperty("rawValue").ToString());
+
+    Console.WriteLine(result.GetProperty("entitiesEvaluation").GetProperty("entities").GetProperty("<test>").GetProperty("f1").ToString());
+
+    Console.WriteLine(result.GetProperty("entitiesEvaluation").GetProperty("entities").GetProperty("<test>").GetProperty("precision").ToString());
+
+    Console.WriteLine(result.GetProperty("entitiesEvaluation").GetProperty("entities").GetProperty("<test>").GetProperty("recall").ToString());
+
+    Console.WriteLine(result.GetProperty("entitiesEvaluation").GetProperty("entities").GetProperty("<test>").GetProperty("truePositiveCount").ToString());
+
+    Console.WriteLine(result.GetProperty("entitiesEvaluation").GetProperty("entities").GetProperty("<test>").GetProperty("trueNegativeCount").ToString());
+
+    Console.WriteLine(result.GetProperty("entitiesEvaluation").GetProperty("entities").GetProperty("<test>").GetProperty("falsePositiveCount").ToString());
+
+    Console.WriteLine(result.GetProperty("entitiesEvaluation").GetProperty("entities").GetProperty("<test>").GetProperty("falseNegativeCount").ToString());
+
+    Console.WriteLine(result.GetProperty("entitiesEvaluation").GetProperty("microF1").ToString());
+
+    Console.WriteLine(result.GetProperty("entitiesEvaluation").GetProperty("microPrecision").ToString());
+
+    Console.WriteLine(result.GetProperty("entitiesEvaluation").GetProperty("microRecall").ToString());
+
+    Console.WriteLine(result.GetProperty("entitiesEvaluation").GetProperty("macroF1").ToString());
+
+    Console.WriteLine(result.GetProperty("entitiesEvaluation").GetProperty("macroPrecision").ToString());
+
+    Console.WriteLine(result.GetProperty("entitiesEvaluation").GetProperty("macroRecall").ToString());
+
+    Console.WriteLine(result.GetProperty("intentsEvaluation").GetProperty("confusionMatrix").GetProperty("<test>").GetProperty("<test>").GetProperty("normalizedValue").ToString());
+
+    Console.WriteLine(result.GetProperty("intentsEvaluation").GetProperty("confusionMatrix").GetProperty("<test>").GetProperty("<test>").GetProperty("rawValue").ToString());
+
+    Console.WriteLine(result.GetProperty("intentsEvaluation").GetProperty("intents").GetProperty("<test>").GetProperty("f1").ToString());
+
+    Console.WriteLine(result.GetProperty("intentsEvaluation").GetProperty("intents").GetProperty("<test>").GetProperty("precision").ToString());
+
+    Console.WriteLine(result.GetProperty("intentsEvaluation").GetProperty("intents").GetProperty("<test>").GetProperty("recall").ToString());
+
+    Console.WriteLine(result.GetProperty("intentsEvaluation").GetProperty("intents").GetProperty("<test>").GetProperty("truePositiveCount").ToString());
+
+    Console.WriteLine(result.GetProperty("intentsEvaluation").GetProperty("intents").GetProperty("<test>").GetProperty("trueNegativeCount").ToString());
+
+    Console.WriteLine(result.GetProperty("intentsEvaluation").GetProperty("intents").GetProperty("<test>").GetProperty("falsePositiveCount").ToString());
+
+    Console.WriteLine(result.GetProperty("intentsEvaluation").GetProperty("intents").GetProperty("<test>").GetProperty("falseNegativeCount").ToString());
+
+    Console.WriteLine(result.GetProperty("intentsEvaluation").GetProperty("microF1").ToString());
+
+    Console.WriteLine(result.GetProperty("intentsEvaluation").GetProperty("microPrecision").ToString());
+
+    Console.WriteLine(result.GetProperty("intentsEvaluation").GetProperty("microRecall").ToString());
+
+    Console.WriteLine(result.GetProperty("intentsEvaluation").GetProperty("macroF1").ToString());
+
+    Console.WriteLine(result.GetProperty("intentsEvaluation").GetProperty("macroPrecision").ToString());
+
+    Console.WriteLine(result.GetProperty("intentsEvaluation").GetProperty("macroRecall").ToString());
+
+    Console.WriteLine(result.GetProperty("evaluationOptions").GetProperty("kind").ToString());
+
+    Console.WriteLine(result.GetProperty("evaluationOptions").GetProperty("trainingSplitPercentage").ToString());
+
+    Console.WriteLine(result.GetProperty("evaluationOptions").GetProperty("testingSplitPercentage").ToString());
+
+    ```
+  metadata: {}
+uid: Azure.AI.Language.Conversations.Authoring.ConversationAuthoringClient.GetModelEvaluationSummaryAsync*
+commentId: Overload:Azure.AI.Language.Conversations.Authoring.ConversationAuthoringClient.GetModelEvaluationSummaryAsync
+namespace: Azure.AI.Language.Conversations.Authoring
+name: GetModelEvaluationSummaryAsync
+fullName: Azure.AI.Language.Conversations.Authoring.ConversationAuthoringClient.GetModelEvaluationSummaryAsync
+nameWithType: ConversationAuthoringClient.GetModelEvaluationSummaryAsync
+assembliesWithMoniker:
+- value: Azure.AI.Language.Conversations.dll
+packagesWithMoniker:
+- value: Azure.AI.Language.Conversations v1.1.0
+  monikers:
+  - azure-dotnet
+- value: Azure.AI.Language.Conversations v1.1.0-beta.2
+  monikers:
+  - azure-dotnet-preview
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.AI.Language.Conversations.Authoring.ConversationAuthoringClient.GetModelEvaluationSummaryAsync
+  api_location:
+  - Azure.AI.Language.Conversations.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.AI.Language.Conversations.Authoring.ConversationAuthoringClient.GetModelEvaluationSummaryAsync
+  - Azure::AI::Language::Conversations::Authoring::ConversationAuthoringClient::GetModelEvaluationSummaryAsync
+  - GetModelEvaluationSummaryAsync
+  - ConversationAuthoringClient.GetModelEvaluationSummaryAsync
+  - ConversationAuthoringClient::GetModelEvaluationSummaryAsync
+  helpviewer_keywords:
+  - ConversationAuthoringClient.GetModelEvaluationSummaryAsync method [.NET]
+  - GetModelEvaluationSummaryAsync method [.NET], class ConversationAuthoringClient
+  - ConversationAuthoringClient.GetModelEvaluationSummaryAsync(String, String, RequestContext) method [.NET]
+  - GetModelEvaluationSummaryAsync(String, String, RequestContext) method [.NET], class ConversationAuthoringClient
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview

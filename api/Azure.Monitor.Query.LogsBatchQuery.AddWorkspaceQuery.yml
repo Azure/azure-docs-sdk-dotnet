@@ -1,0 +1,119 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+    description: The query identifier that has to be passed into <xref data-throw-if-not-resolved="true" uid="Azure.Monitor.Query.Models.LogsBatchQueryResultCollection.GetResult(System.String)"></xref> to get the result.
+  parameters:
+  - namesWithMoniker:
+    - value: workspaceId
+    description: The workspace to include in the query.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: query
+    description: The query text to execute.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: timeRange
+    description: The timespan over which to query data.
+    type: <xref href="Azure.Monitor.Query.QueryTimeRange?alt=Azure.Monitor.Query.QueryTimeRange&text=QueryTimeRange" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: options
+    description: The <xref data-throw-if-not-resolved="true" uid="Azure.Monitor.Query.LogsQueryOptions"></xref> to configure the query.
+    type: <xref href="Azure.Monitor.Query.LogsQueryOptions?alt=Azure.Monitor.Query.LogsQueryOptions&text=LogsQueryOptions" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.Monitor.Query.LogsBatchQuery.AddWorkspaceQuery(System.String,System.String,Azure.Monitor.Query.QueryTimeRange,Azure.Monitor.Query.LogsQueryOptions)
+  commentId: M:Azure.Monitor.Query.LogsBatchQuery.AddWorkspaceQuery(System.String,System.String,Azure.Monitor.Query.QueryTimeRange,Azure.Monitor.Query.LogsQueryOptions)
+  name: AddWorkspaceQuery(String, String, QueryTimeRange, LogsQueryOptions)
+  fullName: Azure.Monitor.Query.LogsBatchQuery.AddWorkspaceQuery(String, String, QueryTimeRange, LogsQueryOptions)
+  nameWithType: LogsBatchQuery.AddWorkspaceQuery(String, String, QueryTimeRange, LogsQueryOptions)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual string AddWorkspaceQuery (string workspaceId, string query, Azure.Monitor.Query.QueryTimeRange timeRange, Azure.Monitor.Query.LogsQueryOptions options = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member AddWorkspaceQuery : string * string * Azure.Monitor.Query.QueryTimeRange * Azure.Monitor.Query.LogsQueryOptions -> string
+
+        override this.AddWorkspaceQuery : string * string * Azure.Monitor.Query.QueryTimeRange * Azure.Monitor.Query.LogsQueryOptions -> string
+  - lang: vb
+    values:
+    - value: Public Overridable Function AddWorkspaceQuery (workspaceId As String, query As String, timeRange As QueryTimeRange, Optional options As LogsQueryOptions = Nothing) As String
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview
+  summary: >-
+    Adds the specified query to the batch. Results can be retrieved after the query is submitted via the <xref data-throw-if-not-resolved="true" uid="Azure.Monitor.Query.LogsQueryClient.QueryBatchAsync(Azure.Monitor.Query.LogsBatchQuery,System.Threading.CancellationToken)"></xref> call.
+
+    <example snippet="Snippet:BatchQueryAddAndGet">
+
+
+    ```csharp
+
+    string countQueryId = batch.AddWorkspaceQuery(
+        workspaceId,
+        "AzureActivity | count",
+        new QueryTimeRange(TimeSpan.FromDays(1)));
+    string topQueryId = batch.AddWorkspaceQuery(
+        workspaceId,
+        "AzureActivity | summarize Count = count() by ResourceGroup | top 10 by Count",
+        new QueryTimeRange(TimeSpan.FromDays(1)));
+
+    Response<LogsBatchQueryResultCollection> response = await client.QueryBatchAsync(batch);
+
+
+    var count = response.Value.GetResult<int>(countQueryId).Single();
+
+    var topEntries = response.Value.GetResult<MyLogEntryModel>(topQueryId);
+
+    ```
+
+    </example>
+  metadata: {}
+uid: Azure.Monitor.Query.LogsBatchQuery.AddWorkspaceQuery*
+commentId: Overload:Azure.Monitor.Query.LogsBatchQuery.AddWorkspaceQuery
+namespace: Azure.Monitor.Query
+name: AddWorkspaceQuery
+fullName: Azure.Monitor.Query.LogsBatchQuery.AddWorkspaceQuery
+nameWithType: LogsBatchQuery.AddWorkspaceQuery
+assembliesWithMoniker:
+- value: Azure.Monitor.Query.dll
+packagesWithMoniker:
+- value: Azure.Monitor.Query v1.2.0
+  monikers:
+  - azure-dotnet
+- value: Azure.Monitor.Query v1.2.0-beta.1
+  monikers:
+  - azure-dotnet-preview
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.Monitor.Query.LogsBatchQuery.AddWorkspaceQuery
+  api_location:
+  - Azure.Monitor.Query.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.Monitor.Query.LogsBatchQuery.AddWorkspaceQuery
+  - Azure::Monitor::Query::LogsBatchQuery::AddWorkspaceQuery
+  - AddWorkspaceQuery
+  - LogsBatchQuery.AddWorkspaceQuery
+  - LogsBatchQuery::AddWorkspaceQuery
+  helpviewer_keywords:
+  - LogsBatchQuery.AddWorkspaceQuery method [.NET]
+  - AddWorkspaceQuery method [.NET], class LogsBatchQuery
+  - LogsBatchQuery.AddWorkspaceQuery(String, String, QueryTimeRange, LogsQueryOptions) method [.NET]
+  - AddWorkspaceQuery(String, String, QueryTimeRange, LogsQueryOptions) method [.NET], class LogsBatchQuery
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview

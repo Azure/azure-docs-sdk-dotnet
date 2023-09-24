@@ -1,0 +1,153 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="System.Threading.Tasks.Task`1?alt=System.Threading.Tasks.Task&text=Task" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.Response?alt=Azure.Response&text=Response" data-throw-if-not-resolved="True"/>&gt;
+    description: The response returned from the service. Details of the response body schema are in the Remarks section below.
+  parameters:
+  - namesWithMoniker:
+    - value: testId
+    description: Unique name for the load test, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.
+    type: <xref href="System.String?alt=System.String&text=String" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: <code data-dev-comment-type="paramref">testId</code> is null.
+    type: <xref href="System.ArgumentNullException" data-throw-if-not-resolved="True"/>
+  - description: <code data-dev-comment-type="paramref">testId</code> is an empty string, and was expected to be non-empty.
+    type: <xref href="System.ArgumentException" data-throw-if-not-resolved="True"/>
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.Developer.LoadTesting.LoadTestAdministrationClient.GetAppComponentsAsync(System.String,Azure.RequestContext)
+  commentId: M:Azure.Developer.LoadTesting.LoadTestAdministrationClient.GetAppComponentsAsync(System.String,Azure.RequestContext)
+  name: GetAppComponentsAsync(String, RequestContext)
+  fullName: Azure.Developer.LoadTesting.LoadTestAdministrationClient.GetAppComponentsAsync(String, RequestContext)
+  nameWithType: LoadTestAdministrationClient.GetAppComponentsAsync(String, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual System.Threading.Tasks.Task<Azure.Response> GetAppComponentsAsync (string testId, Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member GetAppComponentsAsync : string * Azure.RequestContext -> System.Threading.Tasks.Task<Azure.Response>
+
+        override this.GetAppComponentsAsync : string * Azure.RequestContext -> System.Threading.Tasks.Task<Azure.Response>
+  - lang: vb
+    values:
+    - value: Public Overridable Function GetAppComponentsAsync (testId As String, Optional context As RequestContext = Nothing) As Task(Of Response)
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview
+  summary: Get associated app component (collection of azure resources) for the given test.
+  remarks: >-
+    <p>Below is the JSON schema for the response payload.</p><p>Response Body:</p><p>Schema for <code data-dev-comment-type="c">TestAppComponents</code>: 
+
+
+    ```
+
+    {
+      components: Dictionary<string, AppComponent>, # Required. Azure resource collection { resource id (fully qualified resource Id e.g subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}) : resource object } 
+      testId: string, # Optional. Test identifier
+      createdDateTime: string (ISO 8601 Format), # Optional. The creation datetime(ISO 8601 literal format).
+      createdBy: string, # Optional. The user that created.
+      lastModifiedDateTime: string (ISO 8601 Format), # Optional. The last Modified datetime(ISO 8601 literal format).
+      lastModifiedBy: string, # Optional. The user that last modified.
+    }
+
+    ```
+
+    </p>
+  examples: >-
+    This sample shows how to call GetAppComponentsAsync with required parameters and parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new LoadTestAdministrationClient(endpoint, credential);
+
+
+    Response response = await client.GetAppComponentsAsync("<testId>");
+
+
+    JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+
+    Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("resourceId").ToString());
+
+    Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("resourceName").ToString());
+
+    Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("resourceType").ToString());
+
+    Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("displayName").ToString());
+
+    Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("resourceGroup").ToString());
+
+    Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("subscriptionId").ToString());
+
+    Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("kind").ToString());
+
+    Console.WriteLine(result.GetProperty("testId").ToString());
+
+    Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("createdBy").ToString());
+
+    Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("lastModifiedBy").ToString());
+
+    ```
+  metadata: {}
+uid: Azure.Developer.LoadTesting.LoadTestAdministrationClient.GetAppComponentsAsync*
+commentId: Overload:Azure.Developer.LoadTesting.LoadTestAdministrationClient.GetAppComponentsAsync
+namespace: Azure.Developer.LoadTesting
+name: GetAppComponentsAsync
+fullName: Azure.Developer.LoadTesting.LoadTestAdministrationClient.GetAppComponentsAsync
+nameWithType: LoadTestAdministrationClient.GetAppComponentsAsync
+assembliesWithMoniker:
+- value: Azure.Developer.LoadTesting.dll
+packagesWithMoniker:
+- value: Azure.Developer.LoadTesting v1.0.1
+  monikers:
+  - azure-dotnet
+- value: Azure.Developer.LoadTesting v1.0.0-beta.2
+  monikers:
+  - azure-dotnet-preview
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.Developer.LoadTesting.LoadTestAdministrationClient.GetAppComponentsAsync
+  api_location:
+  - Azure.Developer.LoadTesting.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.Developer.LoadTesting.LoadTestAdministrationClient.GetAppComponentsAsync
+  - Azure::Developer::LoadTesting::LoadTestAdministrationClient::GetAppComponentsAsync
+  - GetAppComponentsAsync
+  - LoadTestAdministrationClient.GetAppComponentsAsync
+  - LoadTestAdministrationClient::GetAppComponentsAsync
+  helpviewer_keywords:
+  - LoadTestAdministrationClient.GetAppComponentsAsync method [.NET]
+  - GetAppComponentsAsync method [.NET], class LoadTestAdministrationClient
+  - LoadTestAdministrationClient.GetAppComponentsAsync(String, RequestContext) method [.NET]
+  - GetAppComponentsAsync(String, RequestContext) method [.NET], class LoadTestAdministrationClient
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview

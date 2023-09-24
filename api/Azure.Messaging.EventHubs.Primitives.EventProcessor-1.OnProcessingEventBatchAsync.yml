@@ -1,0 +1,87 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="System.Threading.Tasks.Task?alt=System.Threading.Tasks.Task&text=Task" data-throw-if-not-resolved="True"/>
+  parameters:
+  - namesWithMoniker:
+    - value: events
+    description: The batch of events to be processed.
+    type: <xref href="System.Collections.Generic.IEnumerable`1?alt=System.Collections.Generic.IEnumerable&text=IEnumerable" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.Messaging.EventHubs.EventData?alt=Azure.Messaging.EventHubs.EventData&text=EventData" data-throw-if-not-resolved="True"/>&gt;
+  - namesWithMoniker:
+    - value: partition
+    description: The context of the partition from which the events were read.
+    type: TPartition
+  - namesWithMoniker:
+    - value: cancellationToken
+    description: A <xref data-throw-if-not-resolved="true" uid="System.Threading.CancellationToken"></xref> instance to signal the request to cancel the processing.  This is most likely to occur when the processor is shutting down.
+    type: <xref href="System.Threading.CancellationToken?alt=System.Threading.CancellationToken&text=CancellationToken" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.Messaging.EventHubs.Primitives.EventProcessor`1.OnProcessingEventBatchAsync(System.Collections.Generic.IEnumerable{Azure.Messaging.EventHubs.EventData},`0,System.Threading.CancellationToken)
+  commentId: M:Azure.Messaging.EventHubs.Primitives.EventProcessor`1.OnProcessingEventBatchAsync(System.Collections.Generic.IEnumerable{Azure.Messaging.EventHubs.EventData},`0,System.Threading.CancellationToken)
+  name: OnProcessingEventBatchAsync(IEnumerable<EventData>, TPartition, CancellationToken)
+  fullName: Azure.Messaging.EventHubs.Primitives.EventProcessor<TPartition>.OnProcessingEventBatchAsync(IEnumerable<EventData>, TPartition, CancellationToken)
+  nameWithType: EventProcessor<TPartition>.OnProcessingEventBatchAsync(IEnumerable<EventData>, TPartition, CancellationToken)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: protected abstract System.Threading.Tasks.Task OnProcessingEventBatchAsync (System.Collections.Generic.IEnumerable<Azure.Messaging.EventHubs.EventData> events, TPartition partition, System.Threading.CancellationToken cancellationToken);
+  - lang: fsharp
+    values:
+    - value: "abstract member OnProcessingEventBatchAsync : seq<Azure.Messaging.EventHubs.EventData> * 'Partition * System.Threading.CancellationToken -> System.Threading.Tasks.Task"
+  - lang: vb
+    values:
+    - value: Protected MustOverride Function OnProcessingEventBatchAsync (events As IEnumerable(Of EventData), partition As TPartition, cancellationToken As CancellationToken) As Task
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview
+  summary: Performs the tasks needed to process a batch of events for a given partition as they are read from the Event Hubs service.
+  remarks: <p>The number of events in the <code data-dev-comment-type="paramref">events</code> batch may vary.  The batch will contain a number of events between zero and batch size that was requested when the processor was created, depending on the availability of events in the partition within the requested <xref data-throw-if-not-resolved="true" uid="Azure.Messaging.EventHubs.Primitives.EventProcessorOptions.MaximumWaitTime"></xref> interval.</p><p>When events are available in the prefetch queue, they will be used to form the batch as quickly as possible without waiting for additional events from the Event Hub partition to be read.  When no events are available in prefetch the processor will wait until at least one event is available or the requested <xref data-throw-if-not-resolved="true" uid="Azure.Messaging.EventHubs.Primitives.EventProcessorOptions.MaximumWaitTime"></xref> has elapsed.</p><p>If <xref data-throw-if-not-resolved="true" uid="Azure.Messaging.EventHubs.Primitives.EventProcessorOptions.MaximumWaitTime"></xref> is <code data-dev-comment-type="c">null</code>, the event processor will continue reading from the Event Hub partition until a batch with at least one event could be formed and will not dispatch any empty batches to this method.</p><p>This method will be invoked concurrently, limited to one call per partition. The processor will await each invocation to ensure that the events from the same partition are processed in the order that they were read from the partition.  No time limit is imposed on an invocation of this handler; the processor will wait indefinitely for execution to complete before dispatching another event for the associated partition.  It is safe for implementations to perform long-running operations, retries, delays, and dead-lettering activities.</p><p>Should an exception occur within the code for this method, the event processor will allow it to propagate up the stack without attempting to handle it in any way. On most hosts, this will fault the task responsible for partition processing, causing it to be restarted from the last checkpoint.  On some hosts, it may crash the process. Developers are strongly encouraged to take all exception scenarios into account and guard against them using try/catch blocks and other means as appropriate.</p><p>It is not recommended that the state of the processor be managed directly from within this method; requesting to start or stop the processor may result in a deadlock scenario, especially if using the synchronous form of the call.</p>
+  metadata: {}
+uid: Azure.Messaging.EventHubs.Primitives.EventProcessor`1.OnProcessingEventBatchAsync*
+commentId: Overload:Azure.Messaging.EventHubs.Primitives.EventProcessor`1.OnProcessingEventBatchAsync
+namespace: Azure.Messaging.EventHubs.Primitives
+name: OnProcessingEventBatchAsync
+fullName: Azure.Messaging.EventHubs.Primitives.EventProcessor<TPartition>.OnProcessingEventBatchAsync
+nameWithType: EventProcessor<TPartition>.OnProcessingEventBatchAsync
+assembliesWithMoniker:
+- value: Azure.Messaging.EventHubs.dll
+packagesWithMoniker:
+- value: Azure.Messaging.EventHubs v5.9.2
+  monikers:
+  - azure-dotnet
+- value: Azure.Messaging.EventHubs v5.7.0-beta.5
+  monikers:
+  - azure-dotnet-preview
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.Messaging.EventHubs.Primitives.EventProcessor`1.OnProcessingEventBatchAsync
+  api_location:
+  - Azure.Messaging.EventHubs.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.Messaging.EventHubs.Primitives.EventProcessor`1.OnProcessingEventBatchAsync
+  - Azure::Messaging::EventHubs::Primitives::EventProcessor`1::OnProcessingEventBatchAsync
+  - Azure.Messaging.EventHubs.Primitives.EventProcessor.OnProcessingEventBatchAsync
+  - OnProcessingEventBatchAsync
+  - EventProcessor`1.OnProcessingEventBatchAsync
+  - EventProcessor`1::OnProcessingEventBatchAsync
+  helpviewer_keywords:
+  - EventProcessor<TPartition>.OnProcessingEventBatchAsync method [.NET]
+  - OnProcessingEventBatchAsync method [.NET], class EventProcessor<TPartition>
+  - EventProcessor<TPartition>.OnProcessingEventBatchAsync(IEnumerable<EventData>, TPartition, CancellationToken) method [.NET]
+  - OnProcessingEventBatchAsync(IEnumerable<EventData>, TPartition, CancellationToken) method [.NET], class EventProcessor<TPartition>
+  monikers:
+  - azure-dotnet
+  - azure-dotnet-preview

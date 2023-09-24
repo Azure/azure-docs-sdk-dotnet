@@ -1,0 +1,224 @@
+### YamlMime:NetMember
+type: method
+members:
+- returnsWithMoniker:
+    type:
+    - value: <xref href="System.Threading.Tasks.Task`1?alt=System.Threading.Tasks.Task&text=Task" data-throw-if-not-resolved="True"/>&lt;<xref href="Azure.Response?alt=Azure.Response&text=Response" data-throw-if-not-resolved="True"/>&gt;
+    description: The response returned from the service. Details of the response body schema are in the Remarks section below.
+  parameters:
+  - namesWithMoniker:
+    - value: taskId
+    description: The task id.
+    type: <xref href="System.Guid?alt=System.Guid&text=Guid" data-throw-if-not-resolved="True"/>
+  - namesWithMoniker:
+    - value: context
+    description: The request context, which can override default behaviors of the client pipeline on a per-call basis.
+    type: <xref href="Azure.RequestContext?alt=Azure.RequestContext&text=RequestContext" data-throw-if-not-resolved="True"/>
+  exceptions:
+  - description: Service returned a non-success status code.
+    type: <xref href="Azure.RequestFailedException?alt=Azure.RequestFailedException&text=RequestFailedException" data-throw-if-not-resolved="True"/>
+  type: method
+  uid: Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.GetWorkflowTaskAsync(System.Guid,Azure.RequestContext)
+  commentId: M:Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.GetWorkflowTaskAsync(System.Guid,Azure.RequestContext)
+  name: GetWorkflowTaskAsync(Guid, RequestContext)
+  fullName: Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.GetWorkflowTaskAsync(Guid, RequestContext)
+  nameWithType: PurviewWorkflowServiceClient.GetWorkflowTaskAsync(Guid, RequestContext)
+  syntaxWithMoniker:
+  - lang: csharp
+    values:
+    - value: public virtual System.Threading.Tasks.Task<Azure.Response> GetWorkflowTaskAsync (Guid taskId, Azure.RequestContext context = default);
+  - lang: fsharp
+    values:
+    - value: >-
+        abstract member GetWorkflowTaskAsync : Guid * Azure.RequestContext -> System.Threading.Tasks.Task<Azure.Response>
+
+        override this.GetWorkflowTaskAsync : Guid * Azure.RequestContext -> System.Threading.Tasks.Task<Azure.Response>
+  - lang: vb
+    values:
+    - value: Public Overridable Function GetWorkflowTaskAsync (taskId As Guid, Optional context As RequestContext = Nothing) As Task(Of Response)
+  monikers:
+  - azure-dotnet-preview
+  summary: Get a workflow task.
+  remarks: >-
+    <p>Below is the JSON schema for the response payload.</p><p>Response Body:</p><p>This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this. <details><summary>Approval</summary>Schema for <code data-dev-comment-type="c">Approval</code>: 
+
+
+    ```
+
+    {
+      approvalDetail: {
+        approvalType: "PendingOnAny" | "PendingOnAll", # Required. The approval type of an approval task.
+        status: "Pending" | "Approved" | "Rejected" | "Canceled", # Required. The status of an approval task.
+        approvers: Dictionary<string, ApproverResponse>, # Required. The list of approvers with reply.
+      }, # Optional. The approval task details
+      type: Approval, # Required. The workflow task type.
+      id: Guid, # Required. The workflow task id.
+      title: string, # Optional. The workflow task title.
+      workflowRunId: Guid, # Required. The workflow run id.
+      workflowId: Guid, # Required. The workflow id.
+      requestor: Guid, # Required. The person who submitted the user request.
+      createdTime: string (ISO 8601 Format), # Required. The created time.
+      lastUpdateTime: string (ISO 8601 Format), # Required. The last update time.
+      payload: {
+        type: "CreateTerm" | "UpdateTerm" | "DeleteTerm" | "ImportTerms" | "UpdateAsset" | "GrantDataAccess", # Required. The task payload type.
+        targetValue: string, # Required. The target value of entity which user want to involve workflow to update.
+        payload: AnyObject, # Optional. The payload of the task.
+      }, # Required. Info and material that helps assignees to take action.
+      reminderInfo: {
+        lastRemindTime: string (ISO 8601 Format), # Optional. The last update time.
+        nextRemindTime: string (ISO 8601 Format), # Required. The next remind time.
+        reminderSettings: AnyObject, # Required. The reminder settings.
+      }, # Optional. Info of task reminder.
+      expiryInfo: {
+        lastExpiryNotificationTime: string (ISO 8601 Format), # Optional. The last expiry notification time.
+        nextExpiryNotificationTime: string (ISO 8601 Format), # Required. The next expiry notification time.
+        expiryTime: string (ISO 8601 Format), # Required. The expiry time.
+        expirySettings: {
+          expireAfter: AnyObject, # Required. The time of expiry.
+          notifyOnExpiration: [Guid], # Optional.
+        }, # Required.
+      }, # Optional. Info of task expiry.
+    }
+
+    ```
+
+     </details><details><summary>~+ 1 more JSON objects</summary><details><summary>SimpleTask</summary>Schema for <code data-dev-comment-type="c">SimpleTask</code>: 
+
+
+    ```
+
+    {
+      taskDetail: {
+        taskBody: string, # Required. The simple task body.
+        assignedTo: [Guid], # Required. The users or groups were assigned the simple task.
+        status: "NotStarted" | "InProgress" | "Completed" | "Canceled", # Required. Simple task status.
+        changeHistory: [AnyObject], # Required.
+      }, # Optional. Workflow simple task details.
+      type: SimpleTask, # Required. The workflow task type.
+      id: Guid, # Required. The workflow task id.
+      title: string, # Optional. The workflow task title.
+      workflowRunId: Guid, # Required. The workflow run id.
+      workflowId: Guid, # Required. The workflow id.
+      requestor: Guid, # Required. The person who submitted the user request.
+      createdTime: string (ISO 8601 Format), # Required. The created time.
+      lastUpdateTime: string (ISO 8601 Format), # Required. The last update time.
+      payload: {
+        type: "CreateTerm" | "UpdateTerm" | "DeleteTerm" | "ImportTerms" | "UpdateAsset" | "GrantDataAccess", # Required. The task payload type.
+        targetValue: string, # Required. The target value of entity which user want to involve workflow to update.
+        payload: AnyObject, # Optional. The payload of the task.
+      }, # Required. Info and material that helps assignees to take action.
+      reminderInfo: {
+        lastRemindTime: string (ISO 8601 Format), # Optional. The last update time.
+        nextRemindTime: string (ISO 8601 Format), # Required. The next remind time.
+        reminderSettings: AnyObject, # Required. The reminder settings.
+      }, # Optional. Info of task reminder.
+      expiryInfo: {
+        lastExpiryNotificationTime: string (ISO 8601 Format), # Optional. The last expiry notification time.
+        nextExpiryNotificationTime: string (ISO 8601 Format), # Required. The next expiry notification time.
+        expiryTime: string (ISO 8601 Format), # Required. The expiry time.
+        expirySettings: {
+          expireAfter: AnyObject, # Required. The time of expiry.
+          notifyOnExpiration: [Guid], # Optional.
+        }, # Required.
+      }, # Optional. Info of task expiry.
+    }
+
+    ```
+
+     </details></details></p>
+  examples: >-
+    This sample shows how to call GetWorkflowTaskAsync with required parameters and parse the result.
+
+
+    ```
+
+    var credential = new DefaultAzureCredential();
+
+    var endpoint = new Uri("<https://my-service.azure.com>");
+
+    var client = new PurviewWorkflowServiceClient(endpoint, credential);
+
+
+    Response response = await client.GetWorkflowTaskAsync(Guid.NewGuid());
+
+
+    JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+
+    Console.WriteLine(result.GetProperty("type").ToString());
+
+    Console.WriteLine(result.GetProperty("id").ToString());
+
+    Console.WriteLine(result.GetProperty("title").ToString());
+
+    Console.WriteLine(result.GetProperty("workflowRunId").ToString());
+
+    Console.WriteLine(result.GetProperty("workflowId").ToString());
+
+    Console.WriteLine(result.GetProperty("requestor").ToString());
+
+    Console.WriteLine(result.GetProperty("createdTime").ToString());
+
+    Console.WriteLine(result.GetProperty("lastUpdateTime").ToString());
+
+    Console.WriteLine(result.GetProperty("payload").GetProperty("type").ToString());
+
+    Console.WriteLine(result.GetProperty("payload").GetProperty("targetValue").ToString());
+
+    Console.WriteLine(result.GetProperty("payload").GetProperty("payload").ToString());
+
+    Console.WriteLine(result.GetProperty("reminderInfo").GetProperty("lastRemindTime").ToString());
+
+    Console.WriteLine(result.GetProperty("reminderInfo").GetProperty("nextRemindTime").ToString());
+
+    Console.WriteLine(result.GetProperty("reminderInfo").GetProperty("reminderSettings").ToString());
+
+    Console.WriteLine(result.GetProperty("expiryInfo").GetProperty("lastExpiryNotificationTime").ToString());
+
+    Console.WriteLine(result.GetProperty("expiryInfo").GetProperty("nextExpiryNotificationTime").ToString());
+
+    Console.WriteLine(result.GetProperty("expiryInfo").GetProperty("expiryTime").ToString());
+
+    Console.WriteLine(result.GetProperty("expiryInfo").GetProperty("expirySettings").GetProperty("expireAfter").ToString());
+
+    Console.WriteLine(result.GetProperty("expiryInfo").GetProperty("expirySettings").GetProperty("notifyOnExpiration")[0].ToString());
+
+    ```
+  metadata: {}
+uid: Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.GetWorkflowTaskAsync*
+commentId: Overload:Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.GetWorkflowTaskAsync
+namespace: Azure.Analytics.Purview.Workflows
+name: GetWorkflowTaskAsync
+fullName: Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.GetWorkflowTaskAsync
+nameWithType: PurviewWorkflowServiceClient.GetWorkflowTaskAsync
+assembliesWithMoniker:
+- value: Azure.Analytics.Purview.Workflows.dll
+packagesWithMoniker:
+- value: Azure.Analytics.Purview.Workflows v1.0.0-beta.1
+devLangs:
+- csharp
+- vb
+- fsharp
+monikers:
+- azure-dotnet-preview
+metadata:
+  api_name:
+  - Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.GetWorkflowTaskAsync
+  api_location:
+  - Azure.Analytics.Purview.Workflows.dll
+  topic_type:
+  - apiref
+  api_type:
+  - Assembly
+  f1_keywords:
+  - Azure.Analytics.Purview.Workflows.PurviewWorkflowServiceClient.GetWorkflowTaskAsync
+  - Azure::Analytics::Purview::Workflows::PurviewWorkflowServiceClient::GetWorkflowTaskAsync
+  - GetWorkflowTaskAsync
+  - PurviewWorkflowServiceClient.GetWorkflowTaskAsync
+  - PurviewWorkflowServiceClient::GetWorkflowTaskAsync
+  helpviewer_keywords:
+  - PurviewWorkflowServiceClient.GetWorkflowTaskAsync method [.NET]
+  - GetWorkflowTaskAsync method [.NET], class PurviewWorkflowServiceClient
+  - PurviewWorkflowServiceClient.GetWorkflowTaskAsync(Guid, RequestContext) method [.NET]
+  - GetWorkflowTaskAsync(Guid, RequestContext) method [.NET], class PurviewWorkflowServiceClient
+  monikers:
+  - azure-dotnet-preview
