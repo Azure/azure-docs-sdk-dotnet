@@ -3,12 +3,12 @@ title: Azure WebJobs Storage Queues client library for .NET
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebJobs.Extensions.Storage.Queues, storage
 author: seanmcc-msft
 ms.author: seanmcc
-ms.date: 06/26/2023
+ms.date: 09/25/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: storage
 ---
-# Azure WebJobs Storage Queues client library for .NET - version 5.1.3 
+# Azure WebJobs Storage Queues client library for .NET - version 5.2.0 
 
 
 This extension provides functionality for accessing Azure Storage Queues in Azure Functions.
@@ -272,7 +272,7 @@ public static class Function_BindingToQueueClient
 
 ### Configuring the extension
 
-Please refer to [sample functions app](https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.Storage.Queues_5.1.3/sdk/storage/Microsoft.Azure.WebJobs.Extensions.Storage.Queues/samples/functionapp).
+Please refer to [sample functions app](https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.Storage.Queues_5.2.0/sdk/storage/Microsoft.Azure.WebJobs.Extensions.Storage.Queues/samples/functionapp).
 
 ## Troubleshooting
 
@@ -306,8 +306,8 @@ additional questions or comments.
 [storage_account_create_cli]: /azure/storage/common/storage-quickstart-create-account?tabs=azure-cli
 [storage_account_create_portal]: /azure/storage/common/storage-quickstart-create-account?tabs=azure-portal
 [azure_sub]: https://azure.microsoft.com/free/dotnet/
-[RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.Storage.Queues_5.1.3/sdk/core/Azure.Core/src/RequestFailedException.cs
-[storage_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.WebJobs.Extensions.Storage.Queues_5.1.3/sdk/storage/CONTRIBUTING.md
+[RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.Storage.Queues_5.2.0/sdk/core/Azure.Core/src/RequestFailedException.cs
+[storage_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.WebJobs.Extensions.Storage.Queues_5.2.0/sdk/storage/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
