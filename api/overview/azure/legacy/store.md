@@ -3,7 +3,7 @@ title: Azure Store SDK for .NET
 description: Reference for Azure Store SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 09/22/2023
+ms.data: 09/25/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: store
