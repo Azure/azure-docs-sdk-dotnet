@@ -124,7 +124,7 @@ For more detailed examples, take a look at [samples](https://github.com/yukun-do
 
 ### More sample code
 
-- [Managing EventHubs](https://github.com/yukun-dong/azure-sdk-for-net/blob/eventhub-2018-01-preview/sdk/eventhub/Azure.ResourceManager.EventHubs/samples/Sample1_ManagingEventHubs.md)
+- [Managing EventHubs](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/eventhub/Azure.ResourceManager.EventHubs/samples/Sample1_ManagingEventHubs.md)
 
 ### Additional Documentation
 
