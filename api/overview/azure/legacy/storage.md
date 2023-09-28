@@ -3,7 +3,7 @@ title: Azure Storage SDK for .NET
 description: Reference for Azure Storage SDK for .NET
 author: seanmcc-msft
 ms.author: seanmcc
-ms.data: 09/27/2023
+ms.data: 09/28/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: storage

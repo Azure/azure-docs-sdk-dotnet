@@ -3,7 +3,7 @@ title: Azure Extensions SDK for .NET
 description: Reference for Azure Extensions SDK for .NET
 author: jsquire
 ms.author: jsquire
-ms.data: 09/27/2023
+ms.data: 09/28/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: extensions

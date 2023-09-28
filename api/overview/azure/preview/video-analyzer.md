@@ -3,7 +3,7 @@ title: Azure Video Analyzer SDK for .NET
 description: Reference for Azure Video Analyzer SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 09/27/2023
+ms.data: 09/28/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: videoanalyzer

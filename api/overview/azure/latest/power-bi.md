@@ -3,7 +3,7 @@ title: Azure Power BI SDK for .NET
 description: Reference for Azure Power BI SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 09/27/2023
+ms.data: 09/28/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: powerbi
