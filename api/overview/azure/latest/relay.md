@@ -3,10 +3,10 @@ title: Azure Relay SDK for .NET
 description: Reference for Azure Relay SDK for .NET
 author: pallavit
 ms.author: pallavit
-ms.data: 09/28/2023
+ms.data: 09/29/2023
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: relay
+ms.service: service-bus-relay
 ---
 # Azure Relay SDK for .NET - latest
 ## Packages - latest
