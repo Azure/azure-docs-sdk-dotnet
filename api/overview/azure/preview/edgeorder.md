@@ -44,3 +44,4 @@ OrderItemResource orderItemResource = orderItemResourceCollection.Get(orderItemN
 
 > [!div class="nextstepaction"]
 > [Explore the management APIs](https://docs.microsoft.com/dotnet/api/overview/azure/edgehardwarecenter/management)
+

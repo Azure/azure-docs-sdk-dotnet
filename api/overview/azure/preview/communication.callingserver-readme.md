@@ -1,16 +1,13 @@
 ---
 title: Azure Communication CallingServer client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Communication.CallingServer, communication
-author: ramya-rao-a
-ms.author: ramyar
 ms.date: 10/05/2021
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: communication
+ms.technology: azure
+ms.prod: azure
 ---
-
 # Azure Communication CallingServer client library for .NET - version 1.0.0-beta.3 
 
 

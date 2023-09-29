@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.IotFirmwareDefense, iot
-author: ethanann-ms
-ms.author: ethanann
 ms.date: 06/27/2023
 ms.topic: reference
 ms.devlang: dotnet

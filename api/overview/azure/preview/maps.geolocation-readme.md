@@ -1,8 +1,6 @@
 ---
 title: Azure Maps Geolocation client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Maps.Geolocation, maps
-author: pallavit
-ms.author: pallavit
 ms.date: 07/13/2023
 ms.topic: reference
 ms.devlang: dotnet

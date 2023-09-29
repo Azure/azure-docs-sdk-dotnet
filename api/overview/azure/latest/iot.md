@@ -1,13 +1,10 @@
 ---
 title: Azure IoT SDK for .NET
 description: Reference for Azure IoT SDK for .NET
-author: ethanann-ms
-ms.author: ethanann
-ms.data: 09/28/2023
+ms.date: 10/19/2017
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: iot
-ms.date: 10/19/2017
 ---
 # Azure IoT libraries for .NET
 
@@ -87,3 +84,4 @@ View the [Azure IoT Hub developer guide](https://docs.microsoft.com/azure/iot-hu
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
 [DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
+

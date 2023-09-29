@@ -1,13 +1,10 @@
 ---
 title: Azure PostgreSQL SDK for .NET
 description: Reference for Azure PostgreSQL SDK for .NET
-author: pallavit
-ms.author: pallavit
-ms.data: 09/28/2023
+ms.date: 10/19/2017
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: postgresql
-ms.date: 10/19/2017
 ---
 # Azure Database for PostgreSQL libraries for .NET
 
@@ -70,3 +67,4 @@ using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
 [DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
+

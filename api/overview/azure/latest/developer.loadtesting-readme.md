@@ -1,8 +1,6 @@
 ---
 title: Azure Load Testing client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Developer.LoadTesting, azure-load-testing
-author: abranj1219
-ms.author: abranj
 ms.date: 03/13/2023
 ms.topic: reference
 ms.devlang: dotnet

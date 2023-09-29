@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.HDInsight.Containers, hdinsight
-author: aim-for-better
-ms.author: zhezhou
 ms.date: 08/27/2023
 ms.topic: reference
 ms.devlang: dotnet
@@ -523,3 +521,4 @@ more information, see the [Code of Conduct FAQ][coc_faq] or contact
 [cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.HDInsight.Containers_1.0.0-beta.1/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
+

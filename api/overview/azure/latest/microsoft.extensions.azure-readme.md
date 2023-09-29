@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Microsoft.Extensions.Azure, extensions
-author: jsquire
-ms.author: jsquire
 ms.date: 08/08/2023
 ms.topic: reference
 ms.devlang: dotnet

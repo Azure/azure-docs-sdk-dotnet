@@ -1,13 +1,10 @@
 ---
 title: Azure Search SDK for .NET
 description: Reference for Azure Search SDK for .NET
-author: ShivangiReja
-ms.author: shreja
-ms.data: 09/28/2023
+ms.date: 07/20/2020
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: cognitive-search
-ms.date: 07/20/2020
 ---
 # Azure Cognitive Search libraries for .NET
 
@@ -53,3 +50,4 @@ Use the Azure Cognitive Search management library to provision a service, manage
 |    Library    |    Reference    |    Package    |    Source    |
 |---------------|-----------------|----------------|-------------|
 | Microsoft.Azure.Management.Search | [Reference](/dotnet/api/overview/azure/search/management) | [NuGet](https://www.nuget.org/packages/Microsoft.Azure.Management.Search) | [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/search/Microsoft.Azure.Management.Search)
+

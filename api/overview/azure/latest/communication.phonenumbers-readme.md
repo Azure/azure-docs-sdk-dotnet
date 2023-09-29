@@ -1,8 +1,6 @@
 ---
 title: Azure Communication Phone Numbers client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Communication.PhoneNumbers, communication
-author: acsdevx-msft
-ms.author: acsdevx-msft
 ms.date: 03/28/2023
 ms.topic: reference
 ms.devlang: dotnet

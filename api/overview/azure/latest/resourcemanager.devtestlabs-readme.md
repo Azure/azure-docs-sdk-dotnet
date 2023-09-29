@@ -2,8 +2,6 @@
 title: DevTest Labs management client library for .NET
 description: Learn how to use the management client library for .NET to create labs in Azure DevTest Labs.
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.DevTestLabs, devtestlabs
-author: pallavit
-ms.author: pallavit
 ms.date: 02/16/2023
 ms.topic: reference
 ms.devlang: dotnet
@@ -91,3 +89,4 @@ more information, see the [Code of Conduct FAQ][coc_faq] or contact
 [cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.DevTestLabs_1.0.1/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
+

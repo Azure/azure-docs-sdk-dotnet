@@ -1,16 +1,13 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.Core.NewtonsoftJson, core
-author: ramya-rao-a
-ms.author: ramyar
 ms.date: 01/08/2021
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: core
+ms.technology: azure
+ms.prod: azure
 ---
-
 # Newtonsoft.Json support for Azure Core shared client library for .NET
 
 The [Azure.Core package][azure_core_package] contains types shared by all Azure SDK client libraries.

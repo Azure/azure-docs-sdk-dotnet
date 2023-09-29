@@ -1,8 +1,6 @@
 ---
 title: Azure Cognitive Search client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Search.Documents, search
-author: ShivangiReja
-ms.author: shreja
 ms.date: 09/06/2022
 ms.topic: reference
 ms.devlang: dotnet

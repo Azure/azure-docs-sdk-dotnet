@@ -1,8 +1,6 @@
 ---
 title: Azure WebJobs Service Bus client library for .NET
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebJobs.Extensions.ServiceBus, servicebus
-author: JoshLove-msft
-ms.author: jolov
 ms.date: 08/14/2023
 ms.topic: reference
 ms.devlang: dotnet

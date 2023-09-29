@@ -1,15 +1,12 @@
 ---
-title: Face API 
-author: PatrickFarley
-ms.author: pafarley
+title: Face API
 ms.date: 06/21/2021
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: csharp
 ms.service: face-api
+ms.technology: azure
+ms.prod: azure
 ---
-
 # Azure Face API
 
 > [!IMPORTANT]
@@ -62,3 +59,4 @@ dotnet add package Microsoft.Azure.CognitiveServices.Vision.Face --version 2.7.0
 ## Next Steps
 
 Go to the Face service [Overview](https://docs.microsoft.com/azure/cognitive-services/face/overview) or follow a [quickstart](https://docs.microsoft.com/azure/cognitive-services/face/quickstarts/client-libraries) to get started.
+

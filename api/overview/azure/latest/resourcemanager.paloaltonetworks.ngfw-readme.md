@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.PaloAltoNetworks.Ngfw, paloaltonetworks.ngfw
-author: pallavit
-ms.author: pallavit
 ms.date: 07/14/2023
 ms.topic: reference
 ms.devlang: dotnet

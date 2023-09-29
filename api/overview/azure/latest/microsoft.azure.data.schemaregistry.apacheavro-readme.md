@@ -1,8 +1,6 @@
 ---
 title: Azure Schema Registry Apache Avro client library for .NET
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.Data.SchemaRegistry.ApacheAvro, schemaregistry
-author: jsquire
-ms.author: jsquire
 ms.date: 05/12/2022
 ms.topic: reference
 ms.devlang: dotnet

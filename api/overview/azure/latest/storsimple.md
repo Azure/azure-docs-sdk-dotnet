@@ -1,13 +1,10 @@
 ---
 title: Azure StorSimple SDK for .NET
 description: Reference for Azure StorSimple SDK for .NET
-author: pallavit
-ms.author: pallavit
-ms.data: 06/15/2023
+ms.date: 10/27/2017
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: storsimple
-ms.date: 10/27/2017
 ---
 # Azure StorSimple libraries for .NET
 
@@ -40,3 +37,4 @@ Explore more [sample .NET code](https://azure.microsoft.com/resources/samples/?p
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
 [DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
+

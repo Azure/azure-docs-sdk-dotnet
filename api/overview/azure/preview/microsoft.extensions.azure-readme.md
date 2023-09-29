@@ -1,16 +1,13 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Microsoft.Extensions.Azure, extensions
-author: ramya-rao-a
-ms.author: ramyar
 ms.date: 05/11/2021
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: extensions
+ms.technology: azure
+ms.prod: azure
 ---
-
 # Azure client library integration for ASP.NET Core (Preview)
 
 Microsoft.Extensions.Azure.Core provides shared primitives to integrate Azure clients with ASP.NET Core [dependency injection][dependency_injection] and [configuration][configuration] systems.

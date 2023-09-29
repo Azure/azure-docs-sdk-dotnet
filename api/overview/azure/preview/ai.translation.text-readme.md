@@ -1,8 +1,6 @@
 ---
 title: Azure Text Translation client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.Translation.Text, translation
-author: mikeymcz
-ms.author: mimat
 ms.date: 04/18/2023
 ms.topic: reference
 ms.devlang: dotnet

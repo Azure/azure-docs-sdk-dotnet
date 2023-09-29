@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.KubernetesConfiguration, kubernetesconfiguration
-author: pallavit
-ms.author: pallavit
 ms.date: 05/31/2023
 ms.topic: reference
 ms.devlang: dotnet

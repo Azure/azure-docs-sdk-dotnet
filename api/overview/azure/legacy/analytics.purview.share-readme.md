@@ -1,8 +1,6 @@
 ---
 title: Azure Share client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Analytics.Purview.Share, purview
-author: pallavit
-ms.author: pallavit
 ms.date: 07/27/2022
 ms.topic: reference
 ms.devlang: dotnet

@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.AppContainers, containerapps
-author: pallavit
-ms.author: pallavit
 ms.date: 08/11/2023
 ms.topic: reference
 ms.devlang: dotnet

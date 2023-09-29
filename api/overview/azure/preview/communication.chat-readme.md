@@ -1,8 +1,6 @@
 ---
 title: Azure Communication Chat client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Communication.Chat, communication
-author: acsdevx-msft
-ms.author: acsdevx-msft
 ms.date: 08/15/2023
 ms.topic: reference
 ms.devlang: dotnet

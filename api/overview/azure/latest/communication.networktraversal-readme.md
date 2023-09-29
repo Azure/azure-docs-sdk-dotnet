@@ -1,14 +1,12 @@
 ---
 title: Azure Communication Network Traversal client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Communication.NetworkTraversal, communication
-author: acsdevx-msft
-ms.author: acsdevx-msft
 ms.date: 02/09/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: communication
+ms.technology: azure
+ms.prod: azure
 ---
 # Azure Communication Network Traversal client library for .NET - version 1.0.0 
 

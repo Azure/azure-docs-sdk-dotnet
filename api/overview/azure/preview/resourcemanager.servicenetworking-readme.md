@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.ServiceNetworking, servicenetworking
-author: pallavit
-ms.author: pallavit
 ms.date: 06/01/2023
 ms.topic: reference
 ms.devlang: dotnet

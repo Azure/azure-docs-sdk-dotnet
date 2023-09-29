@@ -1,16 +1,13 @@
 ---
 title: Azure Mixed Reality Authentication client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.MixedReality.Authentication, mixedreality
-author: ramya-rao-a
-ms.author: ramyar
 ms.date: 02/16/2021
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: mixedreality
+ms.technology: azure
+ms.prod: azure
 ---
-
 # Azure Mixed Reality Authentication client library for .NET - version 1.0.0-beta.2 
 
 

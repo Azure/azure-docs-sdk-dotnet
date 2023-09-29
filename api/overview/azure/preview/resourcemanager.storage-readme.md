@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.Storage, storage
-author: seanmcc-msft
-ms.author: seanmcc
 ms.date: 08/14/2023
 ms.topic: reference
 ms.devlang: dotnet

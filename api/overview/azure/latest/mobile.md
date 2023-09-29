@@ -6,7 +6,6 @@ ms.topic: reference
 ms.service: app-service
 ms.subservice: mobile-apps
 ---
-
 # Azure Mobile libraries for .NET
 
 ## Client library
@@ -28,3 +27,4 @@ dotnet add package Microsoft.Azure.Mobile.Server
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
 [DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
+

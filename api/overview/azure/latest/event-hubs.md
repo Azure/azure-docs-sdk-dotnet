@@ -1,13 +1,10 @@
 ---
 title: Azure Event Hubs SDK for .NET
 description: Reference for Azure Event Hubs SDK for .NET
-author: pallavit
-ms.author: pallavit
-ms.data: 09/28/2023
+ms.date: 11/20/2020
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: eventhubs
-ms.date: 11/20/2020
 ---
 # Azure Event Hubs libraries for .NET
 
@@ -46,3 +43,4 @@ Use the following library to work with the Azure Event Hubs resource provider:
 | NuGet Package | Reference |
 |--------------------------------------|---------------------------------------------------------------|
 | [Azure.ResourceManager.EventHubs](https://www.nuget.org/packages/Azure.ResourceManager.EventHubs)  | [API Reference for Azure.ResourceManager.EventHubs](/dotnet/api/overview/azure/eventhubs/management)  |
+

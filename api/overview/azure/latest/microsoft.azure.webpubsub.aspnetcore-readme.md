@@ -1,8 +1,6 @@
 ---
 title: Azure Web PubSub service middleware client library for .NET
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebPubSub.AspNetCore, webpubsub
-author: vicancy
-ms.author: lianwei
 ms.date: 08/30/2023
 ms.topic: reference
 ms.devlang: dotnet
@@ -136,3 +134,4 @@ For more information see the [Code of Conduct FAQ](https://opensource.microsoft.
 [azure_sub]: https://azure.microsoft.com/free/dotnet/
 [sample_ref]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebPubSub.AspNetCore_1.2.0/sdk/webpubsub/Microsoft.Azure.WebPubSub.AspNetCore/tests/Samples/
 [package_ref]: https://www.nuget.org/packages/Microsoft.Azure.WebPubSub.AspNetCore/
+

@@ -1,8 +1,6 @@
 ---
 title: Azure ContainerApps Management client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.Applications.Containers, containerapps
-author: ramya-rao-a
-ms.author: ramyar
 ms.date: 05/25/2022
 ms.topic: reference
 ms.devlang: dotnet
@@ -85,3 +83,4 @@ more information see the [Code of Conduct FAQ][coc_faq] or contact
 [cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Applications.Containers_1.0.0-beta.1/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
+

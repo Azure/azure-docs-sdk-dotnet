@@ -1,8 +1,6 @@
 ---
 title: Azure Communication JobRouter client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Communication.JobRouter, communication
-author: acsdevx-msft
-ms.author: acsdevx-msft
 ms.date: 09/12/2023
 ms.topic: reference
 ms.devlang: dotnet

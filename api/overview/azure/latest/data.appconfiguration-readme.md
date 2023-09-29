@@ -1,8 +1,6 @@
 ---
 title: Azure App Configuration client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Data.AppConfiguration, appconfiguration
-author: ShivangiReja
-ms.author: shreja
 ms.date: 09/12/2023
 ms.topic: reference
 ms.devlang: dotnet

@@ -1,8 +1,6 @@
 ---
 title: Azure Storage Data Movement Blobs client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Storage.DataMovement.Blobs, storage
-author: seanmcc-msft
-ms.author: seanmcc
 ms.date: 07/11/2023
 ms.topic: reference
 ms.devlang: dotnet

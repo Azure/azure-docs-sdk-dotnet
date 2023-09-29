@@ -1,16 +1,13 @@
 ---
 title: Azure Communication Administration client library for .NET
 keywords: Azure, .net, SDK, API, Azure.Communication.Administration, communication
-author: ramya-rao-a
-ms.author: ramyar
 ms.date: 11/16/2020
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: .net
 ms.service: communication
+ms.technology: azure
+ms.prod: azure
 ---
-
 # Azure Communication Administration client library for .NET - version 1.0.0-beta.3 
 
 

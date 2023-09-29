@@ -1,8 +1,6 @@
 ---
 title: Azure Web PubSub client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Messaging.WebPubSub.Client, webpubsub
-author: vicancy
-ms.author: lianwei
 ms.date: 02/06/2023
 ms.topic: reference
 ms.devlang: dotnet

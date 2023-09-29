@@ -5,7 +5,6 @@ ms.date: 10/19/2017
 ms.topic: reference
 ms.service: multiple
 ---
-
 # Power BI Embedded libraries for .NET
 
 [Power BI](https://powerbi.microsoft.com/) is a cloud-based business analytics service that gives you a single view of your most critical business data.
@@ -69,3 +68,4 @@ using (PowerBIClient client = new PowerBIClient(new Uri(apiUrl), tokenCredential
 Explore more [sample .NET code](https://azure.microsoft.com/resources/samples/?platform=dotnet) you can use in your apps.
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
+

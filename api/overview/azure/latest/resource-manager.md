@@ -1,13 +1,10 @@
 ---
 title: Azure Resource Manager SDK for .NET
 description: Reference for Azure Resource Manager SDK for .NET
-author: pallavit
-ms.author: pallavit
-ms.data: 09/28/2023
+ms.date: 10/19/2017
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: resourcemanager
-ms.date: 10/19/2017
 ---
 # Azure Resource Manager libraries for .NET
 
@@ -65,3 +62,4 @@ ResourceGroupResource resourceGroup = operation.Value;
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
 [DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
+
