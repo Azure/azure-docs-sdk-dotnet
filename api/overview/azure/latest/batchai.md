@@ -5,7 +5,6 @@ ms.date: 03/26/2019
 ms.topic: reference
 ms.service: batch-ai
 ---
-
 # Azure Batch AI APIs for .NET
 
 >[!Note]
@@ -14,3 +13,4 @@ ms.service: batch-ai
 ## Namespaces
 
 [Management](/dotnet/api/overview/azure/batchai/management)
+

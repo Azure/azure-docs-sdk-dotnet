@@ -1,14 +1,12 @@
 ---
 title: Azure Personalizer client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.Personalizer, personalizer
-author: orenmichaely
-ms.author: ormichae
 ms.date: 03/23/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: personalizer
+ms.technology: azure
+ms.prod: azure
 ---
 # Azure Personalizer client library for .NET - version 2.0.0-beta.2 
 

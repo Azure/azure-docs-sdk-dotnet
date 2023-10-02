@@ -1,8 +1,6 @@
 ---
 title: Azure Event Hubs Event Processor client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Messaging.EventHubs.Processor, eventhub
-author: serkantkaraca
-ms.author: serkar
 ms.date: 09/12/2023
 ms.topic: reference
 ms.devlang: dotnet

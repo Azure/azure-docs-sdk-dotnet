@@ -5,7 +5,6 @@ ms.date: 07/24/2020
 ms.topic: reference
 ms.service: active-directory
 ---
-
 # Azure Active Directory libraries for .NET
 
 ## Overview
@@ -107,3 +106,4 @@ Explore the full collection of [Microsoft identity platform code samples](/azure
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
 [DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
+

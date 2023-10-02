@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.Batch, batch
-author: jingjlii
-ms.author: jingjli
 ms.date: 06/15/2023
 ms.topic: reference
 ms.devlang: dotnet

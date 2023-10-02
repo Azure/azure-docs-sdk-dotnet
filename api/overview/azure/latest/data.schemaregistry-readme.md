@@ -1,8 +1,6 @@
 ---
 title: Azure Schema Registry client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Data.SchemaRegistry, schemaregistry
-author: jsquire
-ms.author: jsquire
 ms.date: 10/11/2022
 ms.topic: reference
 ms.devlang: dotnet

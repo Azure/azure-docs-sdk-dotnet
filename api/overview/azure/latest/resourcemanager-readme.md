@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager, resourcemanager
-author: pallavit
-ms.author: pallavit
 ms.date: 07/13/2023
 ms.topic: reference
 ms.devlang: dotnet

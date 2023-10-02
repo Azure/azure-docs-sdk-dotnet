@@ -5,7 +5,6 @@ ms.date: 06/11/2018
 ms.topic: reference
 ms.service: container-instances
 ---
-
 # Azure Container Instances libraries for .NET
 
 Use the Microsoft Azure Container Instances libraries for .NET to create and manage Azure container instances. Learn more by reading the [Azure Container Instances overview](/azure/container-instances/container-instances-overview).
@@ -144,3 +143,4 @@ Explore more [sample .NET code](https://azure.microsoft.com/resources/samples/?p
 [PackageManager]: /nuget/tools/package-manager-console
 [iazure]: /dotnet/api/microsoft.azure.management.fluent.azure
 [iazure-authenticate]: /dotnet/api/microsoft.azure.management.fluent.azure.authenticate
+

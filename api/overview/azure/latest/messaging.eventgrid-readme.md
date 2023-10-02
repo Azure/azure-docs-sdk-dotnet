@@ -1,8 +1,6 @@
 ---
 title: Azure Event Grid client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Messaging.EventGrid, eventgrid
-author: Kishp01
-ms.author: kishp
 ms.date: 09/13/2023
 ms.topic: reference
 ms.devlang: dotnet

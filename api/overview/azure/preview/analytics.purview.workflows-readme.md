@@ -1,8 +1,6 @@
 ---
 title: Azure Purview Workflow client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Analytics.Purview.Workflows, purview
-author: pallavit
-ms.author: pallavit
 ms.date: 02/28/2023
 ms.topic: reference
 ms.devlang: dotnet

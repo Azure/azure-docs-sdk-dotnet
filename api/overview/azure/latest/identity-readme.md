@@ -1,8 +1,6 @@
 ---
 title: Azure Identity client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Identity, identity
-author: schaabs
-ms.author: sschaab
 ms.date: 09/13/2023
 ms.topic: reference
 ms.devlang: dotnet

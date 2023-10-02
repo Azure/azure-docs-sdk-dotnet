@@ -1,8 +1,6 @@
 ---
 title: Azure Container Registry client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Containers.ContainerRegistry, containerregistry
-author: ShivangiReja
-ms.author: shreja
 ms.date: 05/11/2023
 ms.topic: reference
 ms.devlang: dotnet

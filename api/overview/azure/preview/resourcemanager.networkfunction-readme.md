@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.NetworkFunction, networkfunction
-author: aznetsuppgithub
-ms.author: aznetsuppgithub
 ms.date: 05/31/2023
 ms.topic: reference
 ms.devlang: dotnet
@@ -90,3 +88,4 @@ more information, see the [Code of Conduct FAQ][coc_faq] or contact
 [cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.NetworkFunction_1.0.0-beta.3/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
+

@@ -1,8 +1,6 @@
 ---
 title: Azure Device Update for IoT Hub client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.IoT.DeviceUpdate, deviceupdate
-author: dpokluda
-ms.author: dpokluda
 ms.date: 09/08/2022
 ms.topic: reference
 ms.devlang: dotnet

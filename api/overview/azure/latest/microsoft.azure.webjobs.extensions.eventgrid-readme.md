@@ -1,8 +1,6 @@
 ---
 title: Azure WebJobs EventGrid client library for .NET
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebJobs.Extensions.EventGrid, eventgrid
-author: Kishp01
-ms.author: kishp
 ms.date: 06/15/2023
 ms.topic: reference
 ms.devlang: dotnet

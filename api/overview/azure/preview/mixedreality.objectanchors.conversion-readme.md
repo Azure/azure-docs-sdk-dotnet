@@ -1,8 +1,6 @@
 ---
 title: Azure Object Anchors client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.MixedReality.ObjectAnchors.Conversion, objectanchors
-author: pallavit
-ms.author: pallavit
 ms.date: 11/03/2022
 ms.topic: reference
 ms.devlang: dotnet

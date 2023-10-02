@@ -1,8 +1,6 @@
 ---
 title: Azure confidential ledger client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Security.ConfidentialLedger, confidentialledger
-author: christothes
-ms.author: chriss
 ms.date: 09/12/2023
 ms.topic: reference
 ms.devlang: dotnet

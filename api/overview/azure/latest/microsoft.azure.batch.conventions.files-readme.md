@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.Batch.Conventions.Files, batch
-author: paterasMSFT
-ms.author: mipatera
 ms.date: 08/31/2022
 ms.topic: reference
 ms.devlang: dotnet

@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.GraphServices, graphservices
-author: pallavit
-ms.author: pallavit
 ms.date: 07/25/2023
 ms.topic: reference
 ms.devlang: dotnet

@@ -1,8 +1,6 @@
 ---
 title: Azure App Configuration Management client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.AppConfiguration, appconfiguration
-author: nisha-bhatia
-ms.author: nibhati
 ms.date: 08/29/2022
 ms.topic: reference
 ms.devlang: dotnet

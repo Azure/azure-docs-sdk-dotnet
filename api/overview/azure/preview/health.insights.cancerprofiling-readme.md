@@ -1,8 +1,6 @@
 ---
 title: Azure Cognitive Services Health Insights Cancer Profiling client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Health.Insights.CancerProfiling, healthinsights
-author: pallavit
-ms.author: pallavit
 ms.date: 04/04/2023
 ms.topic: reference
 ms.devlang: dotnet

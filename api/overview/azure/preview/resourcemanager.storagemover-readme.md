@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.StorageMover, storagemover
-author: seanmcc-msft
-ms.author: seanmcc
 ms.date: 08/08/2023
 ms.topic: reference
 ms.devlang: dotnet

@@ -1,16 +1,13 @@
 ---
 title: Azure Core Experimental shared client library for .NET
-keywords: Azure, .net, SDK, API, Microsoft.Azure.Core.NewtonsoftJson, 
-author: ramya-rao-a
-ms.author: ramyar
+keywords: Azure, .net, SDK, API, Microsoft.Azure.Core.NewtonsoftJson,
 ms.date: 08/07/2020
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: .net
 ms.service: 
+ms.technology: azure
+ms.prod: azure
 ---
-
 # Newtonsoft.Json implementation for Azure Core Experimental shared client library for .NET - version 1.0.0-preview.1 
 
 

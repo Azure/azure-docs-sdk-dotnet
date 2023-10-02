@@ -1,16 +1,13 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, System.Memory.Data, core
-author: ramya-rao-a
-ms.author: ramyar
 ms.date: 04/08/2021
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: core
+ms.technology: azure
+ms.prod: azure
 ---
-
 #  System.Memory.Data library for .NET
 
 ## Binary Data
@@ -75,7 +72,4 @@ var model = new CustomModel
 var data = BinaryData.FromObjectAsJson(model);
 model = data.ToObjectFromJson<CustomModel>();
 ```
-
-
-
 

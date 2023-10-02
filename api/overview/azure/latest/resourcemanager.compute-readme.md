@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.Compute, compute
-author: bilaakpan-ms
-ms.author: saakpan
 ms.date: 09/15/2023
 ms.topic: reference
 ms.devlang: dotnet

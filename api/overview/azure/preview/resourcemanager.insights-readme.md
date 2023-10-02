@@ -1,16 +1,13 @@
 ---
 title: Azure Insights Management client library for .NET
-keywords: Azure, .net, SDK, API, Azure.ResourceManager.Insights, 
-author: ramya-rao-a
-ms.author: ramyar
+keywords: Azure, .net, SDK, API, Azure.ResourceManager.Insights,
 ms.date: 09/28/2020
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: .net
 ms.service: 
+ms.technology: azure
+ms.prod: azure
 ---
-
 # Azure Insights Management client library for .NET - version 1.0.0-preview.1 
 
 
@@ -89,3 +86,4 @@ more information see the Code of Conduct FAQ or contact
 [style-guide-cloud]: https://aka.ms/azsdk/cloud-style-guide
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Ftemplate%2FAzure.Template%2FREADME.png)
+

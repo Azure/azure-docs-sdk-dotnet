@@ -1,8 +1,6 @@
 ---
 title: Azure Communication CallAutomation client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Communication.CallAutomation, communication
-author: acsdevx-msft
-ms.author: acsdevx-msft
 ms.date: 08/17/2023
 ms.topic: reference
 ms.devlang: dotnet

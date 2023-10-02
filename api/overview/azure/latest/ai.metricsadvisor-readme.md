@@ -1,16 +1,13 @@
 ---
 title: Azure Metrics Advisor client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.MetricsAdvisor, metricsadvisor
-author: ramya-rao-a
-ms.author: ramyar
 ms.date: 08/10/2021
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: metricsadvisor
+ms.technology: azure
+ms.prod: azure
 ---
-
 # Azure Metrics Advisor client library for .NET - version 1.1.0 
 
 

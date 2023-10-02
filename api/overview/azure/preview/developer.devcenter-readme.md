@@ -1,8 +1,6 @@
 ---
 title: Azure DevCenter client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Developer.DevCenter, devcenter
-author: sebrenna
-ms.author: sebrenna
 ms.date: 02/09/2023
 ms.topic: reference
 ms.devlang: dotnet

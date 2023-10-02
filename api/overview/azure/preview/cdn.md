@@ -1,13 +1,10 @@
 ---
 title: Azure CDN SDK for .NET
 description: Reference for Azure CDN SDK for .NET
-author: pallavit
-ms.author: pallavit
-ms.data: 01/05/2023
+ms.date: 10/19/2017
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: azure-cdn
-ms.date: 10/19/2017
 ---
 # Azure CDN libraries for .NET
 
@@ -63,3 +60,4 @@ ICdnProfile profileDefinition = azure.CdnProfiles.Define("CdnProfileName")
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
 [DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
+

@@ -1,16 +1,13 @@
 ---
 title: Azure Remote Rendering client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.MixedReality.RemoteRendering, mixedreality
-author: ramya-rao-a
-ms.author: ramyar
 ms.date: 09/17/2021
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: mixedreality
+ms.technology: azure
+ms.prod: azure
 ---
-
 # Azure Remote Rendering client library for .NET - version 1.1.0 
 
 

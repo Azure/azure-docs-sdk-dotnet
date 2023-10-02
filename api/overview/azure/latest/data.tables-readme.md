@@ -1,8 +1,6 @@
 ---
 title: Azure Tables client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Data.Tables, tables
-author: christothes
-ms.author: chriss
 ms.date: 08/16/2023
 ms.topic: reference
 ms.devlang: dotnet

@@ -1,8 +1,6 @@
 ---
 title: Azure Cognitive Services Text Analytics client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.TextAnalytics, textanalytics
-author: joseharriaga
-ms.author: josar
 ms.date: 06/20/2023
 ms.topic: reference
 ms.devlang: dotnet

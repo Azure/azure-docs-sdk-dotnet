@@ -1,8 +1,6 @@
 ---
 title: Azure Core Expressions DataFactory shared client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Core.Expressions.DataFactory, core
-author: JoshLove-msft
-ms.author: jolov
 ms.date: 08/15/2023
 ms.topic: reference
 ms.devlang: dotnet

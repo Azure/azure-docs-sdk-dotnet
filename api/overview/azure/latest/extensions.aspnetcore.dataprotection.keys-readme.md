@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Azure.Extensions.AspNetCore.DataProtection.Keys, extensions
-author: jsquire
-ms.author: jsquire
 ms.date: 03/14/2023
 ms.topic: reference
 ms.devlang: dotnet

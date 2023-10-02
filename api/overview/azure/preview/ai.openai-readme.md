@@ -1,8 +1,6 @@
 ---
 title: Azure OpenAI client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.OpenAI, openai
-author: jpalvarezl
-ms.author: josealvar
 ms.date: 09/21/2023
 ms.topic: reference
 ms.devlang: dotnet

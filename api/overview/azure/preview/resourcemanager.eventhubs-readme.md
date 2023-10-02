@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.EventHubs, eventhub
-author: serkantkaraca
-ms.author: serkar
 ms.date: 05/31/2023
 ms.topic: reference
 ms.devlang: dotnet

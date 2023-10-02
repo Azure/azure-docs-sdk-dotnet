@@ -1,8 +1,6 @@
 ---
 title: Azure Template client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Template, template
-author: hallipr
-ms.author: pahallis
 ms.date: 08/11/2023
 ms.topic: reference
 ms.devlang: dotnet

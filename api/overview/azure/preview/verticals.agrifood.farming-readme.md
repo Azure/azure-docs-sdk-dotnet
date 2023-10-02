@@ -1,8 +1,6 @@
 ---
 title: Azure FarmBeats client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Verticals.AgriFood.Farming, agrifood
-author: pallavit
-ms.author: pallavit
 ms.date: 02/23/2023
 ms.topic: reference
 ms.devlang: dotnet

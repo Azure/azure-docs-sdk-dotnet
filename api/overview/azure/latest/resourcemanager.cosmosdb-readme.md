@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.CosmosDB, cosmosdb
-author: pjohari-ms
-ms.author: pjohari
 ms.date: 04/12/2023
 ms.topic: reference
 ms.devlang: dotnet
@@ -90,3 +88,4 @@ more information, see the [Code of Conduct FAQ][coc_faq] or contact
 [cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.CosmosDB_1.3.0/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
+

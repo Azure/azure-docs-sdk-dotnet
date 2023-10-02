@@ -1,8 +1,6 @@
 ---
 title: Azure Identity Brokered Authentication client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Identity.BrokeredAuthentication, identity
-author: schaabs
-ms.author: sschaab
 ms.date: 07/17/2023
 ms.topic: reference
 ms.devlang: dotnet

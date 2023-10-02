@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.IotHub, iothub
-author: ethanann-ms
-ms.author: ethanann
 ms.date: 09/17/2023
 ms.topic: reference
 ms.devlang: dotnet

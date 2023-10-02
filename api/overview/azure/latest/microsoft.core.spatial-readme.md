@@ -1,16 +1,13 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.Core.Spatial, core
-author: ramya-rao-a
-ms.author: ramyar
 ms.date: 01/08/2021
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: core
+ms.technology: azure
+ms.prod: azure
 ---
-
 # System.Text.Json support for Microsoft.Spatial library for .NET
 
 The [Microsoft.Spatial package][microsoft_spatial_package] contains classes and methods that support geographic operations. This library contains converters dependent on System.Text.Json for use with Microsoft.Spatial when using the Azure SDK for .NET.

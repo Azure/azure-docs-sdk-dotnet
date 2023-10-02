@@ -1,8 +1,6 @@
 ---
 title: Azure Storage Common client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Storage.Common, storage
-author: seanmcc-msft
-ms.author: seanmcc
 ms.date: 09/12/2023
 ms.topic: reference
 ms.devlang: dotnet
