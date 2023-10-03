@@ -1,7 +1,7 @@
 ---
 title: Azure MySQL SDK for .NET
 description: Reference for Azure MySQL SDK for .NET
-ms.date: 10/19/2017
+ms.date: 10/03/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: mysql
@@ -67,4 +67,3 @@ using (MySqlConnection conn = new MySqlConnection(connectionString))
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
 [DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
-

@@ -1,7 +1,7 @@
 ---
 title: Azure Functions SDK for .NET
 description: Reference for Azure Functions SDK for .NET
-ms.date: 10/15/2019
+ms.date: 10/03/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: functions
@@ -43,4 +43,3 @@ View the [complete list](/samples/browse/?products=azure-functions&languages=csh
 
 [PackageManager]: /nuget/tools/package-manager-console
 [DotNetCLI]: /dotnet/core/tools/dotnet-add-package
-

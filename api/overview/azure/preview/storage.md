@@ -1,7 +1,7 @@
 ---
 title: Azure Storage SDK for .NET
 description: Reference for Azure Storage SDK for .NET
-ms.date: 09/19/2022
+ms.date: 10/03/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: storage
@@ -65,4 +65,3 @@ Use the following version 25.x.x library to work with the Azure Storage resource
 |    Library    |    Reference    |    Package    |    Source    |
 |------------------------------------------|-------------------------------------------------------------------|-----------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
 |    Microsoft.Azure.Management.Storage    |    [Reference](/dotnet/api/microsoft.azure.management.storage)    |    [NuGet](https://www.nuget.org/packages/Microsoft.Azure.Management.Storage/)    |    [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/storage/Microsoft.Azure.Management.Storage)    |
-

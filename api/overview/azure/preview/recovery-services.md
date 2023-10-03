@@ -1,7 +1,7 @@
 ---
 title: Azure Recovery Services SDK for .NET
 description: Reference for Azure Recovery Services SDK for .NET
-ms.date: 10/19/2017
+ms.date: 10/03/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: recoveryservices
@@ -47,4 +47,3 @@ BaseRecoveryServicesJobResponse resp =
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
 [DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
-

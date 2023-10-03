@@ -1,7 +1,7 @@
 ---
 title: Azure Storage SDK for .NET
 description: Reference for Azure Storage SDK for .NET
-ms.date: 09/19/2022
+ms.date: 10/03/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: storage
@@ -88,4 +88,3 @@ Time:2023-05-19T17:10:34.2972651Z</Message><HeaderName>x-ms-version</HeaderName>
 ```
 
 If you've upgraded to the latest beta or generally available version of the SDK and you experience this error, it's recommended that you downgrade to the previous generally available version of the SDK to see if the issue resolves. If the issue persists, or if the recommendation is not feasible, [open a support ticket](https://ms.portal.azure.com/#create/Microsoft.Support) to explore further options.
-

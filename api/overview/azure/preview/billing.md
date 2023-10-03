@@ -1,6 +1,7 @@
 ---
 title: Azure Billing SDK for .NET
 description: Reference for Azure Billing SDK for .NET
+ms.date: 10/03/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: billing
@@ -8,4 +9,3 @@ ms.service: billing
 # Azure Billing SDK for .NET - preview
 ## Packages - preview
 [!INCLUDE [packages](billing-index.md)]
-

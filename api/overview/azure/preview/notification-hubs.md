@@ -1,7 +1,7 @@
 ---
 title: Azure Notification Hubs SDK for .NET
 description: Reference for Azure Notification Hubs SDK for .NET
-ms.date: 10/19/2017
+ms.date: 10/03/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: notificationhubs
@@ -64,4 +64,3 @@ dotnet add package Microsoft.Azure.Management.NotificationHubs
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
 [DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
-

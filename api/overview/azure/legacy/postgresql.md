@@ -1,6 +1,7 @@
 ---
 title: Azure PostgreSQL SDK for .NET
 description: Reference for Azure PostgreSQL SDK for .NET
+ms.date: 10/03/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: postgresql
@@ -8,4 +9,3 @@ ms.service: postgresql
 # Azure PostgreSQL SDK for .NET - legacy
 ## Packages - legacy
 [!INCLUDE [packages](postgresql-index.md)]
-

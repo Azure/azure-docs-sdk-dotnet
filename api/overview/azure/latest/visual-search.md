@@ -1,6 +1,7 @@
 ---
 title: Azure Visual Search SDK for .NET
 description: Reference for Azure Visual Search SDK for .NET
+ms.date: 10/03/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: visualsearch
@@ -8,4 +9,3 @@ ms.service: visualsearch
 # Azure Visual Search SDK for .NET - latest
 ## Packages - latest
 [!INCLUDE [packages](visual-search-index.md)]
-
