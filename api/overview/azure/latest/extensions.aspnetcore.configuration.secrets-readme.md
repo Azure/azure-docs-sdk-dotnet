@@ -1,14 +1,12 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Azure.Extensions.AspNetCore.Configuration.Secrets, extensions
-author: jsquire
-ms.author: jsquire
 ms.date: 04/06/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: extensions
+ms.technology: azure
+ms.prod: azure
 ---
 # Azure Key Vault Secrets configuration provider for Microsoft.Extensions.Configuration
 

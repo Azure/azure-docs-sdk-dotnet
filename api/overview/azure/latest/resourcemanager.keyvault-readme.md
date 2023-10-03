@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.KeyVault, keyvault
-author: heaths
-ms.author: heaths
 ms.date: 02/13/2023
 ms.topic: reference
 ms.devlang: dotnet

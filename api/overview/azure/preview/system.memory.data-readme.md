@@ -1,16 +1,13 @@
 ---
 title: 
-keywords: Azure, .net, SDK, API, System.Memory.Data, 
-author: ramya-rao-a
-ms.author: ramyar
+keywords: Azure, .net, SDK, API, System.Memory.Data,
 ms.date: 11/04/2020
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: .net
 ms.service: 
+ms.technology: azure
+ms.prod: azure
 ---
-
 #  System.Memory.Data library for .NET (Preview) 
 
 ## Binary Data
@@ -75,7 +72,4 @@ var model = new CustomModel
 var data = BinaryData.FromObjectAsJson(model);
 model = data.ToObjectFromJson<CustomModel>();
 ```
-
-
-
 

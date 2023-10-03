@@ -1,16 +1,13 @@
 ---
 title: Azure Synapse Spark client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Analytics.Synapse.Spark, synapseanalytics
-author: ramya-rao-a
-ms.author: ramyar
 ms.date: 10/05/2021
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: synapseanalytics
+ms.technology: azure
+ms.prod: azure
 ---
-
 # Azure Synapse Spark client library for .NET - version 1.0.0-preview.8 
 
 

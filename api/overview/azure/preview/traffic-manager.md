@@ -1,13 +1,10 @@
 ---
 title: Azure Traffic Manager SDK for .NET
 description: Reference for Azure Traffic Manager SDK for .NET
-author: pallavit
-ms.author: pallavit
-ms.data: 09/20/2023
+ms.date: 10/19/2017
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: trafficmanager
-ms.date: 10/19/2017
 ---
 # Azure Traffic Manager libraries for .NET
 
@@ -40,3 +37,4 @@ Explore more [sample .NET code](https://azure.microsoft.com/resources/samples/?p
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
 [DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
+

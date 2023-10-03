@@ -1,8 +1,6 @@
 ---
 title: Azure Core Experimental shared client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Core.Experimental, core
-author: JoshLove-msft
-ms.author: jolov
 ms.date: 09/07/2023
 ms.topic: reference
 ms.devlang: dotnet

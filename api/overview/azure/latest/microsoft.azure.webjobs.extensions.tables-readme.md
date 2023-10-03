@@ -1,8 +1,6 @@
 ---
 title: Azure WebJobs Tables client library for .NET
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebJobs.Extensions.Tables, tables
-author: christothes
-ms.author: chriss
 ms.date: 08/11/2023
 ms.topic: reference
 ms.devlang: dotnet

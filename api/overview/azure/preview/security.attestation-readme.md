@@ -1,16 +1,13 @@
 ---
 title: Azure Attestation client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Security.Attestation, attestation
-author: ramya-rao-a
-ms.author: ramyar
 ms.date: 04/05/2021
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: attestation
+ms.technology: azure
+ms.prod: azure
 ---
-
 # Azure Attestation client library for .NET - version 1.0.0-beta.2 
 
 

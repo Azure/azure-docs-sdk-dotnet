@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.CosmosDBForPostgreSql, cosmosdbforpostgresql
-author: pallavit
-ms.author: pallavit
 ms.date: 06/06/2023
 ms.topic: reference
 ms.devlang: dotnet

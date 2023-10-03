@@ -5,7 +5,6 @@ ms.date: 06/15/2023
 ms.topic: reference
 ms.service: application-insights
 ---
-
 # Azure Application Insights libraries for .NET
 
 ## Overview
@@ -47,3 +46,4 @@ client.TrackEvent("MyCustomEvent");
 - [Application Insights Analytics with OpenSchema](https://github.com/Azure-Samples/guidance-appinsights-openschema)
 
 View the [complete list](https://azure.microsoft.com/resources/samples/?service=application-insights&platform=dotnet) of Azure Application Insights samples.
+

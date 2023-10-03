@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.IotCentral, iotcentral
-author: ethanann-ms
-ms.author: ethanann
 ms.date: 02/20/2023
 ms.topic: reference
 ms.devlang: dotnet

@@ -1,8 +1,6 @@
 ---
 title: Azure WebJobs Web PubSub client library for .NET
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebJobs.Extensions.WebPubSub, webpubsub
-author: vicancy
-ms.author: lianwei
 ms.date: 08/30/2023
 ms.topic: reference
 ms.devlang: dotnet

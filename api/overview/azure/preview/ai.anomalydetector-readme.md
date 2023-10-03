@@ -1,8 +1,6 @@
 ---
 title: Azure Cognitive Services Anomaly Detector client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.AnomalyDetector, anomalydetector
-author: conhua
-ms.author: conhua
 ms.date: 05/09/2023
 ms.topic: reference
 ms.devlang: dotnet

@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.LoadTesting, loadtestservice
-author: abranj1219
-ms.author: abranj
 ms.date: 02/17/2023
 ms.topic: reference
 ms.devlang: dotnet

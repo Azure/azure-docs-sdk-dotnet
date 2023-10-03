@@ -1,8 +1,6 @@
 ---
 title: Azure Monitor Ingestion client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Monitor.Ingestion, monitor
-author: SameergMS
-ms.author: sameerg
 ms.date: 02/21/2023
 ms.topic: reference
 ms.devlang: dotnet

@@ -5,7 +5,6 @@ ms.date: 10/19/2017
 ms.topic: reference
 ms.service: application-insights
 ---
-
 # Azure Application Insights libraries for .NET
 
 ## Overview
@@ -50,3 +49,4 @@ View the [complete list](https://azure.microsoft.com/resources/samples/?service=
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
 [DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
+

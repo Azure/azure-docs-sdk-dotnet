@@ -1,13 +1,10 @@
 ---
 title: Azure Service Fabric SDK for .NET
 description: Reference for Azure Service Fabric SDK for .NET
-author: pallavit
-ms.author: pallavit
-ms.data: 09/29/2023
+ms.date: 10/19/2017
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: servicefabric
-ms.date: 10/19/2017
 ---
 # Azure Service Fabric libraries for .NET
 
@@ -126,3 +123,4 @@ dotnet add package Microsoft.Azure.Management.ServiceFabric
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
 [DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
+

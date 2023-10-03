@@ -1,8 +1,6 @@
 ---
 title: Azure Key Vault key client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Security.KeyVault.Keys, keyvault
-author: heaths
-ms.author: heaths
 ms.date: 03/14/2023
 ms.topic: reference
 ms.devlang: dotnet

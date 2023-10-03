@@ -2,14 +2,11 @@
 title: App Authentication to Azure Identity Migration Guidance
 description: App Authentication to Azure Identity Migration Guidance
 keywords: Azure, .net, SDK, API, Azure.Identity, identity
-author: jlichwa
-ms.author: jalichwa
 ms.date: 10/27/2020
 ms.topic: reference
 ms.devlang: .net
 ms.prod: azure
 ---
-
 # AppAuthentication to Azure.Identity Migration Guidance
 
 When the [Microsoft.Azure.Services.AppAuthentication](service-to-service-authentication.md) was first released in fall 2017, it was specifically designed to help mitigate the common and systemic issue of credentials in source code. It introduced a [new paradigm for app development](https://azure.microsoft.com/blog/the-green-team-solves-high-risk-systemic-security-issues-for-azure/) that allowed developers to write code once and let `AppAuthentication` client library determine how to authenticate based on the application environment - whether
@@ -135,3 +132,4 @@ var accessToken = await tokenCredential.GetTokenAsync(
 ```
 
 Note: More information on the `.default` scope can be found [here](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-permissions-and-consent#the-default-scope).
+

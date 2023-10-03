@@ -1,8 +1,6 @@
 ---
 title: Azure Form Recognizer client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.FormRecognizer, formrecognizer
-author: kinelski
-ms.author: camaiaor
 ms.date: 08/11/2023
 ms.topic: reference
 ms.devlang: dotnet

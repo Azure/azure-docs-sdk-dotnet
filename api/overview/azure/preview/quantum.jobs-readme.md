@@ -1,14 +1,12 @@
 ---
 title: Azure Quantum Jobs client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Quantum.Jobs, quantum
-author: xfield
-ms.author: xfield
 ms.date: 01/19/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: quantum
+ms.technology: azure
+ms.prod: azure
 ---
 # Azure Quantum Jobs client library for .NET - version 1.0.0-beta.3 
 

@@ -1,8 +1,6 @@
 ---
 title: Azure Communication Common client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Communication.Common, communication
-author: petrsvihlik
-ms.author: petrsvihlik
 ms.date: 11/01/2022
 ms.topic: reference
 ms.devlang: dotnet
@@ -139,5 +137,4 @@ This project has adopted the [Microsoft Open Source Code of Conduct][coc]. For m
 [communication_resource_create_portal]:  /azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp
 [communication_resource_create_power_shell]: /powershell/module/az.communication/new-azcommunicationservice
 [communication_resource_create_net]: /azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-net
-
 

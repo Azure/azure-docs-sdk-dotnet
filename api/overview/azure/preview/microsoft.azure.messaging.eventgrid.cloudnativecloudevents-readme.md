@@ -1,16 +1,13 @@
 ---
 title: 
-keywords: Azure, dotnet, SDK, API, Microsoft.Azure.Messaging.EventGrid.CloudNativeCloudEvents, 
-author: ramya-rao-a
-ms.author: ramyar
+keywords: Azure, dotnet, SDK, API, Microsoft.Azure.Messaging.EventGrid.CloudNativeCloudEvents,
 ms.date: 06/15/2021
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: 
+ms.technology: azure
+ms.prod: azure
 ---
-
 # CloudNative CloudEvent support for Azure.Messaging.EventGrid library for .NET (Preview)
 
 This library can be used to enable publishing CloudNative CloudEvents using the Azure Event Grid library.

@@ -1,13 +1,10 @@
 ---
 title: Azure Media Services SDK for .NET
 description: Reference for Azure Media Services SDK for .NET
-author: pallavit
-ms.author: pallavit
-ms.data: 09/29/2023
+ms.date: 10/19/2017
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: mediaservices
-ms.date: 10/19/2017
 ---
 # Azure Media Services libraries for .NET
 
@@ -95,3 +92,4 @@ View the [complete list](https://azure.microsoft.com/resources/samples/?platform
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
 [DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
+

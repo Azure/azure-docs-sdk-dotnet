@@ -1,8 +1,6 @@
 ---
 title: Azure Web PubSub Event Handler events data model client library for .NET
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebPubSub.Common, webpubsub
-author: vicancy
-ms.author: lianwei
 ms.date: 11/11/2022
 ms.topic: reference
 ms.devlang: dotnet
@@ -74,3 +72,4 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 
 [azure_sub]: https://azure.microsoft.com/free/dotnet/
 [samples_ref]: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.WebPubSub.Common_1.2.0/sdk/webpubsub/Azure.Messaging.WebPubSub/tests/Samples/
+

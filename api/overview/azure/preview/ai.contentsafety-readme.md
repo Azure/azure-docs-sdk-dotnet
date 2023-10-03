@@ -1,8 +1,6 @@
 ---
 title: Azure AI Content Safety client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.ContentSafety, contentsafety
-author: bowgong
-ms.author: bowgong
 ms.date: 06/06/2023
 ms.topic: reference
 ms.devlang: dotnet

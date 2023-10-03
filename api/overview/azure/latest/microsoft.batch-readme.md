@@ -1,16 +1,13 @@
 ---
 title: 
 keywords: Azure, .net, SDK, API, Microsoft.Azure.Batch, batch
-author: ramya-rao-a
-ms.author: ramyar
 ms.date: 09/29/2020
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: .net
 ms.service: batch
+ms.technology: azure
+ms.prod: azure
 ---
-
 # License notes
 The Azure Batch C# client is now under the MIT license. Prior to March 10 2017 it was under the Apache 2.0 license.
 
@@ -82,3 +79,4 @@ If running the tests against a test tenant, you also must set:
 12. `MABOM_BatchTRPCertificateThumbprint`: The thumbprint used to authenticate with the Batch Resource Provider.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fbatch%2FMicrosoft.Azure.Batch%2FREADME.png)
+

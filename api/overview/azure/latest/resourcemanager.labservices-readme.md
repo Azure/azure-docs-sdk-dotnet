@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.LabServices, labservices
-author: pallavit
-ms.author: pallavit
 ms.date: 02/20/2023
 ms.topic: reference
 ms.devlang: dotnet

@@ -1,8 +1,6 @@
 ---
 title: Azure Monitor Distro client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Monitor.OpenTelemetry.AspNetCore, monitor
-author: SameergMS
-ms.author: sameerg
 ms.date: 09/20/2023
 ms.topic: reference
 ms.devlang: dotnet

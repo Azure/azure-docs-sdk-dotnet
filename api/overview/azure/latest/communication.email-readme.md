@@ -1,8 +1,6 @@
 ---
 title: Azure Communication Email client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Communication.Email, communication
-author: acsdevx-msft
-ms.author: acsdevx-msft
 ms.date: 08/18/2023
 ms.topic: reference
 ms.devlang: dotnet

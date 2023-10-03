@@ -1,8 +1,6 @@
 ---
 title: Azure WebJobs SignalR Service client library for .NET
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebJobs.Extensions.SignalRService, signalr
-author: sffamily
-ms.author: zhshang
 ms.date: 09/15/2023
 ms.topic: reference
 ms.devlang: dotnet

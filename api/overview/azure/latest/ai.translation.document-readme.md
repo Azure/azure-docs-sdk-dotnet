@@ -1,8 +1,6 @@
 ---
 title: Azure Cognitive Services Document Translation client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.Translation.Document, translation
-author: maririos
-ms.author: mariari
 ms.date: 06/08/2022
 ms.topic: reference
 ms.devlang: dotnet

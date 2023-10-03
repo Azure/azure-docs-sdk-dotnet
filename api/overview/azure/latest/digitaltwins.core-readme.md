@@ -1,8 +1,6 @@
 ---
 title: Azure IoT Digital Twins client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.DigitalTwins.Core, digitaltwins
-author: johngallardo
-ms.author: jgalla
 ms.date: 07/09/2022
 ms.topic: reference
 ms.devlang: dotnet

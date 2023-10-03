@@ -1,13 +1,10 @@
 ---
 title: Azure Mixed Reality SDK for .NET
 description: Reference for Azure Mixed Reality SDK for .NET
-author: pallavit
-ms.author: pallavit
-ms.data: 09/29/2023
+ms.date: 10/09/2019
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: mixedreality
-ms.date: 10/09/2019
 ---
 # Azure Mixed Reality Resource Management Libraries for .NET
 
@@ -40,3 +37,4 @@ dotnet add package Microsoft.Azure.Management.MixedReality
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
 [DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
+

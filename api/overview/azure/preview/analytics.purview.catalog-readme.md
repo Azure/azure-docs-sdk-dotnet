@@ -1,8 +1,6 @@
 ---
 title: Azure Purview Catalog client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Analytics.Purview.Catalog, purview
-author: ramya-rao-a
-ms.author: ramyar
 ms.date: 06/13/2022
 ms.topic: reference
 ms.devlang: dotnet

@@ -1,16 +1,13 @@
 ---
 title: Azure Purview Account client library for .NET
-keywords: Azure, dotnet, SDK, API, Azure.Analytics.Purview.Account, 
-author: ramya-rao-a
-ms.author: ramyar
+keywords: Azure, dotnet, SDK, API, Azure.Analytics.Purview.Account,
 ms.date: 08/25/2021
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: dotnet
 ms.service: 
+ms.technology: azure
+ms.prod: azure
 ---
-
 # Azure Purview Account client library for .NET - version 1.0.0-beta.1 
 
 

@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Azure.Media.VideoAnalyzer.Edge, videoanalyzer
-author: giakas
-ms.author: giakas
 ms.date: 04/30/2022
 ms.topic: reference
 ms.devlang: dotnet

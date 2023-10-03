@@ -2,14 +2,11 @@
 title: App Authentication client library for .NET - version 1.6.0
 description: App Authentication client library for .NET - version 1.6.0
 keywords: Azure, .net, SDK, API, Azure.Identity, identity
-author: jlichwa
-ms.author: jalichwa
 ms.date: 10/27/2020
 ms.topic: reference
 ms.devlang: .net
 ms.prod: azure
 ---
-
 # App Authentication client library for .NET - version 1.6.0
 
 > [!NOTE]
@@ -301,3 +298,4 @@ By default, AppAuth runs in a different user context in IIS. That's why it doesn
 
 - Learn more about [managed identities for Azure resources](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/).
 - Learn more about [Azure AD authentication scenarios](https://docs.microsoft.com/azure/active-directory/develop/authentication-vs-authorization).
+

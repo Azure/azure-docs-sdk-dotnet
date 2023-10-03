@@ -1,13 +1,10 @@
 ---
 title: Azure Key Vault SDK for .NET
 description: Reference for Azure Key Vault SDK for .NET
-author: pallavit
-ms.author: pallavit
-ms.data: 09/29/2023
+ms.date: 03/04/2020
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: keyvault
-ms.date: 03/04/2020
 ---
 # Azure Key Vault libraries for .NET
 
@@ -53,3 +50,4 @@ Use the following library to work with the Azure Key Vault resource provider:
 |    Library    |    Reference    |    Package    |    Source    |
 |------------------------------------------|-------------------------------------------------------------------|-----------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
 |    Microsoft.Azure.Management.KeyVault    |    [Reference](https://docs.microsoft.com/dotnet/api/microsoft.azure.management.keyvault)    |    [NuGet](https://www.nuget.org/packages/Microsoft.Azure.Management.KeyVault/)    |    [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/keyvault/Microsoft.Azure.Management.KeyVault)    |
+

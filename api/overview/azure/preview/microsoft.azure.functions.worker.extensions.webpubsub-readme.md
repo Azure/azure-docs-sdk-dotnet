@@ -1,8 +1,6 @@
 ---
 title: Azure Web PubSub extension of isolated-process Azure Functions client library for .NET
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.Functions.Worker.Extensions.WebPubSub, webpubsub
-author: vicancy
-ms.author: lianwei
 ms.date: 09/15/2023
 ms.topic: reference
 ms.devlang: dotnet

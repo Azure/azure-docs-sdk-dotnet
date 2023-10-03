@@ -1,8 +1,6 @@
 ---
 title: Azure Synapse Analytics Artifacts client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Analytics.Synapse.Artifacts, synapse
-author: wonner
-ms.author: wanyang
 ms.date: 07/31/2023
 ms.topic: reference
 ms.devlang: dotnet
