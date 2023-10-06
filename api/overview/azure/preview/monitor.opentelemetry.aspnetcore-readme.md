@@ -1,12 +1,12 @@
 ---
 title: Azure Monitor Distro client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Monitor.OpenTelemetry.AspNetCore, monitor
-ms.date: 09/20/2023
+ms.date: 10/06/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: monitor
 ---
-# Azure Monitor Distro client library for .NET - version 1.0.0-beta.7 
+# Azure Monitor Distro client library for .NET - version 1.0.0-beta.8 
 
 
 The Azure Monitor Distro is a client library that sends telemetry data to Azure Monitor following the OpenTelemetry Specification. This library can be used to instrument your ASP.NET Core applications to collect and send telemetry data to Azure Monitor for analysis and monitoring, powering experiences in Application Insights.
@@ -21,16 +21,15 @@ The Azure Monitor Distro is a client library that sends telemetry data to Azure 
 
 ### What is Included in the Distro
 
-The Azure Monitor Distro is a distribution of the .NET OpenTelemetry SDK and related instrumentation libraries. It includes the following components:
+The Azure Monitor Distro is a distribution of the .NET OpenTelemetry SDK with internally vendored instrumentation libraries, including:
 
 * Traces
-  * [ASP.NET Core Instrumentation Library](https://www.nuget.org/packages/OpenTelemetry.Instrumentation.AspNetCore/) provides automatic tracing for incoming HTTP requests to ASP.NET Core applications.
-  * [HTTP Client Instrumentation Library](https://www.nuget.org/packages/OpenTelemetry.Instrumentation.Http/) provides automatic tracing for outgoing HTTP requests made using [System.Net.Http.HttpClient](/dotnet/api/system.net.http.httpclient).
-  * [SQL Client Instrumentation Library](https://www.nuget.org/packages/OpenTelemetry.Instrumentation.SqlClient) provides automatic tracing for SQL queries executed using the [Microsoft.Data.SqlClient](https://www.nuget.org/packages/Microsoft.Data.SqlClient) and [System.Data.SqlClient](https://www.nuget.org/packages/System.Data.SqlClient) packages.
+  * **ASP.NET Core Instrumentation**: Provides automatic tracing for incoming HTTP requests to ASP.NET Core applications.
+  * **HTTP Client Instrumentation**: Provides automatic tracing for outgoing HTTP requests made using [System.Net.Http.HttpClient](/dotnet/api/system.net.http.httpclient).
+  * **SQL Client Instrumentation** Provides automatic tracing for SQL queries executed using the [Microsoft.Data.SqlClient](https://www.nuget.org/packages/Microsoft.Data.SqlClient) and [System.Data.SqlClient](https://www.nuget.org/packages/System.Data.SqlClient) packages.
 
 * Metrics
-  * [ASP.NET Core Instrumentation Library](https://www.nuget.org/packages/OpenTelemetry.Instrumentation.AspNetCore/) provides automatic collection of common ASP.NET Core metrics.
-  * [HTTP Client Instrumentation Library](https://www.nuget.org/packages/OpenTelemetry.Instrumentation.Http/) provides automatic collection of HTTP client metrics.
+  * Provides automatic collection of Application Insights Standard metrics.
 
 * [Logs](https://github.com/open-telemetry/opentelemetry-dotnet/tree/main/docs/logs/getting-started-console)
 
@@ -48,7 +47,7 @@ dotnet add package Azure.Monitor.OpenTelemetry.AspNetCore --prerelease
 
 #### Nightly builds
 
-Nightly builds are available from this repo's [dev feed](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.OpenTelemetry.AspNetCore_1.0.0-beta.7/CONTRIBUTING.md#nuget-package-dev-feed).
+Nightly builds are available from this repo's [dev feed](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.OpenTelemetry.AspNetCore_1.0.0-beta.8/CONTRIBUTING.md#nuget-package-dev-feed).
 These are provided without support and are not intended for production workloads.
 
 ### Enabling Azure Monitor OpenTelemetry in your application
@@ -92,11 +91,11 @@ var app = builder.Build();
 Note that in the examples above, `UseAzureMonitor` is added to the `IServiceCollection` in the `Program.cs` file. You can also add it in the `ConfigureServices` method of your `Startup.cs` file.
 
 > **Note**
-  > Multiple calls to `AddOpenTelemetry.UseAzureMonitor()` will **NOT** result in multiple providers. Only a single `TracerProvider`, `MeterProvider` and `LoggerProvider` will be created in the target `IServiceCollection`. To establish multiple providers use the `Sdk.CreateTracerProviderBuilder()` and/or `Sdk.CreateMeterProviderBuilder()` and/or `LoggerFactory.CreateLogger` methods with the [Azure Monitor Exporter](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Monitor.OpenTelemetry.AspNetCore_1.0.0-beta.7/sdk/monitor/Azure.Monitor.OpenTelemetry.Exporter) instead of using Azure Monitor Distro.
+  > Multiple calls to `AddOpenTelemetry.UseAzureMonitor()` will **NOT** result in multiple providers. Only a single `TracerProvider`, `MeterProvider` and `LoggerProvider` will be created in the target `IServiceCollection`. To establish multiple providers use the `Sdk.CreateTracerProviderBuilder()` and/or `Sdk.CreateMeterProviderBuilder()` and/or `LoggerFactory.CreateLogger` methods with the [Azure Monitor Exporter](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Monitor.OpenTelemetry.AspNetCore_1.0.0-beta.8/sdk/monitor/Azure.Monitor.OpenTelemetry.Exporter) instead of using Azure Monitor Distro.
 
 ### Authenticate the client
 
-Azure Active Directory (AAD) authentication is an optional feature that can be used with Azure Monitor Distro. To enable AAD authentication, set the `Credential` property in `AzureMonitorOptions`. This is made easy with the [Azure Identity library](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Monitor.OpenTelemetry.AspNetCore_1.0.0-beta.7/sdk/identity/Azure.Identity/README.md), which provides support for authenticating Azure SDK clients with their corresponding Azure services.
+Azure Active Directory (AAD) authentication is an optional feature that can be used with Azure Monitor Distro. To enable AAD authentication, set the `Credential` property in `AzureMonitorOptions`. This is made easy with the [Azure Identity library](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Monitor.OpenTelemetry.AspNetCore_1.0.0-beta.8/sdk/identity/Azure.Identity/README.md), which provides support for authenticating Azure SDK clients with their corresponding Azure services.
 
 ```C#
 // Call UseAzureMonitor and set Credential to authenticate through Active Directory.
@@ -112,48 +111,6 @@ With this configuration, the Azure Monitor Distro will use the credentials of th
 Note that the `Credential` property is optional. If it is not set, Azure Monitor Distro will use the Instrumentation Key from the Connection String to send data to Azure Monitor.
 
 ### Advanced configuration
-
-The Azure Monitor Distro includes .NET OpenTelemetry instrumentation for [ASP.NET Core](https://www.nuget.org/packages/OpenTelemetry.Instrumentation.AspNetCore/), [HttpClient](https://www.nuget.org/packages/OpenTelemetry.Instrumentation.Http/), and [SQLClient](https://www.nuget.org/packages/OpenTelemetry.Instrumentation.SqlClient). However, you can customize the instrumentation included or use additional instrumentation on your own using the OpenTelemetry API. Here are some examples of how to customize the instrumentation:
-
-#### Customizing AspNetCoreInstrumentationOptions
-
-```C#
-builder.Services.AddOpenTelemetry().UseAzureMonitor();
-builder.Services.Configure<AspNetCoreInstrumentationOptions>(options =>
-{
-    options.RecordException = true;
-    options.Filter = (httpContext) =>
-    {
-        // only collect telemetry about HTTP GET requests
-        return HttpMethods.IsGet(httpContext.Request.Method);
-    };
-});
-```
-
-#### Customizing HttpClientInstrumentationOptions
-
-```C#
-builder.Services.AddOpenTelemetry().UseAzureMonitor();
-builder.Services.Configure<HttpClientInstrumentationOptions>(options =>
-{
-    options.RecordException = true;
-    options.FilterHttpRequestMessage = (httpRequestMessage) =>
-    {
-        // only collect telemetry about HTTP GET requests
-        return HttpMethods.IsGet(httpRequestMessage.Method.Method);
-    };
-});
-```
-
-#### Customizing SqlClientInstrumentationOptions
-
-```C#
-builder.Services.AddOpenTelemetry().UseAzureMonitor();
-builder.Services.Configure<SqlClientInstrumentationOptions>(options =>
-{
-    options.SetDbStatementForStoredProcedure = false;
-});
-```
 
 #### Customizing Sampling Percentage
 
@@ -235,19 +192,34 @@ environmental variables:
 
 ## Key concepts
 
-The Azure Monitor Distro is a distribution package which enables users to send telemetry data to Azure Monitor. It includes the .NET OpenTelemetry SDK and instrumentation libraries for [ASP.NET Core](https://www.nuget.org/packages/OpenTelemetry.Instrumentation.AspNetCore/), [HttpClient](https://www.nuget.org/packages/OpenTelemetry.Instrumentation.Http/), and [SQLClient](https://www.nuget.org/packages/OpenTelemetry.Instrumentation.SqlClient).
+The Azure Monitor Distro is a distribution package that facilitates users in sending telemetry data to Azure Monitor. It encompasses the .NET OpenTelemetry SDK and internally vendored instrumentation libraries for ASP.NET Core, HttpClient, and SQLClient, ensuring seamless integration and data collection.
 
 ## Examples
 
-Refer to [`Program.cs`](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.OpenTelemetry.AspNetCore_1.0.0-beta.7/sdk/monitor/Azure.Monitor.OpenTelemetry.AspNetCore/tests/Azure.Monitor.OpenTelemetry.AspNetCore.Demo/Program.cs) for a complete demo.
+Refer to [`Program.cs`](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.OpenTelemetry.AspNetCore_1.0.0-beta.8/sdk/monitor/Azure.Monitor.OpenTelemetry.AspNetCore/tests/Azure.Monitor.OpenTelemetry.AspNetCore.Demo/Program.cs) for a complete demo.
 
 ## Troubleshooting
 
 The Azure Monitor Distro uses EventSource for its own internal logging. The logs are available to any EventListener by opting into the source named "OpenTelemetry-AzureMonitor-Exporter".
 
 OpenTelemetry also provides it's own [self-diagnostics feature](https://github.com/open-telemetry/opentelemetry-dotnet/blob/main/src/OpenTelemetry/README.md#troubleshooting) to collect internal logs.
-An example of this is available in our demo project [here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.OpenTelemetry.AspNetCore_1.0.0-beta.7/sdk/monitor/Azure.Monitor.OpenTelemetry.Exporter/tests/Azure.Monitor.OpenTelemetry.Exporter.Demo/OTEL_DIAGNOSTICS.json).
+An example of this is available in our demo project [here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.OpenTelemetry.AspNetCore_1.0.0-beta.8/sdk/monitor/Azure.Monitor.OpenTelemetry.Exporter/tests/Azure.Monitor.OpenTelemetry.Exporter.Demo/OTEL_DIAGNOSTICS.json).
 
+**Missing Request Telemetry**
+
+If an app has a reference to the [OpenTelemetry.Instrumentation.AspNetCore](https://www.nuget.org/packages/OpenTelemetry.Instrumentation.AspNetCore) package, it could be missing request telemetry. To resolve this issue:
+
+* Either remove the reference to the `OpenTelemetry.Instrumentation.AspNetCore` package (or)
+* Add `AddAspNetCoreInstrumentation` to the OpenTelemetry TracerProvider configuration as per the [OpenTelemetry documentation](https://github.com/open-telemetry/opentelemetry-dotnet/tree/main/src/OpenTelemetry.Instrumentation.AspNetCore).
+
+**Few or all Dependency Telemetries are missing**
+
+If an app references the [OpenTelemetry.Instrumentation.Http](https://www.nuget.org/packages/OpenTelemetry.Instrumentation.Http) or [OpenTelemetry.Instrumentation.SqlClient](https://www.nuget.org/packages/OpenTelemetry.Instrumentation.SqlClient) packages, it might be missing dependency telemetry. To resolve:
+
+* Remove the respective package references (or)
+* Add `AddHttpClientInstrumentation` or `AddSqlClientInstrumentation` to the TracerProvider configuration. Detailed guidance can be found in the OpenTelemetry documentation for [HTTP](https://github.com/open-telemetry/opentelemetry-dotnet/tree/main/src/OpenTelemetry.Instrumentation.Http) and [SQL Client](https://github.com/open-telemetry/opentelemetry-dotnet/tree/main/src/OpenTelemetry.Instrumentation.SqlClient).
+
+**Note:** If all telemetries are missing or if the above troubleshooting steps do not help, please collect [self-diagnostics logs](https://github.com/open-telemetry/opentelemetry-dotnet/blob/main/src/OpenTelemetry/README.md#troubleshooting).
 
 ## Next steps
 
@@ -255,7 +227,7 @@ For more information on Azure SDK, please refer to [this website](https://azure.
 
 ## Contributing
 
-See [CONTRIBUTING.md](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.OpenTelemetry.AspNetCore_1.0.0-beta.7/CONTRIBUTING.md) for details on contribution process.
+See [CONTRIBUTING.md](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.OpenTelemetry.AspNetCore_1.0.0-beta.8/CONTRIBUTING.md) for details on contribution process.
 
 ## Release Schedule
 
