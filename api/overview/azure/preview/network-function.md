@@ -1,7 +1,7 @@
 ---
 title: Azure Network Function SDK for .NET
 description: Reference for Azure Network Function SDK for .NET
-ms.date: 10/05/2023
+ms.date: 10/06/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: networkfunction
