@@ -1,7 +1,7 @@
 ---
 title: Azure Log Analytics SDK for .NET
 description: Reference for Azure Log Analytics SDK for .NET
-ms.date: 10/09/2023
+ms.date: 10/10/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: azure-monitor
