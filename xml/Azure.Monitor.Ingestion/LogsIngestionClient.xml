@@ -7,6 +7,7 @@
   <AssemblyInfo>
     <AssemblyName>Azure.Monitor.Ingestion</AssemblyName>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -26,6 +27,7 @@
       <AssemblyInfo>
         <AssemblyName>Azure.Monitor.Ingestion</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -43,6 +45,7 @@
       <AssemblyInfo>
         <AssemblyName>Azure.Monitor.Ingestion</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="endpoint" Type="System.Uri" />
@@ -67,6 +70,7 @@
       <AssemblyInfo>
         <AssemblyName>Azure.Monitor.Ingestion</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="endpoint" Type="System.Uri" />
@@ -74,10 +78,10 @@
         <Parameter Name="options" Type="Azure.Monitor.Ingestion.LogsIngestionClientOptions" />
       </Parameters>
       <Docs>
-        <param name="endpoint"> The Data Collection Endpoint for the Data Collection Rule, for example https://dce-name.eastus-2.ingest.monitor.azure.com. </param>
-        <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        <param name="endpoint"> The Data Collection Endpoint for the Data Collection Rule. For example, https://dce-name.eastus-2.ingest.monitor.azure.com. </param>
+        <param name="credential"> A credential used to authenticate to an Azure service. </param>
         <param name="options"> The options for configuring the client. </param>
-        <summary> Initializes a new instance of LogsIngestionClient. </summary>
+        <summary> Initializes a new instance of <see cref="T:Azure.Monitor.Ingestion.LogsIngestionClient" />. </summary>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="endpoint" /> or <paramref name="credential" /> is null. </exception>
@@ -93,6 +97,7 @@
       <AssemblyInfo>
         <AssemblyName>Azure.Monitor.Ingestion</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Core.Pipeline.HttpPipeline</ReturnType>
@@ -113,6 +118,7 @@
       <AssemblyInfo>
         <AssemblyName>Azure.Monitor.Ingestion</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Response</ReturnType>
@@ -127,10 +133,14 @@
       <Docs>
         <param name="ruleId"> The immutable Id of the Data Collection Rule resource. </param>
         <param name="streamName"> The streamDeclaration name as defined in the Data Collection Rule. </param>
-        <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        <param name="content"> The content to send as the body of the request. </param>
         <param name="contentEncoding"> If content is already gzipped, put "gzip". Default behavior is to gzip all input. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Ingestion API used to directly ingest data using Data Collection Rules. </summary>
+        <summary>
+            [Protocol Method] Ingestion API used to directly ingest data using Data Collection Rules
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
         <returns> The response returned from the service. </returns>
         <remarks>
 See error response code and error response message for more detail.
@@ -141,30 +151,32 @@ See error response code and error response message for more detail.
           <paramref name="ruleId" /> or <paramref name="streamName" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call Upload with required parameters and request content.
+This sample shows how to call Upload.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LogsIngestionClient(endpoint, credential);
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LogsIngestionClient client = new LogsIngestionClient(endpoint, credential);
 
-var data = new[] {
-    new {}
-};
+using RequestContent content = RequestContent.Create(new object[]
+{
+    new object()
+});
+Response response = client.Upload("<ruleId>", "<streamName>", content);
 
-Response response = client.Upload("<ruleId>", "<streamName>", RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Upload with all parameters and request content.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LogsIngestionClient(endpoint, credential);
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LogsIngestionClient client = new LogsIngestionClient(endpoint, credential);
 
-var data = new[] {
-    new {}
-};
+using RequestContent content = RequestContent.Create(new object[]
+{
+    new object()
+});
+Response response = client.Upload("<ruleId>", "<streamName>", content, contentEncoding: "<contentEncoding>");
 
-Response response = client.Upload("<ruleId>", "<streamName>", RequestContent.Create(data), "<contentEncoding>");
 Console.WriteLine(response.Status);
 ]]></code></example>
       </Docs>
@@ -179,6 +191,7 @@ Console.WriteLine(response.Status);
       <AssemblyInfo>
         <AssemblyName>Azure.Monitor.Ingestion</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Response</ReturnType>
@@ -234,6 +247,7 @@ Console.WriteLine(response.Status);
       <AssemblyInfo>
         <AssemblyName>Azure.Monitor.Ingestion</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&gt;</ReturnType>
@@ -248,10 +262,14 @@ Console.WriteLine(response.Status);
       <Docs>
         <param name="ruleId"> The immutable Id of the Data Collection Rule resource. </param>
         <param name="streamName"> The streamDeclaration name as defined in the Data Collection Rule. </param>
-        <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        <param name="content"> The content to send as the body of the request. </param>
         <param name="contentEncoding"> If content is already gzipped, put "gzip". Default behavior is to gzip all input. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Ingestion API used to directly ingest data using Data Collection Rules. </summary>
+        <summary>
+            [Protocol Method] Ingestion API used to directly ingest data using Data Collection Rules
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
         <returns> The response returned from the service. </returns>
         <remarks>
 See error response code and error response message for more detail.
@@ -262,30 +280,32 @@ See error response code and error response message for more detail.
           <paramref name="ruleId" /> or <paramref name="streamName" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call UploadAsync with required parameters and request content.
+This sample shows how to call UploadAsync.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LogsIngestionClient(endpoint, credential);
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LogsIngestionClient client = new LogsIngestionClient(endpoint, credential);
 
-var data = new[] {
-    new {}
-};
+using RequestContent content = RequestContent.Create(new object[]
+{
+    new object()
+});
+Response response = await client.UploadAsync("<ruleId>", "<streamName>", content);
 
-Response response = await client.UploadAsync("<ruleId>", "<streamName>", RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call UploadAsync with all parameters and request content.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LogsIngestionClient(endpoint, credential);
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LogsIngestionClient client = new LogsIngestionClient(endpoint, credential);
 
-var data = new[] {
-    new {}
-};
+using RequestContent content = RequestContent.Create(new object[]
+{
+    new object()
+});
+Response response = await client.UploadAsync("<ruleId>", "<streamName>", content, contentEncoding: "<contentEncoding>");
 
-Response response = await client.UploadAsync("<ruleId>", "<streamName>", RequestContent.Create(data), "<contentEncoding>");
 Console.WriteLine(response.Status);
 ]]></code></example>
       </Docs>
@@ -300,6 +320,7 @@ Console.WriteLine(response.Status);
       <AssemblyInfo>
         <AssemblyName>Azure.Monitor.Ingestion</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&gt;</ReturnType>
