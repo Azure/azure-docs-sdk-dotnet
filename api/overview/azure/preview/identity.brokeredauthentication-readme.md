@@ -79,7 +79,7 @@ The simplest way to see the logs to help debug authentication issues is to enabl
 
 ``` c#
 // Setup a listener to monitor logged events.
-using AzureEventSourceListener listener = AzureEventSourceListener.CreateConsoleLogger();
+using AzureEventSourceListener listener = AzureEventSourceListener.CreateConsoleLogger(level: EventLevel.Informational);
 ```
 
 All credentials can be configured with diagnostic options, in the same way as other clients in the SDK.

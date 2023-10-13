@@ -133,7 +133,7 @@ To create an Azure SDK log listener that outputs messages to console use `AzureE
 
 ```C# Snippet:ConsoleLogging
 // Setup a listener to monitor logged events.
-using AzureEventSourceListener listener = AzureEventSourceListener.CreateConsoleLogger();
+using AzureEventSourceListener listener = AzureEventSourceListener.CreateConsoleLogger(level: EventLevel.Informational);
 ```
 
 More on logging in [diagnostics samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Core_1.35.0/sdk/core/Azure.Core/samples/Diagnostics.md).
