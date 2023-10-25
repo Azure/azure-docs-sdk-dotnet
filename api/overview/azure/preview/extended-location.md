@@ -1,7 +1,7 @@
 ---
 title: Azure Extended Location SDK for .NET
 description: Reference for Azure Extended Location SDK for .NET
-ms.date: 10/12/2023
+ms.date: 10/25/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: extendedlocation

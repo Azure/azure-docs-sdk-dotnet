@@ -1,7 +1,7 @@
 ---
-title: Azure Api Management SDK for .NET
-description: Reference for Azure Api Management SDK for .NET
-ms.date: 10/12/2023
+title: Azure API Management SDK for .NET
+description: Reference for Azure API Management SDK for .NET
+ms.date: 10/25/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: apimanagement
