@@ -1,3 +1,3 @@
 | Reference | Package | Source |
 |---|---|---|
-|Management - Logic Apps|[Microsoft.Azure.Management.Logic](https://www.nuget.org/packages/Microsoft.Azure.Management.Logic)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/)|
+|[Resource Management - Logic Apps](resourcemanager.logic-readme.md)|[Azure.ResourceManager.Logic](https://www.nuget.org/packages/Azure.ResourceManager.Logic)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/logic/Azure.ResourceManager.Logic)|
