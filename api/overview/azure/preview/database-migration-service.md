@@ -1,7 +1,7 @@
 ---
 title: Azure Database Migration Service SDK for .NET
 description: Reference for Azure Database Migration Service SDK for .NET
-ms.date: 10/27/2023
+ms.date: 10/30/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: databasemigrationservice

@@ -1,7 +1,7 @@
 ---
 title: Azure Resource Health SDK for .NET
 description: Reference for Azure Resource Health SDK for .NET
-ms.date: 10/27/2023
+ms.date: 10/30/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: resourcehealth
