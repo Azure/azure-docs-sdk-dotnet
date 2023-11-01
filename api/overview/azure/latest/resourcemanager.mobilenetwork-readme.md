@@ -1,11 +1,12 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.MobileNetwork, mobilenetwork
-ms.date: 09/05/2023
+ms.date: 11/01/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: mobilenetwork
 ---
+
 # Microsoft Azure MobileNetwork management client library for .NET
 
 [Azure Private 5G](https://learn.microsoft.com/azure/private-5g-core/private-5g-core-overview) is an Azure cloud service for deploying and managing 5G core network functions on an Azure Stack Edge device, as part of an on-premises private mobile network for enterprises. The 5G core network functions connect with standard 4G and 5G standalone radio access networks (RANs) to provide high performance, low latency, and secure connectivity for 5G Internet of Things (IoT) devices. Azure Private 5G Core gives enterprises full control and visibility of their private mobile networks.
@@ -34,7 +35,7 @@ dotnet add package Azure.ResourceManager.MobileNetwork
 
 ### Authenticate the Client
 
-To create an authenticated client and start interacting with Microsoft Azure resources, see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.MobileNetwork_1.0.0/doc/dev/mgmt_quickstart.md).
+To create an authenticated client and start interacting with Microsoft Azure resources, see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.MobileNetwork_1.1.0/doc/dev/mgmt_quickstart.md).
 
 ## Key concepts
 
@@ -44,9 +45,9 @@ Key concepts of the Microsoft Azure SDK for .NET can be found [here](https://azu
 
 Documentation is available to help you learn how to use this package:
 
-- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.MobileNetwork_1.0.0/doc/dev/mgmt_quickstart.md).
+- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.MobileNetwork_1.1.0/doc/dev/mgmt_quickstart.md).
 - [API References](/dotnet/api/?view=azure-dotnet).
-- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.MobileNetwork_1.0.0/sdk/identity/Azure.Identity/README.md).
+- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.MobileNetwork_1.1.0/sdk/identity/Azure.Identity/README.md).
 
 ## Examples
 
@@ -83,7 +84,7 @@ more information, see the [Code of Conduct FAQ][coc_faq] or contact
 <opencode@microsoft.com> with any other questions or comments.
 
 <!-- LINKS -->
-[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.MobileNetwork_1.0.0/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
+[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.MobileNetwork_1.1.0/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 
