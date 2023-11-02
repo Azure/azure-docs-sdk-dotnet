@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: servicenetworking
 ---
-# Azure Service Networking SDK for .NET - preview
-## Packages - preview
+# Azure Service Networking SDK for .NET - latest
+## Packages - latest
 [!INCLUDE [packages](service-networking-index.md)]
