@@ -14,7 +14,9 @@
   <Interfaces />
   <Docs>
     <summary>
-            The configuration information used for a chat completions request.
+            The configuration information for a chat completions request.
+            Completions support a wide variety of tasks and generate text that continues from or "completes"
+            provided prompt data.
             </summary>
     <remarks>To be added.</remarks>
   </Docs>
@@ -38,20 +40,22 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ChatCompletionsOptions (System.Collections.Generic.IEnumerable&lt;Azure.AI.OpenAI.ChatMessage&gt; messages);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Collections.Generic.IEnumerable`1&lt;class Azure.AI.OpenAI.ChatMessage&gt; messages) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.AI.OpenAI.ChatCompletionsOptions.#ctor(System.Collections.Generic.IEnumerable{Azure.AI.OpenAI.ChatMessage})" />
-      <MemberSignature Language="VB.NET" Value="Public Sub New (messages As IEnumerable(Of ChatMessage))" />
-      <MemberSignature Language="F#" Value="new Azure.AI.OpenAI.ChatCompletionsOptions : seq&lt;Azure.AI.OpenAI.ChatMessage&gt; -&gt; Azure.AI.OpenAI.ChatCompletionsOptions" Usage="new Azure.AI.OpenAI.ChatCompletionsOptions messages" />
+      <MemberSignature Language="C#" Value="public ChatCompletionsOptions (string deploymentName, System.Collections.Generic.IEnumerable&lt;Azure.AI.OpenAI.ChatMessage&gt; messages);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string deploymentName, class System.Collections.Generic.IEnumerable`1&lt;class Azure.AI.OpenAI.ChatMessage&gt; messages) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.AI.OpenAI.ChatCompletionsOptions.#ctor(System.String,System.Collections.Generic.IEnumerable{Azure.AI.OpenAI.ChatMessage})" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (deploymentName As String, messages As IEnumerable(Of ChatMessage))" />
+      <MemberSignature Language="F#" Value="new Azure.AI.OpenAI.ChatCompletionsOptions : string * seq&lt;Azure.AI.OpenAI.ChatMessage&gt; -&gt; Azure.AI.OpenAI.ChatCompletionsOptions" Usage="new Azure.AI.OpenAI.ChatCompletionsOptions (deploymentName, messages)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.AI.OpenAI</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
+        <Parameter Name="deploymentName" Type="System.String" />
         <Parameter Name="messages" Type="System.Collections.Generic.IEnumerable&lt;Azure.AI.OpenAI.ChatMessage&gt;" />
       </Parameters>
       <Docs>
+        <param name="deploymentName"> The deployment name to use for chat completions. </param>
         <param name="messages">
             The collection of context messages associated with this chat completions request.
             Typical usage begins with a chat message for the System role that provides instructions for
@@ -61,7 +65,11 @@
         <summary> Initializes a new instance of ChatCompletionsOptions. </summary>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="messages" /> is null. </exception>
+          <paramref name="deploymentName" /> or <paramref name="messages" /> is null.
+            </exception>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="deploymentName" /> is an empty string.
+            </exception>
       </Docs>
     </Member>
     <Member MemberName="AzureExtensionsOptions">
@@ -114,6 +122,37 @@
             
                  <see cref="P:Azure.AI.OpenAI.CompletionsOptions.ChoicesPerPrompt" /> is equivalent to 'n' in the REST request schema.
              </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DeploymentName">
+      <MemberSignature Language="C#" Value="public string DeploymentName { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string DeploymentName" />
+      <MemberSignature Language="DocId" Value="P:Azure.AI.OpenAI.ChatCompletionsOptions.DeploymentName" />
+      <MemberSignature Language="VB.NET" Value="Public Property DeploymentName As String" />
+      <MemberSignature Language="F#" Value="member this.DeploymentName : string with get, set" Usage="Azure.AI.OpenAI.ChatCompletionsOptions.DeploymentName" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.AI.OpenAI</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets the deployment name to use for a chat completions request.
+            </summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>
+            When making a request against Azure OpenAI, this should be the customizable name of the "model deployment"
+            (example: my-gpt4-deployment) and not the name of the model itself (example: gpt-4).
+            </para>
+          <para>
+            When using non-Azure OpenAI, this corresponds to "model" in the request options and should use the
+            appropriate name of the model (example: gpt-4).
+            </para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="FrequencyPenalty">
