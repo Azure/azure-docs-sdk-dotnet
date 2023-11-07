@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: selfhelp
 ---
-# Azure Self Help SDK for .NET - latest
-## Packages - latest
+# Azure Self Help SDK for .NET - preview
+## Packages - preview
 [!INCLUDE [packages](self-help-index.md)]
