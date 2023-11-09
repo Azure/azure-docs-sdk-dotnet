@@ -1,7 +1,7 @@
 ---
 title: Azure RemoteApp SDK for .NET
 description: Reference for Azure RemoteApp SDK for .NET
-ms.date: 11/08/2023
+ms.date: 11/09/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: remoteapp
