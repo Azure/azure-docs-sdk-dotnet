@@ -1,7 +1,7 @@
 ---
 title: Azure Management Groups SDK for .NET
 description: Reference for Azure Management Groups SDK for .NET
-ms.date: 11/09/2023
+ms.date: 11/10/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: managementgroups
