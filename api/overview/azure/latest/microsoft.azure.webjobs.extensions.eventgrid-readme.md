@@ -1,12 +1,12 @@
 ---
 title: Azure WebJobs EventGrid client library for .NET
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebJobs.Extensions.EventGrid, eventgrid
-ms.date: 06/15/2023
+ms.date: 11/13/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: eventgrid
 ---
-# Azure WebJobs EventGrid client library for .NET - version 3.3.0 
+# Azure WebJobs EventGrid client library for .NET - version 3.3.1 
 
 
 This extension provides functionality for receiving Event Grid webhook calls in Azure Functions, allowing you to easily write functions that respond to any event published to Event Grid.
@@ -209,12 +209,12 @@ additional questions or comments.
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fsearch%2FMicrosoft.Azure.WebJobs.Extensions.EventGrid%2FREADME.png)
 
 <!-- LINKS -->
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.EventGrid_3.3.0/sdk/search/Microsoft.Azure.WebJobs.Extensions.EventGrid/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.EventGrid_3.3.1/sdk/search/Microsoft.Azure.WebJobs.Extensions.EventGrid/src
 [package]: https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.EventGrid/
 [docs]: /dotnet/api/Microsoft.Azure.WebJobs.Extensions.EventGrid
 [nuget]: https://www.nuget.org/
 
-[contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.EventGrid_3.3.0/CONTRIBUTING.md
+[contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.EventGrid_3.3.1/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
