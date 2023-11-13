@@ -1,12 +1,12 @@
 ---
 title: Azure WebJobs Tables client library for .NET
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebJobs.Extensions.Tables, tables
-ms.date: 08/11/2023
+ms.date: 11/13/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: tables
 ---
-# Azure WebJobs Tables client library for .NET - version 1.2.0 
+# Azure WebJobs Tables client library for .NET - version 1.2.1 
 
 
 This extension provides functionality for accessing Azure Tables in Azure Functions.
@@ -319,14 +319,14 @@ additional questions or comments.
 [cosmos_tables_create_cli]: /azure/cosmos-db/scripts/cli/table/create
 [cosmos_tables_create_portal]: /azure/cosmos-db/table/how-to-create-container
 
-[identity_dac]: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.WebJobs.Extensions.Tables_1.2.0/sdk/identity/Azure.Identity/README.md#defaultazurecredential
+[identity_dac]: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.WebJobs.Extensions.Tables_1.2.1/sdk/identity/Azure.Identity/README.md#defaultazurecredential
 
 [appsettings_portal]: /azure/azure-functions/functions-how-to-use-azure-function-app-settings?tabs=portal
 [local_settings_json]: /azure/azure-functions/functions-host-json#override-hostjson-values
 
 [azure_sub]: https://azure.microsoft.com/free/dotnet/
-[RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.Tables_1.2.0/sdk/core/Azure.Core/src/RequestFailedException.cs
-[contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.WebJobs.Extensions.Tables_1.2.0/CONTRIBUTING.md
+[RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.Tables_1.2.1/sdk/core/Azure.Core/src/RequestFailedException.cs
+[contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.WebJobs.Extensions.Tables_1.2.1/CONTRIBUTING.md
 
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
