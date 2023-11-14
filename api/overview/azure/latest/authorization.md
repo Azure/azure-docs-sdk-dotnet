@@ -1,7 +1,7 @@
 ---
 title: Azure Authorization SDK for .NET
 description: Reference for Azure Authorization SDK for .NET
-ms.date: 11/13/2023
+ms.date: 11/14/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: authorization
