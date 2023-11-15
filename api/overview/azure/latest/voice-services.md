@@ -1,7 +1,7 @@
 ---
 title: Azure Voice Services SDK for .NET
 description: Reference for Azure Voice Services SDK for .NET
-ms.date: 11/14/2023
+ms.date: 11/15/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: voiceservices
