@@ -1,7 +1,7 @@
 ---
 title: Azure Hybrid Data SDK for .NET
 description: Reference for Azure Hybrid Data SDK for .NET
-ms.date: 11/15/2023
+ms.date: 11/16/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: hybriddata
