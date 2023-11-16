@@ -1,12 +1,12 @@
 ---
 title: Azure Purview Workflow client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Analytics.Purview.Workflows, purview
-ms.date: 02/28/2023
+ms.date: 11/16/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: purview
 ---
-# Azure Purview Workflow client library for .NET - version 1.0.0-beta.1 
+# Azure Purview Workflow client library for .NET - version 1.0.0-beta.2 
 
 
 Workflows are automated, repeatable business processes that users can create within Microsoft Purview to validate and orchestrate CUD (create, update, delete) operations on their data entities. Enabling these processes allow organizations to track changes, enforce policy compliance, and ensure quality data across their data landscape.
@@ -43,7 +43,7 @@ string username = Environment.GetEnvironmentVariable("Username");
 string password = Environment.GetEnvironmentVariable("Password");
 
 TokenCredential usernamePasswordCredential = new UsernamePasswordCredential(clientId,tenantId, username,password, null);
-var client = new PurviewWorkflowServiceClient(endpoint, usernamePasswordCredential);
+var client = new WorkflowsClient(endpoint, usernamePasswordCredential);
 ```
 
 ## Examples
@@ -71,7 +71,7 @@ Guid workflowId = Guid.NewGuid();
 
 string workflow = "{\"name\":\"Create glossary term workflow\",\"description\":\"\",\"triggers\":[{\"type\":\"when_term_creation_is_requested\",\"underGlossaryHierarchy\":\"/glossaries/20031e20-b4df-4a66-a61d-1b0716f3fa48\"}],\"isEnabled\":true,\"actionDag\":{\"actions\":{\"Startandwaitforanapproval\":{\"type\":\"Approval\",\"inputs\":{\"parameters\":{\"approvalType\":\"PendingOnAll\",\"title\":\"ApprovalRequestforCreateGlossaryTerm\",\"assignedTo\":[\"eece94d9-0619-4669-bb8a-d6ecec5220bc\"]}},\"runAfter\":{}},\"Condition\":{\"type\":\"If\",\"expression\":{\"and\":[{\"equals\":[\"@outputs('Startandwaitforanapproval')['body/outcome']\",\"Approved\"]}]},\"actions\":{\"Createglossaryterm\":{\"type\":\"CreateTerm\",\"runAfter\":{}},\"Sendemailnotification\":{\"type\":\"EmailNotification\",\"inputs\":{\"parameters\":{\"emailSubject\":\"GlossaryTermCreate-APPROVED\",\"emailMessage\":\"YourrequestforGlossaryTerm@{triggerBody()['request']['term']['name']}isapproved.\",\"emailRecipients\":[\"@{triggerBody()['request']['requestor']}\"]}},\"runAfter\":{\"Createglossaryterm\":[\"Succeeded\"]}}},\"else\":{\"actions\":{\"Sendrejectemailnotification\":{\"type\":\"EmailNotification\",\"inputs\":{\"parameters\":{\"emailSubject\":\"GlossaryTermCreate-REJECTED\",\"emailMessage\":\"YourrequestforGlossaryTerm@{triggerBody()['request']['term']['name']}isrejected.\",\"emailRecipients\":[\"@{triggerBody()['request']['requestor']}\"]}},\"runAfter\":{}}}},\"runAfter\":{\"Startandwaitforanapproval\":[\"Succeeded\"]}}}}}";
 
-Response createResult = await client.CreateOrReplaceWorkflowAsync(workflowId, RequestContent.Create(workflow));
+Response createResult = await client.CreateOrReplaceAsync(workflowId, RequestContent.Create(workflow));
 ```
 
 ### Submit user requests
@@ -79,7 +79,7 @@ Response createResult = await client.CreateOrReplaceWorkflowAsync(workflowId, Re
 ```C# Snippet:Azure_Analytics_Purview_Workflows_SubmitUserRequests
 string request = "{\"operations\":[{\"type\":\"CreateTerm\",\"payload\":{\"glossaryTerm\":{\"name\":\"term\",\"anchor\":{\"glossaryGuid\":\"20031e20-b4df-4a66-a61d-1b0716f3fa48\"},\"status\":\"Approved\",\"nickName\":\"term\"}}}],\"comment\":\"Thanks!\"}";
 
-Response submitResult = await client.SubmitUserRequestsAsync(RequestContent.Create(request));
+Response submitResult = await client.SubmitAsync(RequestContent.Create(request));
 ```
 
 ### Approve workflow task
@@ -90,7 +90,7 @@ Guid taskId = new Guid("b129fe16-72d3-4994-9135-b997b9be46e0");
 
 string request = "{\"comment\":\"Thanks!\"}";
 
-Response approveResult = await client.ApproveApprovalTaskAsync(taskId, RequestContent.Create(request));
+Response approveResult = await client.ApproveAsync(taskId, RequestContent.Create(request));
 ```
 
 ## Key concepts
@@ -115,7 +115,7 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [product_documentation]: https://learn.microsoft.com/azure/purview/concept-workflow
 [azure_subscription]: https://azure.microsoft.com/free/dotnet/
 [purview_resource]: /azure/purview/create-catalog-portal
-[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Analytics.Purview.Workflows_1.0.0-beta.1/sdk/identity/Azure.Identity/README.md
+[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Analytics.Purview.Workflows_1.0.0-beta.2/sdk/identity/Azure.Identity/README.md
 [app_registration]: https://learn.microsoft.com/azure/active-directory/develop/quickstart-register-app
 [username_password_credential]: https://learn.microsoft.com/dotnet/api/azure.identity.usernamepasswordcredential?view=azure-dotnet
 [protocol_client_quickstart]: https://aka.ms/azsdk/net/protocol/quickstart
@@ -123,5 +123,5 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [coc_contact]: mailto:opencode@microsoft.com
-[contributing]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Purview.Workflows_1.0.0-beta.1/CONTRIBUTING.md
+[contributing]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Purview.Workflows_1.0.0-beta.2/CONTRIBUTING.md
 
