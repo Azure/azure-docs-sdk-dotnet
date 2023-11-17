@@ -1,6 +1,7 @@
 ---
 title: Azure Unknown Service SDK for .NET
 description: Reference for Azure Unknown Service SDK for .NET
+ms.date: 11/17/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: unknownservice
@@ -8,4 +9,3 @@ ms.service: unknownservice
 # Azure Unknown Service SDK for .NET - preview
 ## Packages - preview
 [!INCLUDE [packages](unknown-service-index.md)]
-

@@ -1,7 +1,7 @@
 ---
 title: Azure Customer Insights SDK for .NET
 description: Reference for Azure Customer Insights SDK for .NET
-ms.date: 11/16/2023
+ms.date: 11/17/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: customerinsights
