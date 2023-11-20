@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: communicationjobrouter
 ---
-# Azure Communication JobRouter SDK for .NET - preview
-## Packages - preview
+# Azure Communication JobRouter SDK for .NET - latest
+## Packages - latest
 [!INCLUDE [packages](communication-jobrouter-index.md)]
