@@ -1,7 +1,7 @@
 ---
 title: Azure Content Delivery Network SDK for .NET
 description: Reference for Azure Content Delivery Network SDK for .NET
-ms.date: 11/21/2023
+ms.date: 11/22/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: contentdeliverynetwork
