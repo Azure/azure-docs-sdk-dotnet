@@ -1,7 +1,7 @@
 ---
 title: Azure Security DevOps SDK for .NET
 description: Reference for Azure Security DevOps SDK for .NET
-ms.date: 11/23/2023
+ms.date: 11/24/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: securitydevops
