@@ -1,12 +1,14 @@
 ---
 title: Azure Communication CallAutomation client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Communication.CallAutomation, communication
-ms.date: 06/16/2023
+author: acsdevx-msft
+ms.author: acsdevx-msft
+ms.date: 11/23/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: communication
 ---
-# Azure Communication CallAutomation client library for .NET - version 1.0.0 
+# Azure Communication CallAutomation client library for .NET - version 1.1.0 
 
 
 This package contains a C# SDK for Azure Communication Call Automation.
@@ -187,6 +189,7 @@ A `RequestFailedException` is thrown as a service response for any unsuccessful 
 - [Incoming Call Concept][incomingcall]
 - [Build a customer interaction workflow using Call Automation][build1]
 - [Redirect inbound telephony calls with Call Automation][build2]
+- [Connect Azure Communication Services with Azure AI services][cognitive_integration]
 - [Quickstart: Play action][build3]
 - [Quickstart: Recognize action][build4]
 - [Read more about Call Recording in Azure Communication Services][recording1]
@@ -210,13 +213,14 @@ This project has adopted the [Microsoft Open Source Code of Conduct][coc]. For m
 [communication_resource_create_net]: /azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-net
 [product_docs]: /azure/communication-services/overview
 [nuget]: https://www.nuget.org/
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Communication.CallAutomation_1.0.0/sdk/communication/Azure.Communication.CallAutomation/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Communication.CallAutomation_1.1.0/sdk/communication/Azure.Communication.CallAutomation/src
 [overview]: https://learn.microsoft.com/azure/communication-services/concepts/voice-video-calling/call-automation
 [incomingcall]: https://learn.microsoft.com/azure/communication-services/concepts/voice-video-calling/incoming-call-notification
-[build1]: https://learn.microsoft.com/azure/communication-services/quickstarts/voice-video-calling/callflows-for-customer-interactions?pivots=programming-language-csha
+[build1]: https://learn.microsoft.com/azure/communication-services/quickstarts/voice-video-calling/callflows-for-customer-interactions?pivots=programming-language-csharp
 [build2]: https://learn.microsoft.com/azure/communication-services/how-tos/call-automation-sdk/redirect-inbound-telephony-calls?pivots=programming-language-csharp
 [build3]: https://learn.microsoft.com/azure/communication-services/quickstarts/voice-video-calling/play-action?pivots=programming-language-csharp
 [build4]: https://learn.microsoft.com/azure/communication-services/quickstarts/voice-video-calling/recognize-action?pivots=programming-language-csharp
 [recording1]: https://learn.microsoft.com/azure/communication-services/concepts/voice-video-calling/call-recording
 [recording2]: https://learn.microsoft.com/azure/communication-services/quickstarts/voice-video-calling/get-started-call-recording?pivots=programming-language-csharp
+[cognitive_integration]: https://learn.microsoft.com/azure/communication-services/concepts/call-automation/azure-communication-services-azure-cognitive-services-integration
 
