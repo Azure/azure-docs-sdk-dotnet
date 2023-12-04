@@ -1,7 +1,7 @@
 ---
 title: Azure Event Hubs SDK for .NET
 description: Reference for Azure Event Hubs SDK for .NET
-ms.date: 12/01/2023
+ms.date: 12/04/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: event-hubs
