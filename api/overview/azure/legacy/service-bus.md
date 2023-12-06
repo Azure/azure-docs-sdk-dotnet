@@ -1,10 +1,10 @@
 ---
 title: Azure Service Bus SDK for .NET
 description: Reference for Azure Service Bus SDK for .NET
-ms.date: 12/05/2023
+ms.date: 12/06/2023
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: servicebus
+ms.service: service-bus-messaging
 ---
 # Azure Service Bus SDK for .NET - legacy
 ## Packages - legacy
