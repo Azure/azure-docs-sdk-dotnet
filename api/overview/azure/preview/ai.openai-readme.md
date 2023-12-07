@@ -1,12 +1,12 @@
 ---
 title: Azure OpenAI client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.OpenAI, openai
-ms.date: 11/06/2023
+ms.date: 12/07/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: openai
 ---
-# Azure OpenAI client library for .NET - version 1.0.0-beta.9 
+# Azure OpenAI client library for .NET - version 1.0.0-beta.10 
 
 
 The Azure OpenAI client library for .NET is an adaptation of OpenAI's REST APIs that provides an idiomatic interface
@@ -15,12 +15,15 @@ non-Azure OpenAI inference endpoint, making it a great choice for even non-Azure
 
 Use the client library for Azure OpenAI to:
 
-* [Create a completion for text][msdocs_openai_completion]
+* [Create chat completions using models like gpt-4 and gpt-35-turbo][msdocs_openai_chat_quickstart]
+* [Generate images with dall-e-3][msdocs_openai_dalle_quickstart]
+* [Transcribe or translate audio into text with whisper][msdocs_openai_whisper_quickstart]
 * [Create a text embedding for comparisons][msdocs_openai_embedding]
+* [Create a legacy completion for text using models like text-davinci-002][msdocs_openai_completion]
 
 Azure OpenAI is a managed service that allows developers to deploy, tune, and generate content from OpenAI models on Azure resources.
 
-  [Source code](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.9/sdk/openai/Azure.AI.OpenAI/src) | [Package (NuGet)](https://www.nuget.org/packages/Azure.AI.OpenAI) | [API reference documentation](https://learn.microsoft.com/azure/cognitive-services/openai/reference) | [Product documentation](https://learn.microsoft.com/azure/cognitive-services/openai/) | [Samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.9/sdk/openai/Azure.AI.OpenAI/tests/Samples)
+  [Source code](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.10/sdk/openai/Azure.AI.OpenAI/src) | [Package (NuGet)](https://www.nuget.org/packages/Azure.AI.OpenAI) | [API reference documentation](https://learn.microsoft.com/azure/cognitive-services/openai/reference) | [Product documentation](https://learn.microsoft.com/azure/cognitive-services/openai/) | [Samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.10/sdk/openai/Azure.AI.OpenAI/tests/Samples)
 
 ## Getting started
 
@@ -41,6 +44,30 @@ Install the client library for .NET with [NuGet](https://www.nuget.org/ ):
 ```dotnetcli
 dotnet add package Azure.AI.OpenAI --prerelease
 ```
+
+## Key concepts
+
+### Chat completion
+[From [OpenAI Capabilities: Chat completion](https://platform.openai.com/docs/guides/text-generation/chat-completions-api)]
+
+Chat models take a list of messages as input and return a model-generated message as output. Although the chat format is
+designed to make multi-turn conversations easy, it’s just as useful for single-turn tasks without any conversation.
+
+### Image generation
+[For more see [OpenAI Capabilities: Image
+generation](https://platform.openai.com/docs/guides/images/introduction?context=node)]
+
+### Audio transcription and translation
+[For more see [OpenAI Capabilities: Speech to
+text](https://platform.openai.com/docs/guides/speech-to-text/speech-to-text)]
+
+### Text embeddings
+[For more see [OpenAI Capabilities: Embeddings](https://platform.openai.com/docs/guides/embeddings/embeddings)]
+
+### Vision (preview)
+[For more see [OpenAI Capabilities: Vision](https://platform.openai.com/docs/guides/vision)]
+
+## Getting started
 
 ### Authenticate the client
 
@@ -72,11 +99,57 @@ string endpoint = "https://myaccount.openai.azure.com/";
 var client = new OpenAIClient(new Uri(endpoint), new DefaultAzureCredential());
 ```
 
-## Key concepts
+### Thread safety
 
-The main concept to understand is [Completions][azure_openai_completions_docs]. Briefly explained, completions provides its functionality in the form of a text prompt, which by using a specific [model](https://learn.microsoft.com/azure/cognitive-services/openai/concepts/models), will then attempt to match the context and patterns, providing an output text. The following code snippet provides a rough overview (more details can be found in the `GenerateChatbotResponsesWithToken` sample code):
+We guarantee that all client instance methods are thread-safe and independent of each other ([guideline](https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-service-methods-thread-safety)). This ensures that the recommendation of reusing client instances is always safe, even across threads.
 
-```C# Snippet:UseAzureOrNonAzureOpenAI
+### Additional concepts
+<!-- CLIENT COMMON BAR -->
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.10/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.10/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.10/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.10/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.10/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://learn.microsoft.com/dotnet/azure/sdk/unit-testing-mocking) |
+[Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
+<!-- CLIENT COMMON BAR -->
+
+## Examples
+
+You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.OpenAI_1.0.0-beta.10/sdk/openai/Azure.AI.OpenAI/tests/Samples).
+
+### Get a chat completion
+
+```C# Snippet:SimpleChatResponse
+Uri azureOpenAIResourceUri = new("https://my-resource.openai.azure.com/");
+AzureKeyCredential azureOpenAIApiKey = new(Environment.GetEnvironmentVariable("AZURE_OPENAI_API_KEY"));
+OpenAIClient client = new(azureOpenAIResourceUri, azureOpenAIApiKey);
+
+var chatCompletionsOptions = new ChatCompletionsOptions()
+{
+    DeploymentName = "gpt-3.5-turbo", // Use DeploymentName for "model" with non-Azure clients
+    Messages =
+    {
+        // The system message represents instructions or other guidance about how the assistant should behave
+        new ChatRequestSystemMessage("You are a helpful assistant. You will talk like a pirate."),
+        // User messages represent current or historical input from the end user
+        new ChatRequestUserMessage("Can you help me?"),
+        // Assistant messages represent historical responses from the assistant
+        new ChatRequestAssistantMessage("Arrrr! Of course, me hearty! What can I do for ye?"),
+        new ChatRequestUserMessage("What's the best way to train a parrot?"),
+    }
+};
+
+Response<ChatCompletions> response = await client.GetChatCompletionsAsync(chatCompletionsOptions);
+ChatResponseMessage responseMessage = response.Value.Choices[0].Message;
+Console.WriteLine($"[{responseMessage.Role.ToString().ToUpperInvariant()}]: {responseMessage.Content}");
+```
+
+### Legacy completions
+
+Although using chat completions is recommended, the library also supports using so-called "legacy" completions for older models.
+
+```C# Snippet:UseAzureOrNonAzureOpenAIForCompletions
 OpenAIClient client = useAzureOpenAI
     ? new OpenAIClient(
         new Uri("https://your-azure-openai-resource.com/"),
@@ -95,112 +168,6 @@ foreach (Choice choice in response.Value.Choices)
 }
 ```
 
-### Thread safety
-
-We guarantee that all client instance methods are thread-safe and independent of each other ([guideline](https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-service-methods-thread-safety)). This ensures that the recommendation of reusing client instances is always safe, even across threads.
-
-### Additional concepts
-<!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.9/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.9/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.9/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.9/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.9/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://learn.microsoft.com/dotnet/azure/sdk/unit-testing-mocking) |
-[Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
-<!-- CLIENT COMMON BAR -->
-
-## Examples
-
-You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.OpenAI_1.0.0-beta.9/sdk/openai/Azure.AI.OpenAI/tests/Samples).
-
-### Generate chatbot response
-
-The `GenerateChatbotResponse` method authenticates using a DefaultAzureCredential, then generates text responses to input prompts.
-
-```C# Snippet:GenerateChatbotResponse
-string endpoint = "https://myaccount.openai.azure.com/";
-var client = new OpenAIClient(new Uri(endpoint), new DefaultAzureCredential());
-
-CompletionsOptions completionsOptions = new()
-{
-    DeploymentName = "text-davinci-003",
-    Prompts = { "What is Azure OpenAI?" },
-};
-
-Response<Completions> completionsResponse = client.GetCompletions(completionsOptions);
-string completion = completionsResponse.Value.Choices[0].Text;
-Console.WriteLine($"Chatbot: {completion}");
-```
-
-### Generate multiple chatbot responses with subscription key
-
-The `GenerateMultipleChatbotResponsesWithSubscriptionKey` method gives an example of generating text responses to input prompts using an Azure subscription key
-
-```C# Snippet:GenerateMultipleChatbotResponsesWithSubscriptionKey
-// Replace with your Azure OpenAI key
-string key = "YOUR_AZURE_OPENAI_KEY";
-string endpoint = "https://myaccount.openai.azure.com/";
-var client = new OpenAIClient(new Uri(endpoint), new AzureKeyCredential(key));
-
-CompletionsOptions completionsOptions = new()
-{
-    DeploymentName = "text-davinci-003",
-    Prompts =
-    {
-        "How are you today?",
-        "What is Azure OpenAI?",
-        "Why do children love dinosaurs?",
-        "Generate a proof of Euler's identity",
-        "Describe in single words only the good things that come into your mind about your mother."
-    },
-};
-
-Response<Completions> completionsResponse = client.GetCompletions(completionsOptions);
-
-foreach (Choice choice in completionsResponse.Value.Choices)
-{
-    Console.WriteLine($"Response for prompt {choice.Index}: {choice.Text}");
-}
-```
-
-### Summarize text with completion
-
-The `SummarizeText` method generates a summarization of the given input prompt.
-
-```C# Snippet:SummarizeText
-string endpoint = "https://myaccount.openai.azure.com/";
-var client = new OpenAIClient(new Uri(endpoint), new DefaultAzureCredential());
-
-string textToSummarize = @"
-    Two independent experiments reported their results this morning at CERN, Europe's high-energy physics laboratory near Geneva in Switzerland. Both show convincing evidence of a new boson particle weighing around 125 gigaelectronvolts, which so far fits predictions of the Higgs previously made by theoretical physicists.
-
-    ""As a layman I would say: 'I think we have it'. Would you agree?"" Rolf-Dieter Heuer, CERN's director-general, asked the packed auditorium. The physicists assembled there burst into applause.
-:";
-
-string summarizationPrompt = @$"
-    Summarize the following text.
-
-    Text:
-    """"""
-    {textToSummarize}
-    """"""
-
-    Summary:
-";
-
-Console.Write($"Input: {summarizationPrompt}");
-var completionsOptions = new CompletionsOptions()
-{
-    DeploymentName = "text-davinci-003",
-    Prompts = { summarizationPrompt },
-};
-
-Response<Completions> completionsResponse = client.GetCompletions(completionsOptions);
-string completion = completionsResponse.Value.Choices[0].Text;
-Console.WriteLine($"Summarization: {completion}");
-```
-
 ### Stream chat messages with non-Azure OpenAI
 
 ```C# Snippet:StreamChatMessages
@@ -211,10 +178,10 @@ var chatCompletionsOptions = new ChatCompletionsOptions()
     DeploymentName = "gpt-3.5-turbo", // Use DeploymentName for "model" with non-Azure clients
     Messages =
     {
-        new ChatMessage(ChatRole.System, "You are a helpful assistant. You will talk like a pirate."),
-        new ChatMessage(ChatRole.User, "Can you help me?"),
-        new ChatMessage(ChatRole.Assistant, "Arrrr! Of course, me hearty! What can I do for ye?"),
-        new ChatMessage(ChatRole.User, "What's the best way to train a parrot?"),
+        new ChatRequestSystemMessage("You are a helpful assistant. You will talk like a pirate."),
+        new ChatRequestUserMessage("Can you help me?"),
+        new ChatRequestAssistantMessage("Arrrr! Of course, me hearty! What can I do for ye?"),
+        new ChatRequestUserMessage("What's the best way to train a parrot?"),
     }
 };
 
@@ -239,7 +206,7 @@ When explicitly requesting more than one `Choice` while streaming, use the `Choi
 // same response. This may be useful when choosing between multiple candidates for a single request.
 var chatCompletionsOptions = new ChatCompletionsOptions()
 {
-    Messages = { new ChatMessage(ChatRole.User, "Write a limerick about bananas.") },
+    Messages = { new ChatRequestUserMessage("Write a limerick about bananas.") },
     ChoiceCount = 4
 };
 
@@ -263,10 +230,112 @@ await foreach (StreamingChatCompletionsUpdate chatUpdate
 }
 ```
 
+### Use chat tools
+
+**Tools** extend chat completions by allowing an assistant to invoke defined functions and other capabilities in the
+process of fulfilling a chat completions request. To use chat tools, start by defining a function tool:
+
+```C# Snippet:ChatTools:DefineTool
+var getWeatherTool = new ChatCompletionsFunctionToolDefinition()
+{
+    Name = "get_current_weather",
+    Description = "Get the current weather in a given location",
+    Parameters = BinaryData.FromObjectAsJson(
+    new
+    {
+        Type = "object",
+        Properties = new
+        {
+            Location = new
+            {
+                Type = "string",
+                Description = "The city and state, e.g. San Francisco, CA",
+            },
+            Unit = new
+            {
+                Type = "string",
+                Enum = new[] { "celsius", "fahrenheit" },
+            }
+        },
+        Required = new[] { "location" },
+    },
+    new JsonSerializerOptions() {  PropertyNamingPolicy = JsonNamingPolicy.CamelCase }),
+};
+```
+
+With the tool defined, include that new definition in the options for a chat completions request:
+
+```C# Snippet:ChatTools:RequestWithFunctions
+var chatCompletionsOptions = new ChatCompletionsOptions()
+{
+    DeploymentName = "gpt-35-turbo-1106",
+    Messages = { new ChatRequestUserMessage("What's the weather like in Boston?") },
+    Tools = { getWeatherTool },
+};
+
+Response<ChatCompletions> response = await client.GetChatCompletionsAsync(chatCompletionsOptions);
+```
+
+When the assistant decides that one or more tools should be used, the response message includes one or more "tool
+calls" that must all be resolved via "tool messages" on the subsequent request. This resolution of tool calls into
+new request messages can be thought of as a sort of "callback" for chat completions.
+
+```C# Snippet:ChatTools:HandleToolCalls
+// Purely for convenience and clarity, this standalone local method handles tool call responses.
+ChatRequestToolMessage GetToolCallResponseMessage(ChatCompletionsToolCall toolCall)
+{
+    var functionToolCall = toolCall as ChatCompletionsFunctionToolCall;
+    if (functionToolCall?.Name == getWeatherTool.Name)
+    {
+        // Validate and process the JSON arguments for the function call
+        string unvalidatedArguments = functionToolCall.Arguments;
+        var functionResultData = (object)null; // GetYourFunctionResultData(unvalidatedArguments);
+        // Here, replacing with an example as if returned from "GetYourFunctionResultData"
+        functionResultData = "31 celsius";
+        return new ChatRequestToolMessage(functionResultData.ToString(), toolCall.Id);
+    }
+    else
+    {
+        // Handle other or unexpected calls
+        throw new NotImplementedException();
+    }
+}
+```
+
+To provide tool call resolutions to the assistant to allow the request to continue, provide all prior historical
+context -- including the original system and user messages, the response from the assistant that included the tool
+calls, and the tool messages that resolved each of those tools -- when making a subsequent request.
+
+```C# Snippet:ChatTools:HandleResponseWithToolCalls
+ChatChoice responseChoice = response.Value.Choices[0];
+if (responseChoice.FinishReason == CompletionsFinishReason.ToolCalls)
+{
+    List<ChatRequestToolMessage> toolCallResolutionMessages = new();
+    foreach (ChatCompletionsToolCall toolCall in responseChoice.Message.ToolCalls)
+    {
+        toolCallResolutionMessages.Add(GetToolCallResponseMessage(toolCall));
+    }
+
+    // Include the ToolCall message from the assistant in the conversation history, too
+    var toolCallHistoryMessage = new ChatRequestAssistantMessage(responseChoice.Message.Content);
+    foreach (ChatCompletionsToolCall requestedToolCall in responseChoice.Message.ToolCalls)
+    {
+        toolCallHistoryMessage.ToolCalls.Add(requestedToolCall);
+    }
+
+    // Now make a new request using all the messages, including the original
+    chatCompletionsOptions.Messages.Add(toolCallHistoryMessage);
+    foreach (ChatRequestToolMessage resolutionMessage in toolCallResolutionMessages)
+    {
+        chatCompletionsOptions.Messages.Add(resolutionMessage);
+    }
+}
+```
+
 ### Use chat functions
 
-Chat Functions allow a caller of Chat Completions to define capabilities that the model can use to extend its
-functionality into external tools and data sources.
+Chat Functions are a legacy form of chat tools. Although still supported by older models, the use of tools is encouraged
+when available.
 
 You can read more about Chat Functions on OpenAI's blog: https://openai.com/blog/function-calling-and-other-api-updates
 
@@ -311,16 +380,16 @@ handled across multiple calls that build up data for subsequent stateless reques
 messages as a form of conversation history.
 
 ```C# Snippet:ChatFunctions:RequestWithFunctions
-var conversationMessages = new List<ChatMessage>()
+var conversationMessages = new List<ChatRequestMessage>()
 {
-    new(ChatRole.User, "What is the weather like in Boston?"),
+    new ChatRequestUserMessage("What is the weather like in Boston?"),
 };
 
 var chatCompletionsOptions = new ChatCompletionsOptions()
 {
     DeploymentName = "gpt-35-turbo-0613",
 };
-foreach (ChatMessage chatMessage in conversationMessages)
+foreach (ChatRequestMessage chatMessage in conversationMessages)
 {
     chatCompletionsOptions.Messages.Add(chatMessage);
 }
@@ -349,7 +418,10 @@ ChatChoice responseChoice = response.Value.Choices[0];
 if (responseChoice.FinishReason == CompletionsFinishReason.FunctionCall)
 {
     // Include the FunctionCall message in the conversation history
-    conversationMessages.Add(responseChoice.Message);
+    conversationMessages.Add(new ChatRequestAssistantMessage(responseChoice.Message.Content)
+    {
+        FunctionCall = responseChoice.Message.FunctionCall,
+    });
 
     if (responseChoice.Message.FunctionCall.Name == "get_current_weather")
     {
@@ -357,21 +429,14 @@ if (responseChoice.FinishReason == CompletionsFinishReason.FunctionCall)
         string unvalidatedArguments = responseChoice.Message.FunctionCall.Arguments;
         var functionResultData = (object)null; // GetYourFunctionResultData(unvalidatedArguments);
         // Here, replacing with an example as if returned from GetYourFunctionResultData
-        functionResultData = new
-        {
-            Temperature = 31,
-            Unit = "celsius",
-        };
+        functionResultData = "31 degrees celsius";
         // Serialize the result data from the function into a new chat message with the 'Function' role,
         // then add it to the messages after the first User message and initial response FunctionCall
-        var functionResponseMessage = new ChatMessage(
-            ChatRole.Function,
-            JsonSerializer.Serialize(
+        var functionResponseMessage = new ChatRequestFunctionMessage(
+            name: responseChoice.Message.FunctionCall.Name,
+            content: JsonSerializer.Serialize(
                 functionResultData,
-                new JsonSerializerOptions() {  PropertyNamingPolicy = JsonNamingPolicy.CamelCase }))
-        {
-            Name = responseChoice.Message.FunctionCall.Name
-        };
+                new JsonSerializerOptions() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }));
         conversationMessages.Add(functionResponseMessage);
         // Now make a new request using all three messages in conversationMessages
     }
@@ -403,7 +468,7 @@ if (finishReason == CompletionsFinishReason.FunctionCall)
 {
     string lastContent = contentBuilder.ToString();
     string unvalidatedArguments = functionArgumentsBuilder.ToString();
-    ChatMessage chatMessageForHistory = new(streamedRole, lastContent)
+    ChatRequestAssistantMessage chatMessageForHistory = new(contentBuilder.ToString())
     {
         FunctionCall = new(functionName, unvalidatedArguments),
     };
@@ -430,20 +495,17 @@ See [the Azure OpenAI using your own data quickstart](https://learn.microsoft.co
 AzureCognitiveSearchChatExtensionConfiguration contosoExtensionConfig = new()
 {
     SearchEndpoint = new Uri("https://your-contoso-search-resource.search.windows.net"),
-    IndexName = "contoso-products-index",
+    Authentication = new OnYourDataApiKeyAuthenticationOptions("<your Cognitive Search resource API key>"),
 };
-
-contosoExtensionConfig.SetSearchKey("<your Cognitive Search resource API key>");
 
 ChatCompletionsOptions chatCompletionsOptions = new()
 {
     DeploymentName = "gpt-35-turbo-0613",
     Messages =
     {
-        new ChatMessage(
-            ChatRole.System,
+        new ChatRequestSystemMessage(
             "You are a helpful assistant that answers questions about the Contoso product database."),
-        new ChatMessage(ChatRole.User, "What are the best-selling Contoso products this month?")
+        new ChatRequestUserMessage("What are the best-selling Contoso products this month?")
     },
 
     // The addition of AzureChatExtensionsOptions enables the use of Azure OpenAI capabilities that add to
@@ -456,7 +518,7 @@ ChatCompletionsOptions chatCompletionsOptions = new()
 };
 
 Response<ChatCompletions> response = await client.GetChatCompletionsAsync(chatCompletionsOptions);
-ChatMessage message = response.Value.Choices[0].Message;
+ChatResponseMessage message = response.Value.Choices[0].Message;
 
 // The final, data-informed response still appears in the ChatMessages as usual
 Console.WriteLine($"{message.Role}: {message.Content}");
@@ -465,7 +527,7 @@ Console.WriteLine($"{message.Role}: {message.Content}");
 // to explain extension activity and provide supplemental information like citations.
 Console.WriteLine($"Citations and other information:");
 
-foreach (ChatMessage contextMessage in message.AzureExtensionsContext.Messages)
+foreach (ChatResponseMessage contextMessage in message.AzureExtensionsContext.Messages)
 {
     // Note: citations and other extension payloads from the "tool" role are often encoded JSON documents
     // and need to be parsed as such; that step is omitted here for brevity.
@@ -544,6 +606,85 @@ Console.WriteLine($"Translation ({translation.Duration.Value.TotalSeconds}s):");
 Console.WriteLine(translation.Text);
 ```
 
+### Chat with images using gpt-4-vision-preview
+
+The `gpt-4-vision-preview` model allows you to use images as input components into chat completions.
+
+To do this, provide distinct content items on the user message(s) for the chat completions request:
+
+```C# Snippet:AddImageToChat
+const string rawImageUri = "<URI to your image>";
+ChatCompletionsOptions chatCompletionsOptions = new()
+{
+    DeploymentName = "gpt-4-vision-preview",
+    Messages =
+    {
+        new ChatRequestSystemMessage("You are a helpful assistant that describes images."),
+        new ChatRequestUserMessage(
+            new ChatMessageTextContentItem("Hi! Please describe this image"),
+            new ChatMessageImageContentItem(new Uri(rawImageUri))),
+    },
+};
+```
+
+Chat Completions will then proceed as usual, though the model may report the more informative `finish_details` in lieu
+of `finish_reason`:
+
+```C# Snippet:GetResponseFromImages
+Response<ChatCompletions> chatResponse = await client.GetChatCompletionsAsync(chatCompletionsOptions);
+ChatChoice choice = chatResponse.Value.Choices[0];
+if (choice.FinishDetails is StopFinishDetails stopDetails)
+{
+    Console.WriteLine($"{choice.Message.Role}: {choice.Message.Content}");
+}
+```
+
+### Customize HTTP behavior
+
+As part of the Azure SDK, `OpenAIClient` integrates with Azure.Core's `HttpPipeline` and supports rich customization of
+HTTP messaging behavior via instances of `HttpPipelinePolicy`. This allows traffic manipulation like proxy redirection,
+API gateway use, insertion of custom query string parameters, and more.
+
+To customize the HTTP behavior of OpenAIClient, first implement a class derived from
+`Azure.Core.Pipeline.HttpPipelinePolicy` that performs any desired per-message operations before continuing pipeline
+execution via `ProcessNext`/`ProcessNextAsync`. For example, this is a custom policy that adds a static query string
+parameter key/value pair to all request URIs:
+
+```C# Snippet:ImplementACustomHttpPipelinePolicy
+public class SimpleQueryStringPolicy : HttpPipelinePolicy
+{
+    public override void Process(HttpMessage message, ReadOnlyMemory<HttpPipelinePolicy> pipeline)
+    {
+        message?.Request?.Uri?.AppendQuery("myParameterName", "valueForMyParameter");
+        ProcessNext(message, pipeline);
+    }
+
+    public override ValueTask ProcessAsync(HttpMessage message, ReadOnlyMemory<HttpPipelinePolicy> pipeline)
+    {
+        message?.Request?.Uri?.AppendQuery("myParameterName", "valueForMyParameter");
+        return ProcessNextAsync(message, pipeline);
+    }
+}
+```
+
+Then, to apply the custom policy, add it to an instance of `OpenAIClientOptions` that is in turn used to instantiate an
+`OpenAIClient` instance:
+
+```C# Snippet:ConfigureClientsWithCustomHttpPipelinePolicy
+OpenAIClientOptions clientOptions = new();
+clientOptions.AddPolicy(
+    policy: new SimpleQueryStringPolicy(),
+    position: HttpPipelinePosition.PerRetry);
+
+OpenAIClient client = new(
+    endpoint: new Uri("https://myresource.openai.azure.com"),
+    keyCredential: new AzureKeyCredential(myApiKey),
+    clientOptions);
+```
+
+The above client will execute the custom policy on all requests, including retries, ensuring that the additional query
+string parameter key/value pair is added.
+
 ## Troubleshooting
 
 When you interact with Azure OpenAI using the .NET SDK, errors returned by the service correspond to the same HTTP status codes returned for [REST API][openai_rest] requests.
@@ -569,15 +710,18 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 <!-- LINKS -->
 [azure_identity]: https://learn.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet
 [azure_identity_dac]: https://learn.microsoft.com/dotnet/api/azure.identity.defaultazurecredential?view=azure-dotnet
+[msdocs_openai_chat_quickstart]: https://learn.microsoft.com/azure/ai-services/openai/chatgpt-quickstart?pivots=programming-language-csharp
+[msdocs_openai_dalle_quickstart]: https://learn.microsoft.com/azure/ai-services/openai/dall-e-quickstart?pivots=programming-language-csharp
+[msdocs_openai_whisper_quickstart]: https://learn.microsoft.com/azure/ai-services/openai/whisper-quickstart
 [msdocs_openai_completion]: https://learn.microsoft.com/azure/cognitive-services/openai/how-to/completions
 [msdocs_openai_embedding]: https://learn.microsoft.com/azure/cognitive-services/openai/concepts/understand-embeddings
 [style-guide-msft]: /style-guide/capitalization
 [style-guide-cloud]: https://aka.ms/azsdk/cloud-style-guide
-[openai_client_class]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.9/sdk/openai/Azure.AI.OpenAI/src/Generated/OpenAIClient.cs
+[openai_client_class]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.10/sdk/openai/Azure.AI.OpenAI/src/Generated/OpenAIClient.cs
 [openai_rest]: https://learn.microsoft.com/azure/cognitive-services/openai/reference
 [azure_openai_completions_docs]: https://learn.microsoft.com/azure/cognitive-services/openai/how-to/completions
 [azure_openai_embeddgings_docs]: https://learn.microsoft.com/azure/cognitive-services/openai/concepts/understand-embeddings
-[openai_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.9/CONTRIBUTING.md
+[openai_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.10/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [code_of_conduct_faq]: https://opensource.microsoft.com/codeofconduct/faq/
