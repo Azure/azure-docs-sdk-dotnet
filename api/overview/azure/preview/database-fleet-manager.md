@@ -1,7 +1,7 @@
 ---
 title: Azure Database Fleet Manager SDK for .NET
 description: Reference for Azure Database Fleet Manager SDK for .NET
-ms.date: 12/07/2023
+ms.date: 12/11/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: databasefleetmanager
