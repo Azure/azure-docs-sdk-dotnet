@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: containerservicefleet
 ---
-# Azure Container Service Fleet SDK for .NET - preview
-## Packages - preview
+# Azure Container Service Fleet SDK for .NET - latest
+## Packages - latest
 [!INCLUDE [packages](container-service-fleet-index.md)]
