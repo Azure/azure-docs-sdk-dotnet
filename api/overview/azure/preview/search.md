@@ -1,26 +1,28 @@
 ---
-title: Azure Search SDK for .NET
-description: Reference for Azure Search SDK for .NET
+title: Azure AI Search SDK for .NET
+description: Reference for Azure AI Search SDK for .NET
 ms.date: 12/14/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: cognitive-search
 ---
-# Azure Cognitive Search libraries for .NET
+# Azure AI Search libraries for .NET
 
 ## Overview
 
-[Azure Cognitive Search](https://docs.microsoft.com/azure/search/search-what-is-azure-search) is a fully managed cloud search service that provides a rich search experience over content in web, mobile, and enterprise applications. The client library is used to access and execute indexing and search operations on a search service, index, documents, and other objects.
+[Azure AI Search](https://docs.microsoft.com/azure/search/) (formerly known as "Azure Cognitive Search") is an AI-powered information retrieval platform that helps developers build rich search experiences and generative AI apps that combine large language models with enterprise data.
+
+Although Azure AI Search is renamed, many API descriptions continue to use the former name, "Azure Cognitive Search". API string descriptions will get updated over time.
 
 ## Libraries for data access
 
-After an Azure Cognitive Search resource is created and configured, use data access libraries to create and consume search objects in client applications.
+After an Azure AI Search resource is created and configured, use data access libraries to create and consume search objects in client applications.
 
 ### Version 11
 
-The **`Azure.Search.Documents`** is a new client library  for .NET developers who want to use search technology in their applications. In contrast with the v10 legacy client library, this version takes dependencies on **`Azure.Core`** and **`System.Text.Json`**, implementing standard approaches in terms of service configuration, authentication, document serialization, and other tasks.
+The **`Azure.Search.Documents`** is a client library  for .NET developers who want to use search technology in their applications. In contrast with the v10 legacy client library, this version takes dependencies on **`Azure.Core`** and **`System.Text.Json`**, implementing standard approaches in terms of service configuration, authentication, document serialization, and other tasks.
 
-Use the **`Azure.Search.Documents`** library when creating new projects that use Azure Cognitive Search objects. Moving forward, all new features and enhancements will roll out here.
+Use the **`Azure.Search.Documents`** library when creating new projects that use Azure AI Search objects. Moving forward, all new features and enhancements will roll out here.
 
 |    Library    |    Reference    |    Package    |    Source    |
 |---------------|-----------------|----------------|-------------|
@@ -45,7 +47,7 @@ Use **`Microsoft.Azure.Search`** libraries to maintain existing solutions. This 
 
 ## Libraries for resource management
 
-Use the Azure Cognitive Search management library to provision a service, manage api-keys, and adjust resources. Service management has a dependency on Azure Resource Manager for subscriber and tenant identification. Typically, authentication and application registration with Azure Active Directory is also necessary to support the workflow. For an introduction to Azure Cognitive Search service provisioning, see [How to use the Management REST API](https://docs.microsoft.com/rest/api/searchmanagement/search-howto-management-rest-api).
+Use the Azure AI Search management library to provision a service, manage api-keys, and adjust resources. Service management has a dependency on Azure Resource Manager for subscriber and tenant identification. Typically, authentication and application registration with Azure Active Directory is also necessary to support the workflow. For an introduction to Azure AI Search service provisioning, see [How to use the Management REST API](https://docs.microsoft.com/rest/api/searchmanagement/search-howto-management-rest-api).
 
 |    Library    |    Reference    |    Package    |    Source    |
 |---------------|-----------------|----------------|-------------|
