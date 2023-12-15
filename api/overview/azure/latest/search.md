@@ -10,7 +10,7 @@ ms.service: cognitive-search
 
 ## Overview
 
-[Azure AI Search](https://docs.microsoft.com/azure/search/) (formerly known as "Azure Cognitive Search") is an AI-powered information retrieval platform that helps developers build rich search experiences and generative AI apps that combine large language models with enterprise data.
+[Azure AI Search](/azure/search/) (formerly known as "Azure Cognitive Search") is an AI-powered information retrieval platform that helps developers build rich search experiences and generative AI apps that combine large language models with enterprise data.
 
 Although Azure AI Search is renamed, many API descriptions continue to use the former name, "Azure Cognitive Search". API string descriptions will get updated over time.
 
@@ -34,7 +34,7 @@ If you have existing search applications that call the v10 legacy libraries, be 
 
 ### Version 10 (legacy)
 
-Use **`Microsoft.Azure.Search`** libraries to maintain existing solutions. This version is supported, but with the exception of security hotfixes, no further updates are planned for this library. For an introduction, see [How to use Microsoft.Azure.Search (v10)](https://docs.microsoft.com/azure/search/search-howto-dotnet-sdk).
+Use **`Microsoft.Azure.Search`** libraries to maintain existing solutions. This version is supported, but with the exception of security hotfixes, no further updates are planned for this library. For an introduction, see [How to use Microsoft.Azure.Search (v10)](/azure/search/search-howto-dotnet-sdk).
 
 |    Library    |    Reference    |    Package    |    Source    |
 |---------------|-----------------|----------------|-------------|
@@ -47,7 +47,7 @@ Use **`Microsoft.Azure.Search`** libraries to maintain existing solutions. This 
 
 ## Libraries for resource management
 
-Use the Azure AI Search management library to provision a service, manage api-keys, and adjust resources. Service management has a dependency on Azure Resource Manager for subscriber and tenant identification. Typically, authentication and application registration with Azure Active Directory is also necessary to support the workflow. For an introduction to Azure AI Search service provisioning, see [How to use the Management REST API](https://docs.microsoft.com/rest/api/searchmanagement/search-howto-management-rest-api).
+Use the Azure AI Search management library to provision a service, manage api-keys, and adjust resources. Service management has a dependency on Azure Resource Manager for subscriber and tenant identification. Typically, authentication and application registration with Azure Active Directory is also necessary to support the workflow. For an introduction to Azure AI Search service provisioning, see [How to use the Management REST API](/rest/api/searchmanagement/search-howto-management-rest-api).
 
 |    Library    |    Reference    |    Package    |    Source    |
 |---------------|-----------------|----------------|-------------|

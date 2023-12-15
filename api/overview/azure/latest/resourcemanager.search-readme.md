@@ -1,5 +1,5 @@
 ---
-title: 
+title: Azure AI Search management client library
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.Search, cognitive-search
 ms.date: 12/01/2023
 ms.topic: reference
@@ -12,13 +12,15 @@ Azure AI Search (formerly known as "Azure Cognitive Search") is an AI-powered in
 
 This library supports managing Microsoft Azure AI Search resources.
 
+Although Azure AI Search is renamed, many API descriptions continue to use the former name, "Azure Cognitive Search". API string descriptions will get updated over time.
+
 This library follows the [new Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html), and provides many core capabilities:
 
-    - Support MSAL.NET, Azure.Identity is out of box for supporting MSAL.NET.
-    - Support [OpenTelemetry](https://opentelemetry.io/) for distributed tracing.
-    - HTTP pipeline with custom policies.
-    - Better error-handling.
-    - Support uniform telemetry across all languages.
+* Support MSAL.NET, Azure.Identity is out of box for supporting MSAL.NET.
+* Support [OpenTelemetry](https://opentelemetry.io/) for distributed tracing.
+* HTTP pipeline with custom policies.
+* Better error-handling.
+* Support uniform telemetry across all languages.
 
 ## Getting started 
 
@@ -47,7 +49,7 @@ Key concepts of the Microsoft Azure SDK for .NET can be found [here](https://azu
 Documentation is available to help you learn how to use this package:
 
 - [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Search_1.2.1/doc/dev/mgmt_quickstart.md).
-- [API References](/dotnet/api/?view=azure-dotnet).
+- [API References](/dotnet/api/?view=azure-dotnet?preserve-view=true).
 - [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Search_1.2.1/sdk/identity/Azure.Identity/README.md).
 
 ## Examples
