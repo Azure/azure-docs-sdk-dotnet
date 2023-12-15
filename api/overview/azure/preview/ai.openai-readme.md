@@ -1,12 +1,12 @@
 ---
 title: Azure OpenAI client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.OpenAI, openai
-ms.date: 12/08/2023
+ms.date: 12/15/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: openai
 ---
-# Azure OpenAI client library for .NET - version 1.0.0-beta.11 
+# Azure OpenAI client library for .NET - version 1.0.0-beta.12 
 
 
 The Azure OpenAI client library for .NET is an adaptation of OpenAI's REST APIs that provides an idiomatic interface
@@ -23,7 +23,7 @@ Use the client library for Azure OpenAI to:
 
 Azure OpenAI is a managed service that allows developers to deploy, tune, and generate content from OpenAI models on Azure resources.
 
-  [Source code](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.11/sdk/openai/Azure.AI.OpenAI/src) | [Package (NuGet)](https://www.nuget.org/packages/Azure.AI.OpenAI) | [API reference documentation](https://learn.microsoft.com/azure/cognitive-services/openai/reference) | [Product documentation](https://learn.microsoft.com/azure/cognitive-services/openai/) | [Samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.11/sdk/openai/Azure.AI.OpenAI/tests/Samples)
+  [Source code](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.12/sdk/openai/Azure.AI.OpenAI/src) | [Package (NuGet)](https://www.nuget.org/packages/Azure.AI.OpenAI) | [API reference documentation](https://learn.microsoft.com/azure/cognitive-services/openai/reference) | [Product documentation](https://learn.microsoft.com/azure/cognitive-services/openai/) | [Samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.12/sdk/openai/Azure.AI.OpenAI/tests/Samples)
 
 ## Getting started
 
@@ -105,18 +105,18 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.11/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.11/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.11/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.11/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.11/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.12/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.12/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.12/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.12/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.12/sdk/core/Azure.Core/samples/Diagnostics.md) |
 [Mocking](https://learn.microsoft.com/dotnet/azure/sdk/unit-testing-mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
 ## Examples
 
-You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.OpenAI_1.0.0-beta.11/sdk/openai/Azure.AI.OpenAI/tests/Samples).
+You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.OpenAI_1.0.0-beta.12/sdk/openai/Azure.AI.OpenAI/tests/Samples).
 
 ### Get a chat completion
 
@@ -310,26 +310,70 @@ calls, and the tool messages that resolved each of those tools -- when making a 
 ChatChoice responseChoice = response.Value.Choices[0];
 if (responseChoice.FinishReason == CompletionsFinishReason.ToolCalls)
 {
-    List<ChatRequestToolMessage> toolCallResolutionMessages = new();
+    // Add the assistant message with tool calls to the conversation history
+    ChatRequestAssistantMessage toolCallHistoryMessage = new(responseChoice.Message);
+    chatCompletionsOptions.Messages.Add(toolCallHistoryMessage);
+
+    // Add a new tool message for each tool call that is resolved
     foreach (ChatCompletionsToolCall toolCall in responseChoice.Message.ToolCalls)
     {
-        toolCallResolutionMessages.Add(GetToolCallResponseMessage(toolCall));
+        chatCompletionsOptions.Messages.Add(GetToolCallResponseMessage(toolCall));
     }
 
-    // Include the ToolCall message from the assistant in the conversation history, too
-    var toolCallHistoryMessage = new ChatRequestAssistantMessage(responseChoice.Message.Content);
-    foreach (ChatCompletionsToolCall requestedToolCall in responseChoice.Message.ToolCalls)
-    {
-        toolCallHistoryMessage.ToolCalls.Add(requestedToolCall);
-    }
+    // Now make a new request with all the messages thus far, including the original
+}
+```
 
-    // Now make a new request using all the messages, including the original
-    chatCompletionsOptions.Messages.Add(toolCallHistoryMessage);
-    foreach (ChatRequestToolMessage resolutionMessage in toolCallResolutionMessages)
+When using tool calls with streaming responses, accumulate tool call details much like you'd accumulate the other
+portions of streamed choices, in this case using the accumulated `StreamingToolCallUpdate` data to instantiate new
+tool call messages for assistant message history. Note that the model will ignore `ChoiceCount` when providing tools
+and that all streamed responses should map to a single, common choice index in the range of `[0..(ChoiceCount - 1)]`.
+
+```C# Snippet:ChatTools:StreamingChatTools
+Dictionary<int, string> toolCallIdsByIndex = new();
+Dictionary<int, string> functionNamesByIndex = new();
+Dictionary<int, StringBuilder> functionArgmentBuildersByIndex = new();
+StringBuilder contentBuilder = new();
+
+await foreach (StreamingChatCompletionsUpdate chatUpdate
+    in await client.GetChatCompletionsStreamingAsync(chatCompletionsOptions))
+{
+    if (chatUpdate.ToolCallUpdate is StreamingFunctionToolCallUpdate functionToolCallUpdate)
     {
-        chatCompletionsOptions.Messages.Add(resolutionMessage);
+        if (functionToolCallUpdate.Id != null)
+        {
+            toolCallIdsByIndex[functionToolCallUpdate.ToolCallIndex] = functionToolCallUpdate.Id;
+        }
+        if (functionToolCallUpdate.Name != null)
+        {
+            functionNamesByIndex[functionToolCallUpdate.ToolCallIndex] = functionToolCallUpdate.Name;
+        }
+        if (functionToolCallUpdate.ArgumentsUpdate != null)
+        {
+            StringBuilder argumentsBuilder
+                = functionArgmentBuildersByIndex.TryGetValue(
+                    functionToolCallUpdate.ToolCallIndex,
+                    out StringBuilder existingBuilder) ? existingBuilder : new StringBuilder();
+            argumentsBuilder.Append(functionToolCallUpdate.ArgumentsUpdate);
+        }
+    }
+    if (chatUpdate.ContentUpdate != null)
+    {
+        contentBuilder.Append(chatUpdate.ContentUpdate);
     }
 }
+
+ChatRequestAssistantMessage assistantHistoryMessage = new(contentBuilder.ToString());
+foreach (KeyValuePair<int, string> indexIdPair in toolCallIdsByIndex)
+{
+    assistantHistoryMessage.ToolCalls.Add(new ChatCompletionsFunctionToolCall(
+        id: indexIdPair.Value,
+        functionNamesByIndex[indexIdPair.Key],
+        functionArgmentBuildersByIndex[indexIdPair.Key].ToString()));
+}
+chatCompletionsOptions.Messages.Add(assistantHistoryMessage);
+
+// Add request tool messages and proceed just like non-streaming
 ```
 
 Additionally: if you would like to control the behavior of tool calls, you can use the `ToolChoice` property on
@@ -673,7 +717,8 @@ ChatCompletionsOptions chatCompletionsOptions = new()
 ```
 
 Chat Completions will then proceed as usual, though the model may report the more informative `finish_details` in lieu
-of `finish_reason`:
+of `finish_reason`; this will converge as `gpt-4-vision-preview` is updated but checking for either one is recommended
+in the interim:
 
 ```C# Snippet:GetResponseFromImages
 Response<ChatCompletions> chatResponse = await client.GetChatCompletionsAsync(chatCompletionsOptions);
@@ -762,11 +807,11 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [msdocs_openai_embedding]: https://learn.microsoft.com/azure/cognitive-services/openai/concepts/understand-embeddings
 [style-guide-msft]: /style-guide/capitalization
 [style-guide-cloud]: https://aka.ms/azsdk/cloud-style-guide
-[openai_client_class]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.11/sdk/openai/Azure.AI.OpenAI/src/Generated/OpenAIClient.cs
+[openai_client_class]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.12/sdk/openai/Azure.AI.OpenAI/src/Generated/OpenAIClient.cs
 [openai_rest]: https://learn.microsoft.com/azure/cognitive-services/openai/reference
 [azure_openai_completions_docs]: https://learn.microsoft.com/azure/cognitive-services/openai/how-to/completions
 [azure_openai_embeddgings_docs]: https://learn.microsoft.com/azure/cognitive-services/openai/concepts/understand-embeddings
-[openai_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.11/CONTRIBUTING.md
+[openai_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.12/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [code_of_conduct_faq]: https://opensource.microsoft.com/codeofconduct/faq/
