@@ -49,7 +49,7 @@ Key concepts of the Microsoft Azure SDK for .NET can be found [here](https://azu
 Documentation is available to help you learn how to use this package:
 
 - [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Search_1.2.1/doc/dev/mgmt_quickstart.md).
-- [API References](/dotnet/api/?view=azure-dotnet?preserve-view=true).
+- [API References](/dotnet/api/?view=azure-dotnet&preserve-view=true).
 - [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Search_1.2.1/sdk/identity/Azure.Identity/README.md).
 
 ## Examples

@@ -162,7 +162,7 @@ To use the preceding code, add this to your configuration:
     }
 }
 ```
-You'll also need to provide your resource key to authenticate the client, but you shouldn't be putting that information in the configuration. Instead, when in development, use [User-Secrets](/aspnet/core/security/app-secrets?view=aspnetcore-5.0&tabs=windows#how-the-secret-manager-tool-works). Add the following to `secrets.json`:
+You'll also need to provide your resource key to authenticate the client, but you shouldn't be putting that information in the configuration. Instead, when in development, use [User-Secrets](/aspnet/core/security/app-secrets?view=aspnetcore-5.0&tabs=windows#how-the-secret-manager-tool-works&preserve-view=true). Add the following to `secrets.json`:
 
 ```json
 {
@@ -171,12 +171,12 @@ You'll also need to provide your resource key to authenticate the client, but yo
     }
 }
 ```
-When running in production, it's preferable to use [environment variables](/aspnet/core/security/app-secrets?view=aspnetcore-5.0&tabs=windows#environment-variables):
+When running in production, it's preferable to use [environment variables](/aspnet/core/security/app-secrets?view=aspnetcore-5.0&tabs=windows#environment-variables&preserve-view=true):
 
 ```
 SEARCH__CREDENTIAL__KEY="..."
 ```
-Or use other secure ways of storing secrets like [Azure Key Vault](/aspnet/core/security/key-vault-configuration?view=aspnetcore-5.0).
+Or use other secure ways of storing secrets like [Azure Key Vault](/aspnet/core/security/key-vault-configuration?view=aspnetcore-5.0&preserve-view=true).
 
 For more details about Dependency Injection in ASP.NET Core apps, see [Dependency injection with the Azure SDK for .NET](/dotnet/azure/sdk/dependency-injection).
 
