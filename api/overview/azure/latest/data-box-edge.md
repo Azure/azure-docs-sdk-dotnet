@@ -1,7 +1,7 @@
 ---
 title: Azure Data Box Edge SDK for .NET
 description: Reference for Azure Data Box Edge SDK for .NET
-ms.date: 12/18/2023
+ms.date: 12/19/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: databoxedge
