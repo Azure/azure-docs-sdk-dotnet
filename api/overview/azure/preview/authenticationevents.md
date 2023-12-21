@@ -1,7 +1,7 @@
 ---
 title: Azure AuthenticationEvents SDK for .NET
 description: Reference for Azure AuthenticationEvents SDK for .NET
-ms.date: 12/20/2023
+ms.date: 12/21/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: authenticationevents
