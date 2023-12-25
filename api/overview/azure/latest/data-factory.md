@@ -1,7 +1,7 @@
 ---
 title: Azure Data Factory SDK for .NET
 description: Reference for Azure Data Factory SDK for .NET
-ms.date: 12/22/2023
+ms.date: 12/25/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: datafactory
