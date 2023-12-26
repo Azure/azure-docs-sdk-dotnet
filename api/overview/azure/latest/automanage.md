@@ -1,7 +1,7 @@
 ---
 title: Azure Automanage SDK for .NET
 description: Reference for Azure Automanage SDK for .NET
-ms.date: 12/25/2023
+ms.date: 12/26/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: automanage
