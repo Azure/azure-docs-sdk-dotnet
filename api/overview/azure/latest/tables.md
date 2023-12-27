@@ -1,7 +1,7 @@
 ---
 title: Azure Tables SDK for .NET
 description: Reference for Azure Tables SDK for .NET
-ms.date: 12/26/2023
+ms.date: 12/27/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: tables
