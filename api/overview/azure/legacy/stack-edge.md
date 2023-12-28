@@ -1,7 +1,7 @@
 ---
 title: Azure Stack Edge SDK for .NET
 description: Reference for Azure Stack Edge SDK for .NET
-ms.date: 12/27/2023
+ms.date: 12/28/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: stackedge
