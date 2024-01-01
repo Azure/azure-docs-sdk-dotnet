@@ -1,7 +1,7 @@
 ---
 title: Azure Guest Configuration SDK for .NET
 description: Reference for Azure Guest Configuration SDK for .NET
-ms.date: 12/29/2023
+ms.date: 01/01/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: guestconfiguration
