@@ -1,30 +1,32 @@
 ---
-title: 
+title: Azure AI Search management client library
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.Search, cognitive-search
 ms.date: 06/01/2023
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: cognitive-search
 ---
-# Microsoft Azure Cognitive Search management client library for .NET
+# Microsoft Azure AI Search management client library for .NET (preview)
 
-The Microsoft Azure Cognitive Search is the only cloud search service with built-in AI capabilities that enrich all types of information to help you identify and explore relevant content at scale.
+Azure AI Search (formerly known as "Azure Cognitive Search") is an AI-powered information retrieval platform that helps developers build rich search experiences and generative AI apps that combine large language models with enterprise data.
 
-This library supports managing Microsoft Azure Cognitive Search resources.
+This library supports managing Microsoft Azure AI Search resources.
+
+Although Azure AI Search is renamed, many API descriptions continue to use the former name, "Azure Cognitive Search". API string descriptions will get updated over time.
 
 This library follows the [new Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html), and provides many core capabilities:
 
-    - Support MSAL.NET, Azure.Identity is out of box for supporting MSAL.NET.
-    - Support [OpenTelemetry](https://opentelemetry.io/) for distributed tracing.
-    - HTTP pipeline with custom policies.
-    - Better error-handling.
-    - Support uniform telemetry across all languages.
+* Support MSAL.NET, Azure.Identity is out of box for supporting MSAL.NET.
+* Support [OpenTelemetry](https://opentelemetry.io/) for distributed tracing.
+* HTTP pipeline with custom policies.
+* Better error-handling.
+* Support uniform telemetry across all languages.
 
 ## Getting started 
 
 ### Install the package
 
-Install the Microsoft Azure Cognitive Search management library for .NET with [NuGet](https://www.nuget.org/):
+Install the Microsoft Azure AI Search management library for .NET with [NuGet](https://www.nuget.org/):
 
 ```dotnetcli
 dotnet add package Azure.ResourceManager.Search
