@@ -1,7 +1,7 @@
 ---
 title: Azure Billing Benefits SDK for .NET
 description: Reference for Azure Billing Benefits SDK for .NET
-ms.date: 01/01/2024
+ms.date: 01/02/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: billingbenefits
