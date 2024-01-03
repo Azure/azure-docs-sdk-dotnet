@@ -1,10 +1,10 @@
 ---
 title: Azure Extensions SDK for .NET
 description: Reference for Azure Extensions SDK for .NET
-ms.date: 01/02/2024
+ms.date: 01/03/2024
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: azure-functions
+ms.service: extensions
 ---
 # Azure Extensions SDK for .NET - latest
 ## Packages - latest
