@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, System.ClientModel, core
-ms.date: 12/14/2023
+ms.date: 01/04/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: core
@@ -9,6 +9,8 @@ ms.service: core
 # System.ClientModel library for .NET
 
 `System.ClientModel` provides shared primitives, abstractions, and helpers for .NET service client libraries.
+
+[Source code][source] | [Package (NuGet)][package]
 
 ## Getting started
 
@@ -67,6 +69,8 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fcore%2FAzure.Core%2FREADME.png)
 
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/System.ClientModel_1.0.0-beta.3/sdk/core/System.ClientModel/src
+[package]: https://www.nuget.org/packages/System.ClientModel
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct
 [code_of_conduct_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 
