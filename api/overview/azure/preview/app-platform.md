@@ -1,7 +1,7 @@
 ---
 title: Azure App Platform SDK for .NET
 description: Reference for Azure App Platform SDK for .NET
-ms.date: 01/09/2024
+ms.date: 01/10/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: appplatform
