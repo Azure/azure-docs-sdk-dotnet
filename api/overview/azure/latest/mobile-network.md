@@ -1,7 +1,7 @@
 ---
 title: Azure Mobile Network SDK for .NET
 description: Reference for Azure Mobile Network SDK for .NET
-ms.date: 01/11/2024
+ms.date: 01/12/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: mobilenetwork
