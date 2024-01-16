@@ -1,7 +1,7 @@
 ---
 title: Azure Automation SDK for .NET
 description: Reference for Azure Automation SDK for .NET
-ms.date: 01/15/2024
+ms.date: 01/16/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: automation
