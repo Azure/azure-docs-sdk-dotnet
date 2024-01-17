@@ -1,7 +1,7 @@
 ---
 title: Azure Marketplace SDK for .NET
 description: Reference for Azure Marketplace SDK for .NET
-ms.date: 01/16/2024
+ms.date: 01/17/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: marketplace
