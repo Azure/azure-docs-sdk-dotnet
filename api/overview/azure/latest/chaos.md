@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: chaos
 ---
-# Azure Chaos SDK for .NET - preview
-## Packages - preview
+# Azure Chaos SDK for .NET - latest
+## Packages - latest
 [!INCLUDE [packages](chaos-index.md)]

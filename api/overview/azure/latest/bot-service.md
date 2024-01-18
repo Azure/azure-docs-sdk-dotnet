@@ -1,7 +1,7 @@
 ---
 title: Azure Bot Service SDK for .NET
 description: Reference for Azure Bot Service SDK for .NET
-ms.date: 01/17/2024
+ms.date: 01/18/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: botservice
