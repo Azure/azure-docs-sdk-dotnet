@@ -1,7 +1,7 @@
 ---
 title: Azure Service Fabric SDK for .NET
 description: Reference for Azure Service Fabric SDK for .NET
-ms.date: 01/18/2024
+ms.date: 01/19/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: servicefabric
