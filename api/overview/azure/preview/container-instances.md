@@ -1,7 +1,7 @@
 ---
 title: Azure Container Instances SDK for .NET
 description: Reference for Azure Container Instances SDK for .NET
-ms.date: 01/22/2024
+ms.date: 01/23/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: containerinstances
