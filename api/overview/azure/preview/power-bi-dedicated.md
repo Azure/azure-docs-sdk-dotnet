@@ -1,7 +1,7 @@
 ---
 title: Azure Power BI Dedicated SDK for .NET
 description: Reference for Azure Power BI Dedicated SDK for .NET
-ms.date: 01/29/2024
+ms.date: 01/30/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: powerbidedicated
