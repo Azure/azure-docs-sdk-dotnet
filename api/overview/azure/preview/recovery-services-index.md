@@ -1,3 +1,3 @@
 | Reference | Package | Source |
 |---|---|---|
-|[Resource Management - Data Replication](resourcemanager.recoveryservicesdatareplication-readme.md)|[Azure.ResourceManager.RecoveryServicesDataReplication](https://www.nuget.org/packages/Azure.ResourceManager.RecoveryServicesDataReplication)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/recoveryservices-datareplication/Azure.ResourceManager.RecoveryServicesDataReplication)|
+|[Resource Management - Recovery Services Data Replication](resourcemanager.recoveryservicesdatareplication-readme.md)|[Azure.ResourceManager.RecoveryServicesDataReplication](https://www.nuget.org/packages/Azure.ResourceManager.RecoveryServicesDataReplication)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/recoveryservices-datareplication/Azure.ResourceManager.RecoveryServicesDataReplication)|
