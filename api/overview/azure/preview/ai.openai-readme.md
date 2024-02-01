@@ -1,12 +1,12 @@
 ---
 title: Azure OpenAI client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.OpenAI, openai
-ms.date: 12/15/2023
+ms.date: 02/01/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: openai
 ---
-# Azure OpenAI client library for .NET - version 1.0.0-beta.12 
+# Azure OpenAI client library for .NET - version 1.0.0-beta.13 
 
 
 The Azure OpenAI client library for .NET is an adaptation of OpenAI's REST APIs that provides an idiomatic interface
@@ -23,7 +23,7 @@ Use the client library for Azure OpenAI to:
 
 Azure OpenAI is a managed service that allows developers to deploy, tune, and generate content from OpenAI models on Azure resources.
 
-  [Source code](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.12/sdk/openai/Azure.AI.OpenAI/src) | [Package (NuGet)](https://www.nuget.org/packages/Azure.AI.OpenAI) | [API reference documentation](https://learn.microsoft.com/azure/cognitive-services/openai/reference) | [Product documentation](https://learn.microsoft.com/azure/cognitive-services/openai/) | [Samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.12/sdk/openai/Azure.AI.OpenAI/tests/Samples)
+  [Source code](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.13/sdk/openai/Azure.AI.OpenAI/src) | [Package (NuGet)](https://www.nuget.org/packages/Azure.AI.OpenAI) | [API reference documentation](https://learn.microsoft.com/azure/cognitive-services/openai/reference) | [Product documentation](https://learn.microsoft.com/azure/cognitive-services/openai/) | [Samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.13/sdk/openai/Azure.AI.OpenAI/tests/Samples)
 
 ## Getting started
 
@@ -105,18 +105,18 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.12/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.12/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.12/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.12/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.12/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.13/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.13/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.13/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.13/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.13/sdk/core/Azure.Core/samples/Diagnostics.md) |
 [Mocking](https://learn.microsoft.com/dotnet/azure/sdk/unit-testing-mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
 ## Examples
 
-You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.OpenAI_1.0.0-beta.12/sdk/openai/Azure.AI.OpenAI/tests/Samples).
+You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.OpenAI_1.0.0-beta.13/sdk/openai/Azure.AI.OpenAI/tests/Samples).
 
 ### Get a chat completion
 
@@ -332,7 +332,7 @@ and that all streamed responses should map to a single, common choice index in t
 ```C# Snippet:ChatTools:StreamingChatTools
 Dictionary<int, string> toolCallIdsByIndex = new();
 Dictionary<int, string> functionNamesByIndex = new();
-Dictionary<int, StringBuilder> functionArgmentBuildersByIndex = new();
+Dictionary<int, StringBuilder> functionArgumentBuildersByIndex = new();
 StringBuilder contentBuilder = new();
 
 await foreach (StreamingChatCompletionsUpdate chatUpdate
@@ -351,10 +351,11 @@ await foreach (StreamingChatCompletionsUpdate chatUpdate
         if (functionToolCallUpdate.ArgumentsUpdate != null)
         {
             StringBuilder argumentsBuilder
-                = functionArgmentBuildersByIndex.TryGetValue(
+                = functionArgumentBuildersByIndex.TryGetValue(
                     functionToolCallUpdate.ToolCallIndex,
                     out StringBuilder existingBuilder) ? existingBuilder : new StringBuilder();
             argumentsBuilder.Append(functionToolCallUpdate.ArgumentsUpdate);
+            functionArgumentBuildersByIndex[functionToolCallUpdate.ToolCallIndex] = argumentsBuilder;
         }
     }
     if (chatUpdate.ContentUpdate != null)
@@ -369,7 +370,7 @@ foreach (KeyValuePair<int, string> indexIdPair in toolCallIdsByIndex)
     assistantHistoryMessage.ToolCalls.Add(new ChatCompletionsFunctionToolCall(
         id: indexIdPair.Value,
         functionNamesByIndex[indexIdPair.Key],
-        functionArgmentBuildersByIndex[indexIdPair.Key].ToString()));
+        functionArgumentBuildersByIndex[indexIdPair.Key].ToString()));
 }
 chatCompletionsOptions.Messages.Add(assistantHistoryMessage);
 
@@ -642,15 +643,21 @@ ReadOnlyMemory<float> embedding = item.Embedding;
 ### Generate images with DALL-E image generation models
 
 ```C# Snippet:GenerateImages
-Response<ImageGenerations> imageGenerations = await client.GetImageGenerationsAsync(
+Response<ImageGenerations> response = await client.GetImageGenerationsAsync(
     new ImageGenerationOptions()
     {
+        DeploymentName = usingAzure ? "my-azure-openai-dall-e-3-deployment" : "dall-e-3",
         Prompt = "a happy monkey eating a banana, in watercolor",
-        Size = ImageSize.Size256x256,
+        Size = ImageSize.Size1024x1024,
+        Quality = ImageGenerationQuality.Standard
     });
 
-// Image Generations responses provide URLs you can use to retrieve requested images
-Uri imageUri = imageGenerations.Value.Data[0].Url;
+ImageGenerationData generatedImage = response.Value.Data[0];
+if (!string.IsNullOrEmpty(generatedImage.RevisedPrompt))
+{
+    Console.WriteLine($"Input prompt automatically revised to: {generatedImage.RevisedPrompt}");
+}
+Console.WriteLine($"Generated image available at: {generatedImage.Url.AbsoluteUri}");
 ```
 
 ### Transcribe audio data with Whisper speech models
@@ -723,7 +730,7 @@ in the interim:
 ```C# Snippet:GetResponseFromImages
 Response<ChatCompletions> chatResponse = await client.GetChatCompletionsAsync(chatCompletionsOptions);
 ChatChoice choice = chatResponse.Value.Choices[0];
-if (choice.FinishDetails is StopFinishDetails stopDetails)
+if (choice.FinishDetails is StopFinishDetails stopDetails || choice.FinishReason == CompletionsFinishReason.Stopped)
 {
     Console.WriteLine($"{choice.Message.Role}: {choice.Message.Content}");
 }
@@ -807,11 +814,11 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [msdocs_openai_embedding]: https://learn.microsoft.com/azure/cognitive-services/openai/concepts/understand-embeddings
 [style-guide-msft]: /style-guide/capitalization
 [style-guide-cloud]: https://aka.ms/azsdk/cloud-style-guide
-[openai_client_class]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.12/sdk/openai/Azure.AI.OpenAI/src/Generated/OpenAIClient.cs
+[openai_client_class]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.13/sdk/openai/Azure.AI.OpenAI/src/Generated/OpenAIClient.cs
 [openai_rest]: https://learn.microsoft.com/azure/cognitive-services/openai/reference
 [azure_openai_completions_docs]: https://learn.microsoft.com/azure/cognitive-services/openai/how-to/completions
 [azure_openai_embeddgings_docs]: https://learn.microsoft.com/azure/cognitive-services/openai/concepts/understand-embeddings
-[openai_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.12/CONTRIBUTING.md
+[openai_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.13/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [code_of_conduct_faq]: https://opensource.microsoft.com/codeofconduct/faq/
