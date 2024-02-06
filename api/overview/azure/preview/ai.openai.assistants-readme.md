@@ -1,12 +1,12 @@
 ---
 title: Azure OpenAI: OpenAI Assistants client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.OpenAI.Assistants, openai
-ms.date: 02/01/2024
+ms.date: 02/06/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: openai
 ---
-# Azure OpenAI: OpenAI Assistants client library for .NET - version 1.0.0-beta.1 
+# Azure OpenAI: OpenAI Assistants client library for .NET - version 1.0.0-beta.2 
 
 
 > **NOTE**: This is a preview version of the Azure SDK library for OpenAI Assistants. The Azure OpenAI service does not yet include Assistants features and this project is thus currently for sole use with OpenAI's `api.openai.com` endpoints. [OpenAI's Assistants API](https://platform.openai.com/docs/api-reference/assistants) is tagged as beta and both the API surface as well as this library's representation are subject to change.
@@ -282,7 +282,7 @@ ToolOutput GetResolvedToolOutput(RequiredToolCall toolCall)
         {
             return new ToolOutput(toolCall, GetUserFavoriteCity());
         }
-        using JsonDocument argumentsJson = JsonDocument.Parse(functionToolCall.Parameters);
+        using JsonDocument argumentsJson = JsonDocument.Parse(functionToolCall.Arguments);
         if (functionToolCall.Name == getCityNicknameTool.Name)
         {
             string locationArgument = argumentsJson.RootElement.GetProperty("location").GetString();
@@ -364,11 +364,11 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [msdocs_openai_embedding]: https://learn.microsoft.com/azure/cognitive-services/openai/concepts/understand-embeddings
 [style-guide-msft]: /style-guide/capitalization
 [style-guide-cloud]: https://aka.ms/azsdk/cloud-style-guide
-[openai_client_class]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI.Assistants_1.0.0-beta.1/sdk/openai/Azure.AI.OpenAI/src/Generated/OpenAIClient.cs
+[openai_client_class]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI.Assistants_1.0.0-beta.2/sdk/openai/Azure.AI.OpenAI/src/Generated/OpenAIClient.cs
 [openai_rest]: https://learn.microsoft.com/azure/cognitive-services/openai/reference
 [azure_openai_completions_docs]: https://learn.microsoft.com/azure/cognitive-services/openai/how-to/completions
 [azure_openai_embeddgings_docs]: https://learn.microsoft.com/azure/cognitive-services/openai/concepts/understand-embeddings
-[openai_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI.Assistants_1.0.0-beta.1/CONTRIBUTING.md
+[openai_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI.Assistants_1.0.0-beta.2/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [code_of_conduct_faq]: https://opensource.microsoft.com/codeofconduct/faq/
