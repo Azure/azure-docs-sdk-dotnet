@@ -1,16 +1,17 @@
 ---
 title: Azure Identity Brokered Authentication client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Identity.Broker, identity
-ms.date: 10/19/2023
+ms.date: 02/06/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: identity
 ---
-# Azure Identity Brokered Authentication client library for .NET - version 1.0.0-beta.5 
+# Azure Identity Brokered Authentication client library for .NET - version 1.1.0-beta.1 
 
- The library extends the Azure.Identity library to provide authentication broker support. It includes the necessary dependencies, and provides the `InteractiveBrowserCredentialBrokerOptions` class. This options class can be used to create an `InteractiveBrowserCredential` capable of using the system authentication broker in lieu of the system browser when available.
 
-  [Source code][source] | [Package (nuget)][package] | [API reference documentation][identity_api_docs] | [Microsoft Entra ID documentation][aad_doc]
+The library extends the Azure.Identity library to provide authentication broker support. It includes the necessary dependencies and provides the `InteractiveBrowserCredentialBrokerOptions` class. This options class can be used to create an `InteractiveBrowserCredential` capable of using the system authentication broker in lieu of an embedded web view or the system browser.
+
+[Source code][source] | [Package (NuGet)][package] | [API reference documentation][identity_api_docs] | [Microsoft Entra ID documentation][entraid_doc]
 
 ## Getting started
 
@@ -19,7 +20,7 @@ ms.service: identity
 Install the Azure Identity client library for .NET with [NuGet][nuget]:
 
 ```PowerShell
-dotnet add package Azure.Identity.Broker --prerelease
+dotnet add package Azure.Identity.Broker
 ```
 
 ### Prerequisites
@@ -28,6 +29,24 @@ dotnet add package Azure.Identity.Broker --prerelease
 ### Authenticate the client
 
 ## Key concepts
+
+This package enables authentication broker support via `InteractiveBrowserCredentialBrokerOptions`, in combination with `InteractiveBrowserCredential` in the `Azure.Identity` package.
+
+### Parent window handles
+
+When authenticating interactively via `InteractiveBrowserCredential` constructed with the `InteractiveBrowserCredentialBrokerOptions`, a parent window handle is required to ensure that the authentication dialog is shown correctly over the requesting window. In the context of graphical user interfaces on devices, a window handle is a unique identifier that the operating system assigns to each window. For the Windows operating system, this handle is an integer value that serves as a reference to a specific window.
+
+### Microsoft account (MSA) passthrough
+
+Microsoft accounts (MSA) are personal accounts created by users to access Microsoft services. MSA passthrough is a legacy configuration which enables users to get tokens to resources which normally don't accept MSA logins. This feature is only available to first-party applications. Users authenticating with an application that is configured to use MSA passthrough can set the `InteractiveBrowserCredentialBrokerOptions.IsLegacyMsaPassthroughEnabled` property to `true` to allow these personal accounts to be listed by WAM.
+
+## Redirect URIs
+
+Microsoft Entra applications rely on redirect URIs to determine where to send the authentication response after a user has logged in. To enable brokered authentication through WAM, a redirect URI matching the following pattern should be registered to the application:
+
+```
+ms-appx-web://Microsoft.AAD.BrokerPlugin/{client_id}
+```
 
 ## Examples
 
@@ -47,7 +66,7 @@ var client = new SecretClient(new Uri("https://myvault.vault.azure.net/"), crede
 
 ## Troubleshooting
 
-See the [troubleshooting guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity.Broker_1.0.0-beta.5/sdk/identity/Azure.Identity/TROUBLESHOOTING.md) for details on how to diagnose various failure scenarios.
+See the [troubleshooting guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity.Broker_1.1.0-beta.1/sdk/identity/Azure.Identity/TROUBLESHOOTING.md) for details on how to diagnose various failure scenarios.
 
 ### Error Handling
 Errors arising from authentication can be raised on any service client method which makes a request to the service. This is because the first time the token is requested from the credential is on the first call to the service, and any subsequent calls might need to refresh the token. In order to distinguish these failures from failures in the service client Azure Identity classes raise the `AuthenticationFailedException` with details to the source of the error in the exception message as well as possibly the error message. Depending on the application these errors may or may not be recoverable.
@@ -69,11 +88,11 @@ catch (AuthenticationFailedException e)
 }
 ```
 
-For more details on dealing with errors arising from failed requests to Microsoft Entra ID, or managed identity endpoints please refer to the Microsoft Entra ID [documentation on authorization error codes][aad_err_doc].
+For more details on dealing with errors arising from failed requests to Microsoft Entra ID, or managed identity endpoints please refer to the Microsoft Entra ID [documentation on authorization error codes][entraid_err_doc].
 
 ### Logging
 
-The Azure Identity library provides the same [logging capabilities](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity.Broker_1.0.0-beta.5/sdk/core/Azure.Core/samples/Diagnostics.md#logging) as the rest of the Azure SDK.
+The Azure Identity library provides the same [logging capabilities](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity.Broker_1.1.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md#logging) as the rest of the Azure SDK.
 
 The simplest way to see the logs to help debug authentication issues is to enable the console logging.
 
@@ -103,10 +122,10 @@ We guarantee that all credential instance methods are thread-safe and independen
 This ensures that the recommendation of reusing credential instances is always safe, even across threads.
 
 ### Additional concepts
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity.Broker_1.0.0-beta.5/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity.Broker_1.0.0-beta.5/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity.Broker_1.0.0-beta.5/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity.Broker_1.0.0-beta.5/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity.Broker_1.1.0-beta.1/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity.Broker_1.1.0-beta.1/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity.Broker_1.1.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity.Broker_1.1.0-beta.1/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 
 ## Next steps
@@ -133,21 +152,21 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [azure_cli]: /cli/azure
 [azure_powerShell]: /powershell/azure
 [azure_sub]: https://azure.microsoft.com/free/dotnet/
-[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity.Broker_1.0.0-beta.5/sdk/identity/Azure.Identity/README.md
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity.Broker_1.0.0-beta.5/sdk/identity/Azure.Identity.Broker/src
-[package]: https://www.nuget.org/packages?q=Azure.Identity.Broker
-[aad_doc]: /azure/active-directory/
-[aad_err_doc]: /azure/active-directory/develop/reference-aadsts-error-codes
-[certificates_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity.Broker_1.0.0-beta.5/sdk/keyvault/Azure.Security.KeyVault.Certificates
+[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity.Broker_1.1.0-beta.1/sdk/identity/Azure.Identity/README.md
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity.Broker_1.1.0-beta.1/sdk/identity/Azure.Identity.Broker/src
+[package]: https://www.nuget.org/packages/Azure.Identity.Broker
+[entraid_doc]: https://learn.microsoft.com/entra/identity/
+[entraid_err_doc]: https://learn.microsoft.com/entra/identity-platform/reference-error-codes
+[certificates_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity.Broker_1.1.0-beta.1/sdk/keyvault/Azure.Security.KeyVault.Certificates
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [code_of_conduct_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [nuget]: https://www.nuget.org/
-[keys_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity.Broker_1.0.0-beta.5/sdk/keyvault/Azure.Security.KeyVault.Keys
-[secrets_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity.Broker_1.0.0-beta.5/sdk/keyvault/Azure.Security.KeyVault.Secrets
-[blobs_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity.Broker_1.0.0-beta.5/sdk/storage/Azure.Storage.Blobs
-[queues_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity.Broker_1.0.0-beta.5/sdk/storage/Azure.Storage.Queues
-[eventhubs_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity.Broker_1.0.0-beta.5/sdk/eventhub/Azure.Messaging.EventHubs
-[azure_core_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity.Broker_1.0.0-beta.5/sdk/core/Azure.Core
+[keys_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity.Broker_1.1.0-beta.1/sdk/keyvault/Azure.Security.KeyVault.Keys
+[secrets_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity.Broker_1.1.0-beta.1/sdk/keyvault/Azure.Security.KeyVault.Secrets
+[blobs_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity.Broker_1.1.0-beta.1/sdk/storage/Azure.Storage.Blobs
+[queues_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity.Broker_1.1.0-beta.1/sdk/storage/Azure.Storage.Queues
+[eventhubs_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity.Broker_1.1.0-beta.1/sdk/eventhub/Azure.Messaging.EventHubs
+[azure_core_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity.Broker_1.1.0-beta.1/sdk/core/Azure.Core
 [identity_api_docs]: /dotnet/api/azure.identity?view=azure-dotnet
 [vs_login_image]: https://raw.githubusercontent.com/Azure/azure-sdk-for-net/main/sdk/identity/Azure.Identity/images/VsLoginDialog.png
 [azure_cli_login_image]: https://raw.githubusercontent.com/Azure/azure-sdk-for-net/main/sdk/identity/Azure.Identity/images/AzureCliLogin.png
@@ -163,7 +182,7 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [ref_UsernamePasswordCredential]: /dotnet/api/azure.identity.usernamepasswordcredential?view=azure-dotnet
 [ref_AuthorizationCodeCredential]: /dotnet/api/azure.identity.authorizationcodecredential?view=azure-dotnet
 [ref_AzureCliCredential]: /dotnet/api/azure.identity.azureclicredential?view=azure-dotnet
-[ref_AzurePowerShellCredential]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity.Broker_1.0.0-beta.5/sdk/identity/Azure.Identity/src/AzurePowerShellCredential.cs
+[ref_AzurePowerShellCredential]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity.Broker_1.1.0-beta.1/sdk/identity/Azure.Identity/src/AzurePowerShellCredential.cs
 [ref_VisualStudioCredential]: /dotnet/api/azure.identity.visualstudiocredential?view=azure-dotnet
 [ref_VisualStudioCodeCredential]: /dotnet/api/azure.identity.visualstudiocodecredential?view=azure-dotnet
 
