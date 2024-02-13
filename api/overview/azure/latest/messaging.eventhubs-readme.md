@@ -1,15 +1,15 @@
 ---
 title: Azure Event Hubs client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Messaging.EventHubs, event-hubs
-ms.date: 11/08/2023
+ms.date: 02/13/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: event-hubs
 ---
-# Azure Event Hubs client library for .NET - version 5.10.0 
+# Azure Event Hubs client library for .NET - version 5.11.0 
 
 
-Azure Event Hubs is a highly scalable publish-subscribe service that can ingest millions of events per second and stream them to multiple consumers. This lets you process and analyze the massive amounts of data produced by your connected devices and applications. Once Event Hubs has collected the data, you can retrieve, transform, and store it by using any real-time analytics provider or with batching/storage adapters.  If you would like to know more about Azure Event Hubs, you may wish to review: [What is Event Hubs](/azure/event-hubs/event-hubs-about).
+Azure Event Hubs is a highly scalable publish-subscribe service that can ingest millions of events per second and stream them to multiple consumers. This lets you process and analyze the massive amounts of data produced by your connected devices and applications. Once Event Hubs has collected the data, you can retrieve, transform, and store it by using any real-time analytics provider or with batching/storage adapters.  If you would like to know more about Azure Event Hubs, you may wish to review: [What is Event Hubs](https://learn.microsoft.com/azure/event-hubs/event-hubs-about).
 
 The Azure Event Hubs client library allows for publishing and consuming of Azure Event Hubs events and may be used to:
 
@@ -21,7 +21,7 @@ The Azure Event Hubs client library allows for publishing and consuming of Azure
 
 - Receive events from one or more publishers, transform them to better meet the needs of your ecosystem, then publish the transformed events to a new stream for consumers to observe.
 
-[Source code](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs_5.10.0/sdk/eventhub/Azure.Messaging.EventHubs/src) | [Package (NuGet)](https://www.nuget.org/packages/Azure.Messaging.EventHubs/) | [API reference documentation](/dotnet/api/azure.messaging.eventhubs) | [Product documentation](/azure/event-hubs/) | [Migration guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs_5.10.0/sdk/eventhub/Azure.Messaging.EventHubs/MigrationGuide.md) | [Troubleshooting guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs_5.10.0/sdk/eventhub/Azure.Messaging.EventHubs/TROUBLESHOOTING.md)
+[Source code](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs_5.11.0/sdk/eventhub/Azure.Messaging.EventHubs/src) | [Package (NuGet)](https://www.nuget.org/packages/Azure.Messaging.EventHubs/) | [API reference documentation](https://learn.microsoft.com/dotnet/api/azure.messaging.eventhubs) | [Product documentation](https://learn.microsoft.com/azure/event-hubs/) | [Migration guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs_5.11.0/sdk/eventhub/Azure.Messaging.EventHubs/MigrationGuide.md) | [Troubleshooting guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs_5.11.0/sdk/eventhub/Azure.Messaging.EventHubs/TROUBLESHOOTING.md)
 
 ## Getting started
 
@@ -29,18 +29,18 @@ The Azure Event Hubs client library allows for publishing and consuming of Azure
 
 - **Azure Subscription:**  To use Azure services, including Azure Event Hubs, you'll need a subscription.  If you do not have an existing Azure account, you may sign up for a [free trial](https://azure.microsoft.com/free/dotnet/) or use your [Visual Studio Subscription](https://visualstudio.microsoft.com/subscriptions/) benefits when you [create an account](https://azure.microsoft.com/account).
 
-- **Event Hubs namespace with an Event Hub:** To interact with Azure Event Hubs, you'll also need to have a namespace and Event Hub available.  If you are not familiar with creating Azure resources, you may wish to follow the step-by-step guide for [creating an Event Hub using the Azure portal](/azure/event-hubs/event-hubs-create).  There, you can also find detailed instructions for using the Azure CLI, Azure PowerShell, or Azure Resource Manager (ARM) templates to create an Event Hub.
+- **Event Hubs namespace with an Event Hub:** To interact with Azure Event Hubs, you'll also need to have a namespace and Event Hub available.  If you are not familiar with creating Azure resources, you may wish to follow the step-by-step guide for [creating an Event Hub using the Azure portal](https://learn.microsoft.com/azure/event-hubs/event-hubs-create).  There, you can also find detailed instructions for using the Azure CLI, Azure PowerShell, or Azure Resource Manager (ARM) templates to create an Event Hub.
 
-- **C# 8.0:** The Azure Event Hubs client library makes use of new features that were introduced in C# 8.0.  In order to take advantage of the C# 8.0 syntax, it is recommended that you compile using the [.NET Core SDK](https://dotnet.microsoft.com/download) 3.0 or higher with a [language version](/dotnet/csharp/language-reference/configure-language-version#override-a-default) of `latest`.
+- **C# 8.0:** The Azure Event Hubs client library makes use of new features that were introduced in C# 8.0.  In order to take advantage of the C# 8.0 syntax, it is recommended that you compile using the [.NET Core SDK](https://dotnet.microsoft.com/download) 3.0 or higher with a [language version](https://learn.microsoft.com/dotnet/csharp/language-reference/configure-language-version#override-a-default) of `latest`.
 
   Visual Studio users wishing to take full advantage of the C# 8.0 syntax will need to use Visual Studio 2019 or later.  Visual Studio 2019, including the free Community edition, can be downloaded [here](https://visualstudio.microsoft.com).  Users of Visual Studio 2017 can take advantage of the C# 8 syntax by making use of the [Microsoft.Net.Compilers NuGet package](https://www.nuget.org/packages/Microsoft.Net.Compilers/) and setting the language version, though the editing experience may not be ideal.
 
-  You can still use the library with previous C# language versions, but will need to manage asynchronous enumerable and asynchronous disposable members manually rather than benefiting from the new syntax.  You may still target any framework version supported by your .NET Core SDK, including earlier versions of .NET Core or the .NET framework.  For more information, see: [how to specify target frameworks](/dotnet/standard/frameworks#how-to-specify-target-frameworks).  
-  **Important Note:** In order to build or run the [examples](#examples) and the [samples](#next-steps) without modification, use of C# 11.0 is necessary.  You can still run the samples if you decide to tweak them for other language versions.  An example of doing so is available in the sample: [Earlier Language Versions](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs_5.10.0/sdk/eventhub/Azure.Messaging.EventHubs/samples/Sample07_EarlierLanguageVersions.md).
+  You can still use the library with previous C# language versions, but will need to manage asynchronous enumerable and asynchronous disposable members manually rather than benefiting from the new syntax.  You may still target any framework version supported by your .NET Core SDK, including earlier versions of .NET Core or the .NET framework.  For more information, see: [how to specify target frameworks](https://learn.microsoft.com/dotnet/standard/frameworks#how-to-specify-target-frameworks).  
+  **Important Note:** In order to build or run the [examples](#examples) and the [samples](#next-steps) without modification, use of C# 11.0 is necessary.  You can still run the samples if you decide to tweak them for other language versions.  An example of doing so is available in the sample: [Earlier Language Versions](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs_5.11.0/sdk/eventhub/Azure.Messaging.EventHubs/samples/Sample07_EarlierLanguageVersions.md).
 
 To quickly create a basic set of Event Hubs resources in Azure and to receive a connection string for them, you can deploy our sample template by clicking:
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-sdk-for-net%2Fmaster%2Fsdk%2Feventhub%2FAzure.Messaging.EventHubs%2Fassets%2Fsamples-azure-deploy.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-sdk-for-net%2Fmain%2Fsdk%2Feventhub%2FAzure.Messaging.EventHubs%2Fassets%2Fsamples-azure-deploy.json)
 
 ### Install the package
 
@@ -52,7 +52,7 @@ dotnet add package Azure.Messaging.EventHubs
 
 ### Authenticate the client
 
-For the Event Hubs client library to interact with an Event Hub, it will need to understand how to connect and authorize with it.  The easiest means for doing so is to use a connection string, which is created automatically when creating an Event Hubs namespace.  If you aren't familiar with using connection strings with Event Hubs, you may wish to follow the step-by-step guide to [get an Event Hubs connection string](/azure/event-hubs/event-hubs-get-connection-string).
+For the Event Hubs client library to interact with an Event Hub, it will need to understand how to connect and authorize with it.  The easiest means for doing so is to use a connection string, which is created automatically when creating an Event Hubs namespace.  If you aren't familiar with using connection strings with Event Hubs, you may wish to follow the step-by-step guide to [get an Event Hubs connection string](https://learn.microsoft.com/azure/event-hubs/event-hubs-get-connection-string).
 
 Once you have a connection string, any of the Event Hubs client types can be created with it:
 
@@ -67,7 +67,7 @@ var eventHubName = "<< NAME OF THE EVENT HUB >>";
 await using var producer = new EventHubProducerClient(connectionString, eventHubName);
 ```
 
-For examples of authenticating the Event Hubs clients with credential types, see [Using an Azure Active Directory (AAD) principal](#using-an-active-directory-principal-with-the-event-hub-clients) or the [Identity and Shared Access Credentials](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs_5.10.0/sdk/eventhub/Azure.Messaging.EventHubs/samples/Sample06_IdentityAndSharedAccessCredentials.md) sample.
+For examples of authenticating the Event Hubs clients with credential types, see [Using an Azure Active Directory (AAD) principal](#using-an-active-directory-principal-with-the-event-hub-clients) or the [Identity and Shared Access Credentials](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs_5.11.0/sdk/eventhub/Azure.Messaging.EventHubs/samples/Sample06_IdentityAndSharedAccessCredentials.md) sample.
 
 For examples of authenticating the Event Hubs clients for an ASP.NET Core application, see [Registering with ASP.NET Core dependency injection](#registering-with-aspnet-core-dependency-injection).
 
@@ -83,7 +83,7 @@ For examples of authenticating the Event Hubs clients for an ASP.NET Core applic
 
 - A **consumer group** is a view of an entire Event Hub. Consumer groups enable multiple consuming applications to each have a separate view of the event stream, and to read the stream independently at their own pace and from their own position.  There can be at most 5 concurrent readers on a partition per consumer group; however it is recommended that there is only one active consumer for a given partition and consumer group pairing. Each active reader receives all of the events from its partition; if there are multiple readers on the same partition, then they will receive duplicate events. 
 
-For more concepts and deeper discussion, see: [Event Hubs Features](/azure/event-hubs/event-hubs-features).
+For more concepts and deeper discussion, see: [Event Hubs Features](https://learn.microsoft.com/azure/event-hubs/event-hubs-features).
 
 ### Client lifetime
 
@@ -98,8 +98,8 @@ The data model types, such as `EventData` and `EventDataBatch` are not thread-sa
 ### Additional concepts
 
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs_5.10.0/sdk/eventhub/Azure.Messaging.EventHubs/samples/Sample02_EventHubsClients.md#configuration) | [Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs_5.10.0/sdk/eventhub/Azure.Messaging.EventHubs/TROUBLESHOOTING.md) | [Diagnostics](#logging-and-diagnostics) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs_5.10.0/sdk/eventhub/Azure.Messaging.EventHubs/samples/Sample11_MockingClientTypes.md)
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs_5.11.0/sdk/eventhub/Azure.Messaging.EventHubs/samples/Sample02_EventHubsClients.md#configuration) | [Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs_5.11.0/sdk/eventhub/Azure.Messaging.EventHubs/TROUBLESHOOTING.md) | [Diagnostics](#logging-and-diagnostics) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs_5.11.0/sdk/eventhub/Azure.Messaging.EventHubs/samples/Sample11_MockingClientTypes.md)
 <!-- CLIENT COMMON BAR -->
 
 ## Examples
@@ -152,7 +152,7 @@ await using (var producer = new EventHubProducerClient(connectionString, eventHu
 
 In order to read events from an Event Hub, you'll need to create an `EventHubConsumerClient` for a given consumer group.  When an Event Hub is created, it provides a default consumer group that can be used to get started with exploring Event Hubs.  In our example, we will focus on reading all events that have been published to the Event Hub using an iterator.
 
-**Note:** It is important to note that this approach to consuming is intended to improve the experience of exploring the Event Hubs client library and prototyping.  It is recommended that it not be used in production scenarios.   For production use, we recommend using the [Event Processor Client](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs_5.10.0/sdk/eventhub/Azure.Messaging.EventHubs.Processor), as it provides a more robust and performant experience.
+**Note:** It is important to note that this approach to consuming is intended to improve the experience of exploring the Event Hubs client library and prototyping.  It is recommended that it not be used in production scenarios.   For production use, we recommend using the [Event Processor Client](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs_5.11.0/sdk/eventhub/Azure.Messaging.EventHubs.Processor), as it provides a more robust and performant experience.
 
 ```C# Snippet:EventHubs_ReadMe_Read
 var connectionString = "<< CONNECTION STRING FOR THE EVENT HUBS NAMESPACE >>";
@@ -213,7 +213,7 @@ await using (var consumer = new EventHubConsumerClient(consumerGroup, connection
 
 ### Process events using an Event Processor client
 
-For the majority of production scenarios, it is recommended that the [Event Processor Client](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs_5.10.0/sdk/eventhub/Azure.Messaging.EventHubs.Processor) be used for reading and processing events.  The processor is intended to provide a robust experience for processing events across all partitions of an Event Hub in a performant and fault tolerant manner while providing a means to persist its state.  Event Processor clients are also capable of working cooperatively within the context of a consumer group for a given Event Hub, where they will automatically manage distribution and balancing of work as instances become available or unavailable for the group.
+For the majority of production scenarios, it is recommended that the [Event Processor Client](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs_5.11.0/sdk/eventhub/Azure.Messaging.EventHubs.Processor) be used for reading and processing events.  The processor is intended to provide a robust experience for processing events across all partitions of an Event Hub in a performant and fault tolerant manner while providing a means to persist its state.  Event Processor clients are also capable of working cooperatively within the context of a consumer group for a given Event Hub, where they will automatically manage distribution and balancing of work as instances become available or unavailable for the group.
 
 Since the `EventProcessorClient` has a dependency on Azure Storage blobs for persistence of its state, you'll need to provide a `BlobContainerClient` for the processor, which has been configured for the storage account and container that should be used.
 
@@ -264,11 +264,11 @@ finally
 }
 ```
 
-More details can be found in the Event Processor Client [README](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs_5.10.0/sdk/eventhub/Azure.Messaging.EventHubs.Processor/README.md) and the accompanying [samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs_5.10.0/sdk/eventhub/Azure.Messaging.EventHubs.Processor/samples).
+More details can be found in the Event Processor Client [README](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs_5.11.0/sdk/eventhub/Azure.Messaging.EventHubs.Processor/README.md) and the accompanying [samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs_5.11.0/sdk/eventhub/Azure.Messaging.EventHubs.Processor/samples).
 
 ### Using an Active Directory principal with the Event Hub clients
 
-The [Azure Identity library](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs_5.10.0/sdk/identity/Azure.Identity/README.md) provides Azure Active Directory (AAD) authentication support which can be used for the Azure client libraries, including Event Hubs.
+The [Azure Identity library](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs_5.11.0/sdk/identity/Azure.Identity/README.md) provides Azure Active Directory (AAD) authentication support which can be used for the Azure client libraries, including Event Hubs.
 
 To make use of an Active Directory principal, one of the available credentials from the `Azure.Identity` library is specified when creating the Event Hubs client.  In addition, the fully qualified Event Hubs namespace and the name of desired Event Hub are supplied in lieu of the Event Hubs connection string.  For illustration, the `EventHubProducerClient` is demonstrated in these examples, but the concept and form are common across clients.
 
@@ -295,7 +295,7 @@ await using (var producer = new EventHubProducerClient(fullyQualifiedNamespace, 
 }
 ```
 
-When using Azure Active Directory, your principal must be assigned a role which allows access to Event Hubs, such as the `Azure Event Hubs Data Owner` role. For more information about using Azure Active Directory authorization with Event Hubs, please refer to [the associated documentation](/azure/event-hubs/authorize-access-azure-active-directory).
+When using Azure Active Directory, your principal must be assigned a role which allows access to Event Hubs, such as the `Azure Event Hubs Data Owner` role. For more information about using Azure Active Directory authorization with Event Hubs, please refer to [the associated documentation](https://learn.microsoft.com/azure/event-hubs/authorize-access-azure-active-directory).
 
 ### Registering with ASP.NET Core dependency injection
 
@@ -351,23 +351,23 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-For more details, see [Dependency injection with the Azure SDK for .NET](/dotnet/azure/sdk/dependency-injection).
+For more details, see [Dependency injection with the Azure SDK for .NET](https://learn.microsoft.com/dotnet/azure/sdk/dependency-injection).
 
 ## Troubleshooting
 
-For detailed troubleshooting information, please refer to the [Event Hubs Troubleshooting Guide](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Messaging.EventHubs_5.10.0/sdk/eventhub/Azure.Messaging.EventHubs/TROUBLESHOOTING.md).
+For detailed troubleshooting information, please refer to the [Event Hubs Troubleshooting Guide](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Messaging.EventHubs_5.11.0/sdk/eventhub/Azure.Messaging.EventHubs/TROUBLESHOOTING.md).
 
 ### Logging and diagnostics
 
 The Event Hubs client library is fully instrumented for logging information at various levels of detail using the .NET `EventSource` to emit information.  Logging is performed for each operation and follows the pattern of marking the starting point of the operation, it's completion, and any exceptions encountered.  Additional information that may offer insight is also logged in the context of the associated operation.
 
-The Event Hubs client logs are available to any `EventListener` by opting into the source named "Azure-Messaging-EventHubs" or opting into all sources that have the trait "AzureEventSource".  To make capturing logs from the Azure client libraries easier, the `Azure.Core` library used by Event Hubs offers an `AzureEventSourceListener`.  More information can be found in [Capturing Event Hubs logs using the AzureEventSourceListener](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs_5.10.0/sdk/eventhub/Azure.Messaging.EventHubs/samples/Sample10_AzureEventSourceListener.md).
+The Event Hubs client logs are available to any `EventListener` by opting into the source named "Azure-Messaging-EventHubs" or opting into all sources that have the trait "AzureEventSource".  To make capturing logs from the Azure client libraries easier, the `Azure.Core` library used by Event Hubs offers an `AzureEventSourceListener`.  More information can be found in [Capturing Event Hubs logs using the AzureEventSourceListener](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs_5.11.0/sdk/eventhub/Azure.Messaging.EventHubs/samples/Sample10_AzureEventSourceListener.md).
 
-The Event Hubs client library is also instrumented for distributed tracing using Application Insights or OpenTelemetry.  More information can be found in the [Azure.Core Diagnostics sample](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs_5.10.0/sdk/core/Azure.Core/samples/Diagnostics.md#distributed-tracing).
+The Event Hubs client library is also instrumented for distributed tracing using Application Insights or OpenTelemetry.  More information can be found in the [Azure.Core Diagnostics sample](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs_5.11.0/sdk/core/Azure.Core/samples/Diagnostics.md#distributed-tracing).
 
 ## Next steps
 
-Beyond the introductory scenarios discussed, the Azure Event Hubs client library offers support for additional scenarios to help take advantage of the full feature set of the Azure Event Hubs service.  In order to help explore some of these scenarios, the Event Hubs client library offers a project of samples to serve as an illustration for common scenarios.  Please see the samples [README](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs_5.10.0/sdk/eventhub/Azure.Messaging.EventHubs/samples/README.md) for details.
+Beyond the introductory scenarios discussed, the Azure Event Hubs client library offers support for additional scenarios to help take advantage of the full feature set of the Azure Event Hubs service.  In order to help explore some of these scenarios, the Event Hubs client library offers a project of samples to serve as an illustration for common scenarios.  Please see the samples [README](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs_5.11.0/sdk/eventhub/Azure.Messaging.EventHubs/samples/README.md) for details.
 
 ## Contributing  
 
@@ -377,7 +377,7 @@ When you submit a pull request, a CLA-bot will automatically determine whether y
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
-Please see our [contributing guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs_5.10.0/sdk/eventhub/Azure.Messaging.EventHubs/CONTRIBUTING.md) for more information.
+Please see our [contributing guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs_5.11.0/sdk/eventhub/Azure.Messaging.EventHubs/CONTRIBUTING.md) for more information.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Feventhub%2FAzure.Messaging.EventHubs%2FREADME.png)
 
