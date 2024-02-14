@@ -1,7 +1,7 @@
 ---
 title: Azure Management Partner SDK for .NET
 description: Reference for Azure Management Partner SDK for .NET
-ms.date: 02/13/2024
+ms.date: 02/14/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: managementpartner
