@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, System.ClientModel, core
-ms.date: 02/01/2024
+ms.date: 02/29/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: core
@@ -107,7 +107,7 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fcore%2FAzure.Core%2FREADME.png)
 
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/System.ClientModel_1.1.0-beta.1/sdk/core/System.ClientModel/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/System.ClientModel_1.1.0-beta.2/sdk/core/System.ClientModel/src
 [package]: https://www.nuget.org/packages/System.ClientModel
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct
 [code_of_conduct_faq]: https://opensource.microsoft.com/codeofconduct/faq/
