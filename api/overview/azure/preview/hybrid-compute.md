@@ -1,7 +1,7 @@
 ---
 title: Azure Hybrid Compute SDK for .NET
 description: Reference for Azure Hybrid Compute SDK for .NET
-ms.date: 02/29/2024
+ms.date: 03/01/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: hybridcompute
