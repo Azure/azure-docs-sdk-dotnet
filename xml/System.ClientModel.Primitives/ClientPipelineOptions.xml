@@ -14,7 +14,8 @@
   <Interfaces />
   <Docs>
     <summary>
-            Controls the creation of a pipeline used by a service client.
+            Options that control the creation of a <see cref="T:System.ClientModel.Primitives.ClientPipeline" /> used
+            by a service client to send and receive HTTP messages.
             Service clients must create a client-specific subtype of this class
             to pass to their constructors to allow for service-specific options
             with a client-wide scope.
@@ -57,10 +58,30 @@
         <Parameter Name="position" Type="System.ClientModel.Primitives.PipelinePosition" />
       </Parameters>
       <Docs>
-        <param name="policy">To be added.</param>
-        <param name="position">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="policy">The <see cref="T:System.ClientModel.Primitives.PipelinePolicy" /> to add to the
+            pipeline.</param>
+        <param name="position">The position of the policy in the pipeline.</param>
+        <summary>
+            Adds the provided <see cref="T:System.ClientModel.Primitives.PipelinePolicy" /> to the default
+            <see cref="T:System.ClientModel.Primitives.ClientPipeline" />.
+            </summary>
+        <remarks>
+            For a policy to run once per invocation of
+            <see cref="M:System.ClientModel.Primitives.ClientPipeline.Send(System.ClientModel.Primitives.PipelineMessage)" />, use
+            <see cref="F:System.ClientModel.Primitives.PipelinePosition.PerCall" />, which will insert the policy
+            before the pipeline's <see cref="P:System.ClientModel.Primitives.ClientPipelineOptions.RetryPolicy" />. For a policy to run
+            once per retry attempt, use <see cref="F:System.ClientModel.Primitives.PipelinePosition.PerTry" />, which
+            will insert the policy after the pipeline's <see cref="P:System.ClientModel.Primitives.ClientPipelineOptions.RetryPolicy" />.
+            To ensure that a policy runs after all other policies in the pipeline
+            have viewed the <see cref="P:System.ClientModel.Primitives.PipelineMessage.Request" /> and before all
+            other policies view the <see cref="P:System.ClientModel.Primitives.PipelineMessage.Response" />, use
+            <see cref="F:System.ClientModel.Primitives.PipelinePosition.BeforeTransport" />. Changes made to
+            <see cref="P:System.ClientModel.Primitives.PipelineMessage.Request" /> by a before-transport policy will
+            not be visible to any logging policies that come before it in the
+            pipeline.
+            </remarks>
+        <exception cref="T:System.ArgumentException">Thrown when the provided policy
+            is <c>null</c>.</exception>
       </Docs>
     </Member>
     <Member MemberName="AssertNotFrozen">
@@ -79,8 +100,14 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Assert that <see cref="M:System.ClientModel.Primitives.ClientPipelineOptions.Freeze" /> has not been called on this
+            <see cref="T:System.ClientModel.Primitives.ClientPipelineOptions" /> instance.
+            </summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.InvalidOperationException">Thrown when an attempt is
+            made to change the state of this <see cref="T:System.ClientModel.Primitives.ClientPipelineOptions" />
+            instance after <see cref="M:System.ClientModel.Primitives.ClientPipelineOptions.Freeze" /> has been called.</exception>
       </Docs>
     </Member>
     <Member MemberName="Freeze">
@@ -99,7 +126,12 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Freeze this instance of <see cref="T:System.ClientModel.Primitives.ClientPipelineOptions" />.  After
+            this method has been called, any attempt to set properties on the
+            instance or call methods that would change its state will throw
+            <see cref="T:System.InvalidOperationException" />.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -118,7 +150,9 @@
         <ReturnType>System.Nullable&lt;System.TimeSpan&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            The timeout applied to an individual network operation.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -138,9 +172,15 @@
         <ReturnType>System.ClientModel.Primitives.PipelinePolicy</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the <see cref="T:System.ClientModel.Primitives.PipelinePolicy" /> to be used by the
+            <see cref="T:System.ClientModel.Primitives.ClientPipeline" /> for handling retry logic.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            In most cases, this property will be set to an instance of
+            <see cref="T:System.ClientModel.Primitives.ClientRetryPolicy" />.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="Transport">
@@ -158,9 +198,15 @@
         <ReturnType>System.ClientModel.Primitives.PipelineTransport</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the <see cref="T:System.ClientModel.Primitives.PipelineTransport" /> to be used by the
+            <see cref="T:System.ClientModel.Primitives.ClientPipeline" /> for sending and receiving HTTP messages.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            In most cases, this property will be set to an instance of
+            <see cref="T:System.ClientModel.Primitives.HttpClientPipelineTransport" />.
+            </remarks>
       </Docs>
     </Member>
   </Members>

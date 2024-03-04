@@ -13,7 +13,10 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
+    <summary>
+            Represents an HTTP pipeline transport used to send and receive HTTP requests
+            and responses.
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -50,9 +53,12 @@
       <Parameters />
       <Docs>
         <summary>
-            TBD: needed for inheritdoc.
+            Create an instance of <see cref="T:System.ClientModel.Primitives.PipelineMessage" /> that can be sent
+            using this transport instance. This method will rarely be called directly;
+            <see cref="M:System.ClientModel.Primitives.ClientPipeline.CreateMessage" /> should be called instead.
             </summary>
-        <returns>To be added.</returns>
+        <returns>A <see cref="T:System.ClientModel.Primitives.PipelineMessage" /> that can be passed to
+            <see cref="M:System.ClientModel.Primitives.PipelineTransport.Process(System.ClientModel.Primitives.PipelineMessage)" />.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -72,8 +78,13 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>
+            Creates a new transport-specific instance of <see cref="T:System.ClientModel.Primitives.PipelineMessage" />.
+            Types that derive from <see cref="T:System.ClientModel.Primitives.PipelineTransport" /> must implement this
+            method to provide transport-specific functionality.
+            </summary>
+        <returns>A <see cref="T:System.ClientModel.Primitives.PipelineMessage" /> that can be passed to
+            <see cref="M:System.ClientModel.Primitives.PipelineTransport.Process(System.ClientModel.Primitives.PipelineMessage)" />.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -95,9 +106,11 @@
         <Parameter Name="message" Type="System.ClientModel.Primitives.PipelineMessage" />
       </Parameters>
       <Docs>
-        <param name="message" />
+        <param name="message">The <see cref="T:System.ClientModel.Primitives.PipelineMessage" /> containing the
+            request that was sent and response that was received by the transport.</param>
         <summary>
-            TBD: needed for inheritdoc.
+            Sends the HTTP request contained by <see cref="P:System.ClientModel.Primitives.PipelineMessage.Request" />
+            and sets the value of <see cref="P:System.ClientModel.Primitives.PipelineMessage.Response" />.
             </summary>
         <remarks>To be added.</remarks>
       </Docs>
@@ -122,10 +135,16 @@
         <Parameter Name="currentIndex" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="message">To be added.</param>
-        <param name="pipeline">To be added.</param>
-        <param name="currentIndex">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="message">The <see cref="T:System.ClientModel.Primitives.PipelineMessage" /> to pass to <see cref="M:System.ClientModel.Primitives.PipelineTransport.Process(System.ClientModel.Primitives.PipelineMessage)" />.</param>
+        <param name="pipeline">The collection of policies in the pipeline.</param>
+        <param name="currentIndex">The index of the current policy being processed
+            in the pipeline invocation.</param>
+        <summary>
+            Implementation of <see cref="M:System.ClientModel.Primitives.PipelinePolicy.Process(System.ClientModel.Primitives.PipelineMessage,System.Collections.Generic.IReadOnlyList{System.ClientModel.Primitives.PipelinePolicy},System.Int32)" />.
+            Since the transport is the last policy in the <see cref="T:System.ClientModel.Primitives.ClientPipeline" /> policy
+            chain, this method does not call <see cref="M:System.ClientModel.Primitives.PipelinePolicy.ProcessNext(System.ClientModel.Primitives.PipelineMessage,System.Collections.Generic.IReadOnlyList{System.ClientModel.Primitives.PipelinePolicy},System.Int32)" />
+            as other policy implementations do.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -147,9 +166,11 @@
         <Parameter Name="message" Type="System.ClientModel.Primitives.PipelineMessage" />
       </Parameters>
       <Docs>
-        <param name="message" />
+        <param name="message">The <see cref="T:System.ClientModel.Primitives.PipelineMessage" /> containing the
+            request that was sent and response that was received by the transport.</param>
         <summary>
-            TBD: needed for inheritdoc.
+            Sends the HTTP request contained by <see cref="P:System.ClientModel.Primitives.PipelineMessage.Request" />
+            and sets the value of <see cref="P:System.ClientModel.Primitives.PipelineMessage.Response" />.
             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
@@ -175,10 +196,16 @@
         <Parameter Name="currentIndex" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="message">To be added.</param>
-        <param name="pipeline">To be added.</param>
-        <param name="currentIndex">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="message">The <see cref="T:System.ClientModel.Primitives.PipelineMessage" /> to pass to <see cref="M:System.ClientModel.Primitives.PipelineTransport.Process(System.ClientModel.Primitives.PipelineMessage)" />.</param>
+        <param name="pipeline">The collection of policies in the pipeline.</param>
+        <param name="currentIndex">The index of the current policy being processed
+            in the pipeline invocation.</param>
+        <summary>
+            Implementation of <see cref="M:System.ClientModel.Primitives.PipelinePolicy.Process(System.ClientModel.Primitives.PipelineMessage,System.Collections.Generic.IReadOnlyList{System.ClientModel.Primitives.PipelinePolicy},System.Int32)" />.
+            Since the transport is the last policy in the <see cref="T:System.ClientModel.Primitives.ClientPipeline" /> policy
+            chain, this method does not call <see cref="M:System.ClientModel.Primitives.PipelinePolicy.ProcessNext(System.ClientModel.Primitives.PipelineMessage,System.Collections.Generic.IReadOnlyList{System.ClientModel.Primitives.PipelinePolicy},System.Int32)" />
+            as other policy implementations do.
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -201,8 +228,15 @@
         <Parameter Name="message" Type="System.ClientModel.Primitives.PipelineMessage" />
       </Parameters>
       <Docs>
-        <param name="message">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="message">The <see cref="T:System.ClientModel.Primitives.PipelineMessage" /> containing the
+            request that was sent and response that was received by the transport.</param>
+        <summary>
+            Transport-specific implementation used to sends the HTTP request
+            contained by <see cref="P:System.ClientModel.Primitives.PipelineMessage.Request" /> and set the
+            value of <see cref="P:System.ClientModel.Primitives.PipelineMessage.Response" />. Types that derive
+            from <see cref="T:System.ClientModel.Primitives.PipelineTransport" /> must implement this method to
+            provide transport-specific functionality.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -224,8 +258,15 @@
         <Parameter Name="message" Type="System.ClientModel.Primitives.PipelineMessage" />
       </Parameters>
       <Docs>
-        <param name="message">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="message">The <see cref="T:System.ClientModel.Primitives.PipelineMessage" /> containing the
+            request that was sent and response that was received by the transport.</param>
+        <summary>
+            Transport-specific implementation used to sends the HTTP request
+            contained by <see cref="P:System.ClientModel.Primitives.PipelineMessage.Request" /> and set the
+            value of <see cref="P:System.ClientModel.Primitives.PipelineMessage.Response" />. Types that derive
+            from <see cref="T:System.ClientModel.Primitives.PipelineTransport" /> must implement this method to
+            provide transport-specific functionality.
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>

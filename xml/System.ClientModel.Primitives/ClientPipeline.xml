@@ -13,7 +13,13 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
+    <summary>
+            Represents an extensible pipeline used by clients that call cloud services
+            to send and receive HTTP request and responses. Creators of
+            <see cref="T:System.ClientModel.Primitives.ClientPipeline" /> can modify how it process a
+            <see cref="T:System.ClientModel.Primitives.PipelineMessage" /> by adding <see cref="T:System.ClientModel.Primitives.PipelinePolicy" />
+            instances at various points in the default pipeline.
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -35,9 +41,14 @@
         <Parameter Name="options" Type="System.ClientModel.Primitives.ClientPipelineOptions" />
       </Parameters>
       <Docs>
-        <param name="options">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="options">If provided, the
+            <see cref="T:System.ClientModel.Primitives.ClientPipelineOptions" /> to use to construct the
+            <see cref="T:System.ClientModel.Primitives.ClientPipeline" />.</param>
+        <summary>
+            Create an instance of a <see cref="T:System.ClientModel.Primitives.ClientPipeline" /> from the provided
+            <see cref="T:System.ClientModel.Primitives.ClientPipelineOptions" />.
+            </summary>
+        <returns>The created <see cref="T:System.ClientModel.Primitives.ClientPipeline" /> instance.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -62,13 +73,33 @@
         <Parameter Name="beforeTransportPolicies" Type="System.ReadOnlySpan&lt;System.ClientModel.Primitives.PipelinePolicy&gt;" />
       </Parameters>
       <Docs>
-        <param name="options">To be added.</param>
-        <param name="perCallPolicies">To be added.</param>
-        <param name="perTryPolicies">To be added.</param>
-        <param name="beforeTransportPolicies">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="options"> The <see cref="T:System.ClientModel.Primitives.ClientPipelineOptions" /> to use to
+            construct the <see cref="T:System.ClientModel.Primitives.ClientPipeline" />.</param>
+        <param name="perCallPolicies">A collection of <see cref="T:System.ClientModel.Primitives.PipelinePolicy" />
+            instances to add to the default pipeline before the pipeline's retry
+            policy.</param>
+        <param name="perTryPolicies">A collection of <see cref="T:System.ClientModel.Primitives.PipelinePolicy" />
+            instances to add to the default pipeline after the pipeline's retry
+            policy.</param>
+        <param name="beforeTransportPolicies">A collection of
+            <see cref="T:System.ClientModel.Primitives.PipelinePolicy" /> instances to add to the default pipeline
+            before the pipeline's transport.</param>
+        <summary>
+            Create an instance of a <see cref="T:System.ClientModel.Primitives.ClientPipeline" /> from the provided
+            <see cref="T:System.ClientModel.Primitives.ClientPipelineOptions" /> and <see cref="T:System.ClientModel.Primitives.PipelinePolicy" />
+            collections.
+            </summary>
+        <returns>The created <see cref="T:System.ClientModel.Primitives.ClientPipeline" /> instance.</returns>
+        <remarks>Policies provided in <paramref name="options" /> are intended
+            to come from the end-user of a client who has passed the
+            <see cref="T:System.ClientModel.Primitives.ClientPipelineOptions" /> instance to the client's
+            constructor. The client constructor implementation is intended to pass
+            client-specific policies using the <paramref name="perCallPolicies" />,
+            <paramref name="perTryPolicies" />, and
+            <paramref name="beforeTransportPolicies" /> parameters and should not
+            modify the <see cref="T:System.ClientModel.Primitives.ClientPipelineOptions" /> provided by the client
+            user.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateMessage">
@@ -87,8 +118,11 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>
+            Creates a <see cref="T:System.ClientModel.Primitives.PipelineMessage" /> that can be sent using this
+            pipeline instance.
+            </summary>
+        <returns>The created <see cref="T:System.ClientModel.Primitives.PipelineMessage" />.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -110,9 +144,19 @@
         <Parameter Name="message" Type="System.ClientModel.Primitives.PipelineMessage" />
       </Parameters>
       <Docs>
-        <param name="message">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="message">The <see cref="T:System.ClientModel.Primitives.PipelineMessage" /> to send.</param>
+        <summary>
+            Send the provided <see cref="T:System.ClientModel.Primitives.PipelineMessage" />.
+            </summary>
+        <remarks>
+            All necessary values on <see cref="P:System.ClientModel.Primitives.PipelineMessage.Request" /> should be
+            set prior to calling <see cref="M:System.ClientModel.Primitives.ClientPipeline.Send(System.ClientModel.Primitives.PipelineMessage)" />.  After the
+            method returns, <see cref="P:System.ClientModel.Primitives.PipelineMessage.Response" /> will be populated
+            with the details of the service response.
+            </remarks>
+        <exception cref="T:System.ClientModel.ClientResultException">Thrown if an error other than
+            the service responding with an error response occurred while sending
+            the HTTP request.</exception>
       </Docs>
     </Member>
     <Member MemberName="SendAsync">
@@ -133,10 +177,20 @@
         <Parameter Name="message" Type="System.ClientModel.Primitives.PipelineMessage" />
       </Parameters>
       <Docs>
-        <param name="message">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="message">The <see cref="T:System.ClientModel.Primitives.PipelineMessage" /> to send.</param>
+        <summary>
+            Send the provided <see cref="T:System.ClientModel.Primitives.PipelineMessage" />.
+            </summary>
         <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            All necessary values on <see cref="P:System.ClientModel.Primitives.PipelineMessage.Request" /> should be
+            set prior to calling <see cref="M:System.ClientModel.Primitives.ClientPipeline.Send(System.ClientModel.Primitives.PipelineMessage)" />.  After the
+            method returns, <see cref="P:System.ClientModel.Primitives.PipelineMessage.Response" /> will be populated
+            with the details of the service response.
+            </remarks>
+        <exception cref="T:System.ClientModel.ClientResultException">Thrown if an error other than
+            the service responding with an error response occurred while sending
+            the HTTP request.</exception>
       </Docs>
     </Member>
   </Members>

@@ -17,7 +17,10 @@
     </Interface>
   </Interfaces>
   <Docs>
-    <summary>To be added.</summary>
+    <summary>
+            An implementation of <see cref="T:System.ClientModel.Primitives.PipelineTransport" /> that uses a
+            <see cref="T:System.Net.Http.HttpClient" /> to send and receive HTTP requests and responses.
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -33,7 +36,10 @@
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Create a new instance of <see cref="T:System.ClientModel.Primitives.HttpClientPipelineTransport" /> that
+            uses a shared default instance of <see cref="T:System.Net.Http.HttpClient" />.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -52,8 +58,13 @@
         <Parameter Name="client" Type="System.Net.Http.HttpClient" />
       </Parameters>
       <Docs>
-        <param name="client">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="client">The <see cref="T:System.Net.Http.HttpClient" /> that this transport
+            instance will use to send and receive HTTP requests and responses.
+            </param>
+        <summary>
+            Create a new instance of <see cref="T:System.ClientModel.Primitives.HttpClientPipelineTransport" /> that
+            uses the provided <see cref="T:System.Net.Http.HttpClient" />.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -73,8 +84,13 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>
+            Creates a new transport-specific instance of <see cref="T:System.ClientModel.Primitives.PipelineMessage" />.
+            Types that derive from <see cref="T:System.ClientModel.Primitives.PipelineTransport" /> must implement this
+            method to provide transport-specific functionality.
+            </summary>
+        <returns>A <see cref="T:System.ClientModel.Primitives.PipelineMessage" /> that can be passed to
+            <see cref="M:System.ClientModel.Primitives.PipelineTransport.Process(System.ClientModel.Primitives.PipelineMessage)" />.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -97,7 +113,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -119,8 +135,15 @@
         <Parameter Name="disposing" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="disposing">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="disposing">
+          <c>true</c> to release both managed and
+            unmanaged resources; <c>false</c> to release only unmanaged resources.
+            </param>
+        <summary>
+            Releases the unmanaged resources used by the
+            <see cref="T:System.ClientModel.Primitives.HttpClientPipelineTransport" /> and optionally disposes of
+            the managed resources.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -143,10 +166,18 @@
         <Parameter Name="httpResponse" Type="System.Net.Http.HttpResponseMessage" />
       </Parameters>
       <Docs>
-        <param name="message" />
-        <param name="httpResponse" />
+        <param name="message">The <see cref="T:System.ClientModel.Primitives.PipelineMessage" /> containing the
+            <see cref="T:System.ClientModel.Primitives.PipelineResponse" /> created by the transport.</param>
+        <param name="httpResponse">The <see cref="T:System.Net.Http.HttpResponseMessage" />
+            returned by from the call to Send on <see cref="T:System.Net.Http.HttpClient" /> that the
+            transport used to create <see cref="P:System.ClientModel.Primitives.PipelineMessage.Response" />.
+            </param>
         <summary>
-            TBD.  Needed for inheritdoc.
+            A method that can be overridden by derived types to extend the default
+            <see cref="T:System.ClientModel.Primitives.HttpClientPipelineTransport" /> logic.  It is called from
+            <see cref="M:System.ClientModel.Primitives.HttpClientPipelineTransport.ProcessCore(System.ClientModel.Primitives.PipelineMessage)" /> after the transport has
+            created the <see cref="T:System.ClientModel.Primitives.PipelineResponse" /> and set it on
+            <see cref="P:System.ClientModel.Primitives.PipelineMessage.Response" />.
             </summary>
         <remarks>To be added.</remarks>
       </Docs>
@@ -170,10 +201,18 @@
         <Parameter Name="httpRequest" Type="System.Net.Http.HttpRequestMessage" />
       </Parameters>
       <Docs>
-        <param name="message" />
-        <param name="httpRequest" />
+        <param name="message">The <see cref="T:System.ClientModel.Primitives.PipelineMessage" /> containing the
+            <see cref="T:System.ClientModel.Primitives.PipelineRequest" /> resulting from the processing of the
+            policies in the <see cref="T:System.ClientModel.Primitives.ClientPipeline" /> containing this transport.
+            </param>
+        <param name="httpRequest">The <see cref="T:System.Net.Http.HttpRequestMessage" /> created
+            by the transport that will be sent to the service using this transport's
+            <see cref="T:System.Net.Http.HttpClient" /> instance.</param>
         <summary>
-            TBD. Needed for inheritdoc.
+            A method that can be overridden by derived types to extend the default
+            <see cref="T:System.ClientModel.Primitives.HttpClientPipelineTransport" /> logic.  It is called from
+            <see cref="M:System.ClientModel.Primitives.HttpClientPipelineTransport.ProcessCore(System.ClientModel.Primitives.PipelineMessage)" /> prior to sending the HTTP
+            request.
             </summary>
         <remarks>To be added.</remarks>
       </Docs>
@@ -196,8 +235,15 @@
         <Parameter Name="message" Type="System.ClientModel.Primitives.PipelineMessage" />
       </Parameters>
       <Docs>
-        <param name="message">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="message">The <see cref="T:System.ClientModel.Primitives.PipelineMessage" /> containing the
+            request that was sent and response that was received by the transport.</param>
+        <summary>
+            Transport-specific implementation used to sends the HTTP request
+            contained by <see cref="P:System.ClientModel.Primitives.PipelineMessage.Request" /> and set the
+            value of <see cref="P:System.ClientModel.Primitives.PipelineMessage.Response" />. Types that derive
+            from <see cref="T:System.ClientModel.Primitives.PipelineTransport" /> must implement this method to
+            provide transport-specific functionality.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -219,19 +265,26 @@
         <Parameter Name="message" Type="System.ClientModel.Primitives.PipelineMessage" />
       </Parameters>
       <Docs>
-        <param name="message">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="message">The <see cref="T:System.ClientModel.Primitives.PipelineMessage" /> containing the
+            request that was sent and response that was received by the transport.</param>
+        <summary>
+            Transport-specific implementation used to sends the HTTP request
+            contained by <see cref="P:System.ClientModel.Primitives.PipelineMessage.Request" /> and set the
+            value of <see cref="P:System.ClientModel.Primitives.PipelineMessage.Response" />. Types that derive
+            from <see cref="T:System.ClientModel.Primitives.PipelineTransport" /> must implement this method to
+            provide transport-specific functionality.
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Shared">
-      <MemberSignature Language="C#" Value="public static readonly System.ClientModel.Primitives.HttpClientPipelineTransport Shared;" />
-      <MemberSignature Language="ILAsm" Value=".field public static initonly class System.ClientModel.Primitives.HttpClientPipelineTransport Shared" />
-      <MemberSignature Language="DocId" Value="F:System.ClientModel.Primitives.HttpClientPipelineTransport.Shared" />
-      <MemberSignature Language="VB.NET" Value="Public Shared ReadOnly Shared As HttpClientPipelineTransport " />
-      <MemberSignature Language="F#" Value=" staticval mutable Shared : System.ClientModel.Primitives.HttpClientPipelineTransport" Usage="System.ClientModel.Primitives.HttpClientPipelineTransport.Shared" />
-      <MemberType>Field</MemberType>
+      <MemberSignature Language="C#" Value="public static System.ClientModel.Primitives.HttpClientPipelineTransport Shared { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property class System.ClientModel.Primitives.HttpClientPipelineTransport Shared" />
+      <MemberSignature Language="DocId" Value="P:System.ClientModel.Primitives.HttpClientPipelineTransport.Shared" />
+      <MemberSignature Language="VB.NET" Value="Public Shared ReadOnly Property Shared As HttpClientPipelineTransport" />
+      <MemberSignature Language="F#" Value="static member Shared : System.ClientModel.Primitives.HttpClientPipelineTransport" Usage="System.ClientModel.Primitives.HttpClientPipelineTransport.Shared" />
+      <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>System.ClientModel</AssemblyName>
         <AssemblyVersion>1.1.0.0</AssemblyVersion>
@@ -241,8 +294,10 @@
       </ReturnValue>
       <Docs>
         <summary>
-            A shared instance of <see cref="T:System.ClientModel.Primitives.HttpClientPipelineTransport" /> with default parameters.
+            A default instance of <see cref="T:System.ClientModel.Primitives.HttpClientPipelineTransport" /> that can
+            be shared across pipelines and clients.
             </summary>
+        <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>

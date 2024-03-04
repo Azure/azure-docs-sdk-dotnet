@@ -13,7 +13,14 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
+    <summary>
+            A classifier that can evaluate a <see cref="T:System.ClientModel.Primitives.PipelineMessage" /> in two ways.
+            First, given an HTTP message, the <see cref="T:System.ClientModel.Primitives.PipelineMessageClassifier" />
+            can determine whether the service response it holds should be considered an
+            error response.  Second, given an HTTP message and an optional pipeline
+            exception, the classifier can determine whether or not the
+            <see cref="T:System.ClientModel.Primitives.ClientPipeline" /> should retry the request.
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -51,9 +58,15 @@
         <Parameter Name="successStatusCodes" Type="System.ReadOnlySpan&lt;System.UInt16&gt;" />
       </Parameters>
       <Docs>
-        <param name="successStatusCodes">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="successStatusCodes">The status codes that the returned
+            classifier instance will classifiy as success codes.</param>
+        <summary>
+            Create an instance of a <see cref="T:System.ClientModel.Primitives.PipelineMessageClassifier" /> from a
+            collection of success status codes.
+            </summary>
+        <returns>A <see cref="T:System.ClientModel.Primitives.PipelineMessageClassifier" /> instance that
+            classifies the status codes provided by
+            <paramref name="successStatusCodes" /> as success codes.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -72,7 +85,13 @@
         <ReturnType>System.ClientModel.Primitives.PipelineMessageClassifier</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            A default classifier instance. This classifier will classify a
+            <see cref="T:System.ClientModel.Primitives.PipelineResponse" /> with a status code of <c>4xx</c> or
+            <c>5xx</c> as an error, and with a status code of <c>408</c>,
+            <c>429</c>, <c>500</c>, <c>502</c>, <c>503</c> and <c>504</c> as
+            retriable.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -96,11 +115,30 @@
         <Parameter Name="isError" Type="System.Boolean" RefType="out" />
       </Parameters>
       <Docs>
-        <param name="message">To be added.</param>
-        <param name="isError">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="message">The <see cref="T:System.ClientModel.Primitives.PipelineMessage" /> to classify.</param>
+        <param name="isError">
+          <c>true</c> if the
+            <see cref="P:System.ClientModel.Primitives.PipelineMessage.Response" /> should be considered an error
+            response.</param>
+        <summary>
+            Attempt to evaluate whether the provided <see cref="T:System.ClientModel.Primitives.PipelineMessage" />
+            contains a <see cref="P:System.ClientModel.Primitives.PipelineMessage.Response" /> that the client should
+            consider an error response.
+            </summary>
+        <returns>
+          <c>true</c> if the classifier had an opinion regarding whether
+            the service response was an error response; <c>false</c> otherwise.
+            </returns>
+        <remarks>
+            Not all classifiers derived from <see cref="T:System.ClientModel.Primitives.PipelineMessageClassifier" />
+            will classify a given <see cref="T:System.ClientModel.Primitives.PipelineMessage" />. Returning
+            <c>false</c> from <see cref="M:System.ClientModel.Primitives.PipelineMessageClassifier.TryClassify(System.ClientModel.Primitives.PipelineMessage,System.Boolean@)" />
+            allows a classifier instance to compose with other classifiers by
+            passing the classification decision to a later instance.
+            <see cref="P:System.ClientModel.Primitives.PipelineMessageClassifier.Default" /> will always return <c>true</c> from
+            <see cref="M:System.ClientModel.Primitives.PipelineMessageClassifier.TryClassify(System.ClientModel.Primitives.PipelineMessage,System.Boolean@)" /> and may be used as
+            the last classifier in any composed classifier collection.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="TryClassify">
@@ -123,12 +161,33 @@
         <Parameter Name="isRetriable" Type="System.Boolean" RefType="out" />
       </Parameters>
       <Docs>
-        <param name="message">To be added.</param>
-        <param name="exception">To be added.</param>
-        <param name="isRetriable">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="message">The <see cref="T:System.ClientModel.Primitives.PipelineMessage" /> to classify.</param>
+        <param name="exception">An <see cref="T:System.Exception" />, if any, that will
+            also be used in the retry classification. Callers are intended to
+            provide any exception thrown during the attempt to send the prior
+            request.</param>
+        <param name="isRetriable">
+          <c>true</c> if the
+            <see cref="P:System.ClientModel.Primitives.PipelineMessage.Request" /> should be retried.</param>
+        <summary>
+            Attempt to evaluate whether the provided <see cref="T:System.ClientModel.Primitives.PipelineMessage" />
+            contains a <see cref="P:System.ClientModel.Primitives.PipelineMessage.Response" /> that indicates the
+            client should retry the <see cref="P:System.ClientModel.Primitives.PipelineMessage.Request" />.
+            </summary>
+        <returns>
+          <c>true</c> if the classifier had an opinion regarding whether
+            the service request should be retried; <c>false</c> otherwise.
+            </returns>
+        <remarks>
+            Not all classifiers derived from <see cref="T:System.ClientModel.Primitives.PipelineMessageClassifier" />
+            will classify a given <see cref="T:System.ClientModel.Primitives.PipelineMessage" />. Returning
+            <c>false</c> from <see cref="M:System.ClientModel.Primitives.PipelineMessageClassifier.TryClassify(System.ClientModel.Primitives.PipelineMessage,System.Boolean@)" />
+            allows a classifier instance to compose with other classifiers by
+            passing the classification decision to a later instance.
+            <see cref="P:System.ClientModel.Primitives.PipelineMessageClassifier.Default" /> will always return <c>true</c> from
+            <see cref="M:System.ClientModel.Primitives.PipelineMessageClassifier.TryClassify(System.ClientModel.Primitives.PipelineMessage,System.Boolean@)" /> and may be used as
+            the last classifier in any composed classifier collection.
+            </remarks>
       </Docs>
     </Member>
   </Members>

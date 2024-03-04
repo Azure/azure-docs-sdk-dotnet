@@ -14,7 +14,8 @@
   </Base>
   <Docs>
     <summary>
-            Represents a position of the policy in the pipeline.
+            The position at which to insert a <see cref="T:System.ClientModel.Primitives.PipelinePolicy" /> into the
+            default <see cref="T:System.ClientModel.Primitives.ClientPipeline" /> policy collection.
             </summary>
     <remarks>To be added.</remarks>
   </Docs>
@@ -36,7 +37,16 @@
       <MemberValue>2</MemberValue>
       <Docs>
         <summary>
-            The policy would be invoked before the request is sent by the transport.
+            Insert the <see cref="T:System.ClientModel.Primitives.PipelinePolicy" /> just before the pipeline's
+            <see cref="P:System.ClientModel.Primitives.ClientPipelineOptions.Transport" />. Policies added to a
+            pipeline in this position will run after all other polices in the
+            <see cref="T:System.ClientModel.Primitives.ClientPipeline" /> have viewed the
+            <see cref="P:System.ClientModel.Primitives.PipelineMessage.Request" /> and before they view the
+            <see cref="P:System.ClientModel.Primitives.PipelineMessage.Response" />.  Adding policies at this
+            position should be done with care since changes made to the
+            <see cref="P:System.ClientModel.Primitives.PipelineMessage.Request" /> by a before-transport policy
+            will not be visible to any logging policies that come before it in the
+            pipeline.
             </summary>
       </Docs>
     </Member>
@@ -57,7 +67,10 @@
       <MemberValue>0</MemberValue>
       <Docs>
         <summary>
-            The policy would be invoked once per pipeline invocation (service call).
+            Insert the <see cref="T:System.ClientModel.Primitives.PipelinePolicy" /> before the pipeline's
+            <see cref="P:System.ClientModel.Primitives.ClientPipelineOptions.RetryPolicy" />. Policies added to a
+            pipeline in this position will run once per invocation of
+            <see cref="M:System.ClientModel.Primitives.ClientPipeline.Send(System.ClientModel.Primitives.PipelineMessage)" />.
             </summary>
       </Docs>
     </Member>
@@ -77,7 +90,12 @@
       </ReturnValue>
       <MemberValue>1</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Insert the <see cref="T:System.ClientModel.Primitives.PipelinePolicy" /> after the pipeline's
+            <see cref="P:System.ClientModel.Primitives.ClientPipelineOptions.RetryPolicy" />. Policies added to a
+            pipeline in this position will run each time the pipeline tries to send
+            the <see cref="P:System.ClientModel.Primitives.PipelineMessage.Request" />.
+            </summary>
       </Docs>
     </Member>
   </Members>

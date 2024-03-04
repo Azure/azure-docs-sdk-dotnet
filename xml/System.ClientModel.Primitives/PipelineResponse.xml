@@ -18,7 +18,9 @@
     </Interface>
   </Interfaces>
   <Docs>
-    <summary>To be added.</summary>
+    <summary>
+            Represents an HTTP response received from a cloud service.
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -38,11 +40,77 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
+    <Member MemberName="BufferContent">
+      <MemberSignature Language="C#" Value="public abstract BinaryData BufferContent (System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.BinaryData BufferContent(valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.ClientModel.Primitives.PipelineResponse.BufferContent(System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride Function BufferContent (Optional cancellationToken As CancellationToken = Nothing) As BinaryData" />
+      <MemberSignature Language="F#" Value="abstract member BufferContent : System.Threading.CancellationToken -&gt; BinaryData" Usage="pipelineResponse.BufferContent cancellationToken" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.ClientModel</AssemblyName>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.BinaryData</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="cancellationToken">The <see cref="T:System.Threading.CancellationToken" /> to
+            use while buffering the content.</param>
+        <summary>
+            Transfer the contents of the response network stream from
+            <see cref="P:System.ClientModel.Primitives.PipelineResponse.ContentStream" /> to a buffered cache on this
+            <see cref="T:System.ClientModel.Primitives.PipelineResponse" /> instance.
+            </summary>
+        <returns>The buffered content.</returns>
+        <remarks>
+            This method will read the full content from the response cpntent
+            network stream into memory. Please be sure the contents will fit into
+            memory before calling this method.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="BufferContentAsync">
+      <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.ValueTask&lt;BinaryData&gt; BufferContentAsync (System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance valuetype System.Threading.Tasks.ValueTask`1&lt;class System.BinaryData&gt; BufferContentAsync(valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.ClientModel.Primitives.PipelineResponse.BufferContentAsync(System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride Function BufferContentAsync (Optional cancellationToken As CancellationToken = Nothing) As ValueTask(Of BinaryData)" />
+      <MemberSignature Language="F#" Value="abstract member BufferContentAsync : System.Threading.CancellationToken -&gt; System.Threading.Tasks.ValueTask&lt;BinaryData&gt;" Usage="pipelineResponse.BufferContentAsync cancellationToken" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.ClientModel</AssemblyName>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.ValueTask&lt;System.BinaryData&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="cancellationToken">The <see cref="T:System.Threading.CancellationToken" /> to
+            use while buffering the content.</param>
+        <summary>
+            Transfer the contents of the response network stream from
+            <see cref="P:System.ClientModel.Primitives.PipelineResponse.ContentStream" /> to a buffered cache on this
+            <see cref="T:System.ClientModel.Primitives.PipelineResponse" /> instance.
+            </summary>
+        <returns>The buffered content.</returns>
+        <remarks>
+            This method will read the full content from the response cpntent
+            network stream into memory. Please be sure the contents will fit into
+            memory before calling this method.
+            </remarks>
+      </Docs>
+    </Member>
     <Member MemberName="Content">
-      <MemberSignature Language="C#" Value="public virtual BinaryData Content { get; }" />
+      <MemberSignature Language="C#" Value="public abstract BinaryData Content { get; }" />
       <MemberSignature Language="ILAsm" Value=".property instance class System.BinaryData Content" />
       <MemberSignature Language="DocId" Value="P:System.ClientModel.Primitives.PipelineResponse.Content" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable ReadOnly Property Content As BinaryData" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride ReadOnly Property Content As BinaryData" />
       <MemberSignature Language="F#" Value="member this.Content : BinaryData" Usage="System.ClientModel.Primitives.PipelineResponse.Content" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -54,12 +122,24 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Gets the contents of HTTP response, if it is available.
+            Gets the contents of the HTTP response.
             </summary>
         <value>To be added.</value>
         <remarks>
-            Throws <see cref="T:System.InvalidOperationException" /> when <see cref="P:System.ClientModel.Primitives.PipelineResponse.ContentStream" /> is not a <see cref="T:System.IO.MemoryStream" />.
+          <see cref="P:System.ClientModel.Primitives.PipelineResponse.Content" /> holds the in-memory contents of the HTTP response
+            when <see cref="P:System.ClientModel.Primitives.PipelineMessage.BufferResponse" /> is <c>true</c> on
+            the message sent via <see cref="M:System.ClientModel.Primitives.ClientPipeline.Send(System.ClientModel.Primitives.PipelineMessage)" />.
+            If this <see cref="T:System.ClientModel.Primitives.PipelineResponse" /> instance was obtained from the
+            return value of a client's service method, please refer to the
+            documentation for the service method to understand whether this property
+            can be accessed without throwing an exception. If this instance is
+            accessed from a <see cref="T:System.ClientModel.Primitives.PipelinePolicy" />, please check the value of
+            <see cref="P:System.ClientModel.Primitives.PipelineMessage.BufferResponse" /> to determine whether to
+            obtain the response content from <see cref="P:System.ClientModel.Primitives.PipelineResponse.Content" /> or
+            <see cref="P:System.ClientModel.Primitives.PipelineResponse.ContentStream" />.
             </remarks>
+        <exception cref="T:System.InvalidOperationException">Thrown if the response is
+            not buffered.</exception>
       </Docs>
     </Member>
     <Member MemberName="ContentStream">
@@ -78,10 +158,20 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Gets the contents of HTTP response. Returns <c>null</c> for responses without content.
+            Gets or sets the contents of the HTTP response.
             </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+          <see cref="P:System.ClientModel.Primitives.PipelineResponse.ContentStream" /> may be a stream that contains the buffered
+            contents transfered from the network stream that originally held the
+            contents of the service response; or it may be the live network stream
+            itself, depending on the value of
+            <see cref="P:System.ClientModel.Primitives.PipelineMessage.BufferResponse" /> on the message sent via
+            <see cref="M:System.ClientModel.Primitives.ClientPipeline.Send(System.ClientModel.Primitives.PipelineMessage)" />. Please refer to the
+            documentation for a client's service method if needed to understand
+            whether this <see cref="T:System.ClientModel.Primitives.PipelineResponse" /> instance must be disposed
+            to close the network stream.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="Dispose">
@@ -103,28 +193,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="GetHeadersCore">
-      <MemberSignature Language="C#" Value="protected abstract System.ClientModel.Primitives.PipelineResponseHeaders GetHeadersCore ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance class System.ClientModel.Primitives.PipelineResponseHeaders GetHeadersCore() cil managed" />
-      <MemberSignature Language="DocId" Value="M:System.ClientModel.Primitives.PipelineResponse.GetHeadersCore" />
-      <MemberSignature Language="VB.NET" Value="Protected MustOverride Function GetHeadersCore () As PipelineResponseHeaders" />
-      <MemberSignature Language="F#" Value="abstract member GetHeadersCore : unit -&gt; System.ClientModel.Primitives.PipelineResponseHeaders" Usage="pipelineResponse.GetHeadersCore " />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>System.ClientModel</AssemblyName>
-        <AssemblyVersion>1.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.ClientModel.Primitives.PipelineResponseHeaders</ReturnType>
-      </ReturnValue>
-      <Parameters />
-      <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -143,7 +212,32 @@
         <ReturnType>System.ClientModel.Primitives.PipelineResponseHeaders</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the collection of HTTP request headers.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="HeadersCore">
+      <MemberSignature Language="C#" Value="protected abstract System.ClientModel.Primitives.PipelineResponseHeaders HeadersCore { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.ClientModel.Primitives.PipelineResponseHeaders HeadersCore" />
+      <MemberSignature Language="DocId" Value="P:System.ClientModel.Primitives.PipelineResponse.HeadersCore" />
+      <MemberSignature Language="VB.NET" Value="Protected MustOverride ReadOnly Property HeadersCore As PipelineResponseHeaders" />
+      <MemberSignature Language="F#" Value="member this.HeadersCore : System.ClientModel.Primitives.PipelineResponseHeaders" Usage="System.ClientModel.Primitives.PipelineResponse.HeadersCore" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.ClientModel</AssemblyName>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.ClientModel.Primitives.PipelineResponseHeaders</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets the derived-type's value of the response's
+            <see cref="P:System.ClientModel.Primitives.PipelineResponse.Headers" /> collection.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -171,6 +265,28 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
+    <Member MemberName="IsErrorCore">
+      <MemberSignature Language="C#" Value="protected internal virtual bool IsErrorCore { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsErrorCore" />
+      <MemberSignature Language="DocId" Value="P:System.ClientModel.Primitives.PipelineResponse.IsErrorCore" />
+      <MemberSignature Language="VB.NET" Value="Protected Friend Overridable Property IsErrorCore As Boolean" />
+      <MemberSignature Language="F#" Value="member this.IsErrorCore : bool with get, set" Usage="System.ClientModel.Primitives.PipelineResponse.IsErrorCore" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.ClientModel</AssemblyName>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets the derived-type's value of <see cref="P:System.ClientModel.Primitives.PipelineResponse.IsError" />.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="ReasonPhrase">
       <MemberSignature Language="C#" Value="public abstract string ReasonPhrase { get; }" />
       <MemberSignature Language="ILAsm" Value=".property instance string ReasonPhrase" />
@@ -187,32 +303,10 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Gets the HTTP reason phrase.
+            Gets the reason phrase that accompanies the status code on the HTTP
+            reponse.
             </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="SetIsErrorCore">
-      <MemberSignature Language="C#" Value="protected virtual void SetIsErrorCore (bool isError);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void SetIsErrorCore(bool isError) cil managed" />
-      <MemberSignature Language="DocId" Value="M:System.ClientModel.Primitives.PipelineResponse.SetIsErrorCore(System.Boolean)" />
-      <MemberSignature Language="VB.NET" Value="Protected Overridable Sub SetIsErrorCore (isError As Boolean)" />
-      <MemberSignature Language="F#" Value="abstract member SetIsErrorCore : bool -&gt; unit&#xA;override this.SetIsErrorCore : bool -&gt; unit" Usage="pipelineResponse.SetIsErrorCore isError" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>System.ClientModel</AssemblyName>
-        <AssemblyVersion>1.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Void</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="isError" Type="System.Boolean" />
-      </Parameters>
-      <Docs>
-        <param name="isError">To be added.</param>
-        <summary>To be added.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -232,7 +326,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Gets the HTTP status code.
+            Gets the status code of the HTTP response.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>

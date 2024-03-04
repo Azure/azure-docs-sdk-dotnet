@@ -13,7 +13,16 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
+    <summary>
+            A policy that can be added to a <see cref="T:System.ClientModel.Primitives.ClientPipeline" /> to process a
+            <see cref="T:System.ClientModel.Primitives.PipelineMessage" /> during a call to
+            <see cref="M:System.ClientModel.Primitives.ClientPipeline.Send(System.ClientModel.Primitives.PipelineMessage)" />. Types deriving from
+            <see cref="T:System.ClientModel.Primitives.PipelinePolicy" /> can read or modify the
+            <see cref="P:System.ClientModel.Primitives.PipelineMessage.Request" />, implement functionality based on
+            <see cref="P:System.ClientModel.Primitives.PipelineMessage.Response" />, and must pass control to the next
+            <see cref="T:System.ClientModel.Primitives.PipelinePolicy" /> in the pipeline by calling
+            <see cref="M:System.ClientModel.Primitives.PipelinePolicy.ProcessNext(System.ClientModel.Primitives.PipelineMessage,System.Collections.Generic.IReadOnlyList{System.ClientModel.Primitives.PipelinePolicy},System.Int32)" />.
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -53,10 +62,22 @@
         <Parameter Name="currentIndex" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="message">To be added.</param>
-        <param name="pipeline">To be added.</param>
-        <param name="currentIndex">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="message">The <see cref="T:System.ClientModel.Primitives.PipelineMessage" /> to process.</param>
+        <param name="pipeline">The collection of <see cref="T:System.ClientModel.Primitives.PipelinePolicy" />
+            instances in the <see cref="T:System.ClientModel.Primitives.ClientPipeline" /> instance whose
+            <see cref="M:System.ClientModel.Primitives.ClientPipeline.Send(System.ClientModel.Primitives.PipelineMessage)" /> method was called to invoke
+            this method.</param>
+        <param name="currentIndex">The index of this policy in the
+            <paramref name="pipeline" /> policy list. This value should be passed to
+            <see cref="M:System.ClientModel.Primitives.PipelinePolicy.ProcessNext(System.ClientModel.Primitives.PipelineMessage,System.Collections.Generic.IReadOnlyList{System.ClientModel.Primitives.PipelinePolicy},System.Int32)" />
+            to pass control to the next policy in the pipeline.</param>
+        <summary>
+            Process the provided <see cref="T:System.ClientModel.Primitives.PipelineMessage" /> according to the
+            intended purpose of this <see cref="T:System.ClientModel.Primitives.PipelinePolicy" />instance.
+            Derived types must pass control to the next
+            <see cref="T:System.ClientModel.Primitives.PipelinePolicy" /> in the pipeline by calling
+            <see cref="M:System.ClientModel.Primitives.PipelinePolicy.ProcessNext(System.ClientModel.Primitives.PipelineMessage,System.Collections.Generic.IReadOnlyList{System.ClientModel.Primitives.PipelinePolicy},System.Int32)" />.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -80,10 +101,22 @@
         <Parameter Name="currentIndex" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="message">To be added.</param>
-        <param name="pipeline">To be added.</param>
-        <param name="currentIndex">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="message">The <see cref="T:System.ClientModel.Primitives.PipelineMessage" /> to process.</param>
+        <param name="pipeline">The collection of <see cref="T:System.ClientModel.Primitives.PipelinePolicy" />
+            instances in the <see cref="T:System.ClientModel.Primitives.ClientPipeline" /> instance whose
+            <see cref="M:System.ClientModel.Primitives.ClientPipeline.SendAsync(System.ClientModel.Primitives.PipelineMessage)" /> method was called to invoke
+            this method.</param>
+        <param name="currentIndex">The index of this policy in the
+            <paramref name="pipeline" /> policy list. This value should be passed to
+            <see cref="M:System.ClientModel.Primitives.PipelinePolicy.ProcessNextAsync(System.ClientModel.Primitives.PipelineMessage,System.Collections.Generic.IReadOnlyList{System.ClientModel.Primitives.PipelinePolicy},System.Int32)" />
+            to pass control to the next policy in the pipeline.</param>
+        <summary>
+            Process the provided <see cref="T:System.ClientModel.Primitives.PipelineMessage" /> according to the
+            intended purpose of this <see cref="T:System.ClientModel.Primitives.PipelinePolicy" />instance.
+            Derived types must pass control to the next
+            <see cref="T:System.ClientModel.Primitives.PipelinePolicy" /> in the pipeline by calling
+            <see cref="M:System.ClientModel.Primitives.PipelinePolicy.ProcessNextAsync(System.ClientModel.Primitives.PipelineMessage,System.Collections.Generic.IReadOnlyList{System.ClientModel.Primitives.PipelinePolicy},System.Int32)" />.
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -108,10 +141,18 @@
         <Parameter Name="currentIndex" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="message">To be added.</param>
-        <param name="pipeline">To be added.</param>
-        <param name="currentIndex">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="message">The <see cref="T:System.ClientModel.Primitives.PipelineMessage" /> to process.</param>
+        <param name="pipeline">The collection of <see cref="T:System.ClientModel.Primitives.PipelinePolicy" />
+            instances in the <see cref="T:System.ClientModel.Primitives.ClientPipeline" />.</param>
+        <param name="currentIndex">The index of this policy in the
+            <paramref name="pipeline" /> policy list. The derived-type implementation
+            of <see cref="M:System.ClientModel.Primitives.PipelinePolicy.Process(System.ClientModel.Primitives.PipelineMessage,System.Collections.Generic.IReadOnlyList{System.ClientModel.Primitives.PipelinePolicy},System.Int32)" />
+            should pass the value of <paramref name="currentIndex" /> it received
+            without modifying it.</param>
+        <summary>
+            Passes control to the next <see cref="T:System.ClientModel.Primitives.PipelinePolicy" /> in the
+            <see cref="T:System.ClientModel.Primitives.ClientPipeline" />.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -135,10 +176,18 @@
         <Parameter Name="currentIndex" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="message">To be added.</param>
-        <param name="pipeline">To be added.</param>
-        <param name="currentIndex">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="message">The <see cref="T:System.ClientModel.Primitives.PipelineMessage" /> to process.</param>
+        <param name="pipeline">The collection of <see cref="T:System.ClientModel.Primitives.PipelinePolicy" />
+            instances in the <see cref="T:System.ClientModel.Primitives.ClientPipeline" />.</param>
+        <param name="currentIndex">The index of this policy in the
+            <paramref name="pipeline" /> policy list. The derived-type implementation
+            of <see cref="M:System.ClientModel.Primitives.PipelinePolicy.ProcessAsync(System.ClientModel.Primitives.PipelineMessage,System.Collections.Generic.IReadOnlyList{System.ClientModel.Primitives.PipelinePolicy},System.Int32)" />
+            should pass the value of <paramref name="currentIndex" /> it received
+            without modifying it.</param>
+        <summary>
+            Passes control to the next <see cref="T:System.ClientModel.Primitives.PipelinePolicy" /> in the
+            <see cref="T:System.ClientModel.Primitives.ClientPipeline" />.
+            </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
