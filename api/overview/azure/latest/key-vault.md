@@ -8,7 +8,8 @@ ms.service: keyvault
 ---
 # Azure Key Vault libraries for .NET
 
-The Azure Key Vault libraries for .NET offer a convenient interface for making calls to Azure Key Vault. For more information about Azure Key Vault, see [Introduction to Azure Key Vault](https://docs.microsoft.com/azure/key-vault/general/overview).
+The Azure Key Vault libraries for .NET offer a convenient interface for making calls to Azure Key Vault. For more information about Azure Key Vault, see [Introduction to Azure Key Vault](https://learn.microsoft.com/azure/key-vault/general/overview).
+
 
 ## Libraries for data access
 
