@@ -10,7 +10,6 @@ ms.service: keyvault
 
 The Azure Key Vault libraries for .NET offer a convenient interface for making calls to Azure Key Vault. For more information about Azure Key Vault, see [Introduction to Azure Key Vault](https://learn.microsoft.com/azure/key-vault/general/overview).
 
-
 ## Libraries for data access
 
 The Key Vault libraries for .NET are part of the Azure SDK for .NET. The source code for the Key Vault libraries for .NET is available on [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/keyvault).
