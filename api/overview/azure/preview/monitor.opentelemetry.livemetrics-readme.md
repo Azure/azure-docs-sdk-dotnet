@@ -1,12 +1,12 @@
 ---
 title: Azure Monitor Live Metrics client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Monitor.OpenTelemetry.LiveMetrics, monitor
-ms.date: 02/09/2024
+ms.date: 03/11/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: monitor
 ---
-# Azure Monitor Live Metrics client library for .NET - version 1.0.0-beta.2 
+# Azure Monitor Live Metrics client library for .NET - version 1.0.0-beta.3 
 
 
 The [OpenTelemetry .NET](https://github.com/open-telemetry/opentelemetry-dotnet) compatible processor which sends [telemetry data](/azure/azure-monitor/app/data-model) to [Azure Monitor](/azure/azure-monitor/app/app-insights-overview) [Live Metrics](https://learn.microsoft.com/azure/azure-monitor/app/live-stream).
@@ -27,7 +27,7 @@ dotnet add package Azure.Monitor.OpenTelemetry.LiveMetrics --prerelease
 
 #### Nightly builds
 
-Nightly builds are available from this repo's [dev feed](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.OpenTelemetry.LiveMetrics_1.0.0-beta.2/CONTRIBUTING.md#nuget-package-dev-feed).
+Nightly builds are available from this repo's [dev feed](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.OpenTelemetry.LiveMetrics_1.0.0-beta.3/CONTRIBUTING.md#nuget-package-dev-feed).
 These are provided without support and are not intended for production workloads.
 
 ### Add the Live Metrics client
@@ -40,7 +40,7 @@ Sdk.CreateTracerProviderBuilder()
     .Build();
 ```
 
-For a complete example see [`Program.cs`](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.OpenTelemetry.LiveMetrics_1.0.0-beta.2/sdk/monitor/Azure.Monitor.OpenTelemetry.LiveMetrics/tests/Azure.Monitor.OpenTelemetry.LiveMetrics.Demo/Program.cs)
+For a complete example see [`Program.cs`](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.OpenTelemetry.LiveMetrics_1.0.0-beta.3/sdk/monitor/Azure.Monitor.OpenTelemetry.LiveMetrics/tests/Azure.Monitor.OpenTelemetry.LiveMetrics.Demo/Program.cs)
 
 ### Authenticate the client
 
@@ -52,7 +52,7 @@ Not available in beta.
 
 ## Examples
 
-Refer to [`Program.cs`](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.OpenTelemetry.LiveMetrics_1.0.0-beta.2/sdk/monitor/Azure.Monitor.OpenTelemetry.LiveMetrics/tests/Azure.Monitor.OpenTelemetry.LiveMetrics.Demo/Program.cs) for a complete demo.
+Refer to [`Program.cs`](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.OpenTelemetry.LiveMetrics_1.0.0-beta.3/sdk/monitor/Azure.Monitor.OpenTelemetry.LiveMetrics/tests/Azure.Monitor.OpenTelemetry.LiveMetrics.Demo/Program.cs) for a complete demo.
 
 ## Troubleshooting
 
@@ -66,7 +66,7 @@ For more information on Azure SDK, please refer to [this website](https://azure.
 
 ## Contributing
 
-See [CONTRIBUTING.md](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.OpenTelemetry.LiveMetrics_1.0.0-beta.2/CONTRIBUTING.md) for details on contribution process.
+See [CONTRIBUTING.md](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.OpenTelemetry.LiveMetrics_1.0.0-beta.3/CONTRIBUTING.md) for details on contribution process.
 
 ## Release Schedule
 
