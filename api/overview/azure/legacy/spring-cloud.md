@@ -1,7 +1,7 @@
 ---
 title: Azure Spring Cloud SDK for .NET
 description: Reference for Azure Spring Cloud SDK for .NET
-ms.date: 03/11/2024
+ms.date: 03/12/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: springcloud
