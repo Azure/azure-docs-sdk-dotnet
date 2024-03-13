@@ -1,7 +1,7 @@
 ---
 title: Azure Managed Network SDK for .NET
 description: Reference for Azure Managed Network SDK for .NET
-ms.date: 03/12/2024
+ms.date: 03/13/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: managednetwork
