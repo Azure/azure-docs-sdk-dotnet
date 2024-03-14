@@ -1,7 +1,7 @@
 ---
 title: Azure Container Service SDK for .NET
 description: Reference for Azure Container Service SDK for .NET
-ms.date: 03/13/2024
+ms.date: 03/14/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: containerservice
