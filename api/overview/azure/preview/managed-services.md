@@ -1,7 +1,7 @@
 ---
 title: Azure Managed Services SDK for .NET
 description: Reference for Azure Managed Services SDK for .NET
-ms.date: 03/15/2024
+ms.date: 03/18/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: managedservices
