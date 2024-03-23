@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager, resourcemanager
-ms.date: 01/12/2024
+ms.date: 03/23/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: resourcemanager
@@ -39,7 +39,7 @@ dotnet add package Azure.ResourceManager
   Some options are:
     - Through the [Azure CLI sign in](/cli/azure/authenticate-azure-cli).
     - Via [Visual Studio](/dotnet/api/overview/azure/identity-readme?view=azure-dotnet#authenticating-via-visual-studio).
-    - Setting [Environment Variables](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager_1.11.0-beta.1/sdk/resourcemanager/Azure.ResourceManager/docs/AuthUsingEnvironmentVariables.md).
+    - Setting [Environment Variables](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager_1.12.0-beta.1/sdk/resourcemanager/Azure.ResourceManager/docs/AuthUsingEnvironmentVariables.md).
 
     More information and different authentication approaches using Azure Identity can be found in [this document](/dotnet/api/overview/azure/identity-readme?view=azure-dotnet).
 
@@ -396,7 +396,7 @@ ResourceIdentifier id = new ResourceIdentifier("/subscriptions/{subscription_id}
 var createResult = await client.GetGenericResources().CreateOrUpdateAsync(WaitUntil.Completed, id, data);
 Console.WriteLine($"Resource {createResult.Value.Id.Name} in resource group {createResult.Value.Id.ResourceGroupName} updated");
 ```
-### Update GenericResourc Tags
+### Update GenericResource Tags
 ```C# Snippet:Update_GenericResourc_Tags
 ArmClient client = new ArmClient(new DefaultAzureCredential());
 ResourceIdentifier id = new ResourceIdentifier("/subscriptions/{subscription_id}/resourceGroups/{resourcegroup_name}/providers/Microsoft.Network/virtualNetworks/{vnet_name}");
@@ -438,7 +438,7 @@ var deleteResult = await resource.DeleteAsync(WaitUntil.Completed);
 Console.WriteLine($"Resource deletion response status code: {deleteResult.WaitForCompletionResponse().Status}");
 ```
 
-For more detailed examples, take a look at [samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.ResourceManager_1.11.0-beta.1/sdk/resourcemanager/Azure.ResourceManager/samples) we have available.
+For more detailed examples, take a look at [samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.ResourceManager_1.12.0-beta.1/sdk/resourcemanager/Azure.ResourceManager/samples) we have available.
 
 ## Azure Resource Manager Tests
 
@@ -465,13 +465,13 @@ To run test with code coverage and auto generate an html report with just a sing
 ## Next steps
 ### More sample code
 
-- [Managing Resource Groups](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager_1.11.0-beta.1/sdk/resourcemanager/Azure.ResourceManager/docs/Sample2_ManagingResourceGroups.md)
-- [Creating a Virtual Network](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager_1.11.0-beta.1/sdk/resourcemanager/Azure.ResourceManager/docs/Sample3_CreatingAVirtualNetwork.md)
+- [Managing Resource Groups](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager_1.12.0-beta.1/sdk/resourcemanager/Azure.ResourceManager/docs/Sample2_ManagingResourceGroups.md)
+- [Creating a Virtual Network](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager_1.12.0-beta.1/sdk/resourcemanager/Azure.ResourceManager/docs/Sample3_CreatingAVirtualNetwork.md)
 - [.NET Management Library Code Samples](/samples/browse/?branch=master&languages=csharp&term=managing%20using%20Azure%20.NET%20SDK)
 
 ### Other Documentation
 
-If you're migrating from the old SDK, check out this [Migration guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager_1.11.0-beta.1/sdk/resourcemanager/Azure.ResourceManager/docs/MigrationGuide.md).
+If you're migrating from the old SDK, check out this [Migration guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager_1.12.0-beta.1/sdk/resourcemanager/Azure.ResourceManager/docs/MigrationGuide.md).
 
 For more information about Microsoft Azure SDK, see [this website](https://azure.github.io/azure-sdk/).
 
@@ -496,7 +496,7 @@ more information, see the [Code of Conduct FAQ][coc_faq] or contact
 <opencode@microsoft.com> with any other questions or comments.
 
 <!-- LINKS -->
-[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager_1.11.0-beta.1/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
+[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager_1.12.0-beta.1/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 
