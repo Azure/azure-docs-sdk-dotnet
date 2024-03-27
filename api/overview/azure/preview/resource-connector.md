@@ -1,7 +1,7 @@
 ---
 title: Azure Resource Connector SDK for .NET
 description: Reference for Azure Resource Connector SDK for .NET
-ms.date: 03/18/2024
+ms.date: 03/27/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: resourceconnector
