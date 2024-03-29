@@ -1,6 +1,5 @@
 | Reference | Package | Source |
 |---|---|---|
-|[Azure.Communication.CallingServer](communication.callingserver-readme.md)|[Azure.Communication.CallingServer](https://www.nuget.org/packages/Azure.Communication.CallingServer)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/communication/Azure.Communication.CallingServer)|
 |[Communication Call Automation](communication.callautomation-readme.md)|[Azure.Communication.CallAutomation](https://www.nuget.org/packages/Azure.Communication.CallAutomation)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/communication/Azure.Communication.CallAutomation)|
 |[Communication Chat](communication.chat-readme.md)|[Azure.Communication.Chat](https://www.nuget.org/packages/Azure.Communication.Chat)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/communication/Azure.Communication.Chat)|
 |[Communication Common](communication.common-readme.md)|[Azure.Communication.Common](https://www.nuget.org/packages/Azure.Communication.Common)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/communication/Azure.Communication.Common)|
