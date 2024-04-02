@@ -1,7 +1,7 @@
 ---
 title: Azure Libraries SDK for .NET
 description: Reference for Azure Libraries SDK for .NET
-ms.date: 04/01/2024
+ms.date: 04/02/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: libraries
