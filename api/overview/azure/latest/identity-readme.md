@@ -1,17 +1,17 @@
 ---
 title: Azure Identity client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Identity, identity
-ms.date: 11/13/2023
+ms.date: 04/09/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: identity
 ---
-# Azure Identity client library for .NET - version 1.10.4 
+# Azure Identity client library for .NET - version 1.11.0 
 
 
-The Azure Identity library provides [Microsoft Entra ID](https://learn.microsoft.com/azure/active-directory/fundamentals/active-directory-whatis) ([formerly Azure Active Directory](https://learn.microsoft.com/azure/active-directory/fundamentals/new-name)) token authentication support across the Azure SDK. It provides a set of [`TokenCredential`](https://learn.microsoft.com/dotnet/api/azure.core.tokencredential?view=azure-dotnet) implementations which can be used to construct Azure SDK clients which support Microsoft Entra token authentication.
+The Azure Identity library provides [Microsoft Entra ID](https://learn.microsoft.com/entra/fundamentals/whatis) ([formerly Azure Active Directory](https://learn.microsoft.com/entra/fundamentals/new-name)) token authentication support across the Azure SDK. It provides a set of [`TokenCredential`](https://learn.microsoft.com/dotnet/api/azure.core.tokencredential?view=azure-dotnet) implementations which can be used to construct Azure SDK clients which support Microsoft Entra token authentication.
 
-  [Source code][source] | [Package (NuGet)][package] | [API reference documentation][identity_api_docs] | [Microsoft Entra ID documentation][aad_doc]
+  [Source code][source] | [Package (NuGet)][package] | [API reference documentation][identity_api_docs] | [Microsoft Entra ID documentation][entraid_doc]
 
 ## Getting started
 
@@ -161,15 +161,15 @@ var eventHubProducerClient = new EventHubProducerClient("myeventhub.eventhubs.wi
 
 ## Managed identity support
 
-[Managed identity authentication](https://learn.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview) is supported via either the `DefaultAzureCredential` or the `ManagedIdentityCredential` directly for the following Azure services:
+[Managed identity authentication](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview) is supported via either the `DefaultAzureCredential` or the `ManagedIdentityCredential` directly for the following Azure services:
 
 * [Azure App Service and Azure Functions](https://learn.microsoft.com/azure/app-service/overview-managed-identity?tabs=dotnet)
 * [Azure Arc](https://learn.microsoft.com/azure/azure-arc/servers/managed-identity-authentication)
 * [Azure Cloud Shell](https://learn.microsoft.com/azure/cloud-shell/msi-authorization)
 * [Azure Kubernetes Service](https://learn.microsoft.com/azure/aks/use-managed-identity)
 * [Azure Service Fabric](https://learn.microsoft.com/azure/service-fabric/concepts-managed-identity)
-* [Azure Virtual Machines](https://learn.microsoft.com/azure/active-directory/managed-identities-azure-resources/how-to-use-vm-token)
-* [Azure Virtual Machines Scale Sets](https://learn.microsoft.com/azure/active-directory/managed-identities-azure-resources/qs-configure-powershell-windows-vmss)
+* [Azure Virtual Machines](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/how-to-use-vm-token)
+* [Azure Virtual Machines Scale Sets](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/qs-configure-powershell-windows-vmss)
 
 ### Examples
 
@@ -216,18 +216,18 @@ Not all credentials require this configuration. Credentials which authenticate t
 |Credential | Usage | Reference
 |-|-|-
 |[`ClientAssertionCredential`][ref_ClientAssertionCredential]|Authenticates a service principal using a signed client assertion. |
-|[`ClientCertificateCredential`][ref_ClientCertificateCredential]|Authenticates a service principal using a certificate. | [Service principal authentication](https://learn.microsoft.com/azure/active-directory/develop/app-objects-and-service-principals)
-|[`ClientSecretCredential`][ref_ClientSecretCredential]|Authenticates a service principal using a secret. | [Service principal authentication](https://learn.microsoft.com/azure/active-directory/develop/app-objects-and-service-principals)
+|[`ClientCertificateCredential`][ref_ClientCertificateCredential]|Authenticates a service principal using a certificate. | [Service principal authentication](https://learn.microsoft.com/entra/identity-platform/app-objects-and-service-principals)
+|[`ClientSecretCredential`][ref_ClientSecretCredential]|Authenticates a service principal using a secret. | [Service principal authentication](https://learn.microsoft.com/entra/identity-platform/app-objects-and-service-principals)
 
 ### Authenticate users
 
 |Credential | Usage | Reference
 |-|-|-
-|[`AuthorizationCodeCredential`][ref_AuthorizationCodeCredential]|Authenticates a user with a previously obtained authorization code. | [OAuth2 authentication code](https://learn.microsoft.com/azure/active-directory/develop/v2-oauth2-auth-code-flow)
-|[`DeviceCodeCredential`][ref_DeviceCodeCredential]|Interactively authenticates a user on devices with limited UI. | [Device code authentication](https://learn.microsoft.com/azure/active-directory/develop/v2-oauth2-device-code)
-|[`InteractiveBrowserCredential`][ref_InteractiveBrowserCredential]|Interactively authenticates a user with the default system browser. | [OAuth2 authentication code](https://learn.microsoft.com/azure/active-directory/develop/v2-oauth2-auth-code-flow)
-|[`OnBehalfOfCredential`][ref_OnBehalfOfCredential]|Propagates the delegated user identity and permissions through the request chain. | [On-behalf-of authentication](https://learn.microsoft.com/azure/active-directory/develop/v2-oauth2-on-behalf-of-flow)
-|[`UsernamePasswordCredential`][ref_UsernamePasswordCredential]|Authenticates a user with a username and password. | [Username + password authentication](https://learn.microsoft.com/azure/active-directory/develop/v2-oauth-ropc)
+|[`AuthorizationCodeCredential`][ref_AuthorizationCodeCredential]|Authenticates a user with a previously obtained authorization code. | [OAuth2 authentication code](https://learn.microsoft.com/entra/identity-platform/v2-oauth2-auth-code-flow)
+|[`DeviceCodeCredential`][ref_DeviceCodeCredential]|Interactively authenticates a user on devices with limited UI. | [Device code authentication](https://learn.microsoft.com/entra/identity-platform/v2-oauth2-device-code)
+|[`InteractiveBrowserCredential`][ref_InteractiveBrowserCredential]|Interactively authenticates a user with the default system browser. | [OAuth2 authentication code](https://learn.microsoft.com/entra/identity-platform/v2-oauth2-auth-code-flow)
+|[`OnBehalfOfCredential`][ref_OnBehalfOfCredential]|Propagates the delegated user identity and permissions through the request chain. | [On-behalf-of authentication](https://learn.microsoft.com/entra/identity-platform/v2-oauth2-on-behalf-of-flow)
+|[`UsernamePasswordCredential`][ref_UsernamePasswordCredential]|Authenticates a user with a username and password. | [Username + password authentication](https://learn.microsoft.com/entra/identity-platform/v2-oauth-ropc)
 
 ### Authenticate via development tools
 
@@ -245,7 +245,7 @@ Not all credentials require this configuration. Credentials which authenticate t
 
 [`DefaultAzureCredential`][ref_DefaultAzureCredential] and [`EnvironmentCredential`][ref_EnvironmentCredential] can be configured with environment variables. Each type of authentication requires values for specific variables:
 
-#### Service principal with secret
+### Service principal with secret
 
 |Variable name|Value
 |-|-
@@ -253,7 +253,7 @@ Not all credentials require this configuration. Credentials which authenticate t
 |`AZURE_TENANT_ID`|ID of the application's Microsoft Entra tenant
 |`AZURE_CLIENT_SECRET`|one of the application's client secrets
 
-#### Service principal with certificate
+### Service principal with certificate
 
 |variable name|Value
 |-|-
@@ -263,7 +263,7 @@ Not all credentials require this configuration. Credentials which authenticate t
 |`AZURE_CLIENT_CERTIFICATE_PASSWORD`|(optional) the password protecting the certificate file (currently only supported for PFX (PKCS12) certificates)
 |`AZURE_CLIENT_SEND_CERTIFICATE_CHAIN`|(optional) send certificate chain in x5c header to support subject name / issuer based authentication
 
-#### Username and password
+### Username and password
 
 |Variable name|Value
 |-|-
@@ -271,6 +271,12 @@ Not all credentials require this configuration. Credentials which authenticate t
 |`AZURE_TENANT_ID`|ID of the application's Microsoft Entra tenant
 |`AZURE_USERNAME`|a username (usually an email address)
 |`AZURE_PASSWORD`|that user's password
+
+### Managed identity (`DefaultAzureCredential`)
+
+|Variable name|Value
+|-|-
+|`AZURE_CLIENT_ID`|The client ID for the user-assigned managed identity. If defined, used as the default value for `ManagedIdentityClientId` in `DefaultAzureCredentialOptions`
 
 Configuration is attempted in the above order. For example, if values for a
 client secret and certificate are both present, the client secret will be used.
@@ -288,15 +294,15 @@ Token caching is a feature provided by the Azure Identity library that allows ap
 * Improve resilience and performance.
 * Reduce the number of requests made to Microsoft Entra ID to obtain access tokens.
 
-The Azure Identity library offers both in-memory and persistent disk caching. For more details, see the [token caching documentation](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.10.4/sdk/identity/Azure.Identity/samples/TokenCache.md)
+The Azure Identity library offers both in-memory and persistent disk caching. For more details, see the [token caching documentation](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.11.0/sdk/identity/Azure.Identity/samples/TokenCache.md)
 
 # Brokered Authentication
 
-An authentication broker is an application that runs on a user’s machine and manages the authentication handshakes and token maintenance for connected accounts. Currently, only the Windows Web Account Manager (WAM) is supported. To enable support, use the `Azure.Identity.Broker` package. For details on authenticating using WAM, see the [broker package documentation](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.10.4/sdk/identity/Azure.Identity.Broker/README.md).
+An authentication broker is an application that runs on a user’s machine and manages the authentication handshakes and token maintenance for connected accounts. Currently, only the Windows Web Account Manager (WAM) is supported. To enable support, use the `Azure.Identity.Broker` package. For details on authenticating using WAM, see the [broker package documentation](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.11.0/sdk/identity/Azure.Identity.Broker/README.md).
 
 ## Troubleshooting
 
-See the [troubleshooting guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.10.4/sdk/identity/Azure.Identity/TROUBLESHOOTING.md) for details on how to diagnose various failure scenarios.
+See the [troubleshooting guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.11.0/sdk/identity/Azure.Identity/TROUBLESHOOTING.md) for details on how to diagnose various failure scenarios.
 
 ### Error handling
 
@@ -319,11 +325,11 @@ catch (AuthenticationFailedException e)
 }
 ```
 
-For more information on dealing with errors arising from failed requests to Microsoft Entra ID or managed identity endpoints, see the Microsoft Entra ID [documentation on authorization error codes][aad_err_doc].
+For more information on dealing with errors arising from failed requests to Microsoft Entra ID or managed identity endpoints, see the Microsoft Entra ID [documentation on authorization error codes][entraid_err_doc].
 
 ### Logging
 
-The Azure Identity library provides the same [logging capabilities](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.10.4/sdk/core/Azure.Core/samples/Diagnostics.md#logging) as the rest of the Azure SDK.
+The Azure Identity library provides the same [logging capabilities](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.11.0/sdk/core/Azure.Core/samples/Diagnostics.md#logging) as the rest of the Azure SDK.
 
 The simplest way to see the logs to help debug authentication issues is to enable the console logging.
 
@@ -369,10 +375,10 @@ This ensures that the recommendation of reusing credential instances is always s
 
 ### Additional concepts
 
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.10.4/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.10.4/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.10.4/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.10.4/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.11.0/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.11.0/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.11.0/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.11.0/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 
 ## Next steps
@@ -401,17 +407,17 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [azure_developer_cli]:https://aka.ms/azure-dev
 [azure_powerShell]: https://learn.microsoft.com/powershell/azure
 [azure_sub]: https://azure.microsoft.com/free/dotnet/
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.10.4/sdk/identity/Azure.Identity/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.11.0/sdk/identity/Azure.Identity/src
 [package]: https://www.nuget.org/packages/Azure.Identity
-[aad_doc]: https://learn.microsoft.com/azure/active-directory/
-[aad_err_doc]: https://learn.microsoft.com/azure/active-directory/develop/reference-aadsts-error-codes
+[entraid_doc]: https://learn.microsoft.com/entra/identity/
+[entraid_err_doc]: https://learn.microsoft.com/entra/identity-platform/reference-error-codes
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [code_of_conduct_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [nuget]: https://www.nuget.org/
-[secrets_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.10.4/sdk/keyvault/Azure.Security.KeyVault.Secrets
-[blobs_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.10.4/sdk/storage/Azure.Storage.Blobs
-[eventhubs_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.10.4/sdk/eventhub/Azure.Messaging.EventHubs
-[azure_core_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.10.4/sdk/core/Azure.Core
+[secrets_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.11.0/sdk/keyvault/Azure.Security.KeyVault.Secrets
+[blobs_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.11.0/sdk/storage/Azure.Storage.Blobs
+[eventhubs_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.11.0/sdk/eventhub/Azure.Messaging.EventHubs
+[azure_core_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.11.0/sdk/core/Azure.Core
 [identity_api_docs]: https://learn.microsoft.com/dotnet/api/azure.identity?view=azure-dotnet
 [vs_login_image]: https://raw.githubusercontent.com/Azure/azure-sdk-for-net/main/sdk/identity/Azure.Identity/images/VsLoginDialog.png
 [azure_cli_login_image]: https://raw.githubusercontent.com/Azure/azure-sdk-for-net/main/sdk/identity/Azure.Identity/images/AzureCliLogin.png
@@ -435,7 +441,7 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [ref_VisualStudioCredential]: https://learn.microsoft.com/dotnet/api/azure.identity.visualstudiocredential?view=azure-dotnet
 [ref_VisualStudioCodeCredential]: https://learn.microsoft.com/dotnet/api/azure.identity.visualstudiocodecredential?view=azure-dotnet
 [ref_WorkloadIdentityCredential]: https://learn.microsoft.com/dotnet/api/azure.identity.workloadidentitycredential?view=azure-dotnet
-[cae]: https://learn.microsoft.com/azure/active-directory/conditional-access/concept-continuous-access-evaluation
+[cae]: https://learn.microsoft.com/entra/identity/conditional-access/concept-continuous-access-evaluation
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fidentity%2FAzure.Identity%2FREADME.png)
 
