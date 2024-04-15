@@ -1,5 +1,6 @@
 | Reference | Package | Source |
 |---|---|---|
+|[Data Movement - Files Shares](storage.datamovement.files.shares-readme.md)|[Azure.Storage.DataMovement.Files.Shares](https://www.nuget.org/packages/Azure.Storage.DataMovement.Files.Shares)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/storage/Azure.Storage.DataMovement.Files.Shares)|
 |[Storage - Blobs](storage.blobs-readme.md)|[Azure.Storage.Blobs](https://www.nuget.org/packages/Azure.Storage.Blobs)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/storage/Azure.Storage.Blobs)|
 |[Storage - Blobs Batch](storage.blobs.batch-readme.md)|[Azure.Storage.Blobs.Batch](https://www.nuget.org/packages/Azure.Storage.Blobs.Batch)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/storage/Azure.Storage.Blobs.Batch)|
 |[Storage - Blobs ChangeFeed](storage.blobs.changefeed-readme.md)|[Azure.Storage.Blobs.ChangeFeed](https://www.nuget.org/packages/Azure.Storage.Blobs.ChangeFeed)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/storage/Azure.Storage.Blobs.ChangeFeed)|
@@ -10,7 +11,6 @@
 |[Storage - Queues](storage.queues-readme.md)|[Azure.Storage.Queues](https://www.nuget.org/packages/Azure.Storage.Queues)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/storage/Azure.Storage.Queues)|
 |Storage - Files Data Lake|[Microsoft.Azure.DataLake.Store](https://www.nuget.org/packages/Microsoft.Azure.DataLake.Store)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/)|
 |[Storage - Common](storage.common-readme.md)|[Azure.Storage.Common](https://www.nuget.org/packages/Azure.Storage.Common)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/storage/Azure.Storage.Common)|
-|[Provisioning - Storage](provisioning.storage-readme.md)|[Azure.Provisioning.Storage](https://www.nuget.org/packages/Azure.Provisioning.Storage)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/provisioning/Azure.Provisioning.Storage)|
 |[Resource Management - Storage](resourcemanager.storage-readme.md)|[Azure.ResourceManager.Storage](https://www.nuget.org/packages/Azure.ResourceManager.Storage)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/storage/Azure.ResourceManager.Storage)|
 |[Resource Management - Storage Cache](resourcemanager.storagecache-readme.md)|[Azure.ResourceManager.StorageCache](https://www.nuget.org/packages/Azure.ResourceManager.StorageCache)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/storagecache/Azure.ResourceManager.StorageCache)|
 |[Resource Management - Storage Mover](resourcemanager.storagemover-readme.md)|[Azure.ResourceManager.StorageMover](https://www.nuget.org/packages/Azure.ResourceManager.StorageMover)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/storagemover/Azure.ResourceManager.StorageMover)|
