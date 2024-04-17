@@ -83,6 +83,12 @@
         <AssemblyVersion>12.17.1.0</AssemblyVersion>
         <AssemblyVersion>12.18.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="azure-dotnet-preview">
+          <AttributeName Language="C#">[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]</AttributeName>
+          <AttributeName Language="F#">[&lt;System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)&gt;]</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>Azure.Core.Extensions.IAzureClientBuilder&lt;Azure.Storage.Files.Shares.ShareServiceClient,Azure.Storage.Files.Shares.ShareClientOptions&gt;</ReturnType>
       </ReturnValue>
@@ -102,7 +108,11 @@
         <param name="builder">To be added.</param>
         <param name="serviceUri">To be added.</param>
         <summary>
-            Registers a <see cref="T:Azure.Storage.Files.Shares.ShareServiceClient" /> instance with the provided <paramref name="serviceUri" /></summary>
+             Registers a <see cref="T:Azure.Storage.Files.Shares.ShareServiceClient" /> instance with the provided <paramref name="serviceUri" />.
+            
+             Note that use of this method is not recommended as it constructs a <see cref="T:Azure.Storage.Files.Shares.ShareServiceClient" /> without authentication details, ignoring the token
+             credential configured using the client factory builder's UseCredential method. Use <see cref="M:Microsoft.Extensions.Azure.ShareClientBuilderExtensions.AddFileServiceClientWithCredential``1(``0,System.Uri)" /> instead.
+             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -180,6 +190,49 @@
         <summary>
             Registers a <see cref="T:Azure.Storage.Files.Shares.ShareServiceClient" /> instance with connection options loaded from the provided <paramref name="configuration" /> instance.
             </summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AddFileServiceClientWithCredential&lt;TBuilder&gt;">
+      <MemberSignature Language="C#" Value="public static Azure.Core.Extensions.IAzureClientBuilder&lt;Azure.Storage.Files.Shares.ShareServiceClient,Azure.Storage.Files.Shares.ShareClientOptions&gt; AddFileServiceClientWithCredential&lt;TBuilder&gt; (this TBuilder builder, Uri serviceUri) where TBuilder : Azure.Core.Extensions.IAzureClientFactoryBuilderWithCredential;" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Azure.Core.Extensions.IAzureClientBuilder`2&lt;class Azure.Storage.Files.Shares.ShareServiceClient, class Azure.Storage.Files.Shares.ShareClientOptions&gt; AddFileServiceClientWithCredential&lt;(class Azure.Core.Extensions.IAzureClientFactoryBuilderWithCredential) TBuilder&gt;(!!TBuilder builder, class System.Uri serviceUri) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Extensions.Azure.ShareClientBuilderExtensions.AddFileServiceClientWithCredential``1(``0,System.Uri)" />
+      <MemberSignature Language="VB.NET" Value="&lt;Extension()&gt;&#xA;Public Function AddFileServiceClientWithCredential(Of TBuilder As IAzureClientFactoryBuilderWithCredential) (builder As TBuilder, serviceUri As Uri) As IAzureClientBuilder(Of ShareServiceClient, ShareClientOptions)" />
+      <MemberSignature Language="F#" Value="static member AddFileServiceClientWithCredential : 'Builder * Uri -&gt; Azure.Core.Extensions.IAzureClientBuilder&lt;Azure.Storage.Files.Shares.ShareServiceClient, Azure.Storage.Files.Shares.ShareClientOptions&gt; (requires 'Builder :&gt; Azure.Core.Extensions.IAzureClientFactoryBuilderWithCredential)" Usage="Microsoft.Extensions.Azure.ShareClientBuilderExtensions.AddFileServiceClientWithCredential (builder, serviceUri)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Storage.Files.Shares</AssemblyName>
+        <AssemblyVersion>12.18.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Core.Extensions.IAzureClientBuilder&lt;Azure.Storage.Files.Shares.ShareServiceClient,Azure.Storage.Files.Shares.ShareClientOptions&gt;</ReturnType>
+      </ReturnValue>
+      <TypeParameters>
+        <TypeParameter Name="TBuilder">
+          <Constraints>
+            <InterfaceName>Azure.Core.Extensions.IAzureClientFactoryBuilderWithCredential</InterfaceName>
+          </Constraints>
+        </TypeParameter>
+      </TypeParameters>
+      <Parameters>
+        <Parameter Name="builder" Type="TBuilder" Index="0" FrameworkAlternate="azure-dotnet-preview" RefType="this" />
+        <Parameter Name="serviceUri" Type="System.Uri" Index="1" FrameworkAlternate="azure-dotnet-preview" />
+      </Parameters>
+      <Docs>
+        <typeparam name="TBuilder">To be added.</typeparam>
+        <param name="builder">To be added.</param>
+        <param name="serviceUri">To be added.</param>
+        <summary>
+             Registers a <see cref="T:Azure.Storage.Files.Shares.ShareServiceClient" /> instance with the provided <paramref name="serviceUri" /> and the token credential
+             configured using the client factory builder's UseCredential method.
+            
+             Note that service-level operations do not support token credential authentication.
+             This extension exists to allow the construction of a <see cref="T:Azure.Storage.Files.Shares.ShareServiceClient" /> that can be used to derive
+             a <see cref="T:Azure.Storage.Files.Shares.ShareClient" /> that has token credential authentication.
+            
+             Also note that <see cref="P:Azure.Storage.Files.Shares.ShareClientOptions.ShareTokenIntent" /> is currently required for token authentication.
+             </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
