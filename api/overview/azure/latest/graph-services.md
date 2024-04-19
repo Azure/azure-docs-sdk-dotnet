@@ -1,7 +1,7 @@
 ---
 title: Azure Graph Services SDK for .NET
 description: Reference for Azure Graph Services SDK for .NET
-ms.date: 04/18/2024
+ms.date: 04/19/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: graphservices
