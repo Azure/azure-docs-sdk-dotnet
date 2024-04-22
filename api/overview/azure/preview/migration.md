@@ -1,7 +1,7 @@
 ---
 title: Azure Migration SDK for .NET
 description: Reference for Azure Migration SDK for .NET
-ms.date: 04/19/2024
+ms.date: 04/22/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: migration
