@@ -1,7 +1,7 @@
 ---
 title: Azure Nginx SDK for .NET
 description: Reference for Azure Nginx SDK for .NET
-ms.date: 04/23/2024
+ms.date: 04/24/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: nginx

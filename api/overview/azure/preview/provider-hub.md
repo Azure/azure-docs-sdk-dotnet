@@ -1,7 +1,7 @@
 ---
 title: Azure Provider Hub SDK for .NET
 description: Reference for Azure Provider Hub SDK for .NET
-ms.date: 04/23/2024
+ms.date: 04/24/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: providerhub
