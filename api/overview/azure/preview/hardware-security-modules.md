@@ -1,7 +1,7 @@
 ---
 title: Azure Hardware Security Modules SDK for .NET
 description: Reference for Azure Hardware Security Modules SDK for .NET
-ms.date: 04/24/2024
+ms.date: 04/25/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: hardwaresecuritymodules
