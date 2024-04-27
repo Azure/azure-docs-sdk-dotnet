@@ -1,12 +1,12 @@
 ---
 title: Azure Provisioning client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Provisioning, provisioning
-ms.date: 04/09/2024
+ms.date: 04/27/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: provisioning
 ---
-# Azure Provisioning client library for .NET - version 0.2.0-beta.2 
+# Azure Provisioning client library for .NET - version 0.2.0 
 
 
 Azure.Provisioning is a cloud development kit that allows you to declaritively specify your Azure infrastructure natively in dotnet.
@@ -18,7 +18,7 @@ Azure.Provisioning is a cloud development kit that allows you to declaritively s
 Install the client library for .NET with [NuGet](https://www.nuget.org/ ):
 
 ```dotnetcli
-dotnet add package Azure.Provisioning --prerelease
+dotnet add package Azure.Provisioning
 ```
 
 ### Prerequisites
@@ -84,7 +84,7 @@ more information, see the [Code of Conduct FAQ][coc_faq] or contact
 <opencode@microsoft.com> with any other questions or comments.
 
 <!-- LINKS -->
-[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Provisioning_0.2.0-beta.2/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
+[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Provisioning_0.2.0/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 
