@@ -1,7 +1,7 @@
 ---
 title: Azure Hybrid Connectivity SDK for .NET
 description: Reference for Azure Hybrid Connectivity SDK for .NET
-ms.date: 04/26/2024
+ms.date: 04/29/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: hybridconnectivity
