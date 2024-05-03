@@ -1,7 +1,7 @@
 ---
 title: Azure Resource Graph SDK for .NET
 description: Reference for Azure Resource Graph SDK for .NET
-ms.date: 05/01/2024
+ms.date: 05/03/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: resourcegraph
