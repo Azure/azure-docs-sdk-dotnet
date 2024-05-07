@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager, resourcemanager
-ms.date: 04/23/2024
+ms.date: 05/07/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: resourcemanager
@@ -39,7 +39,7 @@ dotnet add package Azure.ResourceManager
   Some options are:
     - Through the [Azure CLI sign in](/cli/azure/authenticate-azure-cli).
     - Via [Visual Studio](/dotnet/api/overview/azure/identity-readme?view=azure-dotnet#authenticating-via-visual-studio).
-    - Setting [Environment Variables](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager_1.11.1/sdk/resourcemanager/Azure.ResourceManager/docs/AuthUsingEnvironmentVariables.md).
+    - Setting [Environment Variables](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager_1.12.0/sdk/resourcemanager/Azure.ResourceManager/docs/AuthUsingEnvironmentVariables.md).
 
     More information and different authentication approaches using Azure Identity can be found in [this document](/dotnet/api/overview/azure/identity-readme?view=azure-dotnet).
 
@@ -54,7 +54,6 @@ using System;
 using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Identity;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Compute;
 using Azure.ResourceManager.Resources;
 ```
@@ -438,7 +437,25 @@ var deleteResult = await resource.DeleteAsync(WaitUntil.Completed);
 Console.WriteLine($"Resource deletion response status code: {deleteResult.WaitForCompletionResponse().Status}");
 ```
 
-For more detailed examples, take a look at [samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.ResourceManager_1.11.1/sdk/resourcemanager/Azure.ResourceManager/samples) we have available.
+### Rehydrate a long-running operation
+```C# Snippet:Readme_LRORehydration
+ArmClient client = new ArmClient(new DefaultAzureCredential());
+SubscriptionResource subscription = await client.GetDefaultSubscriptionAsync();
+ResourceGroupCollection resourceGroups = subscription.GetResourceGroups();
+var orgData = new ResourceGroupData(AzureLocation.WestUS2);
+// We initialize a long-running operation
+var rgOp = await resourceGroups.CreateOrUpdateAsync(WaitUntil.Started, "orgName", orgData);
+// We get the rehydration token from the operation
+var rgOpRehydrationToken = rgOp.GetRehydrationToken();
+// We rehydrate the long-running operation with the rehydration token, we can also do this asynchronously
+var rehydratedOrgOperation = ArmOperation.Rehydrate<ResourceGroupResource>(client, rgOpRehydrationToken!.Value);
+var rehydratedOrgOperationAsync = await ArmOperation.RehydrateAsync<ResourceGroupResource>(client, rgOpRehydrationToken!.Value);
+// Now we can operate with the rehydrated operation
+var rawResponse = rehydratedOrgOperation.GetRawResponse();
+await rehydratedOrgOperation.WaitForCompletionAsync();
+```
+
+For more detailed examples, take a look at [samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.ResourceManager_1.12.0/sdk/resourcemanager/Azure.ResourceManager/samples) we have available.
 
 ## Azure Resource Manager Tests
 
@@ -465,13 +482,13 @@ To run test with code coverage and auto generate an html report with just a sing
 ## Next steps
 ### More sample code
 
-- [Managing Resource Groups](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager_1.11.1/sdk/resourcemanager/Azure.ResourceManager/docs/Sample2_ManagingResourceGroups.md)
-- [Creating a Virtual Network](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager_1.11.1/sdk/resourcemanager/Azure.ResourceManager/docs/Sample3_CreatingAVirtualNetwork.md)
+- [Managing Resource Groups](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager_1.12.0/sdk/resourcemanager/Azure.ResourceManager/docs/Sample2_ManagingResourceGroups.md)
+- [Creating a Virtual Network](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager_1.12.0/sdk/resourcemanager/Azure.ResourceManager/docs/Sample3_CreatingAVirtualNetwork.md)
 - [.NET Management Library Code Samples](/samples/browse/?branch=master&languages=csharp&term=managing%20using%20Azure%20.NET%20SDK)
 
 ### Other Documentation
 
-If you're migrating from the old SDK, check out this [Migration guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager_1.11.1/sdk/resourcemanager/Azure.ResourceManager/docs/MigrationGuide.md).
+If you're migrating from the old SDK, check out this [Migration guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager_1.12.0/sdk/resourcemanager/Azure.ResourceManager/docs/MigrationGuide.md).
 
 For more information about Microsoft Azure SDK, see [this website](https://azure.github.io/azure-sdk/).
 
@@ -496,7 +513,7 @@ more information, see the [Code of Conduct FAQ][coc_faq] or contact
 <opencode@microsoft.com> with any other questions or comments.
 
 <!-- LINKS -->
-[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager_1.11.1/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
+[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager_1.12.0/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 
