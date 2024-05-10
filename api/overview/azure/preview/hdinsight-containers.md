@@ -1,7 +1,7 @@
 ---
 title: Azure HDInsight Containers SDK for .NET
 description: Reference for Azure HDInsight Containers SDK for .NET
-ms.date: 05/09/2024
+ms.date: 05/10/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: hdinsightcontainers
