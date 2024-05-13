@@ -1,7 +1,7 @@
 ---
 title: Azure Key Vault SDK for .NET
 description: Reference for Azure Key Vault SDK for .NET
-ms.date: 05/10/2024
+ms.date: 05/13/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: keyvault
