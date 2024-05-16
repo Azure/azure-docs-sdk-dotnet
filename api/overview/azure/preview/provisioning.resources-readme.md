@@ -1,12 +1,12 @@
 ---
 title: Azure Provisioning client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Provisioning.Resources, provisioning
-ms.date: 04/27/2024
+ms.date: 05/16/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: provisioning
 ---
-# Azure Provisioning client library for .NET - version 0.1.0 
+# Azure Provisioning client library for .NET - version 0.2.0 
 
 
 Azure.Provisioning.Resources simplifies declarative resource provisioning in .NET for Azure Resources.
@@ -40,6 +40,9 @@ First create your Infrastructure class.
 ```C# Snippet:SampleInfrastructure
 public class SampleInfrastructure : Infrastructure
 {
+    public SampleInfrastructure() : base(envName: "Sample", tenantId: Guid.Empty, subscriptionId: Guid.Empty, configuration: new Configuration { UseInteractiveMode = true })
+    {
+    }
 }
 ```
 
@@ -52,7 +55,7 @@ var infrastructure = new SampleInfrastructure();
 // Add a new key vault
 var keyVault = infrastructure.AddKeyVault();
 
-// You can call Build to convert the infrastructure into bicep files
+// You can call Build to convert the infrastructure into bicep files.
 infrastructure.Build();
 ```
 
@@ -84,7 +87,7 @@ more information, see the [Code of Conduct FAQ][coc_faq] or contact
 <opencode@microsoft.com> with any other questions or comments.
 
 <!-- LINKS -->
-[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Provisioning.Resources_0.1.0/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
+[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Provisioning.Resources_0.2.0/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 
