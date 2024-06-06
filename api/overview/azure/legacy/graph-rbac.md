@@ -1,7 +1,7 @@
 ---
 title: Azure Graph RBAC SDK for .NET
 description: Reference for Azure Graph RBAC SDK for .NET
-ms.date: 06/05/2024
+ms.date: 06/06/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: graphrbac
