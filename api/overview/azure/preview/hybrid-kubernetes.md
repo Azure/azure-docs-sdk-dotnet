@@ -1,7 +1,7 @@
 ---
 title: Azure Hybrid Kubernetes SDK for .NET
 description: Reference for Azure Hybrid Kubernetes SDK for .NET
-ms.date: 06/10/2024
+ms.date: 06/11/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: hybridkubernetes
