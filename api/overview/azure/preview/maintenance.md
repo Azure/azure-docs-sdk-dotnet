@@ -1,7 +1,7 @@
 ---
 title: Azure Maintenance SDK for .NET
 description: Reference for Azure Maintenance SDK for .NET
-ms.date: 06/14/2024
+ms.date: 06/17/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: maintenance
