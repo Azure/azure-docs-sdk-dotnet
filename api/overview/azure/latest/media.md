@@ -1,7 +1,7 @@
 ---
 title: Azure Media SDK for .NET
 description: Reference for Azure Media SDK for .NET
-ms.date: 06/17/2024
+ms.date: 06/18/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: media
