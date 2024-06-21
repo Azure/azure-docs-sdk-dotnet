@@ -1,7 +1,7 @@
 ---
 title: Azure Network Analytics SDK for .NET
 description: Reference for Azure Network Analytics SDK for .NET
-ms.date: 06/20/2024
+ms.date: 06/21/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: networkanalytics
