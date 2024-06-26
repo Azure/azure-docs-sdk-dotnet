@@ -1,12 +1,12 @@
 ---
 title: Azure Communication Messages client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Communication.Messages, communication
-ms.date: 10/10/2023
+ms.date: 06/26/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: communication
 ---
-# Azure Communication Messages client library for .NET - version 1.0.0-beta.1 
+# Azure Communication Messages client library for .NET - version 1.1.0-alpha.20240626.1 
 
 
 This package contains a C# SDK for Azure Communication Messages Services.
@@ -20,7 +20,7 @@ This package contains a C# SDK for Azure Communication Messages Services.
 Install the Azure Communication Messages client library for .NET with [NuGet][nuget]:
 
 ```dotnetcli
-dotnet add package Azure.Communication.Messages --prerelease
+dotnet add package Azure.Communication.Messages
 ``` 
 
 ### Prerequisites
@@ -48,14 +48,14 @@ MessageTemplateClient messageTemplateClient = new MessageTemplateClient(connecti
 
 ## Examples
 ### Send an Notification Message
-To send a notification message, call the `SendMessage` or `SendMessageAsync` function from the `NotificationMessagesClient`.
+To send a notification message, call the `Send` or `SendAsync` function from the `NotificationMessagesClient`.
 
 #### Send a text message
 ```C#
 // Create the recipient list, currently only one recipient is supported 
 var recipient = new List<string> { "<to-phone-number>" };
-var options = new SendMessageOptions("<channel-registration-id>", recipient, "Come on everyone, let's go for lunch together.");
-SendMessageResult result = await notificationMessagesClient.SendMessageAsync(options);
+var textContent = new = new TextNotificationContent(new Guid("<channel-registration-id>"), recipient, "Come on everyone, let's go for lunch together.");
+SendMessageResult result = await notificationMessagesClient.SendAsync(textContent);
 Console.WriteLine($"Message id: {result.Receipts[0].MessageId}");
 ```
 
@@ -66,8 +66,8 @@ var recipient = new List<string> { "<to-phone-number>" };
 string templateName = "sample_template";
 string templateLanguage = "en_us";
 var messageTemplate = new MessageTemplate(templateName, templateLanguage);
-var sendTemplateMessageOptions = new SendMessageOptions(channelRegistrationId, recipientList, messageTemplate);
-SendMessageResult result = await notificationMessagesClient.SendMessageAsync(sendTemplateMessageOptions);
+var templateContent = new TemplateNotificationContent(channelRegistrationId, recipientList, messageTemplate);
+SendMessageResult result = await notificationMessagesClient.SendAsync(templateContent);
 Console.WriteLine($"Message id: {result.Receipts[0].MessageId}");
 ```
 
@@ -76,8 +76,8 @@ Console.WriteLine($"Message id: {result.Receipts[0].MessageId}");
 // Create the recipient list, currently only one recipient is supported 
 var recipient = new List<string> { "<to-phone-number>" };
 var uri = new Uri("https://aka.ms/acsicon1");
-var sendMediaMessageOptions = new SendMessageOptions(channelRegistrationId, recipientList, uri);
-SendMessageResult result = await notificationMessagesClient.SendMessageAsync(sendMediaMessageOptions);
+var mediaContent = new MediaNotificationContent(channelRegistrationId, recipientList, uri);
+SendMessageResult result = await notificationMessagesClient.SendAsync(mediaContent);
 Console.WriteLine($"Message id: {result.Receipts[0].MessageId}");
 ```
 
@@ -106,5 +106,19 @@ This project welcomes contributions and suggestions. Most contributions require 
 
 This project has adopted the [Microsoft Open Source Code of Conduct][coc]. For more information see the [Code of Conduct FAQ][coc_faq] or contact [opencode@microsoft.com][coc_contact] with any additional questions or comments.
 
-
+<!-- LINKS -->
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/communication/Azure.Communication.Messages/src
+[package]: https://www.nuget.org/packages/Azure.Communication.Messages
+[product_docs]: /azure/communication-services/overview
+[nuget]: https://www.nuget.org
+[azure_sub]: https://azure.microsoft.com/free/dotnet/
+[communication_resource_docs]: /azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp
+[communication_resource_create_portal]:  /azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp
+[communication_resource_create_power_shell]: /powershell/module/az.communication/new-azcommunicationservice
+[communication_resource_create_net]: /azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-net
+[azure_portal]: https://portal.azure.com
+[cla]: https://cla.microsoft.com
+[coc]: https://opensource.microsoft.com/codeofconduct
+[coc_faq]: https://opensource.microsoft.com/codeofconduct/faq
+[coc_contact]: mailto:opencode@microsoft.com
 
