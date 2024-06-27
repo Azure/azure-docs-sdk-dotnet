@@ -1,12 +1,12 @@
 ---
 title: Azure Provisioning client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Provisioning.EventHubs, provisioning
-ms.date: 05/16/2024
+ms.date: 06/27/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: provisioning
 ---
-# Azure Provisioning client library for .NET - version 0.2.0-beta.1 
+# Azure Provisioning client library for .NET - version 0.2.0-alpha.20240626.1 
 
 
 Azure.Provisioning.EventHubs simplifies declarative resource provisioning in .NET for Azure Event Hubs.
@@ -87,7 +87,7 @@ more information, see the [Code of Conduct FAQ][coc_faq] or contact
 <opencode@microsoft.com> with any other questions or comments.
 
 <!-- LINKS -->
-[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Provisioning.EventHubs_0.2.0-beta.1/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
+[cg]: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 
