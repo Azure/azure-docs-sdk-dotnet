@@ -20,11 +20,11 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public StorageResourceReadStreamResult (System.IO.Stream content, string contentRange, string acceptRanges, byte[] rangeContentHash, Azure.Storage.DataMovement.StorageResourceProperties properties);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.IO.Stream content, string contentRange, string acceptRanges, unsigned int8[] rangeContentHash, class Azure.Storage.DataMovement.StorageResourceProperties properties) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Storage.DataMovement.StorageResourceReadStreamResult.#ctor(System.IO.Stream,System.String,System.String,System.Byte[],Azure.Storage.DataMovement.StorageResourceProperties)" />
-      <MemberSignature Language="VB.NET" Value="Public Sub New (content As Stream, contentRange As String, acceptRanges As String, rangeContentHash As Byte(), properties As StorageResourceProperties)" />
-      <MemberSignature Language="F#" Value="new Azure.Storage.DataMovement.StorageResourceReadStreamResult : System.IO.Stream * string * string * byte[] * Azure.Storage.DataMovement.StorageResourceProperties -&gt; Azure.Storage.DataMovement.StorageResourceReadStreamResult" Usage="new Azure.Storage.DataMovement.StorageResourceReadStreamResult (content, contentRange, acceptRanges, rangeContentHash, properties)" />
+      <MemberSignature Language="C#" Value="public StorageResourceReadStreamResult (System.IO.Stream content, Azure.HttpRange range, Azure.Storage.DataMovement.StorageResourceItemProperties properties);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.IO.Stream content, valuetype Azure.HttpRange range, class Azure.Storage.DataMovement.StorageResourceItemProperties properties) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Storage.DataMovement.StorageResourceReadStreamResult.#ctor(System.IO.Stream,Azure.HttpRange,Azure.Storage.DataMovement.StorageResourceItemProperties)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (content As Stream, range As HttpRange, properties As StorageResourceItemProperties)" />
+      <MemberSignature Language="F#" Value="new Azure.Storage.DataMovement.StorageResourceReadStreamResult : System.IO.Stream * Azure.HttpRange * Azure.Storage.DataMovement.StorageResourceItemProperties -&gt; Azure.Storage.DataMovement.StorageResourceReadStreamResult" Usage="new Azure.Storage.DataMovement.StorageResourceReadStreamResult (content, range, properties)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Storage.DataMovement</AssemblyName>
@@ -32,40 +32,15 @@
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="content" Type="System.IO.Stream" />
-        <Parameter Name="contentRange" Type="System.String" />
-        <Parameter Name="acceptRanges" Type="System.String" />
-        <Parameter Name="rangeContentHash" Type="System.Byte[]" />
-        <Parameter Name="properties" Type="Azure.Storage.DataMovement.StorageResourceProperties" />
+        <Parameter Name="range" Type="Azure.HttpRange" />
+        <Parameter Name="properties" Type="Azure.Storage.DataMovement.StorageResourceItemProperties" />
       </Parameters>
       <Docs>
         <param name="content" />
-        <param name="contentRange" />
-        <param name="acceptRanges" />
-        <param name="rangeContentHash" />
+        <param name="range" />
         <param name="properties" />
         <summary>
-            Constructor for ReadStreamStorageResourceInfo
-            </summary>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="AcceptRanges">
-      <MemberSignature Language="C#" Value="public readonly string AcceptRanges;" />
-      <MemberSignature Language="ILAsm" Value=".field public initonly string AcceptRanges" />
-      <MemberSignature Language="DocId" Value="F:Azure.Storage.DataMovement.StorageResourceReadStreamResult.AcceptRanges" />
-      <MemberSignature Language="VB.NET" Value="Public ReadOnly AcceptRanges As String " />
-      <MemberSignature Language="F#" Value="val mutable AcceptRanges : string" Usage="Azure.Storage.DataMovement.StorageResourceReadStreamResult.AcceptRanges" />
-      <MemberType>Field</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Azure.Storage.DataMovement</AssemblyName>
-        <AssemblyVersion>12.0.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.String</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>
-            Indicates that the service supports requests for partial storage resource content.
+            Constructor for StorageResourceReadStreamResult
             </summary>
         <remarks>To be added.</remarks>
       </Docs>
@@ -86,55 +61,70 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Content
+            Content.
             </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="ContentRange">
-      <MemberSignature Language="C#" Value="public readonly string ContentRange;" />
-      <MemberSignature Language="ILAsm" Value=".field public initonly string ContentRange" />
-      <MemberSignature Language="DocId" Value="F:Azure.Storage.DataMovement.StorageResourceReadStreamResult.ContentRange" />
-      <MemberSignature Language="VB.NET" Value="Public ReadOnly ContentRange As String " />
-      <MemberSignature Language="F#" Value="val mutable ContentRange : string" Usage="Azure.Storage.DataMovement.StorageResourceReadStreamResult.ContentRange" />
+    <Member MemberName="ContentLength">
+      <MemberSignature Language="C#" Value="public readonly long? ContentLength;" />
+      <MemberSignature Language="ILAsm" Value=".field public initonly valuetype System.Nullable`1&lt;int64&gt; ContentLength" />
+      <MemberSignature Language="DocId" Value="F:Azure.Storage.DataMovement.StorageResourceReadStreamResult.ContentLength" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly ContentLength As Nullable(Of Long) " />
+      <MemberSignature Language="F#" Value="val mutable ContentLength : Nullable&lt;int64&gt;" Usage="Azure.Storage.DataMovement.StorageResourceReadStreamResult.ContentLength" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Storage.DataMovement</AssemblyName>
         <AssemblyVersion>12.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>System.String</ReturnType>
+        <ReturnType>System.Nullable&lt;System.Int64&gt;</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-             Indicates the range of bytes returned if the client requested a subset of the storage resource by setting the Range request header.
-            
-             The format of the Content-Range is expected to comeback in the following format.
-             [unit] [start]-[end]/[fileSize]
-             (e.g. bytes 1024-3071/10240)
-            
-             The [end] value will be the inclusive last byte (e.g. header "bytes 0-7/8" is the entire 8-byte storage resource).
-             </summary>
+            Length of the content.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="RangeContentHash">
-      <MemberSignature Language="C#" Value="public readonly byte[] RangeContentHash;" />
-      <MemberSignature Language="ILAsm" Value=".field public initonly unsigned int8[] RangeContentHash" />
-      <MemberSignature Language="DocId" Value="F:Azure.Storage.DataMovement.StorageResourceReadStreamResult.RangeContentHash" />
-      <MemberSignature Language="VB.NET" Value="Public ReadOnly RangeContentHash As Byte() " />
-      <MemberSignature Language="F#" Value="val mutable RangeContentHash : byte[]" Usage="Azure.Storage.DataMovement.StorageResourceReadStreamResult.RangeContentHash" />
+    <Member MemberName="ETag">
+      <MemberSignature Language="C#" Value="public readonly Azure.ETag? ETag;" />
+      <MemberSignature Language="ILAsm" Value=".field public initonly valuetype System.Nullable`1&lt;valuetype Azure.ETag&gt; ETag" />
+      <MemberSignature Language="DocId" Value="F:Azure.Storage.DataMovement.StorageResourceReadStreamResult.ETag" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly ETag As Nullable(Of ETag) " />
+      <MemberSignature Language="F#" Value="val mutable ETag : Nullable&lt;Azure.ETag&gt;" Usage="Azure.Storage.DataMovement.StorageResourceReadStreamResult.ETag" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Storage.DataMovement</AssemblyName>
         <AssemblyVersion>12.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>System.Byte[]</ReturnType>
+        <ReturnType>System.Nullable&lt;Azure.ETag&gt;</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            If the storage resource has a MD5 hash, and if request contains range header (Range or x-ms-range), this response header is returned with the value of the whole storage resource's MD5 value. This value may or may not be equal to the value returned in Content-MD5 header, with the latter calculated from the requested range.
+            The ETag of the result.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ResourceLength">
+      <MemberSignature Language="C#" Value="public readonly long? ResourceLength;" />
+      <MemberSignature Language="ILAsm" Value=".field public initonly valuetype System.Nullable`1&lt;int64&gt; ResourceLength" />
+      <MemberSignature Language="DocId" Value="F:Azure.Storage.DataMovement.StorageResourceReadStreamResult.ResourceLength" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly ResourceLength As Nullable(Of Long) " />
+      <MemberSignature Language="F#" Value="val mutable ResourceLength : Nullable&lt;int64&gt;" Usage="Azure.Storage.DataMovement.StorageResourceReadStreamResult.ResourceLength" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Storage.DataMovement</AssemblyName>
+        <AssemblyVersion>12.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;System.Int64&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Length of the resource.
             </summary>
         <remarks>To be added.</remarks>
       </Docs>

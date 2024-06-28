@@ -7716,7 +7716,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 Entity client = new DataMapClient(endpoint, credential).GetEntityClient();
 
-BusinessMetadataOptions businessMetadataOptions = new BusinessMetadataOptions(BinaryData.FromObjectAsJson(new object()));
+BusinessMetadataOptions businessMetadataOptions = new BusinessMetadataOptions(null);
 Response<BulkImportResult> response = client.ImportBusinessMetadata(businessMetadataOptions);
 ]]></code>
 This sample shows how to call ImportBusinessMetadata with all parameters.
@@ -7725,81 +7725,8 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 Entity client = new DataMapClient(endpoint, credential).GetEntityClient();
 
-BusinessMetadataOptions businessMetadataOptions = new BusinessMetadataOptions(BinaryData.FromObjectAsJson(new object()));
+BusinessMetadataOptions businessMetadataOptions = new BusinessMetadataOptions(null);
 Response<BulkImportResult> response = client.ImportBusinessMetadata(businessMetadataOptions);
-]]></code></example>
-      </Docs>
-    </Member>
-    <Member MemberName="ImportBusinessMetadata">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response ImportBusinessMetadata (Azure.Core.RequestContent content, Azure.RequestContext context = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response ImportBusinessMetadata(class Azure.Core.RequestContent content, class Azure.RequestContext context) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Analytics.Purview.DataMap.Entity.ImportBusinessMetadata(Azure.Core.RequestContent,Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function ImportBusinessMetadata (content As RequestContent, Optional context As RequestContext = Nothing) As Response" />
-      <MemberSignature Language="F#" Value="abstract member ImportBusinessMetadata : Azure.Core.RequestContent * Azure.RequestContext -&gt; Azure.Response&#xA;override this.ImportBusinessMetadata : Azure.Core.RequestContent * Azure.RequestContext -&gt; Azure.Response" Usage="entity.ImportBusinessMetadata (content, context)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Azure.Analytics.Purview.DataMap</AssemblyName>
-        <AssemblyVersion>1.0.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>Azure.Response</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="content" Type="Azure.Core.RequestContent" />
-        <Parameter Name="context" Type="Azure.RequestContext" />
-      </Parameters>
-      <Docs>
-        <param name="content"> The content to send as the body of the request. </param>
-        <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary>
-            [Protocol Method] Upload the file for creating Business Metadata in BULK
-            <list type="bullet"><item><description>
-            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-            </description></item><item><description>
-            Please try the simpler <see cref="M:Azure.Analytics.Purview.DataMap.Entity.ImportBusinessMetadata(Azure.Analytics.Purview.DataMap.BusinessMetadataOptions,System.Threading.CancellationToken)" /> convenience overload with strongly typed models first.
-            </description></item></list></summary>
-        <returns> The response returned from the service. </returns>
-        <remarks>To be added.</remarks>
-        <exception cref="T:System.ArgumentNullException">
-          <paramref name="content" /> is null. </exception>
-        <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
-        <example>
-This sample shows how to call ImportBusinessMetadata and parse the result.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-TokenCredential credential = new DefaultAzureCredential();
-Entity client = new DataMapClient(endpoint, credential).GetEntityClient();
-
-using RequestContent content = RequestContent.Create(new
-{
-    file = new object(),
-});
-Response response = client.ImportBusinessMetadata(content);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
-]]></code>
-This sample shows how to call ImportBusinessMetadata with all request content and parse the result.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-TokenCredential credential = new DefaultAzureCredential();
-Entity client = new DataMapClient(endpoint, credential).GetEntityClient();
-
-using RequestContent content = RequestContent.Create(new
-{
-    file = new object(),
-});
-Response response = client.ImportBusinessMetadata(content);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("failedImportInfoList")[0].GetProperty("childObjectName").ToString());
-Console.WriteLine(result.GetProperty("failedImportInfoList")[0].GetProperty("importStatus").ToString());
-Console.WriteLine(result.GetProperty("failedImportInfoList")[0].GetProperty("parentObjectName").ToString());
-Console.WriteLine(result.GetProperty("failedImportInfoList")[0].GetProperty("remarks").ToString());
-Console.WriteLine(result.GetProperty("successImportInfoList")[0].GetProperty("childObjectName").ToString());
-Console.WriteLine(result.GetProperty("successImportInfoList")[0].GetProperty("importStatus").ToString());
-Console.WriteLine(result.GetProperty("successImportInfoList")[0].GetProperty("parentObjectName").ToString());
-Console.WriteLine(result.GetProperty("successImportInfoList")[0].GetProperty("remarks").ToString());
 ]]></code></example>
       </Docs>
     </Member>
@@ -7829,6 +7756,81 @@ Console.WriteLine(result.GetProperty("successImportInfoList")[0].GetProperty("re
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="file" /> is null. </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="ImportBusinessMetadata">
+      <MemberSignature Language="C#" Value="public virtual Azure.Response ImportBusinessMetadata (Azure.Core.RequestContent content, string contentType, Azure.RequestContext context = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response ImportBusinessMetadata(class Azure.Core.RequestContent content, string contentType, class Azure.RequestContext context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Analytics.Purview.DataMap.Entity.ImportBusinessMetadata(Azure.Core.RequestContent,System.String,Azure.RequestContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function ImportBusinessMetadata (content As RequestContent, contentType As String, Optional context As RequestContext = Nothing) As Response" />
+      <MemberSignature Language="F#" Value="abstract member ImportBusinessMetadata : Azure.Core.RequestContent * string * Azure.RequestContext -&gt; Azure.Response&#xA;override this.ImportBusinessMetadata : Azure.Core.RequestContent * string * Azure.RequestContext -&gt; Azure.Response" Usage="entity.ImportBusinessMetadata (content, contentType, context)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Analytics.Purview.DataMap</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Response</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="content" Type="Azure.Core.RequestContent" />
+        <Parameter Name="contentType" Type="System.String" />
+        <Parameter Name="context" Type="Azure.RequestContext" />
+      </Parameters>
+      <Docs>
+        <param name="content"> The content to send as the body of the request. </param>
+        <param name="contentType"> The content type for the operation. Always multipart/form-data for this operation. Allowed values: "multipart/form-data". </param>
+        <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        <summary>
+            [Protocol Method] Upload the file for creating Business Metadata in BULK
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item><item><description>
+            Please try the simpler <see cref="M:Azure.Analytics.Purview.DataMap.Entity.ImportBusinessMetadata(Azure.Analytics.Purview.DataMap.BusinessMetadataOptions,System.Threading.CancellationToken)" /> convenience overload with strongly typed models first.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="content" /> is null. </exception>
+        <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
+        <example>
+This sample shows how to call ImportBusinessMetadata and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+Entity client = new DataMapClient(endpoint, credential).GetEntityClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    file = File.OpenRead("<filePath>"),
+});
+Response response = client.ImportBusinessMetadata(content, "multipart/form-data");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call ImportBusinessMetadata with all parameters and request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+Entity client = new DataMapClient(endpoint, credential).GetEntityClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    file = File.OpenRead("<filePath>"),
+});
+Response response = client.ImportBusinessMetadata(content, "multipart/form-data");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("failedImportInfoList")[0].GetProperty("childObjectName").ToString());
+Console.WriteLine(result.GetProperty("failedImportInfoList")[0].GetProperty("importStatus").ToString());
+Console.WriteLine(result.GetProperty("failedImportInfoList")[0].GetProperty("parentObjectName").ToString());
+Console.WriteLine(result.GetProperty("failedImportInfoList")[0].GetProperty("remarks").ToString());
+Console.WriteLine(result.GetProperty("successImportInfoList")[0].GetProperty("childObjectName").ToString());
+Console.WriteLine(result.GetProperty("successImportInfoList")[0].GetProperty("importStatus").ToString());
+Console.WriteLine(result.GetProperty("successImportInfoList")[0].GetProperty("parentObjectName").ToString());
+Console.WriteLine(result.GetProperty("successImportInfoList")[0].GetProperty("remarks").ToString());
+]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="ImportBusinessMetadataAsync">
@@ -7864,7 +7866,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 Entity client = new DataMapClient(endpoint, credential).GetEntityClient();
 
-BusinessMetadataOptions businessMetadataOptions = new BusinessMetadataOptions(BinaryData.FromObjectAsJson(new object()));
+BusinessMetadataOptions businessMetadataOptions = new BusinessMetadataOptions(null);
 Response<BulkImportResult> response = await client.ImportBusinessMetadataAsync(businessMetadataOptions);
 ]]></code>
 This sample shows how to call ImportBusinessMetadataAsync with all parameters.
@@ -7873,17 +7875,17 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 Entity client = new DataMapClient(endpoint, credential).GetEntityClient();
 
-BusinessMetadataOptions businessMetadataOptions = new BusinessMetadataOptions(BinaryData.FromObjectAsJson(new object()));
+BusinessMetadataOptions businessMetadataOptions = new BusinessMetadataOptions(null);
 Response<BulkImportResult> response = await client.ImportBusinessMetadataAsync(businessMetadataOptions);
 ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="ImportBusinessMetadataAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; ImportBusinessMetadataAsync (Azure.Core.RequestContent content, Azure.RequestContext context = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; ImportBusinessMetadataAsync(class Azure.Core.RequestContent content, class Azure.RequestContext context) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Analytics.Purview.DataMap.Entity.ImportBusinessMetadataAsync(Azure.Core.RequestContent,Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function ImportBusinessMetadataAsync (content As RequestContent, Optional context As RequestContext = Nothing) As Task(Of Response)" />
-      <MemberSignature Language="F#" Value="abstract member ImportBusinessMetadataAsync : Azure.Core.RequestContent * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.ImportBusinessMetadataAsync : Azure.Core.RequestContent * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="entity.ImportBusinessMetadataAsync (content, context)" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; ImportBusinessMetadataAsync (Azure.Core.RequestContent content, string contentType, Azure.RequestContext context = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; ImportBusinessMetadataAsync(class Azure.Core.RequestContent content, string contentType, class Azure.RequestContext context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Analytics.Purview.DataMap.Entity.ImportBusinessMetadataAsync(Azure.Core.RequestContent,System.String,Azure.RequestContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function ImportBusinessMetadataAsync (content As RequestContent, contentType As String, Optional context As RequestContext = Nothing) As Task(Of Response)" />
+      <MemberSignature Language="F#" Value="abstract member ImportBusinessMetadataAsync : Azure.Core.RequestContent * string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.ImportBusinessMetadataAsync : Azure.Core.RequestContent * string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="entity.ImportBusinessMetadataAsync (content, contentType, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Analytics.Purview.DataMap</AssemblyName>
@@ -7894,10 +7896,12 @@ Response<BulkImportResult> response = await client.ImportBusinessMetadataAsync(b
       </ReturnValue>
       <Parameters>
         <Parameter Name="content" Type="Azure.Core.RequestContent" />
+        <Parameter Name="contentType" Type="System.String" />
         <Parameter Name="context" Type="Azure.RequestContext" />
       </Parameters>
       <Docs>
         <param name="content"> The content to send as the body of the request. </param>
+        <param name="contentType"> The content type for the operation. Always multipart/form-data for this operation. Allowed values: "multipart/form-data". </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         <summary>
             [Protocol Method] Upload the file for creating Business Metadata in BULK
@@ -7920,14 +7924,14 @@ Entity client = new DataMapClient(endpoint, credential).GetEntityClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    file = new object(),
+    file = File.OpenRead("<filePath>"),
 });
-Response response = await client.ImportBusinessMetadataAsync(content);
+Response response = await client.ImportBusinessMetadataAsync(content, "multipart/form-data");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
-This sample shows how to call ImportBusinessMetadataAsync with all request content and parse the result.
+This sample shows how to call ImportBusinessMetadataAsync with all parameters and request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
@@ -7935,9 +7939,9 @@ Entity client = new DataMapClient(endpoint, credential).GetEntityClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    file = new object(),
+    file = File.OpenRead("<filePath>"),
 });
-Response response = await client.ImportBusinessMetadataAsync(content);
+Response response = await client.ImportBusinessMetadataAsync(content, "multipart/form-data");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("failedImportInfoList")[0].GetProperty("childObjectName").ToString());
