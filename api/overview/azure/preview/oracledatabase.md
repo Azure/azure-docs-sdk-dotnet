@@ -1,7 +1,7 @@
 ---
 title: Azure Oracledatabase SDK for .NET
 description: Reference for Azure Oracledatabase SDK for .NET
-ms.date: 07/02/2024
+ms.date: 07/03/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: oracledatabase
