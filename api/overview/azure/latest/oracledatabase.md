@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: oracledatabase
 ---
-# Azure Oracledatabase SDK for .NET - preview
-## Packages - preview
+# Azure Oracledatabase SDK for .NET - latest
+## Packages - latest
 [!INCLUDE [packages](oracledatabase-index.md)]
