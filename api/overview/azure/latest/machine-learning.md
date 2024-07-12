@@ -1,7 +1,7 @@
 ---
 title: Azure Machine Learning SDK for .NET
 description: Reference for Azure Machine Learning SDK for .NET
-ms.date: 07/11/2024
+ms.date: 07/12/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: machinelearning
