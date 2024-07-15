@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: authenticationevents
 ---
-# Azure AuthenticationEvents SDK for .NET - preview
-## Packages - preview
+# Azure AuthenticationEvents SDK for .NET - latest
+## Packages - latest
 [!INCLUDE [packages](authenticationevents-index.md)]
