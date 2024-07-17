@@ -1,12 +1,12 @@
 ---
 title: Azure Cognitive Services Health Insights RadiologyInsights client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Health.Insights.RadiologyInsights, healthinsights
-ms.date: 03/06/2024
+ms.date: 07/17/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: healthinsights
 ---
-# Azure Cognitive Services Health Insights RadiologyInsights client library for .NET - version 1.0.0-beta.1 
+# Azure Cognitive Services Health Insights RadiologyInsights client library for .NET - version 1.0.0-alpha.20240717.1 
 
 
 [Health Insights][health_insights] is an Azure Applied AI Service built with the Azure Cognitive Services Framework, that leverages multiple Cognitive Services, Healthcare API services and other Azure resources.
@@ -16,7 +16,7 @@ Use the client library for to:
 
 * [Get secret](/azure)
 
-[Source code](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Health.Insights.RadiologyInsights_1.0.0-beta.1/sdk/healthinsights/Azure.Health.Insights.RadiologyInsights/src) | [Package (NuGet)](https://www.nuget.org/packages) | [API reference documentation](https://azure.github.io/azure-sdk-for-net) | [Product documentation](https://learn.microsoft.com/azure/azure-health-insights/radiology-insights/)
+[Source code](https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/healthinsights/Azure.Health.Insights.RadiologyInsights/src) | [Package (NuGet)](https://www.nuget.org/packages) | [API reference documentation](https://azure.github.io/azure-sdk-for-net) | [Product documentation](https://learn.microsoft.com/azure/azure-health-insights/radiology-insights/)
 
 ## Getting started
 
@@ -105,6 +105,10 @@ When you submit a pull request, a CLA-bot will automatically determine whether y
 This project has adopted the [Microsoft Open Source Code of Conduct][code_of_conduct]. For more information see the [Code of Conduct FAQ][coc_faq] or contact [opencode@microsoft.com][coc_contact] with any additional questions or comments.
 
 <!-- LINKS -->
+[azure_sub]: https://azure.microsoft.com/free/dotnet/
+[nuget]: https://www.nuget.org
+[azure_portal]: https://portal.azure.com
+[azure_cli]: /cli/azure
 [health_insights]: https://learn.microsoft.com/azure/azure-health-insights/overview?branch=main
 [style-guide-msft]: /style-guide/capitalization
 [style-guide-cloud]: https://aka.ms/azsdk/cloud-style-guide
@@ -112,8 +116,8 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [cla]: https://cla.microsoft.com
-[logging]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Health.Insights.RadiologyInsights_1.0.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md
+[logging]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/core/Azure.Core/samples/Diagnostics.md
 [coc_contact]: mailto:opencode@microsoft.com
 [here]: https://learn.microsoft.com/azure/azure-health-insights/radiology-insights/inferences
-[sample_folder]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Health.Insights.RadiologyInsights_1.0.0-beta.1/sdk/healthinsights/Azure.Health.Insights.RadiologyInsights/samples
+[sample_folder]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/healthinsights/Azure.Health.Insights.RadiologyInsights/samples
 
