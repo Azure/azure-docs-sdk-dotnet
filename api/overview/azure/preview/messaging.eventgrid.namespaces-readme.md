@@ -1,12 +1,12 @@
 ---
 title: Azure Event Grid client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Messaging.EventGrid.Namespaces, eventgrid
-ms.date: 04/11/2024
+ms.date: 07/17/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: eventgrid
 ---
-# Azure Event Grid client library for .NET - version 1.0.0-beta.1 
+# Azure Event Grid client library for .NET - version 1.1.0-alpha.20240717.1 
 
 
 Azure Event Grid allows you to easily build applications with event-based architectures. The Event Grid service fully manages all routing of events from any source, to any destination, for any application. Azure service events and custom events can be published directly to the service, where the events can then be filtered and sent to various recipients, such as built-in handlers or custom webhooks. To learn more about Azure Event Grid: [What is Event Grid?](/azure/event-grid/overview)
@@ -15,9 +15,7 @@ Use the client library for Azure Event Grid to:
 - Publish events to Event Grid topics using the Cloud Event schema
 - Consume and settle events
 
-[Source code][source_root] | [Package (NuGet)][package] | [API reference documentation][reference_docs] | [Product documentation][azconfig_docs] | [Samples][source_samples]
-
-  [Source code](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid.Namespaces_1.0.0-beta.1/sdk/eventgrid/Azure.Messaging.EventGrid.Namespaces/src) | [Package (NuGet)](https://www.nuget.org/packages) | [API reference documentation](https://azure.github.io/azure-sdk-for-net) | [Product documentation](/azure)
+  [Source code](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/eventgrid/Azure.Messaging.EventGrid.Namespaces/src) | [Package (NuGet)](https://www.nuget.org/packages) | [API reference documentation](https://learn.microsoft.com/dotnet/api/overview/azure/messaging.eventgrid-readme?view=azure-dotnet) | [Product documentation](https://learn.microsoft.com/azure/event-grid/pull-delivery-overview) | [Samples](https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/eventgrid/Azure.Messaging.EventGrid.Namespaces/samples)
 
 ## Getting started
 
@@ -26,7 +24,7 @@ Use the client library for Azure Event Grid to:
 Install the client library for .NET with [NuGet](https://www.nuget.org/ ):
 
 ```dotnetcli
-dotnet add package Azure.Messaging.EventGrid.Namespaces --prerelease
+dotnet add package Azure.Messaging.EventGrid.Namespaces
 ```
 
 ### Prerequisites
@@ -53,18 +51,18 @@ az eventgrid topic key list --name <your-resource-name> --resource-group <your-r
 Once you have your access key and topic endpoint, you can create the publisher client as follows:
 ```C# Snippet:CreateNamespaceClient
 // Construct the client using an Endpoint for a namespace as well as the shared access key
-var client = new EventGridClient(new Uri(namespaceTopicHost), new AzureKeyCredential(namespaceKey));
+var senderClient = new EventGridSenderClient(new Uri(namespaceTopicHost), topicName, new AzureKeyCredential(namespaceKey));
 ```
 
 #### Authenticate using an Entra ID
 
-Azure Event Grid provides integration with Entra ID for identity-based authentication of requests. With Entra ID, you can use role-based access control (RBAC) to grant access to your Azure Event Grid resources to users, groups, or applications. The [Azure Identity library](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Messaging.EventGrid.Namespaces_1.0.0-beta.1/sdk/identity/Azure.Identity/README.md) provides easy Azure Active Directory support for authentication.
+Azure Event Grid provides integration with Entra ID for identity-based authentication of requests. With Entra ID, you can use role-based access control (RBAC) to grant access to your Azure Event Grid resources to users, groups, or applications. The [Azure Identity library](https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/identity/Azure.Identity/README.md) provides easy Azure Active Directory support for authentication.
 
 To send events to a topic or domain using Azure Active Directory, the authenticated identity should have the "EventGrid Data Sender" role assigned.
 
 ```C# Snippet:CreateNamespaceClientAAD
-// Construct the client using an Endpoint for a namespace as well as the DefaultAzureCredential
-var client = new EventGridClient(new Uri(namespaceTopicHost), new DefaultAzureCredential());
+// Construct the sender client using an Endpoint for a namespace as well as the DefaultAzureCredential
+var senderClient = new EventGridSenderClient(new Uri(namespaceTopicHost), topicName, new DefaultAzureCredential());
 ```
 
 ## Key concepts
@@ -75,18 +73,18 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid.Namespaces_1.0.0-beta.1/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid.Namespaces_1.0.0-beta.1/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid.Namespaces_1.0.0-beta.1/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid.Namespaces_1.0.0-beta.1/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid.Namespaces_1.0.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid.Namespaces_1.0.0-beta.1/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
 ## Examples
 
-You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Messaging.EventGrid.Namespaces_1.0.0-beta.1/sdk/eventgrid/Azure.Messaging.EventGrid.Namespaces/samples).
+You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/eventgrid/Azure.Messaging.EventGrid.Namespaces/samples).
 
 ## Troubleshooting
 
@@ -98,7 +96,7 @@ If the package or a related package supports it, include tips for logging or ena
 
 ## Next steps
 
-View more https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid.Namespaces_1.0.0-beta.1/sdk/eventgrid/Azure.Messaging.EventGrid.Namespaces/samples here for common usages of the Event Grid client library: [Event Grid Samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventGrid.Namespaces_1.0.0-beta.1/sdk/eventgrid/Azure.Messaging.EventGrid.Namespaces/samples).
+View more https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/eventgrid/Azure.Messaging.EventGrid.Namespaces/samples here for common usages of the Event Grid client library: [Event Grid Samples](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/eventgrid/Azure.Messaging.EventGrid.Namespaces/samples).
 
 ## Contributing
 
