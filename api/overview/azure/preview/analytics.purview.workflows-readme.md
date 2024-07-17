@@ -1,12 +1,12 @@
 ---
 title: Azure Purview Workflow client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Analytics.Purview.Workflows, purview
-ms.date: 11/16/2023
+ms.date: 07/17/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: purview
 ---
-# Azure Purview Workflow client library for .NET - version 1.0.0-beta.2 
+# Azure Purview Workflow client library for .NET - version 1.0.0-alpha.20240717.1 
 
 
 Workflows are automated, repeatable business processes that users can create within Microsoft Purview to validate and orchestrate CUD (create, update, delete) operations on their data entities. Enabling these processes allow organizations to track changes, enforce policy compliance, and ensure quality data across their data landscape.
@@ -115,7 +115,7 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [product_documentation]: https://learn.microsoft.com/azure/purview/concept-workflow
 [azure_subscription]: https://azure.microsoft.com/free/dotnet/
 [purview_resource]: /azure/purview/create-catalog-portal
-[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Analytics.Purview.Workflows_1.0.0-beta.2/sdk/identity/Azure.Identity/README.md
+[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/identity/Azure.Identity/README.md
 [app_registration]: https://learn.microsoft.com/azure/active-directory/develop/quickstart-register-app
 [username_password_credential]: https://learn.microsoft.com/dotnet/api/azure.identity.usernamepasswordcredential?view=azure-dotnet
 [protocol_client_quickstart]: https://aka.ms/azsdk/net/protocol/quickstart
@@ -123,5 +123,5 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [coc_contact]: mailto:opencode@microsoft.com
-[contributing]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Analytics.Purview.Workflows_1.0.0-beta.2/CONTRIBUTING.md
+[contributing]: https://github.com/Azure/azure-sdk-for-net/blob/main/CONTRIBUTING.md
 
