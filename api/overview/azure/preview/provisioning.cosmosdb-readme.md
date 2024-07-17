@@ -1,12 +1,12 @@
 ---
 title: Azure Provisioning client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Provisioning.CosmosDB, provisioning
-ms.date: 05/16/2024
+ms.date: 07/17/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: provisioning
 ---
-# Azure Provisioning client library for .NET - version 0.2.0-beta.1 
+# Azure Provisioning client library for .NET - version 0.2.0-alpha.20240716.1 
 
 
 Azure.Provisioning.CosmosDB simplifies declarative resource provisioning in .NET for Azure CosmosDB.
@@ -29,7 +29,7 @@ dotnet add package Azure.Provisioning.CosmosDB
 
 ## Key concepts
 
-This library allows you to specify your infrastructure in a declarative style using dotnet.  You can then use azd to deploy your infrastructure to Azure diretly without needing to write or maintain bicep or arm templates.
+This library allows you to specify your infrastructure in a declarative style using dotnet.  You can then use azd to deploy your infrastructure to Azure directly without needing to write or maintain bicep or arm templates.
 
 ## Examples
 
@@ -87,7 +87,7 @@ more information, see the [Code of Conduct FAQ][coc_faq] or contact
 <opencode@microsoft.com> with any other questions or comments.
 
 <!-- LINKS -->
-[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Provisioning.CosmosDB_0.2.0-beta.1/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
+[cg]: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 
