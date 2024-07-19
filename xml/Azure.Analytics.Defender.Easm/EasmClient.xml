@@ -312,11 +312,11 @@ Response<TaskResource> response = await client.CancelTaskAsync("<taskId>");
       </Docs>
     </Member>
     <Member MemberName="CreateOrReplaceDataConnection">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Analytics.Defender.Easm.DataConnection&gt; CreateOrReplaceDataConnection (string dataConnectionName, Azure.Analytics.Defender.Easm.DataConnectionPayload dataConnectionPayload, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Analytics.Defender.Easm.DataConnection&gt; CreateOrReplaceDataConnection(string dataConnectionName, class Azure.Analytics.Defender.Easm.DataConnectionPayload dataConnectionPayload, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Analytics.Defender.Easm.DataConnection&gt; CreateOrReplaceDataConnection (string dataConnectionName, Azure.Analytics.Defender.Easm.DataConnectionPayload body, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Analytics.Defender.Easm.DataConnection&gt; CreateOrReplaceDataConnection(string dataConnectionName, class Azure.Analytics.Defender.Easm.DataConnectionPayload body, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Analytics.Defender.Easm.EasmClient.CreateOrReplaceDataConnection(System.String,Azure.Analytics.Defender.Easm.DataConnectionPayload,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateOrReplaceDataConnection (dataConnectionName As String, dataConnectionPayload As DataConnectionPayload, Optional cancellationToken As CancellationToken = Nothing) As Response(Of DataConnection)" />
-      <MemberSignature Language="F#" Value="abstract member CreateOrReplaceDataConnection : string * Azure.Analytics.Defender.Easm.DataConnectionPayload * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Analytics.Defender.Easm.DataConnection&gt;&#xA;override this.CreateOrReplaceDataConnection : string * Azure.Analytics.Defender.Easm.DataConnectionPayload * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Analytics.Defender.Easm.DataConnection&gt;" Usage="easmClient.CreateOrReplaceDataConnection (dataConnectionName, dataConnectionPayload, cancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateOrReplaceDataConnection (dataConnectionName As String, body As DataConnectionPayload, Optional cancellationToken As CancellationToken = Nothing) As Response(Of DataConnection)" />
+      <MemberSignature Language="F#" Value="abstract member CreateOrReplaceDataConnection : string * Azure.Analytics.Defender.Easm.DataConnectionPayload * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Analytics.Defender.Easm.DataConnection&gt;&#xA;override this.CreateOrReplaceDataConnection : string * Azure.Analytics.Defender.Easm.DataConnectionPayload * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Analytics.Defender.Easm.DataConnection&gt;" Usage="easmClient.CreateOrReplaceDataConnection (dataConnectionName, body, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Analytics.Defender.Easm</AssemblyName>
@@ -327,18 +327,18 @@ Response<TaskResource> response = await client.CancelTaskAsync("<taskId>");
       </ReturnValue>
       <Parameters>
         <Parameter Name="dataConnectionName" Type="System.String" />
-        <Parameter Name="dataConnectionPayload" Type="Azure.Analytics.Defender.Easm.DataConnectionPayload" />
+        <Parameter Name="body" Type="Azure.Analytics.Defender.Easm.DataConnectionPayload" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
         <param name="dataConnectionName"> The caller provided unique name for the resource. </param>
-        <param name="dataConnectionPayload"> The <see cref="T:Azure.Analytics.Defender.Easm.DataConnectionPayload" /> to use. </param>
+        <param name="body"> Body parameter. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary> Create or replace a data connection with a given dataConnectionName. </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="dataConnectionName" /> or <paramref name="dataConnectionPayload" /> is null. </exception>
+          <paramref name="dataConnectionName" /> or <paramref name="body" /> is null. </exception>
         <exception cref="T:System.ArgumentException">
           <paramref name="dataConnectionName" /> is an empty string, and was expected to be non-empty. </exception>
         <example>
@@ -348,8 +348,8 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 EasmClient client = new EasmClient(endpoint, credential);
 
-DataConnectionPayload dataConnectionPayload = new LogAnalyticsDataConnectionPayload(new LogAnalyticsDataConnectionProperties());
-Response<DataConnection> response = client.CreateOrReplaceDataConnection("<dataConnectionName>", dataConnectionPayload);
+DataConnectionPayload body = new LogAnalyticsDataConnectionPayload(new LogAnalyticsDataConnectionProperties());
+Response<DataConnection> response = client.CreateOrReplaceDataConnection("<dataConnectionName>", body);
 ]]></code>
 This sample shows how to call CreateOrReplaceDataConnection with all parameters.
 <code><![CDATA[
@@ -357,7 +357,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 EasmClient client = new EasmClient(endpoint, credential);
 
-DataConnectionPayload dataConnectionPayload = new LogAnalyticsDataConnectionPayload(new LogAnalyticsDataConnectionProperties
+DataConnectionPayload body = new LogAnalyticsDataConnectionPayload(new LogAnalyticsDataConnectionProperties
 {
     ApiKey = "<apiKey>",
     WorkspaceId = "<workspaceId>",
@@ -368,7 +368,7 @@ DataConnectionPayload dataConnectionPayload = new LogAnalyticsDataConnectionPayl
     Frequency = DataConnectionFrequency.Daily,
     FrequencyOffset = 1234,
 };
-Response<DataConnection> response = client.CreateOrReplaceDataConnection("<dataConnectionName>", dataConnectionPayload);
+Response<DataConnection> response = client.CreateOrReplaceDataConnection("<dataConnectionName>", body);
 ]]></code></example>
       </Docs>
     </Member>
@@ -418,8 +418,8 @@ EasmClient client = new EasmClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
-    properties = new object(),
     kind = "logAnalytics",
+    properties = new object(),
 });
 Response response = client.CreateOrReplaceDataConnection("<dataConnectionName>", content);
 
@@ -435,12 +435,12 @@ EasmClient client = new EasmClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
+    kind = "logAnalytics",
     properties = new
     {
         apiKey = "<apiKey>",
         workspaceId = "<workspaceId>",
     },
-    kind = "logAnalytics",
     name = "<name>",
     content = "assets",
     frequency = "daily",
@@ -465,11 +465,11 @@ Console.WriteLine(result.GetProperty("inactiveMessage").ToString());
       </Docs>
     </Member>
     <Member MemberName="CreateOrReplaceDataConnectionAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.DataConnection&gt;&gt; CreateOrReplaceDataConnectionAsync (string dataConnectionName, Azure.Analytics.Defender.Easm.DataConnectionPayload dataConnectionPayload, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Analytics.Defender.Easm.DataConnection&gt;&gt; CreateOrReplaceDataConnectionAsync(string dataConnectionName, class Azure.Analytics.Defender.Easm.DataConnectionPayload dataConnectionPayload, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.DataConnection&gt;&gt; CreateOrReplaceDataConnectionAsync (string dataConnectionName, Azure.Analytics.Defender.Easm.DataConnectionPayload body, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Analytics.Defender.Easm.DataConnection&gt;&gt; CreateOrReplaceDataConnectionAsync(string dataConnectionName, class Azure.Analytics.Defender.Easm.DataConnectionPayload body, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Analytics.Defender.Easm.EasmClient.CreateOrReplaceDataConnectionAsync(System.String,Azure.Analytics.Defender.Easm.DataConnectionPayload,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateOrReplaceDataConnectionAsync (dataConnectionName As String, dataConnectionPayload As DataConnectionPayload, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of DataConnection))" />
-      <MemberSignature Language="F#" Value="abstract member CreateOrReplaceDataConnectionAsync : string * Azure.Analytics.Defender.Easm.DataConnectionPayload * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.DataConnection&gt;&gt;&#xA;override this.CreateOrReplaceDataConnectionAsync : string * Azure.Analytics.Defender.Easm.DataConnectionPayload * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.DataConnection&gt;&gt;" Usage="easmClient.CreateOrReplaceDataConnectionAsync (dataConnectionName, dataConnectionPayload, cancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateOrReplaceDataConnectionAsync (dataConnectionName As String, body As DataConnectionPayload, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of DataConnection))" />
+      <MemberSignature Language="F#" Value="abstract member CreateOrReplaceDataConnectionAsync : string * Azure.Analytics.Defender.Easm.DataConnectionPayload * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.DataConnection&gt;&gt;&#xA;override this.CreateOrReplaceDataConnectionAsync : string * Azure.Analytics.Defender.Easm.DataConnectionPayload * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.DataConnection&gt;&gt;" Usage="easmClient.CreateOrReplaceDataConnectionAsync (dataConnectionName, body, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Analytics.Defender.Easm</AssemblyName>
@@ -480,18 +480,18 @@ Console.WriteLine(result.GetProperty("inactiveMessage").ToString());
       </ReturnValue>
       <Parameters>
         <Parameter Name="dataConnectionName" Type="System.String" />
-        <Parameter Name="dataConnectionPayload" Type="Azure.Analytics.Defender.Easm.DataConnectionPayload" />
+        <Parameter Name="body" Type="Azure.Analytics.Defender.Easm.DataConnectionPayload" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
         <param name="dataConnectionName"> The caller provided unique name for the resource. </param>
-        <param name="dataConnectionPayload"> The <see cref="T:Azure.Analytics.Defender.Easm.DataConnectionPayload" /> to use. </param>
+        <param name="body"> Body parameter. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary> Create or replace a data connection with a given dataConnectionName. </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="dataConnectionName" /> or <paramref name="dataConnectionPayload" /> is null. </exception>
+          <paramref name="dataConnectionName" /> or <paramref name="body" /> is null. </exception>
         <exception cref="T:System.ArgumentException">
           <paramref name="dataConnectionName" /> is an empty string, and was expected to be non-empty. </exception>
         <example>
@@ -501,8 +501,8 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 EasmClient client = new EasmClient(endpoint, credential);
 
-DataConnectionPayload dataConnectionPayload = new LogAnalyticsDataConnectionPayload(new LogAnalyticsDataConnectionProperties());
-Response<DataConnection> response = await client.CreateOrReplaceDataConnectionAsync("<dataConnectionName>", dataConnectionPayload);
+DataConnectionPayload body = new LogAnalyticsDataConnectionPayload(new LogAnalyticsDataConnectionProperties());
+Response<DataConnection> response = await client.CreateOrReplaceDataConnectionAsync("<dataConnectionName>", body);
 ]]></code>
 This sample shows how to call CreateOrReplaceDataConnectionAsync with all parameters.
 <code><![CDATA[
@@ -510,7 +510,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 EasmClient client = new EasmClient(endpoint, credential);
 
-DataConnectionPayload dataConnectionPayload = new LogAnalyticsDataConnectionPayload(new LogAnalyticsDataConnectionProperties
+DataConnectionPayload body = new LogAnalyticsDataConnectionPayload(new LogAnalyticsDataConnectionProperties
 {
     ApiKey = "<apiKey>",
     WorkspaceId = "<workspaceId>",
@@ -521,7 +521,7 @@ DataConnectionPayload dataConnectionPayload = new LogAnalyticsDataConnectionPayl
     Frequency = DataConnectionFrequency.Daily,
     FrequencyOffset = 1234,
 };
-Response<DataConnection> response = await client.CreateOrReplaceDataConnectionAsync("<dataConnectionName>", dataConnectionPayload);
+Response<DataConnection> response = await client.CreateOrReplaceDataConnectionAsync("<dataConnectionName>", body);
 ]]></code></example>
       </Docs>
     </Member>
@@ -571,8 +571,8 @@ EasmClient client = new EasmClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
-    properties = new object(),
     kind = "logAnalytics",
+    properties = new object(),
 });
 Response response = await client.CreateOrReplaceDataConnectionAsync("<dataConnectionName>", content);
 
@@ -588,12 +588,12 @@ EasmClient client = new EasmClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
+    kind = "logAnalytics",
     properties = new
     {
         apiKey = "<apiKey>",
         workspaceId = "<workspaceId>",
     },
-    kind = "logAnalytics",
     name = "<name>",
     content = "assets",
     frequency = "daily",
@@ -618,11 +618,11 @@ Console.WriteLine(result.GetProperty("inactiveMessage").ToString());
       </Docs>
     </Member>
     <Member MemberName="CreateOrReplaceDiscoveryGroup">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Analytics.Defender.Easm.DiscoveryGroup&gt; CreateOrReplaceDiscoveryGroup (string groupName, Azure.Analytics.Defender.Easm.DiscoveryGroupPayload discoveryGroupPayload, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Analytics.Defender.Easm.DiscoveryGroup&gt; CreateOrReplaceDiscoveryGroup(string groupName, class Azure.Analytics.Defender.Easm.DiscoveryGroupPayload discoveryGroupPayload, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Analytics.Defender.Easm.DiscoveryGroup&gt; CreateOrReplaceDiscoveryGroup (string groupName, Azure.Analytics.Defender.Easm.DiscoveryGroupPayload body, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Analytics.Defender.Easm.DiscoveryGroup&gt; CreateOrReplaceDiscoveryGroup(string groupName, class Azure.Analytics.Defender.Easm.DiscoveryGroupPayload body, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Analytics.Defender.Easm.EasmClient.CreateOrReplaceDiscoveryGroup(System.String,Azure.Analytics.Defender.Easm.DiscoveryGroupPayload,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateOrReplaceDiscoveryGroup (groupName As String, discoveryGroupPayload As DiscoveryGroupPayload, Optional cancellationToken As CancellationToken = Nothing) As Response(Of DiscoveryGroup)" />
-      <MemberSignature Language="F#" Value="abstract member CreateOrReplaceDiscoveryGroup : string * Azure.Analytics.Defender.Easm.DiscoveryGroupPayload * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Analytics.Defender.Easm.DiscoveryGroup&gt;&#xA;override this.CreateOrReplaceDiscoveryGroup : string * Azure.Analytics.Defender.Easm.DiscoveryGroupPayload * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Analytics.Defender.Easm.DiscoveryGroup&gt;" Usage="easmClient.CreateOrReplaceDiscoveryGroup (groupName, discoveryGroupPayload, cancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateOrReplaceDiscoveryGroup (groupName As String, body As DiscoveryGroupPayload, Optional cancellationToken As CancellationToken = Nothing) As Response(Of DiscoveryGroup)" />
+      <MemberSignature Language="F#" Value="abstract member CreateOrReplaceDiscoveryGroup : string * Azure.Analytics.Defender.Easm.DiscoveryGroupPayload * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Analytics.Defender.Easm.DiscoveryGroup&gt;&#xA;override this.CreateOrReplaceDiscoveryGroup : string * Azure.Analytics.Defender.Easm.DiscoveryGroupPayload * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Analytics.Defender.Easm.DiscoveryGroup&gt;" Usage="easmClient.CreateOrReplaceDiscoveryGroup (groupName, body, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Analytics.Defender.Easm</AssemblyName>
@@ -633,18 +633,18 @@ Console.WriteLine(result.GetProperty("inactiveMessage").ToString());
       </ReturnValue>
       <Parameters>
         <Parameter Name="groupName" Type="System.String" />
-        <Parameter Name="discoveryGroupPayload" Type="Azure.Analytics.Defender.Easm.DiscoveryGroupPayload" />
+        <Parameter Name="body" Type="Azure.Analytics.Defender.Easm.DiscoveryGroupPayload" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
         <param name="groupName"> The caller provided unique name for the resource. </param>
-        <param name="discoveryGroupPayload"> A request body used to create a discovery group. </param>
+        <param name="body"> Body parameter. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary> Create a discovery group with a given groupName. </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="groupName" /> or <paramref name="discoveryGroupPayload" /> is null. </exception>
+          <paramref name="groupName" /> or <paramref name="body" /> is null. </exception>
         <exception cref="T:System.ArgumentException">
           <paramref name="groupName" /> is an empty string, and was expected to be non-empty. </exception>
         <example>
@@ -654,8 +654,8 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 EasmClient client = new EasmClient(endpoint, credential);
 
-DiscoveryGroupPayload discoveryGroupPayload = new DiscoveryGroupPayload();
-Response<DiscoveryGroup> response = client.CreateOrReplaceDiscoveryGroup("<groupName>", discoveryGroupPayload);
+DiscoveryGroupPayload body = new DiscoveryGroupPayload();
+Response<DiscoveryGroup> response = client.CreateOrReplaceDiscoveryGroup("<groupName>", body);
 ]]></code>
 This sample shows how to call CreateOrReplaceDiscoveryGroup with all parameters.
 <code><![CDATA[
@@ -663,7 +663,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 EasmClient client = new EasmClient(endpoint, credential);
 
-DiscoveryGroupPayload discoveryGroupPayload = new DiscoveryGroupPayload
+DiscoveryGroupPayload body = new DiscoveryGroupPayload
 {
     Name = "<name>",
     Description = "<description>",
@@ -678,7 +678,7 @@ DiscoveryGroupPayload discoveryGroupPayload = new DiscoveryGroupPayload
     Excludes = { default },
     TemplateId = "<templateId>",
 };
-Response<DiscoveryGroup> response = client.CreateOrReplaceDiscoveryGroup("<groupName>", discoveryGroupPayload);
+Response<DiscoveryGroup> response = client.CreateOrReplaceDiscoveryGroup("<groupName>", body);
 ]]></code></example>
       </Docs>
     </Member>
@@ -793,11 +793,11 @@ Console.WriteLine(result.GetProperty("templateId").ToString());
       </Docs>
     </Member>
     <Member MemberName="CreateOrReplaceDiscoveryGroupAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.DiscoveryGroup&gt;&gt; CreateOrReplaceDiscoveryGroupAsync (string groupName, Azure.Analytics.Defender.Easm.DiscoveryGroupPayload discoveryGroupPayload, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Analytics.Defender.Easm.DiscoveryGroup&gt;&gt; CreateOrReplaceDiscoveryGroupAsync(string groupName, class Azure.Analytics.Defender.Easm.DiscoveryGroupPayload discoveryGroupPayload, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.DiscoveryGroup&gt;&gt; CreateOrReplaceDiscoveryGroupAsync (string groupName, Azure.Analytics.Defender.Easm.DiscoveryGroupPayload body, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Analytics.Defender.Easm.DiscoveryGroup&gt;&gt; CreateOrReplaceDiscoveryGroupAsync(string groupName, class Azure.Analytics.Defender.Easm.DiscoveryGroupPayload body, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Analytics.Defender.Easm.EasmClient.CreateOrReplaceDiscoveryGroupAsync(System.String,Azure.Analytics.Defender.Easm.DiscoveryGroupPayload,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateOrReplaceDiscoveryGroupAsync (groupName As String, discoveryGroupPayload As DiscoveryGroupPayload, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of DiscoveryGroup))" />
-      <MemberSignature Language="F#" Value="abstract member CreateOrReplaceDiscoveryGroupAsync : string * Azure.Analytics.Defender.Easm.DiscoveryGroupPayload * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.DiscoveryGroup&gt;&gt;&#xA;override this.CreateOrReplaceDiscoveryGroupAsync : string * Azure.Analytics.Defender.Easm.DiscoveryGroupPayload * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.DiscoveryGroup&gt;&gt;" Usage="easmClient.CreateOrReplaceDiscoveryGroupAsync (groupName, discoveryGroupPayload, cancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateOrReplaceDiscoveryGroupAsync (groupName As String, body As DiscoveryGroupPayload, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of DiscoveryGroup))" />
+      <MemberSignature Language="F#" Value="abstract member CreateOrReplaceDiscoveryGroupAsync : string * Azure.Analytics.Defender.Easm.DiscoveryGroupPayload * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.DiscoveryGroup&gt;&gt;&#xA;override this.CreateOrReplaceDiscoveryGroupAsync : string * Azure.Analytics.Defender.Easm.DiscoveryGroupPayload * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.DiscoveryGroup&gt;&gt;" Usage="easmClient.CreateOrReplaceDiscoveryGroupAsync (groupName, body, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Analytics.Defender.Easm</AssemblyName>
@@ -808,18 +808,18 @@ Console.WriteLine(result.GetProperty("templateId").ToString());
       </ReturnValue>
       <Parameters>
         <Parameter Name="groupName" Type="System.String" />
-        <Parameter Name="discoveryGroupPayload" Type="Azure.Analytics.Defender.Easm.DiscoveryGroupPayload" />
+        <Parameter Name="body" Type="Azure.Analytics.Defender.Easm.DiscoveryGroupPayload" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
         <param name="groupName"> The caller provided unique name for the resource. </param>
-        <param name="discoveryGroupPayload"> A request body used to create a discovery group. </param>
+        <param name="body"> Body parameter. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary> Create a discovery group with a given groupName. </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="groupName" /> or <paramref name="discoveryGroupPayload" /> is null. </exception>
+          <paramref name="groupName" /> or <paramref name="body" /> is null. </exception>
         <exception cref="T:System.ArgumentException">
           <paramref name="groupName" /> is an empty string, and was expected to be non-empty. </exception>
         <example>
@@ -829,8 +829,8 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 EasmClient client = new EasmClient(endpoint, credential);
 
-DiscoveryGroupPayload discoveryGroupPayload = new DiscoveryGroupPayload();
-Response<DiscoveryGroup> response = await client.CreateOrReplaceDiscoveryGroupAsync("<groupName>", discoveryGroupPayload);
+DiscoveryGroupPayload body = new DiscoveryGroupPayload();
+Response<DiscoveryGroup> response = await client.CreateOrReplaceDiscoveryGroupAsync("<groupName>", body);
 ]]></code>
 This sample shows how to call CreateOrReplaceDiscoveryGroupAsync with all parameters.
 <code><![CDATA[
@@ -838,7 +838,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 EasmClient client = new EasmClient(endpoint, credential);
 
-DiscoveryGroupPayload discoveryGroupPayload = new DiscoveryGroupPayload
+DiscoveryGroupPayload body = new DiscoveryGroupPayload
 {
     Name = "<name>",
     Description = "<description>",
@@ -853,7 +853,7 @@ DiscoveryGroupPayload discoveryGroupPayload = new DiscoveryGroupPayload
     Excludes = { default },
     TemplateId = "<templateId>",
 };
-Response<DiscoveryGroup> response = await client.CreateOrReplaceDiscoveryGroupAsync("<groupName>", discoveryGroupPayload);
+Response<DiscoveryGroup> response = await client.CreateOrReplaceDiscoveryGroupAsync("<groupName>", body);
 ]]></code></example>
       </Docs>
     </Member>
@@ -968,11 +968,11 @@ Console.WriteLine(result.GetProperty("templateId").ToString());
       </Docs>
     </Member>
     <Member MemberName="CreateOrReplaceSavedFilter">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Analytics.Defender.Easm.SavedFilter&gt; CreateOrReplaceSavedFilter (string filterName, Azure.Analytics.Defender.Easm.SavedFilterPayload savedFilterPayload, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Analytics.Defender.Easm.SavedFilter&gt; CreateOrReplaceSavedFilter(string filterName, class Azure.Analytics.Defender.Easm.SavedFilterPayload savedFilterPayload, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Analytics.Defender.Easm.SavedFilter&gt; CreateOrReplaceSavedFilter (string filterName, Azure.Analytics.Defender.Easm.SavedFilterPayload body, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Analytics.Defender.Easm.SavedFilter&gt; CreateOrReplaceSavedFilter(string filterName, class Azure.Analytics.Defender.Easm.SavedFilterPayload body, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Analytics.Defender.Easm.EasmClient.CreateOrReplaceSavedFilter(System.String,Azure.Analytics.Defender.Easm.SavedFilterPayload,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateOrReplaceSavedFilter (filterName As String, savedFilterPayload As SavedFilterPayload, Optional cancellationToken As CancellationToken = Nothing) As Response(Of SavedFilter)" />
-      <MemberSignature Language="F#" Value="abstract member CreateOrReplaceSavedFilter : string * Azure.Analytics.Defender.Easm.SavedFilterPayload * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Analytics.Defender.Easm.SavedFilter&gt;&#xA;override this.CreateOrReplaceSavedFilter : string * Azure.Analytics.Defender.Easm.SavedFilterPayload * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Analytics.Defender.Easm.SavedFilter&gt;" Usage="easmClient.CreateOrReplaceSavedFilter (filterName, savedFilterPayload, cancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateOrReplaceSavedFilter (filterName As String, body As SavedFilterPayload, Optional cancellationToken As CancellationToken = Nothing) As Response(Of SavedFilter)" />
+      <MemberSignature Language="F#" Value="abstract member CreateOrReplaceSavedFilter : string * Azure.Analytics.Defender.Easm.SavedFilterPayload * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Analytics.Defender.Easm.SavedFilter&gt;&#xA;override this.CreateOrReplaceSavedFilter : string * Azure.Analytics.Defender.Easm.SavedFilterPayload * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Analytics.Defender.Easm.SavedFilter&gt;" Usage="easmClient.CreateOrReplaceSavedFilter (filterName, body, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Analytics.Defender.Easm</AssemblyName>
@@ -983,18 +983,18 @@ Console.WriteLine(result.GetProperty("templateId").ToString());
       </ReturnValue>
       <Parameters>
         <Parameter Name="filterName" Type="System.String" />
-        <Parameter Name="savedFilterPayload" Type="Azure.Analytics.Defender.Easm.SavedFilterPayload" />
+        <Parameter Name="body" Type="Azure.Analytics.Defender.Easm.SavedFilterPayload" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
         <param name="filterName"> The caller provided unique name for the resource. </param>
-        <param name="savedFilterPayload"> A request body used to create a saved filter. </param>
+        <param name="body"> Body parameter. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary> Create or replace a saved filter with a given filterName. </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="filterName" /> or <paramref name="savedFilterPayload" /> is null. </exception>
+          <paramref name="filterName" /> or <paramref name="body" /> is null. </exception>
         <exception cref="T:System.ArgumentException">
           <paramref name="filterName" /> is an empty string, and was expected to be non-empty. </exception>
         <example>
@@ -1004,8 +1004,8 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 EasmClient client = new EasmClient(endpoint, credential);
 
-SavedFilterPayload savedFilterPayload = new SavedFilterPayload("<filter>", "<description>");
-Response<SavedFilter> response = client.CreateOrReplaceSavedFilter("<filterName>", savedFilterPayload);
+SavedFilterPayload body = new SavedFilterPayload("<filter>", "<description>");
+Response<SavedFilter> response = client.CreateOrReplaceSavedFilter("<filterName>", body);
 ]]></code>
 This sample shows how to call CreateOrReplaceSavedFilter with all parameters.
 <code><![CDATA[
@@ -1013,8 +1013,8 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 EasmClient client = new EasmClient(endpoint, credential);
 
-SavedFilterPayload savedFilterPayload = new SavedFilterPayload("<filter>", "<description>");
-Response<SavedFilter> response = client.CreateOrReplaceSavedFilter("<filterName>", savedFilterPayload);
+SavedFilterPayload body = new SavedFilterPayload("<filter>", "<description>");
+Response<SavedFilter> response = client.CreateOrReplaceSavedFilter("<filterName>", body);
 ]]></code></example>
       </Docs>
     </Member>
@@ -1095,11 +1095,11 @@ Console.WriteLine(result.GetProperty("description").ToString());
       </Docs>
     </Member>
     <Member MemberName="CreateOrReplaceSavedFilterAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.SavedFilter&gt;&gt; CreateOrReplaceSavedFilterAsync (string filterName, Azure.Analytics.Defender.Easm.SavedFilterPayload savedFilterPayload, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Analytics.Defender.Easm.SavedFilter&gt;&gt; CreateOrReplaceSavedFilterAsync(string filterName, class Azure.Analytics.Defender.Easm.SavedFilterPayload savedFilterPayload, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.SavedFilter&gt;&gt; CreateOrReplaceSavedFilterAsync (string filterName, Azure.Analytics.Defender.Easm.SavedFilterPayload body, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Analytics.Defender.Easm.SavedFilter&gt;&gt; CreateOrReplaceSavedFilterAsync(string filterName, class Azure.Analytics.Defender.Easm.SavedFilterPayload body, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Analytics.Defender.Easm.EasmClient.CreateOrReplaceSavedFilterAsync(System.String,Azure.Analytics.Defender.Easm.SavedFilterPayload,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateOrReplaceSavedFilterAsync (filterName As String, savedFilterPayload As SavedFilterPayload, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of SavedFilter))" />
-      <MemberSignature Language="F#" Value="abstract member CreateOrReplaceSavedFilterAsync : string * Azure.Analytics.Defender.Easm.SavedFilterPayload * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.SavedFilter&gt;&gt;&#xA;override this.CreateOrReplaceSavedFilterAsync : string * Azure.Analytics.Defender.Easm.SavedFilterPayload * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.SavedFilter&gt;&gt;" Usage="easmClient.CreateOrReplaceSavedFilterAsync (filterName, savedFilterPayload, cancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateOrReplaceSavedFilterAsync (filterName As String, body As SavedFilterPayload, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of SavedFilter))" />
+      <MemberSignature Language="F#" Value="abstract member CreateOrReplaceSavedFilterAsync : string * Azure.Analytics.Defender.Easm.SavedFilterPayload * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.SavedFilter&gt;&gt;&#xA;override this.CreateOrReplaceSavedFilterAsync : string * Azure.Analytics.Defender.Easm.SavedFilterPayload * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.SavedFilter&gt;&gt;" Usage="easmClient.CreateOrReplaceSavedFilterAsync (filterName, body, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Analytics.Defender.Easm</AssemblyName>
@@ -1110,18 +1110,18 @@ Console.WriteLine(result.GetProperty("description").ToString());
       </ReturnValue>
       <Parameters>
         <Parameter Name="filterName" Type="System.String" />
-        <Parameter Name="savedFilterPayload" Type="Azure.Analytics.Defender.Easm.SavedFilterPayload" />
+        <Parameter Name="body" Type="Azure.Analytics.Defender.Easm.SavedFilterPayload" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
         <param name="filterName"> The caller provided unique name for the resource. </param>
-        <param name="savedFilterPayload"> A request body used to create a saved filter. </param>
+        <param name="body"> Body parameter. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary> Create or replace a saved filter with a given filterName. </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="filterName" /> or <paramref name="savedFilterPayload" /> is null. </exception>
+          <paramref name="filterName" /> or <paramref name="body" /> is null. </exception>
         <exception cref="T:System.ArgumentException">
           <paramref name="filterName" /> is an empty string, and was expected to be non-empty. </exception>
         <example>
@@ -1131,8 +1131,8 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 EasmClient client = new EasmClient(endpoint, credential);
 
-SavedFilterPayload savedFilterPayload = new SavedFilterPayload("<filter>", "<description>");
-Response<SavedFilter> response = await client.CreateOrReplaceSavedFilterAsync("<filterName>", savedFilterPayload);
+SavedFilterPayload body = new SavedFilterPayload("<filter>", "<description>");
+Response<SavedFilter> response = await client.CreateOrReplaceSavedFilterAsync("<filterName>", body);
 ]]></code>
 This sample shows how to call CreateOrReplaceSavedFilterAsync with all parameters.
 <code><![CDATA[
@@ -1140,8 +1140,8 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 EasmClient client = new EasmClient(endpoint, credential);
 
-SavedFilterPayload savedFilterPayload = new SavedFilterPayload("<filter>", "<description>");
-Response<SavedFilter> response = await client.CreateOrReplaceSavedFilterAsync("<filterName>", savedFilterPayload);
+SavedFilterPayload body = new SavedFilterPayload("<filter>", "<description>");
+Response<SavedFilter> response = await client.CreateOrReplaceSavedFilterAsync("<filterName>", body);
 ]]></code></example>
       </Docs>
     </Member>
@@ -4388,11 +4388,11 @@ await foreach (SavedFilter item in client.GetSavedFiltersAsync(filter: "<filter>
       </Docs>
     </Member>
     <Member MemberName="GetSnapshot">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Analytics.Defender.Easm.ReportAssetSnapshotResult&gt; GetSnapshot (Azure.Analytics.Defender.Easm.ReportAssetSnapshotPayload reportAssetSnapshotPayload, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Analytics.Defender.Easm.ReportAssetSnapshotResult&gt; GetSnapshot(class Azure.Analytics.Defender.Easm.ReportAssetSnapshotPayload reportAssetSnapshotPayload, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Analytics.Defender.Easm.ReportAssetSnapshotResult&gt; GetSnapshot (Azure.Analytics.Defender.Easm.ReportAssetSnapshotPayload body, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Analytics.Defender.Easm.ReportAssetSnapshotResult&gt; GetSnapshot(class Azure.Analytics.Defender.Easm.ReportAssetSnapshotPayload body, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Analytics.Defender.Easm.EasmClient.GetSnapshot(Azure.Analytics.Defender.Easm.ReportAssetSnapshotPayload,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetSnapshot (reportAssetSnapshotPayload As ReportAssetSnapshotPayload, Optional cancellationToken As CancellationToken = Nothing) As Response(Of ReportAssetSnapshotResult)" />
-      <MemberSignature Language="F#" Value="abstract member GetSnapshot : Azure.Analytics.Defender.Easm.ReportAssetSnapshotPayload * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Analytics.Defender.Easm.ReportAssetSnapshotResult&gt;&#xA;override this.GetSnapshot : Azure.Analytics.Defender.Easm.ReportAssetSnapshotPayload * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Analytics.Defender.Easm.ReportAssetSnapshotResult&gt;" Usage="easmClient.GetSnapshot (reportAssetSnapshotPayload, cancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetSnapshot (body As ReportAssetSnapshotPayload, Optional cancellationToken As CancellationToken = Nothing) As Response(Of ReportAssetSnapshotResult)" />
+      <MemberSignature Language="F#" Value="abstract member GetSnapshot : Azure.Analytics.Defender.Easm.ReportAssetSnapshotPayload * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Analytics.Defender.Easm.ReportAssetSnapshotResult&gt;&#xA;override this.GetSnapshot : Azure.Analytics.Defender.Easm.ReportAssetSnapshotPayload * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Analytics.Defender.Easm.ReportAssetSnapshotResult&gt;" Usage="easmClient.GetSnapshot (body, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Analytics.Defender.Easm</AssemblyName>
@@ -4402,17 +4402,17 @@ await foreach (SavedFilter item in client.GetSavedFiltersAsync(filter: "<filter>
         <ReturnType>Azure.Response&lt;Azure.Analytics.Defender.Easm.ReportAssetSnapshotResult&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="reportAssetSnapshotPayload" Type="Azure.Analytics.Defender.Easm.ReportAssetSnapshotPayload" />
+        <Parameter Name="body" Type="Azure.Analytics.Defender.Easm.ReportAssetSnapshotPayload" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="reportAssetSnapshotPayload"> A request body used to retrieve an asset report snapshot. </param>
+        <param name="body"> Body parameter. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary> Get the most recent snapshot of asset summary values for the snapshot request. </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="reportAssetSnapshotPayload" /> is null. </exception>
+          <paramref name="body" /> is null. </exception>
         <example>
 This sample shows how to call GetSnapshot.
 <code><![CDATA[
@@ -4420,8 +4420,8 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 EasmClient client = new EasmClient(endpoint, credential);
 
-ReportAssetSnapshotPayload reportAssetSnapshotPayload = new ReportAssetSnapshotPayload();
-Response<ReportAssetSnapshotResult> response = client.GetSnapshot(reportAssetSnapshotPayload);
+ReportAssetSnapshotPayload body = new ReportAssetSnapshotPayload();
+Response<ReportAssetSnapshotResult> response = client.GetSnapshot(body);
 ]]></code>
 This sample shows how to call GetSnapshot with all parameters.
 <code><![CDATA[
@@ -4429,14 +4429,14 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 EasmClient client = new EasmClient(endpoint, credential);
 
-ReportAssetSnapshotPayload reportAssetSnapshotPayload = new ReportAssetSnapshotPayload
+ReportAssetSnapshotPayload body = new ReportAssetSnapshotPayload
 {
     Metric = "<metric>",
     LabelName = "<labelName>",
     Size = 1234,
     Page = 1234,
 };
-Response<ReportAssetSnapshotResult> response = client.GetSnapshot(reportAssetSnapshotPayload);
+Response<ReportAssetSnapshotResult> response = client.GetSnapshot(body);
 ]]></code></example>
       </Docs>
     </Member>
@@ -4532,11 +4532,11 @@ Console.WriteLine(result.GetProperty("assets").GetProperty("value")[0].GetProper
       </Docs>
     </Member>
     <Member MemberName="GetSnapshotAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.ReportAssetSnapshotResult&gt;&gt; GetSnapshotAsync (Azure.Analytics.Defender.Easm.ReportAssetSnapshotPayload reportAssetSnapshotPayload, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Analytics.Defender.Easm.ReportAssetSnapshotResult&gt;&gt; GetSnapshotAsync(class Azure.Analytics.Defender.Easm.ReportAssetSnapshotPayload reportAssetSnapshotPayload, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.ReportAssetSnapshotResult&gt;&gt; GetSnapshotAsync (Azure.Analytics.Defender.Easm.ReportAssetSnapshotPayload body, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Analytics.Defender.Easm.ReportAssetSnapshotResult&gt;&gt; GetSnapshotAsync(class Azure.Analytics.Defender.Easm.ReportAssetSnapshotPayload body, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Analytics.Defender.Easm.EasmClient.GetSnapshotAsync(Azure.Analytics.Defender.Easm.ReportAssetSnapshotPayload,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetSnapshotAsync (reportAssetSnapshotPayload As ReportAssetSnapshotPayload, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of ReportAssetSnapshotResult))" />
-      <MemberSignature Language="F#" Value="abstract member GetSnapshotAsync : Azure.Analytics.Defender.Easm.ReportAssetSnapshotPayload * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.ReportAssetSnapshotResult&gt;&gt;&#xA;override this.GetSnapshotAsync : Azure.Analytics.Defender.Easm.ReportAssetSnapshotPayload * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.ReportAssetSnapshotResult&gt;&gt;" Usage="easmClient.GetSnapshotAsync (reportAssetSnapshotPayload, cancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetSnapshotAsync (body As ReportAssetSnapshotPayload, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of ReportAssetSnapshotResult))" />
+      <MemberSignature Language="F#" Value="abstract member GetSnapshotAsync : Azure.Analytics.Defender.Easm.ReportAssetSnapshotPayload * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.ReportAssetSnapshotResult&gt;&gt;&#xA;override this.GetSnapshotAsync : Azure.Analytics.Defender.Easm.ReportAssetSnapshotPayload * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.ReportAssetSnapshotResult&gt;&gt;" Usage="easmClient.GetSnapshotAsync (body, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Analytics.Defender.Easm</AssemblyName>
@@ -4546,17 +4546,17 @@ Console.WriteLine(result.GetProperty("assets").GetProperty("value")[0].GetProper
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.ReportAssetSnapshotResult&gt;&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="reportAssetSnapshotPayload" Type="Azure.Analytics.Defender.Easm.ReportAssetSnapshotPayload" />
+        <Parameter Name="body" Type="Azure.Analytics.Defender.Easm.ReportAssetSnapshotPayload" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="reportAssetSnapshotPayload"> A request body used to retrieve an asset report snapshot. </param>
+        <param name="body"> Body parameter. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary> Get the most recent snapshot of asset summary values for the snapshot request. </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="reportAssetSnapshotPayload" /> is null. </exception>
+          <paramref name="body" /> is null. </exception>
         <example>
 This sample shows how to call GetSnapshotAsync.
 <code><![CDATA[
@@ -4564,8 +4564,8 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 EasmClient client = new EasmClient(endpoint, credential);
 
-ReportAssetSnapshotPayload reportAssetSnapshotPayload = new ReportAssetSnapshotPayload();
-Response<ReportAssetSnapshotResult> response = await client.GetSnapshotAsync(reportAssetSnapshotPayload);
+ReportAssetSnapshotPayload body = new ReportAssetSnapshotPayload();
+Response<ReportAssetSnapshotResult> response = await client.GetSnapshotAsync(body);
 ]]></code>
 This sample shows how to call GetSnapshotAsync with all parameters.
 <code><![CDATA[
@@ -4573,14 +4573,14 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 EasmClient client = new EasmClient(endpoint, credential);
 
-ReportAssetSnapshotPayload reportAssetSnapshotPayload = new ReportAssetSnapshotPayload
+ReportAssetSnapshotPayload body = new ReportAssetSnapshotPayload
 {
     Metric = "<metric>",
     LabelName = "<labelName>",
     Size = 1234,
     Page = 1234,
 };
-Response<ReportAssetSnapshotResult> response = await client.GetSnapshotAsync(reportAssetSnapshotPayload);
+Response<ReportAssetSnapshotResult> response = await client.GetSnapshotAsync(body);
 ]]></code></example>
       </Docs>
     </Member>
@@ -4676,11 +4676,11 @@ Console.WriteLine(result.GetProperty("assets").GetProperty("value")[0].GetProper
       </Docs>
     </Member>
     <Member MemberName="GetSummary">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Analytics.Defender.Easm.ReportAssetSummaryResult&gt; GetSummary (Azure.Analytics.Defender.Easm.ReportAssetSummaryPayload reportAssetSummaryPayload, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Analytics.Defender.Easm.ReportAssetSummaryResult&gt; GetSummary(class Azure.Analytics.Defender.Easm.ReportAssetSummaryPayload reportAssetSummaryPayload, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Analytics.Defender.Easm.ReportAssetSummaryResult&gt; GetSummary (Azure.Analytics.Defender.Easm.ReportAssetSummaryPayload body, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Analytics.Defender.Easm.ReportAssetSummaryResult&gt; GetSummary(class Azure.Analytics.Defender.Easm.ReportAssetSummaryPayload body, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Analytics.Defender.Easm.EasmClient.GetSummary(Azure.Analytics.Defender.Easm.ReportAssetSummaryPayload,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetSummary (reportAssetSummaryPayload As ReportAssetSummaryPayload, Optional cancellationToken As CancellationToken = Nothing) As Response(Of ReportAssetSummaryResult)" />
-      <MemberSignature Language="F#" Value="abstract member GetSummary : Azure.Analytics.Defender.Easm.ReportAssetSummaryPayload * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Analytics.Defender.Easm.ReportAssetSummaryResult&gt;&#xA;override this.GetSummary : Azure.Analytics.Defender.Easm.ReportAssetSummaryPayload * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Analytics.Defender.Easm.ReportAssetSummaryResult&gt;" Usage="easmClient.GetSummary (reportAssetSummaryPayload, cancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetSummary (body As ReportAssetSummaryPayload, Optional cancellationToken As CancellationToken = Nothing) As Response(Of ReportAssetSummaryResult)" />
+      <MemberSignature Language="F#" Value="abstract member GetSummary : Azure.Analytics.Defender.Easm.ReportAssetSummaryPayload * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Analytics.Defender.Easm.ReportAssetSummaryResult&gt;&#xA;override this.GetSummary : Azure.Analytics.Defender.Easm.ReportAssetSummaryPayload * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Analytics.Defender.Easm.ReportAssetSummaryResult&gt;" Usage="easmClient.GetSummary (body, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Analytics.Defender.Easm</AssemblyName>
@@ -4690,17 +4690,17 @@ Console.WriteLine(result.GetProperty("assets").GetProperty("value")[0].GetProper
         <ReturnType>Azure.Response&lt;Azure.Analytics.Defender.Easm.ReportAssetSummaryResult&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="reportAssetSummaryPayload" Type="Azure.Analytics.Defender.Easm.ReportAssetSummaryPayload" />
+        <Parameter Name="body" Type="Azure.Analytics.Defender.Easm.ReportAssetSummaryPayload" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="reportAssetSummaryPayload"> A request body used to retrieve summary asset information. One and only one collection of summary identifiers must be provided: filters, metrics, or metricCategories. </param>
+        <param name="body"> Body parameter. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary> Get asset summary details for the summary request. </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="reportAssetSummaryPayload" /> is null. </exception>
+          <paramref name="body" /> is null. </exception>
         <example>
 This sample shows how to call GetSummary.
 <code><![CDATA[
@@ -4708,8 +4708,8 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 EasmClient client = new EasmClient(endpoint, credential);
 
-ReportAssetSummaryPayload reportAssetSummaryPayload = new ReportAssetSummaryPayload();
-Response<ReportAssetSummaryResult> response = client.GetSummary(reportAssetSummaryPayload);
+ReportAssetSummaryPayload body = new ReportAssetSummaryPayload();
+Response<ReportAssetSummaryResult> response = client.GetSummary(body);
 ]]></code>
 This sample shows how to call GetSummary with all parameters.
 <code><![CDATA[
@@ -4717,7 +4717,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 EasmClient client = new EasmClient(endpoint, credential);
 
-ReportAssetSummaryPayload reportAssetSummaryPayload = new ReportAssetSummaryPayload
+ReportAssetSummaryPayload body = new ReportAssetSummaryPayload
 {
     MetricCategories = { "<metricCategories>" },
     Metrics = { "<metrics>" },
@@ -4726,7 +4726,7 @@ ReportAssetSummaryPayload reportAssetSummaryPayload = new ReportAssetSummaryPayl
     SegmentBy = "<segmentBy>",
     LabelName = "<labelName>",
 };
-Response<ReportAssetSummaryResult> response = client.GetSummary(reportAssetSummaryPayload);
+Response<ReportAssetSummaryResult> response = client.GetSummary(body);
 ]]></code></example>
       </Docs>
     </Member>
@@ -4816,11 +4816,11 @@ Console.WriteLine(result.GetProperty("assetSummaries")[0].GetProperty("link").To
       </Docs>
     </Member>
     <Member MemberName="GetSummaryAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.ReportAssetSummaryResult&gt;&gt; GetSummaryAsync (Azure.Analytics.Defender.Easm.ReportAssetSummaryPayload reportAssetSummaryPayload, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Analytics.Defender.Easm.ReportAssetSummaryResult&gt;&gt; GetSummaryAsync(class Azure.Analytics.Defender.Easm.ReportAssetSummaryPayload reportAssetSummaryPayload, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.ReportAssetSummaryResult&gt;&gt; GetSummaryAsync (Azure.Analytics.Defender.Easm.ReportAssetSummaryPayload body, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Analytics.Defender.Easm.ReportAssetSummaryResult&gt;&gt; GetSummaryAsync(class Azure.Analytics.Defender.Easm.ReportAssetSummaryPayload body, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Analytics.Defender.Easm.EasmClient.GetSummaryAsync(Azure.Analytics.Defender.Easm.ReportAssetSummaryPayload,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetSummaryAsync (reportAssetSummaryPayload As ReportAssetSummaryPayload, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of ReportAssetSummaryResult))" />
-      <MemberSignature Language="F#" Value="abstract member GetSummaryAsync : Azure.Analytics.Defender.Easm.ReportAssetSummaryPayload * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.ReportAssetSummaryResult&gt;&gt;&#xA;override this.GetSummaryAsync : Azure.Analytics.Defender.Easm.ReportAssetSummaryPayload * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.ReportAssetSummaryResult&gt;&gt;" Usage="easmClient.GetSummaryAsync (reportAssetSummaryPayload, cancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetSummaryAsync (body As ReportAssetSummaryPayload, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of ReportAssetSummaryResult))" />
+      <MemberSignature Language="F#" Value="abstract member GetSummaryAsync : Azure.Analytics.Defender.Easm.ReportAssetSummaryPayload * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.ReportAssetSummaryResult&gt;&gt;&#xA;override this.GetSummaryAsync : Azure.Analytics.Defender.Easm.ReportAssetSummaryPayload * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.ReportAssetSummaryResult&gt;&gt;" Usage="easmClient.GetSummaryAsync (body, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Analytics.Defender.Easm</AssemblyName>
@@ -4830,17 +4830,17 @@ Console.WriteLine(result.GetProperty("assetSummaries")[0].GetProperty("link").To
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.ReportAssetSummaryResult&gt;&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="reportAssetSummaryPayload" Type="Azure.Analytics.Defender.Easm.ReportAssetSummaryPayload" />
+        <Parameter Name="body" Type="Azure.Analytics.Defender.Easm.ReportAssetSummaryPayload" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="reportAssetSummaryPayload"> A request body used to retrieve summary asset information. One and only one collection of summary identifiers must be provided: filters, metrics, or metricCategories. </param>
+        <param name="body"> Body parameter. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary> Get asset summary details for the summary request. </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="reportAssetSummaryPayload" /> is null. </exception>
+          <paramref name="body" /> is null. </exception>
         <example>
 This sample shows how to call GetSummaryAsync.
 <code><![CDATA[
@@ -4848,8 +4848,8 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 EasmClient client = new EasmClient(endpoint, credential);
 
-ReportAssetSummaryPayload reportAssetSummaryPayload = new ReportAssetSummaryPayload();
-Response<ReportAssetSummaryResult> response = await client.GetSummaryAsync(reportAssetSummaryPayload);
+ReportAssetSummaryPayload body = new ReportAssetSummaryPayload();
+Response<ReportAssetSummaryResult> response = await client.GetSummaryAsync(body);
 ]]></code>
 This sample shows how to call GetSummaryAsync with all parameters.
 <code><![CDATA[
@@ -4857,7 +4857,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 EasmClient client = new EasmClient(endpoint, credential);
 
-ReportAssetSummaryPayload reportAssetSummaryPayload = new ReportAssetSummaryPayload
+ReportAssetSummaryPayload body = new ReportAssetSummaryPayload
 {
     MetricCategories = { "<metricCategories>" },
     Metrics = { "<metrics>" },
@@ -4866,7 +4866,7 @@ ReportAssetSummaryPayload reportAssetSummaryPayload = new ReportAssetSummaryPayl
     SegmentBy = "<segmentBy>",
     LabelName = "<labelName>",
 };
-Response<ReportAssetSummaryResult> response = await client.GetSummaryAsync(reportAssetSummaryPayload);
+Response<ReportAssetSummaryResult> response = await client.GetSummaryAsync(body);
 ]]></code></example>
       </Docs>
     </Member>
@@ -5564,11 +5564,11 @@ Console.WriteLine(response.Status);
       </Docs>
     </Member>
     <Member MemberName="UpdateAssets">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Analytics.Defender.Easm.TaskResource&gt; UpdateAssets (string filter, Azure.Analytics.Defender.Easm.AssetUpdatePayload assetUpdatePayload, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Analytics.Defender.Easm.TaskResource&gt; UpdateAssets(string filter, class Azure.Analytics.Defender.Easm.AssetUpdatePayload assetUpdatePayload, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Analytics.Defender.Easm.TaskResource&gt; UpdateAssets (string filter, Azure.Analytics.Defender.Easm.AssetUpdatePayload body, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Analytics.Defender.Easm.TaskResource&gt; UpdateAssets(string filter, class Azure.Analytics.Defender.Easm.AssetUpdatePayload body, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Analytics.Defender.Easm.EasmClient.UpdateAssets(System.String,Azure.Analytics.Defender.Easm.AssetUpdatePayload,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function UpdateAssets (filter As String, assetUpdatePayload As AssetUpdatePayload, Optional cancellationToken As CancellationToken = Nothing) As Response(Of TaskResource)" />
-      <MemberSignature Language="F#" Value="abstract member UpdateAssets : string * Azure.Analytics.Defender.Easm.AssetUpdatePayload * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Analytics.Defender.Easm.TaskResource&gt;&#xA;override this.UpdateAssets : string * Azure.Analytics.Defender.Easm.AssetUpdatePayload * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Analytics.Defender.Easm.TaskResource&gt;" Usage="easmClient.UpdateAssets (filter, assetUpdatePayload, cancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function UpdateAssets (filter As String, body As AssetUpdatePayload, Optional cancellationToken As CancellationToken = Nothing) As Response(Of TaskResource)" />
+      <MemberSignature Language="F#" Value="abstract member UpdateAssets : string * Azure.Analytics.Defender.Easm.AssetUpdatePayload * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Analytics.Defender.Easm.TaskResource&gt;&#xA;override this.UpdateAssets : string * Azure.Analytics.Defender.Easm.AssetUpdatePayload * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Analytics.Defender.Easm.TaskResource&gt;" Usage="easmClient.UpdateAssets (filter, body, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Analytics.Defender.Easm</AssemblyName>
@@ -5579,18 +5579,18 @@ Console.WriteLine(response.Status);
       </ReturnValue>
       <Parameters>
         <Parameter Name="filter" Type="System.String" />
-        <Parameter Name="assetUpdatePayload" Type="Azure.Analytics.Defender.Easm.AssetUpdatePayload" />
+        <Parameter Name="body" Type="Azure.Analytics.Defender.Easm.AssetUpdatePayload" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
         <param name="filter"> An expression on the resource type that selects the resources to be returned. </param>
-        <param name="assetUpdatePayload"> A request body used to update an asset. </param>
+        <param name="body"> Body parameter. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary> Update labels on assets matching the provided filter. </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="filter" /> or <paramref name="assetUpdatePayload" /> is null. </exception>
+          <paramref name="filter" /> or <paramref name="body" /> is null. </exception>
         <example>
 This sample shows how to call UpdateAssets.
 <code><![CDATA[
@@ -5598,8 +5598,8 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 EasmClient client = new EasmClient(endpoint, credential);
 
-AssetUpdatePayload assetUpdatePayload = new AssetUpdatePayload();
-Response<TaskResource> response = client.UpdateAssets("<filter>", assetUpdatePayload);
+AssetUpdatePayload body = new AssetUpdatePayload();
+Response<TaskResource> response = client.UpdateAssets("<filter>", body);
 ]]></code>
 This sample shows how to call UpdateAssets with all parameters.
 <code><![CDATA[
@@ -5607,7 +5607,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 EasmClient client = new EasmClient(endpoint, credential);
 
-AssetUpdatePayload assetUpdatePayload = new AssetUpdatePayload
+AssetUpdatePayload body = new AssetUpdatePayload
 {
     State = AssetUpdateState.Candidate,
     ExternalId = "<externalId>",
@@ -5617,7 +5617,7 @@ AssetUpdatePayload assetUpdatePayload = new AssetUpdatePayload
     },
     Transfers = AssetUpdateTransfers.As,
 };
-Response<TaskResource> response = client.UpdateAssets("<filter>", assetUpdatePayload);
+Response<TaskResource> response = client.UpdateAssets("<filter>", body);
 ]]></code></example>
       </Docs>
     </Member>
@@ -5700,11 +5700,11 @@ Console.WriteLine(result.GetProperty("metadata").GetProperty("<key>").ToString()
       </Docs>
     </Member>
     <Member MemberName="UpdateAssetsAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.TaskResource&gt;&gt; UpdateAssetsAsync (string filter, Azure.Analytics.Defender.Easm.AssetUpdatePayload assetUpdatePayload, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Analytics.Defender.Easm.TaskResource&gt;&gt; UpdateAssetsAsync(string filter, class Azure.Analytics.Defender.Easm.AssetUpdatePayload assetUpdatePayload, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.TaskResource&gt;&gt; UpdateAssetsAsync (string filter, Azure.Analytics.Defender.Easm.AssetUpdatePayload body, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Analytics.Defender.Easm.TaskResource&gt;&gt; UpdateAssetsAsync(string filter, class Azure.Analytics.Defender.Easm.AssetUpdatePayload body, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Analytics.Defender.Easm.EasmClient.UpdateAssetsAsync(System.String,Azure.Analytics.Defender.Easm.AssetUpdatePayload,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function UpdateAssetsAsync (filter As String, assetUpdatePayload As AssetUpdatePayload, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of TaskResource))" />
-      <MemberSignature Language="F#" Value="abstract member UpdateAssetsAsync : string * Azure.Analytics.Defender.Easm.AssetUpdatePayload * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.TaskResource&gt;&gt;&#xA;override this.UpdateAssetsAsync : string * Azure.Analytics.Defender.Easm.AssetUpdatePayload * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.TaskResource&gt;&gt;" Usage="easmClient.UpdateAssetsAsync (filter, assetUpdatePayload, cancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function UpdateAssetsAsync (filter As String, body As AssetUpdatePayload, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of TaskResource))" />
+      <MemberSignature Language="F#" Value="abstract member UpdateAssetsAsync : string * Azure.Analytics.Defender.Easm.AssetUpdatePayload * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.TaskResource&gt;&gt;&#xA;override this.UpdateAssetsAsync : string * Azure.Analytics.Defender.Easm.AssetUpdatePayload * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.TaskResource&gt;&gt;" Usage="easmClient.UpdateAssetsAsync (filter, body, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Analytics.Defender.Easm</AssemblyName>
@@ -5715,18 +5715,18 @@ Console.WriteLine(result.GetProperty("metadata").GetProperty("<key>").ToString()
       </ReturnValue>
       <Parameters>
         <Parameter Name="filter" Type="System.String" />
-        <Parameter Name="assetUpdatePayload" Type="Azure.Analytics.Defender.Easm.AssetUpdatePayload" />
+        <Parameter Name="body" Type="Azure.Analytics.Defender.Easm.AssetUpdatePayload" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
         <param name="filter"> An expression on the resource type that selects the resources to be returned. </param>
-        <param name="assetUpdatePayload"> A request body used to update an asset. </param>
+        <param name="body"> Body parameter. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary> Update labels on assets matching the provided filter. </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="filter" /> or <paramref name="assetUpdatePayload" /> is null. </exception>
+          <paramref name="filter" /> or <paramref name="body" /> is null. </exception>
         <example>
 This sample shows how to call UpdateAssetsAsync.
 <code><![CDATA[
@@ -5734,8 +5734,8 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 EasmClient client = new EasmClient(endpoint, credential);
 
-AssetUpdatePayload assetUpdatePayload = new AssetUpdatePayload();
-Response<TaskResource> response = await client.UpdateAssetsAsync("<filter>", assetUpdatePayload);
+AssetUpdatePayload body = new AssetUpdatePayload();
+Response<TaskResource> response = await client.UpdateAssetsAsync("<filter>", body);
 ]]></code>
 This sample shows how to call UpdateAssetsAsync with all parameters.
 <code><![CDATA[
@@ -5743,7 +5743,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 EasmClient client = new EasmClient(endpoint, credential);
 
-AssetUpdatePayload assetUpdatePayload = new AssetUpdatePayload
+AssetUpdatePayload body = new AssetUpdatePayload
 {
     State = AssetUpdateState.Candidate,
     ExternalId = "<externalId>",
@@ -5753,7 +5753,7 @@ AssetUpdatePayload assetUpdatePayload = new AssetUpdatePayload
     },
     Transfers = AssetUpdateTransfers.As,
 };
-Response<TaskResource> response = await client.UpdateAssetsAsync("<filter>", assetUpdatePayload);
+Response<TaskResource> response = await client.UpdateAssetsAsync("<filter>", body);
 ]]></code></example>
       </Docs>
     </Member>
@@ -5836,11 +5836,11 @@ Console.WriteLine(result.GetProperty("metadata").GetProperty("<key>").ToString()
       </Docs>
     </Member>
     <Member MemberName="ValidateDataConnection">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Analytics.Defender.Easm.ValidateResult&gt; ValidateDataConnection (Azure.Analytics.Defender.Easm.DataConnectionPayload dataConnectionPayload, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Analytics.Defender.Easm.ValidateResult&gt; ValidateDataConnection(class Azure.Analytics.Defender.Easm.DataConnectionPayload dataConnectionPayload, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Analytics.Defender.Easm.ValidateResult&gt; ValidateDataConnection (Azure.Analytics.Defender.Easm.DataConnectionPayload body, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Analytics.Defender.Easm.ValidateResult&gt; ValidateDataConnection(class Azure.Analytics.Defender.Easm.DataConnectionPayload body, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Analytics.Defender.Easm.EasmClient.ValidateDataConnection(Azure.Analytics.Defender.Easm.DataConnectionPayload,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function ValidateDataConnection (dataConnectionPayload As DataConnectionPayload, Optional cancellationToken As CancellationToken = Nothing) As Response(Of ValidateResult)" />
-      <MemberSignature Language="F#" Value="abstract member ValidateDataConnection : Azure.Analytics.Defender.Easm.DataConnectionPayload * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Analytics.Defender.Easm.ValidateResult&gt;&#xA;override this.ValidateDataConnection : Azure.Analytics.Defender.Easm.DataConnectionPayload * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Analytics.Defender.Easm.ValidateResult&gt;" Usage="easmClient.ValidateDataConnection (dataConnectionPayload, cancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function ValidateDataConnection (body As DataConnectionPayload, Optional cancellationToken As CancellationToken = Nothing) As Response(Of ValidateResult)" />
+      <MemberSignature Language="F#" Value="abstract member ValidateDataConnection : Azure.Analytics.Defender.Easm.DataConnectionPayload * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Analytics.Defender.Easm.ValidateResult&gt;&#xA;override this.ValidateDataConnection : Azure.Analytics.Defender.Easm.DataConnectionPayload * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Analytics.Defender.Easm.ValidateResult&gt;" Usage="easmClient.ValidateDataConnection (body, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Analytics.Defender.Easm</AssemblyName>
@@ -5850,17 +5850,17 @@ Console.WriteLine(result.GetProperty("metadata").GetProperty("<key>").ToString()
         <ReturnType>Azure.Response&lt;Azure.Analytics.Defender.Easm.ValidateResult&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="dataConnectionPayload" Type="Azure.Analytics.Defender.Easm.DataConnectionPayload" />
+        <Parameter Name="body" Type="Azure.Analytics.Defender.Easm.DataConnectionPayload" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="dataConnectionPayload"> The <see cref="T:Azure.Analytics.Defender.Easm.DataConnectionPayload" /> to use. </param>
+        <param name="body"> Body parameter. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary> Validate a data connection with a given dataConnectionName. </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="dataConnectionPayload" /> is null. </exception>
+          <paramref name="body" /> is null. </exception>
         <example>
 This sample shows how to call ValidateDataConnection.
 <code><![CDATA[
@@ -5868,8 +5868,8 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 EasmClient client = new EasmClient(endpoint, credential);
 
-DataConnectionPayload dataConnectionPayload = new LogAnalyticsDataConnectionPayload(new LogAnalyticsDataConnectionProperties());
-Response<ValidateResult> response = client.ValidateDataConnection(dataConnectionPayload);
+DataConnectionPayload body = new LogAnalyticsDataConnectionPayload(new LogAnalyticsDataConnectionProperties());
+Response<ValidateResult> response = client.ValidateDataConnection(body);
 ]]></code>
 This sample shows how to call ValidateDataConnection with all parameters.
 <code><![CDATA[
@@ -5877,7 +5877,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 EasmClient client = new EasmClient(endpoint, credential);
 
-DataConnectionPayload dataConnectionPayload = new LogAnalyticsDataConnectionPayload(new LogAnalyticsDataConnectionProperties
+DataConnectionPayload body = new LogAnalyticsDataConnectionPayload(new LogAnalyticsDataConnectionProperties
 {
     ApiKey = "<apiKey>",
     WorkspaceId = "<workspaceId>",
@@ -5888,7 +5888,7 @@ DataConnectionPayload dataConnectionPayload = new LogAnalyticsDataConnectionPayl
     Frequency = DataConnectionFrequency.Daily,
     FrequencyOffset = 1234,
 };
-Response<ValidateResult> response = client.ValidateDataConnection(dataConnectionPayload);
+Response<ValidateResult> response = client.ValidateDataConnection(body);
 ]]></code></example>
       </Docs>
     </Member>
@@ -5934,8 +5934,8 @@ EasmClient client = new EasmClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
-    properties = new object(),
     kind = "logAnalytics",
+    properties = new object(),
 });
 Response response = client.ValidateDataConnection(content);
 
@@ -5950,12 +5950,12 @@ EasmClient client = new EasmClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
+    kind = "logAnalytics",
     properties = new
     {
         apiKey = "<apiKey>",
         workspaceId = "<workspaceId>",
     },
-    kind = "logAnalytics",
     name = "<name>",
     content = "assets",
     frequency = "daily",
@@ -5973,11 +5973,11 @@ Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetPrope
       </Docs>
     </Member>
     <Member MemberName="ValidateDataConnectionAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.ValidateResult&gt;&gt; ValidateDataConnectionAsync (Azure.Analytics.Defender.Easm.DataConnectionPayload dataConnectionPayload, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Analytics.Defender.Easm.ValidateResult&gt;&gt; ValidateDataConnectionAsync(class Azure.Analytics.Defender.Easm.DataConnectionPayload dataConnectionPayload, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.ValidateResult&gt;&gt; ValidateDataConnectionAsync (Azure.Analytics.Defender.Easm.DataConnectionPayload body, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Analytics.Defender.Easm.ValidateResult&gt;&gt; ValidateDataConnectionAsync(class Azure.Analytics.Defender.Easm.DataConnectionPayload body, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Analytics.Defender.Easm.EasmClient.ValidateDataConnectionAsync(Azure.Analytics.Defender.Easm.DataConnectionPayload,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function ValidateDataConnectionAsync (dataConnectionPayload As DataConnectionPayload, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of ValidateResult))" />
-      <MemberSignature Language="F#" Value="abstract member ValidateDataConnectionAsync : Azure.Analytics.Defender.Easm.DataConnectionPayload * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.ValidateResult&gt;&gt;&#xA;override this.ValidateDataConnectionAsync : Azure.Analytics.Defender.Easm.DataConnectionPayload * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.ValidateResult&gt;&gt;" Usage="easmClient.ValidateDataConnectionAsync (dataConnectionPayload, cancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function ValidateDataConnectionAsync (body As DataConnectionPayload, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of ValidateResult))" />
+      <MemberSignature Language="F#" Value="abstract member ValidateDataConnectionAsync : Azure.Analytics.Defender.Easm.DataConnectionPayload * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.ValidateResult&gt;&gt;&#xA;override this.ValidateDataConnectionAsync : Azure.Analytics.Defender.Easm.DataConnectionPayload * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.ValidateResult&gt;&gt;" Usage="easmClient.ValidateDataConnectionAsync (body, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Analytics.Defender.Easm</AssemblyName>
@@ -5987,17 +5987,17 @@ Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetPrope
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.ValidateResult&gt;&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="dataConnectionPayload" Type="Azure.Analytics.Defender.Easm.DataConnectionPayload" />
+        <Parameter Name="body" Type="Azure.Analytics.Defender.Easm.DataConnectionPayload" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="dataConnectionPayload"> The <see cref="T:Azure.Analytics.Defender.Easm.DataConnectionPayload" /> to use. </param>
+        <param name="body"> Body parameter. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary> Validate a data connection with a given dataConnectionName. </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="dataConnectionPayload" /> is null. </exception>
+          <paramref name="body" /> is null. </exception>
         <example>
 This sample shows how to call ValidateDataConnectionAsync.
 <code><![CDATA[
@@ -6005,8 +6005,8 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 EasmClient client = new EasmClient(endpoint, credential);
 
-DataConnectionPayload dataConnectionPayload = new LogAnalyticsDataConnectionPayload(new LogAnalyticsDataConnectionProperties());
-Response<ValidateResult> response = await client.ValidateDataConnectionAsync(dataConnectionPayload);
+DataConnectionPayload body = new LogAnalyticsDataConnectionPayload(new LogAnalyticsDataConnectionProperties());
+Response<ValidateResult> response = await client.ValidateDataConnectionAsync(body);
 ]]></code>
 This sample shows how to call ValidateDataConnectionAsync with all parameters.
 <code><![CDATA[
@@ -6014,7 +6014,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 EasmClient client = new EasmClient(endpoint, credential);
 
-DataConnectionPayload dataConnectionPayload = new LogAnalyticsDataConnectionPayload(new LogAnalyticsDataConnectionProperties
+DataConnectionPayload body = new LogAnalyticsDataConnectionPayload(new LogAnalyticsDataConnectionProperties
 {
     ApiKey = "<apiKey>",
     WorkspaceId = "<workspaceId>",
@@ -6025,7 +6025,7 @@ DataConnectionPayload dataConnectionPayload = new LogAnalyticsDataConnectionPayl
     Frequency = DataConnectionFrequency.Daily,
     FrequencyOffset = 1234,
 };
-Response<ValidateResult> response = await client.ValidateDataConnectionAsync(dataConnectionPayload);
+Response<ValidateResult> response = await client.ValidateDataConnectionAsync(body);
 ]]></code></example>
       </Docs>
     </Member>
@@ -6071,8 +6071,8 @@ EasmClient client = new EasmClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
-    properties = new object(),
     kind = "logAnalytics",
+    properties = new object(),
 });
 Response response = await client.ValidateDataConnectionAsync(content);
 
@@ -6087,12 +6087,12 @@ EasmClient client = new EasmClient(endpoint, credential);
 
 using RequestContent content = RequestContent.Create(new
 {
+    kind = "logAnalytics",
     properties = new
     {
         apiKey = "<apiKey>",
         workspaceId = "<workspaceId>",
     },
-    kind = "logAnalytics",
     name = "<name>",
     content = "assets",
     frequency = "daily",
@@ -6110,11 +6110,11 @@ Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetPrope
       </Docs>
     </Member>
     <Member MemberName="ValidateDiscoveryGroup">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Analytics.Defender.Easm.ValidateResult&gt; ValidateDiscoveryGroup (Azure.Analytics.Defender.Easm.DiscoveryGroupPayload discoveryGroupPayload, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Analytics.Defender.Easm.ValidateResult&gt; ValidateDiscoveryGroup(class Azure.Analytics.Defender.Easm.DiscoveryGroupPayload discoveryGroupPayload, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Analytics.Defender.Easm.ValidateResult&gt; ValidateDiscoveryGroup (Azure.Analytics.Defender.Easm.DiscoveryGroupPayload body, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Analytics.Defender.Easm.ValidateResult&gt; ValidateDiscoveryGroup(class Azure.Analytics.Defender.Easm.DiscoveryGroupPayload body, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Analytics.Defender.Easm.EasmClient.ValidateDiscoveryGroup(Azure.Analytics.Defender.Easm.DiscoveryGroupPayload,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function ValidateDiscoveryGroup (discoveryGroupPayload As DiscoveryGroupPayload, Optional cancellationToken As CancellationToken = Nothing) As Response(Of ValidateResult)" />
-      <MemberSignature Language="F#" Value="abstract member ValidateDiscoveryGroup : Azure.Analytics.Defender.Easm.DiscoveryGroupPayload * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Analytics.Defender.Easm.ValidateResult&gt;&#xA;override this.ValidateDiscoveryGroup : Azure.Analytics.Defender.Easm.DiscoveryGroupPayload * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Analytics.Defender.Easm.ValidateResult&gt;" Usage="easmClient.ValidateDiscoveryGroup (discoveryGroupPayload, cancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function ValidateDiscoveryGroup (body As DiscoveryGroupPayload, Optional cancellationToken As CancellationToken = Nothing) As Response(Of ValidateResult)" />
+      <MemberSignature Language="F#" Value="abstract member ValidateDiscoveryGroup : Azure.Analytics.Defender.Easm.DiscoveryGroupPayload * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Analytics.Defender.Easm.ValidateResult&gt;&#xA;override this.ValidateDiscoveryGroup : Azure.Analytics.Defender.Easm.DiscoveryGroupPayload * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Analytics.Defender.Easm.ValidateResult&gt;" Usage="easmClient.ValidateDiscoveryGroup (body, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Analytics.Defender.Easm</AssemblyName>
@@ -6124,17 +6124,17 @@ Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetPrope
         <ReturnType>Azure.Response&lt;Azure.Analytics.Defender.Easm.ValidateResult&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="discoveryGroupPayload" Type="Azure.Analytics.Defender.Easm.DiscoveryGroupPayload" />
+        <Parameter Name="body" Type="Azure.Analytics.Defender.Easm.DiscoveryGroupPayload" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="discoveryGroupPayload"> A request body used to create a discovery group. </param>
+        <param name="body"> Body parameter. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary> Validate a discovery group with a given groupName. </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="discoveryGroupPayload" /> is null. </exception>
+          <paramref name="body" /> is null. </exception>
         <example>
 This sample shows how to call ValidateDiscoveryGroup.
 <code><![CDATA[
@@ -6142,8 +6142,8 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 EasmClient client = new EasmClient(endpoint, credential);
 
-DiscoveryGroupPayload discoveryGroupPayload = new DiscoveryGroupPayload();
-Response<ValidateResult> response = client.ValidateDiscoveryGroup(discoveryGroupPayload);
+DiscoveryGroupPayload body = new DiscoveryGroupPayload();
+Response<ValidateResult> response = client.ValidateDiscoveryGroup(body);
 ]]></code>
 This sample shows how to call ValidateDiscoveryGroup with all parameters.
 <code><![CDATA[
@@ -6151,7 +6151,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 EasmClient client = new EasmClient(endpoint, credential);
 
-DiscoveryGroupPayload discoveryGroupPayload = new DiscoveryGroupPayload
+DiscoveryGroupPayload body = new DiscoveryGroupPayload
 {
     Name = "<name>",
     Description = "<description>",
@@ -6166,7 +6166,7 @@ DiscoveryGroupPayload discoveryGroupPayload = new DiscoveryGroupPayload
     Excludes = { default },
     TemplateId = "<templateId>",
 };
-Response<ValidateResult> response = client.ValidateDiscoveryGroup(discoveryGroupPayload);
+Response<ValidateResult> response = client.ValidateDiscoveryGroup(body);
 ]]></code></example>
       </Docs>
     </Member>
@@ -6258,11 +6258,11 @@ Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetPrope
       </Docs>
     </Member>
     <Member MemberName="ValidateDiscoveryGroupAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.ValidateResult&gt;&gt; ValidateDiscoveryGroupAsync (Azure.Analytics.Defender.Easm.DiscoveryGroupPayload discoveryGroupPayload, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Analytics.Defender.Easm.ValidateResult&gt;&gt; ValidateDiscoveryGroupAsync(class Azure.Analytics.Defender.Easm.DiscoveryGroupPayload discoveryGroupPayload, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.ValidateResult&gt;&gt; ValidateDiscoveryGroupAsync (Azure.Analytics.Defender.Easm.DiscoveryGroupPayload body, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Analytics.Defender.Easm.ValidateResult&gt;&gt; ValidateDiscoveryGroupAsync(class Azure.Analytics.Defender.Easm.DiscoveryGroupPayload body, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Analytics.Defender.Easm.EasmClient.ValidateDiscoveryGroupAsync(Azure.Analytics.Defender.Easm.DiscoveryGroupPayload,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function ValidateDiscoveryGroupAsync (discoveryGroupPayload As DiscoveryGroupPayload, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of ValidateResult))" />
-      <MemberSignature Language="F#" Value="abstract member ValidateDiscoveryGroupAsync : Azure.Analytics.Defender.Easm.DiscoveryGroupPayload * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.ValidateResult&gt;&gt;&#xA;override this.ValidateDiscoveryGroupAsync : Azure.Analytics.Defender.Easm.DiscoveryGroupPayload * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.ValidateResult&gt;&gt;" Usage="easmClient.ValidateDiscoveryGroupAsync (discoveryGroupPayload, cancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function ValidateDiscoveryGroupAsync (body As DiscoveryGroupPayload, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of ValidateResult))" />
+      <MemberSignature Language="F#" Value="abstract member ValidateDiscoveryGroupAsync : Azure.Analytics.Defender.Easm.DiscoveryGroupPayload * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.ValidateResult&gt;&gt;&#xA;override this.ValidateDiscoveryGroupAsync : Azure.Analytics.Defender.Easm.DiscoveryGroupPayload * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.ValidateResult&gt;&gt;" Usage="easmClient.ValidateDiscoveryGroupAsync (body, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Analytics.Defender.Easm</AssemblyName>
@@ -6272,17 +6272,17 @@ Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetPrope
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Analytics.Defender.Easm.ValidateResult&gt;&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="discoveryGroupPayload" Type="Azure.Analytics.Defender.Easm.DiscoveryGroupPayload" />
+        <Parameter Name="body" Type="Azure.Analytics.Defender.Easm.DiscoveryGroupPayload" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="discoveryGroupPayload"> A request body used to create a discovery group. </param>
+        <param name="body"> Body parameter. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary> Validate a discovery group with a given groupName. </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="discoveryGroupPayload" /> is null. </exception>
+          <paramref name="body" /> is null. </exception>
         <example>
 This sample shows how to call ValidateDiscoveryGroupAsync.
 <code><![CDATA[
@@ -6290,8 +6290,8 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 EasmClient client = new EasmClient(endpoint, credential);
 
-DiscoveryGroupPayload discoveryGroupPayload = new DiscoveryGroupPayload();
-Response<ValidateResult> response = await client.ValidateDiscoveryGroupAsync(discoveryGroupPayload);
+DiscoveryGroupPayload body = new DiscoveryGroupPayload();
+Response<ValidateResult> response = await client.ValidateDiscoveryGroupAsync(body);
 ]]></code>
 This sample shows how to call ValidateDiscoveryGroupAsync with all parameters.
 <code><![CDATA[
@@ -6299,7 +6299,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 EasmClient client = new EasmClient(endpoint, credential);
 
-DiscoveryGroupPayload discoveryGroupPayload = new DiscoveryGroupPayload
+DiscoveryGroupPayload body = new DiscoveryGroupPayload
 {
     Name = "<name>",
     Description = "<description>",
@@ -6314,7 +6314,7 @@ DiscoveryGroupPayload discoveryGroupPayload = new DiscoveryGroupPayload
     Excludes = { default },
     TemplateId = "<templateId>",
 };
-Response<ValidateResult> response = await client.ValidateDiscoveryGroupAsync(discoveryGroupPayload);
+Response<ValidateResult> response = await client.ValidateDiscoveryGroupAsync(body);
 ]]></code></example>
       </Docs>
     </Member>

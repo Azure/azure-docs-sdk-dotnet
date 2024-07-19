@@ -8,6 +8,7 @@
     <AssemblyName>Azure.Developer.LoadTesting</AssemblyName>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <AssemblyVersion>1.0.1.0</AssemblyVersion>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -27,6 +28,7 @@
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.LoadTesting</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -44,6 +46,7 @@
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.LoadTesting</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="endpoint" Type="System.Uri" />
@@ -68,6 +71,7 @@
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.LoadTesting</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="endpoint" Type="System.Uri" />
@@ -94,6 +98,7 @@
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.LoadTesting</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Developer.LoadTesting.TestRunResultOperation</ReturnType>
@@ -133,6 +138,7 @@
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.LoadTesting</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Developer.LoadTesting.TestRunResultOperation&gt;</ReturnType>
@@ -172,6 +178,7 @@
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.LoadTesting</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Response</ReturnType>
@@ -183,10 +190,14 @@
       </Parameters>
       <Docs>
         <param name="testRunId"> Unique name for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters. </param>
-        <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        <param name="content"> The content to send as the body of the request. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Associate an app component (collection of azure resources) to a test run. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Associate an app component (collection of azure resources) to a test run
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Below is the JSON schema for the request and response payloads.
 
@@ -221,33 +232,53 @@ Schema for <c>TestRunAppComponents</c>:
           <paramref name="testRunId" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call CreateOrUpdateAppComponents with required parameters and request content and parse the result.
+This sample shows how to call CreateOrUpdateAppComponents and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LoadTestRunClient(endpoint, credential);
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
 
-var data = new {
-    components = new {
-        key = new {
+using RequestContent content = RequestContent.Create(new
+{
+    components = new
+    {
+        key = new object(),
+    },
+});
+Response response = client.CreateOrUpdateAppComponents("<testRunId>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("components").GetProperty("<key>").ToString());
+]]></code>
+This sample shows how to call CreateOrUpdateAppComponents with all parameters and request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    components = new
+    {
+        key = new
+        {
             resourceName = "<resourceName>",
             resourceType = "<resourceType>",
             displayName = "<displayName>",
             kind = "<kind>",
         },
     },
-};
-
-Response response = client.CreateOrUpdateAppComponents("<testRunId>", RequestContent.Create(data));
+});
+Response response = client.CreateOrUpdateAppComponents("<testRunId>", content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("resourceId").ToString());
-Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("resourceName").ToString());
-Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("resourceType").ToString());
-Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("displayName").ToString());
-Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("resourceGroup").ToString());
-Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("subscriptionId").ToString());
-Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("components").GetProperty("<key>").GetProperty("resourceId").ToString());
+Console.WriteLine(result.GetProperty("components").GetProperty("<key>").GetProperty("resourceName").ToString());
+Console.WriteLine(result.GetProperty("components").GetProperty("<key>").GetProperty("resourceType").ToString());
+Console.WriteLine(result.GetProperty("components").GetProperty("<key>").GetProperty("displayName").ToString());
+Console.WriteLine(result.GetProperty("components").GetProperty("<key>").GetProperty("resourceGroup").ToString());
+Console.WriteLine(result.GetProperty("components").GetProperty("<key>").GetProperty("subscriptionId").ToString());
+Console.WriteLine(result.GetProperty("components").GetProperty("<key>").GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("testRunId").ToString());
 Console.WriteLine(result.GetProperty("createdDateTime").ToString());
 Console.WriteLine(result.GetProperty("createdBy").ToString());
@@ -266,6 +297,7 @@ Console.WriteLine(result.GetProperty("lastModifiedBy").ToString());
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.LoadTesting</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&gt;</ReturnType>
@@ -277,10 +309,14 @@ Console.WriteLine(result.GetProperty("lastModifiedBy").ToString());
       </Parameters>
       <Docs>
         <param name="testRunId"> Unique name for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters. </param>
-        <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        <param name="content"> The content to send as the body of the request. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Associate an app component (collection of azure resources) to a test run. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Associate an app component (collection of azure resources) to a test run
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Below is the JSON schema for the request and response payloads.
 
@@ -315,33 +351,53 @@ Schema for <c>TestRunAppComponents</c>:
           <paramref name="testRunId" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call CreateOrUpdateAppComponentsAsync with required parameters and request content and parse the result.
+This sample shows how to call CreateOrUpdateAppComponentsAsync and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LoadTestRunClient(endpoint, credential);
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
 
-var data = new {
-    components = new {
-        key = new {
+using RequestContent content = RequestContent.Create(new
+{
+    components = new
+    {
+        key = new object(),
+    },
+});
+Response response = await client.CreateOrUpdateAppComponentsAsync("<testRunId>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("components").GetProperty("<key>").ToString());
+]]></code>
+This sample shows how to call CreateOrUpdateAppComponentsAsync with all parameters and request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    components = new
+    {
+        key = new
+        {
             resourceName = "<resourceName>",
             resourceType = "<resourceType>",
             displayName = "<displayName>",
             kind = "<kind>",
         },
     },
-};
-
-Response response = await client.CreateOrUpdateAppComponentsAsync("<testRunId>", RequestContent.Create(data));
+});
+Response response = await client.CreateOrUpdateAppComponentsAsync("<testRunId>", content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("resourceId").ToString());
-Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("resourceName").ToString());
-Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("resourceType").ToString());
-Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("displayName").ToString());
-Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("resourceGroup").ToString());
-Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("subscriptionId").ToString());
-Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("components").GetProperty("<key>").GetProperty("resourceId").ToString());
+Console.WriteLine(result.GetProperty("components").GetProperty("<key>").GetProperty("resourceName").ToString());
+Console.WriteLine(result.GetProperty("components").GetProperty("<key>").GetProperty("resourceType").ToString());
+Console.WriteLine(result.GetProperty("components").GetProperty("<key>").GetProperty("displayName").ToString());
+Console.WriteLine(result.GetProperty("components").GetProperty("<key>").GetProperty("resourceGroup").ToString());
+Console.WriteLine(result.GetProperty("components").GetProperty("<key>").GetProperty("subscriptionId").ToString());
+Console.WriteLine(result.GetProperty("components").GetProperty("<key>").GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("testRunId").ToString());
 Console.WriteLine(result.GetProperty("createdDateTime").ToString());
 Console.WriteLine(result.GetProperty("createdBy").ToString());
@@ -360,6 +416,7 @@ Console.WriteLine(result.GetProperty("lastModifiedBy").ToString());
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.LoadTesting</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Response</ReturnType>
@@ -371,10 +428,14 @@ Console.WriteLine(result.GetProperty("lastModifiedBy").ToString());
       </Parameters>
       <Docs>
         <param name="testRunId"> Unique name for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters. </param>
-        <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        <param name="content"> The content to send as the body of the request. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Configure server metrics for a test run. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Configure server metrics for a test run
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Below is the JSON schema for the request and response payloads.
 
@@ -409,28 +470,30 @@ Schema for <c>TestRunServerMetricConfig</c>:
           <paramref name="testRunId" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call CreateOrUpdateServerMetricsConfig with required parameters and parse the result.
+This sample shows how to call CreateOrUpdateServerMetricsConfig and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LoadTestRunClient(endpoint, credential);
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
 
-var data = new {};
-
-Response response = client.CreateOrUpdateServerMetricsConfig("<testRunId>", RequestContent.Create(data));
+using RequestContent content = RequestContent.Create(new object());
+Response response = client.CreateOrUpdateServerMetricsConfig("<testRunId>", content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
-This sample shows how to call CreateOrUpdateServerMetricsConfig with all parameters and request content, and how to parse the result.
+This sample shows how to call CreateOrUpdateServerMetricsConfig with all parameters and request content and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LoadTestRunClient(endpoint, credential);
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
 
-var data = new {
-    metrics = new {
-        key = new {
+using RequestContent content = RequestContent.Create(new
+{
+    metrics = new
+    {
+        key = new
+        {
             resourceId = "<resourceId>",
             metricNamespace = "<metricNamespace>",
             displayDescription = "<displayDescription>",
@@ -440,20 +503,19 @@ var data = new {
             resourceType = "<resourceType>",
         },
     },
-};
-
-Response response = client.CreateOrUpdateServerMetricsConfig("<testRunId>", RequestContent.Create(data));
+});
+Response response = client.CreateOrUpdateServerMetricsConfig("<testRunId>", content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("testRunId").ToString());
-Console.WriteLine(result.GetProperty("metrics").GetProperty("<test>").GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("metrics").GetProperty("<test>").GetProperty("resourceId").ToString());
-Console.WriteLine(result.GetProperty("metrics").GetProperty("<test>").GetProperty("metricNamespace").ToString());
-Console.WriteLine(result.GetProperty("metrics").GetProperty("<test>").GetProperty("displayDescription").ToString());
-Console.WriteLine(result.GetProperty("metrics").GetProperty("<test>").GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("metrics").GetProperty("<test>").GetProperty("aggregation").ToString());
-Console.WriteLine(result.GetProperty("metrics").GetProperty("<test>").GetProperty("unit").ToString());
-Console.WriteLine(result.GetProperty("metrics").GetProperty("<test>").GetProperty("resourceType").ToString());
+Console.WriteLine(result.GetProperty("metrics").GetProperty("<key>").GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("metrics").GetProperty("<key>").GetProperty("resourceId").ToString());
+Console.WriteLine(result.GetProperty("metrics").GetProperty("<key>").GetProperty("metricNamespace").ToString());
+Console.WriteLine(result.GetProperty("metrics").GetProperty("<key>").GetProperty("displayDescription").ToString());
+Console.WriteLine(result.GetProperty("metrics").GetProperty("<key>").GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("metrics").GetProperty("<key>").GetProperty("aggregation").ToString());
+Console.WriteLine(result.GetProperty("metrics").GetProperty("<key>").GetProperty("unit").ToString());
+Console.WriteLine(result.GetProperty("metrics").GetProperty("<key>").GetProperty("resourceType").ToString());
 Console.WriteLine(result.GetProperty("createdDateTime").ToString());
 Console.WriteLine(result.GetProperty("createdBy").ToString());
 Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
@@ -471,6 +533,7 @@ Console.WriteLine(result.GetProperty("lastModifiedBy").ToString());
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.LoadTesting</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&gt;</ReturnType>
@@ -482,10 +545,14 @@ Console.WriteLine(result.GetProperty("lastModifiedBy").ToString());
       </Parameters>
       <Docs>
         <param name="testRunId"> Unique name for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters. </param>
-        <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        <param name="content"> The content to send as the body of the request. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Configure server metrics for a test run. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Configure server metrics for a test run
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Below is the JSON schema for the request and response payloads.
 
@@ -520,28 +587,30 @@ Schema for <c>TestRunServerMetricConfig</c>:
           <paramref name="testRunId" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call CreateOrUpdateServerMetricsConfigAsync with required parameters and parse the result.
+This sample shows how to call CreateOrUpdateServerMetricsConfigAsync and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LoadTestRunClient(endpoint, credential);
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
 
-var data = new {};
-
-Response response = await client.CreateOrUpdateServerMetricsConfigAsync("<testRunId>", RequestContent.Create(data));
+using RequestContent content = RequestContent.Create(new object());
+Response response = await client.CreateOrUpdateServerMetricsConfigAsync("<testRunId>", content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
-This sample shows how to call CreateOrUpdateServerMetricsConfigAsync with all parameters and request content, and how to parse the result.
+This sample shows how to call CreateOrUpdateServerMetricsConfigAsync with all parameters and request content and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LoadTestRunClient(endpoint, credential);
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
 
-var data = new {
-    metrics = new {
-        key = new {
+using RequestContent content = RequestContent.Create(new
+{
+    metrics = new
+    {
+        key = new
+        {
             resourceId = "<resourceId>",
             metricNamespace = "<metricNamespace>",
             displayDescription = "<displayDescription>",
@@ -551,20 +620,19 @@ var data = new {
             resourceType = "<resourceType>",
         },
     },
-};
-
-Response response = await client.CreateOrUpdateServerMetricsConfigAsync("<testRunId>", RequestContent.Create(data));
+});
+Response response = await client.CreateOrUpdateServerMetricsConfigAsync("<testRunId>", content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("testRunId").ToString());
-Console.WriteLine(result.GetProperty("metrics").GetProperty("<test>").GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("metrics").GetProperty("<test>").GetProperty("resourceId").ToString());
-Console.WriteLine(result.GetProperty("metrics").GetProperty("<test>").GetProperty("metricNamespace").ToString());
-Console.WriteLine(result.GetProperty("metrics").GetProperty("<test>").GetProperty("displayDescription").ToString());
-Console.WriteLine(result.GetProperty("metrics").GetProperty("<test>").GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("metrics").GetProperty("<test>").GetProperty("aggregation").ToString());
-Console.WriteLine(result.GetProperty("metrics").GetProperty("<test>").GetProperty("unit").ToString());
-Console.WriteLine(result.GetProperty("metrics").GetProperty("<test>").GetProperty("resourceType").ToString());
+Console.WriteLine(result.GetProperty("metrics").GetProperty("<key>").GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("metrics").GetProperty("<key>").GetProperty("resourceId").ToString());
+Console.WriteLine(result.GetProperty("metrics").GetProperty("<key>").GetProperty("metricNamespace").ToString());
+Console.WriteLine(result.GetProperty("metrics").GetProperty("<key>").GetProperty("displayDescription").ToString());
+Console.WriteLine(result.GetProperty("metrics").GetProperty("<key>").GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("metrics").GetProperty("<key>").GetProperty("aggregation").ToString());
+Console.WriteLine(result.GetProperty("metrics").GetProperty("<key>").GetProperty("unit").ToString());
+Console.WriteLine(result.GetProperty("metrics").GetProperty("<key>").GetProperty("resourceType").ToString());
 Console.WriteLine(result.GetProperty("createdDateTime").ToString());
 Console.WriteLine(result.GetProperty("createdBy").ToString());
 Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
@@ -1262,6 +1330,7 @@ Console.WriteLine(result.GetProperty("lastModifiedBy").ToString());
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.LoadTesting</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Response</ReturnType>
@@ -1273,7 +1342,11 @@ Console.WriteLine(result.GetProperty("lastModifiedBy").ToString());
       <Docs>
         <param name="testRunId"> Unique name for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Delete a test run by its name. </summary>
+        <summary>
+            [Protocol Method] Delete a test run by its name.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
         <returns> The response returned from the service. </returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
@@ -1282,13 +1355,24 @@ Console.WriteLine(result.GetProperty("lastModifiedBy").ToString());
           <paramref name="testRunId" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call DeleteTestRun with required parameters.
+This sample shows how to call DeleteTestRun.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LoadTestRunClient(endpoint, credential);
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
 
 Response response = client.DeleteTestRun("<testRunId>");
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call DeleteTestRun with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
+
+Response response = client.DeleteTestRun("<testRunId>");
+
 Console.WriteLine(response.Status);
 ]]></code></example>
       </Docs>
@@ -1303,6 +1387,7 @@ Console.WriteLine(response.Status);
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.LoadTesting</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&gt;</ReturnType>
@@ -1314,7 +1399,11 @@ Console.WriteLine(response.Status);
       <Docs>
         <param name="testRunId"> Unique name for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Delete a test run by its name. </summary>
+        <summary>
+            [Protocol Method] Delete a test run by its name.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
         <returns> The response returned from the service. </returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
@@ -1323,13 +1412,24 @@ Console.WriteLine(response.Status);
           <paramref name="testRunId" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call DeleteTestRunAsync with required parameters.
+This sample shows how to call DeleteTestRunAsync.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LoadTestRunClient(endpoint, credential);
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
 
 Response response = await client.DeleteTestRunAsync("<testRunId>");
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call DeleteTestRunAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
+
+Response response = await client.DeleteTestRunAsync("<testRunId>");
+
 Console.WriteLine(response.Status);
 ]]></code></example>
       </Docs>
@@ -1344,6 +1444,7 @@ Console.WriteLine(response.Status);
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.LoadTesting</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Response</ReturnType>
@@ -1355,8 +1456,12 @@ Console.WriteLine(response.Status);
       <Docs>
         <param name="testRunId"> Unique name for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Get associated app component (collection of azure resources) for the given test run. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Get associated app component (collection of azure resources) for the given test run.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Below is the JSON schema for the response payload.
 
@@ -1378,22 +1483,33 @@ Schema for <c>TestRunAppComponents</c>:
           <paramref name="testRunId" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call GetAppComponents with required parameters and parse the result.
+This sample shows how to call GetAppComponents and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LoadTestRunClient(endpoint, credential);
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
 
 Response response = client.GetAppComponents("<testRunId>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("resourceId").ToString());
-Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("resourceName").ToString());
-Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("resourceType").ToString());
-Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("displayName").ToString());
-Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("resourceGroup").ToString());
-Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("subscriptionId").ToString());
-Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("components").GetProperty("<key>").ToString());
+]]></code>
+This sample shows how to call GetAppComponents with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
+
+Response response = client.GetAppComponents("<testRunId>");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("components").GetProperty("<key>").GetProperty("resourceId").ToString());
+Console.WriteLine(result.GetProperty("components").GetProperty("<key>").GetProperty("resourceName").ToString());
+Console.WriteLine(result.GetProperty("components").GetProperty("<key>").GetProperty("resourceType").ToString());
+Console.WriteLine(result.GetProperty("components").GetProperty("<key>").GetProperty("displayName").ToString());
+Console.WriteLine(result.GetProperty("components").GetProperty("<key>").GetProperty("resourceGroup").ToString());
+Console.WriteLine(result.GetProperty("components").GetProperty("<key>").GetProperty("subscriptionId").ToString());
+Console.WriteLine(result.GetProperty("components").GetProperty("<key>").GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("testRunId").ToString());
 Console.WriteLine(result.GetProperty("createdDateTime").ToString());
 Console.WriteLine(result.GetProperty("createdBy").ToString());
@@ -1412,6 +1528,7 @@ Console.WriteLine(result.GetProperty("lastModifiedBy").ToString());
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.LoadTesting</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&gt;</ReturnType>
@@ -1423,8 +1540,12 @@ Console.WriteLine(result.GetProperty("lastModifiedBy").ToString());
       <Docs>
         <param name="testRunId"> Unique name for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Get associated app component (collection of azure resources) for the given test run. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Get associated app component (collection of azure resources) for the given test run.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Below is the JSON schema for the response payload.
 
@@ -1446,22 +1567,33 @@ Schema for <c>TestRunAppComponents</c>:
           <paramref name="testRunId" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call GetAppComponentsAsync with required parameters and parse the result.
+This sample shows how to call GetAppComponentsAsync and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LoadTestRunClient(endpoint, credential);
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
 
 Response response = await client.GetAppComponentsAsync("<testRunId>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("resourceId").ToString());
-Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("resourceName").ToString());
-Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("resourceType").ToString());
-Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("displayName").ToString());
-Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("resourceGroup").ToString());
-Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("subscriptionId").ToString());
-Console.WriteLine(result.GetProperty("components").GetProperty("<test>").GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("components").GetProperty("<key>").ToString());
+]]></code>
+This sample shows how to call GetAppComponentsAsync with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
+
+Response response = await client.GetAppComponentsAsync("<testRunId>");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("components").GetProperty("<key>").GetProperty("resourceId").ToString());
+Console.WriteLine(result.GetProperty("components").GetProperty("<key>").GetProperty("resourceName").ToString());
+Console.WriteLine(result.GetProperty("components").GetProperty("<key>").GetProperty("resourceType").ToString());
+Console.WriteLine(result.GetProperty("components").GetProperty("<key>").GetProperty("displayName").ToString());
+Console.WriteLine(result.GetProperty("components").GetProperty("<key>").GetProperty("resourceGroup").ToString());
+Console.WriteLine(result.GetProperty("components").GetProperty("<key>").GetProperty("subscriptionId").ToString());
+Console.WriteLine(result.GetProperty("components").GetProperty("<key>").GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("testRunId").ToString());
 Console.WriteLine(result.GetProperty("createdDateTime").ToString());
 Console.WriteLine(result.GetProperty("createdBy").ToString());
@@ -1480,6 +1612,7 @@ Console.WriteLine(result.GetProperty("lastModifiedBy").ToString());
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.LoadTesting</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Response</ReturnType>
@@ -1493,8 +1626,12 @@ Console.WriteLine(result.GetProperty("lastModifiedBy").ToString());
         <param name="testRunId"> Unique name for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters. </param>
         <param name="metricNamespace"> Metric namespace to query metric definitions for. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> List the metric definitions for a load test run. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] List the metric definitions for a load test run.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Below is the JSON schema for the response payload.
 
@@ -1531,11 +1668,22 @@ Schema for <c>MetricDefinitionCollection</c>:
           <paramref name="testRunId" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call GetMetricDefinitions with required parameters and parse the result.
+This sample shows how to call GetMetricDefinitions and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LoadTestRunClient(endpoint, credential);
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
+
+Response response = client.GetMetricDefinitions("<testRunId>", "<metricNamespace>");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].ToString());
+]]></code>
+This sample shows how to call GetMetricDefinitions with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
 
 Response response = client.GetMetricDefinitions("<testRunId>", "<metricNamespace>");
 
@@ -1562,6 +1710,7 @@ Console.WriteLine(result.GetProperty("value")[0].GetProperty("metricAvailabiliti
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.LoadTesting</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&gt;</ReturnType>
@@ -1575,8 +1724,12 @@ Console.WriteLine(result.GetProperty("value")[0].GetProperty("metricAvailabiliti
         <param name="testRunId"> Unique name for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters. </param>
         <param name="metricNamespace"> Metric namespace to query metric definitions for. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> List the metric definitions for a load test run. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] List the metric definitions for a load test run.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Below is the JSON schema for the response payload.
 
@@ -1613,11 +1766,22 @@ Schema for <c>MetricDefinitionCollection</c>:
           <paramref name="testRunId" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call GetMetricDefinitionsAsync with required parameters and parse the result.
+This sample shows how to call GetMetricDefinitionsAsync and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LoadTestRunClient(endpoint, credential);
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
+
+Response response = await client.GetMetricDefinitionsAsync("<testRunId>", "<metricNamespace>");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].ToString());
+]]></code>
+This sample shows how to call GetMetricDefinitionsAsync with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
 
 Response response = await client.GetMetricDefinitionsAsync("<testRunId>", "<metricNamespace>");
 
@@ -1644,6 +1808,7 @@ Console.WriteLine(result.GetProperty("value")[0].GetProperty("metricAvailabiliti
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.LoadTesting</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Pageable&lt;System.BinaryData&gt;</ReturnType>
@@ -1665,7 +1830,11 @@ Console.WriteLine(result.GetProperty("value")[0].GetProperty("metricAvailabiliti
         <param name="timeInterval"> The timespan of the query. It is a string with the following format 'startDateTime_ISO/endDateTime_ISO'. </param>
         <param name="interval"> The interval (i.e. timegrain) of the query. Allowed values: "PT5S" | "PT10S" | "PT1M" | "PT5M" | "PT1H". </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> List the dimension values for the given metric dimension name. </summary>
+        <summary>
+            [Protocol Method] List the dimension values for the given metric dimension name.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
         <returns> The <see cref="T:Azure.Pageable`1" /> from the service containing a list of <see cref="T:System.BinaryData" /> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
@@ -1674,27 +1843,27 @@ Console.WriteLine(result.GetProperty("value")[0].GetProperty("metricAvailabiliti
           <paramref name="testRunId" /> or <paramref name="name" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call GetMetricDimensionValues with required parameters and parse the result.
+This sample shows how to call GetMetricDimensionValues and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LoadTestRunClient(endpoint, credential);
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
 
-foreach (var data in client.GetMetricDimensionValues("<testRunId>", "<name>", "<metricName>", "<metricNamespace>", "<timeInterval>"))
+foreach (BinaryData item in client.GetMetricDimensionValues("<testRunId>", "<name>", "<metricName>", "<metricNamespace>", "<timeInterval>"))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code>
-This sample shows how to call GetMetricDimensionValues with all parameters, and how to parse the result.
+This sample shows how to call GetMetricDimensionValues with all parameters and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LoadTestRunClient(endpoint, credential);
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
 
-foreach (var data in client.GetMetricDimensionValues("<testRunId>", "<name>", "<metricName>", "<metricNamespace>", "<timeInterval>", "<interval>"))
+foreach (BinaryData item in client.GetMetricDimensionValues("<testRunId>", "<name>", "<metricName>", "<metricNamespace>", "<timeInterval>", interval: "PT5S"))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code></example>
@@ -1710,6 +1879,7 @@ foreach (var data in client.GetMetricDimensionValues("<testRunId>", "<name>", "<
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.LoadTesting</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.AsyncPageable&lt;System.BinaryData&gt;</ReturnType>
@@ -1731,7 +1901,11 @@ foreach (var data in client.GetMetricDimensionValues("<testRunId>", "<name>", "<
         <param name="timeInterval"> The timespan of the query. It is a string with the following format 'startDateTime_ISO/endDateTime_ISO'. </param>
         <param name="interval"> The interval (i.e. timegrain) of the query. Allowed values: "PT5S" | "PT10S" | "PT1M" | "PT5M" | "PT1H". </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> List the dimension values for the given metric dimension name. </summary>
+        <summary>
+            [Protocol Method] List the dimension values for the given metric dimension name.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
         <returns> The <see cref="T:Azure.AsyncPageable`1" /> from the service containing a list of <see cref="T:System.BinaryData" /> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
@@ -1740,27 +1914,27 @@ foreach (var data in client.GetMetricDimensionValues("<testRunId>", "<name>", "<
           <paramref name="testRunId" /> or <paramref name="name" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call GetMetricDimensionValuesAsync with required parameters and parse the result.
+This sample shows how to call GetMetricDimensionValuesAsync and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LoadTestRunClient(endpoint, credential);
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
 
-await foreach (var data in client.GetMetricDimensionValuesAsync("<testRunId>", "<name>", "<metricName>", "<metricNamespace>", "<timeInterval>"))
+await foreach (BinaryData item in client.GetMetricDimensionValuesAsync("<testRunId>", "<name>", "<metricName>", "<metricNamespace>", "<timeInterval>"))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code>
-This sample shows how to call GetMetricDimensionValuesAsync with all parameters, and how to parse the result.
+This sample shows how to call GetMetricDimensionValuesAsync with all parameters and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LoadTestRunClient(endpoint, credential);
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
 
-await foreach (var data in client.GetMetricDimensionValuesAsync("<testRunId>", "<name>", "<metricName>", "<metricNamespace>", "<timeInterval>", "<interval>"))
+await foreach (BinaryData item in client.GetMetricDimensionValuesAsync("<testRunId>", "<name>", "<metricName>", "<metricNamespace>", "<timeInterval>", interval: "PT5S"))
 {
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code></example>
@@ -1776,6 +1950,7 @@ await foreach (var data in client.GetMetricDimensionValuesAsync("<testRunId>", "
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.LoadTesting</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Response</ReturnType>
@@ -1787,8 +1962,12 @@ await foreach (var data in client.GetMetricDimensionValuesAsync("<testRunId>", "
       <Docs>
         <param name="testRunId"> Unique name for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> List the metric namespaces for a load test run. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] List the metric namespaces for a load test run.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Below is the JSON schema for the response payload.
 
@@ -1810,11 +1989,22 @@ Schema for <c>MetricNamespaceCollection</c>:
           <paramref name="testRunId" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call GetMetricNamespaces with required parameters and parse the result.
+This sample shows how to call GetMetricNamespaces and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LoadTestRunClient(endpoint, credential);
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
+
+Response response = client.GetMetricNamespaces("<testRunId>");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].ToString());
+]]></code>
+This sample shows how to call GetMetricNamespaces with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
 
 Response response = client.GetMetricNamespaces("<testRunId>");
 
@@ -1834,6 +2024,7 @@ Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString())
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.LoadTesting</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&gt;</ReturnType>
@@ -1845,8 +2036,12 @@ Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString())
       <Docs>
         <param name="testRunId"> Unique name for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> List the metric namespaces for a load test run. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] List the metric namespaces for a load test run.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Below is the JSON schema for the response payload.
 
@@ -1868,11 +2063,22 @@ Schema for <c>MetricNamespaceCollection</c>:
           <paramref name="testRunId" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call GetMetricNamespacesAsync with required parameters and parse the result.
+This sample shows how to call GetMetricNamespacesAsync and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LoadTestRunClient(endpoint, credential);
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
+
+Response response = await client.GetMetricNamespacesAsync("<testRunId>");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].ToString());
+]]></code>
+This sample shows how to call GetMetricNamespacesAsync with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
 
 Response response = await client.GetMetricNamespacesAsync("<testRunId>");
 
@@ -1892,6 +2098,7 @@ Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString())
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.LoadTesting</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Pageable&lt;System.BinaryData&gt;</ReturnType>
@@ -1951,11 +2158,6 @@ Schema for <c>MetricsValue</c>:
   ], # Optional. The dimension values 
 }
 </code></remarks>
-        <exception cref="T:System.ArgumentNullException">
-          <paramref name="testRunId" />, <paramref name="metricName" />, <paramref name="metricNamespace" /> or <paramref name="timespan" /> is null. </exception>
-        <exception cref="T:System.ArgumentException">
-          <paramref name="testRunId" /> is an empty string, and was expected to be non-empty. </exception>
-        <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
 This sample shows how to call GetMetrics with required parameters and parse the result.
 <code><![CDATA[
@@ -1997,6 +2199,13 @@ foreach (var data in client.GetMetrics("<testRunId>", "<metricname>", "<metricNa
     Console.WriteLine(result.GetProperty("dimensionValues")[0].GetProperty("value").ToString());
 }
 ]]></code></example>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="testRunId" />, <paramref name="metricName" />, <paramref name="metricNamespace" /> or <paramref name="timespan" /> is null. </exception>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="testRunId" /> is an empty string, and was expected to be non-empty. </exception>
+        <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
+        <!-- No matching elements were found for the following include tag -->
+        <include file="Generated/Docs/LoadTestRunClient.xml" path="doc/members/member[@name='GetMetrics(String,String,String,String,RequestContent,String,String,RequestContext)']/*" />
       </Docs>
     </Member>
     <Member MemberName="GetMetricsAsync">
@@ -2009,6 +2218,7 @@ foreach (var data in client.GetMetrics("<testRunId>", "<metricname>", "<metricNa
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.LoadTesting</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.AsyncPageable&lt;System.BinaryData&gt;</ReturnType>
@@ -2068,11 +2278,6 @@ Schema for <c>MetricsValue</c>:
   ], # Optional. The dimension values 
 }
 </code></remarks>
-        <exception cref="T:System.ArgumentNullException">
-          <paramref name="testRunId" />, <paramref name="metricName" />, <paramref name="metricNamespace" /> or <paramref name="timespan" /> is null. </exception>
-        <exception cref="T:System.ArgumentException">
-          <paramref name="testRunId" /> is an empty string, and was expected to be non-empty. </exception>
-        <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
 This sample shows how to call GetMetricsAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -2114,6 +2319,13 @@ await foreach (var data in client.GetMetricsAsync("<testRunId>", "<metricname>",
     Console.WriteLine(result.GetProperty("dimensionValues")[0].GetProperty("value").ToString());
 }
 ]]></code></example>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="testRunId" />, <paramref name="metricName" />, <paramref name="metricNamespace" /> or <paramref name="timespan" /> is null. </exception>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="testRunId" /> is an empty string, and was expected to be non-empty. </exception>
+        <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
+        <!-- No matching elements were found for the following include tag -->
+        <include file="Generated/Docs/LoadTestRunClient.xml" path="doc/members/member[@name='GetMetricsAsync(String,String,String,String,RequestContent,String,String,RequestContext)']/*" />
       </Docs>
     </Member>
     <Member MemberName="GetServerMetricsConfig">
@@ -2126,6 +2338,7 @@ await foreach (var data in client.GetMetricsAsync("<testRunId>", "<metricname>",
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.LoadTesting</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Response</ReturnType>
@@ -2137,8 +2350,12 @@ await foreach (var data in client.GetMetricsAsync("<testRunId>", "<metricname>",
       <Docs>
         <param name="testRunId"> Unique name for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> List server metrics configuration for the given test run. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] List server metrics configuration for the given test run.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Below is the JSON schema for the response payload.
 
@@ -2160,24 +2377,35 @@ Schema for <c>TestRunServerMetricConfig</c>:
           <paramref name="testRunId" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call GetServerMetricsConfig with required parameters and parse the result.
+This sample shows how to call GetServerMetricsConfig and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LoadTestRunClient(endpoint, credential);
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
+
+Response response = client.GetServerMetricsConfig("<testRunId>");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetServerMetricsConfig with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
 
 Response response = client.GetServerMetricsConfig("<testRunId>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("testRunId").ToString());
-Console.WriteLine(result.GetProperty("metrics").GetProperty("<test>").GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("metrics").GetProperty("<test>").GetProperty("resourceId").ToString());
-Console.WriteLine(result.GetProperty("metrics").GetProperty("<test>").GetProperty("metricNamespace").ToString());
-Console.WriteLine(result.GetProperty("metrics").GetProperty("<test>").GetProperty("displayDescription").ToString());
-Console.WriteLine(result.GetProperty("metrics").GetProperty("<test>").GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("metrics").GetProperty("<test>").GetProperty("aggregation").ToString());
-Console.WriteLine(result.GetProperty("metrics").GetProperty("<test>").GetProperty("unit").ToString());
-Console.WriteLine(result.GetProperty("metrics").GetProperty("<test>").GetProperty("resourceType").ToString());
+Console.WriteLine(result.GetProperty("metrics").GetProperty("<key>").GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("metrics").GetProperty("<key>").GetProperty("resourceId").ToString());
+Console.WriteLine(result.GetProperty("metrics").GetProperty("<key>").GetProperty("metricNamespace").ToString());
+Console.WriteLine(result.GetProperty("metrics").GetProperty("<key>").GetProperty("displayDescription").ToString());
+Console.WriteLine(result.GetProperty("metrics").GetProperty("<key>").GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("metrics").GetProperty("<key>").GetProperty("aggregation").ToString());
+Console.WriteLine(result.GetProperty("metrics").GetProperty("<key>").GetProperty("unit").ToString());
+Console.WriteLine(result.GetProperty("metrics").GetProperty("<key>").GetProperty("resourceType").ToString());
 Console.WriteLine(result.GetProperty("createdDateTime").ToString());
 Console.WriteLine(result.GetProperty("createdBy").ToString());
 Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
@@ -2195,6 +2423,7 @@ Console.WriteLine(result.GetProperty("lastModifiedBy").ToString());
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.LoadTesting</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&gt;</ReturnType>
@@ -2206,8 +2435,12 @@ Console.WriteLine(result.GetProperty("lastModifiedBy").ToString());
       <Docs>
         <param name="testRunId"> Unique name for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> List server metrics configuration for the given test run. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] List server metrics configuration for the given test run.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Below is the JSON schema for the response payload.
 
@@ -2229,24 +2462,35 @@ Schema for <c>TestRunServerMetricConfig</c>:
           <paramref name="testRunId" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call GetServerMetricsConfigAsync with required parameters and parse the result.
+This sample shows how to call GetServerMetricsConfigAsync and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LoadTestRunClient(endpoint, credential);
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
+
+Response response = await client.GetServerMetricsConfigAsync("<testRunId>");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetServerMetricsConfigAsync with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
 
 Response response = await client.GetServerMetricsConfigAsync("<testRunId>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("testRunId").ToString());
-Console.WriteLine(result.GetProperty("metrics").GetProperty("<test>").GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("metrics").GetProperty("<test>").GetProperty("resourceId").ToString());
-Console.WriteLine(result.GetProperty("metrics").GetProperty("<test>").GetProperty("metricNamespace").ToString());
-Console.WriteLine(result.GetProperty("metrics").GetProperty("<test>").GetProperty("displayDescription").ToString());
-Console.WriteLine(result.GetProperty("metrics").GetProperty("<test>").GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("metrics").GetProperty("<test>").GetProperty("aggregation").ToString());
-Console.WriteLine(result.GetProperty("metrics").GetProperty("<test>").GetProperty("unit").ToString());
-Console.WriteLine(result.GetProperty("metrics").GetProperty("<test>").GetProperty("resourceType").ToString());
+Console.WriteLine(result.GetProperty("metrics").GetProperty("<key>").GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("metrics").GetProperty("<key>").GetProperty("resourceId").ToString());
+Console.WriteLine(result.GetProperty("metrics").GetProperty("<key>").GetProperty("metricNamespace").ToString());
+Console.WriteLine(result.GetProperty("metrics").GetProperty("<key>").GetProperty("displayDescription").ToString());
+Console.WriteLine(result.GetProperty("metrics").GetProperty("<key>").GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("metrics").GetProperty("<key>").GetProperty("aggregation").ToString());
+Console.WriteLine(result.GetProperty("metrics").GetProperty("<key>").GetProperty("unit").ToString());
+Console.WriteLine(result.GetProperty("metrics").GetProperty("<key>").GetProperty("resourceType").ToString());
 Console.WriteLine(result.GetProperty("createdDateTime").ToString());
 Console.WriteLine(result.GetProperty("createdBy").ToString());
 Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
@@ -2264,6 +2508,7 @@ Console.WriteLine(result.GetProperty("lastModifiedBy").ToString());
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.LoadTesting</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Response</ReturnType>
@@ -2275,8 +2520,12 @@ Console.WriteLine(result.GetProperty("lastModifiedBy").ToString());
       <Docs>
         <param name="testRunId"> Unique name for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Get test run details by name. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Get test run details by name.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Below is the JSON schema for the response payload.
 
@@ -2356,44 +2605,55 @@ Schema for <c>TestRun</c>:
           <paramref name="testRunId" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call GetTestRun with required parameters and parse the result.
+This sample shows how to call GetTestRun and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LoadTestRunClient(endpoint, credential);
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
 
 Response response = client.GetTestRun("<testRunId>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<test>").GetProperty("clientMetric").ToString());
-Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<test>").GetProperty("aggregate").ToString());
-Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<test>").GetProperty("condition").ToString());
-Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<test>").GetProperty("requestName").ToString());
-Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<test>").GetProperty("value").ToString());
-Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<test>").GetProperty("action").ToString());
-Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<test>").GetProperty("actualValue").ToString());
-Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<test>").GetProperty("result").ToString());
-Console.WriteLine(result.GetProperty("secrets").GetProperty("<test>").GetProperty("value").ToString());
-Console.WriteLine(result.GetProperty("secrets").GetProperty("<test>").GetProperty("type").ToString());
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetTestRun with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
+
+Response response = client.GetTestRun("<testRunId>");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<key>").GetProperty("clientMetric").ToString());
+Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<key>").GetProperty("aggregate").ToString());
+Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<key>").GetProperty("condition").ToString());
+Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<key>").GetProperty("requestName").ToString());
+Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<key>").GetProperty("value").ToString());
+Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<key>").GetProperty("action").ToString());
+Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<key>").GetProperty("actualValue").ToString());
+Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<key>").GetProperty("result").ToString());
+Console.WriteLine(result.GetProperty("secrets").GetProperty("<key>").GetProperty("value").ToString());
+Console.WriteLine(result.GetProperty("secrets").GetProperty("<key>").GetProperty("type").ToString());
 Console.WriteLine(result.GetProperty("certificate").GetProperty("value").ToString());
 Console.WriteLine(result.GetProperty("certificate").GetProperty("type").ToString());
 Console.WriteLine(result.GetProperty("certificate").GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("environmentVariables").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("environmentVariables").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("errorDetails")[0].GetProperty("message").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("transaction").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("sampleCount").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("errorCount").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("errorPct").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("meanResTime").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("medianResTime").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("maxResTime").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("minResTime").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("pct1ResTime").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("pct2ResTime").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("pct3ResTime").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("throughput").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("receivedKBytesPerSec").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("sentKBytesPerSec").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("transaction").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("sampleCount").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("errorCount").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("errorPct").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("meanResTime").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("medianResTime").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("maxResTime").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("minResTime").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("pct1ResTime").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("pct2ResTime").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("pct3ResTime").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("throughput").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("receivedKBytesPerSec").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("sentKBytesPerSec").ToString());
 Console.WriteLine(result.GetProperty("loadTestConfiguration").GetProperty("engineInstances").ToString());
 Console.WriteLine(result.GetProperty("loadTestConfiguration").GetProperty("splitAllCSVs").ToString());
 Console.WriteLine(result.GetProperty("loadTestConfiguration").GetProperty("quickStartTest").ToString());
@@ -2473,6 +2733,7 @@ Console.WriteLine(result.GetProperty("lastModifiedBy").ToString());
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.LoadTesting</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&gt;</ReturnType>
@@ -2484,8 +2745,12 @@ Console.WriteLine(result.GetProperty("lastModifiedBy").ToString());
       <Docs>
         <param name="testRunId"> Unique name for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Get test run details by name. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Get test run details by name.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Below is the JSON schema for the response payload.
 
@@ -2565,44 +2830,55 @@ Schema for <c>TestRun</c>:
           <paramref name="testRunId" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call GetTestRunAsync with required parameters and parse the result.
+This sample shows how to call GetTestRunAsync and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LoadTestRunClient(endpoint, credential);
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
 
 Response response = await client.GetTestRunAsync("<testRunId>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<test>").GetProperty("clientMetric").ToString());
-Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<test>").GetProperty("aggregate").ToString());
-Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<test>").GetProperty("condition").ToString());
-Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<test>").GetProperty("requestName").ToString());
-Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<test>").GetProperty("value").ToString());
-Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<test>").GetProperty("action").ToString());
-Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<test>").GetProperty("actualValue").ToString());
-Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<test>").GetProperty("result").ToString());
-Console.WriteLine(result.GetProperty("secrets").GetProperty("<test>").GetProperty("value").ToString());
-Console.WriteLine(result.GetProperty("secrets").GetProperty("<test>").GetProperty("type").ToString());
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetTestRunAsync with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
+
+Response response = await client.GetTestRunAsync("<testRunId>");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<key>").GetProperty("clientMetric").ToString());
+Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<key>").GetProperty("aggregate").ToString());
+Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<key>").GetProperty("condition").ToString());
+Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<key>").GetProperty("requestName").ToString());
+Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<key>").GetProperty("value").ToString());
+Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<key>").GetProperty("action").ToString());
+Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<key>").GetProperty("actualValue").ToString());
+Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<key>").GetProperty("result").ToString());
+Console.WriteLine(result.GetProperty("secrets").GetProperty("<key>").GetProperty("value").ToString());
+Console.WriteLine(result.GetProperty("secrets").GetProperty("<key>").GetProperty("type").ToString());
 Console.WriteLine(result.GetProperty("certificate").GetProperty("value").ToString());
 Console.WriteLine(result.GetProperty("certificate").GetProperty("type").ToString());
 Console.WriteLine(result.GetProperty("certificate").GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("environmentVariables").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("environmentVariables").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("errorDetails")[0].GetProperty("message").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("transaction").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("sampleCount").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("errorCount").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("errorPct").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("meanResTime").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("medianResTime").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("maxResTime").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("minResTime").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("pct1ResTime").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("pct2ResTime").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("pct3ResTime").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("throughput").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("receivedKBytesPerSec").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("sentKBytesPerSec").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("transaction").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("sampleCount").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("errorCount").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("errorPct").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("meanResTime").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("medianResTime").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("maxResTime").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("minResTime").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("pct1ResTime").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("pct2ResTime").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("pct3ResTime").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("throughput").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("receivedKBytesPerSec").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("sentKBytesPerSec").ToString());
 Console.WriteLine(result.GetProperty("loadTestConfiguration").GetProperty("engineInstances").ToString());
 Console.WriteLine(result.GetProperty("loadTestConfiguration").GetProperty("splitAllCSVs").ToString());
 Console.WriteLine(result.GetProperty("loadTestConfiguration").GetProperty("quickStartTest").ToString());
@@ -2682,6 +2958,7 @@ Console.WriteLine(result.GetProperty("lastModifiedBy").ToString());
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.LoadTesting</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Response</ReturnType>
@@ -2695,8 +2972,12 @@ Console.WriteLine(result.GetProperty("lastModifiedBy").ToString());
         <param name="testRunId"> Unique name for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters. </param>
         <param name="fileName"> Test run file name with file extension. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Get test run file by file name. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Get test run file by file name.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Below is the JSON schema for the response payload.
 
@@ -2718,11 +2999,22 @@ Schema for <c>FileInfo</c>:
           <paramref name="testRunId" /> or <paramref name="fileName" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call GetTestRunFile with required parameters and parse the result.
+This sample shows how to call GetTestRunFile and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LoadTestRunClient(endpoint, credential);
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
+
+Response response = client.GetTestRunFile("<testRunId>", "<fileName>");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetTestRunFile with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
 
 Response response = client.GetTestRunFile("<testRunId>", "<fileName>");
 
@@ -2746,6 +3038,7 @@ Console.WriteLine(result.GetProperty("validationFailureDetails").ToString());
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.LoadTesting</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&gt;</ReturnType>
@@ -2759,8 +3052,12 @@ Console.WriteLine(result.GetProperty("validationFailureDetails").ToString());
         <param name="testRunId"> Unique name for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters. </param>
         <param name="fileName"> Test run file name with file extension. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Get test run file by file name. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Get test run file by file name.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Below is the JSON schema for the response payload.
 
@@ -2782,11 +3079,22 @@ Schema for <c>FileInfo</c>:
           <paramref name="testRunId" /> or <paramref name="fileName" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call GetTestRunFileAsync with required parameters and parse the result.
+This sample shows how to call GetTestRunFileAsync and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LoadTestRunClient(endpoint, credential);
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
+
+Response response = await client.GetTestRunFileAsync("<testRunId>", "<fileName>");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetTestRunFileAsync with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
 
 Response response = await client.GetTestRunFileAsync("<testRunId>", "<fileName>");
 
@@ -2810,6 +3118,7 @@ Console.WriteLine(result.GetProperty("validationFailureDetails").ToString());
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.LoadTesting</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Pageable&lt;System.BinaryData&gt;</ReturnType>
@@ -2847,6 +3156,7 @@ Console.WriteLine(result.GetProperty("validationFailureDetails").ToString());
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.LoadTesting</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.AsyncPageable&lt;System.BinaryData&gt;</ReturnType>
@@ -2884,6 +3194,7 @@ Console.WriteLine(result.GetProperty("validationFailureDetails").ToString());
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.LoadTesting</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Core.Pipeline.HttpPipeline</ReturnType>
@@ -2904,6 +3215,7 @@ Console.WriteLine(result.GetProperty("validationFailureDetails").ToString());
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.LoadTesting</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Response</ReturnType>
@@ -2915,8 +3227,12 @@ Console.WriteLine(result.GetProperty("validationFailureDetails").ToString());
       <Docs>
         <param name="testRunId"> Unique name for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Stop test run by name. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Stop test run by name.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Below is the JSON schema for the response payload.
 
@@ -2996,44 +3312,55 @@ Schema for <c>TestRun</c>:
           <paramref name="testRunId" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call StopTestRun with required parameters and parse the result.
+This sample shows how to call StopTestRun and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LoadTestRunClient(endpoint, credential);
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
 
 Response response = client.StopTestRun("<testRunId>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<test>").GetProperty("clientMetric").ToString());
-Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<test>").GetProperty("aggregate").ToString());
-Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<test>").GetProperty("condition").ToString());
-Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<test>").GetProperty("requestName").ToString());
-Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<test>").GetProperty("value").ToString());
-Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<test>").GetProperty("action").ToString());
-Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<test>").GetProperty("actualValue").ToString());
-Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<test>").GetProperty("result").ToString());
-Console.WriteLine(result.GetProperty("secrets").GetProperty("<test>").GetProperty("value").ToString());
-Console.WriteLine(result.GetProperty("secrets").GetProperty("<test>").GetProperty("type").ToString());
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call StopTestRun with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
+
+Response response = client.StopTestRun("<testRunId>");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<key>").GetProperty("clientMetric").ToString());
+Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<key>").GetProperty("aggregate").ToString());
+Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<key>").GetProperty("condition").ToString());
+Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<key>").GetProperty("requestName").ToString());
+Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<key>").GetProperty("value").ToString());
+Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<key>").GetProperty("action").ToString());
+Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<key>").GetProperty("actualValue").ToString());
+Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<key>").GetProperty("result").ToString());
+Console.WriteLine(result.GetProperty("secrets").GetProperty("<key>").GetProperty("value").ToString());
+Console.WriteLine(result.GetProperty("secrets").GetProperty("<key>").GetProperty("type").ToString());
 Console.WriteLine(result.GetProperty("certificate").GetProperty("value").ToString());
 Console.WriteLine(result.GetProperty("certificate").GetProperty("type").ToString());
 Console.WriteLine(result.GetProperty("certificate").GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("environmentVariables").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("environmentVariables").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("errorDetails")[0].GetProperty("message").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("transaction").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("sampleCount").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("errorCount").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("errorPct").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("meanResTime").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("medianResTime").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("maxResTime").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("minResTime").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("pct1ResTime").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("pct2ResTime").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("pct3ResTime").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("throughput").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("receivedKBytesPerSec").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("sentKBytesPerSec").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("transaction").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("sampleCount").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("errorCount").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("errorPct").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("meanResTime").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("medianResTime").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("maxResTime").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("minResTime").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("pct1ResTime").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("pct2ResTime").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("pct3ResTime").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("throughput").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("receivedKBytesPerSec").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("sentKBytesPerSec").ToString());
 Console.WriteLine(result.GetProperty("loadTestConfiguration").GetProperty("engineInstances").ToString());
 Console.WriteLine(result.GetProperty("loadTestConfiguration").GetProperty("splitAllCSVs").ToString());
 Console.WriteLine(result.GetProperty("loadTestConfiguration").GetProperty("quickStartTest").ToString());
@@ -3113,6 +3440,7 @@ Console.WriteLine(result.GetProperty("lastModifiedBy").ToString());
       <AssemblyInfo>
         <AssemblyName>Azure.Developer.LoadTesting</AssemblyName>
         <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&gt;</ReturnType>
@@ -3124,8 +3452,12 @@ Console.WriteLine(result.GetProperty("lastModifiedBy").ToString());
       <Docs>
         <param name="testRunId"> Unique name for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        <summary> Stop test run by name. </summary>
-        <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        <summary>
+            [Protocol Method] Stop test run by name.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
         <remarks>
 Below is the JSON schema for the response payload.
 
@@ -3205,44 +3537,55 @@ Schema for <c>TestRun</c>:
           <paramref name="testRunId" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call StopTestRunAsync with required parameters and parse the result.
+This sample shows how to call StopTestRunAsync and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new LoadTestRunClient(endpoint, credential);
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
 
 Response response = await client.StopTestRunAsync("<testRunId>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<test>").GetProperty("clientMetric").ToString());
-Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<test>").GetProperty("aggregate").ToString());
-Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<test>").GetProperty("condition").ToString());
-Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<test>").GetProperty("requestName").ToString());
-Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<test>").GetProperty("value").ToString());
-Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<test>").GetProperty("action").ToString());
-Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<test>").GetProperty("actualValue").ToString());
-Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<test>").GetProperty("result").ToString());
-Console.WriteLine(result.GetProperty("secrets").GetProperty("<test>").GetProperty("value").ToString());
-Console.WriteLine(result.GetProperty("secrets").GetProperty("<test>").GetProperty("type").ToString());
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call StopTestRunAsync with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+LoadTestRunClient client = new LoadTestRunClient(endpoint, credential);
+
+Response response = await client.StopTestRunAsync("<testRunId>");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<key>").GetProperty("clientMetric").ToString());
+Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<key>").GetProperty("aggregate").ToString());
+Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<key>").GetProperty("condition").ToString());
+Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<key>").GetProperty("requestName").ToString());
+Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<key>").GetProperty("value").ToString());
+Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<key>").GetProperty("action").ToString());
+Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<key>").GetProperty("actualValue").ToString());
+Console.WriteLine(result.GetProperty("passFailCriteria").GetProperty("passFailMetrics").GetProperty("<key>").GetProperty("result").ToString());
+Console.WriteLine(result.GetProperty("secrets").GetProperty("<key>").GetProperty("value").ToString());
+Console.WriteLine(result.GetProperty("secrets").GetProperty("<key>").GetProperty("type").ToString());
 Console.WriteLine(result.GetProperty("certificate").GetProperty("value").ToString());
 Console.WriteLine(result.GetProperty("certificate").GetProperty("type").ToString());
 Console.WriteLine(result.GetProperty("certificate").GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("environmentVariables").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("environmentVariables").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("errorDetails")[0].GetProperty("message").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("transaction").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("sampleCount").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("errorCount").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("errorPct").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("meanResTime").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("medianResTime").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("maxResTime").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("minResTime").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("pct1ResTime").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("pct2ResTime").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("pct3ResTime").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("throughput").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("receivedKBytesPerSec").ToString());
-Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<test>").GetProperty("sentKBytesPerSec").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("transaction").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("sampleCount").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("errorCount").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("errorPct").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("meanResTime").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("medianResTime").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("maxResTime").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("minResTime").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("pct1ResTime").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("pct2ResTime").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("pct3ResTime").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("throughput").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("receivedKBytesPerSec").ToString());
+Console.WriteLine(result.GetProperty("testRunStatistics").GetProperty("<key>").GetProperty("sentKBytesPerSec").ToString());
 Console.WriteLine(result.GetProperty("loadTestConfiguration").GetProperty("engineInstances").ToString());
 Console.WriteLine(result.GetProperty("loadTestConfiguration").GetProperty("splitAllCSVs").ToString());
 Console.WriteLine(result.GetProperty("loadTestConfiguration").GetProperty("quickStartTest").ToString());
