@@ -1,9 +1,10 @@
 ---
-title: Azure Cosmos DB libraries for .NET
-description: Reference for Azure Cosmos DB libraries for .NET
-ms.date: 03/05/2021
+title: Azure Cosmosdb SDK for .NET
+description: Reference for Azure Cosmosdb SDK for .NET
+ms.date: 04/12/2024
 ms.topic: reference
-ms.service: cosmos-db
+ms.devlang: dotnet
+ms.service: cosmosdb
 ---
 # Azure Cosmos DB libraries for .NET
 
@@ -60,4 +61,3 @@ using (CosmosClient cosmosClient = new CosmosClient("endpoint", "primaryKey"))
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
 [DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
-

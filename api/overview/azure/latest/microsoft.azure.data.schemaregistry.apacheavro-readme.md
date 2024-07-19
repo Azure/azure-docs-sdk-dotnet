@@ -1,12 +1,12 @@
 ---
 title: Azure Schema Registry Apache Avro client library for .NET
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.Data.SchemaRegistry.ApacheAvro, schemaregistry
-ms.date: 05/12/2022
+ms.date: 03/29/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: schemaregistry
 ---
-# Azure Schema Registry Apache Avro client library for .NET - version 1.0.0 
+# Azure Schema Registry Apache Avro client library for .NET - version 1.0.1 
 
 
 Azure Schema Registry is a schema repository service hosted by Azure Event Hubs, providing schema storage, versioning, and management. This package provides an Avro serializer capable of serializing and deserializing payloads containing Schema Registry schema identifiers and Avro-serialized data.
@@ -40,11 +40,11 @@ In order to interact with the Azure Schema Registry service, you'll need to crea
 
 #### Get credentials
 
-To acquire authenicated credentials and start interacting with Azure resources, please see the [quickstart guide here][quickstart_guide].
+To acquire authenticated credentials and start interacting with Azure resources, please see the [quickstart guide here][quickstart_guide].
 
 #### Get Event Hubs namespace hostname
 
-The simpliest way is to use the [Azure portal][azure_portal] and navigate to your Event Hubs namespace. From the Overview tab, you'll see `Host name`. Copy the value from this field.
+The simplest way is to use the [Azure portal][azure_portal] and navigate to your Event Hubs namespace. From the Overview tab, you'll see `Host name`. Copy the value from this field.
 
 #### Create SchemaRegistryClient
 
@@ -53,7 +53,7 @@ Once you have the Azure resource credentials and the Event Hubs namespace hostna
 ```C# Snippet:SchemaRegistryAvroCreateSchemaRegistryClient
 // Create a new SchemaRegistry client using the default credential from Azure.Identity using environment variables previously set,
 // including AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, and AZURE_TENANT_ID.
-// For more information on Azure.Identity usage, see: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.Data.SchemaRegistry.ApacheAvro_1.0.0/sdk/identity/Azure.Identity/README.md
+// For more information on Azure.Identity usage, see: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.Data.SchemaRegistry.ApacheAvro_1.0.1/sdk/identity/Azure.Identity/README.md
 var schemaRegistryClient = new SchemaRegistryClient(fullyQualifiedNamespace: fullyQualifiedNamespace, credential: new DefaultAzureCredential());
 ```
 
@@ -103,6 +103,11 @@ Console.WriteLine(eventData.EventBody);
 var fullyQualifiedNamespace = "<< FULLY-QUALIFIED EVENT HUBS NAMESPACE (like something.servicebus.windows.net) >>";
 var eventHubName = "<< NAME OF THE EVENT HUB >>";
 var credential = new DefaultAzureCredential();
+
+// It is recommended that you cache the Event Hubs clients for the lifetime of your
+// application, closing or disposing when application ends.  This example disposes
+// after the immediate scope for simplicity.
+
 await using var producer = new EventHubProducerClient(fullyQualifiedNamespace, eventHubName, credential);
 await producer.SendAsync(new EventData[] { eventData });
 ```
@@ -110,6 +115,11 @@ await producer.SendAsync(new EventData[] { eventData });
 To deserialize an `EventData` event that you are consuming:
 ```C# Snippet:SchemaRegistryAvroDecodeEventData
 // construct a consumer and consume the event from our event hub
+
+// It is recommended that you cache the Event Hubs clients for the lifetime of your
+// application, closing or disposing when application ends.  This example disposes
+// after the immediate scope for simplicity.
+
 await using var consumer = new EventHubConsumerClient(EventHubConsumerClient.DefaultConsumerGroupName, fullyQualifiedNamespace, eventHubName, credential);
 await foreach (PartitionEvent receivedEvent in consumer.ReadEventsAsync())
 {
@@ -174,8 +184,8 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [event_hubs_namespace]: /azure/event-hubs/event-hubs-about
 [azure_powershell]: /powershell/azure/
 [create_event_hubs_namespace]: /azure/event-hubs/event-hubs-quickstart-powershell#create-an-event-hubs-namespace
-[quickstart_guide]: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.Data.SchemaRegistry.ApacheAvro_1.0.0/doc/mgmt_preview_quickstart.md
-[schema_registry_client]: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.Data.SchemaRegistry.ApacheAvro_1.0.0/sdk/schemaregistry/Azure.Data.SchemaRegistry/src/SchemaRegistryClient.cs
+[quickstart_guide]: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.Data.SchemaRegistry.ApacheAvro_1.0.1/doc/dev/mgmt_quickstart.md
+[schema_registry_client]: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.Data.SchemaRegistry.ApacheAvro_1.0.1/sdk/schemaregistry/Azure.Data.SchemaRegistry/src/SchemaRegistryClient.cs
 [azure_portal]: https://ms.portal.azure.com/
 [schema_properties]: src/SchemaProperties.cs
 [azure_identity]: https://www.nuget.org/packages/Azure.Identity
@@ -183,8 +193,8 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [code_of_conduct_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [email_opencode]: mailto:opencode@microsoft.com
-[schema_registry_avro_serializer]: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.Data.SchemaRegistry.ApacheAvro_1.0.0/sdk/schemaregistry/Microsoft.Azure.Data.SchemaRegistry.ApacheAvro/src/SchemaRegistryAvroSerializer.cs
-[employee]: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.Data.SchemaRegistry.ApacheAvro_1.0.0/sdk/schemaregistry/Microsoft.Azure.Data.SchemaRegistry.ApacheAvro/tests/Models/Employee.cs
+[schema_registry_avro_serializer]: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.Data.SchemaRegistry.ApacheAvro_1.0.1/sdk/schemaregistry/Microsoft.Azure.Data.SchemaRegistry.ApacheAvro/src/SchemaRegistryAvroSerializer.cs
+[employee]: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.Data.SchemaRegistry.ApacheAvro_1.0.1/sdk/schemaregistry/Microsoft.Azure.Data.SchemaRegistry.ApacheAvro/tests/Models/Employee.cs
 [avro_csharp_documentation]: https://avro.apache.org/docs/current/api/csharp/html/index.html
 [apache_avro_library]: https://www.nuget.org/packages/Apache.Avro/
 [generic_record]: https://avro.apache.org/docs/current/api/csharp/html/classAvro_1_1Generic_1_1GenericRecord.html

@@ -1,3 +1,3 @@
 | Reference | Package | Source |
 |---|---|---|
-|Application Insights - Query|[Microsoft.Azure.ApplicationInsights.Query](https://www.nuget.org/packages/Microsoft.Azure.ApplicationInsights.Query)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/)|
+|[Resource Management - Application Insights](resourcemanager.applicationinsights-readme.md)|[Azure.ResourceManager.ApplicationInsights](https://www.nuget.org/packages/Azure.ResourceManager.ApplicationInsights)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/applicationinsights/Azure.ResourceManager.ApplicationInsights)|

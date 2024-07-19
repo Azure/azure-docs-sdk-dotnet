@@ -1,12 +1,12 @@
 ---
 title: Azure Document Intelligence client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.DocumentIntelligence, documentintelligence
-ms.date: 11/17/2023
+ms.date: 03/06/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: documentintelligence
 ---
-# Azure Document Intelligence client library for .NET - version 1.0.0-beta.1 
+# Azure Document Intelligence client library for .NET - version 1.0.0-beta.2 
 
 
 > Note: on July 2023, the Azure Cognitive Services Form Recognizer service was renamed to Azure AI Document Intelligence. Any mentions of Form Recognizer or Document Intelligence in documentation refer to the same Azure service.
@@ -33,7 +33,7 @@ Install the Azure Document Intelligence client library for .NET with [NuGet][nug
 dotnet add package Azure.AI.DocumentIntelligence --prerelease
 ```
 
-> Note: This version of the client library defaults to the `2023-10-31-preview` version of the service.
+> Note: This version of the client library defaults to the `2024-02-29-preview` version of the service.
 
 ### Prerequisites
 
@@ -164,12 +164,12 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.DocumentIntelligence_1.0.0-beta.1/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.DocumentIntelligence_1.0.0-beta.1/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.DocumentIntelligence_1.0.0-beta.1/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.DocumentIntelligence_1.0.0-beta.1/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.DocumentIntelligence_1.0.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.DocumentIntelligence_1.0.0-beta.1/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.DocumentIntelligence_1.0.0-beta.2/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.DocumentIntelligence_1.0.0-beta.2/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.DocumentIntelligence_1.0.0-beta.2/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.DocumentIntelligence_1.0.0-beta.2/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.DocumentIntelligence_1.0.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.DocumentIntelligence_1.0.0-beta.2/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
@@ -326,15 +326,15 @@ for (int i = 0; i < result.Documents.Count; i++)
     }
 
     if (document.Fields.TryGetValue("Items", out DocumentField itemsField)
-        && itemsField.Type == DocumentFieldType.Array)
+        && itemsField.Type == DocumentFieldType.List)
     {
-        foreach (DocumentField itemField in itemsField.ValueArray)
+        foreach (DocumentField itemField in itemsField.ValueList)
         {
             Console.WriteLine("Item:");
 
-            if (itemField.Type == DocumentFieldType.Object)
+            if (itemField.Type == DocumentFieldType.Dictionary)
             {
-                IReadOnlyDictionary<string, DocumentField> itemFields = itemField.ValueObject;
+                IReadOnlyDictionary<string, DocumentField> itemFields = itemField.ValueDictionary;
 
                 if (itemFields.TryGetValue("Description", out DocumentField itemDescriptionField)
                     && itemDescriptionField.Type == DocumentFieldType.String)
@@ -409,7 +409,7 @@ Operation<DocumentModelDetails> operation = await client.BuildDocumentModelAsync
 DocumentModelDetails model = operation.Value;
 
 Console.WriteLine($"Model ID: {model.ModelId}");
-Console.WriteLine($"Created on: {model.CreatedDateTime}");
+Console.WriteLine($"Created on: {model.CreatedOn}");
 
 Console.WriteLine("Document types the model can recognize:");
 foreach (KeyValuePair<string, DocumentTypeDetails> docType in model.DocTypes)
@@ -442,8 +442,8 @@ string modelId = "<modelId>";
 DocumentModelDetails model = await client.GetModelAsync(modelId);
 
 Console.WriteLine($"Details about model with ID '{model.ModelId}':");
-Console.WriteLine($"  Created on: {model.CreatedDateTime}");
-Console.WriteLine($"  Expires on: {model.ExpirationDateTime}");
+Console.WriteLine($"  Created on: {model.CreatedOn}");
+Console.WriteLine($"  Expires on: {model.ExpiresOn}");
 
 // List up to 10 models currently stored in the resource.
 int count = 0;
@@ -453,8 +453,8 @@ await foreach (DocumentModelDetails modelItem in client.GetModelsAsync())
     Console.WriteLine($"Model details:");
     Console.WriteLine($"  Model ID: {modelItem.ModelId}");
     Console.WriteLine($"  Description: {modelItem.Description}");
-    Console.WriteLine($"  Created on: {modelItem.CreatedDateTime}");
-    Console.WriteLine($"  Expires on: {model.ExpirationDateTime}");
+    Console.WriteLine($"  Created on: {modelItem.CreatedOn}");
+    Console.WriteLine($"  Expires on: {model.ExpiresOn}");
 
     if (++count == 10)
     {
@@ -496,7 +496,7 @@ Operation<DocumentClassifierDetails> operation = await client.BuildClassifierAsy
 DocumentClassifierDetails classifier = operation.Value;
 
 Console.WriteLine($"Classifier ID: {classifier.ClassifierId}");
-Console.WriteLine($"Created on: {classifier.CreatedDateTime}");
+Console.WriteLine($"Created on: {classifier.CreatedOn}");
 
 Console.WriteLine("Document types the classifier can recognize:");
 foreach (KeyValuePair<string, ClassifierDocumentTypeDetails> docType in classifier.DocTypes)
@@ -601,11 +601,13 @@ Samples showing how to use the Document Intelligence library are available in th
 - [Analyze a document with a prebuilt model][analyze_prebuilt]
 - [Build a custom model][build_a_custom_model]
 - [Manage models][manage_models]
-- [Classify a document][classify_a_document]
+- [Classify a document][classify_document]
 - [Build a document classifier][build_a_document_classifier]
 - [Get and List document model operations][get_and_list]
 - [Compose a model][compose_model]
 - [Copy a custom model between Document Intelligence resources][copy_custom_models]
+- [Analyze a document with add-on capabilities][analyze_with_addons]
+- [Extract the layout of a document as Markdown][extract_layout_markdown]
 
 ## Contributing
 
@@ -618,11 +620,11 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fdocumentintelligence%2FAzure.AI.DocumentIntelligence%2FREADME.png)
 
 <!-- LINKS -->
-[docint_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.1/sdk/documentintelligence/Azure.AI.DocumentIntelligence/src
+[docint_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.2/sdk/documentintelligence/Azure.AI.DocumentIntelligence/src
 [docint_docs]: /azure/cognitive-services/form-recognizer/
 [docint_refdocs]: https://aka.ms/azsdk/net/docs/ref/formrecognizer
 [docint_nuget_package]: https://www.nuget.org/packages/Azure.AI.FormRecognizer
-[docint_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.1/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/README.md
+[docint_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.2/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/README.md
 [docint_rest_api]: https://aka.ms/azsdk/formrecognizer/restapi
 [docint_models]: https://aka.ms/azsdk/formrecognizer/models
 [docint_errors]: https://aka.ms/azsdk/formrecognizer/errors
@@ -630,12 +632,12 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [cognitive_resource]: /azure/cognitive-services/cognitive-services-apis-create-account
 
 
-[doc_intelligence_client_class]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.1/sdk/documentintelligence/Azure.AI.DocumentIntelligence/src/DocumentIntelligenceClient.cs
-[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.1/sdk/identity/Azure.Identity
+[doc_intelligence_client_class]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.2/sdk/documentintelligence/Azure.AI.DocumentIntelligence/src/DocumentIntelligenceClient.cs
+[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.2/sdk/identity/Azure.Identity
 [register_aad_app]: /azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
 [aad_grant_access]: /azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
 [custom_subdomain]: /azure/cognitive-services/authentication#create-a-resource-with-a-custom-subdomain
-[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.1/sdk/identity/Azure.Identity/README.md
+[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.2/sdk/identity/Azure.Identity/README.md
 [cognitive_resource_portal]: /azure/cognitive-services/cognitive-services-apis-create-account
 [cognitive_resource_cli]: /azure/cognitive-services/cognitive-services-apis-create-account-cli
 [regional_endpoints]: /azure/cognitive-services/cognitive-services-custom-subdomains#is-there-a-list-of-regional-endpoints
@@ -645,17 +647,19 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 
 [di_studio]: https://aka.ms/azsdk/formrecognizer/formrecognizerstudio
 
-[logging]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md
+[logging]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md
 
-[extract_layout]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.1/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_ExtractLayout.md
-[analyze_prebuilt]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.1/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_AnalyzeWithPrebuiltModel.md
-[build_a_custom_model]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.1/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_BuildCustomModel.md
-[build_a_document_classifier]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.1/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_BuildDocumentClassifier.md
-[classify_document]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.1/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_ClassifyDocument.md
-[manage_models]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.1/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_ManageModels.md
-[copy_custom_models]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.1/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_CopyCustomModel.md
-[compose_model]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.1/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_ModelCompose.md
-[get_and_list]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.1/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_GetAndListOperations.md
+[extract_layout]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.2/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_ExtractLayout.md
+[analyze_prebuilt]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.2/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_AnalyzeWithPrebuiltModel.md
+[build_a_custom_model]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.2/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_BuildCustomModel.md
+[build_a_document_classifier]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.2/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_BuildDocumentClassifier.md
+[classify_document]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.2/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_ClassifyDocument.md
+[manage_models]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.2/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_ManageModels.md
+[copy_custom_models]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.2/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_CopyCustomModel.md
+[compose_model]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.2/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_ModelCompose.md
+[get_and_list]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.2/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_GetAndListOperations.md
+[analyze_with_addons]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.2/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_AddOnCapabilities.md
+[extract_layout_markdown]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.2/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_ExtractLayoutAsMarkdown.md
 
 [azure_cli]: /cli/azure
 [azure_sub]: https://azure.microsoft.com/free/dotnet/

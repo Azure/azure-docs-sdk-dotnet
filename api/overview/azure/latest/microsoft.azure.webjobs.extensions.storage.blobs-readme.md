@@ -1,12 +1,12 @@
 ---
 title: Azure WebJobs Storage Blobs client library for .NET
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebJobs.Extensions.Storage.Blobs, storage
-ms.date: 12/12/2023
+ms.date: 07/17/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: storage
 ---
-# Azure WebJobs Storage Blobs client library for .NET - version 5.2.2 
+# Azure WebJobs Storage Blobs client library for .NET - version 5.3.1 
 
 
 This extension provides functionality for accessing Azure Storage Blobs in Azure Functions within the process.
@@ -319,7 +319,7 @@ public static class BlobFunction_EnumerateBlobs_BlobClient
 
 ### Configuring the extension
 
-Please refer to [sample functions app](https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.Storage.Blobs_5.2.2/sdk/storage/Microsoft.Azure.WebJobs.Extensions.Storage.Blobs/samples/functionapp).
+Please refer to [sample functions app](https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.Storage.Blobs_5.3.1/sdk/storage/Microsoft.Azure.WebJobs.Extensions.Storage.Blobs/samples/functionapp).
 
 ## Troubleshooting
 
@@ -353,8 +353,8 @@ additional questions or comments.
 [storage_account_create_cli]: /azure/storage/common/storage-quickstart-create-account?tabs=azure-cli
 [storage_account_create_portal]: /azure/storage/common/storage-quickstart-create-account?tabs=azure-portal
 [azure_sub]: https://azure.microsoft.com/free/dotnet/
-[RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.Storage.Blobs_5.2.2/sdk/core/Azure.Core/src/RequestFailedException.cs
-[storage_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.WebJobs.Extensions.Storage.Blobs_5.2.2/sdk/storage/CONTRIBUTING.md
+[RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.Storage.Blobs_5.3.1/sdk/core/Azure.Core/src/RequestFailedException.cs
+[storage_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.WebJobs.Extensions.Storage.Blobs_5.3.1/sdk/storage/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/

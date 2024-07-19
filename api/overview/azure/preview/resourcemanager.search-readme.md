@@ -1,26 +1,24 @@
 ---
-title: Azure AI Search management client library
+title: 
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.Search, cognitive-search
-ms.date: 06/01/2023
+ms.date: 05/15/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: cognitive-search
 ---
-# Microsoft Azure AI Search management client library for .NET (preview)
+# Microsoft Azure AI Search management client library for .NET
 
 Azure AI Search (formerly known as "Azure Cognitive Search") is an AI-powered information retrieval platform that helps developers build rich search experiences and generative AI apps that combine large language models with enterprise data.
 
-This library supports managing Microsoft Azure AI Search resources.
-
-Although Azure AI Search is renamed, many API descriptions continue to use the former name, "Azure Cognitive Search". API string descriptions will get updated over time.
+This library supports managing Microsoft Azure AI Search resources. Use this library to create, configure, and manage your search resources.
 
 This library follows the [new Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html), and provides many core capabilities:
 
-* Support MSAL.NET, Azure.Identity is out of box for supporting MSAL.NET.
-* Support [OpenTelemetry](https://opentelemetry.io/) for distributed tracing.
-* HTTP pipeline with custom policies.
-* Better error-handling.
-* Support uniform telemetry across all languages.
+    - Support MSAL.NET, Azure.Identity is out of box for supporting MSAL.NET.
+    - Support [OpenTelemetry](https://opentelemetry.io/) for distributed tracing.
+    - HTTP pipeline with custom policies.
+    - Better error-handling.
+    - Support uniform telemetry across all languages.
 
 ## Getting started 
 
@@ -38,7 +36,7 @@ dotnet add package Azure.ResourceManager.Search
 
 ### Authenticate the Client
 
-To create an authenticated client and start interacting with Microsoft Azure resources, see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Search_1.2.0-beta.1/doc/dev/mgmt_quickstart.md).
+To create an authenticated client and start interacting with Microsoft Azure resources, see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Search_1.3.0-beta.3/doc/dev/mgmt_quickstart.md).
 
 ## Key concepts
 
@@ -48,9 +46,9 @@ Key concepts of the Microsoft Azure SDK for .NET can be found [here](https://azu
 
 Documentation is available to help you learn how to use this package:
 
-- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Search_1.2.0-beta.1/doc/dev/mgmt_quickstart.md).
+- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Search_1.3.0-beta.3/doc/dev/mgmt_quickstart.md).
 - [API References](/dotnet/api/?view=azure-dotnet).
-- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Search_1.2.0-beta.1/sdk/identity/Azure.Identity/README.md).
+- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Search_1.3.0-beta.3/sdk/identity/Azure.Identity/README.md).
 
 ## Examples
 
@@ -87,7 +85,6 @@ more information, see the [Code of Conduct FAQ][coc_faq] or contact
 <opencode@microsoft.com> with any other questions or comments.
 
 <!-- LINKS -->
-[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Search_1.2.0-beta.1/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
+[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Search_1.3.0-beta.3/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
-

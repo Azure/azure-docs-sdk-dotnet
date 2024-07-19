@@ -1,7 +1,7 @@
 ---
 title: Azure Playwrighttesting SDK for .NET
 description: Reference for Azure Playwrighttesting SDK for .NET
-ms.date: 02/28/2024
+ms.date: 04/12/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: playwrighttesting

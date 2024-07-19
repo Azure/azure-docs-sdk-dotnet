@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.HDInsight.Containers, hdinsight
-ms.date: 11/30/2023
+ms.date: 03/23/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: hdinsight
@@ -36,7 +36,7 @@ dotnet add package Azure.ResourceManager.HDInsight.Containers --prerelease
 
 ### Authenticate the Client
 
-To create an authenticated client and start interacting with Microsoft Azure resources, see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.HDInsight.Containers_1.0.0-beta.2/doc/dev/mgmt_quickstart.md).
+To create an authenticated client and start interacting with Microsoft Azure resources, see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.HDInsight.Containers_1.0.0-beta.3/doc/dev/mgmt_quickstart.md).
 
 ## Key concepts
 
@@ -46,9 +46,9 @@ Key concepts of the Microsoft Azure SDK for .NET can be found [here](https://azu
 
 Documentation is available to help you learn how to use this package:
 
-- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.HDInsight.Containers_1.0.0-beta.2/doc/dev/mgmt_quickstart.md).
+- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.HDInsight.Containers_1.0.0-beta.3/doc/dev/mgmt_quickstart.md).
 - [API References](/dotnet/api/?view=azure-dotnet).
-- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.HDInsight.Containers_1.0.0-beta.2/sdk/identity/Azure.Identity/README.md).
+- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.HDInsight.Containers_1.0.0-beta.3/sdk/identity/Azure.Identity/README.md).
 
 ## Examples
 
@@ -140,11 +140,12 @@ ClusterComputeNodeProfile nodeProfile = new ClusterComputeNodeProfile(nodeProfil
 var clusterData = new HDInsightClusterData(location)
 {
     ClusterType = clusterType,
-    ClusterProfile = new ClusterProfile(clusterVersion: availableClusterVersion?.ClusterVersion, ossVersion: availableClusterVersion?.OssVersion, identityProfile: identityProfile, authorizationProfile: authorizationProfile)
+    ClusterProfile = new ClusterProfile(clusterVersion: availableClusterVersion?.ClusterVersion, ossVersion: availableClusterVersion?.OssVersion, authorizationProfile: authorizationProfile)
     {
         TrinoProfile = new TrinoProfile(),  // here is related with cluster type
     },
 };
+clusterData.ClusterProfile.IdentityProfile = identityProfile;
 clusterData.ComputeNodes.Add(nodeProfile);
 
 var clusterCollection = clusterPoolCollection.Get(clusterPoolName).Value.GetHDInsightClusters();
@@ -192,11 +193,12 @@ ClusterComputeNodeProfile nodeProfile = new ClusterComputeNodeProfile(nodeProfil
 var clusterData = new HDInsightClusterData(location)
 {
     ClusterType = clusterType,
-    ClusterProfile = new ClusterProfile(clusterVersion: availableClusterVersion?.ClusterVersion, ossVersion: availableClusterVersion?.OssVersion, identityProfile: identityProfile, authorizationProfile: authorizationProfile)
+    ClusterProfile = new ClusterProfile(clusterVersion: availableClusterVersion?.ClusterVersion, ossVersion: availableClusterVersion?.OssVersion, authorizationProfile: authorizationProfile)
     {
         SparkProfile = new SparkProfile(),  // here is related with cluster type
     },
 };
+clusterData.ClusterProfile.IdentityProfile = identityProfile;
 clusterData.ComputeNodes.Add(nodeProfile);
 
 var clusterCollection = clusterPoolCollection.Get(clusterPoolName).Value.GetHDInsightClusters();
@@ -243,8 +245,9 @@ ClusterComputeNodeProfile nodeProfile = new ClusterComputeNodeProfile(nodeProfil
 var clusterData = new HDInsightClusterData(location)
 {
     ClusterType = clusterType,
-    ClusterProfile = new ClusterProfile(clusterVersion: availableClusterVersion?.ClusterVersion, ossVersion: availableClusterVersion?.OssVersion, identityProfile: identityProfile, authorizationProfile: authorizationProfile),
+    ClusterProfile = new ClusterProfile(clusterVersion: availableClusterVersion?.ClusterVersion, ossVersion: availableClusterVersion?.OssVersion, authorizationProfile: authorizationProfile),
 };
+clusterData.ClusterProfile.IdentityProfile = identityProfile;
 clusterData.ComputeNodes.Add(nodeProfile);
 
 // set flink profile
@@ -301,8 +304,10 @@ ClusterComputeNodeProfile nodeProfile = new ClusterComputeNodeProfile(nodeProfil
 var clusterData = new HDInsightClusterData(location)
 {
     ClusterType = clusterType,
-    ClusterProfile = new ClusterProfile(clusterVersion: availableClusterVersion?.ClusterVersion, ossVersion: availableClusterVersion?.OssVersion, identityProfile: identityProfile, authorizationProfile: authorizationProfile),
+    ClusterProfile = new ClusterProfile(clusterVersion: availableClusterVersion?.ClusterVersion, ossVersion: availableClusterVersion?.OssVersion, authorizationProfile: authorizationProfile),
 };
+clusterData.ClusterProfile.IdentityProfile = identityProfile;
+
 clusterData.ComputeNodes.Add(nodeProfile);
 
 // set secret profile
@@ -322,14 +327,11 @@ string metastoreDbPasswordSecret = secretName;
 string metastoreWarehouseDir = "abfs://{your adlsgen2 storage account container}@{your adlsgen2 storage account}.dfs.core.windows.net/{sub folder path}";
 
 TrinoProfile trinoProfile = new TrinoProfile();
-trinoProfile.CatalogOptionsHive.Add(
-    new HiveCatalogOption(
-        catalogName: catalogName,
-        metastoreDBConnectionPasswordSecret: metastoreDbPasswordSecret,
-        metastoreDBConnectionUriString: metastoreDbConnectionUriString,
-        metastoreDBConnectionUserName: metastoreDbUserName,
-        metastoreWarehouseDir: metastoreWarehouseDir)
-);
+HiveCatalogOption hiveCatalogOption = new HiveCatalogOption(catalogName: catalogName, metastoreDBConnectionUriString: metastoreDbConnectionUriString, metastoreWarehouseDir: metastoreWarehouseDir);
+hiveCatalogOption.MetastoreDBConnectionPasswordSecret = metastoreDbPasswordSecret;
+hiveCatalogOption.MetastoreDBConnectionUserName = metastoreDbUserName;
+
+trinoProfile.CatalogOptionsHive.Add(hiveCatalogOption);
 
 clusterData.ClusterProfile.TrinoProfile = trinoProfile;
 
@@ -378,8 +380,9 @@ ClusterComputeNodeProfile nodeProfile = new ClusterComputeNodeProfile(nodeProfil
 var clusterData = new HDInsightClusterData(location)
 {
     ClusterType = clusterType,
-    ClusterProfile = new ClusterProfile(clusterVersion: availableClusterVersion?.ClusterVersion, ossVersion: availableClusterVersion?.OssVersion, identityProfile: identityProfile, authorizationProfile: authorizationProfile),
+    ClusterProfile = new ClusterProfile(clusterVersion: availableClusterVersion?.ClusterVersion, ossVersion: availableClusterVersion?.OssVersion, authorizationProfile: authorizationProfile),
 };
+clusterData.ClusterProfile.IdentityProfile = identityProfile;
 clusterData.ComputeNodes.Add(nodeProfile);
 
 // set secret profile
@@ -398,9 +401,14 @@ string dbUserName = "{your db user name}";
 string dbName = "{yoru db name}";
 string dbPasswordSecretName = secretName;
 
+SparkMetastoreSpec sparkMetastoreSpec = new SparkMetastoreSpec(dbServerHost: dbServerHost, dbName: dbName);
+sparkMetastoreSpec.DBUserName = dbUserName;
+sparkMetastoreSpec.DBPasswordSecretName = dbPasswordSecretName;
+sparkMetastoreSpec.KeyVaultId = kvResourceId;
+
 SparkProfile sparkProfile = new SparkProfile();
 sparkProfile.DefaultStorageUriString = defaultStorageUriString;
-sparkProfile.MetastoreSpec = new SparkMetastoreSpec(dbServerHost: dbServerHost, dbName: dbName, dbUserName: dbUserName, dbPasswordSecretName: dbPasswordSecretName, keyVaultId: kvResourceId);
+sparkProfile.MetastoreSpec = sparkMetastoreSpec;
 
 clusterData.ClusterProfile.SparkProfile = sparkProfile;
 
@@ -449,8 +457,9 @@ ClusterComputeNodeProfile nodeProfile = new ClusterComputeNodeProfile(nodeProfil
 var clusterData = new HDInsightClusterData(location)
 {
     ClusterType = clusterType,
-    ClusterProfile = new ClusterProfile(clusterVersion: availableClusterVersion?.ClusterVersion, ossVersion: availableClusterVersion?.OssVersion, identityProfile: identityProfile, authorizationProfile: authorizationProfile),
+    ClusterProfile = new ClusterProfile(clusterVersion: availableClusterVersion?.ClusterVersion, ossVersion: availableClusterVersion?.OssVersion, authorizationProfile: authorizationProfile),
 };
+clusterData.ClusterProfile.IdentityProfile = identityProfile;
 clusterData.ComputeNodes.Add(nodeProfile);
 
 // set secret profile
@@ -475,7 +484,10 @@ string metastoreDbConnectionUriString = "jdbc:sqlserver://{your sql server name}
 string metastoreDbUserName = "{your db user name}";
 string metastoreDbPasswordSecret = secretName;
 
-FlinkHiveCatalogOption flinkHiveCatalogOption = new FlinkHiveCatalogOption(metastoreDBConnectionPasswordSecret: metastoreDbPasswordSecret, metastoreDBConnectionUriString: metastoreDbConnectionUriString, metastoreDBConnectionUserName: metastoreDbUserName);
+FlinkHiveCatalogOption flinkHiveCatalogOption = new FlinkHiveCatalogOption(metastoreDBConnectionUriString: metastoreDbConnectionUriString);
+flinkHiveCatalogOption.MetastoreDBConnectionUserName = metastoreDbUserName;
+flinkHiveCatalogOption.MetastoreDBConnectionPasswordSecret = metastoreDbPasswordSecret;
+
 clusterData.ClusterProfile.FlinkProfile = new FlinkProfile(storage: flinkStorageProfile, jobManager: jobManager, taskManager: taskManager);
 clusterData.ClusterProfile.FlinkProfile.CatalogOptionsHive = flinkHiveCatalogOption;
 
@@ -518,6 +530,7 @@ more information, see the [Code of Conduct FAQ][coc_faq] or contact
 <opencode@microsoft.com> with any other questions or comments.
 
 <!-- LINKS -->
-[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.HDInsight.Containers_1.0.0-beta.2/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
+[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.HDInsight.Containers_1.0.0-beta.3/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
+
