@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: unknownservice
 ---
-# Azure Unknown Service SDK for .NET - preview
-## Packages - preview
+# Azure Unknown Service SDK for .NET - latest
+## Packages - latest
 [!INCLUDE [packages](unknown-service-index.md)]
