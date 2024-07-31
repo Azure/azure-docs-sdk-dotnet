@@ -1,12 +1,12 @@
 ---
 title: Azure Service Bus client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Messaging.ServiceBus, service-bus-messaging
-ms.date: 07/18/2024
+ms.date: 07/31/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: service-bus-messaging
 ---
-# Azure Service Bus client library for .NET - version 7.18.0 
+# Azure Service Bus client library for .NET - version 7.18.1 
 
 
 Azure Service Bus allows you to build applications that take advantage of asynchronous messaging patterns using a highly-reliable service to broker messages between producers and consumers. Azure Service Bus provides flexible, brokered messaging between client and server, along with structured first-in, first-out (FIFO) messaging, and publish/subscribe capabilities with complex routing. If you would like to know more about Azure Service Bus, you may wish to review: [What is Azure Service Bus?](/azure/service-bus-messaging/service-bus-messaging-overview)
@@ -21,7 +21,7 @@ Use the client library for Azure Service Bus to:
 
 - Implement complex workflows: message sessions support scenarios that require message ordering or message deferral.
 
-[Source code](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Messaging.ServiceBus_7.18.0/sdk/servicebus/Azure.Messaging.ServiceBus/src) | [Package (NuGet)](https://www.nuget.org/packages/Azure.Messaging.ServiceBus/) | [API reference documentation](/dotnet/api/azure.messaging.servicebus) | [Product documentation](/azure/service-bus/) | [Migration guide (Microsoft.Azure.ServiceBus)](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.ServiceBus_7.18.0/sdk/servicebus/Azure.Messaging.ServiceBus/MigrationGuide.md) | [Migration guide (WindowsAzure.ServiceBus)](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.ServiceBus_7.18.0/sdk/servicebus/Azure.Messaging.ServiceBus/MigrationGuide_WindowsAzureServiceBus.md) | [Troubleshooting guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.ServiceBus_7.18.0/sdk/servicebus/Azure.Messaging.ServiceBus/TROUBLESHOOTING.md)
+[Source code](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Messaging.ServiceBus_7.18.1/sdk/servicebus/Azure.Messaging.ServiceBus/src) | [Package (NuGet)](https://www.nuget.org/packages/Azure.Messaging.ServiceBus/) | [API reference documentation](/dotnet/api/azure.messaging.servicebus) | [Product documentation](/azure/service-bus/) | [Migration guide (Microsoft.Azure.ServiceBus)](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.ServiceBus_7.18.1/sdk/servicebus/Azure.Messaging.ServiceBus/MigrationGuide.md) | [Migration guide (WindowsAzure.ServiceBus)](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.ServiceBus_7.18.1/sdk/servicebus/Azure.Messaging.ServiceBus/MigrationGuide_WindowsAzureServiceBus.md) | [Troubleshooting guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.ServiceBus_7.18.1/sdk/servicebus/Azure.Messaging.ServiceBus/TROUBLESHOOTING.md)
 
 ## Getting started
 
@@ -67,7 +67,7 @@ To see how to authenticate using Azure.Identity, view this [example](#authentica
 
 For examples of how to authenticate for an ASP.NET Core application, view this [example](#registering-with-aspnet-core-dependency-injection).
 
-To see how to initiate the connection with a custom endpoint, view this [sample](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.ServiceBus_7.18.0/sdk/servicebus/Azure.Messaging.ServiceBus/samples/Sample13_AdvancedConfiguration.md#initiating-the-connection-with-a-custom-endpoint).
+To see how to initiate the connection with a custom endpoint, view this [sample](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.ServiceBus_7.18.1/sdk/servicebus/Azure.Messaging.ServiceBus/samples/Sample13_AdvancedConfiguration.md#initiating-the-connection-with-a-custom-endpoint).
 
 ## Key concepts
 
@@ -114,7 +114,7 @@ We guarantee that all client instance methods are thread-safe and independent of
 ### Additional concepts
 
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.ServiceBus_7.18.0/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) | [Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.ServiceBus_7.18.0/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.ServiceBus_7.18.1/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) | [Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.ServiceBus_7.18.1/sdk/core/Azure.Core/samples/Diagnostics.md) |
 [Mocking](https://learn.microsoft.com/dotnet/azure/sdk/unit-testing-mocking)
 <!-- CLIENT COMMON BAR -->
 
@@ -402,7 +402,7 @@ Console.ReadKey();
 
 ### Authenticating with Azure.Identity
 
-The [Azure Identity library](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Messaging.ServiceBus_7.18.0/sdk/identity/Azure.Identity/README.md) provides easy Azure Active Directory support for authentication.
+The [Azure Identity library](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Messaging.ServiceBus_7.18.1/sdk/identity/Azure.Identity/README.md) provides easy Azure Active Directory support for authentication.
 
 ```C# Snippet:ServiceBusAuthAAD
 // Create a ServiceBusClient that will authenticate through Active Directory
@@ -414,8 +414,8 @@ await using var client = new ServiceBusClient(fullyQualifiedNamespace, new Defau
 
 [Sessions](/azure/service-bus-messaging/message-sessions) provide a mechanism for grouping related messages. In order to use sessions, you need to be working with a session-enabled entity.
 
-- [Sending and receiving session messages](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.ServiceBus_7.18.0/sdk/servicebus/Azure.Messaging.ServiceBus/samples/Sample03_SendReceiveSessions.md)
-- [Using the session processor](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.ServiceBus_7.18.0/sdk/servicebus/Azure.Messaging.ServiceBus/samples/Sample05_SessionProcessor.md)
+- [Sending and receiving session messages](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.ServiceBus_7.18.1/sdk/servicebus/Azure.Messaging.ServiceBus/samples/Sample03_SendReceiveSessions.md)
+- [Using the session processor](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.ServiceBus_7.18.1/sdk/servicebus/Azure.Messaging.ServiceBus/samples/Sample05_SessionProcessor.md)
 
 ### Registering with ASP.NET Core dependency injection
 
@@ -517,11 +517,11 @@ For more details and examples, see [Dependency injection with the Azure SDK for 
 
 ## Troubleshooting
 
-Please refer to the [Service Bus Troubleshooting Guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.ServiceBus_7.18.0/sdk/servicebus/Azure.Messaging.ServiceBus/TROUBLESHOOTING.md).
+Please refer to the [Service Bus Troubleshooting Guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.ServiceBus_7.18.1/sdk/servicebus/Azure.Messaging.ServiceBus/TROUBLESHOOTING.md).
 
 ## Next steps
 
-Beyond the introductory scenarios discussed, the Azure Service Bus client library offers support for additional scenarios to help take advantage of the full feature set of the Azure Service Bus service. In order to help explore some of these scenarios, the Service Bus client library offers a project of samples to serve as an illustration for common scenarios. Please see the [samples README](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.ServiceBus_7.18.0/sdk/servicebus/Azure.Messaging.ServiceBus/samples/README.md) for details.
+Beyond the introductory scenarios discussed, the Azure Service Bus client library offers support for additional scenarios to help take advantage of the full feature set of the Azure Service Bus service. In order to help explore some of these scenarios, the Service Bus client library offers a project of samples to serve as an illustration for common scenarios. Please see the [samples README](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.ServiceBus_7.18.1/sdk/servicebus/Azure.Messaging.ServiceBus/samples/README.md) for details.
 
 ## Contributing
 
@@ -531,7 +531,7 @@ When you submit a pull request, a CLA-bot will automatically determine whether y
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
-Please see our [contributing guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.ServiceBus_7.18.0/sdk/servicebus/Azure.Messaging.ServiceBus/CONTRIBUTING.md) for more information.
+Please see our [contributing guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.ServiceBus_7.18.1/sdk/servicebus/Azure.Messaging.ServiceBus/CONTRIBUTING.md) for more information.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fservicebus%2FAzure.Messaging.ServiceBus%2FREADME.png)
 
