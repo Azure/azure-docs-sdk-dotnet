@@ -1,10 +1,10 @@
 ---
 title: 
-keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.HDInsight.Containers, hdinsight
-ms.date: 03/23/2024
+keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.HDInsight.Containers, hdinsightcontainers
+ms.date: 08/01/2024
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: hdinsight
+ms.service: hdinsightcontainers
 ---
 # Microsoft Azure HDInsight Containers management client library for .NET
 
@@ -20,7 +20,7 @@ This library follows the [new Azure SDK guidelines](https://azure.github.io/azur
     - Better error-handling.
     - Support uniform telemetry across all languages.
 
-## Getting started 
+## Getting started
 
 ### Install the package (Since now we are in private preview status, the bellow method doesn't work please send email to Askhilo@microsoft.com to install the nuget from our private nuget feed)
 
@@ -36,7 +36,7 @@ dotnet add package Azure.ResourceManager.HDInsight.Containers --prerelease
 
 ### Authenticate the Client
 
-To create an authenticated client and start interacting with Microsoft Azure resources, see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.HDInsight.Containers_1.0.0-beta.3/doc/dev/mgmt_quickstart.md).
+To create an authenticated client and start interacting with Microsoft Azure resources, see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.HDInsight.Containers_1.0.0-beta.4/doc/dev/mgmt_quickstart.md).
 
 ## Key concepts
 
@@ -46,9 +46,9 @@ Key concepts of the Microsoft Azure SDK for .NET can be found [here](https://azu
 
 Documentation is available to help you learn how to use this package:
 
-- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.HDInsight.Containers_1.0.0-beta.3/doc/dev/mgmt_quickstart.md).
+- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.HDInsight.Containers_1.0.0-beta.4/doc/dev/mgmt_quickstart.md).
 - [API References](/dotnet/api/?view=azure-dotnet).
-- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.HDInsight.Containers_1.0.0-beta.3/sdk/identity/Azure.Identity/README.md).
+- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.HDInsight.Containers_1.0.0-beta.4/sdk/identity/Azure.Identity/README.md).
 
 ## Examples
 
@@ -93,8 +93,10 @@ var availableClusterPoolVersion = subscription.GetAvailableClusterPoolVersionsBy
 // initialize the ClusterPoolData instance
 HDInsightClusterPoolData clusterPoolData = new HDInsightClusterPoolData(location)
 {
-    ComputeProfile = new ClusterPoolComputeProfile(clusterPoolVmSize),
-    ClusterPoolVersion = availableClusterPoolVersion?.ClusterPoolVersionValue,
+    Properties = new HDInsightClusterPoolProperties(new ClusterPoolComputeProfile(clusterPoolVmSize))
+    {
+        ClusterPoolVersion = availableClusterPoolVersion?.Properties.ClusterPoolVersion
+    }
 };
 
 var clusterPoolResult = clusterPoolCollection.CreateOrUpdate(Azure.WaitUntil.Completed, clusterPoolName, clusterPoolData);
@@ -118,7 +120,7 @@ string clusterName = "{your cluster name}";
 string clusterType = "Trino"; // your cluster type
 
 // get the available cluster version
-var availableClusterVersion = subscription.GetAvailableClusterVersionsByLocation(location).Where(version => version.ClusterType.Equals(clusterType, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+var availableClusterVersion = subscription.GetAvailableClusterVersionsByLocation(location).Where(version => version.Properties.ClusterType.Equals(clusterType, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
 
 // set the identity profile
 string msiResourceId = "{your user msi resource id}";
@@ -134,19 +136,16 @@ authorizationProfile.UserIds.Add(userId);
 // set the cluster node profile
 string vmSize = "Standard_D8s_v3"; // your vms ize
 int workerCount = 5;
-ClusterComputeNodeProfile nodeProfile = new ClusterComputeNodeProfile(nodeProfileType: "worker", vmSize: vmSize, count: workerCount);
+ClusterComputeProfile nodeProfile = new ClusterComputeProfile(new List<ClusterComputeNodeProfile> { new ClusterComputeNodeProfile(nodeProfileType: "worker", vmSize: vmSize, count: workerCount) });
+ClusterProfile clusterProfile = new ClusterProfile(availableClusterVersion.Properties.ClusterVersion, availableClusterVersion.Properties.OssVersion, authorizationProfile)
+{
+    IdentityList = new List<HDInsightManagedIdentitySpec> { new HDInsightManagedIdentitySpec("cluster",new ResourceIdentifier(msiResourceId), msiClientId, msiObjectId) }
+};
 
-// initialize the ClusterData instance
 var clusterData = new HDInsightClusterData(location)
 {
-    ClusterType = clusterType,
-    ClusterProfile = new ClusterProfile(clusterVersion: availableClusterVersion?.ClusterVersion, ossVersion: availableClusterVersion?.OssVersion, authorizationProfile: authorizationProfile)
-    {
-        TrinoProfile = new TrinoProfile(),  // here is related with cluster type
-    },
+    Properties = new HDInsightClusterProperties(clusterType, nodeProfile, clusterProfile)
 };
-clusterData.ClusterProfile.IdentityProfile = identityProfile;
-clusterData.ComputeNodes.Add(nodeProfile);
 
 var clusterCollection = clusterPoolCollection.Get(clusterPoolName).Value.GetHDInsightClusters();
 
@@ -171,7 +170,7 @@ string clusterName = "{your cluster name}";
 string clusterType = "Spark"; // your cluster type here is Spark
 
 // get the available cluster version
-var availableClusterVersion = subscription.GetAvailableClusterVersionsByLocation(location).Where(version => version.ClusterType.Equals(clusterType, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+var availableClusterVersion = subscription.GetAvailableClusterVersionsByLocation(location).Where(version => version.Properties.ClusterType.Equals(clusterType, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
 
 // set the identity profile
 string msiResourceId = "{your user msi resource id}";
@@ -187,19 +186,22 @@ authorizationProfile.UserIds.Add(userId);
 // set the cluster node profile
 string vmSize = "Standard_D8s_v3"; // your vms ize
 int workerCount = 5;
-ClusterComputeNodeProfile nodeProfile = new ClusterComputeNodeProfile(nodeProfileType: "worker", vmSize: vmSize, count: workerCount);
+ClusterComputeProfile nodeProfile = new ClusterComputeProfile(new List<ClusterComputeNodeProfile> { new ClusterComputeNodeProfile(nodeProfileType: "worker", vmSize: vmSize, count: workerCount) });
+ClusterProfile clusterProfile = new ClusterProfile(availableClusterVersion.Properties.ClusterVersion, availableClusterVersion.Properties.OssVersion, authorizationProfile)
+{
+    IdentityList = new List<HDInsightManagedIdentitySpec> { new HDInsightManagedIdentitySpec("cluster",new ResourceIdentifier(msiResourceId), msiClientId, msiObjectId) }
+};
 
-// initialize the ClusterData instance
 var clusterData = new HDInsightClusterData(location)
 {
-    ClusterType = clusterType,
-    ClusterProfile = new ClusterProfile(clusterVersion: availableClusterVersion?.ClusterVersion, ossVersion: availableClusterVersion?.OssVersion, authorizationProfile: authorizationProfile)
-    {
-        SparkProfile = new SparkProfile(),  // here is related with cluster type
-    },
+    Properties = new HDInsightClusterProperties(clusterType, nodeProfile, clusterProfile)
 };
-clusterData.ClusterProfile.IdentityProfile = identityProfile;
-clusterData.ComputeNodes.Add(nodeProfile);
+
+// set saprk profile
+clusterProfile.SparkProfile = new SparkProfile()
+{
+    DefaultStorageUriString = "abfs://spark@hilostorage.dfs.core.windows.net",
+};
 
 var clusterCollection = clusterPoolCollection.Get(clusterPoolName).Value.GetHDInsightClusters();
 
@@ -224,7 +226,7 @@ string clusterName = "{your cluster name}";
 string clusterType = "Flink"; // cluster type
 
 // get the available cluster version
-var availableClusterVersion = subscription.GetAvailableClusterVersionsByLocation(location).Where(version => version.ClusterType.Equals(clusterType, StringComparison.OrdinalIgnoreCase)).LastOrDefault();
+var availableClusterVersion = subscription.GetAvailableClusterVersionsByLocation(location).Where(version => version.Properties.ClusterType.Equals(clusterType, StringComparison.OrdinalIgnoreCase)).LastOrDefault();
 
 // set the identity profile
 string msiResourceId = "{your user msi resource id}";
@@ -240,15 +242,16 @@ authorizationProfile.UserIds.Add(userId);
 // set the cluster node profile
 string vmSize = "Standard_D8s_v3"; // your vm size
 int workerCount = 5;
-ClusterComputeNodeProfile nodeProfile = new ClusterComputeNodeProfile(nodeProfileType: "worker", vmSize: vmSize, count: workerCount);
-// initialize the ClusterData instance
+ClusterComputeProfile nodeProfile = new ClusterComputeProfile(new List<ClusterComputeNodeProfile> { new ClusterComputeNodeProfile(nodeProfileType: "worker", vmSize: vmSize, count: workerCount) });
+ClusterProfile clusterProfile = new ClusterProfile(availableClusterVersion.Properties.ClusterVersion, availableClusterVersion.Properties.OssVersion, authorizationProfile)
+{
+    IdentityList = new List<HDInsightManagedIdentitySpec> { new HDInsightManagedIdentitySpec("cluster",new ResourceIdentifier(msiResourceId), msiClientId, msiObjectId) }
+};
+
 var clusterData = new HDInsightClusterData(location)
 {
-    ClusterType = clusterType,
-    ClusterProfile = new ClusterProfile(clusterVersion: availableClusterVersion?.ClusterVersion, ossVersion: availableClusterVersion?.OssVersion, authorizationProfile: authorizationProfile),
+    Properties = new HDInsightClusterProperties(clusterType, nodeProfile, clusterProfile)
 };
-clusterData.ClusterProfile.IdentityProfile = identityProfile;
-clusterData.ComputeNodes.Add(nodeProfile);
 
 // set flink profile
 string storageUri = "abfs://{your storage account container name}@{yoru storage account}.dfs.core.windows.net"; // your adlsgen2 storage uri
@@ -257,7 +260,7 @@ FlinkStorageProfile flinkStorageProfile = new FlinkStorageProfile(storageUri);
 ComputeResourceRequirement jobManager = new ComputeResourceRequirement((float)1.0, 2048);
 ComputeResourceRequirement taskManager = new ComputeResourceRequirement((float)1.0, 2048);
 
-clusterData.ClusterProfile.FlinkProfile = new FlinkProfile(storage: flinkStorageProfile, jobManager: jobManager, taskManager: taskManager);
+clusterData.Properties.ClusterProfile.FlinkProfile = new FlinkProfile(flinkStorageProfile, jobManager, taskManager);
 
 var clusterCollection = clusterPoolCollection.Get(clusterPoolName).Value.GetHDInsightClusters();
 
@@ -282,7 +285,7 @@ string clusterName = "{your cluster name}";
 string clusterType = "Trino"; // your cluster type
 
 // get the available cluster version
-var availableClusterVersion = subscription.GetAvailableClusterVersionsByLocation(location).Where(version => version.ClusterType.Equals(clusterType, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+var availableClusterVersion = subscription.GetAvailableClusterVersionsByLocation(location).Where(version => version.Properties.ClusterType.Equals(clusterType, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
 
 // set the identity profile
 string msiResourceId = "{your user msi resource id}";
@@ -298,17 +301,16 @@ authorizationProfile.UserIds.Add(userId);
 // set the cluster node profile
 string vmSize = "Standard_D8s_v3"; // your vms ize
 int workerCount = 5;
-ClusterComputeNodeProfile nodeProfile = new ClusterComputeNodeProfile(nodeProfileType: "worker", vmSize: vmSize, count: workerCount);
+ClusterComputeProfile nodeProfile = new ClusterComputeProfile(new List<ClusterComputeNodeProfile> { new ClusterComputeNodeProfile(nodeProfileType: "worker", vmSize: vmSize, count: workerCount) });
+ClusterProfile clusterProfile = new ClusterProfile(availableClusterVersion.Properties.ClusterVersion, availableClusterVersion.Properties.OssVersion, authorizationProfile)
+{
+    IdentityList = new List<HDInsightManagedIdentitySpec> { new HDInsightManagedIdentitySpec("cluster",new ResourceIdentifier(msiResourceId), msiClientId, msiObjectId) }
+};
 
-// initialize the ClusterData instance
 var clusterData = new HDInsightClusterData(location)
 {
-    ClusterType = clusterType,
-    ClusterProfile = new ClusterProfile(clusterVersion: availableClusterVersion?.ClusterVersion, ossVersion: availableClusterVersion?.OssVersion, authorizationProfile: authorizationProfile),
+    Properties = new HDInsightClusterProperties(clusterType, nodeProfile, clusterProfile)
 };
-clusterData.ClusterProfile.IdentityProfile = identityProfile;
-
-clusterData.ComputeNodes.Add(nodeProfile);
 
 // set secret profile
 string kvResourceId = "{your key vault resource id}";
@@ -316,24 +318,37 @@ string secretName = "{your secret reference name}";
 string keyVaultObjectName = "{your key vault secret name}";
 
 var secretReference = new ClusterSecretReference(referenceName: secretName, KeyVaultObjectType.Secret, keyVaultObjectName: keyVaultObjectName);
-clusterData.ClusterProfile.SecretsProfile = new ClusterSecretsProfile(new ResourceIdentifier(kvResourceId));
-clusterData.ClusterProfile.SecretsProfile.Secrets.Add(secretReference);
+clusterData.Properties.ClusterProfile.SecretsProfile = new ClusterSecretsProfile(new ResourceIdentifier(kvResourceId));
+clusterData.Properties.ClusterProfile.SecretsProfile.Secrets.Add(secretReference);
 
 // set trino profile
-string catalogName = "{your catalog name}";
 string metastoreDbConnectionUriString = "jdbc:sqlserver://{your sql server name}.database.windows.net;database={your database name};encrypt=true;trustServerCertificate=true;loginTimeout=30;";
 string metastoreDbUserName = "{your db user name}";
 string metastoreDbPasswordSecret = secretName;
 string metastoreWarehouseDir = "abfs://{your adlsgen2 storage account container}@{your adlsgen2 storage account}.dfs.core.windows.net/{sub folder path}";
 
-TrinoProfile trinoProfile = new TrinoProfile();
-HiveCatalogOption hiveCatalogOption = new HiveCatalogOption(catalogName: catalogName, metastoreDBConnectionUriString: metastoreDbConnectionUriString, metastoreWarehouseDir: metastoreWarehouseDir);
-hiveCatalogOption.MetastoreDBConnectionPasswordSecret = metastoreDbPasswordSecret;
-hiveCatalogOption.MetastoreDBConnectionUserName = metastoreDbUserName;
+// set trino profile
+clusterProfile.TrinoProfile = new TrinoProfile();
 
-trinoProfile.CatalogOptionsHive.Add(hiveCatalogOption);
+// initialize the ClusterServiceConfigsProfile for HMS
+ClusterServiceConfigsProfile clusterServiceConfigsProfile = new ClusterServiceConfigsProfile(serviceName: "trino", new ClusterServiceConfig[] {
+    new ClusterServiceConfig(component: "common", new ClusterConfigFile[] { new ClusterConfigFile("config.properties")
+        {
+            Values = {
+                    ["hive.metastore.hdi.metastoreDbConnectionAuthenticationMode"] = "SqlAuth",
+                    ["hive.metastore.hdi.metastoreDbConnectionPasswordSecret"] = metastoreDbPasswordSecret,
+                    ["hive.metastore.hdi.metastoreDbConnectionURL"] = metastoreDbConnectionUriString,
+                    ["hive.metastore.hdi.metastoreDbConnectionUserName"] = metastoreDbUserName,
+                    ["hive.metastore.hdi.metastoreWarehouseDir"] = metastoreWarehouseDir
+            }
+        }
+    })
+});
+clusterProfile.ServiceConfigsProfiles.Add(clusterServiceConfigsProfile);
 
-clusterData.ClusterProfile.TrinoProfile = trinoProfile;
+ClusterSecretsProfile clusterSecretsProfile = new ClusterSecretsProfile(new ResourceIdentifier(kvResourceId));
+clusterSecretsProfile.Secrets.Add(new ClusterSecretReference(secretName, KeyVaultObjectType.Secret, keyVaultObjectName));
+clusterProfile.SecretsProfile = clusterSecretsProfile;
 
 var clusterCollection = clusterPoolCollection.Get(clusterPoolName).Value.GetHDInsightClusters();
 
@@ -358,7 +373,7 @@ string clusterName = "{your cluster name}";
 string clusterType = "Spark"; // your cluster type here is Spark
 
 // get the available cluster version
-var availableClusterVersion = subscription.GetAvailableClusterVersionsByLocation(location).Where(version => version.ClusterType.Equals(clusterType, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+var availableClusterVersion = subscription.GetAvailableClusterVersionsByLocation(location).Where(version => version.Properties.ClusterType.Equals(clusterType, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
 
 // set the identity profile
 string msiResourceId = "{your user msi resource id}";
@@ -374,16 +389,16 @@ authorizationProfile.UserIds.Add(userId);
 // set the cluster node profile
 string vmSize = "Standard_D8s_v3"; // your vms ize
 int workerCount = 5;
-ClusterComputeNodeProfile nodeProfile = new ClusterComputeNodeProfile(nodeProfileType: "worker", vmSize: vmSize, count: workerCount);
+ClusterComputeProfile nodeProfile = new ClusterComputeProfile(new List<ClusterComputeNodeProfile> { new ClusterComputeNodeProfile(nodeProfileType: "worker", vmSize: vmSize, count: workerCount) });
+ClusterProfile clusterProfile = new ClusterProfile(availableClusterVersion.Properties.ClusterVersion, availableClusterVersion.Properties.OssVersion, authorizationProfile)
+{
+    IdentityList = new List<HDInsightManagedIdentitySpec> { new HDInsightManagedIdentitySpec("cluster",new ResourceIdentifier(msiResourceId), msiClientId, msiObjectId) }
+};
 
-// initialize the ClusterData instance
 var clusterData = new HDInsightClusterData(location)
 {
-    ClusterType = clusterType,
-    ClusterProfile = new ClusterProfile(clusterVersion: availableClusterVersion?.ClusterVersion, ossVersion: availableClusterVersion?.OssVersion, authorizationProfile: authorizationProfile),
+    Properties = new HDInsightClusterProperties(clusterType, nodeProfile, clusterProfile)
 };
-clusterData.ClusterProfile.IdentityProfile = identityProfile;
-clusterData.ComputeNodes.Add(nodeProfile);
 
 // set secret profile
 string kvResourceId = "{your key vault resource id}";
@@ -391,8 +406,8 @@ string secretName = "{your secret reference name}";
 string keyVaultObjectName = "{your key vault secret name}";
 
 var secretReference = new ClusterSecretReference(referenceName: secretName, KeyVaultObjectType.Secret, keyVaultObjectName: keyVaultObjectName);
-clusterData.ClusterProfile.SecretsProfile = new ClusterSecretsProfile(new ResourceIdentifier(kvResourceId));
-clusterData.ClusterProfile.SecretsProfile.Secrets.Add(secretReference);
+clusterData.Properties.ClusterProfile.SecretsProfile = new ClusterSecretsProfile(new ResourceIdentifier(kvResourceId));
+clusterData.Properties.ClusterProfile.SecretsProfile.Secrets.Add(secretReference);
 
 // set spark profile
 string defaultStorageUriString = "abfs://{your adlsgen2 storage account container}@{your adlsgen2 storage account}.dfs.core.windows.net/";
@@ -410,7 +425,7 @@ SparkProfile sparkProfile = new SparkProfile();
 sparkProfile.DefaultStorageUriString = defaultStorageUriString;
 sparkProfile.MetastoreSpec = sparkMetastoreSpec;
 
-clusterData.ClusterProfile.SparkProfile = sparkProfile;
+clusterData.Properties.ClusterProfile.SparkProfile = sparkProfile;
 
 var clusterCollection = clusterPoolCollection.Get(clusterPoolName).Value.GetHDInsightClusters();
 
@@ -435,7 +450,7 @@ string clusterName = "{your cluster name}";
 string clusterType = "Flink"; // cluster type
 
 // get the available cluster version
-var availableClusterVersion = subscription.GetAvailableClusterVersionsByLocation(location).Where(version => version.ClusterType.Equals(clusterType, StringComparison.OrdinalIgnoreCase)).LastOrDefault();
+var availableClusterVersion = subscription.GetAvailableClusterVersionsByLocation(location).Where(version => version.Properties.ClusterType.Equals(clusterType, StringComparison.OrdinalIgnoreCase)).LastOrDefault();
 
 // set the identity profile
 string msiResourceId = "{your user msi resource id}";
@@ -451,16 +466,16 @@ authorizationProfile.UserIds.Add(userId);
 // set the cluster node profile
 string vmSize = "Standard_D8s_v3"; // your vm size
 int workerCount = 5;
-ClusterComputeNodeProfile nodeProfile = new ClusterComputeNodeProfile(nodeProfileType: "worker", vmSize: vmSize, count: workerCount);
+ClusterComputeProfile nodeProfile = new ClusterComputeProfile(new List<ClusterComputeNodeProfile> { new ClusterComputeNodeProfile(nodeProfileType: "worker", vmSize: vmSize, count: workerCount) });
+ClusterProfile clusterProfile = new ClusterProfile(availableClusterVersion.Properties.ClusterVersion, availableClusterVersion.Properties.OssVersion, authorizationProfile)
+{
+    IdentityList = new List<HDInsightManagedIdentitySpec> { new HDInsightManagedIdentitySpec("cluster",new ResourceIdentifier(msiResourceId), msiClientId, msiObjectId) }
+};
 
-// initialize the ClusterData instance
 var clusterData = new HDInsightClusterData(location)
 {
-    ClusterType = clusterType,
-    ClusterProfile = new ClusterProfile(clusterVersion: availableClusterVersion?.ClusterVersion, ossVersion: availableClusterVersion?.OssVersion, authorizationProfile: authorizationProfile),
+    Properties = new HDInsightClusterProperties(clusterType, nodeProfile, clusterProfile)
 };
-clusterData.ClusterProfile.IdentityProfile = identityProfile;
-clusterData.ComputeNodes.Add(nodeProfile);
 
 // set secret profile
 string kvResourceId = "{your key vault resource id}";
@@ -468,8 +483,8 @@ string secretName = "{your secret reference name}";
 string keyVaultObjectName = "{your key vault secret name}";
 
 var secretReference = new ClusterSecretReference(referenceName: secretName, KeyVaultObjectType.Secret, keyVaultObjectName: keyVaultObjectName);
-clusterData.ClusterProfile.SecretsProfile = new ClusterSecretsProfile(new ResourceIdentifier(kvResourceId));
-clusterData.ClusterProfile.SecretsProfile.Secrets.Add(secretReference);
+clusterData.Properties.ClusterProfile.SecretsProfile = new ClusterSecretsProfile(new ResourceIdentifier(kvResourceId));
+clusterData.Properties.ClusterProfile.SecretsProfile.Secrets.Add(secretReference);
 
 // set flink profile
 
@@ -488,10 +503,64 @@ FlinkHiveCatalogOption flinkHiveCatalogOption = new FlinkHiveCatalogOption(metas
 flinkHiveCatalogOption.MetastoreDBConnectionUserName = metastoreDbUserName;
 flinkHiveCatalogOption.MetastoreDBConnectionPasswordSecret = metastoreDbPasswordSecret;
 
-clusterData.ClusterProfile.FlinkProfile = new FlinkProfile(storage: flinkStorageProfile, jobManager: jobManager, taskManager: taskManager);
-clusterData.ClusterProfile.FlinkProfile.CatalogOptionsHive = flinkHiveCatalogOption;
+clusterData.Properties.ClusterProfile.FlinkProfile = new FlinkProfile(storage: flinkStorageProfile, jobManager: jobManager, taskManager: taskManager);
+clusterData.Properties.ClusterProfile.FlinkProfile.CatalogOptionsHive = flinkHiveCatalogOption;
 
 var clusterCollection = clusterPoolCollection.Get(clusterPoolName).Value.GetHDInsightClusters();
+var clusterResult = clusterCollection.CreateOrUpdate(Azure.WaitUntil.Completed, clusterName, clusterData);
+```
+
+### Create Trino Cluster With Availability Zone
+
+```C# Snippet:Readme_CreateTrinoClusterAvailabilityZone
+// define the prerequisites information: subscription, resource group and location where you want to create the resource
+string subscriptionResourceId = "/subscriptions/{subscription id}"; // your subscription resource id like /subscriptions/{subscription id}
+string resourceGroupName = "{your resource group}"; // your resource group name
+AzureLocation location = AzureLocation.EastUS; // your location
+
+SubscriptionResource subscription = armClient.GetSubscriptionResource(new ResourceIdentifier(resourceId: subscriptionResourceId));
+ResourceGroupResource resourceGroupResource = subscription.GetResourceGroup(resourceGroupName);
+HDInsightClusterPoolCollection clusterPoolCollection = resourceGroupResource.GetHDInsightClusterPools();
+
+// create the cluster
+string clusterPoolName = "{your cluster pool name}";
+string clusterName = "{your cluster name}";
+string clusterType = "Trino"; // your cluster type
+
+// get the available cluster version
+var availableClusterVersion = subscription.GetAvailableClusterVersionsByLocation(location).Where(version => version.Properties.ClusterType.Equals(clusterType, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+
+// set the identity profile
+string msiResourceId = "{your user msi resource id}";
+string msiClientId = "{your user msi client id}";
+string msiObjectId = "{your user msi object id}";
+var identityProfile = new HDInsightIdentityProfile(msiResourceId: new ResourceIdentifier(msiResourceId), msiClientId: msiClientId, msiObjectId: msiObjectId);
+
+// set the authorization profile
+var userId = "{your aad user id}";
+var authorizationProfile = new AuthorizationProfile();
+authorizationProfile.UserIds.Add(userId);
+
+// set the cluster node profile
+string vmSize = "Standard_D8s_v3"; // your vms ize
+int workerCount = 5;
+ClusterComputeProfile nodeProfile = new ClusterComputeProfile(new List<ClusterComputeNodeProfile> { new ClusterComputeNodeProfile(nodeProfileType: "worker", vmSize: vmSize, count: workerCount) });
+// set availability zones
+nodeProfile.AvailabilityZones.Add("1");
+nodeProfile.AvailabilityZones.Add("2");
+
+ClusterProfile clusterProfile = new ClusterProfile(availableClusterVersion.Properties.ClusterVersion, availableClusterVersion.Properties.OssVersion, authorizationProfile)
+{
+    IdentityList = new List<HDInsightManagedIdentitySpec> { new HDInsightManagedIdentitySpec("cluster",new ResourceIdentifier(msiResourceId), msiClientId, msiObjectId) }
+};
+
+var clusterData = new HDInsightClusterData(location)
+{
+    Properties = new HDInsightClusterProperties(clusterType, nodeProfile, clusterProfile)
+};
+
+var clusterCollection = clusterPoolCollection.Get(clusterPoolName).Value.GetHDInsightClusters();
+
 var clusterResult = clusterCollection.CreateOrUpdate(Azure.WaitUntil.Completed, clusterName, clusterData);
 ```
 
@@ -530,7 +599,7 @@ more information, see the [Code of Conduct FAQ][coc_faq] or contact
 <opencode@microsoft.com> with any other questions or comments.
 
 <!-- LINKS -->
-[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.HDInsight.Containers_1.0.0-beta.3/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
+[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.HDInsight.Containers_1.0.0-beta.4/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 
