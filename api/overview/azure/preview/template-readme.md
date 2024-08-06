@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: template
 ---
-# Azure Template client library for .NET - version 1.0.3-alpha.20240806.2 
+# Azure Template client library for .NET - version 1.0.3-alpha.20240806.3 
 
 
 Azure Template is a managed service that helps developers get secret simply and securely.
