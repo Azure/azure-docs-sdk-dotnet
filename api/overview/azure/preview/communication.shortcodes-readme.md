@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: communication
 ---
-# Azure Communication Short Code client library for .NET - version 1.0.0-alpha.20240806.3 
+# Azure Communication Short Code client library for .NET - version 1.0.0-alpha.20240807.2 
 
 
 The phone numbers library provides capabilities for short codes administration.
