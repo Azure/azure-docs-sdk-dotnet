@@ -1,7 +1,7 @@
 ---
 title: Azure HDInsight SDK for .NET
 description: Reference for Azure HDInsight SDK for .NET
-ms.date: 08/07/2024
+ms.date: 08/08/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: hdinsight
