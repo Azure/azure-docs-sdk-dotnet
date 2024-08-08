@@ -4,7 +4,7 @@ description: Reference for Azure Storage SDK for .NET
 ms.date: 08/07/2024
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: storage
+ms.service: azure-storage
 ---
 # Azure Storage client libraries for .NET
 
@@ -69,6 +69,25 @@ Use the following version 25.x.x library to work with the Azure Storage resource
 ## Known issues
 
 This section details known issues for the Azure Storage client libraries for .NET.
+
+### Client-side encryption bug when using `BlobClient.UpdateClientSideEncryptionKey` with an unauthenticated symmetric encryption algorithm
+
+#### Issue description
+
+A bug was found in `BlobClient.UpdateClientSideEncryptionKey` that affects customers who are using an unauthenticated symmetric encryption algorithm. If a customer using an [impacted version](#issue-details) of **Azure.Storage.Blobs** attempts to rotate an unauthenticated symmetric encryption key using `BlobClient.UpdateClientSideEncryptionKey`, the key will not rotate correctly and decryption with the SDK might not be possible without additional steps. For remediation guidance, see [Recommended steps](#recommended-steps).
+
+This bug does *not* affect customers who use authenticated symmetric keys or asymmetric keys. Asymmetric keys are used by Azure Key Vault and are not affected by this bug. Also, the async API `BlobClient.UpdateClientSideEncryptionKeyAsync` is *not* affected by this bug.
+
+#### Issue details
+
+| Client library | Versions impacted | Minimum safe version | Recommended action |
+|--|--|--|--|
+| Azure Storage Blob | 12.11.0-beta.2 to 12.21.1 | 12.21.2 | [Update to latest version or minimum 12.21.2](https://www.nuget.org/packages/Azure.Storage.Blobs/) |
+
+#### Recommended steps
+
+- Update client library version according to the table above.
+- If you rotated an unauthenticated symmetric encryption key with `BlobClient.UpdateClientSideKeyEncryptionKey` and an affected version of **Azure.Storage.Blobs**, it might be possible to restore your data by encrypting the affected key twice.
 
 ### InvalidHeaderValue error message when using beta version of SDK
 
