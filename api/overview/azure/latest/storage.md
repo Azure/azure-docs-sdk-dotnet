@@ -74,9 +74,11 @@ This section details known issues for the Azure Storage client libraries for .NE
 
 #### Issue description
 
-A bug was found in `BlobClient.UpdateClientSideEncryptionKey` that affects customers who are using an unauthenticated symmetric encryption algorithm. If a customer using an [impacted version](#issue-details) of **Azure.Storage.Blobs** attempts to rotate an unauthenticated symmetric encryption key using `BlobClient.UpdateClientSideEncryptionKey`, the key will not rotate correctly and decryption with the SDK might not be possible without additional steps. For remediation guidance, see [Recommended steps](#recommended-steps).
+A bug was found in `BlobClient.UpdateClientSideEncryptionKey` that might affect customers who are using an unauthenticated symmetric encryption algorithm for key wrapping. If a customer using an [impacted version](#issue-details) of **Azure.Storage.Blobs** attempts to rotate an unauthenticated symmetric encryption key using `BlobClient.UpdateClientSideEncryptionKey`, the key might silently rotate incorrectly, and decryption with the SDK might not be possible without additional steps. For remediation guidance, see [Recommended steps](#recommended-steps).
 
-This bug does *not* affect customers who use authenticated symmetric keys or asymmetric keys. Asymmetric keys are used by Azure Key Vault and are not affected by this bug. Also, the async API `BlobClient.UpdateClientSideEncryptionKeyAsync` is *not* affected by this bug.
+This bug does *not* affect customers who use an authenticated symmetric key wrapping algorithm, and does *not* affect customers who use asymmetric keys. Asymmetric keys are used by Azure Key Vault and are not affected by this bug. Also, the async API `BlobClient.UpdateClientSideEncryptionKeyAsync` is *not* affected by this bug.
+
+Only a small subset of key wrapping algorithms can cause this situation. Most key wrapping algorithms safely throw an exception during key rotation and don't actually rotate the key.
 
 #### Issue details
 
