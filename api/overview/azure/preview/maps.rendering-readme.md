@@ -1,17 +1,17 @@
 ---
 title: Azure Maps Render client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Maps.Rendering, maps
-ms.date: 05/10/2024
+ms.date: 08/12/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: maps
 ---
-# Azure Maps Render client library for .NET - version 1.0.0-beta.3 
+# Azure Maps Render client library for .NET - version 2.0.0-beta.1 
 
 
 Azure Maps Render is a library that can fetch image tiles and copyright information.
 
-[Source code](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Maps.Rendering_1.0.0-beta.3/sdk/maps/Azure.Maps.Rendering/src) | [API reference documentation](/rest/api/maps/) | [REST API reference documentation](/rest/api/maps/render) | [Product documentation](/azure/azure-maps/)
+[Source code](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Maps.Rendering_2.0.0-beta.1/sdk/maps/Azure.Maps.Rendering/src) | [API reference documentation](/rest/api/maps/) | [REST API reference documentation](/rest/api/maps/render) | [Product documentation](/azure/azure-maps/)
 
 ## Getting started
 
@@ -50,13 +50,13 @@ MapsRenderingClient client = new MapsRenderingClient(credential);
 
 #### Azure AD authentication
 
-In order to interact with the Azure Maps service, you'll need to create an instance of the `MapsRenderingClient` class. The [Azure Identity library](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Maps.Rendering_1.0.0-beta.3/sdk/identity/Azure.Identity/README.md) makes it easy to add Azure Active Directory support for authenticating Azure SDK clients with their corresponding Azure services.
+In order to interact with the Azure Maps service, you'll need to create an instance of the `MapsRenderingClient` class. The [Azure Identity library](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Maps.Rendering_2.0.0-beta.1/sdk/identity/Azure.Identity/README.md) makes it easy to add Azure Active Directory support for authenticating Azure SDK clients with their corresponding Azure services.
 
-To use AAD authentication, the environment variables as described in the [Azure Identity README](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Maps.Rendering_1.0.0-beta.3/sdk/identity/Azure.Identity/README.md) and create a `DefaultAzureCredential` instance to use with the `MapsRenderingClient`.
+To use AAD authentication, the environment variables as described in the [Azure Identity README](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Maps.Rendering_2.0.0-beta.1/sdk/identity/Azure.Identity/README.md) and create a `DefaultAzureCredential` instance to use with the `MapsRenderingClient`.
 
 We also need an **Azure Maps Client ID** which can be found on the Azure Maps page > Authentication tab > "Client ID" in Azure Active Directory Authentication section.
 
-![AzureMapsPortal](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Rendering_1.0.0-beta.3/sdk/maps/Azure.Maps.Rendering/images/azure-maps-portal.png?raw=true "Azure Maps portal website")
+![AzureMapsPortal](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Rendering_2.0.0-beta.1/sdk/maps/Azure.Maps.Rendering/images/azure-maps-portal.png?raw=true "Azure Maps portal website")
 
 ```C# Snippet:InstantiateRenderClientViaAAD
 // Create a MapsRenderingClient that will authenticate through Active Directory
@@ -138,18 +138,18 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Rendering_1.0.0-beta.3/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Rendering_1.0.0-beta.3/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Rendering_1.0.0-beta.3/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Rendering_1.0.0-beta.3/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Rendering_1.0.0-beta.3/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Rendering_2.0.0-beta.1/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Rendering_2.0.0-beta.1/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Rendering_2.0.0-beta.1/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Rendering_2.0.0-beta.1/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Rendering_2.0.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md) |
 [Mocking](https://learn.microsoft.com/dotnet/azure/sdk/unit-testing-mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
 ## Examples
 
-You can familiarize yourself with different APIs using our [samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Maps.Rendering_1.0.0-beta.3/sdk/maps/Azure.Maps.Rendering/samples). Rendering map tiles requires knowledge about zoom levels and tile grid system. Please refer to the [documentation](/azure/azure-maps/zoom-levels-and-tile-grid) for more information.
+You can familiarize yourself with different APIs using our [samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Maps.Rendering_2.0.0-beta.1/sdk/maps/Azure.Maps.Rendering/samples). Rendering map tiles requires knowledge about zoom levels and tile grid system. Please refer to the [documentation](/azure/azure-maps/zoom-levels-and-tile-grid) for more information.
 
 ### Get Imagery Tiles
 
@@ -203,11 +203,11 @@ catch (RequestFailedException e)
 
 ## Next steps
 
-* For more context and additional scenarios, please see: [detailed samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Maps.Rendering_1.0.0-beta.3/sdk/maps/Azure.Maps.Rendering/samples)
+* For more context and additional scenarios, please see: [detailed samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Maps.Rendering_2.0.0-beta.1/sdk/maps/Azure.Maps.Rendering/samples)
 
 ## Contributing
 
-See the [CONTRIBUTING.md](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Rendering_1.0.0-beta.3/CONTRIBUTING.md) for details on building, testing, and contributing to this library.
+See the [CONTRIBUTING.md](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Rendering_2.0.0-beta.1/CONTRIBUTING.md) for details on building, testing, and contributing to this library.
 
 This project welcomes contributions and suggestions. Most contributions require you to agree to a Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us the rights to use your contribution. For details, visit <cla.microsoft.com>.
 
