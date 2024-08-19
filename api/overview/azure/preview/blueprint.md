@@ -1,7 +1,7 @@
 ---
 title: Azure Blueprint SDK for .NET
 description: Reference for Azure Blueprint SDK for .NET
-ms.date: 08/16/2024
+ms.date: 08/19/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: blueprint
