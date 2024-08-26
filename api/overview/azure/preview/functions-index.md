@@ -1,5 +1,3 @@
 | Reference | Package | Source |
 |---|---|---|
-|Microsoft.Azure.Functions.Worker|[Microsoft.Azure.Functions.Worker](https://www.nuget.org/packages/Microsoft.Azure.Functions.Worker)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/)|
-|Functions extension for Authentication Events|[Microsoft.Azure.WebJobs.Extensions.AuthenticationEvents](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.AuthenticationEvents)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/entra/Microsoft.Azure.WebJobs.Extensions.AuthenticationEvents)|
-|Functions Extensions - WebPubSub|[Microsoft.Azure.Functions.Worker.Extensions.WebPubSub](https://www.nuget.org/packages/Microsoft.Azure.Functions.Worker.Extensions.WebPubSub)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/webpubsub/Microsoft.Azure.Functions.Worker.Extensions.WebPubSub)|
+|App Configuration Extension|[Microsoft.Azure.AppConfiguration.Functions.Worker](https://www.nuget.org/packages/Microsoft.Azure.AppConfiguration.Functions.Worker)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/)|
