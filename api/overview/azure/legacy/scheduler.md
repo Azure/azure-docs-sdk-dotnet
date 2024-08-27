@@ -1,7 +1,7 @@
 ---
 title: Azure Scheduler SDK for .NET
 description: Reference for Azure Scheduler SDK for .NET
-ms.date: 08/26/2024
+ms.date: 08/27/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: scheduler
