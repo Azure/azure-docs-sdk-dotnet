@@ -1,7 +1,7 @@
 ---
 title: Azure Grafana SDK for .NET
 description: Reference for Azure Grafana SDK for .NET
-ms.date: 08/27/2024
+ms.date: 08/28/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: grafana
