@@ -14,6 +14,7 @@
     <AssemblyVersion>16.0.0.0</AssemblyVersion>
     <AssemblyVersion>16.1.0.0</AssemblyVersion>
     <AssemblyVersion>16.2.0.0</AssemblyVersion>
+    <AssemblyVersion>16.3.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -34,7 +35,7 @@
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
-        <AssemblyVersion>16.2.0.0</AssemblyVersion>
+        <AssemblyVersion>16.3.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -45,28 +46,64 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public JobNetworkConfiguration (string subnetId);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string subnetId) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Batch.Protocol.Models.JobNetworkConfiguration.#ctor(System.String)" />
-      <MemberSignature Language="VB.NET" Value="Public Sub New (subnetId As String)" />
-      <MemberSignature Language="F#" Value="new Microsoft.Azure.Batch.Protocol.Models.JobNetworkConfiguration : string -&gt; Microsoft.Azure.Batch.Protocol.Models.JobNetworkConfiguration" Usage="new Microsoft.Azure.Batch.Protocol.Models.JobNetworkConfiguration subnetId" />
+      <MemberSignature Language="C#" Value="public JobNetworkConfiguration (string subnetId, bool? skipWithdrawFromVNet = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string subnetId, valuetype System.Nullable`1&lt;bool&gt; skipWithdrawFromVNet) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Azure.Batch.Protocol.Models.JobNetworkConfiguration.#ctor(System.String,System.Nullable{System.Boolean})" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (subnetId As String, Optional skipWithdrawFromVNet As Nullable(Of Boolean) = Nothing)" />
+      <MemberSignature Language="F#" Value="new Microsoft.Azure.Batch.Protocol.Models.JobNetworkConfiguration : string * Nullable&lt;bool&gt; -&gt; Microsoft.Azure.Batch.Protocol.Models.JobNetworkConfiguration" Usage="new Microsoft.Azure.Batch.Protocol.Models.JobNetworkConfiguration (subnetId, skipWithdrawFromVNet)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
-        <AssemblyVersion>16.2.0.0</AssemblyVersion>
+        <AssemblyVersion>16.3.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="subnetId" Type="System.String" />
+        <Parameter Name="skipWithdrawFromVNet" Type="System.Nullable&lt;System.Boolean&gt;" />
       </Parameters>
       <Docs>
         <param name="subnetId">The ARM resource identifier of the virtual
             network subnet which Compute Nodes running Tasks from the Job will
-            join for the duration of the Task. This will only work with a
-            VirtualMachineConfiguration Pool.</param>
+            join for the duration of the Task.</param>
+        <param name="skipWithdrawFromVNet">Whether to withdraw Compute
+            Nodes from the virtual network to DNC when the job is terminated or
+            deleted.</param>
         <summary>
             Initializes a new instance of the JobNetworkConfiguration class.
             </summary>
         <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SkipWithdrawFromVNet">
+      <MemberSignature Language="C#" Value="public bool? SkipWithdrawFromVNet { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;bool&gt; SkipWithdrawFromVNet" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Azure.Batch.Protocol.Models.JobNetworkConfiguration.SkipWithdrawFromVNet" />
+      <MemberSignature Language="VB.NET" Value="Public Property SkipWithdrawFromVNet As Nullable(Of Boolean)" />
+      <MemberSignature Language="F#" Value="member this.SkipWithdrawFromVNet : Nullable&lt;bool&gt; with get, set" Usage="Microsoft.Azure.Batch.Protocol.Models.JobNetworkConfiguration.SkipWithdrawFromVNet" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
+        <AssemblyVersion>16.3.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName Language="C#">[Newtonsoft.Json.JsonProperty(PropertyName="skipWithdrawFromVNet")]</AttributeName>
+          <AttributeName Language="F#">[&lt;Newtonsoft.Json.JsonProperty(PropertyName="skipWithdrawFromVNet")&gt;]</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;System.Boolean&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets whether to withdraw Compute Nodes from the virtual
+            network to DNC when the job is terminated or deleted.
+            </summary>
+        <value>To be added.</value>
+        <remarks>
+            If true, nodes will remain joined to the virtual network to DNC. If
+            false, nodes will automatically withdraw when the job ends.
+            Defaults to false.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="SubnetId">
@@ -78,7 +115,7 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Batch</AssemblyName>
-        <AssemblyVersion>16.2.0.0</AssemblyVersion>
+        <AssemblyVersion>16.3.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -93,8 +130,7 @@
         <summary>
             Gets or sets the ARM resource identifier of the virtual network
             subnet which Compute Nodes running Tasks from the Job will join for
-            the duration of the Task. This will only work with a
-            VirtualMachineConfiguration Pool.
+            the duration of the Task.
             </summary>
         <value>To be added.</value>
         <remarks>
@@ -118,7 +154,7 @@
             well as port 22 for Linux and port 3389 for Windows. Port 443 is
             also required to be open for outbound connections for
             communications to Azure Storage. For more details see:
-            https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration
+            https://docs.microsoft.com/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration
             </remarks>
       </Docs>
     </Member>
