@@ -1,7 +1,7 @@
 ---
 title: Azure Functions SDK for .NET
 description: Reference for Azure Functions SDK for .NET
-ms.date: 09/10/2024
+ms.date: 09/11/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: functions

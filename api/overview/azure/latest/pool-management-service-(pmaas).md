@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: poolmanagementservice(pmaas)
 ---
-# Azure Pool Management Service (PMaaS) SDK for .NET - preview
-## Packages - preview
+# Azure Pool Management Service (PMaaS) SDK for .NET - latest
+## Packages - latest
 [!INCLUDE [packages](pool-management-service-(pmaas)-index.md)]
