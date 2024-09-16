@@ -1,7 +1,7 @@
 ---
 title: Azure Trusted Signing SDK for .NET
 description: Reference for Azure Trusted Signing SDK for .NET
-ms.date: 09/13/2024
+ms.date: 09/16/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: trustedsigning
