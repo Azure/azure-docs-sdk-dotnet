@@ -1,7 +1,7 @@
 ---
 title: Azure Connected VMware vSphere SDK for .NET
 description: Reference for Azure Connected VMware vSphere SDK for .NET
-ms.date: 09/18/2024
+ms.date: 09/19/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: connectedvmwarevsphere
