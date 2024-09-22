@@ -5,8 +5,6 @@ ms.date: 10/13/2021
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: core
-ms.technology: azure
-ms.prod: azure
 ---
 # System.Text.Json support for Microsoft.Spatial library for .NET (Preview)
 

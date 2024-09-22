@@ -5,8 +5,6 @@ ms.date: 04/08/2022
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: extendedlocation
-ms.technology: azure
-ms.prod: azure
 ---
 # Azure ExtendedLocation Management client library for .NET - version 1.0.0-beta.2 
 

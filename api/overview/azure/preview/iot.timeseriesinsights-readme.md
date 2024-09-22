@@ -5,8 +5,6 @@ ms.date: 05/27/2021
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: 
-ms.technology: azure
-ms.prod: azure
 ---
 # Azure IoT Time Series Insights client library for .NET - version 1.0.0-beta.1 
 

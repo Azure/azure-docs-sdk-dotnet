@@ -5,8 +5,6 @@ ms.date: 05/08/2021
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: attestation
-ms.technology: azure
-ms.prod: azure
 ---
 # Azure Attestation client library for .NET - version 1.0.0 
 

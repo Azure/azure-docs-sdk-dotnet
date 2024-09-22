@@ -5,8 +5,6 @@ ms.date: 05/06/2021
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: eventhubs
-ms.technology: azure
-ms.prod: azure
 ---
 # Azure Event Hubs client library for .NET - version 4.3.2 
 

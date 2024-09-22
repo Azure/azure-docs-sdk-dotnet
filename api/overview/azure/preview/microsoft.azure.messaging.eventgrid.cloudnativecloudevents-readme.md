@@ -5,8 +5,6 @@ ms.date: 06/15/2021
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: 
-ms.technology: azure
-ms.prod: azure
 ---
 # CloudNative CloudEvent support for Azure.Messaging.EventGrid library for .NET (Preview)
 

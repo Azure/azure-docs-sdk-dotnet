@@ -5,8 +5,6 @@ ms.date: 05/11/2021
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: synapseanalytics
-ms.technology: azure
-ms.prod: azure
 ---
 # Azure Synapse Analytics Monitoring client library for .NET - version 1.0.0-beta.3 
 

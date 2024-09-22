@@ -5,8 +5,6 @@ ms.date: 09/08/2021
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: webjobs
-ms.technology: azure
-ms.prod: azure
 ---
 # Azure WebJobs Service Bus client library for .NET - version 5.0.0-beta.6 
 

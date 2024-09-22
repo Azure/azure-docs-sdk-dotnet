@@ -5,8 +5,6 @@ ms.date: 08/13/2021
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: synapseanalytics
-ms.technology: azure
-ms.prod: azure
 ---
 # Azure Synapse Analytics Access Control client library for .NET - version 1.0.0-preview.5 
 

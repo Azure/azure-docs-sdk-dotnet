@@ -5,8 +5,6 @@ ms.date: 05/25/2021
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: communication
-ms.technology: azure
-ms.prod: azure
 ---
 # Azure Communication SMS client library for .NET - version 1.0.1 
 

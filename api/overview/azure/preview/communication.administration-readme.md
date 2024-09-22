@@ -5,8 +5,6 @@ ms.date: 11/16/2020
 ms.topic: reference
 ms.devlang: .net
 ms.service: communication
-ms.technology: azure
-ms.prod: azure
 ---
 # Azure Communication Administration client library for .NET - version 1.0.0-beta.3 
 

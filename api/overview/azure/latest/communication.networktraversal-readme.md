@@ -5,8 +5,6 @@ ms.date: 02/09/2022
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: communication
-ms.technology: azure
-ms.prod: azure
 ---
 # Azure Communication Network Traversal client library for .NET - version 1.0.0 
 

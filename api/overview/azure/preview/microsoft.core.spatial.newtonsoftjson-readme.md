@@ -5,8 +5,6 @@ ms.date: 10/09/2020
 ms.topic: reference
 ms.devlang: .net
 ms.service: 
-ms.technology: azure
-ms.prod: azure
 ---
 # Newtonsoft.Json support for Microsoft.Azure.Core.Spatial library for .NET
 

@@ -4,8 +4,6 @@ ms.date: 06/21/2021
 ms.topic: reference
 ms.devlang: csharp
 ms.service: face-api
-ms.technology: azure
-ms.prod: azure
 ---
 # Azure Face API
 

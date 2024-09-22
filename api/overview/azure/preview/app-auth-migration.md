@@ -5,7 +5,6 @@ keywords: Azure, .net, SDK, API, Azure.Identity, identity
 ms.date: 10/27/2020
 ms.topic: reference
 ms.devlang: .net
-ms.prod: azure
 ---
 # AppAuthentication to Azure.Identity Migration Guidance
 
