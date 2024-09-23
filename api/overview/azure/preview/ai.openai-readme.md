@@ -1,19 +1,19 @@
 ---
 title: Azure OpenAI client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.OpenAI, openai
-ms.date: 09/04/2024
+ms.date: 09/23/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: openai
 ---
-# Azure OpenAI client library for .NET - version 2.0.0-beta.5 
+# Azure OpenAI client library for .NET - version 2.0.0-beta.6 
 
 
 The Azure OpenAI client library for .NET is a companion to the official [OpenAI client library for .NET](https://github.com/openai/openai-dotnet). The Azure OpenAI library configures a client for use with Azure OpenAI and provides additional strongly typed extension support for request and response models specific to Azure OpenAI scenarios.
 
 Azure OpenAI is a managed service that allows developers to deploy, tune, and generate content from OpenAI models on Azure resources.
 
-  [Source code](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_2.0.0-beta.5/sdk/openai/Azure.AI.OpenAI/src) | [Package (NuGet)](https://www.nuget.org/packages/Azure.AI.OpenAI) | [API reference documentation](https://learn.microsoft.com/azure/cognitive-services/openai/reference) | [Product documentation](https://learn.microsoft.com/azure/cognitive-services/openai/) | [Samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_2.0.0-beta.5/sdk/openai/Azure.AI.OpenAI/tests/Samples)
+  [Source code](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_2.0.0-beta.6/sdk/openai/Azure.AI.OpenAI/src) | [Package (NuGet)](https://www.nuget.org/packages/Azure.AI.OpenAI) | [API reference documentation](https://learn.microsoft.com/azure/cognitive-services/openai/reference) | [Product documentation](https://learn.microsoft.com/azure/cognitive-services/openai/) | [Samples](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_2.0.0-beta.6/sdk/openai/Azure.AI.OpenAI/tests/Samples)
 
 ## Getting started
 
@@ -90,7 +90,7 @@ AzureOpenAIClientOptions optionsWithCustomAudience = new()
 
 #### Create client with an API key
 
-While not as secure as Microsoft Entra-based authentication, it's possible to authenticate using a client subscription key:
+While not as secure as [Microsoft Entra-based authentication](#create-client-with-a-microsoft-entra-credential), it's possible to authenticate using a client subscription key:
 
 ```C# Snippet:ConfigureClient:WithAOAITopLevelClient
 string keyFromEnvironment = Environment.GetEnvironmentVariable("AZURE_OPENAI_API_KEY");
@@ -141,18 +141,18 @@ We guarantee that all client instance methods are thread-safe and independent of
 ### Additional concepts
 
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_2.0.0-beta.5/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_2.0.0-beta.5/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_2.0.0-beta.5/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_2.0.0-beta.5/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_2.0.0-beta.5/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_2.0.0-beta.6/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_2.0.0-beta.6/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_2.0.0-beta.6/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_2.0.0-beta.6/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_2.0.0-beta.6/sdk/core/Azure.Core/samples/Diagnostics.md) |
 [Mocking](https://learn.microsoft.com/dotnet/azure/sdk/unit-testing-mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
 ## Examples
 
-You can familiarize yourself with different APIs using [Samples from OpenAI's .NET library](https://github.com/openai/openai-dotnet/tree/main/examples) or [Azure.AI.OpenAI-specific samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.OpenAI_2.0.0-beta.5/sdk/openai/Azure.AI.OpenAI/tests/Samples). Most OpenAI capabilities are available on both Azure OpenAI and OpenAI using the same scenario clients and methods, so not all scenarios are redundantly covered here.
+You can familiarize yourself with different APIs using [Samples from OpenAI's .NET library](https://github.com/openai/openai-dotnet/tree/main/examples) or [Azure.AI.OpenAI-specific samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.OpenAI_2.0.0-beta.6/sdk/openai/Azure.AI.OpenAI/tests/Samples). Most OpenAI capabilities are available on both Azure OpenAI and OpenAI using the same scenario clients and methods, so not all scenarios are redundantly covered here.
 
 ### Get a chat completion
 
@@ -166,7 +166,7 @@ ChatCompletion completion = chatClient.CompleteChat(
     [
         // System messages represent instructions or other guidance about how the assistant should behave
         new SystemChatMessage("You are a helpful assistant that talks like a pirate."),
-        // User messages represent user input, whether historical or the most recen tinput
+        // User messages represent user input, whether historical or the most recent input
         new UserChatMessage("Hi, can you help me?"),
         // Assistant messages in a request represent conversation history for responses
         new AssistantChatMessage("Arrr! Of course, me hearty! What can I do for ye?"),
@@ -371,7 +371,9 @@ foreach (KeyValuePair<int, string> indexToIdPair in toolCallIdsByIndex)
         functionArgumentBuildersByIndex[indexToIdPair.Key].ToString()));
 }
 
-conversationMessages.Add(new AssistantChatMessage(toolCalls, contentBuilder.ToString()));
+var assistantChatMessage = new AssistantChatMessage(toolCalls);
+assistantChatMessage.Content.Add(ChatMessageContentPart.CreateTextPart(contentBuilder.ToString()));
+conversationMessages.Add(assistantChatMessage);
 
 // Placeholder: each tool call must be resolved, like in the non-streaming case
 string GetToolCallOutput(ChatToolCall toolCall) => null;
@@ -532,14 +534,15 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [msdocs_openai_embedding]: https://learn.microsoft.com/azure/cognitive-services/openai/concepts/understand-embeddings
 [style-guide-msft]: /style-guide/capitalization
 [style-guide-cloud]: https://aka.ms/azsdk/cloud-style-guide
-[azure_openai_client_class]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_2.0.0-beta.5/sdk/openai/Azure.AI.OpenAI/src/Custom/AzureOpenAIClient.cs
+[azure_openai_client_class]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_2.0.0-beta.6/sdk/openai/Azure.AI.OpenAI/src/Custom/AzureOpenAIClient.cs
 [openai_rest]: https://learn.microsoft.com/azure/cognitive-services/openai/reference
 [azure_openai_completions_docs]: https://learn.microsoft.com/azure/cognitive-services/openai/how-to/completions
-[azure_openai_embeddgings_docs]: https://learn.microsoft.com/azure/cognitive-services/openai/concepts/understand-embeddings
-[openai_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_2.0.0-beta.5/CONTRIBUTING.md
+[azure_openai_embeddings_docs]: https://learn.microsoft.com/azure/cognitive-services/openai/concepts/understand-embeddings
+[openai_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_2.0.0-beta.6/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [code_of_conduct_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [email_opencode]: mailto:opencode@microsoft.com
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net/sdk/openai/Azure.AI.OpenAI/README.png)
+
