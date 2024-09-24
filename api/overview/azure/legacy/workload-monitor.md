@@ -1,7 +1,7 @@
 ---
 title: Azure Workload Monitor SDK for .NET
 description: Reference for Azure Workload Monitor SDK for .NET
-ms.date: 09/23/2024
+ms.date: 09/24/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: workloadmonitor
