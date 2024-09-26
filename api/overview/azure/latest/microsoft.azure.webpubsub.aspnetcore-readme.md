@@ -1,12 +1,12 @@
 ---
 title: Azure Web PubSub service middleware client library for .NET
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebPubSub.AspNetCore, webpubsub
-ms.date: 04/11/2024
+ms.date: 09/26/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: webpubsub
 ---
-# Azure Web PubSub service middleware client library for .NET - version 1.3.0 
+# Azure Web PubSub service middleware client library for .NET - version 1.4.0 
 
 
 [Azure Web PubSub Service](https://aka.ms/awps/doc) is a service that enables you to build real-time messaging web applications using WebSockets and the publish-subscribe pattern. Any platform supporting WebSocket APIs can connect to the service easily, e.g. web pages, mobile applications, edge devices, etc. The service manages the WebSocket connections for you and allows up to 100K **concurrent** connections. It provides powerful APIs for you to manage these clients and deliver real-time messages.
@@ -19,7 +19,7 @@ This library can be used to do the following actions. Details about the terms us
 - Add validation options for upstream request
 - API to add user defined functionality to handle different upstream events
 
-[Source code](https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.WebPubSub.AspNetCore_1.3.0/sdk/webpubsub/Microsoft.Azure.WebPubSub.AspNetCore/src) |
+[Source code](https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.WebPubSub.AspNetCore_1.4.0/sdk/webpubsub/Microsoft.Azure.WebPubSub.AspNetCore/src) |
 [Package][package_ref] |
 [API reference documentation](https://aka.ms/awps/sdk/csharp) |
 [Product documentation](https://aka.ms/awps/doc) |
@@ -57,7 +57,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Configure with [Azure Identity](https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebPubSub.AspNetCore_1.3.0/sdk/identity/Azure.Identity):
+Configure with [Azure Identity](https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebPubSub.AspNetCore_1.4.0/sdk/identity/Azure.Identity):
 ```C# Snippet:WebPubSubDependencyInjectionWithAzureIdentity
 public void ConfigureServices(IServiceCollection services)
 {
@@ -86,17 +86,17 @@ For information about general Web PubSub concepts [Concepts in Azure Web PubSub]
 
 ### `WebPubSubHub`
 
-`WebPubSubHub` is an abstract class to let users implement the subscribed Web PubSub service events. After user register the [event handler](/azure/azure-web-pubsub/howto-develop-eventhandler) in service side, these events will be forwarded from service to server. And `WebPubSubHub` provides 4 methods mapping to the service events to enable users deal with these events, for example, client management, validations or working with `Azure.Messaging.WebPubSub` to broadcast the messages. See samples below for details.
+`WebPubSubHub` is an abstract class to let users implement the subscribed Web PubSub service events. After user register the [event handler](/azure/azure-web-pubsub/howto-develop-eventhandler) in service side, these events will be forwarded from service to server. And `WebPubSubHub` provides methods mapping to the service events to enable users deal with these events, for example, client management, validations or working with `Azure.Messaging.WebPubSub` to broadcast the messages. See samples below for details.
 
 > NOTE
 >
-> Among the 4 methods, `OnConnectAsync()` and `OnMessageReceivedAsync()` are blocking events that service will respect server returns. Besides the mapped correct response, server can throw exceptions whenever the request is against the server side logic. And `UnauthorizedAccessException` and `AuthenticationException` will be converted to `401Unauthorized` and rest will be converted to `500InternalServerError` along with exception message to return service. Then service will drop current client connection.
+> Among the those methods, `OnConnectAsync()` and `OnMessageReceivedAsync()` are blocking events that service will respect server returns. Besides the mapped correct response, server can throw exceptions whenever the request is against the server side logic. And `UnauthorizedAccessException` and `AuthenticationException` will be converted to `401Unauthorized` and rest will be converted to `500InternalServerError` along with exception message to return service. Then service will drop current client connection.
 
 ## Examples
 
 ### Handle upstream `Connect` event
 
-```C# Snippet:WebPubSubHubMethods
+```C# Snippet:HandleConnectEvent
 private sealed class SampleHub : WebPubSubHub
 {
     internal WebPubSubServiceClient<SampleHub> _serviceClient;
@@ -118,11 +118,111 @@ private sealed class SampleHub : WebPubSubHub
 }
 ```
 
+### Handle upstream MQTT `Connect` event
+```C# Snippet:HandleMqttConnectEvent
+private sealed class SampleHub2 : WebPubSubHub
+{
+    internal WebPubSubServiceClient<SampleHub> _serviceClient;
+
+    // Need to ensure service client is injected by call `AddServiceHub<SampleHub2>` in ConfigureServices.
+    public SampleHub2(WebPubSubServiceClient<SampleHub> serviceClient)
+    {
+        _serviceClient = serviceClient;
+    }
+
+    public override ValueTask<ConnectEventResponse> OnConnectAsync(ConnectEventRequest request, CancellationToken cancellationToken)
+    {
+        // By converting the request to MqttConnectEventRequest, you can get the MQTT specific information.
+        if (request is MqttConnectEventRequest mqttRequest)
+        {
+            if (mqttRequest.Mqtt.Username != "baduser")
+            {
+                var response = mqttRequest.CreateMqttResponse(mqttRequest.ConnectionContext.UserId, null, null);
+                // You can customize the user properties that will be sent to the client in the MQTT CONNACK packet.
+                response.Mqtt.UserProperties = new List<MqttUserProperty>()
+                {
+                    new("name", "value")
+                };
+                return ValueTask.FromResult(response as ConnectEventResponse);
+            }
+            else
+            {
+                var errorResponse = mqttRequest.Mqtt.ProtocolVersion switch
+                {
+                    // You can specify the MQTT specific error code and message.
+                    MqttProtocolVersion.V311 => mqttRequest.CreateMqttV311ErrorResponse(MqttV311ConnectReturnCode.NotAuthorized, "not authorized"),
+                    MqttProtocolVersion.V500 => mqttRequest.CreateMqttV50ErrorResponse(MqttV500ConnectReasonCode.Banned, "The user is banned."),
+                    _ => throw new System.NotSupportedException("Unsupported MQTT protocol version")
+                };
+                // You can customize the user properties that will be sent to the client in the MQTT CONNACK packet.
+                errorResponse.Mqtt.UserProperties = new List<MqttUserProperty>()
+                {
+                    new("name", "value")
+                };
+                throw new MqttConnectionException(errorResponse);
+            }
+        }
+        else
+        {
+            // If you don't need to handle MQTT specific logic, you can still return a general response for MQTT clients.
+            return ValueTask.FromResult(request.CreateResponse(request.ConnectionContext.UserId, null, request.Subprotocols.FirstOrDefault(), null));
+        }
+    }
+}
+```
+
+### Handle upstream MQTT `Connected` event
+```C# Snippet:HandleMqttConnectedEvent
+private sealed class SampleHub3 : WebPubSubHub
+{
+    internal WebPubSubServiceClient<SampleHub> _serviceClient;
+
+    // Need to ensure service client is injected by call `AddServiceHub<SampleHub3>` in ConfigureServices.
+    public SampleHub3(WebPubSubServiceClient<SampleHub> serviceClient)
+    {
+        _serviceClient = serviceClient;
+    }
+
+    public override Task OnConnectedAsync(ConnectedEventRequest request)
+    {
+        if (request.ConnectionContext is MqttConnectionContext mqttContext)
+        {
+            // Have your own logic here
+        }
+        return Task.CompletedTask;
+    }
+}
+```
+
+
+### Handle upstream MQTT `Disconnected` event
+```C# Snippet:HandleMqttDisconnectedEvent
+private sealed class SampleHub4 : WebPubSubHub
+{
+    internal WebPubSubServiceClient<SampleHub> _serviceClient;
+
+    // Need to ensure service client is injected by call `AddServiceHub<SampleHub4>` in ConfigureServices.
+    public SampleHub4(WebPubSubServiceClient<SampleHub> serviceClient)
+    {
+        _serviceClient = serviceClient;
+    }
+
+    public override Task OnDisconnectedAsync(DisconnectedEventRequest request)
+    {
+        if (request is MqttDisconnectedEventRequest mqttDisconnected)
+        {
+            // Have your own logic here
+        }
+        return Task.CompletedTask;
+    }
+}
+```
+
 ## Troubleshooting
 
 ### Setting up console logging
 
-You can also easily [enable console logging](https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.WebPubSub.AspNetCore_1.3.0/sdk/core/Azure.Core/samples/Diagnostics.md#logging) if you want to dig deeper into the requests you're making against the service.
+You can also easily [enable console logging](https://github.com/Azure/azure-sdk-for-net/blob/Microsoft.Azure.WebPubSub.AspNetCore_1.4.0/sdk/core/Azure.Core/samples/Diagnostics.md#logging) if you want to dig deeper into the requests you're making against the service.
 
 ## Next steps
 
@@ -144,5 +244,5 @@ For more information see the [Code of Conduct FAQ](https://opensource.microsoft.
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Ftemplate%2FAzure.Template%2FREADME.png)
 
 [azure_sub]: https://azure.microsoft.com/free/dotnet/
-[sample_ref]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebPubSub.AspNetCore_1.3.0/sdk/webpubsub/Microsoft.Azure.WebPubSub.AspNetCore/tests/Samples/
+[sample_ref]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebPubSub.AspNetCore_1.4.0/sdk/webpubsub/Microsoft.Azure.WebPubSub.AspNetCore/tests/Samples/
 [package_ref]: https://www.nuget.org/packages/Microsoft.Azure.WebPubSub.AspNetCore/
