@@ -5,8 +5,6 @@ ms.date: 01/13/2021
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: servicebus
-ms.technology: azure
-ms.prod: azure
 ---
 # Azure Service Bus client library for .NET - version 5.1.1 
 

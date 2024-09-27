@@ -5,8 +5,6 @@ ms.date: 10/05/2021
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: communication
-ms.technology: azure
-ms.prod: azure
 ---
 # Azure Communication CallingServer client library for .NET - version 1.0.0-beta.3 
 

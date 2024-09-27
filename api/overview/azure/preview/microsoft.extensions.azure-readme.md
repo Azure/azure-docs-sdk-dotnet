@@ -5,8 +5,6 @@ ms.date: 05/11/2021
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: extensions
-ms.technology: azure
-ms.prod: azure
 ---
 # Azure client library integration for ASP.NET Core (Preview)
 

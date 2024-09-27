@@ -5,8 +5,6 @@ ms.date: 09/28/2020
 ms.topic: reference
 ms.devlang: .net
 ms.service: 
-ms.technology: azure
-ms.prod: azure
 ---
 # Azure Insights Management client library for .NET - version 1.0.0-preview.1 
 

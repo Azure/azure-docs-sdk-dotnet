@@ -5,8 +5,6 @@ ms.date: 01/19/2022
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: quantum
-ms.technology: azure
-ms.prod: azure
 ---
 # Azure Quantum Jobs client library for .NET - version 1.0.0-beta.3 
 

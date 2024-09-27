@@ -5,8 +5,6 @@ ms.date: 01/13/2021
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: 
-ms.technology: azure
-ms.prod: azure
 ---
 # Azure Live Video Analytics for IoT Edge client library for .NET - version 1.0.0-beta.1 
 

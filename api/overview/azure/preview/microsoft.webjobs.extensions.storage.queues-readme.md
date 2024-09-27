@@ -5,8 +5,6 @@ ms.date: 11/11/2020
 ms.topic: reference
 ms.devlang: .net
 ms.service: 
-ms.technology: azure
-ms.prod: azure
 ---
 # Azure WebJobs Storage Queues client library for .NET - version 5.0.0-beta.1 
 

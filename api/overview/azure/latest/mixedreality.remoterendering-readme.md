@@ -5,8 +5,6 @@ ms.date: 09/17/2021
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: mixedreality
-ms.technology: azure
-ms.prod: azure
 ---
 # Azure Remote Rendering client library for .NET - version 1.1.0 
 

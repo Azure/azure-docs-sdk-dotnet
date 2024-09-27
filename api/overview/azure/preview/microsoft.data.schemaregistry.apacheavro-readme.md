@@ -5,8 +5,6 @@ ms.date: 09/09/2020
 ms.topic: reference
 ms.devlang: .net
 ms.service: 
-ms.technology: azure
-ms.prod: azure
 ---
 # Azure Schema Registry Apache Avro client library for .NET - version 1.0.0-beta.1 
 

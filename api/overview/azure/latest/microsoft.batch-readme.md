@@ -5,8 +5,6 @@ ms.date: 09/29/2020
 ms.topic: reference
 ms.devlang: .net
 ms.service: batch
-ms.technology: azure
-ms.prod: azure
 ---
 # License notes
 The Azure Batch C# client is now under the MIT license. Prior to March 10 2017 it was under the Apache 2.0 license.

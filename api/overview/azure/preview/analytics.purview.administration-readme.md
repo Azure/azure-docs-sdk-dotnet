@@ -5,8 +5,6 @@ ms.date: 10/19/2021
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: purview
-ms.technology: azure
-ms.prod: azure
 ---
 # Azure Purview Administration client library for .NET - version 1.0.0-beta.1 
 

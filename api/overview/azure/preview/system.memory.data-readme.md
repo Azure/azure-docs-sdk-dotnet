@@ -5,8 +5,6 @@ ms.date: 11/04/2020
 ms.topic: reference
 ms.devlang: .net
 ms.service: 
-ms.technology: azure
-ms.prod: azure
 ---
 #  System.Memory.Data library for .NET (Preview) 
 

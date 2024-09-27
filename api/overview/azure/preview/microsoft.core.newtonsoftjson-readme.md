@@ -5,8 +5,6 @@ ms.date: 08/07/2020
 ms.topic: reference
 ms.devlang: .net
 ms.service: 
-ms.technology: azure
-ms.prod: azure
 ---
 # Newtonsoft.Json implementation for Azure Core Experimental shared client library for .NET - version 1.0.0-preview.1 
 

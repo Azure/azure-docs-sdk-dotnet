@@ -5,8 +5,6 @@ ms.date: 03/23/2022
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: personalizer
-ms.technology: azure
-ms.prod: azure
 ---
 # Azure Personalizer client library for .NET - version 2.0.0-beta.2 
 
