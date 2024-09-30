@@ -1,21 +1,21 @@
 ---
 title: Azure WebJobs Web PubSub for Socket.IO client library for .NET
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebJobs.Extensions.WebPubSubForSocketIO, webpubsub
-ms.date: 09/24/2024
+ms.date: 09/30/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: webpubsub
 ---
-# Azure WebJobs Web PubSub for Socket.IO client library for .NET - version 1.0.0-beta.3 
+# Azure WebJobs Web PubSub for Socket.IO client library for .NET - version 1.0.0-beta.4 
 
 
 This extension provides functionality for receiving Web PubSub for Socket.IO webhook calls in Azure Functions, allowing you to easily write functions that respond to any event published to Web PubSub for Socket.IO in serverless mode.
 
-[Source code](https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.WebPubSubForSocketIO_1.0.0-beta.3/sdk/webpubsub/Microsoft.Azure.WebJobs.Extensions.WebPubSubForSocketIO) |
+[Source code](https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.WebPubSubForSocketIO_1.0.0-beta.4/sdk/webpubsub/Microsoft.Azure.WebJobs.Extensions.WebPubSubForSocketIO) |
 [Package](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.WebPubSubForSocketIO) |
 [API reference documentation](https://learn.microsoft.com/dotnet/api/microsoft.azure.webjobs.extensions.webpubsubforsocketio) |
 [Product documentation](https://learn.microsoft.com/azure/azure-web-pubsub/socketio-overview) |
-[Samples](https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.WebPubSubForSocketIO_1.0.0-beta.3/sdk/webpubsub/Microsoft.Azure.WebJobs.Extensions.WebPubSubForSocketIO/samples)
+[Samples](https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.WebPubSubForSocketIO_1.0.0-beta.4/sdk/webpubsub/Microsoft.Azure.WebJobs.Extensions.WebPubSubForSocketIO/samples)
 
 ## Getting started
 
@@ -210,12 +210,12 @@ additional questions or comments.
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fsearch%2FMicrosoft.Azure.WebJobs.Extensions.WebPubSub%2FREADME.png)
 
 <!-- LINKS -->
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.WebPubSubForSocketIO_1.0.0-beta.3/sdk/search/Microsoft.Azure.WebJobs.Extensions.WebPubSubForSocketIO/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.WebPubSubForSocketIO_1.0.0-beta.4/sdk/search/Microsoft.Azure.WebJobs.Extensions.WebPubSubForSocketIO/src
 [package]: https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.WebPubSubForSocketIO/
 [docs]: /dotnet/api/Microsoft.Azure.WebJobs.Extensions.WebPubSubForSocketIO
 [nuget]: https://www.nuget.org/
 
-[contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.WebPubSubForSocketIO_1.0.0-beta.3/CONTRIBUTING.md
+[contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.WebPubSubForSocketIO_1.0.0-beta.4/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
