@@ -1,21 +1,27 @@
 ---
 title: Azure Provisioning client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Provisioning, provisioning
-ms.date: 05/16/2024
+ms.date: 10/05/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: provisioning
 ---
-# Azure Provisioning client library for .NET - version 0.3.0 
+# Azure Provisioning client library for .NET - version 1.0.0-beta.1 
 
 
-Azure.Provisioning is a cloud development kit that allows you to declaritively specify your Azure infrastructure natively in dotnet.
+Azure.Provisioning makes it easy to declaratively specify Azure infrastructure natively in .NET.
 
 ## Getting started
 
 ### Install the package
 
 Install the client library for .NET with [NuGet](https://www.nuget.org/ ):
+
+```dotnetcli
+dotnet add package Azure.Provisioning --prerelease
+```
+
+You can also install the previous version for use with Aspire 8.x via:
 
 ```dotnetcli
 dotnet add package Azure.Provisioning
@@ -29,35 +35,7 @@ dotnet add package Azure.Provisioning
 
 ## Key concepts
 
-This library allows you to specify your infrastructure in a declarative style using dotnet.  You can then use azd to deploy your infrastructure to Azure diretly without needing to write or maintain bicep or arm templates.
-
-## Examples
-
-Here is a simple example which creates a KeyVault.
-
-First create your Infrastructure class.
-
-```C# Snippet:SampleInfrastructure
-public class SampleInfrastructure : Infrastructure
-{
-    public SampleInfrastructure() : base(envName: "Sample", tenantId: Guid.Empty, subscriptionId: Guid.Empty, configuration: new Configuration { UseInteractiveMode = true })
-    {
-    }
-}
-```
-
-Next add your resources into your infrastructure and then Build.
-
-```C# Snippet:KeyVaultOnly
-// Create a new infrastructure
-var infrastructure = new SampleInfrastructure();
-
-// Add a new key vault
-var keyVault = infrastructure.AddKeyVault();
-
-// You can call Build to convert the infrastructure into bicep files.
-infrastructure.Build();
-```
+This library allows you to specify your infrastructure in a declarative style using dotnet.  You can then use azd to deploy your infrastructure to Azure directly without needing to write or maintain bicep or arm templates.
 
 ## Troubleshooting
 
@@ -87,7 +65,7 @@ more information, see the [Code of Conduct FAQ][coc_faq] or contact
 <opencode@microsoft.com> with any other questions or comments.
 
 <!-- LINKS -->
-[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Provisioning_0.3.0/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
+[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Provisioning_1.0.0-beta.1/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 
