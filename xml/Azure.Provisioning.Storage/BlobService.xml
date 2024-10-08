@@ -1,9 +1,9 @@
 <Type Name="BlobService" FullName="Azure.Provisioning.Storage.BlobService">
-  <TypeSignature Language="C#" Value="public class BlobService : Azure.Provisioning.Resource&lt;Azure.ResourceManager.Storage.BlobServiceData&gt;" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit BlobService extends Azure.Provisioning.Resource`1&lt;class Azure.ResourceManager.Storage.BlobServiceData&gt;" />
+  <TypeSignature Language="C#" Value="public class BlobService : Azure.Provisioning.Primitives.Resource, Azure.Provisioning.Primitives.IClientCreator&lt;Azure.Storage.Blobs.BlobServiceClient,Azure.Storage.Blobs.BlobClientOptions&gt;" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit BlobService extends Azure.Provisioning.Primitives.Resource implements class Azure.Provisioning.Primitives.IClientCreator, class Azure.Provisioning.Primitives.IClientCreator`2&lt;class Azure.Storage.Blobs.BlobServiceClient, class Azure.Storage.Blobs.BlobClientOptions&gt;" />
   <TypeSignature Language="DocId" Value="T:Azure.Provisioning.Storage.BlobService" />
-  <TypeSignature Language="VB.NET" Value="Public Class BlobService&#xA;Inherits Resource(Of BlobServiceData)" />
-  <TypeSignature Language="F#" Value="type BlobService = class&#xA;    inherit Resource&lt;BlobServiceData&gt;" />
+  <TypeSignature Language="VB.NET" Value="Public Class BlobService&#xA;Inherits Resource&#xA;Implements IClientCreator(Of BlobServiceClient, BlobClientOptions)" />
+  <TypeSignature Language="F#" Value="type BlobService = class&#xA;    inherit Resource&#xA;    interface IClientCreator&lt;BlobServiceClient, BlobClientOptions&gt;&#xA;    interface IClientCreator" />
   <AssemblyInfo>
     <AssemblyName>Azure.Provisioning</AssemblyName>
     <AssemblyVersion>0.1.0.0</AssemblyVersion>
@@ -12,112 +12,450 @@
     <AssemblyName>Azure.Provisioning.Storage</AssemblyName>
     <AssemblyVersion>0.1.0.0</AssemblyVersion>
     <AssemblyVersion>0.2.0.0</AssemblyVersion>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
-    <BaseTypeName>Azure.Provisioning.Resource&lt;Azure.ResourceManager.Storage.BlobServiceData&gt;</BaseTypeName>
-    <BaseTypeArguments>
-      <BaseTypeArgument TypeParamName="!0">Azure.ResourceManager.Storage.BlobServiceData</BaseTypeArgument>
-    </BaseTypeArguments>
+    <BaseTypeName>Azure.Provisioning.Primitives.Resource</BaseTypeName>
   </Base>
-  <Interfaces />
+  <Interfaces>
+    <Interface>
+      <InterfaceName>Azure.Provisioning.Primitives.IClientCreator</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>Azure.Provisioning.Primitives.IClientCreator&lt;Azure.Storage.Blobs.BlobServiceClient,Azure.Storage.Blobs.BlobClientOptions&gt;</InterfaceName>
+    </Interface>
+  </Interfaces>
   <Docs>
     <summary>
-            Represents a blob service.
+            BlobService.
             </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public BlobService (Azure.Provisioning.IConstruct scope, Azure.Provisioning.Storage.StorageAccount? parent = default, string version = &quot;2022-09-01&quot;);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Azure.Provisioning.IConstruct scope, class Azure.Provisioning.Storage.StorageAccount parent, string version) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Provisioning.Storage.BlobService.#ctor(Azure.Provisioning.IConstruct,Azure.Provisioning.Storage.StorageAccount,System.String)" />
-      <MemberSignature Language="VB.NET" Value="Public Sub New (scope As IConstruct, Optional parent As StorageAccount = Nothing, Optional version As String = &quot;2022-09-01&quot;)" />
-      <MemberSignature Language="F#" Value="new Azure.Provisioning.Storage.BlobService : Azure.Provisioning.IConstruct * Azure.Provisioning.Storage.StorageAccount * string -&gt; Azure.Provisioning.Storage.BlobService" Usage="new Azure.Provisioning.Storage.BlobService (scope, parent, version)" />
+      <MemberSignature Language="C#" Value="public BlobService (string identifierName, string? resourceVersion = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string identifierName, string resourceVersion) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Provisioning.Storage.BlobService.#ctor(System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (identifierName As String, Optional resourceVersion As String = Nothing)" />
+      <MemberSignature Language="F#" Value="new Azure.Provisioning.Storage.BlobService : string * string -&gt; Azure.Provisioning.Storage.BlobService" Usage="new Azure.Provisioning.Storage.BlobService (identifierName, resourceVersion)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
-        <AssemblyName>Azure.Provisioning</AssemblyName>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <AssemblyInfo>
         <AssemblyName>Azure.Provisioning.Storage</AssemblyName>
-        <AssemblyVersion>0.2.0.0</AssemblyVersion>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="scope" Type="Azure.Provisioning.IConstruct" />
-        <Parameter Name="parent" Type="Azure.Provisioning.Storage.StorageAccount" />
-        <Parameter Name="version" Type="System.String" />
+        <Parameter Name="identifierName" Type="System.String" />
+        <Parameter Name="resourceVersion" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="scope">The scope.</param>
-        <param name="parent">The parent.</param>
-        <param name="version">The version.</param>
+        <param name="identifierName">
+            The the Bicep identifier name of the BlobService resource.  This can be
+            used to refer to the resource in expressions, but is not the Azure
+            name of the resource.  This value can contain letters, numbers, and
+            underscores.
+            </param>
+        <param name="resourceVersion">Version of the BlobService.</param>
         <summary>
-            Initializes a new instance of the <see cref="T:Azure.Provisioning.Storage.BlobService" />.
+            Creates a new BlobService.
             </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="FindParentInScope">
-      <MemberSignature Language="C#" Value="protected override Azure.Provisioning.Resource? FindParentInScope (Azure.Provisioning.IConstruct scope);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class Azure.Provisioning.Resource FindParentInScope(class Azure.Provisioning.IConstruct scope) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Provisioning.Storage.BlobService.FindParentInScope(Azure.Provisioning.IConstruct)" />
-      <MemberSignature Language="VB.NET" Value="Protected Overrides Function FindParentInScope (scope As IConstruct) As Resource" />
-      <MemberSignature Language="F#" Value="override this.FindParentInScope : Azure.Provisioning.IConstruct -&gt; Azure.Provisioning.Resource" Usage="blobService.FindParentInScope scope" />
+    <Member MemberName="Azure.Provisioning.Primitives.IClientCreator.GetOutputs">
+      <MemberSignature Language="C#" Value="System.Collections.Generic.IEnumerable&lt;Azure.Provisioning.ProvisioningOutput&gt; IClientCreator.GetOutputs ();" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance class System.Collections.Generic.IEnumerable`1&lt;class Azure.Provisioning.ProvisioningOutput&gt; Azure.Provisioning.Primitives.IClientCreator.GetOutputs() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Provisioning.Storage.BlobService.Azure#Provisioning#Primitives#IClientCreator#GetOutputs" />
+      <MemberSignature Language="VB.NET" Value=" Iterator Overridable NotOverridable Function GetOutputs () As IEnumerable(Of ProvisioningOutput) Implements IClientCreator.GetOutputs" />
+      <MemberSignature Language="F#" Value="abstract member Azure.Provisioning.Primitives.IClientCreator.GetOutputs : unit -&gt; seq&lt;Azure.Provisioning.ProvisioningOutput&gt;&#xA;override this.Azure.Provisioning.Primitives.IClientCreator.GetOutputs : unit -&gt; seq&lt;Azure.Provisioning.ProvisioningOutput&gt;" Usage="blobService.Azure.Provisioning.Primitives.IClientCreator.GetOutputs " />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Azure.Provisioning</AssemblyName>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+      <Implements>
+        <InterfaceMember>M:Azure.Provisioning.Primitives.IClientCreator.GetOutputs</InterfaceMember>
+      </Implements>
       <AssemblyInfo>
         <AssemblyName>Azure.Provisioning.Storage</AssemblyName>
-        <AssemblyVersion>0.2.0.0</AssemblyVersion>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName Language="C#">[System.Runtime.CompilerServices.IteratorStateMachine(typeof(Azure.Provisioning.Storage.BlobService+&lt;Azure-Provisioning-Primitives-IClientCreator-GetOutputs&gt;d__0))]</AttributeName>
+          <AttributeName Language="F#">[&lt;System.Runtime.CompilerServices.IteratorStateMachine(typeof(Azure.Provisioning.Storage.BlobService+&lt;Azure-Provisioning-Primitives-IClientCreator-GetOutputs&gt;d__0))&gt;]</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.IEnumerable&lt;Azure.Provisioning.ProvisioningOutput&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+            Get the outputs required to construct a client for this resource.
+            </summary>
+        <returns>
+            The outputs required to construct a client for this resource.
+            </returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Azure.Provisioning.Primitives.IClientCreator&lt;Azure.Storage.Blobs.BlobServiceClient,Azure.Storage.Blobs.BlobClientOptions&gt;.CreateClient">
+      <MemberSignature Language="C#" Value="Azure.Storage.Blobs.BlobServiceClient IClientCreator&lt;BlobServiceClient,BlobClientOptions&gt;.CreateClient (System.Collections.Generic.IReadOnlyDictionary&lt;string,object?&gt; deploymentOutputs, Azure.Core.TokenCredential credential, Azure.Storage.Blobs.BlobClientOptions? options);" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance class Azure.Storage.Blobs.BlobServiceClient Azure.Provisioning.Primitives.IClientCreator&lt;Azure.Storage.Blobs.BlobServiceClient,Azure.Storage.Blobs.BlobClientOptions&gt;.CreateClient(class System.Collections.Generic.IReadOnlyDictionary`2&lt;string, object&gt; deploymentOutputs, class Azure.Core.TokenCredential credential, class Azure.Storage.Blobs.BlobClientOptions options) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Provisioning.Storage.BlobService.Azure#Provisioning#Primitives#IClientCreator&lt;Azure#Storage#Blobs#BlobServiceClient,Azure#Storage#Blobs#BlobClientOptions&gt;#CreateClient(System.Collections.Generic.IReadOnlyDictionary{System.String,System.Object},Azure.Core.TokenCredential,Azure.Storage.Blobs.BlobClientOptions)" />
+      <MemberSignature Language="VB.NET" Value="Function CreateClient (deploymentOutputs As IReadOnlyDictionary(Of String, Object), credential As TokenCredential, options As BlobClientOptions) As BlobServiceClient Implements IClientCreator(Of BlobServiceClient, BlobClientOptions).CreateClient" />
+      <MemberSignature Language="F#" Value="abstract member Azure.Provisioning.Primitives.IClientCreator&lt;Azure.Storage.Blobs.BlobServiceClient,Azure.Storage.Blobs.BlobClientOptions&gt;.CreateClient : System.Collections.Generic.IReadOnlyDictionary&lt;string, obj&gt; * Azure.Core.TokenCredential * Azure.Storage.Blobs.BlobClientOptions -&gt; Azure.Storage.Blobs.BlobServiceClient&#xA;override this.Azure.Provisioning.Primitives.IClientCreator&lt;Azure.Storage.Blobs.BlobServiceClient,Azure.Storage.Blobs.BlobClientOptions&gt;.CreateClient : System.Collections.Generic.IReadOnlyDictionary&lt;string, obj&gt; * Azure.Core.TokenCredential * Azure.Storage.Blobs.BlobClientOptions -&gt; Azure.Storage.Blobs.BlobServiceClient" Usage="blobService.Azure.Provisioning.Primitives.IClientCreator&lt;Azure.Storage.Blobs.BlobServiceClient,Azure.Storage.Blobs.BlobClientOptions&gt;.CreateClient (deploymentOutputs, credential, options)" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Azure.Provisioning.Primitives.IClientCreator`2.CreateClient(System.Collections.Generic.IReadOnlyDictionary{System.String,System.Object},Azure.Core.TokenCredential,`1)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Provisioning.Storage</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>Azure.Provisioning.Resource</ReturnType>
+        <ReturnType>Azure.Storage.Blobs.BlobServiceClient</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="scope" Type="Azure.Provisioning.IConstruct" />
+        <Parameter Name="deploymentOutputs" Type="System.Collections.Generic.IReadOnlyDictionary&lt;System.String,System.Object&gt;" />
+        <Parameter Name="credential" Type="Azure.Core.TokenCredential" />
+        <Parameter Name="options" Type="Azure.Storage.Blobs.BlobClientOptions" />
       </Parameters>
       <Docs>
-        <param name="scope">The scope.</param>
+        <param name="deploymentOutputs">The deployment outputs.</param>
+        <param name="credential">A credential to use for creating the client.</param>
+        <param name="options">
+            Optional <see cref="T:Azure.Storage.Blobs.BlobClientOptions" /> to use for configuring the
+            <see cref="T:Azure.Storage.Blobs.BlobServiceClient" />.
+            </param>
         <summary>
-            Finds the parent resource in the scope.
+            Create a <see cref="T:Azure.Storage.Blobs.BlobServiceClient" /> after deploying a
+            <see cref="T:Azure.Provisioning.Storage.BlobService" /> resource.
             </summary>
-        <returns>The parent <see cref="T:Azure.Provisioning.Resource" />.</returns>
+        <returns>
+            A <see cref="T:Azure.Storage.Blobs.BlobServiceClient" /> client for the provisioned
+            <see cref="T:Azure.Provisioning.Storage.BlobService" /> resource.
+            </returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ChangeFeed">
+      <MemberSignature Language="C#" Value="public Azure.Provisioning.BicepValue&lt;Azure.Provisioning.Storage.BlobServiceChangeFeed&gt; ChangeFeed { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Azure.Provisioning.BicepValue`1&lt;class Azure.Provisioning.Storage.BlobServiceChangeFeed&gt; ChangeFeed" />
+      <MemberSignature Language="DocId" Value="P:Azure.Provisioning.Storage.BlobService.ChangeFeed" />
+      <MemberSignature Language="VB.NET" Value="Public Property ChangeFeed As BicepValue(Of BlobServiceChangeFeed)" />
+      <MemberSignature Language="F#" Value="member this.ChangeFeed : Azure.Provisioning.BicepValue&lt;Azure.Provisioning.Storage.BlobServiceChangeFeed&gt; with get, set" Usage="Azure.Provisioning.Storage.BlobService.ChangeFeed" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Provisioning.Storage</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Provisioning.BicepValue&lt;Azure.Provisioning.Storage.BlobServiceChangeFeed&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            The blob service properties for change feed events.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ContainerDeleteRetentionPolicy">
+      <MemberSignature Language="C#" Value="public Azure.Provisioning.BicepValue&lt;Azure.Provisioning.Storage.DeleteRetentionPolicy&gt; ContainerDeleteRetentionPolicy { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Azure.Provisioning.BicepValue`1&lt;class Azure.Provisioning.Storage.DeleteRetentionPolicy&gt; ContainerDeleteRetentionPolicy" />
+      <MemberSignature Language="DocId" Value="P:Azure.Provisioning.Storage.BlobService.ContainerDeleteRetentionPolicy" />
+      <MemberSignature Language="VB.NET" Value="Public Property ContainerDeleteRetentionPolicy As BicepValue(Of DeleteRetentionPolicy)" />
+      <MemberSignature Language="F#" Value="member this.ContainerDeleteRetentionPolicy : Azure.Provisioning.BicepValue&lt;Azure.Provisioning.Storage.DeleteRetentionPolicy&gt; with get, set" Usage="Azure.Provisioning.Storage.BlobService.ContainerDeleteRetentionPolicy" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Provisioning.Storage</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Provisioning.BicepValue&lt;Azure.Provisioning.Storage.DeleteRetentionPolicy&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            The blob service properties for container soft delete.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CorsRules">
+      <MemberSignature Language="C#" Value="public Azure.Provisioning.BicepList&lt;Azure.Provisioning.Storage.StorageCorsRule&gt; CorsRules { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Azure.Provisioning.BicepList`1&lt;class Azure.Provisioning.Storage.StorageCorsRule&gt; CorsRules" />
+      <MemberSignature Language="DocId" Value="P:Azure.Provisioning.Storage.BlobService.CorsRules" />
+      <MemberSignature Language="VB.NET" Value="Public Property CorsRules As BicepList(Of StorageCorsRule)" />
+      <MemberSignature Language="F#" Value="member this.CorsRules : Azure.Provisioning.BicepList&lt;Azure.Provisioning.Storage.StorageCorsRule&gt; with get, set" Usage="Azure.Provisioning.Storage.BlobService.CorsRules" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Provisioning.Storage</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Provisioning.BicepList&lt;Azure.Provisioning.Storage.StorageCorsRule&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            The List of CORS rules. You can include up to five CorsRule elements in
+            the request.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DefaultServiceVersion">
+      <MemberSignature Language="C#" Value="public Azure.Provisioning.BicepValue&lt;string&gt; DefaultServiceVersion { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Azure.Provisioning.BicepValue`1&lt;string&gt; DefaultServiceVersion" />
+      <MemberSignature Language="DocId" Value="P:Azure.Provisioning.Storage.BlobService.DefaultServiceVersion" />
+      <MemberSignature Language="VB.NET" Value="Public Property DefaultServiceVersion As BicepValue(Of String)" />
+      <MemberSignature Language="F#" Value="member this.DefaultServiceVersion : Azure.Provisioning.BicepValue&lt;string&gt; with get, set" Usage="Azure.Provisioning.Storage.BlobService.DefaultServiceVersion" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Provisioning.Storage</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Provisioning.BicepValue&lt;System.String&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            DefaultServiceVersion indicates the default version to use for requests
+            to the Blob service if an incoming request’s version is not specified.
+            Possible values include version 2008-10-27 and all more recent
+            versions.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DeleteRetentionPolicy">
+      <MemberSignature Language="C#" Value="public Azure.Provisioning.BicepValue&lt;Azure.Provisioning.Storage.DeleteRetentionPolicy&gt; DeleteRetentionPolicy { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Azure.Provisioning.BicepValue`1&lt;class Azure.Provisioning.Storage.DeleteRetentionPolicy&gt; DeleteRetentionPolicy" />
+      <MemberSignature Language="DocId" Value="P:Azure.Provisioning.Storage.BlobService.DeleteRetentionPolicy" />
+      <MemberSignature Language="VB.NET" Value="Public Property DeleteRetentionPolicy As BicepValue(Of DeleteRetentionPolicy)" />
+      <MemberSignature Language="F#" Value="member this.DeleteRetentionPolicy : Azure.Provisioning.BicepValue&lt;Azure.Provisioning.Storage.DeleteRetentionPolicy&gt; with get, set" Usage="Azure.Provisioning.Storage.BlobService.DeleteRetentionPolicy" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Provisioning.Storage</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Provisioning.BicepValue&lt;Azure.Provisioning.Storage.DeleteRetentionPolicy&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            The blob service properties for blob soft delete.
+            </summary>
+        <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="FromExisting">
-      <MemberSignature Language="C#" Value="public static Azure.Provisioning.Storage.BlobService FromExisting (Azure.Provisioning.IConstruct scope, string name, Azure.Provisioning.Storage.StorageAccount parent);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Azure.Provisioning.Storage.BlobService FromExisting(class Azure.Provisioning.IConstruct scope, string name, class Azure.Provisioning.Storage.StorageAccount parent) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Provisioning.Storage.BlobService.FromExisting(Azure.Provisioning.IConstruct,System.String,Azure.Provisioning.Storage.StorageAccount)" />
-      <MemberSignature Language="VB.NET" Value="Public Shared Function FromExisting (scope As IConstruct, name As String, parent As StorageAccount) As BlobService" />
-      <MemberSignature Language="F#" Value="static member FromExisting : Azure.Provisioning.IConstruct * string * Azure.Provisioning.Storage.StorageAccount -&gt; Azure.Provisioning.Storage.BlobService" Usage="Azure.Provisioning.Storage.BlobService.FromExisting (scope, name, parent)" />
+      <MemberSignature Language="C#" Value="public static Azure.Provisioning.Storage.BlobService FromExisting (string identifierName, string? resourceVersion = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Azure.Provisioning.Storage.BlobService FromExisting(string identifierName, string resourceVersion) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Provisioning.Storage.BlobService.FromExisting(System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function FromExisting (identifierName As String, Optional resourceVersion As String = Nothing) As BlobService" />
+      <MemberSignature Language="F#" Value="static member FromExisting : string * string -&gt; Azure.Provisioning.Storage.BlobService" Usage="Azure.Provisioning.Storage.BlobService.FromExisting (identifierName, resourceVersion)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>Azure.Provisioning</AssemblyName>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <AssemblyInfo>
         <AssemblyName>Azure.Provisioning.Storage</AssemblyName>
-        <AssemblyVersion>0.2.0.0</AssemblyVersion>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Azure.Provisioning.Storage.BlobService</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="scope" Type="Azure.Provisioning.IConstruct" />
-        <Parameter Name="name" Type="System.String" />
-        <Parameter Name="parent" Type="Azure.Provisioning.Storage.StorageAccount" />
+        <Parameter Name="identifierName" Type="System.String" />
+        <Parameter Name="resourceVersion" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="scope">The scope.</param>
-        <param name="name">The resource name.</param>
-        <param name="parent">The resource group.</param>
+        <param name="identifierName">
+            The the Bicep identifier name of the BlobService resource.  This can be
+            used to refer to the resource in expressions, but is not the Azure
+            name of the resource.  This value can contain letters, numbers, and
+            underscores.
+            </param>
+        <param name="resourceVersion">Version of the BlobService.</param>
         <summary>
-            Creates a new instance of the <see cref="T:Azure.Provisioning.Storage.BlobService" /> class referencing an existing instance.
+            Creates a reference to an existing BlobService.
             </summary>
-        <returns>The BlobService instance.</returns>
+        <returns>The existing BlobService resource.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Id">
+      <MemberSignature Language="C#" Value="public Azure.Provisioning.BicepValue&lt;Azure.Core.ResourceIdentifier&gt; Id { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Azure.Provisioning.BicepValue`1&lt;class Azure.Core.ResourceIdentifier&gt; Id" />
+      <MemberSignature Language="DocId" Value="P:Azure.Provisioning.Storage.BlobService.Id" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Id As BicepValue(Of ResourceIdentifier)" />
+      <MemberSignature Language="F#" Value="member this.Id : Azure.Provisioning.BicepValue&lt;Azure.Core.ResourceIdentifier&gt;" Usage="Azure.Provisioning.Storage.BlobService.Id" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Provisioning.Storage</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Provisioning.BicepValue&lt;Azure.Core.ResourceIdentifier&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets the Id.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsAutomaticSnapshotPolicyEnabled">
+      <MemberSignature Language="C#" Value="public Azure.Provisioning.BicepValue&lt;bool&gt; IsAutomaticSnapshotPolicyEnabled { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Azure.Provisioning.BicepValue`1&lt;bool&gt; IsAutomaticSnapshotPolicyEnabled" />
+      <MemberSignature Language="DocId" Value="P:Azure.Provisioning.Storage.BlobService.IsAutomaticSnapshotPolicyEnabled" />
+      <MemberSignature Language="VB.NET" Value="Public Property IsAutomaticSnapshotPolicyEnabled As BicepValue(Of Boolean)" />
+      <MemberSignature Language="F#" Value="member this.IsAutomaticSnapshotPolicyEnabled : Azure.Provisioning.BicepValue&lt;bool&gt; with get, set" Usage="Azure.Provisioning.Storage.BlobService.IsAutomaticSnapshotPolicyEnabled" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Provisioning.Storage</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Provisioning.BicepValue&lt;System.Boolean&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Deprecated in favor of isVersioningEnabled property.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsVersioningEnabled">
+      <MemberSignature Language="C#" Value="public Azure.Provisioning.BicepValue&lt;bool&gt; IsVersioningEnabled { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Azure.Provisioning.BicepValue`1&lt;bool&gt; IsVersioningEnabled" />
+      <MemberSignature Language="DocId" Value="P:Azure.Provisioning.Storage.BlobService.IsVersioningEnabled" />
+      <MemberSignature Language="VB.NET" Value="Public Property IsVersioningEnabled As BicepValue(Of Boolean)" />
+      <MemberSignature Language="F#" Value="member this.IsVersioningEnabled : Azure.Provisioning.BicepValue&lt;bool&gt; with get, set" Usage="Azure.Provisioning.Storage.BlobService.IsVersioningEnabled" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Provisioning.Storage</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Provisioning.BicepValue&lt;System.Boolean&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Versioning is enabled if set to true.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="LastAccessTimeTrackingPolicy">
+      <MemberSignature Language="C#" Value="public Azure.Provisioning.BicepValue&lt;Azure.Provisioning.Storage.LastAccessTimeTrackingPolicy&gt; LastAccessTimeTrackingPolicy { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Azure.Provisioning.BicepValue`1&lt;class Azure.Provisioning.Storage.LastAccessTimeTrackingPolicy&gt; LastAccessTimeTrackingPolicy" />
+      <MemberSignature Language="DocId" Value="P:Azure.Provisioning.Storage.BlobService.LastAccessTimeTrackingPolicy" />
+      <MemberSignature Language="VB.NET" Value="Public Property LastAccessTimeTrackingPolicy As BicepValue(Of LastAccessTimeTrackingPolicy)" />
+      <MemberSignature Language="F#" Value="member this.LastAccessTimeTrackingPolicy : Azure.Provisioning.BicepValue&lt;Azure.Provisioning.Storage.LastAccessTimeTrackingPolicy&gt; with get, set" Usage="Azure.Provisioning.Storage.BlobService.LastAccessTimeTrackingPolicy" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Provisioning.Storage</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Provisioning.BicepValue&lt;Azure.Provisioning.Storage.LastAccessTimeTrackingPolicy&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            The blob service property to configure last access time based tracking
+            policy.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Parent">
+      <MemberSignature Language="C#" Value="public Azure.Provisioning.Storage.StorageAccount? Parent { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Azure.Provisioning.Storage.StorageAccount Parent" />
+      <MemberSignature Language="DocId" Value="P:Azure.Provisioning.Storage.BlobService.Parent" />
+      <MemberSignature Language="VB.NET" Value="Public Property Parent As StorageAccount" />
+      <MemberSignature Language="F#" Value="member this.Parent : Azure.Provisioning.Storage.StorageAccount with get, set" Usage="Azure.Provisioning.Storage.BlobService.Parent" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Provisioning.Storage</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Provisioning.Storage.StorageAccount</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets a reference to the parent StorageAccount.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RestorePolicy">
+      <MemberSignature Language="C#" Value="public Azure.Provisioning.BicepValue&lt;Azure.Provisioning.Storage.RestorePolicy&gt; RestorePolicy { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Azure.Provisioning.BicepValue`1&lt;class Azure.Provisioning.Storage.RestorePolicy&gt; RestorePolicy" />
+      <MemberSignature Language="DocId" Value="P:Azure.Provisioning.Storage.BlobService.RestorePolicy" />
+      <MemberSignature Language="VB.NET" Value="Public Property RestorePolicy As BicepValue(Of RestorePolicy)" />
+      <MemberSignature Language="F#" Value="member this.RestorePolicy : Azure.Provisioning.BicepValue&lt;Azure.Provisioning.Storage.RestorePolicy&gt; with get, set" Usage="Azure.Provisioning.Storage.BlobService.RestorePolicy" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Provisioning.Storage</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Provisioning.BicepValue&lt;Azure.Provisioning.Storage.RestorePolicy&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            The blob service properties for blob restore policy.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Sku">
+      <MemberSignature Language="C#" Value="public Azure.Provisioning.BicepValue&lt;Azure.Provisioning.Storage.StorageSku&gt; Sku { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Azure.Provisioning.BicepValue`1&lt;class Azure.Provisioning.Storage.StorageSku&gt; Sku" />
+      <MemberSignature Language="DocId" Value="P:Azure.Provisioning.Storage.BlobService.Sku" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Sku As BicepValue(Of StorageSku)" />
+      <MemberSignature Language="F#" Value="member this.Sku : Azure.Provisioning.BicepValue&lt;Azure.Provisioning.Storage.StorageSku&gt;" Usage="Azure.Provisioning.Storage.BlobService.Sku" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Provisioning.Storage</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Provisioning.BicepValue&lt;Azure.Provisioning.Storage.StorageSku&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Sku name and tier.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SystemData">
+      <MemberSignature Language="C#" Value="public Azure.Provisioning.BicepValue&lt;Azure.Provisioning.Resources.SystemData&gt; SystemData { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Azure.Provisioning.BicepValue`1&lt;class Azure.Provisioning.Resources.SystemData&gt; SystemData" />
+      <MemberSignature Language="DocId" Value="P:Azure.Provisioning.Storage.BlobService.SystemData" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property SystemData As BicepValue(Of SystemData)" />
+      <MemberSignature Language="F#" Value="member this.SystemData : Azure.Provisioning.BicepValue&lt;Azure.Provisioning.Resources.SystemData&gt;" Usage="Azure.Provisioning.Storage.BlobService.SystemData" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Provisioning.Storage</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Provisioning.BicepValue&lt;Azure.Provisioning.Resources.SystemData&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets the SystemData.
+            </summary>
+        <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
