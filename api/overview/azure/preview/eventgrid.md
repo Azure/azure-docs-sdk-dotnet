@@ -1,7 +1,7 @@
 ---
-title: Azure EventGrid SDK for .NET
-description: Reference for Azure EventGrid SDK for .NET
-ms.date: 07/20/2021
+title: Azure Eventgrid SDK for .NET
+description: Reference for Azure Eventgrid SDK for .NET
+ms.date: 10/08/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: eventgrid
@@ -62,4 +62,3 @@ dotnet add package Microsoft.Azure.Management.EventGrid
 
 [PackageManager]: /nuget/tools/package-manager-console
 [DotNetCLI]: /dotnet/core/tools/dotnet-add-package
-

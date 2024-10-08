@@ -1,7 +1,7 @@
 ---
 title: Azure Agrifood SDK for .NET
 description: Reference for Azure Agrifood SDK for .NET
-ms.date: 10/07/2024
+ms.date: 10/08/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: agrifood
