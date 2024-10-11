@@ -1,12 +1,12 @@
 ---
 title: Azure Inference client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.Inference, ai
-ms.date: 08/07/2024
+ms.date: 10/11/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: ai
 ---
-# Azure Inference client library for .NET - version 1.0.0-beta.1 
+# Azure Inference client library for .NET - version 1.0.0-alpha.20241011.1 
 
 
 The client Library (in preview) does inference, including chat completions, for AI models deployed by [Azure AI Studio](https://ai.azure.com) and [Azure Machine Learning Studio](https://ml.azure.com/). It supports Serverless API endpoints and Managed Compute endpoints (formerly known as Managed Online Endpoints). The client library makes services calls using REST API version `2024-05-01-preview`, as documented in [Azure AI Model Inference API](https://learn.microsoft.com/azure/ai-studio/reference/reference-model-inference-api). For more information see [Overview: Deploy models, flows, and web apps with Azure AI Studio](https://learn.microsoft.com/azure/ai-studio/concepts/deployments-overview).
@@ -143,11 +143,11 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Inference_1.0.0-beta.1/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Inference_1.0.0-beta.1/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Inference_1.0.0-beta.1/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Inference_1.0.0-beta.1/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Inference_1.0.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md) |
 [Mocking](https://learn.microsoft.com/dotnet/azure/sdk/unit-testing-mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
@@ -191,8 +191,8 @@ System.Console.WriteLine(response.Value.Choices[0].Message.Content);
 
 The following types or messages are supported: `SystemMessage`,`UserMessage`, `AssistantMessage`, `ToolMessage`. See also samples:
 
-* [Sample5_ChatCompletionsWithImageUrl.md](https://aka.ms/azsdk/azure-ai-inference/csharp/samples) for usage of `UserMessage` that includes sending an image URL.
-* [Sample7_ChatCompletionsWithTools.md](https://aka.ms/azsdk/azure-ai-inference/csharp/samples) for usage of `ToolMessage`.
+* [Sample5_ChatCompletionsWithImageUrl.md](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/ai/Azure.AI.Inference/samples/Sample5_ChatCompletionsWithImageUrl.md) for usage of `UserMessage` that includes sending an image URL.
+* [Sample7_ChatCompletionsWithTools.md](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/ai/Azure.AI.Inference/samples/Sample7_ChatCompletionsWithTools.md) for usage of `ToolMessage`.
 
 Alternatively, you can read a `BinaryData` object based on a JSON string instead of using the strongly typed classes like `ChatRequestSystemMessage` and `ChatRequestUserMessage`:
 
@@ -348,6 +348,73 @@ To generate embeddings for additional phrases, simply call `client.embed` multip
 -->
 
 ## Troubleshooting
+
+### Observability with OpenTelemetry
+
+Azure AI Inference client library supports tracing and metrics with OpenTelemetry. Refer to
+[Azure SDK Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md#distributed-tracing)
+documentation for general information on OpenTelemetry support in Azure client libraries.
+
+Distributed tracing and metrics with OpenTelemetry are supported in Azure AI Inference in experimental mode and could be enabled through either
+of these steps:
+
+- Set the `AZURE_EXPERIMENTAL_ENABLE_ACTIVITY_SOURCE` environment variable to `true`.
+- Set the `Azure.Experimental.EnableActivitySource` context switch to `true` in your application code
+
+Refer to [Azure Monitor documentation](https://learn.microsoft.com/azure/azure-monitor/app/opentelemetry-enable?tabs=aspnetcore) on how to use
+Azure Monitor OpenTelemetry Distro.
+
+> [!NOTE]
+> With the Azure Monitor OpenTelemetry Distro, you only need to opt-into Azure SDK experimental telemetry features with one of the ways documented at
+> the beginning of this section.
+> The distro enables activity sources and meters for Azure AI Inference automatically.
+
+The following section provides an example on how to configure OpenTelemetry and enable Azure AI Inference tracing and metrics if your
+OpenTelemetry distro does not include Azure AI Inference by default.
+
+#### Generic OpenTelemetry configuration
+
+In this example we're going to export traces and metrics to console, and to the local [OTLP](https://opentelemetry.io/docs/specs/otel/protocol/) destination.
+[Aspire dashboard](https://learn.microsoft.com/dotnet/aspire/fundamentals/dashboard/standalone) can be used for local testing and exploration.
+
+To run this example, you'll need to install the following dependencies (HTTP tracing and metrics instrumentation
+as well as console and OTLP exporters):
+
+```dotnetcli
+dotnet add package OpenTelemetry.Instrumentation.Http
+dotnet add package OpenTelemetry.Exporter.Console
+dotnet add package OpenTelemetry.Exporter.OpenTelemetryProtocol
+```
+
+These packages also bring [OpenTelemetry SDK](https://www.nuget.org/packages/OpenTelemetry) as a dependency.
+
+```C# Snippet:Azure_AI_Inference_EnableOpenTelemetry
+// Enables experimental Azure SDK observability
+AppContext.SetSwitch("Azure.Experimental.EnableActivitySource", true);
+
+// By default instrumentation captures chat messages without content
+// since content can be very verbose and have sensitive information.
+// The following AppContext switch enables content recording.
+AppContext.SetSwitch("Azure.Experimental.TraceGenAIMessageContent", true);
+
+using var tracerProvider = Sdk.CreateTracerProviderBuilder()
+    .AddHttpClientInstrumentation()
+    .AddSource("Azure.AI.Inference.*")
+    .ConfigureResource(r => r.AddService("sample"))
+    .AddConsoleExporter()
+    .AddOtlpExporter()
+    .Build();
+
+using var meterProvider = Sdk.CreateMeterProviderBuilder()
+    .AddHttpClientInstrumentation()
+    .AddMeter("Azure.AI.Inference.*")
+    .ConfigureResource(r => r.AddService("sample"))
+    .AddConsoleExporter()
+    .AddOtlpExporter()
+    .Build();
+```
+
+Check out [OpenTelemetry .NET](https://opentelemetry.io/docs/languages/net/) and your observability provider documentation on how to configure OpenTelemetry.
 
 ### Exceptions
 
