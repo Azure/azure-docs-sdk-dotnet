@@ -1,6 +1,9 @@
 | Reference | Package | Source |
 |---|---|---|
+|[Digital Twins](digitaltwins.core-readme.md)|[Azure.DigitalTwins.Core](https://www.nuget.org/packages/Azure.DigitalTwins.Core)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/digitaltwins/Azure.DigitalTwins.Core)|
+|[Device Update](iot.deviceupdate-readme.md)|[Azure.IoT.DeviceUpdate](https://www.nuget.org/packages/Azure.IoT.DeviceUpdate)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/deviceupdate/Azure.IoT.DeviceUpdate)|
 |[Models Repository](iot.modelsrepository-readme.md)|[Azure.IoT.ModelsRepository](https://www.nuget.org/packages/Azure.IoT.ModelsRepository)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/modelsrepository/Azure.IoT.ModelsRepository)|
+|[Time Series Insights](iot.timeseriesinsights-readme.md)|[Azure.IoT.TimeSeriesInsights](https://www.nuget.org/packages/Azure.IoT.TimeSeriesInsights)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/timeseriesinsights/Azure.IoT.TimeSeriesInsights)|
 |Microsoft.Azure.Devices|[Microsoft.Azure.Devices](https://www.nuget.org/packages/Microsoft.Azure.Devices)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/)|
 |IoT Plug and Play - Devices Client|[Microsoft.Azure.Devices.Client](https://www.nuget.org/packages/Microsoft.Azure.Devices.Client)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/)|
 |Microsoft.Azure.Devices.Provisioning.Client|[Microsoft.Azure.Devices.Provisioning.Client](https://www.nuget.org/packages/Microsoft.Azure.Devices.Provisioning.Client)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/)|
