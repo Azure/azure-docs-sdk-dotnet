@@ -8,4 +8,4 @@ ms.service: poolmanagementservice(pmaas)
 ---
 # Azure Pool Management Service (PMaaS) SDK for .NET - latest
 ## Packages - latest
-[!INCLUDE [packages](pool-management-service-(pmaas)-index.md)]
+[!INCLUDE [packages](pool-management-service-(pmaas\)-index.md)]
