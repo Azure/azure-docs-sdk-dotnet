@@ -1,12 +1,12 @@
 ---
 title: Azure Monitor Distro client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Monitor.OpenTelemetry.AspNetCore, monitor
-ms.date: 07/16/2024
+ms.date: 10/15/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: monitor
 ---
-# Azure Monitor Distro client library for .NET - version 1.3.0-beta.1 
+# Azure Monitor Distro client library for .NET - version 1.3.0-beta.2 
 
 
 The Azure Monitor Distro is a client library that sends telemetry data to Azure Monitor following the OpenTelemetry Specification. This library can be used to instrument your ASP.NET Core applications to collect and send telemetry data to Azure Monitor for analysis and monitoring, powering experiences in Application Insights.
@@ -74,7 +74,7 @@ dotnet add package Azure.Monitor.OpenTelemetry.AspNetCore
 
 #### Nightly builds
 
-Nightly builds are available from this repo's [dev feed](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.OpenTelemetry.AspNetCore_1.3.0-beta.1/CONTRIBUTING.md#nuget-package-dev-feed).
+Nightly builds are available from this repo's [dev feed](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.OpenTelemetry.AspNetCore_1.3.0-beta.2/CONTRIBUTING.md#nuget-package-dev-feed).
 These are provided without support and are not intended for production workloads.
 
 ### Enabling Azure Monitor OpenTelemetry in your application
@@ -118,18 +118,18 @@ var app = builder.Build();
 Note that in the examples above, `UseAzureMonitor` is added to the `IServiceCollection` in the `Program.cs` file. You can also add it in the `ConfigureServices` method of your `Startup.cs` file.
 
 > **Note**
-  > Multiple calls to `AddOpenTelemetry.UseAzureMonitor()` will **NOT** result in multiple providers. Only a single `TracerProvider`, `MeterProvider` and `LoggerProvider` will be created in the target `IServiceCollection`. To establish multiple providers use the `Sdk.CreateTracerProviderBuilder()` and/or `Sdk.CreateMeterProviderBuilder()` and/or `LoggerFactory.CreateLogger` methods with the [Azure Monitor Exporter](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Monitor.OpenTelemetry.AspNetCore_1.3.0-beta.1/sdk/monitor/Azure.Monitor.OpenTelemetry.Exporter) instead of using Azure Monitor Distro.
+  > Multiple calls to `AddOpenTelemetry.UseAzureMonitor()` will **NOT** result in multiple providers. Only a single `TracerProvider`, `MeterProvider` and `LoggerProvider` will be created in the target `IServiceCollection`. To establish multiple providers use the `Sdk.CreateTracerProviderBuilder()` and/or `Sdk.CreateMeterProviderBuilder()` and/or `LoggerFactory.CreateLogger` methods with the [Azure Monitor Exporter](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Monitor.OpenTelemetry.AspNetCore_1.3.0-beta.2/sdk/monitor/Azure.Monitor.OpenTelemetry.Exporter) instead of using Azure Monitor Distro.
 
 ### Authenticate the client
 
-Azure Active Directory (AAD) authentication is an optional feature that can be used with Azure Monitor Distro. To enable AAD authentication, set the `Credential` property in `AzureMonitorOptions`. This is made easy with the [Azure Identity library](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Monitor.OpenTelemetry.AspNetCore_1.3.0-beta.1/sdk/identity/Azure.Identity/README.md), which provides support for authenticating Azure SDK clients with their corresponding Azure services.
+Azure Active Directory (AAD) authentication is an optional feature that can be used with Azure Monitor Distro. To enable AAD authentication, set the `Credential` property in `AzureMonitorOptions`. This is made easy with the [Azure Identity library](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Monitor.OpenTelemetry.AspNetCore_1.3.0-beta.2/sdk/identity/Azure.Identity/README.md), which provides support for authenticating Azure SDK clients with their corresponding Azure services.
 
 ```C#
 // Call UseAzureMonitor and set Credential to authenticate through Active Directory.
-builder.Services.AddOpenTelemetry().UseAzureMonitor(o =>
+builder.Services.AddOpenTelemetry().UseAzureMonitor(options =>
 {
-    o.ConnectionString = "InstrumentationKey=00000000-0000-0000-0000-000000000000";
-    o.Credential = new DefaultAzureCredential();
+    options.ConnectionString = "InstrumentationKey=00000000-0000-0000-0000-000000000000";
+    options.Credential = new DefaultAzureCredential();
 });
 ```
 
@@ -144,9 +144,9 @@ Note that the `Credential` property is optional. If it is not set, Azure Monitor
 When using the Azure Monitor Distro, the sampling percentage for telemetry data is set to 100% (1.0F) by default. For example, let's say you want to set the sampling percentage to 50%. You can achieve this by modifying the code as follows:
 
 ``` C#
-builder.Services.AddOpenTelemetry().UseAzureMonitor(o =>
+builder.Services.AddOpenTelemetry().UseAzureMonitor(options =>
 {
-    o.SamplingRatio = 0.5F;
+    options.SamplingRatio = 0.5F;
 });
 ```
 
@@ -265,9 +265,9 @@ dotnet add package --prerelease OpenTelemetry.Instrumentation.SqlClient
 ```
 
 ```C#
-builder.Services.AddOpenTelemetry().UseAzureMonitor().WithTracing(builder =>
+builder.Services.AddOpenTelemetry().UseAzureMonitor().WithTracing(tracing =>
 {
-    builder.AddSqlClientInstrumentation(options =>
+    tracing.AddSqlClientInstrumentation(options =>
     {
         options.SetDbStatementForStoredProcedure = false;
     });
@@ -282,10 +282,10 @@ To disable Live Metrics, you can set the `EnableLiveMetrics` property to `false`
 
 ```C#
 // Disable Live Metrics by setting EnableLiveMetrics to false in the UseAzureMonitor configuration.
-builder.Services.AddOpenTelemetry().UseAzureMonitor(o =>
+builder.Services.AddOpenTelemetry().UseAzureMonitor(options =>
 {
-    o.ConnectionString = "InstrumentationKey=00000000-0000-0000-0000-000000000000";
-    o.EnableLiveMetrics = false;
+    options.ConnectionString = "InstrumentationKey=00000000-0000-0000-0000-000000000000";
+    options.EnableLiveMetrics = false;
 });
 ```
 
@@ -308,14 +308,47 @@ The Azure Monitor Distro is a distribution package that facilitates users in sen
 
 ## Examples
 
-Refer to [`Program.cs`](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.OpenTelemetry.AspNetCore_1.3.0-beta.1/sdk/monitor/Azure.Monitor.OpenTelemetry.AspNetCore/tests/Azure.Monitor.OpenTelemetry.AspNetCore.Demo/Program.cs) for a complete demo.
+Refer to [`Program.cs`](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.OpenTelemetry.AspNetCore_1.3.0-beta.2/sdk/monitor/Azure.Monitor.OpenTelemetry.AspNetCore/tests/Azure.Monitor.OpenTelemetry.AspNetCore.Demo/Program.cs) for a complete demo.
+
+### Log Scopes
+
+Log [scopes](https://learn.microsoft.com/dotnet/core/extensions/logging#log-scopes) allow you to add additional properties to the logs generated by your application.
+Although the Azure Monitor Distro does support scopes, this feature is off by default in OpenTelemetry.
+To leverage log scopes, you must explicitly enable them.
+
+To include the scope with your logs, set `OpenTelemetryLoggerOptions.IncludeScopes` to `true` in your application's configuration:
+```csharp
+builder.Services.Configure<OpenTelemetryLoggerOptions>((loggingOptions) =>
+{
+    loggingOptions.IncludeScopes = true;
+});
+```
+
+When using `ILogger` scopes, use a `List<KeyValuePair<string, object?>>` or `IReadOnlyList<KeyValue<string, object?>>` as the state for best performance.
+All logs written within the context of the scope will include the specified information.
+Azure Monitor will add these scope values to the Log's CustomProperties.
+```csharp
+List<KeyValuePair<string, object?>> scope =
+[
+    new("scopeKey", "scopeValue")
+];
+
+using (logger.BeginScope(scope))
+{
+    logger.LogInformation("Example message.");
+}
+```
+
+In scenarios involving multiple scopes or a single scope with multiple key-value pairs, if duplicate keys are present,
+only the first occurrence of the key-value pair from the outermost scope will be recorded.
+However, when the same key is utilized both within a logging scope and directly in the log statement, the value specified in the log message template will take precedence.
 
 ## Troubleshooting
 
 The Azure Monitor Distro uses EventSource for its own internal logging. The logs are available to any EventListener by opting into the source named "OpenTelemetry-AzureMonitor-Exporter".
 
 OpenTelemetry also provides it's own [self-diagnostics feature](https://github.com/open-telemetry/opentelemetry-dotnet/blob/main/src/OpenTelemetry/README.md#troubleshooting) to collect internal logs.
-An example of this is available in our demo project [here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.OpenTelemetry.AspNetCore_1.3.0-beta.1/sdk/monitor/Azure.Monitor.OpenTelemetry.Exporter/tests/Azure.Monitor.OpenTelemetry.Exporter.Demo/OTEL_DIAGNOSTICS.json).
+An example of this is available in our demo project [here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.OpenTelemetry.AspNetCore_1.3.0-beta.2/sdk/monitor/Azure.Monitor.OpenTelemetry.Exporter/tests/Azure.Monitor.OpenTelemetry.Exporter.Demo/OTEL_DIAGNOSTICS.json).
 
 **Missing Request Telemetry**
 
@@ -339,5 +372,5 @@ For more information on Azure SDK, please refer to [this website](https://azure.
 
 ## Contributing
 
-See [CONTRIBUTING.md](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.OpenTelemetry.AspNetCore_1.3.0-beta.1/CONTRIBUTING.md) for details on contribution process.
+See [CONTRIBUTING.md](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.OpenTelemetry.AspNetCore_1.3.0-beta.2/CONTRIBUTING.md) for details on contribution process.
 
