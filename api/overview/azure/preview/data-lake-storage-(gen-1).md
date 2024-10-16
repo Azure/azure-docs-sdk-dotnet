@@ -7,5 +7,5 @@ ms.service: datalakestorage(gen1)
 ---
 # Azure Data Lake Storage (Gen 1) SDK for .NET - preview
 ## Packages - preview
-[!INCLUDE [packages](data-lake-storage-(gen-1)-index.md)]
+[!INCLUDE [packages](data-lake-storage-(gen-1\)-index.md)]
 
