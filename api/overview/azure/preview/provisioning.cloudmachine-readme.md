@@ -1,6 +1,6 @@
 ---
 title: Azure Provisioning client library for .NET
-keywords: Azure, dotnet, SDK, API, Azure.Provisioning.Deployment, provisioning
+keywords: Azure, dotnet, SDK, API, Azure.Provisioning.CloudMachine, provisioning
 ms.date: 10/16/2024
 ms.topic: reference
 ms.devlang: dotnet
@@ -9,7 +9,7 @@ ms.service: provisioning
 # Azure Provisioning client library for .NET - version 1.0.0-alpha.20241015.2 
 
 
-Azure.Provisioning.Deployment makes it easy to declaratively specify Azure infrastructure natively in .NET.
+Azure.Provisioning.CloudMachine simplifies declarative resource provisioning in .NET for CloudMachine resources.
 
 ## Getting started
 
@@ -18,7 +18,7 @@ Azure.Provisioning.Deployment makes it easy to declaratively specify Azure infra
 Install the client library for .NET with [NuGet](https://www.nuget.org/ ):
 
 ```dotnetcli
-dotnet add package Azure.Provisioning.Deployment --prerelease
+dotnet add package Azure.Provisioning.CloudMachine --prerelease
 ```
 
 ### Prerequisites
@@ -30,6 +30,8 @@ dotnet add package Azure.Provisioning.Deployment --prerelease
 ## Key concepts
 
 This library allows you to specify your infrastructure in a declarative style using dotnet.  You can then use azd to deploy your infrastructure to Azure directly without needing to write or maintain bicep or arm templates.
+
+## Examples
 
 ## Troubleshooting
 
@@ -62,5 +64,4 @@ more information, see the [Code of Conduct FAQ][coc_faq] or contact
 [cg]: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
-
 
