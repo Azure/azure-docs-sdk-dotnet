@@ -1,7 +1,7 @@
 ---
 title: Azure Reservations SDK for .NET
 description: Reference for Azure Reservations SDK for .NET
-ms.date: 10/17/2024
+ms.date: 10/18/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: reservations
