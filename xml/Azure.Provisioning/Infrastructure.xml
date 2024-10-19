@@ -17,6 +17,10 @@
   <Interfaces />
   <Docs>
     <param name="name" />
+    <param name="bicepName">
+            A friendly name that can also be used as a file name if compiling to a
+            module.
+            </param>
     <summary>
             Collect resources and other constructs like parameters together.
             </summary>
@@ -24,21 +28,24 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Infrastructure (string name = &quot;main&quot;);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string name) cil managed" />
+      <MemberSignature Language="C#" Value="public Infrastructure (string bicepName = &quot;main&quot;);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string bicepName) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Provisioning.Infrastructure.#ctor(System.String)" />
-      <MemberSignature Language="VB.NET" Value="Public Sub New (Optional name As String = &quot;main&quot;)" />
-      <MemberSignature Language="F#" Value="new Azure.Provisioning.Infrastructure : string -&gt; Azure.Provisioning.Infrastructure" Usage="new Azure.Provisioning.Infrastructure name" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (Optional bicepName As String = &quot;main&quot;)" />
+      <MemberSignature Language="F#" Value="new Azure.Provisioning.Infrastructure : string -&gt; Azure.Provisioning.Infrastructure" Usage="new Azure.Provisioning.Infrastructure bicepName" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Provisioning</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="name" Type="System.String" />
+        <Parameter Name="bicepName" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="name" />
+        <param name="bicepName">
+            A friendly name that can also be used as a file name if compiling to a
+            module.
+            </param>
         <summary>
             Collect resources and other constructs like parameters together.
             </summary>
@@ -73,12 +80,35 @@
             </remarks>
       </Docs>
     </Member>
+    <Member MemberName="BicepName">
+      <MemberSignature Language="C#" Value="public string BicepName { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string BicepName" />
+      <MemberSignature Language="DocId" Value="P:Azure.Provisioning.Infrastructure.BicepName" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property BicepName As String" />
+      <MemberSignature Language="F#" Value="member this.BicepName : string" Usage="Azure.Provisioning.Infrastructure.BicepName" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Provisioning</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            A friendly name that can also be used as a file name if compiling to a
+            module.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="Build">
-      <MemberSignature Language="C#" Value="public virtual Azure.Provisioning.ProvisioningPlan Build (Azure.Provisioning.ProvisioningContext? context = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Provisioning.ProvisioningPlan Build(class Azure.Provisioning.ProvisioningContext context) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Provisioning.Infrastructure.Build(Azure.Provisioning.ProvisioningContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function Build (Optional context As ProvisioningContext = Nothing) As ProvisioningPlan" />
-      <MemberSignature Language="F#" Value="abstract member Build : Azure.Provisioning.ProvisioningContext -&gt; Azure.Provisioning.ProvisioningPlan&#xA;override this.Build : Azure.Provisioning.ProvisioningContext -&gt; Azure.Provisioning.ProvisioningPlan" Usage="infrastructure.Build context" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Provisioning.ProvisioningPlan Build (Azure.Provisioning.ProvisioningBuildOptions? options = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Provisioning.ProvisioningPlan Build(class Azure.Provisioning.ProvisioningBuildOptions options) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Provisioning.Infrastructure.Build(Azure.Provisioning.ProvisioningBuildOptions)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function Build (Optional options As ProvisioningBuildOptions = Nothing) As ProvisioningPlan" />
+      <MemberSignature Language="F#" Value="abstract member Build : Azure.Provisioning.ProvisioningBuildOptions -&gt; Azure.Provisioning.ProvisioningPlan&#xA;override this.Build : Azure.Provisioning.ProvisioningBuildOptions -&gt; Azure.Provisioning.ProvisioningPlan" Usage="infrastructure.Build options" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Provisioning</AssemblyName>
@@ -88,11 +118,11 @@
         <ReturnType>Azure.Provisioning.ProvisioningPlan</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="context" Type="Azure.Provisioning.ProvisioningContext" />
+        <Parameter Name="options" Type="Azure.Provisioning.ProvisioningBuildOptions" />
       </Parameters>
       <Docs>
-        <param name="context">
-            The provisioning context to use for composing resources.
+        <param name="options">
+            The build options to use for composing resources.
             </param>
         <summary>
             Compose all the resources into a concrete <see cref="T:Azure.Provisioning.ProvisioningPlan" />
@@ -106,18 +136,18 @@
       </Docs>
     </Member>
     <Member MemberName="Compile">
-      <MemberSignature Language="C#" Value="protected internal override System.Collections.Generic.IEnumerable&lt;Azure.Provisioning.Expressions.Statement&gt; Compile ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance class System.Collections.Generic.IEnumerable`1&lt;class Azure.Provisioning.Expressions.Statement&gt; Compile() cil managed" />
+      <MemberSignature Language="C#" Value="protected internal override System.Collections.Generic.IEnumerable&lt;Azure.Provisioning.Expressions.BicepStatement&gt; Compile ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance class System.Collections.Generic.IEnumerable`1&lt;class Azure.Provisioning.Expressions.BicepStatement&gt; Compile() cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Provisioning.Infrastructure.Compile" />
-      <MemberSignature Language="VB.NET" Value="Protected Friend Overrides Function Compile () As IEnumerable(Of Statement)" />
-      <MemberSignature Language="F#" Value="override this.Compile : unit -&gt; seq&lt;Azure.Provisioning.Expressions.Statement&gt;" Usage="infrastructure.Compile " />
+      <MemberSignature Language="VB.NET" Value="Protected Friend Overrides Function Compile () As IEnumerable(Of BicepStatement)" />
+      <MemberSignature Language="F#" Value="override this.Compile : unit -&gt; seq&lt;Azure.Provisioning.Expressions.BicepStatement&gt;" Usage="infrastructure.Compile " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Provisioning</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>System.Collections.Generic.IEnumerable&lt;Azure.Provisioning.Expressions.Statement&gt;</ReturnType>
+        <ReturnType>System.Collections.Generic.IEnumerable&lt;Azure.Provisioning.Expressions.BicepStatement&gt;</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
@@ -129,24 +159,24 @@
       </Docs>
     </Member>
     <Member MemberName="CompileModules">
-      <MemberSignature Language="C#" Value="protected internal System.Collections.Generic.IDictionary&lt;string,System.Collections.Generic.IEnumerable&lt;Azure.Provisioning.Expressions.Statement&gt;&gt; CompileModules (Azure.Provisioning.ProvisioningContext? context = default);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig instance class System.Collections.Generic.IDictionary`2&lt;string, class System.Collections.Generic.IEnumerable`1&lt;class Azure.Provisioning.Expressions.Statement&gt;&gt; CompileModules(class Azure.Provisioning.ProvisioningContext context) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Provisioning.Infrastructure.CompileModules(Azure.Provisioning.ProvisioningContext)" />
-      <MemberSignature Language="VB.NET" Value="Protected Friend Function CompileModules (Optional context As ProvisioningContext = Nothing) As IDictionary(Of String, IEnumerable(Of Statement))" />
-      <MemberSignature Language="F#" Value="member this.CompileModules : Azure.Provisioning.ProvisioningContext -&gt; System.Collections.Generic.IDictionary&lt;string, seq&lt;Azure.Provisioning.Expressions.Statement&gt;&gt;" Usage="infrastructure.CompileModules context" />
+      <MemberSignature Language="C#" Value="protected internal System.Collections.Generic.IDictionary&lt;string,System.Collections.Generic.IEnumerable&lt;Azure.Provisioning.Expressions.BicepStatement&gt;&gt; CompileModules (Azure.Provisioning.ProvisioningBuildOptions? options = default);" />
+      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig instance class System.Collections.Generic.IDictionary`2&lt;string, class System.Collections.Generic.IEnumerable`1&lt;class Azure.Provisioning.Expressions.BicepStatement&gt;&gt; CompileModules(class Azure.Provisioning.ProvisioningBuildOptions options) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Provisioning.Infrastructure.CompileModules(Azure.Provisioning.ProvisioningBuildOptions)" />
+      <MemberSignature Language="VB.NET" Value="Protected Friend Function CompileModules (Optional options As ProvisioningBuildOptions = Nothing) As IDictionary(Of String, IEnumerable(Of BicepStatement))" />
+      <MemberSignature Language="F#" Value="member this.CompileModules : Azure.Provisioning.ProvisioningBuildOptions -&gt; System.Collections.Generic.IDictionary&lt;string, seq&lt;Azure.Provisioning.Expressions.BicepStatement&gt;&gt;" Usage="infrastructure.CompileModules options" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Provisioning</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>System.Collections.Generic.IDictionary&lt;System.String,System.Collections.Generic.IEnumerable&lt;Azure.Provisioning.Expressions.Statement&gt;&gt;</ReturnType>
+        <ReturnType>System.Collections.Generic.IDictionary&lt;System.String,System.Collections.Generic.IEnumerable&lt;Azure.Provisioning.Expressions.BicepStatement&gt;&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="context" Type="Azure.Provisioning.ProvisioningContext" />
+        <Parameter Name="options" Type="Azure.Provisioning.ProvisioningBuildOptions" />
       </Parameters>
       <Docs>
-        <param name="context">Provisioning context.</param>
+        <param name="options">Provisioning options.</param>
         <summary>
             Compile this infrastructure into a set of bicep modules.
             </summary>
@@ -178,12 +208,12 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="IsValidIdentifierName">
-      <MemberSignature Language="C#" Value="public static bool IsValidIdentifierName (string? identifierName);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool IsValidIdentifierName(string identifierName) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Provisioning.Infrastructure.IsValidIdentifierName(System.String)" />
-      <MemberSignature Language="VB.NET" Value="Public Shared Function IsValidIdentifierName (identifierName As String) As Boolean" />
-      <MemberSignature Language="F#" Value="static member IsValidIdentifierName : string -&gt; bool" Usage="Azure.Provisioning.Infrastructure.IsValidIdentifierName identifierName" />
+    <Member MemberName="IsValidBicepIdentifier">
+      <MemberSignature Language="C#" Value="public static bool IsValidBicepIdentifier (string? bicepIdentifier);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool IsValidBicepIdentifier(string bicepIdentifier) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Provisioning.Infrastructure.IsValidBicepIdentifier(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function IsValidBicepIdentifier (bicepIdentifier As String) As Boolean" />
+      <MemberSignature Language="F#" Value="static member IsValidBicepIdentifier : string -&gt; bool" Usage="Azure.Provisioning.Infrastructure.IsValidBicepIdentifier bicepIdentifier" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Provisioning</AssemblyName>
@@ -193,46 +223,24 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="identifierName" Type="System.String" />
+        <Parameter Name="bicepIdentifier" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="identifierName">The proposed identifier name.</param>
+        <param name="bicepIdentifier">The proposed identifier.</param>
         <summary>
             Checks whether an name is a valid bicep identifier name comprised of
             letters, digits, and underscores.
             </summary>
-        <returns>Whether the name is a valid bicep identifier name.</returns>
+        <returns>Whether the name is a valid bicep identifier.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="Name">
-      <MemberSignature Language="C#" Value="public string Name { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance string Name" />
-      <MemberSignature Language="DocId" Value="P:Azure.Provisioning.Infrastructure.Name" />
-      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Name As String" />
-      <MemberSignature Language="F#" Value="member this.Name : string" Usage="Azure.Provisioning.Infrastructure.Name" />
-      <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Azure.Provisioning</AssemblyName>
-        <AssemblyVersion>1.0.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.String</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>
-            A friendly name that can also be used if compiling to a module.
-            </summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="NormalizeIdentifierName">
-      <MemberSignature Language="C#" Value="public static string NormalizeIdentifierName (string? identifierName);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig string NormalizeIdentifierName(string identifierName) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Provisioning.Infrastructure.NormalizeIdentifierName(System.String)" />
-      <MemberSignature Language="VB.NET" Value="Public Shared Function NormalizeIdentifierName (identifierName As String) As String" />
-      <MemberSignature Language="F#" Value="static member NormalizeIdentifierName : string -&gt; string" Usage="Azure.Provisioning.Infrastructure.NormalizeIdentifierName identifierName" />
+    <Member MemberName="NormalizeBicepIdentifier">
+      <MemberSignature Language="C#" Value="public static string NormalizeBicepIdentifier (string? bicepIdentifier);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig string NormalizeBicepIdentifier(string bicepIdentifier) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Provisioning.Infrastructure.NormalizeBicepIdentifier(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function NormalizeBicepIdentifier (bicepIdentifier As String) As String" />
+      <MemberSignature Language="F#" Value="static member NormalizeBicepIdentifier : string -&gt; string" Usage="Azure.Provisioning.Infrastructure.NormalizeBicepIdentifier bicepIdentifier" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Provisioning</AssemblyName>
@@ -242,10 +250,10 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="identifierName" Type="System.String" />
+        <Parameter Name="bicepIdentifier" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="identifierName">The proposed bicep identifier name.</param>
+        <param name="bicepIdentifier">The proposed bicep identifier.</param>
         <summary>
             Normalizes a proposed bicep identifier name.  Any invalid characters
             will be replaced with underscores.
@@ -282,11 +290,11 @@
       </Docs>
     </Member>
     <Member MemberName="Resolve">
-      <MemberSignature Language="C#" Value="protected internal override void Resolve (Azure.Provisioning.ProvisioningContext? context = default);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance void Resolve(class Azure.Provisioning.ProvisioningContext context) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Provisioning.Infrastructure.Resolve(Azure.Provisioning.ProvisioningContext)" />
-      <MemberSignature Language="VB.NET" Value="Protected Friend Overrides Sub Resolve (Optional context As ProvisioningContext = Nothing)" />
-      <MemberSignature Language="F#" Value="override this.Resolve : Azure.Provisioning.ProvisioningContext -&gt; unit" Usage="infrastructure.Resolve context" />
+      <MemberSignature Language="C#" Value="protected internal override void Resolve (Azure.Provisioning.ProvisioningBuildOptions? options = default);" />
+      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance void Resolve(class Azure.Provisioning.ProvisioningBuildOptions options) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Provisioning.Infrastructure.Resolve(Azure.Provisioning.ProvisioningBuildOptions)" />
+      <MemberSignature Language="VB.NET" Value="Protected Friend Overrides Sub Resolve (Optional options As ProvisioningBuildOptions = Nothing)" />
+      <MemberSignature Language="F#" Value="override this.Resolve : Azure.Provisioning.ProvisioningBuildOptions -&gt; unit" Usage="infrastructure.Resolve options" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Provisioning</AssemblyName>
@@ -296,10 +304,10 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="context" Type="Azure.Provisioning.ProvisioningContext" />
+        <Parameter Name="options" Type="Azure.Provisioning.ProvisioningBuildOptions" />
       </Parameters>
       <Docs>
-        <param name="context">Optional <see cref="T:Azure.Provisioning.ProvisioningContext" />.</param>
+        <param name="options">Optional <see cref="T:Azure.Provisioning.ProvisioningBuildOptions" />.</param>
         <summary>
             Resolve any resources or properties that were not explicitly specified.
             </summary>
@@ -330,11 +338,11 @@
       </Docs>
     </Member>
     <Member MemberName="Validate">
-      <MemberSignature Language="C#" Value="protected internal override void Validate (Azure.Provisioning.ProvisioningContext? context = default);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance void Validate(class Azure.Provisioning.ProvisioningContext context) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Provisioning.Infrastructure.Validate(Azure.Provisioning.ProvisioningContext)" />
-      <MemberSignature Language="VB.NET" Value="Protected Friend Overrides Sub Validate (Optional context As ProvisioningContext = Nothing)" />
-      <MemberSignature Language="F#" Value="override this.Validate : Azure.Provisioning.ProvisioningContext -&gt; unit" Usage="infrastructure.Validate context" />
+      <MemberSignature Language="C#" Value="protected internal override void Validate (Azure.Provisioning.ProvisioningBuildOptions? options = default);" />
+      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance void Validate(class Azure.Provisioning.ProvisioningBuildOptions options) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Provisioning.Infrastructure.Validate(Azure.Provisioning.ProvisioningBuildOptions)" />
+      <MemberSignature Language="VB.NET" Value="Protected Friend Overrides Sub Validate (Optional options As ProvisioningBuildOptions = Nothing)" />
+      <MemberSignature Language="F#" Value="override this.Validate : Azure.Provisioning.ProvisioningBuildOptions -&gt; unit" Usage="infrastructure.Validate options" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Provisioning</AssemblyName>
@@ -344,22 +352,22 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="context" Type="Azure.Provisioning.ProvisioningContext" />
+        <Parameter Name="options" Type="Azure.Provisioning.ProvisioningBuildOptions" />
       </Parameters>
       <Docs>
-        <param name="context">Optional <see cref="T:Azure.Provisioning.ProvisioningContext" />.</param>
+        <param name="options">Optional <see cref="T:Azure.Provisioning.ProvisioningBuildOptions" />.</param>
         <summary>
             Validate the presence of any required members.
             </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="ValidateIdentifierName">
-      <MemberSignature Language="C#" Value="public static void ValidateIdentifierName (string? identifierName, string? paramName = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void ValidateIdentifierName(string identifierName, string paramName) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Provisioning.Infrastructure.ValidateIdentifierName(System.String,System.String)" />
-      <MemberSignature Language="VB.NET" Value="Public Shared Sub ValidateIdentifierName (identifierName As String, Optional paramName As String = Nothing)" />
-      <MemberSignature Language="F#" Value="static member ValidateIdentifierName : string * string -&gt; unit" Usage="Azure.Provisioning.Infrastructure.ValidateIdentifierName (identifierName, paramName)" />
+    <Member MemberName="ValidateBicepIdentifier">
+      <MemberSignature Language="C#" Value="public static void ValidateBicepIdentifier (string? bicepIdentifier, string? paramName = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void ValidateBicepIdentifier(string bicepIdentifier, string paramName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Provisioning.Infrastructure.ValidateBicepIdentifier(System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub ValidateBicepIdentifier (bicepIdentifier As String, Optional paramName As String = Nothing)" />
+      <MemberSignature Language="F#" Value="static member ValidateBicepIdentifier : string * string -&gt; unit" Usage="Azure.Provisioning.Infrastructure.ValidateBicepIdentifier (bicepIdentifier, paramName)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Provisioning</AssemblyName>
@@ -369,11 +377,11 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="identifierName" Type="System.String" />
+        <Parameter Name="bicepIdentifier" Type="System.String" />
         <Parameter Name="paramName" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="identifierName">The proposed bicep identifier name.</param>
+        <param name="bicepIdentifier">The proposed bicep identifier.</param>
         <param name="paramName">Optional parameter name to use for exceptions.</param>
         <summary>
             Validates whether a given bicep identifier name is correctly formed of
