@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: computefleet
 ---
-# Azure Computefleet SDK for .NET - preview
-## Packages - preview
+# Azure Computefleet SDK for .NET - latest
+## Packages - latest
 [!INCLUDE [packages](computefleet-index.md)]
