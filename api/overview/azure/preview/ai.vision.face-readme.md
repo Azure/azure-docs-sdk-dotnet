@@ -1,12 +1,12 @@
 ---
 title: Azure AI Face client library for .NET
-keywords: Azure, dotnet, SDK, API, Azure.AI.Vision.Face, face
-ms.date: 05/27/2024
+keywords: Azure, dotnet, SDK, API, Azure.AI.Vision.Face, azure-ai-face
+ms.date: 10/23/2024
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: face
+ms.service: azure-ai-face
 ---
-# Azure AI Face client library for .NET - version 1.0.0-beta.1 
+# Azure AI Face client library for .NET - version 1.0.0-beta.2 
 
 
 The Azure AI Face service provides AI algorithms that detect, recognize, and analyze human faces in images. It includes the following main features:
@@ -15,6 +15,7 @@ The Azure AI Face service provides AI algorithms that detect, recognize, and ana
 - Liveness detection
 - Face recognition
   - Face verification ("one-to-one" matching)
+  - Face identification ("one-to-many" matching)
 - Find similar faces
 - Group faces
 
@@ -106,6 +107,28 @@ AzureKeyCredential credential = new AzureKeyCredential("<your apiKey>");
 var client = new FaceClient(endpoint, credential);
 ```
 
+### Service API versions
+
+The client library targets the latest service API version by default. A client instance accepts an optional service API version parameter from its options to specify which API version service to communicate.
+
+#### Select a service API version
+
+You have the flexibility to explicitly select a supported service API version when instantiating a client by configuring its associated options. This ensures that the client can communicate with services using the specified API version.
+
+For example,
+
+```C# Snippet:CreateFaceClientWithVersion
+Uri endpoint = new Uri("<your endpoint>");
+DefaultAzureCredential credential = new DefaultAzureCredential();
+AzureAIVisionFaceClientOptions options = new AzureAIVisionFaceClientOptions(AzureAIVisionFaceClientOptions.ServiceVersion.V1_2_Preview_1);
+FaceClient client = new FaceClient(endpoint, credential, options);
+```
+
+When selecting an API version, it's important to verify that there are no breaking changes compared to the latest API version. If there are significant differences, API calls may fail due to incompatibility.
+
+Always ensure that the chosen API version is fully supported and operational for your specific use case and that it aligns with the service's versioning policy.
+
+
 ## Key concepts
 
 ### FaceClient
@@ -113,10 +136,17 @@ var client = new FaceClient(endpoint, credential);
 `FaceClient` provides operations for:
 
 - Face detection and analysis: Detect human faces in an image and return the rectangle coordinates of their locations, and optionally with landmarks, and face-related attributes. This operation is required as a first step in all the other face recognition scenarios.
-- Face recognition: Confirm that a user is who they claim to be based on how closely their face data matches the target face.
-   Support Face verification ("one-to-one" matching).
+- Face recognition: Confirm that a user is who they claim to be based on how closely their face data matches the target face. It includes Face verification ("one-to-one" matching) and Face identification ("one-to-many" matching).
 - Finding similar faces from a smaller set of faces that look similar to the target face.
 - Grouping faces into several smaller groups based on similarity.
+
+### FaceAdministrationClient
+
+`FaceAdministrationClient` is provided to interact with the following data structures that hold data on faces and
+persons for Face recognition:
+
+- LargeFaceList
+- LargePersonGroup
 
 ### FaceSessionClient
 
@@ -132,12 +162,12 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Vision.Face_1.0.0-beta.1/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Vision.Face_1.0.0-beta.1/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Vision.Face_1.0.0-beta.1/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Vision.Face_1.0.0-beta.1/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Vision.Face_1.0.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Vision.Face_1.0.0-beta.1/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Vision.Face_1.0.0-beta.2/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Vision.Face_1.0.0-beta.2/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Vision.Face_1.0.0-beta.2/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Vision.Face_1.0.0-beta.2/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Vision.Face_1.0.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Vision.Face_1.0.0-beta.2/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
@@ -172,7 +202,7 @@ foreach (var detectedFace in detectedFaces)
 {
     Console.WriteLine($"Face Rectangle: left={detectedFace.FaceRectangle.Left}, top={detectedFace.FaceRectangle.Top}, width={detectedFace.FaceRectangle.Width}, height={detectedFace.FaceRectangle.Height}");
     Console.WriteLine($"Head pose: pitch={detectedFace.FaceAttributes.HeadPose.Pitch}, roll={detectedFace.FaceAttributes.HeadPose.Roll}, yaw={detectedFace.FaceAttributes.HeadPose.Yaw}");
-    Console.WriteLine($"Mask: {detectedFace.FaceAttributes.Mask}");
+    Console.WriteLine($"Mask: NoseAndMouthCovered={detectedFace.FaceAttributes.Mask.NoseAndMouthCovered}, Type={detectedFace.FaceAttributes.Mask.Type}");
     Console.WriteLine($"Quality: {detectedFace.FaceAttributes.QualityForRecognition}");
     Console.WriteLine($"Recognition model: {detectedFace.RecognitionModel}");
     Console.WriteLine($"Landmarks: ");
@@ -340,11 +370,11 @@ When you submit a pull request, a CLA-bot will automatically determine whether y
 This project has adopted the [Microsoft Open Source Code of Conduct][code_of_conduct]. For more information see the [Code of Conduct FAQ][coc_faq] or contact [opencode@microsoft.com][coc_contact] with any additional questions or comments.
 
 <!-- LINKS -->
-[source_code]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Vision.Face_1.0.0-beta.1/sdk/face/Azure.AI.Vision.Face/src
+[source_code]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Vision.Face_1.0.0-beta.2/sdk/face/Azure.AI.Vision.Face/src
 [face_nuget]: https://aka.ms/azsdk-csharp-face-pkg
 [face_ref_docs]: https://aka.ms/azsdk-csharp-face-ref
 [face_product_docs]: https://learn.microsoft.com/azure/ai-services/computer-vision/overview-identity
-[face_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Vision.Face_1.0.0-beta.1/sdk/face/Azure.AI.Vision.Face/samples
+[face_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Vision.Face_1.0.0-beta.2/sdk/face/Azure.AI.Vision.Face/samples
 
 [nuget]: https://www.nuget.org/
 [steps_assign_an_azure_role]: https://learn.microsoft.com/azure/role-based-access-control/role-assignments-steps
@@ -366,12 +396,12 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [azure_sdk_net_default_azure_credential]: https://learn.microsoft.com/dotnet/api/azure.identity.defaultazurecredential?view=azure-dotnet
 [register_aad_app]: /azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
 
-[face_sample_detection]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Vision.Face_1.0.0-beta.1/sdk/face/Azure.AI.Vision.Face/samples/Sample1_FaceDetection.md
+[face_sample_detection]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Vision.Face_1.0.0-beta.2/sdk/face/Azure.AI.Vision.Face/samples/Sample1_FaceDetection.md
 [liveness_tutorial]: https://learn.microsoft.com/azure/ai-services/computer-vision/tutorials/liveness
-[face_sample_liveness_session]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Vision.Face_1.0.0-beta.1/sdk/face/Azure.AI.Vision.Face/samples/Sample2_DetectLivenessWithSession.md
-[face_sample_liveness_with_verify_session]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Vision.Face_1.0.0-beta.1/sdk/face/Azure.AI.Vision.Face/samples/Sample3_DetectLivenessWithVerifyWithSession.md
+[face_sample_liveness_session]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Vision.Face_1.0.0-beta.2/sdk/face/Azure.AI.Vision.Face/samples/Sample2_DetectLivenessWithSession.md
+[face_sample_liveness_with_verify_session]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Vision.Face_1.0.0-beta.2/sdk/face/Azure.AI.Vision.Face/samples/Sample3_DetectLivenessWithVerifyWithSession.md
 
-[logging]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Vision.Face_1.0.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md
+[logging]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Vision.Face_1.0.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md
 
 [cla]: https://cla.microsoft.com
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
