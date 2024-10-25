@@ -146,11 +146,11 @@
       </Docs>
     </Member>
     <Member MemberName="CreateLivenessSession">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.AI.Vision.Face.CreateLivenessSessionResult&gt; CreateLivenessSession (Azure.AI.Vision.Face.CreateLivenessSessionContent createLivenessSessionContent, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.AI.Vision.Face.CreateLivenessSessionResult&gt; CreateLivenessSession(class Azure.AI.Vision.Face.CreateLivenessSessionContent createLivenessSessionContent, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.AI.Vision.Face.CreateLivenessSessionResult&gt; CreateLivenessSession (Azure.AI.Vision.Face.CreateLivenessSessionContent body, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.AI.Vision.Face.CreateLivenessSessionResult&gt; CreateLivenessSession(class Azure.AI.Vision.Face.CreateLivenessSessionContent body, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.AI.Vision.Face.FaceSessionClient.CreateLivenessSession(Azure.AI.Vision.Face.CreateLivenessSessionContent,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateLivenessSession (createLivenessSessionContent As CreateLivenessSessionContent, Optional cancellationToken As CancellationToken = Nothing) As Response(Of CreateLivenessSessionResult)" />
-      <MemberSignature Language="F#" Value="abstract member CreateLivenessSession : Azure.AI.Vision.Face.CreateLivenessSessionContent * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.AI.Vision.Face.CreateLivenessSessionResult&gt;&#xA;override this.CreateLivenessSession : Azure.AI.Vision.Face.CreateLivenessSessionContent * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.AI.Vision.Face.CreateLivenessSessionResult&gt;" Usage="faceSessionClient.CreateLivenessSession (createLivenessSessionContent, cancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateLivenessSession (body As CreateLivenessSessionContent, Optional cancellationToken As CancellationToken = Nothing) As Response(Of CreateLivenessSessionResult)" />
+      <MemberSignature Language="F#" Value="abstract member CreateLivenessSession : Azure.AI.Vision.Face.CreateLivenessSessionContent * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.AI.Vision.Face.CreateLivenessSessionResult&gt;&#xA;override this.CreateLivenessSession : Azure.AI.Vision.Face.CreateLivenessSessionContent * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.AI.Vision.Face.CreateLivenessSessionResult&gt;" Usage="faceSessionClient.CreateLivenessSession (body, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.AI.Vision.Face</AssemblyName>
@@ -160,52 +160,32 @@
         <ReturnType>Azure.Response&lt;Azure.AI.Vision.Face.CreateLivenessSessionResult&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="createLivenessSessionContent" Type="Azure.AI.Vision.Face.CreateLivenessSessionContent" />
+        <Parameter Name="body" Type="Azure.AI.Vision.Face.CreateLivenessSessionContent" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="createLivenessSessionContent"> Request for creating liveness session. </param>
+        <param name="body"> Body parameter. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary> Create a new detect liveness session. </summary>
         <returns>To be added.</returns>
-        <remarks>
-             A session is best for client device scenarios where developers want to authorize a client device to perform only a liveness detection without granting full access to their resource. Created sessions have a limited life span and only authorize clients to perform the desired action before access is expired.
-            
-             Permissions includes...
-             &gt;
-             *
-               * Ability to call /detectLiveness/singleModal for up to 3 retries.
-               * A token lifetime of 10 minutes.
-            
-             &gt; [!NOTE]
-             &gt; Client access can be revoked by deleting the session using the Delete Liveness Session operation. To retrieve a result, use the Get Liveness Session. To audit the individual requests that a client has made to your resource, use the List Liveness Session Audit Entries.
-             </remarks>
+        <remarks> Please refer to https://learn.microsoft.com/rest/api/face/liveness-session-operations/create-liveness-session for more details. </remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="createLivenessSessionContent" /> is null. </exception>
+          <paramref name="body" /> is null. </exception>
         <example>
 This sample shows how to call CreateLivenessSession.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FaceSessionClient client = new FaceSessionClient(endpoint, credential);
 
-CreateLivenessSessionContent createLivenessSessionContent = new CreateLivenessSessionContent(LivenessOperationMode.Passive);
-Response<CreateLivenessSessionResult> response = client.CreateLivenessSession(createLivenessSessionContent);
-]]></code>
-This sample shows how to call CreateLivenessSession with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-FaceSessionClient client = new FaceSessionClient(endpoint, credential);
-
-CreateLivenessSessionContent createLivenessSessionContent = new CreateLivenessSessionContent(LivenessOperationMode.Passive)
+CreateLivenessSessionContent body = new CreateLivenessSessionContent(LivenessOperationMode.Passive)
 {
     SendResultsToClient = true,
     DeviceCorrelationIdSetInClient = true,
-    DeviceCorrelationId = "<deviceCorrelationId>",
-    AuthTokenTimeToLiveInSeconds = 1234,
+    DeviceCorrelationId = "your_device_correlation_id",
+    AuthTokenTimeToLiveInSeconds = 60,
 };
-Response<CreateLivenessSessionResult> response = client.CreateLivenessSession(createLivenessSessionContent);
+Response<CreateLivenessSessionResult> response = client.CreateLivenessSession(body);
 ]]></code></example>
       </Docs>
     </Member>
@@ -245,23 +225,7 @@ Response<CreateLivenessSessionResult> response = client.CreateLivenessSession(cr
         <example>
 This sample shows how to call CreateLivenessSession and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-FaceSessionClient client = new FaceSessionClient(endpoint, credential);
-
-using RequestContent content = RequestContent.Create(new
-{
-    livenessOperationMode = "Passive",
-});
-Response response = client.CreateLivenessSession(content);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("sessionId").ToString());
-Console.WriteLine(result.GetProperty("authToken").ToString());
-]]></code>
-This sample shows how to call CreateLivenessSession with all request content and parse the result.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FaceSessionClient client = new FaceSessionClient(endpoint, credential);
 
@@ -270,8 +234,8 @@ using RequestContent content = RequestContent.Create(new
     livenessOperationMode = "Passive",
     sendResultsToClient = true,
     deviceCorrelationIdSetInClient = true,
-    deviceCorrelationId = "<deviceCorrelationId>",
-    authTokenTimeToLiveInSeconds = 1234,
+    deviceCorrelationId = "your_device_correlation_id",
+    authTokenTimeToLiveInSeconds = 60,
 });
 Response response = client.CreateLivenessSession(content);
 
@@ -282,11 +246,11 @@ Console.WriteLine(result.GetProperty("authToken").ToString());
       </Docs>
     </Member>
     <Member MemberName="CreateLivenessSessionAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.AI.Vision.Face.CreateLivenessSessionResult&gt;&gt; CreateLivenessSessionAsync (Azure.AI.Vision.Face.CreateLivenessSessionContent createLivenessSessionContent, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.AI.Vision.Face.CreateLivenessSessionResult&gt;&gt; CreateLivenessSessionAsync(class Azure.AI.Vision.Face.CreateLivenessSessionContent createLivenessSessionContent, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.AI.Vision.Face.CreateLivenessSessionResult&gt;&gt; CreateLivenessSessionAsync (Azure.AI.Vision.Face.CreateLivenessSessionContent body, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.AI.Vision.Face.CreateLivenessSessionResult&gt;&gt; CreateLivenessSessionAsync(class Azure.AI.Vision.Face.CreateLivenessSessionContent body, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.AI.Vision.Face.FaceSessionClient.CreateLivenessSessionAsync(Azure.AI.Vision.Face.CreateLivenessSessionContent,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateLivenessSessionAsync (createLivenessSessionContent As CreateLivenessSessionContent, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of CreateLivenessSessionResult))" />
-      <MemberSignature Language="F#" Value="abstract member CreateLivenessSessionAsync : Azure.AI.Vision.Face.CreateLivenessSessionContent * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.AI.Vision.Face.CreateLivenessSessionResult&gt;&gt;&#xA;override this.CreateLivenessSessionAsync : Azure.AI.Vision.Face.CreateLivenessSessionContent * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.AI.Vision.Face.CreateLivenessSessionResult&gt;&gt;" Usage="faceSessionClient.CreateLivenessSessionAsync (createLivenessSessionContent, cancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateLivenessSessionAsync (body As CreateLivenessSessionContent, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of CreateLivenessSessionResult))" />
+      <MemberSignature Language="F#" Value="abstract member CreateLivenessSessionAsync : Azure.AI.Vision.Face.CreateLivenessSessionContent * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.AI.Vision.Face.CreateLivenessSessionResult&gt;&gt;&#xA;override this.CreateLivenessSessionAsync : Azure.AI.Vision.Face.CreateLivenessSessionContent * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.AI.Vision.Face.CreateLivenessSessionResult&gt;&gt;" Usage="faceSessionClient.CreateLivenessSessionAsync (body, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.AI.Vision.Face</AssemblyName>
@@ -296,52 +260,32 @@ Console.WriteLine(result.GetProperty("authToken").ToString());
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.AI.Vision.Face.CreateLivenessSessionResult&gt;&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="createLivenessSessionContent" Type="Azure.AI.Vision.Face.CreateLivenessSessionContent" />
+        <Parameter Name="body" Type="Azure.AI.Vision.Face.CreateLivenessSessionContent" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="createLivenessSessionContent"> Request for creating liveness session. </param>
+        <param name="body"> Body parameter. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary> Create a new detect liveness session. </summary>
         <returns>To be added.</returns>
-        <remarks>
-             A session is best for client device scenarios where developers want to authorize a client device to perform only a liveness detection without granting full access to their resource. Created sessions have a limited life span and only authorize clients to perform the desired action before access is expired.
-            
-             Permissions includes...
-             &gt;
-             *
-               * Ability to call /detectLiveness/singleModal for up to 3 retries.
-               * A token lifetime of 10 minutes.
-            
-             &gt; [!NOTE]
-             &gt; Client access can be revoked by deleting the session using the Delete Liveness Session operation. To retrieve a result, use the Get Liveness Session. To audit the individual requests that a client has made to your resource, use the List Liveness Session Audit Entries.
-             </remarks>
+        <remarks> Please refer to https://learn.microsoft.com/rest/api/face/liveness-session-operations/create-liveness-session for more details. </remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="createLivenessSessionContent" /> is null. </exception>
+          <paramref name="body" /> is null. </exception>
         <example>
 This sample shows how to call CreateLivenessSessionAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FaceSessionClient client = new FaceSessionClient(endpoint, credential);
 
-CreateLivenessSessionContent createLivenessSessionContent = new CreateLivenessSessionContent(LivenessOperationMode.Passive);
-Response<CreateLivenessSessionResult> response = await client.CreateLivenessSessionAsync(createLivenessSessionContent);
-]]></code>
-This sample shows how to call CreateLivenessSessionAsync with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-FaceSessionClient client = new FaceSessionClient(endpoint, credential);
-
-CreateLivenessSessionContent createLivenessSessionContent = new CreateLivenessSessionContent(LivenessOperationMode.Passive)
+CreateLivenessSessionContent body = new CreateLivenessSessionContent(LivenessOperationMode.Passive)
 {
     SendResultsToClient = true,
     DeviceCorrelationIdSetInClient = true,
-    DeviceCorrelationId = "<deviceCorrelationId>",
-    AuthTokenTimeToLiveInSeconds = 1234,
+    DeviceCorrelationId = "your_device_correlation_id",
+    AuthTokenTimeToLiveInSeconds = 60,
 };
-Response<CreateLivenessSessionResult> response = await client.CreateLivenessSessionAsync(createLivenessSessionContent);
+Response<CreateLivenessSessionResult> response = await client.CreateLivenessSessionAsync(body);
 ]]></code></example>
       </Docs>
     </Member>
@@ -381,23 +325,7 @@ Response<CreateLivenessSessionResult> response = await client.CreateLivenessSess
         <example>
 This sample shows how to call CreateLivenessSessionAsync and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-FaceSessionClient client = new FaceSessionClient(endpoint, credential);
-
-using RequestContent content = RequestContent.Create(new
-{
-    livenessOperationMode = "Passive",
-});
-Response response = await client.CreateLivenessSessionAsync(content);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("sessionId").ToString());
-Console.WriteLine(result.GetProperty("authToken").ToString());
-]]></code>
-This sample shows how to call CreateLivenessSessionAsync with all request content and parse the result.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FaceSessionClient client = new FaceSessionClient(endpoint, credential);
 
@@ -406,8 +334,8 @@ using RequestContent content = RequestContent.Create(new
     livenessOperationMode = "Passive",
     sendResultsToClient = true,
     deviceCorrelationIdSetInClient = true,
-    deviceCorrelationId = "<deviceCorrelationId>",
-    authTokenTimeToLiveInSeconds = 1234,
+    deviceCorrelationId = "your_device_correlation_id",
+    authTokenTimeToLiveInSeconds = 60,
 });
 Response response = await client.CreateLivenessSessionAsync(content);
 
@@ -418,11 +346,11 @@ Console.WriteLine(result.GetProperty("authToken").ToString());
       </Docs>
     </Member>
     <Member MemberName="CreateLivenessWithVerifySession">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.AI.Vision.Face.CreateLivenessWithVerifySessionResult&gt; CreateLivenessWithVerifySession (Azure.AI.Vision.Face.CreateLivenessSessionContent createLivenessSessionContent, System.IO.Stream verifyImage, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.AI.Vision.Face.CreateLivenessWithVerifySessionResult&gt; CreateLivenessWithVerifySession(class Azure.AI.Vision.Face.CreateLivenessSessionContent createLivenessSessionContent, class System.IO.Stream verifyImage, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.AI.Vision.Face.FaceSessionClient.CreateLivenessWithVerifySession(Azure.AI.Vision.Face.CreateLivenessSessionContent,System.IO.Stream,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateLivenessWithVerifySession (createLivenessSessionContent As CreateLivenessSessionContent, verifyImage As Stream, Optional cancellationToken As CancellationToken = Nothing) As Response(Of CreateLivenessWithVerifySessionResult)" />
-      <MemberSignature Language="F#" Value="abstract member CreateLivenessWithVerifySession : Azure.AI.Vision.Face.CreateLivenessSessionContent * System.IO.Stream * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.AI.Vision.Face.CreateLivenessWithVerifySessionResult&gt;&#xA;override this.CreateLivenessWithVerifySession : Azure.AI.Vision.Face.CreateLivenessSessionContent * System.IO.Stream * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.AI.Vision.Face.CreateLivenessWithVerifySessionResult&gt;" Usage="faceSessionClient.CreateLivenessWithVerifySession (createLivenessSessionContent, verifyImage, cancellationToken)" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.AI.Vision.Face.CreateLivenessWithVerifySessionResult&gt; CreateLivenessWithVerifySession (Azure.AI.Vision.Face.CreateLivenessWithVerifySessionContent jsonContent, System.IO.Stream verifyImage, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.AI.Vision.Face.CreateLivenessWithVerifySessionResult&gt; CreateLivenessWithVerifySession(class Azure.AI.Vision.Face.CreateLivenessWithVerifySessionContent jsonContent, class System.IO.Stream verifyImage, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.AI.Vision.Face.FaceSessionClient.CreateLivenessWithVerifySession(Azure.AI.Vision.Face.CreateLivenessWithVerifySessionContent,System.IO.Stream,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateLivenessWithVerifySession (jsonContent As CreateLivenessWithVerifySessionContent, verifyImage As Stream, Optional cancellationToken As CancellationToken = Nothing) As Response(Of CreateLivenessWithVerifySessionResult)" />
+      <MemberSignature Language="F#" Value="abstract member CreateLivenessWithVerifySession : Azure.AI.Vision.Face.CreateLivenessWithVerifySessionContent * System.IO.Stream * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.AI.Vision.Face.CreateLivenessWithVerifySessionResult&gt;&#xA;override this.CreateLivenessWithVerifySession : Azure.AI.Vision.Face.CreateLivenessWithVerifySessionContent * System.IO.Stream * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.AI.Vision.Face.CreateLivenessWithVerifySessionResult&gt;" Usage="faceSessionClient.CreateLivenessWithVerifySession (jsonContent, verifyImage, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.AI.Vision.Face</AssemblyName>
@@ -432,47 +360,27 @@ Console.WriteLine(result.GetProperty("authToken").ToString());
         <ReturnType>Azure.Response&lt;Azure.AI.Vision.Face.CreateLivenessWithVerifySessionResult&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="createLivenessSessionContent" Type="Azure.AI.Vision.Face.CreateLivenessSessionContent" />
+        <Parameter Name="jsonContent" Type="Azure.AI.Vision.Face.CreateLivenessWithVerifySessionContent" />
         <Parameter Name="verifyImage" Type="System.IO.Stream" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="createLivenessSessionContent"> Parameters for liveness with verify session creation. </param>
+        <param name="jsonContent"> Parameters for liveness with verify session creation. </param>
         <param name="verifyImage"> Image binary data for verify image, can be provided as session creation time or during the /detectLivenessWithVerify/singleModal  </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary> Create a new liveness session with verify. Provide the verify image during session creation. </summary>
         <returns>To be added.</returns>
-        <remarks>
-             A session is best for client device scenarios where developers want to authorize a client device to perform only a liveness detection without granting full access to their resource. Created sessions have a limited life span and only authorize clients to perform the desired action before access is expired.
-            
-             Permissions includes...
-             &gt;
-             *
-               * Ability to call /detectLivenessWithVerify/singleModal for up to 3 retries.
-               * A token lifetime of 10 minutes.
-            
-             &gt; [!NOTE]
-             &gt;
-             &gt; *
-             &gt;   * Client access can be revoked by deleting the session using the Delete Liveness With Verify Session operation.
-             &gt;   * To retrieve a result, use the Get Liveness With Verify Session.
-             &gt;   * To audit the individual requests that a client has made to your resource, use the List Liveness With Verify Session Audit Entries.
-            
-             Recommended Option: VerifyImage is provided during session creation.
-             Alternative Option: Client device submits VerifyImage during the /detectLivenessWithVerify/singleModal call.
-             &gt; [!NOTE]
-             &gt; Extra measures should be taken to validate that the client is sending the expected VerifyImage.
-             </remarks>
+        <remarks> Please refer to https://learn.microsoft.com/rest/api/face/liveness-session-operations/create-liveness-with-verify-session-with-verify-image for more details. </remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="createLivenessSessionContent" /> is null. </exception>
+          <paramref name="jsonContent" /> is null. </exception>
       </Docs>
     </Member>
     <Member MemberName="CreateLivenessWithVerifySessionAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.AI.Vision.Face.CreateLivenessWithVerifySessionResult&gt;&gt; CreateLivenessWithVerifySessionAsync (Azure.AI.Vision.Face.CreateLivenessSessionContent createLivenessSessionContent, System.IO.Stream verifyImage, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.AI.Vision.Face.CreateLivenessWithVerifySessionResult&gt;&gt; CreateLivenessWithVerifySessionAsync(class Azure.AI.Vision.Face.CreateLivenessSessionContent createLivenessSessionContent, class System.IO.Stream verifyImage, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.AI.Vision.Face.FaceSessionClient.CreateLivenessWithVerifySessionAsync(Azure.AI.Vision.Face.CreateLivenessSessionContent,System.IO.Stream,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateLivenessWithVerifySessionAsync (createLivenessSessionContent As CreateLivenessSessionContent, verifyImage As Stream, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of CreateLivenessWithVerifySessionResult))" />
-      <MemberSignature Language="F#" Value="abstract member CreateLivenessWithVerifySessionAsync : Azure.AI.Vision.Face.CreateLivenessSessionContent * System.IO.Stream * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.AI.Vision.Face.CreateLivenessWithVerifySessionResult&gt;&gt;&#xA;override this.CreateLivenessWithVerifySessionAsync : Azure.AI.Vision.Face.CreateLivenessSessionContent * System.IO.Stream * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.AI.Vision.Face.CreateLivenessWithVerifySessionResult&gt;&gt;" Usage="faceSessionClient.CreateLivenessWithVerifySessionAsync (createLivenessSessionContent, verifyImage, cancellationToken)" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.AI.Vision.Face.CreateLivenessWithVerifySessionResult&gt;&gt; CreateLivenessWithVerifySessionAsync (Azure.AI.Vision.Face.CreateLivenessWithVerifySessionContent jsonContent, System.IO.Stream verifyImage, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.AI.Vision.Face.CreateLivenessWithVerifySessionResult&gt;&gt; CreateLivenessWithVerifySessionAsync(class Azure.AI.Vision.Face.CreateLivenessWithVerifySessionContent jsonContent, class System.IO.Stream verifyImage, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.AI.Vision.Face.FaceSessionClient.CreateLivenessWithVerifySessionAsync(Azure.AI.Vision.Face.CreateLivenessWithVerifySessionContent,System.IO.Stream,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateLivenessWithVerifySessionAsync (jsonContent As CreateLivenessWithVerifySessionContent, verifyImage As Stream, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of CreateLivenessWithVerifySessionResult))" />
+      <MemberSignature Language="F#" Value="abstract member CreateLivenessWithVerifySessionAsync : Azure.AI.Vision.Face.CreateLivenessWithVerifySessionContent * System.IO.Stream * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.AI.Vision.Face.CreateLivenessWithVerifySessionResult&gt;&gt;&#xA;override this.CreateLivenessWithVerifySessionAsync : Azure.AI.Vision.Face.CreateLivenessWithVerifySessionContent * System.IO.Stream * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.AI.Vision.Face.CreateLivenessWithVerifySessionResult&gt;&gt;" Usage="faceSessionClient.CreateLivenessWithVerifySessionAsync (jsonContent, verifyImage, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.AI.Vision.Face</AssemblyName>
@@ -482,39 +390,19 @@ Console.WriteLine(result.GetProperty("authToken").ToString());
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.AI.Vision.Face.CreateLivenessWithVerifySessionResult&gt;&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="createLivenessSessionContent" Type="Azure.AI.Vision.Face.CreateLivenessSessionContent" />
+        <Parameter Name="jsonContent" Type="Azure.AI.Vision.Face.CreateLivenessWithVerifySessionContent" />
         <Parameter Name="verifyImage" Type="System.IO.Stream" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="createLivenessSessionContent"> Parameters for liveness with verify session creation. </param>
+        <param name="jsonContent"> Parameters for liveness with verify session creation. </param>
         <param name="verifyImage"> Image binary data for verify image, can be provided as session creation time or during the /detectLivenessWithVerify/singleModal  </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary> Create a new liveness session with verify. Provide the verify image during session creation. </summary>
         <returns>To be added.</returns>
-        <remarks>
-             A session is best for client device scenarios where developers want to authorize a client device to perform only a liveness detection without granting full access to their resource. Created sessions have a limited life span and only authorize clients to perform the desired action before access is expired.
-            
-             Permissions includes...
-             &gt;
-             *
-               * Ability to call /detectLivenessWithVerify/singleModal for up to 3 retries.
-               * A token lifetime of 10 minutes.
-            
-             &gt; [!NOTE]
-             &gt;
-             &gt; *
-             &gt;   * Client access can be revoked by deleting the session using the Delete Liveness With Verify Session operation.
-             &gt;   * To retrieve a result, use the Get Liveness With Verify Session.
-             &gt;   * To audit the individual requests that a client has made to your resource, use the List Liveness With Verify Session Audit Entries.
-            
-             Recommended Option: VerifyImage is provided during session creation.
-             Alternative Option: Client device submits VerifyImage during the /detectLivenessWithVerify/singleModal call.
-             &gt; [!NOTE]
-             &gt; Extra measures should be taken to validate that the client is sending the expected VerifyImage.
-             </remarks>
+        <remarks> Please refer to https://learn.microsoft.com/rest/api/face/liveness-session-operations/create-liveness-with-verify-session-with-verify-image for more details. </remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="createLivenessSessionContent" /> is null. </exception>
+          <paramref name="jsonContent" /> is null. </exception>
       </Docs>
     </Member>
     <Member MemberName="DeleteLivenessSession">
@@ -553,21 +441,11 @@ Console.WriteLine(result.GetProperty("authToken").ToString());
         <example>
 This sample shows how to call DeleteLivenessSession.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FaceSessionClient client = new FaceSessionClient(endpoint, credential);
 
-Response response = client.DeleteLivenessSession("<sessionId>");
-
-Console.WriteLine(response.Status);
-]]></code>
-This sample shows how to call DeleteLivenessSession with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-FaceSessionClient client = new FaceSessionClient(endpoint, credential);
-
-Response response = client.DeleteLivenessSession("<sessionId>");
+Response response = client.DeleteLivenessSession("b12e033e-bda7-4b83-a211-e721c661f30e");
 
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -609,21 +487,11 @@ Console.WriteLine(response.Status);
         <example>
 This sample shows how to call DeleteLivenessSessionAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FaceSessionClient client = new FaceSessionClient(endpoint, credential);
 
-Response response = await client.DeleteLivenessSessionAsync("<sessionId>");
-
-Console.WriteLine(response.Status);
-]]></code>
-This sample shows how to call DeleteLivenessSessionAsync with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-FaceSessionClient client = new FaceSessionClient(endpoint, credential);
-
-Response response = await client.DeleteLivenessSessionAsync("<sessionId>");
+Response response = await client.DeleteLivenessSessionAsync("b12e033e-bda7-4b83-a211-e721c661f30e");
 
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -665,21 +533,11 @@ Console.WriteLine(response.Status);
         <example>
 This sample shows how to call DeleteLivenessWithVerifySession.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FaceSessionClient client = new FaceSessionClient(endpoint, credential);
 
-Response response = client.DeleteLivenessWithVerifySession("<sessionId>");
-
-Console.WriteLine(response.Status);
-]]></code>
-This sample shows how to call DeleteLivenessWithVerifySession with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-FaceSessionClient client = new FaceSessionClient(endpoint, credential);
-
-Response response = client.DeleteLivenessWithVerifySession("<sessionId>");
+Response response = client.DeleteLivenessWithVerifySession("b12e033e-bda7-4b83-a211-e721c661f30e");
 
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -721,23 +579,251 @@ Console.WriteLine(response.Status);
         <example>
 This sample shows how to call DeleteLivenessWithVerifySessionAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FaceSessionClient client = new FaceSessionClient(endpoint, credential);
 
-Response response = await client.DeleteLivenessWithVerifySessionAsync("<sessionId>");
+Response response = await client.DeleteLivenessWithVerifySessionAsync("b12e033e-bda7-4b83-a211-e721c661f30e");
 
 Console.WriteLine(response.Status);
-]]></code>
-This sample shows how to call DeleteLivenessWithVerifySessionAsync with all parameters.
+]]></code></example>
+      </Docs>
+    </Member>
+    <Member MemberName="DetectFromSessionImage">
+      <MemberSignature Language="C#" Value="public virtual Azure.Response DetectFromSessionImage (Azure.Core.RequestContent content, string detectionModel = default, string recognitionModel = default, bool? returnFaceId = default, System.Collections.Generic.IEnumerable&lt;Azure.AI.Vision.Face.FaceAttributeType&gt; returnFaceAttributes = default, bool? returnFaceLandmarks = default, bool? returnRecognitionModel = default, int? faceIdTimeToLive = default, Azure.RequestContext context = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response DetectFromSessionImage(class Azure.Core.RequestContent content, string detectionModel, string recognitionModel, valuetype System.Nullable`1&lt;bool&gt; returnFaceId, class System.Collections.Generic.IEnumerable`1&lt;valuetype Azure.AI.Vision.Face.FaceAttributeType&gt; returnFaceAttributes, valuetype System.Nullable`1&lt;bool&gt; returnFaceLandmarks, valuetype System.Nullable`1&lt;bool&gt; returnRecognitionModel, valuetype System.Nullable`1&lt;int32&gt; faceIdTimeToLive, class Azure.RequestContext context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.AI.Vision.Face.FaceSessionClient.DetectFromSessionImage(Azure.Core.RequestContent,System.String,System.String,System.Nullable{System.Boolean},System.Collections.Generic.IEnumerable{Azure.AI.Vision.Face.FaceAttributeType},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},Azure.RequestContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function DetectFromSessionImage (content As RequestContent, Optional detectionModel As String = Nothing, Optional recognitionModel As String = Nothing, Optional returnFaceId As Nullable(Of Boolean) = Nothing, Optional returnFaceAttributes As IEnumerable(Of FaceAttributeType) = Nothing, Optional returnFaceLandmarks As Nullable(Of Boolean) = Nothing, Optional returnRecognitionModel As Nullable(Of Boolean) = Nothing, Optional faceIdTimeToLive As Nullable(Of Integer) = Nothing, Optional context As RequestContext = Nothing) As Response" />
+      <MemberSignature Language="F#" Value="abstract member DetectFromSessionImage : Azure.Core.RequestContent * string * string * Nullable&lt;bool&gt; * seq&lt;Azure.AI.Vision.Face.FaceAttributeType&gt; * Nullable&lt;bool&gt; * Nullable&lt;bool&gt; * Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.Response&#xA;override this.DetectFromSessionImage : Azure.Core.RequestContent * string * string * Nullable&lt;bool&gt; * seq&lt;Azure.AI.Vision.Face.FaceAttributeType&gt; * Nullable&lt;bool&gt; * Nullable&lt;bool&gt; * Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.Response" Usage="faceSessionClient.DetectFromSessionImage (content, detectionModel, recognitionModel, returnFaceId, returnFaceAttributes, returnFaceLandmarks, returnRecognitionModel, faceIdTimeToLive, context)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.AI.Vision.Face</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Response</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="content" Type="Azure.Core.RequestContent" />
+        <Parameter Name="detectionModel" Type="System.String" />
+        <Parameter Name="recognitionModel" Type="System.String" />
+        <Parameter Name="returnFaceId" Type="System.Nullable&lt;System.Boolean&gt;" />
+        <Parameter Name="returnFaceAttributes" Type="System.Collections.Generic.IEnumerable&lt;Azure.AI.Vision.Face.FaceAttributeType&gt;" />
+        <Parameter Name="returnFaceLandmarks" Type="System.Nullable&lt;System.Boolean&gt;" />
+        <Parameter Name="returnRecognitionModel" Type="System.Nullable&lt;System.Boolean&gt;" />
+        <Parameter Name="faceIdTimeToLive" Type="System.Nullable&lt;System.Int32&gt;" />
+        <Parameter Name="context" Type="Azure.RequestContext" />
+      </Parameters>
+      <Docs>
+        <param name="content"> The content to send as the body of the request. </param>
+        <param name="detectionModel"> The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'. 'detection_03' is recommended since its accuracy is improved on smaller faces (64x64 pixels) and rotated face orientations. Allowed values: "detection_01" | "detection_02" | "detection_03". </param>
+        <param name="recognitionModel"> The 'recognitionModel' associated with the detected faceIds. Supported 'recognitionModel' values include 'recognition_01', 'recognition_02', 'recognition_03' or 'recognition_04'. The default value is 'recognition_01'. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'. Allowed values: "recognition_01" | "recognition_02" | "recognition_03" | "recognition_04". </param>
+        <param name="returnFaceId"> Return faceIds of the detected faces or not. The default value is true. </param>
+        <param name="returnFaceAttributes"> Analyze and return the one or more specified face attributes in the comma-separated string like 'returnFaceAttributes=headPose,glasses'. Face attribute analysis has additional computational and time cost. </param>
+        <param name="returnFaceLandmarks"> Return face landmarks of the detected faces or not. The default value is false. </param>
+        <param name="returnRecognitionModel"> Return 'recognitionModel' or not. The default value is false. This is only applicable when returnFaceId = true. </param>
+        <param name="faceIdTimeToLive"> The number of seconds for the face ID being cached. Supported range from 60 seconds up to 86400 seconds. The default value is 86400 (24 hours). </param>
+        <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        <summary>
+            [Protocol Method] Detect human faces in an image, return face rectangles, and optionally with faceIds, landmarks, and attributes.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item><item><description>
+            Please try the simpler <see cref="M:Azure.AI.Vision.Face.FaceSessionClient.DetectFromSessionImage(System.String,System.Nullable{Azure.AI.Vision.Face.FaceDetectionModel},System.Nullable{Azure.AI.Vision.Face.FaceRecognitionModel},System.Nullable{System.Boolean},System.Collections.Generic.IEnumerable{Azure.AI.Vision.Face.FaceAttributeType},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)" /> convenience overload with strongly typed models first.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="content" /> is null. </exception>
+        <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
+        <example>
+This sample shows how to call DetectFromSessionImage and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FaceSessionClient client = new FaceSessionClient(endpoint, credential);
 
-Response response = await client.DeleteLivenessWithVerifySessionAsync("<sessionId>");
+using RequestContent content = RequestContent.Create(new
+{
+    sessionImageId = "aa93ce80-9a9b-48bd-ae1a-1c7543841e92",
+});
+Response response = client.DetectFromSessionImage(content);
 
-Console.WriteLine(response.Status);
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result[0].GetProperty("faceRectangle").GetProperty("top").ToString());
+Console.WriteLine(result[0].GetProperty("faceRectangle").GetProperty("left").ToString());
+Console.WriteLine(result[0].GetProperty("faceRectangle").GetProperty("width").ToString());
+Console.WriteLine(result[0].GetProperty("faceRectangle").GetProperty("height").ToString());
+]]></code></example>
+      </Docs>
+    </Member>
+    <Member MemberName="DetectFromSessionImage">
+      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;System.Collections.Generic.IReadOnlyList&lt;Azure.AI.Vision.Face.FaceDetectionResult&gt;&gt; DetectFromSessionImage (string sessionImageId, Azure.AI.Vision.Face.FaceDetectionModel? detectionModel = default, Azure.AI.Vision.Face.FaceRecognitionModel? recognitionModel = default, bool? returnFaceId = default, System.Collections.Generic.IEnumerable&lt;Azure.AI.Vision.Face.FaceAttributeType&gt; returnFaceAttributes = default, bool? returnFaceLandmarks = default, bool? returnRecognitionModel = default, int? faceIdTimeToLive = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class System.Collections.Generic.IReadOnlyList`1&lt;class Azure.AI.Vision.Face.FaceDetectionResult&gt;&gt; DetectFromSessionImage(string sessionImageId, valuetype System.Nullable`1&lt;valuetype Azure.AI.Vision.Face.FaceDetectionModel&gt; detectionModel, valuetype System.Nullable`1&lt;valuetype Azure.AI.Vision.Face.FaceRecognitionModel&gt; recognitionModel, valuetype System.Nullable`1&lt;bool&gt; returnFaceId, class System.Collections.Generic.IEnumerable`1&lt;valuetype Azure.AI.Vision.Face.FaceAttributeType&gt; returnFaceAttributes, valuetype System.Nullable`1&lt;bool&gt; returnFaceLandmarks, valuetype System.Nullable`1&lt;bool&gt; returnRecognitionModel, valuetype System.Nullable`1&lt;int32&gt; faceIdTimeToLive, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.AI.Vision.Face.FaceSessionClient.DetectFromSessionImage(System.String,System.Nullable{Azure.AI.Vision.Face.FaceDetectionModel},System.Nullable{Azure.AI.Vision.Face.FaceRecognitionModel},System.Nullable{System.Boolean},System.Collections.Generic.IEnumerable{Azure.AI.Vision.Face.FaceAttributeType},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function DetectFromSessionImage (sessionImageId As String, Optional detectionModel As Nullable(Of FaceDetectionModel) = Nothing, Optional recognitionModel As Nullable(Of FaceRecognitionModel) = Nothing, Optional returnFaceId As Nullable(Of Boolean) = Nothing, Optional returnFaceAttributes As IEnumerable(Of FaceAttributeType) = Nothing, Optional returnFaceLandmarks As Nullable(Of Boolean) = Nothing, Optional returnRecognitionModel As Nullable(Of Boolean) = Nothing, Optional faceIdTimeToLive As Nullable(Of Integer) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Response(Of IReadOnlyList(Of FaceDetectionResult))" />
+      <MemberSignature Language="F#" Value="abstract member DetectFromSessionImage : string * Nullable&lt;Azure.AI.Vision.Face.FaceDetectionModel&gt; * Nullable&lt;Azure.AI.Vision.Face.FaceRecognitionModel&gt; * Nullable&lt;bool&gt; * seq&lt;Azure.AI.Vision.Face.FaceAttributeType&gt; * Nullable&lt;bool&gt; * Nullable&lt;bool&gt; * Nullable&lt;int&gt; * System.Threading.CancellationToken -&gt; Azure.Response&lt;System.Collections.Generic.IReadOnlyList&lt;Azure.AI.Vision.Face.FaceDetectionResult&gt;&gt;&#xA;override this.DetectFromSessionImage : string * Nullable&lt;Azure.AI.Vision.Face.FaceDetectionModel&gt; * Nullable&lt;Azure.AI.Vision.Face.FaceRecognitionModel&gt; * Nullable&lt;bool&gt; * seq&lt;Azure.AI.Vision.Face.FaceAttributeType&gt; * Nullable&lt;bool&gt; * Nullable&lt;bool&gt; * Nullable&lt;int&gt; * System.Threading.CancellationToken -&gt; Azure.Response&lt;System.Collections.Generic.IReadOnlyList&lt;Azure.AI.Vision.Face.FaceDetectionResult&gt;&gt;" Usage="faceSessionClient.DetectFromSessionImage (sessionImageId, detectionModel, recognitionModel, returnFaceId, returnFaceAttributes, returnFaceLandmarks, returnRecognitionModel, faceIdTimeToLive, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.AI.Vision.Face</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Response&lt;System.Collections.Generic.IReadOnlyList&lt;Azure.AI.Vision.Face.FaceDetectionResult&gt;&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sessionImageId" Type="System.String" />
+        <Parameter Name="detectionModel" Type="System.Nullable&lt;Azure.AI.Vision.Face.FaceDetectionModel&gt;" />
+        <Parameter Name="recognitionModel" Type="System.Nullable&lt;Azure.AI.Vision.Face.FaceRecognitionModel&gt;" />
+        <Parameter Name="returnFaceId" Type="System.Nullable&lt;System.Boolean&gt;" />
+        <Parameter Name="returnFaceAttributes" Type="System.Collections.Generic.IEnumerable&lt;Azure.AI.Vision.Face.FaceAttributeType&gt;" />
+        <Parameter Name="returnFaceLandmarks" Type="System.Nullable&lt;System.Boolean&gt;" />
+        <Parameter Name="returnRecognitionModel" Type="System.Nullable&lt;System.Boolean&gt;" />
+        <Parameter Name="faceIdTimeToLive" Type="System.Nullable&lt;System.Int32&gt;" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="sessionImageId"> Id of session image. </param>
+        <param name="detectionModel"> The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'. 'detection_03' is recommended since its accuracy is improved on smaller faces (64x64 pixels) and rotated face orientations. </param>
+        <param name="recognitionModel"> The 'recognitionModel' associated with the detected faceIds. Supported 'recognitionModel' values include 'recognition_01', 'recognition_02', 'recognition_03' or 'recognition_04'. The default value is 'recognition_01'. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'. </param>
+        <param name="returnFaceId"> Return faceIds of the detected faces or not. The default value is true. </param>
+        <param name="returnFaceAttributes"> Analyze and return the one or more specified face attributes in the comma-separated string like 'returnFaceAttributes=headPose,glasses'. Face attribute analysis has additional computational and time cost. </param>
+        <param name="returnFaceLandmarks"> Return face landmarks of the detected faces or not. The default value is false. </param>
+        <param name="returnRecognitionModel"> Return 'recognitionModel' or not. The default value is false. This is only applicable when returnFaceId = true. </param>
+        <param name="faceIdTimeToLive"> The number of seconds for the face ID being cached. Supported range from 60 seconds up to 86400 seconds. The default value is 86400 (24 hours). </param>
+        <param name="cancellationToken"> The cancellation token to use. </param>
+        <summary> Detect human faces in an image, return face rectangles, and optionally with faceIds, landmarks, and attributes. </summary>
+        <returns>To be added.</returns>
+        <remarks> Please refer to https://learn.microsoft.com/rest/api/face/face-detection-operations/detect-from-session-image-id for more details. </remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="sessionImageId" /> is null. </exception>
+        <example>
+This sample shows how to call DetectFromSessionImage.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FaceSessionClient client = new FaceSessionClient(endpoint, credential);
+
+Response<IReadOnlyList<FaceDetectionResult>> response = client.DetectFromSessionImage("aa93ce80-9a9b-48bd-ae1a-1c7543841e92");
+]]></code></example>
+      </Docs>
+    </Member>
+    <Member MemberName="DetectFromSessionImageAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; DetectFromSessionImageAsync (Azure.Core.RequestContent content, string detectionModel = default, string recognitionModel = default, bool? returnFaceId = default, System.Collections.Generic.IEnumerable&lt;Azure.AI.Vision.Face.FaceAttributeType&gt; returnFaceAttributes = default, bool? returnFaceLandmarks = default, bool? returnRecognitionModel = default, int? faceIdTimeToLive = default, Azure.RequestContext context = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; DetectFromSessionImageAsync(class Azure.Core.RequestContent content, string detectionModel, string recognitionModel, valuetype System.Nullable`1&lt;bool&gt; returnFaceId, class System.Collections.Generic.IEnumerable`1&lt;valuetype Azure.AI.Vision.Face.FaceAttributeType&gt; returnFaceAttributes, valuetype System.Nullable`1&lt;bool&gt; returnFaceLandmarks, valuetype System.Nullable`1&lt;bool&gt; returnRecognitionModel, valuetype System.Nullable`1&lt;int32&gt; faceIdTimeToLive, class Azure.RequestContext context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.AI.Vision.Face.FaceSessionClient.DetectFromSessionImageAsync(Azure.Core.RequestContent,System.String,System.String,System.Nullable{System.Boolean},System.Collections.Generic.IEnumerable{Azure.AI.Vision.Face.FaceAttributeType},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},Azure.RequestContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function DetectFromSessionImageAsync (content As RequestContent, Optional detectionModel As String = Nothing, Optional recognitionModel As String = Nothing, Optional returnFaceId As Nullable(Of Boolean) = Nothing, Optional returnFaceAttributes As IEnumerable(Of FaceAttributeType) = Nothing, Optional returnFaceLandmarks As Nullable(Of Boolean) = Nothing, Optional returnRecognitionModel As Nullable(Of Boolean) = Nothing, Optional faceIdTimeToLive As Nullable(Of Integer) = Nothing, Optional context As RequestContext = Nothing) As Task(Of Response)" />
+      <MemberSignature Language="F#" Value="abstract member DetectFromSessionImageAsync : Azure.Core.RequestContent * string * string * Nullable&lt;bool&gt; * seq&lt;Azure.AI.Vision.Face.FaceAttributeType&gt; * Nullable&lt;bool&gt; * Nullable&lt;bool&gt; * Nullable&lt;int&gt; * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.DetectFromSessionImageAsync : Azure.Core.RequestContent * string * string * Nullable&lt;bool&gt; * seq&lt;Azure.AI.Vision.Face.FaceAttributeType&gt; * Nullable&lt;bool&gt; * Nullable&lt;bool&gt; * Nullable&lt;int&gt; * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="faceSessionClient.DetectFromSessionImageAsync (content, detectionModel, recognitionModel, returnFaceId, returnFaceAttributes, returnFaceLandmarks, returnRecognitionModel, faceIdTimeToLive, context)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.AI.Vision.Face</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="content" Type="Azure.Core.RequestContent" />
+        <Parameter Name="detectionModel" Type="System.String" />
+        <Parameter Name="recognitionModel" Type="System.String" />
+        <Parameter Name="returnFaceId" Type="System.Nullable&lt;System.Boolean&gt;" />
+        <Parameter Name="returnFaceAttributes" Type="System.Collections.Generic.IEnumerable&lt;Azure.AI.Vision.Face.FaceAttributeType&gt;" />
+        <Parameter Name="returnFaceLandmarks" Type="System.Nullable&lt;System.Boolean&gt;" />
+        <Parameter Name="returnRecognitionModel" Type="System.Nullable&lt;System.Boolean&gt;" />
+        <Parameter Name="faceIdTimeToLive" Type="System.Nullable&lt;System.Int32&gt;" />
+        <Parameter Name="context" Type="Azure.RequestContext" />
+      </Parameters>
+      <Docs>
+        <param name="content"> The content to send as the body of the request. </param>
+        <param name="detectionModel"> The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'. 'detection_03' is recommended since its accuracy is improved on smaller faces (64x64 pixels) and rotated face orientations. Allowed values: "detection_01" | "detection_02" | "detection_03". </param>
+        <param name="recognitionModel"> The 'recognitionModel' associated with the detected faceIds. Supported 'recognitionModel' values include 'recognition_01', 'recognition_02', 'recognition_03' or 'recognition_04'. The default value is 'recognition_01'. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'. Allowed values: "recognition_01" | "recognition_02" | "recognition_03" | "recognition_04". </param>
+        <param name="returnFaceId"> Return faceIds of the detected faces or not. The default value is true. </param>
+        <param name="returnFaceAttributes"> Analyze and return the one or more specified face attributes in the comma-separated string like 'returnFaceAttributes=headPose,glasses'. Face attribute analysis has additional computational and time cost. </param>
+        <param name="returnFaceLandmarks"> Return face landmarks of the detected faces or not. The default value is false. </param>
+        <param name="returnRecognitionModel"> Return 'recognitionModel' or not. The default value is false. This is only applicable when returnFaceId = true. </param>
+        <param name="faceIdTimeToLive"> The number of seconds for the face ID being cached. Supported range from 60 seconds up to 86400 seconds. The default value is 86400 (24 hours). </param>
+        <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        <summary>
+            [Protocol Method] Detect human faces in an image, return face rectangles, and optionally with faceIds, landmarks, and attributes.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item><item><description>
+            Please try the simpler <see cref="M:Azure.AI.Vision.Face.FaceSessionClient.DetectFromSessionImageAsync(System.String,System.Nullable{Azure.AI.Vision.Face.FaceDetectionModel},System.Nullable{Azure.AI.Vision.Face.FaceRecognitionModel},System.Nullable{System.Boolean},System.Collections.Generic.IEnumerable{Azure.AI.Vision.Face.FaceAttributeType},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)" /> convenience overload with strongly typed models first.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="content" /> is null. </exception>
+        <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
+        <example>
+This sample shows how to call DetectFromSessionImageAsync and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FaceSessionClient client = new FaceSessionClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    sessionImageId = "aa93ce80-9a9b-48bd-ae1a-1c7543841e92",
+});
+Response response = await client.DetectFromSessionImageAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result[0].GetProperty("faceRectangle").GetProperty("top").ToString());
+Console.WriteLine(result[0].GetProperty("faceRectangle").GetProperty("left").ToString());
+Console.WriteLine(result[0].GetProperty("faceRectangle").GetProperty("width").ToString());
+Console.WriteLine(result[0].GetProperty("faceRectangle").GetProperty("height").ToString());
+]]></code></example>
+      </Docs>
+    </Member>
+    <Member MemberName="DetectFromSessionImageAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;System.Collections.Generic.IReadOnlyList&lt;Azure.AI.Vision.Face.FaceDetectionResult&gt;&gt;&gt; DetectFromSessionImageAsync (string sessionImageId, Azure.AI.Vision.Face.FaceDetectionModel? detectionModel = default, Azure.AI.Vision.Face.FaceRecognitionModel? recognitionModel = default, bool? returnFaceId = default, System.Collections.Generic.IEnumerable&lt;Azure.AI.Vision.Face.FaceAttributeType&gt; returnFaceAttributes = default, bool? returnFaceLandmarks = default, bool? returnRecognitionModel = default, int? faceIdTimeToLive = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class System.Collections.Generic.IReadOnlyList`1&lt;class Azure.AI.Vision.Face.FaceDetectionResult&gt;&gt;&gt; DetectFromSessionImageAsync(string sessionImageId, valuetype System.Nullable`1&lt;valuetype Azure.AI.Vision.Face.FaceDetectionModel&gt; detectionModel, valuetype System.Nullable`1&lt;valuetype Azure.AI.Vision.Face.FaceRecognitionModel&gt; recognitionModel, valuetype System.Nullable`1&lt;bool&gt; returnFaceId, class System.Collections.Generic.IEnumerable`1&lt;valuetype Azure.AI.Vision.Face.FaceAttributeType&gt; returnFaceAttributes, valuetype System.Nullable`1&lt;bool&gt; returnFaceLandmarks, valuetype System.Nullable`1&lt;bool&gt; returnRecognitionModel, valuetype System.Nullable`1&lt;int32&gt; faceIdTimeToLive, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.AI.Vision.Face.FaceSessionClient.DetectFromSessionImageAsync(System.String,System.Nullable{Azure.AI.Vision.Face.FaceDetectionModel},System.Nullable{Azure.AI.Vision.Face.FaceRecognitionModel},System.Nullable{System.Boolean},System.Collections.Generic.IEnumerable{Azure.AI.Vision.Face.FaceAttributeType},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function DetectFromSessionImageAsync (sessionImageId As String, Optional detectionModel As Nullable(Of FaceDetectionModel) = Nothing, Optional recognitionModel As Nullable(Of FaceRecognitionModel) = Nothing, Optional returnFaceId As Nullable(Of Boolean) = Nothing, Optional returnFaceAttributes As IEnumerable(Of FaceAttributeType) = Nothing, Optional returnFaceLandmarks As Nullable(Of Boolean) = Nothing, Optional returnRecognitionModel As Nullable(Of Boolean) = Nothing, Optional faceIdTimeToLive As Nullable(Of Integer) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of IReadOnlyList(Of FaceDetectionResult)))" />
+      <MemberSignature Language="F#" Value="abstract member DetectFromSessionImageAsync : string * Nullable&lt;Azure.AI.Vision.Face.FaceDetectionModel&gt; * Nullable&lt;Azure.AI.Vision.Face.FaceRecognitionModel&gt; * Nullable&lt;bool&gt; * seq&lt;Azure.AI.Vision.Face.FaceAttributeType&gt; * Nullable&lt;bool&gt; * Nullable&lt;bool&gt; * Nullable&lt;int&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;System.Collections.Generic.IReadOnlyList&lt;Azure.AI.Vision.Face.FaceDetectionResult&gt;&gt;&gt;&#xA;override this.DetectFromSessionImageAsync : string * Nullable&lt;Azure.AI.Vision.Face.FaceDetectionModel&gt; * Nullable&lt;Azure.AI.Vision.Face.FaceRecognitionModel&gt; * Nullable&lt;bool&gt; * seq&lt;Azure.AI.Vision.Face.FaceAttributeType&gt; * Nullable&lt;bool&gt; * Nullable&lt;bool&gt; * Nullable&lt;int&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;System.Collections.Generic.IReadOnlyList&lt;Azure.AI.Vision.Face.FaceDetectionResult&gt;&gt;&gt;" Usage="faceSessionClient.DetectFromSessionImageAsync (sessionImageId, detectionModel, recognitionModel, returnFaceId, returnFaceAttributes, returnFaceLandmarks, returnRecognitionModel, faceIdTimeToLive, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.AI.Vision.Face</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&lt;System.Collections.Generic.IReadOnlyList&lt;Azure.AI.Vision.Face.FaceDetectionResult&gt;&gt;&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sessionImageId" Type="System.String" />
+        <Parameter Name="detectionModel" Type="System.Nullable&lt;Azure.AI.Vision.Face.FaceDetectionModel&gt;" />
+        <Parameter Name="recognitionModel" Type="System.Nullable&lt;Azure.AI.Vision.Face.FaceRecognitionModel&gt;" />
+        <Parameter Name="returnFaceId" Type="System.Nullable&lt;System.Boolean&gt;" />
+        <Parameter Name="returnFaceAttributes" Type="System.Collections.Generic.IEnumerable&lt;Azure.AI.Vision.Face.FaceAttributeType&gt;" />
+        <Parameter Name="returnFaceLandmarks" Type="System.Nullable&lt;System.Boolean&gt;" />
+        <Parameter Name="returnRecognitionModel" Type="System.Nullable&lt;System.Boolean&gt;" />
+        <Parameter Name="faceIdTimeToLive" Type="System.Nullable&lt;System.Int32&gt;" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="sessionImageId"> Id of session image. </param>
+        <param name="detectionModel"> The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'. 'detection_03' is recommended since its accuracy is improved on smaller faces (64x64 pixels) and rotated face orientations. </param>
+        <param name="recognitionModel"> The 'recognitionModel' associated with the detected faceIds. Supported 'recognitionModel' values include 'recognition_01', 'recognition_02', 'recognition_03' or 'recognition_04'. The default value is 'recognition_01'. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'. </param>
+        <param name="returnFaceId"> Return faceIds of the detected faces or not. The default value is true. </param>
+        <param name="returnFaceAttributes"> Analyze and return the one or more specified face attributes in the comma-separated string like 'returnFaceAttributes=headPose,glasses'. Face attribute analysis has additional computational and time cost. </param>
+        <param name="returnFaceLandmarks"> Return face landmarks of the detected faces or not. The default value is false. </param>
+        <param name="returnRecognitionModel"> Return 'recognitionModel' or not. The default value is false. This is only applicable when returnFaceId = true. </param>
+        <param name="faceIdTimeToLive"> The number of seconds for the face ID being cached. Supported range from 60 seconds up to 86400 seconds. The default value is 86400 (24 hours). </param>
+        <param name="cancellationToken"> The cancellation token to use. </param>
+        <summary> Detect human faces in an image, return face rectangles, and optionally with faceIds, landmarks, and attributes. </summary>
+        <returns>To be added.</returns>
+        <remarks> Please refer to https://learn.microsoft.com/rest/api/face/face-detection-operations/detect-from-session-image-id for more details. </remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="sessionImageId" /> is null. </exception>
+        <example>
+This sample shows how to call DetectFromSessionImageAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FaceSessionClient client = new FaceSessionClient(endpoint, credential);
+
+Response<IReadOnlyList<FaceDetectionResult>> response = await client.DetectFromSessionImageAsync("aa93ce80-9a9b-48bd-ae1a-1c7543841e92");
 ]]></code></example>
       </Docs>
     </Member>
@@ -767,7 +853,7 @@ Console.WriteLine(response.Status);
         <param name="top"> The number of items to list, ranging in [1, 1000]. Default is 1000. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         <summary>
-            [Protocol Method] Gets session requests and response body for the session.
+            [Protocol Method] Please refer to https://learn.microsoft.com/rest/api/face/liveness-session-operations/get-liveness-session-audit-entries for more details.
             <list type="bullet"><item><description>
             This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
             </description></item><item><description>
@@ -783,11 +869,11 @@ Console.WriteLine(response.Status);
         <example>
 This sample shows how to call GetLivenessSessionAuditEntries and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FaceSessionClient client = new FaceSessionClient(endpoint, credential);
 
-Response response = client.GetLivenessSessionAuditEntries("<sessionId>", null, null, null);
+Response response = client.GetLivenessSessionAuditEntries("b12e033e-bda7-4b83-a211-e721c661f30e", "0", 20, null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].GetProperty("id").ToString());
@@ -799,45 +885,6 @@ Console.WriteLine(result[0].GetProperty("request").GetProperty("url").ToString()
 Console.WriteLine(result[0].GetProperty("request").GetProperty("method").ToString());
 Console.WriteLine(result[0].GetProperty("request").GetProperty("contentType").ToString());
 Console.WriteLine(result[0].GetProperty("response").GetProperty("body").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("statusCode").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("latencyInMilliseconds").ToString());
-Console.WriteLine(result[0].GetProperty("digest").ToString());
-]]></code>
-This sample shows how to call GetLivenessSessionAuditEntries with all parameters and parse the result.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-FaceSessionClient client = new FaceSessionClient(endpoint, credential);
-
-Response response = client.GetLivenessSessionAuditEntries("<sessionId>", "<start>", 1234, null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result[0].GetProperty("id").ToString());
-Console.WriteLine(result[0].GetProperty("sessionId").ToString());
-Console.WriteLine(result[0].GetProperty("requestId").ToString());
-Console.WriteLine(result[0].GetProperty("clientRequestId").ToString());
-Console.WriteLine(result[0].GetProperty("receivedDateTime").ToString());
-Console.WriteLine(result[0].GetProperty("request").GetProperty("url").ToString());
-Console.WriteLine(result[0].GetProperty("request").GetProperty("method").ToString());
-Console.WriteLine(result[0].GetProperty("request").GetProperty("contentLength").ToString());
-Console.WriteLine(result[0].GetProperty("request").GetProperty("contentType").ToString());
-Console.WriteLine(result[0].GetProperty("request").GetProperty("userAgent").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("livenessDecision").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("faceRectangle").GetProperty("top").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("faceRectangle").GetProperty("left").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("faceRectangle").GetProperty("width").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("faceRectangle").GetProperty("height").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("fileName").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("timeOffsetWithinFile").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("imageType").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("modelVersionUsed").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("faceRectangle").GetProperty("top").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("faceRectangle").GetProperty("left").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("faceRectangle").GetProperty("width").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("faceRectangle").GetProperty("height").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("qualityForRecognition").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("matchConfidence").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("isIdentical").ToString());
 Console.WriteLine(result[0].GetProperty("response").GetProperty("statusCode").ToString());
 Console.WriteLine(result[0].GetProperty("response").GetProperty("latencyInMilliseconds").ToString());
 Console.WriteLine(result[0].GetProperty("digest").ToString());
@@ -869,7 +916,7 @@ Console.WriteLine(result[0].GetProperty("digest").ToString());
         <param name="start"> List resources greater than the "start". It contains no more than 64 characters. Default is empty. </param>
         <param name="top"> The number of items to list, ranging in [1, 1000]. Default is 1000. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
-        <summary> Gets session requests and response body for the session. </summary>
+        <summary> Please refer to https://learn.microsoft.com/rest/api/face/liveness-session-operations/get-liveness-session-audit-entries for more details. </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
@@ -879,19 +926,11 @@ Console.WriteLine(result[0].GetProperty("digest").ToString());
         <example>
 This sample shows how to call GetLivenessSessionAuditEntries.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FaceSessionClient client = new FaceSessionClient(endpoint, credential);
 
-Response<IReadOnlyList<LivenessSessionAuditEntry>> response = client.GetLivenessSessionAuditEntries("<sessionId>");
-]]></code>
-This sample shows how to call GetLivenessSessionAuditEntries with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-FaceSessionClient client = new FaceSessionClient(endpoint, credential);
-
-Response<IReadOnlyList<LivenessSessionAuditEntry>> response = client.GetLivenessSessionAuditEntries("<sessionId>", start: "<start>", top: 1234);
+Response<IReadOnlyList<LivenessSessionAuditEntry>> response = client.GetLivenessSessionAuditEntries("b12e033e-bda7-4b83-a211-e721c661f30e");
 ]]></code></example>
       </Docs>
     </Member>
@@ -921,7 +960,7 @@ Response<IReadOnlyList<LivenessSessionAuditEntry>> response = client.GetLiveness
         <param name="top"> The number of items to list, ranging in [1, 1000]. Default is 1000. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         <summary>
-            [Protocol Method] Gets session requests and response body for the session.
+            [Protocol Method] Please refer to https://learn.microsoft.com/rest/api/face/liveness-session-operations/get-liveness-session-audit-entries for more details.
             <list type="bullet"><item><description>
             This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
             </description></item><item><description>
@@ -937,11 +976,11 @@ Response<IReadOnlyList<LivenessSessionAuditEntry>> response = client.GetLiveness
         <example>
 This sample shows how to call GetLivenessSessionAuditEntriesAsync and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FaceSessionClient client = new FaceSessionClient(endpoint, credential);
 
-Response response = await client.GetLivenessSessionAuditEntriesAsync("<sessionId>", null, null, null);
+Response response = await client.GetLivenessSessionAuditEntriesAsync("b12e033e-bda7-4b83-a211-e721c661f30e", "0", 20, null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].GetProperty("id").ToString());
@@ -953,45 +992,6 @@ Console.WriteLine(result[0].GetProperty("request").GetProperty("url").ToString()
 Console.WriteLine(result[0].GetProperty("request").GetProperty("method").ToString());
 Console.WriteLine(result[0].GetProperty("request").GetProperty("contentType").ToString());
 Console.WriteLine(result[0].GetProperty("response").GetProperty("body").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("statusCode").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("latencyInMilliseconds").ToString());
-Console.WriteLine(result[0].GetProperty("digest").ToString());
-]]></code>
-This sample shows how to call GetLivenessSessionAuditEntriesAsync with all parameters and parse the result.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-FaceSessionClient client = new FaceSessionClient(endpoint, credential);
-
-Response response = await client.GetLivenessSessionAuditEntriesAsync("<sessionId>", "<start>", 1234, null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result[0].GetProperty("id").ToString());
-Console.WriteLine(result[0].GetProperty("sessionId").ToString());
-Console.WriteLine(result[0].GetProperty("requestId").ToString());
-Console.WriteLine(result[0].GetProperty("clientRequestId").ToString());
-Console.WriteLine(result[0].GetProperty("receivedDateTime").ToString());
-Console.WriteLine(result[0].GetProperty("request").GetProperty("url").ToString());
-Console.WriteLine(result[0].GetProperty("request").GetProperty("method").ToString());
-Console.WriteLine(result[0].GetProperty("request").GetProperty("contentLength").ToString());
-Console.WriteLine(result[0].GetProperty("request").GetProperty("contentType").ToString());
-Console.WriteLine(result[0].GetProperty("request").GetProperty("userAgent").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("livenessDecision").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("faceRectangle").GetProperty("top").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("faceRectangle").GetProperty("left").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("faceRectangle").GetProperty("width").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("faceRectangle").GetProperty("height").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("fileName").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("timeOffsetWithinFile").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("imageType").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("modelVersionUsed").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("faceRectangle").GetProperty("top").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("faceRectangle").GetProperty("left").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("faceRectangle").GetProperty("width").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("faceRectangle").GetProperty("height").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("qualityForRecognition").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("matchConfidence").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("isIdentical").ToString());
 Console.WriteLine(result[0].GetProperty("response").GetProperty("statusCode").ToString());
 Console.WriteLine(result[0].GetProperty("response").GetProperty("latencyInMilliseconds").ToString());
 Console.WriteLine(result[0].GetProperty("digest").ToString());
@@ -1023,7 +1023,7 @@ Console.WriteLine(result[0].GetProperty("digest").ToString());
         <param name="start"> List resources greater than the "start". It contains no more than 64 characters. Default is empty. </param>
         <param name="top"> The number of items to list, ranging in [1, 1000]. Default is 1000. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
-        <summary> Gets session requests and response body for the session. </summary>
+        <summary> Please refer to https://learn.microsoft.com/rest/api/face/liveness-session-operations/get-liveness-session-audit-entries for more details. </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
@@ -1033,19 +1033,11 @@ Console.WriteLine(result[0].GetProperty("digest").ToString());
         <example>
 This sample shows how to call GetLivenessSessionAuditEntriesAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FaceSessionClient client = new FaceSessionClient(endpoint, credential);
 
-Response<IReadOnlyList<LivenessSessionAuditEntry>> response = await client.GetLivenessSessionAuditEntriesAsync("<sessionId>");
-]]></code>
-This sample shows how to call GetLivenessSessionAuditEntriesAsync with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-FaceSessionClient client = new FaceSessionClient(endpoint, credential);
-
-Response<IReadOnlyList<LivenessSessionAuditEntry>> response = await client.GetLivenessSessionAuditEntriesAsync("<sessionId>", start: "<start>", top: 1234);
+Response<IReadOnlyList<LivenessSessionAuditEntry>> response = await client.GetLivenessSessionAuditEntriesAsync("b12e033e-bda7-4b83-a211-e721c661f30e");
 ]]></code></example>
       </Docs>
     </Member>
@@ -1071,7 +1063,7 @@ Response<IReadOnlyList<LivenessSessionAuditEntry>> response = await client.GetLi
         <param name="sessionId"> The unique ID to reference this session. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         <summary>
-            [Protocol Method] Get session result of detectLiveness/singleModal call.
+            [Protocol Method] Please refer to https://learn.microsoft.com/rest/api/face/liveness-session-operations/get-liveness-session-result for more details.
             <list type="bullet"><item><description>
             This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
             </description></item><item><description>
@@ -1087,63 +1079,17 @@ Response<IReadOnlyList<LivenessSessionAuditEntry>> response = await client.GetLi
         <example>
 This sample shows how to call GetLivenessSessionResult and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FaceSessionClient client = new FaceSessionClient(endpoint, credential);
 
-Response response = client.GetLivenessSessionResult("<sessionId>", null);
+Response response = client.GetLivenessSessionResult("b12e033e-bda7-4b83-a211-e721c661f30e", null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 Console.WriteLine(result.GetProperty("createdDateTime").ToString());
 Console.WriteLine(result.GetProperty("sessionExpired").ToString());
 Console.WriteLine(result.GetProperty("status").ToString());
-]]></code>
-This sample shows how to call GetLivenessSessionResult with all parameters and parse the result.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-FaceSessionClient client = new FaceSessionClient(endpoint, credential);
-
-Response response = client.GetLivenessSessionResult("<sessionId>", null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-Console.WriteLine(result.GetProperty("sessionStartDateTime").ToString());
-Console.WriteLine(result.GetProperty("sessionExpired").ToString());
-Console.WriteLine(result.GetProperty("deviceCorrelationId").ToString());
-Console.WriteLine(result.GetProperty("authTokenTimeToLiveInSeconds").ToString());
-Console.WriteLine(result.GetProperty("status").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("sessionId").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("requestId").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("clientRequestId").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("receivedDateTime").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("request").GetProperty("url").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("request").GetProperty("method").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("request").GetProperty("contentLength").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("request").GetProperty("contentType").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("request").GetProperty("userAgent").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("livenessDecision").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("faceRectangle").GetProperty("top").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("faceRectangle").GetProperty("left").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("faceRectangle").GetProperty("width").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("faceRectangle").GetProperty("height").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("fileName").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("timeOffsetWithinFile").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("imageType").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("modelVersionUsed").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("faceRectangle").GetProperty("top").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("faceRectangle").GetProperty("left").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("faceRectangle").GetProperty("width").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("faceRectangle").GetProperty("height").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("qualityForRecognition").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("matchConfidence").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("isIdentical").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("statusCode").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("latencyInMilliseconds").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("digest").ToString());
 ]]></code></example>
       </Docs>
     </Member>
@@ -1168,7 +1114,7 @@ Console.WriteLine(result.GetProperty("result").GetProperty("digest").ToString())
       <Docs>
         <param name="sessionId"> The unique ID to reference this session. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
-        <summary> Get session result of detectLiveness/singleModal call. </summary>
+        <summary> Please refer to https://learn.microsoft.com/rest/api/face/liveness-session-operations/get-liveness-session-result for more details. </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
@@ -1178,19 +1124,11 @@ Console.WriteLine(result.GetProperty("result").GetProperty("digest").ToString())
         <example>
 This sample shows how to call GetLivenessSessionResult.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FaceSessionClient client = new FaceSessionClient(endpoint, credential);
 
-Response<LivenessSession> response = client.GetLivenessSessionResult("<sessionId>");
-]]></code>
-This sample shows how to call GetLivenessSessionResult with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-FaceSessionClient client = new FaceSessionClient(endpoint, credential);
-
-Response<LivenessSession> response = client.GetLivenessSessionResult("<sessionId>");
+Response<LivenessSession> response = client.GetLivenessSessionResult("b12e033e-bda7-4b83-a211-e721c661f30e");
 ]]></code></example>
       </Docs>
     </Member>
@@ -1216,7 +1154,7 @@ Response<LivenessSession> response = client.GetLivenessSessionResult("<sessionId
         <param name="sessionId"> The unique ID to reference this session. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         <summary>
-            [Protocol Method] Get session result of detectLiveness/singleModal call.
+            [Protocol Method] Please refer to https://learn.microsoft.com/rest/api/face/liveness-session-operations/get-liveness-session-result for more details.
             <list type="bullet"><item><description>
             This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
             </description></item><item><description>
@@ -1232,63 +1170,17 @@ Response<LivenessSession> response = client.GetLivenessSessionResult("<sessionId
         <example>
 This sample shows how to call GetLivenessSessionResultAsync and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FaceSessionClient client = new FaceSessionClient(endpoint, credential);
 
-Response response = await client.GetLivenessSessionResultAsync("<sessionId>", null);
+Response response = await client.GetLivenessSessionResultAsync("b12e033e-bda7-4b83-a211-e721c661f30e", null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 Console.WriteLine(result.GetProperty("createdDateTime").ToString());
 Console.WriteLine(result.GetProperty("sessionExpired").ToString());
 Console.WriteLine(result.GetProperty("status").ToString());
-]]></code>
-This sample shows how to call GetLivenessSessionResultAsync with all parameters and parse the result.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-FaceSessionClient client = new FaceSessionClient(endpoint, credential);
-
-Response response = await client.GetLivenessSessionResultAsync("<sessionId>", null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-Console.WriteLine(result.GetProperty("sessionStartDateTime").ToString());
-Console.WriteLine(result.GetProperty("sessionExpired").ToString());
-Console.WriteLine(result.GetProperty("deviceCorrelationId").ToString());
-Console.WriteLine(result.GetProperty("authTokenTimeToLiveInSeconds").ToString());
-Console.WriteLine(result.GetProperty("status").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("sessionId").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("requestId").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("clientRequestId").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("receivedDateTime").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("request").GetProperty("url").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("request").GetProperty("method").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("request").GetProperty("contentLength").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("request").GetProperty("contentType").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("request").GetProperty("userAgent").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("livenessDecision").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("faceRectangle").GetProperty("top").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("faceRectangle").GetProperty("left").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("faceRectangle").GetProperty("width").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("faceRectangle").GetProperty("height").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("fileName").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("timeOffsetWithinFile").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("imageType").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("modelVersionUsed").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("faceRectangle").GetProperty("top").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("faceRectangle").GetProperty("left").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("faceRectangle").GetProperty("width").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("faceRectangle").GetProperty("height").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("qualityForRecognition").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("matchConfidence").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("isIdentical").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("statusCode").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("latencyInMilliseconds").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("digest").ToString());
 ]]></code></example>
       </Docs>
     </Member>
@@ -1313,7 +1205,7 @@ Console.WriteLine(result.GetProperty("result").GetProperty("digest").ToString())
       <Docs>
         <param name="sessionId"> The unique ID to reference this session. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
-        <summary> Get session result of detectLiveness/singleModal call. </summary>
+        <summary> Please refer to https://learn.microsoft.com/rest/api/face/liveness-session-operations/get-liveness-session-result for more details. </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
@@ -1323,19 +1215,11 @@ Console.WriteLine(result.GetProperty("result").GetProperty("digest").ToString())
         <example>
 This sample shows how to call GetLivenessSessionResultAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FaceSessionClient client = new FaceSessionClient(endpoint, credential);
 
-Response<LivenessSession> response = await client.GetLivenessSessionResultAsync("<sessionId>");
-]]></code>
-This sample shows how to call GetLivenessSessionResultAsync with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-FaceSessionClient client = new FaceSessionClient(endpoint, credential);
-
-Response<LivenessSession> response = await client.GetLivenessSessionResultAsync("<sessionId>");
+Response<LivenessSession> response = await client.GetLivenessSessionResultAsync("b12e033e-bda7-4b83-a211-e721c661f30e");
 ]]></code></example>
       </Docs>
     </Member>
@@ -1375,32 +1259,16 @@ Response<LivenessSession> response = await client.GetLivenessSessionResultAsync(
         <example>
 This sample shows how to call GetLivenessSessions and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FaceSessionClient client = new FaceSessionClient(endpoint, credential);
 
-Response response = client.GetLivenessSessions(null, null, null);
+Response response = client.GetLivenessSessions("00000000-0000-0000-0000-000000000000", 20, null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].GetProperty("id").ToString());
 Console.WriteLine(result[0].GetProperty("createdDateTime").ToString());
 Console.WriteLine(result[0].GetProperty("sessionExpired").ToString());
-]]></code>
-This sample shows how to call GetLivenessSessions with all parameters and parse the result.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-FaceSessionClient client = new FaceSessionClient(endpoint, credential);
-
-Response response = client.GetLivenessSessions("<start>", 1234, null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result[0].GetProperty("id").ToString());
-Console.WriteLine(result[0].GetProperty("createdDateTime").ToString());
-Console.WriteLine(result[0].GetProperty("sessionStartDateTime").ToString());
-Console.WriteLine(result[0].GetProperty("sessionExpired").ToString());
-Console.WriteLine(result[0].GetProperty("deviceCorrelationId").ToString());
-Console.WriteLine(result[0].GetProperty("authTokenTimeToLiveInSeconds").ToString());
 ]]></code></example>
       </Docs>
     </Member>
@@ -1429,27 +1297,15 @@ Console.WriteLine(result[0].GetProperty("authTokenTimeToLiveInSeconds").ToString
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary> Lists sessions for /detectLiveness/SingleModal. </summary>
         <returns>To be added.</returns>
-        <remarks>
-             List sessions from the last sessionId greater than the 'start'.
-            
-             The result should be ordered by sessionId in ascending order.
-             </remarks>
+        <remarks> Please refer to https://learn.microsoft.com/rest/api/face/liveness-session-operations/get-liveness-sessions for more details. </remarks>
         <example>
 This sample shows how to call GetLivenessSessions.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FaceSessionClient client = new FaceSessionClient(endpoint, credential);
 
 Response<IReadOnlyList<LivenessSessionItem>> response = client.GetLivenessSessions();
-]]></code>
-This sample shows how to call GetLivenessSessions with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-FaceSessionClient client = new FaceSessionClient(endpoint, credential);
-
-Response<IReadOnlyList<LivenessSessionItem>> response = client.GetLivenessSessions(start: "<start>", top: 1234);
 ]]></code></example>
       </Docs>
     </Member>
@@ -1489,32 +1345,16 @@ Response<IReadOnlyList<LivenessSessionItem>> response = client.GetLivenessSessio
         <example>
 This sample shows how to call GetLivenessSessionsAsync and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FaceSessionClient client = new FaceSessionClient(endpoint, credential);
 
-Response response = await client.GetLivenessSessionsAsync(null, null, null);
+Response response = await client.GetLivenessSessionsAsync("00000000-0000-0000-0000-000000000000", 20, null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].GetProperty("id").ToString());
 Console.WriteLine(result[0].GetProperty("createdDateTime").ToString());
 Console.WriteLine(result[0].GetProperty("sessionExpired").ToString());
-]]></code>
-This sample shows how to call GetLivenessSessionsAsync with all parameters and parse the result.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-FaceSessionClient client = new FaceSessionClient(endpoint, credential);
-
-Response response = await client.GetLivenessSessionsAsync("<start>", 1234, null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result[0].GetProperty("id").ToString());
-Console.WriteLine(result[0].GetProperty("createdDateTime").ToString());
-Console.WriteLine(result[0].GetProperty("sessionStartDateTime").ToString());
-Console.WriteLine(result[0].GetProperty("sessionExpired").ToString());
-Console.WriteLine(result[0].GetProperty("deviceCorrelationId").ToString());
-Console.WriteLine(result[0].GetProperty("authTokenTimeToLiveInSeconds").ToString());
 ]]></code></example>
       </Docs>
     </Member>
@@ -1543,27 +1383,15 @@ Console.WriteLine(result[0].GetProperty("authTokenTimeToLiveInSeconds").ToString
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary> Lists sessions for /detectLiveness/SingleModal. </summary>
         <returns>To be added.</returns>
-        <remarks>
-             List sessions from the last sessionId greater than the 'start'.
-            
-             The result should be ordered by sessionId in ascending order.
-             </remarks>
+        <remarks> Please refer to https://learn.microsoft.com/rest/api/face/liveness-session-operations/get-liveness-sessions for more details. </remarks>
         <example>
 This sample shows how to call GetLivenessSessionsAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FaceSessionClient client = new FaceSessionClient(endpoint, credential);
 
 Response<IReadOnlyList<LivenessSessionItem>> response = await client.GetLivenessSessionsAsync();
-]]></code>
-This sample shows how to call GetLivenessSessionsAsync with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-FaceSessionClient client = new FaceSessionClient(endpoint, credential);
-
-Response<IReadOnlyList<LivenessSessionItem>> response = await client.GetLivenessSessionsAsync(start: "<start>", top: 1234);
 ]]></code></example>
       </Docs>
     </Member>
@@ -1593,7 +1421,7 @@ Response<IReadOnlyList<LivenessSessionItem>> response = await client.GetLiveness
         <param name="top"> The number of items to list, ranging in [1, 1000]. Default is 1000. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         <summary>
-            [Protocol Method] Gets session requests and response body for the session.
+            [Protocol Method] Please refer to https://learn.microsoft.com/rest/api/face/liveness-session-operations/get-liveness-with-verify-session-audit-entries for more details.
             <list type="bullet"><item><description>
             This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
             </description></item><item><description>
@@ -1609,11 +1437,11 @@ Response<IReadOnlyList<LivenessSessionItem>> response = await client.GetLiveness
         <example>
 This sample shows how to call GetLivenessWithVerifySessionAuditEntries and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FaceSessionClient client = new FaceSessionClient(endpoint, credential);
 
-Response response = client.GetLivenessWithVerifySessionAuditEntries("<sessionId>", null, null, null);
+Response response = client.GetLivenessWithVerifySessionAuditEntries("b12e033e-bda7-4b83-a211-e721c661f30e", "0", 20, null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].GetProperty("id").ToString());
@@ -1625,45 +1453,6 @@ Console.WriteLine(result[0].GetProperty("request").GetProperty("url").ToString()
 Console.WriteLine(result[0].GetProperty("request").GetProperty("method").ToString());
 Console.WriteLine(result[0].GetProperty("request").GetProperty("contentType").ToString());
 Console.WriteLine(result[0].GetProperty("response").GetProperty("body").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("statusCode").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("latencyInMilliseconds").ToString());
-Console.WriteLine(result[0].GetProperty("digest").ToString());
-]]></code>
-This sample shows how to call GetLivenessWithVerifySessionAuditEntries with all parameters and parse the result.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-FaceSessionClient client = new FaceSessionClient(endpoint, credential);
-
-Response response = client.GetLivenessWithVerifySessionAuditEntries("<sessionId>", "<start>", 1234, null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result[0].GetProperty("id").ToString());
-Console.WriteLine(result[0].GetProperty("sessionId").ToString());
-Console.WriteLine(result[0].GetProperty("requestId").ToString());
-Console.WriteLine(result[0].GetProperty("clientRequestId").ToString());
-Console.WriteLine(result[0].GetProperty("receivedDateTime").ToString());
-Console.WriteLine(result[0].GetProperty("request").GetProperty("url").ToString());
-Console.WriteLine(result[0].GetProperty("request").GetProperty("method").ToString());
-Console.WriteLine(result[0].GetProperty("request").GetProperty("contentLength").ToString());
-Console.WriteLine(result[0].GetProperty("request").GetProperty("contentType").ToString());
-Console.WriteLine(result[0].GetProperty("request").GetProperty("userAgent").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("livenessDecision").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("faceRectangle").GetProperty("top").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("faceRectangle").GetProperty("left").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("faceRectangle").GetProperty("width").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("faceRectangle").GetProperty("height").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("fileName").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("timeOffsetWithinFile").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("imageType").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("modelVersionUsed").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("faceRectangle").GetProperty("top").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("faceRectangle").GetProperty("left").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("faceRectangle").GetProperty("width").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("faceRectangle").GetProperty("height").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("qualityForRecognition").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("matchConfidence").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("isIdentical").ToString());
 Console.WriteLine(result[0].GetProperty("response").GetProperty("statusCode").ToString());
 Console.WriteLine(result[0].GetProperty("response").GetProperty("latencyInMilliseconds").ToString());
 Console.WriteLine(result[0].GetProperty("digest").ToString());
@@ -1695,7 +1484,7 @@ Console.WriteLine(result[0].GetProperty("digest").ToString());
         <param name="start"> List resources greater than the "start". It contains no more than 64 characters. Default is empty. </param>
         <param name="top"> The number of items to list, ranging in [1, 1000]. Default is 1000. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
-        <summary> Gets session requests and response body for the session. </summary>
+        <summary> Please refer to https://learn.microsoft.com/rest/api/face/liveness-session-operations/get-liveness-with-verify-session-audit-entries for more details. </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
@@ -1705,19 +1494,11 @@ Console.WriteLine(result[0].GetProperty("digest").ToString());
         <example>
 This sample shows how to call GetLivenessWithVerifySessionAuditEntries.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FaceSessionClient client = new FaceSessionClient(endpoint, credential);
 
-Response<IReadOnlyList<LivenessSessionAuditEntry>> response = client.GetLivenessWithVerifySessionAuditEntries("<sessionId>");
-]]></code>
-This sample shows how to call GetLivenessWithVerifySessionAuditEntries with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-FaceSessionClient client = new FaceSessionClient(endpoint, credential);
-
-Response<IReadOnlyList<LivenessSessionAuditEntry>> response = client.GetLivenessWithVerifySessionAuditEntries("<sessionId>", start: "<start>", top: 1234);
+Response<IReadOnlyList<LivenessSessionAuditEntry>> response = client.GetLivenessWithVerifySessionAuditEntries("b12e033e-bda7-4b83-a211-e721c661f30e");
 ]]></code></example>
       </Docs>
     </Member>
@@ -1747,7 +1528,7 @@ Response<IReadOnlyList<LivenessSessionAuditEntry>> response = client.GetLiveness
         <param name="top"> The number of items to list, ranging in [1, 1000]. Default is 1000. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         <summary>
-            [Protocol Method] Gets session requests and response body for the session.
+            [Protocol Method] Please refer to https://learn.microsoft.com/rest/api/face/liveness-session-operations/get-liveness-with-verify-session-audit-entries for more details.
             <list type="bullet"><item><description>
             This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
             </description></item><item><description>
@@ -1763,11 +1544,11 @@ Response<IReadOnlyList<LivenessSessionAuditEntry>> response = client.GetLiveness
         <example>
 This sample shows how to call GetLivenessWithVerifySessionAuditEntriesAsync and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FaceSessionClient client = new FaceSessionClient(endpoint, credential);
 
-Response response = await client.GetLivenessWithVerifySessionAuditEntriesAsync("<sessionId>", null, null, null);
+Response response = await client.GetLivenessWithVerifySessionAuditEntriesAsync("b12e033e-bda7-4b83-a211-e721c661f30e", "0", 20, null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].GetProperty("id").ToString());
@@ -1779,45 +1560,6 @@ Console.WriteLine(result[0].GetProperty("request").GetProperty("url").ToString()
 Console.WriteLine(result[0].GetProperty("request").GetProperty("method").ToString());
 Console.WriteLine(result[0].GetProperty("request").GetProperty("contentType").ToString());
 Console.WriteLine(result[0].GetProperty("response").GetProperty("body").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("statusCode").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("latencyInMilliseconds").ToString());
-Console.WriteLine(result[0].GetProperty("digest").ToString());
-]]></code>
-This sample shows how to call GetLivenessWithVerifySessionAuditEntriesAsync with all parameters and parse the result.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-FaceSessionClient client = new FaceSessionClient(endpoint, credential);
-
-Response response = await client.GetLivenessWithVerifySessionAuditEntriesAsync("<sessionId>", "<start>", 1234, null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result[0].GetProperty("id").ToString());
-Console.WriteLine(result[0].GetProperty("sessionId").ToString());
-Console.WriteLine(result[0].GetProperty("requestId").ToString());
-Console.WriteLine(result[0].GetProperty("clientRequestId").ToString());
-Console.WriteLine(result[0].GetProperty("receivedDateTime").ToString());
-Console.WriteLine(result[0].GetProperty("request").GetProperty("url").ToString());
-Console.WriteLine(result[0].GetProperty("request").GetProperty("method").ToString());
-Console.WriteLine(result[0].GetProperty("request").GetProperty("contentLength").ToString());
-Console.WriteLine(result[0].GetProperty("request").GetProperty("contentType").ToString());
-Console.WriteLine(result[0].GetProperty("request").GetProperty("userAgent").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("livenessDecision").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("faceRectangle").GetProperty("top").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("faceRectangle").GetProperty("left").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("faceRectangle").GetProperty("width").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("faceRectangle").GetProperty("height").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("fileName").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("timeOffsetWithinFile").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("imageType").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("modelVersionUsed").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("faceRectangle").GetProperty("top").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("faceRectangle").GetProperty("left").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("faceRectangle").GetProperty("width").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("faceRectangle").GetProperty("height").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("qualityForRecognition").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("matchConfidence").ToString());
-Console.WriteLine(result[0].GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("isIdentical").ToString());
 Console.WriteLine(result[0].GetProperty("response").GetProperty("statusCode").ToString());
 Console.WriteLine(result[0].GetProperty("response").GetProperty("latencyInMilliseconds").ToString());
 Console.WriteLine(result[0].GetProperty("digest").ToString());
@@ -1849,7 +1591,7 @@ Console.WriteLine(result[0].GetProperty("digest").ToString());
         <param name="start"> List resources greater than the "start". It contains no more than 64 characters. Default is empty. </param>
         <param name="top"> The number of items to list, ranging in [1, 1000]. Default is 1000. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
-        <summary> Gets session requests and response body for the session. </summary>
+        <summary> Please refer to https://learn.microsoft.com/rest/api/face/liveness-session-operations/get-liveness-with-verify-session-audit-entries for more details. </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
@@ -1859,19 +1601,11 @@ Console.WriteLine(result[0].GetProperty("digest").ToString());
         <example>
 This sample shows how to call GetLivenessWithVerifySessionAuditEntriesAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FaceSessionClient client = new FaceSessionClient(endpoint, credential);
 
-Response<IReadOnlyList<LivenessSessionAuditEntry>> response = await client.GetLivenessWithVerifySessionAuditEntriesAsync("<sessionId>");
-]]></code>
-This sample shows how to call GetLivenessWithVerifySessionAuditEntriesAsync with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-FaceSessionClient client = new FaceSessionClient(endpoint, credential);
-
-Response<IReadOnlyList<LivenessSessionAuditEntry>> response = await client.GetLivenessWithVerifySessionAuditEntriesAsync("<sessionId>", start: "<start>", top: 1234);
+Response<IReadOnlyList<LivenessSessionAuditEntry>> response = await client.GetLivenessWithVerifySessionAuditEntriesAsync("b12e033e-bda7-4b83-a211-e721c661f30e");
 ]]></code></example>
       </Docs>
     </Member>
@@ -1897,7 +1631,7 @@ Response<IReadOnlyList<LivenessSessionAuditEntry>> response = await client.GetLi
         <param name="sessionId"> The unique ID to reference this session. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         <summary>
-            [Protocol Method] Get session result of detectLivenessWithVerify/singleModal call.
+            [Protocol Method] Please refer to https://learn.microsoft.com/rest/api/face/liveness-session-operations/get-liveness-with-verify-session-result for more details.
             <list type="bullet"><item><description>
             This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
             </description></item><item><description>
@@ -1913,63 +1647,17 @@ Response<IReadOnlyList<LivenessSessionAuditEntry>> response = await client.GetLi
         <example>
 This sample shows how to call GetLivenessWithVerifySessionResult and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FaceSessionClient client = new FaceSessionClient(endpoint, credential);
 
-Response response = client.GetLivenessWithVerifySessionResult("<sessionId>", null);
+Response response = client.GetLivenessWithVerifySessionResult("b12e033e-bda7-4b83-a211-e721c661f30e", null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 Console.WriteLine(result.GetProperty("createdDateTime").ToString());
 Console.WriteLine(result.GetProperty("sessionExpired").ToString());
 Console.WriteLine(result.GetProperty("status").ToString());
-]]></code>
-This sample shows how to call GetLivenessWithVerifySessionResult with all parameters and parse the result.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-FaceSessionClient client = new FaceSessionClient(endpoint, credential);
-
-Response response = client.GetLivenessWithVerifySessionResult("<sessionId>", null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-Console.WriteLine(result.GetProperty("sessionStartDateTime").ToString());
-Console.WriteLine(result.GetProperty("sessionExpired").ToString());
-Console.WriteLine(result.GetProperty("deviceCorrelationId").ToString());
-Console.WriteLine(result.GetProperty("authTokenTimeToLiveInSeconds").ToString());
-Console.WriteLine(result.GetProperty("status").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("sessionId").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("requestId").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("clientRequestId").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("receivedDateTime").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("request").GetProperty("url").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("request").GetProperty("method").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("request").GetProperty("contentLength").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("request").GetProperty("contentType").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("request").GetProperty("userAgent").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("livenessDecision").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("faceRectangle").GetProperty("top").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("faceRectangle").GetProperty("left").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("faceRectangle").GetProperty("width").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("faceRectangle").GetProperty("height").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("fileName").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("timeOffsetWithinFile").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("imageType").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("modelVersionUsed").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("faceRectangle").GetProperty("top").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("faceRectangle").GetProperty("left").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("faceRectangle").GetProperty("width").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("faceRectangle").GetProperty("height").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("qualityForRecognition").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("matchConfidence").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("isIdentical").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("statusCode").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("latencyInMilliseconds").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("digest").ToString());
 ]]></code></example>
       </Docs>
     </Member>
@@ -1994,7 +1682,7 @@ Console.WriteLine(result.GetProperty("result").GetProperty("digest").ToString())
       <Docs>
         <param name="sessionId"> The unique ID to reference this session. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
-        <summary> Get session result of detectLivenessWithVerify/singleModal call. </summary>
+        <summary> Please refer to https://learn.microsoft.com/rest/api/face/liveness-session-operations/get-liveness-with-verify-session-result for more details. </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
@@ -2004,19 +1692,11 @@ Console.WriteLine(result.GetProperty("result").GetProperty("digest").ToString())
         <example>
 This sample shows how to call GetLivenessWithVerifySessionResult.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FaceSessionClient client = new FaceSessionClient(endpoint, credential);
 
-Response<LivenessWithVerifySession> response = client.GetLivenessWithVerifySessionResult("<sessionId>");
-]]></code>
-This sample shows how to call GetLivenessWithVerifySessionResult with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-FaceSessionClient client = new FaceSessionClient(endpoint, credential);
-
-Response<LivenessWithVerifySession> response = client.GetLivenessWithVerifySessionResult("<sessionId>");
+Response<LivenessWithVerifySession> response = client.GetLivenessWithVerifySessionResult("b12e033e-bda7-4b83-a211-e721c661f30e");
 ]]></code></example>
       </Docs>
     </Member>
@@ -2042,7 +1722,7 @@ Response<LivenessWithVerifySession> response = client.GetLivenessWithVerifySessi
         <param name="sessionId"> The unique ID to reference this session. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         <summary>
-            [Protocol Method] Get session result of detectLivenessWithVerify/singleModal call.
+            [Protocol Method] Please refer to https://learn.microsoft.com/rest/api/face/liveness-session-operations/get-liveness-with-verify-session-result for more details.
             <list type="bullet"><item><description>
             This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
             </description></item><item><description>
@@ -2058,63 +1738,17 @@ Response<LivenessWithVerifySession> response = client.GetLivenessWithVerifySessi
         <example>
 This sample shows how to call GetLivenessWithVerifySessionResultAsync and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FaceSessionClient client = new FaceSessionClient(endpoint, credential);
 
-Response response = await client.GetLivenessWithVerifySessionResultAsync("<sessionId>", null);
+Response response = await client.GetLivenessWithVerifySessionResultAsync("b12e033e-bda7-4b83-a211-e721c661f30e", null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 Console.WriteLine(result.GetProperty("createdDateTime").ToString());
 Console.WriteLine(result.GetProperty("sessionExpired").ToString());
 Console.WriteLine(result.GetProperty("status").ToString());
-]]></code>
-This sample shows how to call GetLivenessWithVerifySessionResultAsync with all parameters and parse the result.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-FaceSessionClient client = new FaceSessionClient(endpoint, credential);
-
-Response response = await client.GetLivenessWithVerifySessionResultAsync("<sessionId>", null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-Console.WriteLine(result.GetProperty("sessionStartDateTime").ToString());
-Console.WriteLine(result.GetProperty("sessionExpired").ToString());
-Console.WriteLine(result.GetProperty("deviceCorrelationId").ToString());
-Console.WriteLine(result.GetProperty("authTokenTimeToLiveInSeconds").ToString());
-Console.WriteLine(result.GetProperty("status").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("sessionId").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("requestId").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("clientRequestId").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("receivedDateTime").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("request").GetProperty("url").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("request").GetProperty("method").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("request").GetProperty("contentLength").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("request").GetProperty("contentType").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("request").GetProperty("userAgent").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("livenessDecision").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("faceRectangle").GetProperty("top").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("faceRectangle").GetProperty("left").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("faceRectangle").GetProperty("width").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("faceRectangle").GetProperty("height").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("fileName").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("timeOffsetWithinFile").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("target").GetProperty("imageType").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("modelVersionUsed").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("faceRectangle").GetProperty("top").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("faceRectangle").GetProperty("left").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("faceRectangle").GetProperty("width").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("faceRectangle").GetProperty("height").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("verifyImage").GetProperty("qualityForRecognition").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("matchConfidence").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("body").GetProperty("verifyResult").GetProperty("isIdentical").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("statusCode").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("response").GetProperty("latencyInMilliseconds").ToString());
-Console.WriteLine(result.GetProperty("result").GetProperty("digest").ToString());
 ]]></code></example>
       </Docs>
     </Member>
@@ -2139,7 +1773,7 @@ Console.WriteLine(result.GetProperty("result").GetProperty("digest").ToString())
       <Docs>
         <param name="sessionId"> The unique ID to reference this session. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
-        <summary> Get session result of detectLivenessWithVerify/singleModal call. </summary>
+        <summary> Please refer to https://learn.microsoft.com/rest/api/face/liveness-session-operations/get-liveness-with-verify-session-result for more details. </summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
@@ -2149,19 +1783,11 @@ Console.WriteLine(result.GetProperty("result").GetProperty("digest").ToString())
         <example>
 This sample shows how to call GetLivenessWithVerifySessionResultAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FaceSessionClient client = new FaceSessionClient(endpoint, credential);
 
-Response<LivenessWithVerifySession> response = await client.GetLivenessWithVerifySessionResultAsync("<sessionId>");
-]]></code>
-This sample shows how to call GetLivenessWithVerifySessionResultAsync with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-FaceSessionClient client = new FaceSessionClient(endpoint, credential);
-
-Response<LivenessWithVerifySession> response = await client.GetLivenessWithVerifySessionResultAsync("<sessionId>");
+Response<LivenessWithVerifySession> response = await client.GetLivenessWithVerifySessionResultAsync("b12e033e-bda7-4b83-a211-e721c661f30e");
 ]]></code></example>
       </Docs>
     </Member>
@@ -2201,32 +1827,16 @@ Response<LivenessWithVerifySession> response = await client.GetLivenessWithVerif
         <example>
 This sample shows how to call GetLivenessWithVerifySessions and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FaceSessionClient client = new FaceSessionClient(endpoint, credential);
 
-Response response = client.GetLivenessWithVerifySessions(null, null, null);
+Response response = client.GetLivenessWithVerifySessions("00000000-0000-0000-0000-000000000000", 20, null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].GetProperty("id").ToString());
 Console.WriteLine(result[0].GetProperty("createdDateTime").ToString());
 Console.WriteLine(result[0].GetProperty("sessionExpired").ToString());
-]]></code>
-This sample shows how to call GetLivenessWithVerifySessions with all parameters and parse the result.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-FaceSessionClient client = new FaceSessionClient(endpoint, credential);
-
-Response response = client.GetLivenessWithVerifySessions("<start>", 1234, null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result[0].GetProperty("id").ToString());
-Console.WriteLine(result[0].GetProperty("createdDateTime").ToString());
-Console.WriteLine(result[0].GetProperty("sessionStartDateTime").ToString());
-Console.WriteLine(result[0].GetProperty("sessionExpired").ToString());
-Console.WriteLine(result[0].GetProperty("deviceCorrelationId").ToString());
-Console.WriteLine(result[0].GetProperty("authTokenTimeToLiveInSeconds").ToString());
 ]]></code></example>
       </Docs>
     </Member>
@@ -2255,27 +1865,15 @@ Console.WriteLine(result[0].GetProperty("authTokenTimeToLiveInSeconds").ToString
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary> Lists sessions for /detectLivenessWithVerify/SingleModal. </summary>
         <returns>To be added.</returns>
-        <remarks>
-             List sessions from the last sessionId greater than the "start".
-            
-             The result should be ordered by sessionId in ascending order.
-             </remarks>
+        <remarks> Please refer to https://learn.microsoft.com/rest/api/face/liveness-session-operations/get-liveness-with-verify-sessions for more details. </remarks>
         <example>
 This sample shows how to call GetLivenessWithVerifySessions.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FaceSessionClient client = new FaceSessionClient(endpoint, credential);
 
 Response<IReadOnlyList<LivenessSessionItem>> response = client.GetLivenessWithVerifySessions();
-]]></code>
-This sample shows how to call GetLivenessWithVerifySessions with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-FaceSessionClient client = new FaceSessionClient(endpoint, credential);
-
-Response<IReadOnlyList<LivenessSessionItem>> response = client.GetLivenessWithVerifySessions(start: "<start>", top: 1234);
 ]]></code></example>
       </Docs>
     </Member>
@@ -2315,32 +1913,16 @@ Response<IReadOnlyList<LivenessSessionItem>> response = client.GetLivenessWithVe
         <example>
 This sample shows how to call GetLivenessWithVerifySessionsAsync and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FaceSessionClient client = new FaceSessionClient(endpoint, credential);
 
-Response response = await client.GetLivenessWithVerifySessionsAsync(null, null, null);
+Response response = await client.GetLivenessWithVerifySessionsAsync("00000000-0000-0000-0000-000000000000", 20, null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].GetProperty("id").ToString());
 Console.WriteLine(result[0].GetProperty("createdDateTime").ToString());
 Console.WriteLine(result[0].GetProperty("sessionExpired").ToString());
-]]></code>
-This sample shows how to call GetLivenessWithVerifySessionsAsync with all parameters and parse the result.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-FaceSessionClient client = new FaceSessionClient(endpoint, credential);
-
-Response response = await client.GetLivenessWithVerifySessionsAsync("<start>", 1234, null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result[0].GetProperty("id").ToString());
-Console.WriteLine(result[0].GetProperty("createdDateTime").ToString());
-Console.WriteLine(result[0].GetProperty("sessionStartDateTime").ToString());
-Console.WriteLine(result[0].GetProperty("sessionExpired").ToString());
-Console.WriteLine(result[0].GetProperty("deviceCorrelationId").ToString());
-Console.WriteLine(result[0].GetProperty("authTokenTimeToLiveInSeconds").ToString());
 ]]></code></example>
       </Docs>
     </Member>
@@ -2369,27 +1951,191 @@ Console.WriteLine(result[0].GetProperty("authTokenTimeToLiveInSeconds").ToString
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary> Lists sessions for /detectLivenessWithVerify/SingleModal. </summary>
         <returns>To be added.</returns>
-        <remarks>
-             List sessions from the last sessionId greater than the "start".
-            
-             The result should be ordered by sessionId in ascending order.
-             </remarks>
+        <remarks> Please refer to https://learn.microsoft.com/rest/api/face/liveness-session-operations/get-liveness-with-verify-sessions for more details. </remarks>
         <example>
 This sample shows how to call GetLivenessWithVerifySessionsAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FaceSessionClient client = new FaceSessionClient(endpoint, credential);
 
 Response<IReadOnlyList<LivenessSessionItem>> response = await client.GetLivenessWithVerifySessionsAsync();
-]]></code>
-This sample shows how to call GetLivenessWithVerifySessionsAsync with all parameters.
+]]></code></example>
+      </Docs>
+    </Member>
+    <Member MemberName="GetSessionImage">
+      <MemberSignature Language="C#" Value="public virtual Azure.Response GetSessionImage (string sessionImageId, Azure.RequestContext context);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response GetSessionImage(string sessionImageId, class Azure.RequestContext context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.AI.Vision.Face.FaceSessionClient.GetSessionImage(System.String,Azure.RequestContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetSessionImage (sessionImageId As String, context As RequestContext) As Response" />
+      <MemberSignature Language="F#" Value="abstract member GetSessionImage : string * Azure.RequestContext -&gt; Azure.Response&#xA;override this.GetSessionImage : string * Azure.RequestContext -&gt; Azure.Response" Usage="faceSessionClient.GetSessionImage (sessionImageId, context)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.AI.Vision.Face</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Response</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sessionImageId" Type="System.String" />
+        <Parameter Name="context" Type="Azure.RequestContext" />
+      </Parameters>
+      <Docs>
+        <param name="sessionImageId"> The request ID of the image to be retrieved. </param>
+        <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        <summary>
+            [Protocol Method] Please refer to https://learn.microsoft.com/rest/api/face/liveness-session-operations/get-session-image for more details.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item><item><description>
+            Please try the simpler <see cref="M:Azure.AI.Vision.Face.FaceSessionClient.GetSessionImage(System.String,System.Threading.CancellationToken)" /> convenience overload with strongly typed models first.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="sessionImageId" /> is null. </exception>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="sessionImageId" /> is an empty string, and was expected to be non-empty. </exception>
+        <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
+        <example>
+This sample shows how to call GetSessionImage and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FaceSessionClient client = new FaceSessionClient(endpoint, credential);
 
-Response<IReadOnlyList<LivenessSessionItem>> response = await client.GetLivenessWithVerifySessionsAsync(start: "<start>", top: 1234);
+Response response = client.GetSessionImage("3d035d35-2e01-4ed4-8935-577afde9caaa", null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code></example>
+      </Docs>
+    </Member>
+    <Member MemberName="GetSessionImage">
+      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;BinaryData&gt; GetSessionImage (string sessionImageId, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class System.BinaryData&gt; GetSessionImage(string sessionImageId, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.AI.Vision.Face.FaceSessionClient.GetSessionImage(System.String,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetSessionImage (sessionImageId As String, Optional cancellationToken As CancellationToken = Nothing) As Response(Of BinaryData)" />
+      <MemberSignature Language="F#" Value="abstract member GetSessionImage : string * System.Threading.CancellationToken -&gt; Azure.Response&lt;BinaryData&gt;&#xA;override this.GetSessionImage : string * System.Threading.CancellationToken -&gt; Azure.Response&lt;BinaryData&gt;" Usage="faceSessionClient.GetSessionImage (sessionImageId, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.AI.Vision.Face</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Response&lt;System.BinaryData&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sessionImageId" Type="System.String" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="sessionImageId"> The request ID of the image to be retrieved. </param>
+        <param name="cancellationToken"> The cancellation token to use. </param>
+        <summary> Please refer to https://learn.microsoft.com/rest/api/face/liveness-session-operations/get-session-image for more details. </summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="sessionImageId" /> is null. </exception>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="sessionImageId" /> is an empty string, and was expected to be non-empty. </exception>
+        <example>
+This sample shows how to call GetSessionImage.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FaceSessionClient client = new FaceSessionClient(endpoint, credential);
+
+Response<BinaryData> response = client.GetSessionImage("3d035d35-2e01-4ed4-8935-577afde9caaa");
+]]></code></example>
+      </Docs>
+    </Member>
+    <Member MemberName="GetSessionImageAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; GetSessionImageAsync (string sessionImageId, Azure.RequestContext context);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; GetSessionImageAsync(string sessionImageId, class Azure.RequestContext context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.AI.Vision.Face.FaceSessionClient.GetSessionImageAsync(System.String,Azure.RequestContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetSessionImageAsync (sessionImageId As String, context As RequestContext) As Task(Of Response)" />
+      <MemberSignature Language="F#" Value="abstract member GetSessionImageAsync : string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.GetSessionImageAsync : string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="faceSessionClient.GetSessionImageAsync (sessionImageId, context)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.AI.Vision.Face</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sessionImageId" Type="System.String" />
+        <Parameter Name="context" Type="Azure.RequestContext" />
+      </Parameters>
+      <Docs>
+        <param name="sessionImageId"> The request ID of the image to be retrieved. </param>
+        <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        <summary>
+            [Protocol Method] Please refer to https://learn.microsoft.com/rest/api/face/liveness-session-operations/get-session-image for more details.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item><item><description>
+            Please try the simpler <see cref="M:Azure.AI.Vision.Face.FaceSessionClient.GetSessionImageAsync(System.String,System.Threading.CancellationToken)" /> convenience overload with strongly typed models first.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="sessionImageId" /> is null. </exception>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="sessionImageId" /> is an empty string, and was expected to be non-empty. </exception>
+        <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
+        <example>
+This sample shows how to call GetSessionImageAsync and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FaceSessionClient client = new FaceSessionClient(endpoint, credential);
+
+Response response = await client.GetSessionImageAsync("3d035d35-2e01-4ed4-8935-577afde9caaa", null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code></example>
+      </Docs>
+    </Member>
+    <Member MemberName="GetSessionImageAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;BinaryData&gt;&gt; GetSessionImageAsync (string sessionImageId, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class System.BinaryData&gt;&gt; GetSessionImageAsync(string sessionImageId, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.AI.Vision.Face.FaceSessionClient.GetSessionImageAsync(System.String,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetSessionImageAsync (sessionImageId As String, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of BinaryData))" />
+      <MemberSignature Language="F#" Value="abstract member GetSessionImageAsync : string * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;BinaryData&gt;&gt;&#xA;override this.GetSessionImageAsync : string * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;BinaryData&gt;&gt;" Usage="faceSessionClient.GetSessionImageAsync (sessionImageId, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.AI.Vision.Face</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&lt;System.BinaryData&gt;&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sessionImageId" Type="System.String" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="sessionImageId"> The request ID of the image to be retrieved. </param>
+        <param name="cancellationToken"> The cancellation token to use. </param>
+        <summary> Please refer to https://learn.microsoft.com/rest/api/face/liveness-session-operations/get-session-image for more details. </summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="sessionImageId" /> is null. </exception>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="sessionImageId" /> is an empty string, and was expected to be non-empty. </exception>
+        <example>
+This sample shows how to call GetSessionImageAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+FaceSessionClient client = new FaceSessionClient(endpoint, credential);
+
+Response<BinaryData> response = await client.GetSessionImageAsync("3d035d35-2e01-4ed4-8935-577afde9caaa");
 ]]></code></example>
       </Docs>
     </Member>

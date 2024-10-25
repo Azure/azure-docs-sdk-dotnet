@@ -44,29 +44,82 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ChatRequestAssistantMessage (Azure.AI.Inference.ChatResponseMessage responseMessage);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Azure.AI.Inference.ChatResponseMessage responseMessage) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.AI.Inference.ChatRequestAssistantMessage.#ctor(Azure.AI.Inference.ChatResponseMessage)" />
-      <MemberSignature Language="VB.NET" Value="Public Sub New (responseMessage As ChatResponseMessage)" />
-      <MemberSignature Language="F#" Value="new Azure.AI.Inference.ChatRequestAssistantMessage : Azure.AI.Inference.ChatResponseMessage -&gt; Azure.AI.Inference.ChatRequestAssistantMessage" Usage="new Azure.AI.Inference.ChatRequestAssistantMessage responseMessage" />
+      <MemberSignature Language="C#" Value="public ChatRequestAssistantMessage (Azure.AI.Inference.ChatCompletions chatCompletions);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Azure.AI.Inference.ChatCompletions chatCompletions) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.AI.Inference.ChatRequestAssistantMessage.#ctor(Azure.AI.Inference.ChatCompletions)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (chatCompletions As ChatCompletions)" />
+      <MemberSignature Language="F#" Value="new Azure.AI.Inference.ChatRequestAssistantMessage : Azure.AI.Inference.ChatCompletions -&gt; Azure.AI.Inference.ChatRequestAssistantMessage" Usage="new Azure.AI.Inference.ChatRequestAssistantMessage chatCompletions" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.AI.Inference</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="responseMessage" Type="Azure.AI.Inference.ChatResponseMessage" />
+        <Parameter Name="chatCompletions" Type="Azure.AI.Inference.ChatCompletions" />
       </Parameters>
       <Docs>
-        <param name="responseMessage"> The <see cref="T:Azure.AI.Inference.ChatResponseMessage" /> to replicate from. </param>
+        <param name="chatCompletions">
+                The <see cref="T:Azure.AI.Inference.ChatCompletions" /> from which the conversation history request message should be created.
+            </param>
         <summary>
-            Initializes a new instance of <see cref="T:Azure.AI.Inference.ChatRequestAssistantMessage" /> from a prior <see cref="T:Azure.AI.Inference.ChatResponseMessage" />
-            instance from the Assistant.
+            Creates a new instance of <see cref="T:Azure.AI.Inference.ChatRequestAssistantMessage" /> from a <see cref="T:Azure.AI.Inference.ChatCompletions" /> with
+            an <c>assistant</c> role response.
+            </summary>
+        <remarks>
+                This constructor will copy the <c>content</c>, <c>tool_calls</c>, and <c>function_call</c> from a chat
+                completion response into a new <c>assistant</c> role request message.
+            </remarks>
+        <exception cref="T:System.ArgumentException">
+                The <c>role</c> of the provided chat completion response was not <see cref="P:Azure.AI.Inference.ChatRole.Assistant" />.
+            </exception>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public ChatRequestAssistantMessage (string content);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string content) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.AI.Inference.ChatRequestAssistantMessage.#ctor(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (content As String)" />
+      <MemberSignature Language="F#" Value="new Azure.AI.Inference.ChatRequestAssistantMessage : string -&gt; Azure.AI.Inference.ChatRequestAssistantMessage" Usage="new Azure.AI.Inference.ChatRequestAssistantMessage content" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.AI.Inference</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="content" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="content"> The text content of the message. </param>
+        <summary>
+            Creates a new instance of <see cref="T:Azure.AI.Inference.ChatRequestAssistantMessage" /> that represents ordinary text content and
+            does not feature tool or function calls.
             </summary>
         <remarks>To be added.</remarks>
-        <exception cref="T:System.ArgumentException">
-          <paramref name="responseMessage" /> is not a valid response message to use.
-            </exception>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public ChatRequestAssistantMessage (System.Collections.Generic.IEnumerable&lt;Azure.AI.Inference.ChatCompletionsToolCall&gt; toolCalls, string content = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Collections.Generic.IEnumerable`1&lt;class Azure.AI.Inference.ChatCompletionsToolCall&gt; toolCalls, string content) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.AI.Inference.ChatRequestAssistantMessage.#ctor(System.Collections.Generic.IEnumerable{Azure.AI.Inference.ChatCompletionsToolCall},System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (toolCalls As IEnumerable(Of ChatCompletionsToolCall), Optional content As String = Nothing)" />
+      <MemberSignature Language="F#" Value="new Azure.AI.Inference.ChatRequestAssistantMessage : seq&lt;Azure.AI.Inference.ChatCompletionsToolCall&gt; * string -&gt; Azure.AI.Inference.ChatRequestAssistantMessage" Usage="new Azure.AI.Inference.ChatRequestAssistantMessage (toolCalls, content)" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.AI.Inference</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="toolCalls" Type="System.Collections.Generic.IEnumerable&lt;Azure.AI.Inference.ChatCompletionsToolCall&gt;" />
+        <Parameter Name="content" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="toolCalls"> The <c>tool_calls</c> made by the model. </param>
+        <param name="content"> Optional text content associated with the message. </param>
+        <summary>
+            Creates a new instance of <see cref="T:Azure.AI.Inference.ChatRequestAssistantMessage" /> that represents <c>tool_calls</c> that
+            were provided by the model.
+            </summary>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Content">
@@ -85,6 +138,29 @@
       </ReturnValue>
       <Docs>
         <summary> The content of the message. </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ParticipantName">
+      <MemberSignature Language="C#" Value="public string ParticipantName { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ParticipantName" />
+      <MemberSignature Language="DocId" Value="P:Azure.AI.Inference.ChatRequestAssistantMessage.ParticipantName" />
+      <MemberSignature Language="VB.NET" Value="Public Property ParticipantName As String" />
+      <MemberSignature Language="F#" Value="member this.ParticipantName : string with get, set" Usage="Azure.AI.Inference.ChatRequestAssistantMessage.ParticipantName" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.AI.Inference</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            An optional <c>name</c> associated with the assistant message. This is typically defined with a <c>system</c>
+            message and is used to differentiate between multiple participants of the same role.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -205,10 +281,10 @@
         <Parameter Name="options" Type="System.ClientModel.Primitives.ModelReaderWriterOptions" />
       </Parameters>
       <Docs>
-        <param name="options">To be added.</param>
+        <param name="options">The <see cref="T:System.ClientModel.Primitives.ModelReaderWriterOptions" /> to consider when serializing and deserializing the model.</param>
         <summary>
             Gets the data interchange format (JSON, Xml, etc) that the model uses when communicating with the service.
-            <param name="options">The <see cref="T:System.ClientModel.Primitives.ModelReaderWriterOptions" /> to use.</param></summary>
+            </summary>
         <returns>The format that the model uses when communicating with the serivce.</returns>
         <remarks>To be added.</remarks>
       </Docs>
