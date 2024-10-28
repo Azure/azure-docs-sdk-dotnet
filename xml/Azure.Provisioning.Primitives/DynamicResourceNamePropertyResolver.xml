@@ -15,7 +15,7 @@
   <Docs>
     <summary>
             Generate a unique name for a resource by combining the resource's
-            <see cref="P:Azure.Provisioning.Primitives.NamedProvisioningConstruct.IdentifierName" /> as a prefix and a
+            <see cref="P:Azure.Provisioning.Primitives.NamedProvisionableConstruct.BicepIdentifier" /> as a prefix and a
             unique suffix based on the current resource group's ID.
             </summary>
     <remarks>To be added.</remarks>
@@ -38,6 +38,38 @@
       </Docs>
     </Member>
     <Member MemberName="GetUniqueSuffix">
+      <MemberSignature Language="C#" Value="protected virtual Azure.Provisioning.BicepValue&lt;string&gt; GetUniqueSuffix (Azure.Provisioning.ProvisioningBuildOptions options, Azure.Provisioning.Primitives.ProvisionableResource resource);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance class Azure.Provisioning.BicepValue`1&lt;string&gt; GetUniqueSuffix(class Azure.Provisioning.ProvisioningBuildOptions options, class Azure.Provisioning.Primitives.ProvisionableResource resource) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Provisioning.Primitives.DynamicResourceNamePropertyResolver.GetUniqueSuffix(Azure.Provisioning.ProvisioningBuildOptions,Azure.Provisioning.Primitives.ProvisionableResource)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overridable Function GetUniqueSuffix (options As ProvisioningBuildOptions, resource As ProvisionableResource) As BicepValue(Of String)" />
+      <MemberSignature Language="F#" Value="abstract member GetUniqueSuffix : Azure.Provisioning.ProvisioningBuildOptions * Azure.Provisioning.Primitives.ProvisionableResource -&gt; Azure.Provisioning.BicepValue&lt;string&gt;&#xA;override this.GetUniqueSuffix : Azure.Provisioning.ProvisioningBuildOptions * Azure.Provisioning.Primitives.ProvisionableResource -&gt; Azure.Provisioning.BicepValue&lt;string&gt;" Usage="dynamicResourceNamePropertyResolver.GetUniqueSuffix (options, resource)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Provisioning</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Provisioning.BicepValue&lt;System.String&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="options" Type="Azure.Provisioning.ProvisioningBuildOptions" Index="0" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="resource" Type="Azure.Provisioning.Primitives.ProvisionableResource" Index="1" FrameworkAlternate="azure-dotnet" />
+      </Parameters>
+      <Docs>
+        <param name="options">The build options for this resource.</param>
+        <param name="resource">The resource with an unset Name property.</param>
+        <summary>
+            Get a unique dynamic name suffix for the given resource.
+            </summary>
+        <returns>A unique dynamic name suffix for the resource.</returns>
+        <remarks>
+            This defaults to `uniqueString(resourceGroup().id)` for most resources
+            and `uniqueString(deployment().id)` for resource groups.  This can be
+            overridden to provide a different "entropy source."
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetUniqueSuffix">
       <MemberSignature Language="C#" Value="protected virtual Azure.Provisioning.BicepValue&lt;string&gt; GetUniqueSuffix (Azure.Provisioning.ProvisioningContext context, Azure.Provisioning.Primitives.Resource resource);" />
       <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance class Azure.Provisioning.BicepValue`1&lt;string&gt; GetUniqueSuffix(class Azure.Provisioning.ProvisioningContext context, class Azure.Provisioning.Primitives.Resource resource) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Provisioning.Primitives.DynamicResourceNamePropertyResolver.GetUniqueSuffix(Azure.Provisioning.ProvisioningContext,Azure.Provisioning.Primitives.Resource)" />
@@ -52,8 +84,8 @@
         <ReturnType>Azure.Provisioning.BicepValue&lt;System.String&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="context" Type="Azure.Provisioning.ProvisioningContext" />
-        <Parameter Name="resource" Type="Azure.Provisioning.Primitives.Resource" />
+        <Parameter Name="context" Type="Azure.Provisioning.ProvisioningContext" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="resource" Type="Azure.Provisioning.Primitives.Resource" Index="1" FrameworkAlternate="azure-dotnet-preview" />
       </Parameters>
       <Docs>
         <param name="context">The provisioning context for this resource.</param>
@@ -67,6 +99,38 @@
             and `uniqueString(deployment().id)` for resource groups.  This can be
             overridden to provide a different "entropy source."
             </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ResolveName">
+      <MemberSignature Language="C#" Value="public override Azure.Provisioning.BicepValue&lt;string&gt;? ResolveName (Azure.Provisioning.ProvisioningBuildOptions options, Azure.Provisioning.Primitives.ProvisionableResource resource, Azure.Provisioning.Primitives.ResourceNameRequirements requirements);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class Azure.Provisioning.BicepValue`1&lt;string&gt; ResolveName(class Azure.Provisioning.ProvisioningBuildOptions options, class Azure.Provisioning.Primitives.ProvisionableResource resource, valuetype Azure.Provisioning.Primitives.ResourceNameRequirements requirements) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Provisioning.Primitives.DynamicResourceNamePropertyResolver.ResolveName(Azure.Provisioning.ProvisioningBuildOptions,Azure.Provisioning.Primitives.ProvisionableResource,Azure.Provisioning.Primitives.ResourceNameRequirements)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function ResolveName (options As ProvisioningBuildOptions, resource As ProvisionableResource, requirements As ResourceNameRequirements) As BicepValue(Of String)" />
+      <MemberSignature Language="F#" Value="override this.ResolveName : Azure.Provisioning.ProvisioningBuildOptions * Azure.Provisioning.Primitives.ProvisionableResource * Azure.Provisioning.Primitives.ResourceNameRequirements -&gt; Azure.Provisioning.BicepValue&lt;string&gt;" Usage="dynamicResourceNamePropertyResolver.ResolveName (options, resource, requirements)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Provisioning</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Provisioning.BicepValue&lt;System.String&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="options" Type="Azure.Provisioning.ProvisioningBuildOptions" Index="0" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="resource" Type="Azure.Provisioning.Primitives.ProvisionableResource" Index="1" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="requirements" Type="Azure.Provisioning.Primitives.ResourceNameRequirements" Index="2" FrameworkAlternate="azure-dotnet" />
+      </Parameters>
+      <Docs>
+        <param name="options">The build options for this resource.</param>
+        <param name="resource">The resource with an unset Name property.</param>
+        <param name="requirements">Requirements to name the resource.</param>
+        <summary>
+            Generate a unique name for a resource by combining the resource's
+            <see cref="P:Azure.Provisioning.Primitives.NamedProvisionableConstruct.BicepIdentifier" /> as a prefix and a
+            unique suffix based on the current resource group's ID.
+            </summary>
+        <returns>A name for the resource.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="ResolveName">
@@ -84,9 +148,9 @@
         <ReturnType>Azure.Provisioning.BicepValue&lt;System.String&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="context" Type="Azure.Provisioning.ProvisioningContext" />
-        <Parameter Name="resource" Type="Azure.Provisioning.Primitives.Resource" />
-        <Parameter Name="requirements" Type="Azure.Provisioning.Primitives.ResourceNameRequirements" />
+        <Parameter Name="context" Type="Azure.Provisioning.ProvisioningContext" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="resource" Type="Azure.Provisioning.Primitives.Resource" Index="1" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="requirements" Type="Azure.Provisioning.Primitives.ResourceNameRequirements" Index="2" FrameworkAlternate="azure-dotnet-preview" />
       </Parameters>
       <Docs>
         <param name="context">The provisioning context for this resource.</param>
