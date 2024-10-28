@@ -1,12 +1,12 @@
 ---
 title: Azure Communication CallAutomation client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Communication.CallAutomation, communication
-ms.date: 08/05/2024
+ms.date: 10/28/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: communication
 ---
-# Azure Communication CallAutomation client library for .NET - version 1.3.0-beta.1 
+# Azure Communication CallAutomation client library for .NET - version 1.3.0-beta.2 
 
 
 This package contains a C# SDK for Azure Communication Call Automation.
@@ -210,7 +210,7 @@ This project has adopted the [Microsoft Open Source Code of Conduct][coc]. For m
 [communication_resource_create_net]: /azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-net
 [product_docs]: /azure/communication-services/overview
 [nuget]: https://www.nuget.org/
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Communication.CallAutomation_1.3.0-beta.1/sdk/communication/Azure.Communication.CallAutomation/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Communication.CallAutomation_1.3.0-beta.2/sdk/communication/Azure.Communication.CallAutomation/src
 [overview]: https://learn.microsoft.com/azure/communication-services/concepts/voice-video-calling/call-automation
 [incomingcall]: https://learn.microsoft.com/azure/communication-services/concepts/voice-video-calling/incoming-call-notification
 [build1]: https://learn.microsoft.com/azure/communication-services/quickstarts/voice-video-calling/callflows-for-customer-interactions?pivots=programming-language-csha
