@@ -1,7 +1,7 @@
 ---
 title: Azure Sphere SDK for .NET
 description: Reference for Azure Sphere SDK for .NET
-ms.date: 11/11/2024
+ms.date: 11/12/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: sphere
