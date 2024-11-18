@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Azure.Developer.MicrosoftPlaywrightTesting.TestLogger, playwrighttesting
-ms.date: 11/05/2024
+ms.date: 11/18/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: playwrighttesting
@@ -22,7 +22,7 @@ dotnet add package Azure.Developer.MicrosoftPlaywrightTesting.TestLogger --prere
 
 ### Authenticate the client
 
-To learn more about options for Microsoft Entra Id authentication, refer to [Azure.Identity credentials](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Developer.MicrosoftPlaywrightTesting.TestLogger_1.0.0-beta.2/sdk/identity/Azure.Identity#credentials). You can also refer to [our samples]<!--(https://github.com/Azure/azure-sdk-for-net/tree/Azure.Developer.MicrosoftPlaywrightTesting.TestLogger_1.0.0-beta.2/sdk/playwrighttesting/Azure.Developer.MicrosoftPlaywrightTesting.NUnit/samples/Sample1_CustomisingServiceParameters.md)--> on how to configurate different Azure Identity credentials.
+To learn more about options for Microsoft Entra Id authentication, refer to [Azure.Identity credentials](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Developer.MicrosoftPlaywrightTesting.TestLogger_1.0.0-beta.3/sdk/identity/Azure.Identity#credentials). You can also refer to [our samples]<!--(https://github.com/Azure/azure-sdk-for-net/tree/Azure.Developer.MicrosoftPlaywrightTesting.TestLogger_1.0.0-beta.3/sdk/playwrighttesting/Azure.Developer.MicrosoftPlaywrightTesting.NUnit/samples/Sample1_CustomisingServiceParameters.md)--> on how to configurate different Azure Identity credentials.
 
 ### Prerequisites
 
