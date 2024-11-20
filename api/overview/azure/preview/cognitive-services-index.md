@@ -1,5 +1,6 @@
 | Reference | Package | Source |
 |---|---|---|
+|[AI Foundry](ai.projects-readme.md)|[Azure.AI.Projects](https://www.nuget.org/packages/Azure.AI.Projects)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/ai/Azure.AI.Projects)|
 |[Anomaly Detector](ai.anomalydetector-readme.md)|[Azure.AI.AnomalyDetector](https://www.nuget.org/packages/Azure.AI.AnomalyDetector)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/anomalydetector/Azure.AI.AnomalyDetector)|
 |[Content Safety](ai.contentsafety-readme.md)|[Azure.AI.ContentSafety](https://www.nuget.org/packages/Azure.AI.ContentSafety)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/contentsafety/Azure.AI.ContentSafety)|
 |[Document Intelligence](ai.documentintelligence-readme.md)|[Azure.AI.DocumentIntelligence](https://www.nuget.org/packages/Azure.AI.DocumentIntelligence)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/documentintelligence/Azure.AI.DocumentIntelligence)|
