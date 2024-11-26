@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: hybridconnectivity
 ---
-# Azure Hybrid Connectivity SDK for .NET - preview
-## Packages - preview
+# Azure Hybrid Connectivity SDK for .NET - latest
+## Packages - latest
 [!INCLUDE [packages](hybrid-connectivity-index.md)]
