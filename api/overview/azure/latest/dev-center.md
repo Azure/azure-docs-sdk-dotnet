@@ -1,7 +1,7 @@
 ---
 title: Azure Dev Center SDK for .NET
 description: Reference for Azure Dev Center SDK for .NET
-ms.date: 11/26/2024
+ms.date: 11/27/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: devcenter
