@@ -1,7 +1,7 @@
 ---
 title: Azure Defender EASM SDK for .NET
 description: Reference for Azure Defender EASM SDK for .NET
-ms.date: 11/28/2024
+ms.date: 11/29/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: defendereasm
