@@ -1,12 +1,12 @@
 ---
 title: Azure Monitor Query client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Monitor.Query, monitor
-ms.date: 08/21/2024
+ms.date: 12/03/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: monitor
 ---
-# Azure Monitor Query client library for .NET - version 1.5.0 
+# Azure Monitor Query client library for .NET - version 1.6.0 
 
 
 The Azure Monitor Query client library is used to execute read-only queries against [Azure Monitor][azure_monitor_overview]'s two data platforms:
@@ -135,11 +135,11 @@ All client instance methods are thread-safe and independent of each other ([guid
 ### Additional concepts
 
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.5.0/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.5.0/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.5.0/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.5.0/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.5.0/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.6.0/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.6.0/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.6.0/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.6.0/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.6.0/sdk/core/Azure.Core/samples/Diagnostics.md) |
 [Mocking](https://learn.microsoft.com/dotnet/azure/sdk/unit-testing-mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
@@ -730,6 +730,34 @@ foreach (MetricsQueryResult value in metricsQueryResults.Values)
 }
 ```
 
+The `MetricsQueryResourcesOptions`-typed argument also has a `StartTime` and `EndTime` property to allow for querying a specific time range. If only the `StartTime` is set, the `EndTime` default becomes the current time. When the `EndTime` is specified, the `StartTime` is necessary as well. The following example demonstrates the use of these properties:
+```C# Snippet:QueryResourcesMetricsWithOptionsStartTimeEndTime
+string resourceId =
+    "/subscriptions/<id>/resourceGroups/<rg-name>/providers/<source>/storageAccounts/<resource-name-1>";
+var client = new MetricsClient(
+    new Uri("https://<region>.metrics.monitor.azure.com"),
+    new DefaultAzureCredential());
+var options = new MetricsQueryResourcesOptions
+{
+    StartTime = DateTimeOffset.Now.AddHours(-4),
+    EndTime = DateTimeOffset.Now.AddHours(-1),
+    OrderBy = "sum asc",
+    Size = 10
+};
+
+Response<MetricsQueryResourcesResult> result = await client.QueryResourcesAsync(
+    resourceIds: new List<ResourceIdentifier> { new ResourceIdentifier(resourceId) },
+    metricNames: new List<string> { "Ingress" },
+    metricNamespace: "Microsoft.Storage/storageAccounts",
+    options).ConfigureAwait(false);
+
+MetricsQueryResourcesResult metricsQueryResults = result.Value;
+foreach (MetricsQueryResult value in metricsQueryResults.Values)
+{
+    Console.WriteLine(value.Metrics.Count);
+}
+```
+
 #### Register the client with dependency injection
 
 To register a client with the dependency injection container, invoke the corresponding extension method.
@@ -744,7 +772,7 @@ For more information, see [Register client](https://learn.microsoft.com/dotnet/a
 
 ## Troubleshooting
 
-To diagnose various failure scenarios, see the [troubleshooting guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.5.0/sdk/monitor/Azure.Monitor.Query/TROUBLESHOOTING.md).
+To diagnose various failure scenarios, see the [troubleshooting guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.6.0/sdk/monitor/Azure.Monitor.Query/TROUBLESHOOTING.md).
 
 ## Next steps
 
@@ -761,14 +789,14 @@ This project has adopted the [Microsoft Open Source Code of Conduct][coc]. For m
 [azure_monitor_create_using_portal]: https://learn.microsoft.com/azure/azure-monitor/logs/quick-create-workspace
 [azure_monitor_overview]: https://learn.microsoft.com/azure/azure-monitor/overview
 [azure_subscription]: https://azure.microsoft.com/free/dotnet/
-[changelog]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.5.0/sdk/monitor/Azure.Monitor.Query/CHANGELOG.md
+[changelog]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.6.0/sdk/monitor/Azure.Monitor.Query/CHANGELOG.md
 [kusto_query_language]: https://learn.microsoft.com/azure/data-explorer/kusto/query/
 [metric_namespaces]: https://learn.microsoft.com/azure/azure-monitor/reference/supported-metrics/metrics-index#supported-metrics-and-log-categories-by-resource-type
 [migration_guide_app_insights]: https://aka.ms/azsdk/net/migrate/ai-monitor-query
 [migration_guide_opp_insights]: https://aka.ms/azsdk/net/migrate/monitor-query
 [msdocs_apiref]: https://learn.microsoft.com/dotnet/api/overview/azure/monitor.query-readme?view=azure-dotnet
 [package]: https://www.nuget.org/packages/Azure.Monitor.Query
-[source]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.5.0/sdk/monitor/Azure.Monitor.Query/src
+[source]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Monitor.Query_1.6.0/sdk/monitor/Azure.Monitor.Query/src
 
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
