@@ -1,7 +1,7 @@
 ---
 title: Azure Health Deidentification SDK for .NET
 description: Reference for Azure Health Deidentification SDK for .NET
-ms.date: 12/02/2024
+ms.date: 12/03/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: healthdeidentification

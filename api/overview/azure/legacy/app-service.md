@@ -1,10 +1,10 @@
 ---
 title: Azure App Service SDK for .NET
 description: Reference for Azure App Service SDK for .NET
-ms.date: 12/02/2024
+ms.date: 12/03/2024
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: azure-monitor
+ms.service: appservice
 ---
 # Azure App Service SDK for .NET - legacy
 ## Packages - legacy
