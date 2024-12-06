@@ -1,7 +1,7 @@
 ---
 title: Azure Advisor SDK for .NET
 description: Reference for Azure Advisor SDK for .NET
-ms.date: 12/05/2024
+ms.date: 12/06/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: advisor
