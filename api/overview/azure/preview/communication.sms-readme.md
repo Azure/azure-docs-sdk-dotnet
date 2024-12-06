@@ -1,12 +1,12 @@
 ---
 title: Azure Communication SMS client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Communication.Sms, communication
-ms.date: 04/24/2024
+ms.date: 12/06/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: communication
 ---
-# Azure Communication SMS client library for .NET - version 1.1.0-beta.1 
+# Azure Communication SMS client library for .NET - version 1.1.0-beta.2 
 
 
 This package contains a C# SDK for Azure Communication Services for SMS and Telephony.
@@ -141,5 +141,5 @@ This project has adopted the [Microsoft Open Source Code of Conduct][coc]. For m
 [product_docs]: /azure/communication-services/overview
 [nextsteps]:/azure/communication-services/quickstarts/telephony-sms/send?pivots=programming-language-csharp
 [nuget]: https://www.nuget.org/
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Communication.Sms_1.1.0-beta.1/sdk/communication/Azure.Communication.Sms/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Communication.Sms_1.1.0-beta.2/sdk/communication/Azure.Communication.Sms/src
 
