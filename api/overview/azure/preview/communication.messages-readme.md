@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: communication
 ---
-# Azure Communication Messages client library for .NET - version 1.2.0-alpha.20241211.1 
+# Azure Communication Messages client library for .NET - version 1.2.0-alpha.20241211.4 
 
 
 This package contains a C# SDK for Azure Communication Messages Services.
