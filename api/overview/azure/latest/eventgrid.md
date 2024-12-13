@@ -54,7 +54,7 @@ dotnet add package Microsoft.Azure.Management.EventGrid
 ```
 
 > [!div class="nextstepaction"]
-> [Explore the management APIs](/dotnet/api/overview/azure/eventgrid/management)
+> [Explore the management APIs](/dotnet/api/overview/azure/provisioning.eventgrid-readme)
 
 ## Learn more
 
